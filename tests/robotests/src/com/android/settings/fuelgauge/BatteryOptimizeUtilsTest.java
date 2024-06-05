@@ -272,7 +272,7 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
-    public void testResetAppOptimizationMode_Optimized_verifyAction() throws Exception {
+    public void testResetAppOptimizationModeInternal_Optimized_verifyAction() throws Exception {
         runTestForResetWithMode(
                 AppOpsManager.MODE_ALLOWED, /* allowListed */
                 false,
@@ -287,7 +287,8 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
-    public void testResetAppOptimizationMode_SystemOrDefault_verifyAction() throws Exception {
+    public void testResetAppOptimizationModeInternal_SystemOrDefault_verifyAction()
+            throws Exception {
         runTestForResetWithMode(
                 AppOpsManager.MODE_ALLOWED, /* allowListed */
                 true,
@@ -304,7 +305,7 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
-    public void testResetAppOptimizationMode_Restricted_verifyAction() throws Exception {
+    public void testResetAppOptimizationModeInternal_Restricted_verifyAction() throws Exception {
         runTestForResetWithMode(
                 AppOpsManager.MODE_IGNORED, /* allowListed */
                 false,
@@ -315,7 +316,7 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
-    public void testResetAppOptimizationMode_Unrestricted_verifyAction() throws Exception {
+    public void testResetAppOptimizationModeInternal_Unrestricted_verifyAction() throws Exception {
         runTestForResetWithMode(
                 AppOpsManager.MODE_ALLOWED, /* allowListed */
                 true,
@@ -346,7 +347,7 @@ public class BatteryOptimizeUtilsTest {
         doReturn(isSystemOrDefaultApp).when(mMockBackend).isSysAllowlisted(anyString());
         doReturn(isSystemOrDefaultApp).when(mMockBackend).isDefaultActiveApp(anyString(), anyInt());
 
-        BatteryOptimizeUtils.resetAppOptimizationMode(
+        BatteryOptimizeUtils.resetAppOptimizationModeInternal(
                 mContext,
                 mMockIPackageManager,
                 mMockAppOpsManager,

@@ -732,7 +732,7 @@
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_face_enroll_introduction_no_thanks">No thanks</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks">Not now</string>
     <!-- Button text to start enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_face_enroll_introduction_agree">I agree</string>
     <!-- Button text to scroll to the end of a scrollview. [CHAR LIMIT=30] -->
@@ -861,7 +861,7 @@
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks">No thanks</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks">Not now</string>
     <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
     <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
@@ -1345,15 +1345,21 @@
     <!-- Summary for the private space setup education screen. [CHAR LIMIT=NONE] -->
     <string name="private_space_hide_apps_summary">Hide or lock private apps in a separate space. Use a dedicated Google Account for extra security.</string>
     <!-- Text shown in private space setup screen which explains how the private space works [CHAR LIMIT=50] -->
-    <string name="private_space_setup_sub_header">Set up your private space</string>
+    <string name="private_space_setup_sub_header">How it works</string>
     <!-- Text shown in private space setup screen which explains private space can be accessed from bottom of all apps list. [CHAR LIMIT=NONE] -->
-    <string name="private_space_separate_account_text"><b>Choose a Google Account for your space</b>\nUsing a dedicated account helps to stop synced files, photos, and emails appearing outside your space</string>
+    <string name="private_space_separate_account_text"><b>Create a Google Account for your space</b>\nIf you use a dedicated account, it helps to stop synced files, photos, and emails appearing outside your space</string>
     <!-- Text shown in private space setup screen which explains private space apps are protected by a lock. [CHAR LIMIT=NONE] -->
     <string name="private_space_protected_lock_text"><b>Set a lock</b>\nLock your space to stop other people opening it</string>
     <!-- Text shown in private space setup screen which explains notifications from private space apps will not be shown when private space is locked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_install_apps_text"><b>Install apps</b>\nYour private space has its own Play Store so you can install apps easily.</string>
+    <string name="private_space_install_apps_text"><b>Install apps</b>\nInstall apps that you want to keep private in your space</string>
+    <!-- Category name "Keep in mind" [CHAR_LIMIT=40] -->
+    <string name="private_space_keep_in_mind_text">Keep in mind</string>
+    <!-- Text shown in private space setup screen which explains  that apps in private space are stopped when private space is locked. [CHAR LIMIT=NONE] -->
+    <string name="private_space_apps_stopped_text"><b>Apps stop when you lock your space</b>\nWhen you lock your space, apps in your space are stopped and you won\u2019t receive notifications from them</string>
     <!-- This is info text to help explain in private space setup screen that the permissions granted to private space apps will not be shown in settings when private space is locked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be restored to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs malicious apps on your device may be able to access your private space.</string>
+    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be moved to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs harmful apps on your device may be able to access your private space.</string>
+    <!-- This is footer text in private space settings page to help explain that when private space is locked the apps are stopped, the permissions granted to private space apps will not be shown in settings. [CHAR LIMIT=NONE] -->
+    <string name="private_space_settings_footer_text">When you lock your space, apps in your private space are stopped and you won\u2019t receive notifications from them.\n\nApps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when private space is locked.\n\nYour private space can\'t be restored to a new device. You\u2019ll need to set up another space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs malicious apps on your device may be able to access your private space.</string>
     <!-- Private space footer link content description [CHAR LIMIT=40] -->
     <string name="private_space_learn_more_text">Learn more about private space</string>
     <string name="private_space_learn_more_url" translatable="false">https://support.google.com/android?p=private_space</string>
@@ -2360,6 +2366,8 @@
     <!-- Wifi Network Details -->
     <!-- Wifi details title-->
     <string name="wifi_details_title">Network details</string>
+    <!-- WEP network less secure warning title -->
+    <string name="wep_network_less_secure_warning_title">This network uses an older security protocol called WEP, which is less secure</string>
     <!-- Wifi details preference title to display router IP subnet mask -->
     <string name="wifi_details_subnet_mask">Subnet mask</string>
     <!-- Server name title-->
@@ -8720,7 +8728,7 @@
     <string name="notif_listener_more_settings">More settings</string>
     <string name="notif_listener_more_settings_desc">More settings are available inside this app</string>
 
-    <!-- Title for Polite Notifications setting  [CHAR LIMIT=30]-->
+    <!-- Title for Polite Notifications setting  [CHAR LIMIT=45]-->
     <string name="notification_polite_title">Cooldown</string>
     <string name="notification_polite_main_control_title">Use Cooldown</string>
     <string name="notification_polite_description">When you get many notifications within a short time span, your device will minimize sound interruptions and pop-ups on the screen. Calls, alarms, and priority conversations will still alert as notmal, and all delivered notifications are easy to find in the Shade.</string>
@@ -12052,6 +12060,8 @@
     <string name="bluetooth_right_name">Right</string>
     <!-- Title for middle bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_middle_name">Case</string>
+    <!-- Content description for battery icon in bluetooth header. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_header_battery_content_description">Battery</string>
 
     <!-- Default title for the settings panel [CHAR LIMIT=NONE] -->
     <string name="settings_panel_title">Settings Panel</string>

@@ -41,6 +41,13 @@ object AppOptModeSharedPreferencesUtils {
     fun getAllEvents(context: Context): List<AppOptimizationModeEvent> =
         synchronized(appOptimizationModeLock) { getAppOptModeEventsMap(context).values.toList() }
 
+    /** Removes all app optimization mode events. */
+    @JvmStatic
+    fun clearAll(context: Context) =
+        synchronized(appOptimizationModeLock) {
+            getSharedPreferences(context).edit().clear().apply()
+        }
+
     /** Updates the app optimization mode event data. */
     @JvmStatic
     fun updateAppOptModeExpiration(
