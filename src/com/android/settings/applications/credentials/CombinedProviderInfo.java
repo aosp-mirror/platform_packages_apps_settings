@@ -16,17 +16,25 @@
 
 package com.android.settings.applications.credentials;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ServiceInfo;
 import android.credentials.CredentialProviderInfo;
 import android.graphics.drawable.Drawable;
+import android.os.UserHandle;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.util.IconDrawableFactory;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,6 +49,11 @@ import java.util.Set;
  * logic for each row in settings.
  */
 public final class CombinedProviderInfo {
+    private static final String TAG = "CombinedProviderInfo";
+    private static final String SETTINGS_ACTIVITY_INTENT_ACTION = "android.intent.action.MAIN";
+    private static final String SETTINGS_ACTIVITY_INTENT_CATEGORY =
+            "android.intent.category.DEFAULT";
+
     private final List<CredentialProviderInfo> mCredentialProviderInfos;
     private final @Nullable AutofillServiceInfo mAutofillServiceInfo;
     private final boolean mIsDefaultAutofillProvider;
@@ -80,6 +93,37 @@ public final class CombinedProviderInfo {
             return mCredentialProviderInfos.get(0).getServiceInfo().applicationInfo;
         }
         return mAutofillServiceInfo.getServiceInfo().applicationInfo;
+    }
+
+    /** Returns the package name. */
+    public @Nullable String getPackageName() {
+        ApplicationInfo ai = getApplicationInfo();
+        if (ai != null) {
+            return ai.packageName;
+        }
+
+        return null;
+    }
+
+    /** Returns the settings activity. */
+    public @Nullable String getSettingsActivity() {
+        // This logic is not used by the top entry but rather what activity should
+        // be launched from the settings screen.
+        for (CredentialProviderInfo cpi : mCredentialProviderInfos) {
+            final CharSequence settingsActivity = cpi.getSettingsActivity();
+            if (!TextUtils.isEmpty(settingsActivity)) {
+                return String.valueOf(settingsActivity);
+            }
+        }
+
+        if (mAutofillServiceInfo != null) {
+            final String settingsActivity = mAutofillServiceInfo.getSettingsActivity();
+            if (!TextUtils.isEmpty(settingsActivity)) {
+                return settingsActivity;
+            }
+        }
+
+        return null;
     }
 
     /** Returns the app icon. */
@@ -195,6 +239,31 @@ public final class CombinedProviderInfo {
         return null;
     }
 
+    /** Returns whether this entry contains a system provider. */
+    public boolean isCredentialManagerSystemProvider() {
+        for (CredentialProviderInfo cpi : mCredentialProviderInfos) {
+            if (cpi.isSystemProvider()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** Returns whether this entry has device admin restrictions. */
+    @Nullable
+    public RestrictedLockUtils.EnforcedAdmin getDeviceAdminRestrictions(
+            Context context, int userId) {
+        final String packageName = getPackageName();
+        if (TextUtils.isEmpty(packageName)) {
+            return null;
+        }
+
+        return RestrictedLockUtilsInternal.checkIfApplicationCanBeCredentialManagerProvider(
+                context.createContextAsUser(UserHandle.of(userId), /* flags= */ 0),
+                packageName);
+    }
+
     /** Returns the provider that gets the top spot. */
     public static @Nullable CombinedProviderInfo getTopProvider(
             List<CombinedProviderInfo> providers) {
@@ -283,5 +352,48 @@ public final class CombinedProviderInfo {
         }
 
         return cmpi;
+    }
+
+    public static @Nullable Intent createSettingsActivityIntent(
+            @Nullable CharSequence packageName, @Nullable CharSequence settingsActivity) {
+        if (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(settingsActivity)) {
+            return null;
+        }
+
+        ComponentName cn =
+                new ComponentName(String.valueOf(packageName), String.valueOf(settingsActivity));
+        if (cn == null) {
+            Log.e(
+                    TAG,
+                    "Failed to deserialize settingsActivity attribute, we got: "
+                            + String.valueOf(packageName)
+                            + " and "
+                            + String.valueOf(settingsActivity));
+            return null;
+        }
+
+        Intent intent = new Intent(SETTINGS_ACTIVITY_INTENT_ACTION);
+        intent.addCategory(SETTINGS_ACTIVITY_INTENT_CATEGORY);
+        intent.setComponent(cn);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
+    }
+
+    /** Launches the settings activity intent. */
+    public static void launchSettingsActivityIntent(
+            @NonNull Context context,
+            @Nullable CharSequence packageName,
+            @Nullable CharSequence settingsActivity,
+            int userId) {
+        Intent settingsIntent = createSettingsActivityIntent(packageName, settingsActivity);
+        if (settingsIntent == null) {
+            return;
+        }
+
+        try {
+            context.startActivityAsUser(settingsIntent, UserHandle.of(userId));
+        } catch (ActivityNotFoundException e) {
+            Log.e(TAG, "Failed to open settings activity", e);
+        }
     }
 }

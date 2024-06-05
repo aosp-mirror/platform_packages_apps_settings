@@ -17,8 +17,8 @@
 package com.android.settings.development.graphicsdriver;
 
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.ANGLE_DRIVER_SUFFIX;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION;
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_PERSISTENT_GRAPHICS_EGL;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_RO_GFX_ANGLE_SUPPORTED;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -47,9 +47,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSystemProperties;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
     private static final String TAG = "GraphicsDriverEnableAngleAsSystemDriverControllerTest";
     @Mock private PreferenceScreen mScreen;
@@ -67,6 +71,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        ShadowSystemProperties.override(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION, "true");
         doReturn(mTransaction).when(mFragmentManager).beginTransaction();
         doReturn(mFragmentManager).when(mActivity).getSupportFragmentManager();
         doReturn(mActivity).when(mFragment).getActivity();
@@ -77,7 +82,6 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
 
     @Test
     public void onPreferenceChange_switchOn_shouldEnableAngleAsSystemDriver() {
-        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
         // since GraphicsEnvironment is mocked in Robolectric test environment,
         // we will override the system property persist.graphics.egl as if it is changed by
         // mGraphicsEnvironment.toggleAngleAsSystemDriver(true).
@@ -94,7 +98,6 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
 
     @Test
     public void onPreferenceChange_switchOff_shouldDisableAngleAsSystemDriver() {
-        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
         // since GraphicsEnvironment is mocked in Robolectric test environment,
         // we will override the system property persist.graphics.egl as if it is changed by
         // mGraphicsEnvironment.toggleAngleAsSystemDriver(false).
@@ -110,30 +113,14 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
     }
 
     @Test
-    public void updateState_angleNotSupported_preferenceShouldNotBeChecked() {
-        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "");
-        mController.updateState(mPreference);
-        verify(mPreference).setChecked(false);
-    }
-
-    @Test
-    public void updateState_angleNotSupported_preferenceShouldNotBeEnabled() {
-        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "");
-        mController.updateState(mPreference);
-        verify(mPreference).setEnabled(false);
-    }
-
-    @Test
-    public void updateState_angleSupported_angleUsed_preferenceShouldBeChecked() {
-        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
+    public void updateState_angleUsed_preferenceShouldBeChecked() {
         ShadowSystemProperties.override(PROPERTY_PERSISTENT_GRAPHICS_EGL, ANGLE_DRIVER_SUFFIX);
         mController.updateState(mPreference);
         verify(mPreference).setChecked(true);
     }
 
     @Test
-    public void updateState_angleSupported_angleNotUsed_preferenceShouldNotBeChecked() {
-        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
+    public void updateState_angleNotUsed_preferenceShouldNotBeChecked() {
         ShadowSystemProperties.override(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
         mController.updateState(mPreference);
         verify(mPreference).setChecked(false);
@@ -141,7 +128,6 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
 
     @Test
     public void onDeveloperOptionSwitchDisabled_shouldDisableAngleAsSystemDriver() {
-        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
         mController.onDeveloperOptionsSwitchDisabled();
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
         assertThat(systemEGLDriver).isEqualTo("");
@@ -149,14 +135,12 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
 
     @Test
     public void onDeveloperOptionSwitchDisabled_preferenceShouldNotBeChecked() {
-        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
         mController.onDeveloperOptionsSwitchDisabled();
         verify(mPreference).setChecked(false);
     }
 
     @Test
     public void onDeveloperOptionsSwitchDisabled_preferenceShouldNotBeEnabled() {
-        ShadowSystemProperties.override(PROPERTY_RO_GFX_ANGLE_SUPPORTED, "true");
         mController.onDeveloperOptionsSwitchDisabled();
         verify(mPreference).setEnabled(false);
     }

@@ -37,9 +37,9 @@ public class EnterpriseSetDefaultAppsPreferenceController
 
     public EnterpriseSetDefaultAppsPreferenceController(Context context) {
         super(context);
-        final FeatureFactory factory = FeatureFactory.getFactory(context);
-        mApplicationFeatureProvider = factory.getApplicationFeatureProvider(context);
-        mUserFeatureProvider = factory.getUserFeatureProvider(context);
+        final FeatureFactory factory = FeatureFactory.getFeatureFactory();
+        mApplicationFeatureProvider = factory.getApplicationFeatureProvider();
+        mUserFeatureProvider = factory.getUserFeatureProvider();
     }
 
     @Override

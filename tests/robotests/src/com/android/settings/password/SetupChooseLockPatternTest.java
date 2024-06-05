@@ -19,9 +19,8 @@ package com.android.settings.password;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import static org.robolectric.RuntimeEnvironment.application;
-
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -33,6 +32,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
@@ -45,7 +45,6 @@ import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -55,9 +54,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
@@ -68,40 +67,40 @@ import java.util.Arrays;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class, ShadowLockPatternUtils.class})
 public class SetupChooseLockPatternTest {
+    private Context mContext;
 
     private SetupChooseLockPattern mActivity;
 
     @Before
     public void setUp() {
-        application.getPackageManager().setComponentEnabledSetting(
-                new ComponentName(application, SetupRedactionInterstitial.class),
+        mContext = ApplicationProvider.getApplicationContext();
+        mContext.getPackageManager().setComponentEnabledSetting(
+                new ComponentName(mContext, SetupRedactionInterstitial.class),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
 
         final Intent intent =
                 SetupChooseLockPattern.modifyIntentForSetup(
-                        application,
-                        new IntentBuilder(application)
+                        mContext,
+                        new IntentBuilder(mContext)
                                 .setUserId(UserHandle.myUserId())
                                 .build());
-
-        mActivity = (SetupChooseLockPattern) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(SetupChooseLockPattern.class, intent)).get();
+        mActivity = ActivityController.of(new SetupChooseLockPattern(), intent).setup().get();
     }
 
     @Test
     public void chooseLockSaved_shouldEnableRedactionInterstitial() {
         findFragment(mActivity).onChosenLockSaveFinished(false, null);
 
-        ShadowPackageManager spm = Shadows.shadowOf(application.getPackageManager());
-        ComponentName cname = new ComponentName(application, SetupRedactionInterstitial.class);
+        ShadowPackageManager spm = Shadows.shadowOf(mContext.getPackageManager());
+        ComponentName cname = new ComponentName(mContext, SetupRedactionInterstitial.class);
         final int componentEnabled = spm.getComponentEnabledSettingFlags(cname)
                 & PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
         assertThat(componentEnabled).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
     }
 
-    @Ignore
     @Test
+    @Ignore("b/295325503")
     public void optionsButton_whenPatternSelected_shouldBeVisible() {
         final Button button = mActivity.findViewById(R.id.screen_lock_options);
         assertThat(button).isNotNull();
@@ -126,16 +125,16 @@ public class SetupChooseLockPatternTest {
         assertWithMessage("List items shown").that(count).isEqualTo(3);
     }
 
-    @Ignore
     @Config(qualifiers = "sw400dp")
     @Test
+    @Ignore("b/295325503")
     public void sw400dp_shouldShowScreenLockOptions() {
         verifyScreenLockOptionsShown();
     }
 
-    @Ignore
     @Config(qualifiers = "sw400dp-land")
     @Test
+    @Ignore("b/295325503")
     public void sw400dpLandscape_shouldShowScreenLockOptions() {
         verifyScreenLockOptionsShown();
     }
@@ -148,18 +147,20 @@ public class SetupChooseLockPatternTest {
 
     @Config(qualifiers = "sw300dp")
     @Test
+    @Ignore("b/295325503")
     public void smallScreens_shouldHideScreenLockOptions() {
         verifyScreenLockOptionsHidden();
     }
 
     @Config(qualifiers = "sw300dp-land")
     @Test
+    @Ignore("b/295325503")
     public void smallScreensLandscape_shouldHideScreenLockOptions() {
         verifyScreenLockOptionsHidden();
     }
 
-    @Ignore
     @Test
+    @Ignore("b/295325503")
     public void skipButton_shouldBeVisible_duringNonFingerprintFlow() {
         final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
@@ -198,14 +199,14 @@ public class SetupChooseLockPatternTest {
         assertThat(skipOrClearButton.isEnabled()).isTrue();
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(skipOrClearButton.getText())
-                .isEqualTo(application.getString(R.string.skip_label));
+                .isEqualTo(mContext.getString(R.string.skip_label));
 
         enterPattern();
 
         assertThat(skipOrClearButton.isEnabled()).isTrue();
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(skipOrClearButton.getText())
-                .isEqualTo(application.getString(R.string.lockpattern_retry_button_text));
+                .isEqualTo(mContext.getString(R.string.lockpattern_retry_button_text));
     }
 
     @Test
@@ -216,7 +217,15 @@ public class SetupChooseLockPatternTest {
 
         assertThat(patternDescription.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(patternDescription.getText()).isEqualTo(
-                application.getString(R.string.lockpassword_choose_your_pattern_description));
+                mContext.getString(R.string.lockpassword_choose_your_pattern_description));
+    }
+
+    @Test
+    public void createActivity_patternTitle_shouldShowGenericText() {
+        final CharSequence headerView = mActivity.getTitle();
+
+        assertThat(headerView).isEqualTo(
+                mContext.getString(R.string.lockpassword_choose_your_pattern_header));
     }
 
     @Test
@@ -226,7 +235,7 @@ public class SetupChooseLockPatternTest {
 
         assertThat(headerView.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(headerView.getText().toString()).isEqualTo(
-                application.getString(R.string.lockpassword_choose_your_pattern_description));
+                mContext.getString(R.string.lockpassword_choose_your_pattern_description));
     }
 
     @Test
@@ -239,7 +248,7 @@ public class SetupChooseLockPatternTest {
         enterPattern();
 
         assertThat(headerView.getText().toString()).isEqualTo(
-                application.getString(R.string.lockpattern_pattern_entered_header));
+                mContext.getString(R.string.lockpattern_pattern_entered_header));
     }
 
     @Test
@@ -251,7 +260,7 @@ public class SetupChooseLockPatternTest {
 
         assertThat(headerView.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(headerView.getText().toString()).isEqualTo(
-                application.getResources().getString(
+                mContext.getResources().getString(
                         R.string.lockpattern_recording_incorrect_too_short,
                         LockPatternUtils.MIN_LOCK_PATTERN_SIZE));
     }
@@ -262,7 +271,7 @@ public class SetupChooseLockPatternTest {
         final TextView headerView = layout.findViewById(R.id.sud_layout_subtitle);
         final TypedValue typedValue = new TypedValue();
         final Resources.Theme theme = mActivity.getTheme();
-        theme.resolveAttribute(R.attr.colorError, typedValue, true);
+        theme.resolveAttribute(androidx.appcompat.R.attr.colorError, typedValue, true);
         final int errorColor = typedValue.data;
 
         enterShortPattern();
@@ -298,7 +307,7 @@ public class SetupChooseLockPatternTest {
         nextButton.performClick();
 
         assertThat(headerView.getText().toString()).isEqualTo(
-                application.getString(R.string.lockpattern_need_to_confirm));
+                mContext.getString(R.string.lockpattern_need_to_confirm));
     }
 
     @Test
@@ -315,15 +324,15 @@ public class SetupChooseLockPatternTest {
 
         // NeedToConfirmStage
         assertThat(headerView.getText().toString()).isEqualTo(
-                application.getString(R.string.lockpattern_need_to_confirm));
+                mContext.getString(R.string.lockpattern_need_to_confirm));
 
         enterShortPattern();
 
         // ConfirmWrongStage
         assertThat(headerView.getText().toString()).isEqualTo(
-                application.getString(R.string.lockpattern_need_to_unlock_wrong));
+                mContext.getString(R.string.lockpattern_need_to_unlock_wrong));
         assertThat(nextButton.getText().toString()).isEqualTo(
-                application.getString(R.string.lockpattern_confirm_button_text));
+                mContext.getString(R.string.lockpattern_confirm_button_text));
         assertThat(nextButton.isEnabled()).isFalse();
     }
 
@@ -341,15 +350,15 @@ public class SetupChooseLockPatternTest {
 
         // NeedToConfirmStage
         assertThat(headerView.getText().toString()).isEqualTo(
-                application.getString(R.string.lockpattern_need_to_confirm));
+                mContext.getString(R.string.lockpattern_need_to_confirm));
 
         enterPattern();
 
         // ChoiceConfirmedStage
         assertThat(headerView.getText().toString()).isEqualTo(
-                application.getString(R.string.lockpattern_pattern_confirmed_header));
+                mContext.getString(R.string.lockpattern_pattern_confirmed_header));
         assertThat(nextButton.getText().toString()).isEqualTo(
-                application.getString(R.string.lockpattern_confirm_button_text));
+                mContext.getString(R.string.lockpattern_confirm_button_text));
         assertThat(nextButton.isEnabled()).isTrue();
     }
 

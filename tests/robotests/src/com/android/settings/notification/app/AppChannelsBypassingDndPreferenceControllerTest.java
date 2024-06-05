@@ -26,28 +26,40 @@ import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.PrimarySwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public class AppChannelsBypassingDndPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     private NotificationBackend mBackend;
@@ -57,11 +69,13 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
 
     private PreferenceScreen mPreferenceScreen;
     private PreferenceCategory mCategory;
+    private PausedExecutorService mExecutorService;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         Context context = ApplicationProvider.getApplicationContext();
+        mExecutorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(mExecutorService);
 
         mAppRow = new NotificationBackend.AppRow();
         mAppRow.uid = 42;
@@ -83,7 +97,8 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                 buildGroupList(true, true, false));
 
         mController.displayPreference(mPreferenceScreen);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mCategory.getPreferenceCount()).isEqualTo(4); // "All" + 3 channels
         assertThat(mCategory.getPreference(0).getTitle().toString()).isEqualTo(
@@ -99,7 +114,8 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                 buildGroupList(true, true, false));
 
         mController.displayPreference(mPreferenceScreen);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mCategory.getPreference(0).isEnabled()).isTrue();
     }
@@ -110,7 +126,8 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                 buildGroupList(true, false, true));
 
         mController.displayPreference(mPreferenceScreen);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(((PrimarySwitchPreference) mCategory.getPreference(
                 1)).isSwitchEnabled()).isTrue();
@@ -127,7 +144,8 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                 buildGroupList(true, false, true));
 
         mController.displayPreference(mPreferenceScreen);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mCategory.getPreference(0).isEnabled()).isFalse();
         assertThat(((PrimarySwitchPreference) mCategory.getPreference(
@@ -147,5 +165,47 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                             : NotificationManager.IMPORTANCE_NONE));
         }
         return new ParceledListSlice<>(Collections.singletonList(group));
+    }
+
+    @Test
+    public void displayPreference_duplicateChannelName_AddsGroupNameAsSummary() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_DEDUPE_DND_SETTINGS_CHANNELS);
+        NotificationChannelGroup group1 = new NotificationChannelGroup("group1_id", "Group1");
+        NotificationChannelGroup group2 = new NotificationChannelGroup("group2_id", "Group2");
+
+        group1.addChannel(new NotificationChannel("mail_group1_id", "Mail",
+                NotificationManager.IMPORTANCE_DEFAULT));
+        group1.addChannel(new NotificationChannel("other_group1_id", "Other",
+                NotificationManager.IMPORTANCE_DEFAULT));
+
+        group2.addChannel(new NotificationChannel("music_group2_id", "Music",
+                NotificationManager.IMPORTANCE_DEFAULT));
+        // This channel has the same name as a channel in group1.
+        group2.addChannel(new NotificationChannel("mail_group2_id", "Mail",
+                NotificationManager.IMPORTANCE_DEFAULT));
+
+        ParceledListSlice<NotificationChannelGroup> groups = new ParceledListSlice<>(
+                new ArrayList<NotificationChannelGroup>() {
+                    {
+                        add(group1);
+                        add(group2);
+                    }
+                }
+        );
+
+        when(mBackend.getGroups(eq(mAppRow.pkg), eq(mAppRow.uid))).thenReturn(groups);
+        mController.displayPreference(mPreferenceScreen);
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
+
+        // Check that we've added the group name as a summary to channels that have identical names.
+        // Channels are also alphabetized.
+        assertThat(mCategory.getPreference(1).getTitle().toString()).isEqualTo("Mail");
+        assertThat(mCategory.getPreference(1).getSummary().toString()).isEqualTo("Group1");
+        assertThat(mCategory.getPreference(2).getTitle().toString()).isEqualTo("Mail");
+        assertThat(mCategory.getPreference(2).getSummary().toString()).isEqualTo("Group2");
+        assertThat(mCategory.getPreference(3).getTitle().toString()).isEqualTo("Music");
+        assertThat(mCategory.getPreference(4).getTitle().toString()).isEqualTo("Other");
+
     }
 }

@@ -16,9 +16,13 @@
 
 package com.android.settings.privacy;
 
-import android.annotation.NonNull;
 import android.content.Context;
+import android.content.Intent;
 import android.provider.DeviceConfig;
+
+import androidx.annotation.NonNull;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -36,5 +40,16 @@ public final class PrivacyHubPreferenceController extends BasePreferenceControll
     public int getAvailabilityStatus() {
         return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
                 PROPERTY_PRIVACY_HUB_ENABLED, true) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        Preference pref = screen.findPreference(getPreferenceKey());
+        if (pref != null) {
+            pref.setIntent(new Intent(Intent.ACTION_REVIEW_PERMISSION_USAGE)
+                    .setPackage(mContext.getPackageManager().getPermissionControllerPackageName()));
+        }
     }
 }

@@ -25,9 +25,7 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SmartBatteryTip;
 
-/**
- * Detect whether to show smart battery tip.
- */
+/** Detect whether to show smart battery tip. */
 public class SmartBatteryDetector implements BatteryTipDetector {
     private static final int EXPECTED_BATTERY_LEVEL = 30;
 
@@ -36,8 +34,12 @@ public class SmartBatteryDetector implements BatteryTipDetector {
     private final ContentResolver mContentResolver;
     private final boolean mIsPowerSaveMode;
 
-    public SmartBatteryDetector(Context context, BatteryTipPolicy policy, BatteryInfo batteryInfo,
-            ContentResolver contentResolver, boolean isPowerSaveMode) {
+    public SmartBatteryDetector(
+            Context context,
+            BatteryTipPolicy policy,
+            BatteryInfo batteryInfo,
+            ContentResolver contentResolver,
+            boolean isPowerSaveMode) {
         mPolicy = policy;
         mBatteryInfo = batteryInfo;
         mContentResolver = contentResolver;
@@ -46,14 +48,18 @@ public class SmartBatteryDetector implements BatteryTipDetector {
 
     @Override
     public BatteryTip detect() {
-        final boolean smartBatteryOff = Settings.Global.getInt(mContentResolver,
-                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 1) == 0;
+        final boolean smartBatteryOff =
+                Settings.Global.getInt(
+                                mContentResolver,
+                                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED,
+                                1)
+                        == 0;
         final boolean isUnderExpectedBatteryLevel =
                 mBatteryInfo.batteryLevel <= EXPECTED_BATTERY_LEVEL;
         // Show it if in test or smart battery is off.
         final boolean enableSmartBatteryTip =
                 smartBatteryOff && !mIsPowerSaveMode && isUnderExpectedBatteryLevel
-                || mPolicy.testSmartBatteryTip;
+                        || mPolicy.testSmartBatteryTip;
         final int state =
                 enableSmartBatteryTip ? BatteryTip.StateType.NEW : BatteryTip.StateType.INVISIBLE;
         return new SmartBatteryTip(state);

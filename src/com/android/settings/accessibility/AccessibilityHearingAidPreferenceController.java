@@ -25,9 +25,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
@@ -35,7 +33,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.BluetoothCallback;
@@ -116,17 +113,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            final CachedBluetoothDevice device = mHelper.getConnectedHearingAidDevice();
-            if (FeatureFlagUtils.isEnabled(mContext,
-                    FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE)) {
-                launchHearingAidPage();
-                return true;
-            }
-            if (device == null) {
-                launchHearingAidInstructionDialog();
-            } else {
-                launchBluetoothDeviceDetailSetting(device);
-            }
+            launchHearingAidPage();
             return true;
         }
         return false;
@@ -184,7 +171,8 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         }
 
         if (bluetoothProfile == BluetoothProfile.HEARING_AID) {
-            HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, activeDevice);
+            HearingAidUtils.launchHearingAidPairingDialog(
+                    mFragmentManager, activeDevice, getMetricsCategory());
         }
     }
 
@@ -212,29 +200,6 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     void setPreference(Preference preference) {
         mHearingAidPreference = preference;
-    }
-
-    @VisibleForTesting
-    void launchBluetoothDeviceDetailSetting(final CachedBluetoothDevice device) {
-        if (device == null) {
-            return;
-        }
-        final Bundle args = new Bundle();
-        args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS,
-                device.getDevice().getAddress());
-
-        new SubSettingLauncher(mContext)
-                .setDestination(BluetoothDeviceDetailsFragment.class.getName())
-                .setArguments(args)
-                .setTitleRes(R.string.device_details_title)
-                .setSourceMetricsCategory(getMetricsCategory())
-                .launch();
-    }
-
-    @VisibleForTesting
-    void launchHearingAidInstructionDialog() {
-        HearingAidDialogFragment fragment = HearingAidDialogFragment.newInstance();
-        fragment.show(mFragmentManager, HearingAidDialogFragment.class.toString());
     }
 
     private void launchHearingAidPage() {

@@ -18,13 +18,9 @@ package com.android.settings.datetime.timezone;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.app.Activity;
 
 import androidx.preference.Preference;
-
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,8 +35,7 @@ public class RegionPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mActivity = spy((Activity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(Activity.class)).get());
+        mActivity = Robolectric.setupActivity(Activity.class);
     }
 
     @Test

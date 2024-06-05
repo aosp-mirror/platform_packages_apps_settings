@@ -55,6 +55,7 @@ public class TelephonyBasePreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(SubscriptionManager.class))
                 .thenReturn(mSubscriptionManager);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
         when(mSubscriptionInfo.getSubscriptionId()).thenReturn(VALID_SUB_ID);
         mPreferenceController = new TestPreferenceController(mContext, "prefKey");
     }

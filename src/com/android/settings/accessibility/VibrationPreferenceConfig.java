@@ -68,8 +68,19 @@ public abstract class VibrationPreferenceConfig {
     /** Play a vibration effect with intensity just selected by the user. */
     public static void playVibrationPreview(Vibrator vibrator,
             @VibrationAttributes.Usage int vibrationUsage) {
-        vibrator.vibrate(PREVIEW_VIBRATION_EFFECT,
-                createPreviewVibrationAttributes(vibrationUsage));
+        playVibrationPreview(vibrator, createPreviewVibrationAttributes(vibrationUsage));
+    }
+
+    /**
+     * Play a vibration effect with intensity just selected by the user.
+     *
+     * @param vibrator The {@link Vibrator} used to play the vibration.
+     * @param vibrationAttributes The {@link VibrationAttributes} to indicate the
+     *        vibration information.
+     */
+    public static void playVibrationPreview(Vibrator vibrator,
+            VibrationAttributes vibrationAttributes) {
+        vibrator.vibrate(PREVIEW_VIBRATION_EFFECT, vibrationAttributes);
     }
 
     public VibrationPreferenceConfig(Context context, String settingKey,
@@ -135,13 +146,17 @@ public abstract class VibrationPreferenceConfig {
         return mAudioManager.getRingerModeInternal() == AudioManager.RINGER_MODE_SILENT;
     }
 
-    private static VibrationAttributes createPreviewVibrationAttributes(
+    static VibrationAttributes createPreviewVibrationAttributes(
             @VibrationAttributes.Usage int vibrationUsage) {
         return new VibrationAttributes.Builder()
                 .setUsage(vibrationUsage)
-                // Enforce fresh settings to be applied for the preview vibration, as they
-                // are played immediately after the new user values are set.
-                .setFlags(VibrationAttributes.FLAG_INVALIDATE_SETTINGS_CACHE)
+                .setFlags(
+                        // Enforce fresh settings to be applied for the preview vibration, as they
+                        // are played immediately after the new user values are set.
+                        VibrationAttributes.FLAG_INVALIDATE_SETTINGS_CACHE
+                        // Bypass user settings to allow vibration previews to be played while in
+                        // limited interruptions' mode, e.g. zen mode.
+                        | VibrationAttributes.FLAG_BYPASS_INTERRUPTION_POLICY)
                 .build();
     }
 

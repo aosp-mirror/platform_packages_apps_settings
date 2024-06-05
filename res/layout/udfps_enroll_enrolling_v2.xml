@@ -70,25 +70,7 @@
         app:lottie_loop="true"
         app:lottie_speed=".85" />
 
-    <com.android.settings.biometrics2.ui.widget.UdfpsEnrollView
-        android:id="@+id/udfps_animation_view"
-        android:layout_width="218.42dp"
-        android:layout_height="216dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="553dp">
-
-        <ImageView
-            android:id="@+id/udfps_enroll_animation_fp_progress_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <!-- Fingerprint -->
-        <ImageView
-            android:id="@+id/udfps_enroll_animation_fp_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.android.settings.biometrics2.ui.widget.UdfpsEnrollView>
+    <include layout="@layout/udfps_enroll_enrolling_v2_udfps_view"/>
 
     <Button
         style="@style/SudGlifButton.Secondary"

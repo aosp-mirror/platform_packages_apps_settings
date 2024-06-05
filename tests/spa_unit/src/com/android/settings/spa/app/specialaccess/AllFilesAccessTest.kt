@@ -22,6 +22,7 @@ import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,33 +34,16 @@ class AllFilesAccessTest {
     private val listModel = AllFilesAccessListModel(context)
 
     @Test
-    fun pageTitleResId() {
+    fun modelResourceIdAndProperties() {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.manage_external_storage_title)
-    }
-
-    @Test
-    fun switchTitleResId() {
         assertThat(listModel.switchTitleResId).isEqualTo(R.string.permit_manage_external_storage)
-    }
-
-    @Test
-    fun footerResId() {
-        assertThat(listModel.footerResId)
-            .isEqualTo(R.string.allow_manage_external_storage_description)
-    }
-
-    @Test
-    fun appOp() {
-        assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE)
-    }
-
-    @Test
-    fun permission() {
+        assertThat(listModel.footerResId).isEqualTo(R.string.allow_manage_external_storage_description)
+        assertThat(listModel.appOps).isEqualTo(
+            AppOps(
+                op = AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE,
+                setModeByUid = true,
+            )
+        )
         assertThat(listModel.permission).isEqualTo(Manifest.permission.MANAGE_EXTERNAL_STORAGE)
-    }
-
-    @Test
-    fun setModeByUid() {
-        assertThat(listModel.setModeByUid).isTrue()
     }
 }

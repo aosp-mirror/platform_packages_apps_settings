@@ -20,6 +20,7 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
+import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
@@ -51,6 +52,7 @@ import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.NetworkProviderSettings;
+import com.android.settings.network.SatelliteRepository;
 import com.android.settings.network.WifiSwitchPreferenceController;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
@@ -65,11 +67,18 @@ import com.android.wifitrackerlib.WifiEntry;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 /**
  * {@link CustomSliceable} for Wi-Fi, used by generic clients.
+ *
+ * @deprecated This is not used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class WifiSlice implements CustomSliceable {
 
     @VisibleForTesting
@@ -224,7 +233,8 @@ public class WifiSlice implements CustomSliceable {
                 .setAccentColor(COLOR_NOT_TINTED)
                 .setKeywords(getKeywords())
                 .addRow(getHeaderRow(isWifiEnabled, wifiSliceItem));
-        if (!isWiFiPermissionGranted || !mWifiRestriction.isChangeWifiStateAllowed(mContext)) {
+        if (!isWiFiPermissionGranted || !mWifiRestriction.isChangeWifiStateAllowed(mContext)
+                || isSatelliteOn()) {
             return builder;
         }
 
@@ -264,11 +274,17 @@ public class WifiSlice implements CustomSliceable {
                     android.R.attr.colorControlNormal));
         }
 
-        final Drawable drawable = mContext.getDrawable(
-                WifiUtils.getInternetIconResource(wifiSliceItem.getLevel(),
-                        wifiSliceItem.shouldShowXLevelIcon()));
+        Drawable drawable = mContext.getDrawable(getWifiIconResId(wifiSliceItem));
         drawable.setTint(tint);
         return Utils.createIconWithDrawable(drawable);
+    }
+
+    @VisibleForTesting
+    int getWifiIconResId(WifiSliceItem wifiSliceItem) {
+        return (wifiSliceItem.isInstantHotspotNetwork())
+                ? getHotspotIconResource(wifiSliceItem.getInstantHotspotDeviceType())
+                : WifiUtils.getInternetIconResource(wifiSliceItem.getLevel(),
+                        wifiSliceItem.shouldShowXLevelIcon());
     }
 
     protected IconCompat getEndIcon(WifiSliceItem wifiSliceItem) {
@@ -408,5 +424,18 @@ public class WifiSlice implements CustomSliceable {
             if (context == null) return true;
             return WifiEnterpriseRestrictionUtils.isChangeWifiStateAllowed(context);
         }
+    }
+
+    private boolean isSatelliteOn() {
+        SatelliteRepository satelliteRepository = new SatelliteRepository(mContext);
+        boolean isSatelliteOn = false;
+        try {
+            isSatelliteOn =
+                    satelliteRepository.requestIsEnabled(Executors.newSingleThreadExecutor())
+                            .get(2000, TimeUnit.MILLISECONDS);
+        } catch (ExecutionException | TimeoutException | InterruptedException e) {
+            Log.e(TAG, "Error to get satellite status : " + e);
+        }
+        return isSatelliteOn;
     }
 }

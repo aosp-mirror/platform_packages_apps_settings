@@ -38,7 +38,6 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.Settings.CreateShortcutActivity;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.search.SearchStateReceiver;
@@ -48,7 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Listens to {@link Intent.ACTION_PRE_BOOT_COMPLETED} and {@link Intent.ACTION_USER_INITIALIZED}
+ * Listens to {@link Intent.ACTION_PRE_BOOT_COMPLETED} and {@link Intent.ACTION_USER_INITIALIZE}
  * performs setup steps for a managed profile (disables the launcher icon of the Settings app,
  * adds cross-profile intent filters for the appropriate Settings activities), disables the
  * webview setting for non-admin users, updates the intent flags for any existing shortcuts and
@@ -104,26 +103,15 @@ public class SettingsInitialize extends BroadcastReceiver {
             }
         }
 
-        // Disable launcher icon
-        disableComponent(pm, new ComponentName(context, Settings.class));
-        // Disable shortcut picker.
-        disableComponent(pm, new ComponentName(context, CreateShortcutActivity.class));
+        Utils.disableComponentsToHideSettings(context, pm);
     }
 
     private void cloneProfileSetup(Context context, PackageManager pm, UserInfo userInfo) {
         if (userInfo == null || !userInfo.isCloneProfile()) {
             return;
         }
-        // Disable launcher icon
-        disableComponent(pm, new ComponentName(context, Settings.class));
 
-        //Disable Shortcut picker
-        disableComponent(pm, new ComponentName(context, CreateShortcutActivity.class));
-    }
-
-    private void disableComponent(PackageManager pm, ComponentName componentName) {
-        pm.setComponentEnabledSetting(componentName,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        Utils.disableComponentsToHideSettings(context, pm);
     }
 
     // Disable WebView Setting if the current user is not an admin

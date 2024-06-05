@@ -24,7 +24,7 @@
         android:title="@string/summary_placeholder"
         android:layout="@layout/preference_category_no_label"
         android:order="20"
-        settings:controller="com.android.settings.network.NetworkProviderSimsCategoryController"/>
+        settings:controller="com.android.settings.network.NetworkProviderSimListController"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="add_sim"
@@ -35,7 +35,8 @@
         android:title="@string/mobile_network_list_add_more"
         android:icon="@drawable/ic_menu_add_activated_tint"
         android:order="100">
-        <intent android:action="android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION">
+        <intent android:action="android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION"
+                android:targetPackage="com.android.phone">
             <extra android:name="android.telephony.euicc.extra.FORCE_PROVISION"
                    android:value="true"/>
         </intent>

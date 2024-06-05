@@ -45,6 +45,8 @@ import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
+import com.android.settings.flags.Flags;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -57,7 +59,6 @@ import com.google.android.setupdesign.util.DeviceHelper;
 import java.util.List;
 
 public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
-
     private static final String TAG = "FingerprintIntro";
 
     @VisibleForTesting
@@ -67,6 +68,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     private DevicePolicyManager mDevicePolicyManager;
     private boolean mCanAssumeUdfps;
+    @Nullable
+    protected UdfpsEnrollCalibrator mCalibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         mCanAssumeUdfps = props != null && props.size() == 1 && props.get(0).isAnyUdfpsType();
 
         mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
+
+        if (Flags.udfpsEnrollCalibration()) {
+            mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                    .getUdfpsEnrollCalibrator(getApplicationContext(), savedInstanceState, null);
+        }
 
         final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
         final ImageView iconDeviceLocked = findViewById(R.id.icon_device_locked);
@@ -127,13 +135,16 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         footerTitle1.setText(getFooterTitle1());
         footerTitle2.setText(getFooterTitle2());
 
-        final ScrollView scrollView = findViewById(R.id.sud_scroll_view);
+        final ScrollView scrollView =
+                findViewById(com.google.android.setupdesign.R.id.sud_scroll_view);
         scrollView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
 
         final Intent intent = getIntent();
         if (mFromSettingsSummary
                 && GatekeeperPasswordProvider.containsGatekeeperPasswordHandle(intent)) {
-            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+            overridePendingTransition(
+                    com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                    com.google.android.setupdesign.R.anim.sud_slide_next_out);
             getNextButton().setEnabled(false);
             getChallenge(((sensorId, userId, challenge) -> {
                 if (isFinishing()) {
@@ -153,9 +164,21 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (Flags.udfpsEnrollCalibration()) {
+            if (mCalibrator != null) {
+                mCalibrator.onSaveInstanceState(outState);
+            }
+        }
+    }
+
+    @Override
     protected void initViews() {
         setDescriptionText(getString(
-                R.string.security_settings_fingerprint_enroll_introduction_v3_message,
+                isPrivateProfile()
+                        ? R.string.private_space_fingerprint_enroll_introduction_message
+                        : R.string.security_settings_fingerprint_enroll_introduction_v3_message,
                 DeviceHelper.getDeviceName(this)));
 
         super.initViews();
@@ -240,6 +263,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @StringRes
     protected int getFooterMessage5() {
+        if (isPrivateProfile()) {
+            return R.string.private_space_fingerprint_enroll_introduction_footer_message;
+        }
         return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_5;
     }
 
@@ -271,6 +297,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected int getHeaderResDefault() {
+        if (isPrivateProfile()) {
+            return R.string.private_space_fingerprint_enroll_introduction_title;
+        }
         return R.string.security_settings_fingerprint_enroll_introduction_title;
     }
 
@@ -319,6 +348,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
             final List<FingerprintSensorPropertiesInternal> props =
                     mFingerprintManager.getSensorPropertiesInternal();
             // This will need to be updated for devices with multiple fingerprint sensors
+            if (props == null || props.isEmpty()) {
+                return R.string.fingerprint_intro_error_unknown;
+            }
             final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFingerprints =
                     mFingerprintManager.getEnrolledFingerprints(mUserId).size();
@@ -361,6 +393,13 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
                     BiometricUtils.getGatekeeperPasswordHandle(getIntent()));
         }
+        if (Flags.udfpsEnrollCalibration()) {
+            if (mCalibrator != null) {
+                intent.putExtras(mCalibrator.getExtrasForNextIntent());
+            }
+        }
+        intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                getIntent().getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1));
         return intent;
     }
 
@@ -406,7 +445,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                     .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
                     .setListener(this::onNextButtonClick)
                     .setButtonType(FooterButton.ButtonType.OPT_IN)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mPrimaryFooterButton;
@@ -420,7 +459,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                     .setText(getNegativeButtonTextId())
                     .setListener(this::onSkipButtonClick)
                     .setButtonType(FooterButton.ButtonType.NEXT)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mSecondaryFooterButton;
@@ -445,5 +484,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         }
         data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
         return data;
+    }
+
+    private boolean isPrivateProfile() {
+        return Utils.isPrivateProfile(mUserId, getApplicationContext());
     }
 }

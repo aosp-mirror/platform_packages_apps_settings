@@ -18,21 +18,29 @@ package com.android.settings.network;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.content.Context;
 import android.net.Uri;
 import android.provider.Settings;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class MobileDataEnabledListenerTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private static final int SUB_ID_ONE = 111;
     private static final int SUB_ID_TWO = 222;
 
@@ -44,8 +52,7 @@ public class MobileDataEnabledListenerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mListener = new MobileDataEnabledListener(mContext, mClient);
     }
 
@@ -54,6 +61,7 @@ public class MobileDataEnabledListenerTest {
         mListener.start(SUB_ID_ONE);
         final Uri uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA + SUB_ID_ONE);
         mContext.getContentResolver().notifyChange(uri, null);
+        shadowMainLooper().idle();
         verify(mClient).onMobileDataEnabledChange();
     }
 
@@ -63,6 +71,7 @@ public class MobileDataEnabledListenerTest {
         mListener.stop();
         final Uri uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA + SUB_ID_ONE);
         mContext.getContentResolver().notifyChange(uri, null);
+        shadowMainLooper().idle();
         verify(mClient, never()).onMobileDataEnabledChange();
     }
 
@@ -73,6 +82,7 @@ public class MobileDataEnabledListenerTest {
         mListener.start(SUB_ID_TWO);
         final Uri uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA + SUB_ID_TWO);
         mContext.getContentResolver().notifyChange(uri, null);
+        shadowMainLooper().idle();
         verify(mClient).onMobileDataEnabledChange();
     }
 }

@@ -138,9 +138,13 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
             final Bundle bundle = getArguments();
             final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                     .setMessage(bundle.getCharSequence(EXTRA_MESSAGE))
-                    .setPositiveButton(android.R.string.ok, this)
+                    .setPositiveButton(getPositiveButtonText(), this)
                     .setNegativeButton(android.R.string.cancel, mCancelListener);
             return builder.create();
+        }
+
+        protected CharSequence getPositiveButtonText() {
+            return getContext().getString(android.R.string.ok);
         }
 
         @Override

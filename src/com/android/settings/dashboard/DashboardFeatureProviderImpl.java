@@ -33,6 +33,7 @@ import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SWIT
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE_URI;
 
+import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
@@ -54,7 +55,7 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -74,6 +75,8 @@ import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.AdaptiveIcon;
+
+import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +100,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     public DashboardFeatureProviderImpl(Context context) {
         mContext = context.getApplicationContext();
         mCategoryManager = CategoryManager.get(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mPackageManager = context.getPackageManager();
     }
 
@@ -152,7 +155,14 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         bindIcon(pref, tile, forceRoundedIcon);
 
-        if (tile instanceof ActivityTile) {
+        if (tile.hasPendingIntent()) {
+            // Pending intent cannot be launched within the settings app panel, and will thus always
+            // be executed directly.
+            pref.setOnPreferenceClickListener(preference -> {
+                launchPendingIntentOrSelectProfile(activity, tile, fragment.getMetricsCategory());
+                return true;
+            });
+        } else if (tile instanceof ActivityTile) {
             final int sourceMetricsCategory = fragment.getMetricsCategory();
             final Bundle metadata = tile.getMetaData();
             String clsName = null;
@@ -213,8 +223,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public void openTileIntent(FragmentActivity activity, Tile tile) {
         if (tile == null) {
-            Intent intent = new Intent(Settings.ACTION_SETTINGS).addFlags(
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Intent intent = new Intent(Settings.ACTION_SETTINGS)
+                    .setPackage(mContext.getPackageName())
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mContext.startActivity(intent);
             return;
         }
@@ -366,16 +377,16 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void setSwitchChecked(Preference pref, boolean checked) {
-        if (pref instanceof PrimarySwitchPreference) {
-            ((PrimarySwitchPreference) pref).setChecked(checked);
-        } else if (pref instanceof SwitchPreference) {
-            ((SwitchPreference) pref).setChecked(checked);
+        if (pref instanceof PrimarySwitchPreference primarySwitchPreference) {
+            primarySwitchPreference.setChecked(checked);
+        } else if (pref instanceof TwoStatePreference twoStatePreference) {
+            twoStatePreference.setChecked(checked);
         }
     }
 
     private void setSwitchEnabled(Preference pref, boolean enabled) {
-        if (pref instanceof PrimarySwitchPreference) {
-            ((PrimarySwitchPreference) pref).setSwitchEnabled(enabled);
+        if (pref instanceof PrimarySwitchPreference primarySwitchPreference) {
+            primarySwitchPreference.setSwitchEnabled(enabled);
         } else {
             pref.setEnabled(enabled);
         }
@@ -433,12 +444,41 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         if (TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
             iconDrawable.setTint(Utils.getHomepageIconColor(preference.getContext()));
-        } else if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
+        }
+
+        if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
             iconDrawable = new AdaptiveIcon(mContext, iconDrawable,
                     R.dimen.dashboard_tile_foreground_image_inset);
             ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);
         }
         preference.setIcon(iconDrawable);
+    }
+
+    private void launchPendingIntentOrSelectProfile(FragmentActivity activity, Tile tile,
+            int sourceMetricCategory) {
+        ProfileSelectDialog.updatePendingIntentsIfNeeded(mContext, tile);
+
+        if (tile.pendingIntentMap.isEmpty()) {
+            Log.w(TAG, "Cannot resolve pendingIntent, skipping. " + tile.getIntent());
+            return;
+        }
+
+        mMetricsFeatureProvider.logSettingsTileClick(tile.getKey(mContext), sourceMetricCategory);
+
+        // Launch the pending intent directly if there's only one available.
+        if (tile.pendingIntentMap.size() == 1) {
+            PendingIntent pendingIntent = Iterables.getOnlyElement(tile.pendingIntentMap.values());
+            try {
+                pendingIntent.send();
+            } catch (PendingIntent.CanceledException e) {
+                Log.w(TAG, "Failed executing pendingIntent. " + pendingIntent.getIntent(), e);
+            }
+            return;
+        }
+
+        ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
+                sourceMetricCategory, /* onShowListener= */ null,
+                /* onDismissListener= */ null, /* onCancelListener= */ null);
     }
 
     private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,

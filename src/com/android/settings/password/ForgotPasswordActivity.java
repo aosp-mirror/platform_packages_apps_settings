@@ -50,6 +50,7 @@ public class ForgotPasswordActivity extends Activity {
             finish();
             return;
         }
+        ThemeHelper.trySetDynamicColor(this);
         setContentView(R.layout.forgot_password_activity);
 
         DevicePolicyManager devicePolicyManager = getSystemService(DevicePolicyManager.class);
@@ -63,7 +64,7 @@ public class ForgotPasswordActivity extends Activity {
                         .setText(android.R.string.ok)
                         .setListener(v -> finish())
                         .setButtonType(FooterButton.ButtonType.DONE)
-                        .setTheme(R.style.SudGlifButton_Primary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build()
         );
 

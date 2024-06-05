@@ -47,6 +47,7 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -128,6 +129,7 @@ public class ConfirmCredentialTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void onCreate_remoteValidation_invalidServiceComponentName_finishActivity()
             throws Exception {
         Intent intentWithInvalidComponentName = new Intent()

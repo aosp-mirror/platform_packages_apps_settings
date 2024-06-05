@@ -45,7 +45,7 @@ public class AmbientDisplayNotificationsPreferenceController extends
 
     public AmbientDisplayNotificationsPreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     /**

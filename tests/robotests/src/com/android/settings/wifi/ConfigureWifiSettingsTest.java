@@ -12,7 +12,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -20,6 +19,7 @@ import android.os.UserManager;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -30,7 +30,6 @@ import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,6 +45,9 @@ import org.robolectric.annotation.Implements;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ConfigureWifiSettingsTest {
 
     @Rule
@@ -69,7 +71,6 @@ public class ConfigureWifiSettingsTest {
 
     TestConfigureWifiSettings mSettings;
 
-    @Ignore
     @Before
     public void setUp() {
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
@@ -148,7 +149,6 @@ public class ConfigureWifiSettingsTest {
         verify(mPreferenceScreen).removeAll();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getNonIndexableKeys_ifPageDisabled_shouldNotIndexResource() {

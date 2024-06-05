@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.safetycenter.SafetyCenterManager;
 import android.safetycenter.SafetyEvent;
 
+import com.android.settings.privatespace.PrivateSpaceSafetySource;
 import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -79,11 +80,16 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
         if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)) {
             BiometricsSafetySource.setSafetySourceData(context, safetyEvent);
         }
+
+        if (sourceIds.contains(PrivateSpaceSafetySource.SAFETY_SOURCE_ID)) {
+            PrivateSpaceSafetySource.setSafetySourceData(context, safetyEvent);
+        }
     }
 
     private static void refreshAllSafetySources(Context context, SafetyEvent safetyEvent) {
         LockScreenSafetySource.setSafetySourceData(context,
                 new ScreenLockPreferenceDetailsUtils(context), safetyEvent);
         BiometricsSafetySource.setSafetySourceData(context, safetyEvent);
+        PrivateSpaceSafetySource.setSafetySourceData(context, safetyEvent);
     }
 }

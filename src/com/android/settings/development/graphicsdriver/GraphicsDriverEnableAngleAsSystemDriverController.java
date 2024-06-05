@@ -25,7 +25,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -52,10 +52,11 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     private boolean mShouldToggleSwitchBackOnRebootDialogDismiss;
 
     @VisibleForTesting
-    static final String PROPERTY_RO_GFX_ANGLE_SUPPORTED = "ro.gfx.angle.supported";
+    static final String PROPERTY_PERSISTENT_GRAPHICS_EGL = "persist.graphics.egl";
 
     @VisibleForTesting
-    static final String PROPERTY_PERSISTENT_GRAPHICS_EGL = "persist.graphics.egl";
+    static final String PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION =
+            "debug.graphics.angle.developeroption.enable";
 
     @VisibleForTesting static final String ANGLE_DRIVER_SUFFIX = "angle";
 
@@ -72,6 +73,11 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
                 public void set(String key, String val) {
                     SystemProperties.set(key, val);
                 }
+
+                @Override
+                public boolean getBoolean(String key, boolean def) {
+                    return SystemProperties.getBoolean(key, def);
+                }
             };
         }
     }
@@ -81,9 +87,11 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
         this(context, fragment, new Injector());
     }
 
-    private boolean isAngleSupported() {
-        return TextUtils.equals(
-                        mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
+    // Return true if the ANGLE developer option entry point is enabled.
+    // This can be enabled by calling:
+    //     `adb shell setprop debug.graphics.angle.developeroption.enable true`
+    private boolean isAngleDeveloperOptionEnabled() {
+        return mSystemProperties.getBoolean(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION, false);
     }
 
     @VisibleForTesting
@@ -96,6 +104,10 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
         // Exception is when user chooses to reboot now, the switch should keep its current value
         // and persist its' state over reboot.
         mShouldToggleSwitchBackOnRebootDialogDismiss = true;
+        final String persistGraphicsEglValue =
+                mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
+        Log.v(TAG, "Value of " + PROPERTY_PERSISTENT_GRAPHICS_EGL + " is: "
+                + persistGraphicsEglValue);
     }
 
     @Override
@@ -125,10 +137,6 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
 
     /** Return the default value of "persist.graphics.egl" */
     public boolean isDefaultValue() {
-        if (!isAngleSupported()) {
-            return true;
-        }
-
         final String currentGlesDriver =
                 mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
         // default value of "persist.graphics.egl" is ""
@@ -138,16 +146,17 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (isAngleSupported()) {
-            // set switch on if "persist.graphics.egl" is "angle" and angle is built in /vendor
-            // set switch off otherwise.
-            final String currentGlesDriver =
-                    mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
-            final boolean isAngle = TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver);
-            ((SwitchPreference) mPreference).setChecked(isAngle);
-        } else {
+        // set switch on if "persist.graphics.egl" is "angle".
+        final String currentGlesDriver =
+                mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
+        final boolean isAngle = TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver);
+        ((TwoStatePreference) mPreference).setChecked(isAngle);
+
+        // Disable the developer option toggle UI if ANGLE is disabled, this means next time the
+        // debug property needs to be set to true again to enable ANGLE. If ANGLE is enabled, don't
+        // disable the developer option toggle UI so that it can be turned off easily.
+        if (!isAngleDeveloperOptionEnabled() && !((TwoStatePreference) mPreference).isChecked()) {
             mPreference.setEnabled(false);
-            ((SwitchPreference) mPreference).setChecked(false);
         }
     }
 
@@ -155,12 +164,10 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     protected void onDeveloperOptionsSwitchDisabled() {
         // 1) disable the switch
         super.onDeveloperOptionsSwitchDisabled();
-        if (isAngleSupported()) {
-            // 2) set the persist.graphics.egl empty string
-            GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
-            // 3) reset the switch
-            ((SwitchPreference) mPreference).setChecked(false);
-        }
+        // 2) set the persist.graphics.egl empty string
+        GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
+        // 3) reset the switch
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 
     void toggleSwitchBack() {
@@ -170,7 +177,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
             // if persist.graphics.egl = "angle", set the property value back to ""
             GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
             // toggle switch off
-            ((SwitchPreference) mPreference).setChecked(false);
+            ((TwoStatePreference) mPreference).setChecked(false);
             return;
         }
 
@@ -178,7 +185,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
             // if persist.graphicx.egl = "", set the persist.graphics.egl back to "angle"
             GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(true);
             // toggle switch on
-            ((SwitchPreference) mPreference).setChecked(true);
+            ((TwoStatePreference) mPreference).setChecked(true);
             return;
         }
 
@@ -188,7 +195,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
 
     @VisibleForTesting
     void rebootDevice(Context context) {
-        final Intent intent = new Intent(Intent.ACTION_REBOOT);
+        final Intent intent = new Intent(Intent.ACTION_REBOOT).setPackage("android");
         context.startActivity(intent);
     }
 

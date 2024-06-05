@@ -154,6 +154,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (shouldShowSplitScreenDialog()) {
+            BiometricsSplitScreenDialog
+                    .newInstance(getModality(), !WizardManagerHelper.isAnySetupWizard(getIntent()))
+                    .show(getSupportFragmentManager(), BiometricsSplitScreenDialog.class.getName());
+        }
+
         if (savedInstanceState != null) {
             mConfirmingCredentials = savedInstanceState.getBoolean(KEY_CONFIRMING_CREDENTIALS);
             mHasScrolledToBottom = savedInstanceState.getBoolean(KEY_SCROLLED_TO_BOTTOM);
@@ -223,18 +229,23 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                     }
 
                     // Show secondary button once scroll is completed.
-                    if (!scrollNeeded) {
-                        if (!enrollmentCompleted) {
-                            getSecondaryFooterButton().setVisibility(View.VISIBLE);
-                        }
-                        mHasScrolledToBottom = true;
-                    }
+                    getSecondaryFooterButton().setVisibility(
+                            !scrollNeeded && !enrollmentCompleted ? View.VISIBLE : View.INVISIBLE);
+                    mHasScrolledToBottom = !scrollNeeded;
                 });
+
+        final boolean isScrollNeeded = requireScrollMixin.isScrollingRequired();
+        final boolean enrollmentCompleted = checkMaxEnrolled() != 0;
+        getSecondaryFooterButton().setVisibility(
+                !isScrollNeeded && !enrollmentCompleted ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        //reset mNextClick to make sure introduction page would be closed correctly
+        mNextClicked = false;
 
         final int errorMsg = checkMaxEnrolled();
         if (errorMsg == 0) {
@@ -290,6 +301,13 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
     @Override
     protected void onNextButtonClick(View view) {
+        // If it's not on suw, this method shouldn't be accessed.
+        if (shouldShowSplitScreenDialog() && WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            BiometricsSplitScreenDialog.newInstance(getModality(), false /*destroyActivity*/)
+                    .show(getSupportFragmentManager(), BiometricsSplitScreenDialog.class.getName());
+            return;
+        }
+
         mNextClicked = true;
         if (checkMaxEnrolled() == 0) {
             // Lock thingy is already set up, launch directly to the next page
@@ -364,7 +382,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 updatePasswordQuality();
                 final boolean handled = onSetOrConfirmCredentials(data);
                 if (!handled) {
-                    overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+                    overridePendingTransition(
+                            com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                            com.google.android.setupdesign.R.anim.sud_slide_next_out);
                     getNextButton().setEnabled(false);
                     getChallenge(((sensorId, userId, challenge) -> {
                         mSensorId = sensorId;
@@ -384,7 +404,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             if (resultCode == RESULT_OK && data != null) {
                 final boolean handled = onSetOrConfirmCredentials(data);
                 if (!handled) {
-                    overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+                    overridePendingTransition(
+                            com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                            com.google.android.setupdesign.R.anim.sud_slide_next_out);
                     getNextButton().setEnabled(false);
                     getChallenge(((sensorId, userId, challenge) -> {
                         mSensorId = sensorId;
@@ -400,7 +422,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 finish();
             }
         } else if (requestCode == LEARN_MORE_REQUEST) {
-            overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
+            overridePendingTransition(
+                    com.google.android.setupdesign.R.anim.sud_slide_back_in,
+                    com.google.android.setupdesign.R.anim.sud_slide_back_out);
         } else if (requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST
                 || cameFromMultiBioFpAuthAddAnother) {
             if (isResultFinished(resultCode)) {

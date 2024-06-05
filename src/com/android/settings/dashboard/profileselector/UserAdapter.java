@@ -17,6 +17,7 @@
 package com.android.settings.dashboard.profileselector;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PRIVATE_CATEGORY_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
 
 import android.app.ActivityManager;
@@ -27,6 +28,7 @@ import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,19 +49,26 @@ import java.util.Objects;
  * Adapter for a spinner that shows a list of users.
  */
 public class UserAdapter extends BaseAdapter {
+    private static final String TAG = "UserAdapter";
 
     /** Holder for user details */
     public static class UserDetails {
         private final UserHandle mUserHandle;
+        private final UserManager mUserManager;
         private final Drawable mIcon;
         private final String mTitle;
 
         public UserDetails(UserHandle userHandle, UserManager um, Context context) {
             mUserHandle = userHandle;
+            mUserManager = um;
             UserInfo userInfo = um.getUserInfo(mUserHandle.getIdentifier());
             int tintColor = Utils.getColorAttrDefaultColor(context,
-                    com.android.internal.R.attr.materialColorPrimaryContainer);
-            if (userInfo.isManagedProfile()) {
+                    com.android.internal.R.attr.materialColorPrimary);
+            if (userInfo.isManagedProfile()
+                    || (android.os.Flags.allowPrivateProfile()
+                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                        && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                        && userInfo.isPrivateProfile())) {
                 mIcon = context.getPackageManager().getUserBadgeForDensityNoBackground(
                         userHandle, /* density= */ 0);
                 mIcon.setTint(tintColor);
@@ -73,15 +82,24 @@ public class UserAdapter extends BaseAdapter {
             DevicePolicyManager devicePolicyManager =
                     Objects.requireNonNull(context.getSystemService(DevicePolicyManager.class));
             DevicePolicyResourcesManager resources = devicePolicyManager.getResources();
-            int userHandle = mUserHandle.getIdentifier();
-            if (userHandle == UserHandle.USER_CURRENT
-                    || userHandle == ActivityManager.getCurrentUser()) {
+            int userId = mUserHandle.getIdentifier();
+            if (userId == UserHandle.USER_CURRENT || userId == ActivityManager.getCurrentUser()) {
                 return resources.getString(PERSONAL_CATEGORY_HEADER,
-                        () -> context.getString(R.string.category_personal));
-            } else {
+                        () -> context.getString(
+                                com.android.settingslib.R.string.category_personal));
+            } else if (mUserManager.isManagedProfile(userId)) {
                 return resources.getString(WORK_CATEGORY_HEADER,
-                        () -> context.getString(R.string.category_work));
+                        () -> context.getString(com.android.settingslib.R.string.category_work));
+            } else if (android.os.Flags.allowPrivateProfile()
+                    && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                    && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                    && mUserManager.getUserInfo(userId).isPrivateProfile()) {
+                return resources.getString(PRIVATE_CATEGORY_HEADER,
+                        () -> context.getString(com.android.settingslib.R.string.category_private));
             }
+            Log.w(TAG, "title requested for unexpected user id " + userId);
+            return resources.getString(PERSONAL_CATEGORY_HEADER,
+                    () -> context.getString(com.android.settingslib.R.string.category_personal));
         }
     }
 
@@ -196,11 +214,21 @@ public class UserAdapter extends BaseAdapter {
 
     private static UserAdapter createUserAdapter(
             UserManager userManager, Context context, List<UserHandle> userProfiles) {
+        updateUserHandlesIfNeeded(userManager, userProfiles);
         ArrayList<UserDetails> userDetails = new ArrayList<>(userProfiles.size());
         for (UserHandle userProfile : userProfiles) {
             userDetails.add(new UserDetails(userProfile, userManager, context));
         }
         return new UserAdapter(context, userDetails);
+    }
+
+    private static void updateUserHandlesIfNeeded(
+            UserManager userManager, List<UserHandle> userProfiles) {
+        for (int i = userProfiles.size() - 1; i >= 0; --i) {
+            if (com.android.settings.Utils.shouldHideUser(userProfiles.get(i), userManager)) {
+                userProfiles.remove(i);
+            }
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

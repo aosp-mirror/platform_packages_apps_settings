@@ -16,9 +16,62 @@
 
 package com.android.settings.fuelgauge;
 
-import android.content.ComponentName;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+
+import java.util.List;
 
 /** Feature provider for battery settings usage. */
 public interface BatterySettingsFeatureProvider {
 
+    /** Returns true if manufacture date should be shown */
+    boolean isManufactureDateAvailable(Context context, long manufactureDateMs);
+
+    /** Returns true if first use date should be shown */
+    boolean isFirstUseDateAvailable(Context context, long firstUseDateMs);
+
+    /** Check whether the battery information page is enabled in the About phone page */
+    boolean isBatteryInfoEnabled(Context context);
+
+    /** A way to add more battery tip detectors. */
+    void addBatteryTipDetector(
+            Context context,
+            List<BatteryTip> batteryTips,
+            BatteryInfo batteryInfo,
+            BatteryTipPolicy batteryTipPolicy);
+
+    /** Return a label for the bottom summary during wireless charging. */
+    @Nullable
+    CharSequence getWirelessChargingLabel(@NonNull Context context, @NonNull BatteryInfo info);
+
+    /** Return a charging remaining time label for wireless charging. */
+    @Nullable
+    CharSequence getWirelessChargingRemainingLabel(
+            @NonNull Context context, long remainingTimeMs, long currentTimeMs);
+
+    /** Return true if it's in the charging optimization mode. */
+    boolean isChargingOptimizationMode(@NonNull Context context);
+
+    /** Return a charging remaining time label for charging optimization mode. */
+    @Nullable
+    CharSequence getChargingOptimizationRemainingLabel(
+            @NonNull Context context,
+            int batteryLevel,
+            int pluggedStatus,
+            long chargeRemainingTimeMs,
+            long currentTimeMs);
+
+    /** Return a charge label for charging optimization mode. */
+    @Nullable
+    CharSequence getChargingOptimizationChargeLabel(
+            @NonNull Context context,
+            int batteryLevel,
+            String batteryPercentageString,
+            long chargeRemainingTimeMs,
+            long currentTimeMs);
 }

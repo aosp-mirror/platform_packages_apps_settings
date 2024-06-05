@@ -15,7 +15,8 @@
  */
 package com.android.settings.wifi;
 
-import android.annotation.Nullable;
+import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 
@@ -36,7 +38,7 @@ import com.android.settingslib.R;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.wifi.WifiUtils;
-import com.android.wifitrackerlib.BaseWifiTracker;
+import com.android.wifitrackerlib.HotspotNetworkEntry;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -83,9 +85,18 @@ public class WifiEntryPreference extends RestrictedPreference implements
 
         setLayoutResource(R.layout.preference_access_point);
         mFrictionSld = getFrictionStateListDrawable();
+        mIconInjector = iconInjector;
+        setWifiEntry(wifiEntry);
+    }
+
+    /**
+     * Set updated {@link WifiEntry} to refresh the preference
+     *
+     * @param wifiEntry An instance of {@link WifiEntry}
+     */
+    public void setWifiEntry(@NonNull WifiEntry wifiEntry) {
         mWifiEntry = wifiEntry;
         mWifiEntry.setListener(this);
-        mIconInjector = iconInjector;
         refresh();
     }
 
@@ -96,7 +107,7 @@ public class WifiEntryPreference extends RestrictedPreference implements
     @Override
     public void onBindViewHolder(final PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-        if (BaseWifiTracker.isVerboseLoggingEnabled()) {
+        if (mWifiEntry.isVerboseSummaryEnabled()) {
             TextView summary = (TextView) view.findViewById(android.R.id.summary);
             if (summary != null) {
                 summary.setMaxLines(100);
@@ -110,7 +121,8 @@ public class WifiEntryPreference extends RestrictedPreference implements
         view.itemView.setContentDescription(mContentDescription);
 
         // Turn off divider
-        view.findViewById(R.id.two_target_divider).setVisibility(View.INVISIBLE);
+        view.findViewById(com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider)
+                .setVisibility(View.INVISIBLE);
 
         // Enable the icon button when the help string in this WifiEntry is not null.
         final ImageButton imageButton = (ImageButton) view.findViewById(R.id.icon_button);
@@ -145,13 +157,12 @@ public class WifiEntryPreference extends RestrictedPreference implements
      */
     public void refresh() {
         setTitle(mWifiEntry.getTitle());
-        final int level = mWifiEntry.getLevel();
-        final boolean showX = mWifiEntry.shouldShowXLevelIcon();
-        if (level != mLevel || showX != mShowX) {
-            mLevel = level;
-            mShowX = showX;
+        if (mWifiEntry instanceof HotspotNetworkEntry) {
+            updateHotspotIcon(((HotspotNetworkEntry) mWifiEntry).getDeviceType());
+        } else {
+            mLevel = mWifiEntry.getLevel();
+            mShowX = mWifiEntry.shouldShowXLevelIcon();
             updateIcon(mShowX, mLevel);
-            notifyChanged();
         }
 
         setSummary(mWifiEntry.getSummary(false /* concise */));
@@ -201,14 +212,7 @@ public class WifiEntryPreference extends RestrictedPreference implements
         return accent ? android.R.attr.colorAccent : android.R.attr.colorControlNormal;
     }
 
-    @VisibleForTesting
-    void updateIcon(boolean showX, int level) {
-        if (level == -1) {
-            setIcon(null);
-            return;
-        }
-
-        final Drawable drawable = mIconInjector.getIcon(showX, level);
+    private void setIconWithTint(Drawable drawable) {
         if (drawable != null) {
             // Must use Drawable#setTintList() instead of Drawable#setTint() to show the grey
             // icon when the preference is disabled.
@@ -217,6 +221,20 @@ public class WifiEntryPreference extends RestrictedPreference implements
         } else {
             setIcon(null);
         }
+    }
+
+    @VisibleForTesting
+    void updateIcon(boolean showX, int level) {
+        if (level == -1) {
+            setIcon(null);
+            return;
+        }
+        setIconWithTint(mIconInjector.getIcon(showX, level));
+    }
+
+    @VisibleForTesting
+    void updateHotspotIcon(int deviceType) {
+        setIconWithTint(getContext().getDrawable(getHotspotIconResource(deviceType)));
     }
 
     @Nullable

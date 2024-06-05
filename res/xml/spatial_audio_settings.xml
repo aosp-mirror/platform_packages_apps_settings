@@ -24,12 +24,12 @@
         android:title="@string/spatial_audio_text"
         settings:searchable="false"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="spatial_audio"
         android:title="@string/spatial_audio_speaker"
         settings:controller="com.android.settings.notification.SpatialAudioPreferenceController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="spatial_audio_wired_headphones"
         android:title="@string/spatial_audio_wired_headphones"
         settings:controller="com.android.settings.notification.SpatialAudioWiredHeadphonesController"/>

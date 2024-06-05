@@ -66,13 +66,8 @@ public class TimeZonePreferenceControllerTest {
 
         mPreference = new RestrictedPreference(mContext);
 
-        mController = spy(new TimeZonePreferenceController(mContext));
+        mController = spy(new TimeZonePreferenceController(mContext, "test_key"));
         doReturn("test timezone").when(mController).getTimeZoneOffsetAndName();
-    }
-
-    @Test
-    public void isAlwaysAvailable() {
-        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test

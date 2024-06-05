@@ -17,15 +17,15 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentity;
 import android.telephony.CellIdentityGsm;
@@ -33,23 +33,29 @@ import android.telephony.CellIdentityLte;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoGsm;
 import android.telephony.CellInfoLte;
+import android.telephony.CellSignalStrength;
 import android.telephony.CellSignalStrengthGsm;
 import android.telephony.CellSignalStrengthLte;
 import android.telephony.TelephonyManager;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.network.telephony.scan.NetworkScanRepository;
+import com.android.settings.network.telephony.scan.NetworkScanRepository.NetworkScanResult;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -68,10 +74,6 @@ public class NetworkSelectSettingsTest {
     @Mock
     public MetricsFeatureProvider mMetricsFeatureProvider;
     @Mock
-    public NetworkOperatorPreference mNetworkOperatorPreference1;
-    @Mock
-    public NetworkOperatorPreference mNetworkOperatorPreference2;
-    @Mock
     private CellInfo mCellInfo1;
     @Mock
     private CellIdentity mCellId1;
@@ -80,15 +82,12 @@ public class NetworkSelectSettingsTest {
     @Mock
     private CellIdentity mCellId2;
 
-    private PreferenceScreen mPreferenceScreen;
     @Mock
     public PreferenceManager mPreferenceManager;
 
     public Context mContext;
     public PreferenceCategory mPreferenceCategory;
-    public boolean mIsAggregationEnabled = true;
 
-    private Bundle mInitArguments;
     private TargetClass mNetworkSelectSettings;
 
     @Before
@@ -103,21 +102,24 @@ public class NetworkSelectSettingsTest {
         mPreferenceCategory = spy(new PreferenceCategory(mContext));
         doReturn(mPreferenceManager).when(mPreferenceCategory).getPreferenceManager();
         doReturn(mCellId1).when(mCellInfo1).getCellIdentity();
+        doReturn(mock(CellSignalStrength.class)).when(mCellInfo1).getCellSignalStrength();
         doReturn(CARRIER_NAME1).when(mCellId1).getOperatorAlphaLong();
         doReturn(mCellId2).when(mCellInfo2).getCellIdentity();
+        doReturn(mock(CellSignalStrength.class)).when(mCellInfo2).getCellSignalStrength();
         doReturn(CARRIER_NAME2).when(mCellId2).getOperatorAlphaLong();
-        mIsAggregationEnabled = true;
         mNetworkSelectSettings = spy(new TargetClass(this));
 
         PersistableBundle config = new PersistableBundle();
         config.putBoolean(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL, true);
-        doReturn(config).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        doReturn(config).when(mCarrierConfigManager).getConfigForSubId(SUB_ID,
+                CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL,
+                CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL);
 
         doReturn(TelephonyManager.DATA_CONNECTED).when(mTelephonyManager).getDataState();
     }
 
-    public class TargetClass extends NetworkSelectSettings {
-        private NetworkSelectSettingsTest mTestEnv;
+    public static class TargetClass extends NetworkSelectSettings {
+        private final NetworkSelectSettingsTest mTestEnv;
         private boolean mIsPreferenceScreenEnabled;
 
         public TargetClass(NetworkSelectSettingsTest env) {
@@ -165,8 +167,7 @@ public class NetworkSelectSettingsTest {
         }
 
         @Override
-        protected NetworkOperatorPreference
-                createNetworkOperatorPreference(CellInfo cellInfo) {
+        protected NetworkOperatorPreference createNetworkOperatorPreference(CellInfo cellInfo) {
             NetworkOperatorPreference pref = super.createNetworkOperatorPreference(cellInfo);
             if (cellInfo == mTestEnv.mCellInfo1) {
                 pref.updateCell(cellInfo, mTestEnv.mCellId1);
@@ -174,11 +175,6 @@ public class NetworkSelectSettingsTest {
                 pref.updateCell(cellInfo, mTestEnv.mCellId2);
             }
             return pref;
-        }
-
-        @Override
-        protected boolean enableAggregation(Context context) {
-            return mTestEnv.mIsAggregationEnabled;
         }
 
         @Override
@@ -190,9 +186,14 @@ public class NetworkSelectSettingsTest {
     @Test
     @UiThreadTest
     public void updateAllPreferenceCategory_correctOrderingPreference() {
+        NetworkScanResult result = new NetworkScanResult(
+                NetworkScanRepository.NetworkScanState.COMPLETE,
+                ImmutableList.of(mCellInfo1, mCellInfo2));
         mNetworkSelectSettings.onCreateInitialization();
         mNetworkSelectSettings.enablePreferenceScreen(true);
-        mNetworkSelectSettings.scanResultHandler(Arrays.asList(mCellInfo1, mCellInfo2));
+
+        mNetworkSelectSettings.scanResultHandler(result);
+
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(2);
         final NetworkOperatorPreference preference =
                 (NetworkOperatorPreference) mPreferenceCategory.getPreference(1);
@@ -212,80 +213,105 @@ public class NetworkSelectSettingsTest {
     }
 
     @Test
-    public void doAggregation_hasDuplicateItemsDiffCellIdCase1_removeSamePlmnRatItem() {
+    public void filterOutSatellitePlmn_filterOutSatellitePlmn_whenKeyIsTrue() {
+        PersistableBundle config = new PersistableBundle();
+        config.putBoolean(
+                CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL, true);
+        doReturn(config).when(mCarrierConfigManager).getConfigForSubId(eq(SUB_ID),
+                eq(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL),
+                eq(CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL));
+
+        List<String> testSatellitePlmn = new ArrayList<>(Arrays.asList("123232", "123235"));
+        doReturn(testSatellitePlmn).when(
+                mNetworkSelectSettings).getSatellitePlmnsForCarrierWrapper();
+
+        /* Expect filter out satellite plmns when
+           KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL is true, and there is available
+           satellite plmns. */
         mNetworkSelectSettings.onCreateInitialization();
         List<CellInfo> testList = Arrays.asList(
                 createLteCellInfo(true, 123, "123", "232", "CarrierA"),
-                createLteCellInfo(true, 1234, "123", "232", "CarrierA"),
-                createGsmCellInfo(false, 123, "123", "232", "CarrierB"));
+                createGsmCellInfo(false, 123, "123", "233", "CarrierB"),
+                createLteCellInfo(false, 1234, "123", "234", "CarrierC"),
+                createGsmCellInfo(false, 1234, "123", "235", "CarrierD"));
         List<CellInfo> expected = Arrays.asList(
-                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
-                createGsmCellInfo(false, 123, "123", "232", "CarrierB"));
-        assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
+                createGsmCellInfo(false, 123, "123", "233", "CarrierB"),
+                createLteCellInfo(false, 1234, "123", "234", "CarrierC"));
+        assertThat(mNetworkSelectSettings.filterOutSatellitePlmn(testList)).isEqualTo(expected);
     }
 
     @Test
-    public void doAggregation_hasDuplicateItemsDiffCellIdCase2_removeSamePlmnRatItem() {
+    public void filterOutSatellitePlmn_filterOutSatellitePlmn_whenNoSatellitePlmnIsAvailable() {
+        PersistableBundle config = new PersistableBundle();
+        config.putBoolean(
+                CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL, true);
+        doReturn(config).when(mCarrierConfigManager).getConfigForSubId(eq(SUB_ID),
+                eq(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL),
+                eq(CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL));
+
+        List<String> testSatellitePlmn = new ArrayList<>(Arrays.asList("123232", "123235"));
+        doReturn(testSatellitePlmn).when(
+                mNetworkSelectSettings).getSatellitePlmnsForCarrierWrapper();
+
+        // Expect no filter out when there is no available satellite plmns.
+        mNetworkSelectSettings.onCreateInitialization();
+        testSatellitePlmn = new ArrayList<>();
+        doReturn(testSatellitePlmn).when(
+                mNetworkSelectSettings).getSatellitePlmnsForCarrierWrapper();
         mNetworkSelectSettings.onCreateInitialization();
         List<CellInfo> testList = Arrays.asList(
                 createLteCellInfo(true, 123, "123", "232", "CarrierA"),
-                createGsmCellInfo(false, 123, "123", "232", "CarrierB"),
-                createLteCellInfo(false, 1234, "123", "232", "CarrierB"),
-                createGsmCellInfo(false, 1234, "123", "232", "CarrierB"));
+                createGsmCellInfo(false, 123, "123", "233", "CarrierB"),
+                createLteCellInfo(false, 1234, "123", "234", "CarrierC"),
+                createGsmCellInfo(false, 12345, "123", "235", "CarrierD"));
         List<CellInfo> expected = Arrays.asList(
                 createLteCellInfo(true, 123, "123", "232", "CarrierA"),
-                createGsmCellInfo(false, 123, "123", "232", "CarrierB"),
-                createLteCellInfo(false, 1234, "123", "232", "CarrierB"));
-        assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
+                createGsmCellInfo(false, 123, "123", "233", "CarrierB"),
+                createLteCellInfo(false, 1234, "123", "234", "CarrierC"),
+                createGsmCellInfo(false, 12345, "123", "235", "CarrierD"));
+        assertThat(mNetworkSelectSettings.filterOutSatellitePlmn(testList)).isEqualTo(expected);
+
+        // Expect no filter out when KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL is false.
+        config.putBoolean(
+                CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL, false);
+        mNetworkSelectSettings.onCreateInitialization();
+        assertThat(mNetworkSelectSettings.filterOutSatellitePlmn(testList)).isEqualTo(expected);
     }
 
     @Test
-    public void doAggregation_hasDuplicateItemsDiffMccMncCase1_removeSamePlmnRatItem() {
-        mNetworkSelectSettings.onCreateInitialization();
-        List<CellInfo> testList = Arrays.asList(
-                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
-                createLteCellInfo(true, 123, "456", "232", "CarrierA"),
-                createGsmCellInfo(false, 123, "123", "232", "CarrierB"));
-        List<CellInfo> expected = Arrays.asList(
-                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
-                createGsmCellInfo(false, 123, "123", "232", "CarrierB"));
-        assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
-    }
+    public void filterOutSatellitePlmn_filterOutSatellitePlmn_whenKeyIsFalse() {
+        PersistableBundle config = new PersistableBundle();
+        config.putBoolean(
+                CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL, true);
+        doReturn(config).when(mCarrierConfigManager).getConfigForSubId(eq(SUB_ID),
+                eq(CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL),
+                eq(CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL));
 
-    @Test
-    public void doAggregation_hasDuplicateItemsDiffMccMncCase2_removeSamePlmnRatItem() {
-        mNetworkSelectSettings.onCreateInitialization();
-        List<CellInfo> testList = Arrays.asList(
-                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
-                createGsmCellInfo(false, 123, "123", "232", "CarrierB"),
-                createLteCellInfo(false, 1234, "123", "232", "CarrierB"),
-                createGsmCellInfo(false, 123, "456", "232", "CarrierB"));
-        List<CellInfo> expected = Arrays.asList(
-                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
-                createGsmCellInfo(false, 123, "123", "232", "CarrierB"),
-                createLteCellInfo(false, 1234, "123", "232", "CarrierB"));
-        assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
-    }
+        List<String> testSatellitePlmn = new ArrayList<>(Arrays.asList("123232", "123235"));
+        doReturn(testSatellitePlmn).when(
+                mNetworkSelectSettings).getSatellitePlmnsForCarrierWrapper();
 
-    @Test
-    public void doAggregation_hasDuplicateItemsDiffMccMncCase3_removeSamePlmnRatItem() {
+        // Expect no filter out when KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL is false.
+        config.putBoolean(
+                CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL, false);
         mNetworkSelectSettings.onCreateInitialization();
         List<CellInfo> testList = Arrays.asList(
-                createLteCellInfo(false, 123, "123", "232", "CarrierA"),
-                createLteCellInfo(false, 124, "123", "233", "CarrierA"),
-                createLteCellInfo(true, 125, "123", "234", "CarrierA"),
-                createGsmCellInfo(false, 126, "456", "232", "CarrierA"));
+                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
+                createGsmCellInfo(false, 123, "123", "233", "CarrierB"),
+                createLteCellInfo(false, 1234, "123", "234", "CarrierC"),
+                createGsmCellInfo(false, 12345, "123", "235", "CarrierD"));
         List<CellInfo> expected = Arrays.asList(
-                createLteCellInfo(true, 125, "123", "234", "CarrierA"),
-                createGsmCellInfo(false, 126, "456", "232", "CarrierA"));
-        assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
+                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
+                createGsmCellInfo(false, 123, "123", "233", "CarrierB"),
+                createLteCellInfo(false, 1234, "123", "234", "CarrierC"),
+                createGsmCellInfo(false, 12345, "123", "235", "CarrierD"));
+        assertThat(mNetworkSelectSettings.filterOutSatellitePlmn(testList)).isEqualTo(expected);
     }
 
     private CellInfoLte createLteCellInfo(boolean registered, int cellId, String mcc, String mnc,
             String plmnName) {
         CellIdentityLte cil = new CellIdentityLte(
-                cellId, 5, 200, 2000, new int[]{1, 2}, 10000, new String(mcc),
-                new String(mnc), new String(plmnName), new String(plmnName),
+                cellId, 5, 200, 2000, new int[]{1, 2}, 10000, mcc, mnc, plmnName, plmnName,
                 Collections.emptyList(), null);
         CellSignalStrengthLte cssl = new CellSignalStrengthLte(15, 16, 17, 18, 19, 20);
 
@@ -299,8 +325,7 @@ public class NetworkSelectSettingsTest {
 
     private CellInfoGsm createGsmCellInfo(boolean registered, int cellId, String mcc, String mnc,
             String plmnName) {
-        CellIdentityGsm cig = new CellIdentityGsm(1, cellId, 40, 5, new String(mcc),
-                new String(mnc), new String(plmnName), new String(plmnName),
+        CellIdentityGsm cig = new CellIdentityGsm(1, cellId, 40, 5, mcc, mnc, plmnName, plmnName,
                 Collections.emptyList());
         CellSignalStrengthGsm cssg = new CellSignalStrengthGsm(5, 6, 7);
         CellInfoGsm cellInfoGsm = new CellInfoGsm();
@@ -309,5 +334,14 @@ public class NetworkSelectSettingsTest {
         cellInfoGsm.setCellIdentity(cig);
         cellInfoGsm.setCellSignalStrength(cssg);
         return cellInfoGsm;
+    }
+
+    @Test
+    @UiThreadTest
+    public void onPreferenceTreeClick_notNetworkOperatorPreference_noCrash() {
+        mNetworkSelectSettings.onCreateInitialization();
+        mNetworkSelectSettings.enablePreferenceScreen(true);
+
+        mNetworkSelectSettings.onPreferenceTreeClick(new Preference(mContext));
     }
 }

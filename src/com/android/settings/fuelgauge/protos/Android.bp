@@ -1,4 +1,5 @@
 package {
+    default_team: "trendy_team_android_settings_app",
     // See: http://go/android-license-faq
     // A large-scale-change added 'default_applicable_licenses' to import
     // all of the 'license_kinds' from "packages_apps_Settings_license"
@@ -8,25 +9,9 @@ package {
 }
 
 java_library {
-    name: "app-usage-event-protos-lite",
+    name: "fuelgauge-protos-lite",
     proto: {
         type: "lite",
     },
-    srcs: ["app_usage_event.proto"],
-}
-
-java_library {
-    name: "battery-event-protos-lite",
-    proto: {
-        type: "lite",
-    },
-    srcs: ["battery_event.proto"],
-}
-
-java_library {
-    name: "fuelgauge-usage-state-protos-lite",
-    proto: {
-        type: "lite",
-    },
-    srcs: ["fuelgauge_usage_state.proto"],
+    srcs: ["*.proto"],
 }

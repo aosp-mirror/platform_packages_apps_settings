@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.RecoverySystem;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -33,9 +32,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.network.helper.ConfirmationSimDeletionPredicate;
 import com.android.settings.system.ResetDashboardFragment;
-import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 
 public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {
@@ -45,6 +43,9 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
             "com.android.settings.network";
 
     public static void show(ResetDashboardFragment host) {
+        if (host.getActivity() == null) {
+            return;
+        }
         final EraseEuiccDataDialogFragment dialog = new EraseEuiccDataDialogFragment();
         dialog.setTargetFragment(host, 0 /* requestCode */);
         final FragmentManager manager = host.getActivity().getSupportFragmentManager();
@@ -62,7 +63,7 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.reset_esim_title)
                 .setMessage(R.string.reset_esim_desc)
-                .setPositiveButton(R.string.erase_euicc_data_button, this)
+                .setPositiveButton(R.string.erase_sim_confirm_button, this)
                 .setNegativeButton(R.string.cancel, null)
                 .setOnDismissListener(this)
                 .create();
@@ -77,14 +78,7 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
 
         if (which == DialogInterface.BUTTON_POSITIVE) {
             Context context = getContext();
-            if (ConfirmationSimDeletionPredicate.getSingleton().test(context)) {
-                // Create a "verify it's you" verification over keyguard
-                // when "erase" button been pressed.
-                // This might protect from erasing by some automation process.
-                WifiDppUtils.showLockScreen(context, () -> runAsyncWipe(context));
-            } else {
-                runAsyncWipe(context);
-            }
+            MobileNetworkUtils.showLockScreen(context, () -> runAsyncWipe(context));
         }
     }
 

@@ -18,7 +18,10 @@ package com.android.settings.panel;
 /**
  * PanelContentCallback provides a callback interface for {@link PanelFragment} to receive
  * events from {@link PanelContent}.
+ *
+ * @deprecated this is no longer used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public interface PanelContentCallback {
 
     /**

@@ -20,7 +20,7 @@ import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.os.UserManager;
 
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 
@@ -30,10 +30,10 @@ import com.android.settings.R;
  * the current state.
  */
 public class SecureNfcEnabler extends BaseNfcEnabler {
-    private final SwitchPreference mPreference;
+    private final TwoStatePreference mPreference;
     private final UserManager mUserManager;
 
-    public SecureNfcEnabler(Context context, SwitchPreference preference) {
+    public SecureNfcEnabler(Context context, TwoStatePreference preference) {
         super(context);
         mPreference = preference;
         mUserManager = context.getSystemService(UserManager.class);

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.settings.widget;
 
 import android.content.Context;
@@ -21,6 +20,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -32,17 +32,13 @@ import java.util.Optional;
 
 /** Preference that wrapped by {@link MaterialCardView} */
 public class CardPreference extends Preference {
-
-    private View.OnClickListener mPrimaryBtnClickListener = null;
-    private View.OnClickListener mSecondaryBtnClickListener = null;
-
-    private String mPrimaryButtonText = null;
-    private String mSecondaryButtonText = null;
-
+    @Nullable private View.OnClickListener mPrimaryBtnClickListener = null;
+    @Nullable private View.OnClickListener mSecondaryBtnClickListener = null;
+    @Nullable private String mPrimaryButtonText = null;
+    @Nullable private String mSecondaryButtonText = null;
     private Optional<Button> mPrimaryButton = Optional.empty();
     private Optional<Button> mSecondaryButton = Optional.empty();
     private Optional<View> mButtonsGroup = Optional.empty();
-
     private boolean mPrimaryButtonVisible = false;
     private boolean mSecondaryButtonVisible = false;
 
@@ -50,14 +46,13 @@ public class CardPreference extends Preference {
         this(context, null /* attrs */);
     }
 
-    public CardPreference(Context context, AttributeSet attrs) {
+    public CardPreference(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs, R.attr.cardPreferenceStyle);
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-
         initButtonsAndLayout(holder);
     }
 
@@ -65,7 +60,6 @@ public class CardPreference extends Preference {
         mPrimaryButton = Optional.ofNullable((Button) holder.findViewById(android.R.id.button1));
         mSecondaryButton = Optional.ofNullable((Button) holder.findViewById(android.R.id.button2));
         mButtonsGroup = Optional.ofNullable(holder.findViewById(R.id.card_preference_buttons));
-
         setPrimaryButtonText(mPrimaryButtonText);
         setPrimaryButtonClickListener(mPrimaryBtnClickListener);
         setPrimaryButtonVisible(mPrimaryButtonVisible);

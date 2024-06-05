@@ -16,7 +16,11 @@
 
 package com.android.settings.sound;
 
+import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
+
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeBroadcast;
+import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -24,6 +28,8 @@ import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -32,6 +38,8 @@ import com.android.settings.media.MediaOutputUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.MediaOutputConstants;
 
 import java.util.List;
@@ -46,21 +54,86 @@ import java.util.List;
  */
 public class MediaOutputPreferenceController extends AudioSwitchPreferenceController {
 
-    private MediaController mMediaController;
+    private static final String TAG = "MediaOutputPreferenceController";
+    @Nullable private MediaController mMediaController;
+    private MediaSessionManager mMediaSessionManager;
+
+    @Nullable private LocalBluetoothLeBroadcast mLocalBluetoothLeBroadcast;
+
+    private final BluetoothLeBroadcast.Callback mBroadcastCallback =
+            new BluetoothLeBroadcast.Callback() {
+                @Override
+                public void onBroadcastStarted(int reason, int broadcastId) {
+                    updateState(mPreference);
+                }
+
+                @Override
+                public void onBroadcastStartFailed(int reason) {
+                    updateState(mPreference);
+                }
+
+                @Override
+                public void onBroadcastStopped(int reason, int broadcastId) {
+                    updateState(mPreference);
+                }
+
+                @Override
+                public void onBroadcastStopFailed(int reason) {
+                    updateState(mPreference);
+                }
+
+                @Override
+                public void onPlaybackStarted(int reason, int broadcastId) {}
+
+                @Override
+                public void onPlaybackStopped(int reason, int broadcastId) {}
+
+                @Override
+                public void onBroadcastUpdated(int reason, int broadcastId) {}
+
+                @Override
+                public void onBroadcastUpdateFailed(int reason, int broadcastId) {}
+
+                @Override
+                public void onBroadcastMetadataChanged(
+                        int broadcastId, @NonNull BluetoothLeBroadcastMetadata metadata) {}
+            };
 
     public MediaOutputPreferenceController(Context context, String key) {
         super(context, key);
-        mMediaController = MediaOutputUtils.getActiveLocalMediaController(context.getSystemService(
-                MediaSessionManager.class));
+        mMediaSessionManager = context.getSystemService(MediaSessionManager.class);
+        mMediaController = MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager);
+        LocalBluetoothManager localBluetoothManager =
+                com.android.settings.bluetooth.Utils.getLocalBtManager(mContext);
+        if (localBluetoothManager != null) {
+            mLocalBluetoothLeBroadcast =
+                    localBluetoothManager.getProfileManager().getLeAudioBroadcastProfile();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mLocalBluetoothLeBroadcast != null) {
+            mLocalBluetoothLeBroadcast.registerServiceCallBack(
+                    mContext.getMainExecutor(), mBroadcastCallback);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mLocalBluetoothLeBroadcast != null) {
+            mLocalBluetoothLeBroadcast.unregisterServiceCallBack(mBroadcastCallback);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        if (!Utils.isAudioModeOngoingCall(mContext) && mMediaController != null) {
-            mPreference.setVisible(true);
-        }
+        mPreference.setVisible(!Utils.isAudioModeOngoingCall(mContext)
+                && (enableOutputSwitcherForSystemRouting() ? true : mMediaController != null));
     }
 
     @Override
@@ -70,11 +143,16 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        if (mMediaController == null) {
-            // No active local playback
-            return;
+        if (enableOutputSwitcherForSystemRouting()) {
+            mMediaController = MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager);
+        } else {
+            if (mMediaController == null) {
+                // No active local playback
+                return;
+            }
         }
 
+        mPreference.setEnabled(true);
         if (Utils.isAudioModeOngoingCall(mContext)) {
             // Ongoing call status, switch entry for media will be disabled.
             mPreference.setVisible(false);
@@ -95,12 +173,23 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
                 || (connectedLeAudioDevices != null && !connectedLeAudioDevices.isEmpty()))) {
             activeDevice = findActiveDevice();
         }
-        mPreference.setTitle(mContext.getString(R.string.media_output_label_title,
-                com.android.settings.Utils.getApplicationLabel(mContext,
-                        mMediaController.getPackageName())));
-        mPreference.setSummary((activeDevice == null) ?
-                mContext.getText(R.string.media_output_default_summary) :
-                activeDevice.getAlias());
+
+        if (mMediaController == null) {
+            mPreference.setTitle(mContext.getString(R.string.media_output_title_without_playing));
+        } else {
+            mPreference.setTitle(mContext.getString(R.string.media_output_label_title,
+                    com.android.settings.Utils.getApplicationLabel(mContext,
+                    mMediaController.getPackageName())));
+        }
+        if (isDeviceBroadcasting()) {
+            mPreference.setSummary(R.string.media_output_audio_sharing);
+            mPreference.setEnabled(false);
+        } else {
+            mPreference.setSummary(
+                    (activeDevice == null)
+                            ? mContext.getText(R.string.media_output_default_summary)
+                            : activeDevice.getAlias());
+        }
     }
 
     @Override
@@ -145,15 +234,27 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            mContext.sendBroadcast(new Intent()
-                    .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
-                    .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
-                    .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
-                            mMediaController.getPackageName())
-                    .putExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
-                            mMediaController.getSessionToken()));
+            if (enableOutputSwitcherForSystemRouting() && mMediaController == null) {
+                mContext.sendBroadcast(new Intent()
+                        .setAction(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG)
+                        .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME));
+            } else if (mMediaController != null) {
+                mContext.sendBroadcast(new Intent()
+                        .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                        .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
+                        .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
+                                mMediaController.getPackageName())
+                        .putExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
+                                mMediaController.getSessionToken()));
+            }
             return true;
         }
         return false;
+    }
+
+    private boolean isDeviceBroadcasting() {
+        return com.android.settingslib.flags.Flags.enableLeAudioSharing()
+                && mLocalBluetoothLeBroadcast != null
+                && mLocalBluetoothLeBroadcast.isEnabled(null);
     }
 }

@@ -24,7 +24,7 @@ import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -65,7 +65,7 @@ public class ZenModeRepeatCallersPreferenceController extends AbstractZenModePre
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        SwitchPreference pref = (SwitchPreference) preference;
+        TwoStatePreference pref = (TwoStatePreference) preference;
         switch (getZenMode()) {
             case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
             case Settings.Global.ZEN_MODE_ALARMS:

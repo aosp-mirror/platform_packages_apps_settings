@@ -22,13 +22,14 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.robolectric.Shadows.shadowOf;
 
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 

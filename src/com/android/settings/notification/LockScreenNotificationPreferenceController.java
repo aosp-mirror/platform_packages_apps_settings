@@ -84,7 +84,7 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         mWorkSettingKey = workSettingKey;
 
         mProfileUserId = Utils.getManagedProfileId(UserManager.get(context), UserHandle.myUserId());
-        final LockPatternUtils utils = FeatureFactory.getFactory(context)
+        final LockPatternUtils utils = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context);
         mSecure = utils.isSecure(UserHandle.myUserId());
@@ -278,7 +278,7 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
 
     public static int getSummaryResource(Context context) {
         final boolean enabled = getLockscreenNotificationsEnabled(context);
-        final boolean secure = FeatureFactory.getFactory(context)
+        final boolean secure = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context)
                 .isSecure(UserHandle.myUserId());

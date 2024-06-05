@@ -22,7 +22,6 @@ import static org.mockito.Mockito.spy;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.os.PowerManager;
 import android.provider.Settings;
 
 import com.android.settings.fuelgauge.BatteryInfo;
@@ -49,8 +48,7 @@ public class SmartBatteryDetectorTest {
     private SmartBatteryDetector mSmartBatteryDetector;
     private BatteryTipPolicy mPolicy;
 
-    @Mock
-    private BatteryInfo mBatteryInfo;
+    @Mock private BatteryInfo mBatteryInfo;
 
     @Before
     public void setUp() {
@@ -59,8 +57,13 @@ public class SmartBatteryDetectorTest {
         mContext = RuntimeEnvironment.application;
         mContentResolver = mContext.getContentResolver();
         mPolicy = spy(new BatteryTipPolicy(mContext));
-        mSmartBatteryDetector = new SmartBatteryDetector(mContext, mPolicy, mBatteryInfo,
-                mContentResolver, false /* isPowerSaveMode */);
+        mSmartBatteryDetector =
+                new SmartBatteryDetector(
+                        mContext,
+                        mPolicy,
+                        mBatteryInfo,
+                        mContentResolver,
+                        false /* isPowerSaveMode */);
     }
 
     @Test
@@ -72,8 +75,8 @@ public class SmartBatteryDetectorTest {
 
     @Test
     public void testDetect_smartBatteryOff_tipVisible() {
-        Settings.Global.putInt(mContentResolver,
-                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 0);
+        Settings.Global.putInt(
+                mContentResolver, Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 0);
         mBatteryInfo.batteryLevel = EXPECTED_BATTERY_LEVEL;
 
         assertThat(mSmartBatteryDetector.detect().isVisible()).isTrue();
@@ -81,30 +84,40 @@ public class SmartBatteryDetectorTest {
 
     @Test
     public void testDetect_batterySaverOn_tipInvisible() {
-        Settings.Global.putInt(mContentResolver,
-                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 0);
+        Settings.Global.putInt(
+                mContentResolver, Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 0);
         mBatteryInfo.batteryLevel = EXPECTED_BATTERY_LEVEL;
-        mSmartBatteryDetector = new SmartBatteryDetector(mContext, mPolicy, mBatteryInfo,
-                mContentResolver, true /* isPowerSaveMode */);
+        mSmartBatteryDetector =
+                new SmartBatteryDetector(
+                        mContext,
+                        mPolicy,
+                        mBatteryInfo,
+                        mContentResolver,
+                        true /* isPowerSaveMode */);
 
         assertThat(mSmartBatteryDetector.detect().isVisible()).isFalse();
     }
 
     @Test
     public void testDetect_unexpectedBatteryLevel_tipInvisible() {
-        Settings.Global.putInt(mContentResolver,
-                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 0);
+        Settings.Global.putInt(
+                mContentResolver, Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 0);
         mBatteryInfo.batteryLevel = UNEXPECTED_BATTERY_LEVEL;
-        mSmartBatteryDetector = new SmartBatteryDetector(mContext, mPolicy, mBatteryInfo,
-                mContentResolver, true /* isPowerSaveMode */);
+        mSmartBatteryDetector =
+                new SmartBatteryDetector(
+                        mContext,
+                        mPolicy,
+                        mBatteryInfo,
+                        mContentResolver,
+                        true /* isPowerSaveMode */);
 
         assertThat(mSmartBatteryDetector.detect().isVisible()).isFalse();
     }
 
     @Test
     public void testDetect_smartBatteryOn_tipInvisible() {
-        Settings.Global.putInt(mContentResolver,
-                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 1);
+        Settings.Global.putInt(
+                mContentResolver, Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, 1);
         mBatteryInfo.batteryLevel = EXPECTED_BATTERY_LEVEL;
 
         assertThat(mSmartBatteryDetector.detect().isVisible()).isFalse();

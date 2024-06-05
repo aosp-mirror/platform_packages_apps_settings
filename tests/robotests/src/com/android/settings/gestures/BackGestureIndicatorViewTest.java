@@ -21,17 +21,24 @@ import static org.junit.Assert.assertEquals;
 import android.content.Context;
 import android.widget.ImageView;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
 public class BackGestureIndicatorViewTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private Context mContext;
 
@@ -42,9 +49,7 @@ public class BackGestureIndicatorViewTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mView = new BackGestureIndicatorView(mContext);
 
         mLeftDrawable = (BackGestureIndicatorDrawable) ((ImageView) mView.findViewById(
@@ -57,6 +62,7 @@ public class BackGestureIndicatorViewTest {
     public void testSetIndicatoreWidth() {
         mView.setIndicatorWidth(25, true);
         mView.setIndicatorWidth(52, false);
+        ShadowLooper.idleMainLooper();
 
         assertEquals(25, mLeftDrawable.getWidth());
         assertEquals(52, mRightDrawable.getWidth());

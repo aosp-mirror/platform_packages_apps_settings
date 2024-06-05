@@ -66,6 +66,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated(forRemoval = true)
 public class PanelFragment extends Fragment {
 
     private static final String TAG = "PanelFragment";
@@ -221,7 +222,7 @@ public class PanelFragment extends Fragment {
         final String callingPackageName =
                 arguments.getString(SettingsPanelActivity.KEY_CALLING_PACKAGE_NAME);
 
-        mPanel = FeatureFactory.getFactory(activity)
+        mPanel = FeatureFactory.getFeatureFactory()
                 .getPanelFeatureProvider()
                 .getPanel(activity, arguments);
 
@@ -235,7 +236,7 @@ public class PanelFragment extends Fragment {
             getLifecycle().addObserver((LifecycleObserver) mPanel);
         }
 
-        mMetricsProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
+        mMetricsProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         updateProgressBar();
 
@@ -519,6 +520,7 @@ public class PanelFragment extends Fragment {
         return mPanel.getViewType();
     }
 
+    @Deprecated(forRemoval = true)
     class LocalPanelCallback implements PanelContentCallback {
 
         @Override

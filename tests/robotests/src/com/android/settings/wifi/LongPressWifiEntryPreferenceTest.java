@@ -18,6 +18,10 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -60,7 +64,7 @@ public class LongPressWifiEntryPreferenceTest {
         when(mWifiEntry.canDisconnect()).thenReturn(false);
         when(mWifiEntry.isSaved()).thenReturn(false);
 
-        mPreference = new LongPressWifiEntryPreference(mContext, mWifiEntry, mFragment);
+        mPreference = spy(new LongPressWifiEntryPreference(mContext, mWifiEntry, mFragment));
     }
 
     @Test
@@ -105,5 +109,24 @@ public class LongPressWifiEntryPreferenceTest {
         when(mWifiEntry.isSaved()).thenReturn(true);
 
         assertThat(mPreference.shouldEnabled()).isTrue();
+    }
+
+    @Test
+    public void checkRestrictionAndSetDisabled_hasAdminRestrictions_doSetDisabledByAdmin() {
+        when(mContext.getUser()).thenReturn(null);
+        when(mWifiEntry.hasAdminRestrictions()).thenReturn(true);
+
+        mPreference.checkRestrictionAndSetDisabled();
+
+        verify(mPreference).setDisabledByAdmin(any());
+    }
+
+    @Test
+    public void checkRestrictionAndSetDisabled_noAdminRestrictions_doNotSetDisabledByAdmin() {
+        when(mWifiEntry.hasAdminRestrictions()).thenReturn(false);
+
+        mPreference.checkRestrictionAndSetDisabled();
+
+        verify(mPreference, never()).setDisabledByAdmin(any());
     }
 }

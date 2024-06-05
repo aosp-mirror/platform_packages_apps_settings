@@ -26,31 +26,40 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Application;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
 
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
-
 @RunWith(RobolectricTestRunner.class)
 public class OverlayCategoryPreferenceControllerTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
 
     private static final OverlayInfo ONE_DISABLED = createFakeOverlay("overlay.one", false, 1);
     private static final OverlayInfo ONE_ENABLED = createFakeOverlay("overlay.one", true, 1);
@@ -65,15 +74,19 @@ public class OverlayCategoryPreferenceControllerTest {
     @Mock
     private ListPreference mPreference;
     private OverlayCategoryPreferenceController mController;
+    private PausedExecutorService mExecutorService;
+    private Application mApplication;
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
+        mApplication = ApplicationProvider.getApplicationContext();
         mockCurrentOverlays();
         when(mPackageManager.getApplicationInfo(any(), anyInt()))
             .thenThrow(PackageManager.NameNotFoundException.class);
         mController = createController();
         mController.setPreference(mPreference);
+        mExecutorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(mExecutorService);
     }
 
     Object mockCurrentOverlays(OverlayInfo... overlays) {
@@ -109,7 +122,8 @@ public class OverlayCategoryPreferenceControllerTest {
         mockCurrentOverlays(ONE_DISABLED, TWO_DISABLED);
 
         mController.onPreferenceChange(null, TWO_DISABLED.packageName);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         verify(mOverlayManager)
             .setEnabledExclusiveInCategory(eq(TWO_DISABLED.packageName), anyInt());
@@ -122,10 +136,11 @@ public class OverlayCategoryPreferenceControllerTest {
                 .thenReturn(false);
 
         mController.onPreferenceChange(null, TWO_DISABLED.packageName);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
-                RuntimeEnvironment.application.getString(R.string.overlay_toast_failed_to_apply));
+                mApplication.getString(R.string.overlay_toast_failed_to_apply));
     }
 
     @Test
@@ -134,7 +149,8 @@ public class OverlayCategoryPreferenceControllerTest {
 
         mController.onPreferenceChange(
                 null, OverlayCategoryPreferenceController.PACKAGE_DEVICE_DEFAULT);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         verify(mOverlayManager).setEnabled(eq(TWO_ENABLED.packageName), eq(false), anyInt());
     }
@@ -147,10 +163,11 @@ public class OverlayCategoryPreferenceControllerTest {
 
         mController.onPreferenceChange(
                 null, OverlayCategoryPreferenceController.PACKAGE_DEVICE_DEFAULT);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
-                RuntimeEnvironment.application.getString(R.string.overlay_toast_failed_to_apply));
+                mApplication.getString(R.string.overlay_toast_failed_to_apply));
     }
 
     @Test
@@ -161,10 +178,11 @@ public class OverlayCategoryPreferenceControllerTest {
 
         mController.onPreferenceChange(
                 null, OverlayCategoryPreferenceController.PACKAGE_DEVICE_DEFAULT);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
-                RuntimeEnvironment.application.getString(R.string.overlay_toast_failed_to_apply));
+                mApplication.getString(R.string.overlay_toast_failed_to_apply));
     }
 
     @Test
@@ -206,13 +224,15 @@ public class OverlayCategoryPreferenceControllerTest {
         mController.displayPreference(screen);
 
         mController.onDeveloperOptionsSwitchDisabled();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         verify(mPreference).setEnabled(false);
         verify(mOverlayManager).setEnabled(eq(ONE_ENABLED.packageName), eq(false), anyInt());
     }
 
     private OverlayCategoryPreferenceController createController() {
-        return new OverlayCategoryPreferenceController(RuntimeEnvironment.application,
+        return new OverlayCategoryPreferenceController(mApplication,
                 mPackageManager, mOverlayManager, TEST_CATEGORY);
     }
 

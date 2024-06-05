@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,27 +31,30 @@ import com.android.settings.Utils;
 import com.android.settingslib.widget.AppPreference;
 
 /**
- * Custom preference for displaying battery usage info as a bar and an icon on
- * the left for the subsystem/app type.
+ * Custom preference for displaying battery usage info as a bar and an icon on the left for the
+ * subsystem/app type.
  *
- * The battery usage info could be usage percentage or usage time. The preference
- * won't show any icon if it is null.
+ * <p>The battery usage info could be usage percentage or usage time. The preference won't show any
+ * icon if it is null.
  */
 public class PowerGaugePreference extends AppPreference {
 
     // Please see go/battery-usage-app-list-alpha
     private static final float SELECTABLE_ALPHA = 1f;
     private static final float UNSELECTABLE_ALPHA_LIGHT_MODE = 0.65f;
-    private static final float UNSELECTABLE_ALPHA_DARK_MODE = 0.5f;
+    private static final float UNSELECTABLE_ALPHA_DARK_MODE = 0.65f;
+
+    private final int mTitleColorNormal;
 
     private BatteryEntry mInfo;
     private BatteryDiffEntry mBatteryDiffEntry;
     private CharSequence mContentDescription;
     private CharSequence mProgress;
+    private CharSequence mProgressContentDescription;
     private boolean mShowAnomalyIcon;
 
-    public PowerGaugePreference(Context context, Drawable icon, CharSequence contentDescription,
-            BatteryEntry info) {
+    public PowerGaugePreference(
+            Context context, Drawable icon, CharSequence contentDescription, BatteryEntry info) {
         this(context, null, icon, contentDescription, info);
     }
 
@@ -62,8 +66,12 @@ public class PowerGaugePreference extends AppPreference {
         this(context, attrs, null, null, null);
     }
 
-    private PowerGaugePreference(Context context, AttributeSet attrs, Drawable icon,
-            CharSequence contentDescription, BatteryEntry info) {
+    private PowerGaugePreference(
+            Context context,
+            AttributeSet attrs,
+            Drawable icon,
+            CharSequence contentDescription,
+            BatteryEntry info) {
         super(context, attrs);
         if (icon != null) {
             setIcon(icon);
@@ -72,6 +80,8 @@ public class PowerGaugePreference extends AppPreference {
         mInfo = info;
         mContentDescription = contentDescription;
         mShowAnomalyIcon = false;
+        mTitleColorNormal =
+                Utils.getColorAttrDefaultColor(context, android.R.attr.textColorPrimary);
     }
 
     /** Sets the content description. */
@@ -83,6 +93,13 @@ public class PowerGaugePreference extends AppPreference {
     /** Sets the percentage to show. */
     public void setPercentage(CharSequence percentage) {
         mProgress = percentage;
+        mProgressContentDescription = percentage;
+        notifyChanged();
+    }
+
+    /** Sets the content description of the percentage. */
+    public void setPercentageContentDescription(CharSequence contentDescription) {
+        mProgressContentDescription = contentDescription;
         notifyChanged();
     }
 
@@ -119,21 +136,35 @@ public class PowerGaugePreference extends AppPreference {
         super.onBindViewHolder(view);
 
         final boolean isNightMode = Utils.isNightMode(getContext());
-        final float alpha = isSelectable() ? SELECTABLE_ALPHA
-                : (isNightMode ? UNSELECTABLE_ALPHA_DARK_MODE : UNSELECTABLE_ALPHA_LIGHT_MODE);
+        final float alpha =
+                isSelectable()
+                        ? SELECTABLE_ALPHA
+                        : (isNightMode
+                                ? UNSELECTABLE_ALPHA_DARK_MODE
+                                : UNSELECTABLE_ALPHA_LIGHT_MODE);
         setViewAlpha(view.itemView, alpha);
 
         final TextView subtitle = (TextView) view.findViewById(R.id.widget_summary);
         subtitle.setText(mProgress);
+        if (!TextUtils.isEmpty(mProgressContentDescription)) {
+            subtitle.setContentDescription(mProgressContentDescription);
+        }
         if (mShowAnomalyIcon) {
-            subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_warning_24dp, 0,
-                    0, 0);
+            subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    R.drawable.ic_warning_24dp, 0, 0, 0);
         } else {
             subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
         }
         if (mContentDescription != null) {
             final TextView titleView = (TextView) view.findViewById(android.R.id.title);
             titleView.setContentDescription(mContentDescription);
+        }
+
+        if (!isSelectable()) {
+            // Set colors consistently to meet contrast requirements for non-selectable items
+            ((TextView) view.findViewById(android.R.id.title)).setTextColor(mTitleColorNormal);
+            ((TextView) view.findViewById(android.R.id.summary)).setTextColor(mTitleColorNormal);
+            subtitle.setTextColor(mTitleColorNormal);
         }
     }
 

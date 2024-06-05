@@ -28,6 +28,8 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.ONLY_CONN
 import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_AWARE;
 import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_UNAWARE;
 import static android.provider.Settings.ACTION_MANAGE_CROSS_PROFILE_ACCESS;
+import static android.provider.Settings.Global.CONNECTED_APPS_ALLOWED_PACKAGES;
+import static android.provider.Settings.Global.CONNECTED_APPS_DISALLOWED_PACKAGES;
 
 import android.Manifest;
 import android.annotation.UserIdInt;
@@ -35,6 +37,7 @@ import android.app.ActionBar;
 import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyEventLogger;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.flags.Flags;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -49,6 +52,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.stats.devicepolicy.DevicePolicyEnums;
 import android.util.IconDrawableFactory;
 import android.view.LayoutInflater;
@@ -67,6 +71,10 @@ import com.android.settings.widget.CardPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.widget.LayoutPreference;
+
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
 
 public class InteractAcrossProfilesDetails extends AppInfoBase
         implements Preference.OnPreferenceClickListener {
@@ -208,7 +216,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             title.setText(appLabel);
         }
 
-        final ImageView personalIconView = mHeader.findViewById(R.id.entity_header_icon_personal);
+        final ImageView personalIconView = mHeader.findViewById(
+                com.android.settingslib.widget.preference.layout.R.id.entity_header_icon_personal);
         if (personalIconView != null) {
             Drawable icon = IconDrawableFactory.newInstance(mContext)
                     .getBadgedIcon(mPackageInfo.applicationInfo, personalProfile.getIdentifier())
@@ -219,7 +228,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             personalIconView.setImageDrawable(icon);
         }
 
-        final ImageView workIconView = mHeader.findViewById(R.id.entity_header_icon_work);
+        final ImageView workIconView = mHeader.findViewById(
+                com.android.settingslib.widget.preference.layout.R.id.entity_header_icon_work);
         if (workIconView != null) {
             Drawable icon = IconDrawableFactory.newInstance(mContext)
                     .getBadgedIcon(mPackageInfo.applicationInfo, workProfile.getIdentifier())
@@ -379,23 +389,25 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     private void enableInteractAcrossProfiles(boolean newState) {
         mCrossProfileApps.setInteractAcrossProfilesAppOp(
                 mPackageName, newState ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED);
+        setUserPreferenceForPackage(newState, mPackageName);
     }
 
     private void handleInstallBannerClick() {
-        if (mInstallAppIntent == null) {
-            logEvent(
-                    DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_NO_INTENT_CLICKED);
-            return;
-        }
-        if (!mInstalledInWork) {
+        if (mInstallAppIntent != null
+                && !mInstalledInWork
+                && isInstallableInProfile(mInstallAppIntent, mWorkProfile)) {
             logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_CLICKED);
             mContext.startActivityAsUser(mInstallAppIntent, mWorkProfile);
             return;
         }
-        if (!mInstalledInPersonal) {
+        if (mInstallAppIntent != null
+                && !mInstalledInPersonal
+                && isInstallableInProfile(mInstallAppIntent, mPersonalProfile)) {
             logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_CLICKED);
             mContext.startActivityAsUser(mInstallAppIntent, mPersonalProfile);
+            return;
         }
+        logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_NO_INTENT_CLICKED);
     }
 
     /**
@@ -445,7 +457,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                                     R.string.interact_across_profiles_install_personal_app_title,
                                     mAppLabel),
                             mAppLabel));
-            if (mInstallAppIntent != null) {
+            if (mInstallAppIntent != null
+                    && isInstallableInProfile(mInstallAppIntent, mPersonalProfile)) {
                 mInstallBanner.setSummary(
                         R.string.interact_across_profiles_install_app_summary);
             }
@@ -459,7 +472,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                                     R.string.interact_across_profiles_install_work_app_title,
                                     mAppLabel),
                             mAppLabel));
-            if (mInstallAppIntent != null) {
+            if (mInstallAppIntent != null
+                    && isInstallableInProfile(mInstallAppIntent, mWorkProfile)) {
                 mInstallBanner.setSummary(
                         R.string.interact_across_profiles_install_app_summary);
             }
@@ -486,6 +500,12 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         return info != null;
     }
 
+    private boolean isInstallableInProfile(Intent intent, UserHandle profile) {
+        return !mContext.getPackageManager()
+                .queryIntentActivitiesAsUser(intent, /* flags= */ 0, profile)
+                .isEmpty();
+    }
+
     private void refreshUiForConfigurableApps() {
         mInstallBanner.setVisible(false);
         mSwitchPref.setEnabled(true);
@@ -499,20 +519,24 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     private void enableSwitchPref() {
         mSwitchPref.setChecked(true);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_enabled);
-        final ImageView horizontalArrowIcon = mHeader.findViewById(R.id.entity_header_swap_horiz);
+        final ImageView horizontalArrowIcon =
+                mHeader.findViewById(com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
         if (horizontalArrowIcon != null) {
             horizontalArrowIcon.setImageDrawable(
-                    mContext.getDrawable(R.drawable.ic_swap_horiz_blue));
+                    mContext.getDrawable(
+                            com.android.settingslib.widget.preference.layout.R.drawable.ic_swap_horiz_blue));
         }
     }
 
     private void disableSwitchPref() {
         mSwitchPref.setChecked(false);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
-        final ImageView horizontalArrowIcon = mHeader.findViewById(R.id.entity_header_swap_horiz);
+        final ImageView horizontalArrowIcon =
+                mHeader.findViewById(com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
         if (horizontalArrowIcon != null) {
             horizontalArrowIcon.setImageDrawable(
-                    mContext.getDrawable(R.drawable.ic_swap_horiz_grey));
+                    mContext.getDrawable(
+                            com.android.settingslib.widget.preference.layout.R.drawable.ic_swap_horiz_grey));
         }
     }
 
@@ -536,5 +560,41 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             return false;
         }
         return ACTION_MANAGE_CROSS_PROFILE_ACCESS.equals(intent.getAction());
+    }
+
+    private void setUserPreferenceForPackage(boolean enabled, String crossProfilePackage) {
+        if (!Flags.backupConnectedAppsSettings()) {
+            return;
+        }
+        String allowedPackagesString = Settings.Global.getString(getContentResolver(),
+                CONNECTED_APPS_ALLOWED_PACKAGES);
+        String disallowedPackagesString = Settings.Global.getString(getContentResolver(),
+                CONNECTED_APPS_DISALLOWED_PACKAGES);
+
+        Set<String> allowedPackagesSet = getSetFromString(allowedPackagesString);
+        Set<String> disallowedPackagesSet = getSetFromString(disallowedPackagesString);
+
+        if (enabled) {
+            allowedPackagesSet.add(crossProfilePackage);
+            disallowedPackagesSet.remove(crossProfilePackage);
+
+        } else {
+            allowedPackagesSet.remove(crossProfilePackage);
+            disallowedPackagesSet.add(crossProfilePackage);
+        }
+
+        Settings.Global.putString(getContentResolver(),
+                CONNECTED_APPS_ALLOWED_PACKAGES,
+                String.join(",", allowedPackagesSet));
+
+        Settings.Global.putString(getContentResolver(),
+                CONNECTED_APPS_DISALLOWED_PACKAGES,
+                String.join(",", disallowedPackagesSet));
+    }
+
+    private Set<String> getSetFromString(String packages) {
+        return Optional.ofNullable(packages)
+                .map(pkg -> Set.of(pkg.split(",")))
+                .orElse(Collections.emptySet());
     }
 }

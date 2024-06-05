@@ -25,11 +25,13 @@ import static com.android.settingslib.dream.DreamBackend.WHILE_DOCKED;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.service.dreams.DreamService;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -44,13 +46,12 @@ import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class DreamSettings extends DashboardFragment implements OnMainSwitchChangeListener {
+public class DreamSettings extends DashboardFragment implements OnCheckedChangeListener {
 
     private static final String TAG = "DreamSettings";
     static final String WHILE_CHARGING_ONLY = "while_charging_only";
@@ -61,9 +62,11 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
     private MainSwitchPreference mMainSwitchPreference;
     private Button mPreviewButton;
     private Preference mComplicationsTogglePreference;
+    private Preference mHomeControllerTogglePreference;
     private RecyclerView mRecyclerView;
 
     private DreamPickerController mDreamPickerController;
+    private DreamHomeControlsPreferenceController mDreamHomeControlsPreferenceController;
 
     private final DreamPickerController.Callback mCallback =
             this::updateComplicationsToggleVisibility;
@@ -139,7 +142,12 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         if (mDreamPickerController == null) {
             mDreamPickerController = new DreamPickerController(context);
         }
+        if (mDreamHomeControlsPreferenceController == null) {
+            mDreamHomeControlsPreferenceController = new DreamHomeControlsPreferenceController(
+                    context, DreamBackend.getInstance(getContext()));
+        }
         controllers.add(mDreamPickerController);
+        controllers.add(mDreamHomeControlsPreferenceController);
         controllers.add(new WhenToDreamPreferenceController(context));
         return controllers;
     }
@@ -164,11 +172,20 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         mDreamPickerController = dreamPickerController;
     }
 
+    @VisibleForTesting
+    void setDreamHomeControlsPreferenceController(DreamHomeControlsPreferenceController
+            dreamHomeControlsPreferenceController) {
+        mDreamHomeControlsPreferenceController = dreamHomeControlsPreferenceController;
+    }
+
     private void setAllPreferencesEnabled(boolean isEnabled) {
         getPreferenceControllers().forEach(controllers -> {
             controllers.forEach(controller -> {
                 final String prefKey = controller.getPreferenceKey();
                 if (prefKey.equals(MAIN_SWITCH_PREF_KEY)) {
+                    return;
+                }
+                if (prefKey.equals(DreamHomeControlsPreferenceController.PREF_KEY)) {
                     return;
                 }
                 final Preference pref = findPreference(prefKey);
@@ -178,6 +195,7 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
                 }
             });
         });
+        updateComplicationsToggleVisibility();
     }
 
     @Override
@@ -188,7 +206,10 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
 
         mComplicationsTogglePreference = findPreference(
                 DreamComplicationPreferenceController.PREF_KEY);
-        updateComplicationsToggleVisibility();
+
+        mHomeControllerTogglePreference = findPreference(
+                DreamHomeControlsPreferenceController.PREF_KEY
+        );
 
         mMainSwitchPreference = findPreference(MAIN_SWITCH_PREF_KEY);
         if (mMainSwitchPreference != null) {
@@ -224,22 +245,35 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         mPreviewButton.setOnClickListener(v -> dreamBackend.preview(dreamBackend.getActiveDream()));
 
         mRecyclerView = super.onCreateRecyclerView(inflater, parent, bundle);
-        // The enable/disable status change of the nested RecyclerView(Dream Picker) causes the
-        // focus moving. Make the RecyclerView unfocusable to prevent the unexpected scrolling when
-        // the focus changes in the TalkBack mode.
         mRecyclerView.setFocusable(false);
         updatePaddingForPreviewButton();
         return mRecyclerView;
     }
 
     private void updateComplicationsToggleVisibility() {
-        if (mDreamPickerController == null || mComplicationsTogglePreference == null) {
+        if (mDreamPickerController == null) {
             return;
         }
-
         final DreamBackend.DreamInfo activeDream = mDreamPickerController.getActiveDreamInfo();
-        mComplicationsTogglePreference.setVisible(
-                activeDream != null && activeDream.supportsComplications);
+
+        final DreamBackend dreamBackend = DreamBackend.getInstance(getContext());
+
+
+        if (mComplicationsTogglePreference != null) {
+            mComplicationsTogglePreference.setVisible(
+                    activeDream != null && activeDream.supportsComplications);
+        }
+
+        if (mHomeControllerTogglePreference != null) {
+            boolean isEnabled = dreamBackend.isEnabled()
+                                && (activeDream == null
+                                || (activeDream.dreamCategory
+                                & DreamService.DREAM_CATEGORY_HOME_PANEL) == 0)
+                                && mDreamHomeControlsPreferenceController
+                                    .getAvailabilityStatus()
+                                    == mDreamHomeControlsPreferenceController.AVAILABLE;
+            mHomeControllerTogglePreference.setEnabled(isEnabled);
+        }
     }
 
     private void updatePaddingForPreviewButton() {
@@ -249,7 +283,7 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         setAllPreferencesEnabled(isChecked);
         mPreviewButton.setVisibility(isChecked ? View.VISIBLE : View.GONE);
         updatePaddingForPreviewButton();

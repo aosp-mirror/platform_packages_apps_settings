@@ -18,12 +18,15 @@ package com.android.settings.development.graphicsdriver;
 
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.ANGLE_DRIVER_SUFFIX;
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.Injector;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION;
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_PERSISTENT_GRAPHICS_EGL;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_RO_GFX_ANGLE_SUPPORTED;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -98,6 +101,8 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
         }
 
         mContext = ApplicationProvider.getApplicationContext();
+        when(mSystemPropertiesMock.getBoolean(eq(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION),
+                                              anyBoolean())).thenReturn(true);
 
         // Construct a GraphicsDriverEnableAngleAsSystemDriverController with two Overrides:
         // 1) Override the mSystemProperties with mSystemPropertiesMock,
@@ -175,31 +180,13 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
     }
 
     @Test
-    public void updateState_angleNotSupported_PreferenceShouldDisabled() {
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any())).thenReturn("");
-        mController.updateState(mPreference);
-        assertThat(mPreference.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void updateState_angleNotSupported_PreferenceShouldNotBeChecked() {
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any())).thenReturn("");
-        mController.updateState(mPreference);
-        assertThat(mPreference.isChecked()).isFalse();
-    }
-
-    @Test
-    public void updateState_angleSupported_PreferenceShouldEnabled() {
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
-                .thenReturn("true");
+    public void updateState_PreferenceShouldEnabled() {
         mController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isTrue();
     }
 
     @Test
-    public void updateState_angleSupported_angleIsSystemGLESDriver_PreferenceShouldBeChecked() {
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
-                .thenReturn("true");
+    public void updateState_angleIsSystemGLESDriver_PreferenceShouldBeChecked() {
         when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
                 .thenReturn(ANGLE_DRIVER_SUFFIX);
         mController.updateState(mPreference);
@@ -207,10 +194,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
     }
 
     @Test
-    public void
-            updateState_angleSupported_angleIsNotSystemGLESDriver_PreferenceShouldNotBeChecked() {
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
-                .thenReturn("true");
+    public void updateState_angleIsNotSystemGLESDriver_PreferenceShouldNotBeChecked() {
         when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any())).thenReturn("");
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isFalse();
@@ -226,8 +210,6 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
         // Test that onDeveloperOptionSwitchDisabled,
         // persist.graphics.egl updates to ""
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
-                .thenReturn("true");
         mController.onDeveloperOptionsSwitchDisabled();
         propertyChangeSignal1.wait(100);
         final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
@@ -239,16 +221,12 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     @Test
     public void onDeveloperOptionSwitchDisabled_PreferenceShouldNotBeChecked() {
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
-                .thenReturn("true");
         mController.onDeveloperOptionsSwitchDisabled();
         assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
     public void onDeveloperOptionSwitchDisabled_PreferenceShouldDisabled() {
-        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
-                .thenReturn("true");
         mController.onDeveloperOptionsSwitchDisabled();
         assertThat(mPreference.isEnabled()).isFalse();
     }
@@ -467,5 +445,26 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
         // Done with the test, remove the callback
         SystemProperties.removeChangeCallback(propertyChangeSignal1.getCountDownJob());
         SystemProperties.removeChangeCallback(propertyChangeSignal2.getCountDownJob());
+    }
+
+    @Test
+    public void updateState_DeveloperOptionPropertyIsFalse() {
+        // Test that when debug.graphics.angle.developeroption.enable is false:
+        when(mSystemPropertiesMock.getBoolean(eq(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION),
+                                              anyBoolean())).thenReturn(false);
+
+        // 1. "Enable ANGLE" switch is on, the switch should be enabled.
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
+                .thenReturn(ANGLE_DRIVER_SUFFIX);
+        mController.updateState(mPreference);
+        assertTrue(mPreference.isChecked());
+        assertTrue(mPreference.isEnabled());
+
+        // 2. "Enable ANGLE" switch is off, the switch should be disabled.
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
+                .thenReturn("");
+        mController.updateState(mPreference);
+        assertFalse(mPreference.isChecked());
+        assertFalse(mPreference.isEnabled());
     }
 }

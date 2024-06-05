@@ -77,7 +77,7 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         loadPreferences();
-        mWifiHotspotSpeedViewModel = FeatureFactory.getFactory(getContext())
+        mWifiHotspotSpeedViewModel = FeatureFactory.getFeatureFactory()
                 .getWifiFeatureProvider().getWifiHotspotSpeedViewModel(this);
         onSpeedInfoMapDataChanged(mWifiHotspotSpeedViewModel.getSpeedInfoMapData().getValue());
         mWifiHotspotSpeedViewModel.getSpeedInfoMapData()
@@ -108,15 +108,17 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
             if (radioButton == null) {
                 continue;
             }
-            if (radioButton.isChecked() != speedInfo.mIsChecked) {
-                radioButton.setChecked(speedInfo.mIsChecked);
+            if (!speedInfo.mIsVisible) {
+                radioButton.setVisible(false);
+                continue;
             }
-            if (radioButton.isEnabled() != speedInfo.mIsEnabled) {
-                radioButton.setEnabled(speedInfo.mIsEnabled);
+            radioButton.setEnabled(speedInfo.mIsEnabled);
+            radioButton.setChecked(speedInfo.mIsChecked);
+            if (speedInfo.mSummary != null) {
+                radioButton.setSummary(speedInfo.mSummary);
             }
-            if (radioButton.isVisible() != speedInfo.mIsVisible) {
-                radioButton.setVisible(speedInfo.mIsVisible);
-            }
+            // setVisible at the end to avoid UI flickering
+            radioButton.setVisible(true);
         }
     }
 
@@ -136,6 +138,6 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
     }
 
     private void log(String msg) {
-        FeatureFactory.getFactory(getContext()).getWifiFeatureProvider().verboseLog(TAG, msg);
+        FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }

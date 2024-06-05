@@ -16,8 +16,6 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.content.Context;
 import android.graphics.PointF;
 import android.hardware.fingerprint.FingerprintManager;
@@ -28,6 +26,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.accessibility.AccessibilityManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.core.InstrumentedFragment;
 
@@ -75,6 +76,8 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
     private int mLocationsEnrolled = 0;
 
     private int mCenterTouchCount = 0;
+
+    private int mPace = 1;
 
     @Nullable
     UdfpsEnrollHelper.Listener mListener;
@@ -157,6 +160,9 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
             }
         }
 
+        if (mRemainingSteps > remaining) {
+            mPace = mRemainingSteps - remaining;
+        }
         mRemainingSteps = remaining;
 
         if (mListener != null && mTotalSteps != -1) {
@@ -177,7 +183,8 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
      * Called when a fingerprint image has been acquired, but wasn't processed yet.
      */
     public void onAcquired(boolean isAcquiredGood) {
-        if (mListener != null && mTotalSteps != -1) {
+        if (mListener != null) {
+            Log.e("JRM", "OnaCquired " + isAcquiredGood + " lastStepIsGood" + animateIfLastStep());
             mListener.onAcquired(isAcquiredGood && animateIfLastStep());
         }
     }
@@ -258,7 +265,7 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
             return false;
         }
 
-        return mRemainingSteps <= 2 && mRemainingSteps >= 0;
+        return mRemainingSteps <= mPace && mRemainingSteps >= 0;
     }
 
     private int getStageThresholdSteps(int totalSteps, int stageIndex) {

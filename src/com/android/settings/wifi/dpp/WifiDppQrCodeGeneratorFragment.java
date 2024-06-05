@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi.dpp;
 
-import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -38,6 +37,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.chooser.DisplayResolveInfo;
@@ -223,11 +224,9 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
     private Button createActionButton(Drawable icon, CharSequence title, View.OnClickListener r) {
         final Button b = (Button) LayoutInflater.from(getContext()).inflate(
-                com.android.internal.R.layout.chooser_action_button, null);
+                R.layout.action_button, null);
         if (icon != null) {
-            final int size = getResources()
-                    .getDimensionPixelSize(
-                            com.android.internal.R.dimen.chooser_action_button_icon_size);
+            final int size = getResources().getDimensionPixelSize(R.dimen.action_button_icon_size);
             icon.setBounds(0, 0, size, size);
             b.setCompoundDrawablesRelative(icon, null, null, null);
         }

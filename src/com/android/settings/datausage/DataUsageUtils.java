@@ -17,7 +17,6 @@ package com.android.settings.datausage;
 import static android.content.pm.PackageManager.FEATURE_ETHERNET;
 import static android.content.pm.PackageManager.FEATURE_USB_HOST;
 import static android.content.pm.PackageManager.FEATURE_WIFI;
-import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
 import android.app.usage.NetworkStats.Bucket;
 import android.app.usage.NetworkStatsManager;
@@ -46,10 +45,9 @@ import java.util.Optional;
 /**
  * Utility methods for data usage classes.
  */
-public final class DataUsageUtils extends com.android.settingslib.net.DataUsageUtils {
+public final class DataUsageUtils {
     static final boolean TEST_RADIOS = false;
     static final String TEST_RADIOS_PROP = "test.radios";
-    private static final boolean LOGD = false;
     private static final String ETHERNET = "ethernet";
     private static final String TAG = "DataUsageUtils";
 
@@ -58,7 +56,10 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
 
     /**
      * Format byte value to readable string using IEC units.
+     *
+     * @deprecated Use {@link com.android.settings.datausage.lib.DataUsageFormatter} instead.
      */
+    @Deprecated
     public static CharSequence formatDataUsage(Context context, long byteValue) {
         final BytesResult res = Formatter.formatBytes(context.getResources(), byteValue,
                 Formatter.FLAG_IEC_UNITS);
@@ -104,44 +105,6 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
     public static boolean hasMobileData(Context context) {
         final TelephonyManager tele = context.getSystemService(TelephonyManager.class);
         return tele.isDataCapable();
-    }
-
-    /**
-     * Test if device has a mobile data radio with SIM in ready state.
-     */
-    public static boolean hasReadyMobileRadio(Context context) {
-        if (DataUsageUtils.TEST_RADIOS) {
-            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
-        }
-        final List<SubscriptionInfo> subInfoList =
-                ProxySubscriptionManager.getInstance(context)
-                .getActiveSubscriptionsInfo();
-        // No activated Subscriptions
-        if (subInfoList == null) {
-            if (LOGD) {
-                Log.d(TAG, "hasReadyMobileRadio: subInfoList=null");
-            }
-            return false;
-        }
-        final TelephonyManager tele = context.getSystemService(TelephonyManager.class);
-        // require both supported network and ready SIM
-        boolean isReady = true;
-        for (SubscriptionInfo subInfo : subInfoList) {
-            isReady = isReady & tele.getSimState(subInfo.getSimSlotIndex()) == SIM_STATE_READY;
-            if (LOGD) {
-                Log.d(TAG, "hasReadyMobileRadio: subInfo=" + subInfo);
-            }
-        }
-
-        final boolean isDataCapable = tele.isDataCapable();
-        final boolean retVal = isDataCapable && isReady;
-        if (LOGD) {
-            Log.d(TAG, "hasReadyMobileRadio:"
-                    + " telephonManager.isDataCapable()="
-                    + isDataCapable
-                    + " isReady=" + isReady);
-        }
-        return retVal;
     }
 
     /**

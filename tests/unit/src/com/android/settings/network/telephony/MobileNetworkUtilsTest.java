@@ -113,6 +113,7 @@ public class MobileNetworkUtilsTest {
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID_1)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID_2)).thenReturn(mTelephonyManager2);
@@ -133,6 +134,10 @@ public class MobileNetworkUtilsTest {
 
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
+        when(mSubscriptionManager.getActiveSubscriptionInfo(SUB_ID_1)).thenReturn(
+                mSubscriptionInfo1);
+        when(mSubscriptionManager.getActiveSubscriptionInfo(SUB_ID_2)).thenReturn(
+                mSubscriptionInfo2);
 
         when(mTelephonyManager.getNetworkOperatorName()).thenReturn(
                 PLMN_FROM_TELEPHONY_MANAGER_API);
@@ -147,24 +152,30 @@ public class MobileNetworkUtilsTest {
     public void setMobileDataEnabled_setEnabled_enabled() {
         MobileNetworkUtils.setMobileDataEnabled(mContext, SUB_ID_1, true, false);
 
-        verify(mTelephonyManager).setDataEnabled(true);
-        verify(mTelephonyManager2, never()).setDataEnabled(anyBoolean());
+        verify(mTelephonyManager)
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, true);
+        verify(mTelephonyManager2, never())
+                .setDataEnabledForReason(anyInt(), anyBoolean());
     }
 
     @Test
     public void setMobileDataEnabled_setDisabled_disabled() {
         MobileNetworkUtils.setMobileDataEnabled(mContext, SUB_ID_2, true, false);
 
-        verify(mTelephonyManager2).setDataEnabled(true);
-        verify(mTelephonyManager, never()).setDataEnabled(anyBoolean());
+        verify(mTelephonyManager2)
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, true);
+        verify(mTelephonyManager, never())
+                .setDataEnabledForReason(anyInt(), anyBoolean());
     }
 
     @Test
     public void setMobileDataEnabled_disableOtherSubscriptions() {
         MobileNetworkUtils.setMobileDataEnabled(mContext, SUB_ID_1, true, true);
 
-        verify(mTelephonyManager).setDataEnabled(true);
-        verify(mTelephonyManager2).setDataEnabled(false);
+        verify(mTelephonyManager)
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, true);
+        verify(mTelephonyManager2)
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, false);
     }
 
     @Test
@@ -230,6 +241,33 @@ public class MobileNetworkUtilsTest {
 
         assertThat(MobileNetworkUtils.getSearchableSubscriptionId(mContext))
                 .isEqualTo(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+    }
+
+    @Test
+    public void getActiveSubscriptionIdList_nonActive_returnEmptyArray() {
+        int[] expectedList = new int[0];
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(new ArrayList<>());
+
+        assertThat(MobileNetworkUtils.getActiveSubscriptionIdList(mContext))
+                .isEqualTo(expectedList);
+    }
+
+    @Test
+    public void getActiveSubscriptionIdList_normalCaseTwoActiveSims_returnValidSubId() {
+        int[] expectedList = {SUB_ID_1, SUB_ID_2};
+
+        assertThat(MobileNetworkUtils.getActiveSubscriptionIdList(mContext))
+                .isEqualTo(expectedList);
+    }
+
+    @Test
+    public void getActiveSubscriptionIdList_TwoActiveSimsAndOneIsNtn_returnOneSubId() {
+        int[] expectedList = {SUB_ID_2};
+        when(mSubscriptionInfo1.isEmbedded()).thenReturn(true);
+        when(mSubscriptionInfo1.isOnlyNonTerrestrialNetwork()).thenReturn(true);
+
+        assertThat(MobileNetworkUtils.getActiveSubscriptionIdList(mContext))
+                .isEqualTo(expectedList);
     }
 
     @Test

@@ -27,9 +27,12 @@ import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.util.Pair;
 
 import androidx.preference.Preference;
@@ -47,6 +50,7 @@ import com.android.settings.widget.SingleTargetGearPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -69,6 +73,9 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     private static final String FAKE_ADDRESS_3 = "AA:AA:AA:AA:AA:03";
     private static final String FAKE_ADDRESS_4 = "AA:AA:AA:AA:AA:04";
     private static final String FAKE_ADDRESS_5 = "AA:AA:AA:AA:AA:05";
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock
     private DashboardFragment mDashboardFragment;
@@ -105,6 +112,9 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     @Mock
     private Drawable mDrawable;
 
+    @Mock private BluetoothManager mBluetoothManager;
+    @Mock private BluetoothAdapter mBluetoothAdapter;
+
     private Context mContext;
     private PreviouslyConnectedDevicePreferenceController mPreConnectedDeviceController;
     private PreferenceGroup mPreferenceGroup;
@@ -117,10 +127,9 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mContext).when(mDashboardFragment).getContext();
         doReturn(mPackageManager).when(mContext).getPackageManager();
-        mPreConnectedDeviceController =
-                new PreviouslyConnectedDevicePreferenceController(mContext, KEY);
-        mPreConnectedDeviceController.setBluetoothDeviceUpdater(mBluetoothDeviceUpdater);
-        mPreConnectedDeviceController.setSavedDockUpdater(mDockUpdater);
+        when(mContext.getSystemService(BluetoothManager.class)).thenReturn(mBluetoothManager);
+        when(mBluetoothManager.getAdapter()).thenReturn(mBluetoothAdapter);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
 
         when(mCachedDevice1.getDevice()).thenReturn(mBluetoothDevice1);
@@ -145,7 +154,13 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mMostRecentlyConnectedDevices.add(mBluetoothDevice4);
         mMostRecentlyConnectedDevices.add(mBluetoothDevice3);
         mShadowBluetoothAdapter.setMostRecentlyConnectedDevices(mMostRecentlyConnectedDevices);
+        when(mBluetoothAdapter.getMostRecentlyConnectedDevices())
+                .thenReturn(mMostRecentlyConnectedDevices);
 
+        mPreConnectedDeviceController =
+                new PreviouslyConnectedDevicePreferenceController(mContext, KEY);
+        mPreConnectedDeviceController.setBluetoothDeviceUpdater(mBluetoothDeviceUpdater);
+        mPreConnectedDeviceController.setSavedDockUpdater(mDockUpdater);
         mPreferenceGroup = spy(new PreferenceCategory(mContext));
         doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
         mPreferenceGroup.setVisible(false);
@@ -255,8 +270,19 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
 
         mPreConnectedDeviceController.onDeviceAdded(preference);
 
-        // 1 BluetoothDevicePreference and 1 see all preference
-        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(2);
+        // 1 see all preference
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
+    }
+
+    @Test
+    public void onDeviceAdded_addPreferenceNotExistInRecentlyDevices_doNothing() {
+        final BluetoothDevicePreference preference = new BluetoothDevicePreference(
+                mContext, mCachedDevice5, true, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+
+        mPreConnectedDeviceController.onDeviceAdded(preference);
+
+        // 1 see all preference
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
     }
 
     @Test
@@ -277,6 +303,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     @Test
     public void updatePreferenceVisibility_bluetoothIsEnable_shouldShowCorrectText() {
         mShadowBluetoothAdapter.setEnabled(true);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
         mPreConnectedDeviceController.updatePreferenceVisibility();
 
         verify(mSeeAllPreference).setSummary("");
@@ -285,9 +312,76 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     @Test
     public void updatePreferenceVisibility_bluetoothIsDisable_shouldShowCorrectText() {
         mShadowBluetoothAdapter.setEnabled(false);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(false);
         mPreConnectedDeviceController.updatePreferenceVisibility();
 
         verify(mSeeAllPreference).setSummary(
                 mContext.getString(R.string.connected_device_see_all_summary));
+    }
+
+    @Test
+    public void updatePreferenceGroup_bluetoothIsEnable_shouldOrderByMostRecentlyConnected() {
+        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
+        final BluetoothDevicePreference preference4 =
+                new BluetoothDevicePreference(
+                        mContext,
+                        mCachedDevice4,
+                        true,
+                        BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        final BluetoothDevicePreference preference3 =
+                new BluetoothDevicePreference(
+                        mContext,
+                        mCachedDevice3,
+                        true,
+                        BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        final BluetoothDevicePreference preference2 =
+                new BluetoothDevicePreference(
+                        mContext,
+                        mCachedDevice2,
+                        true,
+                        BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        mPreConnectedDeviceController.onDeviceAdded(preference4);
+        mPreConnectedDeviceController.onDeviceAdded(preference3);
+        mPreConnectedDeviceController.onDeviceAdded(preference2);
+
+        mPreConnectedDeviceController.updatePreferenceGroup();
+
+        // Refer to the order of {@link #mMostRecentlyConnectedDevices}, the first one is see all
+        // preference
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(4);
+        assertThat(preference2.getOrder()).isEqualTo(0);
+        assertThat(preference4.getOrder()).isEqualTo(1);
+        assertThat(preference3.getOrder()).isEqualTo(2);
+    }
+
+    @Test
+    public void updatePreferenceGroup_bluetoothIsDisable_shouldShowOnlySeeAllPreference() {
+        when(mBluetoothAdapter.isEnabled()).thenReturn(false);
+        final BluetoothDevicePreference preference4 =
+                new BluetoothDevicePreference(
+                        mContext,
+                        mCachedDevice4,
+                        true,
+                        BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        final BluetoothDevicePreference preference3 =
+                new BluetoothDevicePreference(
+                        mContext,
+                        mCachedDevice3,
+                        true,
+                        BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        final BluetoothDevicePreference preference2 =
+                new BluetoothDevicePreference(
+                        mContext,
+                        mCachedDevice2,
+                        true,
+                        BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        mPreConnectedDeviceController.onDeviceAdded(preference4);
+        mPreConnectedDeviceController.onDeviceAdded(preference3);
+        mPreConnectedDeviceController.onDeviceAdded(preference2);
+
+        mPreConnectedDeviceController.updatePreferenceGroup();
+
+        // 1 see all preference
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
     }
 }

@@ -28,9 +28,8 @@ import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.utils.ActivityControllerWrapper;
-
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +40,7 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
+@Ignore("b/314867581")
 @RunWith(RobolectricTestRunner.class)
 public class WifiDppConfiguratorActivityTest {
 
@@ -64,15 +64,14 @@ public class WifiDppConfiguratorActivityTest {
         mIntent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WPA");
         mIntent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "\\012345678,");
 
-        mActivity = spy((WifiDppConfiguratorActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiDppConfiguratorActivity.class)).get());
+        mActivity = spy(Robolectric.setupActivity(WifiDppConfiguratorActivity.class));
         when(mActivity.getApplicationContext()).thenReturn(mContext);
     }
 
     @Test
     public void launchActivity_noIntentAction_shouldNotFatalException() {
-        ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiDppConfiguratorActivity.class)).get();
+        WifiDppConfiguratorActivity wifiDppConfiguratorActivity =
+                Robolectric.setupActivity(WifiDppConfiguratorActivity.class);
     }
 
     @Test

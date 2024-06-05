@@ -89,7 +89,7 @@ public class WalletPrivacyPreferenceController extends TogglePreferenceControlle
     }
 
     private boolean isSecure() {
-        final LockPatternUtils utils = FeatureFactory.getFactory(mContext)
+        final LockPatternUtils utils = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(mContext);
         int userId = UserHandle.myUserId();

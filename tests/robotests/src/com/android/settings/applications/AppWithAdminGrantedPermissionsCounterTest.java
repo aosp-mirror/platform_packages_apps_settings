@@ -40,10 +40,13 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -52,6 +55,9 @@ import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public final class AppWithAdminGrantedPermissionsCounterTest {
+
+    @Rule
+    MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private final String APP_1 = "app1";
     private final String APP_2 = "app2";
@@ -96,7 +102,6 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
         mApp1 = buildInfo(APP_1_UID, APP_1, 0 /* flags */, Build.VERSION_CODES.M);
@@ -155,11 +160,13 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
                 mDevicePolicyManager, mPackageManager, mPackageManagerService, mApp5)).isFalse();
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCountInstalledAppsSync() throws Exception {
         verifyCountInstalledApps(false /* async */);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCountInstalledAppsAync() throws Exception {
         verifyCountInstalledApps(true /* async */);

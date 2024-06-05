@@ -11,6 +11,11 @@
         android:name="com.android.settings.BATTERY_DATA"
         android:protectionLevel="signature|privileged"/>
 
+    <!-- Permission for using the Biometric Settings Provider. -->
+    <permission
+        android:name="com.android.settings.USE_BIOMETRIC_PROVIDER"
+        android:protectionLevel="signature|privileged"/>
+
     <uses-permission android:name="android.permission.REQUEST_NETWORK_SCORES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -33,9 +38,10 @@
     <uses-permission android:name="android.permission.HARDWARE_TEST" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED" />
     <uses-permission android:name="android.permission.QUERY_AUDIO_STATE" />
     <uses-permission android:name="android.permission.MASTER_CLEAR" />
-    <uses-permission android:name="com.google.android.googleapps.permission.GOOGLE_AUTH" />
+    <uses-permission android:name="com.google.android.googleapps.permission.GOOGLE_AUTH" android:maxSdkVersion="34"/>
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
@@ -96,6 +102,7 @@
     <uses-permission android:name="android.permission.OVERRIDE_WIFI_CONFIG" />
     <uses-permission android:name="android.permission.RESTART_WIFI_SUBSYSTEM" />
     <uses-permission android:name="android.permission.MANAGE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.RECOVERY"/>
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC_INTERNAL" />
     <uses-permission android:name="android.permission.USER_ACTIVITY" />
@@ -132,6 +139,15 @@
     <uses-permission android:name="android.permission.CUSTOMIZE_SYSTEM_UI" />
     <uses-permission android:name="android.permission.REMAP_MODIFIER_KEYS" />
     <uses-permission android:name="android.permission.ACCESS_GPU_SERVICE" />
+    <uses-permission android:name="android.permission.MANAGE_GAME_MODE" />
+    <uses-permission android:name="android.permission.RESTART_PHONE_PROCESS" />
+    <uses-permission android:name="android.permission.MANAGE_ENHANCED_CONFIRMATION_STATES" />
+    <uses-permission android:name="android.permission.ACCESS_KEYGUARD_SECURE_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_NETWORK_POLICY" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.GET_BACKGROUND_INSTALLED_PACKAGES" />
+    <uses-permission android:name="android.permission.SATELLITE_COMMUNICATION" />
+    <uses-permission android:name="android.permission.READ_SYSTEM_GRAMMATICAL_GENDER" />
 
     <application
             android:name=".SettingsApplication"
@@ -142,6 +158,7 @@
             android:requiredForAllUsers="true"
             android:supportsRtl="true"
             android:backupAgent="com.android.settings.backup.SettingsBackupHelper"
+            android:restoreAnyVersion="true"
             android:usesCleartextTraffic="true"
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"
@@ -223,6 +240,28 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".development.Enable16KBootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".development.PageAgnosticNotificationService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.POST_NOTIFICATIONS"/>
+
+        <activity android:name=".development.PageAgnosticWarningActivity"
+                  android:enabled="true"
+                  android:launchMode="singleTask"
+                  android:taskAffinity=""
+                  android:excludeFromRecents="true"
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight"/>
+
         <activity android:name=".SubSettings"
                   android:exported="false"
                   android:theme="@style/Theme.SubSettings"
@@ -302,6 +341,19 @@
                        android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+        </activity>
+
+        <activity android:name=".Settings$ResetMobileNetworkSettingsActivity"
+                  android:exported="true"
+                  android:label="@string/reset_mobile_network_settings_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.telephony.action.RESET_MOBILE_NETWORK_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.ResetNetwork"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity
@@ -432,6 +484,7 @@
         <activity
             android:name="Settings$NetworkSelectActivity"
             android:label="@string/choose_network_title"
+            android:permission="android.permission.SATELLITE_COMMUNICATION"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.network.telephony.NetworkSelectSettings" />
@@ -483,6 +536,17 @@
                 android:value="com.android.settings.display.AutoBrightnessSettings"/>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_display"/>
+        </activity>
+
+        <activity android:name=".Settings$ScreenTimeoutActivity"
+                  android:label="@string/screen_timeout"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.SCREEN_TIMEOUT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.display.ScreenTimeoutSettings"/>
         </activity>
 
         <activity
@@ -592,6 +656,38 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name="Settings$CellularSecuritySettingsActivity"
+                  android:label="@string/cellular_security_settings_title"
+                  android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.CELLULAR_NETWORK_SECURITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+              android:value="com.android.settings.network.telephony.CellularSecuritySettingsFragment"/>
+        </activity>
+
+        <activity android:name="Settings$SatelliteSettingActivity"
+                  android:label="@string/satellite_setting"
+                  android:exported="true"
+                  android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SATELLITE_SETTING" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.network.telephony.SatelliteSetting" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_network"/>
+        </activity>
+
         <activity android:name="Settings$ApnSettingsActivity"
                 android:label="@string/apn_settings"
                 android:exported="true"
@@ -606,7 +702,7 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
+                       android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.network.apn.ApnSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -641,24 +737,10 @@
                        android:value="@string/menu_key_connected_devices"/>
         </activity-alias>
 
-        <activity android:name="Settings$AssistGestureSettingsActivity"
-            android:label="@string/assist_gesture_title"
-            android:exported="true"
-            android:icon="@drawable/ic_settings_gestures">
-            <intent-filter>
-                <action android:name="android.settings.ASSIST_GESTURE_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.gestures.AssistGestureSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
-        </activity>
-
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
             android:exported="true"
-            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.Settings.NoActionBar"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
                 <action android:name="android.settings.FACE_SETTINGS" />
@@ -673,8 +755,8 @@
         <activity android:name="Settings$FaceSettingsInternalActivity"
                   android:label="@string/security_settings_face_preference_title"
                   android:exported="false"
+                  android:theme="@style/Theme.Settings.NoActionBar"
                   android:icon="@drawable/ic_face_header"
-                  android:configChanges="orientation|screenSize"
                   android:taskAffinity="com.android.settings.root">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.face.FaceSettings" />
@@ -715,6 +797,13 @@
                        android:value="@string/menu_key_security"/>
         </activity>
 
+        <activity android:name=".Settings$PrivateSpaceBiometricSettingsActivity"
+                  android:label="@string/private_space_biometric_title"
+                  android:exported="false">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.privatespace.onelock.PrivateSpaceBiometricSettings" />
+        </activity>
+
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:label="@string/device_picker"
                 android:configChanges="orientation|keyboardHidden|screenSize"
@@ -753,6 +842,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".network.SimOnboardingActivity"
+            android:exported="false"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
+            android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+            android:theme="@style/Theme.SpaLib.BottomSheetDialog"/>
+
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
@@ -761,6 +856,10 @@
         <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+                  android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
+
+        <activity android:name=".network.telephony.EuiccRacConnectivityDialogActivity"
+                  android:exported="false"
                   android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
 
         <activity
@@ -864,6 +963,7 @@
 
         <activity
             android:name="Settings$LongBackgroundTasksActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="true"
             android:label="@string/long_background_tasks_label">
             <intent-filter android:priority="1">
@@ -957,6 +1057,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".localepicker.NotificationActionActivity"
+            android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.NoDisplay">
         </activity>
 
         <activity
@@ -1516,6 +1621,39 @@
         </activity>
 
         <activity
+            android:name=".Settings$HearingDevicesActivity"
+            android:label="@string/accessibility_hearingaid_title"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.HEARING_DEVICES_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.AccessibilityHearingAidsFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name=".Settings$HearingDevicesPairingActivity"
+            android:label="@string/accessibility_hearing_device_pairing_title"
+            android:permission="android.permission.BLUETOOTH_SCAN"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.HEARING_DEVICES_PAIRING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.HearingDevicePairingFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="SettingsLicenseActivity"
             android:label="@string/settings_license_activity_title"
             android:exported="true"
@@ -1545,6 +1683,7 @@
 
         <activity
             android:name="Settings$ManageApplicationsActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="true"
             android:label="@string/applications_settings">
             <intent-filter android:priority="1">
@@ -1577,6 +1716,33 @@
                        android:value="@string/menu_key_apps"/>
         </activity-alias>
 
+        <activity android:name="Settings$UserAspectRatioAppListActivity"
+            android:exported="true"
+            android:label="@string/aspect_ratio_experimental_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity>
+
+        <activity android:name="Settings$UserAspectRatioAppActivity"
+                  android:exported="true"
+                  android:label="@string/aspect_ratio_experimental_title">
+            <intent-filter>
+                <action android:name="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.appcompat.UserAspectRatioDetails" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+        </activity>
+
         <activity
             android:name="Settings$ManageDomainUrlsActivity"
             android:exported="true"
@@ -1606,7 +1772,8 @@
         </activity>
 
         <activity
-            android:name="Settings$HighPowerApplicationsActivity"
+            android:name="Settings$AppBatteryUsageActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="true"
             android:label="@string/high_power_apps">
             <intent-filter android:priority="1">
@@ -1665,6 +1832,7 @@
              This is for compatibility with old shortcuts. -->
         <activity-alias android:name=".RunningServices"
                 android:label="@string/runningservices_settings_title"
+                android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                 android:exported="true"
                 android:targetActivity="Settings$ManageApplicationsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1677,6 +1845,7 @@
              This is for compatibility with old shortcuts. -->
         <activity-alias android:name=".applications.StorageUse"
                 android:label="@string/storageuse_settings_title"
+                android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                 android:exported="true"
                 android:targetActivity="Settings$ManageApplicationsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1712,6 +1881,8 @@
                         android:targetActivity=".spa.SpaBridgeActivity">
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="TogglePermissionAppList/UseFullScreenIntent"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <activity-alias android:name="AppManageFullScreenIntent"
@@ -1724,6 +1895,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="TogglePermissionAppInfoPage/UseFullScreenIntent"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
@@ -1743,6 +1916,7 @@
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity android:name="Settings$RunningServicesActivity"
                 android:exported="true"
+                android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                 android:label="@string/runningservices_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1761,6 +1935,7 @@
         <!-- Provide direct entry into manage apps showing storage usage of apps. -->
         <activity
             android:name="Settings$StorageUseActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="true"
             android:label="@string/storageuse_settings_title">
             <intent-filter android:priority="1">
@@ -1941,7 +2116,7 @@
         <activity android:name="MonitoringCertInfoActivity"
                 android:label=""
                 android:theme="@style/Transparent"
-                android:exported="true"
+                android:exported="false"
                 android:excludeFromRecents="true">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.MONITORING_CERT_INFO" />
@@ -2105,6 +2280,7 @@
 
         <activity
             android:name="Settings$UsageAccessSettingsActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="true"
             android:label="@string/usage_access_title">
             <intent-filter android:priority="1">
@@ -2188,6 +2364,21 @@
                        android:value="@string/menu_key_accessibility"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$AccessibilityEditShortcutsActivity"
+            android:label="@string/accessibility_settings"
+            android:exported="true"
+            android:permission="android.permission.MANAGE_ACCESSIBILITY">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACCESSIBILITY_SHORTCUT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_accessibility"/>
         </activity>
 
         <activity android:name=".accessibility.AccessibilitySettingsForSetupWizardActivity"
@@ -2352,6 +2543,22 @@
         </activity>
 
         <activity
+            android:name="Settings$ColorContrastActivity"
+            android:exported="true"
+            android:label="@string/accessibility_color_contrast_title">
+            <intent-filter>
+                <action android:name="android.settings.ACCESSIBILITY_COLOR_CONTRAST_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.display.ColorContrastFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_display"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$TextToSpeechSettingsActivity"
             android:exported="true"
             android:label="@string/tts_settings">
@@ -2389,6 +2596,8 @@
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL" />
                 <action android:name="android.app.action.CONFIRM_FRP_CREDENTIAL" />
+                <action android:name="android.app.action.PREPARE_REPAIR_MODE_DEVICE_CREDENTIAL" />
+                <action android:name="android.app.action.CONFIRM_REPAIR_MODE_DEVICE_CREDENTIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -2467,7 +2676,8 @@
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
                   android:exported="true"
-                  android:screenOrientation="portrait">
+                  android:theme="@style/GlifV4Theme.DayNight"
+                  android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.settings.FACE_ENROLL"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -2476,19 +2686,23 @@
 
         <activity android:name=".biometrics.face.FaceEnrollIntroductionInternal"
                   android:exported="false"
-                  android:screenOrientation="portrait"
+                  android:screenOrientation="nosensor"
+                  android:theme="@style/GlifV4Theme.DayNight"
                   android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.face.FaceEnrollEducation"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/GlifV4Theme.DayNight"
+            android:screenOrientation="nosensor"/>
 
         <activity android:name=".biometrics.face.FaceEnrollEnrolling"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.face.FaceEnrollFinish"
             android:exported="false"
+            android:theme="@style/GlifV4Theme.DayNight"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.BiometricHandoffActivity"
@@ -2529,8 +2743,17 @@
 
         <activity android:name=".biometrics2.ui.view.FingerprintEnrollmentActivity"
             android:exported="true"
+            android:theme="@style/GlifTheme.Light" />
+
+        <activity android:name=".biometrics2.ui.view.FingerprintEnrollmentActivity$InternalActivity"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light"
+            android:taskAffinity="com.android.settings.root" />
+
+        <activity android:name=".biometrics2.ui.view.FingerprintEnrollmentActivity$SetupActivity"
+            android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
-            android:theme="@style/GlifTheme.Light"/>
+            android:theme="@style/GlifTheme.Light" />
 
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroductionInternal"
                   android:exported="false"
@@ -2543,6 +2766,18 @@
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollIntroduction"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
+            android:theme="@style/GlifTheme.Light">
+            <intent-filter>
+                <action android:name="android.settings.FINGERPRINT_SETUP" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".biometrics.fingerprint2.ui.enrollment.activity.FingerprintEnrollmentV2Activity"
+            android:exported="true"
+            android:permission="android.permission.MANAGE_FINGERPRINT"
+            android:configChanges="density"
             android:theme="@style/GlifTheme.Light">
             <intent-filter>
                 <action android:name="android.settings.FINGERPRINT_SETUP" />
@@ -2581,6 +2816,18 @@
         </activity-alias>
 
         <activity android:name=".biometrics.activeunlock.ActiveUnlockRequireBiometricSetup" android:exported="false"/>
+
+        <activity android:name=".remoteauth.RemoteAuthActivity"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.REMOTE_AUTHENTICATOR_ENROLL" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".remoteauth.RemoteAuthActivityInternal"
+                  android:exported="false"
+                  android:taskAffinity="com.android.settings.root" />
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name=".password.ConfirmLockPattern$InternalActivity"
@@ -2768,6 +3015,8 @@
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
+        <receiver android:name=".localepicker.NotificationCancelReceiver" />
+
         <activity android:name="Settings$ApnEditorActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:exported="true"
@@ -2791,50 +3040,22 @@
         </activity>
 
         <activity
-            android:name="Settings$DevelopmentSettingsDashboardActivity"
+            android:name="Settings$DevelopmentSettingsActivity"
             android:label="@string/development_settings_title"
             android:icon="@drawable/ic_settings_development"
-            android:exported="true"
-            android:enabled="false">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-                <action android:name="com.android.intent.action.SHOW_CONTRAST_DIALOG" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-40"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/summary_empty"/>
-            <meta-data android:name="com.android.settings.icon"
-                       android:resource="@drawable/ic_settings_development" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.development.DevelopmentSettingsDashboardFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_system"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
-        </activity>
-
-        <!-- The opposite of DevelopmentSettingsActivity, it's no-op and only enabled when the real
-             activity is disabled to be CTS compliant. -->
-        <activity
-            android:name=".development.DevelopmentSettingsDisabledActivity"
-            android:icon="@drawable/ic_settings_development"
-            android:label="@string/development_settings_title"
-            android:excludeFromRecents="true"
-            android:exported="true"
-            android:theme="@style/Transparent">
-            <intent-filter android:priority="-1">
-                <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
-                <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -3017,23 +3238,6 @@
             </intent-filter>
         </activity>
 
-        <!-- NFC settings -->
-        <activity
-            android:name="Settings$AndroidBeamSettingsActivity"
-            android:exported="true"
-            android:label="@string/android_beam_settings_title">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.NFCSHARING_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.nfc.AndroidBeam" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
         <activity
             android:name="Settings$WifiDisplaySettingsActivity"
             android:label="@string/wifi_display_settings_title"
@@ -3130,11 +3334,14 @@
 
         <receiver
             android:name=".fuelgauge.batteryusage.BootBroadcastReceiver"
-            android:exported="true">
+            android:exported="true"
+            android:permission="com.android.settings.BATTERY_DATA">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="com.google.android.setupwizard.SETUP_WIZARD_FINISHED"/>
                 <action android:name="com.android.settings.battery.action.PERIODIC_JOB_RECHECK"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
             </intent-filter>
         </receiver>
 
@@ -3257,6 +3464,7 @@
             android:name="Settings$DataUsageSummaryActivity"
             android:label="@string/data_usage_summary_title"
             android:exported="true"
+            android:enabled="@bool/config_show_sim_info"
             android:icon="@drawable/ic_homepage_data_usage">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DATA_USAGE_SETTINGS" />
@@ -3331,16 +3539,6 @@
                 <action android:name="android.settings.USER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-45"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
-            <meta-data android:name="com.android.settings.summary_uri"
-                       android:value="content://com.android.settings.dashboard.SummaryProvider/user" />
-            <meta-data android:name="com.android.settings.icon"
-                       android:resource="@drawable/ic_settings_multiuser" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.users.UserSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -3483,6 +3681,7 @@
         <activity
             android:name="Settings$TurnScreenOnSettingsActivity"
             android:exported="true"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:label="@string/turn_screen_on_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.TURN_SCREEN_ON_SETTINGS" />
@@ -3662,6 +3861,7 @@
         <activity android:name="Settings$NotificationAppListActivity"
                   android:label="@string/app_notifications_title"
                   android:icon="@drawable/ic_notifications"
+                  android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                   android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ALL_APPS_NOTIFICATION_SETTINGS" />
@@ -3676,6 +3876,7 @@
         <!-- Displays a list of apps available for cloning on the device -->
         <activity android:name=".Settings$ClonedAppsListActivity"
                   android:label="@string/cloned_apps_dashboard_title"
+                  android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                   android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MANAGE_CLONED_APPS_SETTINGS" />
@@ -3748,6 +3949,7 @@
         <!-- Show regulatory info (from settings item or dialing "*#07#") -->
         <activity
             android:name="RegulatoryInfoDisplayActivity"
+            android:theme="@style/Theme.AlertDialog"
             android:label="@string/regulatory_labels"
             android:exported="true"
             android:enabled="@bool/config_show_regulatory_info">
@@ -3787,6 +3989,9 @@
                 <action android:name="android.settings.ENABLE_MMS_DATA_REQUEST"/>
             </intent-filter>
         </receiver>
+
+        <service android:name=".sim.PrimarySubscriptionListChangedService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -3849,6 +4054,7 @@
             android:launchMode="singleTop"
             android:taskAffinity=".wifi.NetworkRequestDialogActivity"
             android:exported="true"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
             android:permission="android.permission.NETWORK_SETTINGS">
             <intent-filter>
                 <action android:name="com.android.settings.wifi.action.NETWORK_REQUEST" />
@@ -3941,6 +4147,7 @@
 
         <activity
             android:name="Settings$OverlaySettingsActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="true"
             android:label="@string/draw_overlay">
             <intent-filter android:priority="1">
@@ -3978,6 +4185,7 @@
 
         <activity
             android:name="Settings$WriteSettingsActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="true"
             android:label="@string/write_settings_title">
             <intent-filter android:priority="1">
@@ -4011,6 +4219,7 @@
         <activity
             android:name="Settings$AlarmsAndRemindersActivity"
             android:exported="true"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:label="@string/alarms_and_reminders_label">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.REQUEST_SCHEDULE_EXACT_ALARM" />
@@ -4041,6 +4250,7 @@
 
         <activity
             android:name="Settings$ManageExternalSourcesActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="true"
             android:label="@string/install_other_apps">
             <intent-filter android:priority="1">
@@ -4095,6 +4305,7 @@
 
         <activity
             android:name="Settings$ManageExternalStorageActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="true"
             android:label="@string/manage_external_storage_title">
             <intent-filter android:priority="1">
@@ -4126,6 +4337,7 @@
 
         <activity
             android:name="Settings$MediaManagementAppsActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="true"
             android:label="@string/media_management_apps_title">
             <intent-filter android:priority="1">
@@ -4155,6 +4367,40 @@
                        android:value="@string/menu_key_apps"/>
         </activity>
 
+        <!-- @FlaggedApi("com.android.media.flags.enable_privileged_routing_for_media_routing_control") -->
+        <activity-alias
+            android:name="MediaRoutingControlActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
+            android:exported="true"
+            android:targetActivity=".spa.SpaBridgeActivity"
+            android:label="@string/media_routing_control_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_MEDIA_ROUTING_CONTROL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppList/MediaRoutingControl"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
+        <activity-alias
+            android:name="AppMediaRoutingControlActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
+            android:exported="true"
+            android:targetActivity=".spa.SpaAppBridgeActivity"
+            android:label="@string/media_routing_control_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_MEDIA_ROUTING_CONTROL" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppInfoPage/MediaRoutingControl"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
         <!-- Keep compatibility with old WebView-picker implementation -->
         <activity-alias android:name=".WebViewImplementation"
                   android:targetActivity="Settings$WebViewAppPickerActivity"
@@ -4172,11 +4418,6 @@
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_system"/>
         </activity-alias>
-
-        <provider
-            android:name=".dashboard.SummaryProvider"
-            android:authorities="${applicationId}.dashboard.SummaryProvider">
-        </provider>
 
         <activity android:name=".backup.UserBackupSettingsActivity"
                   android:label="@string/privacy_settings_title"
@@ -4263,6 +4504,18 @@
                        android:value="@string/menu_key_accounts"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+        </activity>
+
+        <!-- Access to the Credential Manager list. -->
+        <activity android:name=".applications.credentials.CredentialsPickerActivity"
+                android:excludeFromRecents="true"
+                android:launchMode="singleInstance"
+                android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_SET_AUTOFILL_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -4352,20 +4605,6 @@
         </service>
 
         <service
-            android:name=".development.qstile.DevelopmentTiles$WinscopeTrace"
-            android:label="@string/winscope_trace_quick_settings_title"
-            android:icon="@drawable/tile_icon_winscope_trace"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
-                       android:value="true"/>
-        </service>
-
-        <service
             android:name=".development.qstile.DevelopmentTiles$SensorsOff"
             android:label="@string/sensors_off_quick_settings_title"
             android:icon="@drawable/tile_icon_sensors_off"
@@ -4407,22 +4646,6 @@
                        android:value="true"/>
         </service>
 
-        <service
-            android:name=".development.qstile.DevelopmentTiles$DesktopMode"
-            android:label="@string/desktop_mode"
-            android:icon="@drawable/tile_icon_desktop_mode"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
-                android:value="true"/>
-            <meta-data android:name="com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY"
-                       android:value="persist.wm.debug.desktop_mode" />
-        </service>
-
         <activity
             android:name=".HelpTrampoline"
             android:exported="true"
@@ -4435,19 +4658,6 @@
                 android:excludeFromRecents="true"
                 android:launchMode="singleInstance"
                 android:exported="false">
-        </activity>
-
-        <activity android:name=".applications.autofill.AutofillPickerTrampolineActivity"
-                android:theme="@android:style/Theme.NoDisplay"
-                android:excludeFromRecents="true"
-                android:launchMode="singleInstance"
-                android:exported="true"
-                android:label="@string/autofill_app">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.REQUEST_SET_AUTOFILL_SERVICE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="package" />
-            </intent-filter>
         </activity>
 
         <activity android:name="Settings$AdvancedConnectedDeviceActivity"
@@ -4529,6 +4739,22 @@
         </activity>
 
         <activity
+            android:name=".Settings$PreviouslyConnectedDeviceActivity"
+            android:label="@string/connected_device_saved_title"
+            android:exported="true"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:icon="@drawable/ic_homepage_connected_device">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.PREVIOUSLY_CONNECTED_DEVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$StylusUsiDetailsActivity"
             android:label="@string/stylus_device_details_title"
             android:exported="true">
@@ -4601,28 +4827,6 @@
             android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
             android:exported="true" />
 
-        <!-- Couldn't be triggered from outside of settings. Statsd can trigger it because we send
-             PendingIntent to it-->
-        <receiver android:name=".fuelgauge.batterytip.AnomalyDetectionReceiver"
-                  android:exported="false" />
-
-        <receiver android:name=".fuelgauge.batterytip.AnomalyConfigReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.app.action.STATSD_STARTED"/>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".fuelgauge.batterytip.AnomalyCleanupJobService"
-                 android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <service android:name=".fuelgauge.batterytip.AnomalyConfigJobService"
-                 android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <service android:name=".fuelgauge.batterytip.AnomalyDetectionJobService"
-                 android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <provider
             android:name=".homepage.contextualcards.CardContentProvider"
             android:authorities="${applicationId}.homepage.CardContentProvider"
@@ -4651,6 +4855,16 @@
                 <action android:name="android.settings.PROCESS_WIFI_EASY_CONNECT_URI"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:scheme="DPP"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".wifi.dpp.WifiDppConfiguratorAuthActivity"
+            android:theme="@style/Transparent"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.WIFI_DPP_CONFIGURATOR_AUTH_QR_CODE_GENERATOR"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
@@ -4821,7 +5035,7 @@
         </activity>
 
         <activity android:name="Settings$FactoryResetActivity"
-                  android:permission="android.permission.BACKUP"
+                  android:permission="android.permission.MASTER_CLEAR"
                   android:label="@string/main_clear_title"
                   android:exported="true"
                   android:theme="@style/SudThemeGlif.Light">
@@ -4881,9 +5095,64 @@
         <activity
             android:name=".spa.SpaActivity"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
             android:exported="false" />
         <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
         <activity android:name=".spa.SpaAppBridgeActivity" android:exported="false"/>
+
+        <activity android:name=".Settings$FingerprintSettingsActivityV2"
+            android:label="@string/security_settings_fingerprint_preference_title"
+            android:exported="false"
+            android:icon="@drawable/ic_fingerprint_header">
+            <intent-filter>
+                <action android:name="android.settings.FINGERPRINT_SETTINGS_V2" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.biometrics.fingerprint2.ui.settings.fragment.FingerprintSettingsV2Fragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_security"/>
+        </activity>
+
+         <provider
+            android:name=".biometrics.BiometricSettingsProvider"
+            android:authorities="${applicationId}.biometrics.provider"
+            android:exported="true"
+            android:permission="com.android.settings.USE_BIOMETRIC_PROVIDER">
+            <intent-filter>
+                <action android:name="com.android.settings.biometrics.BIOMETRIC_SETTINGS_PROVIDER" />
+            </intent-filter>
+        </provider>
+
+        <activity
+            android:name=".privatespace.PrivateSpaceSetupActivity"
+            android:theme="@style/GlifV3Theme.Light"
+            android:exported="false" />
+
+        <activity
+            android:name=".privatespace.PrivateSpaceAuthenticationActivity"
+            android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.settings.action.OPEN_PRIVATE_SPACE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".privatespace.PrivateProfileContextHelperActivity" android:exported="false"/>
+
+        <activity android:name=".privatespace.delete.PrivateSpaceDeleteActivity"
+                  android:label="@string/private_space_delete_header"
+                  android:exported="false">
+        </activity>
+
+        <receiver android:name=".privatespace.PrivateSpaceBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PRE_BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
 
         <activity-alias android:name="UsageStatsActivity"
                         android:exported="true"
@@ -4895,6 +5164,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="UsageStats"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <!-- [b/197780098] Disable eager initialization of Jetpack libraries. -->
@@ -4902,6 +5173,75 @@
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
             tools:node="remove" />
+
+        <activity
+            android:name="com.android.settings.network.WepNetworkDialogActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:permission="android.permission.NETWORK_SETTINGS"
+            android:theme="@style/Theme.SpaLib.Dialog">
+        </activity>
+
+        <activity
+            android:name="com.android.settings.network.SatelliteWarningDialogActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:permission="android.permission.NETWORK_SETTINGS"
+            android:theme="@style/Theme.SpaLib.Dialog">
+        </activity>
+
+        <activity android:name="Settings$BluetoothDashboardActivity"
+            android:label="@string/bluetooth_settings_title"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.BLUETOOTH_DASHBOARD_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.BluetoothDashboardFragment"/>
+        </activity>
+
+        <activity
+            android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingActivity"
+            android:label="@string/audio_sharing_title"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.settings.BLUETOOTH_AUDIO_SHARING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment"/>
+        </activity>
+
+        <activity
+            android:name="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamConfirmDialogActivity"
+            android:exported="true"
+            android:theme="@style/Transparent"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.AUDIO_STREAM_DIALOG" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamConfirmDialog" />
+        </activity>
+
+        <service
+            android:name="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService"
+            android:foregroundServiceType="mediaPlayback"
+            android:enabled="true"
+            android:exported="false" />
+
+        <receiver android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STATE_CHANGE" />
+                <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STOP" />
+            </intent-filter>
+        </receiver>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>

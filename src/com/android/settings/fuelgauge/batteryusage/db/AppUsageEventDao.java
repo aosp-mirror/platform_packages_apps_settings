@@ -42,8 +42,9 @@ public interface AppUsageEventDao {
     List<AppUsageEventEntity> getAllAfter(long timestamp);
 
     /** Gets the {@link Cursor} of all recorded data after a specific timestamp of the users. */
-    @Query("SELECT * FROM AppUsageEventEntity WHERE timestamp >= :timestamp"
-            + " AND userId IN (:userIds) ORDER BY timestamp ASC")
+    @Query(
+            "SELECT * FROM AppUsageEventEntity WHERE timestamp >= :timestamp"
+                    + " AND userId IN (:userIds) ORDER BY timestamp ASC")
     Cursor getAllForUsersAfter(List<Long> userIds, long timestamp);
 
     /** Gets the {@link Cursor} of the latest timestamp of the specific user. */
@@ -53,6 +54,10 @@ public interface AppUsageEventDao {
     /** Deletes all recorded data before a specific timestamp. */
     @Query("DELETE FROM AppUsageEventEntity WHERE timestamp <= :timestamp")
     void clearAllBefore(long timestamp);
+
+    /** Deletes all recorded data after a specific timestamp. */
+    @Query("DELETE FROM AppUsageEventEntity WHERE timestamp >= :timestamp")
+    void clearAllAfter(long timestamp);
 
     /** Clears all recorded data in the database. */
     @Query("DELETE FROM AppUsageEventEntity")

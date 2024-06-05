@@ -22,6 +22,7 @@ import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,33 +34,16 @@ class MediaManagementAppsTest {
     private val listModel = MediaManagementAppsListModel(context)
 
     @Test
-    fun pageTitleResId() {
+    fun modelResourceIdAndProperties() {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.media_management_apps_title)
-    }
-
-    @Test
-    fun switchTitleResId() {
-        assertThat(listModel.switchTitleResId)
-            .isEqualTo(R.string.media_management_apps_toggle_label)
-    }
-
-    @Test
-    fun footerResId() {
+        assertThat(listModel.switchTitleResId).isEqualTo(R.string.media_management_apps_toggle_label)
         assertThat(listModel.footerResId).isEqualTo(R.string.media_management_apps_description)
-    }
-
-    @Test
-    fun appOp() {
-        assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_MANAGE_MEDIA)
-    }
-
-    @Test
-    fun permission() {
+        assertThat(listModel.appOps).isEqualTo(
+            AppOps(
+                op = AppOpsManager.OP_MANAGE_MEDIA,
+                setModeByUid = true,
+            )
+        )
         assertThat(listModel.permission).isEqualTo(Manifest.permission.MANAGE_MEDIA)
-    }
-
-    @Test
-    fun setModeByUid() {
-        assertThat(listModel.setModeByUid).isTrue()
     }
 }

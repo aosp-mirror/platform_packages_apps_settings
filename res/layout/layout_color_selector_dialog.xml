@@ -17,16 +17,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="24dp">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <com.android.settings.accessibility.ColorSelectorLayout
         android:id="@+id/color_selector_preference"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="21dp"
-        android:orientation="vertical" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

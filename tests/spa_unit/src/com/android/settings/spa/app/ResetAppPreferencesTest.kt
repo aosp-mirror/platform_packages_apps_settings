@@ -45,7 +45,7 @@ class ResetAppPreferencesTest {
     }
 
     private fun setResetAppPreferences() {
-        val fakeMoreOptionsScope = object : MoreOptionsScope {
+        val fakeMoreOptionsScope = object : MoreOptionsScope() {
             override fun dismiss() {}
         }
         composeTestRule.setContent {

@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.bluetooth.HearingAidPairingDialogFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CsipSetCoordinatorProfile;
 import com.android.settingslib.bluetooth.HearingAidInfo;
 
 /** Provides utility methods related hearing aids. */
@@ -37,23 +38,30 @@ public final class HearingAidUtils {
      *
      * @param fragmentManager The {@link FragmentManager} used to show dialog fragment
      * @param device The {@link CachedBluetoothDevice} need to be hearing aid device
+     * @param launchPage The page id where the dialog is launched
      */
     public static void launchHearingAidPairingDialog(FragmentManager fragmentManager,
-            @NonNull CachedBluetoothDevice device) {
+            @NonNull CachedBluetoothDevice device, int launchPage) {
+        // No need to show the pair another ear dialog if the device supports CSIP.
+        // CSIP will pair other devices in the same set automatically.
+        if (device.getProfiles().stream().anyMatch(
+                profile -> profile instanceof CsipSetCoordinatorProfile)) {
+            return;
+        }
         if (device.isConnectedAshaHearingAidDevice()
                 && device.getDeviceMode() == HearingAidInfo.DeviceMode.MODE_BINAURAL
                 && device.getSubDevice() == null) {
-            launchHearingAidPairingDialogInternal(fragmentManager, device);
+            launchHearingAidPairingDialogInternal(fragmentManager, device, launchPage);
         }
     }
 
     private static void launchHearingAidPairingDialogInternal(FragmentManager fragmentManager,
-            @NonNull CachedBluetoothDevice device) {
+            @NonNull CachedBluetoothDevice device, int launchPage) {
         if (device.getDeviceSide() == HearingAidInfo.DeviceSide.SIDE_INVALID) {
             Log.w(TAG, "Can not launch hearing aid pairing dialog for invalid side");
             return;
         }
-        HearingAidPairingDialogFragment.newInstance(device.getAddress()).show(fragmentManager,
-                HearingAidPairingDialogFragment.TAG);
+        HearingAidPairingDialogFragment.newInstance(device.getAddress(), launchPage)
+                .show(fragmentManager, HearingAidPairingDialogFragment.TAG);
     }
 }

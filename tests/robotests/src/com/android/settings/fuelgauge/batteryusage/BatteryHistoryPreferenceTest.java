@@ -27,7 +27,6 @@ import android.widget.TextView;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.fuelgauge.BatteryInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,16 +38,10 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryHistoryPreferenceTest {
-    @Mock
-    private PreferenceViewHolder mViewHolder;
-    @Mock
-    private BatteryInfo mBatteryInfo;
-    @Mock
-    private TextView mTextView;
-    @Mock
-    private BatteryChartView mDailyChartView;
-    @Mock
-    private BatteryChartView mHourlyChartView;
+    @Mock private PreferenceViewHolder mViewHolder;
+    @Mock private TextView mTextView;
+    @Mock private BatteryChartView mDailyChartView;
+    @Mock private BatteryChartView mHourlyChartView;
     private BatteryHistoryPreference mBatteryHistoryPreference;
 
     @Before
@@ -59,7 +52,6 @@ public class BatteryHistoryPreferenceTest {
                 LayoutInflater.from(context).inflate(R.layout.battery_chart_graph, null);
 
         mBatteryHistoryPreference = new BatteryHistoryPreference(context, null);
-        mBatteryHistoryPreference.mBatteryInfo = mBatteryInfo;
         mViewHolder = spy(PreferenceViewHolder.createInstanceForTests(itemView));
         when(mViewHolder.findViewById(R.id.daily_battery_chart)).thenReturn(mDailyChartView);
         when(mViewHolder.findViewById(R.id.hourly_battery_chart)).thenReturn(mHourlyChartView);

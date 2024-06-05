@@ -1,0 +1,44 @@
+package: "com.android.settings.flags"
+container: "system_ext"
+
+flag {
+    name: "show_factory_reset_cancel_button"
+    namespace: "android_settings"
+    description: "This flag controls whether to show a Cancel button when factory reset"
+    bug: "300634367"
+}
+
+flag {
+    name: "mainline_module_explicit_intent"
+    namespace: "android_settings"
+    description: "Enabling will provide an explicit package name for Intent to update mainline modules"
+    bug: "278987474"
+}
+
+flag {
+    name: "app_archiving"
+    namespace: "android_settings"
+    description: "Feature flag to enable the archiving feature."
+    bug: "323164382"
+}
+
+flag {
+    name: "homepage_revamp"
+    namespace: "android_settings"
+    description: "Feature flag to enable new settings homepage UX."
+    bug: "321612737"
+}
+
+flag {
+    name: "dynamic_injection_category"
+    namespace: "android_settings"
+    description: "Feature flag to enable injection into PreferenceCategory."
+    bug: "333547416"
+}
+
+flag {
+    name: "slices_retirement"
+    namespace: "android_settings"
+    description: "Feature flag to remove relevant slices dependencies."
+    bug: "297367302"
+}

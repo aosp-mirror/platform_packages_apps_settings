@@ -20,6 +20,9 @@ import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6GHZ;
+import static com.android.settings.wifi.tether.WifiHotspotSpeedViewModel.RES_SPEED_5G_SUMMARY;
+import static com.android.settings.wifi.tether.WifiHotspotSpeedViewModel.RES_SPEED_6G_SUMMARY;
+import static com.android.settings.wifi.tether.WifiHotspotSpeedViewModel.RES_SUMMARY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -128,7 +131,9 @@ public class WifiHotspotSpeedViewModelTest {
         mViewModel.on6gAvailableChanged(true);
 
         verify(mSpeedInfoMapData).setValue(mViewModel.mSpeedInfoMap);
-        assertThat(mViewModel.mSpeedInfoMap.get(SPEED_6GHZ).mIsEnabled).isTrue();
+        WifiHotspotSpeedViewModel.SpeedInfo speedInfo = mViewModel.mSpeedInfoMap.get(SPEED_6GHZ);
+        assertThat(speedInfo.mIsEnabled).isTrue();
+        assertThat(speedInfo.mSummary).isEqualTo(mContext.getString(RES_SPEED_6G_SUMMARY));
     }
 
     @Test
@@ -139,7 +144,9 @@ public class WifiHotspotSpeedViewModelTest {
         mViewModel.on6gAvailableChanged(false);
 
         verify(mSpeedInfoMapData).setValue(mViewModel.mSpeedInfoMap);
-        assertThat(mViewModel.mSpeedInfoMap.get(SPEED_6GHZ).mIsEnabled).isFalse();
+        WifiHotspotSpeedViewModel.SpeedInfo speedInfo = mViewModel.mSpeedInfoMap.get(SPEED_6GHZ);
+        assertThat(speedInfo.mIsEnabled).isFalse();
+        assertThat(speedInfo.mSummary).isEqualTo(mContext.getString(RES_SUMMARY_UNAVAILABLE));
     }
 
     @Test
@@ -150,7 +157,9 @@ public class WifiHotspotSpeedViewModelTest {
         mViewModel.on5gAvailableChanged(true);
 
         verify(mSpeedInfoMapData).setValue(mViewModel.mSpeedInfoMap);
-        assertThat(mViewModel.mSpeedInfoMap.get(SPEED_5GHZ).mIsEnabled).isTrue();
+        WifiHotspotSpeedViewModel.SpeedInfo speedInfo = mViewModel.mSpeedInfoMap.get(SPEED_5GHZ);
+        assertThat(speedInfo.mIsEnabled).isTrue();
+        assertThat(speedInfo.mSummary).isEqualTo(mContext.getString(RES_SPEED_5G_SUMMARY));
     }
 
     @Test
@@ -161,7 +170,9 @@ public class WifiHotspotSpeedViewModelTest {
         mViewModel.on5gAvailableChanged(false);
 
         verify(mSpeedInfoMapData).setValue(mViewModel.mSpeedInfoMap);
-        assertThat(mViewModel.mSpeedInfoMap.get(SPEED_5GHZ).mIsEnabled).isFalse();
+        WifiHotspotSpeedViewModel.SpeedInfo speedInfo = mViewModel.mSpeedInfoMap.get(SPEED_5GHZ);
+        assertThat(speedInfo.mIsEnabled).isFalse();
+        assertThat(speedInfo.mSummary).isEqualTo(mContext.getString(RES_SUMMARY_UNAVAILABLE));
     }
 
     @Test

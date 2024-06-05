@@ -16,6 +16,7 @@
 
 package com.android.settings.development;
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,6 +27,7 @@ import android.debug.IAdbManager;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
+import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -47,7 +49,6 @@ import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.wifi.dpp.AdbQrCode;
 import com.android.settings.wifi.dpp.WifiDppQrCodeBaseFragment;
-import com.android.settings.wifi.dpp.WifiNetworkConfig;
 import com.android.settingslib.qrcode.QrCamera;
 import com.android.settingslib.qrcode.QrDecorateView;
 
@@ -81,7 +82,8 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
 
     /** QR code data scanned by camera */
     private AdbQrCode mAdbQrCode;
-    private WifiNetworkConfig mAdbConfig;
+    @Nullable
+    private WifiConfiguration mAdbConfig;
 
     private IAdbManager mAdbManager;
 
@@ -177,7 +179,7 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         mVerifyingTextView = view.findViewById(R.id.verifying_textview);
 
         setHeaderTitle(R.string.wifi_dpp_scan_qr_code);
-        mSummary.setText(R.string.adb_wireless_qrcode_pairing_description);
+        mSummary.setText(com.android.settingslib.R.string.adb_wireless_qrcode_pairing_description);
 
         mErrorMessage = view.findViewById(R.id.error_message);
     }
@@ -287,13 +289,16 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         AdbQrCode.triggerVibrationForQrCodeRecognition(getContext());
         mVerifyingTextView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
         try {
-            mAdbManager.enablePairingByQrCode(mAdbConfig.getSsid(),
-                    mAdbConfig.getPreSharedKey());
+            if (mAdbConfig != null) {
+                mAdbManager.enablePairingByQrCode(mAdbConfig.SSID,
+                        mAdbConfig.preSharedKey);
+                return;
+            }
         } catch (RemoteException e) {
-            Log.e(TAG, "Unable to enable QR code pairing");
-            getActivity().setResult(Activity.RESULT_CANCELED);
-            getActivity().finish();
+            Log.e(TAG, "Unable to enable QR code pairing" + e);
         }
+        getActivity().setResult(Activity.RESULT_CANCELED);
+        getActivity().finish();
     }
 
     @Override

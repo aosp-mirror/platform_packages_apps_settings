@@ -23,7 +23,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 @Implements(ActivityManager.class)
-public class ShadowActivityManager {
+public class ShadowActivityManager extends org.robolectric.shadows.ShadowActivityManager {
     private static int sCurrentUserId = 0;
     private static IActivityManager sService = null;
 

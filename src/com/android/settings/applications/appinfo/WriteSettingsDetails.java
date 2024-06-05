@@ -24,7 +24,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -43,7 +43,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     // TODO: Break out this functionality into its own class.
     private AppStateWriteSettingsBridge mAppBridge;
     private AppOpsManager mAppOpsManager;
-    private SwitchPreference mSwitchPref;
+    private TwoStatePreference mSwitchPref;
     private WriteSettingsState mWriteSettingsState;
 
     @Override
@@ -89,7 +89,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     void logSpecialPermissionChange(boolean newState, String packageName) {
         int logCategory = newState ? SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_DENY;
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(getContext(),
                 logCategory, packageName);
     }
 

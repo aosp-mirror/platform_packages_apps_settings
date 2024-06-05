@@ -144,7 +144,6 @@ public class SliceContextualCardControllerTest {
                 .isEqualTo(ContextualCardFeedbackDialog.class.getName());
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void isFeedbackEnabled_hasFeedbackEmail_debug_returnTrue() {

@@ -22,12 +22,14 @@ import static android.net.wifi.SoftApConfiguration.BAND_5GHZ;
 import static android.net.wifi.SoftApConfiguration.BAND_6GHZ;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION;
 import static android.net.wifi.WifiAvailableChannel.OP_MODE_SAP;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_DISABLED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_ENABLED;
 
 import android.content.Context;
 import android.net.TetheringManager;
+import android.net.wifi.SoftApCapability;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiAvailableChannel;
 import android.net.wifi.WifiManager;
@@ -97,10 +99,10 @@ public class WifiHotspotRepository {
 
     protected Boolean mIsDualBand;
     protected Boolean mIs5gBandSupported;
-    protected Boolean mIs5gAvailable;
+    protected SapBand mBand5g = new SapBand(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS);
     protected MutableLiveData<Boolean> m5gAvailable;
     protected Boolean mIs6gBandSupported;
-    protected Boolean mIs6gAvailable;
+    protected SapBand mBand6g = new SapBand(WifiScanner.WIFI_BAND_6_GHZ);
     protected MutableLiveData<Boolean> m6gAvailable;
     protected ActiveCountryCodeChangedCallback mActiveCountryCodeChangedCallback;
 
@@ -342,16 +344,23 @@ public class WifiHotspotRepository {
                 log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
                 configBuilder.setPassphrase(generatePassword(config), SECURITY_TYPE_WPA3_SAE);
             }
-        } else if (speedType == SPEED_5GHZ) {
-            log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
-            configBuilder.setBand(BAND_2GHZ_5GHZ);
-        } else if (mIsDualBand) {
-            log("setSpeedType(), setBands(BAND_2GHZ + BAND_2GHZ_5GHZ)");
-            int[] bands = {BAND_2GHZ, BAND_2GHZ_5GHZ};
-            configBuilder.setBands(bands);
         } else {
-            log("setSpeedType(), setBand(BAND_2GHZ)");
-            configBuilder.setBand(BAND_2GHZ);
+            if (speedType == SPEED_5GHZ) {
+                log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
+                configBuilder.setBand(BAND_2GHZ_5GHZ);
+            } else if (mIsDualBand) {
+                log("setSpeedType(), setBands(BAND_2GHZ + BAND_2GHZ_5GHZ)");
+                int[] bands = {BAND_2GHZ, BAND_2GHZ_5GHZ};
+                configBuilder.setBands(bands);
+            } else {
+                log("setSpeedType(), setBand(BAND_2GHZ)");
+                configBuilder.setBand(BAND_2GHZ);
+            }
+            // Set the security type back to WPA2/WPA3 if we're moving from 6GHz to something else.
+            if ((config.getBand() & BAND_6GHZ) != 0) {
+                configBuilder.setPassphrase(
+                        generatePassword(config), SECURITY_TYPE_WPA3_SAE_TRANSITION);
+            }
         }
         setSoftApConfiguration(configBuilder.build());
     }
@@ -388,15 +397,10 @@ public class WifiHotspotRepository {
      * @return {@code true} if Wi-Fi Hotspot 5 GHz Band is available
      */
     public boolean is5gAvailable() {
-        if (mIs5gAvailable == null) {
-            // If Settings is unable to get available 5GHz SAP information, Wi-Fi Framework's
-            // proposal is to assume that 5GHz is available. (See b/272450463#comment16)
-            mIs5gAvailable = is5GHzBandSupported()
-                    && isChannelAvailable(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS,
-                    true /* defaultValue */);
-            log("is5gAvailable():" + mIs5gAvailable);
+        if (!mBand5g.isUsableChannelsReady && is5GHzBandSupported()) {
+            isChannelAvailable(mBand5g);
         }
-        return mIs5gAvailable;
+        return mBand5g.isAvailable();
     }
 
     /**
@@ -435,12 +439,10 @@ public class WifiHotspotRepository {
      * @return {@code true} if Wi-Fi Hotspot 6 GHz Band is available
      */
     public boolean is6gAvailable() {
-        if (mIs6gAvailable == null) {
-            mIs6gAvailable = is6GHzBandSupported()
-                    && isChannelAvailable(WifiScanner.WIFI_BAND_6_GHZ, false /* defaultValue */);
-            log("is6gAvailable():" + mIs6gAvailable);
+        if (!mBand6g.isUsableChannelsReady && is6GHzBandSupported()) {
+            isChannelAvailable(mBand6g);
         }
-        return mIs6gAvailable;
+        return mBand6g.isAvailable();
     }
 
     /**
@@ -463,28 +465,31 @@ public class WifiHotspotRepository {
     /**
      * Return whether the Hotspot channel is available or not.
      *
-     * @param band         one of the following band constants defined in
-     *                     {@code WifiScanner#WIFI_BAND_*} constants.
+     * @param sapBand      The SapBand#band constants defined in {@code WifiScanner#WIFI_BAND_*}
      *                     1. {@code WifiScanner#WIFI_BAND_5_GHZ_WITH_DFS}
      *                     2. {@code WifiScanner#WIFI_BAND_6_GHZ}
-     * @param defaultValue returns the default value if WifiManager#getUsableChannels is
-     *                     unavailable to get the SAP information.
      */
-    protected boolean isChannelAvailable(int band, boolean defaultValue) {
+    @VisibleForTesting
+    boolean isChannelAvailable(SapBand sapBand) {
         try {
-            List<WifiAvailableChannel> channels = mWifiManager.getUsableChannels(band, OP_MODE_SAP);
-            log("isChannelAvailable(), band:" + band + ", channels:" + channels);
-            return (channels != null && channels.size() > 0);
+            List<WifiAvailableChannel> channels =
+                    mWifiManager.getUsableChannels(sapBand.band, OP_MODE_SAP);
+            log("isChannelAvailable(), band:" + sapBand.band + ", channels:" + channels);
+            sapBand.hasUsableChannels = (channels != null && channels.size() > 0);
+            sapBand.isUsableChannelsUnsupported = false;
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Querying usable SAP channels failed, band:" + band);
+            Log.e(TAG, "Querying usable SAP channels failed, band:" + sapBand.band);
+            sapBand.hasUsableChannels = false;
+            sapBand.isUsableChannelsUnsupported = true;
         } catch (UnsupportedOperationException e) {
             // This is expected on some hardware.
-            Log.e(TAG, "Querying usable SAP channels is unsupported, band:" + band);
+            Log.e(TAG, "Querying usable SAP channels is unsupported, band:" + sapBand.band);
+            sapBand.hasUsableChannels = false;
+            sapBand.isUsableChannelsUnsupported = true;
         }
-        // Disable Wi-Fi hotspot speed feature if an error occurs while getting usable channels.
-        mIsSpeedFeatureAvailable = false;
-        Log.w(TAG, "isChannelAvailable(): Wi-Fi hotspot speed feature disabled");
-        return defaultValue;
+        sapBand.isUsableChannelsReady = true;
+        log("isChannelAvailable(), " + sapBand);
+        return sapBand.isAvailable();
     }
 
     private boolean isConfigShowSpeed() {
@@ -519,19 +524,6 @@ public class WifiHotspotRepository {
             log("isSpeedFeatureAvailable():false, 5 GHz band is not supported on this device");
             return false;
         }
-        // Check if 5 GHz band SAP channel is not ready
-        isChannelAvailable(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, true /* defaultValue */);
-        if (mIsSpeedFeatureAvailable != null && !mIsSpeedFeatureAvailable) {
-            log("isSpeedFeatureAvailable():false, error occurred while getting 5 GHz SAP channel");
-            return false;
-        }
-
-        // Check if 6 GHz band SAP channel is not ready
-        isChannelAvailable(WifiScanner.WIFI_BAND_6_GHZ, false /* defaultValue */);
-        if (mIsSpeedFeatureAvailable != null && !mIsSpeedFeatureAvailable) {
-            log("isSpeedFeatureAvailable():false, error occurred while getting 6 GHz SAP channel");
-            return false;
-        }
 
         mIsSpeedFeatureAvailable = true;
         log("isSpeedFeatureAvailable():true");
@@ -539,8 +531,8 @@ public class WifiHotspotRepository {
     }
 
     protected void purgeRefreshData() {
-        mIs5gAvailable = null;
-        mIs6gAvailable = null;
+        mBand5g.isUsableChannelsReady = false;
+        mBand6g.isUsableChannelsReady = false;
     }
 
     protected void startAutoRefresh() {
@@ -622,10 +614,26 @@ public class WifiHotspotRepository {
     }
 
     @VisibleForTesting
+    void updateCapabilityChanged() {
+        if (mBand5g.isUsableChannelsUnsupported) {
+            update5gAvailable();
+            log("updateCapabilityChanged(), " + mBand5g);
+        }
+        if (mBand6g.isUsableChannelsUnsupported) {
+            update6gAvailable();
+            log("updateCapabilityChanged(), " + mBand6g);
+        }
+        if (mBand5g.isUsableChannelsUnsupported || mBand6g.isUsableChannelsUnsupported) {
+            updateSpeedType();
+        }
+    }
+
+    @VisibleForTesting
     class SoftApCallback implements WifiManager.SoftApCallback {
+
         @Override
         public void onStateChanged(int state, int failureReason) {
-            log("onStateChanged(), state:" + state + ", failureReason:" + failureReason);
+            Log.d(TAG, "onStateChanged(), state:" + state + ", failureReason:" + failureReason);
             mWifiApState = state;
             if (!mIsRestarting) {
                 return;
@@ -639,6 +647,14 @@ public class WifiHotspotRepository {
                 refresh();
                 setRestarting(false);
             }
+        }
+
+        @Override
+        public void onCapabilityChanged(@NonNull SoftApCapability softApCapability) {
+            log("onCapabilityChanged(), softApCapability:" + softApCapability);
+            mBand5g.hasCapability = softApCapability.getSupportedChannelList(BAND_5GHZ).length > 0;
+            mBand6g.hasCapability = softApCapability.getSupportedChannelList(BAND_6GHZ).length > 0;
+            updateCapabilityChanged();
         }
     }
 
@@ -654,7 +670,42 @@ public class WifiHotspotRepository {
         }
     }
 
+    /**
+     * Wi-Fi Hotspot SoftAp Band
+     */
+    @VisibleForTesting
+    static class SapBand {
+        public int band;
+        public boolean isUsableChannelsReady;
+        public boolean hasUsableChannels;
+        public boolean isUsableChannelsUnsupported;
+        public boolean hasCapability;
+
+        SapBand(int band) {
+            this.band = band;
+        }
+
+        /**
+         * Return whether SoftAp band is available or not.
+         */
+        public boolean isAvailable() {
+            return isUsableChannelsUnsupported ? hasCapability : hasUsableChannels;
+        }
+
+        @Override
+        @NonNull
+        public String toString() {
+            return "SapBand{"
+                    + "band:" + band
+                    + ",isUsableChannelsReady:" + isUsableChannelsReady
+                    + ",hasUsableChannels:" + hasUsableChannels
+                    + ",isUsableChannelsUnsupported:" + isUsableChannelsUnsupported
+                    + ",hasChannelsCapability:" + hasCapability
+                    + '}';
+        }
+    }
+
     private void log(String msg) {
-        FeatureFactory.getFactory(mAppContext).getWifiFeatureProvider().verboseLog(TAG, msg);
+        FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }

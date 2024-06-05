@@ -26,36 +26,41 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.ComponentName;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
 
+import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowFragment;
-import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.widget.LabeledSeekBarPreference;
-import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowLooper;
 
 /**
  * Tests for {@link PreviewSizeSeekBarController}.
@@ -63,10 +68,13 @@ import org.robolectric.shadows.ShadowApplication;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowInteractionJankMonitor.class})
 public class PreviewSizeSeekBarControllerTest {
+
+    @Rule
+    public ActivityScenarioRule<EmptyFragmentActivity> rule =
+            new ActivityScenarioRule<>(EmptyFragmentActivity.class);
     private static final String FONT_SIZE_KEY = "font_size";
     private static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
-    @Spy
-    private final Context mContext = ApplicationProvider.getApplicationContext();
+    private Activity mContext;
     private PreviewSizeSeekBarController mSeekBarController;
     private FontSizeData mFontSizeData;
     private LabeledSeekBarPreference mSeekBarPreference;
@@ -90,8 +98,10 @@ public class PreviewSizeSeekBarControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ShadowInteractionJankMonitor.reset();
 
-        mContext.setTheme(R.style.Theme_AppCompat);
+        rule.getScenario().onActivity(activity -> mContext = activity);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         mFragment = spy(new TestFragment());
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
@@ -177,8 +187,9 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarPreference.setProgress(mSeekBarPreference.getMax());
         mSeekBarPreference.onProgressChanged(new SeekBar(mContext), /* progress= */
                 0, /* fromUser= */ false);
+        ShadowLooper.idleMainLooper();
 
-        verify(mInteractionListener).notifyPreferenceChanged();
+        verify(mInteractionListener).onProgressChanged();
     }
 
     @Test
@@ -193,6 +204,23 @@ public class PreviewSizeSeekBarControllerTest {
                 /* fromUser= */ false);
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
+    }
+
+    @Test
+    public void onProgressChanged_inSuw_toolTipShouldNotShown() {
+        Intent intent = mContext.getIntent();
+        intent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
+        mContext.setIntent(intent);
+        mSeekBarController.displayPreference(mPreferenceScreen);
+
+        // Simulate changing the progress for the first time
+        int newProgress = (mSeekBarPreference.getProgress() != 0) ? 0 : mSeekBarPreference.getMax();
+        mSeekBarPreference.setProgress(newProgress);
+        mSeekBarPreference.onProgressChanged(new SeekBar(mContext),
+                newProgress,
+                /* fromUser= */ false);
+
+        assertThat(getLatestPopupWindow()).isNull();
     }
 
     @Test
@@ -224,6 +252,7 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarController.onCreate(savedInstanceState);
 
         mSeekBarController.displayPreference(mPreferenceScreen);
+        ShadowLooper.idleMainLooper();
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
     }

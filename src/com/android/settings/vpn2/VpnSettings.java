@@ -61,7 +61,8 @@ import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.Utils;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.GearPreference.OnGearClickListener;
@@ -80,7 +81,7 @@ import java.util.Set;
  * Settings screen listing VPNs. Configured VPNs and networks managed by apps
  * are shown in the same list.
  */
-public class VpnSettings extends RestrictedSettingsFragment implements
+public class VpnSettings extends RestrictedDashboardFragment implements
         Handler.Callback, Preference.OnPreferenceClickListener {
     private static final String LOG_TAG = "VpnSettings";
     private static final boolean DEBUG = Log.isLoggable(LOG_TAG, Log.DEBUG);
@@ -129,19 +130,23 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
         mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         mVpnManager = (VpnManager) getSystemService(Context.VPN_MANAGEMENT_SERVICE);
-        mFeatureProvider = FeatureFactory.getFactory(getContext()).getAdvancedVpnFeatureProvider();
+        mFeatureProvider = FeatureFactory.getFeatureFactory().getAdvancedVpnFeatureProvider();
         mIsAdvancedVpnSupported = mFeatureProvider.isAdvancedVpnSupported(getContext());
 
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
 
-        addPreferencesFromResource(R.xml.vpn_settings2);
         mPreferenceScreen = getPreferenceScreen();
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+
+        if (!getContext().getResources().getBoolean(R.bool.config_show_vpn_options)) {
+            return;
+        }
+
         // Although FEATURE_IPSEC_TUNNELS should always be present in android S and beyond,
         // keep this check here just to be safe.
         if (!getContext().getPackageManager().hasSystemFeature(
@@ -192,7 +197,8 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         if (mUnavailable) {
             // Show a message to explain that VPN settings have been disabled
             if (!isUiRestrictedByOnlyAdmin()) {
-                getEmptyTextView().setText(R.string.vpn_settings_not_available);
+                getEmptyTextView()
+                        .setText(com.android.settingslib.R.string.vpn_settings_not_available);
             }
             getPreferenceScreen().removeAll();
             return;
@@ -209,6 +215,16 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         mUpdaterThread.start();
         mUpdater = new Handler(mUpdaterThread.getLooper(), this);
         mUpdater.sendEmptyMessage(RESCAN_MESSAGE);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.vpn_settings2;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return LOG_TAG;
     }
 
     @Override
@@ -577,6 +593,9 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         // Mark connected third-party services
         Set<AppVpnInfo> connections = new ArraySet<>();
         for (UserHandle profile : mUserManager.getUserProfiles()) {
+            if (Utils.shouldHideUser(profile, mUserManager)) {
+                continue;
+            }
             VpnConfig config = mVpnManager.getVpnConfig(profile.getIdentifier());
             if (config != null && !config.legacy) {
                 connections.add(new AppVpnInfo(profile.getIdentifier(), config.user));
@@ -589,6 +608,9 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     private Set<AppVpnInfo> getAlwaysOnAppVpnInfos() {
         Set<AppVpnInfo> result = new ArraySet<>();
         for (UserHandle profile : mUserManager.getUserProfiles()) {
+            if (Utils.shouldHideUser(profile, mUserManager)) {
+                continue;
+            }
             final int profileId = profile.getIdentifier();
             final String packageName = mVpnManager.getAlwaysOnVpnPackageForUser(profileId);
             if (packageName != null) {
@@ -612,7 +634,11 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         final Set<Integer> profileIds;
         if (includeProfiles) {
             profileIds = new ArraySet<>();
-            for (UserHandle profile : UserManager.get(context).getUserProfiles()) {
+            UserManager userManager = UserManager.get(context);
+            for (UserHandle profile : userManager.getUserProfiles()) {
+                if (Utils.shouldHideUser(profile, userManager)) {
+                    continue;
+                }
                 profileIds.add(profile.getIdentifier());
             }
         } else {

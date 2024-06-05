@@ -25,7 +25,6 @@ import static com.android.settings.slices.CustomSliceRegistry.VOLUME_ALARM_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_CALL_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_NOTIFICATION_URI;
-import static com.android.settings.slices.CustomSliceRegistry.VOLUME_RINGER_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_SEPARATE_RING_URI;
 
 import android.app.Activity;
@@ -58,7 +57,10 @@ import java.util.concurrent.FutureTask;
 
 /**
  * Panel data class for Volume settings.
+ *
+ * @deprecated this is no longer used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class VolumePanel implements PanelContent, LifecycleObserver {
     private static final String TAG = "VolumePanel";
 
@@ -144,7 +146,6 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
         }
         uris.add(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
         uris.add(VOLUME_CALL_URI);
-        uris.add(VOLUME_RINGER_URI);
         uris.add(VOLUME_SEPARATE_RING_URI);
         uris.add(VOLUME_NOTIFICATION_URI);
         uris.add(VOLUME_ALARM_URI);
@@ -153,7 +154,9 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
 
     @Override
     public Intent getSeeMoreIntent() {
-        return new Intent(Settings.ACTION_SOUND_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return new Intent(Settings.ACTION_SOUND_SETTINGS)
+                .setPackage(mContext.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @Override

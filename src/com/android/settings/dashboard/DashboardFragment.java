@@ -25,16 +25,20 @@ import android.preference.PreferenceManager.OnActivityResultListener;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -42,12 +46,12 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settings.core.CategoryMixin.CategoryListener;
 import com.android.settings.core.PreferenceControllerListHelper;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.Indexable;
 
@@ -55,6 +59,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -90,8 +95,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         super.onAttach(context);
         mSuppressInjectedTileKeys = Arrays.asList(context.getResources().getStringArray(
                 R.array.config_suppress_injected_tile_keys));
-        mDashboardFeatureProvider = FeatureFactory.getFactory(context).
-                getDashboardFeatureProvider(context);
+        mDashboardFeatureProvider =
+                FeatureFactory.getFeatureFactory().getDashboardFeatureProvider();
         // Load preference controllers from code
         final List<AbstractPreferenceController> controllersFromCode =
                 createPreferenceControllers(context);
@@ -165,6 +170,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             // Upon rotation configuration change we need to update preference states before any
             // editing dialog is recreated (that would happen before onResume is called).
             updatePreferenceStates();
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LifecycleOwner viewLifecycleOwner = getViewLifecycleOwner();
+        for (AbstractPreferenceController controller : mControllers) {
+            controller.onViewCreated(viewLifecycleOwner);
         }
     }
 
@@ -504,6 +518,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         // Install dashboard tiles and collect pending observers.
         final boolean forceRoundedIcons = shouldForceRoundedIcon();
         final List<DynamicDataObserver> pendingObservers = new ArrayList<>();
+
+        // Move group tiles to the beginning of the list to ensure they are created before the
+        // other tiles.
+        tiles.sort(Comparator.comparingInt(tile -> tile.getType() == Tile.Type.GROUP ? 0 : 1));
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (TextUtils.isEmpty(key)) {
@@ -526,7 +544,28 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 observers = mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(
                         getActivity(), this, forceRoundedIcons, pref, tile, key,
                         mPlaceholderPreferenceController.getOrder());
-                screen.addPreference(pref);
+                if (Flags.dynamicInjectionCategory()) {
+                    if (tile.hasGroupKey()) {
+                        Preference group = screen.findPreference(tile.getGroupKey());
+                        if (group instanceof PreferenceCategory) {
+                            ((PreferenceCategory) group).addPreference(pref);
+                        } else {
+                            screen.addPreference(pref);
+                        }
+                    } else {
+                        screen.addPreference(pref);
+                    }
+                } else {
+                    if (tile.hasGroupKey()
+                            && mDashboardTilePrefKeys.containsKey(tile.getGroupKey())) {
+                        Preference group = screen.findPreference(tile.getGroupKey());
+                        if (group instanceof PreferenceCategory) {
+                            ((PreferenceCategory) group).addPreference(pref);
+                        }
+                    } else {
+                        screen.addPreference(pref);
+                    }
+                }
                 registerDynamicDataObservers(observers);
                 mDashboardTilePrefKeys.put(key, observers);
             }
@@ -540,9 +579,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         for (Map.Entry<String, List<DynamicDataObserver>> entry : remove.entrySet()) {
             final String key = entry.getKey();
             mDashboardTilePrefKeys.remove(key);
-            final Preference preference = screen.findPreference(key);
-            if (preference != null) {
-                screen.removePreference(preference);
+            if (Flags.dynamicInjectionCategory()) {
+                screen.removePreferenceRecursively(key);
+            } else {
+                Preference preference = screen.findPreference(key);
+                if (preference != null) {
+                    screen.removePreference(preference);
+                }
             }
             unregisterDynamicDataObservers(entry.getValue());
         }
@@ -569,11 +612,28 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     protected Preference createPreference(Tile tile) {
-        return tile instanceof ProviderTile
-                ? new SwitchPreference(getPrefContext())
-                : tile.hasSwitch()
-                        ? new PrimarySwitchPreference(getPrefContext())
-                        : new Preference(getPrefContext());
+        switch (tile.getType()) {
+            case EXTERNAL_ACTION:
+                Preference externalActionPreference = new Preference(getPrefContext());
+                externalActionPreference
+                        .setWidgetLayoutResource(R.layout.preference_external_action_icon);
+                return externalActionPreference;
+            case SWITCH:
+                return new SwitchPreferenceCompat(getPrefContext());
+            case SWITCH_WITH_ACTION:
+                return new PrimarySwitchPreference(getPrefContext());
+            case GROUP:
+                mMetricsFeatureProvider.action(
+                        mMetricsFeatureProvider.getAttribution(getActivity()),
+                        SettingsEnums.ACTION_SETTINGS_GROUP_TILE_ADDED_TO_SCREEN,
+                        getMetricsCategory(),
+                        tile.getKey(getContext()),
+                        /* value= */ 0);
+                return new PreferenceCategory((getPrefContext()));
+            case ACTION:
+            default:
+                return new Preference(getPrefContext());
+        }
     }
 
     @VisibleForTesting

@@ -100,7 +100,7 @@ public class LeaseInfoListView extends ListActivity {
 
         blobLabel.setText(mBlobInfo.getLabel());
         blobLabel.setTypeface(Typeface.DEFAULT_BOLD);
-        blobId.setText(getString(R.string.blob_id_text, mBlobInfo.getId()));
+        blobId.setText(getString(com.android.settingslib.R.string.blob_id_text, mBlobInfo.getId()));
         blobExpiry.setVisibility(View.GONE);
         blobSize.setText(SharedDataUtils.formatSize(mBlobInfo.getSizeBytes()));
         return headerView;
@@ -110,7 +110,7 @@ public class LeaseInfoListView extends ListActivity {
         final Button deleteButton = new Button(this);
         deleteButton.setLayoutParams(
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-        deleteButton.setText(R.string.delete_blob_text);
+        deleteButton.setText(com.android.settingslib.R.string.delete_blob_text);
         deleteButton.setOnClickListener(getButtonOnClickListener());
         return deleteButton;
     }
@@ -118,7 +118,7 @@ public class LeaseInfoListView extends ListActivity {
     private View.OnClickListener getButtonOnClickListener() {
         return v -> {
             final AlertDialog dialog = new AlertDialog.Builder(mContext)
-                    .setMessage(R.string.delete_blob_confirmation_text)
+                    .setMessage(com.android.settingslib.R.string.delete_blob_confirmation_text)
                     .setPositiveButton(android.R.string.ok, getDialogOnClickListener())
                     .setNegativeButton(android.R.string.cancel, null)
                     .create();
@@ -185,7 +185,8 @@ public class LeaseInfoListView extends ListActivity {
                 }
             } finally {
                 if (TextUtils.isEmpty(description)) {
-                    description = getString(R.string.accessor_no_description_text);
+                    description = getString(
+                            com.android.settingslib.R.string.accessor_no_description_text);
                 }
             }
             return description;
@@ -195,7 +196,7 @@ public class LeaseInfoListView extends ListActivity {
             if (expiryTimeMillis == 0) {
                 return getString(R.string.accessor_never_expires_text);
             }
-            return getString(R.string.accessor_expires_text,
+            return getString(com.android.settingslib.R.string.accessor_expires_text,
                     SharedDataUtils.formatTime(expiryTimeMillis));
         }
     }

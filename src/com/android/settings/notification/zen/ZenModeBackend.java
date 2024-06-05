@@ -30,6 +30,7 @@ import android.icu.text.MessageFormat;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.Settings;
+import android.service.notification.ZenAdapters;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
 import android.util.Log;
@@ -56,7 +57,6 @@ public class ZenModeBackend {
     @VisibleForTesting
     protected static final String ZEN_MODE_FROM_NONE = "zen_mode_from_none";
     protected static final int SOURCE_NONE = -1;
-    private static List<String> mDefaultRuleIds;
 
     private static ZenModeBackend sInstance;
 
@@ -65,7 +65,7 @@ public class ZenModeBackend {
     protected NotificationManager.Policy mPolicy;
     private final NotificationManager mNotificationManager;
 
-    private String TAG = "ZenModeSettingsBackend";
+    private static final String TAG = "ZenModeSettingsBackend";
     private final Context mContext;
 
     public static ZenModeBackend getInstance(Context context) {
@@ -95,19 +95,32 @@ public class ZenModeBackend {
     }
 
     protected boolean updateZenRule(String id, AutomaticZenRule rule) {
-        return NotificationManager.from(mContext).updateAutomaticZenRule(id, rule);
+        if (android.app.Flags.modesApi()) {
+            return mNotificationManager.updateAutomaticZenRule(id, rule, /* fromUser= */ true);
+        } else {
+            return NotificationManager.from(mContext).updateAutomaticZenRule(id, rule);
+        }
     }
 
     protected void setZenMode(int zenMode) {
-        NotificationManager.from(mContext).setZenMode(zenMode, null, TAG);
+        if (android.app.Flags.modesApi()) {
+            mNotificationManager.setZenMode(zenMode, null, TAG, /* fromUser= */ true);
+        } else {
+            NotificationManager.from(mContext).setZenMode(zenMode, null, TAG);
+        }
         mZenMode = getZenMode();
     }
 
     protected void setZenModeForDuration(int minutes) {
         Uri conditionId = ZenModeConfig.toTimeCondition(mContext, minutes,
                 ActivityManager.getCurrentUser(), true).id;
-        mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
-                conditionId, TAG);
+        if (android.app.Flags.modesApi()) {
+            mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
+                        conditionId, TAG, /* fromUser= */ true);
+        } else {
+            mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
+                    conditionId, TAG);
+        }
         mZenMode = getZenMode();
     }
 
@@ -180,7 +193,11 @@ public class ZenModeBackend {
             int priorityConversationSenders) {
         mPolicy = new NotificationManager.Policy(priorityCategories, priorityCallSenders,
                 priorityMessageSenders, suppressedVisualEffects, priorityConversationSenders);
-        mNotificationManager.setNotificationPolicy(mPolicy);
+        if (android.app.Flags.modesApi()) {
+            mNotificationManager.setNotificationPolicy(mPolicy, /* fromUser= */ true);
+        } else {
+            mNotificationManager.setNotificationPolicy(mPolicy);
+        }
     }
 
 
@@ -357,7 +374,11 @@ public class ZenModeBackend {
     }
 
     public boolean removeZenRule(String ruleId) {
-        return NotificationManager.from(mContext).removeAutomaticZenRule(ruleId);
+        if (android.app.Flags.modesApi()) {
+            return mNotificationManager.removeAutomaticZenRule(ruleId, /* fromUser= */ true);
+        } else {
+            return NotificationManager.from(mContext).removeAutomaticZenRule(ruleId);
+        }
     }
 
     public NotificationManager.Policy getConsolidatedPolicy() {
@@ -366,7 +387,11 @@ public class ZenModeBackend {
 
     protected String addZenRule(AutomaticZenRule rule) {
         try {
-            return NotificationManager.from(mContext).addAutomaticZenRule(rule);
+            if (android.app.Flags.modesApi()) {
+                return mNotificationManager.addAutomaticZenRule(rule, /* fromUser= */ true);
+            } else {
+                return NotificationManager.from(mContext).addAutomaticZenRule(rule);
+            }
         } catch (Exception e) {
             return null;
         }
@@ -375,14 +400,16 @@ public class ZenModeBackend {
     ZenPolicy setDefaultZenPolicy(ZenPolicy zenPolicy) {
         int calls;
         if (mPolicy.allowCalls()) {
-            calls = ZenModeConfig.getZenPolicySenders(mPolicy.allowCallsFrom());
+            calls = ZenAdapters.notificationPolicySendersToZenPolicyPeopleType(
+                    mPolicy.allowCallsFrom());
         } else {
             calls = ZenPolicy.PEOPLE_TYPE_NONE;
         }
 
         int messages;
         if (mPolicy.allowMessages()) {
-            messages = ZenModeConfig.getZenPolicySenders(mPolicy.allowMessagesFrom());
+            messages = ZenAdapters.notificationPolicySendersToZenPolicyPeopleType(
+                    mPolicy.allowMessagesFrom());
         } else {
             messages = ZenPolicy.PEOPLE_TYPE_NONE;
         }
@@ -429,10 +456,7 @@ public class ZenModeBackend {
     }
 
     private static List<String> getDefaultRuleIds() {
-        if (mDefaultRuleIds == null) {
-            mDefaultRuleIds = ZenModeConfig.DEFAULT_RULE_IDS;
-        }
-        return mDefaultRuleIds;
+        return ZenModeConfig.DEFAULT_RULE_IDS;
     }
 
     NotificationManager.Policy toNotificationPolicy(ZenPolicy policy) {

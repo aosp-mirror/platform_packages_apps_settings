@@ -40,6 +40,7 @@ import android.content.res.Resources;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.Fingerprint;
+import android.hardware.fingerprint.FingerprintEnrollOptions;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
@@ -52,6 +53,7 @@ import androidx.annotation.Nullable;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -85,6 +87,7 @@ public class FingerprintEnrollIntroductionTest {
     private Context mContext;
 
     private TestFingerprintEnrollIntroduction mFingerprintEnrollIntroduction;
+    private ActivityController<TestFingerprintEnrollIntroduction> mController;
 
     private static final int MAX_ENROLLMENTS = 5;
     private static final byte[] EXPECTED_TOKEN = new byte[] { 10, 20, 30, 40 };
@@ -121,9 +124,8 @@ public class FingerprintEnrollIntroductionTest {
 
     void setupFingerprintEnrollIntroWith(@NonNull Intent intent) {
 
-        final ActivityController<TestFingerprintEnrollIntroduction> controller =
-                Robolectric.buildActivity(TestFingerprintEnrollIntroduction.class, intent);
-        mFingerprintEnrollIntroduction = controller.get();
+        mController = Robolectric.buildActivity(TestFingerprintEnrollIntroduction.class, intent);
+        mFingerprintEnrollIntroduction = mController.get();
         mFingerprintEnrollIntroduction.mMockedFingerprintManager = mFingerprintManager;
         mFingerprintEnrollIntroduction.mMockedGatekeeperPasswordProvider =
                 mGatekeeperPasswordProvider;
@@ -137,7 +139,7 @@ public class FingerprintEnrollIntroductionTest {
         when(mLockPatternUtils.getActivePasswordQuality(userId))
                 .thenReturn(PASSWORD_QUALITY_SOMETHING);
 
-        controller.create();
+        mController.create();
     }
 
     void setFingerprintManagerToHave(int numEnrollments) {
@@ -181,14 +183,6 @@ public class FingerprintEnrollIntroductionTest {
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
         assertThat(result).isEqualTo(0);
-
-        final RequireScrollMixin requireScrollMixin =
-                ((GlifLayout) mFingerprintEnrollIntroduction.findViewById(
-                        R.id.setup_wizard_layout)).getMixin(RequireScrollMixin.class);
-        requireScrollMixin.getOnRequireScrollStateChangedListener().onRequireScrollStateChanged(
-                false);
-        Assert.assertEquals(View.VISIBLE,
-                mFingerprintEnrollIntroduction.getSecondaryFooterButton().getVisibility());
     }
 
     @Test
@@ -204,14 +198,6 @@ public class FingerprintEnrollIntroductionTest {
         int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
 
         assertThat(result).isEqualTo(R.string.fingerprint_intro_error_max);
-
-        final RequireScrollMixin requireScrollMixin =
-                ((GlifLayout) mFingerprintEnrollIntroduction.findViewById(
-                        R.id.setup_wizard_layout)).getMixin(RequireScrollMixin.class);
-        requireScrollMixin.getOnRequireScrollStateChangedListener().onRequireScrollStateChanged(
-                false);
-        Assert.assertEquals(View.INVISIBLE,
-                mFingerprintEnrollIntroduction.getSecondaryFooterButton().getVisibility());
     }
 
     @Test
@@ -251,6 +237,24 @@ public class FingerprintEnrollIntroductionTest {
     }
 
     @Test
+    public void intro_CheckNullPropsReturnsErrorString() {
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
+        when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(null);
+        final int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
+
+        assertThat(result).isEqualTo(R.string.fingerprint_intro_error_unknown);
+    }
+
+    @Test
+    public void intro_CheckEmptyPropsReturnsErrorString() {
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
+        when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(List.of());
+        final int result = mFingerprintEnrollIntroduction.checkMaxEnrolled();
+
+        assertThat(result).isEqualTo(R.string.fingerprint_intro_error_unknown);
+    }
+
+    @Test
     public void intro_CheckGenerateChallenge() {
         setupFingerprintEnrollIntroWith(newGkPwHandleAndFromSettingsIntent());
 
@@ -275,6 +279,81 @@ public class FingerprintEnrollIntroductionTest {
             assertWithMessage("token2[" + i + "] is " + token2[i] + " not " + EXPECTED_TOKEN[i])
                     .that(token2[i]).isEqualTo(EXPECTED_TOKEN[i]);
         }
+    }
+
+    @Test
+    public void clickNext_onActivityResult_pause_shouldFinish() {
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
+        mController.resume();
+        mFingerprintEnrollIntroduction.clickNextBtn();
+        mController.pause().stop();
+        assertThat(mFingerprintEnrollIntroduction.shouldFinishWhenBackgrounded()).isEqualTo(false);
+
+        mController.resume().pause().stop();
+        assertThat(mFingerprintEnrollIntroduction.shouldFinishWhenBackgrounded()).isEqualTo(true);
+    }
+
+    @Test
+    public void testFingerprintEnrollIntroduction_forwardsEnrollOptions() {
+        final Intent intent = newTokenOnlyIntent();
+        intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                FingerprintEnrollOptions.ENROLL_REASON_SETTINGS);
+        setupFingerprintEnrollIntroWith(intent);
+
+        final Intent enrollingIntent = mFingerprintEnrollIntroduction.getEnrollingIntent();
+        assertThat(enrollingIntent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1))
+                .isEqualTo(FingerprintEnrollOptions.ENROLL_REASON_SETTINGS);
+    }
+
+    @Test
+    public void intro_CheckNoThanksButtonWhenCanEnroll() {
+        // This code path should depend on suw_max_fingerprints_enrollable versus
+        // FingerprintManager.getSensorProperties...maxEnrollmentsPerUser()
+        Resources resources = mock(Resources.class);
+        when(resources.getInteger(anyInt())).thenReturn(5);
+        when(mContext.getResources()).thenReturn(resources);
+
+        setupFingerprintEnrollIntroWith(newFirstSuwIntent());
+        setFingerprintManagerToHave(0 /* numEnrollments */);
+
+        final RequireScrollMixin requireScrollMixin =
+                ((GlifLayout) mFingerprintEnrollIntroduction.findViewById(
+                        R.id.setup_wizard_layout)).getMixin(RequireScrollMixin.class);
+
+        Assert.assertEquals(
+                requireScrollMixin.isScrollingRequired() ? View.INVISIBLE : View.VISIBLE,
+                mFingerprintEnrollIntroduction.getSecondaryFooterButton().getVisibility());
+
+        requireScrollMixin.getOnRequireScrollStateChangedListener().onRequireScrollStateChanged(
+                false);
+        Assert.assertEquals(View.VISIBLE,
+                mFingerprintEnrollIntroduction.getSecondaryFooterButton().getVisibility());
+    }
+
+    @Test
+    public void intro_CheckNoThanksButtonWhenMaxEnroll() {
+        // This code path should depend on suw_max_fingerprints_enrollable versus
+        // FingerprintManager.getSensorProperties...maxEnrollmentsPerUser()
+        Resources resources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(resources);
+        when(resources.getInteger(anyInt())).thenReturn(1);
+
+        setupFingerprintEnrollIntroWith(newFirstSuwIntent());
+        setFingerprintManagerToHave(1 /* numEnrollments */);
+
+        final RequireScrollMixin requireScrollMixin =
+                ((GlifLayout) mFingerprintEnrollIntroduction.findViewById(
+                        R.id.setup_wizard_layout)).getMixin(RequireScrollMixin.class);
+
+        mFingerprintEnrollIntroduction.onResume();
+        Assert.assertEquals(View.INVISIBLE,
+                mFingerprintEnrollIntroduction.getSecondaryFooterButton().getVisibility());
+
+        requireScrollMixin.getOnRequireScrollStateChangedListener().onRequireScrollStateChanged(
+                false);
+        Assert.assertEquals(View.INVISIBLE,
+                mFingerprintEnrollIntroduction.getSecondaryFooterButton().getVisibility());
+
     }
 
     private Intent newTokenOnlyIntent() {
@@ -321,6 +400,11 @@ public class FingerprintEnrollIntroductionTest {
         public int mNewSensorId;
         public long mNewChallenge;
 
+        @Override
+        protected void onResume() {
+            super.onResume();
+        }
+
         @Nullable
         public byte[] getTokenField() {
             return mToken;
@@ -362,5 +446,16 @@ public class FingerprintEnrollIntroductionTest {
         protected void getChallenge(GenerateChallengeCallback callback) {
             callback.onChallengeGenerated(mNewSensorId, mUserId, mNewChallenge);
         }
+
+        @Override
+        protected boolean shouldFinishWhenBackgrounded() {
+            return super.shouldFinishWhenBackgrounded();
+        }
+
+        //mock click next btn
+        public void clickNextBtn() {
+            super.onNextButtonClick(null);
+        }
+
     }
 }

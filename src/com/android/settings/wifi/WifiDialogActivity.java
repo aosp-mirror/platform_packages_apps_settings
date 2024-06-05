@@ -43,6 +43,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.lifecycle.ObservableActivity;
@@ -141,7 +142,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
                     return SystemClock.elapsedRealtime();
                 }
             };
-            mNetworkDetailsTracker = FeatureFactory.getFactory(this)
+            mNetworkDetailsTracker = FeatureFactory.getFeatureFactory()
                     .getWifiTrackerLibProvider()
                     .createNetworkDetailsTracker(
                             getLifecycle(),
@@ -171,8 +172,11 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             createDialogWithSuwTheme();
         } else {
             if (mIsWifiTrackerLib) {
-                mDialog2 = WifiDialog2.createModal(this, this,
-                        mNetworkDetailsTracker.getWifiEntry(), WifiConfigUiBase2.MODE_CONNECT);
+                mDialog2 = new WifiDialog2(this, this,
+                        mNetworkDetailsTracker.getWifiEntry(), WifiConfigUiBase2.MODE_CONNECT,
+                        0 /* style */, false /* hideSubmitButton */,
+                        false /* hideMeteredAndPrivacy */,
+                        Utils.SYSTEMUI_PACKAGE_NAME.equals(getLaunchedFromPackage()));
             } else {
                 mDialog = WifiDialog.createModal(
                         this, this, mAccessPoint, WifiConfigUiBase.MODE_CONNECT);
@@ -202,7 +206,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
                 ? R.style.SuwAlertDialogThemeCompat_DayNight :
                 R.style.SuwAlertDialogThemeCompat_Light;
         if (mIsWifiTrackerLib) {
-            mDialog2 = WifiDialog2.createModal(this, this,
+            mDialog2 = new WifiDialog2(this, this,
                     mNetworkDetailsTracker.getWifiEntry(),
                     WifiConfigUiBase2.MODE_CONNECT, targetStyle);
         } else {

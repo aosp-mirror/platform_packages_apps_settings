@@ -16,18 +16,25 @@
 
 package com.android.settings.applications.credentials;
 
-import android.annotation.Nullable;
+import static com.android.settings.applications.credentials.CredentialManagerPreferenceController.getCredentialAutofillService;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
+import android.credentials.flags.Flags;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -36,15 +43,18 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
+import com.android.settingslib.RestrictedSelectorWithWidgetPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +74,8 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
     private CredentialManager mCredentialManager;
     private int mIntentSenderUserId = -1;
+
+    private static final Handler sMainHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,6 +122,18 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             setCancelListener(target.mCancelListener);
             super.onCreate(savedInstanceState);
         }
+
+        @Override
+        protected CharSequence getPositiveButtonText() {
+            final Bundle bundle = getArguments();
+            if (TextUtils.isEmpty(bundle.getString(EXTRA_KEY))) {
+                return getContext()
+                        .getString(R.string.credman_confirmation_turn_off_positive_button);
+            }
+
+            return getContext()
+                    .getString(R.string.credman_confirmation_change_provider_positive_button);
+        }
     }
 
     @Override
@@ -132,17 +156,44 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             new PackageMonitor() {
                 @Override
                 public void onPackageAdded(String packageName, int uid) {
-                    ThreadUtils.postOnMainThread(() -> update());
+                    sMainHandler.post(
+                            () -> {
+                                // See b/296164461 for context
+                                if (getContext() == null) {
+                                    Log.w(TAG, "context is null");
+                                    return;
+                                }
+
+                                update();
+                            });
                 }
 
                 @Override
                 public void onPackageModified(String packageName) {
-                    ThreadUtils.postOnMainThread(() -> update());
+                    sMainHandler.post(
+                            () -> {
+                                // See b/296164461 for context
+                                if (getContext() == null) {
+                                    Log.w(TAG, "context is null");
+                                    return;
+                                }
+
+                                update();
+                            });
                 }
 
                 @Override
                 public void onPackageRemoved(String packageName, int uid) {
-                    ThreadUtils.postOnMainThread(() -> update());
+                    sMainHandler.post(
+                            () -> {
+                                // See b/296164461 for context
+                                if (getContext() == null) {
+                                    Log.w(TAG, "context is null");
+                                    return;
+                                }
+
+                                update();
+                            });
                 }
             };
 
@@ -210,54 +261,45 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         return mCredentialManager;
     }
 
-    private List<CombinedProviderInfo> getAllProviders() {
+    private List<CombinedProviderInfo> getAllProviders(int userId) {
         final Context context = getContext();
         final List<AutofillServiceInfo> autofillProviders =
-                AutofillServiceInfo.getAvailableServices(context, getUser());
+                AutofillServiceInfo.getAvailableServices(context, userId);
 
         final CredentialManager service = getCredentialProviderService();
         final List<CredentialProviderInfo> credManProviders = new ArrayList<>();
         if (service != null) {
             credManProviders.addAll(
                     service.getCredentialProviderServices(
-                            getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY));
+                            userId,
+                            CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN));
         }
 
-        final String selectedAutofillProvider = getSelectedAutofillProvider(context, getUser());
+        final String selectedAutofillProvider =
+                CredentialManagerPreferenceController
+                    .getSelectedAutofillProvider(context, userId, TAG);
         return CombinedProviderInfo.buildMergedList(
                 autofillProviders, credManProviders, selectedAutofillProvider);
     }
 
-    public static String getSelectedAutofillProvider(Context context, int userId) {
-        return Settings.Secure.getStringForUser(
-                context.getContentResolver(), AUTOFILL_SETTING, userId);
-    }
 
     protected List<DefaultAppInfo> getCandidates() {
         final Context context = getContext();
-        final List<CombinedProviderInfo> allProviders = getAllProviders();
+        final int userId = getUser();
+        final List<CombinedProviderInfo> allProviders = getAllProviders(userId);
         final List<DefaultAppInfo> candidates = new ArrayList<>();
 
         for (CombinedProviderInfo cpi : allProviders) {
             ServiceInfo brandingService = cpi.getBrandingService();
-            if (brandingService == null) {
+            ApplicationInfo appInfo = cpi.getApplicationInfo();
+
+            if (brandingService != null) {
                 candidates.add(
-                        new DefaultAppInfo(
-                                context,
-                                mPm,
-                                getUser(),
-                                cpi.getApplicationInfo(),
-                                cpi.getSettingsSubtitle(),
-                                true));
-            } else {
+                        new CredentialManagerDefaultAppInfo(
+                                context, mPm, userId, brandingService, cpi));
+            } else if (appInfo != null) {
                 candidates.add(
-                        new DefaultAppInfo(
-                                context,
-                                mPm,
-                                getUser(),
-                                brandingService,
-                                cpi.getSettingsSubtitle(),
-                                true));
+                        new CredentialManagerDefaultAppInfo(context, mPm, userId, appInfo, cpi));
             }
         }
 
@@ -265,10 +307,78 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    public void bindPreferenceExtra(
+            SelectorWithWidgetPreference pref,
+            String key,
+            CandidateInfo info,
+            String defaultKey,
+            String systemDefaultKey) {
+        super.bindPreferenceExtra(pref, key, info, defaultKey, systemDefaultKey);
+
+        if (!(info instanceof CredentialManagerDefaultAppInfo)) {
+            Log.e(TAG, "Candidate info should be a subclass of CredentialManagerDefaultAppInfo");
+            return;
+        }
+
+        if (!(pref instanceof RestrictedSelectorWithWidgetPreference)) {
+            Log.e(TAG, "Preference should be a subclass of RestrictedSelectorWithWidgetPreference");
+            return;
+        }
+
+        CredentialManagerDefaultAppInfo credmanAppInfo = (CredentialManagerDefaultAppInfo) info;
+        RestrictedSelectorWithWidgetPreference rp = (RestrictedSelectorWithWidgetPreference) pref;
+
+        // Apply policy transparency.
+        rp.setDisabledByAdmin(
+                credmanAppInfo
+                        .getCombinedProviderInfo()
+                        .getDeviceAdminRestrictions(getContext(), getUser()));
+    }
+
+    @Override
+    protected SelectorWithWidgetPreference createPreference() {
+        return new RestrictedSelectorWithWidgetPreference(getPrefContext());
+    }
+
+    /** This extends DefaultAppInfo with custom CredMan app info. */
+    public static class CredentialManagerDefaultAppInfo extends DefaultAppInfo {
+
+        private final CombinedProviderInfo mCombinedProviderInfo;
+
+        CredentialManagerDefaultAppInfo(
+                Context context,
+                PackageManager pm,
+                int uid,
+                PackageItemInfo info,
+                CombinedProviderInfo cpi) {
+            super(context, pm, uid, info, cpi.getSettingsSubtitle(), /* enabled= */ true);
+            mCombinedProviderInfo = cpi;
+        }
+
+        public @NonNull CombinedProviderInfo getCombinedProviderInfo() {
+            return mCombinedProviderInfo;
+        }
+    }
+
+    @Override
     protected String getDefaultKey() {
-        final CombinedProviderInfo topProvider =
-                CombinedProviderInfo.getTopProvider(getAllProviders());
-        return topProvider == null ? "" : topProvider.getApplicationInfo().packageName;
+        final int userId = getUser();
+        final @Nullable CombinedProviderInfo topProvider =
+                CombinedProviderInfo.getTopProvider(getAllProviders(userId));
+
+        if (topProvider != null) {
+            // Apply device admin restrictions to top provider.
+            if (topProvider.getDeviceAdminRestrictions(getContext(), userId) != null) {
+                return "";
+            }
+
+            ApplicationInfo appInfo = topProvider.getApplicationInfo();
+            if (appInfo != null) {
+                return appInfo.packageName;
+            }
+        }
+
+        return "";
     }
 
     @Override
@@ -278,14 +388,18 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             final String message =
                     getContext()
                             .getString(
-                                    R.string.credman_confirmation_message);
+                                    Flags.newSettingsUi()
+                                            ? R.string.credman_confirmation_message_new_ui
+                                            : R.string.credman_confirmation_message);
             return Html.fromHtml(message);
         }
         final CharSequence appName = appInfo.loadLabel();
         final String message =
                 getContext()
                         .getString(
-                                R.string.credman_autofill_confirmation_message,
+                                Flags.newSettingsUi()
+                                        ? R.string.credman_autofill_confirmation_message_new_ui
+                                        : R.string.credman_autofill_confirmation_message,
                                 Html.escapeHtml(appName));
         return Html.fromHtml(message);
     }
@@ -293,7 +407,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     @Override
     protected boolean setDefaultKey(String key) {
         // Get the list of providers and see if any match the key (package name).
-        final List<CombinedProviderInfo> allProviders = getAllProviders();
+        final List<CombinedProviderInfo> allProviders = getAllProviders(getUser());
         CombinedProviderInfo matchedProvider = null;
         for (CombinedProviderInfo cpi : allProviders) {
             if (cpi.getApplicationInfo().packageName.equals(key)) {
@@ -349,9 +463,13 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     private void setProviders(String autofillProvider, List<String> primaryCredManProviders) {
         if (TextUtils.isEmpty(autofillProvider)) {
             if (primaryCredManProviders.size() > 0) {
-                autofillProvider =
-                        CredentialManagerPreferenceController
-                                .AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER;
+                if (android.service.autofill.Flags.autofillCredmanDevIntegration()) {
+                    autofillProvider = getCredentialAutofillService(getContext(), TAG);
+                } else {
+                    autofillProvider =
+                            CredentialManagerPreferenceController
+                                    .AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER;
+                }
             }
         }
 
@@ -368,7 +486,8 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         final List<String> credManProviders = new ArrayList<>();
         for (CredentialProviderInfo cpi :
                 service.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY)) {
+                        getUser(),
+                        CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN)) {
 
             if (cpi.isEnabled() && !cpi.isPrimary()) {
                 credManProviders.add(cpi.getServiceInfo().getComponentName().flattenToString());

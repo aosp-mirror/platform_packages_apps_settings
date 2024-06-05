@@ -22,8 +22,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.icu.text.MeasureFormat;
-import android.icu.util.MeasureUnit;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -42,10 +40,12 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.datausage.lib.DataUsageFormatter;
+import com.android.settings.datausage.lib.NetworkTemplates;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -84,8 +84,8 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
     NetworkTemplate mNetworkTemplate;
     private Preference mBillingCycle;
     private Preference mDataWarning;
-    private SwitchPreference mEnableDataWarning;
-    private SwitchPreference mEnableDataLimit;
+    private TwoStatePreference mEnableDataWarning;
+    private TwoStatePreference mEnableDataLimit;
     private Preference mDataLimit;
     private DataUsageController mDataUsageController;
 
@@ -94,8 +94,8 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
             Preference billingCycle,
             Preference dataLimit,
             Preference dataWarning,
-            SwitchPreference enableLimit,
-            SwitchPreference enableWarning) {
+            TwoStatePreference enableLimit,
+            TwoStatePreference enableWarning) {
         services.mPolicyEditor = policyEditor;
         mBillingCycle = billingCycle;
         mDataLimit = dataLimit;
@@ -130,15 +130,14 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         }
 
         if (mNetworkTemplate == null) {
-            mNetworkTemplate = DataUsageUtils.getDefaultTemplate(context,
-                DataUsageUtils.getDefaultSubscriptionId(context));
+            mNetworkTemplate = NetworkTemplates.INSTANCE.getDefaultTemplate(context);
         }
 
         mBillingCycle = findPreference(KEY_BILLING_CYCLE);
-        mEnableDataWarning = (SwitchPreference) findPreference(KEY_SET_DATA_WARNING);
+        mEnableDataWarning = (TwoStatePreference) findPreference(KEY_SET_DATA_WARNING);
         mEnableDataWarning.setOnPreferenceChangeListener(this);
         mDataWarning = findPreference(KEY_DATA_WARNING);
-        mEnableDataLimit = (SwitchPreference) findPreference(KEY_SET_DATA_LIMIT);
+        mEnableDataLimit = (TwoStatePreference) findPreference(KEY_SET_DATA_LIMIT);
         mEnableDataLimit.setOnPreferenceChangeListener(this);
         mDataLimit = findPreference(KEY_DATA_LIMIT);
     }
@@ -322,14 +321,10 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
             final long bytes = isLimit ? editor.getPolicyLimitBytes(template)
                     : editor.getPolicyWarningBytes(template);
-            final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
 
-            final MeasureFormat formatter = MeasureFormat.getInstance(
-                    getContext().getResources().getConfiguration().locale,
-                    MeasureFormat.FormatWidth.SHORT);
             final String[] unitNames = new String[] {
-                formatter.getUnitDisplayName(MeasureUnit.MEGABYTE),
-                formatter.getUnitDisplayName(MeasureUnit.GIGABYTE)
+                    DataUsageFormatter.Companion.getBytesDisplayUnit(getResources(), MIB_IN_BYTES),
+                    DataUsageFormatter.Companion.getBytesDisplayUnit(getResources(), GIB_IN_BYTES),
             };
             final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                     getContext(), android.R.layout.simple_spinner_item, unitNames);

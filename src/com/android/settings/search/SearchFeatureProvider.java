@@ -18,7 +18,6 @@ package com.android.settings.search;
 
 import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
 
-import android.annotation.NonNull;
 import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Context;
@@ -30,6 +29,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
@@ -80,8 +81,9 @@ public interface SearchFeatureProvider {
     /**
      * Initializes the search toolbar.
      */
-    default void initSearchToolbar(FragmentActivity activity, Toolbar toolbar, int pageId) {
-        if (activity == null || toolbar == null) {
+    default void initSearchToolbar(@NonNull FragmentActivity activity, @Nullable View toolbar,
+            int pageId) {
+        if (toolbar == null) {
             return;
         }
 
@@ -98,10 +100,13 @@ public interface SearchFeatureProvider {
         //
         // Need to make the navigation icon non-clickable so that the entire card is clickable
         // and goes to the search UI. Also set the background to null so there's no ripple.
-        final View navView = toolbar.getNavigationView();
-        navView.setClickable(false);
-        navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
-        navView.setBackground(null);
+        if (toolbar instanceof Toolbar) {
+            final View navView = ((Toolbar) toolbar).getNavigationView();
+            navView.setClickable(false);
+            navView.setFocusable(false);
+            navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+            navView.setBackground(null);
+        }
 
         final Context context = activity.getApplicationContext();
         final Intent intent = buildSearchIntent(context, pageId)
@@ -136,10 +141,10 @@ public interface SearchFeatureProvider {
     /** Start the search activity. */
     private static void startSearchActivity(
             Context context, FragmentActivity activity, int pageId, Intent intent) {
-        FeatureFactory.getFactory(context).getSlicesFeatureProvider()
+        FeatureFactory.getFeatureFactory().getSlicesFeatureProvider()
                 .indexSliceDataAsync(context);
 
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .logSettingsTileClick(KEY_HOMEPAGE_SEARCH_BAR, pageId);
 
         final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();

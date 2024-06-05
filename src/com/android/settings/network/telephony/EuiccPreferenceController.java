@@ -24,6 +24,8 @@ import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
+import com.android.settings.Utils;
+
 /**
  * Preference controller for "Euicc preference"
  */
@@ -57,7 +59,8 @@ public class EuiccPreferenceController extends TelephonyBasePreferenceController
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            Intent intent = new Intent(EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS);
+            Intent intent = new Intent(EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS)
+                    .setPackage(Utils.PHONE_PACKAGE_NAME);
             mContext.startActivity(intent);
             return true;
         }

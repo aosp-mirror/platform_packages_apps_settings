@@ -99,8 +99,7 @@ public class NumberingSystemItemControllerTest {
         assertTrue(isCallingStartActivity);
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 mApplicationContext,
-                SettingsEnums.ACTION_CHOOSE_LANGUAGE_FOR_NUMBERS_PREFERENCES,
-                "I_am_the_key");
+                SettingsEnums.ACTION_CHOOSE_LANGUAGE_FOR_NUMBERS_PREFERENCES);
     }
 
     @Test
@@ -122,8 +121,7 @@ public class NumberingSystemItemControllerTest {
 
         verify(mFragment).setArguments(any());
         verify(mFeatureFactory.metricsFeatureProvider).action(
-                mApplicationContext, SettingsEnums.ACTION_SET_NUMBERS_PREFERENCES,
-                "test_key");
+                mApplicationContext, SettingsEnums.ACTION_SET_NUMBERS_PREFERENCES);
     }
 
     @Test

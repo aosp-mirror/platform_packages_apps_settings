@@ -58,9 +58,7 @@
         android:key="default_apps"
         android:title="@string/app_default_dashboard_title"
         android:order="-996"
-        settings:controller="com.android.settings.applications.DefaultAppsPreferenceController">
-        <intent android:action="android.settings.MANAGE_DEFAULT_APPS_SETTINGS"/>
-    </Preference>
+        settings:controller="com.android.settings.applications.DefaultAppsPreferenceController"/>
 
     <Preference
         android:key="cloned_apps"
@@ -72,7 +70,9 @@
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$ClonedAppsListActivity"/>
-        <intent android:action="android.settings.MANAGE_CLONED_APPS_SETTINGS"/>
+        <intent
+            android:action="android.settings.MANAGE_CLONED_APPS_SETTINGS"
+            android:targetPackage="${applicationId}"/>
     </Preference>
 
     <PreferenceCategory
@@ -85,9 +85,7 @@
         android:summary="@string/summary_placeholder"
         android:order="15"
         settings:keywords="app_hibernation_key"
-        settings:controller="com.android.settings.applications.HibernatedAppsPreferenceController">
-        <intent android:action="android.intent.action.MANAGE_UNUSED_APPS"/>
-    </Preference>
+        settings:controller="com.android.settings.applications.HibernatedAppsPreferenceController"/>
 
     <Preference
         android:key="app_battery_usage"
@@ -105,7 +103,25 @@
         android:key="special_access"
         android:fragment="com.android.settings.applications.specialaccess.SpecialAccessSettings"
         android:title="@string/special_access"
-        android:order="20"
-        settings:controller="com.android.settings.applications.SpecialAppAccessPreferenceController"/>
+        android:order="20"/>
+
+    <PreferenceCategory
+        android:key="advanced_category"
+        android:title="@string/advanced_apps"
+        android:order="21"
+        settings:searchable="false">
+
+        <Preference
+            android:key="aspect_ratio_apps"
+            android:title="@string/aspect_ratio_experimental_title"
+            android:summary="@string/summary_placeholder"
+            android:order="22"
+            settings:controller="com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+            <extra android:name="classname"
+                   android:value="com.android.settings.Settings$UserAspectRatioAppListActivity"/>
+            <intent android:action="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS"/>
+        </Preference>
+    </PreferenceCategory>
 
 </PreferenceScreen>

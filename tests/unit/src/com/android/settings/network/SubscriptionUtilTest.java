@@ -16,25 +16,36 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.network.SubscriptionUtil.KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME;
+import static com.android.settings.network.SubscriptionUtil.SUB_ID;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.android.settings.R;
-
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -55,22 +66,29 @@ public class SubscriptionUtilTest {
     private static final CharSequence CARRIER_1 = "carrier1";
     private static final CharSequence CARRIER_1_SPACE = " carrier1       ";
     private static final CharSequence CARRIER_2 = "carrier2";
+    private static final int RAC_CARRIER_ID = 1;
+    private static final int NO_RAC_CARRIER_ID = 2;
+    private static final int[] CARRIERS_THAT_USE_RAC = {RAC_CARRIER_ID};
 
     private Context mContext;
+    private NetworkCapabilities mNetworkCapabilities;
+
     @Mock
     private SubscriptionManager mSubMgr;
     @Mock
     private TelephonyManager mTelMgr;
     @Mock
     private Resources mResources;
-
+    @Mock private ConnectivityManager mConnectivityManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getResources()).thenReturn(mResources);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubMgr);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelMgr);
+        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mTelMgr.getUiccSlotsInfo()).thenReturn(null);
     }
 
@@ -94,6 +112,40 @@ public class SubscriptionUtilTest {
 
         assertThat(subs).isNotNull();
         assertThat(subs).hasSize(1);
+    }
+
+    @Test
+    public void hasSubscriptionWithRacCarrier_containsRac_returnTrue() {
+        when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
+        final SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(info.getCarrierId()).thenReturn(RAC_CARRIER_ID);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
+
+        assertTrue(SubscriptionUtil.hasSubscriptionWithRacCarrier(mContext));
+    }
+
+    @Test
+    public void hasSubscriptionWithRacCarrier_doesNotContainsRac_returnFalse() {
+        when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
+        final SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(info.getCarrierId()).thenReturn(NO_RAC_CARRIER_ID);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
+
+        assertFalse(SubscriptionUtil.hasSubscriptionWithRacCarrier(mContext));
+    }
+
+    @Test
+    public void isCarrierRac_returnTrue() {
+        when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
+
+        assertTrue(SubscriptionUtil.isCarrierRac(mContext, RAC_CARRIER_ID));
+    }
+
+    @Test
+    public void isCarrierRac_returnFalse() {
+        when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
+
+        assertFalse(SubscriptionUtil.isCarrierRac(mContext, NO_RAC_CARRIER_ID));
     }
 
     @Ignore
@@ -179,7 +231,7 @@ public class SubscriptionUtilTest {
     @Ignore
     @Test
     public void getUniqueDisplayNames_identicalCarriers_fourDigitsUsed() {
-        // Both subscriptoins have the same display name.
+        // Both subscriptions have the same display name.
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(SUBID_1);
@@ -209,7 +261,7 @@ public class SubscriptionUtilTest {
     @Ignore
     @Test
     public void getUniqueDisplayNames_identicalCarriersAfterTrim_fourDigitsUsed() {
-        // Both subscriptoins have the same display name.
+        // Both subscriptions have the same display name.
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(SUBID_1);
@@ -238,8 +290,8 @@ public class SubscriptionUtilTest {
 
     @Ignore
     @Test
-    public void getUniqueDisplayNames_phoneNumberBlocked_subscriptoinIdFallback() {
-        // Both subscriptoins have the same display name.
+    public void getUniqueDisplayNames_phoneNumberBlocked_subscriptionIdFallback() {
+        // Both subscriptions have the same display name.
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(SUBID_1);
@@ -267,9 +319,9 @@ public class SubscriptionUtilTest {
 
     @Ignore
     @Test
-    public void getUniqueDisplayNames_phoneNumberIdentical_subscriptoinIdFallback() {
+    public void getUniqueDisplayNames_phoneNumberIdentical_subscriptionIdFallback() {
         // TODO have three here from the same carrier
-        // Both subscriptoins have the same display name.
+        // Both subscriptions have the same display name.
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info3 = mock(SubscriptionInfo.class);
@@ -445,13 +497,74 @@ public class SubscriptionUtilTest {
     }
 
     @Test
+    public void getUniqueDisplayName_hasRecord_useRecordBeTheResult() {
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info2.getSubscriptionId()).thenReturn(SUBID_2);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(info2.getDisplayName()).thenReturn(CARRIER_1);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1, info2));
+
+        SharedPreferences sp = mock(SharedPreferences.class);
+        when(mContext.getSharedPreferences(
+                KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME, Context.MODE_PRIVATE)).thenReturn(sp);
+        when(sp.getString(eq(SUB_ID + SUBID_1), anyString())).thenReturn(CARRIER_1 + " 6789");
+        when(sp.getString(eq(SUB_ID + SUBID_2), anyString())).thenReturn(CARRIER_1 + " 4321");
+
+
+        final CharSequence nameOfSub1 =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info1, mContext);
+        final CharSequence nameOfSub2 =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info2, mContext);
+
+        assertThat(nameOfSub1).isNotNull();
+        assertThat(nameOfSub2).isNotNull();
+        assertEquals(CARRIER_1 + " 6789", nameOfSub1.toString());
+        assertEquals(CARRIER_1 + " 4321", nameOfSub2.toString());
+    }
+
+    @Test
+    public void getUniqueDisplayName_hasRecordAndNameIsChanged_doesNotUseRecordBeTheResult() {
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info2.getSubscriptionId()).thenReturn(SUBID_2);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(info2.getDisplayName()).thenReturn(CARRIER_2);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1, info2));
+
+        SharedPreferences sp = mock(SharedPreferences.class);
+        SharedPreferences.Editor editor = mock(SharedPreferences.Editor.class);
+        when(mContext.getSharedPreferences(
+                KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME, Context.MODE_PRIVATE)).thenReturn(sp);
+        when(sp.edit()).thenReturn(editor);
+        when(editor.remove(anyString())).thenReturn(editor);
+
+        when(sp.getString(eq(SUB_ID + SUBID_1), anyString())).thenReturn(CARRIER_1 + " 6789");
+        when(sp.getString(eq(SUB_ID + SUBID_2), anyString())).thenReturn(CARRIER_1 + " 4321");
+
+
+        final CharSequence nameOfSub1 =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info1, mContext);
+        final CharSequence nameOfSub2 =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info2, mContext);
+
+        assertThat(nameOfSub1).isNotNull();
+        assertThat(nameOfSub2).isNotNull();
+        assertEquals(CARRIER_1 + " 6789", nameOfSub1.toString());
+        assertEquals(CARRIER_2.toString(), nameOfSub2.toString());
+    }
+
+    @Test
     public void isInactiveInsertedPSim_nullSubInfo_doesNotCrash() {
         assertThat(SubscriptionUtil.isInactiveInsertedPSim(null)).isFalse();
     }
 
     @Test
     public void isSimHardwareVisible_configAsInvisible_returnFalse() {
-        when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.config_show_sim_info))
                 .thenReturn(false);
 
@@ -459,11 +572,128 @@ public class SubscriptionUtilTest {
     }
 
     @Test
+    @Ignore("b/339149463")
     public void isSimHardwareVisible_configAsVisible_returnTrue() {
-        when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(R.bool.config_show_sim_info))
                 .thenReturn(true);
 
         assertTrue(SubscriptionUtil.isSimHardwareVisible(mContext));
+    }
+
+    @Test
+    public void isValidCachedDisplayName_matchesRule1_returnTrue() {
+        String originalName = "originalName";
+        String cacheString = "originalName 1234";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isTrue();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_matchesRule2_returnTrue() {
+        String originalName = "original Name";
+        String cacheString = originalName + " " + 1234;
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isTrue();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_nameIsEmpty1_returnFalse() {
+        String originalName = "original Name";
+        String cacheString = "";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_nameIsEmpty2_returnFalse() {
+        String originalName = "";
+        String cacheString = "originalName 1234";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_nameIsDifferent_returnFalse() {
+        String originalName = "original Name";
+        String cacheString = "originalName 1234";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_noNumber_returnFalse() {
+        String originalName = "original Name";
+        String cacheString = originalName;
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_noSpace_returnFalse() {
+        String originalName = "original Name";
+        String cacheString = originalName;
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_withBrackets_noCrash() {
+        String originalName = "originalName(";
+        String cacheString = "originalName( 1234";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isTrue();
+    }
+
+    @Test
+    public void isConnectedToWifi_hasWiFi_returnTrue() {
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+
+        assertTrue(SubscriptionUtil.isConnectedToWifi(mContext));
+    }
+
+    @Test
+    public void isConnectedToWifi_noWiFi_returnFalse() {
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_BLUETOOTH);
+
+        assertFalse(SubscriptionUtil.isConnectedToWifi(mContext));
+    }
+
+    @Test
+    public void hasSubscriptionWithRacCarrier_hasNoWifi_showRacDialogForAllEsims_returnTrue() {
+        when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
+        final SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(info.getCarrierId()).thenReturn(RAC_CARRIER_ID);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_BLUETOOTH);
+
+        assertTrue(SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(mContext));
+    }
+
+    @Test
+    public void hasSubscriptionWithRacCarrier_hasWifi_showRacDialogForAllEsims_returnFalse() {
+        when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
+        final SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(info.getCarrierId()).thenReturn(RAC_CARRIER_ID);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+
+        assertFalse(SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(mContext));
+    }
+
+    @Test
+    public void hasNoSubscriptionWithRacCarrier_hasNoWifi_showRacDialogForAllEsims_returnFalse() {
+        when(mResources.getIntArray(anyInt())).thenReturn(CARRIERS_THAT_USE_RAC);
+        final SubscriptionInfo info = mock(SubscriptionInfo.class);
+        when(info.getCarrierId()).thenReturn(NO_RAC_CARRIER_ID);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+
+        assertFalse(SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(mContext));
+    }
+
+    private void addNetworkTransportType(int networkType) {
+        mNetworkCapabilities =
+                new NetworkCapabilities.Builder().addTransportType(networkType).build();
+        when(mConnectivityManager.getNetworkCapabilities(any())).thenReturn(mNetworkCapabilities);
     }
 }

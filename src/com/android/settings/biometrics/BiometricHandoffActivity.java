@@ -56,7 +56,7 @@ public class BiometricHandoffActivity extends BiometricEnrollBase {
                     .setText(R.string.biometric_settings_hand_back_to_guardian_ok)
                     .setButtonType(FooterButton.ButtonType.NEXT)
                     .setListener(this::onNextButtonClick)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mPrimaryFooterButton;

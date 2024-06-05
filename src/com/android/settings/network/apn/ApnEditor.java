@@ -48,7 +48,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
@@ -119,7 +119,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     @VisibleForTesting
     ListPreference mRoamingProtocol;
     @VisibleForTesting
-    SwitchPreference mCarrierEnabled;
+    TwoStatePreference mCarrierEnabled;
     @VisibleForTesting
     MultiSelectListPreference mBearerMulti;
     @VisibleForTesting
@@ -435,15 +435,20 @@ public class ApnEditor extends SettingsPreferenceFragment
             return false;
         }
 
-        if (hasAllApns(apnTypesArray1) || TextUtils.isEmpty(apnTypes2)) {
+        final String[] apnTypesArray1LowerCase = new String[apnTypesArray1.length];
+        for (int i = 0; i < apnTypesArray1.length; i++) {
+            apnTypesArray1LowerCase[i] = apnTypesArray1[i].toLowerCase();
+        }
+
+        if (hasAllApns(apnTypesArray1LowerCase) || TextUtils.isEmpty(apnTypes2)) {
             return true;
         }
 
-        final List apnTypesList1 = Arrays.asList(apnTypesArray1);
+        final List apnTypesList1 = Arrays.asList(apnTypesArray1LowerCase);
         final String[] apnTypesArray2 = apnTypes2.split(",");
 
         for (String apn : apnTypesArray2) {
-            if (apnTypesList1.contains(apn.trim())) {
+            if (apnTypesList1.contains(apn.trim().toLowerCase())) {
                 Log.d(TAG, "apnTypesMatch: true because match found for " + apn.trim());
                 return true;
             }
@@ -1332,7 +1337,7 @@ public class ApnEditor extends SettingsPreferenceFragment
         mAuthType = (ListPreference) findPreference(KEY_AUTH_TYPE);
         mProtocol = (ListPreference) findPreference(KEY_PROTOCOL);
         mRoamingProtocol = (ListPreference) findPreference(KEY_ROAMING_PROTOCOL);
-        mCarrierEnabled = (SwitchPreference) findPreference(KEY_CARRIER_ENABLED);
+        mCarrierEnabled = (TwoStatePreference) findPreference(KEY_CARRIER_ENABLED);
         mBearerMulti = (MultiSelectListPreference) findPreference(KEY_BEARER_MULTI);
         mMvnoType = (ListPreference) findPreference(KEY_MVNO_TYPE);
         mMvnoMatchData = (EditTextPreference) findPreference("mvno_match_data");
@@ -1446,8 +1451,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                 null /* selection */,
                 null /* selectionArgs */,
                 null /* sortOrder */)) {
-            if (cursor != null) {
-                cursor.moveToFirst();
+            if (cursor != null && cursor.moveToFirst()) {
                 apnData = new ApnData(uri, cursor);
             }
         }

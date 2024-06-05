@@ -16,12 +16,13 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_REAR;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
 
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
-import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.ADD_FINGERPRINT_REQUEST;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.CHOOSE_LOCK_GENERIC_REQUEST;
-import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.KEY_FINGERPRINT_ADD;
+import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.KEY_REQUIRE_SCREEN_ON_TO_AUTH;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -32,28 +33,32 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
+import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -61,13 +66,16 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -76,11 +84,15 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowSettingsPreferenceFragment.class, ShadowUtils.class, ShadowFragment.class,
         ShadowUserManager.class, ShadowLockPatternUtils.class})
 public class FingerprintSettingsFragmentTest {
+    private static final int PRIMARY_USER_ID = 0;
+    private static final int GUEST_USER_ID = 10;
+
     private FingerprintSettingsFragment mFragment;
     private Context mContext;
     private FragmentActivity mActivity;
@@ -92,45 +104,31 @@ public class FingerprintSettingsFragmentTest {
     @Mock
     private FragmentTransaction mFragmentTransaction;
 
+    @Captor
+    private ArgumentCaptor<CancellationSignal> mCancellationSignalArgumentCaptor =
+            ArgumentCaptor.forClass(CancellationSignal.class);
+    @Captor
+    private ArgumentCaptor<FingerprintManager.AuthenticationCallback>
+            mAuthenticationCallbackArgumentCaptor = ArgumentCaptor.forClass(
+            FingerprintManager.AuthenticationCallback.class);
+
+    private FingerprintAuthenticateSidecar mFingerprintAuthenticateSidecar;
+
     @Before
     public void setUp() {
-        doReturn(true).when(mFingerprintManager).isHardwareDetected();
         ShadowUtils.setFingerprintManager(mFingerprintManager);
         FakeFeatureFactory.setupForTest();
+
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mFragment = spy(new FingerprintSettingsFragment());
+        doReturn(mContext).when(mFragment).getContext();
+
+        doReturn(true).when(mFingerprintManager).isHardwareDetected();
     }
 
     @After
     public void tearDown() {
         ShadowUtils.reset();
-    }
-
-    @Test
-    public void testAddFingerprint_inFullScreen_noDialog() {
-        setUpFragment(false);
-        // Click "Add Fingerprint"
-        final Preference preference = new Preference(mContext);
-        preference.setKey(KEY_FINGERPRINT_ADD);
-        mFragment.onPreferenceTreeClick(preference);
-
-        verify(mFragment).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
-        verify(mFragmentTransaction, never()).add(any(),
-                eq(BiometricsSplitScreenDialog.class.getName()));
-
-    }
-
-    @Test
-    public void testAddFingerprint_inMultiWindow_showsDialog() {
-        setUpFragment(false);
-
-        doReturn(true).when(mActivity).isInMultiWindowMode();
-
-        // Click "Add Fingerprint"
-        final Preference preference = new Preference(mContext);
-        preference.setKey(KEY_FINGERPRINT_ADD);
-        mFragment.onPreferenceTreeClick(preference);
-
-        verify(mFragment, times(0)).startActivityForResult(any(), eq(ADD_FINGERPRINT_REQUEST));
-        verify(mFragmentTransaction).add(any(), eq(BiometricsSplitScreenDialog.class.getName()));
     }
 
     @Test
@@ -146,19 +144,71 @@ public class FingerprintSettingsFragmentTest {
                 false)).isTrue();
     }
 
+    // Test the case when FingerprintAuthenticateSidecar receives an error callback from the
+    // framework or from another authentication client. The cancellation signal should not be set
+    // to null because there may exist a running authentication client.
+    // The signal can only be cancelled from the caller in FingerprintSettings.
+    @Test
+    public void testCancellationSignalLifeCycle() {
+        setUpFragment(false);
+
+
+        doNothing().when(mFingerprintManager).authenticate(any(),
+                mCancellationSignalArgumentCaptor.capture(),
+                mAuthenticationCallbackArgumentCaptor.capture(), any(), anyInt());
+
+        mFingerprintAuthenticateSidecar.startAuthentication(1);
+
+        assertThat(mAuthenticationCallbackArgumentCaptor.getValue()).isNotNull();
+        assertThat(mCancellationSignalArgumentCaptor.getValue()).isNotNull();
+
+        // Authentication error callback should not cancel the signal.
+        mAuthenticationCallbackArgumentCaptor.getValue().onAuthenticationError(0, "");
+        assertThat(mFingerprintAuthenticateSidecar.isCancelled()).isFalse();
+
+        // The signal should be cancelled when caller stops the authentication.
+        mFingerprintAuthenticateSidecar.stopAuthentication();
+        assertThat(mFingerprintAuthenticateSidecar.isCancelled()).isTrue();
+    }
+
+    @Ignore("b/313342682")
+    @Test
+    public void testGuestUserRequireScreenOnToAuth() {
+        Settings.Secure.putIntForUser(
+                mContext.getContentResolver(),
+                Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
+                0,
+                UserHandle.of(PRIMARY_USER_ID).getIdentifier());
+
+        Settings.Secure.putIntForUser(
+                mContext.getContentResolver(),
+                Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
+                1,
+                UserHandle.of(GUEST_USER_ID).getIdentifier());
+
+        setUpFragment(false, GUEST_USER_ID, TYPE_POWER_BUTTON);
+
+        final RestrictedSwitchPreference requireScreenOnToAuthPreference = mFragment.findPreference(
+                KEY_REQUIRE_SCREEN_ON_TO_AUTH);
+        assertThat(requireScreenOnToAuthPreference.isChecked()).isTrue();
+    }
+
     private void setUpFragment(boolean showChooseLock) {
+        setUpFragment(showChooseLock, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL);
+    }
+
+    private void setUpFragment(boolean showChooseLock, int userId,
+            @FingerprintSensorProperties.SensorType int sensorType) {
+        ShadowUserManager.getShadow().addProfile(new UserInfo(userId, "", 0));
+
         Intent intent = new Intent();
         if (!showChooseLock) {
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L);
         }
-
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class, intent).get());
-        mContext = spy(ApplicationProvider.getApplicationContext());
-
-        mFragment = spy(new FingerprintSettingsFragment());
         doReturn(mActivity).when(mFragment).getActivity();
-        doReturn(mContext).when(mFragment).getContext();
 
         FragmentManager fragmentManager = mock(FragmentManager.class);
         doReturn(mFragmentTransaction).when(fragmentManager).beginTransaction();
@@ -166,9 +216,14 @@ public class FingerprintSettingsFragmentTest {
         doReturn(fragmentManager).when(mFragment).getFragmentManager();
         doReturn(fragmentManager).when(mActivity).getSupportFragmentManager();
 
+        mFingerprintAuthenticateSidecar = new FingerprintAuthenticateSidecar();
+        mFingerprintAuthenticateSidecar.setFingerprintManager(mFingerprintManager);
+        doReturn(mFingerprintAuthenticateSidecar).when(fragmentManager).findFragmentByTag(
+                "authenticate_sidecar");
+
         doNothing().when(mFragment).startActivityForResult(any(Intent.class), anyInt());
 
-        setSensor();
+        setSensor(sensorType);
 
         // Start fragment
         mFragment.onAttach(mContext);
@@ -177,15 +232,46 @@ public class FingerprintSettingsFragmentTest {
         mFragment.onResume();
     }
 
-    private void setSensor() {
+    @Ignore("b/315519360")
+    @Test
+    public void testFragmentVisibleWhenNoHardwareDetected() {
+        doReturn(false).when(mFingerprintManager).isHardwareDetected();
+        setUpFragment(false);
+        assertThat(mFragment.isVisible()).isTrue();
+    }
+
+    private void setSensor(@FingerprintSensorProperties.SensorType int sensorType) {
         final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
         props.add(new FingerprintSensorPropertiesInternal(
                 0 /* sensorId */,
                 SensorProperties.STRENGTH_STRONG,
                 1 /* maxEnrollmentsPerUser */,
                 new ArrayList<ComponentInfoInternal>(),
-                TYPE_UDFPS_OPTICAL,
+                sensorType,
                 true /* resetLockoutRequiresHardwareAuthToken */));
         doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
+    }
+
+    @Test
+    public void testAuthOnFragmentSetup() {
+        doReturn(List.of(new Fingerprint("Finger 1", 1, 2, 3)))
+                .when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, 1, TYPE_REAR);
+
+        verify(mFingerprintManager).authenticate(any(), any(),
+                any(), any(), anyInt());
+    }
+
+    @Test
+    public void testErrorCancelledRestartsAuth() {
+        doReturn(List.of(new Fingerprint("Finger 1", 1, 2, 3)))
+                .when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, 1, TYPE_REAR);
+
+        // When we receive a cancel, we should restart auth.
+        mFragment.handleError(FingerprintManager.FINGERPRINT_ERROR_CANCELED, "blah");
+
+        verify(mFingerprintManager, times(2)).authenticate(any(), any(),
+                any(), any(), anyInt());
     }
 }

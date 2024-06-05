@@ -22,24 +22,34 @@
     settings:keywords="@string/keywords_display">
 
     <PreferenceCategory
-        android:title="@string/category_name_brightness">
+        android:title="@string/category_name_brightness"
+        android:order="-200">
 
         <com.android.settingslib.RestrictedPreference
-            android:key="brightness"
+            android:key="@string/preference_key_brightness_level"
             android:title="@string/brightness"
             settings:keywords="@string/keywords_display_brightness_level"
             settings:useAdminDisabledSummary="true"
             settings:userRestriction="no_config_brightness"/>
 
         <com.android.settingslib.PrimarySwitchPreference
-            android:key="auto_brightness_entry"
+            android:key="@string/preference_key_auto_brightness"
             android:title="@string/auto_brightness_title"
             android:fragment="com.android.settings.display.AutoBrightnessSettings"
-            settings:controller="com.android.settings.display.AutoBrightnessPreferenceController"/>
+            settings:useAdminDisabledSummary="true"
+            settings:userRestriction="no_config_brightness"
+            settings:controller="com.android.settings.display.AutoBrightnessPreferenceController" />
+
+        <SwitchPreferenceCompat
+            android:key="even_dimmer_activated"
+            android:title="@string/even_dimmer_display_title"
+            android:summary="@string/even_dimmer_display_summary"
+            settings:controller="com.android.settings.display.EvenDimmerPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/category_name_lock_display">
+        android:title="@string/category_name_lock_display"
+        android:order="-190">
 
         <Preference
             android:key="lockscreen_from_display_settings"
@@ -47,6 +57,13 @@
             android:fragment="com.android.settings.security.LockscreenDashboardFragment"
             settings:keywords="@string/keywords_ambient_display_screen"
             settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController"/>
+
+        <com.android.settingslib.RestrictedPreference
+            android:fragment="com.android.settings.display.FoldLockBehaviorSettings"
+            android:key="fold_lock_behavior"
+            android:title="@string/fold_lock_behavior_title"
+            settings:controller="com.android.settings.display.FoldLockBehaviorPreferenceController"
+            settings:keywords="@string/keywords_fold_lock_behavior" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="screen_timeout"
@@ -57,7 +74,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/category_name_appearance">
+        android:title="@string/category_name_appearance"
+        android:order="-180">
 
         <com.android.settings.display.darkmode.DarkModePreference
             android:key="dark_ui_mode"
@@ -77,7 +95,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/category_name_color">
+        android:title="@string/category_name_color"
+        android:order="-170">
 
         <com.android.settingslib.PrimarySwitchPreference
             android:key="night_display"
@@ -92,16 +111,25 @@
             android:fragment="com.android.settings.display.ColorModePreferenceFragment"
             settings:controller="com.android.settings.display.ColorModePreferenceController"
             settings:keywords="@string/keywords_color_mode"/>
+
+        <Preference
+            android:fragment="com.android.settings.display.ColorContrastFragment"
+            android:key="color_contrast"
+            android:persistent="false"
+            android:title="@string/accessibility_color_contrast_title"
+            settings:controller="com.android.settings.display.ContrastPreferenceController"
+            settings:searchable="true"/>
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/category_name_display_controls">
+        android:title="@string/category_name_display_controls"
+        android:order="-150">
 
         <!--
             Standard auto-rotation preference that will be shown when device state based
             auto-rotation settings are NOT available.
           -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="auto_rotate"
             android:title="@string/accelerometer_title"
             settings:keywords="@string/keywords_auto_rotate"
@@ -125,19 +153,19 @@
             settings:keywords="@string/keywords_screen_resolution"
             settings:controller="com.android.settings.display.ScreenResolutionController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="display_white_balance"
             android:title="@string/display_white_balance_title"
             android:summary="@string/display_white_balance_summary"
             settings:controller="com.android.settings.display.DisplayWhiteBalancePreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="peak_refresh_rate"
             android:title="@string/peak_refresh_rate_title"
             android:summary="@string/peak_refresh_rate_summary"
             settings:controller="com.android.settings.display.PeakRefreshRatePreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="show_operator_name"
             android:title="@string/show_operator_name_title"
             android:summary="@string/show_operator_name_summary"/>
@@ -149,16 +177,16 @@
             settings:keywords="@string/keywords_screensaver"
             settings:controller="com.android.settings.display.ScreenSaverPreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="camera_gesture"
             android:title="@string/camera_gesture_title"
             android:summary="@string/camera_gesture_desc"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="lift_to_wake"
             android:title="@string/lift_to_wake_title"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="tap_to_wake"
             android:title="@string/tap_to_wake"
             android:summary="@string/tap_to_wake_summary"/>

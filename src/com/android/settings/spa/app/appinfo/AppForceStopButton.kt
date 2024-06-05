@@ -19,11 +19,14 @@ package com.android.settings.spa.app.appinfo
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
 import android.os.UserManager
+import androidx.annotation.VisibleForTesting
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.WarningAmber
+import androidx.compose.material.icons.outlined.Report
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin
@@ -32,38 +35,25 @@ import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
 import com.android.settingslib.spa.widget.dialog.AlertDialogPresenter
 import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
-import com.android.settingslib.spaprivileged.model.app.hasFlag
-import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.userId
 
 class AppForceStopButton(
     private val packageInfoPresenter: PackageInfoPresenter,
+    private val appForceStopRepository: AppForceStopRepository =
+        AppForceStopRepository(packageInfoPresenter),
 ) {
     private val context = packageInfoPresenter.context
-    private val appButtonRepository = AppButtonRepository(context)
     private val packageManager = context.packageManager
 
     @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton {
         val dialogPresenter = confirmDialogPresenter()
         return ActionButton(
-            text = context.getString(R.string.force_stop),
-            imageVector = Icons.Outlined.WarningAmber,
-            enabled = isForceStopButtonEnable(app),
+            text = stringResource(R.string.force_stop),
+            imageVector = Icons.Outlined.Report,
+            enabled = remember(app) { appForceStopRepository.canForceStopFlow() }
+                .collectAsStateWithLifecycle(false).value,
         ) { onForceStopButtonClicked(app, dialogPresenter) }
-    }
-
-    /**
-     * Gets whether a package can be force stopped.
-     */
-    private fun isForceStopButtonEnable(app: ApplicationInfo): Boolean = when {
-        // User can't force stop device admin.
-        app.isActiveAdmin(context) -> false
-
-        appButtonRepository.isDisallowControl(app) -> false
-
-        // If the app isn't explicitly stopped, then always show the force stop button.
-        else -> !app.hasFlag(ApplicationInfo.FLAG_STOPPED)
     }
 
     private fun onForceStopButtonClicked(
@@ -78,9 +68,10 @@ class AppForceStopButton(
         dialogPresenter.open()
     }
 
-    private fun getAdminRestriction(app: ApplicationInfo): EnforcedAdmin? = when {
+    @VisibleForTesting
+    fun getAdminRestriction(app: ApplicationInfo): EnforcedAdmin? = when {
         packageManager.isPackageStateProtected(app.packageName, app.userId) -> {
-            RestrictedLockUtilsInternal.getDeviceOwner(context)
+            RestrictedLockUtilsInternal.getDeviceOwner(context) ?: EnforcedAdmin()
         }
 
         else -> RestrictedLockUtilsInternal.checkIfRestrictionEnforced(

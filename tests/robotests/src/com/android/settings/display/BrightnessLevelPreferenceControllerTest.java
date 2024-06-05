@@ -21,6 +21,7 @@ import static android.content.Context.POWER_SERVICE;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,17 +33,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.display.BrightnessInfo;
 import android.os.PowerManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings.System;
 import android.view.Display;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
+import com.android.settings.accessibility.Flags;
 import com.android.settings.core.SettingsBaseActivity;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -57,6 +63,9 @@ import org.robolectric.shadows.ShadowContentResolver;
 
 @RunWith(RobolectricTestRunner.class)
 public class BrightnessLevelPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private PowerManager mPowerManager;
@@ -85,13 +94,27 @@ public class BrightnessLevelPreferenceControllerTest {
         ShadowApplication.getInstance().setSystemService(POWER_SERVICE,
                 mPowerManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        when(mContext.getDisplay()).thenReturn(mDisplay);
+        doReturn(mDisplay).when(mContext).getDisplay();
         mController = spy(new BrightnessLevelPreferenceController(mContext, null));
     }
 
     @Test
-    public void isAvailable_shouldAlwaysReturnTrue() {
+    public void isAvailable_shouldAlwaysReturnTrueWhenNotInSetupWizard() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
+    public void isAvailable_inSetupWizardAndFlagOn_shouldReturnTrue() {
+        mController.setInSetupWizard(true);
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
+    public void isAvailable_inSetupWizardAndFlagOff_shouldReturnFalse() {
+        mController.setInSetupWizard(true);
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -165,19 +188,18 @@ public class BrightnessLevelPreferenceControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_transitionTypeNone_shouldPassToNextActivity() {
-        final Activity activity = (Activity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(Activity.class)).get();
-
+        final Activity activity = Robolectric.setupActivity(Activity.class);
         final BrightnessLevelPreferenceController controller =
                 new BrightnessLevelPreferenceController(activity, null);
         final ShadowActivity shadowActivity = shadowOf(activity);
-        when(mPreference.getKey()).thenReturn("brightness");
+
+        String preferenceKey = mContext.getString(R.string.preference_key_brightness_level);
+        when(mPreference.getKey()).thenReturn(preferenceKey);
 
         controller.handlePreferenceTreeClick(mPreference);
 
         final Intent intent = shadowActivity.getNextStartedActivity();
         assertThat(intent.getIntExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE, 0))
                 .isEqualTo(SettingsTransitionHelper.TransitionType.TRANSITION_NONE);
-
     }
 }

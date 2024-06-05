@@ -20,13 +20,13 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 /**
  *  This widget with enabled filterTouchesWhenObscured attribute use to replace
- *  the {@link SwitchPreference} in the Special access app pages for security.
+ *  the {@link SwitchPreferenceCompat} in the Special access app pages for security.
  */
-public class FilterTouchesSwitchPreference extends SwitchPreference {
+public class FilterTouchesSwitchPreference extends SwitchPreferenceCompat {
 
     public FilterTouchesSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
@@ -48,7 +48,7 @@ public class FilterTouchesSwitchPreference extends SwitchPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        final View switchView = holder.findViewById(android.R.id.switch_widget);
+        final View switchView = holder.findViewById(androidx.preference.R.id.switchWidget);
         if (switchView != null) {
             final View rootView = switchView.getRootView();
             rootView.setFilterTouchesWhenObscured(true);

@@ -78,8 +78,7 @@ public class ConnectedUsbDeviceUpdater {
         mUsbBackend = usbBackend;
         mUsbReceiver = new UsbConnectionBroadcastReceiver(context,
                 mUsbConnectionListener, mUsbBackend);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(mFragment.getContext())
-                .getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     public void registerCallback() {

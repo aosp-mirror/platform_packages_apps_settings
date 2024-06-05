@@ -16,28 +16,35 @@
 
 package com.android.settings.inputmethod;
 
+import static android.hardware.input.KeyboardLayoutSelectionResult.LAYOUT_SELECTION_CRITERIA_USER;
+import static android.hardware.input.KeyboardLayoutSelectionResult.LAYOUT_SELECTION_CRITERIA_DEVICE;
+import static android.hardware.input.KeyboardLayoutSelectionResult.LAYOUT_SELECTION_CRITERIA_VIRTUAL_KEYBOARD;
+
+import android.annotation.NonNull;
+import android.annotation.Nullable;
+import android.annotation.SuppressLint;
+import android.annotation.UserIdInt;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
+import android.hardware.input.KeyboardLayoutSelectionResult;
+import android.hardware.input.KeyboardLayoutSelectionResult.LayoutSelectionCriteria;
+import android.os.UserHandle;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.android.settings.R;
+
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Utilities of keyboard settings
  */
 public class NewKeyboardSettingsUtils {
-
-    /**
-     * Record the class name of the intent sender for metrics.
-     */
-    public static final String EXTRA_INTENT_FROM =
-            "com.android.settings.inputmethod.EXTRA_INTENT_FROM";
 
     static final String EXTRA_TITLE = "keyboard_layout_picker_title";
     static final String EXTRA_USER_ID = "user_id";
@@ -59,36 +66,47 @@ public class NewKeyboardSettingsUtils {
         return false;
     }
 
-    static List<String> getSuitableImeLabels(Context context, InputMethodManager imm, int userId) {
-        List<String> suitableInputMethodInfoLabels = new ArrayList<>();
-        List<InputMethodInfo> infoList = imm.getEnabledInputMethodListAsUser(userId);
-        for (InputMethodInfo info : infoList) {
-            List<InputMethodSubtype> subtypes =
-                    imm.getEnabledInputMethodSubtypeList(info, true);
-            for (InputMethodSubtype subtype : subtypes) {
-                if (subtype.isSuitableForPhysicalKeyboardLayoutMapping()) {
-                    suitableInputMethodInfoLabels.add(
-                            info.loadLabel(context.getPackageManager()).toString());
-                    break;
+    @SuppressLint("MissingPermission")
+    @Nullable
+    static String getSelectedKeyboardLayoutLabelForUser(Context context, @UserIdInt int userId,
+            InputDeviceIdentifier inputDeviceIdentifier) {
+        InputMethodManager imm = context.getSystemService(InputMethodManager.class);
+        InputManager im = context.getSystemService(InputManager.class);
+        if (imm == null || im == null) {
+            return null;
+        }
+        InputMethodInfo imeInfo = imm.getCurrentInputMethodInfoAsUser(UserHandle.of(userId));
+        InputMethodSubtype subtype = imm.getCurrentInputMethodSubtype();
+        KeyboardLayout[] keyboardLayouts = getKeyboardLayouts(im, userId, inputDeviceIdentifier,
+                imeInfo, subtype);
+        KeyboardLayoutSelectionResult result = getKeyboardLayout(im, userId, inputDeviceIdentifier,
+                imeInfo, subtype);
+        if (result != null) {
+            for (KeyboardLayout keyboardLayout : keyboardLayouts) {
+                if (keyboardLayout.getDescriptor().equals(result.getLayoutDescriptor())) {
+                    return keyboardLayout.getLabel();
                 }
             }
         }
-        return suitableInputMethodInfoLabels;
+        return null;
     }
 
     static class KeyboardInfo {
         CharSequence mSubtypeLabel;
         String mLayout;
+        @LayoutSelectionCriteria int mSelectionCriteria;
         InputMethodInfo mInputMethodInfo;
         InputMethodSubtype mInputMethodSubtype;
 
         KeyboardInfo(
                 CharSequence subtypeLabel,
                 String layout,
+                @LayoutSelectionCriteria int selectionCriteria,
                 InputMethodInfo inputMethodInfo,
                 InputMethodSubtype inputMethodSubtype) {
             mSubtypeLabel = subtypeLabel;
             mLayout = layout;
+            mSelectionCriteria = selectionCriteria;
             mInputMethodInfo = inputMethodInfo;
             mInputMethodSubtype = inputMethodSubtype;
         }
@@ -105,6 +123,17 @@ public class NewKeyboardSettingsUtils {
             return mLayout;
         }
 
+        String getLayoutSummaryText(Context context) {
+            if (isAutomaticSelection(mSelectionCriteria)) {
+                return context.getResources().getString(R.string.automatic_keyboard_layout_label,
+                        mLayout);
+            } else if (isUserSelection(mSelectionCriteria)) {
+                return context.getResources().getString(
+                        R.string.user_selected_keyboard_layout_label, mLayout);
+            }
+            return mLayout;
+        }
+
         InputMethodInfo getInputMethodInfo() {
             return mInputMethodInfo;
         }
@@ -115,7 +144,8 @@ public class NewKeyboardSettingsUtils {
     }
 
     static InputDevice getInputDevice(InputManager im, InputDeviceIdentifier identifier) {
-        return im.getInputDeviceByDescriptor(identifier.getDescriptor());
+        return identifier == null ? null : im.getInputDeviceByDescriptor(
+                identifier.getDescriptor());
     }
 
     static KeyboardLayout[] getKeyboardLayouts(InputManager inputManager, int userId,
@@ -123,8 +153,25 @@ public class NewKeyboardSettingsUtils {
         return inputManager.getKeyboardLayoutListForInputDevice(identifier, userId, info, subtype);
     }
 
-    static String getKeyboardLayout(InputManager inputManager, int userId,
+    @NonNull
+    static KeyboardLayoutSelectionResult getKeyboardLayout(InputManager inputManager, int userId,
             InputDeviceIdentifier identifier, InputMethodInfo info, InputMethodSubtype subtype) {
         return inputManager.getKeyboardLayoutForInputDevice(identifier, userId, info, subtype);
+    }
+
+    static boolean isAutomaticSelection(@LayoutSelectionCriteria int criteria) {
+        return criteria == LAYOUT_SELECTION_CRITERIA_DEVICE
+                || criteria == LAYOUT_SELECTION_CRITERIA_VIRTUAL_KEYBOARD;
+    }
+
+    static boolean isUserSelection(@LayoutSelectionCriteria int criteria) {
+        return criteria == LAYOUT_SELECTION_CRITERIA_USER;
+    }
+
+    static void sortKeyboardLayoutsByLabel(KeyboardLayout[] keyboardLayouts) {
+        Arrays.sort(
+                keyboardLayouts,
+                Comparator.comparing(KeyboardLayout::getLabel)
+        );
     }
 }

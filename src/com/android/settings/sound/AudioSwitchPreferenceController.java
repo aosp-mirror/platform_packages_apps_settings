@@ -18,6 +18,8 @@ package com.android.settings.sound;
 
 import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
 
+import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
+
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,11 +30,14 @@ import android.media.AudioDeviceCallback;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.MediaRouter;
+import android.media.session.MediaController;
+import android.media.session.MediaSessionManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -79,6 +84,8 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     private final WiredHeadsetBroadcastReceiver mReceiver;
     private final Handler mHandler;
     private LocalBluetoothManager mLocalBluetoothManager;
+    @Nullable private MediaSessionManager.OnActiveSessionsChangedListener mSessionListener;
+    @Nullable private MediaSessionManager mMediaSessionManager;
 
     public interface AudioSwitchCallback {
         void onPreferenceDataChanged(ListPreference preference);
@@ -107,6 +114,14 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             return;
         }
         mProfileManager = mLocalBluetoothManager.getProfileManager();
+
+        if (enableOutputSwitcherForSystemRouting()) {
+            mMediaSessionManager = context.getSystemService(MediaSessionManager.class);
+            mSessionListener = new SessionChangeListener();
+        } else {
+            mMediaSessionManager = null;
+            mSessionListener = null;
+        }
     }
 
     /**
@@ -227,6 +242,10 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             return connectedDevices;
         }
         final List<BluetoothDevice> devices = leAudioProfile.getConnectedDevices();
+        if (devices == null) {
+          Log.d(TAG, "No connected LeAudioProfile devices");
+          return connectedDevices;
+        }
         for (BluetoothDevice device : devices) {
             if (device.isConnected() && isDeviceInCachedList(device)) {
                 connectedDevices.add(device);
@@ -329,13 +348,27 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         // Register for misc other intent broadcasts.
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
         intentFilter.addAction(STREAM_DEVICES_CHANGED_ACTION);
-        mContext.registerReceiver(mReceiver, intentFilter);
+
+        if (enableOutputSwitcherForSystemRouting()) {
+            mContext.registerReceiver(mReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+            if (mMediaSessionManager != null) {
+                mMediaSessionManager.addOnActiveSessionsChangedListener(
+                        mSessionListener, null, mHandler);
+            }
+        } else {
+            mContext.registerReceiver(mReceiver, intentFilter);
+        }
     }
 
     private void unregister() {
         mLocalBluetoothManager.getEventManager().unregisterCallback(this);
         mAudioManager.unregisterAudioDeviceCallback(mAudioManagerAudioDeviceCallback);
         mContext.unregisterReceiver(mReceiver);
+        if (enableOutputSwitcherForSystemRouting()) {
+            if (mMediaSessionManager != null) {
+                mMediaSessionManager.removeOnActiveSessionsChangedListener(mSessionListener);
+            }
+        }
     }
 
     /** Notifications of audio device connection and disconnection events. */
@@ -360,6 +393,14 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
                     AudioManager.STREAM_DEVICES_CHANGED_ACTION.equals(action)) {
                 updateState(mPreference);
             }
+        }
+    }
+
+    private class SessionChangeListener
+            implements MediaSessionManager.OnActiveSessionsChangedListener {
+        @Override
+        public void onActiveSessionsChanged(List<MediaController> controllers) {
+            updateState(mPreference);
         }
     }
 }

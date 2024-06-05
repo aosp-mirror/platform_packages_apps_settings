@@ -120,6 +120,8 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected void onCreate(Bundle savedInstanceState) {
         mFaceManager = getFaceManager();
 
+        super.onCreate(savedInstanceState);
+
         if (savedInstanceState == null
                 && !WizardManagerHelper.isAnySetupWizard(getIntent())
                 && !getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false)
@@ -129,8 +131,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             launchFaceSettingsActivity();
             finish();
         }
-
-        super.onCreate(savedInstanceState);
 
         // Wait super::onCreated() then return because SuperNotCalledExceptio will be thrown
         // if we don't wait for it.
@@ -170,22 +170,25 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
         }
 
-        mFaceManager.addAuthenticatorsRegisteredCallback(
-                new IFaceAuthenticatorsRegisteredCallback.Stub() {
-                    @Override
-                    public void onAllAuthenticatorsRegistered(
-                            @NonNull List<FaceSensorPropertiesInternal> sensors) {
-                        if (sensors.isEmpty()) {
-                            Log.e(TAG, "No sensors");
-                            return;
-                        }
 
-                        boolean isFaceStrong = sensors.get(0).sensorStrength
-                                == SensorProperties.STRENGTH_STRONG;
-                        mIsFaceStrong = isFaceStrong;
-                        onFaceStrengthChanged();
-                    }
-                });
+        if (mFaceManager != null) {
+            mFaceManager.addAuthenticatorsRegisteredCallback(
+                    new IFaceAuthenticatorsRegisteredCallback.Stub() {
+                        @Override
+                        public void onAllAuthenticatorsRegistered(
+                                @NonNull List<FaceSensorPropertiesInternal> sensors) {
+                            if (sensors.isEmpty()) {
+                                Log.e(TAG, "No sensors");
+                                return;
+                            }
+
+                            boolean isFaceStrong = sensors.get(0).sensorStrength
+                                    == SensorProperties.STRENGTH_STRONG;
+                            mIsFaceStrong = isFaceStrong;
+                            onFaceStrengthChanged();
+                        }
+                    });
+        }
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
@@ -362,7 +365,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @StringRes
     protected int getInfoMessageLooking() {
-        return R.string.security_settings_face_enroll_introduction_info_looking;
+        return isPrivateProfile()
+                ? R.string.private_space_face_enroll_introduction_info_looking
+                : R.string.security_settings_face_enroll_introduction_info_looking;
     }
 
     @StringRes
@@ -387,7 +392,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @StringRes
     protected int getLessSecureMessage() {
-        return R.string.security_settings_face_enroll_introduction_info_less_secure;
+        return isPrivateProfile()
+                ? R.string.private_space_face_enroll_introduction_info_less_secure
+                : R.string.security_settings_face_enroll_introduction_info_less_secure;
+
     }
 
     @Override
@@ -408,6 +416,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected int getHeaderResDefault() {
+        if (isPrivateProfile()) {
+            return R.string.private_space_face_enroll_introduction_title;
+        }
         return R.string.security_settings_face_enroll_introduction_title;
     }
 
@@ -484,6 +495,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected Intent getEnrollingIntent() {
         Intent intent = new Intent(this, FaceEnrollEducation.class);
         WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+        intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                getIntent().getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1));
+
         return intent;
     }
 
@@ -537,7 +551,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                     .setText(R.string.security_settings_face_enroll_introduction_agree)
                     .setButtonType(FooterButton.ButtonType.OPT_IN)
                     .setListener(this::onNextButtonClick)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mPrimaryFooterButton;
@@ -551,7 +565,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                     .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
                     .setListener(this::onSkipButtonClick)
                     .setButtonType(FooterButton.ButtonType.NEXT)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mSecondaryFooterButton;
@@ -560,7 +574,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     @StringRes
     protected int getAgreeButtonTextRes() {
-        return R.string.security_settings_fingerprint_enroll_introduction_agree;
+        return R.string.security_settings_face_enroll_introduction_agree;
     }
 
     @Override
@@ -571,7 +585,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void updateDescriptionText() {
-        if (mIsFaceStrong) {
+        if (isPrivateProfile()) {
+            setDescriptionText(getString(
+                    R.string.private_space_face_enroll_introduction_message));
+        } else if (mIsFaceStrong) {
             setDescriptionText(getString(
                     R.string.security_settings_face_enroll_introduction_message_class3));
         }
@@ -601,5 +618,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             iconLessSecure.getBackground().setColorFilter(getIconColorFilter());
         }
         updateDescriptionText();
+    }
+
+    private boolean isPrivateProfile() {
+        return Utils.isPrivateProfile(mUserId, getApplicationContext());
     }
 }

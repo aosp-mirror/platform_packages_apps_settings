@@ -16,11 +16,10 @@
 package com.android.settings.biometrics.combination;
 
 import static android.app.Activity.RESULT_OK;
-import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FACE;
-import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FINGERPRINT;
 
 import static com.android.settings.password.ChooseLockPattern.RESULT_FINISHED;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.biometrics.SensorProperties;
@@ -47,12 +46,10 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
@@ -166,19 +163,13 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         // since FingerprintSettings and FaceSettings revoke the challenge when finishing.
         if (getFacePreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
-
-            //  If it's split mode and there is no enrolled face, show the dialog. (if there is
-            //  enrolled face, FaceSettingsEnrollButtonPreferenceController#onClick will handle
-            //  the dialog)
-            if (getActivity().isInMultiWindowMode() && !ActivityEmbeddingUtils.isActivityEmbedded(
-                    getActivity()) && !mFaceManager.hasEnrolledTemplates(mUserId)) {
-                BiometricsSplitScreenDialog.newInstance(TYPE_FACE).show(
-                        getActivity().getSupportFragmentManager(),
-                        BiometricsSplitScreenDialog.class.getName());
-                return true;
-            }
-
             mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+                final Activity activity = getActivity();
+                if (activity == null || activity.isFinishing()) {
+                    Log.e(getLogTag(), "Stop during generating face unlock challenge"
+                            + " because activity is null or finishing");
+                    return;
+                }
                 try {
                     final byte[] token = requestGatekeeperHat(context, mGkPwHandle, mUserId,
                             challenge);
@@ -202,19 +193,13 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             return true;
         } else if (getFingerprintPreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
-
-            //  If it's split mode and there is no enrolled fingerprint, show the dialog. (if
-            //  there is enrolled fingerprint, FingerprintSettingsFragment#onPreferenceTreeClick
-            //  will handle the dialog)
-            if (getActivity().isInMultiWindowMode() && !ActivityEmbeddingUtils.isActivityEmbedded(
-                    getActivity()) && !mFingerprintManager.hasEnrolledFingerprints(mUserId)) {
-                BiometricsSplitScreenDialog.newInstance(TYPE_FINGERPRINT).show(
-                        getActivity().getSupportFragmentManager(),
-                        BiometricsSplitScreenDialog.class.getName());
-                return true;
-            }
-
             mFingerprintManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+                final Activity activity = getActivity();
+                if (activity == null || activity.isFinishing()) {
+                    Log.e(getLogTag(), "Stop during generating fingerprint challenge"
+                            + " because activity is null or finishing");
+                    return;
+                }
                 try {
                     final byte[] token = requestGatekeeperHat(context, mGkPwHandle, mUserId,
                             challenge);
@@ -315,8 +300,9 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                 if (BiometricUtils.containsGatekeeperPasswordHandle(data)) {
                     mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
                     if (!TextUtils.isEmpty(mRetryPreferenceKey)) {
-                        getActivity().overridePendingTransition(R.anim.sud_slide_next_in,
-                                R.anim.sud_slide_next_out);
+                        getActivity().overridePendingTransition(
+                                com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                                com.google.android.setupdesign.R.anim.sud_slide_next_out);
                         retryPreferenceKey(mRetryPreferenceKey, mRetryPreferenceExtra);
                     }
                 } else {

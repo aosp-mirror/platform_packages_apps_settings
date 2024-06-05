@@ -34,7 +34,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -275,7 +275,7 @@ public class ChannelListPreferenceControllerTest {
             PreferenceGroup group = (PreferenceGroup) mGroupList.getPreference(0);
             assertEquals("group", group.getKey());
             assertEquals(3, group.getPreferenceCount());
-            SwitchPreference groupBlockPref = (SwitchPreference) group.getPreference(0);
+            SwitchPreferenceCompat groupBlockPref = (SwitchPreferenceCompat) group.getPreference(0);
             assertNull(groupBlockPref.getKey());
             assertEquals("All \"My Group\" notifications", groupBlockPref.getTitle().toString());
             assertTrue(groupBlockPref.isChecked());
@@ -297,7 +297,7 @@ public class ChannelListPreferenceControllerTest {
             PreferenceGroup group = (PreferenceGroup) mGroupList.getPreference(0);
             assertEquals("group", group.getKey());
             assertEquals(1, group.getPreferenceCount());
-            SwitchPreference groupBlockPref = (SwitchPreference) group.getPreference(0);
+            SwitchPreferenceCompat groupBlockPref = (SwitchPreferenceCompat) group.getPreference(0);
             assertNull(groupBlockPref.getKey());
             assertEquals("All \"My Group\" notifications", groupBlockPref.getTitle().toString());
             assertFalse(groupBlockPref.isChecked());
@@ -311,7 +311,7 @@ public class ChannelListPreferenceControllerTest {
             PreferenceGroup group = (PreferenceGroup) mGroupList.getPreference(0);
             assertEquals("group", group.getKey());
             assertEquals(3, group.getPreferenceCount());
-            SwitchPreference groupBlockPref = (SwitchPreference) group.getPreference(0);
+            SwitchPreferenceCompat groupBlockPref = (SwitchPreferenceCompat) group.getPreference(0);
             assertNull(groupBlockPref.getKey());
             assertEquals("All \"My Group\" notifications", groupBlockPref.getTitle().toString());
             assertTrue(groupBlockPref.isChecked());

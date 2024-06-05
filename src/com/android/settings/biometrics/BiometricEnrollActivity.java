@@ -24,7 +24,6 @@ import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_CONSENT
 
 import static com.google.android.setupdesign.transition.TransitionHelper.TRANSITION_FADE_THROUGH;
 
-import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
@@ -45,6 +44,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.internal.util.FrameworkStatsLog;
@@ -86,6 +86,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     // Intent extra. If true, biometric enrollment should skip introductory screens. Currently
     // this only applies to fingerprint.
     public static final String EXTRA_SKIP_INTRO = "skip_intro";
+
+    // Intent extra. If true, support fingerprint enrollment only and skip other biometric
+    // enrollment methods like face unlock.
+    public static final String EXTRA_FINGERPRINT_ENROLLMENT_ONLY = "fingerprint_enrollment_only";
 
     // Intent extra. If true, parental consent will be requested before user enrollment.
     public static final String EXTRA_REQUIRE_PARENTAL_CONSENT = "require_consent";
@@ -194,7 +198,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
         final PackageManager pm = getApplicationContext().getPackageManager();
         mHasFeatureFingerprint = pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
-        mHasFeatureFace = pm.hasSystemFeature(PackageManager.FEATURE_FACE);
+        mHasFeatureFace = pm.hasSystemFeature(PackageManager.FEATURE_FACE)
+                && !(intent.getBooleanExtra(EXTRA_FINGERPRINT_ENROLLMENT_ONLY, false));
 
         // Default behavior is to enroll BIOMETRIC_WEAK or above. See ACTION_BIOMETRIC_ENROLL.
         final int authenticators = getIntent().getIntExtra(
@@ -238,7 +243,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 if (parentalConsent && isMultiSensor && mIsFaceEnrollable) {
                     // Exclude face enrollment from setup wizard if feature config not supported
                     // in setup wizard flow, we still allow user enroll faces through settings.
-                    mIsFaceEnrollable = FeatureFactory.getFactory(getApplicationContext())
+                    mIsFaceEnrollable = FeatureFactory.getFeatureFactory()
                             .getFaceFeatureProvider()
                             .isSetupWizardSupported(getApplicationContext());
                     Log.d(TAG, "config_suw_support_face_enroll: " + mIsFaceEnrollable);
@@ -424,7 +429,9 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     // handles responses while parental consent is pending
     private void handleOnActivityResultWhileConsenting(
             int requestCode, int resultCode, Intent data) {
-        overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+        overridePendingTransition(
+                com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                com.google.android.setupdesign.R.anim.sud_slide_next_out);
 
         switch (requestCode) {
             case REQUEST_CHOOSE_LOCK:

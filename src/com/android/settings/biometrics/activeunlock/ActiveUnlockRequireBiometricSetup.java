@@ -88,7 +88,7 @@ public class ActiveUnlockRequireBiometricSetup extends BiometricEnrollBase {
                         .setText(R.string.cancel)
                         .setListener(this::onCancelClick)
                         .setButtonType(FooterButton.ButtonType.CANCEL)
-                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build()
         );
 
@@ -97,7 +97,7 @@ public class ActiveUnlockRequireBiometricSetup extends BiometricEnrollBase {
                         .setText(R.string.security_settings_activeunlock_biometric_setup)
                         .setListener(this::onNextButtonClick)
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SudGlifButton_Primary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build()
         );
     }

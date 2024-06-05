@@ -31,7 +31,7 @@ import static com.android.settings.network.telephony.TelephonyConstants.Telephon
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
 
-import android.annotation.Nullable;
+import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -42,13 +42,18 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.hardware.biometrics.BiometricPrompt;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
@@ -69,6 +74,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.util.ArrayUtils;
@@ -80,6 +87,7 @@ import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
+import com.android.settings.network.telephony.wificalling.WifiCallingRepository;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
@@ -307,7 +315,7 @@ public class MobileNetworkUtils {
     public static Boolean showEuiccSettingsDetecting(Context context) {
         final EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(EuiccManager.class);
-        if (!euiccManager.isEnabled()) {
+        if (euiccManager == null || !euiccManager.isEnabled()) {
             Log.w(TAG, "EuiccManager is not enabled.");
             return false;
         }
@@ -357,8 +365,10 @@ public class MobileNetworkUtils {
         final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         final SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
-        telephonyManager.setDataEnabled(enabled);
+                SubscriptionManager.class).createForAllUserProfiles();
+        Log.d(TAG, "setDataEnabledForReason: " + enabled);
+        telephonyManager.setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
+                enabled);
 
         if (disableOtherSubscriptions) {
             final List<SubscriptionInfo> subInfoList =
@@ -367,8 +377,10 @@ public class MobileNetworkUtils {
                 for (SubscriptionInfo subInfo : subInfoList) {
                     // We never disable mobile data for opportunistic subscriptions.
                     if (subInfo.getSubscriptionId() != subId && !subInfo.isOpportunistic()) {
-                        context.getSystemService(TelephonyManager.class).createForSubscriptionId(
-                                subInfo.getSubscriptionId()).setDataEnabled(false);
+                        context.getSystemService(TelephonyManager.class)
+                                .createForSubscriptionId(subInfo.getSubscriptionId())
+                                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
+                                        false);
                     }
                 }
             }
@@ -666,39 +678,26 @@ public class MobileNetworkUtils {
      * 2. Similar design which aligned with operator name displayed in status bar
      */
     public static CharSequence getCurrentCarrierNameForDisplay(Context context, int subId) {
-        final SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
-        if (sm != null) {
-            final SubscriptionInfo subInfo = getSubscriptionInfo(sm, subId);
-            if (subInfo != null) {
-                return subInfo.getCarrierName();
-            }
+        final SubscriptionInfo subInfo = getSubscriptionInfo(context, subId);
+        if (subInfo != null) {
+            return subInfo.getCarrierName();
         }
         return getOperatorNameFromTelephonyManager(context);
     }
 
     public static CharSequence getCurrentCarrierNameForDisplay(Context context) {
-        final SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
-        if (sm != null) {
-            final int subId = sm.getDefaultSubscriptionId();
-            final SubscriptionInfo subInfo = getSubscriptionInfo(sm, subId);
-            if (subInfo != null) {
-                return subInfo.getCarrierName();
-            }
+        final SubscriptionInfo subInfo = getSubscriptionInfo(context,
+                SubscriptionManager.getDefaultSubscriptionId());
+        if (subInfo != null) {
+            return subInfo.getCarrierName();
         }
         return getOperatorNameFromTelephonyManager(context);
     }
 
-    private static SubscriptionInfo getSubscriptionInfo(SubscriptionManager subManager, int subId) {
-        List<SubscriptionInfo> subInfos = subManager.getActiveSubscriptionInfoList();
-        if (subInfos == null) {
-            return null;
-        }
-        for (SubscriptionInfo subInfo : subInfos) {
-            if (subInfo.getSubscriptionId() == subId) {
-                return subInfo;
-            }
-        }
-        return null;
+    private static @Nullable SubscriptionInfo getSubscriptionInfo(Context context, int subId) {
+        SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
+        if (sm == null) return null;
+        return sm.createForAllUserProfiles().getActiveSubscriptionInfo(subId);
     }
 
     private static String getOperatorNameFromTelephonyManager(Context context) {
@@ -710,12 +709,13 @@ public class MobileNetworkUtils {
         return tm.getNetworkOperatorName();
     }
 
-    private static int[] getActiveSubscriptionIdList(Context context) {
+    @VisibleForTesting
+    static int[] getActiveSubscriptionIdList(Context context) {
         final SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
+                SubscriptionManager.class).createForAllUserProfiles();
         final List<SubscriptionInfo> subInfoList =
-                subscriptionManager.getActiveSubscriptionInfoList();
-        if (subInfoList == null) {
+                SubscriptionUtil.getActiveSubscriptions(subscriptionManager);
+        if (subInfoList == null || subInfoList.isEmpty()) {
             return new int[0];
         }
         int[] activeSubIds = new int[subInfoList.size()];
@@ -938,7 +938,10 @@ public class MobileNetworkUtils {
 
     /**
      * Copied from WifiCallingPreferenceController#isWifiCallingEnabled()
+     *
+     * @deprecated Use {@link WifiCallingRepository#wifiCallingReadyFlow()} instead.
      */
+    @Deprecated
     public static boolean isWifiCallingEnabled(Context context, int subId,
             @Nullable WifiCallingQueryImsState queryImsState) {
         if (queryImsState == null) {
@@ -1055,4 +1058,53 @@ public class MobileNetworkUtils {
                 .launch();
     }
 
+    /**
+     * Shows authentication screen to confirm credentials (pin/pattern/password) for the current
+     * user of the device.
+     *
+     * <p>Similar to WifiDppUtils.showLockScreen(), but doesn't check for the existence of
+     * SIM PIN lock, only screen PIN lock.
+     *
+     * @param context The {@code Context} used to get {@link KeyguardManager} service
+     * @param onSuccess The {@code Runnable} which will be executed if the user does not setup
+     *                  device security or if lock screen is unlocked
+     */
+    public static void showLockScreen(@NonNull Context context, @NonNull Runnable onSuccess) {
+        final KeyguardManager keyguardManager =
+                context.getSystemService(KeyguardManager.class);
+
+        if (keyguardManager.isDeviceSecure()) {
+            final BiometricPrompt.AuthenticationCallback authenticationCallback =
+                    new BiometricPrompt.AuthenticationCallback() {
+                        @Override
+                        public void onAuthenticationSucceeded(
+                                    BiometricPrompt.AuthenticationResult result) {
+                            onSuccess.run();
+                        }
+
+                        @Override
+                        public void onAuthenticationError(int errorCode, CharSequence errString) {
+                            // Do nothing
+                        }
+            };
+
+            final int userId = UserHandle.myUserId();
+            final BiometricPrompt biometricPrompt = new BiometricPrompt.Builder(context)
+                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title))
+                    .setDeviceCredentialAllowed(true)
+                    .setTextForDeviceCredential(
+                        /* title= */ null,
+                        Utils.getConfirmCredentialStringForUser(
+                                context, userId, Utils.getCredentialType(context, userId)),
+                        /* description= */ null)
+                    .build();
+            final Handler handler = new Handler(Looper.getMainLooper());
+            biometricPrompt.authenticate(
+                    new CancellationSignal(),
+                    handler::post,
+                    authenticationCallback);
+        } else {
+            onSuccess.run();
+        }
+    }
 }

@@ -16,10 +16,11 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Handler;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.time.Clock;
 import java.util.ArrayDeque;
@@ -174,6 +175,11 @@ public class MessageDisplayController extends FingerprintManager.EnrollmentCallb
     @Override
     public void onEnrollmentError(int errMsgId, CharSequence errString) {
         mEnrollmentCallback.onEnrollmentError(errMsgId, errString);
+    }
+
+    @Override
+    public void onAcquired(boolean isAcquiredGood) {
+        mEnrollmentCallback.onAcquired(isAcquiredGood);
     }
 
     private Message getMessageToDisplay(long timeStamp) {

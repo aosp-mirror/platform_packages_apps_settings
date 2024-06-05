@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.VpnManager;
@@ -33,8 +34,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.text.SpannableStringBuilder;
-import android.text.style.ClickableSpan;
-import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.vpn2.VpnUtils;
@@ -220,6 +219,9 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     public int getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile() {
         int activeAdmins = 0;
         for (final UserInfo userInfo : mUm.getProfiles(MY_USER_ID)) {
+            if (shouldSkipProfile(userInfo)) {
+                continue;
+            }
             final List<ComponentName> activeAdminsForUser
                     = mDpm.getActiveAdminsAsUser(userInfo.id);
             if (activeAdminsForUser != null) {
@@ -248,6 +250,15 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         }
 
         return false;
+    }
+
+    private boolean shouldSkipProfile(UserInfo userInfo) {
+        return android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && userInfo.isQuietModeEnabled()
+                && mUm.getUserProperties(userInfo.getUserHandle()).getShowInQuietMode()
+                        == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN;
     }
 
     private Intent getParentalControlsIntent() {
@@ -289,25 +300,5 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
             return userInfo.id;
         }
         return UserHandle.USER_NULL;
-    }
-
-    protected static class EnterprisePrivacySpan extends ClickableSpan {
-        private final Context mContext;
-
-        public EnterprisePrivacySpan(Context context) {
-            mContext = context;
-        }
-
-        @Override
-        public void onClick(View widget) {
-            mContext.startActivity(new Intent(Settings.ACTION_ENTERPRISE_PRIVACY_SETTINGS)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-        }
-
-        @Override
-        public boolean equals(Object object) {
-            return object instanceof EnterprisePrivacySpan
-                    && ((EnterprisePrivacySpan) object).mContext == mContext;
-        }
     }
 }

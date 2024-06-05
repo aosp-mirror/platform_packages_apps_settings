@@ -38,6 +38,8 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
+import com.android.settings.fuelgauge.batteryusage.AppOptimizationModeEvent;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
@@ -47,11 +49,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /** An implementation to backup and restore battery configurations. */
 public final class BatteryBackupHelper implements BackupHelper {
     /** An inditifier for {@link BackupHelper}. */
     public static final String TAG = "BatteryBackupHelper";
+
     // Definition for the device build information.
     public static final String KEY_BUILD_BRAND = "device_build_brand";
     public static final String KEY_BUILD_PRODUCT = "device_build_product";
@@ -70,17 +75,12 @@ public final class BatteryBackupHelper implements BackupHelper {
     static final String DELIMITER_MODE = ":";
     static final String KEY_OPTIMIZATION_LIST = "optimization_mode_list";
 
-    @VisibleForTesting
-    ArraySet<ApplicationInfo> mTestApplicationInfoList = null;
+    @VisibleForTesting ArraySet<ApplicationInfo> mTestApplicationInfoList = null;
 
-    @VisibleForTesting
-    PowerAllowlistBackend mPowerAllowlistBackend;
-    @VisibleForTesting
-    IDeviceIdleController mIDeviceIdleController;
-    @VisibleForTesting
-    IPackageManager mIPackageManager;
-    @VisibleForTesting
-    BatteryOptimizeUtils mBatteryOptimizeUtils;
+    @VisibleForTesting PowerAllowlistBackend mPowerAllowlistBackend;
+    @VisibleForTesting IDeviceIdleController mIDeviceIdleController;
+    @VisibleForTesting IPackageManager mIPackageManager;
+    @VisibleForTesting BatteryOptimizeUtils mBatteryOptimizeUtils;
 
     private byte[] mOptimizationModeBytes;
     private boolean mVerifyMigrateConfiguration = false;
@@ -95,8 +95,8 @@ public final class BatteryBackupHelper implements BackupHelper {
     }
 
     @Override
-    public void performBackup(ParcelFileDescriptor oldState, BackupDataOutput data,
-            ParcelFileDescriptor newState) {
+    public void performBackup(
+            ParcelFileDescriptor oldState, BackupDataOutput data, ParcelFileDescriptor newState) {
         if (!isOwner() || data == null) {
             Log.w(TAG, "ignore performBackup() for non-owner or empty data");
             return;
@@ -111,8 +111,8 @@ public final class BatteryBackupHelper implements BackupHelper {
         writeBackupData(data, KEY_BUILD_MANUFACTURER, Build.MANUFACTURER);
         writeBackupData(data, KEY_BUILD_FINGERPRINT, Build.FINGERPRINT);
         // Add customized device build metadata fields.
-        final PowerUsageFeatureProvider provider = FeatureFactory.getFactory(mContext)
-                .getPowerUsageFeatureProvider(mContext);
+        final PowerUsageFeatureProvider provider =
+                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
         writeBackupData(data, KEY_BUILD_METADATA_1, provider.getBuildMetadata1(mContext));
         writeBackupData(data, KEY_BUILD_METADATA_2, provider.getBuildMetadata2(mContext));
 
@@ -149,8 +149,7 @@ public final class BatteryBackupHelper implements BackupHelper {
     }
 
     @Override
-    public void writeNewStateDescription(ParcelFileDescriptor newState) {
-    }
+    public void writeNewStateDescription(ParcelFileDescriptor newState) {}
 
     private List<String> getFullPowerList() {
         final long timestamp = System.currentTimeMillis();
@@ -166,8 +165,11 @@ public final class BatteryBackupHelper implements BackupHelper {
             Log.w(TAG, "no data found in the getFullPowerList()");
             return new ArrayList<>();
         }
-        Log.d(TAG, String.format("getFullPowerList() size=%d in %d/ms",
-                allowlistedApps.length, (System.currentTimeMillis() - timestamp)));
+        Log.d(
+                TAG,
+                String.format(
+                        "getFullPowerList() size=%d in %d/ms",
+                        allowlistedApps.length, (System.currentTimeMillis() - timestamp)));
         return Arrays.asList(allowlistedApps);
     }
 
@@ -183,31 +185,43 @@ public final class BatteryBackupHelper implements BackupHelper {
         final StringBuilder builder = new StringBuilder();
         final AppOpsManager appOps = mContext.getSystemService(AppOpsManager.class);
         final SharedPreferences sharedPreferences = getSharedPreferences(mContext);
+        final Map<Integer, AppOptimizationModeEvent> appOptModeMap =
+                AppOptModeSharedPreferencesUtils.getAllEvents(mContext).stream()
+                        .collect(Collectors.toMap(AppOptimizationModeEvent::getUid, e -> e));
         // Converts application into the AppUsageState.
         for (ApplicationInfo info : applications) {
             final int mode = BatteryOptimizeUtils.getMode(appOps, info.uid, info.packageName);
             @BatteryOptimizeUtils.OptimizationMode
-            final int optimizationMode = BatteryOptimizeUtils.getAppOptimizationMode(
-                    mode, allowlistedApps.contains(info.packageName));
+            final int optimizationMode =
+                    appOptModeMap.containsKey(info.uid)
+                            ? (int) appOptModeMap.get(info.uid).getResetOptimizationMode()
+                            : BatteryOptimizeUtils.getAppOptimizationMode(
+                                    mode, allowlistedApps.contains(info.packageName));
             // Ignores default optimized/unknown state or system/default apps.
             if (optimizationMode == BatteryOptimizeUtils.MODE_OPTIMIZED
                     || optimizationMode == BatteryOptimizeUtils.MODE_UNKNOWN
                     || isSystemOrDefaultApp(info.packageName, info.uid)) {
                 continue;
             }
-            final String packageOptimizeMode =
-                    info.packageName + DELIMITER_MODE + optimizationMode;
+            final String packageOptimizeMode = info.packageName + DELIMITER_MODE + optimizationMode;
             builder.append(packageOptimizeMode + DELIMITER);
             Log.d(TAG, "backupOptimizationMode: " + packageOptimizeMode);
-            BatteryHistoricalLogUtil.writeLog(
-                    sharedPreferences, Action.BACKUP, info.packageName,
+            BatteryOptimizeLogUtils.writeLog(
+                    sharedPreferences,
+                    Action.BACKUP,
+                    info.packageName,
                     /* actionDescription */ "mode: " + optimizationMode);
             backupCount++;
         }
 
         writeBackupData(data, KEY_OPTIMIZATION_LIST, builder.toString());
-        Log.d(TAG, String.format("backup getInstalledApplications():%d count=%d in %d/ms",
-                applications.size(), backupCount, (System.currentTimeMillis() - timestamp)));
+        Log.d(
+                TAG,
+                String.format(
+                        "backup getInstalledApplications():%d count=%d in %d/ms",
+                        applications.size(),
+                        backupCount,
+                        (System.currentTimeMillis() - timestamp)));
     }
 
     @VisibleForTesting
@@ -225,8 +239,8 @@ public final class BatteryBackupHelper implements BackupHelper {
         }
         int restoreCount = 0;
         for (int index = 0; index < appConfigurations.length; index++) {
-            final String[] results = appConfigurations[index]
-                    .split(BatteryBackupHelper.DELIMITER_MODE);
+            final String[] results =
+                    appConfigurations[index].split(BatteryBackupHelper.DELIMITER_MODE);
             // Example format: com.android.systemui:2 we should have length=2
             if (results == null || results.length != 2) {
                 Log.w(TAG, "invalid raw data found:" + appConfigurations[index]);
@@ -244,15 +258,17 @@ public final class BatteryBackupHelper implements BackupHelper {
             try {
                 optimizationMode = Integer.parseInt(results[1]);
             } catch (NumberFormatException e) {
-                Log.e(TAG, "failed to parse the optimization mode: "
-                        + appConfigurations[index], e);
+                Log.e(TAG, "failed to parse the optimization mode: " + appConfigurations[index], e);
                 continue;
             }
             restoreOptimizationMode(packageName, optimizationMode);
             restoreCount++;
         }
-        Log.d(TAG, String.format("restoreOptimizationMode() count=%d in %d/ms",
-                restoreCount, (System.currentTimeMillis() - timestamp)));
+        Log.d(
+                TAG,
+                String.format(
+                        "restoreOptimizationMode() count=%d in %d/ms",
+                        restoreCount, (System.currentTimeMillis() - timestamp)));
         return restoreCount;
     }
 
@@ -260,22 +276,22 @@ public final class BatteryBackupHelper implements BackupHelper {
         if (mOptimizationModeBytes == null || mOptimizationModeBytes.length == 0) {
             return;
         }
-        final PowerUsageFeatureProvider provider = FeatureFactory.getFactory(mContext)
-                .getPowerUsageFeatureProvider(mContext);
+        final PowerUsageFeatureProvider provider =
+                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
         if (!provider.isValidToRestoreOptimizationMode(mDeviceBuildInfoMap)) {
             return;
         }
         // Start to restore the app optimization mode data.
         final int restoreCount = restoreOptimizationMode(mOptimizationModeBytes);
         if (restoreCount > 0) {
-            BatterySettingsMigrateChecker.verifyOptimizationModes(mContext);
+            BatterySettingsMigrateChecker.verifyBatteryOptimizeModes(mContext);
         }
         mOptimizationModeBytes = null; // clear data
     }
 
     /** Dump the app optimization mode backup history data. */
     public static void dumpHistoricalData(Context context, PrintWriter writer) {
-        BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(
+        BatteryOptimizeLogUtils.printBatteryOptimizeHistoricalLog(
                 getSharedPreferences(context), writer);
     }
 
@@ -319,8 +335,9 @@ public final class BatteryBackupHelper implements BackupHelper {
         if (mIDeviceIdleController != null) {
             return mIDeviceIdleController;
         }
-        mIDeviceIdleController = IDeviceIdleController.Stub.asInterface(
-                ServiceManager.getService(DEVICE_IDLE_SERVICE));
+        mIDeviceIdleController =
+                IDeviceIdleController.Stub.asInterface(
+                        ServiceManager.getService(DEVICE_IDLE_SERVICE));
         return mIDeviceIdleController;
     }
 
@@ -342,7 +359,7 @@ public final class BatteryBackupHelper implements BackupHelper {
 
     private boolean isSystemOrDefaultApp(String packageName, int uid) {
         return BatteryOptimizeUtils.isSystemOrDefaultApp(
-                getPowerAllowlistBackend(), packageName, uid);
+                mContext, getPowerAllowlistBackend(), packageName, uid);
     }
 
     private ArraySet<ApplicationInfo> getInstalledApplications() {
@@ -374,8 +391,7 @@ public final class BatteryBackupHelper implements BackupHelper {
         return dataBytes;
     }
 
-    private static void writeBackupData(
-            BackupDataOutput data, String dataKey, String dataContent) {
+    private static void writeBackupData(BackupDataOutput data, String dataKey, String dataContent) {
         if (dataContent == null || dataContent.isEmpty()) {
             return;
         }

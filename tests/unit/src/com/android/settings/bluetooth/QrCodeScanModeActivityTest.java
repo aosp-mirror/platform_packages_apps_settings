@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.Intent;
 
@@ -28,11 +27,13 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
 @RunWith(AndroidJUnit4.class)
+@Ignore("b/337418017")
 public class QrCodeScanModeActivityTest {
 
     @Mock

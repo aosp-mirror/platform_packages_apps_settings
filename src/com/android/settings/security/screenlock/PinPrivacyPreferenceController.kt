@@ -45,7 +45,7 @@ class PinPrivacyPreferenceController(
         return PREF_KEY
     }
 
-    override fun onPreferenceChange(preference: Preference?, value: Any?): Boolean {
+    override fun onPreferenceChange(preference: Preference, value: Any): Boolean {
         lockPatternUtils.setPinEnhancedPrivacyEnabled((value as Boolean), userId)
         return true
     }

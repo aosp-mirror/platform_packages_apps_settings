@@ -18,6 +18,7 @@ package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,6 +28,10 @@ import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.wifi.factory.WifiFeatureProvider;
+import com.android.settings.wifi.repository.WifiHotspotRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,6 +59,8 @@ public class WifiTetherAutoOffPreferenceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
 
+        WifiFeatureProvider provider = FakeFeatureFactory.setupForTest().getWifiFeatureProvider();
+        when(provider.getWifiHotspotRepository()).thenReturn(mock(WifiHotspotRepository.class));
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         mSoftApConfiguration = new SoftApConfiguration.Builder().build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
@@ -101,6 +108,32 @@ public class WifiTetherAutoOffPreferenceControllerTest {
         assertThat(mSwitchPreference.isChecked()).isTrue();
     }
 
+    @Test
+    public void onPreferenceChange_needShutdownSecondarySap_setSecondarySap() {
+        mController.mNeedShutdownSecondarySap = true;
+        setConfigShutdownSecondarySap(false);
+
+        mController.onPreferenceChange(mSwitchPreference, true);
+
+        ArgumentCaptor<SoftApConfiguration> config =
+                ArgumentCaptor.forClass(SoftApConfiguration.class);
+        verify(mWifiManager).setSoftApConfiguration(config.capture());
+        assertThat(config.getValue().isBridgedModeOpportunisticShutdownEnabled()).isTrue();
+    }
+
+    @Test
+    public void onPreferenceChange_noNeedShutdownSecondarySap_doNotSetSecondarySap() {
+        mController.mNeedShutdownSecondarySap = false;
+        setConfigShutdownSecondarySap(false);
+
+        mController.onPreferenceChange(mSwitchPreference, true);
+
+        ArgumentCaptor<SoftApConfiguration> config =
+                ArgumentCaptor.forClass(SoftApConfiguration.class);
+        verify(mWifiManager).setSoftApConfiguration(config.capture());
+        assertThat(config.getValue().isBridgedModeOpportunisticShutdownEnabled()).isFalse();
+    }
+
     private boolean getAutoOffSetting() {
         ArgumentCaptor<SoftApConfiguration> softApConfigCaptor =
                 ArgumentCaptor.forClass(SoftApConfiguration.class);
@@ -112,6 +145,14 @@ public class WifiTetherAutoOffPreferenceControllerTest {
         mSoftApConfiguration =
                 new SoftApConfiguration.Builder(mSoftApConfiguration)
                         .setAutoShutdownEnabled(config)
+                        .build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
+    }
+
+    private void setConfigShutdownSecondarySap(boolean enabled) {
+        mSoftApConfiguration =
+                new SoftApConfiguration.Builder(mSoftApConfiguration)
+                        .setBridgedModeOpportunisticShutdownEnabled(enabled)
                         .build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
     }

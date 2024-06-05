@@ -34,6 +34,7 @@ import androidx.window.embedding.SplitPairRule;
 import androidx.window.embedding.SplitPlaceholderRule;
 import androidx.window.embedding.SplitRule;
 
+import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
@@ -49,7 +50,9 @@ import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockPattern;
-import com.android.settingslib.users.AvatarPickerActivity;
+import com.android.settings.privatespace.PrivateSpaceSetupActivity;
+import com.android.settings.remoteauth.RemoteAuthActivity;
+import com.android.settings.remoteauth.RemoteAuthActivityInternal;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -110,8 +113,9 @@ public class ActivityEmbeddingRulesController {
                 .setFinishPrimaryWithSecondary(finishPrimaryWithSecondary)
                 .setFinishSecondaryWithPrimary(finishSecondaryWithPrimary)
                 .setClearTop(clearTop)
-                .setMinWidthDp(ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthDp())
-                .setMinSmallestWidthDp(ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthDp())
+                .setMinWidthDp(ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthDp(context))
+                .setMinSmallestWidthDp(
+                        ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthDp(context))
                 .setMaxAspectRatioInPortrait(EmbeddingAspectRatio.ALWAYS_ALLOW)
                 .setDefaultSplitAttributes(attributes)
                 .build();
@@ -231,8 +235,9 @@ public class ActivityEmbeddingRulesController {
                 .build();
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule.Builder(
                 activityFilters, intent)
-                .setMinWidthDp(ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthDp())
-                .setMinSmallestWidthDp(ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthDp())
+                .setMinWidthDp(ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthDp(mContext))
+                .setMinSmallestWidthDp(
+                        ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthDp(mContext))
                 .setMaxAspectRatioInPortrait(EmbeddingAspectRatio.ALWAYS_ALLOW)
                 .setSticky(false)
                 .setFinishPrimaryWithPlaceholder(SplitRule.FinishBehavior.ADJACENT)
@@ -245,19 +250,25 @@ public class ActivityEmbeddingRulesController {
     private void registerAlwaysExpandRule() {
         final Set<ActivityFilter> activityFilters = new HashSet<>();
         if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SETTINGS_SEARCH_ALWAYS_EXPAND)) {
-            final Intent searchIntent = FeatureFactory.getFactory(mContext)
+            final Intent searchIntent = FeatureFactory.getFeatureFactory()
                     .getSearchFeatureProvider()
                     .buildSearchIntent(mContext, SettingsEnums.SETTINGS_HOMEPAGE);
             addActivityFilter(activityFilters, searchIntent);
         }
         addActivityFilter(activityFilters, FingerprintEnrollmentActivity.class);
+        addActivityFilter(activityFilters, FingerprintEnrollmentActivity.InternalActivity.class);
         addActivityFilter(activityFilters, FingerprintEnrollIntroduction.class);
         addActivityFilter(activityFilters, FingerprintEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
         addActivityFilter(activityFilters, FaceEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FaceEnrollIntroduction.class);
-        addActivityFilter(activityFilters, AvatarPickerActivity.class);
+        addActivityFilter(activityFilters, RemoteAuthActivity.class);
+        addActivityFilter(activityFilters, RemoteAuthActivityInternal.class);
         addActivityFilter(activityFilters, ChooseLockPattern.class);
+        addActivityFilter(activityFilters, PrivateSpaceSetupActivity.class);
+        String action = mContext.getString(R.string.config_avatar_picker_action);
+        addActivityFilter(activityFilters, new Intent(action));
+
         ActivityRule activityRule = new ActivityRule.Builder(activityFilters).setAlwaysExpand(true)
                 .build();
         mRuleController.addRule(activityRule);

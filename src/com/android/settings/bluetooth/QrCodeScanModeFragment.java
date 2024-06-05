@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Matrix;
@@ -71,20 +70,13 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
 
     public static final String KEY_BROADCAST_METADATA = "key_broadcast_metadata";
 
-    private boolean mIsGroupOp;
     private int mCornerRadius;
-    private BluetoothDevice mSink;
     private String mBroadcastMetadata;
     private Context mContext;
     private QrCamera mCamera;
     private TextureView mTextureView;
     private TextView mSummary;
     private TextView mErrorMessage;
-
-    public QrCodeScanModeFragment(boolean isGroupOp, BluetoothDevice sink) {
-        mIsGroupOp = isGroupOp;
-        mSink = sink;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

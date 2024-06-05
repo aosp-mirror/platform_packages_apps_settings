@@ -20,14 +20,13 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
-import android.provider.DeviceConfig;
+import android.os.SystemProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 /**
@@ -39,15 +38,23 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String PREFERENCE_KEY = "bluetooth_show_leaudio_device_details";
-    private static final String CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT = "le_audio_enabled_by_default";
+    private static final String LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY =
+            "ro.bluetooth.leaudio.le_audio_connection_by_default";
+    private static final boolean LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE = true;
     static int sLeAudioSupportedStateCache = BluetoothStatusCodes.ERROR_UNKNOWN;
+
+    static final String LE_AUDIO_TOGGLE_VISIBLE_PROPERTY =
+            "persist.bluetooth.leaudio.toggle_visible";
 
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
+    @VisibleForTesting boolean mLeAudioEnabledByDefault;
 
     public BluetoothLeAudioDeviceDetailsPreferenceController(Context context) {
         super(context);
         mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
+        mLeAudioEnabledByDefault =
+                SystemProperties.getBoolean(LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY, true);
     }
 
     @Override
@@ -66,16 +73,14 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
         }
 
         // Display the option only if LE Audio is supported
-        return (sLeAudioSupportedStateCache == BluetoothStatusCodes.FEATURE_SUPPORTED);
+        return !mLeAudioEnabledByDefault
+                && (sLeAudioSupportedStateCache == BluetoothStatusCodes.FEATURE_SUPPORTED);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        DeviceConfig.setProperty(
-                DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED,
-                isEnabled ? "true" : "false", false);
+        SystemProperties.set(LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, Boolean.toString(isEnabled));
         return true;
     }
 
@@ -85,23 +90,9 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
             return;
         }
 
-        final boolean leAudioDeviceDetailEnabled = DeviceConfig.getBoolean(
-                DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, false);
-        final boolean leAudioEnabledByDefault = DeviceConfig.getBoolean(
-                DeviceConfig.NAMESPACE_BLUETOOTH, CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
+        final boolean isLeAudioToggleVisible = SystemProperties.getBoolean(
+                LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE);
 
-        mPreference.setEnabled(!leAudioEnabledByDefault);
-        ((SwitchPreference) mPreference).setChecked(leAudioDeviceDetailEnabled
-                || leAudioEnabledByDefault);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        super.onDeveloperOptionsSwitchDisabled();
-        // Reset the toggle to null when the developer option is disabled
-        DeviceConfig.setProperty(
-                DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, "null", false);
+        ((TwoStatePreference) mPreference).setChecked(isLeAudioToggleVisible);
     }
 }

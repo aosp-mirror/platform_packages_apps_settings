@@ -38,19 +38,25 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.hardware.face.Face;
+import android.hardware.face.FaceEnrollOptions;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorProperties;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -61,6 +67,7 @@ import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
@@ -71,10 +78,12 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.template.RequireScrollMixin;
 import com.google.android.setupdesign.view.BottomScrollView;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -99,7 +108,8 @@ import java.util.List;
         ShadowUtils.class,
         ShadowDevicePolicyManager.class,
         ShadowSensorPrivacyManager.class,
-        SettingsShadowResources.class
+        SettingsShadowResources.class,
+        ShadowAlertDialogCompat.class
 })
 public class FaceEnrollIntroductionTest {
 
@@ -116,15 +126,21 @@ public class FaceEnrollIntroductionTest {
     private FaceEnrollIntroduction mSpyActivity;
     private FakeFeatureFactory mFakeFeatureFactory;
     private ShadowUserManager mUserManager;
+    private Resources mResources;
 
     enum GateKeeperAction {CALL_SUPER, RETURN_BYTE_ARRAY, THROW_CREDENTIAL_NOT_MATCH}
 
     public static class TestFaceEnrollIntroduction extends FaceEnrollIntroduction {
-
         private int mRecreateCount = 0;
+        public boolean mIsMultiWindowMode;
 
         public int getRecreateCount() {
             return mRecreateCount;
+        }
+
+        @Override
+        protected void onResume() {
+            super.onResume();
         }
 
         @Override
@@ -158,6 +174,11 @@ public class FaceEnrollIntroductionTest {
         protected boolean launchPostureGuidance() {
             return super.launchPostureGuidance();
         }
+
+        @Override
+        public boolean isInMultiWindowMode() {
+            return mIsMultiWindowMode;
+        }
     }
 
     @Before
@@ -175,12 +196,15 @@ public class FaceEnrollIntroductionTest {
     public void tearDown() {
         ShadowUtils.reset();
         ShadowLockPatternUtils.reset();
+        ShadowAlertDialogCompat.reset();
     }
 
     private void setupActivity() {
         final Intent testIntent = new Intent();
         // Set the challenge token so the confirm screen will not be shown
         testIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        testIntent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                FaceEnrollOptions.ENROLL_REASON_SETTINGS);
 
         when(mFakeFeatureFactory.mFaceFeatureProvider.getPostureGuidanceIntent(any())).thenReturn(
                 null /* Simulate no posture intent */);
@@ -205,6 +229,8 @@ public class FaceEnrollIntroductionTest {
         testIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
         testIntent.putExtra(EXTRA_KEY_NEXT_LAUNCHED, false);
         testIntent.putExtra(EXTRA_LAUNCHED_POSTURE_GUIDANCE, false);
+        testIntent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                FaceEnrollOptions.ENROLL_REASON_SETTINGS);
 
         when(mFakeFeatureFactory.mFaceFeatureProvider.getPostureGuidanceIntent(any())).thenReturn(
                 testIntent);
@@ -245,6 +271,14 @@ public class FaceEnrollIntroductionTest {
         when(mFaceManager.getEnrolledFaces(anyInt())).thenReturn(faces);
     }
 
+    private void setFaceManagerToHaveWithUserId(int numEnrollments, int userId) {
+        List<Face> faces = new ArrayList<>();
+        for (int i = 0; i < numEnrollments; i++) {
+            faces.add(new Face("Face " + i /* name */, 1 /*faceId */, 1 /* deviceId */));
+        }
+        when(mFaceManager.getEnrolledFaces(userId)).thenReturn(faces);
+    }
+
     @Test
     public void intro_CheckCanEnroll() {
         setFaceManagerToHave(0 /* numEnrollments */);
@@ -272,6 +306,7 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void testOnCreateToGenerateChallenge() {
         setupActivityWithGenerateChallenge(
                 new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L));
@@ -375,7 +410,8 @@ public class FaceEnrollIntroductionTest {
     @Test
     public void testFaceEnrollIntroduction_hasBottomScrollView() {
         setupActivity();
-        BottomScrollView scrollView = getGlifLayout(mActivity).findViewById(R.id.sud_scroll_view);
+        BottomScrollView scrollView = getGlifLayout(mActivity)
+                .findViewById(com.google.android.setupdesign.R.id.sud_scroll_view);
 
         assertThat(scrollView).isNotNull();
         assertThat(scrollView.getVisibility()).isEqualTo(View.VISIBLE);
@@ -394,11 +430,39 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
-    public void testFaceEnrollIntroduction_notShowFooterSecondaryButton() {
+    public void testFaceEnrollIntroduction_footerSecondaryButtonWhenCanEnroll() {
         setupActivity();
         FooterBarMixin footer = getGlifLayout(mActivity).getMixin(FooterBarMixin.class);
         FooterButton footerButton = footer.getSecondaryButton();
 
+        final RequireScrollMixin requireScrollMixin = getGlifLayout(mActivity).getMixin(
+                RequireScrollMixin.class);
+        assertThat(footerButton.getVisibility()).isEqualTo(
+                requireScrollMixin.isScrollingRequired() ? View.INVISIBLE : View.VISIBLE);
+
+        requireScrollMixin.getOnRequireScrollStateChangedListener().onRequireScrollStateChanged(
+                false);
+        assertThat(footerButton.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_footerSecondaryButtonWhenMaxEnroll() {
+        setFaceManagerToHave(1 /* numEnrollments */);
+        final Intent intent = new Intent();
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+
+        mController.create();
+
+        FooterBarMixin footer = getGlifLayout(mActivity).getMixin(FooterBarMixin.class);
+        FooterButton footerButton = footer.getSecondaryButton();
+        final RequireScrollMixin requireScrollMixin = getGlifLayout(mActivity).getMixin(
+                RequireScrollMixin.class);
+        assertThat(footerButton.getVisibility()).isEqualTo(View.INVISIBLE);
+
+        requireScrollMixin.getOnRequireScrollStateChangedListener().onRequireScrollStateChanged(
+                false);
         assertThat(footerButton.getVisibility()).isEqualTo(View.INVISIBLE);
     }
 
@@ -421,6 +485,7 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void testFaceEnrollIntroduction_onStartRegisteredPostureChangeCallback() {
         setupActivityForPosture();
         mSpyActivity.onStart();
@@ -544,6 +609,85 @@ public class FaceEnrollIntroductionTest {
         mController.start();
 
         assertThat(mActivity.getPostureCallback()).isNull();
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_maxFacesNotEnrolled_addUserProfile() {
+        // Enroll a face for one user
+        setFaceManagerToHaveWithUserId(1, 0);
+
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mResources = spy(mContext.getResources());
+        when(mResources.getInteger(R.integer.suw_max_faces_enrollable)).thenReturn(1);
+
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, new Intent());
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+
+        mController.create();
+
+        // The maximum number of faces is already enrolled
+        int result = mActivity.checkMaxEnrolled();
+        assertThat(result).isEqualTo(R.string.face_intro_error_max);
+
+        // Add another user profile
+        mUserManager.addUser(10, "", 0);
+        final Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_USER_ID, 10);
+
+        when(mResources.getInteger(R.integer.suw_max_faces_enrollable)).thenReturn(2);
+
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+
+        mController.create();
+
+        // The maximum number of faces hasn't been enrolled, so a new face
+        // can be enrolled for the added user profile
+        result = mActivity.checkMaxEnrolled();
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    public void multiWindow_showsDialog() {
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class);
+        mActivity  = (TestFaceEnrollIntroduction) mController.get();
+        mActivity.mIsMultiWindowMode = true;
+        mController.setup().get();
+
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNotNull();
+
+        final ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(dialog);
+        assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
+                mActivity.getString(R.string.biometric_settings_add_face_in_split_mode_title));
+        assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
+                mActivity.getString(R.string.biometric_settings_add_face_in_split_mode_message));
+
+        final Button button = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        assertThat(button).isNotNull();
+        button.performClick();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        assertThat(dialog.isShowing()).isFalse();
+        assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    @Test
+    public void singleWindow_noDialog() {
+        Robolectric.buildActivity(TestFaceEnrollIntroduction.class).setup().get();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_forwardsEnrollOptions() {
+        setupActivity();
+        final Intent intent = mActivity.getEnrollingIntent();
+
+        assertThat(intent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1))
+                .isEqualTo(FaceEnrollOptions.ENROLL_REASON_SETTINGS);
     }
 
 }

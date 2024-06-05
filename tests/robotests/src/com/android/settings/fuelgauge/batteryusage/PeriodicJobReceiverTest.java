@@ -86,14 +86,14 @@ public final class PeriodicJobReceiverTest {
 
     @Test
     public void onReceive_nullIntent_notRefreshesJob() {
-        mReceiver.onReceive(mContext, /*intent=*/ null);
+        mReceiver.onReceive(mContext, /* intent= */ null);
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
     }
 
     @Test
     public void onReceive_containsExpiredData_clearsExpiredDataFromDatabase()
             throws InterruptedException {
-        insertExpiredData(/*shiftDay=*/ DatabaseUtils.DATA_RETENTION_INTERVAL_DAY);
+        insertExpiredData(/* shiftDay= */ DatabaseUtils.DATA_RETENTION_INTERVAL_DAY);
 
         mReceiver.onReceive(mContext, JOB_UPDATE_INTENT);
 
@@ -104,7 +104,7 @@ public final class PeriodicJobReceiverTest {
     @Test
     public void onReceive_withoutExpiredData_notClearsExpiredDataFromDatabase()
             throws InterruptedException {
-        insertExpiredData(/*shiftDay=*/ DatabaseUtils.DATA_RETENTION_INTERVAL_DAY - 1);
+        insertExpiredData(/* shiftDay= */ DatabaseUtils.DATA_RETENTION_INTERVAL_DAY - 1);
 
         mReceiver.onReceive(mContext, JOB_UPDATE_INTENT);
 
@@ -129,5 +129,4 @@ public final class PeriodicJobReceiverTest {
         // Ensures the testing environment is correct.
         assertThat(mDao.getAllAfter(0)).hasSize(3);
     }
-
 }

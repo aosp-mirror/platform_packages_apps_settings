@@ -32,7 +32,6 @@ object UsageStatsPageProvider : SettingsPageProvider {
         AppListPage(
             title = stringResource(R.string.testing_usage_stats),
             listModel = rememberContext(::UsageStatsListModel),
-            primaryUserOnly = true,
         )
     }
 }

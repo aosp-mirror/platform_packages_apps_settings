@@ -1,0 +1,111 @@
+<!--
+  ~ Copyright (C) 2024 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ps_account_intro_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:filterTouchesWhenObscured="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_security_privacy_alert_primary"/>
+        <TextView
+            style="@style/PrivateSpaceSetupTextFontStyle"
+            android:fontFamily="google-sans"
+            android:text="@string/private_space_gaia_education_title"
+            android:layout_margin="24dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:textSize="28sp"/>
+        <TextView
+            style="@style/PrivateSpaceSetupTextFontStyle"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="40dp"
+            android:textSize="14sp"
+            android:text="@string/private_space_gaia_education_description"/>
+        <TextView
+            style="@style/PrivateSpaceSetupTextFontStyle"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="14sp"
+            android:text="@string/private_space_gaia_education_header"/>
+        <RelativeLayout
+            style="@style/PrivateSpaceSetupBulletPointLayoutStyle"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+            <ImageView
+                android:id="@+id/point1"
+                style="@style/PrivateSpaceBulletPointIconStyle"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_text_dot" />
+            <TextView
+                style="@style/PrivateSpaceBulletPointTextFontStyle"
+                android:layout_toRightOf="@+id/point1"
+                android:textSize="14sp"
+                android:text="@string/private_space_gaia_education_bullet1"/>
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/PrivateSpaceSetupBulletPointLayoutStyle">
+            <ImageView
+                android:id="@+id/point2"
+                style="@style/PrivateSpaceBulletPointIconStyle"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_text_dot" />
+            <TextView
+                style="@style/PrivateSpaceBulletPointTextFontStyle"
+                android:layout_toRightOf="@+id/point2"
+                android:textSize="14sp"
+                android:text="@string/private_space_gaia_education_bullet2"/>
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/PrivateSpaceSetupBulletPointLayoutStyle">
+            <ImageView
+                android:id="@+id/point3"
+                style="@style/PrivateSpaceBulletPointIconStyle"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_text_dot" />
+            <TextView
+                style="@style/PrivateSpaceBulletPointTextFontStyle"
+                android:layout_toRightOf="@+id/point3"
+                android:textSize="14sp"
+                android:text="@string/private_space_gaia_education_bullet3"/>
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/PrivateSpaceSetupBulletPointLayoutStyle">
+            <ImageView
+                android:id="@+id/point4"
+                style="@style/PrivateSpaceBulletPointIconStyle"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_text_dot" />
+            <TextView
+                style="@style/PrivateSpaceBulletPointTextFontStyle"
+                android:layout_toRightOf="@+id/point4"
+                android:textSize="14sp"
+                android:text="@string/private_space_gaia_education_bullet4"/>
+        </RelativeLayout>
+    </LinearLayout>
+</com.google.android.setupdesign.GlifLayout>

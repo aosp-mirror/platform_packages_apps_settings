@@ -38,8 +38,14 @@
     <!-- Whether to show Camera laser sensor switch in Developer Options -->
     <bool name="config_show_camera_laser_sensor">false</bool>
 
-    <!-- Fully-qualified class name for the implementation of the FeatureFactory to be instantiated. -->
-    <string name="config_featureFactory" translatable="false">com.android.settings.overlay.FeatureFactoryImpl</string>
+    <!-- Intent action to open Avatar Picker app -->
+    <string name="config_avatar_picker_action" translatable="false">
+        com.android.avatarpicker.FULL_SCREEN_ACTIVITY
+    </string>
+    <!-- User avatar dialog result broadcast explicit package -->
+    <string name="config_avatar_picker_package" translatable="false">
+        com.android.avatarpicker
+    </string>
 
     <!-- Package name and fully-qualified class name for the wallpaper picker activity. -->
     <string name="config_wallpaper_picker_package" translatable="false">com.android.settings</string>
@@ -229,6 +235,9 @@
          Can be overridden for specific product builds if the target device does not support it -->
     <bool name="config_media_vibration_supported">true</bool>
 
+    <!-- Whether to show Keyboard vibration settings in the vibration and haptics screen. -->
+    <bool name="config_keyboard_vibration_supported">false</bool>
+
     <!--
         Whether or not the homepage should be powered by legacy suggestion (versus contextual cards)
         Default to true as not all devices support contextual cards.
@@ -248,7 +257,7 @@
     <bool name="config_show_device_header_in_device_info">true</bool>
 
     <!-- Whether or not TopLevelSettings should force rounded icon for injected tiles -->
-    <bool name="config_force_rounded_icon_TopLevelSettings">true</bool>
+    <bool name="config_force_rounded_icon_TopLevelSettings">false</bool>
 
     <!-- Whether dismissal timestamp should be kept before deletion -->
     <bool name="config_keep_contextual_card_dismissal_timestamp">false</bool>
@@ -258,19 +267,31 @@
         com.android.settings.intelligence
     </string>
 
-    <!-- Whether the confirmation for sim deletion is defaulted to be on or off-->
-    <bool name="config_sim_deletion_confirmation_default_on">false</bool>
+    <!-- Settings intelligence interaction log intent action -->
+    <string name="config_settingsintelligence_log_action" translatable="false"></string>
+
+    <!-- Whether Settings intelligence supports presenting Slices. -->
+    <bool name="config_settingsintelligence_slice_supported">false</bool>
 
     <!-- Package Installer package name -->
     <string name="config_package_installer_package_name" translatable="false">
         com.android.packageinstaller
     </string>
 
-    <!-- Settings intelligence interaction log intent action -->
-    <string name="config_settingsintelligence_log_action" translatable="false"></string>
+    <!-- Device lock controller package name -->
+    <string name="config_device_lock_controller_package_name" translatable="false">
+        com.android.devicelockcontroller
+    </string>
 
-    <!-- Whether Settings intelligence supports presenting Slices. -->
-    <bool name="config_settingsintelligence_slice_supported">false</bool>
+    <!-- Sound picker package name -->
+    <string name="config_sound_picker_package_name" translatable="false">
+        com.android.soundpicker
+    </string>
+
+    <!-- Contacts package name -->
+    <string name="config_contacts_package_name" translatable="false">
+        com.android.contacts
+    </string>
 
     <!-- AOSP Emergency app package name -->
     <string name="config_aosp_emergency_package_name" translatable="false">
@@ -345,9 +366,9 @@
     <bool name="config_show_manual">false</bool>
     <!-- Whether to show a preference item for regulatory information in About phone -->
     <bool name="config_show_regulatory_info">false</bool>
-
-    <!-- Whether to show a preference item for mobile plan -->
-    <bool name="config_show_mobile_plan">true</bool>
+    <!-- Package name of regulatory information overlay which provides mapping and contents.
+         Fetch resource from overlay package directly if this is set. -->
+    <string name="config_regulatory_info_overlay_package_name" translatable="false" />
 
     <!-- Whether none security option is hide or not  (country specific). -->
     <bool name="config_hide_none_security_option">false</bool>
@@ -364,7 +385,10 @@
     <bool name="config_show_wifi_hotspot_settings">true</bool>
 
     <!-- Whether Wi-Fi hotspot speed should be shown or not. -->
-    <bool name="config_show_wifi_hotspot_speed">false</bool>
+    <bool name="config_show_wifi_hotspot_speed">true</bool>
+
+    <!-- Whether or not Internet preference should be shown. -->
+    <bool name="config_show_internet_settings">true</bool>
 
     <!-- Whether toggle_airplane is available or not. -->
     <bool name="config_show_toggle_airplane">true</bool>
@@ -526,8 +550,12 @@
         <item>content://com.android.settings.slices/intent/media_output_indicator</item>
     </string-array>
 
-    <!-- List containing the apps cannot be changed the battery optimize modes -->
-    <string-array name="config_disable_optimization_mode_apps" translatable="false">
+    <!-- List containing the apps keep in battery mode = "Optimized" -->
+    <string-array name="config_force_battery_optimize_mode_apps" translatable="false">
+    </string-array>
+
+    <!-- List containing the apps keep in battery mode = "Unrestricted" -->
+    <string-array name="config_force_battery_unrestrict_mode_apps" translatable="false">
     </string-array>
 
     <!-- Uri to query non-public Slice Uris. -->
@@ -579,8 +607,11 @@
     <!-- Media Uri to view audio storage category. -->
     <string name="config_audio_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/audio_root</string>
 
-    <!-- Media Uri to view documents & other storage category. -->
-    <string name="config_documents_and_other_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/documents_root</string>
+    <!-- Media Uri to view documents storage category. -->
+    <string name="config_documents_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/documents_root</string>
+
+    <!-- Media Uri to view "other" storage category. -->
+    <string name="config_other_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/others_root</string>
 
     <!-- Whether to show Smart Storage toggle -->
     <bool name="config_show_smart_storage_toggle">true</bool>
@@ -603,6 +634,31 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+    </integer-array>
+
+    <!-- App aspect ratio settings screen, user aspect ratio override options. Must be the same
+         length and order as config_userAspectRatioOverrideValues below. -->
+    <string-array name="config_userAspectRatioOverrideEntries" translatable="false">
+        <item>@string/user_aspect_ratio_app_default</item>
+        <item>@string/user_aspect_ratio_fullscreen</item>
+        <item>@string/user_aspect_ratio_half_screen</item>
+        <item>@string/user_aspect_ratio_device_size</item>
+        <item>@string/user_aspect_ratio_16_9</item>
+        <item>@string/user_aspect_ratio_4_3</item>
+        <item>@string/user_aspect_ratio_3_2</item>
+    </string-array>
+
+    <!-- App aspect ratio settings screen, user aspect ratio override options. Must be the same
+         length and order as config_userAspectRatioOverrideEntries above. The values must
+         correspond to PackageManager.UserMinAspectRatio -->
+    <integer-array name="config_userAspectRatioOverrideValues" translatable="false">
+        <item>0</item> <!-- USER_MIN_ASPECT_RATIO_UNSET -->
+        <item>6</item> <!-- USER_MIN_ASPECT_RATIO_FULLSCREEN -->
+        <item>1</item> <!-- USER_MIN_ASPECT_RATIO_SPLIT_SCREEN -->
+        <item>2</item> <!-- USER_MIN_ASPECT_RATIO_DISPLAY_SIZE -->
+        <item>4</item> <!-- USER_MIN_ASPECT_RATIO_16_9 -->
+        <item>3</item> <!-- USER_MIN_ASPECT_RATIO_4_3 -->
+        <item>5</item> <!-- USER_MIN_ASPECT_RATIO_3_2 -->
     </integer-array>
 
     <!-- The settings/preference description for each settable device state defined in the array
@@ -644,6 +700,13 @@
     <!-- The ratio to use when using the two-pane settings layout -->
     <item name="config_activity_embed_split_ratio" format="float" type="dimen">0.3636</item>
 
+    <!-- The smallest value of the smallest-width (sw) of the window in any rotation when the split
+         should be used. -->
+    <integer name="config_activity_embed_split_min_sw_dp">600</integer>
+
+    <!-- The smallest value of current width of the window when the split should be used. -->
+    <integer name="config_activity_embed_split_min_cur_dp">720</integer>
+
     <!-- The number of visible app icons while entering app list related pages for preloading.
          Take the "Unrestricted data" page as the example, the visible app icons could be 15
          on 6.4 inches screen size whether the font size and display size are both small. -->
@@ -661,6 +724,9 @@
     <!-- Whether to enable the advanced vpn feature. The default is not to. -->
     <bool name="config_advanced_vpn_enabled">false</bool>
 
+    <!-- Whether to show the VPN options menu. The default is to show it. -->
+    <bool name="config_show_vpn_options">true</bool>
+
     <!-- An array of uid name for which packages exempt from Wi-Fi permission check. -->
     <string-array name="config_exempt_wifi_permission_uid_name" translatable="false">
         <item>@string/config_settingsintelligence_package_name</item>
@@ -671,7 +737,7 @@
     <bool name="default_allow_sensitive_lockscreen_content">true</bool>
 
     <!-- Whether to enable the app battery usage list page feature. -->
-    <bool name="config_app_battery_usage_list_enabled">true</bool>
+    <bool name="config_app_battery_usage_list_enabled">false</bool>
 
     <!-- Whether sim related information is visible to the end user. -->
     <bool name="config_show_sim_info">true</bool>
@@ -718,14 +784,59 @@
     <!-- Whether to display Cloned Apps page in Settings (Settings > Apps > Cloned Apps).-->
     <bool name="config_cloned_apps_page_enabled">false</bool>
 
+    <!-- Whether to initiate Account login during Private Space setup.-->
+    <bool name="config_privatespace_account_login_enabled">false</bool>
+
     <!-- Certificates of apps which are allowed to use activity embedding with Settings.-->
     <string-array name="config_known_host_certs" translatable="false">
         <item></item>
     </string-array>
+
+    <!-- Whether to display the "Enable wireless display" menu -->
+    <bool name="config_show_wifi_display_enable_menu">true</bool>
 
     <!-- List of packages that should be hidden for MVNO. Do not translate -->
     <string-array name="datausage_hiding_carrier_service_package_names" translatable="false"/>
 
     <!-- List of MVNO. Do not translate -->
     <integer-array name="datausage_hiding_carrier_service_carrier_id" translatable="false"/>
+
+    <!-- App locale change intent action-->
+    <string name ="config_app_locale_intent_action" translatable="false" />
+
+    <!-- Allowed packages to show the confirmation dialog for a system locale suggestion  -->
+    <string-array name="allowed_packages_for_locale_confirmation_diallog" translatable="false"/>
+
+    <!-- Array of text reading preview layouts. Must contain at least 1 layout -->
+    <array name="config_text_reading_preview_samples">
+        <item>@layout/accessibility_text_reading_preview_app_grid</item>
+        <item>@layout/screen_zoom_preview_1</item>
+        <item>@layout/accessibility_text_reading_preview_mail_content</item>
+    </array>
+
+    <!-- Package responsible for updating Mainline Modules -->
+    <string name="config_mainline_module_update_package" translatable="false">com.android.vending</string>
+
+    <!-- Whether location services setting is available or not. -->
+    <bool name="config_show_location_services">true</bool>
+
+    <!-- Whether to disable location toggle for ChromeOS devices-->
+    <bool name="config_disable_location_toggle_for_chrome">false</bool>
+
+    <!-- Whether to display pSIM conversion menu in Settings.-->
+    <bool name="config_psim_conversion_menu_enabled">false</bool>
+
+    <!-- Array of carrier id to allow the pSIM conversion-->
+    <integer-array name="config_psim_conversion_menu_enabled_carrier" translatable="false">
+    </integer-array>
+
+    <!-- Array of carrier id that uses reusable activation code-->
+    <integer-array name="config_carrier_use_rac" translatable="false">
+    </integer-array>
+
+    <!-- The Activity intent to trigger to launch time-related feedback. -->
+    <string name="config_time_feedback_intent_uri" translatable="false" />
+
+    <!-- Package name for diagnostics app. -->
+    <string name="config_device_diagnostics_package_name" translatable="false">com.android.devicediagnostics</string>
 </resources>

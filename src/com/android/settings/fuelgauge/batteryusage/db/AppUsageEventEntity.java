@@ -32,6 +32,7 @@ import java.util.Locale;
 public class AppUsageEventEntity {
     /** Keys for accessing {@link ContentValues}. */
     public static final String KEY_UID = "uid";
+
     public static final String KEY_USER_ID = "userId";
     public static final String KEY_TIMESTAMP = "timestamp";
     public static final String KEY_APP_USAGE_EVENT_TYPE = "appUsageEventType";
@@ -81,14 +82,28 @@ public class AppUsageEventEntity {
     @Override
     public String toString() {
         final String recordAtDateTime = ConvertUtils.utcToLocalTimeForLogging(timestamp);
-        final StringBuilder builder = new StringBuilder()
-                .append("\nAppUsageEvent{")
-                .append(String.format(Locale.US,
-                        "\n\tpackage=%s|uid=%d|userId=%d", packageName, uid, userId))
-                .append(String.format(Locale.US, "\n\ttimestamp=%s|eventType=%d|instanceId=%d",
-                        recordAtDateTime, appUsageEventType, instanceId))
-                .append(String.format(Locale.US, "\n\ttaskRootPackageName=%s",
-                        taskRootPackageName));
+        final StringBuilder builder =
+                new StringBuilder()
+                        .append("\nAppUsageEvent{")
+                        .append(
+                                String.format(
+                                        Locale.US,
+                                        "\n\tpackage=%s|uid=%d|userId=%d",
+                                        packageName,
+                                        uid,
+                                        userId))
+                        .append(
+                                String.format(
+                                        Locale.US,
+                                        "\n\ttimestamp=%s|eventType=%d|instanceId=%d",
+                                        recordAtDateTime,
+                                        appUsageEventType,
+                                        instanceId))
+                        .append(
+                                String.format(
+                                        Locale.US,
+                                        "\n\ttaskRootPackageName=%s",
+                                        taskRootPackageName));
         return builder.toString();
     }
 
@@ -111,8 +126,7 @@ public class AppUsageEventEntity {
             builder.setPackageName(contentValues.getAsString(KEY_PACKAGE_NAME));
         }
         if (contentValues.containsKey(KEY_INSTANCE_ID)) {
-            builder.setInstanceId(
-                    contentValues.getAsInteger(KEY_INSTANCE_ID));
+            builder.setInstanceId(contentValues.getAsInteger(KEY_INSTANCE_ID));
         }
         if (contentValues.containsKey(KEY_TASK_ROOT_PACKAGE_NAME)) {
             builder.setTaskRootPackageName(contentValues.getAsString(KEY_TASK_ROOT_PACKAGE_NAME));
@@ -198,6 +212,4 @@ public class AppUsageEventEntity {
 
         private Builder() {}
     }
-
-
 }

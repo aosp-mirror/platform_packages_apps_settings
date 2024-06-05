@@ -23,6 +23,7 @@ import static com.android.settings.accessibility.AccessibilitySettingsForSetupWi
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -38,13 +39,17 @@ import android.content.pm.ServiceInfo;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.display.AutoBrightnessPreferenceController;
+import com.android.settings.display.BrightnessLevelPreferenceController;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
@@ -57,6 +62,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +71,9 @@ import java.util.List;
  * Tests for {@link AccessibilitySettingsForSetupWizard}.
  */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AccessibilitySettingsForSetupWizardTest {
 
     private static final ComponentName TEST_SCREEN_READER_COMPONENT_NAME = new ComponentName(
@@ -83,7 +92,7 @@ public class AccessibilitySettingsForSetupWizardTest {
     private GlifPreferenceLayout mGlifLayoutView;
     @Mock
     private FooterBarMixin mFooterBarMixin;
-    private AccessibilitySettingsForSetupWizard mFragment;
+    private TestAccessibilitySettingsForSetupWizard mFragment;
 
     @Before
     public void setUp() {
@@ -93,6 +102,7 @@ public class AccessibilitySettingsForSetupWizardTest {
         when(mAccessibilityManager.getInstalledAccessibilityServiceList()).thenReturn(
                 mAccessibilityServices);
         doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mock(LifecycleOwner.class)).when(mFragment).getViewLifecycleOwner();
         doReturn(mFooterBarMixin).when(mGlifLayoutView).getMixin(FooterBarMixin.class);
     }
 
@@ -135,6 +145,19 @@ public class AccessibilitySettingsForSetupWizardTest {
         assertThat(mFragment.mSelectToSpeakPreference.getKey()).isNull();
     }
 
+    @Test
+    public void createPreferenceControllers_brightnessPreferencesControllersAreCreated() {
+        mFragment.onAttach(mContext);
+
+        List<AbstractPreferenceController> controllers =
+                mFragment.createPreferenceControllers(mContext);
+
+        assertTrue(controllers.stream().anyMatch(
+                controller -> controller instanceof BrightnessLevelPreferenceController));
+        assertTrue(controllers.stream().anyMatch(
+                controller -> controller instanceof AutoBrightnessPreferenceController));
+    }
+
     private void addEnabledServiceInfo(ComponentName componentName, boolean isAccessibilityTool) {
         final AccessibilityServiceInfo a11yServiceInfo = mock(AccessibilityServiceInfo.class);
         when(a11yServiceInfo.getComponentName()).thenReturn(componentName);
@@ -164,12 +187,14 @@ public class AccessibilitySettingsForSetupWizardTest {
 
         private final Context mContext;
         private final PreferenceManager mPreferenceManager;
+        final PreferenceScreen mPreferenceScreen;
 
         TestAccessibilitySettingsForSetupWizard(Context context) {
             super();
             mContext = context;
             mPreferenceManager = new PreferenceManager(context);
-            mPreferenceManager.setPreferences(mPreferenceManager.createPreferenceScreen(context));
+            mPreferenceScreen = spy(mPreferenceManager.createPreferenceScreen(context));
+            mPreferenceManager.setPreferences(mPreferenceScreen);
             mDisplayMagnificationPreference = new Preference(context);
             mScreenReaderPreference = new RestrictedPreference(context);
             mSelectToSpeakPreference = new RestrictedPreference(context);

@@ -23,16 +23,19 @@ import android.net.Uri;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
+import com.android.settings.network.NetworkProviderSettings;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBuilderUtils;
-import com.android.settings.wifi.WifiSettings;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Panel data class for Wifi settings.
+ *
+ * @deprecated this is not used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class WifiPanel implements PanelContent {
 
     private final Context mContext;
@@ -59,10 +62,9 @@ public class WifiPanel implements PanelContent {
 
     @Override
     public Intent getSeeMoreIntent() {
-        final String screenTitle =
-                mContext.getText(R.string.wifi_settings).toString();
+        final String screenTitle = mContext.getText(R.string.wifi_settings).toString();
         final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                WifiSettings.class.getName(),
+                NetworkProviderSettings.class.getName(),
                 null /* key */,
                 screenTitle,
                 SettingsEnums.WIFI,

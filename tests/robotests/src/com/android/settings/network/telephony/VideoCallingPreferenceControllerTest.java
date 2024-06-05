@@ -86,7 +86,8 @@ public class VideoCallingPreferenceControllerTest {
 
         mPreference = new SwitchPreference(mContext);
         mController = spy(new VideoCallingPreferenceController(mContext, "wifi_calling"));
-        mController.init(SUB_ID);
+        mController.init(
+                SUB_ID, new CallingPreferenceCategoryController(mContext, "calling_category"));
         doReturn(mQueryImsState).when(mController).queryImsState(anyInt());
         doReturn(mQueryVoLteState).when(mController).queryVoLteState(anyInt());
         doReturn(true).when(mController).isImsSupported();

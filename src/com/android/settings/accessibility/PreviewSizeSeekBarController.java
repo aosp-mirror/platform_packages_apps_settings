@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
@@ -28,11 +29,12 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.LabeledSeekBarPreference;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.Optional;
 
@@ -111,6 +113,10 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
     public void onDestroy() {
         // remove runnables in the queue.
         mHandler.removeCallbacksAndMessages(null);
+        final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
+        if (isTooltipWindowShowing) {
+            mTooltipWindow.dismiss();
+        }
     }
 
     @Override
@@ -204,17 +210,31 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
             return;
         }
 
+        if (mContext instanceof Activity
+                && WizardManagerHelper.isAnySetupWizard(((Activity) mContext).getIntent())) {
+            // Don't show QuickSettingsTooltip in Setup Wizard
+            return;
+        }
+
         if (!mNeedsQSTooltipReshow && AccessibilityQuickSettingUtils.hasValueInSharedPreferences(
                 mContext, tileComponentName)) {
             // Returns if quick settings tooltip only show once.
             return;
         }
 
-        mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(mContext);
-        mTooltipWindow.setup(getTileTooltipContent(),
-                R.drawable.accessibility_auto_added_qs_tooltip_illustration);
-        mTooltipWindow.showAtTopCenter(mSeekBarPreference.getSeekbar());
-        AccessibilityQuickSettingUtils.optInValueToSharedPreferences(mContext, tileComponentName);
+        // TODO (287728819): Move tooltip showing to SystemUI
+        // Since the lifecycle of controller is independent of that of the preference, doing
+        // null check on seekbar is a temporary solution for the case that seekbar view
+        // is not ready when we would like to show the tooltip.  If the seekbar is not ready,
+        // we give up showing the tooltip and also do not reshow it in the future.
+        if (mSeekBarPreference.getSeekbar() != null) {
+            mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(mContext);
+            mTooltipWindow.setup(getTileTooltipContent(),
+                    R.drawable.accessibility_auto_added_qs_tooltip_illustration);
+            mTooltipWindow.showAtTopCenter(mSeekBarPreference.getSeekbar());
+        }
+        AccessibilityQuickSettingUtils.optInValueToSharedPreferences(mContext,
+                tileComponentName);
         mNeedsQSTooltipReshow = false;
     }
 

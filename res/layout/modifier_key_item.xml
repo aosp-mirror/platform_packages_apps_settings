@@ -19,8 +19,7 @@
     android:layout_marginTop="8dip"
     android:layout_marginBottom="8dip"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingEnd="?android:attr/scrollbarSize"
-    android:layout_weight="1">
+    android:paddingEnd="?android:attr/scrollbarSize">
 
     <ImageView
         android:id="@+id/modifier_key_check_icon"
@@ -36,7 +35,7 @@
 
     <TextView
         android:id="@+id/modifier_key_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:textDirection="locale"
@@ -45,5 +44,39 @@
         android:layout_toEndOf="@+id/modifier_key_check_icon"
         android:ellipsize="marquee"
         android:fadingEdge="horizontal" />
+
+    <TextView
+        android:id="@+id/modifier_key_left_bracket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textDirection="locale"
+        android:padding="1dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_toEndOf="@+id/modifier_key_text"
+        android:fadingEdge="horizontal" />
+
+    <ImageView
+        android:id="@+id/modifier_key_action_key_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/modifier_key_left_bracket"
+        android:fadingEdge="horizontal"
+        android:tint="?android:attr/textColorPrimary"/>
+
+    <TextView
+        android:id="@+id/modifier_key_right_bracket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textDirection="locale"
+        android:padding="1dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_toEndOf="@+id/modifier_key_action_key_icon"
+        android:fadingEdge="horizontal" />
+
+    <View android:layout_width="wrap_content"
+          android:layout_height="match_parent" />
 
 </RelativeLayout>

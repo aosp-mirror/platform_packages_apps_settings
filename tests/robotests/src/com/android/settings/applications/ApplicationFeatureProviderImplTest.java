@@ -35,22 +35,35 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.SystemConfigManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.webkit.Flags;
 
 import com.android.settings.testutils.ApplicationTestUtils;
+import com.android.settings.webview.WebViewUpdateServiceWrapper;
 import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
 import com.android.settingslib.testutils.shadow.ShadowSmsApplication;
 
 import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -64,6 +77,12 @@ import java.util.Set;
 @RunWith(RobolectricTestRunner.class)
 public final class ApplicationFeatureProviderImplTest {
 
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     private final int MAIN_USER_ID = 0;
     private final int MANAGED_PROFILE_ID = 10;
 
@@ -75,6 +94,9 @@ public final class ApplicationFeatureProviderImplTest {
     private final String APP_2 = "app2";
 
     private final String PERMISSION = "some.permission";
+
+    private final List<String> PREVENT_USER_DISABLE_PACKAGES = List.of(
+            "prevent.disable.package1", "prevent.disable.package2", "prevent.disable.package3");
 
     @Mock
     private UserManager mUserManager;
@@ -88,22 +110,29 @@ public final class ApplicationFeatureProviderImplTest {
     private DevicePolicyManager mDevicePolicyManager;
     @Mock
     private LocationManager mLocationManager;
+    @Mock
+    private WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
+    @Mock
+    private SystemConfigManager mSystemConfigManager;
 
     private ApplicationFeatureProvider mProvider;
 
     private int mAppCount = -1;
     private List<UserAppInfo> mAppList = null;
+    private PausedExecutorService mExecutorService;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
+        when(mContext.getSystemService(SystemConfigManager.class)).thenReturn(mSystemConfigManager);
 
         mProvider = new ApplicationFeatureProviderImpl(mContext, mPackageManager,
-                mPackageManagerService, mDevicePolicyManager);
+                mPackageManagerService, mDevicePolicyManager, mWebViewUpdateServiceWrapper);
+
+        mExecutorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(mExecutorService);
     }
 
     private void verifyCalculateNumberOfPolicyInstalledApps(boolean async) {
@@ -133,16 +162,20 @@ public final class ApplicationFeatureProviderImplTest {
 
         mAppList = null;
         mProvider.listPolicyInstalledApps((list) -> mAppList = list);
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
         assertThat(mAppList).isNotNull();
         assertThat(mAppList.size()).isEqualTo(1);
         assertThat(mAppList.get(0).appInfo.packageName).isEqualTo(APP_2);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCalculateNumberOfInstalledAppsSync() {
         verifyCalculateNumberOfPolicyInstalledApps(false /* async */);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCalculateNumberOfInstalledAppsAsync() {
         verifyCalculateNumberOfPolicyInstalledApps(true /* async */);
@@ -174,11 +207,13 @@ public final class ApplicationFeatureProviderImplTest {
         assertThat(mAppCount).isEqualTo(2);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCalculateNumberOfAppsWithAdminGrantedPermissionsSync() throws Exception {
         verifyCalculateNumberOfAppsWithAdminGrantedPermissions(false /* async */);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCalculateNumberOfAppsWithAdminGrantedPermissionsAsync() throws Exception {
         verifyCalculateNumberOfAppsWithAdminGrantedPermissions(true /* async */);
@@ -205,6 +240,9 @@ public final class ApplicationFeatureProviderImplTest {
         mAppList = null;
         mProvider.listAppsWithAdminGrantedPermissions(new String[]{PERMISSION},
                 (list) -> mAppList = list);
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
+
         assertThat(mAppList).isNotNull();
         assertThat(mAppList.size()).isEqualTo(2);
         assertThat(Arrays.asList(mAppList.get(0).appInfo.packageName,
@@ -335,6 +373,26 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_UPDATE_SERVICE_V2)
+    public void getKeepEnabledPackages_shouldContainWebViewPackage() {
+        final String testWebViewPackageName = "com.android.webview";
+        when(mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName())
+                .thenReturn(testWebViewPackageName);
+        final Set<String> allowlist = mProvider.getKeepEnabledPackages();
+        assertThat(allowlist).contains(testWebViewPackageName);
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_UPDATE_SERVICE_V2)
+    public void getKeepEnabledPackages_shouldNotContainWebViewPackageIfFlagDisabled() {
+        final String testWebViewPackageName = "com.android.webview";
+        when(mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName())
+                .thenReturn(testWebViewPackageName);
+        final Set<String> allowlist = mProvider.getKeepEnabledPackages();
+        assertThat(allowlist).doesNotContain(testWebViewPackageName);
+    }
+
+    @Test
     @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
     public void getKeepEnabledPackages_shouldContainPackageInstaller() {
         final String testDialer = "com.android.test.defaultdialer";
@@ -354,6 +412,16 @@ public final class ApplicationFeatureProviderImplTest {
         final Set<String> allowlist = mProvider.getKeepEnabledPackages();
 
         assertThat(allowlist).contains("com.android.packageinstaller");
+    }
+
+    @Test
+    public void getKeepEnabledPackages_shouldContainPreventUserDisablePackages() {
+        when(mSystemConfigManager.getPreventUserDisablePackages())
+                .thenReturn(PREVENT_USER_DISABLE_PACKAGES);
+
+        final Set<String> keepEnabledPackages = mProvider.getKeepEnabledPackages();
+
+        assertThat(keepEnabledPackages).containsAtLeastElementsIn(PREVENT_USER_DISABLE_PACKAGES);
     }
 
     private void setUpUsersAndInstalledApps() {

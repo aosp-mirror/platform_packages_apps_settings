@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics;
 
+import static android.util.FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT;
+
 import android.annotation.IntDef;
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -23,6 +25,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
@@ -63,6 +66,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 public class BiometricUtils {
     private static final String TAG = "BiometricUtils";
+    public static final String EXTRA_ENROLL_REASON = BiometricManager.EXTRA_ENROLL_REASON;
 
     /** The character ' • ' to separate the setup choose options */
     public static final String SEPARATOR = " \u2022 ";
@@ -249,20 +253,22 @@ public class BiometricUtils {
      */
     public static Intent getFingerprintFindSensorIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)) {
-            final Intent intent = new Intent(context, FingerprintEnrollmentActivity.class);
+        final boolean isSuw =  WizardManagerHelper.isAnySetupWizard(activityIntent);
+        final Intent intent;
+        if (FeatureFlagUtils.isEnabled(context, SETTINGS_BIOMETRICS2_ENROLLMENT)) {
+            intent = new Intent(context, isSuw
+                    ? FingerprintEnrollmentActivity.SetupActivity.class
+                    : FingerprintEnrollmentActivity.class);
             intent.putExtra(BiometricEnrollActivity.EXTRA_SKIP_INTRO, true);
-            if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
-                SetupWizardUtils.copySetupExtras(activityIntent, intent);
-            }
-            return intent;
-        } else if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
-            Intent intent = new Intent(context, SetupFingerprintEnrollFindSensor.class);
-            SetupWizardUtils.copySetupExtras(activityIntent, intent);
-            return intent;
         } else {
-            return new Intent(context, FingerprintEnrollFindSensor.class);
+            intent = new Intent(context, isSuw
+                    ? SetupFingerprintEnrollFindSensor.class
+                    : FingerprintEnrollFindSensor.class);
         }
+        if (isSuw) {
+            SetupWizardUtils.copySetupExtras(activityIntent, intent);
+        }
+        return intent;
     }
 
     /**
@@ -272,19 +278,21 @@ public class BiometricUtils {
      */
     public static Intent getFingerprintIntroIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)) {
-            final Intent intent = new Intent(context, FingerprintEnrollmentActivity.class);
-            if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
-                WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
-            }
-            return intent;
-        } else if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
-            Intent intent = new Intent(context, SetupFingerprintEnrollIntroduction.class);
-            WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
-            return intent;
+        final boolean isSuw = WizardManagerHelper.isAnySetupWizard(activityIntent);
+        final Intent intent;
+        if (FeatureFlagUtils.isEnabled(context, SETTINGS_BIOMETRICS2_ENROLLMENT)) {
+            intent = new Intent(context, isSuw
+                    ? FingerprintEnrollmentActivity.SetupActivity.class
+                    : FingerprintEnrollmentActivity.class);
         } else {
-            return new Intent(context, FingerprintEnrollIntroduction.class);
+            intent = new Intent(context, isSuw
+                    ? SetupFingerprintEnrollIntroduction.class
+                    : FingerprintEnrollIntroduction.class);
         }
+        if (isSuw) {
+            WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
+        }
+        return intent;
     }
 
     /**
@@ -508,7 +516,7 @@ public class BiometricUtils {
      * Returns true if the device supports Face enrollment in SUW flow
      */
     public static boolean isFaceSupportedInSuw(Context context) {
-        return FeatureFactory.getFactory(context).getFaceFeatureProvider().isSetupWizardSupported(
+        return FeatureFactory.getFeatureFactory().getFaceFeatureProvider().isSetupWizardSupported(
                 context);
     }
 
@@ -527,17 +535,18 @@ public class BiometricUtils {
         // Assume the flow is "Screen Lock" + "Face" + "Fingerprint"
         ssb.append(bidi.unicodeWrap(screenLock));
 
+        if (hasFingerprint) {
+            ssb.append(bidi.unicodeWrap(SEPARATOR));
+            ssb.append(bidi.unicodeWrap(
+                    capitalize(context.getString(R.string.security_settings_fingerprint))));
+        }
+
         if (isFaceSupported) {
             ssb.append(bidi.unicodeWrap(SEPARATOR));
             ssb.append(bidi.unicodeWrap(
                     capitalize(context.getString(R.string.keywords_face_settings))));
         }
 
-        if (hasFingerprint) {
-            ssb.append(bidi.unicodeWrap(SEPARATOR));
-            ssb.append(bidi.unicodeWrap(
-                    capitalize(context.getString(R.string.security_settings_fingerprint))));
-        }
         return ssb.toString();
     }
 

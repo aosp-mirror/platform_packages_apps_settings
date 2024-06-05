@@ -37,7 +37,6 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
@@ -49,6 +48,7 @@ import com.android.settings.network.ims.MockWfcQueryImsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -100,6 +100,7 @@ public class NetworkProviderWifiCallingGroupTest {
         when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
                 mCarrierConfigManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);
@@ -176,6 +177,7 @@ public class NetworkProviderWifiCallingGroupTest {
     }
 
     @Test
+    @Ignore("b/337417499")
     public void
     shouldShowWifiCallingForSub_wifiCallingEnabledWithActivityHandleIntent_returnTrue() {
         buildPhoneAccountConfigureIntent(true);

@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -24,8 +26,8 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -42,20 +44,20 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.bluetooth.BlockingPrefWithSliceController;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+@RunWith(AndroidJUnit4.class)
 public class BlockingPrefWithSliceControllerTest {
     private static final String KEY = "bt_device_slice_category";
-    private static final String TEST_URI_AUTHORITY = "com.android.authority.test";
+    private static final String TEST_URI_AUTHORITY = "com.android.settings";
     private static final String TEST_EXTRA_INTENT = "EXTRA_INTENT";
     private static final String TEST_EXTRA_PENDING_INTENT = "EXTRA_PENDING_INTENT";
     private static final String TEST_INTENT_ACTION = "test";
@@ -71,6 +73,8 @@ public class BlockingPrefWithSliceControllerTest {
     private LiveData<Slice> mLiveData;
     @Mock
     private PreferenceCategory mPreferenceCategory;
+    @Captor
+    ArgumentCaptor<Preference> mPreferenceArgumentCaptor;
 
     private Context mContext;
     private BlockingPrefWithSliceController mController;
@@ -130,6 +134,14 @@ public class BlockingPrefWithSliceControllerTest {
         verify(mController.mPreferenceCategory).addPreference(any());
     }
 
+    @Test
+    public void onChanged_sliceWithoutValidIntent_makePreferenceUnselectable() {
+        mController.onChanged(buildTestSlice());
+
+        verify(mController.mPreferenceCategory).addPreference(mPreferenceArgumentCaptor.capture());
+        assertThat(mPreferenceArgumentCaptor.getValue().isSelectable()).isFalse();
+    }
+
     private Slice buildTestSlice() {
         Uri uri =
                 new Uri.Builder()
@@ -141,7 +153,7 @@ public class BlockingPrefWithSliceControllerTest {
         IconCompat icon = mock(IconCompat.class);
         listBuilder.addRow(
                 new RowBuilder()
-                        .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                        .setTitleItem(icon, ICON_IMAGE)
                         .setTitle(TEST_SLICE_TITLE)
                         .setSubtitle(TEST_SLICE_SUBTITLE)
                         .setPrimaryAction(
@@ -153,7 +165,7 @@ public class BlockingPrefWithSliceControllerTest {
                                                 PendingIntent.FLAG_UPDATE_CURRENT
                                                         | PendingIntent.FLAG_IMMUTABLE),
                                         icon,
-                                        ListBuilder.ICON_IMAGE,
+                                        ICON_IMAGE,
                                         "")));
         return listBuilder.build();
     }

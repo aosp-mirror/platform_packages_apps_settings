@@ -28,19 +28,26 @@ import android.hardware.dumpstate.V1_1.IDumpstateDevice;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowLooper;
 
 import java.lang.reflect.Field;
 
 @RunWith(RobolectricTestRunner.class)
 public final class EnableVerboseVendorLoggingPreferenceControllerTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     @Mock
     private SwitchPreference mPreference;
     @Mock
@@ -55,8 +62,7 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mController = spy(new EnableVerboseVendorLoggingPreferenceController(mContext));
         doReturn(mIDumpstateDevice).when(mController).getDumpstateDeviceService();
         doReturn(mIDumpstateDeviceAidl).when(mController).getDumpstateDeviceAidlService();
@@ -127,6 +133,7 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
 
         mController.setVerboseLoggingEnabled(false);
         mController.updateState(mPreference);
+        ShadowLooper.idleMainLooper();
 
         verify(mPreference).setChecked(false);
     }
@@ -138,6 +145,7 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
 
         mController.setVerboseLoggingEnabled(false);
         mController.updateState(mPreference);
+        ShadowLooper.idleMainLooper();
 
         verify(mPreference).setChecked(false);
     }
@@ -149,6 +157,7 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
 
         mController.setVerboseLoggingEnabled(true);
         mController.updateState(mPreference);
+        ShadowLooper.idleMainLooper();
 
         verify(mPreference).setChecked(true);
     }
@@ -160,6 +169,7 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
 
         mController.setVerboseLoggingEnabled(true);
         mController.updateState(mPreference);
+        ShadowLooper.idleMainLooper();
 
         verify(mPreference).setChecked(true);
     }

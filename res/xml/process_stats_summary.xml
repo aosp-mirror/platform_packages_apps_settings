@@ -19,45 +19,52 @@
     android:title="@string/app_memory_use"
     android:key="app_list">
 
+    <SwitchPreference
+        android:key="force_enable_pss_profiling"
+        android:title="@string/force_enable_pss_profiling_title"
+        android:summary="@string/force_enable_pss_profiling_summary" />
+
     <PreferenceCategory
-        android:title="@string/average_memory_use"/>
+        android:title="@string/average_memory_use"
+        android:key="memory_info">
 
-    <com.android.settings.SummaryPreference
-        android:key="status_header"
-        android:selectable="false" />
+        <com.android.settings.SummaryPreference
+            android:key="status_header"
+            android:selectable="false" />
 
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="5dp" />
+        <com.android.settings.applications.SpacePreference
+            android:layout_height="5dp" />
 
-    <Preference
-        android:key="performance"
-        android:selectable="false"
-        android:layout="@layout/horizontal_preference"
-        android:title="@string/memory_performance" />
+        <Preference
+            android:key="performance"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference"
+            android:title="@string/memory_performance" />
 
-    <Preference
-        android:key="total_memory"
-        android:selectable="false"
-        android:layout="@layout/horizontal_preference"
-        android:title="@string/total_memory" />
+        <Preference
+            android:key="total_memory"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference"
+            android:title="@string/total_memory" />
 
-    <Preference
-        android:key="average_used"
-        android:selectable="false"
-        android:layout="@layout/horizontal_preference"
-        android:title="@string/average_used" />
+        <Preference
+            android:key="average_used"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference"
+            android:title="@string/average_used" />
 
-    <Preference
-        android:key="free"
-        android:selectable="false"
-        android:layout="@layout/horizontal_preference"
-        android:title="@string/free_memory" />
+        <Preference
+            android:key="free"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference"
+            android:title="@string/free_memory" />
 
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="15dp" />
+        <com.android.settings.applications.SpacePreference
+            android:layout_height="15dp" />
 
-    <Preference
-        android:key="apps_list"
-        android:title="@string/memory_usage_apps" />
+        <Preference
+            android:key="apps_list"
+            android:title="@string/memory_usage_apps" />
 
+    </PreferenceCategory>
 </PreferenceScreen>

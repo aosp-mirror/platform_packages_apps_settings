@@ -68,6 +68,7 @@ public class EnableAutoDataSwitchDialogFragmentTest
         doReturn(mContext).when(mFragment).getContext();
 
         doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
+        doReturn(mSubscriptionManager).when(mSubscriptionManager).createForAllUserProfiles();
         doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(anyInt());
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);

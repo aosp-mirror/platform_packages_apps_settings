@@ -31,12 +31,12 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.datausage.ChartDataUsagePreference.DataUsageSummaryNode;
-import com.android.settings.utils.ActivityControllerWrapper;
+import com.android.settings.datausage.lib.NetworkCycleChartData;
+import com.android.settings.datausage.lib.NetworkUsageData;
 import com.android.settings.widget.UsageView;
-import com.android.settingslib.net.NetworkCycleChartData;
-import com.android.settingslib.net.NetworkCycleData;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -56,7 +56,7 @@ public class ChartDataUsagePreferenceTest {
     // Test bucket end date, 22 Mar 2018 00:00:00
     private static final long TIMESTAMP_END = 1521676800000L;
 
-    private List<NetworkCycleData> mNetworkCycleData;
+    private List<NetworkUsageData> mNetworkCycleData;
     private NetworkCycleChartData mNetworkCycleChartData;
     private ChartDataUsagePreference mPreference;
     private Activity mActivity;
@@ -65,8 +65,8 @@ public class ChartDataUsagePreferenceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy((Activity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(Activity.class)).get());
+
+        mActivity = spy(Robolectric.setupActivity(Activity.class));
         mPreference = new ChartDataUsagePreference(mActivity, null /* attrs */);
         LayoutInflater inflater = LayoutInflater.from(mActivity);
         View view = inflater.inflate(mPreference.getLayoutResource(), null /* root */,
@@ -80,6 +80,9 @@ public class ChartDataUsagePreferenceTest {
         final ArgumentCaptor<SparseIntArray> pointsCaptor =
                 ArgumentCaptor.forClass(SparseIntArray.class);
         createTestNetworkData();
+        mPreference.setTime(
+                mNetworkCycleChartData.getTotal().getStartTime(),
+                mNetworkCycleChartData.getTotal().getEndTime());
         mPreference.setNetworkCycleData(mNetworkCycleChartData);
 
         mPreference.calcPoints(usageView, mNetworkCycleData.subList(0, 5));
@@ -90,12 +93,16 @@ public class ChartDataUsagePreferenceTest {
         assertThat(points.valueAt(1)).isNotEqualTo(-1);
     }
 
+    @Ignore("b/313568482")
     @Test
     public void calcPoints_dataNotAvailableAtCycleStart_shouldIndicateStartOfData() {
         final UsageView usageView = mock(UsageView.class);
         final ArgumentCaptor<SparseIntArray> pointsCaptor =
                 ArgumentCaptor.forClass(SparseIntArray.class);
         createTestNetworkData();
+        mPreference.setTime(
+                mNetworkCycleChartData.getTotal().getStartTime(),
+                mNetworkCycleChartData.getTotal().getEndTime());
         mPreference.setNetworkCycleData(mNetworkCycleChartData);
 
         mPreference.calcPoints(usageView, mNetworkCycleData.subList(2, 7));
@@ -107,43 +114,67 @@ public class ChartDataUsagePreferenceTest {
         assertThat(points.valueAt(1)).isEqualTo(-1);
     }
 
+    @Ignore("b/313568482")
     @Test
     public void calcPoints_shouldNotDrawPointForFutureDate() {
         final UsageView usageView = mock(UsageView.class);
         final ArgumentCaptor<SparseIntArray> pointsCaptor =
-            ArgumentCaptor.forClass(SparseIntArray.class);
+                ArgumentCaptor.forClass(SparseIntArray.class);
         final long tonight = System.currentTimeMillis() + TimeUnit.HOURS.toMillis(12);
         mNetworkCycleData = new ArrayList<>();
         // add test usage data for last 5 days
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight - TimeUnit.DAYS.toMillis(5), tonight - TimeUnit.DAYS.toMillis(4), 743823454L));
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight - TimeUnit.DAYS.toMillis(4), tonight - TimeUnit.DAYS.toMillis(3), 64396L));
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight - TimeUnit.DAYS.toMillis(3), tonight - TimeUnit.DAYS.toMillis(2), 2832L));
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight - TimeUnit.DAYS.toMillis(2), tonight - TimeUnit.DAYS.toMillis(1), 83849690L));
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight - TimeUnit.DAYS.toMillis(1), tonight, 1883657L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight - TimeUnit.DAYS.toMillis(5),
+                tonight - TimeUnit.DAYS.toMillis(4),
+                743823454L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight - TimeUnit.DAYS.toMillis(4),
+                tonight - TimeUnit.DAYS.toMillis(3),
+                64396L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight - TimeUnit.DAYS.toMillis(3),
+                tonight - TimeUnit.DAYS.toMillis(2),
+                2832L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight - TimeUnit.DAYS.toMillis(2),
+                tonight - TimeUnit.DAYS.toMillis(1),
+                83849690L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight - TimeUnit.DAYS.toMillis(1), tonight, 1883657L));
         // add test usage data for next 5 days
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight, tonight + TimeUnit.DAYS.toMillis(1), 0L));
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight + TimeUnit.DAYS.toMillis(1), tonight + TimeUnit.DAYS.toMillis(2), 0L));
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight + TimeUnit.DAYS.toMillis(2), tonight + TimeUnit.DAYS.toMillis(3), 0L));
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight + TimeUnit.DAYS.toMillis(3), tonight + TimeUnit.DAYS.toMillis(4), 0L));
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight + TimeUnit.DAYS.toMillis(4), tonight + TimeUnit.DAYS.toMillis(5), 0L));
-        mNetworkCycleData.add(createNetworkCycleData(
-            tonight + TimeUnit.DAYS.toMillis(5), tonight + TimeUnit.DAYS.toMillis(6), 0L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight, tonight + TimeUnit.DAYS.toMillis(1), 0L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight + TimeUnit.DAYS.toMillis(1),
+                tonight + TimeUnit.DAYS.toMillis(2),
+                0L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight + TimeUnit.DAYS.toMillis(2),
+                tonight + TimeUnit.DAYS.toMillis(3),
+                0L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight + TimeUnit.DAYS.toMillis(3),
+                tonight + TimeUnit.DAYS.toMillis(4),
+                0L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight + TimeUnit.DAYS.toMillis(4),
+                tonight + TimeUnit.DAYS.toMillis(5),
+                0L));
+        mNetworkCycleData.add(new NetworkUsageData(
+                tonight + TimeUnit.DAYS.toMillis(5),
+                tonight + TimeUnit.DAYS.toMillis(6),
+                0L));
 
-        final NetworkCycleChartData.Builder builder = new NetworkCycleChartData.Builder();
-        builder.setUsageBuckets(mNetworkCycleData)
-            .setStartTime(tonight - TimeUnit.DAYS.toMillis(5))
-            .setEndTime(tonight + TimeUnit.DAYS.toMillis(6));
-        mNetworkCycleChartData = builder.build();
+        mNetworkCycleChartData = new NetworkCycleChartData(
+                new NetworkUsageData(
+                        tonight - TimeUnit.DAYS.toMillis(5),
+                        tonight + TimeUnit.DAYS.toMillis(6),
+                        0),
+                mNetworkCycleData
+        );
+        mPreference.setTime(
+                mNetworkCycleChartData.getTotal().getStartTime(),
+                mNetworkCycleChartData.getTotal().getEndTime());
         mPreference.setNetworkCycleData(mNetworkCycleChartData);
 
         mPreference.calcPoints(usageView, mNetworkCycleData);
@@ -171,6 +202,9 @@ public class ChartDataUsagePreferenceTest {
         final TextView labelStart = (TextView) mHolder.findViewById(R.id.label_start);
         final TextView labelEnd = (TextView) mHolder.findViewById(R.id.label_end);
         createTestNetworkData();
+        mPreference.setTime(
+                mNetworkCycleChartData.getTotal().getStartTime(),
+                mNetworkCycleChartData.getTotal().getEndTime());
         mPreference.setNetworkCycleData(mNetworkCycleChartData);
 
         mPreference.onBindViewHolder(mHolder);
@@ -199,38 +233,33 @@ public class ChartDataUsagePreferenceTest {
     private void createTestNetworkData() {
         mNetworkCycleData = new ArrayList<>();
         // create 10 arbitrary network data
-        mNetworkCycleData.add(createNetworkCycleData(1521583200000L, 1521586800000L, 743823454L));
-        mNetworkCycleData.add(createNetworkCycleData(1521586800000L, 1521590400000L, 64396L));
-        mNetworkCycleData.add(createNetworkCycleData(1521590400000L, 1521655200000L, 2832L));
-        mNetworkCycleData.add(createNetworkCycleData(1521655200000L, 1521658800000L, 83849690L));
-        mNetworkCycleData.add(createNetworkCycleData(1521658800000L, 1521662400000L, 1883657L));
-        mNetworkCycleData.add(createNetworkCycleData(1521662400000L, 1521666000000L, 705259L));
-        mNetworkCycleData.add(createNetworkCycleData(1521666000000L, 1521669600000L, 216169L));
-        mNetworkCycleData.add(createNetworkCycleData(1521669600000L, 1521673200000L, 6069175L));
-        mNetworkCycleData.add(createNetworkCycleData(1521673200000L, 1521676800000L, 120389L));
-        mNetworkCycleData.add(createNetworkCycleData(1521676800000L, 1521678800000L, 29947L));
+        mNetworkCycleData.add(new NetworkUsageData(1521583200000L, 1521586800000L, 743823454L));
+        mNetworkCycleData.add(new NetworkUsageData(1521586800000L, 1521590400000L, 64396L));
+        mNetworkCycleData.add(new NetworkUsageData(1521590400000L, 1521655200000L, 2832L));
+        mNetworkCycleData.add(new NetworkUsageData(1521655200000L, 1521658800000L, 83849690L));
+        mNetworkCycleData.add(new NetworkUsageData(1521658800000L, 1521662400000L, 1883657L));
+        mNetworkCycleData.add(new NetworkUsageData(1521662400000L, 1521666000000L, 705259L));
+        mNetworkCycleData.add(new NetworkUsageData(1521666000000L, 1521669600000L, 216169L));
+        mNetworkCycleData.add(new NetworkUsageData(1521669600000L, 1521673200000L, 6069175L));
+        mNetworkCycleData.add(new NetworkUsageData(1521673200000L, 1521676800000L, 120389L));
+        mNetworkCycleData.add(new NetworkUsageData(1521676800000L, 1521678800000L, 29947L));
 
-        final NetworkCycleChartData.Builder builder = new NetworkCycleChartData.Builder();
-        builder.setUsageBuckets(mNetworkCycleData)
-            .setStartTime(TIMESTAMP_START)
-            .setEndTime(TIMESTAMP_END);
-        mNetworkCycleChartData = builder.build();
+        mNetworkCycleChartData = new NetworkCycleChartData(
+                new NetworkUsageData(TIMESTAMP_START, TIMESTAMP_END, 0),
+                mNetworkCycleData
+        );
     }
 
     private void createSomeSamePercentageNetworkData() {
         mNetworkCycleData = new ArrayList<>();
-        mNetworkCycleData.add(createNetworkCycleData(1521583200000L, 1521586800000L, 100));//33%
-        mNetworkCycleData.add(createNetworkCycleData(1521586800000L, 1521590400000L, 1));  //33%
-        mNetworkCycleData.add(createNetworkCycleData(1521590400000L, 1521655200000L, 0));  //33%
-        mNetworkCycleData.add(createNetworkCycleData(1521655200000L, 1521658800000L, 0));  //33%
-        mNetworkCycleData.add(createNetworkCycleData(1521658800000L, 1521662400000L, 200));//99%
-        mNetworkCycleData.add(createNetworkCycleData(1521662400000L, 1521666000000L, 1));  //99%
-        mNetworkCycleData.add(createNetworkCycleData(1521666000000L, 1521669600000L, 1));  //100
-        mNetworkCycleData.add(createNetworkCycleData(1521669600000L, 1521673200000L, 0));  //100%
+        mNetworkCycleData.add(new NetworkUsageData(1521583200000L, 1521586800000L, 100)); //33%
+        mNetworkCycleData.add(new NetworkUsageData(1521586800000L, 1521590400000L, 1));   //33%
+        mNetworkCycleData.add(new NetworkUsageData(1521590400000L, 1521655200000L, 0));   //33%
+        mNetworkCycleData.add(new NetworkUsageData(1521655200000L, 1521658800000L, 0));   //33%
+        mNetworkCycleData.add(new NetworkUsageData(1521658800000L, 1521662400000L, 200)); //99%
+        mNetworkCycleData.add(new NetworkUsageData(1521662400000L, 1521666000000L, 1));   //99%
+        mNetworkCycleData.add(new NetworkUsageData(1521666000000L, 1521669600000L, 1));   //100
+        mNetworkCycleData.add(new NetworkUsageData(1521669600000L, 1521673200000L, 0));   //100%
     }
 
-    private NetworkCycleData createNetworkCycleData(long start, long end, long usage) {
-        return new NetworkCycleData.Builder()
-            .setStartTime(start).setEndTime(end).setTotalUsage(usage).build();
-    }
 }

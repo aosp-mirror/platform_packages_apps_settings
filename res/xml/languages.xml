@@ -18,7 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/language_settings">
+    android:title="@string/language_picker_title">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:title="@string/desc_introduction_of_language_picker"
@@ -30,6 +30,17 @@
         <com.android.settingslib.widget.LayoutPreference
             android:key="languages_picker"
             android:layout="@layout/locale_order_list" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="key_category_terms_of_address"
+        android:title="@string/category_title_terms_of_address"
+        settings:controller="com.android.settings.localepicker.TermsOfAddressCategoryController">
+        <Preference
+            android:key="key_terms_of_address"
+            android:title="@string/terms_of_address_title"
+            android:summary="@string/terms_of_address_summary"
+            settings:controller="com.android.settings.localepicker.TermsOfAddressController"/>
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference

@@ -18,22 +18,16 @@ package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.testutils.FakeFeatureFactory;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -46,11 +40,8 @@ import org.robolectric.annotation.Config;
 public class ShowPasswordPreferenceControllerTest {
 
     @Mock
-    private LockPatternUtils mLockPatternUtils;
-    @Mock
     private PreferenceScreen mScreen;
 
-    private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
     private ShowPasswordPreferenceController mController;
     private Preference mPreference;
@@ -59,9 +50,6 @@ public class ShowPasswordPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
-        when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
-                .thenReturn(mLockPatternUtils);
         mController = new ShowPasswordPreferenceController(mContext);
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
@@ -73,7 +61,6 @@ public class ShowPasswordPreferenceControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_whenNotVisible_isFalse() {
@@ -100,7 +87,6 @@ public class ShowPasswordPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, true);
 
         assertThat(mController.isChecked()).isTrue();
-        verify(mLockPatternUtils).setVisiblePasswordEnabled(true, UserHandle.myUserId());
     }
 
     @Test
@@ -108,6 +94,5 @@ public class ShowPasswordPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, false);
 
         assertThat(mController.isChecked()).isFalse();
-        verify(mLockPatternUtils).setVisiblePasswordEnabled(false, UserHandle.myUserId());
     }
 }

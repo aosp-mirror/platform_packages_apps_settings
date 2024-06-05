@@ -59,7 +59,7 @@ import java.util.Optional;
  * until {@link Slice} is fully loaded.
  */
 public class BlockingPrefWithSliceController extends BasePreferenceController implements
-        LifecycleObserver, OnStart, OnStop, Observer<Slice>, BasePreferenceController.UiBlocker{
+        LifecycleObserver, OnStart, OnStop, Observer<Slice>, BasePreferenceController.UiBlocker {
     private static final String TAG = "BlockingPrefWithSliceController";
 
     private static final String PREFIX_KEY = "slice_preference_item_";
@@ -225,7 +225,8 @@ public class BlockingPrefWithSliceController extends BasePreferenceController im
             } else {
                 expectedActivityIntent = intentFromSliceAction;
             }
-            if (expectedActivityIntent != null) {
+            if (expectedActivityIntent != null && expectedActivityIntent.resolveActivity(
+                    mContext.getPackageManager()) != null) {
                 Log.d(TAG, "setIntent: ActivityIntent" + expectedActivityIntent);
                 // Since UI needs to support the Settings' 2 panel feature, the intent can't use the
                 // FLAG_ACTIVITY_NEW_TASK. The above intent may have the FLAG_ACTIVITY_NEW_TASK
@@ -234,6 +235,7 @@ public class BlockingPrefWithSliceController extends BasePreferenceController im
                 preference.setIntent(expectedActivityIntent);
             } else {
                 Log.d(TAG, "setIntent: Intent is null");
+                preference.setSelectable(false);
             }
         }
 

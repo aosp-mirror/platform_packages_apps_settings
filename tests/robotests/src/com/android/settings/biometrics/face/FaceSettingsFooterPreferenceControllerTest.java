@@ -41,7 +41,6 @@ import com.android.settings.R;
 import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,7 +56,6 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-@Ignore
 @RunWith(RobolectricTestRunner.class)
 public class FaceSettingsFooterPreferenceControllerTest {
     @Rule

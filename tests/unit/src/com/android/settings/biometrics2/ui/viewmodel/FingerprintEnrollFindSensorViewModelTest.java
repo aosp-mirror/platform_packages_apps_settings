@@ -18,6 +18,7 @@ package com.android.settings.biometrics2.ui.viewmodel;
 
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_DIALOG;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_SKIP;
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_START;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -68,6 +69,13 @@ public class FingerprintEnrollFindSensorViewModelTest {
         mViewModel.onSkipDialogButtonClick();
         assertThat(mViewModel.getActionLiveData().getValue()).isEqualTo(
                 FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_SKIP);
+    }
+
+    @Test
+    public void testClickStartDialogButton() {
+        mViewModel.onStartButtonClick();
+        assertThat(mViewModel.getActionLiveData().getValue()).isEqualTo(
+                FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_START);
     }
 
     @Test

@@ -35,6 +35,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
+@Deprecated(forRemoval = true)
 @RunWith(RobolectricTestRunner.class)
 public class VolumePanelTest {
 
@@ -62,7 +63,6 @@ public class VolumePanelTest {
                 CustomSliceRegistry.VOLUME_CALL_URI,
                 CustomSliceRegistry.VOLUME_MEDIA_URI,
                 CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI,
-                CustomSliceRegistry.VOLUME_RINGER_URI,
                 CustomSliceRegistry.VOLUME_SEPARATE_RING_URI,
                 CustomSliceRegistry.VOLUME_NOTIFICATION_URI,
                 CustomSliceRegistry.VOLUME_ALARM_URI);

@@ -66,25 +66,6 @@
                 <EditText style="@style/vpn_value"
                         android:id="@+id/server"/>
 
-                <CheckBox style="@style/vpn_value"
-                        android:id="@+id/mppe"
-                        android:text="@string/vpn_mppe"
-                        android:visibility="gone"/>
-
-                <LinearLayout android:id="@+id/l2tp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="gone">
-                    <TextView style="@style/vpn_label"
-                            android:text="@string/vpn_l2tp_secret"
-                            android:labelFor="@+id/l2tp_secret"/>
-                    <EditText style="@style/vpn_value"
-                            android:id="@+id/l2tp_secret"
-                            android:password="true"
-                            android:hint="@string/vpn_not_used"/>
-                </LinearLayout>
-
                 <LinearLayout android:id="@+id/options_ipsec_identity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -154,31 +135,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
-                <LinearLayout android:id="@+id/network_options"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    <TextView style="@style/vpn_label"
-                            android:text="@string/vpn_search_domains"
-                            android:labelFor="@+id/search_domains"/>
-                    <EditText style="@style/vpn_value"
-                            android:id="@+id/search_domains"
-                            android:hint="@string/vpn_not_used"/>
-
-                    <TextView style="@style/vpn_label"
-                            android:text="@string/vpn_dns_servers"
-                            android:labelFor="@+id/dns_servers"/>
-                    <EditText style="@style/vpn_value"
-                            android:id="@+id/dns_servers"
-                            android:hint="@string/vpn_not_used"/>
-
-                    <TextView style="@style/vpn_label"
-                            android:text="@string/vpn_routes"
-                            android:labelFor="@+id/routes"/>
-                    <EditText style="@style/vpn_value"
-                            android:id="@+id/routes"
-                            android:hint="@string/vpn_not_used"/>
-                </LinearLayout>
 
                 <TextView android:id="@+id/vpn_proxy_settings_title"
                           style="@style/vpn_label"

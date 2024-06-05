@@ -23,7 +23,7 @@ import android.util.Pair;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -52,7 +52,7 @@ public class ZenRuleRepeatCallersPreferenceController extends
             return;
         }
 
-        SwitchPreference pref = (SwitchPreference) preference;
+        TwoStatePreference pref = (TwoStatePreference) preference;
         boolean anyCallersCanBypassDnd = mRule.getZenPolicy().getPriorityCallSenders()
                 == ZenPolicy.PEOPLE_TYPE_ANYONE;
 

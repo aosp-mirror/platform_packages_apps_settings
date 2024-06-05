@@ -52,36 +52,28 @@ import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
 
-/**
- * Fragment to show a list of anomaly apps, where user could handle these anomalies
- */
-public class RestrictedAppDetails extends DashboardFragment implements
-        BatteryTipPreferenceController.BatteryTipListener {
+/** Fragment to show a list of anomaly apps, where user could handle these anomalies */
+public class RestrictedAppDetails extends DashboardFragment
+        implements BatteryTipPreferenceController.BatteryTipListener {
 
     public static final String TAG = "RestrictedAppDetails";
 
-    @VisibleForTesting
-    static final String EXTRA_APP_INFO_LIST = "app_info_list";
+    @VisibleForTesting static final String EXTRA_APP_INFO_LIST = "app_info_list";
     private static final String KEY_PREF_RESTRICTED_APP_LIST = "restrict_app_list";
     private static final long TIME_NULL = -1;
 
-    @VisibleForTesting
-    List<AppInfo> mAppInfos;
-    @VisibleForTesting
-    IconDrawableFactory mIconDrawableFactory;
-    @VisibleForTesting
-    PreferenceGroup mRestrictedAppListGroup;
-    @VisibleForTesting
-    BatteryUtils mBatteryUtils;
-    @VisibleForTesting
-    PackageManager mPackageManager;
-    @VisibleForTesting
-    BatteryDatabaseManager mBatteryDatabaseManager;
+    @VisibleForTesting List<AppInfo> mAppInfos;
+    @VisibleForTesting IconDrawableFactory mIconDrawableFactory;
+    @VisibleForTesting PreferenceGroup mRestrictedAppListGroup;
+    @VisibleForTesting BatteryUtils mBatteryUtils;
+    @VisibleForTesting PackageManager mPackageManager;
+    @VisibleForTesting BatteryDatabaseManager mBatteryDatabaseManager;
 
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public static void startRestrictedAppDetails(InstrumentedPreferenceFragment fragment,
-            List<AppInfo> appInfos) {
+    /** Starts restricted app details page */
+    public static void startRestrictedAppDetails(
+            InstrumentedPreferenceFragment fragment, List<AppInfo> appInfos) {
         final Bundle args = new Bundle();
         args.putParcelableList(EXTRA_APP_INFO_LIST, appInfos);
 
@@ -104,8 +96,7 @@ public class RestrictedAppDetails extends DashboardFragment implements
         mIconDrawableFactory = IconDrawableFactory.newInstance(context);
         mBatteryUtils = BatteryUtils.getInstance(context);
         mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
-        mMetricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         refreshUi();
     }
 
@@ -144,39 +135,50 @@ public class RestrictedAppDetails extends DashboardFragment implements
     void refreshUi() {
         mRestrictedAppListGroup.removeAll();
         final Context context = getPrefContext();
-        final SparseLongArray timestampArray = mBatteryDatabaseManager
-                .queryActionTime(AnomalyDatabaseHelper.ActionType.RESTRICTION);
+        final SparseLongArray timestampArray =
+                mBatteryDatabaseManager.queryActionTime(
+                        AnomalyDatabaseHelper.ActionType.RESTRICTION);
         final long now = System.currentTimeMillis();
 
         for (int i = 0, size = mAppInfos.size(); i < size; i++) {
             final CheckBoxPreference checkBoxPreference = new AppCheckBoxPreference(context);
             final AppInfo appInfo = mAppInfos.get(i);
             try {
-                final ApplicationInfo applicationInfo = mPackageManager.getApplicationInfoAsUser(
-                        appInfo.packageName, 0 /* flags */, UserHandle.getUserId(appInfo.uid));
+                final ApplicationInfo applicationInfo =
+                        mPackageManager.getApplicationInfoAsUser(
+                                appInfo.packageName,
+                                0 /* flags */,
+                                UserHandle.getUserId(appInfo.uid));
                 checkBoxPreference.setChecked(
                         mBatteryUtils.isForceAppStandbyEnabled(appInfo.uid, appInfo.packageName));
                 checkBoxPreference.setTitle(mPackageManager.getApplicationLabel(applicationInfo));
                 checkBoxPreference.setIcon(
-                        Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager,
+                        Utils.getBadgedIcon(
+                                mIconDrawableFactory,
+                                mPackageManager,
                                 appInfo.packageName,
                                 UserHandle.getUserId(appInfo.uid)));
                 checkBoxPreference.setKey(getKeyFromAppInfo(appInfo));
-                checkBoxPreference.setOnPreferenceChangeListener((pref, value) -> {
-                    final BatteryTipDialogFragment fragment = createDialogFragment(appInfo,
-                            (Boolean) value);
-                    fragment.setTargetFragment(this, 0 /* requestCode */);
-                    fragment.show(getFragmentManager(), TAG);
-                    mMetricsFeatureProvider.action(getContext(),
-                            SettingsEnums.ACTION_APP_RESTRICTED_LIST_UNCHECKED,
-                            appInfo.packageName);
-                    return false;
-                });
+                checkBoxPreference.setOnPreferenceChangeListener(
+                        (pref, value) -> {
+                            final BatteryTipDialogFragment fragment =
+                                    createDialogFragment(appInfo, (Boolean) value);
+                            fragment.setTargetFragment(this, 0 /* requestCode */);
+                            fragment.show(getFragmentManager(), TAG);
+                            mMetricsFeatureProvider.action(
+                                    getContext(),
+                                    SettingsEnums.ACTION_APP_RESTRICTED_LIST_UNCHECKED,
+                                    appInfo.packageName);
+                            return false;
+                        });
 
                 final long timestamp = timestampArray.get(appInfo.uid, TIME_NULL);
                 if (timestamp != TIME_NULL) {
-                    checkBoxPreference.setSummary(getString(R.string.restricted_app_time_summary,
-                            StringUtil.formatRelativeTime(context, now - timestamp, false)));
+                    checkBoxPreference.setSummary(
+                            getString(
+                                    R.string.restricted_app_time_summary,
+                                    StringUtil.formatRelativeTime(
+                                            context, now - timestamp, false)));
                 }
                 final CharSequence test = checkBoxPreference.getSummaryOn();
                 mRestrictedAppListGroup.addPreference(checkBoxPreference);
@@ -196,8 +198,9 @@ public class RestrictedAppDetails extends DashboardFragment implements
             appInfo = ((UnrestrictAppTip) batteryTip).getUnrestrictAppInfo();
         }
 
-        CheckBoxPreference preference = (CheckBoxPreference) mRestrictedAppListGroup
-                .findPreference(getKeyFromAppInfo(appInfo));
+        CheckBoxPreference preference =
+                (CheckBoxPreference)
+                        mRestrictedAppListGroup.findPreference(getKeyFromAppInfo(appInfo));
         if (preference != null) {
             preference.setChecked(isRestricted);
         }
@@ -205,12 +208,12 @@ public class RestrictedAppDetails extends DashboardFragment implements
 
     @VisibleForTesting
     BatteryTipDialogFragment createDialogFragment(AppInfo appInfo, boolean toRestrict) {
-        final BatteryTip batteryTip = toRestrict
-                ? new RestrictAppTip(BatteryTip.StateType.NEW, appInfo)
-                : new UnrestrictAppTip(BatteryTip.StateType.NEW, appInfo);
+        final BatteryTip batteryTip =
+                toRestrict
+                        ? new RestrictAppTip(BatteryTip.StateType.NEW, appInfo)
+                        : new UnrestrictAppTip(BatteryTip.StateType.NEW, appInfo);
 
-        return BatteryTipDialogFragment.newInstance(
-                batteryTip, getMetricsCategory());
+        return BatteryTipDialogFragment.newInstance(batteryTip, getMetricsCategory());
     }
 
     @VisibleForTesting

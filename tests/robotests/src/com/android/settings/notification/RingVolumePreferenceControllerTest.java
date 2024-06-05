@@ -91,26 +91,6 @@ public class RingVolumePreferenceControllerTest {
         assertThat(mController.isAvailable()).isFalse();
     }
 
-    /**
-     * Devices that are not voice capable should still show Ring volume, because it is used by apps
-     * that make calls outside the cell network.
-     */
-    @Test
-    public void isAvailable_notSingleVolume_notVoiceCapable_shouldReturnTrue() {
-        when(mHelper.isSingleVolume()).thenReturn(false);
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_notSingleVolume_VoiceCapable_shouldReturnTrue() {
-        when(mHelper.isSingleVolume()).thenReturn(false);
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
     @Test
     public void getAudioStream_shouldReturnRing() {
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_RING);

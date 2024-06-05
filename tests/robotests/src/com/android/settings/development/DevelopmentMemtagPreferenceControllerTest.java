@@ -47,14 +47,14 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSystemProperties;
 
-@Ignore
+@Ignore("b/313564061")
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
-            ZygoteShadow.class,
-            ShadowDeviceConfig.class,
-            ShadowInteractionJankMonitor.class,
-            ShadowRestrictedLockUtilsInternal.class
+                ZygoteShadow.class,
+                ShadowDeviceConfig.class,
+                ShadowInteractionJankMonitor.class,
+                ShadowRestrictedLockUtilsInternal.class
         })
 public class DevelopmentMemtagPreferenceControllerTest {
     private final String mMemtagSupportedProperty = "ro.arm64.memtag.bootctl_supported";

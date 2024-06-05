@@ -16,6 +16,7 @@
 
 package com.android.settings.accounts;
 
+import android.app.admin.flags.Flags;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -58,7 +59,14 @@ final class ManagedProfileQuietModeEnabler implements DefaultLifecycleObserver {
     }
 
     public void setQuietModeEnabled(boolean enabled) {
-        if (mManagedProfile != null) {
+        if (mManagedProfile == null) {
+            return;
+        }
+        if (Flags.quietModeCredentialBugFix()) {
+            if (isQuietModeEnabled() != enabled) {
+                mUserManager.requestQuietModeEnabled(enabled, mManagedProfile);
+            }
+        } else {
             mUserManager.requestQuietModeEnabled(enabled, mManagedProfile);
         }
     }

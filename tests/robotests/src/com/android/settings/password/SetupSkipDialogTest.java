@@ -35,7 +35,6 @@ import com.android.settings.R;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -50,6 +49,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialog.class})
@@ -69,14 +69,14 @@ public class SetupSkipDialogTest {
         ShadowUtils.setFingerprintManager(mFingerprintManager);
         ShadowUtils.setFaceManager(mFaceManager);
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
 
         when(mFakeFeatureFactory.mFaceFeatureProvider.isSetupWizardSupported(any())).thenReturn(
                 true);
     }
 
     private ShadowAlertDialog getShadowAlertDialog() {
+        ShadowLooper.idleMainLooper();
         ShadowApplication shadowApplication = Shadow.extract(
                 ApplicationProvider.getApplicationContext());
         ShadowAlertDialog shadowAlertDialog = shadowApplication.getLatestAlertDialog();

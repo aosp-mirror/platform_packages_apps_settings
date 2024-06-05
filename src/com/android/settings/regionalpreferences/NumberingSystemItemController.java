@@ -64,7 +64,7 @@ public class NumberingSystemItemController extends BasePreferenceController {
                 RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE, "");
         mSelectedLanguage = argument.getString(
                 NumberingSystemItemController.KEY_SELECTED_LANGUAGE, "");
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     /**

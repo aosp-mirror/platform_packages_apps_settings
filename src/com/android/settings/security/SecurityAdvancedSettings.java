@@ -27,7 +27,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.safetycenter.SafetyCenterUtils;
-import com.android.settings.safetycenter.SafetyCenterUtils.EnterpriseOverrideString;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -54,15 +53,7 @@ public class SecurityAdvancedSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        List<EnterpriseOverrideString> securityOverrideStrings =
-                SafetyCenterUtils.getEnterpriseOverrideStringForSecurityEntries();
-        for (int i = 0; i < securityOverrideStrings.size(); i++) {
-            EnterpriseOverrideString overrideString = securityOverrideStrings.get(i);
-            replaceEnterpriseStringTitle(
-                    overrideString.getPreferenceKey(),
-                    overrideString.getOverrideKey(),
-                    overrideString.getResource());
-        }
+        SafetyCenterUtils.replaceEnterpriseStringsForSecurityEntries(this);
     }
 
     @Override
@@ -79,7 +70,7 @@ public class SecurityAdvancedSettings extends DashboardFragment {
             return CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS;
         } else {
             final SecuritySettingsFeatureProvider securitySettingsFeatureProvider =
-                    FeatureFactory.getFactory(context).getSecuritySettingsFeatureProvider();
+                    FeatureFactory.getFeatureFactory().getSecuritySettingsFeatureProvider();
 
             if (securitySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
                 return securitySettingsFeatureProvider.getAlternativeAdvancedSettingsCategoryKey();

@@ -23,6 +23,7 @@ import android.content.Context;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
@@ -31,9 +32,10 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -51,7 +53,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     private static final String DIALOG_TAG = "MobileDataDialog";
 
-    private SwitchPreference mPreference;
+    private TwoStatePreference mPreference;
     private TelephonyManager mTelephonyManager;
     private SubscriptionManager mSubscriptionManager;
     private FragmentManager mFragmentManager;
@@ -71,18 +73,25 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     public MobileDataPreferenceController(Context context, String key, Lifecycle lifecycle,
             LifecycleOwner lifecycleOwner, int subId) {
-        super(context, key);
+        this(context, key);
         mSubId = subId;
-        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
     }
 
+    public MobileDataPreferenceController(Context context, String key) {
+        super(context, key);
+        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
+    }
+
     @Override
     public int getAvailabilityStatus(int subId) {
+        if (Flags.isDualSimOnboardingEnabled()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 ? AVAILABLE
                 : AVAILABLE_UNSEARCHABLE;
@@ -123,6 +132,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
         if (!mNeedDialog) {
             // Update data directly if we don't need dialog
+            Log.d(DIALOG_TAG, "setMobileDataEnabled: " + isChecked);
             MobileNetworkUtils.setMobileDataEnabled(mContext, mSubId, isChecked, false);
             if (mWifiPickerTrackerHelper != null
                     && !mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(mSubId)) {
@@ -143,7 +153,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        mPreference = (SwitchPreference) preference;
+        mPreference = (TwoStatePreference) preference;
         update();
     }
 

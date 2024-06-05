@@ -20,20 +20,17 @@ import android.os.BatteryStats;
 
 import com.android.settings.fuelgauge.BatteryInfo;
 
-/**
- * DataParser used to go through battery data and detect whether battery is
- * heavily used.
- */
+/** DataParser used to go through battery data and detect whether battery is heavily used. */
 public class HighUsageDataParser implements BatteryInfo.BatteryDataParser {
-    /**
-     * time period to check the battery usage
-     */
+    /** Time period to check the battery usage */
     private final long mTimePeriodMs;
+
     /**
-     * treat device as heavily used if battery usage is more than {@code threshold}. 1 means 1%
+     * Treat device as heavily used if battery usage is more than {@code threshold}. 1 means 1%
      * battery usage.
      */
     private int mThreshold;
+
     private long mEndTimeMs;
     private byte mEndBatteryLevel;
     private byte mLastPeriodBatteryLevel;
@@ -69,11 +66,8 @@ public class HighUsageDataParser implements BatteryInfo.BatteryDataParser {
         mBatteryDrain = mLastPeriodBatteryLevel - mEndBatteryLevel;
     }
 
-    /**
-     * Return {@code true} if the battery drain in {@link #mTimePeriodMs} is too much
-     */
+    /** Return {@code true} if the battery drain in {@link #mTimePeriodMs} is too much */
     public boolean isDeviceHeavilyUsed() {
         return mBatteryDrain > mThreshold;
     }
 }
-

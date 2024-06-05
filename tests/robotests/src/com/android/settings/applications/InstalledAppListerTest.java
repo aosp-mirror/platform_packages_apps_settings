@@ -36,14 +36,17 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,6 +56,9 @@ import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
 public final class InstalledAppListerTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private final String APP_1 = "app1";
     private final String APP_2 = "app2";
@@ -75,11 +81,6 @@ public final class InstalledAppListerTest {
 
     private List<UserAppInfo> mInstalledAppList = Collections.emptyList();
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     private void expectQueryIntentActivities(int userId, String packageName, boolean launchable) {
         when(mPackageManager.queryIntentActivitiesAsUser(
                 argThat(isLaunchIntentFor(packageName)),
@@ -92,6 +93,9 @@ public final class InstalledAppListerTest {
 
     @Test
     public void testCountInstalledAppsAcrossAllUsers() {
+        PausedExecutorService executorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(executorService);
+
         // There are two users.
         when(mUserManager.getProfiles(UserHandle.myUserId())).thenReturn(Arrays.asList(
                 new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN),
@@ -153,8 +157,8 @@ public final class InstalledAppListerTest {
         mInstalledAppList = Collections.emptyList();
         final InstalledAppListerTestable counter = new InstalledAppListerTestable();
         counter.execute();
-        // Wait for the background task to finish.
-        ShadowApplication.runBackgroundTasks();
+        executorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mInstalledAppList.size()).isEqualTo(3);
 

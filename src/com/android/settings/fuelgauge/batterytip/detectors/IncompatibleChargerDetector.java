@@ -34,12 +34,12 @@ public final class IncompatibleChargerDetector implements BatteryTipDetector {
 
     @Override
     public BatteryTip detect() {
-        final boolean isIncompatibleCharging =
-                Utils.containsIncompatibleChargers(mContext, TAG);
-        final int state = isIncompatibleCharging
-                ? BatteryTip.StateType.NEW : BatteryTip.StateType.INVISIBLE;
-        Log.d(TAG, "detect() state= " + state + " isIncompatibleCharging: "
-                + isIncompatibleCharging);
+        final boolean isIncompatibleCharging = Utils.containsIncompatibleChargers(mContext, TAG);
+        final int state =
+                isIncompatibleCharging ? BatteryTip.StateType.NEW : BatteryTip.StateType.INVISIBLE;
+        Log.d(
+                TAG,
+                "detect() state= " + state + " isIncompatibleCharging: " + isIncompatibleCharging);
         return new IncompatibleChargerTip(state);
     }
 }

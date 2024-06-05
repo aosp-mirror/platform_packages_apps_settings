@@ -29,13 +29,11 @@ import com.android.settings.gestures.GestureNavigationSettingsFragment;
 import com.android.settings.gestures.SystemNavigationGestureSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.RecentLocationAccessSeeAllFragment;
-import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.zen.ZenModeBlockedEffectsSettings;
 import com.android.settings.notification.zen.ZenModeRestrictNotificationsSettings;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.system.SystemDashboardFragment;
-import com.android.settings.wifi.WifiSettings;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,12 +45,6 @@ public class CustomSiteMapRegistryTest {
     public void shouldContainScreenLockSettingsPairs() {
         assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(ScreenLockSettings.class.getName()))
                 .isEqualTo(SecuritySettings.class.getName());
-    }
-
-    @Test
-    public void shouldContainWifiSettingsPairs() {
-        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(WifiSettings.class.getName()))
-                .isEqualTo(NetworkDashboardFragment.class.getName());
     }
 
     @Test

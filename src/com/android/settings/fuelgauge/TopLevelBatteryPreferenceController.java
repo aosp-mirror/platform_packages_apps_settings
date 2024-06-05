@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.os.BatteryManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -27,21 +28,19 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
 
-public class TopLevelBatteryPreferenceController extends BasePreferenceController implements
-        LifecycleObserver, OnStart, OnStop, BatteryPreferenceController {
+public class TopLevelBatteryPreferenceController extends BasePreferenceController
+        implements LifecycleObserver, OnStart, OnStop, BatteryPreferenceController {
 
     private static final String TAG = "TopLvBatteryPrefControl";
 
-    @VisibleForTesting
-    Preference mPreference;
-    @VisibleForTesting
-    protected boolean mIsBatteryPresent = true;
+    @VisibleForTesting Preference mPreference;
+    @VisibleForTesting protected boolean mIsBatteryPresent = true;
 
     private final BatteryBroadcastReceiver mBatteryBroadcastReceiver;
 
@@ -52,28 +51,33 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
     public TopLevelBatteryPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mContext);
-        mBatteryBroadcastReceiver.setBatteryChangedListener(type -> {
-            Log.d(TAG, "onBatteryChanged: type=" + type);
-            if (type == BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_NOT_PRESENT) {
-                mIsBatteryPresent = false;
-            }
-            BatteryInfo.getBatteryInfo(mContext, info -> {
-                Log.d(TAG, "getBatteryInfo: " + info);
-                mBatteryInfo = info;
-                updateState(mPreference);
-                // Update the preference summary text to the latest state.
-                setSummaryAsync(info);
-            }, true /* shortString */);
-        });
+        mBatteryBroadcastReceiver.setBatteryChangedListener(
+                type -> {
+                    Log.d(TAG, "onBatteryChanged: type=" + type);
+                    if (type == BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_NOT_PRESENT) {
+                        mIsBatteryPresent = false;
+                    }
+                    BatteryInfo.getBatteryInfo(
+                            mContext,
+                            info -> {
+                                Log.d(TAG, "getBatteryInfo: " + info);
+                                mBatteryInfo = info;
+                                updateState(mPreference);
+                                // Update the preference summary text to the latest state.
+                                setSummaryAsync(info);
+                            },
+                            true /* shortString */);
+                });
 
-        mBatteryStatusFeatureProvider = FeatureFactory.getFactory(context)
-                .getBatteryStatusFeatureProvider(context);
+        mBatteryStatusFeatureProvider =
+                FeatureFactory.getFeatureFactory().getBatteryStatusFeatureProvider();
     }
 
     @Override
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_top_level_battery)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -105,13 +109,17 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         return getDashboardLabel(mContext, mBatteryInfo, batteryStatusUpdate);
     }
 
-    protected CharSequence getDashboardLabel(Context context, BatteryInfo info,
-            boolean batteryStatusUpdate) {
+    protected CharSequence getDashboardLabel(
+            Context context, BatteryInfo info, boolean batteryStatusUpdate) {
         if (info == null || context == null) {
             return null;
         }
-        Log.d(TAG, "getDashboardLabel: " + mBatteryStatusLabel + " batteryStatusUpdate="
-                + batteryStatusUpdate);
+        Log.d(
+                TAG,
+                "getDashboardLabel: "
+                        + mBatteryStatusLabel
+                        + " batteryStatusUpdate="
+                        + batteryStatusUpdate);
 
         if (batteryStatusUpdate) {
             setSummaryAsync(info);
@@ -120,39 +128,58 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
     }
 
     private void setSummaryAsync(BatteryInfo info) {
-        ThreadUtils.postOnBackgroundThread(() -> {
-            // Return false if built-in status should be used, will use updateBatteryStatus()
-            // method to inject the customized battery status label.
-            final boolean triggerBatteryStatusUpdate =
-                    mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info);
-            ThreadUtils.postOnMainThread(() -> {
-                if (!triggerBatteryStatusUpdate) {
-                    mBatteryStatusLabel = null; // will generateLabel()
-                }
-                mPreference.setSummary(
-                        mBatteryStatusLabel == null ? generateLabel(info) : mBatteryStatusLabel);
-            });
-        });
+        ThreadUtils.postOnBackgroundThread(
+                () -> {
+                    // Return false if built-in status should be used, will use
+                    // updateBatteryStatus()
+                    // method to inject the customized battery status label.
+                    final boolean triggerBatteryStatusUpdate =
+                            mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info);
+                    ThreadUtils.postOnMainThread(
+                            () -> {
+                                if (!triggerBatteryStatusUpdate) {
+                                    mBatteryStatusLabel = null; // will generateLabel()
+                                }
+                                mPreference.setSummary(
+                                        mBatteryStatusLabel == null
+                                                ? generateLabel(info)
+                                                : mBatteryStatusLabel);
+                            });
+                });
     }
 
     private CharSequence generateLabel(BatteryInfo info) {
         if (Utils.containsIncompatibleChargers(mContext, TAG)) {
-            return mContext.getString(R.string.battery_info_status_not_charging);
+            return mContext.getString(
+                    com.android.settingslib.R.string.power_incompatible_charging_settings_home_page,
+                    info.batteryPercentString);
         }
-        if (!info.discharging && info.chargeLabel != null) {
+        if (BatteryUtils.isBatteryDefenderOn(info)) {
+            return mContext.getString(
+                    com.android.settingslib.R.string.power_charging_on_hold_settings_home_page,
+                    info.batteryPercentString);
+        }
+        final BatterySettingsFeatureProvider featureProvider =
+                FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
+        if (info.chargeLabel != null && featureProvider.isChargingOptimizationMode(mContext)) {
+            return info.chargeLabel;
+        }
+        if (info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
+            // Present status only if no remaining time or status anomalous
+            return info.statusLabel;
+        } else if (!info.discharging && info.chargeLabel != null) {
             return info.chargeLabel;
         } else if (info.remainingLabel == null) {
             return info.batteryPercentString;
         } else {
-            return mContext.getString(R.string.power_remaining_settings_home_page,
+            return mContext.getString(
+                    com.android.settingslib.R.string.power_remaining_settings_home_page,
                     info.batteryPercentString,
                     info.remainingLabel);
         }
     }
 
-    /**
-     * Callback which receives text for the label.
-     */
+    /** Callback which receives text for the label. */
     @Override
     public void updateBatteryStatus(String label, BatteryInfo info) {
         mBatteryStatusLabel = label; // Null if adaptive charging is not active

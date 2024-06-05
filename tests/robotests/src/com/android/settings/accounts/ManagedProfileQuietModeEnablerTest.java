@@ -19,18 +19,24 @@ package com.android.settings.accounts;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.flags.Flags;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
@@ -38,17 +44,26 @@ import androidx.lifecycle.LifecycleRegistry;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
+import org.robolectric.ParameterizedRobolectricTestRunner;
+import org.robolectric.shadows.ShadowLooper;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(ParameterizedRobolectricTestRunner.class)
 public class ManagedProfileQuietModeEnablerTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private static final int MANAGED_USER_ID = 10;
     private Context mContext;
     private ManagedProfileQuietModeEnabler mQuietModeEnabler;
@@ -61,6 +76,15 @@ public class ManagedProfileQuietModeEnablerTest {
         }
     };
 
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
+    @ParameterizedRobolectricTestRunner.Parameters
+    public static List<?> params() {
+        return Arrays.asList(true, false);
+    }
+    final boolean mEnable;
+
     @Mock
     private ManagedProfileQuietModeEnabler.QuietModeChangeListener mOnQuietModeChangeListener;
     @Mock
@@ -70,9 +94,12 @@ public class ManagedProfileQuietModeEnablerTest {
     @Mock
     private UserInfo mUserInfo;
 
+    public ManagedProfileQuietModeEnablerTest(boolean enable) {
+        mEnable = enable;
+    }
+
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mUserInfo.isManagedProfile()).thenReturn(true);
@@ -86,10 +113,21 @@ public class ManagedProfileQuietModeEnablerTest {
 
     @Test
     public void onSetQuietMode_shouldRequestQuietModeEnabled() {
-        mQuietModeEnabler.setQuietModeEnabled(false);
-        verify(mUserManager).requestQuietModeEnabled(false, mManagedUser);
-        mQuietModeEnabler.setQuietModeEnabled(true);
-        verify(mUserManager).requestQuietModeEnabled(true, mManagedUser);
+        when(mUserManager.isQuietModeEnabled(any(UserHandle.class))).thenReturn(!mEnable);
+
+        mQuietModeEnabler.setQuietModeEnabled(mEnable);
+
+        verify(mUserManager).requestQuietModeEnabled(mEnable, mManagedUser);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_QUIET_MODE_CREDENTIAL_BUG_FIX)
+    public void onSetQuietMode_ifQuietModeAlreadyInDesiredState_shouldNotRequestQuietModeEnabled() {
+        when(mUserManager.isQuietModeEnabled(any(UserHandle.class))).thenReturn(mEnable);
+
+        mQuietModeEnabler.setQuietModeEnabled(mEnable);
+
+        verify(mUserManager, never()).requestQuietModeEnabled(anyBoolean(), any());
     }
 
     @Test
@@ -105,6 +143,8 @@ public class ManagedProfileQuietModeEnablerTest {
                 Intent.EXTRA_USER_HANDLE, MANAGED_USER_ID));
         mContext.sendBroadcast(new Intent(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE).putExtra(
                 Intent.EXTRA_USER_HANDLE, MANAGED_USER_ID));
+        ShadowLooper.idleMainLooper();
+
         verify(mOnQuietModeChangeListener, times(2)).onQuietModeChanged();
     }
 
@@ -121,6 +161,7 @@ public class ManagedProfileQuietModeEnablerTest {
                 Context.RECEIVER_EXPORTED/*UNAUDITED*/);
 
         mQuietModeEnabler.onStop(mLifecycleOwner);
+
         verify(mContext).unregisterReceiver(mQuietModeEnabler.mReceiver);
     }
 }

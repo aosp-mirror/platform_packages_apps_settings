@@ -40,11 +40,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.ParameterizedRobolectricTestRunner;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(ParameterizedRobolectricTestRunner.class)
 public class WorkModePreferenceControllerTest {
 
     private static final String PREF_KEY = "work_mode";
@@ -54,6 +56,11 @@ public class WorkModePreferenceControllerTest {
     private WorkModePreferenceController mController;
     private MainSwitchPreference mPreference;
 
+    @ParameterizedRobolectricTestRunner.Parameters
+    public static List<?> params() {
+        return Arrays.asList(true, false);
+    }
+    final boolean mEnable;
     @Mock
     private UserManager mUserManager;
     @Mock
@@ -64,6 +71,10 @@ public class WorkModePreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     Switch mSwitch;
+
+    public WorkModePreferenceControllerTest(boolean enable) {
+        mEnable = enable;
+    }
 
     @Before
     public void setUp() {
@@ -99,28 +110,19 @@ public class WorkModePreferenceControllerTest {
     @Test
     public void updateState_shouldRefreshContent() {
         when(mUserManager.isQuietModeEnabled(any(UserHandle.class)))
-                .thenReturn(false);
+                .thenReturn(mEnable);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isChecked()).isTrue();
-
-        when(mUserManager.isQuietModeEnabled(any(UserHandle.class)))
-                .thenReturn(true);
-
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isEqualTo(!mEnable);
     }
 
     @Test
     public void onPreferenceChange_shouldRequestQuietModeEnabled() {
-        mController.onSwitchChanged(mSwitch, true);
+        when(mUserManager.isQuietModeEnabled(any(UserHandle.class))).thenReturn(mEnable);
 
-        verify(mUserManager).requestQuietModeEnabled(false, mManagedUser);
+        mController.onCheckedChanged(mSwitch, mEnable);
 
-        mController.onSwitchChanged(mSwitch, false);
-
-        verify(mUserManager).requestQuietModeEnabled(true, mManagedUser);
+        verify(mUserManager).requestQuietModeEnabled(!mEnable, mManagedUser);
     }
 }

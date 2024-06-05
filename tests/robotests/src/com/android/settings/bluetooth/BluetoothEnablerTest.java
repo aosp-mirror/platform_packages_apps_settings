@@ -34,13 +34,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.AndroidRuntimeException;
 import android.view.View;
 
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -80,6 +79,7 @@ public class BluetoothEnablerTest {
     private SwitchWidgetController.OnSwitchChangeListener mCallback;
 
     private Context mContext;
+    @Mock
     private SwitchWidgetController mSwitchController;
     private BluetoothEnabler mBluetoothEnabler;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
@@ -90,7 +90,6 @@ public class BluetoothEnablerTest {
         mContext = spy(RuntimeEnvironment.application);
 
         mRestrictedSwitchPreference = new RestrictedSwitchPreference(mContext);
-        mSwitchController = spy(new SwitchBarController(new SwitchBar(mContext)));
         mBluetoothEnabler = new BluetoothEnabler(
                 mContext,
                 mSwitchController,
@@ -101,6 +100,19 @@ public class BluetoothEnablerTest {
         mRestrictedSwitchPreference.onBindViewHolder(mHolder);
         mBluetoothEnabler.setToggleCallback(mCallback);
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+    }
+
+    @Test
+    public void onSwitchToggled_satelliteOn_showWarningDialog() {
+        mBluetoothEnabler.mIsSatelliteOn.set(true);
+
+        try {
+            mBluetoothEnabler.onSwitchToggled(true);
+        } catch (AndroidRuntimeException e) {
+            // Catch exception of starting activity .
+        }
+
+        verify(mContext).startActivity(any());
     }
 
     @Test
@@ -215,7 +227,7 @@ public class BluetoothEnablerTest {
         verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
         verify(mSwitchController, never()).setChecked(false);
-        verify(mSwitchController).setChecked(true);
+        when(mSwitchController.isChecked()).thenReturn(true);
 
         // Now simulate bluetooth being turned off via an event.
         BroadcastReceiver receiver = captor.getValue();

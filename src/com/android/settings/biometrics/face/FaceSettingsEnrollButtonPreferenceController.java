@@ -18,6 +18,7 @@ package com.android.settings.biometrics.face;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -28,6 +29,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.widget.LayoutPreference;
 
 import com.google.android.setupdesign.util.ButtonStyler;
@@ -71,15 +73,14 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
         }
 
         mButton.setOnClickListener(this);
+        final boolean isDeviceOwnerBlockingAuth =
+                RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                        mContext, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null;
+        mButton.setEnabled(!isDeviceOwnerBlockingAuth);
     }
 
     @Override
     public void onClick(View v) {
-        // If it's in multi window mode, do not start the introduction intent.
-        if (mListener != null && mListener.onShowSplitScreenDialog()) {
-            return;
-        }
-
         mIsClicked = true;
         final Intent intent = new Intent();
         intent.setClassName(SETTINGS_PACKAGE_NAME, FaceEnrollIntroduction.class.getName());
@@ -120,12 +121,6 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
      * Interface for registering callbacks related to the face enroll preference button.
      */
     public interface Listener {
-        /**
-         * Called to check whether to show dialog in split screen mode
-         * @return Whether split screen warning dialog shown.
-         */
-        boolean onShowSplitScreenDialog();
-
         /**
          * Called when the user has indicated an intent to begin enrolling a new face.
          * @param intent The Intent that should be used to launch face enrollment.

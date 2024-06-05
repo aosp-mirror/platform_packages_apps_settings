@@ -16,12 +16,13 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.core.InstrumentedFragment;
 

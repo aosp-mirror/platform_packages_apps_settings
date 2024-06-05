@@ -18,12 +18,11 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHapClient;
@@ -51,7 +50,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -108,7 +106,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mShadowApplication = ShadowApplication.getInstance();
+        mShadowApplication = shadowOf((Application) ApplicationProvider.getApplicationContext());
         setupEnvironment();
 
         mHearingAidPreference = new Preference(mContext);
@@ -136,7 +134,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, right only")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Right only")).isTrue();
     }
 
     @Test
@@ -153,7 +151,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, left and right")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Left and right")).isTrue();
     }
 
     @Test
@@ -169,7 +167,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, left only")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Left only")).isTrue();
     }
 
     @Test
@@ -185,7 +183,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, right only")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Right only")).isTrue();
     }
 
     @Test
@@ -201,7 +199,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, left and right")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Left and right")).isTrue();
     }
 
     @Test
@@ -216,7 +214,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         sendIntent(intent);
 
         assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, left and right");
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Left and right");
     }
 
     @Test
@@ -246,32 +244,6 @@ public class AccessibilityHearingAidPreferenceControllerTest {
                 mContext.getText(R.string.accessibility_hearingaid_not_connected_summary));
     }
 
-    @Ignore
-    @Test
-    public void handleHearingAidPreferenceClick_noHearingAid_launchHearingAidInstructionDialog() {
-        mPreferenceController = spy(new AccessibilityHearingAidPreferenceController(mContext,
-                HEARING_AID_PREFERENCE));
-        mPreferenceController.setPreference(mHearingAidPreference);
-        doNothing().when(mPreferenceController).launchHearingAidInstructionDialog();
-        mPreferenceController.handlePreferenceTreeClick(mHearingAidPreference);
-
-        verify(mPreferenceController).launchHearingAidInstructionDialog();
-    }
-
-    @Ignore
-    @Test
-    public void handleHearingAidPreferenceClick_withHearingAid_launchBluetoothDeviceDetailSetting
-            () {
-        mPreferenceController = spy(new AccessibilityHearingAidPreferenceController(mContext,
-                HEARING_AID_PREFERENCE));
-        mPreferenceController.setPreference(mHearingAidPreference);
-        when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
-        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
-        mPreferenceController.handlePreferenceTreeClick(mHearingAidPreference);
-
-        verify(mPreferenceController).launchBluetoothDeviceDetailSetting(mCachedBluetoothDevice);
-    }
-
     @Test
     public void onServiceConnected_onHearingAidProfileConnected_updateSummary() {
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
@@ -282,7 +254,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         mPreferenceController.onServiceConnected();
 
         assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, left only");
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Left only");
     }
 
     @Test
@@ -295,7 +267,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         mPreferenceController.onServiceConnected();
 
         assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
-                "TEST_HEARING_AID_BT_DEVICE_NAME, right only");
+                "TEST_HEARING_AID_BT_DEVICE_NAME / Right only");
     }
 
     private void setupEnvironment() {

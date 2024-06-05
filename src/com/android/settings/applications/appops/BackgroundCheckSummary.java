@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.appops;
 
-import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.preference.PreferenceFrameLayout;
@@ -24,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;

@@ -36,13 +36,38 @@ public interface BatteryEventDao {
     @Query("SELECT * FROM BatteryEventEntity ORDER BY timestamp DESC")
     List<BatteryEventEntity> getAll();
 
+    /** Gets the {@link Cursor} of the last full charge time . */
+    @Query(
+            "SELECT MAX(timestamp) FROM BatteryEventEntity"
+                    + " WHERE batteryEventType = 3") // BatteryEventType.FULL_CHARGED = 3
+    Cursor getLastFullChargeTimestamp();
+
+    /** Gets the {@link Long} of the last full charge time . */
+    @Query(
+            "SELECT MAX(timestamp) FROM BatteryEventEntity"
+                    + " WHERE batteryEventType = 3") // BatteryEventType.FULL_CHARGED = 3
+    Long getLastFullChargeTimestampForLog();
+
     /** Gets the {@link Cursor} of all recorded data after a specific timestamp. */
-    @Query("SELECT * FROM BatteryEventEntity WHERE timestamp > :timestamp ORDER BY timestamp DESC")
-    Cursor getAllAfter(long timestamp);
+    @Query(
+            "SELECT * FROM BatteryEventEntity"
+                    + " WHERE timestamp >= :timestamp AND batteryEventType IN (:batteryEventTypes)"
+                    + " ORDER BY timestamp DESC")
+    Cursor getAllAfter(long timestamp, List<Integer> batteryEventTypes);
+
+    /** Gets all recorded data after a specific timestamp for log.*/
+    @Query(
+            "SELECT * FROM BatteryEventEntity "
+                    + "WHERE timestamp >= :timestamp ORDER BY timestamp DESC")
+    List<BatteryEventEntity> getAllAfterForLog(long timestamp);
 
     /** Deletes all recorded data before a specific timestamp. */
     @Query("DELETE FROM BatteryEventEntity WHERE timestamp <= :timestamp")
     void clearAllBefore(long timestamp);
+
+    /** Deletes all recorded data after a specific timestamp. */
+    @Query("DELETE FROM BatteryEventEntity WHERE timestamp >= :timestamp")
+    void clearAllAfter(long timestamp);
 
     /** Clears all recorded data in the database. */
     @Query("DELETE FROM BatteryEventEntity")

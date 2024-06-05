@@ -84,11 +84,11 @@
     <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_message" product="device">Use your face to unlock your device, authorize purchases, or sign in to apps.</string>
     <!-- Subtitle shown on the face enrollment introduction screen with in-app authentication. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_enroll_introduction_message_class3" product="default">Use your face to unlock your phone or for authentication in apps, like when you sign in to apps or approve a purchase.</string>
+    <string name="security_settings_face_enroll_introduction_message_class3" product="default">Use your face to unlock your phone or for authentication in apps, like when you sign in to apps or approve a purchase</string>
     <!-- Subtitle shown on the face enrollment introduction screen with in-app authentication. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_enroll_introduction_message_class3" product="tablet">Use your face to unlock your tablet or for authentication in apps, like when you sign in to apps or approve a purchase.</string>
+    <string name="security_settings_face_enroll_introduction_message_class3" product="tablet">Use your face to unlock your tablet or for authentication in apps, like when you sign in to apps or approve a purchase</string>
     <!-- Subtitle shown on the face enrollment introduction screen with in-app authentication. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_enroll_introduction_message_class3" product="device">Use your face to unlock your device or for authentication in apps, like when you sign in to apps or approve a purchase.</string>
+    <string name="security_settings_face_enroll_introduction_message_class3" product="device">Use your face to unlock your device or for authentication in apps, like when you sign in to apps or approve a purchase</string>
     <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default">Allow your child to use their face to unlock their phone</string>
     <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
@@ -719,9 +719,9 @@
     <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
     <string name="lockpassword_confirm_your_password_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous password.</string>
     <!-- Message of incompatible charging battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_incompatible_charging_message" product="default">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your phone</string>
-    <string name="battery_tip_incompatible_charging_message" product="device">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your device</string>
-    <string name="battery_tip_incompatible_charging_message" product="tablet">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your tablet</string>
+    <string name="battery_tip_incompatible_charging_message" product="default">Your phone may be charging slowly or not charging. For faster charging, use a recommended cable and adapter.</string>
+    <string name="battery_tip_incompatible_charging_message" product="device">Your device may be charging slowly or not charging. For faster charging, use a recommended cable and adapter.</string>
+    <string name="battery_tip_incompatible_charging_message" product="tablet">Your tablet may be charging slowly or not charging. For faster charging, use a recommended cable and adapter.</string>
 
     <!-- Description for using device controls feature with a locked phone [CHAR LIMIT=NONE] -->
     <string name="lockscreen_trivial_controls_summary" product="default">Without unlocking your phone</string>
@@ -731,6 +731,35 @@
     <!-- Accessibility summary text for auto rotate [CHAR LIMIT=NONE] -->
     <string name="auto_rotate_summary_a11y" product="default">When you move your phone between portrait and landscape</string>
     <!-- Accessibility summary text for auto rotate [CHAR LIMIT=NONE] -->
-    <string name="auto_rotate_summary_a11y" product="tabled">When you move your tablet between portrait and landscape</string>
+    <string name="auto_rotate_summary_a11y" product="tablet">When you move your tablet between portrait and landscape</string>
 
+
+    <!-- The daltonizer feature summary display as a subtext as an item in a list. -->
+    <string name="daltonizer_feature_summary" product="default">Adjust how colors display on your phone</string>
+    <!-- The daltonizer feature summary display as a subtext as an item in a list. -->
+    <string name="daltonizer_feature_summary" product="tablet">Adjust how colors display on your tablet</string>
+
+    <!-- Output device type for the phone speaker that is available for spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_speaker" product="default">Phone speakers</string>
+    <!-- Output device type for the phone speaker that is available for spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_speaker" product="tablet">Tablet speakers</string>
+    <!-- Output device type for the phone speaker that is available for spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_speaker" product="device">Device speakers</string>
+
+    <!-- Content for audio sharing share dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_dialog_share_content" product="default">This phone\'s music and videos will play on both pairs of headphones</string>
+    <string name="audio_sharing_dialog_share_content" product="tablet">This tablet\'s music and videos will play on both pairs of headphones</string>
+    <string name="audio_sharing_dialog_share_content" product="device">This device\'s music and videos will play on both pairs of headphones</string>
+    <!-- Content for audio sharing share dialog with more devices [CHAR LIMIT=none]-->
+    <string name="audio_sharing_dialog_share_more_content" product="default">This phone\'s music and videos will play on the headphones you connect</string>
+    <string name="audio_sharing_dialog_share_more_content" product="tablet">This tablet\'s music and videos will play on the headphones you connect</string>
+    <string name="audio_sharing_dialog_share_more_content" product="device">This device\'s music and videos will play on the headphones you connect</string>
+    <!-- Le audio streams no le device dialog subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_no_le_device_subtitle" product="default">To listen to an audio stream, first connect headphones that support LE Audio to this phone.</string>
+    <string name="audio_streams_dialog_no_le_device_subtitle" product="tablet">To listen to an audio stream, first connect headphones that support LE Audio to this tablet.</string>
+    <string name="audio_streams_dialog_no_le_device_subtitle" product="device">To listen to an audio stream, first connect headphones that support LE Audio to this device.</string>
+    <!-- Le audio streams unsupported device subtitle [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_unsupported_device_subtitle" product="default">This phone doesn\'t support LE Audio, which is needed to listen to audio streams.</string>
+    <string name="audio_streams_dialog_unsupported_device_subtitle" product="tablet">This tablet doesn\'t support LE Audio, which is needed to listen to audio streams.</string>
+    <string name="audio_streams_dialog_unsupported_device_subtitle" product="device">This device doesn\'t support LE Audio, which is needed to listen to audio streams.</string>
 </resources>

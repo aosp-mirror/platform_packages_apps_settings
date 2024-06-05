@@ -16,12 +16,10 @@
 
 package com.android.settings;
 
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -43,12 +41,15 @@ import android.widget.Spinner;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.ResetNetworkRestrictionViewBuilder;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -121,31 +122,48 @@ public class ResetNetwork extends InstrumentedFragment {
     @VisibleForTesting
     void showFinalConfirmation() {
         Bundle args = new Bundle();
+        Context context = getContext();
+        boolean resetSims = false;
 
-        ResetNetworkRequest request = new ResetNetworkRequest(
-                ResetNetworkRequest.RESET_CONNECTIVITY_MANAGER |
-                ResetNetworkRequest.RESET_VPN_MANAGER
-        );
+        // TODO(b/317276437) Simplify the logic once flag is released
+        int resetOptions = ResetNetworkRequest.RESET_CONNECTIVITY_MANAGER
+                        | ResetNetworkRequest.RESET_VPN_MANAGER;
+        if (Flags.resetMobileNetworkSettings()) {
+            resetOptions |= ResetNetworkRequest.RESET_IMS_STACK;
+            resetOptions |= ResetNetworkRequest.RESET_PHONE_PROCESS;
+            resetOptions |= ResetNetworkRequest.RESET_RILD;
+        }
+        ResetNetworkRequest request = new ResetNetworkRequest(resetOptions);
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             int selectedIndex = mSubscriptionSpinner.getSelectedItemPosition();
             SubscriptionInfo subscription = mSubscriptions.get(selectedIndex);
             int subId = subscription.getSubscriptionId();
             request.setResetTelephonyAndNetworkPolicyManager(subId)
                    .setResetApn(subId);
+            if (Flags.resetMobileNetworkSettings()) {
+                request.setResetImsSubId(subId);
+            }
         }
         if (mEsimContainer.getVisibility() == View.VISIBLE && mEsimCheckbox.isChecked()) {
-            request.setResetEsim(getContext().getPackageName())
-                   .writeIntoBundle(args);
+            resetSims = true;
+            request.setResetEsim(context.getPackageName()).writeIntoBundle(args);
         } else {
             request.writeIntoBundle(args);
         }
 
-        new SubSettingLauncher(getContext())
-                .setDestination(ResetNetworkConfirm.class.getName())
-                .setArguments(args)
-                .setTitleRes(R.string.reset_mobile_network_settings_confirm_title)
-                .setSourceMetricsCategory(getMetricsCategory())
-                .launch();
+        SubSettingLauncher launcher =
+                new SubSettingLauncher(context)
+                        .setDestination(ResetNetworkConfirm.class.getName())
+                        .setArguments(args)
+                        .setTitleRes(R.string.reset_mobile_network_settings_confirm_title)
+                        .setSourceMetricsCategory(getMetricsCategory());
+
+        if (resetSims && SubscriptionUtil.shouldShowRacDialogWhenErasingAllEsims(context)) {
+            context.startActivity(
+                    EuiccRacConnectivityDialogActivity.getIntent(context, launcher.toIntent()));
+        } else {
+            launcher.launch();
+        }
     }
 
     /**
@@ -285,7 +303,7 @@ public class ResetNetwork extends InstrumentedFragment {
         }
         EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
-        if (!euiccManager.isEnabled()) {
+        if (euiccManager == null || !euiccManager.isEnabled()) {
             return false;
         }
         ContentResolver resolver = context.getContentResolver();

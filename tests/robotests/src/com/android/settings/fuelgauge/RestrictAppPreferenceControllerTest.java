@@ -33,7 +33,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.Pair;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -65,12 +64,9 @@ public class RestrictAppPreferenceControllerTest {
     private static final String RESTRICTED_PACKAGE_NAME = "com.android.restricted.package";
     private static final int OTHER_USER_UID = UserHandle.PER_USER_RANGE + RESTRICTED_UID;
 
-    @Mock
-    private AppOpsManager mAppOpsManager;
-    @Mock
-    private InstrumentedPreferenceFragment mFragment;
-    @Mock
-    private UserManager mUserManager;
+    @Mock private AppOpsManager mAppOpsManager;
+    @Mock private InstrumentedPreferenceFragment mFragment;
+    @Mock private UserManager mUserManager;
 
     private AppOpsManager.PackageOps mRestrictedPackageOps;
     private AppOpsManager.PackageOps mAllowedPackageOps;
@@ -84,19 +80,25 @@ public class RestrictAppPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         final List<AppOpsManager.OpEntry> allowOps = new ArrayList<>();
-        allowOps.add(new AppOpsManager.OpEntry(
-                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_ALLOWED,
-                Collections.emptyMap()));
+        allowOps.add(
+                new AppOpsManager.OpEntry(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
+                        AppOpsManager.MODE_ALLOWED,
+                        Collections.emptyMap()));
         final List<AppOpsManager.OpEntry> restrictedOps = new ArrayList<>();
-        restrictedOps.add(new AppOpsManager.OpEntry(
-                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_IGNORED,
-                Collections.emptyMap()));
-        mAllowedPackageOps = new AppOpsManager.PackageOps(
-                ALLOWED_PACKAGE_NAME, ALLOWED_UID, allowOps);
-        mRestrictedPackageOps = new AppOpsManager.PackageOps(
-                RESTRICTED_PACKAGE_NAME, RESTRICTED_UID, restrictedOps);
-        mOtherUserPackageOps = new AppOpsManager.PackageOps(
-                RESTRICTED_PACKAGE_NAME, OTHER_USER_UID, restrictedOps);
+        restrictedOps.add(
+                new AppOpsManager.OpEntry(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
+                        AppOpsManager.MODE_IGNORED,
+                        Collections.emptyMap()));
+        mAllowedPackageOps =
+                new AppOpsManager.PackageOps(ALLOWED_PACKAGE_NAME, ALLOWED_UID, allowOps);
+        mRestrictedPackageOps =
+                new AppOpsManager.PackageOps(
+                        RESTRICTED_PACKAGE_NAME, RESTRICTED_UID, restrictedOps);
+        mOtherUserPackageOps =
+                new AppOpsManager.PackageOps(
+                        RESTRICTED_PACKAGE_NAME, OTHER_USER_UID, restrictedOps);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
@@ -109,8 +111,8 @@ public class RestrictAppPreferenceControllerTest {
         mPreferenceScreen = spy(new PreferenceScreen(mContext, null));
         when(mPreferenceScreen.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
         when(mPreferenceScreen.getContext()).thenReturn(mContext);
-        when(mPreferenceScreen.findPreference(
-                RestrictAppPreferenceController.KEY_RESTRICT_APP)).thenReturn(mPreference);
+        when(mPreferenceScreen.findPreference(RestrictAppPreferenceController.KEY_RESTRICT_APP))
+                .thenReturn(mPreference);
 
         final List<UserHandle> userHandles = new ArrayList<>();
         userHandles.add(new UserHandle(0));
@@ -122,8 +124,8 @@ public class RestrictAppPreferenceControllerTest {
         mPackageOpsList.add(mRestrictedPackageOps);
         doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any(int[].class));
 
-        final RestrictAppPreferenceController controller = new RestrictAppPreferenceController(
-                mFragment);
+        final RestrictAppPreferenceController controller =
+                new RestrictAppPreferenceController(mFragment);
         controller.displayPreference(mPreferenceScreen);
         controller.updateState(mPreference);
 
@@ -138,8 +140,8 @@ public class RestrictAppPreferenceControllerTest {
         mPackageOpsList.add(mOtherUserPackageOps);
         doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any(int[].class));
 
-        final RestrictAppPreferenceController controller = new RestrictAppPreferenceController(
-                mFragment);
+        final RestrictAppPreferenceController controller =
+                new RestrictAppPreferenceController(mFragment);
         controller.displayPreference(mPreferenceScreen);
         controller.updateState(mPreference);
 
@@ -154,17 +156,18 @@ public class RestrictAppPreferenceControllerTest {
         mPackageOpsList.add(mOtherUserPackageOps);
         doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any(int[].class));
 
-        final RestrictAppPreferenceController controller = new RestrictAppPreferenceController(
-                mFragment);
+        final RestrictAppPreferenceController controller =
+                new RestrictAppPreferenceController(mFragment);
         controller.displayPreference(mPreferenceScreen);
         controller.updateState(mPreference);
 
         assertThat(mPreference.getSummary()).isEqualTo("Limiting battery usage for 1 app");
-        assertThat(controller.mAppInfos).containsExactly(
-                new AppInfo.Builder()
-                        .setUid(RESTRICTED_UID)
-                        .setPackageName(RESTRICTED_PACKAGE_NAME)
-                        .build());
+        assertThat(controller.mAppInfos)
+                .containsExactly(
+                        new AppInfo.Builder()
+                                .setUid(RESTRICTED_UID)
+                                .setPackageName(RESTRICTED_PACKAGE_NAME)
+                                .build());
     }
 
     @Test
@@ -172,8 +175,8 @@ public class RestrictAppPreferenceControllerTest {
         mPackageOpsList.add(mAllowedPackageOps);
         doReturn(mPackageOpsList).when(mAppOpsManager).getPackagesForOps(any(int[].class));
 
-        final RestrictAppPreferenceController controller = new RestrictAppPreferenceController(
-                mFragment);
+        final RestrictAppPreferenceController controller =
+                new RestrictAppPreferenceController(mFragment);
         controller.displayPreference(mPreferenceScreen);
         controller.updateState(mPreference);
 
@@ -185,8 +188,8 @@ public class RestrictAppPreferenceControllerTest {
     public void handlePreferenceTreeClick_startFragment() {
         final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
 
-        final RestrictAppPreferenceController controller = new RestrictAppPreferenceController(
-                mFragment);
+        final RestrictAppPreferenceController controller =
+                new RestrictAppPreferenceController(mFragment);
         controller.handlePreferenceTreeClick(mPreference);
 
         verify(mContext).startActivity(intent.capture());

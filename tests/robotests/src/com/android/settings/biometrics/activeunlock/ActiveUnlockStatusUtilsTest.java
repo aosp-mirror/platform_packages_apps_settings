@@ -149,17 +149,31 @@ public class ActiveUnlockStatusUtilsTest {
     }
 
     @Test
-    public void getIntro_unlockOnIntentAndFaceEnabled_returnsEmpty() {
+    public void getIntro_faceEnabled_returnsFace() {
+        ActiveUnlockTestUtils.enable(
+                mApplicationContext, ActiveUnlockStatusUtils.UNLOCK_INTENT_LAYOUT);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        assertThat(mActiveUnlockStatusUtils.getIntroForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_intro_with_face));
+    }
+
+    @Test
+    public void getIntro_fingerprintEnabled_returnsFingerprint() {
         ActiveUnlockTestUtils.enable(
                 mApplicationContext, ActiveUnlockStatusUtils.UNLOCK_INTENT_LAYOUT);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
 
-        assertThat(mActiveUnlockStatusUtils.getIntroForActiveUnlock()).isEqualTo("");
+        assertThat(mActiveUnlockStatusUtils.getIntroForActiveUnlock())
+                .isEqualTo(mApplicationContext.getString(
+                        R.string.biometric_settings_intro_with_fingerprint));
     }
 
     @Test
-    public void getIntro_unlockOnIntentAndFaceAndFingerprintEnabled_returnsDefault() {
+    public void getIntro_faceAndFingerprintEnabled_returnsFaceAndFingerprint() {
         ActiveUnlockTestUtils.enable(
                 mApplicationContext, ActiveUnlockStatusUtils.UNLOCK_INTENT_LAYOUT);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
@@ -167,7 +181,7 @@ public class ActiveUnlockStatusUtilsTest {
 
         assertThat(mActiveUnlockStatusUtils.getIntroForActiveUnlock())
                 .isEqualTo(mApplicationContext.getString(
-                        R.string.biometric_settings_intro));
+                        R.string.biometric_settings_intro_with_activeunlock));
     }
 
     @Test

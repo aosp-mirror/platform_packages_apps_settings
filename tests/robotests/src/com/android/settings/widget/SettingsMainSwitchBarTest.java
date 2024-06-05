@@ -19,45 +19,42 @@ package com.android.settings.widget;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.android.settingslib.R;
-import com.android.settingslib.RestrictedLockUtils;
+import androidx.test.core.app.ApplicationProvider;
 
-import org.junit.Before;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.widget.mainswitch.R;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class SettingsMainSwitchBarTest {
 
-    private SettingsMainSwitchBar mMainSwitchBar;
+    private final Context mContext = ApplicationProvider.getApplicationContext();
+    private final SettingsMainSwitchBar mMainSwitchBar = new SettingsMainSwitchBar(mContext);
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        final Context context = RuntimeEnvironment.application;
-        mMainSwitchBar = new SettingsMainSwitchBar(context);
-    }
+    private final TextView mTitle = mMainSwitchBar.findViewById(R.id.switch_text);
+
+    private final CompoundButton mSwitchWidget =
+            mMainSwitchBar.findViewById(android.R.id.switch_widget);
 
     @Test
     public void disabledByAdmin_shouldBeDisabled() {
         mMainSwitchBar.setDisabledByAdmin(new RestrictedLockUtils.EnforcedAdmin());
 
-        TextView title = (TextView) mMainSwitchBar.findViewById(R.id.switch_text);
-        assertThat(title.isEnabled()).isFalse();
-        assertThat(mMainSwitchBar.getSwitch().isEnabled()).isFalse();
+        assertThat(mTitle.isEnabled()).isFalse();
+        assertThat(mSwitchWidget.isEnabled()).isFalse();
     }
 
     @Test
     public void disabledByAdmin_setNull_shouldBeEnabled() {
         mMainSwitchBar.setDisabledByAdmin(null);
 
-        TextView title = (TextView) mMainSwitchBar.findViewById(R.id.switch_text);
-        assertThat(title.isEnabled()).isTrue();
-        assertThat(mMainSwitchBar.getSwitch().isEnabled()).isTrue();
+        assertThat(mTitle.isEnabled()).isTrue();
+        assertThat(mSwitchWidget.isEnabled()).isTrue();
     }
 }

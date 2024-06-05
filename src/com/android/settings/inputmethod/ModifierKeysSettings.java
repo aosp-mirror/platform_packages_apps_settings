@@ -58,7 +58,8 @@ public class ModifierKeysSettings extends DashboardFragment {
                 protected boolean isPageSearchEnabled(Context context) {
                     return FeatureFlagUtils
                             .isEnabled(
-                                    context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
+                                    context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY)
+                            && !PhysicalKeyboardFragment.getHardKeyboards(context).isEmpty();
                 }
             };
 }

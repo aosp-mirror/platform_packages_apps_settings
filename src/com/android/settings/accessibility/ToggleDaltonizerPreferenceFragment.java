@@ -62,6 +62,9 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     static final String KEY_TRITANOMEALY = "daltonizer_mode_tritanomaly";
     @VisibleForTesting
     static final String KEY_GRAYSCALE = "daltonizer_mode_grayscale";
+    @VisibleForTesting
+    static final String KEY_SATURATION = "daltonizer_saturation";
+
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
@@ -79,7 +82,6 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         return sControllers;
     }
 
-
     @Override
     protected void registerKeysToObserverCallback(
             AccessibilitySettingsContentObserver contentObserver) {
@@ -95,8 +97,10 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mComponentName = DALTONIZER_COMPONENT_NAME;
-        mPackageName = getText(R.string.accessibility_display_daltonizer_preference_title);
-        mHtmlDescription = getText(R.string.accessibility_display_daltonizer_preference_subtitle);
+        mPackageName = getText(com.android.settingslib.R
+                .string.accessibility_display_daltonizer_preference_title);
+        mHtmlDescription = getText(com.android.settingslib.R
+                .string.accessibility_display_daltonizer_preference_subtitle);
         mTopIntroTitle = getText(R.string.accessibility_daltonizer_about_intro_text);
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         updateFooterPreference();
@@ -108,8 +112,8 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         super.onViewCreated(view, savedInstanceState);
         final View rootView = getActivity().getWindow().peekDecorView();
         if (rootView != null) {
-            rootView.setAccessibilityPaneTitle(getString(
-                    R.string.accessibility_display_daltonizer_preference_title));
+            rootView.setAccessibilityPaneTitle(getString(com.android.settingslib.R
+                    .string.accessibility_display_daltonizer_preference_title));
         }
     }
 
@@ -136,6 +140,8 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         lists.add(KEY_TOP_INTRO_PREFERENCE);
         lists.add(KEY_PREVIEW);
         lists.add(KEY_USE_SERVICE_PREFERENCE);
+        // Putting saturation level close to the preview so users can see what is changing.
+        lists.add(KEY_SATURATION);
         lists.add(KEY_DEUTERANOMALY);
         lists.add(KEY_PROTANOMALY);
         lists.add(KEY_TRITANOMEALY);

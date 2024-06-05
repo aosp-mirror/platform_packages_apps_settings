@@ -120,7 +120,7 @@ public class NotificationSbnAdapter extends
             holder.setDividerVisible(position < (mValues.size() -1));
             int userId = normalizeUserId(sbn);
             if (!mUserBadgeCache.containsKey(userId)) {
-                Drawable profile = mContext.getPackageManager().getUserBadgeForDensity(
+                Drawable profile = mContext.getPackageManager().getUserBadgeForDensityNoBackground(
                         UserHandle.of(userId), 0);
                 mUserBadgeCache.put(userId, profile);
             }
@@ -130,6 +130,7 @@ public class NotificationSbnAdapter extends
                     mUiEventLogger);
             holder.itemView.setOnLongClickListener(v -> {
                 Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+                        .setPackage(mContext.getPackageName())
                         .putExtra(EXTRA_APP_PACKAGE, sbn.getPackageName())
                         .putExtra(EXTRA_CHANNEL_ID, sbn.getNotification().getChannelId())
                         .putExtra(EXTRA_CONVERSATION_ID, sbn.getNotification().getShortcutId());

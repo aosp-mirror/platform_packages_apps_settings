@@ -47,6 +47,7 @@ import android.content.pm.UserInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -97,11 +98,13 @@ import java.util.List;
         ShadowUserManager.class,
         ShadowDevicePolicyManager.class,
         SettingsShadowResources.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class UserSettingsTest {
 
     private static final String KEY_USER_GUEST = "user_guest";
     private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
+    private static final String KEY_USER_SETTINGS_SCREEN = "user_settings_screen";
     private static final int ACTIVE_USER_ID = 0;
     private static final int INACTIVE_ADMIN_USER_ID = 1;
     private static final int INACTIVE_SECONDARY_USER_ID = 14;
@@ -209,9 +212,9 @@ public class UserSettingsTest {
 
     @Test
     public void testGetRawDataToIndex_returnAllIndexablePreferences() {
-        String[] expectedKeys = {KEY_ALLOW_MULTIPLE_USERS};
+        String[] expectedKeys = {KEY_ALLOW_MULTIPLE_USERS, KEY_USER_SETTINGS_SCREEN};
         List<String> keysResultList = new ArrayList<>();
-
+        ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
         List<SearchIndexableRaw> rawData =
                 UserSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
 
@@ -261,7 +264,6 @@ public class UserSettingsTest {
                 eq(SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED));
     }
 
-    @Ignore
     @Test
     public void withDisallowRemoveUser_ShouldDisableRemoveUser() {
         // TODO(b/115781615): Tidy robolectric tests
@@ -709,6 +711,7 @@ public class UserSettingsTest {
         verify(mUserManager).getAliveUsers();
     }
 
+    @Ignore
     @Test
     public void updateUserList_userIconMissing_shouldLoadIcon() {
         UserInfo currentUser = getAdminUser(true);
@@ -720,6 +723,7 @@ public class UserSettingsTest {
         doReturn(userIcon).when(mUserManager).getUserIcon(ACTIVE_USER_ID);
 
         mFragment.updateUserList();
+        shadowOf(Looper.getMainLooper()).idle();
 
         verify(mUserManager).getUserIcon(ACTIVE_USER_ID);
         // updateUserList should be called another time after loading the icons

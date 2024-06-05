@@ -17,20 +17,22 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-
-import com.android.settings.R;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.template.Mixin;
+import com.google.android.setupcompat.util.ForceTwoPaneHelper;
 import com.google.android.setupdesign.GlifPreferenceLayout;
+import com.google.android.setupdesign.R;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 /** Provides utility methods to accessibility settings for Setup Wizard only. */
-class AccessibilitySetupWizardUtils {
+public class AccessibilitySetupWizardUtils {
 
     private AccessibilitySetupWizardUtils(){}
 
@@ -46,13 +48,32 @@ class AccessibilitySetupWizardUtils {
      * @param icon The icon to be set
      */
     public static void updateGlifPreferenceLayout(Context context, GlifPreferenceLayout layout,
-            CharSequence title, CharSequence description, Drawable icon) {
-        layout.setHeaderText(title);
-        layout.setDescriptionText(description);
-        layout.setIcon(icon);
+            @Nullable CharSequence title, @Nullable CharSequence description,
+            @Nullable Drawable icon) {
+        if (!TextUtils.isEmpty(title)) {
+            layout.setHeaderText(title);
+        }
+
+        if (!TextUtils.isEmpty(description)) {
+            layout.setDescriptionText(description);
+        }
+
+        if (icon != null) {
+            layout.setIcon(icon);
+        }
         layout.setDividerInsets(Integer.MAX_VALUE, 0);
 
         if (ThemeHelper.shouldApplyMaterialYouStyle(context)) {
+            // For b/323771329#comment26, if the layout is forced-two-pan, we should not adjust the
+            // headerLayout horizontal padding to 0, which will make an unexpected large padding on
+            // two-pane layout.
+            // TODO: This is just a short-term quick workaround for force-two-pane devices padding
+            //  issue. The long-term goal here is to remove the header padding adjustment since it
+            //  should be handled in setup design lib. (b/331878747)
+            if (ForceTwoPaneHelper.shouldForceTwoPane(context)) {
+                return;
+            }
+
             final LinearLayout headerLayout = layout.findManagedViewById(R.id.sud_layout_header);
             if (headerLayout != null) {
                 headerLayout.setPadding(0, layout.getPaddingTop(), 0,

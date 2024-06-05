@@ -1,8 +1,5 @@
-    //############################################################
-// Build SettingsRoboTestStub.apk which includes test-only resources.#
-//############################################################
-
 package {
+    default_team: "trendy_team_android_settings_app",
     // See: http://go/android-license-faq
     // A large-scale-change added 'default_applicable_licenses' to import
     // all of the 'license_kinds' from "packages_apps_Settings_license"
@@ -11,53 +8,33 @@ package {
     default_applicable_licenses: ["packages_apps_Settings_license"],
 }
 
+// Build SettingsRoboTestStub.apk which includes test-only resources.
 android_app {
     name: "SettingsRoboTestStub",
     defaults: [
-        "SettingsLibDefaults",
         "SettingsLib-search-defaults",
+        "SettingsLibDefaults",
     ],
     platform_apis: true,
     certificate: "platform",
     privileged: true,
-
+    use_resource_processor: true,
     resource_dirs: ["res"],
 
     static_libs: [
         "Settings-core",
-        "androidx-constraintlayout_constraintlayout",
-        "androidx.slice_slice-builders",
-        "androidx.slice_slice-core",
-        "androidx.slice_slice-view",
-        "androidx.core_core",
-        "androidx.appcompat_appcompat",
-        "androidx.cardview_cardview",
-        "androidx.preference_preference",
-        "androidx.recyclerview_recyclerview",
-        "androidx.window_window",
-        "com.google.android.material_material",
-        "setupcompat",
-        "setupdesign",
-        "androidx.lifecycle_lifecycle-runtime",
-        "androidx.test.core",
-        "androidx.test.runner",
-        "androidx.test.ext.junit",
+        "androidx.fragment_fragment",
+        "androidx.fragment_fragment-testing",
+        "androidx.lifecycle_lifecycle-runtime-testing",
         "frameworks-base-testutils",
-        "guava",
-        "jsr305",
-        "settings-contextual-card-protos-lite",
-        "settings-log-bridge-protos-lite",
-	"settings-telephony-protos-lite",
-        "contextualcards",
-        "settings-logtags",
-        "zxing-core-1.7",
+        "kotlinx_coroutines_test",
     ],
 
     aaptflags: ["--extra-packages com.android.settings"],
 
     libs: [
-        "telephony-common",
         "ims-common",
+        "telephony-common",
     ],
     uses_libs: ["org.apache.http.legacy"],
     optional_uses_libs: [
@@ -66,31 +43,74 @@ android_app {
     ],
 }
 
-//############################################################
-// Settings Robolectric test target.                         #
-//############################################################
+// Settings Robolectric test target.
 android_robolectric_test {
     name: "SettingsRoboTests",
     srcs: [
-        "src/**/*.java",
-        "src/**/*.kt",
+        "src/com/android/settings/*.java",
+        "src/com/android/settings/accessibility/**/*.java",
+        "src/com/android/settings/accounts/**/*.java",
+        "src/com/android/settings/applications/**/*.java",
+        "src/com/android/settings/backup/**/*.java",
+        "src/com/android/settings/bluetooth/**/*.java",
+        "src/com/android/settings/bluetooth/**/*.kt",
+        "src/com/android/settings/bugreporthandler/**/*.java",
+        "src/com/android/settings/communal/**/*.java",
+        "src/com/android/settings/connecteddevice/**/*.java",
+        //"src/com/android/settings/core/**/*.java",
+        "src/com/android/settings/dashboard/**/*.java",
+        "src/com/android/settings/datausage/**/*.java",
+        "src/com/android/settings/datetime/**/*.java",
+        "src/com/android/settings/deletionhelper/**/*.java",
+        //"src/com/android/settings/development/**/*.java",
+        "src/com/android/settings/deviceinfo/**/*.java",
+        "src/com/android/settings/devicelock/**/*.java",
+        "src/com/android/settings/display/**/*.java",
+        "src/com/android/settings/dream/**/*.java",
+        "src/com/android/settings/emergency/**/*.java",
+        "src/com/android/settings/enterprise/**/*.java",
+        "src/com/android/settings/flashlight/**/*.java",
+        "src/com/android/settings/fuelgauge/**/*.java",
+        "src/com/android/settings/gestures/**/*.java",
+        //"src/com/android/settings/homepage/**/*.java",
+        "src/com/android/settings/inputmethod/**/*.java",
+        "src/com/android/settings/network/ShadowServiceManagerExtend.java",
+        "src/com/android/settings/search/DatabaseIndexingUtils.java",
+        "src/com/android/settings/testutils/**/*.java",
     ],
 
+    // test_suites attribute is not needed. This module will be configured in ATP GCL file.
+
     static_libs: [
+        "Robolectric_shadows_androidx_fragment_upstream",
+        "Settings-robo-testutils",
+        "Settings-testutils2",
         "SettingsLib-robo-testutils",
-        "android-support-annotations",
+        "Settings_robolectric_meta_service_file",
+        "aconfig_settings_flags_lib",
+        "android.webkit.flags-aconfig-java",
         "androidx.test.core",
+        "androidx.test.espresso.core",
+        "androidx.test.ext.junit",
         "androidx.test.rules",
         "androidx.test.runner",
-        "androidx.test.ext.junit",
-        "androidx.test.espresso.core",
+        "com_android_server_accessibility_flags_lib",
+        "flag-junit",
+        "flag-junit-base",
+        "notification_flags_lib",
+        "platform-test-annotations",
+        "testables",
     ],
 
     libs: [
+        "android.test.mock",
         "ims-common",
     ],
 
-    java_resource_dirs: ["config", "resources"],
+    java_resource_dirs: [
+        "config",
+        "resources",
+    ],
 
     instrumentation_for: "SettingsRoboTestStub",
 
@@ -104,16 +124,19 @@ android_robolectric_test {
         "SettingsLib",
         "SettingsLib-search",
     ],
+
+    upstream: true,
+
+    strict_mode: false,
 }
 
 java_library {
     name: "Settings-robo-testutils",
-    srcs: ["src/com/android/settings/testutils/**/*.java"],
-
+    srcs: ["testutils/**/*.java"],
     libs: [
+        "Robolectric_all-target_upstream",
         "Settings-core",
-        "Robolectric_all-target",
         "mockito-robolectric-prebuilt",
-        "truth-prebuilt",
+        "truth",
     ],
 }

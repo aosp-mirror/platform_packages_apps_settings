@@ -26,7 +26,6 @@ import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
-import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -52,9 +51,10 @@ object AppLanguagesPageProvider : SettingsPageProvider {
 
     @Composable
     fun EntryItem() {
+        val summary = stringResource(R.string.app_locale_picker_summary)
         Preference(object : PreferenceModel {
             override val title = stringResource(R.string.app_locales_picker_menu_title)
-            override val summary = stringResource(R.string.app_locale_picker_summary).toState()
+            override val summary = { summary }
             override val onClick = navigator(name)
         })
     }

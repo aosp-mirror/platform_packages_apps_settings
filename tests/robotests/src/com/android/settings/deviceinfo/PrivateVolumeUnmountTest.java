@@ -30,7 +30,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
@@ -38,9 +41,12 @@ import org.robolectric.shadows.androidx.fragment.FragmentController;
 public class PrivateVolumeUnmountTest {
 
     private PrivateVolumeUnmount mFragment;
+    private PausedExecutorService mExecutorService;
 
     @Before
     public void setUp() {
+        mExecutorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(mExecutorService);
         Bundle bundle = new Bundle();
         bundle.putString(VolumeInfo.EXTRA_VOLUME_ID, "id");
         mFragment = FragmentController.of(new PrivateVolumeUnmount(), bundle)
@@ -63,6 +69,8 @@ public class PrivateVolumeUnmountTest {
         final Button confirm = mFragment.getView().findViewById(R.id.confirm);
 
         confirm.performClick();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(ShadowStorageManager.isUnmountCalled()).isTrue();
     }

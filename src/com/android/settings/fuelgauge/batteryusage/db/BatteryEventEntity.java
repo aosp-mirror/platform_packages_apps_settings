@@ -32,6 +32,7 @@ import java.util.Locale;
 public class BatteryEventEntity {
     /** Keys for accessing {@link ContentValues}. */
     public static final String KEY_TIMESTAMP = "timestamp";
+
     public static final String KEY_BATTERY_EVENT_TYPE = "batteryEventType";
     public static final String KEY_BATTERY_LEVEL = "batteryLevel";
 
@@ -43,9 +44,7 @@ public class BatteryEventEntity {
     public final int batteryLevel;
 
     public BatteryEventEntity(
-            final long timestamp,
-            final int batteryEventType,
-            final int batteryLevel) {
+            final long timestamp, final int batteryEventType, final int batteryLevel) {
         this.timestamp = timestamp;
         this.batteryEventType = batteryEventType;
         this.batteryLevel = batteryLevel;
@@ -64,12 +63,17 @@ public class BatteryEventEntity {
     @Override
     public String toString() {
         final String recordAtDateTime = ConvertUtils.utcToLocalTimeForLogging(timestamp);
-        final StringBuilder builder = new StringBuilder()
-                .append("\nBatteryEvent{")
-                .append(String.format(Locale.US,
-                        "\n\ttimestamp=%s|batteryEventType=%d|batteryLevel=%d",
-                        recordAtDateTime, batteryEventType, batteryLevel))
-                .append("\n}");
+        final StringBuilder builder =
+                new StringBuilder()
+                        .append("\nBatteryEvent{")
+                        .append(
+                                String.format(
+                                        Locale.US,
+                                        "\n\ttimestamp=%s|batteryEventType=%d|batteryLevel=%d",
+                                        recordAtDateTime,
+                                        batteryEventType,
+                                        batteryLevel))
+                        .append("\n}");
         return builder.toString();
     }
 
@@ -122,10 +126,7 @@ public class BatteryEventEntity {
 
         /** Builds the {@link BatteryEventEntity}. */
         public BatteryEventEntity build() {
-            return new BatteryEventEntity(
-                    mTimestamp,
-                    mBatteryEventType,
-                    mBatteryLevel);
+            return new BatteryEventEntity(mTimestamp, mBatteryEventType, mBatteryLevel);
         }
 
         private Builder() {}

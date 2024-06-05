@@ -30,35 +30,32 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
-/**
- * Action to open the {@link com.android.settings.fuelgauge.RestrictedAppDetails}
- */
+/** Action to open the {@link com.android.settings.fuelgauge.RestrictedAppDetails} */
 public class OpenRestrictAppFragmentAction extends BatteryTipAction {
     private final RestrictAppTip mRestrictAppTip;
     private final InstrumentedPreferenceFragment mFragment;
-    @VisibleForTesting
-    BatteryDatabaseManager mBatteryDatabaseManager;
+    @VisibleForTesting BatteryDatabaseManager mBatteryDatabaseManager;
 
-    public OpenRestrictAppFragmentAction(InstrumentedPreferenceFragment fragment,
-            RestrictAppTip tip) {
+    public OpenRestrictAppFragmentAction(
+            InstrumentedPreferenceFragment fragment, RestrictAppTip tip) {
         super(fragment.getContext());
         mFragment = fragment;
         mRestrictAppTip = tip;
         mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(mContext);
     }
 
-    /**
-     * Handle the action when user clicks positive button
-     */
+    /** Handle the action when user clicks positive button */
     @Override
     public void handlePositiveAction(int metricsKey) {
-        mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_TIP_OPEN_APP_RESTRICTION_PAGE, metricsKey);
+        mMetricsFeatureProvider.action(
+                mContext, SettingsEnums.ACTION_TIP_OPEN_APP_RESTRICTION_PAGE, metricsKey);
         final List<AppInfo> mAppInfos = mRestrictAppTip.getRestrictAppList();
         RestrictedAppDetails.startRestrictedAppDetails(mFragment, mAppInfos);
 
         // Mark all the anomalies as handled, so it won't show up again.
-        ThreadUtils.postOnBackgroundThread(() -> mBatteryDatabaseManager.updateAnomalies(mAppInfos,
-                AnomalyDatabaseHelper.State.HANDLED));
+        ThreadUtils.postOnBackgroundThread(
+                () ->
+                        mBatteryDatabaseManager.updateAnomalies(
+                                mAppInfos, AnomalyDatabaseHelper.State.HANDLED));
     }
 }

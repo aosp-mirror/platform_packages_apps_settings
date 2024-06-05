@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -31,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.BatteryUsageStatsQuery;
+import android.os.UserManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,33 +45,32 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryUsageDataLoaderTest {
 
     private Context mContext;
-    @Mock
-    private ContentResolver mMockContentResolver;
-    @Mock
-    private BatteryStatsManager mBatteryStatsManager;
-    @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private BatteryUsageStats mBatteryUsageStats;
-    @Mock
-    private BatteryEntry mMockBatteryEntry;
-    @Captor
-    private ArgumentCaptor<BatteryUsageStatsQuery> mStatsQueryCaptor;
+    @Mock private UserIdsSeries mUserIdsSeries;
+    @Mock private ContentResolver mMockContentResolver;
+    @Mock private BatteryStatsManager mBatteryStatsManager;
+    @Mock private PackageManager mPackageManager;
+    @Mock private UserManager mUserManager;
+    @Mock private BatteryUsageStats mBatteryUsageStats;
+    @Mock private BatteryEntry mMockBatteryEntry;
+    @Captor private ArgumentCaptor<BatteryUsageStatsQuery> mStatsQueryCaptor;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mContext).when(mContext).getApplicationContext();
-        doReturn(mBatteryStatsManager).when(mContext).getSystemService(
-                Context.BATTERY_STATS_SERVICE);
+        doReturn(mBatteryStatsManager)
+                .when(mContext)
+                .getSystemService(Context.BATTERY_STATS_SERVICE);
         doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         doReturn(mMockContentResolver).when(mContext).getContentResolver();
         doReturn(new Intent()).when(mContext).registerReceiver(any(), any());
     }
@@ -82,11 +83,10 @@ public final class BatteryUsageDataLoaderTest {
                 .thenReturn(mBatteryUsageStats);
         BatteryUsageDataLoader.sFakeBatteryEntryListSupplier = () -> batteryEntryList;
 
-        BatteryUsageDataLoader.loadUsageData(mContext, /*isFullChargeStart=*/ false);
+        BatteryUsageDataLoader.loadBatteryStatsData(mContext, /* isFullChargeStart= */ false);
 
         final int queryFlags = mStatsQueryCaptor.getValue().getFlags();
-        assertThat(queryFlags
-                & BatteryUsageStatsQuery.FLAG_BATTERY_USAGE_STATS_INCLUDE_HISTORY)
+        assertThat(queryFlags & BatteryUsageStatsQuery.FLAG_BATTERY_USAGE_STATS_INCLUDE_HISTORY)
                 .isNotEqualTo(0);
         verify(mMockContentResolver).insert(any(), any());
     }
@@ -97,7 +97,7 @@ public final class BatteryUsageDataLoaderTest {
                 .thenReturn(mBatteryUsageStats);
         BatteryUsageDataLoader.sFakeBatteryEntryListSupplier = () -> null;
 
-        BatteryUsageDataLoader.loadUsageData(mContext, /*isFullChargeStart=*/ false);
+        BatteryUsageDataLoader.loadBatteryStatsData(mContext, /* isFullChargeStart= */ false);
 
         verify(mMockContentResolver).insert(any(), any());
     }
@@ -108,8 +108,51 @@ public final class BatteryUsageDataLoaderTest {
                 .thenReturn(mBatteryUsageStats);
         BatteryUsageDataLoader.sFakeBatteryEntryListSupplier = () -> new ArrayList<>();
 
-        BatteryUsageDataLoader.loadUsageData(mContext, /*isFullChargeStart=*/ false);
+        BatteryUsageDataLoader.loadBatteryStatsData(mContext, /* isFullChargeStart= */ false);
 
         verify(mMockContentResolver).insert(any(), any());
+    }
+
+    @Test
+    public void loadAppUsageData_withData_insertFakeDataIntoProvider() {
+        final List<AppUsageEvent> AppUsageEventList = new ArrayList<>();
+        final AppUsageEvent appUsageEvent = AppUsageEvent.newBuilder().setUid(0).build();
+        AppUsageEventList.add(appUsageEvent);
+        BatteryUsageDataLoader.sFakeAppUsageEventsSupplier = () -> new HashMap<>();
+        BatteryUsageDataLoader.sFakeUsageEventsListSupplier = () -> AppUsageEventList;
+
+        BatteryUsageDataLoader.loadAppUsageData(mContext, mUserIdsSeries);
+
+        verify(mMockContentResolver).bulkInsert(any(), any());
+        verify(mMockContentResolver).notifyChange(any(), any());
+    }
+
+    @Test
+    public void loadAppUsageData_nullAppUsageEvents_notInsertDataIntoProvider() {
+        BatteryUsageDataLoader.sFakeAppUsageEventsSupplier = () -> null;
+
+        BatteryUsageDataLoader.loadAppUsageData(mContext, mUserIdsSeries);
+
+        verifyNoMoreInteractions(mMockContentResolver);
+    }
+
+    @Test
+    public void loadAppUsageData_nullUsageEventsList_notInsertDataIntoProvider() {
+        BatteryUsageDataLoader.sFakeAppUsageEventsSupplier = () -> new HashMap<>();
+        BatteryUsageDataLoader.sFakeUsageEventsListSupplier = () -> null;
+
+        BatteryUsageDataLoader.loadAppUsageData(mContext, mUserIdsSeries);
+
+        verifyNoMoreInteractions(mMockContentResolver);
+    }
+
+    @Test
+    public void loadAppUsageData_emptyUsageEventsList_notInsertDataIntoProvider() {
+        BatteryUsageDataLoader.sFakeAppUsageEventsSupplier = () -> new HashMap<>();
+        BatteryUsageDataLoader.sFakeUsageEventsListSupplier = () -> new ArrayList<>();
+
+        BatteryUsageDataLoader.loadAppUsageData(mContext, mUserIdsSeries);
+
+        verifyNoMoreInteractions(mMockContentResolver);
     }
 }

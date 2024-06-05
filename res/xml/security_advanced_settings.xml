@@ -106,14 +106,6 @@
         settings:keywords="@string/keywords_app_pinning"
         settings:controller="com.android.settings.security.ScreenPinningPreferenceController" />
 
-    <SwitchPreference
-        android:order="290"
-        android:key="confirm_sim_deletion"
-        android:title="@string/confirm_sim_deletion_title"
-        android:summary="@string/confirm_sim_deletion_description"
-        settings:isPreferenceVisible="@bool/config_show_sim_info"
-        settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController" />
-
   <com.android.settingslib.RestrictedPreference
         android:order="300"
         android:id="@+id/memtag_page"
@@ -142,9 +134,10 @@
             android:summary="@string/unlock_set_unlock_mode_pattern"
             settings:keywords="@string/keywords_lockscreen" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="visiblepattern_profile"
-            android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile" />
+            android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile"
+            settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="fingerprint_settings_profile"

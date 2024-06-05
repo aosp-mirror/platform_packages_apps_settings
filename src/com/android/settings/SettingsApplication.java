@@ -17,17 +17,26 @@
 package com.android.settings;
 
 import android.app.Application;
+import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.provider.Settings;
 import android.util.FeatureFlagUtils;
 
+import androidx.annotation.NonNull;
+
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
+import com.android.settings.development.DeveloperOptionsActivityLifecycle;
+import com.android.settings.fuelgauge.BatterySettingsStorage;
 import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.localepicker.LocaleNotificationDataManager;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.overlay.FeatureFactoryImpl;
 import com.android.settings.spa.SettingsSpaEnvironment;
 import com.android.settingslib.applications.AppIconCacheManager;
+import com.android.settingslib.datastore.BackupRestoreStorageManager;
 import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -40,8 +49,19 @@ public class SettingsApplication extends Application {
     private WeakReference<SettingsHomepageActivity> mHomeActivity = new WeakReference<>(null);
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        FeatureFactory.setFactory(this, getFeatureFactory());
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
+
+        BackupRestoreStorageManager.getInstance(this)
+                .add(
+                        new BatterySettingsStorage(this),
+                        LocaleNotificationDataManager.getSharedPreferencesStorage(this));
 
         // Add null checking to avoid test case failed.
         if (getApplicationContext() != null) {
@@ -60,6 +80,19 @@ public class SettingsApplication extends Application {
                 new DeviceProvisionedObserver().registerContentObserver();
             }
         }
+
+        registerActivityLifecycleCallbacks(new DeveloperOptionsActivityLifecycle());
+    }
+
+    @Override
+    public void onTerminate() {
+        BackupRestoreStorageManager.getInstance(this).removeAll();
+        super.onTerminate();
+    }
+
+    @NonNull
+    protected FeatureFactory getFeatureFactory() {
+        return new FeatureFactoryImpl();
     }
 
     /**

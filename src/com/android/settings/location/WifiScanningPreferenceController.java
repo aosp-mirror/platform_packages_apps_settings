@@ -17,7 +17,7 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -45,13 +45,13 @@ public class WifiScanningPreferenceController extends AbstractPreferenceControll
 
     @Override
     public void updateState(Preference preference) {
-        ((SwitchPreference) preference).setChecked(mWifiManager.isScanAlwaysAvailable());
+        ((TwoStatePreference) preference).setChecked(mWifiManager.isScanAlwaysAvailable());
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_WIFI_SCAN_ALWAYS_AVAILABLE.equals(preference.getKey())) {
-            mWifiManager.setScanAlwaysAvailable(((SwitchPreference) preference).isChecked());
+            mWifiManager.setScanAlwaysAvailable(((TwoStatePreference) preference).isChecked());
             return true;
         }
         return false;

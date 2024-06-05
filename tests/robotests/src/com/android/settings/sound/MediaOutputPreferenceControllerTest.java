@@ -21,6 +21,9 @@ import static android.media.AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP;
 import static android.media.AudioSystem.DEVICE_OUT_EARPIECE;
 import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
 
+import static com.android.settingslib.media.flags.Flags.FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING;
+import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -33,6 +36,7 @@ import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +49,7 @@ import android.media.VolumeProvider;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -60,12 +65,14 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LeAudioProfile;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -103,6 +110,9 @@ public class MediaOutputPreferenceControllerTest {
     private static final String TEST_PACKAGE_NAME = "com.test.packagename";
     private static final String TEST_APPLICATION_LABEL = "APP Test Label";
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Mock
     private LocalBluetoothManager mLocalManager;
     @Mock
@@ -115,6 +125,8 @@ public class MediaOutputPreferenceControllerTest {
     private HearingAidProfile mHearingAidProfile;
     @Mock
     private LeAudioProfile mLeAudioProfile;
+    @Mock
+    private LocalBluetoothLeBroadcast mLocalBluetoothLeBroadcast;
     @Mock
     private AudioSwitchPreferenceController.AudioSwitchCallback mAudioSwitchPreferenceCallback;
     @Mock
@@ -187,6 +199,8 @@ public class MediaOutputPreferenceControllerTest {
         when(mLocalBluetoothProfileManager.getA2dpProfile()).thenReturn(mA2dpProfile);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
         when(mLocalBluetoothProfileManager.getLeAudioProfile()).thenReturn(mLeAudioProfile);
+        when(mLocalBluetoothProfileManager.getLeAudioBroadcastProfile())
+                .thenReturn(mLocalBluetoothLeBroadcast);
 
         mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
@@ -232,6 +246,25 @@ public class MediaOutputPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowBluetoothUtils.reset();
+    }
+
+    /** Device start broadcasting so Preference summary should become "Audio Sharing" */
+    @Test
+    public void audioSharingStart_changeSummary() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_LE_AUDIO_SHARING);
+        mController.onStart();
+        ArgumentCaptor<BluetoothLeBroadcast.Callback> broadcastCallbackCaptor =
+                ArgumentCaptor.forClass(BluetoothLeBroadcast.Callback.class);
+        mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_A2DP);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mLocalBluetoothLeBroadcast.isEnabled(null)).thenReturn(true);
+        verify(mLocalBluetoothLeBroadcast)
+                .registerServiceCallBack(any(), broadcastCallbackCaptor.capture());
+        BluetoothLeBroadcast.Callback callback = broadcastCallbackCaptor.getValue();
+
+        callback.onBroadcastStarted(0, 0);
+        assertThat(mPreference.getSummary().toString())
+                .isEqualTo(mContext.getText(R.string.media_output_audio_sharing).toString());
     }
 
     /**
@@ -314,6 +347,7 @@ public class MediaOutputPreferenceControllerTest {
 
     @Test
     public void updateState_noActiveLocalPlayback_noTitle() {
+        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         mPlaybackState = new PlaybackState.Builder()
                 .setState(PlaybackState.STATE_NONE, 0, 1)
                 .build();
@@ -323,6 +357,48 @@ public class MediaOutputPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getTitle()).isNull();
+    }
+
+    @Test
+    public void updateState_noActiveLocalPlayback_checkTitle() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_NONE, 0, 1)
+                .build();
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+        mController.displayPreference(mScreen);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.media_output_title_without_playing,
+                        TEST_APPLICATION_LABEL));
+    }
+
+    @Test
+    public void updateState_withNullMediaController_noTitle() {
+        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        mMediaControllers.clear();
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle()).isNull();
+    }
+
+    @Test
+    public void updateState_withNullMediaController_checkTitle() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        mMediaControllers.clear();
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+        mController.displayPreference(mScreen);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.media_output_title_without_playing,
+                        TEST_APPLICATION_LABEL));
     }
 
     @Test
@@ -347,6 +423,39 @@ public class MediaOutputPreferenceControllerTest {
         verify(mContext).sendBroadcast(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getAction())
                 .isEqualTo(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_WithNoLocalPlaybackFlagEnabled_verifyIntentExtra() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_NONE, 0, 1)
+                .build();
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+        mPreference.setKey(TEST_KEY);
+
+        mController.handlePreferenceTreeClick(mPreference);
+
+        verify(mContext).sendBroadcast(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getAction())
+                .isEqualTo(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_WithNullControllerFlagEnabled_verifyIntentExtra() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        mMediaControllers.clear();
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+        mPreference.setKey(TEST_KEY);
+
+        mController.handlePreferenceTreeClick(mPreference);
+
+        verify(mContext).sendBroadcast(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getAction())
+                .isEqualTo(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG);
     }
 
     /**

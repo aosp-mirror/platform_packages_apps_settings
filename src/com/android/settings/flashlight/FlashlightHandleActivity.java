@@ -52,7 +52,7 @@ public class FlashlightHandleActivity extends Activity implements Indexable {
 
         // Caller's choice: fallback to homepage, or just exit?
         if (getIntent().getBooleanExtra(EXTRA_FALLBACK_TO_HOMEPAGE, false)) {
-            startActivity(new Intent(Settings.ACTION_SETTINGS));
+            startActivity(new Intent(Settings.ACTION_SETTINGS).setPackage(getPackageName()));
         }
         finish();
     }

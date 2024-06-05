@@ -18,8 +18,6 @@ package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.app.Application;
 import android.app.WallpaperColors;
 import android.app.WallpaperManager;
@@ -27,12 +25,17 @@ import android.app.WallpaperManager.OnColorsChangedListener;
 import android.content.Context;
 import android.os.Handler;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.FallbackHome;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -42,21 +45,20 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class FallbackHomeActivityTest {
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private ActivityController<FallbackHome> mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        final Application application = RuntimeEnvironment.application;
+        final Application application = ApplicationProvider.getApplicationContext();
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(application);
         ShadowApplication shadowApplication = Shadows.shadowOf(application);
         shadowApplication.setSystemService(Context.WALLPAPER_SERVICE, wallpaperManager);
@@ -80,7 +82,7 @@ public class FallbackHomeActivityTest {
 
     @Implements(WallpaperManager.class)
     public static class ShadowWallpaperManager extends
-        org.robolectric.shadows.ShadowWallpaperManager {
+            org.robolectric.shadows.ShadowWallpaperManager {
 
         private final List<OnColorsChangedListener> mListener = new ArrayList<>();
 

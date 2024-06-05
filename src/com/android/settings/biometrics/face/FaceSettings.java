@@ -18,8 +18,8 @@ package com.android.settings.biometrics.face;
 
 import static android.app.Activity.RESULT_OK;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_SETTINGS_FOR_WORK_TITLE;
-import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FACE;
 
+import static com.android.settings.Utils.isPrivateProfile;
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.ENROLL_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
@@ -37,18 +37,18 @@ import android.util.Log;
 import android.widget.Button;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.LayoutPreference;
@@ -71,6 +71,8 @@ public class FaceSettings extends DashboardFragment {
             "security_settings_face_delete_faces_container";
     private static final String PREF_KEY_ENROLL_FACE_UNLOCK =
             "security_settings_face_enroll_faces_container";
+    public static final String SECURITY_SETTINGS_FACE_MANAGE_CATEGORY =
+            "security_settings_face_manage_category";
 
     private UserManager mUserManager;
     private FaceManager mFaceManager;
@@ -104,26 +106,8 @@ public class FaceSettings extends DashboardFragment {
         mEnrollButton.setVisible(true);
     };
 
-    private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener =
-            new FaceSettingsEnrollButtonPreferenceController.Listener() {
-                @Override
-                public boolean onShowSplitScreenDialog() {
-                    if (getActivity().isInMultiWindowMode()
-                            && !ActivityEmbeddingUtils.isActivityEmbedded(getActivity())) {
-                        // If it's in split mode, show the error dialog.
-                        BiometricsSplitScreenDialog.newInstance(TYPE_FACE).show(
-                                getActivity().getSupportFragmentManager(),
-                                BiometricsSplitScreenDialog.class.getName());
-                        return true;
-                    }
-                    return false;
-                }
-
-                @Override
-                public void onStartEnrolling(Intent intent) {
-                    FaceSettings.this.startActivityForResult(intent, ENROLL_REQUEST);
-                }
-            };
+    private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener = intent ->
+            startActivityForResult(intent, ENROLL_REQUEST);
 
     /**
      * @param context
@@ -182,13 +166,17 @@ public class FaceSettings extends DashboardFragment {
 
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        mFaceFeatureProvider = FeatureFactory.getFactory(getContext()).getFaceFeatureProvider();
+        mFaceFeatureProvider = FeatureFactory.getFeatureFactory().getFaceFeatureProvider();
 
         if (mUserManager.getUserInfo(mUserId).isManagedProfile()) {
             getActivity().setTitle(
                     mDevicePolicyManager.getResources().getString(FACE_SETTINGS_FOR_WORK_TITLE,
                             () -> getActivity().getResources().getString(
                                     R.string.security_settings_face_profile_preference_title)));
+        } else if (isPrivateProfile(mUserId, getContext())) {
+            getActivity().setTitle(
+                    getActivity().getResources().getString(
+                    R.string.private_space_face_unlock_title));
         }
 
         mLockscreenController = Utils.isMultipleBiometricsSupported(context)
@@ -196,6 +184,8 @@ public class FaceSettings extends DashboardFragment {
                 : use(FaceSettingsLockscreenBypassPreferenceController.class);
         mLockscreenController.setUserId(mUserId);
 
+        final PreferenceCategory managePref =
+                findPreference(SECURITY_SETTINGS_FACE_MANAGE_CATEGORY);
         Preference keyguardPref = findPreference(FaceSettingsKeyguardPreferenceController.KEY);
         Preference appPref = findPreference(FaceSettingsAppPreferenceController.KEY);
         Preference attentionPref = findPreference(FaceSettingsAttentionPreferenceController.KEY);
@@ -205,8 +195,20 @@ public class FaceSettings extends DashboardFragment {
         mTogglePreferences = new ArrayList<>(
                 Arrays.asList(keyguardPref, appPref, attentionPref, confirmPref, bypassPref));
 
+        if (RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                getContext(), DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null) {
+            managePref.setTitle(getString(
+                    com.android.settingslib.widget.restricted.R.string.disabled_by_admin));
+        } else {
+            managePref.setTitle(R.string.security_settings_face_settings_preferences_category);
+        }
+
         mRemoveButton = findPreference(FaceSettingsRemoveButtonPreferenceController.KEY);
         mEnrollButton = findPreference(FaceSettingsEnrollButtonPreferenceController.KEY);
+
+        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+        mEnrollButton.setVisible(!hasEnrolled);
+        mRemoveButton.setVisible(hasEnrolled);
 
         // There is no better way to do this :/
         for (AbstractPreferenceController controller : mControllers) {
@@ -214,12 +216,15 @@ public class FaceSettings extends DashboardFragment {
                 ((FaceSettingsPreferenceController) controller).setUserId(mUserId);
             } else if (controller instanceof FaceSettingsEnrollButtonPreferenceController) {
                 ((FaceSettingsEnrollButtonPreferenceController) controller).setUserId(mUserId);
+            } else if (controller instanceof FaceSettingsFooterPreferenceController) {
+                ((FaceSettingsFooterPreferenceController) controller).setUserId(mUserId);
             }
         }
         mRemoveController.setUserId(mUserId);
 
-        // Don't show keyguard controller for work profile settings.
-        if (mUserManager.isManagedProfile(mUserId)) {
+        // Don't show keyguard controller for work and private profile settings.
+        if (mUserManager.isManagedProfile(mUserId)
+                || mUserManager.getUserInfo(mUserId).isPrivateProfile()) {
             removePreference(FaceSettingsKeyguardPreferenceController.KEY);
             removePreference(mLockscreenController.getPreferenceKey());
         }
@@ -369,6 +374,7 @@ public class FaceSettings extends DashboardFragment {
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));
         controllers.add(new FaceSettingsConfirmPreferenceController(context));
         controllers.add(new FaceSettingsEnrollButtonPreferenceController(context));
+        controllers.add(new FaceSettingsFooterPreferenceController(context));
         return controllers;
     }
 
@@ -414,13 +420,9 @@ public class FaceSettings extends DashboardFragment {
                 }
 
                 private boolean isAttentionSupported(Context context) {
-                    FaceFeatureProvider featureProvider = FeatureFactory.getFactory(
-                            context).getFaceFeatureProvider();
-                    boolean isAttentionSupported = false;
-                    if (featureProvider != null) {
-                        isAttentionSupported = featureProvider.isAttentionSupported(context);
-                    }
-                    return isAttentionSupported;
+                    FaceFeatureProvider featureProvider =
+                            FeatureFactory.getFeatureFactory().getFaceFeatureProvider();
+                    return featureProvider.isAttentionSupported(context);
                 }
 
                 private boolean hasEnrolledBiometrics(Context context) {

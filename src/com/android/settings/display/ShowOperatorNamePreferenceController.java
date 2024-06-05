@@ -20,7 +20,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -64,6 +64,6 @@ public class ShowOperatorNamePreferenceController extends AbstractPreferenceCont
     public void updateState(Preference preference) {
         int value = Settings.Secure.getInt(mContext.getContentResolver(),
                 KEY_SHOW_OPERATOR_NAME, 1);
-        ((SwitchPreference) preference).setChecked(value != 0);
+        ((TwoStatePreference) preference).setChecked(value != 0);
     }
 }

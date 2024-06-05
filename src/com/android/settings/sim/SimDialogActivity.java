@@ -41,6 +41,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
@@ -90,7 +91,7 @@ public class SimDialogActivity extends FragmentActivity {
         }
         SimDialogProhibitService.supportDismiss(this);
 
-        mMetricsFeatureProvider = FeatureFactory.getFactory(this).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         getWindow().addSystemFlags(
                 WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         showOrUpdateDialog();
@@ -130,6 +131,15 @@ public class SimDialogActivity extends FragmentActivity {
         if (dialogType == PREFERRED_PICK
                 && getProgressState() == SubscriptionActionDialogActivity.PROGRESS_IS_SHOWING) {
             Log.d(TAG, "Finish the sim dialog since the sim action dialog is showing the progress");
+            finish();
+            return;
+        }
+
+        if (Flags.isDualSimOnboardingEnabled()
+                && (dialogType == DATA_PICK
+                || dialogType == CALLS_PICK
+                || dialogType == SMS_PICK)) {
+            Log.d(TAG, "Finish the sim dialog since the sim onboarding is shown");
             finish();
             return;
         }
@@ -280,8 +290,20 @@ public class SimDialogActivity extends FragmentActivity {
     public void showEnableAutoDataSwitchDialog() {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         SimDialogFragment fragment = createFragment(ENABLE_AUTO_DATA_SWITCH);
-        fragment.show(fragmentManager, Integer.toString(ENABLE_AUTO_DATA_SWITCH));
 
+        if (fragmentManager.isStateSaved()) {
+            Log.w(TAG, "Failed to show EnableAutoDataSwitchDialog. The fragmentManager "
+                    + "is StateSaved.");
+            forceClose();
+            return;
+        }
+        try {
+            fragment.show(fragmentManager, Integer.toString(ENABLE_AUTO_DATA_SWITCH));
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to show EnableAutoDataSwitchDialog.", e);
+            forceClose();
+            return;
+        }
         if (getResources().getBoolean(
                 R.bool.config_auto_data_switch_enables_cross_sim_calling)) {
             // If auto data switch is already enabled on the non-DDS, the dialog for enabling it
@@ -337,6 +359,7 @@ public class SimDialogActivity extends FragmentActivity {
                 TelephonyManager.class).createForSubscriptionId(subId);
         subscriptionManager.setDefaultDataSubId(subId);
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            Log.d(TAG, "setDataEnabledForReason true");
             telephonyManager.setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
                     true);
             Toast.makeText(this, R.string.data_switch_started, Toast.LENGTH_LONG).show();

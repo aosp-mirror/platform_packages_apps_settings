@@ -25,7 +25,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class ClearAdbKeysWarningDialog extends InstrumentedDialogFragment implements
@@ -51,7 +50,7 @@ public class ClearAdbKeysWarningDialog extends InstrumentedDialogFragment implem
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
-                .setMessage(R.string.adb_keys_warning_message)
+                .setMessage(com.android.settingslib.R.string.adb_keys_warning_message)
                 .setPositiveButton(android.R.string.ok, this /* onClickListener */)
                 .setNegativeButton(android.R.string.cancel, null /* onClickListener */)
                 .create();

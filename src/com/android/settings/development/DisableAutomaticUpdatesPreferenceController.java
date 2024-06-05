@@ -21,7 +21,7 @@ import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -63,7 +63,7 @@ public class DisableAutomaticUpdatesPreferenceController extends
         final int updatesEnabled = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE, 0 /* default */);
 
-        ((SwitchPreference) mPreference).setChecked(updatesEnabled != DISABLE_UPDATES_SETTING);
+        ((TwoStatePreference) mPreference).setChecked(updatesEnabled != DISABLE_UPDATES_SETTING);
     }
 
     @Override
@@ -71,6 +71,6 @@ public class DisableAutomaticUpdatesPreferenceController extends
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE, DISABLE_UPDATES_SETTING);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

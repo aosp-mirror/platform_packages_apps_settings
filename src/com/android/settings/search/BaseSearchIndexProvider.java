@@ -45,6 +45,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A basic SearchIndexProvider that returns no data to index.
@@ -73,7 +74,19 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
 
     @Override
     public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-        return null;
+        final List<SearchIndexableRaw> raws = new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
+        if (controllers == null || controllers.isEmpty()) {
+            return raws;
+        }
+        for (AbstractPreferenceController controller : controllers) {
+            if (controller instanceof PreferenceControllerMixin) {
+                ((PreferenceControllerMixin) controller).updateRawDataToIndex(raws);
+            } else if (controller instanceof BasePreferenceController) {
+                ((BasePreferenceController) controller).updateRawDataToIndex(raws);
+            }
+        }
+        return raws;
     }
 
     @Override
@@ -105,11 +118,18 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     @Override
     @CallSuper
     public List<String> getNonIndexableKeys(Context context) {
+        final List<String> nonIndexableKeys = new ArrayList<>();
         if (!isPageSearchEnabled(context)) {
             // Entire page should be suppressed, mark all keys from this page as non-indexable.
-            return getNonIndexableKeysFromXml(context, true /* suppressAllPage */);
+            nonIndexableKeys.addAll(
+                    getNonIndexableKeysFromXml(context, true /* suppressAllPage */));
+            nonIndexableKeys.addAll(
+                    getRawDataToIndex(context, true /* enabled */)
+                            .stream()
+                            .map(data -> data.key)
+                            .collect(Collectors.toList()));
+            return nonIndexableKeys;
         }
-        final List<String> nonIndexableKeys = new ArrayList<>();
         nonIndexableKeys.addAll(getNonIndexableKeysFromXml(context, false /* suppressAllPage */));
         final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
         if (controllers != null && !controllers.isEmpty()) {
@@ -136,7 +156,7 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         try {
             controllersFromCode = createPreferenceControllers(context);
         } catch (Exception e) {
-            Log.w(TAG, "Error initial controller");
+            Log.w(TAG, "Error initializing controller in fragment: " + this + ", e: " + e);
         }
 
         final List<SearchIndexableResource> res = getXmlResourcesToIndex(context, true);

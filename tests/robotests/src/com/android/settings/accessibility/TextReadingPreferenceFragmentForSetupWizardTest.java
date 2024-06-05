@@ -16,12 +16,15 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.TextReadingPreferenceFragment.PREVIEW_KEY;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.RESET_KEY;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -29,6 +32,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
@@ -63,6 +67,9 @@ public class TextReadingPreferenceFragmentForSetupWizardTest {
     @Mock
     private FragmentActivity mActivity;
 
+    @Mock
+    private TextReadingPreviewPreference mPreviewPreference;
+
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private TextReadingPreferenceFragmentForSetupWizard mFragment;
@@ -73,7 +80,9 @@ public class TextReadingPreferenceFragmentForSetupWizardTest {
         final LayoutPreference resetPreference =
                 new LayoutPreference(mContext, R.layout.accessibility_text_reading_reset_button);
         doReturn(mContext).when(mFragment).getContext();
+        doReturn(mock(LifecycleOwner.class)).when(mFragment).getViewLifecycleOwner();
         doReturn(resetPreference).when(mFragment).findPreference(RESET_KEY);
+        doReturn(mPreviewPreference).when(mFragment).findPreference(PREVIEW_KEY);
         doReturn(mFooterBarMixin).when(mGlifLayoutView).getMixin(FooterBarMixin.class);
     }
 
@@ -105,5 +114,13 @@ public class TextReadingPreferenceFragmentForSetupWizardTest {
 
         verify(mFooterBarMixin).setPrimaryButton(any());
         verify(mFooterBarMixin).setSecondaryButton(any());
+    }
+
+    @Test
+    public void adjustPreviewPaddingsForSetupWizard_setPreviewLayoutPaddings() {
+        mFragment.adjustPreviewPaddingsForSetupWizard();
+
+        verify(mPreviewPreference).setLayoutMinHorizontalPadding(anyInt());
+        verify(mPreviewPreference).setBackgroundMinHorizontalPadding(anyInt());
     }
 }

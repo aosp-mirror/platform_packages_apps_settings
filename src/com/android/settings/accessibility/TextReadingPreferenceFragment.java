@@ -62,7 +62,7 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     static final String BOLD_TEXT_KEY = "toggle_force_bold_text";
     static final String HIGH_TEXT_CONTRAST_KEY = "toggle_high_text_contrast_preference";
     static final String RESET_KEY = "reset";
-    private static final String PREVIEW_KEY = "preview";
+    static final String PREVIEW_KEY = "preview";
     private static final String NEED_RESET_SETTINGS = "need_reset_settings";
     private static final String LAST_PREVIEW_INDEX = "last_preview_index";
     private static final int UNKNOWN_INDEX = -1;

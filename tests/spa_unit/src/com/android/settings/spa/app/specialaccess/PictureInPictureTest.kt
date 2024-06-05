@@ -27,9 +27,9 @@ import android.os.DeadSystemRuntimeException
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -46,7 +46,6 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.mockito.Mockito.`when` as whenever
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class PictureInPictureTest {
     @get:Rule
@@ -69,18 +68,9 @@ class PictureInPictureTest {
     }
 
     @Test
-    fun pageTitleResId() {
+    fun modelResourceId() {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.picture_in_picture_title)
-    }
-
-    @Test
-    fun switchTitleResId() {
-        assertThat(listModel.switchTitleResId)
-            .isEqualTo(R.string.picture_in_picture_app_detail_switch)
-    }
-
-    @Test
-    fun footerResId() {
+        assertThat(listModel.switchTitleResId).isEqualTo(R.string.picture_in_picture_app_detail_switch)
         assertThat(listModel.footerResId).isEqualTo(R.string.picture_in_picture_app_detail_summary)
     }
 
@@ -190,7 +180,7 @@ class PictureInPictureTest {
         appOpsController = AppOpsController(
             context = context,
             app = PICTURE_IN_PICTURE_APP,
-            op = AppOpsManager.OP_PICTURE_IN_PICTURE,
+            appOps = AppOps(AppOpsManager.OP_PICTURE_IN_PICTURE),
         ),
     )
 

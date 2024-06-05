@@ -23,7 +23,6 @@ import android.util.Log;
 
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -52,12 +51,13 @@ public class SharedDataPreferenceController extends DeveloperOptionsPreferenceCo
             final boolean showPref = mBlobStoreManager != null
                     && !mBlobStoreManager.queryBlobsForUser(UserHandle.CURRENT).isEmpty();
             preference.setEnabled(showPref);
-            preference.setSummary(showPref ? R.string.shared_data_summary
-                                           : R.string.shared_data_no_blobs_text);
+            preference.setSummary(
+                    showPref ? com.android.settingslib.R.string.shared_data_summary
+                            : com.android.settingslib.R.string.shared_data_no_blobs_text);
         } catch (IOException e) {
             Log.e(TAG, "Unable to fetch blobs for current user: " + e.getMessage());
             preference.setEnabled(false);
-            preference.setSummary(R.string.shared_data_no_blobs_text);
+            preference.setSummary(com.android.settingslib.R.string.shared_data_no_blobs_text);
         }
     }
 }

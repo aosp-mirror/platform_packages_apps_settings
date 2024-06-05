@@ -17,7 +17,10 @@
 package com.android.settings.network;
 
 import android.annotation.IntDef;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -53,6 +56,35 @@ public class UiccSlotUtil {
     public static final int INVALID_LOGICAL_SLOT_ID = -1;
     public static final int INVALID_PHYSICAL_SLOT_ID = -1;
     public static final int INVALID_PORT_ID = -1;
+
+    @VisibleForTesting
+    static class SimCardStateChangeReceiver extends BroadcastReceiver{
+        private final CountDownLatch mLatch;
+        SimCardStateChangeReceiver(CountDownLatch latch) {
+            mLatch = latch;
+        }
+
+        public void registerOn(Context context) {
+            context.registerReceiver(this,
+                    new IntentFilter(TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED),
+                    Context.RECEIVER_NOT_EXPORTED);
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i(TAG, "Action: " + intent.getAction());
+            if (!TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED.equals(intent.getAction())) {
+                return;
+            }
+            final int simState = intent.getIntExtra(
+                    TelephonyManager.EXTRA_SIM_STATE, TelephonyManager.SIM_STATE_UNKNOWN);
+            Log.i(TAG, "simState: " + simState);
+            if (simState != TelephonyManager.SIM_STATE_UNKNOWN
+                    && simState != TelephonyManager.SIM_STATE_ABSENT) {
+                mLatch.countDown();
+            }
+        }
+    }
 
     /**
      * Mode for switching to eSIM slot which decides whether there is cleanup process, e.g.
@@ -130,7 +162,7 @@ public class UiccSlotUtil {
         Log.d(TAG, "The SimSlotMapping: " + uiccSlotMappings);
 
         SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
+                SubscriptionManager.class).createForAllUserProfiles();
         int excludedLogicalSlotIndex = getExcludedLogicalSlotIndex(uiccSlotMappings,
                 SubscriptionUtil.getActiveSubscriptions(subscriptionManager), removedSubInfo,
                 telMgr.isMultiSimEnabled());
@@ -171,7 +203,7 @@ public class UiccSlotUtil {
         }
 
         SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
+                SubscriptionManager.class).createForAllUserProfiles();
         int excludedLogicalSlotIndex = getExcludedLogicalSlotIndex(uiccSlotMappings,
                 SubscriptionUtil.getActiveSubscriptions(subscriptionManager), removedSubInfo,
                 telMgr.isMultiSimEnabled());
@@ -190,7 +222,7 @@ public class UiccSlotUtil {
         List<UiccCardInfo> uiccCardInfos = telMgr.getUiccCardsInfo();
         ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(telMgr);
         SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
+                SubscriptionManager.class).createForAllUserProfiles();
         SubscriptionInfo subInfo = SubscriptionUtil.getSubById(subscriptionManager, subId);
 
         // checking whether this is the removable esim. If it is, then return the removable slot id.
@@ -229,19 +261,27 @@ public class UiccSlotUtil {
                                 && uiccSlotMapping.getPortIndex() == port);
     }
 
-    private static void performSwitchToSlot(TelephonyManager telMgr,
+    @VisibleForTesting
+    static void performSwitchToSlot(TelephonyManager telMgr,
             Collection<UiccSlotMapping> uiccSlotMappings, Context context)
             throws UiccSlotsException {
-        CarrierConfigChangedReceiver receiver = null;
+        BroadcastReceiver receiver = null;
         long waitingTimeMillis =
                 Settings.Global.getLong(
                         context.getContentResolver(),
                         Settings.Global.EUICC_SWITCH_SLOT_TIMEOUT_MILLIS,
                         DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS);
+        Log.d(TAG, "Set waitingTime as " + waitingTimeMillis);
+
         try {
             CountDownLatch latch = new CountDownLatch(1);
-            receiver = new CarrierConfigChangedReceiver(latch);
-            receiver.registerOn(context);
+            if (isMultipleEnabledProfilesSupported(telMgr)) {
+                receiver = new SimCardStateChangeReceiver(latch);
+                ((SimCardStateChangeReceiver) receiver).registerOn(context);
+            } else {
+                receiver = new CarrierConfigChangedReceiver(latch);
+                ((CarrierConfigChangedReceiver) receiver).registerOn(context);
+            }
             telMgr.setSimSlotMapping(uiccSlotMappings);
             latch.await(waitingTimeMillis, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
@@ -268,7 +308,8 @@ public class UiccSlotUtil {
         }
         if (slotId == INVALID_PHYSICAL_SLOT_ID) {
             for (int i = 0; i < slots.length; i++) {
-                if (slots[i].isRemovable()
+                if (slots[i] != null
+                        && slots[i].isRemovable()
                         && !slots[i].getIsEuicc()
                         && !slots[i].getPorts().stream().findFirst().get().isActive()
                         && slots[i].getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_ERROR
@@ -277,8 +318,9 @@ public class UiccSlotUtil {
                 }
             }
         } else {
-            if (slotId >= slots.length || !slots[slotId].isRemovable()) {
-                throw new UiccSlotsException("The given slotId is not a removable slot: " + slotId);
+            if (slotId >= slots.length || slots[slotId] == null || !slots[slotId].isRemovable()) {
+                Log.d(TAG, "The given slotId is not a removable slot: " + slotId);
+                return INVALID_PHYSICAL_SLOT_ID;
             }
             if (!slots[slotId].getPorts().stream().findFirst().get().isActive()) {
                 return slotId;
@@ -286,38 +328,6 @@ public class UiccSlotUtil {
         }
         return INVALID_PHYSICAL_SLOT_ID;
     }
-
-    // Device |                                        |Slot   |
-    // Working|                                        |Mapping|
-    // State  |Type                                    |Mode   |Friendly name
-    //--------------------------------------------------------------------------
-    // Single |SIM pSIM [RIL 0]                        |1      |pSIM active
-    // Single |SIM MEP Port #0 [RIL0]                  |2      |eSIM Port0 active
-    // Single |SIM MEP Port #1 [RIL0]                  |2.1    |eSIM Port1 active
-    // DSDS   |pSIM [RIL 0] + MEP Port #0 [RIL 1]      |3      |pSIM+Port0
-    // DSDS   |pSIM [RIL 0] + MEP Port #1 [RIL 1]      |3.1    |pSIM+Port1
-    // DSDS   |MEP Port #0 [RIL 0] + MEP Port #1 [RIL1]|3.2    |Dual-Ports-A
-    // DSDS   |MEP Port #1 [RIL 0] + MEP Port #0 [RIL1]|4      |Dual-Ports-B
-    //
-    // The rules are:
-    // 1. pSIM's logical slots always is [RIL 0].
-    // 2. assign the new active port to the same stack that will be de-activated
-    //    For example: mode#3->mode#4
-    // 3. Add an eSIM carrier or enable eSIM carrier. The cases are at the below.
-    //    1) 1   => 2 / 2.1 / 3 / 3.1
-    //    2) 2   => 1 / 3 / 3.2
-    //    3) 2.1 => 3.1 / 4
-    //    4) 3   => 4
-    //    5) 3.1 => 3.2
-    //    Note:
-    //        1) 2 <=> 2.1  blocked by LPA (reason: existing active port in SS so just re-use)
-    //        2) 3 <=> 3.1 blocked by LPA (reason: if pSIM+an active port, re-use the active port)
-    // 4. pSIM insertion or enabling
-    //     1) 2   => 1 / 3
-    //     2) 2.1 => 1 / 3.1
-    //     3) 3.2 => 3 / 3.1
-    //     4) 4   => 3 / 3.1
-
 
     @VisibleForTesting
     static Collection<UiccSlotMapping> prepareUiccSlotMappings(
@@ -421,18 +431,38 @@ public class UiccSlotUtil {
         if (telMgr == null) {
             return false;
         }
-        ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(telMgr);
+        List<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(telMgr);
+        return isRemovableSimEnabled(slotInfos);
+    }
+
+    /**
+     * Return whether the removable psim is enabled.
+     *
+     * @param slotInfos is a List of UiccSlotInfo.
+     * @return whether the removable psim is enabled.
+     */
+    public static boolean isRemovableSimEnabled(List<UiccSlotInfo> slotInfos) {
         boolean isRemovableSimEnabled =
                 slotInfos.stream()
                         .anyMatch(
                                 slot -> slot != null
                                         && slot.isRemovable()
                                         && !slot.getIsEuicc()
-                                        && slot.getPorts().stream().anyMatch(
-                                                port -> port.isActive())
+                                        && slot.getPorts().stream()
+                                                .anyMatch(port -> port.isActive())
                                         && slot.getCardStateInfo()
-                                                == UiccSlotInfo.CARD_STATE_INFO_PRESENT);
+                                        == UiccSlotInfo.CARD_STATE_INFO_PRESENT);
         Log.i(TAG, "isRemovableSimEnabled: " + isRemovableSimEnabled);
         return isRemovableSimEnabled;
+    }
+
+    private static boolean isMultipleEnabledProfilesSupported(TelephonyManager telMgr) {
+        List<UiccCardInfo> cardInfos = telMgr.getUiccCardsInfo();
+        if (cardInfos == null) {
+            Log.w(TAG, "UICC cards info list is empty.");
+            return false;
+        }
+        return cardInfos.stream().anyMatch(
+                cardInfo -> cardInfo.isMultipleEnabledProfilesSupported());
     }
 }

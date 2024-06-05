@@ -27,7 +27,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -42,7 +43,7 @@ import java.util.List;
 public class DeviceStateAutoRotateSettingController extends TogglePreferenceController implements
         LifecycleObserver {
 
-    private SwitchPreference mPreference;
+    private TwoStatePreference mPreference;
 
     private final DeviceStateRotationLockSettingsManager mAutoRotateSettingsManager;
     private final int mOrder;
@@ -67,7 +68,7 @@ public class DeviceStateAutoRotateSettingController extends TogglePreferenceCont
     public DeviceStateAutoRotateSettingController(Context context, int deviceState,
             String deviceStateDescription, int order) {
         this(context, deviceState, deviceStateDescription, order,
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider());
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider());
     }
 
     void init(Lifecycle lifecycle) {
@@ -86,7 +87,7 @@ public class DeviceStateAutoRotateSettingController extends TogglePreferenceCont
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mPreference = new SwitchPreference(mContext);
+        mPreference = new SwitchPreferenceCompat(mContext);
         mPreference.setTitle(mDeviceStateDescription);
         mPreference.setKey(getPreferenceKey());
         mPreference.setOrder(mOrder);

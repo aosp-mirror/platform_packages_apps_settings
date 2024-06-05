@@ -42,28 +42,33 @@ import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.FakeUnavailablePreferenceController;
 import com.android.settings.testutils.SliceTester;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowRestrictedLockUtilsInternal.class)
 public class SliceBuilderUtilsTest {
 
-    private final String KEY = "KEY";
-    private final String TITLE = "title";
-    private final String SUMMARY = "summary";
-    private final String SCREEN_TITLE = "screen title";
-    private final String KEYWORDS = "a, b, c";
-    private final String FRAGMENT_NAME = "fragment name";
-    private final int ICON = R.drawable.ic_settings_accent;
-    private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
-    private final Class TOGGLE_CONTROLLER = FakeToggleController.class;
-    private final Class SLIDER_CONTROLLER = FakeSliderController.class;
-    private final Class INVALID_SLIDER_CONTROLLER = FakeInvalidSliderController.class;
-    private final Class CONTEXT_CONTROLLER = FakeContextOnlyPreferenceController.class;
+    private static final String KEY = "KEY";
+    private static final String TITLE = "title";
+    private static final String SUMMARY = "summary";
+    private static final String SCREEN_TITLE = "screen title";
+    private static final String KEYWORDS = "a, b, c";
+    private static final String FRAGMENT_NAME = "fragment name";
+    private static final String RESTRICTION = "no_brightness";
+    private static final int ICON = R.drawable.ic_settings_accent;
+    private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
+    private static final Class TOGGLE_CONTROLLER = FakeToggleController.class;
+    private static final Class SLIDER_CONTROLLER = FakeSliderController.class;
+    private static final Class INVALID_SLIDER_CONTROLLER = FakeInvalidSliderController.class;
+    private static final Class CONTEXT_CONTROLLER = FakeContextOnlyPreferenceController.class;
 
     private Context mContext;
 
@@ -72,6 +77,11 @@ public class SliceBuilderUtilsTest {
         mContext = RuntimeEnvironment.application;
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowRestrictedLockUtilsInternal.reset();
     }
 
     @Test
@@ -96,6 +106,27 @@ public class SliceBuilderUtilsTest {
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
         SliceTester.testSettingsSliderSlice(mContext, slice, data);
+    }
+
+    @Test
+    public void buildToggleSlice_withUserRestriction_shouldReturnToggleSlice() {
+        final SliceData mockData = getMockData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
+                RESTRICTION);
+
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, mockData);
+
+        SliceTester.testSettingsToggleSlice(mContext, slice, mockData);
+    }
+
+    @Test
+    public void buildToggleSlice_withUserRestrictionAndRestricted_shouldReturnIntentSlice() {
+        final SliceData mockData = getMockData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
+                RESTRICTION);
+        ShadowRestrictedLockUtilsInternal.setRestricted(true);
+
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, mockData);
+
+        SliceTester.testSettingsIntentSlice(mContext, slice, mockData);
     }
 
     @Test
@@ -425,8 +456,19 @@ public class SliceBuilderUtilsTest {
                 null /* unavailableSliceSubtitle */);
     }
 
+    private SliceData getMockData(Class prefController, int sliceType, String userRestriction) {
+        return getMockData(prefController, SUMMARY, sliceType, SCREEN_TITLE, ICON,
+                null /* unavailableSliceSubtitle */, userRestriction);
+    }
+
     private SliceData getMockData(Class prefController, String summary, int sliceType,
             String screenTitle, int icon, String unavailableSliceSubtitle) {
+        return getMockData(prefController, summary, sliceType, screenTitle, icon,
+                unavailableSliceSubtitle, null /* userRestriction */);
+    }
+
+    private SliceData getMockData(Class prefController, String summary, int sliceType,
+            String screenTitle, int icon, String unavailableSliceSubtitle, String userRestriction) {
         return new SliceData.Builder()
                 .setKey(KEY)
                 .setTitle(TITLE)
@@ -439,6 +481,7 @@ public class SliceBuilderUtilsTest {
                 .setPreferenceControllerClassName(prefController.getName())
                 .setSliceType(sliceType)
                 .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
+                .setUserRestriction(userRestriction)
                 .build();
     }
 }

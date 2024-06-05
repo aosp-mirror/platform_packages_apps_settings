@@ -40,7 +40,7 @@ public class AppSettingsInjector extends SettingsInjector {
     public AppSettingsInjector(Context context, int metricsCategory) {
         super(context);
         mMetricsCategory = metricsCategory;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

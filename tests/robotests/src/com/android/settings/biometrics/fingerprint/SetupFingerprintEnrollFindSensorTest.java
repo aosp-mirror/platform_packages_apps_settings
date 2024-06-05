@@ -18,39 +18,43 @@ package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.robolectric.RuntimeEnvironment.application;
-
 import android.content.Intent;
 import android.content.res.Resources.Theme;
 import android.hardware.fingerprint.FingerprintManager;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class})
 public class SetupFingerprintEnrollFindSensorTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    @Mock private FingerprintManager mFingerprintManager;
+    @Mock
+    private FingerprintManager mFingerprintManager;
 
     private Theme mTheme;
 
@@ -58,15 +62,14 @@ public class SetupFingerprintEnrollFindSensorTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         ShadowUtils.setFingerprintManager(mFingerprintManager);
         FakeFeatureFactory.setupForTest();
 
         final Intent intent = new Intent()
                 // Set the challenge token so the confirm screen will not be shown
                 .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
-        mActivity = (SetupFingerprintEnrollFindSensor) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(SetupFingerprintEnrollFindSensor.class, intent)).get();
+        mActivity = Robolectric.buildActivity(SetupFingerprintEnrollFindSensor.class,
+                intent).setup().get();
         mTheme = mActivity.getTheme();
     }
 
@@ -82,7 +85,8 @@ public class SetupFingerprintEnrollFindSensorTest {
                 alertDialog);
         final int titleRes = R.string.setup_fingerprint_enroll_skip_title;
 
-        assertThat(application.getString(titleRes)).isEqualTo(shadowAlertDialog.getTitle());
+        assertThat(ApplicationProvider.getApplicationContext().getString(titleRes)).isEqualTo(
+                shadowAlertDialog.getTitle());
     }
 
     @Test
@@ -104,7 +108,7 @@ public class SetupFingerprintEnrollFindSensorTest {
     private AlertDialog setupAlertDialog() {
         PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().performClick();
-
+        ShadowLooper.idleMainLooper();
         final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(alertDialog).isNotNull();
 

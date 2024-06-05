@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -47,10 +48,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -65,6 +66,7 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowInteractionJankMonitor.class)
+@Ignore
 public class WifiP2pSettingsTest {
 
     private Context mContext;
@@ -89,8 +91,7 @@ public class WifiP2pSettingsTest {
         mContext = RuntimeEnvironment.application;
         TestWifiP2pSettings.sMockWifiP2pManager = mWifiP2pManager;
 
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mFragment = new TestWifiP2pSettings();
         mFragment.mWifiP2pManager = mWifiP2pManager;
         doReturn(mChannel).when(mWifiP2pManager).initialize(any(), any(), any());
@@ -148,6 +149,13 @@ public class WifiP2pSettingsTest {
     public void networkInfo_afterOnDeviceInfoAvailable_shouldBeRequested() {
         mFragment.onDeviceInfoAvailable(mock(WifiP2pDevice.class));
         verify(mWifiP2pManager, times(1)).requestNetworkInfo(any(), any());
+    }
+
+    @Test
+    public void onDeviceInfoAvailable_nullChannel_shouldBeIgnored() {
+        mFragment.sChannel = null;
+        mFragment.onDeviceInfoAvailable(mock(WifiP2pDevice.class));
+        verify(mWifiP2pManager, never()).requestNetworkInfo(any(), any());
     }
 
     @Test

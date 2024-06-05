@@ -23,12 +23,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ServiceInfo;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.view.InputDevice;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
@@ -42,6 +44,8 @@ import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.development.Enable16kUtils;
+import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedPreference;
@@ -56,7 +60,8 @@ import java.util.Map;
 
 /** Activity with the accessibility settings. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class AccessibilitySettings extends DashboardFragment {
+public class AccessibilitySettings extends DashboardFragment implements
+        InputManager.InputDeviceListener {
 
     private static final String TAG = "AccessibilitySettings";
 
@@ -67,19 +72,20 @@ public class AccessibilitySettings extends DashboardFragment {
     private static final String CATEGORY_SPEECH = "speech_category";
     private static final String CATEGORY_DISPLAY = "display_category";
     private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
+    private static final String CATEGORY_KEYBOARD_OPTIONS = "physical_keyboard_options_category";
     @VisibleForTesting
     static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
 
     private static final String[] CATEGORIES = new String[]{
             CATEGORY_SCREEN_READER, CATEGORY_CAPTIONS, CATEGORY_AUDIO, CATEGORY_DISPLAY,
-            CATEGORY_SPEECH, CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
+            CATEGORY_SPEECH, CATEGORY_INTERACTION_CONTROL,
+            CATEGORY_KEYBOARD_OPTIONS, CATEGORY_DOWNLOADED_SERVICES
     };
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
     static final String EXTRA_CHECKED = "checked";
     static final String EXTRA_TITLE = "title";
-    static final String EXTRA_TITLE_RES = "title_res";
     static final String EXTRA_RESOLVE_INFO = "resolve_info";
     static final String EXTRA_SUMMARY = "summary";
     static final String EXTRA_INTRO = "intro";
@@ -87,12 +93,13 @@ public class AccessibilitySettings extends DashboardFragment {
     static final String EXTRA_COMPONENT_NAME = "component_name";
     static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
     static final String EXTRA_TILE_SERVICE_COMPONENT_NAME = "tile_service_component_name";
-    static final String EXTRA_VIDEO_RAW_RESOURCE_ID = "video_resource";
     static final String EXTRA_LAUNCHED_FROM_SUW = "from_suw";
     static final String EXTRA_ANIMATED_IMAGE_RES = "animated_image_res";
     static final String EXTRA_HTML_DESCRIPTION = "html_description";
     static final String EXTRA_TIME_FOR_LOGGING = "start_time_to_log_a11y_tool";
     static final String EXTRA_METRICS_CATEGORY = "metrics_category";
+
+    public static final String VOICE_ACCESS_SERVICE = "android.apps.accessibility.voiceaccess";
 
     // Timeout before we update the services if packages are added/removed
     // since the AccessibilityManagerService has to do that processing first
@@ -171,6 +178,12 @@ public class AccessibilitySettings extends DashboardFragment {
         // Observe changes from accessibility selection menu
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
+        }
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_STICKY_KEYS);
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SLOW_KEYS);
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BOUNCE_KEYS);
         mSettingsContentObserver = new AccessibilitySettingsContentObserver(mHandler);
         mSettingsContentObserver.registerKeysToObserverCallback(shortcutFeatureKeys,
                 key -> onContentChanged());
@@ -198,23 +211,30 @@ public class AccessibilitySettings extends DashboardFragment {
         super.onCreate(icicle);
         initializeAllPreferences();
         updateAllPreferences();
+        mNeedPreferencesUpdate = false;
         registerContentMonitors();
+        registerInputDeviceListener();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mIsForeground = true;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        updateAllPreferences();
-    }
-
-    @Override
-    public void onStart() {
         if (mNeedPreferencesUpdate) {
             updateAllPreferences();
             mNeedPreferencesUpdate = false;
         }
-        mIsForeground = true;
-        super.onStart();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mNeedPreferencesUpdate = true;
     }
 
     @Override
@@ -226,6 +246,7 @@ public class AccessibilitySettings extends DashboardFragment {
     @Override
     public void onDestroy() {
         unregisterContentMonitors();
+        unRegisterInputDeviceListener();
         super.onDestroy();
     }
 
@@ -248,7 +269,7 @@ public class AccessibilitySettings extends DashboardFragment {
      * @return The service summary
      */
     public static CharSequence getServiceSummary(Context context, AccessibilityServiceInfo info,
-            boolean serviceEnabled) {
+                                                 boolean serviceEnabled) {
         if (serviceEnabled && info.crashed) {
             return context.getText(R.string.accessibility_summary_state_stopped);
         }
@@ -263,11 +284,11 @@ public class AccessibilitySettings extends DashboardFragment {
                     context, componentName) != AccessibilityUtil.UserShortcutType.EMPTY;
             serviceState = shortcutEnabled
                     ? context.getText(R.string.accessibility_summary_shortcut_enabled)
-                    : context.getText(R.string.accessibility_summary_shortcut_disabled);
+                    : context.getText(R.string.generic_accessibility_feature_shortcut_off);
         } else {
             serviceState = serviceEnabled
-                    ? context.getText(R.string.accessibility_summary_state_enabled)
-                    : context.getText(R.string.accessibility_summary_state_disabled);
+                    ? context.getText(R.string.generic_accessibility_service_on)
+                    : context.getText(R.string.generic_accessibility_service_off);
         }
 
         final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
@@ -315,9 +336,9 @@ public class AccessibilitySettings extends DashboardFragment {
 
     @VisibleForTesting
     void updateAllPreferences() {
-        updateSystemPreferences();
         updateServicePreferences();
         updatePreferencesState();
+        updateSystemPreferences();
     }
 
     private void registerContentMonitors() {
@@ -326,6 +347,22 @@ public class AccessibilitySettings extends DashboardFragment {
         mSettingsPackageMonitor.register(context, context.getMainLooper(), /* externalStorage= */
                 false);
         mSettingsContentObserver.register(getContentResolver());
+    }
+
+    private void registerInputDeviceListener() {
+        InputManager mIm = getSystemService(InputManager.class);
+        if (mIm == null) {
+            return;
+        }
+        mIm.registerInputDeviceListener(this, null);
+    }
+
+    private void unRegisterInputDeviceListener() {
+        InputManager mIm = getSystemService(InputManager.class);
+        if (mIm == null) {
+            return;
+        }
+        mIm.unregisterInputDeviceListener(this);
     }
 
     private void unregisterContentMonitors() {
@@ -407,6 +444,7 @@ public class AccessibilitySettings extends DashboardFragment {
         // Hide category if it is empty.
         updatePreferenceCategoryVisibility(CATEGORY_SCREEN_READER);
         updatePreferenceCategoryVisibility(CATEGORY_SPEECH);
+        updatePreferenceCategoryVisibility(CATEGORY_KEYBOARD_OPTIONS);
     }
 
     private List<RestrictedPreference> getInstalledAccessibilityList(Context context) {
@@ -459,6 +497,11 @@ public class AccessibilitySettings extends DashboardFragment {
         String[] services = getResources().getStringArray(key);
         PreferenceCategory category = mCategoryToPrefCategoryMap.get(categoryKey);
         for (int i = 0; i < services.length; i++) {
+            // TODO(b/335443194) Voice access is not available in 16kB mode.
+            if (services[i].contains(VOICE_ACCESS_SERVICE)
+                    && Enable16kUtils.isPageAgnosticModeOn(getContext())) {
+                continue;
+            }
             ComponentName component = ComponentName.unflattenFromString(services[i]);
             mPreBundledServiceComponentToCategoryMap.put(component, category);
         }
@@ -501,7 +544,7 @@ public class AccessibilitySettings extends DashboardFragment {
      * Updates preferences related to system configurations.
      */
     protected void updateSystemPreferences() {
-        // Do nothing.
+        updateKeyboardPreferencesVisibility();
     }
 
     private void updatePreferencesState() {
@@ -511,14 +554,72 @@ public class AccessibilitySettings extends DashboardFragment {
                 findPreference(controller.getPreferenceKey())));
     }
 
+    private void updateKeyboardPreferencesVisibility() {
+        if (!mCategoryToPrefCategoryMap.containsKey(CATEGORY_KEYBOARD_OPTIONS)) {
+            return;
+        }
+        boolean isVisible = isAnyHardKeyboardsExist()
+                && isAnyKeyboardPreferenceAvailable();
+        mCategoryToPrefCategoryMap.get(CATEGORY_KEYBOARD_OPTIONS).setVisible(
+                isVisible);
+        if (isVisible) {
+            //set summary here.
+            findPreference(KeyboardBounceKeyPreferenceController.PREF_KEY).setSummary(
+                    getContext().getString(R.string.bounce_keys_summary,
+                            PhysicalKeyboardFragment.BOUNCE_KEYS_THRESHOLD));
+            findPreference(KeyboardSlowKeyPreferenceController.PREF_KEY).setSummary(
+                    getContext().getString(R.string.slow_keys_summary,
+                            PhysicalKeyboardFragment.SLOW_KEYS_THRESHOLD));
+        }
+    }
+
+    private boolean isAnyHardKeyboardsExist() {
+        for (int deviceId : InputDevice.getDeviceIds()) {
+            final InputDevice device = InputDevice.getDevice(deviceId);
+            if (device != null && !device.isVirtual() && device.isFullKeyboard()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isAnyKeyboardPreferenceAvailable() {
+        for (List<AbstractPreferenceController> controllerList : getPreferenceControllers()) {
+            for (AbstractPreferenceController controller : controllerList) {
+                if (controller.getPreferenceKey().equals(
+                        KeyboardBounceKeyPreferenceController.PREF_KEY)
+                        || controller.getPreferenceKey().equals(
+                        KeyboardSlowKeyPreferenceController.PREF_KEY)
+                        || controller.getPreferenceKey().equals(
+                        KeyboardStickyKeyPreferenceController.PREF_KEY)) {
+                    if (controller.isAvailable()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_settings) {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
                         boolean enabled) {
-                    return FeatureFactory.getFactory(context)
+                    return FeatureFactory.getFeatureFactory()
                             .getAccessibilitySearchFeatureProvider().getSearchIndexableRawData(
                                     context);
                 }
             };
+
+    @Override
+    public void onInputDeviceAdded(int deviceId) {}
+
+    @Override
+    public void onInputDeviceRemoved(int deviceId) {}
+
+    @Override
+    public void onInputDeviceChanged(int deviceId) {
+        mHandler.postDelayed(mUpdateRunnable, DELAY_UPDATE_SERVICES_MILLIS);
+    }
 }

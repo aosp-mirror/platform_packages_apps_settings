@@ -18,6 +18,7 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -25,10 +26,12 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ProcStatsData;
@@ -37,20 +40,25 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AppMemoryPreferenceControllerTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     private SettingsActivity mActivity;
@@ -66,9 +74,11 @@ public class AppMemoryPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        ShadowUserManager.getShadow().setIsAdminUser(true);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        UserManager userManager = mock(UserManager.class);
+        when(userManager.isAdminUser()).thenReturn(true);
+        doReturn(userManager).when(mContext).getSystemService(Context.USER_SERVICE);
+
         mController =
                 spy(new AppMemoryPreferenceController(mContext, mFragment, null /* lifecycle */));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -77,7 +87,6 @@ public class AppMemoryPreferenceControllerTest {
         when(mFragment.getActivity()).thenReturn(mActivity);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_developmentSettingsEnabled_shouldReturnAvailable() {
@@ -106,7 +115,6 @@ public class AppMemoryPreferenceControllerTest {
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_developmentSettingsDisabled_shouldReturnDisabled() {

@@ -27,21 +27,27 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowRecoverySystem;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowRecoverySystem.class, ShadowBluetoothAdapter.class})
 public class ResetNetworkConfirmTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private static final String TEST_PACKAGE = "com.android.settings";
 
@@ -49,14 +55,14 @@ public class ResetNetworkConfirmTest {
 
     @Mock
     private ResetNetworkConfirm mResetNetworkConfirm;
+    private PausedExecutorService mExecutorService;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
+        mExecutorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(mExecutorService);
         mResetNetworkConfirm = new ResetNetworkConfirm();
-        mActivity = spy((FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get());
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
         mResetNetworkConfirm.mActivity = mActivity;
     }
 
@@ -79,7 +85,8 @@ public class ResetNetworkConfirmTest {
         };
 
         mResetNetworkConfirm.mFinalClickListener.onClick(null /* View */);
-        Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount()).isEqualTo(0);
     }

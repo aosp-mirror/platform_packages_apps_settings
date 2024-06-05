@@ -32,16 +32,13 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /**
- * Simple controller to navigate users to the scheduling page from
- * "Settings > Battery > Battery Saver". Also updates the summary for preference based on
- * the currently selected settings.
+ * Simple controller to navigate users to the scheduling page from "Settings > Battery > Battery
+ * Saver". Also updates the summary for preference based on the currently selected settings.
  */
 public class BatterySaverSchedulePreferenceController extends BasePreferenceController {
 
-    @VisibleForTesting
-    Preference mBatterySaverSchedulePreference;
+    @VisibleForTesting Preference mBatterySaverSchedulePreference;
     public static final String KEY_BATTERY_SAVER_SCHEDULE = "battery_saver_schedule";
-
 
     public BatterySaverSchedulePreferenceController(Context context) {
         super(context, KEY_BATTERY_SAVER_SCHEDULE);
@@ -66,7 +63,8 @@ public class BatterySaverSchedulePreferenceController extends BasePreferenceCont
         if (KEY_PERCENTAGE.equals(mode)) {
             final int threshold =
                     Settings.Global.getInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-            return mContext.getString(R.string.battery_saver_auto_percentage_summary,
+            return mContext.getString(
+                    R.string.battery_saver_auto_percentage_summary,
                     Utils.formatPercentage(threshold));
         }
         return mContext.getText(R.string.battery_saver_auto_no_schedule);

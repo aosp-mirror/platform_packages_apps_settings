@@ -57,7 +57,7 @@ public class RecentLocationAccessSeeAllPreferenceController
             : false;
 
         mRecentLocationAccesses = RecentAppOpsAccess.createForLocation(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

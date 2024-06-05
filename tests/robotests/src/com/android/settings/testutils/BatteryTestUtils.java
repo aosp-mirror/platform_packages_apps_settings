@@ -18,6 +18,7 @@ package com.android.settings.testutils;
 
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.usb.UsbManager;
@@ -25,11 +26,21 @@ import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
 import android.os.BatteryManager;
 import android.os.UserManager;
+import android.provider.Settings;
+
 import androidx.room.Room;
 
+import com.android.settings.DisplaySettings;
+import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.fuelgauge.batteryusage.BatteryInformation;
 import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 import com.android.settings.fuelgauge.batteryusage.DeviceBatteryState;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEvent;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyKey;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyType;
+import com.android.settings.fuelgauge.batteryusage.WarningBannerInfo;
+import com.android.settings.fuelgauge.batteryusage.WarningItemInfo;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
@@ -82,30 +93,35 @@ public class BatteryTestUtils {
     public static void insertDataToBatteryStateTable(
             Context context, long timestamp, String packageName) {
         insertDataToBatteryStateTable(
-                context, timestamp, packageName, /*multiple=*/ false, /*isFullChargeStart=*/ false);
+                context,
+                timestamp,
+                packageName,
+                /* multiple= */ false,
+                /* isFullChargeStart= */ false);
     }
 
     /** Inserts a fake data into the database for testing. */
     public static void insertDataToBatteryStateTable(
             Context context, long timestamp, String packageName, boolean isFullChargeStart) {
         insertDataToBatteryStateTable(
-                context, timestamp, packageName, /*multiple=*/ false, isFullChargeStart);
+                context, timestamp, packageName, /* multiple= */ false, isFullChargeStart);
     }
 
     /** Inserts a fake data into the database for testing. */
     public static void insertDataToBatteryStateTable(
-            Context context, long timestamp, String packageName, boolean multiple,
+            Context context,
+            long timestamp,
+            String packageName,
+            boolean multiple,
             boolean isFullChargeStart) {
         DeviceBatteryState deviceBatteryState =
-                DeviceBatteryState
-                        .newBuilder()
+                DeviceBatteryState.newBuilder()
                         .setBatteryLevel(31)
                         .setBatteryStatus(0)
                         .setBatteryHealth(0)
                         .build();
         BatteryInformation batteryInformation =
-                BatteryInformation
-                        .newBuilder()
+                BatteryInformation.newBuilder()
                         .setDeviceBatteryState(deviceBatteryState)
                         .setIsHidden(true)
                         .setBootTimestamp(timestamp - 1)
@@ -125,16 +141,15 @@ public class BatteryTestUtils {
 
         final BatteryState state =
                 new BatteryState(
-                        /*uid=*/ 1001L,
-                        /*userId=*/ 100L,
+                        /* uid= */ 1001L,
+                        /* userId= */ 100L,
                         packageName,
                         timestamp,
-                        /*consumerType=*/ 2,
+                        /* consumerType= */ 2,
                         isFullChargeStart,
                         ConvertUtils.convertBatteryInformationToString(batteryInformation),
                         "");
-        BatteryStateDao dao =
-                BatteryStateDatabase.getInstance(context).batteryStateDao();
+        BatteryStateDao dao = BatteryStateDatabase.getInstance(context).batteryStateDao();
         if (multiple) {
             dao.insertAll(ImmutableList.of(state));
         } else {
@@ -146,7 +161,7 @@ public class BatteryTestUtils {
     public static void insertDataToAppUsageEventTable(
             Context context, long userId, long timestamp, String packageName) {
         insertDataToAppUsageEventTable(
-                context, userId, timestamp, packageName, /*multiple=*/ false);
+                context, userId, timestamp, packageName, /* multiple= */ false);
     }
 
     /** Inserts a fake data into the database for testing. */
@@ -154,15 +169,14 @@ public class BatteryTestUtils {
             Context context, long userId, long timestamp, String packageName, boolean multiple) {
         final AppUsageEventEntity entity =
                 new AppUsageEventEntity(
-                        /*uid=*/ 101L,
+                        /* uid= */ 101L,
                         userId,
                         timestamp,
-                        /*appUsageEventType=*/ 2,
+                        /* appUsageEventType= */ 2,
                         packageName,
-                        /*instanceId=*/ 10001,
-                        /*taskRootPackageName=*/ "com.android.settings");
-        AppUsageEventDao dao =
-                BatteryStateDatabase.getInstance(context).appUsageEventDao();
+                        /* instanceId= */ 10001,
+                        /* taskRootPackageName= */ "com.android.settings");
+        AppUsageEventDao dao = BatteryStateDatabase.getInstance(context).appUsageEventDao();
         if (multiple) {
             dao.insertAll(ImmutableList.of(entity));
         } else {
@@ -191,6 +205,82 @@ public class BatteryTestUtils {
         when(mockUsbPort.supportsComplianceWarnings()).thenReturn(true);
         when(mockUsbPortStatus.isConnected()).thenReturn(true);
         when(mockUsbPortStatus.getComplianceWarnings())
-                .thenReturn(new int[]{UsbPortStatus.COMPLIANCE_WARNING_OTHER});
+                .thenReturn(new int[] {UsbPortStatus.COMPLIANCE_WARNING_DEBUG_ACCESSORY});
+    }
+
+    /** Create an empty power anomaly event list proto. */
+    public static PowerAnomalyEventList createEmptyPowerAnomalyEventList() {
+        return PowerAnomalyEventList.getDefaultInstance();
+    }
+
+    /** Create an non-empty power anomaly event list proto. */
+    public static PowerAnomalyEventList createNonEmptyPowerAnomalyEventList() {
+        return PowerAnomalyEventList.newBuilder()
+                .addPowerAnomalyEvents(0, createAdaptiveBrightnessAnomalyEvent())
+                .addPowerAnomalyEvents(1, createScreenTimeoutAnomalyEvent())
+                .build();
+    }
+
+    /** Create a power anomaly event proto of adaptive brightness. */
+    public static PowerAnomalyEvent createAdaptiveBrightnessAnomalyEvent() {
+        return createAdaptiveBrightnessAnomalyEvent(false);
+    }
+
+    /** Create a power anomaly event proto of adaptive brightness. */
+    public static PowerAnomalyEvent createAdaptiveBrightnessAnomalyEvent(boolean changeSettings) {
+        // TODO: migrate "auto_brightness_entry" to use R.string.preference_key_auto_brightness
+        //  if we can access the Context here. (b/338314718)
+        WarningBannerInfo.Builder warningBannerInfoBuilder =
+                WarningBannerInfo.newBuilder()
+                        .setMainButtonDestination(DisplaySettings.class.getName())
+                        .setMainButtonSourceMetricsCategory(SettingsEnums.DISPLAY)
+                        .setMainButtonSourceHighlightKey("auto_brightness_entry");
+        if (changeSettings) {
+            warningBannerInfoBuilder
+                    .setMainButtonConfigSettingsName(Settings.System.SCREEN_BRIGHTNESS_MODE)
+                    .setMainButtonConfigSettingsValue(
+                            Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+        }
+        return PowerAnomalyEvent.newBuilder()
+                .setEventId("BrightnessAnomaly")
+                .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
+                .setKey(PowerAnomalyKey.KEY_BRIGHTNESS)
+                .setDismissRecordKey(PowerAnomalyKey.KEY_BRIGHTNESS.name())
+                .setScore(1.2f)
+                .setWarningBannerInfo(warningBannerInfoBuilder.build())
+                .build();
+    }
+
+    /** Create a power anomaly event proto of screen timeout. */
+    public static PowerAnomalyEvent createScreenTimeoutAnomalyEvent() {
+        return PowerAnomalyEvent.newBuilder()
+                .setEventId("ScreenTimeoutAnomaly")
+                .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
+                .setKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT)
+                .setDismissRecordKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT.name())
+                .setScore(1.1f)
+                .setWarningBannerInfo(
+                        WarningBannerInfo.newBuilder()
+                                .setMainButtonDestination(ScreenTimeoutSettings.class.getName())
+                                .setMainButtonSourceMetricsCategory(SettingsEnums.SCREEN_TIMEOUT)
+                                .setMainButtonSourceHighlightKey("60000")
+                                .build())
+                .build();
+    }
+
+    /** Create a power anomaly event proto of app anomaly. */
+    public static PowerAnomalyEvent createAppAnomalyEvent() {
+        return PowerAnomalyEvent.newBuilder()
+                .setEventId("AppAnomaly")
+                .setType(PowerAnomalyType.TYPE_APPS_ITEM)
+                .setKey(PowerAnomalyKey.KEY_APP_TOTAL_HIGHER_THAN_USUAL)
+                .setDismissRecordKey("KEY_APP_1")
+                .setScore(2.0f)
+                .setWarningItemInfo(
+                        WarningItemInfo.newBuilder()
+                                .setStartTimestamp(1694361600000L) // 2023-09-11 00:00:00
+                                .setEndTimestamp(1694368800000L) // 2023-09-11 02:00:00
+                                .build())
+                .build();
     }
 }

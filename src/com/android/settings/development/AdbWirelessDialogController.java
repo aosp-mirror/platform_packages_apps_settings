@@ -59,22 +59,26 @@ public class AdbWirelessDialogController {
 
         switch (mMode) {
             case AdbWirelessDialogUiBase.MODE_PAIRING:
-                String title = res.getString(R.string.adb_pairing_device_dialog_title);
+                String title = res.getString(
+                        com.android.settingslib.R.string.adb_pairing_device_dialog_title);
                 mUi.setTitle(title);
                 mView.findViewById(R.id.l_pairing_six_digit).setVisibility(View.VISIBLE);
                 mUi.setCancelButton(res.getString(R.string.cancel));
                 mUi.setCanceledOnTouchOutside(false);
                 break;
             case AdbWirelessDialogUiBase.MODE_PAIRING_FAILED:
-                String msg = res.getString(R.string.adb_pairing_device_dialog_failed_msg);
-                mUi.setTitle(R.string.adb_pairing_device_dialog_failed_title);
+                String msg = res.getString(
+                        com.android.settingslib.R.string.adb_pairing_device_dialog_failed_msg);
+                mUi.setTitle(
+                        com.android.settingslib.R.string.adb_pairing_device_dialog_failed_title);
                 mView.findViewById(R.id.l_pairing_failed).setVisibility(View.VISIBLE);
                 mFailedMsg = (TextView) mView.findViewById(R.id.pairing_failed_label);
                 mFailedMsg.setText(msg);
                 mUi.setSubmitButton(res.getString(R.string.okay));
                 break;
             case AdbWirelessDialogUiBase.MODE_QRCODE_FAILED:
-                mUi.setTitle(R.string.adb_pairing_device_dialog_failed_title);
+                mUi.setTitle(
+                        com.android.settingslib.R.string.adb_pairing_device_dialog_failed_title);
                 mView.findViewById(R.id.l_qrcode_pairing_failed).setVisibility(View.VISIBLE);
                 mUi.setSubmitButton(res.getString(R.string.okay));
                 break;

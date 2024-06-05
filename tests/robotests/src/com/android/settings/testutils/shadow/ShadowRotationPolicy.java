@@ -30,12 +30,13 @@ public class ShadowRotationPolicy {
     private static boolean rotationSupported = true;
 
     @Implementation
-    protected static void setRotationLock(Context context, final boolean enabled) {
+    protected static void setRotationLock(Context context, final boolean enabled, String caller) {
         rotationLockEnabled = enabled;
     }
 
     @Implementation
-    protected static void setRotationLockForAccessibility(Context context, final boolean enabled) {
+    protected static void setRotationLockForAccessibility(
+            Context context, final boolean enabled, String caller) {
         rotationLockEnabled = enabled;
     }
 

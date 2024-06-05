@@ -30,7 +30,6 @@ import android.content.IntentFilter;
 import android.net.wifi.SoftApConfiguration;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -39,12 +38,12 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.wifi.WifiUtils;
+import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -76,6 +75,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     static final String KEY_WIFI_HOTSPOT_SECURITY = "wifi_hotspot_security";
     @VisibleForTesting
     static final String KEY_WIFI_HOTSPOT_SPEED = "wifi_hotspot_speed";
+    @VisibleForTesting
+    static final String KEY_INSTANT_HOTSPOT = "wifi_hotspot_instant";
 
     @VisibleForTesting
     SettingsMainSwitchBar mMainSwitchBar;
@@ -91,7 +92,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
 
-    private boolean mUnavailable;
+    @VisibleForTesting
+    boolean mUnavailable;
     private WifiRestriction mWifiRestriction;
     @VisibleForTesting
     TetherChangeReceiver mTetherChangeReceiver;
@@ -102,6 +104,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     Preference mWifiHotspotSecurity;
     @VisibleForTesting
     Preference mWifiHotspotSpeed;
+    @VisibleForTesting
+    Preference mInstantHotspot;
 
     static {
         TETHER_STATE_CHANGE_FILTER = new IntentFilter(WIFI_AP_STATE_CHANGED_ACTION);
@@ -139,11 +143,15 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         setIfOnlyAvailableForAdmins(true);
         mUnavailable = isUiRestricted() || !mWifiRestriction.isHotspotAvailable(getContext());
+        if (mUnavailable) {
+            return;
+        }
 
-        mWifiTetherViewModel = FeatureFactory.getFactory(getContext()).getWifiFeatureProvider()
+        mWifiTetherViewModel = FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
                 .getWifiTetherViewModel(this);
         if (mWifiTetherViewModel != null) {
             setupSpeedFeature(mWifiTetherViewModel.isSpeedFeatureAvailable());
+            setupInstantHotspot(mWifiTetherViewModel.isInstantHotspotFeatureAvailable());
             mWifiTetherViewModel.getRestarting().observe(this, this::onRestartingChanged);
         }
     }
@@ -161,6 +169,24 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             mWifiTetherViewModel.getSecuritySummary().observe(this, this::onSecuritySummaryChanged);
             mWifiTetherViewModel.getSpeedSummary().observe(this, this::onSpeedSummaryChanged);
         }
+    }
+
+    @VisibleForTesting
+    void setupInstantHotspot(boolean isFeatureAvailable) {
+        if (!isFeatureAvailable) {
+            return;
+        }
+        mInstantHotspot = findPreference(KEY_INSTANT_HOTSPOT);
+        if (mInstantHotspot == null) {
+            Log.e(TAG, "Failed to find Instant Hotspot preference:" + KEY_INSTANT_HOTSPOT);
+            return;
+        }
+        mWifiTetherViewModel.getInstantHotspotSummary()
+                .observe(this, this::onInstantHotspotChanged);
+        mInstantHotspot.setOnPreferenceClickListener(p -> {
+            mWifiTetherViewModel.launchInstantHotspotSettings();
+            return true;
+        });
     }
 
     @Override
@@ -202,7 +228,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         }
         if (mUnavailable) {
             if (!isUiRestrictedByOnlyAdmin()) {
-                getEmptyTextView().setText(R.string.tethering_settings_not_available);
+                getEmptyTextView()
+                        .setText(com.android.settingslib.R.string.tethering_settings_not_available);
             }
             getPreferenceScreen().removeAll();
             return;
@@ -275,6 +302,16 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     }
 
     @VisibleForTesting
+    void onInstantHotspotChanged(String summary) {
+        if (summary == null) {
+            mInstantHotspot.setVisible(false);
+            return;
+        }
+        mInstantHotspot.setVisible(true);
+        mInstantHotspot.setSummary(summary);
+    }
+
+    @VisibleForTesting
     SoftApConfiguration buildNewConfig() {
         SoftApConfiguration currentConfig = mWifiTetherViewModel.getSoftApConfiguration();
         SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder(currentConfig);
@@ -310,16 +347,20 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     static class SearchIndexProvider extends BaseSearchIndexProvider {
 
         private final WifiRestriction mWifiRestriction;
+        private final boolean mIsInstantHotspotEnabled;
 
         SearchIndexProvider(int xmlRes) {
             super(xmlRes);
             mWifiRestriction = new WifiRestriction();
+            mIsInstantHotspotEnabled = SharedConnectivityRepository.isDeviceConfigEnabled();
         }
 
         @VisibleForTesting
-        SearchIndexProvider(int xmlRes, WifiRestriction wifiRestriction) {
+        SearchIndexProvider(int xmlRes, WifiRestriction wifiRestriction,
+                boolean isInstantHotspotEnabled) {
             super(xmlRes);
             mWifiRestriction = wifiRestriction;
+            mIsInstantHotspotEnabled = isInstantHotspotEnabled;
         }
 
         @Override
@@ -333,6 +374,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 keys.add(KEY_WIFI_TETHER_NETWORK_PASSWORD);
                 keys.add(KEY_WIFI_TETHER_AUTO_OFF);
                 keys.add(KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+                keys.add(KEY_INSTANT_HOTSPOT);
+            } else if (!mIsInstantHotspotEnabled) {
+                keys.add(KEY_INSTANT_HOTSPOT);
             }
 
             // Remove duplicate
@@ -342,8 +386,14 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         @Override
         protected boolean isPageSearchEnabled(Context context) {
-            if (context == null || !WifiUtils.canShowWifiHotspot(context)) return false;
-            return !FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE);
+            if (context == null) {
+                return false;
+            }
+            UserManager userManager = context.getSystemService(UserManager.class);
+            if (userManager == null || !userManager.isAdminUser()) {
+                return false;
+            }
+            return WifiUtils.canShowWifiHotspot(context);
         }
 
         @Override

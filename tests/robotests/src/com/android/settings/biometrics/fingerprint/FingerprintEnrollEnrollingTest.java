@@ -56,6 +56,7 @@ import android.os.Vibrator;
 import android.view.Display;
 import android.view.Surface;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,6 +70,7 @@ import com.airbnb.lottie.LottieTask;
 import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -77,13 +79,13 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
-import org.robolectric.shadows.ShadowToast;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+@Ignore("b/295325503")
 @RunWith(RobolectricTestRunner.class)
 public class FingerprintEnrollEnrollingTest {
     private static final String ENROLL_PROGRESS_COLOR_LIGHT = "#699FF3";
@@ -119,16 +121,6 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    public void fingerprintMultiWindowMode() {
-        initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
-        when(mActivity.isInMultiWindowMode()).thenReturn(true);
-        createActivity();
-
-        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
-                mContext.getString(R.string.dock_multi_instances_not_supported_text));
-    }
-
-    @Test
     public void fingerprintUdfpsEnrollSuccessProgress_shouldNotVibrate() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
@@ -144,6 +136,23 @@ public class FingerprintEnrollEnrollingTest {
         mActivity.onEnrollmentProgressChange(1, 1);
 
         verify(mVibrator, never()).vibrate(anyInt(), anyString(), any(), anyString(), any());
+    }
+
+    @Test
+    public void fingerprintUdfpsEnrollInitStage_afterOnEnrollmentHelp_shouldVibrate() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        assertThat(getLayout().getDescriptionText()).isNotEqualTo("");
+
+        mActivity.configureEnrollmentStage(0 /* lottie */);
+        mActivity.onEnrollmentHelp(1/* FINGERPRINT_ACQUIRED_PARTIAL */, mContext.getString(
+                com.android.internal.R.string.fingerprint_acquired_partial));
+
+        verify(mVibrator, never()).vibrate(anyInt(), anyString(), any(), anyString(), any());
+
+        mActivity.onEnrollmentProgressChange(1, 1);
+        verify(mVibrator).vibrate(anyInt(), anyString(), any(), anyString(), any());
+
     }
 
     @Test
@@ -314,11 +323,17 @@ public class FingerprintEnrollEnrollingTest {
     @Test
     public void fingerprintUdfpsOverlayEnrollment_descriptionViewGoneWithOverlap() {
         initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
-        doReturn(true).when(mActivity).hasOverlap(any(), any());
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
         createActivity();
 
-        final GlifLayout defaultLayout = spy(mActivity.findViewById(R.id.setup_wizard_layout));
+        final UdfpsEnrollEnrollingView defaultLayout = spy(
+                mActivity.findViewById(R.id.setup_wizard_layout));
+        doReturn(true).when(defaultLayout).hasOverlap(any(), any());
+
+        // Somehow spy doesn't work, and we need to call initView manually.
+        defaultLayout.initView(mFingerprintManager.getSensorPropertiesInternal().get(0),
+                mActivity.mUdfpsEnrollHelper,
+                mActivity.getSystemService(AccessibilityManager.class));
         final TextView descriptionTextView = defaultLayout.getDescriptionTextView();
 
         defaultLayout.getViewTreeObserver().dispatchOnDraw();
@@ -328,15 +343,34 @@ public class FingerprintEnrollEnrollingTest {
     @Test
     public void fingerprintUdfpsOverlayEnrollment_descriptionViewVisibleWithoutOverlap() {
         initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
-        doReturn(false).when(mActivity).hasOverlap(any(), any());
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
         createActivity();
 
-        final GlifLayout defaultLayout = spy(mActivity.findViewById(R.id.setup_wizard_layout));
+        final UdfpsEnrollEnrollingView defaultLayout = spy(
+                mActivity.findViewById(R.id.setup_wizard_layout));
+        doReturn(false).when(defaultLayout).hasOverlap(any(), any());
+
+        // Somehow spy doesn't work, and we need to call initView manually.
+        defaultLayout.initView(mFingerprintManager.getSensorPropertiesInternal().get(0),
+                mActivity.mUdfpsEnrollHelper,
+                mActivity.getSystemService(AccessibilityManager.class));
         final TextView descriptionTextView = defaultLayout.getDescriptionTextView();
 
         defaultLayout.getViewTreeObserver().dispatchOnDraw();
         assertThat(descriptionTextView.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_udfpsAnimationViewVisibility() {
+        initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
+        createActivity();
+
+        final UdfpsEnrollView enrollView = mActivity.findViewById(R.id.udfps_animation_view);
+        assertThat(enrollView.getVisibility()).isEqualTo(View.GONE);
+
+        mActivity.onUdfpsOverlayShown();
+        assertThat(enrollView.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
@@ -380,11 +414,11 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    public void forwardEnrollPointerDownEvents() {
+    public void forwardUdfpsEnrollPointerDownEvents() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
-        mActivity.onPointerDown(0);
+        mActivity.onUdfpsPointerDown(0);
         assertThat(listener.mProgress).isFalse();
         assertThat(listener.mHelp).isFalse();
         assertThat(listener.mAcquired).isFalse();
@@ -393,11 +427,11 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    public void forwardEnrollPointerUpEvents() {
+    public void forwardUdfpsEnrollPointerUpEvents() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
-        mActivity.onPointerUp(0);
+        mActivity.onUdfpsPointerUp(0);
         assertThat(listener.mProgress).isFalse();
         assertThat(listener.mHelp).isFalse();
         assertThat(listener.mAcquired).isFalse();
@@ -578,10 +612,10 @@ public class FingerprintEnrollEnrollingTest {
         mContext = spy(RuntimeEnvironment.application);
         mActivity = spy(FingerprintEnrollEnrolling.class);
 
-        when(mFingerprintManager.getSensorPropertiesInternal()).thenReturn(props);
-        when(mContext.getDisplay()).thenReturn(mMockDisplay);
+        doReturn(mMockDisplay).when(mContext).getDisplay();
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
 
+        doReturn(mMockDisplay).when(mActivity).getDisplay();
         doReturn(true).when(mActivity).shouldShowLottie();
         doReturn(mFingerprintManager).when(mActivity).getSystemService(FingerprintManager.class);
         doReturn(mVibrator).when(mActivity).getSystemService(Vibrator.class);
@@ -611,6 +645,7 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     private void createActivity() {
+        System.setProperty("robolectric.createActivityContexts", "true");
         final Bundle savedInstanceState = new Bundle();
         savedInstanceState.putInt(KEY_STATE_PREVIOUS_ROTATION, Surface.ROTATION_90);
 
@@ -632,7 +667,8 @@ public class FingerprintEnrollEnrollingTest {
                         any(CancellationSignal.class),
                         anyInt(),
                         callbackCaptor.capture(),
-                        eq(FingerprintManager.ENROLL_ENROLL));
+                        eq(FingerprintManager.ENROLL_ENROLL),
+                        any());
 
         return callbackCaptor.getValue();
     }

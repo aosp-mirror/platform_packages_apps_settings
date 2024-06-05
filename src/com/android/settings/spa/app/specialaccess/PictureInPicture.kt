@@ -16,7 +16,7 @@
 
 package com.android.settings.spa.app.specialaccess
 
-import android.app.AppOpsManager.OP_PICTURE_IN_PICTURE
+import android.app.AppOpsManager
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
@@ -25,8 +25,9 @@ import android.content.pm.PackageManager.GET_ACTIVITIES
 import android.content.pm.PackageManager.PackageInfoFlags
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import com.android.settings.R
+import com.android.settingslib.spa.lifecycle.collectAsCallbackWithLifecycle
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.installed
@@ -53,6 +54,7 @@ class PictureInPictureListModel(private val context: Context) :
     override val pageTitleResId = R.string.picture_in_picture_title
     override val switchTitleResId = R.string.picture_in_picture_app_detail_switch
     override val footerResId = R.string.picture_in_picture_app_detail_summary
+    override val enhancedConfirmationKey: String = AppOpsManager.OPSTR_PICTURE_IN_PICTURE
 
     private val packageManager = context.packageManager
 
@@ -77,12 +79,7 @@ class PictureInPictureListModel(private val context: Context) :
         PictureInPictureRecord(
             app = app,
             isSupport = isSupport,
-            appOpsController =
-                AppOpsController(
-                    context = context,
-                    app = app,
-                    op = OP_PICTURE_IN_PICTURE,
-                ),
+            appOpsController = AppOpsController(context = context, app = app, appOps = APP_OPS),
         )
 
     override fun filter(userIdFlow: Flow<Int>, recordListFlow: Flow<List<PictureInPictureRecord>>) =
@@ -90,7 +87,7 @@ class PictureInPictureListModel(private val context: Context) :
 
     @Composable
     override fun isAllowed(record: PictureInPictureRecord) =
-        record.appOpsController.isAllowed.observeAsState()
+        record.appOpsController.isAllowed.collectAsCallbackWithLifecycle()
 
     override fun isChangeable(record: PictureInPictureRecord) = record.isSupport
 
@@ -128,6 +125,8 @@ class PictureInPictureListModel(private val context: Context) :
 
     companion object {
         private const val TAG = "PictureInPictureListModel"
+
+        private val APP_OPS = AppOps(AppOpsManager.OP_PICTURE_IN_PICTURE)
 
         private fun PackageInfo.supportsPictureInPicture() =
             activities?.any(ActivityInfo::supportsPictureInPicture) ?: false

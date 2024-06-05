@@ -47,6 +47,13 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_active_unlock_settings"
             settings:controller="com.android.settings.biometrics.activeunlock.ActiveUnlockStatusPreferenceController" />
+
+        <com.android.settingslib.RestrictedPreference
+            android:key="biometric_remote_authenticator_settings"
+            android:title="@string/security_settings_remoteauth_preference_title"
+            android:summary="@string/summary_placeholder"
+            settings:keywords="@string/keywords_active_unlock_settings"
+            settings:controller="com.android.settings.remoteauth.RemoteAuthStatusPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -59,7 +66,7 @@
             settings:keywords="@string/keywords_biometric_unlock"
             settings:controller="com.android.settings.biometrics.combination.BiometricSettingsKeyguardPreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="biometric_settings_biometric_app"
             android:title="@string/biometric_settings_use_biometric_for_apps"
             settings:keywords="@string/keywords_biometric_unlock"

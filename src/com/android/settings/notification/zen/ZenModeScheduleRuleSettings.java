@@ -31,12 +31,13 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.TimePicker;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -60,7 +61,8 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private Preference mDays;
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
-    private SwitchPreference mExitAtAlarm;
+    @Nullable
+    private TwoStatePreference mExitAtAlarm = null;
     private AlertDialog mDayDialog;
     private ScheduleInfo mSchedule;
 
@@ -106,7 +108,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
                 if (DEBUG) Log.d(TAG, "onPrefChange start h=" + hour + " m=" + minute);
                 mSchedule.startHour = hour;
                 mSchedule.startMinute = minute;
-                updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                updateScheduleRule(mSchedule);
                 return true;
             }
         });
@@ -128,19 +130,19 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
                 if (DEBUG) Log.d(TAG, "onPrefChange end h=" + hour + " m=" + minute);
                 mSchedule.endHour = hour;
                 mSchedule.endMinute = minute;
-                updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                updateScheduleRule(mSchedule);
                 return true;
             }
         });
         root.addPreference(mEnd);
         mEnd.setDependency(mDays.getKey());
 
-        mExitAtAlarm = (SwitchPreference) root.findPreference(KEY_EXIT_AT_ALARM);
+        mExitAtAlarm = root.findPreference(KEY_EXIT_AT_ALARM);
         mExitAtAlarm.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 mSchedule.exitAtAlarm = (Boolean) o;
-                updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                updateScheduleRule(mSchedule);
                 return true;
             }
         });
@@ -212,7 +214,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
                         if (Arrays.equals(days, mSchedule.days)) return;
                         if (DEBUG) Log.d(TAG, "days.onChanged days=" + Arrays.toString(days));
                         mSchedule.days = days;
-                        updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
+                        updateScheduleRule(mSchedule);
                     }
                 })
                 .setOnDismissListener(new OnDismissListener() {

@@ -16,33 +16,69 @@
 
 package com.android.settings.dashboard.profileselector;
 
+import static android.content.pm.UserInfo.FLAG_MAIN;
+import static android.os.UserManager.USER_TYPE_FULL_SYSTEM;
+import static android.os.UserManager.USER_TYPE_PROFILE_MANAGED;
+import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
+
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.EXTRA_PROFILE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
+import android.content.pm.UserInfo;
+
+import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.testutils.shadow.ShadowUserManager;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
+@Config(shadows = {
+        ShadowUserManager.class,
+})
 @RunWith(RobolectricTestRunner.class)
 public class ProfileSelectLocationFragmentTest {
+    private static final String PERSONAL_PROFILE_NAME = "personal";
+    private static final String WORK_PROFILE_NAME = "work";
+    private static final String PRIVATE_PROFILE_NAME = "private";
+    @Rule
+    public final MockitoRule rule = MockitoJUnit.rule();
 
+    private ShadowUserManager mUserManager;
     private ProfileSelectLocationFragment mProfileSelectLocationFragment;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mProfileSelectLocationFragment = new ProfileSelectLocationFragment();
+        mUserManager = ShadowUserManager.getShadow();
+        mUserManager.addProfile(
+                new UserInfo(0, PERSONAL_PROFILE_NAME, null, FLAG_MAIN, USER_TYPE_FULL_SYSTEM));
+        mUserManager.addProfile(
+                new UserInfo(1, WORK_PROFILE_NAME, null, 0, USER_TYPE_PROFILE_MANAGED));
+        mUserManager.addProfile(
+                new UserInfo(11, PRIVATE_PROFILE_NAME, null, 0, USER_TYPE_PROFILE_PRIVATE));
+        mProfileSelectLocationFragment = spy(new ProfileSelectLocationFragment());
+        when(mProfileSelectLocationFragment.getContext()).thenReturn(
+                ApplicationProvider.getApplicationContext());
     }
 
     @Test
     public void getFragments_containsCorrectBundle() {
-        assertThat(mProfileSelectLocationFragment.getFragments().length).isEqualTo(2);
+        assertThat(mProfileSelectLocationFragment.getFragments().length).isEqualTo(3);
         assertThat(mProfileSelectLocationFragment.getFragments()[0].getArguments().getInt(
                 EXTRA_PROFILE, -1)).isEqualTo(ProfileSelectFragment.ProfileType.PERSONAL);
         assertThat(mProfileSelectLocationFragment.getFragments()[1].getArguments().getInt(
                 EXTRA_PROFILE, -1)).isEqualTo(ProfileSelectFragment.ProfileType.WORK);
+        assertThat(mProfileSelectLocationFragment.getFragments()[2].getArguments().getInt(
+                EXTRA_PROFILE, -1)).isEqualTo(ProfileSelectFragment.ProfileType.PRIVATE);
     }
 }

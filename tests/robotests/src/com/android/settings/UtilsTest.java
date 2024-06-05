@@ -16,8 +16,13 @@
 
 package com.android.settings;
 
+import static android.hardware.biometrics.SensorProperties.STRENGTH_CONVENIENCE;
+import static android.hardware.biometrics.SensorProperties.STRENGTH_STRONG;
+import static android.hardware.biometrics.SensorProperties.STRENGTH_WEAK;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -31,6 +36,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.ActionBar;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyResourcesManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -41,6 +47,9 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorProperties;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
@@ -60,6 +69,7 @@ import android.widget.TextView;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 
 import org.junit.After;
@@ -93,6 +103,8 @@ public class UtilsTest {
     private ConnectivityManager connectivityManager;
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
+    @Mock
+    private DevicePolicyResourcesManager mDevicePolicyResourcesManager;
     @Mock
     private UserManager mMockUserManager;
     @Mock
@@ -347,5 +359,153 @@ public class UtilsTest {
         assertThrows(
                 SecurityException.class,
                 () -> Utils.checkUserOwnsFrpCredential(mContext, 123));
+    }
+
+    @Test
+    public void getConfirmCredentialStringForUser_Pin_shouldReturnCorrectString() {
+        setUpForConfirmCredentialString(false /* isEffectiveUserManagedProfile */);
+
+        when(mContext.getString(R.string.lockpassword_confirm_your_pin_generic))
+                .thenReturn("PIN");
+
+        String confirmCredentialString = Utils.getConfirmCredentialStringForUser(mContext,
+                USER_ID, LockPatternUtils.CREDENTIAL_TYPE_PIN);
+
+        assertThat(confirmCredentialString).isEqualTo("PIN");
+    }
+
+    @Test
+    public void getConfirmCredentialStringForUser_Pattern_shouldReturnCorrectString() {
+        setUpForConfirmCredentialString(false /* isEffectiveUserManagedProfile */);
+
+        when(mContext.getString(R.string.lockpassword_confirm_your_pattern_generic))
+                .thenReturn("PATTERN");
+
+        String confirmCredentialString = Utils.getConfirmCredentialStringForUser(mContext,
+                USER_ID, LockPatternUtils.CREDENTIAL_TYPE_PATTERN);
+
+        assertThat(confirmCredentialString).isEqualTo("PATTERN");
+    }
+
+    @Test
+    public void getConfirmCredentialStringForUser_Password_shouldReturnCorrectString() {
+        setUpForConfirmCredentialString(false /* isEffectiveUserManagedProfile */);
+
+        when(mContext.getString(R.string.lockpassword_confirm_your_password_generic))
+                .thenReturn("PASSWORD");
+
+        String confirmCredentialString = Utils.getConfirmCredentialStringForUser(mContext,
+                USER_ID, LockPatternUtils.CREDENTIAL_TYPE_PASSWORD);
+
+        assertThat(confirmCredentialString).isEqualTo("PASSWORD");
+    }
+
+    @Test
+    public void getConfirmCredentialStringForUser_workPin_shouldReturnNull() {
+        setUpForConfirmCredentialString(true /* isEffectiveUserManagedProfile */);
+
+        String confirmCredentialString = Utils.getConfirmCredentialStringForUser(mContext,
+                USER_ID, LockPatternUtils.CREDENTIAL_TYPE_PIN);
+
+        assertNull(confirmCredentialString);
+    }
+
+    @Test
+    public void getConfirmCredentialStringForUser_workPattern_shouldReturnNull() {
+        setUpForConfirmCredentialString(true /* isEffectiveUserManagedProfile */);
+
+        String confirmCredentialString = Utils.getConfirmCredentialStringForUser(mContext,
+                USER_ID, LockPatternUtils.CREDENTIAL_TYPE_PATTERN);
+
+        assertNull(confirmCredentialString);
+    }
+
+    @Test
+    public void getConfirmCredentialStringForUser_workPassword_shouldReturnNull() {
+        setUpForConfirmCredentialString(true /* isEffectiveUserManagedProfile */);
+
+        String confirmCredentialString = Utils.getConfirmCredentialStringForUser(mContext,
+                USER_ID, LockPatternUtils.CREDENTIAL_TYPE_PASSWORD);
+
+        assertNull(confirmCredentialString);
+    }
+
+    @Test
+    public void getConfirmCredentialStringForUser_credentialTypeNone_shouldReturnNull() {
+        setUpForConfirmCredentialString(false /* isEffectiveUserManagedProfile */);
+
+        String confirmCredentialString = Utils.getConfirmCredentialStringForUser(mContext,
+                USER_ID, LockPatternUtils.CREDENTIAL_TYPE_NONE);
+
+        assertNull(confirmCredentialString);
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceStrengthStrong_shouldReturnTrue() {
+        FaceManager mockFaceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mockFaceManager);
+        doReturn(true).when(mPackageManager).hasSystemFeature(anyString());
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                STRENGTH_STRONG,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        doReturn(props).when(mockFaceManager).getSensorPropertiesInternal();
+
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isTrue();
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceStrengthWeak_shouldReturnTrue() {
+        FaceManager mockFaceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mockFaceManager);
+        doReturn(true).when(mPackageManager).hasSystemFeature(anyString());
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                STRENGTH_WEAK,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        doReturn(props).when(mockFaceManager).getSensorPropertiesInternal();
+
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isTrue();
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceStrengthConvenience_shouldReturnFalse() {
+        FaceManager mockFaceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mockFaceManager);
+        doReturn(true).when(mPackageManager).hasSystemFeature(anyString());
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                STRENGTH_CONVENIENCE,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        doReturn(props).when(mockFaceManager).getSensorPropertiesInternal();
+
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isFalse();
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceManagerNull_shouldReturnFalse() {
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(null);
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isFalse();
+    }
+
+    private void setUpForConfirmCredentialString(boolean isEffectiveUserManagedProfile) {
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);
+        when(mMockUserManager.isManagedProfile(USER_ID)).thenReturn(isEffectiveUserManagedProfile);
     }
 }

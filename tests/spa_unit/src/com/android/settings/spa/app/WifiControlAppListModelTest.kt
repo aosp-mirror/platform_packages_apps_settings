@@ -17,18 +17,13 @@
 package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
-import android.app.AppOpsManager
-import android.app.AppOpsManager.MODE_ALLOWED
-import android.app.AppOpsManager.MODE_DEFAULT
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import androidx.compose.runtime.State
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.lifecycle.MutableLiveData
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
-import com.android.settingslib.spaprivileged.model.app.IAppOpsController
+import com.android.settingslib.spaprivileged.model.app.IAppOpsPermissionController
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.google.common.truth.Truth.assertThat
@@ -40,9 +35,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when` as whenever
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
+import org.mockito.Mockito.`when` as whenever
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
@@ -121,14 +116,14 @@ class WifiControlAppListModelTest {
                 app = APP_NOT_REQUEST_PERMISSION,
                 hasRequestPermission = false,
                 hasRequestBroaderPermission = false,
-                appOpsController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT),
+                appOpsPermissionController = FakeAppOpsPermissionController(false),
             )
         val appRequestedNetworkSettingsRecord =
             AppOpPermissionRecord(
                 app = APP_REQUESTED_NETWORK_SETTINGS,
                 hasRequestPermission = true,
                 hasRequestBroaderPermission = false,
-                appOpsController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT)
+                appOpsPermissionController = FakeAppOpsPermissionController(false),
             )
 
         val recordListFlow =
@@ -148,7 +143,7 @@ class WifiControlAppListModelTest {
                 app = APP,
                 hasRequestPermission = false,
                 hasRequestBroaderPermission = true,
-                appOpsController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT),
+                appOpsPermissionController = FakeAppOpsPermissionController(false),
             )
 
         val isAllowed = getIsAllowed(record)
@@ -163,7 +158,7 @@ class WifiControlAppListModelTest {
                 app = APP,
                 hasRequestPermission = true,
                 hasRequestBroaderPermission = false,
-                appOpsController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_ALLOWED),
+                appOpsPermissionController = FakeAppOpsPermissionController(true),
             )
 
         val isAllowed = getIsAllowed(record)
@@ -178,7 +173,7 @@ class WifiControlAppListModelTest {
                 app = APP,
                 hasRequestPermission = true,
                 hasRequestBroaderPermission = false,
-                appOpsController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_IGNORED),
+                appOpsPermissionController = FakeAppOpsPermissionController(false),
             )
 
         val isAllowed = getIsAllowed(record)
@@ -193,7 +188,7 @@ class WifiControlAppListModelTest {
                 app = APP,
                 hasRequestPermission = false,
                 hasRequestBroaderPermission = false,
-                appOpsController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT),
+                appOpsPermissionController = FakeAppOpsPermissionController(false),
             )
 
         val isChangeable = listModel.isChangeable(record)
@@ -202,13 +197,13 @@ class WifiControlAppListModelTest {
     }
 
     @Test
-    fun isChangeable_notChangableWhenRequestedNetworkSettingPermissions() {
+    fun isChangeable_notChangeableWhenRequestedNetworkSettingPermissions() {
         val record =
             AppOpPermissionRecord(
                 app = APP,
                 hasRequestPermission = false,
                 hasRequestBroaderPermission = true,
-                appOpsController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT),
+                appOpsPermissionController = FakeAppOpsPermissionController(false),
             )
 
         val isChangeable = listModel.isChangeable(record)
@@ -217,13 +212,13 @@ class WifiControlAppListModelTest {
     }
 
     @Test
-    fun isChangeable_changableWhenRequestedChangeWifiStatePermission() {
+    fun isChangeable_changeableWhenRequestedChangeWifiStatePermission() {
         val record =
             AppOpPermissionRecord(
                 app = APP,
                 hasRequestPermission = true,
                 hasRequestBroaderPermission = false,
-                appOpsController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT),
+                appOpsPermissionController = FakeAppOpsPermissionController(false),
             )
 
         val isChangeable = listModel.isChangeable(record)
@@ -233,24 +228,24 @@ class WifiControlAppListModelTest {
 
     @Test
     fun setAllowed_shouldCallController() {
-        val appOpsController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT)
+        val appOpsPermissionController = FakeAppOpsPermissionController(false)
         val record =
             AppOpPermissionRecord(
                 app = APP,
                 hasRequestPermission = true,
                 hasRequestBroaderPermission = false,
-                appOpsController = appOpsController,
+                appOpsPermissionController = appOpsPermissionController,
             )
 
         listModel.setAllowed(record = record, newAllowed = true)
 
-        assertThat(appOpsController.setAllowedCalledWith).isTrue()
+        assertThat(appOpsPermissionController.setAllowedCalledWith).isTrue()
     }
 
     private fun getIsAllowed(record: AppOpPermissionRecord): Boolean? {
-        lateinit var isAllowedState: State<Boolean?>
+        lateinit var isAllowedState: () -> Boolean?
         composeTestRule.setContent { isAllowedState = listModel.isAllowed(record) }
-        return isAllowedState.value
+        return isAllowedState()
     }
 
     private companion object {
@@ -270,14 +265,12 @@ class WifiControlAppListModelTest {
     }
 }
 
-private class FakeAppOpsController(private val fakeMode: Int) : IAppOpsController {
+private class FakeAppOpsPermissionController(allowed: Boolean) : IAppOpsPermissionController {
     var setAllowedCalledWith: Boolean? = null
 
-    override val mode = MutableLiveData(fakeMode)
+    override val isAllowedFlow = flowOf(allowed)
 
     override fun setAllowed(allowed: Boolean) {
         setAllowedCalledWith = allowed
     }
-
-    override fun getMode() = fakeMode
 }

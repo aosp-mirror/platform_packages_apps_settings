@@ -180,7 +180,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     public void init(DashboardFragment fragment) {
         final Context context = fragment.getContext();
         DockUpdaterFeatureProvider dockUpdaterFeatureProvider =
-                FeatureFactory.getFactory(context).getDockUpdaterFeatureProvider();
+                FeatureFactory.getFeatureFactory().getDockUpdaterFeatureProvider();
         final DockUpdater connectedDockUpdater =
                 dockUpdaterFeatureProvider.getConnectedDockUpdater(context, this);
         init(hasBluetoothFeature()

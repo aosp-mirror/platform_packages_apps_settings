@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -45,10 +46,12 @@ import android.safetycenter.SafetySourceStatus;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Settings;
 import com.android.settings.biometrics.face.FaceEnrollIntroductionInternal;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.testutils.ActiveUnlockTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.utils.StringUtil;
 
@@ -67,24 +70,19 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 public class BiometricsSafetySourceTest {
 
-    private static final ComponentName COMPONENT_NAME =
-            new ComponentName("package", "class");
+    private static final ComponentName COMPONENT_NAME = new ComponentName("package", "class");
     private static final UserHandle USER_HANDLE = new UserHandle(UserHandle.myUserId());
     private static final SafetyEvent EVENT_SOURCE_STATE_CHANGED =
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build();
 
     private Context mApplicationContext;
 
-    @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private DevicePolicyManager mDevicePolicyManager;
-    @Mock
-    private FingerprintManager mFingerprintManager;
-    @Mock
-    private FaceManager mFaceManager;
-    @Mock
-    private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
+    @Mock private PackageManager mPackageManager;
+    @Mock private DevicePolicyManager mDevicePolicyManager;
+    @Mock private FingerprintManager mFingerprintManager;
+    @Mock private FaceManager mFaceManager;
+    @Mock private LockPatternUtils mLockPatternUtils;
+    @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
     @Before
     public void setUp() {
@@ -100,6 +98,10 @@ public class BiometricsSafetySourceTest {
         when(mApplicationContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
         when(mApplicationContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
+        FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
+        when(featureFactory.securityFeatureProvider.getLockPatternUtils(mApplicationContext))
+                .thenReturn(mLockPatternUtils);
+        doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
     }
 
@@ -119,15 +121,16 @@ public class BiometricsSafetySourceTest {
     }
 
     @Test
-    public void setSafetySourceData_whenSafetyCenterIsEnabled_withoutBiometrics_doesNotSetData() {
-        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
+    public void setSafetySourceData_whenSafetyCenterIsEnabled_withoutBiometrics_setsNullData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
 
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        verify(mSafetyCenterManagerWrapper, never())
-                .setSafetySourceData(any(), any(), any(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), eq(null), any());
     }
 
     @Test
@@ -140,8 +143,9 @@ public class BiometricsSafetySourceTest {
 
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), any(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), any(), any());
     }
 
     @Test
@@ -225,7 +229,8 @@ public class BiometricsSafetySourceTest {
 
         assertSafetySourceEnabledDataSetWithPluralSummary(
                 "security_settings_fingerprint_preference_title",
-                "security_settings_fingerprint_preference_summary", enrolledFingerprintsCount,
+                "security_settings_fingerprint_preference_summary",
+                enrolledFingerprintsCount,
                 FingerprintSettings.class.getName());
     }
 
@@ -346,8 +351,9 @@ public class BiometricsSafetySourceTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
-                .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE
-                        | DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
+                .thenReturn(
+                        DevicePolicyManager.KEYGUARD_DISABLE_FACE
+                                | DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
 
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
@@ -363,8 +369,8 @@ public class BiometricsSafetySourceTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
-        when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
-                createFingerprintList(enrolledFingerprintsCount));
+        when(mFingerprintManager.getEnrolledFingerprints(anyInt()))
+                .thenReturn(createFingerprintList(enrolledFingerprintsCount));
 
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
@@ -381,8 +387,8 @@ public class BiometricsSafetySourceTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
-        when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
-                createFingerprintList(enrolledFingerprintsCount));
+        when(mFingerprintManager.getEnrolledFingerprints(anyInt()))
+                .thenReturn(createFingerprintList(enrolledFingerprintsCount));
 
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
@@ -398,8 +404,8 @@ public class BiometricsSafetySourceTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
-        when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
-                Collections.emptyList());
+        when(mFingerprintManager.getEnrolledFingerprints(anyInt()))
+                .thenReturn(Collections.emptyList());
 
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
@@ -415,8 +421,8 @@ public class BiometricsSafetySourceTest {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
-        when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
-                createFingerprintList(enrolledFingerprintsCount));
+        when(mFingerprintManager.getEnrolledFingerprints(anyInt()))
+                .thenReturn(createFingerprintList(enrolledFingerprintsCount));
 
         ActiveUnlockTestUtils.enable(mApplicationContext);
 
@@ -452,8 +458,8 @@ public class BiometricsSafetySourceTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
-        when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
-                createFingerprintList(enrolledFingerprintsCount));
+        when(mFingerprintManager.getEnrolledFingerprints(anyInt()))
+                .thenReturn(createFingerprintList(enrolledFingerprintsCount));
         ActiveUnlockTestUtils.enable(mApplicationContext);
 
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
@@ -462,7 +468,6 @@ public class BiometricsSafetySourceTest {
                 "security_settings_biometric_preference_title",
                 "security_settings_biometric_preference_summary_both_fp_single",
                 Settings.CombinedBiometricSettingsActivity.class.getName());
-
     }
 
     @Test
@@ -472,14 +477,15 @@ public class BiometricsSafetySourceTest {
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
-        when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
-                createFingerprintList(enrolledFingerprintsCount));
+        when(mFingerprintManager.getEnrolledFingerprints(anyInt()))
+                .thenReturn(createFingerprintList(enrolledFingerprintsCount));
 
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
         assertSafetySourceEnabledDataSetWithPluralSummary(
                 "security_settings_biometric_preference_title",
-                "security_settings_fingerprint_preference_summary", enrolledFingerprintsCount,
+                "security_settings_fingerprint_preference_summary",
+                enrolledFingerprintsCount,
                 Settings.CombinedBiometricSettingsActivity.class.getName());
     }
 
@@ -494,8 +500,12 @@ public class BiometricsSafetySourceTest {
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(),
+                        eq(BiometricsSafetySource.SAFETY_SOURCE_ID),
+                        captor.capture(),
+                        any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
                 .isEqualTo(SafetySourceData.SEVERITY_LEVEL_INFORMATION);
@@ -512,8 +522,12 @@ public class BiometricsSafetySourceTest {
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(),
+                        eq(BiometricsSafetySource.SAFETY_SOURCE_ID),
+                        captor.capture(),
+                        any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
                 .isEqualTo(SafetySourceData.SEVERITY_LEVEL_INFORMATION);
@@ -530,8 +544,12 @@ public class BiometricsSafetySourceTest {
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(),
+                        eq(BiometricsSafetySource.SAFETY_SOURCE_ID),
+                        captor.capture(),
+                        any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
                 .isEqualTo(SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED);
@@ -547,8 +565,12 @@ public class BiometricsSafetySourceTest {
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(),
+                        eq(BiometricsSafetySource.SAFETY_SOURCE_ID),
+                        captor.capture(),
+                        any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
                 .isEqualTo(SafetySourceData.SEVERITY_LEVEL_INFORMATION);
@@ -564,8 +586,12 @@ public class BiometricsSafetySourceTest {
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(),
+                        eq(BiometricsSafetySource.SAFETY_SOURCE_ID),
+                        captor.capture(),
+                        any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
                 .isEqualTo(SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED);
@@ -581,8 +607,12 @@ public class BiometricsSafetySourceTest {
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(),
+                        eq(BiometricsSafetySource.SAFETY_SOURCE_ID),
+                        captor.capture(),
+                        any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
                 .isEqualTo(SafetySourceData.SEVERITY_LEVEL_INFORMATION);
@@ -598,61 +628,74 @@ public class BiometricsSafetySourceTest {
         BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(),
+                        eq(BiometricsSafetySource.SAFETY_SOURCE_ID),
+                        captor.capture(),
+                        any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
                 .isEqualTo(SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED);
     }
 
-    private void assertSafetySourceDisabledDataSetWithSingularSummary(String expectedTitleResName,
-            String expectedSummaryResName) {
+    private void assertSafetySourceDisabledDataSetWithSingularSummary(
+            String expectedTitleResName, String expectedSummaryResName) {
         assertSafetySourceDisabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
-                ResourcesUtils.getResourcesString(mApplicationContext, expectedSummaryResName)
-        );
+                ResourcesUtils.getResourcesString(mApplicationContext, expectedSummaryResName));
     }
 
-    private void assertSafetySourceEnabledDataSetWithSingularSummary(String expectedTitleResName,
+    private void assertSafetySourceEnabledDataSetWithSingularSummary(
+            String expectedTitleResName,
             String expectedSummaryResName,
             String expectedSettingsClassName) {
         assertSafetySourceEnabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedSummaryResName),
-                expectedSettingsClassName
-        );
+                expectedSettingsClassName);
     }
 
-    private void assertSafetySourceDisabledDataSetWithPluralSummary(String expectedTitleResName,
-            String expectedSummaryResName, int expectedSummaryQuantity) {
-        final int stringResId = ResourcesUtils.getResourcesId(
-                ApplicationProvider.getApplicationContext(), "string",
-                expectedSummaryResName);
+    private void assertSafetySourceDisabledDataSetWithPluralSummary(
+            String expectedTitleResName,
+            String expectedSummaryResName,
+            int expectedSummaryQuantity) {
+        final int stringResId =
+                ResourcesUtils.getResourcesId(
+                        ApplicationProvider.getApplicationContext(),
+                        "string",
+                        expectedSummaryResName);
         assertSafetySourceDisabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
-                StringUtil.getIcuPluralsString(mApplicationContext,
-                        expectedSummaryQuantity, stringResId)
-        );
+                StringUtil.getIcuPluralsString(
+                        mApplicationContext, expectedSummaryQuantity, stringResId));
     }
 
-    private void assertSafetySourceEnabledDataSetWithPluralSummary(String expectedTitleResName,
-            String expectedSummaryResName, int expectedSummaryQuantity,
+    private void assertSafetySourceEnabledDataSetWithPluralSummary(
+            String expectedTitleResName,
+            String expectedSummaryResName,
+            int expectedSummaryQuantity,
             String expectedSettingsClassName) {
-        final int stringResId = ResourcesUtils.getResourcesId(
-                ApplicationProvider.getApplicationContext(), "string",
-                expectedSummaryResName);
+        final int stringResId =
+                ResourcesUtils.getResourcesId(
+                        ApplicationProvider.getApplicationContext(),
+                        "string",
+                        expectedSummaryResName);
         assertSafetySourceEnabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
-                StringUtil.getIcuPluralsString(mApplicationContext,
-                        expectedSummaryQuantity, stringResId),
-                expectedSettingsClassName
-        );
+                StringUtil.getIcuPluralsString(
+                        mApplicationContext, expectedSummaryQuantity, stringResId),
+                expectedSettingsClassName);
     }
 
     private void assertSafetySourceDisabledDataSet(String expectedTitle, String expectedSummary) {
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(),
+                        eq(BiometricsSafetySource.SAFETY_SOURCE_ID),
+                        captor.capture(),
+                        any());
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
@@ -667,11 +710,15 @@ public class BiometricsSafetySourceTest {
         assertThat(clickIntent.getAction()).isEqualTo(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
     }
 
-    private void assertSafetySourceEnabledDataSet(String expectedTitle, String expectedSummary,
-            String expectedSettingsClassName) {
+    private void assertSafetySourceEnabledDataSet(
+            String expectedTitle, String expectedSummary, String expectedSettingsClassName) {
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(),
+                        eq(BiometricsSafetySource.SAFETY_SOURCE_ID),
+                        captor.capture(),
+                        any());
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
@@ -680,10 +727,8 @@ public class BiometricsSafetySourceTest {
         assertThat(safetySourceStatus.isEnabled()).isTrue();
         final Intent clickIntent = safetySourceStatus.getPendingIntent().getIntent();
         assertThat(clickIntent).isNotNull();
-        assertThat(clickIntent.getComponent().getPackageName())
-                .isEqualTo("com.android.settings");
-        assertThat(clickIntent.getComponent().getClassName())
-                .isEqualTo(expectedSettingsClassName);
+        assertThat(clickIntent.getComponent().getPackageName()).isEqualTo("com.android.settings");
+        assertThat(clickIntent.getComponent().getClassName()).isEqualTo(expectedSettingsClassName);
     }
 
     private List<Fingerprint> createFingerprintList(int size) {

@@ -18,12 +18,14 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -44,11 +46,6 @@ class TextReadingPreviewController extends BasePreferenceController implements
     private static final String TAG = "TextReadingPreviewCtrl";
     private static final int LAYER_INITIAL_INDEX = 0;
     private static final int FRAME_INITIAL_INDEX = 0;
-    static final int[] PREVIEW_SAMPLE_RES_IDS = new int[]{
-            R.layout.accessibility_text_reading_preview_app_grid,
-            R.layout.screen_zoom_preview_1,
-            R.layout.accessibility_text_reading_preview_mail_content};
-
     private static final String PREVIEW_KEY = "preview";
     private static final String FONT_SIZE_KEY = "font_size";
     private static final String DISPLAY_SIZE_KEY = "display_size";
@@ -107,11 +104,12 @@ class TextReadingPreviewController extends BasePreferenceController implements
         final Configuration origConfig = mContext.getResources().getConfiguration();
         final boolean isLayoutRtl =
                 origConfig.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+        final int[] previewSamples = getPreviewSampleLayouts(mContext);
         final PreviewPagerAdapter pagerAdapter = new PreviewPagerAdapter(mContext, isLayoutRtl,
-                PREVIEW_SAMPLE_RES_IDS, createConfig(origConfig));
+                previewSamples, createConfig(origConfig));
         mPreviewPreference.setPreviewAdapter(pagerAdapter);
         mPreviewPreference.setCurrentItem(
-                isLayoutRtl ? PREVIEW_SAMPLE_RES_IDS.length - 1 : FRAME_INITIAL_INDEX);
+                isLayoutRtl ? previewSamples.length - 1 : FRAME_INITIAL_INDEX);
 
         final int initialPagerIndex =
                 mLastFontProgress * mDisplaySizeData.getValues().size() + mLastDisplayProgress;
@@ -176,6 +174,19 @@ class TextReadingPreviewController extends BasePreferenceController implements
         final Choreographer choreographer = Choreographer.getInstance();
         choreographer.removeFrameCallback(mCommit);
         choreographer.postFrameCallbackDelayed(mCommit, commitDelayMs);
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    static int[] getPreviewSampleLayouts(Context context) {
+        TypedArray previews = context.getResources().obtainTypedArray(
+                R.array.config_text_reading_preview_samples);
+        int previewCount = previews.length();
+        int[] previewSamples = new int[previewCount];
+        for (int i = 0; i < previewCount; i++) {
+            previewSamples[i] = previews.getResourceId(i, R.layout.screen_zoom_preview_1);
+        }
+        previews.recycle();
+        return previewSamples;
     }
 
     private int getPagerIndex() {

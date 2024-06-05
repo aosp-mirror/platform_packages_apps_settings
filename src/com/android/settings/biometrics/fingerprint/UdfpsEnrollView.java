@@ -19,6 +19,7 @@ package com.android.settings.biometrics.fingerprint;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
@@ -33,7 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
-import com.android.settingslib.udfps.UdfpsOverlayParams;
+import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
 
 /**
  * View corresponding with udfps_enroll_view.xml
@@ -202,7 +203,9 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
     }
 
     private void onFingerDown() {
-        mFingerprintDrawable.setShouldSkipDraw(true);
+        if (mOverlayParams.getSensorType() == FingerprintSensorProperties.TYPE_UDFPS_OPTICAL) {
+            mFingerprintDrawable.setShouldSkipDraw(true);
+        }
         mFingerprintDrawable.invalidateSelf();
     }
 

@@ -30,10 +30,16 @@ import android.bluetooth.le.ScanFilter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.Spanned;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -124,6 +130,10 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                     if (mSelectedPreference == null) {
                         Log.w(TAG, "onSourceAdded: mSelectedPreference == null!");
                         return;
+                    }
+                    if (mLeBroadcastAssistant != null
+                            && mLeBroadcastAssistant.isSearchInProgress()) {
+                        mLeBroadcastAssistant.stopSearchingForSources();
                     }
                     getActivity().runOnUiThread(() -> updateListCategoryFromBroadcastMetadata(
                             mSelectedPreference.getBluetoothLeBroadcastMetadata(), true));
@@ -232,6 +242,9 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
     public void onStop() {
         super.onStop();
         if (mLeBroadcastAssistant != null) {
+            if (mLeBroadcastAssistant.isSearchInProgress()) {
+                mLeBroadcastAssistant.stopSearchingForSources();
+            }
             mLeBroadcastAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
         }
     }
@@ -467,8 +480,63 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 .create();
 
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        addTextWatcher(alertDialog, editText);
         alertDialog.show();
+        updateBtnState(alertDialog, false);
     }
+
+    private void addTextWatcher(AlertDialog alertDialog, EditText editText) {
+        if (alertDialog == null || editText == null) {
+            return;
+        }
+        final InputFilter[] filter = new InputFilter[] {mInputFilter};
+        editText.setFilters(filter);
+        editText.setInputType(InputType.TYPE_CLASS_TEXT
+                | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        TextWatcher bCodeTextWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Do nothing
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                boolean breakBroadcastCodeRuleTextLengthLessThanMin =
+                        s.length() > 0 && s.toString().getBytes().length < 4;
+                boolean breakBroadcastCodeRuleTextLengthMoreThanMax =
+                        s.toString().getBytes().length > 16;
+                boolean breakRule = breakBroadcastCodeRuleTextLengthLessThanMin
+                        || breakBroadcastCodeRuleTextLengthMoreThanMax;
+                updateBtnState(alertDialog, !breakRule);
+            }
+        };
+        editText.addTextChangedListener(bCodeTextWatcher);
+    }
+
+    private void updateBtnState(AlertDialog alertDialog, boolean isEnable) {
+        Button positiveBtn = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        if (positiveBtn != null) {
+            positiveBtn.setEnabled(isEnable ? true : false);
+        }
+    }
+
+    private InputFilter mInputFilter = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end,
+                Spanned dest, int dstart, int dend) {
+            byte[] bytes = source.toString().getBytes(StandardCharsets.UTF_8);
+            if (bytes.length == source.length()) {
+                return source;
+            } else {
+                return "";
+            }
+        }
+    };
 
     private void handleSearchStarted() {
         cacheRemoveAllPrefs(mBroadcastSourceListCategory);

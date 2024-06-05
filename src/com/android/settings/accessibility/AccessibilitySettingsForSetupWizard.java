@@ -41,11 +41,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.display.AutoBrightnessPreferenceController;
+import com.android.settings.display.BrightnessLevelPreferenceController;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -129,7 +133,6 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
                 SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME);
         updateAccessibilityServicePreference(mSelectToSpeakPreference,
                 SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME);
-        configureMagnificationPreferenceIfNeeded(mDisplayMagnificationPreference);
     }
 
     @Override
@@ -161,6 +164,21 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        BrightnessLevelPreferenceController brightnessLevelPreferenceController =
+                new BrightnessLevelPreferenceController(context, getSettingsLifecycle());
+        brightnessLevelPreferenceController.setInSetupWizard(true);
+        controllers.add(brightnessLevelPreferenceController);
+        String autoBrightnessKey = context.getString(R.string.preference_key_auto_brightness);
+        AutoBrightnessPreferenceController autoBrightnessPreferenceController =
+                new AutoBrightnessPreferenceController(context, autoBrightnessKey);
+        autoBrightnessPreferenceController.setInSetupWizard(true);
+        controllers.add(autoBrightnessPreferenceController);
+        return controllers;
     }
 
     /**
@@ -219,14 +237,5 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
 
         final String htmlDescription = info.loadHtmlDescription(getPackageManager());
         extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
-    }
-
-    private static void configureMagnificationPreferenceIfNeeded(Preference preference) {
-        final Context context = preference.getContext();
-        preference.setFragment(
-                ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
-        final Bundle extras = preference.getExtras();
-        MagnificationGesturesPreferenceController
-                .populateMagnificationGesturesPreferenceExtras(extras, context);
     }
 }

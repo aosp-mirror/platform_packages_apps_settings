@@ -32,6 +32,7 @@ import android.content.IntentFilter;
 import android.content.om.OverlayInfo;
 import android.content.om.OverlayManager;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.Flags;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -138,9 +139,9 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                     "Fragment should implement AppButtonsDialogListener");
         }
 
-        final FeatureFactory factory = FeatureFactory.getFactory(activity);
+        final FeatureFactory factory = FeatureFactory.getFeatureFactory();
         mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
-        mApplicationFeatureProvider = factory.getApplicationFeatureProvider(activity);
+        mApplicationFeatureProvider = factory.getApplicationFeatureProvider();
         mState = state;
         mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
@@ -292,7 +293,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         switch (id) {
             case ButtonActionDialogFragment.DialogType.DISABLE:
                 mMetricsFeatureProvider.action(mActivity,
-                        SettingsEnums.ACTION_SETTINGS_DISABLE_APP);
+                        SettingsEnums.ACTION_SETTINGS_DISABLE_APP,
+                        getPackageNameForMetric());
                 AsyncTask.execute(new DisableChangerRunnable(mPm, mAppEntry.info.packageName,
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER));
                 break;
@@ -433,10 +435,17 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                     // No preferred default, so permit uninstall only when
                     // there is more than one candidate
                     enabled = (mHomePackages.size() > 1);
-                } else {
-                    // There is an explicit default home app -- forbid uninstall of
-                    // that one, but permit it for installed-but-inactive ones.
-                    enabled = !mPackageInfo.packageName.equals(currentDefaultHome.getPackageName());
+                } else if (mPackageInfo.packageName.equals(currentDefaultHome.getPackageName())) {
+                    if (Flags.improveHomeAppBehavior()) {
+                        // Allow uninstallation of current home app if it is a non-system app
+                        // and/or there are other candidate apps available.
+                        if (mPackageInfo.applicationInfo.isSystemApp()
+                                || mHomePackages.size() == 1) {
+                            enabled = false;
+                        }
+                    } else {
+                        enabled = false;
+                    }
                 }
             }
         }
@@ -503,6 +512,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         } else {
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                     Uri.fromParts("package", mAppEntry.info.packageName, null));
+            intent.setPackage("android");
             intent.putExtra(Intent.EXTRA_PACKAGES, new String[]{mAppEntry.info.packageName});
             intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
@@ -546,6 +556,12 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         ActivityManager am = (ActivityManager) mActivity.getSystemService(
                 Context.ACTIVITY_SERVICE);
         Log.d(TAG, "Stopping package " + pkgName);
+        if (android.app.Flags.appRestrictionsApi()) {
+            am.noteAppRestrictionEnabled(pkgName, mAppEntry.info.uid,
+                    ActivityManager.RESTRICTION_LEVEL_FORCE_STOPPED, true,
+                    ActivityManager.RESTRICTION_REASON_USER,
+                    "settings", ActivityManager.RESTRICTION_SOURCE_USER, 0L);
+        }
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);
         mState.invalidatePackage(pkgName, userId);

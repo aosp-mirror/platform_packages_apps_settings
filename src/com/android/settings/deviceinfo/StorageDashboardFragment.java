@@ -308,7 +308,6 @@ public class StorageDashboardFragment extends DashboardFragment
         // These member variables are initialized befoer super.onAttach for
         // createPreferenceControllers to work correctly.
         mUserManager = context.getSystemService(UserManager.class);
-        mIsWorkProfile = false;
         mUserId = UserHandle.myUserId();
         mStorageCacheHelper = new StorageCacheHelper(getContext(), mUserId);
 
@@ -423,7 +422,7 @@ public class StorageDashboardFragment extends DashboardFragment
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final StorageManager sm = context.getSystemService(StorageManager.class);
         mPreferenceController = new StorageItemPreferenceController(context, this,
-                null /* volume */, new StorageManagerVolumeProvider(sm), mIsWorkProfile);
+                null /* volume */, new StorageManagerVolumeProvider(sm));
         controllers.add(mPreferenceController);
 
         mNonCurrentUsers = NonCurrentUserController.getNonCurrentUserControllers(context,
@@ -467,8 +466,7 @@ public class StorageDashboardFragment extends DashboardFragment
                     final UserManager userManager = context.getSystemService(UserManager.class);
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new StorageItemPreferenceController(context, null /* host */,
-                            null /* volume */, new StorageManagerVolumeProvider(sm),
-                            false /* isWorkProfile */));
+                            null /* volume */, new StorageManagerVolumeProvider(sm)));
                     controllers.addAll(NonCurrentUserController.getNonCurrentUserControllers(
                             context, userManager));
                     return controllers;

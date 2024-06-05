@@ -20,18 +20,19 @@ package com.android.settings.password;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PATTERN_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PIN_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
+import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.RemoteLockscreenValidationSession;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.ManagedSubscriptionsPolicy;
 import android.app.trust.TrustManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.UserProperties;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricPrompt;
@@ -42,6 +43,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.WindowManager;
 
@@ -61,11 +63,6 @@ import java.util.concurrent.Executor;
 public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     public static final String TAG = ConfirmDeviceCredentialActivity.class.getSimpleName();
 
-    // The normal flow that apps go through
-    private static final int CREDENTIAL_NORMAL = 1;
-    // Unlocks the managed profile when the primary profile is unlocked
-    private static final int CREDENTIAL_MANAGED = 2;
-
     private static final String TAG_BIOMETRIC_FRAGMENT = "fragment";
 
     public static class InternalActivity extends ConfirmDeviceCredentialActivity {
@@ -84,7 +81,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private String mTitle;
     private CharSequence mDetails;
     private int mUserId;
-    private int mCredentialMode;
+    // Used to force the verification path required to unlock profile that shares credentials with
+    // with parent
+    private boolean mForceVerifyPath = false;
     private boolean mGoingToBackground;
     private boolean mWaitingForBiometricCallback;
 
@@ -166,11 +165,18 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mDetails = intent.getCharSequenceExtra(KeyguardManager.EXTRA_DESCRIPTION);
         String alternateButton = intent.getStringExtra(
                 KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
-        boolean frp = KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
-        boolean remoteValidation =
+        final boolean frp =
+                KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
+        final boolean repairMode =
+                KeyguardManager.ACTION_CONFIRM_REPAIR_MODE_DEVICE_CREDENTIAL
+                        .equals(intent.getAction());
+        final boolean remoteValidation =
                 KeyguardManager.ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL.equals(intent.getAction());
         mTaskOverlay = isInternalActivity()
                 && intent.getBooleanExtra(KeyguardManager.EXTRA_FORCE_TASK_OVERLAY, false);
+        final boolean prepareRepairMode =
+                KeyguardManager.ACTION_PREPARE_REPAIR_MODE_DEVICE_CREDENTIAL.equals(
+                        intent.getAction());
 
         mUserId = UserHandle.myUserId();
         if (isInternalActivity()) {
@@ -182,7 +188,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         }
         final int effectiveUserId = mUserManager.getCredentialOwnerProfile(mUserId);
         final boolean isEffectiveUserManagedProfile =
-                UserManager.get(this).isManagedProfile(effectiveUserId);
+                mUserManager.isManagedProfile(effectiveUserId);
+        final UserProperties userProperties =
+                mUserManager.getUserProperties(UserHandle.of(mUserId));
         // if the client app did not hand in a title and we are about to show the work challenge,
         // check whether there is a policy setting the organization name and use that as title
         if ((mTitle == null) && isEffectiveUserManagedProfile) {
@@ -194,6 +202,13 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         promptInfo.setDescription(mDetails);
         promptInfo.setDisallowBiometricsIfPolicyExists(mCheckDevicePolicyManager);
 
+        final int policyType = mDevicePolicyManager.getManagedSubscriptionsPolicy().getPolicyType();
+
+        if (isEffectiveUserManagedProfile
+                && (policyType == ManagedSubscriptionsPolicy.TYPE_ALL_MANAGED_SUBSCRIPTIONS)) {
+            promptInfo.setShowEmergencyCallButton(true);
+        }
+
         final @LockPatternUtils.CredentialType int credentialType = Utils.getCredentialType(
                 mContext, effectiveUserId);
         if (mTitle == null) {
@@ -202,7 +217,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         }
         if (mDetails == null) {
             promptInfo.setDeviceCredentialSubtitle(
-                    getDetailsFromCredentialType(credentialType, isEffectiveUserManagedProfile));
+                    Utils.getConfirmCredentialStringForUser(this, mUserId, credentialType));
         }
 
         boolean launchedBiometric = false;
@@ -218,6 +233,14 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setAlternateButton(alternateButton)
                     .setExternal(true)
                     .setUserId(LockPatternUtils.USER_FRP)
+                    .show();
+        } else if (repairMode) {
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            launchedCDC = builder.setHeader(mTitle)
+                    .setDescription(mDetails)
+                    .setExternal(true)
+                    .setUserId(LockPatternUtils.USER_REPAIR_MODE)
                     .show();
         } else if (remoteValidation) {
             RemoteLockscreenValidationSession remoteLockscreenValidationSession =
@@ -244,21 +267,64 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setExternal(true)
                     .show();
             return;
-        } else if (isEffectiveUserManagedProfile && isInternalActivity()) {
-            mCredentialMode = CREDENTIAL_MANAGED;
+        } else if (prepareRepairMode) {
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            launchedCDC = builder.setHeader(mTitle)
+                    .setDescription(mDetails)
+                    .setExternal(true)
+                    .setUserId(mUserId)
+                    .setTaskOverlay(mTaskOverlay)
+                    .setRequestWriteRepairModePassword(true)
+                    .setForceVerifyPath(true)
+                    .show();
+        } else if (mLockPatternUtils.isManagedProfileWithUnifiedChallenge(mUserId)
+                && isInternalActivity()) {
+            // When the mForceVerifyPath is set to true, we launch the real confirm credential
+            // activity with an explicit but fake challenge value (0L). This will result in
+            // ConfirmLockPassword calling verifyTiedProfileChallenge() (if it's a profile with
+            // unified challenge), due to the difference between
+            // ConfirmLockPassword.startVerifyPassword() and
+            // ConfirmLockPassword.startCheckPassword(). Calling verifyTiedProfileChallenge() here
+            // is necessary when this is part of the turning on work profile flow, because it forces
+            // unlocking the work profile even before the profile is running.
+            // TODO: Remove the duplication of checkPassword and verifyPassword in
+            //  ConfirmLockPassword,
+            // LockPatternChecker and LockPatternUtils. verifyPassword should be the only API to
+            // use, which optionally accepts a challenge.
+            mForceVerifyPath = true;
             if (isBiometricAllowed(effectiveUserId, mUserId)) {
-                showBiometricPrompt(promptInfo);
+                showBiometricPrompt(promptInfo, mUserId);
+                launchedBiometric = true;
+            } else {
+                showConfirmCredentials();
+                launchedCDC = true;
+            }
+        } else if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && userProperties != null
+                && userProperties.isAuthAlwaysRequiredToDisableQuietMode()
+                && isInternalActivity()) {
+            // Force verification path is required to be invoked as we might need to verify the
+            // tied profile challenge if the profile is using the unified challenge mode. This
+            // would result in ConfirmLockPassword.startVerifyPassword/
+            // ConfirmLockPattern.startVerifyPattern being called instead of the
+            // startCheckPassword/startCheckPattern
+            mForceVerifyPath = userProperties.isCredentialShareableWithParent();
+            if (android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                    && isBiometricAllowed(effectiveUserId, mUserId)) {
+                setBiometricPromptPropertiesForPrivateProfile(promptInfo);
+                showBiometricPrompt(promptInfo, effectiveUserId);
                 launchedBiometric = true;
             } else {
                 showConfirmCredentials();
                 launchedCDC = true;
             }
         } else {
-            mCredentialMode = CREDENTIAL_NORMAL;
             if (isBiometricAllowed(effectiveUserId, mUserId)) {
                 // Don't need to check if biometrics / pin/pattern/pass are enrolled. It will go to
                 // onAuthenticationError and do the right thing automatically.
-                showBiometricPrompt(promptInfo);
+                showBiometricPrompt(promptInfo, mUserId);
                 launchedBiometric = true;
             } else {
                 showConfirmCredentials();
@@ -278,13 +344,15 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         }
     }
 
+    private static void setBiometricPromptPropertiesForPrivateProfile(PromptInfo promptInfo) {
+        promptInfo.setUseParentProfileForDeviceCredential(true);
+        promptInfo.setConfirmationRequested(false);
+    }
+
     private String getTitleFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
             boolean isEffectiveUserManagedProfile) {
-        int overrideStringId;
-        int defaultStringId;
         switch (credentialType) {
             case LockPatternUtils.CREDENTIAL_TYPE_PIN:
-
                 if (isEffectiveUserManagedProfile) {
                     return mDevicePolicyManager.getResources().getString(
                             CONFIRM_WORK_PROFILE_PIN_HEADER,
@@ -314,45 +382,18 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         return null;
     }
 
-    private String getDetailsFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
-            boolean isEffectiveUserManagedProfile) {
-        switch (credentialType) {
-            case LockPatternUtils.CREDENTIAL_TYPE_PIN:
-                if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getResources().getString(WORK_PROFILE_CONFIRM_PIN,
-                            () -> getString(
-                                    R.string.lockpassword_confirm_your_pin_generic_profile));
-                }
-
-                return getString(R.string.lockpassword_confirm_your_pin_generic);
-            case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
-                if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getResources().getString(
-                            WORK_PROFILE_CONFIRM_PATTERN,
-                            () -> getString(
-                                    R.string.lockpassword_confirm_your_pattern_generic_profile));
-                }
-
-                return getString(R.string.lockpassword_confirm_your_pattern_generic);
-            case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
-                if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getResources().getString(
-                            WORK_PROFILE_CONFIRM_PASSWORD,
-                            () -> getString(
-                                    R.string.lockpassword_confirm_your_password_generic_profile));
-                }
-
-                return getString(R.string.lockpassword_confirm_your_password_generic);
-        }
-        return null;
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
         // Translucent activity that is "visible", so it doesn't complain about finish()
         // not being called before onResume().
         setVisible(true);
+
+        if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                != Configuration.UI_MODE_NIGHT_YES) {
+            getWindow().getInsetsController().setSystemBarsAppearance(
+                    APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS);
+        }
     }
 
     @Override
@@ -374,7 +415,20 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     // biometric is disabled due to device restart.
     private boolean isStrongAuthRequired(int effectiveUserId) {
         return !mLockPatternUtils.isBiometricAllowedForUser(effectiveUserId)
-                || !mUserManager.isUserUnlocked(mUserId);
+                || doesUserStateEnforceStrongAuth(mUserId);
+    }
+
+    private boolean doesUserStateEnforceStrongAuth(int userId) {
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
+            // Check if CE storage for user is locked since biometrics can't unlock fbe/keystore of
+            // the profile user using verifyTiedProfileChallenge. Biometrics can still be used if
+            // the user is stopped with delayed locking (i.e., with storage unlocked), so the user
+            // state (whether the user is in the RUNNING_UNLOCKED state) should not be relied upon.
+            return !StorageManager.isCeStorageUnlocked(userId);
+        }
+        return !mUserManager.isUserUnlocked(userId);
     }
 
     private boolean isBiometricAllowed(int effectiveUserId, int realUserId) {
@@ -382,17 +436,20 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 .hasPendingEscrowToken(realUserId);
     }
 
-    private void showBiometricPrompt(PromptInfo promptInfo) {
+    private void showBiometricPrompt(PromptInfo promptInfo, int userId) {
         mBiometricFragment = (BiometricFragment) getSupportFragmentManager()
                 .findFragmentByTag(TAG_BIOMETRIC_FRAGMENT);
         boolean newFragment = false;
 
         if (mBiometricFragment == null) {
-            mBiometricFragment = BiometricFragment.newInstance(promptInfo);
+            mBiometricFragment = BiometricFragment.newInstance(promptInfo,
+                    getCallingActivity());
             newFragment = true;
         }
         mBiometricFragment.setCallbacks(mExecutor, mAuthenticationCallback);
-        mBiometricFragment.setUser(mUserId);
+        // TODO(b/315864564): Move the logic of choosing the user id against which the
+        //  authentication needs to happen to the BiometricPrompt API
+        mBiometricFragment.setUser(userId);
 
         if (newFragment) {
             getSupportFragmentManager().beginTransaction()
@@ -404,29 +461,15 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
      * Shows ConfirmDeviceCredentials for normal apps.
      */
     private void showConfirmCredentials() {
-        boolean launched = false;
-        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(this)
+        boolean launched = new ChooseLockSettingsHelper.Builder(this)
                 .setHeader(mTitle)
                 .setDescription(mDetails)
                 .setExternal(true)
                 .setUserId(mUserId)
-                .setTaskOverlay(mTaskOverlay);
-        // The only difference between CREDENTIAL_MANAGED and CREDENTIAL_NORMAL is that for
-        // CREDENTIAL_MANAGED, we launch the real confirm credential activity with an explicit
-        // but fake challenge value (0L). This will result in ConfirmLockPassword calling
-        // verifyTiedProfileChallenge() (if it's a profile with unified challenge), due to the
-        // difference between ConfirmLockPassword.startVerifyPassword() and
-        // ConfirmLockPassword.startCheckPassword(). Calling verifyTiedProfileChallenge() here is
-        // necessary when this is part of the turning on work profile flow, because it forces
-        // unlocking the work profile even before the profile is running.
-        // TODO: Remove the duplication of checkPassword and verifyPassword in ConfirmLockPassword,
-        // LockPatternChecker and LockPatternUtils. verifyPassword should be the only API to use,
-        // which optionally accepts a challenge.
-        if (mCredentialMode == CREDENTIAL_MANAGED) {
-            launched = builder.setForceVerifyPath(true).show();
-        } else if (mCredentialMode == CREDENTIAL_NORMAL) {
-            launched = builder.show();
-        }
+                .setTaskOverlay(mTaskOverlay)
+                .setForceVerifyPath(mForceVerifyPath)
+                .show();
+
         if (!launched) {
             Log.d(TAG, "No pin/pattern/pass set");
             setResult(Activity.RESULT_OK);

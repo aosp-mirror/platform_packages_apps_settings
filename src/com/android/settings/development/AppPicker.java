@@ -16,6 +16,7 @@
 
 package com.android.settings.development;
 
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -31,8 +32,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.android.settings.R;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -59,7 +58,11 @@ public class AppPicker extends ListActivity {
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         mPermissionName = getIntent().getStringExtra(EXTRA_REQUESTIING_PERMISSION);
         mDebuggableOnly = getIntent().getBooleanExtra(EXTRA_DEBUGGABLE, false);
@@ -168,7 +171,7 @@ public class AppPicker extends ListActivity {
             Collections.sort(mPackageInfoList, sDisplayNameComparator);
             if (mIncludeNothing) {
                 MyApplicationInfo info = new MyApplicationInfo();
-                info.label = context.getText(R.string.no_application);
+                info.label = context.getText(com.android.settingslib.R.string.no_application);
                 mPackageInfoList.add(0, info);
             }
             addAll(mPackageInfoList);

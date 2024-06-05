@@ -92,8 +92,7 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
             }
             if (mLocalMediaManager == null || !TextUtils.equals(mPackageName,
                     mLocalMediaManager.getPackageName())) {
-                mLocalMediaManager = new LocalMediaManager(mContext, mPackageName,
-                        null /* notification */);
+                mLocalMediaManager = new LocalMediaManager(mContext, mPackageName);
             }
             mLocalMediaManager.registerCallback(this);
             mLocalMediaManager.startScan();
@@ -157,7 +156,11 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
         return mMediaDevices;
     }
 
+    @Nullable
     public MediaDevice getCurrentConnectedMediaDevice() {
+        if (mLocalMediaManager == null) {
+            return null;
+        }
         return mLocalMediaManager.getCurrentConnectedDevice();
     }
 
@@ -167,12 +170,20 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
 
     /** Check if this device supports LE Audio Broadcast feature */
     public boolean isBroadcastSupported() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "isBroadcastSupported: Bluetooth is not supported on this device");
+            return false;
+        }
         LocalBluetoothLeBroadcast broadcast =
                 mLocalBluetoothManager.getProfileManager().getLeAudioBroadcastProfile();
         return broadcast != null ? true : false;
     }
 
     public boolean isDeviceBroadcasting() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "isDeviceBroadcasting: Bluetooth is not supported on this device");
+            return false;
+        }
         LocalBluetoothLeBroadcast broadcast =
                 mLocalBluetoothManager.getProfileManager().getLeAudioBroadcastProfile();
         if (broadcast == null) {

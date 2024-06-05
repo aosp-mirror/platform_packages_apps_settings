@@ -69,13 +69,13 @@ public class SliceContextualCardController implements ContextualCardController {
     public void onDismissed(ContextualCard card) {
         ThreadUtils.postOnBackgroundThread(() -> {
             final ContextualCardFeatureProvider cardFeatureProvider =
-                    FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
+                    FeatureFactory.getFeatureFactory().getContextualCardFeatureProvider(mContext);
             cardFeatureProvider.markCardAsDismissed(mContext, card.getName());
         });
         showFeedbackDialog(card);
 
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         metricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_CONTEXTUAL_CARD_DISMISS,

@@ -21,8 +21,8 @@ import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FACE;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT;
 
 import static com.android.internal.util.Preconditions.checkNotNull;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY;
 
-import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.UserManager;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.Utils;
@@ -79,7 +80,10 @@ final class SetNewPasswordController {
         }
         // Create a wrapper of FingerprintManager for testing, see IFingerPrintManager for details.
         final FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(context);
-        final FaceManager faceManager = Utils.getFaceManagerOrNull(context);
+        final FaceManager faceManager =
+                !intent.getBooleanExtra(EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY, false)
+                        ? Utils.getFaceManagerOrNull(context)
+                        : null;
         return new SetNewPasswordController(userId,
                 context.getPackageManager(),
                 fingerprintManager, faceManager,

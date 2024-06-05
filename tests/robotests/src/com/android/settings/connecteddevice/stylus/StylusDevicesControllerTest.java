@@ -16,8 +16,14 @@
 
 package com.android.settings.connecteddevice.stylus;
 
+import static android.view.KeyEvent.KEYCODE_STYLUS_BUTTON_TAIL;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
@@ -27,13 +33,20 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Dialog;
 import android.app.role.RoleManager;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
+import android.graphics.drawable.Drawable;
+import android.os.Process;
 import android.os.UserHandle;
+import android.os.UserManager;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.view.InputDevice;
@@ -44,14 +57,17 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.profileselector.UserAdapter;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -59,12 +75,18 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class StylusDevicesControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final String NOTES_PACKAGE_NAME = "notes.package";
     private static final CharSequence NOTES_APP_LABEL = "App Label";
+    private static final int WORK_USER_ID = 1;
+    private static final int PRIVATE_USER_ID = 2;
 
     private Context mContext;
     private StylusDevicesController mController;
@@ -79,6 +101,14 @@ public class StylusDevicesControllerTest {
     @Mock
     private PackageManager mPm;
     @Mock
+    private UserManager mUserManager;
+    @Mock
+    UserInfo mPersonalUserInfo;
+    @Mock
+    UserInfo mWorkUserInfo;
+    @Mock
+    UserInfo mPrivateUserInfo;
+    @Mock
     private RoleManager mRm;
     @Mock
     private Lifecycle mLifecycle;
@@ -86,13 +116,17 @@ public class StylusDevicesControllerTest {
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
     private BluetoothDevice mBluetoothDevice;
-
+    @Mock
+    private Drawable mIcon;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
+        final var spiedResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(spiedResources);
+
         PreferenceManager preferenceManager = new PreferenceManager(mContext);
         mScreen = preferenceManager.createPreferenceScreen(mContext);
         mPreferenceContainer = new PreferenceCategory(mContext);
@@ -101,6 +135,7 @@ public class StylusDevicesControllerTest {
 
         when(mContext.getSystemService(InputMethodManager.class)).thenReturn(mImm);
         when(mContext.getSystemService(RoleManager.class)).thenReturn(mRm);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         doNothing().when(mContext).startActivity(any());
 
         when(mImm.getCurrentInputMethodInfo()).thenReturn(mInputMethodInfo);
@@ -115,6 +150,9 @@ public class StylusDevicesControllerTest {
         when(mPm.getApplicationInfo(eq(NOTES_PACKAGE_NAME),
                 any(PackageManager.ApplicationInfoFlags.class))).thenReturn(new ApplicationInfo());
         when(mPm.getApplicationLabel(any(ApplicationInfo.class))).thenReturn(NOTES_APP_LABEL);
+        when(mPm.getUserBadgeForDensityNoBackground(any(), anyInt())).thenReturn(mIcon);
+        when(mUserManager.getUsers()).thenReturn(Arrays.asList(new UserInfo(0, "default", 0)));
+        when(mUserManager.isManagedProfile(anyInt())).thenReturn(false);
 
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
 
@@ -123,6 +161,11 @@ public class StylusDevicesControllerTest {
                 .setSources(InputDevice.SOURCE_STYLUS)
                 .build());
         when(mInputDevice.getBluetoothAddress()).thenReturn("SOME:ADDRESS");
+        when(mInputDevice.hasKeys(KEYCODE_STYLUS_BUTTON_TAIL)).thenReturn(
+                new boolean[]{true});
+
+        when(spiedResources.getBoolean(
+                com.android.internal.R.bool.config_enableStylusPointerIcon)).thenReturn(true);
 
         mController = new StylusDevicesController(mContext, mInputDevice, null, mLifecycle);
     }
@@ -201,20 +244,23 @@ public class StylusDevicesControllerTest {
 
         showScreen(controller);
 
-        assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(3);
+        assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(4);
     }
 
     @Test
-    public void btStylusInputDevice_showsAllPreferences() {
-        showScreen(mController);
-        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
-        Preference handwritingPref = mPreferenceContainer.getPreference(1);
-        Preference buttonPref = mPreferenceContainer.getPreference(2);
+    public void usiStylusInputDevice_doesntSupportTailButton_tailButtonPreferenceNotShown() {
+        when(mInputDevice.hasKeys(KEYCODE_STYLUS_BUTTON_TAIL)).thenReturn(new boolean[]{false});
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        StylusDevicesController controller = new StylusDevicesController(
+                mContext, mInputDevice, mCachedBluetoothDevice, mLifecycle
+        );
+
+        showScreen(controller);
+        Preference handwritingPref = mPreferenceContainer.getPreference(0);
+        Preference buttonPref = mPreferenceContainer.getPreference(1);
 
         assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(3);
-        assertThat(defaultNotesPref.getTitle().toString()).isEqualTo(
-                mContext.getString(R.string.stylus_default_notes_app));
-        assertThat(defaultNotesPref.isVisible()).isTrue();
         assertThat(handwritingPref.getTitle().toString()).isEqualTo(
                 mContext.getString(R.string.stylus_textfield_handwriting));
         assertThat(handwritingPref.isVisible()).isTrue();
@@ -224,23 +270,74 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
+    public void btStylusInputDevice_showsAllPreferences() {
+        showScreen(mController);
+
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        Preference handwritingPref = mPreferenceContainer.getPreference(1);
+        Preference buttonPref = mPreferenceContainer.getPreference(2);
+        Preference stylusPointerIconPref = mPreferenceContainer.getPreference(3);
+
+        assertThat(defaultNotesPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_default_notes_app));
+        assertThat(defaultNotesPref.isVisible()).isTrue();
+        assertThat(handwritingPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_textfield_handwriting));
+        assertThat(handwritingPref.isVisible()).isTrue();
+        assertThat(buttonPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_ignore_button));
+        assertThat(buttonPref.isVisible()).isTrue();
+        assertThat(stylusPointerIconPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.show_stylus_pointer_icon));
+        assertThat(stylusPointerIconPref.isVisible()).isTrue();
+    }
+
+    @Test
     public void btStylusInputDevice_noHandwritingIme_handwritingPrefNotVisible() {
         when(mInputMethodInfo.supportsStylusHandwriting()).thenReturn(false);
 
         showScreen(mController);
-        Preference handwritingPref = mPreferenceContainer.getPreference(1);
 
+        Preference handwritingPref = mPreferenceContainer.getPreference(1);
         assertThat(handwritingPref.isVisible()).isFalse();
     }
 
     @Test
-    public void defaultNotesPreference_showsNotesRoleApp() {
+    public void defaultNotesPreference_singleUser_showsNotesRoleApp() {
         showScreen(mController);
-        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
 
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
         assertThat(defaultNotesPref.getTitle().toString()).isEqualTo(
                 mContext.getString(R.string.stylus_default_notes_app));
         assertThat(defaultNotesPref.getSummary().toString()).isEqualTo(NOTES_APP_LABEL.toString());
+    }
+
+    @Test
+    public void defaultNotesPreference_workProfileUser_showsWorkNotesRoleApp() {
+        when(mUserManager.isManagedProfile(0)).thenReturn(true);
+
+        showScreen(mController);
+
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        assertThat(defaultNotesPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_default_notes_app));
+        assertThat(defaultNotesPref.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_default_notes_summary_work,
+                        NOTES_APP_LABEL.toString()));
+    }
+
+    @Test
+    public void defaultNotesPreference_noApplicationInfo_showsBlankSummary()
+            throws PackageManager.NameNotFoundException {
+        when(mPm.getApplicationInfo(eq(NOTES_PACKAGE_NAME),
+                any(PackageManager.ApplicationInfoFlags.class))).thenReturn(null);
+
+        showScreen(mController);
+
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        assertThat(defaultNotesPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_default_notes_app));
+        assertThat(defaultNotesPref.getSummary().toString()).isEqualTo("");
     }
 
     @Test
@@ -267,7 +364,7 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
-    public void defaultNotesPreferenceClick_sendsManageDefaultRoleIntent() {
+    public void defaultNotesPreferenceClick_singleUser_sendsManageDefaultRoleIntent() {
         final String permissionPackageName = "permissions.package";
         when(mPm.getPermissionControllerPackageName()).thenReturn(permissionPackageName);
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
@@ -282,6 +379,136 @@ public class StylusDevicesControllerTest {
         assertThat(intent.getPackage()).isEqualTo(permissionPackageName);
         assertThat(intent.getStringExtra(Intent.EXTRA_ROLE_NAME)).isEqualTo(
                 RoleManager.ROLE_NOTES);
+        assertNull(mController.mDialog);
+    }
+
+    @Test
+    public void defaultNotesPreferenceClick_multiUserManagedProfile_showsProfileSelectorDialog() {
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
+        final String permissionPackageName = "permissions.package";
+        final UserHandle currentUser = Process.myUserHandle();
+        List<UserInfo> userInfos = Arrays.asList(
+                mPersonalUserInfo,
+                mWorkUserInfo
+        );
+        UserProperties personalUserProperties =
+                new UserProperties.Builder()
+                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_DEFAULT)
+                        .build();
+        UserProperties workUserProperties =
+                new UserProperties.Builder()
+                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_PAUSED)
+                        .build();
+        when(mWorkUserInfo.isManagedProfile()).thenReturn(true);
+        when(mWorkUserInfo.getUserHandle()).thenReturn(UserHandle.of(WORK_USER_ID));
+        when(mUserManager.getProfiles(currentUser.getIdentifier())).thenReturn(userInfos);
+        when(mUserManager.getUserInfo(currentUser.getIdentifier())).thenReturn(mPersonalUserInfo);
+        when(mUserManager.getUserInfo(WORK_USER_ID)).thenReturn(mWorkUserInfo);
+        when(mUserManager.getProfileParent(WORK_USER_ID)).thenReturn(mPersonalUserInfo);
+        when(mUserManager.getUserProperties(currentUser)).thenReturn(personalUserProperties);
+        when(mUserManager.getUserProperties(UserHandle.of(WORK_USER_ID)))
+                .thenReturn(workUserProperties);
+        when(mPm.getPermissionControllerPackageName()).thenReturn(permissionPackageName);
+
+        showScreen(mController);
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        mController.onPreferenceClick(defaultNotesPref);
+
+        assertTrue(mController.mDialog.isShowing());
+    }
+
+    @Test
+    public void defaultNotesPreferenceClick_multiUsers_showsProfileSelectorDialog() {
+        mSetFlagsRule.enableFlags(
+                android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES,
+                android.multiuser.Flags.FLAG_HANDLE_INTERLEAVED_SETTINGS_FOR_PRIVATE_SPACE);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
+        final String permissionPackageName = "permissions.package";
+        final UserHandle currentUser = Process.myUserHandle();
+        List<UserInfo> userInfos = Arrays.asList(
+                mPersonalUserInfo,
+                mPrivateUserInfo,
+                mWorkUserInfo
+        );
+        UserProperties personalUserProperties =
+                new UserProperties.Builder()
+                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_DEFAULT)
+                        .build();
+        UserProperties workUserProperties =
+                new UserProperties.Builder()
+                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_PAUSED)
+                        .build();
+        UserProperties privateUserProperties =
+                new UserProperties.Builder()
+                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_HIDDEN)
+                        .build();
+        when(mWorkUserInfo.isManagedProfile()).thenReturn(true);
+        when(mWorkUserInfo.getUserHandle()).thenReturn(UserHandle.of(WORK_USER_ID));
+        when(mPrivateUserInfo.isPrivateProfile()).thenReturn(true);
+        when(mPrivateUserInfo.getUserHandle()).thenReturn(UserHandle.of(PRIVATE_USER_ID));
+        when(mUserManager.getProfiles(currentUser.getIdentifier())).thenReturn(userInfos);
+        when(mUserManager.getUserInfo(currentUser.getIdentifier())).thenReturn(mPersonalUserInfo);
+        when(mUserManager.getUserInfo(WORK_USER_ID)).thenReturn(mWorkUserInfo);
+        when(mUserManager.getUserInfo(PRIVATE_USER_ID)).thenReturn(mPrivateUserInfo);
+        when(mUserManager.getUserProperties(currentUser)).thenReturn(personalUserProperties);
+        when(mUserManager.getUserProperties(UserHandle.of(PRIVATE_USER_ID)))
+                .thenReturn(privateUserProperties);
+        when(mUserManager.getUserProperties(UserHandle.of(WORK_USER_ID)))
+                .thenReturn(workUserProperties);
+        when(mPm.getPermissionControllerPackageName()).thenReturn(permissionPackageName);
+
+        showScreen(mController);
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        mController.onPreferenceClick(defaultNotesPref);
+
+        assertTrue(mController.mDialog.isShowing());
+    }
+
+    @Test
+    public void defaultNotesPreferenceClick_noProfiles_sendsManageDefaultRoleIntent() {
+        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
+        final String permissionPackageName = "permissions.package";
+        final UserHandle currentUser = Process.myUserHandle();
+        List<UserInfo> userInfos = Arrays.asList(
+                new UserInfo(currentUser.getIdentifier(), "current", 0),
+                new UserInfo(1, "other", UserInfo.FLAG_FULL)
+        );
+        when(mUserManager.getProfiles(currentUser.getIdentifier())).thenReturn(userInfos);
+        when(mUserManager.isManagedProfile(1)).thenReturn(false);
+        when(mUserManager.getUserInfo(currentUser.getIdentifier())).thenReturn(userInfos.get(0));
+        when(mUserManager.getUserInfo(1)).thenReturn(userInfos.get(1));
+        when(mUserManager.getProfileParent(any())).thenReturn(null);
+        when(mPm.getPermissionControllerPackageName()).thenReturn(permissionPackageName);
+
+        showScreen(mController);
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        mController.onPreferenceClick(defaultNotesPref);
+
+        verify(mContext).startActivity(captor.capture());
+        Intent intent = captor.getValue();
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MANAGE_DEFAULT_APP);
+        assertThat(intent.getPackage()).isEqualTo(permissionPackageName);
+        assertThat(intent.getStringExtra(Intent.EXTRA_ROLE_NAME)).isEqualTo(
+                RoleManager.ROLE_NOTES);
+        assertNull(mController.mDialog);
+    }
+
+    @Test
+    public void profileSelectDialogClickCallback_onClick_sendsIntent() {
+        Intent intent = new Intent();
+        UserHandle user1 = mock(UserHandle.class);
+        UserHandle user2 = mock(UserHandle.class);
+        List<UserHandle> users = Arrays.asList(user1, user2);
+        mController.mDialog = new Dialog(mContext);
+        UserAdapter.OnClickListener callback = mController
+                .createProfileDialogClickCallback(intent, users);
+
+        callback.onClick(1);
+
+        assertEquals(intent.getExtra(Intent.EXTRA_USER), user2);
+        verify(mContext).startActivity(intent);
     }
 
     @Test
@@ -290,9 +517,10 @@ public class StylusDevicesControllerTest {
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED, 1);
 
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
-        assertThat(handwritingPref.isChecked()).isEqualTo(true);
+        assertThat(handwritingPref.getCheckedState()).isEqualTo(true);
     }
 
     @Test
@@ -301,9 +529,10 @@ public class StylusDevicesControllerTest {
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED, 0);
 
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
-        assertThat(handwritingPref.isChecked()).isEqualTo(false);
+        assertThat(handwritingPref.getCheckedState()).isEqualTo(false);
     }
 
     @Test
@@ -311,21 +540,20 @@ public class StylusDevicesControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED, 0);
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
-        handwritingPref.performClick();
+        handwritingPref.callChangeListener(true);
 
-        assertThat(handwritingPref.isChecked()).isEqualTo(true);
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED, -1)).isEqualTo(1);
     }
 
     @Test
-    public void handwritingPreference_startsHandwritingSettingsOnClickIfChecked() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 0);
+    public void handwritingPreference_startsHandwritingSettingsOnClick() {
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
         handwritingPref.performClick();
 
@@ -334,11 +562,23 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
-    public void handwritingPreference_doesNotStartHandwritingSettingsOnClickIfNotChecked() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 1);
+    public void handwritingPreference_doesNotStartHandwritingSettingsOnChange() {
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
+
+        handwritingPref.callChangeListener(true);
+
+        verify(mInputMethodInfo, times(0)).createStylusHandwritingSettingsActivityIntent();
+        verify(mContext, times(0)).startActivity(any());
+    }
+
+    @Test
+    public void handwritingPreference_doesNotCreateIntentIfNoInputMethod() {
+        when(mImm.getCurrentInputMethodInfo()).thenReturn(null);
+        showScreen(mController);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
         handwritingPref.performClick();
 
@@ -350,14 +590,12 @@ public class StylusDevicesControllerTest {
     public void handwritingPreference_doesNotStartHandwritingSettingsIfNoIntent() {
         when(mInputMethodInfo.createStylusHandwritingSettingsActivityIntent())
                 .thenReturn(null);
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 1);
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
         handwritingPref.performClick();
 
-        verify(mInputMethodInfo, times(0)).createStylusHandwritingSettingsActivityIntent();
         verify(mContext, times(0)).startActivity(any());
     }
 
@@ -367,7 +605,8 @@ public class StylusDevicesControllerTest {
                 Settings.Secure.STYLUS_BUTTONS_ENABLED, 0);
 
         showScreen(mController);
-        SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
+        SwitchPreferenceCompat buttonsPref =
+                (SwitchPreferenceCompat) mPreferenceContainer.getPreference(2);
 
         assertThat(buttonsPref.isChecked()).isEqualTo(true);
     }
@@ -378,7 +617,8 @@ public class StylusDevicesControllerTest {
                 Settings.Secure.STYLUS_BUTTONS_ENABLED, 1);
 
         showScreen(mController);
-        SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
+        SwitchPreferenceCompat buttonsPref =
+                (SwitchPreferenceCompat) mPreferenceContainer.getPreference(2);
 
         assertThat(buttonsPref.isChecked()).isEqualTo(false);
     }
@@ -388,13 +628,54 @@ public class StylusDevicesControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.STYLUS_BUTTONS_ENABLED, 0);
         showScreen(mController);
-        SwitchPreference buttonsPref = (SwitchPreference) mPreferenceContainer.getPreference(2);
+        SwitchPreferenceCompat buttonsPref =
+                (SwitchPreferenceCompat) mPreferenceContainer.getPreference(2);
 
         buttonsPref.performClick();
 
         assertThat(buttonsPref.isChecked()).isEqualTo(false);
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Secure.STYLUS_BUTTONS_ENABLED, -1)).isEqualTo(1);
+    }
+
+    @Test
+    public void stylusPointerIconPreference_checkedWhenFlagTrue() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_POINTER_ICON_ENABLED, 1);
+
+        showScreen(mController);
+        SwitchPreferenceCompat stylusPointerIconPref =
+                (SwitchPreferenceCompat) mPreferenceContainer.getPreference(3);
+
+        assertThat(stylusPointerIconPref.isChecked()).isEqualTo(true);
+    }
+
+    @Test
+    public void stylusPointerIconPreference_uncheckedWhenFlagFalse() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_POINTER_ICON_ENABLED, 0);
+
+        showScreen(mController);
+        SwitchPreferenceCompat stylusPointerIconPref =
+                (SwitchPreferenceCompat) mPreferenceContainer.getPreference(3);
+
+        assertThat(stylusPointerIconPref.isChecked()).isEqualTo(false);
+    }
+
+    @Test
+    public void stylusPointerIconPreference_updatesFlagOnClick() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_POINTER_ICON_ENABLED, 0);
+
+        showScreen(mController);
+        SwitchPreferenceCompat stylusPointerIconPref =
+                (SwitchPreferenceCompat) mPreferenceContainer.getPreference(3);
+
+        stylusPointerIconPref.performClick();
+
+        assertThat(stylusPointerIconPref.isChecked()).isEqualTo(true);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Secure.STYLUS_POINTER_ICON_ENABLED, -1)).isEqualTo(1);
     }
 
     private void showScreen(StylusDevicesController controller) {

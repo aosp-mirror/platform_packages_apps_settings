@@ -42,9 +42,11 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
+import com.android.window.flags.Flags;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -92,6 +94,10 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             finish();
         }
         final long startTime = System.currentTimeMillis();
+        if (Flags.enforceEdgeToEdge()) {
+            Utils.setupEdgeToEdge(this);
+            hideInternalActionBar();
+        }
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
         TextAppearanceConfig.setShouldLoadFontSynchronously(true);
 
@@ -110,8 +116,10 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         }
 
         if (isToolbarEnabled() && !isAnySetupWizard) {
-            super.setContentView(R.layout.collapsing_toolbar_base_layout);
-            mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+            super.setContentView(
+                    com.android.settingslib.collapsingtoolbar.R.layout.collapsing_toolbar_base_layout);
+            mCollapsingToolbarLayout =
+                    findViewById(com.android.settingslib.collapsingtoolbar.R.id.collapsing_toolbar);
             mAppBarLayout = findViewById(R.id.app_bar);
             if (mCollapsingToolbarLayout != null) {
                 mCollapsingToolbarLayout.setLineSpacingMultiplier(TOOLBAR_LINE_SPACING_MULTIPLIER);
@@ -162,9 +170,12 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         final int transitionType = getTransitionType(intent);
         super.startActivityForResult(intent, requestCode, options);
         if (transitionType == TransitionType.TRANSITION_SLIDE) {
-            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+            overridePendingTransition(
+                    com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                    com.google.android.setupdesign.R.anim.sud_slide_next_out);
         } else if (transitionType == TransitionType.TRANSITION_FADE) {
-            overridePendingTransition(android.R.anim.fade_in, R.anim.sud_stay);
+            overridePendingTransition(
+                    android.R.anim.fade_in, com.google.android.setupdesign.R.anim.sud_stay);
         }
     }
 
@@ -172,7 +183,8 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     protected void onPause() {
         // For accessibility activities launched from setup wizard.
         if (getTransitionType(getIntent()) == TransitionType.TRANSITION_FADE) {
-            overridePendingTransition(R.anim.sud_stay, android.R.anim.fade_out);
+            overridePendingTransition(
+                    com.google.android.setupdesign.R.anim.sud_stay, android.R.anim.fade_out);
         }
         super.onPause();
     }
@@ -282,5 +294,19 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             return TransitionType.TRANSITION_NONE;
         }
         return intent.getIntExtra(EXTRA_PAGE_TRANSITION_TYPE, TransitionType.TRANSITION_NONE);
+    }
+
+    /**
+     * This internal ActionBar will be appeared automatically when the
+     * Utils.setupEdgeToEdge is invoked.
+     *
+     * @see Utils.setupEdgeToEdge
+     */
+    private void hideInternalActionBar() {
+        final View actionBarContainer =
+                findViewById(com.android.internal.R.id.action_bar_container);
+        if (actionBarContainer != null) {
+            actionBarContainer.setVisibility(View.GONE);
+        }
     }
 }

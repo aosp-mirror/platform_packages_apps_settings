@@ -28,7 +28,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -41,7 +41,7 @@ public class PictureInPictureDetails extends AppInfoWithHeader
     private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
     private static final String LOG_TAG = "PictureInPictureDetails";
 
-    private SwitchPreference mSwitchPref;
+    private TwoStatePreference mSwitchPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class PictureInPictureDetails extends AppInfoWithHeader
 
         // find preferences
         addPreferencesFromResource(R.xml.picture_in_picture_permissions_details);
-        mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
+        mSwitchPref = (TwoStatePreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
 
         // set title/summary for all of them
         mSwitchPref.setTitle(R.string.picture_in_picture_app_detail_switch);
@@ -124,7 +124,7 @@ public class PictureInPictureDetails extends AppInfoWithHeader
                 ? SettingsEnums.APP_PICTURE_IN_PICTURE_ALLOW
                 : SettingsEnums.APP_PICTURE_IN_PICTURE_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsFeatureProvider.action(
                 metricsFeatureProvider.getAttribution(getActivity()),
                 logCategory,

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2024 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/color_contrast_preview_background"
+    android:importantForAccessibility="no"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingBottom="24dp">
+
+    <View
+        android:id="@+id/preview_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?androidprv:attr/materialColorSurface"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_appbar_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/preview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center_horizontal"
+        android:text="@string/color_contrast_preview"
+        android:textColor="?androidprv:attr/textColorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/email_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/color_contrast_preview_dialog_background"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_appbar_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/preview" />
+
+    <ImageView
+        android:id="@+id/ic_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/color_contrast_preview_icon_group_background"
+        android:contentDescription="@null"
+        android:padding="8dp"
+        android:src="@drawable/ic_group_24dp"
+        app:layout_constraintStart_toStartOf="@+id/email_background"
+        app:layout_constraintTop_toTopOf="@+id/email_background" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/email_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="17dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/ic_star"
+        app:layout_constraintStart_toEndOf="@id/ic_group"
+        app:layout_constraintTop_toTopOf="@+id/email_background">
+
+        <TextView
+            android:id="@+id/sender_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingEnd="10dp"
+            android:text="@string/color_contrast_preview_sender_name"
+            android:textColor="?androidprv:attr/materialColorOnSurface"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/email_tag"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_max="wrap"
+            app:layout_constraintWidth_percent="0.5" />
+
+        <TextView
+            android:id="@+id/email_tag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/color_contrast_preview_tag_background"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingHorizontal="4dp"
+            android:text="@string/color_contrast_preview_email_badge"
+            android:textColor="?androidprv:attr/materialColorOnSurface"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sender_name"
+            app:layout_constraintTop_toTopOf="@+id/sender_name"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_max="wrap"
+            app:layout_constraintWidth_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/color_contrast_preview_email_send_date"
+        android:textColor="?androidprv:attr/materialColorOnSurfaceVariant"
+        android:textSize="11sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@+id/email_background"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/email_header"
+        app:layout_constraintTop_toBottomOf="@+id/email_header" />
+
+    <ImageView
+        android:id="@+id/ic_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/color_contrast_preview_icon_star_background"
+        android:contentDescription="@null"
+        android:padding="8dp"
+        android:src="@drawable/ic_star_24dp"
+        app:layout_constraintEnd_toEndOf="@+id/email_background"
+        app:layout_constraintTop_toTopOf="@+id/email_background" />
+
+    <View
+        android:id="@+id/email_main_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/email_background"
+        app:layout_constraintEnd_toEndOf="@+id/email_background"
+        app:layout_constraintStart_toStartOf="@+id/email_background"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
+
+    <TextView
+        android:id="@+id/email_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/color_contrast_preview_email_title"
+        android:textColor="?androidprv:attr/materialColorOnSurface"
+        android:textSize="16sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@+id/email_main_background"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/email_main_background"
+        app:layout_constraintTop_toTopOf="@+id/email_main_background" />
+
+    <TextView
+        android:id="@+id/email_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingBottom="8dp"
+        android:text="@string/color_contrast_preview_email_body"
+        android:textColor="?androidprv:attr/materialColorOnSurfaceVariant"
+        android:textSize="12sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@+id/email_main_background"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/email_title"
+        app:layout_constraintTop_toBottomOf="@+id/email_title" />
+
+    <View
+        android:id="@+id/attachment_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/color_contrast_preview_button_background"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_article_filled"
+        app:layout_constraintEnd_toEndOf="@+id/email_attachment"
+        app:layout_constraintStart_toStartOf="@+id/email_title"
+        app:layout_constraintTop_toBottomOf="@+id/email_body" />
+
+    <ImageView
+        android:id="@+id/ic_article_filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:paddingVertical="6dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="6dp"
+        android:src="@drawable/ic_article_filled_24dp"
+        app:layout_constraintStart_toStartOf="@+id/email_title"
+        app:layout_constraintTop_toBottomOf="@+id/email_body" />
+
+    <TextView
+        android:id="@+id/email_attachment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingEnd="10dp"
+        android:text="@string/color_contrast_preview_email_attachment_name"
+        android:textColor="?androidprv:attr/materialColorOnTertiaryContainer"
+        android:textSize="12sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@+id/attachment_background"
+        app:layout_constraintEnd_toStartOf="@+id/ic_edit"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ic_article_filled"
+        app:layout_constraintTop_toTopOf="@+id/attachment_background" />
+
+    <ImageView
+        android:id="@+id/ic_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-8dp"
+        android:background="@drawable/color_contrast_preview_icon_edit_background"
+        android:contentDescription="@null"
+        android:padding="27dp"
+        android:src="@drawable/ic_edit_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/email_background"
+        app:layout_constraintEnd_toEndOf="@+id/email_background" />
+
+    <View
+        android:id="@+id/bottom_appbar_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/color_contrast_preview_bottom_appbar_background"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_inbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ic_inbox" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:src="@drawable/color_contrast_preview_icon_inbox_background"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_inbox"
+        app:layout_constraintEnd_toEndOf="@+id/ic_inbox"
+        app:layout_constraintStart_toStartOf="@+id/ic_inbox"
+        app:layout_constraintTop_toTopOf="@+id/ic_inbox" />
+
+    <ImageView
+        android:id="@+id/ic_inbox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:contentDescription="@null"
+        android:padding="24dp"
+        android:src="@drawable/ic_inbox_24dp"
+        app:layout_constraintEnd_toStartOf="@+id/ic_article"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_article_filled" />
+
+    <ImageView
+        android:id="@+id/ic_article"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:padding="24dp"
+        android:src="@drawable/ic_article_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/ic_inbox"
+        app:layout_constraintEnd_toStartOf="@+id/ic_chat_bubble"
+        app:layout_constraintStart_toEndOf="@+id/ic_inbox"
+        app:layout_constraintTop_toTopOf="@id/ic_inbox" />
+
+    <ImageView
+        android:id="@+id/ic_chat_bubble"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:padding="24dp"
+        android:src="@drawable/ic_chat_bubble_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/ic_inbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ic_article"
+        app:layout_constraintTop_toTopOf="@id/ic_inbox" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

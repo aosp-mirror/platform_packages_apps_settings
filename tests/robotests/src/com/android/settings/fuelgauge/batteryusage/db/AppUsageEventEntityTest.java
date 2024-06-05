@@ -35,16 +35,16 @@ public final class AppUsageEventEntityTest {
         final int instanceId = 100001;
         final String taskRootPackageName = "com.android.settings2";
 
-        AppUsageEventEntity entity = AppUsageEventEntity
-                .newBuilder()
-                .setUid(uid)
-                .setUserId(userId)
-                .setTimestamp(timestamp)
-                .setAppUsageEventType(appUsageEventType)
-                .setPackageName(packageName)
-                .setInstanceId(instanceId)
-                .setTaskRootPackageName(taskRootPackageName)
-                .build();
+        AppUsageEventEntity entity =
+                AppUsageEventEntity.newBuilder()
+                        .setUid(uid)
+                        .setUserId(userId)
+                        .setTimestamp(timestamp)
+                        .setAppUsageEventType(appUsageEventType)
+                        .setPackageName(packageName)
+                        .setInstanceId(instanceId)
+                        .setTaskRootPackageName(taskRootPackageName)
+                        .build();
 
         // Verifies the app relative information.
         assertThat(entity.uid).isEqualTo(uid);

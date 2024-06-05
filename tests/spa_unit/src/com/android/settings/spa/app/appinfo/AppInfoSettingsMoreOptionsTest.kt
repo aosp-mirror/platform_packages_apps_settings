@@ -19,11 +19,17 @@ package com.android.settings.spa.app.appinfo
 import android.app.AppOpsManager
 import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
+import android.app.ecm.EnhancedConfirmationManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.UserInfo
+import android.os.UserHandle
 import android.os.UserManager
+import android.platform.test.annotations.RequiresFlagsDisabled
+import android.platform.test.annotations.RequiresFlagsEnabled
+import android.platform.test.flag.junit.CheckFlagsRule
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsNotDisplayed
@@ -61,6 +67,9 @@ class AppInfoSettingsMoreOptionsTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
+    @get:Rule
+    val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     private lateinit var mockSession: MockitoSession
 
     @Spy
@@ -80,6 +89,9 @@ class AppInfoSettingsMoreOptionsTest {
 
     @Mock
     private lateinit var appOpsManager: AppOpsManager
+
+    @Mock
+    private lateinit var enhancedConfirmationManager: EnhancedConfirmationManager
 
     @Mock
     private lateinit var keyguardManager: KeyguardManager
@@ -103,6 +115,8 @@ class AppInfoSettingsMoreOptionsTest {
         whenever(context.devicePolicyManager).thenReturn(devicePolicyManager)
         whenever(context.appOpsManager).thenReturn(appOpsManager)
         whenever(context.getSystemService(KeyguardManager::class.java)).thenReturn(keyguardManager)
+        whenever(context.getSystemService(EnhancedConfirmationManager::class.java))
+                .thenReturn(enhancedConfirmationManager)
         whenever(keyguardManager.isKeyguardSecure).thenReturn(false)
         whenever(Utils.isProfileOrDeviceOwner(userManager, devicePolicyManager, PACKAGE_NAME))
             .thenReturn(false)
@@ -158,7 +172,47 @@ class AppInfoSettingsMoreOptionsTest {
     }
 
     @Test
-    fun shouldShowAccessRestrictedSettings() {
+    fun uninstallForAllUsers_appHiddenNotInQuietModeAndPrimaryUser_displayed() {
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            uid = UID
+        }
+        whenever(userManager.aliveUsers).thenReturn(listOf(OTHER_USER))
+        whenever(packageManagers
+                .isPackageInstalledAsUser(PACKAGE_NAME, OTHER_USER_ID))
+            .thenReturn(true)
+        whenever(Utils.shouldHideUser(UserHandle.of(OTHER_USER_ID), userManager)).thenReturn(false)
+
+        setContent(app)
+        composeTestRule.onRoot().performClick()
+
+        composeTestRule.waitUntilExists(
+            hasText(context.getString(R.string.uninstall_all_users_text))
+        )
+
+    }
+
+    @Test
+    fun uninstallForAllUsers_appHiddenInQuietModeAndPrimaryUser_notDisplayed() {
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            uid = UID
+        }
+        whenever(userManager.aliveUsers).thenReturn(listOf(OTHER_USER))
+        whenever(packageManagers
+                .isPackageInstalledAsUser(PACKAGE_NAME, OTHER_USER_ID))
+            .thenReturn(true)
+        whenever(Utils.shouldHideUser(UserHandle.of(OTHER_USER_ID), userManager)).thenReturn(true)
+
+        setContent(ApplicationInfo())
+
+        composeTestRule.onRoot().assertIsNotDisplayed()
+    }
+
+    @Test
+    @RequiresFlagsDisabled(android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS,
+        android.permission.flags.Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED)
+    fun shouldShowAccessRestrictedSettings_appOp() {
         whenever(
             appOpsManager.noteOpNoThrow(
                 AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS, UID, PACKAGE_NAME, null, null
@@ -184,6 +238,31 @@ class AppInfoSettingsMoreOptionsTest {
             PACKAGE_NAME,
             AppOpsManager.MODE_ALLOWED,
         )
+    }
+
+    @Test
+    @RequiresFlagsEnabled(android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS,
+        android.permission.flags.Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED)
+    fun shouldShowAccessRestrictedSettings() {
+        whenever(
+            enhancedConfirmationManager.isClearRestrictionAllowed(PACKAGE_NAME)
+        ).thenReturn(true)
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            uid = UID
+        }
+
+        setContent(app)
+        composeTestRule.onRoot().performClick()
+
+        composeTestRule.waitUntilExists(
+            hasText(context.getString(R.string.app_restricted_settings_lockscreen_title))
+        )
+        composeTestRule
+            .onNodeWithText(context
+                .getString(R.string.app_restricted_settings_lockscreen_title))
+            .performClick()
+        verify(enhancedConfirmationManager).clearRestriction(PACKAGE_NAME)
     }
 
     private fun setContent(app: ApplicationInfo) {

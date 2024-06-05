@@ -75,6 +75,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
     @Override
     protected void onCreate(Bundle savedInstance) {
         setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstance);
 
@@ -113,7 +114,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             layout.setDescriptionText(loadDescriptionText());
             layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
             layout.setDividerInset(getContext().getResources().getDimensionPixelSize(
-                    R.dimen.sud_items_glif_text_divider_inset));
+                    com.google.android.setupdesign.R.dimen.sud_items_glif_text_divider_inset));
 
             layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
 
@@ -266,7 +267,6 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             @Override
             public void onViewCreated(@NotNull View view, Bundle savedInstanceState) {
                 super.onViewCreated(view, savedInstanceState);
-
                 GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
                 int titleResource = R.string.lock_settings_picker_new_lock_title;
 

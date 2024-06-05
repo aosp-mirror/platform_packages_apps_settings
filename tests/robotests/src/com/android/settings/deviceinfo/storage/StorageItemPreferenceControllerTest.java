@@ -45,6 +45,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -52,6 +53,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
@@ -67,6 +69,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class StorageItemPreferenceControllerTest {
 
     private Context mContext;
@@ -96,7 +101,7 @@ public class StorageItemPreferenceControllerTest {
         // Note: null is passed as the Lifecycle because we are handling it outside of the normal
         //       Settings fragment lifecycle for test purposes.
         mController = new StorageItemPreferenceController(mContext, mFragment, mVolume, mSvp,
-                false /* isWorkProfile */);
+                ProfileSelectFragment.ProfileType.PERSONAL);
         mPreference = new StorageItemPreference(mContext);
 
         // Inflate the preference and the widget.
@@ -119,10 +124,15 @@ public class StorageItemPreferenceControllerTest {
         apps.setIcon(R.drawable.ic_storage_apps);
         final StorageItemPreference games = spy(new StorageItemPreference(mContext));
         games.setIcon(R.drawable.ic_videogame_vd_theme_24);
-        final StorageItemPreference documentsAndOther = spy(new StorageItemPreference(mContext));
-        documentsAndOther.setIcon(R.drawable.ic_folder_vd_theme_24);
+        final StorageItemPreference documents = spy(new StorageItemPreference(mContext));
+        documents.setIcon(R.drawable.ic_folder_vd_theme_24);
+        final StorageItemPreference other = spy(new StorageItemPreference(mContext));
+        other.setIcon(R.drawable.ic_category_vd_theme_24);
         final StorageItemPreference system = spy(new StorageItemPreference(mContext));
-        system.setIcon(R.drawable.ic_system_update);
+        system.setIcon(R.drawable.ic_android_vd_theme_24);
+        final StorageItemPreference temporaryFiles = spy(new StorageItemPreference(mContext));
+        temporaryFiles.setIcon(R.drawable.ic_database_vd_theme_24);
+        final PreferenceCategory categorySplitter = spy(new PreferenceCategory(mContext));
         final StorageItemPreference trash = spy(new StorageItemPreference(mContext));
         trash.setIcon(R.drawable.ic_trash_can);
 
@@ -139,10 +149,16 @@ public class StorageItemPreferenceControllerTest {
                 .thenReturn(apps);
         when(screen.findPreference(eq(StorageItemPreferenceController.GAMES_KEY)))
                 .thenReturn(games);
-        when(screen.findPreference(eq(StorageItemPreferenceController.DOCUMENTS_AND_OTHER_KEY)))
-                .thenReturn(documentsAndOther);
+        when(screen.findPreference(eq(StorageItemPreferenceController.DOCUMENTS_KEY)))
+                .thenReturn(documents);
+        when(screen.findPreference(eq(StorageItemPreferenceController.OTHER_KEY)))
+                .thenReturn(other);
         when(screen.findPreference(eq(StorageItemPreferenceController.SYSTEM_KEY)))
                 .thenReturn(system);
+        when(screen.findPreference(eq(StorageItemPreferenceController.TEMPORARY_FILES_KEY)))
+                .thenReturn(temporaryFiles);
+        when(screen.findPreference(eq(StorageItemPreferenceController.CATEGORY_SPLITTER)))
+                .thenReturn(categorySplitter);
         when(screen.findPreference(eq(StorageItemPreferenceController.TRASH_KEY)))
                 .thenReturn(trash);
 
@@ -172,7 +188,7 @@ public class StorageItemPreferenceControllerTest {
         mPreference.setKey(StorageItemPreferenceController.IMAGES_KEY);
         final Context mockContext = getMockContext();
         mController = new StorageItemPreferenceController(mockContext, mFragment, mVolume,
-                mSvp, false /* isWorkProfile */);
+                mSvp, ProfileSelectFragment.ProfileType.PERSONAL);
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
@@ -189,7 +205,7 @@ public class StorageItemPreferenceControllerTest {
         mPreference.setKey(StorageItemPreferenceController.AUDIO_KEY);
         final Context mockContext = getMockContext();
         mController = new StorageItemPreferenceController(mockContext, mFragment, mVolume,
-                mSvp, false /* isWorkProfile */);
+                mSvp, ProfileSelectFragment.ProfileType.PERSONAL);
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
@@ -213,8 +229,10 @@ public class StorageItemPreferenceControllerTest {
         assertThat(mController.mAudioPreference.isVisible()).isFalse();
         assertThat(mController.mAppsPreference.isVisible()).isFalse();
         assertThat(mController.mGamesPreference.isVisible()).isFalse();
-        assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
+        assertThat(mController.mDocumentsPreference.isVisible()).isFalse();
+        assertThat(mController.mOtherPreference.isVisible()).isFalse();
         assertThat(mController.mSystemPreference.isVisible()).isFalse();
+        assertThat(mController.mTemporaryFilesPreference.isVisible()).isFalse();
         assertThat(mController.mTrashPreference.isVisible()).isFalse();
     }
 
@@ -239,7 +257,7 @@ public class StorageItemPreferenceControllerTest {
     @Test
     public void launchAppsIntent_forWork_settingsIntent() {
         mController = new FakeStorageItemPreferenceController(mContext, mFragment, mVolume, mSvp,
-                true /* isWorkProfile */);
+                ProfileType.WORK);
         mPreference.setKey(StorageItemPreferenceController.APPS_KEY);
         mController.handlePreferenceTreeClick(mPreference);
 
@@ -265,11 +283,11 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
-    public void launchDocumentsAndOtherIntent_resolveActionViewNull_settingsIntent() {
-        mPreference.setKey(StorageItemPreferenceController.DOCUMENTS_AND_OTHER_KEY);
+    public void launchDocumentsIntent_resolveActionViewNull_settingsIntent() {
+        mPreference.setKey(StorageItemPreferenceController.DOCUMENTS_KEY);
         final Context mockContext = getMockContext();
         mController = new StorageItemPreferenceController(mockContext, mFragment, mVolume,
-                mSvp, false /* isWorkProfile */);
+                mSvp, ProfileSelectFragment.ProfileType.PERSONAL);
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
@@ -278,7 +296,24 @@ public class StorageItemPreferenceControllerTest {
 
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
-        assertThat(intent.getData()).isEqualTo(mController.mDocumentsAndOtherUri);
+        assertThat(intent.getData()).isEqualTo(mController.mDocumentsUri);
+    }
+
+    @Test
+    public void launchOtherIntent_resolveActionViewNull_settingsIntent() {
+        mPreference.setKey(StorageItemPreferenceController.OTHER_KEY);
+        final Context mockContext = getMockContext();
+        mController = new StorageItemPreferenceController(mockContext, mFragment, mVolume,
+                mSvp, ProfileSelectFragment.ProfileType.PERSONAL);
+        mController.handlePreferenceTreeClick(mPreference);
+
+        final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mockContext).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
+
+        Intent intent = argumentCaptor.getValue();
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
+        assertThat(intent.getData()).isEqualTo(mController.mOtherUri);
     }
 
     @Test
@@ -304,7 +339,7 @@ public class StorageItemPreferenceControllerTest {
         mPreference.setKey(StorageItemPreferenceController.VIDEOS_KEY);
         final Context mockContext = getMockContext();
         mController = new StorageItemPreferenceController(mockContext, mFragment, mVolume,
-                mSvp, false /* isWorkProfile */);
+                mSvp, ProfileSelectFragment.ProfileType.PERSONAL);
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
@@ -326,6 +361,16 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
+    public void testClickTemporaryFiles() {
+        mPreference.setKey(StorageItemPreferenceController.TEMPORARY_FILES_KEY);
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+
+        verify(mFragment.getFragmentManager().beginTransaction())
+                .add(nullable(StorageUtils.TemporaryFilesInfoFragment.class),
+                        nullable(String.class));
+    }
+
+    @Test
     @Config(shadows = ShadowUserManager.class)
     public void testMeasurementCompletedUpdatesPreferences() {
         mController.displayPreference(mPreferenceScreen);
@@ -336,9 +381,11 @@ public class StorageItemPreferenceControllerTest {
         result.imagesSize = MEGABYTE_IN_BYTES * 350;
         result.videosSize = GIGABYTE_IN_BYTES * 30;
         result.audioSize = MEGABYTE_IN_BYTES * 40;
-        result.documentsAndOtherSize = MEGABYTE_IN_BYTES * 50;
+        result.documentsSize = MEGABYTE_IN_BYTES * 50;
+        result.otherSize = MEGABYTE_IN_BYTES * 70;
         result.trashSize = KILOBYTE_IN_BYTES * 100;
         result.allAppsExceptGamesSize = MEGABYTE_IN_BYTES * 90;
+        result.systemSize = MEGABYTE_IN_BYTES * 60;
 
         final SparseArray<StorageAsyncLoader.StorageResult> results = new SparseArray<>();
         results.put(0, result);
@@ -349,9 +396,11 @@ public class StorageItemPreferenceControllerTest {
         assertThat(mController.mAudioPreference.getSummary().toString()).isEqualTo("40 MB");
         assertThat(mController.mAppsPreference.getSummary().toString()).isEqualTo("90 MB");
         assertThat(mController.mGamesPreference.getSummary().toString()).isEqualTo("80 MB");
-        assertThat(mController.mDocumentsAndOtherPreference.getSummary().toString())
-                .isEqualTo("50 MB");
+        assertThat(mController.mDocumentsPreference.getSummary().toString()).isEqualTo("50 MB");
+        assertThat(mController.mOtherPreference.getSummary().toString()).isEqualTo("70 MB");
         assertThat(mController.mTrashPreference.getSummary().toString()).isEqualTo("100 kB");
+        assertThat(mController.mSystemPreference.getSummary().toString())
+                .isEqualTo("60 MB");
     }
 
     @Test
@@ -366,9 +415,10 @@ public class StorageItemPreferenceControllerTest {
         verify(mController.mAudioPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mAppsPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mGamesPreference, times(2)).setIcon(nullable(Drawable.class));
-        verify(mController.mDocumentsAndOtherPreference, times(2))
-                .setIcon(nullable(Drawable.class));
+        verify(mController.mDocumentsPreference, times(2)).setIcon(nullable(Drawable.class));
+        verify(mController.mOtherPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mSystemPreference, times(2)).setIcon(nullable(Drawable.class));
+        verify(mController.mTemporaryFilesPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mTrashPreference, times(2)).setIcon(nullable(Drawable.class));
     }
 
@@ -381,7 +431,8 @@ public class StorageItemPreferenceControllerTest {
 
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isTrue();
+        assertThat(mController.mDocumentsPreference.isVisible()).isTrue();
+        assertThat(mController.mOtherPreference.isVisible()).isTrue();
     }
 
     @Test
@@ -396,7 +447,8 @@ public class StorageItemPreferenceControllerTest {
 
         mController.setPrivateStorageCategoryPreferencesVisibility(true);
 
-        assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
+        assertThat(mController.mDocumentsPreference.isVisible()).isFalse();
+        assertThat(mController.mOtherPreference.isVisible()).isFalse();
     }
 
     @Test
@@ -411,7 +463,8 @@ public class StorageItemPreferenceControllerTest {
         // And we bring it back.
         mController.setVolume(mVolume);
 
-        assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isTrue();
+        assertThat(mController.mDocumentsPreference.isVisible()).isTrue();
+        assertThat(mController.mOtherPreference.isVisible()).isTrue();
     }
 
     @Test
@@ -431,8 +484,10 @@ public class StorageItemPreferenceControllerTest {
         assertThat(mController.mAudioPreference.isVisible()).isFalse();
         assertThat(mController.mAppsPreference.isVisible()).isFalse();
         assertThat(mController.mGamesPreference.isVisible()).isFalse();
-        assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
+        assertThat(mController.mDocumentsPreference.isVisible()).isFalse();
+        assertThat(mController.mOtherPreference.isVisible()).isFalse();
         assertThat(mController.mSystemPreference.isVisible()).isFalse();
+        assertThat(mController.mTemporaryFilesPreference.isVisible()).isFalse();
         assertThat(mController.mTrashPreference.isVisible()).isFalse();
     }
 
@@ -454,8 +509,8 @@ public class StorageItemPreferenceControllerTest {
         private static final int CURRENT_USER_ID = 10;
 
         FakeStorageItemPreferenceController(Context context, Fragment hostFragment,
-                VolumeInfo volume, StorageVolumeProvider svp, boolean isWorkProfile) {
-            super(context, hostFragment, volume, svp, isWorkProfile);
+                VolumeInfo volume, StorageVolumeProvider svp, @ProfileType int profileType) {
+            super(context, hostFragment, volume, svp, profileType);
         }
 
         @Override

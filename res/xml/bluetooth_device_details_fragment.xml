@@ -69,13 +69,19 @@
         android:key="device_companion_apps"/>
 
     <PreferenceCategory
-        android:key="device_controls_general" />
+        android:key="hearing_device_group" />
+
+    <PreferenceCategory
+        android:key="bluetooth_audio_device_type_group"/>
 
     <PreferenceCategory
         android:key="spatial_audio_group"/>
 
     <PreferenceCategory
         android:key="bluetooth_profiles"/>
+
+    <PreferenceCategory
+        android:key="bt_extra_options"/>
 
     <PreferenceCategory
         android:key="bluetooth_related_tools"
@@ -88,6 +94,9 @@
             android:title="@string/live_caption_title"
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="data_sync_group"/>
 
     <Preference
         android:key="keyboard_settings"

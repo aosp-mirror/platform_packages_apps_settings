@@ -53,13 +53,14 @@ public class TimeSpentInAppPreferenceController extends LiveDataController {
     public TimeSpentInAppPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mPackageManager = context.getPackageManager();
-        mAppFeatureProvider = FeatureFactory.getFactory(context)
-                .getApplicationFeatureProvider(context);
+        mAppFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getApplicationFeatureProvider();
     }
 
     public void setPackageName(String packageName) {
         mPackageName = packageName;
         mIntent = new Intent(SEE_TIME_IN_APP_TEMPLATE)
+                .setPackage(mPackageManager.getWellbeingPackageName())
                 .putExtra(Intent.EXTRA_PACKAGE_NAME, mPackageName);
     }
 
