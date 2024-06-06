@@ -27,9 +27,11 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothStatusCodes;
@@ -44,6 +46,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
@@ -94,6 +97,7 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
     private AudioSharingCompatibilityPreferenceController mController;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private LocalBluetoothManager mLocalBluetoothManager;
+    private FakeFeatureFactory mFeatureFactory;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
 
@@ -109,6 +113,7 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBtEventManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mBtProfileManager);
         when(mBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
@@ -258,6 +263,8 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
         doNothing().when(mBroadcast).setImproveCompatibility(anyBoolean());
         boolean setChecked = mController.setChecked(false);
         verify(mBroadcast).setImproveCompatibility(false);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_IMPROVE_COMPATIBILITY, false);
         assertThat(setChecked).isTrue();
     }
 
@@ -266,6 +273,7 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
         when(mBroadcast.getImproveCompatibility()).thenReturn(true);
         boolean setChecked = mController.setChecked(true);
         verify(mBroadcast, times(0)).setImproveCompatibility(anyBoolean());
+        verifyNoInteractions(mFeatureFactory.metricsFeatureProvider);
         assertThat(setChecked).isFalse();
     }
 }

@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
@@ -32,9 +33,11 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.concurrent.Executor;
@@ -53,6 +56,7 @@ public class AudioSharingCompatibilityPreferenceController extends TogglePrefere
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private TwoStatePreference mPreference;
     private final Executor mExecutor;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
 
     private final BluetoothLeBroadcast.Callback mBroadcastCallback =
@@ -108,6 +112,7 @@ public class AudioSharingCompatibilityPreferenceController extends TogglePrefere
         mProfileManager = mBtManager == null ? null : mBtManager.getProfileManager();
         mBroadcast = mProfileManager == null ? null : mProfileManager.getLeAudioBroadcastProfile();
         mExecutor = Executors.newSingleThreadExecutor();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -178,6 +183,8 @@ public class AudioSharingCompatibilityPreferenceController extends TogglePrefere
         }
         mBroadcast.setImproveCompatibility(isChecked);
         // TODO: call updateBroadcast once framework change ready.
+        mMetricsFeatureProvider.action(
+                mContext, SettingsEnums.ACTION_AUDIO_SHARING_IMPROVE_COMPATIBILITY, isChecked);
         return true;
     }
 
