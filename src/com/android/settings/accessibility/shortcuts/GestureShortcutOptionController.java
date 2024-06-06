@@ -45,8 +45,8 @@ public class GestureShortcutOptionController extends SoftwareShortcutOptionPrefe
                     R.string.accessibility_shortcut_edit_dialog_title_software_by_gesture);
 
             int resId = AccessibilityUtil.isTouchExploreEnabled(mContext)
-                    ? R.drawable.a11y_shortcut_type_software_gesture_talkback
-                    : R.drawable.a11y_shortcut_type_software_gesture;
+                    ? R.drawable.accessibility_shortcut_type_gesture_touch_explore_on
+                    : R.drawable.accessibility_shortcut_type_gesture;
             shortcutOptionPreference.setIntroImageResId(resId);
         }
     }

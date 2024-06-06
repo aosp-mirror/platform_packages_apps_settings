@@ -33,7 +33,9 @@ import android.view.ViewGroup;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.window.embedding.ActivityEmbeddingController;
@@ -210,6 +212,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
+        if (Flags.homepageRevamp()) {
+            return;
+        }
         int tintColor = Utils.getHomepageIconColor(getContext());
         iteratePreferences(preference -> {
             Drawable icon = preference.getIcon();
@@ -364,13 +369,17 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         }
 
         job.init();
-        int count = screen.getPreferenceCount();
+        iteratePreferences(screen, job);
+    }
+
+    private void iteratePreferences(PreferenceGroup group, PreferenceJob job) {
+        int count = group.getPreferenceCount();
         for (int i = 0; i < count; i++) {
-            Preference preference = screen.getPreference(i);
-            if (preference == null) {
-                break;
-            }
+            Preference preference = group.getPreference(i);
             job.doForEach(preference);
+            if (preference instanceof PreferenceCategory) {
+                iteratePreferences((PreferenceCategory) preference, job);
+            }
         }
     }
 

@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -30,9 +31,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.flags.Flags;
 
 import org.junit.Before;
@@ -55,6 +61,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
         shadows = {
             ShadowAlertDialogCompat.class,
             ShadowBluetoothAdapter.class,
+            ShadowBluetoothUtils.class,
         })
 public class AudioSharingJoinDialogFragmentTest {
 
@@ -78,6 +85,9 @@ public class AudioSharingJoinDialogFragmentTest {
 
     @Mock private CachedBluetoothDevice mCachedDevice1;
     @Mock private CachedBluetoothDevice mCachedDevice2;
+    @Mock private LocalBluetoothManager mLocalBtManager;
+    @Mock private LocalBluetoothProfileManager mBtProfileManager;
+    @Mock private LocalBluetoothLeBroadcast mBroadcast;
     private Fragment mParent;
     private AudioSharingJoinDialogFragment mFragment;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
@@ -98,9 +108,30 @@ public class AudioSharingJoinDialogFragmentTest {
         when(mCachedDevice1.getName()).thenReturn(TEST_DEVICE_NAME1);
         when(mCachedDevice2.getName()).thenReturn(TEST_DEVICE_NAME2);
         mFragment = new AudioSharingJoinDialogFragment();
+        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
+        mLocalBtManager = Utils.getLocalBtManager(mFragment.getContext());
+        when(mLocalBtManager.getProfileManager()).thenReturn(mBtProfileManager);
+        when(mBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
+    }
+
+    @Test
+    public void getMetricsCategory_notInSharing_correctValue() {
+        when(mBroadcast.isEnabled(null)).thenReturn(false);
+        int category = mFragment.getMetricsCategory();
+        shadowMainLooper().idle();
+        assertThat(category).isEqualTo(SettingsEnums.DIALOG_START_AUDIO_SHARING);
+    }
+
+    @Test
+    public void getMetricsCategory_inSharing_correctValue() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
+        int category = mFragment.getMetricsCategory();
+        shadowMainLooper().idle();
+        assertThat(category).isEqualTo(SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE);
     }
 
     @Test
