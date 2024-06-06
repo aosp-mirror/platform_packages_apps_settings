@@ -68,7 +68,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkSettings extends AbstractMobileNetworkSettings implements
@@ -359,23 +358,17 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
     private void onSubscriptionDetailChanged() {
-        if (mSubscriptionInfoEntity != null) {
-            /**
-             * Update the title when SIM stats got changed
-             */
-            final Consumer<Activity> renameTitle = activity -> {
-                if (activity != null && !activity.isFinishing()) {
-                    if (activity instanceof SettingsActivity) {
-                        ((SettingsActivity) activity).setTitle(mSubscriptionInfoEntity.uniqueName);
-                    }
-                }
-            };
-
-            ThreadUtils.postOnMainThread(() -> {
-                renameTitle.accept(getActivity());
-                redrawPreferenceControllers();
-            });
+        final SubscriptionInfoEntity subscriptionInfoEntity = mSubscriptionInfoEntity;
+        if (subscriptionInfoEntity == null) {
+            return;
         }
+        ThreadUtils.postOnMainThread(() -> {
+            if (getActivity() instanceof SettingsActivity activity && !activity.isFinishing()) {
+                // Update the title when SIM stats got changed
+                activity.setTitle(subscriptionInfoEntity.uniqueName);
+            }
+            redrawPreferenceControllers();
+        });
     }
 
     @Override
