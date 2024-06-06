@@ -32,6 +32,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.BroadcastReceiver;
@@ -40,6 +41,7 @@ import android.content.Intent;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settings.bluetooth.Utils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.R;
@@ -77,6 +79,7 @@ public class AudioSharingReceiverTest {
     private ShadowApplication mShadowApplication;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private LocalBluetoothManager mLocalBluetoothManager;
+    private FakeFeatureFactory mFeatureFactory;
     @Mock private LocalBluetoothProfileManager mLocalBtProfileManager;
     @Mock private LocalBluetoothLeBroadcast mBroadcast;
     @Mock private LocalBluetoothManager mLocalBtManager;
@@ -97,6 +100,7 @@ public class AudioSharingReceiverTest {
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBtProfileManager);
         when(mLocalBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
@@ -156,6 +160,8 @@ public class AudioSharingReceiverTest {
 
         verify(mNm, times(1))
                 .notify(eq(R.drawable.ic_bt_le_audio_sharing), any(Notification.class));
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_SHOW_AUDIO_SHARING_NOTIFICATION);
     }
 
     @Test
@@ -170,6 +176,8 @@ public class AudioSharingReceiverTest {
         audioSharingReceiver.onReceive(mContext, intent);
 
         verify(mNm, times(1)).cancel(R.drawable.ic_bt_le_audio_sharing);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION);
     }
 
     @Test
@@ -196,6 +204,8 @@ public class AudioSharingReceiverTest {
         audioSharingReceiver.onReceive(mContext, intent);
 
         verify(mBroadcast, times(1)).stopBroadcast(broadcastId);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_STOP_AUDIO_SHARING_FROM_NOTIFICATION);
     }
 
     private AudioSharingReceiver getAudioSharingReceiver(Intent intent) {

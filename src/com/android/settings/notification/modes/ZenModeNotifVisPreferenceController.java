@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.widget.DisabledCheckBoxPreference;
 
@@ -57,7 +58,6 @@ public class ZenModeNotifVisPreferenceController extends AbstractZenModePreferen
 
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
-
         boolean suppressed = !zenMode.getPolicy().isVisualEffectAllowed(mEffect, false);
         boolean parentSuppressed = false;
         if (mParentSuppressedEffects != null) {
@@ -68,12 +68,12 @@ public class ZenModeNotifVisPreferenceController extends AbstractZenModePreferen
             }
         }
         if (parentSuppressed) {
-            ((CheckBoxPreference) preference).setChecked(true);
+            ((TwoStatePreference) preference).setChecked(true);
             onPreferenceChange(preference, true);
-            ((DisabledCheckBoxPreference) preference).enableCheckbox(false);
+            preference.setEnabled(false);
         } else {
-            ((DisabledCheckBoxPreference) preference).enableCheckbox(true);
-            ((CheckBoxPreference) preference).setChecked(suppressed);
+            preference.setEnabled(true);
+            ((TwoStatePreference) preference).setChecked(suppressed);
         }
     }
 

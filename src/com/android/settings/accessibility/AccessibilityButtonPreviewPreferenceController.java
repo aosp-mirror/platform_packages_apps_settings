@@ -46,7 +46,6 @@ public class AccessibilityButtonPreviewPreferenceController extends BasePreferen
     private final ContentResolver mContentResolver;
     @VisibleForTesting
     final ContentObserver mContentObserver;
-    private AccessibilityLayerDrawable mAccessibilityPreviewDrawable;
     @VisibleForTesting
     IllustrationPreference mIllustrationPreference;
 
@@ -108,34 +107,23 @@ public class AccessibilityButtonPreviewPreferenceController extends BasePreferen
         if (AccessibilityUtil.isFloatingMenuEnabled(mContext)) {
             final int size = Settings.Secure.getInt(mContentResolver,
                     Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, DEFAULT_SIZE);
+            // The alpha range when set on a drawable is [0-255]
             final int opacity = (int) (Settings.Secure.getFloat(mContentResolver,
-                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, DEFAULT_OPACITY) * 100);
+                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, DEFAULT_OPACITY) * 255);
             final int floatingMenuIconId = (size == SMALL_SIZE)
-                    ? R.drawable.a11y_button_preview_small_floating_menu
-                    : R.drawable.a11y_button_preview_large_floating_menu;
-            mIllustrationPreference.setImageDrawable(
-                    getAccessibilityPreviewDrawable(floatingMenuIconId, opacity));
+                    ? R.drawable.accessibility_shortcut_type_fab_size_small_preview
+                    : R.drawable.accessibility_shortcut_type_fab_size_large_preview;
+            Drawable fabDrawable = mContext.getDrawable(floatingMenuIconId);
+            fabDrawable.setAlpha(opacity);
+            mIllustrationPreference.setImageDrawable(fabDrawable);
         } else if (AccessibilityUtil.isGestureNavigateEnabled(mContext)) {
             mIllustrationPreference.setImageDrawable(mContext.getDrawable(
                     AccessibilityUtil.isTouchExploreEnabled(mContext)
-                            ? R.drawable.a11y_button_preview_three_finger
-                            : R.drawable.a11y_button_preview_two_finger));
+                            ? R.drawable.accessibility_shortcut_type_gesture_touch_explore_on
+                            : R.drawable.accessibility_shortcut_type_gesture));
         } else {
             mIllustrationPreference.setImageDrawable(
-                    mContext.getDrawable(R.drawable.a11y_button_navigation));
+                    mContext.getDrawable(R.drawable.accessibility_shortcut_type_navbar));
         }
-    }
-
-    private Drawable getAccessibilityPreviewDrawable(int resId, int opacity) {
-        if (mAccessibilityPreviewDrawable == null) {
-            mAccessibilityPreviewDrawable = AccessibilityLayerDrawable.createLayerDrawable(
-                    mContext, resId, opacity);
-        } else {
-            mAccessibilityPreviewDrawable.updateLayerDrawable(mContext, resId, opacity);
-            // Only change alpha (opacity) value did not change drawable id. It needs to force to
-            // redraw.
-            mAccessibilityPreviewDrawable.invalidateSelf();
-        }
-        return mAccessibilityPreviewDrawable;
     }
 }
