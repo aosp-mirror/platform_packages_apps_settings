@@ -60,6 +60,7 @@ import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.utils.LocaleUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.IllustrationPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -130,6 +131,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     public void onResume() {
         super.onResume();
+        final IllustrationPreference illustrationPreference =
+                getPreferenceScreen().findPreference(KEY_ANIMATED_IMAGE);
+        if (illustrationPreference != null) {
+            illustrationPreference.applyDynamicColor();
+        }
 
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);

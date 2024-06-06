@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsDashboardFragment.KEY_BROADCAST_METADATA;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -30,7 +32,6 @@ import androidx.annotation.Nullable;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
-import com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode.QrCodeScanModeFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
@@ -41,7 +42,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.google.common.base.Strings;
 
 public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
-    public static final String KEY_BROADCAST_METADATA = "key_broadcast_metadata";
     private static final String TAG = "AudioStreamConfirmDialog";
     private static final int DEFAULT_DEVICE_NAME = R.string.audio_streams_dialog_default_device;
     @Nullable private LocalBluetoothManager mLocalBluetoothManager;
@@ -63,8 +63,7 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
         mLocalBluetoothManager = Utils.getLocalBluetoothManager(mActivity);
         mProfileManager =
                 mLocalBluetoothManager == null ? null : mLocalBluetoothManager.getProfileManager();
-        mBroadcastMetadataStr =
-                mActivity.getIntent().getStringExtra(QrCodeScanModeFragment.KEY_BROADCAST_METADATA);
+        mBroadcastMetadataStr = mActivity.getIntent().getStringExtra(KEY_BROADCAST_METADATA);
         if (Strings.isNullOrEmpty(mBroadcastMetadataStr)) {
             Log.w(TAG, "onCreate() mBroadcastMetadataStr is null or empty!");
             return;

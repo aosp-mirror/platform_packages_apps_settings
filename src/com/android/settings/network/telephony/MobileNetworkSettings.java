@@ -65,13 +65,9 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkSettings extends AbstractMobileNetworkSettings implements
@@ -107,7 +103,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     private MobileNetworkRepository mMobileNetworkRepository;
     private List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
-    private Map<Integer, SubscriptionInfoEntity> mSubscriptionInfoMap = new HashMap<>();
+    @Nullable
     private SubscriptionInfoEntity mSubscriptionInfoEntity;
     private MobileNetworkInfoEntity mMobileNetworkInfoEntity;
 
@@ -362,23 +358,17 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
     private void onSubscriptionDetailChanged() {
-        if (mSubscriptionInfoEntity != null) {
-            /**
-             * Update the title when SIM stats got changed
-             */
-            final Consumer<Activity> renameTitle = activity -> {
-                if (activity != null && !activity.isFinishing()) {
-                    if (activity instanceof SettingsActivity) {
-                        ((SettingsActivity) activity).setTitle(mSubscriptionInfoEntity.uniqueName);
-                    }
-                }
-            };
-
-            ThreadUtils.postOnMainThread(() -> {
-                renameTitle.accept(getActivity());
-                redrawPreferenceControllers();
-            });
+        final SubscriptionInfoEntity subscriptionInfoEntity = mSubscriptionInfoEntity;
+        if (subscriptionInfoEntity == null) {
+            return;
         }
+        ThreadUtils.postOnMainThread(() -> {
+            if (getActivity() instanceof SettingsActivity activity && !activity.isFinishing()) {
+                // Update the title when SIM stats got changed
+                activity.setTitle(subscriptionInfoEntity.uniqueName);
+            }
+            redrawPreferenceControllers();
+        });
     }
 
     @Override
@@ -512,37 +502,26 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        // Check the current subId is existed or not, if so, finish it.
-        if (!mSubscriptionInfoMap.isEmpty()) {
-
-            // Check each subInfo and remove it in the map based on the new list.
-            for (SubscriptionInfoEntity entity : subInfoEntityList) {
-                mSubscriptionInfoMap.remove(Integer.parseInt(entity.subId));
-            }
-
-            Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
-            while (iterator.hasNext()) {
-                if (iterator.next() == mSubId && getActivity() != null) {
-                    finishFragment();
-                    return;
-                }
-            }
-        }
-
         mSubInfoEntityList = subInfoEntityList;
         SubscriptionInfoEntity[] entityArray = mSubInfoEntityList.toArray(
                 new SubscriptionInfoEntity[0]);
+        mSubscriptionInfoEntity = null;
         for (SubscriptionInfoEntity entity : entityArray) {
             int subId = Integer.parseInt(entity.subId);
-            mSubscriptionInfoMap.put(subId, entity);
-            if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID && subId == mSubId) {
+            if (subId == mSubId) {
                 mSubscriptionInfoEntity = entity;
                 Log.d(LOG_TAG, "Set subInfo for subId " + mSubId);
                 break;
-            } else if (entity.isDefaultSubscriptionSelection) {
+            } else if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                    && entity.isDefaultSubscriptionSelection) {
                 mSubscriptionInfoEntity = entity;
                 Log.d(LOG_TAG, "Set subInfo to default subInfo.");
             }
+        }
+        if (mSubscriptionInfoEntity == null && getActivity() != null) {
+            // If the current subId is not existed, finish it.
+            finishFragment();
+            return;
         }
         onSubscriptionDetailChanged();
     }
