@@ -211,24 +211,30 @@ public class AccessibilitySettings extends DashboardFragment implements
         super.onCreate(icicle);
         initializeAllPreferences();
         updateAllPreferences();
+        mNeedPreferencesUpdate = false;
         registerContentMonitors();
         registerInputDeviceListener();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        updateAllPreferences();
+    public void onStart() {
+        super.onStart();
+        mIsForeground = true;
     }
 
     @Override
-    public void onStart() {
+    public void onResume() {
+        super.onResume();
         if (mNeedPreferencesUpdate) {
             updateAllPreferences();
             mNeedPreferencesUpdate = false;
         }
-        mIsForeground = true;
-        super.onStart();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mNeedPreferencesUpdate = true;
     }
 
     @Override

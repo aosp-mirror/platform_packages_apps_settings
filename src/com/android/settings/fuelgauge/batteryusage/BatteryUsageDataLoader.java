@@ -167,6 +167,8 @@ public final class BatteryUsageDataLoader {
         try {
             final long start = System.currentTimeMillis();
             loadBatteryStatsData(context, isFullChargeStart);
+            AppOptModeSharedPreferencesUtils.resetExpiredAppOptModeBeforeTimestamp(
+                    context, System.currentTimeMillis());
             if (!isFullChargeStart) {
                 // No app usage data or battery diff data at this time.
                 final UserIdsSeries userIdsSeries =

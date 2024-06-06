@@ -643,8 +643,13 @@ public class SubscriptionUtil {
 
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class);
-        String rawPhoneNumber = subscriptionManager.getPhoneNumber(
-                subscriptionInfo.getSubscriptionId());
+        String rawPhoneNumber = "";
+        try {
+            rawPhoneNumber = subscriptionManager.getPhoneNumber(
+                    subscriptionInfo.getSubscriptionId());
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "Subscription service unavailable : " + e);
+        }
         if (TextUtils.isEmpty(rawPhoneNumber)) {
             return null;
         }
