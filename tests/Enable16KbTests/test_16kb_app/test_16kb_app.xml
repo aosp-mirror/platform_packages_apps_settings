@@ -16,8 +16,8 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.android.settings.development.test"
-          android:sharedUserId="android.uid.systemui">
+          android:installLocation="internalOnly"
+          package="com.android.settings.development.test">
     <application>
         <uses-library android:name="android.test.runner"/>
     </application>
