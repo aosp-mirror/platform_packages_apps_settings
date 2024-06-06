@@ -87,12 +87,17 @@ private fun LabelSimPreference(
     }
     val phoneNumber = phoneNumber(subInfo)
     val alertDialogPresenter = rememberAlertDialogPresenter(
-        confirmButton = AlertDialogButton(stringResource(R.string.mobile_network_sim_name_rename)) {
+        confirmButton = AlertDialogButton(
+            stringResource(R.string.mobile_network_sim_name_rename),
+            titleSimName.isNotBlank()
+        ) {
             onboardingService.addItemForRenaming(
                 subInfo, if (titleSimName.isEmpty()) originalSimCarrierName else titleSimName
             )
         },
-        dismissButton = AlertDialogButton(stringResource(R.string.cancel)) {
+        dismissButton = AlertDialogButton(
+            stringResource(R.string.cancel),
+        ) {
             titleSimName = onboardingService.getSubscriptionInfoDisplayName(subInfo)
         },
         title = stringResource(R.string.sim_onboarding_label_sim_dialog_title),
@@ -107,7 +112,7 @@ private fun LabelSimPreference(
                 placeholder = {Text(text = originalSimCarrierName)},
                 modifier = Modifier.fillMaxWidth().testTag("contentInput")
             ) {
-                titleSimName = if (it.matches(Regex("^\\s*$"))) originalSimCarrierName else it
+                titleSimName = it
             }
         },
     )
