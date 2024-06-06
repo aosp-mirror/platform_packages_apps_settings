@@ -497,6 +497,8 @@ public class WifiHotspotRepositoryTest {
         SparseIntArray channels = mSoftApConfigCaptor.getValue().getChannels();
         assertThat(channels.get(BAND_2GHZ, CHANNEL_NOT_FOUND)).isNotEqualTo(CHANNEL_NOT_FOUND);
         assertThat(channels.get(BAND_2GHZ_5GHZ, CHANNEL_NOT_FOUND)).isNotEqualTo(CHANNEL_NOT_FOUND);
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_WPA3_SAE_TRANSITION);
     }
 
     @Test

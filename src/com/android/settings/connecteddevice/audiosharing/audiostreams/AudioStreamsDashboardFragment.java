@@ -28,7 +28,6 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
-import com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode.QrCodeScanModeFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -36,6 +35,7 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.google.common.base.Strings;
 
 public class AudioStreamsDashboardFragment extends DashboardFragment {
+    public static final String KEY_BROADCAST_METADATA = "key_broadcast_metadata";
     private static final String TAG = "AudioStreamsDashboardFrag";
     private static final boolean DEBUG = BluetoothUtils.D;
     private AudioStreamsProgressCategoryController mAudioStreamsProgressCategoryController;
@@ -78,8 +78,7 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
         mAudioStreamsProgressCategoryController.setFragment(this);
 
         if (getArguments() != null) {
-            String broadcastMetadataStr =
-                    getArguments().getString(AudioStreamConfirmDialog.KEY_BROADCAST_METADATA);
+            String broadcastMetadataStr = getArguments().getString(KEY_BROADCAST_METADATA);
             if (!Strings.isNullOrEmpty(broadcastMetadataStr)) {
                 BluetoothLeBroadcastMetadata broadcastMetadata =
                         BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(
@@ -112,9 +111,7 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
         if (requestCode == REQUEST_SCAN_BT_BROADCAST_QR_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String broadcastMetadata =
-                        data != null
-                                ? data.getStringExtra(QrCodeScanModeFragment.KEY_BROADCAST_METADATA)
-                                : "";
+                        data != null ? data.getStringExtra(KEY_BROADCAST_METADATA) : "";
                 BluetoothLeBroadcastMetadata source =
                         BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(
                                 broadcastMetadata);

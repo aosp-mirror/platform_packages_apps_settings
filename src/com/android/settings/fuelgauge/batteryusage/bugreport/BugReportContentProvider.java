@@ -54,6 +54,7 @@ public final class BugReportContentProvider extends ContentProvider {
             return;
         }
         writer.println("dump BatteryUsage and AppUsage states:");
+        LogUtils.dumpAppOptimizationModeEventHist(context, writer);
         LogUtils.dumpBatteryUsageDatabaseHist(context, writer);
         LogUtils.dumpAppUsageDatabaseHist(context, writer);
         LogUtils.dumpBatteryUsageSlotDatabaseHist(context, writer);

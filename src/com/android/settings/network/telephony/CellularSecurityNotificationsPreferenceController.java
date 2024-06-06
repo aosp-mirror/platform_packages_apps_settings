@@ -24,7 +24,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.flags.Flags;
 
@@ -60,15 +59,10 @@ public class CellularSecurityNotificationsPreferenceController extends
      * @param subId is the subscription id
      * @return this instance after initialization
      */
-    public CellularSecurityNotificationsPreferenceController init(@NonNull int subId) {
+    @NonNull public CellularSecurityNotificationsPreferenceController init(@NonNull int subId) {
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         return this;
-    }
-
-    @Override
-    public void displayPreference(@NonNull PreferenceScreen screen) {
-        super.displayPreference(screen);
     }
 
     @Override
@@ -79,10 +73,6 @@ public class CellularSecurityNotificationsPreferenceController extends
 
         if (!areFlagsEnabled()) {
             return UNSUPPORTED_ON_DEVICE;
-        }
-        if (mTelephonyManager == null) {
-            Log.w(LOG_TAG, "Telephony manager not yet initialized");
-            mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         }
 
         // Checking for hardware support, i.e. IRadio AIDL version must be >= 2.2
@@ -168,6 +158,10 @@ public class CellularSecurityNotificationsPreferenceController extends
     }
 
     private boolean areNotificationsEnabled() {
+        if (mTelephonyManager == null) {
+            Log.w(LOG_TAG, "Telephony manager not yet initialized");
+            mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        }
         return mTelephonyManager.isNullCipherNotificationsEnabled()
             && mTelephonyManager.isCellularIdentifierDisclosureNotificationsEnabled();
     }
