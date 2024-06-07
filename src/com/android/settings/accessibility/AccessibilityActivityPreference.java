@@ -50,6 +50,7 @@ public class AccessibilityActivityPreference extends RestrictedPreference {
     private final AccessibilityShortcutInfo mA11yShortcutInfo;
     private final PackageManager mPm;
     private final ComponentName mComponentName;
+    private final CharSequence mLabel;
     private final ListenableFuture mExtraArgumentsFuture;
 
     public AccessibilityActivityPreference(Context context, String packageName, int uid,
@@ -58,9 +59,10 @@ public class AccessibilityActivityPreference extends RestrictedPreference {
         mPm = context.getPackageManager();
         mA11yShortcutInfo = a11yShortcutInfo;
         mComponentName = a11yShortcutInfo.getComponentName();
+        mLabel = a11yShortcutInfo.getActivityInfo().loadLabel(mPm);
         // setup basic info for a preference
         setKey(mComponentName.flattenToString());
-        setTitle(a11yShortcutInfo.getActivityInfo().loadLabel(mPm));
+        setTitle(mLabel);
         setSummary(a11yShortcutInfo.loadSummary(mPm));
         setFragment(TARGET_FRAGMENT);
         setIconSize(ICON_SIZE_MEDIUM);
@@ -90,6 +92,13 @@ public class AccessibilityActivityPreference extends RestrictedPreference {
                             + "componentName: " + mComponentName);
         }
         super.performClick();
+    }
+
+    /**
+     * Returns the label of the Accessibility Activity
+     */
+    public CharSequence getLabel() {
+        return mLabel;
     }
 
     private Drawable getA11yActivityIcon() {
