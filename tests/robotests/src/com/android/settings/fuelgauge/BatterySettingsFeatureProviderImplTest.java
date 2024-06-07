@@ -77,6 +77,12 @@ public class BatterySettingsFeatureProviderImplTest {
     }
 
     @Test
+    public void getWirelessChargingContentDescription_returnNull() {
+        assertThat(mImpl.getWirelessChargingContentDescription(mContext, new BatteryInfo()))
+                .isNull();
+    }
+
+    @Test
     public void getWirelessChargingRemainingLabel_returnNull() {
         assertThat(mImpl.getWirelessChargingRemainingLabel(mContext, 1000L, 1000L)).isNull();
     }

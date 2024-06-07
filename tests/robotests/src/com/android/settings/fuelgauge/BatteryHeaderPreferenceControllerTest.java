@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -278,6 +279,7 @@ public class BatteryHeaderPreferenceControllerTest {
     @Test
     public void updateBatteryStatus_customizedWirelessChargingLabel_customizedLabel() {
         var label = "Customized Wireless Charging Label";
+        var contentDescription = "Customized Wireless Charging description";
         var batteryInfo =
                 arrangeUpdateBatteryStatusTestWithRemainingLabel(
                         /* remainingLabel= */ "Full by 1:30 PM",
@@ -288,14 +290,19 @@ public class BatteryHeaderPreferenceControllerTest {
         when(mFactory.batterySettingsFeatureProvider.getWirelessChargingLabel(
                         eq(mContext), any(BatteryInfo.class)))
                 .thenReturn(label);
+        when(mFactory.batterySettingsFeatureProvider.getWirelessChargingContentDescription(
+                        eq(mContext), any(BatteryInfo.class)))
+                .thenReturn(contentDescription);
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
         verify(mBatteryUsageProgressBarPref).setBottomSummary(label);
+        verify(mBatteryUsageProgressBarPref).setBottomSummaryContentDescription(contentDescription);
     }
 
     @Test
     public void updateBatteryStatus_noCustomizedWirelessChargingLabel_statusWithRemainingLabel() {
+        var contentDescription = "Customized Wireless Charging description";
         var batteryInfo =
                 arrangeUpdateBatteryStatusTestWithRemainingLabel(
                         /* remainingLabel= */ "Full by 1:30 PM",
@@ -308,10 +315,13 @@ public class BatteryHeaderPreferenceControllerTest {
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
         verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+        verify(mBatteryUsageProgressBarPref, never())
+                .setBottomSummaryContentDescription(contentDescription);
     }
 
     @Test
     public void updateBatteryStatus_noCustomizedWirelessChargingLabel_v1StatusWithRemainingLabel() {
+        var contentDescription = "Customized Wireless Charging description";
         var batteryInfo =
                 arrangeUpdateBatteryStatusTestWithRemainingLabel(
                         /* remainingLabel= */ "1 hr, 40 min left until full",
@@ -324,6 +334,8 @@ public class BatteryHeaderPreferenceControllerTest {
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
         verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+        verify(mBatteryUsageProgressBarPref, never())
+                .setBottomSummaryContentDescription(contentDescription);
     }
 
     @Test
