@@ -30,6 +30,7 @@
         android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/sud_layout_icon_container"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -37,8 +38,6 @@
             android:id="@+id/lottie_animation"
             style="@style/SudContentIllustration"
             android:layout_width="match_parent"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
             android:layout_height="match_parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
