@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.data.repository
+package com.android.settings.biometrics.fingerprint2.debug.domain.interactor
 
-import android.graphics.Point
 import android.view.MotionEvent
+import com.android.settings.biometrics.fingerprint2.data.repository.SimulatedTouchEventsRepository
+import com.android.settings.biometrics.fingerprint2.domain.interactor.TouchEventInteractor
 import kotlinx.coroutines.flow.Flow
 
-/**
- * This repository simulates touch events. This is mainly used to debug accessibility and ensure
- * that talkback is correct.
- */
-interface SimulatedTouchEventsRepository {
-  /** A flow simulating user touches. */
-  val touchExplorationDebug: Flow<MotionEvent>
+class DebugTouchEventInteractorImpl(
+  udfpsSimulatedTouchEventsRepository: SimulatedTouchEventsRepository
+) : TouchEventInteractor {
+  override val touchEvent: Flow<MotionEvent> =
+    udfpsSimulatedTouchEventsRepository.touchExplorationDebug
 }

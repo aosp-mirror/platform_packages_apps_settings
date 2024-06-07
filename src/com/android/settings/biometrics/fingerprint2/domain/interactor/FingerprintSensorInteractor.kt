@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.data.repository
+package com.android.settings.biometrics.fingerprint2.domain.interactor
 
-import android.graphics.Point
-import android.view.MotionEvent
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
+import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import kotlinx.coroutines.flow.Flow
 
 /**
- * This repository simulates touch events. This is mainly used to debug accessibility and ensure
- * that talkback is correct.
+ * Interactor that propagates the type of [FingerprintSensor] this device supports.
  */
-interface SimulatedTouchEventsRepository {
-  /** A flow simulating user touches. */
-  val touchExplorationDebug: Flow<MotionEvent>
+interface FingerprintSensorInteractor {
+  /** Get the [FingerprintSensor] */
+  val fingerprintSensor: Flow<FingerprintSensor>
+}
+
+class FingerprintSensorInteractorImpl(repo: FingerprintSensorRepository) :
+  FingerprintSensorInteractor {
+  override val fingerprintSensor: Flow<FingerprintSensor> = repo.fingerprintSensor
 }
