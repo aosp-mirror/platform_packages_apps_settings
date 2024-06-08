@@ -82,6 +82,7 @@ class RFPSProgressBar : RingProgressBar {
 
     shouldAnimateInternal = shouldAnimate
   }
+
   /** This function should only be called when actual progress has been made. */
   fun updateProgress(percentComplete: Float) {
     val progress = maxProgress - (percentComplete.coerceIn(0.0f, 100.0f) * maxProgress).toInt()

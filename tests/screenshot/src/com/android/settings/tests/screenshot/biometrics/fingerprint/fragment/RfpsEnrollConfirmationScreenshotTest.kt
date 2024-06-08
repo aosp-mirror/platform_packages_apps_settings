@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.android.settings.tests.screenshot.biometrics.fingerprint.fragment
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollIntroV2Fragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollConfirmationV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
 import com.android.settings.tests.screenshot.biometrics.fingerprint.Injector
 import org.junit.Rule
@@ -27,19 +27,17 @@ import platform.test.screenshot.FragmentScreenshotTestRule
 import platform.test.screenshot.ViewScreenshotTestRule.Mode
 
 @RunWith(AndroidJUnit4::class)
-class FingerprintEnrollIntroScreenshotTest {
-  private val injector: Injector = Injector(FingerprintNavigationStep.Introduction())
+class RfpsEnrollConfirmationScreenshotTest {
+  private val injector: Injector = Injector(FingerprintNavigationStep.Confirmation)
 
-  @Rule
-  @JvmField
-  var rule: FragmentScreenshotTestRule = Injector.BiometricFragmentScreenShotRule()
+  @Rule @JvmField var rule: FragmentScreenshotTestRule = Injector.BiometricFragmentScreenShotRule()
 
   @Test
-  fun testEnrollIntro() {
+  fun testConfirmation() {
     rule.screenshotTest(
-      "fp_enroll_intro",
+      "rfps_enroll_confirmation",
       Mode.MatchSize,
-      FingerprintEnrollIntroV2Fragment(injector.factory),
+      FingerprintEnrollConfirmationV2Fragment(injector.factory),
     )
   }
 }

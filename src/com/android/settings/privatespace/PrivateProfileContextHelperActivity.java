@@ -29,6 +29,7 @@ import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LO
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
@@ -70,11 +71,20 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
         if (savedInstanceState == null) {
             int action = getIntent().getIntExtra(EXTRA_ACTION_TYPE, -1);
             if (action == ACCOUNT_LOGIN_ACTION) {
+                setContentView(R.layout.private_space_wait_screen);
                 PrivateSpaceLoginFeatureProvider privateSpaceLoginFeatureProvider =
                         FeatureFactory.getFeatureFactory().getPrivateSpaceLoginFeatureProvider();
-                if (!privateSpaceLoginFeatureProvider.initiateAccountLogin(
-                        this, mAddAccountToPrivateProfile)) {
-                    setResult(RESULT_OK);
+                UserHandle userHandle =
+                        PrivateSpaceMaintainer.getInstance(this).getPrivateProfileHandle();
+                if (userHandle != null) {
+                    if (!privateSpaceLoginFeatureProvider.initiateAccountLogin(
+                            createContextAsUser(userHandle, 0), mAddAccountToPrivateProfile)) {
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                } else {
+                    Log.w(TAG, "Private profile user handle is null");
+                    setResult(RESULT_CANCELED);
                     finish();
                 }
             } else if (action == SET_LOCK_ACTION) {
