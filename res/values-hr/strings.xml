@@ -502,7 +502,7 @@
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Odaberite zaključavanje zaslona"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Odaberite novo zaključavanje zaslona"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Zaključavanje za poslovne aplikacije"</string>
-    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Novo zaključ. poslov. prof."</string>
+    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Odaberite novo zaključavanje poslovnog profila"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Radi dodatne sigurnosti, postavite dodatni način zaključavanja zaslona"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Odaberite dodatni način zaključavanja zaslona"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ako zaboravite radnju za zaključavanje zaslona, IT administrator ga ne može poništiti."</string>
@@ -616,7 +616,7 @@
     <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{Mora sadržavati najmanje 1 znak koji nije slovo}one{Mora sadržavati najmanje # znak koji nije slovo}few{Mora sadržavati najmanje # znaka koja nisu slova}other{Mora sadržavati najmanje # znakova koji nisu slova}}"</string>
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Mora sadržavati najmanje 1 znak koji nije znamenka}one{Mora sadržavati najmanje # znak koji nije znamenka}few{Mora sadržavati najmanje # znaka koja nisu znamenke}other{Mora sadržavati najmanje # znakova koji nisu znamenke}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Administrator uređaja ne dopušta upotrebu nedavne zaporke"</string>
-    <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Uzastopno rastući ili padajući slijed brojeva ili ponavljanje brojeva nije dopušteno"</string>
+    <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Rastući, padajući ili ponavljajući slijed brojeva nije dopušten"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Potvrdi"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Izbriši"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Zaključavanje zaslona već je promijenjeno. Pokušajte ponovo s novim zaključavanjem zaslona."</string>
@@ -1782,7 +1782,7 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Preuzete aplikacije"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentalno"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Oznake značajki"</string>
-    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtriranje Bluetooth HCI snoop loga"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtriraj Bluetooth HCI snoop log"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Postavi filtre"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Onemogućite i omogućite Bluetooth da bi promjene stupile na snagu"</string>
     <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"PBAP filtriranje Bluetooth HCI snoop loga"</string>
@@ -2022,7 +2022,7 @@
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Uparite slušni uređaj"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Dostupna slušna pomagala"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Ne vidite svoje slušno pomagalo?"</string>
-    <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Pregled više uređaja"</string>
+    <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Pregledajte više uređaja"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Prilagodba zvuka"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Audioopis"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Poslušajte opis događaja na zaslonu u podržanim filmovima i emisijama"</string>
@@ -2527,7 +2527,7 @@
     <string name="data_usage_label_foreground" msgid="8782117644558473624">"Prednji plan"</string>
     <string name="data_usage_label_background" msgid="8862781660427421859">"Pozadina"</string>
     <string name="data_usage_app_restricted" msgid="312065316274378518">"ograničeno"</string>
-    <string name="data_usage_disable_mobile" msgid="6183809500102606801">"Isključiti mobilne podatke?"</string>
+    <string name="data_usage_disable_mobile" msgid="6183809500102606801">"Želite li isključiti mobilne podatke?"</string>
     <string name="data_usage_disable_mobile_limit" msgid="1370147078938479538">"Ograničenje za mobilne podatke"</string>
     <string name="data_usage_disable_4g_limit" msgid="3084868504051520840">"Postavi ograničenje za 4G"</string>
     <string name="data_usage_disable_3g_limit" msgid="8867555130268898044">"Postavi ograničenje za 2G-3G"</string>
@@ -3181,9 +3181,9 @@
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Sakrij bešumne razgovore i obavijesti"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ne prikazuj obavijesti"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Osjetljive obavijesti"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Prikaži osjetljiv sadržaj kad je zaslon zaključan"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Prikaži osjetljivi sadržaj kad je zaslon zaključan"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Osjetljive obavijesti poslovnog profila"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Prikaži osjetljiv sadržaj poslovnog profila kad je zaslon zaključan"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Prikaži osjetljivi sadržaj poslovnog profila kad je zaslon zaključan"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Prikaži cijeli sadržaj obavijesti"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Prikaži osjetljiv sadržaj samo kad je uređaj otključan"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Uopće ne prikazuj obavijesti"</string>
@@ -3265,7 +3265,7 @@
     <string name="notif_type_alerting" msgid="4713073696855718576">"Obavijesti"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Možda će zvoniti ili vibrirati, ovisno o postavkama"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Bešumno"</string>
-    <string name="notif_type_silent_summary" msgid="7820923063105060844">"Obavijesti koje su uvijek bez zvuka i vibracija"</string>
+    <string name="notif_type_silent_summary" msgid="7820923063105060844">"Obavijesti koje su uvijek bez zvuka ili vibracije"</string>
     <string name="notification_listener_allowed" msgid="5536962633536318551">"Dopušteno"</string>
     <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Nije dopušteno"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Pogledajte sve aplikacije"</string>
@@ -3666,8 +3666,8 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Dopustite toj aplikaciji čitanje, izmjenu i brisanje svih datoteka na ovom uređaju ili drugim povezanim uređajima za pohranu. Ako date to dopuštenje, aplikacija može pristupati datotekama bez vašeg znanja."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Može pristupiti svim datotekama"</string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Obavijesti na cijelom zaslonu"</string>
-    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Omogući obavijesti te aplikacije na cijelom zaslonu"</string>
-    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Omogućuje aplikaciji da prikazuje obavijesti koje zauzimaju cijeli zaslon kad je uređaj zaključan. Aplikacije na taj način mogu istaknuti alarme, dolazne pozive ili druge hitne obavijesti."</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Dopusti obavijesti te aplikacije na cijelom zaslonu"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Omogućuje toj aplikaciji da prikazuje obavijesti koje zauzimaju cijeli zaslon kad je uređaj zaključan. Aplikacije na taj način mogu istaknuti alarme, dolazne pozive ili druge hitne obavijesti."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikacije za upravljanje medijima"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Dopusti aplikaciji da upravlja medijima"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Ako je dopušteno, ta aplikacija može mijenjati ili brisati medijske datoteke izrađene putem ostalih aplikacija bez vašeg dopuštenja. Aplikacija mora imati dopuštenje za pristup datotekama i medijima."</string>
@@ -3726,7 +3726,7 @@
     <string name="condition_expand_show" msgid="1501084007540953213">"Prikaži"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"Sakrij"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"Žarišna je točka aktivna"</string>
-    <string name="condition_airplane_title" msgid="5847967403687381705">"Način rada u zrakoplovu uklj."</string>
+    <string name="condition_airplane_title" msgid="5847967403687381705">"Uključen je način rada u zrakoplovu"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"Mreže nisu dostupne"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"Način Ne uznemiravaj uključen"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Na telefonu je isključen zvuk"</string>
@@ -4514,7 +4514,7 @@
     <string name="mobile_data_temp_using" msgid="5211002380149434155">"Privremeno koristite <xliff:g id="SUBNAME">%1$s</xliff:g>"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Niste povezani"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"Mobilni podaci neće se automatski prenositi"</string>
-    <string name="mobile_data_disable_title" msgid="8438714772256088913">"Isključiti mobilne podatke?"</string>
+    <string name="mobile_data_disable_title" msgid="8438714772256088913">"Želite li isključiti mobilne podatke?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Nećete imati pristup podacima ni internetu putem usluge <xliff:g id="CARRIER">%s</xliff:g>. Internet će biti dostupan samo putem Wi-Fija."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"mobilnog operatera"</string>
     <string name="not_allowed_by_ent" msgid="1958611623122304411">"Vaša organizacija ne dopušta"</string>

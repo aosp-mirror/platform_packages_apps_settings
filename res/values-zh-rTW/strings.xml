@@ -616,7 +616,7 @@
     <string name="lockpassword_password_requires_nonletter" msgid="1185342065898300006">"{count,plural, =1{至少要有 1 個非字母半形字元}other{至少要有 # 個非字母半形字元}}"</string>
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{至少要有 1 個非數值半形字元}other{至少要有 # 個非數值半形字元}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"裝置管理員不允許使用最近用過的密碼"</string>
-    <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"不允許使用依遞增或遞減順序排列或是重複的一串數字"</string>
+    <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"不允許使用遞增、遞減或重複的數字"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"確認"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"清除"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"螢幕鎖定設定已變更，請使用新的螢幕鎖定設定再試一次。"</string>
@@ -2319,10 +2319,10 @@
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"每小時電池用量圖表"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"上次充飽電後的電池用量"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g>的電池用量"</string>
-    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"自上次充飽電後的螢幕時間"</string>
+    <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"上次充飽電後的螢幕時間"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g>的螢幕時間"</string>
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"應用程式"</string>
-    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"系統"</string>
+    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"按系統查看"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"處理程序統計資料"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"執行中處理程序的相關完善統計資料"</string>
@@ -3154,7 +3154,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"為這個應用程式啟用對話框功能後，也會一併為裝置啟用對話框功能。\n\n這麼做會影響能夠以對話框形式顯示的其他應用程式和對話。"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"開啟"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"取消"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"已開啟 / 對話能以浮動圖示形式顯示"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"已開啟 / 對話可顯示為浮動圖示"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"允許應用程式顯示對話框"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"部分對話將以浮動圖示形式，顯示在其他應用程式的上層"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"所有對話都能以對話框形式顯示"</string>
@@ -3175,7 +3175,7 @@
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"工作資料夾鎖定時"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"螢幕鎖定畫面上只顯示新通知"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"自動從螢幕鎖定畫面移除先前看過的通知"</string>
-    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"螢幕鎖定畫面上的通知"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"螢幕鎖定畫面通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"顯示對話通知、預設通知和已設為靜音的通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"顯示對話通知、預設通知和已設為靜音的通知"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"隱藏已設為靜音的對話和通知"</string>
@@ -3328,7 +3328,7 @@
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"允許在裝置鎖定時顯示全螢幕通知。"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"允許使用通知圓點"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"顯示通知圓點"</string>
-    <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"忽略「零打擾」模式設定"</string>
+    <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"忽略「零打擾」模式"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"允許系統在「零打擾」模式開啟時繼續發出這些通知"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"螢幕鎖定"</string>
     <string name="app_notifications_dialog_done" msgid="573716608705273004">"完成"</string>
@@ -4504,7 +4504,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"通話"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"簡訊"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"行動數據"</string>
-    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"為提升裝置使用體驗，應用程式和服務仍可隨時掃描 Wi‑Fi 網路 (即使 Wi-Fi 關閉時也不例外)，改善適地性等功能和服務。你可以前往「掃描 Wi-Fi」設定進行變更。"</string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"為提升裝置使用體驗，應用程式和服務仍可隨時掃描 Wi‑Fi 網路 (即使 Wi-Fi 關閉時也不例外)，改善需要位置資訊的功能和服務。你可以前往「掃描 Wi-Fi」設定進行變更。"</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"變更"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"已連線"</string>
