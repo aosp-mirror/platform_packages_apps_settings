@@ -36,6 +36,7 @@ sealed class FingerprintVibrationEffects {
   /** This vibration typically occurs when a help message is shown during UDFPS enrollment */
   data object UdfpsHelp : FingerprintVibrationEffects()
 }
+
 /** Interface for sending haptic feedback */
 interface VibrationInteractor {
   /** This will send a haptic vibration */
@@ -43,8 +44,9 @@ interface VibrationInteractor {
 }
 
 /** Implementation of the VibrationInteractor interface */
-class VibrationInteractorImpl(val vibrator: Vibrator, val applicationContext: Context) :
-  VibrationInteractor {
+class VibrationInteractorImpl(val applicationContext: Context) : VibrationInteractor {
+  val vibrator = applicationContext.getSystemService(Vibrator::class.java)!!
+
   override fun vibrate(effect: FingerprintVibrationEffects, caller: String) {
     val callerString = "$caller::$effect"
     val res =

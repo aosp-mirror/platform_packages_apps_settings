@@ -20,6 +20,7 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_weight="1"
+    android:focusable="true"
     android:orientation="vertical">
 
     <ImageView
@@ -54,7 +55,8 @@
         <ImageView
             android:id="@+id/bt_battery_icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/bluetooth_header_battery_content_description" />
         <TextView
             android:id="@+id/bt_battery_summary"
             style="@style/TextAppearance.EntityHeaderSummary"

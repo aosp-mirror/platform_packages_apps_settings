@@ -34,12 +34,12 @@ import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadow
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
@@ -59,7 +59,7 @@ public class AudioStreamButtonControllerTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     private static final String KEY = "audio_stream_button";
     private static final int BROADCAST_ID = 1;
-    @Spy Context mContext = ApplicationProvider.getApplicationContext();
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock private AudioStreamsHelper mAudioStreamsHelper;
     @Mock private PreferenceScreen mScreen;
     @Mock private BluetoothLeBroadcastReceiveState mBroadcastReceiveState;
@@ -78,6 +78,11 @@ public class AudioStreamButtonControllerTest {
         when(mPreference.setButton1Enabled(anyBoolean())).thenReturn(mPreference);
         when(mPreference.setButton1OnClickListener(any(View.OnClickListener.class)))
                 .thenReturn(mPreference);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAudioStreamsHelper.reset();
     }
 
     @Test

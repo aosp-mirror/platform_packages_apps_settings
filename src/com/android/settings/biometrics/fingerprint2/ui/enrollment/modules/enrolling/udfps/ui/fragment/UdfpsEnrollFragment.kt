@@ -18,8 +18,6 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrol
 
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
-import android.view.MotionEvent.ACTION_HOVER_MOVE
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -27,6 +25,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -36,6 +35,7 @@ import com.airbnb.lottie.LottieCompositionFactory
 import com.android.settings.R
 import com.android.settings.biometrics.fingerprint2.data.model.EnrollStageModel
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.common.util.toFingerprintEnrollOptions
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.common.widget.FingerprintErrorDialog
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.model.DescriptionText
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.model.HeaderText
@@ -50,17 +50,10 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
 
   /** Used for testing purposes */
   private var factory: ViewModelProvider.Factory? = null
-  private val viewModel: UdfpsViewModel by lazy { viewModelProvider[UdfpsViewModel::class.java] }
   private lateinit var udfpsEnrollView: UdfpsEnrollViewV2
   private lateinit var lottie: LottieAnimationView
 
-  private val viewModelProvider: ViewModelProvider by lazy {
-    if (factory != null) {
-      ViewModelProvider(requireActivity(), factory!!)
-    } else {
-      ViewModelProvider(requireActivity())
-    }
-  }
+  private val viewModel: UdfpsViewModel by activityViewModels { factory ?: UdfpsViewModel.Factory }
 
   @VisibleForTesting
   constructor(theFactory: ViewModelProvider.Factory) : this() {
@@ -90,6 +83,7 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
 
     viewLifecycleOwner.lifecycleScope.launch {
       repeatOnLifecycle(Lifecycle.State.RESUMED) {
+        viewModel.enroll(requireActivity().intent.toFingerprintEnrollOptions())
         launch {
           viewModel.sensorLocation.collect { sensor ->
             udfpsEnrollView.setSensorRect(sensor.sensorBounds, sensor.sensorType)
@@ -204,12 +198,16 @@ class UdfpsEnrollFragment() : Fragment(R.layout.fingerprint_v2_udfps_enroll_enro
     }
 
     viewLifecycleOwner.lifecycleScope.launch {
-      viewModel.touchExplorationDebug.collect {
-        udfpsEnrollView.sendDebugTouchExplorationEvent(
-          MotionEvent.obtain(100, 100, ACTION_HOVER_MOVE, it.x.toFloat(), it.y.toFloat(), 0)
-        )
+      view.setOnTouchListener { _, motionEvent ->
+        viewModel.onTouchEvent(motionEvent)
+        false
       }
     }
+
+    viewLifecycleOwner.lifecycleScope.launch {
+      viewModel.touchEvent.collect { udfpsEnrollView.onTouchEvent(it) }
+    }
+
     viewModel.readyForEnrollment()
   }
 

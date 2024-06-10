@@ -17,6 +17,7 @@
 package com.android.settings.connecteddevice.audiosharing;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -33,8 +34,7 @@ public class AudioSharingConfirmDialogFragment extends InstrumentedDialogFragmen
 
     @Override
     public int getMetricsCategory() {
-        // TODO: add metrics category.
-        return 0;
+        return SettingsEnums.DIALOG_AUDIO_SHARING_CONFIRMATION;
     }
 
     /**
@@ -63,7 +63,7 @@ public class AudioSharingConfirmDialogFragment extends InstrumentedDialogFragmen
                         .setTitleIcon(com.android.settingslib.R.drawable.ic_bt_le_audio_sharing)
                         .setIsCustomBodyEnabled(true)
                         .setCustomMessage(R.string.audio_sharing_comfirm_dialog_content)
-                        .setPositiveButton(com.android.settings.R.string.okay, (d, w) -> dismiss())
+                        .setPositiveButton(com.android.settings.R.string.okay, (d, w) -> {})
                         .build();
         dialog.setCanceledOnTouchOutside(true);
         return dialog;

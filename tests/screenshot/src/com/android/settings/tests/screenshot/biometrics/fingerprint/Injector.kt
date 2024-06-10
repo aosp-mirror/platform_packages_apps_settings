@@ -42,7 +42,6 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
 import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import kotlinx.coroutines.flow.Flow
@@ -95,23 +94,27 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
 
       override fun getRotationFromDefault(rotation: Int): Int = rotation
     }
-  var gatekeeperViewModel =
-    FingerprintGatekeeperViewModel(
-      GatekeeperInfo.GatekeeperPasswordInfo(byteArrayOf(1, 2, 3), 100L),
-      interactor,
-    )
+  var gatekeeperViewModel = FingerprintGatekeeperViewModel(fingerprintManagerInteractor)
 
-  val flowViewModel = FingerprintFlowViewModel(enrollFlow)
+  val flowViewModel = FingerprintFlowViewModel()
 
-  var navigationViewModel = FingerprintNavigationViewModel(step, true, flowViewModel, interactor)
+  var navigationViewModel = FingerprintNavigationViewModel(fingerprintManagerInteractor)
   var fingerprintViewModel =
-    FingerprintEnrollIntroViewModel(navigationViewModel, flowViewModel, interactor)
+    FingerprintEnrollIntroViewModel(
+      navigationViewModel,
+      flowViewModel,
+      fingerprintManagerInteractor,
+    )
 
   var fingerprintScrollViewModel = FingerprintScrollViewModel()
   var backgroundViewModel = BackgroundViewModel()
 
   var fingerprintEnrollViewModel =
-    FingerprintEnrollViewModel(interactor, gatekeeperViewModel, navigationViewModel)
+    FingerprintEnrollViewModel(
+      fingerprintManagerInteractor,
+      gatekeeperViewModel,
+      navigationViewModel,
+    )
 
   var fingerprintEnrollEnrollingViewModel =
     FingerprintEnrollEnrollingViewModel(fingerprintEnrollViewModel, backgroundViewModel)
@@ -122,11 +125,11 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
       fingerprintEnrollEnrollingViewModel,
       navigationViewModel,
       orientationInteractor,
-      interactor,
+      fingerprintManagerInteractor,
     )
 
   val fingerprintEnrollConfirmationViewModel =
-    FingerprintEnrollConfirmationViewModel(navigationViewModel, interactor)
+    FingerprintEnrollConfirmationViewModel(navigationViewModel, fingerprintManagerInteractor)
 
   var fingerprintFindSensorViewModel =
     FingerprintEnrollFindSensorViewModel(
@@ -134,11 +137,11 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
       fingerprintEnrollViewModel,
       gatekeeperViewModel,
       backgroundViewModel,
+      flowViewModel,
       accessibilityInteractor,
       foldStateInteractor,
       orientationInteractor,
-      flowViewModel,
-      interactor,
+      fingerprintManagerInteractor,
     )
 
   val factory =
@@ -166,12 +169,16 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
 
   init {
     fingerprintEnrollViewModel.sensorTypeCached = fingerprintSensor.sensorType
+    gatekeeperViewModel.onConfirmDevice(true, 100L)
+    navigationViewModel.updateFingerprintFlow(enrollFlow)
+    navigationViewModel.hasConfirmedDeviceCredential(true)
+    flowViewModel.updateFlowType(enrollFlow)
   }
 
   companion object {
     private val Phone = DisplaySpec("phone", width = 1080, height = 2340, densityDpi = 420)
     private const val screenshotPath = "/settings_screenshots"
-    val interactor = FakeFingerprintManagerInteractor()
+    val fingerprintManagerInteractor = FakeFingerprintManagerInteractor()
 
     fun BiometricFragmentScreenShotRule() =
       FragmentScreenshotTestRule(

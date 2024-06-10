@@ -19,15 +19,14 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController.REQUEST_SCAN_BT_BROADCAST_QR_CODE;
 
 import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
-import com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode.QrCodeScanModeActivity;
-import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.utils.ThreadUtils;
 
 class WaitForSyncState extends AudioStreamStateHandler {
@@ -102,14 +101,16 @@ class WaitForSyncState extends AudioStreamStateHandler {
                 .setRightButtonOnClickListener(
                         dialog -> {
                             if (controller.getFragment() != null) {
-                                Intent intent = new Intent(context, QrCodeScanModeActivity.class);
-                                intent.setAction(
-                                        BluetoothBroadcastUtils
-                                                .ACTION_BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER);
-                                controller
-                                        .getFragment()
-                                        .startActivityForResult(
-                                                intent, REQUEST_SCAN_BT_BROADCAST_QR_CODE);
+                                new SubSettingLauncher(context)
+                                        .setTitleRes(
+                                                R.string.audio_streams_main_page_scan_qr_code_title)
+                                        .setDestination(
+                                                AudioStreamsQrCodeScanFragment.class.getName())
+                                        .setResultListener(
+                                                controller.getFragment(),
+                                                REQUEST_SCAN_BT_BROADCAST_QR_CODE)
+                                        .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
+                                        .launch();
                                 dialog.dismiss();
                             }
                         });

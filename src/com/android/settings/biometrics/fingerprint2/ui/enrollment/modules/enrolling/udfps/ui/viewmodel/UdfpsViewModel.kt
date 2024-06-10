@@ -16,21 +16,26 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel
 
-import android.graphics.Point
 import android.graphics.PointF
+import android.hardware.fingerprint.FingerprintEnrollOptions
+import android.view.MotionEvent
 import android.view.Surface
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.fingerprint2.data.model.EnrollStageModel
-import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
-import com.android.settings.biometrics.fingerprint2.data.repository.SimulatedTouchEventsRepository
 import com.android.settings.biometrics.fingerprint2.domain.interactor.AccessibilityInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.DebuggingInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.DisplayDensityInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollStageInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintSensorInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintVibrationEffects
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.TouchEventInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.UdfpsEnrollInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.VibrationInteractor
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
@@ -45,6 +50,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -60,20 +66,20 @@ import kotlinx.coroutines.launch
 
 /** ViewModel used to drive UDFPS Enrollment through [UdfpsEnrollFragment] */
 class UdfpsViewModel(
+  val navigationViewModel: FingerprintNavigationViewModel,
+  val fingerprintEnrollEnrollingViewModel: FingerprintEnrollEnrollingViewModel,
+  backgroundViewModel: BackgroundViewModel,
+  val udfpsLastStepViewModel: UdfpsLastStepViewModel,
   val vibrationInteractor: VibrationInteractor,
   displayDensityInteractor: DisplayDensityInteractor,
-  val navigationViewModel: FingerprintNavigationViewModel,
   debuggingInteractor: DebuggingInteractor,
-  val fingerprintEnrollEnrollingViewModel: FingerprintEnrollEnrollingViewModel,
-  simulatedTouchEventsDebugRepository: SimulatedTouchEventsRepository,
   enrollStageInteractor: EnrollStageInteractor,
   orientationInteractor: OrientationInteractor,
-  backgroundViewModel: BackgroundViewModel,
-  sensorRepository: FingerprintSensorRepository,
   udfpsEnrollInteractor: UdfpsEnrollInteractor,
   fingerprintManager: FingerprintManagerInteractor,
-  val udfpsLastStepViewModel: UdfpsLastStepViewModel,
   accessibilityInteractor: AccessibilityInteractor,
+  sensorRepository: FingerprintSensorInteractor,
+  touchEventInteractor: TouchEventInteractor,
 ) : ViewModel() {
 
   private val isSetupWizard = flowOf(false)
@@ -191,15 +197,9 @@ class UdfpsViewModel(
       .transform { emit(it == Surface.ROTATION_90) }
       .distinctUntilChanged()
 
-  /** This sends touch exploration events only used for debugging purposes. */
-  val touchExplorationDebug: Flow<Point> =
-    debuggingInteractor.debuggingEnabled.combineTransform(
-      simulatedTouchEventsDebugRepository.touchExplorationDebug
-    ) { enabled, point ->
-      if (enabled) {
-        emit(point)
-      }
-    }
+  private val _touchEvent: MutableStateFlow<MotionEvent?> = MutableStateFlow(null)
+  val touchEvent =
+    _touchEvent.asStateFlow().filterNotNull()
 
   /** Determines the current [EnrollStageModel] enrollment is in */
   private val enrollStage: Flow<EnrollStageModel> =
@@ -265,6 +265,12 @@ class UdfpsViewModel(
 
     viewModelScope.launch {
       backgroundViewModel.background.filter { it }.collect { didGoToBackground() }
+    }
+
+    viewModelScope.launch {
+      touchEventInteractor.touchEvent.collect {
+        _touchEvent.update { it }
+      }
     }
   }
 
@@ -393,47 +399,43 @@ class UdfpsViewModel(
     )
   }
 
-  class UdfpsEnrollmentFactory(
-    private val vibrationInteractor: VibrationInteractor,
-    private val displayDensityInteractor: DisplayDensityInteractor,
-    private val navigationViewModel: FingerprintNavigationViewModel,
-    private val debuggingInteractor: DebuggingInteractor,
-    private val fingerprintEnrollEnrollingViewModel: FingerprintEnrollEnrollingViewModel,
-    private val simulatedTouchEventsRepository: SimulatedTouchEventsRepository,
-    private val enrollStageInteractor: EnrollStageInteractor,
-    private val orientationInteractor: OrientationInteractor,
-    private val backgroundViewModel: BackgroundViewModel,
-    private val sensorRepository: FingerprintSensorRepository,
-    private val udfpsEnrollInteractor: UdfpsEnrollInteractor,
-    private val fingerprintManager: FingerprintManagerInteractor,
-    private val udfpsLastStepViewModel: UdfpsLastStepViewModel,
-    private val accessibilityInteractor: AccessibilityInteractor,
-  ) : ViewModelProvider.Factory {
+  /** Starts enrollment. */
+  fun enroll(enrollOptions: FingerprintEnrollOptions) {
+    fingerprintEnrollEnrollingViewModel.enroll(enrollOptions)
+  }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return UdfpsViewModel(
-        vibrationInteractor,
-        displayDensityInteractor,
-        navigationViewModel,
-        debuggingInteractor,
-        fingerprintEnrollEnrollingViewModel,
-        simulatedTouchEventsRepository,
-        enrollStageInteractor,
-        orientationInteractor,
-        backgroundViewModel,
-        sensorRepository,
-        udfpsEnrollInteractor,
-        fingerprintManager,
-        udfpsLastStepViewModel,
-        accessibilityInteractor,
-      )
-        as T
-    }
+  /** Indicates a touch event has occurred. */
+  fun onTouchEvent(event: MotionEvent) {
+    _touchEvent.update { event }
   }
 
   companion object {
     private val navStep = FingerprintNavigationStep.Enrollment::class
     private const val TAG = "UDFPSViewModel"
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer {
+        val settingsApplication =
+          this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as SettingsApplication
+        val biometricEnvironment = settingsApplication.biometricEnvironment!!
+        val provider = ViewModelProvider(this[VIEW_MODEL_STORE_OWNER_KEY]!!)
+
+        UdfpsViewModel(
+          provider[FingerprintNavigationViewModel::class],
+          provider[FingerprintEnrollEnrollingViewModel::class],
+          provider[BackgroundViewModel::class],
+          provider[UdfpsLastStepViewModel::class],
+          biometricEnvironment.vibrationInteractor,
+          biometricEnvironment.displayDensityInteractor,
+          biometricEnvironment.debuggingInteractor,
+          biometricEnvironment.enrollStageInteractor,
+          biometricEnvironment.orientationInteractor,
+          biometricEnvironment.udfpsEnrollInteractor,
+          biometricEnvironment.fingerprintManagerInteractor,
+          biometricEnvironment.accessibilityInteractor,
+          biometricEnvironment.sensorInteractor,
+          biometricEnvironment.touchEventInteractor,
+        )
+      }
+    }
   }
 }

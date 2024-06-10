@@ -34,12 +34,12 @@ import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.widget.LayoutPreference;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
@@ -61,7 +61,7 @@ public class AudioStreamHeaderControllerTest {
     private static final String KEY = "audio_stream_header";
     private static final int BROADCAST_ID = 1;
     private static final String BROADCAST_NAME = "broadcast name";
-    @Spy Context mContext = ApplicationProvider.getApplicationContext();
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock private AudioStreamsHelper mAudioStreamsHelper;
     @Mock private PreferenceScreen mScreen;
     @Mock private BluetoothLeBroadcastReceiveState mBroadcastReceiveState;
@@ -79,6 +79,12 @@ public class AudioStreamHeaderControllerTest {
         when(mScreen.findPreference(KEY)).thenReturn(mPreference);
         when(mScreen.getContext()).thenReturn(mContext);
         when(mPreference.getContext()).thenReturn(mContext);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowEntityHeaderController.reset();
+        ShadowAudioStreamsHelper.reset();
     }
 
     @Test

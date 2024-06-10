@@ -43,6 +43,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Set;
 
@@ -120,7 +121,20 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     }
 
     @Override
-    public CharSequence getSummary() {
+    protected void refreshSummary(Preference preference) {
+        if (preference == null) {
+            return;
+        }
+
+        // Loading the hearing aids summary requires IPC call, which can block the UI thread.
+        // To reduce page loading latency, move loadSummary in the background thread.
+        ThreadUtils.postOnBackgroundThread(() -> {
+            CharSequence summary = loadSummary();
+            ThreadUtils.getUiThreadHandler().post(() -> preference.setSummary(summary));
+        });
+    }
+
+    private CharSequence loadSummary() {
         final CachedBluetoothDevice device = mHelper.getConnectedHearingAidDevice();
         if (device == null) {
             return mContext.getText(R.string.accessibility_hearingaid_not_connected_summary);

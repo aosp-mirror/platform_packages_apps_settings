@@ -43,6 +43,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.overlay.FeatureFactory;
@@ -274,9 +275,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
         final int currentOptimizeMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         mLogStringBuilder.append(", onPause mode = ").append(currentOptimizeMode);
         logMetricCategory(currentOptimizeMode);
-
         mExecutor.execute(
                 () -> {
+                    if (currentOptimizeMode != mOptimizationMode) {
+                        AppOptModeSharedPreferencesUtils.deleteAppOptimizationModeEventByUid(
+                                getContext(), mBatteryOptimizeUtils.getUid());
+                    }
                     BatteryOptimizeLogUtils.writeLog(
                             getContext().getApplicationContext(),
                             Action.LEAVE,
