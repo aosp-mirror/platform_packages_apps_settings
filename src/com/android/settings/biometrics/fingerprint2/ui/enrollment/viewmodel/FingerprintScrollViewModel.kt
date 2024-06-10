@@ -18,6 +18,8 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,11 +38,9 @@ class FingerprintScrollViewModel : ViewModel() {
     _hasReadConsentScreen.update { true }
   }
 
-  class FingerprintScrollViewModelFactory : ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return FingerprintScrollViewModel() as T
+  companion object {
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer { FingerprintScrollViewModel() }
     }
   }
 }
