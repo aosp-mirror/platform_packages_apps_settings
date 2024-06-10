@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilitySettings.VOICE_ACCESS_SERVICE;
-import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;
@@ -26,20 +25,13 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 
-import androidx.core.content.ContextCompat;
-
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.development.Enable16kUtils;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
@@ -58,13 +50,11 @@ public class RestrictedPreferenceHelper {
 
     private final Context mContext;
     private final DevicePolicyManager mDpm;
-    private final PackageManager mPm;
     private final AppOpsManager mAppOps;
 
     public RestrictedPreferenceHelper(Context context) {
         mContext = context;
         mDpm = context.getSystemService(DevicePolicyManager.class);
-        mPm = context.getPackageManager();
         mAppOps = context.getSystemService(AppOpsManager.class);
     }
 
@@ -96,59 +86,29 @@ public class RestrictedPreferenceHelper {
                     && Enable16kUtils.isPageAgnosticModeOn(mContext)) {
                 continue;
             }
+
             final ComponentName componentName = new ComponentName(packageName,
                     resolveInfo.serviceInfo.name);
-
-            final String key = componentName.flattenToString();
-            final CharSequence title = resolveInfo.loadLabel(mPm);
             final boolean serviceEnabled = enabledServices.contains(componentName);
-            final CharSequence summary = AccessibilitySettings.getServiceSummary(
-                    mContext, info, serviceEnabled);
-            final String fragment = getAccessibilityServiceFragmentTypeName(info);
 
-            Drawable icon = resolveInfo.loadIcon(mPm);
-            if (resolveInfo.getIconResource() == 0) {
-                icon = ContextCompat.getDrawable(mContext,
-                        R.drawable.ic_accessibility_generic);
-            }
-
-            final RestrictedPreference preference = createRestrictedPreference(key, title,
-                    summary, icon, fragment, packageName,
-                    resolveInfo.serviceInfo.applicationInfo.uid);
-
+            RestrictedPreference preference = new AccessibilityServicePreference(
+                    mContext, packageName, resolveInfo.serviceInfo.applicationInfo.uid,
+                    info, serviceEnabled);
             setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
-
-            final String prefKey = preference.getKey();
-            final int imageRes = info.getAnimatedImageRes();
-            final CharSequence intro = info.loadIntro(mPm);
-            final CharSequence description = AccessibilitySettings.getServiceDescription(
-                    mContext, info, serviceEnabled);
-            final String htmlDescription = info.loadHtmlDescription(mPm);
-            final String settingsClassName = info.getSettingsActivityName();
-            final String tileServiceClassName = info.getTileServiceName();
-            final int metricsCategory = FeatureFactory.getFeatureFactory()
-                    .getAccessibilityMetricsFeatureProvider()
-                    .getDownloadedFeatureMetricsCategory(componentName);
-
-            putBasicExtras(preference, prefKey, title, intro, description, imageRes,
-                    htmlDescription, componentName, metricsCategory);
-            putServiceExtras(preference, resolveInfo, serviceEnabled);
-            putSettingsExtras(preference, packageName, settingsClassName);
-            putTileServiceExtras(preference, packageName, tileServiceClassName);
-
             preferenceList.add(preference);
         }
         return preferenceList;
     }
 
     /**
-     * Creates the list of {@link RestrictedPreference} with the installedShortcuts arguments.
+     * Creates the list of {@link AccessibilityActivityPreference} with the installedShortcuts
+     * arguments.
      *
      * @param installedShortcuts The list of {@link AccessibilityShortcutInfo}s of the
      *                           installed accessibility shortcuts
-     * @return The list of {@link RestrictedPreference}
+     * @return The list of {@link AccessibilityActivityPreference}
      */
-    public List<RestrictedPreference> createAccessibilityActivityPreferenceList(
+    public List<AccessibilityActivityPreference> createAccessibilityActivityPreferenceList(
             List<AccessibilityShortcutInfo> installedShortcuts) {
         final Set<ComponentName> enabledServices =
                 AccessibilityUtils.getEnabledServicesFromSettings(mContext);
@@ -156,7 +116,7 @@ public class RestrictedPreferenceHelper {
                 UserHandle.myUserId());
 
         final int installedShortcutsSize = installedShortcuts.size();
-        final List<RestrictedPreference> preferenceList = new ArrayList<>(
+        final List<AccessibilityActivityPreference> preferenceList = new ArrayList<>(
                 installedShortcutsSize);
 
         for (int i = 0; i < installedShortcutsSize; ++i) {
@@ -164,47 +124,17 @@ public class RestrictedPreferenceHelper {
             final ActivityInfo activityInfo = info.getActivityInfo();
             final ComponentName componentName = info.getComponentName();
 
-            final String key = componentName.flattenToString();
-            final CharSequence title = activityInfo.loadLabel(mPm);
-            final String summary = info.loadSummary(mPm);
-            final String fragment =
-                    LaunchAccessibilityActivityPreferenceFragment.class.getName();
-
-            Drawable icon = activityInfo.loadIcon(mPm);
-            if (activityInfo.getIconResource() == 0) {
-                icon = ContextCompat.getDrawable(mContext, R.drawable.ic_accessibility_generic);
-            }
-
-            final RestrictedPreference preference = createRestrictedPreference(key, title,
-                    summary, icon, fragment, componentName.getPackageName(),
-                    activityInfo.applicationInfo.uid);
             final boolean serviceEnabled = enabledServices.contains(componentName);
-
+            AccessibilityActivityPreference preference = new AccessibilityActivityPreference(
+                    mContext, componentName.getPackageName(), activityInfo.applicationInfo.uid,
+                    info);
             setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
-
-            final String prefKey = preference.getKey();
-            final CharSequence intro = info.loadIntro(mPm);
-            final String description = info.loadDescription(mPm);
-            final int imageRes = info.getAnimatedImageRes();
-            final String htmlDescription = info.loadHtmlDescription(mPm);
-            final String settingsClassName = info.getSettingsActivityName();
-            final String tileServiceClassName = info.getTileServiceName();
-            final int metricsCategory = FeatureFactory.getFeatureFactory()
-                    .getAccessibilityMetricsFeatureProvider()
-                    .getDownloadedFeatureMetricsCategory(componentName);
-
-            putBasicExtras(preference, prefKey, title, intro, description, imageRes,
-                    htmlDescription, componentName, metricsCategory);
-            putSettingsExtras(preference, componentName.getPackageName(), settingsClassName);
-            putTileServiceExtras(preference, componentName.getPackageName(),
-                    tileServiceClassName);
-
             preferenceList.add(preference);
         }
         return preferenceList;
     }
 
-    private String getAccessibilityServiceFragmentTypeName(AccessibilityServiceInfo info) {
+    static String getAccessibilityServiceFragmentTypeName(AccessibilityServiceInfo info) {
         final int type = AccessibilityUtil.getAccessibilityServiceFragmentType(info);
         switch (type) {
             case AccessibilityUtil.AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE:
@@ -217,23 +147,6 @@ public class RestrictedPreferenceHelper {
                 throw new IllegalArgumentException(
                         "Unsupported accessibility fragment type " + type);
         }
-    }
-
-    private RestrictedPreference createRestrictedPreference(String key, CharSequence title,
-            CharSequence summary, Drawable icon, String fragment, String packageName, int uid) {
-        final RestrictedPreference preference = new RestrictedPreference(mContext, packageName,
-                uid);
-
-        preference.setKey(key);
-        preference.setTitle(title);
-        preference.setSummary(summary);
-        preference.setIcon(Utils.getAdaptiveIcon(mContext, icon, Color.WHITE));
-        preference.setFragment(fragment);
-        preference.setIconSize(ICON_SIZE_MEDIUM);
-        preference.setPersistent(false); // Disable SharedPreferences.
-        preference.setOrder(FIRST_PREFERENCE_IN_CATEGORY_INDEX);
-
-        return preference;
     }
 
     private void setRestrictedPreferenceEnabled(RestrictedPreference preference,
@@ -304,7 +217,7 @@ public class RestrictedPreferenceHelper {
     }
 
     /** Puts the basic extras into {@link RestrictedPreference}'s getExtras(). */
-    private void putBasicExtras(RestrictedPreference preference, String prefKey,
+    static void putBasicExtras(RestrictedPreference preference, String prefKey,
             CharSequence title, CharSequence intro, CharSequence summary, int imageRes,
             String htmlDescription, ComponentName componentName, int metricsCategory) {
         final Bundle extras = preference.getExtras();
@@ -327,7 +240,7 @@ public class RestrictedPreferenceHelper {
      * @param resolveInfo The service resolve info.
      * @param serviceEnabled Whether the accessibility service is enabled.
      */
-    private void putServiceExtras(RestrictedPreference preference, ResolveInfo resolveInfo,
+    static void putServiceExtras(RestrictedPreference preference, ResolveInfo resolveInfo,
             Boolean serviceEnabled) {
         final Bundle extras = preference.getExtras();
 
@@ -345,13 +258,14 @@ public class RestrictedPreferenceHelper {
      * @param settingsClassName The component name of an activity that allows the user to modify
      *                          the settings for this accessibility feature.
      */
-    private void putSettingsExtras(RestrictedPreference preference, String packageName,
+    static void putSettingsExtras(RestrictedPreference preference, String packageName,
             String settingsClassName) {
         final Bundle extras = preference.getExtras();
 
         if (!TextUtils.isEmpty(settingsClassName)) {
             extras.putString(AccessibilitySettings.EXTRA_SETTINGS_TITLE,
-                    mContext.getText(R.string.accessibility_menu_item_settings).toString());
+                    preference.getContext().getText(
+                            R.string.accessibility_menu_item_settings).toString());
             extras.putString(AccessibilitySettings.EXTRA_SETTINGS_COMPONENT_NAME,
                     new ComponentName(packageName, settingsClassName).flattenToString());
         }
@@ -370,7 +284,7 @@ public class RestrictedPreferenceHelper {
      * @param tileServiceClassName The component name of tileService is associated with this
      *                             accessibility feature.
      */
-    private void putTileServiceExtras(RestrictedPreference preference, String packageName,
+    static void putTileServiceExtras(RestrictedPreference preference, String packageName,
             String tileServiceClassName) {
         final Bundle extras = preference.getExtras();
         if (!TextUtils.isEmpty(tileServiceClassName)) {

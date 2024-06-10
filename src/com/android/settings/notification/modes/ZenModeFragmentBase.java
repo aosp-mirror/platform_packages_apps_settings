@@ -103,6 +103,7 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
         if (!reloadMode(id)) {
             Log.d(TAG, "Mode id=" + id + " not found");
             toastAndFinish();
+            return;
         }
         updateControllers();
     }

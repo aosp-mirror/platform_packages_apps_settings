@@ -385,6 +385,7 @@ public class AccessibilitySettingsTest {
 
         mFragment.onContentChanged();
         mFragment.onStart();
+        mFragment.onResume();
 
         RestrictedPreference preference = mFragment.getPreferenceScreen().findPreference(
                 COMPONENT_NAME.flattenToString());

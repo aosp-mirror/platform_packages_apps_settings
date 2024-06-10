@@ -65,7 +65,7 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
             if (resultCode == RESULT_OK) {
                 mMetricsFeatureProvider.action(
                         this, SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_SUCCESS, true);
-                mNavHostFragment.getNavController().navigate(R.id.action_account_lock_fragment);
+                mNavHostFragment.getNavController().navigate(R.id.show_set_lock_fragment);
             } else {
                 mMetricsFeatureProvider.action(
                         this,
