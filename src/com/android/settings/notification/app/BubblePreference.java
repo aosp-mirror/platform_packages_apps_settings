@@ -80,8 +80,10 @@ public class BubblePreference extends Preference implements RadioGroup.OnChecked
     }
 
     public void setSelectedVisibility(boolean visible) {
-        mSelectedVisible = visible;
-        notifyChanged();
+        if (mSelectedVisible != visible) {
+            mSelectedVisible = visible;
+            notifyChanged();
+        }
     }
 
     @Override

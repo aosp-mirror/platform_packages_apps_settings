@@ -62,6 +62,13 @@
         android:selectable="false"
         settings:controller="com.android.settings.inputmethod.TrackpadPointerSpeedPreferenceController"/>
 
+    <com.android.settings.inputmethod.PointerFillStylePreference
+        android:key="pointer_fill_style"
+        android:title="@string/pointer_fill_style"
+        android:order="50"
+        android:dialogTitle="@string/pointer_fill_style"
+        settings:controller="com.android.settings.inputmethod.PointerFillStylePreferenceController"/>
+
     <com.android.settingslib.widget.ButtonPreference
         android:key="trackpad_touch_gesture"
         android:title="@string/trackpad_touch_gesture"

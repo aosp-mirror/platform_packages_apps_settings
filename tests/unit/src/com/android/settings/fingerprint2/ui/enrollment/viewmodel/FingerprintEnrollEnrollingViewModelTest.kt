@@ -28,9 +28,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintFlowViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Enrollment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
 import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import com.google.common.truth.Truth.assertThat
@@ -61,20 +59,15 @@ class FingerprintEnrollEnrollingViewModelTest {
   private lateinit var backgroundViewModel: BackgroundViewModel
   private lateinit var gateKeeperViewModel: FingerprintGatekeeperViewModel
   private lateinit var navigationViewModel: FingerprintNavigationViewModel
-  private val defaultGatekeeperInfo = GatekeeperInfo.GatekeeperPasswordInfo(byteArrayOf(1, 3), 3)
   private var testScope = TestScope(backgroundDispatcher)
 
   private lateinit var fakeFingerprintManagerInteractor: FakeFingerprintManagerInteractor
 
-  private fun initialize(gatekeeperInfo: GatekeeperInfo = defaultGatekeeperInfo) {
+  private fun initialize() {
     fakeFingerprintManagerInteractor = FakeFingerprintManagerInteractor()
-    gateKeeperViewModel =
-      FingerprintGatekeeperViewModel.FingerprintGatekeeperViewModelFactory(
-          gatekeeperInfo,
-          fakeFingerprintManagerInteractor,
-        )
-        .create(FingerprintGatekeeperViewModel::class.java)
-    val sensor =
+
+    gateKeeperViewModel = FingerprintGatekeeperViewModel(fakeFingerprintManagerInteractor)
+    fakeFingerprintManagerInteractor.sensorProp =
       FingerprintSensorPropertiesInternal(
           1 /* sensorId */,
           SensorProperties.STRENGTH_STRONG,
@@ -86,32 +79,21 @@ class FingerprintEnrollEnrollingViewModelTest {
           listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
         )
         .toFingerprintSensor()
-    val fingerprintFlowViewModel = FingerprintFlowViewModel(Default)
+    val fingerprintFlowViewModel = FingerprintFlowViewModel()
+    fingerprintFlowViewModel.updateFlowType(Default)
 
-    navigationViewModel =
-      FingerprintNavigationViewModel(
-        Enrollment(sensor),
-        false,
-        fingerprintFlowViewModel,
-        fakeFingerprintManagerInteractor,
-      )
+    navigationViewModel = FingerprintNavigationViewModel(fakeFingerprintManagerInteractor)
 
-    backgroundViewModel =
-      BackgroundViewModel.BackgroundViewModelFactory().create(BackgroundViewModel::class.java)
+    backgroundViewModel = BackgroundViewModel()
     backgroundViewModel.inForeground()
     val fingerprintEnrollViewModel =
-      FingerprintEnrollViewModel.FingerprintEnrollViewModelFactory(
-          fakeFingerprintManagerInteractor,
-          gateKeeperViewModel,
-          navigationViewModel,
-        )
-        .create(FingerprintEnrollViewModel::class.java)
+      FingerprintEnrollViewModel(
+        fakeFingerprintManagerInteractor,
+        gateKeeperViewModel,
+        navigationViewModel,
+      )
     enrollEnrollingViewModel =
-      FingerprintEnrollEnrollingViewModel.FingerprintEnrollEnrollingViewModelFactory(
-          fingerprintEnrollViewModel,
-          backgroundViewModel,
-        )
-        .create(FingerprintEnrollEnrollingViewModel::class.java)
+      FingerprintEnrollEnrollingViewModel(fingerprintEnrollViewModel, backgroundViewModel)
   }
 
   @Before
@@ -128,6 +110,7 @@ class FingerprintEnrollEnrollingViewModelTest {
   @Test
   fun testEnrollShouldBeFalse() =
     testScope.runTest {
+      gateKeeperViewModel.onConfirmDevice(true, 3L, false)
       var shouldEnroll = false
 
       val job = launch {
@@ -147,6 +130,7 @@ class FingerprintEnrollEnrollingViewModelTest {
   @Test
   fun testEnrollShouldBeFalseWhenBackground() =
     testScope.runTest {
+      gateKeeperViewModel.onConfirmDevice(true, 3L, false)
       var shouldEnroll = false
 
       val job = launch {
