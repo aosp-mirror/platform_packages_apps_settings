@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.settings.tests.screenshot.biometrics.fingerprint.fragment
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollConfirmationV2Fragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.fragment.RFPSEnrollFragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
 import com.android.settings.tests.screenshot.biometrics.fingerprint.Injector
+import com.android.settings.tests.screenshot.biometrics.fingerprint.Injector.Companion.BiometricFragmentScreenShotRule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,19 +27,14 @@ import platform.test.screenshot.FragmentScreenshotTestRule
 import platform.test.screenshot.ViewScreenshotTestRule.Mode
 
 @RunWith(AndroidJUnit4::class)
-class FingerprintEnrollConfirmationScreenshotTest {
-  private val injector: Injector = Injector(FingerprintNavigationStep.Confirmation)
+class RfpsEnrollEnrollingScreenshotTest {
+  private val injector: Injector =
+    Injector(FingerprintNavigationStep.Enrollment(Injector.fingerprintManagerInteractor.sensorProp))
 
-  @Rule
-  @JvmField
-  var rule: FragmentScreenshotTestRule = Injector.BiometricFragmentScreenShotRule()
+  @Rule @JvmField var rule: FragmentScreenshotTestRule = BiometricFragmentScreenShotRule()
 
   @Test
-  fun testConfirmation() {
-    rule.screenshotTest(
-      "fp_enroll_confirmation",
-      Mode.MatchSize,
-      FingerprintEnrollConfirmationV2Fragment(injector.factory),
-    )
+  fun testEnrollEnrolling() {
+    rule.screenshotTest("rfps_enroll_enrolling", Mode.MatchSize, RFPSEnrollFragment(injector.factory))
   }
 }

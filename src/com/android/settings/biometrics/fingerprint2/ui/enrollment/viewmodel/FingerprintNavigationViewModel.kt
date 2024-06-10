@@ -20,7 +20,11 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintFlow
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Finish
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.TransitionStep
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.UiStep
@@ -28,39 +32,40 @@ import java.lang.NullPointerException
 import kotlin.reflect.KClass
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 /**
  * This class is essentially a wrapper around [FingerprintNavigationStep] that will be used by
  * fragments/viewmodels that want to consume these events. It should provide no additional
  * functionality beyond what is available in [FingerprintNavigationStep].
  */
-class FingerprintNavigationViewModel(
-  step: UiStep,
-  hasConfirmedDeviceCredential: Boolean,
-  flowViewModel: FingerprintFlowViewModel,
-  fingerprintManagerInteractor: FingerprintManagerInteractor,
-) : ViewModel() {
+class FingerprintNavigationViewModel(fingerprintManagerInteractor: FingerprintManagerInteractor) :
+  ViewModel() {
 
-  private var _navStateInternal: MutableStateFlow<NavigationState?> = MutableStateFlow(null)
-
-  init {
-    viewModelScope.launch {
-      flowViewModel.fingerprintFlow
-        .combineTransform(fingerprintManagerInteractor.sensorPropertiesInternal) { flow, props ->
-          if (props?.sensorId != -1) {
-            emit(NavigationState(flow, hasConfirmedDeviceCredential, props))
-          }
+  private val _flowInternal: MutableStateFlow<FingerprintFlow?> = MutableStateFlow(null)
+  private val _hasConfirmedDeviceCredential: MutableStateFlow<Boolean> = MutableStateFlow(false)
+  private val _navStateInternal: StateFlow<NavigationState?> =
+    combine(
+        _flowInternal,
+        _hasConfirmedDeviceCredential,
+        fingerprintManagerInteractor.sensorPropertiesInternal,
+      ) { flow, hasConfirmed, sensorType ->
+        if (flow == null || sensorType == null) {
+          return@combine null
         }
-        .collect { navState -> _navStateInternal.update { navState } }
-    }
-  }
+        return@combine NavigationState(flow, hasConfirmed, sensorType)
+      }
+      .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
-  private var _currentStep = MutableStateFlow<FingerprintNavigationStep?>(step)
+  private var _currentStep =
+    MutableStateFlow<FingerprintNavigationStep?>(FingerprintNavigationStep.Init)
 
   private var _navigateTo: MutableStateFlow<UiStep?> = MutableStateFlow(null)
   val navigateTo: Flow<UiStep?> = _navigateTo.asStateFlow()
@@ -84,6 +89,16 @@ class FingerprintNavigationViewModel(
 
   /** This indicates what screen should currently be presenting to the user. */
   val currentScreen: Flow<UiStep?> = _currentScreen.asStateFlow()
+
+  /** Updates the type of flow the navigation should begin */
+  fun updateFingerprintFlow(flow: FingerprintFlow) {
+    _flowInternal.update { flow }
+  }
+
+  /** Indicates if we have confirmed device credential */
+  fun hasConfirmedDeviceCredential(hasConfirmedDeviceCredential: Boolean) {
+    _hasConfirmedDeviceCredential.update { hasConfirmedDeviceCredential }
+  }
 
   /** See [updateInternal] for more details */
   fun update(action: FingerprintAction, caller: KClass<*>, debugStr: String) {
@@ -122,26 +137,15 @@ class FingerprintNavigationViewModel(
     }
   }
 
-  class FingerprintNavigationViewModelFactory(
-    private val step: UiStep,
-    private val hasConfirmedDeviceCredential: Boolean,
-    private val flowViewModel: FingerprintFlowViewModel,
-    private val fingerprintManagerInteractor: FingerprintManagerInteractor,
-  ) : ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return FingerprintNavigationViewModel(
-        step,
-        hasConfirmedDeviceCredential,
-        flowViewModel,
-        fingerprintManagerInteractor,
-      )
-        as T
-    }
-  }
-
   companion object {
     private const val TAG = "FingerprintNavigationViewModel"
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer {
+        val settingsApplication =
+          this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as SettingsApplication
+        val biometricEnvironment = settingsApplication.biometricEnvironment
+        FingerprintNavigationViewModel(biometricEnvironment!!.fingerprintManagerInteractor)
+      }
+    }
   }
 }

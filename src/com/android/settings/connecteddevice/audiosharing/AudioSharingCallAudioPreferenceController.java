@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
@@ -36,19 +37,22 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
-import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -67,18 +71,26 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     private static final String TAG = "CallsAndAlarmsPreferenceController";
     private static final String PREF_KEY = "calls_and_alarms";
 
+    @VisibleForTesting
+    protected enum ChangeCallAudioType {
+        UNKNOWN,
+        CONNECTED_EARLIER,
+        CONNECTED_LATER
+    }
+
     @Nullable private final LocalBluetoothManager mBtManager;
-    @Nullable private final LocalBluetoothProfileManager mProfileManager;
     @Nullable private final BluetoothEventManager mEventManager;
     @Nullable private final ContentResolver mContentResolver;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
+    @Nullable private final CachedBluetoothDeviceManager mCacheManager;
     private final Executor mExecutor;
     private final ContentObserver mSettingsObserver;
-    @Nullable private DashboardFragment mFragment;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+    @Nullable private Fragment mFragment;
     Map<Integer, List<CachedBluetoothDevice>> mGroupedConnectedDevices = new HashMap<>();
     private List<AudioSharingDeviceItem> mDeviceItemsInSharingSession = new ArrayList<>();
-    private AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
-    private BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+    private final AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
+    private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
                 @Override
                 public void onSearchStarted(int reason) {}
@@ -136,15 +148,18 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     public AudioSharingCallAudioPreferenceController(Context context) {
         super(context, PREF_KEY);
         mBtManager = Utils.getLocalBtManager(mContext);
-        mProfileManager = mBtManager == null ? null : mBtManager.getProfileManager();
+        LocalBluetoothProfileManager profileManager =
+                mBtManager == null ? null : mBtManager.getProfileManager();
         mEventManager = mBtManager == null ? null : mBtManager.getEventManager();
         mAssistant =
-                mProfileManager == null
+                profileManager == null
                         ? null
-                        : mProfileManager.getLeAudioBroadcastAssistantProfile();
+                        : profileManager.getLeAudioBroadcastAssistantProfile();
+        mCacheManager = mBtManager == null ? null : mBtManager.getCachedDeviceManager();
         mExecutor = Executors.newSingleThreadExecutor();
         mContentResolver = context.getContentResolver();
         mSettingsObserver = new FallbackDeviceGroupIdSettingsObserver();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     private class FallbackDeviceGroupIdSettingsObserver extends ContentObserver {
@@ -155,7 +170,9 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
         @Override
         public void onChange(boolean selfChange) {
             Log.d(TAG, "onChange, fallback device group id has been changed");
-            var unused = ThreadUtils.postOnBackgroundThread(() -> updateSummary());
+            var unused =
+                    ThreadUtils.postOnBackgroundThread(
+                            AudioSharingCallAudioPreferenceController.this::updateSummary);
         }
     }
 
@@ -177,15 +194,23 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                             return true;
                         }
                         updateDeviceItemsInSharingSession();
-                        if (mDeviceItemsInSharingSession.size() >= 1) {
+                        if (!mDeviceItemsInSharingSession.isEmpty()) {
                             AudioSharingCallAudioDialogFragment.show(
                                     mFragment,
                                     mDeviceItemsInSharingSession,
                                     (AudioSharingDeviceItem item) -> {
+                                        int currentGroupId =
+                                                AudioSharingUtils.getFallbackActiveGroupId(
+                                                        mContext);
+                                        if (item.getGroupId() == currentGroupId) {
+                                            Log.d(
+                                                    TAG,
+                                                    "Skip set fallback active device: unchanged");
+                                            return;
+                                        }
                                         List<CachedBluetoothDevice> devices =
                                                 mGroupedConnectedDevices.getOrDefault(
                                                         item.getGroupId(), ImmutableList.of());
-                                        @Nullable
                                         CachedBluetoothDevice lead =
                                                 AudioSharingUtils.getLeadDevice(devices);
                                         if (lead != null) {
@@ -195,11 +220,12 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                                                             + lead.getDevice()
                                                                     .getAnonymizedAddress());
                                             lead.setActive();
+                                            logCallAudioDeviceChange(currentGroupId, lead);
                                         } else {
-                                            Log.w(
+                                            Log.d(
                                                     TAG,
-                                                    "Fail to set fallback active device: no lead"
-                                                            + " device");
+                                                    "Fail to set fallback active device: no"
+                                                            + " lead device");
                                         }
                                     });
                         }
@@ -237,9 +263,9 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     /**
      * Initialize the controller.
      *
-     * @param fragment The fragment to host the {@link CallsAndAlarmsDialogFragment} dialog.
+     * @param fragment The fragment to host the {@link AudioSharingCallAudioDialogFragment} dialog.
      */
-    public void init(DashboardFragment fragment) {
+    public void init(Fragment fragment) {
         this.mFragment = fragment;
     }
 
@@ -325,7 +351,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                 if (item.getGroupId() == fallbackActiveGroupId) {
                     Log.d(
                             TAG,
-                            "updatePreference: set summary tp fallback group "
+                            "updatePreference: set summary to fallback group "
                                     + fallbackActiveGroupId);
                     AudioSharingUtils.postOnMainThread(
                             mContext,
@@ -356,5 +382,49 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
         mDeviceItemsInSharingSession =
                 AudioSharingUtils.buildOrderedConnectedLeadAudioSharingDeviceItem(
                         mBtManager, mGroupedConnectedDevices, /* filterByInSharing= */ true);
+    }
+
+    @VisibleForTesting
+    protected void logCallAudioDeviceChange(int currentGroupId, CachedBluetoothDevice target) {
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            ChangeCallAudioType type = ChangeCallAudioType.UNKNOWN;
+                            if (mCacheManager != null) {
+                                int targetDeviceGroupId = AudioSharingUtils.getGroupId(target);
+                                List<BluetoothDevice> mostRecentDevices =
+                                        BluetoothAdapter.getDefaultAdapter()
+                                                .getMostRecentlyConnectedDevices();
+                                int targetDeviceIdx = -1;
+                                int currentDeviceIdx = -1;
+                                for (int idx = 0; idx < mostRecentDevices.size(); idx++) {
+                                    BluetoothDevice device = mostRecentDevices.get(idx);
+                                    CachedBluetoothDevice cachedDevice =
+                                            mCacheManager.findDevice(device);
+                                    int groupId =
+                                            cachedDevice != null
+                                                    ? AudioSharingUtils.getGroupId(cachedDevice)
+                                                    : BluetoothCsipSetCoordinator.GROUP_ID_INVALID;
+                                    if (groupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
+                                        if (groupId == targetDeviceGroupId) {
+                                            targetDeviceIdx = idx;
+                                        } else if (groupId == currentGroupId) {
+                                            currentDeviceIdx = idx;
+                                        }
+                                    }
+                                    if (targetDeviceIdx != -1 && currentDeviceIdx != -1) break;
+                                }
+                                if (targetDeviceIdx != -1 && currentDeviceIdx != -1) {
+                                    type =
+                                            targetDeviceIdx < currentDeviceIdx
+                                                    ? ChangeCallAudioType.CONNECTED_LATER
+                                                    : ChangeCallAudioType.CONNECTED_EARLIER;
+                                }
+                            }
+                            mMetricsFeatureProvider.action(
+                                    mContext,
+                                    SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_CALL_AUDIO,
+                                    type.ordinal());
+                        });
     }
 }
