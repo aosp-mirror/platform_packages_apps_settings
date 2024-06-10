@@ -60,6 +60,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowLooper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -132,6 +133,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         Intent intent = new Intent(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHearingAid.STATE_CONNECTED);
         sendIntent(intent);
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
                 "TEST_HEARING_AID_BT_DEVICE_NAME / Right only")).isTrue();
@@ -149,6 +151,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         Intent intent = new Intent(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHearingAid.STATE_CONNECTED);
         sendIntent(intent);
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
                 "TEST_HEARING_AID_BT_DEVICE_NAME / Left and right")).isTrue();
@@ -165,6 +168,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
         sendIntent(intent);
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
                 "TEST_HEARING_AID_BT_DEVICE_NAME / Left only")).isTrue();
@@ -181,6 +185,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
         sendIntent(intent);
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
                 "TEST_HEARING_AID_BT_DEVICE_NAME / Right only")).isTrue();
@@ -197,6 +202,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
         sendIntent(intent);
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
                 "TEST_HEARING_AID_BT_DEVICE_NAME / Left and right")).isTrue();
@@ -212,6 +218,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
         sendIntent(intent);
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
                 "TEST_HEARING_AID_BT_DEVICE_NAME / Left and right");
@@ -228,6 +235,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         Intent intent = new Intent(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
         intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHearingAid.STATE_CONNECTED);
         sendIntent(intent);
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
                 "TEST_HEARING_AID_BT_DEVICE_NAME +1 more")).isTrue();
@@ -239,6 +247,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         Intent intent = new Intent(BluetoothAdapter.ACTION_STATE_CHANGED);
         intent.putExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.STATE_OFF);
         sendIntent(intent);
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary()).isEqualTo(
                 mContext.getText(R.string.accessibility_hearingaid_not_connected_summary));
@@ -252,6 +261,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
         mPreferenceController.onStart();
         mPreferenceController.onServiceConnected();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
                 "TEST_HEARING_AID_BT_DEVICE_NAME / Left only");
@@ -265,6 +275,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
         mPreferenceController.onStart();
         mPreferenceController.onServiceConnected();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary().toString()).isEqualTo(
                 "TEST_HEARING_AID_BT_DEVICE_NAME / Right only");

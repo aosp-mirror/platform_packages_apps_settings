@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.android.settings.tests.screenshot.biometrics.fingerprint.fragment
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.fragment.RFPSEnrollFragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollIntroV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep
 import com.android.settings.tests.screenshot.biometrics.fingerprint.Injector
-import com.android.settings.tests.screenshot.biometrics.fingerprint.Injector.Companion.BiometricFragmentScreenShotRule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,14 +27,17 @@ import platform.test.screenshot.FragmentScreenshotTestRule
 import platform.test.screenshot.ViewScreenshotTestRule.Mode
 
 @RunWith(AndroidJUnit4::class)
-class FingerprintEnrollEnrollingScreenshotTest {
-  private val injector: Injector =
-    Injector(FingerprintNavigationStep.Enrollment(Injector.interactor.sensorProp))
+class RfpsEnrollIntroScreenshotTest {
+  private val injector: Injector = Injector(FingerprintNavigationStep.Introduction())
 
-  @Rule @JvmField var rule: FragmentScreenshotTestRule = BiometricFragmentScreenShotRule()
+  @Rule @JvmField var rule: FragmentScreenshotTestRule = Injector.BiometricFragmentScreenShotRule()
 
   @Test
-  fun testEnrollEnrolling() {
-    rule.screenshotTest("fp_enroll_enrolling", Mode.MatchSize, RFPSEnrollFragment(injector.factory))
+  fun testEnrollIntro() {
+    rule.screenshotTest(
+      "rfps_enroll_intro",
+      Mode.MatchSize,
+      FingerprintEnrollIntroV2Fragment(injector.factory),
+    )
   }
 }
