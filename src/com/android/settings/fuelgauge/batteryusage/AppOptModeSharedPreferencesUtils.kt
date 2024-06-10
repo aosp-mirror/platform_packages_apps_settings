@@ -41,6 +41,13 @@ object AppOptModeSharedPreferencesUtils {
     fun getAllEvents(context: Context): List<AppOptimizationModeEvent> =
         synchronized(appOptimizationModeLock) { getAppOptModeEventsMap(context).values.toList() }
 
+    /** Removes all app optimization mode events. */
+    @JvmStatic
+    fun clearAll(context: Context) =
+        synchronized(appOptimizationModeLock) {
+            getSharedPreferences(context).edit().clear().apply()
+        }
+
     /** Updates the app optimization mode event data. */
     @JvmStatic
     fun updateAppOptModeExpiration(
@@ -58,19 +65,19 @@ object AppOptModeSharedPreferencesUtils {
             uids,
             packageNames,
             optimizationModes,
-            expirationTimes
+            expirationTimes,
         ) { uid: Int, packageName: String ->
             BatteryOptimizeUtils(context, uid, packageName)
         }
 
     /** Resets the app optimization mode event data since the query timestamp. */
     @JvmStatic
-    fun resetExpiredAppOptModeBeforeTimestamp(context: Context, queryTimestamp: Long) =
+    fun resetExpiredAppOptModeBeforeTimestamp(context: Context, queryTimestampMs: Long) =
         synchronized(appOptimizationModeLock) {
             val eventsMap = getAppOptModeEventsMap(context)
             val expirationUids = ArrayList<Int>(eventsMap.size)
             for ((uid, event) in eventsMap) {
-                if (event.expirationTime > queryTimestamp) {
+                if (event.expirationTime > queryTimestampMs) {
                     continue
                 }
                 updateBatteryOptimizationMode(
@@ -98,7 +105,7 @@ object AppOptModeSharedPreferencesUtils {
         packageNames: List<String>,
         optimizationModes: List<Int>,
         expirationTimes: LongArray,
-        getBatteryOptimizeUtils: (Int, String) -> BatteryOptimizeUtils
+        getBatteryOptimizeUtils: (Int, String) -> BatteryOptimizeUtils,
     ) =
         synchronized(appOptimizationModeLock) {
             val eventsMap = getAppOptModeEventsMap(context)
@@ -114,7 +121,7 @@ object AppOptModeSharedPreferencesUtils {
                         packageName,
                         optimizationMode,
                         Action.EXTERNAL_UPDATE,
-                        getBatteryOptimizeUtils(uid, packageName)
+                        getBatteryOptimizeUtils(uid, packageName),
                     )
                 if (originalOptMode == BatteryOptimizeUtils.MODE_UNKNOWN) {
                     continue
@@ -151,7 +158,8 @@ object AppOptModeSharedPreferencesUtils {
         packageName: String,
         optimizationMode: Int,
         action: Action,
-        batteryOptimizeUtils: BatteryOptimizeUtils = BatteryOptimizeUtils(context, uid, packageName)
+        batteryOptimizeUtils: BatteryOptimizeUtils =
+            BatteryOptimizeUtils(context, uid, packageName),
     ): Int {
         if (!batteryOptimizeUtils.isOptimizeModeMutable) {
             Log.w(TAG, "Fail to update immutable optimization mode for: $packageName")
@@ -190,7 +198,7 @@ object AppOptModeSharedPreferencesUtils {
 
     private fun updateSharedPreferences(
         context: Context,
-        eventsMap: Map<Int, AppOptimizationModeEvent>
+        eventsMap: Map<Int, AppOptimizationModeEvent>,
     ) {
         val sharedPreferences = getSharedPreferences(context)
         sharedPreferences.edit().run {
@@ -216,7 +224,7 @@ object AppOptModeSharedPreferencesUtils {
     }
 
     private fun deserializeAppOptimizationModeEvent(
-        encodedProtoString: String
+        encodedProtoString: String,
     ): AppOptimizationModeEvent {
         return BatteryUtils.parseProtoFromString(encodedProtoString, defaultInstance)
     }

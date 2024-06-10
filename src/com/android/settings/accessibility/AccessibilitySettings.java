@@ -21,7 +21,6 @@ import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ServiceInfo;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
@@ -30,6 +29,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.Pair;
 import android.view.InputDevice;
 import android.view.accessibility.AccessibilityManager;
 
@@ -57,6 +57,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /** Activity with the accessibility settings. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -210,24 +212,31 @@ public class AccessibilitySettings extends DashboardFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         initializeAllPreferences();
+        updateAllPreferences();
+        mNeedPreferencesUpdate = false;
         registerContentMonitors();
         registerInputDeviceListener();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        updateAllPreferences();
+    public void onStart() {
+        super.onStart();
+        mIsForeground = true;
     }
 
     @Override
-    public void onStart() {
+    public void onResume() {
+        super.onResume();
         if (mNeedPreferencesUpdate) {
             updateAllPreferences();
             mNeedPreferencesUpdate = false;
         }
-        mIsForeground = true;
-        super.onStart();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mNeedPreferencesUpdate = true;
     }
 
     @Override
@@ -447,17 +456,22 @@ public class AccessibilitySettings extends DashboardFragment implements
         final List<AccessibilityShortcutInfo> installedShortcutList =
                 a11yManager.getInstalledAccessibilityShortcutListAsUser(context,
                         UserHandle.myUserId());
+        final List<AccessibilityActivityPreference> activityList =
+                preferenceHelper.createAccessibilityActivityPreferenceList(installedShortcutList);
+        final Set<Pair<String, CharSequence>> packageLabelPairs =
+                activityList.stream()
+                        .map(a11yActivityPref -> new Pair<>(
+                                a11yActivityPref.getPackageName(), a11yActivityPref.getLabel())
+                        ).collect(Collectors.toSet());
 
         // Remove duplicate item here, new a ArrayList to copy unmodifiable list result
         // (getInstalledAccessibilityServiceList).
         final List<AccessibilityServiceInfo> installedServiceList = new ArrayList<>(
                 a11yManager.getInstalledAccessibilityServiceList());
-        installedServiceList.removeIf(
-                target -> containsTargetNameInList(installedShortcutList, target));
-
-        final List<RestrictedPreference> activityList =
-                preferenceHelper.createAccessibilityActivityPreferenceList(installedShortcutList);
-
+        if (!packageLabelPairs.isEmpty()) {
+            installedServiceList.removeIf(
+                    target -> containsPackageAndLabelInList(packageLabelPairs, target));
+        }
         final List<RestrictedPreference> serviceList =
                 preferenceHelper.createAccessibilityServicePreferenceList(installedServiceList);
 
@@ -468,22 +482,14 @@ public class AccessibilitySettings extends DashboardFragment implements
         return preferenceList;
     }
 
-    private boolean containsTargetNameInList(List<AccessibilityShortcutInfo> shortcutInfos,
+    private boolean containsPackageAndLabelInList(
+            Set<Pair<String, CharSequence>> packageLabelPairs,
             AccessibilityServiceInfo targetServiceInfo) {
         final ServiceInfo serviceInfo = targetServiceInfo.getResolveInfo().serviceInfo;
         final String servicePackageName = serviceInfo.packageName;
         final CharSequence serviceLabel = serviceInfo.loadLabel(getPackageManager());
 
-        for (int i = 0, count = shortcutInfos.size(); i < count; ++i) {
-            final ActivityInfo activityInfo = shortcutInfos.get(i).getActivityInfo();
-            final String activityPackageName = activityInfo.packageName;
-            final CharSequence activityLabel = activityInfo.loadLabel(getPackageManager());
-            if (servicePackageName.equals(activityPackageName)
-                    && serviceLabel.equals(activityLabel)) {
-                return true;
-            }
-        }
-        return false;
+        return packageLabelPairs.contains(new Pair<>(servicePackageName, serviceLabel));
     }
 
     private void initializePreBundledServicesMapFromArray(String categoryKey, int key) {

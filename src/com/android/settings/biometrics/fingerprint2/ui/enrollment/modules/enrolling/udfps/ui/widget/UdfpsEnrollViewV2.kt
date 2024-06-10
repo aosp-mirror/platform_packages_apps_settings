@@ -148,18 +148,10 @@ class UdfpsEnrollViewV2(context: Context, attrs: AttributeSet?) : FrameLayout(co
     }
   }
 
-  /**
-   * Sends a touch exploration event to the [onHoverListener] this should only be used for
-   * debugging.
-   */
-  fun sendDebugTouchExplorationEvent(motionEvent: MotionEvent) {
-    touchExplorationAnnouncer.onTouch(motionEvent)
-  }
-
   /** Sets the addHoverListener, this should happen when talkback is enabled. */
   private fun addHoverListener() {
     onHoverListener = OnHoverListener { _: View, event: MotionEvent ->
-      sendDebugTouchExplorationEvent(event)
+      touchExplorationAnnouncer.onTouch(event)
       false
     }
     this.setOnHoverListener(onHoverListener)

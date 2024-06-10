@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.data.repository
+package com.android.settings.biometrics.fingerprint2.debug.data.repository
 
-import android.graphics.Point
 import android.graphics.Rect
+import android.hardware.fingerprint.FingerprintEnrollOptions
+import android.view.MotionEvent
+import android.view.MotionEvent.ACTION_HOVER_MOVE
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
+import com.android.settings.biometrics.fingerprint2.data.repository.SimulatedTouchEventsRepository
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintEnrollInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
@@ -36,7 +40,11 @@ import kotlinx.coroutines.flow.flowOf
 class UdfpsEnrollDebugRepositoryImpl :
   FingerprintEnrollInteractor, FingerprintSensorRepository, SimulatedTouchEventsRepository {
 
-  override suspend fun enroll(hardwareAuthToken: ByteArray?, enrollReason: EnrollReason) = flow {
+  override suspend fun enroll(
+    hardwareAuthToken: ByteArray?,
+    enrollReason: EnrollReason,
+    fingerprintEnrollOptions: FingerprintEnrollOptions,
+  ) = flow {
     emit(FingerEnrollState.OverlayShown)
     delay(200)
     emit(FingerEnrollState.EnrollHelp(helpMsgId, "Hello world"))
@@ -77,7 +85,7 @@ class UdfpsEnrollDebugRepositoryImpl :
   }
 
   /** Provides touch events to the UdfpsEnrollFragment */
-  override val touchExplorationDebug: Flow<Point> = flow {
+  override val touchExplorationDebug: Flow<MotionEvent> = flow {
     delay(2000)
     emit(pointToLeftOfSensor(sensorRect))
     delay(2000)
@@ -90,17 +98,45 @@ class UdfpsEnrollDebugRepositoryImpl :
 
   override val fingerprintSensor: Flow<FingerprintSensor> = flowOf(sensorProps)
 
-  private fun pointToLeftOfSensor(sensorLocation: Rect) =
-    Point(sensorLocation.right + 5, sensorLocation.centerY())
+  private fun pointToLeftOfSensor(sensorLocation: Rect): MotionEvent =
+    MotionEvent.obtain(
+      100,
+      100,
+      ACTION_HOVER_MOVE,
+      sensorLocation.right + 5.0f,
+      sensorLocation.centerY().toFloat(),
+      0,
+    )
 
-  private fun pointToRightOfSensor(sensorLocation: Rect) =
-    Point(sensorLocation.left - 5, sensorLocation.centerY())
+  private fun pointToRightOfSensor(sensorLocation: Rect): MotionEvent =
+    MotionEvent.obtain(
+      100,
+      100,
+      ACTION_HOVER_MOVE,
+      sensorLocation.right - 5.0f,
+      sensorLocation.centerY().toFloat(),
+      0,
+    )
 
-  private fun pointBelowSensor(sensorLocation: Rect) =
-    Point(sensorLocation.centerX(), sensorLocation.bottom + 5)
+  private fun pointBelowSensor(sensorLocation: Rect): MotionEvent =
+    MotionEvent.obtain(
+      100,
+      100,
+      ACTION_HOVER_MOVE,
+      sensorLocation.centerX().toFloat(),
+      sensorLocation.bottom + 5.0f,
+      0,
+    )
 
-  private fun pointAboveSensor(sensorLocation: Rect) =
-    Point(sensorLocation.centerX(), sensorLocation.top - 5)
+  private fun pointAboveSensor(sensorLocation: Rect): MotionEvent =
+    MotionEvent.obtain(
+      100,
+      100,
+      ACTION_HOVER_MOVE,
+      sensorLocation.centerX().toFloat(),
+      sensorLocation.top - 5.0f,
+      0,
+    )
 
   companion object {
 
@@ -109,10 +145,10 @@ class UdfpsEnrollDebugRepositoryImpl :
     private val sensorRadius = 100
     private val sensorRect =
       Rect(
-        this.sensorLocationInternal.first - sensorRadius,
-        this.sensorLocationInternal.second - sensorRadius,
-        this.sensorLocationInternal.first + sensorRadius,
-        this.sensorLocationInternal.second + sensorRadius,
+        sensorLocationInternal.first - sensorRadius,
+        sensorLocationInternal.second - sensorRadius,
+        sensorLocationInternal.first + sensorRadius,
+        sensorLocationInternal.second + sensorRadius,
       )
     val sensorProps =
       FingerprintSensor(

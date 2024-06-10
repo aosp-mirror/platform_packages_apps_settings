@@ -25,6 +25,7 @@ import android.hardware.biometrics.PromptInfo;
 import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.CancellationSignal;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
@@ -149,6 +150,13 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setShowEmergencyCallButton(promptInfo.isShowEmergencyCallButton())
                 .setReceiveSystemEvents(true)
                 .setComponentNameForConfirmDeviceCredentialActivity(callingActivity);
+        if (promptInfo.getLogoRes() != 0){
+            promptBuilder.setLogoRes(promptInfo.getLogoRes());
+        }
+        String logoDescription = promptInfo.getLogoDescription();
+        if (!TextUtils.isEmpty(logoDescription)) {
+            promptBuilder.setLogoDescription(logoDescription);
+        }
 
         if (android.os.Flags.allowPrivateProfile() && Flags.enablePrivateSpaceFeatures()
                 && Flags.enableBiometricsToUnlockPrivateSpace()) {

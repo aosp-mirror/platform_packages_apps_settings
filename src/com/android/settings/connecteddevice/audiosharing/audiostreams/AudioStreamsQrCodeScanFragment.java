@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode;
+package com.android.settings.connecteddevice.audiosharing.audiostreams;
+
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsDashboardFragment.KEY_BROADCAST_METADATA;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -26,6 +28,7 @@ import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -41,11 +44,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
-import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsHelper;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -54,34 +55,54 @@ import com.android.settingslib.qrcode.QrCamera;
 
 import java.time.Duration;
 
-public class QrCodeScanModeFragment extends InstrumentedFragment
+public class AudioStreamsQrCodeScanFragment extends InstrumentedFragment
         implements TextureView.SurfaceTextureListener, QrCamera.ScannerCallback {
     private static final boolean DEBUG = BluetoothUtils.D;
-    private static final String TAG = "QrCodeScanModeFragment";
-
-    /** Message sent to hide error message */
+    private static final String TAG = "AudioStreamsQrCodeScanFragment";
     private static final int MESSAGE_HIDE_ERROR_MESSAGE = 1;
-
-    /** Message sent to show error message */
     private static final int MESSAGE_SHOW_ERROR_MESSAGE = 2;
-
-    /** Message sent to broadcast QR code */
     private static final int MESSAGE_SCAN_BROADCAST_SUCCESS = 3;
-
     private static final long SHOW_ERROR_MESSAGE_INTERVAL = 10000;
     private static final long SHOW_SUCCESS_SQUARE_INTERVAL = 1000;
-
     private static final Duration VIBRATE_DURATION_QR_CODE_RECOGNITION = Duration.ofMillis(3);
-
-    public static final String KEY_BROADCAST_METADATA = "key_broadcast_metadata";
-
+    private final Handler mHandler =
+            new Handler(Looper.getMainLooper()) {
+                @Override
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case MESSAGE_HIDE_ERROR_MESSAGE:
+                            mErrorMessage.setVisibility(View.INVISIBLE);
+                            break;
+                        case MESSAGE_SHOW_ERROR_MESSAGE:
+                            String errorMessage = (String) msg.obj;
+                            mErrorMessage.setVisibility(View.VISIBLE);
+                            mErrorMessage.setText(errorMessage);
+                            mErrorMessage.sendAccessibilityEvent(
+                                    AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+                            // Cancel any pending messages to hide error view and requeue the
+                            // message so user has time to see error
+                            removeMessages(MESSAGE_HIDE_ERROR_MESSAGE);
+                            sendEmptyMessageDelayed(
+                                    MESSAGE_HIDE_ERROR_MESSAGE, SHOW_ERROR_MESSAGE_INTERVAL);
+                            break;
+                        case MESSAGE_SCAN_BROADCAST_SUCCESS:
+                            Log.d(TAG, "scan success");
+                            Intent resultIntent = new Intent();
+                            resultIntent.putExtra(KEY_BROADCAST_METADATA, mBroadcastMetadata);
+                            if (getActivity() != null) {
+                                getActivity().setResult(Activity.RESULT_OK, resultIntent);
+                                notifyUserForQrCodeRecognition();
+                            }
+                            break;
+                    }
+                }
+            };
     private LocalBluetoothManager mLocalBluetoothManager;
     private int mCornerRadius;
     @Nullable private String mBroadcastMetadata;
     private Context mContext;
     @Nullable private QrCamera mCamera;
     private TextureView mTextureView;
-    private TextView mSummary;
     private TextView mErrorMessage;
 
     @Override
@@ -119,33 +140,21 @@ public class QrCodeScanModeFragment extends InstrumentedFragment
         var device =
                 AudioStreamsHelper.getCachedBluetoothDeviceInSharingOrLeConnected(
                         mLocalBluetoothManager);
-        mSummary = view.findViewById(android.R.id.summary);
-        if (mSummary != null && device.isPresent()) {
-            mSummary.setText(
+        TextView summary = view.findViewById(android.R.id.summary);
+        if (summary != null && device.isPresent()) {
+            summary.setText(
                     getString(
                             R.string.audio_streams_main_page_qr_code_scanner_summary,
                             device.get().getName()));
         }
     }
 
-    private void initCamera(SurfaceTexture surface) {
-        // Check if the camera has already created.
+    @Override
+    public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
         if (mCamera == null) {
             mCamera = new QrCamera(mContext, this);
             mCamera.start(surface);
         }
-    }
-
-    private void destroyCamera() {
-        if (mCamera != null) {
-            mCamera.stop();
-            mCamera = null;
-        }
-    }
-
-    @Override
-    public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
-        initCamera(surface);
     }
 
     @Override
@@ -167,7 +176,8 @@ public class QrCodeScanModeFragment extends InstrumentedFragment
             Log.d(TAG, "handleSuccessfulResult(), get the qr code string.");
         }
         mBroadcastMetadata = qrCode;
-        handleBtLeAudioScanner();
+        Message message = mHandler.obtainMessage(MESSAGE_SCAN_BROADCAST_SUCCESS);
+        mHandler.sendMessageDelayed(message, SHOW_SUCCESS_SQUARE_INTERVAL);
     }
 
     @Override
@@ -194,52 +204,21 @@ public class QrCodeScanModeFragment extends InstrumentedFragment
     public boolean isValid(String qrCode) {
         if (qrCode.startsWith(BluetoothBroadcastUtils.SCHEME_BT_BROADCAST_METADATA)) {
             return true;
-        } else {
-            showErrorMessage(R.string.audio_streams_qr_code_is_not_valid_format);
-            return false;
+        }
+        Message message =
+                mHandler.obtainMessage(
+                        MESSAGE_SHOW_ERROR_MESSAGE,
+                        getString(R.string.audio_streams_qr_code_is_not_valid_format));
+        message.sendToTarget();
+        return false;
+    }
+
+    private void destroyCamera() {
+        if (mCamera != null) {
+            mCamera.stop();
+            mCamera = null;
         }
     }
-
-    protected boolean isDecodeTaskAlive() {
-        return mCamera != null && mCamera.isDecodeTaskAlive();
-    }
-
-    private final Handler mHandler =
-            new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    switch (msg.what) {
-                        case MESSAGE_HIDE_ERROR_MESSAGE:
-                            mErrorMessage.setVisibility(View.INVISIBLE);
-                            break;
-
-                        case MESSAGE_SHOW_ERROR_MESSAGE:
-                            final String errorMessage = (String) msg.obj;
-
-                            mErrorMessage.setVisibility(View.VISIBLE);
-                            mErrorMessage.setText(errorMessage);
-                            mErrorMessage.sendAccessibilityEvent(
-                                    AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
-
-                            // Cancel any pending messages to hide error view and requeue the
-                            // message so
-                            // user has time to see error
-                            removeMessages(MESSAGE_HIDE_ERROR_MESSAGE);
-                            sendEmptyMessageDelayed(
-                                    MESSAGE_HIDE_ERROR_MESSAGE, SHOW_ERROR_MESSAGE_INTERVAL);
-                            break;
-
-                        case MESSAGE_SCAN_BROADCAST_SUCCESS:
-                            Log.d(TAG, "scan success");
-                            final Intent resultIntent = new Intent();
-                            resultIntent.putExtra(KEY_BROADCAST_METADATA, mBroadcastMetadata);
-                            getActivity().setResult(Activity.RESULT_OK, resultIntent);
-                            notifyUserForQrCodeRecognition();
-                            break;
-                        default:
-                    }
-                }
-            };
 
     private void notifyUserForQrCodeRecognition() {
         if (mCamera != null) {
@@ -249,9 +228,11 @@ public class QrCodeScanModeFragment extends InstrumentedFragment
         mErrorMessage.setVisibility(View.INVISIBLE);
         mTextureView.setVisibility(View.INVISIBLE);
 
-        triggerVibrationForQrCodeRecognition(getContext());
+        triggerVibrationForQrCodeRecognition(mContext);
 
-        getActivity().finish();
+        if (getActivity() != null) {
+            getActivity().finish();
+        }
     }
 
     private static void triggerVibrationForQrCodeRecognition(Context context) {
@@ -263,17 +244,6 @@ public class QrCodeScanModeFragment extends InstrumentedFragment
                 VibrationEffect.createOneShot(
                         VIBRATE_DURATION_QR_CODE_RECOGNITION.toMillis(),
                         VibrationEffect.DEFAULT_AMPLITUDE));
-    }
-
-    private void showErrorMessage(@StringRes int messageResId) {
-        final Message message =
-                mHandler.obtainMessage(MESSAGE_SHOW_ERROR_MESSAGE, getString(messageResId));
-        message.sendToTarget();
-    }
-
-    private void handleBtLeAudioScanner() {
-        Message message = mHandler.obtainMessage(MESSAGE_SCAN_BROADCAST_SUCCESS);
-        mHandler.sendMessageDelayed(message, SHOW_SUCCESS_SQUARE_INTERVAL);
     }
 
     @Override

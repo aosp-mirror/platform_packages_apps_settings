@@ -74,7 +74,7 @@ class FingerprintSettingsViewModel(
   /** Represents the stream of visibility of sfps preference. */
   val isSfpsPrefVisible: Flow<Boolean> =
     _enrolledFingerprints.filterOnlyWhenSettingsIsShown().transform {
-      emit(fingerprintManagerInteractor.hasSideFps() && !it.isNullOrEmpty())
+      emit(fingerprintManagerInteractor.hasSideFps() == true && !it.isNullOrEmpty())
     }
 
   private val _isShowingDialog: MutableStateFlow<PreferenceViewModel?> = MutableStateFlow(null)

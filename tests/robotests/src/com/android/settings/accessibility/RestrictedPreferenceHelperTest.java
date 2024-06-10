@@ -137,7 +137,7 @@ public class RestrictedPreferenceHelperTest {
         final List<AccessibilityShortcutInfo> infoList = new ArrayList<>(
                 singletonList(mShortcutInfo));
 
-        final List<RestrictedPreference> preferenceList =
+        final List<AccessibilityActivityPreference> preferenceList =
                 mHelper.createAccessibilityActivityPreferenceList(infoList);
         final RestrictedPreference preference = preferenceList.get(0);
 
