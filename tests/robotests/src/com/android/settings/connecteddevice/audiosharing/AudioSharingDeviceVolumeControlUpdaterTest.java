@@ -28,6 +28,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
@@ -42,6 +43,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
@@ -96,12 +98,14 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
     private Context mContext;
     private AudioSharingDeviceVolumeControlUpdater mDeviceUpdater;
     private Collection<CachedBluetoothDevice> mCachedDevices;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
         mLocalBtManager = Utils.getLocalBtManager(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mLocalBtManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBtManager.getProfileManager()).thenReturn(mLocalBtProfileManager);
         when(mLocalBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
@@ -250,6 +254,11 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
 
         verify(mVolumeControl).setDeviceVolume(mBluetoothDevice, 255, true);
         verifyNoInteractions(mAudioManager);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
+                        /* isPrimary= */ false);
     }
 
     @Test
@@ -272,6 +281,11 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
 
         verifyNoInteractions(mVolumeControl);
         verify(mAudioManager).setStreamVolume(AudioManager.STREAM_MUSIC, 10, 0);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
+                        /* isPrimary= */ true);
     }
 
     @Test

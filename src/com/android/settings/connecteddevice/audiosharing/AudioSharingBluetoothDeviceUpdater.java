@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.Log;
 
@@ -70,6 +71,7 @@ public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     public boolean onPreferenceClick(Preference preference) {
         mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_DEVICE_CLICK);
         return true;
     }
 

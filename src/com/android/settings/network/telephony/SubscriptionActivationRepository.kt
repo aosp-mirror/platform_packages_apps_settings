@@ -17,9 +17,18 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import android.content.Intent
+import android.telephony.SubscriptionManager
+import android.telephony.TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS
+import android.util.Log
+import com.android.settings.Utils
+import com.android.settings.flags.Flags
 import com.android.settings.network.SatelliteRepository
+import com.android.settings.network.SimOnboardingActivity.Companion.startSimOnboardingActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.withContext
 
 class SubscriptionActivationRepository(
     private val context: Context,
@@ -31,5 +40,37 @@ class SubscriptionActivationRepository(
         satelliteRepository.getIsSessionStartedFlow()
     ) { isInCall, isSatelliteModemEnabled ->
         !isInCall && !isSatelliteModemEnabled
+    }
+
+    /**
+     * Starts a dialog activity to handle SIM enabling / disabling.
+     * @param subId The id of subscription need to be enabled or disabled.
+     * @param active Whether the subscription with [subId] should be enabled or disabled.
+     */
+    suspend fun setActive(subId: Int, active: Boolean) {
+        if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
+            Log.i(TAG, "Unable to toggle subscription due to unusable subscription ID.")
+            return
+        }
+        if (!active && isEmergencyCallbackMode(subId)) {
+            val intent = Intent(ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS).apply {
+                setPackage(Utils.PHONE_PACKAGE_NAME)
+            }
+            context.startActivity(intent)
+            return
+        }
+        if (active && Flags.isDualSimOnboardingEnabled()) {
+            startSimOnboardingActivity(context, subId)
+            return
+        }
+        context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, active))
+    }
+
+    private suspend fun isEmergencyCallbackMode(subId: Int) = withContext(Dispatchers.Default) {
+        context.telephonyManager(subId).emergencyCallbackMode
+    }
+
+    private companion object {
+        private const val TAG = "SubscriptionActivationR"
     }
 }

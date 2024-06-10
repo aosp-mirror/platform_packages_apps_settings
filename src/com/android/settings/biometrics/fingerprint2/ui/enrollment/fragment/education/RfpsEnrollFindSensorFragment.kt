@@ -23,11 +23,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.android.settings.R
 import com.android.settings.biometrics.fingerprint.FingerprintErrorDialog
 import com.android.settings.biometrics.fingerprint.FingerprintFindSensorAnimation
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.common.util.toFingerprintEnrollOptions
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollFindSensorViewModel
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
@@ -51,18 +55,10 @@ class RfpsEnrollFindSensorFragment() : Fragment() {
     factory = theFactory
   }
 
-  private val viewModelProvider: ViewModelProvider by lazy {
-    if (factory != null) {
-      ViewModelProvider(requireActivity(), factory!!)
-    } else {
-      ViewModelProvider(requireActivity())
-    }
-  }
-
   private var animation: FingerprintFindSensorAnimation? = null
 
-  private val viewModel: FingerprintEnrollFindSensorViewModel by lazy {
-    viewModelProvider[FingerprintEnrollFindSensorViewModel::class.java]
+  private val viewModel: FingerprintEnrollFindSensorViewModel by activityViewModels {
+    factory ?: FingerprintEnrollFindSensorViewModel.Factory
   }
 
   override fun onCreateView(
@@ -78,6 +74,12 @@ class RfpsEnrollFindSensorFragment() : Fragment() {
     // Set up footer bar
     val footerBarMixin = view.getMixin(FooterBarMixin::class.java)
     setupSecondaryButton(footerBarMixin)
+
+    viewLifecycleOwner.lifecycleScope.launch {
+      repeatOnLifecycle(Lifecycle.State.RESUMED) {
+        viewModel.enroll(requireActivity().intent.toFingerprintEnrollOptions())
+      }
+    }
     lifecycleScope.launch {
       viewModel.showPrimaryButton.collect { setupPrimaryButton(footerBarMixin) }
     }

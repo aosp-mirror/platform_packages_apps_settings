@@ -26,6 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
@@ -39,6 +40,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.flags.Flags;
@@ -71,6 +73,7 @@ public class AudioSharingPlaySoundPreferenceControllerTest {
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
     private Preference mPreference;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
@@ -80,6 +83,7 @@ public class AudioSharingPlaySoundPreferenceControllerTest {
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mRingtone.getStreamType()).thenReturn(AudioManager.STREAM_MUSIC);
@@ -165,6 +169,8 @@ public class AudioSharingPlaySoundPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mPreference.performClick();
         verify(mRingtone).play();
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_PLAY_TEST_SOUND);
     }
 
     @Test

@@ -246,8 +246,9 @@ public final class AccessibilityShortcutsTutorial {
 
         final ImageView imageView = view.findViewById(R.id.image);
         final int gestureSettingsImageResId =
-                isTouchExploreEnabled ? R.drawable.a11y_gesture_navigation_three_finger_preview
-                        : R.drawable.a11y_gesture_navigation_two_finger_preview;
+                isTouchExploreEnabled
+                        ? R.drawable.accessibility_shortcut_type_gesture_preview_touch_explore_on
+                        : R.drawable.accessibility_shortcut_type_gesture_preview;
         imageView.setImageResource(gestureSettingsImageResId);
 
         final TextView textView = view.findViewById(R.id.gesture_tutorial_message);
@@ -408,7 +409,7 @@ public final class AccessibilityShortcutsTutorial {
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_volume);
         final View image =
-                createIllustrationView(context, R.drawable.a11y_shortcut_type_hardware);
+                createIllustrationView(context, R.drawable.accessibility_shortcut_type_volume_keys);
         final ImageView indicatorIcon =
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
         final CharSequence instruction =
@@ -424,7 +425,7 @@ public final class AccessibilityShortcutsTutorial {
                 context.getText(R.string.accessibility_tutorial_dialog_title_triple);
         final View image =
                 createIllustrationViewWithImageRawResource(context,
-                        R.raw.a11y_shortcut_type_triple_tap);
+                        R.raw.accessibility_shortcut_type_tripletap);
         final CharSequence instruction = context.getString(
                 R.string.accessibility_tutorial_dialog_tripletap_instruction, 3);
         final ImageView indicatorIcon =
@@ -439,10 +440,9 @@ public final class AccessibilityShortcutsTutorial {
         final int numFingers = 2;
         final CharSequence title = context.getString(
                 R.string.accessibility_tutorial_dialog_title_two_finger_double, numFingers);
-        // TODO(b/308088945): Update tutorial image when UX provides them
         final View image =
                 createIllustrationViewWithImageRawResource(context,
-                        R.raw.a11y_shortcut_type_triple_tap);
+                        R.raw.accessibility_shortcut_type_2finger_doubletap);
         final CharSequence instruction = context.getString(
                 R.string.accessibility_tutorial_dialog_twofinger_doubletap_instruction, numFingers);
         final ImageView indicatorIcon =
@@ -459,7 +459,7 @@ public final class AccessibilityShortcutsTutorial {
                 context.getText(R.string.accessibility_tutorial_dialog_title_quick_setting);
         final View image =
                 createIllustrationView(context,
-                        R.drawable.a11y_shortcut_type_quick_settings);
+                        R.drawable.accessibility_shortcut_type_quick_settings);
         // Remove the unneeded background, since the main image already includes a background
         image.findViewById(R.id.image_background).setVisibility(GONE);
         final int numFingers = AccessibilityUtil.isTouchExploreEnabled(context) ? 2 : 1;
@@ -526,13 +526,14 @@ public final class AccessibilityShortcutsTutorial {
     private static View createSoftwareImage(Context context) {
         int resId;
         if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.drawable.a11y_shortcut_type_software_floating;
+            return createIllustrationViewWithImageRawResource(
+                    context, R.raw.accessibility_shortcut_type_fab);
         } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.drawable.a11y_shortcut_type_software_gesture_talkback
-                    : R.drawable.a11y_shortcut_type_software_gesture;
+                    ? R.drawable.accessibility_shortcut_type_gesture_touch_explore_on
+                    : R.drawable.accessibility_shortcut_type_gesture;
         } else {
-            resId = R.drawable.a11y_shortcut_type_software;
+            resId = R.drawable.accessibility_shortcut_type_navbar;
         }
         return createIllustrationView(context, resId);
     }
