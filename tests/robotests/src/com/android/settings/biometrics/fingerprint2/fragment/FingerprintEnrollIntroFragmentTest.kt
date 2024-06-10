@@ -67,7 +67,6 @@ class FingerprintEnrollIntroFragmentTest {
 
   private val gatekeeperViewModel =
     FingerprintGatekeeperViewModel(
-      GatekeeperInfo.GatekeeperPasswordInfo(byteArrayOf(1, 2, 3), 100L),
       interactor
     )
   private val backgroundDispatcher = StandardTestDispatcher()
@@ -86,13 +85,10 @@ class FingerprintEnrollIntroFragmentTest {
       .toFingerprintSensor()
 
   var enrollFlow = Default
-  val flowViewModel = FingerprintFlowViewModel(enrollFlow)
+  val flowViewModel = FingerprintFlowViewModel()
 
   private val navigationViewModel =
     FingerprintNavigationViewModel(
-      Introduction(),
-      false,
-      flowViewModel,
       interactor
     )
 
@@ -123,6 +119,11 @@ class FingerprintEnrollIntroFragmentTest {
             as T
         }
       }
+
+    gatekeeperViewModel.onConfirmDevice(true, 100L, false)
+    flowViewModel.updateFlowType(enrollFlow)
+    navigationViewModel.hasConfirmedDeviceCredential(true)
+    navigationViewModel.updateFingerprintFlow(enrollFlow)
 
     fragmentScenario =
       launchFragmentInContainer(Bundle(), R.style.SudThemeGlif) {

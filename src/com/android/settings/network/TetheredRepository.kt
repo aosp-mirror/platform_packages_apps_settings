@@ -72,7 +72,7 @@ class TetheredRepository(private val context: Context) {
             flowOf(null), // kick an initial value
             context.broadcastReceiverFlow(IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)),
         ).flatMapLatest {
-            if (adapter.getState() == BluetoothAdapter.STATE_ON) {
+            if (adapter?.getState() == BluetoothAdapter.STATE_ON) {
                 isBluetoothPanTetheringOnFlow()
             } else {
                 flowOf(false)
@@ -93,10 +93,10 @@ class TetheredRepository(private val context: Context) {
             override fun onServiceDisconnected(profile: Int) {}
         }
 
-        adapter.getProfileProxy(context, listener, BluetoothProfile.PAN)
+        adapter?.getProfileProxy(context, listener, BluetoothProfile.PAN)
 
         awaitClose {
-            connectedProxy?.let { adapter.closeProfileProxy(BluetoothProfile.PAN, it) }
+            connectedProxy?.let { adapter?.closeProfileProxy(BluetoothProfile.PAN, it) }
         }
     }.conflate().flowOn(Dispatchers.Default)
 }
