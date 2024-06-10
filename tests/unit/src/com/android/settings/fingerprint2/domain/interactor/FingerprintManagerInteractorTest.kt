@@ -109,12 +109,7 @@ class FingerprintManagerInteractorTest {
         fingerprintManager,
         fingerprintSensorRepository,
         gateKeeperPasswordProvider,
-        FingerprintEnrollInteractorImpl(
-          context,
-          FingerprintEnrollOptions.Builder().build(),
-          fingerprintManager,
-          Default,
-        ),
+        FingerprintEnrollInteractorImpl(context, fingerprintManager, Default),
       )
   }
 
@@ -135,7 +130,7 @@ class FingerprintManagerInteractorTest {
       whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(fingerprintList)
 
       val list = underTest.enrolledFingerprints.last()
-      assertThat(list.size).isEqualTo(fingerprintList.size)
+      assertThat(list!!.size).isEqualTo(fingerprintList.size)
       val actual = list[0]
       assertThat(actual.name).isEqualTo(expected.name)
       assertThat(actual.fingerId).isEqualTo(expected.biometricId)
@@ -318,7 +313,11 @@ class FingerprintManagerInteractorTest {
     testScope.runTest {
       val token = byteArrayOf(5, 3, 2)
       var result: FingerEnrollState? = null
-      val job = launch { underTest.enroll(token, EnrollReason.FindSensor).collect { result = it } }
+      val job = launch {
+        underTest
+          .enroll(token, EnrollReason.FindSensor, FingerprintEnrollOptions.Builder().build())
+          .collect { result = it }
+      }
       val enrollCallback: ArgumentCaptor<FingerprintManager.EnrollmentCallback> = argumentCaptor()
       runCurrent()
 
@@ -343,7 +342,11 @@ class FingerprintManagerInteractorTest {
     testScope.runTest {
       val token = byteArrayOf(5, 3, 2)
       var result: FingerEnrollState? = null
-      val job = launch { underTest.enroll(token, EnrollReason.FindSensor).collect { result = it } }
+      val job = launch {
+        underTest
+          .enroll(token, EnrollReason.FindSensor, FingerprintEnrollOptions.Builder().build())
+          .collect { result = it }
+      }
       val enrollCallback: ArgumentCaptor<FingerprintManager.EnrollmentCallback> = argumentCaptor()
       runCurrent()
 
@@ -368,7 +371,11 @@ class FingerprintManagerInteractorTest {
     testScope.runTest {
       val token = byteArrayOf(5, 3, 2)
       var result: FingerEnrollState? = null
-      val job = launch { underTest.enroll(token, EnrollReason.FindSensor).collect { result = it } }
+      val job = launch {
+        underTest
+          .enroll(token, EnrollReason.FindSensor, FingerprintEnrollOptions.Builder().build())
+          .collect { result = it }
+      }
       val enrollCallback: ArgumentCaptor<FingerprintManager.EnrollmentCallback> = argumentCaptor()
       runCurrent()
 
