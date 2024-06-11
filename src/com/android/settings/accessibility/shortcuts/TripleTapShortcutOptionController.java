@@ -57,7 +57,7 @@ public class TripleTapShortcutOptionController extends ShortcutOptionPreferenceC
 
             shortcutOptionPreference.setSummary(summary);
             shortcutOptionPreference.setIntroImageRawResId(
-                    R.raw.a11y_shortcut_type_triple_tap);
+                    R.raw.accessibility_shortcut_type_tripletap);
         }
     }
 

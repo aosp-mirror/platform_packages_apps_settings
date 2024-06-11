@@ -52,7 +52,7 @@ class FingerprintSettingsNavigationViewModel(
       _nextStep.update { LaunchConfirmDeviceCredential(userId) }
     } else {
       viewModelScope.launch {
-        if (fingerprintManagerInteractor.enrolledFingerprints.last().isEmpty()) {
+        if (fingerprintManagerInteractor.enrolledFingerprints.last()?.isEmpty() == true) {
           _nextStep.update { EnrollFirstFingerprint(userId, null, challenge, token) }
         } else {
           showSettingsHelper()
@@ -149,7 +149,7 @@ class FingerprintSettingsNavigationViewModel(
 
   private suspend fun launchEnrollNextStep(gateKeeperPasswordHandle: Long?) {
     fingerprintManagerInteractor.enrolledFingerprints.collect {
-      if (it.isEmpty()) {
+      if (it?.isEmpty() == true) {
         _nextStep.update { EnrollFirstFingerprint(userId, gateKeeperPasswordHandle, null, null) }
       } else {
         viewModelScope.launch(backgroundDispatcher) {

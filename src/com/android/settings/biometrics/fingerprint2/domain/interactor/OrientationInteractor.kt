@@ -60,10 +60,7 @@ class OrientationInteractorImpl(private val context: Context) : OrientationInter
     awaitClose { orientationEventListener.disable() }
   }
 
-  override val rotation: Flow<Int> =
-    orientation.transform {
-      emit(context.display!!.rotation)
-    }
+  override val rotation: Flow<Int> = orientation.transform { emit(context.display.rotation) }
 
   override val rotationFromDefault: Flow<Int> = rotation.map { getRotationFromDefault(it) }
 

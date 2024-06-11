@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
+import android.content.Context
+import com.android.settingslib.display.DisplayDensityUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -50,12 +52,11 @@ interface DisplayDensityInteractor {
  * Implementation of the [DisplayDensityInteractor]. This interactor is used to forward activity
  * information to the rest of the application.
  */
-class DisplayDensityInteractorImpl(
-  currentFontScale: Float,
-  currentDisplayDensity: Int,
-  defaultDisplayDensity: Int,
-  scope: CoroutineScope,
-) : DisplayDensityInteractor {
+class DisplayDensityInteractorImpl(context: Context, scope: CoroutineScope) :
+  DisplayDensityInteractor {
+
+  val displayDensityUtils = DisplayDensityUtils(context)
+
   override fun updateDisplayDensity(density: Int) {
     _displayDensity.update { density }
   }
@@ -64,13 +65,18 @@ class DisplayDensityInteractorImpl(
     _fontScale.update { fontScale }
   }
 
-  private val _fontScale = MutableStateFlow(currentFontScale)
-  private val _displayDensity = MutableStateFlow(currentDisplayDensity)
+  private val _fontScale = MutableStateFlow(context.resources.configuration.fontScale)
+  private val _displayDensity =
+    MutableStateFlow(
+      displayDensityUtils.defaultDisplayDensityValues[
+          displayDensityUtils.currentIndexForDefaultDisplay]
+    )
 
   override val fontScale: Flow<Float> = _fontScale.asStateFlow()
 
   override val displayDensity: Flow<Int> = _displayDensity.asStateFlow()
 
   override val defaultDisplayDensity: Flow<Int> =
-    flowOf(defaultDisplayDensity).shareIn(scope, SharingStarted.Eagerly, 1)
+    flowOf(displayDensityUtils.defaultDensityForDefaultDisplay)
+      .shareIn(scope, SharingStarted.Eagerly, 1)
 }

@@ -172,7 +172,7 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
         pref.setTitle(access.label);
         pref.setSummary(StringUtil.formatRelativeTime(prefContext,
                 System.currentTimeMillis() - access.accessFinishTime, false,
-                RelativeDateTimeFormatter.Style.SHORT));
+                RelativeDateTimeFormatter.Style.LONG));
         pref.setOnPreferenceClickListener(new PackageEntryClickedListener(
                 fragment.getContext(), access.packageName, access.userHandle));
         return pref;

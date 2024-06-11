@@ -16,8 +16,12 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintFlow
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Introduction
@@ -27,8 +31,8 @@ import kotlinx.coroutines.flow.Flow
 /** A view model for fingerprint enroll introduction. */
 class FingerprintEnrollIntroViewModel(
   val navigationViewModel: FingerprintNavigationViewModel,
-  private val fingerprintFlowViewModel: FingerprintFlowViewModel,
-  private val fingerprintManagerInteractor: FingerprintManagerInteractor,
+  fingerprintFlowViewModel: FingerprintFlowViewModel,
+  fingerprintManagerInteractor: FingerprintManagerInteractor,
 ) : ViewModel() {
 
   /** Represents a stream of [FingerprintSensor] */
@@ -51,25 +55,21 @@ class FingerprintEnrollIntroViewModel(
     )
   }
 
-  class FingerprintEnrollIntoViewModelFactory(
-    val navigationViewModel: FingerprintNavigationViewModel,
-    val fingerprintFlowViewModel: FingerprintFlowViewModel,
-    val fingerprintManagerInteractor: FingerprintManagerInteractor,
-  ) : ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return FingerprintEnrollIntroViewModel(
-        navigationViewModel,
-        fingerprintFlowViewModel,
-        fingerprintManagerInteractor,
-      )
-        as T
-    }
-  }
-
   companion object {
     val navStep = Introduction::class
     private const val TAG = "FingerprintEnrollIntroViewModel"
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer {
+        val settingsApplication =
+          this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as SettingsApplication
+        val biometricEnvironment = settingsApplication.biometricEnvironment
+        val provider = ViewModelProvider(this[VIEW_MODEL_STORE_OWNER_KEY]!!)
+        FingerprintEnrollIntroViewModel(
+          provider[FingerprintNavigationViewModel::class],
+          provider[FingerprintFlowViewModel::class],
+          biometricEnvironment!!.fingerprintManagerInteractor,
+        )
+      }
+    }
   }
 }

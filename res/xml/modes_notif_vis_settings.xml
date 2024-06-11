@@ -24,15 +24,15 @@
        android:title="@string/zen_mode_block_effects_screen_off"
        android:key="zen_mode_block_screen_off">
 
-       <com.android.settings.widget.DisabledCheckBoxPreference
+       <SwitchPreferenceCompat
            android:key="zen_effect_intent"
            android:title="@string/zen_mode_block_effect_intent" />
 
-       <com.android.settings.widget.DisabledCheckBoxPreference
+       <SwitchPreferenceCompat
            android:key="zen_effect_light"
            android:title="@string/zen_mode_block_effect_light" />
 
-       <com.android.settings.widget.DisabledCheckBoxPreference
+       <SwitchPreferenceCompat
            android:key="zen_effect_ambient"
            android:title="@string/zen_mode_block_effect_ambient" />
 
@@ -40,19 +40,19 @@
     <PreferenceCategory
         android:title="@string/zen_mode_block_effects_screen_on"
         android:key="zen_mode_block_screen_on">
-       <com.android.settings.widget.DisabledCheckBoxPreference
+       <SwitchPreferenceCompat
            android:key="zen_effect_badge"
            android:title="@string/zen_mode_block_effect_badge" />
 
-        <com.android.settings.widget.DisabledCheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="zen_effect_status"
             android:title="@string/zen_mode_block_effect_status" />
 
-        <com.android.settings.widget.DisabledCheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="zen_effect_peek"
             android:title="@string/zen_mode_block_effect_peek" />
 
-       <com.android.settings.widget.DisabledCheckBoxPreference
+       <SwitchPreferenceCompat
            android:key="zen_effect_list"
            android:title="@string/zen_mode_block_effect_list" />
    </PreferenceCategory>

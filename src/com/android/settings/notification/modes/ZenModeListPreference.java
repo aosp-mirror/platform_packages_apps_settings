@@ -22,7 +22,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.notification.zen.ZenModeSettings;
 import com.android.settingslib.RestrictedPreference;
 
 /**
@@ -42,32 +41,24 @@ class ZenModeListPreference extends RestrictedPreference {
 
     @Override
     public void onClick() {
-        // TODO: b/322373473 - This implementation is a hack that just leads to the old DND page
-        //                     for manual only; remove this in favor of the real implementation.
-        if (mZenMode.isManualDnd()) {
-            new SubSettingLauncher(mContext)
-                    .setDestination(ZenModeSettings.class.getName())
-                    .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_ZEN_MODE)
-                    .launch();
-        } else {
-            Bundle bundle = new Bundle();
-            bundle.putString(MODE_ID, mZenMode.getId());
-            new SubSettingLauncher(mContext)
-                    .setDestination(ZenModeFragment.class.getName())
-                    .setArguments(bundle)
-                    .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION)
-                    .launch();
-        }
+        Bundle bundle = new Bundle();
+        bundle.putString(MODE_ID, mZenMode.getId());
+        new SubSettingLauncher(mContext)
+                .setDestination(ZenModeFragment.class.getName())
+                .setArguments(bundle)
+                .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION)
+                .launch();
     }
 
     public void setZenMode(ZenMode zenMode) {
         mZenMode = zenMode;
         setTitle(mZenMode.getRule().getName());
         setSummary(mZenMode.getRule().getTriggerDescription());
+        setIconSize(ICON_SIZE_SMALL);
 
         FutureUtil.whenDone(
-                mZenMode.getIcon(IconLoader.getInstance(mContext)),
-                icon -> setIcon(icon),
+                mZenMode.getIcon(mContext, IconLoader.getInstance()),
+                icon -> setIcon(IconUtil.applyTint(mContext, icon)),
                 mContext.getMainExecutor());
     }
 }
