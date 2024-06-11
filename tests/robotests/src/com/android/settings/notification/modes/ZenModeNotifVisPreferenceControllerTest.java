@@ -41,7 +41,7 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
 
-import com.android.settings.widget.DisabledCheckBoxPreference;
+import androidx.preference.TwoStatePreference;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -95,7 +95,7 @@ public final class ZenModeNotifVisPreferenceControllerTest {
 
     @Test
     public void updateState_notChecked() {
-        DisabledCheckBoxPreference preference = mock(DisabledCheckBoxPreference.class);
+        TwoStatePreference preference = mock(TwoStatePreference.class);
         ZenMode zenMode = new ZenMode("id",
                 new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
                         .setType(AutomaticZenRule.TYPE_DRIVING)
@@ -109,12 +109,12 @@ public final class ZenModeNotifVisPreferenceControllerTest {
         mController.updateZenMode(preference, zenMode);
 
         verify(preference).setChecked(false);
-        verify(preference).enableCheckbox(true);
+        verify(preference).setEnabled(true);
     }
 
     @Test
     public void updateState_checked() {
-        DisabledCheckBoxPreference preference = mock(DisabledCheckBoxPreference.class);
+        TwoStatePreference preference = mock(TwoStatePreference.class);
         ZenMode zenMode = new ZenMode("id",
                 new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
                         .setType(AutomaticZenRule.TYPE_DRIVING)
@@ -128,12 +128,12 @@ public final class ZenModeNotifVisPreferenceControllerTest {
         mController.updateZenMode(preference, zenMode);
 
         verify(preference).setChecked(true);
-        verify(preference).enableCheckbox(true);
+        verify(preference).setEnabled(true);
     }
 
     @Test
     public void updateState_checkedFalse_parentChecked() {
-        DisabledCheckBoxPreference preference = mock(DisabledCheckBoxPreference.class);
+        TwoStatePreference preference = mock(TwoStatePreference.class);
         mController = new ZenModeNotifVisPreferenceController(mContext,
                 "zen_effect_status", VISUAL_EFFECT_STATUS_BAR,
                 new int[]{VISUAL_EFFECT_NOTIFICATION_LIST}, mBackend);
@@ -152,7 +152,7 @@ public final class ZenModeNotifVisPreferenceControllerTest {
         mController.updateZenMode(preference, zenMode);
 
         verify(preference).setChecked(true);
-        verify(preference).enableCheckbox(false);
+        verify(preference).setEnabled(false);
         ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
         verify(mBackend).updateMode(captor.capture());
         assertThat(captor.getValue().getPolicy().getVisualEffectStatusBar())
@@ -163,7 +163,7 @@ public final class ZenModeNotifVisPreferenceControllerTest {
 
     @Test
     public void updateState_checkedFalse_parentNotChecked() {
-        DisabledCheckBoxPreference preference = mock(DisabledCheckBoxPreference.class);
+        TwoStatePreference preference = mock(TwoStatePreference.class);
         mController = new ZenModeNotifVisPreferenceController(mContext,
                 "zen_effect_status", VISUAL_EFFECT_STATUS_BAR,
                 new int[]{VISUAL_EFFECT_NOTIFICATION_LIST}, mBackend);
@@ -181,13 +181,13 @@ public final class ZenModeNotifVisPreferenceControllerTest {
         mController.updateZenMode(preference, zenMode);
 
         verify(preference).setChecked(false);
-        verify(preference).enableCheckbox(true);
+        verify(preference).setEnabled(true);
         verify(mBackend, never()).updateMode(any());
     }
 
     @Test
     public void onPreferenceChanged_checkedFalse() {
-        DisabledCheckBoxPreference preference = mock(DisabledCheckBoxPreference.class);
+        TwoStatePreference preference = mock(TwoStatePreference.class);
         ZenMode zenMode = new ZenMode("id",
                 new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
                         .setType(AutomaticZenRule.TYPE_DRIVING)
@@ -212,7 +212,7 @@ public final class ZenModeNotifVisPreferenceControllerTest {
 
     @Test
     public void onPreferenceChanged_checkedTrue() {
-        DisabledCheckBoxPreference preference = mock(DisabledCheckBoxPreference.class);
+        TwoStatePreference preference = mock(TwoStatePreference.class);
         ZenMode zenMode = new ZenMode("id",
                 new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
                         .setType(AutomaticZenRule.TYPE_DRIVING)

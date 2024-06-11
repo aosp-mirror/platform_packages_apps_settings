@@ -23,6 +23,8 @@ import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowLocalMediaManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -30,6 +32,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.BluetoothMediaDevice;
 import com.android.settingslib.media.LocalMediaManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,7 +41,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
@@ -64,13 +66,18 @@ public class MediaControlHelperTest {
 
     @Before
     public void setUp() {
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mMediaSessionManager);
         when(mMediaSessionManager.getActiveSessions(any())).thenReturn(List.of(mMediaController));
         when(mMediaController.getPackageName()).thenReturn(FAKE_PACKAGE);
         when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
-        ShadowAudioStreamsHelper.resetCachedBluetoothDevice();
         ShadowLocalMediaManager.setUseMock(mLocalMediaManager);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAudioStreamsHelper.reset();
+        ShadowLocalMediaManager.reset();
     }
 
     @Test

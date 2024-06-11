@@ -51,7 +51,7 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DIALOG_AUDIO_SHARING_SWITCH_ACTIVE;
+        return SettingsEnums.DIALOG_AUDIO_SHARING_CALL_AUDIO;
     }
 
     /**

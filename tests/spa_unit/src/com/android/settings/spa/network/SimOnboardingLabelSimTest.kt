@@ -19,20 +19,32 @@ package com.android.settings.spa.network
 import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
+import android.view.KeyEvent.ACTION_DOWN
+import android.view.KeyEvent.KEYCODE_FORWARD_DEL
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.input.key.KeyEvent
+import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performKeyPress
+import androidx.compose.ui.test.performTextClearance
+import androidx.compose.ui.test.performTextInput
 import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
 import com.android.settingslib.spa.testutils.waitUntilExists
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -125,22 +137,7 @@ class SimOnboardingLabelSimTest {
 
     @Test
     fun simOnboardingLabelSimImpl_showItem_show3Items() {
-        mockSimOnboardingService.stub {
-            on { targetSubId }.doReturn(SUB_ID_1)
-            on { targetSubInfo }.doReturn(SUB_INFO_1)
-            on { availableSubInfoList }.doReturn(listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_3))
-            on { activeSubInfoList }.doReturn(listOf(SUB_INFO_2, SUB_INFO_3))
-            on { getSelectableSubscriptionInfoList() }.doReturn(
-                listOf(
-                    SUB_INFO_1,
-                    SUB_INFO_2,
-                    SUB_INFO_3
-                )
-            )
-            on { getSubscriptionInfoDisplayName(SUB_INFO_1) }.doReturn(DISPLAY_NAME_1)
-            on { getSubscriptionInfoDisplayName(SUB_INFO_2) }.doReturn(DISPLAY_NAME_2)
-            on { getSubscriptionInfoDisplayName(SUB_INFO_3) }.doReturn(DISPLAY_NAME_3)
-        }
+        preSetupContent()
 
         composeTestRule.setContent {
             CompositionLocalProvider(
@@ -161,6 +158,97 @@ class SimOnboardingLabelSimTest {
 
     @Test
     fun simOnboardingLabelSimImpl_showDialog_checkTitle() {
+        preSetupContent()
+
+        composeTestRule.setContent {
+            SimOnboardingLabelSimImpl(nextAction, cancelAction, mockSimOnboardingService)
+        }
+        composeTestRule.onNodeWithText(DISPLAY_NAME_1).performClick()
+
+        composeTestRule.onNodeWithText(
+            context.getString(R.string.sim_onboarding_label_sim_dialog_title)
+        ).assertIsDisplayed()
+    }
+
+    @Test
+    fun showDialog_noContentInput_showOriginalDisplayName() {
+        preSetupContent()
+
+        composeTestRule.setContent {
+            SimOnboardingLabelSimImpl(nextAction, cancelAction, mockSimOnboardingService)
+        }
+
+        composeTestRule.onNodeWithText(DISPLAY_NAME_1).performClick()
+
+        assertEquals(
+            composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT)
+                .fetchSemanticsNode()
+                .config[SemanticsProperties.EditableText].text, DISPLAY_NAME_1
+        )
+    }
+
+    @Test
+    fun showDialog_clearContent_saveBtnIsDisabled() {
+        preSetupContent()
+
+        composeTestRule.setContent {
+            SimOnboardingLabelSimImpl(nextAction, cancelAction, mockSimOnboardingService)
+        }
+
+        composeTestRule.onNodeWithText(DISPLAY_NAME_1).performClick()
+        composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT).performTextClearance()
+
+        composeTestRule.onNodeWithText(context.getString(R.string.mobile_network_sim_name_rename))
+            .assertIsNotEnabled()
+    }
+
+    @Test
+    fun showDialog_modifyContent_showAndSaveModifiedDisplayName() {
+        val inputData = "input_data"
+        preSetupContent()
+
+        composeTestRule.setContent {
+            SimOnboardingLabelSimImpl(nextAction, cancelAction, mockSimOnboardingService)
+        }
+
+        composeTestRule.onNodeWithText(DISPLAY_NAME_1).performClick()
+        composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT).performTextInput(inputData)
+
+        // Due to this TextField with Text and EditText, it need fetch correct node to get correct
+        // content.
+        assertEquals(
+            composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT)
+                .fetchSemanticsNode()
+                .config[SemanticsProperties.EditableText].text, inputData + DISPLAY_NAME_1
+        )
+
+        // Click save button
+        composeTestRule.onNodeWithText(context.getString(R.string.mobile_network_sim_name_rename))
+            .performClick()
+
+        // Check preference's name is still DISPLAY_NAME_1
+        composeTestRule.onNodeWithText(inputData + DISPLAY_NAME_1).assertExists()
+    }
+
+    @Test
+    fun showDialog_onlySpaceCharContent_saveBtnIsDisabled() {
+        val spaceChars = "        ";
+        preSetupContent()
+
+        composeTestRule.setContent {
+            SimOnboardingLabelSimImpl(nextAction, cancelAction, mockSimOnboardingService)
+        }
+
+        // Simulate real operation,
+        composeTestRule.onNodeWithText(DISPLAY_NAME_1).performClick()
+        composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT).performTextClearance()
+        composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT).performTextInput(spaceChars)
+
+        composeTestRule.onNodeWithText(context.getString(R.string.mobile_network_sim_name_rename))
+            .assertIsNotEnabled()
+    }
+
+    fun preSetupContent() {
         mockSimOnboardingService.stub {
             on { targetSubId }.doReturn(SUB_ID_1)
             on { targetSubInfo }.doReturn(SUB_INFO_1)
@@ -177,21 +265,10 @@ class SimOnboardingLabelSimTest {
             on { getSubscriptionInfoDisplayName(SUB_INFO_2) }.doReturn(DISPLAY_NAME_2)
             on { getSubscriptionInfoDisplayName(SUB_INFO_3) }.doReturn(DISPLAY_NAME_3)
         }
-
-        composeTestRule.setContent {
-            SimOnboardingLabelSimImpl(nextAction, cancelAction, mockSimOnboardingService)
-        }
-
-
-        composeTestRule.onNodeWithText(DISPLAY_NAME_1).performClick()
-
-        composeTestRule.onNodeWithText(
-            context.getString(R.string.sim_onboarding_label_sim_dialog_title)
-        )
-            .assertIsDisplayed()
     }
 
     private companion object {
+        const val TEXT_FIELD_INPUT = "contentInput"
         const val SUB_ID_1 = 1
         const val SUB_ID_2 = 2
         const val SUB_ID_3 = 3

@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -108,7 +109,9 @@ open class NetworkCellularGroupProvider : SettingsPageProvider {
         var nonDdsRemember = rememberSaveable {
             mutableIntStateOf(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
         }
-
+        var showMobileDataSection = rememberSaveable {
+            mutableStateOf(false)
+        }
         val subscriptionViewModel = viewModel<SubscriptionInfoListViewModel>()
 
         CollectAirplaneModeAndFinishIfOn()
@@ -125,13 +128,18 @@ open class NetworkCellularGroupProvider : SettingsPageProvider {
         val selectableSubscriptionInfoList by subscriptionViewModel
                 .selectableSubscriptionInfoListFlow
                 .collectAsStateWithLifecycle(initialValue = emptyList())
-
+        showMobileDataSection.value = selectableSubscriptionInfoList
+                .filter { subInfo -> subInfo.simSlotIndex > -1 }
+                .size > 0
         val stringSims = stringResource(R.string.provider_network_settings_title)
         RegularScaffold(title = stringSims) {
             SimsSection(selectableSubscriptionInfoList)
-            MobileDataSectionImpl(mobileDataSelectedId,
-                nonDdsRemember,
-            )
+            if(showMobileDataSection.value) {
+                MobileDataSectionImpl(
+                    mobileDataSelectedId,
+                    nonDdsRemember,
+                )
+            }
 
             PrimarySimSectionImpl(
                 subscriptionViewModel.selectableSubscriptionInfoListFlow,
