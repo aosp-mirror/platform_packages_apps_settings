@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -32,6 +33,7 @@ import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.util.Pair;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -39,6 +41,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.bluetooth.Utils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -51,6 +54,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.flags.Flags;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.truth.Correspondence;
 
 import org.junit.Before;
@@ -87,6 +91,7 @@ public class AudioSharingDialogHandlerTest {
             Correspondence.from(
                     (Fragment fragment, String tag) ->
                             fragment instanceof DialogFragment
+                                    && ((DialogFragment) fragment).getTag() != null
                                     && ((DialogFragment) fragment).getTag().equals(tag),
                     "is equal to");
 
@@ -107,20 +112,22 @@ public class AudioSharingDialogHandlerTest {
     private Fragment mParentFragment;
     @Mock private BluetoothLeBroadcastReceiveState mState;
     private Context mContext;
-    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private AudioSharingDialogHandler mHandler;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setup() {
         mContext = ApplicationProvider.getApplicationContext();
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
         mLocalBtManager = Utils.getLocalBtManager(mContext);
-        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
-        mShadowBluetoothAdapter.setEnabled(true);
-        mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
+        ShadowBluetoothAdapter shadowBluetoothAdapter =
+                Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+        shadowBluetoothAdapter.setEnabled(true);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
-        mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
+        shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         when(mLocalBtManager.getProfileManager()).thenReturn(mLocalBtProfileManager);
         when(mLocalBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
@@ -183,9 +190,33 @@ public class AudioSharingDialogHandlerTest {
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
         mHandler.handleDeviceConnected(mCachedDevice2, /* userTriggered= */ true);
         shadowOf(Looper.getMainLooper()).idle();
-        assertThat(mParentFragment.getChildFragmentManager().getFragments())
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments)
                 .comparingElementsUsing(TAG_EQUALS)
                 .containsExactly(AudioSharingStopDialogFragment.tag());
+
+        AudioSharingStopDialogFragment fragment =
+                (AudioSharingStopDialogFragment) Iterables.getOnlyElement(childFragments);
+        Pair<Integer, Object>[] eventData = fragment.getEventData();
+        assertThat(eventData)
+                .asList()
+                .containsExactly(
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
+                                SettingsEnums.DIALOG_STOP_AUDIO_SHARING),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 1),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
+                                        .ordinal(),
+                                1),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
+                                        .ordinal(),
+                                0));
     }
 
     @Test
@@ -211,9 +242,33 @@ public class AudioSharingDialogHandlerTest {
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
         mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ true);
         shadowOf(Looper.getMainLooper()).idle();
-        assertThat(mParentFragment.getChildFragmentManager().getFragments())
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments)
                 .comparingElementsUsing(TAG_EQUALS)
                 .containsExactly(AudioSharingJoinDialogFragment.tag());
+
+        AudioSharingJoinDialogFragment fragment =
+                (AudioSharingJoinDialogFragment) Iterables.getOnlyElement(childFragments);
+        Pair<Integer, Object>[] eventData = fragment.getEventData();
+        assertThat(eventData)
+                .asList()
+                .containsExactly(
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
+                                SettingsEnums.DIALOG_START_AUDIO_SHARING),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 1),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
+                                        .ordinal(),
+                                0),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
+                                        .ordinal(),
+                                2));
     }
 
     @Test
@@ -227,9 +282,33 @@ public class AudioSharingDialogHandlerTest {
         when(mAssistant.getAllSources(mDevice3)).thenReturn(ImmutableList.of(mState));
         mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ true);
         shadowOf(Looper.getMainLooper()).idle();
-        assertThat(mParentFragment.getChildFragmentManager().getFragments())
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments)
                 .comparingElementsUsing(TAG_EQUALS)
                 .containsExactly(AudioSharingJoinDialogFragment.tag());
+
+        AudioSharingJoinDialogFragment fragment =
+                (AudioSharingJoinDialogFragment) Iterables.getOnlyElement(childFragments);
+        Pair<Integer, Object>[] eventData = fragment.getEventData();
+        assertThat(eventData)
+                .asList()
+                .containsExactly(
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
+                                SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 1),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
+                                        .ordinal(),
+                                1),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
+                                        .ordinal(),
+                                1));
     }
 
     @Test
@@ -245,9 +324,33 @@ public class AudioSharingDialogHandlerTest {
         when(mAssistant.getAllSources(mDevice4)).thenReturn(ImmutableList.of(mState));
         mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ true);
         shadowOf(Looper.getMainLooper()).idle();
-        assertThat(mParentFragment.getChildFragmentManager().getFragments())
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments)
                 .comparingElementsUsing(TAG_EQUALS)
                 .containsExactly(AudioSharingDisconnectDialogFragment.tag());
+
+        AudioSharingDisconnectDialogFragment fragment =
+                (AudioSharingDisconnectDialogFragment) Iterables.getOnlyElement(childFragments);
+        Pair<Integer, Object>[] eventData = fragment.getEventData();
+        assertThat(eventData)
+                .asList()
+                .containsExactly(
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
+                                SettingsEnums.DIALOG_AUDIO_SHARING_SWITCH_DEVICE),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 1),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
+                                        .ordinal(),
+                                2),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
+                                        .ordinal(),
+                                1));
     }
 
     @Test
@@ -273,9 +376,33 @@ public class AudioSharingDialogHandlerTest {
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
         mHandler.handleDeviceConnected(mCachedDevice2, /* userTriggered= */ false);
         shadowOf(Looper.getMainLooper()).idle();
-        assertThat(mParentFragment.getChildFragmentManager().getFragments())
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments)
                 .comparingElementsUsing(TAG_EQUALS)
                 .containsExactly(AudioSharingStopDialogFragment.tag());
+
+        AudioSharingStopDialogFragment fragment =
+                (AudioSharingStopDialogFragment) Iterables.getOnlyElement(childFragments);
+        Pair<Integer, Object>[] eventData = fragment.getEventData();
+        assertThat(eventData)
+                .asList()
+                .containsExactly(
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
+                                SettingsEnums.DIALOG_STOP_AUDIO_SHARING),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 0),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
+                                        .ordinal(),
+                                1),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
+                                        .ordinal(),
+                                0));
     }
 
     @Test
@@ -301,9 +428,33 @@ public class AudioSharingDialogHandlerTest {
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
         mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ false);
         shadowOf(Looper.getMainLooper()).idle();
-        assertThat(mParentFragment.getChildFragmentManager().getFragments())
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments)
                 .comparingElementsUsing(TAG_EQUALS)
                 .containsExactly(AudioSharingJoinDialogFragment.tag());
+
+        AudioSharingJoinDialogFragment fragment =
+                (AudioSharingJoinDialogFragment) Iterables.getOnlyElement(childFragments);
+        Pair<Integer, Object>[] eventData = fragment.getEventData();
+        assertThat(eventData)
+                .asList()
+                .containsExactly(
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
+                                SettingsEnums.DIALOG_START_AUDIO_SHARING),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 0),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
+                                        .ordinal(),
+                                0),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
+                                        .ordinal(),
+                                2));
     }
 
     @Test
@@ -317,9 +468,33 @@ public class AudioSharingDialogHandlerTest {
         when(mAssistant.getAllSources(mDevice3)).thenReturn(ImmutableList.of(mState));
         mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ false);
         shadowOf(Looper.getMainLooper()).idle();
-        assertThat(mParentFragment.getChildFragmentManager().getFragments())
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments)
                 .comparingElementsUsing(TAG_EQUALS)
                 .containsExactly(AudioSharingJoinDialogFragment.tag());
+
+        AudioSharingJoinDialogFragment fragment =
+                (AudioSharingJoinDialogFragment) Iterables.getOnlyElement(childFragments);
+        Pair<Integer, Object>[] eventData = fragment.getEventData();
+        assertThat(eventData)
+                .asList()
+                .containsExactly(
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
+                                SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 0),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
+                                        .ordinal(),
+                                1),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
+                                        .ordinal(),
+                                1));
     }
 
     @Test
@@ -334,9 +509,33 @@ public class AudioSharingDialogHandlerTest {
         when(mAssistant.getAllSources(mDevice4)).thenReturn(ImmutableList.of(mState));
         mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ false);
         shadowOf(Looper.getMainLooper()).idle();
-        assertThat(mParentFragment.getChildFragmentManager().getFragments())
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments)
                 .comparingElementsUsing(TAG_EQUALS)
                 .containsExactly(AudioSharingDisconnectDialogFragment.tag());
+
+        AudioSharingDisconnectDialogFragment fragment =
+                (AudioSharingDisconnectDialogFragment) Iterables.getOnlyElement(childFragments);
+        Pair<Integer, Object>[] eventData = fragment.getEventData();
+        assertThat(eventData)
+                .asList()
+                .containsExactly(
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
+                                SettingsEnums.DIALOG_AUDIO_SHARING_SWITCH_DEVICE),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 0),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
+                                        .ordinal(),
+                                2),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
+                                        .ordinal(),
+                                1));
     }
 
     @Test
@@ -357,6 +556,11 @@ public class AudioSharingDialogHandlerTest {
         mHandler.closeOpeningDialogsForLeaDevice(mCachedDevice1);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mParentFragment.getChildFragmentManager().getFragments()).isEmpty();
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS,
+                        SettingsEnums.DIALOG_START_AUDIO_SHARING);
     }
 
     @Test
@@ -377,6 +581,11 @@ public class AudioSharingDialogHandlerTest {
         mHandler.closeOpeningDialogsForNonLeaDevice(mCachedDevice2);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mParentFragment.getChildFragmentManager().getFragments()).isEmpty();
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS,
+                        SettingsEnums.DIALOG_STOP_AUDIO_SHARING);
     }
 
     private void setUpBroadcast(boolean isBroadcasting) {
