@@ -30,12 +30,12 @@ import com.android.settings.R;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
@@ -49,7 +49,7 @@ import org.robolectric.annotation.Config;
 public class AudioStreamsActiveDeviceSummaryUpdaterTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     private static final String DEVICE_NAME = "device_name";
-    @Spy private final Context mContext = ApplicationProvider.getApplicationContext();
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     private final AudioStreamsActiveDeviceSummaryUpdater.OnSummaryChangeListener mFakeListener =
             summary -> mUpdatedSummary = summary;
     @Mock private CachedBluetoothDevice mCachedBluetoothDevice;
@@ -60,8 +60,12 @@ public class AudioStreamsActiveDeviceSummaryUpdaterTest {
     @Before
     public void setUp() {
         ShadowAudioStreamsHelper.setUseMock(mAudioStreamsHelper);
-        ShadowAudioStreamsHelper.resetCachedBluetoothDevice();
         mUpdater = new AudioStreamsActiveDeviceSummaryUpdater(mContext, mFakeListener);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAudioStreamsHelper.reset();
     }
 
     @Test

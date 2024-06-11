@@ -184,7 +184,6 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
      */
     public void onAcquired(boolean isAcquiredGood) {
         if (mListener != null) {
-            Log.e("JRM", "OnaCquired " + isAcquiredGood + " lastStepIsGood" + animateIfLastStep());
             mListener.onAcquired(isAcquiredGood && animateIfLastStep());
         }
     }

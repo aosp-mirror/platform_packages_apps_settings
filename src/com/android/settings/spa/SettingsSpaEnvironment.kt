@@ -19,6 +19,7 @@ package com.android.settings.spa
 import android.content.Context
 import android.util.FeatureFlagUtils
 import com.android.settings.network.apn.ApnEditPageProvider
+import com.android.settings.print.PrintSettingsPageProvider
 import com.android.settings.spa.about.AboutPhonePageProvider
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
@@ -120,6 +121,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
         BatteryOptimizationModeAppListPageProvider,
         NetworkCellularGroupProvider(),
         WifiPrivacyPageProvider,
+        PrintSettingsPageProvider,
     )
 
     override val logger = if (FeatureFlagUtils.isEnabled(

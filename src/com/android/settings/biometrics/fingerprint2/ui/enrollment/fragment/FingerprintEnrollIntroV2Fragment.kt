@@ -30,8 +30,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
-import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
@@ -74,37 +75,22 @@ private data class TextModel(
  * 2. How the data will be stored
  * 3. How the user can access and remove their data
  */
-class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enroll_introduction) {
-
-  /** Used for testing purposes */
-  private var factory: ViewModelProvider.Factory? = null
-
-  @VisibleForTesting
-  constructor(theFactory: ViewModelProvider.Factory) : this() {
-    factory = theFactory
-  }
-
-  private val viewModelProvider: ViewModelProvider by lazy {
-    if (factory != null) {
-      ViewModelProvider(requireActivity(), factory!!)
-    } else {
-      ViewModelProvider(requireActivity())
-    }
-  }
+class FingerprintEnrollIntroV2Fragment(testFactory: ViewModelProvider.Factory? = null) :
+  Fragment(R.layout.fingerprint_v2_enroll_introduction) {
 
   private lateinit var footerBarMixin: FooterBarMixin
   private lateinit var textModel: TextModel
 
-  private val viewModel: FingerprintEnrollIntroViewModel by lazy {
-    viewModelProvider[FingerprintEnrollIntroViewModel::class.java]
+  private val viewModel: FingerprintEnrollIntroViewModel by activityViewModels {
+    testFactory ?: FingerprintEnrollIntroViewModel.Factory
   }
 
-  private val fingerprintScrollViewModel: FingerprintScrollViewModel by lazy {
-    viewModelProvider[FingerprintScrollViewModel::class.java]
+  private val fingerprintScrollViewModel: FingerprintScrollViewModel by viewModels {
+    testFactory ?: FingerprintScrollViewModel.Factory
   }
 
-  private val gateKeeperViewModel: FingerprintGatekeeperViewModel by lazy {
-    viewModelProvider[FingerprintGatekeeperViewModel::class.java]
+  private val gateKeeperViewModel: FingerprintGatekeeperViewModel by activityViewModels {
+    testFactory ?: FingerprintGatekeeperViewModel.Factory
   }
 
   override fun onCreateView(

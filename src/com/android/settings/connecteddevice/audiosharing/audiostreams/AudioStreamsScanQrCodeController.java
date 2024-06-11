@@ -16,9 +16,9 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -28,10 +28,10 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
-import com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode.QrCodeScanModeActivity;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -107,13 +107,12 @@ public class AudioStreamsScanQrCodeController extends BasePreferenceController
                         return false;
                     }
                     if (preference.getKey().equals(KEY)) {
-                        Intent intent = new Intent(mContext, QrCodeScanModeActivity.class);
-                        intent.setAction(
-                                BluetoothBroadcastUtils.ACTION_BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER);
-                        mFragment.startActivityForResult(intent, REQUEST_SCAN_BT_BROADCAST_QR_CODE);
-                        if (DEBUG) {
-                            Log.w(TAG, "displayPreference() sent intent : " + intent);
-                        }
+                        new SubSettingLauncher(mContext)
+                                .setTitleRes(R.string.audio_streams_main_page_scan_qr_code_title)
+                                .setDestination(AudioStreamsQrCodeScanFragment.class.getName())
+                                .setResultListener(mFragment, REQUEST_SCAN_BT_BROADCAST_QR_CODE)
+                                .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
+                                .launch();
                         return true;
                     }
                     return false;
