@@ -65,7 +65,7 @@ public class QuickSettingsShortcutOptionController extends ShortcutOptionPrefere
             shortcutOptionPreference.setTitle(
                     R.string.accessibility_shortcut_edit_dialog_title_quick_settings);
             shortcutOptionPreference.setIntroImageResId(
-                    R.drawable.a11y_shortcut_type_quick_settings);
+                    R.drawable.accessibility_shortcut_type_quick_settings);
         }
     }
 

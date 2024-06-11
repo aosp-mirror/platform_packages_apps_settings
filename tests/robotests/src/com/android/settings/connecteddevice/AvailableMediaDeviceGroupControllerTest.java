@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
@@ -58,6 +59,7 @@ import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
 import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingDialogHandler;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
@@ -128,6 +130,7 @@ public class AvailableMediaDeviceGroupControllerTest {
     private PreferenceGroup mPreferenceGroup;
     private Context mContext;
     private FragmentManager mFragManager;
+    private FakeFeatureFactory mFeatureFactory;
     private Preference mPreference;
     private AvailableMediaDeviceGroupController mAvailableMediaDeviceGroupController;
     private AudioManager mAudioManager;
@@ -157,6 +160,7 @@ public class AvailableMediaDeviceGroupControllerTest {
                 BluetoothStatusCodes.FEATURE_NOT_SUPPORTED);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mAudioManager = mContext.getSystemService(AudioManager.class);
         doReturn(mEventManager).when(mLocalBluetoothManager).getEventManager();
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBtProfileManager);
@@ -414,6 +418,8 @@ public class AvailableMediaDeviceGroupControllerTest {
         mAvailableMediaDeviceGroupController.onDeviceClick(preference);
         verify(mDialogHandler)
                 .handleDeviceConnected(mCachedBluetoothDevice, /* userTriggered= */ true);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_MEDIA_DEVICE_CLICK);
     }
 
     private void setUpBroadcast() {

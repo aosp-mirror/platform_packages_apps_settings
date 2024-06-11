@@ -28,12 +28,15 @@ import android.view.animation.Interpolator
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.android.settings.R
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.common.util.toFingerprintEnrollOptions
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.common.widget.FingerprintErrorDialog
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSIconTouchViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
@@ -62,28 +65,20 @@ class RFPSEnrollFragment() : Fragment(R.layout.fingerprint_v2_rfps_enroll_enroll
     factory = theFactory
   }
 
-  private val viewModelProvider: ViewModelProvider by lazy {
-    if (factory != null) {
-      ViewModelProvider(requireActivity(), factory!!)
-    } else {
-      ViewModelProvider(requireActivity())
-    }
-  }
-
   private lateinit var linearOutSlowInInterpolator: Interpolator
   private lateinit var fastOutLinearInInterpolator: Interpolator
   private lateinit var textView: TextView
   private lateinit var progressBar: RFPSProgressBar
 
-  private val iconTouchViewModel: RFPSIconTouchViewModel by lazy {
-    viewModelProvider[RFPSIconTouchViewModel::class.java]
+  private val iconTouchViewModel: RFPSIconTouchViewModel by viewModels {
+    RFPSIconTouchViewModel.Factory
   }
 
-  private val rfpsViewModel: RFPSViewModel by lazy { viewModelProvider[RFPSViewModel::class.java] }
-
-  private val backgroundViewModel: BackgroundViewModel by lazy {
-    viewModelProvider[BackgroundViewModel::class.java]
+  private val rfpsViewModel: RFPSViewModel by activityViewModels {
+    factory ?: RFPSViewModel.Factory
   }
+
+  private val backgroundViewModel: BackgroundViewModel by activityViewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -131,6 +126,7 @@ class RFPSEnrollFragment() : Fragment(R.layout.fingerprint_v2_rfps_enroll_enroll
 
     viewLifecycleOwner.lifecycleScope.launch {
       repeatOnLifecycle(Lifecycle.State.RESUMED) {
+        rfpsViewModel.enroll(requireActivity().intent.toFingerprintEnrollOptions())
         // Icon animation  update
         viewLifecycleOwner.lifecycleScope.launch {
           // TODO(b/324427704): Fix this delay

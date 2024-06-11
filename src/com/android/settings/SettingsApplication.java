@@ -24,9 +24,11 @@ import android.provider.Settings;
 import android.util.FeatureFlagUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.biometrics.fingerprint2.BiometricsEnvironment;
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
 import com.android.settings.development.DeveloperOptionsActivityLifecycle;
 import com.android.settings.fuelgauge.BatterySettingsStorage;
@@ -47,6 +49,7 @@ import java.lang.ref.WeakReference;
 public class SettingsApplication extends Application {
 
     private WeakReference<SettingsHomepageActivity> mHomeActivity = new WeakReference<>(null);
+    private BiometricsEnvironment mBiometricsEnvironment;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -70,6 +73,7 @@ public class SettingsApplication extends Application {
 
         // Set Spa environment.
         setSpaEnvironment();
+        mBiometricsEnvironment = new BiometricsEnvironment(this);
 
         if (ActivityEmbeddingUtils.isSettingsSplitEnabled(this)
                 && FeatureFlagUtils.isEnabled(this,
@@ -109,6 +113,11 @@ public class SettingsApplication extends Application {
 
     public SettingsHomepageActivity getHomeActivity() {
         return mHomeActivity.get();
+    }
+
+    @Nullable
+    public BiometricsEnvironment getBiometricEnvironment() {
+        return mBiometricsEnvironment;
     }
 
     @Override

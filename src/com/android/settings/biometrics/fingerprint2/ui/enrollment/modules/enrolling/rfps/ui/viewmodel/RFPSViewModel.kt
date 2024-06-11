@@ -16,9 +16,14 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel
 
+import android.hardware.fingerprint.FingerprintEnrollOptions
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
@@ -158,27 +163,27 @@ class RFPSViewModel(
     enrollFlow = fingerprintEnrollViewModel.enrollFlow
   }
 
-  class RFPSViewModelFactory(
-    private val fingerprintEnrollEnrollingViewModel: FingerprintEnrollEnrollingViewModel,
-    private val navigationViewModel: FingerprintNavigationViewModel,
-    private val orientationInteractor: OrientationInteractor,
-    private val fingerprintManager: FingerprintManagerInteractor,
-  ) : ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return RFPSViewModel(
-        fingerprintEnrollEnrollingViewModel,
-        navigationViewModel,
-        orientationInteractor,
-        fingerprintManager,
-      )
-        as T
-    }
+  /** Starts enrollment. */
+  fun enroll(enrollOptions: FingerprintEnrollOptions) {
+    fingerprintEnrollViewModel.enroll(enrollOptions)
   }
 
   companion object {
     private val navStep = Enrollment::class
     private const val TAG = "RFPSViewModel"
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer {
+        val settingsApplication =
+          this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as SettingsApplication
+        val biometricEnvironment = settingsApplication.biometricEnvironment!!
+        val provider = ViewModelProvider(this[VIEW_MODEL_STORE_OWNER_KEY]!!)
+        RFPSViewModel(
+          provider[FingerprintEnrollEnrollingViewModel::class],
+          provider[FingerprintNavigationViewModel::class],
+          biometricEnvironment.orientationInteractor,
+          biometricEnvironment.fingerprintManagerInteractor,
+        )
+      }
+    }
   }
 }

@@ -19,6 +19,7 @@ package com.android.settings.biometrics.face;
 import static android.app.Activity.RESULT_OK;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_SETTINGS_FOR_WORK_TITLE;
 
+import static com.android.settings.Utils.isPrivateProfile;
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.ENROLL_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
@@ -172,6 +173,10 @@ public class FaceSettings extends DashboardFragment {
                     mDevicePolicyManager.getResources().getString(FACE_SETTINGS_FOR_WORK_TITLE,
                             () -> getActivity().getResources().getString(
                                     R.string.security_settings_face_profile_preference_title)));
+        } else if (isPrivateProfile(mUserId, getContext())) {
+            getActivity().setTitle(
+                    getActivity().getResources().getString(
+                    R.string.private_space_face_unlock_title));
         }
 
         mLockscreenController = Utils.isMultipleBiometricsSupported(context)
