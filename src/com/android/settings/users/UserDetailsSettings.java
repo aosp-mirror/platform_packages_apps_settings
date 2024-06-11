@@ -127,7 +127,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         mSwitchUserPref.setEnabled(canSwitchUserNow());
-        if (mGuestUserAutoCreated) {
+        if (mUserInfo.isGuest() && mGuestUserAutoCreated) {
             mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
         }
     }

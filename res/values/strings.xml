@@ -7963,6 +7963,15 @@
     <!-- Do not disturb: Title on the page where users choose a calendar to determine the schedule for an automatically-triggered DND rule. [CHAR LIMIT=30] -->
     <string name="zen_mode_set_calendar_category_title">Schedule</string>
 
+    <!-- Do not disturb: Title prompting a user to set a time-based schedule to use for an automatic rule [CHAR LIMIT=30] -->
+    <string name="zen_mode_set_schedule_title">Set a schedule</string>
+
+    <!-- Do not disturb: Link text prompting a user to click through to setting a time-based schedule [CHAR LIMIT=40] -->
+    <string name="zen_mode_set_schedule_link">Schedule</string>
+
+    <!-- Duration in hours and minutes for the length of a Do Not Disturb schedule. For example "1 hr, 22 min" -->
+    <string name="zen_mode_schedule_duration"><xliff:g example="10" id="hours">%1$d</xliff:g> hr, <xliff:g example="20" id="minutes">%2$d</xliff:g> min</string>
+
     <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_category_title">Schedule</string>
 
@@ -9302,6 +9311,15 @@
     <string name="zen_mode_summary_alarms_only_by_time">Change to alarms only until <xliff:g id="formattedTime" example="10:00 PM">%1$s</xliff:g></string>
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
     <string name="zen_mode_summary_always">Change to always interrupt</string>
+
+    <!-- [CHAR LIMIT=20] Caption of the action button to change the name of a mode. -->
+    <string name="zen_mode_action_change_name">Rename</string>
+
+    <!-- [CHAR LIMIT=20] Caption of the action button to change the icon of a mode. -->
+    <string name="zen_mode_action_change_icon">Change icon</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Title for the "choose mode icon" screen -->
+    <string name="zen_mode_icon_picker_title">Change icon</string>
 
     <!-- Content description for help icon button [CHAR LIMIT=20] -->
     <string name="warning_button_text">Warning</string>

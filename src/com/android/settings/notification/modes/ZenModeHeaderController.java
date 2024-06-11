@@ -63,9 +63,8 @@ class ZenModeHeaderController extends AbstractZenModePreferenceController {
 
         FutureUtil.whenDone(
                 zenMode.getIcon(mContext, IconLoader.getInstance()),
-                icon -> mHeaderController.setIcon(icon)
-                        .setLabel(zenMode.getRule().getName())
-                        .done(false /* rebindActions */),
+                icon -> mHeaderController.setIcon(IconUtil.applyTint(mContext, icon))
+                        .done(/* rebindActions= */ false),
                 mContext.getMainExecutor());
     }
 }

@@ -23,6 +23,8 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_W
 import static android.Manifest.permission.SET_BIOMETRIC_DIALOG_ADVANCED;
 import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
+import static com.android.systemui.biometrics.Utils.toBitmap;
+
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.RemoteLockscreenValidationSession;
@@ -35,6 +37,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.UserProperties;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricPrompt;
@@ -215,9 +218,10 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 && android.multiuser.Flags.usePrivateSpaceIconInBiometricPrompt()
                 && hasSetBiometricDialogAdvanced(mContext, getLaunchedFromUid())
         ) {
-            int iconResId = intent.getIntExtra(CUSTOM_BIOMETRIC_PROMPT_LOGO_RES_ID_KEY, 0);
+            final int iconResId = intent.getIntExtra(CUSTOM_BIOMETRIC_PROMPT_LOGO_RES_ID_KEY, 0);
             if (iconResId != 0) {
-                promptInfo.setLogoRes(iconResId);
+                final Bitmap iconBitmap = toBitmap(mContext.getDrawable(iconResId));
+                promptInfo.setLogo(iconResId, iconBitmap);
             }
             String logoDescription = intent.getStringExtra(
                     CUSTOM_BIOMETRIC_PROMPT_LOGO_DESCRIPTION_KEY);

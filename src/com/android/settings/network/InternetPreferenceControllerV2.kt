@@ -22,7 +22,6 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.wifi.WifiSummaryRepository
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 
 class InternetPreferenceControllerV2(context: Context, preferenceKey: String) :
@@ -40,7 +39,7 @@ class InternetPreferenceControllerV2(context: Context, preferenceKey: String) :
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        WifiSummaryRepository(mContext).summaryFlow()
+        InternetPreferenceRepository(mContext).summaryFlow()
             .collectLatestWithLifecycle(viewLifecycleOwner) {
                 preference?.summary = it
             }

@@ -16,6 +16,12 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT;
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING;
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID;
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID;
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
@@ -25,6 +31,7 @@ import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.provider.Settings;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -53,6 +60,14 @@ public class AudioSharingUtils {
             "bluetooth_le_broadcast_fallback_active_group_id";
     private static final String TAG = "AudioSharingUtils";
     private static final boolean DEBUG = BluetoothUtils.D;
+
+    public enum MetricKey {
+        METRIC_KEY_SOURCE_PAGE_ID,
+        METRIC_KEY_PAGE_ID,
+        METRIC_KEY_USER_TRIGGERED,
+        METRIC_KEY_DEVICE_COUNT_IN_SHARING,
+        METRIC_KEY_CANDIDATE_DEVICE_COUNT
+    }
 
     /**
      * Fetch {@link CachedBluetoothDevice}s connected to the broadcast assistant. The devices are
@@ -121,7 +136,7 @@ public class AudioSharingUtils {
             boolean filterByInSharing) {
         List<CachedBluetoothDevice> orderedDevices = new ArrayList<>();
         for (List<CachedBluetoothDevice> devices : groupedConnectedDevices.values()) {
-            @Nullable CachedBluetoothDevice leadDevice = getLeadDevice(devices);
+            CachedBluetoothDevice leadDevice = getLeadDevice(devices);
             if (leadDevice == null) {
                 Log.d(TAG, "Skip due to no lead device");
                 continue;
@@ -206,7 +221,7 @@ public class AudioSharingUtils {
         return buildOrderedConnectedLeadDevices(
                         localBtManager, groupedConnectedDevices, filterByInSharing)
                 .stream()
-                .map(device -> buildAudioSharingDeviceItem(device))
+                .map(AudioSharingUtils::buildAudioSharingDeviceItem)
                 .collect(Collectors.toList());
     }
 
@@ -315,8 +330,9 @@ public class AudioSharingUtils {
                 manager.getProfileManager().getLeAudioBroadcastProfile();
         if (broadcast == null) {
             Log.d(TAG, "Skip stop broadcasting due to broadcast profile is null");
+        } else {
+            broadcast.stopBroadcast(broadcast.getLatestBroadcastId());
         }
-        broadcast.stopBroadcast(broadcast.getLatestBroadcastId());
     }
 
     /**
@@ -378,9 +394,32 @@ public class AudioSharingUtils {
             return false;
         }
         VolumeControlProfile vc = profileManager.getVolumeControlProfile();
-        if (vc == null || !vc.isProfileReady()) {
-            return false;
-        }
-        return true;
+        return vc != null && vc.isProfileReady();
+    }
+
+    /**
+     * Build audio sharing dialog log event data
+     *
+     * @param sourcePageId The source page id on which the dialog is shown. *
+     * @param pageId The page id of the dialog.
+     * @param userTriggered Indicates whether the dialog is triggered by user click.
+     * @param deviceCountInSharing The count of the devices joining the audio sharing.
+     * @param candidateDeviceCount The count of the eligible devices to join the audio sharing.
+     * @return The event data to be attached to the audio sharing action logs.
+     */
+    @NonNull
+    public static Pair<Integer, Object>[] buildAudioSharingDialogEventData(
+            int sourcePageId,
+            int pageId,
+            boolean userTriggered,
+            int deviceCountInSharing,
+            int candidateDeviceCount) {
+        return new Pair[] {
+            Pair.create(METRIC_KEY_SOURCE_PAGE_ID.ordinal(), sourcePageId),
+            Pair.create(METRIC_KEY_PAGE_ID.ordinal(), pageId),
+            Pair.create(METRIC_KEY_USER_TRIGGERED.ordinal(), userTriggered ? 1 : 0),
+            Pair.create(METRIC_KEY_DEVICE_COUNT_IN_SHARING.ordinal(), deviceCountInSharing),
+            Pair.create(METRIC_KEY_CANDIDATE_DEVICE_COUNT.ordinal(), candidateDeviceCount)
+        };
     }
 }

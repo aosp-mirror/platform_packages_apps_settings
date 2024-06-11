@@ -16,6 +16,7 @@
 package com.android.settings.notification.modes;
 
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
+import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
 
 import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
 
@@ -32,13 +33,13 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.PrimarySwitchPreference;
 
 /**
- * Preference controller for the link
+ * Preference controller for the link to an individual mode's configuration page.
  */
-public class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenceController {
+class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenceController {
     @VisibleForTesting
     protected static final String AUTOMATIC_TRIGGER_PREF_KEY = "zen_automatic_trigger_settings";
 
-    public ZenModeSetTriggerLinkPreferenceController(Context context, String key,
+    ZenModeSetTriggerLinkPreferenceController(Context context, String key,
             ZenModesBackend backend) {
         super(context, key, backend);
     }
@@ -66,6 +67,16 @@ public class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePr
 
         // TODO: b/341961712 - direct preference to app-owned intent if available
         switch (zenMode.getRule().getType()) {
+            case TYPE_SCHEDULE_TIME:
+                switchPref.setTitle(R.string.zen_mode_set_schedule_link);
+                switchPref.setSummary(zenMode.getRule().getTriggerDescription());
+                switchPref.setIntent(new SubSettingLauncher(mContext)
+                        .setDestination(ZenModeSetScheduleFragment.class.getName())
+                        // TODO: b/332937635 - set correct metrics category
+                        .setSourceMetricsCategory(0)
+                        .setArguments(bundle)
+                        .toIntent());
+                break;
             case TYPE_SCHEDULE_CALENDAR:
                 switchPref.setTitle(R.string.zen_mode_set_calendar_link);
                 switchPref.setSummary(zenMode.getRule().getTriggerDescription());

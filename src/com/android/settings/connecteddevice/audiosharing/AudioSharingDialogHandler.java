@@ -24,6 +24,7 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,15 +34,21 @@ import androidx.fragment.app.Fragment;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.utils.ThreadUtils;
+
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Executor;
 
 public class AudioSharingDialogHandler {
@@ -51,6 +58,7 @@ public class AudioSharingDialogHandler {
     @Nullable private final LocalBluetoothManager mLocalBtManager;
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private List<BluetoothDevice> mTargetSinks = new ArrayList<>();
 
     private final BluetoothLeBroadcast.Callback mBroadcastCallback =
@@ -119,9 +127,7 @@ public class AudioSharingDialogHandler {
                         new SubSettingLauncher(mContext)
                                 .setDestination(AudioSharingDashboardFragment.class.getName())
                                 .setSourceMetricsCategory(
-                                        (mHostFragment != null
-                                                        && mHostFragment
-                                                                instanceof DashboardFragment)
+                                        (mHostFragment instanceof DashboardFragment)
                                                 ? ((DashboardFragment) mHostFragment)
                                                         .getMetricsCategory()
                                                 : SettingsEnums.PAGE_UNKNOWN)
@@ -146,6 +152,7 @@ public class AudioSharingDialogHandler {
                 mLocalBtManager != null
                         ? mLocalBtManager.getProfileManager().getLeAudioBroadcastAssistantProfile()
                         : null;
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     /** Register callbacks for dialog handler */
@@ -191,6 +198,18 @@ public class AudioSharingDialogHandler {
             List<AudioSharingDeviceItem> deviceItemsInSharingSession =
                     AudioSharingUtils.buildOrderedConnectedLeadAudioSharingDeviceItem(
                             mLocalBtManager, groupedDevices, /* filterByInSharing= */ true);
+            AudioSharingStopDialogFragment.DialogEventListener listener =
+                    () -> {
+                        cachedDevice.setActive();
+                        AudioSharingUtils.stopBroadcasting(mLocalBtManager);
+                    };
+            Pair<Integer, Object>[] eventData =
+                    AudioSharingUtils.buildAudioSharingDialogEventData(
+                            SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY,
+                            SettingsEnums.DIALOG_STOP_AUDIO_SHARING,
+                            userTriggered,
+                            deviceItemsInSharingSession.size(),
+                            /* candidateDeviceCount= */ 0);
             postOnMainThread(
                     () -> {
                         closeOpeningDialogsOtherThan(AudioSharingStopDialogFragment.tag());
@@ -198,10 +217,8 @@ public class AudioSharingDialogHandler {
                                 mHostFragment,
                                 deviceItemsInSharingSession,
                                 cachedDevice,
-                                () -> {
-                                    cachedDevice.setActive();
-                                    AudioSharingUtils.stopBroadcasting(mLocalBtManager);
-                                });
+                                listener,
+                                eventData);
                     });
         } else {
             if (userTriggered) {
@@ -252,6 +269,20 @@ public class AudioSharingDialogHandler {
             // Show audio sharing switch dialog when the third eligible (LE audio) remote device
             // connected during a sharing session.
             if (deviceItemsInSharingSession.size() >= 2) {
+                AudioSharingDisconnectDialogFragment.DialogEventListener listener =
+                        (AudioSharingDeviceItem item) -> {
+                            // Remove all sources from the device user clicked
+                            removeSourceForGroup(item.getGroupId(), groupedDevices);
+                            // Add current broadcast to the latest connected device
+                            addSourceForGroup(groupId, groupedDevices);
+                        };
+                Pair<Integer, Object>[] eventData =
+                        AudioSharingUtils.buildAudioSharingDialogEventData(
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY,
+                                SettingsEnums.DIALOG_AUDIO_SHARING_SWITCH_DEVICE,
+                                userTriggered,
+                                deviceItemsInSharingSession.size(),
+                                /* candidateDeviceCount= */ 1);
                 postOnMainThread(
                         () -> {
                             closeOpeningDialogsOtherThan(
@@ -260,16 +291,29 @@ public class AudioSharingDialogHandler {
                                     mHostFragment,
                                     deviceItemsInSharingSession,
                                     cachedDevice,
-                                    (AudioSharingDeviceItem item) -> {
-                                        // Remove all sources from the device user clicked
-                                        removeSourceForGroup(item.getGroupId(), groupedDevices);
-                                        // Add current broadcast to the latest connected device
-                                        addSourceForGroup(groupId, groupedDevices);
-                                    });
+                                    listener,
+                                    eventData);
                         });
             } else {
                 // Show audio sharing join dialog when the first or second eligible (LE audio)
                 // remote device connected during a sharing session.
+                AudioSharingJoinDialogFragment.DialogEventListener listener =
+                        new AudioSharingJoinDialogFragment.DialogEventListener() {
+                            @Override
+                            public void onShareClick() {
+                                addSourceForGroup(groupId, groupedDevices);
+                            }
+
+                            @Override
+                            public void onCancelClick() {}
+                        };
+                Pair<Integer, Object>[] eventData =
+                        AudioSharingUtils.buildAudioSharingDialogEventData(
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY,
+                                SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE,
+                                userTriggered,
+                                deviceItemsInSharingSession.size(),
+                                /* candidateDeviceCount= */ 1);
                 postOnMainThread(
                         () -> {
                             closeOpeningDialogsOtherThan(AudioSharingJoinDialogFragment.tag());
@@ -277,15 +321,8 @@ public class AudioSharingDialogHandler {
                                     mHostFragment,
                                     deviceItemsInSharingSession,
                                     cachedDevice,
-                                    new AudioSharingJoinDialogFragment.DialogEventListener() {
-                                        @Override
-                                        public void onShareClick() {
-                                            addSourceForGroup(groupId, groupedDevices);
-                                        }
-
-                                        @Override
-                                        public void onCancelClick() {}
-                                    });
+                                    listener,
+                                    eventData);
                         });
             }
         } else {
@@ -302,39 +339,43 @@ public class AudioSharingDialogHandler {
             // Show audio sharing join dialog when the second eligible (LE audio) remote
             // device connect and no sharing session.
             if (deviceItems.size() == 1) {
+                AudioSharingJoinDialogFragment.DialogEventListener listener =
+                        new AudioSharingJoinDialogFragment.DialogEventListener() {
+                            @Override
+                            public void onShareClick() {
+                                mTargetSinks = new ArrayList<>();
+                                for (List<CachedBluetoothDevice> devices :
+                                        groupedDevices.values()) {
+                                    for (CachedBluetoothDevice device : devices) {
+                                        mTargetSinks.add(device.getDevice());
+                                    }
+                                }
+                                Log.d(TAG, "Start broadcast with sinks = " + mTargetSinks.size());
+                                if (mBroadcast != null) {
+                                    mBroadcast.startPrivateBroadcast();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelClick() {
+                                if (userTriggered) {
+                                    cachedDevice.setActive();
+                                }
+                            }
+                        };
+
+                Pair<Integer, Object>[] eventData =
+                        AudioSharingUtils.buildAudioSharingDialogEventData(
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY,
+                                SettingsEnums.DIALOG_START_AUDIO_SHARING,
+                                userTriggered,
+                                /* deviceCountInSharing= */ 0,
+                                /* candidateDeviceCount= */ 2);
                 postOnMainThread(
                         () -> {
                             closeOpeningDialogsOtherThan(AudioSharingJoinDialogFragment.tag());
                             AudioSharingJoinDialogFragment.show(
-                                    mHostFragment,
-                                    deviceItems,
-                                    cachedDevice,
-                                    new AudioSharingJoinDialogFragment.DialogEventListener() {
-                                        @Override
-                                        public void onShareClick() {
-                                            mTargetSinks = new ArrayList<>();
-                                            for (List<CachedBluetoothDevice> devices :
-                                                    groupedDevices.values()) {
-                                                for (CachedBluetoothDevice device : devices) {
-                                                    mTargetSinks.add(device.getDevice());
-                                                }
-                                            }
-                                            Log.d(
-                                                    TAG,
-                                                    "Start broadcast with sinks: "
-                                                            + mTargetSinks.size());
-                                            if (mBroadcast != null) {
-                                                mBroadcast.startPrivateBroadcast();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelClick() {
-                                            if (userTriggered) {
-                                                cachedDevice.setActive();
-                                            }
-                                        }
-                                    });
+                                    mHostFragment, deviceItems, cachedDevice, listener, eventData);
                         });
             } else if (userTriggered) {
                 cachedDevice.setActive();
@@ -346,9 +387,12 @@ public class AudioSharingDialogHandler {
         if (mHostFragment == null) return;
         List<Fragment> fragments = mHostFragment.getChildFragmentManager().getFragments();
         for (Fragment fragment : fragments) {
-            if (fragment instanceof DialogFragment && !fragment.getTag().equals(tag)) {
+            if (fragment instanceof DialogFragment
+                    && fragment.getTag() != null
+                    && !fragment.getTag().equals(tag)) {
                 Log.d(TAG, "Remove staled opening dialog " + fragment.getTag());
                 ((DialogFragment) fragment).dismiss();
+                logDialogDismissEvent(fragment);
             }
         }
     }
@@ -365,6 +409,7 @@ public class AudioSharingDialogHandler {
                     && AudioSharingUtils.getGroupId(device) == groupId) {
                 Log.d(TAG, "Remove staled opening dialog for group " + groupId);
                 ((DialogFragment) fragment).dismiss();
+                logDialogDismissEvent(fragment);
             }
         }
     }
@@ -382,6 +427,7 @@ public class AudioSharingDialogHandler {
                         "Remove staled opening dialog for device "
                                 + cachedDevice.getDevice().getAnonymizedAddress());
                 ((DialogFragment) fragment).dismiss();
+                logDialogDismissEvent(fragment);
             }
         }
     }
@@ -409,9 +455,9 @@ public class AudioSharingDialogHandler {
             Log.d(TAG, "Fail to remove source for group " + groupId);
             return;
         }
-        groupedDevices.get(groupId).stream()
+        groupedDevices.getOrDefault(groupId, ImmutableList.of()).stream()
                 .map(CachedBluetoothDevice::getDevice)
-                .filter(device -> device != null)
+                .filter(Objects::nonNull)
                 .forEach(
                         device -> {
                             for (BluetoothLeBroadcastReceiveState source :
@@ -431,9 +477,9 @@ public class AudioSharingDialogHandler {
             Log.d(TAG, "Fail to add source due to invalid group id, group = " + groupId);
             return;
         }
-        groupedDevices.get(groupId).stream()
+        groupedDevices.getOrDefault(groupId, ImmutableList.of()).stream()
                 .map(CachedBluetoothDevice::getDevice)
-                .filter(device -> device != null)
+                .filter(Objects::nonNull)
                 .forEach(
                         device ->
                                 mAssistant.addSource(
@@ -448,5 +494,30 @@ public class AudioSharingDialogHandler {
 
     private boolean isBroadcasting() {
         return mBroadcast != null && mBroadcast.isEnabled(null);
+    }
+
+    private void logDialogDismissEvent(Fragment fragment) {
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            int pageId = SettingsEnums.PAGE_UNKNOWN;
+                            if (fragment instanceof AudioSharingJoinDialogFragment) {
+                                pageId =
+                                        ((AudioSharingJoinDialogFragment) fragment)
+                                                .getMetricsCategory();
+                            } else if (fragment instanceof AudioSharingStopDialogFragment) {
+                                pageId =
+                                        ((AudioSharingStopDialogFragment) fragment)
+                                                .getMetricsCategory();
+                            } else if (fragment instanceof AudioSharingDisconnectDialogFragment) {
+                                pageId =
+                                        ((AudioSharingDisconnectDialogFragment) fragment)
+                                                .getMetricsCategory();
+                            }
+                            mMetricsFeatureProvider.action(
+                                    mContext,
+                                    SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS,
+                                    pageId);
+                        });
     }
 }
