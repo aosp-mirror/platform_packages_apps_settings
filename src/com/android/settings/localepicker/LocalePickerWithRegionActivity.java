@@ -16,6 +16,8 @@
 
 package com.android.settings.localepicker;
 
+import static android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT;
+
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import android.os.LocaleList;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
+import android.window.OnBackInvokedCallback;
 
 import androidx.core.view.ViewCompat;
 
@@ -39,6 +42,10 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
 
     private LocalePickerWithRegion mSelector;
 
+    private final OnBackInvokedCallback mOnBackInvokedCallback = () -> {
+        handleBackPressed();
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +59,8 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
                     : bundle.getParcelable(Settings.EXTRA_EXPLICIT_LOCALES, LocaleList.class);
             Log.i(TAG, "Has explicit locales : " + explicitLocales);
         }
-
+        getOnBackInvokedDispatcher()
+                .registerOnBackInvokedCallback(PRIORITY_DEFAULT, mOnBackInvokedCallback);
         mSelector = LocalePickerWithRegion.createLanguagePicker(
                 this,
                 LocalePickerWithRegionActivity.this,
@@ -66,6 +74,12 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
                 .replace(R.id.content_frame, mSelector)
                 .addToBackStack(PARENT_FRAGMENT_NAME)
                 .commit();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(mOnBackInvokedCallback);
     }
 
     @Override
@@ -83,11 +97,6 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
         intent.putExtra(LocaleListEditor.INTENT_LOCALE_KEY, locale);
         setResult(RESULT_OK, intent);
         finish();
-    }
-
-    @Override
-    public void onBackPressed() {
-        handleBackPressed();
     }
 
     private void handleBackPressed() {

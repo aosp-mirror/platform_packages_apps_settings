@@ -21,14 +21,15 @@ import android.telephony.SubscriptionManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
-import com.android.settings.network.SubscriptionUtil
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.MainSwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
+import kotlinx.coroutines.launch
 
 class MobileNetworkSwitchController @JvmOverloads constructor(
     context: Context,
@@ -56,12 +57,15 @@ class MobileNetworkSwitchController @JvmOverloads constructor(
         val changeable by remember {
             subscriptionActivationRepository.isActivationChangeableFlow()
         }.collectAsStateWithLifecycle(initialValue = true)
+        val coroutineScope = rememberCoroutineScope()
         MainSwitchPreference(model = object : SwitchPreferenceModel {
             override val title = stringResource(R.string.mobile_network_use_sim_on)
             override val changeable = { changeable }
             override val checked = { checked }
-            override val onCheckedChange = { newChecked: Boolean ->
-                SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, newChecked)
+            override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
+                coroutineScope.launch {
+                    subscriptionActivationRepository.setActive(subId, newChecked)
+                }
             }
         })
     }

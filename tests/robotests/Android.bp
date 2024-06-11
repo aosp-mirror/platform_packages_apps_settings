@@ -12,8 +12,8 @@ package {
 android_app {
     name: "SettingsRoboTestStub",
     defaults: [
-        "SettingsLibDefaults",
         "SettingsLib-search-defaults",
+        "SettingsLibDefaults",
     ],
     platform_apis: true,
     certificate: "platform",
@@ -23,18 +23,18 @@ android_app {
 
     static_libs: [
         "Settings-core",
-        "androidx.fragment_fragment-testing",
-        "frameworks-base-testutils",
         "androidx.fragment_fragment",
+        "androidx.fragment_fragment-testing",
         "androidx.lifecycle_lifecycle-runtime-testing",
+        "frameworks-base-testutils",
         "kotlinx_coroutines_test",
     ],
 
     aaptflags: ["--extra-packages com.android.settings"],
 
     libs: [
-        "telephony-common",
         "ims-common",
+        "telephony-common",
     ],
     uses_libs: ["org.apache.http.legacy"],
     optional_uses_libs: [
@@ -47,36 +47,65 @@ android_app {
 android_robolectric_test {
     name: "SettingsRoboTests",
     srcs: [
-        "src/**/*.java",
-        "src/**/*.kt",
+        "src/com/android/settings/*.java",
+        "src/com/android/settings/accessibility/**/*.java",
+        "src/com/android/settings/accounts/**/*.java",
+        "src/com/android/settings/applications/**/*.java",
+        "src/com/android/settings/backup/**/*.java",
+        "src/com/android/settings/bluetooth/**/*.java",
+        "src/com/android/settings/bluetooth/**/*.kt",
+        "src/com/android/settings/bugreporthandler/**/*.java",
+        "src/com/android/settings/communal/**/*.java",
+        "src/com/android/settings/connecteddevice/**/*.java",
+        //"src/com/android/settings/core/**/*.java",
+        "src/com/android/settings/dashboard/**/*.java",
+        "src/com/android/settings/datausage/**/*.java",
+        "src/com/android/settings/datetime/**/*.java",
+        "src/com/android/settings/deletionhelper/**/*.java",
+        //"src/com/android/settings/development/**/*.java",
+        "src/com/android/settings/deviceinfo/**/*.java",
+        "src/com/android/settings/devicelock/**/*.java",
+        "src/com/android/settings/display/**/*.java",
+        "src/com/android/settings/dream/**/*.java",
+        "src/com/android/settings/emergency/**/*.java",
+        "src/com/android/settings/enterprise/**/*.java",
+        "src/com/android/settings/flashlight/**/*.java",
+        "src/com/android/settings/fuelgauge/**/*.java",
+        "src/com/android/settings/gestures/**/*.java",
+        //"src/com/android/settings/homepage/**/*.java",
+        "src/com/android/settings/inputmethod/**/*.java",
+        "src/com/android/settings/network/ShadowServiceManagerExtend.java",
+        "src/com/android/settings/password/**/*.java",
+        "src/com/android/settings/search/DatabaseIndexingUtils.java",
+        "src/com/android/settings/testutils/**/*.java",
     ],
 
     // test_suites attribute is not needed. This module will be configured in ATP GCL file.
 
     static_libs: [
         "Robolectric_shadows_androidx_fragment_upstream",
-        "Settings_robolectric_meta_service_file",
-        "SettingsLib-robo-testutils",
         "Settings-robo-testutils",
+        "Settings-testutils2",
+        "SettingsLib-robo-testutils",
+        "Settings_robolectric_meta_service_file",
+        "aconfig_settings_flags_lib",
         "android.webkit.flags-aconfig-java",
         "androidx.test.core",
         "androidx.test.espresso.core",
         "androidx.test.ext.junit",
         "androidx.test.rules",
         "androidx.test.runner",
+        "com_android_server_accessibility_flags_lib",
         "flag-junit",
         "flag-junit-base",
-        "aconfig_settings_flags_lib",
-        "platform-test-annotations",
-        "Settings-testutils2",
         "notification_flags_lib",
-        "com_android_server_accessibility_flags_lib",
+        "platform-test-annotations",
         "testables",
     ],
 
     libs: [
-        "ims-common",
         "android.test.mock",
+        "ims-common",
     ],
 
     java_resource_dirs: [
