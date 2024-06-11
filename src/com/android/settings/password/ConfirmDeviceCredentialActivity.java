@@ -219,8 +219,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 && hasSetBiometricDialogAdvanced(mContext, getLaunchedFromUid())
         ) {
             final int iconResId = intent.getIntExtra(CUSTOM_BIOMETRIC_PROMPT_LOGO_RES_ID_KEY, 0);
-            final Bitmap iconBitmap = toBitmap(mContext.getDrawable(iconResId));
             if (iconResId != 0) {
+                final Bitmap iconBitmap = toBitmap(mContext.getDrawable(iconResId));
                 promptInfo.setLogo(iconResId, iconBitmap);
             }
             String logoDescription = intent.getStringExtra(
