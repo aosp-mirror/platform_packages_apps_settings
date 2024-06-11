@@ -99,17 +99,12 @@ import java.util.Optional;
 
 /**
  * UI for Mobile network and Wi-Fi network settings.
- *
- * TODO(b/167474581): Define the intent android.settings.NETWORK_PROVIDER_SETTINGS in Settings.java.
  */
 @SearchIndexable
 public class NetworkProviderSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener,
         AirplaneModeEnabler.OnAirplaneModeChangedListener, InternetUpdater.InternetChangeListener {
-
-    public static final String ACTION_NETWORK_PROVIDER_SETTINGS =
-            "android.settings.NETWORK_PROVIDER_SETTINGS";
 
     private static final String TAG = "NetworkProviderSettings";
     // IDs of context menu

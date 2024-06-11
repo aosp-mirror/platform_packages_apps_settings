@@ -28,6 +28,7 @@ import android.content.Context;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -37,7 +38,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class AudioStreamsActiveDeviceControllerTest {
@@ -48,7 +48,7 @@ public class AudioStreamsActiveDeviceControllerTest {
 
     @Before
     public void setUp() {
-        Context context = RuntimeEnvironment.application;
+        Context context = ApplicationProvider.getApplicationContext();
         mController =
                 new AudioStreamsActiveDeviceController(
                         context, AudioStreamsActiveDeviceController.KEY);

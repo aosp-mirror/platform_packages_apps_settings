@@ -121,6 +121,7 @@
             android:title="@string/cellular_security_title"
             android:summary="@string/cellular_security_summary"
             android:fragment="com.android.settings.network.telephony.CellularSecuritySettingsFragment"
+            settings:controller="com.android.settings.network.CellularSecurityPreferenceController"
             settings:searchable="false"/>
     </PreferenceCategory>
 

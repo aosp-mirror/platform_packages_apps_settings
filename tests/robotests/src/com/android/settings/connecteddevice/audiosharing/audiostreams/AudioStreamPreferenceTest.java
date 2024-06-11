@@ -30,6 +30,7 @@ import android.view.View;
 
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceViewHolder;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState;
@@ -42,7 +43,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.util.Collections;
 
@@ -53,7 +53,7 @@ public class AudioStreamPreferenceTest {
     private static final String PROGRAM_NAME = "program_name";
     private static final int BROADCAST_RSSI = 1;
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
-    private Context mContext;
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     private AudioStreamPreference mPreference;
     @Mock private BluetoothLeBroadcastMetadata mBluetoothLeBroadcastMetadata;
     @Mock private BluetoothLeBroadcastReceiveState mBluetoothLeBroadcastReceiveState;
@@ -61,7 +61,6 @@ public class AudioStreamPreferenceTest {
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
         mPreference = new AudioStreamPreference(mContext, null);
         when(mBluetoothLeBroadcastMetadata.getBroadcastId()).thenReturn(BROADCAST_ID);
         when(mBluetoothLeBroadcastMetadata.getBroadcastName()).thenReturn(BROADCAST_NAME);

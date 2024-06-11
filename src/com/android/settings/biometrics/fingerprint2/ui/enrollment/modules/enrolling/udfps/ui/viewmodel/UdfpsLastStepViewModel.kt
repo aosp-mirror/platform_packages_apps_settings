@@ -16,9 +16,13 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.viewmodel
 
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintVibrationEffects
 import com.android.settings.biometrics.fingerprint2.domain.interactor.VibrationInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
@@ -89,14 +93,18 @@ class UdfpsLastStepViewModel(
       }
       .filterNotNull()
 
-  class UdfpsLastStepViewModelFactory(
-    private val fingerprintEnrollEnrollingViewModel: FingerprintEnrollEnrollingViewModel,
-    private val vibrationInteractor: VibrationInteractor,
-  ) : ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return UdfpsLastStepViewModel(fingerprintEnrollEnrollingViewModel, vibrationInteractor) as T
+  companion object {
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer {
+        val settingsApplication =
+          this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as SettingsApplication
+        val biometricEnvironment = settingsApplication.biometricEnvironment
+        val provider = ViewModelProvider(this[VIEW_MODEL_STORE_OWNER_KEY]!!)
+        UdfpsLastStepViewModel(
+          provider[FingerprintEnrollEnrollingViewModel::class],
+          biometricEnvironment!!.vibrationInteractor,
+        )
+      }
     }
   }
 }

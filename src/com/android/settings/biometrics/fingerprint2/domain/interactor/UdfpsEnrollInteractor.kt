@@ -16,8 +16,9 @@
 
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
+import android.content.Context
 import android.graphics.PointF
-import android.util.Log
+import android.util.TypedValue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -43,13 +44,18 @@ interface UdfpsEnrollInteractor {
 
 /** Keeps track of which guided enrollment point we should be using */
 class UdfpsEnrollInteractorImpl(
-  pixelsPerMillimeter: Float,
+  applicationContext: Context,
   accessibilityInteractor: AccessibilityInteractor,
 ) : UdfpsEnrollInteractor {
 
   private var isGuidedEnrollment = MutableStateFlow(false)
   // Number of pixels per mm
-  val px = pixelsPerMillimeter
+  val px =
+    TypedValue.applyDimension(
+      TypedValue.COMPLEX_UNIT_MM,
+      1f,
+      applicationContext.resources.displayMetrics,
+    )
   private val guidedEnrollmentPoints: MutableList<PointF> =
     mutableListOf(
       PointF(2.00f * px, 0.00f * px),
@@ -70,7 +76,6 @@ class UdfpsEnrollInteractorImpl(
 
   override fun onEnrollmentStep(stepsRemaining: Int, totalStep: Int) {
     val index = (totalStep - stepsRemaining) % guidedEnrollmentPoints.size
-    Log.e("JRM", "guided enroll step $index")
     _guidedEnrollment.update { guidedEnrollmentPoints[index] }
   }
 

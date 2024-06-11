@@ -18,6 +18,7 @@ package com.android.settings.biometrics.fingerprint2.domain.interactor
 
 import android.content.Context
 import android.content.Intent
+import android.hardware.fingerprint.FingerprintEnrollOptions
 import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintManager.GenerateChallengeCallback
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback
@@ -45,7 +46,7 @@ private const val TAG = "FingerprintManagerInteractor"
 class FingerprintManagerInteractorImpl(
   applicationContext: Context,
   private val backgroundDispatcher: CoroutineDispatcher,
-  private val fingerprintManager: FingerprintManager,
+  private val fingerprintManager: FingerprintManager?,
   fingerprintSensorRepository: FingerprintSensorRepository,
   private val gatekeeperPasswordProvider: GatekeeperPasswordProvider,
   private val fingerprintEnrollStateRepository: FingerprintEnrollInteractor,
@@ -56,7 +57,6 @@ class FingerprintManagerInteractorImpl(
       com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser
     )
   private val applicationContext = applicationContext.applicationContext
-
 
   override suspend fun generateChallenge(gateKeeperPasswordHandle: Long): Pair<Long, ByteArray> =
     suspendCoroutine {
@@ -70,21 +70,19 @@ class FingerprintManagerInteractorImpl(
         val p = Pair(challenge, challengeToken)
         it.resume(p)
       }
-      fingerprintManager.generateChallenge(applicationContext.userId, callback)
+      fingerprintManager?.generateChallenge(applicationContext.userId, callback)
     }
 
-  override val enrolledFingerprints: Flow<List<FingerprintData>> = flow {
+  override val enrolledFingerprints: Flow<List<FingerprintData>?> = flow {
     emit(
-      fingerprintManager
-        .getEnrolledFingerprints(applicationContext.userId)
-        .map { (FingerprintData(it.name.toString(), it.biometricId, it.deviceId)) }
-        .toList()
+      fingerprintManager?.getEnrolledFingerprints(applicationContext.userId)
+        ?.map { (FingerprintData(it.name.toString(), it.biometricId, it.deviceId)) }?.toList()
     )
   }
 
   override val canEnrollFingerprints: Flow<Boolean> = flow {
     emit(
-      fingerprintManager.getEnrolledFingerprints(applicationContext.userId).size < maxFingerprints
+      fingerprintManager?.getEnrolledFingerprints(applicationContext.userId)?.size  ?: maxFingerprints < maxFingerprints
     )
   }
 
@@ -92,8 +90,16 @@ class FingerprintManagerInteractorImpl(
 
   override val maxEnrollableFingerprints = flow { emit(maxFingerprints) }
 
-  override suspend fun enroll(hardwareAuthToken: ByteArray?, enrollReason: EnrollReason): Flow<FingerEnrollState> =
-    fingerprintEnrollStateRepository.enroll(hardwareAuthToken, enrollReason)
+  override suspend fun enroll(
+    hardwareAuthToken: ByteArray?,
+    enrollReason: EnrollReason,
+    fingerprintEnrollOptions: FingerprintEnrollOptions,
+  ): Flow<FingerEnrollState> =
+    fingerprintEnrollStateRepository.enroll(
+      hardwareAuthToken,
+      enrollReason,
+      fingerprintEnrollOptions,
+    )
 
   override suspend fun removeFingerprint(fp: FingerprintData): Boolean = suspendCoroutine {
     val callback =
@@ -113,7 +119,7 @@ class FingerprintManagerInteractorImpl(
           it.resume(true)
         }
       }
-    fingerprintManager.remove(
+    fingerprintManager?.remove(
       android.hardware.fingerprint.Fingerprint(fp.name, fp.fingerId, fp.deviceId),
       applicationContext.userId,
       callback,
@@ -122,12 +128,12 @@ class FingerprintManagerInteractorImpl(
 
   override suspend fun renameFingerprint(fp: FingerprintData, newName: String) {
     withContext(backgroundDispatcher) {
-      fingerprintManager.rename(fp.fingerId, applicationContext.userId, newName)
+      fingerprintManager?.rename(fp.fingerId, applicationContext.userId, newName)
     }
   }
 
-  override suspend fun hasSideFps(): Boolean = suspendCancellableCoroutine {
-    it.resume(fingerprintManager.isPowerbuttonFps)
+  override suspend fun hasSideFps(): Boolean? = suspendCancellableCoroutine {
+    it.resume(fingerprintManager?.isPowerbuttonFps)
   }
 
   override suspend fun authenticate(): FingerprintAuthAttemptModel =
@@ -156,7 +162,7 @@ class FingerprintManagerInteractorImpl(
 
       val cancellationSignal = CancellationSignal()
       c.invokeOnCancellation { cancellationSignal.cancel() }
-      fingerprintManager.authenticate(
+      fingerprintManager?.authenticate(
         null,
         cancellationSignal,
         authenticationCallback,
@@ -164,5 +170,4 @@ class FingerprintManagerInteractorImpl(
         applicationContext.userId,
       )
     }
-
 }
