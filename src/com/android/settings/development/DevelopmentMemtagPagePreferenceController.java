@@ -26,8 +26,7 @@ public class DevelopmentMemtagPagePreferenceController extends DeveloperOptionsP
         implements PreferenceControllerMixin {
     private static final String KEY_DEVELOPMENT_MEMTAG_PAGE = "development_memtag_page";
 
-    public DevelopmentMemtagPagePreferenceController(
-            Context context, DevelopmentSettingsDashboardFragment fragment) {
+    public DevelopmentMemtagPagePreferenceController(Context context) {
         super(context);
     }
 
