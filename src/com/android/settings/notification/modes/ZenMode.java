@@ -204,6 +204,14 @@ class ZenMode {
                 : new ZenDeviceEffects.Builder().build();
     }
 
+    public boolean canEditName() {
+        return !isManualDnd();
+    }
+
+    public boolean canEditIcon() {
+        return !isManualDnd();
+    }
+
     public boolean canBeDeleted() {
         return !mIsManualDnd;
     }

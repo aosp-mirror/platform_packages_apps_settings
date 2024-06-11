@@ -28,6 +28,10 @@
             android:selectable="false"
             android:layout="@layout/modes_activation_button"/>
 
+    <com.android.settingslib.widget.ActionButtonsPreference
+        android:key="actions"
+        android:selectable="true" />
+
     <PreferenceCategory
             android:title="@string/mode_interruption_filter_title"
             android:key="modes_filters">
