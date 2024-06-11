@@ -492,7 +492,9 @@ public class EnabledNetworkModePreferenceController extends
                     }
                 }
             } else if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
-                if (MobileNetworkUtils.isTdscdmaSupported(mContext, mSubId)) {
+                if (mIsGlobalCdma) {
+                    enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_CDMA_CHOICES;
+                } else if (MobileNetworkUtils.isTdscdmaSupported(mContext, mSubId)) {
                     enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_TDSCDMA_CHOICES;
                 } else if (!mDisplay2gOptions && !mDisplay3gOptions) {
                     enabledNetworkType = mShow4gForLTE
@@ -506,8 +508,6 @@ public class EnabledNetworkModePreferenceController extends
                             : EnabledNetworks.ENABLED_NETWORKS_EXCEPT_GSM_CHOICES;
                 } else if (!mLteEnabled) {
                     enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_EXCEPT_LTE_CHOICES;
-                } else if (mIsGlobalCdma) {
-                    enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_CDMA_CHOICES;
                 } else {
                     enabledNetworkType = mShow4gForLTE ? EnabledNetworks.ENABLED_NETWORKS_4G_CHOICES
                             : EnabledNetworks.ENABLED_NETWORKS_CHOICES;
