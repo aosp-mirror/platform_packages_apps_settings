@@ -33,6 +33,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -71,6 +72,7 @@ class InternetPreferenceRepository(
                 when (transportType) {
                     NetworkCapabilities.TRANSPORT_WIFI -> return wifiDisplayInfoFlow()
                     NetworkCapabilities.TRANSPORT_CELLULAR -> return cellularDisplayInfoFlow()
+                    NetworkCapabilities.TRANSPORT_ETHERNET -> return ethernetDisplayInfoFlow()
                 }
             }
         }
@@ -92,6 +94,14 @@ class InternetPreferenceRepository(
                 iconResId = R.drawable.ic_network_cell,
             )
         }
+
+    private fun ethernetDisplayInfoFlow() =
+        flowOf(
+            DisplayInfo(
+                summary = context.getString(R.string.to_switch_networks_disconnect_ethernet),
+                iconResId = R.drawable.ic_settings_ethernet,
+            )
+        )
 
     private fun defaultDisplayInfoFlow(): Flow<DisplayInfo> =
         combine(

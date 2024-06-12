@@ -106,6 +106,29 @@ class InternetPreferenceRepositoryTest {
     }
 
     @Test
+    fun displayInfoFlow_ethernet() = runBlocking {
+        val wifiNetworkCapabilities =
+            NetworkCapabilities.Builder()
+                .addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+                .build()
+        mockConnectivityRepository.stub {
+            on { networkCapabilitiesFlow() } doReturn flowOf(wifiNetworkCapabilities)
+        }
+
+        val displayInfo = repository.displayInfoFlow().firstWithTimeoutOrNull()
+
+        assertThat(displayInfo)
+            .isEqualTo(
+                InternetPreferenceRepository.DisplayInfo(
+                    summary = context.getString(R.string.to_switch_networks_disconnect_ethernet),
+                    iconResId = R.drawable.ic_settings_ethernet,
+                )
+            )
+    }
+
+    @Test
     fun displayInfoFlow_airplaneModeOnAndWifiOn() = runBlocking {
         mockConnectivityRepository.stub {
             on { networkCapabilitiesFlow() } doReturn flowOf(NetworkCapabilities())
