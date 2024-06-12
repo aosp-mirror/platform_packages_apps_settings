@@ -188,7 +188,7 @@ public class ResetNetworkOperationBuilderTest {
         doThrow(new IllegalArgumentException()).when(mContentProvider).call(
                 anyString(), anyString(), anyString(), any());
 
-        mBuilder.restartPhoneProcess();
+        mBuilder.restartPhoneProcess().build().run();
     }
 
     @Test
@@ -196,12 +196,12 @@ public class ResetNetworkOperationBuilderTest {
         doThrow(new IllegalArgumentException()).when(mContentProvider).call(
                 anyString(), anyString(), anyString(), any());
 
-        mBuilder.restartRild();
+        mBuilder.restartRild().build().run();
     }
 
     @Test
     public void restartPhoneProcess_withTelephonyContentProvider_shouldCallRestartPhoneProcess() {
-        mBuilder.restartPhoneProcess();
+        mBuilder.restartPhoneProcess().build().run();
 
         verify(mContentProvider).call(
                 eq(mBuilder.getResetTelephonyContentProviderAuthority()),
@@ -212,7 +212,7 @@ public class ResetNetworkOperationBuilderTest {
 
     @Test
     public void restartRild_withTelephonyContentProvider_shouldCallRestartRild() {
-        mBuilder.restartRild();
+        mBuilder.restartRild().build().run();
 
         verify(mContentProvider).call(
                 eq(mBuilder.getResetTelephonyContentProviderAuthority()),

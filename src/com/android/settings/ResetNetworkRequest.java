@@ -270,6 +270,7 @@ public class ResetNetworkRequest {
         if ((mResetOptions & RESET_IMS_STACK) != 0) {
             builder.resetIms(mSubscriptionIdToResetIms);
         }
+        // Reset phone process and RILD may impact above components, keep them at the end
         if ((mResetOptions & RESET_PHONE_PROCESS) != 0) {
             builder.restartPhoneProcess();
         }
