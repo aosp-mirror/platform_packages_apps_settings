@@ -34,6 +34,8 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.widget.LayoutPreference;
 
+import com.google.common.collect.ImmutableList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +63,8 @@ public class ZenModeIconPickerListPreferenceControllerTest {
 
         DashboardFragment fragment = mock(DashboardFragment.class);
         mController = new ZenModeIconPickerListPreferenceController(
-                RuntimeEnvironment.getApplication(), "icon_list", fragment, mBackend);
+                RuntimeEnvironment.getApplication(), "icon_list", fragment,
+                new TestIconOptionsProvider(), mBackend);
 
         mRecyclerView = new RecyclerView(context);
         mRecyclerView.setId(R.id.icon_list);
@@ -75,7 +78,7 @@ public class ZenModeIconPickerListPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
 
         assertThat(mRecyclerView.getAdapter()).isNotNull();
-        assertThat(mRecyclerView.getAdapter().getItemCount()).isEqualTo(20);
+        assertThat(mRecyclerView.getAdapter().getItemCount()).isEqualTo(3);
     }
 
     @Test
@@ -87,5 +90,16 @@ public class ZenModeIconPickerListPreferenceControllerTest {
         ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
         verify(mBackend).updateMode(captor.capture());
         assertThat(captor.getValue().getRule().getIconResId()).isEqualTo(R.drawable.ic_android);
+    }
+
+    private static class TestIconOptionsProvider implements IconOptionsProvider {
+
+        @Override
+        public ImmutableList<IconInfo> getIcons() {
+            return ImmutableList.of(
+                    new IconInfo(R.drawable.ic_android, "android"),
+                    new IconInfo(R.drawable.ic_info, "info"),
+                    new IconInfo(R.drawable.ic_hearing, "hearing"));
+        }
     }
 }

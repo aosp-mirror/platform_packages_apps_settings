@@ -44,6 +44,7 @@ public class ZenModeIconPickerFragment extends ZenModeFragmentBase {
                 new ZenModeIconPickerIconPreferenceController(context, "current_icon", this,
                         mBackend),
                 new ZenModeIconPickerListPreferenceController(context, "icon_list", this,
-                        mBackend));
+                        // TODO: b/333901673 - Replace with correct icon list.
+                        new TempIconOptionsProvider(), mBackend));
     }
 }
