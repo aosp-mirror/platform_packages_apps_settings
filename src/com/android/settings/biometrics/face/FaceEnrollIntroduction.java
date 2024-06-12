@@ -38,6 +38,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -159,6 +160,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 Html.FROM_HTML_MODE_LEGACY));
         inControlMessage.setMovementMethod(LinkMovementMethod.getInstance());
         lessSecure.setText(getLessSecureMessage());
+
+        final ScrollView scrollView =
+                findViewById(com.google.android.setupdesign.R.id.sud_scroll_view);
+        scrollView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
 
         // Set up and show the "require eyes" info section if necessary.
         if (getResources().getBoolean(R.bool.config_face_intro_show_require_eyes)) {
