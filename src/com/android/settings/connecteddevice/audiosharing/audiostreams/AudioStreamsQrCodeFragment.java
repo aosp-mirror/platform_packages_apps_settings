@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -45,8 +46,7 @@ public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO(chelseahao): update metrics id
-        return 0;
+        return SettingsEnums.AUDIO_STREAM_QR_CODE;
     }
 
     @Override

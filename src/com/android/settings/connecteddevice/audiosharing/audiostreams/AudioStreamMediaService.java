@@ -20,6 +20,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -40,12 +41,14 @@ import androidx.annotation.Nullable;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.VolumeControlProfile;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -177,6 +180,8 @@ public class AudioStreamMediaService extends Service {
                             LEAVE_BROADCAST_TEXT,
                             com.android.settings.R.drawable.ic_clear);
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider =
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     private int mBroadcastId;
     @Nullable private ArrayList<BluetoothDevice> mDevices;
@@ -322,6 +327,11 @@ public class AudioStreamMediaService extends Service {
                                         + 0);
                         if (mVolumeControl != null) {
                             mVolumeControl.setDeviceVolume(mDevices.get(0), 0, true);
+                            mMetricsFeatureProvider.action(
+                                    getApplicationContext(),
+                                    SettingsEnums
+                                            .ACTION_AUDIO_STREAM_NOTIFICATION_MUTE_BUTTON_CLICK,
+                                    1);
                         }
                     }
 
@@ -341,6 +351,10 @@ public class AudioStreamMediaService extends Service {
                             mVolumeControl.setDeviceVolume(
                                     mDevices.get(0), mLatestPositiveVolume, true);
                         }
+                        mMetricsFeatureProvider.action(
+                                getApplicationContext(),
+                                SettingsEnums.ACTION_AUDIO_STREAM_NOTIFICATION_MUTE_BUTTON_CLICK,
+                                0);
                     }
 
                     @Override
@@ -348,6 +362,10 @@ public class AudioStreamMediaService extends Service {
                         Log.d(TAG, "onCustomAction: " + action);
                         if (action.equals(LEAVE_BROADCAST_ACTION) && mAudioStreamsHelper != null) {
                             mAudioStreamsHelper.removeSource(mBroadcastId);
+                            mMetricsFeatureProvider.action(
+                                    getApplicationContext(),
+                                    SettingsEnums
+                                            .ACTION_AUDIO_STREAM_NOTIFICATION_LEAVE_BUTTON_CLICK);
                         }
                     }
                 });
@@ -379,7 +397,7 @@ public class AudioStreamMediaService extends Service {
                                 mLocalSession != null ? mLocalSession.getSessionToken() : null);
         if (deviceName != null && !deviceName.isEmpty()) {
             mediaStyle.setRemotePlaybackInfo(
-                    deviceName, com.android.internal.R.drawable.ic_bt_headset_hfp, null);
+                    deviceName, com.android.settingslib.R.drawable.ic_bt_le_audio, null);
         }
         Notification.Builder notificationBuilder =
                 new Notification.Builder(this, CHANNEL_ID)
