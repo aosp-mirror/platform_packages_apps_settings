@@ -58,7 +58,7 @@ class InternetPreferenceRepositoryTest {
         )
 
     @Test
-    fun summaryFlow_wifi() = runBlocking {
+    fun displayInfoFlow_wifi() = runBlocking {
         val wifiNetworkCapabilities =
             NetworkCapabilities.Builder()
                 .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
@@ -70,13 +70,19 @@ class InternetPreferenceRepositoryTest {
         }
         mockWifiSummaryRepository.stub { on { summaryFlow() } doReturn flowOf(SUMMARY) }
 
-        val summary = repository.summaryFlow().firstWithTimeoutOrNull()
+        val displayInfo = repository.displayInfoFlow().firstWithTimeoutOrNull()
 
-        assertThat(summary).isEqualTo(SUMMARY)
+        assertThat(displayInfo)
+            .isEqualTo(
+                InternetPreferenceRepository.DisplayInfo(
+                    summary = SUMMARY,
+                    iconResId = R.drawable.ic_wifi_signal_4,
+                )
+            )
     }
 
     @Test
-    fun summaryFlow_cellular() = runBlocking {
+    fun displayInfoFlow_cellular() = runBlocking {
         val wifiNetworkCapabilities =
             NetworkCapabilities.Builder()
                 .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
@@ -88,13 +94,19 @@ class InternetPreferenceRepositoryTest {
         }
         mockDataSubscriptionRepository.stub { on { dataSummaryFlow() } doReturn flowOf(SUMMARY) }
 
-        val summary = repository.summaryFlow().firstWithTimeoutOrNull()
+        val displayInfo = repository.displayInfoFlow().firstWithTimeoutOrNull()
 
-        assertThat(summary).isEqualTo(SUMMARY)
+        assertThat(displayInfo)
+            .isEqualTo(
+                InternetPreferenceRepository.DisplayInfo(
+                    summary = SUMMARY,
+                    iconResId = R.drawable.ic_network_cell,
+                )
+            )
     }
 
     @Test
-    fun summaryFlow_airplaneModeOnAndWifiOn() = runBlocking {
+    fun displayInfoFlow_airplaneModeOnAndWifiOn() = runBlocking {
         mockConnectivityRepository.stub {
             on { networkCapabilitiesFlow() } doReturn flowOf(NetworkCapabilities())
         }
@@ -103,13 +115,19 @@ class InternetPreferenceRepositoryTest {
             on { wifiStateFlow() } doReturn flowOf(WifiManager.WIFI_STATE_ENABLED)
         }
 
-        val summary = repository.summaryFlow().firstWithTimeoutOrNull()
+        val displayInfo = repository.displayInfoFlow().firstWithTimeoutOrNull()
 
-        assertThat(summary).isEqualTo(context.getString(R.string.networks_available))
+        assertThat(displayInfo)
+            .isEqualTo(
+                InternetPreferenceRepository.DisplayInfo(
+                    summary = context.getString(R.string.networks_available),
+                    iconResId = R.drawable.ic_no_internet_available,
+                )
+            )
     }
 
     @Test
-    fun summaryFlow_airplaneModeOnAndWifiOff() = runBlocking {
+    fun displayInfoFlow_airplaneModeOnAndWifiOff() = runBlocking {
         mockConnectivityRepository.stub {
             on { networkCapabilitiesFlow() } doReturn flowOf(NetworkCapabilities())
         }
@@ -118,13 +136,19 @@ class InternetPreferenceRepositoryTest {
             on { wifiStateFlow() } doReturn flowOf(WifiManager.WIFI_STATE_DISABLED)
         }
 
-        val summary = repository.summaryFlow().firstWithTimeoutOrNull()
+        val displayInfo = repository.displayInfoFlow().firstWithTimeoutOrNull()
 
-        assertThat(summary).isEqualTo(context.getString(R.string.condition_airplane_title))
+        assertThat(displayInfo)
+            .isEqualTo(
+                InternetPreferenceRepository.DisplayInfo(
+                    summary = context.getString(R.string.condition_airplane_title),
+                    iconResId = R.drawable.ic_no_internet_unavailable,
+                )
+            )
     }
 
     @Test
-    fun summaryFlow_airplaneModeOff() = runBlocking {
+    fun displayInfoFlow_airplaneModeOff() = runBlocking {
         mockConnectivityRepository.stub {
             on { networkCapabilitiesFlow() } doReturn flowOf(NetworkCapabilities())
         }
@@ -133,9 +157,15 @@ class InternetPreferenceRepositoryTest {
             on { wifiStateFlow() } doReturn flowOf(WifiManager.WIFI_STATE_DISABLED)
         }
 
-        val summary = repository.summaryFlow().firstWithTimeoutOrNull()
+        val displayInfo = repository.displayInfoFlow().firstWithTimeoutOrNull()
 
-        assertThat(summary).isEqualTo(context.getString(R.string.networks_available))
+        assertThat(displayInfo)
+            .isEqualTo(
+                InternetPreferenceRepository.DisplayInfo(
+                    summary = context.getString(R.string.networks_available),
+                    iconResId = R.drawable.ic_no_internet_available,
+                )
+            )
     }
 
     private companion object {
