@@ -114,14 +114,17 @@ class TelephonyRepository(
 fun <T> Context.telephonyCallbackFlow(
     subId: Int,
     block: ProducerScope<T>.() -> TelephonyCallback,
-): Flow<T> = callbackFlow {
-    val telephonyManager = telephonyManager(subId)
+): Flow<T> = telephonyManager(subId).telephonyCallbackFlow(block)
 
+/** Creates an instance of a cold Flow for Telephony callback. */
+fun <T> TelephonyManager.telephonyCallbackFlow(
+    block: ProducerScope<T>.() -> TelephonyCallback,
+): Flow<T> = callbackFlow {
     val callback = block()
 
-    telephonyManager.registerTelephonyCallback(Dispatchers.Default.asExecutor(), callback)
+    registerTelephonyCallback(Dispatchers.Default.asExecutor(), callback)
 
-    awaitClose { telephonyManager.unregisterTelephonyCallback(callback) }
+    awaitClose { unregisterTelephonyCallback(callback) }
 }.conflate().flowOn(Dispatchers.Default)
 
 fun Context.telephonyManager(subId: Int): TelephonyManager =
