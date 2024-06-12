@@ -58,6 +58,8 @@ import com.google.common.collect.ImmutableList;
 
 import kotlin.Unit;
 
+import kotlinx.coroutines.Job;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,6 +100,8 @@ public class NetworkSelectSettings extends DashboardFragment {
     private AtomicBoolean mShouldFilterOutSatellitePlmn = new AtomicBoolean();
 
     private NetworkScanRepository mNetworkScanRepository;
+    @Nullable
+    private Job mNetworkScanJob = null;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -206,13 +210,14 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     private void launchNetworkScan() {
         setProgressBarVisible(true);
-        mNetworkScanRepository.launchNetworkScan(getViewLifecycleOwner(), (networkScanResult) -> {
-            if (isPreferenceScreenEnabled()) {
-                scanResultHandler(networkScanResult);
-            }
+        mNetworkScanJob = mNetworkScanRepository.launchNetworkScan(getViewLifecycleOwner(),
+                (networkScanResult) -> {
+                    if (isPreferenceScreenEnabled()) {
+                        scanResultHandler(networkScanResult);
+                    }
 
-            return Unit.INSTANCE;
-        });
+                    return Unit.INSTANCE;
+                });
     }
 
     /**
@@ -236,6 +241,12 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (!(preference instanceof NetworkOperatorPreference)) {
             Log.d(TAG, "onPreferenceTreeClick: preference is not the NetworkOperatorPreference.");
             return false;
+        }
+
+        // Need stop network scan before manual select network.
+        if (mNetworkScanJob != null) {
+            mNetworkScanJob.cancel(null);
+            mNetworkScanJob = null;
         }
 
         // Refresh the last selected item in case users reselect network.

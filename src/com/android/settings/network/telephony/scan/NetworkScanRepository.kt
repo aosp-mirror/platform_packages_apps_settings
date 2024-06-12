@@ -52,9 +52,8 @@ class NetworkScanRepository(context: Context, subId: Int) {
         context.getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)
 
     /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
-    fun launchNetworkScan(lifecycleOwner: LifecycleOwner, onResult: (NetworkScanResult) -> Unit) {
+    fun launchNetworkScan(lifecycleOwner: LifecycleOwner, onResult: (NetworkScanResult) -> Unit) =
         networkScanFlow().collectLatestWithLifecycle(lifecycleOwner, action = onResult)
-    }
 
     data class CellInfoScanKey(
         val title: String?,
@@ -101,7 +100,10 @@ class NetworkScanRepository(context: Context, subId: Int) {
             callback,
         )
 
-        awaitClose { networkScan.stopScan() }
+        awaitClose {
+            networkScan.stopScan()
+            Log.d(TAG, "network scan stopped")
+        }
     }.conflate().onEach { Log.d(TAG, "networkScanFlow: $it") }.flowOn(Dispatchers.Default)
 
     /** Create network scan for allowed network types. */
