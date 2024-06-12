@@ -18,6 +18,7 @@ package com.android.settings.network
 
 import android.content.Context
 import android.net.NetworkCapabilities
+import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -32,6 +33,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
@@ -77,6 +79,36 @@ class InternetPreferenceRepositoryTest {
                 InternetPreferenceRepository.DisplayInfo(
                     summary = SUMMARY,
                     iconResId = R.drawable.ic_wifi_signal_4,
+                )
+            )
+    }
+
+    @Test
+    fun displayInfoFlow_carrierMergedWifi_asCellular() = runBlocking {
+        val wifiInfo =
+            mock<WifiInfo> {
+                on { isCarrierMerged } doReturn true
+                on { makeCopy(any()) } doReturn mock
+            }
+        val wifiNetworkCapabilities =
+            NetworkCapabilities.Builder()
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+                .setTransportInfo(wifiInfo)
+                .build()
+        mockConnectivityRepository.stub {
+            on { networkCapabilitiesFlow() } doReturn flowOf(wifiNetworkCapabilities)
+        }
+        mockDataSubscriptionRepository.stub { on { dataSummaryFlow() } doReturn flowOf(SUMMARY) }
+
+        val displayInfo = repository.displayInfoFlow().firstWithTimeoutOrNull()
+
+        assertThat(displayInfo)
+            .isEqualTo(
+                InternetPreferenceRepository.DisplayInfo(
+                    summary = SUMMARY,
+                    iconResId = R.drawable.ic_network_cell,
                 )
             )
     }

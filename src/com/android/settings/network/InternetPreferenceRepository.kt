@@ -18,6 +18,7 @@ package com.android.settings.network
 
 import android.content.Context
 import android.net.NetworkCapabilities
+import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
 import android.provider.Settings
 import android.util.Log
@@ -68,6 +69,11 @@ class InternetPreferenceRepository(
             hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
                 hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
         ) {
+            val transportInfo = transportInfo
+            if (transportInfo is WifiInfo && transportInfo.isCarrierMerged) {
+                Log.i(TAG, "Detect a merged carrier Wi-Fi connected.")
+                return cellularDisplayInfoFlow()
+            }
             for (transportType in transportTypes) {
                 when (transportType) {
                     NetworkCapabilities.TRANSPORT_WIFI -> return wifiDisplayInfoFlow()
