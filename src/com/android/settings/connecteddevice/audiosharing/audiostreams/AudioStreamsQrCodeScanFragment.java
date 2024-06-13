@@ -248,6 +248,6 @@ public class AudioStreamsQrCodeScanFragment extends InstrumentedFragment
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.LE_AUDIO_BROADCAST_SCAN_QR_CODE;
+        return SettingsEnums.AUDIO_STREAM_QR_CODE_SCAN;
     }
 }
