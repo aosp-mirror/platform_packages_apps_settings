@@ -17,6 +17,7 @@
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
@@ -52,6 +53,10 @@ class AddSourceWaitForResponseState extends AudioStreamStateHandler {
         var metadata = preference.getAudioStreamMetadata();
         if (metadata != null) {
             helper.addSource(metadata);
+            mMetricsFeatureProvider.action(
+                    preference.getContext(),
+                    SettingsEnums.ACTION_AUDIO_STREAM_JOIN,
+                    preference.getSourceOriginForLogging().ordinal());
             // Cache the metadata that used for add source, if source is added successfully, we
             // will save it persistently.
             mAudioStreamsRepository.cacheMetadata(metadata);
@@ -66,6 +71,10 @@ class AddSourceWaitForResponseState extends AudioStreamStateHandler {
                                 && preference.getAudioStreamState() == getStateEnum()) {
                             controller.handleSourceFailedToConnect(
                                     preference.getAudioStreamBroadcastId());
+                            mMetricsFeatureProvider.action(
+                                    preference.getContext(),
+                                    SettingsEnums.ACTION_AUDIO_STREAM_JOIN_FAILED_TIMEOUT,
+                                    preference.getSourceOriginForLogging().ordinal());
                             ThreadUtils.postOnMainThread(
                                     () -> {
                                         if (controller.getFragment() != null) {

@@ -17,6 +17,12 @@
 package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
+import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
+import static android.provider.Settings.Global.ZEN_MODE_OFF;
+import static android.service.notification.Condition.SOURCE_UNKNOWN;
+import static android.service.notification.Condition.STATE_FALSE;
+import static android.service.notification.Condition.STATE_TRUE;
+import static android.service.notification.ZenPolicy.STATE_ALLOW;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -27,13 +33,17 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AutomaticZenRule;
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
 import android.net.Uri;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.service.notification.Condition;
 import android.service.notification.ZenAdapters;
+import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
 
@@ -42,6 +52,7 @@ import com.android.settings.R;
 import com.google.common.collect.ImmutableMap;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -54,6 +65,7 @@ import java.time.Duration;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@EnableFlags(Flags.FLAG_MODES_UI)
 public class ZenModesBackendTest {
 
     private static final String ZEN_RULE_ID = "rule";
@@ -76,13 +88,22 @@ public class ZenModesBackendTest {
     private Context mContext;
     private ZenModesBackend mBackend;
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(
+            SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT);
+
     // Helper methods to add active/inactive rule state to a config. Returns a copy.
     private ZenModeConfig configWithManualRule(ZenModeConfig base, boolean active) {
         ZenModeConfig out = base.copy();
-        if (!active) {
-            out.manualRule = null;
+
+        if (active) {
+            out.manualRule.zenMode = ZEN_MODE_IMPORTANT_INTERRUPTIONS;
+            out.manualRule.condition =
+                    new Condition(out.manualRule.conditionId, "", STATE_TRUE, SOURCE_UNKNOWN);
         } else {
-            out.manualRule = new ZenModeConfig.ZenRule();
+            out.manualRule.zenMode = ZEN_MODE_OFF;
+            out.manualRule.condition =
+                    new Condition(out.manualRule.conditionId, "", STATE_FALSE, SOURCE_UNKNOWN);
         }
         return out;
     }
@@ -130,7 +151,10 @@ public class ZenModesBackendTest {
                 Policy.PRIORITY_SENDERS_CONTACTS, Policy.PRIORITY_SENDERS_CONTACTS);
         when(mNm.getAutomaticZenRules()).thenReturn(
                 ImmutableMap.of("rule1", ZEN_RULE, "rule2", rule2));
-        when(mNm.getNotificationPolicy()).thenReturn(dndPolicy);
+        ZenModeConfig config = new ZenModeConfig();
+        config.applyNotificationPolicy(dndPolicy);
+        assertThat(config.manualRule.zenPolicy.getPriorityCategoryAlarms()).isEqualTo(STATE_ALLOW);
+        when(mNm.getZenModeConfig()).thenReturn(config);
 
         List<ZenMode> modes = mBackend.getModes();
 
@@ -154,7 +178,9 @@ public class ZenModesBackendTest {
     public void getMode_manualDnd_returnsMode() {
         Policy dndPolicy = new Policy(Policy.PRIORITY_CATEGORY_ALARMS,
                 Policy.PRIORITY_SENDERS_CONTACTS, Policy.PRIORITY_SENDERS_CONTACTS);
-        when(mNm.getNotificationPolicy()).thenReturn(dndPolicy);
+        ZenModeConfig config = new ZenModeConfig();
+        config.applyNotificationPolicy(dndPolicy);
+        when(mNm.getZenModeConfig()).thenReturn(config);
 
         ZenMode mode = mBackend.getMode(ZenMode.MANUAL_DND_MODE_ID);
 
@@ -193,11 +219,11 @@ public class ZenModesBackendTest {
         // Set up a base config with an active rule to make sure we're looking at the correct info
         ZenModeConfig configWithActiveRule = configWithRule(new ZenModeConfig(), ZEN_RULE_ID,
                 ZEN_RULE, true);
-        when(mNm.getZenModeConfig()).thenReturn(configWithActiveRule);
 
         // Equivalent to disallowAllSounds()
         Policy dndPolicy = new Policy(0, 0, 0);
-        when(mNm.getNotificationPolicy()).thenReturn(dndPolicy);
+        configWithActiveRule.applyNotificationPolicy(dndPolicy);
+        when(mNm.getZenModeConfig()).thenReturn(configWithActiveRule);
 
         ZenMode mode = mBackend.getMode(ZenMode.MANUAL_DND_MODE_ID);
 
@@ -230,6 +256,23 @@ public class ZenModesBackendTest {
                 configWithRule(configWithActiveRules, ZEN_RULE_ID, ZEN_RULE, true));
         ZenMode activeMode = mBackend.getMode(ZEN_RULE_ID);
         assertThat(activeMode.isActive()).isTrue();
+    }
+
+    @Test
+    public void updateMode_manualDnd_setsDeviceEffects() throws Exception {
+        ZenMode manualDnd = ZenMode.manualDndMode(
+                new AutomaticZenRule.Builder("DND", Uri.EMPTY)
+                        .setZenPolicy(new ZenPolicy())
+                        .setDeviceEffects(new ZenDeviceEffects.Builder()
+                                .setShouldDimWallpaper(true)
+                                .build())
+                        .build(), false);
+
+        mBackend.updateMode(manualDnd);
+
+        verify(mNm).setManualZenRuleDeviceEffects(new ZenDeviceEffects.Builder()
+                .setShouldDimWallpaper(true)
+                .build());
     }
 
     @Test
@@ -293,7 +336,7 @@ public class ZenModesBackendTest {
     public void deactivateMode_manualDnd_setsZenModeOff() {
         mBackend.deactivateMode(ZenMode.manualDndMode(MANUAL_DND_RULE, true));
 
-        verify(mNm).setZenMode(eq(Settings.Global.ZEN_MODE_OFF), eq(null), any(), eq(true));
+        verify(mNm).setZenMode(eq(ZEN_MODE_OFF), eq(null), any(), eq(true));
     }
 
     @Test

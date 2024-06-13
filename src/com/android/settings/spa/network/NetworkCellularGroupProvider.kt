@@ -46,6 +46,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
 import com.android.settings.network.SubscriptionInfoListViewModel
+import com.android.settings.network.telephony.DataSubscriptionRepository
 import com.android.settings.network.telephony.TelephonyRepository
 import com.android.settings.spa.network.PrimarySimRepository.PrimarySimInfo
 import com.android.settings.wifi.WifiPickerTrackerHelper
@@ -158,7 +159,7 @@ open class NetworkCellularGroupProvider : SettingsPageProvider {
                     selectableSubscriptionInfoListFlow,
                     context.defaultVoiceSubscriptionFlow(),
                     context.defaultSmsSubscriptionFlow(),
-                    context.defaultDefaultDataSubscriptionFlow(),
+                    DataSubscriptionRepository(context).defaultDataSubscriptionIdFlow(),
                     this::refreshUiStates,
             ).flowOn(Dispatchers.Default)
 
@@ -368,15 +369,6 @@ private fun Context.defaultSmsSubscriptionFlow(): Flow<Int> =
                         IntentFilter(SubscriptionManager.ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED)
                 ),
         ).map { SubscriptionManager.getDefaultSmsSubscriptionId() }
-                .conflate().flowOn(Dispatchers.Default)
-
-private fun Context.defaultDefaultDataSubscriptionFlow(): Flow<Int> =
-        merge(
-                flowOf(null), // kick an initial value
-                broadcastReceiverFlow(
-                        IntentFilter(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)
-                ),
-        ).map { SubscriptionManager.getDefaultDataSubscriptionId() }
                 .conflate().flowOn(Dispatchers.Default)
 
 suspend fun setDefaultVoice(

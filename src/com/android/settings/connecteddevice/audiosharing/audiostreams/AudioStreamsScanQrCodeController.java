@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
@@ -111,7 +110,7 @@ public class AudioStreamsScanQrCodeController extends BasePreferenceController
                                 .setTitleRes(R.string.audio_streams_main_page_scan_qr_code_title)
                                 .setDestination(AudioStreamsQrCodeScanFragment.class.getName())
                                 .setResultListener(mFragment, REQUEST_SCAN_BT_BROADCAST_QR_CODE)
-                                .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
+                                .setSourceMetricsCategory(mFragment.getMetricsCategory())
                                 .launch();
                         return true;
                     }

@@ -215,7 +215,7 @@ public class PrivateSpaceMaintainerTest {
         privateSpaceMaintainer.deletePrivateSpace();
         privateSpaceMaintainer.createPrivateSpace();
         // test that no exception is thrown, which would indicate that the receiver was registered.
-        mContext.unregisterReceiver(privateSpaceMaintainer.getBroadcastReceiver());
+        mContext.unregisterReceiver(privateSpaceMaintainer.getProfileBroadcastReceiver());
         privateSpaceMaintainer.resetBroadcastReceiver();
     }
 
@@ -227,7 +227,7 @@ public class PrivateSpaceMaintainerTest {
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.createPrivateSpace();
         privateSpaceMaintainer.deletePrivateSpace();
-        assertThat(privateSpaceMaintainer.getBroadcastReceiver()).isNull();
+        assertThat(privateSpaceMaintainer.getProfileBroadcastReceiver()).isNull();
     }
 
     /**

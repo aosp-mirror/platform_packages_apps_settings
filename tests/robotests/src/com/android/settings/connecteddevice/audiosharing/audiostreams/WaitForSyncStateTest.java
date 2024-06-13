@@ -93,6 +93,8 @@ public class WaitForSyncStateTest {
                 .thenReturn(AudioStreamsProgressCategoryController.AudioStreamState.WAIT_FOR_SYNC);
         when(mMockPreference.getAudioStreamBroadcastId()).thenReturn(1);
         when(mMockPreference.getAudioStreamMetadata()).thenReturn(mMockMetadata);
+        when(mMockPreference.getSourceOriginForLogging())
+                .thenReturn(SourceOriginForLogging.UNKNOWN);
 
         mInstance.performAction(mMockPreference, mMockController, mMockHelper);
         ShadowLooper.idleMainLooper(WAIT_FOR_SYNC_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
