@@ -63,7 +63,6 @@ class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenc
         }
         switchPref.setChecked(zenMode.getRule().isEnabled());
         switchPref.setOnPreferenceChangeListener(mSwitchChangeListener);
-
         switchPref.setSummary(zenMode.getRule().getTriggerDescription());
         switchPref.setIcon(null);
         switchPref.setOnPreferenceClickListener(null);

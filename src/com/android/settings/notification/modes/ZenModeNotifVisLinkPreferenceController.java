@@ -17,8 +17,7 @@
 package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
-
-import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
+import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -46,7 +45,7 @@ class ZenModeNotifVisLinkPreferenceController extends AbstractZenModePreferenceC
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
-        bundle.putString(MODE_ID, zenMode.getId());
+        bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
         // TODO(b/332937635): Update metrics category
         preference.setIntent(new SubSettingLauncher(mContext)
                 .setDestination(ZenModeNotifVisFragment.class.getName())

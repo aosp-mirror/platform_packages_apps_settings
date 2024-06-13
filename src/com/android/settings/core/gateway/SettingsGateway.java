@@ -162,6 +162,8 @@ import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.notification.app.ChannelNotificationSettings;
 import com.android.settings.notification.app.ConversationListSettings;
 import com.android.settings.notification.history.NotificationStation;
+import com.android.settings.notification.modes.ZenModeFragment;
+import com.android.settings.notification.modes.ZenModesListFragment;
 import com.android.settings.notification.zen.ZenAccessSettings;
 import com.android.settings.notification.zen.ZenModeAutomationSettings;
 import com.android.settings.notification.zen.ZenModeBlockedEffectsSettings;
@@ -396,6 +398,8 @@ public class SettingsGateway {
             CellularSecuritySettingsFragment.class.getName(),
             AccessibilityHearingAidsFragment.class.getName(),
             HearingDevicePairingFragment.class.getName(),
+            ZenModesListFragment.class.getName(),
+            ZenModeFragment.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
