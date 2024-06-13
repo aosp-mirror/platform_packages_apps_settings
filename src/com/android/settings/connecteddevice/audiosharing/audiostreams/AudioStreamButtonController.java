@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
@@ -33,7 +34,9 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
@@ -44,6 +47,7 @@ public class AudioStreamButtonController extends BasePreferenceController
         implements DefaultLifecycleObserver {
     private static final String TAG = "AudioStreamButtonController";
     private static final String KEY = "audio_stream_button";
+    private static final int SOURCE_ORIGIN_REPOSITORY = SourceOriginForLogging.REPOSITORY.ordinal();
     private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new AudioStreamsBroadcastAssistantCallback() {
                 @Override
@@ -56,6 +60,8 @@ public class AudioStreamButtonController extends BasePreferenceController
                 public void onSourceRemoveFailed(BluetoothDevice sink, int sourceId, int reason) {
                     super.onSourceRemoveFailed(sink, sourceId, reason);
                     updateButton();
+                    mMetricsFeatureProvider.action(
+                            mContext, SettingsEnums.ACTION_AUDIO_STREAM_LEAVE_FAILED);
                 }
 
                 @Override
@@ -66,6 +72,10 @@ public class AudioStreamButtonController extends BasePreferenceController
                     super.onReceiveStateChanged(sink, sourceId, state);
                     if (AudioStreamsHelper.isConnected(state)) {
                         updateButton();
+                        mMetricsFeatureProvider.action(
+                                mContext,
+                                SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED,
+                                SOURCE_ORIGIN_REPOSITORY);
                     }
                 }
 
@@ -74,6 +84,10 @@ public class AudioStreamButtonController extends BasePreferenceController
                         BluetoothDevice sink, BluetoothLeBroadcastMetadata source, int reason) {
                     super.onSourceAddFailed(sink, source, reason);
                     updateButton();
+                    mMetricsFeatureProvider.action(
+                            mContext,
+                            SettingsEnums.ACTION_AUDIO_STREAM_JOIN_FAILED_OTHER,
+                            SOURCE_ORIGIN_REPOSITORY);
                 }
 
                 @Override
@@ -88,6 +102,7 @@ public class AudioStreamButtonController extends BasePreferenceController
     private final Executor mExecutor;
     private final AudioStreamsHelper mAudioStreamsHelper;
     private final @Nullable LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private @Nullable ActionButtonsPreference mPreference;
     private int mBroadcastId = -1;
 
@@ -96,6 +111,7 @@ public class AudioStreamButtonController extends BasePreferenceController
         mExecutor = Executors.newSingleThreadExecutor();
         mAudioStreamsHelper = new AudioStreamsHelper(Utils.getLocalBtManager(context));
         mLeBroadcastAssistant = mAudioStreamsHelper.getLeBroadcastAssistant();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -124,59 +140,77 @@ public class AudioStreamButtonController extends BasePreferenceController
     }
 
     private void updateButton() {
-        if (mPreference != null) {
-            if (mAudioStreamsHelper.getAllConnectedSources().stream()
-                    .map(BluetoothLeBroadcastReceiveState::getBroadcastId)
-                    .anyMatch(connectedBroadcastId -> connectedBroadcastId == mBroadcastId)) {
-                ThreadUtils.postOnMainThread(
-                        () -> {
-                            if (mPreference != null) {
-                                mPreference.setButton1Enabled(true);
-                                mPreference
-                                        .setButton1Text(R.string.audio_streams_disconnect)
-                                        .setButton1Icon(
-                                                com.android.settings.R.drawable.ic_settings_close)
-                                        .setButton1OnClickListener(
-                                                unused -> {
+        if (mPreference == null) {
+            Log.w(TAG, "updateButton(): preference is null!");
+            return;
+        }
+        boolean isConnected =
+                mAudioStreamsHelper.getAllConnectedSources().stream()
+                        .map(BluetoothLeBroadcastReceiveState::getBroadcastId)
+                        .anyMatch(connectedBroadcastId -> connectedBroadcastId == mBroadcastId);
+
+        View.OnClickListener onClickListener;
+
+        if (isConnected) {
+            onClickListener =
+                    unused ->
+                            ThreadUtils.postOnBackgroundThread(
+                                    () -> {
+                                        mAudioStreamsHelper.removeSource(mBroadcastId);
+                                        mMetricsFeatureProvider.action(
+                                                mContext,
+                                                SettingsEnums
+                                                        .ACTION_AUDIO_STREAM_LEAVE_BUTTON_CLICK);
+                                        ThreadUtils.postOnMainThread(
+                                                () -> {
                                                     if (mPreference != null) {
                                                         mPreference.setButton1Enabled(false);
                                                     }
-                                                    mAudioStreamsHelper.removeSource(mBroadcastId);
                                                 });
-                            }
-                        });
-            } else {
-                View.OnClickListener clickToRejoin =
-                        unused ->
-                                ThreadUtils.postOnBackgroundThread(
-                                        () -> {
-                                            var metadata =
-                                                    mAudioStreamsRepository.getSavedMetadata(
-                                                            mContext, mBroadcastId);
-                                            if (metadata != null) {
-                                                mAudioStreamsHelper.addSource(metadata);
-                                                ThreadUtils.postOnMainThread(
-                                                        () -> {
-                                                            if (mPreference != null) {
-                                                                mPreference.setButton1Enabled(
-                                                                        false);
-                                                            }
-                                                        });
-                                            }
-                                        });
-                ThreadUtils.postOnMainThread(
-                        () -> {
-                            if (mPreference != null) {
-                                mPreference.setButton1Enabled(true);
-                                mPreference
-                                        .setButton1Text(R.string.audio_streams_connect)
-                                        .setButton1Icon(com.android.settings.R.drawable.ic_add_24dp)
-                                        .setButton1OnClickListener(clickToRejoin);
-                            }
-                        });
-            }
+                                    });
+            ThreadUtils.postOnMainThread(
+                    () -> {
+                        if (mPreference != null) {
+                            mPreference.setButton1Enabled(true);
+                            mPreference
+                                    .setButton1Text(R.string.audio_streams_disconnect)
+                                    .setButton1Icon(
+                                            com.android.settings.R.drawable.ic_settings_close)
+                                    .setButton1OnClickListener(onClickListener);
+                        }
+                    });
         } else {
-            Log.w(TAG, "updateButton(): preference is null!");
+            onClickListener =
+                    unused ->
+                            ThreadUtils.postOnBackgroundThread(
+                                    () -> {
+                                        var metadata =
+                                                mAudioStreamsRepository.getSavedMetadata(
+                                                        mContext, mBroadcastId);
+                                        if (metadata != null) {
+                                            mAudioStreamsHelper.addSource(metadata);
+                                            mMetricsFeatureProvider.action(
+                                                    mContext,
+                                                    SettingsEnums.ACTION_AUDIO_STREAM_JOIN,
+                                                    SOURCE_ORIGIN_REPOSITORY);
+                                            ThreadUtils.postOnMainThread(
+                                                    () -> {
+                                                        if (mPreference != null) {
+                                                            mPreference.setButton1Enabled(false);
+                                                        }
+                                                    });
+                                        }
+                                    });
+            ThreadUtils.postOnMainThread(
+                    () -> {
+                        if (mPreference != null) {
+                            mPreference.setButton1Enabled(true);
+                            mPreference
+                                    .setButton1Text(R.string.audio_streams_connect)
+                                    .setButton1Icon(com.android.settings.R.drawable.ic_add_24dp)
+                                    .setButton1OnClickListener(onClickListener);
+                        }
+                    });
         }
     }
 

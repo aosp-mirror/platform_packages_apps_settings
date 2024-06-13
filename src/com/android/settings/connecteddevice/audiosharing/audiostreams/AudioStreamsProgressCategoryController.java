@@ -19,12 +19,11 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import static java.util.Collections.emptyList;
 
 import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.content.Intent;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -34,8 +33,10 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -100,6 +101,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     private final ConcurrentHashMap<Integer, AudioStreamPreference> mBroadcastIdToPreferenceMap =
             new ConcurrentHashMap<>();
     private @Nullable BluetoothLeBroadcastMetadata mSourceFromQrCode;
+    private SourceOriginForLogging mSourceFromQrCodeOriginForLogging;
     @Nullable private AudioStreamsProgressCategoryPreference mCategoryPreference;
     @Nullable private AudioStreamsDashboardFragment mFragment;
 
@@ -149,11 +151,13 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         return mFragment;
     }
 
-    void setSourceFromQrCode(BluetoothLeBroadcastMetadata source) {
+    void setSourceFromQrCode(
+            BluetoothLeBroadcastMetadata source, SourceOriginForLogging sourceOriginForLogging) {
         if (DEBUG) {
             Log.d(TAG, "setSourceFromQrCode(): broadcastId " + source.getBroadcastId());
         }
         mSourceFromQrCode = source;
+        mSourceFromQrCodeOriginForLogging = sourceOriginForLogging;
     }
 
     void setScanning(boolean isScanning) {
@@ -196,7 +200,10 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 broadcastIdFound,
                 (k, existingPreference) -> {
                     if (existingPreference == null) {
-                        return addNewPreference(source, AudioStreamState.SYNCED);
+                        return addNewPreference(
+                                source,
+                                AudioStreamState.SYNCED,
+                                SourceOriginForLogging.BROADCAST_SEARCH);
                     }
                     var fromState = existingPreference.getAudioStreamState();
                     if (fromState == AudioStreamState.WAIT_FOR_SYNC && mSourceFromQrCode != null) {
@@ -268,7 +275,9 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                         // Check nullability to bypass NullAway check.
                         if (mSourceFromQrCode != null) {
                             return addNewPreference(
-                                    mSourceFromQrCode, AudioStreamState.WAIT_FOR_SYNC);
+                                    mSourceFromQrCode,
+                                    AudioStreamState.WAIT_FOR_SYNC,
+                                    mSourceFromQrCodeOriginForLogging);
                         }
                     }
                     Log.w(
@@ -525,23 +534,27 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     }
 
     private AudioStreamPreference addNewPreference(
-            BluetoothLeBroadcastMetadata metadata, AudioStreamState state) {
-        var preference = AudioStreamPreference.fromMetadata(mContext, metadata);
+            BluetoothLeBroadcastMetadata metadata,
+            AudioStreamState state,
+            SourceOriginForLogging sourceOriginForLogging) {
+        var preference =
+                AudioStreamPreference.fromMetadata(mContext, metadata, sourceOriginForLogging);
         moveToState(preference, state);
         return preference;
     }
 
     private void moveToState(AudioStreamPreference preference, AudioStreamState state) {
-        AudioStreamStateHandler stateHandler = switch (state) {
-            case SYNCED -> SyncedState.getInstance();
-            case WAIT_FOR_SYNC -> WaitForSyncState.getInstance();
-            case ADD_SOURCE_WAIT_FOR_RESPONSE ->
-                    AddSourceWaitForResponseState.getInstance();
-            case ADD_SOURCE_BAD_CODE -> AddSourceBadCodeState.getInstance();
-            case ADD_SOURCE_FAILED -> AddSourceFailedState.getInstance();
-            case SOURCE_ADDED -> SourceAddedState.getInstance();
-            default -> throw new IllegalArgumentException("Unsupported state: " + state);
-        };
+        AudioStreamStateHandler stateHandler =
+                switch (state) {
+                    case SYNCED -> SyncedState.getInstance();
+                    case WAIT_FOR_SYNC -> WaitForSyncState.getInstance();
+                    case ADD_SOURCE_WAIT_FOR_RESPONSE ->
+                            AddSourceWaitForResponseState.getInstance();
+                    case ADD_SOURCE_BAD_CODE -> AddSourceBadCodeState.getInstance();
+                    case ADD_SOURCE_FAILED -> AddSourceFailedState.getInstance();
+                    case SOURCE_ADDED -> SourceAddedState.getInstance();
+                    default -> throw new IllegalArgumentException("Unsupported state: " + state);
+                };
 
         stateHandler.handleStateChange(preference, this, mAudioStreamsHelper);
 
@@ -566,9 +579,12 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                         mContext.getString(R.string.audio_streams_dialog_no_le_device_button))
                 .setRightButtonOnClickListener(
                         dialog -> {
-                            mContext.startActivity(
-                                    new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
-                                            .setPackage(mContext.getPackageName()));
+                            new SubSettingLauncher(mContext)
+                                    .setDestination(
+                                            ConnectedDeviceDashboardFragment.class.getName())
+                                    .setSourceMetricsCategory(
+                                            SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_NO_LE_DEVICE)
+                                    .launch();
                             dialog.dismiss();
                         });
     }
