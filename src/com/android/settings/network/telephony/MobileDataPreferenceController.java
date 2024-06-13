@@ -34,6 +34,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -83,6 +84,9 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public int getAvailabilityStatus(int subId) {
+        if (Flags.isDualSimOnboardingEnabled()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 ? AVAILABLE
                 : AVAILABLE_UNSEARCHABLE;

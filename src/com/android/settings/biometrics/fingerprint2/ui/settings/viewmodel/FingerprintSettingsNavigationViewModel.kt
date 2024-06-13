@@ -21,7 +21,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.BiometricEnrollBase
-import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,11 +32,11 @@ import kotlinx.coroutines.launch
 
 /** A Viewmodel that represents the navigation of the FingerprintSettings activity. */
 class FingerprintSettingsNavigationViewModel(
-    private val userId: Int,
-    private val fingerprintManagerInteractor: FingerprintManagerInteractor,
-    private val backgroundDispatcher: CoroutineDispatcher,
-    tokenInit: ByteArray?,
-    challengeInit: Long?,
+  private val userId: Int,
+  private val fingerprintManagerInteractor: FingerprintManagerInteractor,
+  private val backgroundDispatcher: CoroutineDispatcher,
+  tokenInit: ByteArray?,
+  challengeInit: Long?,
 ) : ViewModel() {
 
   private var token = tokenInit
@@ -173,17 +173,15 @@ class FingerprintSettingsNavigationViewModel(
   }
 
   class FingerprintSettingsNavigationModelFactory(
-      private val userId: Int,
-      private val interactor: FingerprintManagerInteractor,
-      private val backgroundDispatcher: CoroutineDispatcher,
-      private val token: ByteArray?,
-      private val challenge: Long?,
+    private val userId: Int,
+    private val interactor: FingerprintManagerInteractor,
+    private val backgroundDispatcher: CoroutineDispatcher,
+    private val token: ByteArray?,
+    private val challenge: Long?,
   ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(
-      modelClass: Class<T>,
-    ): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
       return FingerprintSettingsNavigationViewModel(
         userId,

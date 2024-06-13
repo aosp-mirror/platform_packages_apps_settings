@@ -261,6 +261,11 @@
             android:title="@string/enable_angle_as_system_driver"
             android:summary="@string/enable_angle_as_system_driver_summary" />
 
+        <SwitchPreferenceCompat
+            android:key="disable_game_default_frame_rate"
+            android:title="@string/disable_game_default_frame_rate_title"
+            android:summary="@string/disable_game_default_frame_rate_summary"/>
+
         <Preference
             android:key="graphics_driver_dashboard"
             android:title="@string/graphics_driver_dashboard_title"
@@ -367,6 +372,13 @@
             android:key="bluetooth_disable_leaudio"
             android:title="@string/bluetooth_disable_leaudio"
             android:summary="@string/bluetooth_disable_leaudio_summary" />
+
+        <ListPreference
+            android:key="bluetooth_leaudio_mode"
+            android:title="@string/bluetooth_leaudio_mode"
+            android:summary="@string/summary_placeholder"
+            android:entries="@array/bluetooth_leaudio_mode"
+            android:entryValues="@array/bluetooth_leaudio_mode_values"/>
 
         <SwitchPreferenceCompat
             android:key="bluetooth_show_leaudio_device_details"
@@ -697,6 +709,11 @@
             android:key="show_notification_channel_warnings"
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
+
+        <SwitchPreferenceCompat
+            android:key="disable_screen_share_protections_for_apps_and_notifications"
+            android:title="@string/disable_screen_share_protections_for_apps_and_notifications"
+            android:summary="@string/disable_screen_share_protections_for_apps_and_notifications_summary" />
 
         <Preference
             android:key="asst_importance_reset"

@@ -16,6 +16,8 @@
 
 package com.android.settings.display;
 
+import static android.hardware.display.DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED;
+
 import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
@@ -24,12 +26,22 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
+import android.hardware.display.DisplayManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
+import android.testing.TestableContext;
+import android.view.Display;
 
 import androidx.preference.SwitchPreference;
+import androidx.test.platform.app.InstrumentationRegistry;
+
+import com.android.server.display.feature.flags.Flags;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -41,18 +53,55 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 public class PeakRefreshRatePreferenceControllerTest {
 
-    private Context mContext;
     private PeakRefreshRatePreferenceController mController;
     private SwitchPreference mPreference;
 
     @Mock
     private PeakRefreshRatePreferenceController.DeviceConfigDisplaySettings
             mDeviceConfigDisplaySettings;
+    @Mock
+    private DisplayManager mDisplayManagerMock;
+    @Mock
+    private Display mDisplayMock;
+    @Mock
+    private Display mDisplayMock2;
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+    @Rule
+    public final TestableContext mContext = new TestableContext(
+            InstrumentationRegistry.getInstrumentation().getContext());
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext.addMockSystemService(DisplayManager.class, mDisplayManagerMock);
+
+        Display.Mode[] modes = new Display.Mode[]{
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 60),
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 120),
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 90)
+        };
+        when(mDisplayManagerMock.getDisplay(Display.DEFAULT_DISPLAY)).thenReturn(mDisplayMock);
+        when(mDisplayMock.getSupportedModes()).thenReturn(modes);
+
+        Display.Mode[] modes2 = new Display.Mode[]{
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 70),
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 130),
+                new Display.Mode(/* modeId= */ 0, /* width= */ 800, /* height= */ 600,
+                        /* refreshRate= */ 80)
+        };
+        when(mDisplayManagerMock.getDisplay(Display.DEFAULT_DISPLAY + 1)).thenReturn(mDisplayMock2);
+        when(mDisplayMock2.getSupportedModes()).thenReturn(modes2);
+
+        when(mDisplayManagerMock.getDisplays(DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED))
+                .thenReturn(new Display[]{ mDisplayMock, mDisplayMock2 });
+
         mController = new PeakRefreshRatePreferenceController(mContext, "key");
         mController.injectDeviceConfigDisplaySettings(mDeviceConfigDisplaySettings);
         mPreference = new SwitchPreference(RuntimeEnvironment.application);
@@ -79,7 +128,19 @@ public class PeakRefreshRatePreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_enableSmoothDisplay_setRefreshRateToInfinity() {
+    @RequiresFlagsDisabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
+    public void setChecked_enableSmoothDisplay_featureFlagOff() {
+        mController.mPeakRefreshRate = 88f;
+        mController.setChecked(true);
+
+        assertThat(Settings.System.getFloat(mContext.getContentResolver(),
+                Settings.System.PEAK_REFRESH_RATE, DEFAULT_REFRESH_RATE))
+                .isEqualTo(88f);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
+    public void setChecked_enableSmoothDisplay_featureFlagOn() {
         mController.mPeakRefreshRate = 88f;
         mController.setChecked(true);
 
@@ -100,14 +161,16 @@ public class PeakRefreshRatePreferenceControllerTest {
 
     @Test
     public void isChecked_enableSmoothDisplay_returnTrue() {
-        enableSmoothDisplayPreference();
+        mController.mPeakRefreshRate = 88f;
+        mController.setChecked(true);
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void isChecked_disableSmoothDisplay_returnFalse() {
-        disableSmoothDisplayPreference();
+        mController.mPeakRefreshRate = 88f;
+        mController.setChecked(false);
 
         assertThat(mController.isChecked()).isFalse();
     }
@@ -129,21 +192,15 @@ public class PeakRefreshRatePreferenceControllerTest {
         assertThat(mController.isChecked()).isFalse();
     }
 
-    private void enableSmoothDisplayPreference() {
-        mController.mPeakRefreshRate = 88f;
-
-        Settings.System.putFloat(
-                mContext.getContentResolver(),
-                Settings.System.PEAK_REFRESH_RATE,
-                mController.mPeakRefreshRate);
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
+    public void peakRefreshRate_highestOfDefaultDisplay_featureFlagOff() {
+        assertThat(mController.mPeakRefreshRate).isEqualTo(120);
     }
 
-    private void disableSmoothDisplayPreference() {
-        mController.mPeakRefreshRate = 88f;
-
-        Settings.System.putFloat(
-                mContext.getContentResolver(),
-                Settings.System.PEAK_REFRESH_RATE,
-                DEFAULT_REFRESH_RATE);
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
+    public void peakRefreshRate_highestOfAllDisplays_featureFlagOn() {
+        assertThat(mController.mPeakRefreshRate).isEqualTo(130);
     }
 }

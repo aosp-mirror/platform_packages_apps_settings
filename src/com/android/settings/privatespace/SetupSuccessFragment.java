@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class SetupSuccessFragment extends InstrumentedFragment {
         }
         GlifLayout rootView =
                 (GlifLayout)
-                        inflater.inflate(R.layout.privatespace_setup_success, container, false);
+                        inflater.inflate(R.layout.private_space_setup_success, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
@@ -100,6 +101,7 @@ public class SetupSuccessFragment extends InstrumentedFragment {
                 }
                 accessPrivateSpaceToast();
                 startActivity(allAppsIntent);
+                Log.i(TAG, "Private space setup complete");
                 activity.finish();
             }
         };

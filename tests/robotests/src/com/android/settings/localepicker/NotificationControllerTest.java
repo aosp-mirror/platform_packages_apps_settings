@@ -72,6 +72,19 @@ public class NotificationControllerTest {
     }
 
     @Test
+    public void testRemoveNotificationInfo_removed() throws Exception {
+        String enUS = "en-US";
+        Set<Integer> uidSet = Set.of(100, 101);
+        long lastNotificationTime = Calendar.getInstance().getTimeInMillis();
+        int id = (int) SystemClock.uptimeMillis();
+        initSharedPreference(enUS, uidSet, 0, 1, lastNotificationTime, id);
+
+        mNotificationController.removeNotificationInfo(enUS);
+
+        assertThat(mDataManager.getNotificationInfo(enUS)).isNull();
+    }
+
+    @Test
     public void testShouldTriggerNotification_inSystemLocale_returnFalse() throws Exception {
         int uid = 102;
         // As checking whether app's locales exist in system locales, both app locales and system

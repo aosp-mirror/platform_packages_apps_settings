@@ -21,8 +21,10 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.om.OverlayManager
 import android.content.pm.ApplicationInfo
+import android.content.pm.Flags
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.util.Log
 import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.Utils
@@ -94,7 +96,7 @@ class AppButtonRepository(private val context: Context) {
 
             isDisallowControl(app) -> return false
 
-            uninstallDisallowedDueToHomeApp(app.packageName) -> return false
+            uninstallDisallowedDueToHomeApp(app) -> return false
 
             // Resource overlays can be uninstalled iff they are public (installed on /data) and
             // disabled. ("Enabled" means they are in use by resource management.)
@@ -112,7 +114,8 @@ class AppButtonRepository(private val context: Context) {
      * can go to Home settings and pick a different one, after which we'll permit uninstallation
      * of the now-not-default one.
      */
-    private fun uninstallDisallowedDueToHomeApp(packageName: String): Boolean {
+    fun uninstallDisallowedDueToHomeApp(applicationInfo: ApplicationInfo): Boolean {
+        val packageName = applicationInfo.packageName
         val homePackageInfo = getHomePackageInfo()
         return when {
             packageName !in homePackageInfo.homePackages -> false
@@ -120,8 +123,17 @@ class AppButtonRepository(private val context: Context) {
             // Disallow uninstall when this is the only home app.
             homePackageInfo.homePackages.size == 1 -> true
 
-            // Disallow if this is the explicit default home app.
-            else -> packageName == homePackageInfo.currentDefaultHome?.packageName
+            packageName == homePackageInfo.currentDefaultHome?.packageName -> {
+                if (Flags.improveHomeAppBehavior()) {
+                    // Disallow the uninstallation of the current home app if it is a system app.
+                    return applicationInfo.isSystemApp()
+                } else {
+                    // Disallow if this is the explicit default home app.
+                    return true
+                }
+            }
+
+            else -> false
         }
     }
 

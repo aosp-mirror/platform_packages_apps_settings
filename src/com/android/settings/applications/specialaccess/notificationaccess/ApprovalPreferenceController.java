@@ -24,6 +24,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -42,7 +43,7 @@ public class ApprovalPreferenceController extends BasePreferenceController {
     private NotificationManager mNm;
     private PackageManager mPm;
     // The appOp representing this preference
-    private String mAppOpStr;
+    private String mSettingIdentifier;
 
     public ApprovalPreferenceController(Context context, String key) {
         super(context, key);
@@ -76,8 +77,9 @@ public class ApprovalPreferenceController extends BasePreferenceController {
     /**
      * Set the associated appOp for the Setting
      */
-    public ApprovalPreferenceController setAppOpStr(String appOpStr) {
-        mAppOpStr = appOpStr;
+    @NonNull
+    public ApprovalPreferenceController setSettingIdentifier(@NonNull String settingIdentifier) {
+        mSettingIdentifier = settingIdentifier;
         return this;
     }
 
@@ -118,14 +120,15 @@ public class ApprovalPreferenceController extends BasePreferenceController {
             }
         });
 
-        if (android.security.Flags.extendEcmToAllSettings()) {
+        if (android.permission.flags.Flags.enhancedConfirmationModeApisEnabled()
+                && android.security.Flags.extendEcmToAllSettings()) {
             if (!isAllowedCn && !isEnabled) {
                 preference.setEnabled(false);
             } else if (isEnabled) {
                 preference.setEnabled(true);
             } else {
-                preference.checkEcmRestrictionAndSetDisabled(mAppOpStr,
-                        mCn.getPackageName(), mPkgInfo.applicationInfo.uid);
+                preference.checkEcmRestrictionAndSetDisabled(mSettingIdentifier,
+                        mCn.getPackageName());
             }
         } else {
             preference.updateState(
@@ -139,7 +142,11 @@ public class ApprovalPreferenceController extends BasePreferenceController {
         AsyncTask.execute(() -> {
             if (!mNm.isNotificationPolicyAccessGrantedForPackage(
                     cn.getPackageName())) {
-                mNm.removeAutomaticZenRules(cn.getPackageName());
+                if (android.app.Flags.modesApi()) {
+                    mNm.removeAutomaticZenRules(cn.getPackageName(), /* fromUser= */ true);
+                } else {
+                    mNm.removeAutomaticZenRules(cn.getPackageName());
+                }
             }
         });
     }

@@ -21,6 +21,7 @@ import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_NO
 import static com.android.settings.localepicker.LocaleListEditor.EXTRA_SYSTEM_LOCALE_DIALOG_TYPE;
 import static com.android.settings.localepicker.LocaleListEditor.LOCALE_SUGGESTION;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * An Activity that launches the system locale settings page.
@@ -60,6 +63,8 @@ public class NotificationActionActivity extends AppCompatActivity {
             actionIntent.putExtra(EXTRA_APP_LOCALE, appLocale);
             actionIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             getLauncher().launch(actionIntent);
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(this,
+                    SettingsEnums.ACTION_NOTIFICATION_CLICK_FOR_SYSTEM_LOCALE);
             finish();
             return;
         }

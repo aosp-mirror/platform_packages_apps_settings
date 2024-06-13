@@ -19,8 +19,8 @@ package com.android.settings.biometrics.fingerprint2.ui.settings.binder
 import android.hardware.fingerprint.FingerprintManager
 import android.util.Log
 import androidx.lifecycle.LifecycleCoroutineScope
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.settings.biometrics.fingerprint2.ui.settings.binder.FingerprintSettingsViewBinder.FingerprintView
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.EnrollAdditionalFingerprint
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.EnrollFirstFingerprint
@@ -52,7 +52,7 @@ object FingerprintSettingsViewBinder {
       userId: Int,
       gateKeeperPasswordHandle: Long?,
       challenge: Long?,
-      challengeToken: ByteArray?
+      challengeToken: ByteArray?,
     )
     /** Helper to launch an add fingerprint request */
     fun launchAddFingerprint(userId: Int, challengeToken: ByteArray?)
@@ -158,7 +158,7 @@ object FingerprintSettingsViewBinder {
               nextStep.userId,
               nextStep.gateKeeperPasswordHandle,
               nextStep.challenge,
-              nextStep.challengeToken
+              nextStep.challengeToken,
             )
           is EnrollAdditionalFingerprint ->
             view.launchAddFingerprint(nextStep.userId, nextStep.challengeToken)

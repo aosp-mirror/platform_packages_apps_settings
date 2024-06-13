@@ -59,7 +59,6 @@ import org.robolectric.annotation.Config;
 import java.util.HashSet;
 import java.util.Set;
 
-@Ignore("b/313014781")
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowDeviceConfig.class})
 public class AdvancedBluetoothDetailsHeaderControllerTest {
@@ -386,6 +385,9 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
                 .thenReturn("true".getBytes());
         Set<CachedBluetoothDevice> cacheBluetoothDevices = new HashSet<>();
         when(mCachedDevice.getMemberDevice()).thenReturn(cacheBluetoothDevices);
+        when(mBluetoothAdapter.addOnMetadataChangedListener(
+                mBluetoothDevice, mContext.getMainExecutor(), mController.mMetadataListener))
+                .thenReturn(true);
 
         mController.onStart();
 

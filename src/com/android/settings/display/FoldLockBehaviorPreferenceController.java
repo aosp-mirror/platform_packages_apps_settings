@@ -29,6 +29,7 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 
+import com.android.internal.foldables.FoldGracePeriodProvider;
 import com.android.internal.foldables.FoldLockSettingAvailabilityProvider;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -58,8 +59,13 @@ public class FoldLockBehaviorPreferenceController extends BasePreferenceControll
         mFoldLockSettingAvailabilityProvider = foldLockSettingAvailabilityProvider;
         KEY_TO_TEXT.put(SETTING_VALUE_STAY_AWAKE_ON_FOLD,
                 resourceToString(R.string.stay_awake_on_fold_title));
-        KEY_TO_TEXT.put(SETTING_VALUE_SELECTIVE_STAY_AWAKE,
-                resourceToString(R.string.selective_stay_awake_title));
+        if (new FoldGracePeriodProvider().isEnabled()) {
+            KEY_TO_TEXT.put(SETTING_VALUE_SELECTIVE_STAY_AWAKE,
+                    resourceToString(R.string.stay_awake_on_lockscreen_title));
+        } else {
+            KEY_TO_TEXT.put(SETTING_VALUE_SELECTIVE_STAY_AWAKE,
+                    resourceToString(R.string.selective_stay_awake_title));
+        }
         KEY_TO_TEXT.put(SETTING_VALUE_SLEEP_ON_FOLD,
                 resourceToString(R.string.sleep_on_fold_title));
     }

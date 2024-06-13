@@ -20,22 +20,25 @@ import static com.android.settings.connecteddevice.ConnectedDeviceDashboardFragm
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.connecteddevice.fastpair.FastPairDeviceUpdater;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.flags.Flags;
 import com.android.settings.slices.SlicePreferenceController;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -53,20 +56,23 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class,
-        ShadowConnectivityManager.class, ShadowBluetoothAdapter.class})
+@Config(
+        shadows = {
+            ShadowUserManager.class,
+            ShadowConnectivityManager.class,
+            ShadowBluetoothAdapter.class
+        })
 public class ConnectedDeviceDashboardFragmentTest {
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String KEY_NEARBY_DEVICES = "bt_nearby_slice";
     private static final String KEY_DISCOVERABLE_FOOTER = "discoverable_footer";
     private static final String KEY_SAVED_DEVICE_SEE_ALL = "previously_connected_devices_see_all";
     private static final String KEY_FAST_PAIR_DEVICE_SEE_ALL = "fast_pair_devices_see_all";
     private static final String KEY_ADD_BT_DEVICES = "add_bt_devices";
-    private static final String KEY_AUDIO_SHARING_DEVICE_LIST = "audio_sharing_device_list";
-    private static final String KEY_AUDIO_SHARING_SETTINGS =
-            "connected_device_audio_sharing_settings";
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
     private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
     private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
@@ -74,8 +80,11 @@ public class ConnectedDeviceDashboardFragmentTest {
     private static final String TEST_ACTION = "com.testapp.settings.ACTION_START";
 
     @Mock private PackageManager mPackageManager;
+    @Mock private FastPairDeviceUpdater mFastPairDeviceUpdater;
     private Context mContext;
     private ConnectedDeviceDashboardFragment mFragment;
+    private FakeFeatureFactory mFeatureFactory;
+    private AvailableMediaDeviceGroupController mMediaDeviceGroupController;
 
     @Before
     public void setUp() {
@@ -83,6 +92,22 @@ public class ConnectedDeviceDashboardFragmentTest {
 
         mContext = spy(RuntimeEnvironment.application);
         mFragment = new ConnectedDeviceDashboardFragment();
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(mFeatureFactory
+                        .getFastPairFeatureProvider()
+                        .getFastPairDeviceUpdater(
+                                any(Context.class), any(DevicePreferenceCallback.class)))
+                .thenReturn(mFastPairDeviceUpdater);
+        when(mFeatureFactory
+                        .getAudioSharingFeatureProvider()
+                        .createAudioSharingDevicePreferenceController(mContext, null, null))
+                .thenReturn(null);
+        mMediaDeviceGroupController = new AvailableMediaDeviceGroupController(mContext, null, null);
+        when(mFeatureFactory
+                        .getAudioSharingFeatureProvider()
+                        .createAvailableMediaDeviceGroupController(mContext, null, null))
+                .thenReturn(mMediaDeviceGroupController);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
     }
@@ -98,7 +123,6 @@ public class ConnectedDeviceDashboardFragmentTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void nonIndexableKeys_existInXmlLayout() {
         final List<String> niks =
                 ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
@@ -111,27 +135,7 @@ public class ConnectedDeviceDashboardFragmentTest {
                         KEY_NEARBY_DEVICES,
                         KEY_DISCOVERABLE_FOOTER,
                         KEY_SAVED_DEVICE_SEE_ALL,
-                        KEY_FAST_PAIR_DEVICE_SEE_ALL,
-                        KEY_AUDIO_SHARING_SETTINGS);
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void nonIndexableKeys_existInXmlLayout_flagOff() {
-        final List<String> niks =
-                ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                        mContext);
-
-        assertThat(niks)
-                .containsExactly(
-                        KEY_CONNECTED_DEVICES,
-                        KEY_AVAILABLE_DEVICES,
-                        KEY_NEARBY_DEVICES,
-                        KEY_DISCOVERABLE_FOOTER,
-                        KEY_SAVED_DEVICE_SEE_ALL,
-                        KEY_FAST_PAIR_DEVICE_SEE_ALL,
-                        KEY_AUDIO_SHARING_DEVICE_LIST,
-                        KEY_AUDIO_SHARING_SETTINGS);
+                        KEY_FAST_PAIR_DEVICE_SEE_ALL);
     }
 
     @Test
@@ -160,10 +164,12 @@ public class ConnectedDeviceDashboardFragmentTest {
                 PreferenceControllerListHelper.getPreferenceControllersFromXml(
                         mContext, R.xml.connected_devices);
 
-        assertThat(controllers
-                .stream()
-                .filter(controller -> controller instanceof SlicePreferenceController)
-                .count())
+        assertThat(
+                        controllers.stream()
+                                .filter(
+                                        controller ->
+                                                controller instanceof SlicePreferenceController)
+                                .count())
                 .isEqualTo(1);
     }
 }

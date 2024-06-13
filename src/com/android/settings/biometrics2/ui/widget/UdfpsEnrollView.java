@@ -260,8 +260,8 @@ public class UdfpsEnrollView extends FrameLayout {
                 displayInfo.getNaturalWidth(),
                 displayInfo.getNaturalHeight(),
                 scaleFactor,
-                displayInfo.rotation);
-
+                displayInfo.rotation,
+                mSensorProperties.sensorType);
 
         post(() -> {
             mProgressBarRadius =

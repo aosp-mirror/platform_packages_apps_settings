@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.zen;
 
-import android.annotation.Nullable;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -30,6 +29,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -39,8 +39,8 @@ import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetail
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessSettingObserverMixin;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.EmptyTextSettings;
+import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.AppPreference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -122,7 +122,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;
             final CharSequence label = app.loadLabel(mPkgMan);
-            final AppPreference pref = new AppPreference(getPrefContext());
+            final RestrictedAppPreference pref = new RestrictedAppPreference(getPrefContext());
             pref.setKey(pkg);
             pref.setIcon(app.loadIcon(mPkgMan));
             pref.setTitle(label);
@@ -133,6 +133,8 @@ public class ZenAccessSettings extends EmptyTextSettings implements
             } else {
                 // Not auto approved, update summary according to notification backend.
                 pref.setSummary(getPreferenceSummary(pkg));
+                pref.checkEcmRestrictionAndSetDisabled(
+                        android.Manifest.permission.MANAGE_NOTIFICATIONS, app.packageName);
             }
             pref.setOnPreferenceClickListener(preference -> {
                 AppInfoBase.startAppInfoFragment(

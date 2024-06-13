@@ -16,12 +16,12 @@
 
 package com.android.settings.print;
 
-import android.annotation.NonNull;
 import android.content.Context;
 import android.print.PrintManager;
 import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 
+import androidx.annotation.NonNull;
 import androidx.loader.content.Loader;
 
 import com.android.internal.util.Preconditions;

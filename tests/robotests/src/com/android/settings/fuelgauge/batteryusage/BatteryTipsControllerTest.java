@@ -90,7 +90,12 @@ public final class BatteryTipsControllerTest {
         // Check proto info
         verify(mBatteryTipsCardPreference).setVisible(true);
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "BrightnessAnomaly");
+                .action(
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "BrightnessAnomaly",
+                        PowerAnomalyKey.KEY_BRIGHTNESS.getNumber());
     }
 
     @Test
@@ -109,9 +114,11 @@ public final class BatteryTipsControllerTest {
         verify(mBatteryTipsCardPreference).setVisible(true);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                         SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
-                        "ScreenTimeoutAnomaly");
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "ScreenTimeoutAnomaly",
+                        PowerAnomalyKey.KEY_SCREEN_TIMEOUT.getNumber());
     }
 
     @Test
@@ -138,9 +145,11 @@ public final class BatteryTipsControllerTest {
         verify(mBatteryTipsCardPreference).setVisible(true);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                         SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
-                        "ScreenTimeoutAnomaly");
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "ScreenTimeoutAnomaly",
+                        PowerAnomalyKey.KEY_SCREEN_TIMEOUT.getNumber());
     }
 
     @Test
@@ -161,6 +170,11 @@ public final class BatteryTipsControllerTest {
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setVisible(true);
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "AppAnomaly");
+                .action(
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "AppAnomaly",
+                        PowerAnomalyKey.KEY_APP_TOTAL_HIGHER_THAN_USUAL.getNumber());
     }
 }

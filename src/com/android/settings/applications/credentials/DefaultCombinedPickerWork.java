@@ -19,13 +19,16 @@ package com.android.settings.applications.credentials;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.Utils;
-
 public class DefaultCombinedPickerWork extends DefaultCombinedPicker {
+    private static final String TAG = "DefaultCombinedPickerWork";
 
     @Override
     protected int getUser() {
-        UserHandle workProfile = Utils.getManagedProfile(UserManager.get(getContext()));
-        return workProfile.getIdentifier();
+        return UserHandle.myUserId();
+    }
+
+    /** Returns whether the user is handled by this fragment. */
+    public static boolean isUserHandledByFragment(UserManager userManager, int userId) {
+        return userManager.isManagedProfile(userId);
     }
 }

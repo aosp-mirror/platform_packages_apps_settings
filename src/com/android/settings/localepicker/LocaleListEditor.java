@@ -245,6 +245,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
             }
             mAdapter.setCacheItemList();
         } else if (requestCode == DIALOG_ADD_SYSTEM_LOCALE) {
+            int action = SettingsEnums.ACTION_CANCEL_SYSTEM_LOCALE_FROM_RECOMMENDATION;
             if (resultCode == Activity.RESULT_OK) {
                 localeInfo = (LocaleStore.LocaleInfo) data.getExtras().getSerializable(
                         LocaleDialogFragment.ARG_TARGET_LOCALE);
@@ -252,7 +253,9 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                         getContext().getContentResolver(),
                         Settings.System.LOCALE_PREFERENCES);
                 mAdapter.addLocale(mayAppendUnicodeTags(localeInfo, preferencesTags));
+                action = SettingsEnums.ACTION_ADD_SYSTEM_LOCALE_FROM_RECOMMENDATION;
             }
+            mMetricsFeatureProvider.action(getContext(), action);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

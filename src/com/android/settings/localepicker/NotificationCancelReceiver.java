@@ -19,12 +19,15 @@ package com.android.settings.localepicker;
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_APP_LOCALE;
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_NOTIFICATION_ID;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * A Broadcast receiver that handles the locale notification which is swiped away.
@@ -41,6 +44,8 @@ public class NotificationCancelReceiver extends BroadcastReceiver {
         Log.i(TAG, "Locale notification is swiped away.");
         if (savedNotificationID == notificationId) {
             getNotificationController(context).incrementDismissCount(appLocale);
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(context,
+                    SettingsEnums.ACTION_NOTIFICATION_SWIPE_FOR_SYSTEM_LOCALE);
         }
     }
 

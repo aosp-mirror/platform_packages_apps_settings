@@ -19,7 +19,6 @@ package com.android.settings.notification;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_APPS_CANNOT_ACCESS_NOTIFICATION_SETTINGS;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_NOTIFICATION_LISTENER_BLOCKED;
 
-import android.annotation.Nullable;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
@@ -40,6 +39,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 

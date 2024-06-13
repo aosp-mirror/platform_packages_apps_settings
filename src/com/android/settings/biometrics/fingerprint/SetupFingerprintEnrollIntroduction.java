@@ -25,6 +25,7 @@ import android.view.View;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 
@@ -46,6 +47,11 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
                     BiometricUtils.getGatekeeperPasswordHandle(getIntent()));
         }
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
+        if (Flags.udfpsEnrollCalibration()) {
+            if (mCalibrator != null) {
+                intent.putExtras(mCalibrator.getExtrasForNextIntent(false));
+            }
+        }
         return intent;
     }
 

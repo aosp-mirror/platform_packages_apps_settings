@@ -112,9 +112,26 @@ public class BatteryOptimizeUtils {
 
     /** Gets the {@link OptimizationMode} for associated app. */
     @OptimizationMode
-    public int getAppOptimizationMode() {
-        refreshState();
+    public int getAppOptimizationMode(boolean refreshList) {
+        if (refreshList) {
+            mPowerAllowListBackend.refreshList();
+        }
+        mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName, mUid);
+        mMode =
+                mAppOpsManager.checkOpNoThrow(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mPackageName);
+        Log.d(
+                TAG,
+                String.format(
+                        "refresh %s state, allowlisted = %s, mode = %d",
+                        mPackageName, mAllowListed, mMode));
         return getAppOptimizationMode(mMode, mAllowListed);
+    }
+
+    /** Gets the {@link OptimizationMode} for associated app. */
+    @OptimizationMode
+    public int getAppOptimizationMode() {
+        return getAppOptimizationMode(true);
     }
 
     /** Resets optimization mode for all applications. */
@@ -334,19 +351,6 @@ public class BatteryOptimizeUtils {
         }
         BatteryOptimizeLogUtils.writeLog(
                 context, action, packageNameKey, createLogEvent(appStandbyMode, allowListed));
-    }
-
-    private void refreshState() {
-        mPowerAllowListBackend.refreshList();
-        mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName, mUid);
-        mMode =
-                mAppOpsManager.checkOpNoThrow(
-                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mPackageName);
-        Log.d(
-                TAG,
-                String.format(
-                        "refresh %s state, allowlisted = %s, mode = %d",
-                        mPackageName, mAllowListed, mMode));
     }
 
     private static String createLogEvent(int appStandbyMode, boolean allowListed) {

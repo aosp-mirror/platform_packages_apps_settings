@@ -43,6 +43,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowLooper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,6 +121,7 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
         when(mSpatializer.getCompatibleAudioDevices()).thenReturn(compatibleAudioDevices);
 
         mController.refresh();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mSpatialAudioPref.isChecked()).isTrue();
     }
@@ -130,6 +132,7 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
         when(mSpatializer.getCompatibleAudioDevices()).thenReturn(compatibleAudioDevices);
 
         mController.refresh();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mSpatialAudioPref.isChecked()).isFalse();
     }
@@ -142,6 +145,7 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
         when(mSpatializer.hasHeadTracker(mController.mAudioDevice)).thenReturn(true);
 
         mController.refresh();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHeadTrackingPref.isVisible()).isTrue();
     }
@@ -156,6 +160,7 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
         when(mSpatializer.hasHeadTracker(mController.mAudioDevice)).thenReturn(false);
 
         mController.refresh();
+        ShadowLooper.idleMainLooper();
 
         verify(mProfilesContainer).removePreference(mHeadTrackingPref);
     }
@@ -166,6 +171,7 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
         when(mSpatializer.getCompatibleAudioDevices()).thenReturn(compatibleAudioDevices);
 
         mController.refresh();
+        ShadowLooper.idleMainLooper();
 
         verify(mProfilesContainer).removePreference(mHeadTrackingPref);
     }
@@ -181,6 +187,7 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
         when(mSpatializer.isHeadTrackerEnabled(mController.mAudioDevice)).thenReturn(true);
 
         mController.refresh();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHeadTrackingPref.isChecked()).isTrue();
     }
@@ -196,6 +203,7 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
         when(mSpatializer.isHeadTrackerEnabled(mController.mAudioDevice)).thenReturn(false);
 
         mController.refresh();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mHeadTrackingPref.isChecked()).isFalse();
     }

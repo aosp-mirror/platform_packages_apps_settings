@@ -22,6 +22,16 @@
     android:title="@string/accessibility_color_and_motion_title">
 
     <Preference
+        android:fragment="com.android.settings.accessibility.ColorContrastFragment"
+        android:key="color_contrast"
+        android:icon="@drawable/ic_color_contrast"
+        android:persistent="false"
+        android:title="@string/accessibility_color_contrast_title"
+        android:summary="@string/accessibility_color_contrast_summary"
+        settings:controller="com.android.settings.accessibility.ContrastPreferenceController"
+        settings:searchable="true"/>
+
+    <Preference
         android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
         android:icon="@drawable/ic_daltonizer"
         android:key="daltonizer_preference"

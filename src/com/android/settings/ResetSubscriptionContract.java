@@ -23,8 +23,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.IntStream;
 
@@ -53,8 +53,8 @@ public class ResetSubscriptionContract implements AutoCloseable {
         mContext = context;
         // Only keeps specific subscription ID required to perform reset operation
         IntStream subIdStream = IntStream.of(
-                resetRequest.getResetTelephonyAndNetworkPolicyManager()
-                , resetRequest.getResetApnSubId());
+                resetRequest.getResetTelephonyAndNetworkPolicyManager(),
+                resetRequest.getResetApnSubId(), resetRequest.getResetImsSubId());
         mResetSubscriptionIds = subIdStream.sorted().distinct()
                 .filter(id -> SubscriptionManager.isUsableSubscriptionId(id))
                 .toArray();

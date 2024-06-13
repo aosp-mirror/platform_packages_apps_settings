@@ -35,6 +35,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -427,13 +428,35 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 R.string.battery_usage_day_and_hour, selectedDayText, selectedHourText);
     }
 
+    @VisibleForTesting
+    String getBatteryLevelPercentageInfo() {
+        if (mDailyViewModel == null || mHourlyViewModels == null) {
+            // No data
+            return "";
+        }
+
+        if (mDailyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL
+                || mHourlyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL) {
+            return mDailyViewModel.getSlotBatteryLevelText(mDailyChartIndex);
+        }
+
+        return mHourlyViewModels.get(mDailyChartIndex).getSlotBatteryLevelText(mHourlyChartIndex);
+    }
+
     private String getAccessibilityAnnounceMessage() {
         final String slotInformation = getSlotInformation();
-        return slotInformation == null
-                ? mPrefContext.getString(
-                        R.string.battery_usage_breakdown_title_since_last_full_charge)
-                : mPrefContext.getString(
-                        R.string.battery_usage_breakdown_title_for_slot, slotInformation);
+        final String slotInformationMessage =
+                slotInformation == null
+                        ? mPrefContext.getString(
+                                R.string.battery_usage_breakdown_title_since_last_full_charge)
+                        : mPrefContext.getString(
+                                R.string.battery_usage_breakdown_title_for_slot, slotInformation);
+        final String batteryLevelPercentageMessage = getBatteryLevelPercentageInfo();
+
+        return mPrefContext.getString(
+                R.string.battery_usage_time_info_and_battery_level,
+                slotInformationMessage,
+                batteryLevelPercentageMessage);
     }
 
     private void animateBatteryChartViewGroup() {
@@ -573,7 +596,29 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return null;
     }
 
-    private final class DailyChartLabelTextGenerator
+    private abstract class BaseLabelTextGenerator
+            implements BatteryChartViewModel.LabelTextGenerator {
+        @Override
+        public String generateSlotBatteryLevelText(List<Integer> levels, int index) {
+            final int fromBatteryLevelIndex =
+                    index == BatteryChartViewModel.SELECTED_INDEX_ALL ? 0 : index;
+            final int toBatteryLevelIndex =
+                    index == BatteryChartViewModel.SELECTED_INDEX_ALL
+                            ? levels.size() - 1
+                            : index + 1;
+            return mPrefContext.getString(
+                    R.string.battery_level_percentage,
+                    generateBatteryLevelText(levels.get(fromBatteryLevelIndex)),
+                    generateBatteryLevelText(levels.get(toBatteryLevelIndex)));
+        }
+
+        @VisibleForTesting
+        private static String generateBatteryLevelText(Integer level) {
+            return Utils.formatPercentage(level);
+        }
+    }
+
+    private final class DailyChartLabelTextGenerator extends BaseLabelTextGenerator
             implements BatteryChartViewModel.LabelTextGenerator {
         @Override
         public String generateText(List<Long> timestamps, int index) {
@@ -588,7 +633,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
     }
 
-    private final class HourlyChartLabelTextGenerator
+    private final class HourlyChartLabelTextGenerator extends BaseLabelTextGenerator
             implements BatteryChartViewModel.LabelTextGenerator {
         private static final int FULL_CHARGE_BATTERY_LEVEL = 100;
 

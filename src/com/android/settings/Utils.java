@@ -54,7 +54,9 @@ import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
+import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
@@ -1333,4 +1335,64 @@ public final class Utils extends com.android.settingslib.Utils {
         return dreamsSupported && (!dreamsOnlyEnabledForDockUser || canCurrentUserDream(context));
     }
 
+
+    /**
+     * Removes fingerprint templates enrolled for a given user.
+     *
+     * @param context application context.
+     * @param userId the id of the relevant user
+     */
+    public static void removeEnrolledFingerprintForUser(Context context, int userId) {
+        FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
+        if (fingerprintManager != null && fingerprintManager.hasEnrolledTemplates(userId)) {
+            fingerprintManager.removeAll(userId,
+                    fingerprintManagerRemovalCallback(userId));
+        }
+    }
+
+    /**
+     * Removes face templates enrolled for a given user.
+     *
+     * @param context application context.
+     * @param userId the id of the relevant user
+     */
+    public static void removeEnrolledFaceForUser(Context context, int userId) {
+        FaceManager faceManager  = getFaceManagerOrNull(context);
+        if (faceManager != null && faceManager.hasEnrolledTemplates(userId)) {
+            faceManager.removeAll(userId, faceManagerRemovalCallback(userId));
+        }
+    }
+
+    private static FaceManager.RemovalCallback faceManagerRemovalCallback(int userId) {
+        return new FaceManager.RemovalCallback() {
+            @Override
+            public void onRemovalError(@Nullable Face face, int errMsgId, CharSequence err) {
+                Log.e(TAG, "Unable to remove face template for user " + userId + ", error: " + err);
+            }
+
+            @Override
+            public void onRemovalSucceeded(Face face, int remaining) {
+                if (remaining == 0) {
+                    Log.d(TAG, "Enrolled face templates removed for user " + userId);
+                }
+            }
+        };
+    }
+
+    private static FingerprintManager.RemovalCallback fingerprintManagerRemovalCallback(
+            int userId) {
+        return new FingerprintManager.RemovalCallback() {
+            @Override
+            public void onRemovalError(@Nullable Fingerprint fp, int errMsgId, CharSequence err) {
+                Log.e(TAG, "Unable to remove fingerprint for user " + userId + " , error: " + err);
+            }
+
+            @Override
+            public void onRemovalSucceeded(Fingerprint fp, int remaining) {
+                if (remaining == 0) {
+                    Log.d(TAG, "Enrolled fingerprints removed for user " + userId);
+                }
+            }
+        };
+    }
 }

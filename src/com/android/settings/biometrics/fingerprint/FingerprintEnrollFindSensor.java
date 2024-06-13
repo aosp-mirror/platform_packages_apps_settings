@@ -78,7 +78,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     private boolean mIsFolded;
     private boolean mIsReverseDefaultRotation;
     @Nullable
-    private UdfpsEnrollCalibrator mCalibrator;
+    protected UdfpsEnrollCalibrator mCalibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -292,6 +292,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     @Override
     protected Intent getFingerprintEnrollingIntent() {
         final Intent ret = super.getFingerprintEnrollingIntent();
+        ret.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                getIntent().getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1));
         if (Flags.udfpsEnrollCalibration()) {
             if (mCalibrator != null) {
                 ret.putExtras(mCalibrator.getExtrasForNextIntent(true));
@@ -349,7 +351,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 FingerprintEnrollEnrolling.TAG_SIDECAR);
         if (mSidecar == null) {
             mSidecar = new FingerprintEnrollSidecar(this,
-                    FingerprintManager.ENROLL_FIND_SENSOR);
+                    FingerprintManager.ENROLL_FIND_SENSOR, getIntent());
             getSupportFragmentManager().beginTransaction()
                     .add(mSidecar, FingerprintEnrollEnrolling.TAG_SIDECAR)
                     .commitAllowingStateLoss();
