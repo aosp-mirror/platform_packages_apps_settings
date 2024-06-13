@@ -117,7 +117,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             };
 
     @VisibleForTesting
-    protected final BluetoothLeBroadcast.Callback mBroadcastCallback =
+    final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastStarted(int reason, int broadcastId) {
@@ -392,7 +392,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
     /** Test only: set callback registration status in tests. */
     @VisibleForTesting
-    public void setCallbacksRegistered(boolean registered) {
+    void setCallbacksRegistered(boolean registered) {
         mCallbacksRegistered.set(registered);
     }
 
