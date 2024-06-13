@@ -22,6 +22,7 @@ import android.net.wifi.WifiManager
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.R
+import com.android.settings.network.telephony.DataSubscriptionRepository
 import com.android.settings.wifi.WifiSummaryRepository
 import com.android.settings.wifi.repository.WifiRepository
 import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBooleanFlow
@@ -39,42 +40,50 @@ class InternetPreferenceRepository(
     private val context: Context,
     private val connectivityRepository: ConnectivityRepository = ConnectivityRepository(context),
     private val wifiSummaryRepository: WifiSummaryRepository = WifiSummaryRepository(context),
+    private val dataSubscriptionRepository: DataSubscriptionRepository =
+        DataSubscriptionRepository(context),
     private val wifiRepository: WifiRepository = WifiRepository(context),
     private val airplaneModeOnFlow: Flow<Boolean> =
         context.settingsGlobalBooleanFlow(Settings.Global.AIRPLANE_MODE_ON),
 ) {
 
-    fun summaryFlow(): Flow<String> = connectivityRepository.networkCapabilitiesFlow()
-        .flatMapLatest { capabilities -> capabilities.summaryFlow() }
-        .onEach { Log.d(TAG, "summaryFlow: $it") }
-        .conflate()
-        .flowOn(Dispatchers.Default)
+    fun summaryFlow(): Flow<String> =
+        connectivityRepository
+            .networkCapabilitiesFlow()
+            .flatMapLatest { capabilities -> capabilities.summaryFlow() }
+            .onEach { Log.d(TAG, "summaryFlow: $it") }
+            .conflate()
+            .flowOn(Dispatchers.Default)
 
     private fun NetworkCapabilities.summaryFlow(): Flow<String> {
-        if (hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
-            hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+        if (
+            hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+                hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
         ) {
             for (transportType in transportTypes) {
-                if (transportType == NetworkCapabilities.TRANSPORT_WIFI) {
-                    return wifiSummaryRepository.summaryFlow()
+                when (transportType) {
+                    NetworkCapabilities.TRANSPORT_WIFI -> return wifiSummaryRepository.summaryFlow()
+                    NetworkCapabilities.TRANSPORT_CELLULAR ->
+                        return dataSubscriptionRepository.dataSummaryFlow()
                 }
             }
         }
         return defaultSummaryFlow()
     }
 
-    private fun defaultSummaryFlow(): Flow<String> = combine(
-        airplaneModeOnFlow,
-        wifiRepository.wifiStateFlow(),
-    ) { airplaneModeOn: Boolean, wifiState: Int ->
-        context.getString(
-            if (airplaneModeOn && wifiState != WifiManager.WIFI_STATE_ENABLED) {
-                R.string.condition_airplane_title
-            } else {
-                R.string.networks_available
-            }
-        )
-    }
+    private fun defaultSummaryFlow(): Flow<String> =
+        combine(
+            airplaneModeOnFlow,
+            wifiRepository.wifiStateFlow(),
+        ) { airplaneModeOn: Boolean, wifiState: Int ->
+            context.getString(
+                if (airplaneModeOn && wifiState != WifiManager.WIFI_STATE_ENABLED) {
+                    R.string.condition_airplane_title
+                } else {
+                    R.string.networks_available
+                }
+            )
+        }
 
     private companion object {
         private const val TAG = "InternetPreferenceRepo"

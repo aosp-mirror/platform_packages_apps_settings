@@ -22,6 +22,7 @@ import android.net.wifi.WifiManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.network.telephony.DataSubscriptionRepository
 import com.android.settings.wifi.WifiSummaryRepository
 import com.android.settings.wifi.repository.WifiRepository
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
@@ -42,30 +43,50 @@ class InternetPreferenceRepositoryTest {
 
     private val mockConnectivityRepository = mock<ConnectivityRepository>()
     private val mockWifiSummaryRepository = mock<WifiSummaryRepository>()
+    private val mockDataSubscriptionRepository = mock<DataSubscriptionRepository>()
     private val mockWifiRepository = mock<WifiRepository>()
     private val airplaneModeOnFlow = MutableStateFlow(false)
 
-    private val repository = InternetPreferenceRepository(
-        context = context,
-        connectivityRepository = mockConnectivityRepository,
-        wifiSummaryRepository = mockWifiSummaryRepository,
-        wifiRepository = mockWifiRepository,
-        airplaneModeOnFlow = airplaneModeOnFlow,
-    )
+    private val repository =
+        InternetPreferenceRepository(
+            context = context,
+            connectivityRepository = mockConnectivityRepository,
+            wifiSummaryRepository = mockWifiSummaryRepository,
+            dataSubscriptionRepository = mockDataSubscriptionRepository,
+            wifiRepository = mockWifiRepository,
+            airplaneModeOnFlow = airplaneModeOnFlow,
+        )
 
     @Test
     fun summaryFlow_wifi() = runBlocking {
-        val wifiNetworkCapabilities = NetworkCapabilities.Builder().apply {
-            addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-            addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-            addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
-        }.build()
+        val wifiNetworkCapabilities =
+            NetworkCapabilities.Builder()
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+                .build()
         mockConnectivityRepository.stub {
             on { networkCapabilitiesFlow() } doReturn flowOf(wifiNetworkCapabilities)
         }
-        mockWifiSummaryRepository.stub {
-            on { summaryFlow() } doReturn flowOf(SUMMARY)
+        mockWifiSummaryRepository.stub { on { summaryFlow() } doReturn flowOf(SUMMARY) }
+
+        val summary = repository.summaryFlow().firstWithTimeoutOrNull()
+
+        assertThat(summary).isEqualTo(SUMMARY)
+    }
+
+    @Test
+    fun summaryFlow_cellular() = runBlocking {
+        val wifiNetworkCapabilities =
+            NetworkCapabilities.Builder()
+                .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+                .build()
+        mockConnectivityRepository.stub {
+            on { networkCapabilitiesFlow() } doReturn flowOf(wifiNetworkCapabilities)
         }
+        mockDataSubscriptionRepository.stub { on { dataSummaryFlow() } doReturn flowOf(SUMMARY) }
 
         val summary = repository.summaryFlow().firstWithTimeoutOrNull()
 
