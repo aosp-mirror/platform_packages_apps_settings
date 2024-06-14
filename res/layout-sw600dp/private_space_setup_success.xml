@@ -28,11 +28,8 @@
         android:id="@+id/sud_layout_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <Space
-            android:id="@+id/space1"
-            android:layout_width="1dp"
-            android:layout_height="@dimen/private_space_sud_items_margin_inbetween"/>
+        android:orientation="vertical"
+        android:gravity="center">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,8 +37,8 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottie_animation"
                 style="@style/SudContentIllustration"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/private_space_illustration"/>
