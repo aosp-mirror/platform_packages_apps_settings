@@ -74,6 +74,7 @@ import com.android.settingslib.flags.Flags;
 
 import com.google.common.collect.ImmutableList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -171,6 +172,11 @@ public class AudioSharingDevicePreferenceControllerTest {
         mController.setDialogHandler(mDialogHandler);
         doReturn(mActivity).when(mFragment).getActivity();
         mController.setHostFragment(mFragment);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowBluetoothUtils.reset();
     }
 
     @Test

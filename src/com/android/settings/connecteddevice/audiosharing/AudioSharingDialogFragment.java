@@ -100,7 +100,8 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
 
     /** Test only: get the event data passed to the dialog. */
     @VisibleForTesting
-    protected @NonNull Pair<Integer, Object>[] getEventData() {
+    @NonNull
+    Pair<Integer, Object>[] getEventData() {
         return sEventData;
     }
 

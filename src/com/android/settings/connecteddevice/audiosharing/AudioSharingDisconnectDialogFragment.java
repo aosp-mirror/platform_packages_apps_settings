@@ -147,7 +147,8 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
 
     /** Test only: get the event data passed to the dialog. */
     @VisibleForTesting
-    protected @NonNull Pair<Integer, Object>[] getEventData() {
+    @NonNull
+    Pair<Integer, Object>[] getEventData() {
         return sEventData;
     }
 

@@ -72,7 +72,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     private static final String PREF_KEY = "calls_and_alarms";
 
     @VisibleForTesting
-    protected enum ChangeCallAudioType {
+    enum ChangeCallAudioType {
         UNKNOWN,
         CONNECTED_EARLIER,
         CONNECTED_LATER
@@ -276,7 +276,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
 
     /** Test only: set callback registration status in tests. */
     @VisibleForTesting
-    public void setCallbacksRegistered(boolean registered) {
+    void setCallbacksRegistered(boolean registered) {
         mCallbacksRegistered.set(registered);
     }
 
@@ -385,7 +385,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     }
 
     @VisibleForTesting
-    protected void logCallAudioDeviceChange(int currentGroupId, CachedBluetoothDevice target) {
+    void logCallAudioDeviceChange(int currentGroupId, CachedBluetoothDevice target) {
         var unused =
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
