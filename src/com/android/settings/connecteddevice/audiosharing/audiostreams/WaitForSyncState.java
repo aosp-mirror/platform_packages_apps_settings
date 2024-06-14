@@ -24,6 +24,7 @@ import android.content.Context;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -59,6 +60,11 @@ class WaitForSyncState extends AudioStreamStateHandler {
                         if (preference.isShown()
                                 && preference.getAudioStreamState() == getStateEnum()) {
                             controller.handleSourceLost(preference.getAudioStreamBroadcastId());
+                            mMetricsFeatureProvider.action(
+                                    preference.getContext(),
+                                    SettingsEnums
+                                            .ACTION_AUDIO_STREAM_JOIN_FAILED_WAIT_FOR_SYNC_TIMEOUT,
+                                    preference.getSourceOriginForLogging().ordinal());
                             ThreadUtils.postOnMainThread(
                                     () -> {
                                         if (controller.getFragment() != null) {
@@ -101,18 +107,19 @@ class WaitForSyncState extends AudioStreamStateHandler {
                 .setRightButtonOnClickListener(
                         dialog -> {
                             if (controller.getFragment() != null) {
-                                new SubSettingLauncher(context)
-                                        .setTitleRes(
-                                                R.string.audio_streams_main_page_scan_qr_code_title)
-                                        .setDestination(
-                                                AudioStreamsQrCodeScanFragment.class.getName())
-                                        .setResultListener(
-                                                controller.getFragment(),
-                                                REQUEST_SCAN_BT_BROADCAST_QR_CODE)
-                                        .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
-                                        .launch();
+                                launchQrCodeScanFragment(context, controller.getFragment());
                                 dialog.dismiss();
                             }
                         });
+    }
+
+    private void launchQrCodeScanFragment(Context context, Fragment fragment) {
+        new SubSettingLauncher(context)
+                .setTitleRes(R.string.audio_streams_main_page_scan_qr_code_title)
+                .setDestination(AudioStreamsQrCodeScanFragment.class.getName())
+                .setResultListener(fragment, REQUEST_SCAN_BT_BROADCAST_QR_CODE)
+                .setSourceMetricsCategory(
+                        SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_WAIT_FOR_SYNC_TIMEOUT)
+                .launch();
     }
 }
