@@ -68,13 +68,10 @@ class WaitForSyncState extends AudioStreamStateHandler {
                             ThreadUtils.postOnMainThread(
                                     () -> {
                                         if (controller.getFragment() != null) {
-                                            AudioStreamsDialogFragment.show(
+                                            showBroadcastUnavailableDialog(
                                                     controller.getFragment(),
-                                                    getBroadcastUnavailableDialog(
-                                                            preference.getContext(),
-                                                            AudioStreamsHelper.getBroadcastName(
-                                                                    metadata),
-                                                            controller));
+                                                    preference.getContext(),
+                                                    AudioStreamsHelper.getBroadcastName(metadata));
                                         }
                                     });
                         }
@@ -93,24 +90,28 @@ class WaitForSyncState extends AudioStreamStateHandler {
         return AudioStreamsProgressCategoryController.AudioStreamState.WAIT_FOR_SYNC;
     }
 
-    private AudioStreamsDialogFragment.DialogBuilder getBroadcastUnavailableDialog(
-            Context context,
-            String broadcastName,
-            AudioStreamsProgressCategoryController controller) {
-        return new AudioStreamsDialogFragment.DialogBuilder(context)
-                .setTitle(context.getString(R.string.audio_streams_dialog_stream_is_not_available))
-                .setSubTitle1(broadcastName)
-                .setSubTitle2(context.getString(R.string.audio_streams_is_not_playing))
-                .setLeftButtonText(context.getString(R.string.audio_streams_dialog_close))
-                .setLeftButtonOnClickListener(AlertDialog::dismiss)
-                .setRightButtonText(context.getString(R.string.audio_streams_dialog_retry))
-                .setRightButtonOnClickListener(
-                        dialog -> {
-                            if (controller.getFragment() != null) {
-                                launchQrCodeScanFragment(context, controller.getFragment());
-                                dialog.dismiss();
-                            }
-                        });
+    private void showBroadcastUnavailableDialog(
+            Fragment fragment, Context context, String broadcastName) {
+        var broadcastUnavailableDialog =
+                new AudioStreamsDialogFragment.DialogBuilder(context)
+                        .setTitle(
+                                context.getString(
+                                        R.string.audio_streams_dialog_stream_is_not_available))
+                        .setSubTitle1(broadcastName)
+                        .setSubTitle2(context.getString(R.string.audio_streams_is_not_playing))
+                        .setLeftButtonText(context.getString(R.string.audio_streams_dialog_close))
+                        .setLeftButtonOnClickListener(AlertDialog::dismiss)
+                        .setRightButtonText(context.getString(R.string.audio_streams_dialog_retry))
+                        .setRightButtonOnClickListener(
+                                dialog -> {
+                                    launchQrCodeScanFragment(context, fragment);
+                                    dialog.dismiss();
+                                });
+
+        AudioStreamsDialogFragment.show(
+                fragment,
+                broadcastUnavailableDialog,
+                SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_WAIT_FOR_SYNC_TIMEOUT);
     }
 
     private void launchQrCodeScanFragment(Context context, Fragment fragment) {

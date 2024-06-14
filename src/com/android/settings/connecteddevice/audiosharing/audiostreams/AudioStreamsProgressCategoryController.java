@@ -481,7 +481,10 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                     mContext,
                     () -> {
                         if (mFragment != null) {
-                            AudioStreamsDialogFragment.show(mFragment, getNoLeDeviceDialog());
+                            AudioStreamsDialogFragment.show(
+                                    mFragment,
+                                    getNoLeDeviceDialog(),
+                                    SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_NO_LE_DEVICE);
                         }
                     });
         }
