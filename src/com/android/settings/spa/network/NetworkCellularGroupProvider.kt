@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.network
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.IntentFilter
 import android.os.Bundle
@@ -78,7 +79,7 @@ import kotlinx.coroutines.withContext
  */
 open class NetworkCellularGroupProvider : SettingsPageProvider {
     override val name = fileName
-
+    override val metricsCategory = SettingsEnums.MOBILE_NETWORK_LIST
     private val owner = createSettingsPage()
 
     var defaultVoiceSubId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
