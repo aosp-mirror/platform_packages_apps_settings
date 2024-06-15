@@ -37,6 +37,7 @@ import android.util.Log;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
@@ -196,7 +197,7 @@ public class AudioStreamMediaService extends Service {
     // override this value. Otherwise, we raise the volume to 25 when the play button is clicked.
     private int mLatestPositiveVolume = 25;
     private boolean mIsMuted = false;
-    @Nullable private MediaSession mLocalSession;
+    @VisibleForTesting @Nullable MediaSession mLocalSession;
 
     @Override
     public void onCreate() {
@@ -228,7 +229,7 @@ public class AudioStreamMediaService extends Service {
             NotificationChannel notificationChannel =
                     new NotificationChannel(
                             CHANNEL_ID,
-                            this.getString(com.android.settings.R.string.bluetooth),
+                            getString(com.android.settings.R.string.bluetooth),
                             NotificationManager.IMPORTANCE_HIGH);
             mNotificationManager.createNotificationChannel(notificationChannel);
         }
@@ -403,7 +404,7 @@ public class AudioStreamMediaService extends Service {
                 new Notification.Builder(this, CHANNEL_ID)
                         .setSmallIcon(com.android.settingslib.R.drawable.ic_bt_le_audio_sharing)
                         .setStyle(mediaStyle)
-                        .setContentText(this.getString(BROADCAST_CONTENT_TEXT))
+                        .setContentText(getString(BROADCAST_CONTENT_TEXT))
                         .setSilent(true);
         return notificationBuilder.build();
     }

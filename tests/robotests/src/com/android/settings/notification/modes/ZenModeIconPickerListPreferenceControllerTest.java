@@ -27,6 +27,7 @@ import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -95,6 +96,7 @@ public class ZenModeIconPickerListPreferenceControllerTest {
     private static class TestIconOptionsProvider implements IconOptionsProvider {
 
         @Override
+        @NonNull
         public ImmutableList<IconInfo> getIcons() {
             return ImmutableList.of(
                     new IconInfo(R.drawable.ic_android, "android"),

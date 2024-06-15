@@ -17,12 +17,13 @@
 package com.android.settings.notification.modes;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 
 import com.google.common.collect.ImmutableList;
 
 interface IconOptionsProvider {
 
-    ImmutableList<IconInfo> getIcons();
+    @NonNull ImmutableList<IconInfo> getIcons();
 
     record IconInfo(@DrawableRes int resId, String description) { }
 }

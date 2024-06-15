@@ -44,6 +44,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
@@ -62,8 +63,8 @@ public class AudioStreamsQrCodeScanFragment extends InstrumentedFragment
     private static final int MESSAGE_HIDE_ERROR_MESSAGE = 1;
     private static final int MESSAGE_SHOW_ERROR_MESSAGE = 2;
     private static final int MESSAGE_SCAN_BROADCAST_SUCCESS = 3;
-    private static final long SHOW_ERROR_MESSAGE_INTERVAL = 10000;
-    private static final long SHOW_SUCCESS_SQUARE_INTERVAL = 1000;
+    @VisibleForTesting static final long SHOW_ERROR_MESSAGE_INTERVAL = 10000;
+    @VisibleForTesting static final long SHOW_SUCCESS_SQUARE_INTERVAL = 1000;
     private static final Duration VIBRATE_DURATION_QR_CODE_RECOGNITION = Duration.ofMillis(3);
     private final Handler mHandler =
             new Handler(Looper.getMainLooper()) {

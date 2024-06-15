@@ -19,6 +19,7 @@ package com.android.settings.network
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.telephony.SubscriptionManager
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -41,7 +42,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -54,7 +54,9 @@ import androidx.lifecycle.LifecycleRegistry
 import com.android.settings.R
 import com.android.settings.SidecarFragment
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity
+import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity
+import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.network.SimOnboardingPageProvider.getRoute
 import com.android.settings.wifi.WifiPickerTrackerHelper
@@ -67,13 +69,17 @@ import com.android.settingslib.spa.widget.dialog.getDialogWidth
 import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
 import com.android.settingslib.spa.widget.ui.SettingsTitle
 import com.android.settingslib.spaprivileged.framework.common.userManager
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SimOnboardingActivity : SpaBaseDialogActivity() {
     lateinit var scope: CoroutineScope
@@ -441,7 +447,9 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             SidecarFragment.State.SUCCESS -> {
                 Log.i(TAG, "Successfully enable the eSIM profile.")
                 switchToEuiccSubscriptionSidecar!!.reset()
-                callbackListener(CallbackType.CALLBACK_SETUP_NAME)
+                scope.launch {
+                    checkSimIsReadyAndGoNext()
+                }
             }
 
             SidecarFragment.State.ERROR -> {
@@ -459,7 +467,9 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 Log.i(TAG, "Successfully switched to removable slot.")
                 switchToRemovableSlotSidecar!!.reset()
                 onboardingService.handleTogglePsimAction()
-                callbackListener(CallbackType.CALLBACK_SETUP_NAME)
+                scope.launch {
+                    checkSimIsReadyAndGoNext()
+                }
             }
 
             SidecarFragment.State.ERROR -> {
@@ -488,6 +498,35 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 showError.value = ErrorType.ERROR_ENABLE_DSDS
                 callbackListener(CallbackType.CALLBACK_ERROR)
             }
+        }
+    }
+
+    suspend fun checkSimIsReadyAndGoNext() {
+        withContext(Dispatchers.Default) {
+            val isEnabled = context.requireSubscriptionManager()
+                .isSubscriptionEnabled(onboardingService.targetSubId)
+            if (!isEnabled) {
+                val latch = CountDownLatch(1)
+                val receiver = CarrierConfigChangedReceiver(latch)
+                try {
+                    val waitingTimeMillis =
+                        Settings.Global.getLong(
+                            context.contentResolver,
+                            Settings.Global.EUICC_SWITCH_SLOT_TIMEOUT_MILLIS,
+                            UiccSlotUtil.DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS
+                        )
+                    receiver.registerOn(context)
+                    Log.d(TAG, "Start waiting, waitingTime is $waitingTimeMillis")
+                    latch.await(waitingTimeMillis, TimeUnit.MILLISECONDS)
+                } catch (e: InterruptedException) {
+                    Thread.currentThread().interrupt()
+                    Log.e(TAG, "Failed switching to physical slot.", e)
+                } finally {
+                    context.unregisterReceiver(receiver)
+                }
+            }
+            Log.d(TAG, "Sim is ready then go to next")
+            callbackListener(CallbackType.CALLBACK_SETUP_NAME)
         }
     }
 
