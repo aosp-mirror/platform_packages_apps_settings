@@ -25,7 +25,9 @@ import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 class AudioStreamStateHandler {
@@ -35,6 +37,8 @@ class AudioStreamStateHandler {
 
     final AudioStreamsRepository mAudioStreamsRepository = AudioStreamsRepository.getInstance();
     final Handler mHandler = new Handler(Looper.getMainLooper());
+    final MetricsFeatureProvider mMetricsFeatureProvider =
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
     AudioStreamStateHandler() {}
 

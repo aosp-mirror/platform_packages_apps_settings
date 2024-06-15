@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.isBroadcasting;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -29,9 +30,11 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.nio.charset.StandardCharsets;
@@ -48,6 +51,7 @@ public class AudioSharingPasswordPreferenceController extends BasePreferenceCont
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private AudioSharingPasswordPreference mPreference;
     private final AudioSharingPasswordValidator mAudioSharingPasswordValidator;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     public AudioSharingPasswordPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -57,6 +61,7 @@ public class AudioSharingPasswordPreferenceController extends BasePreferenceCont
                         ? mBtManager.getProfileManager().getLeAudioBroadcastProfile()
                         : null;
         mAudioSharingPasswordValidator = new AudioSharingPasswordValidator();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -94,18 +99,38 @@ public class AudioSharingPasswordPreferenceController extends BasePreferenceCont
         }
         mPreference.setEditable(!isBroadcasting(mBtManager));
         var password = mBroadcast.getBroadcastCode();
-        mPreference.setChecked(password == null || password.length == 0);
+        mPreference.setChecked(isPublicBroadcast(password));
     }
 
     @Override
     public void onPreferenceDataChanged(@NonNull String password, boolean isPublicBroadcast) {
-        if (mBroadcast == null || isBroadcasting(mBtManager)) {
-            Log.w(TAG, "onPreferenceDataChanged() changing password when broadcasting or null!");
-            return;
-        }
-        persistDefaultPassword(mContext, password);
-        mBroadcast.setBroadcastCode(isPublicBroadcast ? new byte[0] : password.getBytes());
-        updatePreference();
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            if (mBroadcast == null || isBroadcasting(mBtManager)) {
+                                Log.w(
+                                        TAG,
+                                        "onPreferenceDataChanged() changing password when"
+                                                + " broadcasting or null!");
+                                return;
+                            }
+                            boolean isCurrentPublicBroadcast =
+                                    isPublicBroadcast(mBroadcast.getBroadcastCode());
+                            String currentDefaultPassword = getDefaultPassword(mContext);
+                            if (password.equals(currentDefaultPassword)
+                                    && isCurrentPublicBroadcast == isPublicBroadcast) {
+                                Log.d(TAG, "onPreferenceDataChanged() nothing changed");
+                                return;
+                            }
+                            persistDefaultPassword(mContext, password);
+                            mBroadcast.setBroadcastCode(
+                                    isPublicBroadcast ? new byte[0] : password.getBytes());
+                            updatePreference();
+                            mMetricsFeatureProvider.action(
+                                    mContext,
+                                    SettingsEnums.ACTION_AUDIO_STREAM_PASSWORD_UPDATED,
+                                    isPublicBroadcast ? 1 : 0);
+                        });
     }
 
     private void updatePreference() {
@@ -116,7 +141,7 @@ public class AudioSharingPasswordPreferenceController extends BasePreferenceCont
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
                             byte[] password = mBroadcast.getBroadcastCode();
-                            boolean noPassword = (password == null || password.length == 0);
+                            boolean noPassword = isPublicBroadcast(password);
                             String passwordToDisplay =
                                     noPassword
                                             ? getDefaultPassword(mContext)
@@ -140,25 +165,20 @@ public class AudioSharingPasswordPreferenceController extends BasePreferenceCont
     }
 
     private static void persistDefaultPassword(Context context, String defaultPassword) {
-        var unused =
-                ThreadUtils.postOnBackgroundThread(
-                        () -> {
-                            if (getDefaultPassword(context).equals(defaultPassword)) {
-                                return;
-                            }
+        if (getDefaultPassword(context).equals(defaultPassword)) {
+            return;
+        }
 
-                            SharedPreferences sharedPref =
-                                    context.getSharedPreferences(
-                                            SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                            if (sharedPref == null) {
-                                Log.w(TAG, "persistDefaultPassword(): sharedPref is empty!");
-                                return;
-                            }
+        SharedPreferences sharedPref =
+                context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        if (sharedPref == null) {
+            Log.w(TAG, "persistDefaultPassword(): sharedPref is empty!");
+            return;
+        }
 
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putString(SHARED_PREF_KEY, defaultPassword);
-                            editor.apply();
-                        });
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(SHARED_PREF_KEY, defaultPassword);
+        editor.apply();
     }
 
     private static String getDefaultPassword(Context context) {
@@ -174,5 +194,9 @@ public class AudioSharingPasswordPreferenceController extends BasePreferenceCont
             Log.w(TAG, "getDefaultPassword(): default password is empty!");
         }
         return value;
+    }
+
+    private static boolean isPublicBroadcast(@Nullable byte[] password) {
+        return password == null || password.length == 0;
     }
 }

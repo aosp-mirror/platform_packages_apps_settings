@@ -107,6 +107,12 @@ class AudioStreamPreference extends TwoTargetPreference {
                 : AudioStreamsProgressCategoryController.AudioStreamState.UNKNOWN;
     }
 
+    SourceOriginForLogging getSourceOriginForLogging() {
+        return mAudioStream != null
+                ? mAudioStream.getSourceOriginForLogging()
+                : SourceOriginForLogging.UNKNOWN;
+    }
+
     @Override
     protected boolean shouldHideSecondTarget() {
         return mIsConnected || !mIsEncrypted;
@@ -130,11 +136,13 @@ class AudioStreamPreference extends TwoTargetPreference {
     }
 
     static AudioStreamPreference fromMetadata(
-            Context context, BluetoothLeBroadcastMetadata source) {
+            Context context,
+            BluetoothLeBroadcastMetadata source,
+            SourceOriginForLogging sourceOriginForLogging) {
         AudioStreamPreference preference = new AudioStreamPreference(context, /* attrs= */ null);
         preference.setIsEncrypted(source.isEncrypted());
         preference.setTitle(AudioStreamsHelper.getBroadcastName(source));
-        preference.setAudioStream(new AudioStream(source));
+        preference.setAudioStream(new AudioStream(source, sourceOriginForLogging));
         return preference;
     }
 
@@ -158,11 +166,15 @@ class AudioStreamPreference extends TwoTargetPreference {
         private static final int UNAVAILABLE = -1;
         @Nullable private BluetoothLeBroadcastMetadata mMetadata;
         @Nullable private BluetoothLeBroadcastReceiveState mReceiveState;
+        private SourceOriginForLogging mSourceOriginForLogging = SourceOriginForLogging.UNKNOWN;
         private AudioStreamsProgressCategoryController.AudioStreamState mState =
                 AudioStreamsProgressCategoryController.AudioStreamState.UNKNOWN;
 
-        private AudioStream(BluetoothLeBroadcastMetadata metadata) {
+        private AudioStream(
+                BluetoothLeBroadcastMetadata metadata,
+                SourceOriginForLogging sourceOriginForLogging) {
             mMetadata = metadata;
+            mSourceOriginForLogging = sourceOriginForLogging;
         }
 
         private AudioStream(BluetoothLeBroadcastReceiveState receiveState) {
@@ -189,6 +201,10 @@ class AudioStreamPreference extends TwoTargetPreference {
 
         private AudioStreamsProgressCategoryController.AudioStreamState getState() {
             return mState;
+        }
+
+        private SourceOriginForLogging getSourceOriginForLogging() {
+            return mSourceOriginForLogging;
         }
 
         @Nullable

@@ -23,6 +23,7 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
@@ -45,7 +46,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
 
     private static final String ENABLE_ANELE_AS_SYSTEM_DRIVER_KEY = "enable_angle_as_system_driver";
 
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
 
     private final GraphicsDriverSystemPropertiesWrapper mSystemProperties;
 
@@ -83,7 +84,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     }
 
     public GraphicsDriverEnableAngleAsSystemDriverController(
-            Context context, DevelopmentSettingsDashboardFragment fragment) {
+            Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
         this(context, fragment, new Injector());
     }
 
@@ -96,7 +97,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
 
     @VisibleForTesting
     GraphicsDriverEnableAngleAsSystemDriverController(
-            Context context, DevelopmentSettingsDashboardFragment fragment, Injector injector) {
+            Context context, @Nullable DevelopmentSettingsDashboardFragment fragment, Injector injector) {
         super(context);
         mFragment = fragment;
         mSystemProperties = injector.createSystemPropertiesWrapper();

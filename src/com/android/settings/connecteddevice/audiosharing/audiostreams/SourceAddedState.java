@@ -57,6 +57,10 @@ class SourceAddedState extends AudioStreamStateHandler {
                 context,
                 preference.getAudioStreamBroadcastId(),
                 String.valueOf(preference.getTitle()));
+        mMetricsFeatureProvider.action(
+                preference.getContext(),
+                SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED,
+                preference.getSourceOriginForLogging().ordinal());
     }
 
     @Override
@@ -79,8 +83,10 @@ class SourceAddedState extends AudioStreamStateHandler {
                     .setTitleText(
                             p.getContext().getString(R.string.audio_streams_detail_page_title))
                     .setDestination(AudioStreamDetailsFragment.class.getName())
-                    // TODO(chelseahao): Add logging enum
-                    .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
+                    .setSourceMetricsCategory(
+                            controller.getFragment() == null
+                                    ? SettingsEnums.PAGE_UNKNOWN
+                                    : controller.getFragment().getMetricsCategory())
                     .setArguments(broadcast)
                     .launch();
             return true;

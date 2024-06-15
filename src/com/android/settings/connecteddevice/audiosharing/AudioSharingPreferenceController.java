@@ -23,6 +23,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -50,7 +51,8 @@ public class AudioSharingPreferenceController extends BasePreferenceController
     @Nullable private Preference mPreference;
     private final Executor mExecutor;
 
-    private final BluetoothLeBroadcast.Callback mBroadcastCallback =
+    @VisibleForTesting
+    protected final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastStarted(int reason, int broadcastId) {

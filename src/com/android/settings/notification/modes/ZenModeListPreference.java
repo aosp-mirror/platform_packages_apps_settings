@@ -23,7 +23,6 @@ import android.os.Bundle;
 
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.Utils;
 
 /**
  * Preference representing a single mode item on the modes aggregator page. Clicking on this
@@ -59,11 +58,7 @@ class ZenModeListPreference extends RestrictedPreference {
 
         FutureUtil.whenDone(
                 mZenMode.getIcon(mContext, IconLoader.getInstance()),
-                icon -> {
-                    icon.setTintList(
-                            Utils.getColorAttr(mContext, android.R.attr.colorControlNormal));
-                    setIcon(icon);
-                },
+                icon -> setIcon(IconUtil.applyTint(mContext, icon)),
                 mContext.getMainExecutor());
     }
 }

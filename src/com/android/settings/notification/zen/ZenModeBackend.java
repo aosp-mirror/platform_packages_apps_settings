@@ -400,7 +400,7 @@ public class ZenModeBackend {
     ZenPolicy setDefaultZenPolicy(ZenPolicy zenPolicy) {
         int calls;
         if (mPolicy.allowCalls()) {
-            calls = ZenAdapters.notificationPolicySendersToZenPolicyPeopleType(
+            calls = ZenAdapters.prioritySendersToPeopleType(
                     mPolicy.allowCallsFrom());
         } else {
             calls = ZenPolicy.PEOPLE_TYPE_NONE;
@@ -408,7 +408,7 @@ public class ZenModeBackend {
 
         int messages;
         if (mPolicy.allowMessages()) {
-            messages = ZenAdapters.notificationPolicySendersToZenPolicyPeopleType(
+            messages = ZenAdapters.prioritySendersToPeopleType(
                     mPolicy.allowMessagesFrom());
         } else {
             messages = ZenPolicy.PEOPLE_TYPE_NONE;
