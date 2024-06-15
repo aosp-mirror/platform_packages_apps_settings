@@ -148,7 +148,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
 
         // Check if another side of LE audio hearing aid is connected as a pair
         final Set<CachedBluetoothDevice> memberDevices = device.getMemberDevice();
-        if (memberDevices.stream().anyMatch(m -> m.isConnected())) {
+        if (memberDevices.stream().anyMatch(m -> m.getDevice().isConnected())) {
             return mContext.getString(
                     R.string.accessibility_hearingaid_left_and_right_side_device_summary,
                     name);
@@ -156,7 +156,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
 
         // Check if another side of ASHA hearing aid is connected as a pair
         final CachedBluetoothDevice subDevice = device.getSubDevice();
-        if (subDevice != null && subDevice.isConnected()) {
+        if (subDevice != null && subDevice.getDevice().isConnected()) {
             return mContext.getString(
                     R.string.accessibility_hearingaid_left_and_right_side_device_summary, name);
         }

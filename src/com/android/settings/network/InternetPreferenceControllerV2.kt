@@ -22,12 +22,13 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.wifi.WifiSummaryRepository
+import com.android.settingslib.Utils
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 
 class InternetPreferenceControllerV2(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
 
+    private val repository = InternetPreferenceRepository(mContext)
     private var preference: Preference? = null
 
     override fun getAvailabilityStatus() =
@@ -40,9 +41,14 @@ class InternetPreferenceControllerV2(context: Context, preferenceKey: String) :
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        WifiSummaryRepository(mContext).summaryFlow()
-            .collectLatestWithLifecycle(viewLifecycleOwner) {
-                preference?.summary = it
+        repository.displayInfoFlow().collectLatestWithLifecycle(viewLifecycleOwner) { displayInfo ->
+            preference?.apply {
+                summary = displayInfo.summary
+                icon =
+                    mContext.getDrawable(displayInfo.iconResId)?.apply {
+                        setTintList(Utils.getColorAttr(mContext, android.R.attr.colorControlNormal))
+                    }
             }
+        }
     }
 }

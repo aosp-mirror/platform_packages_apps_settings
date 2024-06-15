@@ -85,6 +85,10 @@ public abstract class SimDialogFragment extends InstrumentedDialogFragment imple
 
     @Override
     public void dismiss() {
+        if (isStateSaved()) {
+            Log.d(TAG, "fragment saved state, so bypass dismiss");
+            return;
+        }
         mChangeListener.stop();
         super.dismiss();
     }
