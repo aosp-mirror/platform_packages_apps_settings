@@ -30,6 +30,8 @@ import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.service.notification.Condition;
 import android.service.notification.ConversationChannelWrapper;
+import android.service.notification.SystemZenRules;
+import android.service.notification.ZenAdapters;
 import android.service.notification.ZenModeConfig;
 import android.util.Log;
 
@@ -241,5 +243,33 @@ class ZenModesBackend {
             throw new IllegalArgumentException("Mode " + mode + " cannot be deleted!");
         }
         mNotificationManager.removeAutomaticZenRule(mode.getId(), /* fromUser= */ true);
+    }
+
+    /**
+     * Creates a new custom mode with the provided {@code name}. The mode will be "manual" (i.e.
+     * not have a schedule), this can be later updated by the user in the mode settings page.
+     *
+     * @return the created mode. Only {@code null} if creation failed due to an internal error
+     */
+    @Nullable
+    ZenMode addCustomMode(String name) {
+        ZenModeConfig.ScheduleInfo schedule = new ZenModeConfig.ScheduleInfo();
+        schedule.days = ZenModeConfig.ALL_DAYS;
+        schedule.startHour = 22;
+        schedule.endHour = 7;
+
+        // TODO: b/326442408 - Create as "manual" (i.e. no trigger) instead of schedule-time.
+        AutomaticZenRule rule = new AutomaticZenRule.Builder(name,
+                ZenModeConfig.toScheduleConditionId(schedule))
+                .setPackage(ZenModeConfig.getScheduleConditionProvider().getPackageName())
+                .setType(AutomaticZenRule.TYPE_SCHEDULE_CALENDAR)
+                .setOwner(ZenModeConfig.getScheduleConditionProvider())
+                .setTriggerDescription(SystemZenRules.getTriggerDescriptionForScheduleTime(
+                        mContext, schedule))
+                .setManualInvocationAllowed(true)
+                .build();
+
+        String ruleId = mNotificationManager.addAutomaticZenRule(rule);
+        return getMode(ruleId);
     }
 }
