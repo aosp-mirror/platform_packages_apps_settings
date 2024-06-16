@@ -100,6 +100,7 @@ public final class DataProcessManagerTest {
                 new DataProcessManager(
                         mContext,
                         /* handler= */ null,
+                        /* isFromPeriodJob= */ false,
                         /* rawStartTimestamp= */ 0L,
                         /* lastFullChargeTimestamp= */ 0L,
                         /* callbackFunction= */ null,
@@ -239,6 +240,7 @@ public final class DataProcessManagerTest {
                 new DataProcessManager(
                         mContext,
                         /* handler= */ null,
+                        /* isFromPeriodJob= */ false,
                         /* rawStartTimestamp= */ 2L,
                         /* lastFullChargeTimestamp= */ 1L,
                         /* callbackFunction= */ null,
