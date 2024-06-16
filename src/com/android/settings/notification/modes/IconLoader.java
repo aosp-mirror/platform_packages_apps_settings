@@ -36,8 +36,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import com.android.settings.R;
-
 import com.google.common.util.concurrent.FluentFuture;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -123,17 +121,26 @@ class IconLoader {
 
     private static Drawable getFallbackIcon(Context context, int ruleType) {
         int iconResIdFromType = switch (ruleType) {
-            case AutomaticZenRule.TYPE_UNKNOWN -> R.drawable.ic_zen_mode_type_unknown;
-            case AutomaticZenRule.TYPE_OTHER -> R.drawable.ic_zen_mode_type_other;
-            case AutomaticZenRule.TYPE_SCHEDULE_TIME -> R.drawable.ic_zen_mode_type_schedule_time;
+            case AutomaticZenRule.TYPE_UNKNOWN ->
+                    com.android.internal.R.drawable.ic_zen_mode_type_unknown;
+            case AutomaticZenRule.TYPE_OTHER ->
+                    com.android.internal.R.drawable.ic_zen_mode_type_other;
+            case AutomaticZenRule.TYPE_SCHEDULE_TIME ->
+                    com.android.internal.R.drawable.ic_zen_mode_type_schedule_time;
             case AutomaticZenRule.TYPE_SCHEDULE_CALENDAR ->
-                    R.drawable.ic_zen_mode_type_schedule_calendar;
-            case AutomaticZenRule.TYPE_BEDTIME -> R.drawable.ic_zen_mode_type_bedtime;
-            case AutomaticZenRule.TYPE_DRIVING -> R.drawable.ic_zen_mode_type_driving;
-            case AutomaticZenRule.TYPE_IMMERSIVE -> R.drawable.ic_zen_mode_type_immersive;
-            case AutomaticZenRule.TYPE_THEATER -> R.drawable.ic_zen_mode_type_theater;
-            case AutomaticZenRule.TYPE_MANAGED -> R.drawable.ic_zen_mode_type_managed;
-            default -> R.drawable.ic_zen_mode_type_unknown;
+                    com.android.internal.R.drawable.ic_zen_mode_type_schedule_calendar;
+            case AutomaticZenRule.TYPE_BEDTIME ->
+                    com.android.internal.R.drawable.ic_zen_mode_type_bedtime;
+            case AutomaticZenRule.TYPE_DRIVING ->
+                    com.android.internal.R.drawable.ic_zen_mode_type_driving;
+            case AutomaticZenRule.TYPE_IMMERSIVE ->
+                    com.android.internal.R.drawable.ic_zen_mode_type_immersive;
+            case AutomaticZenRule.TYPE_THEATER ->
+                    com.android.internal.R.drawable.ic_zen_mode_type_theater;
+            case AutomaticZenRule.TYPE_MANAGED ->
+                    com.android.internal.R.drawable.ic_zen_mode_type_managed;
+            default ->
+                    com.android.internal.R.drawable.ic_zen_mode_type_unknown;
         };
         return requireNonNull(context.getDrawable(iconResIdFromType));
     }

@@ -37,22 +37,18 @@ import com.android.settingslib.widget.LayoutPreference;
 
 import com.google.common.collect.ImmutableList;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-
 class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenceController {
 
     private final DashboardFragment mFragment;
-    private IconAdapter mAdapter;
+    private final IconOptionsProvider mIconOptionsProvider;
+    @Nullable private IconAdapter mAdapter;
 
     ZenModeIconPickerListPreferenceController(@NonNull Context context, @NonNull String key,
-            @NonNull DashboardFragment fragment, @Nullable ZenModesBackend backend) {
+            @NonNull DashboardFragment fragment, @NonNull IconOptionsProvider iconOptionsProvider,
+            @Nullable ZenModesBackend backend) {
         super(context, key, backend);
         mFragment = fragment;
+        mIconOptionsProvider = iconOptionsProvider;
     }
 
     @Override
@@ -64,24 +60,7 @@ class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenc
         }
 
         if (mAdapter == null) {
-            // TODO: b/333901673 - This is just an example; replace with correct list.
-            List<IconInfo> exampleIcons =
-                    Arrays.stream(android.R.drawable.class.getFields())
-                            .filter(
-                                    f -> Modifier.isStatic(f.getModifiers())
-                                            && f.getName().startsWith("ic_"))
-                            .sorted(Comparator.comparing(Field::getName))
-                            .limit(20)
-                            .map(f -> {
-                                try {
-                                    return new IconInfo(f.getInt(null), f.getName());
-                                } catch (IllegalAccessException e) {
-                                    return null;
-                                }
-                            })
-                            .filter(Objects::nonNull)
-                            .toList();
-            mAdapter = new IconAdapter(exampleIcons);
+            mAdapter = new IconAdapter(mIconOptionsProvider);
         }
         RecyclerView recyclerView = pref.findViewById(R.id.icon_list);
         recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
@@ -103,8 +82,6 @@ class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenc
         // Nothing to do, the current icon is shown in a different preference.
     }
 
-    private record IconInfo(@DrawableRes int resId, String description) { }
-
     private class IconHolder extends RecyclerView.ViewHolder {
 
         private final ImageView mImageView;
@@ -114,7 +91,7 @@ class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenc
             mImageView = itemView.findViewById(R.id.icon_image_view);
         }
 
-        void bindIcon(IconInfo icon) {
+        void bindIcon(IconOptionsProvider.IconInfo icon) {
             mImageView.setImageDrawable(
                     IconUtil.makeIconCircle(itemView.getContext(), icon.resId()));
             itemView.setContentDescription(icon.description());
@@ -124,10 +101,10 @@ class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenc
 
     private class IconAdapter extends RecyclerView.Adapter<IconHolder> {
 
-        private final ImmutableList<IconInfo> mIconResources;
+        private final ImmutableList<IconOptionsProvider.IconInfo> mIconResources;
 
-        private IconAdapter(List<IconInfo> iconOptions) {
-            mIconResources = ImmutableList.copyOf(iconOptions);
+        private IconAdapter(IconOptionsProvider iconOptionsProvider) {
+            mIconResources = iconOptionsProvider.getIcons();
         }
 
         @NonNull

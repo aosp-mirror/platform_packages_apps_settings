@@ -103,8 +103,8 @@ class ZenMode {
         mIsManualDnd = isManualDnd;
     }
 
-    static ZenMode manualDndMode(AutomaticZenRule dndPolicyAsRule, boolean isActive) {
-        return new ZenMode(MANUAL_DND_MODE_ID, dndPolicyAsRule, isActive, true);
+    static ZenMode manualDndMode(AutomaticZenRule manualRule, boolean isActive) {
+        return new ZenMode(MANUAL_DND_MODE_ID, manualRule, isActive, true);
     }
 
     @NonNull

@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.app.settings.SettingsEnums;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
@@ -35,6 +37,17 @@ class AddSourceBadCodeState extends SyncedState {
             sInstance = new AddSourceBadCodeState();
         }
         return sInstance;
+    }
+
+    @Override
+    void performAction(
+            AudioStreamPreference preference,
+            AudioStreamsProgressCategoryController controller,
+            AudioStreamsHelper helper) {
+        mMetricsFeatureProvider.action(
+                preference.getContext(),
+                SettingsEnums.ACTION_AUDIO_STREAM_JOIN_FAILED_BAD_CODE,
+                preference.getSourceOriginForLogging().ordinal());
     }
 
     @Override
