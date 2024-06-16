@@ -58,6 +58,7 @@ import com.android.settingslib.bluetooth.VolumeControlProfile;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -134,6 +135,11 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
                         new AudioSharingDeviceVolumeControlUpdater(
                                 mContext, mDevicePreferenceCallback, /* metricsCategory= */ 0));
         mDeviceUpdater.setPrefContext(mContext);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowBluetoothUtils.reset();
     }
 
     @Test

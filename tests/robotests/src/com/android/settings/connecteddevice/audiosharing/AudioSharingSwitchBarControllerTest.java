@@ -78,6 +78,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.truth.Correspondence;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -208,6 +209,12 @@ public class AudioSharingSwitchBarControllerTest {
                 0 /* containerViewId */,
                 null /* bundle */);
         mController.init(mParentFragment);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowBluetoothUtils.reset();
+        ShadowThreadUtils.reset();
     }
 
     @Test

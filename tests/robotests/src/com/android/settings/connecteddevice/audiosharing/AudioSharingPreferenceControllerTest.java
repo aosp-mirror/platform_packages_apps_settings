@@ -56,6 +56,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.flags.Flags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -112,6 +113,12 @@ public class AudioSharingPreferenceControllerTest {
         mController = new AudioSharingPreferenceController(mContext, PREF_KEY);
         mPreference = spy(new Preference(mContext));
         when(mScreen.findPreference(PREF_KEY)).thenReturn(mPreference);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowBluetoothUtils.reset();
+        ShadowThreadUtils.reset();
     }
 
     @Test

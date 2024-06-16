@@ -72,6 +72,7 @@ import com.android.settingslib.flags.Flags;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -187,6 +188,12 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mController = new AudioSharingDeviceVolumeGroupController(mContext);
         mController.setDeviceUpdater(mDeviceUpdater);
         mContentObserver = mController.getSettingsObserver();
+    }
+
+    @After
+    public void tearDown() {
+        ShadowThreadUtils.reset();
+        ShadowBluetoothUtils.reset();
     }
 
     @Test

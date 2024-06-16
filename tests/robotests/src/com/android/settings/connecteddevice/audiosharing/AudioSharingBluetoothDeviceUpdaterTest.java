@@ -58,6 +58,7 @@ import com.android.settingslib.flags.Flags;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -141,6 +142,12 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
                         new AudioSharingBluetoothDeviceUpdater(
                                 mContext, mDevicePreferenceCallback, /* metricsCategory= */ 0));
         mDeviceUpdater.setPrefContext(mContext);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowThreadUtils.reset();
+        ShadowBluetoothUtils.reset();
     }
 
     @Test

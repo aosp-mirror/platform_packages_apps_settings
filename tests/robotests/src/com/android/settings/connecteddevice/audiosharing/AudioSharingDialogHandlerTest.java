@@ -62,6 +62,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.truth.Correspondence;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -174,6 +175,11 @@ public class AudioSharingDialogHandlerTest {
         when(mCacheManager.findDevice(mDevice3)).thenReturn(mCachedDevice3);
         when(mCacheManager.findDevice(mDevice4)).thenReturn(mCachedDevice4);
         mHandler = new AudioSharingDialogHandler(mContext, mParentFragment);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowBluetoothUtils.reset();
     }
 
     @Test

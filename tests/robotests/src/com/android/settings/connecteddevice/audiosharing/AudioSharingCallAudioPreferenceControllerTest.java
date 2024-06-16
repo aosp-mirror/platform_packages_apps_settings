@@ -78,6 +78,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -144,6 +145,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
 
     @Before
     public void setUp() {
+        ShadowAlertDialogCompat.reset();
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mShadowBluetoothAdapter.setEnabled(true);
         mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
@@ -179,6 +181,13 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         mContentObserver = mController.getSettingsObserver();
         mPreference = new Preference(mContext);
         when(mScreen.findPreference(PREF_KEY)).thenReturn(mPreference);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAlertDialogCompat.reset();
+        ShadowThreadUtils.reset();
+        ShadowBluetoothUtils.reset();
     }
 
     @Test
