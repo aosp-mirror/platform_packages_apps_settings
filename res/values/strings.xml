@@ -7906,7 +7906,7 @@
     <!-- Sound: Footer hyperlink text to launch the Connected devices settings page. [CHAR LIMIT=NONE]-->
     <string name="spatial_audio_footer_learn_more_text">Connected devices settings</string>
 
-    <!-- Sound: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
+    <!-- Zen Modes: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_schedules_summary">
         {count, plural,
             =0    {None}
@@ -7915,13 +7915,16 @@
         }
     </string>
 
-    <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
+    <!-- Zen Modes: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
-    <!-- Sound: Title for the Modes option and associated settings page. [CHAR LIMIT=50]-->
+    <!-- Zen Modes: Title for the Modes option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_modes_list_title">Priority Modes</string>
 
-    <!-- Sound: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
+    <!-- Zen Modes: Caption of the "add a mode" item in the modes list -->
+    <string name="zen_modes_add_mode">Add a mode</string>
+
+    <!-- Zen Modes: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
     <string name="zen_mode_settings_summary">Only get notified by important people and apps</string>
 
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
@@ -9211,6 +9214,16 @@
     <string name="zen_mode_apps_none_apps">None</string>
     <!-- [CHAR LIMIT=60] Zen mode settings: all apps will be able to bypass dnd -->
     <string name="zen_mode_apps_all_apps">All</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Lists apps that can bypass DND. For example, "Nest, Messages, and 2 more can interrupt". -->
+    <string name="zen_mode_apps_subtext">
+        {count, plural, offset:2
+            =0    {No apps can interrupt}
+            =1    {{app_1} can interrupt}
+            =2    {{app_1} and {app_2} can interrupt}
+            =3    {{app_1}, {app_2}, and {app_3} can interrupt}
+            other {{app_1}, {app_2}, and # more can interrupt}
+        }
+    </string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
