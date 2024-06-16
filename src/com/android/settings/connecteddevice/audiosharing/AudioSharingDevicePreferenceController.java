@@ -87,7 +87,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     @Nullable private AudioSharingDialogHandler mDialogHandler;
     private AtomicBoolean mIntentHandled = new AtomicBoolean(false);
 
-    private BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+    @VisibleForTesting
+    BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
                 @Override
                 public void onSearchStarted(int reason) {}
@@ -368,23 +369,23 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     }
 
     @VisibleForTesting
-    public void setBluetoothDeviceUpdater(@Nullable BluetoothDeviceUpdater bluetoothDeviceUpdater) {
+    void setBluetoothDeviceUpdater(@Nullable BluetoothDeviceUpdater bluetoothDeviceUpdater) {
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
     }
 
     @VisibleForTesting
-    public void setDialogHandler(@Nullable AudioSharingDialogHandler dialogHandler) {
+    void setDialogHandler(@Nullable AudioSharingDialogHandler dialogHandler) {
         mDialogHandler = dialogHandler;
     }
 
     @VisibleForTesting
-    public void setHostFragment(@Nullable DashboardFragment fragment) {
+    void setHostFragment(@Nullable DashboardFragment fragment) {
         mFragment = fragment;
     }
 
     /** Test only: set intent handle state for test. */
     @VisibleForTesting
-    public void setIntentHandled(boolean handled) {
+    void setIntentHandled(boolean handled) {
         mIntentHandled.set(handled);
     }
 

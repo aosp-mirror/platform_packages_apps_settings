@@ -16,13 +16,13 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -33,7 +33,6 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.BluetoothCallback;
-import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.utils.ThreadUtils;
@@ -42,9 +41,10 @@ public class AudioStreamsScanQrCodeController extends BasePreferenceController
         implements DefaultLifecycleObserver {
     static final int REQUEST_SCAN_BT_BROADCAST_QR_CODE = 0;
     private static final String TAG = "AudioStreamsProgressCategoryController";
-    private static final boolean DEBUG = BluetoothUtils.D;
-    private static final String KEY = "audio_streams_scan_qr_code";
-    private final BluetoothCallback mBluetoothCallback =
+    @VisibleForTesting static final String KEY = "audio_streams_scan_qr_code";
+
+    @VisibleForTesting
+    final BluetoothCallback mBluetoothCallback =
             new BluetoothCallback() {
                 @Override
                 public void onActiveDeviceChanged(
@@ -111,7 +111,7 @@ public class AudioStreamsScanQrCodeController extends BasePreferenceController
                                 .setTitleRes(R.string.audio_streams_main_page_scan_qr_code_title)
                                 .setDestination(AudioStreamsQrCodeScanFragment.class.getName())
                                 .setResultListener(mFragment, REQUEST_SCAN_BT_BROADCAST_QR_CODE)
-                                .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
+                                .setSourceMetricsCategory(mFragment.getMetricsCategory())
                                 .launch();
                         return true;
                     }

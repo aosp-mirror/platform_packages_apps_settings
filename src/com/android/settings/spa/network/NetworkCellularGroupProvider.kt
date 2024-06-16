@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.network
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.IntentFilter
 import android.os.Bundle
@@ -46,6 +47,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
 import com.android.settings.network.SubscriptionInfoListViewModel
+import com.android.settings.network.telephony.DataSubscriptionRepository
 import com.android.settings.network.telephony.TelephonyRepository
 import com.android.settings.spa.network.PrimarySimRepository.PrimarySimInfo
 import com.android.settings.wifi.WifiPickerTrackerHelper
@@ -77,7 +79,7 @@ import kotlinx.coroutines.withContext
  */
 open class NetworkCellularGroupProvider : SettingsPageProvider {
     override val name = fileName
-
+    override val metricsCategory = SettingsEnums.MOBILE_NETWORK_LIST
     private val owner = createSettingsPage()
 
     var defaultVoiceSubId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -158,7 +160,7 @@ open class NetworkCellularGroupProvider : SettingsPageProvider {
                     selectableSubscriptionInfoListFlow,
                     context.defaultVoiceSubscriptionFlow(),
                     context.defaultSmsSubscriptionFlow(),
-                    context.defaultDefaultDataSubscriptionFlow(),
+                    DataSubscriptionRepository(context).defaultDataSubscriptionIdFlow(),
                     this::refreshUiStates,
             ).flowOn(Dispatchers.Default)
 
@@ -368,15 +370,6 @@ private fun Context.defaultSmsSubscriptionFlow(): Flow<Int> =
                         IntentFilter(SubscriptionManager.ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED)
                 ),
         ).map { SubscriptionManager.getDefaultSmsSubscriptionId() }
-                .conflate().flowOn(Dispatchers.Default)
-
-private fun Context.defaultDefaultDataSubscriptionFlow(): Flow<Int> =
-        merge(
-                flowOf(null), // kick an initial value
-                broadcastReceiverFlow(
-                        IntentFilter(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)
-                ),
-        ).map { SubscriptionManager.getDefaultDataSubscriptionId() }
                 .conflate().flowOn(Dispatchers.Default)
 
 suspend fun setDefaultVoice(

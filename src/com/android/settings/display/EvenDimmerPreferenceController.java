@@ -50,11 +50,7 @@ public class EvenDimmerPreferenceController extends TogglePreferenceController {
                 com.android.internal.R.bool.config_evenDimmerEnabled);
 
         if (Flags.evenDimmer() && enabledInConfig) {
-            return Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.SCREEN_BRIGHTNESS_MODE,
-                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL)
-                    == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC ? AVAILABLE
-                    : DISABLED_DEPENDENT_SETTING;
+            return AVAILABLE;
         } else {
             return UNSUPPORTED_ON_DEVICE;
         }

@@ -103,7 +103,7 @@ public class AudioSharingDashboardFragment extends DashboardFragment
 
     /** Test only: set mock controllers for the {@link AudioSharingDashboardFragment} */
     @VisibleForTesting
-    protected void setControllers(
+    void setControllers(
             AudioSharingDeviceVolumeGroupController volumeGroupController,
             AudioSharingCallAudioPreferenceController callAudioController,
             AudioSharingPlaySoundPreferenceController playSoundController,
