@@ -51,7 +51,7 @@ public class UiccSlotUtil {
 
     private static final String TAG = "UiccSlotUtil";
 
-    private static final long DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS = 25 * 1000L;
+    static final long DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS = 25 * 1000L;
 
     public static final int INVALID_LOGICAL_SLOT_ID = -1;
     public static final int INVALID_PHYSICAL_SLOT_ID = -1;

@@ -15,25 +15,19 @@
  */
 package com.android.settings.notification.modes;
 
-import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
-
-import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
 
-import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.Utils;
 
 /**
  * Preference representing a single mode item on the modes aggregator page. Clicking on this
  * preference leads to an individual mode's configuration page.
  */
-class ZenModeListPreference extends RestrictedPreference {
+class ZenModesListItemPreference extends RestrictedPreference {
     final Context mContext;
     ZenMode mZenMode;
 
-    ZenModeListPreference(Context context, ZenMode zenMode) {
+    ZenModesListItemPreference(Context context, ZenMode zenMode) {
         super(context);
         mContext = context;
         setZenMode(zenMode);
@@ -42,13 +36,7 @@ class ZenModeListPreference extends RestrictedPreference {
 
     @Override
     public void onClick() {
-        Bundle bundle = new Bundle();
-        bundle.putString(MODE_ID, mZenMode.getId());
-        new SubSettingLauncher(mContext)
-                .setDestination(ZenModeFragment.class.getName())
-                .setArguments(bundle)
-                .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION)
-                .launch();
+        ZenSubSettingLauncher.forMode(mContext, mZenMode.getId()).launch();
     }
 
     public void setZenMode(ZenMode zenMode) {
@@ -59,11 +47,7 @@ class ZenModeListPreference extends RestrictedPreference {
 
         FutureUtil.whenDone(
                 mZenMode.getIcon(mContext, IconLoader.getInstance()),
-                icon -> {
-                    icon.setTintList(
-                            Utils.getColorAttr(mContext, android.R.attr.colorControlNormal));
-                    setIcon(icon);
-                },
+                icon -> setIcon(IconUtil.applyTint(mContext, icon)),
                 mContext.getMainExecutor());
     }
 }

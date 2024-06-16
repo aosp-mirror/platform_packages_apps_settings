@@ -92,6 +92,8 @@ public class AddSourceWaitForResponseStateTest {
     @Test
     public void testPerformAction_metadataIsNotNull_addSource() {
         when(mMockPreference.getAudioStreamMetadata()).thenReturn(mMockMetadata);
+        when(mMockPreference.getSourceOriginForLogging())
+                .thenReturn(SourceOriginForLogging.UNKNOWN);
 
         mInstance.performAction(mMockPreference, mMockController, mMockHelper);
 
@@ -105,6 +107,8 @@ public class AddSourceWaitForResponseStateTest {
         when(mMockPreference.isShown()).thenReturn(true);
         when(mMockPreference.getAudioStreamState()).thenReturn(mInstance.getStateEnum());
         when(mMockPreference.getAudioStreamBroadcastId()).thenReturn(BROADCAST_ID);
+        when(mMockPreference.getSourceOriginForLogging())
+                .thenReturn(SourceOriginForLogging.UNKNOWN);
 
         mInstance.performAction(mMockPreference, mMockController, mMockHelper);
         ShadowLooper.idleMainLooper(ADD_SOURCE_WAIT_FOR_RESPONSE_TIMEOUT_MILLIS, TimeUnit.SECONDS);

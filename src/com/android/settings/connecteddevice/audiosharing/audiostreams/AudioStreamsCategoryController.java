@@ -60,6 +60,7 @@ public class AudioStreamsCategoryController extends AudioSharingBasePreferenceCo
 
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
+        if (!isAvailable()) return;
         super.onStart(owner);
         if (mLocalBtManager != null) {
             mLocalBtManager.getEventManager().registerCallback(mBluetoothCallback);
@@ -68,6 +69,7 @@ public class AudioStreamsCategoryController extends AudioSharingBasePreferenceCo
 
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
+        if (!isAvailable()) return;
         super.onStop(owner);
         if (mLocalBtManager != null) {
             mLocalBtManager.getEventManager().unregisterCallback(mBluetoothCallback);

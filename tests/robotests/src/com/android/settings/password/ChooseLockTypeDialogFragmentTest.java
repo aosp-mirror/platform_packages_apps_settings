@@ -37,7 +37,6 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -47,7 +46,6 @@ import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowAlertDialogCompat.class, ShadowLockPatternUtils.class})
-@Ignore("b/342667939")
 public class ChooseLockTypeDialogFragmentTest {
 
     private Context mContext;

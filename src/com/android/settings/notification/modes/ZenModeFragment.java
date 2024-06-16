@@ -16,11 +16,13 @@
 
 package com.android.settings.notification.modes;
 
+import android.app.Application;
 import android.app.AutomaticZenRule;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import com.android.settings.R;
+import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -38,10 +40,13 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
         prefControllers.add(new ZenModeButtonPreferenceController(context, "activate", mBackend));
+        prefControllers.add(new ZenModeActionsPreferenceController(context, "actions", mBackend));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
                 context, "zen_mode_people", mBackend));
         prefControllers.add(new ZenModeAppsLinkPreferenceController(
-                context, "zen_mode_apps", mBackend));
+                context, "zen_mode_apps", this,
+                ApplicationsState.getInstance((Application) context.getApplicationContext()),
+                mBackend));
         prefControllers.add(new ZenModeOtherLinkPreferenceController(
                 context, "zen_other_settings", mBackend));
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(

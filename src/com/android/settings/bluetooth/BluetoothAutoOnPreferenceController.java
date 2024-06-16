@@ -93,7 +93,7 @@ public class BluetoothAutoOnPreferenceController extends TogglePreferenceControl
                 var unused = ThreadUtils.postOnBackgroundThread(this::updateValue);
             }
             return isSupported ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-        } catch (Exception e) {
+        } catch (Exception | NoSuchMethodError e) {
             // Server could throw TimeoutException, InterruptedException or ExecutionException
             return UNSUPPORTED_ON_DEVICE;
         }
