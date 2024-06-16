@@ -201,6 +201,20 @@ public final class ConvertUtils {
         return defaultInstance;
     }
 
+    /** Gets the encoded string from {@link BatteryReattribute} instance. */
+    @NonNull
+    public static String encodeBatteryReattribute(
+            @NonNull BatteryReattribute batteryReattribute) {
+        return Base64.encodeToString(batteryReattribute.toByteArray(), Base64.DEFAULT);
+    }
+
+    /** Gets the decoded {@link BatteryReattribute} instance from string. */
+    @NonNull
+    public static BatteryReattribute decodeBatteryReattribute(@NonNull String content) {
+        return BatteryUtils.parseProtoFromString(
+                content, BatteryReattribute.getDefaultInstance());
+    }
+
     /** Converts to {@link BatteryHistEntry} */
     public static BatteryHistEntry convertToBatteryHistEntry(
             BatteryEntry entry, BatteryUsageStats batteryUsageStats) {

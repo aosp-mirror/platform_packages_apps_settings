@@ -31,6 +31,8 @@ import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -80,6 +82,7 @@ public class DataProcessManager {
     // Raw start timestamp with round to the nearest hour.
     private final long mRawStartTimestamp;
     private final long mLastFullChargeTimestamp;
+    private final boolean mIsFromPeriodJob;
     private final Context mContext;
     private final Handler mHandler;
     private final UserManager mUserManager;
@@ -123,6 +126,7 @@ public class DataProcessManager {
     DataProcessManager(
             Context context,
             Handler handler,
+            final boolean isFromPeriodJob,
             final long rawStartTimestamp,
             final long lastFullChargeTimestamp,
             @NonNull final OnBatteryDiffDataMapLoadedListener callbackFunction,
@@ -130,6 +134,7 @@ public class DataProcessManager {
             @NonNull final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         mContext = context.getApplicationContext();
         mHandler = handler;
+        mIsFromPeriodJob = isFromPeriodJob;
         mUserManager = mContext.getSystemService(UserManager.class);
         mRawStartTimestamp = rawStartTimestamp;
         mLastFullChargeTimestamp = lastFullChargeTimestamp;
@@ -147,6 +152,7 @@ public class DataProcessManager {
         mHandler = handler;
         mUserManager = mContext.getSystemService(UserManager.class);
         mCallbackFunction = callbackFunction;
+        mIsFromPeriodJob = false;
         mRawStartTimestamp = 0L;
         mLastFullChargeTimestamp = 0L;
         mHourlyBatteryLevelsPerDay = null;
@@ -158,14 +164,9 @@ public class DataProcessManager {
 
     /** Starts the async tasks to load battery history data and app usage data. */
     public void start() {
-        start(/* isFromPeriodJob= */ false);
-    }
-
-    /** Starts the async tasks to load battery history data and app usage data. */
-    public void start(boolean isFromPeriodJob) {
         // If we have battery level data, load the battery history map and app usage simultaneously.
         if (mHourlyBatteryLevelsPerDay != null) {
-            if (isFromPeriodJob) {
+            if (mIsFromPeriodJob) {
                 mIsCurrentBatteryHistoryLoaded = true;
                 mIsCurrentAppUsageLoaded = true;
                 mIsBatteryUsageSlotLoaded = true;
@@ -519,6 +520,14 @@ public class DataProcessManager {
                                 mAppUsagePeriodMap,
                                 getSystemAppsPackageNames(),
                                 getSystemAppsUids()));
+                // Process the reattributate data for the following two cases:
+                // 1) the latest slot for the timestamp "until now"
+                // 2) walkthrough all BatteryDiffData again to handle "re-compute" case
+                final PowerUsageFeatureProvider featureProvider =
+                        FeatureFactory.getFeatureFactory()
+                                .getPowerUsageFeatureProvider();
+                featureProvider.processBatteryReattributeData(
+                        mContext, batteryDiffDataMap, mBatteryEventList, mIsFromPeriodJob);
 
                 Log.d(
                         TAG,
@@ -684,12 +693,13 @@ public class DataProcessManager {
         new DataProcessManager(
                         context,
                         handler,
+                        isFromPeriodJob,
                         startTimestamp,
                         lastFullChargeTime,
                         onBatteryDiffDataMapLoadedListener,
                         batteryLevelData.getHourlyBatteryLevelsPerDay(),
                         processedBatteryHistoryMap)
-                .start(isFromPeriodJob);
+                .start();
 
         return batteryLevelData;
     }

@@ -26,13 +26,19 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseIntArray;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
+import com.android.settings.fuelgauge.batteryusage.BatteryEvent;
 import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /** Implementation of {@code PowerUsageFeatureProvider} */
@@ -226,6 +232,20 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public boolean isValidToRestoreOptimizationMode(ArrayMap<String, String> deviceInfoMap) {
+        return false;
+    }
+
+    @Override
+    public boolean isBatteryUsageReattributeEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean processBatteryReattributeData(
+            @NonNull Context context,
+            @NonNull Map<Long, BatteryDiffData> batteryDiffDataMap,
+            @NonNull List<BatteryEvent> batteryEventList,
+            final boolean isFromPeriodJob) {
         return false;
     }
 }
