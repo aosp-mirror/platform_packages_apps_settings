@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.input.InputManager;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 import android.view.InputDevice;
 
 import androidx.annotation.VisibleForTesting;
@@ -26,19 +27,29 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.connecteddevice.stylus.StylusDeviceUpdater;
 import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
+import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.search.SearchIndexableRaw;
+
+import java.util.List;
 
 /**
  * Controller to maintain the {@link androidx.preference.PreferenceGroup} for all
@@ -49,6 +60,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
         DevicePreferenceCallback {
 
     private static final String KEY = "connected_device_list";
+    private static final String TAG = "ConnectedDeviceGroupController";
 
     @VisibleForTesting
     PreferenceGroup mPreferenceGroup;
@@ -58,11 +70,13 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     private StylusDeviceUpdater mStylusDeviceUpdater;
     private final PackageManager mPackageManager;
     private final InputManager mInputManager;
+    private final LocalBluetoothManager mLocalBluetoothManager;
 
     public ConnectedDeviceGroupController(Context context) {
         super(context, KEY);
         mPackageManager = context.getPackageManager();
         mInputManager = context.getSystemService(InputManager.class);
+        mLocalBluetoothManager = Utils.getLocalBluetoothManager(context);
     }
 
     @Override
@@ -220,5 +234,32 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
             }
         }
         return false;
+    }
+
+    @Override
+    public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
+        if (!Flags.enableBondedBluetoothDeviceSearchable()) {
+            return;
+        }
+        if (mLocalBluetoothManager == null) {
+            Log.d(TAG, "Bluetooth is not supported");
+            return;
+        }
+        for (CachedBluetoothDevice cachedDevice :
+                mLocalBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy()) {
+            if (!BluetoothDeviceFilter.BONDED_DEVICE_FILTER.matches(cachedDevice.getDevice())) {
+                continue;
+            }
+            if (BluetoothUtils.isExclusivelyManagedBluetoothDevice(mContext,
+                    cachedDevice.getDevice())) {
+                continue;
+            }
+            SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+            // Include the identity address as well to ensure the key is unique.
+            data.key = cachedDevice.getName() + cachedDevice.getIdentityAddress();
+            data.title = cachedDevice.getName();
+            data.summaryOn = mContext.getString(R.string.connected_devices_dashboard_title);
+            rawData.add(data);
+        }
     }
 }

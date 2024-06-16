@@ -27,9 +27,12 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.input.InputManager;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.FeatureFlagUtils;
 import android.view.InputDevice;
 
@@ -39,13 +42,23 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.connecteddevice.stylus.StylusDeviceUpdater;
 import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.search.SearchIndexableRaw;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -57,11 +70,16 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplicationPackageManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowApplicationPackageManager.class, ShadowBluetoothAdapter.class})
+@Config(shadows = {ShadowApplicationPackageManager.class, ShadowBluetoothUtils.class,
+        ShadowBluetoothAdapter.class})
 public class ConnectedDeviceGroupControllerTest {
 
     private static final String PREFERENCE_KEY_1 = "pref_key_1";
+    private static final String DEVICE_NAME = "device";
 
     @Mock
     private DashboardFragment mDashboardFragment;
@@ -79,12 +97,23 @@ public class ConnectedDeviceGroupControllerTest {
     private PreferenceManager mPreferenceManager;
     @Mock
     private InputManager mInputManager;
+    @Mock
+    private CachedBluetoothDeviceManager mCachedDeviceManager;
+    @Mock
+    private LocalBluetoothManager mLocalBluetoothManager;
+    @Mock
+    private CachedBluetoothDevice mCachedDevice;
+    @Mock
+    private BluetoothDevice mDevice;
 
     private ShadowApplicationPackageManager mPackageManager;
     private PreferenceGroup mPreferenceGroup;
     private Context mContext;
     private Preference mPreference;
     private ConnectedDeviceGroupController mConnectedDeviceGroupController;
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
@@ -102,10 +131,19 @@ public class ConnectedDeviceGroupControllerTest {
         when(mContext.getSystemService(InputManager.class)).thenReturn(mInputManager);
         when(mInputManager.getInputDeviceIds()).thenReturn(new int[]{});
 
+        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
+        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
+        when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
+
         mConnectedDeviceGroupController = new ConnectedDeviceGroupController(mContext);
         mConnectedDeviceGroupController.init(mConnectedBluetoothDeviceUpdater,
                 mConnectedUsbDeviceUpdater, mConnectedDockUpdater, mStylusDeviceUpdater);
         mConnectedDeviceGroupController.mPreferenceGroup = mPreferenceGroup;
+
+        when(mCachedDevice.getName()).thenReturn(DEVICE_NAME);
+        when(mCachedDevice.getDevice()).thenReturn(mDevice);
+        when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(
+                ImmutableList.of(mCachedDevice));
 
         FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_SHOW_STYLUS_PREFERENCES,
                 true);
@@ -266,5 +304,28 @@ public class ConnectedDeviceGroupControllerTest {
         mConnectedDeviceGroupController.displayPreference(mPreferenceScreen);
         mConnectedDeviceGroupController.onStart();
         mConnectedDeviceGroupController.onStop();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_BONDED_BLUETOOTH_DEVICE_SEARCHABLE)
+    public void updateDynamicRawDataToIndex_deviceNotBonded_deviceIsNotSearchable() {
+        when(mDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);
+        List<SearchIndexableRaw> searchData = new ArrayList<>();
+
+        mConnectedDeviceGroupController.updateDynamicRawDataToIndex(searchData);
+
+        assertThat(searchData).isEmpty();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_BONDED_BLUETOOTH_DEVICE_SEARCHABLE)
+    public void updateDynamicRawDataToIndex_deviceBonded_deviceIsSearchable() {
+        when(mDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
+        List<SearchIndexableRaw> searchData = new ArrayList<>();
+
+        mConnectedDeviceGroupController.updateDynamicRawDataToIndex(searchData);
+
+        assertThat(searchData).isNotEmpty();
+        assertThat(searchData.get(0).key).contains(DEVICE_NAME);
     }
 }

@@ -31,8 +31,6 @@ import com.android.settingslib.widget.ActionButtonsPreference;
 
 class ZenModeActionsPreferenceController extends AbstractZenModePreferenceController {
 
-    private ActionButtonsPreference mPreference;
-
     ZenModeActionsPreferenceController(@NonNull Context context, @NonNull String key,
             @Nullable ZenModesBackend backend) {
         super(context, key, backend);

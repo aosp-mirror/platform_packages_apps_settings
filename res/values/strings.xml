@@ -133,7 +133,7 @@
     <!-- Keywords for bluetooth pairing item [CHAR LIMIT=30] -->
     <string name="keywords_add_bt_device">bluetooth</string>
     <!-- Title for bluetooth auto on toggle [CHAR LIMIT=60] -->
-    <string name="bluetooth_screen_auto_on_title">Automatically turn on again tomorrow</string>
+    <string name="bluetooth_screen_auto_on_title">Automatically turn on tomorrow</string>
 
 
     <!-- Button to help user to pair right ear of the hearing aid device. It will show when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
@@ -1355,9 +1355,9 @@
     <!-- Text shown in private space setup screen which explains  that apps in private space are stopped when private space is locked. [CHAR LIMIT=NONE] -->
     <string name="private_space_apps_stopped_text"><b>Apps stop when you lock your space</b>\nWhen you lock your space, apps in your space are stopped and you won\u2019t receive notifications from them</string>
     <!-- This is info text to help explain in private space setup screen that the permissions granted to private space apps will not be shown in settings when private space is locked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be moved to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs harmful apps on your device may be able to access your private space.</string>
+    <string name="private_space_apps_permission_text">Private spaces are not suitable for apps that need to run in the background or send critical notifications, such as medical apps. This is because notifications and background activity are stopped when your space is locked.\n\nApps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be moved to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs harmful apps on your device may be able to access your private space.</string>
     <!-- This is footer text in private space settings page to help explain that when private space is locked the apps are stopped, the permissions granted to private space apps will not be shown in settings. [CHAR LIMIT=NONE] -->
-    <string name="private_space_settings_footer_text">When you lock your space, apps in your private space are stopped and you won\u2019t receive notifications from them.\n\nApps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when private space is locked.\n\nYour private space can\'t be restored to a new device. You\u2019ll need to set up another space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs malicious apps on your device may be able to access your private space.</string>
+    <string name="private_space_settings_footer_text">Private spaces are not suitable for apps that need to run in the background or send critical notifications, such as medical apps. This is because notifications and background activity are stopped when your space is locked.\n\nApps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when private space is locked.\n\nYour private space can\'t be restored to a new device. You\u2019ll need to set up another space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs malicious apps on your device may be able to access your private space.</string>
     <!-- Private space footer link content description [CHAR LIMIT=40] -->
     <string name="private_space_learn_more_text">Learn more about private space</string>
     <string name="private_space_learn_more_url" translatable="false">https://support.google.com/android?p=private_space</string>
@@ -4458,15 +4458,15 @@
     <string name="trackpad_pointer_speed">Pointer speed</string>
     <!-- Title text for mouse pointer fill style. [CHAR LIMIT=35] -->
     <string name="pointer_fill_style">Pointer fill style</string>
-    <!-- Content description for black pointer fill style. [CHAR LIMIT=35] -->
+    <!-- Content description for black pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_black_button">Change pointer fill style to black</string>
-    <!-- Content description for green pointer fill style. [CHAR LIMIT=35] -->
+    <!-- Content description for green pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_green_button">Change pointer fill style to green</string>
-    <!-- Content description for yellow pointer fill style. [CHAR LIMIT=35] -->
+    <!-- Content description for yellow pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_yellow_button">Change pointer fill style to yellow</string>
-    <!-- Content description for pink pointer fill style. [CHAR LIMIT=35] -->
+    <!-- Content description for pink pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_pink_button">Change pointer fill style to pink</string>
-    <!-- Content description for blue pointer fill style. [CHAR LIMIT=35] -->
+    <!-- Content description for blue pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_blue_button">Change pointer fill style to blue</string>
     <!-- Title for the button to trigger the 'touch gesture' education. [CHAR LIMIT=35] -->
     <string name="trackpad_touch_gesture">Learn touchpad gestures</string>
@@ -7906,7 +7906,7 @@
     <!-- Sound: Footer hyperlink text to launch the Connected devices settings page. [CHAR LIMIT=NONE]-->
     <string name="spatial_audio_footer_learn_more_text">Connected devices settings</string>
 
-    <!-- Sound: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
+    <!-- Zen Modes: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_schedules_summary">
         {count, plural,
             =0    {None}
@@ -7915,13 +7915,16 @@
         }
     </string>
 
-    <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
+    <!-- Zen Modes: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
-    <!-- Sound: Title for the Modes option and associated settings page. [CHAR LIMIT=50]-->
+    <!-- Zen Modes: Title for the Modes option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_modes_list_title">Priority Modes</string>
 
-    <!-- Sound: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
+    <!-- Zen Modes: Caption of the "add a mode" item in the modes list -->
+    <string name="zen_modes_add_mode">Add a mode</string>
+
+    <!-- Zen Modes: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
     <string name="zen_mode_settings_summary">Only get notified by important people and apps</string>
 
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
@@ -8732,9 +8735,9 @@
     <string name="notif_listener_more_settings_desc">More settings are available inside this app</string>
 
     <!-- Title for Polite Notifications setting  [CHAR LIMIT=45]-->
-    <string name="notification_polite_title">Cooldown</string>
-    <string name="notification_polite_main_control_title">Use Cooldown</string>
-    <string name="notification_polite_description">When you get many notifications within a short time span, your device will minimize sound interruptions and pop-ups on the screen. Calls, alarms, and priority conversations will still alert as notmal, and all delivered notifications are easy to find in the Shade.</string>
+    <string name="notification_polite_title">Adaptive Notifications</string>
+    <string name="notification_polite_main_control_title">Use adaptive notifications</string>
+    <string name="notification_polite_description">When you get many notifications within a short time, your phone will lower volume and minimize pop-ups on screen for up to two minutes. Calls, alarms, and priority conversations still vibrate, make a sound, or show up on the screen, and all notifications are easy to find when you pull down from the top of the screen.</string>
     <string name="notification_polite_work">Apply to work profiles</string>
     <string name="notification_polite_work_summary">Apply to work profile apps</string>
 
@@ -9211,6 +9214,16 @@
     <string name="zen_mode_apps_none_apps">None</string>
     <!-- [CHAR LIMIT=60] Zen mode settings: all apps will be able to bypass dnd -->
     <string name="zen_mode_apps_all_apps">All</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Lists apps that can bypass DND. For example, "Nest, Messages, and 2 more can interrupt". -->
+    <string name="zen_mode_apps_subtext">
+        {count, plural, offset:2
+            =0    {No apps can interrupt}
+            =1    {{app_1} can interrupt}
+            =2    {{app_1} and {app_2} can interrupt}
+            =3    {{app_1}, {app_2}, and {app_3} can interrupt}
+            other {{app_1}, {app_2}, and # more can interrupt}
+        }
+    </string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>

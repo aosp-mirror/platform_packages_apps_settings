@@ -256,16 +256,19 @@ public class ResetNetworkOperationBuilder {
      * @return this
      */
     public ResetNetworkOperationBuilder restartPhoneProcess() {
-        try {
-            mContext.getContentResolver().call(
-                    getResetTelephonyContentProviderAuthority(),
-                    METHOD_RESTART_PHONE_PROCESS,
-                    /* arg= */ null,
-                    /* extras= */ null);
-            Log.i(TAG, "Phone process was restarted.");
-        } catch (IllegalArgumentException iae) {
-            Log.w(TAG, "Fail to restart phone process: " + iae);
-        }
+        Runnable runnable = () -> {
+            try {
+                mContext.getContentResolver().call(
+                        getResetTelephonyContentProviderAuthority(),
+                        METHOD_RESTART_PHONE_PROCESS,
+                        /* arg= */ null,
+                        /* extras= */ null);
+                Log.i(TAG, "Phone process was restarted.");
+            } catch (IllegalArgumentException iae) {
+                Log.w(TAG, "Fail to restart phone process: " + iae);
+            }
+        };
+        mResetSequence.add(runnable);
         return this;
     }
 
@@ -275,16 +278,19 @@ public class ResetNetworkOperationBuilder {
      * @return this
      */
     public ResetNetworkOperationBuilder restartRild() {
-        try {
-            mContext.getContentResolver().call(
-                    getResetTelephonyContentProviderAuthority(),
-                    METHOD_RESTART_RILD,
-                    /* arg= */ null,
-                    /* extras= */ null);
-            Log.i(TAG, "RILD was restarted.");
-        } catch (IllegalArgumentException iae) {
-            Log.w(TAG, "Fail to restart RILD: " + iae);
-        }
+        Runnable runnable = () -> {
+            try {
+                mContext.getContentResolver().call(
+                        getResetTelephonyContentProviderAuthority(),
+                        METHOD_RESTART_RILD,
+                        /* arg= */ null,
+                        /* extras= */ null);
+                Log.i(TAG, "RILD was restarted.");
+            } catch (IllegalArgumentException iae) {
+                Log.w(TAG, "Fail to restart RILD: " + iae);
+            }
+        };
+        mResetSequence.add(runnable);
         return this;
     }
 

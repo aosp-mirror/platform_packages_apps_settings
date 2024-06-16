@@ -66,10 +66,10 @@ import java.util.stream.Collectors;
 public final class DatabaseUtils {
     private static final String TAG = "DatabaseUtils";
     private static final String SHARED_PREFS_FILE = "battery_usage_shared_prefs";
+    private static final boolean EXPLICIT_CLEAR_MEMORY_ENABLED = false;
 
     /** Clear memory threshold for device booting phase. */
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
-
     private static final long CLEAR_MEMORY_DELAYED_MS = Duration.ofSeconds(2).toMillis();
     private static final long INVALID_TIMESTAMP = 0L;
 
@@ -975,7 +975,8 @@ public final class DatabaseUtils {
     }
 
     private static void clearMemory() {
-        if (SystemClock.uptimeMillis() > CLEAR_MEMORY_THRESHOLD_MS) {
+        if (!EXPLICIT_CLEAR_MEMORY_ENABLED
+                || SystemClock.uptimeMillis() > CLEAR_MEMORY_THRESHOLD_MS) {
             return;
         }
         final Handler mainHandler = new Handler(Looper.getMainLooper());
