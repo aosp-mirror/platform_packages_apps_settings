@@ -31,6 +31,8 @@ import androidx.preference.PreferenceCategory;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import java.util.ArrayList;
 import java.util.Arrays;

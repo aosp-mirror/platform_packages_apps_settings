@@ -46,6 +46,8 @@ import androidx.preference.Preference;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;

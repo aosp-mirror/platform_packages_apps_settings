@@ -22,6 +22,8 @@ import androidx.preference.Preference;
 
 import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import java.util.Random;
 
