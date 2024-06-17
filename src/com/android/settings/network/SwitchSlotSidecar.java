@@ -130,11 +130,13 @@ public class SwitchSlotSidecar
         } catch (UiccSlotsException e) {
             result.exception = e;
         }
+        Log.i(TAG, "return command.");
         return result;
     }
 
     @Override
     protected void onPostExecute(Result result) {
+        Log.i(TAG, "onPostExecute: get result");
         if (result.exception == null) {
             setState(State.SUCCESS, Substate.UNUSED);
         } else {

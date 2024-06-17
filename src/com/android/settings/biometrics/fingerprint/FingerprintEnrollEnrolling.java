@@ -16,13 +16,12 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FINGERPRINT;
 import static android.text.Layout.HYPHENATION_FREQUENCY_NONE;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.IntDef;
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.annotation.RawRes;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -53,7 +52,6 @@ import android.view.Surface;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
@@ -61,6 +59,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -68,6 +68,7 @@ import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
+import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.flags.Flags;
@@ -191,7 +192,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mHaveShownSfpsRightEdgeLottie;
     private boolean mShouldShowLottie;
 
-    private ObjectAnimator mHelpAnimation;
+    private Animator mHelpAnimation;
 
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
@@ -224,7 +225,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (shouldShowSplitScreenDialog()) {
+            BiometricsSplitScreenDialog.newInstance(TYPE_FINGERPRINT, true /*destroyActivity*/)
+                    .show(getSupportFragmentManager(), BiometricsSplitScreenDialog.class.getName());
+        }
         if (savedInstanceState != null) {
             restoreSavedState(savedInstanceState);
         }
@@ -341,20 +345,14 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void setHelpAnimation() {
-        final float translationX = 40;
-        final int duration = 550;
         final RelativeLayout progressLottieLayout = findViewById(R.id.progress_lottie);
-        mHelpAnimation = ObjectAnimator.ofFloat(progressLottieLayout,
-                "translationX" /* propertyName */,
-                0, translationX, -1 * translationX, translationX, 0f);
-        mHelpAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-        mHelpAnimation.setDuration(duration);
-        mHelpAnimation.setAutoCancel(false);
+        mHelpAnimation = mSfpsEnrollmentFeature.getHelpAnimator(progressLottieLayout);
     }
+
     @Override
     protected BiometricEnrollSidecar getSidecar() {
         final FingerprintEnrollSidecar sidecar = new FingerprintEnrollSidecar(this,
-                FingerprintManager.ENROLL_ENROLL);
+                FingerprintManager.ENROLL_ENROLL, getIntent());
         return sidecar;
     }
 
@@ -703,6 +701,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         view.setComposition(composition);
         view.setVisibility(View.VISIBLE);
         view.playAnimation();
+        if (mCanAssumeSfps) {
+            mSfpsEnrollmentFeature.handleOnEnrollmentLottieComposition(view);
+        }
     }
 
     @EnrollStage
@@ -1224,6 +1225,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         @Override
         public float getEnrollStageThreshold(@NonNull Context context, int index) {
+            throw new IllegalStateException(exceptionStr);
+        }
+
+        @Override
+        public Animator getHelpAnimator(@NonNull View target) {
             throw new IllegalStateException(exceptionStr);
         }
     }

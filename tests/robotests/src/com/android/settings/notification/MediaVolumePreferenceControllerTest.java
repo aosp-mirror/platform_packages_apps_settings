@@ -31,17 +31,23 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.session.MediaController;
 import android.net.Uri;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.slice.builders.SliceAction;
 
 import com.android.settings.media.MediaOutputIndicatorWorker;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.media.BluetoothMediaDevice;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -60,16 +66,16 @@ public class MediaVolumePreferenceControllerTest {
             "android.settings.MEDIA_BROADCAST_DIALOG";
     private static MediaOutputIndicatorWorker sMediaOutputIndicatorWorker;
 
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     private MediaVolumePreferenceController mController;
 
     private Context mContext;
 
-    @Mock
-    private MediaController mMediaController;
-    @Mock
-    private MediaDevice mDevice1;
-    @Mock
-    private MediaDevice mDevice2;
+    @Mock private MediaController mMediaController;
+    @Mock private MediaDevice mDevice1;
+    @Mock private MediaDevice mDevice2;
 
     @Before
     public void setUp() {
@@ -77,8 +83,8 @@ public class MediaVolumePreferenceControllerTest {
 
         mContext = RuntimeEnvironment.application;
         mController = new MediaVolumePreferenceController(mContext);
-        sMediaOutputIndicatorWorker = spy(
-                new MediaOutputIndicatorWorker(mContext, VOLUME_MEDIA_URI));
+        sMediaOutputIndicatorWorker =
+                spy(new MediaOutputIndicatorWorker(mContext, VOLUME_MEDIA_URI));
         when(mDevice1.isBLEDevice()).thenReturn(true);
         when(mDevice2.isBLEDevice()).thenReturn(false);
     }
@@ -101,8 +107,8 @@ public class MediaVolumePreferenceControllerTest {
 
     @Test
     public void isSliceableCorrectKey_returnsTrue() {
-        final MediaVolumePreferenceController controller = new MediaVolumePreferenceController(
-                mContext);
+        final MediaVolumePreferenceController controller =
+                new MediaVolumePreferenceController(mContext);
         assertThat(controller.isSliceable()).isTrue();
     }
 
@@ -112,6 +118,17 @@ public class MediaVolumePreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_LEGACY_LE_AUDIO_SHARING)
+    public void isSupportEndItem_flagOff_returnsFalse() {
+        doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
+        doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
+        doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
+
+        assertThat(mController.isSupportEndItem()).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LEGACY_LE_AUDIO_SHARING)
     public void isSupportEndItem_withBleDevice_returnsTrue() {
         doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
@@ -121,6 +138,7 @@ public class MediaVolumePreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LEGACY_LE_AUDIO_SHARING)
     public void isSupportEndItem_notSupportedBroadcast_returnsFalse() {
         doReturn(false).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
@@ -129,6 +147,7 @@ public class MediaVolumePreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LEGACY_LE_AUDIO_SHARING)
     public void isSupportEndItem_withNonBleDevice_returnsFalse() {
         doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
@@ -138,6 +157,7 @@ public class MediaVolumePreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LEGACY_LE_AUDIO_SHARING)
     public void isSupportEndItem_deviceIsBroadcastingAndConnectedToNonBleDevice_returnsTrue() {
         doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(true).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
@@ -147,6 +167,7 @@ public class MediaVolumePreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LEGACY_LE_AUDIO_SHARING)
     public void isSupportEndItem_deviceIsNotBroadcastingAndConnectedToNonBleDevice_returnsFalse() {
         doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
@@ -155,8 +176,20 @@ public class MediaVolumePreferenceControllerTest {
         assertThat(mController.isSupportEndItem()).isFalse();
     }
 
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_LEGACY_LE_AUDIO_SHARING)
+    public void getSliceEndItem_flagOff_getsNullSliceAction() {
+        doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
+        doReturn(true).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
+        doReturn(mDevice2).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
+
+        final SliceAction sliceAction = mController.getSliceEndItem(mContext);
+
+        assertThat(sliceAction).isNull();
+    }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LEGACY_LE_AUDIO_SHARING)
     public void getSliceEndItem_NotSupportEndItem_getsNullSliceAction() {
         doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
@@ -168,22 +201,26 @@ public class MediaVolumePreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LEGACY_LE_AUDIO_SHARING)
     public void getSliceEndItem_deviceIsBroadcasting_getsBroadcastIntent() {
         doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
         doReturn(true).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
-        doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
+        doReturn(mMediaController)
+                .when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
 
         final SliceAction sliceAction = mController.getSliceEndItem(mContext);
 
         final PendingIntent endItemPendingIntent = sliceAction.getAction();
-        final PendingIntent expectedToggleIntent = getBroadcastIntent(
-                MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_BROADCAST_DIALOG);
+        final PendingIntent expectedToggleIntent =
+                getBroadcastIntent(
+                        MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_BROADCAST_DIALOG);
         assertThat(endItemPendingIntent).isEqualTo(expectedToggleIntent);
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LEGACY_LE_AUDIO_SHARING)
     public void getSliceEndItem_deviceIsNotBroadcasting_getsActivityIntent() {
         final MediaDevice device = mock(BluetoothMediaDevice.class);
         final CachedBluetoothDevice cachedDevice = mock(CachedBluetoothDevice.class);
@@ -192,7 +229,8 @@ public class MediaVolumePreferenceControllerTest {
         doReturn(true).when(sMediaOutputIndicatorWorker).isBroadcastSupported();
         doReturn(device).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
         doReturn(false).when(sMediaOutputIndicatorWorker).isDeviceBroadcasting();
-        doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
+        doReturn(mMediaController)
+                .when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
 
         final SliceAction sliceAction = mController.getSliceEndItem(mContext);
@@ -215,13 +253,19 @@ public class MediaVolumePreferenceControllerTest {
     private PendingIntent getBroadcastIntent(String action) {
         final Intent intent = new Intent(action);
         intent.setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME);
-        return PendingIntent.getBroadcast(mContext, 0 /* requestCode */, intent,
+        return PendingIntent.getBroadcast(
+                mContext,
+                0 /* requestCode */,
+                intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     private PendingIntent getActivityIntent(String action) {
         final Intent intent = new Intent(action);
-        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent,
+        return PendingIntent.getActivity(
+                mContext,
+                0 /* requestCode */,
+                intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 }

@@ -32,6 +32,7 @@ import android.content.IntentFilter;
 import android.content.om.OverlayInfo;
 import android.content.om.OverlayManager;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.Flags;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -292,7 +293,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         switch (id) {
             case ButtonActionDialogFragment.DialogType.DISABLE:
                 mMetricsFeatureProvider.action(mActivity,
-                        SettingsEnums.ACTION_SETTINGS_DISABLE_APP);
+                        SettingsEnums.ACTION_SETTINGS_DISABLE_APP,
+                        getPackageNameForMetric());
                 AsyncTask.execute(new DisableChangerRunnable(mPm, mAppEntry.info.packageName,
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER));
                 break;
@@ -433,10 +435,17 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                     // No preferred default, so permit uninstall only when
                     // there is more than one candidate
                     enabled = (mHomePackages.size() > 1);
-                } else {
-                    // There is an explicit default home app -- forbid uninstall of
-                    // that one, but permit it for installed-but-inactive ones.
-                    enabled = !mPackageInfo.packageName.equals(currentDefaultHome.getPackageName());
+                } else if (mPackageInfo.packageName.equals(currentDefaultHome.getPackageName())) {
+                    if (Flags.improveHomeAppBehavior()) {
+                        // Allow uninstallation of current home app if it is a non-system app
+                        // and/or there are other candidate apps available.
+                        if (mPackageInfo.applicationInfo.isSystemApp()
+                                || mHomePackages.size() == 1) {
+                            enabled = false;
+                        }
+                    } else {
+                        enabled = false;
+                    }
                 }
             }
         }

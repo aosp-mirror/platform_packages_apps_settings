@@ -33,10 +33,15 @@ import com.android.settings.R
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spaprivileged.framework.compose.DisposableBroadcastReceiverAsUser
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 
-class AppArchiveButton(packageInfoPresenter: PackageInfoPresenter) {
+class AppArchiveButton(
+    packageInfoPresenter: PackageInfoPresenter,
+    private val isHibernationSwitchEnabledStateFlow: MutableStateFlow<Boolean>,
+) {
     private companion object {
         private const val LOG_TAG = "AppArchiveButton"
         private const val INTENT_ACTION = "com.android.settings.archive.action"
@@ -49,6 +54,7 @@ class AppArchiveButton(packageInfoPresenter: PackageInfoPresenter) {
     private val packageName = packageInfoPresenter.packageName
     private val userHandle = UserHandle.of(packageInfoPresenter.userId)
     private var broadcastReceiverIsCreated = false
+    private lateinit var appLabel: CharSequence
 
     @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton {
@@ -56,25 +62,28 @@ class AppArchiveButton(packageInfoPresenter: PackageInfoPresenter) {
             val intentFilter = IntentFilter(INTENT_ACTION)
             DisposableBroadcastReceiverAsUser(intentFilter, userHandle) { intent ->
                 if (app.packageName == intent.getStringExtra(PackageInstaller.EXTRA_PACKAGE_NAME)) {
-                    onReceive(intent, app)
+                    onReceive(intent)
                 }
             }
             broadcastReceiverIsCreated = true
         }
+        appLabel = userPackageManager.getApplicationLabel(app)
         return ActionButton(
             text = context.getString(R.string.archive),
             imageVector = Icons.Outlined.CloudUpload,
             enabled = remember(app) {
-                flow {
-                    emit(
-                        app.isActionButtonEnabled() && appButtonRepository.isAllowUninstallOrArchive(
-                            context,
-                            app
-                        )
-                    )
+                isHibernationSwitchEnabledStateFlow.asStateFlow().map {
+                    it && isActionButtonEnabledForApp(app)
                 }.flowOn(Dispatchers.Default)
             }.collectAsStateWithLifecycle(false).value
         ) { onArchiveClicked(app) }
+    }
+
+    private fun isActionButtonEnabledForApp(app: ApplicationInfo): Boolean {
+        return app.isActionButtonEnabled() && appButtonRepository.isAllowUninstallOrArchive(
+            context,
+            app
+        )
     }
 
     private fun ApplicationInfo.isActionButtonEnabled(): Boolean {
@@ -95,7 +104,7 @@ class AppArchiveButton(packageInfoPresenter: PackageInfoPresenter) {
             userHandle
         )
         try {
-            packageInstaller.requestArchive(app.packageName, pendingIntent.intentSender, 0)
+            packageInstaller.requestArchive(app.packageName, pendingIntent.intentSender)
         } catch (e: Exception) {
             Log.e(LOG_TAG, "Request archive failed", e)
             Toast.makeText(
@@ -106,10 +115,9 @@ class AppArchiveButton(packageInfoPresenter: PackageInfoPresenter) {
         }
     }
 
-    private fun onReceive(intent: Intent, app: ApplicationInfo) {
+    private fun onReceive(intent: Intent) {
         when (val status = intent.getIntExtra(PackageInstaller.EXTRA_STATUS, Int.MIN_VALUE)) {
             PackageInstaller.STATUS_SUCCESS -> {
-                val appLabel = userPackageManager.getApplicationLabel(app)
                 Toast.makeText(
                     context,
                     context.getString(R.string.archiving_succeeded, appLabel),

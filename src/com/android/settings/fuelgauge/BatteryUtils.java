@@ -22,17 +22,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.InstallSourceInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.BatteryUsageStatsQuery;
 import android.os.Build;
-import android.os.Process;
 import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -47,14 +44,11 @@ import androidx.annotation.WorkerThread;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
-import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
-import com.android.settings.fuelgauge.batterytip.StatsManagerConfig;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.EstimateKt;
-import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.utils.ThreadUtils;
@@ -68,7 +62,6 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.List;
 
 /** Utils for battery operation */
 public class BatteryUtils {
@@ -143,7 +136,6 @@ public class BatteryUtils {
     public void reset() {
         sInstance = null;
     }
-
 
     /** Gets the process time */
     public long getProcessTimeMs(@StatusType int type, @Nullable BatteryStats.Uid uid, int which) {
@@ -345,6 +337,25 @@ public class BatteryUtils {
     }
 
     /**
+     * Find package uid from package name
+     *
+     * @param packageName used to find the uid
+     * @param userId The user handle identifier to look up the package under
+     * @return uid for packageName, or {@link #UID_NULL} if exception happens or {@code packageName}
+     *     is null
+     */
+    public int getPackageUidAsUser(String packageName, int userId) {
+        try {
+            return packageName == null
+                    ? UID_NULL
+                    : mPackageManager.getPackageUidAsUser(
+                            packageName, PackageManager.GET_META_DATA, userId);
+        } catch (PackageManager.NameNotFoundException e) {
+            return UID_NULL;
+        }
+    }
+
+    /**
      * Parses proto object from string.
      *
      * @param serializedProto the serialized proto string
@@ -523,74 +534,6 @@ public class BatteryUtils {
 
         for (String packageName : packageNames) {
             if (isPreOApp(packageName)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /** Return {@code true} if we should hide anomaly app represented by {@code uid} */
-    public boolean shouldHideAnomaly(
-            PowerAllowlistBackend powerAllowlistBackend, int uid, AnomalyInfo anomalyInfo) {
-        final String[] packageNames = mPackageManager.getPackagesForUid(uid);
-        if (ArrayUtils.isEmpty(packageNames)) {
-            // Don't show it if app has been uninstalled
-            return true;
-        }
-
-        return isSystemUid(uid)
-                || powerAllowlistBackend.isAllowlisted(packageNames, uid)
-                || (isSystemApp(mPackageManager, packageNames) && !hasLauncherEntry(packageNames))
-                || (isExcessiveBackgroundAnomaly(anomalyInfo) && !isPreOApp(packageNames));
-    }
-
-    private boolean isExcessiveBackgroundAnomaly(AnomalyInfo anomalyInfo) {
-        return anomalyInfo.anomalyType
-                == StatsManagerConfig.AnomalyType.EXCESSIVE_BACKGROUND_SERVICE;
-    }
-
-    private boolean isSystemUid(int uid) {
-        final int appUid = UserHandle.getAppId(uid);
-        return appUid >= Process.ROOT_UID && appUid < Process.FIRST_APPLICATION_UID;
-    }
-
-    private boolean isSystemApp(PackageManager packageManager, String[] packageNames) {
-        for (String packageName : packageNames) {
-            try {
-                final ApplicationInfo info =
-                        packageManager.getApplicationInfo(packageName, 0 /* flags */);
-                if ((info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                    return true;
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Package not found: " + packageName, e);
-            }
-        }
-
-        return false;
-    }
-
-    private boolean hasLauncherEntry(String[] packageNames) {
-        final Intent launchIntent = new Intent(Intent.ACTION_MAIN, null);
-        launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-        // If we do not specify MATCH_DIRECT_BOOT_AWARE or
-        // MATCH_DIRECT_BOOT_UNAWARE, system will derive and update the flags
-        // according to the user's lock state. When the user is locked,
-        // components
-        // with ComponentInfo#directBootAware == false will be filtered. We should
-        // explicitly include both direct boot aware and unaware components here.
-        final List<ResolveInfo> resolveInfos =
-                mPackageManager.queryIntentActivities(
-                        launchIntent,
-                        PackageManager.MATCH_DISABLED_COMPONENTS
-                                | PackageManager.MATCH_DIRECT_BOOT_AWARE
-                                | PackageManager.MATCH_DIRECT_BOOT_UNAWARE
-                                | PackageManager.MATCH_SYSTEM_ONLY);
-        for (int i = 0, size = resolveInfos.size(); i < size; i++) {
-            final ResolveInfo resolveInfo = resolveInfos.get(i);
-            if (ArrayUtils.contains(packageNames, resolveInfo.activityInfo.packageName)) {
                 return true;
             }
         }

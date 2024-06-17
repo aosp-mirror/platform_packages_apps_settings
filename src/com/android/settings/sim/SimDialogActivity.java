@@ -41,6 +41,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
@@ -130,6 +131,15 @@ public class SimDialogActivity extends FragmentActivity {
         if (dialogType == PREFERRED_PICK
                 && getProgressState() == SubscriptionActionDialogActivity.PROGRESS_IS_SHOWING) {
             Log.d(TAG, "Finish the sim dialog since the sim action dialog is showing the progress");
+            finish();
+            return;
+        }
+
+        if (Flags.isDualSimOnboardingEnabled()
+                && (dialogType == DATA_PICK
+                || dialogType == CALLS_PICK
+                || dialogType == SMS_PICK)) {
+            Log.d(TAG, "Finish the sim dialog since the sim onboarding is shown");
             finish();
             return;
         }

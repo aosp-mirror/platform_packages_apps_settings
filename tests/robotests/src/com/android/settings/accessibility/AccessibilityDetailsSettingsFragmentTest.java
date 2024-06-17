@@ -38,6 +38,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
 import com.google.common.collect.ImmutableList;
 
@@ -57,7 +58,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Tests for {@link AccessibilityDetailsSettingsFragment}. */
-@Config(shadows = ShadowDevicePolicyManager.class)
+@Config(shadows = {
+        ShadowDevicePolicyManager.class,
+        ShadowRestrictedLockUtilsInternal.class
+})
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityDetailsSettingsFragmentTest {
     private static final String PACKAGE_NAME = "com.foo.bar";

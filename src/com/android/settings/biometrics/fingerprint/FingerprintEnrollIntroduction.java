@@ -59,7 +59,6 @@ import com.google.android.setupdesign.util.DeviceHelper;
 import java.util.List;
 
 public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
-
     private static final String TAG = "FingerprintIntro";
 
     @VisibleForTesting
@@ -70,7 +69,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     private DevicePolicyManager mDevicePolicyManager;
     private boolean mCanAssumeUdfps;
     @Nullable
-    private UdfpsEnrollCalibrator mCalibrator;
+    protected UdfpsEnrollCalibrator mCalibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -388,6 +387,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                 intent.putExtras(mCalibrator.getExtrasForNextIntent(false));
             }
         }
+        intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                getIntent().getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1));
         return intent;
     }
 

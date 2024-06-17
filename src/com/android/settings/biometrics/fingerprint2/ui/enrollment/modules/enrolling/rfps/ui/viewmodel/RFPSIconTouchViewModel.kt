@@ -38,9 +38,9 @@ class RFPSIconTouchViewModel : ViewModel() {
   private val _touches: MutableStateFlow<Int> = MutableStateFlow(0)
 
   /**
-   * Whether or not the UI should be showing the dialog. By making this SharingStarted.Eagerly
-   * the first event 0 % 3 == 0 will fire as soon as this view model is created, so it should
-   * be ignored and work as intended.
+   * Whether or not the UI should be showing the dialog. By making this SharingStarted.Eagerly the
+   * first event 0 % 3 == 0 will fire as soon as this view model is created, so it should be ignored
+   * and work as intended.
    */
   val shouldShowDialog: Flow<Boolean> =
     _touches

@@ -130,11 +130,14 @@ public class TopLevelBatteryPreferenceControllerTest {
         BatteryTestUtils.setupIncompatibleEvent(mUsbPort, mUsbManager, mUsbPortStatus);
         mController.mPreference = new Preference(mContext);
         BatteryInfo info = new BatteryInfo();
+        info.batteryPercentString = "66%";
 
         assertThat(mController.getDashboardLabel(mContext, info, true))
                 .isEqualTo(
                         mContext.getString(
-                                com.android.settingslib.R.string.battery_info_status_not_charging));
+                                com.android.settingslib.R.string
+                                        .power_incompatible_charging_settings_home_page,
+                                info.batteryPercentString));
     }
 
     @Test

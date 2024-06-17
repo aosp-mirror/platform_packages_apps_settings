@@ -16,10 +16,11 @@
 
 package com.android.settings.privacy;
 
-import android.annotation.NonNull;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;

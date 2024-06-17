@@ -33,13 +33,21 @@ public class HidePrivateSpaceSettings extends DashboardFragment{
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if (PrivateSpaceMaintainer.getInstance(getContext()).isPrivateSpaceLocked()) {
+            finish();
+        }
+    }
+
+    @Override
     public int getMetricsCategory() {
         return SettingsEnums.PRIVATE_SPACE_SETTINGS;
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.privatespace_hide_locked;
+        return R.xml.private_space_hide_locked;
     }
 
     @Override

@@ -28,6 +28,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.preference.Preference;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Settings;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.factory_reset.Flags;
@@ -36,11 +37,14 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "FactoryResetPreference";
 
-    private static final String ACTION_PREPARE_FACTORY_RESET =
+    @VisibleForTesting
+    static final String ACTION_PREPARE_FACTORY_RESET =
             "com.android.settings.ACTION_PREPARE_FACTORY_RESET";
 
     private final UserManager mUm;
-    private ActivityResultLauncher<Intent> mFactoryResetPreparationLauncher;
+
+    @VisibleForTesting
+    ActivityResultLauncher<Intent> mFactoryResetPreparationLauncher;
 
     public FactoryResetPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);

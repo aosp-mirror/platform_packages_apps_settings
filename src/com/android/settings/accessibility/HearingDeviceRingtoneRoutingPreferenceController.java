@@ -19,7 +19,6 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
 
 /**
@@ -28,15 +27,13 @@ import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
 public class HearingDeviceRingtoneRoutingPreferenceController extends
         HearingDeviceAudioRoutingBasePreferenceController {
 
-    private CachedBluetoothDevice mHearingDevice;
-
     public HearingDeviceRingtoneRoutingPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     protected int[] getSupportedAttributeList() {
-        return HearingAidAudioRoutingConstants.RINGTONE_ROUTING_ATTRIBUTE;
+        return HearingAidAudioRoutingConstants.RINGTONE_ROUTING_ATTRIBUTES;
 
     }
 

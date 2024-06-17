@@ -18,8 +18,6 @@ package com.android.settings.applications.credentials;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -34,6 +32,7 @@ import android.content.res.Resources;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
+import android.credentials.flags.Flags;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -46,9 +45,12 @@ import android.provider.Settings;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.CompoundButton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
@@ -75,6 +77,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
@@ -95,9 +98,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
     private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
     private static final int MAX_SELECTABLE_PROVIDERS = 5;
-    private static final String SETTINGS_ACTIVITY_INTENT_ACTION = "android.intent.action.MAIN";
-    private static final String SETTINGS_ACTIVITY_INTENT_CATEGORY =
-            "android.intent.category.LAUNCHER";
 
     private final PackageManager mPm;
     private final List<CredentialProviderInfo> mServices;
@@ -108,14 +108,16 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final List<ServiceInfo> mPendingServiceInfos = new ArrayList<>();
     private final Handler mHandler = new Handler();
     private final SettingContentObserver mSettingsContentObserver;
+    private final ImageUtils.IconResizer mIconResizer;
 
     private @Nullable FragmentManager mFragmentManager = null;
     private @Nullable Delegate mDelegate = null;
     private @Nullable String mFlagOverrideForTest = null;
     private @Nullable PreferenceScreen mPreferenceScreen = null;
 
-    private boolean mVisibility = false;
+    private Optional<Boolean> mSimulateHiddenForTests = Optional.empty();
     private boolean mIsWorkProfile = false;
+    private boolean mSimulateConnectedForTests = false;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -129,6 +131,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 new SettingContentObserver(mHandler, context.getContentResolver());
         mSettingsContentObserver.register();
         mSettingsPackageMonitor.register(context, context.getMainLooper(), false);
+        mIconResizer = getResizer(context);
+    }
+
+    private static ImageUtils.IconResizer getResizer(Context context) {
+        final Resources resources = context.getResources();
+        int size = (int) resources.getDimension(android.R.dimen.app_icon_size);
+        return new ImageUtils.IconResizer(size, size, resources.getDisplayMetrics());
     }
 
     private @Nullable CredentialManager getCredentialManager(Context context, boolean isTest) {
@@ -147,15 +156,17 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-        if (mCredentialManager == null) {
+        if (!isConnected()) {
             return UNSUPPORTED_ON_DEVICE;
         }
 
-        if (!mVisibility) {
+        // If there is no top provider or any providers in the list then
+        // we should hide this pref.
+        if (isHiddenDueToNoProviderSet()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
 
-        if (mServices.isEmpty()) {
+        if (!hasNonPrimaryServices()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
 
@@ -174,7 +185,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     @VisibleForTesting
     public boolean isConnected() {
-        return mCredentialManager != null;
+        return mCredentialManager != null || mSimulateConnectedForTests;
+    }
+
+    public void setSimulateConnectedForTests(boolean simulateConnectedForTests) {
+        mSimulateConnectedForTests = simulateConnectedForTests;
     }
 
     /**
@@ -293,7 +308,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         NewProviderConfirmationDialogFragment fragment =
                 newNewProviderConfirmationDialogFragment(
-                        serviceInfo.packageName, appName, /* setActivityResult= */ true);
+                        serviceInfo.packageName, appName, /* shouldSetActivityResult= */ true);
         if (fragment == null || mFragmentManager == null) {
             return;
         }
@@ -365,15 +380,30 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
     }
 
-    private void setVisibility(boolean newVisibility) {
-        if (newVisibility == mVisibility) {
-            return;
-        }
-
-        mVisibility = newVisibility;
+    @VisibleForTesting
+    public void forceDelegateRefresh() {
         if (mDelegate != null) {
             mDelegate.forceDelegateRefresh();
         }
+    }
+
+    @VisibleForTesting
+    public void setSimulateHiddenForTests(Optional<Boolean> simulateHiddenForTests) {
+        mSimulateHiddenForTests = simulateHiddenForTests;
+    }
+
+    @VisibleForTesting
+    public boolean isHiddenDueToNoProviderSet() {
+        return isHiddenDueToNoProviderSet(getProviders());
+    }
+
+    private boolean isHiddenDueToNoProviderSet(
+            Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair) {
+        if (mSimulateHiddenForTests.isPresent()) {
+            return mSimulateHiddenForTests.get();
+        }
+
+        return (providerPair.first.size() == 0 || providerPair.second == null);
     }
 
     @VisibleForTesting
@@ -396,6 +426,17 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         for (String packageName : mPrefs.keySet()) {
             mPrefs.get(packageName).setChecked(mEnabledPackageNames.contains(packageName));
         }
+    }
+
+    @VisibleForTesting
+    public boolean hasNonPrimaryServices() {
+        for (CredentialProviderInfo availableService : mServices) {
+            if (!availableService.isPrimary()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -441,10 +482,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         return preference;
     }
 
-    /** Aggregates the list of services and builds a list of UI prefs to show. */
-    @VisibleForTesting
-    public Map<String, CombiPreference> buildPreferenceList(
-            Context context, PreferenceGroup group) {
+    /**
+     * Returns a pair that contains a list of the providers in the first position and the top
+     * provider in the second position.
+     */
+    private Pair<List<CombinedProviderInfo>, CombinedProviderInfo> getProviders() {
         // Get the selected autofill provider. If it is the placeholder then replace it with an
         // empty string.
         String selectedAutofillProvider =
@@ -457,15 +499,25 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         // Get the list of combined providers.
         List<CombinedProviderInfo> providers =
                 CombinedProviderInfo.buildMergedList(
-                        AutofillServiceInfo.getAvailableServices(context, getUser()),
+                        AutofillServiceInfo.getAvailableServices(mContext, getUser()),
                         mServices,
                         selectedAutofillProvider);
+        return new Pair<>(providers, CombinedProviderInfo.getTopProvider(providers));
+    }
 
-        // Get the provider that is displayed at the top. If there is none then hide
-        // everything.
-        CombinedProviderInfo topProvider = CombinedProviderInfo.getTopProvider(providers);
-        if (topProvider == null) {
-            setVisibility(false);
+    /** Aggregates the list of services and builds a list of UI prefs to show. */
+    @VisibleForTesting
+    public @NonNull Map<String, CombiPreference> buildPreferenceList(
+            @NonNull Context context, @NonNull PreferenceGroup group) {
+        // Get the providers and extract the values.
+        Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair = getProviders();
+        CombinedProviderInfo topProvider = providerPair.second;
+        List<CombinedProviderInfo> providers = providerPair.first;
+
+        // If the provider is set to "none" or there are no providers then we should not
+        // return any providers.
+        if (isHiddenDueToNoProviderSet(providerPair)) {
+            forceDelegateRefresh();
             return new HashMap<>();
         }
 
@@ -475,6 +527,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
             // If this provider is displayed at the top then we should not show it.
             if (topProvider != null
+                    && topProvider.getApplicationInfo() != null
                     && topProvider.getApplicationInfo().packageName.equals(packageName)) {
                 continue;
             }
@@ -483,10 +536,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             if (combinedInfo.getCredentialProviderInfos().isEmpty()) {
                 continue;
             }
-
-            // Get the settings activity.
-            CharSequence settingsActivity =
-                    combinedInfo.getCredentialProviderInfos().get(0).getSettingsActivity();
 
             Drawable icon = combinedInfo.getAppIcon(context, getUser());
             CharSequence title = combinedInfo.getAppName(context);
@@ -499,13 +548,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             icon,
                             packageName,
                             combinedInfo.getSettingsSubtitle(),
-                            settingsActivity);
+                            combinedInfo.getSettingsActivity());
             output.put(packageName, pref);
             group.addPreference(pref);
         }
 
         // Set the visibility if we have services.
-        setVisibility(!output.isEmpty());
+        forceDelegateRefresh();
 
         return output;
     }
@@ -530,7 +579,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
      */
     @VisibleForTesting
     public boolean togglePackageNameEnabled(String packageName) {
-        if (mEnabledPackageNames.size() >= MAX_SELECTABLE_PROVIDERS) {
+        if (hasProviderLimitBeenReached()) {
             return false;
         } else {
             mEnabledPackageNames.add(packageName);
@@ -574,6 +623,30 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         return enabledServices;
     }
 
+    @VisibleForTesting
+    public @NonNull Drawable processIcon(@Nullable Drawable icon) {
+        // If we didn't get an icon then we should use the default app icon.
+        if (icon == null) {
+            icon = mPm.getDefaultActivityIcon();
+        }
+
+        Drawable providerIcon = Utils.getSafeIcon(icon);
+        return mIconResizer.createIconThumbnail(providerIcon);
+    }
+
+    private boolean hasProviderLimitBeenReached() {
+        return hasProviderLimitBeenReached(mEnabledPackageNames.size());
+    }
+
+    @VisibleForTesting
+    public static boolean hasProviderLimitBeenReached(int enabledAdditionalProviderCount) {
+        // If the number of package names has reached the maximum limit then
+        // we should stop any new packages from being added. We will also
+        // reserve one place for the primary provider so if the max limit is
+        // five providers this will be four additional plus the primary.
+        return (enabledAdditionalProviderCount + 1) >= MAX_SELECTABLE_PROVIDERS;
+    }
+
     private CombiPreference addProviderPreference(
             @NonNull Context prefContext,
             @NonNull CharSequence title,
@@ -584,12 +657,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         final CombiPreference pref =
                 new CombiPreference(prefContext, mEnabledPackageNames.contains(packageName));
         pref.setTitle(title);
+        pref.setLayoutResource(R.layout.preference_icon_credman);
 
-        if (icon != null) {
+        if (Flags.newSettingsUi()) {
+            pref.setIcon(processIcon(icon));
+        } else if (icon != null) {
             pref.setIcon(icon);
         }
-
-        pref.setLayoutResource(R.layout.preference_icon_credman);
 
         if (subtitle != null) {
             pref.setSummary(subtitle);
@@ -598,19 +672,18 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         pref.setPreferenceListener(
                 new CombiPreference.OnCombiPreferenceClickListener() {
                     @Override
-                    public void onCheckChanged(CombiPreference p, boolean isChecked) {
+                    public boolean onCheckChanged(CombiPreference p, boolean isChecked) {
                         if (isChecked) {
-                            if (mEnabledPackageNames.size() >= MAX_SELECTABLE_PROVIDERS) {
+                            if (hasProviderLimitBeenReached()) {
                                 // Show the error if too many enabled.
-                                pref.setChecked(false);
                                 final DialogFragment fragment = newErrorDialogFragment();
 
                                 if (fragment == null || mFragmentManager == null) {
-                                    return;
+                                    return false;
                                 }
 
                                 fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
-                                return;
+                                return false;
                             }
 
                             togglePackageNameEnabled(packageName);
@@ -622,47 +695,14 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                         } else {
                             togglePackageNameDisabled(packageName);
                         }
+
+                        return true;
                     }
 
                     @Override
                     public void onLeftSideClicked() {
-                        if (settingsActivity == null) {
-                            Log.w(TAG, "settingsActivity was null");
-                            return;
-                        }
-
-                        String settingsActivityStr = String.valueOf(settingsActivity);
-                        ComponentName cn = ComponentName.unflattenFromString(settingsActivityStr);
-                        if (cn == null) {
-                            Log.w(
-                                    TAG,
-                                    "Failed to deserialize settingsActivity attribute, we got: "
-                                            + settingsActivityStr);
-                            return;
-                        }
-
-                        Intent intent = new Intent(SETTINGS_ACTIVITY_INTENT_ACTION);
-                        intent.addCategory(SETTINGS_ACTIVITY_INTENT_CATEGORY);
-                        intent.setComponent(cn);
-
-                        Context context = mContext;
-                        int currentUserId = getUser();
-                        int contextUserId = context.getUser().getIdentifier();
-
-                        if (currentUserId != contextUserId) {
-                            Log.d(
-                                    TAG,
-                                    "onLeftSideClicked(): using context for current user ("
-                                            + currentUserId
-                                            + ") instead of user "
-                                            + contextUserId
-                                            + " on headless system user mode");
-                            context =
-                                    context.createContextAsUser(
-                                            UserHandle.of(currentUserId), /* flags= */ 0);
-                        }
-
-                        context.startActivity(intent);
+                        CombinedProviderInfo.launchSettingsActivityIntent(
+                                mContext, packageName, settingsActivity, getUser());
                     }
                 });
 
@@ -711,13 +751,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             newNewProviderConfirmationDialogFragment(
                     @NonNull String packageName,
                     @NonNull CharSequence appName,
-                    boolean setActivityResult) {
+                    boolean shouldSetActivityResult) {
         DialogHost host =
                 new DialogHost() {
                     @Override
                     public void onDialogClick(int whichButton) {
                         completeEnableProviderDialogBox(
-                                whichButton, packageName, setActivityResult);
+                                whichButton, packageName, shouldSetActivityResult);
                     }
 
                     @Override
@@ -728,8 +768,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     @VisibleForTesting
-    void completeEnableProviderDialogBox(
-            int whichButton, String packageName, boolean setActivityResult) {
+    int completeEnableProviderDialogBox(
+            int whichButton, String packageName, boolean shouldSetActivityResult) {
         int activityResult = -1;
         if (whichButton == DialogInterface.BUTTON_POSITIVE) {
             if (togglePackageNameEnabled(packageName)) {
@@ -746,7 +786,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 final DialogFragment fragment = newErrorDialogFragment();
 
                 if (fragment == null || mFragmentManager == null) {
-                    return;
+                    return activityResult;
                 }
 
                 fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
@@ -758,9 +798,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         // If the dialog is being shown because of the intent we should
         // return a result.
-        if (activityResult == -1 || !setActivityResult) {
+        if (activityResult == -1 || !shouldSetActivityResult) {
             setActivityResult(activityResult);
         }
+
+        return activityResult;
     }
 
     private @Nullable ErrorDialogFragment newErrorDialogFragment() {
@@ -865,8 +907,18 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
-                    .setTitle(getContext().getString(R.string.credman_error_message_title))
-                    .setMessage(getContext().getString(R.string.credman_error_message))
+                    .setTitle(
+                            getContext()
+                                    .getString(
+                                            Flags.newSettingsUi()
+                                                    ? R.string.credman_limit_error_msg_title
+                                                    : R.string.credman_error_message_title))
+                    .setMessage(
+                            getContext()
+                                    .getString(
+                                            Flags.newSettingsUi()
+                                                    ? R.string.credman_limit_error_msg
+                                                    : R.string.credman_error_message))
                     .setPositiveButton(android.R.string.ok, this)
                     .create();
         }
@@ -962,8 +1014,13 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             @Override
             public void onClick(View buttonView) {
                 // Forward the event.
-                if (mSwitch != null) {
-                    mOnClickListener.onCheckChanged(CombiPreference.this, mSwitch.isChecked());
+                if (mSwitch != null && mOnClickListener != null) {
+                    if (!mOnClickListener.onCheckChanged(CombiPreference.this, mSwitch.isChecked())) {
+                      // The update was not successful since there were too
+                      // many enabled providers to manually reset any state.
+                      mChecked = false;
+                      mSwitch.setChecked(false);
+                    }
                 }
             }
         }
@@ -977,7 +1034,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         public interface OnCombiPreferenceClickListener {
             /** Called when the check is updated */
-            void onCheckChanged(CombiPreference p, boolean isChecked);
+            boolean onCheckChanged(CombiPreference p, boolean isChecked);
 
             /** Called when the left side is clicked. */
             void onLeftSideClicked();
@@ -1002,6 +1059,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             }
         }
 
+        @VisibleForTesting
         public boolean isChecked() {
             return mChecked;
         }

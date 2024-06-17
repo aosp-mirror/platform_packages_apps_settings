@@ -38,20 +38,25 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.hardware.face.Face;
+import android.hardware.face.FaceEnrollOptions;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorProperties;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -62,6 +67,7 @@ import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
@@ -101,7 +107,8 @@ import java.util.List;
         ShadowUtils.class,
         ShadowDevicePolicyManager.class,
         ShadowSensorPrivacyManager.class,
-        SettingsShadowResources.class
+        SettingsShadowResources.class,
+        ShadowAlertDialogCompat.class
 })
 public class FaceEnrollIntroductionTest {
 
@@ -123,8 +130,8 @@ public class FaceEnrollIntroductionTest {
     enum GateKeeperAction {CALL_SUPER, RETURN_BYTE_ARRAY, THROW_CREDENTIAL_NOT_MATCH}
 
     public static class TestFaceEnrollIntroduction extends FaceEnrollIntroduction {
-
         private int mRecreateCount = 0;
+        public boolean mIsMultiWindowMode;
 
         public int getRecreateCount() {
             return mRecreateCount;
@@ -161,6 +168,11 @@ public class FaceEnrollIntroductionTest {
         protected boolean launchPostureGuidance() {
             return super.launchPostureGuidance();
         }
+
+        @Override
+        public boolean isInMultiWindowMode() {
+            return mIsMultiWindowMode;
+        }
     }
 
     @Before
@@ -178,12 +190,15 @@ public class FaceEnrollIntroductionTest {
     public void tearDown() {
         ShadowUtils.reset();
         ShadowLockPatternUtils.reset();
+        ShadowAlertDialogCompat.reset();
     }
 
     private void setupActivity() {
         final Intent testIntent = new Intent();
         // Set the challenge token so the confirm screen will not be shown
         testIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        testIntent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                FaceEnrollOptions.ENROLL_REASON_SETTINGS);
 
         when(mFakeFeatureFactory.mFaceFeatureProvider.getPostureGuidanceIntent(any())).thenReturn(
                 null /* Simulate no posture intent */);
@@ -208,6 +223,8 @@ public class FaceEnrollIntroductionTest {
         testIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
         testIntent.putExtra(EXTRA_KEY_NEXT_LAUNCHED, false);
         testIntent.putExtra(EXTRA_LAUNCHED_POSTURE_GUIDANCE, false);
+        testIntent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                FaceEnrollOptions.ENROLL_REASON_SETTINGS);
 
         when(mFakeFeatureFactory.mFaceFeatureProvider.getPostureGuidanceIntent(any())).thenReturn(
                 testIntent);
@@ -594,6 +611,49 @@ public class FaceEnrollIntroductionTest {
         // can be enrolled for the added user profile
         result = mActivity.checkMaxEnrolled();
         assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    public void multiWindow_showsDialog() {
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class);
+        mActivity  = (TestFaceEnrollIntroduction) mController.get();
+        mActivity.mIsMultiWindowMode = true;
+        mController.setup().get();
+
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNotNull();
+
+        final ShadowAlertDialogCompat shadowAlertDialog = ShadowAlertDialogCompat.shadowOf(dialog);
+        assertThat(shadowAlertDialog.getTitle().toString()).isEqualTo(
+                mActivity.getString(R.string.biometric_settings_add_face_in_split_mode_title));
+        assertThat(shadowAlertDialog.getMessage().toString()).isEqualTo(
+                mActivity.getString(R.string.biometric_settings_add_face_in_split_mode_message));
+
+        final Button button = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        assertThat(button).isNotNull();
+        button.performClick();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+        assertThat(dialog.isShowing()).isFalse();
+        assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    @Test
+    public void singleWindow_noDialog() {
+        Robolectric.buildActivity(TestFaceEnrollIntroduction.class).setup().get();
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_forwardsEnrollOptions() {
+        setupActivity();
+        final Intent intent = mActivity.getEnrollingIntent();
+
+        assertThat(intent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1))
+                .isEqualTo(FaceEnrollOptions.ENROLL_REASON_SETTINGS);
     }
 
 }

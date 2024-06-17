@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.os.UserManager.DISALLOW_ADD_WIFI_CONFIG;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import static com.android.settings.wifi.WifiDialogActivity.REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER;
@@ -50,16 +51,16 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.LooperMode;
 
-@Ignore("b/314867581")
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class WifiDialogActivityTest {
 
     static final String CALLING_PACKAGE = "calling_package";
@@ -240,6 +241,20 @@ public class WifiDialogActivityTest {
         when(mUserManager.hasUserRestriction(DISALLOW_CONFIG_WIFI)).thenReturn(true);
 
         assertThat(mActivity.isConfigWifiAllowed()).isFalse();
+    }
+
+    @Test
+    public void isAddWifiConfigAllowed_hasNoUserRestriction_returnTrue() {
+        when(mUserManager.hasUserRestriction(DISALLOW_ADD_WIFI_CONFIG)).thenReturn(false);
+
+        assertThat(mActivity.isAddWifiConfigAllowed()).isTrue();
+    }
+
+    @Test
+    public void isAddWifiConfigAllowed_hasUserRestriction_returnFalse() {
+        when(mUserManager.hasUserRestriction(DISALLOW_ADD_WIFI_CONFIG)).thenReturn(true);
+
+        assertThat(mActivity.isAddWifiConfigAllowed()).isFalse();
     }
 
     @Test

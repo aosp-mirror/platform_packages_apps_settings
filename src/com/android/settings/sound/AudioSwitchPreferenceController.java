@@ -20,7 +20,6 @@ import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
 
 import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
 
-import android.annotation.Nullable;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -38,6 +37,7 @@ import android.os.Looper;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;

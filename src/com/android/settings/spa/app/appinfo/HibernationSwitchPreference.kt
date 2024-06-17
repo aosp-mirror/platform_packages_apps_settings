@@ -22,8 +22,9 @@ import android.app.AppOpsManager.MODE_IGNORED
 import android.app.AppOpsManager.OP_AUTO_REVOKE_PERMISSIONS_IF_UNUSED
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.Flags
+import android.content.pm.Flags as PmFlags
 import android.os.Build
+import android.os.SystemProperties
 import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_EXEMPT_BY_SYSTEM
 import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_UNKNOWN
 import android.provider.DeviceConfig
@@ -36,6 +37,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED
 import com.android.settings.Utils.PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS
+import com.android.settings.flags.Flags
 import com.android.settingslib.spa.framework.compose.OverridableFlow
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
@@ -48,11 +50,15 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
 @Composable
-fun HibernationSwitchPreference(app: ApplicationInfo) {
+fun HibernationSwitchPreference(
+    app: ApplicationInfo,
+    isHibernationSwitchEnabledStateFlow: MutableStateFlow<Boolean>
+) {
     val context = LocalContext.current
     val presenter = remember(app) { HibernationSwitchPresenter(context, app) }
     if (!presenter.isAvailable()) return
@@ -73,14 +79,22 @@ fun HibernationSwitchPreference(app: ApplicationInfo) {
                     context.getString(R.string.unused_apps_switch_summary)
             }
             override val changeable = { isEligibleState }
-            override val checked = { if (changeable()) isCheckedState.value else false }
+            override val checked = {
+                val result = if (changeable()) isCheckedState.value else false
+                result.also { isChecked ->
+                    isChecked?.let {
+                        isHibernationSwitchEnabledStateFlow.value = it
+                    }
+                }
+            }
             override val onCheckedChange = presenter::onCheckedChange
         }
     })
 }
 
 private fun isArchivingEnabled() =
-        Flags.archiving() || "true" == System.getProperty("pm.archiving.enabled")
+        PmFlags.archiving() || SystemProperties.getBoolean("pm.archiving.enabled", false)
+                || Flags.appArchiving()
 
 private class HibernationSwitchPresenter(context: Context, private val app: ApplicationInfo) {
     private val appOpsManager = context.appOpsManager

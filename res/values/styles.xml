@@ -966,6 +966,7 @@
         <item name="android:paddingTop">20dp</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">google-sans-medium</item>
     </style>
 
     <style name="PrivateSpaceSetupBulletPointLayoutStyle">
@@ -987,6 +988,24 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_alignParentTop">true</item>
+    </style>
+
+    <style name="CredentialManagerChangeButton" parent="@style/ActionPrimaryButton">
+        <item name="android:fontFamily">google-sans-medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingHorizontal">24dp</item>
+    </style>
+
+    <style name="CredentialManagerOpenButton"
+        parent="@style/Widget.AppCompat.Button">
+        <item name="android:theme">@style/RoundedCornerThemeOverlay</item>
+        <item name="android:fontFamily">google-sans-medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@null</item>
     </style>
 
 </resources>

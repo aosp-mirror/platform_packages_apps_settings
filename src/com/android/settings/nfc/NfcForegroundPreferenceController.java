@@ -16,6 +16,7 @@ package com.android.settings.nfc;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.permission.flags.Flags;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -68,6 +69,9 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
 
     @Override
     public int getAvailabilityStatus() {
+        if (Flags.walletRoleEnabled()) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         final PackageManager pm = mContext.getPackageManager();
         if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
             return UNSUPPORTED_ON_DEVICE;

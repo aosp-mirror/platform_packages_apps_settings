@@ -114,7 +114,8 @@ public class MobileDataSliceTest {
 
         mMobileDataSlice.onNotifyChange(intent);
 
-        verify(mTelephonyManager).setDataEnabled(true);
+        verify(mTelephonyManager)
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, true);
     }
 
     @Test
@@ -126,7 +127,8 @@ public class MobileDataSliceTest {
 
         mMobileDataSlice.onNotifyChange(intent);
 
-        verify(mTelephonyManager).setDataEnabled(false);
+        verify(mTelephonyManager)
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, false);
     }
 
     @Test
@@ -138,7 +140,8 @@ public class MobileDataSliceTest {
 
         mMobileDataSlice.onNotifyChange(intent);
 
-        verify(mTelephonyManager, times(0)).setDataEnabled(true);
+        verify(mTelephonyManager, times(0))
+                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER, true);
     }
 
     @Test

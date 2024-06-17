@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.credentials;
 
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -26,6 +25,7 @@ import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
+import android.credentials.flags.Flags;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,6 +38,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 
@@ -112,6 +113,18 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             final DefaultCombinedPicker target = (DefaultCombinedPicker) getTargetFragment();
             setCancelListener(target.mCancelListener);
             super.onCreate(savedInstanceState);
+        }
+
+        @Override
+        protected CharSequence getPositiveButtonText() {
+            final Bundle bundle = getArguments();
+            if (TextUtils.isEmpty(bundle.getString(EXTRA_KEY))) {
+                return getContext().getString(
+                    R.string.credman_confirmation_turn_off_positive_button);
+            }
+
+            return getContext().getString(
+                R.string.credman_confirmation_change_provider_positive_button);
         }
     }
 
@@ -305,14 +318,21 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     protected CharSequence getConfirmationMessage(CandidateInfo appInfo) {
         // If we are selecting none then show a warning label.
         if (appInfo == null) {
-            final String message = getContext().getString(R.string.credman_confirmation_message);
+            final String message =
+                    getContext()
+                            .getString(
+                                    Flags.newSettingsUi()
+                                            ? R.string.credman_confirmation_message_new_ui
+                                            : R.string.credman_confirmation_message);
             return Html.fromHtml(message);
         }
         final CharSequence appName = appInfo.loadLabel();
         final String message =
                 getContext()
                         .getString(
-                                R.string.credman_autofill_confirmation_message,
+                                Flags.newSettingsUi()
+                                        ? R.string.credman_autofill_confirmation_message_new_ui
+                                        : R.string.credman_autofill_confirmation_message,
                                 Html.escapeHtml(appName));
         return Html.fromHtml(message);
     }

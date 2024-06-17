@@ -65,6 +65,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     private static final String SPINNER_PREFERENCE_KEY = "battery_usage_spinner";
     private static final String APP_LIST_PREFERENCE_KEY = "app_list";
     private static final String PACKAGE_NAME_NONE = "none";
+    private static final String SLOT_TIMESTAMP = "slot_timestamp";
+    private static final String ANOMALY_KEY = "anomaly_key";
     private static final List<BatteryDiffEntry> EMPTY_ENTRY_LIST = new ArrayList<>();
 
     private static int sUiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
@@ -77,7 +79,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting final Map<String, Preference> mPreferenceCache = new ArrayMap<>();
 
     private int mSpinnerPosition;
-    private String mSlotTimestamp;
+    private String mSlotInformation;
 
     @VisibleForTesting Context mPrefContext;
     @VisibleForTesting PreferenceCategory mRootPreference;
@@ -87,7 +89,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting BatteryDiffData mBatteryDiffData;
     @VisibleForTesting String mPercentLessThanThresholdText;
     @VisibleForTesting boolean mIsHighlightSlot;
-    @VisibleForTesting String mAnomalyEventId;
+    @VisibleForTesting int mAnomalyKeyNumber;
     @VisibleForTesting String mAnomalyEntryKey;
     @VisibleForTesting String mAnomalyHintString;
     @VisibleForTesting String mAnomalyHintPrefKey;
@@ -142,12 +144,25 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                 && mAnomalyEntryKey.equals(entry.getKey());
     }
 
-    private String getActionKey(BatteryDiffEntry entry) {
-        final String actionKey =
+    private void logPreferenceClickedMetrics(BatteryDiffEntry entry) {
+        final int attribution = SettingsEnums.OPEN_BATTERY_USAGE;
+        final int action = entry.isSystemEntry()
+                ? SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM
+                : SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM;
+        final int pageId = SettingsEnums.OPEN_BATTERY_USAGE;
+        final String packageName =
                 TextUtils.isEmpty(entry.getPackageName())
                         ? PACKAGE_NAME_NONE
                         : entry.getPackageName();
-        return !isAnomalyBatteryDiffEntry(entry) ? actionKey : actionKey + "|" + mAnomalyEventId;
+        final int percentage = (int) Math.round(entry.getPercentage());
+        final int slotTimestamp = (int) (mBatteryDiffData.getStartTimestamp() / 1000);
+        mMetricsFeatureProvider.action(attribution, action, pageId, packageName, percentage);
+        mMetricsFeatureProvider.action(attribution, action, pageId, SLOT_TIMESTAMP, slotTimestamp);
+
+        if (isAnomalyBatteryDiffEntry(entry)) {
+            mMetricsFeatureProvider.action(
+                    attribution, action, pageId, ANOMALY_KEY, mAnomalyKeyNumber);
+        }
     }
 
     @Override
@@ -157,14 +172,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         }
         final PowerGaugePreference powerPref = (PowerGaugePreference) preference;
         final BatteryDiffEntry diffEntry = powerPref.getBatteryDiffEntry();
-        mMetricsFeatureProvider.action(
-                /* attribution */ SettingsEnums.OPEN_BATTERY_USAGE,
-                /* action */ diffEntry.isSystemEntry()
-                        ? SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM
-                        : SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
-                /* pageId */ SettingsEnums.OPEN_BATTERY_USAGE,
-                getActionKey(diffEntry),
-                (int) Math.round(diffEntry.getPercentage()));
+        logPreferenceClickedMetrics(diffEntry);
         Log.d(
                 TAG,
                 String.format(
@@ -179,7 +187,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                 mFragment.getMetricsCategory(),
                 diffEntry,
                 powerPref.getPercentage(),
-                mSlotTimestamp,
+                mSlotInformation,
                 /* showTimeInformation= */ true,
                 anomalyHintPrefKey,
                 anomalyHintText);
@@ -245,13 +253,14 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
             boolean isHighlightSlot,
             Optional<AnomalyEventWrapper> optionalAnomalyEventWrapper) {
         mBatteryDiffData = slotUsageData;
-        mSlotTimestamp = slotTimestamp;
+        mSlotInformation = slotTimestamp;
         mIsHighlightSlot = isHighlightSlot;
 
         if (optionalAnomalyEventWrapper != null) {
             final AnomalyEventWrapper anomalyEventWrapper =
                     optionalAnomalyEventWrapper.orElse(null);
-            mAnomalyEventId = anomalyEventWrapper != null ? anomalyEventWrapper.getEventId() : null;
+            mAnomalyKeyNumber =
+                    anomalyEventWrapper != null ? anomalyEventWrapper.getAnomalyKeyNumber() : -1;
             mAnomalyEntryKey =
                     anomalyEventWrapper != null ? anomalyEventWrapper.getAnomalyEntryKey() : null;
             mAnomalyHintString =

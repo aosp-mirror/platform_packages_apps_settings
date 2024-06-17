@@ -25,8 +25,8 @@ import kotlinx.coroutines.flow.transformLatest
 import kotlinx.coroutines.flow.update
 
 /**
- * This class is a wrapper around the [FingerprintEnrollViewModel] and decides when
- * the user should or should not be enrolling.
+ * This class is a wrapper around the [FingerprintEnrollViewModel] and decides when the user should
+ * or should not be enrolling.
  */
 class FingerprintEnrollEnrollingViewModel(
   private val fingerprintEnrollViewModel: FingerprintEnrollViewModel,
@@ -72,12 +72,10 @@ class FingerprintEnrollEnrollingViewModel(
 
   class FingerprintEnrollEnrollingViewModelFactory(
     private val fingerprintEnrollViewModel: FingerprintEnrollViewModel,
-    private val backgroundViewModel: BackgroundViewModel
+    private val backgroundViewModel: BackgroundViewModel,
   ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(
-      modelClass: Class<T>,
-    ): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
       return FingerprintEnrollEnrollingViewModel(fingerprintEnrollViewModel, backgroundViewModel)
         as T
     }

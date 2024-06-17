@@ -23,42 +23,28 @@
     <com.android.settings.slices.SlicePreference
         android:key="bt_nearby_slice"
         android:title="@string/summary_placeholder"
-        settings:controller="com.android.settings.slices.SlicePreferenceController"
-        settings:allowDividerBelow="true"/>
-
-    <PreferenceCategory
-        android:key="audio_sharing_device_list"
-        android:title="@string/audio_sharing_title"
-        settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingDevicePreferenceController">
-        <Preference
-            android:fragment="com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment"
-            android:key="connected_device_audio_sharing_settings"
-            android:title="@string/audio_sharing_title"
-            android:icon="@drawable/ic_bt_audio_sharing"
-            android:order="10"
-            settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPreferenceController"/>
-    </PreferenceCategory>
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.slices.SlicePreferenceController" />
 
     <PreferenceCategory
         android:key="available_device_list"
-        android:title="@string/connected_device_media_device_title"
-        settings:controller="com.android.settings.connecteddevice.AvailableMediaDeviceGroupController"/>
+        android:title="@string/connected_device_media_device_title"/>
 
     <PreferenceCategory
         android:key="connected_device_list"
         android:title="@string/connected_device_other_device_title"
-        settings:controller="com.android.settings.connecteddevice.ConnectedDeviceGroupController"/>
+        settings:controller="com.android.settings.connecteddevice.ConnectedDeviceGroupController" />
 
     <com.android.settingslib.RestrictedPreference
-        android:key="add_bt_devices"
-        android:title="@string/bluetooth_pairing_pref_title"
-        android:icon="@drawable/ic_add_24dp"
-        android:summary="@string/connected_device_add_device_summary"
         android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
+        android:icon="@drawable/ic_add_24dp"
+        android:key="add_bt_devices"
+        android:summary="@string/connected_device_add_device_summary"
+        android:title="@string/bluetooth_pairing_pref_title"
+        settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"
         settings:keywords="@string/keywords_add_bt_device"
-        settings:userRestriction="no_config_bluetooth"
         settings:useAdminDisabledSummary="true"
-        settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
+        settings:userRestriction="no_config_bluetooth" />
 
     <PreferenceCategory
         android:key="previously_connected_devices"
@@ -66,12 +52,12 @@
         settings:controller="com.android.settings.connecteddevice.PreviouslyConnectedDevicePreferenceController">
 
         <Preference
-            android:key="previously_connected_devices_see_all"
-            android:title="@string/previous_connected_see_all"
+            android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"
             android:icon="@drawable/ic_chevron_right_24dp"
+            android:key="previously_connected_devices_see_all"
             android:order="10"
-            settings:searchable="false"
-            android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"/>
+            android:title="@string/previous_connected_see_all"
+            settings:searchable="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -81,27 +67,27 @@
             "com.android.settings.connecteddevice.fastpair.FastPairDevicePreferenceController">
 
         <Preference
-            android:key="fast_pair_devices_see_all"
-            android:title="@string/connected_device_fast_pair_device_see_all"
-            android:icon="@drawable/ic_chevron_right_24dp"
-            android:order="10"
-            settings:searchable="false"
             android:fragment=
-                "com.android.settings.connecteddevice.fastpair.FastPairDeviceDashboardFragment"/>
+                "com.android.settings.connecteddevice.fastpair.FastPairDeviceDashboardFragment"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:key="fast_pair_devices_see_all"
+            android:order="10"
+            android:title="@string/connected_device_fast_pair_device_see_all"
+            settings:searchable="false" />
     </PreferenceCategory>
 
     <Preference
-        android:key="connection_preferences"
-        android:title="@string/connected_device_connections_title"
-        android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"
+        android:key="connection_preferences"
+        android:summary="@string/summary_placeholder"
+        android:title="@string/connected_device_connections_title"
         settings:allowDividerAbove="true"
-        settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController"/>
+        settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="discoverable_footer"
-        android:title="@string/bluetooth_off_footer"
         android:selectable="false"
+        android:title="@string/bluetooth_off_footer"
         settings:controller="com.android.settings.connecteddevice.DiscoverableFooterPreferenceController">
     </com.android.settingslib.widget.FooterPreference>
 

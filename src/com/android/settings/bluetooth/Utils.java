@@ -37,12 +37,16 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
+import com.android.settingslib.utils.ThreadUtils;
+
+import com.google.common.base.Supplier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -271,5 +275,23 @@ public final class Utils {
                 + " , cachedBluetoothDevice = " + cachedBluetoothDevice
                 + " , deviceList = " + cachedBluetoothDevices);
         return cachedBluetoothDevices;
+    }
+
+    /**
+     * Preloads the values and run the Runnable afterwards.
+     * @param suppliers the value supplier, should be a memoized supplier
+     * @param runnable the runnable to be run after value is preloaded
+     */
+    public static void preloadAndRun(List<Supplier<?>> suppliers, Runnable runnable) {
+        if (!Flags.enableOffloadBluetoothOperationsToBackgroundThread()) {
+            runnable.run();
+            return;
+        }
+        ThreadUtils.postOnBackgroundThread(() -> {
+            for (Supplier<?> supplier : suppliers) {
+                supplier.get();
+            }
+            ThreadUtils.postOnMainThread(runnable);
+        });
     }
 }

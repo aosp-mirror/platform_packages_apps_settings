@@ -73,7 +73,19 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
 
     @Override
     public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-        return null;
+        final List<SearchIndexableRaw> raws = new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
+        if (controllers == null || controllers.isEmpty()) {
+            return raws;
+        }
+        for (AbstractPreferenceController controller : controllers) {
+            if (controller instanceof PreferenceControllerMixin) {
+                ((PreferenceControllerMixin) controller).updateRawDataToIndex(raws);
+            } else if (controller instanceof BasePreferenceController) {
+                ((BasePreferenceController) controller).updateRawDataToIndex(raws);
+            }
+        }
+        return raws;
     }
 
     @Override

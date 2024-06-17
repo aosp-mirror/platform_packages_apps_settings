@@ -17,32 +17,29 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.data.ApnSetting
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.PreferenceScreen
-import com.android.settings.network.MobileDataContentObserver
+import com.android.settings.network.mobileDataEnabledFlow
+import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
+import kotlinx.coroutines.flow.combine
 
 /**
  * Preference controller for "MMS messages"
  */
-class MmsMessagePreferenceController(context: Context, key: String) :
-    TelephonyTogglePreferenceController(context, key), DefaultLifecycleObserver {
+class MmsMessagePreferenceController @JvmOverloads constructor(
+    context: Context,
+    key: String,
+    private val getDefaultDataSubId: () -> Int = {
+        SubscriptionManager.getDefaultDataSubscriptionId()
+    },
+) : TelephonyTogglePreferenceController(context, key) {
 
     private lateinit var telephonyManager: TelephonyManager
 
     private var preferenceScreen: PreferenceScreen? = null
-
-    private val mobileDataContentObserver =
-        MobileDataContentObserver(Handler(Looper.getMainLooper())).apply {
-            setOnMobileDataChangedListener {
-                preferenceScreen?.let { super.displayPreference(it) }
-            }
-        }
 
     fun init(subId: Int) {
         mSubId = subId
@@ -53,24 +50,31 @@ class MmsMessagePreferenceController(context: Context, key: String) :
     override fun getAvailabilityStatus(subId: Int) =
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID &&
             !telephonyManager.isDataEnabled &&
-            telephonyManager.isApnMetered(ApnSetting.TYPE_MMS)
+            telephonyManager.isApnMetered(ApnSetting.TYPE_MMS) &&
+            !isFallbackDataEnabled()
         ) AVAILABLE else CONDITIONALLY_UNAVAILABLE
 
-    override fun onStart(owner: LifecycleOwner) {
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            mobileDataContentObserver.register(mContext, mSubId)
-        }
-    }
-
-    override fun onStop(owner: LifecycleOwner) {
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            mobileDataContentObserver.unRegister(mContext)
-        }
+    private fun isFallbackDataEnabled(): Boolean {
+        val defaultDataSubId = getDefaultDataSubId()
+        return defaultDataSubId != mSubId &&
+            telephonyManager.createForSubscriptionId(defaultDataSubId).isDataEnabled &&
+            telephonyManager.isMobileDataPolicyEnabled(
+                TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH
+            )
     }
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preferenceScreen = screen
+    }
+
+    override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        combine(
+            mContext.mobileDataEnabledFlow(mSubId),
+            mContext.subscriptionsChangedFlow(), // Capture isMobileDataPolicyEnabled() changes
+        ) { _, _ -> }.collectLatestWithLifecycle(viewLifecycleOwner) {
+            preferenceScreen?.let { super.displayPreference(it) }
+        }
     }
 
     override fun isChecked(): Boolean = telephonyManager.isMobileDataPolicyEnabled(

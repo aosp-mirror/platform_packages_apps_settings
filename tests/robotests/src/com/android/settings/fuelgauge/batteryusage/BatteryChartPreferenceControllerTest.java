@@ -384,6 +384,8 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(null);
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 100% to 66%");
     }
 
     @Test
@@ -393,6 +395,8 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(null);
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 100% to 66%");
     }
 
     @Test
@@ -402,6 +406,8 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo("Sunday");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 83% to 59%");
     }
 
     @Test
@@ -412,6 +418,8 @@ public final class BatteryChartPreferenceControllerTest {
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation())
                 .isEqualTo("10 AM - 12 PM");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 97% to 95%");
     }
 
     @Test
@@ -422,6 +430,8 @@ public final class BatteryChartPreferenceControllerTest {
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation())
                 .isEqualTo("Sunday 4 PM - 6 PM");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 67% to 65%");
     }
 
     @Test
@@ -432,6 +442,8 @@ public final class BatteryChartPreferenceControllerTest {
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation())
                 .isEqualTo("7:01 AM - 8 AM");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 100% to 99%");
     }
 
     @Test
@@ -441,6 +453,8 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = 3;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo("12 PM - now");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 95% to 66%");
     }
 
     @Test
@@ -451,6 +465,8 @@ public final class BatteryChartPreferenceControllerTest {
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation())
                 .isEqualTo("7:01 AM - now");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 100% to 66%");
     }
 
     @Test

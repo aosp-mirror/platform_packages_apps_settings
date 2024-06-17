@@ -183,10 +183,8 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
 
     @Override
     public void onAclConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
-        if (DBG) {
-            Log.d(getLogTag(), "onAclConnectionStateChanged() device: " + cachedDevice.getName()
-                    + ", state: " + state);
-        }
+        Log.d(getLogTag(), "onAclConnectionStateChanged() device: " + cachedDevice.getName()
+                + ", state: " + state);
         update(cachedDevice);
     }
 
