@@ -139,8 +139,10 @@ public class AudioStreamsHelper {
                 .toList();
     }
 
+    /** Retrieves LocalBluetoothLeBroadcastAssistant. */
+    @VisibleForTesting
     @Nullable
-    LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
+    public LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
         return mLeBroadcastAssistant;
     }
 

@@ -30,6 +30,7 @@
         android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/sud_layout_icon_container"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -37,8 +38,6 @@
             android:id="@+id/lottie_animation"
             style="@style/SudContentIllustration"
             android:layout_width="match_parent"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
             android:layout_height="match_parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
@@ -80,6 +79,23 @@
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
                 android:layout_toRightOf="@+id/appsIcon"
                 android:text="@string/private_space_install_apps_text"/>
+        </RelativeLayout>
+        <TextView
+            style="@style/PrivateSpaceSetupSubHeaderStyle"
+            android:text="@string/private_space_keep_in_mind_text"/>
+        <RelativeLayout
+            style="@style/PrivateSpaceSetupBulletPointLayoutStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/eduIcon"
+                style="@style/PrivateSpaceBulletPointIconStyle"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_private_space_edu_icon" />
+            <TextView
+                style="@style/PrivateSpaceBulletPointTextFontStyle"
+                android:layout_toRightOf="@+id/eduIcon"
+                android:text="@string/private_space_apps_stopped_text"/>
         </RelativeLayout>
         <Space
             android:layout_width="wrap_content"

@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
@@ -29,24 +30,27 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -56,6 +60,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -91,14 +96,15 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     @Nullable private final LocalBluetoothProfileManager mProfileManager;
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
-    @Nullable private DashboardFragment mFragment;
+    @Nullable private Fragment mFragment;
     private final Executor mExecutor;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final OnAudioSharingStateChangedListener mListener;
     private Map<Integer, List<CachedBluetoothDevice>> mGroupedConnectedDevices = new HashMap<>();
     private List<BluetoothDevice> mTargetActiveSinks = new ArrayList<>();
     private List<AudioSharingDeviceItem> mDeviceItemsForSharing = new ArrayList<>();
     @VisibleForTesting IntentFilter mIntentFilter;
-    private AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
+    private final AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
 
     @VisibleForTesting
     BroadcastReceiver mReceiver =
@@ -110,7 +116,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 }
             };
 
-    private final BluetoothLeBroadcast.Callback mBroadcastCallback =
+    @VisibleForTesting
+    final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastStarted(int reason, int broadcastId) {
@@ -182,7 +189,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 public void onPlaybackStopped(int reason, int broadcastId) {}
             };
 
-    private BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+    private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
                 @Override
                 public void onSearchStarted(int reason) {}
@@ -251,9 +258,9 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
                 @Override
                 public void onReceiveStateChanged(
-                        BluetoothDevice sink,
+                        @NonNull BluetoothDevice sink,
                         int sourceId,
-                        BluetoothLeBroadcastReceiveState state) {}
+                        @NonNull BluetoothLeBroadcastReceiveState state) {}
             };
 
     AudioSharingSwitchBarController(
@@ -273,6 +280,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                         ? null
                         : mProfileManager.getLeAudioBroadcastAssistantProfile();
         mExecutor = Executors.newSingleThreadExecutor();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -378,13 +386,13 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
      *
      * @param fragment The fragment to host the {@link AudioSharingSwitchBarController} dialog.
      */
-    public void init(DashboardFragment fragment) {
+    public void init(@NonNull Fragment fragment) {
         this.mFragment = fragment;
     }
 
     /** Test only: set callback registration status in tests. */
     @VisibleForTesting
-    public void setCallbacksRegistered(boolean registered) {
+    void setCallbacksRegistered(boolean registered) {
         mCallbacksRegistered.set(registered);
     }
 
@@ -494,34 +502,58 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     }
 
     private void handleOnBroadcastReady() {
-        AudioSharingUtils.addSourceToTargetSinks(mTargetActiveSinks, mBtManager);
-        mTargetActiveSinks.clear();
+        Pair<Integer, Object>[] eventData =
+                AudioSharingUtils.buildAudioSharingDialogEventData(
+                        SettingsEnums.AUDIO_SHARING_SETTINGS,
+                        SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE,
+                        /* userTriggered= */ false,
+                        /* deviceCountInSharing= */ mTargetActiveSinks.isEmpty() ? 0 : 1,
+                        /* candidateDeviceCount= */ mDeviceItemsForSharing.size());
+        if (!mTargetActiveSinks.isEmpty()) {
+            Log.d(TAG, "handleOnBroadcastReady: automatically add source to active sinks.");
+            AudioSharingUtils.addSourceToTargetSinks(mTargetActiveSinks, mBtManager);
+            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING);
+            mTargetActiveSinks.clear();
+        }
         if (mFragment == null) {
-            Log.w(TAG, "Dialog fail to show due to null fragment.");
+            Log.d(TAG, "handleOnBroadcastReady: dialog fail to show due to null fragment.");
             mGroupedConnectedDevices.clear();
             mDeviceItemsForSharing.clear();
             return;
         }
+        showDialog(eventData);
+    }
+
+    private void showDialog(Pair<Integer, Object>[] eventData) {
+        AudioSharingDialogFragment.DialogEventListener listener =
+                new AudioSharingDialogFragment.DialogEventListener() {
+                    @Override
+                    public void onItemClick(@NonNull AudioSharingDeviceItem item) {
+                        AudioSharingUtils.addSourceToTargetSinks(
+                                mGroupedConnectedDevices
+                                        .getOrDefault(item.getGroupId(), ImmutableList.of())
+                                        .stream()
+                                        .map(CachedBluetoothDevice::getDevice)
+                                        .filter(Objects::nonNull)
+                                        .collect(Collectors.toList()),
+                                mBtManager);
+                        mGroupedConnectedDevices.clear();
+                        mDeviceItemsForSharing.clear();
+                    }
+
+                    @Override
+                    public void onCancelClick() {
+                        mGroupedConnectedDevices.clear();
+                        mDeviceItemsForSharing.clear();
+                    }
+                };
         AudioSharingUtils.postOnMainThread(
                 mContext,
                 () -> {
                     // Check nullability to pass NullAway check
                     if (mFragment != null) {
                         AudioSharingDialogFragment.show(
-                                mFragment,
-                                mDeviceItemsForSharing,
-                                item -> {
-                                    AudioSharingUtils.addSourceToTargetSinks(
-                                            mGroupedConnectedDevices
-                                                    .getOrDefault(
-                                                            item.getGroupId(), ImmutableList.of())
-                                                    .stream()
-                                                    .map(CachedBluetoothDevice::getDevice)
-                                                    .collect(Collectors.toList()),
-                                            mBtManager);
-                                    mGroupedConnectedDevices.clear();
-                                    mDeviceItemsForSharing.clear();
-                                });
+                                mFragment, mDeviceItemsForSharing, listener, eventData);
                     }
                 });
     }

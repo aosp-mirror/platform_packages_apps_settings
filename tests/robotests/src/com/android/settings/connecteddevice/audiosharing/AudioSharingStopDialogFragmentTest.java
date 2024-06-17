@@ -18,13 +18,21 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothStatusCodes;
+import android.content.Context;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.util.Pair;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -32,6 +40,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -39,6 +48,7 @@ import com.android.settingslib.flags.Flags;
 
 import com.google.common.collect.ImmutableList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -76,28 +86,31 @@ public class AudioSharingStopDialogFragmentTest {
     private static final AudioSharingDeviceItem TEST_DEVICE_ITEM3 =
             new AudioSharingDeviceItem(
                     TEST_DEVICE_NAME3, TEST_DEVICE_GROUP_ID3, /* isActive= */ false);
+    private static final AudioSharingStopDialogFragment.DialogEventListener EMPTY_EVENT_LISTENER =
+            () -> {};
+    private static final Pair<Integer, Object> TEST_EVENT_DATA = Pair.create(1, 1);
+    private static final Pair<Integer, Object>[] TEST_EVENT_DATA_LIST =
+            new Pair[] {TEST_EVENT_DATA};
 
     @Mock private CachedBluetoothDevice mCachedDevice1;
     @Mock private CachedBluetoothDevice mCachedDevice2;
     @Mock private BluetoothDevice mDevice1;
     @Mock private BluetoothDevice mDevice2;
+    private FakeFeatureFactory mFeatureFactory;
     private Fragment mParent;
     private AudioSharingStopDialogFragment mFragment;
-    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() {
-        AlertDialog latestAlertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        if (latestAlertDialog != null) {
-            latestAlertDialog.dismiss();
-            ShadowAlertDialogCompat.reset();
-        }
-        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
-        mShadowBluetoothAdapter.setEnabled(true);
-        mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
+        ShadowAlertDialogCompat.reset();
+        ShadowBluetoothAdapter shadowBluetoothAdapter =
+                Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+        shadowBluetoothAdapter.setEnabled(true);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
-        mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
+        shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mCachedDevice1.getName()).thenReturn(TEST_DEVICE_NAME1);
         when(mCachedDevice1.getGroupId()).thenReturn(TEST_DEVICE_GROUP_ID1);
         when(mCachedDevice1.getDevice()).thenReturn(mDevice1);
@@ -110,10 +123,26 @@ public class AudioSharingStopDialogFragmentTest {
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
     }
 
+    @After
+    public void tearDown() {
+        ShadowAlertDialogCompat.reset();
+    }
+
+    @Test
+    public void getMetricsCategory_correctValue() {
+        assertThat(mFragment.getMetricsCategory())
+                .isEqualTo(SettingsEnums.DIALOG_STOP_AUDIO_SHARING);
+    }
+
     @Test
     public void onCreateDialog_flagOff_dialogNotExist() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        mFragment.show(mParent, ImmutableList.of(), mCachedDevice1, () -> {});
+        AudioSharingStopDialogFragment.show(
+                mParent,
+                ImmutableList.of(),
+                mCachedDevice1,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
@@ -122,12 +151,18 @@ public class AudioSharingStopDialogFragmentTest {
     @Test
     public void onCreateDialog_oneDeviceInSharing_showDialogWithCorrectMessage() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        mFragment.show(mParent, ImmutableList.of(TEST_DEVICE_ITEM2), mCachedDevice1, () -> {});
+        AudioSharingStopDialogFragment.show(
+                mParent,
+                ImmutableList.of(TEST_DEVICE_ITEM2),
+                mCachedDevice1,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
         TextView view = dialog.findViewById(R.id.description_text);
+        assertThat(view).isNotNull();
         assertThat(view.getText().toString())
                 .isEqualTo(
                         mParent.getString(
@@ -137,16 +172,18 @@ public class AudioSharingStopDialogFragmentTest {
     @Test
     public void onCreateDialog_twoDeviceInSharing_showDialogWithCorrectMessage() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        mFragment.show(
+        AudioSharingStopDialogFragment.show(
                 mParent,
                 ImmutableList.of(TEST_DEVICE_ITEM2, TEST_DEVICE_ITEM3),
                 mCachedDevice1,
-                () -> {});
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
         TextView view = dialog.findViewById(R.id.description_text);
+        assertThat(view).isNotNull();
         assertThat(view.getText().toString())
                 .isEqualTo(
                         mParent.getString(
@@ -158,57 +195,99 @@ public class AudioSharingStopDialogFragmentTest {
     @Test
     public void onCreateDialog_dialogIsShowingForSameDevice_updateDialog() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        mFragment.show(mParent, ImmutableList.of(), mCachedDevice1, () -> {});
+        AudioSharingStopDialogFragment.show(
+                mParent,
+                ImmutableList.of(),
+                mCachedDevice1,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
         TextView view = dialog.findViewById(R.id.description_text);
+        assertThat(view).isNotNull();
         assertThat(view.getText().toString())
                 .isEqualTo(mParent.getString(R.string.audio_sharing_stop_dialog_with_more_content));
 
         // Update the content
         AtomicBoolean isStopBtnClicked = new AtomicBoolean(false);
-        mFragment.show(
-                mParent, ImmutableList.of(), mCachedDevice1, () -> isStopBtnClicked.set(true));
+        AudioSharingStopDialogFragment.show(
+                mParent,
+                ImmutableList.of(),
+                mCachedDevice1,
+                () -> isStopBtnClicked.set(true),
+                TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
         dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
+        verify(mFeatureFactory.metricsFeatureProvider, times(0))
+                .action(
+                        any(Context.class),
+                        eq(SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS),
+                        eq(SettingsEnums.DIALOG_STOP_AUDIO_SHARING));
 
-        dialog.findViewById(android.R.id.button1).performClick();
+        View btnView = dialog.findViewById(android.R.id.button1);
+        assertThat(btnView).isNotNull();
+        btnView.performClick();
         shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
         assertThat(isStopBtnClicked.get()).isTrue();
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        any(Context.class),
+                        eq(SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_POSITIVE_BTN_CLICKED),
+                        eq(TEST_EVENT_DATA));
     }
 
     @Test
     public void onCreateDialog_dialogIsShowingForNewDevice_showNewDialog() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        mFragment.show(mParent, ImmutableList.of(), mCachedDevice1, () -> {});
+        AudioSharingStopDialogFragment.show(
+                mParent,
+                ImmutableList.of(),
+                mCachedDevice1,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
         TextView view = dialog.findViewById(R.id.description_text);
+        assertThat(view).isNotNull();
         assertThat(view.getText().toString())
                 .isEqualTo(mParent.getString(R.string.audio_sharing_stop_dialog_with_more_content));
         TextView title = dialog.findViewById(R.id.title_text);
+        assertThat(title).isNotNull();
         assertThat(title.getText().toString())
                 .isEqualTo(
                         mParent.getString(
                                 R.string.audio_sharing_stop_dialog_title, TEST_DEVICE_NAME1));
 
         // Show new dialog
-        mFragment.show(mParent, ImmutableList.of(), mCachedDevice2, () -> {});
+        AudioSharingStopDialogFragment.show(
+                mParent,
+                ImmutableList.of(),
+                mCachedDevice2,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
         dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        any(Context.class),
+                        eq(SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS),
+                        eq(SettingsEnums.DIALOG_STOP_AUDIO_SHARING));
+
         view = dialog.findViewById(R.id.description_text);
+        assertThat(view).isNotNull();
         assertThat(view.getText().toString())
                 .isEqualTo(mParent.getString(R.string.audio_sharing_stop_dialog_with_more_content));
         title = dialog.findViewById(R.id.title_text);
+        assertThat(title).isNotNull();
         assertThat(title.getText().toString())
                 .isEqualTo(
                         mParent.getString(
@@ -218,25 +297,60 @@ public class AudioSharingStopDialogFragmentTest {
     @Test
     public void onCreateDialog_clickCancel_dialogDismiss() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        mFragment.show(mParent, ImmutableList.of(), mCachedDevice1, () -> {});
+        AudioSharingStopDialogFragment.show(
+                mParent,
+                ImmutableList.of(),
+                mCachedDevice1,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        dialog.findViewById(android.R.id.button2).performClick();
+        assertThat(dialog).isNotNull();
+        View btnView = dialog.findViewById(android.R.id.button2);
+        assertThat(btnView).isNotNull();
+        btnView.performClick();
         shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
+        verify(mFeatureFactory.metricsFeatureProvider, times(0))
+                .action(
+                        any(Context.class),
+                        eq(SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS),
+                        eq(SettingsEnums.DIALOG_STOP_AUDIO_SHARING));
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        any(Context.class),
+                        eq(SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_NEGATIVE_BTN_CLICKED),
+                        eq(TEST_EVENT_DATA));
     }
 
     @Test
     public void onCreateDialog_clickShare_callbackTriggered() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         AtomicBoolean isStopBtnClicked = new AtomicBoolean(false);
-        mFragment.show(
-                mParent, ImmutableList.of(), mCachedDevice1, () -> isStopBtnClicked.set(true));
+        AudioSharingStopDialogFragment.show(
+                mParent,
+                ImmutableList.of(),
+                mCachedDevice1,
+                () -> isStopBtnClicked.set(true),
+                TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        dialog.findViewById(android.R.id.button1).performClick();
+        assertThat(dialog).isNotNull();
+        View btnView = dialog.findViewById(android.R.id.button1);
+        assertThat(btnView).isNotNull();
+        btnView.performClick();
         shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
         assertThat(isStopBtnClicked.get()).isTrue();
+        verify(mFeatureFactory.metricsFeatureProvider, times(0))
+                .action(
+                        any(Context.class),
+                        eq(SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS),
+                        eq(SettingsEnums.DIALOG_STOP_AUDIO_SHARING));
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        any(Context.class),
+                        eq(SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_POSITIVE_BTN_CLICKED),
+                        eq(TEST_EVENT_DATA));
     }
 }

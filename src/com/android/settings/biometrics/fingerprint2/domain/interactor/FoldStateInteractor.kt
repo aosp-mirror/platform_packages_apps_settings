@@ -25,34 +25,30 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
 interface FoldStateInteractor {
-    /** A flow that contains the fold state info */
-    val isFolded: Flow<Boolean>
+  /** A flow that contains the fold state info */
+  val isFolded: Flow<Boolean>
 
-    /**
-     * Indicates a configuration change has occurred, and the repo
-     * should update the [isFolded] flow.
-     */
-    fun onConfigurationChange(newConfig: Configuration)
+  /**
+   * Indicates a configuration change has occurred, and the repo should update the [isFolded] flow.
+   */
+  fun onConfigurationChange(newConfig: Configuration)
 }
 
-/**
- * Interactor which handles fold state
- */
+/** Interactor which handles fold state */
 class FoldStateInteractorImpl(context: Context) : FoldStateInteractor {
-    private val screenSizeFoldProvider = ScreenSizeFoldProvider(context)
-    override val isFolded: Flow<Boolean> = callbackFlow {
-        val foldStateListener = FoldProvider.FoldCallback { isFolded -> trySend(isFolded) }
-        screenSizeFoldProvider.registerCallback(foldStateListener, context.mainExecutor)
-        awaitClose { screenSizeFoldProvider.unregisterCallback(foldStateListener) }
-    }
+  private val screenSizeFoldProvider = ScreenSizeFoldProvider(context)
+  override val isFolded: Flow<Boolean> = callbackFlow {
+    val foldStateListener = FoldProvider.FoldCallback { isFolded -> trySend(isFolded) }
+    screenSizeFoldProvider.registerCallback(foldStateListener, context.mainExecutor)
+    awaitClose { screenSizeFoldProvider.unregisterCallback(foldStateListener) }
+  }
 
-    /**
-     * This function is called by the root activity, indicating an orientation event has occurred.
-     * When this happens, the [ScreenSizeFoldProvider] is notified and it will re-compute if the
-     * device is folded or not, and notify the [FoldProvider.FoldCallback]
-     */
-    override fun onConfigurationChange(newConfig: Configuration) {
-        screenSizeFoldProvider.onConfigurationChange(newConfig)
-    }
-
+  /**
+   * This function is called by the root activity, indicating an orientation event has occurred.
+   * When this happens, the [ScreenSizeFoldProvider] is notified and it will re-compute if the
+   * device is folded or not, and notify the [FoldProvider.FoldCallback]
+   */
+  override fun onConfigurationChange(newConfig: Configuration) {
+    screenSizeFoldProvider.onConfigurationChange(newConfig)
+  }
 }

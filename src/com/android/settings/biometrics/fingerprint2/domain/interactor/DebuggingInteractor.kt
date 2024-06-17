@@ -28,9 +28,7 @@ interface DebuggingInteractor {
   val udfpsEnrollmentDebuggingEnabled: Flow<Boolean>
 }
 
-/**
- * This interactor essentially forwards the [DebuggingRepository]
- */
+/** This interactor essentially forwards the [DebuggingRepository] */
 class DebuggingInteractorImpl(val debuggingRepository: DebuggingRepository) : DebuggingInteractor {
   override val debuggingEnabled: Flow<Boolean> = flow {
     emit(debuggingRepository.isDebuggingEnabled())

@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
@@ -41,10 +42,10 @@ public class DesktopModePreferenceController extends DeveloperOptionsPreferenceC
     @VisibleForTesting
     static final int SETTING_VALUE_ON = 1;
 
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
 
     public DesktopModePreferenceController(
-            Context context, DevelopmentSettingsDashboardFragment fragment) {
+            Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
     }

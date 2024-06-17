@@ -17,6 +17,7 @@
 package com.android.settings.notification.modes;
 
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
+import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
 
@@ -52,6 +53,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+
+import java.util.Calendar;
 
 @RunWith(RobolectricTestRunner.class)
 public class ZenModeSetTriggerLinkPreferenceControllerTest {
@@ -166,5 +169,30 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
         assertThat(
                 captor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
                 ZenModeSetCalendarFragment.class.getName());
+    }
+
+    @Test
+    public void testRuleLink_schedule() {
+        ZenModeConfig.ScheduleInfo scheduleInfo = new ZenModeConfig.ScheduleInfo();
+        scheduleInfo.days = new int[] { Calendar.MONDAY, Calendar.TUESDAY, Calendar.THURSDAY };
+        scheduleInfo.startHour = 1;
+        scheduleInfo.endHour = 15;
+        ZenMode mode = new ZenMode("id", new AutomaticZenRule.Builder("name",
+                ZenModeConfig.toScheduleConditionId(scheduleInfo))
+                .setType(TYPE_SCHEDULE_TIME)
+                .setTriggerDescription("some schedule")
+                .build(),
+                true);  // is active
+        mPrefController.updateZenMode(mPrefCategory, mode);
+
+        verify(mPreference).setTitle(R.string.zen_mode_set_schedule_link);
+        verify(mPreference).setSummary(mode.getRule().getTriggerDescription());
+
+        ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        verify(mPreference).setIntent(captor.capture());
+        // Destination as written into the intent by SubSettingLauncher
+        assertThat(
+                captor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
+                ZenModeSetScheduleFragment.class.getName());
     }
 }

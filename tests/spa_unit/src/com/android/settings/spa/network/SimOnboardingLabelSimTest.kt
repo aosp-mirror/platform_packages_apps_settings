@@ -28,6 +28,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -186,7 +188,7 @@ class SimOnboardingLabelSimTest {
     }
 
     @Test
-    fun showDialog_clearContent_showOriginalDisplayName() {
+    fun showDialog_clearContent_saveBtnIsDisabled() {
         preSetupContent()
 
         composeTestRule.setContent {
@@ -196,15 +198,12 @@ class SimOnboardingLabelSimTest {
         composeTestRule.onNodeWithText(DISPLAY_NAME_1).performClick()
         composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT).performTextClearance()
 
-        assertEquals(
-            composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT)
-                .fetchSemanticsNode()
-                .config[SemanticsProperties.EditableText].text, DISPLAY_NAME_1
-        )
+        composeTestRule.onNodeWithText(context.getString(R.string.mobile_network_sim_name_rename))
+            .assertIsNotEnabled()
     }
 
     @Test
-    fun showDialog_modifyContent_showModifiedDisplayName() {
+    fun showDialog_modifyContent_showAndSaveModifiedDisplayName() {
         val inputData = "input_data"
         preSetupContent()
 
@@ -232,7 +231,7 @@ class SimOnboardingLabelSimTest {
     }
 
     @Test
-    fun showDialog_onlySpaceCharContent_showAndSaveOriginalDisplayName() {
+    fun showDialog_onlySpaceCharContent_saveBtnIsDisabled() {
         val spaceChars = "        ";
         preSetupContent()
 
@@ -241,30 +240,12 @@ class SimOnboardingLabelSimTest {
         }
 
         // Simulate real operation,
-        // 1. Click preference of DISPLAY_NAME_1
         composeTestRule.onNodeWithText(DISPLAY_NAME_1).performClick()
-        // 2. Input space chars to EditText view
+        composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT).performTextClearance()
         composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT).performTextInput(spaceChars)
-        // 3. Remove the string of DISPLAY_NAME_1 from EditText view
-        repeat(DISPLAY_NAME_1.length) {
-            composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT)
-                .performKeyPress(KeyEvent(NativeKeyEvent(ACTION_DOWN, KEYCODE_FORWARD_DEL)))
-        }
 
-        // Due to this TextField with Text and EditText, it need fetch correct node to get correct
-        // content.
-        assertEquals(
-            DISPLAY_NAME_1, composeTestRule.onNodeWithTag(TEXT_FIELD_INPUT)
-                .fetchSemanticsNode()
-                .config[SemanticsProperties.EditableText].text
-        )
-
-        // Click save button
         composeTestRule.onNodeWithText(context.getString(R.string.mobile_network_sim_name_rename))
-            .performClick()
-
-        // Check preference's name is still DISPLAY_NAME_1
-        composeTestRule.onNodeWithText(DISPLAY_NAME_1).assertExists()
+            .assertIsNotEnabled()
     }
 
     fun preSetupContent() {

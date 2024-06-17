@@ -70,6 +70,8 @@ data class ApnData(
         Telephony.Carriers.ROAMING_PROTOCOL to context.convertOptions2Protocol(apnRoaming),
         Telephony.Carriers.TYPE to apnType,
         Telephony.Carriers.NETWORK_TYPE_BITMASK to networkType,
+        // Copy network type into lingering network type.
+        Telephony.Carriers.LINGERING_NETWORK_TYPE_BITMASK to networkType,
         Telephony.Carriers.CARRIER_ENABLED to apnEnable,
         Telephony.Carriers.EDITED_STATUS to Telephony.Carriers.USER_EDITED,
     )

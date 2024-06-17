@@ -23,6 +23,7 @@ interface DebuggingRepository {
 
   /** A function that will return if a build is debuggable */
   fun isDebuggingEnabled(): Boolean
+
   /** A function that will return if udfps enrollment should be swapped with debug repos */
   fun isUdfpsEnrollmentDebuggingEnabled(): Boolean
 }

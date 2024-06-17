@@ -63,4 +63,19 @@ public class AudioSharingDeviceItemTest {
     public void creator_newArray() {
         assertThat(AudioSharingDeviceItem.CREATOR.newArray(2)).hasLength(2);
     }
+
+    @Test
+    public void creator_createFromParcel() {
+        AudioSharingDeviceItem item =
+                new AudioSharingDeviceItem(TEST_NAME, TEST_GROUP_ID, TEST_IS_ACTIVE);
+        Parcel parcel = Parcel.obtain();
+        item.writeToParcel(parcel, 0);
+        parcel.setDataPosition(0);
+        AudioSharingDeviceItem itemFromParcel =
+                AudioSharingDeviceItem.CREATOR.createFromParcel(parcel);
+        parcel.recycle();
+        assertThat(itemFromParcel.getName()).isEqualTo(TEST_NAME);
+        assertThat(itemFromParcel.getGroupId()).isEqualTo(TEST_GROUP_ID);
+        assertThat(itemFromParcel.isActive()).isEqualTo(TEST_IS_ACTIVE);
+    }
 }
