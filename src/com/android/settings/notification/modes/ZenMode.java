@@ -18,6 +18,12 @@ package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
+import static android.service.notification.SystemZenRules.getTriggerDescriptionForScheduleEvent;
+import static android.service.notification.SystemZenRules.getTriggerDescriptionForScheduleTime;
+import static android.service.notification.ZenModeConfig.tryParseEventConditionId;
+import static android.service.notification.ZenModeConfig.tryParseScheduleConditionId;
+
+import static com.google.common.base.Preconditions.checkState;
 
 import static java.util.Objects.requireNonNull;
 
@@ -26,7 +32,10 @@ import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.service.notification.SystemZenRules;
 import android.service.notification.ZenDeviceEffects;
+import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
 import android.util.Log;
 
@@ -204,6 +213,44 @@ class ZenMode {
                 : new ZenDeviceEffects.Builder().build();
     }
 
+    public void setCustomModeConditionId(Context context, Uri conditionId) {
+        checkState(SystemZenRules.PACKAGE_ANDROID.equals(mRule.getPackageName()),
+                "Trying to change condition of non-system-owned rule %s (to %s)",
+                mRule, conditionId);
+
+        Uri oldCondition = mRule.getConditionId();
+        mRule.setConditionId(conditionId);
+
+        ZenModeConfig.ScheduleInfo scheduleInfo = tryParseScheduleConditionId(conditionId);
+        if (scheduleInfo != null) {
+            mRule.setType(AutomaticZenRule.TYPE_SCHEDULE_TIME);
+            mRule.setOwner(ZenModeConfig.getScheduleConditionProvider());
+            mRule.setTriggerDescription(
+                    getTriggerDescriptionForScheduleTime(context, scheduleInfo));
+            return;
+        }
+
+        ZenModeConfig.EventInfo eventInfo = tryParseEventConditionId(conditionId);
+        if (eventInfo != null) {
+            mRule.setType(AutomaticZenRule.TYPE_SCHEDULE_CALENDAR);
+            mRule.setOwner(ZenModeConfig.getEventConditionProvider());
+            mRule.setTriggerDescription(getTriggerDescriptionForScheduleEvent(context, eventInfo));
+            return;
+        }
+
+        if (ZenModeConfig.isValidCustomManualConditionId(conditionId)) {
+            mRule.setType(AutomaticZenRule.TYPE_OTHER);
+            mRule.setOwner(ZenModeConfig.getCustomManualConditionProvider());
+            mRule.setTriggerDescription("");
+            return;
+        }
+
+        Log.wtf(TAG, String.format(
+                "Changed condition of rule %s (%s -> %s) but cannot recognize which kind of "
+                        + "condition it was!",
+                mRule, oldCondition, conditionId));
+    }
+
     public boolean canEditName() {
         return !isManualDnd();
     }
@@ -222,6 +269,15 @@ class ZenMode {
 
     public boolean isActive() {
         return mIsActive;
+    }
+
+    public boolean isSystemOwned() {
+        return SystemZenRules.PACKAGE_ANDROID.equals(mRule.getPackageName());
+    }
+
+    @AutomaticZenRule.Type
+    public int getType() {
+        return mRule.getType();
     }
 
     @Override

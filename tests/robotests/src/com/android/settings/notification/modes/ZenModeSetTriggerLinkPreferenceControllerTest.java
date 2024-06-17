@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.modes;
 
+import static android.app.AutomaticZenRule.TYPE_OTHER;
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
@@ -31,10 +32,10 @@ import static org.mockito.Mockito.when;
 import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
 
@@ -43,6 +44,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.PrimarySwitchPreference;
 
 import org.junit.Before;
@@ -57,6 +59,7 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.Calendar;
 
 @RunWith(RobolectricTestRunner.class)
+@EnableFlags(Flags.FLAG_MODES_UI)
 public class ZenModeSetTriggerLinkPreferenceControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
@@ -65,10 +68,13 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
     private ZenModesBackend mBackend;
     private Context mContext;
 
+    private PrimarySwitchPreference mPreference;
+
     @Mock
     private PreferenceCategory mPrefCategory;
     @Mock
-    private PrimarySwitchPreference mPreference;
+    private DashboardFragment mFragment;
+
     private ZenModeSetTriggerLinkPreferenceController mPrefController;
 
     @Before
@@ -77,12 +83,12 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
         mContext = ApplicationProvider.getApplicationContext();
 
         mPrefController = new ZenModeSetTriggerLinkPreferenceController(mContext,
-                "zen_automatic_trigger_category", mBackend);
+                "zen_automatic_trigger_category", mFragment, mBackend);
+        mPreference = new PrimarySwitchPreference(mContext);
         when(mPrefCategory.findPreference(AUTOMATIC_TRIGGER_PREF_KEY)).thenReturn(mPreference);
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
     public void testIsAvailable() {
         // should not be available for manual DND
         ZenMode manualMode = ZenMode.manualDndMode(new AutomaticZenRule.Builder("Do Not Disturb",
@@ -117,12 +123,12 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
 
         // Update preference controller with a zen mode that is not enabled
         mPrefController.updateZenMode(mPrefCategory, zenMode);
-        verify(mPreference).setChecked(false);
+        assertThat(mPreference.getCheckedState()).isFalse();
 
         // Now with the rule enabled
         zenMode.getRule().setEnabled(true);
         mPrefController.updateZenMode(mPrefCategory, zenMode);
-        verify(mPreference).setChecked(true);
+        assertThat(mPreference.getCheckedState()).isTrue();
     }
 
     @Test
@@ -154,21 +160,24 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
         eventInfo.calName = "My events";
         ZenMode mode = new ZenMode("id", new AutomaticZenRule.Builder("name",
                 ZenModeConfig.toEventConditionId(eventInfo))
+                .setPackage(SystemZenRules.PACKAGE_ANDROID)
                 .setType(TYPE_SCHEDULE_CALENDAR)
                 .setTriggerDescription("My events")
                 .build(),
                 true);  // is active
         mPrefController.updateZenMode(mPrefCategory, mode);
 
-        verify(mPreference).setTitle(R.string.zen_mode_set_calendar_link);
-        verify(mPreference).setSummary(mode.getRule().getTriggerDescription());
+        assertThat(mPreference.getTitle()).isNotNull();
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.zen_mode_set_calendar_link));
+        assertThat(mPreference.getSummary()).isNotNull();
+        assertThat(mPreference.getSummary().toString()).isEqualTo(
+                mode.getRule().getTriggerDescription());
+        assertThat(mPreference.getIcon()).isNull();
 
-        ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        verify(mPreference).setIntent(captor.capture());
         // Destination as written into the intent by SubSettingLauncher
-        assertThat(
-                captor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
-                ZenModeSetCalendarFragment.class.getName());
+        assertThat(mPreference.getIntent().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(ZenModeSetCalendarFragment.class.getName());
     }
 
     @Test
@@ -179,20 +188,75 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
         scheduleInfo.endHour = 15;
         ZenMode mode = new ZenMode("id", new AutomaticZenRule.Builder("name",
                 ZenModeConfig.toScheduleConditionId(scheduleInfo))
+                .setPackage(SystemZenRules.PACKAGE_ANDROID)
                 .setType(TYPE_SCHEDULE_TIME)
                 .setTriggerDescription("some schedule")
                 .build(),
                 true);  // is active
         mPrefController.updateZenMode(mPrefCategory, mode);
 
-        verify(mPreference).setTitle(R.string.zen_mode_set_schedule_link);
-        verify(mPreference).setSummary(mode.getRule().getTriggerDescription());
+        assertThat(mPreference.getTitle()).isNotNull();
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.zen_mode_set_schedule_link));
+        assertThat(mPreference.getSummary()).isNotNull();
+        assertThat(mPreference.getSummary().toString()).isEqualTo(
+                mode.getRule().getTriggerDescription());
+        assertThat(mPreference.getIcon()).isNull();
 
-        ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        verify(mPreference).setIntent(captor.capture());
         // Destination as written into the intent by SubSettingLauncher
-        assertThat(
-                captor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
-                ZenModeSetScheduleFragment.class.getName());
+        assertThat(mPreference.getIntent().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(ZenModeSetScheduleFragment.class.getName());
+    }
+
+    @Test
+    public void testRuleLink_manual() {
+        ZenMode mode = new ZenMode("id", new AutomaticZenRule.Builder("name",
+                ZenModeConfig.toCustomManualConditionId())
+                .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                .setType(TYPE_OTHER)
+                .setTriggerDescription("Will not be shown")
+                .build(),
+                true);  // is active
+        mPrefController.updateZenMode(mPrefCategory, mode);
+
+        assertThat(mPreference.getTitle()).isNotNull();
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.zen_mode_select_schedule));
+        assertThat(mPreference.getIcon()).isNotNull();
+        assertThat(mPreference.getSummary()).isNotNull();
+        assertThat(mPreference.getSummary().toString()).isEqualTo("");
+
+        // Set up a click listener to open the dialog.
+        assertThat(mPreference.getOnPreferenceClickListener()).isNotNull();
+    }
+
+    @Test
+    public void onScheduleChosen_updatesMode() {
+        ZenMode originalMode = new ZenMode("id",
+                new AutomaticZenRule.Builder("name", ZenModeConfig.toCustomManualConditionId())
+                        .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                        .setType(TYPE_OTHER)
+                        .setTriggerDescription("")
+                        .build(),
+                false);
+        mPrefController.updateZenMode(mPrefCategory, originalMode);
+
+        ZenModeConfig.ScheduleInfo scheduleInfo = new ZenModeConfig.ScheduleInfo();
+        scheduleInfo.days = new int[] { Calendar.MONDAY };
+        scheduleInfo.startHour = 12;
+        scheduleInfo.endHour = 15;
+        Uri scheduleUri = ZenModeConfig.toScheduleConditionId(scheduleInfo);
+
+        mPrefController.mOnScheduleOptionListener.onScheduleSelected(scheduleUri);
+
+        // verify the backend got asked to update the mode to be schedule-based.
+        ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
+        verify(mBackend).updateMode(captor.capture());
+        ZenMode updatedMode = captor.getValue();
+        assertThat(updatedMode.getType()).isEqualTo(TYPE_SCHEDULE_TIME);
+        assertThat(updatedMode.getRule().getConditionId()).isEqualTo(scheduleUri);
+        assertThat(updatedMode.getRule().getTriggerDescription()).isNotEmpty();
+        assertThat(updatedMode.getRule().getOwner()).isEqualTo(
+                ZenModeConfig.getScheduleConditionProvider());
     }
 }
