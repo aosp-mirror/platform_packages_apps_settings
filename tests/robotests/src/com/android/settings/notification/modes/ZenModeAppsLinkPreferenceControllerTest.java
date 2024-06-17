@@ -43,7 +43,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
@@ -57,7 +56,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +71,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
     private ZenModesBackend mZenModesBackend;
 
     @Mock
-    private NotificationBackend mNotificationBackend;
+    private ZenHelperBackend mHelperBackend;
 
     @Mock
     private ApplicationsState mApplicationsState;
@@ -90,8 +88,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         when(mApplicationsState.newSession(any(), any())).thenReturn(mSession);
         mController = new ZenModeAppsLinkPreferenceController(
                 mContext, "controller_key", mock(Fragment.class), mApplicationsState,
-                mZenModesBackend);
-        ReflectionHelpers.setField(mController, "mNotificationBackend", mNotificationBackend);
+                mZenModesBackend, mHelperBackend);
     }
 
     private ApplicationsState.AppEntry createAppEntry(String packageName, String label) {
@@ -149,7 +146,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         ApplicationsState.AppEntry entryConv = createAppEntry("test_conv", "test_convLabel");
         List<ApplicationsState.AppEntry> appEntries = List.of(entry, entryConv);
 
-        when(mNotificationBackend.getPackagesBypassingDnd(mContext.getUserId(),
+        when(mHelperBackend.getPackagesBypassingDnd(mContext.getUserId(),
                 false)).thenReturn(List.of("test"));
 
         assertThat(mController.getAppsBypassingDnd(appEntries)).containsExactly("testLabel");
@@ -167,7 +164,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
                 new ArrayList<ApplicationsState.AppEntry>();
         appEntries.add(createAppEntry("test", "pkgLabel"));
 
-        when(mNotificationBackend.getPackagesBypassingDnd(
+        when(mHelperBackend.getPackagesBypassingDnd(
                 mContext.getUserId(), false))
                 .thenReturn(List.of("test"));
 

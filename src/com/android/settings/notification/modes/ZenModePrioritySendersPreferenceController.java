@@ -83,6 +83,7 @@ class ZenModePrioritySendersPreferenceController
     private static final Intent FALLBACK_INTENT = new Intent(Intent.ACTION_MAIN)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
+    private final ZenHelperBackend mHelperBackend;
     private final PackageManager mPackageManager;
     private PreferenceCategory mPreferenceCategory;
     private List<SelectorWithWidgetPreference> mSelectorPreferences = new ArrayList<>();
@@ -90,9 +91,10 @@ class ZenModePrioritySendersPreferenceController
     private final ZenModeSummaryHelper mZenModeSummaryHelper;
 
     public ZenModePrioritySendersPreferenceController(Context context, String key,
-            boolean isMessages, ZenModesBackend backend) {
+            boolean isMessages, ZenModesBackend backend, ZenHelperBackend helperBackend) {
         super(context, key, backend);
         mIsMessages = isMessages;
+        mHelperBackend = helperBackend;
 
         String contactsPackage = context.getString(R.string.config_contacts_package_name);
         ALL_CONTACTS_INTENT.setPackage(contactsPackage);
@@ -103,7 +105,7 @@ class ZenModePrioritySendersPreferenceController
         if (!FALLBACK_INTENT.hasCategory(Intent.CATEGORY_APP_CONTACTS)) {
             FALLBACK_INTENT.addCategory(Intent.CATEGORY_APP_CONTACTS);
         }
-        mZenModeSummaryHelper = new ZenModeSummaryHelper(mContext, mBackend);
+        mZenModeSummaryHelper = new ZenModeSummaryHelper(mContext, mHelperBackend);
     }
 
     @Override
@@ -164,7 +166,7 @@ class ZenModePrioritySendersPreferenceController
 
     private void updateChannelCounts() {
         ParceledListSlice<ConversationChannelWrapper> impConversations =
-                mBackend.getConversations(true);
+                mHelperBackend.getConversations(true);
         int numImportantConversations = 0;
         if (impConversations != null) {
             for (ConversationChannelWrapper conversation : impConversations.getList()) {

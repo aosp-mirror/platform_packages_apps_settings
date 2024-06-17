@@ -29,7 +29,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.applications.ApplicationsState;
 
 import java.util.ArrayList;
@@ -47,14 +46,16 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
 
     private final ZenModeSummaryHelper mSummaryHelper;
     private ApplicationsState.Session mAppSession;
-    private NotificationBackend mNotificationBackend = new NotificationBackend();
+    private final ZenHelperBackend mHelperBackend;
     private ZenMode mZenMode;
     private Preference mPreference;
 
     ZenModeAppsLinkPreferenceController(Context context, String key, Fragment host,
-            ApplicationsState applicationsState, ZenModesBackend backend) {
+            ApplicationsState applicationsState, ZenModesBackend backend,
+            ZenHelperBackend helperBackend) {
         super(context, key, backend);
-        mSummaryHelper = new ZenModeSummaryHelper(mContext, mBackend);
+        mSummaryHelper = new ZenModeSummaryHelper(mContext, helperBackend);
+        mHelperBackend = helperBackend;
         if (applicationsState != null && host != null) {
             mAppSession = applicationsState.newSession(mAppSessionCallbacks, host.getLifecycle());
         }
@@ -105,7 +106,7 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
                 pkgLabelMap.put(entry.info.packageName, entry.label);
             }
         }
-        for (String pkg : mNotificationBackend.getPackagesBypassingDnd(mContext.getUserId(),
+        for (String pkg : mHelperBackend.getPackagesBypassingDnd(mContext.getUserId(),
                 /* includeConversationChannels= */ false)) {
             // Settings may hide some packages from the user, so if they're not present here
             // we skip displaying them, even if they bypass dnd.

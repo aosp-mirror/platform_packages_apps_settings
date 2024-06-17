@@ -60,9 +60,9 @@ import java.util.function.Predicate;
 class ZenModeSummaryHelper {
 
     private final Context mContext;
-    private final ZenModesBackend mBackend;
+    private final ZenHelperBackend mBackend;
 
-    public ZenModeSummaryHelper(Context context, ZenModesBackend backend) {
+    ZenModeSummaryHelper(Context context, ZenHelperBackend backend) {
         mContext = context;
         mBackend = backend;
     }
