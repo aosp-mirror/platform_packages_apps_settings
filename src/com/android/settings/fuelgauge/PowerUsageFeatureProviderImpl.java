@@ -84,6 +84,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isForceExpireAppOptimizationModeEnabled() {
+        return false;
+    }
+
+    @Override
     public boolean isAppOptimizationModeLogged() {
         return false;
     }
