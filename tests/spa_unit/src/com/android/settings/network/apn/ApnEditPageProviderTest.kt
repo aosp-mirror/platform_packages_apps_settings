@@ -58,7 +58,6 @@ class ApnEditPageProviderTest {
     private val apnEnable = context.resources.getString(R.string.carrier_enabled)
     private val apnProtocolOptions =
         context.resources.getStringArray(R.array.apn_protocol_entries).toList()
-    private val networkType = context.resources.getString(R.string.network_type)
     private val passwordTitle = context.resources.getString(R.string.apn_password)
     private val apnInit = ApnData(
         name = apnName,
@@ -168,48 +167,6 @@ class ApnEditPageProviderTest {
     }
 
     @Test
-    fun network_type_displayed() {
-        composeTestRule.setContent {
-            ApnPage(apnInit, remember { apnData }, uri)
-        }
-        composeTestRule.onRoot().onChild().onChildAt(0)
-            .performScrollToNode(hasText(networkType, true))
-        composeTestRule.onNodeWithText(networkType, true).assertIsDisplayed()
-    }
-
-    @Test
-    fun network_type_changed() {
-        composeTestRule.setContent {
-            ApnPage(apnInit, remember { apnData }, uri)
-        }
-        composeTestRule.onRoot().onChild().onChildAt(0)
-            .performScrollToNode(hasText(networkType, true))
-        composeTestRule.onNodeWithText(networkType, true).performClick()
-        composeTestRule.onNodeWithText(NETWORK_TYPE_LTE, true).performClick()
-        composeTestRule.onNode(hasText(NETWORK_TYPE_UNSPECIFIED) and isFocused(), true)
-            .assertDoesNotExist()
-        composeTestRule.onNode(hasText(NETWORK_TYPE_LTE) and isFocused(), true).assertIsDisplayed()
-    }
-
-    @Test
-    fun network_type_changed_back2Default() {
-        composeTestRule.setContent {
-            ApnPage(apnInit, remember { apnData }, uri)
-        }
-        composeTestRule.onRoot().onChild().onChildAt(0)
-            .performScrollToNode(hasText(networkType, true))
-        composeTestRule.onNodeWithText(networkType, true).performClick()
-        composeTestRule.onNodeWithText(NETWORK_TYPE_LTE, true).performClick()
-        composeTestRule.onNode(hasText(NETWORK_TYPE_UNSPECIFIED) and isFocused(), true)
-            .assertDoesNotExist()
-        composeTestRule.onNode(hasText(NETWORK_TYPE_LTE) and isFocused(), true).assertIsDisplayed()
-        composeTestRule.onAllNodesWithText(NETWORK_TYPE_LTE, true).onLast().performClick()
-        composeTestRule.onNode(hasText(NETWORK_TYPE_UNSPECIFIED) and isFocused(), true)
-            .assertIsDisplayed()
-        composeTestRule.onNode(hasText(NETWORK_TYPE_LTE) and isFocused(), true).assertDoesNotExist()
-    }
-
-    @Test
     fun password_displayed() {
         composeTestRule.setContent {
             ApnPage(apnInit, remember { apnData }, uri)
@@ -217,10 +174,5 @@ class ApnEditPageProviderTest {
         composeTestRule.onRoot().onChild().onChildAt(0)
             .performScrollToNode(hasText(passwordTitle, true))
         composeTestRule.onNodeWithText(passwordTitle, true).assertIsDisplayed()
-    }
-
-    private companion object {
-        const val NETWORK_TYPE_UNSPECIFIED = "Unspecified"
-        const val NETWORK_TYPE_LTE = "LTE"
     }
 }
