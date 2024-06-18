@@ -463,7 +463,8 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        if (!isCurrentUserAdmin() && canSwitchUserNow() && !isCurrentUserGuest()) {
+        if (!isCurrentUserAdmin() && (canSwitchUserNow() || Flags.newMultiuserSettingsUx())
+                && !isCurrentUserGuest()) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -1198,7 +1199,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         List<UserInfo> users;
-        if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+        if (Flags.newMultiuserSettingsUx()) {
             // Only users that can be switched to should show up here.
             // e.g. Managed profiles appear under Accounts Settings instead
             users = mUserManager.getAliveUsers().stream()
@@ -1265,7 +1266,10 @@ public class UserSettings extends SettingsPreferenceFragment
                     pref.setSummary(R.string.user_summary_not_set_up);
                     // Disallow setting up user which results in user switching when the
                     // restriction is set.
-                    pref.setEnabled(!mUserCaps.mDisallowSwitchUser && canSwitchUserNow());
+                    // If newMultiuserSettingsUx flag is enabled, allow opening user details page
+                    // since switch to user will be disabled
+                    pref.setEnabled((!mUserCaps.mDisallowSwitchUser && canSwitchUserNow())
+                            || Flags.newMultiuserSettingsUx());
                 }
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);
@@ -1425,13 +1429,13 @@ public class UserSettings extends SettingsPreferenceFragment
                             getContext().getResources(), icon)));
             pref.setKey(KEY_USER_GUEST);
             pref.setOrder(Preference.DEFAULT_ORDER);
-            if (mUserCaps.mDisallowSwitchUser) {
+            if (mUserCaps.mDisallowSwitchUser && !Flags.newMultiuserSettingsUx()) {
                 pref.setDisabledByAdmin(
                         RestrictedLockUtilsInternal.getDeviceOwner(context));
             } else {
                 pref.setDisabledByAdmin(null);
             }
-            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+            if (Flags.newMultiuserSettingsUx()) {
                 mGuestUserCategory.addPreference(pref);
                 // guest user preference is shown hence also make guest category visible
                 mGuestUserCategory.setVisible(true);
@@ -1464,11 +1468,11 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private boolean updateAddGuestPreference(Context context, boolean isGuestAlreadyCreated) {
         boolean isVisible = false;
-        if (!isGuestAlreadyCreated && mUserCaps.mCanAddGuest
+        if (!isGuestAlreadyCreated && (mUserCaps.mCanAddGuest
+                || (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUserSetByAdmin))
                 && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
-                && (mUserCaps.mUserSwitcherEnabled
-                || android.multiuser.Flags.newMultiuserSettingsUx())) {
+                && (mUserCaps.mUserSwitcherEnabled || Flags.newMultiuserSettingsUx())) {
             Drawable icon = context.getDrawable(
                     com.android.settingslib.R.drawable.ic_account_circle);
             mAddGuest.setIcon(centerAndTint(icon));
@@ -1481,11 +1485,11 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddGuest.setEnabled(false);
             } else {
                 mAddGuest.setTitle(com.android.settingslib.R.string.guest_new_guest);
-                if (android.multiuser.Flags.newMultiuserSettingsUx()
+                if (Flags.newMultiuserSettingsUx()
                         && mUserCaps.mDisallowAddUserSetByAdmin) {
                     mAddGuest.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
                 } else {
-                    mAddGuest.setEnabled(canSwitchUserNow());
+                    mAddGuest.setEnabled(canSwitchUserNow() || Flags.newMultiuserSettingsUx());
                 }
             }
         } else {
@@ -1516,15 +1520,15 @@ public class UserSettings extends SettingsPreferenceFragment
             boolean canAddRestrictedProfile) {
         if ((mUserCaps.mCanAddUser && !mUserCaps.mDisallowAddUserSetByAdmin)
                 && WizardManagerHelper.isDeviceProvisioned(context)
-                && (mUserCaps.mUserSwitcherEnabled
-                || android.multiuser.Flags.newMultiuserSettingsUx())) {
+                && (mUserCaps.mUserSwitcherEnabled || Flags.newMultiuserSettingsUx())) {
             addUser.setVisible(true);
             addUser.setSelectable(true);
             final boolean canAddMoreUsers =
                     mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_SECONDARY)
                             || (canAddRestrictedProfile
                             && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_RESTRICTED));
-            addUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
+            addUser.setEnabled(canAddMoreUsers && !mAddingUser
+                    && (canSwitchUserNow() || Flags.newMultiuserSettingsUx()));
 
             if (!canAddMoreUsers) {
                 addUser.setSummary(getString(R.string.user_add_max_count));
@@ -1535,7 +1539,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 addUser.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
             }
-        } else if (android.multiuser.Flags.newMultiuserSettingsUx()
+        } else if (Flags.newMultiuserSettingsUx()
                 && mUserCaps.mDisallowAddUserSetByAdmin) {
             addUser.setVisible(true);
             addUser.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);

@@ -368,6 +368,7 @@ public class UserSettingsTest {
     }
 
     @Test
+    @RequiresFlagsDisabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
     public void updateUserList_cannotSwitchUser_shouldDisableAddUser() {
         mUserCapabilities.mCanAddUser = true;
         doReturn(true).when(mUserManager).canAddMoreUsers(anyString());
@@ -381,6 +382,20 @@ public class UserSettingsTest {
         verify(mAddUserPreference).setSummary(null);
         verify(mAddUserPreference).setEnabled(false);
         verify(mAddUserPreference).setSelectable(true);
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
+    public void updateUserList_disallowAddUser_shouldDisableAddUserAndAddGuest() {
+        mUserCapabilities.mDisallowAddUserSetByAdmin = true;
+        doReturn(true).when(mUserManager).canAddMoreUsers(anyString());
+        doReturn(SWITCHABILITY_STATUS_OK)
+                .when(mUserManager).getUserSwitchability();
+
+        mFragment.updateUserList();
+
+        verify(mAddUserPreference).setVisible(true);
+        verify(mAddUserPreference).setDisabledByAdmin(any());
     }
 
     @Test
@@ -401,6 +416,7 @@ public class UserSettingsTest {
     }
 
     @Test
+    @RequiresFlagsDisabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
     public void updateUserList_cannotSwitchUser_shouldDisableAddGuest() {
         mUserCapabilities.mCanAddGuest = true;
         doReturn(true)
@@ -412,6 +428,26 @@ public class UserSettingsTest {
         verify(mAddGuestPreference).setVisible(true);
         verify(mAddGuestPreference).setEnabled(false);
         verify(mAddGuestPreference).setSelectable(true);
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
+    public void updateUserList_cannotSwitchUser_shouldKeepPreferencesVisibleAndEnabled() {
+        givenUsers(getAdminUser(true));
+        mUserCapabilities.mCanAddGuest = true;
+        mUserCapabilities.mCanAddUser = true;
+        mUserCapabilities.mDisallowSwitchUser = true;
+        doReturn(true)
+                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_GUEST));
+        doReturn(true)
+                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_SECONDARY));
+
+        mFragment.updateUserList();
+
+        verify(mAddGuestPreference).setVisible(true);
+        verify(mAddGuestPreference).setEnabled(true);
+        verify(mAddUserPreference).setVisible(true);
+        verify(mAddUserPreference).setEnabled(true);
     }
 
     @Test
@@ -670,6 +706,7 @@ public class UserSettingsTest {
     }
 
     @Test
+    @RequiresFlagsDisabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
     public void updateUserList_uninitializedUserAndCanNotSwitchUser_shouldDisablePref() {
         UserInfo uninitializedUser = getSecondaryUser(false);
         removeFlag(uninitializedUser, UserInfo.FLAG_INITIALIZED);

@@ -43,12 +43,17 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        if (!mUserCaps.isAdmin() || !mUserCaps.mCanAddGuest) {
-            return DISABLED_FOR_USER;
-        } else if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+        if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+            if (!mUserCaps.isAdmin()) {
+                return DISABLED_FOR_USER;
+            }
             return AVAILABLE;
         } else {
-            return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+            if (!mUserCaps.isAdmin() || !mUserCaps.mCanAddGuest) {
+                return DISABLED_FOR_USER;
+            } else {
+                return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+            }
         }
     }
 
