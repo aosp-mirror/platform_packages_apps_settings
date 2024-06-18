@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -32,6 +33,7 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.flags.Flags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -65,21 +67,32 @@ public class AudioSharingCallAudioDialogFragmentTest {
 
     private Fragment mParent;
     private AudioSharingCallAudioDialogFragment mFragment;
-    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() {
         ShadowAlertDialogCompat.reset();
-        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
-        mShadowBluetoothAdapter.setEnabled(true);
-        mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
+        ShadowBluetoothAdapter shadowBluetoothAdapter =
+                Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+        shadowBluetoothAdapter.setEnabled(true);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
-        mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
+        shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         mFragment = new AudioSharingCallAudioDialogFragment();
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAlertDialogCompat.reset();
+    }
+
+    @Test
+    public void getMetricsCategory_correctValue() {
+        assertThat(mFragment.getMetricsCategory())
+                .isEqualTo(SettingsEnums.DIALOG_AUDIO_SHARING_CALL_AUDIO);
     }
 
     @Test

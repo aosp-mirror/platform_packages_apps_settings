@@ -28,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
@@ -86,12 +87,17 @@ private fun LabelSimPreference(
     }
     val phoneNumber = phoneNumber(subInfo)
     val alertDialogPresenter = rememberAlertDialogPresenter(
-        confirmButton = AlertDialogButton(stringResource(R.string.mobile_network_sim_name_rename)) {
+        confirmButton = AlertDialogButton(
+            stringResource(R.string.mobile_network_sim_name_rename),
+            titleSimName.isNotBlank()
+        ) {
             onboardingService.addItemForRenaming(
                 subInfo, if (titleSimName.isEmpty()) originalSimCarrierName else titleSimName
             )
         },
-        dismissButton = AlertDialogButton(stringResource(R.string.cancel)) {
+        dismissButton = AlertDialogButton(
+            stringResource(R.string.cancel),
+        ) {
             titleSimName = onboardingService.getSubscriptionInfoDisplayName(subInfo)
         },
         title = stringResource(R.string.sim_onboarding_label_sim_dialog_title),
@@ -104,9 +110,9 @@ private fun LabelSimPreference(
                 value = titleSimName,
                 label = stringResource(R.string.sim_onboarding_label_sim_dialog_label),
                 placeholder = {Text(text = originalSimCarrierName)},
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().testTag("contentInput")
             ) {
-                titleSimName = if (it.isEmpty()) originalSimCarrierName else it
+                titleSimName = it
             }
         },
     )

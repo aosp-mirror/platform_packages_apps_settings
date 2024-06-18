@@ -408,7 +408,6 @@ public class SubscriptionUtil {
      *
      * @return map of active subscription ids to display names.
      */
-    @VisibleForTesting
     public static CharSequence getUniqueSubscriptionDisplayName(
             Integer subscriptionId, Context context) {
         final Map<Integer, CharSequence> displayNames = getUniqueSubscriptionDisplayNames(context);
@@ -643,8 +642,13 @@ public class SubscriptionUtil {
 
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class);
-        String rawPhoneNumber = subscriptionManager.getPhoneNumber(
-                subscriptionInfo.getSubscriptionId());
+        String rawPhoneNumber = "";
+        try {
+            rawPhoneNumber = subscriptionManager.getPhoneNumber(
+                    subscriptionInfo.getSubscriptionId());
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "Subscription service unavailable : " + e);
+        }
         if (TextUtils.isEmpty(rawPhoneNumber)) {
             return null;
         }

@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,15 +44,16 @@ import java.util.function.Consumer;
 public class AudioStreamsDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "AudioStreamsDialogFragment";
     private final DialogBuilder mDialogBuilder;
+    private int mDialogId = SettingsEnums.PAGE_UNKNOWN;
 
-    AudioStreamsDialogFragment(DialogBuilder dialogBuilder) {
+    AudioStreamsDialogFragment(DialogBuilder dialogBuilder, int dialogId) {
         mDialogBuilder = dialogBuilder;
+        mDialogId = dialogId;
     }
 
     @Override
     public int getMetricsCategory() {
-        // TODO(chelseahao): update metrics id
-        return 0;
+        return mDialogId;
     }
 
     @Override
@@ -64,14 +66,15 @@ public class AudioStreamsDialogFragment extends InstrumentedDialogFragment {
      *
      * @param host The fragment to host the dialog.
      * @param dialogBuilder The builder for constructing the dialog.
+     * @param dialogId The dialog settings enum for logging
      */
-    public static void show(Fragment host, DialogBuilder dialogBuilder) {
+    public static void show(Fragment host, DialogBuilder dialogBuilder, int dialogId) {
         if (!host.isAdded()) {
             Log.w(TAG, "The host fragment is not added to the activity!");
             return;
         }
         FragmentManager manager = host.getChildFragmentManager();
-        (new AudioStreamsDialogFragment(dialogBuilder)).show(manager, TAG);
+        (new AudioStreamsDialogFragment(dialogBuilder, dialogId)).show(manager, TAG);
     }
 
     static void dismissAll(Fragment host) {

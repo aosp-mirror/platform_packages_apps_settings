@@ -16,6 +16,7 @@
 
 package com.android.settings.network.apn
 
+import android.app.settings.SettingsEnums
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Telephony
@@ -62,6 +63,7 @@ const val INSERT_URL = "insertUrl"
 object ApnEditPageProvider : SettingsPageProvider {
 
     override val name = "ApnEdit"
+    override val metricsCategory = SettingsEnums.APN_EDITOR
     const val TAG = "ApnEditPageProvider"
 
     override val parameter = listOf(

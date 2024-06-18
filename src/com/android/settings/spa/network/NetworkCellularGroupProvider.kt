@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.network
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.IntentFilter
 import android.os.Bundle
@@ -31,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -45,6 +47,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
 import com.android.settings.network.SubscriptionInfoListViewModel
+import com.android.settings.network.telephony.DataSubscriptionRepository
 import com.android.settings.network.telephony.TelephonyRepository
 import com.android.settings.spa.network.PrimarySimRepository.PrimarySimInfo
 import com.android.settings.wifi.WifiPickerTrackerHelper
@@ -76,7 +79,7 @@ import kotlinx.coroutines.withContext
  */
 open class NetworkCellularGroupProvider : SettingsPageProvider {
     override val name = fileName
-
+    override val metricsCategory = SettingsEnums.MOBILE_NETWORK_LIST
     private val owner = createSettingsPage()
 
     var defaultVoiceSubId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
@@ -108,7 +111,9 @@ open class NetworkCellularGroupProvider : SettingsPageProvider {
         var nonDdsRemember = rememberSaveable {
             mutableIntStateOf(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
         }
-
+        var showMobileDataSection = rememberSaveable {
+            mutableStateOf(false)
+        }
         val subscriptionViewModel = viewModel<SubscriptionInfoListViewModel>()
 
         CollectAirplaneModeAndFinishIfOn()
@@ -125,13 +130,18 @@ open class NetworkCellularGroupProvider : SettingsPageProvider {
         val selectableSubscriptionInfoList by subscriptionViewModel
                 .selectableSubscriptionInfoListFlow
                 .collectAsStateWithLifecycle(initialValue = emptyList())
-
+        showMobileDataSection.value = selectableSubscriptionInfoList
+                .filter { subInfo -> subInfo.simSlotIndex > -1 }
+                .size > 0
         val stringSims = stringResource(R.string.provider_network_settings_title)
         RegularScaffold(title = stringSims) {
             SimsSection(selectableSubscriptionInfoList)
-            MobileDataSectionImpl(mobileDataSelectedId,
-                nonDdsRemember,
-            )
+            if(showMobileDataSection.value) {
+                MobileDataSectionImpl(
+                    mobileDataSelectedId,
+                    nonDdsRemember,
+                )
+            }
 
             PrimarySimSectionImpl(
                 subscriptionViewModel.selectableSubscriptionInfoListFlow,
@@ -150,7 +160,7 @@ open class NetworkCellularGroupProvider : SettingsPageProvider {
                     selectableSubscriptionInfoListFlow,
                     context.defaultVoiceSubscriptionFlow(),
                     context.defaultSmsSubscriptionFlow(),
-                    context.defaultDefaultDataSubscriptionFlow(),
+                    DataSubscriptionRepository(context).defaultDataSubscriptionIdFlow(),
                     this::refreshUiStates,
             ).flowOn(Dispatchers.Default)
 
@@ -360,15 +370,6 @@ private fun Context.defaultSmsSubscriptionFlow(): Flow<Int> =
                         IntentFilter(SubscriptionManager.ACTION_DEFAULT_SMS_SUBSCRIPTION_CHANGED)
                 ),
         ).map { SubscriptionManager.getDefaultSmsSubscriptionId() }
-                .conflate().flowOn(Dispatchers.Default)
-
-private fun Context.defaultDefaultDataSubscriptionFlow(): Flow<Int> =
-        merge(
-                flowOf(null), // kick an initial value
-                broadcastReceiverFlow(
-                        IntentFilter(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)
-                ),
-        ).map { SubscriptionManager.getDefaultDataSubscriptionId() }
                 .conflate().flowOn(Dispatchers.Default)
 
 suspend fun setDefaultVoice(

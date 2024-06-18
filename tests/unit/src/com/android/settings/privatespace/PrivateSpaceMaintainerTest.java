@@ -33,8 +33,10 @@ import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
 import android.app.IActivityManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Flags;
 import android.os.RemoteException;
 import android.os.UserManager;
@@ -213,7 +215,7 @@ public class PrivateSpaceMaintainerTest {
         privateSpaceMaintainer.deletePrivateSpace();
         privateSpaceMaintainer.createPrivateSpace();
         // test that no exception is thrown, which would indicate that the receiver was registered.
-        mContext.unregisterReceiver(privateSpaceMaintainer.getBroadcastReceiver());
+        mContext.unregisterReceiver(privateSpaceMaintainer.getProfileBroadcastReceiver());
         privateSpaceMaintainer.resetBroadcastReceiver();
     }
 
@@ -225,7 +227,7 @@ public class PrivateSpaceMaintainerTest {
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.createPrivateSpace();
         privateSpaceMaintainer.deletePrivateSpace();
-        assertThat(privateSpaceMaintainer.getBroadcastReceiver()).isNull();
+        assertThat(privateSpaceMaintainer.getProfileBroadcastReceiver()).isNull();
     }
 
     /**
@@ -430,6 +432,36 @@ public class PrivateSpaceMaintainerTest {
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.createPrivateSpace();
         assertThat(getSecureSkipFirstUseHints()).isEqualTo(1);
+    }
+
+    @Test
+    public void createPrivateSpace_psDoesNotExist_setsPrivateSpaceSettingsComponentDisabled() {
+        mSetFlagsRule.enableFlags(
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assumeTrue(mContext.getSystemService(UserManager.class).canAddPrivateProfile());
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(privateSpaceMaintainer.getPrivateProfileHandle()).isNotNull();
+        Context privateSpaceUserContext = mContext.createContextAsUser(
+                privateSpaceMaintainer.getPrivateProfileHandle(),
+                /* flags */ 0);
+
+        // Assert that private space settings launcher app icon is disabled
+        ComponentName settingsComponentName = new ComponentName(privateSpaceUserContext,
+                com.android.settings.Settings.class);
+        int settingsComponentEnabledSetting = privateSpaceUserContext.getPackageManager()
+                .getComponentEnabledSetting(settingsComponentName);
+        assertThat(settingsComponentEnabledSetting)
+                .isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+
+        // Assert that private space settings create shortcut activity is disabled
+        ComponentName shortcutPickerComponentName = new ComponentName(privateSpaceUserContext,
+                com.android.settings.Settings.CreateShortcutActivity.class);
+        int settingsShortcutPickerEnabledSetting = privateSpaceUserContext.getPackageManager()
+                .getComponentEnabledSetting(shortcutPickerComponentName);
+        assertThat(settingsShortcutPickerEnabledSetting)
+                .isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
     }
 
     @Test

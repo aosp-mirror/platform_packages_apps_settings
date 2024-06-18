@@ -21,6 +21,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,12 +50,10 @@ sealed interface GatekeeperInfo {
  * in as a parameter to this class.
  */
 class FingerprintGatekeeperViewModel(
-  theGatekeeperInfo: GatekeeperInfo?,
-  private val fingerprintManagerInteractor: FingerprintManagerInteractor,
+  private val fingerprintManagerInteractor: FingerprintManagerInteractor
 ) : ViewModel() {
 
-  private var _gatekeeperInfo: MutableStateFlow<GatekeeperInfo?> =
-    MutableStateFlow(theGatekeeperInfo)
+  private var _gatekeeperInfo: MutableStateFlow<GatekeeperInfo?> = MutableStateFlow(null)
 
   /** The gatekeeper info for fingerprint enrollment. */
   val gatekeeperInfo: Flow<GatekeeperInfo?> = _gatekeeperInfo.asStateFlow()
@@ -61,26 +62,27 @@ class FingerprintGatekeeperViewModel(
   val hasValidGatekeeperInfo: Flow<Boolean> =
     gatekeeperInfo.map { it is GatekeeperInfo.GatekeeperPasswordInfo }
 
-  private var _credentialConfirmed: MutableStateFlow<Boolean?> = MutableStateFlow(null)
-  val credentialConfirmed: Flow<Boolean?> = _credentialConfirmed.asStateFlow()
-
   private var countDownTimer: CountDownTimer? = null
 
   /** Timeout of 15 minutes for a generated challenge */
   private val TIMEOUT: Long = 15 * 60 * 1000
 
   /** Called after a confirm device credential attempt has been made. */
-  fun onConfirmDevice(wasSuccessful: Boolean, theGatekeeperPasswordHandle: Long?) {
+  fun onConfirmDevice(
+    wasSuccessful: Boolean,
+    theGatekeeperPasswordHandle: Long?,
+    shouldStartTimer: Boolean = true,
+  ) {
     if (!wasSuccessful) {
       Log.d(TAG, "confirmDevice failed")
       _gatekeeperInfo.update { GatekeeperInfo.Invalid }
-      _credentialConfirmed.update { false }
     } else {
       viewModelScope.launch {
         val res = fingerprintManagerInteractor.generateChallenge(theGatekeeperPasswordHandle!!)
         _gatekeeperInfo.update { GatekeeperInfo.GatekeeperPasswordInfo(res.second, res.first) }
-        _credentialConfirmed.update { true }
-        startTimeout()
+        if (shouldStartTimer) {
+          startTimeout()
+        }
       }
     }
   }
@@ -97,19 +99,9 @@ class FingerprintGatekeeperViewModel(
       }
   }
 
-  class FingerprintGatekeeperViewModelFactory(
-    private val gatekeeperInfo: GatekeeperInfo?,
-    private val fingerprintManagerInteractor: FingerprintManagerInteractor,
-  ) : ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return FingerprintGatekeeperViewModel(gatekeeperInfo, fingerprintManagerInteractor) as T
-    }
-  }
-
   companion object {
     private const val TAG = "FingerprintGatekeeperViewModel"
+
     /**
      * A function that checks if the challenge and token are valid, in which case a
      * [GatekeeperInfo.GatekeeperPasswordInfo] is provided, else [GatekeeperInfo.Invalid]
@@ -120,6 +112,15 @@ class FingerprintGatekeeperViewModel(
         return GatekeeperInfo.Invalid
       }
       return GatekeeperInfo.GatekeeperPasswordInfo(token, challenge)
+    }
+
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer {
+        val settingsApplication =
+          this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as SettingsApplication
+        val biometricEnvironment = settingsApplication.biometricEnvironment
+        FingerprintGatekeeperViewModel(biometricEnvironment!!.fingerprintManagerInteractor)
+      }
     }
   }
 }
