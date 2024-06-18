@@ -54,6 +54,7 @@ import com.android.settingslib.bluetooth.VolumeControlProfile;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.flags.Flags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -115,6 +116,11 @@ public class StreamSettingsCategoryControllerTest {
         mController = new StreamSettingsCategoryController(mContext, KEY);
         mPreference = new Preference(mContext);
         when(mScreen.findPreference(KEY)).thenReturn(mPreference);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowBluetoothUtils.reset();
     }
 
     @Test
