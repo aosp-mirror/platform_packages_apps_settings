@@ -210,6 +210,7 @@ class UdfpsEnrollProgressBarDrawableV2(private val context: Context, attrs: Attr
   override fun getOpacity(): Int {
     return PixelFormat.UNKNOWN
   }
+
   /**
    * Draws the progress with locations [sensorLocationX] [sensorLocationY], note these must be with
    * respect to the parent framelayout.

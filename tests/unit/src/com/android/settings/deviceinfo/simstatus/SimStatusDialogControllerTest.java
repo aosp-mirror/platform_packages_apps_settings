@@ -28,26 +28,18 @@ import static com.android.settings.deviceinfo.simstatus.SimStatusDialogControlle
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ROAMING_INFO_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SERVICE_STATE_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SIGNAL_STRENGTH_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SIGNAL_STRENGTH_VALUE_ID;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
-import android.telephony.CellSignalStrength;
 import android.telephony.ServiceState;
-import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -71,7 +63,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -86,14 +77,6 @@ public class SimStatusDialogControllerTest {
     private SubscriptionInfo mSubscriptionInfo;
     @Mock
     private ServiceState mServiceState;
-    @Mock
-    private SignalStrength mSignalStrength;
-    @Mock
-    private CellSignalStrength mCellSignalStrengthCdma;
-    @Mock
-    private CellSignalStrength mCellSignalStrengthLte;
-    @Mock
-    private CellSignalStrength mCellSignalStrengthWcdma;
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
     private PersistableBundle mPersistableBundle;
@@ -149,15 +132,6 @@ public class SimStatusDialogControllerTest {
                 mUpdatePhoneNumberCount.incrementAndGet();
             }
         };
-        // CellSignalStrength setup
-        doReturn(0).when(mCellSignalStrengthCdma).getDbm();
-        doReturn(0).when(mCellSignalStrengthCdma).getAsuLevel();
-        doReturn(0).when(mCellSignalStrengthLte).getDbm();
-        doReturn(0).when(mCellSignalStrengthLte).getAsuLevel();
-        doReturn(0).when(mCellSignalStrengthWcdma).getDbm();
-        doReturn(0).when(mCellSignalStrengthWcdma).getAsuLevel();
-
-        doReturn(null).when(mSignalStrength).getCellSignalStrengths();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(anyInt());
 
         when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_SINGLE_SIM);
@@ -172,10 +146,7 @@ public class SimStatusDialogControllerTest {
         mPersistableBundle = new PersistableBundle();
         when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(mPersistableBundle);
 
-        mPersistableBundle.putBoolean(
-                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL, true);
         doReturn(mServiceState).when(mTelephonyManager).getServiceState();
-        doReturn(mSignalStrength).when(mTelephonyManager).getSignalStrength();
     }
 
     @Test
@@ -218,7 +189,7 @@ public class SimStatusDialogControllerTest {
 
     @Test
     @Ignore("b/337417520")
-    public void initialize_updateServiceStateWithPowerOff_shouldUpdateTextAndResetSignalStrength() {
+    public void initialize_updateServiceStateWithPowerOff_shouldUpdateText() {
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_POWER_OFF);
 
         mController.initialize();
@@ -226,12 +197,11 @@ public class SimStatusDialogControllerTest {
         final String offServiceText = ResourcesUtils.getResourcesString(
                 mContext, "radioInfo_service_off");
         verify(mDialog).setText(SERVICE_STATE_VALUE_ID, offServiceText);
-        verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, "0");
     }
 
     @Test
     @Ignore("b/337417520")
-    public void initialize_updateVoiceDataOutOfService_shouldUpdateSettingAndResetSignalStrength() {
+    public void initialize_updateVoiceDataOutOfService_shouldUpdateSetting() {
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
         when(mServiceState.getDataRegistrationState()).thenReturn(
                 ServiceState.STATE_OUT_OF_SERVICE);
@@ -241,7 +211,6 @@ public class SimStatusDialogControllerTest {
         final String offServiceText = ResourcesUtils.getResourcesString(
                 mContext, "radioInfo_service_out");
         verify(mDialog).setText(SERVICE_STATE_VALUE_ID, offServiceText);
-        verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, "0");
     }
 
     @Test
@@ -254,52 +223,6 @@ public class SimStatusDialogControllerTest {
         final String inServiceText = ResourcesUtils.getResourcesString(
                 mContext, "radioInfo_service_in");
         verify(mDialog).setText(SERVICE_STATE_VALUE_ID, inServiceText);
-    }
-
-    @Test
-    public void initialize_updateSignalStrengthWithLte50Wcdma40_shouldUpdateSignalStrengthTo50() {
-        final int lteDbm = 50;
-        final int lteAsu = 50;
-        final int wcdmaDbm = 40;
-        final int wcdmaAsu = 40;
-        setupCellSignalStrength_lteWcdma(lteDbm, lteAsu, wcdmaDbm, wcdmaAsu);
-
-        mController.initialize();
-
-        final String signalStrengthString = ResourcesUtils.getResourcesString(
-                mContext, "sim_signal_strength", lteDbm, lteAsu);
-        verify(mDialog, times(2)).setText(SIGNAL_STRENGTH_VALUE_ID, signalStrengthString);
-    }
-
-    @Test
-    public void initialize_updateSignalStrengthWithLte50Cdma30_shouldUpdateSignalStrengthTo50() {
-        final int lteDbm = 50;
-        final int lteAsu = 50;
-        final int cdmaDbm = 30;
-        final int cdmaAsu = 30;
-        setupCellSignalStrength_lteCdma(lteDbm, lteAsu, cdmaDbm, cdmaAsu);
-
-        mController.initialize();
-
-        final String signalStrengthString = ResourcesUtils.getResourcesString(
-                mContext, "sim_signal_strength", lteDbm, lteAsu);
-        verify(mDialog, times(2)).setText(SIGNAL_STRENGTH_VALUE_ID, signalStrengthString);
-    }
-
-    @Test
-    public void initialize_updateVoiceOutOfServiceDataInService_shouldUpdateSignalStrengthTo50() {
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
-        when(mServiceState.getDataRegistrationState()).thenReturn(ServiceState.STATE_IN_SERVICE);
-
-        final int lteDbm = 50;
-        final int lteAsu = 50;
-        setupCellSignalStrength_lteOnly(lteDbm, lteAsu);
-
-        mController.initialize();
-
-        final String signalStrengthString = ResourcesUtils.getResourcesString(
-                mContext, "sim_signal_strength", lteDbm, lteAsu);
-        verify(mDialog, times(2)).setText(SIGNAL_STRENGTH_VALUE_ID, signalStrengthString);
     }
 
     @Test
@@ -358,24 +281,12 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
-    public void initialize_doNotShowSignalStrength_shouldRemoveSignalStrengthSetting() {
-        mPersistableBundle.putBoolean(
-                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL, false);
-
-        mController.initialize();
-
-        verify(mDialog, times(2)).removeSettingFromScreen(SIGNAL_STRENGTH_LABEL_ID);
-        verify(mDialog, times(2)).removeSettingFromScreen(SIGNAL_STRENGTH_VALUE_ID);
-    }
-
-    @Test
     public void initialize_showSignalStrengthAndIccId_shouldShowSignalStrengthAndIccIdSetting() {
         // getConfigForSubId is nullable, so make sure the default behavior is correct
         when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(null);
 
         mController.initialize();
 
-        verify(mDialog, times(2)).setText(eq(SIGNAL_STRENGTH_VALUE_ID), any());
         verify(mDialog).removeSettingFromScreen(ICCID_INFO_LABEL_ID);
         verify(mDialog).removeSettingFromScreen(ICCID_INFO_VALUE_ID);
     }
@@ -394,8 +305,6 @@ public class SimStatusDialogControllerTest {
     @Test
     @Ignore
     public void initialize_imsRegistered_shouldSetImsRegistrationStateSummaryToRegisterd() {
-        mPersistableBundle.putBoolean(
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, true);
         when(mTelephonyManager.isImsRegistered(anyInt())).thenReturn(true);
 
         mController.initialize();
@@ -407,8 +316,6 @@ public class SimStatusDialogControllerTest {
     @Test
     @Ignore
     public void initialize_imsNotRegistered_shouldSetImsRegistrationStateSummaryToNotRegisterd() {
-        mPersistableBundle.putBoolean(
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, true);
         when(mTelephonyManager.isImsRegistered(anyInt())).thenReturn(false);
 
         mController.initialize();
@@ -418,67 +325,19 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
-    public void initialize_showImsRegistration_shouldNotRemoveImsRegistrationStateSetting() {
-        mPersistableBundle.putBoolean(
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, true);
-
+    @Ignore("b/337417520")
+    public void initialize_showImsRegistration_shouldShowImsRegistrationStateSetting() {
         mController.initialize();
 
-        verify(mDialog, never()).removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+        verify(mDialog).setSettingVisibility(IMS_REGISTRATION_STATE_VALUE_ID, true);
     }
 
     @Test
-    public void initialize_doNotShowImsRegistration_shouldRemoveImsRegistrationStateSetting() {
-        mPersistableBundle.putBoolean(
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL, false);
-
+    @Ignore("b/337417520")
+    public void initialize_doNotShowImsRegistration_shouldHideImsRegistrationStateSetting() {
         mController.initialize();
 
-        verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
-        verify(mDialog).removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
-    }
-
-    @Test
-    public void initialize_nullSignalStrength_noCrash() {
-        doReturn(null).when(mTelephonyManager).getSignalStrength();
-        // we should not crash when running the following line
-        mController.initialize();
-    }
-
-    private void setupCellSignalStrength_lteWcdma(int lteDbm, int lteAsu, int wcdmaDbm,
-            int wcdmaAsu) {
-        doReturn(lteDbm).when(mCellSignalStrengthLte).getDbm();
-        doReturn(lteAsu).when(mCellSignalStrengthLte).getAsuLevel();
-        doReturn(wcdmaDbm).when(mCellSignalStrengthWcdma).getDbm();
-        doReturn(wcdmaAsu).when(mCellSignalStrengthWcdma).getAsuLevel();
-
-        List<CellSignalStrength> cellSignalStrengthList = new ArrayList<>(2);
-        cellSignalStrengthList.add(mCellSignalStrengthLte);
-        cellSignalStrengthList.add(mCellSignalStrengthWcdma);
-
-        doReturn(cellSignalStrengthList).when(mSignalStrength).getCellSignalStrengths();
-    }
-
-    private void setupCellSignalStrength_lteCdma(int lteDbm, int lteAsu, int cdmaDbm, int cdmaAsu) {
-        doReturn(lteDbm).when(mCellSignalStrengthLte).getDbm();
-        doReturn(lteAsu).when(mCellSignalStrengthLte).getAsuLevel();
-        doReturn(cdmaDbm).when(mCellSignalStrengthCdma).getDbm();
-        doReturn(cdmaAsu).when(mCellSignalStrengthCdma).getAsuLevel();
-
-        List<CellSignalStrength> cellSignalStrengthList = new ArrayList<>(2);
-        cellSignalStrengthList.add(mCellSignalStrengthLte);
-        cellSignalStrengthList.add(mCellSignalStrengthCdma);
-
-        doReturn(cellSignalStrengthList).when(mSignalStrength).getCellSignalStrengths();
-    }
-
-    private void setupCellSignalStrength_lteOnly(int lteDbm, int lteAsu) {
-        doReturn(lteDbm).when(mCellSignalStrengthLte).getDbm();
-        doReturn(lteAsu).when(mCellSignalStrengthLte).getAsuLevel();
-
-        List<CellSignalStrength> cellSignalStrengthList = new ArrayList<>(2);
-        cellSignalStrengthList.add(mCellSignalStrengthLte);
-
-        doReturn(cellSignalStrengthList).when(mSignalStrength).getCellSignalStrengths();
+        verify(mDialog).setSettingVisibility(IMS_REGISTRATION_STATE_LABEL_ID, false);
+        verify(mDialog).setSettingVisibility(IMS_REGISTRATION_STATE_VALUE_ID, false);
     }
 }

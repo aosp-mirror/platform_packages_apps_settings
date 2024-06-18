@@ -31,9 +31,9 @@ class ZenModeCallsLinkPreferenceController extends AbstractZenModePreferenceCont
     private final ZenModeSummaryHelper mSummaryHelper;
 
     public ZenModeCallsLinkPreferenceController(Context context, String key,
-            ZenModesBackend backend) {
+            ZenModesBackend backend, ZenHelperBackend helperBackend) {
         super(context, key, backend);
-        mSummaryHelper = new ZenModeSummaryHelper(context, backend);
+        mSummaryHelper = new ZenModeSummaryHelper(context, helperBackend);
     }
 
     @Override

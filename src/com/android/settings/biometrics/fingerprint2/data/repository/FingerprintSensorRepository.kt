@@ -46,7 +46,7 @@ interface FingerprintSensorRepository {
 }
 
 class FingerprintSensorRepositoryImpl(
-  fingerprintManager: FingerprintManager,
+  fingerprintManager: FingerprintManager?,
   backgroundDispatcher: CoroutineDispatcher,
   activityScope: CoroutineScope,
 ) : FingerprintSensorRepository {
@@ -73,12 +73,9 @@ class FingerprintSensorRepositoryImpl(
       .stateIn(activityScope, started = SharingStarted.Eagerly, initialValue = DEFAULT_PROPS)
 
   override val fingerprintSensor: Flow<FingerprintSensor> =
-    fingerprintPropsInternal.transform {
-      emit(it.toFingerprintSensor())
-    }
+    fingerprintPropsInternal.transform { emit(it.toFingerprintSensor()) }
 
   companion object {
-    private const val TAG = "FingerprintSensorRepoImpl"
 
     private val DEFAULT_PROPS =
       FingerprintSensorPropertiesInternal(

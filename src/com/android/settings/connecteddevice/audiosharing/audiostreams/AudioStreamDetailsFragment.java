@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -45,8 +46,7 @@ public class AudioStreamDetailsFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO(chelseahao): update metrics id
-        return 0;
+        return SettingsEnums.AUDIO_STREAM_DETAIL;
     }
 
     @Override

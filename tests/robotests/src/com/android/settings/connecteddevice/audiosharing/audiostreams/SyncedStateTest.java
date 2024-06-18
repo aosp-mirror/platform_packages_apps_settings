@@ -21,7 +21,6 @@ import static com.android.settings.connecteddevice.audiosharing.audiostreams.Aud
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
@@ -33,6 +32,7 @@ import android.content.Context;
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -60,8 +60,13 @@ public class SyncedStateTest {
     @Before
     public void setUp() {
         ShadowAlertDialog.reset();
-        mMockContext = spy(ApplicationProvider.getApplicationContext());
+        mMockContext = ApplicationProvider.getApplicationContext();
         mInstance = SyncedState.getInstance();
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAlertDialog.reset();
     }
 
     @Test

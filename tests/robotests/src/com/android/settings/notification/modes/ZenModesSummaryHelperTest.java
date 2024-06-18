@@ -22,6 +22,7 @@ import static android.service.notification.ZenPolicy.PEOPLE_TYPE_ANYONE;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_CONTACTS;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_AMBIENT;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_LIGHTS;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.AutomaticZenRule;
@@ -29,6 +30,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,10 +38,13 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @RunWith(RobolectricTestRunner.class)
 public class ZenModesSummaryHelperTest {
     private Context mContext;
-    private ZenModesBackend mBackend;
+    private ZenHelperBackend mBackend;
 
     private ZenModeSummaryHelper mSummaryHelper;
 
@@ -47,7 +52,7 @@ public class ZenModesSummaryHelperTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mBackend = new ZenModesBackend(mContext);
+        mBackend = new ZenHelperBackend(mContext);
         mSummaryHelper = new ZenModeSummaryHelper(mContext, mBackend);
     }
 
@@ -325,4 +330,99 @@ public class ZenModesSummaryHelperTest {
         assertThat(mSummaryHelper.getDisplayEffectsSummary(zenMode)).isEqualTo(
                 "Notifications partially hidden, grayscale, and 2 more");
     }
+
+    @Test
+    public void getAppsSummary_all() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowChannels(ZenMode.CHANNEL_POLICY_ALL)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getAppsSummary(zenMode, new LinkedHashSet<>())).isEqualTo("All");
+    }
+
+    @Test
+    public void getAppsSummary_none() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowChannels(ZenPolicy.CHANNEL_POLICY_NONE)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getAppsSummary(zenMode, new LinkedHashSet<>())).isEqualTo("None");
+    }
+
+    @Test
+    public void getAppsSummary_priorityAppsNoList() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowChannels(ZenPolicy.CHANNEL_POLICY_PRIORITY)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+
+        assertThat(mSummaryHelper.getAppsSummary(zenMode, null)).isEqualTo("Selected apps");
+    }
+
+    @Test
+    public void getAppsSummary_formatAppsListEmpty() {
+        Set<String> apps = new LinkedHashSet<>();
+        assertThat(mSummaryHelper.formatAppsList(apps)).isEqualTo("No apps can interrupt");
+    }
+
+    @Test
+    public void getAppsSummary_formatAppsListSingle() {
+        Set<String> apps = Set.of("My App");
+        assertThat(mSummaryHelper.formatAppsList(apps)).isEqualTo("My App can interrupt");
+    }
+
+    @Test
+    public void getAppsSummary_formatAppsListTwo() {
+        Set<String> apps = Set.of("My App", "SecondApp");
+        assertThat(mSummaryHelper.formatAppsList(apps)).isEqualTo("My App and SecondApp "
+                + "can interrupt");
+    }
+
+    @Test
+    public void getAppsSummary_formatAppsListThree() {
+        Set<String> apps = Set.of("My App", "SecondApp", "ThirdApp");
+        assertThat(mSummaryHelper.formatAppsList(apps)).isEqualTo("My App, SecondApp, "
+                + "and ThirdApp can interrupt");
+    }
+
+    @Test
+    public void getAppsSummary_formatAppsListMany() {
+        Set<String> apps = Set.of("My App", "SecondApp", "ThirdApp", "FourthApp",
+                "FifthApp", "SixthApp");
+        // Note that apps are selected alphabetically.
+        assertThat(mSummaryHelper.formatAppsList(apps)).isEqualTo("FifthApp, FourthApp, "
+                + "and 4 more can interrupt");
+    }
+
+    @Test
+    public void getAppsSummary_priorityApps() {
+        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
+                .setType(AutomaticZenRule.TYPE_BEDTIME)
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowChannels(ZenPolicy.CHANNEL_POLICY_PRIORITY)
+                        .build())
+                .build();
+        ZenMode zenMode = new ZenMode("id", rule, true);
+        Set<String> apps = Set.of("My App", "SecondApp", "ThirdApp", "FourthApp",
+                "FifthApp", "SixthApp");
+
+        assertThat(mSummaryHelper.getAppsSummary(zenMode, apps)).isEqualTo("FifthApp, FourthApp, "
+                + "and 4 more can interrupt");
+    }
+
 }

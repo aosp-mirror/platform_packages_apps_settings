@@ -31,6 +31,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -54,11 +55,11 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     private final UserManager mUserManager;
     private final TelephonyManager mTelephonyManager;
     private final Activity mActivity;
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
     private RestrictedSwitchPreference mPreference;
 
     public OemUnlockPreferenceController(Context context, Activity activity,
-            DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
 
         if (!TextUtils.equals(SystemProperties.get(OEM_UNLOCK_SUPPORTED_KEY, UNSUPPORTED),

@@ -17,10 +17,12 @@
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
@@ -52,6 +54,10 @@ class AddSourceWaitForResponseState extends AudioStreamStateHandler {
         var metadata = preference.getAudioStreamMetadata();
         if (metadata != null) {
             helper.addSource(metadata);
+            mMetricsFeatureProvider.action(
+                    preference.getContext(),
+                    SettingsEnums.ACTION_AUDIO_STREAM_JOIN,
+                    preference.getSourceOriginForLogging().ordinal());
             // Cache the metadata that used for add source, if source is added successfully, we
             // will save it persistently.
             mAudioStreamsRepository.cacheMetadata(metadata);
@@ -66,15 +72,17 @@ class AddSourceWaitForResponseState extends AudioStreamStateHandler {
                                 && preference.getAudioStreamState() == getStateEnum()) {
                             controller.handleSourceFailedToConnect(
                                     preference.getAudioStreamBroadcastId());
+                            mMetricsFeatureProvider.action(
+                                    preference.getContext(),
+                                    SettingsEnums.ACTION_AUDIO_STREAM_JOIN_FAILED_TIMEOUT,
+                                    preference.getSourceOriginForLogging().ordinal());
                             ThreadUtils.postOnMainThread(
                                     () -> {
                                         if (controller.getFragment() != null) {
-                                            AudioStreamsDialogFragment.show(
+                                            showBroadcastUnavailableNoRetryDialog(
                                                     controller.getFragment(),
-                                                    getBroadcastUnavailableNoRetryDialog(
-                                                            preference.getContext(),
-                                                            AudioStreamsHelper.getBroadcastName(
-                                                                    metadata)));
+                                                    preference.getContext(),
+                                                    AudioStreamsHelper.getBroadcastName(metadata));
                                         }
                                     });
                         }
@@ -94,13 +102,21 @@ class AddSourceWaitForResponseState extends AudioStreamStateHandler {
         return AudioStreamsProgressCategoryController.AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE;
     }
 
-    private AudioStreamsDialogFragment.DialogBuilder getBroadcastUnavailableNoRetryDialog(
-            Context context, String broadcastName) {
-        return new AudioStreamsDialogFragment.DialogBuilder(context)
-                .setTitle(context.getString(R.string.audio_streams_dialog_stream_is_not_available))
-                .setSubTitle1(broadcastName)
-                .setSubTitle2(context.getString(R.string.audio_streams_is_not_playing))
-                .setRightButtonText(context.getString(R.string.audio_streams_dialog_close))
-                .setRightButtonOnClickListener(AlertDialog::dismiss);
+    private void showBroadcastUnavailableNoRetryDialog(
+            Fragment fragment, Context context, String broadcastName) {
+        var broadcastUnavailableNoRetryDialog =
+                new AudioStreamsDialogFragment.DialogBuilder(context)
+                        .setTitle(
+                                context.getString(
+                                        R.string.audio_streams_dialog_stream_is_not_available))
+                        .setSubTitle1(broadcastName)
+                        .setSubTitle2(context.getString(R.string.audio_streams_is_not_playing))
+                        .setRightButtonText(context.getString(R.string.audio_streams_dialog_close))
+                        .setRightButtonOnClickListener(AlertDialog::dismiss);
+
+        AudioStreamsDialogFragment.show(
+                fragment,
+                broadcastUnavailableNoRetryDialog,
+                SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_JOIN_FAILED_TIMEOUT);
     }
 }

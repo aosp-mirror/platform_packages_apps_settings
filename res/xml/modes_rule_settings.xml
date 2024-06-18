@@ -16,6 +16,7 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:title="@string/zen_modes_list_title" >
 
     <com.android.settingslib.widget.LayoutPreference
@@ -27,6 +28,10 @@
             android:selectable="false"
             android:layout="@layout/modes_activation_button"/>
 
+    <com.android.settingslib.widget.ActionButtonsPreference
+        android:key="actions"
+        android:selectable="true" />
+
     <PreferenceCategory
             android:title="@string/mode_interruption_filter_title"
             android:key="modes_filters">
@@ -35,8 +40,20 @@
                 android:title="@string/zen_category_people"/>
 
         <Preference
+            android:key="zen_mode_apps"
+            android:title="@string/zen_category_apps" />
+
+        <Preference
                 android:key="zen_other_settings"
                 android:title="@string/zen_category_exceptions" />
+    </PreferenceCategory>
+
+    <!-- automatic trigger section; preference changes programmatically depending on type -->
+    <PreferenceCategory
+        android:key="zen_automatic_trigger_category"
+        android:title="@string/zen_mode_automatic_trigger_title">
+        <com.android.settingslib.PrimarySwitchPreference
+            android:key="zen_automatic_trigger_settings" />
     </PreferenceCategory>
 
     <PreferenceCategory

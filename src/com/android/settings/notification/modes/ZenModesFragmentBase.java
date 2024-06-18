@@ -41,6 +41,7 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
     protected Context mContext;
 
     protected ZenModesBackend mBackend;
+    protected ZenHelperBackend mHelperBackend;
 
     // Individual pages must implement this method based on what they should do when
     // the device's zen mode state changes.
@@ -59,6 +60,7 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
     public void onAttach(@NonNull Context context) {
         mContext = context;
         mBackend = ZenModesBackend.getInstance(context);
+        mHelperBackend = ZenHelperBackend.getInstance(context);
         super.onAttach(context);
         mSettingsObserver.register();
     }
