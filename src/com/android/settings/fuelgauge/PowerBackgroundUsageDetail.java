@@ -35,6 +35,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.HelpUtils;
@@ -121,6 +122,10 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
 
         mExecutor.execute(
                 () -> {
+                    if (currentOptimizeMode != mOptimizationMode) {
+                        AppOptModeSharedPreferencesUtils.deleteAppOptimizationModeEventByUid(
+                                getContext(), mBatteryOptimizeUtils.getUid());
+                    }
                     BatteryOptimizeLogUtils.writeLog(
                             getContext().getApplicationContext(),
                             Action.LEAVE,

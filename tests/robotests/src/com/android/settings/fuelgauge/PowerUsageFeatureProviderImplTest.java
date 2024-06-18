@@ -78,6 +78,11 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void isForceExpireAppOptimizationModeEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isForceExpireAppOptimizationModeEnabled()).isFalse();
+    }
+
+    @Test
     public void isAppOptimizationModeLogged_returnFalse() {
         assertThat(mPowerFeatureProvider.isAppOptimizationModeLogged()).isFalse();
     }

@@ -21,6 +21,7 @@ message BatteryOptimizeHistoricalLogEntry {
     BACKUP = 5;
     FORCE_RESET = 6;
     EXTERNAL_UPDATE = 7;
+    EXPIRATION_RESET = 8;
   }
 
   optional string package_name = 1;

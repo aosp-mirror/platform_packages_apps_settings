@@ -31,10 +31,6 @@ class RfpsEnrollFindSensorScreenshotTest {
 
   @Test
   fun testEnrollFindSensor() {
-    rule.screenshotTest(
-      "fp_enroll_find_sensor",
-      Mode.MatchSize,
-      RfpsEnrollFindSensorFragment(),
-    )
+    rule.screenshotTest("rfps_enroll_find_sensor", Mode.MatchSize, RfpsEnrollFindSensorFragment())
   }
 }

@@ -103,8 +103,8 @@ class ZenMode {
         mIsManualDnd = isManualDnd;
     }
 
-    static ZenMode manualDndMode(AutomaticZenRule dndPolicyAsRule, boolean isActive) {
-        return new ZenMode(MANUAL_DND_MODE_ID, dndPolicyAsRule, isActive, true);
+    static ZenMode manualDndMode(AutomaticZenRule manualRule, boolean isActive) {
+        return new ZenMode(MANUAL_DND_MODE_ID, manualRule, isActive, true);
     }
 
     @NonNull
@@ -118,14 +118,14 @@ class ZenMode {
     }
 
     @NonNull
-    public ListenableFuture<Drawable> getIcon(@NonNull IconLoader iconLoader) {
-        Context context = iconLoader.getContext();
+    public ListenableFuture<Drawable> getIcon(@NonNull Context context,
+            @NonNull IconLoader iconLoader) {
         if (mIsManualDnd) {
             return Futures.immediateFuture(requireNonNull(
                     context.getDrawable(R.drawable.ic_do_not_disturb_on_24dp)));
         }
 
-        return iconLoader.getIcon(mRule);
+        return iconLoader.getIcon(context, mRule);
     }
 
     @NonNull
@@ -202,6 +202,14 @@ class ZenMode {
         return mRule.getDeviceEffects() != null
                 ? mRule.getDeviceEffects()
                 : new ZenDeviceEffects.Builder().build();
+    }
+
+    public boolean canEditName() {
+        return !isManualDnd();
+    }
+
+    public boolean canEditIcon() {
+        return !isManualDnd();
     }
 
     public boolean canBeDeleted() {

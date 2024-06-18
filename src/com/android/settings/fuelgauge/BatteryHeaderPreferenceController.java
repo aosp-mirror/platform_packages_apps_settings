@@ -97,6 +97,9 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
             final CharSequence wirelessChargingLabel =
                     mBatterySettingsFeatureProvider.getWirelessChargingLabel(mContext, info);
             if (wirelessChargingLabel != null) {
+                mBatteryUsageProgressBarPref.setBottomSummaryContentDescription(
+                        mBatterySettingsFeatureProvider
+                                .getWirelessChargingContentDescription(mContext, info));
                 return wirelessChargingLabel;
             }
         }
