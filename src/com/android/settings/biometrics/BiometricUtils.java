@@ -25,6 +25,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
@@ -65,6 +66,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 public class BiometricUtils {
     private static final String TAG = "BiometricUtils";
+    public static final String EXTRA_ENROLL_REASON = BiometricManager.EXTRA_ENROLL_REASON;
 
     /** The character ' • ' to separate the setup choose options */
     public static final String SEPARATOR = " \u2022 ";

@@ -169,7 +169,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                mFragment.mComponentName.flattenToString());
         // Compare to default UserShortcutType
         assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE);
     }
@@ -185,7 +185,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                mFragment.mComponentName.flattenToString());
         assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
     }
 
@@ -199,7 +199,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                mFragment.mComponentName.flattenToString());
         assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE);
     }
 
@@ -281,7 +281,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.saveNonEmptyUserShortcutType(value);
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                mFragment.mComponentName.flattenToString());
         assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
     }
 

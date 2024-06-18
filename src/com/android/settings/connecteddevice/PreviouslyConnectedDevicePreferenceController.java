@@ -17,6 +17,7 @@ package com.android.settings.connecteddevice;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,13 +37,16 @@ import com.android.settings.bluetooth.SavedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PreviouslyConnectedDevicePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, DevicePreferenceCallback {
@@ -56,11 +60,12 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     private final List<Preference> mDevicesList = new ArrayList<>();
     private final List<Preference> mDockDevicesList = new ArrayList<>();
+    private final Map<BluetoothDevice, Preference> mDevicePreferenceMap = new HashMap<>();
+    private final BluetoothAdapter mBluetoothAdapter;
 
     private PreferenceGroup mPreferenceGroup;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private DockUpdater mSavedDockUpdater;
-    private BluetoothAdapter mBluetoothAdapter;
 
     @VisibleForTesting
     Preference mSeeAllPreference;
@@ -81,7 +86,11 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         mSavedDockUpdater = FeatureFactory.getFeatureFactory().getDockUpdaterFeatureProvider()
                 .getSavedDockUpdater(context, this);
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (Flags.enableSavedDevicesOrderByRecency()) {
+            mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
+        } else {
+            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        }
     }
 
     @Override
@@ -114,6 +123,9 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         mContext.registerReceiver(mReceiver, mIntentFilter,
                 Context.RECEIVER_EXPORTED_UNAUDITED);
         mBluetoothDeviceUpdater.refreshPreference();
+        if (Flags.enableSavedDevicesOrderByRecency()) {
+            updatePreferenceGroup();
+        }
     }
 
     @Override
@@ -131,19 +143,37 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     @Override
     public void onDeviceAdded(Preference preference) {
-        final List<BluetoothDevice> bluetoothDevices =
-                mBluetoothAdapter.getMostRecentlyConnectedDevices();
-        final int index = preference instanceof BluetoothDevicePreference
-                ? bluetoothDevices.indexOf(((BluetoothDevicePreference) preference)
-                .getBluetoothDevice().getDevice()) : DOCK_DEVICE_INDEX;
-        if (DEBUG) {
-            Log.d(TAG, "onDeviceAdded() " + preference.getTitle() + ", index of : " + index);
-            for (BluetoothDevice device : bluetoothDevices) {
-                Log.d(TAG, "onDeviceAdded() most recently device : " + device.getName());
+        if (Flags.enableSavedDevicesOrderByRecency()) {
+            if (preference instanceof BluetoothDevicePreference) {
+                mDevicePreferenceMap.put(
+                        ((BluetoothDevicePreference) preference).getBluetoothDevice().getDevice(),
+                        preference);
+            } else {
+                mDockDevicesList.add(preference);
             }
+            if (DEBUG) {
+                Log.d(TAG, "onDeviceAdded() " + preference.getTitle());
+            }
+            updatePreferenceGroup();
+        } else {
+            final List<BluetoothDevice> bluetoothDevices =
+                    mBluetoothAdapter.getMostRecentlyConnectedDevices();
+            final int index =
+                    preference instanceof BluetoothDevicePreference
+                            ? bluetoothDevices.indexOf(
+                                    ((BluetoothDevicePreference) preference)
+                                            .getBluetoothDevice()
+                                            .getDevice())
+                            : DOCK_DEVICE_INDEX;
+            if (DEBUG) {
+                Log.d(TAG, "onDeviceAdded() " + preference.getTitle() + ", index of : " + index);
+                for (BluetoothDevice device : bluetoothDevices) {
+                    Log.d(TAG, "onDeviceAdded() most recently device : " + device.getName());
+                }
+            }
+            addPreference(index, preference);
+            updatePreferenceVisibility();
         }
-        addPreference(index, preference);
-        updatePreferenceVisibility();
     }
 
     private void addPreference(int index, Preference preference) {
@@ -194,13 +224,57 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     @Override
     public void onDeviceRemoved(Preference preference) {
-        if (preference instanceof BluetoothDevicePreference) {
-            mDevicesList.remove(preference);
+        if (Flags.enableSavedDevicesOrderByRecency()) {
+            if (preference instanceof BluetoothDevicePreference) {
+                mDevicePreferenceMap.remove(
+                        ((BluetoothDevicePreference) preference).getBluetoothDevice().getDevice(),
+                        preference);
+            } else {
+                mDockDevicesList.remove(preference);
+            }
+            if (DEBUG) {
+                Log.d(TAG, "onDeviceRemoved() " + preference.getTitle());
+            }
+            updatePreferenceGroup();
         } else {
-            mDockDevicesList.remove(preference);
-        }
+            if (preference instanceof BluetoothDevicePreference) {
+                mDevicesList.remove(preference);
+            } else {
+                mDockDevicesList.remove(preference);
+            }
 
-        addPreference();
+            addPreference();
+            updatePreferenceVisibility();
+        }
+    }
+
+    /** Sort the preferenceGroup by most recently used. */
+    public void updatePreferenceGroup() {
+        mPreferenceGroup.removeAll();
+        mPreferenceGroup.addPreference(mSeeAllPreference);
+        if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
+            // Bluetooth is supported
+            int order = 0;
+            for (BluetoothDevice device : mBluetoothAdapter.getMostRecentlyConnectedDevices()) {
+                Preference preference = mDevicePreferenceMap.getOrDefault(device, null);
+                if (preference != null) {
+                    preference.setOrder(order);
+                    mPreferenceGroup.addPreference(preference);
+                    order += 1;
+                }
+                if (order == MAX_DEVICE_NUM) {
+                    break;
+                }
+            }
+            for (Preference preference : mDockDevicesList) {
+                if (order == MAX_DEVICE_NUM) {
+                    break;
+                }
+                preference.setOrder(order);
+                mPreferenceGroup.addPreference(preference);
+                order += 1;
+            }
+        }
         updatePreferenceVisibility();
     }
 

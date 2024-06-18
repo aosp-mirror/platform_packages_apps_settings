@@ -18,7 +18,6 @@ package com.android.settings.datausage
 
 import android.content.Context
 import android.net.NetworkTemplate
-import android.util.Range
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Spinner
@@ -27,10 +26,9 @@ import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.datausage.lib.INetworkCycleDataRepository
-import com.android.settings.datausage.lib.NetworkUsageData
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,13 +45,6 @@ class DataUsageListHeaderControllerTest {
         doNothing().whenever(mock).startActivity(any())
     }
 
-    private val repository = object : INetworkCycleDataRepository {
-        override suspend fun loadCycles() = emptyList<NetworkUsageData>()
-        override fun getCycles() = emptyList<Range<Long>>()
-        override fun getPolicy() = null
-        override suspend fun queryChartData(startTime: Long, endTime: Long) = null
-    }
-
     private val header =
         LayoutInflater.from(context).inflate(R.layout.apps_filter_spinner, null, false)
 
@@ -68,9 +59,8 @@ class DataUsageListHeaderControllerTest {
         template = mock<NetworkTemplate>(),
         sourceMetricsCategory = 0,
         viewLifecycleOwner = testLifecycleOwner,
-        onCyclesLoad = {},
+        cyclesFlow = flowOf(emptyList()),
         updateSelectedCycle = {},
-        repository = repository,
     )
 
     @Test

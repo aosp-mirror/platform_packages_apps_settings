@@ -146,7 +146,7 @@ public class SelectableSubscriptions implements Callable<List<SubscriptionAnnota
     }
 
     protected SubscriptionManager getSubscriptionManager(Context context) {
-        return context.getSystemService(SubscriptionManager.class);
+        return context.getSystemService(SubscriptionManager.class).createForAllUserProfiles();
     }
 
     protected List<SubscriptionInfo> getAvailableSubInfoList(Context context) {

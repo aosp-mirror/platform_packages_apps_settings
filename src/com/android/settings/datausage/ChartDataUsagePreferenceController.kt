@@ -18,37 +18,20 @@ package com.android.settings.datausage
 
 import android.content.Context
 import android.net.NetworkTemplate
-import androidx.annotation.OpenForTesting
-import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceScreen
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkCycleChartData
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-@OpenForTesting
-open class ChartDataUsagePreferenceController(context: Context, preferenceKey: String) :
+class ChartDataUsagePreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
 
     private lateinit var repository: INetworkCycleDataRepository
     private lateinit var preference: ChartDataUsagePreference
-    private lateinit var lifecycleScope: LifecycleCoroutineScope
-    private var lastStartTime: Long? = null
-    private var lastEndTime: Long? = null
 
-    open fun init(template: NetworkTemplate) {
+    fun init(template: NetworkTemplate) {
         this.repository = NetworkCycleDataRepository(mContext, template)
-    }
-
-    @VisibleForTesting
-    fun init(repository: INetworkCycleDataRepository) {
-        this.repository = repository
     }
 
     override fun getAvailabilityStatus() = AVAILABLE
@@ -58,33 +41,20 @@ open class ChartDataUsagePreferenceController(context: Context, preferenceKey: S
         preference = screen.findPreference(preferenceKey)!!
     }
 
-    override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        lifecycleScope = viewLifecycleOwner.lifecycleScope
-    }
-
     /**
      * Sets whether billing cycle modifiable.
      *
      * Don't bind warning / limit sweeps if not modifiable.
      */
-    open fun setBillingCycleModifiable(isModifiable: Boolean) {
+    fun setBillingCycleModifiable(isModifiable: Boolean) {
         preference.setNetworkPolicy(
             if (isModifiable) repository.getPolicy() else null
         )
     }
 
-    fun update(startTime: Long, endTime: Long) {
-        if (lastStartTime == startTime && lastEndTime == endTime) return
-        lastStartTime = startTime
-        lastEndTime = endTime
-
-        preference.setTime(startTime, endTime)
-        preference.setNetworkCycleData(NetworkCycleChartData.AllZero)
-        lifecycleScope.launch {
-            val chartData = withContext(Dispatchers.Default) {
-                repository.queryChartData(startTime, endTime)
-            }
-            preference.setNetworkCycleData(chartData)
-        }
+    /** Updates chart to show selected cycle. */
+    fun update(chartData: NetworkCycleChartData) {
+        preference.setTime(chartData.total.startTime, chartData.total.endTime)
+        preference.setNetworkCycleData(chartData)
     }
 }

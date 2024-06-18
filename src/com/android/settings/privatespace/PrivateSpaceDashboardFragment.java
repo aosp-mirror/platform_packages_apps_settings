@@ -16,20 +16,38 @@
 
 package com.android.settings.privatespace;
 
+import static com.android.settings.privatespace.PrivateSpaceAuthenticationActivity.EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED;
+
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
 /** Fragment representing the Private Space dashboard in Settings. */
 public class PrivateSpaceDashboardFragment extends DashboardFragment {
-    private static final String TAG = "PrivateSpaceDashboardFragment";
+    private static final String TAG = "PSDashboardFragment";
 
     @Override
     public void onCreate(Bundle icicle) {
         if (android.os.Flags.allowPrivateProfile()) {
             super.onCreate(icicle);
+            if (icicle == null
+                    && getIntent().getBooleanExtra(EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED, false)) {
+                Log.i(TAG, "Private space unlocked showing toast");
+                Toast.makeText(getContext(), R.string.private_space_unlocked, Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (PrivateSpaceMaintainer.getInstance(getContext()).isPrivateSpaceLocked()) {
+            finish();
         }
     }
 

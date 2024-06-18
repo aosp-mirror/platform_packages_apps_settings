@@ -21,17 +21,19 @@ import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CA
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON;
 
 import static com.android.settings.notification.zen.ZenOnboardingActivity.ALWAYS_SHOW_THRESHOLD;
-import static com.android.settings.notification.zen.ZenOnboardingActivity
-        .PREF_KEY_SUGGESTION_FIRST_DISPLAY_TIME;
+import static com.android.settings.notification.zen.ZenOnboardingActivity.PREF_KEY_SUGGESTION_FIRST_DISPLAY_TIME;
 import static com.android.settings.notification.zen.ZenOnboardingActivity.isSuggestionComplete;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
@@ -40,7 +42,6 @@ import android.provider.Settings;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.notification.zen.ZenOnboardingActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -103,7 +104,11 @@ public class ZenOnboardingActivityTest {
         verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_OK);
 
         ArgumentCaptor<Policy> captor = ArgumentCaptor.forClass(Policy.class);
-        verify(mNm).setNotificationPolicy(captor.capture());
+        if (android.app.Flags.modesApi()) {
+            verify(mNm).setNotificationPolicy(captor.capture(), eq(true));
+        } else {
+            verify(mNm).setNotificationPolicy(captor.capture());
+        }
 
         Policy actual = captor.getValue();
         assertThat(actual.priorityCategories).isEqualTo(PRIORITY_CATEGORY_ALARMS
@@ -123,7 +128,11 @@ public class ZenOnboardingActivityTest {
         mActivity.save(null);
 
         verify(mMetricsLogger).action(MetricsEvent.ACTION_ZEN_ONBOARDING_KEEP_CURRENT_SETTINGS);
-        verify(mNm, never()).setNotificationPolicy(any());
+        if (Flags.modesApi()) {
+            verify(mNm, never()).setNotificationPolicy(any(), anyBoolean());
+        } else {
+            verify(mNm, never()).setNotificationPolicy(any());
+        }
     }
 
     @Test

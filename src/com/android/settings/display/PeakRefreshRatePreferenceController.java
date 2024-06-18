@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
+import static com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateAmongAllDisplays;
 import static com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateForDefaultDisplay;
 
 import android.content.Context;
@@ -30,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.server.display.feature.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -65,7 +67,9 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
                         updateState(mPreference);
                     }
                 };
-        mPeakRefreshRate = Math.round(findHighestRefreshRateForDefaultDisplay(context));
+        mPeakRefreshRate = Math.round(Flags.backUpSmoothDisplayAndForcePeakRefreshRate()
+                ? findHighestRefreshRateAmongAllDisplays(context)
+                : findHighestRefreshRateForDefaultDisplay(context));
         Log.d(
                 TAG,
                 "DEFAULT_REFRESH_RATE : "
@@ -107,7 +111,9 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        final float peakRefreshRate = isChecked ? Float.POSITIVE_INFINITY : DEFAULT_REFRESH_RATE;
+        final float valueIfChecked = Flags.backUpSmoothDisplayAndForcePeakRefreshRate()
+                ? Float.POSITIVE_INFINITY : mPeakRefreshRate;
+        final float peakRefreshRate = isChecked ? valueIfChecked : DEFAULT_REFRESH_RATE;
         Log.d(TAG, "setChecked to : " + peakRefreshRate);
 
         return Settings.System.putFloat(

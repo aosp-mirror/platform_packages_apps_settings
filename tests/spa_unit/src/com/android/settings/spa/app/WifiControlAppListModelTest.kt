@@ -21,7 +21,6 @@ import android.app.AppOpsManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.lifecycle.MutableLiveData
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
@@ -270,7 +269,7 @@ class WifiControlAppListModelTest {
 private class FakeAppOpsController(private val fakeMode: Int) : IAppOpsController {
     var setAllowedCalledWith: Boolean? = null
 
-    override val mode = MutableLiveData(fakeMode)
+    override val mode = flowOf(fakeMode)
 
     override fun setAllowed(allowed: Boolean) {
         setAllowedCalledWith = allowed

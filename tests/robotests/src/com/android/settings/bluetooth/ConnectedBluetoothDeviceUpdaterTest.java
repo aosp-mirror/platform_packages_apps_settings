@@ -20,6 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,8 +30,13 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.util.Pair;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
@@ -37,9 +44,12 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowCachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.flags.Flags;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -58,6 +68,10 @@ import java.util.Collection;
 public class ConnectedBluetoothDeviceUpdaterTest {
 
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
+    private static final String FAKE_EXCLUSIVE_MANAGER_NAME = "com.fake.name";
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock
     private DashboardFragment mDashboardFragment;
@@ -69,6 +83,8 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     private BluetoothDevice mBluetoothDevice;
     @Mock
     private Drawable mDrawable;
+    @Mock
+    private PackageManager mPackageManager;
 
     private Context mContext;
     private ConnectedBluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -82,7 +98,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
         MockitoAnnotations.initMocks(this);
 
         Pair<Drawable, String> pairs = new Pair<>(mDrawable, "fake_device");
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mAudioManager = mContext.getSystemService(AudioManager.class);
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mShadowBluetoothAdapter.setEnabled(true);
@@ -92,6 +108,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
         mCachedDevices = new ArrayList<>();
         mCachedDevices.add(mCachedBluetoothDevice);
 
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
         when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pairs);
@@ -319,5 +336,98 @@ public class ConnectedBluetoothDeviceUpdaterTest {
         mBluetoothDeviceUpdater.addPreference(mCachedBluetoothDevice);
 
         assertThat(btPreference.shouldHideSecondTarget()).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
+    public void update_notExclusiveManagedDevice_addDevice() {
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mBluetoothDeviceUpdater
+                .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_EXCLUSIVE_MANAGER)).thenReturn(
+                null);
+
+        mBluetoothDeviceUpdater.update(mCachedBluetoothDevice);
+
+        verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
+    public void update_notAllowedExclusiveManagedDevice_addDevice() {
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mBluetoothDeviceUpdater
+                .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_EXCLUSIVE_MANAGER)).thenReturn(
+                FAKE_EXCLUSIVE_MANAGER_NAME.getBytes());
+
+        mBluetoothDeviceUpdater.update(mCachedBluetoothDevice);
+
+        verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
+    public void update_existingExclusivelyManagedDeviceWithPackageInstalled_removePreference()
+            throws Exception {
+        final String exclusiveManagerName =
+                BluetoothUtils.getExclusiveManagers().stream().findAny().orElse(
+                        FAKE_EXCLUSIVE_MANAGER_NAME);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mBluetoothDeviceUpdater
+                .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_EXCLUSIVE_MANAGER)).thenReturn(
+                exclusiveManagerName.getBytes());
+        doReturn(new PackageInfo()).when(mPackageManager).getPackageInfo(exclusiveManagerName, 0);
+
+        mBluetoothDeviceUpdater.update(mCachedBluetoothDevice);
+
+        verify(mBluetoothDeviceUpdater).removePreference(mCachedBluetoothDevice);
+        verify(mBluetoothDeviceUpdater, never()).addPreference(mCachedBluetoothDevice);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
+    public void update_newExclusivelyManagedDeviceWithPackageInstalled_doNotAddPreference()
+            throws Exception {
+        final String exclusiveManagerName =
+                BluetoothUtils.getExclusiveManagers().stream().findAny().orElse(
+                        FAKE_EXCLUSIVE_MANAGER_NAME);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mBluetoothDeviceUpdater
+                .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_EXCLUSIVE_MANAGER)).thenReturn(
+                exclusiveManagerName.getBytes());
+        doReturn(new PackageInfo()).when(mPackageManager).getPackageInfo(exclusiveManagerName, 0);
+
+        mBluetoothDeviceUpdater.update(mCachedBluetoothDevice);
+
+        verify(mBluetoothDeviceUpdater).removePreference(mCachedBluetoothDevice);
+        verify(mBluetoothDeviceUpdater, never()).addPreference(mCachedBluetoothDevice);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
+    public void update_exclusivelyManagedDeviceWithoutPackageInstalled_addDevice()
+            throws Exception {
+        final String exclusiveManagerName =
+                BluetoothUtils.getExclusiveManagers().stream().findAny().orElse(
+                        FAKE_EXCLUSIVE_MANAGER_NAME);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        when(mBluetoothDeviceUpdater
+                .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_EXCLUSIVE_MANAGER)).thenReturn(
+                exclusiveManagerName.getBytes());
+        doThrow(new PackageManager.NameNotFoundException()).when(mPackageManager).getPackageInfo(
+                exclusiveManagerName, 0);
+
+        mBluetoothDeviceUpdater.update(mCachedBluetoothDevice);
+
+        verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice);
     }
 }

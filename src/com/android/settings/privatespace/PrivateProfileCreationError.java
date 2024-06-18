@@ -19,6 +19,7 @@ package com.android.settings.privatespace;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,8 @@ import com.google.android.setupdesign.GlifLayout;
 
 /** Fragment to display error screen if creation of private profile failed for any reason. */
 public class PrivateProfileCreationError extends InstrumentedFragment {
+    private static final String TAG = "PrivateSpaceCreationErr";
+
     @Override
     public View onCreateView(
             LayoutInflater inflater,
@@ -57,9 +60,7 @@ public class PrivateProfileCreationError extends InstrumentedFragment {
                         .setText(R.string.private_space_cancel_label)
                         .setListener(onCancel())
                         .setButtonType(FooterButton.ButtonType.CANCEL)
-                        .setTheme(
-                                androidx.appcompat.R.style
-                                        .Base_TextAppearance_AppCompat_Widget_Button)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build());
         OnBackPressedCallback callback =
                 new OnBackPressedCallback(true /* enabled by default */) {
@@ -83,6 +84,7 @@ public class PrivateProfileCreationError extends InstrumentedFragment {
         return v -> {
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_TRY_CREATE_SPACE_AGAIN);
+            Log.i(TAG, "Retry private space creation");
             NavHostFragment.findNavController(PrivateProfileCreationError.this)
                     .navigate(R.id.action_retry_profile_creation);
         };
@@ -94,6 +96,7 @@ public class PrivateProfileCreationError extends InstrumentedFragment {
             if (activity != null) {
                 mMetricsFeatureProvider.action(
                         getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_CANCEL_CREATE_SPACE);
+                Log.i(TAG, "private space setup cancelled");
                 activity.finish();
             }
         };

@@ -16,12 +16,12 @@
 
 package com.android.settings.fuelgauge;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.graphics.ColorFilter;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;

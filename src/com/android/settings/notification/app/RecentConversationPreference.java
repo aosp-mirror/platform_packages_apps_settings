@@ -28,7 +28,7 @@ import com.google.common.annotations.VisibleForTesting;
 public class RecentConversationPreference extends TwoTargetPreference {
 
     private OnClearClickListener mOnClearClickListener;
-
+    private final Context mContext;
     private View mClearView;
 
     public interface OnClearClickListener {
@@ -37,6 +37,7 @@ public class RecentConversationPreference extends TwoTargetPreference {
 
     public RecentConversationPreference(Context context) {
         super(context);
+        mContext = context;
     }
 
     public void setOnClearClickListener(
@@ -70,6 +71,9 @@ public class RecentConversationPreference extends TwoTargetPreference {
         final View widgetFrame = view.findViewById(android.R.id.widget_frame);
         widgetFrame.setVisibility(mOnClearClickListener != null ? View.VISIBLE : View.GONE);
         mClearView = view.findViewById(getClearId());
+        mClearView.setContentDescription(
+                mContext.getString(R.string.clear_conversation, getTitle()));
+
         mClearView.setOnClickListener(v -> {
             if (mOnClearClickListener != null) {
                 mOnClearClickListener.onClear();

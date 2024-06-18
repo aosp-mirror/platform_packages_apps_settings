@@ -91,13 +91,13 @@ public class BackAnimationPreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_PREDICTIVE_BACK_SYSTEM_ANIMATIONS)
+    @RequiresFlagsEnabled(Flags.FLAG_PREDICTIVE_BACK_SYSTEM_ANIMS)
     public void controllerNotAvailable_whenAconfigFlagEnabled() {
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_PREDICTIVE_BACK_SYSTEM_ANIMATIONS)
+    @RequiresFlagsDisabled(Flags.FLAG_PREDICTIVE_BACK_SYSTEM_ANIMS)
     public void controllerAvailable_whenAconfigFlagDisabled() {
         assertTrue(mController.isAvailable());
     }

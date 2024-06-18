@@ -40,6 +40,7 @@ import android.content.res.Resources;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.Fingerprint;
+import android.hardware.fingerprint.FingerprintEnrollOptions;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
@@ -52,6 +53,7 @@ import androidx.annotation.Nullable;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -287,6 +289,18 @@ public class FingerprintEnrollIntroductionTest {
 
         mController.resume().pause().stop();
         assertThat(mFingerprintEnrollIntroduction.shouldFinishWhenBackgrounded()).isEqualTo(true);
+    }
+
+    @Test
+    public void testFingerprintEnrollIntroduction_forwardsEnrollOptions() {
+        final Intent intent = newTokenOnlyIntent();
+        intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                FingerprintEnrollOptions.ENROLL_REASON_SETTINGS);
+        setupFingerprintEnrollIntroWith(intent);
+
+        final Intent enrollingIntent = mFingerprintEnrollIntroduction.getEnrollingIntent();
+        assertThat(enrollingIntent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1))
+                .isEqualTo(FingerprintEnrollOptions.ENROLL_REASON_SETTINGS);
     }
 
     private Intent newTokenOnlyIntent() {

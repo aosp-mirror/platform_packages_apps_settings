@@ -58,6 +58,7 @@ import com.android.settings.wifi.details2.AddDevicePreferenceController2;
 import com.android.settings.wifi.details2.WifiAutoConnectPreferenceController2;
 import com.android.settings.wifi.details2.WifiDetailPreferenceController2;
 import com.android.settings.wifi.details2.WifiMeteredPreferenceController2;
+import com.android.settings.wifi.details2.WifiPrivacyPreferenceController;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.details2.WifiSecondSummaryController2;
 import com.android.settings.wifi.details2.WifiSubscriptionDetailPreferenceController2;
@@ -116,6 +117,13 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
 
     public WifiNetworkDetailsFragment() {
         super(UserManager.DISALLOW_CONFIG_WIFI);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        use(WifiPrivacyPreferenceController.class)
+                .setWifiEntryKey(getArguments().getString(KEY_CHOSEN_WIFIENTRY_KEY));
     }
 
     @Override

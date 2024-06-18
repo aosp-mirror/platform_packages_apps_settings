@@ -27,7 +27,11 @@ import java.util.concurrent.Executor;
 
 /**
  * {@link TelephonyCallback} to listen to Allowed Network Types changed
+ *
+ * @deprecated Please use {@link com.android.settings.network.telephony.AllowedNetworkTypesFlowKt}
+ * instead.
  */
+@Deprecated
 public class AllowedNetworkTypesListener extends TelephonyCallback implements
         TelephonyCallback.AllowedNetworkTypesListener {
     private static final String LOG_TAG = "NetworkModeListener";

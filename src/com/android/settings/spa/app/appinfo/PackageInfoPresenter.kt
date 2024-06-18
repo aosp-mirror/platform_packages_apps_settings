@@ -20,14 +20,16 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.FeatureFlags
-import android.content.pm.FeatureFlagsImpl
+import android.content.pm.FeatureFlags as PmFeatureFlags
+import android.content.pm.FeatureFlagsImpl as PmFeatureFlagsImpl
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.UserHandle
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
+import com.android.settings.flags.FeatureFlags
+import com.android.settings.flags.FeatureFlagsImpl
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.spa.app.startUninstallActivity
 import com.android.settingslib.spa.framework.compose.LocalNavController
@@ -60,7 +62,7 @@ class PackageInfoPresenter(
     val userId: Int,
     private val coroutineScope: CoroutineScope,
     private val packageManagers: IPackageManagers = PackageManagers,
-    private val featureFlags: FeatureFlags = FeatureFlagsImpl(),
+    private val featureFlags: PmFeatureFlags = PmFeatureFlagsImpl(),
 ) {
     private val metricsFeatureProvider = featureFactory.metricsFeatureProvider
     private val userHandle = UserHandle.of(userId)
@@ -166,7 +168,7 @@ class PackageInfoPresenter(
             flags = PackageManager.MATCH_ANY_USER.toLong() or
                 PackageManager.MATCH_DISABLED_COMPONENTS.toLong() or
                 PackageManager.GET_PERMISSIONS.toLong() or
-                if (featureFlags.archiving()) PackageManager.MATCH_ARCHIVED_PACKAGES else 0,
+                if (isArchivingEnabled(featureFlags)) PackageManager.MATCH_ARCHIVED_PACKAGES else 0,
             userId = userId,
         )
 }

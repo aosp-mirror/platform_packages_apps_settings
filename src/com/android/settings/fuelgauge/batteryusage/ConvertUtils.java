@@ -16,7 +16,6 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import android.annotation.IntDef;
-import android.annotation.Nullable;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents.Event;
 import android.app.usage.UsageStatsManager;
@@ -34,6 +33,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -479,7 +479,9 @@ public final class ConvertUtils {
         }
     }
 
-    private static BatteryUsageDiff convertToBatteryUsageDiff(BatteryDiffEntry batteryDiffEntry) {
+
+    @VisibleForTesting
+    static BatteryUsageDiff convertToBatteryUsageDiff(BatteryDiffEntry batteryDiffEntry) {
         BatteryUsageDiff.Builder builder =
                 BatteryUsageDiff.newBuilder()
                         .setUid(batteryDiffEntry.mUid)
@@ -496,6 +498,8 @@ public final class ConvertUtils {
                                 batteryDiffEntry.mForegroundServiceUsageConsumePower)
                         .setCachedUsageConsumePower(batteryDiffEntry.mCachedUsageConsumePower)
                         .setForegroundUsageTime(batteryDiffEntry.mForegroundUsageTimeInMs)
+                        .setForegroundServiceUsageTime(
+                                batteryDiffEntry.mForegroundServiceUsageTimeInMs)
                         .setBackgroundUsageTime(batteryDiffEntry.mBackgroundUsageTimeInMs)
                         .setScreenOnTime(batteryDiffEntry.mScreenOnTimeInMs);
         if (batteryDiffEntry.mKey != null) {

@@ -21,8 +21,8 @@ import static android.provider.Settings.System.KEYBOARD_VIBRATION_ENABLED;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
+import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -33,6 +33,8 @@ import android.os.vibrator.Flags;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -41,10 +43,12 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 
 /**
- *  A preference controller to turn on/off keyboard vibration state with a single toggle.
+ * A preference controller to turn on/off keyboard vibration state with a single toggle.
  */
 public class KeyboardVibrationTogglePreferenceController extends TogglePreferenceController
         implements DefaultLifecycleObserver {
@@ -61,6 +65,8 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     @Nullable
     private TwoStatePreference mPreference;
 
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+
     public KeyboardVibrationTogglePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mVibrator = context.getSystemService(Vibrator.class);
@@ -74,6 +80,7 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
                 }
             }
         };
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -104,7 +111,9 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     @Override
     public int getAvailabilityStatus() {
         if (Flags.keyboardCategoryEnabled()
-                && mContext.getResources().getBoolean(R.bool.config_keyboard_vibration_supported)) {
+                && mContext.getResources().getBoolean(R.bool.config_keyboard_vibration_supported)
+                && mContext.getResources().getFloat(
+                com.android.internal.R.dimen.config_keyboardHapticFeedbackFixedAmplitude) > 0) {
             return AVAILABLE;
         }
         return UNSUPPORTED_ON_DEVICE;
@@ -119,6 +128,8 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     @Override
     public boolean setChecked(boolean isChecked) {
         final boolean success = updateKeyboardVibrationSetting(isChecked);
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_KEYBOARD_VIBRATION_CHANGED, isChecked);
         if (success && isChecked) {
             // Play the preview vibration effect when the toggle is on.
             final VibrationAttributes touchAttrs =
@@ -149,8 +160,11 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     }
 
     private boolean updateKeyboardVibrationSetting(boolean enable) {
-        final boolean success = Settings.System.putInt(mContext.getContentResolver(),
-                    KEYBOARD_VIBRATION_ENABLED, enable ? ON : OFF);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        final boolean success = Settings.System.putInt(contentResolver,
+                KEYBOARD_VIBRATION_ENABLED, enable ? ON : OFF);
+        contentResolver.notifyChange(Settings.System.getUriFor(KEYBOARD_VIBRATION_ENABLED),
+                null /* observer */, ContentResolver.NOTIFY_NO_DELAY);
         if (!success) {
             Log.w(TAG, "Update settings database error!");
         }

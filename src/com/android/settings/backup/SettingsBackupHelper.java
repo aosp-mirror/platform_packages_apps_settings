@@ -19,25 +19,15 @@ package com.android.settings.backup;
 import static com.android.settings.localepicker.LocaleNotificationDataManager.LOCALE_NOTIFICATION;
 
 import android.app.backup.BackupAgentHelper;
-import android.app.backup.BackupDataInputStream;
-import android.app.backup.BackupDataOutput;
-import android.app.backup.BackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
-import android.os.ParcelFileDescriptor;
 
-import com.android.settings.fuelgauge.BatteryBackupHelper;
+import com.android.settings.flags.Flags;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.shortcut.CreateShortcutPreferenceController;
+import com.android.settingslib.datastore.BackupRestoreStorageManager;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import com.android.settings.flags.Flags;
-
-/**
- * Backup agent for Settings APK
- */
+/** Backup agent for Settings APK */
 public class SettingsBackupHelper extends BackupAgentHelper {
     private static final String PREF_LOCALE_NOTIFICATION = "localeNotificationSharedPref";
     public static final String SOUND_BACKUP_HELPER = "SoundSettingsBackup";
@@ -45,8 +35,7 @@ public class SettingsBackupHelper extends BackupAgentHelper {
     @Override
     public void onCreate() {
         super.onCreate();
-        addHelper("no-op", new NoOpHelper());
-        addHelper(BatteryBackupHelper.TAG, new BatteryBackupHelper(this));
+        BackupRestoreStorageManager.getInstance(this).addBackupAgentHelpers(this);
         addHelper(PREF_LOCALE_NOTIFICATION,
                 new SharedPreferencesBackupHelper(this, LOCALE_NOTIFICATION));
         if (Flags.enableSoundBackup()) {
@@ -62,48 +51,7 @@ public class SettingsBackupHelper extends BackupAgentHelper {
     @Override
     public void onRestoreFinished() {
         super.onRestoreFinished();
+        BackupRestoreStorageManager.getInstance(this).onRestoreFinished();
         CreateShortcutPreferenceController.updateRestoredShortcuts(this);
-    }
-
-    /**
-     * Backup helper which does not do anything. Having at least one helper ensures that the
-     * transport is not empty and onRestoreFinished is called eventually.
-     */
-    private static class NoOpHelper implements BackupHelper {
-
-        private final int VERSION_CODE = 1;
-
-        @Override
-        public void performBackup(ParcelFileDescriptor oldState, BackupDataOutput data,
-                ParcelFileDescriptor newState) {
-
-            try (FileOutputStream out = new FileOutputStream(newState.getFileDescriptor())) {
-                if (getVersionCode(oldState) != VERSION_CODE) {
-                    data.writeEntityHeader("placeholder", 1);
-                    data.writeEntityData(new byte[1], 1);
-                }
-
-                // Write new version code
-                out.write(VERSION_CODE);
-                out.flush();
-            } catch (IOException e) { }
-        }
-
-        @Override
-        public void restoreEntity(BackupDataInputStream data) { }
-
-        @Override
-        public void writeNewStateDescription(ParcelFileDescriptor newState) { }
-
-        private int getVersionCode(ParcelFileDescriptor state) {
-            if (state == null) {
-                return 0;
-            }
-            try (FileInputStream in = new FileInputStream(state.getFileDescriptor())) {
-                return in.read();
-            } catch (IOException e) {
-                return 0;
-            }
-        }
     }
 }

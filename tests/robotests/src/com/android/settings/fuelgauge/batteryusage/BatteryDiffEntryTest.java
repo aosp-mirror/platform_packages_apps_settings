@@ -59,6 +59,7 @@ import java.util.Locale;
 public final class BatteryDiffEntryTest {
 
     private static final int UID = 100;
+    private static final int USER_ID = 0;
     private static final int UNINSTALLED_UID = 101;
     private static final String PACKAGE_NAME = "com.android.testing";
     private static final String UNINSTALLED_PACKAGE_NAME = "com.android.testing.uninstalled";
@@ -87,13 +88,14 @@ public final class BatteryDiffEntryTest {
         doReturn(mMockPackageManager).when(mContext).getPackageManager();
         doReturn(UID)
                 .when(mMockPackageManager)
-                .getPackageUid(PACKAGE_NAME, PackageManager.GET_META_DATA);
+                .getPackageUidAsUser(PACKAGE_NAME, PackageManager.GET_META_DATA, USER_ID);
         doReturn(BatteryUtils.UID_NULL)
                 .when(mMockPackageManager)
-                .getPackageUid(UNINSTALLED_PACKAGE_NAME, PackageManager.GET_META_DATA);
+                .getPackageUidAsUser(
+                        UNINSTALLED_PACKAGE_NAME, PackageManager.GET_META_DATA, USER_ID);
         doReturn(BatteryUtils.UID_ZERO)
                 .when(mMockPackageManager)
-                .getPackageUid(UID_ZERO_PACKAGE_NAME, PackageManager.GET_META_DATA);
+                .getPackageUidAsUser(UID_ZERO_PACKAGE_NAME, PackageManager.GET_META_DATA, USER_ID);
         BatteryDiffEntry.clearCache();
     }
 

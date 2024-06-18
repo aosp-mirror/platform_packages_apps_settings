@@ -98,17 +98,19 @@ public class UsbDetailsDataRoleController extends UsbDetailsController
 
     @Override
     public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
-        int role = UsbBackend.dataRoleFromString(preference.getKey());
-        if (role != mUsbBackend.getDataRole() && mNextRolePref == null
-                && !Utils.isMonkeyRunning()) {
-            mUsbBackend.setDataRole(role);
-            mNextRolePref = preference;
-            preference.setSummary(R.string.usb_switching);
+        requireAuthAndExecute(() -> {
+            int role = UsbBackend.dataRoleFromString(preference.getKey());
+            if (role != mUsbBackend.getDataRole() && mNextRolePref == null
+                    && !Utils.isMonkeyRunning()) {
+                mUsbBackend.setDataRole(role);
+                mNextRolePref = preference;
+                preference.setSummary(R.string.usb_switching);
 
-            mHandler.postDelayed(mFailureCallback,
-                    mUsbBackend.areAllRolesSupported() ? UsbBackend.PD_ROLE_SWAP_TIMEOUT_MS
-                            : UsbBackend.NONPD_ROLE_SWAP_TIMEOUT_MS);
-        }
+                mHandler.postDelayed(mFailureCallback,
+                        mUsbBackend.areAllRolesSupported() ? UsbBackend.PD_ROLE_SWAP_TIMEOUT_MS
+                                : UsbBackend.NONPD_ROLE_SWAP_TIMEOUT_MS);
+            }
+        });
     }
 
     @Override

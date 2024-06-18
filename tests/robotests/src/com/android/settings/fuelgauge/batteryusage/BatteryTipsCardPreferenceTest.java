@@ -120,12 +120,19 @@ public final class BatteryTipsCardPreferenceTest {
         assertThat(intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, -1))
                 .isEqualTo(SettingsEnums.DISPLAY);
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "BrightnessAnomaly");
+                .action(
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "BrightnessAnomaly",
+                        PowerAnomalyKey.KEY_BRIGHTNESS.getNumber());
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                         SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT,
-                        "BrightnessAnomaly");
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "BrightnessAnomaly",
+                        PowerAnomalyKey.KEY_BRIGHTNESS.getNumber());
     }
 
     @Test
@@ -146,14 +153,18 @@ public final class BatteryTipsCardPreferenceTest {
                 .contains(PowerAnomalyKey.KEY_SCREEN_TIMEOUT.name());
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                         SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
-                        "ScreenTimeoutAnomaly");
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "ScreenTimeoutAnomaly",
+                        PowerAnomalyKey.KEY_SCREEN_TIMEOUT.getNumber());
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
                         SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS,
-                        "ScreenTimeoutAnomaly");
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "ScreenTimeoutAnomaly",
+                        PowerAnomalyKey.KEY_SCREEN_TIMEOUT.getNumber());
     }
 
     @Ignore("b/313582999")
@@ -173,9 +184,19 @@ public final class BatteryTipsCardPreferenceTest {
         verify(mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(eq(1), eq(0));
         verify(mBatteryChartPreferenceController).selectHighlightSlotIndex();
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "AppAnomaly");
+                .action(
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "AppAnomaly",
+                        PowerAnomalyKey.KEY_APP_TOTAL_HIGHER_THAN_USUAL.getNumber());
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT, "AppAnomaly");
+                .action(
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "AppAnomaly",
+                        PowerAnomalyKey.KEY_APP_TOTAL_HIGHER_THAN_USUAL.getNumber());
     }
 
     @Ignore("b/313582999")
@@ -194,8 +215,18 @@ public final class BatteryTipsCardPreferenceTest {
         verify(mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(eq(1), eq(0));
         verify(mBatteryChartPreferenceController, never()).selectHighlightSlotIndex();
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "AppAnomaly");
+                .action(
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "AppAnomaly",
+                        PowerAnomalyKey.KEY_APP_TOTAL_HIGHER_THAN_USUAL.getNumber());
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, "AppAnomaly");
+                .action(
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS,
+                        SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                        "AppAnomaly",
+                        PowerAnomalyKey.KEY_APP_TOTAL_HIGHER_THAN_USUAL.getNumber());
     }
 }

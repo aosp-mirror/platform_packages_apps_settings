@@ -26,8 +26,10 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -52,6 +54,8 @@ class AppArchiveButtonTest {
 
     private val packageInstaller = mock<PackageInstaller>()
 
+    private val isHibernationSwitchEnabledStateFlow = MutableStateFlow(true)
+
     private lateinit var appArchiveButton: AppArchiveButton
 
     @Before
@@ -59,8 +63,10 @@ class AppArchiveButtonTest {
         whenever(packageInfoPresenter.context).thenReturn(context)
         whenever(packageInfoPresenter.userPackageManager).thenReturn(userPackageManager)
         whenever(userPackageManager.packageInstaller).thenReturn(packageInstaller)
+        whenever(userPackageManager.getApplicationLabel(any())).thenReturn(APP_LABEL)
         whenever(packageInfoPresenter.packageName).thenReturn(PACKAGE_NAME)
-        appArchiveButton = AppArchiveButton(packageInfoPresenter)
+        appArchiveButton =
+            AppArchiveButton(packageInfoPresenter, isHibernationSwitchEnabledStateFlow)
     }
 
     @Test
@@ -90,6 +96,20 @@ class AppArchiveButtonTest {
     }
 
     @Test
+    fun appArchiveButton_whenIsHibernationSwitchDisabled_isDisabled() {
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            isArchived = false
+            flags = ApplicationInfo.FLAG_INSTALLED
+        }
+        whenever(userPackageManager.isAppArchivable(app.packageName)).thenReturn(true)
+        isHibernationSwitchEnabledStateFlow.value = false
+        val enabledActionButton = setContent(app)
+
+        assertThat(enabledActionButton.enabled).isFalse()
+    }
+
+    @Test
     fun appArchiveButton_displaysRightTextAndIcon() {
         val app = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
@@ -116,8 +136,7 @@ class AppArchiveButtonTest {
 
         verify(packageInstaller).requestArchive(
             eq(PACKAGE_NAME),
-            any(),
-            eq(0)
+            any()
         )
     }
 
@@ -126,10 +145,12 @@ class AppArchiveButtonTest {
         composeTestRule.setContent {
             actionButton = appArchiveButton.getActionButton(app)
         }
+        composeTestRule.delay()
         return actionButton
     }
 
     private companion object {
         const val PACKAGE_NAME = "package.name"
+        const val APP_LABEL = "App label"
     }
 }

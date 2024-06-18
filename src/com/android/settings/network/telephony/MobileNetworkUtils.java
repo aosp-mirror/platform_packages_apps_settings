@@ -31,7 +31,6 @@ import static com.android.settings.network.telephony.TelephonyConstants.Telephon
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
 
-import android.annotation.Nullable;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -69,6 +68,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.util.ArrayUtils;
@@ -80,6 +80,7 @@ import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
+import com.android.settings.network.telephony.wificalling.WifiCallingRepository;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
@@ -357,8 +358,9 @@ public class MobileNetworkUtils {
         final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         final SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
-        telephonyManager.setDataEnabled(enabled);
+                SubscriptionManager.class).createForAllUserProfiles();
+        telephonyManager.setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
+                enabled);
 
         if (disableOtherSubscriptions) {
             final List<SubscriptionInfo> subInfoList =
@@ -367,8 +369,10 @@ public class MobileNetworkUtils {
                 for (SubscriptionInfo subInfo : subInfoList) {
                     // We never disable mobile data for opportunistic subscriptions.
                     if (subInfo.getSubscriptionId() != subId && !subInfo.isOpportunistic()) {
-                        context.getSystemService(TelephonyManager.class).createForSubscriptionId(
-                                subInfo.getSubscriptionId()).setDataEnabled(false);
+                        context.getSystemService(TelephonyManager.class)
+                                .createForSubscriptionId(subInfo.getSubscriptionId())
+                                .setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
+                                        false);
                     }
                 }
             }
@@ -666,39 +670,26 @@ public class MobileNetworkUtils {
      * 2. Similar design which aligned with operator name displayed in status bar
      */
     public static CharSequence getCurrentCarrierNameForDisplay(Context context, int subId) {
-        final SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
-        if (sm != null) {
-            final SubscriptionInfo subInfo = getSubscriptionInfo(sm, subId);
-            if (subInfo != null) {
-                return subInfo.getCarrierName();
-            }
+        final SubscriptionInfo subInfo = getSubscriptionInfo(context, subId);
+        if (subInfo != null) {
+            return subInfo.getCarrierName();
         }
         return getOperatorNameFromTelephonyManager(context);
     }
 
     public static CharSequence getCurrentCarrierNameForDisplay(Context context) {
-        final SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
-        if (sm != null) {
-            final int subId = sm.getDefaultSubscriptionId();
-            final SubscriptionInfo subInfo = getSubscriptionInfo(sm, subId);
-            if (subInfo != null) {
-                return subInfo.getCarrierName();
-            }
+        final SubscriptionInfo subInfo = getSubscriptionInfo(context,
+                SubscriptionManager.getDefaultSubscriptionId());
+        if (subInfo != null) {
+            return subInfo.getCarrierName();
         }
         return getOperatorNameFromTelephonyManager(context);
     }
 
-    private static SubscriptionInfo getSubscriptionInfo(SubscriptionManager subManager, int subId) {
-        List<SubscriptionInfo> subInfos = subManager.getActiveSubscriptionInfoList();
-        if (subInfos == null) {
-            return null;
-        }
-        for (SubscriptionInfo subInfo : subInfos) {
-            if (subInfo.getSubscriptionId() == subId) {
-                return subInfo;
-            }
-        }
-        return null;
+    private static @Nullable SubscriptionInfo getSubscriptionInfo(Context context, int subId) {
+        SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
+        if (sm == null) return null;
+        return sm.createForAllUserProfiles().getActiveSubscriptionInfo(subId);
     }
 
     private static String getOperatorNameFromTelephonyManager(Context context) {
@@ -712,7 +703,7 @@ public class MobileNetworkUtils {
 
     private static int[] getActiveSubscriptionIdList(Context context) {
         final SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
+                SubscriptionManager.class).createForAllUserProfiles();
         final List<SubscriptionInfo> subInfoList =
                 subscriptionManager.getActiveSubscriptionInfoList();
         if (subInfoList == null) {
@@ -938,7 +929,10 @@ public class MobileNetworkUtils {
 
     /**
      * Copied from WifiCallingPreferenceController#isWifiCallingEnabled()
+     *
+     * @deprecated Use {@link WifiCallingRepository#wifiCallingReadyFlow()} instead.
      */
+    @Deprecated
     public static boolean isWifiCallingEnabled(Context context, int subId,
             @Nullable WifiCallingQueryImsState queryImsState) {
         if (queryImsState == null) {

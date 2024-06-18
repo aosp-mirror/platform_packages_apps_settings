@@ -25,7 +25,6 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
-import org.mockito.kotlin.anyVararg
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
@@ -47,7 +46,7 @@ class ClientInitiatedActionRepositoryTest {
     @Test
     fun onSystemUpdate_notEnabled() {
         mockCarrierConfigManager.stub {
-            on { getConfig(anyVararg()) } doReturn persistableBundleOf()
+            on { getConfigForSubId(any(), any()) } doReturn persistableBundleOf()
         }
 
         repository.onSystemUpdate()
@@ -58,7 +57,7 @@ class ClientInitiatedActionRepositoryTest {
     @Test
     fun onSystemUpdate_enabled() {
         mockCarrierConfigManager.stub {
-            on { getConfig(anyVararg()) } doReturn persistableBundleOf(
+            on { getConfigForSubId(any(), any()) } doReturn persistableBundleOf(
                 CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_BOOL to true,
                 CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_INTENT_STRING to ACTION,
             )

@@ -27,9 +27,18 @@ import android.widget.Toast
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CloudDownload
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spaprivileged.framework.compose.DisposableBroadcastReceiverAsUser
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 
 class AppRestoreButton(packageInfoPresenter: PackageInfoPresenter) {
     private companion object {
@@ -43,6 +52,16 @@ class AppRestoreButton(packageInfoPresenter: PackageInfoPresenter) {
     private val packageName = packageInfoPresenter.packageName
     private val userHandle = UserHandle.of(packageInfoPresenter.userId)
     private var broadcastReceiverIsCreated = false
+    private lateinit var coroutineScope: CoroutineScope
+    private lateinit var updateButtonTextJob: Job
+    private val buttonTexts = intArrayOf(
+        R.string.restore,
+        R.string.restoring_step_one,
+        R.string.restoring_step_two,
+        R.string.restoring_step_three,
+        R.string.restoring_step_four,
+    )
+    private var buttonTextIndexStateFlow = MutableStateFlow(0)
 
     @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton {
@@ -55,10 +74,17 @@ class AppRestoreButton(packageInfoPresenter: PackageInfoPresenter) {
             }
             broadcastReceiverIsCreated = true
         }
+        coroutineScope = rememberCoroutineScope()
+        if (app.isArchived && ::updateButtonTextJob.isInitialized && !updateButtonTextJob.isActive) {
+            buttonTextIndexStateFlow.value = 0
+        }
         return ActionButton(
-            text = context.getString(R.string.restore),
+            text = context.getString(
+                buttonTexts[
+                    buttonTextIndexStateFlow.asStateFlow().collectAsStateWithLifecycle(0).value]
+            ),
             imageVector = Icons.Outlined.CloudDownload,
-            enabled = app.isArchived
+            enabled = app.isArchived && (!::updateButtonTextJob.isInitialized || !updateButtonTextJob.isActive)
         ) { onRestoreClicked(app) }
     }
 
@@ -73,12 +99,6 @@ class AppRestoreButton(packageInfoPresenter: PackageInfoPresenter) {
         )
         try {
             packageInstaller.requestUnarchive(app.packageName, pendingIntent.intentSender)
-            val appLabel = userPackageManager.getApplicationLabel(app)
-            Toast.makeText(
-                context,
-                context.getString(R.string.restoring_in_progress, appLabel),
-                Toast.LENGTH_SHORT
-            ).show()
         } catch (e: Exception) {
             Log.e(LOG_TAG, "Request unarchive failed", e)
             Toast.makeText(
@@ -92,23 +112,23 @@ class AppRestoreButton(packageInfoPresenter: PackageInfoPresenter) {
     private fun onReceive(intent: Intent, app: ApplicationInfo) {
         when (val unarchiveStatus =
             intent.getIntExtra(PackageInstaller.EXTRA_UNARCHIVE_STATUS, Int.MIN_VALUE)) {
-            PackageInstaller.STATUS_PENDING_USER_ACTION -> {
-                Log.e(
-                    LOG_TAG,
-                    "Request unarchiving failed for $packageName with code $unarchiveStatus"
-                )
-                Toast.makeText(
-                    context,
-                    context.getString(R.string.restoring_failed),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-            PackageInstaller.STATUS_SUCCESS -> {
+            PackageInstaller.UNARCHIVAL_OK -> {
+                // updateButtonTextJob will be canceled automatically once
+                // AppButtonsPresenter#getActionButtons is triggered
+                updateButtonTextJob = coroutineScope.launch {
+                    while (isActive) {
+                        var index = buttonTextIndexStateFlow.value
+                        index = (index + 1) % buttonTexts.size
+                        // The initial state shouldn't be used here
+                        if (index == 0) index++
+                        buttonTextIndexStateFlow.emit(index)
+                        delay(1000)
+                    }
+                }
                 val appLabel = userPackageManager.getApplicationLabel(app)
                 Toast.makeText(
                     context,
-                    context.getString(R.string.restoring_succeeded, appLabel),
+                    context.getString(R.string.restoring_in_progress, appLabel),
                     Toast.LENGTH_SHORT
                 ).show()
             }

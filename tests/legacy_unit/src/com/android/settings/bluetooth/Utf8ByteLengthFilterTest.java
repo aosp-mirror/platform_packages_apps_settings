@@ -17,9 +17,10 @@
 package com.android.settings.bluetooth;
 
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.SmallTest;
 import android.text.InputFilter;
 import android.text.SpannableStringBuilder;
+
+import androidx.test.filters.SmallTest;
 
 public class Utf8ByteLengthFilterTest extends AndroidTestCase {
 

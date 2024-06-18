@@ -33,7 +33,6 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
-import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -46,6 +45,7 @@ import android.os.UserHandle;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -53,7 +53,6 @@ import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.PrimarySwitchPreference;
@@ -61,19 +60,24 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.datastore.ChangeReason;
+import com.android.settingslib.datastore.Observer;
 import com.android.settingslib.widget.LayoutPreference;
+
+import com.google.common.util.concurrent.MoreExecutors;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -83,10 +87,13 @@ import java.util.concurrent.TimeUnit;
 @Config(
         shadows = {
             ShadowEntityHeaderController.class,
-            ShadowActivityManager.class,
             com.android.settings.testutils.shadow.ShadowFragment.class,
         })
 public class AdvancedPowerUsageDetailTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
     private static final String[] PACKAGE_NAME = {"com.android.app"};
@@ -112,9 +119,10 @@ public class AdvancedPowerUsageDetailTest {
     @Mock private AppOpsManager mAppOpsManager;
     @Mock private LoaderManager mLoaderManager;
     @Mock private BatteryOptimizeUtils mBatteryOptimizeUtils;
-    @Mock private BackupManager mBackupManager;
+    @Mock private Observer mObserver;
 
     private Context mContext;
+    private BatterySettingsStorage mBatterySettingsStorage;
     private PrimarySwitchPreference mAllowBackgroundUsagePreference;
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
@@ -125,9 +133,8 @@ public class AdvancedPowerUsageDetailTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mBatterySettingsStorage = BatterySettingsStorage.get(mContext);
         when(mContext.getPackageName()).thenReturn("foo");
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
@@ -198,7 +205,6 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
         mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
-        mFragment.mBackupManager = mBackupManager;
         mFragment.mLogStringBuilder = new StringBuilder();
         mAppEntry.info = mock(ApplicationInfo.class);
 
@@ -413,9 +419,9 @@ public class AdvancedPowerUsageDetailTest {
         TimeUnit.SECONDS.sleep(1);
         verify(mMetricsFeatureProvider)
                 .action(
-                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                        SettingsEnums.LEAVE_APP_BATTERY_USAGE,
                         SettingsEnums.ACTION_APP_BATTERY_USAGE_ALLOW_BACKGROUND,
-                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                        SettingsEnums.FUELGAUGE_POWER_USAGE_DETAIL,
                         packageName,
                         /* consumed battery */ 0);
     }
@@ -445,23 +451,25 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void notifyBackupManager_optimizationModeIsNotChanged_notInvokeDataChanged() {
+        mBatterySettingsStorage.addObserver(mObserver, MoreExecutors.directExecutor());
         final int mode = BatteryOptimizeUtils.MODE_RESTRICTED;
         mFragment.mOptimizationMode = mode;
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
 
         mFragment.notifyBackupManager();
 
-        verifyNoInteractions(mBackupManager);
+        verifyNoInteractions(mObserver);
     }
 
     @Test
     public void notifyBackupManager_optimizationModeIsChanged_invokeDataChanged() {
+        mBatterySettingsStorage.addObserver(mObserver, MoreExecutors.directExecutor());
         mFragment.mOptimizationMode = BatteryOptimizeUtils.MODE_RESTRICTED;
         when(mBatteryOptimizeUtils.getAppOptimizationMode())
                 .thenReturn(BatteryOptimizeUtils.MODE_UNRESTRICTED);
 
         mFragment.notifyBackupManager();
 
-        verify(mBackupManager).dataChanged();
+        verify(mObserver).onChanged(ChangeReason.UPDATE);
     }
 }

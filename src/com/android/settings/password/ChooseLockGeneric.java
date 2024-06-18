@@ -50,6 +50,9 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.security.AndroidKeyStoreMaintenance;
+import android.security.GateKeeper;
+import android.security.KeyStoreException;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.text.TextUtils;
 import android.util.EventLog;
@@ -147,7 +150,6 @@ public class ChooseLockGeneric extends SettingsActivity {
          * ChooseLockGeneric can be relaunched with the same extras.
          */
         public static final String EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS = "choose_lock_generic_extras";
-
         @VisibleForTesting
         static final int CONFIRM_EXISTING_REQUEST = 100;
         @VisibleForTesting
@@ -162,6 +164,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mRequestGatekeeperPasswordHandle = false;
         private boolean mPasswordConfirmed = false;
         private boolean mWaitingForConfirmation = false;
+        private boolean mWaitingForActivityResult = false;
         private LockscreenCredential mUserPassword;
         private FingerprintManager mFingerprintManager;
         private FaceManager mFaceManager;
@@ -202,6 +205,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mOnlyEnforceDevicePasswordRequirement = false;
         private int mExtraLockScreenTitleResId;
         private int mExtraLockScreenDescriptionResId;
+        private boolean mWaitingForBiometricEnrollment = false;
 
         @Override
         public int getMetricsCategory() {
@@ -249,6 +253,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
             mForBiometrics = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
+            mWaitingForBiometricEnrollment = mForBiometrics || mForFingerprint || mForFace;
 
             mExtraLockScreenTitleResId = intent.getIntExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, -1);
             mExtraLockScreenDescriptionResId =
@@ -435,10 +440,11 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (!isUnlockMethodSecure(key) && mLockPatternUtils.isSecure(mUserId)) {
                 // Show the disabling FRP warning only when the user is switching from a secure
                 // unlock method to an insecure one
-                showFactoryResetProtectionWarningDialog(key);
+                showFactoryResetProtectionWarningDialog(key, GateKeeper.getSecureUserId(mUserId));
                 return true;
             } else if (KEY_SKIP_FINGERPRINT.equals(key) || KEY_SKIP_FACE.equals(key)
                     || KEY_SKIP_BIOMETRICS.equals(key)) {
+                mWaitingForBiometricEnrollment = false;
                 Intent chooseLockGenericIntent = new Intent(getActivity(),
                     getInternalActivityClass());
                 chooseLockGenericIntent.setAction(getIntent().getAction());
@@ -470,6 +476,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
             mWaitingForConfirmation = false;
+            mWaitingForActivityResult = false;
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
                 mPasswordConfirmed = true;
                 mUserPassword = data != null
@@ -479,7 +486,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else if (requestCode == CHOOSE_LOCK_REQUEST) {
                 if (resultCode != RESULT_CANCELED) {
                     getActivity().setResult(resultCode, data);
-                    finish();
                 } else {
                     // If PASSWORD_TYPE_KEY is set, this activity is used as a trampoline to start
                     // the actual password enrollment. If the result is canceled, which means the
@@ -487,11 +493,12 @@ public class ChooseLockGeneric extends SettingsActivity {
                     int quality = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
                     if (quality != -1) {
                         getActivity().setResult(RESULT_CANCELED, data);
-                        finish();
                     }
                 }
+                finish();
             } else if (requestCode == CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST
                     && resultCode == BiometricEnrollBase.RESULT_FINISHED) {
+                mWaitingForBiometricEnrollment = false;
                 Intent intent = getBiometricEnrollIntent(getActivity());
                 if (data != null) {
                     // ChooseLockGeneric should have requested for a Gatekeeper Password Handle to
@@ -821,6 +828,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
                 if (getIntent().getBooleanExtra(EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW, false)) {
                     intent.putExtra(EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW, true);
+                    mWaitingForActivityResult = true;
                 }
                 intent.putExtra(EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS, getIntent().getExtras());
                 // If the caller requested Gatekeeper Password Handle to be returned, we assume it
@@ -871,7 +879,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             // Otherwise, bugs would be caused. (e.g. b/278488549, b/278530059)
             final boolean hasCredential = mLockPatternUtils.isSecure(mUserId);
             if (!getActivity().isChangingConfigurations()
-                    && !mWaitingForConfirmation && hasCredential) {
+                    && !mWaitingForConfirmation && !mWaitingForActivityResult && hasCredential
+                    && !mWaitingForBiometricEnrollment) {
                 getActivity().finish();
             }
         }
@@ -899,7 +908,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     : R.string.unlock_disable_frp_warning_title;
         }
 
-        private int getResIdForFactoryResetProtectionWarningMessage() {
+        private int getResIdForFactoryResetProtectionWarningMessage(
+                boolean hasAppsWithAuthBoundKeys) {
             final boolean hasFingerprints;
             final boolean hasFace;
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
@@ -928,13 +938,24 @@ public class ChooseLockGeneric extends SettingsActivity {
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
                     if (hasFingerprints && hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_pin_face_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pin_face_fingerprint;
                     } else if (hasFingerprints) {
-                        return R.string.unlock_disable_frp_warning_content_pin_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pin_fingerprint;
                     } else if (hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_pin_face;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_pin_face_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pin_face;
                     } else {
-                        return R.string.unlock_disable_frp_warning_content_pin;
+                        return hasAppsWithAuthBoundKeys
+                                ? R.string.unlock_disable_frp_warning_content_pin_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pin;
                     }
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
@@ -991,9 +1012,26 @@ public class ChooseLockGeneric extends SettingsActivity {
             return false;
         }
 
-        private void showFactoryResetProtectionWarningDialog(String unlockMethodToSet) {
+        private void showFactoryResetProtectionWarningDialog(String unlockMethodToSet,
+                long userSecureId) {
+            // Call Keystore to find out if this user has apps with authentication-bound
+            // keys associated with the userSecureId of the LSKF to be removed.
+            boolean appsAffectedByFRPRemovalExist;
+            try {
+                long[] appsAffectedByFRPRemoval =
+                        AndroidKeyStoreMaintenance.getAllAppUidsAffectedBySid(mUserId,
+                                userSecureId);
+                appsAffectedByFRPRemovalExist = appsAffectedByFRPRemoval.length > 0;
+            } catch (KeyStoreException e) {
+                Log.w(TAG, String.format("Failed to get list of apps affected by SID %d removal",
+                        userSecureId), e);
+                // Fail closed: If Settings can't reach Keystore, assume (out of caution) that
+                // there are authentication-bound keys that will be invalidated.
+                appsAffectedByFRPRemovalExist = true;
+            }
             int title = getResIdForFactoryResetProtectionWarningTitle();
-            int message = getResIdForFactoryResetProtectionWarningMessage();
+            int message = getResIdForFactoryResetProtectionWarningMessage(
+                    appsAffectedByFRPRemovalExist);
             FactoryResetProtectionWarningDialog dialog =
                     FactoryResetProtectionWarningDialog.newInstance(
                             title, message, unlockMethodToSet);

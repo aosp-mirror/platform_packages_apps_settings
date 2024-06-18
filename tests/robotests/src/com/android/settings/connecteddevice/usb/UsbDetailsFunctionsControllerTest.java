@@ -30,15 +30,18 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.net.TetheringManager;
+import android.platform.test.annotations.RequiresFlagsEnabled;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
@@ -51,6 +54,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -70,11 +74,10 @@ public class UsbDetailsFunctionsControllerTest {
     private PreferenceManager mPreferenceManager;
     private PreferenceScreen mScreen;
     private SelectorWithWidgetPreference mRadioButtonPreference;
+    private UsbDetailsFragment mFragment;
 
     @Mock
     private UsbBackend mUsbBackend;
-    @Mock
-    private UsbDetailsFragment mFragment;
     @Mock
     private FragmentActivity mActivity;
     @Mock
@@ -83,7 +86,7 @@ public class UsbDetailsFunctionsControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
+        mFragment = spy(new UsbDetailsFragment());
         mContext = spy(RuntimeEnvironment.application);
         mLifecycle = new Lifecycle(() -> mLifecycle);
         mPreferenceManager = new PreferenceManager(mContext);
@@ -332,6 +335,23 @@ public class UsbDetailsFunctionsControllerTest {
         verify(mTetheringManager, never()).startTethering(eq(TetheringManager.TETHERING_USB),
                 any(),
                 eq(mDetailsFunctionsController.mOnStartTetheringCallback));
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_AUTH_CHALLENGE_FOR_USB_PREFERENCES)
+    public void onRadioButtonClicked_userAuthenticated() {
+        mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_PTP));
+        doReturn(UsbManager.FUNCTION_MTP).when(mUsbBackend).getCurrentFunctions();
+        setAuthPassesAutomatically();
+
+        mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
+
+        assertThat(mFragment.isUserAuthenticated()).isTrue();
+    }
+
+    private void setAuthPassesAutomatically() {
+        Shadows.shadowOf(mContext.getSystemService(KeyguardManager.class))
+                .setIsKeyguardSecure(false);
     }
 
     @Test

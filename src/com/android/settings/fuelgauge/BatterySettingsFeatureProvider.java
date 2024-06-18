@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 
+import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 
 import java.util.List;
@@ -35,5 +36,9 @@ public interface BatterySettingsFeatureProvider {
     boolean isBatteryInfoEnabled(Context context);
 
     /** A way to add more battery tip detectors. */
-    void addBatteryTipDetector(Context context, List<BatteryTip> tips);
+    void addBatteryTipDetector(
+            Context context,
+            List<BatteryTip> batteryTips,
+            BatteryInfo batteryInfo,
+            BatteryTipPolicy batteryTipPolicy);
 }

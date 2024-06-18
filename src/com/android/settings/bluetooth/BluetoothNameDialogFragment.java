@@ -132,7 +132,7 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
+        if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
             setDeviceName(v.getText().toString());
             if (mAlertDialog != null && mAlertDialog.isShowing()) {
                 mAlertDialog.dismiss();

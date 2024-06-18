@@ -18,6 +18,7 @@ package com.android.settings.applications.specialaccess.deviceadmin;
 
 import static android.app.admin.DevicePolicyManager.ACTION_DEVICE_POLICY_MANAGER_STATE_CHANGED;
 
+import android.Manifest;
 import android.app.AppGlobals;
 import android.app.admin.DeviceAdminInfo;
 import android.app.admin.DeviceAdminReceiver;
@@ -31,6 +32,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.UserProperties;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -45,12 +47,13 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.widget.AppSwitchPreference;
 import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -154,10 +157,21 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         mAdmins.clear();
         final List<UserHandle> profiles = mUm.getUserProfiles();
         for (UserHandle profile : profiles) {
+            if (shouldSkipProfile(profile)) {
+                continue;
+            }
             final int profileId = profile.getIdentifier();
             updateAvailableAdminsForProfile(profileId);
         }
         Collections.sort(mAdmins);
+    }
+
+    private boolean shouldSkipProfile(UserHandle profile) {
+        return  android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                && mUm.isQuietModeEnabled(profile)
+                && mUm.getUserProperties(profile).getShowInQuietMode()
+                        == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN;
     }
 
     private void refreshUI() {
@@ -167,35 +181,35 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         if (mFooterPreference != null) {
             mFooterPreference.setVisible(mAdmins.isEmpty());
         }
-        final Map<String, AppSwitchPreference> preferenceCache = new ArrayMap<>();
+        final Map<String, RestrictedSwitchPreference> preferenceCache = new ArrayMap<>();
         final Context prefContext = mPreferenceGroup.getContext();
         final int childrenCount = mPreferenceGroup.getPreferenceCount();
         for (int i = 0; i < childrenCount; i++) {
             final Preference pref = mPreferenceGroup.getPreference(i);
-            if (!(pref instanceof AppSwitchPreference)) {
+            if (!(pref instanceof RestrictedSwitchPreference switchPref)) {
                 continue;
             }
-            final AppSwitchPreference appSwitch = (AppSwitchPreference) pref;
-            preferenceCache.put(appSwitch.getKey(), appSwitch);
+            preferenceCache.put(switchPref.getKey(), switchPref);
         }
         for (DeviceAdminListItem item : mAdmins) {
             final String key = item.getKey();
-            AppSwitchPreference pref = preferenceCache.remove(key);
+            RestrictedSwitchPreference pref = preferenceCache.remove(key);
             if (pref == null) {
-                pref = new AppSwitchPreference(prefContext);
+                pref = new RestrictedSwitchPreference(prefContext);
                 mPreferenceGroup.addPreference(pref);
             }
             bindPreference(item, pref);
         }
-        for (AppSwitchPreference unusedCacheItem : preferenceCache.values()) {
+        for (RestrictedSwitchPreference unusedCacheItem : preferenceCache.values()) {
             mPreferenceGroup.removePreference(unusedCacheItem);
         }
     }
 
-    private void bindPreference(DeviceAdminListItem item, AppSwitchPreference pref) {
+    private void bindPreference(DeviceAdminListItem item, RestrictedSwitchPreference pref) {
         pref.setKey(item.getKey());
         pref.setTitle(item.getName());
         pref.setIcon(item.getIcon());
+        pref.setIconSize(TwoTargetPreference.ICON_SIZE_DEFAULT);
         pref.setChecked(item.isActive());
         pref.setSummary(item.getDescription());
         pref.setEnabled(item.isEnabled());
@@ -207,6 +221,8 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         });
         pref.setOnPreferenceChangeListener((preference, newValue) -> false);
         pref.setSingleLineTitle(true);
+        pref.checkEcmRestrictionAndSetDisabled(Manifest.permission.BIND_DEVICE_ADMIN,
+                item.getPackageName());
     }
 
     /**
