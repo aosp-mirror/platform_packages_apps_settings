@@ -19,20 +19,23 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/notification_polite_title">
 
-    <com.android.settings.RestrictedListPreference
-        android:key="polite_notifications_pref_dlg"
-        android:persistent="false"
-        android:title="@string/notification_polite_title"
-        android:entries="@array/notification_polite_options"
-        android:entryValues="@array/notification_polite_options_values"
-        settings:controller="com.android.settings.notification.PoliteNotificationFilterController"/>
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="polite_notification_desc"
+        android:title="@string/notification_polite_description"/>
 
-    <SwitchPreferenceCompat
-        android:key="notification_polite_vibrate_unlocked"
-        android:persistent="false"
-        android:title="@string/notification_polite_vibrate_unlocked"
-        android:summary="@string/notification_polite_vibrate_unlocked_summary"
-        settings:controller="com.android.settings.notification.PoliteNotifVibrateUnlockedToggleController" />
+<!--    TODO(b/330606963): add the illustration back when animation is ready-->
+<!--    <com.android.settingslib.widget.IllustrationPreference-->
+<!--        android:key="bubbles_illustration"-->
+<!--        settings:searchable="false"-->
+<!--        android:selectable="false"-->
+<!--        app:lottie_rawRes="@raw/lottie_bubbles"-->
+<!--        app:lottie_cacheComposition="false"-->
+<!--        settings:dynamicColor="true" />-->
+
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="polite_notification_global_pref"
+        android:title="@string/notification_polite_main_control_title"
+        settings:controller="com.android.settings.notification.PoliteNotificationGlobalPreferenceController" />
 
     <SwitchPreferenceCompat
         android:key="notification_polite_work_profile"

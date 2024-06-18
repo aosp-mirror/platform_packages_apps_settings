@@ -18,10 +18,12 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assume.assumeTrue;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.companion.CompanionDeviceManager;
+import android.companion.Flags;
 import android.companion.datatransfer.PermissionSyncRequest;
 
 import androidx.preference.PreferenceCategory;
@@ -88,6 +90,7 @@ public class BluetoothDetailsDataSyncControllerTest extends BluetoothDetailsCont
 
     @Test
     public void isAvailable_hasAssociations_returnTrue() {
+        assumeTrue(Flags.ongoingPermSync());
         assertThat(mController.isAvailable()).isTrue();
     }
 

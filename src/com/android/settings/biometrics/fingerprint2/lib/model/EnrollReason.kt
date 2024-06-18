@@ -24,5 +24,5 @@ enum class EnrollReason {
    */
   FindSensor,
   /** The enroll happens on enrolling screen. */
-  EnrollEnrolling
+  EnrollEnrolling,
 }

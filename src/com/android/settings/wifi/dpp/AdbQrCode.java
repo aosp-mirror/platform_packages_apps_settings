@@ -16,7 +16,11 @@
 package com.android.settings.wifi.dpp;
 
 import android.content.Context;
+import android.net.wifi.UriParserResults;
+import android.net.wifi.WifiConfiguration;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 /**
  * Extension of WifiQrCode to support ADB QR code format.
@@ -27,31 +31,31 @@ import android.text.TextUtils;
 public class AdbQrCode extends WifiQrCode {
     static final String SECURITY_ADB = "ADB";
 
-    private WifiNetworkConfig mAdbConfig;
+    private WifiConfiguration mAdbConfig;
 
     public AdbQrCode(String qrCode) throws IllegalArgumentException {
         super(qrCode);
 
         // Only accept the zxing format.
-        if (!WifiQrCode.SCHEME_ZXING_WIFI_NETWORK_CONFIG.equals(getScheme())) {
+        if (getScheme() != UriParserResults.URI_SCHEME_ZXING_WIFI_NETWORK_CONFIG) {
             throw new IllegalArgumentException("DPP format not supported for ADB QR code");
         }
+        mAdbConfig = getWifiConfiguration();
 
-        mAdbConfig = getWifiNetworkConfig();
-        if (!SECURITY_ADB.equals(mAdbConfig.getSecurity())) {
-            throw new IllegalArgumentException("Invalid security type");
+        if (mAdbConfig == null) {
+            throw new IllegalArgumentException("Null config when parsing ADB QR code");
         }
-
-        if (TextUtils.isEmpty(mAdbConfig.getSsid())) {
+        if (TextUtils.isEmpty(mAdbConfig.SSID)) {
             throw new IllegalArgumentException("Empty service name");
         }
 
-        if (TextUtils.isEmpty(mAdbConfig.getPreSharedKey())) {
+        if (TextUtils.isEmpty(mAdbConfig.preSharedKey)) {
             throw new IllegalArgumentException("Empty password");
         }
     }
 
-    public WifiNetworkConfig getAdbNetworkConfig() {
+    @NonNull
+    public WifiConfiguration getAdbNetworkConfig() {
         return mAdbConfig;
     }
 

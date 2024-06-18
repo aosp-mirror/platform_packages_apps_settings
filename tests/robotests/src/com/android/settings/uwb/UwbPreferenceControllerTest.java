@@ -57,9 +57,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.LooperMode;
 
 /** Unit tests for UWB preference toggle. */
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.INSTRUMENTATION_TEST)
 public class UwbPreferenceControllerTest {
     private static final String TEST_SUMMARY = "uwb";
     private static final String TEST_AIRPLANE_SUMMARY = "apm_uwb";

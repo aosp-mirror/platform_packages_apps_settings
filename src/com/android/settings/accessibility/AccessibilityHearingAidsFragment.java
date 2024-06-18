@@ -97,13 +97,12 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
 
     @Override
     protected ComponentName getTileComponentName() {
-        // Don't have quick settings tile for now.
-        return null;
+        return AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_TILE_COMPONENT_NAME;
     }
 
     @Override
     protected CharSequence getTileTooltipContent(int type) {
-        // Don't have quick settings tile for now.
+        // No tooltip to be shown
         return null;
     }
 

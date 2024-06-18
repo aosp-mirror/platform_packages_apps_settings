@@ -25,6 +25,7 @@ import android.os.SystemProperties;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.development.DeveloperOptionAwareMixin;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
@@ -35,7 +36,8 @@ import java.util.List;
 import java.util.Map;
 
 @SearchIndexable
-public class DevelopmentTileConfigFragment extends DashboardFragment {
+public class DevelopmentTileConfigFragment extends DashboardFragment implements
+        DeveloperOptionAwareMixin {
     private static final String TAG = "DevelopmentTileConfig";
     private static final String QS_TILE_PERF = "develop_qs_tile";
 

@@ -139,6 +139,7 @@ public final class CredentialStorage extends FragmentActivity {
             }
 
             final Intent installIntent = new Intent(ACTION_INSTALL)
+                    .setPackage(getPackageName())
                     .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                     .putExtras(bundle);
             startActivityAsUser(installIntent, new UserHandle(dstUserId));

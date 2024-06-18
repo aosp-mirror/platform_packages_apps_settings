@@ -22,6 +22,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -30,14 +32,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.ResolveInfo;
-import android.content.pm.ServiceInfo;
-import android.os.Build;
+import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.Flags;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -48,18 +51,18 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.accessibility.AccessibilityButtonFragment;
 import com.android.settings.accessibility.FloatingMenuSizePreferenceController;
+import com.android.settings.testutils.AccessibilityTestUtils;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -77,18 +80,23 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
             new ComponentName("FakePackage", "StandardA11yService");
     private static final String SOFTWARE_SHORTCUT_SETTING_NAME =
             Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
-
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private Context mContext;
+    private AccessibilityManager mAccessibilityManager;
     private TestSoftwareShortcutOptionPreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = spy(Robolectric.buildActivity(FragmentActivity.class).get());
+        mAccessibilityManager = AccessibilityTestUtils.setupMockAccessibilityManager(mContext);
 
-        AccessibilityServiceInfo mAlwaysOnServiceInfo = createAccessibilityServiceInfo(
-                TARGET_ALWAYS_ON_A11Y_SERVICE, /* isAlwaysOnService= */ true);
-        AccessibilityServiceInfo mStandardServiceInfo = createAccessibilityServiceInfo(
-                TARGET_STANDARD_A11Y_SERVICE, /* isAlwaysOnService= */ false);
+        AccessibilityServiceInfo mAlwaysOnServiceInfo =
+                AccessibilityTestUtils.createAccessibilityServiceInfo(
+                        mContext, TARGET_ALWAYS_ON_A11Y_SERVICE, /* isAlwaysOnService= */ true);
+        AccessibilityServiceInfo mStandardServiceInfo =
+                AccessibilityTestUtils.createAccessibilityServiceInfo(
+                        mContext, TARGET_STANDARD_A11Y_SERVICE, /* isAlwaysOnService= */ false);
         AccessibilityManager am = mock(AccessibilityManager.class);
         when(mContext.getSystemService(Context.ACCESSIBILITY_SERVICE)).thenReturn(am);
         when(am.getInstalledAccessibilityServiceList()).thenReturn(
@@ -170,6 +178,7 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableShortcut_shortcutTurnedOn() {
         String target = TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString();
         mController.setShortcutTargets(Set.of(target));
@@ -185,6 +194,27 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void enableShortcutForTargets_enableShortcut_callA11yManager() {
+        String target = TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString();
+        mController.setShortcutTargets(Set.of(target));
+        assertThat(ShortcutUtils.isComponentIdExistingInSettings(
+                mContext, ShortcutConstants.UserShortcutType.SOFTWARE, target
+        )).isFalse();
+
+        mController.enableShortcutForTargets(true);
+
+        verify(mAccessibilityManager).enableShortcutsForTargets(
+                /* enable= */ true,
+                ShortcutConstants.UserShortcutType.SOFTWARE,
+                Set.of(target),
+                UserHandle.myUserId()
+        );
+        verifyNoMoreInteractions(mAccessibilityManager);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_disableShortcut_shortcutTurnedOff() {
         String target = TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString();
         ShortcutUtils.optInValueToSettings(
@@ -202,6 +232,29 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void enableShortcutForTargets_disableShortcut_callA11yManager() {
+        String target = TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString();
+        ShortcutUtils.optInValueToSettings(
+                mContext, ShortcutConstants.UserShortcutType.SOFTWARE, target);
+        assertThat(ShortcutUtils.isComponentIdExistingInSettings(
+                mContext, ShortcutConstants.UserShortcutType.SOFTWARE, target
+        )).isTrue();
+        mController.setShortcutTargets(Set.of(target));
+
+        mController.enableShortcutForTargets(false);
+
+        verify(mAccessibilityManager).enableShortcutsForTargets(
+                /* enable= */ false,
+                ShortcutConstants.UserShortcutType.SOFTWARE,
+                Set.of(target),
+                UserHandle.myUserId()
+        );
+        verifyNoMoreInteractions(mAccessibilityManager);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableShortcutWithMagnification_menuSizeIncreased() {
         mController.setShortcutTargets(Set.of(TARGET_MAGNIFICATION));
 
@@ -216,6 +269,7 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableShortcutWithMagnification_userConfigureSmallMenuSize_menuSizeNotChanged() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
@@ -233,6 +287,7 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableAlwaysOnServiceShortcut_turnsOnAlwaysOnService() {
         mController.setShortcutTargets(
                 Set.of(TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString()));
@@ -244,6 +299,7 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_disableAlwaysOnServiceShortcut_turnsOffAlwaysOnService() {
         mController.setShortcutTargets(
                 Set.of(TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString()));
@@ -255,6 +311,7 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableStandardServiceShortcut_wontTurnOnService() {
         mController.setShortcutTargets(
                 Set.of(TARGET_STANDARD_A11Y_SERVICE.flattenToString()));
@@ -266,6 +323,7 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_disableStandardServiceShortcutWithServiceOn_wontTurnOffService() {
         mController.setShortcutTargets(
                 Set.of(TARGET_STANDARD_A11Y_SERVICE.flattenToString()));
@@ -286,32 +344,6 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
         assertThat(intent.getComponent()).isEqualTo(
                 new ComponentName(applicationContext, SubSettings.class));
         assertThat(intent.getExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(page);
-    }
-
-    private AccessibilityServiceInfo createAccessibilityServiceInfo(
-            ComponentName componentName, boolean isAlwaysOnService) {
-        final ApplicationInfo applicationInfo = new ApplicationInfo();
-        applicationInfo.targetSdkVersion = Build.VERSION_CODES.R;
-        final ServiceInfo serviceInfo = new ServiceInfo();
-        applicationInfo.packageName = componentName.getPackageName();
-        serviceInfo.packageName = componentName.getPackageName();
-        serviceInfo.name = componentName.getClassName();
-        serviceInfo.applicationInfo = applicationInfo;
-
-        final ResolveInfo resolveInfo = new ResolveInfo();
-        resolveInfo.serviceInfo = serviceInfo;
-        try {
-            final AccessibilityServiceInfo info = new AccessibilityServiceInfo(resolveInfo,
-                    mContext);
-            info.setComponentName(componentName);
-            if (isAlwaysOnService) {
-                info.flags |= AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON;
-            }
-            return info;
-        } catch (XmlPullParserException | IOException e) {
-            // Do nothing
-        }
-        return null;
     }
 
     private static class TestSoftwareShortcutOptionPreferenceController

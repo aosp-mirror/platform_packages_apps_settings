@@ -34,7 +34,8 @@ public class PrivateSpaceBiometricSettings extends BiometricsSettingsBase {
     @Override
     public void onAttach(Context context) {
         if (android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()) {
+                && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             super.onAttach(context);
             UserHandle privateProfileHandle =
                     PrivateSpaceMaintainer.getInstance(context).getPrivateProfileHandle();

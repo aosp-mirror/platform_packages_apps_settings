@@ -48,6 +48,7 @@ import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.testing.TestLifecycleOwner;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -112,6 +113,7 @@ public class EnabledNetworkModePreferenceControllerTest {
         doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfig();
         doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_CARRIER_CONFIG_APPLIED_BOOL, true);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_PREFER_3G_VISIBILITY_BOOL, true);
         mPreference = new ListPreference(mContext);
         mController = new EnabledNetworkModePreferenceController(mContext, KEY);
         mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
@@ -384,6 +386,7 @@ public class EnabledNetworkModePreferenceControllerTest {
                         TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
 
         mController.updateState(mPreference);
+        mController.onViewCreated(new TestLifecycleOwner());
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
 
@@ -399,6 +402,7 @@ public class EnabledNetworkModePreferenceControllerTest {
                 getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
         mController.updateState(mPreference);
+        mController.onViewCreated(new TestLifecycleOwner());
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 

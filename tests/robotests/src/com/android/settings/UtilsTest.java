@@ -16,6 +16,10 @@
 
 package com.android.settings;
 
+import static android.hardware.biometrics.SensorProperties.STRENGTH_CONVENIENCE;
+import static android.hardware.biometrics.SensorProperties.STRENGTH_STRONG;
+import static android.hardware.biometrics.SensorProperties.STRENGTH_WEAK;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertNull;
@@ -43,6 +47,9 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorProperties;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
@@ -431,6 +438,69 @@ public class UtilsTest {
                 USER_ID, LockPatternUtils.CREDENTIAL_TYPE_NONE);
 
         assertNull(confirmCredentialString);
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceStrengthStrong_shouldReturnTrue() {
+        FaceManager mockFaceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mockFaceManager);
+        doReturn(true).when(mPackageManager).hasSystemFeature(anyString());
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                STRENGTH_STRONG,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        doReturn(props).when(mockFaceManager).getSensorPropertiesInternal();
+
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isTrue();
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceStrengthWeak_shouldReturnTrue() {
+        FaceManager mockFaceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mockFaceManager);
+        doReturn(true).when(mPackageManager).hasSystemFeature(anyString());
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                STRENGTH_WEAK,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        doReturn(props).when(mockFaceManager).getSensorPropertiesInternal();
+
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isTrue();
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceStrengthConvenience_shouldReturnFalse() {
+        FaceManager mockFaceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mockFaceManager);
+        doReturn(true).when(mPackageManager).hasSystemFeature(anyString());
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                STRENGTH_CONVENIENCE,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        doReturn(props).when(mockFaceManager).getSensorPropertiesInternal();
+
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isFalse();
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceManagerNull_shouldReturnFalse() {
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(null);
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isFalse();
     }
 
     private void setUpForConfirmCredentialString(boolean isEffectiveUserManagedProfile) {

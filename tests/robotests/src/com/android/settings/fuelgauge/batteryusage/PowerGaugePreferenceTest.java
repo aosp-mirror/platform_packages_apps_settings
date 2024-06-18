@@ -101,4 +101,13 @@ public class PowerGaugePreferenceTest {
         assertThat(mPreferenceViewHolder.findViewById(android.R.id.title).getContentDescription())
                 .isEqualTo(CONTENT_DESCRIPTION);
     }
+
+    @Test
+    public void testOnBindViewHolder_bindPercentageContentDescription() {
+        mPowerGaugePreference.setPercentageContentDescription(CONTENT_DESCRIPTION);
+        mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);
+
+        assertThat(mPreferenceViewHolder.findViewById(R.id.widget_summary).getContentDescription())
+                .isEqualTo(CONTENT_DESCRIPTION);
+    }
 }

@@ -19,20 +19,14 @@ package com.android.settings.network.telephony;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.PersistableBundle;
-import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.telephony.ims.ImsException;
-import android.telephony.ims.ImsManager;
-import android.telephony.ims.ImsMmTelManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
@@ -40,15 +34,11 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.R;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.flags.Flags;
 import com.android.settings.network.MobileDataContentObserver;
-import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionsChangeListener;
-import com.android.settings.network.ims.WifiCallingQueryImsState;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.network.telephony.wificalling.CrossSimCallingViewModel;
 
 /**
  * Controls whether switch mobile data to the non-default SIM if the non-default SIM has better
@@ -63,25 +53,29 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenceController
         implements LifecycleObserver,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
-    private static final String LOG_TAG = "AutoDataSwitchPrefCtrl";
 
+    @Nullable
     private TwoStatePreference mPreference;
+    @Nullable
     private SubscriptionsChangeListener mChangeListener;
+    @Nullable
     private TelephonyManager mManager;
+    @Nullable
     private MobileDataContentObserver mMobileDataContentObserver;
+    @Nullable
+    private CrossSimCallingViewModel mCrossSimCallingViewModel;
+    @Nullable
     private PreferenceScreen mScreen;
 
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
-
-    public AutoDataSwitchPreferenceController(Context context,
-            String preferenceKey) {
+    public AutoDataSwitchPreferenceController(
+            @NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
-        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
-    void init(int subId) {
+    void init(int subId, @Nullable CrossSimCallingViewModel crossSimCallingViewModel) {
         this.mSubId = subId;
         mManager = mContext.getSystemService(TelephonyManager.class).createForSubscriptionId(subId);
+        mCrossSimCallingViewModel = crossSimCallingViewModel;
     }
 
     @OnLifecycleEvent(ON_RESUME)
@@ -121,35 +115,15 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
                 TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH);
     }
 
-    private int getOtherSubId(@NonNull int[] subIds) {
-        if (subIds.length > 1) {
-            for (int subId : subIds) {
-                if (subId != mSubId) {
-                    return subId;
-                }
-            }
-        }
-        return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-    }
-
-    private boolean isEnabled(int subId) {
-        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return false;
-        }
-        TelephonyManager telephonyManager = mContext.getSystemService(
-                TelephonyManager.class).createForSubscriptionId(subId);
-        return telephonyManager != null && telephonyManager.isMobileDataPolicyEnabled(
-                        TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH);
-    }
-
     @Override
     public boolean setChecked(boolean isChecked) {
-        mManager.setMobileDataPolicyEnabled(
-                TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH,
-                isChecked);
-        if (mContext.getResources().getBoolean(
-                R.bool.config_auto_data_switch_enables_cross_sim_calling)) {
-            trySetCrossSimCalling(mContext, getActiveSubscriptionIdList(), isChecked /* enabled */);
+        if (mManager != null) {
+            mManager.setMobileDataPolicyEnabled(
+                    TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH,
+                    isChecked);
+        }
+        if (mCrossSimCallingViewModel != null) {
+            mCrossSimCallingViewModel.updateCrossSimCalling();
         }
         return true;
     }
@@ -157,40 +131,6 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
     @VisibleForTesting
     protected boolean hasMobileData() {
         return DataUsageUtils.hasMobileData(mContext);
-    }
-
-    private boolean isCrossSimCallingAllowedByPlatform(Context context, int subId) {
-        if ((new WifiCallingQueryImsState(context, subId)).isWifiCallingSupported()) {
-            PersistableBundle bundle = getCarrierConfigForSubId(subId);
-            return (bundle != null) && bundle.getBoolean(
-                    CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL,
-                    false /*default*/);
-        }
-        return false;
-    }
-
-    protected ImsMmTelManager getImsMmTelManager(Context context, int subId) {
-        ImsManager imsMgr = context.getSystemService(ImsManager.class);
-        return (imsMgr == null) ? null : imsMgr.getImsMmTelManager(subId);
-    }
-
-    private void trySetCrossSimCallingPerSub(Context context, int subId, boolean enabled) {
-        try {
-            getImsMmTelManager(context, subId).setCrossSimCallingEnabled(enabled);
-        } catch (ImsException | IllegalArgumentException | NullPointerException exception) {
-            Log.w(LOG_TAG, "failed to change cross SIM calling configuration to " + enabled
-                    + " for subID " + subId + "with exception: ", exception);
-        }
-    }
-
-    private void trySetCrossSimCalling(Context context, int[] subIds, boolean enabled) {
-        mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_UPDATE_CROSS_SIM_CALLING_ON_AUTO_DATA_SWITCH_EVENT, enabled);
-        for (int subId : subIds) {
-            if (isCrossSimCallingAllowedByPlatform(context, subId)) {
-                trySetCrossSimCallingPerSub(context, subId, enabled);
-            }
-        }
     }
 
     @Override
@@ -221,20 +161,11 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
         updateState(mPreference);
     }
 
-    private int[] getActiveSubscriptionIdList() {
-        return ProxySubscriptionManager.getInstance(mContext).getActiveSubscriptionIdList();
-    }
-
     /**
      * Trigger displaying preference when Mobile data content changed.
      */
     @VisibleForTesting
     public void refreshPreference() {
-        if (mContext.getResources().getBoolean(
-                R.bool.config_auto_data_switch_enables_cross_sim_calling)) {
-            int[] subIds = getActiveSubscriptionIdList();
-            trySetCrossSimCalling(mContext, subIds, isEnabled(getOtherSubId(subIds)));
-        }
         if (mScreen != null) {
             super.displayPreference(mScreen);
         }

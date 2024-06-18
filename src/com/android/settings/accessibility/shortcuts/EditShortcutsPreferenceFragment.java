@@ -21,6 +21,7 @@ import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED;
 import static android.provider.Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED;
+import static android.provider.Settings.Secure.ACCESSIBILITY_QS_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
@@ -53,6 +54,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.dialog.AccessibilityTarget;
 import com.android.internal.accessibility.dialog.AccessibilityTargetHelper;
 import com.android.settings.R;
@@ -98,6 +100,9 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     private static final Uri TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING =
             Settings.Secure.getUriFor(ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED);
 
+    private static final Uri QUICK_SETTINGS_SHORTCUT_SETTING =
+            Settings.Secure.getUriFor(ACCESSIBILITY_QS_TARGETS);
+
     @VisibleForTesting
     static final Uri[] SHORTCUT_SETTINGS = {
             VOLUME_KEYS_SHORTCUT_SETTING,
@@ -105,6 +110,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
             BUTTON_SHORTCUT_SETTING,
             TRIPLE_TAP_SHORTCUT_SETTING,
             TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING,
+            QUICK_SETTINGS_SHORTCUT_SETTING,
     };
 
     private Set<String> mShortcutTargets;
@@ -171,11 +177,15 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
                 } else if (TRIPLE_TAP_SHORTCUT_SETTING.equals(uri)) {
                     refreshPreferenceController(TripleTapShortcutOptionController.class);
                 } else if (TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING.equals(uri)) {
-                    refreshPreferenceController(TwoFingersDoubleTapShortcutOptionController.class);
+                    refreshPreferenceController(TwoFingerDoubleTapShortcutOptionController.class);
+                } else if (QUICK_SETTINGS_SHORTCUT_SETTING.equals(uri)) {
+                    refreshPreferenceController(QuickSettingsShortcutOptionController.class);
                 }
 
-                PreferredShortcuts.updatePreferredShortcutsFromSettings(
-                        getContext(), mShortcutTargets);
+                if (getContext() != null) {
+                    PreferredShortcuts.updatePreferredShortcutsFromSettings(
+                            getContext(), mShortcutTargets);
+                }
             }
         };
 
@@ -197,7 +207,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
         // TODO(b/325664350): Implement shortcut type for "all shortcuts"
         List<AccessibilityTarget> accessibilityTargets =
                 AccessibilityTargetHelper.getInstalledTargets(
-                        activity.getBaseContext(), AccessibilityManager.ACCESSIBILITY_SHORTCUT_KEY);
+                        activity.getBaseContext(), ShortcutConstants.UserShortcutType.HARDWARE);
 
         Pair<String, String> titles = getTitlesFromAccessibilityTargetList(
                 mShortcutTargets,
@@ -207,9 +217,9 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
 
         activity.setTitle(titles.first);
 
-        String categoryKey = activity.getResources().getString(
+        String screenDescriptionPrefKey = getString(
                 R.string.accessibility_shortcut_description_pref);
-        findPreference(categoryKey).setTitle(titles.second);
+        findPreference(screenDescriptionPrefKey).setSummary(titles.second);
     }
 
     @NonNull
@@ -251,8 +261,10 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
-        mTouchExplorationStateChangeListener = isTouchExplorationEnabled ->
-                refreshPreferenceController(GestureShortcutOptionController.class);
+        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
+            refreshPreferenceController(QuickSettingsShortcutOptionController.class);
+            refreshPreferenceController(GestureShortcutOptionController.class);
+        };
 
         final AccessibilityManager am = getSystemService(
                 AccessibilityManager.class);
@@ -378,7 +390,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     private void refreshPreferenceController(
             Class<? extends AbstractPreferenceController> controllerClass) {
         AbstractPreferenceController controller = use(controllerClass);
-        if (controller != null) {
+        if (controller != null && getPreferenceScreen() != null) {
             controller.displayPreference(getPreferenceScreen());
             if (!TextUtils.isEmpty(controller.getPreferenceKey())) {
                 controller.updateState(findPreference(controller.getPreferenceKey()));

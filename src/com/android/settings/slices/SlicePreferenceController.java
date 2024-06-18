@@ -92,6 +92,7 @@ public class SlicePreferenceController extends BasePreferenceController implemen
     @Override
     public void onChanged(Slice slice) {
         mSlicePreference.onSliceUpdated(slice);
+        Log.w(TAG, "Slice UI updated, uri: " + mUri + ", slice content: " + slice);
     }
 
     private void removeLiveDataObserver() {

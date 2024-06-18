@@ -416,6 +416,7 @@ public class ChooseLockPassword extends SettingsActivity {
             public String getHint(Context context, boolean isAlpha, int type, ProfileType profile) {
                 if (isAlpha) {
                     if (android.os.Flags.allowPrivateProfile()
+                            && android.multiuser.Flags.enablePrivateSpaceFeatures()
                             && profile.equals(ProfileType.Private)) {
                         return context.getString(alphaHintForPrivateProfile);
                     } else if (type == TYPE_FINGERPRINT) {
@@ -433,6 +434,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     }
                 } else {
                     if (android.os.Flags.allowPrivateProfile()
+                            && android.multiuser.Flags.enablePrivateSpaceFeatures()
                             && profile.equals(ProfileType.Private)) {
                         return context.getString(numericHintForPrivateProfile);
                     } else if (type == TYPE_FINGERPRINT) {
@@ -1147,7 +1149,9 @@ public class ChooseLockPassword extends SettingsActivity {
                     /*flags=*/0).getSystemService(UserManager.class);
             if (userManager.isManagedProfile()) {
                 return ProfileType.Managed;
-            } else if (android.os.Flags.allowPrivateProfile() && userManager.isPrivateProfile()) {
+            } else if (android.os.Flags.allowPrivateProfile()
+                    && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                    && userManager.isPrivateProfile()) {
                 return ProfileType.Private;
             } else if (userManager.isProfile()) {
                 return ProfileType.Other;

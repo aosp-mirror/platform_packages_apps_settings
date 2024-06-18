@@ -26,11 +26,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.datausage.lib.BillingCycleRepository
-import com.android.settings.network.mobileDataEnabledFlow
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
-import kotlinx.coroutines.flow.map
 
 /**
  * Preference which displays billing cycle of subscription
@@ -46,8 +44,8 @@ class BillingCyclePreference @JvmOverloads constructor(
 
     override fun setTemplate(template: NetworkTemplate, subId: Int) {
         setContent {
-            val isModifiable by remember {
-                context.mobileDataEnabledFlow(subId).map { repository.isModifiable(subId) }
+            val isModifiable by remember(subId) {
+                repository.isModifiableFlow(subId)
             }.collectAsStateWithLifecycle(initialValue = false)
 
             Preference(object : PreferenceModel {

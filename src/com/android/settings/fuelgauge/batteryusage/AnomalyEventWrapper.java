@@ -18,8 +18,12 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -49,8 +53,8 @@ final class AnomalyEventWrapper {
     }
 
     private <T> T getInfo(
-            Function<WarningBannerInfo, T> warningBannerInfoSupplier,
-            Function<WarningItemInfo, T> warningItemInfoSupplier) {
+            @Nullable Function<WarningBannerInfo, T> warningBannerInfoSupplier,
+            @Nullable Function<WarningItemInfo, T> warningItemInfoSupplier) {
         if (warningBannerInfoSupplier != null && mPowerAnomalyEvent.hasWarningBannerInfo()) {
             return warningBannerInfoSupplier.apply(mPowerAnomalyEvent.getWarningBannerInfo());
         } else if (warningItemInfoSupplier != null && mPowerAnomalyEvent.hasWarningItemInfo()) {
@@ -251,5 +255,33 @@ final class AnomalyEventWrapper {
         // Navigate to sub setting page
         mSubSettingLauncher.launch();
         return true;
+    }
+
+    boolean updateSystemSettingsIfAvailable() {
+        final String settingsName =
+                getInfo(WarningBannerInfo::getMainButtonConfigSettingsName, null);
+        final Integer settingsValue =
+                getInfo(WarningBannerInfo::getMainButtonConfigSettingsValue, null);
+        if (TextUtils.isEmpty(settingsName) || settingsValue == null) {
+            Log.d(TAG, "Failed to update settings due to invalid key or value");
+            return false;
+        }
+
+        try {
+            Settings.System.putInt(mContext.getContentResolver(), settingsName, settingsValue);
+            Log.d(
+                    TAG,
+                    String.format(
+                            "Update settings name=%s to value=%d", settingsName, settingsValue));
+            return true;
+        } catch (SecurityException e) {
+            Log.w(
+                    TAG,
+                    String.format(
+                            "Failed to update settings name=%s to value=%d",
+                            settingsName, settingsValue),
+                    e);
+            return false;
+        }
     }
 }

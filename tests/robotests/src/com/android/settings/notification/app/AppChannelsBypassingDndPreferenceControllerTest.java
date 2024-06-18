@@ -42,20 +42,24 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.LooperMode;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public class AppChannelsBypassingDndPreferenceControllerTest {
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     private NotificationBackend mBackend;
@@ -65,11 +69,13 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
 
     private PreferenceScreen mPreferenceScreen;
     private PreferenceCategory mCategory;
+    private PausedExecutorService mExecutorService;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         Context context = ApplicationProvider.getApplicationContext();
+        mExecutorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(mExecutorService);
 
         mAppRow = new NotificationBackend.AppRow();
         mAppRow.uid = 42;
@@ -91,7 +97,8 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                 buildGroupList(true, true, false));
 
         mController.displayPreference(mPreferenceScreen);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mCategory.getPreferenceCount()).isEqualTo(4); // "All" + 3 channels
         assertThat(mCategory.getPreference(0).getTitle().toString()).isEqualTo(
@@ -107,7 +114,8 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                 buildGroupList(true, true, false));
 
         mController.displayPreference(mPreferenceScreen);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mCategory.getPreference(0).isEnabled()).isTrue();
     }
@@ -118,7 +126,8 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                 buildGroupList(true, false, true));
 
         mController.displayPreference(mPreferenceScreen);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(((PrimarySwitchPreference) mCategory.getPreference(
                 1)).isSwitchEnabled()).isTrue();
@@ -135,7 +144,8 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                 buildGroupList(true, false, true));
 
         mController.displayPreference(mPreferenceScreen);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mCategory.getPreference(0).isEnabled()).isFalse();
         assertThat(((PrimarySwitchPreference) mCategory.getPreference(
@@ -185,7 +195,9 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
 
         when(mBackend.getGroups(eq(mAppRow.pkg), eq(mAppRow.uid))).thenReturn(groups);
         mController.displayPreference(mPreferenceScreen);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
+
         // Check that we've added the group name as a summary to channels that have identical names.
         // Channels are also alphabetized.
         assertThat(mCategory.getPreference(1).getTitle().toString()).isEqualTo("Mail");

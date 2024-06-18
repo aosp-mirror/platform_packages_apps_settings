@@ -222,6 +222,7 @@ public class ProviderModelSlice extends WifiSlice {
                 // If we need to display a reminder dialog box, do nothing here.
                 return;
             } else {
+                log("setMobileDataEnabled: " + newState);
                 MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
                         false /* disableOtherSubscriptions */);
             }
@@ -251,6 +252,7 @@ public class ProviderModelSlice extends WifiSlice {
                 .setPositiveButton(
                         com.android.internal.R.string.alert_windows_notification_turn_off_action,
                         (dialog, which) -> {
+                            log("setMobileDataEnabled: false");
                             MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId,
                                     false /* enabled */,
                                     false /* disableOtherSubscriptions */);

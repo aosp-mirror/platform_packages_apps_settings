@@ -162,4 +162,7 @@ public class ZenModeAddBypassingAppsPreferenceControllerTest {
         assertThat(pref.getKey()).isEqualTo(
                 ZenModeAddBypassingAppsPreferenceController.KEY_NO_APPS);
     }
+
+    // TODO(b/331624810): Add tests to verify updateAppList() when the filter is
+    //  ApplicationsState.FILTER_ENABLED_NOT_QUIET
 }

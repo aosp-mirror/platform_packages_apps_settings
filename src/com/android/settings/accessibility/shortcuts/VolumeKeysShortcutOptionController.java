@@ -17,6 +17,7 @@
 package com.android.settings.accessibility.shortcuts;
 
 import android.content.Context;
+import android.view.accessibility.Flags;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -52,7 +53,7 @@ public class VolumeKeysShortcutOptionController extends ShortcutOptionPreference
             shortcutOptionPreference.setSummary(
                     R.string.accessibility_shortcut_edit_dialog_summary_hardware);
             shortcutOptionPreference.setIntroImageResId(
-                    R.drawable.a11y_shortcut_type_hardware);
+                    R.drawable.accessibility_shortcut_type_volume_keys);
         }
     }
 
@@ -64,6 +65,10 @@ public class VolumeKeysShortcutOptionController extends ShortcutOptionPreference
     @Override
     protected void enableShortcutForTargets(boolean enable) {
         super.enableShortcutForTargets(enable);
+        if (Flags.a11yQsShortcut()) {
+            return;
+        }
+
         if (enable) {
             AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(mContext);
         }

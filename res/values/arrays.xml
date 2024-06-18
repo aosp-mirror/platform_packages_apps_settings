@@ -232,6 +232,23 @@
 
 
     <!-- Bluetooth Settings -->
+    <!-- Titles for Bluetooth Stack Logging -->
+    <string-array name="bt_stack_log_level_entries">
+        <item>Verbose</item>
+        <item>Debug</item>
+        <item>Info</item>
+        <item>Warn</item>
+        <item>Error</item>
+    </string-array>
+
+    <!-- Values for Bluetooth Stack Logging -->
+    <string-array name="bt_stack_log_level_values" translatable="false">
+        <item>verbose</item>
+        <item>debug</item>
+        <item>info</item>
+        <item>warn</item>
+        <item>error</item>
+    </string-array>
 
     <!-- Bluetooth developer settings: Bluetooth LE Audio modes -->
     <string-array name="bluetooth_leaudio_mode">
@@ -1074,8 +1091,13 @@
     </string-array>
 
     <string-array name="wifi_privacy_entries">
-        <item>Use randomized MAC (default)</item>
+        <item>Use randomized MAC</item>
         <item>Use device MAC</item>
+    </string-array>
+
+    <string-array name="wifi_dhcp_entries">
+        <item>Send device name to network</item>
+        <item>Don\u0027t send device name to network</item>
     </string-array>
 
     <string-array name="wifi_hidden_entries">
@@ -1489,25 +1511,11 @@
         <item>fr</item> <!-- French -->
     </string-array>
 
-    <!-- Values for notification cooldown -->
-    <string-array name="notification_polite_options">
-        <item>@string/notification_polite_all_apps</item>
-        <item>@string/notification_polite_conversations</item>
-        <item>@string/notification_polite_disabled</item>
-    </string-array>
-
-    <!-- Values for notification cooldown -->
-    <string-array name="notification_polite_options_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
     <!-- Entries for private space auto lock option -->
     <string-array name="private_space_auto_lock_options">
         <item>@string/private_space_auto_lock_every_time</item>
         <item>@string/private_space_auto_lock_after_inactivity</item>
-        <item>@string/private_space_auto_lock_never</item>
+        <item>@string/private_space_auto_lock_after_device_restart</item>
     </string-array>
 
     <!-- Values for private space auto lock option -->
@@ -1517,4 +1525,31 @@
         <item>2</item>
     </string-array>
 
+    <!-- TODO: b/333901673 - Get full icon list. -->
+    <array name="zen_mode_icon_options" translatable="false">
+        <item>@*android:drawable/ic_zen_mode_type_bedtime</item>
+        <item>@*android:drawable/ic_zen_mode_type_driving</item>
+        <item>@*android:drawable/ic_zen_mode_type_immersive</item>
+        <item>@*android:drawable/ic_zen_mode_type_managed</item>
+        <item>@*android:drawable/ic_zen_mode_type_other</item>
+        <item>@*android:drawable/ic_zen_mode_type_schedule_calendar</item>
+        <item>@*android:drawable/ic_zen_mode_type_schedule_time</item>
+        <item>@*android:drawable/ic_zen_mode_type_theater</item>
+        <item>@*android:drawable/ic_zen_mode_type_unknown</item>
+    </array>
+
+    <!-- TODO: b/333901673 - Complete list -->
+    <!-- Descriptions of the icons in zen_mode_icon_options. Should describe the associated image
+         [CHAR LIMIT=NONE] -->
+    <string-array name="zen_mode_icon_options_descriptions">
+        <item>Bedtime</item>
+        <item>Driving</item>
+        <item>Immersive</item>
+        <item>Managed</item>
+        <item>Star</item>
+        <item>Calendar</item>
+        <item>Time</item>
+        <item>Theater</item>
+        <item>Flower</item>
+    </string-array>
 </resources>

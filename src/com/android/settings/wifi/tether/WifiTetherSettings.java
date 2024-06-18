@@ -43,6 +43,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.wifi.WifiUtils;
+import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -346,16 +347,20 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     static class SearchIndexProvider extends BaseSearchIndexProvider {
 
         private final WifiRestriction mWifiRestriction;
+        private final boolean mIsInstantHotspotEnabled;
 
         SearchIndexProvider(int xmlRes) {
             super(xmlRes);
             mWifiRestriction = new WifiRestriction();
+            mIsInstantHotspotEnabled = SharedConnectivityRepository.isDeviceConfigEnabled();
         }
 
         @VisibleForTesting
-        SearchIndexProvider(int xmlRes, WifiRestriction wifiRestriction) {
+        SearchIndexProvider(int xmlRes, WifiRestriction wifiRestriction,
+                boolean isInstantHotspotEnabled) {
             super(xmlRes);
             mWifiRestriction = wifiRestriction;
+            mIsInstantHotspotEnabled = isInstantHotspotEnabled;
         }
 
         @Override
@@ -369,6 +374,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 keys.add(KEY_WIFI_TETHER_NETWORK_PASSWORD);
                 keys.add(KEY_WIFI_TETHER_AUTO_OFF);
                 keys.add(KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+                keys.add(KEY_INSTANT_HOTSPOT);
+            } else if (!mIsInstantHotspotEnabled) {
+                keys.add(KEY_INSTANT_HOTSPOT);
             }
 
             // Remove duplicate

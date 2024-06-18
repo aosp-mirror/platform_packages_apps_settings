@@ -16,10 +16,13 @@
 
 package com.android.settings.notification.zen;
 
+import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -27,13 +30,20 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 
+import com.android.settings.notification.modes.ZenModesListFragment;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -45,6 +55,9 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class ZenModePreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
 
     @Mock
     private Preference mPreference;
@@ -95,5 +108,21 @@ public class ZenModePreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference, never()).setSummary(anyString());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MODES_UI)
+    public void updateState_modesUi_resetsTitleAndFragment() {
+        mController.updateState(mPreference);
+        verify(mPreference).setTitle(anyInt());  // Resource IDs are ints
+        verify(mPreference).setFragment(ZenModesListFragment.class.getCanonicalName());
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_MODES_UI)
+    public void updateState_noModesUi_doesNotSetTitleAndFragment() {
+        mController.updateState(mPreference);
+        verify(mPreference, never()).setTitle(anyInt());
+        verify(mPreference, never()).setFragment(anyString());
     }
 }

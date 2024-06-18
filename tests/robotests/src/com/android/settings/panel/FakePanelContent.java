@@ -29,7 +29,10 @@ import java.util.List;
 
 /**
  * Fake PanelContent for testing.
+ *
+ * @deprecated this is no longer used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class FakePanelContent implements PanelContent {
 
     public static final String FAKE_ACTION = "fake_action";

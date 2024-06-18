@@ -42,7 +42,8 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (!android.os.Flags.allowPrivateProfile()) {
+        if (!android.os.Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             return;
         }
         setTheme(SetupWizardUtils.getTheme(this, getIntent()));
@@ -59,12 +60,12 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == SET_LOCK_ACTION && resultCode == RESULT_OK) {
-            mNavHostFragment.getNavController().navigate(R.id.action_success_fragment);
+            mNavHostFragment.getNavController().navigate(R.id.action_pre_finish_delay_fragment);
         } else if (requestCode == ACCOUNT_LOGIN_ACTION) {
             if (resultCode == RESULT_OK) {
                 mMetricsFeatureProvider.action(
                         this, SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_SUCCESS, true);
-                mNavHostFragment.getNavController().navigate(R.id.action_account_lock_fragment);
+                mNavHostFragment.getNavController().navigate(R.id.show_set_lock_fragment);
             } else {
                 mMetricsFeatureProvider.action(
                         this,

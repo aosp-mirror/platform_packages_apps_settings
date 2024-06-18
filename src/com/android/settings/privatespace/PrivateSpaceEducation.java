@@ -19,20 +19,26 @@ package com.android.settings.privatespace;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settingslib.widget.LottieColorUtils;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+
+import java.util.regex.Pattern;
 
 /** Fragment educating about the usage of Private Space. */
 public class PrivateSpaceEducation extends InstrumentedFragment {
@@ -43,7 +49,8 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
             LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        if (!android.os.Flags.allowPrivateProfile()) {
+        if (!android.os.Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             return null;
         }
         GlifLayout rootView =
@@ -64,6 +71,15 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
                         .setButtonType(FooterButton.ButtonType.CANCEL)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build());
+        LottieAnimationView lottieAnimationView = rootView.findViewById(R.id.lottie_animation);
+        LottieColorUtils.applyDynamicColors(getContext(), lottieAnimationView);
+
+        TextView infoTextView = rootView.findViewById(R.id.learn_more);
+        Pattern pattern = Pattern.compile(infoTextView.getText().toString());
+        Linkify.addLinks(
+                infoTextView,
+                pattern,
+                getContext().getString(R.string.private_space_learn_more_url));
 
         return rootView;
     }
@@ -79,7 +95,7 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_START);
             Log.i(TAG, "Starting private space setup");
             NavHostFragment.findNavController(PrivateSpaceEducation.this)
-                    .navigate(R.id.action_education_to_auto_advance);
+                    .navigate(R.id.action_education_to_create);
         };
     }
 
