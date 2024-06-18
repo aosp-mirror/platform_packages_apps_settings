@@ -22,6 +22,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.GET_ACTIVITIES
+import android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_APP_DEFAULT
 import android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET
 import android.os.Build
 import android.os.Bundle
@@ -139,7 +140,9 @@ class UserAspectRatioAppListModel(private val context: Context)
         recordList: List<UserAspectRatioAppListItemModel>
     ): List<SpinnerOption> {
         val hasSuggested = recordList.any { it.suggested }
-        val hasOverride = recordList.any { it.userOverride != USER_MIN_ASPECT_RATIO_UNSET }
+        val hasOverride = recordList.any {
+            userAspectRatioManager.isAppOverridden(it.app, it.userOverride)
+        }
         val options = mutableListOf(SpinnerItem.All)
         // Add suggested filter first as default
         if (hasSuggested) options.add(0, SpinnerItem.Suggested)
@@ -187,7 +190,9 @@ class UserAspectRatioAppListModel(private val context: Context)
     ): Flow<List<UserAspectRatioAppListItemModel>> = recordListFlow.filterItem(
         when (SpinnerItem.entries.getOrNull(option)) {
             SpinnerItem.Suggested -> ({ it.canDisplay && it.suggested })
-            SpinnerItem.Overridden -> ({ it.userOverride != USER_MIN_ASPECT_RATIO_UNSET })
+            SpinnerItem.Overridden -> ({
+                userAspectRatioManager.isAppOverridden(it.app, it.userOverride)
+            })
             else -> ({ it.canDisplay })
         }
     )
@@ -197,7 +202,7 @@ class UserAspectRatioAppListModel(private val context: Context)
         val summary by remember(record.userOverride) {
             flow {
                 emit(userAspectRatioManager.getUserMinAspectRatioEntry(record.userOverride,
-                    record.app.packageName))
+                    record.app.packageName, record.app.userId))
             }.flowOn(Dispatchers.IO)
         }.collectAsStateWithLifecycle(initialValue = stringResource(R.string.summary_placeholder))
         return { summary }

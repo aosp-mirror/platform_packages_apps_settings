@@ -31,16 +31,20 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 /** A class to dynamically manage per apps {@link NetworkPolicyManager} POLICY_ flags. */
-public final class DynamicDenylistManager {
+public class DynamicDenylistManager {
 
     private static final String TAG = "DynamicDenylistManager";
     private static final String PREF_KEY_MANUAL_DENY = "manual_denylist_preference";
     private static final String PREF_KEY_DYNAMIC_DENY = "dynamic_denylist_preference";
 
-    private static DynamicDenylistManager sInstance;
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    public static DynamicDenylistManager sInstance = null;
 
     private final Context mContext;
     private final NetworkPolicyManager mNetworkPolicyManager;
@@ -87,6 +91,7 @@ public final class DynamicDenylistManager {
 
     /** Set policy flags for specific UID. */
     public void setUidPolicyLocked(int uid, int policy) {
+        Log.i(TAG, "setUidPolicyLocked: uid=" + uid + " policy=" + policy);
         synchronized (mLock) {
             mNetworkPolicyManager.setUidPolicy(uid, policy);
         }
@@ -111,7 +116,11 @@ public final class DynamicDenylistManager {
         final ArraySet<Integer> failedUids = new ArraySet<>();
         synchronized (mLock) {
             // Set new added UIDs into REJECT policy.
-            for (int uid : denylistTargetUids) {
+            for (Integer uidInteger : denylistTargetUids) {
+                if (uidInteger == null) {
+                    continue;
+                }
+                final int uid = uidInteger.intValue();
                 if (!lastDynamicDenylistUids.contains(uid)) {
                     try {
                         mNetworkPolicyManager.setUidPolicy(uid, POLICY_REJECT_METERED_BACKGROUND);
@@ -152,17 +161,21 @@ public final class DynamicDenylistManager {
     /** Reset the UIDs in the denylist if needed. */
     public void resetDenylistIfNeeded(String packageName, boolean force) {
         if (!force && !SETTINGS_PACKAGE_NAME.equals(packageName)) {
+            Log.w(TAG, "resetDenylistIfNeeded: invalid conditions");
             return;
         }
         synchronized (mLock) {
             final int[] uids = mNetworkPolicyManager
                     .getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND);
             if (uids != null && uids.length != 0) {
+                Log.i(TAG, "resetDenylistIfNeeded: " + Arrays.toString(uids));
                 for (int uid : uids) {
                     if (!getDenylistAllUids(getManualDenylistPref()).contains(uid)) {
                         mNetworkPolicyManager.setUidPolicy(uid, POLICY_NONE);
                     }
                 }
+            } else {
+                Log.w(TAG, "resetDenylistIfNeeded: there is no valid UIDs");
             }
         }
         clearSharedPreferences();
@@ -177,10 +190,21 @@ public final class DynamicDenylistManager {
     /** Dump the data stored in the {@link SharedPreferences}. */
     public void dump(PrintWriter writer) {
         writer.println("Dump of DynamicDenylistManager:");
-        writer.println("\tManualDenylist: " + getPackageNames(mContext,
-                getDenylistAllUids(getManualDenylistPref())));
-        writer.println("\tDynamicDenylist: " + getPackageNames(mContext,
-                getDenylistAllUids(getDynamicDenylistPref())));
+        final List<String> manualDenyList =
+                getPackageNames(mContext, getDenylistAllUids(getManualDenylistPref()));
+        writer.println("\tManualDenylist:");
+        if (manualDenyList != null) {
+            manualDenyList.forEach(packageName -> writer.println("\t\t" + packageName));
+            writer.flush();
+        }
+
+        final List<String> dynamicDenyList =
+                getPackageNames(mContext, getDenylistAllUids(getDynamicDenylistPref()));
+        writer.println("\tDynamicDenylist:");
+        if (dynamicDenyList != null) {
+            dynamicDenyList.forEach(packageName -> writer.println("\t\t" + packageName));
+            writer.flush();
+        }
     }
 
     private Set<Integer> getDenylistAllUids(SharedPreferences sharedPreferences) {
@@ -209,6 +233,7 @@ public final class DynamicDenylistManager {
     }
 
     void clearSharedPreferences() {
+        Log.i(TAG, "clearSharedPreferences()");
         getManualDenylistPref().edit().clear().apply();
         getDynamicDenylistPref().edit().clear().apply();
     }
@@ -223,13 +248,13 @@ public final class DynamicDenylistManager {
         return mContext.getSharedPreferences(PREF_KEY_DYNAMIC_DENY, Context.MODE_PRIVATE);
     }
 
-    private static String getPackageNames(Context context, Set<Integer> uids) {
+    private static List<String> getPackageNames(Context context, Set<Integer> uids) {
         if (uids == null || uids.isEmpty()) {
             return null;
         }
         final PackageManager pm = context.getPackageManager();
-        final StringBuilder builder = new StringBuilder();
-        uids.forEach(uid -> builder.append(pm.getNameForUid(uid) + " "));
-        return builder.toString();
+        final List<String> packageNames = new ArrayList<>(uids.size());
+        uids.forEach(uid -> packageNames.add(pm.getNameForUid(uid)));
+        return packageNames;
     }
 }

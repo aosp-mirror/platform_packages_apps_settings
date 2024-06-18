@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess.premiumsms;
 
-import android.annotation.Nullable;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -24,8 +23,8 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
@@ -38,6 +37,7 @@ import com.android.settings.applications.AppStateSmsPremBridge.SmsState;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.EmptyTextSettings;
+import com.android.settingslib.RestrictedDropDownPreference;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
@@ -51,6 +51,8 @@ import java.util.ArrayList;
 @SearchIndexable
 public class PremiumSmsAccess extends EmptyTextSettings
         implements Callback, Callbacks, OnPreferenceChangeListener {
+
+    private static final String ECM_RESTRICTION_KEY = "android:premium_sms_access";
 
     private ApplicationsState mApplicationsState;
     private AppStateSmsPremBridge mSmsBackend;
@@ -205,7 +207,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
 
     }
 
-    private class PremiumSmsPreference extends DropDownPreference {
+    private class PremiumSmsPreference extends RestrictedDropDownPreference {
         private final AppEntry mAppEntry;
 
         public PremiumSmsPreference(AppEntry appEntry, Context context) {
@@ -224,6 +226,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
             });
             setValue(String.valueOf(getCurrentValue()));
             setSummary("%s");
+            this.checkEcmRestrictionAndSetDisabled(ECM_RESTRICTION_KEY, appEntry.info.packageName);
         }
 
         private int getCurrentValue() {

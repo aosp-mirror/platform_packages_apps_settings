@@ -109,7 +109,7 @@ public class FastPairDevicePreferenceControllerTest {
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
-    public void onStart_registerCallback() {
+    public void onStart_flagOn_registerCallback() {
         // register the callback in onStart()
         mFastPairDevicePrefController.onStart(mLifecycleOwner);
         verify(mFastPairDeviceUpdater).registerCallback();
@@ -121,8 +121,21 @@ public class FastPairDevicePreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
+    public void onStart_flagOff_registerCallback() {
+        // register the callback in onStart()
+        mFastPairDevicePrefController.onStart(mLifecycleOwner);
+        assertThat(mFastPairDeviceUpdater).isNull();
+        verify(mContext)
+                .registerReceiver(
+                        mFastPairDevicePrefController.mReceiver,
+                        mFastPairDevicePrefController.mIntentFilter,
+                        Context.RECEIVER_EXPORTED_UNAUDITED);
+    }
+
+    @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
-    public void onStop_unregisterCallback() {
+    public void onStop_flagOn_unregisterCallback() {
         // register broadcast first
         mContext.registerReceiver(
                 mFastPairDevicePrefController.mReceiver, null, Context.RECEIVER_EXPORTED_UNAUDITED);
@@ -130,6 +143,19 @@ public class FastPairDevicePreferenceControllerTest {
         // unregister the callback in onStop()
         mFastPairDevicePrefController.onStop(mLifecycleOwner);
         verify(mFastPairDeviceUpdater).unregisterCallback();
+        verify(mContext).unregisterReceiver(mFastPairDevicePrefController.mReceiver);
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
+    public void onStop_flagOff_unregisterCallback() {
+        // register broadcast first
+        mContext.registerReceiver(
+                mFastPairDevicePrefController.mReceiver, null, Context.RECEIVER_EXPORTED_UNAUDITED);
+
+        // unregister the callback in onStop()
+        mFastPairDevicePrefController.onStop(mLifecycleOwner);
+        assertThat(mFastPairDeviceUpdater).isNull();
         verify(mContext).unregisterReceiver(mFastPairDevicePrefController.mReceiver);
     }
 
@@ -152,6 +178,15 @@ public class FastPairDevicePreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
+    public void getAvailabilityStatus_noBluetoothFastPairFeature_returnUnsupported() {
+        doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+
+        assertThat(mFastPairDevicePrefController.getAvailabilityStatus())
+                .isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
     public void getAvailabilityStatus_bothBluetoothFastPairFeature_returnSupported() {
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
@@ -160,7 +195,6 @@ public class FastPairDevicePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
     public void onDeviceAdded_addThreeFastPairDevicePreference_displayThreeNoSeeAll() {
         mShadowBluetoothAdapter.setEnabled(true);
         final GearPreference preference1 = new GearPreference(mContext, null /* AttributeSet */);
@@ -177,7 +211,6 @@ public class FastPairDevicePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
     public void onDeviceAdded_addFourDevicePreference_onlyDisplayThreeWithSeeAll() {
         mShadowBluetoothAdapter.setEnabled(true);
         final GearPreference preference1 = new GearPreference(mContext, null /* AttributeSet */);
@@ -206,7 +239,6 @@ public class FastPairDevicePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
     public void onDeviceRemoved_removeFourthDevice_hideSeeAll() {
         mShadowBluetoothAdapter.setEnabled(true);
         final GearPreference preference1 = new GearPreference(mContext, null /* AttributeSet */);
@@ -238,7 +270,6 @@ public class FastPairDevicePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
     public void updatePreferenceVisibility_bluetoothIsDisable_shouldHidePreference() {
         mShadowBluetoothAdapter.setEnabled(true);
         final GearPreference preference1 = new GearPreference(mContext, null /* AttributeSet */);

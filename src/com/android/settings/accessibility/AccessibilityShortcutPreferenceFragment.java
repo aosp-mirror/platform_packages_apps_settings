@@ -44,6 +44,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
+import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.utils.LocaleUtils;
 
@@ -251,7 +252,17 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        showDialog(DialogEnums.EDIT_SHORTCUT);
+        if (Flags.editShortcutsInFullScreen()) {
+            EditShortcutsPreferenceFragment.showEditShortcutScreen(
+                    getContext(),
+                    getMetricsCategory(),
+                    getShortcutTitle(),
+                    getComponentName(),
+                    getIntent()
+            );
+        } else {
+            showDialog(DialogEnums.EDIT_SHORTCUT);
+        }
     }
 
     @Override
@@ -261,7 +272,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                getComponentName().flattenToString(), AccessibilityUtil.UserShortcutType.SOFTWARE);
+                getComponentName().flattenToString());
         if (preference.isChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                     getComponentName());
@@ -438,7 +449,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
-                getComponentName().flattenToString(), AccessibilityUtil.UserShortcutType.SOFTWARE);
+                getComponentName().flattenToString());
 
         final List<CharSequence> list = new ArrayList<>();
 
@@ -466,8 +477,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         int value = restoreOnConfigChangedValue();
         if (value == NOT_SET) {
             final int lastNonEmptyUserShortcutType = PreferredShortcuts.retrieveUserShortcutType(
-                    getPrefContext(), getComponentName().flattenToString(),
-                    AccessibilityUtil.UserShortcutType.SOFTWARE);
+                    getPrefContext(), getComponentName().flattenToString()
+            );
             value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
                     : AccessibilityUtil.UserShortcutType.EMPTY;
         }
@@ -508,7 +519,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                getComponentName().flattenToString(), AccessibilityUtil.UserShortcutType.SOFTWARE);
+                getComponentName().flattenToString());
         mShortcutPreference.setChecked(
                 AccessibilityUtil.hasValuesInSettings(getPrefContext(), shortcutTypes,
                         getComponentName()));

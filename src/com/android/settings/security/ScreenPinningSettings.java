@@ -22,6 +22,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -30,6 +31,7 @@ import android.provider.Settings;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -45,7 +47,11 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.FooterPreference;
+
+import java.util.List;
+
 /**
  * Screen pinning settings.
  */
@@ -174,9 +180,8 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         }
     }
 
-    private int getCurrentSecurityTitle() {
-        int quality = mLockPatternUtils.getKeyguardStoredPasswordQuality(
-                UserHandle.myUserId());
+    private static int getCurrentSecurityTitle(LockPatternUtils lockPatternUtils) {
+        int quality = lockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId());
         switch (quality) {
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
@@ -187,7 +192,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
             case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
                 return R.string.screen_pinning_unlock_password;
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                if (mLockPatternUtils.isLockPatternEnabled(UserHandle.myUserId())) {
+                if (lockPatternUtils.isLockPatternEnabled(UserHandle.myUserId())) {
                     return R.string.screen_pinning_unlock_pattern;
                 }
         }
@@ -232,7 +237,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
                 }
             });
             mUseScreenLock.setChecked(isScreenLockUsed());
-            mUseScreenLock.setTitle(getCurrentSecurityTitle());
+            mUseScreenLock.setTitle(getCurrentSecurityTitle(mLockPatternUtils));
         } else {
             mFooterPreference.setSummary(getAppPinningContent());
             mUseScreenLock.setEnabled(false);
@@ -252,8 +257,30 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     }
 
     /**
-     * For search
+     * For search.
+     *
+     * This page only provides an index for the toggle preference of using screen lock for
+     * unpinning. The preference name will change with various lock configurations. Indexing data
+     * from XML isn't suitable since it uses a static title by default. So, we skip XML indexing
+     * by omitting the XML argument in the constructor and use a dynamic index method instead.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.screen_pinning_settings);
+            new BaseSearchIndexProvider() {
+
+                @NonNull
+                @Override
+                public List<SearchIndexableRaw> getDynamicRawDataToIndex(@NonNull Context context,
+                        boolean enabled) {
+                    List<SearchIndexableRaw> dynamicRaws =
+                            super.getDynamicRawDataToIndex(context, enabled);
+                    final SearchIndexableRaw raw = new SearchIndexableRaw(context);
+                    final Resources res = context.getResources();
+                    final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
+                    raw.key = KEY_USE_SCREEN_LOCK;
+                    raw.title = res.getString(getCurrentSecurityTitle(lockPatternUtils));
+                    raw.screenTitle = res.getString(R.string.screen_pinning_title);
+                    dynamicRaws.add(raw);
+                    return dynamicRaws;
+                }
+            };
 }

@@ -92,6 +92,7 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
             }
             preference.title = title
             preference.dialogTitle = title
+            preference.summary = eid
             updateDialog()
         }
     }
@@ -130,9 +131,6 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
 
         val qrCodeView = dialog.requireViewById<ImageView>(R.id.esim_id_qrcode)
         qrCodeView.setImageBitmap(getEidQrCode(eid))
-
-        // After "Tap to show", eid is displayed on preference.
-        preference.summary = textView.text
     }
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {

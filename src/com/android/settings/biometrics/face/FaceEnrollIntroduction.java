@@ -484,6 +484,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected Intent getEnrollingIntent() {
         Intent intent = new Intent(this, FaceEnrollEducation.class);
         WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+        intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                getIntent().getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1));
+
         return intent;
     }
 
@@ -560,7 +563,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     @StringRes
     protected int getAgreeButtonTextRes() {
-        return R.string.security_settings_fingerprint_enroll_introduction_agree;
+        return R.string.security_settings_face_enroll_introduction_agree;
     }
 
     @Override

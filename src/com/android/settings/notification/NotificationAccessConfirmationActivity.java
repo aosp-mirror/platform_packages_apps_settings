@@ -24,7 +24,6 @@ import static com.android.internal.notification.NotificationAccessConfirmationAc
 import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_USER_ID;
 
 import android.Manifest;
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
@@ -43,6 +42,8 @@ import android.util.Slog;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;

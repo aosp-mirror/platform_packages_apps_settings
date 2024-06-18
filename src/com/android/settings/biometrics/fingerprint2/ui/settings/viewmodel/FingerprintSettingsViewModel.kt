@@ -21,9 +21,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -66,7 +66,7 @@ class FingerprintSettingsViewModel(
       emit(
         Pair(
           fingerprintManagerInteractor.canEnrollFingerprints.first(),
-          fingerprintManagerInteractor.maxEnrollableFingerprints.first()
+          fingerprintManagerInteractor.maxEnrollableFingerprints.first(),
         )
       )
     }
@@ -120,7 +120,7 @@ class FingerprintSettingsViewModel(
         _isLockedOut,
         _attemptsSoFar,
         _fingerprintSensorType,
-        _sensorNullOrEmpty
+        _sensorNullOrEmpty,
       ) {
         dialogShowing,
         step,
@@ -140,7 +140,7 @@ class FingerprintSettingsViewModel(
               "lockedOut=${isLockedOut}," +
               "attempts=${attempts}," +
               "sensorType=${sensorType}" +
-              "sensorNullOrEmpty=${sensorNullOrEmpty}"
+              "sensorNullOrEmpty=${sensorNullOrEmpty}",
           )
         }
         if (sensorNullOrEmpty) {
@@ -294,9 +294,7 @@ class FingerprintSettingsViewModel(
   ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(
-      modelClass: Class<T>,
-    ): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
       return FingerprintSettingsViewModel(
         userId,
@@ -318,7 +316,7 @@ private inline fun <T1, T2, T3, T4, T5, T6, T7, T8, R> combine(
   flow6: Flow<T6>,
   flow7: Flow<T7>,
   flow8: Flow<T8>,
-  crossinline transform: suspend (T1, T2, T3, T4, T5, T6, T7, T8) -> R
+  crossinline transform: suspend (T1, T2, T3, T4, T5, T6, T7, T8) -> R,
 ): Flow<R> {
   return combine(flow, flow2, flow3, flow4, flow5, flow6, flow7, flow8) { args: Array<*> ->
     @Suppress("UNCHECKED_CAST")

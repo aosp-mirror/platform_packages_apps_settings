@@ -40,7 +40,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.CarrierConfigManager;
+import android.telephony.NetworkRegistrationInfo;
+import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
 import android.view.View;
@@ -48,6 +51,7 @@ import android.view.View;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.network.ims.MockWifiCallingQueryImsState;
@@ -57,6 +61,7 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -70,6 +75,7 @@ import org.robolectric.util.ReflectionHelpers;
 @Config(shadows = ShadowFragment.class)
 @RunWith(RobolectricTestRunner.class)
 public class WifiCallingSettingsForSubTest {
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final int SUB_ID = 2;
 
     private static final String SWITCH_BAR = "wifi_calling_switch_bar";
@@ -158,6 +164,7 @@ public class WifiCallingSettingsForSubTest {
         mFragment.onAttach(mContext);
         mFragment.onCreate(null);
         mFragment.onActivityCreated(null);
+        mSetFlagsRule.disableFlags(Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG);
     }
 
     private void setDefaultCarrierConfigValues() {
@@ -238,6 +245,31 @@ public class WifiCallingSettingsForSubTest {
 
         // Check that WFC roaming preference is hidden.
         verify(mButtonWfcRoamingMode, times(1)).setVisible(false);
+    }
+
+    @Test
+    public void onResume_overrideWfcRoamingModeWhileUsingNTN_shouldDisableWfcRoaming() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG);
+        mBundle.putBoolean(
+                CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, false);
+        mBundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, true);
+        mBundle.putBoolean(
+                CarrierConfigManager.KEY_OVERRIDE_WFC_ROAMING_MODE_WHILE_USING_NTN_BOOL, true);
+
+        // Phone connected to non-terrestrial network
+        NetworkRegistrationInfo nri = new NetworkRegistrationInfo.Builder()
+                .setIsNonTerrestrialNetwork(true)
+                .build();
+        ServiceState ss = new ServiceState();
+        ss.addNetworkRegistrationInfo(nri);
+        doReturn(ss).when(mTelephonyManager).getServiceState();
+
+        // Call onResume to update the WFC roaming preference.
+        mFragment.onResume();
+
+        // Check that WFC roaming preference is visible but disabled
+        verify(mButtonWfcRoamingMode, times(1)).setEnabled(false);
+        verify(mButtonWfcRoamingMode, times(1)).setVisible(true);
     }
 
     @Test

@@ -17,21 +17,18 @@
 package com.android.settings.notification.app;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
-import static android.os.UserHandle.USER_SYSTEM;
 
-import android.annotation.Nullable;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
-import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.notification.NotificationBackend;

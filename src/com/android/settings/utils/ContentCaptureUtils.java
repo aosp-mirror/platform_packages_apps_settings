@@ -16,8 +16,6 @@
 
 package com.android.settings.utils;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.IBinder;
@@ -26,6 +24,9 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.contentcapture.ContentCaptureManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public final class ContentCaptureUtils {
 

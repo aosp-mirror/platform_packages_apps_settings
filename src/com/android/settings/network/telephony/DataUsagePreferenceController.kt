@@ -81,16 +81,12 @@ class DataUsagePreferenceController(context: Context, key: String) :
     }
 
     private suspend fun update() {
-        val summary = withContext(Dispatchers.Default) {
+        val (summary, enabled) = withContext(Dispatchers.Default) {
             networkTemplate = getNetworkTemplate()
-            getDataUsageSummary()
+            getDataUsageSummaryAndEnabled()
         }
-        if (summary == null) {
-            preference.isEnabled = false
-        } else {
-            preference.isEnabled = true
-            preference.summary = summary
-        }
+        preference.isEnabled = enabled
+        preference.summary = summary
     }
 
     private fun getNetworkTemplate(): NetworkTemplate? = when {
@@ -105,17 +101,19 @@ class DataUsagePreferenceController(context: Context, key: String) :
     fun createNetworkCycleDataRepository(): NetworkCycleDataRepository? =
         networkTemplate?.let { NetworkCycleDataRepository(mContext, it) }
 
-    private fun getDataUsageSummary(): String? {
-        val repository = createNetworkCycleDataRepository() ?: return null
-        repository.loadFirstCycle()?.takeIf { it.usage > 0 }?.let { usageData ->
+    private fun getDataUsageSummaryAndEnabled(): Pair<String?, Boolean> {
+        val repository = createNetworkCycleDataRepository() ?: return null to false
+
+        repository.loadFirstCycle()?.let { usageData ->
             return mContext.getString(
                 R.string.data_usage_template,
                 usageData.formatUsage(mContext),
                 usageData.formatDateRange(mContext),
-            )
+            ) to (usageData.usage > 0 || repository.queryUsage(AllTimeRange).usage > 0)
         }
 
-        return repository.queryUsage(AllTimeRange).takeIf { it.usage > 0 }
-            ?.getDataUsedString(mContext)
+        val allTimeUsage = repository.queryUsage(AllTimeRange)
+        if (allTimeUsage.usage > 0) return allTimeUsage.getDataUsedString(mContext) to true
+        return null to false
     }
 }

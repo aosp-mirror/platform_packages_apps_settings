@@ -31,6 +31,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -41,6 +42,9 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** Tests for {@link AccessibilityButtonPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
@@ -87,5 +91,37 @@ public class AccessibilityButtonPreferenceControllerTest {
 
         assertThat(mPreference.getTitle()).isEqualTo(
                 mContext.getText(R.string.accessibility_button_title));
+    }
+
+    @Test
+    public void updateDynamicRawDataToIndex_navigationGestureEnabled_setCorrectIndex() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
+                .thenReturn(NAV_BAR_MODE_GESTURAL);
+        List<SearchIndexableRaw> rawDataList = new ArrayList<>();
+
+        mController.updateDynamicRawDataToIndex(rawDataList);
+
+        assertThat(rawDataList).hasSize(1);
+        SearchIndexableRaw raw = rawDataList.get(0);
+        assertThat(raw.title).isEqualTo(
+                mResources.getString(R.string.accessibility_button_gesture_title));
+        assertThat(raw.screenTitle).isEqualTo(
+                mResources.getString(R.string.accessibility_shortcuts_settings_title));
+    }
+
+    @Test
+    public void updateDynamicRawDataToIndex_navigationGestureDisabled_setCorrectIndex() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
+                .thenReturn(NAV_BAR_MODE_2BUTTON);
+        List<SearchIndexableRaw> rawDataList = new ArrayList<>();
+
+        mController.updateDynamicRawDataToIndex(rawDataList);
+
+        assertThat(rawDataList).hasSize(1);
+        SearchIndexableRaw raw = rawDataList.get(0);
+        assertThat(raw.title).isEqualTo(
+                mResources.getString(R.string.accessibility_button_title));
+        assertThat(raw.screenTitle).isEqualTo(
+                mResources.getString(R.string.accessibility_shortcuts_settings_title));
     }
 }

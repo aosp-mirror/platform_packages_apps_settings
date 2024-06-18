@@ -24,7 +24,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
 import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -86,39 +86,28 @@ class FingerprintErrorDialog : InstrumentedDialogFragment() {
     private const val KEY_TITLE = "fingerprint_title"
     private const val KEY_SHOULD_TRY_AGAIN = "should_try_again"
 
-    suspend fun showInstance(
-        error: FingerEnrollState.EnrollError,
-        fragment: Fragment,
-    ) = suspendCancellableCoroutine { continuation ->
-      val dialog = FingerprintErrorDialog()
-      dialog.onTryAgain = DialogInterface.OnClickListener { _, _ -> continuation.resume(true) }
+    suspend fun showInstance(error: FingerEnrollState.EnrollError, fragment: Fragment) =
+      suspendCancellableCoroutine { continuation ->
+        val dialog = FingerprintErrorDialog()
+        dialog.onTryAgain = DialogInterface.OnClickListener { _, _ -> continuation.resume(true) }
 
-      dialog.onContinue = DialogInterface.OnClickListener { _, _ -> continuation.resume(false) }
+        dialog.onContinue = DialogInterface.OnClickListener { _, _ -> continuation.resume(false) }
 
-      dialog.onCancelListener =
-        DialogInterface.OnCancelListener {
-          Log.d(TAG, "onCancelListener clicked $dialog")
-          continuation.resume(null)
-        }
+        dialog.onCancelListener =
+          DialogInterface.OnCancelListener {
+            Log.d(TAG, "onCancelListener clicked $dialog")
+            continuation.resume(null)
+          }
 
-      continuation.invokeOnCancellation { Log.d(TAG, "invokeOnCancellation $dialog") }
+        continuation.invokeOnCancellation { Log.d(TAG, "invokeOnCancellation $dialog") }
 
-      val bundle = Bundle()
-      bundle.putInt(
-        KEY_TITLE,
-        error.errTitle,
-      )
-      bundle.putInt(
-        KEY_MESSAGE,
-        error.errString,
-      )
-      bundle.putBoolean(
-        KEY_SHOULD_TRY_AGAIN,
-        error.shouldRetryEnrollment,
-      )
-      dialog.arguments = bundle
-      Log.d(TAG, "showing dialog $dialog")
-      dialog.show(fragment.parentFragmentManager, FingerprintErrorDialog::class.java.toString())
-    }
+        val bundle = Bundle()
+        bundle.putInt(KEY_TITLE, error.errTitle)
+        bundle.putInt(KEY_MESSAGE, error.errString)
+        bundle.putBoolean(KEY_SHOULD_TRY_AGAIN, error.shouldRetryEnrollment)
+        dialog.arguments = bundle
+        Log.d(TAG, "showing dialog $dialog")
+        dialog.show(fragment.parentFragmentManager, FingerprintErrorDialog::class.java.toString())
+      }
   }
 }

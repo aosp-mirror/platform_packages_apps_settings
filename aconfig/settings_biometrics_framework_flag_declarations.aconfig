@@ -7,3 +7,10 @@ flag {
   description: "This flag enables or disables the BiometricSettingsProvider"
   bug: "303595205"
 }
+
+flag {
+  name: "fingerprint_v2_enrollment"
+  namespace: "biometrics_framework"
+  description: "This flag enables or disables the Fingerprint v2 enrollment"
+  bug: "295206723"
+}

@@ -80,7 +80,8 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_not_charging);
         } else if (BatteryUtils.isBatteryDefenderOn(info)) {
-            return null;
+            return mContext.getString(
+                    com.android.settingslib.R.string.battery_info_status_charging_on_hold);
         } else if (info.remainingLabel == null
                 || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
             // Present status only if no remaining time or status anomalous

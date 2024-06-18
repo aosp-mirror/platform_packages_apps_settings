@@ -17,6 +17,7 @@
 package com.android.settings.spa.app.appinfo
 
 import android.app.AppOpsManager
+import android.app.ecm.EnhancedConfirmationManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.UserManager
@@ -90,12 +91,18 @@ fun AppInfoSettingsMoreOptions(
 
 private fun ApplicationInfo.allowRestrictedSettings(context: Context, onSuccess: () -> Unit) {
     AppInfoDashboardFragment.showLockScreen(context) {
-        context.appOpsManager.setMode(
-            AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
-            uid,
-            packageName,
-            AppOpsManager.MODE_ALLOWED,
-        )
+        if (android.permission.flags.Flags.enhancedConfirmationModeApisEnabled()
+                && android.security.Flags.extendEcmToAllSettings()) {
+            val manager = context.getSystemService(EnhancedConfirmationManager::class.java)!!
+            manager.clearRestriction(packageName)
+        } else {
+            context.appOpsManager.setMode(
+                AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
+                uid,
+                packageName,
+                AppOpsManager.MODE_ALLOWED,
+            )
+        }
         onSuccess()
         val toastString = context.getString(
             R.string.toast_allows_restricted_settings_successfully,
@@ -137,7 +144,7 @@ private suspend fun ApplicationInfo.getMoreOptionsState(
         )
     }
     val shouldShowAccessRestrictedSettingsDeferred = async {
-        shouldShowAccessRestrictedSettings(context.appOpsManager)
+        shouldShowAccessRestrictedSettings(context)
     }
     val isProfileOrDeviceOwner =
         Utils.isProfileOrDeviceOwner(context.userManager, context.devicePolicyManager, packageName)
@@ -169,7 +176,14 @@ private fun ApplicationInfo.isOtherUserHasInstallPackage(
     .filter { it.id != userId }
     .any { packageManagers.isPackageInstalledAsUser(packageName, it.id) }
 
-private fun ApplicationInfo.shouldShowAccessRestrictedSettings(appOpsManager: AppOpsManager) =
-    appOpsManager.noteOpNoThrow(
-        AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS, uid, packageName, null, null
-    ) == AppOpsManager.MODE_IGNORED
+private fun ApplicationInfo.shouldShowAccessRestrictedSettings(context: Context): Boolean {
+    return if (android.permission.flags.Flags.enhancedConfirmationModeApisEnabled()
+            && android.security.Flags.extendEcmToAllSettings()) {
+        val manager = context.getSystemService(EnhancedConfirmationManager::class.java)!!
+        manager.isClearRestrictionAllowed(packageName)
+    } else {
+        context.appOpsManager.noteOpNoThrow(
+            AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS, uid, packageName, null, null
+        ) == AppOpsManager.MODE_IGNORED
+    }
+}

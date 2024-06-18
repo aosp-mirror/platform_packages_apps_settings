@@ -45,11 +45,12 @@ import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepositoryImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
-import com.android.settings.biometrics.fingerprint2.repository.PressToAuthProviderImpl
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
-import com.android.settings.biometrics.fingerprint2.shared.model.Settings
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.model.Settings
 import com.android.settings.biometrics.fingerprint2.ui.settings.binder.FingerprintSettingsViewBinder
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsViewModel
@@ -128,12 +129,12 @@ class FingerprintSettingsV2Fragment :
           if (resultCode == BiometricEnrollBase.RESULT_TIMEOUT) {
             navigationViewModel.onEnrollFirstFailure(
               "Received RESULT_TIMEOUT when enrolling",
-              resultCode
+              resultCode,
             )
           } else {
             navigationViewModel.onEnrollFirstFailure(
               "Incorrect resultCode or data was null",
-              resultCode
+              resultCode,
             )
           }
         } else {
@@ -212,21 +213,26 @@ class FingerprintSettingsV2Fragment :
           context.contentResolver,
           Secure.SFPS_PERFORMANT_AUTH_ENABLED,
           toReturn,
-          userHandle
+          userHandle,
         )
       }
 
       toReturn == 1
     }
+    val fingerprintSensorProvider =
+      FingerprintSensorRepositoryImpl(fingerprintManager, backgroundDispatcher, lifecycleScope)
+    val pressToAuthInteractor = PressToAuthInteractorImpl(context, backgroundDispatcher)
 
     val interactor =
       FingerprintManagerInteractorImpl(
         context.applicationContext,
         backgroundDispatcher,
         fingerprintManager,
+        fingerprintSensorProvider,
         GatekeeperPasswordProvider(LockPatternUtils(context.applicationContext)),
-        PressToAuthProviderImpl(context),
-        isAnySuw
+        pressToAuthInteractor,
+        Settings,
+        getIntent()
       )
 
     val token = intent.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN)
@@ -240,8 +246,8 @@ class FingerprintSettingsV2Fragment :
           interactor,
           backgroundDispatcher,
           token,
-          challenge
-        )
+          challenge,
+        ),
       )[FingerprintSettingsNavigationViewModel::class.java]
 
     settingsViewModel =
@@ -252,15 +258,10 @@ class FingerprintSettingsV2Fragment :
           interactor,
           backgroundDispatcher,
           navigationViewModel,
-        )
+        ),
       )[FingerprintSettingsViewModel::class.java]
 
-    FingerprintSettingsViewBinder.bind(
-      this,
-      settingsViewModel,
-      navigationViewModel,
-      lifecycleScope,
-    )
+    FingerprintSettingsViewBinder.bind(this, settingsViewModel, navigationViewModel, lifecycleScope)
   }
 
   override fun getMetricsCategory(): Int {
@@ -364,7 +365,7 @@ class FingerprintSettingsV2Fragment :
       RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
         activity,
         DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT,
-        requireActivity().userId
+        requireActivity().userId,
       )
     val activity = requireActivity()
     val helpIntent =
@@ -404,7 +405,7 @@ class FingerprintSettingsV2Fragment :
       column.title =
         getString(
           R.string.security_settings_fingerprint_enroll_introduction_v3_message,
-          DeviceHelper.getDeviceName(requireActivity())
+          DeviceHelper.getDeviceName(requireActivity()),
         )
       column.learnMoreOnClickListener = learnMoreClickListener
       column.learnMoreOverrideText =
@@ -437,13 +438,12 @@ class FingerprintSettingsV2Fragment :
       val willDelete =
         fingerprintPreferences()
           .first { it?.fingerprintViewModel == fingerprintViewModel }
-          ?.askUserToDeleteDialog()
-          ?: false
+          ?.askUserToDeleteDialog() ?: false
       if (willDelete) {
         mMetricsFeatureProvider.action(
           context,
           SettingsEnums.ACTION_FINGERPRINT_DELETE,
-          fingerprintViewModel.fingerId
+          fingerprintViewModel.fingerId,
         )
       }
       return willDelete
@@ -466,7 +466,7 @@ class FingerprintSettingsV2Fragment :
         mMetricsFeatureProvider.action(
           context,
           SettingsEnums.ACTION_FINGERPRINT_RENAME,
-          toReturn.first.fingerId
+          toReturn.first.fingerId,
         )
       }
       return toReturn
@@ -518,12 +518,12 @@ class FingerprintSettingsV2Fragment :
     val intent = Intent()
     intent.setClassName(
       SETTINGS_PACKAGE_NAME,
-      FingerprintEnrollIntroductionInternal::class.java.name
+      FingerprintEnrollIntroductionInternal::class.java.name,
     )
     intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true)
     intent.putExtra(
       SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
-      SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE
+      SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE,
     )
 
     intent.putExtra(Intent.EXTRA_USER_ID, userId)
@@ -546,7 +546,7 @@ class FingerprintSettingsV2Fragment :
     val intent = Intent()
     intent.setClassName(
       SETTINGS_PACKAGE_NAME,
-      FingerprintEnrollEnrolling::class.qualifiedName.toString()
+      FingerprintEnrollEnrolling::class.qualifiedName.toString(),
     )
     intent.putExtra(Intent.EXTRA_USER_ID, userId)
     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, challengeToken)
@@ -568,8 +568,7 @@ class FingerprintSettingsV2Fragment :
 
     return category?.let { cat ->
       cat.childrenToList().map { it as FingerprintSettingsPreference? }
-    }
-      ?: emptyList()
+    } ?: emptyList()
   }
 
   private fun PreferenceCategory.childrenToList(): List<Preference> {

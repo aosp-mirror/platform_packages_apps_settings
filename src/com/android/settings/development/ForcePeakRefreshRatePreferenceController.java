@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
+import static com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateAmongAllDisplays;
 import static com.android.internal.display.RefreshRateSettingsUtils.findHighestRefreshRateForDefaultDisplay;
 
 import android.content.Context;
@@ -28,6 +29,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
+import com.android.server.display.feature.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -46,7 +48,9 @@ public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPr
 
     public ForcePeakRefreshRatePreferenceController(Context context) {
         super(context);
-        mPeakRefreshRate = findHighestRefreshRateForDefaultDisplay(context);
+        mPeakRefreshRate = Flags.backUpSmoothDisplayAndForcePeakRefreshRate()
+                ? findHighestRefreshRateAmongAllDisplays(context)
+                : findHighestRefreshRateForDefaultDisplay(context);
         Log.d(TAG, "DEFAULT_REFRESH_RATE : " + DEFAULT_REFRESH_RATE
             + " mPeakRefreshRate : " + mPeakRefreshRate);
     }
@@ -95,7 +99,9 @@ public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPr
 
     @VisibleForTesting
     void forcePeakRefreshRate(boolean enable) {
-        final float peakRefreshRate = enable ? Float.POSITIVE_INFINITY : NO_CONFIG;
+        final float valueIfEnabled = Flags.backUpSmoothDisplayAndForcePeakRefreshRate()
+                ? Float.POSITIVE_INFINITY : mPeakRefreshRate;
+        final float peakRefreshRate = enable ? valueIfEnabled : NO_CONFIG;
         Settings.System.putFloat(mContext.getContentResolver(),
             Settings.System.MIN_REFRESH_RATE, peakRefreshRate);
     }

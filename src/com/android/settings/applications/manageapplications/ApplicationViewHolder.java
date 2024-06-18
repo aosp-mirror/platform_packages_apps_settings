@@ -231,7 +231,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     void updateAppCloneWidget(Context context, View.OnClickListener onClickListener,
             AppEntry entry) {
         if (mAddIcon != null) {
-            if (!entry.isCloned) {
+            if (!entry.isClonedProfile()) {
                 mAddIcon.setBackground(context.getDrawable(R.drawable.ic_add_24dp));
             } else {
                 mAddIcon.setBackground(context.getDrawable(R.drawable.ic_trash_can));
@@ -254,7 +254,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
                 String packageName = entry.info.packageName;
 
                 if (mWidgetContainer != null) {
-                    if (!entry.isCloned) {
+                    if (!entry.isClonedProfile()) {
                         metricsFeatureProvider.action(context,
                                 SettingsEnums.ACTION_CREATE_CLONE_APP);
                         mAddIcon.setVisibility(View.INVISIBLE);
@@ -285,7 +285,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
                             }
                         }.execute();
 
-                    } else if (entry.isCloned) {
+                    } else if (entry.isClonedProfile()) {
                         metricsFeatureProvider.action(context,
                                 SettingsEnums.ACTION_DELETE_CLONE_APP);
                         cloneBackend.uninstallClonedApp(packageName, /*allUsers*/ false,

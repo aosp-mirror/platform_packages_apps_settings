@@ -374,7 +374,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         mFragController.get().updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                MAGNIFICATION_CONTROLLER_NAME);
         // Compare to default UserShortcutType
         assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE);
     }
@@ -388,7 +388,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         mFragController.get().updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                MAGNIFICATION_CONTROLLER_NAME);
         assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.TRIPLETAP);
     }
 
@@ -402,7 +402,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         mFragController.get().updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                MAGNIFICATION_CONTROLLER_NAME);
         assertThat(expectedType).isEqualTo(UserShortcutType.TRIPLETAP);
     }
 
@@ -416,7 +416,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         mFragController.get().updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                MAGNIFICATION_CONTROLLER_NAME);
         assertThat(expectedType).isEqualTo(UserShortcutType.TWOFINGERTRIPLETAP);
     }
 
@@ -431,7 +431,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         mFragController.get().updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                MAGNIFICATION_CONTROLLER_NAME);
         assertThat(expectedType).isEqualTo(UserShortcutType.TWOFINGERTRIPLETAP);
     }
 
@@ -507,7 +507,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         fragment.saveNonEmptyUserShortcutType(value);
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                MAGNIFICATION_CONTROLLER_NAME);
         assertThat(value).isEqualTo(6);
         assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP);
     }
@@ -529,7 +529,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         fragment.saveNonEmptyUserShortcutType(value);
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                MAGNIFICATION_CONTROLLER_NAME);
         assertThat(value).isEqualTo(UserShortcutType.TWOFINGERTRIPLETAP);
         assertThat(expectedType).isEqualTo(UserShortcutType.TWOFINGERTRIPLETAP);
     }

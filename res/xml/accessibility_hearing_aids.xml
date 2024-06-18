@@ -28,11 +28,11 @@
         settings:controller="com.android.settings.accessibility.AvailableHearingDevicePreferenceController"/>
 
     <com.android.settingslib.RestrictedPreference
-        android:key="add_bt_devices"
+        android:key="hearing_device_add_bt_devices"
         android:title="@string/bluetooth_pairing_pref_title"
         android:icon="@drawable/ic_add_24dp"
         android:summary="@string/connected_device_add_device_summary"
-        android:fragment="com.android.settings.accessibility.HearingDevicePairingDetail"
+        android:fragment="com.android.settings.accessibility.HearingDevicePairingFragment"
         settings:userRestriction="no_config_bluetooth"
         settings:useAdminDisabledSummary="true"
         settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>

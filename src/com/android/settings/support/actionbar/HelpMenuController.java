@@ -18,12 +18,12 @@ package com.android.settings.support.actionbar;
 
 import static com.android.settings.support.actionbar.HelpResourceProvider.HELP_URI_RESOURCE_KEY;
 
-import android.annotation.NonNull;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.android.settingslib.HelpUtils;

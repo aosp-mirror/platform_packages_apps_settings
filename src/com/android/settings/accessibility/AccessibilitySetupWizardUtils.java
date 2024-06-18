@@ -17,8 +17,10 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -29,7 +31,7 @@ import com.google.android.setupdesign.R;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 /** Provides utility methods to accessibility settings for Setup Wizard only. */
-class AccessibilitySetupWizardUtils {
+public class AccessibilitySetupWizardUtils {
 
     private AccessibilitySetupWizardUtils(){}
 
@@ -45,10 +47,19 @@ class AccessibilitySetupWizardUtils {
      * @param icon The icon to be set
      */
     public static void updateGlifPreferenceLayout(Context context, GlifPreferenceLayout layout,
-            CharSequence title, CharSequence description, Drawable icon) {
-        layout.setHeaderText(title);
-        layout.setDescriptionText(description);
-        layout.setIcon(icon);
+            @Nullable CharSequence title, @Nullable CharSequence description,
+            @Nullable Drawable icon) {
+        if (!TextUtils.isEmpty(title)) {
+            layout.setHeaderText(title);
+        }
+
+        if (!TextUtils.isEmpty(description)) {
+            layout.setDescriptionText(description);
+        }
+
+        if (icon != null) {
+            layout.setIcon(icon);
+        }
         layout.setDividerInsets(Integer.MAX_VALUE, 0);
 
         if (ThemeHelper.shouldApplyMaterialYouStyle(context)) {

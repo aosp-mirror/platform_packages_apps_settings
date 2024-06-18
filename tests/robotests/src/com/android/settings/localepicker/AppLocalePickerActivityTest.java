@@ -314,6 +314,8 @@ public class AppLocalePickerActivityTest {
         assertThat(info.getNotificationCount()).isEqualTo(1);
         assertThat(info.getDismissCount()).isEqualTo(0);
         assertThat(info.getLastNotificationTimeMs()).isNotEqualTo(0);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(), eq(SettingsEnums.ACTION_NOTIFICATION_FOR_SYSTEM_LOCALE));
 
         mDataManager.clearLocaleNotificationMap();
     }
@@ -367,7 +369,7 @@ public class AppLocalePickerActivityTest {
         // In the proto file, en-US's uid list contains 103, the notificationCount equals 1, and
         // LastNotificationTime > 0.
         NotificationInfo info = mDataManager.getNotificationInfo(EN_US);
-        assertThat(info.getUidCollection().contains(sUid)).isTrue();
+        assertThat(info.getUidCollection()).contains(sUid);
         assertThat(info.getNotificationCount()).isEqualTo(1);
         assertThat(info.getDismissCount()).isEqualTo(0);
         assertThat(info.getLastNotificationTimeMs()).isNotEqualTo(0);
@@ -438,7 +440,7 @@ public class AppLocalePickerActivityTest {
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
-    public void testEvaluateLocaleNotification_localeUpdateReachThreshold_uidAddedNoNotification()
+    public void testEvaluateLocaleNotification_localeUpdateReachThreshold_noUidNorNotification()
             throws Exception {
         // App with uid 106 changed its locale from System to en-US.
         sUid = 106;
@@ -458,7 +460,7 @@ public class AppLocalePickerActivityTest {
         // In the proto file, en-US's uid list contains 106, the notificationCount equals 2, and
         // LastNotificationTime > 0.
         NotificationInfo info = mDataManager.getNotificationInfo(EN_US);
-        assertThat(info.getUidCollection()).contains(sUid);
+        assertThat(info.getUidCollection().contains(sUid)).isFalse();
         assertThat(info.getNotificationCount()).isEqualTo(2);
         assertThat(info.getDismissCount()).isEqualTo(0);
         assertThat(info.getLastNotificationTimeMs()).isEqualTo(lastNotificationTime);

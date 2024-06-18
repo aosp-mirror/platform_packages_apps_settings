@@ -18,9 +18,11 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
-import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Education
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Enrollment
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -34,7 +36,7 @@ import kotlinx.coroutines.flow.transformLatest
 class FingerprintEnrollViewModel(
   private val fingerprintManagerInteractor: FingerprintManagerInteractor,
   gatekeeperViewModel: FingerprintGatekeeperViewModel,
-  navigationViewModel: FingerprintEnrollNavigationViewModel,
+  val navigationViewModel: FingerprintNavigationViewModel,
 ) : ViewModel() {
 
   /**
@@ -45,8 +47,8 @@ class FingerprintEnrollViewModel(
    */
   var sensorTypeCached: FingerprintSensorType? = null
   private var _enrollReason: Flow<EnrollReason?> =
-    navigationViewModel.navigationViewModel.map {
-      when (it.currStep) {
+    navigationViewModel.currentScreen.map {
+      when (it) {
         is Enrollment -> EnrollReason.EnrollEnrolling
         is Education -> EnrollReason.FindSensor
         else -> null
@@ -54,7 +56,7 @@ class FingerprintEnrollViewModel(
     }
 
   /** Represents the stream of [FingerprintSensorType] */
-  val sensorType: Flow<FingerprintSensorType> =
+  val sensorType: Flow<FingerprintSensorType?> =
     fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
 
   /**
@@ -64,8 +66,7 @@ class FingerprintEnrollViewModel(
    * This flow should be the only flow which calls enroll().
    */
   val _enrollFlow: Flow<FingerEnrollState> =
-    combine(gatekeeperViewModel.gatekeeperInfo, _enrollReason) { hardwareAuthToken, enrollReason,
-        ->
+    combine(gatekeeperViewModel.gatekeeperInfo, _enrollReason) { hardwareAuthToken, enrollReason ->
         Pair(hardwareAuthToken, enrollReason)
       }
       .transformLatest {
@@ -110,18 +111,11 @@ class FingerprintEnrollViewModel(
   class FingerprintEnrollViewModelFactory(
     val interactor: FingerprintManagerInteractor,
     val gatekeeperViewModel: FingerprintGatekeeperViewModel,
-    val navigationViewModel: FingerprintEnrollNavigationViewModel,
+    val navigationViewModel: FingerprintNavigationViewModel,
   ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(
-      modelClass: Class<T>,
-    ): T {
-      return FingerprintEnrollViewModel(
-        interactor,
-        gatekeeperViewModel,
-        navigationViewModel,
-      )
-        as T
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+      return FingerprintEnrollViewModel(interactor, gatekeeperViewModel, navigationViewModel) as T
     }
   }
 }

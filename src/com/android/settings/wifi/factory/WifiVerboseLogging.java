@@ -16,12 +16,12 @@
 
 package com.android.settings.wifi.factory;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Wi-Fi Verbose Logging

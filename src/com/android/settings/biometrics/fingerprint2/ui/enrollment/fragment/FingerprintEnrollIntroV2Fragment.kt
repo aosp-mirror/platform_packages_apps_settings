@@ -24,7 +24,6 @@ import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,9 +35,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.Unicorn
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
+import com.android.settings.biometrics.fingerprint2.lib.model.Unicorn
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollIntroViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
@@ -48,6 +46,7 @@ import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.template.RequireScrollMixin
 import com.google.android.setupdesign.util.DynamicColorPalette
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 private const val TAG = "FingerprintEnrollmentIntroV2Fragment"
@@ -96,16 +95,14 @@ class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enro
   private lateinit var footerBarMixin: FooterBarMixin
   private lateinit var textModel: TextModel
 
-  // Note that the ViewModels cannot be requested before the onCreate call
-  private val navigationViewModel: FingerprintEnrollNavigationViewModel by lazy {
-    viewModelProvider[FingerprintEnrollNavigationViewModel::class.java]
+  private val viewModel: FingerprintEnrollIntroViewModel by lazy {
+    viewModelProvider[FingerprintEnrollIntroViewModel::class.java]
   }
-  private val fingerprintViewModel: FingerprintEnrollViewModel by lazy {
-    viewModelProvider[FingerprintEnrollViewModel::class.java]
-  }
+
   private val fingerprintScrollViewModel: FingerprintScrollViewModel by lazy {
     viewModelProvider[FingerprintScrollViewModel::class.java]
   }
+
   private val gateKeeperViewModel: FingerprintGatekeeperViewModel by lazy {
     viewModelProvider[FingerprintGatekeeperViewModel::class.java]
   }
@@ -113,17 +110,16 @@ class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enro
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View? =
     super.onCreateView(inflater, container, savedInstanceState).also { theView ->
       val view = theView!!
 
       viewLifecycleOwner.lifecycleScope.launch {
-        combine(
-            navigationViewModel.fingerprintFlow,
-            fingerprintViewModel.sensorType,
-          ) { enrollType, sensorType ->
-            Pair(enrollType, sensorType)
+        combine(viewModel.fingerprintFlow, viewModel.sensor.filterNotNull()) {
+            enrollType,
+            sensorType ->
+            Pair(enrollType, sensorType.sensorType)
           }
           .collect { (enrollType, sensorType) ->
             textModel =
@@ -147,7 +143,7 @@ class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enro
                 R.id.icon_trash_can,
                 R.id.icon_info,
                 R.id.icon_shield,
-                R.id.icon_link
+                R.id.icon_link,
               )
               .forEach { icon ->
                 view.requireViewById<ImageView>(icon).drawable.colorFilter = colorFilter
@@ -186,31 +182,24 @@ class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enro
       return view
     }
 
-  /**
-   * TODO (b/305269201): This link isn't displaying for screenshot tests.
-   */
+  /** TODO (b/305269201): This link isn't displaying for screenshot tests. */
   private fun setFooterLink(view: View) {
     val footerLink: TextView = view.requireViewById(R.id.footer_learn_more)
     footerLink.movementMethod = LinkMovementMethod.getInstance()
     footerLink.text =
       Html.fromHtml(
         getString(R.string.security_settings_fingerprint_v2_enroll_introduction_message_learn_more),
-        Html.FROM_HTML_MODE_LEGACY
+        Html.FROM_HTML_MODE_LEGACY,
       )
   }
 
-  private fun setupFooterBarAndScrollView(
-    view: View,
-  ) {
+  private fun setupFooterBarAndScrollView(view: View) {
     val scrollView: ScrollView =
       view.requireViewById(com.google.android.setupdesign.R.id.sud_scroll_view)
     scrollView.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
     // Next button responsible for starting the next fragment.
     val onNextButtonClick: View.OnClickListener =
-      View.OnClickListener {
-        Log.d(TAG, "OnNextClicked")
-        navigationViewModel.nextStep()
-      }
+      View.OnClickListener { viewModel.primaryButtonClicked() }
 
     val layout: GlifLayout = view.findViewById(R.id.setup_wizard_layout)!!
     footerBarMixin = layout.getMixin(FooterBarMixin::class.java)
@@ -225,11 +214,11 @@ class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enro
     footerBarMixin.setSecondaryButton(
       FooterButton.Builder(requireContext())
         .setText(textModel.negativeButton)
-        .setListener({ Log.d(TAG, "prevClicked") })
+        .setListener { viewModel.onSecondaryButtonClicked() }
         .setButtonType(FooterButton.ButtonType.NEXT)
         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
         .build(),
-      true /* usePrimaryStyle */
+      true, /* usePrimaryStyle */
     )
 
     val primaryButton = footerBarMixin.primaryButton
@@ -242,7 +231,7 @@ class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enro
       requireContext(),
       primaryButton,
       R.string.security_settings_face_enroll_introduction_more,
-      onNextButtonClick
+      onNextButtonClick,
     )
 
     requireScrollMixin.setOnRequireScrollStateChangedListener { scrollNeeded: Boolean ->
@@ -257,7 +246,7 @@ class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enro
         if (consented) {
           primaryButton.setText(
             requireContext(),
-            R.string.security_settings_fingerprint_enroll_introduction_agree
+            R.string.security_settings_fingerprint_enroll_introduction_agree,
           )
           secondaryButton.visibility = View.VISIBLE
         } else {
@@ -309,7 +298,7 @@ class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enro
   private fun getIconColorFilter(): PorterDuffColorFilter {
     return PorterDuffColorFilter(
       DynamicColorPalette.getColor(context, DynamicColorPalette.ColorType.ACCENT),
-      PorterDuff.Mode.SRC_IN
+      PorterDuff.Mode.SRC_IN,
     )
   }
 }

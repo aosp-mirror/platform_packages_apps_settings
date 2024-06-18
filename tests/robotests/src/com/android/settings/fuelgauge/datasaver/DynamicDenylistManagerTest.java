@@ -177,8 +177,11 @@ public class DynamicDenylistManagerTest {
     @Test
     public void setDenylist_uidDeniedAlready_doNothing() {
         initDynamicDenylistManager(new int[] {FAKE_UID_1_INT});
+        final ArraySet uids = new ArraySet<>();
+        uids.add(FAKE_UID_1_INT);
+        uids.add(null);
 
-        setDenylist(new ArraySet<>(List.of(FAKE_UID_1_INT)));
+        setDenylist(uids);
 
         verify(mNetworkPolicyManager, never()).setUidPolicy(anyInt(), anyInt());
     }
@@ -375,8 +378,8 @@ public class DynamicDenylistManagerTest {
         mDynamicDenylistManager.dump(printWriter);
 
         final String dumpResults = stringWriter.toString();
-        assertThat(dumpResults.contains("ManualDenylist: app1")).isTrue();
-        assertThat(dumpResults.contains("DynamicDenylist: app2")).isTrue();
+        assertThat(dumpResults.contains("\tManualDenylist:\n\t\tapp1")).isTrue();
+        assertThat(dumpResults.contains("\tDynamicDenylist:\n\t\tapp2")).isTrue();
     }
 
     @Test
@@ -389,8 +392,8 @@ public class DynamicDenylistManagerTest {
         mDynamicDenylistManager.dump(printWriter);
 
         final String dumpResults = stringWriter.toString();
-        assertThat(dumpResults.contains("ManualDenylist: null")).isTrue();
-        assertThat(dumpResults.contains("DynamicDenylist: null")).isTrue();
+        assertThat(dumpResults.contains("Dump of DynamicDenylistManager:")).isTrue();
+        assertThat(dumpResults.contains("\tManualDenylist:\n\tDynamicDenylist:")).isTrue();
     }
 
     @Test

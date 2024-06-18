@@ -16,7 +16,7 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import android.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;

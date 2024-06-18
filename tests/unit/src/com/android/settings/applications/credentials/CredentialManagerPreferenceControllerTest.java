@@ -18,7 +18,10 @@ package com.android.settings.applications.credentials;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 
 import android.app.Activity;
@@ -27,7 +30,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ServiceInfo;
+import android.content.res.Resources;
 import android.credentials.CredentialProviderInfo;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Looper;
 import android.provider.Settings;
@@ -38,6 +43,9 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+
+import com.android.settings.tests.unit.R;
 
 import com.google.android.collect.Lists;
 
@@ -58,14 +66,13 @@ public class CredentialManagerPreferenceControllerTest {
     private PreferenceScreen mScreen;
     private PreferenceCategory mCredentialsPreferenceCategory;
     private CredentialManagerPreferenceController.Delegate mDelegate;
-    private Optional<Integer> mReceivedResultCode;
 
     private static final String TEST_PACKAGE_NAME_A = "com.android.providerA";
     private static final String TEST_PACKAGE_NAME_B = "com.android.providerB";
     private static final String TEST_PACKAGE_NAME_C = "com.android.providerC";
     private static final String TEST_TITLE_APP_A = "test app A";
     private static final String TEST_TITLE_APP_B = "test app B";
-    private static final String TEST_TITLE_SERVICE_C = "test service C1";
+    private static final String TEST_TITLE_APP_C = "test app C1";
     private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
     private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
 
@@ -79,12 +86,9 @@ public class CredentialManagerPreferenceControllerTest {
         mCredentialsPreferenceCategory = new PreferenceCategory(mContext);
         mCredentialsPreferenceCategory.setKey("credentials_test");
         mScreen.addPreference(mCredentialsPreferenceCategory);
-        mReceivedResultCode = Optional.empty();
         mDelegate =
                 new CredentialManagerPreferenceController.Delegate() {
-                    public void setActivityResult(int resultCode) {
-                        mReceivedResultCode = Optional.of(resultCode);
-                    }
+                    public void setActivityResult(int resultCode) {}
 
                     public void forceDelegateRefresh() {}
                 };
@@ -94,11 +98,15 @@ public class CredentialManagerPreferenceControllerTest {
     // Tests that getAvailabilityStatus() does not throw an exception if it's called before the
     // Controller is initialized (this can happen during indexing).
     public void getAvailabilityStatus_withoutInit_returnsUnavailable() {
+        if (Looper.myLooper() == null) {
+            Looper.prepare(); // needed to create the preference screen
+        }
+
         CredentialManagerPreferenceController controller =
                 new CredentialManagerPreferenceController(
                         mContext, mCredentialsPreferenceCategory.getKey());
         assertThat(controller.isConnected()).isFalse();
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -106,23 +114,43 @@ public class CredentialManagerPreferenceControllerTest {
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(Collections.emptyList());
         assertThat(controller.isConnected()).isFalse();
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     public void getAvailabilityStatus_withServices_returnsAvailable() {
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
-        assertThat(controller.isConnected()).isFalse();
+        controller.setSimulateConnectedForTests(true);
+        assertThat(controller.isConnected()).isTrue();
+        controller.setSimulateHiddenForTests(Optional.of(false));
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_isHidden_returnsConditionallyUnavailable() {
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
+        controller.setSimulateConnectedForTests(true);
+        assertThat(controller.isConnected()).isTrue();
+        controller.setSimulateHiddenForTests(Optional.of(true));
+        assertThat(controller.isHiddenDueToNoProviderSet()).isTrue();
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void displayPreference_withServices_preferencesAdded() {
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
+        controller.setSimulateConnectedForTests(true);
+        controller.setSimulateHiddenForTests(Optional.of(false));
+
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
+        assertThat(controller.isConnected()).isTrue();
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+
         controller.displayPreference(mScreen);
-        assertThat(controller.isConnected()).isFalse();
         assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
 
         Preference pref = mCredentialsPreferenceCategory.getPreference(0);
@@ -139,8 +167,11 @@ public class CredentialManagerPreferenceControllerTest {
                         "com.android.provider2", "ClassA", "Service Title", "Summary Text");
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(Lists.newArrayList(providerInfo1, providerInfo2));
+        controller.setSimulateConnectedForTests(true);
+        assertThat(controller.isConnected()).isTrue();
+        controller.setSimulateHiddenForTests(Optional.of(false));
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-        assertThat(controller.isConnected()).isFalse();
 
         // Test the data is correct.
         assertThat(providerInfo1.isEnabled()).isFalse();
@@ -180,36 +211,39 @@ public class CredentialManagerPreferenceControllerTest {
                                 createCredentialProviderInfo("com.android.provider4", "ClassA"),
                                 createCredentialProviderInfo("com.android.provider5", "ClassA"),
                                 createCredentialProviderInfo("com.android.provider6", "ClassA")));
+        controller.setSimulateConnectedForTests(true);
+        assertThat(controller.isConnected()).isTrue();
+        controller.setSimulateHiddenForTests(Optional.of(false));
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-        assertThat(controller.isConnected()).isFalse();
 
-        // Ensure that we stay under 5 providers.
+        // Ensure that we stay under 5 providers (one is reserved for primary).
         assertThat(controller.togglePackageNameEnabled("com.android.provider1")).isTrue();
         assertThat(controller.togglePackageNameEnabled("com.android.provider2")).isTrue();
         assertThat(controller.togglePackageNameEnabled("com.android.provider3")).isTrue();
         assertThat(controller.togglePackageNameEnabled("com.android.provider4")).isTrue();
-        assertThat(controller.togglePackageNameEnabled("com.android.provider5")).isTrue();
+        assertThat(controller.togglePackageNameEnabled("com.android.provider5")).isFalse();
         assertThat(controller.togglePackageNameEnabled("com.android.provider6")).isFalse();
 
         // Check that they are all actually registered.
         Set<String> enabledProviders = controller.getEnabledProviders();
-        assertThat(enabledProviders.size()).isEqualTo(5);
+        assertThat(enabledProviders.size()).isEqualTo(4);
         assertThat(enabledProviders.contains("com.android.provider1")).isTrue();
         assertThat(enabledProviders.contains("com.android.provider2")).isTrue();
         assertThat(enabledProviders.contains("com.android.provider3")).isTrue();
         assertThat(enabledProviders.contains("com.android.provider4")).isTrue();
-        assertThat(enabledProviders.contains("com.android.provider5")).isTrue();
+        assertThat(enabledProviders.contains("com.android.provider5")).isFalse();
         assertThat(enabledProviders.contains("com.android.provider6")).isFalse();
 
         // Check that the settings string has the right component names.
         List<String> enabledServices = controller.getEnabledSettings();
-        assertThat(enabledServices.size()).isEqualTo(6);
+        assertThat(enabledServices.size()).isEqualTo(5);
         assertThat(enabledServices.contains("com.android.provider1/ClassA")).isTrue();
         assertThat(enabledServices.contains("com.android.provider1/ClassB")).isTrue();
         assertThat(enabledServices.contains("com.android.provider2/ClassA")).isTrue();
         assertThat(enabledServices.contains("com.android.provider3/ClassA")).isTrue();
         assertThat(enabledServices.contains("com.android.provider4/ClassA")).isTrue();
-        assertThat(enabledServices.contains("com.android.provider5/ClassA")).isTrue();
+        assertThat(enabledServices.contains("com.android.provider5/ClassA")).isFalse();
         assertThat(enabledServices.contains("com.android.provider6/ClassA")).isFalse();
 
         // Toggle the provider disabled.
@@ -217,22 +251,22 @@ public class CredentialManagerPreferenceControllerTest {
 
         // Check that the provider was removed from the list of providers.
         Set<String> currentlyEnabledProviders = controller.getEnabledProviders();
-        assertThat(currentlyEnabledProviders.size()).isEqualTo(4);
+        assertThat(currentlyEnabledProviders.size()).isEqualTo(3);
         assertThat(currentlyEnabledProviders.contains("com.android.provider1")).isTrue();
         assertThat(currentlyEnabledProviders.contains("com.android.provider2")).isFalse();
         assertThat(currentlyEnabledProviders.contains("com.android.provider3")).isTrue();
         assertThat(currentlyEnabledProviders.contains("com.android.provider4")).isTrue();
-        assertThat(currentlyEnabledProviders.contains("com.android.provider5")).isTrue();
+        assertThat(currentlyEnabledProviders.contains("com.android.provider5")).isFalse();
         assertThat(currentlyEnabledProviders.contains("com.android.provider6")).isFalse();
 
         // Check that the provider was removed from the list of services stored in the setting.
         List<String> currentlyEnabledServices = controller.getEnabledSettings();
-        assertThat(currentlyEnabledServices.size()).isEqualTo(5);
+        assertThat(currentlyEnabledServices.size()).isEqualTo(4);
         assertThat(currentlyEnabledServices.contains("com.android.provider1/ClassA")).isTrue();
         assertThat(currentlyEnabledServices.contains("com.android.provider1/ClassB")).isTrue();
         assertThat(currentlyEnabledServices.contains("com.android.provider3/ClassA")).isTrue();
         assertThat(currentlyEnabledServices.contains("com.android.provider4/ClassA")).isTrue();
-        assertThat(currentlyEnabledServices.contains("com.android.provider5/ClassA")).isTrue();
+        assertThat(currentlyEnabledServices.contains("com.android.provider5/ClassA")).isFalse();
         assertThat(currentlyEnabledServices.contains("com.android.provider6/ClassA")).isFalse();
     }
 
@@ -246,8 +280,11 @@ public class CredentialManagerPreferenceControllerTest {
                         "com.android.provider2", "ClassA", "Service Title", true);
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(Lists.newArrayList(providerInfo1, providerInfo2));
+        controller.setSimulateConnectedForTests(true);
+        assertThat(controller.isConnected()).isTrue();
+        controller.setSimulateHiddenForTests(Optional.of(false));
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-        assertThat(controller.isConnected()).isFalse();
 
         // Test the data is correct.
         assertThat(providerInfo1.isEnabled()).isFalse();
@@ -282,31 +319,30 @@ public class CredentialManagerPreferenceControllerTest {
                         "test service B");
         CredentialProviderInfo serviceC1 =
                 createCredentialProviderInfoWithAppLabel(
-                        TEST_PACKAGE_NAME_C,
-                        "CredManProviderC1",
-                        "test app C1",
-                        TEST_TITLE_SERVICE_C);
+                        TEST_PACKAGE_NAME_C, "CredManProviderC1", "test app C1", TEST_TITLE_APP_C);
         CredentialProviderInfo serviceC2 =
                 createCredentialProviderInfoWithAppLabel(
-                        TEST_PACKAGE_NAME_C,
-                        "CredManProviderC2",
-                        "test app C2",
-                        TEST_TITLE_SERVICE_C);
+                        TEST_PACKAGE_NAME_C, "CredManProviderC2", "test app C2", TEST_TITLE_APP_C);
         CredentialProviderInfo serviceC3 =
                 createCredentialProviderInfoBuilder(
                                 TEST_PACKAGE_NAME_C,
                                 "CredManProviderC3",
                                 "test app C3",
-                                TEST_TITLE_SERVICE_C)
+                                TEST_TITLE_APP_C)
                         .setEnabled(true)
                         .build();
 
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(
                         Lists.newArrayList(serviceA1, serviceB1, serviceC1, serviceC2, serviceC3));
-        controller.displayPreference(mScreen);
+        controller.setSimulateConnectedForTests(true);
+        controller.setSimulateHiddenForTests(Optional.of(false));
 
-        assertThat(controller.isConnected()).isFalse();
+        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
+        assertThat(controller.isConnected()).isTrue();
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+
+        controller.displayPreference(mScreen);
         assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(3);
 
         Map<String, CredentialManagerPreferenceController.CombiPreference> prefs =
@@ -321,7 +357,7 @@ public class CredentialManagerPreferenceControllerTest {
         assertThat(prefs.get(TEST_PACKAGE_NAME_B).getTitle()).isEqualTo(TEST_TITLE_APP_B);
         assertThat(prefs.get(TEST_PACKAGE_NAME_B).isChecked()).isFalse();
         assertThat(prefs.containsKey(TEST_PACKAGE_NAME_C)).isTrue();
-        assertThat(prefs.get(TEST_PACKAGE_NAME_C).getTitle()).isEqualTo(TEST_TITLE_SERVICE_C);
+        assertThat(prefs.get(TEST_PACKAGE_NAME_C).getTitle()).isEqualTo(TEST_TITLE_APP_C);
         assertThat(prefs.get(TEST_PACKAGE_NAME_C).isChecked()).isTrue();
     }
 
@@ -347,9 +383,10 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(PRIMARY_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(
-                DialogInterface.BUTTON_POSITIVE, packageName, true);
-        assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_OK);
+        int resultCode =
+                controller.completeEnableProviderDialogBox(
+                        DialogInterface.BUTTON_POSITIVE, packageName, true);
+        assertThat(resultCode).isEqualTo(Activity.RESULT_OK);
     }
 
     @Test
@@ -363,9 +400,10 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(PRIMARY_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(
-                DialogInterface.BUTTON_NEGATIVE, packageName, true);
-        assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_CANCELED);
+        int resultCode =
+                controller.completeEnableProviderDialogBox(
+                        DialogInterface.BUTTON_NEGATIVE, packageName, true);
+        assertThat(resultCode).isEqualTo(Activity.RESULT_CANCELED);
     }
 
     @Test
@@ -390,9 +428,10 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(ALTERNATE_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(
-                DialogInterface.BUTTON_POSITIVE, packageName, true);
-        assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_OK);
+        int resultCode =
+                controller.completeEnableProviderDialogBox(
+                        DialogInterface.BUTTON_POSITIVE, packageName, true);
+        assertThat(resultCode).isEqualTo(Activity.RESULT_OK);
     }
 
     @Test
@@ -406,9 +445,10 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(ALTERNATE_INTENT);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isTrue();
-        controller.completeEnableProviderDialogBox(
-                DialogInterface.BUTTON_NEGATIVE, packageName, true);
-        assertThat(mReceivedResultCode.get()).isEqualTo(Activity.RESULT_CANCELED);
+        int resultCode =
+                controller.completeEnableProviderDialogBox(
+                        DialogInterface.BUTTON_NEGATIVE, packageName, true);
+        assertThat(resultCode).isEqualTo(Activity.RESULT_CANCELED);
     }
 
     @Test
@@ -422,7 +462,6 @@ public class CredentialManagerPreferenceControllerTest {
         Intent intent = new Intent(Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE);
         intent.setData(Uri.parse("package:" + packageName));
         assertThat(controller.verifyReceivedIntent(intent)).isFalse();
-        assertThat(mReceivedResultCode.isPresent()).isFalse();
     }
 
     @Test
@@ -433,7 +472,93 @@ public class CredentialManagerPreferenceControllerTest {
 
         // Use a null intent.
         assertThat(controller.verifyReceivedIntent(null)).isFalse();
-        assertThat(mReceivedResultCode.isPresent()).isFalse();
+    }
+
+    @Test
+    public void testIconResizer_resizeLargeImage() throws Throwable {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+
+        final Drawable d =
+                InstrumentationRegistry.getInstrumentation()
+                        .getContext()
+                        .getResources()
+                        .getDrawable(R.drawable.credman_icon_32_32);
+        assertThat(d).isNotNull();
+        assertThat(d.getIntrinsicHeight() >= 0).isTrue();
+        assertThat(d.getIntrinsicWidth() >= 0).isTrue();
+
+        Drawable thumbnail = controller.processIcon(d);
+        assertThat(thumbnail).isNotNull();
+        assertThat(thumbnail.getIntrinsicHeight()).isEqualTo(getIconSize());
+        assertThat(thumbnail.getIntrinsicWidth()).isEqualTo(getIconSize());
+    }
+
+    @Test
+    public void testIconResizer_resizeNullImage() throws Throwable {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+
+        Drawable thumbnail = controller.processIcon(null);
+        assertThat(thumbnail).isNotNull();
+        assertThat(thumbnail.getIntrinsicHeight()).isEqualTo(getIconSize());
+        assertThat(thumbnail.getIntrinsicWidth()).isEqualTo(getIconSize());
+    }
+
+    @Test
+    public void testIconResizer_resizeSmallImage() throws Throwable {
+        CredentialProviderInfo cpi = createCredentialProviderInfo();
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(cpi));
+
+        final Drawable d =
+                InstrumentationRegistry.getInstrumentation()
+                        .getContext()
+                        .getResources()
+                        .getDrawable(R.drawable.credman_icon_1_1);
+        assertThat(d).isNotNull();
+        assertThat(d.getIntrinsicHeight() >= 0).isTrue();
+        assertThat(d.getIntrinsicWidth() >= 0).isTrue();
+
+        Drawable thumbnail = controller.processIcon(null);
+        assertThat(thumbnail).isNotNull();
+        assertThat(thumbnail.getIntrinsicHeight()).isEqualTo(getIconSize());
+        assertThat(thumbnail.getIntrinsicWidth()).isEqualTo(getIconSize());
+    }
+
+    @Test
+    public void hasNonPrimaryServices_allServicesArePrimary() {
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(
+                    Lists.newArrayList(createCredentialProviderPrimary()));
+        assertThat(controller.hasNonPrimaryServices()).isFalse();
+    }
+
+    @Test
+    public void hasNonPrimaryServices_mixtureOfServices() {
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(
+                    Lists.newArrayList(createCredentialProviderInfo(),
+                        createCredentialProviderPrimary()));
+        assertThat(controller.hasNonPrimaryServices()).isTrue();
+    }
+
+    @Test
+    public void testProviderLimitReached() {
+        // The limit is 5 with one slot reserved for primary.
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(0)).isFalse();
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(1)).isFalse();
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(2)).isFalse();
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(3)).isFalse();
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(4)).isTrue();
+        assertThat(CredentialManagerPreferenceController.hasProviderLimitBeenReached(5)).isTrue();
+    }
+
+    private int getIconSize() {
+        final Resources resources = mContext.getResources();
+        return (int) resources.getDimension(android.R.dimen.app_icon_size);
     }
 
     private CredentialManagerPreferenceController createControllerWithServices(
@@ -443,6 +568,10 @@ public class CredentialManagerPreferenceControllerTest {
 
     private CredentialManagerPreferenceController createControllerWithServicesAndAddServiceOverride(
             List<CredentialProviderInfo> availableServices, String addServiceOverride) {
+        if (Looper.myLooper() == null) {
+            Looper.prepare(); // needed to create the preference screen
+        }
+
         CredentialManagerPreferenceController controller =
                 new CredentialManagerPreferenceController(
                         mContext, mCredentialsPreferenceCategory.getKey());
@@ -465,6 +594,13 @@ public class CredentialManagerPreferenceControllerTest {
             String packageName, String className, CharSequence serviceLabel, boolean isEnabled) {
         return createCredentialProviderInfoBuilder(packageName, className, serviceLabel, "App Name")
                 .setEnabled(isEnabled)
+                .build();
+    }
+
+    private CredentialProviderInfo createCredentialProviderPrimary() {
+        return createCredentialProviderInfoBuilder(
+            "com.android.primary", "CredManProvider", "Service Label", "App Name")
+                .setPrimary(true)
                 .build();
     }
 

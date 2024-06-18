@@ -77,6 +77,7 @@ public class ActiveSubscriptionsListenerTest {
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        doReturn(mSubscriptionManager).when(mSubscriptionManager).createForAllUserProfiles();
 
         mActiveSubscriptions = new ArrayList<SubscriptionInfo>();
         addMockSubscription(SUB_ID1);

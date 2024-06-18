@@ -25,23 +25,20 @@ import static org.mockito.Mockito.verify;
 import android.app.NotificationManager;
 import android.content.Context;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowNotificationManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowActivityManager.class,
-})
 public class ZenAccessControllerTest {
 
     private static final String TEST_PKG = "com.test.package";
@@ -49,15 +46,12 @@ public class ZenAccessControllerTest {
     private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
     private ZenAccessController mController;
-    private ShadowActivityManager mActivityManager;
-
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new ZenAccessController(mContext, "key");
-        mActivityManager = Shadow.extract(mContext.getSystemService(Context.ACTIVITY_SERVICE));
     }
 
     @Test
