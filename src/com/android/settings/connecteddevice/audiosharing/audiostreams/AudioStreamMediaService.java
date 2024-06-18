@@ -74,6 +74,10 @@ public class AudioStreamMediaService extends Service {
                 public void onSourceLost(int broadcastId) {
                     super.onSourceLost(broadcastId);
                     if (broadcastId == mBroadcastId) {
+                        Log.d(TAG, "onSourceLost() : stopSelf");
+                        if (mNotificationManager != null) {
+                            mNotificationManager.cancel(NOTIFICATION_ID);
+                        }
                         stopSelf();
                     }
                 }
@@ -85,6 +89,10 @@ public class AudioStreamMediaService extends Service {
                             && mAudioStreamsHelper.getAllConnectedSources().stream()
                                     .map(BluetoothLeBroadcastReceiveState::getBroadcastId)
                                     .noneMatch(id -> id == mBroadcastId)) {
+                        Log.d(TAG, "onSourceRemoved() : stopSelf");
+                        if (mNotificationManager != null) {
+                            mNotificationManager.cancel(NOTIFICATION_ID);
+                        }
                         stopSelf();
                     }
                 }
@@ -95,6 +103,10 @@ public class AudioStreamMediaService extends Service {
                 @Override
                 public void onBluetoothStateChanged(int bluetoothState) {
                     if (BluetoothAdapter.STATE_OFF == bluetoothState) {
+                        Log.d(TAG, "onBluetoothStateChanged() : stopSelf");
+                        if (mNotificationManager != null) {
+                            mNotificationManager.cancel(NOTIFICATION_ID);
+                        }
                         stopSelf();
                     }
                 }
@@ -119,6 +131,10 @@ public class AudioStreamMediaService extends Service {
                                         });
                     }
                     if (mDevices == null || mDevices.isEmpty()) {
+                        Log.d(TAG, "onProfileConnectionStateChanged() : stopSelf");
+                        if (mNotificationManager != null) {
+                            mNotificationManager.cancel(NOTIFICATION_ID);
+                        }
                         stopSelf();
                     }
                 }
@@ -245,21 +261,27 @@ public class AudioStreamMediaService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.d(TAG, "onDestroy()");
         super.onDestroy();
 
         if (!AudioSharingUtils.isFeatureEnabled()) {
+            Log.d(TAG, "onDestroy() : skip due to feature not enabled");
             return;
         }
         if (mLocalBtManager != null) {
+            Log.d(TAG, "onDestroy() : unregister mBluetoothCallback");
             mLocalBtManager.getEventManager().unregisterCallback(mBluetoothCallback);
         }
         if (mLeBroadcastAssistant != null) {
+            Log.d(TAG, "onDestroy() : unregister mBroadcastAssistantCallback");
             mLeBroadcastAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
         }
         if (mVolumeControl != null) {
+            Log.d(TAG, "onDestroy() : unregister mVolumeControlCallback");
             mVolumeControl.unregisterCallback(mVolumeControlCallback);
         }
         if (mLocalSession != null) {
+            Log.d(TAG, "onDestroy() : release mLocalSession");
             mLocalSession.release();
             mLocalSession = null;
         }
@@ -272,6 +294,9 @@ public class AudioStreamMediaService extends Service {
         mBroadcastId = intent != null ? intent.getIntExtra(BROADCAST_ID, -1) : -1;
         if (mBroadcastId == -1) {
             Log.w(TAG, "Invalid broadcast ID. Service will not start.");
+            if (mNotificationManager != null) {
+                mNotificationManager.cancel(NOTIFICATION_ID);
+            }
             stopSelf();
             return START_NOT_STICKY;
         }
@@ -281,6 +306,9 @@ public class AudioStreamMediaService extends Service {
         }
         if (mDevices == null || mDevices.isEmpty()) {
             Log.w(TAG, "No device. Service will not start.");
+            if (mNotificationManager != null) {
+                mNotificationManager.cancel(NOTIFICATION_ID);
+            }
             stopSelf();
             return START_NOT_STICKY;
         }
