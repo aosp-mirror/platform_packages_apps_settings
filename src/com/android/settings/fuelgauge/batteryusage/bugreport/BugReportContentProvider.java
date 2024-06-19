@@ -60,6 +60,7 @@ public final class BugReportContentProvider extends ContentProvider {
         LogUtils.dumpBatteryUsageSlotDatabaseHist(context, writer);
         LogUtils.dumpBatteryEventDatabaseHist(context, writer);
         LogUtils.dumpBatteryStateDatabaseHist(context, writer);
+        LogUtils.dumpBatteryReattributeDatabaseHist(context, writer);
     }
 
     @Override

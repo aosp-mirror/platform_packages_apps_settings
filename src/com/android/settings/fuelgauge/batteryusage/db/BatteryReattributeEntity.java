@@ -62,6 +62,7 @@ public class BatteryReattributeEntity {
                 .append("\nBatteryReattributeEntity{")
                 .append("\n\t" + utcToLocalTimeForLogging(timestampStart))
                 .append("\n\t" + utcToLocalTimeForLogging(timestampEnd))
+                .append("\n\t" + ConvertUtils.decodeBatteryReattribute(reattributeData))
                 .append("\n}");
         return builder.toString();
     }
