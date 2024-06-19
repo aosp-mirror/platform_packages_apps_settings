@@ -36,7 +36,8 @@ class AddSourceWaitForResponseState extends AudioStreamStateHandler {
 
     @Nullable private static AddSourceWaitForResponseState sInstance = null;
 
-    private AddSourceWaitForResponseState() {}
+    @VisibleForTesting
+    AddSourceWaitForResponseState() {}
 
     static AddSourceWaitForResponseState getInstance() {
         if (sInstance == null) {
