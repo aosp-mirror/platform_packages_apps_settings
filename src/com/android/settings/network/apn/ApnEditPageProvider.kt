@@ -235,19 +235,7 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 enabled = apnData.isFieldEnabled(Telephony.Carriers.ROAMING_PROTOCOL),
             ) { apnData = apnData.copy(apnRoaming = it) }
             ApnNetworkTypeCheckBox(apnData) { apnData = apnData.copy(networkType = it) }
-            SwitchPreference(
-                object : SwitchPreferenceModel {
-                    override val title = stringResource(R.string.carrier_enabled)
-                    override val changeable = {
-                        apnData.apnEnableEnabled &&
-                            apnData.isFieldEnabled(Telephony.Carriers.CARRIER_ENABLED)
-                    }
-                    override val checked = { apnData.apnEnable }
-                    override val onCheckedChange = { newChecked: Boolean ->
-                        apnData = apnData.copy(apnEnable = newChecked)
-                    }
-                }
-            )
+            ApnEditCarrierEnabled(apnData) { apnData = apnData.copy(carrierEnabled = it) }
         }
     }
 }
