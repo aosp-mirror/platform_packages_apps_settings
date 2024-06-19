@@ -159,19 +159,22 @@ public class BluetoothDetailsHearingAidsPresetsController extends
         mPreference.setEnabled(mCachedDevice.isConnectedHapClientDevice());
 
         loadAllPresetInfo();
+        mPreference.setSummary(null);
         if (mPreference.getEntries().length == 0) {
-            if (DEBUG) {
-                Log.w(TAG, "Disable the preference since preset info size = 0");
+            if (mPreference.isEnabled()) {
+                if (DEBUG) {
+                    Log.w(TAG, "Disable the preference since preset info size = 0");
+                }
+                mPreference.setEnabled(false);
+                mPreference.setSummary(mContext.getString(
+                        R.string.bluetooth_hearing_aids_presets_empty_list_message));
             }
-            mPreference.setEnabled(false);
         } else {
             int activePresetIndex = mHapClientProfile.getActivePresetIndex(
                     mCachedDevice.getDevice());
             if (activePresetIndex != BluetoothHapClient.PRESET_INDEX_UNAVAILABLE) {
                 mPreference.setValue(Integer.toString(activePresetIndex));
                 mPreference.setSummary(mPreference.getEntry());
-            } else {
-                mPreference.setSummary(null);
             }
         }
     }

@@ -38,6 +38,7 @@ import android.bluetooth.BluetoothHapPresetInfo;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HapClientProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -215,6 +216,8 @@ public class BluetoothDetailsHearingAidsPresetsControllerTest extends
 
         assertThat(mController.getPreference()).isNotNull();
         assertThat(mController.getPreference().isEnabled()).isFalse();
+        assertThat(String.valueOf(mController.getPreference().getSummary())).isEqualTo(
+                mContext.getString(R.string.bluetooth_hearing_aids_presets_empty_list_message));
     }
 
     @Test
