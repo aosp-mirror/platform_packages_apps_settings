@@ -18,7 +18,6 @@ package com.android.settings.notification.modes;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -35,7 +34,7 @@ public class ZenModeMessagesFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModePrioritySendersPreferenceController(context,
-                "zen_mode_settings_category_messages", true, mBackend, mHelperBackend));
+                "zen_mode_settings_category_messages", true, mBackend));
         return controllers;
     }
 

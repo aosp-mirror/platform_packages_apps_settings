@@ -44,7 +44,7 @@ import java.util.Set;
 @RunWith(RobolectricTestRunner.class)
 public class ZenModesSummaryHelperTest {
     private Context mContext;
-    private ZenHelperBackend mBackend;
+    private ZenModesBackend mBackend;
 
     private ZenModeSummaryHelper mSummaryHelper;
 
@@ -52,7 +52,7 @@ public class ZenModesSummaryHelperTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mBackend = new ZenHelperBackend(mContext);
+        mBackend = new ZenModesBackend(mContext);
         mSummaryHelper = new ZenModeSummaryHelper(mContext, mBackend);
     }
 

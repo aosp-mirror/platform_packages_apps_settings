@@ -18,7 +18,6 @@ package com.android.settings.notification.modes;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -35,9 +34,9 @@ public class ZenModePeopleFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeCallsLinkPreferenceController(
-                context, "zen_mode_people_calls", mBackend, mHelperBackend));
+                context, "zen_mode_people_calls", mBackend));
         prefControllers.add(new ZenModeMessagesLinkPreferenceController(
-                context, "zen_mode_people_messages", mBackend, mHelperBackend));
+                context, "zen_mode_people_messages", mBackend));
         return prefControllers;
     }
 

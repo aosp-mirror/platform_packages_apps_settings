@@ -77,8 +77,8 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
-    @Mock private ZenModesBackend mBackend;
-    @Mock private ZenHelperBackend mHelperBackend;
+    @Mock
+    private ZenModesBackend mBackend;
 
     private PreferenceCategory mMessagesPrefCategory, mCallsPrefCategory;
 
@@ -90,11 +90,10 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
 
         mContext = RuntimeEnvironment.application;
 
-        mMessagesController = new ZenModePrioritySendersPreferenceController(mContext, "messages",
-                true, mBackend, mHelperBackend);
-        mCallsController = new ZenModePrioritySendersPreferenceController(mContext, "calls", false,
-                mBackend, mHelperBackend);
-
+        mMessagesController = new ZenModePrioritySendersPreferenceController(
+                mContext, "messages", true, mBackend);
+        mCallsController = new ZenModePrioritySendersPreferenceController(
+                mContext, "calls", false, mBackend);
         mMessagesPrefCategory = new PreferenceCategory(mContext);
         mMessagesPrefCategory.setKey(mMessagesController.getPreferenceKey());
         mCallsPrefCategory = new PreferenceCategory(mContext);
@@ -107,7 +106,7 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
 
         Cursor cursor = mock(Cursor.class);
         when(cursor.getCount()).thenReturn(1);
-        when(mHelperBackend.queryAllContactsData()).thenReturn(cursor);
+        when(mBackend.queryAllContactsData()).thenReturn(cursor);
     }
 
     // Makes a preference with the provided key and whether it's a checkbox with

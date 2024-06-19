@@ -31,9 +31,9 @@ class ZenModeNotifVisLinkPreferenceController extends AbstractZenModePreferenceC
     private final ZenModeSummaryHelper mSummaryBuilder;
 
     public ZenModeNotifVisLinkPreferenceController(Context context, String key,
-            ZenModesBackend backend, ZenHelperBackend helperBackend) {
+            ZenModesBackend backend) {
         super(context, key, backend);
-        mSummaryBuilder = new ZenModeSummaryHelper(context, helperBackend);
+        mSummaryBuilder = new ZenModeSummaryHelper(context, backend);
     }
 
     @Override

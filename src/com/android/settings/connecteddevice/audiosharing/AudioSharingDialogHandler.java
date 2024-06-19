@@ -60,9 +60,7 @@ public class AudioSharingDialogHandler {
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    // The target sinks to join broadcast onPlaybackStarted
-    @Nullable private List<BluetoothDevice> mTargetSinks;
-    private boolean mIsStoppingBroadcast = false;
+    private List<BluetoothDevice> mTargetSinks = new ArrayList<>();
 
     @VisibleForTesting
     final BluetoothLeBroadcast.Callback mBroadcastCallback =
@@ -80,15 +78,8 @@ public class AudioSharingDialogHandler {
                 @Override
                 public void onBroadcastStartFailed(int reason) {
                     Log.d(TAG, "onBroadcastStartFailed(), reason = " + reason);
-                    if (mTargetSinks != null) {
-                        mMetricsFeatureProvider.action(
-                                mContext,
-                                SettingsEnums.ACTION_AUDIO_SHARING_START_FAILED,
-                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
-                        AudioSharingUtils.toastMessage(
-                                mContext, "Fail to start broadcast, reason " + reason);
-                        mTargetSinks = null;
-                    }
+                    AudioSharingUtils.toastMessage(
+                            mContext, "Fail to start broadcast, reason " + reason);
                 }
 
                 @Override
@@ -110,21 +101,13 @@ public class AudioSharingDialogHandler {
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
-                    mIsStoppingBroadcast = false;
                 }
 
                 @Override
                 public void onBroadcastStopFailed(int reason) {
                     Log.d(TAG, "onBroadcastStopFailed(), reason = " + reason);
-                    if (mIsStoppingBroadcast) {
-                        mMetricsFeatureProvider.action(
-                                mContext,
-                                SettingsEnums.ACTION_AUDIO_SHARING_STOP_FAILED,
-                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
-                        AudioSharingUtils.toastMessage(
-                                mContext, "Fail to stop broadcast, reason " + reason);
-                        mIsStoppingBroadcast = false;
-                    }
+                    AudioSharingUtils.toastMessage(
+                            mContext, "Fail to stop broadcast, reason " + reason);
                 }
 
                 @Override
@@ -141,7 +124,7 @@ public class AudioSharingDialogHandler {
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
-                    if (mTargetSinks != null) {
+                    if (!mTargetSinks.isEmpty()) {
                         AudioSharingUtils.addSourceToTargetSinks(mTargetSinks, mLocalBtManager);
                         new SubSettingLauncher(mContext)
                                 .setDestination(AudioSharingDashboardFragment.class.getName())
@@ -151,7 +134,7 @@ public class AudioSharingDialogHandler {
                                                         .getMetricsCategory()
                                                 : SettingsEnums.PAGE_UNKNOWN)
                                 .launch();
-                        mTargetSinks = null;
+                        mTargetSinks = new ArrayList<>();
                     }
                 }
 
@@ -220,7 +203,6 @@ public class AudioSharingDialogHandler {
             AudioSharingStopDialogFragment.DialogEventListener listener =
                     () -> {
                         cachedDevice.setActive();
-                        mIsStoppingBroadcast = true;
                         AudioSharingUtils.stopBroadcasting(mLocalBtManager);
                     };
             Pair<Integer, Object>[] eventData =

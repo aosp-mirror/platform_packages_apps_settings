@@ -34,9 +34,9 @@ class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceCont
     private final ZenModeSummaryHelper mSummaryHelper;
 
     public ZenModeOtherLinkPreferenceController(Context context, String key,
-            ZenModesBackend backend, ZenHelperBackend helperBackend) {
+            ZenModesBackend backend) {
         super(context, key, backend);
-        mSummaryHelper = new ZenModeSummaryHelper(mContext, helperBackend);
+        mSummaryHelper = new ZenModeSummaryHelper(mContext, mBackend);
     }
 
     @Override

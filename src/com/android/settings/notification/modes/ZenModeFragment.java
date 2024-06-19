@@ -42,15 +42,15 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         prefControllers.add(new ZenModeButtonPreferenceController(context, "activate", mBackend));
         prefControllers.add(new ZenModeActionsPreferenceController(context, "actions", mBackend));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
-                context, "zen_mode_people", mBackend, mHelperBackend));
+                context, "zen_mode_people", mBackend));
         prefControllers.add(new ZenModeAppsLinkPreferenceController(
                 context, "zen_mode_apps", this,
                 ApplicationsState.getInstance((Application) context.getApplicationContext()),
-                mBackend, mHelperBackend));
+                mBackend));
         prefControllers.add(new ZenModeOtherLinkPreferenceController(
-                context, "zen_other_settings", mBackend, mHelperBackend));
+                context, "zen_other_settings", mBackend));
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(
-                context, "mode_display_settings", mBackend, mHelperBackend));
+                context, "mode_display_settings", mBackend));
         prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
                 "zen_automatic_trigger_category", mBackend));
         return prefControllers;

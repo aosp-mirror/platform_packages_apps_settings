@@ -134,11 +134,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 @Override
                 public void onBroadcastStartFailed(int reason) {
                     Log.d(TAG, "onBroadcastStartFailed(), reason = " + reason);
+                    // TODO: handle broadcast start fail
                     updateSwitch();
-                    mMetricsFeatureProvider.action(
-                            mContext,
-                            SettingsEnums.ACTION_AUDIO_SHARING_START_FAILED,
-                            SettingsEnums.AUDIO_SHARING_SETTINGS);
                 }
 
                 @Override
@@ -167,11 +164,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 @Override
                 public void onBroadcastStopFailed(int reason) {
                     Log.d(TAG, "onBroadcastStopFailed(), reason = " + reason);
+                    // TODO: handle broadcast stop fail
                     updateSwitch();
-                    mMetricsFeatureProvider.action(
-                            mContext,
-                            SettingsEnums.ACTION_AUDIO_SHARING_STOP_FAILED,
-                            SettingsEnums.AUDIO_SHARING_SETTINGS);
                 }
 
                 @Override
@@ -195,8 +189,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 public void onPlaybackStopped(int reason, int broadcastId) {}
             };
 
-    @VisibleForTesting
-    final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+    private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
                 @Override
                 public void onSearchStarted(int reason) {}
@@ -214,8 +207,16 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 public void onSourceFound(@NonNull BluetoothLeBroadcastMetadata source) {}
 
                 @Override
-                public void onSourceAdded(
-                        @NonNull BluetoothDevice sink, int sourceId, int reason) {}
+                public void onSourceAdded(@NonNull BluetoothDevice sink, int sourceId, int reason) {
+                    Log.d(
+                            TAG,
+                            "onSourceAdded(), sink = "
+                                    + sink
+                                    + ", sourceId = "
+                                    + sourceId
+                                    + ", reason = "
+                                    + reason);
+                }
 
                 @Override
                 public void onSourceAddFailed(
@@ -230,10 +231,6 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                     + source
                                     + ", reason = "
                                     + reason);
-                    mMetricsFeatureProvider.action(
-                            mContext,
-                            SettingsEnums.ACTION_AUDIO_SHARING_JOIN_FAILED,
-                            SettingsEnums.AUDIO_SHARING_SETTINGS);
                     AudioSharingUtils.toastMessage(
                             mContext,
                             String.format(
@@ -321,17 +318,15 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         // Filter out unnecessary callbacks when switch is disabled.
         if (!buttonView.isEnabled()) return;
-        if (mBroadcast == null || mAssistant == null) {
-            mSwitchBar.setChecked(false);
-            Log.d(TAG, "Skip onCheckedChanged, profile not support.");
-            return;
-        }
-        mSwitchBar.setEnabled(false);
-        boolean isBroadcasting = AudioSharingUtils.isBroadcasting(mBtManager);
         if (isChecked) {
-            if (isBroadcasting) {
-                Log.d(TAG, "Skip startAudioSharing, already broadcasting.");
+            mSwitchBar.setEnabled(false);
+            boolean isBroadcasting = AudioSharingUtils.isBroadcasting(mBtManager);
+            if (mAssistant == null || mBroadcast == null || isBroadcasting) {
+                Log.d(TAG, "Skip startAudioSharing, already broadcasting or not support.");
                 mSwitchBar.setEnabled(true);
+                if (!isBroadcasting) {
+                    mSwitchBar.setChecked(false);
+                }
                 return;
             }
             // FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST is always true in
@@ -357,11 +352,6 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             }
             startAudioSharing();
         } else {
-            if (!isBroadcasting) {
-                Log.d(TAG, "Skip stopAudioSharing, already not broadcasting.");
-                mSwitchBar.setEnabled(true);
-                return;
-            }
             stopAudioSharing();
         }
     }
@@ -464,18 +454,18 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         }
         if (mBroadcast != null) {
             mBroadcast.startPrivateBroadcast();
-            mMetricsFeatureProvider.action(
-                    mContext,
-                    SettingsEnums.ACTION_AUDIO_SHARING_MAIN_SWITCH_ON,
-                    deviceItems.size());
         }
     }
 
     private void stopAudioSharing() {
+        mSwitchBar.setEnabled(false);
+        if (!AudioSharingUtils.isBroadcasting(mBtManager)) {
+            Log.d(TAG, "Skip stopAudioSharing, already not broadcasting or broadcast not support.");
+            mSwitchBar.setEnabled(true);
+            return;
+        }
         if (mBroadcast != null) {
             mBroadcast.stopBroadcast(mBroadcast.getLatestBroadcastId());
-            mMetricsFeatureProvider.action(
-                    mContext, SettingsEnums.ACTION_AUDIO_SHARING_MAIN_SWITCH_OFF);
         }
     }
 

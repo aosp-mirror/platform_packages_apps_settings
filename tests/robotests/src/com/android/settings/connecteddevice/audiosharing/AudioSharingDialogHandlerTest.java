@@ -25,7 +25,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -289,8 +288,6 @@ public class AudioSharingDialogHandlerTest {
         assertThat(listener).isNotNull();
         listener.onShareClick();
         verify(mBroadcast).startPrivateBroadcast();
-        listener.onCancelClick();
-        verify(mCachedDevice1).setActive();
     }
 
     @Test
@@ -333,8 +330,6 @@ public class AudioSharingDialogHandlerTest {
                                 1));
         AudioSharingJoinDialogFragment.DialogEventListener listener = fragment.getListener();
         assertThat(listener).isNotNull();
-        listener.onCancelClick();
-        verify(mAssistant, never()).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
         listener.onShareClick();
         verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
     }
@@ -402,7 +397,7 @@ public class AudioSharingDialogHandlerTest {
     @Test
     public void handleNonLeaDeviceConnected_sharing_showStopDialog() {
         setUpBroadcast(true);
-        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1);
+        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice2);
         when(mAssistant.getDevicesMatchingConnectionStates(
                         new int[] {BluetoothProfile.STATE_CONNECTED}))
                 .thenReturn(deviceList);
@@ -492,8 +487,6 @@ public class AudioSharingDialogHandlerTest {
         assertThat(listener).isNotNull();
         listener.onShareClick();
         verify(mBroadcast).startPrivateBroadcast();
-        listener.onCancelClick();
-        verify(mCachedDevice1, never()).setActive();
     }
 
     @Test
@@ -536,8 +529,6 @@ public class AudioSharingDialogHandlerTest {
                                 1));
         AudioSharingJoinDialogFragment.DialogEventListener listener = fragment.getListener();
         assertThat(listener).isNotNull();
-        listener.onCancelClick();
-        verify(mAssistant, never()).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
         listener.onShareClick();
         verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
     }
@@ -614,37 +605,10 @@ public class AudioSharingDialogHandlerTest {
     }
 
     @Test
-    public void closeOpeningDialogsForLeaDevice_closeDisconnectDialog() {
-        // Show disconnect dialog
-        setUpBroadcast(true);
-        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1, mDevice3, mDevice4);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(deviceList);
-        when(mAssistant.getAllSources(mDevice1)).thenReturn(ImmutableList.of());
-        when(mAssistant.getAllSources(mDevice3)).thenReturn(ImmutableList.of(mState));
-        when(mAssistant.getAllSources(mDevice4)).thenReturn(ImmutableList.of(mState));
-        mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ false);
-        shadowOf(Looper.getMainLooper()).idle();
-        assertThat(mParentFragment.getChildFragmentManager().getFragments())
-                .comparingElementsUsing(TAG_EQUALS)
-                .containsExactly(AudioSharingDisconnectDialogFragment.tag());
-        // Close opening dialogs
-        mHandler.closeOpeningDialogsForLeaDevice(mCachedDevice1);
-        shadowOf(Looper.getMainLooper()).idle();
-        assertThat(mParentFragment.getChildFragmentManager().getFragments()).isEmpty();
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(
-                        mContext,
-                        SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS,
-                        SettingsEnums.DIALOG_AUDIO_SHARING_SWITCH_DEVICE);
-    }
-
-    @Test
     public void closeOpeningDialogsForNonLeaDevice_closeStopDialog() {
         // Show stop dialog
         setUpBroadcast(true);
-        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1);
+        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice2);
         when(mAssistant.getDevicesMatchingConnectionStates(
                         new int[] {BluetoothProfile.STATE_CONNECTED}))
                 .thenReturn(deviceList);
@@ -714,34 +678,6 @@ public class AudioSharingDialogHandlerTest {
     }
 
     @Test
-    public void onBroadcastStartFailed_logAction() {
-        setUpBroadcast(false);
-        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1, mDevice3);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(deviceList);
-        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
-        mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ false);
-        shadowOf(Looper.getMainLooper()).idle();
-        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
-        assertThat(childFragments)
-                .comparingElementsUsing(TAG_EQUALS)
-                .containsExactly(AudioSharingJoinDialogFragment.tag());
-        AudioSharingJoinDialogFragment fragment =
-                (AudioSharingJoinDialogFragment) Iterables.getOnlyElement(childFragments);
-        AudioSharingJoinDialogFragment.DialogEventListener listener = fragment.getListener();
-        assertThat(listener).isNotNull();
-        listener.onShareClick();
-
-        mHandler.mBroadcastCallback.onBroadcastStartFailed(/* reason= */ 1);
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(
-                        mContext,
-                        SettingsEnums.ACTION_AUDIO_SHARING_START_FAILED,
-                        SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
-    }
-
-    @Test
     public void onPlaybackStarted_addSource() {
         setUpBroadcast(false);
         ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1, mDevice3);
@@ -770,41 +706,15 @@ public class AudioSharingDialogHandlerTest {
     }
 
     @Test
-    public void onBroadcastStopFailed_logAction() {
-        setUpBroadcast(true);
-        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(deviceList);
-        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
-        mHandler.handleDeviceConnected(mCachedDevice2, /* userTriggered= */ false);
-        shadowOf(Looper.getMainLooper()).idle();
-        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
-        assertThat(childFragments)
-                .comparingElementsUsing(TAG_EQUALS)
-                .containsExactly(AudioSharingStopDialogFragment.tag());
-
-        AudioSharingStopDialogFragment fragment =
-                (AudioSharingStopDialogFragment) Iterables.getOnlyElement(childFragments);
-        AudioSharingStopDialogFragment.DialogEventListener listener = fragment.getListener();
-        assertThat(listener).isNotNull();
-        listener.onStopSharingClick();
-
-        mHandler.mBroadcastCallback.onBroadcastStopFailed(/* reason= */ 1);
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(
-                        mContext,
-                        SettingsEnums.ACTION_AUDIO_SHARING_STOP_FAILED,
-                        SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
-    }
-
-    @Test
     public void testBluetoothLeBroadcastCallbacks_doNothing() {
         mHandler.mBroadcastCallback.onBroadcastStarted(/* reason= */ 1, /* broadcastId= */ 1);
+        mHandler.mBroadcastCallback.onBroadcastStopped(/* reason= */ 1, /* broadcastId= */ 1);
         mHandler.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
         mHandler.mBroadcastCallback.onBroadcastUpdated(/* reason= */ 1, /* broadcastId= */ 1);
         mHandler.mBroadcastCallback.onPlaybackStarted(/* reason= */ 1, /* broadcastId= */ 1);
         mHandler.mBroadcastCallback.onPlaybackStopped(/* reason= */ 1, /* broadcastId= */ 1);
+        mHandler.mBroadcastCallback.onBroadcastStartFailed(/* reason= */ 1);
+        mHandler.mBroadcastCallback.onBroadcastStopFailed(/* reason= */ 1);
         mHandler.mBroadcastCallback.onBroadcastUpdateFailed(/* reason= */ 1, /* broadcastId= */ 1);
 
         verify(mAssistant, never())
@@ -813,7 +723,6 @@ public class AudioSharingDialogHandlerTest {
                         any(BluetoothLeBroadcastMetadata.class),
                         anyBoolean());
         verify(mAssistant, never()).removeSource(any(BluetoothDevice.class), anyInt());
-        verifyNoMoreInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     private void setUpBroadcast(boolean isBroadcasting) {

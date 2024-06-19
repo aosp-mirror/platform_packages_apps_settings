@@ -34,9 +34,9 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
     private final ZenModeSummaryHelper mSummaryHelper;
 
     public ZenModePeopleLinkPreferenceController(Context context, String key,
-            ZenModesBackend backend, ZenHelperBackend helperBackend) {
+            ZenModesBackend backend) {
         super(context, key, backend);
-        mSummaryHelper = new ZenModeSummaryHelper(mContext, helperBackend);
+        mSummaryHelper = new ZenModeSummaryHelper(mContext, mBackend);
     }
 
     @Override

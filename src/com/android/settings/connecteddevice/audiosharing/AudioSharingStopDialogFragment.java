@@ -140,13 +140,6 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
         return sCachedDevice;
     }
 
-    /** Test only: get the {@link DialogEventListener} passed to the dialog. */
-    @VisibleForTesting
-    @Nullable
-    DialogEventListener getListener() {
-        return sListener;
-    }
-
     /** Test only: get the event data passed to the dialog. */
     @VisibleForTesting
     @NonNull
