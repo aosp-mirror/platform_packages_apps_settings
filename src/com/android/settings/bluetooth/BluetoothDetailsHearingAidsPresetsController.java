@@ -276,7 +276,8 @@ public class BluetoothDetailsHearingAidsPresetsController extends
             return;
         }
         List<BluetoothHapPresetInfo> infoList = mHapClientProfile.getAllPresetInfo(
-                mCachedDevice.getDevice());
+                mCachedDevice.getDevice()).stream().filter(
+                BluetoothHapPresetInfo::isAvailable).toList();
         CharSequence[] presetNames = new CharSequence[infoList.size()];
         CharSequence[] presetIndexes = new CharSequence[infoList.size()];
         for (int i = 0; i < infoList.size(); i++) {
