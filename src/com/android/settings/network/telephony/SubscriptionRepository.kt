@@ -20,9 +20,7 @@ import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.util.Log
-import androidx.lifecycle.LifecycleOwner
 import com.android.settings.network.SubscriptionUtil
-import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
@@ -36,14 +34,6 @@ import kotlinx.coroutines.flow.onEach
 private const val TAG = "SubscriptionRepository"
 
 class SubscriptionRepository(private val context: Context) {
-    /**
-     * Return a list of subscriptions that are available and visible to the user.
-     *
-     * @return list of user selectable subscriptions.
-     */
-    fun getSelectableSubscriptionInfoList(): List<SubscriptionInfo> =
-        context.getSelectableSubscriptionInfoList()
-
     fun isSubscriptionEnabledFlow(subId: Int) = context.isSubscriptionEnabledFlow(subId)
 }
 
@@ -77,36 +67,3 @@ fun Context.subscriptionsChangedFlow() = callbackFlow {
 
     awaitClose { subscriptionManager.removeOnSubscriptionsChangedListener(listener) }
 }.conflate().onEach { Log.d(TAG, "subscriptions changed") }.flowOn(Dispatchers.Default)
-
-/**
- * Return a list of subscriptions that are available and visible to the user.
- *
- * @return list of user selectable subscriptions.
- */
-fun Context.getSelectableSubscriptionInfoList(): List<SubscriptionInfo> {
-    val subscriptionManager = requireSubscriptionManager()
-    val availableList = subscriptionManager.getAvailableSubscriptionInfoList() ?: return emptyList()
-    val visibleList = availableList.filter { subInfo ->
-        // Opportunistic subscriptions are considered invisible
-        // to users so they should never be returned.
-        SubscriptionUtil.isSubscriptionVisible(subscriptionManager, this, subInfo)
-    }
-    // Multiple subscriptions in a group should only have one representative.
-    // It should be the current active primary subscription if any, or any primary subscription.
-    val groupUuidToSelectedIdMap = visibleList
-        .groupBy { it.groupUuid }
-        .mapValues { (_, subInfos) ->
-            subInfos.filter { it.simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX }
-                .ifEmpty { subInfos }
-                .minOf { it.subscriptionId }
-        }
-
-    return visibleList
-        .filter { subInfo ->
-            val groupUuid = subInfo.groupUuid ?: return@filter true
-            groupUuidToSelectedIdMap[groupUuid] == subInfo.subscriptionId
-        }
-        .sortedBy { it.subscriptionId }
-        .also { Log.d(TAG, "getSelectableSubscriptionInfoList: $it") }
-}
-
