@@ -25,6 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -180,13 +181,30 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
     @Test
     public void testOnPackageListChangedTriggersRebuild() {
-        mController.mAppSessionCallbacks.onPackageListChanged();
+        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
+        // Create a zen mode that allows priority channels to breakthrough.
+        ZenMode zenMode = createPriorityChannelsZenMode();
+        mController.updateState(preference, zenMode);
         verify(mSession).rebuild(any(), any(), eq(false));
+
+        mController.mAppSessionCallbacks.onPackageListChanged();
+        verify(mSession, times(2)).rebuild(any(), any(), eq(false));
     }
 
     @Test
     public void testOnLoadEntriesCompletedTriggersRebuild() {
-        mController.mAppSessionCallbacks.onLoadEntriesCompleted();
+        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
+        // Create a zen mode that allows priority channels to breakthrough.
+        ZenMode zenMode = createPriorityChannelsZenMode();
+        mController.updateState(preference, zenMode);
         verify(mSession).rebuild(any(), any(), eq(false));
+
+        mController.mAppSessionCallbacks.onLoadEntriesCompleted();
+        verify(mSession, times(2)).rebuild(any(), any(), eq(false));
+    }
+
+    @Test
+    public void testNoCrashIfAppsReadyBeforeRuleAvailable() {
+        mController.mAppSessionCallbacks.onLoadEntriesCompleted();
     }
 }

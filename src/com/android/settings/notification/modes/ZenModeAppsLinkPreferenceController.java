@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.modes;
 
+import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
+
 import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
 
 import android.content.Context;
@@ -45,10 +47,12 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
     private static final String TAG = "ZenModeAppsLinkPreferenceController";
 
     private final ZenModeSummaryHelper mSummaryHelper;
+    private final ApplicationsState mApplicationsState;
     private ApplicationsState.Session mAppSession;
     private final ZenHelperBackend mHelperBackend;
     private ZenMode mZenMode;
     private Preference mPreference;
+    private final Fragment mHost;
 
     ZenModeAppsLinkPreferenceController(Context context, String key, Fragment host,
             ApplicationsState applicationsState, ZenModesBackend backend,
@@ -56,9 +60,13 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
         super(context, key, backend);
         mSummaryHelper = new ZenModeSummaryHelper(mContext, helperBackend);
         mHelperBackend = helperBackend;
-        if (applicationsState != null && host != null) {
-            mAppSession = applicationsState.newSession(mAppSessionCallbacks, host.getLifecycle());
-        }
+        mApplicationsState = applicationsState;
+        mHost = host;
+    }
+
+    @Override
+    public boolean isAvailable(ZenMode zenMode) {
+        return zenMode.getRule().getInterruptionFilter() != INTERRUPTION_FILTER_ALL;
     }
 
     @Override
@@ -73,6 +81,9 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
                 .toIntent());
         mZenMode = zenMode;
         mPreference = preference;
+        if (mApplicationsState != null && mHost != null) {
+            mAppSession = mApplicationsState.newSession(mAppSessionCallbacks, mHost.getLifecycle());
+        }
         triggerUpdateAppsBypassingDndSummaryText();
     }
 

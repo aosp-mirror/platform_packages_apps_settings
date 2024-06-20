@@ -18,6 +18,12 @@ package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
+import static android.service.notification.SystemZenRules.getTriggerDescriptionForScheduleEvent;
+import static android.service.notification.SystemZenRules.getTriggerDescriptionForScheduleTime;
+import static android.service.notification.ZenModeConfig.tryParseEventConditionId;
+import static android.service.notification.ZenModeConfig.tryParseScheduleConditionId;
+
+import static com.google.common.base.Preconditions.checkState;
 
 import static java.util.Objects.requireNonNull;
 
@@ -26,7 +32,10 @@ import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.service.notification.SystemZenRules;
 import android.service.notification.ZenDeviceEffects;
+import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
 import android.util.Log;
 
@@ -50,25 +59,7 @@ class ZenMode {
 
     private static final String TAG = "ZenMode";
 
-    /**
-     * Additional value for the {@code @ZenPolicy.ChannelType} enumeration that indicates that all
-     * channels can bypass DND when this policy is active.
-     *
-     * <p>This value shouldn't be used on "real" ZenPolicy objects sent to or returned from
-     * {@link android.app.NotificationManager}; it's a way of representing rules with interruption
-     * filter = {@link NotificationManager#INTERRUPTION_FILTER_ALL} in the UI.
-     */
-    public static final int CHANNEL_POLICY_ALL = -1;
-
     static final String MANUAL_DND_MODE_ID = "manual_dnd";
-
-    @SuppressLint("WrongConstant")
-    private static final ZenPolicy POLICY_INTERRUPTION_FILTER_ALL =
-            new ZenPolicy.Builder()
-                    .allowChannels(CHANNEL_POLICY_ALL)
-                    .allowAllSounds()
-                    .showAllVisualEffects()
-                    .build();
 
     // Must match com.android.server.notification.ZenModeHelper#applyCustomPolicy.
     private static final ZenPolicy POLICY_INTERRUPTION_FILTER_ALARMS =
@@ -132,10 +123,8 @@ class ZenMode {
     public ZenPolicy getPolicy() {
         switch (mRule.getInterruptionFilter()) {
             case INTERRUPTION_FILTER_PRIORITY:
-                return requireNonNull(mRule.getZenPolicy());
-
             case NotificationManager.INTERRUPTION_FILTER_ALL:
-                return POLICY_INTERRUPTION_FILTER_ALL;
+                return requireNonNull(mRule.getZenPolicy());
 
             case NotificationManager.INTERRUPTION_FILTER_ALARMS:
                 return POLICY_INTERRUPTION_FILTER_ALARMS;
@@ -163,31 +152,8 @@ class ZenMode {
             return;
         }
 
-        // A policy with CHANNEL_POLICY_ALL is only a UI representation of the
-        // INTERRUPTION_FILTER_ALL filter. Thus, switching to or away to this value only updates
-        // the filter, discarding the rest of the supplied policy.
-        if (policy.getAllowedChannels() == CHANNEL_POLICY_ALL
-                && currentPolicy.getAllowedChannels() != CHANNEL_POLICY_ALL) {
-            if (mIsManualDnd) {
-                throw new IllegalArgumentException("Manual DND cannot have CHANNEL_POLICY_ALL");
-            }
-            mRule.setInterruptionFilter(INTERRUPTION_FILTER_ALL);
-            // Preserve the existing policy, e.g. if the user goes PRIORITY -> ALL -> PRIORITY that
-            // shouldn't discard all other policy customizations. The existing policy will be a
-            // synthetic one if the rule originally had filter NONE or ALARMS_ONLY and that's fine.
-            if (mRule.getZenPolicy() == null) {
-                mRule.setZenPolicy(currentPolicy);
-            }
-            return;
-        } else if (policy.getAllowedChannels() != CHANNEL_POLICY_ALL
-                && currentPolicy.getAllowedChannels() == CHANNEL_POLICY_ALL) {
-            mRule.setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY);
-            // Go back to whatever policy the rule had before, unless the rule never had one, in
-            // which case we use the supplied policy (which we know has a valid allowedChannels).
-            if (mRule.getZenPolicy() == null) {
-                mRule.setZenPolicy(policy);
-            }
-            return;
+        if (mRule.getInterruptionFilter() == INTERRUPTION_FILTER_ALL) {
+            Log.wtf(TAG, "Able to change policy without filtering being enabled");
         }
 
         // If policy is customized from any of the "special" ones, make the rule PRIORITY.
@@ -202,6 +168,44 @@ class ZenMode {
         return mRule.getDeviceEffects() != null
                 ? mRule.getDeviceEffects()
                 : new ZenDeviceEffects.Builder().build();
+    }
+
+    public void setCustomModeConditionId(Context context, Uri conditionId) {
+        checkState(SystemZenRules.PACKAGE_ANDROID.equals(mRule.getPackageName()),
+                "Trying to change condition of non-system-owned rule %s (to %s)",
+                mRule, conditionId);
+
+        Uri oldCondition = mRule.getConditionId();
+        mRule.setConditionId(conditionId);
+
+        ZenModeConfig.ScheduleInfo scheduleInfo = tryParseScheduleConditionId(conditionId);
+        if (scheduleInfo != null) {
+            mRule.setType(AutomaticZenRule.TYPE_SCHEDULE_TIME);
+            mRule.setOwner(ZenModeConfig.getScheduleConditionProvider());
+            mRule.setTriggerDescription(
+                    getTriggerDescriptionForScheduleTime(context, scheduleInfo));
+            return;
+        }
+
+        ZenModeConfig.EventInfo eventInfo = tryParseEventConditionId(conditionId);
+        if (eventInfo != null) {
+            mRule.setType(AutomaticZenRule.TYPE_SCHEDULE_CALENDAR);
+            mRule.setOwner(ZenModeConfig.getEventConditionProvider());
+            mRule.setTriggerDescription(getTriggerDescriptionForScheduleEvent(context, eventInfo));
+            return;
+        }
+
+        if (ZenModeConfig.isValidCustomManualConditionId(conditionId)) {
+            mRule.setType(AutomaticZenRule.TYPE_OTHER);
+            mRule.setOwner(ZenModeConfig.getCustomManualConditionProvider());
+            mRule.setTriggerDescription("");
+            return;
+        }
+
+        Log.wtf(TAG, String.format(
+                "Changed condition of rule %s (%s -> %s) but cannot recognize which kind of "
+                        + "condition it was!",
+                mRule, oldCondition, conditionId));
     }
 
     public boolean canEditName() {
@@ -222,6 +226,15 @@ class ZenMode {
 
     public boolean isActive() {
         return mIsActive;
+    }
+
+    public boolean isSystemOwned() {
+        return SystemZenRules.PACKAGE_ANDROID.equals(mRule.getPackageName());
+    }
+
+    @AutomaticZenRule.Type
+    public int getType() {
+        return mRule.getType();
     }
 
     @Override

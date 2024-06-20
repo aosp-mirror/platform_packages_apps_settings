@@ -24,7 +24,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.provider.Settings;
 import android.service.notification.Condition;
-import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
 import android.util.Log;
 
@@ -194,19 +193,11 @@ class ZenModesBackend {
      */
     @Nullable
     ZenMode addCustomMode(String name) {
-        ZenModeConfig.ScheduleInfo schedule = new ZenModeConfig.ScheduleInfo();
-        schedule.days = ZenModeConfig.ALL_DAYS;
-        schedule.startHour = 22;
-        schedule.endHour = 7;
-
-        // TODO: b/326442408 - Create as "manual" (i.e. no trigger) instead of schedule-time.
         AutomaticZenRule rule = new AutomaticZenRule.Builder(name,
-                ZenModeConfig.toScheduleConditionId(schedule))
-                .setPackage(ZenModeConfig.getScheduleConditionProvider().getPackageName())
-                .setType(AutomaticZenRule.TYPE_SCHEDULE_CALENDAR)
-                .setOwner(ZenModeConfig.getScheduleConditionProvider())
-                .setTriggerDescription(SystemZenRules.getTriggerDescriptionForScheduleTime(
-                        mContext, schedule))
+                ZenModeConfig.toCustomManualConditionId())
+                .setPackage(ZenModeConfig.getCustomManualConditionProvider().getPackageName())
+                .setType(AutomaticZenRule.TYPE_OTHER)
+                .setOwner(ZenModeConfig.getCustomManualConditionProvider())
                 .setManualInvocationAllowed(true)
                 .build();
 

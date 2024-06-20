@@ -332,20 +332,6 @@ public class ZenModesSummaryHelperTest {
     }
 
     @Test
-    public void getAppsSummary_all() {
-        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
-                .setType(AutomaticZenRule.TYPE_BEDTIME)
-                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                .setZenPolicy(new ZenPolicy.Builder()
-                        .allowChannels(ZenMode.CHANNEL_POLICY_ALL)
-                        .build())
-                .build();
-        ZenMode zenMode = new ZenMode("id", rule, true);
-
-        assertThat(mSummaryHelper.getAppsSummary(zenMode, new LinkedHashSet<>())).isEqualTo("All");
-    }
-
-    @Test
     public void getAppsSummary_none() {
         AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
                 .setType(AutomaticZenRule.TYPE_BEDTIME)

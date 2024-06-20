@@ -14,35 +14,27 @@
  * limitations under the License.
  */
 
-package com.android.settings.spa.network
+package com.android.settings.network.apn
 
+import android.provider.Telephony
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.res.booleanResource
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @Composable
-fun MobileDataSwitchingPreference(
-    isMobileDataEnabled: () -> Boolean?,
-    setMobileDataEnabled: (newEnabled: Boolean) -> Unit,
-) {
-    val mobileDataSummary = stringResource(id = R.string.mobile_data_settings_summary)
-    val coroutineScope = rememberCoroutineScope()
+fun ApnEditCarrierEnabled(apnData: ApnData, onCarrierEnabledChanged: (Boolean) -> Unit) {
     SwitchPreference(
         object : SwitchPreferenceModel {
-            override val title = stringResource(id = R.string.mobile_data_settings_title)
-            override val summary = { mobileDataSummary }
-            override val checked = { isMobileDataEnabled() }
-            override val onCheckedChange: (Boolean) -> Unit = { newEnabled ->
-                coroutineScope.launch(Dispatchers.Default) {
-                    setMobileDataEnabled(newEnabled)
-                }
+            override val title = stringResource(R.string.carrier_enabled)
+            val allowEdit = booleanResource(R.bool.config_allow_edit_carrier_enabled)
+            override val changeable = {
+                allowEdit && apnData.isFieldEnabled(Telephony.Carriers.CARRIER_ENABLED)
             }
-            override val changeable:() -> Boolean = {true}
+            override val checked = { apnData.carrierEnabled }
+            override val onCheckedChange = onCarrierEnabledChanged
         }
     )
 }
