@@ -21,6 +21,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -42,6 +43,7 @@ public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceControlle
     private boolean mNeedsQSTooltipReshow = false;
 
     /** Returns the accessibility tile component name. */
+    @Nullable
     abstract ComponentName getTileComponentName();
 
     /** Returns the accessibility tile tooltip content. */
