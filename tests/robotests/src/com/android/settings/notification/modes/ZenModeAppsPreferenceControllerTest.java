@@ -20,7 +20,6 @@ import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_NONE;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 
-import static com.android.settings.notification.modes.ZenModeAppsPreferenceController.KEY_ALL;
 import static com.android.settings.notification.modes.ZenModeAppsPreferenceController.KEY_NONE;
 import static com.android.settings.notification.modes.ZenModeAppsPreferenceController.KEY_PRIORITY;
 
@@ -62,11 +61,9 @@ public final class ZenModeAppsPreferenceControllerTest {
     @Mock
     private ZenModesBackend mBackend;
     private ZenModeAppsPreferenceController mPriorityController;
-    private ZenModeAppsPreferenceController mAllController;
     private ZenModeAppsPreferenceController mNoneController;
 
     private SelectorWithWidgetPreference mPriorityPref;
-    private SelectorWithWidgetPreference mAllPref;
     private SelectorWithWidgetPreference mNonePref;
     private PreferenceCategory mPrefCategory;
     private PreferenceScreen mPreferenceScreen;
@@ -81,10 +78,8 @@ public final class ZenModeAppsPreferenceControllerTest {
 
         mPriorityController = new ZenModeAppsPreferenceController(mContext, KEY_PRIORITY, mBackend);
         mNoneController = new ZenModeAppsPreferenceController(mContext, KEY_NONE, mBackend);
-        mAllController =  new ZenModeAppsPreferenceController(mContext, KEY_ALL, mBackend);
 
         mPriorityPref = makePreference(KEY_PRIORITY, mPriorityController);
-        mAllPref = makePreference(KEY_ALL, mAllController);
         mNonePref = makePreference(KEY_NONE, mNoneController);
 
         mPrefCategory = new PreferenceCategory(mContext);
@@ -95,10 +90,8 @@ public final class ZenModeAppsPreferenceControllerTest {
 
         mPreferenceScreen.addPreference(mPrefCategory);
         mPrefCategory.addPreference(mPriorityPref);
-        mPrefCategory.addPreference(mAllPref);
         mPrefCategory.addPreference(mNonePref);
 
-        mAllController.displayPreference(mPreferenceScreen);
         mPriorityController.displayPreference(mPreferenceScreen);
         mNoneController.displayPreference(mPreferenceScreen);
     }
@@ -109,36 +102,6 @@ public final class ZenModeAppsPreferenceControllerTest {
         pref.setKey(key);
         pref.setOnClickListener(controller.mSelectorClickListener);
         return pref;
-    }
-
-    @Test
-    public void testUpdateState_All() {
-        TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowChannels(ZenMode.CHANNEL_POLICY_ALL)
-                                .build())
-                        .build(), true);
-        mAllController.updateZenMode(preference, zenMode);
-
-        verify(preference).setChecked(true);
-    }
-
-    @Test
-    public void testUpdateState_All_Unchecked() {
-        TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowChannels(ZenPolicy.CHANNEL_POLICY_NONE)
-                                .build())
-                        .build(), true);
-        mAllController.updateZenMode(preference, zenMode);
-
-        verify(preference).setChecked(false);
     }
 
     @Test
@@ -163,7 +126,7 @@ public final class ZenModeAppsPreferenceControllerTest {
                 new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
                         .setType(AutomaticZenRule.TYPE_DRIVING)
                         .setZenPolicy(new ZenPolicy.Builder()
-                                .allowChannels(ZenMode.CHANNEL_POLICY_ALL)
+                                .allowChannels(ZenPolicy.CHANNEL_POLICY_PRIORITY)
                                 .build())
                         .build(), true);
         mNoneController.updateZenMode(preference, zenMode);
@@ -202,67 +165,6 @@ public final class ZenModeAppsPreferenceControllerTest {
     }
 
     @Test
-    public void testOnPreferenceChange_All() {
-        TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_NONE)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowChannels(ZenMode.CHANNEL_POLICY_ALL)
-                                .build())
-                        .build(), true);
-
-        mAllController.updateZenMode(preference, zenMode);
-        mAllController.onPreferenceChange(preference, true);
-        ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
-        verify(mBackend).updateMode(captor.capture());
-
-        assertThat(captor.getValue().getPolicy().getAllowedChannels())
-                .isEqualTo(ZenMode.CHANNEL_POLICY_ALL);
-    }
-
-    @Test
-    public void testPreferenceClick_passesCorrectCheckedState_All() {
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowChannels(ZenPolicy.CHANNEL_POLICY_NONE)
-                                .build())
-                        .build(), true);
-
-
-        mAllController.updateZenMode(mAllPref, zenMode);
-        mNoneController.updateZenMode(mNonePref, zenMode);
-        mPriorityController.updateZenMode(mPriorityPref, zenMode);
-
-        // MPME is checked; ALL and PRIORITY are unchecked.
-        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
-                .isChecked());
-
-        mPrefCategory.findPreference(KEY_ALL).performClick();
-
-        ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
-        verify(mBackend).updateMode(captor.capture());
-        // Checks the policy value for ALL is set.
-        // The important part is that the interruption filter is propagated to the backend.
-        assertThat(captor.getValue().getRule().getInterruptionFilter())
-                .isEqualTo(INTERRUPTION_FILTER_ALL);
-        // ALL is now checked; others are unchecked.
-        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
-                .isChecked());
-    }
-
-    @Test
     public void testPreferenceClick_passesCorrectCheckedState_None() {
         ZenMode zenMode = new ZenMode("id",
                 new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
@@ -272,12 +174,9 @@ public final class ZenModeAppsPreferenceControllerTest {
                                 .build())
                         .build(), true);
 
-        mAllController.updateZenMode(mAllPref, zenMode);
         mNoneController.updateZenMode(mNonePref, zenMode);
         mPriorityController.updateZenMode(mPriorityPref, zenMode);
 
-        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
-                .isChecked());
         assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
                 .isChecked());
         assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
@@ -296,8 +195,6 @@ public final class ZenModeAppsPreferenceControllerTest {
         // NONE is now checked; others are unchecked.
         assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
                 .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
-                .isChecked());
         assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
                 .isChecked());
     }
@@ -312,13 +209,10 @@ public final class ZenModeAppsPreferenceControllerTest {
                                 .build())
                         .build(), true);
 
-        mAllController.updateZenMode(mAllPref, zenMode);
         mNoneController.updateZenMode(mNonePref, zenMode);
         mPriorityController.updateZenMode(mPriorityPref, zenMode);
 
         assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
                 .isChecked());
         assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
                 .isChecked());
@@ -333,8 +227,6 @@ public final class ZenModeAppsPreferenceControllerTest {
                 .isEqualTo(INTERRUPTION_FILTER_PRIORITY);
         // PRIORITY is now checked; others are unchecked.
         assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
                 .isChecked());
         assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
                 .isChecked());

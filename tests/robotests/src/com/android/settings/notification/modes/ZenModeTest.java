@@ -71,18 +71,6 @@ public class ZenModeTest {
     }
 
     @Test
-    public void getPolicy_interruptionFilterAll_returnsPolicyAllowingAll() {
-        ZenMode zenMode = new ZenMode("id", new AutomaticZenRule.Builder("Rule", Uri.EMPTY)
-                .setInterruptionFilter(INTERRUPTION_FILTER_ALL)
-                .setZenPolicy(ZEN_POLICY) // should be ignored
-                .build(), false);
-
-        assertThat(zenMode.getPolicy()).isEqualTo(
-                new ZenPolicy.Builder().allowChannels(ZenMode.CHANNEL_POLICY_ALL)
-                        .allowAllSounds().showAllVisualEffects().build());
-    }
-
-    @Test
     public void getPolicy_interruptionFilterAlarms_returnsPolicyAllowingAlarms() {
         ZenMode zenMode = new ZenMode("id", new AutomaticZenRule.Builder("Rule", Uri.EMPTY)
                 .setInterruptionFilter(INTERRUPTION_FILTER_ALARMS)
@@ -125,70 +113,5 @@ public class ZenModeTest {
                 INTERRUPTION_FILTER_PRIORITY);
         assertThat(zenMode.getPolicy()).isEqualTo(ZEN_POLICY);
         assertThat(zenMode.getRule().getZenPolicy()).isEqualTo(ZEN_POLICY);
-    }
-
-    @Test
-    public void setPolicy_withAllChannelsAllowed_setsInterruptionFilterAll() {
-        ZenMode zenMode = new ZenMode("id", new AutomaticZenRule.Builder("Rule", Uri.EMPTY)
-                .setInterruptionFilter(INTERRUPTION_FILTER_ALARMS)
-                .setZenPolicy(ZEN_POLICY)
-                .build(), false);
-
-        zenMode.setPolicy(
-                new ZenPolicy.Builder().allowChannels(ZenMode.CHANNEL_POLICY_ALL).build());
-
-        assertThat(zenMode.getRule().getInterruptionFilter()).isEqualTo(INTERRUPTION_FILTER_ALL);
-        assertThat(zenMode.getPolicy()).isEqualTo(
-                new ZenPolicy.Builder().allowChannels(ZenMode.CHANNEL_POLICY_ALL)
-                        .allowAllSounds().showAllVisualEffects().build());
-    }
-
-    @Test
-    public void setPolicy_priorityToAllChannelsAndBack_restoresOldPolicy() {
-        ZenMode zenMode = new ZenMode("id", new AutomaticZenRule.Builder("Rule", Uri.EMPTY)
-                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                .setZenPolicy(ZEN_POLICY)
-                .build(), false);
-
-        zenMode.setPolicy(
-                new ZenPolicy.Builder().allowChannels(ZenMode.CHANNEL_POLICY_ALL).build());
-        assertThat(zenMode.getRule().getInterruptionFilter()).isEqualTo(INTERRUPTION_FILTER_ALL);
-        assertThat(zenMode.getPolicy()).isEqualTo(
-                new ZenPolicy.Builder().allowChannels(ZenMode.CHANNEL_POLICY_ALL)
-                        .allowAllSounds().showAllVisualEffects().build());
-
-        zenMode.setPolicy(
-                new ZenPolicy.Builder().allowChannels(ZenPolicy.CHANNEL_POLICY_PRIORITY).build());
-
-        assertThat(zenMode.getRule().getInterruptionFilter()).isEqualTo(
-                INTERRUPTION_FILTER_PRIORITY);
-        assertThat(zenMode.getPolicy()).isEqualTo(ZEN_POLICY);
-        assertThat(zenMode.getRule().getZenPolicy()).isEqualTo(ZEN_POLICY);
-    }
-
-    @Test
-    public void setPolicy_alarmsOnlyToAllChannelsAndBack_restoresPolicySimilarToAlarmsOnly() {
-        ZenMode zenMode = new ZenMode("id", new AutomaticZenRule.Builder("Rule", Uri.EMPTY)
-                .setInterruptionFilter(INTERRUPTION_FILTER_ALARMS)
-                .build(), false);
-
-        zenMode.setPolicy(
-                new ZenPolicy.Builder().allowChannels(ZenMode.CHANNEL_POLICY_ALL).build());
-        assertThat(zenMode.getRule().getInterruptionFilter()).isEqualTo(INTERRUPTION_FILTER_ALL);
-        assertThat(zenMode.getPolicy()).isEqualTo(
-                new ZenPolicy.Builder().allowChannels(ZenMode.CHANNEL_POLICY_ALL)
-                        .allowAllSounds().showAllVisualEffects().build());
-
-        zenMode.setPolicy(
-                new ZenPolicy.Builder().allowChannels(ZenPolicy.CHANNEL_POLICY_PRIORITY).build());
-
-        // We don't go back to ALARMS, but the policy must be the one the user was seeing before.
-        ZenPolicy alarmsOnlyLikePolicy = new ZenPolicy.Builder().disallowAllSounds()
-                .allowAlarms(true).allowMedia(true).allowPriorityChannels(false)
-                .build();
-        assertThat(zenMode.getRule().getInterruptionFilter()).isEqualTo(
-                INTERRUPTION_FILTER_PRIORITY);
-        assertThat(zenMode.getPolicy()).isEqualTo(alarmsOnlyLikePolicy);
-        assertThat(zenMode.getRule().getZenPolicy()).isEqualTo(alarmsOnlyLikePolicy);
     }
 }

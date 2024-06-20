@@ -53,6 +53,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
                 context, "mode_display_settings", mBackend, mHelperBackend));
         prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
                 "zen_automatic_trigger_category", this, mBackend));
+        prefControllers.add(new InterruptionFilterPreferenceController(
+                context, "allow_filtering", mBackend));
         return prefControllers;
     }
 
