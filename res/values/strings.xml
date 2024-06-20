@@ -12172,10 +12172,17 @@
     <!-- Default title for the settings panel [CHAR LIMIT=NONE] -->
     <string name="settings_panel_title">Settings Panel</string>
 
-    <!-- UI debug setting: force desktop mode [CHAR LIMIT=50] -->
-    <string name="force_desktop_mode">Force desktop mode</string>
-    <!-- UI debug setting: force desktop mode summary [CHAR LIMIT=NONE] -->
-    <string name="force_desktop_mode_summary">Force experimental desktop mode on secondary displays</string>
+    <!-- Title for enabling freeform windows (desktop mode) developer option toggle [CHAR LIMIT=50] -->
+    <string name="enable_desktop_mode">Enable freeform windows</string>
+    <!-- Summary for enabling freeform windows (desktop mode) developer option toggle [CHAR LIMIT=NONE] -->
+    <string name="enable_desktop_mode_summary">Enable support for freeform windows.</string>
+
+    <!-- TODO(b/348193756): Rename resources for this toggle to indicate that it is for secondary display -->
+    <!-- Title for enabling freeform windows (desktop mode) on secondary display developer option toggle  [CHAR LIMIT=50] -->
+    <string name="force_desktop_mode">Enable freeform windowing on second display</string>
+    <!-- Summary for enabling freeform windows (desktop mode) on secondary display developer option toggle [CHAR LIMIT=NONE] -->
+    <string name="force_desktop_mode_summary">Enable freeform windows only on secondary display.</string>
+
     <!-- UI debug setting: enable non-resizables in multi window [CHAR LIMIT=60] -->
     <string name="enable_non_resizable_multi_window">Enable non-resizable in multi window</string>
     <!-- UI debug setting: enable non-resizables in multi window summary [CHAR LIMIT=NONE] -->
@@ -13139,12 +13146,12 @@
 
     <!-- Dialog body text used to explain a reboot is required after enabling freeform support for
     it to work [CHAR LIMIT=none] -->
-    <string name="reboot_dialog_enable_freeform_support">A reboot is required to enable freeform
-    support.</string>
-    <!-- Dialog body text used to explain a reboot is required after forcing desktop mode on
-    secondary dislays. [CHAR LIMIT=none] -->
-    <string name="reboot_dialog_force_desktop_mode">A reboot is required to force desktop mode on
-    secondary displays.</string>
+    <string name="reboot_dialog_enable_freeform_support">A reboot is required to enable legacy freeform windowing support.</string>
+    <!-- Dialog body text used to explain a reboot is required after overriding freeform windowing (desktop mode) support. [CHAR LIMIT=none] -->
+    <string name="reboot_dialog_override_desktop_mode">A reboot is required to change freeform windowing support.</string>
+    <!-- Dialog body text used to explain a reboot is required after forcing freeform windowing (desktop mode) on
+    secondary displays. [CHAR LIMIT=none] -->
+    <string name="reboot_dialog_force_desktop_mode">A reboot is required to force freeform windowing on secondary displays.</string>
     <!-- Text on the dialog button to reboot the device now [CHAR LIMIT=50] -->
     <string name="reboot_dialog_reboot_now">Reboot now</string>
     <!-- Text on the dialog button to reboot the device later [CHAR LIMIT=50] -->
