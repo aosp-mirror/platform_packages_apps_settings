@@ -128,6 +128,9 @@ public final class BatteryUsageDataLoader {
                             final PowerUsageFeatureProvider featureProvider =
                                     FeatureFactory.getFeatureFactory()
                                             .getPowerUsageFeatureProvider();
+                            // Collect and process battery reattribute data.
+                            featureProvider.processBatteryReattributeData(
+                                    context, batteryDiffDataMap);
                             DatabaseUtils.sendBatteryUsageSlotData(
                                     context,
                                     ConvertUtils.convertToBatteryUsageSlotList(

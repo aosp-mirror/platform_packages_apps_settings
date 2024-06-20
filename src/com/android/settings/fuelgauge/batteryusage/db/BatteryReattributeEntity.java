@@ -58,12 +58,16 @@ public class BatteryReattributeEntity {
     @NonNull
     @Override
     public String toString() {
+        final BatteryReattribute batteryReattribute =
+                ConvertUtils.decodeBatteryReattribute(reattributeData);
         final StringBuilder builder = new StringBuilder()
                 .append("\nBatteryReattributeEntity{")
                 .append("\n\t" + utcToLocalTimeForLogging(timestampStart))
                 .append("\n\t" + utcToLocalTimeForLogging(timestampEnd))
-                .append("\n\t" + ConvertUtils.decodeBatteryReattribute(reattributeData))
-                .append("\n}");
-        return builder.toString();
+                .append("\n\t" + batteryReattribute);
+        if (batteryReattribute != null) {
+            builder.append("\n\t" + batteryReattribute.getReattributeDataMap());
+        }
+        return builder.append("\n}").toString();
     }
 }
