@@ -18,13 +18,13 @@ package com.android.settings.fuelgauge.batteryusage.db;
 
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTimeForLogging;
 
-import com.android.settings.fuelgauge.batteryusage.BatteryReattribute;
-import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.android.settings.fuelgauge.batteryusage.BatteryReattribute;
+import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 
 /** A {@link Entity} for battery usage reattribution data in the database. */
 @Entity
@@ -38,7 +38,7 @@ public class BatteryReattributeEntity {
     public final long timestampEnd;
 
     /** The battery usage reattribution data for corresponding  uids. */
-    public final String reattributeData;
+    @NonNull public final String reattributeData;
 
     public BatteryReattributeEntity(@NonNull BatteryReattribute batteryReattribute) {
         this(
@@ -58,11 +58,16 @@ public class BatteryReattributeEntity {
     @NonNull
     @Override
     public String toString() {
+        final BatteryReattribute batteryReattribute =
+                ConvertUtils.decodeBatteryReattribute(reattributeData);
         final StringBuilder builder = new StringBuilder()
                 .append("\nBatteryReattributeEntity{")
                 .append("\n\t" + utcToLocalTimeForLogging(timestampStart))
                 .append("\n\t" + utcToLocalTimeForLogging(timestampEnd))
-                .append("\n}");
-        return builder.toString();
+                .append("\n\t" + batteryReattribute);
+        if (batteryReattribute != null) {
+            builder.append("\n\t" + batteryReattribute.getReattributeDataMap());
+        }
+        return builder.append("\n}").toString();
     }
 }

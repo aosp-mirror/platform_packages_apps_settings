@@ -19,6 +19,8 @@ package com.android.settings.fuelgauge.batteryusage.bugreport;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
 import com.android.settings.fuelgauge.batteryusage.AppOptimizationModeEvent;
@@ -29,6 +31,8 @@ import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryReattributeDao;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryReattributeEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
@@ -125,6 +129,24 @@ public final class LogUtils {
         final List<BatteryEventEntity> entities =
                 dao.getAllAfterForLog(getLastFullChargeTimestamp(context));
         dumpListItems(writer, entities, entity -> entity);
+    }
+
+    static void dumpBatteryReattributeDatabaseHist(Context context, PrintWriter writer) {
+        dumpBatteryReattributeDatabaseHist(
+                BatteryStateDatabase.getInstance(context).batteryReattributeDao(),
+                writer);
+    }
+
+    @VisibleForTesting
+    static void dumpBatteryReattributeDatabaseHist(
+            BatteryReattributeDao batteryReattributeDao, PrintWriter writer) {
+        writer.println("\n\tBatteryReattribute DatabaseHistory:");
+        final List<BatteryReattributeEntity> entities =
+                batteryReattributeDao.getAllAfter(
+                        Clock.systemUTC().millis() - DUMP_TIME_OFFSET.toMillis());
+        if (entities != null && !entities.isEmpty()) {
+            dumpListItems(writer, entities, entity -> entity);
+        }
     }
 
     private static <T, S> void dumpListItems(

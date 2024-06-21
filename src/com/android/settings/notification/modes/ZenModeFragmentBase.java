@@ -120,10 +120,6 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
         }
         for (List<AbstractPreferenceController> list : getPreferenceControllers()) {
             for (AbstractPreferenceController controller : list) {
-                if (!controller.isAvailable()) {
-                    continue;
-                }
-
                 try {
                     // Find preference associated with controller
                     final String key = controller.getPreferenceKey();
@@ -137,6 +133,7 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
                                 String.format("Cannot find preference with key %s in Controller %s",
                                         key, controller.getClass().getSimpleName()));
                     }
+                    controller.displayPreference(screen);
                 } catch (ClassCastException e) {
                     // Skip any controllers that aren't AbstractZenModePreferenceController.
                     Log.d(TAG, "Could not cast: " + controller.getClass().getSimpleName());

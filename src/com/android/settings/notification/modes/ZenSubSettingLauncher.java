@@ -29,7 +29,7 @@ class ZenSubSettingLauncher {
                 SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION);
     }
 
-    private static SubSettingLauncher forModeFragment(Context context,
+    static SubSettingLauncher forModeFragment(Context context,
             Class<? extends ZenModeFragmentBase> fragmentClass, String modeId,
             int sourceMetricsCategory) {
         Bundle bundle = new Bundle();

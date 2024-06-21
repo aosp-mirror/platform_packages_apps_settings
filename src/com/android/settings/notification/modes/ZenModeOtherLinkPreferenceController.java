@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.modes;
 
+import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
+
 import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
 
 import android.content.Context;
@@ -34,9 +36,14 @@ class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceCont
     private final ZenModeSummaryHelper mSummaryHelper;
 
     public ZenModeOtherLinkPreferenceController(Context context, String key,
-            ZenModesBackend backend) {
+            ZenModesBackend backend, ZenHelperBackend helperBackend) {
         super(context, key, backend);
-        mSummaryHelper = new ZenModeSummaryHelper(mContext, mBackend);
+        mSummaryHelper = new ZenModeSummaryHelper(mContext, helperBackend);
+    }
+
+    @Override
+    public boolean isAvailable(ZenMode zenMode) {
+        return zenMode.getRule().getInterruptionFilter() != INTERRUPTION_FILTER_ALL;
     }
 
     @Override

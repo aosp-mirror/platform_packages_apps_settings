@@ -29,6 +29,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
 import android.view.ViewGroup;
 import android.widget.ToggleButton;
@@ -81,7 +82,9 @@ public class ZenModeSetSchedulePreferenceControllerTest {
     @EnableFlags({Flags.FLAG_MODES_API, Flags.FLAG_MODES_UI})
     public void updateScheduleRule_updatesConditionAndTriggerDescription() {
         ZenMode mode = new ZenMode("id",
-                new AutomaticZenRule.Builder("name", Uri.parse("condition")).build(),
+                new AutomaticZenRule.Builder("name", Uri.parse("condition"))
+                        .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                        .build(),
                 true);  // is active
 
         ZenModeConfig.ScheduleInfo scheduleInfo = new ZenModeConfig.ScheduleInfo();
@@ -93,6 +96,8 @@ public class ZenModeSetSchedulePreferenceControllerTest {
         assertThat(out.getRule().getConditionId())
                 .isEqualTo(ZenModeConfig.toScheduleConditionId(scheduleInfo));
         assertThat(out.getRule().getTriggerDescription()).isNotEmpty();
+        assertThat(out.getRule().getOwner()).isEqualTo(
+                ZenModeConfig.getScheduleConditionProvider());
     }
 
     @Test

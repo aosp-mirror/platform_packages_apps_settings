@@ -17,7 +17,7 @@
 package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
-import static org.junit.Assert.assertTrue;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -29,7 +29,9 @@ import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
+
 import androidx.preference.Preference;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,8 +40,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public final class ZenModeCallsLinkPreferenceControllerTest {
@@ -49,10 +49,9 @@ public final class ZenModeCallsLinkPreferenceControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
-
     private Context mContext;
-    @Mock
-    private ZenModesBackend mBackend;
+    @Mock private ZenModesBackend mBackend;
+    @Mock private ZenHelperBackend mHelperBackend;
 
     @Before
     public void setup() {
@@ -61,7 +60,7 @@ public final class ZenModeCallsLinkPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
 
         mController = new ZenModeCallsLinkPreferenceController(
-                mContext, "something", mBackend);
+                mContext, "something", mBackend, mHelperBackend);
     }
 
     @Test

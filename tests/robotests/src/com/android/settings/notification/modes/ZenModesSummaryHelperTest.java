@@ -44,7 +44,7 @@ import java.util.Set;
 @RunWith(RobolectricTestRunner.class)
 public class ZenModesSummaryHelperTest {
     private Context mContext;
-    private ZenModesBackend mBackend;
+    private ZenHelperBackend mBackend;
 
     private ZenModeSummaryHelper mSummaryHelper;
 
@@ -52,7 +52,7 @@ public class ZenModesSummaryHelperTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mBackend = new ZenModesBackend(mContext);
+        mBackend = new ZenHelperBackend(mContext);
         mSummaryHelper = new ZenModeSummaryHelper(mContext, mBackend);
     }
 
@@ -329,20 +329,6 @@ public class ZenModesSummaryHelperTest {
 
         assertThat(mSummaryHelper.getDisplayEffectsSummary(zenMode)).isEqualTo(
                 "Notifications partially hidden, grayscale, and 2 more");
-    }
-
-    @Test
-    public void getAppsSummary_all() {
-        AutomaticZenRule rule = new AutomaticZenRule.Builder("Bedtime", Uri.parse("bed"))
-                .setType(AutomaticZenRule.TYPE_BEDTIME)
-                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                .setZenPolicy(new ZenPolicy.Builder()
-                        .allowChannels(ZenMode.CHANNEL_POLICY_ALL)
-                        .build())
-                .build();
-        ZenMode zenMode = new ZenMode("id", rule, true);
-
-        assertThat(mSummaryHelper.getAppsSummary(zenMode, new LinkedHashSet<>())).isEqualTo("All");
     }
 
     @Test

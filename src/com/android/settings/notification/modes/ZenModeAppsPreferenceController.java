@@ -38,10 +38,8 @@ public class ZenModeAppsPreferenceController extends
 
     static final String KEY_PRIORITY = "zen_mode_apps_priority";
     static final String KEY_NONE = "zen_mode_apps_none";
-    static final String KEY_ALL = "zen_mode_apps_all";
 
     String mModeId;
-
 
     public ZenModeAppsPreferenceController(@NonNull Context context,
             @NonNull String key, @Nullable ZenModesBackend backend) {
@@ -79,13 +77,6 @@ public class ZenModeAppsPreferenceController extends
                         == ZenPolicy.CHANNEL_POLICY_NONE;
                 pref.setChecked(policy_none);
                 break;
-            case KEY_ALL:
-                // A UI-only setting; the underlying policy never actually has this value,
-                // but ZenMode acts as though it does for the sake of UI consistency.
-                boolean policy_all = zenMode.getPolicy().getAllowedChannels()
-                        == ZenMode.CHANNEL_POLICY_ALL;
-                pref.setChecked(policy_all);
-                break;
         }
     }
 
@@ -96,8 +87,6 @@ public class ZenModeAppsPreferenceController extends
                 return savePolicy(p -> p.allowChannels(ZenPolicy.CHANNEL_POLICY_PRIORITY));
             case KEY_NONE:
                 return savePolicy(p -> p.allowChannels(ZenPolicy.CHANNEL_POLICY_NONE));
-            case KEY_ALL:
-                return savePolicy(p -> p.allowChannels(ZenMode.CHANNEL_POLICY_ALL));
         }
         return true;
     }
