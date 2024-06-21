@@ -33,6 +33,10 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.collection.ArraySet;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceFragmentCompat;
@@ -45,6 +49,8 @@ import com.android.settings.location.LocationSettings;
 import com.android.settings.utils.LocalClassLoaderContextThemeWrapper;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+
+import java.util.Set;
 
 /**
  * Class to load the preference screen to be added to the settings page for the specific account
@@ -83,6 +89,7 @@ public class AccountTypePreferenceLoader {
             try {
                 desc = mAuthenticatorHelper.getAccountTypeDescription(accountType);
                 if (desc != null && desc.accountPreferencesId != 0) {
+                    Set<String> fragmentAllowList = generateFragmentAllowlist(parent);
                     // Load the context of the target package, then apply the
                     // base Settings theme (no references to local resources)
                     // and create a context theme wrapper so that we get the
@@ -98,6 +105,12 @@ public class AccountTypePreferenceLoader {
                     themedCtx.getTheme().setTo(baseTheme);
                     prefs = mFragment.getPreferenceManager().inflateFromResource(themedCtx,
                             desc.accountPreferencesId, parent);
+                    // Ignore Fragments provided dynamically, as these are coming from external
+                    // applications which must not have access to internal Settings' fragments.
+                    // These preferences are rendered into Settings, so they also won't have access
+                    // to their own Fragments, meaning there is no acceptable usage of
+                    // android:fragment here.
+                    filterBlockedFragments(prefs, fragmentAllowList);
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "Couldn't load preferences.xml file from " + desc.packageName);
@@ -182,6 +195,48 @@ public class AccountTypePreferenceLoader {
                 }
             }
             i++;
+        }
+    }
+
+    // Build allowlist from existing Fragments in PreferenceGroup
+    @VisibleForTesting
+    Set<String> generateFragmentAllowlist(@Nullable PreferenceGroup prefs) {
+        Set<String> fragmentAllowList = new ArraySet<>();
+        if (prefs == null) {
+            return fragmentAllowList;
+        }
+
+        for (int i = 0; i < prefs.getPreferenceCount(); i++) {
+            Preference pref = prefs.getPreference(i);
+            if (pref instanceof PreferenceGroup) {
+                fragmentAllowList.addAll(generateFragmentAllowlist((PreferenceGroup) pref));
+            }
+
+            String fragmentName = pref.getFragment();
+            if (!TextUtils.isEmpty(fragmentName)) {
+                fragmentAllowList.add(fragmentName);
+            }
+        }
+        return fragmentAllowList;
+    }
+
+    // Block clicks on any Preference with android:fragment that is not contained in the allowlist
+    @VisibleForTesting
+    void filterBlockedFragments(@Nullable PreferenceGroup prefs,
+            @NonNull Set<String> allowedFragments) {
+        if (prefs == null) {
+            return;
+        }
+        for (int i = 0; i < prefs.getPreferenceCount(); i++) {
+            Preference pref = prefs.getPreference(i);
+            if (pref instanceof PreferenceGroup) {
+                filterBlockedFragments((PreferenceGroup) pref, allowedFragments);
+            }
+
+            String fragmentName = pref.getFragment();
+            if (fragmentName != null && !allowedFragments.contains(fragmentName)) {
+                pref.setOnPreferenceClickListener(preference -> true);
+            }
         }
     }
 
