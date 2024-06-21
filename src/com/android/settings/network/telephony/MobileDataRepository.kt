@@ -118,6 +118,18 @@ class MobileDataRepository(
         }
     }
 
+    /** Creates an instance of a cold Flow for whether data roaming is enabled of given [subId]. */
+    fun isDataRoamingEnabledFlow(subId: Int): Flow<Boolean> {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)
+        val telephonyManager = context.telephonyManager(subId)
+        return mobileSettingsGlobalChangedFlow(Settings.Global.DATA_ROAMING, subId)
+            .map { telephonyManager.isDataRoamingEnabled }
+            .distinctUntilChanged()
+            .conflate()
+            .onEach { Log.d(TAG, "[$subId] isDataRoamingEnabledFlow: $it") }
+            .flowOn(Dispatchers.Default)
+    }
+
     private companion object {
         private const val TAG = "MobileDataRepository"
     }
