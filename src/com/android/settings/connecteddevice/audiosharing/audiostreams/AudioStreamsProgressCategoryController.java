@@ -20,6 +20,7 @@ import static java.util.Collections.emptyList;
 
 import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
@@ -27,10 +28,12 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -55,13 +58,35 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         implements DefaultLifecycleObserver {
     private static final String TAG = "AudioStreamsProgressCategoryController";
     private static final boolean DEBUG = BluetoothUtils.D;
-    private static final int UNSET_BROADCAST_ID = -1;
-    private final BluetoothCallback mBluetoothCallback =
+    @VisibleForTesting static final int UNSET_BROADCAST_ID = -1;
+
+    @VisibleForTesting
+    final BluetoothCallback mBluetoothCallback =
             new BluetoothCallback() {
                 @Override
-                public void onActiveDeviceChanged(
-                        @Nullable CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-                    if (bluetoothProfile == BluetoothProfile.LE_AUDIO) {
+                public void onBluetoothStateChanged(@AdapterState int bluetoothState) {
+                    Log.d(TAG, "onBluetoothStateChanged() with bluetoothState : " + bluetoothState);
+                    if (bluetoothState == BluetoothAdapter.STATE_OFF) {
+                        mExecutor.execute(() -> init());
+                    }
+                }
+
+                @Override
+                public void onProfileConnectionStateChanged(
+                        @NonNull CachedBluetoothDevice cachedDevice,
+                        @ConnectionState int state,
+                        int bluetoothProfile) {
+                    Log.d(
+                            TAG,
+                            "onProfileConnectionStateChanged() with cachedDevice : "
+                                    + cachedDevice.getAddress()
+                                    + " with state : "
+                                    + state
+                                    + " on profile : "
+                                    + bluetoothProfile);
+                    if (bluetoothProfile == BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT
+                            && (state == BluetoothAdapter.STATE_CONNECTED
+                                    || state == BluetoothAdapter.STATE_DISCONNECTED)) {
                         mExecutor.execute(() -> init());
                     }
                 }
@@ -92,7 +117,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         SOURCE_ADDED,
     }
 
-    private final Executor mExecutor;
+    @VisibleForTesting Executor mExecutor;
     private final AudioStreamsProgressCategoryCallback mBroadcastAssistantCallback;
     private final AudioStreamsHelper mAudioStreamsHelper;
     private final MediaControlHelper mMediaControlHelper;
@@ -103,7 +128,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     private @Nullable BluetoothLeBroadcastMetadata mSourceFromQrCode;
     private SourceOriginForLogging mSourceFromQrCodeOriginForLogging;
     @Nullable private AudioStreamsProgressCategoryPreference mCategoryPreference;
-    @Nullable private AudioStreamsDashboardFragment mFragment;
+    @Nullable private Fragment mFragment;
 
     public AudioStreamsProgressCategoryController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -142,12 +167,12 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         mExecutor.execute(this::stopScanning);
     }
 
-    void setFragment(AudioStreamsDashboardFragment fragment) {
+    void setFragment(Fragment fragment) {
         mFragment = fragment;
     }
 
     @Nullable
-    AudioStreamsDashboardFragment getFragment() {
+    Fragment getFragment() {
         return mFragment;
     }
 
@@ -546,7 +571,8 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         return preference;
     }
 
-    private void moveToState(AudioStreamPreference preference, AudioStreamState state) {
+    @VisibleForTesting
+    void moveToState(AudioStreamPreference preference, AudioStreamState state) {
         AudioStreamStateHandler stateHandler =
                 switch (state) {
                     case SYNCED -> SyncedState.getInstance();

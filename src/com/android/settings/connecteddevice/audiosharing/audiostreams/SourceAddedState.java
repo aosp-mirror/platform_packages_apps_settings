@@ -25,6 +25,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 
 class SourceAddedState extends AudioStreamStateHandler {
     @VisibleForTesting
@@ -84,9 +85,10 @@ class SourceAddedState extends AudioStreamStateHandler {
                     .setTitleRes(R.string.audio_streams_detail_page_title)
                     .setDestination(AudioStreamDetailsFragment.class.getName())
                     .setSourceMetricsCategory(
-                            controller.getFragment() == null
+                            !(controller.getFragment() instanceof DashboardFragment)
                                     ? SettingsEnums.PAGE_UNKNOWN
-                                    : controller.getFragment().getMetricsCategory())
+                                    : ((DashboardFragment) controller.getFragment())
+                                            .getMetricsCategory())
                     .setArguments(broadcast)
                     .launch();
             return true;
