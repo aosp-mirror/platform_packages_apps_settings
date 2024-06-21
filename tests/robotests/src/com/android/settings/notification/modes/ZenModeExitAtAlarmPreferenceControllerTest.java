@@ -28,6 +28,9 @@ import android.service.notification.ZenModeConfig;
 import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

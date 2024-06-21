@@ -31,6 +31,8 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -128,11 +130,13 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
         return appsBypassingDnd;
     }
 
-    @VisibleForTesting final ApplicationsState.Callbacks mAppSessionCallbacks =
+    @VisibleForTesting
+    final ApplicationsState.Callbacks mAppSessionCallbacks =
             new ApplicationsState.Callbacks() {
 
                 @Override
-                public void onRunningStateChanged(boolean running) { }
+                public void onRunningStateChanged(boolean running) {
+                }
 
                 @Override
                 public void onPackageListChanged() {
@@ -145,16 +149,20 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
                 }
 
                 @Override
-                public void onPackageIconChanged() { }
+                public void onPackageIconChanged() {
+                }
 
                 @Override
-                public void onPackageSizeChanged(String packageName) { }
+                public void onPackageSizeChanged(String packageName) {
+                }
 
                 @Override
-                public void onAllSizesComputed() { }
+                public void onAllSizesComputed() {
+                }
 
                 @Override
-                public void onLauncherInfoChanged() { }
+                public void onLauncherInfoChanged() {
+                }
 
                 @Override
                 public void onLoadEntriesCompleted() {

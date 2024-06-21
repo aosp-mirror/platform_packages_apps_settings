@@ -26,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 class ZenModeNotifVisLinkPreferenceController extends AbstractZenModePreferenceController  {
 

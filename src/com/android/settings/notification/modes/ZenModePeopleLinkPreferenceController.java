@@ -26,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 /**
  * Preference with a link and summary about what calls and messages can break through the mode
