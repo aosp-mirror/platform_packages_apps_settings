@@ -17,8 +17,7 @@
 package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
-
-import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
+import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -138,7 +137,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         Bundle bundle = launcherIntent.getBundleExtra(
                 SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
         assertThat(bundle).isNotNull();
-        assertThat(bundle.getString(MODE_ID)).isEqualTo("id");
+        assertThat(bundle.getString(EXTRA_AUTOMATIC_ZEN_RULE_ID)).isEqualTo("id");
     }
 
     @Test
