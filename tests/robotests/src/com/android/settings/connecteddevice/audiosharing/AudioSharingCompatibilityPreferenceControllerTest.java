@@ -61,6 +61,7 @@ import com.android.settingslib.bluetooth.VolumeControlProfile;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.flags.Flags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -126,6 +127,12 @@ public class AudioSharingCompatibilityPreferenceControllerTest {
         when(mVolumeControl.isProfileReady()).thenReturn(true);
         mController = new AudioSharingCompatibilityPreferenceController(mContext, PREF_KEY);
         when(mScreen.findPreference(PREF_KEY)).thenReturn(mPreference);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowThreadUtils.reset();
+        ShadowBluetoothUtils.reset();
     }
 
     @Test

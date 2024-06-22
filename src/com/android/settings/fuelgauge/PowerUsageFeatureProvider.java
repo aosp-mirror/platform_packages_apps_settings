@@ -23,11 +23,13 @@ import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.SparseIntArray;
 
+import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
 import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /** Feature Provider used in power usage */
@@ -38,6 +40,9 @@ public interface PowerUsageFeatureProvider {
 
     /** Check whether the battery tips card is enabled in the battery usage page */
     boolean isBatteryTipsEnabled();
+
+    /** Check whether force expire the app optimization mode. */
+    boolean isForceExpireAppOptimizationModeEnabled();
 
     /** Check whether to log the optimization mode of app entry in period job */
     boolean isAppOptimizationModeLogged();
@@ -154,4 +159,8 @@ public interface PowerUsageFeatureProvider {
 
     /** Whether the device is under the battery defender mode */
     boolean isBatteryDefend(BatteryInfo info);
+
+    /** Collect and process battery reattribute data if needed. */
+    boolean processBatteryReattributeData(
+            Context context, Map<Long, BatteryDiffData> batteryDiffDataMap);
 }

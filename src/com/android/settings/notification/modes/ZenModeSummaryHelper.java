@@ -15,6 +15,7 @@
  */
 package com.android.settings.notification.modes;
 
+import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_ANYONE;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_IMPORTANT;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_NONE;
@@ -47,6 +48,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settingslib.notification.modes.ZenMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,9 +62,9 @@ import java.util.function.Predicate;
 class ZenModeSummaryHelper {
 
     private final Context mContext;
-    private final ZenModesBackend mBackend;
+    private final ZenHelperBackend mBackend;
 
-    public ZenModeSummaryHelper(Context context, ZenModesBackend backend) {
+    ZenModeSummaryHelper(Context context, ZenHelperBackend backend) {
         mContext = context;
         mBackend = backend;
     }
@@ -187,11 +189,12 @@ class ZenModeSummaryHelper {
     String getDisplayEffectsSummary(ZenMode zenMode) {
         boolean isFirst = true;
         List<String> enabledEffects = new ArrayList<>();
-        if (!zenMode.getPolicy().shouldShowAllVisualEffects()) {
+        if (!zenMode.getPolicy().shouldShowAllVisualEffects()
+                && zenMode.getRule().getInterruptionFilter() != INTERRUPTION_FILTER_ALL) {
             enabledEffects.add(getBlockedEffectsSummary(zenMode));
             isFirst = false;
         }
-        ZenDeviceEffects currEffects =  zenMode.getRule().getDeviceEffects();
+        ZenDeviceEffects currEffects = zenMode.getRule().getDeviceEffects();
         if (currEffects != null) {
             if (currEffects.shouldDisplayGrayscale()) {
                 if (isFirst) {
@@ -411,8 +414,6 @@ class ZenModeSummaryHelper {
             return formatAppsList(appsBypassing);
         } else if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_NONE) {
             return mContext.getResources().getString(R.string.zen_mode_apps_none_apps);
-        } else if (zenMode.getPolicy().getAllowedChannels() == ZenMode.CHANNEL_POLICY_ALL) {
-            return mContext.getResources().getString(R.string.zen_mode_apps_all_apps);
         }
         return "";
     }

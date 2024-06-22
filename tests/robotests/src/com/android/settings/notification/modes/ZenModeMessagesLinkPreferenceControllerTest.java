@@ -17,7 +17,7 @@
 package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
-import static org.junit.Assert.assertTrue;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -29,7 +29,12 @@ import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
+
 import androidx.preference.Preference;
+
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,8 +53,8 @@ public final class ZenModeMessagesLinkPreferenceControllerTest {
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
-    @Mock
-    private ZenModesBackend mBackend;
+    @Mock private ZenModesBackend mBackend;
+    @Mock private ZenHelperBackend mHelperBackend;
 
     @Before
     public void setup() {
@@ -58,7 +63,7 @@ public final class ZenModeMessagesLinkPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
 
         mController = new ZenModeMessagesLinkPreferenceController(
-                mContext, "something", mBackend);
+                mContext, "something", mBackend, mHelperBackend);
     }
 
     @Test

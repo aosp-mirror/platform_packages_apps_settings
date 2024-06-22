@@ -363,13 +363,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         }
         if (mUserInfo.isMain() || mUserInfo.isGuest() || !UserManager.isMultipleAdminEnabled()
                 || mUserManager.hasUserRestrictionForUser(UserManager.DISALLOW_GRANT_ADMIN,
-                mUserInfo.getUserHandle())) {
+                mUserInfo.getUserHandle()) || !mUserManager.isAdminUser()) {
             removePreference(KEY_GRANT_ADMIN);
         }
         if (!mUserManager.isAdminUser()) { // non admin users can't remove users and allow calls
             removePreference(KEY_ENABLE_TELEPHONY);
             removePreference(KEY_REMOVE_USER);
-            removePreference(KEY_GRANT_ADMIN);
             removePreference(KEY_APP_AND_CONTENT_ACCESS);
             removePreference(KEY_APP_COPYING);
         } else {

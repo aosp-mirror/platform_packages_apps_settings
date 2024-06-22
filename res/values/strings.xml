@@ -7927,6 +7927,19 @@
     <!-- Zen Modes: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
     <string name="zen_mode_settings_summary">Only get notified by important people and apps</string>
 
+    <!-- Zen Modes: Option to add an automatic schedule for a mode. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_select_schedule">Select activation type</string>
+
+    <!-- Zen Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_select_schedule_time">Time</string>
+    <!-- Zen Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
+    <string name="zen_mode_select_schedule_time_example">Ex. \"9:30 – 5:00 PM\"</string>
+
+    <!-- Zen Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_select_schedule_calendar">Calendar</string>
+    <!-- Zen Modes: Example text for the option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=60] -->
+    <string name="zen_mode_select_schedule_calendar_example">Ex. \"Personal calendar\"</string>
+
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
 
@@ -8003,7 +8016,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
     <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
-    <string name="mode_interruption_filter_title">Notifications that can reach you</string>
+    <string name="mode_interruption_filter_title">Stay focused</string>
     <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_device_effects_title">Additional actions</string>
 
@@ -8047,7 +8060,10 @@
         other {{effect_1}, {effect_2}, and # more}
         }
     </string>
-
+    <!-- Modes: setting for whether the mode should filter (silence/hide) notifications/volume streams -->
+    <string name="mode_notification_filter_title">Filter interruptions</string>
+    <!-- Modes: subtext when a mode is not filtering (silence/hide) notifications/volume streams -->
+    <string name="mode_no_notification_filter">No interruptions are filtered</string>
 
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for filtered
@@ -13588,4 +13604,7 @@
 
     <!-- url for learning more about bluetooth audio sharing -->
     <string name="help_url_audio_sharing" translatable="false"></string>
+
+    <!-- Text for Search bar of Settings home screen [CHAR LIMIT=34] -->
+    <string name="homepage_search">Search Settings</string>
 </resources>
