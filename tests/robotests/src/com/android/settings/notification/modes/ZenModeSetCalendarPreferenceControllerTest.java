@@ -34,11 +34,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
 
 import androidx.preference.DropDownPreference;
 import androidx.preference.PreferenceCategory;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -85,7 +89,9 @@ public class ZenModeSetCalendarPreferenceControllerTest {
     @EnableFlags({Flags.FLAG_MODES_API, Flags.FLAG_MODES_UI})
     public void updateEventMode_updatesConditionAndTriggerDescription() {
         ZenMode mode = new ZenMode("id",
-                new AutomaticZenRule.Builder("name", Uri.parse("condition")).build(),
+                new AutomaticZenRule.Builder("name", Uri.parse("condition"))
+                        .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                        .build(),
                 true);  // is active
 
         // Explicitly update preference controller with mode info first, which will also call
@@ -99,6 +105,7 @@ public class ZenModeSetCalendarPreferenceControllerTest {
         // apply event mode updater to existing mode
         ZenMode out = mPrefController.updateEventMode(eventInfo).apply(mode);
 
+        assertThat(out.getRule().getOwner()).isEqualTo(ZenModeConfig.getEventConditionProvider());
         assertThat(out.getRule().getConditionId()).isEqualTo(
                 ZenModeConfig.toEventConditionId(eventInfo));
         assertThat(out.getRule().getTriggerDescription()).isEqualTo("My events");

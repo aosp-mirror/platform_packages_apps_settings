@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.android.settings.wifi.details.WifiNetworkDetailsViewModel;
+import com.android.settings.wifi.dpp.WifiDppQrCodeGeneratorFragment;
 import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settings.wifi.repository.WifiHotspotRepository;
 import com.android.settings.wifi.tether.WifiHotspotSecurityViewModel;
@@ -144,6 +145,15 @@ public class WifiFeatureProvider {
                 new ViewModelProvider(owner).get(WifiNetworkDetailsViewModel.class);
         verboseLog(TAG, "getWifiNetworkDetailsViewModel():" + viewModel);
         return viewModel;
+    }
+
+    /**
+     * Gets an instance of WifiDppQrCodeGeneratorFragment
+     */
+    public WifiDppQrCodeGeneratorFragment getWifiDppQrCodeGeneratorFragment() {
+        WifiDppQrCodeGeneratorFragment fragment = new WifiDppQrCodeGeneratorFragment();
+        verboseLog(TAG, "getWifiDppQrCodeGeneratorFragment():" + fragment);
+        return fragment;
     }
 
     /**

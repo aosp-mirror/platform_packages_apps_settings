@@ -26,6 +26,7 @@ import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_RESTRICTED
 import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNKNOWN
 import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNRESTRICTED
 import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils.UNLIMITED_EXPIRE_TIME
+import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
@@ -51,9 +52,14 @@ class AppOptModeSharedPreferencesUtilsTest {
     @Spy
     private var testBatteryOptimizeUtils = spy(BatteryOptimizeUtils(context, UID, PACKAGE_NAME))
 
+    private lateinit var featureFactory: FakeFeatureFactory
+
     @Before
     fun setup() {
         AppOptModeSharedPreferencesUtils.clearAll(context)
+        featureFactory = FakeFeatureFactory.setupForTest()
+        whenever(featureFactory.powerUsageFeatureProvider.isForceExpireAppOptimizationModeEnabled)
+            .thenReturn(false)
     }
 
     @After
@@ -122,6 +128,20 @@ class AppOptModeSharedPreferencesUtilsTest {
         insertAppOptModeEventForTest(expirationTime = 1000L)
 
         AppOptModeSharedPreferencesUtils.deleteAppOptimizationModeEventByUid(context, UID)
+
+        assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).isEmpty()
+    }
+
+    @Test
+    fun resetExpiredAppOptModeBeforeTimestamp_forceExpiredData_verifyEmptyList() {
+        whenever(featureFactory.powerUsageFeatureProvider.isForceExpireAppOptimizationModeEnabled)
+            .thenReturn(true)
+        insertAppOptModeEventForTest(expirationTime = 1000L)
+
+        AppOptModeSharedPreferencesUtils.resetExpiredAppOptModeBeforeTimestamp(
+            context,
+            queryTimestampMs = 999L
+        )
 
         assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).isEmpty()
     }

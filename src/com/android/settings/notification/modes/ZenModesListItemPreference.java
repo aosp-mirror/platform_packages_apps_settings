@@ -18,6 +18,8 @@ package com.android.settings.notification.modes;
 import android.content.Context;
 
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.notification.modes.ZenIconLoader;
+import com.android.settingslib.notification.modes.ZenMode;
 
 /**
  * Preference representing a single mode item on the modes aggregator page. Clicking on this
@@ -46,7 +48,7 @@ class ZenModesListItemPreference extends RestrictedPreference {
         setIconSize(ICON_SIZE_SMALL);
 
         FutureUtil.whenDone(
-                mZenMode.getIcon(mContext, IconLoader.getInstance()),
+                mZenMode.getIcon(mContext, ZenIconLoader.getInstance()),
                 icon -> setIcon(IconUtil.applyTint(mContext, icon)),
                 mContext.getMainExecutor());
     }

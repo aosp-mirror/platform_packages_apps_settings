@@ -22,7 +22,6 @@ import android.telephony.TelephonyManager
 import android.telephony.data.ApnSetting
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.PreferenceScreen
-import com.android.settings.network.mobileDataEnabledFlow
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.flow.combine
 
@@ -71,7 +70,7 @@ class MmsMessagePreferenceController @JvmOverloads constructor(
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
         combine(
-            mContext.mobileDataEnabledFlow(mSubId),
+            MobileDataRepository(mContext).mobileDataEnabledChangedFlow(mSubId),
             mContext.subscriptionsChangedFlow(), // Capture isMobileDataPolicyEnabled() changes
         ) { _, _ -> }.collectLatestWithLifecycle(viewLifecycleOwner) {
             preferenceScreen?.let { super.displayPreference(it) }
