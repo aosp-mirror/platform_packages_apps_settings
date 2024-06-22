@@ -31,6 +31,8 @@ import android.net.Uri;
 import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
 
+import com.android.settingslib.notification.modes.ZenMode;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +42,6 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-
 @RunWith(RobolectricTestRunner.class)
 public class ZenModesSummaryHelperTest {
     private Context mContext;

@@ -29,6 +29,8 @@ import androidx.preference.PreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 /**
  * Preference controller for the link to an individual mode's configuration page.
@@ -63,7 +65,6 @@ class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenc
         }
         switchPref.setChecked(zenMode.getRule().isEnabled());
         switchPref.setOnPreferenceChangeListener(mSwitchChangeListener);
-
         switchPref.setSummary(zenMode.getRule().getTriggerDescription());
         switchPref.setIcon(null);
         switchPref.setOnPreferenceClickListener(null);

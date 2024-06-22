@@ -46,6 +46,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
 import org.junit.Rule;

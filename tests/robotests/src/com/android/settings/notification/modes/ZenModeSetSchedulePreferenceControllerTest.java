@@ -38,6 +38,8 @@ import androidx.fragment.app.Fragment;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
 import org.junit.Rule;
