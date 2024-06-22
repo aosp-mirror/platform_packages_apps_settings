@@ -162,6 +162,26 @@ class MobileDataRepositoryTest {
         assertThat(state.firstWithTimeoutOrNull()).isTrue()
     }
 
+    @Test
+    fun isDataRoamingEnabledFlow_invalidSub_returnFalse() = runBlocking {
+        val isDataRoamingEnabled =
+            repository
+                .isDataRoamingEnabledFlow(subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+                .firstWithTimeoutOrNull()
+
+        assertThat(isDataRoamingEnabled).isFalse()
+    }
+
+    @Test
+    fun isDataRoamingEnabledFlow_validSub_returnCurrentValue() = runBlocking {
+        mockTelephonyManager.stub { on { isDataRoamingEnabled } doReturn true }
+
+        val isDataRoamingEnabled =
+            repository.isDataRoamingEnabledFlow(subId = SUB_ID).firstWithTimeoutOrNull()
+
+        assertThat(isDataRoamingEnabled).isTrue()
+    }
+
     private companion object {
         const val SUB_ID = 123
     }

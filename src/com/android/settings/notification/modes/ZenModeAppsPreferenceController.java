@@ -16,7 +16,7 @@
 
 package com.android.settings.notification.modes;
 
-import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
+import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -31,6 +31,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 public class ZenModeAppsPreferenceController extends
@@ -103,7 +105,7 @@ public class ZenModeAppsPreferenceController extends
     private void launchPrioritySettings() {
         Bundle bundle = new Bundle();
         if (mModeId != null) {
-            bundle.putString(MODE_ID, mModeId);
+            bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, mModeId);
         }
         // TODO(b/332937635): Update metrics category
         new SubSettingLauncher(mContext)

@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.modes;
 
+import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
@@ -33,7 +35,7 @@ class ZenSubSettingLauncher {
             Class<? extends ZenModeFragmentBase> fragmentClass, String modeId,
             int sourceMetricsCategory) {
         Bundle bundle = new Bundle();
-        bundle.putString(ZenModeFragmentBase.MODE_ID, modeId);
+        bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, modeId);
 
         return new SubSettingLauncher(context)
                 .setDestination(fragmentClass.getName())

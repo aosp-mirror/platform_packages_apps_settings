@@ -23,10 +23,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.android.settings.network.telephony.CarrierConfigRepository
 import com.android.settings.network.telephony.SimSlotRepository
 import com.android.settings.network.telephony.ims.ImsMmTelRepository
 import com.android.settings.network.telephony.ims.ImsMmTelRepositoryImpl
-import com.android.settings.network.telephony.safeGetConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -39,7 +39,9 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class SimStatusDialogRepository @JvmOverloads constructor(
+class SimStatusDialogRepository
+@JvmOverloads
+constructor(
     private val context: Context,
     private val simSlotRepository: SimSlotRepository = SimSlotRepository(context),
     private val signalStrengthRepository: SignalStrengthRepository =
@@ -48,7 +50,7 @@ class SimStatusDialogRepository @JvmOverloads constructor(
         ImsMmTelRepositoryImpl(context, subId)
     },
 ) {
-    private val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
+    private val carrierConfigRepository = CarrierConfigRepository(context)
 
     data class SimStatusDialogInfo(
         val signalStrength: String? = null,
@@ -73,7 +75,8 @@ class SimStatusDialogRepository @JvmOverloads constructor(
     }
 
     private fun simStatusDialogInfoBySlotFlow(simSlotIndex: Int): Flow<SimStatusDialogInfo> =
-        simSlotRepository.subIdInSimSlotFlow(simSlotIndex)
+        simSlotRepository
+            .subIdInSimSlotFlow(simSlotIndex)
             .flatMapLatest { subId ->
                 if (SubscriptionManager.isValidSubscriptionId(subId)) {
                     simStatusDialogInfoFlow(subId)
@@ -99,22 +102,16 @@ class SimStatusDialogRepository @JvmOverloads constructor(
         }
 
     private fun showUpFlow(subId: Int) = flow {
-        val config = carrierConfigManager.safeGetConfig(
-            keys = listOf(
-                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL,
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL,
-            ),
-            subId = subId,
-        )
-        val visibility = SimStatusDialogVisibility(
-            signalStrengthShowUp = config.getBoolean(
-                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL,
-                true,  // by default we show the signal strength in sim status
-            ),
-            imsRegisteredShowUp = config.getBoolean(
-                CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL
-            ),
-        )
+        val visibility =
+            carrierConfigRepository.transformConfig(subId) {
+                SimStatusDialogVisibility(
+                    signalStrengthShowUp =
+                        getBoolean(
+                            CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL),
+                    imsRegisteredShowUp =
+                        getBoolean(CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL),
+                )
+            }
         emit(visibility)
     }
 }
