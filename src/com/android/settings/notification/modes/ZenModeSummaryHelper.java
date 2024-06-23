@@ -48,6 +48,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settingslib.notification.modes.ZenMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -193,7 +194,7 @@ class ZenModeSummaryHelper {
             enabledEffects.add(getBlockedEffectsSummary(zenMode));
             isFirst = false;
         }
-        ZenDeviceEffects currEffects =  zenMode.getRule().getDeviceEffects();
+        ZenDeviceEffects currEffects = zenMode.getRule().getDeviceEffects();
         if (currEffects != null) {
             if (currEffects.shouldDisplayGrayscale()) {
                 if (isFirst) {

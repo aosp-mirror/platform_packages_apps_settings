@@ -26,6 +26,8 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import com.google.common.base.Preconditions;
 

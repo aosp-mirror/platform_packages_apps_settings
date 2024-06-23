@@ -17,8 +17,7 @@
 package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
-
-import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
+import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -32,6 +31,8 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +73,7 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
-        bundle.putString(MODE_ID, zenMode.getId());
+        bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
         // TODO(b/332937635): Update metrics category
         preference.setIntent(new SubSettingLauncher(mContext)
                 .setDestination(ZenModeAppsFragment.class.getName())
@@ -129,11 +130,13 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
         return appsBypassingDnd;
     }
 
-    @VisibleForTesting final ApplicationsState.Callbacks mAppSessionCallbacks =
+    @VisibleForTesting
+    final ApplicationsState.Callbacks mAppSessionCallbacks =
             new ApplicationsState.Callbacks() {
 
                 @Override
-                public void onRunningStateChanged(boolean running) { }
+                public void onRunningStateChanged(boolean running) {
+                }
 
                 @Override
                 public void onPackageListChanged() {
@@ -146,16 +149,20 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
                 }
 
                 @Override
-                public void onPackageIconChanged() { }
+                public void onPackageIconChanged() {
+                }
 
                 @Override
-                public void onPackageSizeChanged(String packageName) { }
+                public void onPackageSizeChanged(String packageName) {
+                }
 
                 @Override
-                public void onAllSizesComputed() { }
+                public void onAllSizesComputed() {
+                }
 
                 @Override
-                public void onLauncherInfoChanged() { }
+                public void onLauncherInfoChanged() {
+                }
 
                 @Override
                 public void onLoadEntriesCompleted() {

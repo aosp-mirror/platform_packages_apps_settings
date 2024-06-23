@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
@@ -24,7 +26,12 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
+import android.view.accessibility.Flags;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -33,6 +40,7 @@ import com.android.internal.R;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -40,6 +48,8 @@ import org.junit.runner.RunWith;
 public class ReduceBrightColorsPreferenceControllerTest {
     private static final String PREF_KEY = "rbc_preference";
 
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     private Context mContext;
     private Resources mResources;;
     private ReduceBrightColorsPreferenceController mController;
@@ -86,6 +96,20 @@ public class ReduceBrightColorsPreferenceControllerTest {
         doReturn(false).when(mResources).getBoolean(
                 R.bool.config_reduceBrightColorsAvailable);
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void getTileComponentName_a11yQsFlagOff_returnComponentName() {
+        assertThat(mController.getTileComponentName())
+                .isEqualTo(REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void getTileComponentName_a11yQsFlagOff_returnNull() {
+        assertThat(mController.getTileComponentName()).isNull();
     }
 
     private int resourceId(String type, String name) {

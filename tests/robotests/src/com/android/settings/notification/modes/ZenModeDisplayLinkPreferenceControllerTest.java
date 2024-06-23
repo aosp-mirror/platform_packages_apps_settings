@@ -32,6 +32,9 @@ import android.service.notification.ZenPolicy;
 
 import androidx.preference.Preference;
 
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
