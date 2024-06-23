@@ -271,11 +271,11 @@ public class ResetNetworkRequest {
             builder.resetIms(mSubscriptionIdToResetIms);
         }
         // Reset phone process and RILD may impact above components, keep them at the end
-        if ((mResetOptions & RESET_PHONE_PROCESS) != 0) {
-            builder.restartPhoneProcess();
-        }
         if ((mResetOptions & RESET_RILD) != 0) {
             builder.restartRild();
+        }
+        if ((mResetOptions & RESET_PHONE_PROCESS) != 0) {
+            builder.restartPhoneProcess();
         }
         return builder;
     }

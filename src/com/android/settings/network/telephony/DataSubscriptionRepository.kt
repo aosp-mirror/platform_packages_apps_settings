@@ -51,46 +51,41 @@ class DataSubscriptionRepository(
             )
             .map { it.getIntExtra(SUBSCRIPTION_KEY, SubscriptionManager.INVALID_SUBSCRIPTION_ID) }
             .onStart { emit(SubscriptionManager.getDefaultDataSubscriptionId()) }
+            .distinctUntilChanged()
             .conflate()
             .flowOn(Dispatchers.Default)
 
     fun activeDataSubscriptionIdFlow(): Flow<Int> =
-        telephonyManager.telephonyCallbackFlow {
-            object : TelephonyCallback(), TelephonyCallback.ActiveDataSubscriptionIdListener {
-                override fun onActiveDataSubscriptionIdChanged(subId: Int) {
-                    trySend(subId)
-                    Log.d(TAG, "activeDataSubscriptionIdFlow: $subId")
+        telephonyManager
+            .telephonyCallbackFlow {
+                object : TelephonyCallback(), TelephonyCallback.ActiveDataSubscriptionIdListener {
+                    override fun onActiveDataSubscriptionIdChanged(subId: Int) {
+                        trySend(subId)
+                        Log.d(TAG, "activeDataSubscriptionIdFlow: $subId")
+                    }
                 }
             }
-        }
+            .distinctUntilChanged()
 
     fun dataSummaryFlow(): Flow<String> =
         combine(defaultDataSubscriptionIdFlow(), activeDataSubscriptionIdFlow()) {
-                defaultSubId,
-                activeSubId ->
-                DataSubscriptionIds(defaultSubId, activeSubId)
+                defaultDataSubId,
+                activeDataSubId ->
+                getDataSummary(defaultDataSubId, activeDataSubId)
             }
-            .distinctUntilChanged()
-            .map { it.getDataSummary() }
             .conflate()
             .flowOn(Dispatchers.Default)
 
-    private data class DataSubscriptionIds(
-        val defaultSubId: Int,
-        val activeSubId: Int,
-    )
-
-    private fun DataSubscriptionIds.getDataSummary(): String {
-        val activeSubInfo = subscriptionManager.getActiveSubscriptionInfo(activeSubId) ?: return ""
+    private fun getDataSummary(defaultDataSubId: Int, activeDataSubId: Int): String {
+        if (defaultDataSubId == activeDataSubId) return getDisplayName(defaultDataSubId)
+        val activeSubInfo =
+            subscriptionManager.getActiveSubscriptionInfo(activeDataSubId)
+                ?: return getDisplayName(defaultDataSubId)
         if (!SubscriptionUtil.isSubscriptionVisible(subscriptionManager, context, activeSubInfo)) {
-            return getDisplayName(defaultSubId)
+            return getDisplayName(defaultDataSubId)
         }
-        val uniqueName = getDisplayName(activeSubId)
-        return if (activeSubId == defaultSubId) {
-            uniqueName
-        } else {
-            context.getString(R.string.mobile_data_temp_using, uniqueName)
-        }
+        // non-DDS is active
+        return context.getString(R.string.mobile_data_temp_using, getDisplayName(activeDataSubId))
     }
 
     companion object {

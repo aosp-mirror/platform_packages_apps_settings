@@ -47,6 +47,7 @@ import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.flags.Flags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -104,11 +105,7 @@ public class AudioSharingDisconnectDialogFragmentTest {
 
     @Before
     public void setUp() {
-        AlertDialog latestAlertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        if (latestAlertDialog != null) {
-            latestAlertDialog.dismiss();
-            ShadowAlertDialogCompat.reset();
-        }
+        ShadowAlertDialogCompat.reset();
         ShadowBluetoothAdapter shadowBluetoothAdapter =
                 Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         shadowBluetoothAdapter.setEnabled(true);
@@ -129,6 +126,11 @@ public class AudioSharingDisconnectDialogFragmentTest {
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAlertDialogCompat.reset();
     }
 
     @Test

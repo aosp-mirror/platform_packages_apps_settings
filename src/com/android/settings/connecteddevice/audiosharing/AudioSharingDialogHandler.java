@@ -28,6 +28,7 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
@@ -59,9 +60,12 @@ public class AudioSharingDialogHandler {
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private List<BluetoothDevice> mTargetSinks = new ArrayList<>();
+    // The target sinks to join broadcast onPlaybackStarted
+    @Nullable private List<BluetoothDevice> mTargetSinks;
+    private boolean mIsStoppingBroadcast = false;
 
-    private final BluetoothLeBroadcast.Callback mBroadcastCallback =
+    @VisibleForTesting
+    final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastStarted(int reason, int broadcastId) {
@@ -76,8 +80,15 @@ public class AudioSharingDialogHandler {
                 @Override
                 public void onBroadcastStartFailed(int reason) {
                     Log.d(TAG, "onBroadcastStartFailed(), reason = " + reason);
-                    AudioSharingUtils.toastMessage(
-                            mContext, "Fail to start broadcast, reason " + reason);
+                    if (mTargetSinks != null) {
+                        mMetricsFeatureProvider.action(
+                                mContext,
+                                SettingsEnums.ACTION_AUDIO_SHARING_START_FAILED,
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
+                        AudioSharingUtils.toastMessage(
+                                mContext, "Fail to start broadcast, reason " + reason);
+                        mTargetSinks = null;
+                    }
                 }
 
                 @Override
@@ -99,13 +110,21 @@ public class AudioSharingDialogHandler {
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
+                    mIsStoppingBroadcast = false;
                 }
 
                 @Override
                 public void onBroadcastStopFailed(int reason) {
                     Log.d(TAG, "onBroadcastStopFailed(), reason = " + reason);
-                    AudioSharingUtils.toastMessage(
-                            mContext, "Fail to stop broadcast, reason " + reason);
+                    if (mIsStoppingBroadcast) {
+                        mMetricsFeatureProvider.action(
+                                mContext,
+                                SettingsEnums.ACTION_AUDIO_SHARING_STOP_FAILED,
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
+                        AudioSharingUtils.toastMessage(
+                                mContext, "Fail to stop broadcast, reason " + reason);
+                        mIsStoppingBroadcast = false;
+                    }
                 }
 
                 @Override
@@ -122,7 +141,7 @@ public class AudioSharingDialogHandler {
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
-                    if (!mTargetSinks.isEmpty()) {
+                    if (mTargetSinks != null) {
                         AudioSharingUtils.addSourceToTargetSinks(mTargetSinks, mLocalBtManager);
                         new SubSettingLauncher(mContext)
                                 .setDestination(AudioSharingDashboardFragment.class.getName())
@@ -132,7 +151,7 @@ public class AudioSharingDialogHandler {
                                                         .getMetricsCategory()
                                                 : SettingsEnums.PAGE_UNKNOWN)
                                 .launch();
-                        mTargetSinks = new ArrayList<>();
+                        mTargetSinks = null;
                     }
                 }
 
@@ -201,6 +220,7 @@ public class AudioSharingDialogHandler {
             AudioSharingStopDialogFragment.DialogEventListener listener =
                     () -> {
                         cachedDevice.setActive();
+                        mIsStoppingBroadcast = true;
                         AudioSharingUtils.stopBroadcasting(mLocalBtManager);
                     };
             Pair<Integer, Object>[] eventData =

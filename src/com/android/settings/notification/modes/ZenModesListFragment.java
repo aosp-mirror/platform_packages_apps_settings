@@ -29,6 +29,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexable;
 
 import com.google.common.collect.ImmutableList;
