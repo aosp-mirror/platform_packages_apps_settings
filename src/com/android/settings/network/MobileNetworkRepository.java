@@ -18,7 +18,6 @@ package com.android.settings.network;
 import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
 import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
-import android.annotation.NonNull;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -38,6 +37,7 @@ import android.util.IndentingPrintWriter;
 import android.util.Log;
 
 import androidx.annotation.GuardedBy;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.internal.telephony.flags.Flags;

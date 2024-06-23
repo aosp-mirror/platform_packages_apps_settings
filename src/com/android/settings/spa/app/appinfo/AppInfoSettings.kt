@@ -18,9 +18,8 @@ package com.android.settings.spa.app.appinfo
 
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
-import android.content.pm.FeatureFlags
-import android.content.pm.FeatureFlagsImpl
 import android.os.Bundle
+import android.os.SystemProperties
 import android.os.UserHandle
 import android.util.FeatureFlagUtils
 import androidx.compose.runtime.Composable
@@ -39,6 +38,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppPreference
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
+import com.android.settings.spa.app.specialaccess.BackupTasksAppsListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
@@ -50,6 +50,9 @@ import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spaprivileged.model.app.toRoute
 import com.android.settingslib.spaprivileged.template.app.AppInfoProvider
+import kotlinx.coroutines.flow.MutableStateFlow
+import android.content.pm.FeatureFlags as PmFeatureFlags
+import android.content.pm.FeatureFlagsImpl as PmFeatureFlagsImpl
 
 private const val PACKAGE_NAME = "packageName"
 private const val USER_ID = "userId"
@@ -120,12 +123,12 @@ object AppInfoSettingsProvider : SettingsPageProvider {
 @Composable
 private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     val packageInfoState = packageInfoPresenter.flow.collectAsStateWithLifecycle()
-    val featureFlags: FeatureFlags = FeatureFlagsImpl()
+    val featureFlags: PmFeatureFlags = PmFeatureFlagsImpl()
     RegularScaffold(
         title = stringResource(R.string.application_info_label),
         actions = {
             packageInfoState.value?.applicationInfo?.let { app ->
-                if (featureFlags.archiving()) TopBarAppLaunchButton(packageInfoPresenter, app)
+                if (isArchivingEnabled(featureFlags)) TopBarAppLaunchButton(packageInfoPresenter, app)
                 AppInfoSettingsMoreOptions(packageInfoPresenter, app)
             }
         }
@@ -133,10 +136,11 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         val packageInfo = packageInfoState.value ?: return@RegularScaffold
         val app = packageInfo.applicationInfo ?: return@RegularScaffold
         val appInfoProvider = remember(packageInfo) { AppInfoProvider(packageInfo) }
+        val isHibernationSwitchEnabledStateFlow = MutableStateFlow(false)
 
         appInfoProvider.AppInfo()
 
-        AppButtons(packageInfoPresenter)
+        AppButtons(packageInfoPresenter, isHibernationSwitchEnabledStateFlow)
 
         AppSettingsPreference(app)
         AppAllServicesPreference(app)
@@ -152,7 +156,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         DefaultAppShortcuts(app)
 
         Category(title = stringResource(R.string.unused_apps_category)) {
-            HibernationSwitchPreference(app)
+            HibernationSwitchPreference(app, isHibernationSwitchEnabledStateFlow)
         }
 
         Category(title = stringResource(R.string.advanced_apps)) {
@@ -166,6 +170,9 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             if (Flags.enableVoiceActivationAppsInSettings()) {
                 VoiceActivationAppsListProvider.InfoPageEntryItem(app)
             }
+            if (Flags.enablePerformBackupTasksInSettings()) {
+                BackupTasksAppsListProvider.InfoPageEntryItem(app)
+            }
         }
 
         Category(title = stringResource(R.string.app_install_details_group_title)) {
@@ -174,3 +181,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         appInfoProvider.FooterAppVersion()
     }
 }
+
+fun isArchivingEnabled(featureFlags: PmFeatureFlags) =
+        featureFlags.archiving() || SystemProperties.getBoolean("pm.archiving.enabled", false)
+                || Flags.appArchiving()

@@ -25,6 +25,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.preference.Preference;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -32,12 +33,13 @@ import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowLog;
 
 @RunWith(RobolectricTestRunner.class)
@@ -47,22 +49,21 @@ public final class IncompatibleChargerTipTest {
     private FakeFeatureFactory mFeatureFactory;
     private IncompatibleChargerTip mIncompatibleChargerTip;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    private CardPreference mCardPreference;
 
+    @Rule public MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Mock private BatteryTip mBatteryTip;
     @Mock private Preference mPreference;
-    @Mock private CardPreference mCardPreference;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mIncompatibleChargerTip = new IncompatibleChargerTip(BatteryTip.StateType.NEW);
+        mCardPreference = new CardPreference(mContext);
 
         when(mPreference.getContext()).thenReturn(mContext);
-        when(mCardPreference.getContext()).thenReturn(mContext);
     }
 
     @Test
@@ -79,7 +80,8 @@ public final class IncompatibleChargerTipTest {
 
     @Test
     public void getIcon_showIcon() {
-        assertThat(mIncompatibleChargerTip.getIconId()).isEqualTo(R.drawable.ic_battery_charger);
+        assertThat(mIncompatibleChargerTip.getIconId())
+                .isEqualTo(R.drawable.ic_battery_incompatible_charger);
     }
 
     @Test
@@ -106,13 +108,13 @@ public final class IncompatibleChargerTipTest {
 
         mIncompatibleChargerTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setPrimaryButtonText(expected);
+        assertThat(mCardPreference.getPrimaryButtonText()).isEqualTo(expected);
     }
 
     @Test
     public void updatePreference_shouldSetSecondaryButtonVisible() {
         mIncompatibleChargerTip.updatePreference(mCardPreference);
-        verify(mCardPreference).setPrimaryButtonVisible(true);
+        assertThat(mCardPreference.getPrimaryButtonVisibility()).isTrue();
     }
 
     private String getLastErrorLog() {

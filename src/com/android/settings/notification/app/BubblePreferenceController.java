@@ -19,11 +19,11 @@ package com.android.settings.notification.app;
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
-import android.annotation.Nullable;
 import android.app.NotificationChannel;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 

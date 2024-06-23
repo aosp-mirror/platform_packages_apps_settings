@@ -18,14 +18,15 @@ package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.app.Application;
 import android.app.WallpaperColors;
 import android.app.WallpaperManager;
 import android.app.WallpaperManager.OnColorsChangedListener;
 import android.content.Context;
 import android.os.Handler;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.FallbackHome;
 
@@ -43,10 +44,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class FallbackHomeActivityTest {

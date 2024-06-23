@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import android.content.Context;
+import android.os.PowerManager;
 
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
@@ -26,37 +27,33 @@ import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 /** Detect whether the battery is too low */
 public class LowBatteryDetector implements BatteryTipDetector {
     private final BatteryInfo mBatteryInfo;
-    private final BatteryTipPolicy mPolicy;
+    private final BatteryTipPolicy mBatteryTipPolicy;
     private final boolean mIsPowerSaveMode;
     private final int mWarningLevel;
 
     public LowBatteryDetector(
-            Context context,
-            BatteryTipPolicy policy,
-            BatteryInfo batteryInfo,
-            boolean isPowerSaveMode) {
-        mPolicy = policy;
+            Context context, BatteryTipPolicy batteryTipPolicy, BatteryInfo batteryInfo) {
+        mBatteryTipPolicy = batteryTipPolicy;
         mBatteryInfo = batteryInfo;
         mWarningLevel =
                 context.getResources()
                         .getInteger(com.android.internal.R.integer.config_lowBatteryWarningLevel);
-        mIsPowerSaveMode = isPowerSaveMode;
+        mIsPowerSaveMode = context.getSystemService(PowerManager.class).isPowerSaveMode();
     }
 
     @Override
     public BatteryTip detect() {
         final boolean lowBattery = mBatteryInfo.batteryLevel <= mWarningLevel;
-        final boolean lowBatteryEnabled = mPolicy.lowBatteryEnabled && !mIsPowerSaveMode;
+        final boolean lowBatteryEnabled = mBatteryTipPolicy.lowBatteryEnabled && !mIsPowerSaveMode;
         final boolean dischargingLowBatteryState =
-                mPolicy.testLowBatteryTip || (mBatteryInfo.discharging && lowBattery);
-
-        int state = BatteryTip.StateType.INVISIBLE;
+                mBatteryTipPolicy.testLowBatteryTip || (mBatteryInfo.discharging && lowBattery);
 
         // Show it as new if in test or in discharging low battery state,
         // dismiss it if battery saver is on or disabled by config.
-        if (lowBatteryEnabled && dischargingLowBatteryState) {
-            state = BatteryTip.StateType.NEW;
-        }
+        final int state =
+                lowBatteryEnabled && dischargingLowBatteryState
+                        ? BatteryTip.StateType.NEW
+                        : BatteryTip.StateType.INVISIBLE;
 
         return new LowBatteryTip(state, mIsPowerSaveMode);
     }

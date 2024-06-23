@@ -52,6 +52,7 @@ import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowApplicationPackageManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -87,6 +88,7 @@ import java.util.List;
         ShadowUserManager.class,
         ShadowColorDisplayManager.class,
         ShadowApplicationPackageManager.class,
+        ShadowRestrictedLockUtilsInternal.class,
 })
 public class AccessibilitySettingsTest {
     private static final String PACKAGE_NAME = "com.android.test";

@@ -21,6 +21,7 @@ import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
 
 import android.annotation.UserIdInt;
 import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -155,6 +156,12 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     protected void setDefaultGuestRestrictions(Bundle restrictions) {
         mDefaultGuestUserRestriction = restrictions;
     }
+
+    @Implementation
+    protected UserProperties getUserProperties(UserHandle userHandle) {
+        return new UserProperties.Builder().build();
+    }
+
 
     public void addGuestUserRestriction(String restriction) {
         mDefaultGuestUserRestriction.putBoolean(restriction, true);

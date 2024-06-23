@@ -23,17 +23,24 @@ import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrol
 import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.SFPS_STAGE_RIGHT_EDGE;
 import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling.STAGE_UNKNOWN;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
+import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 
 import java.util.function.Function;
 
 public class SfpsEnrollmentFeatureImpl implements SfpsEnrollmentFeature {
+    @VisibleForTesting
+    public static final int HELP_ANIMATOR_DURATION = 550;
 
     @Nullable
     private FingerprintManager mFingerprintManager = null;
@@ -87,5 +94,17 @@ public class SfpsEnrollmentFeatureImpl implements SfpsEnrollmentFeature {
             mFingerprintManager = context.getSystemService(FingerprintManager.class);
         }
         return mFingerprintManager.getEnrollStageThreshold(index);
+    }
+
+    @Override
+    public Animator getHelpAnimator(@NonNull View target) {
+        final float translationX = 40;
+        final ObjectAnimator help = ObjectAnimator.ofFloat(target,
+                "translationX" /* propertyName */,
+                0, translationX, -1 * translationX, translationX, 0f);
+        help.setInterpolator(new AccelerateInterpolator());
+        help.setDuration(HELP_ANIMATOR_DURATION);
+        help.setAutoCancel(false);
+        return help;
     }
 }

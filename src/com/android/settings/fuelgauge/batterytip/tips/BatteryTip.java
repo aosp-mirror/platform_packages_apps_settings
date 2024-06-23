@@ -62,7 +62,8 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         TipType.BATTERY_DEFENDER,
         TipType.DOCK_DEFENDER,
         TipType.INCOMPATIBLE_CHARGER,
-        TipType.BATTERY_WARNING
+        TipType.BATTERY_WARNING,
+        TipType.WIRELESS_CHARGING_WARNING
     })
     public @interface TipType {
         int SMART_BATTERY_MANAGER = 0;
@@ -77,6 +78,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         int DOCK_DEFENDER = 9;
         int INCOMPATIBLE_CHARGER = 10;
         int BATTERY_WARNING = 11;
+        int WIRELESS_CHARGING_WARNING = 12;
     }
 
     @VisibleForTesting static final SparseIntArray TIP_ORDER;
@@ -95,6 +97,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         TIP_ORDER.append(TipType.REDUCED_BATTERY, 9);
         TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 10);
         TIP_ORDER.append(TipType.BATTERY_WARNING, 11);
+        TIP_ORDER.append(TipType.WIRELESS_CHARGING_WARNING, 12);
     }
 
     private static final String KEY_PREFIX = "key_battery_tip";

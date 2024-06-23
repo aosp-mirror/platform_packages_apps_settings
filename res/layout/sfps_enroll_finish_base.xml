@@ -24,6 +24,7 @@
 
     <LinearLayout
         style="@style/SudContentFrame"
+        android:id="@+id/sfps_enrollment_finish_content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -31,6 +32,7 @@
         android:clipChildren="false">
 
             <com.google.android.setupdesign.view.FillContentLayout
+                android:id="@+id/sfps_enrollment_finish_content_layout"
                 android:layout_width="@dimen/sfps_enrollment_finished_icon_max_size"
                 android:layout_height="@dimen/sfps_enrollment_finished_icon_max_size"
                 android:layout_marginTop="24dp"

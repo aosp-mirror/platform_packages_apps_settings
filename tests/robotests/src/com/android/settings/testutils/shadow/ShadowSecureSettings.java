@@ -16,6 +16,8 @@
 
 package com.android.settings.testutils.shadow;
 
+import static android.provider.Settings.DEFAULT_OVERRIDEABLE_BY_RESTORE;
+
 import android.content.ContentResolver;
 import android.provider.Settings;
 
@@ -24,12 +26,13 @@ import com.google.common.collect.Table;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.ShadowSettings;
 
 import java.util.Map;
 import java.util.WeakHashMap;
 
 @Implements(Settings.Secure.class)
-public class ShadowSecureSettings {
+public class ShadowSecureSettings extends ShadowSettings.ShadowSecure {
 
     private static final Map<ContentResolver, Table<Integer, String, Object>> sUserDataMap =
         new WeakHashMap<>();
@@ -48,12 +51,31 @@ public class ShadowSecureSettings {
         }
     }
 
+    /**
+     * Same implementation as Settings.Secure because robolectric.ShadowSettings.ShadowSecure
+     * overrides this API.
+     */
+    @Implementation
+    public static boolean putString(ContentResolver resolver, String name, String value) {
+        return putStringForUser(resolver, name, value, null, false,
+                resolver.getUserId(), DEFAULT_OVERRIDEABLE_BY_RESTORE);
+    }
+
     @Implementation
     public static String getStringForUser(ContentResolver resolver, String name, int userHandle) {
         final Table<Integer, String, Object> userTable = getUserTable(resolver);
         synchronized (userTable) {
             return (String) userTable.get(userHandle, name);
         }
+    }
+
+    /**
+     * Same implementation as Settings.Secure because robolectric.ShadowSettings.ShadowSecure
+     * overrides this API.
+     */
+    @Implementation
+    public static boolean putInt(ContentResolver resolver, String name, int value) {
+        return putIntForUser(resolver, name, value, resolver.getUserId());
     }
 
     @Implementation
@@ -64,6 +86,15 @@ public class ShadowSecureSettings {
             userTable.put(userHandle, name, value);
             return true;
         }
+    }
+
+    /**
+     * Same implementation as Settings.Secure because robolectric.ShadowSettings.ShadowSecure
+     * overrides this API.
+     */
+    @Implementation
+    public static int getInt(ContentResolver resolver, String name, int def) {
+        return getIntForUser(resolver, name, def, resolver.getUserId());
     }
 
     @Implementation

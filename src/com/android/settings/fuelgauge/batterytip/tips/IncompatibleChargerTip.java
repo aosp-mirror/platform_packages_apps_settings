@@ -16,17 +16,21 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Parcel;
 import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.widget.CardPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import kotlin.Unit;
 
 /** Tip to show incompatible charger state */
 public final class IncompatibleChargerTip extends BatteryTip {
@@ -52,7 +56,7 @@ public final class IncompatibleChargerTip extends BatteryTip {
 
     @Override
     public int getIconId() {
-        return R.drawable.ic_battery_charger;
+        return R.drawable.ic_battery_incompatible_charger;
     }
 
     @Override
@@ -77,18 +81,28 @@ public final class IncompatibleChargerTip extends BatteryTip {
         }
 
         cardPreference.setSelectable(false);
+        cardPreference.enableDismiss(false);
+        cardPreference.setIconResId(getIconId());
         cardPreference.setPrimaryButtonText(context.getString(R.string.learn_more));
-        cardPreference.setPrimaryButtonClickListener(
-                button ->
-                        button.startActivityForResult(
-                                HelpUtils.getHelpIntent(
-                                        context,
-                                        context.getString(R.string.help_url_incompatible_charging),
-                                        /* backupContext */ ""), /* requestCode */
-                                0));
-        cardPreference.setPrimaryButtonVisible(true);
+        cardPreference.setPrimaryButtonAction(
+                () -> {
+                    var helpIntent =
+                            HelpUtils.getHelpIntent(
+                                    context,
+                                    context.getString(R.string.help_url_incompatible_charging),
+                                    /* backupContext */ "");
+                    ActivityCompat.startActivityForResult(
+                            (Activity) context,
+                            helpIntent,
+                            /* requestCode= */ 0,
+                            /* options= */ null);
+
+                    return Unit.INSTANCE;
+                });
+        cardPreference.setPrimaryButtonVisibility(true);
         cardPreference.setPrimaryButtonContentDescription(
                 context.getString(R.string.battery_tip_incompatible_charging_content_description));
+        cardPreference.buildContent();
     }
 
     public static final Creator CREATOR =

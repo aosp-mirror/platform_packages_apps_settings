@@ -61,6 +61,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -77,6 +78,7 @@ import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.wifi.flags.Flags;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 
@@ -286,6 +288,12 @@ public class WifiConfigController2 implements TextWatcher,
         mDoNotProvideEapUserCertString =
             mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
         mInstallCertsString = mContext.getString(R.string.wifi_install_credentials);
+
+        if (Flags.androidVWifiApi() && mWifiEntrySecurity == WifiEntry.SECURITY_WEP) {
+            LinearLayout wepWarningLayout =
+                    (LinearLayout) mView.findViewById(R.id.wep_warning_layout);
+            wepWarningLayout.setVisibility(View.VISIBLE);
+        }
 
         mSsidScanButton = (ImageButton) mView.findViewById(R.id.ssid_scanner_button);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
@@ -1382,7 +1390,11 @@ public class WifiConfigController2 implements TextWatcher,
 
     @VisibleForTesting
     void setAnonymousIdVisible() {
-        mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+        View view = mView.findViewById(R.id.l_anonymous);
+        if (view.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        view.setVisibility(View.VISIBLE);
         mEapAnonymousView.setText(DEFAULT_ANONYMOUS_ID);
     }
 

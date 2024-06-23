@@ -31,6 +31,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -122,15 +123,15 @@ public class UseOneLockControllerSwitch extends AbstractPreferenceController
     }
 
     /** Method to handle onActivityResult */
-    public boolean handleActivityResult(int requestCode, int resultCode, Intent data) {
+    public boolean handleActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == UNUNIFY_PRIVATE_LOCK_FROM_DEVICE_REQUEST
-                  && resultCode == Activity.RESULT_OK) {
+                  && resultCode == Activity.RESULT_OK && data != null) {
             mCurrentDevicePassword =
                       data.getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             separateLocks();
             return true;
         } else if (requestCode == UNIFY_PRIVATE_LOCK_WITH_DEVICE_REQUEST
-                  && resultCode == Activity.RESULT_OK) {
+                  && resultCode == Activity.RESULT_OK && data != null) {
             mCurrentProfilePassword =
                       data.getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             unifyLocks();

@@ -23,9 +23,14 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.vibrator.Flags;
@@ -37,6 +42,7 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -49,18 +55,20 @@ import org.robolectric.RobolectricTestRunner;
 /** Tests for {@link KeyboardVibrationTogglePreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
 public class KeyboardVibrationTogglePreferenceControllerTest {
-
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
+    @Mock
+    private ContentResolver mContentResolver;
+
     private Context mContext;
     private Resources mResources;
     private KeyboardVibrationTogglePreferenceController mController;
-
     private SwitchPreference mPreference;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
@@ -68,6 +76,8 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mResources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(mResources);
+        when(mContext.getContentResolver()).thenReturn(mContentResolver);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new KeyboardVibrationTogglePreferenceController(mContext, "preferenceKey");
         mPreference = new SwitchPreference(mContext);
         when(mPreferenceScreen.findPreference(
@@ -79,6 +89,9 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
     public void getAvailabilityStatus_featureSupported_available() {
         mSetFlagsRule.enableFlags(Flags.FLAG_KEYBOARD_CATEGORY_ENABLED);
         when(mResources.getBoolean(R.bool.config_keyboard_vibration_supported)).thenReturn(true);
+        when(mResources.getFloat(
+                com.android.internal.R.dimen.config_keyboardHapticFeedbackFixedAmplitude))
+                .thenReturn(0.8f);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -148,6 +161,8 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
         mController.setChecked(true);
 
         assertThat(readSystemSetting(Settings.System.KEYBOARD_VIBRATION_ENABLED)).isEqualTo(ON);
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_KEYBOARD_VIBRATION_CHANGED), eq(true));
     }
 
     @Test
@@ -160,6 +175,8 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
         mController.setChecked(false);
 
         assertThat(readSystemSetting(Settings.System.KEYBOARD_VIBRATION_ENABLED)).isEqualTo(OFF);
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_KEYBOARD_VIBRATION_CHANGED), eq(false));
     }
 
     private void updateSystemSetting(String key, int value) {

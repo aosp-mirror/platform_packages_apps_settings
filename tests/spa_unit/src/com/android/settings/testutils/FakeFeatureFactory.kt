@@ -25,11 +25,13 @@ import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
+import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
+import com.android.settings.display.DisplayFeatureProvider
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider
@@ -145,5 +147,9 @@ class FakeFeatureFactory : FeatureFactory() {
     override val fastPairFeatureProvider: FastPairFeatureProvider
         get() = TODO("Not yet implemented")
     override val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val displayFeatureProvider: DisplayFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val audioSharingFeatureProvider: AudioSharingFeatureProvider
         get() = TODO("Not yet implemented")
 }

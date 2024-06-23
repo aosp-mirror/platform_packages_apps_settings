@@ -23,7 +23,7 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -70,9 +70,34 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
         boolean isFilterMatched = false;
         if (isDeviceConnected(cachedDevice) && isDeviceInCachedDevicesList(cachedDevice)) {
-            if (DBG) {
-                Log.d(TAG, "isFilterMatched() current audio profile : " + currentAudioProfile);
+            Log.d(TAG, "isFilterMatched() current audio profile : " + currentAudioProfile);
+
+            // If device is LE Audio, it is compatible with HFP and A2DP.
+            // It would show in Available Devices group if the audio sharing flag is disabled or
+            // the device is not in the audio sharing session.
+            if (cachedDevice.isConnectedLeAudioDevice()) {
+                boolean isAudioSharingFilterMatched =
+                        FeatureFactory.getFeatureFactory()
+                                .getAudioSharingFeatureProvider()
+                                .isAudioSharingFilterMatched(cachedDevice, mLocalManager);
+                if (!isAudioSharingFilterMatched) {
+                    Log.d(
+                            TAG,
+                            "isFilterMatched() device : "
+                                    + cachedDevice.getName()
+                                    + ", the LE Audio profile is connected and not in sharing "
+                                    + "if broadcast enabled.");
+                    return true;
+                } else {
+                    Log.d(
+                            TAG,
+                            "Filter out device : "
+                                    + cachedDevice.getName()
+                                    + ", it is in audio sharing.");
+                    return false;
+                }
             }
+
             // If device is Hearing Aid, it is compatible with HFP and A2DP.
             // It would show in Available Devices group.
             if (cachedDevice.isConnectedAshaHearingAidDevice()) {
@@ -83,20 +108,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                                 + ", the Hearing Aid profile is connected.");
                 return true;
             }
-            // If device is LE Audio, it is compatible with HFP and A2DP.
-            // It would show in Available Devices group if the audio sharing flag is disabled or
-            // the device is not in the audio sharing session.
-            if (cachedDevice.isConnectedLeAudioDevice()) {
-                if (!AudioSharingUtils.isFeatureEnabled()
-                        || !AudioSharingUtils.hasBroadcastSource(cachedDevice, mLocalManager)) {
-                    Log.d(
-                            TAG,
-                            "isFilterMatched() device : "
-                                    + cachedDevice.getName()
-                                    + ", the LE Audio profile is connected and not in sharing.");
-                    return true;
-                }
-            }
+
             // According to the current audio profile type,
             // this page will show the bluetooth device that have corresponding profile.
             // For example:
@@ -111,14 +123,12 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                     isFilterMatched = cachedDevice.isConnectedHfpDevice();
                     break;
             }
-            if (DBG) {
-                Log.d(
-                        TAG,
-                        "isFilterMatched() device : "
-                                + cachedDevice.getName()
-                                + ", isFilterMatched : "
-                                + isFilterMatched);
-            }
+            Log.d(
+                    TAG,
+                    "isFilterMatched() device : "
+                            + cachedDevice.getName()
+                            + ", isFilterMatched : "
+                            + isFilterMatched);
         }
         return isFilterMatched;
     }
@@ -128,13 +138,9 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
         final CachedBluetoothDevice device =
                 ((BluetoothDevicePreference) preference).getBluetoothDevice();
-        if (AudioSharingUtils.isFeatureEnabled()
-                && AudioSharingUtils.isBroadcasting(mLocalBtManager)) {
-            if (DBG) {
-                Log.d(TAG, "onPreferenceClick stop broadcasting.");
-            }
-            AudioSharingUtils.stopBroadcasting(mLocalBtManager);
-        }
+        FeatureFactory.getFeatureFactory()
+                .getAudioSharingFeatureProvider()
+                .handleMediaDeviceOnClick(mLocalManager);
         return device.setActive();
     }
 

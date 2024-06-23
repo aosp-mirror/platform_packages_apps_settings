@@ -21,6 +21,7 @@ import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
+import android.hardware.input.KeyboardLayoutSelectionResult;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -105,8 +106,13 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
     public void onActivityCreated(final Bundle icicle) {
         super.onActivityCreated(icicle);
         Bundle arguments = getArguments();
+        if (arguments == null) {
+            Log.e(TAG, "Arguments should not be null");
+            return;
+        }
         mInputDeviceIdentifier =
-                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
+                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                        InputDeviceIdentifier.class);
         if (mInputDeviceIdentifier == null) {
             Log.e(TAG, "The inputDeviceIdentifier should not be null");
             return;
@@ -128,6 +134,7 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         InputDevice inputDevice =
                 NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
         if (inputDevice == null) {
+            Log.e(TAG, "Unable to start: input device is null");
             getActivity().finish();
             return;
         }
@@ -174,7 +181,7 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
                     mapLanguageWithLayout(info, subtype);
                 }
             }
-            updatePreferenceLayout(preferenceScreen, info);
+            updatePreferenceLayout(preferenceScreen, info, infoList.size() > 1);
         }
     }
 
@@ -183,14 +190,15 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         KeyboardLayout[] keyboardLayouts =
                 NewKeyboardSettingsUtils.getKeyboardLayouts(
                         mIm, mUserId, mInputDeviceIdentifier, info, subtype);
-        String layout = NewKeyboardSettingsUtils.getKeyboardLayout(
+        KeyboardLayoutSelectionResult result = NewKeyboardSettingsUtils.getKeyboardLayout(
                 mIm, mUserId, mInputDeviceIdentifier, info, subtype);
-        if (layout != null) {
+        if (result.getLayoutDescriptor() != null) {
             for (int i = 0; i < keyboardLayouts.length; i++) {
-                if (keyboardLayouts[i].getDescriptor().equals(layout)) {
+                if (keyboardLayouts[i].getDescriptor().equals(result.getLayoutDescriptor())) {
                     KeyboardInfo keyboardInfo = new KeyboardInfo(
                             subtypeLabel,
                             keyboardLayouts[i].getLabel(),
+                            result.getSelectionCriteria(),
                             info,
                             subtype);
                     mKeyboardInfoList.add(keyboardInfo);
@@ -202,18 +210,22 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
             KeyboardInfo keyboardInfo = new KeyboardInfo(
                     subtypeLabel,
                     mContext.getString(R.string.keyboard_default_layout),
+                    KeyboardLayoutSelectionResult.LAYOUT_SELECTION_CRITERIA_UNSPECIFIED,
                     info,
                     subtype);
             mKeyboardInfoList.add(keyboardInfo);
         }
     }
 
-    private void updatePreferenceLayout(PreferenceScreen preferenceScreen, InputMethodInfo info) {
+    private void updatePreferenceLayout(PreferenceScreen preferenceScreen, InputMethodInfo info,
+            boolean hasMultipleImes) {
         if (mKeyboardInfoList.isEmpty()) {
             return;
         }
         PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
-        preferenceCategory.setTitle(info.loadLabel(mContext.getPackageManager()));
+        preferenceCategory.setTitle(hasMultipleImes ? mContext.getString(R.string.ime_label_title,
+                info.loadLabel(mContext.getPackageManager()))
+                : mContext.getString(R.string.enabled_locales_keyboard_layout));
         preferenceCategory.setKey(info.getPackageName());
         preferenceScreen.addPreference(preferenceCategory);
         Collections.sort(mKeyboardInfoList, new Comparator<KeyboardInfo>() {
@@ -228,7 +240,7 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
             final Preference pref = new Preference(mContext);
             pref.setKey(keyboardInfo.getPrefId());
             pref.setTitle(keyboardInfo.getSubtypeLabel());
-            pref.setSummary(keyboardInfo.getLayout());
+            pref.setSummary(keyboardInfo.getLayoutSummaryText(mContext));
             pref.setOnPreferenceClickListener(
                     preference -> {
                         showKeyboardLayoutPicker(

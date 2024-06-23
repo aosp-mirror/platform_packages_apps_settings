@@ -158,13 +158,14 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
     private void broadcastAppLocaleChange(LocaleStore.LocaleInfo localeInfo) {
         if (!localeNotificationEnabled()) {
+            Log.w(TAG, "Locale notification is not enabled");
             return;
         }
-        String localeTag = localeInfo.getLocale().toLanguageTag();
-        if (LocaleUtils.isInSystemLocale(localeTag) || localeInfo.isAppCurrentLocale()) {
+        if (localeInfo.isAppCurrentLocale()) {
             return;
         }
         try {
+            String localeTag = localeInfo.getLocale().toLanguageTag();
             int uid = getPackageManager().getApplicationInfo(mPackageName,
                     PackageManager.GET_META_DATA).uid;
             boolean launchNotification = mNotificationController.shouldTriggerNotification(
@@ -176,6 +177,8 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
                                 localeInfo.getFullNameNative()),
                         getString(R.string.desc_system_locale_addition),
                         localeTag);
+                mMetricsFeatureProvider.action(this,
+                        SettingsEnums.ACTION_NOTIFICATION_FOR_SYSTEM_LOCALE);
             }
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Unable to find info for package: " + mPackageName);

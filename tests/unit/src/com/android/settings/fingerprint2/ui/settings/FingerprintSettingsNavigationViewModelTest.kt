@@ -18,7 +18,7 @@ package com.android.settings.fingerprint2.ui.settings
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.settings.biometrics.BiometricEnrollBase
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.EnrollFirstFingerprint
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FinishSettings

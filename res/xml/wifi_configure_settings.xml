@@ -34,6 +34,11 @@
         settings:keywords="@string/keywords_wifi_notify_open_networks"
         settings:controller="com.android.settings.wifi.NotifyOpenNetworksPreferenceController"/>
 
+    <com.android.settings.spa.preference.ComposePreference
+        android:key="allow_wep_networks"
+        android:title="@string/wifi_allow_wep_networks"
+        settings:controller="com.android.settings.wifi.WepNetworksPreferenceController"/>
+
     <SwitchPreferenceCompat
         android:key="wifi_cellular_data_fallback"
         android:title="@string/wifi_cellular_data_fallback_title"

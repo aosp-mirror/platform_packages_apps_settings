@@ -27,6 +27,7 @@ import android.app.usage.UsageEvents
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Build
+import android.os.IUserManager
 import android.os.RemoteException
 import android.os.ServiceManager
 import android.util.Log
@@ -65,6 +66,9 @@ class AppNotificationRepository(
     ),
     private val notificationManager: INotificationManager = INotificationManager.Stub.asInterface(
         ServiceManager.getService(Context.NOTIFICATION_SERVICE)
+    ),
+    private val userManager: IUserManager = IUserManager.Stub.asInterface(
+            ServiceManager.getService(Context.USER_SERVICE)
     ),
 ) : IAppNotificationRepository {
     fun getAggregatedUsageEvents(userIdFlow: Flow<Int>): Flow<Map<String, NotificationSentState>> =
@@ -118,6 +122,15 @@ class AppNotificationRepository(
             true
         } catch (e: Exception) {
             Log.w(TAG, "Error calling INotificationManager", e)
+            false
+        }
+    }
+
+    fun isUserUnlocked(user: Int): Boolean {
+        return try {
+            userManager.isUserUnlocked(user)
+        } catch (e: Exception) {
+            Log.w(TAG, "Error calling UserManager", e)
             false
         }
     }

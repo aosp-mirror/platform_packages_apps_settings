@@ -16,13 +16,13 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.os.BadParcelableException;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;

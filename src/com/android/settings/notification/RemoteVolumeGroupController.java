@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaRouter2Manager;
@@ -53,6 +55,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
     @VisibleForTesting
     static final String SWITCHER_PREFIX = "OUTPUT_SWITCHER";
 
+    @Nullable
     private PreferenceCategory mPreferenceCategory;
     private final List<RoutingSessionInfo> mRoutingSessionInfos = new ArrayList<>();
 
@@ -61,6 +64,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
     @VisibleForTesting
     MediaRouter2Manager mRouterManager;
 
+    // Called via reflection from BasePreferenceController#createInstance().
     public RemoteVolumeGroupController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         if (mLocalMediaManager == null) {
@@ -69,6 +73,19 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             mLocalMediaManager.startScan();
         }
         mRouterManager = MediaRouter2Manager.getInstance(context);
+    }
+
+    @VisibleForTesting
+    /* package */ RemoteVolumeGroupController(
+            @NonNull Context context,
+            @NonNull String preferenceKey,
+            @NonNull LocalMediaManager localMediaManager,
+            @NonNull MediaRouter2Manager mediaRouter2Manager) {
+        super(context, preferenceKey);
+        mLocalMediaManager = localMediaManager;
+        mRouterManager = mediaRouter2Manager;
+        mLocalMediaManager.registerCallback(this);
+        mLocalMediaManager.startScan();
     }
 
     @Override

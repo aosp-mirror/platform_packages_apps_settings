@@ -31,6 +31,7 @@ import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.SpaAppBridgeActivity.Companion.getDestinationForApp
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
+import com.android.settings.spa.app.specialaccess.BackupTasksAppsListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
@@ -68,6 +69,8 @@ object SettingsActivityUtil {
             NfcTagAppsSettingsProvider.getAppInfoRoutePrefix(),
         VoiceActivationAppsListProvider::class.qualifiedName to
             VoiceActivationAppsListProvider.getAppInfoRoutePrefix(),
+        BackupTasksAppsListProvider::class.qualifiedName to
+            BackupTasksAppsListProvider.getAppInfoRoutePrefix(),
     )
 
     @JvmStatic

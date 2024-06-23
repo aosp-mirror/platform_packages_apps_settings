@@ -16,7 +16,6 @@
 
 package com.android.settings.testutils.shadow;
 
-import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
@@ -25,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Implements(android.provider.DeviceConfig.class)
-public class ShadowDeviceConfig {
+public class ShadowDeviceConfig extends org.robolectric.shadows.ShadowDeviceConfig {
 
     private static Map<String, String> sPropertyMaps = new HashMap<>();
 

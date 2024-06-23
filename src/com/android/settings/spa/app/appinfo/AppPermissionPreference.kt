@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,15 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
+import com.android.settingslib.spaprivileged.framework.compose.placeholder
 import com.android.settingslib.spaprivileged.model.app.userHandle
+import kotlinx.coroutines.flow.Flow
 
 private const val TAG = "AppPermissionPreference"
 private const val EXTRA_HIDE_INFO_BUTTON = "hideInfoButton"
@@ -38,14 +38,11 @@ private const val EXTRA_HIDE_INFO_BUTTON = "hideInfoButton"
 @Composable
 fun AppPermissionPreference(
     app: ApplicationInfo,
-    summaryLiveData: LiveData<AppPermissionSummaryState> = rememberAppPermissionSummary(app),
+    summaryFlow: Flow<AppPermissionSummaryState> = rememberAppPermissionSummary(app),
 ) {
     val context = LocalContext.current
-    val summaryState = summaryLiveData.observeAsState(
-        initial = AppPermissionSummaryState(
-            summary = stringResource(R.string.summary_placeholder),
-            enabled = false,
-        )
+    val summaryState = summaryFlow.collectAsStateWithLifecycle(
+        initialValue = AppPermissionSummaryState(summary = placeholder(), enabled = false),
     )
     Preference(
         model = remember {

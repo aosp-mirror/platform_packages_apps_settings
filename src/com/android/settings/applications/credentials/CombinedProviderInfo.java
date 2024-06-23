@@ -16,17 +16,22 @@
 
 package com.android.settings.applications.credentials;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ServiceInfo;
 import android.credentials.CredentialProviderInfo;
 import android.graphics.drawable.Drawable;
+import android.os.UserHandle;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.util.IconDrawableFactory;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,6 +46,11 @@ import java.util.Set;
  * logic for each row in settings.
  */
 public final class CombinedProviderInfo {
+    private static final String TAG = "CombinedProviderInfo";
+    private static final String SETTINGS_ACTIVITY_INTENT_ACTION = "android.intent.action.MAIN";
+    private static final String SETTINGS_ACTIVITY_INTENT_CATEGORY =
+            "android.intent.category.DEFAULT";
+
     private final List<CredentialProviderInfo> mCredentialProviderInfos;
     private final @Nullable AutofillServiceInfo mAutofillServiceInfo;
     private final boolean mIsDefaultAutofillProvider;
@@ -314,5 +324,49 @@ public final class CombinedProviderInfo {
         }
 
         return cmpi;
+    }
+
+    public static @Nullable Intent createSettingsActivityIntent(
+            @Nullable CharSequence packageName,
+            @Nullable CharSequence settingsActivity) {
+        if (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(settingsActivity)) {
+            return null;
+        }
+
+        ComponentName cn =
+                new ComponentName(String.valueOf(packageName), String.valueOf(settingsActivity));
+        if (cn == null) {
+            Log.e(
+                    TAG,
+                    "Failed to deserialize settingsActivity attribute, we got: "
+                            + String.valueOf(packageName)
+                            + " and "
+                            + String.valueOf(settingsActivity));
+            return null;
+        }
+
+        Intent intent = new Intent(SETTINGS_ACTIVITY_INTENT_ACTION);
+        intent.addCategory(SETTINGS_ACTIVITY_INTENT_CATEGORY);
+        intent.setComponent(cn);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
+    }
+
+    /** Launches the settings activity intent. */
+    public static void launchSettingsActivityIntent(
+            @NonNull Context context,
+            @Nullable CharSequence packageName,
+            @Nullable CharSequence settingsActivity,
+            int userId) {
+        Intent settingsIntent = createSettingsActivityIntent(packageName, settingsActivity);
+        if (settingsIntent == null) {
+            return;
+        }
+
+        try {
+            context.startActivityAsUser(settingsIntent, UserHandle.of(userId));
+        } catch (ActivityNotFoundException e) {
+            Log.e(TAG, "Failed to open settings activity", e);
+        }
     }
 }

@@ -27,7 +27,7 @@ import android.util.Log
 import android.widget.ImeAwareEditText
 import androidx.appcompat.app.AlertDialog
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
 import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -78,7 +78,7 @@ class FingerprintSettingsRenameDialog : InstrumentedDialogFragment() {
           end: Int,
           dest: Spanned?,
           dstart: Int,
-          dend: Int
+          dend: Int,
         ): CharSequence? {
           for (index in start until end) {
             val c = source[index]
@@ -133,13 +133,13 @@ class FingerprintSettingsRenameDialog : InstrumentedDialogFragment() {
         val bundle = Bundle()
         bundle.putObject(
           KEY_FINGERPRINT,
-          android.hardware.fingerprint.Fingerprint(fp.name, fp.fingerId, fp.deviceId)
+          android.hardware.fingerprint.Fingerprint(fp.name, fp.fingerId, fp.deviceId),
         )
         dialog.arguments = bundle
         Log.d(TAG, "showing dialog $dialog")
         dialog.show(
           target.parentFragmentManager,
-          FingerprintSettingsRenameDialog::class.java.toString()
+          FingerprintSettingsRenameDialog::class.java.toString(),
         )
       }
   }

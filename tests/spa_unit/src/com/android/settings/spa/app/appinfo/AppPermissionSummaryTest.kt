@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito.mockitoSession
@@ -27,50 +26,42 @@ import com.android.settings.R
 import com.android.settings.testutils.mockAsUser
 import com.android.settingslib.applications.PermissionsSummaryHelper
 import com.android.settingslib.applications.PermissionsSummaryHelper.PermissionsResultCallback
-import com.android.settingslib.spa.testutils.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.any
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.eq
-import org.mockito.Mockito.never
-import org.mockito.Mockito.verify
 import org.mockito.MockitoSession
-import org.mockito.Spy
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
-import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class AppPermissionSummaryTest {
-    @get:Rule
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var mockSession: MockitoSession
 
-    @Spy
-    private var context: Context = ApplicationProvider.getApplicationContext()
+    private val mockPackageManager = mock<PackageManager>()
 
-    @Mock
-    private lateinit var packageManager: PackageManager
+    private var context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        mock.mockAsUser()
+        on { packageManager } doReturn mockPackageManager
+    }
 
-    private lateinit var summaryLiveData: AppPermissionSummaryLiveData
+    private val summaryRepository = AppPermissionSummaryRepository(context, APP)
 
     @Before
     fun setUp() {
         mockSession = mockitoSession()
-            .initMocks(this)
             .mockStatic(PermissionsSummaryHelper::class.java)
             .strictness(Strictness.LENIENT)
             .startMocking()
-        context.mockAsUser()
-        whenever(context.packageManager).thenReturn(packageManager)
-
-        summaryLiveData = AppPermissionSummaryLiveData(context, APP)
     }
 
     private fun mockGetPermissionSummary(
@@ -95,22 +86,10 @@ class AppPermissionSummaryTest {
     }
 
     @Test
-    fun permissionsChangeListener() {
-        mockGetPermissionSummary()
-
-        summaryLiveData.getOrAwaitValue {
-            verify(packageManager).addOnPermissionsChangeListener(any())
-            verify(packageManager, never()).removeOnPermissionsChangeListener(any())
-        }
-
-        verify(packageManager).removeOnPermissionsChangeListener(any())
-    }
-
-    @Test
-    fun summary_noPermissionsRequested() {
+    fun summary_noPermissionsRequested() = runBlocking {
         mockGetPermissionSummary(requestedPermissionCount = 0)
 
-        val (summary, enabled) = summaryLiveData.getOrAwaitValue()!!
+        val (summary, enabled) = summaryRepository.flow.first()
 
         assertThat(summary).isEqualTo(
             context.getString(R.string.runtime_permissions_summary_no_permissions_requested)
@@ -119,10 +98,10 @@ class AppPermissionSummaryTest {
     }
 
     @Test
-    fun summary_noPermissionsGranted() {
+    fun summary_noPermissionsGranted() = runBlocking {
         mockGetPermissionSummary(requestedPermissionCount = 1, grantedGroupLabels = emptyList())
 
-        val (summary, enabled) = summaryLiveData.getOrAwaitValue()!!
+        val (summary, enabled) = summaryRepository.flow.first()
 
         assertThat(summary).isEqualTo(
             context.getString(R.string.runtime_permissions_summary_no_permissions_granted)
@@ -131,34 +110,34 @@ class AppPermissionSummaryTest {
     }
 
     @Test
-    fun onPermissionSummaryResult_hasRuntimePermission_shouldSetPermissionAsSummary() {
+    fun summary_hasRuntimePermission_usePermissionAsSummary() = runBlocking {
         mockGetPermissionSummary(
             requestedPermissionCount = 1,
             grantedGroupLabels = listOf(PERMISSION),
         )
 
-        val (summary, enabled) = summaryLiveData.getOrAwaitValue()!!
+        val (summary, enabled) = summaryRepository.flow.first()
 
         assertThat(summary).isEqualTo(PERMISSION)
         assertThat(enabled).isTrue()
     }
 
     @Test
-    fun onPermissionSummaryResult_hasAdditionalPermission_shouldSetAdditionalSummary() {
+    fun summary_hasAdditionalPermission_containsAdditionalSummary() = runBlocking {
         mockGetPermissionSummary(
             requestedPermissionCount = 5,
             additionalGrantedPermissionCount = 2,
             grantedGroupLabels = listOf(PERMISSION),
         )
 
-        val (summary, enabled) = summaryLiveData.getOrAwaitValue()!!
+        val (summary, enabled) = summaryRepository.flow.first()
 
         assertThat(summary).isEqualTo("Storage and 2 additional permissions")
         assertThat(enabled).isTrue()
     }
 
     private companion object {
-        const val PACKAGE_NAME = "packageName"
+        const val PACKAGE_NAME = "package.name"
         const val PERMISSION = "Storage"
         val APP = ApplicationInfo().apply {
             packageName = PACKAGE_NAME

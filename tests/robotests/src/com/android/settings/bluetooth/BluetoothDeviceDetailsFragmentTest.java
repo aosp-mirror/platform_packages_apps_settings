@@ -18,6 +18,8 @@ package com.android.settings.bluetooth;
 
 import static android.bluetooth.BluetoothDevice.BOND_NONE;
 
+import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceControlsController.KEY_DEVICE_CONTROLS_GENERAL_GROUP;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -29,8 +31,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.companion.CompanionDeviceManager;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -49,6 +53,8 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import com.google.common.collect.ImmutableList;
 
@@ -64,6 +70,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenu;
+
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -214,6 +222,38 @@ public class BluetoothDeviceDetailsFragmentTest {
         mFragment.finishFragmentIfNecessary();
 
         verify(mFragment).finish();
+    }
+
+    @Test
+    public void createPreferenceControllers_launchFromHAPage_deviceControllerNotExist() {
+        BluetoothDeviceDetailsFragment fragment = setupFragment();
+        Intent intent = fragment.getActivity().getIntent();
+        intent.putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
+                SettingsEnums.ACCESSIBILITY_HEARING_AID_SETTINGS);
+        fragment.onAttach(mContext);
+
+        List<AbstractPreferenceController> controllerList = fragment.createPreferenceControllers(
+                mContext);
+
+        assertThat(controllerList.stream()
+                .anyMatch(controller -> controller.getPreferenceKey().equals(
+                        KEY_DEVICE_CONTROLS_GENERAL_GROUP))).isFalse();
+    }
+
+    @Test
+    public void createPreferenceControllers_notLaunchFromHAPage_deviceControllerExist() {
+        BluetoothDeviceDetailsFragment fragment = setupFragment();
+        Intent intent = fragment.getActivity().getIntent();
+        intent.putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
+                SettingsEnums.PAGE_UNKNOWN);
+        fragment.onAttach(mContext);
+
+        List<AbstractPreferenceController> controllerList = fragment.createPreferenceControllers(
+                mContext);
+
+        assertThat(controllerList.stream()
+                .anyMatch(controller -> controller.getPreferenceKey().equals(
+                        KEY_DEVICE_CONTROLS_GENERAL_GROUP))).isTrue();
     }
 
     private InputDevice createInputDeviceWithMatchingBluetoothAddress() {

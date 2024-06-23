@@ -14,13 +14,14 @@
 
 package com.android.settings.fuelgauge;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 public class BatteryActiveView extends View {
 

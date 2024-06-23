@@ -22,7 +22,7 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceViewHolder
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.settingslib.widget.TwoTargetPreference
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -30,10 +30,10 @@ import kotlinx.coroutines.launch
 private const val TAG = "FingerprintSettingsPreference"
 
 class FingerprintSettingsPreference(
-    context: Context,
-    val fingerprintViewModel: FingerprintData,
-    val fragment: FingerprintSettingsV2Fragment,
-    val isLastFingerprint: Boolean
+  context: Context,
+  val fingerprintViewModel: FingerprintData,
+  val fragment: FingerprintSettingsV2Fragment,
+  val isLastFingerprint: Boolean,
 ) : TwoTargetPreference(context) {
   private lateinit var myView: View
 

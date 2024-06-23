@@ -154,6 +154,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (shouldShowSplitScreenDialog()) {
+            BiometricsSplitScreenDialog
+                    .newInstance(getModality(), !WizardManagerHelper.isAnySetupWizard(getIntent()))
+                    .show(getSupportFragmentManager(), BiometricsSplitScreenDialog.class.getName());
+        }
+
         if (savedInstanceState != null) {
             mConfirmingCredentials = savedInstanceState.getBoolean(KEY_CONFIRMING_CREDENTIALS);
             mHasScrolledToBottom = savedInstanceState.getBoolean(KEY_SCROLLED_TO_BOTTOM);
@@ -293,6 +299,13 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
     @Override
     protected void onNextButtonClick(View view) {
+        // If it's not on suw, this method shouldn't be accessed.
+        if (shouldShowSplitScreenDialog() && WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            BiometricsSplitScreenDialog.newInstance(getModality(), false /*destroyActivity*/)
+                    .show(getSupportFragmentManager(), BiometricsSplitScreenDialog.class.getName());
+            return;
+        }
+
         mNextClicked = true;
         if (checkMaxEnrolled() == 0) {
             // Lock thingy is already set up, launch directly to the next page

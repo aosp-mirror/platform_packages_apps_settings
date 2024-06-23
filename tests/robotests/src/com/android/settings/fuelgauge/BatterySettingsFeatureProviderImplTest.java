@@ -22,10 +22,16 @@ import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+
+import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatterySettingsFeatureProviderImplTest {
@@ -51,5 +57,16 @@ public class BatterySettingsFeatureProviderImplTest {
     @Test
     public void isBatteryInfoEnabled_returnFalse() {
         assertThat(mImpl.isBatteryInfoEnabled(mContext)).isFalse();
+    }
+
+    @Test
+    public void addBatteryTipDetector_containsLowBatteryTip() {
+        var tips = new ArrayList<BatteryTip>();
+
+        mImpl.addBatteryTipDetector(
+                mContext, tips, new BatteryInfo(), new BatteryTipPolicy(mContext));
+
+        var expectedResult = tips.stream().anyMatch(tip -> tip instanceof LowBatteryTip);
+        assertThat(expectedResult).isTrue();
     }
 }
