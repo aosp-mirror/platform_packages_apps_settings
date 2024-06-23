@@ -62,7 +62,7 @@ public class PoliteNotifWorkProfileToggleController extends TogglePreferenceCont
     @Override
     public boolean isChecked() {
         return Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.NOTIFICATION_COOLDOWN_ENABLED, OFF, mManagedProfileId) != OFF;
+                Settings.System.NOTIFICATION_COOLDOWN_ENABLED, ON, mManagedProfileId) != OFF;
     }
 
     @Override

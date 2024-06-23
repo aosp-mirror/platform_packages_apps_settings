@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature;
+import com.android.settings.biometrics.fingerprint.feature.SfpsRestToUnlockFeature;
 
 public interface FingerprintFeatureProvider {
     /**
@@ -44,4 +45,11 @@ public interface FingerprintFeatureProvider {
             @Nullable Bundle activitySavedInstanceState, @Nullable Intent activityIntent) {
         return null;
     }
+
+    /**
+     * Gets the feature implementation of SFPS rest to unlock.
+     * @param context context
+     * @return the feature implementation
+     */
+    SfpsRestToUnlockFeature getSfpsRestToUnlockFeature(@NonNull Context context);
 }

@@ -22,6 +22,7 @@ import android.view.LayoutInflater
 import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -30,7 +31,6 @@ import com.android.settings.R
 import com.android.settings.biometrics.fingerprint.FingerprintErrorDialog
 import com.android.settings.biometrics.fingerprint.FingerprintFindSensorAnimation
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollFindSensorViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
@@ -50,23 +50,39 @@ private const val TAG = "FingerprintEnrollFindSensorV2Fragment"
  * 2. Explain to the user how the enrollment process shown by [FingerprintEnrollEnrollingV2Fragment]
  *    will work.
  */
-class FingerprintEnrollFindSensorV2Fragment : Fragment() {
+class FingerprintEnrollFindSensorV2Fragment(val sensorType: FingerprintSensorType) : Fragment() {
+  /** Used for testing purposes */
+  private var factory: ViewModelProvider.Factory? = null
+
+  @VisibleForTesting
+  constructor(
+    sensorType: FingerprintSensorType,
+    theFactory: ViewModelProvider.Factory,
+  ) : this(sensorType) {
+    factory = theFactory
+  }
+
+  private val viewModelProvider: ViewModelProvider by lazy {
+    if (factory != null) {
+      ViewModelProvider(requireActivity(), factory!!)
+    } else {
+      ViewModelProvider(requireActivity())
+    }
+  }
+
   // This is only for non-udfps or non-sfps sensor. For udfps and sfps, we show lottie.
   private var animation: FingerprintFindSensorAnimation? = null
 
   private var contentLayoutId: Int = -1
   private val viewModel: FingerprintEnrollFindSensorViewModel by lazy {
-    ViewModelProvider(requireActivity())[FingerprintEnrollFindSensorViewModel::class.java]
+    viewModelProvider[FingerprintEnrollFindSensorViewModel::class.java]
   }
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View? {
-
-    val sensorType =
-      ViewModelProvider(requireActivity())[FingerprintEnrollViewModel::class.java].sensorTypeCached
 
     contentLayoutId =
       when (sensorType) {
@@ -76,47 +92,43 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
         else -> R.layout.fingerprint_v2_enroll_find_sensor
       }
 
-    return inflater.inflate(contentLayoutId, container, false).also { it ->
-      val view = it!! as GlifLayout
+    val view = inflater.inflate(contentLayoutId, container, false)!! as GlifLayout
+    setTexts(sensorType, view)
 
-      // Set up header and description
-      lifecycleScope.launch { viewModel.sensorType.collect { setTexts(it, view) } }
+    // Set up footer bar
+    val footerBarMixin = view.getMixin(FooterBarMixin::class.java)
+    setupSecondaryButton(footerBarMixin)
+    lifecycleScope.launch {
+      viewModel.showPrimaryButton.collect { setupPrimaryButton(footerBarMixin) }
+    }
 
-      // Set up footer bar
-      val footerBarMixin = view.getMixin(FooterBarMixin::class.java)
-      setupSecondaryButton(footerBarMixin)
-      lifecycleScope.launch {
-        viewModel.showPrimaryButton.collect { setupPrimaryButton(footerBarMixin) }
-      }
-
-      // Set up lottie or animation
-      lifecycleScope.launch {
-        viewModel.sfpsLottieInfo.collect { (isFolded, rotation) ->
-          setupLottie(view, getSfpsIllustrationLottieAnimation(isFolded, rotation))
-        }
-      }
-      lifecycleScope.launch {
-        viewModel.udfpsLottieInfo.collect { isAccessibilityEnabled ->
-          val lottieAnimation =
-            if (isAccessibilityEnabled) R.raw.udfps_edu_a11y_lottie else R.raw.udfps_edu_lottie
-          setupLottie(view, lottieAnimation) { viewModel.proceedToEnrolling() }
-        }
-      }
-      lifecycleScope.launch {
-        viewModel.showRfpsAnimation.collect {
-          animation =
-            view.findViewById(R.id.fingerprint_sensor_location_animation)
-          animation!!.startAnimation()
-        }
-      }
-
-      lifecycleScope.launch {
-        viewModel.showErrorDialog.collect { (errMsgId, isSetup) ->
-          // TODO: Covert error dialog kotlin as well
-          FingerprintErrorDialog.showErrorDialog(requireActivity(), errMsgId, isSetup)
-        }
+    // Set up lottie or animation
+    lifecycleScope.launch {
+      viewModel.sfpsLottieInfo.collect { (isFolded, rotation) ->
+        setupLottie(view, getSfpsIllustrationLottieAnimation(isFolded, rotation))
       }
     }
+    lifecycleScope.launch {
+      viewModel.udfpsLottieInfo.collect { isAccessibilityEnabled ->
+        val lottieAnimation =
+          if (isAccessibilityEnabled) R.raw.udfps_edu_a11y_lottie else R.raw.udfps_edu_lottie
+        setupLottie(view, lottieAnimation) { viewModel.proceedToEnrolling() }
+      }
+    }
+    lifecycleScope.launch {
+      viewModel.showRfpsAnimation.collect {
+        animation = view.findViewById(R.id.fingerprint_sensor_location_animation)
+        animation!!.startAnimation()
+      }
+    }
+
+    lifecycleScope.launch {
+      viewModel.showErrorDialog.collect { (errMsgId, isSetup) ->
+        // TODO: Covert error dialog kotlin as well
+        FingerprintErrorDialog.showErrorDialog(requireActivity(), errMsgId, isSetup)
+      }
+    }
+    return view
   }
 
   override fun onDestroy() {
@@ -128,14 +140,7 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
     footerBarMixin.secondaryButton =
       FooterButton.Builder(requireActivity())
         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
-        .setListener {
-          run {
-            // TODO: Show the dialog for suw
-            Log.d(TAG, "onSkipClicked")
-            // TODO: Finish activity in the root activity instead.
-            requireActivity().finish()
-          }
-        }
+        .setListener { viewModel.secondaryButtonClicked() }
         .setButtonType(FooterButton.ButtonType.SKIP)
         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
         .build()
@@ -146,10 +151,8 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
       FooterButton.Builder(requireActivity())
         .setText(R.string.security_settings_udfps_enroll_find_sensor_start_button)
         .setListener {
-          run {
-            Log.d(TAG, "onStartButtonClick")
-            viewModel.proceedToEnrolling()
-          }
+          Log.d(TAG, "onStartButtonClick")
+          viewModel.proceedToEnrolling()
         }
         .setButtonType(FooterButton.ButtonType.NEXT)
         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
@@ -159,7 +162,7 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
   private fun setupLottie(
     view: View,
     lottieAnimation: Int,
-    lottieClickListener: View.OnClickListener? = null
+    lottieClickListener: View.OnClickListener? = null,
   ) {
     val illustrationLottie: LottieAnimationView? = view.findViewById(R.id.illustration_lottie)
     illustrationLottie?.setAnimation(lottieAnimation)
@@ -168,7 +171,7 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
     illustrationLottie?.visibility = View.VISIBLE
   }
 
-  private fun setTexts(sensorType: FingerprintSensorType, view: GlifLayout) {
+  private fun setTexts(sensorType: FingerprintSensorType?, view: GlifLayout) {
     when (sensorType) {
       FingerprintSensorType.UDFPS_OPTICAL,
       FingerprintSensorType.UDFPS_ULTRASONIC -> {

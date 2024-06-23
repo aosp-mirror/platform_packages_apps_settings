@@ -16,10 +16,11 @@
 
 package com.android.settings.testutils.shadow;
 
-import android.annotation.NonNull;
 import android.app.ApplicationPackageManager;
 import android.content.pm.PackageInfo;
 import android.os.IRemoteCallback;
+
+import androidx.annotation.NonNull;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;

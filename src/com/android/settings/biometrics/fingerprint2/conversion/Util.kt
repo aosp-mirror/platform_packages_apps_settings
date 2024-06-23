@@ -20,8 +20,8 @@ import android.hardware.biometrics.BiometricFingerprintConstants.FINGERPRINT_ERR
 import android.hardware.biometrics.BiometricFingerprintConstants.FINGERPRINT_ERROR_UNABLE_TO_PROCESS
 import android.hardware.fingerprint.FingerprintManager
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 
 object Util {
   fun EnrollReason.toOriginalReason(): Int {
@@ -71,6 +71,4 @@ object Util {
       this == FINGERPRINT_ERROR_CANCELED,
     )
   }
-
 }
-

@@ -27,7 +27,7 @@ import org.robolectric.annotation.Implements;
 import java.util.Set;
 
 @Implements(NotificationManager.class)
-public class ShadowNotificationManager {
+public class ShadowNotificationManager extends org.robolectric.shadows.ShadowNotificationManager {
 
     private int mZenMode;
     private ZenModeConfig mZenModeConfig;

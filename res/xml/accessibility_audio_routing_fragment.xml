@@ -46,10 +46,10 @@
         android:entries="@array/bluetooth_audio_routing_titles"
         android:entryValues="@array/bluetooth_audio_routing_values"
         android:summary="%s"
-        android:key="audio_routing_system_sounds"
+        android:key="audio_routing_notification"
         android:persistent="false"
-        android:title="@string/bluetooth_system_sounds_title"
-        settings:controller="com.android.settings.accessibility.HearingDeviceSystemSoundsRoutingPreferenceController" />
+        android:title="@string/bluetooth_notification_title"
+        settings:controller="com.android.settings.accessibility.HearingDeviceNotificationRoutingPreferenceController" />
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="hearing_device_footer"

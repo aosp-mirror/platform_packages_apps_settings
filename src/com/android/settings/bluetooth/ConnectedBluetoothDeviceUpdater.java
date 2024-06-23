@@ -24,7 +24,9 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.flags.Flags;
 
 /**
  * Controller to maintain connected bluetooth devices
@@ -93,6 +95,15 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
             if (DBG) {
                 Log.d(TAG, "isFilterMatched() device : " +
                         cachedDevice.getName() + ", isFilterMatched : " + isFilterMatched);
+            }
+        }
+        if (Flags.enableHideExclusivelyManagedBluetoothDevice()) {
+            if (BluetoothUtils.isExclusivelyManagedBluetoothDevice(mContext,
+                    cachedDevice.getDevice())) {
+                if (DBG) {
+                    Log.d(TAG, "isFilterMatched() hide BluetoothDevice with exclusive manager");
+                }
+                return false;
             }
         }
         return isFilterMatched;

@@ -92,7 +92,7 @@ public class SwitchToRemovableSlotSidecar extends EuiccOperationSidecar
         mPhysicalSlotId = physicalSlotId;
         mRemovedSubInfo = removedSubInfo;
         SubscriptionManager subscriptionManager =
-                getContext().getSystemService(SubscriptionManager.class);
+                getContext().getSystemService(SubscriptionManager.class).createForAllUserProfiles();
         if (!mTelephonyManager.isMultiSimEnabled()
                 && SubscriptionUtil.getActiveSubscriptions(subscriptionManager).stream().anyMatch(
                 SubscriptionInfo::isEmbedded)) {

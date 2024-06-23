@@ -25,12 +25,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/security_settings_fingerprint_enroll_find_sensor_content_description"
-        android:src="@drawable/fingerprint_sensor_location"
-        android:scaleType="centerInside"/>
+        android:scaleType="centerInside"
+        android:src="@drawable/fingerprint_sensor_location" />
 
     <com.android.settings.biometrics.fingerprint.FingerprintLocationAnimationView
         android:id="@+id/fingerprint_sensor_location_animation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </FrameLayout>

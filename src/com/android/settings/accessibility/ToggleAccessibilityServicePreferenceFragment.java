@@ -47,7 +47,7 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
-import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -330,7 +330,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
         final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
-                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                mComponentName.flattenToString());
         if (preference.isChecked()) {
             final boolean isWarningRequired;
             if (android.view.accessibility.Flags.cleanupAccessibilityWarningDialog()) {
@@ -507,7 +507,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mShortcutPreference.setChecked(true);
 
         final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
-                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                mComponentName.flattenToString());
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
 
         mIsDialogShown.set(false);
@@ -539,7 +539,17 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private void onAllowButtonFromShortcutClicked() {
         mIsDialogShown.set(false);
-        showPopupDialog(DialogEnums.EDIT_SHORTCUT);
+        if (Flags.editShortcutsInFullScreen()) {
+            EditShortcutsPreferenceFragment.showEditShortcutScreen(
+                    getContext(),
+                    getMetricsCategory(),
+                    getShortcutTitle(),
+                    mComponentName,
+                    getIntent()
+            );
+        } else {
+            showPopupDialog(DialogEnums.EDIT_SHORTCUT);
+        }
 
         if (mWarningDialog != null) {
             mWarningDialog.dismiss();

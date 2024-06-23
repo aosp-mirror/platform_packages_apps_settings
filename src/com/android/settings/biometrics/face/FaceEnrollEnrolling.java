@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.face;
 
+import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FACE;
+
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
@@ -33,6 +35,7 @@ import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricErrorDialog;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
+import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.slices.CustomSliceRegistry;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -88,6 +91,10 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (shouldShowSplitScreenDialog()) {
+            BiometricsSplitScreenDialog.newInstance(TYPE_FACE, true /*destroyActivity*/)
+                    .show(getSupportFragmentManager(), BiometricsSplitScreenDialog.class.getName());
+        }
         setContentView(R.layout.face_enroll_enrolling);
         setHeaderText(R.string.security_settings_face_enroll_repeat_title);
         mErrorText = findViewById(R.id.error_text);
@@ -134,7 +141,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     @Override
-    public void startEnrollment() {
+    protected void startEnrollmentInternal() {
         super.startEnrollment();
         mPreviewFragment = (FaceEnrollPreviewFragment) getSupportFragmentManager()
                 .findFragmentByTag(TAG_FACE_PREVIEW);
@@ -158,7 +165,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
             disabledFeatures[i] = mDisabledFeatures.get(i);
         }
 
-        return new FaceEnrollSidecar(disabledFeatures);
+        return new FaceEnrollSidecar(disabledFeatures, getIntent());
     }
 
     @Override

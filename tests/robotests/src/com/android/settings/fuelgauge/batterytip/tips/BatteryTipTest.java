@@ -20,11 +20,10 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.view.View;
 
 import androidx.annotation.DrawableRes;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.widget.CardPreference;
@@ -32,10 +31,12 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +48,15 @@ public class BatteryTipTest {
     private static final String SUMMARY = "summary";
     @DrawableRes private static final int ICON_ID = R.drawable.ic_fingerprint;
 
+    @Rule public MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private Context mContext;
     private TestBatteryTip mBatteryTip;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
         mBatteryTip = new TestBatteryTip();
+        mContext = ApplicationProvider.getApplicationContext();
     }
 
     @Test
@@ -84,19 +87,14 @@ public class BatteryTipTest {
 
     @Test
     public void updatePreference_resetLayoutState() {
-        mContext.setTheme(R.style.Theme_Settings);
-        PreferenceViewHolder holder =
-                PreferenceViewHolder.createInstanceForTests(
-                        View.inflate(
-                                mContext, R.layout.card_preference_layout, /* parent= */ null));
         CardPreference cardPreference = new CardPreference(mContext);
-        cardPreference.onBindViewHolder(holder);
-        cardPreference.setPrimaryButtonVisible(true);
+        cardPreference.setPrimaryButtonVisibility(true);
+        cardPreference.setSecondaryButtonVisibility(true);
 
         mBatteryTip.updatePreference(cardPreference);
 
-        View view = holder.findViewById(R.id.card_preference_buttons);
-        assertThat(view.getVisibility()).isEqualTo(View.GONE);
+        assertThat(cardPreference.getPrimaryButtonVisibility()).isFalse();
+        assertThat(cardPreference.getSecondaryButtonVisibility()).isFalse();
     }
 
     @Test

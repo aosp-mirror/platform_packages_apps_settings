@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
@@ -55,6 +56,7 @@ import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.utils.LocaleUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -384,7 +386,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         int value = restoreOnConfigChangedValue();
         if (value == NOT_SET) {
             final int lastNonEmptyUserShortcutType = PreferredShortcuts.retrieveUserShortcutType(
-                    getPrefContext(), MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                    getPrefContext(), MAGNIFICATION_CONTROLLER_NAME);
             value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
                     : UserShortcutType.EMPTY;
         }
@@ -458,7 +460,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                MAGNIFICATION_CONTROLLER_NAME);
 
         final List<CharSequence> list = new ArrayList<>();
         if (hasShortcutType(shortcutTypes, UserShortcutType.SOFTWARE)) {
@@ -572,7 +574,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                MAGNIFICATION_CONTROLLER_NAME);
         if (preference.isChecked()) {
             optInAllMagnificationValuesToSettings(getPrefContext(), shortcutTypes);
             showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
@@ -584,7 +586,16 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        showDialog(DialogEnums.MAGNIFICATION_EDIT_SHORTCUT);
+        if (com.android.settings.accessibility.Flags.editShortcutsInFullScreen()) {
+            EditShortcutsPreferenceFragment.showEditShortcutScreen(
+                    requireContext(),
+                    getMetricsCategory(),
+                    getShortcutTitle(),
+                    MAGNIFICATION_COMPONENT_NAME,
+                    getIntent());
+        } else {
+            showDialog(DialogEnums.MAGNIFICATION_EDIT_SHORTCUT);
+        }
     }
 
     @Override
@@ -618,7 +629,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     protected void updateShortcutPreference() {
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
+                MAGNIFICATION_CONTROLLER_NAME);
         mShortcutPreference.setChecked(
                 hasMagnificationValuesInSettings(getPrefContext(), shortcutTypes));
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));

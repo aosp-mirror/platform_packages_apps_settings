@@ -49,13 +49,17 @@ class AppDataUsageDetailsRepositoryTest {
             on { queryBuckets(CYCLE1_START_TIME, CYCLE1_END_TIME) } doReturn listOf(
                 Bucket(
                     uid = UID,
-                    state = NetworkStats.Bucket.STATE_DEFAULT,
                     bytes = BACKGROUND_USAGE,
+                    state = NetworkStats.Bucket.STATE_DEFAULT,
+                    startTimeStamp = 0L,
+                    endTimeStamp = 0L,
                 ),
                 Bucket(
                     uid = UID,
-                    state = NetworkStats.Bucket.STATE_FOREGROUND,
                     bytes = FOREGROUND_USAGE,
+                    state = NetworkStats.Bucket.STATE_FOREGROUND,
+                    startTimeStamp = 0L,
+                    endTimeStamp = 0L,
                 ),
             )
         }
@@ -86,13 +90,17 @@ class AppDataUsageDetailsRepositoryTest {
             on { queryBuckets(CYCLE1_END_TIME, CYCLE2_END_TIME) } doReturn listOf(
                 Bucket(
                     uid = UID,
-                    state = NetworkStats.Bucket.STATE_DEFAULT,
                     bytes = BACKGROUND_USAGE,
+                    state = NetworkStats.Bucket.STATE_DEFAULT,
+                    startTimeStamp = 0L,
+                    endTimeStamp = 0L,
                 ),
                 Bucket(
                     uid = UID,
-                    state = NetworkStats.Bucket.STATE_FOREGROUND,
                     bytes = FOREGROUND_USAGE,
+                    state = NetworkStats.Bucket.STATE_FOREGROUND,
+                    startTimeStamp = 0L,
+                    endTimeStamp = 0L,
                 ),
             )
         }

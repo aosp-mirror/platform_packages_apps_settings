@@ -13,14 +13,16 @@
  */
 package com.android.settings.datausage;
 
-import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataRestricted;
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataUsageUserControlDisabled;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -36,6 +38,7 @@ import com.android.settingslib.widget.AppSwitchPreference;
 
 public class UnrestrictedDataAccessPreference extends AppSwitchPreference implements
         DataSaverBackend.Listener {
+    private static final String ECM_SETTING_IDENTIFIER = "android:unrestricted_data_access";
 
     private final ApplicationsState mApplicationsState;
     private final AppEntry mEntry;
@@ -56,8 +59,9 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         mApplicationsState = applicationsState;
         mDataSaverBackend = dataSaverBackend;
         mParentFragment = parentFragment;
-        setDisabledByAdmin(checkIfMeteredDataRestricted(context, entry.info.packageName,
-                UserHandle.getUserId(entry.info.uid)));
+        setDisabledByAdmin(checkIfMeteredDataUsageUserControlDisabled(
+                context, entry.info.packageName, UserHandle.getUserId(entry.info.uid)));
+        mHelper.checkEcmRestrictionAndSetDisabled(ECM_SETTING_IDENTIFIER, entry.info.packageName);
         updateState();
         setKey(generateKey(mEntry));
 
@@ -166,8 +170,22 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         return mHelper.isDisabledByAdmin();
     }
 
+    @VisibleForTesting
+    boolean isDisabledByEcm() {
+        return mHelper.isDisabledByEcm();
+    }
+
     public void setDisabledByAdmin(EnforcedAdmin admin) {
         mHelper.setDisabledByAdmin(admin);
+    }
+
+    /**
+     * Checks if the given setting is subject to Enhanced Confirmation Mode restrictions for this
+     * package. Marks the preference as disabled if so.
+     * @param packageName the package to check the restriction for
+     */
+    public void checkEcmRestrictionAndSetDisabled(@NonNull String packageName) {
+        mHelper.checkEcmRestrictionAndSetDisabled(ECM_SETTING_IDENTIFIER, packageName);
     }
 
     // Sets UI state based on allowlist/denylist status.
@@ -179,7 +197,8 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
                 setSummary(com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
             } else if (mDataUsageState.isDataSaverDenylisted) {
                 setSummary(R.string.restrict_background_blocklisted);
-            } else {
+            // If disabled by ECM, the summary is set directly by the switch.
+            } else if (!isDisabledByEcm()) {
                 setSummary("");
             }
         }

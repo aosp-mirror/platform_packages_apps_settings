@@ -34,6 +34,7 @@ import com.android.settingslib.spa.widget.ui.SpinnerOption
 import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
+import com.android.settingslib.spaprivileged.model.app.userId
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.spaprivileged.template.app.AppListTwoTargetSwitchItem
 import com.android.settingslib.utils.StringUtil
@@ -102,13 +103,21 @@ class AppNotificationsListModel(
             }
         }
 
-    override fun getSpinnerOptions(recordList: List<AppNotificationsRecord>): List<SpinnerOption> =
-        SpinnerItem.entries.map {
+    override fun getSpinnerOptions(recordList: List<AppNotificationsRecord>): List<SpinnerOption> {
+        val options = mutableListOf(SpinnerItem.AllApps, SpinnerItem.TurnedOff)
+        if (repository.isUserUnlocked(recordList[0].app.userId)) {
+            options.add(0, SpinnerItem.MostRecent)
+            options.add(1, SpinnerItem.MostFrequent)
+        }
+
+        return options.map {
             SpinnerOption(
-                id = it.ordinal,
-                text = context.getString(it.stringResId),
+                    id = it.ordinal,
+                    text = context.getString(it.stringResId),
             )
         }
+    }
+
 
     private fun formatLastSent(lastSent: Long) =
         StringUtil.formatRelativeTime(

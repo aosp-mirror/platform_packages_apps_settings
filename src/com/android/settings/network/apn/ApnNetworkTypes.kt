@@ -17,8 +17,9 @@
 package com.android.settings.network.apn
 
 import android.telephony.TelephonyManager
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.snapshots.SnapshotStateMap
+import com.android.settingslib.spa.widget.editor.SettingsDropdownCheckOption
 
 object ApnNetworkTypes {
     private val Types = listOf(
@@ -39,32 +40,40 @@ object ApnNetworkTypes {
         TelephonyManager.NETWORK_TYPE_NR,
     )
 
-    fun getNetworkTypeDisplayNames(): List<String> =
-        Types.map { TelephonyManager.getNetworkTypeName(it) }
+    fun getNetworkTypeOptions(): List<SettingsDropdownCheckOption> =
+        Types.map { SettingsDropdownCheckOption(TelephonyManager.getNetworkTypeName(it)) }
 
     /**
      * Gets the selected Network type Selected Options according to network type.
      * @param networkType Initialized network type bitmask, often multiple network type options may
      *                    be included.
      */
-    fun getNetworkTypeSelectedOptionsState(networkType: Long): SnapshotStateList<Int> {
-        val networkTypeSelectedOptionsState = mutableStateListOf<Int>()
+    fun networkTypeToSelectedStateMap(
+        options: List<SettingsDropdownCheckOption>,
+        networkType: Long,
+    ): SnapshotStateMap<SettingsDropdownCheckOption, Boolean> {
+        val stateMap = mutableStateMapOf<SettingsDropdownCheckOption, Boolean>()
         Types.forEachIndexed { index, type ->
             if (networkType and TelephonyManager.getBitMaskForNetworkType(type) != 0L) {
-                networkTypeSelectedOptionsState.add(index)
+                stateMap[options[index]] = true
             }
         }
-        return networkTypeSelectedOptionsState
+        return stateMap
     }
 
     /**
      * Gets the network type according to the selected Network type Selected Options.
-     * @param networkTypeSelectedOptionsState the selected Network type Selected Options.
+     * @param stateMap the selected Network type Selected Options.
      */
-    fun getNetworkType(networkTypeSelectedOptionsState: SnapshotStateList<Int>): Long {
+    fun selectedStateMapToNetworkType(
+        options: List<SettingsDropdownCheckOption>,
+        stateMap: SnapshotStateMap<SettingsDropdownCheckOption, Boolean>,
+    ): Long {
         var networkType = 0L
-        networkTypeSelectedOptionsState.forEach { option ->
-            networkType = networkType or TelephonyManager.getBitMaskForNetworkType(Types[option])
+        options.forEachIndexed { index, option ->
+            if (stateMap[option] == true) {
+                networkType = networkType or TelephonyManager.getBitMaskForNetworkType(Types[index])
+            }
         }
         return networkType
     }

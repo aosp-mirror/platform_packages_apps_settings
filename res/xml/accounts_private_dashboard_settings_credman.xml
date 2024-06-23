@@ -19,7 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="user_and_account_settings_screen"
-    android:title="@string/account_dashboard_title"
+    android:title="@string/account_dashboard_title_with_passkeys"
     settings:keywords="@string/keywords_accounts">
 
     <PreferenceCategory
@@ -27,8 +27,7 @@
         android:order="10"
         android:title="@string/credman_chosen_app_title">
 
-        <com.android.settings.widget.GearPreference
-            android:fragment="com.android.settings.applications.credentials.DefaultCombinedPickerPrivate"
+        <com.android.settings.applications.credentials.PrimaryProviderPreference
             android:key="default_credman_autofill_private"
             android:title="@string/credman_chosen_app_title"
             settings:searchable="false">
@@ -36,7 +35,7 @@
             <extra
                 android:name="for_work"
                 android:value="false" />
-        </com.android.settings.widget.GearPreference>
+        </com.android.settings.applications.credentials.PrimaryProviderPreference>
     </PreferenceCategory>
 
     <PreferenceCategory

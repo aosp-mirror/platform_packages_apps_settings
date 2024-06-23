@@ -17,13 +17,18 @@
 package com.android.settings.notification.zen;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
+import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
+import static android.provider.Settings.Global.ZEN_MODE_OFF;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -39,9 +44,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.List;
 
@@ -51,9 +59,16 @@ public class ZenModeSliceBuilderTest {
 
     private Context mContext;
 
+    @Mock
+    private NotificationManager mNm;
+
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+
+        MockitoAnnotations.initMocks(this);
+        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -99,24 +114,27 @@ public class ZenModeSliceBuilderTest {
     public void handleUriChange_turnOn_zenModeTurnsOn() {
         final Intent intent = new Intent();
         intent.putExtra(EXTRA_TOGGLE_STATE, true);
-        NotificationManager.from(mContext).setZenMode(Settings.Global.ZEN_MODE_OFF, null, "");
 
         ZenModeSliceBuilder.handleUriChange(mContext, intent);
 
-        final int zenMode = NotificationManager.from(mContext).getZenMode();
-        assertThat(zenMode).isEqualTo(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+        if (android.app.Flags.modesApi()) {
+            verify(mNm).setZenMode(eq(ZEN_MODE_IMPORTANT_INTERRUPTIONS), any(), any(), eq(true));
+        } else {
+            verify(mNm).setZenMode(eq(ZEN_MODE_IMPORTANT_INTERRUPTIONS), any(), any());
+        }
     }
 
     @Test
     public void handleUriChange_turnOff_zenModeTurnsOff() {
         final Intent intent = new Intent();
         intent.putExtra(EXTRA_TOGGLE_STATE, false);
-        NotificationManager.from(mContext).setZenMode(
-                Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, "");
 
         ZenModeSliceBuilder.handleUriChange(mContext, intent);
 
-        final int zenMode = NotificationManager.from(mContext).getZenMode();
-        assertThat(zenMode).isEqualTo(Settings.Global.ZEN_MODE_OFF);
+        if (android.app.Flags.modesApi()) {
+            verify(mNm).setZenMode(eq(ZEN_MODE_OFF), any(), any(), eq(true));
+        } else {
+            verify(mNm).setZenMode(eq(ZEN_MODE_OFF), any(), any());
+        }
     }
 }

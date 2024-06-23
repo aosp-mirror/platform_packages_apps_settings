@@ -16,11 +16,15 @@
 
 package com.android.settings.biometrics.fingerprint.feature;
 
+import android.animation.Animator;
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -76,4 +80,17 @@ public interface SfpsEnrollmentFeature {
      * @return threshold
      */
     float getEnrollStageThreshold(@NonNull Context context, int index);
+
+    /**
+     * Gets the help animator used when get help message.
+     * @param target the target view to animate
+     * @return animator
+     */
+    Animator getHelpAnimator(@NonNull View target);
+
+    /**
+     * Handles extra stuffs on lottie composition.
+     * @param lottieView the view related to the lottie
+     */
+    default void handleOnEnrollmentLottieComposition(LottieAnimationView lottieView) {}
 }

@@ -33,6 +33,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -41,31 +42,44 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowKeyguardManager;
 
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowFragment.class,
+        ShadowKeyguardManager.class
 })
 public class ScreenTimeoutSettingsTest {
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     private static final String[] TIMEOUT_ENTRIES = new String[]{"15 secs", "30 secs"};
     private static final String[] TIMEOUT_VALUES = new String[]{"15000", "30000"};
 
@@ -217,5 +231,86 @@ public class ScreenTimeoutSettingsTest {
                 30000 /* default */);
 
         assertThat(Long.toString(timeout)).isEqualTo(TIMEOUT_VALUES[0]);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_PROTECT_SCREEN_TIMEOUT_WITH_AUTH)
+    public void onClick_whenUserAlreadyAuthenticated_buttonChecked() {
+        String key = "222";
+        String defaultKey = "1";
+        mSettings.setDefaultKey(defaultKey);
+        CandidateInfo info = new ScreenTimeoutSettings.TimeoutCandidateInfo("label", key, false);
+        ScreenTimeoutSettings.ProtectedSelectorWithWidgetPreference pref =
+                new ScreenTimeoutSettings.ProtectedSelectorWithWidgetPreference(
+                        mContext, info.getKey(), mSettings);
+        mSettings.bindPreference(pref, info.getKey(), info, defaultKey);
+        mSettings.setUserAuthenticated(true);
+
+        pref.onClick();
+
+        assertThat(mSettings.getDefaultKey()).isEqualTo(key);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_PROTECT_SCREEN_TIMEOUT_WITH_AUTH)
+    public void onClick_whenButtonAlreadyChecked_noAuthNeeded() {
+        String key = "222";
+        mSettings.setDefaultKey(key);
+        CandidateInfo info = new ScreenTimeoutSettings.TimeoutCandidateInfo("label", key, false);
+        ScreenTimeoutSettings.ProtectedSelectorWithWidgetPreference pref =
+                new ScreenTimeoutSettings.ProtectedSelectorWithWidgetPreference(
+                        mContext, info.getKey(), mSettings);
+        mSettings.bindPreference(pref, info.getKey(), info, key);
+        mSettings.setUserAuthenticated(false);
+        setAuthPassesAutomatically();
+
+        pref.onClick();
+
+        assertThat(mSettings.isUserAuthenticated()).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_PROTECT_SCREEN_TIMEOUT_WITH_AUTH)
+    public void onClick_whenReducingTimeout_noAuthNeeded() {
+        String key = "1";
+        String defaultKey = "222";
+        mSettings.setDefaultKey(defaultKey);
+        CandidateInfo info = new ScreenTimeoutSettings.TimeoutCandidateInfo("label", key, false);
+        ScreenTimeoutSettings.ProtectedSelectorWithWidgetPreference pref =
+                new ScreenTimeoutSettings.ProtectedSelectorWithWidgetPreference(
+                        mContext, info.getKey(), mSettings);
+        mSettings.bindPreference(pref, info.getKey(), info, defaultKey);
+        mSettings.setUserAuthenticated(false);
+        setAuthPassesAutomatically();
+
+        pref.onClick();
+
+        assertThat(mSettings.isUserAuthenticated()).isFalse();
+        assertThat(mSettings.getDefaultKey()).isEqualTo(key);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_PROTECT_SCREEN_TIMEOUT_WITH_AUTH)
+    public void onClick_whenIncreasingTimeout_authNeeded() {
+        String key = "222";
+        String defaultKey = "1";
+        mSettings.setDefaultKey(defaultKey);
+        CandidateInfo info = new ScreenTimeoutSettings.TimeoutCandidateInfo("label", key, false);
+        ScreenTimeoutSettings.ProtectedSelectorWithWidgetPreference pref =
+                new ScreenTimeoutSettings.ProtectedSelectorWithWidgetPreference(
+                        mContext, info.getKey(), mSettings);
+        mSettings.bindPreference(pref, info.getKey(), info, defaultKey);
+        mSettings.setUserAuthenticated(false);
+        setAuthPassesAutomatically();
+
+        pref.onClick();
+
+        assertThat(mSettings.getDefaultKey()).isEqualTo(key);
+        assertThat(mSettings.isUserAuthenticated()).isTrue();
+    }
+
+    private void setAuthPassesAutomatically() {
+        Shadows.shadowOf(mContext.getSystemService(KeyguardManager.class))
+                .setIsKeyguardSecure(false);
     }
 }

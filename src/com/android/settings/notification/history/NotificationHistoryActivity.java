@@ -365,10 +365,8 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
                 }
                 final int newState = isChecked ? 1 : 0;
                 if (oldState != newState) {
-                    for (int user : mUm.getProfileIds(ActivityManager.getCurrentUser(), false)) {
-                        Settings.Secure.putIntForUser(getContentResolver(),
-                                NOTIFICATION_HISTORY_ENABLED, newState, user);
-                    }
+                    Settings.Secure.putInt(
+                            getContentResolver(), NOTIFICATION_HISTORY_ENABLED, newState);
                     mUiEventLogger.log(isChecked ? NotificationHistoryEvent.NOTIFICATION_HISTORY_ON
                             : NotificationHistoryEvent.NOTIFICATION_HISTORY_OFF);
                     Log.d(TAG, "onSwitchChange history to " + isChecked);

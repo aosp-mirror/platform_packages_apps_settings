@@ -22,7 +22,6 @@ import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT
 
 import static com.android.internal.util.Preconditions.checkNotNull;
 
-import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -34,6 +33,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.UserManager;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.Utils;

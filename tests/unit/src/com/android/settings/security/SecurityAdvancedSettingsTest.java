@@ -107,7 +107,7 @@ public class SecurityAdvancedSettingsTest {
 
     @Test
     public void whenSafetyCenterIsEnabled_pageIndexExcluded() throws Exception {
-        when(mSafetyCenterManagerWrapper.isEnabled(any())).thenReturn(false);
+        when(mSafetyCenterManagerWrapper.isEnabled(any())).thenReturn(true);
         BaseSearchIndexProvider indexProvider = SecurityAdvancedSettings.SEARCH_INDEX_DATA_PROVIDER;
 
         List<String> allXmlKeys = TestUtils.getAllXmlKeys(mContext, indexProvider);

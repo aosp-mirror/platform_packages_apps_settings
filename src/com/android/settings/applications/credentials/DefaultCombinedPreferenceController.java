@@ -16,13 +16,11 @@
 
 package com.android.settings.applications.credentials;
 
-import android.annotation.Nullable;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
+import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
@@ -30,17 +28,21 @@ import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.view.autofill.AutofillManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
 import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultCombinedPreferenceController extends DefaultAppPreferenceController
-        implements Preference.OnPreferenceClickListener {
+public class DefaultCombinedPreferenceController extends DefaultAppPreferenceController {
 
     private static final Intent AUTOFILL_PROBE = new Intent(AutofillService.SERVICE_INTERFACE);
     private static final String TAG = "DefaultCombinedPreferenceController";
@@ -78,72 +80,80 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
         // Despite this method being called getSettingIntent this intent actually
         // opens the primary picker. This is so that we can swap the cog and the left
         // hand side presses to align the UX.
-        return new Intent(mContext, CredentialsPickerActivity.class);
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        final String prefKey = getPreferenceKey();
-        final Preference preference = screen.findPreference(prefKey);
-        if (preference != null) {
-            preference.setOnPreferenceClickListener((Preference.OnPreferenceClickListener) this);
+        if (PrimaryProviderPreference.shouldUseNewSettingsUi()) {
+            // We need to return an empty intent here since the class we inherit
+            // from will throw an NPE if we return null and we don't want it to
+            // open anything since we added the buttons.
+            return new Intent();
         }
+        return createIntentToOpenPicker();
     }
 
     @Override
-    public boolean onPreferenceClick(Preference preference) {
-        // Get the selected provider.
+    public void updateState(@NonNull Preference preference) {
         final CombinedProviderInfo topProvider = getTopProvider();
-        if (topProvider == null) {
-            return false;
+        if (topProvider != null && mContext != null) {
+            updatePreferenceForProvider(
+                    preference,
+                    topProvider.getAppName(mContext),
+                    topProvider.getSettingsSubtitle(),
+                    topProvider.getAppIcon(mContext, getUser()),
+                    topProvider.getPackageName(),
+                    topProvider.getSettingsActivity());
+        } else {
+            updatePreferenceForProvider(preference, null, null, null, null, null);
+        }
+    }
+
+    @VisibleForTesting
+    public void updatePreferenceForProvider(
+            Preference preference,
+            @Nullable CharSequence appName,
+            @Nullable String appSubtitle,
+            @Nullable Drawable appIcon,
+            @Nullable CharSequence packageName,
+            @Nullable CharSequence settingsActivity) {
+        if (appName == null) {
+            preference.setTitle(R.string.credman_app_list_preference_none);
+        } else {
+            preference.setTitle(appName);
         }
 
-        // If the top provider has a defined Credential Manager settings
-        // provider then we should open that up.
-        final String settingsActivity = topProvider.getSettingsActivity();
-        if (!TextUtils.isEmpty(settingsActivity)) {
-            final Intent intent =
-                    new Intent(Intent.ACTION_MAIN)
-                            .setComponent(
-                                    new ComponentName(
-                                            topProvider.getPackageName(), settingsActivity));
-            startActivity(intent);
-            return true;
+        if (appIcon == null) {
+            preference.setIcon(null);
+        } else {
+            preference.setIcon(Utils.getSafeIcon(appIcon));
         }
 
-        return false;
+        preference.setSummary(appSubtitle);
+
+        if (preference instanceof PrimaryProviderPreference) {
+            PrimaryProviderPreference primaryPref = (PrimaryProviderPreference) preference;
+            primaryPref.setIconSize(TwoTargetPreference.ICON_SIZE_MEDIUM);
+            primaryPref.setDelegate(
+                    new PrimaryProviderPreference.Delegate() {
+                        public void onOpenButtonClicked() {
+                            CombinedProviderInfo.launchSettingsActivityIntent(
+                                    mContext, packageName, settingsActivity, getUser());
+                        }
+
+                        public void onChangeButtonClicked() {
+                            startActivity(createIntentToOpenPicker());
+                        }
+                    });
+
+            // Hide the open button if there is no defined settings activity.
+            primaryPref.setOpenButtonVisible(!TextUtils.isEmpty(settingsActivity));
+            primaryPref.setButtonsCompactMode(appName != null);
+        }
     }
 
     private @Nullable CombinedProviderInfo getTopProvider() {
-        List<CombinedProviderInfo> providers = getAllProviders(getUser());
-        return CombinedProviderInfo.getTopProvider(providers);
+        return CombinedProviderInfo.getTopProvider(getAllProviders(getUser()));
     }
 
     @Override
     protected DefaultAppInfo getDefaultAppInfo() {
-        CombinedProviderInfo topProvider = getTopProvider();
-        if (topProvider != null) {
-            ServiceInfo brandingService = topProvider.getBrandingService();
-            if (brandingService == null) {
-                return new DefaultAppInfo(
-                        mContext,
-                        mPackageManager,
-                        getUser(),
-                        topProvider.getApplicationInfo(),
-                        topProvider.getSettingsSubtitle(),
-                        true);
-            } else {
-                return new DefaultAppInfo(
-                        mContext,
-                        mPackageManager,
-                        getUser(),
-                        brandingService,
-                        topProvider.getSettingsSubtitle(),
-                        true);
-            }
-        }
         return null;
     }
 
@@ -179,5 +189,12 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
 
     protected int getUser() {
         return UserHandle.myUserId();
+    }
+
+    /** Creates an intent to open the credential picker. */
+    private Intent createIntentToOpenPicker() {
+        final Context context =
+                mContext.createContextAsUser(UserHandle.of(getUser()), /* flags= */ 0);
+        return new Intent(context, CredentialsPickerActivity.class);
     }
 }

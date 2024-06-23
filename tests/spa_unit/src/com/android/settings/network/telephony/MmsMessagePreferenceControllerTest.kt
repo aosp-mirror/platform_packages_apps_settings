@@ -27,7 +27,6 @@ import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILA
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
@@ -36,20 +35,35 @@ import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class MmsMessagePreferenceControllerTest {
+    private val mockTelephonyManager1: TelephonyManager = mock<TelephonyManager> {
+        on { isApnMetered(ApnSetting.TYPE_MMS) } doReturn true
+    }
+
+    private val mockTelephonyManager2: TelephonyManager = mock<TelephonyManager> {
+        on { createForSubscriptionId(SUB_1_ID) } doReturn mockTelephonyManager1
+        on { isApnMetered(ApnSetting.TYPE_MMS) } doReturn true
+    }
+
     private val mockTelephonyManager: TelephonyManager = mock<TelephonyManager> {
-        on { createForSubscriptionId(any()) } doReturn mock
+        on { createForSubscriptionId(SUB_1_ID) } doReturn mockTelephonyManager1
+        on { createForSubscriptionId(SUB_2_ID) } doReturn mockTelephonyManager2
+        on { createForSubscriptionId(INVALID_SUBSCRIPTION_ID) } doReturn mock
     }
 
     private var context: Context = spy(ApplicationProvider.getApplicationContext()) {
         on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
     }
 
-    private val controller = MmsMessagePreferenceController(context, KEY).apply {
-        init(SUB_ID)
-    }
+    private var defaultDataSubId = SUB_1_ID
+
+    private val controller = MmsMessagePreferenceController(
+        context = context,
+        key = KEY,
+        getDefaultDataSubId = { defaultDataSubId },
+    ).apply { init(SUB_2_ID) }
 
     @Test
-    fun getAvailabilityStatus_invalidSubscription_returnUnavailable() {
+    fun getAvailabilityStatus_invalidSubscription_unavailable() {
         controller.init(INVALID_SUBSCRIPTION_ID)
 
         val availabilityStatus = controller.getAvailabilityStatus(INVALID_SUBSCRIPTION_ID)
@@ -58,42 +72,92 @@ class MmsMessagePreferenceControllerTest {
     }
 
     @Test
-    fun getAvailabilityStatus_mobileDataOn_returnUnavailable() {
-        mockTelephonyManager.stub {
+    fun getAvailabilityStatus_mobileDataOn_unavailable() {
+        mockTelephonyManager2.stub {
             on { isDataEnabled } doReturn true
         }
 
-        val availabilityStatus = controller.getAvailabilityStatus(SUB_ID)
+        val availabilityStatus = controller.getAvailabilityStatus(SUB_2_ID)
 
         assertThat(availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
     }
 
     @Test
-    fun getAvailabilityStatus_meteredOff_returnUnavailable() {
-        mockTelephonyManager.stub {
+    fun getAvailabilityStatus_meteredOff_unavailable() {
+        mockTelephonyManager2.stub {
             on { isApnMetered(ApnSetting.TYPE_MMS) } doReturn false
         }
 
-        val availabilityStatus = controller.getAvailabilityStatus(SUB_ID)
+        val availabilityStatus = controller.getAvailabilityStatus(SUB_2_ID)
 
         assertThat(availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
     }
 
     @Test
-    fun getAvailabilityStatus_mobileDataOffWithValidSubId_returnAvailable() {
-        mockTelephonyManager.stub {
-            on { isDataEnabled } doReturn false
-            on { isApnMetered(ApnSetting.TYPE_MMS) } doReturn true
+    fun getAvailabilityStatus_isDefaultDataAndDataOnAndAutoDataSwitchOn_unavailable() {
+        defaultDataSubId = SUB_2_ID
+        mockTelephonyManager2.stub {
+            on { isDataEnabled } doReturn true
+            on {
+                isMobileDataPolicyEnabled(TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH)
+            } doReturn true
         }
 
-        val availabilityStatus = controller.getAvailabilityStatus(SUB_ID)
+        val availabilityStatus = controller.getAvailabilityStatus(SUB_2_ID)
+
+        assertThat(availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
+    }
+
+    @Test
+    fun getAvailabilityStatus_isDefaultDataAndDataOffAndAutoDataSwitchOn_available() {
+        defaultDataSubId = SUB_2_ID
+        mockTelephonyManager2.stub {
+            on { isDataEnabled } doReturn false
+            on {
+                isMobileDataPolicyEnabled(TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH)
+            } doReturn true
+        }
+
+        val availabilityStatus = controller.getAvailabilityStatus(SUB_2_ID)
+
+        assertThat(availabilityStatus).isEqualTo(AVAILABLE)
+    }
+
+    @Test
+    fun getAvailabilityStatus_defaultDataOnAndAutoDataSwitchOn_unavailable() {
+        mockTelephonyManager1.stub {
+            on { isDataEnabled } doReturn true
+        }
+        mockTelephonyManager2.stub {
+            on {
+                isMobileDataPolicyEnabled(TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH)
+            } doReturn true
+        }
+
+        val availabilityStatus = controller.getAvailabilityStatus(SUB_2_ID)
+
+        assertThat(availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
+    }
+
+    @Test
+    fun getAvailabilityStatus_defaultDataOffAndAutoDataSwitchOn_available() {
+        mockTelephonyManager1.stub {
+            on { isDataEnabled } doReturn false
+        }
+        mockTelephonyManager2.stub {
+            on {
+                isMobileDataPolicyEnabled(TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH)
+            } doReturn true
+        }
+
+        val availabilityStatus = controller.getAvailabilityStatus(SUB_2_ID)
 
         assertThat(availabilityStatus).isEqualTo(AVAILABLE)
     }
 
     @Test
     fun isChecked_whenMmsNotAlwaysAllowed_returnFalse() {
-        mockTelephonyManager.stub {
+        mockTelephonyManager2.stub {
             on {
                 isMobileDataPolicyEnabled(TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED)
             } doReturn false
@@ -106,7 +170,7 @@ class MmsMessagePreferenceControllerTest {
 
     @Test
     fun isChecked_whenMmsAlwaysAllowed_returnTrue() {
-        mockTelephonyManager.stub {
+        mockTelephonyManager2.stub {
             on {
                 isMobileDataPolicyEnabled(TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED)
             } doReturn true
@@ -121,7 +185,7 @@ class MmsMessagePreferenceControllerTest {
     fun setChecked_setTrue_setDataIntoSubscriptionManager() {
         controller.setChecked(true)
 
-        verify(mockTelephonyManager).setMobileDataPolicyEnabled(
+        verify(mockTelephonyManager2).setMobileDataPolicyEnabled(
             TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED, true
         )
     }
@@ -130,13 +194,14 @@ class MmsMessagePreferenceControllerTest {
     fun setChecked_setFalse_setDataIntoSubscriptionManager() {
         controller.setChecked(false)
 
-        verify(mockTelephonyManager).setMobileDataPolicyEnabled(
+        verify(mockTelephonyManager2).setMobileDataPolicyEnabled(
             TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED, false
         )
     }
 
     private companion object {
         const val KEY = "mms_message"
-        const val SUB_ID = 2
+        const val SUB_1_ID = 1
+        const val SUB_2_ID = 2
     }
 }

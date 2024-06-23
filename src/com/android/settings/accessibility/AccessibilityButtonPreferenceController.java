@@ -17,12 +17,16 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.search.SearchIndexableRaw;
+
+import java.util.List;
 
 /**
  * Preference controller for accessibility button preference.
@@ -41,10 +45,23 @@ public class AccessibilityButtonPreferenceController extends BasePreferenceContr
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final int titleResource = AccessibilityUtil.isGestureNavigateEnabled(mContext)
-                ? R.string.accessibility_button_gesture_title : R.string.accessibility_button_title;
         final Preference preference = screen.findPreference(getPreferenceKey());
-        preference.setTitle(titleResource);
+        preference.setTitle(getPreferenceTitleResource());
 
+    }
+
+    @Override
+    public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
+        SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+        data.key = getPreferenceKey();
+        final Resources res = mContext.getResources();
+        data.title = res.getString(getPreferenceTitleResource());
+        data.screenTitle = res.getString(R.string.accessibility_shortcuts_settings_title);
+        rawData.add(data);
+    }
+
+    private int getPreferenceTitleResource() {
+        return AccessibilityUtil.isGestureNavigateEnabled(mContext)
+                ? R.string.accessibility_button_gesture_title : R.string.accessibility_button_title;
     }
 }

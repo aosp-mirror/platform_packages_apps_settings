@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2023 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:key="@string/accessibility_shortcut_description_pref">
+
+        <com.android.settings.accessibility.shortcuts.ShortcutOptionPreference
+            android:key="@string/accessibility_shortcut_fab_pref"
+            android:persistent="false"
+            android:selectable="true"
+            settings:allowDividerAbove="false"
+            settings:allowDividerBelow="false"
+            settings:controller="com.android.settings.accessibility.shortcuts.FloatingButtonShortcutOptionController" />
+
+        <com.android.settings.accessibility.shortcuts.ShortcutOptionPreference
+            android:key="@string/accessibility_shortcut_gesture_pref"
+            android:persistent="false"
+            android:selectable="true"
+            settings:allowDividerAbove="false"
+            settings:allowDividerBelow="false"
+            settings:controller="com.android.settings.accessibility.shortcuts.GestureShortcutOptionController" />
+
+        <com.android.settings.accessibility.shortcuts.ShortcutOptionPreference
+            android:key="@string/accessibility_shortcut_nav_button_pref"
+            android:persistent="false"
+            android:selectable="true"
+            settings:allowDividerAbove="false"
+            settings:allowDividerBelow="false"
+            settings:controller="com.android.settings.accessibility.shortcuts.NavButtonShortcutOptionController" />
+
+        <com.android.settings.accessibility.shortcuts.ShortcutOptionPreference
+            android:key="@string/accessibility_shortcut_volume_keys_pref"
+            android:persistent="false"
+            android:selectable="true"
+            settings:allowDividerAbove="false"
+            settings:allowDividerBelow="false"
+            settings:controller="com.android.settings.accessibility.shortcuts.VolumeKeysShortcutOptionController" />
+
+        <com.android.settings.accessibility.shortcuts.ShortcutOptionPreference
+            android:key="@string/accessibility_shortcut_two_fingers_double_tap_pref"
+            android:persistent="false"
+            android:selectable="true"
+            settings:allowDividerAbove="false"
+            settings:allowDividerBelow="false"
+            settings:controller="com.android.settings.accessibility.shortcuts.TwoFingersDoubleTapShortcutOptionController" />
+
+        <Preference
+            android:icon="@drawable/ic_keyboard_arrow_down"
+            android:key="@string/accessibility_shortcuts_advanced_collapsed"
+            android:persistent="false"
+            android:selectable="true"
+            android:title="@string/accessibility_shortcut_edit_dialog_title_advance"
+            settings:allowDividerAbove="false"
+            settings:allowDividerBelow="false"
+            settings:controller="com.android.settings.accessibility.shortcuts.AdvancedShortcutsPreferenceController" />
+
+        <com.android.settings.accessibility.shortcuts.ShortcutOptionPreference
+            android:key="@string/accessibility_shortcut_triple_tap_pref"
+            android:persistent="false"
+            android:selectable="true"
+            settings:allowDividerAbove="false"
+            settings:allowDividerBelow="false"
+            settings:controller="com.android.settings.accessibility.shortcuts.TripleTapShortcutOptionController" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

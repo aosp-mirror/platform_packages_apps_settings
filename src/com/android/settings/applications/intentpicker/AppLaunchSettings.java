@@ -288,6 +288,7 @@ public class AppLaunchSettings extends AppInfoBase implements
                 .create();
         if (dialog.getListView() != null) {
             dialog.getListView().setTextDirection(View.TEXT_DIRECTION_LOCALE);
+            dialog.getListView().setEnabled(false);
         } else {
             Log.w(TAG, "createVerifiedLinksDialog: dialog.getListView() is null, please check it.");
         }

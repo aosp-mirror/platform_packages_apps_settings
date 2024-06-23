@@ -43,6 +43,7 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowFragment.class,
+        com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal.class,
 })
 public abstract class BluetoothDetailsControllerTestBase {
 

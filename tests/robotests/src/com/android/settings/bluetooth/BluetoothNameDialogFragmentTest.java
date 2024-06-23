@@ -33,6 +33,8 @@ public class BluetoothNameDialogFragmentTest {
     private TestBluetoothNameDialogFragment mBluetoothNameDialogFragment;
     private TextView mTextView;
 
+    private static final String NAME_FOR_TEST = "test_device_name";
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -51,11 +53,23 @@ public class BluetoothNameDialogFragmentTest {
                         null)).isTrue();
     }
 
+    @Test
+    public void onEditorAction_ImeNull_setsDeviceName() {
+
+
+        mTextView.setText(NAME_FOR_TEST);
+        assertThat(
+                mBluetoothNameDialogFragment.onEditorAction(mTextView, EditorInfo.IME_NULL,
+                        null)).isTrue();
+        assertThat(mBluetoothNameDialogFragment.getDeviceName()).isEqualTo(NAME_FOR_TEST);
+    }
 
     /**
      * Test fragment for {@link BluetoothNameDialogFragment} to test common methods
      */
     public static class TestBluetoothNameDialogFragment extends BluetoothNameDialogFragment {
+
+        private String mName;
 
         @Override
         protected int getDialogTitle() {
@@ -64,12 +78,12 @@ public class BluetoothNameDialogFragmentTest {
 
         @Override
         protected String getDeviceName() {
-            return null;
+            return mName;
         }
 
         @Override
         protected void setDeviceName(String deviceName) {
-
+            mName = deviceName;
         }
 
         @Override

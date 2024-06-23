@@ -18,35 +18,35 @@
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="?attr/fingerprint_layout_theme"
     android:id="@+id/setup_wizard_layout"
+    style="?attr/fingerprint_layout_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/SudContentFrame"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    android:orientation="vertical">
-
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/content_view"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:orientation="vertical">
 
-        <com.google.android.setupdesign.view.FillContentLayout
-            android:layout_width="@dimen/fingerprint_progress_bar_max_size"
-            android:layout_height="@dimen/fingerprint_progress_bar_max_size"
-            android:layout_marginVertical="24dp"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <com.google.android.setupdesign.view.FillContentLayout
+                android:layout_width="@dimen/fingerprint_progress_bar_max_size"
+                android:layout_height="@dimen/fingerprint_progress_bar_max_size"
+                android:layout_marginVertical="24dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp">
             <com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.widget.RFPSProgressBar
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/fingerprint_progress_bar"
@@ -54,22 +54,23 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/fp_illustration"
                 android:minHeight="@dimen/fingerprint_progress_bar_min_size"
-                android:progress="0" />
+                android:progress="0"
+                    />
 
-        </com.google.android.setupdesign.view.FillContentLayout>
+            </com.google.android.setupdesign.view.FillContentLayout>
 
-        <TextView
-            android:id="@+id/text"
-            style="@style/TextAppearance.ErrorText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:accessibilityLiveRegion="polite"
-            android:gravity="center"
-            android:visibility="invisible" />
+            <TextView
+                android:id="@+id/text"
+                style="@style/TextAppearance.ErrorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:accessibilityLiveRegion="polite"
+                android:gravity="center"
+                android:visibility="invisible" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
 
 </com.google.android.setupdesign.GlifLayout>

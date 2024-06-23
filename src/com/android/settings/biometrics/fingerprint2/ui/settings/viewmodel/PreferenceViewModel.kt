@@ -16,15 +16,11 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel
 
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 
 /** Classed use to represent a Dialogs state. */
 sealed class PreferenceViewModel {
-  data class RenameDialog(
-      val fingerprintViewModel: FingerprintData,
-  ) : PreferenceViewModel()
+  data class RenameDialog(val fingerprintViewModel: FingerprintData) : PreferenceViewModel()
 
-  data class DeleteDialog(
-      val fingerprintViewModel: FingerprintData,
-  ) : PreferenceViewModel()
+  data class DeleteDialog(val fingerprintViewModel: FingerprintData) : PreferenceViewModel()
 }

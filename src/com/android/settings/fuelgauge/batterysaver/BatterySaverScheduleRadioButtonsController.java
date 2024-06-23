@@ -41,7 +41,7 @@ import com.android.settingslib.fuelgauge.BatterySaverUtils;
 public class BatterySaverScheduleRadioButtonsController {
     private static final String TAG = "BatterySaverScheduleRadioButtonsController";
 
-    public static final int TRIGGER_LEVEL_MIN = 10;
+    public static final int TRIGGER_LEVEL_MIN = 20;
 
     private Context mContext;
     private BatterySaverScheduleSeekBarController mSeekBarController;

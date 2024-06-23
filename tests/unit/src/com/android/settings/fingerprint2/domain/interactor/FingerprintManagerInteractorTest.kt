@@ -19,6 +19,7 @@ package com.android.settings.fingerprint2.domain.interactor
 import android.content.Context
 import android.content.Intent
 import android.hardware.fingerprint.Fingerprint
+import android.hardware.fingerprint.FingerprintEnrollOptions
 import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintManager.CryptoObject
 import android.hardware.fingerprint.FingerprintManager.FINGERPRINT_ERROR_LOCKOUT_PERMANENT
@@ -26,17 +27,23 @@ import android.os.CancellationSignal
 import android.os.Handler
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.biometrics.GatekeeperPasswordProvider
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
+import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
-import com.android.settings.biometrics.fingerprint2.shared.data.repository.PressToAuthProvider
-import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
-import com.android.settings.biometrics.fingerprint2.shared.model.Default
-import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.model.Default
+import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.settings.password.ChooseLockSettingsHelper
+import com.android.systemui.biometrics.shared.model.FingerprintSensor
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
+import com.android.systemui.biometrics.shared.model.SensorStrength
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -71,22 +78,29 @@ class FingerprintManagerInteractorTest {
   @Mock private lateinit var gateKeeperPasswordProvider: GatekeeperPasswordProvider
 
   private var testScope = TestScope(backgroundDispatcher)
-  private var pressToAuthProvider =
-    object : PressToAuthProvider {
-      override val isEnabled: Boolean
-        get() = false
+  private var pressToAuthInteractor =
+    object : PressToAuthInteractor {
+      override val isEnabled = flowOf(false)
     }
 
   @Before
   fun setup() {
+    val sensor = FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
+    val fingerprintSensorRepository =
+      object : FingerprintSensorRepository {
+        override val fingerprintSensor: Flow<FingerprintSensor> = flowOf(sensor)
+      }
+
     underTest =
       FingerprintManagerInteractorImpl(
         context,
         backgroundDispatcher,
         fingerprintManager,
+        fingerprintSensorRepository,
         gateKeeperPasswordProvider,
-        pressToAuthProvider,
+        pressToAuthInteractor,
         Default,
+        Intent(),
       )
   }
 
@@ -300,7 +314,8 @@ class FingerprintManagerInteractorTest {
           any(CancellationSignal::class.java),
           anyInt(),
           capture(enrollCallback),
-          eq(FingerprintManager.ENROLL_FIND_SENSOR)
+          eq(FingerprintManager.ENROLL_FIND_SENSOR),
+          any(FingerprintEnrollOptions::class.java),
         )
       enrollCallback.value.onEnrollmentProgress(1)
       runCurrent()
@@ -324,7 +339,8 @@ class FingerprintManagerInteractorTest {
           any(CancellationSignal::class.java),
           anyInt(),
           capture(enrollCallback),
-          eq(FingerprintManager.ENROLL_FIND_SENSOR)
+          eq(FingerprintManager.ENROLL_FIND_SENSOR),
+          any(FingerprintEnrollOptions::class.java),
         )
       enrollCallback.value.onEnrollmentHelp(-1, "help")
       runCurrent()
@@ -348,7 +364,8 @@ class FingerprintManagerInteractorTest {
           any(CancellationSignal::class.java),
           anyInt(),
           capture(enrollCallback),
-          eq(FingerprintManager.ENROLL_FIND_SENSOR)
+          eq(FingerprintManager.ENROLL_FIND_SENSOR),
+          any(FingerprintEnrollOptions::class.java),
         )
       enrollCallback.value.onEnrollmentError(-1, "error")
       runCurrent()

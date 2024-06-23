@@ -25,8 +25,10 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.flags.Flags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,6 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "SavedBluetoothDeviceUpdater";
-    private static final boolean DBG = Log.isLoggable(BluetoothDeviceUpdater.TAG, Log.DEBUG);
 
     private static final String PREF_KEY = "saved_bt";
 
@@ -100,14 +101,22 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
-        if (DBG) {
-            Log.d(TAG, "isFilterMatched() device name : " + cachedDevice.getName() +
-                    ", is connected : " + device.isConnected() + ", is profile connected : "
-                    + cachedDevice.isConnected());
+        boolean isExclusivelyManaged = BluetoothUtils.isExclusivelyManagedBluetoothDevice(mContext,
+                cachedDevice.getDevice());
+        Log.d(TAG, "isFilterMatched() device name : " + cachedDevice.getName()
+                + ", is connected : " + device.isConnected() + ", is profile connected : "
+                + cachedDevice.isConnected() + ", is exclusively managed : "
+                + isExclusivelyManaged);
+        if (Flags.enableHideExclusivelyManagedBluetoothDevice()) {
+            return device.getBondState() == BluetoothDevice.BOND_BONDED
+                    && (mShowConnectedDevice || (!device.isConnected()
+                    && isDeviceInCachedDevicesList(cachedDevice)))
+                    && !isExclusivelyManaged;
+        } else {
+            return device.getBondState() == BluetoothDevice.BOND_BONDED
+                    && (mShowConnectedDevice || (!device.isConnected()
+                    && isDeviceInCachedDevicesList(cachedDevice)));
         }
-        return device.getBondState() == BluetoothDevice.BOND_BONDED
-                && (mShowConnectedDevice || (!device.isConnected() && isDeviceInCachedDevicesList(
-                cachedDevice)));
     }
 
     @Override

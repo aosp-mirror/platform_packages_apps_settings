@@ -21,11 +21,14 @@ import static android.hardware.usb.UsbPortStatus.POWER_ROLE_NONE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.os.SystemProperties;
+import android.platform.test.annotations.RequiresFlagsEnabled;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceCategory;
@@ -33,6 +36,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
@@ -43,6 +47,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -57,11 +62,10 @@ public class UsbDetailsTranscodeMtpControllerTest {
     private PreferenceManager mPreferenceManager;
     private PreferenceScreen mScreen;
     private UsbDetailsTranscodeMtpController mUnderTest;
+    private UsbDetailsFragment mFragment;
 
     @Mock
     private UsbBackend mUsbBackend;
-    @Mock
-    private UsbDetailsFragment mFragment;
     @Mock
     private FragmentActivity mActivity;
 
@@ -69,6 +73,7 @@ public class UsbDetailsTranscodeMtpControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mFragment = spy(new UsbDetailsFragment());
         mContext = RuntimeEnvironment.application;
         mPreferenceManager = new PreferenceManager(mContext);
         mScreen = mPreferenceManager.createPreferenceScreen(mContext);
@@ -84,11 +89,12 @@ public class UsbDetailsTranscodeMtpControllerTest {
         mPreference = new PreferenceCategory(mContext);
         mPreference.setKey(mUnderTest.getPreferenceKey());
         mScreen.addPreference(mPreference);
+
+        mUnderTest.displayPreference(mScreen);
     }
 
     @Test
     public void displayRefresh_noUsbConnection_shouldDisablePrefCategory() {
-        mUnderTest.displayPreference(mScreen);
         when(mUsbBackend.areAllRolesSupported()).thenReturn(true);
 
         mUnderTest.refresh(false /* connected */, UsbManager.FUNCTION_MTP, POWER_ROLE_NONE,
@@ -99,7 +105,6 @@ public class UsbDetailsTranscodeMtpControllerTest {
 
     @Test
     public void displayRefresh_noDataTransfer_shouldDisablePrefCategory() {
-        mUnderTest.displayPreference(mScreen);
         when(mUsbBackend.areAllRolesSupported()).thenReturn(true);
 
         mUnderTest.refresh(true /* connected */, UsbManager.FUNCTION_NONE, POWER_ROLE_NONE,
@@ -110,7 +115,6 @@ public class UsbDetailsTranscodeMtpControllerTest {
 
     @Test
     public void displayRefresh_noDataRole_shouldDisablePrefCategory() throws InterruptedException {
-        mUnderTest.displayPreference(mScreen);
         when(mUsbBackend.areAllRolesSupported()).thenReturn(true);
 
         mUnderTest.refresh(true /* connected */, UsbManager.FUNCTION_MTP, POWER_ROLE_NONE,
@@ -122,7 +126,6 @@ public class UsbDetailsTranscodeMtpControllerTest {
     @Ignore("b/313362757")
     @Test
     public void displayRefresh_fileTransfer_withAbsentProp_shouldCheck() {
-        mUnderTest.displayPreference(mScreen);
         when(mUsbBackend.areAllRolesSupported()).thenReturn(true);
 
         mUnderTest.refresh(true /* connected */, UsbManager.FUNCTION_MTP, POWER_ROLE_NONE,
@@ -134,7 +137,6 @@ public class UsbDetailsTranscodeMtpControllerTest {
     @Ignore("b/313362757")
     @Test
     public void displayRefresh_fileTransfer_withUnsetProp_shouldUncheck() {
-        mUnderTest.displayPreference(mScreen);
         SystemProperties.set(TRANSCODE_MTP_SYS_PROP_KEY, Boolean.toString(false));
         when(mUsbBackend.areAllRolesSupported()).thenReturn(true);
 
@@ -147,7 +149,6 @@ public class UsbDetailsTranscodeMtpControllerTest {
     @Ignore("b/313362757")
     @Test
     public void displayRefresh_fileTransfer_withSetProp_shouldCheck() {
-        mUnderTest.displayPreference(mScreen);
         SystemProperties.set(TRANSCODE_MTP_SYS_PROP_KEY, Boolean.toString(true));
         when(mUsbBackend.areAllRolesSupported()).thenReturn(true);
 
@@ -160,7 +161,6 @@ public class UsbDetailsTranscodeMtpControllerTest {
     @Ignore("b/313362757")
     @Test
     public void click_checked_shouldSetSystemProperty() {
-        mUnderTest.displayPreference(mScreen);
         getSwitchPreference().performClick();
         assertThat(SystemProperties.getBoolean(TRANSCODE_MTP_SYS_PROP_KEY, false)).isTrue();
     }
@@ -168,7 +168,6 @@ public class UsbDetailsTranscodeMtpControllerTest {
     @Ignore("b/313362757")
     @Test
     public void click_unChecked_shouldUnsetSystemProperty() {
-        mUnderTest.displayPreference(mScreen);
         getSwitchPreference().performClick();
         getSwitchPreference().performClick();
         assertThat(SystemProperties.getBoolean(TRANSCODE_MTP_SYS_PROP_KEY, true)).isFalse();
@@ -179,6 +178,21 @@ public class UsbDetailsTranscodeMtpControllerTest {
     public void isAvailable_isMonkey_shouldReturnFalse() {
         ShadowUtils.setIsUserAMonkey(true);
         assertThat(mUnderTest.isAvailable()).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_AUTH_CHALLENGE_FOR_USB_PREFERENCES)
+    public void onClick_userAuthenticated() {
+        setAuthPassesAutomatically();
+
+        mUnderTest.onPreferenceClick(null);
+
+        assertThat(mFragment.isUserAuthenticated()).isTrue();
+    }
+
+    private void setAuthPassesAutomatically() {
+        Shadows.shadowOf(mContext.getSystemService(KeyguardManager.class))
+                .setIsKeyguardSecure(false);
     }
 
     private SwitchPreference getSwitchPreference() {

@@ -16,7 +16,6 @@
 
 package com.android.settings.privatespace;
 
-import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
 
@@ -31,6 +30,7 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
@@ -55,8 +55,8 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
             return null;
         }
         GlifLayout rootView =
-                (GlifLayout) inflater.inflate(
-                        R.layout.privatespace_setlock_screen, container, false);
+                (GlifLayout)
+                        inflater.inflate(R.layout.private_space_setlock_screen, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
@@ -70,9 +70,7 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
                         .setText(R.string.private_space_set_lock_label)
                         .setListener(onClickNewLock())
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(
-                                androidx.appcompat.R.style
-                                        .Base_TextAppearance_AppCompat_Widget_Button)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build());
         OnBackPressedCallback callback =
                 new OnBackPressedCallback(true /* enabled by default */) {
@@ -97,7 +95,8 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_USE_SCREEN_LOCK);
             // Simply Use default screen lock. No need to handle
-            launchActivityForAction(ACCOUNT_LOGIN_ACTION);
+            NavHostFragment.findNavController(PrivateSpaceSetLockFragment.this)
+                    .navigate(R.id.action_lock_success_fragment);
         };
     }
 
@@ -115,6 +114,7 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
         if (userHandle != null) {
             Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
             intent.putExtra(EXTRA_ACTION_TYPE, action);
+            Log.i(TAG, "Start separate lock setup for private profile");
             getActivity().startActivityForResultAsUser(intent, action, userHandle);
         } else {
             Log.w(TAG, "Private profile user handle is null");

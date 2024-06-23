@@ -19,6 +19,7 @@ package com.android.settings.spa.app.appinfo
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
 import android.os.UserManager
+import androidx.annotation.VisibleForTesting
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Report
 import androidx.compose.material3.Text
@@ -87,9 +88,10 @@ class AppForceStopButton(
         dialogPresenter.open()
     }
 
-    private fun getAdminRestriction(app: ApplicationInfo): EnforcedAdmin? = when {
+    @VisibleForTesting
+    fun getAdminRestriction(app: ApplicationInfo): EnforcedAdmin? = when {
         packageManager.isPackageStateProtected(app.packageName, app.userId) -> {
-            RestrictedLockUtilsInternal.getDeviceOwner(context)
+            RestrictedLockUtilsInternal.getDeviceOwner(context) ?: EnforcedAdmin()
         }
 
         else -> RestrictedLockUtilsInternal.checkIfRestrictionEnforced(

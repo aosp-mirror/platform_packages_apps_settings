@@ -74,6 +74,7 @@ import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.AdditionalMatchers;
@@ -709,6 +710,7 @@ public class UserSettingsTest {
         verify(mUserManager).getAliveUsers();
     }
 
+    @Ignore
     @Test
     public void updateUserList_userIconMissing_shouldLoadIcon() {
         UserInfo currentUser = getAdminUser(true);

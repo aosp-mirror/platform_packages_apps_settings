@@ -21,8 +21,8 @@ import android.platform.test.annotations.Presubmit;
 import android.provider.Settings;
 import android.system.helpers.SettingsHelper;
 import android.test.InstrumentationTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
 
+import androidx.test.filters.MediumTest;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.Direction;
 import androidx.test.uiautomator.UiDevice;
