@@ -110,9 +110,17 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
         return sNewDevice;
     }
 
+    /** Test only: get the {@link DialogEventListener} passed to the dialog. */
+    @VisibleForTesting
+    @Nullable
+    DialogEventListener getListener() {
+        return sListener;
+    }
+
     /** Test only: get the event data passed to the dialog. */
     @VisibleForTesting
-    protected @NonNull Pair<Integer, Object>[] getEventData() {
+    @NonNull
+    Pair<Integer, Object>[] getEventData() {
         return sEventData;
     }
 

@@ -77,11 +77,13 @@ public class BatteryDiffData {
         processAndSortEntries(mSystemEntries);
     }
 
-    long getStartTimestamp() {
+    /** Gets the start timestamp. */
+    public long getStartTimestamp() {
         return mStartTimestamp;
     }
 
-    long getEndTimestamp() {
+    /** Gets the end timestamp. */
+    public long getEndTimestamp() {
         return mEndTimestamp;
     }
 

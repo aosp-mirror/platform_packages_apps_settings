@@ -19,7 +19,9 @@ package com.android.settings.notification.modes;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.service.notification.ZenPolicy.STATE_ALLOW;
 import static android.service.notification.ZenPolicy.STATE_UNSET;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -30,7 +32,12 @@ import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
+
 import androidx.preference.TwoStatePreference;
+
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

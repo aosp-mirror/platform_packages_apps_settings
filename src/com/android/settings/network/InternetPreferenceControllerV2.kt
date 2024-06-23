@@ -28,7 +28,7 @@ import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 class InternetPreferenceControllerV2(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
 
-    private val repository = InternetPreferenceRepository(mContext)
+    private val repository by lazy { InternetPreferenceRepository(mContext) }
     private var preference: Preference? = null
 
     override fun getAvailabilityStatus() =

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,59 +13,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.android.settings.fuelgauge.batteryusage.db
 
-package com.android.settings.fuelgauge.batteryusage.db;
+import android.database.Cursor
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
-import android.database.Cursor;
-
-import androidx.room.Dao;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-
-import java.util.List;
-
-/** Data access object for accessing {@link BatteryState} in the database. */
+/** Data access object for accessing [BatteryState] in the database. */
 @Dao
-public interface BatteryStateDao {
+interface BatteryStateDao {
+    /** Inserts a [BatteryState] data into the database. */
+    @Insert(onConflict = OnConflictStrategy.REPLACE) fun insert(state: BatteryState)
 
-    /** Inserts a {@link BatteryState} data into the database. */
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(BatteryState state);
+    /** Inserts [BatteryState] data into the database. */
+    @Insert(onConflict = OnConflictStrategy.REPLACE) fun insertAll(states: List<BatteryState>)
 
-    /** Inserts {@link BatteryState} data into the database. */
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<BatteryState> states);
-
-    /** Gets the {@link Cursor} of the latest record timestamp no later than the given timestamp. */
+    /** Gets the [Cursor] of the latest record timestamp no later than the given timestamp. */
     @Query("SELECT MAX(timestamp) FROM BatteryState WHERE timestamp <= :timestamp")
-    Cursor getLatestTimestampBefore(long timestamp);
+    fun getLatestTimestampBefore(timestamp: Long): Cursor
 
     /** Lists all recorded battery states after a specific timestamp. */
     @Query("SELECT * FROM BatteryState WHERE timestamp >= :timestamp ORDER BY timestamp ASC")
-    Cursor getBatteryStatesAfter(long timestamp);
+    fun getBatteryStatesAfter(timestamp: Long): Cursor
 
     /** Lists all recorded data after a specific timestamp. */
     @Query("SELECT * FROM BatteryState WHERE timestamp > :timestamp ORDER BY timestamp DESC")
-    List<BatteryState> getAllAfter(long timestamp);
+    fun getAllAfter(timestamp: Long): List<BatteryState>
 
     /** Get the count of distinct timestamp after a specific timestamp. */
     @Query("SELECT COUNT(DISTINCT timestamp) FROM BatteryState WHERE timestamp > :timestamp")
-    int getDistinctTimestampCount(long timestamp);
+    fun getDistinctTimestampCount(timestamp: Long): Int
 
     /** Lists all distinct timestamps after a specific timestamp. */
     @Query("SELECT DISTINCT timestamp FROM BatteryState WHERE timestamp > :timestamp")
-    List<Long> getDistinctTimestamps(long timestamp);
+    fun getDistinctTimestamps(timestamp: Long): List<Long>
 
     /** Deletes all recorded data before a specific timestamp. */
     @Query("DELETE FROM BatteryState WHERE timestamp <= :timestamp")
-    void clearAllBefore(long timestamp);
+    fun clearAllBefore(timestamp: Long)
 
     /** Deletes all recorded data after a specific timestamp. */
     @Query("DELETE FROM BatteryState WHERE timestamp >= :timestamp")
-    void clearAllAfter(long timestamp);
+    fun clearAllAfter(timestamp: Long)
 
     /** Clears all recorded data in the database. */
-    @Query("DELETE FROM BatteryState")
-    void clearAll();
+    @Query("DELETE FROM BatteryState") fun clearAll()
 }

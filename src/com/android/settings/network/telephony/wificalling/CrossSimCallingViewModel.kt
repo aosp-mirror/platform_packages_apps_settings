@@ -24,7 +24,7 @@ import android.telephony.TelephonyManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.settings.R
-import com.android.settings.network.mobileDataEnabledFlow
+import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.ims.ImsMmTelRepositoryImpl
 import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.network.telephony.safeGetConfig
@@ -54,6 +54,7 @@ class CrossSimCallingViewModel(
     private val scope = viewModelScope + Dispatchers.Default
     private val metricsFeatureProvider = featureFactory.metricsFeatureProvider
     private val updateChannel = Channel<Unit>()
+    private val mobileDataRepository = MobileDataRepository(application)
 
     init {
         val resources = application.resources
@@ -81,7 +82,7 @@ class CrossSimCallingViewModel(
     }
 
     private fun List<Int>.anyMobileDataEnableChangedFlow() = map { subId ->
-        application.mobileDataEnabledFlow(subId = subId, sendInitialValue = false)
+        mobileDataRepository.mobileDataEnabledChangedFlow(subId = subId, sendInitialValue = false)
     }.merge()
 
     private suspend fun updateCrossSimCalling(activeSubIds: List<Int>, newEnabled: Boolean) {
