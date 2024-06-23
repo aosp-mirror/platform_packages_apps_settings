@@ -132,8 +132,8 @@ public class ZenModeSliceBuilder {
         final Uri contentUri = new Uri.Builder().appendPath(ZEN_MODE_SLICE_KEY).build();
         final String screenTitle = context.getText(R.string.zen_mode_settings_title).toString();
         return SliceBuilderUtils.buildSearchResultPageIntent(context,
-                ZenModeSettings.class.getName(), ZEN_MODE_SLICE_KEY, screenTitle,
-                SettingsEnums.NOTIFICATION_ZEN_MODE, R.string.menu_key_notifications)
+                        ZenModeSettings.class.getName(), ZEN_MODE_SLICE_KEY, screenTitle,
+                        SettingsEnums.NOTIFICATION_ZEN_MODE, R.string.menu_key_notifications)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }

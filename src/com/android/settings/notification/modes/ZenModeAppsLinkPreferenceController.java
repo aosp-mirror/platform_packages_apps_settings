@@ -16,7 +16,8 @@
 
 package com.android.settings.notification.modes;
 
-import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
+import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
+import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -29,8 +30,9 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,24 +48,32 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
     private static final String TAG = "ZenModeAppsLinkPreferenceController";
 
     private final ZenModeSummaryHelper mSummaryHelper;
+    private final ApplicationsState mApplicationsState;
     private ApplicationsState.Session mAppSession;
-    private NotificationBackend mNotificationBackend = new NotificationBackend();
+    private final ZenHelperBackend mHelperBackend;
     private ZenMode mZenMode;
     private Preference mPreference;
+    private final Fragment mHost;
 
     ZenModeAppsLinkPreferenceController(Context context, String key, Fragment host,
-            ApplicationsState applicationsState, ZenModesBackend backend) {
+            ApplicationsState applicationsState, ZenModesBackend backend,
+            ZenHelperBackend helperBackend) {
         super(context, key, backend);
-        mSummaryHelper = new ZenModeSummaryHelper(mContext, mBackend);
-        if (applicationsState != null && host != null) {
-            mAppSession = applicationsState.newSession(mAppSessionCallbacks, host.getLifecycle());
-        }
+        mSummaryHelper = new ZenModeSummaryHelper(mContext, helperBackend);
+        mHelperBackend = helperBackend;
+        mApplicationsState = applicationsState;
+        mHost = host;
+    }
+
+    @Override
+    public boolean isAvailable(ZenMode zenMode) {
+        return zenMode.getRule().getInterruptionFilter() != INTERRUPTION_FILTER_ALL;
     }
 
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
-        bundle.putString(MODE_ID, zenMode.getId());
+        bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
         // TODO(b/332937635): Update metrics category
         preference.setIntent(new SubSettingLauncher(mContext)
                 .setDestination(ZenModeAppsFragment.class.getName())
@@ -72,6 +82,9 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
                 .toIntent());
         mZenMode = zenMode;
         mPreference = preference;
+        if (mApplicationsState != null && mHost != null) {
+            mAppSession = mApplicationsState.newSession(mAppSessionCallbacks, mHost.getLifecycle());
+        }
         triggerUpdateAppsBypassingDndSummaryText();
     }
 
@@ -105,7 +118,7 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
                 pkgLabelMap.put(entry.info.packageName, entry.label);
             }
         }
-        for (String pkg : mNotificationBackend.getPackagesBypassingDnd(mContext.getUserId(),
+        for (String pkg : mHelperBackend.getPackagesBypassingDnd(mContext.getUserId(),
                 /* includeConversationChannels= */ false)) {
             // Settings may hide some packages from the user, so if they're not present here
             // we skip displaying them, even if they bypass dnd.
@@ -117,11 +130,13 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
         return appsBypassingDnd;
     }
 
-    @VisibleForTesting final ApplicationsState.Callbacks mAppSessionCallbacks =
+    @VisibleForTesting
+    final ApplicationsState.Callbacks mAppSessionCallbacks =
             new ApplicationsState.Callbacks() {
 
                 @Override
-                public void onRunningStateChanged(boolean running) { }
+                public void onRunningStateChanged(boolean running) {
+                }
 
                 @Override
                 public void onPackageListChanged() {
@@ -134,16 +149,20 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
                 }
 
                 @Override
-                public void onPackageIconChanged() { }
+                public void onPackageIconChanged() {
+                }
 
                 @Override
-                public void onPackageSizeChanged(String packageName) { }
+                public void onPackageSizeChanged(String packageName) {
+                }
 
                 @Override
-                public void onAllSizesComputed() { }
+                public void onAllSizesComputed() {
+                }
 
                 @Override
-                public void onLauncherInfoChanged() { }
+                public void onLauncherInfoChanged() {
+                }
 
                 @Override
                 public void onLoadEntriesCompleted() {

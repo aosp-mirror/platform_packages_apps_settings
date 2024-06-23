@@ -54,6 +54,8 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
@@ -77,8 +79,8 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
-    @Mock
-    private ZenModesBackend mBackend;
+    @Mock private ZenModesBackend mBackend;
+    @Mock private ZenHelperBackend mHelperBackend;
 
     private PreferenceCategory mMessagesPrefCategory, mCallsPrefCategory;
 
@@ -90,10 +92,11 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
 
         mContext = RuntimeEnvironment.application;
 
-        mMessagesController = new ZenModePrioritySendersPreferenceController(
-                mContext, "messages", true, mBackend);
-        mCallsController = new ZenModePrioritySendersPreferenceController(
-                mContext, "calls", false, mBackend);
+        mMessagesController = new ZenModePrioritySendersPreferenceController(mContext, "messages",
+                true, mBackend, mHelperBackend);
+        mCallsController = new ZenModePrioritySendersPreferenceController(mContext, "calls", false,
+                mBackend, mHelperBackend);
+
         mMessagesPrefCategory = new PreferenceCategory(mContext);
         mMessagesPrefCategory.setKey(mMessagesController.getPreferenceKey());
         mCallsPrefCategory = new PreferenceCategory(mContext);
@@ -106,7 +109,7 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
 
         Cursor cursor = mock(Cursor.class);
         when(cursor.getCount()).thenReturn(1);
-        when(mBackend.queryAllContactsData()).thenReturn(cursor);
+        when(mHelperBackend.queryAllContactsData()).thenReturn(cursor);
     }
 
     // Makes a preference with the provided key and whether it's a checkbox with
