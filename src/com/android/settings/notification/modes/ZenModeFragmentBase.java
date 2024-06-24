@@ -22,6 +22,7 @@ import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -112,6 +113,18 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
             return;
         }
         updateControllers();
+    }
+
+    @Override
+    public final boolean onOptionsItemSelected(MenuItem item) {
+        if (mZenMode != null) {
+            return onOptionsItemSelected(item, mZenMode);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected boolean onOptionsItemSelected(MenuItem item, @NonNull ZenMode zenMode) {
+        return true;
     }
 
     private void updateControllers() {
