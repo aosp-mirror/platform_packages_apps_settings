@@ -32,7 +32,7 @@ import org.robolectric.annotation.Resetter;
 import java.util.List;
 import java.util.Optional;
 
-@Implements(value = AudioStreamsHelper.class, callThroughByDefault = false)
+@Implements(value = AudioStreamsHelper.class, callThroughByDefault = true)
 public class ShadowAudioStreamsHelper {
     private static AudioStreamsHelper sMockHelper;
     @Nullable private static CachedBluetoothDevice sCachedBluetoothDevice;

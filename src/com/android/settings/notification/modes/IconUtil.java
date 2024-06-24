@@ -24,6 +24,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
@@ -32,10 +33,18 @@ import com.android.settingslib.Utils;
 
 class IconUtil {
 
-    static Drawable applyTint(@NonNull Context context, @NonNull Drawable icon) {
+    static Drawable applyNormalTint(@NonNull Context context, @NonNull Drawable icon) {
+        return applyTint(context, icon, android.R.attr.colorControlNormal);
+    }
+
+    static Drawable applyAccentTint(@NonNull Context context, @NonNull Drawable icon) {
+        return applyTint(context, icon, android.R.attr.colorAccent);
+    }
+
+    private static Drawable applyTint(@NonNull Context context, @NonNull Drawable icon,
+            @AttrRes int colorAttr) {
         icon = icon.mutate();
-        icon.setTintList(
-                Utils.getColorAttr(context, android.R.attr.colorControlNormal));
+        icon.setTintList(Utils.getColorAttr(context, colorAttr));
         return icon;
     }
 
