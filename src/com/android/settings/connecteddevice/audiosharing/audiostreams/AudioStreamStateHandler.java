@@ -35,10 +35,10 @@ class AudioStreamStateHandler {
     private static final boolean DEBUG = BluetoothUtils.D;
     @VisibleForTesting static final int EMPTY_STRING_RES = 0;
 
-    final AudioStreamsRepository mAudioStreamsRepository = AudioStreamsRepository.getInstance();
     final Handler mHandler = new Handler(Looper.getMainLooper());
     final MetricsFeatureProvider mMetricsFeatureProvider =
             FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+    AudioStreamsRepository mAudioStreamsRepository = AudioStreamsRepository.getInstance();
 
     AudioStreamStateHandler() {}
 
@@ -111,5 +111,10 @@ class AudioStreamStateHandler {
     /** Subclasses should always override. */
     AudioStreamsProgressCategoryController.AudioStreamState getStateEnum() {
         return AudioStreamsProgressCategoryController.AudioStreamState.UNKNOWN;
+    }
+
+    @VisibleForTesting
+    void setAudioStreamsRepositoryForTesting(AudioStreamsRepository repository) {
+        mAudioStreamsRepository = repository;
     }
 }
