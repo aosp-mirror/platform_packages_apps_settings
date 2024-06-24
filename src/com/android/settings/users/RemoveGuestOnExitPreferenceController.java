@@ -74,11 +74,18 @@ public class RemoveGuestOnExitPreferenceController extends BasePreferenceControl
             restrictedSwitchPreference.setVisible(false);
         } else {
             if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+                restrictedSwitchPreference.setVisible(true);
                 final RestrictedLockUtils.EnforcedAdmin disallowRemoveUserAdmin =
                         RestrictedLockUtilsInternal.checkIfRestrictionEnforced(mContext,
                                 UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
-                restrictedSwitchPreference.setDisabledByAdmin(disallowRemoveUserAdmin);
-                restrictedSwitchPreference.setVisible(true);
+                if (disallowRemoveUserAdmin != null) {
+                    restrictedSwitchPreference.setDisabledByAdmin(disallowRemoveUserAdmin);
+                } else if (mUserCaps.mDisallowAddUserSetByAdmin) {
+                    restrictedSwitchPreference.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+                } else if (mUserCaps.mDisallowAddUser) {
+                    // Adding user is restricted by system
+                    restrictedSwitchPreference.setVisible(false);
+                }
             } else {
                 restrictedSwitchPreference.setDisabledByAdmin(
                         mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);

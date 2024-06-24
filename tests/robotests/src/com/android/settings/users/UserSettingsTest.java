@@ -34,6 +34,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.settings.SettingsEnums;
@@ -448,6 +449,33 @@ public class UserSettingsTest {
         verify(mAddGuestPreference).setEnabled(true);
         verify(mAddUserPreference).setVisible(true);
         verify(mAddUserPreference).setEnabled(true);
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
+    public void updateUserList_disallowAddUser_shouldShowButDisableAddActions() {
+        givenUsers(getAdminUser(true));
+        mUserCapabilities.mCanAddGuest = true;
+        mUserCapabilities.mCanAddUser = false;
+        mUserCapabilities.mDisallowAddUser = true;
+        mUserCapabilities.mDisallowAddUserSetByAdmin = false;
+        List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        enforcingUsers.add(new UserManager.EnforcingUser(UserHandle.myUserId(),
+                UserManager.RESTRICTION_SOURCE_SYSTEM));
+        when(mUserManager.getUserRestrictionSources(UserManager.DISALLOW_ADD_USER,
+                UserHandle.of(UserHandle.myUserId()))).thenReturn(enforcingUsers);
+
+        doReturn(true)
+                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_GUEST));
+        doReturn(true)
+                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_SECONDARY));
+
+        mFragment.updateUserList();
+
+        verify(mAddGuestPreference).setVisible(true);
+        verify(mAddGuestPreference).setEnabled(false);
+        verify(mAddUserPreference).setVisible(true);
+        verify(mAddUserPreference).setEnabled(false);
     }
 
     @Test

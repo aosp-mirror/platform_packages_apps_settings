@@ -43,10 +43,12 @@ public class AddUserWhenLockedPreferenceController extends TogglePreferenceContr
             restrictedSwitchPreference.setVisible(false);
         } else {
             if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+                restrictedSwitchPreference.setVisible(true);
                 if (mUserCaps.mDisallowAddUserSetByAdmin) {
                     restrictedSwitchPreference.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+                } else if (mUserCaps.mDisallowAddUser) {
+                    restrictedSwitchPreference.setVisible(false);
                 }
-                restrictedSwitchPreference.setVisible(true);
             } else {
                 restrictedSwitchPreference.setDisabledByAdmin(
                         mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);

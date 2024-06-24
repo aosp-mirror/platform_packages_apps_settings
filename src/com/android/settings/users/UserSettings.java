@@ -1469,7 +1469,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private boolean updateAddGuestPreference(Context context, boolean isGuestAlreadyCreated) {
         boolean isVisible = false;
         if (!isGuestAlreadyCreated && (mUserCaps.mCanAddGuest
-                || (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUserSetByAdmin))
+                || (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUser))
                 && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && (mUserCaps.mUserSwitcherEnabled || Flags.newMultiuserSettingsUx())) {
@@ -1488,6 +1488,19 @@ public class UserSettings extends SettingsPreferenceFragment
                 if (Flags.newMultiuserSettingsUx()
                         && mUserCaps.mDisallowAddUserSetByAdmin) {
                     mAddGuest.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+                } else if (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUser) {
+                    final List<UserManager.EnforcingUser> enforcingUsers =
+                            mUserManager.getUserRestrictionSources(UserManager.DISALLOW_ADD_USER,
+                                    UserHandle.of(UserHandle.myUserId()));
+                    if (!enforcingUsers.isEmpty()) {
+                        final UserManager.EnforcingUser enforcingUser = enforcingUsers.get(0);
+                        final int restrictionSource = enforcingUser.getUserRestrictionSource();
+                        if (restrictionSource == UserManager.RESTRICTION_SOURCE_SYSTEM) {
+                            mAddGuest.setEnabled(false);
+                        } else {
+                            mAddGuest.setVisible(false);
+                        }
+                    }
                 } else {
                     mAddGuest.setEnabled(canSwitchUserNow() || Flags.newMultiuserSettingsUx());
                 }
@@ -1518,7 +1531,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUserCommon(Context context, RestrictedPreference addUser,
             boolean canAddRestrictedProfile) {
-        if ((mUserCaps.mCanAddUser && !mUserCaps.mDisallowAddUserSetByAdmin)
+        if ((mUserCaps.mCanAddUser
+                && !(mUserCaps.mDisallowAddUserSetByAdmin && Flags.newMultiuserSettingsUx()))
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && (mUserCaps.mUserSwitcherEnabled || Flags.newMultiuserSettingsUx())) {
             addUser.setVisible(true);
@@ -1539,10 +1553,23 @@ public class UserSettings extends SettingsPreferenceFragment
                 addUser.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
             }
-        } else if (Flags.newMultiuserSettingsUx()
-                && mUserCaps.mDisallowAddUserSetByAdmin) {
+        } else if (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUserSetByAdmin) {
             addUser.setVisible(true);
             addUser.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+        } else if (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUser) {
+            final List<UserManager.EnforcingUser> enforcingUsers =
+                    mUserManager.getUserRestrictionSources(UserManager.DISALLOW_ADD_USER,
+                            UserHandle.of(UserHandle.myUserId()));
+            if (!enforcingUsers.isEmpty()) {
+                final UserManager.EnforcingUser enforcingUser = enforcingUsers.get(0);
+                final int restrictionSource = enforcingUser.getUserRestrictionSource();
+                if (restrictionSource == UserManager.RESTRICTION_SOURCE_SYSTEM) {
+                    addUser.setVisible(true);
+                    addUser.setEnabled(false);
+                } else {
+                    addUser.setVisible(false);
+                }
+            }
         } else {
             addUser.setVisible(false);
         }
