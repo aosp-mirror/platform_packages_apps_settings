@@ -44,19 +44,26 @@ public class WifiScanThrottlingPreferenceController extends DeveloperOptionsPref
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
+        if(mWifiManager == null) {
+            return false;
+        }
         mWifiManager.setScanThrottleEnabled(isEnabled);
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        ((SwitchPreference) mPreference).setChecked(mWifiManager.isScanThrottleEnabled());
+        if(mWifiManager != null){
+            ((SwitchPreference) mPreference).setChecked(mWifiManager.isScanThrottleEnabled());
+        }
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        mWifiManager.setScanThrottleEnabled(true);
+        if(mWifiManager != null) {
+            mWifiManager.setScanThrottleEnabled(true);
+        }
         ((SwitchPreference) mPreference).setChecked(true);
     }
 }
