@@ -80,6 +80,7 @@ public class AddSourceWaitForResponseStateTest {
 
     @Test
     public void testGetInstance() {
+        mInstance = AddSourceWaitForResponseState.getInstance();
         assertThat(mInstance).isNotNull();
         assertThat(mInstance).isInstanceOf(AudioStreamStateHandler.class);
     }

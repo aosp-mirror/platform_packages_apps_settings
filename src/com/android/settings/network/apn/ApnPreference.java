@@ -85,10 +85,11 @@ public class ApnPreference extends Preference
         final RelativeLayout textArea = (RelativeLayout) view.findViewById(R.id.text_layout);
         textArea.setOnClickListener(this);
 
+        final View radioButtonFrame = view.itemView.requireViewById(R.id.apn_radio_button_frame);
         final RadioButton rb = view.itemView.requireViewById(R.id.apn_radiobutton);
         mRadioButton = rb;
         if (mDefaultSelectable) {
-            view.itemView.requireViewById(R.id.apn_radio_button_frame).setOnClickListener((v) -> {
+            radioButtonFrame.setOnClickListener((v) -> {
                 rb.performClick();
             });
             rb.setOnCheckedChangeListener(this);
@@ -96,9 +97,9 @@ public class ApnPreference extends Preference
             mProtectFromCheckedChange = true;
             rb.setChecked(mIsChecked);
             mProtectFromCheckedChange = false;
-            rb.setVisibility(View.VISIBLE);
+            radioButtonFrame.setVisibility(View.VISIBLE);
         } else {
-            rb.setVisibility(View.GONE);
+            radioButtonFrame.setVisibility(View.GONE);
         }
     }
 

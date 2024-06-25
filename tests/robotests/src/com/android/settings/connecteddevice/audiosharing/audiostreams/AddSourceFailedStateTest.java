@@ -58,6 +58,7 @@ public class AddSourceFailedStateTest {
 
     @Test
     public void testGetInstance() {
+        mInstance = AddSourceFailedState.getInstance();
         assertThat(mInstance).isNotNull();
         assertThat(mInstance).isInstanceOf(SyncedState.class);
     }

@@ -58,6 +58,7 @@ public class AddSourceBadCodeStateTest {
 
     @Test
     public void testGetInstance() {
+        mInstance = AddSourceBadCodeState.getInstance();
         assertThat(mInstance).isNotNull();
         assertThat(mInstance).isInstanceOf(SyncedState.class);
     }
