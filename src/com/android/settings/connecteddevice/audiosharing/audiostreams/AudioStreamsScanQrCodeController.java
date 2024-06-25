@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
@@ -47,9 +48,13 @@ public class AudioStreamsScanQrCodeController extends BasePreferenceController
     final BluetoothCallback mBluetoothCallback =
             new BluetoothCallback() {
                 @Override
-                public void onActiveDeviceChanged(
-                        @Nullable CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-                    if (bluetoothProfile == BluetoothProfile.LE_AUDIO) {
+                public void onProfileConnectionStateChanged(
+                        @NonNull CachedBluetoothDevice cachedDevice,
+                        @ConnectionState int state,
+                        int bluetoothProfile) {
+                    if (bluetoothProfile == BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT
+                            && (state == BluetoothAdapter.STATE_CONNECTED
+                                    || state == BluetoothAdapter.STATE_DISCONNECTED)) {
                         updateVisibility();
                     }
                 }

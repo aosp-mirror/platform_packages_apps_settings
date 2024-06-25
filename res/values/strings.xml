@@ -7930,15 +7930,27 @@
     <!-- Zen Modes: Option to add an automatic schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule">Select activation type</string>
 
-    <!-- Zen Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <!-- Priority Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_time">Time</string>
-    <!-- Zen Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
+    <!-- Priority Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
     <string name="zen_mode_select_schedule_time_example">Ex. \"9:30 – 5:00 PM\"</string>
 
-    <!-- Zen Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <!-- Priority Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_calendar">Calendar</string>
-    <!-- Zen Modes: Example text for the option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=60] -->
+    <!-- Priority Modes: Example text for the option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=60] -->
     <string name="zen_mode_select_schedule_calendar_example">Ex. \"Personal calendar\"</string>
+
+    <!-- Priority Modes: Short text that indicates that a mode is currently on (active). [CHAR_LIMIT=10] -->
+    <string name="zen_mode_active_text">ON</string>
+
+    <!-- Priority Modes: Format string for the "current state + trigger description summary for rules in the list. [CHAR_LIMIT=10] -->
+    <string name="zen_mode_format_status_and_trigger" translatable="false"><xliff:g id="current_status" example="ON">%1$s</xliff:g> • <xliff:g id="trigger_description" example="Mon-Fri, 23:00-7:00">%2$s</xliff:g></string>
+
+    <!-- Priority Modes: Call to action for a mode that is disabled and needs to be configured. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_disabled_tap_to_set_up">Tap to set up</string>
+
+    <!-- Priority Modes: Indicates that a mode is disabled by the user. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_disabled_by_user">Paused</string>
 
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
@@ -7955,8 +7967,14 @@
     <!--  Do not disturb: Title for dialog that allows users to delete DND rules/schedules[CHAR LIMIT=40] -->
     <string name="zen_mode_delete_automatic_rules">Delete schedules</string>
 
-    <!--  Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
+    <!-- Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_delete">Delete</string>
+
+    <!-- Do not disturb: Menu option for deleting a mode on its configuration page [CHAR LIMIT=40] -->
+    <string name="zen_mode_menu_delete_mode">Delete mode</string>
+
+    <!-- Do not disturb: Confirmation dialog asking the user whether they would like to delete the named mode [CHAR LIMIT: 40] -->
+    <string name="zen_mode_delete_mode_confirmation">Delete \"<xliff:g id="mode" example="My Schedule">%1$s</xliff:g>\" mode?</string>
 
     <!--  Do not disturb: Edit label for button that allows user to edit the dnd schedule name. [CHAR LIMIT=30] -->
     <string name="zen_mode_rule_name_edit">Edit</string>
