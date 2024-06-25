@@ -79,7 +79,7 @@ class ZenModesListItemPreference extends RestrictedPreference {
                                     mZenMode.getRule().getTriggerDescription());
             case ENABLED -> mZenMode.getRule().getTriggerDescription();
             case DISABLED_BY_USER -> mContext.getString(R.string.zen_mode_disabled_by_user);
-            case DISABLED_BY_OTHER -> mContext.getString(R.string.zen_mode_disabled_tap_to_set_up);
+            case DISABLED_BY_OTHER -> mContext.getString(R.string.zen_mode_disabled_needs_setup);
         };
         setSummary(statusText);
 
