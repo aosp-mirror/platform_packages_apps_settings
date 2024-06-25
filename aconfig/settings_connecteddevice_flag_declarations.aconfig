@@ -38,3 +38,13 @@ flag {
         purpose: PURPOSE_BUGFIX
     }
 }
+
+flag {
+    name: "exclude_webcam_auth_challenge"
+    namespace: "safety_center"
+    description: "Gates whether to exclude webcam from USB preferences auth challenge."
+    bug: "349370229"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}
