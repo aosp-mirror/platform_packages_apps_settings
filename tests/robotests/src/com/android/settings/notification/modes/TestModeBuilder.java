@@ -24,6 +24,7 @@ import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 
 import com.android.settingslib.notification.modes.ZenMode;
@@ -70,13 +71,13 @@ class TestModeBuilder {
         return this;
     }
 
-    public TestModeBuilder setName(String name) {
+    TestModeBuilder setName(String name) {
         mRule.setName(name);
         mConfigZenRule.name = name;
         return this;
     }
 
-    public TestModeBuilder setPackage(String pkg) {
+    TestModeBuilder setPackage(String pkg) {
         mRule.setPackageName(pkg);
         mConfigZenRule.pkg = pkg;
         return this;
@@ -114,7 +115,7 @@ class TestModeBuilder {
         return this;
     }
 
-    public TestModeBuilder setEnabled(boolean enabled) {
+    TestModeBuilder setEnabled(boolean enabled) {
         mRule.setEnabled(enabled);
         mConfigZenRule.enabled = enabled;
         return this;
@@ -126,9 +127,14 @@ class TestModeBuilder {
         return this;
     }
 
-    public TestModeBuilder setTriggerDescription(@Nullable String triggerDescription) {
+    TestModeBuilder setTriggerDescription(@Nullable String triggerDescription) {
         mRule.setTriggerDescription(triggerDescription);
         mConfigZenRule.triggerDescription = triggerDescription;
+        return this;
+    }
+
+    TestModeBuilder setIconResId(@DrawableRes int iconResId) {
+        mRule.setIconResId(iconResId);
         return this;
     }
 
