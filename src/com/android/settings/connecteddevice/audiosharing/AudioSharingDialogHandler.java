@@ -258,6 +258,8 @@ public class AudioSharingDialogHandler {
             boolean userTriggered) {
         Map<Integer, List<CachedBluetoothDevice>> groupedDevices =
                 AudioSharingUtils.fetchConnectedDevicesByGroupId(mLocalBtManager);
+        BluetoothDevice btDevice = cachedDevice.getDevice();
+        String deviceAddress = btDevice == null ? "" : btDevice.getAnonymizedAddress();
         if (isBroadcasting) {
             // If another device within the same is already in the sharing session, add source to
             // the device automatically.
@@ -271,10 +273,10 @@ public class AudioSharingDialogHandler {
                 Log.d(
                         TAG,
                         "Automatically add another device within the same group to the sharing: "
-                                + cachedDevice.getDevice().getAnonymizedAddress());
+                                + deviceAddress);
                 if (mAssistant != null && mBroadcast != null) {
                     mAssistant.addSource(
-                            cachedDevice.getDevice(),
+                            btDevice,
                             mBroadcast.getLatestBluetoothLeBroadcastMetadata(),
                             /* isGroupOp= */ false);
                 }
@@ -313,6 +315,7 @@ public class AudioSharingDialogHandler {
                                     cachedDevice,
                                     listener,
                                     eventData);
+                            Log.d(TAG, "Show disconnect dialog, device = " + deviceAddress);
                         });
             } else {
                 // Show audio sharing join dialog when the first or second eligible (LE audio)
@@ -343,9 +346,11 @@ public class AudioSharingDialogHandler {
                                     cachedDevice,
                                     listener,
                                     eventData);
+                            Log.d(TAG, "Show join dialog, device = " + deviceAddress);
                         });
             }
         } else {
+            // Build a list of AudioSharingDeviceItem for connected devices other than cachedDevice.
             List<AudioSharingDeviceItem> deviceItems = new ArrayList<>();
             for (List<CachedBluetoothDevice> devices : groupedDevices.values()) {
                 // Use random device in the group within the sharing session to represent the group.
@@ -358,7 +363,7 @@ public class AudioSharingDialogHandler {
             }
             // Show audio sharing join dialog when the second eligible (LE audio) remote
             // device connect and no sharing session.
-            if (deviceItems.size() == 1) {
+            if (groupedDevices.size() == 2 && deviceItems.size() == 1) {
                 AudioSharingJoinDialogFragment.DialogEventListener listener =
                         new AudioSharingJoinDialogFragment.DialogEventListener() {
                             @Override
@@ -396,9 +401,13 @@ public class AudioSharingDialogHandler {
                             closeOpeningDialogsOtherThan(AudioSharingJoinDialogFragment.tag());
                             AudioSharingJoinDialogFragment.show(
                                     mHostFragment, deviceItems, cachedDevice, listener, eventData);
+                            Log.d(TAG, "Show start dialog, device = " + deviceAddress);
                         });
             } else if (userTriggered) {
                 cachedDevice.setActive();
+                Log.d(TAG, "Set active device = " + deviceAddress);
+            } else {
+                Log.d(TAG, "Fail to handle LE audio device connected, device = " + deviceAddress);
             }
         }
     }

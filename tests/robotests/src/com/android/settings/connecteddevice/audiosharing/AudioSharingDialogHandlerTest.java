@@ -249,6 +249,23 @@ public class AudioSharingDialogHandlerTest {
     }
 
     @Test
+    public void handleUserTriggeredLeaDeviceConnected_noSharingLeaDeviceInErrorState_setActive() {
+        setUpBroadcast(false);
+        when(mCachedDevice1.getGroupId()).thenReturn(-1);
+        when(mLeAudioProfile.getGroupId(mDevice1)).thenReturn(-1);
+        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1, mDevice3);
+        when(mAssistant.getDevicesMatchingConnectionStates(
+                        new int[] {BluetoothProfile.STATE_CONNECTED}))
+                .thenReturn(deviceList);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
+        mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).isEmpty();
+        verify(mCachedDevice1).setActive();
+    }
+
+    @Test
     public void handleUserTriggeredLeaDeviceConnected_noSharingTwoLeaDevices_showJoinDialog() {
         setUpBroadcast(false);
         ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1, mDevice3);
@@ -448,6 +465,23 @@ public class AudioSharingDialogHandlerTest {
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
         mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ false);
         shadowOf(Looper.getMainLooper()).idle();
+        verify(mCachedDevice1, never()).setActive();
+    }
+
+    @Test
+    public void handleLeaDeviceConnected_noSharingLeaDeviceInErrorState_doNothing() {
+        setUpBroadcast(false);
+        when(mCachedDevice1.getGroupId()).thenReturn(-1);
+        when(mLeAudioProfile.getGroupId(mDevice1)).thenReturn(-1);
+        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1, mDevice3);
+        when(mAssistant.getDevicesMatchingConnectionStates(
+                        new int[] {BluetoothProfile.STATE_CONNECTED}))
+                .thenReturn(deviceList);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
+        mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ false);
+        shadowOf(Looper.getMainLooper()).idle();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).isEmpty();
         verify(mCachedDevice1, never()).setActive();
     }
 
