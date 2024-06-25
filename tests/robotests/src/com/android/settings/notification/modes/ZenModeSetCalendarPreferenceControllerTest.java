@@ -28,10 +28,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.SystemZenRules;
@@ -88,11 +86,9 @@ public class ZenModeSetCalendarPreferenceControllerTest {
     @Test
     @EnableFlags({Flags.FLAG_MODES_API, Flags.FLAG_MODES_UI})
     public void updateEventMode_updatesConditionAndTriggerDescription() {
-        ZenMode mode = new ZenMode("id",
-                new AutomaticZenRule.Builder("name", Uri.parse("condition"))
-                        .setPackage(SystemZenRules.PACKAGE_ANDROID)
-                        .build(),
-                true);  // is active
+        ZenMode mode = new TestModeBuilder()
+                .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                .build();
 
         // Explicitly update preference controller with mode info first, which will also call
         // updateState()
@@ -118,10 +114,9 @@ public class ZenModeSetCalendarPreferenceControllerTest {
         eventInfo.calName = "Definitely A Calendar";
         eventInfo.reply = REPLY_YES;
 
-        ZenMode mode = new ZenMode("id",
-                new AutomaticZenRule.Builder("name",
-                        ZenModeConfig.toEventConditionId(eventInfo)).build(),
-                true);  // is active
+        ZenMode mode = new TestModeBuilder()
+                .setConditionId(ZenModeConfig.toEventConditionId(eventInfo))
+                .build();
         mPrefController.updateZenMode(mPrefCategory, mode);
 
         // We should see mCalendar, mReply have their values set

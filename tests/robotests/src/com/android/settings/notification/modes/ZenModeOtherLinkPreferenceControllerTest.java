@@ -16,23 +16,17 @@
 
 package com.android.settings.notification.modes;
 
-import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.service.notification.ZenPolicy;
 
 import androidx.preference.Preference;
 
-import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
@@ -71,13 +65,7 @@ public final class ZenModeOtherLinkPreferenceControllerTest {
     @EnableFlags(Flags.FLAG_MODES_UI)
     public void testHasSummary() {
         Preference pref = mock(Preference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                .setType(AutomaticZenRule.TYPE_DRIVING)
-                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                .setZenPolicy(new ZenPolicy.Builder().allowAllSounds().build())
-                .build(), true);
-        mController.updateZenMode(pref, zenMode);
+        mController.updateZenMode(pref, TestModeBuilder.EXAMPLE);
         verify(pref).setSummary(any());
     }
 }
