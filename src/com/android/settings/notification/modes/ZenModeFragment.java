@@ -18,12 +18,13 @@ package com.android.settings.notification.modes;
 
 import android.app.AlertDialog;
 import android.app.Application;
-import android.app.AutomaticZenRule;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState;
@@ -72,11 +73,9 @@ public class ZenModeFragment extends ZenModeFragmentBase {
 
         // Set title for the entire screen
         ZenMode mode = getMode();
-        AutomaticZenRule azr = getAZR();
-        if (mode == null || azr == null) {
-            return;
+        if (mode != null) {
+            requireActivity().setTitle(mode.getName());
         }
-        getActivity().setTitle(azr.getName());
     }
 
     @Override
@@ -92,7 +91,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     }
 
     @Override
-    protected boolean onOptionsItemSelected(MenuItem item, ZenMode zenMode) {
+    protected boolean onOptionsItemSelected(MenuItem item, @NonNull ZenMode zenMode) {
         switch (item.getItemId()) {
             case DELETE_MODE:
                 new AlertDialog.Builder(mContext)
