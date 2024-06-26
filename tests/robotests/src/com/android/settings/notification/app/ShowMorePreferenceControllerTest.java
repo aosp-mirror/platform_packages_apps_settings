@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,16 @@
 
 package com.android.settings.notification.app;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
-import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
@@ -44,17 +38,15 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-import java.util.ArrayList;
-
 @RunWith(RobolectricTestRunner.class)
-public class DeletedChannelsPreferenceControllerTest {
+@EnableFlags(Flags.FLAG_NOTIFICATION_HIDE_UNUSED_CHANNELS)
+public class ShowMorePreferenceControllerTest {
 
     private Context mContext;
     @Mock
@@ -63,8 +55,10 @@ public class DeletedChannelsPreferenceControllerTest {
     private NotificationManager mNm;
     @Mock
     private UserManager mUm;
+    @Mock
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
-    private DeletedChannelsPreferenceController mController;
+    private ShowMorePreferenceController mController;
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
@@ -75,7 +69,7 @@ public class DeletedChannelsPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
-        mController = new DeletedChannelsPreferenceController(mContext, mBackend);
+        mController = new ShowMorePreferenceController(mContext, mDependentFieldListener, mBackend);
     }
 
     @Test
@@ -85,15 +79,16 @@ public class DeletedChannelsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_appScreen_notIfAppBlocked() {
+    public void isAvailable_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
+        appRow.showAllChannels = false;
         mController.onResume(appRow, null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_groupScreen_never() {
+    public void isAvailable_notIfShowingAll() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null, null, null,
                 null);
@@ -101,50 +96,18 @@ public class DeletedChannelsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_channelScreen_never() {
-        mController.onResume(
-                new NotificationBackend.AppRow(), mock(NotificationChannel.class), null, null, null,
-                null, null);
-        assertFalse(mController.isAvailable());
-    }
-
-    @Test
-    public void isAvailable_appScreen_notIfNoDeletedChannels() {
-        when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(0);
-        mController.onResume(new NotificationBackend.AppRow(), null, null, null, null, null, null);
-        assertFalse(mController.isAvailable());
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_NOTIFICATION_HIDE_UNUSED_CHANNELS)
-    public void isAvailable_notIfFlagEnabled() {
-        when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(1);
-        mController.onResume(
-                new NotificationBackend.AppRow(), null, null, null, null, null, new ArrayList<>());
-        assertFalse(mController.isAvailable());
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_NOTIFICATION_HIDE_UNUSED_CHANNELS)
-    public void isAvailable_appScreen() {
-        when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(1);
-        mController.onResume(
-                new NotificationBackend.AppRow(), null, null, null, null, null, new ArrayList<>());
-        assertTrue(mController.isAvailable());
-    }
-
-    @Test
     public void updateState() {
-        when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(1);
-        mController.onResume(new NotificationBackend.AppRow(), null, null, null, null, null, null);
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.banned = false;
+        appRow.showAllChannels = false;
+        mController.onResume(appRow, null, null, null, null, null, null);
 
-        Preference pref = mock(Preference.class);
+        Preference pref = new Preference(mContext);
         mController.updateState(pref);
 
-        verify(pref, times(1)).setSelectable(false);
-        verify(mBackend, times(1)).getDeletedChannelCount(any(), anyInt());
-        ArgumentCaptor<CharSequence> argumentCaptor = ArgumentCaptor.forClass(CharSequence.class);
-        verify(pref, times(1)).setTitle(argumentCaptor.capture());
-        assertTrue(argumentCaptor.getValue().toString().contains("1"));
+        pref.performClick();
+
+        verify(mDependentFieldListener).onFieldValueChanged();
+        assertThat(appRow.showAllChannels).isTrue();
     }
 }
