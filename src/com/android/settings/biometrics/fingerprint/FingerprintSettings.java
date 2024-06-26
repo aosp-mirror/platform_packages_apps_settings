@@ -356,6 +356,11 @@ public class FingerprintSettings extends SubSettings {
          */
         protected void handleError(int errMsgId, CharSequence msg) {
             switch (errMsgId) {
+                case FingerprintManager.FINGERPRINT_ERROR_CANCELED:
+                case FingerprintManager.FINGERPRINT_ERROR_USER_CANCELED:
+                    // Only happens if we get preempted by another activity, or canceled by the
+                    // user (e.g. swipe up to home). Ignored.
+                    return;
                 case FingerprintManager.FINGERPRINT_ERROR_LOCKOUT:
                     mInFingerprintLockout = true;
                     // We've been locked out.  Reset after 30s.
