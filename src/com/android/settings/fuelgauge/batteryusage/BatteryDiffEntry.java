@@ -422,7 +422,8 @@ public class BatteryDiffEntry {
             return;
         }
         final boolean isValidPackage =
-                BatteryUtils.getInstance(mContext).getPackageUid(getPackageName())
+                BatteryUtils.getInstance(mContext)
+                                .getPackageUidAsUser(getPackageName(), (int) mUserId)
                         != BatteryUtils.UID_NULL;
         if (!isValidPackage) {
             mValidForRestriction = false;
