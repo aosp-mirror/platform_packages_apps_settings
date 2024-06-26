@@ -100,7 +100,7 @@ public class ZenModesListItemPreferenceTest {
         ShadowLooper.idleMainLooper();
 
         assertThat(preference.getTitle()).isEqualTo("Mode disabled by app");
-        assertThat(preference.getSummary()).isEqualTo("Tap to set up");
+        assertThat(preference.getSummary()).isEqualTo("Not set");
         assertThat(preference.getIcon()).isNotNull();
     }
 
@@ -120,7 +120,7 @@ public class ZenModesListItemPreferenceTest {
         ShadowLooper.idleMainLooper();
 
         assertThat(preference.getTitle()).isEqualTo("Mode disabled by user");
-        assertThat(preference.getSummary()).isEqualTo("Paused");
+        assertThat(preference.getSummary()).isEqualTo("Disabled");
         assertThat(preference.getIcon()).isNotNull();
     }
 }

@@ -85,6 +85,7 @@ public class SourceAddedStateTest {
 
     @Test
     public void testGetInstance() {
+        mInstance = SourceAddedState.getInstance();
         assertThat(mInstance).isNotNull();
         assertThat(mInstance).isInstanceOf(SourceAddedState.class);
     }

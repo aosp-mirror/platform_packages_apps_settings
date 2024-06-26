@@ -1893,6 +1893,37 @@
     <!-- Nfc developer settings: The confirm button of the popup dialog. [CHAR_LIMIT=60] -->
     <string name="nfc_reboot_dialog_confirm">Restart</string>
 
+    <!-- External Display settings. The keywords for searching. [CHAR LIMIT=40] -->
+    <string name="keywords_external_display">mirror, external display, connected display, usb display, resolution, rotation</string>
+    <!-- External Display settings. When external display is enabled. [CHAR LIMIT=40] -->
+    <string name="external_display_on">On</string>
+    <!-- External Display settings. When external display is disabled. [CHAR LIMIT=40] -->
+    <string name="external_display_off">Off</string>
+    <!-- External Display settings. The title of the screen. [CHAR LIMIT=40] -->
+    <string name="external_display_settings_title">External Display</string>
+    <!-- External Display use. The title of the use preference. [CHAR LIMIT=40] -->
+    <string name="external_display_use_title">Use external display</string>
+    <!-- External Display resolution settings. The title of the screen. [CHAR LIMIT=40] -->
+    <string name="external_display_resolution_settings_title">Display resolution</string>
+    <!-- External Display settings. Text that appears when scanning for devices is finished and no nearby device was found [CHAR LIMIT=40]-->
+    <string name="external_display_not_found">External display is disconnected</string>
+    <!-- External Display settings. Rotation of the external display -->
+    <string name="external_display_rotation">Rotation</string>
+    <!-- External Display settings. Standard rotation of the external display -->
+    <string name="external_display_standard_rotation">Standard</string>
+    <!-- External Display settings. 90 rotation of the external display -->
+    <string name="external_display_rotation_90">90°</string>
+    <!-- External Display settings. 180 rotation of the external display -->
+    <string name="external_display_rotation_180">180°</string>
+    <!-- External Display settings. 180 rotation of the external display -->
+    <string name="external_display_rotation_270">270°</string>
+    <!-- External Display settings. Footer title -->
+    <string name="external_display_change_resolution_footer_title">Changing rotation or resolution may stop any apps that are currently running</string>
+    <!-- External Display settings. No Displays footer title -->
+    <string name="external_display_not_found_footer_title">Your device must be connected to an external display to mirror your screen</string>
+    <!-- External Display settings. More resolution options -->
+    <string name="external_display_more_options_title">More options</string>
+
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
     <!-- Wifi Display settings. The keywords of the setting. [CHAR LIMIT=NONE] -->
@@ -4571,6 +4602,12 @@
 
     <!-- On Languages & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
     <string name="pointer_speed">Pointer speed</string>
+    <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale">Pointer scale</string>
+    <!-- Content description for decreasing pointer scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale_decrease_content_description">Decrease pointer scale</string>
+    <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale_increase_content_description">Increase pointer scale</string>
 
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to game controller devices. [CHAR LIMIT=40] -->
     <string name="game_controller_settings_category">Game Controller</string>
@@ -7268,6 +7305,8 @@
     <string name="help_url_install_certificate" translatable="false"></string>
     <!-- Help URL, Tap & pay [DO NOT TRANSLATE] -->
     <string name="help_url_nfc_payment" translatable="false"></string>
+    <!-- Help URL, External display [DO NOT TRANSLATE] -->
+    <string name="help_url_external_display" translatable="false"></string>
     <!-- Help URL, Remote display [DO NOT TRANSLATE] -->
     <string name="help_url_remote_display" translatable="false"></string>
     <!-- Help URL, Face [DO NOT TRANSLATE] -->
@@ -7946,11 +7985,11 @@
     <!-- Priority Modes: Format string for the "current state + trigger description summary for rules in the list. [CHAR_LIMIT=10] -->
     <string name="zen_mode_format_status_and_trigger" translatable="false"><xliff:g id="current_status" example="ON">%1$s</xliff:g> • <xliff:g id="trigger_description" example="Mon-Fri, 23:00-7:00">%2$s</xliff:g></string>
 
-    <!-- Priority Modes: Call to action for a mode that is disabled and needs to be configured. [CHAR_LIMIT=40] -->
-    <string name="zen_mode_disabled_tap_to_set_up">Tap to set up</string>
+    <!-- Priority Modes: Indicates that a mode is disabled and needs to be configured. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_disabled_needs_setup">Not set</string>
 
     <!-- Priority Modes: Indicates that a mode is disabled by the user. [CHAR_LIMIT=40] -->
-    <string name="zen_mode_disabled_by_user">Paused</string>
+    <string name="zen_mode_disabled_by_user">Disabled</string>
 
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
@@ -12661,7 +12700,7 @@
     <string name="default_print_service_main_switch_title">Use print service</string>
 
     <!-- Title for multiple users main switch. [CHAR LIMIT=50] -->
-    <string name="multiple_users_main_switch_title">Allow multiple users</string>
+    <string name="multiple_users_main_switch_title">Allow user switch</string>
     <!-- Search keywords for the "Allow Multiple Users" section in Multiple Users Screen. [CHAR LIMIT=NONE] -->
     <string name="multiple_users_main_switch_keywords">allow, multiple, user, permit, many</string>
     <!-- Search keywords for the Users Screen. [CHAR LIMIT=NONE] -->

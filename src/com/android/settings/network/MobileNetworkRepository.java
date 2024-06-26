@@ -85,7 +85,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private List<SubscriptionInfoEntity> mActiveSubInfoEntityList = new ArrayList<>();
     private Context mContext;
     private AirplaneModeObserver mAirplaneModeObserver;
-    private DataRoamingObserver mDataRoamingObserver;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private int mPhysicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
     private int mLogicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
@@ -122,7 +121,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mSubscriptionInfoDao = mMobileNetworkDatabase.mSubscriptionInfoDao();
         mMobileNetworkInfoDao = mMobileNetworkDatabase.mMobileNetworkInfoDao();
         mAirplaneModeObserver = new AirplaneModeObserver(new Handler(Looper.getMainLooper()));
-        mDataRoamingObserver = new DataRoamingObserver(new Handler(Looper.getMainLooper()));
     }
 
     private class AirplaneModeObserver extends ContentObserver {
@@ -153,47 +151,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private class DataRoamingObserver extends ContentObserver {
-        private int mRegSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        private String mBaseField = Settings.Global.DATA_ROAMING;
-
-        DataRoamingObserver(Handler handler) {
-            super(handler);
-        }
-
-        public void register(Context context, int subId) {
-            mRegSubId = subId;
-            String lastField = mBaseField;
-            createTelephonyManagerBySubId(subId);
-            TelephonyManager tm = mTelephonyManagerMap.get(subId);
-            if (tm.getSimCount() != 1) {
-                lastField += subId;
-            }
-            context.getContentResolver().registerContentObserver(
-                    Settings.Global.getUriFor(lastField), false, this);
-        }
-
-        public void unRegister(Context context) {
-            context.getContentResolver().unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            TelephonyManager tm = mTelephonyManagerMap.get(mRegSubId);
-            if (tm == null) {
-                return;
-            }
-            sExecutor.execute(() -> {
-                Log.d(TAG, "DataRoamingObserver changed");
-                insertMobileNetworkInfo(mContext, mRegSubId, tm);
-            });
-            boolean isDataRoamingEnabled = tm.isDataRoamingEnabled();
-            for (MobileNetworkCallback callback : sCallbacks) {
-                callback.onDataRoamingChanged(mRegSubId, isDataRoamingEnabled);
-            }
-        }
-    }
-
     /**
      * Register all callbacks and listener.
      *
@@ -219,7 +176,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         observeAllMobileNetworkInfo(lifecycleOwner);
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             createTelephonyManagerBySubId(subId);
-            mDataRoamingObserver.register(mContext, subId);
         }
         // When one client registers callback first time, convey the cached results to the client
         // so that the client is aware of the content therein.
@@ -283,7 +239,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         if (sCallbacks.isEmpty()) {
             mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
             mAirplaneModeObserver.unRegister(mContext);
-            mDataRoamingObserver.unRegister(mContext);
 
             mTelephonyManagerMap.forEach((id, manager) -> {
                 TelephonyCallback callback = mTelephonyCallbackMap.get(id);
@@ -588,10 +543,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private MobileNetworkInfoEntity convertToMobileNetworkInfoEntity(Context context, int subId,
             TelephonyManager telephonyManager) {
         boolean isDataEnabled = false;
-        boolean isDataRoamingEnabled = false;
         if (telephonyManager != null) {
             isDataEnabled = telephonyManager.isDataEnabled();
-            isDataRoamingEnabled = telephonyManager.isDataRoamingEnabled();
         } else {
             Log.d(TAG, "TelephonyManager is null, subId = " + subId);
         }
@@ -607,7 +560,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 MobileNetworkUtils.isTdscdmaSupported(context, subId),
                 MobileNetworkUtils.activeNetworkIsCellular(context),
                 SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager),
-                isDataRoamingEnabled
+                /* deprecated isDataRoamingEnabled = */ false
         );
     }
 
@@ -753,12 +706,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
 
         default void onAirplaneModeChanged(boolean enabled) {
-        }
-
-        /**
-         * Notify clients data roaming changed of subscription.
-         */
-        default void onDataRoamingChanged(int subId, boolean enabled) {
         }
     }
 
