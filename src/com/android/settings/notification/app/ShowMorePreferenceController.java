@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,41 +20,43 @@ import static com.android.server.notification.Flags.notificationHideUnusedChanne
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settingslib.utils.StringUtil;
 
-public class DeletedChannelsPreferenceController extends NotificationPreferenceController
-        implements PreferenceControllerMixin {
+import org.jetbrains.annotations.NotNull;
 
-    private static final String  KEY_DELETED = "deleted";
+public class ShowMorePreferenceController extends NotificationPreferenceController {
 
-    public DeletedChannelsPreferenceController(Context context, NotificationBackend backend) {
+    private static final String KEY = "more";
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
+
+    public ShowMorePreferenceController(Context context,
+            NotificationSettings.DependentFieldListener dependentFieldListener,
+            NotificationBackend backend) {
         super(context, backend);
+        mDependentFieldListener = dependentFieldListener;
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_DELETED;
+        return KEY;
     }
 
     @Override
     public boolean isAvailable() {
-        if (!super.isAvailable()) {
+        if (!notificationHideUnusedChannels()) {
             return false;
         }
-        if (notificationHideUnusedChannels()) {
+        if (mAppRow == null) {
             return false;
         }
-        // only visible on app screen
-        if (mChannel != null || hasValidGroup()) {
+        if (mAppRow.banned || mAppRow.showAllChannels) {
             return false;
         }
-
-        return mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid) > 0;
+        return true;
     }
 
     @Override
@@ -62,12 +64,12 @@ public class DeletedChannelsPreferenceController extends NotificationPreferenceC
         return false;
     }
 
+    @Override
     public void updateState(Preference preference) {
-        if (mAppRow != null) {
-            int deletedChannelCount = mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid);
-            preference.setTitle(StringUtil.getIcuPluralsString(mContext, deletedChannelCount,
-                    R.string.deleted_channels));
-        }
-        preference.setSelectable(false);
+        preference.setOnPreferenceClickListener(preference1 -> {
+            mAppRow.showAllChannels = true;
+            mDependentFieldListener.onFieldValueChanged();
+            return true;
+        });
     }
 }

@@ -649,8 +649,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             DynamicDataObserver observer) {
         Log.d(TAG, "register observer: @" + Integer.toHexString(observer.hashCode())
                 + ", uri: " + observer.getUri());
-        resolver.registerContentObserver(observer.getUri(), false, observer);
-        mRegisteredObservers.add(observer);
+        try {
+            resolver.registerContentObserver(observer.getUri(), false, observer);
+            mRegisteredObservers.add(observer);
+        } catch (Exception e) {
+            Log.w(TAG, "Cannot register observer: " + observer.getUri(), e);
+        }
     }
 
     private void unregisterDynamicDataObservers(List<DynamicDataObserver> observers) {
@@ -661,8 +665,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         observers.forEach(observer -> {
             Log.d(TAG, "unregister observer: @" + Integer.toHexString(observer.hashCode())
                     + ", uri: " + observer.getUri());
-            mRegisteredObservers.remove(observer);
-            resolver.unregisterContentObserver(observer);
+            if (mRegisteredObservers.remove(observer)) {
+                try {
+                    resolver.unregisterContentObserver(observer);
+                } catch (Exception e) {
+                    Log.w(TAG, "Cannot unregister observer: " + observer.getUri(), e);
+                }
+            }
         });
     }
 
