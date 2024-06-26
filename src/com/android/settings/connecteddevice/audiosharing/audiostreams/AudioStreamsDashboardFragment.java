@@ -23,7 +23,6 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -64,11 +63,6 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         use(AudioStreamsScanQrCodeController.class).setFragment(this);
@@ -89,11 +83,6 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
                         SourceOriginForLogging.QR_CODE_SCAN_OTHER.ordinal());
             }
         }
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     @Override

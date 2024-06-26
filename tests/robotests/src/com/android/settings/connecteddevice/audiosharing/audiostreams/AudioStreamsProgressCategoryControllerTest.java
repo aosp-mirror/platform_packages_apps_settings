@@ -168,6 +168,25 @@ public class AudioStreamsProgressCategoryControllerTest {
     }
 
     @Test
+    public void testShowToast_noError() {
+        mController.showToast(BROADCAST_NAME_1);
+    }
+
+    @Test
+    public void testOnStop_unregister() {
+        mController.onStop(mLifecycleOwner);
+
+        verify(mBluetoothEventManager).unregisterCallback(any());
+    }
+
+    @Test
+    public void testGetFragment_returnFragment() {
+        mController.setFragment(mFragment);
+
+        assertThat(mController.getFragment()).isEqualTo(mFragment);
+    }
+
+    @Test
     public void testOnStart_initNoDevice_showDialog() {
         when(mLeBroadcastAssistant.isSearchInProgress()).thenReturn(true);
 
@@ -236,6 +255,25 @@ public class AudioStreamsProgressCategoryControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mLeBroadcastAssistant).registerServiceCallBack(any(), any());
+        verify(mLeBroadcastAssistant).startSearchingForSources(any());
+
+        var dialog = ShadowAlertDialog.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+
+        verify(mController, never()).moveToState(any(), any());
+    }
+
+    @Test
+    public void testOnStart_initHasDevice_scanningInProgress() {
+        // Setup a device
+        ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(mDevice);
+        when(mLeBroadcastAssistant.isSearchInProgress()).thenReturn(true);
+
+        mController.onStart(mLifecycleOwner);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mLeBroadcastAssistant).registerServiceCallBack(any(), any());
+        verify(mLeBroadcastAssistant).stopSearchingForSources();
         verify(mLeBroadcastAssistant).startSearchingForSources(any());
 
         var dialog = ShadowAlertDialog.getLatestAlertDialog();
@@ -383,6 +421,49 @@ public class AudioStreamsProgressCategoryControllerTest {
     }
 
     @Test
+    public void testHandleSourceAddRequest_updateMetadataAndState() {
+        // Setup a device
+        ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(mDevice);
+
+        var metadata =
+                BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(VALID_METADATA);
+        assertThat(metadata).isNotNull();
+        var metadataWithNoCode =
+                new BluetoothLeBroadcastMetadata.Builder(metadata)
+                        .setBroadcastId(NEWLY_FOUND_BROADCAST_ID)
+                        .setBroadcastName(BROADCAST_NAME_1)
+                        .build();
+        // A new source is found
+        mController.handleSourceFound(metadataWithNoCode);
+
+        ArgumentCaptor<AudioStreamPreference> preferenceCaptor =
+                ArgumentCaptor.forClass(AudioStreamPreference.class);
+        ArgumentCaptor<AudioStreamsProgressCategoryController.AudioStreamState> stateCaptor =
+                ArgumentCaptor.forClass(
+                        AudioStreamsProgressCategoryController.AudioStreamState.class);
+
+        // moving state to SYNCED
+        verify(mController).moveToState(preferenceCaptor.capture(), stateCaptor.capture());
+        var preference = preferenceCaptor.getValue();
+        var state = stateCaptor.getValue();
+
+        assertThat(preference).isNotNull();
+        assertThat(preference.getAudioStreamBroadcastId()).isEqualTo(NEWLY_FOUND_BROADCAST_ID);
+        assertThat(state).isEqualTo(SYNCED);
+
+        var updatedMetadata =
+                new BluetoothLeBroadcastMetadata.Builder(metadataWithNoCode)
+                        .setBroadcastCode(BROADCAST_CODE)
+                        .build();
+        mController.handleSourceAddRequest(preference, updatedMetadata);
+        // state updated to ADD_SOURCE_WAIT_FOR_RESPONSE
+        assertThat(preference.getAudioStreamBroadcastId()).isEqualTo(NEWLY_FOUND_BROADCAST_ID);
+        assertThat(preference.getAudioStreamMetadata().getBroadcastCode())
+                .isEqualTo(BROADCAST_CODE);
+        assertThat(preference.getAudioStreamState()).isEqualTo(ADD_SOURCE_WAIT_FOR_RESPONSE);
+    }
+
+    @Test
     public void testHandleSourceFound_sameIdWithSourceFromQrCode_updateMetadataAndState() {
         // Setup a device
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(mDevice);
@@ -516,6 +597,42 @@ public class AudioStreamsProgressCategoryControllerTest {
         verify(mPreference).removePreference(preferenceToRemove.capture());
         assertThat(preferenceToRemove.getValue().getAudioStreamBroadcastId())
                 .isEqualTo(NEWLY_FOUND_BROADCAST_ID);
+    }
+
+    @Test
+    public void testHandleSourceLost_sourceConnected_doNothing() {
+        // Setup a device
+        ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(mDevice);
+
+        // Setup mPreference so it's not null
+        mController.displayPreference(mScreen);
+
+        // A new source found
+        when(mMetadata.getBroadcastId()).thenReturn(NEWLY_FOUND_BROADCAST_ID);
+        mController.handleSourceFound(mMetadata);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // A new source found is lost, but the source is still connected
+        BluetoothLeBroadcastReceiveState connected = createConnectedMock(NEWLY_FOUND_BROADCAST_ID);
+        when(mAudioStreamsHelper.getAllConnectedSources()).thenReturn(ImmutableList.of(connected));
+        mController.handleSourceLost(NEWLY_FOUND_BROADCAST_ID);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        ArgumentCaptor<AudioStreamPreference> preferenceToAdd =
+                ArgumentCaptor.forClass(AudioStreamPreference.class);
+        ArgumentCaptor<AudioStreamsProgressCategoryController.AudioStreamState> state =
+                ArgumentCaptor.forClass(
+                        AudioStreamsProgressCategoryController.AudioStreamState.class);
+
+        // Verify a new preference is created with state SYNCED.
+        verify(mController).moveToState(preferenceToAdd.capture(), state.capture());
+        assertThat(preferenceToAdd.getValue()).isNotNull();
+        assertThat(preferenceToAdd.getValue().getAudioStreamBroadcastId())
+                .isEqualTo(NEWLY_FOUND_BROADCAST_ID);
+        assertThat(state.getValue()).isEqualTo(SYNCED);
+
+        // No preference is removed.
+        verify(mPreference, never()).removePreference(any());
     }
 
     @Test
