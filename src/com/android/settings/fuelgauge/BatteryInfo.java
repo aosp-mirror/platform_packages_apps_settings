@@ -53,8 +53,7 @@ public class BatteryInfo {
     public int batteryStatus;
     public int pluggedStatus;
     public boolean discharging = true;
-    public boolean isBatteryDefender = false;
-    public boolean isLongLife = false;
+    public boolean isBatteryDefender;
     public boolean isFastCharging;
     public long remainingTimeUs = 0;
     public long averageTimeToDischarge = EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN;
@@ -307,7 +306,7 @@ public class BatteryInfo {
         info.pluggedStatus = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
         info.mCharging = info.pluggedStatus != 0;
         info.averageTimeToDischarge = estimate.getAverageDischargeTime();
-        info.isLongLife =
+        info.isBatteryDefender =
                 batteryBroadcast.getIntExtra(
                                 BatteryManager.EXTRA_CHARGING_STATUS,
                                 BatteryManager.CHARGING_POLICY_DEFAULT)
@@ -320,7 +319,7 @@ public class BatteryInfo {
         info.isFastCharging =
                 BatteryStatus.getChargingSpeed(context, batteryBroadcast)
                         == BatteryStatus.CHARGING_FAST;
-        if (info.isLongLife) {
+        if (info.isBatteryDefender) {
             info.isBatteryDefender =
                     FeatureFactory.getFeatureFactory()
                             .getPowerUsageFeatureProvider()

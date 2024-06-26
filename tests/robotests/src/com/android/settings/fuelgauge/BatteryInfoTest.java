@@ -789,40 +789,6 @@ public class BatteryInfoTest {
                 expectedChargeLabel);
     }
 
-    @Test
-    public void getBatteryInfo_longlife_shouldSetLonglife() {
-        var batteryIntent = createIntentForLongLifeTest(/* hasLongLife= */ true);
-
-        var batteryInfo =
-                BatteryInfo.getBatteryInfo(
-                        mContext,
-                        batteryIntent,
-                        mBatteryUsageStats,
-                        /* estimate= */ MOCK_ESTIMATE,
-                        /* elapsedRealtimeUs= */ 0L,
-                        /* shortString= */ false,
-                        /* currentTimeMs= */ 0L);
-
-        assertThat(batteryInfo.isLongLife).isTrue();
-    }
-
-    @Test
-    public void getBatteryInfo_noLonglife_shouldNotLonglife() {
-        var batteryIntent = createIntentForLongLifeTest(/* hasLongLife= */ false);
-
-        var batteryInfo =
-                BatteryInfo.getBatteryInfo(
-                        mContext,
-                        batteryIntent,
-                        mBatteryUsageStats,
-                        /* estimate= */ MOCK_ESTIMATE,
-                        /* elapsedRealtimeUs= */ 0L,
-                        /* shortString= */ false,
-                        /* currentTimeMs= */ 0L);
-
-        assertThat(batteryInfo.isLongLife).isFalse();
-    }
-
     private enum ChargingSpeed {
         FAST,
         REGULAR,
@@ -833,15 +799,6 @@ public class BatteryInfoTest {
         WIRED,
         WIRELESS,
         DOCKED
-    }
-
-    private Intent createIntentForLongLifeTest(Boolean hasLongLife) {
-        return new Intent(Intent.ACTION_BATTERY_CHANGED)
-                .putExtra(
-                        BatteryManager.EXTRA_CHARGING_STATUS,
-                        hasLongLife
-                                ? BatteryManager.CHARGING_POLICY_ADAPTIVE_LONGLIFE
-                                : BatteryManager.CHARGING_POLICY_DEFAULT);
     }
 
     private Intent createIntentForGetBatteryInfoTest(
