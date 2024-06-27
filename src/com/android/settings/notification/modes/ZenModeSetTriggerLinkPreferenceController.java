@@ -18,20 +18,12 @@ package com.android.settings.notification.modes;
 
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
-import static android.app.NotificationManager.EXTRA_AUTOMATIC_RULE_ID;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ComponentInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.service.notification.ConditionProviderService;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -39,13 +31,9 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.utils.ManagedServiceSettings;
-import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
-
-import java.util.List;
 
 /**
  * Preference controller for the link to an individual mode's configuration page.
@@ -56,23 +44,25 @@ class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenc
     @VisibleForTesting
     protected static final String AUTOMATIC_TRIGGER_PREF_KEY = "zen_automatic_trigger_settings";
 
-    private static final ManagedServiceSettings.Config CONFIG =
-            ZenModesListFragment.getConditionProviderConfig();
-
-    private ZenServiceListing mServiceListing;
-    private final PackageManager mPm;
+    private final ConfigurationActivityHelper mConfigurationActivityHelper;
+    private final ZenServiceListing mServiceListing;
     private final DashboardFragment mFragment;
 
     ZenModeSetTriggerLinkPreferenceController(Context context, String key,
-            DashboardFragment fragment, ZenModesBackend backend,
-            PackageManager packageManager) {
-        super(context, key, backend);
-        mFragment = fragment;
-        mPm = packageManager;
+            DashboardFragment fragment, ZenModesBackend backend) {
+        this(context, key, fragment, backend,
+                new ConfigurationActivityHelper(context.getPackageManager()),
+                new ZenServiceListing(context));
     }
 
     @VisibleForTesting
-    protected void setServiceListing(ZenServiceListing serviceListing) {
+    ZenModeSetTriggerLinkPreferenceController(Context context, String key,
+            DashboardFragment fragment, ZenModesBackend backend,
+            ConfigurationActivityHelper configurationActivityHelper,
+            ZenServiceListing serviceListing) {
+        super(context, key, backend);
+        mFragment = fragment;
+        mConfigurationActivityHelper = configurationActivityHelper;
         mServiceListing = serviceListing;
     }
 
@@ -83,11 +73,9 @@ class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenc
 
     @Override
     public void displayPreference(PreferenceScreen screen, @NonNull ZenMode zenMode) {
-        if (mServiceListing == null) {
-            mServiceListing = new ZenServiceListing(
-                    mContext, CONFIG, zenMode.getRule().getPackageName());
-        }
-        mServiceListing.reloadApprovedServices();
+        // Preload approved components, but only for the package that owns the rule (since it's the
+        // only package that can have a valid configurationActivity).
+        mServiceListing.loadApprovedComponents(zenMode.getRule().getPackageName());
     }
 
     @Override
@@ -130,8 +118,9 @@ class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenc
                 });
             }
         } else {
-            Intent intent = getAppRuleIntent(zenMode);
-            if (intent != null && isValidIntent(intent)) {
+            Intent intent = mConfigurationActivityHelper.getConfigurationActivityIntentForMode(
+                    zenMode, mServiceListing::findService);
+            if (intent != null) {
                 preference.setVisible(true);
                 switchPref.setTitle(R.string.zen_mode_configuration_link_title);
                 switchPref.setSummary(zenMode.getRule().getTriggerDescription());
@@ -161,68 +150,4 @@ class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenc
         });
         // TODO: b/342156843 - Do we want to jump to the corresponding schedule editing screen?
     };
-
-    @VisibleForTesting
-    protected @Nullable Intent getAppRuleIntent(ZenMode zenMode) {
-        Intent intent = new Intent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .putExtra(ConditionProviderService.EXTRA_RULE_ID, zenMode.getId())
-                .putExtra(EXTRA_AUTOMATIC_RULE_ID, zenMode.getId());
-        String owner = zenMode.getRule().getPackageName();
-        ComponentName configActivity = null;
-        if (zenMode.getRule().getConfigurationActivity() != null) {
-            // If a configuration activity is present, use that directly in the intent
-            configActivity = zenMode.getRule().getConfigurationActivity();
-        } else {
-            // Otherwise, look for a condition provider service for the rule's package
-            ComponentInfo ci = mServiceListing.findService(zenMode.getRule().getOwner());
-            if (ci == null) {
-                // do nothing
-            } else if (ci instanceof ActivityInfo) {
-                // new activity backed rule
-                intent.setComponent(new ComponentName(ci.packageName, ci.name));
-                return intent;
-            } else if (ci.metaData != null) {
-                // old service backed rule
-                final String configurationActivity = ci.metaData.getString(
-                        ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY);
-                if (configurationActivity != null) {
-                    configActivity = ComponentName.unflattenFromString(configurationActivity);
-                }
-            }
-        }
-
-        if (configActivity != null) {
-            // verify that the owner of the rule owns the configuration activity, but only if
-            // owner exists
-            intent.setComponent(configActivity);
-            if (owner == null) {
-                return intent;
-            }
-            try {
-                int ownerUid = mPm.getPackageUid(owner, 0);
-                int configActivityOwnerUid = mPm.getPackageUid(configActivity.getPackageName(), 0);
-                if (ownerUid == configActivityOwnerUid) {
-                    return intent;
-                } else {
-                    Log.w(TAG, "Config activity not in owner package for "
-                            + zenMode.getRule().getName());
-                    return null;
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Failed to find config activity");
-                return null;
-            }
-        }
-        return null;
-    }
-
-    private boolean isValidIntent(Intent intent) {
-        List<ResolveInfo> results = mPm.queryIntentActivities(
-                intent, PackageManager.ResolveInfoFlags.of(0));
-        if (intent.resolveActivity(mPm) == null || results.size() == 0) {
-            Log.w(TAG, "intent for zen rule invalid: " + intent);
-            return false;
-        }
-        return true;
-    }
 }
