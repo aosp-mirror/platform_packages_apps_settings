@@ -16,9 +16,14 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
+import android.hardware.fingerprint.FingerprintEnrollOptions
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.fingerprint2.domain.interactor.AccessibilityInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
@@ -43,10 +48,10 @@ class FingerprintEnrollFindSensorViewModel(
   private val fingerprintEnrollViewModel: FingerprintEnrollViewModel,
   private val gatekeeperViewModel: FingerprintGatekeeperViewModel,
   backgroundViewModel: BackgroundViewModel,
+  fingerprintFlowViewModel: FingerprintFlowViewModel,
   accessibilityInteractor: AccessibilityInteractor,
   foldStateInteractor: FoldStateInteractor,
   orientationInteractor: OrientationInteractor,
-  fingerprintFlowViewModel: FingerprintFlowViewModel,
   fingerprintManagerInteractor: FingerprintManagerInteractor,
 ) : ViewModel() {
 
@@ -64,6 +69,7 @@ class FingerprintEnrollFindSensorViewModel(
   val showPrimaryButton: Flow<Boolean> = _isUdfps.filter { it }
 
   private val _showSfpsLottie = _isSfps.filter { it }
+
   /** Represents the stream of showing sfps lottie and the information Pair(isFolded, rotation). */
   val sfpsLottieInfo: Flow<Pair<Boolean, Int>> =
     combineTransform(
@@ -75,6 +81,7 @@ class FingerprintEnrollFindSensorViewModel(
     }
 
   private val _showUdfpsLottie = _isUdfps.filter { it }
+
   /** Represents the stream of showing udfps lottie and whether accessibility is enabled. */
   val udfpsLottieInfo: Flow<Boolean> =
     _showUdfpsLottie.combine(accessibilityInteractor.isAccessibilityEnabled) {
@@ -87,11 +94,13 @@ class FingerprintEnrollFindSensorViewModel(
   val showRfpsAnimation: Flow<Boolean> = _isRearSfps.filter { it }
 
   private val _showErrorDialog: MutableStateFlow<Pair<Int, Boolean>?> = MutableStateFlow(null)
+
   /** Represents the stream of showing error dialog. */
   val showErrorDialog = _showErrorDialog.filterNotNull()
 
   private var _didTryEducation = false
   private var _education: MutableStateFlow<Boolean> = MutableStateFlow(false)
+
   /** Indicates if the education flow should be running. */
   private val educationFlowShouldBeRunning: Flow<Boolean> =
     _education.combine(backgroundViewModel.background) { shouldRunEducation, isInBackground ->
@@ -167,6 +176,11 @@ class FingerprintEnrollFindSensorViewModel(
     _education.update { false }
   }
 
+  /** Indicates enrollment to start */
+  fun enroll(enrollOptions: FingerprintEnrollOptions) {
+    fingerprintEnrollViewModel.enroll(enrollOptions)
+  }
+
   /** Proceed to EnrollEnrolling page. */
   fun proceedToEnrolling() {
     stopEducation()
@@ -182,36 +196,29 @@ class FingerprintEnrollFindSensorViewModel(
     )
   }
 
-  class FingerprintEnrollFindSensorViewModelFactory(
-    private val navigationViewModel: FingerprintNavigationViewModel,
-    private val fingerprintEnrollViewModel: FingerprintEnrollViewModel,
-    private val gatekeeperViewModel: FingerprintGatekeeperViewModel,
-    private val backgroundViewModel: BackgroundViewModel,
-    private val accessibilityInteractor: AccessibilityInteractor,
-    private val foldStateInteractor: FoldStateInteractor,
-    private val orientationInteractor: OrientationInteractor,
-    private val fingerprintFlowViewModel: FingerprintFlowViewModel,
-    private val fingerprintManagerInteractor: FingerprintManagerInteractor,
-  ) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return FingerprintEnrollFindSensorViewModel(
-        navigationViewModel,
-        fingerprintEnrollViewModel,
-        gatekeeperViewModel,
-        backgroundViewModel,
-        accessibilityInteractor,
-        foldStateInteractor,
-        orientationInteractor,
-        fingerprintFlowViewModel,
-        fingerprintManagerInteractor,
-      )
-        as T
-    }
-  }
-
   companion object {
     private const val TAG = "FingerprintEnrollFindSensorViewModel"
     private val navStep = Education::class
+
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer {
+        val settingsApplication =
+          this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as SettingsApplication
+        val biometricEnvironment = settingsApplication.biometricEnvironment!!
+        val provider = ViewModelProvider(this[VIEW_MODEL_STORE_OWNER_KEY]!!)
+
+        FingerprintEnrollFindSensorViewModel(
+          provider[FingerprintNavigationViewModel::class],
+          provider[FingerprintEnrollViewModel::class],
+          provider[FingerprintGatekeeperViewModel::class],
+          provider[BackgroundViewModel::class],
+          provider[FingerprintFlowViewModel::class],
+          biometricEnvironment.accessibilityInteractor,
+          biometricEnvironment.foldStateInteractor,
+          biometricEnvironment.orientationInteractor,
+          biometricEnvironment.fingerprintManagerInteractor,
+        )
+      }
+    }
   }
 }

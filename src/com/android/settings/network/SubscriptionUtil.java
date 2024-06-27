@@ -408,7 +408,6 @@ public class SubscriptionUtil {
      *
      * @return map of active subscription ids to display names.
      */
-    @VisibleForTesting
     public static CharSequence getUniqueSubscriptionDisplayName(
             Integer subscriptionId, Context context) {
         final Map<Integer, CharSequence> displayNames = getUniqueSubscriptionDisplayNames(context);

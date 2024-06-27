@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsHelper;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.robolectric.annotation.Implementation;
@@ -31,7 +32,7 @@ import org.robolectric.annotation.Resetter;
 import java.util.List;
 import java.util.Optional;
 
-@Implements(value = AudioStreamsHelper.class, callThroughByDefault = false)
+@Implements(value = AudioStreamsHelper.class, callThroughByDefault = true)
 public class ShadowAudioStreamsHelper {
     private static AudioStreamsHelper sMockHelper;
     @Nullable private static CachedBluetoothDevice sCachedBluetoothDevice;
@@ -62,5 +63,10 @@ public class ShadowAudioStreamsHelper {
     public static Optional<CachedBluetoothDevice> getCachedBluetoothDeviceInSharingOrLeConnected(
             LocalBluetoothManager manager) {
         return Optional.ofNullable(sCachedBluetoothDevice);
+    }
+
+    @Implementation
+    public LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
+        return sMockHelper.getLeBroadcastAssistant();
     }
 }

@@ -140,7 +140,7 @@
     <uses-permission android:name="android.permission.REMAP_MODIFIER_KEYS" />
     <uses-permission android:name="android.permission.ACCESS_GPU_SERVICE" />
     <uses-permission android:name="android.permission.MANAGE_GAME_MODE" />
-    <uses-permission android:name="android.permission.RESTART_PHONE_PROCESS" />
+    <uses-permission android:name="android.permission.RESTART_TELEPHONY_PROCESS" />
     <uses-permission android:name="android.permission.MANAGE_ENHANCED_CONFIRMATION_STATES" />
     <uses-permission android:name="android.permission.ACCESS_KEYGUARD_SECURE_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_NETWORK_POLICY" />
@@ -1287,20 +1287,63 @@
         </activity>
 
         <activity
-            android:name="Settings$ZenModeSettingsActivity"
+            android:name="Settings$ModesSettingsActivity"
             android:label="@string/zen_mode_settings_title"
             android:icon="@drawable/ic_homepage_notification"
             android:exported="true">
-            <intent-filter android:priority="1">
+            <intent-filter android:priority="1"
+                           android:featureFlag="android.app.modes_ui">
                 <action android:name="android.settings.ZEN_MODE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="1">
+            <intent-filter android:priority="1"
+                           android:featureFlag="android.app.modes_ui">
                 <action android:name="android.settings.ZEN_MODE_PRIORITY_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="41">
+            <intent-filter android:priority="41"
+                           android:featureFlag="android.app.modes_ui">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <intent-filter android:priority="10"
+                           android:featureFlag="android.app.modes_ui">
+                <action android:name="android.settings.ZEN_MODE_AUTOMATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="10"
+                           android:featureFlag="android.app.modes_ui">
+                <action android:name="android.settings.ACTION_CONDITION_PROVIDER_SETTINGS" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.modes.ZenModesListFragment"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_notifications"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$ZenModeSettingsActivity"
+            android:label="@string/zen_mode_settings_title"
+            android:icon="@drawable/ic_homepage_notification"
+            android:exported="true">
+            <intent-filter android:priority="1"
+                           android:featureFlag="!android.app.modes_ui">
+                <action android:name="android.settings.ZEN_MODE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="1"
+                           android:featureFlag="!android.app.modes_ui">
+                <action android:name="android.settings.ZEN_MODE_PRIORITY_SETTINGS" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="41"
+                           android:featureFlag="!android.app.modes_ui">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
@@ -1310,6 +1353,20 @@
                        android:value="@string/menu_key_notifications"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$ModeSettingsActivity"
+            android:exported="true">
+            <intent-filter android:priority="1"
+                           android:featureFlag="android.app.modes_ui">
+                <action android:name="android.settings.AUTOMATIC_ZEN_RULE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.modes.ZenModeFragment"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity
@@ -1351,11 +1408,13 @@
             android:label="@string/zen_mode_automation_settings_title"
             android:icon="@drawable/ic_notifications"
             android:exported="true">
-            <intent-filter android:priority="1">
+            <intent-filter android:priority="10"
+                           android:featureFlag="!android.app.modes_ui">
                 <action android:name="android.settings.ZEN_MODE_AUTOMATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="1">
+            <intent-filter android:priority="10"
+                           android:featureFlag="!android.app.modes_ui">
                 <action android:name="android.settings.ACTION_CONDITION_PROVIDER_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2832,17 +2891,20 @@
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name=".password.ConfirmLockPattern$InternalActivity"
             android:exported="false"
+            android:enableOnBackInvokedCallback="false"
             android:theme="@style/GlifTheme.Light"/>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name=".password.ConfirmLockPassword$InternalActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
+            android:enableOnBackInvokedCallback="false"
             android:theme="@style/GlifTheme.Light"/>
 
         <activity android:name=".password.SetupChooseLockGeneric"
             android:theme="@style/GlifTheme.Light"
             android:exported="true"
+            android:enableOnBackInvokedCallback="false"
             android:label="@string/lock_settings_picker_title">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.SETUP_LOCK_SCREEN" />
@@ -2852,16 +2914,19 @@
 
         <activity android:name=".password.SetupChooseLockGeneric$InternalActivity"
             android:exported="false"
+            android:enableOnBackInvokedCallback="false"
             android:excludeFromRecents="true" />
 
         <activity android:name=".password.ChooseLockGeneric"
             android:label="@string/lockpassword_choose_lock_generic_header"
             android:excludeFromRecents="true"
+            android:enableOnBackInvokedCallback="false"
             android:exported="false" />
 
         <activity android:name=".password.SetNewPasswordActivity"
             android:theme="@android:style/Theme.NoDisplay"
             android:exported="true"
+            android:enableOnBackInvokedCallback="false"
             android:excludeFromRecents="true" >
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.SET_NEW_PASSWORD" />
@@ -2907,24 +2972,29 @@
         <activity android:name=".password.ChooseLockGeneric$InternalActivity"
             android:exported="false"
             android:label="@string/lockpassword_choose_lock_generic_header"
+            android:enableOnBackInvokedCallback="false"
             android:excludeFromRecents="true" />
 
         <activity android:name=".password.SetupChooseLockPattern"
             android:exported="false"
+            android:enableOnBackInvokedCallback="false"
             android:theme="@style/GlifTheme.Light" />
 
         <activity android:name=".password.ChooseLockPattern"
             android:exported="false"
+            android:enableOnBackInvokedCallback="false"
             android:theme="@style/GlifTheme.Light" />
 
         <activity android:name=".password.SetupChooseLockPassword"
             android:exported="false"
             android:theme="@style/GlifTheme.Light"
+            android:enableOnBackInvokedCallback="false"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <activity android:name=".password.ChooseLockPassword"
             android:exported="false"
             android:theme="@style/GlifTheme.Light"
+            android:enableOnBackInvokedCallback="false"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <activity

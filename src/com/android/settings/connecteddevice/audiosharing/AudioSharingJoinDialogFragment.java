@@ -20,9 +20,11 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -52,6 +54,7 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
 
     @Nullable private static DialogEventListener sListener;
     @Nullable private static CachedBluetoothDevice sNewDevice;
+    private static Pair<Integer, Object>[] sEventData = new Pair[0];
 
     @Override
     public int getMetricsCategory() {
@@ -69,16 +72,19 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
      * @param deviceItems The existing connected device items eligible for audio sharing.
      * @param newDevice The latest connected device triggered this dialog.
      * @param listener The callback to handle the user action on this dialog.
+     * @param eventData The eventData to log with for dialog onClick events.
      */
     public static void show(
             @NonNull Fragment host,
             @NonNull List<AudioSharingDeviceItem> deviceItems,
             @NonNull CachedBluetoothDevice newDevice,
-            @NonNull DialogEventListener listener) {
+            @NonNull DialogEventListener listener,
+            @NonNull Pair<Integer, Object>[] eventData) {
         if (!AudioSharingUtils.isFeatureEnabled()) return;
         final FragmentManager manager = host.getChildFragmentManager();
         sListener = listener;
         sNewDevice = newDevice;
+        sEventData = eventData;
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
         if (dialog != null) {
             Log.d(TAG, "Dialog is showing, update the content.");
@@ -104,7 +110,22 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
         return sNewDevice;
     }
 
+    /** Test only: get the {@link DialogEventListener} passed to the dialog. */
+    @VisibleForTesting
+    @Nullable
+    DialogEventListener getListener() {
+        return sListener;
+    }
+
+    /** Test only: get the event data passed to the dialog. */
+    @VisibleForTesting
+    @NonNull
+    Pair<Integer, Object>[] getEventData() {
+        return sEventData;
+    }
+
     @Override
+    @NonNull
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Bundle arguments = requireArguments();
         List<AudioSharingDeviceItem> deviceItems =
@@ -121,6 +142,11 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
                                 v -> {
                                     if (sListener != null) {
                                         sListener.onShareClick();
+                                        mMetricsFeatureProvider.action(
+                                                getContext(),
+                                                SettingsEnums
+                                                .ACTION_AUDIO_SHARING_DIALOG_POSITIVE_BTN_CLICKED,
+                                                sEventData);
                                     }
                                     dismiss();
                                 })
@@ -129,11 +155,20 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
                                 v -> {
                                     if (sListener != null) {
                                         sListener.onCancelClick();
+                                        mMetricsFeatureProvider.action(
+                                                getContext(),
+                                                SettingsEnums
+                                                .ACTION_AUDIO_SHARING_DIALOG_NEGATIVE_BTN_CLICKED,
+                                                sEventData);
                                     }
                                     dismiss();
                                 })
                         .build();
-        updateDialog(deviceItems, newDeviceName, dialog);
+        if (deviceItems == null) {
+            Log.d(TAG, "Fail to create dialog: null deviceItems");
+        } else {
+            updateDialog(deviceItems, newDeviceName, dialog);
+        }
         dialog.show();
         AudioSharingDialogHelper.updateMessageStyle(dialog);
         return dialog;

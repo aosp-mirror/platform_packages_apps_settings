@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -41,6 +42,7 @@ import android.widget.SeekBar;
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -56,6 +58,7 @@ import com.android.settingslib.bluetooth.VolumeControlProfile;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -80,6 +83,9 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
     private static final String TEST_SETTINGS_KEY =
             "bluetooth_le_broadcast_fallback_active_group_id";
     private static final int TEST_DEVICE_GROUP_ID = 1;
+    private static final int TEST_VOLUME_VALUE = 255;
+    private static final int TEST_MAX_STREAM_VALUE = 10;
+    private static final int TEST_MIN_STREAM_VALUE = 0;
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
@@ -129,6 +135,11 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
                         new AudioSharingDeviceVolumeControlUpdater(
                                 mContext, mDevicePreferenceCallback, /* metricsCategory= */ 0));
         mDeviceUpdater.setPrefContext(mContext);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowBluetoothUtils.reset();
     }
 
     @Test
@@ -249,10 +260,11 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
                 (AudioSharingDeviceVolumePreference) captor.getValue();
 
         SeekBar seekBar = mock(SeekBar.class);
-        when(seekBar.getProgress()).thenReturn(255);
+        when(seekBar.getProgress()).thenReturn(TEST_VOLUME_VALUE);
         preference.onStopTrackingTouch(seekBar);
 
-        verify(mVolumeControl).setDeviceVolume(mBluetoothDevice, 255, true);
+        verify(mVolumeControl)
+                .setDeviceVolume(mBluetoothDevice, TEST_VOLUME_VALUE, /* isGroupOp= */ true);
         verifyNoInteractions(mAudioManager);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
@@ -273,19 +285,38 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
 
         Settings.Secure.putInt(
                 mContext.getContentResolver(), TEST_SETTINGS_KEY, TEST_DEVICE_GROUP_ID);
-        when(mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)).thenReturn(10);
-        when(mAudioManager.getStreamMinVolume(AudioManager.STREAM_MUSIC)).thenReturn(0);
+        when(mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC))
+                .thenReturn(TEST_MAX_STREAM_VALUE);
+        when(mAudioManager.getStreamMinVolume(AudioManager.STREAM_MUSIC))
+                .thenReturn(TEST_MIN_STREAM_VALUE);
         SeekBar seekBar = mock(SeekBar.class);
-        when(seekBar.getProgress()).thenReturn(255);
+        when(seekBar.getProgress()).thenReturn(TEST_VOLUME_VALUE);
         preference.onStopTrackingTouch(seekBar);
 
         verifyNoInteractions(mVolumeControl);
-        verify(mAudioManager).setStreamVolume(AudioManager.STREAM_MUSIC, 10, 0);
+        verify(mAudioManager)
+                .setStreamVolume(AudioManager.STREAM_MUSIC, TEST_MAX_STREAM_VALUE, /* flags= */ 0);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
                         mContext,
                         SettingsEnums.ACTION_AUDIO_SHARING_CHANGE_MEDIA_DEVICE_VOLUME,
                         /* isPrimary= */ true);
+    }
+
+    @Test
+    public void testOnSeekBarChangeListener_doNothing() {
+        ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
+        setupPreferenceMapWithDevice();
+
+        verify(mDevicePreferenceCallback).onDeviceAdded(captor.capture());
+        assertThat(captor.getValue() instanceof AudioSharingDeviceVolumePreference).isTrue();
+        AudioSharingDeviceVolumePreference preference =
+                (AudioSharingDeviceVolumePreference) captor.getValue();
+        SeekBar seekBar = mock(SeekBar.class);
+        preference.onProgressChanged(seekBar, TEST_VOLUME_VALUE, /* fromUser= */ false);
+
+        verifyNoInteractions(mAudioManager);
+        verifyNoInteractions(mVolumeControl);
     }
 
     @Test
@@ -296,6 +327,35 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
     @Test
     public void getPreferenceKey_returnsCorrectKey() {
         assertThat(mDeviceUpdater.getPreferenceKey()).isEqualTo(PREF_KEY);
+    }
+
+    @Test
+    public void addPreferenceWithSortType_doNothing() {
+        mDeviceUpdater.addPreference(
+                mCachedBluetoothDevice, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+        // Verify AudioSharingDeviceVolumeControlUpdater overrides BluetoothDeviceUpdater and won't
+        // trigger add preference.
+        verifyNoInteractions(mDevicePreferenceCallback);
+    }
+
+    @Test
+    public void launchDeviceDetails_doNothing() {
+        Preference preference = mock(Preference.class);
+        mDeviceUpdater.launchDeviceDetails(preference);
+        // Verify AudioSharingDeviceVolumeControlUpdater overrides BluetoothDeviceUpdater and won't
+        // launch device details
+        verifyNoInteractions(preference);
+    }
+
+    @Test
+    public void refreshPreference_doNothing() {
+        setupPreferenceMapWithDevice();
+        verify(mDevicePreferenceCallback).onDeviceAdded(any(Preference.class));
+        when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(ImmutableList.of());
+        mDeviceUpdater.refreshPreference();
+        // Verify AudioSharingDeviceVolumeControlUpdater overrides BluetoothDeviceUpdater and won't
+        // refresh preference map
+        verify(mDevicePreferenceCallback, never()).onDeviceRemoved(any(Preference.class));
     }
 
     private void setupPreferenceMapWithDevice() {

@@ -555,6 +555,9 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             int deviceType = ((HotspotNetworkEntry) wifiEntry).getDeviceType();
             return mContext.getDrawable(getHotspotIconResource(deviceType));
         }
+        if (mWifiEntry.getLevel() == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
+            return mContext.getDrawable(R.drawable.empty_icon);
+        }
         return mIconInjector.getIcon(wifiEntry.shouldShowXLevelIcon(), wifiEntry.getLevel());
     }
 
