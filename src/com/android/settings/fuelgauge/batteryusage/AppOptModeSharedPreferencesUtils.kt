@@ -25,6 +25,7 @@ import androidx.annotation.VisibleForTesting
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action
 import com.android.settings.fuelgauge.BatteryOptimizeUtils
 import com.android.settings.fuelgauge.BatteryUtils
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 
 /** A util to store and update app optimization mode expiration event data. */
 object AppOptModeSharedPreferencesUtils {
@@ -74,10 +75,14 @@ object AppOptModeSharedPreferencesUtils {
     @JvmStatic
     fun resetExpiredAppOptModeBeforeTimestamp(context: Context, queryTimestampMs: Long) =
         synchronized(appOptimizationModeLock) {
+            val forceExpireEnabled =
+                featureFactory
+                    .powerUsageFeatureProvider.isForceExpireAppOptimizationModeEnabled
             val eventsMap = getAppOptModeEventsMap(context)
             val expirationUids = ArrayList<Int>(eventsMap.size)
             for ((uid, event) in eventsMap) {
-                if (event.expirationTime > queryTimestampMs) {
+                // Not reset the mode if forceExpireEnabled is false and not expired.
+                if (!forceExpireEnabled && event.expirationTime > queryTimestampMs) {
                     continue
                 }
                 updateBatteryOptimizationMode(

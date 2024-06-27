@@ -28,77 +28,67 @@ import kotlinx.coroutines.flow.flowOn
 
 /** Interface that indicates if press to auth is on or off. */
 interface PressToAuthInteractor {
-    /** Indicates true if the PressToAuth feature is enabled, false otherwise. */
-    val isEnabled: Flow<Boolean>
+  /** Indicates true if the PressToAuth feature is enabled, false otherwise. */
+  val isEnabled: Flow<Boolean>
 }
 
 /** Indicates whether or not the press to auth feature is enabled. */
 class PressToAuthInteractorImpl(
-    private val context: Context,
-    private val backgroundDispatcher: CoroutineDispatcher,
+  private val context: Context,
+  private val backgroundDispatcher: CoroutineDispatcher,
 ) : PressToAuthInteractor {
 
-    /**
-     * A flow that contains the status of the press to auth feature.
-     */
-    override val isEnabled: Flow<Boolean> =
-
-        callbackFlow {
-            val callback =
-                object : ContentObserver(null) {
-                    override fun onChange(selfChange: Boolean) {
-                        Log.d(TAG, "SFPS_PERFORMANT_AUTH_ENABLED#onchange")
-                        trySend(
-                            getPressToAuth(),
-                        )
-                    }
-                }
-
-            context.contentResolver.registerContentObserver(
-                Settings.Secure.getUriFor(Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED),
-                false,
-                callback,
-                context.userId
-            )
-            trySend(getPressToAuth())
-            awaitClose {
-                context.contentResolver.unregisterContentObserver(callback)
+  /** A flow that contains the status of the press to auth feature. */
+  override val isEnabled: Flow<Boolean> =
+    callbackFlow {
+        val callback =
+          object : ContentObserver(null) {
+            override fun onChange(selfChange: Boolean) {
+              Log.d(TAG, "SFPS_PERFORMANT_AUTH_ENABLED#onchange")
+              trySend(getPressToAuth())
             }
-        }.flowOn(backgroundDispatcher)
+          }
 
+        context.contentResolver.registerContentObserver(
+          Settings.Secure.getUriFor(Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED),
+          false,
+          callback,
+          context.userId,
+        )
+        trySend(getPressToAuth())
+        awaitClose { context.contentResolver.unregisterContentObserver(callback) }
+      }
+      .flowOn(backgroundDispatcher)
 
-    /**
-     * Returns true if press to auth is enabled
-     */
-    private fun getPressToAuth(): Boolean {
-        var toReturn: Int =
-            Settings.Secure.getIntForUser(
-                context.contentResolver,
-                Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
-                -1,
-                context.userId,
-            )
-        if (toReturn == -1) {
-            toReturn =
-                if (
-                    context.resources.getBoolean(com.android.internal.R.bool.config_performantAuthDefault)
-                ) {
-                    1
-                } else {
-                    0
-                }
-            Settings.Secure.putIntForUser(
-                context.contentResolver,
-                Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
-                toReturn,
-                context.userId,
-            )
+  /** Returns true if press to auth is enabled */
+  private fun getPressToAuth(): Boolean {
+    var toReturn: Int =
+      Settings.Secure.getIntForUser(
+        context.contentResolver,
+        Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
+        -1,
+        context.userId,
+      )
+    if (toReturn == -1) {
+      toReturn =
+        if (
+          context.resources.getBoolean(com.android.internal.R.bool.config_performantAuthDefault)
+        ) {
+          1
+        } else {
+          0
         }
-        return toReturn == 1
-
+      Settings.Secure.putIntForUser(
+        context.contentResolver,
+        Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
+        toReturn,
+        context.userId,
+      )
     }
+    return toReturn == 1
+  }
 
-    companion object {
-        const val TAG = "PressToAuthInteractor"
-    }
+  companion object {
+    const val TAG = "PressToAuthInteractor"
+  }
 }

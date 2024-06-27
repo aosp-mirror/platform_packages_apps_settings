@@ -64,6 +64,10 @@ public class SatelliteSettingPreferenceController extends
             return UNSUPPORTED_ON_DEVICE;
         }
 
+        if (mSatelliteManager == null) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         final boolean isSatelliteAttachSupported = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL);

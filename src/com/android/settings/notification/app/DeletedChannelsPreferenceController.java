@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.app;
 
+import static com.android.server.notification.Flags.notificationHideUnusedChannels;
+
 import android.content.Context;
 
 import androidx.preference.Preference;
@@ -42,6 +44,9 @@ public class DeletedChannelsPreferenceController extends NotificationPreferenceC
     @Override
     public boolean isAvailable() {
         if (!super.isAvailable()) {
+            return false;
+        }
+        if (notificationHideUnusedChannels()) {
             return false;
         }
         // only visible on app screen

@@ -95,14 +95,14 @@ public class AudioSharingNamePreference extends ValidatedEditTextPreference {
     }
 
     private void configureInvisibleStateForQrCodeIcon(ImageButton shareButton, View divider) {
-        divider.setVisibility(View.INVISIBLE);
-        shareButton.setVisibility(View.INVISIBLE);
+        divider.setVisibility(View.GONE);
+        shareButton.setVisibility(View.GONE);
         shareButton.setOnClickListener(null);
     }
 
     private void launchAudioSharingQrCodeFragment() {
         new SubSettingLauncher(getContext())
-                .setTitleText(getContext().getString(R.string.audio_streams_qr_code_page_title))
+                .setTitleRes(R.string.audio_streams_qr_code_page_title)
                 .setDestination(AudioStreamsQrCodeFragment.class.getName())
                 .setSourceMetricsCategory(SettingsEnums.AUDIO_SHARING_SETTINGS)
                 .launch();

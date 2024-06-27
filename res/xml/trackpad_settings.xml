@@ -62,6 +62,23 @@
         android:selectable="false"
         settings:controller="com.android.settings.inputmethod.TrackpadPointerSpeedPreferenceController"/>
 
+    <com.android.settings.inputmethod.PointerFillStylePreference
+        android:key="pointer_fill_style"
+        android:title="@string/pointer_fill_style"
+        android:order="50"
+        settings:controller="com.android.settings.inputmethod.PointerFillStylePreferenceController"/>
+
+    <com.android.settings.widget.LabeledSeekBarPreference
+        android:key="pointer_scale"
+        android:title="@string/pointer_scale"
+        android:order="70"
+        android:max="@integer/pointer_scale_seek_bar_end"
+        settings:iconStart="@drawable/ic_remove_24dp"
+        settings:iconStartContentDescription="@string/pointer_scale_decrease_content_description"
+        settings:iconEnd="@drawable/ic_add_24dp"
+        settings:iconEndContentDescription="@string/pointer_scale_increase_content_description"
+        settings:controller="com.android.settings.inputmethod.PointerScaleSeekBarController" />
+
     <com.android.settingslib.widget.ButtonPreference
         android:key="trackpad_touch_gesture"
         android:title="@string/trackpad_touch_gesture"

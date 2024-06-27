@@ -90,7 +90,7 @@ fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
                 apnRoaming = context.convertProtocol2Options(
                     cursor.getString(Telephony.Carriers.ROAMING_PROTOCOL)
                 ),
-                apnEnable = cursor.getInt(Telephony.Carriers.CARRIER_ENABLED) == 1,
+                carrierEnabled = cursor.getInt(Telephony.Carriers.CARRIER_ENABLED) == 1,
                 networkType = cursor.getLong(Telephony.Carriers.NETWORK_TYPE_BITMASK),
                 edited = cursor.getInt(Telephony.Carriers.EDITED_STATUS),
                 userEditable = cursor.getInt(Telephony.Carriers.USER_EDITABLE),

@@ -15,9 +15,15 @@
  */
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
+import android.hardware.fingerprint.FingerprintEnrollOptions
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
@@ -25,12 +31,14 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Enrollment
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.transformLatest
+import kotlinx.coroutines.flow.update
 
 /** Represents all of the fingerprint information needed for a fingerprint enrollment process. */
 class FingerprintEnrollViewModel(
@@ -55,6 +63,8 @@ class FingerprintEnrollViewModel(
       }
     }
 
+  private val enrollOptions: MutableStateFlow<FingerprintEnrollOptions?> = MutableStateFlow(null)
+
   /** Represents the stream of [FingerprintSensorType] */
   val sensorType: Flow<FingerprintSensorType?> =
     fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
@@ -66,16 +76,23 @@ class FingerprintEnrollViewModel(
    * This flow should be the only flow which calls enroll().
    */
   val _enrollFlow: Flow<FingerEnrollState> =
-    combine(gatekeeperViewModel.gatekeeperInfo, _enrollReason) { hardwareAuthToken, enrollReason ->
-        Pair(hardwareAuthToken, enrollReason)
+    combine(gatekeeperViewModel.gatekeeperInfo, _enrollReason, enrollOptions) {
+        hardwareAuthToken,
+        enrollReason,
+        enrollOptions ->
+        Triple(hardwareAuthToken, enrollReason, enrollOptions)
       }
       .transformLatest {
         /** [transformLatest] is used as we want to make sure to cancel previous API call. */
-        (hardwareAuthToken, enrollReason) ->
-        if (hardwareAuthToken is GatekeeperInfo.GatekeeperPasswordInfo && enrollReason != null) {
-          fingerprintManagerInteractor.enroll(hardwareAuthToken.token, enrollReason).collect {
-            emit(it)
-          }
+        (hardwareAuthToken, enrollReason, enrollOptions) ->
+        if (
+          hardwareAuthToken is GatekeeperInfo.GatekeeperPasswordInfo &&
+            enrollReason != null &&
+            enrollOptions != null
+        ) {
+          fingerprintManagerInteractor
+            .enroll(hardwareAuthToken.token, enrollReason, enrollOptions)
+            .collect { emit(it) }
         }
       }
       .shareIn(viewModelScope, SharingStarted.WhileSubscribed(), 0)
@@ -108,14 +125,23 @@ class FingerprintEnrollViewModel(
       }
     }
 
-  class FingerprintEnrollViewModelFactory(
-    val interactor: FingerprintManagerInteractor,
-    val gatekeeperViewModel: FingerprintGatekeeperViewModel,
-    val navigationViewModel: FingerprintNavigationViewModel,
-  ) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return FingerprintEnrollViewModel(interactor, gatekeeperViewModel, navigationViewModel) as T
+  /** Starts enrollment. */
+  fun enroll(options: FingerprintEnrollOptions) {
+    enrollOptions.update { options }
+  }
+
+  companion object {
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer {
+        val settingsApplication = this[APPLICATION_KEY] as SettingsApplication
+        val biometricEnvironment = settingsApplication.biometricEnvironment
+        val provider = ViewModelProvider(this[VIEW_MODEL_STORE_OWNER_KEY]!!)
+        FingerprintEnrollViewModel(
+          biometricEnvironment!!.fingerprintManagerInteractor,
+          provider[FingerprintGatekeeperViewModel::class],
+          provider[FingerprintNavigationViewModel::class],
+        )
+      }
     }
   }
 }

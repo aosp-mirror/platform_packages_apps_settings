@@ -35,9 +35,6 @@
         <action
             android:id="@+id/action_set_lock_fragment"
             app:destination="@id/ps_profile_lock_fragment"/>
-        <action
-            android:id="@+id/action_account_intro_fragment"
-            app:destination="@id/ps_account_intro_fragment"/>
     </fragment>
     <fragment android:id="@+id/ps_profile_error_fragment"
               android:name="com.android.settings.privatespace.PrivateProfileCreationError"
@@ -60,9 +57,6 @@
               android:name="com.android.settings.privatespace.PrivateSpaceAccountLoginError"
               android:label="fragment_account_error">
         <action
-            android:id="@+id/action_advance_login_error"
-            app:destination="@id/ps_account_intro_fragment"/>
-        <action
             android:id="@+id/action_skip_account_login"
             app:destination="@id/ps_profile_lock_fragment"/>
     </fragment>
@@ -73,16 +67,10 @@
             android:id="@+id/action_lock_success_fragment"
             app:destination="@id/ps_pre_finish_delay_fragment"/>
     </fragment>
-    <fragment android:id="@+id/ps_account_intro_fragment"
-              android:name="com.android.settings.privatespace.PrivateSpaceGaiaEducationFragment"
-              android:label="fragment_ps_account_intro">
-        <action
-            android:id="@+id/action_account_lock_fragment"
-            app:destination="@id/ps_profile_lock_fragment"/>
-        <action
-            android:id="@+id/action_advance_login_error"
-            app:destination="@id/ps_account_error_fragment"/>
-    </fragment>
     <action android:id="@+id/action_pre_finish_delay_fragment"
             app:destination="@id/ps_pre_finish_delay_fragment"/>
+    <action android:id="@+id/action_advance_login_error"
+            app:destination="@id/ps_account_error_fragment"/>
+    <action android:id="@+id/show_set_lock_fragment"
+            app:destination="@id/ps_profile_lock_fragment"/>
 </navigation>

@@ -703,4 +703,26 @@ public final class ConvertUtilsTest {
                                 /* taskRootPackageName= */ ""))
                 .isEqualTo(packageName);
     }
+
+    @Test
+    public void decodeBatteryReattribute_returnExpectedResult() {
+        final BatteryReattribute batteryReattribute =
+                BatteryReattribute.newBuilder()
+                        .setTimestampStart(100L)
+                        .setTimestampEnd(200L)
+                        .putReattributeData(1001, 0.2f)
+                        .putReattributeData(2001, 0.8f)
+                        .build();
+
+        final BatteryReattribute decodeResult = ConvertUtils.decodeBatteryReattribute(
+                ConvertUtils.encodeBatteryReattribute(batteryReattribute));
+
+        assertThat(decodeResult.getTimestampStart()).isEqualTo(100L);
+        assertThat(decodeResult.getTimestampEnd()).isEqualTo(200L);
+        final Map<Integer, Float> reattributeDataMap = decodeResult.getReattributeDataMap();
+        // Verify the reattribute data in the map.
+        assertThat(reattributeDataMap).hasSize(2);
+        assertThat(reattributeDataMap.get(1001)).isEqualTo(0.2f);
+        assertThat(reattributeDataMap.get(2001)).isEqualTo(0.8f);
+    }
 }
