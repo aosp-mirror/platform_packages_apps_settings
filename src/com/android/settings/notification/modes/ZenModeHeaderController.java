@@ -25,6 +25,9 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.notification.modes.ZenIconLoader;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
 class ZenModeHeaderController extends AbstractZenModePreferenceController {
@@ -62,10 +65,9 @@ class ZenModeHeaderController extends AbstractZenModePreferenceController {
         }
 
         FutureUtil.whenDone(
-                zenMode.getIcon(mContext, IconLoader.getInstance()),
-                icon -> mHeaderController.setIcon(icon)
-                        .setLabel(zenMode.getRule().getName())
-                        .done(false /* rebindActions */),
+                zenMode.getIcon(mContext, ZenIconLoader.getInstance()),
+                icon -> mHeaderController.setIcon(IconUtil.applyNormalTint(mContext, icon))
+                        .done(/* rebindActions= */ false),
                 mContext.getMainExecutor());
     }
 }

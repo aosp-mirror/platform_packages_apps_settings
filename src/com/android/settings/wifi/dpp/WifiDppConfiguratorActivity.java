@@ -35,6 +35,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
 
@@ -236,7 +238,12 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
                         WifiDppUtils.TAG_FRAGMENT_QR_CODE_GENERATOR);
 
         if (fragment == null) {
-            fragment = new WifiDppQrCodeGeneratorFragment();
+            if (Flags.enableWifiSharingRuntimeFragment()) {
+                fragment = FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
+                    .getWifiDppQrCodeGeneratorFragment();
+            } else {
+                fragment = new WifiDppQrCodeGeneratorFragment();
+            }
         } else {
             if (fragment.isVisible()) {
                 return;

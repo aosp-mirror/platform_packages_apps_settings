@@ -54,7 +54,9 @@ public class AudioStreamHeaderController extends BasePreferenceController
     private final Executor mExecutor;
     private final AudioStreamsHelper mAudioStreamsHelper;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
-    private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+
+    @VisibleForTesting
+    final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new AudioStreamsBroadcastAssistantCallback() {
                 @Override
                 public void onSourceRemoved(BluetoothDevice sink, int sourceId, int reason) {

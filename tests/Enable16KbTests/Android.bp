@@ -17,7 +17,7 @@ package {
     default_team: "trendy_team_android_kernel",
 }
 
-android_test_helper_app {
+android_test {
     name: "test_16kb_app",
     srcs: ["test_16kb_app/src/**/*.java"],
     manifest: "test_16kb_app/test_16kb_app.xml",
@@ -33,7 +33,6 @@ android_test_helper_app {
     ],
     platform_apis: true,
     certificate: "platform",
-    test_suites: ["general-tests"],
     libs: [
         "android.test.runner",
         "android.test.base",

@@ -21,26 +21,35 @@ import static android.media.Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_NONE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
 import android.media.AudioDeviceAttributes;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.Spatializer;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.bluetooth.A2dpProfile;
+import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.flags.Flags;
 
 import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -54,7 +63,8 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetailsControllerTestBase {
-
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
     private static final String KEY_SPATIAL_AUDIO = "spatial_audio";
     private static final String KEY_HEAD_TRACKING = "head_tracking";
@@ -64,6 +74,9 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
     @Mock private Lifecycle mSpatialAudioLifecycle;
     @Mock private PreferenceCategory mProfilesContainer;
     @Mock private BluetoothDevice mBluetoothDevice;
+    @Mock private A2dpProfile mA2dpProfile;
+    @Mock private LeAudioProfile mLeAudioProfile;
+    @Mock private HearingAidProfile mHearingAidProfile;
 
     private AudioDeviceAttributes mAvailableDevice;
 
@@ -83,6 +96,12 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
         when(mAudioManager.getSpatializer()).thenReturn(mSpatializer);
         when(mCachedDevice.getAddress()).thenReturn(MAC_ADDRESS);
         when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mCachedDevice.getProfiles())
+                .thenReturn(List.of(mA2dpProfile, mLeAudioProfile, mHearingAidProfile));
+        when(mA2dpProfile.isEnabled(mBluetoothDevice)).thenReturn(true);
+        when(mA2dpProfile.getProfileId()).thenReturn(BluetoothProfile.A2DP);
+        when(mLeAudioProfile.getProfileId()).thenReturn(BluetoothProfile.LE_AUDIO);
+        when(mHearingAidProfile.getProfileId()).thenReturn(BluetoothProfile.HEARING_AID);
         when(mBluetoothDevice.getAnonymizedAddress()).thenReturn(MAC_ADDRESS);
         when(mFeatureFactory.getBluetoothFeatureProvider().getSpatializer(mContext))
                 .thenReturn(mSpatializer);
@@ -270,6 +289,52 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
                         mContext,
                         SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_HEAD_TRACKING_TRIGGERED,
                         false);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_DETERMINING_SPATIAL_AUDIO_ATTRIBUTES_BY_PROFILE)
+    public void refresh_leAudioProfileEnabledForHeadset_useLeAudioHeadsetAttributes() {
+        when(mLeAudioProfile.isEnabled(mBluetoothDevice)).thenReturn(true);
+        when(mA2dpProfile.isEnabled(mBluetoothDevice)).thenReturn(false);
+        when(mHearingAidProfile.isEnabled(mBluetoothDevice)).thenReturn(false);
+        when(mAudioManager.getBluetoothAudioDeviceCategory(MAC_ADDRESS))
+                .thenReturn(AudioManager.AUDIO_DEVICE_CATEGORY_HEADPHONES);
+        when(mSpatializer.isAvailableForDevice(any())).thenReturn(true);
+
+        mController.refresh();
+        ShadowLooper.idleMainLooper();
+
+        assertThat(mController.mAudioDevice.getType()).isEqualTo(AudioDeviceInfo.TYPE_BLE_HEADSET);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_DETERMINING_SPATIAL_AUDIO_ATTRIBUTES_BY_PROFILE)
+    public void refresh_leAudioProfileEnabledForSpeaker_useLeAudioSpeakerAttributes() {
+        when(mLeAudioProfile.isEnabled(mBluetoothDevice)).thenReturn(true);
+        when(mA2dpProfile.isEnabled(mBluetoothDevice)).thenReturn(false);
+        when(mHearingAidProfile.isEnabled(mBluetoothDevice)).thenReturn(false);
+        when(mAudioManager.getBluetoothAudioDeviceCategory(MAC_ADDRESS))
+                .thenReturn(AudioManager.AUDIO_DEVICE_CATEGORY_SPEAKER);
+        when(mSpatializer.isAvailableForDevice(any())).thenReturn(true);
+
+        mController.refresh();
+        ShadowLooper.idleMainLooper();
+
+        assertThat(mController.mAudioDevice.getType()).isEqualTo(AudioDeviceInfo.TYPE_BLE_SPEAKER);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_DETERMINING_SPATIAL_AUDIO_ATTRIBUTES_BY_PROFILE)
+    public void refresh_hearingAidProfileEnabled_useHearingAidAttributes() {
+        when(mLeAudioProfile.isEnabled(mBluetoothDevice)).thenReturn(false);
+        when(mA2dpProfile.isEnabled(mBluetoothDevice)).thenReturn(false);
+        when(mHearingAidProfile.isEnabled(mBluetoothDevice)).thenReturn(true);
+        when(mSpatializer.isAvailableForDevice(any())).thenReturn(true);
+
+        mController.refresh();
+        ShadowLooper.idleMainLooper();
+
+        assertThat(mController.mAudioDevice.getType()).isEqualTo(AudioDeviceInfo.TYPE_HEARING_AID);
     }
 
     @Test

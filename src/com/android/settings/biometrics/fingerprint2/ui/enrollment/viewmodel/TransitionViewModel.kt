@@ -18,24 +18,15 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
 /** Indicates the type of transitions that can occur between fragments */
 sealed class Transition {
-  /**
-   * Indicates the new fragment should slide in from the left side
-   */
+  /** Indicates the new fragment should slide in from the left side */
   data object EnterFromLeft : Transition()
 
-  /**
-   * Indicates the new fragment should slide in from the right side
-   */
+  /** Indicates the new fragment should slide in from the right side */
   data object EnterFromRight : Transition()
 
-  /**
-   * Indicates the old fragment should slide out to the left side
-   */
+  /** Indicates the old fragment should slide out to the left side */
   data object ExitToLeft : Transition()
 
-  /**
-   * Indicates the old fragment should slide out to the right side
-   */
+  /** Indicates the old fragment should slide out to the right side */
   data object ExitToRight : Transition()
 }
-

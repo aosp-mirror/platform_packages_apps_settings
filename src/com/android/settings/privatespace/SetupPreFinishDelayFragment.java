@@ -92,7 +92,7 @@ public class SetupPreFinishDelayFragment extends InstrumentedFragment {
             @Nullable Bundle savedInstanceState) {
         GlifLayout rootView =
                 (GlifLayout)
-                        inflater.inflate(R.layout.private_space_pre_finish_delay, container, false);
+                        inflater.inflate(R.layout.private_space_wait_screen, container, false);
         OnBackPressedCallback callback =
                 new OnBackPressedCallback(true /* enabled by default */) {
                     @Override
