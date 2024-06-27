@@ -33,7 +33,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.update
 
 /** This repository is responsible for collecting all state related to the enroll API. */
@@ -45,13 +44,13 @@ interface FingerprintEnrollInteractor {
   suspend fun enroll(
     hardwareAuthToken: ByteArray?,
     enrollReason: EnrollReason,
+    fingerprintEnrollOptions: FingerprintEnrollOptions,
   ): Flow<FingerEnrollState>
 }
 
 class FingerprintEnrollInteractorImpl(
   private val applicationContext: Context,
-  private val fingerprintEnrollOptions: FingerprintEnrollOptions,
-  private val fingerprintManager: FingerprintManager,
+  private val fingerprintManager: FingerprintManager?,
   private val fingerprintFlow: FingerprintFlow,
 ) : FingerprintEnrollInteractor {
   private val enrollRequestOutstanding = MutableStateFlow(false)
@@ -59,6 +58,7 @@ class FingerprintEnrollInteractorImpl(
   override suspend fun enroll(
     hardwareAuthToken: ByteArray?,
     enrollReason: EnrollReason,
+    fingerprintEnrollOptions: FingerprintEnrollOptions,
   ): Flow<FingerEnrollState> = callbackFlow {
     // TODO (b/308456120) Improve this logic
     if (enrollRequestOutstanding.value) {
@@ -135,7 +135,7 @@ class FingerprintEnrollInteractorImpl(
 
     val cancellationSignal = CancellationSignal()
 
-    fingerprintManager.enroll(
+    fingerprintManager?.enroll(
       hardwareAuthToken,
       cancellationSignal,
       applicationContext.userId,

@@ -19,13 +19,16 @@ package com.android.settings.bluetooth;
 import static android.media.Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_NONE;
 
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.media.AudioDeviceAttributes;
 import android.media.AudioDeviceInfo;
+import android.media.AudioManager;
 import android.media.Spatializer;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -37,9 +40,14 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
+import com.google.common.collect.ImmutableSet;
+
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -53,15 +61,19 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     private static final String KEY_SPATIAL_AUDIO = "spatial_audio";
     private static final String KEY_HEAD_TRACKING = "head_tracking";
 
+    private final AudioManager mAudioManager;
     private final Spatializer mSpatializer;
 
     @VisibleForTesting
     PreferenceCategory mProfilesContainer;
-    @VisibleForTesting
-    AudioDeviceAttributes mAudioDevice = null;
+    @VisibleForTesting @Nullable AudioDeviceAttributes mAudioDevice = null;
 
     AtomicBoolean mHasHeadTracker = new AtomicBoolean(false);
     AtomicBoolean mInitialRefresh = new AtomicBoolean(true);
+
+    public static final Set<Integer> SA_PROFILES =
+            ImmutableSet.of(
+                    BluetoothProfile.A2DP, BluetoothProfile.LE_AUDIO, BluetoothProfile.HEARING_AID);
 
     public BluetoothDetailsSpatialAudioController(
             Context context,
@@ -69,6 +81,7 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
             CachedBluetoothDevice device,
             Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
+        mAudioManager = context.getSystemService(AudioManager.class);
         mSpatializer = FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider()
                 .getSpatializer(context);
     }
@@ -142,8 +155,12 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
 
     @Override
     protected void refresh() {
-        if (mAudioDevice == null) {
-            getAvailableDevice();
+        if (Flags.enableDeterminingSpatialAudioAttributesByProfile()) {
+            getAvailableDeviceByProfileState();
+        } else {
+            if (mAudioDevice == null) {
+                getAvailableDevice();
+            }
         }
         ThreadUtils.postOnBackgroundThread(
                 () -> {
@@ -272,6 +289,77 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
                 + mCachedDevice.getDevice().getAnonymizedAddress()
                 + ", is available : " + (mAudioDevice != null)
                 + ", type : " + (mAudioDevice == null ? "no type" : mAudioDevice.getType()));
+    }
+
+    private void getAvailableDeviceByProfileState() {
+        Log.i(
+                TAG,
+                "getAvailableDevice() mCachedDevice: "
+                        + mCachedDevice
+                        + " profiles: "
+                        + mCachedDevice.getProfiles());
+
+        AudioDeviceAttributes saDevice = null;
+        for (LocalBluetoothProfile profile : mCachedDevice.getProfiles()) {
+            // pick first enabled profile that is compatible with spatial audio
+            if (SA_PROFILES.contains(profile.getProfileId())
+                    && profile.isEnabled(mCachedDevice.getDevice())) {
+                switch (profile.getProfileId()) {
+                    case BluetoothProfile.A2DP:
+                        saDevice =
+                                new AudioDeviceAttributes(
+                                        AudioDeviceAttributes.ROLE_OUTPUT,
+                                        AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
+                                        mCachedDevice.getAddress());
+                        break;
+                    case BluetoothProfile.LE_AUDIO:
+                        if (mAudioManager.getBluetoothAudioDeviceCategory(
+                                mCachedDevice.getAddress())
+                                == AudioManager.AUDIO_DEVICE_CATEGORY_SPEAKER) {
+                            saDevice =
+                                    new AudioDeviceAttributes(
+                                            AudioDeviceAttributes.ROLE_OUTPUT,
+                                            AudioDeviceInfo.TYPE_BLE_SPEAKER,
+                                            mCachedDevice.getAddress());
+                        } else {
+                            saDevice =
+                                    new AudioDeviceAttributes(
+                                            AudioDeviceAttributes.ROLE_OUTPUT,
+                                            AudioDeviceInfo.TYPE_BLE_HEADSET,
+                                            mCachedDevice.getAddress());
+                        }
+
+                        break;
+                    case BluetoothProfile.HEARING_AID:
+                        saDevice =
+                                new AudioDeviceAttributes(
+                                        AudioDeviceAttributes.ROLE_OUTPUT,
+                                        AudioDeviceInfo.TYPE_HEARING_AID,
+                                        mCachedDevice.getAddress());
+                        break;
+                    default:
+                        Log.i(
+                                TAG,
+                                "unrecognized profile for spatial audio: "
+                                        + profile.getProfileId());
+                        break;
+                }
+                break;
+            }
+        }
+        mAudioDevice = null;
+        if (saDevice != null && mSpatializer.isAvailableForDevice(saDevice)) {
+            mAudioDevice = saDevice;
+        }
+
+        Log.d(
+                TAG,
+                "getAvailableDevice() device : "
+                        + mCachedDevice.getDevice().getAnonymizedAddress()
+                        + ", is available : "
+                        + (mAudioDevice != null)
+                        + ", type : "
+                        + (mAudioDevice == null ? "no type" : mAudioDevice.getType()));
     }
 
     @VisibleForTesting

@@ -21,6 +21,7 @@ import static com.android.settings.development.BluetoothLeAudioHwOffloadPreferen
 import android.content.Context;
 import android.os.SystemProperties;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
@@ -32,7 +33,7 @@ public class BluetoothA2dpHwOffloadPreferenceController extends DeveloperOptions
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String PREFERENCE_KEY = "bluetooth_disable_a2dp_hw_offload";
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
 
     static final String A2DP_OFFLOAD_DISABLED_PROPERTY = "persist.bluetooth.a2dp_offload.disabled";
     static final String A2DP_OFFLOAD_SUPPORTED_PROPERTY = "ro.bluetooth.a2dp_offload.supported";
@@ -41,7 +42,7 @@ public class BluetoothA2dpHwOffloadPreferenceController extends DeveloperOptions
     boolean mChanged = false;
 
     public BluetoothA2dpHwOffloadPreferenceController(Context context,
-            DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
     }

@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint2.data.repository
 
 import android.graphics.Point
+import android.view.MotionEvent
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -24,8 +25,6 @@ import kotlinx.coroutines.flow.Flow
  * that talkback is correct.
  */
 interface SimulatedTouchEventsRepository {
-  /**
-   * A flow simulating user touches.
-   */
-  val touchExplorationDebug: Flow<Point>
+  /** A flow simulating user touches. */
+  val touchExplorationDebug: Flow<MotionEvent>
 }

@@ -20,11 +20,14 @@ import static com.android.settings.network.MobileNetworkListFragment.collectAirp
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -68,7 +71,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkSettings extends AbstractMobileNetworkSettings implements
@@ -80,7 +82,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @VisibleForTesting
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
-    private static final String KEY_ROAMING_PREF = "button_roaming_key";
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
     private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
@@ -107,6 +108,15 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Nullable
     private SubscriptionInfoEntity mSubscriptionInfoEntity;
     private MobileNetworkInfoEntity mMobileNetworkInfoEntity;
+
+    private BroadcastReceiver mBrocastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED)) {
+                redrawPreferenceControllers();
+            }
+        }
+    };
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -179,8 +189,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         return Arrays.asList(
                 new DataUsageSummaryPreferenceController(context, mSubId),
-                new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
-                        this, mSubId),
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
                         getSettingsLifecycle(), this),
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
@@ -264,8 +272,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         final RoamingPreferenceController roamingPreferenceController =
                 use(RoamingPreferenceController.class);
         if (roamingPreferenceController != null) {
-            roamingPreferenceController.init(getFragmentManager(), mSubId,
-                    mMobileNetworkInfoEntity);
+            roamingPreferenceController.init(getParentFragmentManager(), mSubId);
         }
         final SatelliteSettingPreferenceController satelliteSettingPreferenceController = use(
                 SatelliteSettingPreferenceController.class);
@@ -356,31 +363,30 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         mMobileNetworkRepository.updateEntity();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
+        getContext().registerReceiver(mBrocastReceiver, intentFilter, Context.RECEIVER_EXPORTED);
     }
 
     private void onSubscriptionDetailChanged() {
-        if (mSubscriptionInfoEntity != null) {
-            /**
-             * Update the title when SIM stats got changed
-             */
-            final Consumer<Activity> renameTitle = activity -> {
-                if (activity != null && !activity.isFinishing()) {
-                    if (activity instanceof SettingsActivity) {
-                        ((SettingsActivity) activity).setTitle(mSubscriptionInfoEntity.uniqueName);
-                    }
-                }
-            };
-
-            ThreadUtils.postOnMainThread(() -> {
-                renameTitle.accept(getActivity());
-                redrawPreferenceControllers();
-            });
+        final SubscriptionInfoEntity subscriptionInfoEntity = mSubscriptionInfoEntity;
+        if (subscriptionInfoEntity == null) {
+            return;
         }
+        ThreadUtils.postOnMainThread(() -> {
+            if (getActivity() instanceof SettingsActivity activity && !activity.isFinishing()) {
+                // Update the title when SIM stats got changed
+                activity.setTitle(subscriptionInfoEntity.uniqueName);
+            }
+            redrawPreferenceControllers();
+        });
     }
 
     @Override
     public void onPause() {
         mMobileNetworkRepository.removeRegister(this);
+        getContext().unregisterReceiver(mBrocastReceiver);
         super.onPause();
     }
 

@@ -29,6 +29,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
@@ -68,6 +69,30 @@ class SubscriptionRepository(private val context: Context) {
     }
 
     fun canDisablePhysicalSubscription() = subscriptionManager.canDisablePhysicalSubscription()
+
+    /** Flow for subscriptions changes. */
+    fun subscriptionsChangedFlow() = callbackFlow {
+        val listener = object : SubscriptionManager.OnSubscriptionsChangedListener() {
+            override fun onSubscriptionsChanged() {
+                trySend(Unit)
+            }
+        }
+
+        subscriptionManager.addOnSubscriptionsChangedListener(
+            Dispatchers.Default.asExecutor(),
+            listener,
+        )
+
+        awaitClose { subscriptionManager.removeOnSubscriptionsChangedListener(listener) }
+    }.conflate().onEach { Log.d(TAG, "subscriptions changed") }.flowOn(Dispatchers.Default)
+
+    /** Flow of active subscription ids. */
+    fun activeSubscriptionIdListFlow(): Flow<List<Int>> = context.subscriptionsChangedFlow()
+        .map { subscriptionManager.activeSubscriptionIdList.sorted() }
+        .distinctUntilChanged()
+        .conflate()
+        .onEach { Log.d(TAG, "activeSubscriptionIdList: $it") }
+        .flowOn(Dispatchers.Default)
 }
 
 val Context.subscriptionManager: SubscriptionManager?
@@ -79,22 +104,8 @@ fun Context.phoneNumberFlow(subscriptionInfo: SubscriptionInfo) = subscriptionsC
     SubscriptionUtil.getBidiFormattedPhoneNumber(this, subscriptionInfo)
 }.filterNot { it.isNullOrEmpty() }.flowOn(Dispatchers.Default)
 
-fun Context.subscriptionsChangedFlow() = callbackFlow {
-    val subscriptionManager = requireSubscriptionManager()
-
-    val listener = object : SubscriptionManager.OnSubscriptionsChangedListener() {
-        override fun onSubscriptionsChanged() {
-            trySend(Unit)
-        }
-    }
-
-    subscriptionManager.addOnSubscriptionsChangedListener(
-        Dispatchers.Default.asExecutor(),
-        listener,
-    )
-
-    awaitClose { subscriptionManager.removeOnSubscriptionsChangedListener(listener) }
-}.conflate().onEach { Log.d(TAG, "subscriptions changed") }.flowOn(Dispatchers.Default)
+fun Context.subscriptionsChangedFlow(): Flow<Unit> =
+    SubscriptionRepository(this).subscriptionsChangedFlow()
 
 /**
  * Return a list of subscriptions that are available and visible to the user.
