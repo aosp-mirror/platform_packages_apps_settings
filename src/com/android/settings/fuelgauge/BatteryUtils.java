@@ -600,7 +600,7 @@ public class BatteryUtils {
                             context.getContentResolver(), SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 0)
                     == 1) {
                 return DockDefenderMode.TEMPORARILY_BYPASSED;
-            } else if (batteryInfo.isLongLife
+            } else if (batteryInfo.isBatteryDefender
                     && FeatureFactory.getFeatureFactory()
                             .getPowerUsageFeatureProvider()
                             .isExtraDefend()) {

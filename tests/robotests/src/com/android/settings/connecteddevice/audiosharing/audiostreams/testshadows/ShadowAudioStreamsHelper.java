@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows;
 
+import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 
 import androidx.annotation.Nullable;
@@ -68,5 +69,17 @@ public class ShadowAudioStreamsHelper {
     @Implementation
     public LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
         return sMockHelper.getLeBroadcastAssistant();
+    }
+
+    /** Removes sources from LE broadcasts associated for all active sinks based on broadcast Id. */
+    @Implementation
+    public void removeSource(int broadcastId) {
+        sMockHelper.removeSource(broadcastId);
+    }
+
+    /** Adds the specified LE broadcast source to all active sinks. */
+    @Implementation
+    public void addSource(BluetoothLeBroadcastMetadata source) {
+        sMockHelper.addSource(source);
     }
 }

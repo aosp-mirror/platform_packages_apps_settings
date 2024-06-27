@@ -414,7 +414,13 @@ public class AudioSharingDialogHandler {
 
     private void closeOpeningDialogsOtherThan(String tag) {
         if (mHostFragment == null) return;
-        List<Fragment> fragments = mHostFragment.getChildFragmentManager().getFragments();
+        List<Fragment> fragments;
+        try {
+            fragments = mHostFragment.getChildFragmentManager().getFragments();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to closeOpeningDialogsOtherThan " + tag + ": " + e.getMessage());
+            return;
+        }
         for (Fragment fragment : fragments) {
             if (fragment instanceof DialogFragment
                     && fragment.getTag() != null
@@ -430,7 +436,13 @@ public class AudioSharingDialogHandler {
     public void closeOpeningDialogsForLeaDevice(@NonNull CachedBluetoothDevice cachedDevice) {
         if (mHostFragment == null) return;
         int groupId = AudioSharingUtils.getGroupId(cachedDevice);
-        List<Fragment> fragments = mHostFragment.getChildFragmentManager().getFragments();
+        List<Fragment> fragments;
+        try {
+            fragments = mHostFragment.getChildFragmentManager().getFragments();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to closeOpeningDialogsForLeaDevice: " + e.getMessage());
+            return;
+        }
         for (Fragment fragment : fragments) {
             CachedBluetoothDevice device = getCachedBluetoothDeviceFromDialog(fragment);
             if (device != null
@@ -447,7 +459,13 @@ public class AudioSharingDialogHandler {
     public void closeOpeningDialogsForNonLeaDevice(@NonNull CachedBluetoothDevice cachedDevice) {
         if (mHostFragment == null) return;
         String address = cachedDevice.getAddress();
-        List<Fragment> fragments = mHostFragment.getChildFragmentManager().getFragments();
+        List<Fragment> fragments;
+        try {
+            fragments = mHostFragment.getChildFragmentManager().getFragments();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to closeOpeningDialogsForNonLeaDevice: " + e.getMessage());
+            return;
+        }
         for (Fragment fragment : fragments) {
             CachedBluetoothDevice device = getCachedBluetoothDeviceFromDialog(fragment);
             if (device != null && address != null && address.equals(device.getAddress())) {
