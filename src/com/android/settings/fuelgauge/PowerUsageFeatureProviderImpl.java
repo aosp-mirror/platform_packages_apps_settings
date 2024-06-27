@@ -27,6 +27,8 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseIntArray;
 
+import androidx.annotation.NonNull;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
 import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
@@ -250,7 +252,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public boolean processBatteryReattributeData(
-            Context context, Map<Long, BatteryDiffData> batteryDiffDataMap) {
+            @NonNull Context context,
+            @NonNull Map<Long, BatteryDiffData> batteryDiffDataMap,
+            final boolean isFromPeriodJob) {
         return false;
     }
 }
