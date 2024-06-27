@@ -18,21 +18,32 @@ package com.android.settings.notification.modes;
 
 import android.annotation.NonNull;
 import android.content.Context;
+import android.provider.Settings;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.notification.SettingsEnableZenModeDialog;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
+import java.time.Duration;
+
 class ZenModeButtonPreferenceController extends AbstractZenModePreferenceController {
+    private static final String TAG = "ZenModeButtonPrefController";
 
     private Button mZenButton;
+    private Fragment mParent;
+    private ManualDurationHelper mDurationHelper;
 
-    public ZenModeButtonPreferenceController(Context context, String key, ZenModesBackend backend) {
+    ZenModeButtonPreferenceController(Context context, String key, Fragment parent,
+            ZenModesBackend backend) {
         super(context, key, backend);
+        mParent = parent;
+        mDurationHelper = new ManualDurationHelper(context);
     }
 
     @Override
@@ -49,7 +60,23 @@ class ZenModeButtonPreferenceController extends AbstractZenModePreferenceControl
             if (zenMode.isActive()) {
                 mBackend.deactivateMode(zenMode);
             } else {
-                mBackend.activateMode(zenMode, null);
+                if (zenMode.isManualDnd()) {
+                    // if manual DND, potentially ask for or use desired duration
+                    int zenDuration = mDurationHelper.getZenDuration();
+                    switch (zenDuration) {
+                        case Settings.Secure.ZEN_DURATION_PROMPT:
+                            new SettingsEnableZenModeDialog().show(
+                                    mParent.getParentFragmentManager(), TAG);
+                            break;
+                        case Settings.Secure.ZEN_DURATION_FOREVER:
+                            mBackend.activateMode(zenMode, null);
+                            break;
+                        default:
+                            mBackend.activateMode(zenMode, Duration.ofMinutes(zenDuration));
+                    }
+                } else {
+                    mBackend.activateMode(zenMode, null);
+                }
             }
         });
         if (zenMode.isActive()) {
