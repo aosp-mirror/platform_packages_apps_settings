@@ -111,9 +111,8 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     @Override
     public int getAvailabilityStatus() {
         if (Flags.keyboardCategoryEnabled()
-                && mContext.getResources().getBoolean(R.bool.config_keyboard_vibration_supported)
-                && mContext.getResources().getFloat(
-                com.android.internal.R.dimen.config_keyboardHapticFeedbackFixedAmplitude) > 0) {
+                && mContext.getResources().getBoolean(
+                        com.android.internal.R.bool.config_keyboardVibrationSettingsSupported)) {
             return AVAILABLE;
         }
         return UNSUPPORTED_ON_DEVICE;
