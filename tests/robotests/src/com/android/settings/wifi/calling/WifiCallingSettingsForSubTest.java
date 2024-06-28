@@ -48,6 +48,8 @@ import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -56,9 +58,13 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.network.ims.MockWifiCallingQueryImsState;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
+import com.android.settings.network.telephony.wificalling.IWifiCallingRepository;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -183,33 +189,22 @@ public class WifiCallingSettingsForSubTest {
     }
 
     @Test
-    public void onResume_provisioningAllowed_shouldNotFinish() {
-        // Call onResume while provisioning is allowed.
-        mFragment.onResume();
+    public void onViewCreated_provisioningAllowed_shouldNotFinish() {
+        // Call onViewCreated while provisioning is allowed.
+        mFragment.onViewCreated(mView, null);
 
         // Verify that finish() is not called.
         verify(mFragment, never()).finish();
     }
 
     @Test
-    public void onResume_provisioningDisallowed_shouldFinish() {
-        // Call onResume while provisioning is disallowed.
-        mQueryImsState.setIsProvisionedOnDevice(false);
-        mFragment.onResume();
+    public void onViewCreated_provisioningDisallowed_shouldFinish() {
+        // Call onViewCreated while provisioning is disallowed.
+        mFragment.mIsWifiCallingReady = false;
+        mFragment.onViewCreated(mView, null);
 
         // Verify that finish() is called
         verify(mFragment).finish();
-    }
-
-    @Test
-    public void onResumeOnPause_provisioningCallbackRegistration() throws Exception {
-        // Verify that provisioning callback is registered after call to onResume().
-        mFragment.onResume();
-        verify(mFragment).registerProvisioningChangedCallback();
-
-        // Verify that provisioning callback is unregistered after call to onPause.
-        mFragment.onPause();
-        verify(mFragment).unregisterProvisioningChangedCallback();
     }
 
     @Test
@@ -377,6 +372,7 @@ public class WifiCallingSettingsForSubTest {
 
     protected class TestFragment extends WifiCallingSettingsForSub {
         private SettingsMainSwitchPreference mSwitchPref;
+        protected boolean mIsWifiCallingReady = true;
 
         protected void setSwitchBar(SettingsMainSwitchPreference switchPref) {
             mSwitchPref = switchPref;
@@ -419,6 +415,25 @@ public class WifiCallingSettingsForSubTest {
         @Override
         WifiCallingQueryImsState queryImsState(int subId) {
             return mQueryImsState;
+        }
+
+        @Override
+        @NonNull
+        IWifiCallingRepository getWifiCallingRepository() {
+            return new IWifiCallingRepository() {
+                @Override
+                public void collectIsWifiCallingReadyFlow(
+                        @NonNull LifecycleOwner lifecycleOwner,
+                        @NonNull Function1<? super Boolean, Unit> action) {
+                    action.invoke(mIsWifiCallingReady);
+                }
+            };
+        }
+
+        @NonNull
+        @Override
+        LifecycleOwner getLifecycleOwner() {
+            return this;
         }
 
         @Override

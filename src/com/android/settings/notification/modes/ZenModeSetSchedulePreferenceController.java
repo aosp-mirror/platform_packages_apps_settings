@@ -16,9 +16,7 @@
 
 package com.android.settings.notification.modes;
 
-import android.app.Flags;
 import android.content.Context;
-import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
 import android.text.format.DateFormat;
 import android.util.ArraySet;
@@ -33,6 +31,8 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.text.SimpleDateFormat;
@@ -116,16 +116,13 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
     @VisibleForTesting
     protected Function<ZenMode, ZenMode> updateScheduleMode(ZenModeConfig.ScheduleInfo schedule) {
         return (zenMode) -> {
-            zenMode.getRule().setConditionId(ZenModeConfig.toScheduleConditionId(schedule));
-            if (Flags.modesApi() && Flags.modesUi()) {
-                zenMode.getRule().setTriggerDescription(
-                        SystemZenRules.getTriggerDescriptionForScheduleTime(mContext, schedule));
-            }
+            zenMode.setCustomModeConditionId(mContext,
+                    ZenModeConfig.toScheduleConditionId(schedule));
             return zenMode;
         };
     }
 
-    private ZenModeTimePickerFragment.TimeSetter mStartSetter = (hour, minute) -> {
+    private final ZenModeTimePickerFragment.TimeSetter mStartSetter = (hour, minute) -> {
         if (!isValidTime(hour, minute)) {
             return;
         }
@@ -137,7 +134,7 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
         saveMode(updateScheduleMode(mSchedule));
     };
 
-    private ZenModeTimePickerFragment.TimeSetter mEndSetter = (hour, minute) -> {
+    private final ZenModeTimePickerFragment.TimeSetter mEndSetter = (hour, minute) -> {
         if (!isValidTime(hour, minute)) {
             return;
         }

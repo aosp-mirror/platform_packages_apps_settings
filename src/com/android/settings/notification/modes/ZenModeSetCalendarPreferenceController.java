@@ -16,14 +16,12 @@
 
 package com.android.settings.notification.modes;
 
-import android.app.Flags;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.CalendarContract;
-import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
 
 import androidx.annotation.NonNull;
@@ -33,6 +31,8 @@ import androidx.preference.PreferenceCategory;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class ZenModeSetCalendarPreferenceController extends AbstractZenModePreferenceController {
+class ZenModeSetCalendarPreferenceController extends AbstractZenModePreferenceController {
     @VisibleForTesting
     protected static final String KEY_CALENDAR = "calendar";
     @VisibleForTesting
@@ -122,11 +122,7 @@ public class ZenModeSetCalendarPreferenceController extends AbstractZenModePrefe
     @VisibleForTesting
     protected Function<ZenMode, ZenMode> updateEventMode(ZenModeConfig.EventInfo event) {
         return (zenMode) -> {
-            zenMode.getRule().setConditionId(ZenModeConfig.toEventConditionId(event));
-            if (Flags.modesApi() && Flags.modesUi()) {
-                zenMode.getRule().setTriggerDescription(
-                        SystemZenRules.getTriggerDescriptionForScheduleEvent(mContext, event));
-            }
+            zenMode.setCustomModeConditionId(mContext, ZenModeConfig.toEventConditionId(event));
             return zenMode;
         };
     }

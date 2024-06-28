@@ -17,23 +17,21 @@
 package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
-
-import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
+import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -45,6 +43,8 @@ import androidx.preference.Preference;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
@@ -101,14 +101,13 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
     }
 
     private ZenMode createPriorityChannelsZenMode() {
-        return new ZenMode("id", new AutomaticZenRule.Builder("Bedtime",
-                Uri.parse("bed"))
-                .setType(AutomaticZenRule.TYPE_BEDTIME)
+        return new TestModeBuilder()
+                .setId("id")
                 .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
                 .setZenPolicy(new ZenPolicy.Builder()
                         .allowChannels(ZenPolicy.CHANNEL_POLICY_PRIORITY)
                         .build())
-                .build(), true);
+                .build();
     }
 
     @Test
@@ -137,7 +136,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         Bundle bundle = launcherIntent.getBundleExtra(
                 SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
         assertThat(bundle).isNotNull();
-        assertThat(bundle.getString(MODE_ID)).isEqualTo("id");
+        assertThat(bundle.getString(EXTRA_AUTOMATIC_ZEN_RULE_ID)).isEqualTo("id");
     }
 
     @Test
@@ -180,13 +179,30 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
     @Test
     public void testOnPackageListChangedTriggersRebuild() {
-        mController.mAppSessionCallbacks.onPackageListChanged();
+        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
+        // Create a zen mode that allows priority channels to breakthrough.
+        ZenMode zenMode = createPriorityChannelsZenMode();
+        mController.updateState(preference, zenMode);
         verify(mSession).rebuild(any(), any(), eq(false));
+
+        mController.mAppSessionCallbacks.onPackageListChanged();
+        verify(mSession, times(2)).rebuild(any(), any(), eq(false));
     }
 
     @Test
     public void testOnLoadEntriesCompletedTriggersRebuild() {
-        mController.mAppSessionCallbacks.onLoadEntriesCompleted();
+        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
+        // Create a zen mode that allows priority channels to breakthrough.
+        ZenMode zenMode = createPriorityChannelsZenMode();
+        mController.updateState(preference, zenMode);
         verify(mSession).rebuild(any(), any(), eq(false));
+
+        mController.mAppSessionCallbacks.onLoadEntriesCompleted();
+        verify(mSession, times(2)).rebuild(any(), any(), eq(false));
+    }
+
+    @Test
+    public void testNoCrashIfAppsReadyBeforeRuleAvailable() {
+        mController.mAppSessionCallbacks.onLoadEntriesCompleted();
     }
 }

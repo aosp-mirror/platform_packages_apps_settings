@@ -37,6 +37,8 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import com.google.common.collect.ImmutableList;
@@ -58,14 +60,15 @@ import java.util.List;
 public class ZenModesListPreferenceControllerTest {
     private static final String TEST_MODE_ID = "test_mode";
     private static final String TEST_MODE_NAME = "Test Mode";
-    private static final ZenMode TEST_MODE = new ZenMode(
-            TEST_MODE_ID,
-            new AutomaticZenRule.Builder(TEST_MODE_NAME, Uri.parse("test_uri"))
+
+    private static final ZenMode TEST_MODE = new TestModeBuilder()
+            .setId(TEST_MODE_ID)
+            .setAzr(new AutomaticZenRule.Builder(TEST_MODE_NAME, Uri.parse("test_uri"))
                     .setType(AutomaticZenRule.TYPE_BEDTIME)
                     .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
                     .setZenPolicy(new ZenPolicy.Builder().allowAllSounds().build())
-                    .build(),
-            false);
+                    .build())
+            .build();
 
     private static final ZenMode TEST_MANUAL_MODE = ZenMode.manualDndMode(
             new AutomaticZenRule.Builder("Do Not Disturb", Uri.EMPTY)
@@ -110,14 +113,9 @@ public class ZenModesListPreferenceControllerTest {
 
         assertThat(mPreference.getPreferenceCount()).isEqualTo(5);
         List<ZenModesListItemPreference> itemPreferences = getModeListItems(mPreference);
-        assertThat(itemPreferences.stream().map(pref -> pref.mZenMode).toList())
+        assertThat(itemPreferences.stream().map(ZenModesListItemPreference::getZenMode).toList())
                 .containsExactlyElementsIn(modes)
                 .inOrder();
-
-        for (int i = 0; i < modes.size(); i++) {
-            assertThat(((ZenModesListItemPreference) (mPreference.getPreference(i))).mZenMode)
-                    .isEqualTo(modes.get(i));
-        }
     }
 
     @Test
@@ -138,7 +136,7 @@ public class ZenModesListPreferenceControllerTest {
         mPrefController.updateState(mPreference);
 
         List<ZenModesListItemPreference> newPreferences = getModeListItems(mPreference);
-        assertThat(newPreferences.stream().map(pref -> pref.mZenMode).toList())
+        assertThat(newPreferences.stream().map(ZenModesListItemPreference::getZenMode).toList())
                 .containsExactlyElementsIn(updatedModes)
                 .inOrder();
 
@@ -194,7 +192,7 @@ public class ZenModesListPreferenceControllerTest {
         assertThat(newData).hasSize(1);
 
         SearchIndexableRaw newItem = newData.get(0);
-        assertThat(newItem.key).isEqualTo(ZenMode.MANUAL_DND_MODE_ID);
+        assertThat(newItem.key).isEqualTo(TEST_MANUAL_MODE.getId());
         assertThat(newItem.title).isEqualTo("Do Not Disturb");  // set above
     }
 
@@ -209,7 +207,7 @@ public class ZenModesListPreferenceControllerTest {
 
         // Should keep the order presented by getModes()
         SearchIndexableRaw item0 = data.get(0);
-        assertThat(item0.key).isEqualTo(ZenMode.MANUAL_DND_MODE_ID);
+        assertThat(item0.key).isEqualTo(TEST_MANUAL_MODE.getId());
         assertThat(item0.title).isEqualTo("Do Not Disturb");  // set above
 
         SearchIndexableRaw item1 = data.get(1);
@@ -218,13 +216,7 @@ public class ZenModesListPreferenceControllerTest {
     }
 
     private static ZenMode newMode(String id) {
-        return new ZenMode(
-                id,
-                new AutomaticZenRule.Builder("Mode " + id, Uri.parse("test_uri"))
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAllSounds().build())
-                        .build(),
-                false);
+        return new TestModeBuilder().setId(id).setName("Mode " + id).build();
     }
 
     /**

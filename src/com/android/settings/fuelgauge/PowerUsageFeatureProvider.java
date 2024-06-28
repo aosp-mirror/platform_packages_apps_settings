@@ -23,11 +23,15 @@ import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.SparseIntArray;
 
+import androidx.annotation.NonNull;
+
+import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
 import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /** Feature Provider used in power usage */
@@ -157,4 +161,10 @@ public interface PowerUsageFeatureProvider {
 
     /** Whether the device is under the battery defender mode */
     boolean isBatteryDefend(BatteryInfo info);
+
+    /** Collect and process battery reattribute data if needed. */
+    boolean processBatteryReattributeData(
+            @NonNull Context context,
+            @NonNull Map<Long, BatteryDiffData> batteryDiffDataMap,
+            final boolean isFromPeriodJob);
 }

@@ -16,10 +16,12 @@
 
 package com.android.settings.notification.modes;
 
-import android.app.AutomaticZenRule;
+import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,15 +31,18 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenMode;
+
+import com.google.common.base.Preconditions;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Base class for Settings pages used to configure individual modes.
  */
 abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
     static final String TAG = "ZenModeSettings";
-    static final String MODE_ID = "MODE_ID";
 
     @Nullable  // only until reloadMode() is called
     private ZenMode mZenMode;
@@ -46,17 +51,21 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        // TODO: b/322373473 - Update if modes page ends up using a different method of passing id
+        String id = null;
+        if (getActivity() != null && getActivity().getIntent() != null) {
+            id = getActivity().getIntent().getStringExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID);
+        }
         Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey(MODE_ID)) {
-            String id = bundle.getString(MODE_ID);
-            if (!reloadMode(id)) {
-                Log.e(TAG, "Mode id " + id + " not found");
-                toastAndFinish();
-                return;
-            }
-        } else {
-            Log.e(TAG, "Mode id required to set mode config settings");
+        if (id == null && bundle != null && bundle.containsKey(EXTRA_AUTOMATIC_ZEN_RULE_ID)) {
+            id = bundle.getString(EXTRA_AUTOMATIC_ZEN_RULE_ID);
+        }
+        if (id == null) {
+            Log.d(TAG, "No id provided");
+            toastAndFinish();
+            return;
+        }
+        if (!reloadMode(id)) {
+            Log.d(TAG, "Mode id " + id + " not found");
             toastAndFinish();
             return;
         }
@@ -108,6 +117,18 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
         updateControllers();
     }
 
+    @Override
+    public final boolean onOptionsItemSelected(MenuItem item) {
+        if (mZenMode != null) {
+            return onOptionsItemSelected(item, mZenMode);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected boolean onOptionsItemSelected(MenuItem item, @NonNull ZenMode zenMode) {
+        return true;
+    }
+
     private void updateControllers() {
         if (getPreferenceControllers() == null || mZenMode == null) {
             return;
@@ -120,10 +141,6 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
         }
         for (List<AbstractPreferenceController> list : getPreferenceControllers()) {
             for (AbstractPreferenceController controller : list) {
-                if (!controller.isAvailable()) {
-                    continue;
-                }
-
                 try {
                     // Find preference associated with controller
                     final String key = controller.getPreferenceKey();
@@ -137,6 +154,7 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
                                 String.format("Cannot find preference with key %s in Controller %s",
                                         key, controller.getClass().getSimpleName()));
                     }
+                    controller.displayPreference(screen);
                 } catch (ClassCastException e) {
                     // Skip any controllers that aren't AbstractZenModePreferenceController.
                     Log.d(TAG, "Could not cast: " + controller.getClass().getSimpleName());
@@ -159,14 +177,15 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
         return mZenMode;
     }
 
-    /**
-     * Get AutomaticZenRule associated with current mode data, or null if it doesn't exist.
-     */
-    @Nullable
-    public AutomaticZenRule getAZR() {
-        if (mZenMode == null) {
-            return null;
+    protected final boolean saveMode(Consumer<ZenMode> updater) {
+        Preconditions.checkState(mBackend != null);
+        ZenMode mode = mZenMode;
+        if (mode == null) {
+            Log.wtf(TAG, "Cannot save mode, it hasn't been loaded (" + getClass() + ")");
+            return false;
         }
-        return mZenMode.getRule();
+        updater.accept(mode);
+        mBackend.updateMode(mode);
+        return true;
     }
 }
