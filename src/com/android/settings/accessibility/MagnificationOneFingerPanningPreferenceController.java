@@ -28,6 +28,7 @@ import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -103,16 +104,10 @@ public class MagnificationOneFingerPanningPreferenceController extends
 
     @Override
     public CharSequence getSummary() {
-        if (!mSwitchPreference.isEnabled()) {
-            return mContext.getString(
-                    R.string.accessibility_magnification_one_finger_panning_summary_unavailable);
-        }
-
-        return (isChecked())
-                ? mContext.getString(
-                        R.string.accessibility_magnification_one_finger_panning_summary_on)
-                : mContext.getString(
-                        R.string.accessibility_magnification_one_finger_panning_summary_off);
+        @StringRes int resId = mSwitchPreference.isEnabled()
+                ? R.string.accessibility_magnification_one_finger_panning_summary
+                : R.string.accessibility_magnification_one_finger_panning_summary_unavailable;
+        return mContext.getString(resId);
     }
 
     @Override

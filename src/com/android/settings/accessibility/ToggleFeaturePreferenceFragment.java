@@ -101,6 +101,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     protected SettingsMainSwitchPreference mToggleServiceSwitchPreference;
     protected ShortcutPreference mShortcutPreference;
     protected Preference mSettingsPreference;
+    @Nullable protected AccessibilityFooterPreference mHtmlFooterPreference;
     protected AccessibilityFooterPreferenceController mFooterPreferenceController;
     protected String mPreferenceKey;
     protected Dialog mDialog;
@@ -589,25 +590,38 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     }
 
     private void initHtmlTextPreference() {
-        if (TextUtils.isEmpty(mHtmlDescription)) {
+        if (TextUtils.isEmpty(getCurrentHtmlDescription())) {
             return;
         }
         final PreferenceScreen screen = getPreferenceScreen();
-        final CharSequence htmlDescription = Html.fromHtml(mHtmlDescription.toString(),
-                Html.FROM_HTML_MODE_COMPACT, mImageGetter, /* tagHandler= */ null);
 
-        final AccessibilityFooterPreference htmlFooterPreference =
+        mHtmlFooterPreference =
                 new AccessibilityFooterPreference(screen.getContext());
-        htmlFooterPreference.setKey(KEY_HTML_DESCRIPTION_PREFERENCE);
-        htmlFooterPreference.setSummary(htmlDescription);
-        screen.addPreference(htmlFooterPreference);
+        mHtmlFooterPreference.setKey(KEY_HTML_DESCRIPTION_PREFERENCE);
+        updateHtmlTextPreference();
+        screen.addPreference(mHtmlFooterPreference);
 
         // TODO(b/171272809): Migrate to DashboardFragment.
         final String title = getString(R.string.accessibility_introduction_title, mPackageName);
         mFooterPreferenceController = new AccessibilityFooterPreferenceController(
-                screen.getContext(), htmlFooterPreference.getKey());
+                screen.getContext(), mHtmlFooterPreference.getKey());
         mFooterPreferenceController.setIntroductionTitle(title);
         mFooterPreferenceController.displayPreference(screen);
+    }
+
+    protected void updateHtmlTextPreference() {
+        if (mHtmlFooterPreference == null) {
+            return;
+        }
+
+        String description = getCurrentHtmlDescription().toString();
+        final CharSequence htmlDescription = Html.fromHtml(description,
+                Html.FROM_HTML_MODE_COMPACT, mImageGetter, /* tagHandler= */ null);
+        mHtmlFooterPreference.setSummary(htmlDescription);
+    }
+
+    CharSequence getCurrentHtmlDescription() {
+        return mHtmlDescription;
     }
 
     private void initFooterPreference() {
@@ -616,7 +630,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                     getString(R.string.accessibility_introduction_title, mPackageName));
         }
     }
-
 
     /**
      * Creates {@link AccessibilityFooterPreference} and append into {@link PreferenceScreen}
