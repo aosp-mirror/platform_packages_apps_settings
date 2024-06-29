@@ -28,12 +28,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -103,14 +101,13 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
     }
 
     private ZenMode createPriorityChannelsZenMode() {
-        return new ZenMode("id", new AutomaticZenRule.Builder("Bedtime",
-                Uri.parse("bed"))
-                .setType(AutomaticZenRule.TYPE_BEDTIME)
+        return new TestModeBuilder()
+                .setId("id")
                 .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
                 .setZenPolicy(new ZenPolicy.Builder()
                         .allowChannels(ZenPolicy.CHANNEL_POLICY_PRIORITY)
                         .build())
-                .build(), true);
+                .build();
     }
 
     @Test

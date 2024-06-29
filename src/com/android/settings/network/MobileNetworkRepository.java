@@ -41,7 +41,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.internal.telephony.flags.Flags;
-import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.mobile.dataservice.MobileNetworkDatabase;
@@ -85,7 +84,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private List<SubscriptionInfoEntity> mActiveSubInfoEntityList = new ArrayList<>();
     private Context mContext;
     private AirplaneModeObserver mAirplaneModeObserver;
-    private DataRoamingObserver mDataRoamingObserver;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private int mPhysicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
     private int mLogicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
@@ -122,7 +120,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mSubscriptionInfoDao = mMobileNetworkDatabase.mSubscriptionInfoDao();
         mMobileNetworkInfoDao = mMobileNetworkDatabase.mMobileNetworkInfoDao();
         mAirplaneModeObserver = new AirplaneModeObserver(new Handler(Looper.getMainLooper()));
-        mDataRoamingObserver = new DataRoamingObserver(new Handler(Looper.getMainLooper()));
     }
 
     private class AirplaneModeObserver extends ContentObserver {
@@ -153,47 +150,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private class DataRoamingObserver extends ContentObserver {
-        private int mRegSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        private String mBaseField = Settings.Global.DATA_ROAMING;
-
-        DataRoamingObserver(Handler handler) {
-            super(handler);
-        }
-
-        public void register(Context context, int subId) {
-            mRegSubId = subId;
-            String lastField = mBaseField;
-            createTelephonyManagerBySubId(subId);
-            TelephonyManager tm = mTelephonyManagerMap.get(subId);
-            if (tm.getSimCount() != 1) {
-                lastField += subId;
-            }
-            context.getContentResolver().registerContentObserver(
-                    Settings.Global.getUriFor(lastField), false, this);
-        }
-
-        public void unRegister(Context context) {
-            context.getContentResolver().unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            TelephonyManager tm = mTelephonyManagerMap.get(mRegSubId);
-            if (tm == null) {
-                return;
-            }
-            sExecutor.execute(() -> {
-                Log.d(TAG, "DataRoamingObserver changed");
-                insertMobileNetworkInfo(mContext, mRegSubId, tm);
-            });
-            boolean isDataRoamingEnabled = tm.isDataRoamingEnabled();
-            for (MobileNetworkCallback callback : sCallbacks) {
-                callback.onDataRoamingChanged(mRegSubId, isDataRoamingEnabled);
-            }
-        }
-    }
-
     /**
      * Register all callbacks and listener.
      *
@@ -219,7 +175,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         observeAllMobileNetworkInfo(lifecycleOwner);
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             createTelephonyManagerBySubId(subId);
-            mDataRoamingObserver.register(mContext, subId);
         }
         // When one client registers callback first time, convey the cached results to the client
         // so that the client is aware of the content therein.
@@ -283,7 +238,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         if (sCallbacks.isEmpty()) {
             mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
             mAirplaneModeObserver.unRegister(mContext);
-            mDataRoamingObserver.unRegister(mContext);
 
             mTelephonyManagerMap.forEach((id, manager) -> {
                 TelephonyCallback callback = mTelephonyCallbackMap.get(id);
@@ -480,7 +434,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 mMetricsFeatureProvider.action(mContext,
                         SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO, subId);
                 insertUiccInfo(subId, telephonyManager);
-                insertMobileNetworkInfo(context, subId, telephonyManager);
+                insertMobileNetworkInfo(subId, telephonyManager);
             }
         } else if (DEBUG) {
             Log.d(TAG, "Can not insert subInfo, the entity is null");
@@ -562,19 +516,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private void insertMobileNetworkInfo(Context context, int subId,
-            TelephonyManager telephonyManager) {
-        MobileNetworkInfoEntity mobileNetworkInfoEntity = convertToMobileNetworkInfoEntity(context,
-                subId, telephonyManager);
-
+    private void insertMobileNetworkInfo(int subId, TelephonyManager telephonyManager) {
+        MobileNetworkInfoEntity mobileNetworkInfoEntity =
+                convertToMobileNetworkInfoEntity(subId, telephonyManager);
 
         Log.d(TAG, "insertMobileNetworkInfo, mobileNetworkInfoEntity = "
                 + mobileNetworkInfoEntity);
-
-
-        if (mobileNetworkInfoEntity == null) {
-            return;
-        }
 
         if (!sCacheMobileNetworkInfoEntityMap.containsKey(subId)
                 || !sCacheMobileNetworkInfoEntityMap.get(subId).equals(mobileNetworkInfoEntity)) {
@@ -585,29 +532,17 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private MobileNetworkInfoEntity convertToMobileNetworkInfoEntity(Context context, int subId,
+    private MobileNetworkInfoEntity convertToMobileNetworkInfoEntity(int subId,
             TelephonyManager telephonyManager) {
         boolean isDataEnabled = false;
-        boolean isDataRoamingEnabled = false;
         if (telephonyManager != null) {
             isDataEnabled = telephonyManager.isDataEnabled();
-            isDataRoamingEnabled = telephonyManager.isDataRoamingEnabled();
         } else {
             Log.d(TAG, "TelephonyManager is null, subId = " + subId);
         }
 
-        return new MobileNetworkInfoEntity(String.valueOf(subId),
-                MobileNetworkUtils.isContactDiscoveryEnabled(context, subId),
-                MobileNetworkUtils.isContactDiscoveryVisible(context, subId),
-                isDataEnabled,
-                MobileNetworkUtils.isCdmaOptions(context, subId),
-                MobileNetworkUtils.isGsmOptions(context, subId),
-                MobileNetworkUtils.isWorldMode(context, subId),
-                MobileNetworkUtils.shouldDisplayNetworkSelectOptions(context, subId),
-                MobileNetworkUtils.isTdscdmaSupported(context, subId),
-                MobileNetworkUtils.activeNetworkIsCellular(context),
-                SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager),
-                isDataRoamingEnabled
+        return new MobileNetworkInfoEntity(String.valueOf(subId), isDataEnabled,
+                SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)
         );
     }
 
@@ -728,8 +663,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         public void onUserMobileDataStateChanged(boolean enabled) {
             Log.d(TAG, "onUserMobileDataStateChanged enabled " + enabled + " on SUB " + mSubId);
             sExecutor.execute(() -> {
-                insertMobileNetworkInfo(mContext, mSubId,
-                        getTelephonyManagerBySubId(mContext, mSubId));
+                insertMobileNetworkInfo(mSubId, getTelephonyManagerBySubId(mContext, mSubId));
             });
         }
     }
@@ -753,12 +687,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
 
         default void onAirplaneModeChanged(boolean enabled) {
-        }
-
-        /**
-         * Notify clients data roaming changed of subscription.
-         */
-        default void onDataRoamingChanged(int subId, boolean enabled) {
         }
     }
 

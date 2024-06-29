@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
@@ -43,9 +44,12 @@ import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 
 public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     private static final String TAG = "AudioStreamConfirmDialog";
-    private static final int DEFAULT_DEVICE_NAME = R.string.audio_streams_dialog_default_device;
+
+    @VisibleForTesting
+    static final int DEFAULT_DEVICE_NAME = R.string.audio_streams_dialog_default_device;
+
     private Context mContext;
-    @Nullable private Activity mActivity;
+    @VisibleForTesting @Nullable Activity mActivity;
     @Nullable private BluetoothLeBroadcastMetadata mBroadcastMetadata;
     @Nullable private BluetoothDevice mConnectedDevice;
     private int mAudioStreamConfirmDialogId = SettingsEnums.PAGE_UNKNOWN;
