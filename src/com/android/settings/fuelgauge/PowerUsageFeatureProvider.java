@@ -26,6 +26,7 @@ import android.util.SparseIntArray;
 import androidx.annotation.NonNull;
 
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
+import com.android.settings.fuelgauge.batteryusage.BatteryEvent;
 import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
@@ -166,5 +167,6 @@ public interface PowerUsageFeatureProvider {
     boolean processBatteryReattributeData(
             @NonNull Context context,
             @NonNull Map<Long, BatteryDiffData> batteryDiffDataMap,
+            @NonNull List<BatteryEvent> batteryEventList,
             final boolean isFromPeriodJob);
 }
