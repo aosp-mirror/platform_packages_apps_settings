@@ -81,24 +81,28 @@ private fun LabelSimPreference(
     onboardingService: SimOnboardingService,
     subInfo: SubscriptionInfo,
 ) {
-    val originalSimCarrierName = subInfo.displayName.toString()
-    var titleSimName by remember {
-        mutableStateOf(onboardingService.getSubscriptionInfoDisplayName(subInfo))
+    val currentSimName = onboardingService.getSubscriptionInfoDisplayName(subInfo)
+    var prefTitle by remember {
+        mutableStateOf(currentSimName)
+    }
+    var dialogInputContent by remember {
+        mutableStateOf(currentSimName)
     }
     val phoneNumber = phoneNumber(subInfo)
     val alertDialogPresenter = rememberAlertDialogPresenter(
         confirmButton = AlertDialogButton(
             stringResource(R.string.mobile_network_sim_name_rename),
-            titleSimName.isNotBlank()
+            dialogInputContent.isNotBlank()
         ) {
             onboardingService.addItemForRenaming(
-                subInfo, if (titleSimName.isEmpty()) originalSimCarrierName else titleSimName
+                subInfo, dialogInputContent
             )
+            prefTitle = dialogInputContent
         },
         dismissButton = AlertDialogButton(
             stringResource(R.string.cancel),
         ) {
-            titleSimName = onboardingService.getSubscriptionInfoDisplayName(subInfo)
+            // Do nothing
         },
         title = stringResource(R.string.sim_onboarding_label_sim_dialog_title),
         text = {
@@ -107,17 +111,19 @@ private fun LabelSimPreference(
                 modifier = Modifier.padding(bottom = SettingsDimension.itemPaddingVertical)
             )
             SettingsOutlinedTextField(
-                value = titleSimName,
+                value = dialogInputContent,
                 label = stringResource(R.string.sim_onboarding_label_sim_dialog_label),
-                placeholder = {Text(text = originalSimCarrierName)},
-                modifier = Modifier.fillMaxWidth().testTag("contentInput")
+                placeholder = {Text(text = subInfo.displayName.toString())},
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("contentInput")
             ) {
-                titleSimName = it
+                dialogInputContent = it
             }
         },
     )
     Preference(object : PreferenceModel {
-        override val title = titleSimName
+        override val title = prefTitle
         override val summary = { phoneNumber.value ?: "" }
         override val onClick = alertDialogPresenter::open
     })

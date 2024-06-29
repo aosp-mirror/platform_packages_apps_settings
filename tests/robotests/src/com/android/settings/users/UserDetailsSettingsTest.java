@@ -42,9 +42,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
@@ -63,6 +67,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -123,6 +128,8 @@ public class UserDetailsSettingsTest {
     private Bundle mArguments;
     private UserInfo mUserInfo;
 
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -236,6 +243,19 @@ public class UserDetailsSettingsTest {
     public void onResume_userInCall_shouldDisableSwitchPref() {
         setupSelectedUser();
         mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_USER_IN_CALL);
+        mFragment.mSwitchUserPref = mSwitchUserPref;
+        mFragment.onAttach(mContext);
+
+        mFragment.onResume();
+
+        verify(mSwitchUserPref).setEnabled(false);
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
+    public void onResume_UserSwitcherDisabled_shouldDisableSwitchPref() {
+        setupSelectedUser();
+        mUserCapabilities.mUserSwitcherEnabled = false;
         mFragment.mSwitchUserPref = mSwitchUserPref;
         mFragment.onAttach(mContext);
 

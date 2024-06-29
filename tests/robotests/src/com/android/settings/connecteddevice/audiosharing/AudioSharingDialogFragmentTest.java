@@ -130,7 +130,16 @@ public class AudioSharingDialogFragmentTest {
         AudioSharingDialogFragment.show(
                 mParent, new ArrayList<>(), EMPTY_EVENT_LISTENER, TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
 
+    @Test
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AudioSharingDialogFragment.show(
+                new Fragment(), new ArrayList<>(), EMPTY_EVENT_LISTENER, TEST_EVENT_DATA_LIST);
+        shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }
