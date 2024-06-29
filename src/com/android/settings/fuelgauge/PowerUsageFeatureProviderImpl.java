@@ -247,7 +247,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public boolean isBatteryDefend(BatteryInfo info) {
-        return info.isBatteryDefender && !isExtraDefend();
+        return info.isLongLife && !isExtraDefend();
     }
 
     @Override

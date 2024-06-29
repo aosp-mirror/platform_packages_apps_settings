@@ -303,6 +303,7 @@ public class Settings extends SettingsActivity {
     public static class UserSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAccessDetailsActivity extends SettingsActivity { /* empty */ }
+    public static class ManageAdaptiveNotificationsActivity extends SettingsActivity { /* empty */ }
     public static class VrListenersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PremiumSmsAccessActivity extends SettingsActivity { /* empty */ }
     public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
