@@ -37,7 +37,6 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
-import android.service.notification.ZenPolicy;
 
 import androidx.preference.PreferenceCategory;
 import androidx.test.core.app.ApplicationProvider;
@@ -102,26 +101,13 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
         assertThat(mPrefController.isAvailable()).isFalse();
 
         // should be available for other modes
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(true).build())
-                        .setEnabled(false)
-                        .build(), false);
-        mPrefController.updateZenMode(mPrefCategory, zenMode);
+        mPrefController.updateZenMode(mPrefCategory, TestModeBuilder.EXAMPLE);
         assertThat(mPrefController.isAvailable()).isTrue();
     }
 
     @Test
     public void testUpdateState() {
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(true).build())
-                        .setEnabled(false)
-                        .build(), false);
+        ZenMode zenMode = new TestModeBuilder().setEnabled(false).build();
 
         // Update preference controller with a zen mode that is not enabled
         mPrefController.updateZenMode(mPrefCategory, zenMode);
@@ -135,13 +121,7 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
 
     @Test
     public void testOnPreferenceChange() {
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(true).build())
-                        .setEnabled(false)
-                        .build(), false);
+        ZenMode zenMode = new TestModeBuilder().setEnabled(false).build();
 
         // start with disabled rule
         mPrefController.updateZenMode(mPrefCategory, zenMode);
@@ -160,13 +140,12 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
         ZenModeConfig.EventInfo eventInfo = new ZenModeConfig.EventInfo();
         eventInfo.calendarId = 1L;
         eventInfo.calName = "My events";
-        ZenMode mode = new ZenMode("id", new AutomaticZenRule.Builder("name",
-                ZenModeConfig.toEventConditionId(eventInfo))
+        ZenMode mode = new TestModeBuilder()
                 .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                .setConditionId(ZenModeConfig.toEventConditionId(eventInfo))
                 .setType(TYPE_SCHEDULE_CALENDAR)
                 .setTriggerDescription("My events")
-                .build(),
-                true);  // is active
+                .build();
         mPrefController.updateZenMode(mPrefCategory, mode);
 
         assertThat(mPreference.getTitle()).isNotNull();
@@ -188,13 +167,12 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
         scheduleInfo.days = new int[] { Calendar.MONDAY, Calendar.TUESDAY, Calendar.THURSDAY };
         scheduleInfo.startHour = 1;
         scheduleInfo.endHour = 15;
-        ZenMode mode = new ZenMode("id", new AutomaticZenRule.Builder("name",
-                ZenModeConfig.toScheduleConditionId(scheduleInfo))
+        ZenMode mode = new TestModeBuilder()
+                .setConditionId(ZenModeConfig.toScheduleConditionId(scheduleInfo))
                 .setPackage(SystemZenRules.PACKAGE_ANDROID)
                 .setType(TYPE_SCHEDULE_TIME)
                 .setTriggerDescription("some schedule")
-                .build(),
-                true);  // is active
+                .build();
         mPrefController.updateZenMode(mPrefCategory, mode);
 
         assertThat(mPreference.getTitle()).isNotNull();
@@ -212,13 +190,12 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
 
     @Test
     public void testRuleLink_manual() {
-        ZenMode mode = new ZenMode("id", new AutomaticZenRule.Builder("name",
-                ZenModeConfig.toCustomManualConditionId())
+        ZenMode mode = new TestModeBuilder()
+                .setConditionId(ZenModeConfig.toCustomManualConditionId())
                 .setPackage(SystemZenRules.PACKAGE_ANDROID)
                 .setType(TYPE_OTHER)
                 .setTriggerDescription("Will not be shown")
-                .build(),
-                true);  // is active
+                .build();
         mPrefController.updateZenMode(mPrefCategory, mode);
 
         assertThat(mPreference.getTitle()).isNotNull();
@@ -234,13 +211,12 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
 
     @Test
     public void onScheduleChosen_updatesMode() {
-        ZenMode originalMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("name", ZenModeConfig.toCustomManualConditionId())
-                        .setPackage(SystemZenRules.PACKAGE_ANDROID)
-                        .setType(TYPE_OTHER)
-                        .setTriggerDescription("")
-                        .build(),
-                false);
+        ZenMode originalMode = new TestModeBuilder()
+                .setConditionId(ZenModeConfig.toCustomManualConditionId())
+                .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                .setType(TYPE_OTHER)
+                .setTriggerDescription("")
+                .build();
         mPrefController.updateZenMode(mPrefCategory, originalMode);
 
         ZenModeConfig.ScheduleInfo scheduleInfo = new ZenModeConfig.ScheduleInfo();

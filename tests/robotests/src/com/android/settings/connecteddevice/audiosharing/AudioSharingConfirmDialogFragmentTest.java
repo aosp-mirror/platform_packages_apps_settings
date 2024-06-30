@@ -96,6 +96,15 @@ public class AudioSharingConfirmDialogFragmentTest {
     }
 
     @Test
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AudioSharingConfirmDialogFragment.show(new Fragment());
+        shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
     public void onCreateDialog_flagOn_showDialog() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         AudioSharingConfirmDialogFragment.show(mParent);

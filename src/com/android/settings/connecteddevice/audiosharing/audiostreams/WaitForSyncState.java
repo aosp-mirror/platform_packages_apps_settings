@@ -39,7 +39,8 @@ class WaitForSyncState extends AudioStreamStateHandler {
 
     @Nullable private static WaitForSyncState sInstance = null;
 
-    private WaitForSyncState() {}
+    @VisibleForTesting
+    WaitForSyncState() {}
 
     static WaitForSyncState getInstance() {
         if (sInstance == null) {
@@ -114,7 +115,8 @@ class WaitForSyncState extends AudioStreamStateHandler {
                 SettingsEnums.DIALOG_AUDIO_STREAM_MAIN_WAIT_FOR_SYNC_TIMEOUT);
     }
 
-    private void launchQrCodeScanFragment(Context context, Fragment fragment) {
+    @VisibleForTesting
+    void launchQrCodeScanFragment(Context context, Fragment fragment) {
         new SubSettingLauncher(context)
                 .setTitleRes(R.string.audio_streams_main_page_scan_qr_code_title)
                 .setDestination(AudioStreamsQrCodeScanFragment.class.getName())

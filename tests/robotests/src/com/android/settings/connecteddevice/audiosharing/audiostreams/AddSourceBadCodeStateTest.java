@@ -20,22 +20,45 @@ import static com.android.settings.connecteddevice.audiosharing.audiostreams.Add
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.app.settings.SettingsEnums;
+import android.content.Context;
+
+import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.testutils.FakeFeatureFactory;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class AddSourceBadCodeStateTest {
+    @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    private final Context mContext = ApplicationProvider.getApplicationContext();
+    @Mock private AudioStreamPreference mPreference;
+    @Mock private AudioStreamsProgressCategoryController mController;
+    @Mock private AudioStreamsHelper mHelper;
+    private FakeFeatureFactory mFeatureFactory;
     private AddSourceBadCodeState mInstance;
 
     @Before
     public void setUp() {
-        mInstance = AddSourceBadCodeState.getInstance();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mInstance = new AddSourceBadCodeState();
     }
 
     @Test
     public void testGetInstance() {
+        mInstance = AddSourceBadCodeState.getInstance();
         assertThat(mInstance).isNotNull();
         assertThat(mInstance).isInstanceOf(SyncedState.class);
     }
@@ -54,5 +77,20 @@ public class AddSourceBadCodeStateTest {
                 .isEqualTo(
                         AudioStreamsProgressCategoryController.AudioStreamState
                                 .ADD_SOURCE_BAD_CODE);
+    }
+
+    @Test
+    public void testPerformAction() {
+        when(mPreference.getContext()).thenReturn(mContext);
+        when(mPreference.getSourceOriginForLogging())
+                .thenReturn(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS);
+
+        mInstance.performAction(mPreference, mController, mHelper);
+
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        eq(mContext),
+                        eq(SettingsEnums.ACTION_AUDIO_STREAM_JOIN_FAILED_BAD_CODE),
+                        eq(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS.ordinal()));
     }
 }

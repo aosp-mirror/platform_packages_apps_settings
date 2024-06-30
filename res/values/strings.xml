@@ -156,6 +156,8 @@
     <string name="bluetooth_hearing_device_settings_summary">Shortcut, hearing aid compatibility</string>
     <!-- Connected devices settings. Title for hearing aids presets. A preset is a set of hearing aid settings. User can apply different settings in different environments (e.g. Outdoor, Restaurant, Home) [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=5429761844739722885] -->
     <string name="bluetooth_hearing_aids_presets">Preset</string>
+    <!-- Connected devices settings. Summary of the preference when no preset info is obtained from the remote device [CHAR LIMIT=60] -->
+    <string name="bluetooth_hearing_aids_presets_empty_list_message">There are no presets programmed by your audiologist</string>
     <!-- Message when selecting hearing aids presets failed. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_hearing_aids_presets_error">Couldn\u2019t update preset</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
@@ -995,7 +997,7 @@
 
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
-    <string name="security_settings_biometric_preference_title">Fingerprint &amp; Face Unlock</string>
+    <string name="security_settings_biometric_preference_title">Face &amp; Fingerprint Unlock</string>
     <!-- Title shown for work menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_work_biometric_preference_title">Face &amp; Fingerprint Unlock for work</string>
     <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
@@ -1893,6 +1895,37 @@
     <!-- Nfc developer settings: The confirm button of the popup dialog. [CHAR_LIMIT=60] -->
     <string name="nfc_reboot_dialog_confirm">Restart</string>
 
+    <!-- External Display settings. The keywords for searching. [CHAR LIMIT=40] -->
+    <string name="keywords_external_display">mirror, external display, connected display, usb display, resolution, rotation</string>
+    <!-- External Display settings. When external display is enabled. [CHAR LIMIT=40] -->
+    <string name="external_display_on">On</string>
+    <!-- External Display settings. When external display is disabled. [CHAR LIMIT=40] -->
+    <string name="external_display_off">Off</string>
+    <!-- External Display settings. The title of the screen. [CHAR LIMIT=40] -->
+    <string name="external_display_settings_title">External Display</string>
+    <!-- External Display use. The title of the use preference. [CHAR LIMIT=40] -->
+    <string name="external_display_use_title">Use external display</string>
+    <!-- External Display resolution settings. The title of the screen. [CHAR LIMIT=40] -->
+    <string name="external_display_resolution_settings_title">Display resolution</string>
+    <!-- External Display settings. Text that appears when scanning for devices is finished and no nearby device was found [CHAR LIMIT=40]-->
+    <string name="external_display_not_found">External display is disconnected</string>
+    <!-- External Display settings. Rotation of the external display -->
+    <string name="external_display_rotation">Rotation</string>
+    <!-- External Display settings. Standard rotation of the external display -->
+    <string name="external_display_standard_rotation">Standard</string>
+    <!-- External Display settings. 90 rotation of the external display -->
+    <string name="external_display_rotation_90">90°</string>
+    <!-- External Display settings. 180 rotation of the external display -->
+    <string name="external_display_rotation_180">180°</string>
+    <!-- External Display settings. 180 rotation of the external display -->
+    <string name="external_display_rotation_270">270°</string>
+    <!-- External Display settings. Footer title -->
+    <string name="external_display_change_resolution_footer_title">Changing rotation or resolution may stop any apps that are currently running</string>
+    <!-- External Display settings. No Displays footer title -->
+    <string name="external_display_not_found_footer_title">Your device must be connected to an external display to mirror your screen</string>
+    <!-- External Display settings. More resolution options -->
+    <string name="external_display_more_options_title">More options</string>
+
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
     <!-- Wifi Display settings. The keywords of the setting. [CHAR LIMIT=NONE] -->
@@ -2753,6 +2786,9 @@
     <string name="brightness">Brightness level</string>
     <!-- Sound & display settings screen, setting option name to enable adaptive brightness [CHAR LIMIT=30] -->
     <string name="auto_brightness_title">Adaptive brightness</string>
+    <!-- Note: The content description title is only applied in adaptive brightness detailed page in setup wizard flow, to make the consistency with other accessibility suw pages. -->
+    <!-- ContentDescription title for adaptive brightness detailed page footer. [CHAR LIMIT=60] -->
+    <string name="auto_brightness_content_description_title">About adaptive brightness</string>
     <!-- Description about the feature adaptive brightness -->
     <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
     <!-- Setting option summary when adaptive brightness is on [CHAR LIMIT=NONE] -->
@@ -4571,6 +4607,12 @@
 
     <!-- On Languages & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
     <string name="pointer_speed">Pointer speed</string>
+    <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale">Pointer scale</string>
+    <!-- Content description for decreasing pointer scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale_decrease_content_description">Decrease pointer scale</string>
+    <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale_increase_content_description">Increase pointer scale</string>
 
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to game controller devices. [CHAR LIMIT=40] -->
     <string name="game_controller_settings_category">Game Controller</string>
@@ -4841,8 +4883,10 @@
     <string name="accessibility_magnification_triple_tap_warning_negative_button">Cancel</string>
     <!-- Title for the accessibility preference screen to enable screen magnification settings. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_service_settings_title">Magnification settings</string>
-    <!-- Title for accessibility magnification preference where user can move the magnification area by dragging one finger instead of two. [CHAR LIMIT=60] -->
-    <string name="accessibility_magnification_one_finger_panning_title">One-finger panning</string>
+    <!-- Title for accessibility magnification preference where user can move the magnification area by dragging one finger. [CHAR LIMIT=60] -->
+    <string name="accessibility_magnification_one_finger_panning_title">Move magnifier with 1 finger</string>
+    <!-- Summary for accessibility magnification one finger panning feature where user can move the magnification area by dragging one finger. [CHAR LIMIT=60] -->
+    <string name="accessibility_magnification_one_finger_panning_summary">Drag 1 finger to move around the screen</string>
     <!-- Summary for accessibility magnification preference when one finger panning feature is turned on.
          The feature when enabled allows user to move the magnification area by dragging one finger instead of two. [CHAR LIMIT=60] -->
     <string name="accessibility_magnification_one_finger_panning_summary_on">Move the magnification area by dragging one finger.</string>
@@ -4904,6 +4948,30 @@
         {2,number,integer}. Touch & hold anywhere on the screen<br/>
         {3,number,integer}. Drag finger to move around screen<br/>
         {4,number,integer}. Lift finger to stop magnification
+        ]]>
+    </string>
+    <!-- Instructions on the accessibility preference screen teaching the user how to interact with screen magnification when one finger panning feature is turned off. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off">
+        <![CDATA[
+        <b>To zoom in:</b><br/>
+        {0,number,integer}. Use shortcut to start magnification<br/>
+        {1,number,integer}. Tap the screen<br/>
+        {2,number,integer}. Drag 2 fingers to move around the screen<br/>
+        {3,number,integer}. Pinch with 2 fingers to adjust zoom<br/>
+        {4,number,integer}. Use shortcut to stop magnification<br/><br/>
+        You can also zoom in temporarily and more.
+        ]]>
+    </string>
+    <!-- Instructions on the accessibility preference screen teaching the user how to interact with screen magnification when one finger panning feature is turned on. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on">
+        <![CDATA[
+        <b>To zoom in:</b><br/>
+        {0,number,integer}. Use shortcut to start magnification<br/>
+        {1,number,integer}. Tap the screen<br/>
+        {2,number,integer}. Drag 1 or 2 fingers to move around the screen<br/>
+        {3,number,integer}. Pinch with 2 fingers to adjust zoom<br/>
+        {4,number,integer}. Use shortcut to stop magnification<br/><br/>
+        You can also zoom in temporarily and more.
         ]]>
     </string>
     <!-- Summary for the accessibility preference screen to enable screen magnification via the nav bar. [CHAR LIMIT=none] -->
@@ -7268,6 +7336,8 @@
     <string name="help_url_install_certificate" translatable="false"></string>
     <!-- Help URL, Tap & pay [DO NOT TRANSLATE] -->
     <string name="help_url_nfc_payment" translatable="false"></string>
+    <!-- Help URL, External display [DO NOT TRANSLATE] -->
+    <string name="help_url_external_display" translatable="false"></string>
     <!-- Help URL, Remote display [DO NOT TRANSLATE] -->
     <string name="help_url_remote_display" translatable="false"></string>
     <!-- Help URL, Face [DO NOT TRANSLATE] -->
@@ -7930,15 +8000,27 @@
     <!-- Zen Modes: Option to add an automatic schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule">Select activation type</string>
 
-    <!-- Zen Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <!-- Priority Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_time">Time</string>
-    <!-- Zen Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
+    <!-- Priority Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
     <string name="zen_mode_select_schedule_time_example">Ex. \"9:30 – 5:00 PM\"</string>
 
-    <!-- Zen Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <!-- Priority Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_calendar">Calendar</string>
-    <!-- Zen Modes: Example text for the option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=60] -->
+    <!-- Priority Modes: Example text for the option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=60] -->
     <string name="zen_mode_select_schedule_calendar_example">Ex. \"Personal calendar\"</string>
+
+    <!-- Priority Modes: Short text that indicates that a mode is currently on (active). [CHAR_LIMIT=10] -->
+    <string name="zen_mode_active_text">ON</string>
+
+    <!-- Priority Modes: Format string for the "current state + trigger description summary for rules in the list. [CHAR_LIMIT=10] -->
+    <string name="zen_mode_format_status_and_trigger" translatable="false"><xliff:g id="current_status" example="ON">%1$s</xliff:g> • <xliff:g id="trigger_description" example="Mon-Fri, 23:00-7:00">%2$s</xliff:g></string>
+
+    <!-- Priority Modes: Indicates that a mode is disabled and needs to be configured. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_disabled_needs_setup">Not set</string>
+
+    <!-- Priority Modes: Indicates that a mode is disabled by the user. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_disabled_by_user">Disabled</string>
 
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
@@ -7955,8 +8037,14 @@
     <!--  Do not disturb: Title for dialog that allows users to delete DND rules/schedules[CHAR LIMIT=40] -->
     <string name="zen_mode_delete_automatic_rules">Delete schedules</string>
 
-    <!--  Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
+    <!-- Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_delete">Delete</string>
+
+    <!-- Do not disturb: Menu option for deleting a mode on its configuration page [CHAR LIMIT=40] -->
+    <string name="zen_mode_menu_delete_mode">Delete mode</string>
+
+    <!-- Do not disturb: Confirmation dialog asking the user whether they would like to delete the named mode [CHAR LIMIT: 40] -->
+    <string name="zen_mode_delete_mode_confirmation">Delete \"<xliff:g id="mode" example="My Schedule">%1$s</xliff:g>\" mode?</string>
 
     <!--  Do not disturb: Edit label for button that allows user to edit the dnd schedule name. [CHAR LIMIT=30] -->
     <string name="zen_mode_rule_name_edit">Edit</string>
@@ -8922,6 +9010,9 @@
 
     <!-- [CHAR LIMIT=NONE] App notification settings: no channels -->
     <string name="no_channels">This app has not posted any notifications</string>
+
+    <!-- [CHAR LIMIT=NONE] App notification settings: has channels, but hasn't sent notifications recently -->
+    <string name="no_recent_channels">Show unused categories</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: link to app notification settings-->
     <string name="app_settings_link">Additional settings in the app</string>
@@ -12292,7 +12383,7 @@
     <!-- Toast on failure to reformat data to ext4 -->
     <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partition to ext4.</string>
     <!-- Dialog to OEM unlock the device before using 16K developer option -->
-    <string name="confirm_oem_unlock_for_16k_title">Bootloader Unlock Required for 16KB Mode</string>
+    <string name="confirm_oem_unlock_for_16k_title">Bootloader Unlock Required</string>
     <string name="confirm_oem_unlock_for_16k_text">This device needs to have the bootloader unlocked before using the 16KB developer option.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
         All user data and settings will be wiped when activating 16KB mode. Once the bootloader is unlocked, activating the 16KB option will require two reboots.
@@ -12321,10 +12412,10 @@
     <!-- persistent notification 16k page agnostic mode text -->
     <string name="page_agnostic_16k_pages_text_short">You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
         and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
-        In order to re-enter the production mode, you must, switch back to 4K mode and then lock the bootloader of the device. Tap to read more.</string>
+        In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. Tap to read more.</string>
     <string name="page_agnostic_16k_pages_text">You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
         and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
-        In order to re-enter the production mode, you must, switch back to 4K mode and then lock the bootloader of the device. This would factory reset the device again and
+        In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. This would factory reset the device again and
         restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options.
         If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from
         &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;
@@ -12643,7 +12734,7 @@
     <string name="default_print_service_main_switch_title">Use print service</string>
 
     <!-- Title for multiple users main switch. [CHAR LIMIT=50] -->
-    <string name="multiple_users_main_switch_title">Allow multiple users</string>
+    <string name="multiple_users_main_switch_title">Allow user switch</string>
     <!-- Search keywords for the "Allow Multiple Users" section in Multiple Users Screen. [CHAR LIMIT=NONE] -->
     <string name="multiple_users_main_switch_keywords">allow, multiple, user, permit, many</string>
     <!-- Search keywords for the Users Screen. [CHAR LIMIT=NONE] -->
