@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.legacysuggestion;
 
+import android.app.ActivityOptions;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
@@ -79,7 +80,10 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
     @Override
     public void onPrimaryClick(ContextualCard card) {
         try {
-            ((LegacySuggestionContextualCard) card).getPendingIntent().send();
+            ActivityOptions options = ActivityOptions.makeBasic()
+                    .setPendingIntentBackgroundActivityStartMode(
+                            ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED);
+            ((LegacySuggestionContextualCard) card).getPendingIntent().send(options.toBundle());
         } catch (PendingIntent.CanceledException e) {
             Log.w(TAG, "Failed to start suggestion " + card.getTitleText());
         }

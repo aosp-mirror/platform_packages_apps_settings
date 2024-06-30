@@ -50,14 +50,16 @@ class IconUtil {
 
     /**
      * Returns a variant of the supplied {@code icon} to be used in the icon picker. The inner icon
-     * is 36x36dp and it's contained into a circle of diameter 54dp.
+     * is 36x36dp and it's contained into a circle of diameter 54dp. It's also set up so that
+     * selection and pressed states are represented in the color.
      */
     static Drawable makeIconCircle(@NonNull Context context, @NonNull Drawable icon) {
         ShapeDrawable background = new ShapeDrawable(new OvalShape());
-        background.getPaint().setColor(Utils.getColorAttrDefaultColor(context,
-                com.android.internal.R.attr.materialColorSecondaryContainer));
-        icon.setTint(Utils.getColorAttrDefaultColor(context,
-                com.android.internal.R.attr.materialColorOnSecondaryContainer));
+        background.setTintList(
+                context.getColorStateList(R.color.modes_icon_picker_item_background));
+        icon = icon.mutate();
+        icon.setTintList(
+                context.getColorStateList(R.color.modes_icon_picker_item_icon));
 
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { background, icon });
 

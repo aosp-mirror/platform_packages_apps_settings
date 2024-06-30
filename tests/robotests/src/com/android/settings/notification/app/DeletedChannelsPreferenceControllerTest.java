@@ -31,12 +31,17 @@ import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 
+import com.android.server.notification.Flags;
 import com.android.settings.notification.NotificationBackend;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -60,6 +65,8 @@ public class DeletedChannelsPreferenceControllerTest {
     private UserManager mUm;
 
     private DeletedChannelsPreferenceController mController;
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
@@ -109,6 +116,16 @@ public class DeletedChannelsPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_NOTIFICATION_HIDE_UNUSED_CHANNELS)
+    public void isAvailable_notIfFlagEnabled() {
+        when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(1);
+        mController.onResume(
+                new NotificationBackend.AppRow(), null, null, null, null, null, new ArrayList<>());
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_NOTIFICATION_HIDE_UNUSED_CHANNELS)
     public void isAvailable_appScreen() {
         when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(1);
         mController.onResume(

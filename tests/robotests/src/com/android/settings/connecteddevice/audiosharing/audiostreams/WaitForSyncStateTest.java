@@ -76,6 +76,7 @@ public class WaitForSyncStateTest {
 
     @Test
     public void testGetInstance() {
+        mInstance = WaitForSyncState.getInstance();
         assertThat(mInstance).isNotNull();
         assertThat(mInstance).isInstanceOf(AudioStreamStateHandler.class);
     }

@@ -18,12 +18,13 @@ package com.android.settings.notification.modes;
 
 import android.app.AlertDialog;
 import android.app.Application;
-import android.app.AutomaticZenRule;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState;
@@ -34,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ZenModeFragment extends ZenModeFragmentBase {
-
     // for mode deletion menu
     private static final int DELETE_MODE = 1;
 
@@ -47,7 +47,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
-        prefControllers.add(new ZenModeButtonPreferenceController(context, "activate", mBackend));
+        prefControllers.add(
+                new ZenModeButtonPreferenceController(context, "activate", this, mBackend));
         prefControllers.add(new ZenModeActionsPreferenceController(context, "actions", mBackend));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
                 context, "zen_mode_people", mBackend, mHelperBackend));
@@ -63,7 +64,17 @@ public class ZenModeFragment extends ZenModeFragmentBase {
                 "zen_automatic_trigger_category", this, mBackend));
         prefControllers.add(new InterruptionFilterPreferenceController(
                 context, "allow_filtering", mBackend));
+        prefControllers.add(new ManualDurationPreferenceController(
+                context, "mode_manual_duration", this, mBackend));
         return prefControllers;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        // allow duration preference controller to listen for settings changes
+        use(ManualDurationPreferenceController.class).registerSettingsObserver();
     }
 
     @Override
@@ -72,11 +83,15 @@ public class ZenModeFragment extends ZenModeFragmentBase {
 
         // Set title for the entire screen
         ZenMode mode = getMode();
-        AutomaticZenRule azr = getAZR();
-        if (mode == null || azr == null) {
-            return;
+        if (mode != null) {
+            requireActivity().setTitle(mode.getName());
         }
-        getActivity().setTitle(azr.getName());
+    }
+
+    @Override
+    public void onDetach() {
+        use(ManualDurationPreferenceController.class).unregisterSettingsObserver();
+        super.onDetach();
     }
 
     @Override
@@ -92,7 +107,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     }
 
     @Override
-    protected boolean onOptionsItemSelected(MenuItem item, ZenMode zenMode) {
+    protected boolean onOptionsItemSelected(MenuItem item, @NonNull ZenMode zenMode) {
         switch (item.getItemId()) {
             case DELETE_MODE:
                 new AlertDialog.Builder(mContext)

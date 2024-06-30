@@ -22,18 +22,25 @@ import static com.android.settings.connecteddevice.audiosharing.audiostreams.Aud
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -53,12 +60,14 @@ public class AudioStreamsDashboardFragmentTest {
                     + "MD:BgNwVGVzdA==;AS:1;PI:A0;NS:1;BS:3;NB:2;SM:BQNUZXN0BARlbmc=;;";
 
     private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
     private AudioStreamsProgressCategoryController mController;
     private TestFragment mTestFragment;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mTestFragment = spy(new TestFragment());
         doReturn(mContext).when(mTestFragment).getContext();
         mController = spy(new AudioStreamsProgressCategoryController(mContext, "key"));
@@ -114,6 +123,28 @@ public class AudioStreamsDashboardFragmentTest {
         mTestFragment.onActivityResult(
                 REQUEST_SCAN_BT_BROADCAST_QR_CODE, Activity.RESULT_OK, intent);
         verify(mController).setSourceFromQrCode(any(), any());
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        any(),
+                        eq(SettingsEnums.ACTION_AUDIO_STREAM_QR_CODE_SCAN_SUCCEED),
+                        anyInt());
+    }
+
+    @Test
+    public void onAttach_hasArgument() {
+        BluetoothLeBroadcastMetadata data = mock(BluetoothLeBroadcastMetadata.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(KEY_BROADCAST_METADATA, data);
+        mTestFragment.setArguments(bundle);
+
+        mTestFragment.onAttach(mContext);
+
+        verify(mController).setSourceFromQrCode(eq(data), any());
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        any(),
+                        eq(SettingsEnums.ACTION_AUDIO_STREAM_QR_CODE_SCAN_SUCCEED),
+                        anyInt());
     }
 
     public static class TestFragment extends AudioStreamsDashboardFragment {
