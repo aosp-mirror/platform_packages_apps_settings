@@ -25,10 +25,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.settings.R
 import com.android.settings.network.telephony.MobileDataRepository
+import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.network.telephony.ims.ImsMmTelRepositoryImpl
-import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.network.telephony.safeGetConfig
-import com.android.settings.network.telephony.subscriptionsChangedFlow
 import com.android.settings.network.telephony.telephonyManager
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +47,7 @@ class CrossSimCallingViewModel(
     private val application: Application,
 ) : AndroidViewModel(application) {
 
-    private val subscriptionManager = application.requireSubscriptionManager()
+    private val subscriptionRepository = SubscriptionRepository(application)
     private val carrierConfigManager =
         application.getSystemService(CarrierConfigManager::class.java)!!
     private val scope = viewModelScope + Dispatchers.Default
@@ -59,9 +58,8 @@ class CrossSimCallingViewModel(
     init {
         val resources = application.resources
         if (resources.getBoolean(R.bool.config_auto_data_switch_enables_cross_sim_calling)) {
-            application.subscriptionsChangedFlow()
-                .flatMapLatest {
-                    val activeSubIds = subscriptionManager.activeSubscriptionIdList.toList()
+            subscriptionRepository.activeSubscriptionIdListFlow()
+                .flatMapLatest { activeSubIds ->
                     merge(
                         activeSubIds.anyMobileDataEnableChangedFlow(),
                         updateChannel.receiveAsFlow(),

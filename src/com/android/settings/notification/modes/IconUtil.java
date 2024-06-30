@@ -24,6 +24,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
@@ -32,23 +33,33 @@ import com.android.settingslib.Utils;
 
 class IconUtil {
 
-    static Drawable applyTint(@NonNull Context context, @NonNull Drawable icon) {
+    static Drawable applyNormalTint(@NonNull Context context, @NonNull Drawable icon) {
+        return applyTint(context, icon, android.R.attr.colorControlNormal);
+    }
+
+    static Drawable applyAccentTint(@NonNull Context context, @NonNull Drawable icon) {
+        return applyTint(context, icon, android.R.attr.colorAccent);
+    }
+
+    private static Drawable applyTint(@NonNull Context context, @NonNull Drawable icon,
+            @AttrRes int colorAttr) {
         icon = icon.mutate();
-        icon.setTintList(
-                Utils.getColorAttr(context, android.R.attr.colorControlNormal));
+        icon.setTintList(Utils.getColorAttr(context, colorAttr));
         return icon;
     }
 
     /**
      * Returns a variant of the supplied {@code icon} to be used in the icon picker. The inner icon
-     * is 36x36dp and it's contained into a circle of diameter 54dp.
+     * is 36x36dp and it's contained into a circle of diameter 54dp. It's also set up so that
+     * selection and pressed states are represented in the color.
      */
     static Drawable makeIconCircle(@NonNull Context context, @NonNull Drawable icon) {
         ShapeDrawable background = new ShapeDrawable(new OvalShape());
-        background.getPaint().setColor(Utils.getColorAttrDefaultColor(context,
-                com.android.internal.R.attr.materialColorSecondaryContainer));
-        icon.setTint(Utils.getColorAttrDefaultColor(context,
-                com.android.internal.R.attr.materialColorOnSecondaryContainer));
+        background.setTintList(
+                context.getColorStateList(R.color.modes_icon_picker_item_background));
+        icon = icon.mutate();
+        icon.setTintList(
+                context.getColorStateList(R.color.modes_icon_picker_item_icon));
 
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { background, icon });
 

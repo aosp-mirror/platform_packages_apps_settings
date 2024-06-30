@@ -18,10 +18,10 @@ package com.android.settings.notification.modes;
 
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
-import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,7 +33,10 @@ import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.notification.modes.ZenMode;
 
+import com.google.common.base.Preconditions;
+
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Base class for Settings pages used to configure individual modes.
@@ -114,6 +117,18 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
         updateControllers();
     }
 
+    @Override
+    public final boolean onOptionsItemSelected(MenuItem item) {
+        if (mZenMode != null) {
+            return onOptionsItemSelected(item, mZenMode);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected boolean onOptionsItemSelected(MenuItem item, @NonNull ZenMode zenMode) {
+        return true;
+    }
+
     private void updateControllers() {
         if (getPreferenceControllers() == null || mZenMode == null) {
             return;
@@ -162,14 +177,15 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
         return mZenMode;
     }
 
-    /**
-     * Get AutomaticZenRule associated with current mode data, or null if it doesn't exist.
-     */
-    @Nullable
-    public AutomaticZenRule getAZR() {
-        if (mZenMode == null) {
-            return null;
+    protected final boolean saveMode(Consumer<ZenMode> updater) {
+        Preconditions.checkState(mBackend != null);
+        ZenMode mode = mZenMode;
+        if (mode == null) {
+            Log.wtf(TAG, "Cannot save mode, it hasn't been loaded (" + getClass() + ")");
+            return false;
         }
-        return mZenMode.getRule();
+        updater.accept(mode);
+        mBackend.updateMode(mode);
+        return true;
     }
 }

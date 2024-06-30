@@ -25,10 +25,8 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
@@ -71,12 +69,9 @@ public final class InterruptionFilterPreferenceControllerTest {
     @Test
     public void testUpdateState_all() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_ALL)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(true).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setInterruptionFilter(INTERRUPTION_FILTER_ALL)
+                .build();
         mController.updateZenMode(preference, zenMode);
 
         verify(preference).setChecked(false);
@@ -85,12 +80,9 @@ public final class InterruptionFilterPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_fromAll() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_ALL)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(false).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setInterruptionFilter(INTERRUPTION_FILTER_ALL)
+                .build();
 
         mController.updateZenMode(preference, zenMode);
 
@@ -107,12 +99,10 @@ public final class InterruptionFilterPreferenceControllerTest {
     @Test
     public void testUpdateState_priority() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(true).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder().allowAlarms(true).build())
+                .build();
         mController.updateZenMode(preference, zenMode);
 
         verify(preference).setChecked(true);
@@ -121,12 +111,10 @@ public final class InterruptionFilterPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_fromPriority() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(false).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .setZenPolicy(new ZenPolicy.Builder().allowAlarms(false).build())
+                .build();
 
         mController.updateZenMode(preference, zenMode);
 
