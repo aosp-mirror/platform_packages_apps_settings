@@ -26,7 +26,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
-public class ZenModeDisplayEffectPreferenceController extends AbstractZenModePreferenceController
+class ZenModeDisplayEffectPreferenceController extends AbstractZenModePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
     public ZenModeDisplayEffectPreferenceController(Context context, String key,
@@ -37,24 +37,20 @@ public class ZenModeDisplayEffectPreferenceController extends AbstractZenModePre
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         TwoStatePreference pref = (TwoStatePreference) preference;
-        ZenDeviceEffects effects =  zenMode.getRule().getDeviceEffects();
-        if (effects == null) {
-            pref.setChecked(false);
-        } else {
-            switch (getPreferenceKey()) {
-                case "effect_greyscale":
-                    pref.setChecked(effects.shouldDisplayGrayscale());
-                    break;
-                case "effect_aod":
-                    pref.setChecked(effects.shouldSuppressAmbientDisplay());
-                    break;
-                case "effect_wallpaper":
-                    pref.setChecked(effects.shouldDimWallpaper());
-                    break;
-                case "effect_dark_theme":
-                    pref.setChecked(effects.shouldUseNightMode());
-                    break;
-            }
+        ZenDeviceEffects effects =  zenMode.getDeviceEffects();
+        switch (getPreferenceKey()) {
+            case "effect_greyscale":
+                pref.setChecked(effects.shouldDisplayGrayscale());
+                break;
+            case "effect_aod":
+                pref.setChecked(effects.shouldSuppressAmbientDisplay());
+                break;
+            case "effect_wallpaper":
+                pref.setChecked(effects.shouldDimWallpaper());
+                break;
+            case "effect_dark_theme":
+                pref.setChecked(effects.shouldUseNightMode());
+                break;
         }
     }
 

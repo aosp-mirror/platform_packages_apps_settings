@@ -16,18 +16,31 @@
 package com.android.settings.notification.modes;
 
 import android.content.Context;
+import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.Utils;
 import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
+
+import com.google.common.base.Strings;
 
 /**
  * Preference representing a single mode item on the modes aggregator page. Clicking on this
  * preference leads to an individual mode's configuration page.
  */
 class ZenModesListItemPreference extends RestrictedPreference {
-    final Context mContext;
-    ZenMode mZenMode;
+
+    private final Context mContext;
+    private ZenMode mZenMode;
+
+    private TextView mTitleView;
+    private TextView mSummaryView;
 
     ZenModesListItemPreference(Context context, ZenMode zenMode) {
         super(context);
@@ -37,19 +50,65 @@ class ZenModesListItemPreference extends RestrictedPreference {
     }
 
     @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        if (holder.findViewById(android.R.id.title) instanceof TextView titleView) {
+            mTitleView = titleView;
+        }
+        if (holder.findViewById(android.R.id.summary) instanceof TextView summaryView) {
+            mSummaryView = summaryView;
+        }
+        updateTextColor(mZenMode);
+    }
+
+    @Override
     public void onClick() {
         ZenSubSettingLauncher.forMode(mContext, mZenMode.getId()).launch();
     }
 
     public void setZenMode(ZenMode zenMode) {
         mZenMode = zenMode;
-        setTitle(mZenMode.getRule().getName());
-        setSummary(mZenMode.getRule().getTriggerDescription());
-        setIconSize(ICON_SIZE_SMALL);
+        setTitle(mZenMode.getName());
+        CharSequence statusText = switch (mZenMode.getStatus()) {
+            case ENABLED_AND_ACTIVE ->
+                    Strings.isNullOrEmpty(mZenMode.getTriggerDescription())
+                            ? mContext.getString(R.string.zen_mode_active_text)
+                            : mContext.getString(
+                                    R.string.zen_mode_format_status_and_trigger,
+                                    mContext.getString(R.string.zen_mode_active_text),
+                                    mZenMode.getRule().getTriggerDescription());
+            case ENABLED -> mZenMode.getRule().getTriggerDescription();
+            case DISABLED_BY_USER -> mContext.getString(R.string.zen_mode_disabled_by_user);
+            case DISABLED_BY_OTHER -> mContext.getString(R.string.zen_mode_disabled_needs_setup);
+        };
+        setSummary(statusText);
 
+        setIconSize(ICON_SIZE_SMALL);
         FutureUtil.whenDone(
                 mZenMode.getIcon(mContext, ZenIconLoader.getInstance()),
-                icon -> setIcon(IconUtil.applyTint(mContext, icon)),
+                icon -> setIcon(
+                        zenMode.isActive()
+                                ? IconUtil.applyAccentTint(mContext, icon)
+                                : IconUtil.applyNormalTint(mContext, icon)),
                 mContext.getMainExecutor());
+
+        updateTextColor(zenMode);
+    }
+
+    private void updateTextColor(@Nullable ZenMode zenMode) {
+        boolean isActive = zenMode != null && zenMode.isActive();
+        if (mTitleView != null) {
+            mTitleView.setTextColor(Utils.getColorAttr(mContext,
+                    isActive ? android.R.attr.colorAccent : android.R.attr.textColorPrimary));
+        }
+        if (mSummaryView != null) {
+            mSummaryView.setTextColor(Utils.getColorAttr(mContext,
+                    isActive ? android.R.attr.colorAccent : android.R.attr.textColorSecondary));
+        }
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    ZenMode getZenMode() {
+        return mZenMode;
     }
 }

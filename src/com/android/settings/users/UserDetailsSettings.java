@@ -126,7 +126,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mSwitchUserPref.setEnabled(canSwitchUserNow());
+        if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+            mSwitchUserPref.setEnabled(canSwitchUserNow() && mUserCaps.mUserSwitcherEnabled);
+        } else {
+            mSwitchUserPref.setEnabled(canSwitchUserNow());
+        }
         if (mUserInfo.isGuest() && mGuestUserAutoCreated) {
             mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
         }
@@ -358,7 +362,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mSwitchUserPref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
         } else {
             mSwitchUserPref.setDisabledByAdmin(null);
-            mSwitchUserPref.setSelectable(true);
+            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+                mSwitchUserPref.setEnabled(mUserCaps.mUserSwitcherEnabled);
+                mSwitchUserPref.setSelectable(mUserCaps.mUserSwitcherEnabled);
+            } else {
+                mSwitchUserPref.setSelectable(true);
+            }
             mSwitchUserPref.setOnPreferenceClickListener(this);
         }
         if (mUserInfo.isMain() || mUserInfo.isGuest() || !UserManager.isMultipleAdminEnabled()

@@ -51,6 +51,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -319,7 +320,8 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.onCreate(Bundle.EMPTY);
 
         verify(mDataUsagePreference).setVisible(true);
-        verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/);
+        verify(mDataUsagePreference)
+                .setTemplate(any(), eq(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
     }
 
     @Test

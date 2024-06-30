@@ -33,13 +33,10 @@ import com.android.settings.R
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.datausage.lib.NetworkUsageData
-import com.android.settings.network.MobileNetworkRepository
 import com.android.settings.network.SubscriptionUtil
-import com.android.settings.network.telephony.requireSubscriptionManager
-import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity
+import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
-import com.android.settingslib.utils.ThreadUtils
 import kotlin.jvm.optionals.getOrNull
 
 /**
@@ -59,7 +56,6 @@ open class DataUsageList : DashboardFragment() {
     private lateinit var billingCycleRepository: BillingCycleRepository
 
     private var usageAmount: Preference? = null
-    private var subscriptionInfoEntity: SubscriptionInfoEntity? = null
     private var dataUsageListAppsController: DataUsageListAppsController? = null
     private var chartDataUsagePreferenceController: ChartDataUsagePreferenceController? = null
     private var dataUsageListHeaderController: DataUsageListHeaderController? = null
@@ -90,7 +86,6 @@ open class DataUsageList : DashboardFragment() {
             finish()
             return
         }
-        updateSubscriptionInfoEntity()
         dataUsageListAppsController = use(DataUsageListAppsController::class.java).apply {
             init(template)
         }
@@ -132,6 +127,16 @@ open class DataUsageList : DashboardFragment() {
         viewModel.chartDataFlow.collectLatestWithLifecycle(viewLifecycleOwner) { chartData ->
             chartDataUsagePreferenceController?.update(chartData)
         }
+        finishIfSubscriptionDisabled()
+    }
+
+    private fun finishIfSubscriptionDisabled() {
+        if (SubscriptionManager.isUsableSubscriptionId(subId)) {
+            SubscriptionRepository(requireContext()).isSubscriptionEnabledFlow(subId)
+                .collectLatestWithLifecycle(viewLifecycleOwner) { isSubscriptionEnabled ->
+                    if (!isSubscriptionEnabled) finish()
+                }
+        }
     }
 
     override fun getPreferenceScreenResId() = R.xml.data_usage_list
@@ -155,22 +160,11 @@ open class DataUsageList : DashboardFragment() {
         }
     }
 
-    private fun updateSubscriptionInfoEntity() {
-        ThreadUtils.postOnBackgroundThread {
-            subscriptionInfoEntity =
-                MobileNetworkRepository.getInstance(context).getSubInfoById(subId.toString())
-        }
-    }
-
     /** Update chart sweeps and cycle list to reflect [NetworkPolicy] for current [template]. */
     private fun updatePolicy(isModifiable: Boolean) {
-        val isBillingCycleModifiable = isModifiable && isActiveSubscription()
-        dataUsageListHeaderController?.setConfigButtonVisible(isBillingCycleModifiable)
-        chartDataUsagePreferenceController?.setBillingCycleModifiable(isBillingCycleModifiable)
+        dataUsageListHeaderController?.setConfigButtonVisible(isModifiable)
+        chartDataUsagePreferenceController?.setBillingCycleModifiable(isModifiable)
     }
-
-    private fun isActiveSubscription(): Boolean =
-            requireContext().requireSubscriptionManager().getActiveSubscriptionInfo(subId) != null
 
     /**
      * Updates the chart and detail data when initial loaded or selected cycle changed.
@@ -187,7 +181,7 @@ open class DataUsageList : DashboardFragment() {
     /** Updates applications data usage. */
     private fun updateApps(usageData: NetworkUsageData) {
         dataUsageListAppsController?.update(
-            carrierId = subscriptionInfoEntity?.carrierId,
+            subId = subId,
             startTime = usageData.startTime,
             endTime = usageData.endTime,
         )

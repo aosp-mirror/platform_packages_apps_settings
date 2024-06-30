@@ -164,6 +164,20 @@ public class AudioSharingJoinDialogFragmentTest {
     }
 
     @Test
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AudioSharingJoinDialogFragment.show(
+                new Fragment(),
+                new ArrayList<>(),
+                mCachedDevice2,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
+        shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
     public void onCreateDialog_flagOn_dialogShowTextForSingleDevice() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         AudioSharingJoinDialogFragment.show(
