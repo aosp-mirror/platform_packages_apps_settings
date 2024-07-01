@@ -49,12 +49,8 @@ public class BluetoothLeAudioAllowListPreferenceController
     BluetoothAdapter mBluetoothAdapter;
     @VisibleForTesting boolean mLeAudioConnectionByDefault;
 
-    private final DevelopmentSettingsDashboardFragment mFragment;
-
-    public BluetoothLeAudioAllowListPreferenceController(Context context,
-            DevelopmentSettingsDashboardFragment fragment) {
+    public BluetoothLeAudioAllowListPreferenceController(Context context) {
         super(context);
-        mFragment = fragment;
         mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
         mLeAudioConnectionByDefault =
                 SystemProperties.getBoolean(LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY, true);

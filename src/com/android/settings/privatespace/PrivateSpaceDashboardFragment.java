@@ -26,12 +26,10 @@ import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.widget.IllustrationPreference;
 
 /** Fragment representing the Private Space dashboard in Settings. */
 public class PrivateSpaceDashboardFragment extends DashboardFragment {
     private static final String TAG = "PSDashboardFragment";
-    private static final String PRIVATE_SPACE_ILLUSTRATION_KEY = "private_space_illustration";
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -61,14 +59,6 @@ public class PrivateSpaceDashboardFragment extends DashboardFragment {
             // To make sure the task is removed if it is the last activity in that stack.
             getActivity().finishAndRemoveTask();
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        final IllustrationPreference illustrationPreference =
-                getPreferenceScreen().findPreference(PRIVATE_SPACE_ILLUSTRATION_KEY);
-        illustrationPreference.applyDynamicColor();
     }
 
     @Override

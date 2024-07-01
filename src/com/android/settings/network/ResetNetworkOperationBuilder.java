@@ -18,6 +18,7 @@ package com.android.settings.network;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
+import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -28,10 +29,13 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Looper;
 import android.os.RecoverySystem;
+import android.os.RemoteException;
 import android.os.SystemClock;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -61,6 +65,8 @@ public class ResetNetworkOperationBuilder {
 
     private Context mContext;
     private List<Runnable> mResetSequence = new ArrayList<Runnable>();
+    @Nullable
+    private Consumer<Boolean> mResetEsimResultCallback = null;
 
     /**
      * Constructor of builder.
@@ -125,31 +131,32 @@ public class ResetNetworkOperationBuilder {
     }
 
     /**
-     * Append a step of resetting E-SIM.
-     * @param callerPackage package name of caller
+     * Append a result callback of resetting E-SIM.
+     * @param resultCallback a callback dealing with result of resetting eSIM
      * @return this
      */
-    public ResetNetworkOperationBuilder resetEsim(String callerPackage) {
-        resetEsim(callerPackage, null);
+    public ResetNetworkOperationBuilder resetEsimResultCallback(Consumer<Boolean> resultCallback) {
+        mResetEsimResultCallback = resultCallback;
         return this;
     }
 
     /**
      * Append a step of resetting E-SIM.
      * @param callerPackage package name of caller
-     * @param resultCallback a Consumer<Boolean> dealing with result of resetting eSIM
      * @return this
      */
-    public ResetNetworkOperationBuilder resetEsim(String callerPackage,
-            Consumer<Boolean> resultCallback) {
+    public ResetNetworkOperationBuilder resetEsim(String callerPackage) {
         Runnable runnable = () -> {
             long startTime = SystemClock.elapsedRealtime();
 
-            if (!DRY_RUN) {
-                Boolean wipped = RecoverySystem.wipeEuiccData(mContext, callerPackage);
-                if (resultCallback != null) {
-                    resultCallback.accept(wipped);
-                }
+            boolean wipped;
+            if (DRY_RUN) {
+                wipped = true;
+            } else {
+                wipped = RecoverySystem.wipeEuiccData(mContext, callerPackage);
+            }
+            if (mResetEsimResultCallback != null) {
+                mResetEsimResultCallback.accept(wipped);
             }
 
             long endTime = SystemClock.elapsedRealtime();
@@ -256,16 +263,19 @@ public class ResetNetworkOperationBuilder {
      * @return this
      */
     public ResetNetworkOperationBuilder restartPhoneProcess() {
-        try {
-            mContext.getContentResolver().call(
-                    getResetTelephonyContentProviderAuthority(),
-                    METHOD_RESTART_PHONE_PROCESS,
-                    /* arg= */ null,
-                    /* extras= */ null);
-            Log.i(TAG, "Phone process was restarted.");
-        } catch (IllegalArgumentException iae) {
-            Log.w(TAG, "Fail to restart phone process: " + iae);
-        }
+        Runnable runnable = () -> {
+            // Unstable content provider can avoid us getting killed together with phone process
+            try (ContentProviderClient client = getUnstableTelephonyContentProviderClient()) {
+                if (client != null) {
+                    client.call(METHOD_RESTART_PHONE_PROCESS, /* arg= */ null, /* extra= */ null);
+                    Log.i(TAG, "Phone process was restarted.");
+                }
+            } catch (RemoteException re) {
+                // It's normal to throw RE since phone process immediately dies
+                Log.i(TAG, "Phone process has been restarted: " + re);
+            }
+        };
+        mResetSequence.add(runnable);
         return this;
     }
 
@@ -275,16 +285,17 @@ public class ResetNetworkOperationBuilder {
      * @return this
      */
     public ResetNetworkOperationBuilder restartRild() {
-        try {
-            mContext.getContentResolver().call(
-                    getResetTelephonyContentProviderAuthority(),
-                    METHOD_RESTART_RILD,
-                    /* arg= */ null,
-                    /* extras= */ null);
-            Log.i(TAG, "RILD was restarted.");
-        } catch (IllegalArgumentException iae) {
-            Log.w(TAG, "Fail to restart RILD: " + iae);
-        }
+        Runnable runnable = () -> {
+            try (ContentProviderClient client = getUnstableTelephonyContentProviderClient()) {
+                if (client != null) {
+                    client.call(METHOD_RESTART_RILD, /* arg= */ null, /* extra= */ null);
+                    Log.i(TAG, "RILD was restarted.");
+                }
+            } catch (RemoteException re) {
+                Log.w(TAG, "Fail to restart RILD: " + re);
+            }
+        };
+        mResetSequence.add(runnable);
         return this;
     }
 
@@ -316,9 +327,18 @@ public class ResetNetworkOperationBuilder {
      * @return the authority of the telephony content provider that support methods
      * resetPhoneProcess and resetRild.
      */
-    @VisibleForTesting
-    String getResetTelephonyContentProviderAuthority() {
+    private String getResetTelephonyContentProviderAuthority() {
         return mContext.getResources().getString(
                 R.string.reset_telephony_stack_content_provider_authority);
+    }
+
+    /**
+     * @return the unstable content provider to avoid us getting killed with phone process
+     */
+    @Nullable
+    @VisibleForTesting
+    public ContentProviderClient getUnstableTelephonyContentProviderClient() {
+        return mContext.getContentResolver().acquireUnstableContentProviderClient(
+                getResetTelephonyContentProviderAuthority());
     }
 }

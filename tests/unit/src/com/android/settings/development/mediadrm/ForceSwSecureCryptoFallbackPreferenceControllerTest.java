@@ -29,6 +29,8 @@ import android.util.Log;
 import android.content.Context;
 
 import com.android.settings.media_drm.Flags;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.SwitchPreference;
@@ -65,10 +67,10 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_FORCE_L3_ENABLED)
     public void updateState_flagEnabled_checkPreference() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_FORCE_L3_ENABLED);
         mController.updateState(mPreference);
-        assumeTrue(mPreference.isEnabled());
+        assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.isChecked()).isFalse();
         assertThat(WidevineProperties.forcel3_enabled().orElse(false)).isFalse();
 
@@ -85,33 +87,22 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
         assertThat(WidevineProperties.forcel3_enabled().orElse(false)).isFalse();
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.isChecked()).isFalse();
-
-        // Test flag rollback
-        mController.setChecked(true);
-        mController.updateState(mPreference);
-        assertThat(mPreference.isChecked()).isTrue();
-        assertThat(WidevineProperties.forcel3_enabled().orElse(false)).isTrue();
-        mSetFlagsRule.disableFlags(Flags.FLAG_FORCE_L3_ENABLED);
-        mController.updateState(mPreference);
-        assertThat(mPreference.isEnabled()).isFalse();
-        assertThat(mPreference.isChecked()).isFalse();
-        assertThat(WidevineProperties.forcel3_enabled().orElse(false)).isFalse();
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_FORCE_L3_ENABLED)
     public void updateState_flagDisabled_checkPreference() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_FORCE_L3_ENABLED);
         mController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_FORCE_L3_ENABLED)
     public void updateState_checkWidevine() throws Exception {
         try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
             assumeTrue(drm.getPropertyString("securityLevel").equals("L1"));
-            mSetFlagsRule.enableFlags(Flags.FLAG_FORCE_L3_ENABLED);
             mController.updateState(mPreference);
-            assumeTrue(mPreference.isEnabled());
+            assertThat(mPreference.isEnabled()).isTrue();
         } catch (UnsupportedSchemeException ex) {
             assumeNoException(ex);
         }
@@ -139,11 +130,11 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_FORCE_L3_ENABLED)
     public void updateState_checkWhenWidevineReady() throws Exception {
         try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
             if (drm.getPropertyString("securityLevel").equals("L1")) {
                 String version = drm.getPropertyString(MediaDrm.PROPERTY_VERSION);
-                mSetFlagsRule.enableFlags(Flags.FLAG_FORCE_L3_ENABLED);
                 mController.updateState(mPreference);
                 if (Integer.parseInt(version.split("\\.", 2)[0]) >= 19) {
                     assertThat(mPreference.isEnabled()).isTrue();

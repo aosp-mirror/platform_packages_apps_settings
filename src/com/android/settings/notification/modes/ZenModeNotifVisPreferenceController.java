@@ -21,19 +21,21 @@ import android.service.notification.ZenPolicy;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
-import com.android.settings.widget.DisabledCheckBoxPreference;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 public class ZenModeNotifVisPreferenceController extends AbstractZenModePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
-    @VisibleForTesting protected @ZenPolicy.VisualEffect int mEffect;
+    @VisibleForTesting
+    protected @ZenPolicy.VisualEffect int mEffect;
 
     // if any of these effects are suppressed, this effect must be too
-    @VisibleForTesting protected @ZenPolicy.VisualEffect int[] mParentSuppressedEffects;
+    @VisibleForTesting
+    protected @ZenPolicy.VisualEffect int[] mParentSuppressedEffects;
 
     public ZenModeNotifVisPreferenceController(Context context, String key,
             @ZenPolicy.VisualEffect int visualEffect,

@@ -19,7 +19,6 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
-import android.util.Log;
 
 public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastAssistantCallback {
     private static final String TAG = "AudioStreamsProgressCategoryCallback";
@@ -53,10 +52,6 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
     @Override
     public void onSearchStarted(int reason) {
         super.onSearchStarted(reason);
-        if (mCategoryController == null) {
-            Log.w(TAG, "onSearchStarted() : mCategoryController is null!");
-            return;
-        }
         mCategoryController.setScanning(true);
     }
 
@@ -69,10 +64,6 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
     @Override
     public void onSearchStopped(int reason) {
         super.onSearchStopped(reason);
-        if (mCategoryController == null) {
-            Log.w(TAG, "onSearchStopped() : mCategoryController is null!");
-            return;
-        }
         mCategoryController.setScanning(false);
     }
 
@@ -86,10 +77,6 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
     @Override
     public void onSourceFound(BluetoothLeBroadcastMetadata source) {
         super.onSourceFound(source);
-        if (mCategoryController == null) {
-            Log.w(TAG, "onSourceFound() : mCategoryController is null!");
-            return;
-        }
         mCategoryController.handleSourceFound(source);
     }
 

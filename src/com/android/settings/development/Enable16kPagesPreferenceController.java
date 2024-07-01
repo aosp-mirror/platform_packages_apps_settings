@@ -34,6 +34,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
@@ -86,7 +87,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     private static final int OFFSET_TO_FILE_NAME = 30;
     public static final String EXPERIMENTAL_UPDATE_TITLE = "Android 16K Kernel Experimental Update";
 
-    private @NonNull DevelopmentSettingsDashboardFragment mFragment;
+    private @Nullable DevelopmentSettingsDashboardFragment mFragment;
     private boolean mEnable16k;
 
     private final ListeningExecutorService mExecutorService =
@@ -95,7 +96,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
     private AlertDialog mProgressDialog;
 
     public Enable16kPagesPreferenceController(
-            @NonNull Context context, @NonNull DevelopmentSettingsDashboardFragment fragment) {
+            @NonNull Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         this.mFragment = fragment;
         mEnable16k = Enable16kUtils.isUsing16kbPages();

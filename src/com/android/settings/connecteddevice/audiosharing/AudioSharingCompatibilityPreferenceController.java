@@ -57,9 +57,10 @@ public class AudioSharingCompatibilityPreferenceController extends TogglePrefere
     @Nullable private TwoStatePreference mPreference;
     private final Executor mExecutor;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
+    private final AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
 
-    private final BluetoothLeBroadcast.Callback mBroadcastCallback =
+    @VisibleForTesting
+    final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastStarted(int reason, int broadcastId) {
@@ -218,7 +219,7 @@ public class AudioSharingCompatibilityPreferenceController extends TogglePrefere
 
     /** Test only: set callbacks registration state for test setup. */
     @VisibleForTesting
-    public void setCallbacksRegistered(boolean registered) {
+    void setCallbacksRegistered(boolean registered) {
         mCallbacksRegistered.set(registered);
     }
 
