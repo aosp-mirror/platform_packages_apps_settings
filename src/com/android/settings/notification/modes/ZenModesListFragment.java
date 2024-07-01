@@ -25,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.modes.ZenModesListAddModePreferenceController.ModeType;
 import com.android.settings.notification.modes.ZenModesListAddModePreferenceController.OnAddModeListener;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -37,7 +38,6 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @SearchIndexable
 public class ZenModesListFragment extends ZenModesFragmentBase {
@@ -100,13 +100,12 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
                     mBackend.getModes().stream().map(ZenMode::getId).toList());
             startActivityForResult(type.creationActivityIntent(), REQUEST_NEW_MODE);
         } else {
-            // Custom-manual mode.
-            // TODO: b/326442408 - Transition to the choose-name-and-icon fragment.
-            ZenMode mode = mBackend.addCustomManualMode(
-                    "Mode #" + new Random().nextInt(100), 0);
-            if (mode != null) {
-                ZenSubSettingLauncher.forMode(mContext, mode.getId()).launch();
-            }
+            // Custom-manual mode -> "add a mode" screen.
+            // TODO: b/332937635 - set metrics categories correctly
+            new SubSettingLauncher(requireContext())
+                    .setDestination(ZenModeNewCustomFragment.class.getName())
+                    .setSourceMetricsCategory(0)
+                    .launch();
         }
     }
 
