@@ -16,16 +16,90 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.bluetooth.Utils;
+import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
-public class AudioStreamConfirmDialogActivity extends SettingsActivity {
+public class AudioStreamConfirmDialogActivity extends SettingsActivity
+        implements LocalBluetoothProfileManager.ServiceListener {
+    private static final String TAG = "AudioStreamConfirmDialogActivity";
+    @Nullable private LocalBluetoothProfileManager mProfileManager;
+    @Nullable private Bundle mSavedState;
+    @Nullable private Intent mIntent;
+
+    @Override
+    protected boolean isToolbarEnabled() {
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedState) {
+        var localBluetoothManager = Utils.getLocalBluetoothManager(this);
+        mProfileManager =
+                localBluetoothManager == null ? null : localBluetoothManager.getProfileManager();
         super.onCreate(savedState);
     }
+
+    @Override
+    protected void createUiFromIntent(@Nullable Bundle savedState, Intent intent) {
+        if (AudioSharingUtils.isFeatureEnabled()
+                && !AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
+            Log.d(TAG, "createUiFromIntent() : supported but not ready, skip createUiFromIntent");
+            mSavedState = savedState;
+            mIntent = intent;
+            return;
+        }
+
+        Log.d(
+                TAG,
+                "createUiFromIntent() : not supported or already connected, starting"
+                        + " createUiFromIntent");
+        super.createUiFromIntent(savedState, intent);
+    }
+
+    @Override
+    public void onStart() {
+        if (AudioSharingUtils.isFeatureEnabled()
+                && !AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
+            Log.d(TAG, "onStart() : supported but not ready, listen to service ready");
+            if (mProfileManager != null) {
+                mProfileManager.addServiceListener(this);
+            }
+        }
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        if (mProfileManager != null) {
+            mProfileManager.removeServiceListener(this);
+        }
+        super.onStop();
+    }
+
+    @Override
+    public void onServiceConnected() {
+        if (AudioSharingUtils.isFeatureEnabled()
+                && AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
+            if (mProfileManager != null) {
+                mProfileManager.removeServiceListener(this);
+            }
+            if (mIntent != null) {
+                Log.d(TAG, "onServiceConnected() : service ready, starting createUiFromIntent");
+                super.createUiFromIntent(mSavedState, mIntent);
+            }
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected() {}
 
     @Override
     protected boolean isValidFragment(String fragmentName) {

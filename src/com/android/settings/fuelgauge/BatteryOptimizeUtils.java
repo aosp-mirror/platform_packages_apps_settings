@@ -33,6 +33,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
 import com.android.settingslib.datastore.DataChangeReason;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
@@ -138,7 +139,8 @@ public class BatteryOptimizeUtils {
     /** Resets optimization mode for all applications. */
     public static void resetAppOptimizationMode(
             Context context, IPackageManager ipm, AppOpsManager aom) {
-        resetAppOptimizationMode(
+        AppOptModeSharedPreferencesUtils.clearAll(context);
+        resetAppOptimizationModeInternal(
                 context,
                 ipm,
                 aom,
@@ -219,7 +221,7 @@ public class BatteryOptimizeUtils {
     }
 
     @VisibleForTesting
-    static void resetAppOptimizationMode(
+    static void resetAppOptimizationModeInternal(
             Context context,
             IPackageManager ipm,
             AppOpsManager aom,

@@ -139,16 +139,14 @@ public class ApprovalPreferenceController extends BasePreferenceController {
     public void disable(final ComponentName cn) {
         logSpecialPermissionChange(true, cn.getPackageName());
         mNm.setNotificationListenerAccessGranted(cn, false);
-        AsyncTask.execute(() -> {
-            if (!mNm.isNotificationPolicyAccessGrantedForPackage(
-                    cn.getPackageName())) {
-                if (android.app.Flags.modesApi()) {
-                    mNm.removeAutomaticZenRules(cn.getPackageName(), /* fromUser= */ true);
-                } else {
-                    mNm.removeAutomaticZenRules(cn.getPackageName());
-                }
+        if (!mNm.isNotificationPolicyAccessGrantedForPackage(
+                cn.getPackageName())) {
+            if (android.app.Flags.modesApi()) {
+                mNm.removeAutomaticZenRules(cn.getPackageName(), /* fromUser= */ true);
+            } else {
+                mNm.removeAutomaticZenRules(cn.getPackageName());
             }
-        });
+        }
     }
 
     protected void enable(ComponentName cn) {

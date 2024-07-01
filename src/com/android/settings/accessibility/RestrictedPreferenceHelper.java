@@ -101,13 +101,14 @@ public class RestrictedPreferenceHelper {
     }
 
     /**
-     * Creates the list of {@link RestrictedPreference} with the installedShortcuts arguments.
+     * Creates the list of {@link AccessibilityActivityPreference} with the installedShortcuts
+     * arguments.
      *
      * @param installedShortcuts The list of {@link AccessibilityShortcutInfo}s of the
      *                           installed accessibility shortcuts
-     * @return The list of {@link RestrictedPreference}
+     * @return The list of {@link AccessibilityActivityPreference}
      */
-    public List<RestrictedPreference> createAccessibilityActivityPreferenceList(
+    public List<AccessibilityActivityPreference> createAccessibilityActivityPreferenceList(
             List<AccessibilityShortcutInfo> installedShortcuts) {
         final Set<ComponentName> enabledServices =
                 AccessibilityUtils.getEnabledServicesFromSettings(mContext);
@@ -115,7 +116,7 @@ public class RestrictedPreferenceHelper {
                 UserHandle.myUserId());
 
         final int installedShortcutsSize = installedShortcuts.size();
-        final List<RestrictedPreference> preferenceList = new ArrayList<>(
+        final List<AccessibilityActivityPreference> preferenceList = new ArrayList<>(
                 installedShortcutsSize);
 
         for (int i = 0; i < installedShortcutsSize; ++i) {
@@ -124,7 +125,7 @@ public class RestrictedPreferenceHelper {
             final ComponentName componentName = info.getComponentName();
 
             final boolean serviceEnabled = enabledServices.contains(componentName);
-            RestrictedPreference preference = new AccessibilityActivityPreference(
+            AccessibilityActivityPreference preference = new AccessibilityActivityPreference(
                     mContext, componentName.getPackageName(), activityInfo.applicationInfo.uid,
                     info);
             setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);

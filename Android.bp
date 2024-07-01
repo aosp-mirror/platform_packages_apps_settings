@@ -123,6 +123,9 @@ android_library {
         "telephony-common",
         "ims-common",
     ],
+    flags_packages: [
+        "android.app.flags-aconfig",
+    ],
 }
 
 platform_compat_config {
@@ -153,6 +156,9 @@ android_app {
     optimize: {
         proguard_flags_files: ["proguard.flags"],
     },
+    flags_packages: [
+        "android.app.flags-aconfig",
+    ],
 }
 
 android_library_import {

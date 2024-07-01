@@ -65,7 +65,8 @@
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"¿Desconectar dispositivo?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Vincular dispositivo nuevo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <string name="bluetooth_screen_auto_on_title" msgid="8496443490064988240">"Volver a activar automáticamente mañana"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_title (2203993262483477532) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Vincular aud. der."</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Vincular aud. izq."</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Vincula el otro audífono"</string>
@@ -75,7 +76,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Vincular aud. izq."</string>
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Configuración de dispositivos auditivos"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Acceso directo, compatibilidad con audífonos"</string>
-    <string name="bluetooth_hearing_aids_presets" msgid="5429761844739722885">"Ajustes predeterminados"</string>
+    <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Ajuste predeterminado"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"No se pudo actualizar el ajuste predeterminado"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Salida de audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Info. sobre salida de audio"</string>
@@ -312,7 +313,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Cancelar"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"No, gracias"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"Ahora no"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Acepto"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Más"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Usa tu rostro para desbloquear"</string>
@@ -373,7 +374,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Para tener en cuenta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Usa tu huella dactilar para desbloquear el teléfono o aprobar compras.\n\nNota: No puedes usar tu huella dactilar para desbloquear este dispositivo. Para obtener más información, comunícate con el administrador de la organización."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancelar"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"No, gracias"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Ahora no"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Acepto"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"¿Omitir huella dactilar?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"La configuración de la huella dactilar solo toma unos minutos. Si omites este paso, puedes agregarla más tarde en la app Configuración."</string>
@@ -577,7 +578,6 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Cada vez que el dispositivo se bloquea"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 min luego del tiempo de espera"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Solo después de reiniciar el dispositivo"</string>
-    <string name="private_space_auto_lock_footer_message" msgid="2752467351969856487">"Si usas un bloqueo para tu espacio privado, es posible que debas verificar tu identidad para abrir las apps que estén allí."</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Ocultar espacio privado"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Oculta el espacio privado cuando está bloqueado"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Oculta el espacio privado de tu lista de apps en el dispositivo para que otras personas no puedan verlo"</string>
@@ -608,11 +608,16 @@
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Configurar"</string>
     <string name="private_space_setup_title" msgid="2272968244329821450">"Espacio privado"</string>
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Oculta o bloquea las apps privadas en un espacio separado. Usa una Cuenta de Google exclusiva para más seguridad."</string>
-    <string name="private_space_setup_sub_header" msgid="5454598292017819146">"Cómo configurar tu espacio privado"</string>
-    <string name="private_space_separate_account_text" msgid="4492251315012955548"><b>"Elige una Cuenta de Google para tu espacio"</b>\n"Si usas una cuenta exclusiva, podrás evitar que los archivos, las fotos y los correos electrónicos sincronizados aparezcan fuera de tu espacio."</string>
+    <string name="private_space_setup_sub_header" msgid="550476876393954356">"Cómo funciona"</string>
+    <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Crea una Cuenta de Google para tu espacio"</b>\n"Usa una cuenta exclusiva para evitar que aparezcan archivos sincronizados, fotos y correos electrónicos fuera de tu espacio"</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Configura un bloqueo"</b>\n"Bloquea tu espacio privado para que nadie más pueda abrirlo."</string>
-    <string name="private_space_install_apps_text" msgid="5693139160766464498"><b>"Instala apps"</b>\n"Tu espacio privado tiene su propia Play Store para que puedas instalar apps fácilmente."</string>
-    <string name="private_space_apps_permission_text" msgid="7476093383297232044">"Las apps de tu espacio privado no se mostrarán en el Administrador de permisos, el panel de privacidad ni en ningún otro parámetro de configuración cuando tu espacio privado esté bloqueado.\n\nTu espacio privado no puede restablecerse en un dispositivo nuevo. Deberás configurar uno nuevo si quieres usar la función en otro dispositivo.\n\nCualquier persona que conecte tu dispositivo a una computadora o le instale apps maliciosas podría acceder a tu espacio privado."</string>
+    <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Instala apps"</b>\n"Instala apps que quieres mantener privadas en tu espacio"</string>
+    <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Importante"</string>
+    <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Las apps se detienen cuando bloqueas tu espacio"</b>\n"Cuando bloquees tu espacio, las apps en él se detendrán, y no recibirás notificaciones de ellas"</string>
+    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
+    <skip />
+    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
+    <skip />
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Más información sobre el espacio privado"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"El proceso tardará unos minutos"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configurando espacio privado…"</string>
@@ -622,7 +627,7 @@
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Puedes establecer un nuevo bloqueo solo para el espacio privado, o bien puedes usar el mismo que usas para desbloquear el dispositivo"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Usar bloqueo de pantalla"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Elegir nuevo bloqueo"</string>
-    <string name="private_space_pre_finish_title" msgid="2314776598615113267">"Un segundo…"</string>
+    <string name="private_space_wait_screen_title" msgid="1535431437075585381">"Un segundo…"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Todo listo"</string>
     <string name="private_space_access_text" msgid="4433988836344567888">"Para encontrar el espacio privado, ve a tu lista de apps y desplázate hacia abajo"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Listo"</string>
@@ -636,14 +641,6 @@
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Establece un PIN para tu espacio privado"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Define contraseña para espacio privado"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Establece patrón para espacio privado"</string>
-    <string name="private_space_gaia_education_title" msgid="3787414895669666563">"Crea una Cuenta de Google para mantener tus datos privados"</string>
-    <string name="private_space_gaia_education_description" msgid="1592753570023264559">"Puedes acceder a una cuenta en la siguiente pantalla para usar con tu espacio privado"</string>
-    <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"Crea una cuenta específica para impedir que aparezcan datos fuera de tu espacio privado, como:"</b></string>
-    <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Fotos, archivos, correos, contactos, eventos de calendario y otros datos sincronizados"</string>
-    <string name="private_space_gaia_education_bullet2" msgid="3679859681253672976">"Historial de descarga de apps y recomendaciones"</string>
-    <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Historial de navegación, favoritos y contraseñas guardadas"</string>
-    <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Contenido sugerido relacionado con tu actividad en apps del espacio privado"</string>
-    <string name="private_space_gaia_education_got_it" msgid="7824029819615566806">"Entendido"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Bloqueo"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Ocultar"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puedes agregar hasta <xliff:g id="COUNT">%d</xliff:g> huellas dactilares"</string>
@@ -854,6 +851,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"¿Quieres reiniciar el dispositivo?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"El registro detallado de NFC está destinado únicamente a fines de desarrollo. Se incluyen datos de NFC adicionales en los informes de errores, que podrían contener información privada. Reinicia el dispositivo para cambiar la configuración."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Reiniciar"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Transmitir"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"duplicar"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Habilitar pantalla inalámbrica"</string>
@@ -1054,6 +1081,7 @@
     <string name="wifi_certificate_summary_system" msgid="6521297326433133669">"Certificado del sistema"</string>
     <string name="wifi_certificate_summary_pinning" msgid="5901067790901727957">"Fijación de certificados"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Detalles de la red"</string>
+    <string name="wep_network_less_secure_warning_title" msgid="2118823633436946728">"Esta red usa un protocolo de seguridad antiguo llamado WEP que es menos seguro"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Máscara de subred"</string>
     <string name="server_name_title" msgid="7257095185810299066">"Nombre del servidor"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"Tipo"</string>
@@ -1266,7 +1294,7 @@
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Después de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"No establecido"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Fondo de pantalla"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Fondo de pantalla y estilo"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Estilo y fondo de pantalla"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Pantalla principal, pantalla de bloqueo"</string>
     <string name="wallpaper_suggestion_title" msgid="3812842717939877330">"Cambiar fondo de pantalla"</string>
     <string name="wallpaper_suggestion_summary" msgid="9077061486716754784">"Personalizar tu pantalla"</string>
@@ -1371,7 +1399,7 @@
     <string name="status_device_wifi_mac_address" msgid="1896121694334176494">"Dirección MAC de Wi-Fi del dispositivo"</string>
     <string name="status_bt_address" msgid="6919660304578476547">"Dirección de Bluetooth"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Número de serie"</string>
-    <string name="status_up_time" msgid="1274778533719495438">"Tiempo de actividad"</string>
+    <string name="status_up_time" msgid="4250719389455342087">"Tiempo de actividad"</string>
     <string name="battery_manufacture_date" msgid="7139426520156833987">"Fecha de fabricación"</string>
     <string name="battery_first_use_date" msgid="3157207331722711317">"Fecha de primer uso"</string>
     <string name="battery_cycle_count" msgid="2912949283386571900">"Conteo de ciclos"</string>
@@ -1550,7 +1578,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth y Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth y Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"No se comparte Internet con otros dispositivos"</string>
-    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Desactivados"</string>
+    <string name="tether_preference_summary_off" msgid="6266799346319794630">"No"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Conexión mediante USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Conexión Bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Conexión Ethernet"</string>
@@ -1603,7 +1631,7 @@
     <string name="about_settings_summary" msgid="4831942939227432513">"Ver información legal, estado, versión de software del tablet"</string>
     <string name="legal_information" msgid="7509900979811934843">"Información legal"</string>
     <string name="manual" msgid="3651593989906084868">"Manual"</string>
-    <string name="regulatory_labels" msgid="5960251403367154270">"Etiquetas reglamentarias"</string>
+    <string name="regulatory_labels" msgid="5960251403367154270">"Etiquetas sobre reglamentaciones"</string>
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Manual sobre reglamentación y seguridad"</string>
     <string name="copyright_title" msgid="83245306827757857">"Derechos de autor"</string>
     <string name="license_title" msgid="8745742085916617540">"Licencia"</string>
@@ -1630,7 +1658,7 @@
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Por motivos de seguridad, establece un PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Configura el PIN para usar la huella"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Vuelve a ingresar tu contraseña"</string>
-    <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Vuelve a ingresar contraseña de trabajo"</string>
+    <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Reingresa tu contraseña de trabajo"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Ingresa tu contraseña de trabajo"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirma el patrón"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Ingresa tu patrón de trabajo"</string>
@@ -1925,6 +1953,12 @@
     <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Toque en la parte inferior derecha"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Más opciones en la esquina inferior derecha del panel táctil"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Velocidad del puntero"</string>
+    <string name="pointer_fill_style" msgid="8413840032931637595">"Estilo de relleno del puntero"</string>
+    <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Cambia el estilo de relleno a negro"</string>
+    <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Cambia el estilo de relleno a verde"</string>
+    <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Cambia estilo de relleno a amarillo"</string>
+    <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Cambia el estilo de relleno a rosa"</string>
+    <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Cambia el estilo de relleno a azul"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Aprende los gestos del panel táctil"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"panel táctil, panel, táctil,mouse, cursor, desplazar, deslizar, hacer clic con el botón derecho, clic, puntero"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"hacer clic con el botón derecho, presionar"</string>
@@ -1968,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Seleccionado por el usuario: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Voz"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Velocidad del puntero"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controlador de juegos"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redireccionar vibración"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Enviar la vibración al controlador de juegos cuando esté conectado"</string>
@@ -2145,7 +2185,7 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Deslizar dos dedos hacia arriba"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Deslizar tres dedos hacia arriba"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="6505512764022389951">"Botón de accesibilidad"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Presiona el botón flotante."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Presiona el botón flotante"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Gesto de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Presiona el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ubicado en la parte inferior de la pantalla. Para cambiar entre funciones, mantén presionado el botón de accesibilidad."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Desliza dos dedos hacia arriba desde la parte inferior de la pantalla.\n\nPara cambiar de función, desliza dos dedos hacia arriba y mantén presionada la pantalla."</string>
@@ -2154,7 +2194,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Más opciones"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Más información sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Configuración rápida"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Desliza hacia abajo desde la parte superior de la pantalla.}other{Desliza hacia abajo con # dedos desde la parte superior de la pantalla.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Desliza hacia abajo desde la parte superior de la pantalla}other{Desliza hacia abajo con # dedos desde la parte superior de la pantalla}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Desliza hacia abajo desde la parte superior de la pantalla. Este acceso directo estará disponible cuando termines de configurar el dispositivo.}other{Desliza hacia abajo con # dedos desde la parte superior de la pantalla. Este acceso directo estará disponible cuando termines de configurar el dispositivo.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Configuración rápida"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Teclas de volumen"</string>
@@ -3319,13 +3359,35 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ninguno}=1{Se estableció 1 programa}other{Se establecieron # programas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No interrumpir"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Modos de prioridad"</string>
+    <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Solo recibe notificaciones de las personas y apps que más te interesan"</string>
+    <!-- no translation found for zen_mode_select_schedule (5135520719771212697) -->
+    <skip />
+    <!-- no translation found for zen_mode_select_schedule_time (1761728920617757652) -->
+    <skip />
+    <!-- no translation found for zen_mode_select_schedule_time_example (3071816060919446355) -->
+    <skip />
+    <!-- no translation found for zen_mode_select_schedule_calendar (4320676795917533667) -->
+    <skip />
+    <!-- no translation found for zen_mode_select_schedule_calendar_example (6549820995975678001) -->
+    <skip />
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitar las interrupciones"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Activar No interrumpir"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Los sonidos multimedia y las alarmas pueden interrumpir"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Programaciones"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Borrar programas"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Borrar"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Editar"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Programas"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Programa"</string>
@@ -3333,6 +3395,9 @@
     <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Agrega un calendario"</string>
     <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Usa tu calendario"</string>
     <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Programa"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Establecer un programa"</string>
+    <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programa"</string>
+    <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programa"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silenciar en ciertos momentos"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Definir reglas de No interrumpir"</string>
@@ -3342,7 +3407,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Habilitar interrupciones con sonido"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloquear alteraciones visuales"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permitir señales visuales"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Notificaciones que puedes recibir"</string>
+    <!-- no translation found for mode_interruption_filter_title (3343846700214702347) -->
+    <skip />
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Acciones adicionales"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Configuración de visualización"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Opciones de visualización"</string>
@@ -3359,6 +3425,10 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"Habilitar el tema oscuro"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Cambia el SO y las apps para preferir el texto claro sobre un fondo oscuro, lo que puede ser más cómodo para los ojos y genera un ahorro de batería significativo en algunos dispositivos."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Sin cambios de visualización}=1{{effect_1}}=2{{effect_1} y {effect_2}}=3{{effect_1}, {effect_2} y {effect_3}}other{{effect_1}, {effect_2} y # más}}"</string>
+    <!-- no translation found for mode_notification_filter_title (443728483176031977) -->
+    <skip />
+    <!-- no translation found for mode_no_notification_filter (7119188047783404890) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opciones de visualización de notificaciones filtradas"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Cuando se activa No interrumpir"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Notificaciones sin sonido"</string>
@@ -3603,9 +3673,12 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Esta app no admite opciones de configuración mejoradas"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Más parámetros de configuración"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Puedes encontrar más parámetros de configuración disponibles dentro de esta app"</string>
-    <string name="notification_polite_title" msgid="3801775758735739286">"Período de inactividad"</string>
-    <string name="notification_polite_main_control_title" msgid="855117131309844580">"Usar período de inactividad"</string>
-    <string name="notification_polite_description" msgid="6414215800132666462">"Cuando recibas muchas notificaciones en un intervalo de tiempo corto, el dispositivo minimizará las interrupciones de sonido y las ventanas emergentes en la pantalla. Las llamadas, alarmas y conversaciones prioritarias seguirán enviando alertas de forma habitual. Además, podrás ver fácilmente todas las notificaciones enviadas en el panel de notificaciones."</string>
+    <!-- no translation found for notification_polite_title (4737150709382859870) -->
+    <skip />
+    <!-- no translation found for notification_polite_main_control_title (7267191551379543859) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (7749280535620291610) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Aplicar a perfiles de trabajo"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Aplicar a apps del perfil de trabajo"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicio de ayuda de RV"</string>
@@ -3761,6 +3834,8 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Apps seleccionadas"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Ninguna"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Todo"</string>
+    <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permitir que las apps anulen No interrumpir"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps que pueden interrumpir"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Seleccionar más apps"</string>
@@ -3797,6 +3872,9 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Cambiar a solo alarmas durante una hora hasta la hora {time}}other{Cambiar a solo alarmas durante # horas hasta la hora {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Cambiar a solo alarmas hasta la(s) <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Cambiar a interrumpir siempre"</string>
+    <string name="zen_mode_action_change_name" msgid="766639614789907016">"Cambiar nombre"</string>
+    <string name="zen_mode_action_change_icon" msgid="6192187791750301778">"Cambiar ícono"</string>
+    <string name="zen_mode_icon_picker_title" msgid="6845490379143557472">"Cambiar ícono"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Advertencia"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Cerrar"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Enviar comentarios sobre el dispositivo"</string>
@@ -4463,7 +4541,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"Cambiar"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"Solo puedes tener 5 servicios activos"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"Desactiva al menos 1 servicio para agregar otro."</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Elige el servicio que prefieras para guardar los datos de acceso y las sugerencias de Autocompletar. Activa servicios adicionales si quieres que también te proporcionen sugerencias."</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"Elige el servicio que prefieras para guardar los datos de acceso y las sugerencias de autocompletar. Activa servicios adicionales si quieres que también te proporcionen sugerencias."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s usa el contenido de tu pantalla para determinar qué se puede autocompletar."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Límite de servicios de contraseñas, llaves de acceso y datos"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"Puedes tener hasta 5 servicios de contraseñas, llaves de acceso y datos activos al mismo tiempo. Desactiva un servicio para agregar otros."</string>
@@ -4780,6 +4858,7 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Izquierdo"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Derecho"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Funda"</string>
+    <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batería"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel de Configuración"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Forzar modo de escritorio"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Fuerza el modo de escritorio experimental en pantallas secundarias."</string>
@@ -4909,7 +4988,7 @@
     <string name="allow_mock_modem" msgid="3832264806530479214">"Permitir módem de prueba"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Permite que este dispositivo ejecute un servicio de módem de prueba para realizar una prueba de instrumentación. No habilites esta opción durante el uso normal del teléfono"</string>
     <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"Inhabilitar protecciones cuando compartes pantalla"</string>
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="5379583403909210858">"Desactiva las protecciones del sistema para apps con contenido sensible para las próximas sesiones en las que se comparta la pantalla"</string>
+    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="5379583403909210858">"Desactiva las protecciones del sistema para apps con contenido sensible en las próximas sesiones donde se comparta la pantalla"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Contenido multimedia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fijar reproductor multimedia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Para reanudar rápidamente la reproducción, el reproductor multimedia permanece abierto en Configuración rápida"</string>
@@ -4989,7 +5068,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Usar fijación de apps"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Usar opciones para desarrolladores"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usar servicio de impresión"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir varios usuarios"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"permitir, varios, usuarios, habilitar, muchos"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"múltiples, usuarios, perfiles, personas, cuentas, cambiar, muchos"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usar depuración inalámbrica"</string>
@@ -5333,4 +5413,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Escuchar reproducción"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Escanea el código QR de una reproducción de audio para escuchar con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"No se puede editar la contraseña mientras se está compartiendo. Para cambiar la contraseña, primero desactiva el uso compartido de audio."</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

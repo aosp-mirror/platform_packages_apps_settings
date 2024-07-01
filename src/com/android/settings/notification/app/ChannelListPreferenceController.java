@@ -59,8 +59,6 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
     private List<NotificationChannelGroup> mChannelGroupList;
     private PreferenceCategory mPreference;
 
-    private boolean mShowAll;
-
     public ChannelListPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
     }
@@ -100,7 +98,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
             @Override
             protected Void doInBackground(Void... unused) {
                 if (notificationHideUnusedChannels()) {
-                    if (mShowAll) {
+                    if (mAppRow.showAllChannels) {
                         mChannelGroupList = mBackend.getGroups(mAppRow.pkg, mAppRow.uid).getList();
                     } else {
                         mChannelGroupList = mBackend.getGroupsWithRecentBlockedFilter(mAppRow.pkg,
@@ -121,10 +119,6 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 updateFullList(mPreference, mChannelGroupList);
             }
         }.execute();
-    }
-
-    protected void setShowAll(boolean showAll) {
-        mShowAll = showAll;
     }
 
     /**

@@ -133,7 +133,7 @@
     <!-- Keywords for bluetooth pairing item [CHAR LIMIT=30] -->
     <string name="keywords_add_bt_device">bluetooth</string>
     <!-- Title for bluetooth auto on toggle [CHAR LIMIT=60] -->
-    <string name="bluetooth_screen_auto_on_title">Automatically turn on again tomorrow</string>
+    <string name="bluetooth_screen_auto_on_title">Automatically turn on tomorrow</string>
 
 
     <!-- Button to help user to pair right ear of the hearing aid device. It will show when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
@@ -156,6 +156,8 @@
     <string name="bluetooth_hearing_device_settings_summary">Shortcut, hearing aid compatibility</string>
     <!-- Connected devices settings. Title for hearing aids presets. A preset is a set of hearing aid settings. User can apply different settings in different environments (e.g. Outdoor, Restaurant, Home) [CHAR LIMIT=60] [BACKUP_MESSAGE_ID=5429761844739722885] -->
     <string name="bluetooth_hearing_aids_presets">Preset</string>
+    <!-- Connected devices settings. Summary of the preference when no preset info is obtained from the remote device [CHAR LIMIT=60] -->
+    <string name="bluetooth_hearing_aids_presets_empty_list_message">There are no presets programmed by your audiologist</string>
     <!-- Message when selecting hearing aids presets failed. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_hearing_aids_presets_error">Couldn\u2019t update preset</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
@@ -732,7 +734,7 @@
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_face_enroll_introduction_no_thanks">No thanks</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks">Not now</string>
     <!-- Button text to start enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_face_enroll_introduction_agree">I agree</string>
     <!-- Button text to scroll to the end of a scrollview. [CHAR LIMIT=30] -->
@@ -861,7 +863,7 @@
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks">No thanks</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks">Not now</string>
     <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
     <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
@@ -995,7 +997,7 @@
 
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
-    <string name="security_settings_biometric_preference_title">Fingerprint &amp; Face Unlock</string>
+    <string name="security_settings_biometric_preference_title">Face &amp; Fingerprint Unlock</string>
     <!-- Title shown for work menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_work_biometric_preference_title">Face &amp; Fingerprint Unlock for work</string>
     <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
@@ -1282,8 +1284,6 @@
     <string name="private_space_auto_lock_after_inactivity">5 minutes after screen timeout</string>
     <!-- Configure auto lock: Value for auto lock configuration to lock private space only after device restarts. [CHAR LIMIT=40] -->
     <string name="private_space_auto_lock_after_device_restart">Only after device restarts</string>
-    <!-- Note in footer of private space auto lock settings page that using privae apps may need a lock verification when a separate lock is used for private space. [CHAR LIMIT=NONE] -->
-    <string name="private_space_auto_lock_footer_message">If you use a different lock for your private space, you may need to verify it\u2019s you to open apps in your private space.</string>
     <!-- Title for the settings page for hiding private space. [CHAR LIMIT=45] -->
     <string name="private_space_hide_page_title">Hide private space</string>
     <!-- Title for the settings preference for hiding private space when it's locked. [CHAR LIMIT=60] -->
@@ -1345,15 +1345,21 @@
     <!-- Summary for the private space setup education screen. [CHAR LIMIT=NONE] -->
     <string name="private_space_hide_apps_summary">Hide or lock private apps in a separate space. Use a dedicated Google Account for extra security.</string>
     <!-- Text shown in private space setup screen which explains how the private space works [CHAR LIMIT=50] -->
-    <string name="private_space_setup_sub_header">Set up your private space</string>
+    <string name="private_space_setup_sub_header">How it works</string>
     <!-- Text shown in private space setup screen which explains private space can be accessed from bottom of all apps list. [CHAR LIMIT=NONE] -->
-    <string name="private_space_separate_account_text"><b>Choose a Google Account for your space</b>\nUsing a dedicated account helps to stop synced files, photos, and emails appearing outside your space</string>
+    <string name="private_space_separate_account_text"><b>Create a Google Account for your space</b>\nIf you use a dedicated account, it helps to stop synced files, photos, and emails appearing outside your space</string>
     <!-- Text shown in private space setup screen which explains private space apps are protected by a lock. [CHAR LIMIT=NONE] -->
     <string name="private_space_protected_lock_text"><b>Set a lock</b>\nLock your space to stop other people opening it</string>
     <!-- Text shown in private space setup screen which explains notifications from private space apps will not be shown when private space is locked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_install_apps_text"><b>Install apps</b>\nYour private space has its own Play Store so you can install apps easily.</string>
+    <string name="private_space_install_apps_text"><b>Install apps</b>\nInstall apps that you want to keep private in your space</string>
+    <!-- Category name "Keep in mind" [CHAR_LIMIT=40] -->
+    <string name="private_space_keep_in_mind_text">Keep in mind</string>
+    <!-- Text shown in private space setup screen which explains  that apps in private space are stopped when private space is locked. [CHAR LIMIT=NONE] -->
+    <string name="private_space_apps_stopped_text"><b>Apps stop when you lock your space</b>\nWhen you lock your space, apps in your space are stopped and you won\u2019t receive notifications from them</string>
     <!-- This is info text to help explain in private space setup screen that the permissions granted to private space apps will not be shown in settings when private space is locked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be restored to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs malicious apps on your device may be able to access your private space.</string>
+    <string name="private_space_apps_permission_text">Private spaces are not suitable for apps that need to run in the background or send critical notifications, such as medical apps. This is because notifications and background activity are stopped when your space is locked.\n\nApps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be moved to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs harmful apps on your device may be able to access your private space.</string>
+    <!-- This is footer text in private space settings page to help explain that when private space is locked the apps are stopped, the permissions granted to private space apps will not be shown in settings. [CHAR LIMIT=NONE] -->
+    <string name="private_space_settings_footer_text">Private spaces are not suitable for apps that need to run in the background or send critical notifications, such as medical apps. This is because notifications and background activity are stopped when your space is locked.\n\nApps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when private space is locked.\n\nYour private space can\'t be restored to a new device. You\u2019ll need to set up another space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs malicious apps on your device may be able to access your private space.</string>
     <!-- Private space footer link content description [CHAR LIMIT=40] -->
     <string name="private_space_learn_more_text">Learn more about private space</string>
     <string name="private_space_learn_more_url" translatable="false">https://support.google.com/android?p=private_space</string>
@@ -1374,7 +1380,7 @@
     <!-- Label for private space lock setup button to choose a new lock. [CHAR LIMIT=50] -->
     <string name="private_space_set_lock_label">Choose new lock</string>
     <!-- Title for private space setup pre completion screen to add a delay. [CHAR LIMIT=30] -->
-    <string name="private_space_pre_finish_title">Just a sec\u2026</string>
+    <string name="private_space_wait_screen_title">Just a sec\u2026</string>
     <!-- Title for private space setup success screen. [CHAR LIMIT=30] -->
     <string name="private_space_success_title">All set!</string>
     <!-- Summary for the private space setup success screen. [CHAR LIMIT=NONE] -->
@@ -1401,22 +1407,6 @@
     <string name="private_space_choose_your_password_header">Set a password for your private space</string>
     <!-- Header for private space choose your pattern screen [CHAR LIMIT=40] -->
     <string name="private_space_choose_your_pattern_header">Set a pattern for your private space</string>
-    <!-- Title for private space GAIA education screen [CHAR LIMIT=90] -->
-    <string name="private_space_gaia_education_title">Create a Google Account to help keep your data private</string>
-    <!-- Description for private space GAIA education screen [CHAR LIMIT=120] -->
-    <string name="private_space_gaia_education_description">On the next screen you can sign in to an account to use with your private space</string>
-    <!-- Sub header for private space GAIA education screen [CHAR LIMIT=120] -->
-    <string name="private_space_gaia_education_header"><b>Create a dedicated account to help stop data appearing outside private space, such as:</b></string>
-    <!-- Text for private space GAIA education screen [CHAR LIMIT=90] -->
-    <string name="private_space_gaia_education_bullet1">Synced photos, files, emails, contacts, calendar events, and other data</string>
-    <!-- Text for private space GAIA education screen [CHAR LIMIT=60] -->
-    <string name="private_space_gaia_education_bullet2">App download history and recommendations</string>
-    <!-- Text for private space GAIA education screen [CHAR LIMIT=60] -->
-    <string name="private_space_gaia_education_bullet3">Browsing history, bookmarks, and saved passwords</string>
-    <!-- Text for private space GAIA education screen [CHAR LIMIT=90] -->
-    <string name="private_space_gaia_education_bullet4">Suggested content related to your activity in private space apps</string>
-    <!-- Text for button in private space GAIA education screen to start login [CHAR LIMIT=20] -->
-    <string name="private_space_gaia_education_got_it">Got it</string>
     <!-- The title of the category for settings related to the private space lock  [CHAR LIMIT=20] -->
     <string name="private_space_category_lock">Lock</string>
     <!-- The title of the category for settings related to hiding the private space  [CHAR LIMIT=20] -->
@@ -1905,6 +1895,37 @@
     <!-- Nfc developer settings: The confirm button of the popup dialog. [CHAR_LIMIT=60] -->
     <string name="nfc_reboot_dialog_confirm">Restart</string>
 
+    <!-- External Display settings. The keywords for searching. [CHAR LIMIT=40] -->
+    <string name="keywords_external_display">mirror, external display, connected display, usb display, resolution, rotation</string>
+    <!-- External Display settings. When external display is enabled. [CHAR LIMIT=40] -->
+    <string name="external_display_on">On</string>
+    <!-- External Display settings. When external display is disabled. [CHAR LIMIT=40] -->
+    <string name="external_display_off">Off</string>
+    <!-- External Display settings. The title of the screen. [CHAR LIMIT=40] -->
+    <string name="external_display_settings_title">External Display</string>
+    <!-- External Display use. The title of the use preference. [CHAR LIMIT=40] -->
+    <string name="external_display_use_title">Use external display</string>
+    <!-- External Display resolution settings. The title of the screen. [CHAR LIMIT=40] -->
+    <string name="external_display_resolution_settings_title">Display resolution</string>
+    <!-- External Display settings. Text that appears when scanning for devices is finished and no nearby device was found [CHAR LIMIT=40]-->
+    <string name="external_display_not_found">External display is disconnected</string>
+    <!-- External Display settings. Rotation of the external display -->
+    <string name="external_display_rotation">Rotation</string>
+    <!-- External Display settings. Standard rotation of the external display -->
+    <string name="external_display_standard_rotation">Standard</string>
+    <!-- External Display settings. 90 rotation of the external display -->
+    <string name="external_display_rotation_90">90°</string>
+    <!-- External Display settings. 180 rotation of the external display -->
+    <string name="external_display_rotation_180">180°</string>
+    <!-- External Display settings. 180 rotation of the external display -->
+    <string name="external_display_rotation_270">270°</string>
+    <!-- External Display settings. Footer title -->
+    <string name="external_display_change_resolution_footer_title">Changing rotation or resolution may stop any apps that are currently running</string>
+    <!-- External Display settings. No Displays footer title -->
+    <string name="external_display_not_found_footer_title">Your device must be connected to an external display to mirror your screen</string>
+    <!-- External Display settings. More resolution options -->
+    <string name="external_display_more_options_title">More options</string>
+
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
     <!-- Wifi Display settings. The keywords of the setting. [CHAR LIMIT=NONE] -->
@@ -2360,6 +2381,8 @@
     <!-- Wifi Network Details -->
     <!-- Wifi details title-->
     <string name="wifi_details_title">Network details</string>
+    <!-- WEP network less secure warning title -->
+    <string name="wep_network_less_secure_warning_title">This network uses an older security protocol called WEP, which is less secure</string>
     <!-- Wifi details preference title to display router IP subnet mask -->
     <string name="wifi_details_subnet_mask">Subnet mask</string>
     <!-- Server name title-->
@@ -2763,6 +2786,9 @@
     <string name="brightness">Brightness level</string>
     <!-- Sound & display settings screen, setting option name to enable adaptive brightness [CHAR LIMIT=30] -->
     <string name="auto_brightness_title">Adaptive brightness</string>
+    <!-- Note: The content description title is only applied in adaptive brightness detailed page in setup wizard flow, to make the consistency with other accessibility suw pages. -->
+    <!-- ContentDescription title for adaptive brightness detailed page footer. [CHAR LIMIT=60] -->
+    <string name="auto_brightness_content_description_title">About adaptive brightness</string>
     <!-- Description about the feature adaptive brightness -->
     <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
     <!-- Setting option summary when adaptive brightness is on [CHAR LIMIT=NONE] -->
@@ -4466,6 +4492,18 @@
     <string name="trackpad_bottom_right_tap_summary">Tap the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
     <string name="trackpad_pointer_speed">Pointer speed</string>
+    <!-- Title text for mouse pointer fill style. [CHAR LIMIT=35] -->
+    <string name="pointer_fill_style">Pointer fill style</string>
+    <!-- Content description for black pointer fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_black_button">Change pointer fill style to black</string>
+    <!-- Content description for green pointer fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_green_button">Change pointer fill style to green</string>
+    <!-- Content description for yellow pointer fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_yellow_button">Change pointer fill style to yellow</string>
+    <!-- Content description for pink pointer fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_pink_button">Change pointer fill style to pink</string>
+    <!-- Content description for blue pointer fill style. [CHAR LIMIT=60] -->
+    <string name="pointer_fill_style_blue_button">Change pointer fill style to blue</string>
     <!-- Title for the button to trigger the 'touch gesture' education. [CHAR LIMIT=35] -->
     <string name="trackpad_touch_gesture">Learn touchpad gestures</string>
     <!-- Search keywords for "touchpad" -->
@@ -4569,6 +4607,12 @@
 
     <!-- On Languages & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
     <string name="pointer_speed">Pointer speed</string>
+    <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale">Pointer scale</string>
+    <!-- Content description for decreasing pointer scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale_decrease_content_description">Decrease pointer scale</string>
+    <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
+    <string name="pointer_scale_increase_content_description">Increase pointer scale</string>
 
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to game controller devices. [CHAR LIMIT=40] -->
     <string name="game_controller_settings_category">Game Controller</string>
@@ -4839,8 +4883,10 @@
     <string name="accessibility_magnification_triple_tap_warning_negative_button">Cancel</string>
     <!-- Title for the accessibility preference screen to enable screen magnification settings. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_service_settings_title">Magnification settings</string>
-    <!-- Title for accessibility magnification preference where user can move the magnification area by dragging one finger instead of two. [CHAR LIMIT=60] -->
-    <string name="accessibility_magnification_one_finger_panning_title">One-finger panning</string>
+    <!-- Title for accessibility magnification preference where user can move the magnification area by dragging one finger. [CHAR LIMIT=60] -->
+    <string name="accessibility_magnification_one_finger_panning_title">Move magnifier with 1 finger</string>
+    <!-- Summary for accessibility magnification one finger panning feature where user can move the magnification area by dragging one finger. [CHAR LIMIT=60] -->
+    <string name="accessibility_magnification_one_finger_panning_summary">Drag 1 finger to move around the screen</string>
     <!-- Summary for accessibility magnification preference when one finger panning feature is turned on.
          The feature when enabled allows user to move the magnification area by dragging one finger instead of two. [CHAR LIMIT=60] -->
     <string name="accessibility_magnification_one_finger_panning_summary_on">Move the magnification area by dragging one finger.</string>
@@ -4902,6 +4948,30 @@
         {2,number,integer}. Touch & hold anywhere on the screen<br/>
         {3,number,integer}. Drag finger to move around screen<br/>
         {4,number,integer}. Lift finger to stop magnification
+        ]]>
+    </string>
+    <!-- Instructions on the accessibility preference screen teaching the user how to interact with screen magnification when one finger panning feature is turned off. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off">
+        <![CDATA[
+        <b>To zoom in:</b><br/>
+        {0,number,integer}. Use shortcut to start magnification<br/>
+        {1,number,integer}. Tap the screen<br/>
+        {2,number,integer}. Drag 2 fingers to move around the screen<br/>
+        {3,number,integer}. Pinch with 2 fingers to adjust zoom<br/>
+        {4,number,integer}. Use shortcut to stop magnification<br/><br/>
+        You can also zoom in temporarily and more.
+        ]]>
+    </string>
+    <!-- Instructions on the accessibility preference screen teaching the user how to interact with screen magnification when one finger panning feature is turned on. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on">
+        <![CDATA[
+        <b>To zoom in:</b><br/>
+        {0,number,integer}. Use shortcut to start magnification<br/>
+        {1,number,integer}. Tap the screen<br/>
+        {2,number,integer}. Drag 1 or 2 fingers to move around the screen<br/>
+        {3,number,integer}. Pinch with 2 fingers to adjust zoom<br/>
+        {4,number,integer}. Use shortcut to stop magnification<br/><br/>
+        You can also zoom in temporarily and more.
         ]]>
     </string>
     <!-- Summary for the accessibility preference screen to enable screen magnification via the nav bar. [CHAR LIMIT=none] -->
@@ -7266,6 +7336,8 @@
     <string name="help_url_install_certificate" translatable="false"></string>
     <!-- Help URL, Tap & pay [DO NOT TRANSLATE] -->
     <string name="help_url_nfc_payment" translatable="false"></string>
+    <!-- Help URL, External display [DO NOT TRANSLATE] -->
+    <string name="help_url_external_display" translatable="false"></string>
     <!-- Help URL, Remote display [DO NOT TRANSLATE] -->
     <string name="help_url_remote_display" translatable="false"></string>
     <!-- Help URL, Face [DO NOT TRANSLATE] -->
@@ -7904,7 +7976,7 @@
     <!-- Sound: Footer hyperlink text to launch the Connected devices settings page. [CHAR LIMIT=NONE]-->
     <string name="spatial_audio_footer_learn_more_text">Connected devices settings</string>
 
-    <!-- Sound: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
+    <!-- Zen Modes: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_schedules_summary">
         {count, plural,
             =0    {None}
@@ -7913,14 +7985,42 @@
         }
     </string>
 
-    <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
+    <!-- Zen Modes: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
-    <!-- Sound: Title for the Modes option and associated settings page. [CHAR LIMIT=50]-->
+    <!-- Zen Modes: Title for the Modes option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_modes_list_title">Priority Modes</string>
 
-    <!-- Sound: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
+    <!-- Zen Modes: Caption of the "add a mode" item in the modes list -->
+    <string name="zen_modes_add_mode">Add a mode</string>
+
+    <!-- Zen Modes: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
     <string name="zen_mode_settings_summary">Only get notified by important people and apps</string>
+
+    <!-- Zen Modes: Option to add an automatic schedule for a mode. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_select_schedule">Select activation type</string>
+
+    <!-- Priority Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_select_schedule_time">Time</string>
+    <!-- Priority Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
+    <string name="zen_mode_select_schedule_time_example">Ex. \"9:30 – 5:00 PM\"</string>
+
+    <!-- Priority Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_select_schedule_calendar">Calendar</string>
+    <!-- Priority Modes: Example text for the option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=60] -->
+    <string name="zen_mode_select_schedule_calendar_example">Ex. \"Personal calendar\"</string>
+
+    <!-- Priority Modes: Short text that indicates that a mode is currently on (active). [CHAR_LIMIT=10] -->
+    <string name="zen_mode_active_text">ON</string>
+
+    <!-- Priority Modes: Format string for the "current state + trigger description summary for rules in the list. [CHAR_LIMIT=10] -->
+    <string name="zen_mode_format_status_and_trigger" translatable="false"><xliff:g id="current_status" example="ON">%1$s</xliff:g> • <xliff:g id="trigger_description" example="Mon-Fri, 23:00-7:00">%2$s</xliff:g></string>
+
+    <!-- Priority Modes: Indicates that a mode is disabled and needs to be configured. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_disabled_needs_setup">Not set</string>
+
+    <!-- Priority Modes: Indicates that a mode is disabled by the user. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_disabled_by_user">Disabled</string>
 
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
@@ -7937,8 +8037,14 @@
     <!--  Do not disturb: Title for dialog that allows users to delete DND rules/schedules[CHAR LIMIT=40] -->
     <string name="zen_mode_delete_automatic_rules">Delete schedules</string>
 
-    <!--  Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
+    <!-- Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_delete">Delete</string>
+
+    <!-- Do not disturb: Menu option for deleting a mode on its configuration page [CHAR LIMIT=40] -->
+    <string name="zen_mode_menu_delete_mode">Delete mode</string>
+
+    <!-- Do not disturb: Confirmation dialog asking the user whether they would like to delete the named mode [CHAR LIMIT: 40] -->
+    <string name="zen_mode_delete_mode_confirmation">Delete \"<xliff:g id="mode" example="My Schedule">%1$s</xliff:g>\" mode?</string>
 
     <!--  Do not disturb: Edit label for button that allows user to edit the dnd schedule name. [CHAR LIMIT=30] -->
     <string name="zen_mode_rule_name_edit">Edit</string>
@@ -7960,6 +8066,15 @@
 
     <!-- Do not disturb: Title on the page where users choose a calendar to determine the schedule for an automatically-triggered DND rule. [CHAR LIMIT=30] -->
     <string name="zen_mode_set_calendar_category_title">Schedule</string>
+
+    <!-- Do not disturb: Title prompting a user to set a time-based schedule to use for an automatic rule [CHAR LIMIT=30] -->
+    <string name="zen_mode_set_schedule_title">Set a schedule</string>
+
+    <!-- Do not disturb: Link text prompting a user to click through to setting a time-based schedule [CHAR LIMIT=40] -->
+    <string name="zen_mode_set_schedule_link">Schedule</string>
+
+    <!-- Duration in hours and minutes for the length of a Do Not Disturb schedule. For example "1 hr, 22 min" -->
+    <string name="zen_mode_schedule_duration"><xliff:g example="10" id="hours">%1$d</xliff:g> hr, <xliff:g example="20" id="minutes">%2$d</xliff:g> min</string>
 
     <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_category_title">Schedule</string>
@@ -7989,7 +8104,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
     <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
-    <string name="mode_interruption_filter_title">Notifications that can reach you</string>
+    <string name="mode_interruption_filter_title">Stay focused</string>
     <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_device_effects_title">Additional actions</string>
 
@@ -8033,7 +8148,10 @@
         other {{effect_1}, {effect_2}, and # more}
         }
     </string>
-
+    <!-- Modes: setting for whether the mode should filter (silence/hide) notifications/volume streams -->
+    <string name="mode_notification_filter_title">Filter interruptions</string>
+    <!-- Modes: subtext when a mode is not filtering (silence/hide) notifications/volume streams -->
+    <string name="mode_no_notification_filter">No interruptions are filtered</string>
 
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for filtered
@@ -8720,10 +8838,10 @@
     <string name="notif_listener_more_settings">More settings</string>
     <string name="notif_listener_more_settings_desc">More settings are available inside this app</string>
 
-    <!-- Title for Polite Notifications setting  [CHAR LIMIT=30]-->
-    <string name="notification_polite_title">Cooldown</string>
-    <string name="notification_polite_main_control_title">Use Cooldown</string>
-    <string name="notification_polite_description">When you get many notifications within a short time span, your device will minimize sound interruptions and pop-ups on the screen. Calls, alarms, and priority conversations will still alert as notmal, and all delivered notifications are easy to find in the Shade.</string>
+    <!-- Title for Polite Notifications setting  [CHAR LIMIT=45]-->
+    <string name="notification_polite_title">Adaptive Notifications</string>
+    <string name="notification_polite_main_control_title">Use adaptive notifications</string>
+    <string name="notification_polite_description">When you get many notifications within a short time, your phone will lower volume and minimize pop-ups on screen for up to two minutes. Calls, alarms, and priority conversations still vibrate, make a sound, or show up on the screen, and all notifications are easy to find when you pull down from the top of the screen.</string>
     <string name="notification_polite_work">Apply to work profiles</string>
     <string name="notification_polite_work_summary">Apply to work profile apps</string>
 
@@ -8892,6 +9010,9 @@
 
     <!-- [CHAR LIMIT=NONE] App notification settings: no channels -->
     <string name="no_channels">This app has not posted any notifications</string>
+
+    <!-- [CHAR LIMIT=NONE] App notification settings: has channels, but hasn't sent notifications recently -->
+    <string name="no_recent_channels">Show unused categories</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: link to app notification settings-->
     <string name="app_settings_link">Additional settings in the app</string>
@@ -9200,6 +9321,16 @@
     <string name="zen_mode_apps_none_apps">None</string>
     <!-- [CHAR LIMIT=60] Zen mode settings: all apps will be able to bypass dnd -->
     <string name="zen_mode_apps_all_apps">All</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Lists apps that can bypass DND. For example, "Nest, Messages, and 2 more can interrupt". -->
+    <string name="zen_mode_apps_subtext">
+        {count, plural, offset:2
+            =0    {No apps can interrupt}
+            =1    {{app_1} can interrupt}
+            =2    {{app_1} and {app_2} can interrupt}
+            =3    {{app_1}, {app_2}, and {app_3} can interrupt}
+            other {{app_1}, {app_2}, and # more can interrupt}
+        }
+    </string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
@@ -9300,6 +9431,15 @@
     <string name="zen_mode_summary_alarms_only_by_time">Change to alarms only until <xliff:g id="formattedTime" example="10:00 PM">%1$s</xliff:g></string>
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
     <string name="zen_mode_summary_always">Change to always interrupt</string>
+
+    <!-- [CHAR LIMIT=20] Caption of the action button to change the name of a mode. -->
+    <string name="zen_mode_action_change_name">Rename</string>
+
+    <!-- [CHAR LIMIT=20] Caption of the action button to change the icon of a mode. -->
+    <string name="zen_mode_action_change_icon">Change icon</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Title for the "choose mode icon" screen -->
+    <string name="zen_mode_icon_picker_title">Change icon</string>
 
     <!-- Content description for help icon button [CHAR LIMIT=20] -->
     <string name="warning_button_text">Warning</string>
@@ -12052,6 +12192,8 @@
     <string name="bluetooth_right_name">Right</string>
     <!-- Title for middle bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_middle_name">Case</string>
+    <!-- Content description for battery icon in bluetooth header. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_header_battery_content_description">Battery</string>
 
     <!-- Default title for the settings panel [CHAR LIMIT=NONE] -->
     <string name="settings_panel_title">Settings Panel</string>
@@ -12241,7 +12383,7 @@
     <!-- Toast on failure to reformat data to ext4 -->
     <string name="format_ext4_failure_toast">Failed to reformat and wipe the data partition to ext4.</string>
     <!-- Dialog to OEM unlock the device before using 16K developer option -->
-    <string name="confirm_oem_unlock_for_16k_title">Bootloader Unlock Required for 16KB Mode</string>
+    <string name="confirm_oem_unlock_for_16k_title">Bootloader Unlock Required</string>
     <string name="confirm_oem_unlock_for_16k_text">This device needs to have the bootloader unlocked before using the 16KB developer option.
         Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk.
         All user data and settings will be wiped when activating 16KB mode. Once the bootloader is unlocked, activating the 16KB option will require two reboots.
@@ -12270,10 +12412,10 @@
     <!-- persistent notification 16k page agnostic mode text -->
     <string name="page_agnostic_16k_pages_text_short">You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
         and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
-        In order to re-enter the production mode, you must, switch back to 4K mode and then lock the bootloader of the device. Tap to read more.</string>
+        In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. Tap to read more.</string>
     <string name="page_agnostic_16k_pages_text">You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode,
         and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work.
-        In order to re-enter the production mode, you must, switch back to 4K mode and then lock the bootloader of the device. This would factory reset the device again and
+        In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. This would factory reset the device again and
         restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options.
         If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from
         &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;
@@ -12592,7 +12734,7 @@
     <string name="default_print_service_main_switch_title">Use print service</string>
 
     <!-- Title for multiple users main switch. [CHAR LIMIT=50] -->
-    <string name="multiple_users_main_switch_title">Allow multiple users</string>
+    <string name="multiple_users_main_switch_title">Allow user switch</string>
     <!-- Search keywords for the "Allow Multiple Users" section in Multiple Users Screen. [CHAR LIMIT=NONE] -->
     <string name="multiple_users_main_switch_keywords">allow, multiple, user, permit, many</string>
     <!-- Search keywords for the Users Screen. [CHAR LIMIT=NONE] -->
@@ -13553,4 +13695,7 @@
 
     <!-- url for learning more about bluetooth audio sharing -->
     <string name="help_url_audio_sharing" translatable="false"></string>
+
+    <!-- Text for Search bar of Settings home screen [CHAR LIMIT=34] -->
+    <string name="homepage_search">Search Settings</string>
 </resources>

@@ -71,7 +71,8 @@ public class AudioStreamsHelper {
      *
      * @param source The LE broadcast metadata representing the audio source.
      */
-    void addSource(BluetoothLeBroadcastMetadata source) {
+    @VisibleForTesting
+    public void addSource(BluetoothLeBroadcastMetadata source) {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "addSource(): LeBroadcastAssistant is null!");
             return;
@@ -97,7 +98,8 @@ public class AudioStreamsHelper {
     }
 
     /** Removes sources from LE broadcasts associated for all active sinks based on broadcast Id. */
-    void removeSource(int broadcastId) {
+    @VisibleForTesting
+    public void removeSource(int broadcastId) {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "removeSource(): LeBroadcastAssistant is null!");
             return;
@@ -139,8 +141,10 @@ public class AudioStreamsHelper {
                 .toList();
     }
 
+    /** Retrieves LocalBluetoothLeBroadcastAssistant. */
+    @VisibleForTesting
     @Nullable
-    LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
+    public LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
         return mLeBroadcastAssistant;
     }
 
