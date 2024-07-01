@@ -16,21 +16,25 @@
 
 package com.android.settings.notification.modes;
 
-import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.service.notification.ZenPolicy.STATE_ALLOW;
 import static android.service.notification.ZenPolicy.STATE_UNSET;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
+
 import androidx.preference.TwoStatePreference;
+
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -61,12 +65,9 @@ public final class ZenModeOtherPreferenceControllerTest {
     @Test
     public void testUpdateState_alarms() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(true).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowAlarms(true).build())
+                .build();
 
         ZenModeOtherPreferenceController controller =
                 new ZenModeOtherPreferenceController(mContext, "modes_category_alarm", mBackend);
@@ -79,12 +80,9 @@ public final class ZenModeOtherPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_alarms() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(false).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowAlarms(false).build())
+                .build();
 
         ZenModeOtherPreferenceController controller =
                 new ZenModeOtherPreferenceController(mContext, "modes_category_alarm", mBackend);
@@ -104,12 +102,9 @@ public final class ZenModeOtherPreferenceControllerTest {
     @Test
     public void testUpdateState_media() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowMedia(true).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowMedia(true).build())
+                .build();
 
         ZenModeOtherPreferenceController controller =
                 new ZenModeOtherPreferenceController(mContext, "modes_category_media", mBackend);
@@ -122,12 +117,9 @@ public final class ZenModeOtherPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_media() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowMedia(false).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowMedia(false).build())
+                .build();
 
         ZenModeOtherPreferenceController controller =
                 new ZenModeOtherPreferenceController(mContext, "modes_category_media", mBackend);
@@ -147,12 +139,9 @@ public final class ZenModeOtherPreferenceControllerTest {
     @Test
     public void testUpdateState_system() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowSystem(true).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowSystem(true).build())
+                .build();
 
         ZenModeOtherPreferenceController controller =
                 new ZenModeOtherPreferenceController(mContext, "modes_category_system", mBackend);
@@ -165,12 +154,9 @@ public final class ZenModeOtherPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_system() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowSystem(false).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowSystem(false).build())
+                .build();
 
         ZenModeOtherPreferenceController controller =
                 new ZenModeOtherPreferenceController(mContext, "modes_category_system", mBackend);
@@ -190,12 +176,9 @@ public final class ZenModeOtherPreferenceControllerTest {
     @Test
     public void testUpdateState_reminders() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowReminders(true).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowReminders(true).build())
+                .build();
 
         ZenModeOtherPreferenceController controller =
                 new ZenModeOtherPreferenceController(mContext, "modes_category_reminders",
@@ -209,12 +192,9 @@ public final class ZenModeOtherPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_reminders() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowReminders(false).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowReminders(false).build())
+                .build();
 
         ZenModeOtherPreferenceController controller =
                 new ZenModeOtherPreferenceController(mContext, "modes_category_reminders",
@@ -235,12 +215,9 @@ public final class ZenModeOtherPreferenceControllerTest {
     @Test
     public void testUpdateState_events() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowEvents(true).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowEvents(true).build())
+                .build();
 
         ZenModeOtherPreferenceController controller =
                 new ZenModeOtherPreferenceController(mContext, "modes_category_events", mBackend);
@@ -253,12 +230,9 @@ public final class ZenModeOtherPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_events() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowEvents(false).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowEvents(false).build())
+                .build();
 
         ZenModeOtherPreferenceController controller =
                 new ZenModeOtherPreferenceController(mContext, "modes_category_events", mBackend);

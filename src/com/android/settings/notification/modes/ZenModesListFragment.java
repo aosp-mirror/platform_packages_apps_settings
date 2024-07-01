@@ -29,14 +29,17 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
+import com.google.common.collect.ImmutableList;
+
 import java.util.List;
 
 @SearchIndexable
 public class ZenModesListFragment extends ZenModesFragmentBase {
-    protected final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
+
+    private static final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
@@ -50,13 +53,11 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
         // We need to redefine ZenModesBackend here even though mBackend exists so that this method
         // can be static; it must be static to be able to be used in SEARCH_INDEX_DATA_PROVIDER.
         ZenModesBackend backend = ZenModesBackend.getInstance(context);
-        List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModesListPreferenceController(
-                context, parent, backend));
 
-        // TODO: b/326442408 - Add controller for "Add Mode" preference/flow, which is what uses
-        //                     the ZenServiceListing.
-        return controllers;
+        return ImmutableList.of(
+                new ZenModesListPreferenceController(context, parent, backend),
+                new ZenModesListAddModePreferenceController(context, backend, serviceListing)
+        );
     }
 
     @Override
@@ -77,7 +78,7 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
         return SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION;
     }
 
-    protected static ManagedServiceSettings.Config getConditionProviderConfig() {
+    private static ManagedServiceSettings.Config getConditionProviderConfig() {
         return new ManagedServiceSettings.Config.Builder()
                 .setTag(TAG)
                 .setIntentAction(ConditionProviderService.SERVICE_INTERFACE)
@@ -86,8 +87,6 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
                 .setNoun("condition provider")
                 .build();
     }
-
-    // TODO: b/322373473 - Add 3-dot options menu with capability to delete modes.
 
     /**
      * For Search.

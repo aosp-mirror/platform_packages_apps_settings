@@ -45,6 +45,7 @@ import android.view.accessibility.AccessibilityManager.TouchExplorationStateChan
 import android.widget.CheckBox;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreferenceCompat;
@@ -90,6 +91,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private CheckBox mTripleTapTypeCheckBox;
     @Nullable private CheckBox mTwoFingerTripleTapTypeCheckBox;
     private DialogCreatable mDialogDelegate;
+
+    @Nullable
+    MagnificationOneFingerPanningPreferenceController mOneFingerPanningPreferenceController;
 
     private boolean mInSetupWizard;
 
@@ -236,7 +240,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                     context.getString(R.string.accessibility_screen_magnification_intro_text));
         }
 
-        if (!arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION)) {
+        if (!arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION)
+                && !Flags.enableMagnificationOneFingerPanningGesture()) {
             String summary = MessageFormat.format(
                     context.getString(R.string.accessibility_screen_magnification_summary),
                             new Object[]{1, 2, 3, 4, 5});
@@ -308,12 +313,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 MagnificationOneFingerPanningPreferenceController.PREF_KEY);
         generalCategory.addPreference(oneFingerPanningPreference);
 
-        var oneFingerPanningPreferenceController =
+        mOneFingerPanningPreferenceController =
                 new MagnificationOneFingerPanningPreferenceController(getContext());
-        oneFingerPanningPreferenceController.setInSetupWizard(mInSetupWizard);
-        getSettingsLifecycle().addObserver(oneFingerPanningPreferenceController);
-        oneFingerPanningPreferenceController.displayPreference(getPreferenceScreen());
-        addPreferenceController(oneFingerPanningPreferenceController);
+        mOneFingerPanningPreferenceController.setInSetupWizard(mInSetupWizard);
+        getSettingsLifecycle().addObserver(mOneFingerPanningPreferenceController);
+        mOneFingerPanningPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(mOneFingerPanningPreferenceController);
     }
 
     private void addJoystickSetting(PreferenceCategory generalCategory) {
@@ -471,6 +476,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         );
         contentObserver.registerKeysToObserverCallback(keysToObserve,
                 key -> updatePreferencesState());
+
+        if (Flags.enableMagnificationOneFingerPanningGesture()) {
+            contentObserver.registerKeysToObserverCallback(
+                    List.of(Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED),
+                    key -> updateHtmlTextPreference());
+        }
     }
 
     private void updatePreferencesState() {
@@ -478,6 +489,25 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         getPreferenceControllers().forEach(controllers::addAll);
         controllers.forEach(controller -> controller.updateState(
                 findPreference(controller.getPreferenceKey())));
+    }
+
+    @Override
+    CharSequence getCurrentHtmlDescription() {
+        CharSequence origin = super.getCurrentHtmlDescription();
+        if (!TextUtils.isEmpty(origin)) {
+            // If in ToggleFeaturePreferenceFragment we already have a fixed html description, we
+            // should use the fixed one, otherwise we'll dynamically decide the description.
+            return origin;
+        }
+
+        Context context = getContext();
+        if (mOneFingerPanningPreferenceController != null && context != null) {
+            @StringRes int resId = mOneFingerPanningPreferenceController.isChecked()
+                    ? R.string.accessibility_screen_magnification_summary_one_finger_panning_on
+                    : R.string.accessibility_screen_magnification_summary_one_finger_panning_off;
+            return MessageFormat.format(context.getString(resId), new Object[]{1, 2, 3, 4, 5});
+        }
+        return "";
     }
 
     @Override

@@ -16,14 +16,15 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
-import android.util.Log
+import android.hardware.fingerprint.FingerprintEnrollOptions
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.android.systemui.biometrics.shared.model.FingerprintSensor
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.transformLatest
 import kotlinx.coroutines.flow.update
 
@@ -69,23 +70,24 @@ class FingerprintEnrollEnrollingViewModel(
   val enrollFlow =
     enrollFlowShouldBeRunning.transformLatest {
       if (it) {
-        fingerprintEnrollViewModel.enrollFlow.collect { event ->
-          emit(event) }
+        fingerprintEnrollViewModel.enrollFlow.collect { event -> emit(event) }
       }
     }
 
-  class FingerprintEnrollEnrollingViewModelFactory(
-    private val fingerprintEnrollViewModel: FingerprintEnrollViewModel,
-    private val backgroundViewModel: BackgroundViewModel,
-  ) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return FingerprintEnrollEnrollingViewModel(fingerprintEnrollViewModel, backgroundViewModel)
-        as T
-    }
+  /** Indicates enrollment to start */
+  fun enroll(enrollOptions: FingerprintEnrollOptions) {
+    fingerprintEnrollViewModel.enroll(enrollOptions)
   }
 
   companion object {
-    private val TAG = "FingerprintEnrollEnrollingViewModel"
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer {
+        val provider = ViewModelProvider(this[VIEW_MODEL_STORE_OWNER_KEY]!!)
+        FingerprintEnrollEnrollingViewModel(
+          provider[FingerprintEnrollViewModel::class],
+          provider[BackgroundViewModel::class],
+        )
+      }
+    }
   }
 }

@@ -56,7 +56,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     private static final String TAG = "WifiDppQrCodeGeneratorFragment";
 
     private ImageView mQrCodeView;
-    private String mQrCode;
+    protected String mQrCode;
 
     private static final String CHIP_LABEL_METADATA_KEY = "android.service.chooser.chip_label";
     private static final String CHIP_ICON_METADATA_KEY = "android.service.chooser.chip_icon";
@@ -258,7 +258,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         return button;
     }
 
-    private void setQrCode() {
+    protected void setQrCode() {
         try {
             final int qrcodeSize = getContext().getResources().getDimensionPixelSize(
                     R.dimen.qrcode_size);
