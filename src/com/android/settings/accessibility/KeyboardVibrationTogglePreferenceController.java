@@ -154,8 +154,8 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     }
 
     private boolean isKeyboardVibrationSwitchEnabled() {
-        return Settings.System.getInt(mContext.getContentResolver(), KEYBOARD_VIBRATION_ENABLED,
-                mVibrator.isDefaultKeyboardVibrationEnabled() ? ON : OFF) == ON;
+        return Settings.System.getInt(
+                mContext.getContentResolver(), KEYBOARD_VIBRATION_ENABLED, ON) == ON;
     }
 
     private boolean updateKeyboardVibrationSetting(boolean enable) {
