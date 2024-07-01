@@ -20,6 +20,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsCategoryController;
@@ -31,7 +33,6 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     private static final String TAG = "AudioSharingDashboardFrag";
 
     SettingsMainSwitchBar mMainSwitchBar;
-    private AudioSharingSwitchBarController mSwitchBarController;
     private AudioSharingDeviceVolumeGroupController mAudioSharingDeviceVolumeGroupController;
     private AudioSharingCallAudioPreferenceController mAudioSharingCallAudioPreferenceController;
     private AudioSharingPlaySoundPreferenceController mAudioSharingPlaySoundPreferenceController;
@@ -83,9 +84,10 @@ public class AudioSharingDashboardFragment extends DashboardFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mMainSwitchBar = activity.getSwitchBar();
         mMainSwitchBar.setTitle(getText(R.string.audio_sharing_switch_title));
-        mSwitchBarController = new AudioSharingSwitchBarController(activity, mMainSwitchBar, this);
-        mSwitchBarController.init(this);
-        getSettingsLifecycle().addObserver(mSwitchBarController);
+        AudioSharingSwitchBarController switchBarController =
+                new AudioSharingSwitchBarController(activity, mMainSwitchBar, this);
+        switchBarController.init(this);
+        getSettingsLifecycle().addObserver(switchBarController);
         mMainSwitchBar.show();
     }
 
@@ -97,6 +99,19 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     @Override
     public void onAudioSharingProfilesConnected() {
         onProfilesConnectedForAttachedPreferences();
+    }
+
+    /** Test only: set mock controllers for the {@link AudioSharingDashboardFragment} */
+    @VisibleForTesting
+    void setControllers(
+            AudioSharingDeviceVolumeGroupController volumeGroupController,
+            AudioSharingCallAudioPreferenceController callAudioController,
+            AudioSharingPlaySoundPreferenceController playSoundController,
+            AudioStreamsCategoryController streamsCategoryController) {
+        mAudioSharingDeviceVolumeGroupController = volumeGroupController;
+        mAudioSharingCallAudioPreferenceController = callAudioController;
+        mAudioSharingPlaySoundPreferenceController = playSoundController;
+        mAudioStreamsCategoryController = streamsCategoryController;
     }
 
     private void updateVisibilityForAttachedPreferences() {

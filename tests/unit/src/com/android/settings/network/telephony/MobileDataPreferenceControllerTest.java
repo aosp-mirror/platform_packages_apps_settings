@@ -131,8 +131,7 @@ public class MobileDataPreferenceControllerTest {
 
     private MobileNetworkInfoEntity setupMobileNetworkInfoEntity(String subId,
             boolean isDatEnabled) {
-        return new MobileNetworkInfoEntity(subId, false, false, isDatEnabled, false, false, false,
-                false, false, false, false, false);
+        return new MobileNetworkInfoEntity(subId, isDatEnabled, false);
     }
 
     @Test

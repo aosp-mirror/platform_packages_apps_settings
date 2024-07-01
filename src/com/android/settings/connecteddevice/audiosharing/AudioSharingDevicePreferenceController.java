@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_BLUETOOTH_DEVICE;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
@@ -44,6 +45,7 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
@@ -56,6 +58,7 @@ import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Locale;
 import java.util.concurrent.Executor;
@@ -80,6 +83,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     @Nullable private final LocalBluetoothProfileManager mProfileManager;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
     private final Executor mExecutor;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     @Nullable private PreferenceGroup mPreferenceGroup;
     @Nullable private Preference mAudioSharingSettingsPreference;
     @Nullable private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -87,7 +91,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     @Nullable private AudioSharingDialogHandler mDialogHandler;
     private AtomicBoolean mIntentHandled = new AtomicBoolean(false);
 
-    private BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+    @VisibleForTesting
+    BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
                 @Override
                 public void onSearchStarted(int reason) {}
@@ -113,6 +118,10 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                         @NonNull BluetoothDevice sink,
                         @NonNull BluetoothLeBroadcastMetadata source,
                         int reason) {
+                    mMetricsFeatureProvider.action(
+                            mContext,
+                            SettingsEnums.ACTION_AUDIO_SHARING_JOIN_FAILED,
+                            SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
                     AudioSharingUtils.toastMessage(
                             mContext,
                             String.format(
@@ -142,6 +151,10 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                 @Override
                 public void onSourceRemoveFailed(
                         @NonNull BluetoothDevice sink, int sourceId, int reason) {
+                    mMetricsFeatureProvider.action(
+                            mContext,
+                            SettingsEnums.ACTION_AUDIO_SHARING_LEAVE_FAILED,
+                            SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
                     AudioSharingUtils.toastMessage(
                             mContext,
                             String.format(
@@ -182,6 +195,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                         ? null
                         : mProfileManager.getLeAudioBroadcastAssistantProfile();
         mExecutor = Executors.newSingleThreadExecutor();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -368,23 +382,23 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     }
 
     @VisibleForTesting
-    public void setBluetoothDeviceUpdater(@Nullable BluetoothDeviceUpdater bluetoothDeviceUpdater) {
+    void setBluetoothDeviceUpdater(@Nullable BluetoothDeviceUpdater bluetoothDeviceUpdater) {
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
     }
 
     @VisibleForTesting
-    public void setDialogHandler(@Nullable AudioSharingDialogHandler dialogHandler) {
+    void setDialogHandler(@Nullable AudioSharingDialogHandler dialogHandler) {
         mDialogHandler = dialogHandler;
     }
 
     @VisibleForTesting
-    public void setHostFragment(@Nullable DashboardFragment fragment) {
+    void setHostFragment(@Nullable DashboardFragment fragment) {
         mFragment = fragment;
     }
 
     /** Test only: set intent handle state for test. */
     @VisibleForTesting
-    public void setIntentHandled(boolean handled) {
+    void setIntentHandled(boolean handled) {
         mIntentHandled.set(handled);
     }
 
