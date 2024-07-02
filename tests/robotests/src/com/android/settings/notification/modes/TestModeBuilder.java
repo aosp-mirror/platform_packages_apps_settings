@@ -84,6 +84,18 @@ class TestModeBuilder {
         return this;
     }
 
+    TestModeBuilder setOwner(ComponentName owner) {
+        mRule.setOwner(owner);
+        mConfigZenRule.component = owner;
+        return this;
+    }
+
+    TestModeBuilder setConfigurationActivity(ComponentName configActivity) {
+        mRule.setConfigurationActivity(configActivity);
+        mConfigZenRule.configurationActivity = configActivity;
+        return this;
+    }
+
     TestModeBuilder setConditionId(Uri conditionId) {
         mRule.setConditionId(conditionId);
         mConfigZenRule.conditionId = conditionId;
@@ -147,18 +159,6 @@ class TestModeBuilder {
         } else {
             mConfigZenRule.condition = null;
         }
-        return this;
-    }
-
-    TestModeBuilder setConfigurationActivity(ComponentName configActivity) {
-        mRule.setConfigurationActivity(configActivity);
-        mConfigZenRule.configurationActivity = configActivity;
-        return this;
-    }
-
-    TestModeBuilder setOwner(ComponentName owner) {
-        mRule.setOwner(owner);
-        mConfigZenRule.component = owner;
         return this;
     }
 

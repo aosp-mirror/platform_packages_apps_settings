@@ -99,7 +99,7 @@ public class ZenModesListPreferenceControllerTest {
         PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
         preferenceScreen.addPreference(mPreference);
 
-        mPrefController = new ZenModesListPreferenceController(mContext, null, mBackend);
+        mPrefController = new ZenModesListPreferenceController(mContext, mBackend);
     }
 
     @Test

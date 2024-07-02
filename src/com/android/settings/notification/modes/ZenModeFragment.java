@@ -47,23 +47,22 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
-        prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
+        prefControllers.add(new ZenModeHeaderController(context, "header", this));
         prefControllers.add(
                 new ZenModeButtonPreferenceController(context, "activate", this, mBackend));
-        prefControllers.add(new ZenModeActionsPreferenceController(context, "actions", mBackend));
+        prefControllers.add(new ZenModeActionsPreferenceController(context, "actions"));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
-                context, "zen_mode_people", mBackend, mHelperBackend));
+                context, "zen_mode_people", mHelperBackend));
         prefControllers.add(new ZenModeAppsLinkPreferenceController(
                 context, "zen_mode_apps", this,
                 ApplicationsState.getInstance((Application) context.getApplicationContext()),
                 mBackend, mHelperBackend));
         prefControllers.add(new ZenModeOtherLinkPreferenceController(
-                context, "zen_other_settings", mBackend, mHelperBackend));
+                context, "zen_other_settings", mHelperBackend));
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(
                 context, "mode_display_settings", mBackend, mHelperBackend));
         prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
-                "zen_automatic_trigger_category", this, mBackend,
-                context.getPackageManager()));
+                "zen_automatic_trigger_category", this, mBackend));
         prefControllers.add(new InterruptionFilterPreferenceController(
                 context, "allow_filtering", mBackend));
         prefControllers.add(new ManualDurationPreferenceController(

@@ -27,7 +27,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.notification.modes.ZenMode;
-import com.android.settingslib.notification.modes.ZenModesBackend;
 
 /**
  * Preference with a link and summary about what other sounds can break through the mode
@@ -37,8 +36,8 @@ class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceCont
     private final ZenModeSummaryHelper mSummaryHelper;
 
     public ZenModeOtherLinkPreferenceController(Context context, String key,
-            ZenModesBackend backend, ZenHelperBackend helperBackend) {
-        super(context, key, backend);
+            ZenHelperBackend helperBackend) {
+        super(context, key);
         mSummaryHelper = new ZenModeSummaryHelper(mContext, helperBackend);
     }
 
