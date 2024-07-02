@@ -73,7 +73,7 @@ public class AudioStreamsDialogFragmentTest {
     }
 
     @Test
-    public void testShowDialog() {
+    public void testShowDialog_dismissAll() {
         FragmentController.setupFragment(mFragment);
         AudioStreamsDialogFragment.show(mFragment, mDialogBuilder, SettingsEnums.PAGE_UNKNOWN);
         ShadowLooper.idleMainLooper();
@@ -81,5 +81,8 @@ public class AudioStreamsDialogFragmentTest {
         var dialog = ShadowAlertDialog.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
+
+        AudioStreamsDialogFragment.dismissAll(mFragment);
+        assertThat(dialog.isShowing()).isFalse();
     }
 }

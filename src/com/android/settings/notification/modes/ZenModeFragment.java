@@ -48,7 +48,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
-        prefControllers.add(new ZenModeButtonPreferenceController(context, "activate", mBackend));
+        prefControllers.add(
+                new ZenModeButtonPreferenceController(context, "activate", this, mBackend));
         prefControllers.add(new ZenModeActionsPreferenceController(context, "actions", mBackend));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
                 context, "zen_mode_people", mBackend, mHelperBackend));
@@ -61,10 +62,21 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(
                 context, "mode_display_settings", mBackend, mHelperBackend));
         prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
-                "zen_automatic_trigger_category", this, mBackend));
+                "zen_automatic_trigger_category", this, mBackend,
+                context.getPackageManager()));
         prefControllers.add(new InterruptionFilterPreferenceController(
                 context, "allow_filtering", mBackend));
+        prefControllers.add(new ManualDurationPreferenceController(
+                context, "mode_manual_duration", this, mBackend));
         return prefControllers;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        // allow duration preference controller to listen for settings changes
+        use(ManualDurationPreferenceController.class).registerSettingsObserver();
     }
 
     @Override
@@ -76,6 +88,12 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         if (mode != null) {
             requireActivity().setTitle(mode.getName());
         }
+    }
+
+    @Override
+    public void onDetach() {
+        use(ManualDurationPreferenceController.class).unregisterSettingsObserver();
+        super.onDetach();
     }
 
     @Override

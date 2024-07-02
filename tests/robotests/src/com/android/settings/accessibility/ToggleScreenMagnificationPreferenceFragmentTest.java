@@ -24,6 +24,7 @@ import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
@@ -391,6 +392,40 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertThat(shadowContentResolver.getContentObservers(
                 Settings.Secure.getUriFor(
                         Settings.Secure.ACCESSIBILITY_QS_TARGETS))).hasSize(0);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void onResume_oneFingerPanningFlagOn_registerToSpecificUri() {
+        ShadowContentResolver shadowContentResolver = Shadows.shadowOf(
+                mContext.getContentResolver());
+        Uri observedUri = Settings.Secure.getUriFor(
+                Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED);
+        // verify no one finger panning settings observer registered before launching the fragment
+        assertThat(shadowContentResolver.getContentObservers(observedUri)).isEmpty();
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        Collection<ContentObserver> observers =
+                shadowContentResolver.getContentObservers(observedUri);
+        assertThat(observers.size()).isEqualTo(1);
+        assertThat(observers.stream().findFirst().get()).isInstanceOf(
+                AccessibilitySettingsContentObserver.class);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void onResume_oneFingerPanningFlagOff_notRegisterToSpecificUri() {
+        ShadowContentResolver shadowContentResolver = Shadows.shadowOf(
+                mContext.getContentResolver());
+        Uri observedUri = Settings.Secure.getUriFor(
+                Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED);
+        // verify no one finger panning settings observer registered before launching the fragment
+        assertThat(shadowContentResolver.getContentObservers(observedUri)).isEmpty();
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+        // verify no one finger panning settings observer registered after launching the fragment
+        assertThat(shadowContentResolver.getContentObservers(observedUri)).isEmpty();
     }
 
     @Test
@@ -934,7 +969,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    public void onProcessArguments_defaultArgumentUnavailable_shouldSetDefaultArguments() {
+    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void
+            onProcessArguments_defaultArgumentUnavailableAndFlagOff_shouldSetDefaultArguments() {
         ToggleScreenMagnificationPreferenceFragment fragment =
                 mFragController.create(
                         R.id.main_content, /* bundle= */ null).start().resume().get();
@@ -945,6 +982,32 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_PREFERENCE_KEY));
         assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_INTRO));
         assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void
+            onProcessArguments_defaultArgumentUnavailableAndFlagOn_shouldSetDefaultArguments() {
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(
+                        R.id.main_content, /* bundle= */ null).start().resume().get();
+        Bundle arguments = new Bundle();
+
+        fragment.onProcessArguments(arguments);
+
+        assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_PREFERENCE_KEY));
+        assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_INTRO));
+        // If OneFingerPanning flag is on, the EXTRA_HTML_DESCRIPTION should not be set. The html
+        // description would be decided dynamically based on the OneFingerPanning preference state.
+        assertFalse(arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION));
+    }
+
+    @Test
+    public void getCurrentHtmlDescription_shouldNotBeEmpty() {
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(
+                        R.id.main_content, /* bundle= */ null).start().resume().get();
+        assertThat(fragment.getCurrentHtmlDescription().toString()).isNotEmpty();
     }
 
     @Test
