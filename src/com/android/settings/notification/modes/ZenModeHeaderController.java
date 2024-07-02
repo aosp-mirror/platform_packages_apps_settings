@@ -19,7 +19,6 @@ import android.app.Flags;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -27,7 +26,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
-import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
 class ZenModeHeaderController extends AbstractZenModePreferenceController {
@@ -38,9 +36,8 @@ class ZenModeHeaderController extends AbstractZenModePreferenceController {
     ZenModeHeaderController(
             @NonNull  Context context,
             @NonNull String key,
-            @NonNull DashboardFragment fragment,
-            @Nullable ZenModesBackend backend) {
-        super(context, key, backend);
+            @NonNull DashboardFragment fragment) {
+        super(context, key);
         mFragment = fragment;
     }
 

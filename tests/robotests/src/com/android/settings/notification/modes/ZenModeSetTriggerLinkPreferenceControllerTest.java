@@ -19,30 +19,26 @@ package com.android.settings.notification.modes;
 import static android.app.AutomaticZenRule.TYPE_OTHER;
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
-import static android.app.NotificationManager.EXTRA_AUTOMATIC_RULE_ID;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
-import static android.service.notification.ConditionProviderService.EXTRA_RULE_ID;
 
 import static com.android.settings.notification.modes.ZenModeSetTriggerLinkPreferenceController.AUTOMATIC_TRIGGER_PREF_KEY;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AutomaticZenRule;
 import android.app.Flags;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Bundle;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.service.notification.ConditionProviderService;
 import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
 
@@ -52,7 +48,6 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
@@ -81,9 +76,9 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
     private PrimarySwitchPreference mPreference;
 
     @Mock
-    private ZenServiceListing mServiceListing;
-    @Mock
     private PackageManager mPm;
+    @Mock
+    private ConfigurationActivityHelper mConfigurationActivityHelper;
 
     @Mock
     private PreferenceCategory mPrefCategory;
@@ -98,8 +93,9 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
         mContext = ApplicationProvider.getApplicationContext();
 
         mPrefController = new ZenModeSetTriggerLinkPreferenceController(mContext,
-                "zen_automatic_trigger_category", mFragment, mBackend, mPm);
-        mPrefController.setServiceListing(mServiceListing);
+                "zen_automatic_trigger_category", mFragment, mBackend,
+                mConfigurationActivityHelper,
+                mock(ZenServiceListing.class));
         mPreference = new PrimarySwitchPreference(mContext);
 
         when(mPrefCategory.findPreference(AUTOMATIC_TRIGGER_PREF_KEY)).thenReturn(mPreference);
@@ -226,6 +222,40 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
     }
 
     @Test
+    public void testRuleLink_appWithConfigActivity_linksToConfigActivity() {
+        ZenMode mode = new TestModeBuilder()
+                .setPackage("some.package")
+                .setTriggerDescription("When The Music's Over")
+                .build();
+        Intent configurationIntent = new Intent("configure the mode");
+        when(mConfigurationActivityHelper.getConfigurationActivityIntentForMode(any(), any()))
+                .thenReturn(configurationIntent);
+
+        mPrefController.updateZenMode(mPrefCategory, mode);
+
+        assertThat(mPreference.getTitle()).isNotNull();
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.zen_mode_configuration_link_title));
+        assertThat(mPreference.getSummary()).isNotNull();
+        assertThat(mPreference.getSummary().toString()).isEqualTo("When The Music's Over");
+        assertThat(mPreference.getIntent()).isEqualTo(configurationIntent);
+    }
+
+    @Test
+    public void testRuleLink_appWithoutConfigActivity_hidden() {
+        ZenMode mode = new TestModeBuilder()
+                .setPackage("some.package")
+                .setTriggerDescription("Will not be shown :(")
+                .build();
+        when(mConfigurationActivityHelper.getConfigurationActivityIntentForMode(any(), any()))
+                .thenReturn(null);
+
+        mPrefController.updateZenMode(mPrefCategory, mode);
+
+        assertThat(mPrefCategory.isVisible()).isFalse();
+    }
+
+    @Test
     public void onScheduleChosen_updatesMode() {
         ZenMode originalMode = new TestModeBuilder()
                 .setConditionId(ZenModeConfig.toCustomManualConditionId())
@@ -252,110 +282,5 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
         assertThat(updatedMode.getRule().getTriggerDescription()).isNotEmpty();
         assertThat(updatedMode.getRule().getOwner()).isEqualTo(
                 ZenModeConfig.getScheduleConditionProvider());
-    }
-
-    @Test
-    public void testGetAppRuleIntent_configActivity() throws Exception {
-        ZenMode mode = new TestModeBuilder()
-                .setId("id")
-                .setPackage(mContext.getPackageName())
-                .setConfigurationActivity(new ComponentName(mContext.getPackageName(), "test"))
-                .setType(TYPE_OTHER)
-                .setTriggerDescription("some rule")
-                .build();
-
-        when(mPm.getPackageUid(null, 0)).thenReturn(-1);
-        when(mPm.getPackageUid(mContext.getPackageName(), 0)).thenReturn(1);
-
-        Intent res = mPrefController.getAppRuleIntent(mode);
-        assertThat(res).isNotNull();
-        assertThat(res.getStringExtra(EXTRA_RULE_ID)).isEqualTo("id");
-        assertThat(res.getStringExtra(EXTRA_AUTOMATIC_RULE_ID)).isEqualTo("id");
-        assertThat(res.getComponent()).isEqualTo(
-                new ComponentName(mContext.getPackageName(), "test"));
-    }
-
-    @Test
-    public void testGetAppRuleIntent_configActivity_wrongPackage() throws Exception {
-        ZenMode mode = new TestModeBuilder()
-                .setPackage(mContext.getPackageName())
-                .setConfigurationActivity(new ComponentName("another", "test"))
-                .setType(TYPE_OTHER)
-                .build();
-
-        when(mPm.getPackageUid(null, 0)).thenReturn(-1);
-        when(mPm.getPackageUid(mContext.getPackageName(), 0)).thenReturn(1);
-
-        Intent res = mPrefController.getAppRuleIntent(mode);
-        assertThat(res).isNull();
-    }
-
-    @Test
-    public void testGetAppRuleIntent_configActivity_unspecifiedOwner() throws Exception {
-        ZenMode mode = new TestModeBuilder()
-                .setId("id")
-                .setPackage(null)
-                .setConfigurationActivity(new ComponentName("another", "test"))
-                .setType(TYPE_OTHER)
-                .build();
-
-        when(mPm.getPackageUid(null, 0)).thenReturn(-1);
-        when(mPm.getPackageUid(mContext.getPackageName(), 0)).thenReturn(1);
-
-        Intent res = mPrefController.getAppRuleIntent(mode);
-        assertThat(res).isNotNull();
-        assertThat(res.getStringExtra(EXTRA_RULE_ID)).isEqualTo("id");
-        assertThat(res.getStringExtra(EXTRA_AUTOMATIC_RULE_ID)).isEqualTo("id");
-        assertThat(res.getComponent()).isEqualTo(new ComponentName("another", "test"));
-    }
-
-    @Test
-    public void testGetAppRuleIntent_cps() throws Exception {
-        ZenMode mode = new TestModeBuilder()
-                .setId("id")
-                .setPackage(mContext.getPackageName())
-                .setOwner(new ComponentName(mContext.getPackageName(), "service"))
-                .build();
-
-        ComponentInfo ci = new ComponentInfo();
-        ci.packageName = mContext.getPackageName();
-        ci.metaData = new Bundle();
-        ci.metaData.putString(ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY,
-                ComponentName.flattenToShortString(
-                        new ComponentName(mContext.getPackageName(), "activity")));
-
-        when(mServiceListing.findService(new ComponentName(mContext.getPackageName(), "service")))
-                .thenReturn(ci);
-        when(mPm.getPackageUid(null, 0)).thenReturn(-1);
-        when(mPm.getPackageUid(mContext.getPackageName(), 0)).thenReturn(1);
-
-        Intent res = mPrefController.getAppRuleIntent(mode);
-        assertThat(res).isNotNull();
-        assertThat(res.getStringExtra(EXTRA_RULE_ID)).isEqualTo("id");
-        assertThat(res.getStringExtra(EXTRA_AUTOMATIC_RULE_ID)).isEqualTo("id");
-        assertThat(res.getComponent()).isEqualTo(
-                new ComponentName(mContext.getPackageName(), "activity"));
-    }
-
-    @Test
-    public void testGetAppRuleIntent_cps_wrongPackage() throws Exception {
-        ZenMode mode = new TestModeBuilder()
-                .setPackage("other")
-                .setOwner(new ComponentName(mContext.getPackageName(), "service"))
-                .setType(TYPE_OTHER)
-                .build();
-
-        ComponentInfo ci = new ComponentInfo();
-        ci.packageName = mContext.getPackageName();
-        ci.metaData = new Bundle();
-        ci.metaData.putString(ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY,
-                ComponentName.flattenToShortString(
-                        new ComponentName(mContext.getPackageName(), "activity")));
-
-        when(mPm.getPackageUid(null, 0)).thenReturn(-1);
-        when(mPm.getPackageUid(mContext.getPackageName(), 0)).thenReturn(1);
-
-        Intent res = mPrefController.getAppRuleIntent(mode);
-        assertThat(res).isNull();
     }
 }
