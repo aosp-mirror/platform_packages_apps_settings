@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"تنظیمات دستگاه سمعک"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"میان‌بر، سازگاری با سمعک"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"پیش‌تنظیم"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"متخصص شنوایی‌سنجی شما هیچ پیش‌تنظیمی برنامه‌ریزی نکرده است"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"پیش‌تنظیم به‌روزرسانی نشد"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"خروجی صوتی"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"درباره خروجی صوتی"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"درباره «قفل‌گشایی با ساعت» بیشتر بدانید"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"افزودن ساعت"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"برداشتن ساعت"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"قفل‌گشایی با اثر انگشت و چهره"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"قفل‌گشایی با چهره و اثر انگشت"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"«قفل‌گشایی با اثر انگشت و چهره» برای نمایه کاری"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"راه‌اندازی لازم است"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"چهره و چند اثر انگشت اضافه شده است"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"نصب برنامه"</b>\n"برنامه‌هایی را که می‌خواهید در فضایتان به‌صورت خصوصی حفظ شود نصب کنید"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"به‌خاطر داشته باشید"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"برنامه‌ها هنگام قفل کردن فضا متوقف می‌شوند"</b>\n"وقتی فضای خود را قفل می‌کنید، برنامه‌های موجود در فضا متوقف می‌شوند و اعلانی از آن‌ها دریافت نخواهید کرد"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"فضاهای خصوصی برای برنامه‌هایی که لازم است در پس‌زمینه اجرا شوند یا اعلان‌های مهم ارسال کنند (مانند برنامه‌های پزشکی) مناسب نیستند. زیرا وقتی فضای شما قفل باشد، اعلان‌ها و فعالیت پس‌زمینه متوقف می‌شود.\n\nوقتی فضای خصوصی شما قفل است، برنامه‌های موجود در فضای خصوصی شما در مدیر اجازه‌ها، داشبورد حریم خصوصی، و تنظیمات دیگر نشان داده نمی‌شود.\n\nفضای خصوصی را نمی‌توان به دستگاه جدید منتقل کرد. اگر می‌خواهید از آن در دستگاه دیگری استفاده کنید، باید فضای خصوصی دیگری راه‌اندازی کنید.\n\nهر کسی که دستگاه شما را به رایانه متصل کند یا برنامه‌های مخرب در دستگاهتان نصب کند ممکن است بتواند به فضای خصوصی شما دسترسی داشته باشد."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"فضاهای خصوصی برای برنامه‌هایی که لازم است در پس‌زمینه اجرا شوند یا اعلان‌های مهم ارسال کنند (مانند برنامه‌های پزشکی) مناسب نیستند. زیرا وقتی فضای شما قفل باشد، اعلان‌ها و فعالیت پس‌زمینه متوقف می‌شود.\n\nوقتی فضای خصوصی قفل است، برنامه‌های موجود در فضای خصوصی در مدیر اجازه‌ها، داشبورد حریم خصوصی، و تنظیمات دیگر نشان داده نمی‌شود.\n\nفضای خصوصی را نمی‌توان در دستگاه جدید بازیابی کرد. اگر می‌خواهید از فضای خصوصی در دستگاه دیگری استفاده کنید، باید فضای دیگری راه‌اندازی کنید.\n\nهر شخصی که دستگاه شما را به رایانه متصل کند یا برنامه‌های مخرب روی دستگاهتان نصب کند، ممکن است بتواند به فضای خصوصی شما دسترسی داشته باشد."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"درباره فضای خصوصی بیشتر بدانید"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"این کار چند لحظه طول می‌کشد"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"درحال راه‌اندازی فضای خصوصی…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"تطبیقی"</string>
     <string name="brightness" msgid="6216871641021779698">"سطح روشنایی"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"روشنایی تطبیقی"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"درباره «روشنایی تطبیقی»"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"روشنایی صفحه‌نمایش به‌طور خودکار با محیط و فعالیت‌هایتان تنظیم می‌شود. می‌توانید لغزاننده را به‌طور دستی حرکت دهید تا روشنایی تطبیقی ترجیح شما را دریابد."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"روشن"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"خاموش"</string>
@@ -2130,7 +2130,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"درهرصورت ادامه داده شود"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"لغو"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"تنظیمات درشت‌‌نمایی"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"حرکت افقی با یک انگشت"</string>
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"ذره‌بین را با ۱ انگشت جابه‌جا کنید"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"برای حرکت در صفحه، ۱ انگشت را بکشید"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"با کشیدن یک انگشت، درشت‌نمایی را جابه‌جا کنید."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"با کشیدن دو انگشت، درشت‌نمایی را جابه‌جا کنید."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"وقتی فقط بخشی از صفحه درشت‌نمایی می‌شود دردسترس نیست"</string>
@@ -2154,6 +2155,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"برای بزرگ‌نمایی، روی دکمه‌ای تک‌ضرب بزنید"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"به‌سرعت صفحه را بزرگ کنید تا محتوا درشت‌تر نمایش داده شود"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"‏&lt;b&gt;برای زوم‌پیش کردن:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. برای فعال کردن درشت‌نمایی، از میان‌بر استفاده کنید&lt;br/&gt; {1,number,integer}. روی صفحه تک‌ضرب بزنید&lt;br/&gt; {2,number,integer}. برای حرکت کردن در صفحه، ۲ انگشت را بکشید&lt;br/&gt; {3,number,integer}. برای تنظیم کردن زوم، ۲ انگشت را ازهم دور یا به‌هم نزدیک کنید&lt;br/&gt; {4,number,integer}. برای توقف درشت‌نمایی از میان‌براستفاده کنید&lt;br/&gt;&lt;br/&gt; &lt;b&gt;برای زوم‌پیش موقت:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. مطمئن شوید نوع درشت‌نمایی روی تمام‌صفحه تنظیم شده باشد&lt;br/&gt; {1,number,integer}. برای فعال کردن درشت‌نمایی، از میان‌بر استفاده کنید&lt;br/&gt; {2,number,integer}. جایی از صفحه را لمس کنید و نگه دارید&lt;br/&gt; {3,number,integer}. برای حرکت کردن در صفحه، انگشت را بکشید&lt;br/&gt; {4,number,integer}. برای متوقف کردن درشت‌نمایی، انگشتتان را بردارید"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"‏&lt;b&gt;برای زوم‌پیش کردن:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. برای فعال کردن درشت‌نمایی، از میان‌بر استفاده کنید&lt;br/&gt; {1,number,integer}. روی صفحه تک‌ضرب بزنید&lt;br/&gt; {2,number,integer}. برای حرکت کردن در صفحه، ۲ انگشت را بکشید&lt;br/&gt; {3,number,integer}. برای تنظیم بزرگ‌نمایی، ۲ انگشت را ازهم دور یا به‌هم نزدیک کنید&lt;br/&gt; {4,number,integer}. از میان‌بر برای متوقف کردن درشت‌نمایی استفاده کنید&lt;br/&gt;&lt;br/&gt; همچنین می‌توانید موقتاً زوم‌پیش کنید و کارهای دیگری انجام دهید."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"‏&lt;b&gt;برای زوم‌پیش کردن:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. برای فعال کردن درشت‌نمایی، از میان‌بر استفاده کنید&lt;br/&gt; {1,number,integer}. روی صفحه تک‌ضرب بزنید&lt;br/&gt; {2,number,integer}. برای حرکت کردن در صفحه، ۱ یا ۲ انگشت را بکشید&lt;br/&gt; {3,number,integer}. برای تنظیم بزرگ‌نمایی، ۲ انگشت را ازهم دور یا به‌هم نزدیک کنید&lt;br/&gt; {4,number,integer}. از میان‌بر برای متوقف کردن درشت‌نمایی استفاده کنید&lt;br/&gt;&lt;br/&gt; همچنین می‌توانید موقتاً زوم‌پیش کنید و کارهای دیگری انجام دهید."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"با روشن کردن درشت‌نمایی، می‌توانید روی صفحه زوم‌پیش کنید.\n\n"<b>"برای زوم کردن"</b>"، درشت‌نمایی را روشن کنید و روی جایی از صفحه تک‌ضرب بزنید.\n"<ul><li>"برای پیمایش، دو یا چند انگشتتان را روی صفحه بکشید "</li>\n<li>"برای تنظیم کردن زوم، دو یا چند انگشتتان را به‌هم نزدیک کنید"</li></ul>\n\n<b>"برای زوم موقت"</b>"، درشت‌نمایی را روشن کنید، سپس جایی از صفحه را لمس کنید و نگه‌دارید.\n"<ul><li>"برای حرکت در صفحه، انگشتتان را روی صفحه بکشید"</li>\n<li>"برای زوم‌پس کردن، انگشتتان را بردارید"</li></ul>\n\n"نمی‌توانید صفحه‌کلید یا نوار پیمایش را کوچک کنید."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"صفحه <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> از <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"میان‌بر دکمه دسترس‌پذیری"</string>
@@ -3393,6 +3396,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"تنظیم زمان‌بندی"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"زمان‌بندی"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ساعت، <xliff:g id="MINUTES">%2$d</xliff:g> دقیقه"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"زمان‌بندی"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"بی‌صدا کردن تلفن در زمان‌های خاصی"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"تنظیم قانون‌های «مزاحم نشوید»"</string>
@@ -3717,6 +3722,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"دسته‌ها"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"موارد دیگر"</string>
     <string name="no_channels" msgid="4716199078612071915">"این برنامه هیچ اعلانی پست نکرده است"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"نمایش دسته‌های استفاده‌نشده"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"تنظیمات بیشتر در برنامه"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"نمایش دسته‌های استفاده‌نشده"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"پنهان کردن دسته‌های استفاده‌نشده"</string>
@@ -4921,14 +4927,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"‏پیش‌از استفاده از گزینه توسعه‌دهنده ۱۶ کیلوبایتی، پارتیشن داده‌های این دستگاه باید به ext4 تبدیل شود. در این حالت تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. فعال کردن گزینه ۱۶ کیلوبایتی به بازراه‌اندازی دیگری بعداز این بازراه‌اندازی نیاز خواهد داشت. بعداز رفتن به این حالت، می‌توانید با یک بار بازراه‌اندازی بین حالت‌های ۴ کیلوبایتی و ۱۶ کیلوبایتی جابجا شوید. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای برگرداندن دستگاه به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader را قفل کنید که با این کار،‌ دستگاه بازنشانی کارخانه‌ای می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید. داده‌های دستگاه محو می‌شود و سیستم فایل به ext4 تغییر می‌کند. بعداز تکمیل کار،‌ لطفاً به اینجا برگردید تا دوباره حالت ۱۶ کیلوبایتی را فعال کنید."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"پاک کردن همه داده‌ها"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"‏محو کردن داده و قالب‌بندی مجدد پارتیشن داده به ext4 انجام نشد."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"‏باز کردن قفل bootloader برای حالت ۱۶ کیلوبایتی الزامی است"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"‏پیش‌از استفاده از گزینه توسعه‌دهنده ۱۶ کیلوبایتی، قفل bootloader باید در این دستگاه باز شود. نمی‌توان تمامیت نرم‌افزار را در این حالت تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. با فعال کردن حالت ۱۶ کیلوبایتی، همه تنظیمات و داده‌های کاربر محو خواهند شد. بعداز باز کردن قفل bootloader، گزینه ۱۶ کیلوبایتی به انجام دو بازراه‌اندازی نیاز دارد. بعداز رفتن به این حالت، می‌توانید با یک بار بازراه‌اندازی بین حالت‌های ۴ کیلوبایتی و ۱۶ کیلوبایتی جابجا شوید. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای برگرداندن دستگاه به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس سازنده اصلی محصول/ bootloader دستگاه را قفل کنید (که با این کار،‌ دستگاه بازنشانی کارخانه‌ای می‌شود). لطفاً قفل bootloader را باز و دوباره امتحان کنید. می‌توانید دستورالعمل‌های نحوه انجام این کار را از اینجا دریافت کنید: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"درحال استفاده از حالت مستقل با صفحه ۴ کیلوبایتی"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"‏در حالت ۴ کیلوبایتی حالت مستقل از صفحه هستید. در این حالت، تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید bootloader دستگاه را قفل کنید. برای مطالعه بیشتر، تک‌ضرب بزنید."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"‏در حالت ۴ کیلوبایتی حالت مستقل از صفحه هستید. در این حالت تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید bootloader دستگاه را قفل کنید. با این کار، دستگاه دوباره بازنشانی کارخانه‌ای می‌شود و به تنظیمات تولید بازگردانده می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید. اگر دستگاه نتوانست باموفقیت با سیستم‌عامل Android راه‌اندازی شود یا ناپایدار بود، دستگاه را با جدیدترین تصویر تنظیمات کارخانه از &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; دوباره فلاش کنید و «محو کردن داده‌های دستگاه»، «قفل کردن bootloader»، و «فلاش کردن اجباری همه پارتیشن‌ها» را انتخاب کنید."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"درحال استفاده از حالت مستقل از صفحه ۱۶ کیلوبایتی"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"‏در حالت ۱۶ کیلوبایتی حالت مستقل از صفحه هستید. در این حالت تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader دستگاه را قفل کنید. برای مطالعه بیشتر، تک‌ضرب بزنید."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"‏در حالت ۱۶ کیلوبایتی حالت مستقل از صفحه هستید. در این حالت تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader دستگاه را قفل کنید. با این کار، دستگاه دوباره بازنشانی کارخانه‌ای می‌شود و به تنظیمات تولید بازگردانده می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید. اگر دستگاه نتوانست باموفقیت با سیستم‌عامل Android راه‌اندازی شود یا ناپایدار بود، دستگاه را با جدیدترین تصویر تنظیمات کارخانه از &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; دوباره فلاش کنید و «محو کردن داده‌های دستگاه»، «قفل کردن bootloader»، و «فلاش کردن اجباری همه پارتیشن‌ها» را انتخاب کنید."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"حالت مستقل از صفحه ۱۶ کیلوبایتی"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"بیشتر بخوانید"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"کنترل‌کننده گزارش اشکال"</string>

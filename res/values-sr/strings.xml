@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Подешавања слушног апарата"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Пречица, компатибилност са слушним апаратима"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Задата подешавања"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Не постоје задата подешавања која је програмирао аудиолог"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Ажурирање задатих подешавања није успело"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудио излаз"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"О аудио излазу"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Сазнајте више о откључавању сата"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Додај сат"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Уклони сат"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Отисак прста и откључавање лицем"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Откључавање лицем и отиском прста"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Откључавање лицем и отиском прста за посао"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Треба да подесите"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Лице и отисци прста су додати"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Инсталирајте апликације"</b>\n"Апликације за које желите да буду приватне инсталирајте у простору"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Имајте на уму"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Апликације се заустављају када закључате простор"</b>\n"Када закључате простор, апликације у њему се заустављају и не шаљу вам обавештења"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Приватни простори нису погодни за апликације које треба да раде у позадини или шаљу важна обавештења, попут медицинских апликација. Разлог је то што се обавештења и активности у позадини заустављају када је простор закључан.\n\nАпликације у приватном простору се неће приказивати у менаџеру дозвола, на контролној табли за приватност ни у другим подешавањима када је приватан простор закључан.\n\nПриватан простор не можете да преместите на нови уређај. Морате да подесите други приватан простор ако желите да га користите на другом уређају.\n\nСвако ко ваш уређај повеже са рачунаром или на њега инсталира штетне апликације, моћи ће да приступи вашем приватном простору."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Приватни простори нису погодни за апликације које треба да раде у позадини или шаљу важна обавештења, попут медицинских апликација. Разлог је то што се обавештења и активности у позадини заустављају када је простор закључан.\n\nАпликације у приватном простору се неће приказивати у менаџеру дозвола, на контролној табли за приватност ни у другим подешавањима када је приватан простор закључан.\n\nПриватан простор не можете да вратите на нови уређај. Морате да подесите други простор ако желите да га користите на другом уређају.\n\nСвако ко ваш уређај повеже са рачунаром или на њега инсталира злонамерне апликације, моћи ће да приступи вашем приватном простору."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Сазнајте више о приватном простору"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Потрајаће неколико тренутака"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Подешава се приватни простор…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Прилагодљиво"</string>
     <string name="brightness" msgid="6216871641021779698">"Ниво осветљености"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Прилагодљива осветљеност"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"О приладољивој осветљености"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Осветљеност екрана ће се аутоматски прилагођавати окружењу и активностима. Можете ручно да померате клизач да би прилагодљиво подешавање осветљености научило шта вам одговара."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Укључено"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Искључено"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Ипак настави"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Откажи"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Подешавања увећања"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Померање једним прстом"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Померајте област за увећање превлачењем једног прста."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Померајте област за увећање превлачењем два прста."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Није доступно када се увећава само део екрана"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Додирните дугме да бисте зумирали"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Брзо увећајте екран да би садржај био већи"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Да бисте увећали:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Користите пречицу да бисте покренули увећање&lt;br/&gt; {1,number,integer}. Додирните екран&lt;br/&gt; {2,number,integer}. Превлачите помоћу 2 прста да бисте се кретали по екрану&lt;br/&gt; {3,number,integer}. Скупите 2 прста да бисте прилагодили зумирање&lt;br/&gt; {4,number,integer}. Користите пречицу да бисте зауставили увећање&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Да бисте привремено увећали:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Уверите се да је тип увећања подешен на цео екран&lt;br/&gt; {1,number,integer}. Користите пречицу да бисте покренули увећање&lt;br/&gt; {2,number,integer}. Додирните и задржите било који део екрана&lt;br/&gt; {3,number,integer}. Превлачите прст да бисте се кретали по екрану&lt;br/&gt; {4,number,integer}. Подигните прст да бисте зауставили увећање"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Када је увећање укључено, можете да увећате екран.\n\n"<b>"Да бисте зумирали"</b>", покрените увећање, па додирните било који део екрана.\n"<ul><li>"Превлачите помоћу 2 или више прстију да бисте померали приказ"</li>\n<li>"Скупите 2 или више прстију да бисте прилагодили зумирање"</li></ul>\n\n<b>"За привремено зумирање"</b>" покрените увећање, па додирните и задржите било који део екрана.\n"<ul><li>"Превлачите да бисте се кретали по екрану"</li>\n<li>"Подигните прст да бисте умањили приказ"</li></ul>\n\n"Не можете да увећавате тастатуру или траку за навигацију."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>. страница од <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Пречица за дугме Приступачност"</string>
@@ -3393,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Подесите распоред"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Распоред"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> с, <xliff:g id="MINUTES">%2$d</xliff:g> мин"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Распоред"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Утишајте телефон у одређено време"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Подесите правила за режим „Не узнемиравај“"</string>
@@ -3717,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Категорије"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Другo"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ова апликација није поставила ниједно обавештење"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Прикажи некоришћене категорије"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Додатна подешавања у апликацији"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Прикажи некоришћене категорије"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Сакриј некоришћене категорије"</string>
@@ -4921,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Да би овај уређај могао да користи опцију за програмера од 16 kB, његова партиција података треба да се конвертује у ext4. У овом режиму не може да се гарантује интегритет софтвера, па подаци који сe чувају на телефону док је покретачки програм откључан могу да буду угрожени. Активирање опције од 16 kB захтева још једно рестартовање. Када будете у овом режиму, моћи ћете да прелазите са режима од 4 kB на режим од 16 kB и обратно уз једно рестартовање. Неке функције су онемогућене у овим режимима, што значи да неке апликације можда неће радити. Да бисте уређај вратили на производни режим, треба да га вратите на режим од 4 kB и закључате покретачки програм, чиме ће се уређај ресетовати на фабричка подешавања. Када се на уређају укључи Android, онемогућите OEM откључавање у Опцијама за програмера. Уређај ће после потврде бити обрисан, а систем фајлова промењен на ext4. Када се то заврши, вратите се овде да бисте поново омогућили режим од 16 kB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Обриши све податке"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Реформатирање и брисање партиције података на ext4 није успело."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Треба да откључате покретачки програм да бисте користили 16 KB режим"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Да би овај уређај могао да користи опцију за програмера од 16 kB, на њему треба да буде откључан покретачки програм. У овом режиму не може да се гарантује интегритет софтвера, па могу бити угрожени подаци који сe чувају на телефону док је покретачки програм откључан. Када се активира режим од 16 kB, сви подаци и подешавања корисника ће бити избрисани. Када се покретачки програм откључа, активирање опције од 16 kB захтева два рестартовања. Када будете у овом режиму, моћи ћете да прелазите са режима од 4 kB на режим од 16 kB и обратно уз једно рестартовање. Неке функције су онемогућене у овим режимима, што значи да неке апликације можда неће радити. Да бисте уређај вратили на производни режим, треба да га вратите на режим од 4 kB и закључате OEM или покретачки програм на уређају (што ће га ресетовати на фабричка подешавања). Откључајте покретачки програм и пробајте поново. Упутства како то да урадите потражите на &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Користите режим од 4 kB независан од величине странице"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Користите режим од 4 kB у оквиру режима независног од величине странице. У овом режиму не може да се гарантује интегритет софтвера, па подаци који сe чувају на телефону док је покретачки програм откључан могу да буду угрожени. Неке функције су онемогућене у овим режимима, што значи да неке апликације можда неће радити. Да бисте уређај поново вратили у производни режим, морате да закључате покретачки програм уређаја. Додирните да бисте прочитали више."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Користите режим од 4 kB у оквиру режима независног од величине странице. У овом режиму не може да се гарантује интегритет софтвера, па могу бити угрожени подаци који сe чувају на телефону док је покретачки програм откључан. Неке функције су онемогућене у овим режимима, што значи да неке апликације можда неће радити. Да бисте уређај поново вратили у производни режим, морате да закључате покретачки програм уређаја. То ће поново ресетовати уређај на фабричка подешавања и вратити га на производна подешавања. Када се на уређају укључи Android, онемогућите OEM откључавање у Опцијама за програмера. Ако је уређај нестабилан или се на њему не укључи Android, поново га флешујте користећи најновије слике са фабричким подешавањима са &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;. Можете и да користите &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; и изаберете Обриши уређај, Закључај покретачки програм и Принудно флешуј све партиције."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Користите режим од 16 kB независан од величине странице"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Користите режим од 16 kB у оквиру режима независног од величине странице. У овом режиму не може да се гарантује интегритет софтвера, па подаци који сe чувају на телефону док је покретачки програм откључан могу да буду угрожени. Неке функције су онемогућене у овим режимима, што значи да неке апликације можда неће радити. Да бисте уређај поново вратили у производни режим, морате да га вратите на режим од 4 kB и закључате покретачки програм уређаја. Додирните да бисте прочитали више."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Користите режим од 16 kB у оквиру режима независног од величине странице. У овом режиму не може да се гарантује интегритет софтвера, па подаци који сe чувају на телефону док је покретачки програм откључан могу да буду угрожени. Неке функције су онемогућене у овим режимима, што значи да неке апликације можда неће радити. Да бисте уређај поново вратили у производни режим, морате да га вратите на режим од 4 kB и закључате покретачки програм уређаја. То ће поново ресетовати уређај на фабричка подешавања и вратити га на производна подешавања. Када се на уређају укључи Android, онемогућите OEM откључавање у Опцијама за програмера. Ако је уређај нестабилан или се на њему не укључи Android, поново га флешујте користећи најновије слике са фабричким подешавањима са &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;. Можете и да користите &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; и изаберете Обриши уређај, Закључај покретачки програм и Принудно флешуј све партиције."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Режим од 16 kB независан од величине странице"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Прочитајте више"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Обрађивач извештаја о грешци"</string>

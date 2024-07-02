@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"助聽器設定"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"捷徑、助聽器兼容性"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"預設"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"沒有聽力師的預設設定"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"無法更新預設"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音訊輸出裝置"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"關於音訊輸出"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"進一步瞭解「手錶解鎖」"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"新增手錶"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"移除手錶"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"指紋及面孔解鎖"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"面孔和指紋解鎖"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"用於工作設定檔的面孔和指紋解鎖"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"需要設定"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已新增面孔和指紋"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"安裝應用程式"</b>\n"在私人空間中安裝你想設定為私人的應用程式"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"注意事項"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"應用程式在私人空間鎖定後停止運作"</b>\n"私人空間鎖定後，當中的應用程式會停止運作，因此你不會收到這些應用程式的通知"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"私人空間不適用於需要在背景執行或傳送重要通知的應用程式，例如醫療應用程式。因為當空間鎖定時，通知和背景活動亦會隨之停止。\n\n私人空間鎖定時，當中的應用程式不會在權限管理工具、私隱資訊主頁和其他設定中顯示。\n\n私人空間無法移至新裝置。如要在其他裝置上使用私人空間，請重新設定。\n\n如果有人將裝置連接電腦，或在裝置上安裝有害的應用程式，或許能存取你的私人空間。"</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"私人空間不適用於需要在背景執行或傳送重要通知的應用程式，例如醫療應用程式。因為當空間鎖定時，通知和背景活動亦會隨之停止。\n\n私人空間鎖定時，當中的應用程式不會在權限管理工具、私隱資訊主頁和其他設定中顯示。\n\n私人空間無法在新裝置上還原。如要在其他裝置上使用私人空間，請重新設定。\n\n如果有人將裝置連接電腦，或在裝置上安裝惡意應用程式，或許可存取你的私人空間。"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"進一步瞭解私人空間"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"過程需時數分鐘"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"正在設定私人空間…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"自動調整"</string>
     <string name="brightness" msgid="6216871641021779698">"亮度"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"自動調校光暗"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"關於自動調校光暗"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"系統會根據你所在的環境和活動自動調校螢幕光暗。你可以移動滑桿，幫助自動調校光暗功能瞭解你偏好的亮度。"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"開"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"關閉"</string>
@@ -2130,7 +2130,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"仍要繼續"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"取消"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"放大設定"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"單指平移"</string>
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"以 1 隻手指移動放大鏡"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"拖曳 1 隻手指便可在螢幕上移動"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"拖曳一隻手指即可移動放大範圍。"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"拖曳兩隻手指即可移動放大範圍。"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"無法用於只放大部分畫面"</string>
@@ -2154,6 +2155,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"輕按按鈕即可縮放"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"快速放大螢幕畫面中的內容"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;放大螢幕畫面：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 用捷徑開始放大&lt;br/&gt; {1,number,integer}. 輕按螢幕&lt;br/&gt; {2,number,integer}. 用兩指拖曳畫面即可四處移動&lt;br/&gt; {3,number,integer}. 用兩指縮放即可調整縮放比例&lt;br/&gt; {4,number,integer}. 用捷徑即可停止放大&lt;br/&gt;&lt;br/&gt;&lt;b&gt;暫時放大螢幕畫面：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 確定放大類型已設為全螢幕&lt;br/&gt; {1,number,integer}. 用捷徑開始放大&lt;br/&gt; {2,number,integer}. 按住畫面上任何地方&lt;br/&gt; {3,number,integer}. 用兩指拖曳畫面即可四處移動&lt;br/&gt; {4,number,integer}. 提起手指即可停止放大"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;按照下列步驟放大螢幕畫面：&lt;/b&gt;&lt;br/&gt; {0,number,integer}。用快速鍵啟用放大功能&lt;br/&gt; {1,number,integer}。輕按螢幕&lt;br/&gt; {2,number,integer}。拖曳 2 指就可以在畫面上移動&lt;br/&gt; {3,number,integer}。用 2 指縮放就可以調整縮放程度&lt;br/&gt; {4,number,integer}。以快速鍵停用放大功能&lt;br/&gt;&lt;br/&gt;你亦可以暫時放大畫面及執行其他操作。"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;按照下列步驟放大螢幕畫面：&lt;/b&gt;&lt;br/&gt; {0,number,integer}。用快速鍵啟用放大功能&lt;br/&gt; {1,number,integer}。輕按螢幕&lt;br/&gt; {2,number,integer}。拖曳 1 指或 2 指就可以在畫面上移動&lt;br/&gt; {3,number,integer}.用 2 指縮放就可以調整縮放程度&lt;br/&gt; {4,number,integer}。以快速鍵停用放大功能&lt;br/&gt;&lt;br/&gt;你亦可以暫時放大畫面及執行其他操作。"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"開啟放大功能後，你可放大畫面。\n\n"<b>"如要縮放"</b>"，請開啟放大功能，然後輕按螢幕任何地方。\n"<ul><li>"用 2 隻或多隻手指拖曳，即可捲動螢幕"</li>\n<li>"用 2 隻或多隻手指縮放，即可調整縮放程度"</li></ul>\n\n<b>"如要暫時縮放"</b>"，請開啟放大功能，再按住螢幕任何地方。\n"<ul><li>"拖曳即可在螢幕上移動"</li>\n<li>"提起手指即可縮小至原大"</li></ul>\n\n"你無法在鍵盤或導覽列上使用放大功能。"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> 頁中嘅第 <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> 頁"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"無障礙功能按鈕捷徑"</string>
@@ -3362,16 +3365,11 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"只接收重要聯絡人和應用程式的通知"</string>
-    <!-- no translation found for zen_mode_select_schedule (5135520719771212697) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time (1761728920617757652) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time_example (3071816060919446355) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar (4320676795917533667) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar_example (6549820995975678001) -->
-    <skip />
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"選擇啟用類型"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"時間"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"例如：「上午 9:30 至下午 5:00」"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"日曆"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"例如：「個人日曆」"</string>
     <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
     <skip />
     <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
@@ -3398,6 +3396,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"設定時間表"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"時間表"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> 小時 <xliff:g id="MINUTES">%2$d</xliff:g> 分鐘"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"預定時間"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"在特定時間將手機設為靜音"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"設定「請勿騷擾」規則"</string>
@@ -3407,8 +3407,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"允許發出音效的干擾"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"封鎖視覺干擾"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"允許視覺訊號"</string>
-    <!-- no translation found for mode_interruption_filter_title (3343846700214702347) -->
-    <skip />
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"保持專注"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"更多操作"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"顯示設定"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"顯示選項"</string>
@@ -3425,10 +3424,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"啟用深色主題背景"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"將 OS 和應用程式偏好設定切換成「淺色文字配搭深色背景」。此設定或許可減少眼睛疲勞，且在部分裝置上還能節省大量電力"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{沒有顯示變更}=1{{effect_1}}=2{{effect_1}和{effect_2}}=3{{effect_1}、{effect_2}和{effect_3}}other{{effect_1}、{effect_2}和另外 # 個設定}}"</string>
-    <!-- no translation found for mode_notification_filter_title (443728483176031977) -->
-    <skip />
-    <!-- no translation found for mode_no_notification_filter (7119188047783404890) -->
-    <skip />
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"過濾干擾"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"不會過濾任何干擾"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"用來篩選通知的顯示選項"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"開啟「請勿騷擾」模式時"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"不發出音效通知"</string>
@@ -3725,6 +3722,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"類別"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"其他"</string>
     <string name="no_channels" msgid="4716199078612071915">"此應用程式未發佈任何通知"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"顯示未使用的類別"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"應用程式中的其他設定"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"顯示未使用的類別"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"隱藏未使用的類別"</string>
@@ -4929,14 +4927,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"你需要先將此裝置的資料分區轉換為 ext4，才能使用 16 KB 開發人員選項。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。在此之後需要再重新啟動一次，才能啟用 16 KB 選項。當你處於此模式時，可以在 4 KB 和 16 KB 模式之間來回切換，每次切換都要重新啟動一次。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要將裝置返回實際工作環境模式，你需要切換回 4 KB 模式並鎖定啟動程式，然後裝置就會回復原廠設定。裝置成功啟動 Android 後，請在開發人員選項中停用 OEM 解鎖設定。裝置資料將會抹除，檔案系統會在確認後變更為 ext4。完成此步驟之後，請再次返回啟用 16 KB。"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"清除所有資料"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"無法重新格式化並將資料分區抹除，變更為 ext4 檔案系統。"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"需要解鎖啟動程式才可使用 16 KB 模式"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"你需要先將此裝置的啟動程式解鎖，才能使用 16 KB 開發人員選項。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。啟用 16 KB 模式時，所有使用者資料和設定都將抹除。啟動程式解鎖後需要經過兩次重新啟動，才能啟用 16 KB 選項。當你處於此模式時，可以在 4 KB 和 16 KB 模式之間來回切換，每次切換都要重新啟動一次。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要將裝置返回實際工作環境模式，你需要切換回 4 KB 模式，然後原始設備製造商 (OEM)/啟動程式就會鎖定裝置 (此操作會將裝置回復原廠設定)。請解鎖啟動程式，然後再試一次。如需有關的操作指示，請瀏覽 &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"使用 4 KB 頁面通用模式"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"你目前處於頁面通用模式的 4 KB 模式。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要再次進入實際工作環境模式，你必須鎖定裝置的啟動程式。輕按即可閱讀更多。"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"你目前處於頁面通用模式的 4 KB 模式。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要再次進入實際工作環境模式，你必須鎖定裝置的啟動程式。此操作會再次將裝置回復原廠設定，並將裝置還原為實際工作環境設定。裝置成功啟動 Android 後，請在開發人員選項中停用 OEM 解鎖設定。如裝置無法啟動 Android 或不穩定，請透過以下其中一種方式更新裝置：使用 &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; 中的最新原廠映像，或使用 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; 工具，只要選取 [抹除裝置資料]、[鎖定啟動程式] 及 [強制更新所有分區] 即可。"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"使用 16 KB 頁面通用模式"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"你目前處於頁面通用模式的 16 KB 模式。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要再次進入實際工作環境模式，你必須切換回 4 KB 模式，然後鎖定裝置的啟動程式。輕按即可閱讀更多。"</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"你目前處於頁面通用模式的 16 KB 模式。在此模式中無法保證軟件完整性，在啟動程式解鎖時，儲存在手機上的任何資料都可能面臨風險。在這類模式中，部分功能會停用，因此部分應用程式無法運作。如要再次進入實際工作環境模式，你必須切換回 4 KB 模式，然後鎖定裝置的啟動程式。此操作會再次將裝置回復原廠設定，並將裝置還原為實際工作環境設定。裝置成功啟動 Android 後，請在開發人員選項中停用 OEM 解鎖設定。如裝置無法啟動 Android 或不穩定，請透過以下其中一種方式更新裝置：使用 &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; 中的最新原廠映像，或使用 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; 工具，只要選取 [抹除裝置資料]、[鎖定啟動程式] 及 [強制更新所有分區] 即可。"</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 KB 頁面通用模式"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"閱讀更多"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"錯誤報告處理常式"</string>

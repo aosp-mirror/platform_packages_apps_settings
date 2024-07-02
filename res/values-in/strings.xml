@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Setelan alat bantu dengar"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Pintasan, kompatibilitas alat bantu dengar (HAC)"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Preset"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Tidak ada preset yang diprogram oleh ahli audiologi Anda"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Tidak dapat memperbarui preset"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Output audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Tentang output audio"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Pelajari lebih lanjut Buka dengan Smartwatch"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Tambahkan smartwatch"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Hapus smartwatch"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Buka dengan Sidik Jari &amp; Wajah"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Buka dengan Wajah &amp; Sidik Jari"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Buka dengan Wajah &amp; Sidik Jari untuk profil kerja"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Penyiapan diperlukan"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Wajah dan sidik jari ditambahkan"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Instal aplikasi"</b>\n"Instal aplikasi yang ingin Anda jadikan pribadi di ruang Anda"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Perlu diingat"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Aplikasi berhenti saat Anda mengunci ruang"</b>\n"Saat Anda mengunci ruang, aplikasi di ruang Anda akan dihentikan dan Anda tidak akan menerima notifikasi dari aplikasi tersebut"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Ruang privasi tidak cocok untuk aplikasi yang perlu berjalan di latar belakang atau mengirim notifikasi penting, seperti aplikasi medis. Hal ini dikarenakan notifikasi dan aktivitas latar belakang dihentikan saat ruang Anda dikunci.\n\nAplikasi di ruang privasi Anda tidak akan muncul di pengelola izin, dasbor privasi, dan setelan lainnya saat ruang privasi Anda dikunci.\n\nRuang privasi Anda tidak dapat dipindahkan ke perangkat baru. Anda harus menyiapkan ruang privasi baru jika ingin menggunakannya di perangkat lain.\n\nSiapa pun yang menghubungkan perangkat Anda ke komputer atau menginstal aplikasi berbahaya ke perangkat Anda mungkin dapat mengakses ruang privasi Anda."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Ruang privasi tidak cocok untuk aplikasi yang perlu berjalan di latar belakang atau mengirim notifikasi penting, seperti aplikasi medis. Hal ini dikarenakan notifikasi dan aktivitas latar belakang dihentikan saat ruang Anda dikunci.\n\nAplikasi di ruang privasi Anda tidak akan muncul di pengelola izin, dasbor privasi, dan setelan lainnya saat ruang privasi dikunci.\n\nRuang privasi Anda tidak dapat dipulihkan ke perangkat baru. Anda harus menyiapkan ruang lain jika ingin menggunakannya di perangkat lain.\n\nSiapa pun yang menghubungkan perangkat Anda ke komputer atau menginstal aplikasi berbahaya ke perangkat Anda mungkin dapat mengakses ruang privasi Anda."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Pelajari lebih lanjut ruang privasi"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Proses ini perlu waktu beberapa saat"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Menyiapkan ruang privasi…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptif"</string>
     <string name="brightness" msgid="6216871641021779698">"Tingkat kecerahan"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Kecerahan adaptif"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Tentang kecerahan adaptif"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Kecerahan layar akan otomatis disesuaikan dengan lingkungan dan aktivitas Anda. Anda dapat menggeser tombol kecerahan secara manual untuk membantu fitur ini mempelajari preferensi Anda."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Aktif"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Nonaktif"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Tetap lanjutkan"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Batal"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Setelan pembesaran"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Penggeseran satu jari"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Pindahkan area pembesaran dengan menarik satu jari."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Pindahkan area pembesaran dengan menarik dua jari."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Tidak tersedia ketika hanya memperbesar sebagian layar"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ketuk tombol untuk zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Perbesar layar dengan cepat untuk membuat konten terlihat lebih besar"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Untuk memperbesar:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; {1,number,integer}. Ketuk layar&lt;br/&gt; {2,number,integer}. Tarik dengan 2 jari untuk berpindah pada layar&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk menyesuaikan zoom&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk memperbesar sementara:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Pastikan jenis pembesaran disetel ke layar penuh&lt;br/&gt; {1,number,integer}. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; {2,number,integer}. Sentuh lama di mana pun pada layar&lt;br/&gt; {3,number,integer}. Tarik dengan jari untuk berpindah pada layar&lt;br/&gt; {4,number,integer}. Angkat jari untuk menghentikan pembesaran"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Jika pembesaran diaktifkan, Anda dapat memperbesar tampilan layar.\n\n"<b>"Untuk memperbesar tampilan"</b>", mulai pembesaran, lalu ketuk di bagian mana saja pada layar.\n"<ul><li>"Tarik dengan 2 jari atau lebih untuk melakukan scroll"</li>\n<li>"Cubit dengan 2 jari atau lebih untuk menyesuaikan pembesaran"</li></ul>\n\n<b>"Untuk memperbesar tampilan sementara"</b>", mulai pembesaran, lalu sentuh lama di bagian mana saja pada layar.\n"<ul><li>"• Tarik untuk menggeser layar"</li>\n<li>"• Angkat jari untuk memperkecil tampilan"</li></ul>\n\n"Anda tidak dapat memperbesar keyboard atau menu navigasi."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Halaman <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> dari <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Pintasan tombol aksesibilitas"</string>
@@ -3393,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Setel jadwal"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Jadwal"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> jam, <xliff:g id="MINUTES">%2$d</xliff:g> mnt"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Jadwal"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Nonaktifkan notifikasi ponsel pada waktu tertentu"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Setel aturan Jangan Ganggu"</string>
@@ -3717,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Kategori"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Lainnya"</string>
     <string name="no_channels" msgid="4716199078612071915">"Aplikasi ini belum memposting notifikasi"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Tampilkan kategori yang tidak digunakan"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Setelan tambahan di aplikasi"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Tampilkan kategori yang tidak digunakan"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Sembunyikan kategori yang tidak digunakan"</string>
@@ -4921,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Partisi data perangkat ini perlu dikonversi ke ext4 sebelum menggunakan opsi developer 16KB. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Mengaktifkan opsi 16KB akan memerlukan mulai ulang sekali lagi setelah ini. Setelah Anda berada dalam mode ini, Anda dapat beralih antara mode 4KB dan 16KB dengan sekali mulai ulang. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Untuk mengembalikan perangkat ke mode produksi, Anda perlu beralih kembali ke mode 4KB dan mengunci bootloader, yang akan mereset perangkat ke setelan pabrik. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer. Perangkat akan dihapus total dan sistem file akan diubah menjadi ext4 setelah konfirmasi. Setelah selesai, kembali untuk mengaktifkan 16KB lagi."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Hapus semua data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Gagal memformat ulang dan menghapus total partisi data ke ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Buka Kunci Bootloader Diperlukan untuk menggunakan Mode 16KB"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Perangkat ini harus membuka kunci bootloader sebelum menggunakan opsi developer 16KB. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Semua data dan setelan pengguna akan dihapus total saat mengaktifkan mode 16KB. Setelah bootloader dibuka kuncinya, mengaktifkan opsi 16KB akan memerlukan dua kali mulai ulang. Setelah Anda berada dalam mode ini, Anda dapat beralih antara mode 4KB dan 16KB dengan sekali mulai ulang. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Untuk mengembalikan perangkat ke mode produksi, Anda perlu beralih kembali ke mode 4KB dan mengunci bootloader/OEM perangkat (yang akan mereset perangkat setelan pabrik). Buka kunci bootloader dan coba lagi. Anda dapat melihat petunjuk cara melakukannya di &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Menggunakan mode agnostik halaman 4KB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Anda berada dalam mode 4KB dari mode agnostik halaman. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus mengunci bootloader perangkat. Ketuk untuk membaca selengkapnya."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Anda berada dalam mode 4KB dari mode agnostik halaman. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus mengunci bootloader perangkat. Tindakan ini akan mereset perangkat ke setelan pabrik dan memulihkannya ke setelan produksi. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer. Jika perangkat gagal melakukan booting ke Android atau tidak stabil, flash ulang perangkat dengan setelan pabrik terbaru dari &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; atau gunakan &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dan pilih \'Hapus Total Perangkat\', \'Kunci Bootloader\', dan \'Paksa Flash semua partisi\'."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Menggunakan mode agnostik halaman 16KB"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Anda berada dalam mode 16KB dari mode agnostik halaman. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus beralih kembali ke mode 4K dan kemudian mengunci bootloader perangkat. Ketuk untuk membaca selengkapnya."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Anda berada dalam mode 16KB dari mode agnostik halaman. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus beralih kembali ke mode 4K dan kemudian mengunci bootloader perangkat. Tindakan ini akan mereset perangkat ke setelan pabrik dan memulihkannya ke setelan produksi. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer. Jika perangkat gagal melakukan booting ke Android atau tidak stabil, flash ulang perangkat dengan setelan pabrik terbaru dari &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; atau gunakan &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dan pilih \'Hapus Total Perangkat\', \'Kunci Bootloader\', dan \'Paksa Flash semua partisi\'."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Mode Agnostik halaman 16KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Baca selengkapnya"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Pengendali laporan bug"</string>

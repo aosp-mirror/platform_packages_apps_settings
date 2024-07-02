@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Nastavenia načúvacieho zariadenia"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Skratka, kompatibilita s načúvadlami"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Predvoľba"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Váš audiológ nenaprogramoval žiadne predvoľby"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Predvoľbu sa nepodarilo aktualizovať"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Zvukový výstup"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Zvukový výstup"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Ďalšie informácie o odomknutí hodinkami"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Pridať hodinky"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Odstrániť hodinky"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Odomknutie odtlačkom prsta a tvárou"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Odomknutie tvárou a odtlačkom prsta"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Odomknutie tvárou a odtlačkom prsta pre prácu"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Vyžaduje sa nastavenie"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Bola pridaná tvár a odtlačky prsta"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Inštalácia aplikácií"</b>\n"Nainštalujte si aplikácie, ktoré chcete vo svojom priestore ponechať súkromné"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Na čo treba pamätať"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Keď uzamknete svoj priestor, aplikácie sa zastavia"</b>\n"Keď uzamknete svoj priestor, aplikácie v ňom sa zastavia a nebudete z nich dostávať upozornenia"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Súkromné priestory nie sú vhodné pre aplikácie, ktoré majú byť spustené na pozadí alebo odosielajú závažné upozornenia. Týka sa to napríklad zdravotníckych aplikácií. Je to tak preto, lebo upozornenia a aktivita na pozadí sa po uzamknutí priestoru zastavia.\n\nKeď je súkromný priestor uzamknutý, aplikácie v ňom sa nezobrazujú v správe povolení, na paneli ochrany súkromia ani v iných nastaveniach.\n\nSúkromný priestor sa nedá preniesť do nového zariadenia. Ak ho chcete používať v inom zariadení, musíte si založiť ďalší.\n\nK vášmu súkromnému priestoru môže získať prístup ktokoľvek, kto pripojí vaše zariadenie k počítaču alebo v ňom nainštaluje škodlivé aplikácie."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Súkromné priestory nie sú vhodné pre aplikácie, ktoré majú byť spustené na pozadí alebo odosielajú závažné upozornenia. Týka sa to napríklad zdravotníckych aplikácií. Je to tak preto, lebo upozornenia a aktivita na pozadí sa po uzamknutí priestoru zastavia.\n\nKeď je súkromný priestor uzamknutý, aplikácie v ňom sa nezobrazujú v správe povolení, na paneli ochrany súkromia ani v iných nastaveniach.\n\nSúkromný priestor sa nedá obnoviť v novom zariadení. Ak ho chcete používať v inom zariadení, musíte si založiť ďalší.\n\nK vášmu súkromnému priestoru môže získať prístup ktokoľvek, kto pripojí vaše zariadenie k počítaču alebo v ňom nainštaluje škodlivé aplikácie."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Ďalšie informácie o súkromnom priestore"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Bude to chvíľu trvať"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Nastavuje sa súkromný priestor…"</string>
@@ -890,7 +889,7 @@
     <string name="wifi_display_status_in_use" msgid="5904009697167947449">"Používa sa"</string>
     <string name="wifi_display_status_not_available" msgid="8463750208946968594">"Nie je k dispozícii"</string>
     <string name="wifi_display_options_title" msgid="7584326966240865043">"Možnosti bezdrôtového zobrazenia"</string>
-    <string name="wifi_display_options_forget" msgid="3140558691112356024">"Odstrániť"</string>
+    <string name="wifi_display_options_forget" msgid="3140558691112356024">"Zabudnúť"</string>
     <string name="wifi_display_options_done" msgid="7608851767701954020">"Hotovo"</string>
     <string name="wifi_display_options_name" msgid="8181334945680312228">"Názov"</string>
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2,4 GHz"</string>
@@ -1064,7 +1063,7 @@
     <string name="wifi_connecting" msgid="7450277833386859724">"Pripája sa…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Nepodarilo sa pripojiť k sieti"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Sieť nie je v dosahu"</string>
-    <string name="wifi_forget" msgid="3485573280364015620">"Odstrániť"</string>
+    <string name="wifi_forget" msgid="3485573280364015620">"Zabudnúť"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"Upraviť"</string>
     <string name="wifi_save" msgid="2312643132472226807">"Uložiť"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Nepodarilo sa uložiť sieť"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptívne"</string>
     <string name="brightness" msgid="6216871641021779698">"Úroveň jasu"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Adaptácia jasu"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Informácie o adaptácii jasu"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Jas obrazovky sa automaticky prispôsobí prostrediu a aktivitám. Ručným posúvaním posúvača učíte adaptáciu jasu svoje preferované nastavenia."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Zapnuté"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Vypnuté"</string>
@@ -1413,7 +1413,7 @@
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Naformátovať ako prenosné"</string>
     <string name="storage_menu_format_option" msgid="4886059624052908432">"Formátovať"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migrovať dáta"</string>
-    <string name="storage_menu_forget" msgid="5154017890033638936">"Odstrániť záznam"</string>
+    <string name="storage_menu_forget" msgid="5154017890033638936">"Zabudnúť"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Nastaviť"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Uvoľniť miesto"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Spravovať úložisko"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Aj tak pokračovať"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Zrušiť"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Nastavenia priblíženia"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Presunutie jedným prstom"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Jedným prstom presuňte oblasť zväčšenia."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Dvoma prstami presuňte oblasť zväčšenia."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Nie je k dispozícii iba pri zväčšovaní časti obrazovky"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Na priblíženie klepnite na tlačidlo"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Obrazovku si môžete rýchlo priblížiť, aby bol obsah väčší"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Priblíženie:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Skratkou spustite zväčšenie.&lt;br/&gt; {1,number,integer}. Klepnite na obrazovku.&lt;br/&gt; {2,number,integer}. Pohybujte sa po obrazovke presúvaním dvoch prstov.&lt;br/&gt; {3,number,integer}. Priblíženie upravte stiahnutím či roztiahnutím dvoch prstov.&lt;br/&gt; {4,number,integer}. Zväčšenie ukončíte skratkou.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Dočasné priblíženie:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Skontrolujte, či je typ zväčšenia nastavený na celú obrazovku.&lt;br/&gt; {1,number,integer}. Skratkou spustite zväčšenie.&lt;br/&gt; {2,number,integer}. Pridržte ľubovoľné miesto na obrazovke.&lt;br/&gt; {3,number,integer}. Pohybujte sa po obrazovke presúvaním prsta.&lt;br/&gt; {4,number,integer}. Zväčšenie ukončíte zdvihnutím prsta."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Keď je priblíženie zapnuté, môžete si zväčšiť obsah obrazovky.\n\n"<b>"Urobíte to tak"</b>", že spustíte priblíženie a klepnete kamkoľvek na obrazovku.\n"<ul><li>"Zobrazenie posuniete presunutím dvoch alebo viacerých prstov."</li>\n<li>"Priblíženie upravíte stiahnutím dvoch alebo viacerých prstov."</li></ul>\n\n<b>"Ak chcete obsah priblížiť krátkodobo"</b>", spustite priblíženie a pridržte ľubovoľné miesto na obrazovke.\n"<ul><li>"Po obrazovke prechádzate presunutím."</li>\n<li>"Oddialite zdvihnutím prsta."</li></ul>\n\n"Nemôžete priblížiť klávesnicu ani navigačný panel."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>. stránka z <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Skratka tlačidla dostupnosti"</string>
@@ -3393,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Nastavte si plán"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Naplánovať"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Plán"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Stlmiť telefón v určitý čas"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Nastavenie pravidiel režimu bez vyrušení"</string>
@@ -3717,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Kategórie"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Iné"</string>
     <string name="no_channels" msgid="4716199078612071915">"Táto aplikácia ešte neposlala žiadne upozornenia"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Zobrazenie nepoužívaných kategórií"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Ďalšie nastavenia v aplikácii"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Zobraziť nepoužívané kategórie"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Skryť nepoužívané kategórie"</string>
@@ -4921,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Dátový oddiel tohto zariadenia je potrebné pred použitím možnosti 16 kB pre vývojárov konvertovať na ext4. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Aktivácia možnosti 16 kB si potom vyžiada ešte jedno reštartovanie. Keď budete v tomto režime, môžete prepínať medzi režimom 4 kB a 16 kB jedným reštartovaním. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete zariadenie vrátiť do ostrého režimu, musíte prepnúť späť na režim 4 kB a potom uzamknúť zavádzací program systému, čím sa v zariadení obnovia výrobné nastavenia. Po úspešnom zapnutí Androidu v zariadení vypnite odomknutie OEM v sekcii Pre vývojárov. Zariadenie sa trvalo vymaže a systém súborov sa po potvrdení zmení na ext4. Po dokončení tohto kroku sa vráťte a znova zapnite režim 16 kB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Vymazať všetky údaje"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Nepodarilo sa zmeniť formát ani trvale vymazať oddiel dát na ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Režim 16 kB vyžaduje odomknutie zavádzacieho programu systému"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Toto zariadenie musí mať pred použitím možnosti pre vývojárov 16 kB odomknutý zavádzací program systému. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Pri aktivácii režimu 16 kB sa vymažú všetky dáta a nastavenia používateľa. Po odomknutí zavádzacieho programu systému si aktivácia možnosti 16 kB vyžiada dve reštartovania. Keď budete v tomto režime, môžete prepínať medzi režimom 4 kB a 16 kB jedným reštartovaním. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete zariadenie vrátiť do ostrého režimu, musíte prepnúť späť na režim 4 kB a potom uzamknúť OEM alebo zavádzací program systému, čím sa v zariadení obnovia výrobné nastavenia. Odomknite zavádzací program systému a skúste to znova. Postup, ako to vykonať, nájdete na &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Používa sa režim 4 kB, ktorý nezohľadňuje stránkovanie"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Ste v režime 4 kB, ktorý nezohľadňuje stránkovanie. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete znova vstúpiť do ostrého režimu, musíte uzamknúť zavádzací program systému zariadenia. Klepnutím zobrazíte ďalšie informácie."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Ste v režime 4 kB, ktorý nezohľadňuje stránkovanie. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete znova vstúpiť do ostrého režimu, musíte uzamknúť zavádzací program systému zariadenia. Tým sa v zariadení znova obnovia výrobné nastavenia na nastavenia ostrého režimu. Po úspešnom zapnutí zariadenia do Androidu vypnite odomknutie OEM v sekcii Pre vývojárov. Ak sa zariadeniu nepodarí spustiť Android alebo bude nestabilné, znova nainštalujte najnovšie výrobné obrazy systému z webu &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; alebo prejdite na &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; a vyberte Wipe Device (Trvale vymazať zariadenie), Lock Bootloader (Uzamknúť zavádzací program systému) a Force Flash all partitions (Vynútiť inštaláciu obrazu systému vo všetkých oddieloch)."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Používa sa režim 16 kB, ktorý nezohľadňuje stránkovanie"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Ste v režime 16 kB, ktorý nezohľadňuje stránkovanie. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete znova vstúpiť do ostrého režimu, musíte prepnúť späť do režimu 4 kB a potom uzamknúť zavádzací program systému zariadenia. Klepnutím zobrazíte ďalšie informácie."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Ste v režime 16 kB, ktorý nezohľadňuje stránkovanie. V tomto režime nie je možné zaručiť integritu softvéru a všetky dáta uložené v telefóne môžu byť počas odomknutia zavádzacieho programu systému ohrozené. Niektoré funkcie budú v týchto režimoch vypnuté, takže niektoré aplikácie nemusia fungovať. Ak chcete znova vstúpiť do ostrého režimu, musíte prepnúť späť do režimu 4 kB a potom uzamknúť zavádzací program systému zariadenia. Tým sa v zariadení znova obnovia výrobné nastavenia na nastavenia ostrého režimu. Po úspešnom zapnutí zariadenia do Androidu vypnite odomknutie OEM v sekcii Pre vývojárov. Ak sa zariadeniu nepodarí spustiť Android alebo bude nestabilné, znova nainštalujte najnovšie výrobné obrazy systému z webu &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; alebo prejdite na &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; a vyberte Wipe Device (Trvale vymazať zariadenie), Lock Bootloader (Uzamknúť zavádzací program systému) a Force Flash all partitions (Vynútiť inštaláciu obrazu systému vo všetkých oddieloch)."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Režim 16 kB nezohľadňujúci stránkovanie"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ďalšie informácie"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Obsluha hlásení chýb"</string>
