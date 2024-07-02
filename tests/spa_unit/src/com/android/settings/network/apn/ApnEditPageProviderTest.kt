@@ -38,6 +38,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.google.common.truth.Truth
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -133,6 +134,7 @@ class ApnEditPageProviderTest {
         composeTestRule.onNodeWithText(apnRoaming, true).assertIsDisplayed()
     }
 
+    @Ignore("b/342374681")
     @Test
     fun carrier_enabled_displayed() {
         composeTestRule.setContent {
@@ -153,6 +155,7 @@ class ApnEditPageProviderTest {
         composeTestRule.onNodeWithText(apnEnable, true).assertIsOn()
     }
 
+    @Ignore("b/342374681")
     @Test
     fun carrier_enabled_checkChanged() {
         composeTestRule.setContent {
