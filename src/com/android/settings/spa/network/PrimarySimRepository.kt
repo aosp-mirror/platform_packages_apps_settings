@@ -22,12 +22,14 @@ import android.telephony.SubscriptionManager
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.network.SubscriptionUtil
+import com.android.settings.network.telephony.CarrierConfigRepository
 import com.android.settingslib.spa.widget.preference.ListPreferenceOption
 
 class PrimarySimRepository(private val context: Context) {
 
     data class PrimarySimInfo(
-        val callsAndSmsList: List<ListPreferenceOption>,
+        val callsList: List<ListPreferenceOption>,
+        val smsList: List<ListPreferenceOption>,
         val dataList: List<ListPreferenceOption>,
     )
 
@@ -37,7 +39,8 @@ class PrimarySimRepository(private val context: Context) {
             return null
         }
 
-        val callsAndSmsList = mutableListOf<ListPreferenceOption>()
+        val callsList = mutableListOf<ListPreferenceOption>()
+        val smsList = mutableListOf<ListPreferenceOption>()
         val dataList = mutableListOf<ListPreferenceOption>()
         for (info in selectableSubscriptionInfoList) {
             val item = ListPreferenceOption(
@@ -45,15 +48,22 @@ class PrimarySimRepository(private val context: Context) {
                 text = "${info.displayName}",
                 summary = SubscriptionUtil.getBidiFormattedPhoneNumber(context, info) ?: "",
             )
-            callsAndSmsList += item
+            callsList += item
+            smsList += item
             dataList += item
         }
-        callsAndSmsList += ListPreferenceOption(
+
+        val askEveryTime = ListPreferenceOption(
             id = SubscriptionManager.INVALID_SUBSCRIPTION_ID,
             text = context.getString(R.string.sim_calls_ask_first_prefs_title),
         )
+        callsList += askEveryTime
+        if (context.resources
+                .getBoolean(com.android.internal.R.bool.config_sms_ask_every_time_support)) {
+            smsList += askEveryTime
+        }
 
-        return PrimarySimInfo(callsAndSmsList, dataList)
+        return PrimarySimInfo(callsList, smsList, dataList)
     }
 
     private companion object {

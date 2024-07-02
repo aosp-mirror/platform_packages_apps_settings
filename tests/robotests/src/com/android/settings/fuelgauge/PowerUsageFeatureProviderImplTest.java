@@ -78,6 +78,11 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void isRestrictedModeOverwriteEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isRestrictedModeOverwriteEnabled()).isFalse();
+    }
+
+    @Test
     public void isForceExpireAppOptimizationModeEnabled_returnFalse() {
         assertThat(mPowerFeatureProvider.isForceExpireAppOptimizationModeEnabled()).isFalse();
     }
