@@ -24,6 +24,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.notification.modes.ZenMode;
@@ -90,6 +91,16 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
         mZenMode = zenMode;
         updateState(preference);
     }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        if (mZenMode != null) {
+            displayPreference(screen, mZenMode);
+        }
+    }
+
+    public void displayPreference(PreferenceScreen screen, @NonNull ZenMode zenMode) {}
 
     @Override
     public final void updateState(Preference preference) {

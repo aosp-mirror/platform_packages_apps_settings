@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ZenModeFragment extends ZenModeFragmentBase {
+
     // for mode deletion menu
     private static final int DELETE_MODE = 1;
 
@@ -61,7 +62,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(
                 context, "mode_display_settings", mBackend, mHelperBackend));
         prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
-                "zen_automatic_trigger_category", this, mBackend));
+                "zen_automatic_trigger_category", this, mBackend,
+                context.getPackageManager()));
         prefControllers.add(new InterruptionFilterPreferenceController(
                 context, "allow_filtering", mBackend));
         prefControllers.add(new ManualDurationPreferenceController(
