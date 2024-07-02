@@ -41,7 +41,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.internal.telephony.flags.Flags;
-import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.mobile.dataservice.MobileNetworkDatabase;
@@ -435,7 +434,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 mMetricsFeatureProvider.action(mContext,
                         SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO, subId);
                 insertUiccInfo(subId, telephonyManager);
-                insertMobileNetworkInfo(context, subId, telephonyManager);
+                insertMobileNetworkInfo(subId, telephonyManager);
             }
         } else if (DEBUG) {
             Log.d(TAG, "Can not insert subInfo, the entity is null");
@@ -517,19 +516,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private void insertMobileNetworkInfo(Context context, int subId,
-            TelephonyManager telephonyManager) {
-        MobileNetworkInfoEntity mobileNetworkInfoEntity = convertToMobileNetworkInfoEntity(context,
-                subId, telephonyManager);
-
+    private void insertMobileNetworkInfo(int subId, TelephonyManager telephonyManager) {
+        MobileNetworkInfoEntity mobileNetworkInfoEntity =
+                convertToMobileNetworkInfoEntity(subId, telephonyManager);
 
         Log.d(TAG, "insertMobileNetworkInfo, mobileNetworkInfoEntity = "
                 + mobileNetworkInfoEntity);
-
-
-        if (mobileNetworkInfoEntity == null) {
-            return;
-        }
 
         if (!sCacheMobileNetworkInfoEntityMap.containsKey(subId)
                 || !sCacheMobileNetworkInfoEntityMap.get(subId).equals(mobileNetworkInfoEntity)) {
@@ -540,7 +532,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private MobileNetworkInfoEntity convertToMobileNetworkInfoEntity(Context context, int subId,
+    private MobileNetworkInfoEntity convertToMobileNetworkInfoEntity(int subId,
             TelephonyManager telephonyManager) {
         boolean isDataEnabled = false;
         if (telephonyManager != null) {
@@ -549,18 +541,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             Log.d(TAG, "TelephonyManager is null, subId = " + subId);
         }
 
-        return new MobileNetworkInfoEntity(String.valueOf(subId),
-                MobileNetworkUtils.isContactDiscoveryEnabled(context, subId),
-                MobileNetworkUtils.isContactDiscoveryVisible(context, subId),
-                isDataEnabled,
-                MobileNetworkUtils.isCdmaOptions(context, subId),
-                MobileNetworkUtils.isGsmOptions(context, subId),
-                MobileNetworkUtils.isWorldMode(context, subId),
-                MobileNetworkUtils.shouldDisplayNetworkSelectOptions(context, subId),
-                MobileNetworkUtils.isTdscdmaSupported(context, subId),
-                MobileNetworkUtils.activeNetworkIsCellular(context),
-                SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager),
-                /* deprecated isDataRoamingEnabled = */ false
+        return new MobileNetworkInfoEntity(String.valueOf(subId), isDataEnabled,
+                SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)
         );
     }
 
@@ -681,8 +663,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         public void onUserMobileDataStateChanged(boolean enabled) {
             Log.d(TAG, "onUserMobileDataStateChanged enabled " + enabled + " on SUB " + mSubId);
             sExecutor.execute(() -> {
-                insertMobileNetworkInfo(mContext, mSubId,
-                        getTelephonyManagerBySubId(mContext, mSubId));
+                insertMobileNetworkInfo(mSubId, getTelephonyManagerBySubId(mContext, mSubId));
             });
         }
     }
