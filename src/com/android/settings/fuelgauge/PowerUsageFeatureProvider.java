@@ -26,6 +26,7 @@ import android.util.SparseIntArray;
 import androidx.annotation.NonNull;
 
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
+import com.android.settings.fuelgauge.batteryusage.BatteryEvent;
 import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
@@ -42,6 +43,9 @@ public interface PowerUsageFeatureProvider {
 
     /** Check whether the battery tips card is enabled in the battery usage page */
     boolean isBatteryTipsEnabled();
+
+    /** Check whether overwrite the app optimization mode to restricted mode is enabled */
+    boolean isRestrictedModeOverwriteEnabled();
 
     /** Check whether force expire the app optimization mode. */
     boolean isForceExpireAppOptimizationModeEnabled();
@@ -166,5 +170,6 @@ public interface PowerUsageFeatureProvider {
     boolean processBatteryReattributeData(
             @NonNull Context context,
             @NonNull Map<Long, BatteryDiffData> batteryDiffDataMap,
+            @NonNull List<BatteryEvent> batteryEventList,
             final boolean isFromPeriodJob);
 }

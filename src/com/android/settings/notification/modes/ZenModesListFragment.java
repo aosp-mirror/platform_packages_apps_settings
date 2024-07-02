@@ -78,7 +78,7 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
         return SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION;
     }
 
-    private static ManagedServiceSettings.Config getConditionProviderConfig() {
+    static ManagedServiceSettings.Config getConditionProviderConfig() {
         return new ManagedServiceSettings.Config.Builder()
                 .setTag(TAG)
                 .setIntentAction(ConditionProviderService.SERVICE_INTERFACE)
