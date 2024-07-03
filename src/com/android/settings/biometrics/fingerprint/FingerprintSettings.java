@@ -23,6 +23,7 @@ import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.Utils.isPrivateProfile;
+import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
 
@@ -218,6 +219,10 @@ public class FingerprintSettings extends SubSettings {
                 "security_settings_fingerprint_unlock_category";
         private static final String KEY_FINGERPRINT_UNLOCK_FOOTER =
                 "security_settings_fingerprint_footer";
+        private static final String KEY_BIOMETRICS_AUTHENTICATION_REQUESTED =
+                "biometrics_authentication_requested";
+        private static final String KEY_BIOMETRICS_SUCCESSFULLY_AUTHENTICATED =
+                "biometrics_successfully_authenticated";
 
         private static final int MSG_REFRESH_FINGERPRINT_TEMPLATES = 1000;
         private static final int MSG_FINGER_AUTH_SUCCESS = 1001;
@@ -251,6 +256,8 @@ public class FingerprintSettings extends SubSettings {
         private boolean mInFingerprintLockout;
         private byte[] mToken;
         private boolean mLaunchedConfirm;
+        private boolean mBiometricsAuthenticationRequested;
+        private boolean mBiometricsSuccessfullyAuthenticated;
         private boolean mHasFirstEnrolled = true;
         private Drawable mHighlightDrawable;
         private int mUserId;
@@ -423,6 +430,8 @@ public class FingerprintSettings extends SubSettings {
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
             mChallenge = activity.getIntent()
                     .getLongExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, -1L);
+            mBiometricsSuccessfullyAuthenticated = getIntent().getBooleanExtra(
+                    BiometricEnrollBase.EXTRA_BIOMETRICS_AUTHENTICATED_SUCCESSFULLY, false);
 
             mAuthenticateSidecar = (FingerprintAuthenticateSidecar)
                     getFragmentManager().findFragmentByTag(TAG_AUTHENTICATE_SIDECAR);
@@ -464,6 +473,10 @@ public class FingerprintSettings extends SubSettings {
                 mIsEnrolling = savedInstanceState.getBoolean(KEY_IS_ENROLLING, mIsEnrolling);
                 mHasFirstEnrolled = savedInstanceState.getBoolean(KEY_HAS_FIRST_ENROLLED,
                         mHasFirstEnrolled);
+                mBiometricsSuccessfullyAuthenticated = savedInstanceState.getBoolean(
+                        KEY_BIOMETRICS_SUCCESSFULLY_AUTHENTICATED);
+                mBiometricsAuthenticationRequested = savedInstanceState.getBoolean(
+                        KEY_BIOMETRICS_AUTHENTICATION_REQUESTED);
             }
 
             // (mLaunchedConfirm or mIsEnrolling) means that we are waiting an activity result.
@@ -472,6 +485,10 @@ public class FingerprintSettings extends SubSettings {
                 if (mToken == null) {
                     mLaunchedConfirm = true;
                     launchChooseOrConfirmLock();
+                } else if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
+                        mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested)) {
+                    mBiometricsAuthenticationRequested = true;
+                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
                 } else if (!mHasFirstEnrolled) {
                     mIsEnrolling = true;
                     addFirstFingerprint(null);
@@ -751,6 +768,12 @@ public class FingerprintSettings extends SubSettings {
 
             mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
                     .getUdfpsEnrollCalibrator(getActivity().getApplicationContext(), null, null);
+
+            if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
+                    mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested)) {
+                mBiometricsAuthenticationRequested = true;
+                Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+            }
         }
 
         private void updatePreferences() {
@@ -798,6 +821,10 @@ public class FingerprintSettings extends SubSettings {
             outState.putSerializable("mFingerprintsRenaming", mFingerprintsRenaming);
             outState.putBoolean(KEY_IS_ENROLLING, mIsEnrolling);
             outState.putBoolean(KEY_HAS_FIRST_ENROLLED, mHasFirstEnrolled);
+            outState.putBoolean(KEY_BIOMETRICS_AUTHENTICATION_REQUESTED,
+                    mBiometricsAuthenticationRequested);
+            outState.putBoolean(KEY_BIOMETRICS_SUCCESSFULLY_AUTHENTICATED,
+                    mBiometricsSuccessfullyAuthenticated);
         }
 
         @Override
@@ -1018,6 +1045,13 @@ public class FingerprintSettings extends SubSettings {
                 mIsEnrolling = false;
                 mHasFirstEnrolled = true;
                 updateAddPreference();
+            } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
+                mBiometricsAuthenticationRequested = false;
+                if (resultCode == RESULT_OK) {
+                    mBiometricsSuccessfullyAuthenticated = true;
+                } else {
+                    finish();
+                }
             }
         }
 
