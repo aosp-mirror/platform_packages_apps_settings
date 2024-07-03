@@ -8118,6 +8118,14 @@
     <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_device_effects_title">Additional actions</string>
 
+    <!-- Summary for the Sound Do not Disturb option when DND isn't currently on. [CHAR LIMIT=NONE]-->
+    <string name="modes_sound_summary_off">
+        {count, plural,
+        =0    {Off}
+        =1    {Off / 1 mode can turn on automatically}
+        other {Off / # modes can turn on automatically}
+        }
+    </string>
 
     <!-- Do not disturb: display settings title [CHAR LIMIT=80] -->
     <string name="mode_display_settings_title">Display settings</string>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.notification.zen;
+package com.android.settings.notification.modes;
 
 import android.app.Flags;
+import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -28,20 +29,29 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class ZenModePreferenceController extends BasePreferenceController
+public class ZenModesLinkPreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
     private SettingObserver mSettingObserver;
-    private ZenModeSettings.SummaryBuilder mSummaryBuilder;
+    private ZenModeSummaryHelper mSummaryBuilder;
+    private NotificationManager mNm;
 
-    public ZenModePreferenceController(Context context, String key) {
+    public ZenModesLinkPreferenceController(Context context, String key) {
         super(context, key);
-        mSummaryBuilder = new ZenModeSettings.SummaryBuilder(context);
+        mSummaryBuilder = new ZenModeSummaryHelper(context, ZenHelperBackend.getInstance(context));
+        mNm = mContext.getSystemService(NotificationManager.class);
+    }
+
+    @Override
+    @AvailabilityStatus
+    public int getAvailabilityStatus() {
+        return Flags.modesUi() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -66,16 +76,12 @@ public class ZenModePreferenceController extends BasePreferenceController
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return Flags.modesUi() ? UNSUPPORTED_ON_DEVICE : AVAILABLE_UNSEARCHABLE;
-    }
-
-    @Override
     public void updateState(Preference preference) {
-        super.updateState(preference);
-        if (preference.isEnabled()) {
-            preference.setSummary(mSummaryBuilder.getSoundSummary());
-        }
+        preference.setSummary(mSummaryBuilder.getSoundSummary(
+                Settings.Global.getInt(mContext.getContentResolver(),
+                        Settings.Global.ZEN_MODE,
+                        Settings.Global.ZEN_MODE_OFF),
+                mNm.getZenModeConfig()));
     }
 
     class SettingObserver extends ContentObserver {
