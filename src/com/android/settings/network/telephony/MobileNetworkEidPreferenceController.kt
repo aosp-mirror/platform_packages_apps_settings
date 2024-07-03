@@ -91,7 +91,6 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
             )
             return
         }
-        preference.isVisible = false
 
         val viewModel by lazyViewModel
         coroutineScope = viewLifecycleOwner.lifecycleScope
@@ -127,7 +126,6 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
         preference.title = title
         preference.dialogTitle = title
         preference.summary = eid
-        preference.isVisible = eid.isNotEmpty()
     }
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {

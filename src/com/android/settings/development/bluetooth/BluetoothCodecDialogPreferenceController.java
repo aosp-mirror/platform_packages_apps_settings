@@ -22,6 +22,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
@@ -41,11 +42,11 @@ public class BluetoothCodecDialogPreferenceController extends
     private static final String KEY = "bluetooth_audio_codec_settings";
     private static final String TAG = "BtCodecCtr";
 
-    private final Callback mCallback;
+    @Nullable private final Callback mCallback;
 
     public BluetoothCodecDialogPreferenceController(Context context, Lifecycle lifecycle,
                                                     BluetoothA2dpConfigStore store,
-                                                    Callback callback) {
+                                                    @Nullable Callback callback) {
         super(context, lifecycle, store);
         mCallback = callback;
     }

@@ -45,6 +45,7 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.flags.Flags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -112,6 +113,11 @@ public class AudioSharingDialogFragmentTest {
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
     }
 
+    @After
+    public void tearDown() {
+        ShadowAlertDialogCompat.reset();
+    }
+
     @Test
     public void getMetricsCategory_correctValue() {
         assertThat(mFragment.getMetricsCategory())
@@ -124,7 +130,16 @@ public class AudioSharingDialogFragmentTest {
         AudioSharingDialogFragment.show(
                 mParent, new ArrayList<>(), EMPTY_EVENT_LISTENER, TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
 
+    @Test
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AudioSharingDialogFragment.show(
+                new Fragment(), new ArrayList<>(), EMPTY_EVENT_LISTENER, TEST_EVENT_DATA_LIST);
+        shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }

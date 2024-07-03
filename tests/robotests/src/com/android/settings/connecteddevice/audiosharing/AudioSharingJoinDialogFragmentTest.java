@@ -48,6 +48,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.flags.Flags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -104,11 +105,7 @@ public class AudioSharingJoinDialogFragmentTest {
 
     @Before
     public void setUp() {
-        AlertDialog latestAlertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        if (latestAlertDialog != null) {
-            latestAlertDialog.dismiss();
-            ShadowAlertDialogCompat.reset();
-        }
+        ShadowAlertDialogCompat.reset();
         ShadowBluetoothAdapter shadowBluetoothAdapter =
                 Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         shadowBluetoothAdapter.setEnabled(true);
@@ -127,6 +124,12 @@ public class AudioSharingJoinDialogFragmentTest {
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowAlertDialogCompat.reset();
+        ShadowBluetoothUtils.reset();
     }
 
     @Test
@@ -151,6 +154,20 @@ public class AudioSharingJoinDialogFragmentTest {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         AudioSharingJoinDialogFragment.show(
                 mParent,
+                new ArrayList<>(),
+                mCachedDevice2,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
+        shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AudioSharingJoinDialogFragment.show(
+                new Fragment(),
                 new ArrayList<>(),
                 mCachedDevice2,
                 EMPTY_EVENT_LISTENER,

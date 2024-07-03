@@ -61,7 +61,7 @@ public class AudioSharingConfirmDialogFragmentTest {
 
     @Before
     public void setUp() {
-        cleanUpDialogs();
+        ShadowAlertDialogCompat.reset();
         ShadowBluetoothAdapter shadowBluetoothAdapter =
                 Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         shadowBluetoothAdapter.setEnabled(true);
@@ -77,7 +77,7 @@ public class AudioSharingConfirmDialogFragmentTest {
 
     @After
     public void tearDown() {
-        cleanUpDialogs();
+        ShadowAlertDialogCompat.reset();
     }
 
     @Test
@@ -90,6 +90,15 @@ public class AudioSharingConfirmDialogFragmentTest {
     public void onCreateDialog_flagOff_dialogNotExist() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         AudioSharingConfirmDialogFragment.show(mParent);
+        shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AudioSharingConfirmDialogFragment.show(new Fragment());
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
@@ -117,13 +126,5 @@ public class AudioSharingConfirmDialogFragmentTest {
         btnView.performClick();
         shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
-    }
-
-    private void cleanUpDialogs() {
-        AlertDialog latestAlertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        if (latestAlertDialog != null) {
-            latestAlertDialog.dismiss();
-            ShadowAlertDialogCompat.reset();
-        }
     }
 }

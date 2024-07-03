@@ -47,6 +47,7 @@ import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.flags.Flags;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -104,11 +105,7 @@ public class AudioSharingDisconnectDialogFragmentTest {
 
     @Before
     public void setUp() {
-        AlertDialog latestAlertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        if (latestAlertDialog != null) {
-            latestAlertDialog.dismiss();
-            ShadowAlertDialogCompat.reset();
-        }
+        ShadowAlertDialogCompat.reset();
         ShadowBluetoothAdapter shadowBluetoothAdapter =
                 Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         shadowBluetoothAdapter.setEnabled(true);
@@ -131,6 +128,11 @@ public class AudioSharingDisconnectDialogFragmentTest {
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
     }
 
+    @After
+    public void tearDown() {
+        ShadowAlertDialogCompat.reset();
+    }
+
     @Test
     public void getMetricsCategory_correctValue() {
         assertThat(mFragment.getMetricsCategory())
@@ -147,6 +149,23 @@ public class AudioSharingDisconnectDialogFragmentTest {
                 mParent, mDeviceItems, mCachedDevice3, EMPTY_EVENT_LISTENER, TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
 
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mDeviceItems = new ArrayList<>();
+        mDeviceItems.add(TEST_DEVICE_ITEM1);
+        mDeviceItems.add(TEST_DEVICE_ITEM2);
+        AudioSharingDisconnectDialogFragment.show(
+                new Fragment(),
+                mDeviceItems,
+                mCachedDevice3,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
+        shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }

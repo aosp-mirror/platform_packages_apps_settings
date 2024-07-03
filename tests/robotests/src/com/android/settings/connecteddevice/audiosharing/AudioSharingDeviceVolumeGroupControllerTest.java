@@ -25,6 +25,7 @@ import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -34,6 +35,8 @@ import static org.robolectric.Shadows.shadowOf;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
+import android.bluetooth.BluetoothLeBroadcastMetadata;
+import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothStatusCodes;
 import android.bluetooth.BluetoothVolumeControl;
 import android.content.ContentResolver;
@@ -69,6 +72,7 @@ import com.android.settingslib.flags.Flags;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -81,6 +85,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 @RunWith(RobolectricTestRunner.class)
@@ -114,6 +120,8 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     @Mock private LocalBluetoothProfileManager mProfileManager;
     @Mock private LocalBluetoothLeBroadcast mBroadcast;
     @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
+    @Mock private BluetoothLeBroadcastReceiveState mState;
+    @Mock private BluetoothLeBroadcastMetadata mSource;
     @Mock private AudioSharingDeviceVolumeControlUpdater mDeviceUpdater;
     @Mock private VolumeControlProfile mVolumeControl;
     @Mock private PreferenceScreen mScreen;
@@ -164,6 +172,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         doReturn(TEST_DEVICE_GROUP_ID1).when(mCachedDevice1).getGroupId();
         doReturn(mDevice1).when(mCachedDevice1).getDevice();
         doReturn(ImmutableSet.of()).when(mCachedDevice1).getMemberDevice();
+        when(mCachedDeviceManager.findDevice(mDevice1)).thenReturn(mCachedDevice1);
         when(mPreference1.getCachedDevice()).thenReturn(mCachedDevice1);
         doReturn(TEST_DEVICE_NAME2).when(mCachedDevice2).getName();
         doReturn(TEST_DEVICE_GROUP_ID2).when(mCachedDevice2).getGroupId();
@@ -181,17 +190,23 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mContentObserver = mController.getSettingsObserver();
     }
 
+    @After
+    public void tearDown() {
+        ShadowThreadUtils.reset();
+        ShadowBluetoothUtils.reset();
+    }
+
     @Test
     public void onStart_flagOff_doNothing() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStart(mLifecycleOwner);
-        verify(mAssistant, times(0))
+        verify(mAssistant, never())
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
-        verify(mDeviceUpdater, times(0)).registerCallback();
-        verify(mVolumeControl, times(0))
+        verify(mDeviceUpdater, never()).registerCallback();
+        verify(mVolumeControl, never())
                 .registerCallback(any(Executor.class), any(BluetoothVolumeControl.Callback.class));
-        verify(mContentResolver, times(0))
+        verify(mContentResolver, never())
                 .registerContentObserver(
                         Settings.Secure.getUriFor(SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID),
                         false,
@@ -216,15 +231,32 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     }
 
     @Test
+    public void onAudioSharingProfilesConnected_flagOn_registerCallbacks() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mController.onAudioSharingProfilesConnected();
+        verify(mAssistant)
+                .registerServiceCallBack(
+                        any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
+        verify(mDeviceUpdater).registerCallback();
+        verify(mVolumeControl)
+                .registerCallback(any(Executor.class), any(BluetoothVolumeControl.Callback.class));
+        verify(mContentResolver)
+                .registerContentObserver(
+                        Settings.Secure.getUriFor(SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID),
+                        false,
+                        mContentObserver);
+    }
+
+    @Test
     public void onStop_flagOff_doNothing() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStop(mLifecycleOwner);
-        verify(mAssistant, times(0))
+        verify(mAssistant, never())
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
-        verify(mDeviceUpdater, times(0)).unregisterCallback();
-        verify(mVolumeControl, times(0))
+        verify(mDeviceUpdater, never()).unregisterCallback();
+        verify(mVolumeControl, never())
                 .unregisterCallback(any(BluetoothVolumeControl.Callback.class));
-        verify(mContentResolver, times(0)).unregisterContentObserver(mContentObserver);
+        verify(mContentResolver, never()).unregisterContentObserver(mContentObserver);
     }
 
     @Test
@@ -232,12 +264,12 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.setCallbacksRegistered(false);
         mController.onStop(mLifecycleOwner);
-        verify(mAssistant, times(0))
+        verify(mAssistant, never())
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
-        verify(mDeviceUpdater, times(0)).unregisterCallback();
-        verify(mVolumeControl, times(0))
+        verify(mDeviceUpdater, never()).unregisterCallback();
+        verify(mVolumeControl, never())
                 .unregisterCallback(any(BluetoothVolumeControl.Callback.class));
-        verify(mContentResolver, times(0)).unregisterContentObserver(mContentObserver);
+        verify(mContentResolver, never()).unregisterContentObserver(mContentObserver);
     }
 
     @Test
@@ -257,7 +289,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.displayPreference(mScreen);
         assertThat(mPreferenceGroup.isVisible()).isFalse();
-        verify(mDeviceUpdater, times(0)).forceUpdate();
+        verify(mDeviceUpdater, never()).forceUpdate();
     }
 
     @Test
@@ -324,7 +356,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mPreferenceGroup.addPreference(mPreference1);
         mController.setPreferenceGroup(mPreferenceGroup);
         mController.onDeviceRemoved(mPreference1);
-        verify(mPreferenceGroup, times(0)).setVisible(false);
+        verify(mPreferenceGroup, never()).setVisible(false);
         assertThat(mPreferenceGroup.isVisible()).isTrue();
     }
 
@@ -344,7 +376,7 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mController.updateVisibility();
         shadowOf(Looper.getMainLooper()).idle();
 
-        verify(mPreferenceGroup, times(0)).setVisible(anyBoolean());
+        verify(mPreferenceGroup, never()).setVisible(anyBoolean());
     }
 
     @Test
@@ -410,5 +442,65 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
 
         verify(mPreference1).setOrder(0);
         verify(mPreference2).setOrder(1);
+    }
+
+    @Test
+    public void onDeviceVolumeChanged_updatePreference() {
+        when(mPreference1.getProgress()).thenReturn(TEST_MAX_VOLUME_VALUE);
+        mController.setPreferenceGroup(mPreferenceGroup);
+        mController.onDeviceAdded(mPreference1);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
+
+        mController.mVolumeControlCallback.onDeviceVolumeChanged(mDevice1, TEST_VOLUME_VALUE);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mPreference1).setProgress(TEST_VOLUME_VALUE);
+    }
+
+    @Test
+    public void testBluetoothLeBroadcastAssistantCallbacks_updateGroup() {
+        when(mState.getBisSyncState()).thenReturn(new ArrayList<>());
+        // onReceiveStateChanged with unconnected state will do nothing
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
+                mDevice1, /* sourceId= */ 1, mState);
+        verify(mDeviceUpdater, never()).forceUpdate();
+
+        // onReceiveStateChanged with connected state will update group preference
+        List<Long> bisSyncState = new ArrayList<>();
+        bisSyncState.add(1L);
+        when(mState.getBisSyncState()).thenReturn(bisSyncState);
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
+                mDevice1, /* sourceId= */ 1, mState);
+        verify(mDeviceUpdater).forceUpdate();
+
+        // onSourceRemoved will update group preference
+        mController.mBroadcastAssistantCallback.onSourceRemoved(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        verify(mDeviceUpdater, times(2)).forceUpdate();
+    }
+
+    @Test
+    public void testBluetoothLeBroadcastAssistantCallbacks_doNothing() {
+        mController.mBroadcastAssistantCallback.onSearchStarted(/* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSearchStartFailed(/* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSearchStopped(/* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSearchStopFailed(/* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceAdded(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceAddFailed(
+                mDevice1, mSource, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceRemoveFailed(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceModified(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceModifyFailed(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceFound(mSource);
+        mController.mBroadcastAssistantCallback.onSourceLost(/* broadcastId= */ 1);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // Above callbacks won't update group preference
+        verify(mDeviceUpdater, never()).forceUpdate();
     }
 }

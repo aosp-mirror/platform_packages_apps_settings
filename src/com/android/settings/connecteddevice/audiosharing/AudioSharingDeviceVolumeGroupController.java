@@ -79,12 +79,9 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
     private Map<Integer, Integer> mValueMap = new HashMap<Integer, Integer>();
     private AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
 
-    private BluetoothVolumeControl.Callback mVolumeControlCallback =
+    @VisibleForTesting
+    BluetoothVolumeControl.Callback mVolumeControlCallback =
             new BluetoothVolumeControl.Callback() {
-                @Override
-                public void onVolumeOffsetChanged(
-                        @NonNull BluetoothDevice device, int volumeOffset) {}
-
                 @Override
                 public void onDeviceVolumeChanged(
                         @NonNull BluetoothDevice device,
@@ -117,7 +114,8 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
                 }
             };
 
-    private BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+    @VisibleForTesting
+    BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
                 @Override
                 public void onSearchStarted(int reason) {}
@@ -323,26 +321,26 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
     }
 
     @VisibleForTesting
-    public void setDeviceUpdater(@Nullable AudioSharingDeviceVolumeControlUpdater updater) {
+    void setDeviceUpdater(@Nullable AudioSharingDeviceVolumeControlUpdater updater) {
         mBluetoothDeviceUpdater = updater;
     }
 
     /** Test only: set callback registration status in tests. */
     @VisibleForTesting
-    public void setCallbacksRegistered(boolean registered) {
+    void setCallbacksRegistered(boolean registered) {
         mCallbacksRegistered.set(registered);
     }
 
     /** Test only: set volume map in tests. */
     @VisibleForTesting
-    public void setVolumeMap(@Nullable Map<Integer, Integer> map) {
+    void setVolumeMap(@Nullable Map<Integer, Integer> map) {
         mValueMap.clear();
         mValueMap.putAll(map);
     }
 
     /** Test only: set value for private preferenceGroup in tests. */
     @VisibleForTesting
-    public void setPreferenceGroup(@Nullable PreferenceGroup group) {
+    void setPreferenceGroup(@Nullable PreferenceGroup group) {
         mPreferenceGroup = group;
         mPreference = group;
     }

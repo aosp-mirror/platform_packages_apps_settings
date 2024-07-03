@@ -18,6 +18,7 @@ package com.android.settings.notification.modes;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -34,7 +35,7 @@ public class ZenModeDisplayFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeNotifVisLinkPreferenceController(
-                context, "notification_visibility", mBackend));
+                context, "notification_visibility", mHelperBackend));
         prefControllers.add(new ZenModeDisplayEffectPreferenceController(
                 context, "effect_greyscale", mBackend));
         prefControllers.add(new ZenModeDisplayEffectPreferenceController(

@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice.audiosharing;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,7 +67,13 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
             @NonNull List<AudioSharingDeviceItem> deviceItems,
             @NonNull DialogEventListener listener) {
         if (!AudioSharingUtils.isFeatureEnabled()) return;
-        final FragmentManager manager = host.getChildFragmentManager();
+        final FragmentManager manager;
+        try {
+            manager = host.getChildFragmentManager();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+            return;
+        }
         sListener = listener;
         if (manager.findFragmentByTag(TAG) == null) {
             final Bundle bundle = new Bundle();
@@ -79,10 +86,18 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle arguments = requireArguments();
         List<AudioSharingDeviceItem> deviceItems =
                 arguments.getParcelable(BUNDLE_KEY_DEVICE_ITEMS, List.class);
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.audio_sharing_call_audio_title);
+        if (deviceItems == null) {
+            Log.d(TAG, "Create dialog error: null deviceItems");
+            return builder.create();
+        }
         int checkedItem = -1;
         for (AudioSharingDeviceItem item : deviceItems) {
             int fallbackActiveGroupId = AudioSharingUtils.getFallbackActiveGroupId(getContext());
@@ -92,17 +107,14 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
         }
         String[] choices =
                 deviceItems.stream().map(AudioSharingDeviceItem::getName).toArray(String[]::new);
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.audio_sharing_call_audio_title)
-                        .setSingleChoiceItems(
-                                choices,
-                                checkedItem,
-                                (dialog, which) -> {
-                                    if (sListener != null) {
-                                        sListener.onItemClick(deviceItems.get(which));
-                                    }
-                                });
+        builder.setSingleChoiceItems(
+                choices,
+                checkedItem,
+                (dialog, which) -> {
+                    if (sListener != null) {
+                        sListener.onItemClick(deviceItems.get(which));
+                    }
+                });
         return builder.create();
     }
 }

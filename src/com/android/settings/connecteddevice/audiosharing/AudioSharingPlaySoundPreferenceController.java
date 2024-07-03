@@ -105,7 +105,7 @@ public class AudioSharingPlaySoundPreferenceController
     }
 
     @VisibleForTesting
-    protected void setRingtone(Ringtone ringtone) {
+    void setRingtone(Ringtone ringtone) {
         mRingtone = ringtone;
     }
 

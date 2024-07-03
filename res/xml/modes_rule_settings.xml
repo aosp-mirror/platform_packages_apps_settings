@@ -35,13 +35,18 @@
     <PreferenceCategory
             android:title="@string/mode_interruption_filter_title"
             android:key="modes_filters">
+
+        <SwitchPreferenceCompat
+            android:key="allow_filtering"
+            android:title="@string/mode_notification_filter_title"/>
+
         <Preference
                 android:key="zen_mode_people"
                 android:title="@string/zen_category_people"/>
 
         <Preference
             android:key="zen_mode_apps"
-            android:title="@string/zen_category_apps" />
+            android:title="@string/zen_category_apps"/>
 
         <Preference
                 android:key="zen_other_settings"
@@ -62,5 +67,9 @@
         <Preference
                 android:key="mode_display_settings"
                 android:title="@string/mode_display_settings_title" />
+
+        <Preference
+                android:key="mode_manual_duration"
+                android:title="@string/zen_category_duration" />
     </PreferenceCategory>
 </PreferenceScreen>

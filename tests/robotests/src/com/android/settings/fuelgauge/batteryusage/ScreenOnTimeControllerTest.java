@@ -25,8 +25,12 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.LocaleList;
+import android.text.SpannableString;
 
 import androidx.preference.PreferenceCategory;
+
+import com.android.settings.R;
+import com.android.settings.Utils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +49,7 @@ public final class ScreenOnTimeControllerTest {
 
     private Context mContext;
     private ScreenOnTimeController mScreenOnTimeController;
+    private ArgumentCaptor<SpannableString> mStringCaptor;
 
     @Mock private PreferenceCategory mRootPreference;
     @Mock private TextViewPreference mScreenOnTimeTextPreference;
@@ -56,6 +61,7 @@ public final class ScreenOnTimeControllerTest {
         org.robolectric.shadows.ShadowSettings.set24HourTimeFormat(false);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         mContext = spy(RuntimeEnvironment.application);
+        mStringCaptor = ArgumentCaptor.forClass(SpannableString.class);
         final Resources resources = spy(mContext.getResources());
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         doReturn(resources).when(mContext).getResources();
@@ -63,12 +69,14 @@ public final class ScreenOnTimeControllerTest {
         mScreenOnTimeController.mPrefContext = mContext;
         mScreenOnTimeController.mRootPreference = mRootPreference;
         mScreenOnTimeController.mScreenOnTimeTextPreference = mScreenOnTimeTextPreference;
+        mScreenOnTimeController.mScreenTimeCategoryLastFullChargeText =
+                resources.getString(R.string.screen_time_category_last_full_charge);
     }
 
     @Test
-    public void handleSceenOnTimeUpdated_nullScreenOnTime_hideAllPreference() {
-        mScreenOnTimeController.handleSceenOnTimeUpdated(
-                /* screenOnTime= */ null, "Friday 12:00 to now");
+    public void handleScreenOnTimeUpdated_nullScreenOnTime_hideAllPreference() {
+        mScreenOnTimeController.handleScreenOnTimeUpdated(
+                /* screenOnTime= */ null, "Friday 12:00 - now", "Friday 12:00 to now");
 
         verify(mRootPreference).setVisible(false);
         verify(mScreenOnTimeTextPreference).setVisible(false);
@@ -76,18 +84,32 @@ public final class ScreenOnTimeControllerTest {
 
     @Test
     public void showCategoryTitle_null_sinceLastFullCharge() {
-        mScreenOnTimeController.showCategoryTitle(null);
+        mScreenOnTimeController.showCategoryTitle(null, null);
 
-        verify(mRootPreference).setTitle("Screen time since last full charge");
+        verify(mRootPreference).setTitle(mStringCaptor.capture());
         verify(mRootPreference).setVisible(true);
+        assertThat(mStringCaptor.getValue().toString())
+                .isEqualTo(
+                        Utils.createAccessibleSequence(
+                                        mScreenOnTimeController
+                                                .mScreenTimeCategoryLastFullChargeText,
+                                        mScreenOnTimeController
+                                                .mScreenTimeCategoryLastFullChargeText)
+                                .toString());
     }
 
     @Test
     public void showCategoryTitle_notNull_slotTimestamp() {
-        mScreenOnTimeController.showCategoryTitle("Friday 12:00 to now");
+        mScreenOnTimeController.showCategoryTitle("Friday 12:00 - now", "Friday 12:00 to now");
 
-        verify(mRootPreference).setTitle("Screen time for Friday 12:00 to now");
+        verify(mRootPreference).setTitle(mStringCaptor.capture());
         verify(mRootPreference).setVisible(true);
+        assertThat(mStringCaptor.getValue().toString())
+                .isEqualTo(
+                        Utils.createAccessibleSequence(
+                                        "Screen time for Friday 12:00 - now",
+                                        "Screen time for Friday 12:00 to now")
+                                .toString());
     }
 
     @Test

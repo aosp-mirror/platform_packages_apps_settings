@@ -41,9 +41,17 @@ public class ZenModeIconPickerFragment extends ZenModeFragmentBase {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return ImmutableList.of(
-                new ZenModeIconPickerIconPreferenceController(context, "current_icon", this,
-                        mBackend),
-                new ZenModeIconPickerListPreferenceController(context, "icon_list", this,
-                        mBackend));
+                new ZenModeIconPickerIconPreferenceController(context, "current_icon", this),
+                new ZenModeIconPickerListPreferenceController(context, "icon_list",
+                        mIconPickerListener));
     }
+
+    private final ZenModeIconPickerListPreferenceController.IconPickerListener mIconPickerListener =
+            new ZenModeIconPickerListPreferenceController.IconPickerListener() {
+                @Override
+                public void onIconSelected(int iconResId) {
+                    saveMode(mode -> mode.getRule().setIconResId(iconResId));
+                    finish();
+                }
+            };
 }

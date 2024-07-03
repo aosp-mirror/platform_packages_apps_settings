@@ -85,13 +85,9 @@
             android:summary="@string/auto_data_switch_summary"
             settings:controller="com.android.settings.network.telephony.AutoDataSwitchPreferenceController"/>
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settings.spa.preference.ComposePreference
             android:key="button_roaming_key"
             android:title="@string/roaming"
-            android:persistent="false"
-            android:summaryOn="@string/roaming_enable"
-            android:summaryOff="@string/roaming_disable"
-            settings:userRestriction="no_data_roaming"
             settings:controller="com.android.settings.network.telephony.RoamingPreferenceController"/>
 
         <Preference
