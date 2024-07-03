@@ -69,9 +69,8 @@ import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.IconDrawableFactory;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -108,7 +107,7 @@ import java.util.List;
 public class UtilsTest {
 
     @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String PACKAGE_NAME = "com.android.app";
     private static final int USER_ID = 1;
@@ -528,18 +527,17 @@ public class UtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_MANDATORY_BIOMETRICS)
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testRequestBiometricAuthentication_biometricManagerNull_shouldReturnFalse() {
-        when(mContext.getSystemService(Context.BIOMETRIC_SERVICE)).thenReturn(null);
+        when(mContext.getSystemService(BiometricManager.class)).thenReturn(null);
         assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
                 false /* biometricsSuccessfullyAuthenticated */,
                 false /* biometricsAuthenticationRequested */)).isFalse();
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_MANDATORY_BIOMETRICS)
-    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccess_shouldReturnTrue()
-            throws InterruptedException {
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccess_shouldReturnTrue() {
         when(mBiometricManager.canAuthenticate(
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
@@ -551,7 +549,7 @@ public class UtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_MANDATORY_BIOMETRICS)
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testRequestBiometricAuthentication_biometricManagerReturnsError_shouldReturnFalse() {
         when(mBiometricManager.canAuthenticate(
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
@@ -562,7 +560,7 @@ public class UtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_MANDATORY_BIOMETRICS)
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testLaunchBiometricPrompt_checkIntentValues() {
         when(mFragment.getContext()).thenReturn(mContext);
 

@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Kuuldeseade seaded"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Otsetee, ühilduvus kuuldeaparaatidega"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Eelseadistus"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Teie audioloog ei ole ühtegi eelseadistust programmeerinud"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Eelseadistust ei saanud värskendada"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Heliväljund"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Teave heliväljundi kohta"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Lisateave kellaga avamise kohta"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Lisa kell"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Kella eemaldamine"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Sõrmejälje ja näoga avamine"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Näo ja sõrmejäljega avamine"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Näo ja sõrmejäljega avamine töö jaoks"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Seadistamine on vajalik"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Nägu ja sõrmejäljed on lisatud"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installige rakendused"</b>\n"Installige rakendused, mille soovite oma ruumis privaatsena hoida"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Pidage meeles"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Ruumi lukustamisel peatatakse rakendused"</b>\n"Kui lukustate oma ruumi, peatatakse teie ruumis olevad rakendused ja te ei saa neilt märguandeid"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Privaatsed ruumid ei ole sobilikud rakendustele, mis peavad töötama taustal või saatma kriitilisi märguandeid (nt meditsiinirakendused). Seda seetõttu, et märguanded ja taustategevused peatatakse, kui teie ruum on lukus.\n\nTeie privaatses ruumis olevaid rakendusi ei näidata lubade halduris, privaatsuse juhtpaneelis ja muudes seadetes, kui privaatne ruum on lukus.\n\nPrivaatset ruumi ei saa teisaldada uude seadmesse. Kui soovite seda mõnes teises seadmes kasutada, peate seadistama teise privaatse ruumi.\n\nKõik, kes ühendavad teie seadme arvutiga või installivad teie seadmesse kahjulikke rakendusi, võivad pääseda juurde teie privaatsele ruumile."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Privaatsed ruumid ei ole sobilikud rakendustele, mis peavad töötama taustal või saatma kriitilisi märguandeid (nt meditsiinirakendused). Seda seetõttu, et märguanded ja taustategevused peatatakse, kui teie ruum on lukus.\n\nTeie privaatses ruumis olevaid rakendusi ei näidata lubade halduris, privaatsuse juhtpaneelis ja muudes seadetes, kui privaatne ruum on lukus.\n\nPrivaatset ruumi ei saa uues seadmes taastada. Kui soovite seda teises seadmes kasutada, peate seadistama teise ruumi.\n\nKõik, kes ühendavad teie seadme arvutiga või installivad teie seadmesse pahatahtlikke rakendusi, võivad pääseda juurde teie privaatsele ruumile."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Lisateave privaatsete ruumide kohta"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"See võtab mõne hetke"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Privaatse ruumi seadistamine …"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Kohanduvad"</string>
     <string name="brightness" msgid="6216871641021779698">"Ereduse tase"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Kohanduv eredus"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Kohanduva ereduse teave"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Teie ekraanikuva eredust kohandatakse automaatselt teie keskkonna ja tegevuste järgi. Võite liugurit käsitsi liigutada, et aidata kohanduval eredusel teie eelistusi õppida."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Sees"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Väljas"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Jätka ikkagi"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Tühista"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Suurendamisseaded"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Ühe sõrmega paanimine"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Suurendusala teisaldamiseks lohistage ühe sõrmega."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Suurendusala teisaldamiseks lohistage kahe sõrmega."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Pole saadaval, kui suurendatakse ainult osa ekraanist"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Suumimiseks puudutage nuppu"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Suumige ekraanil kiiresti sisse, et sisu suuremalt kuvada"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Sissesuumimiseks toimige järgmiselt.&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Kasutage suurendamise alustamiseks otseteed.&lt;br/&gt; {1,number,integer}. Puudutage ekraani.&lt;br/&gt; {2,number,integer}. Ekraanikuval liikumiseks lohistage kahe sõrmega.&lt;br/&gt; {3,number,integer}. Suumi kohandamiseks liigutage ekraanil kaht sõrme kokku-lahku.&lt;br/&gt; {4,number,integer}. Kasutage suurendamise lõpetamiseks otseteed.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Ajutiseks sissesuumimiseks toimige järgmiselt.&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Veenduge, et suurendamise tüübiks oleks valitud täisekraan.&lt;br/&gt; {1,number,integer}. Kasutage suurendamise alustamiseks otseteed.&lt;br/&gt; {2,number,integer}. Hoidke sõrme kus tahes ekraanikuval.&lt;br/&gt; {3,number,integer}. Lohistage ekraanikuval liikumiseks sõrme.&lt;br/&gt; {4,number,integer}. Suurendamise lõpetamiseks tõstke sõrm ekraanikuvalt."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Kui suurendusfunktsioon on sisse lülitatud, saate oma ekraanikuval sisse suumida.\n\n"<b>"Suumimiseks"</b>" käivitage suurendusfunktsioon ja puudutage siis ekraanikuval mis tahes kohta.\n"<ul><li>"Kerimiseks lohistage kahe või enama sõrmega."</li>\n<li>"Suumi kohandamiseks pigistage kahte või enamat sõrme kokku."</li></ul>\n\n<b>"Ajutiseks suumimiseks"</b>" käivitage suurendusfunktsioon ja puudutage siis ekraanikuval pikalt mis tahes kohta.\n"<ul><li>"Ekraanikuval teisaldamiseks lohistage sõrme."</li>\n<li>"Väljasuumimiseks tõstke sõrm ekraanilt."</li></ul>\n\n"Klaviatuuril ega navigeerimisribal ei saa sisse suumida."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>. leht <xliff:g id="NUM_PAGES">%2$d</xliff:g>-st"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Juurdepääsetavuse nupu otsetee"</string>
@@ -3393,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Ajakava määramine"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Ajakava"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Ajastamine"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Telefoni vaigistamine teatud ajal"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Režiimi Mitte segada reeglite määramine"</string>
@@ -3717,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Kategooriad"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Muu"</string>
     <string name="no_channels" msgid="4716199078612071915">"See rakendus pole postitanud ühtegi märguannet"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Kuva kasutamata kategooriad"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Lisaseaded rakenduses"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Kuva kasutamata kategooriad"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Peida kasutamata kategooriad"</string>
@@ -4921,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Arendaja valiku 16 kB kasutamiseks peab seadme andmete sektsioon olema konverditud failisüsteemiks ext4. Selles režiimis ei saa garanteerida tarkvara terviklust ja andmed, mis salvestatakse telefoni, kui käivituslaadur on avatud, võivad olla ohus. Pärast valiku 16 kB aktiveerimist tuleb seade veel korra taaskäivitada. Selles režiimis saate 4 kB ja 16 kB režiimide vahel vahetada ühe taaskäivitamisega. Mõned funktsioonid on nendes režiimides keelatud, mistõttu ei pruugi kõik rakendused töötada Seadme tehaseseadetele lähtestamiseks ja tavarežiimi naasmiseks lülituge uuesti 4K režiimile ja avage seadme käivituslaadur. Pärast seda, kui seade on Androidi käivitanud, keelake arendaja valikutes OEM-tootjaluku avamine. Pärast kinnitamist seade tühjendatakse ja failisüsteemiks seatakse ext4. Kui need toimingud on lõpetatud, lubage taas režiim 16 kB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Kustuta kõik andmed"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Andmete sektsiooni ümbervormindamine failisüsteemiks ext4 ja seadme tühjendamine ebaõnnestus."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"16 kB režiimi jaoks on vaja käivituslaadur avada"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Arendaja valiku 16 kB kasutamiseks peab seadme käivituslaadur olema avatud. Selles režiimis ei saa garanteerida tarkvara terviklust ja andmed, mis salvestatakse telefoni, kui käivituslaadur on avatud, võivad olla ohus. Režiimi 16 kB aktiveerimisel tühjendatakse seade kõigist kasutaja andmetest ja seadetest. Kui käivituslaadur on avatud, on valiku 16 kB aktiveerimiseks vaja seade kaks korda taaskäivitada. Selles režiimis saate 4 kB ja 16 kB režiimide vahel vahetada ühe taaskäivitamisega. Mõned funktsioonid on nendes režiimides keelatud, mistõttu ei pruugi kõik rakendused töötada. Selleks, et viia seade uuesti tavarežiimile, peate lülituma tagasi 4 kB režiimile ja lukustama OEM-i/käivituslaaduri. See lähtestab seadme tehaseseadetele. Avage käivituslaadur ja proovige uuesti. Juhiseid selle kohta vaadake aadressilt &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Lehest sõltumatu 4 kB režiimi kasutamine"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Olete lehest sõltumatus 4 kB režiimis. Selles režiimis ei saa garanteerida tarkvara terviklust ja andmed, mis salvestatakse telefoni, kui käivituslaadur on avatud, võivad olla ohus. Mõned funktsioonid on nendes režiimides keelatud, mistõttu ei pruugi kõik rakendused töötada. Tavarežiimi naasmiseks peate avama seadme käivituslaaduri. Puudutage lisateabe vaatamiseks."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Olete lehest sõltumatus 4 kB režiimis. Selles režiimis ei saa garanteerida tarkvara terviklust ja andmed, mis salvestatakse telefoni, kui käivituslaadur on avatud, võivad olla ohus. Mõned funktsioonid on nendes režiimides keelatud, mistõttu ei pruugi kõik rakendused töötada. Tavarežiimi naasmiseks peate avama seadme käivituslaaduri. See lähtestab seadme tehaseseadetele. Pärast seda, kui seade on Androidi käivitanud, keelake arendaja valikutes OEM-tootjaluku avamine. Kui seadmel ei õnnestu Androidi käivitada või see on ebastabiilne, installige kogu operatsioonisüsteem ja püsivara uuesti, kasutades tehaseoleku süsteemikujutisi aadressilt &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; või kasutage tööriista aadressil &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ja valige „Tühjenda seade“, „Lukusta käivituslaadur“ ja „Installi kõik sektsioonid uuesti“."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Lehest sõltumatu 16 kB režiimi kasutamine"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Olete lehest sõltumatus 16 kB režiimis. Selles režiimis ei saa garanteerida tarkvara terviklust ja andmed, mis salvestatakse telefoni, kui käivituslaadur on avatud, võivad olla ohus. Mõned funktsioonid on nendes režiimides keelatud, mistõttu ei pruugi kõik rakendused töötada. Selleks et viia seade uuesti tavarežiimile, peate lülituma tagasi 4K režiimile ja seejärel avama seadme käivituslaaduri. Puudutage lisateabe vaatamiseks."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Olete lehest sõltumatus 16 kB režiimis. Selles režiimis ei saa garanteerida tarkvara terviklust ja andmed, mis salvestatakse telefoni, kui käivituslaadur on avatud, võivad olla ohus. Mõned funktsioonid on nendes režiimides keelatud, mistõttu ei pruugi kõik rakendused töötada. Seadme tehaseseadetele lähtestamiseks ja tavarežiimi naasmiseks lülituge uuesti 4K režiimile ja avage seadme käivituslaadur. Pärast seda, kui seade on Androidi käivitanud, keelake arendaja valikutes OEM-tootjaluku avamine. Kui seadmel ei õnnestu Androidi käivitada või see on ebastabiilne, installige kogu operatsioonisüsteem ja püsivara uuesti, kasutades tehaseoleku süsteemikujutisi aadressilt &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;, või kasutage tööriista aadressilt &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ja valige „Tühjenda seade“, „Lukusta käivituslaadur“ ja „Installi kõik sektsioonid uuesti“."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Lehest sõltumatu 16 kB režiim"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Lisateave"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Veaaruannete töötleja"</string>
