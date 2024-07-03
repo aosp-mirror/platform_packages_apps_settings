@@ -279,14 +279,14 @@ fun PrimarySimImpl(
 ) {
     CreatePrimarySimListPreference(
         stringResource(id = R.string.primary_sim_calls_title),
-        primarySimInfo.callsAndSmsList,
+        primarySimInfo.callsList,
         callsSelectedId,
         ImageVector.vectorResource(R.drawable.ic_phone),
         actionSetCalls
     )
     CreatePrimarySimListPreference(
         stringResource(id = R.string.primary_sim_texts_title),
-        primarySimInfo.callsAndSmsList,
+        primarySimInfo.smsList,
         textsSelectedId,
         Icons.AutoMirrored.Outlined.Message,
         actionSetTexts

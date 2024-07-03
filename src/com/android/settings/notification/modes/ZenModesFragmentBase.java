@@ -26,6 +26,8 @@ import android.os.UserManager;
 import android.provider.Settings.Global;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
@@ -55,6 +57,11 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    void setBackend(ZenModesBackend backend) {
+        mBackend = backend;
     }
 
     @Override

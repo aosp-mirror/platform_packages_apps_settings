@@ -22,20 +22,17 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.notification.modes.ZenMode;
-import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
 class ZenModeActionsPreferenceController extends AbstractZenModePreferenceController {
 
-    ZenModeActionsPreferenceController(@NonNull Context context, @NonNull String key,
-            @Nullable ZenModesBackend backend) {
-        super(context, key, backend);
+    ZenModeActionsPreferenceController(@NonNull Context context, @NonNull String key) {
+        super(context, key);
     }
 
     @Override

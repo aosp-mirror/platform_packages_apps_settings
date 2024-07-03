@@ -26,12 +26,16 @@ import static com.android.settings.notification.modes.ZenModeSetTriggerLinkPrefe
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -72,6 +76,11 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
     private PrimarySwitchPreference mPreference;
 
     @Mock
+    private PackageManager mPm;
+    @Mock
+    private ConfigurationActivityHelper mConfigurationActivityHelper;
+
+    @Mock
     private PreferenceCategory mPrefCategory;
     @Mock
     private DashboardFragment mFragment;
@@ -84,8 +93,11 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
         mContext = ApplicationProvider.getApplicationContext();
 
         mPrefController = new ZenModeSetTriggerLinkPreferenceController(mContext,
-                "zen_automatic_trigger_category", mFragment, mBackend);
+                "zen_automatic_trigger_category", mFragment, mBackend,
+                mConfigurationActivityHelper,
+                mock(ZenServiceListing.class));
         mPreference = new PrimarySwitchPreference(mContext);
+
         when(mPrefCategory.findPreference(AUTOMATIC_TRIGGER_PREF_KEY)).thenReturn(mPreference);
     }
 
@@ -93,9 +105,9 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
     public void testIsAvailable() {
         // should not be available for manual DND
         ZenMode manualMode = ZenMode.manualDndMode(new AutomaticZenRule.Builder("Do Not Disturb",
-                        Uri.parse("manual"))
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .build(), true);
+                Uri.parse("manual"))
+                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
+                .build(), true);
 
         mPrefController.updateZenMode(mPrefCategory, manualMode);
         assertThat(mPrefController.isAvailable()).isFalse();
@@ -164,7 +176,7 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
     @Test
     public void testRuleLink_schedule() {
         ZenModeConfig.ScheduleInfo scheduleInfo = new ZenModeConfig.ScheduleInfo();
-        scheduleInfo.days = new int[] { Calendar.MONDAY, Calendar.TUESDAY, Calendar.THURSDAY };
+        scheduleInfo.days = new int[]{Calendar.MONDAY, Calendar.TUESDAY, Calendar.THURSDAY};
         scheduleInfo.startHour = 1;
         scheduleInfo.endHour = 15;
         ZenMode mode = new TestModeBuilder()
@@ -207,6 +219,40 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
 
         // Set up a click listener to open the dialog.
         assertThat(mPreference.getOnPreferenceClickListener()).isNotNull();
+    }
+
+    @Test
+    public void testRuleLink_appWithConfigActivity_linksToConfigActivity() {
+        ZenMode mode = new TestModeBuilder()
+                .setPackage("some.package")
+                .setTriggerDescription("When The Music's Over")
+                .build();
+        Intent configurationIntent = new Intent("configure the mode");
+        when(mConfigurationActivityHelper.getConfigurationActivityIntentForMode(any(), any()))
+                .thenReturn(configurationIntent);
+
+        mPrefController.updateZenMode(mPrefCategory, mode);
+
+        assertThat(mPreference.getTitle()).isNotNull();
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.zen_mode_configuration_link_title));
+        assertThat(mPreference.getSummary()).isNotNull();
+        assertThat(mPreference.getSummary().toString()).isEqualTo("When The Music's Over");
+        assertThat(mPreference.getIntent()).isEqualTo(configurationIntent);
+    }
+
+    @Test
+    public void testRuleLink_appWithoutConfigActivity_hidden() {
+        ZenMode mode = new TestModeBuilder()
+                .setPackage("some.package")
+                .setTriggerDescription("Will not be shown :(")
+                .build();
+        when(mConfigurationActivityHelper.getConfigurationActivityIntentForMode(any(), any()))
+                .thenReturn(null);
+
+        mPrefController.updateZenMode(mPrefCategory, mode);
+
+        assertThat(mPrefCategory.isVisible()).isFalse();
     }
 
     @Test
