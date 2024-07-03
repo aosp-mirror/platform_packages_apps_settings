@@ -154,7 +154,7 @@ public class AccessibilitySettings extends DashboardFragment implements
     };
 
     @VisibleForTesting
-    final AccessibilitySettingsContentObserver mSettingsContentObserver;
+    AccessibilitySettingsContentObserver mSettingsContentObserver;
 
     private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
             new ArrayMap<>();
@@ -168,9 +168,14 @@ public class AccessibilitySettings extends DashboardFragment implements
     private boolean mIsForeground = true;
 
     public AccessibilitySettings() {
+        mSettingsContentObserver = new AccessibilitySettingsContentObserver(mHandler);
+    }
+
+    private void initializeSettingsContentObserver() {
         // Observe changes to anything that the shortcut can toggle, so we can reflect updates
         final Collection<AccessibilityShortcutController.FrameworkFeatureInfo> features =
-                AccessibilityShortcutController.getFrameworkShortcutFeaturesMap().values();
+                AccessibilityShortcutController
+                        .getFrameworkShortcutFeaturesMap().values();
         final List<String> shortcutFeatureKeys = new ArrayList<>(features.size());
         for (AccessibilityShortcutController.FrameworkFeatureInfo feature : features) {
             final String key = feature.getSettingKey();
@@ -188,7 +193,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_STICKY_KEYS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SLOW_KEYS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BOUNCE_KEYS);
-        mSettingsContentObserver = new AccessibilitySettingsContentObserver(mHandler);
         mSettingsContentObserver.registerKeysToObserverCallback(shortcutFeatureKeys,
                 key -> onContentChanged());
     }
@@ -213,6 +217,7 @@ public class AccessibilitySettings extends DashboardFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        initializeSettingsContentObserver();
         initializeAllPreferences();
         updateAllPreferences();
         mNeedPreferencesUpdate = false;
