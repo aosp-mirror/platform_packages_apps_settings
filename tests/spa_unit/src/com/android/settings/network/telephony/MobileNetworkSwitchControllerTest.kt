@@ -30,8 +30,11 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.spa.testutils.waitUntilExists
 import kotlinx.coroutines.flow.flowOf
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -58,7 +61,6 @@ class MobileNetworkSwitchControllerTest {
     }
 
     private val mockSubscriptionRepository = mock<SubscriptionRepository> {
-        on { getSelectableSubscriptionInfoList() } doReturn listOf(SubInfo)
         on { isSubscriptionEnabledFlow(SUB_ID) } doReturn flowOf(false)
     }
 
@@ -67,6 +69,16 @@ class MobileNetworkSwitchControllerTest {
         preferenceKey = TEST_KEY,
         subscriptionRepository = mockSubscriptionRepository,
     ).apply { init(SUB_ID) }
+
+    @Before
+    fun setUp() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(listOf(SubInfo))
+    }
+
+    @After
+    fun tearDown() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(null)
+    }
 
     @Test
     fun isVisible_pSimAndCanDisablePhysicalSubscription_returnTrue() {
@@ -77,9 +89,7 @@ class MobileNetworkSwitchControllerTest {
         mockSubscriptionManager.stub {
             on { canDisablePhysicalSubscription() } doReturn true
         }
-        mockSubscriptionRepository.stub {
-            on { getSelectableSubscriptionInfoList() } doReturn listOf(pSimSubInfo)
-        }
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(listOf(pSimSubInfo))
 
         setContent()
 
@@ -96,9 +106,7 @@ class MobileNetworkSwitchControllerTest {
         mockSubscriptionManager.stub {
             on { canDisablePhysicalSubscription() } doReturn false
         }
-        mockSubscriptionRepository.stub {
-            on { getSelectableSubscriptionInfoList() } doReturn listOf(pSimSubInfo)
-        }
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(listOf(pSimSubInfo))
 
         setContent()
 
@@ -112,9 +120,7 @@ class MobileNetworkSwitchControllerTest {
             setId(SUB_ID)
             setEmbedded(true)
         }.build()
-        mockSubscriptionRepository.stub {
-            on { getSelectableSubscriptionInfoList() } doReturn listOf(eSimSubInfo)
-        }
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(listOf(eSimSubInfo))
 
         setContent()
 

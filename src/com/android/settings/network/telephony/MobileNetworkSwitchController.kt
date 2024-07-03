@@ -67,7 +67,7 @@ class MobileNetworkSwitchController @JvmOverloads constructor(
     }
 
     private fun Context.isVisible(): Boolean {
-        val subInfo = subscriptionRepository.getSelectableSubscriptionInfoList()
+        val subInfo = SubscriptionUtil.getAvailableSubscriptions(this)
             .firstOrNull { it.subscriptionId == subId }
             ?: return false
         // For eSIM, we always want the toggle. If telephony stack support disabling a pSIM

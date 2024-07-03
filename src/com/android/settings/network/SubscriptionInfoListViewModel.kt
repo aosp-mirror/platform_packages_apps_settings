@@ -20,7 +20,6 @@ import android.app.Application
 import android.telephony.SubscriptionManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.settings.network.telephony.getSelectableSubscriptionInfoList
 import com.android.settings.network.telephony.subscriptionsChangedFlow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
@@ -46,6 +45,6 @@ class SubscriptionInfoListViewModel(application: Application) : AndroidViewModel
      * getAvailableSubscriptionInfoList
      */
     val selectableSubscriptionInfoListFlow = application.subscriptionsChangedFlow().map {
-        application.getSelectableSubscriptionInfoList()
+        SubscriptionUtil.getSelectableSubscriptionInfoList(application)
     }.stateIn(scope, SharingStarted.Eagerly, initialValue = emptyList())
 }
