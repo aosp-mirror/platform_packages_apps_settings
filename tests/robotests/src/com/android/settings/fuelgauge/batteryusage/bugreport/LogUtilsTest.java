@@ -18,15 +18,19 @@ package com.android.settings.fuelgauge.batteryusage.bugreport;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.batteryusage.BatteryReattribute;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryReattributeDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryReattributeEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settings.testutils.BatteryTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.After;
 import org.junit.Before;
@@ -48,6 +52,7 @@ public final class LogUtilsTest {
     private Context mContext;
     private BatteryStateDatabase mDatabase;
     private BatteryReattributeDao mBatteryReattributeDao;
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     @Before
     public void setUp() {
@@ -56,6 +61,8 @@ public final class LogUtilsTest {
         mTestPrintWriter = new PrintWriter(mTestStringWriter);
         mDatabase = BatteryTestUtils.setUpBatteryStateDatabase(mContext);
         mBatteryReattributeDao = mDatabase.batteryReattributeDao();
+        mPowerUsageFeatureProvider = FakeFeatureFactory.setupForTest().powerUsageFeatureProvider;
+        when(mPowerUsageFeatureProvider.isBatteryUsageReattributeEnabled()).thenReturn(true);
     }
 
     @After
@@ -98,5 +105,18 @@ public final class LogUtilsTest {
         assertThat(result).contains("BatteryReattribute DatabaseHistory:");
         assertThat(result).contains(batteryReattribute1.toString());
         assertThat(result).contains(batteryReattribute2.toString());
+    }
+
+    @Test
+    public void dumpBatteryReattributeDatabaseHist_featureDisable_notPrintData() {
+        mBatteryReattributeDao.insert(new BatteryReattributeEntity(
+                BatteryReattribute.getDefaultInstance()));
+        when(mPowerUsageFeatureProvider.isBatteryUsageReattributeEnabled()).thenReturn(false);
+
+        LogUtils.dumpBatteryReattributeDatabaseHist(mBatteryReattributeDao, mTestPrintWriter);
+
+        final String result = mTestStringWriter.toString();
+        assertThat(result).contains("BatteryReattribute is disabled!");
+        assertThat(result.contains("BatteryReattribute DatabaseHistory:")).isFalse();
     }
 }
