@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Innstillinger for høreapparater"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Snarvei, kompatibilitet med høreapparater"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Forhåndsinnstilling"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Ingen forhåndsinnstillinger er programmert av audiografen"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Kunne ikke oppdatere forhåndsinnstillingen"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Utenhet for lyd"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Om lyd"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Finn ut mer om klokkelåsen"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Legg til en klokke"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Fjern klokken"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Opplåsing med fingeravtrykk og ansiktslås"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Opplåsing med ansikt og fingeravtrykk"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ansiktslås og opplåsing med fingeravtrykk for jobb"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Konfigurering kreves"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansikt og fingeravtrykk er lagt til"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installer apper"</b>\n"Installer apper du vil holde private, i området ditt"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Husk"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Apper stopper når du låser området ditt"</b>\n"Når du låser området, blir apper i området stoppet, og du mottar ikke varsler fra dem."</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Private områder egner seg ikke for apper som må kjøre i bakgrunnen eller sende kritiske varsler, for eksempel medisinske apper. Dette er fordi varsler og bakgrunnsaktivitet stoppes når området ditt låses.\n\nApper i det private området vises ikke i tillatelseskontrollen, personvernoversikten og andre innstillinger når det private området er låst.\n\nDet private området kan ikke flyttes til en ny enhet. Hvis du vil bruke det private området på en annen enhet, må du konfigurere et nytt.\n\nHvis noen kobler enheten din til en datamaskin eller installerer skadelige apper på enheten, kan de kanskje åpne det private området ditt."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Private områder egner seg ikke for apper som må kjøre i bakgrunnen eller sende kritiske varsler, for eksempel medisinske apper. Dette er fordi varsler og bakgrunnsaktivitet stoppes når området ditt låses.\n\nApper i det private området vises ikke i tillatelseskontrollen, personvernoversikten og andre innstillinger når det private området er låst.\n\nDet private området kan ikke gjenopprettes på en ny enhet. Du må konfigurere et nytt område hvis du vil bruke det på en annen enhet.\n\nAlle som kobler enheten din til en datamaskin eller installerer skadelige apper på enheten, kan muligens åpne det private området."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Finn ut mer om det private området"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Dette tar en liten stund"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Konfigurerer det private området …"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Tilpasset"</string>
     <string name="brightness" msgid="6216871641021779698">"Lysstyrkenivå"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Tilpasset lysstyrke"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Om tilpasset lysstyrke"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Lysstyrken på skjermen justeres automatisk etter omgivelser og aktiviteter. Du kan flytte glidebryteren manuelt for lære tilpasset lysstyrke om preferansene dine."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"På"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Av"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Fortsett likevel"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Avbryt"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Innstillinger for forstørring"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Panorer med én finger"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Flytt forstørringsområdet ved å dra én finger."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Flytt forstørringsområdet ved å dra to fingre."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Ikke tilgjengelig ved forstørring av bare en del av skjermen"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Trykk på en knapp for å zoome"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zoom raskt inn på skjermen for å gjøre innhold større"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Slik zoomer du inn:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Bruk snarveien for å starte forstørring.&lt;br/&gt; {1,number,integer}. Trykk på skjermen.&lt;br/&gt; {2,number,integer}. Dra to fingre for å bevege deg rundt på skjermen.&lt;br/&gt; {3,number,integer}. Klyp med to fingre for å justere zoomen.&lt;br/&gt; {4,number,integer}. Bruk snarveien for å stoppe forstørring.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Slik zoomer du inn midlertidig:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Sørg for at forstørringstype er satt til fullskjerm.&lt;br/&gt; {1,number,integer}. Bruk snarveien for å starte forstørring.&lt;br/&gt; {2,number,integer}. Trykk og hold hvor som helst på skjermen.&lt;br/&gt; {3,number,integer}. Dra en finger for å bevege deg rundt på skjermen.&lt;br/&gt; {4,number,integer}. Løft fingeren for å stoppe forstørring."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Når forstørrelse er slått på, kan du zoome inn på skjermen.\n\n"<b>"For å zoome"</b>", start forstørring og trykk hvor som helst på skjermen.\n"<ul><li>"Dra to eller flere fingre for å rulle"</li>\n<li>"Knip to eller flere fingre for å justere zoomen"</li></ul>\n\n<b>"For å zoome midlertidig"</b>", start forstørring og trykk og hold hvor som helst på skjermen.\n"<ul><li>"Dra for å bevege deg rundt på skjermen"</li>\n<li>"Løft fingeren for å zoome ut"</li></ul>\n\n"Du kan ikke zoome inn på tastaturet eller navigasjonsraden."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Side <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> av <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Snarvei via Tilgjengelighet-knappen"</string>
@@ -3362,16 +3369,11 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Bli bare varslet av viktige personer og apper"</string>
-    <!-- no translation found for zen_mode_select_schedule (5135520719771212697) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time (1761728920617757652) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time_example (3071816060919446355) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar (4320676795917533667) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar_example (6549820995975678001) -->
-    <skip />
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Velg aktiveringstype"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Tidspunkt"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Eksempel: «09:30–17:00»"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalender"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Eksempel: «Personlig kalender»"</string>
     <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
     <skip />
     <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
@@ -3398,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Angi en tidsplan"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Tidsplan"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> t, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Tidsplan"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Demp telefonen til bestemte tider"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Angi Ikke forstyrr-regler"</string>
@@ -3407,8 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Tillat forstyrrelser som lager lyd"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokkér visuelle forstyrrelser"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Tillat visuelle signaler"</string>
-    <!-- no translation found for mode_interruption_filter_title (3343846700214702347) -->
-    <skip />
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Hold fokus"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Flere handlinger"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Visningsinnstillinger"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Visningsalternativer"</string>
@@ -3425,10 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"slå på mørkt tema"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Bytt til at OS-et og appene foretrekker lys tekst på mørk bakgrunn, som kan være mer behagelig for øynene og gir betydelig batterisparing på noen enheter."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ingen visningsendringer}=1{{effect_1}}=2{{effect_1} og {effect_2}}=3{{effect_1}, {effect_2} og {effect_3}}other{{effect_1}, {effect_2} og # andre}}"</string>
-    <!-- no translation found for mode_notification_filter_title (443728483176031977) -->
-    <skip />
-    <!-- no translation found for mode_no_notification_filter (7119188047783404890) -->
-    <skip />
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtrer bort avbrytelser"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Ingen avbrytelser blir filtrert bort"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Visningsalternativer for filtrerte varsler"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Når «Ikke forstyrr» er på"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ingen lydvarsling"</string>
@@ -3725,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Kategorier"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Annet"</string>
     <string name="no_channels" msgid="4716199078612071915">"Denne appen har ikke publisert noen varsler"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Vis kategorier som ikke brukes"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Flere innstillinger i appen"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Vis kategorier som ikke brukes"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Skjul kategorier som ikke brukes"</string>
@@ -4929,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Datapartisjonen på denne enheten må konverteres til ext4 før du kan bruke utvikleralternativet for 16 kB. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Hvis du aktiverer alternativet for 16 kB, må du starte enheten på nytt én gang til etter dette. Når du er i denne modusen, kan du bytte mellom modusen for 4 kB og modusen for 16 kB ved bare å starte enheten på nytt én gang. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen på enheten må du bytte tilbake til modusen for 4 kB og så låse oppstartsinnlasteren. Da tilbakestilles enheten til fabrikkstandard. Når enheten har startet i Android, kan du deaktivere fjerning av produsentsperre i utvikleralternativene. Når du bekrefter, blir alle dataene på enheten visket ut, og filsystemet blir byttet til ext4. Når dette er ferdig, kan du komme tilbake for å aktivere 16 kB igjen."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Tøm alle data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Kunne ikke omformatere og viske ut datapartisjonen til ext4"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Oppstartsinnlasteren må låses opp for å bruke modusen for 16 kB"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Denne enheten krever at oppstartsinnlasteren er låst opp, før utvikleralternativet for 16 kB kan brukes. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Alle brukerdata og innstillinger viskes ut når modusen for 16 kB aktiveres. Når oppstartsinnlasteren er låst opp, kreves det to omstarter for å aktivere alternativet for 16 kB. Når du er i denne modusen, kan du bytte mellom modusen for 4 kB og modusen for 16 kB ved bare å starte enheten på nytt én gang. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen på enheten må du bytte tilbake til modusen for 4 kB og så låse enheten via produsenten eller oppstartsinnlasteren (og da tilbakestilles enheten til fabrikkstandard). Lås opp oppstartsinnlasteren, og prøv på nytt. Du finner veiledning om hvordan du gjør dette, på &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Bruker den sideagnostiske modusen for 4 kB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Du er i modusen for 4 kB av den sideagnostiske modusen. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen, må du låse oppstartsinnlasteren på enheten. Trykk for å finne ut mer."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Du er i modusen for 4 kB av den sideagnostiske modusen. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen, må du låse oppstartsinnlasteren på enheten. Da tilbakestilles enheten til fabrikkstandard, og produksjonsinnstillingene gjenopprettes. Når enheten har startet i Android, kan du deaktivere fjerning av produsentsperre i utvikleralternativene. Hvis enheten ikke starter opp i Android, eller hvis den er ustabil, bør du flashe enheten på nytt med de siste fabrikkavbildningene fra &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; eller bruke &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; og velge «Wipe Device» (visk ut alt på enheten), «Lock Bootloader» (lås oppstartsinnlasteren) og «Force Flash all partitions» (tving gjennom flashing av alle partisjoner)."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Bruker den sideagnostiske modusen for 16 kB"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Du er i modusen for 16 kB av den sideagnostiske modusen. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen, må du bytte tilbake til modusen for 4K og låse oppstartsinnlasteren på enheten. Trykk for å finne ut mer."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Du er i modusen for 16 kB av den sideagnostiske modusen. I denne modusen kan ikke programvareintegriteten garanteres, og eventuelle data som er lagret på telefonen mens oppstartsinnlasteren er låst opp, kan være utsatt for fare. Noen funksjoner deaktiveres i disse modusene, så det er ikke sikkert at alle apper fungerer. For å gå tilbake til produksjonsmodusen, må du bytte tilbake til modusen for 4K og låse oppstartsinnlasteren på enheten. Da tilbakestilles enheten til fabrikkstandard, og produksjonsinnstillingene gjenopprettes. Når enheten har startet i Android, kan du deaktivere fjerning av produsentsperre i utvikleralternativene. Hvis enheten ikke starter opp i Android, eller hvis den er ustabil, bør du flashe enheten på nytt med de siste fabrikkavbildningene fra &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; eller bruke &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; og velge «Wipe Device» (visk ut alt på enheten), «Lock Bootloader» (lås oppstartsinnlasteren) og «Force Flash all partitions» (tving gjennom flashing av alle partisjoner)."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Sideagnostisk modus for 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Les mer"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Feilrapporthåndtering"</string>

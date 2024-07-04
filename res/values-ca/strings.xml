@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Configuració de l\'audiòfon"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Drecera, compatibilitat amb audiòfons"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Valors predefinits"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"L\'audiòleg no ha programat cap valor predefinit"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"No s\'ha pogut actualitzar el valor predefinit"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Sortida d\'àudio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Sobre la sortida d\'àudio"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Més informació sobre Desbloqueig amb rellotge"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Afegeix un rellotge"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Suprimeix el rellotge"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Desbloqueig facial i amb empremta digital"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueig facial i amb empremta digital"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Desbloqueig facial i amb empremta digital per a la feina"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Cal fer la configuració"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Cara i empremtes digitals afegides"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Instal·la aplicacions"</b>\n"Instal·la aplicacions que vulguis mantenir privades a l\'espai"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Nota important"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Les aplicacions s\'aturen quan bloqueges l\'espai"</b>\n"Quan bloquegis l\'espai, les aplicacions de l\'espai s\'aturaran i no en rebràs notificacions"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Els espais privats no són adequats per a les aplicacions que necessiten executar-se en segon pla o enviar notificacions crítiques, com ara aplicacions de medicina. Això és perquè les notificacions i l\'activitat en segon pla s\'aturen quan l\'espai es bloqueja.\n\nLes aplicacions del teu espai privat no apareixeran al gestor de permisos, al tauler de privadesa ni en altres opcions de configuració quan l\'espai privat estigui bloquejat.\n\nL\'espai privat no es pot moure a un dispositiu nou. Caldrà que configuris un altre espai privat si el vols utilitzar en un altre dispositiu.\n\nQualsevol persona que connecti el teu dispositiu a un ordinador o instal·li aplicacions perjudicials al teu dispositiu podria accedir a l\'espai privat."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Els espais privats no són adequats per a les aplicacions que necessiten executar-se en segon pla o enviar notificacions crítiques, com ara aplicacions de medicina. Això és perquè les notificacions i l\'activitat en segon pla s\'aturen quan l\'espai es bloqueja.\n\nLes aplicacions del teu espai privat no apareixeran al gestor de permisos, al tauler de privadesa ni en altres opcions de configuració quan l\'espai privat estigui bloquejat.\n\nL\'espai privat no es pot restaurar en un dispositiu nou. Hauràs de configurar un altre espai si vols utilitzar-lo en un dispositiu diferent.\n\nÉs possible que qualsevol persona que connecti el teu dispositiu a un ordinador o que instal·li aplicacions malicioses al dispositiu pugui accedir a l\'espai privat."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Més informació sobre l\'espai privat"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Aquesta acció tardarà una estona"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"S\'està configurant l\'espai privat…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptatius"</string>
     <string name="brightness" msgid="6216871641021779698">"Nivell de brillantor"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Brillantor adaptativa"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Sobre la brillantor adaptativa"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"La brillantor de la pantalla s\'ajustarà automàticament al teu entorn i a la teva activitat. Pots moure el control lliscant manualment perquè la brillantor adaptativa aprengui les teves preferències."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Activat"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Desactivat"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continua igualment"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Cancel·la"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Configuració de l\'ampliació"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Desplaçament amb un dit"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Mou l\'àrea d\'ampliació arrossegant un dit."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Mou l\'àrea d\'ampliació arrossegant dos dits."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"No està disponible mentre només s\'amplia una part de la pantalla"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Toca un botó per fer zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Amplia la pantalla ràpidament per engrandir el contingut"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Per ampliar&lt;/b&gt;:&lt;br/&gt; {0,number,integer}. Utilitza la drecera per iniciar l\'ampliació.&lt;br/&gt; {1,number,integer}. Toca la pantalla.&lt;br/&gt; {2,number,integer}. Arrossega 2 dits per moure\'t per la pantalla.&lt;br/&gt; {3,number,integer}. Pinça amb 2 dits per ajustar el zoom.&lt;br/&gt; {4,number,integer}. Utilitza la drecera per aturar l\'ampliació.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Per ampliar temporalment&lt;/b&gt;:&lt;br/&gt; {0,number,integer}. Assegura\'t que el tipus d\'ampliació estigui definit com a pantalla completa.&lt;br/&gt; {1,number,integer}. Utilitza la drecera per iniciar l\'ampliació.&lt;br/&gt; {2,number,integer}. Mantén premut qualsevol punt de la pantalla.&lt;br/&gt; {3,number,integer}. Arrossega un dit per moure\'t per la pantalla.&lt;br/&gt; {4,number,integer}. Aixeca el dit per aturar l\'ampliació."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Quan l\'opció d\'ampliació està activada, pots ampliar la pantalla.\n\n"<b>"Per ampliar-la"</b>", activa l\'opció i toca qualsevol punt de la pantalla.\n"<ul><li>"Arrossega dos o més dits per desplaçar-te."</li>\n<li>"Pinça amb dos o més dits per ajustar el zoom."</li></ul>\n\n<b>"Per fer zoom temporalment"</b>", activa l\'ampliació i mantén premut qualsevol punt de la pantalla.\n"<ul><li>"Arrossega per moure\'t per la pantalla."</li>\n<li>"Aixeca el dit per allunyar la pantalla."</li></ul>\n\n"No es pot ampliar el teclat ni la barra de navegació."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Pàgina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> de <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Drecera del botó d\'accessibilitat"</string>
@@ -3362,16 +3369,11 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Rep notificacions només de persones i aplicacions importants"</string>
-    <!-- no translation found for zen_mode_select_schedule (5135520719771212697) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time (1761728920617757652) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time_example (3071816060919446355) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar (4320676795917533667) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar_example (6549820995975678001) -->
-    <skip />
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Selecciona el tipus d\'activació"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Hora"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Exemple: \"De 9:30 a 17 h\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Calendari"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Exemple: \"Calendari personal\""</string>
     <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
     <skip />
     <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
@@ -3398,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Defineix una programació"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programa"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programació"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silencia en hores concretes"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Defineix les regles de No molestis"</string>
@@ -3407,8 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Permet les interrupcions sonores"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloqueja interrupcions visuals"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permet senyals visuals"</string>
-    <!-- no translation found for mode_interruption_filter_title (3343846700214702347) -->
-    <skip />
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Concentra\'t"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Accions addicionals"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Configuració de la pantalla"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Opcions de pantalla"</string>
@@ -3425,10 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"activa el tema fosc"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Canvia l\'SO i les aplicacions perquè prioritzin el text clar sobre fons fosc, que pot ser millor per a la vista i suposa un estalvi de bateria important en alguns dispositius"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{No hi ha cap canvi a la pantalla}=1{{effect_1}}=2{{effect_1} i {effect_2}}=3{{effect_1}, {effect_2} i {effect_3}}other{{effect_1}, {effect_2} i # més}}"</string>
-    <!-- no translation found for mode_notification_filter_title (443728483176031977) -->
-    <skip />
-    <!-- no translation found for mode_no_notification_filter (7119188047783404890) -->
-    <skip />
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtra interrupcions"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"No es filtra cap interrupció"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opcions de pantalla per a les notificacions filtrades"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quan el mode No molestis estigui activat"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Notificacions sense so"</string>
@@ -3725,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Categories"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Altres"</string>
     <string name="no_channels" msgid="4716199078612071915">"Aquesta aplicació no ha publicat cap notificació"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Mostra les categories no utilitzades"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Opcions de configuració addicionals a l\'aplicació"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Mostra les categories no utilitzades"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Amaga les categories no utilitzades"</string>
@@ -4345,7 +4347,7 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"Mode de navegació"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navegació amb 2 botons"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Per canviar d\'aplicació, fes lliscar cap amunt el botó d\'inici. Per veure totes les aplicacions, torna a lliscar cap amunt. Per tornar enrere, toca el botó Enrere."</string>
-    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Seguretat i emergència"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Seguretat personal i emergència"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Emergència SOS, informació mèdica, alertes"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navegació amb gestos"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Per anar a l\'inici, llisca cap amunt des de la part inferior de la pantalla. Per canviar d\'aplicació, llisca cap amunt des de la part inferior, mantén premut i deixa anar. Per tornar enrere, llisca des de la vora esquerra o dreta."</string>
@@ -4929,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"La partició de dades d\'aquest dispositiu s\'ha de convertir al format ext4 abans d\'utilitzar l\'opció per a desenvolupadors de 16 kB. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Per activar l\'opció de 16 kB, caldrà que el dispositiu es reiniciï una vegada més. Quan estiguis en aquest mode, podràs alternar entre el mode de 4 kB i el mode de 16 kB amb un sol reinici. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per fer que el dispositiu torni al mode de producció, hauràs de tornar al mode de 4 kB i, a continuació, bloquejar el bootloader, que restablirà les dades de fàbrica del dispositiu. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors. Es netejaran les dades del dispositiu i el sistema de fitxers es canviarà al format ext4 després de la confirmació. Quan es completi aquesta acció, torna i activa el mode de 16 kB de nou."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Esborra totes les dades"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"No s\'ha pogut canviar el format a ext4 ni netejar-ne la partició de dades."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Es requereix el desbloqueig del bootloader per al mode de 16 kB"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Aquest dispositiu ha de tenir el bootloader desbloquejat abans d\'utilitzar l\'opció per a desenvolupadors de 16 kB. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. En activar el mode de 16 kB, es netejaran totes les dades d\'usuari i opcions de configuració. Quan s\'hagi desbloquejat el bootloader, caldrà que el dispositiu es reiniciï dues vegades per activar l\'opció de 16 kB. Quan estiguis en aquest mode, podràs alternar entre el mode de 4 kB i el mode de 16 kB amb un sol reinici. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per fer que el dispositiu torni al mode de producció, hauràs de tornar al mode de 4 kB i, a continuació, bloquejar l\'OEM o el bootloader, que restablirà les dades de fàbrica del dispositiu. Desbloqueja el bootloader i torna-ho a provar. Pots consultar les instruccions per fer-ho a &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"S\'està utilitzant el mode independent de la pàgina de 4 kB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Estàs utilitzant l\'opció de 4 kB del mode independent de la pàgina. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per tornar a entrar al mode de producció, has de bloquejar el bootloader del dispositiu. Toca per obtenir més informació."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Estàs utilitzant l\'opció de 4 kB del mode independent de la pàgina. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per tornar a entrar al mode de producció, has de bloquejar el bootloader del dispositiu. Aquesta acció tornarà a restablir les dades de fàbrica del dispositiu i en restaurarà la configuració de producció. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors. Si el dispositiu no es pot iniciar a Android o és inestable, torna a instal·lar-hi les darreres imatges de fàbrica des de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o utilitza &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; i selecciona Neteja el dispositiu, Bloqueja el bootloader i Força la instal·lació de totes les particions."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"S\'està utilitzant el mode independent de la pàgina de 16 kB"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Estàs utilitzant l\'opció de 16 kB del mode independent de la pàgina. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per entrar al mode de producció de nou, has de tornar al mode de 4 kB i, a continuació, bloquejar el bootloader del dispositiu. Toca per obtenir més informació."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Estàs utilitzant l\'opció de 16 kB del mode independent de la pàgina. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per entrar al mode de producció de nou, has de tornar al mode de 4 kB i, a continuació, bloquejar el bootloader del dispositiu. Aquesta acció tornarà a restablir les dades de fàbrica del dispositiu i en restaurarà la configuració de producció. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors. Si el dispositiu no es pot iniciar a Android o és inestable, torna a instal·lar-hi les darreres imatges de fàbrica des de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o utilitza &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; i selecciona Neteja el dispositiu, Bloqueja el bootloader i Força la instal·lació de totes les particions."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Mode independent de la pàgina de 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Més informació"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gestor d\'informes d\'errors"</string>

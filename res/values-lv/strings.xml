@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Dzirdes aparāta iestatījumi"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Saīsne, saderība ar dzirdes aparātiem."</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Pirmsiestatījums"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Jūsu audiologs nav ieprogrammējis nekādus pirmsiestatījumus."</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Nebija iespējams atjaunināt pirmsiestatījumu."</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audio izeja"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Par audio izvadi"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Uzzināt vairāk par funkciju “Atbloķēšana ar pulksteni”"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Pievienot pulksteni"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Noņemt pulksteni"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Autorizācija ar pirksta nospiedumu un pēc sejas"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Autorizācija pēc sejas un pirksta nospieduma"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Autorizācija pēc sejas un pirksta nospieduma darba profilam"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Nepieciešama iestatīšana"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Seja un pirksta nospiedumi ir pievienoti"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Lietotņu instalēšana"</b>\n"Instalējiet lietotnes, ko vēlaties privāti glabāt savā telpā."</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Svarīga informācija"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Lietotnes pārstāj darboties, kad bloķējat privāto telpu"</b>\n"Kad bloķējat privāto telpu, lietotnes šajā telpā pārstāj darboties un jūs turpmāk nesaņemat šo lietotņu paziņojumus."</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Privātās telpas nav piemērotas lietotnēm, kam nepieciešams darboties fonā vai sūtīt kritiskus paziņojumus, piemēram, medicīnas lietotnēm. Iemesls ir tas, ka paziņojumi un darbība fonā tiek apturēta, kad telpa tiek bloķēta.\n\nLietotnes, kas atrodas jūsu privātajā telpā, nebūs redzamas atļauju pārvaldniekā, konfidencialitātes informācijas panelī un citos iestatījumos, kad privātā telpa būs bloķēta.\n\nPrivāto telpu nevar pārvietot uz jaunu ierīci. Ja vēlēsieties izmantot privāto telpu citā ierīcē, jums būs jāiestata jauna telpa.\n\nJebkura persona, kas izveidos savienojumu starp jūsu ierīci un datoru vai instalēs kaitīgas lietotnes jūsu ierīcē, iespējams, varēs piekļūt jūsu privātajai telpai."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Privātās telpas nav piemērotas lietotnēm, kam nepieciešams darboties fonā vai sūtīt kritiskus paziņojumus, piemēram, medicīnas lietotnēm. Iemesls ir tas, ka paziņojumi un darbība fonā tiek apturēta, kad telpa tiek bloķēta.\n\nLietotnes, kas atrodas jūsu privātajā telpā, nebūs redzamas atļauju pārvaldniekā, konfidencialitātes informācijas panelī un citos iestatījumos, kad privātā telpa būs bloķēta.\n\nPrivāto telpu nevar atjaunot jaunā ierīcē. Ja vēlēsieties izmantot privāto telpu citā ierīcē, jums būs jāiestata jauna telpa.\n\nJebkura persona, kas izveidos savienojumu starp jūsu ierīci un datoru vai instalēs ļaunprātīgas lietotnes jūsu ierīcē, iespējams, varēs piekļūt jūsu privātajai telpai."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Uzzināt vairāk par privāto telpu"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Tas ilgs kādu brīdi."</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Notiek privātās telpas iestatīšana…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptīva krāsa"</string>
     <string name="brightness" msgid="6216871641021779698">"Spilgtuma līmenis"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Adaptīvs spilgtums"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Par adaptīvo spilgtumu"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Ekrāna spilgtums automātiski tiks pielāgots apkārtējai videi un veiktajām darbībām. Lai adaptīvajam spilgtumam iestatītu savas preferences, pārvietojiet slīdni."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Ieslēgt"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Izslēgts"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Tomēr turpināt"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Atcelt"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Palielināšanas iestatījumi"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Pārvietošana ar vienu pirkstu"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Palielinājuma apgabala pārvietošanai velciet vienu pirkstu."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Palielinājuma apgabala pārvietošanai velciet divus pirkstus."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Nav pieejama, kad tiek palielināta tikai daļa ekrāna"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Pieskarieties pogai, lai palielinātu"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Ātri tuviniet ekrānu, lai palielinātu saturu"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Tuvināšana&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Izmantojiet īsinājumtaustiņu, lai sāktu palielināšanu.&lt;br/&gt; {1,number,integer}. Pieskarieties ekrānam.&lt;br/&gt; {2,number,integer}. Lai pārvietotos ekrānā, velciet ar diviem pirkstiem.&lt;br/&gt; {3,number,integer}. Lai regulētu tālummaiņu, savelciet ar diviem pirkstiem.&lt;br/&gt; {4,number,integer}. Izmantojiet īsinājumtaustiņu, lai pārtrauktu palielināšanu.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Īslaicīga tuvināšana&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Pārliecinieties, vai iestatītais palielinājuma veids ir “Pilnekrāna režīms”.&lt;br/&gt; {1,number,integer}. Izmantojiet īsinājumtaustiņu, lai sāktu palielināšanu.&lt;br/&gt; {2,number,integer}. Pieskarieties un turiet jebkurā ekrāna vietā.&lt;br/&gt; {3,number,integer}. Lai pārvietotos ekrānā, velciet ar pirkstu.&lt;br/&gt; {4,number,integer}. Paceliet pirkstu, lai pārtrauktu palielināšanu."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Kad ir ieslēgts palielinājums, ekrānā varat izmantot tuvināšanu.\n\n"<b>"Lai izmantotu tālummaiņu"</b>", aktivizējiet palielinājumu un pēc tam pieskarieties jebkur ekrānā.\n"<ul><li>"Velciet ar vismaz 2 pirkstiem, lai ritinātu."</li>\n<li>"Savelciet kopā vismaz 2 pirkstus, lai pielāgotu tālummaiņu."</li></ul>\n\n<b>"Lai veiktu īslaicīgu tālummaiņu"</b>", aktivizējiet palielinājumu un pēc tam pieskarieties jebkurai vietai ekrānā un turiet to.\n"<ul><li>"Velciet ar pirkstu, lai pārvietotos pa ekrānu."</li>\n<li>"Paceliet pirkstu, lai veiktu tālināšanu."</li></ul>\n\n"Tastatūrā vai navigācijas joslā nevarat veikt tuvināšanu."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>. lapa no <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Saīsne: pieejamības poga"</string>
@@ -3393,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Iestatiet grafiku"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Grafiks"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Grafiks"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Skaņas izslēgšana noteiktā laikā"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Iestatīt režīma “Netraucēt” kārtulas"</string>
@@ -3717,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Kategorijas"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Cits"</string>
     <string name="no_channels" msgid="4716199078612071915">"Šai lietotnei nav neviena paziņojuma."</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Rādīt neizmantotās kategorijas"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Lietotnes papildu iestatījumi"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Rādīt neizmantotās kategorijas"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Paslēpt neizmantotās kategorijas"</string>
@@ -4921,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Ierīces datu nodalījuma failu sistēma jākonvertē uz ext4, lai varētu izmantot izstrādātāju opciju “16 KB”. Šajā režīmā nevar garantēt programmatūras integritāti, un tālrunī glabātie dati var būt apdraudēti, kamēr operētājsistēmu ielādes rīks ir atbloķēts. Lai varētu aktivizēt opciju “16 KB”, ierīce būs vēl vienu reizi atkārtoti jāpalaiž. Kad būs ieslēgts šis režīms, varēsiet pārslēgt 4 KB vai 16 KB režīmu, vienreiz atkārtoti palaižot ierīci. Šajos režīmos dažas funkcijas tiks atspējotas, tādēļ dažas lietojumprogrammas var nedarboties. Lai ierīcē atjaunotu produkcijas režīmu, jums būs jāpārslēdz 4 KB režīms un jābloķē operētājsistēmu ielādes rīks. Tādējādi ierīcē tiks atjaunoti rūpnīcas dati. Kad ierīcē būs sekmīgi palaista operētājsistēma Android, izstrādātāju opcijās atspējojiet OAR atbloķēšanu. Apstiprinot šo darbību, ierīcē tiks notīrīti dati un failu sistēma tiks mainīta uz ext4. Kad tas būs paveikts, lūdzu, atgriezieties, lai iespējotu 16 KB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Dzēst visus datus"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Neizdevās notīrīt datu nodalījumu un to pārformatēt uz failu sistēmu ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Lai varētu izmantot 16 KB režīmu, jāatbloķē operētājsistēmu ielādes rīks"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Lai varētu izmantot izstrādātāju opciju “16 KB”, ierīcē ir jāatbloķē operētājsistēmu ielādes rīks. Šajā režīmā nevar garantēt programmatūras integritāti, un tālrunī glabātie dati var būt apdraudēti, kamēr operētājsistēmu ielādes rīks ir atbloķēts. Aktivizējot 16 KB režīmu, tiks notīrīti visi lietotāja dati un iestatījumi. Kad operētājsistēmu ielādes rīks būs atbloķēts, ierīce būs atkārtoti jāpalaiž divas reizes, lai aktivizētu opciju “16 KB”. Kad būs ieslēgts šis režīms, varēsiet pārslēgt 4 KB vai 16 KB režīmu, vienreiz atkārtoti palaižot ierīci. Šajos režīmos dažas funkcijas tiks atspējotas, tādēļ dažas lietojumprogrammas var nedarboties. Lai ierīcē atjaunotu produkcijas režīmu, jums būs jāpārslēdz 4 KB režīms un jābloķē OAR/operētājsistēmu ielādes rīks. Tādējādi ierīcē tiks atjaunoti rūpnīcas dati. Lūdzu, atbloķējiet operētājsistēmu ielādes rīku un mēģiniet vēlreiz. Norādījumi ir sniegti šeit: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Tiek izmantots 4 KB režīms, kas nav atkarīgs no lappušatmiņas lieluma"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Pašlaik izmantojat 4 KB režīmu, kas nav atkarīgs no lappušatmiņas lieluma. Šajā režīmā nevar garantēt programmatūras integritāti, un tālrunī glabātie dati var būt apdraudēti, kamēr operētājsistēmu ielādes rīks ir atbloķēts. Šajos režīmos dažas funkcijas tiks atspējotas, tādēļ dažas lietojumprogrammas var nedarboties. Lai ierīcē atjaunotu produkcijas režīmu, jums ir jābloķē operētājsistēmu ielādes rīks. Pieskarieties, lai lasītu vairāk."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Pašlaik izmantojat 4 KB režīmu, kas nav atkarīgs no lappušatmiņas lieluma. Šajā režīmā nevar garantēt programmatūras integritāti, un tālrunī glabātie dati var būt apdraudēti, kamēr operētājsistēmu ielādes rīks ir atbloķēts. Šajos režīmos dažas funkcijas tiks atspējotas, tādēļ dažas lietojumprogrammas var nedarboties. Lai ierīcē atjaunotu produkcijas režīmu, jums ir jābloķē operētājsistēmu ielādes rīks. Tādējādi ierīcē atkal tiks atjaunoti rūpnīcas dati un produkcijas iestatījumi. Kad ierīcē būs sekmīgi palaista operētājsistēma Android, izstrādātāju opcijās atspējojiet OAR atbloķēšanu. Ja ierīcē neizdodas palaist operētājsistēmu Android vai tā nav stabila, ierīcē instalējiet jaunākos rūpnīcas attēlus no vietnes &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; vai apmeklējiet vietni &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; un atlasiet “Wipe Device” (Notīrīt ierīci), “Lock Bootloader” (Bloķēt operētājsistēmu ielādes rīku) un “Force Flash all partitions” (Veikt piespiedu instalēšanu visos nodalījumos)."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Tiek izmantots 16 KB režīms, kas nav atkarīgs no lappušatmiņas lieluma"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Pašlaik izmantojat 16 KB režīmu, kas nav atkarīgs no lappušatmiņas lieluma. Šajā režīmā nevar garantēt programmatūras integritāti, un tālrunī glabātie dati var būt apdraudēti, kamēr operētājsistēmu ielādes rīks ir atbloķēts. Šajos režīmos dažas funkcijas tiks atspējotas, tādēļ dažas lietojumprogrammas var nedarboties. Lai ierīcē atjaunotu produkcijas režīmu, jums būs jāpārslēdz 4 KB režīms un jābloķē operētājsistēmu ielādes rīks. Pieskarieties, lai lasītu vairāk."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Pašlaik izmantojat 16 KB režīmu, kas nav atkarīgs no lappušatmiņas lieluma. Šajā režīmā nevar garantēt programmatūras integritāti, un tālrunī glabātie dati var būt apdraudēti, kamēr operētājsistēmu ielādes rīks ir atbloķēts. Šajos režīmos dažas funkcijas tiks atspējotas, tādēļ dažas lietojumprogrammas var nedarboties. Lai ierīcē atjaunotu produkcijas režīmu, jums būs jāpārslēdz 4 KB režīms un jābloķē operētājsistēmu ielādes rīks. Tādējādi ierīcē atkal tiks atjaunoti rūpnīcas dati un produkcijas iestatījumi. Kad ierīcē būs sekmīgi palaista operētājsistēma Android, izstrādātāju opcijās atspējojiet OAR atbloķēšanu. Ja ierīcē neizdodas palaist operētājsistēmu Android vai tā nav stabila, ierīcē instalējiet jaunākos rūpnīcas attēlus no vietnes &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; vai apmeklējiet vietni &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; un atlasiet “Wipe Device” (Notīrīt ierīci), “Lock Bootloader” (Bloķēt operētājsistēmu ielādes rīku) un “Force Flash all partitions” (Veikt piespiedu instalēšanu visos nodalījumos)."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 KB režīms, kas nav atkarīgs no lappušatmiņas lieluma"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Uzzināt vairāk"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Kļūdu pārskatu apstrādātājs"</string>
