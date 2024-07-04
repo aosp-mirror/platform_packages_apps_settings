@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"হিয়ারিং ডিভাইস সংক্রান্ত সেটিংস"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"শর্টকাট, হিয়ারিং এড কম্প্যাটিবিলিটি"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"প্রিসেট"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"আপনার অডিওলজিস্ট কোনও প্রিসেট প্রোগ্রাম করে রাখেননি"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"প্রিসেট আপডেট করা যায়নি"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"অডিও আউটপুট"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"অডিও আউটপুট সম্পর্কে"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"\'ঘড়ি আনলক করুন\' ফিচার সম্পর্কে আরও জানুন"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"ঘড়ি যোগ করুন"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"ঘড়ি সরান"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"ফিঙ্গারপ্রিন্ট ও ফেস আনলক"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"ফেস ও ফিঙ্গারপ্রিন্ট আনলক"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"অফিস প্রোফালের জন্য \'ফেস ও ফিঙ্গারপ্রিন্ট আনলক\' ফিচার"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"সেট-আপ করতে হবে"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"ফেস এবং আঙ্গুলের ছাপ যোগ করা হয়েছে"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"অ্যাপ ইনস্টল করুন"</b>\n"আপনি নিজের স্পেসে যেসব অ্যাপ ব্যক্তিগত রাখতে চান সেগুলি ইনস্টল করুন"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"মনে রাখবেন"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"আপনি নিজের স্পেস লক করলে অ্যাপ বন্ধ হয়"</b>\n"আপনি নিজের স্পেস লক করলে, আপনার স্পেসে থাকা অ্যাপগুলি বন্ধ হয়ে যাবে এবং আপনি সেগুলি থেকে কোনও বিজ্ঞপ্তি পাবেন না"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"যেসব অ্যাপ ব্যাকগ্রাউন্ডে চালাতে হয় বা গুরুত্বপূর্ণ বিজ্ঞপ্তি পাঠায়, সেগুলির জন্য প্রাইভেট স্পেস ব্যবহার করা যাবে না। যেমন, চিকিৎসা সম্পর্কিত অ্যাপ। এর কারণ হল, স্পেস লক হলে বিজ্ঞপ্তি পাঠানোর সুবিধা ও ব্যাকগ্রাউন্ড অ্যাক্টিভিটি বন্ধ হয়ে যায়। \n\nপ্রাইভেট স্পেস লক থাকলে, প্রাইভেট স্পেসে থাকা অ্যাপ পার্মিশন ম্যানেজার, প্রাইভেসি ড্যাশবোর্ড এবং অন্যান্য সেটিংসে দেখা যাবে না।\n\nআপনার প্রাইভেট স্পেস নতুন ডিভাইসে সরানো যাবে না। আপনি অন্য ডিভাইসে প্রাইভেট স্পেস ব্যবহার করতে চাইলে, আপনাকে অন্য একটি প্রাইভেট স্পেস সেট-আপ করতে হবে।\n\nযদি কেউ আপনার ডিভাইস একটি কম্পিউটারের সাথে কানেক্ট করেন বা ডিভাইসে ক্ষতিকারক অ্যাপ ইনস্টল করেন, তাহলে তিনি আপনার প্রাইভেট স্পেস হয়ত অ্যাক্সেস করতে পারবেন।"</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"যেসব অ্যাপ ব্যাকগ্রাউন্ডে চালাতে হয় বা গুরুত্বপূর্ণ বিজ্ঞপ্তি পাঠায়, সেগুলির জন্য প্রাইভেট স্পেস ব্যবহার করা যাবে না। যেমন, চিকিৎসা সম্পর্কিত অ্যাপ। এর কারণ হল, স্পেস লক হলে বিজ্ঞপ্তি পাঠানোর সুবিধা ও ব্যাকগ্রাউন্ড অ্যাক্টিভিটি বন্ধ হয়ে যায়।\n\nপ্রাইভেট স্পেস লক থাকলে, প্রাইভেট স্পেসে থাকা অ্যাপ পার্মিশন ম্যানেজার, প্রাইভেসি ড্যাশবোর্ড এবং অন্যান্য সেটিংসে দেখা যাবে না।\n\nআপনার প্রাইভেট স্পেস নতুন ডিভাইসে ফিরিয়ে আনা যাবে না। আপনি অন্য ডিভাইসে স্পেস ব্যবহার করতে চাইলে আপনাকে অন্য একটি স্পেস সেট-আপ করতে হবে।\n\nকেউ আপনার ডিভাইস কোনও কম্পিউটারের সাথে কানেক্ট করলে বা ডিভাইসে ক্ষতিকর অ্যাপ ইনস্টল করলে, তিনি হয়ত আপনার প্রাইভেট স্পেস অ্যাক্সেস করতে পারবেন।"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"প্রাইভেট স্পেস সম্পর্কে আরও জানুন"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"এর জন্য কিছুক্ষণ সময় লাগতে পারে"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"প্রাইভেট স্পেস সেট-আপ করা হচ্ছে…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"অভিযোজিত"</string>
     <string name="brightness" msgid="6216871641021779698">"উজ্জ্বলতার স্তর"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"পরিবেশের আলো অনুযায়ী উজ্জ্বলতা"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"পরিবেশের আলো অনুযায়ী উজ্জ্বলতা সম্পর্কে"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"আপনার পারিপার্শ্বিক অবস্থা এবং অ্যাক্টিভিটি অনুযায়ী স্ক্রিনের উজ্জ্বলতা নিজে থেকেই অ্যাডজাস্ট করে নেওয়া হবে। স্ক্রিন কতখানি উজ্জ্বল হলে আপনার সুবিধা হয়, তা আপনি স্লাইডারের মাধ্যমে নির্দিষ্ট করে দিতে পারেন।"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"চালু আছে"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"বন্ধ আছে"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"তা সত্ত্বেও চালিয়ে যান"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"বাতিল করুন"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"বড় করে দেখার সেটিংস"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"একটি আঙুল দিয়ে প্যান করা"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"\'বড় করে দেখা\' এলাকা একটি আঙুল দিয়ে টেনে সরান।"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"\'বড় করে দেখা\' এলাকা দুটি আঙুল দিয়ে টেনে সরান।"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"শুধুমাত্র স্ক্রিনের বড় করে দেখানো অংশে উপলভ্য থাকে না"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"জুম করার জন্য বোতামে ট্যাপ করুন"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"কন্টেন্ট আরও বড় সাইজে দেখার জন্য, স্ক্রিনে দ্রুত জুম বাড়ান"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;জুম ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. \'বড় করে দেখা\' ফিচার চালু করার জন্য শর্টকাট ব্যবহার করুন&lt;br/&gt; {1,number,integer}। স্ক্রিনে ট্যাপ করুন&lt;br/&gt; {2,number,integer}। স্ক্রিনের চারদিকে ঘোরাতে ২টি আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {3,number,integer}। জুম অ্যাডজাস্ট করার জন্য ২টি আঙুল দিয়ে পিঞ্চ করুন&lt;br/&gt; {4,number,integer}। \'বড় করে দেখা\' ফিচার বন্ধ করার জন্য শর্টকাট ব্যবহার করুন&lt;br/&gt;&lt;br/&gt; &lt;b&gt;সাময়িকভাবে জুম ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}। আপনার \'বড় করে দেখা\' ফিচারের ধরন ফুল স্ক্রিনে সেট হয়েছে কিনা ভাল করে দেখে নিন&lt;br/&gt; {1,number,integer}। \'বড় করে দেখা\' ফিচার চালু করতে শর্টকাট ব্যবহার করুন&lt;br/&gt; {2,number,integer}। স্ক্রিনের যেকোনও জায়গা টাচ করে ধরে থাকুন&lt;br/&gt; {3,number,integer}। স্ক্রিনের চারদিকে ঘোরাতে আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {4,number,integer}। \'বড় করে দেখা\' ফিচার বন্ধ করতে স্ক্রিনের উপর থেকে আঙুল সরিয়ে নিন"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"ম্যাগনিফিকেশন চালু করা থাকলে, আপনি স্ক্রিনে জুম বাড়াতে পারবেন।\n\n"<b>"জুম করতে"</b>", ম্যাগনিফিকেশন চালু করে স্ক্রিনের যেকোনও জায়গায় ট্যাপ করুন।\n"<ul><li>"• স্ক্রল করতে ২ বা তার বেশি আঙ্গুল দিয়ে টানুন"</li>\n<li>"• জুম অ্যাডজাস্ট করতে ২ বা তার বেশি আঙ্গুল দিয়ে পিঞ্চ করুন"</li></ul>\n\n<b>"সাময়িকভাবে জুম করতে"</b>", ম্যাগনিফিকেশন চালু করে স্ক্রিনের যেকোনও জায়গায় টাচ করে ধরে থাকুন।\n"<ul><li>"• টেনে স্ক্রিনের বিভিন্ন জায়গায় সরান"</li>\n<li>"• জুম কমাতে স্ক্রিন থেকে আঙ্গুল তুলে নিন"</li></ul>\n\n"কীবোর্ড বা নেভিগেশন বারে আপনি জুম করতে পারবেন না।"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g>টি মধ্যে <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> নম্বর পৃষ্ঠা"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"অ্যাক্সেসিবিলিটি বোতামের শর্টকার্ট"</string>
@@ -3393,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"একটি শিডিউল সেট করুন"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"শিডিউল করুন"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ঘণ্টা, <xliff:g id="MINUTES">%2$d</xliff:g> মিনিট"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"সময়সূচি"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"নির্দিষ্ট সময়ে ফোন সাইলেন্ট করুন"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\'বিরক্ত করবে না\' মোডের নিয়ম সেট-আপ করুন"</string>
@@ -3717,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"বিভাগগুলি"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"অন্যান্য"</string>
     <string name="no_channels" msgid="4716199078612071915">"এই অ্যাপটি দ্বারা কোন বিজ্ঞপ্তি পোস্ট করা হয়নি"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"অব্যবহৃত বিভাগ দেখুন"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"অ্যাপের আরও সেটিংস"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"অব্যবহৃত বিভাগ দেখান"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"অব্যবহৃত বিভাগ লুকান"</string>
@@ -4921,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"১৬ কেবি ডেভেলপার বিকল্প ব্যবহার করার আগে, এই ডিভাইসের ডেটা পার্টিশন ext4-এ পরিবর্তন করতে হবে। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। ১৬ কেবি ডেভেলপার বিকল্প অ্যাক্টিভেট করে দিলে, এর পরে ডিভাইসটি আরও একবার রিবুট করতে হবে। আপনি এই মোড থাকলে, একবার রিবুট করার মাধ্যমে ৪ কেবি এবং ১৬ কেবি মোডের মধ্যে সুইচ করতে পারবেন। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। ডিভাইসটি প্রোডাকশন মোডে রাখতে, আপনাকে ৪ কেবি মোডে ফিরে আসতে হবে ও তারপরে বুটলোডার লক করতে হবে যেটি ডিভাইসকে ফ্যাক্টরি রিসেট করবে। ডিভাইসটি Android-এ বুট করা হয়ে গেলে, ডেভেলপার বিকল্পে OEM আনলক করা বন্ধ করুন। নিশ্চিত করার পরে ডিভাইস ওয়াইপ করা হবে এবং ফাইল সিস্টেম ext4-এ পরিবর্তিত হয়ে যাবে। এটি হয়ে যাওয়ার পরে, আবার ১৬ কেবি মোড চালু করুন।"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"সব ডেটা মুছুন"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ডেটা পার্টিশানকে ext4 ফর্ম্যাটে আবার ফর্ম্যাট করা ও ওয়াইপ করা যায়নি।"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"১৬ কেবি মোডের জন্য বুটলোডার আনলক করা প্রয়োজন"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"১৬ কেবি ডেভেলপার বিকল্প ব্যবহার করতে হলে, এই ডিভাইসের জন্য বুটলোডার আনলক করতে হবে। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। ১৬ কেবি মোড অ্যাক্টিভেট করে দিলে, ব্যবহারকারীর সব ডেটা ও সেটিংস ওয়াইপ হয়ে যাবে। বুটলোডার আনলক হয়ে গেলে, ১৬ কেবি মোড বিকল্প চালু করার জন্য ডিভাইস দুবার রিবুট করার প্রয়োজন হয়। আপনি এই মোড থাকলে, একবার রিবুট করার মাধ্যমে ৪ কেবি এবং ১৬ কেবি মোডের মধ্যে সুইচ করতে পারবেন। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। ডিভাইসটিকে আবার প্রোডাকশন মোডে রাখতে, আপনাকে ৪ কেবি মোডে ফিরে আসতে হবে ও তারপরে OEM/বুটলোডার লক করতে হবে (যেটি ডিভাইসকে ফ্যাক্টরি রিসেট করবে)। বুটলোডার আনলক করে আবার চেষ্টা করুন। বুটলোডার কীভাবে আনলক করবেন তার নির্দেশাবলী এখানে দেখতে পারেন &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"৪ কেবি পেজ-অ্যাগনোস্টিক মোড ব্যবহার করা হচ্ছে"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"আপনি পেজ-অ্যাগনোস্টিক মোডের ৪ কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, অবশ্যই ডিভাইসের বুটলোডার লক করতে হবে। আরও পড়তে ট্যাপ করুন।"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"আপনি পেজ-অ্যাগনোস্টিক মোডের ৪ কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, অবশ্যই ডিভাইসের বুটলোডার লক করতে হবে। এটি ডিভাইসটিকে আবার ফ্যাক্টরি রিসেট করবে এবং এটির প্রোডাকশন সেটিংস আগের মতো হয়ে যাবে। ডিভাইসটি Android-এ বুট করা হয়ে গেলে, ডেভেলপার বিকল্পে OEM আনলক করা বন্ধ করুন। ডিভাইসটি Android-এ বুট করা না গেলে বা স্থিতিশীল না হলে, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; সাম্প্রতিক ফ্যাক্টরি ইমেজের সাথে ডিভাইসটি আবার ফ্ল্যাশ করুন এবং \'ডিভাইস ওয়াইপ করুন\', \'বুটলোডার লক করুন\' ও \'সব পার্টিশন জোরপূর্বক ফ্ল্যাশ করুন\' বিকল্প বেছে নিন।"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"১৬ কেবি পেজ-অ্যাগনোস্টিক মোড ব্যবহার করা হচ্ছে"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"আপনি পেজ-অ্যাগনোস্টিক মোডের ১৬ কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, আপনাকে অবশ্যই ৪ কেবি মোডে ফিরে যেতে হবে ও তারপরে ডিভাইসের বুটলোডার লক করতে হবে। আরও পড়তে ট্যাপ করুন।"</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"আপনি পেজ-অ্যাগনোস্টিক মোডের ১৬ কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, আপনাকে অবশ্যই ৪ কেবি মোডে ফিরে যেতে হবে ও তারপরে ডিভাইসের বুটলোডার লক করতে হবে। এটি ডিভাইসটিকে আবার ফ্যাক্টরি রিসেট করবে এবং এটির প্রোডাকশন সেটিংস আগের মতো হয়ে যাবে। ডিভাইসটি Android-এ বুট করা হয়ে গেলে, ডেভেলপার বিকল্পে OEM আনলক করা বন্ধ করুন। ডিভাইসটি Android-এ বুট করা না গেলে বা স্থিতিশীল না হলে, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; সাম্প্রতিক ফ্যাক্টরি ইমেজের সাথে ডিভাইসটি আবার ফ্ল্যাশ করুন এবং \'ডিভাইস ওয়াইপ করুন\', \'বুটলোডার লক করুন\' ও \'সব পার্টিশন জোরপূর্বক ফ্ল্যাশ করুন\' বিকল্প বেছে নিন।"</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"১৬ কেবি পেজ-অ্যাগনোস্টিক মোড"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"আরও পড়ুন"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"সমস্যার রিপোর্টের পরিচালক"</string>

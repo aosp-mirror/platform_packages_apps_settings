@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Configuración dos dispositivos auditivos"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Atallo, compatibilidade con audiófonos"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Configuración predeterminada"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"O audiólogo non fixo ningunha configuración predeterminada"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Non se puido actualizar a configuración predeterminada"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Saída de audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Acerca da saída de audio"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Máis información sobre a función Desbloqueo mediante reloxo"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Engadir reloxo"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Quitar reloxo"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Impresión dixital e desbloqueo facial"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueo facial e dactilar"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Desbloqueo dactilar e facial para o traballo"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Cómpre realizar o proceso de configuración"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Engadíronse a cara e as impresións dixitais"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Instala aplicacións"</b>\n"Instala as aplicacións que queiras manter no teu espazo privado"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Importante"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"As aplicacións desactívanse ao bloquear o espazo privado"</b>\n"Cando bloqueas o espazo, as aplicacións que están nel detéñense, polo que non che enviarán notificacións"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Os espazos privados non son axeitados para as aplicacións que deben executarse en segundo plano ou enviar notificacións esenciais, como as aplicacións médicas. A razón é que se deteñen as notificacións e a actividade en segundo plano cando bloqueas o espazo.\n\nUnha vez bloqueado, as aplicacións do espazo privado non aparecerán no xestor de permisos, no panel de privacidade nin noutras opcións de configuración\n\nEste espazo non se pode mover a outro dispositivo. Terás que configurar un novo espazo privado se queres usalo noutro aparello.\n\nCalquera usuario que instale aplicacións daniñas no teu dispositivo ou o conecte a un ordenador poderá acceder ao teu espazo privado."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Os espazos privados non son axeitados para as aplicacións que deben executarse en segundo plano ou enviar notificacións esenciais, como as aplicacións médicas. A razón é que se deteñen as notificacións e a actividade en segundo plano cando bloqueas o espazo.\n\nUnha vez bloqueado, as aplicacións do espazo privado non aparecerán no xestor de permisos, no panel de privacidade nin noutras opcións de configuración\n\nEste espazo non se pode restaurar noutro dispositivo. Terás que configurar un novo se queres usalo noutro aparello.\n\nCalquera usuario que instale aplicacións maliciosas no teu dispositivo ou o conecte a un ordenador podería acceder ao teu espazo privado."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Máis información sobre o espazo privado"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Esta acción tardará uns intres"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configurando espazo privado…"</string>
@@ -881,7 +880,7 @@
     <skip />
     <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
     <skip />
-    <string name="wifi_display_settings_title" msgid="6451625615274960175">"Emisión"</string>
+    <string name="wifi_display_settings_title" msgid="6451625615274960175">"Emitir"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"proxección"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activar visualización sen fíos"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Non hai dispositivos cerca."</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Automáticas"</string>
     <string name="brightness" msgid="6216871641021779698">"Nivel de brillo"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Brillo intelixente"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Acerca do brillo intelixente"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"O brillo da pantalla axustarase automaticamente segundo o ambiente e as actividades que leves a cabo. Podes mover o control desprazable de forma manual para que o brillo intelixente recoñeza as túas preferencias."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Activado"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Desactivado"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuar igualmente"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Cancelar"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Configuración da ampliación"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Desprazamento cun dedo"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Arrastra un dedo para mover a área de ampliación."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Arrastra dous dedos para mover a área de ampliación."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Non dispoñible cando só se amplíe unha parte da pantalla"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Toca un botón para achegar o zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Se queres ampliar o contido, achégao rapidamente na pantalla usando o zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Se queres achegar o contido usando o zoom, sigue estes pasos:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utiliza o atallo cando queiras iniciar a ampliación&lt;br/&gt; {1,number,integer}. Toca a pantalla&lt;br/&gt; {2,number,integer}. Para moverte pola pantalla, arrastra dous dedos&lt;br/&gt; {3,number,integer}. Cando queiras axustar o zoom, belisca a pantalla con dous dedos&lt;br/&gt; {4,number,integer}. Utiliza o atallo para deter a ampliación&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Para achegar o contido temporalmente usando o zoom, sigue estes pasos:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Asegúrate de que o tipo de ampliación estea configurado a pantalla completa&lt;br/&gt; {1,number,integer}. Utiliza o atallo cando queiras iniciar a ampliación&lt;br/&gt; {2,number,integer}. Mantén premido calquera punto da pantalla&lt;br/&gt; {3,number,integer}. Para moverte pola pantalla, arrastra o dedo&lt;br/&gt; {4,number,integer}. Levanta o dedo para deter a ampliación"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Ao activar a ampliación, podes achegar o contido da pantalla.\n\n"<b>"Para utilizar o zoom"</b>", inicia a ampliación e toca calquera parte da pantalla.\n"<ul><li>"Arrastra 2 ou máis dedos para desprazarte."</li>\n<li>"Belisca con 2 ou máis dedos para axustar o zoom."</li></ul>\n\n<b>"Para utilizar o zoom de forma temporal"</b>", inicia a ampliación e mantén premida calquera parte da pantalla.\n"<ul><li>"Arrastra o dedo para moverte pola pantalla."</li>\n<li>"Levanta o dedo para afastar a imaxe ou o texto."</li></ul>\n\n"Ten en conta que non se pode ampliar o teclado nin a barra de navegación."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Páxina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> de <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Atallo do botón Accesibilidade"</string>
@@ -3393,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Definir un horario"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programar"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h e <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Planificación"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silencia o teléfono en horas concretas"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Definir normas de Non molestar"</string>
@@ -3717,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Categorías"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Outros"</string>
     <string name="no_channels" msgid="4716199078612071915">"Esta aplicación non emitiu notificacións"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Mostrar categorías sen usar"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Configuración adicional da aplicación"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Mostrar categorías sen usar"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Ocultar categorías sen usar"</string>
@@ -4921,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Esta partición de datos do dispositivo debe converterse a ext4 antes de utilizar a opción de programador de 16 kB. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Para activar a opción de 16 kB será necesario reiniciar o dispositivo unha vez máis. Unha vez que esteas neste modo, poderás alternar entre o modo de 4 kB e 16 kB só cun reinicio. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que o dispositivo retorne ao modo de produción, terás que volver ao modo de 4 kB e bloquear o cargador de arranque, o que restablecerá a configuración de fábrica do dispositivo. Despois de que o dispositivo se inicie correctamente en Android, desactiva o desbloqueo do fabricante do equipo orixinal en Opcións de programador. Tras a confirmación, borraranse os datos do dispositivo e cambiarase o sistema de ficheiros a ext4. Unha vez completada esta operación, volve para activar de novo o modo de 16 kB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Borrar todos os datos"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Produciuse un erro ao borrar a partición de datos e cambiar o formato a ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"É necesario desbloquear o cargador de arranque para usar o modo de 16 kB"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Cómpre desbloquear o cargador de arranque deste dispositivo antes de utilizar a opción de programador de 16 kB. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Borraranse todos os datos e opcións de configuración do usuario cando se active o modo de 16 kB. Despois de desbloquear o cargador de arranque, haberá que reiniciar o dispositivo dúas veces para activar a opción de 16 kB. Unha vez que esteas neste modo, poderás alternar entre o modo de 4 kB e 16 kB só cun reinicio. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que o dispositivo retorne ao modo de produción, terás que volver ao modo de 4 kB e bloquear o cargador de arranque ou o fabricante do equipo orixinal, o que restablecerá a configuración de fábrica do dispositivo. Desbloquea o cargador de arranque e téntao de novo. Podes consultar as instrucións deste proceso en &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Estase usando o modo independente de páxina de 4 kB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Estás usando o modo independente de páxina de 4 kB. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que retorne ao modo de produción, terás que bloquear o cargador de arranque do dispositivo. Toca para obter máis información."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Estás usando o modo independente de páxina de 4 kB. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que retorne ao modo de produción, terás que bloquear o cargador de arranque do dispositivo. Esta acción restablecerá de novo a configuración de fábrica do dispositivo e restaurará a súa configuración de produción. Despois de que o dispositivo se inicie correctamente en Android, desactiva o desbloqueo do fabricante do equipo orixinal en Opcións de programador. Se o dispositivo non arranca en Android ou é inestable, volve instalar as últimas imaxes de fábrica desde &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e selecciona as opcións de borrar datos do dispositivo, bloquear o cargador de arranque e forzar a instalación de todas as particións."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Estase usando o modo independente de páxina de 16 kB"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Estás na opción de 16 kB do modo independente de páxina. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que retorne ao modo de produción, terás que volver ao modo de 4 kB e bloquear o cargador de arranque do dispositivo. Toca para obter máis información."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Estás na opción de 16 kB do modo independente de páxina. A integridade do software non se pode garantir neste modo, e os datos almacenados no teléfono mentres está desbloqueado o cargador de arranque poden correr perigo. Desactivaranse algunhas funcións nestes modos, polo que pode que non funcionen algunhas aplicacións. Para facer que retorne ao modo de produción, terás que volver ao modo de 4 kB e bloquear o cargador de arranque do dispositivo. Esta acción restablecerá de novo a configuración de fábrica do dispositivo e restaurará a súa configuración de produción. Despois de que o dispositivo se inicie correctamente en Android, desactiva o desbloqueo do fabricante do equipo orixinal en Opcións de programador. Se o dispositivo non arranca en Android ou é inestable, volve instalar as últimas imaxes de fábrica desde &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e selecciona as opcións de borrar datos do dispositivo, bloquear o cargador de arranque e forzar a instalación de todas as particións."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modo independente de páxina de 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ler máis"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador do Informe de erros"</string>
