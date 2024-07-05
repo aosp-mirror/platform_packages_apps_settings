@@ -38,6 +38,7 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotEntity;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.io.PrintWriter;
 import java.time.Clock;
@@ -132,14 +133,23 @@ public final class LogUtils {
     }
 
     static void dumpBatteryReattributeDatabaseHist(Context context, PrintWriter writer) {
-        dumpBatteryReattributeDatabaseHist(
-                BatteryStateDatabase.getInstance(context).batteryReattributeDao(),
-                writer);
+        try {
+            dumpBatteryReattributeDatabaseHist(
+                    BatteryStateDatabase.getInstance(context).batteryReattributeDao(),
+                    writer);
+        } catch (Exception e) {
+            Log.e(TAG, "failed to run dumpBatteryReattributeDatabaseHist()", e);
+        }
     }
 
     @VisibleForTesting
     static void dumpBatteryReattributeDatabaseHist(
             BatteryReattributeDao batteryReattributeDao, PrintWriter writer) {
+        if (!FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider()
+                .isBatteryUsageReattributeEnabled()) {
+            writer.println("\n\tBatteryReattribute is disabled!");
+            return;
+        }
         writer.println("\n\tBatteryReattribute DatabaseHistory:");
         final List<BatteryReattributeEntity> entities =
                 batteryReattributeDao.getAllAfter(
