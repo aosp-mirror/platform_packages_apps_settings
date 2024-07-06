@@ -18,6 +18,7 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -39,7 +40,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
+import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.Flags;
 import android.os.UserManager;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +63,7 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -77,6 +84,9 @@ import org.robolectric.shadows.ShadowActivity;
 })
 public class MainClearTest {
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final String TEST_ACCOUNT_TYPE = "android.test.account.type";
     private static final String TEST_CONFIRMATION_PACKAGE = "android.test.conf.pkg";
     private static final String TEST_CONFIRMATION_CLASS = "android.test.conf.pkg.ConfActivity";
@@ -95,6 +105,12 @@ public class MainClearTest {
 
     @Mock
     private FragmentActivity mMockActivity;
+    @Mock
+    private BiometricManager mBiometricManager;
+    @Mock
+    private Resources mResources;
+    @Mock
+    private Context mContext;
 
     @Mock
     private Intent mMockIntent;
@@ -122,6 +138,7 @@ public class MainClearTest {
         // Make scrollView only have one child
         when(mScrollView.getChildAt(0)).thenReturn(mLinearLayout);
         when(mScrollView.getChildCount()).thenReturn(1);
+        doReturn(mActivity).when(mMainClear).getActivity();
     }
 
     @After
@@ -341,6 +358,59 @@ public class MainClearTest {
         verify(mMainClear, times(0)).establishInitialState();
         verify(mMainClear, times(1)).getAccountConfirmationIntent();
         verify(mMainClear, times(1)).showFinalConfirmation();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void testOnActivityResultInternal_keyguardRequestTriggeringBiometricPrompt() {
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
+        when(mResources.getString(anyInt())).thenReturn(TEST_ACCOUNT_NAME);
+        when(mBiometricManager.canAuthenticate(
+                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
+        doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        doNothing().when(mMainClear).startActivityForResult(any(), anyInt());
+        doReturn(mMockActivity).when(mMainClear).getActivity();
+        doReturn(mContext).when(mMainClear).getContext();
+
+        mMainClear
+                .onActivityResultInternal(MainClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+
+        verify(mMainClear, times(1)).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        verify(mMainClear).startActivityForResult(any(), eq(MainClear.BIOMETRICS_REQUEST));
+        verify(mMainClear, times(0)).establishInitialState();
+        verify(mMainClear, times(0)).getAccountConfirmationIntent();
+        verify(mMainClear, times(0)).showFinalConfirmation();
+    }
+
+    @Test
+    public void testOnActivityResultInternal_biometricRequestTriggeringFinalConfirmation() {
+        doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.BIOMETRICS_REQUEST));
+        doReturn(null).when(mMainClear).getAccountConfirmationIntent();
+        doNothing().when(mMainClear).showFinalConfirmation();
+
+        mMainClear
+                .onActivityResultInternal(MainClear.BIOMETRICS_REQUEST, Activity.RESULT_OK, null);
+
+        verify(mMainClear, times(1)).isValidRequestCode(eq(MainClear.BIOMETRICS_REQUEST));
+        verify(mMainClear, times(0)).establishInitialState();
+        verify(mMainClear, times(1)).getAccountConfirmationIntent();
+        verify(mMainClear, times(1)).showFinalConfirmation();
+    }
+
+    @Test
+    public void testOnActivityResultInternal_biometricRequestTriggeringInitialState() {
+        doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.BIOMETRICS_REQUEST));
+        doNothing().when(mMainClear).establishInitialState();
+
+        mMainClear.onActivityResultInternal(MainClear.BIOMETRICS_REQUEST, Activity.RESULT_CANCELED,
+                        null);
+
+        verify(mMainClear, times(1)).isValidRequestCode(eq(MainClear.BIOMETRICS_REQUEST));
+        verify(mMainClear, times(1)).establishInitialState();
+        verify(mMainClear, times(0)).getAccountConfirmationIntent();
+        verify(mMainClear, times(0)).showFinalConfirmation();
     }
 
     @Test

@@ -24,7 +24,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
+import androidx.core.view.MenuProvider;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState;
@@ -35,8 +37,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ZenModeFragment extends ZenModeFragmentBase {
+
     // for mode deletion menu
     private static final int DELETE_MODE = 1;
+
+    private ModeMenuProvider mModeMenuProvider;
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -46,18 +51,18 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
-        prefControllers.add(new ZenModeHeaderController(context, "header", this, mBackend));
+        prefControllers.add(new ZenModeHeaderController(context, "header", this));
         prefControllers.add(
                 new ZenModeButtonPreferenceController(context, "activate", this, mBackend));
-        prefControllers.add(new ZenModeActionsPreferenceController(context, "actions", mBackend));
+        prefControllers.add(new ZenModeActionsPreferenceController(context, "actions"));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
-                context, "zen_mode_people", mBackend, mHelperBackend));
+                context, "zen_mode_people", mHelperBackend));
         prefControllers.add(new ZenModeAppsLinkPreferenceController(
                 context, "zen_mode_apps", this,
                 ApplicationsState.getInstance((Application) context.getApplicationContext()),
                 mBackend, mHelperBackend));
         prefControllers.add(new ZenModeOtherLinkPreferenceController(
-                context, "zen_other_settings", mBackend, mHelperBackend));
+                context, "zen_other_settings", mHelperBackend));
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(
                 context, "mode_display_settings", mBackend, mHelperBackend));
         prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
@@ -83,9 +88,20 @@ public class ZenModeFragment extends ZenModeFragmentBase {
 
         // Set title for the entire screen
         ZenMode mode = getMode();
-        if (mode != null) {
-            requireActivity().setTitle(mode.getName());
+        ComponentActivity activity = getActivity();
+        if (mode != null && activity != null) {
+            activity.setTitle(mode.getName());
+            mModeMenuProvider = new ModeMenuProvider(mode);
+            activity.addMenuProvider(mModeMenuProvider);
         }
+    }
+
+    @Override
+    public void onStop() {
+        if (getActivity() != null) {
+            getActivity().removeMenuProvider(mModeMenuProvider);
+        }
+        super.onStop();
     }
 
     @Override
@@ -101,35 +117,6 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(Menu.NONE, DELETE_MODE, Menu.NONE, R.string.zen_mode_menu_delete_mode);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    protected boolean onOptionsItemSelected(MenuItem item, @NonNull ZenMode zenMode) {
-        switch (item.getItemId()) {
-            case DELETE_MODE:
-                new AlertDialog.Builder(mContext)
-                        .setTitle(mContext.getString(R.string.zen_mode_delete_mode_confirmation,
-                                zenMode.getRule().getName()))
-                        .setPositiveButton(R.string.zen_mode_schedule_delete,
-                                (dialog, which) -> {
-                                    // start finishing before calling removeMode() so that we don't
-                                    // try to update this activity with a nonexistent mode when the
-                                    // zen mode config is updated
-                                    finish();
-                                    mBackend.removeMode(zenMode);
-                                })
-                        .setNegativeButton(R.string.cancel, null)
-                        .show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
     protected void updateZenModeState() {
         // Because this fragment may be asked to finish by the delete menu but not be done doing
         // so yet, ignore any attempts to update info in that case.
@@ -137,5 +124,43 @@ public class ZenModeFragment extends ZenModeFragmentBase {
             return;
         }
         super.updateZenModeState();
+    }
+
+    private class ModeMenuProvider implements MenuProvider {
+        private ZenMode mZenMode;
+        ModeMenuProvider(ZenMode mode) {
+            mZenMode = mode;
+        }
+
+        @Override
+        public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+            if (mZenMode != null && mZenMode.canBeDeleted()) {
+                // Only deleteable modes should get a delete menu option.
+                menu.add(Menu.NONE, DELETE_MODE, Menu.NONE, R.string.zen_mode_menu_delete_mode);
+            }
+        }
+
+        @Override
+        public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+            if (mZenMode != null) {
+                if (menuItem.getItemId() == DELETE_MODE) {
+                    new AlertDialog.Builder(mContext)
+                            .setTitle(mContext.getString(R.string.zen_mode_delete_mode_confirmation,
+                                    mZenMode.getRule().getName()))
+                            .setPositiveButton(R.string.zen_mode_schedule_delete,
+                                    (dialog, which) -> {
+                                        // start finishing before calling removeMode() so that we
+                                        // don't try to update this activity with a nonexistent mode
+                                        // when the zen mode config is updated
+                                        finish();
+                                        mBackend.removeMode(mZenMode);
+                                    })
+                            .setNegativeButton(R.string.cancel, null)
+                            .show();
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

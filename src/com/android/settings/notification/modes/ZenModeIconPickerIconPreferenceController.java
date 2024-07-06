@@ -17,9 +17,10 @@
 package com.android.settings.notification.modes;
 
 import android.content.Context;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -27,17 +28,17 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
-import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
+/** Controller used for displaying the currently-chosen icon at the top of the icon picker. */
 class ZenModeIconPickerIconPreferenceController extends AbstractZenModePreferenceController {
 
     private final DashboardFragment mFragment;
     private EntityHeaderController mHeaderController;
 
     ZenModeIconPickerIconPreferenceController(@NonNull Context context, @NonNull String key,
-            @NonNull DashboardFragment fragment, @Nullable ZenModesBackend backend) {
-        super(context, key, backend);
+            @NonNull DashboardFragment fragment) {
+        super(context, key);
         mFragment = fragment;
     }
 
@@ -51,11 +52,19 @@ class ZenModeIconPickerIconPreferenceController extends AbstractZenModePreferenc
                             mFragment.getActivity(),
                             mFragment,
                             pref.findViewById(R.id.entity_header));
+
+            ImageView iconView = pref.findViewById(R.id.entity_header_icon);
+            ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
+            int imageSizePx = iconView.getContext().getResources().getDimensionPixelSize(
+                    R.dimen.zen_mode_icon_list_header_circle_diameter);
+            layoutParams.width = imageSizePx;
+            layoutParams.height = imageSizePx;
+            iconView.setLayoutParams(layoutParams);
         }
 
         FutureUtil.whenDone(
                 zenMode.getIcon(mContext, ZenIconLoader.getInstance()),
-                icon -> mHeaderController.setIcon(IconUtil.applyNormalTint(mContext, icon))
+                icon -> mHeaderController.setIcon(IconUtil.makeBigIconCircle(mContext, icon))
                         .done(/* rebindActions= */ false),
                 mContext.getMainExecutor());
     }

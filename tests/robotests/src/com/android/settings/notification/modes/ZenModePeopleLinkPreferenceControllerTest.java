@@ -27,8 +27,6 @@ import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 
-import com.android.settingslib.notification.modes.ZenModesBackend;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,8 +46,6 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
     private Context mContext;
     @Mock
-    private ZenModesBackend mBackend;
-    @Mock
     private ZenHelperBackend mHelperBackend;
 
     @Before
@@ -59,7 +55,7 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
 
         mController = new ZenModePeopleLinkPreferenceController(
-                mContext, "something", mBackend, mHelperBackend);
+                mContext, "something", mHelperBackend);
     }
 
     @Test

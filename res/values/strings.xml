@@ -934,7 +934,8 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary">Face, fingerprint, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
     <!-- Message showing that multiple fingerprints, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80]-->
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary">Face, fingerprints, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
-
+    <!-- Description for mandatory biometrics prompt-->
+    <string name="mandatory_biometrics_prompt_description">This is needed since Identity Check is on</string>
     <!-- RemoteAuth unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
     <string name ="security_settings_remoteauth_preference_title">Remote Authenticator Unlock</string>
@@ -4438,10 +4439,6 @@
     <string name="keyboard_a11y_category">Accessibility</string>
     <!-- Title for the 'physical keyboard' settings screen. [CHAR LIMIT=35] -->
     <string name="physical_keyboard_title">Physical keyboard</string>
-    <!-- Title for the 'show virtual keyboard' preference switch. [CHAR LIMIT=35] -->
-    <string name="show_ime">Use on-screen keyboard</string>
-    <!-- Summary text for the 'add virtual keyboard' preference sub-screen. [CHAR LIMIT=100] -->
-    <string name="show_ime_summary">Keep it on screen while physical keyboard is active</string>
     <!-- Title for the 'Bounce keys' preference switch. [CHAR LIMIT=35] -->
     <string name="bounce_keys">Bounce keys</string>
     <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=300] -->
@@ -8022,6 +8019,12 @@
     <!-- Priority Modes: Indicates that a mode is disabled by the user. [CHAR_LIMIT=40] -->
     <string name="zen_mode_disabled_by_user">Disabled</string>
 
+    <!-- Priority Modes: Title of the "Create a mode" dialog, to choose the mode type. [CHAR_LIMIT=30] -->
+    <string name="zen_mode_new_title">Create a mode</string>
+
+    <!-- Priority Modes: Option to add a "custom" mode in the "Add a mode" dialog. [CHAR_LIMIT=20] -->
+    <string name="zen_mode_new_option_custom">Custom</string>
+
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
 
@@ -8075,6 +8078,9 @@
 
     <!-- Duration in hours and minutes for the length of a Do Not Disturb schedule. For example "1 hr, 22 min" -->
     <string name="zen_mode_schedule_duration"><xliff:g example="10" id="hours">%1$d</xliff:g> hr, <xliff:g example="20" id="minutes">%2$d</xliff:g> min</string>
+
+    <!-- Priority Modes: Label for switch to enable/disable a rule turning on automatically; links to an app-provided configuration page [CHAR LIMIT=40] -->
+    <string name="zen_mode_configuration_link_title">Turn on automatically</string>
 
     <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_category_title">Schedule</string>
@@ -8472,6 +8478,9 @@
 
     <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=50 BACKUP_MESSAGE_ID=5125022693565388760] -->
     <string name="notification_badging_title">Notification dot on app icon</string>
+
+    <!-- App Info > Notifications: Title for section where notifications bundles can be configured [CHAR LIMIT=80]-->
+    <string name="notification_bundles">Notification bundles</string>
 
     <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
     <string name="notification_bubbles_title">Bubbles</string>
@@ -12198,10 +12207,17 @@
     <!-- Default title for the settings panel [CHAR LIMIT=NONE] -->
     <string name="settings_panel_title">Settings Panel</string>
 
-    <!-- UI debug setting: force desktop mode [CHAR LIMIT=50] -->
-    <string name="force_desktop_mode">Force desktop mode</string>
-    <!-- UI debug setting: force desktop mode summary [CHAR LIMIT=NONE] -->
-    <string name="force_desktop_mode_summary">Force experimental desktop mode on secondary displays</string>
+    <!-- Title for enabling freeform windows (desktop mode) developer option toggle [CHAR LIMIT=50] -->
+    <string name="enable_desktop_mode">Enable freeform windows</string>
+    <!-- Summary for enabling freeform windows (desktop mode) developer option toggle [CHAR LIMIT=NONE] -->
+    <string name="enable_desktop_mode_summary">Enable support for freeform windows.</string>
+
+    <!-- TODO(b/348193756): Rename resources for this toggle to indicate that it is for secondary display -->
+    <!-- Title for enabling freeform windows (desktop mode) on secondary display developer option toggle  [CHAR LIMIT=50] -->
+    <string name="force_desktop_mode">Enable freeform windowing on second display</string>
+    <!-- Summary for enabling freeform windows (desktop mode) on secondary display developer option toggle [CHAR LIMIT=NONE] -->
+    <string name="force_desktop_mode_summary">Enable freeform windows only on secondary display.</string>
+
     <!-- UI debug setting: enable non-resizables in multi window [CHAR LIMIT=60] -->
     <string name="enable_non_resizable_multi_window">Enable non-resizable in multi window</string>
     <!-- UI debug setting: enable non-resizables in multi window summary [CHAR LIMIT=NONE] -->
@@ -13165,12 +13181,12 @@
 
     <!-- Dialog body text used to explain a reboot is required after enabling freeform support for
     it to work [CHAR LIMIT=none] -->
-    <string name="reboot_dialog_enable_freeform_support">A reboot is required to enable freeform
-    support.</string>
-    <!-- Dialog body text used to explain a reboot is required after forcing desktop mode on
-    secondary dislays. [CHAR LIMIT=none] -->
-    <string name="reboot_dialog_force_desktop_mode">A reboot is required to force desktop mode on
-    secondary displays.</string>
+    <string name="reboot_dialog_enable_freeform_support">A reboot is required to enable legacy freeform windowing support.</string>
+    <!-- Dialog body text used to explain a reboot is required after overriding freeform windowing (desktop mode) support. [CHAR LIMIT=none] -->
+    <string name="reboot_dialog_override_desktop_mode">A reboot is required to change freeform windowing support.</string>
+    <!-- Dialog body text used to explain a reboot is required after forcing freeform windowing (desktop mode) on
+    secondary displays. [CHAR LIMIT=none] -->
+    <string name="reboot_dialog_force_desktop_mode">A reboot is required to force freeform windowing on secondary displays.</string>
     <!-- Text on the dialog button to reboot the device now [CHAR LIMIT=50] -->
     <string name="reboot_dialog_reboot_now">Reboot now</string>
     <!-- Text on the dialog button to reboot the device later [CHAR LIMIT=50] -->
