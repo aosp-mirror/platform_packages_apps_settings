@@ -68,6 +68,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final String EXTRA_FINISHED_ENROLL_FACE = "finished_enrolling_face";
     public static final String EXTRA_FINISHED_ENROLL_FINGERPRINT = "finished_enrolling_fingerprint";
     public static final String EXTRA_LAUNCHED_POSTURE_GUIDANCE = "launched_posture_guidance";
+    public static final String EXTRA_BIOMETRICS_AUTHENTICATED_SUCCESSFULLY =
+            "biometrics_authenticated_successfully";
 
     /**
      * Used by the choose fingerprint wizard to indicate the wizard is
@@ -115,6 +117,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final int LEARN_MORE_REQUEST = 3;
     public static final int CONFIRM_REQUEST = 4;
     public static final int ENROLL_REQUEST = 5;
+    public static final int BIOMETRIC_AUTH_REQUEST = 6;
 
     /**
      * Request code when starting another biometric enrollment from within a biometric flow. For

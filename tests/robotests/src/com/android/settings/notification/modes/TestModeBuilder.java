@@ -18,6 +18,7 @@ package com.android.settings.notification.modes;
 
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.net.Uri;
 import android.service.notification.Condition;
 import android.service.notification.ZenDeviceEffects;
@@ -80,6 +81,18 @@ class TestModeBuilder {
     TestModeBuilder setPackage(String pkg) {
         mRule.setPackageName(pkg);
         mConfigZenRule.pkg = pkg;
+        return this;
+    }
+
+    TestModeBuilder setOwner(ComponentName owner) {
+        mRule.setOwner(owner);
+        mConfigZenRule.component = owner;
+        return this;
+    }
+
+    TestModeBuilder setConfigurationActivity(ComponentName configActivity) {
+        mRule.setConfigurationActivity(configActivity);
+        mConfigZenRule.configurationActivity = configActivity;
         return this;
     }
 

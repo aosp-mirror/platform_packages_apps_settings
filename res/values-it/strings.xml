@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Impostazioni protesi uditive"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Scorciatoia, compatibilità con apparecchi acustici"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Preset"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Non sono presenti preset programmati dal tuo audiologo"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Impossibile aggiornare preset"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Uscita audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informazioni su uscita audio"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Scopri di più su Sblocco dall\'orologio"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Aggiungi smartwatch"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Rimuovi smartwatch"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Sblocco con il Volto e l\'Impronta"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Sblocco con il Volto e con l\'Impronta"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Sblocco con il Volto e l\'Impronta per lavoro"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Configurazione richiesta"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Impronte e volto aggiunti"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installa le app"</b>\n"Installa le app che vuoi mantenere private nel tuo spazio"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Aspetti da considerare"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Le app vengono interrotte quando blocchi il tuo spazio"</b>\n"Quando blocchi il tuo spazio, le app al suo interno verranno interrotte e non ti invieranno notifiche"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Gli spazi privati non sono adatti per le app che devono essere eseguite in background o inviare notifiche critiche, come le app mediche. Questo perché le notifiche e le attività in background vengono interrotte quando il tuo spazio è bloccato.\n\nLe app nel tuo spazio privato non verranno visualizzate nella gestione autorizzazioni, nella dashboard della privacy e in altre impostazioni quando lo spazio privato è bloccato.\n\nIl tuo spazio privato non può essere ripristinato su un nuovo dispositivo. Dovrai configurare un altro spazio privato per poterlo usare su un altro dispositivo.\n\nChiunque colleghi il dispositivo a un computer o installi app dannose sul dispositivo può avere accesso al tuo spazio privato."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Gli spazi privati non sono adatti per le app che devono essere eseguite in background o inviare notifiche critiche, come le app mediche. Questo perché le notifiche e le attività in background vengono interrotte quando lo spazio è bloccato.\n\nLe app nel tuo spazio privato non verranno visualizzate nella gestione autorizzazioni, nella dashboard della privacy e in altre impostazioni quando lo spazio privato è bloccato.\n\nIl tuo spazio privato non può essere ripristinato su un nuovo dispositivo. Dovrai configurare un altro spazio se vuoi usarlo su un altro dispositivo.\n\nChiunque colleghi il tuo dispositivo a un computer o installi app dannose sul tuo dispositivo potrebbe accedere al tuo spazio privato."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Scopri di più sullo spazio privato"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"L\'operazione richiederà alcuni istanti"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configurazione dello spazio privato in corso…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adattivi"</string>
     <string name="brightness" msgid="6216871641021779698">"Livello di luminosità"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Luminosità adattiva"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Informazioni sulla luminosità adattiva"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"La luminosità dello schermo verrà regolata automaticamente in base all\'ambiente e alle attività. Puoi spostare manualmente il cursore per far sì che la luminosità adattiva memorizzi le tue preferenze."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"On"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Off"</string>
@@ -2130,7 +2130,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continua comunque"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Annulla"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Impostazioni ingrandimento"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Panning con un dito"</string>
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"Muovi Lente d\'ingrandimento con 1 dito"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"Trascina 1 dito per spostarti nella schermata"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Sposta l\'area di ingrandimento trascinando un dito."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Sposta l\'area di ingrandimento trascinando due dita."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Non disponibile quando viene ingrandita solo una parte dello schermo"</string>
@@ -2154,6 +2155,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tocca un pulsante per eseguire lo zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Aumenta velocemente lo zoom sullo schermo per ingrandire i contenuti"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Per aumentare lo zoom:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa la scorciatoia per avviare l\'ingrandimento&lt;br/&gt; {1,number,integer}. Tocca lo schermo&lt;br/&gt; {2,number,integer}. Trascina 2 dita per spostarti sullo schermo&lt;br/&gt; {3,number,integer}. Pizzica con 2 dita per regolare lo zoom&lt;br/&gt; {4,number,integer}. Usa la scorciatoia per interrompere l\'ingrandimento&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Per aumentare lo zoom temporaneamente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Assicurati che sia impostato il tipo di ingrandimento a schermo intero&lt;br/&gt; {1,number,integer}. Usa la scorciatoia per avviare l\'ingrandimento&lt;br/&gt; {2,number,integer}. Tocca e tieni premuto un punto qualsiasi dello schermo&lt;br/&gt; {3,number,integer}. Trascina il dito per spostarti sullo schermo&lt;br/&gt; {4,number,integer}. Solleva il dito per interrompere l\'ingrandimento"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Per aumentare lo zoom:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa la scorciatoia per avviare l\'ingrandimento.&lt;br/&gt; {1,number,integer}. Tocca lo schermo.&lt;br/&gt; {2,number,integer}. Trascina 2 dita per spostarti sullo schermo.&lt;br/&gt; {3,number,integer}. Pizzica con 2 dita per regolare lo zoom.&lt;br/&gt; {4,number,integer}. Utilizza la scorciatoia per interrompere l\'ingrandimento&lt;br/&gt;&lt;br/&gt; Puoi anche aumentare lo zoom temporaneamente e altro ancora."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Per aumentare lo zoom:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa la scorciatoia per avviare l\'ingrandimento.&lt;br/&gt; {1,number,integer}. Tocca lo schermo.&lt;br/&gt; {2,number,integer}. Trascina 1 o 2 dita per spostarti sullo schermo&lt;br/&gt; {3,number,integer}. Pizzica con 2 dita per regolare lo zoom.&lt;br/&gt; {4,number,integer}. Utilizza la scorciatoia per interrompere l\'ingrandimento&lt;br/&gt;&lt;br/&gt; Puoi anche aumentare lo zoom temporaneamente e altro ancora."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Quando è attivo l\'ingrandimento, puoi aumentare lo zoom sullo schermo.\n\n"<b>"Per eseguire lo zoom"</b>", avvia l\'ingrandimento, quindi tocca un punto qualsiasi sullo schermo.\n"<ul><li>"Trascina almeno due dita per scorrere"</li>\n<li>"Pizzica con almeno due dita per regolare lo zoom."</li></ul>\n\n<b>"Per ingrandire temporaneamente"</b>", avvia l\'ingrandimento, quindi tocca e tieni premuto un punto qualsiasi sullo schermo.\n"<ul><li>"Trascina per spostarti sullo schermo"</li>\n<li>"Solleva il dito per ridurre lo zoom"</li></ul>\n\n"Non puoi aumentare lo zoom sulla tastiera o nella barra di navigazione."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Pagina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> di <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Scorciatoia pulsante Accessibilità"</string>
@@ -3362,16 +3365,11 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ricevi soltanto le notifiche di app e persone importanti"</string>
-    <!-- no translation found for zen_mode_select_schedule (5135520719771212697) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time (1761728920617757652) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time_example (3071816060919446355) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar (4320676795917533667) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar_example (6549820995975678001) -->
-    <skip />
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Seleziona tipo di attivazione"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Ora"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Ad esempio, \"9:30 – 17:00\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Calendario"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Ad esempio, \"Calendario personale\""</string>
     <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
     <skip />
     <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
@@ -3398,6 +3396,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Imposta una programmazione"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programmazione"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Pianificazione"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Disattiva la suoneria in orari specifici"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Imposta regole Non disturbare"</string>
@@ -3407,8 +3407,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Consenti le interruzioni sonore"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blocca interruzioni visive"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Consenti segnali visivi"</string>
-    <!-- no translation found for mode_interruption_filter_title (3343846700214702347) -->
-    <skip />
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Mantieni la concentrazione"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Azioni aggiuntive"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Impostazioni di visualizzazione"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Opzioni di visualizzazione"</string>
@@ -3425,10 +3424,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"attiva tema scuro"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Scegli l\'opzione Testo chiaro su sfondo scuro per il sistema operativo e le app per non stancare gli occhi e consentire un notevole risparmio della batteria su alcuni dispositivi"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nessuna modifica del display}=1{{effect_1}}=2{{effect_1} e {effect_2}}=3{{effect_1}, {effect_2} e {effect_3}}other{{effect_1}, {effect_2} e altri #}}"</string>
-    <!-- no translation found for mode_notification_filter_title (443728483176031977) -->
-    <skip />
-    <!-- no translation found for mode_no_notification_filter (7119188047783404890) -->
-    <skip />
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtra interruzioni"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nessuna interruzione filtrata"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Mostra opzioni per le notifiche filtrate"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quando è attiva la modalità Non disturbare"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Notifiche senza audio"</string>
@@ -3725,6 +3722,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Categorie"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Altro"</string>
     <string name="no_channels" msgid="4716199078612071915">"L\'app non ha pubblicato alcuna notifica"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Mostra le categorie inutilizzate"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Altre impostazioni nell\'app"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Mostra le categorie inutilizzate"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Nascondi le categorie inutilizzate"</string>
@@ -4929,14 +4927,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"La partizione dei dati del dispositivo deve essere convertita in ext4 prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Se attivi l\'opzione a 16 kB, sarà necessario un ulteriore riavvio. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Tutti i dati verranno cancellati dal dispositivo e il file system verrà convertito in ext4 dopo la conferma. Quando termina l\'operazione, riabilita nuovamente la modalità a 16 kB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Resetta tutti i dati"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Impossibile riformattare e cancellare la partizione di dati in ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Sblocco del bootloader richiesto per la modalità a 16 kB"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"È necessario sbloccare il bootloader del dispositivo prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Tutti i dati utente e le impostazioni verranno cancellati quando attivi la modalità a 16 kB. Dopo aver sbloccato il bootloader, l\'attivazione dell\'opzione a 16 kB richiederà due riavvii. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo, il che ripristina i dati di fabbrica del dispositivo. Sblocca il bootloader e riprova. Puoi consultare le istruzioni su come fare all\'indirizzo &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Modalità indipendente dalla pagina a 4 kB in uso"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Hai attivato l\'opzione a 4 kB della modalità indipendente dalla pagina. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi bloccare il bootloader del dispositivo. Tocca per leggere altro."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Hai attivato l\'opzione a 4 kB della modalità indipendente dalla pagina. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi bloccare il bootloader del dispositivo. Questo eseguirà nuovamente il ripristino dei dati di fabbrica del dispositivo e ripristinerà le impostazioni di produzione. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Se l\'avvio di Android sul dispositivo non riesce o è instabile, esegui nuovamente il flashing del dispositivo con le immagini del produttore più recenti da &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e seleziona \"Cancella dati dispositivo\", \"Blocca bootloader\" e \"Esegui il flash forzato di tutte le partizioni\"."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Modalità indipendente dalla pagina a 16 kB in uso"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Hai attivato l\'opzione a 16 kB della modalità indipendente dalla pagina. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo. Tocca per leggere altro."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Hai attivato l\'opzione a 16 kB della modalità indipendente dalla pagina. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo. Questo eseguirà nuovamente il ripristino dei dati di fabbrica del dispositivo e ripristinerà le impostazioni di produzione. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Se l\'avvio di Android sul dispositivo non riesce o è instabile, esegui nuovamente il flashing del dispositivo con le immagini del produttore più recenti da &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e seleziona \"Cancella dati dispositivo\", \"Blocca bootloader\" e \"Esegui il flash forzato di tutte le partizioni\"."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modalità indipendente dalla pagina a 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Leggi tutto"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gestore segnalazione di bug"</string>

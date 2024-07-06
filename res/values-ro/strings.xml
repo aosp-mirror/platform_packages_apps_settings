@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Setări pentru aparate auditive"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Comandă rapidă, compatibilitate cu aparatele auditive"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Presetare"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Audiologul nu a configurat presetări"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Nu s-a putut actualiza presetarea"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Ieșire audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Despre ieșirea audio"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Află mai multe despre Deblocarea cu ceasul"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Adaugă un ceas"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Elimină ceasul"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Deblocare cu amprenta și Deblocare facială"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Deblocare facială și cu amprenta"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Deblocarea facială și cu amprenta pentru serviciu"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Este necesară configurarea"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Fața și amprentele au fost adăugate"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Instalează aplicații"</b>\n"Instalează aplicațiile pe care vrei să le păstrezi private în spațiul tău"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Reține"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Aplicațiile se opresc când îți blochezi spațiul"</b>\n"Când îți blochezi spațiul, aplicațiile din spațiul tău sunt oprite și nu vei mai primi notificări de la ele"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Spațiile private nu sunt potrivite pentru aplicațiile care trebuie să ruleze în fundal sau să trimită notificări critice, cum ar fi aplicațiile medicale. Motivul este că notificările și activitatea din fundal sunt oprite când spațiul este blocat.\n\nAplicațiile din spațiul privat nu vor apărea în Managerul de permisiuni, în tabloul de bord de confidențialitate și în alte setări atunci când spațiul privat este blocat.\n\nSpațiul privat nu poate fi mutat pe alt dispozitiv. Va trebui să configurezi alt spațiu privat dacă vrei să-l folosești pe alt dispozitiv.\n\nOricine îți conectează dispozitivul la un computer sau instalează aplicații dăunătoare pe dispozitiv poate să îți acceseze spațiul privat."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Spațiile private nu sunt potrivite pentru aplicațiile care trebuie să ruleze în fundal sau să trimită notificări critice, cum ar fi aplicațiile medicale. Motivul este că notificările și activitatea din fundal sunt oprite când spațiul este blocat.\n\nAplicațiile din spațiul privat nu vor apărea în Managerul de permisiuni, în tabloul de bord de confidențialitate și în alte setări atunci când spațiul privat este blocat.\n\nSpațiul privat nu poate fi restabilit pe alt dispozitiv. Va fi necesar să configurezi alt spațiu dacă vrei să îl folosești pe alt dispozitiv.\n\nOricine îți conectează dispozitivul la un computer sau instalează aplicații rău intenționate pe dispozitiv poate să îți acceseze spațiul privat."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Află mai multe despre spațiul privat"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Procesul va dura câteva momente"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Se configurează spațiul privat…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptive"</string>
     <string name="brightness" msgid="6216871641021779698">"Nivel de luminozitate"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Luminozitate adaptivă"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Despre luminozitatea adaptivă"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Luminozitatea ecranului se va adapta automat la mediul și activitățile tale. Poți să muți manual glisorul pentru a ajuta luminozitatea adaptivă să îți învețe preferințele."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Activată"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Dezactivat"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuă oricum"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Anulează"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Setări pentru mărire"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Deplasare cu un deget"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Mută zona de mărit trăgând cu un deget."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Mută zona de mărit trăgând cu două degete."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Opțiune indisponibilă dacă se mărește numai o parte a ecranului"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Atinge un buton pentru a micșora/mări"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Mărește rapid conținutul de pe ecran"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Pentru a mări:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. folosește comanda rapidă ca să începi mărirea;&lt;br/&gt; {1,number,integer}. atinge ecranul;&lt;br/&gt; {2,number,integer}. glisează cu două degete ca să te deplasezi pe ecran;&lt;br/&gt; {3,number,integer}. ciupește cu două degete ca să ajustezi nivelul de zoom;&lt;br/&gt; {4,number,integer}. folosește comanda rapidă ca să oprești mărirea.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pentru a mări temporar:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. asigură-te că tipul de mărire este setat la ecran complet;&lt;br/&gt; {1,number,integer}. folosește comanda rapidă ca să începi mărirea;&lt;br/&gt; {2,number,integer}. atinge lung oriunde pe ecran;&lt;br/&gt; {3,number,integer}. glisează cu degetul ca să te deplasezi pe ecran;&lt;br/&gt; {4,number,integer}. ridică degetul ca să oprești mărirea."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Când mărirea este activată, poți mări ecranul curent.\n\n"<b>"Pentru a mări"</b>", începe mărirea, apoi atinge oriunde pe ecran.\n"<ul><li>"Trage cu două sau mai multe degete pentru a derula"</li>\n<li>"Ciupește cu două sau mai multe degete pentru a regla nivelul de zoom"</li></ul>\n\n<b>"Pentru a mări temporar"</b>", începe mărirea, apoi atinge lung oriunde pe ecran.\n"<ul><li>"Trage pentru a te mișca pe ecran"</li>\n<li>"Ridică degetul pentru a micșora"</li></ul>\n\n"Nu poți mări pe tastatură și pe bara de navigare."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Pagina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> din <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Comandă rapidă pentru butonul de accesibilitate"</string>
@@ -3393,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Setează un program"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Program"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min."</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Program"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Dezactivează sunetul uneori"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Setează regulile pentru Nu deranja"</string>
@@ -3717,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Categorii"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Altele"</string>
     <string name="no_channels" msgid="4716199078612071915">"Această aplicație nu a postat nicio notificare"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Afișează categoriile nefolosite"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Setări suplimentare în aplicație"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Afișează categoriile nefolosite"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Ascunde categoriile nefolosite"</string>
@@ -4921,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Partiția de date a acestui dispozitiv trebuie schimbată la ext4 înainte de a folosi opțiunea pentru dezvoltatori pe 16 KB. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Activarea opțiunii pe 16 KB va necesita încă o repornire după această acțiune. Când te afli în acest mod, poți să comuți între modul de 4 KB și cel de 16 KB printr-o repornire. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a readuce dispozitivul în modul de producție, trebuie să revii la modul pe 4 KB, apoi să blochezi bootloaderul, acțiune care aduce dispozitivul la setările din fabrică. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori. Datele de pe dispozitiv vor fi șterse și sistemul de fișiere se va schimba în ext4 după confirmare. După finalizarea acțiunii, reactivează modul pe 16 KB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Șterge toate datele"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Nu s-a putut reformata și golește partiția de date cu ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Este necesară deblocarea bootloaderului pentru modul pe 16 KB"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Bootloaderul dispozitivului trebuie deblocat înainte de a folosi opțiunea pentru dezvoltatori pe 16 KB. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Toate datele și setările utilizatorului vor fi șterse la activarea modului pe 16 KB. După deblocarea bootloaderului, activarea opțiunii pe 16 KB va necesita două reporniri. Când te afli în acest mod, poți să comuți între modul de 4 KB și cel de 16 KB printr-o repornire. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a readuce dispozitivul în modul de producție, trebuie să revii la modul pe 4 KB, apoi să blochezi OEM / bootloaderul dispozitivului (acțiune care aduce dispozitivul la setările din fabrică). Deblochează bootloaderul și încearcă din nou. Găsești instrucțiuni pentru acest proces la &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Se folosește modul pe 4 KB independent de dimensiunea paginii."</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Ești în modul pe 4 KB independent de dimensiunea paginii. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a intra din nou în modul de producție, trebuie să blochezi bootloaderul dispozitivului. Atinge pentru a citi mai multe."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Ești în modul pe 4 KB independent de dimensiunea paginii. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a intra din nou în modul de producție, trebuie să blochezi bootloaderul dispozitivului. Astfel, dispozitivul revine din nou la setările din fabrică și este restabilit la setările de producție. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori. Dacă dispozitivul nu pornește în sistemul Android sau este instabil, reinstalează cele mai recente configurații din fabrică pe dispozitiv de la &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; sau accesează &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; și selectează Wipe Device (Șterge datele de pe dispozitiv) > Lock Bootloader (Blochează bootloaderul) > Force Flash all partitions (Instalează forțat pe toate partițiile)."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Se folosește modul pe 16 KB independent de dimensiunea paginii."</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Ești în modul pe 16 KB independent de dimensiunea paginii. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a intra din nou în modul de producție, trebuie să revii la modul pe 4 KB, apoi să blochezi bootloaderul dispozitivului. Atinge pentru a citi mai multe."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Ești în modul pe 16 KB independent de dimensiunea paginii. Integritatea software-ului nu poate fi garantată în acest mod și toate datele stocate pe telefon cât timp bootloaderul este deblocat pot fi în pericol. Unele funcții vor fi dezactivate în aceste moduri, prin urmare este posibil ca unele aplicații să nu funcționeze. Pentru a intra din nou în modul de producție, trebuie să revii la modul pe 4 KB, apoi să blochezi bootloaderul dispozitivului. Astfel, dispozitivul revine din nou la setările din fabrică și este restabilit la setările de producție. După ce dispozitivul pornește în sistemul Android, dezactivează deblocarea OEM în Opțiuni pentru dezvoltatori. Dacă dispozitivul nu pornește în sistemul Android sau este instabil, reinstalează cele mai recente configurații din fabrică pe dispozitiv de la &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; sau accesează &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; și selectează Wipe Device (Șterge datele de pe dispozitiv) > Lock Bootloader (Blochează bootloaderul) > Force Flash all partitions (Instalează forțat pe toate partițiile)."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modul pe 16 KB independent de dimensiunea paginii"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Citește mai multe"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Handler pentru rapoartele de eroare"</string>

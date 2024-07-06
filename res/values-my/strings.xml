@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"နားကြားကိရိယာ ဆက်တင်များ"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"ဖြတ်လမ်းလင့်ခ်၊ နားကြားကိရိယာ တွဲဖက်အသုံးပြုနိုင်မှု"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"ကြိုတင်သတ်မှတ်ချက်"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"သင့်နားအထူးကုဆရာဝန်က စီမံပေးထားသည့် အသင့်သုံးများ မရှိပါ"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"အသင့်သုံးကို အပ်ဒိတ်လုပ်၍မရပါ"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"အသံထွက်မည့် ကိရိယာ"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"အသံထွက်မည့် ကိရိယာအကြောင်း"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"‘နာရီဖြင့်ဖွင့်ခြင်း’ အကြောင်း ပိုမိုလေ့လာရန်"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"နာရီထည့်ရန်"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"နာရီ ဖယ်ရှားရန်"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"လက်ဗွေနှင့် မျက်နှာပြ လော့ခ်ဖွင့်ခြင်း"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"မျက်နှာ၊ လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"အလုပ်အတွက် ‘မျက်နှာပြနှင့် လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"စနစ်ထည့်သွင်းရန် လိုအပ်သည်"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"မျက်နှာနှင့် လက်ဗွေများ ထည့်ပြီးပါပြီ"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"အက်ပ်များ ထည့်သွင်းပါ"</b>\n"သင်၏နေရာတွင် သီးသန့်ထားလိုသော အက်ပ်များကို ထည့်သွင်းပါ"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"သတိပြုရန်"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"သင့်နေရာကို လော့ခ်ချပါက အက်ပ်များ ရပ်သွားမည်"</b>\n"သင့်နေရာကို လော့ခ်ချပါက သင်၏နေရာရှိ အက်ပ်များ ရပ်သွားပြီး ၎င်းတို့ထံမှ အကြောင်းကြားချက်များကို ရရှိတော့မည်မဟုတ်ပါ"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"သီးသန့်နေရာများသည် ဆေးဘက်ဆိုင်ရာအက်ပ်များကဲ့သို့ အရေးကြီးအကြောင်းကြားချက်များ ပို့ရန် (သို့) နောက်ခံတွင်လုပ်ဆောင်ရန် လိုအပ်သော အက်ပ်များအတွက် မသင့်လျော်ပါ။ သင့်နေရာကို လော့ခ်ချလိုက်သောအခါ အကြောင်းကြားချက်များနှင့် နောက်ခံလုပ်ဆောင်ချက်တို့ ရပ်သွားသောကြောင့်ဖြစ်သည်။\n\nသင်၏သီးသန့်နေရာကို လော့ခ်ချထားသောအခါ ၎င်းရှိ အက်ပ်များကို ခွင့်ပြုချက်စီမံစနစ်၊ ကိုယ်ရေးအချက်အလက် လုံခြုံမှုဒက်ရှ်ဘုတ်နှင့် အခြားဆက်တင်များတွင် မြင်ရမည်မဟုတ်ပါ။\n\nသင်၏သီးသန့်နေရာကို စက်အသစ်သို့ ရွှေ့၍မရပါ။ ၎င်းကို အခြားစက်တွင် သုံးလိုပါက သီးသန့်နေရာနောက်တစ်ခုကို စီစဉ်သတ်မှတ်ရမည်။\n\nသင့်စက်ကို ကွန်ပျူတာနှင့် ချိတ်ဆက်သော (သို့) သင့်စက်တွင် အန္တရာယ်ရှိသည့်အက်ပ်များ ထည့်သွင်းသော မည်သူမဆို သင်၏သီးသန့်နေရာကို ဝင်နိုင်မည်။"</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"သီးသန့်နေရာများသည် ဆေးဘက်ဆိုင်ရာအက်ပ်များကဲ့သို့ အရေးကြီးအကြောင်းကြားချက်များ ပို့ရန် (သို့) နောက်ခံတွင်လုပ်ဆောင်ရန် လိုအပ်သော အက်ပ်များအတွက် မသင့်လျော်ပါ။ သင့်နေရာကို လော့ခ်ချလိုက်သောအခါ အကြောင်းကြားချက်များနှင့် နောက်ခံလုပ်ဆောင်ချက်တို့ ရပ်သွားသောကြောင့်ဖြစ်သည်။\n\nသီးသန့်နေရာကို လော့ခ်ချထားသောအခါ ၎င်းရှိ အက်ပ်များကို ခွင့်ပြုချက်စီမံစနစ်၊ ကိုယ်ရေးအချက်အလက် လုံခြုံမှုဒက်ရှ်ဘုတ်နှင့် အခြားဆက်တင်များတွင် မြင်ရမည်မဟုတ်ပါ။\n\nသင်၏သီးသန့်နေရာကို စက်အသစ်တွင် ပြန်ယူ၍မရပါ။ ၎င်းကို အခြားစက်တွင် သုံးလိုပါက နေရာနောက်တစ်ခုကို စီစဉ်သတ်မှတ်ရမည်။\n\nသင့်စက်ကို ကွန်ပျူတာနှင့် ချိတ်ဆက်သော (သို့) သင့်တွင် အန္တရာယ်ရှိသည့်အက်ပ်များ ထည့်သွင်းသော မည်သူမဆို သင်၏သီးသန့်နေရာကို ဝင်နိုင်မည်။"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"သီးသန့်နေရာအကြောင်း ပိုမိုလေ့လာရန်"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"အချိန်အနည်းငယ် ကြာပါမည်"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"သီးသန့်နေရာကို စနစ်ထည့်သွင်းနေသည်…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"အလိုက်အထိုက်"</string>
     <string name="brightness" msgid="6216871641021779698">"တောက်ပမှု အဆင့်"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"အလိုက်သင့် တောက်ပမှု"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"အလိုက်သင့် တောက်ပမှုအကြောင်း"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"သင်၏ ဖန်သားပြင်တောက်ပမှုသည် ပတ်ဝန်းကျင်နှင့် လုပ်ဆောင်ချက်များကိုလိုက်၍ အလိုအလျောက် ချိန်ညှိသွားပါမည်။ သင့်ရွေးချယ်မှုများကို အလိုက်သင့် တောက်ပမှုပြောင်းလဲခြင်းစနစ်က ပိုမိုလေ့လာနိုင်စေရန် ရွှေ့တုန်းကို သင်ကိုယ်တိုင် ရွှေ့နိုင်ပါသည်။"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"ဖွင့်"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"ပိတ်"</string>
@@ -2130,7 +2130,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"မည်သို့ပင်ဖြစ်စေ ရှေ့ဆက်ရန်"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"မလုပ်တော့"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"ပုံကြီးချဲ့ခြင်း ဆက်တင်များ"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"လက်တစ်ချောင်းသုံး ရွှေ့ကြည့်ခြင်း"</string>
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"မှန်ဘီလူးကို လက် ၁ ချောင်းဖြင့် ရွှေ့ပါ"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"ဖန်သားပြင်ပေါ်တွင် ရွှေ့ကြည့်ရန် လက် ၁ ချောင်းဖြင့် ဖိဆွဲပါ"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"လက်တစ်ချောင်းဖြင့် ဖိဆွဲ၍ ချဲ့ပြသည့်အကွက်ကို ရွှေ့နိုင်သည်။"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"လက်နှစ်ချောင်းဖြင့် ဖိဆွဲ၍ ချဲ့ပြသည့်အကွက်ကို ရွှေ့နိုင်သည်။"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"ဖန်သားပြင်၏တစ်စိတ်တစ်ပိုင်းကိုသာ ချဲ့နေစဉ် မရနိုင်ပါ"</string>
@@ -2154,6 +2155,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"ဇူးမ်အသုံးပြုရန် ခလုတ်ကို တို့ပါ"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"အကြောင်းအရာပိုကြီးလာစေရန် ဖန်သားပြင်တွင် အမြန်ဇူးမ်ဆွဲနိုင်သည်"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;ဇူးမ်ဆွဲရန်အတွက်-&lt;/b&gt;&lt;br/&gt; {0,number,integer}။ စတင်ချဲ့ရန် ဖြတ်လမ်းလင့်ခ်ကို သုံးပါ&lt;br/&gt; {1,number,integer}။ ဖန်သားပြင်ကို တို့ပါ&lt;br/&gt; {2,number,integer}။ ဖန်သားပြင်ပေါ်တွင် ရွှေ့ကြည့်ရန် လက် ၂ ချောင်းဖြင့် ဖိဆွဲပါ&lt;br/&gt; {3,number,integer}။ ဇူးမ်ချိန်ညှိရန် လက် ၂ ချောင်းဖြင့် ချဲ့ချုံ့ပါ&lt;br/&gt; {4,number,integer}။ ချဲ့ခြင်းကို ရပ်ရန် ဖြတ်လမ်းလင့်ခ်ကို သုံးပါ&lt;br/&gt;&lt;br/&gt; &lt;b&gt;ယာယီ ဇူးမ်ဆွဲရန်-&lt;/b&gt;&lt;br/&gt; {0,number,integer}။ ချဲ့သည့်ပုံစံကို ဖန်သားပြင်အပြည့် သတ်မှတ်ထားကြောင်း သေချာပါစေ&lt;br/&gt; {1,number,integer}။ စတင်ချဲ့ရန် ဖြတ်လမ်းလင့်ခ်ကို သုံးပါ&lt;br/&gt; {2,number,integer}။ ဖန်သားပြင်တစ်နေရာတွင် ထိပြီး ဖိထားပါ&lt;br/&gt; {3,number,integer}။ ဖန်သားပြင်ပေါ်တွင် ရွှေ့ကြည့်ရန် လက်ချောင်းကို ဖိဆွဲပါ&lt;br/&gt; {4,number,integer}။ ချဲ့ခြင်း ရပ်ရန် လက်ချောင်းကို ကြွပါ"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;ဇူးမ်ဆွဲရန်အတွက်-&lt;/b&gt;&lt;br/&gt; {0,number,integer}။ စတင်ချဲ့ရန် ဖြတ်လမ်းလင့်ခ်ကို သုံးပါ&lt;br/&gt; {1,number,integer}။ ဖန်သားပြင်ကို တို့ပါ&lt;br/&gt; {2,number,integer}။ ဖန်သားပြင်ပေါ်တွင် ရွှေ့ကြည့်ရန် လက် ၂ ချောင်းဖြင့် ဖိဆွဲပါ&lt;br/&gt; {3,number,integer}။ ဇူးမ်ချိန်ညှိရန် လက် ၂ ချောင်းဖြင့် ချဲ့ချုံ့ပါ&lt;br/&gt; {4,number,integer}။ ချဲ့ခြင်းကိုရပ်ရန် ဖြတ်လမ်းအသုံးပြုပါ&lt;br/&gt;&lt;br/&gt; ယာယီဇူးမ်ဆွဲခြင်းနှင့် အခြားအရာများလည်း လုပ်နိုင်သည်။"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;ဇူးမ်ဆွဲရန်အတွက်-&lt;/b&gt;&lt;br/&gt; {0,number,integer}။ စတင်ချဲ့ရန် ဖြတ်လမ်းလင့်ခ်ကို သုံးပါ&lt;br/&gt; {1,number,integer}။ ဖန်သားပြင်ကို တို့ပါ&lt;br/&gt; {2,number,integer}။ ဖန်သားပြင်ပေါ်တွင် ရွှေ့ကြည့်ရန် လက် ၁ ချောင်း သို့မဟုတ် ၂ ချောင်းဖြင့် ဖိဆွဲပါ&lt;br/&gt; {3,number,integer}. ဇူးမ်ချိန်ညှိရန် လက် ၂ ချောင်းဖြင့် ချဲ့ချုံ့ပါ&lt;br/&gt; {4,number,integer}။ ချဲ့ခြင်းကိုရပ်ရန် ဖြတ်လမ်းအသုံးပြုပါ&lt;br/&gt;&lt;br/&gt; ယာယီဇူးမ်ဆွဲခြင်းနှင့် အခြားအရာများလည်း လုပ်နိုင်သည်။"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"မှန်ဘီလူးကို ဖွင့်ထားသည့်အခါ သင့်ဖန်သားပြင်ပေါ်တွင် ဇူးမ်ဆွဲနိုင်ပါသည်။\n\n"<b>"ဇူးမ်ဆွဲရန်"</b>" မှန်ဘီလူးကို ဖွင့်ပြီး ဖန်သားပြင်ပေါ်ရှိ နေရာတစ်ခုတွင် တို့ပါ။\n"<ul><li>"လှိမ့်ရွှေ့ရန် အနည်းဆုံး လက်ချောင်း ၂ ချောင်းဖြင့် ဖိဆွဲပါ"</li>\n<li>"ဇူးမ်ကို ချိန်ညှိရန် အနည်းဆုံး လက်ချောင်း ၂ ချောင်းဖြင့် ဆွဲကပ်ပါ"</li></ul>\n\n<b>"ယာယီဇူးမ်ဆွဲရန်"</b>" မှန်ဘီလူးကို ဖွင့်ပြီး ဖန်သားပြင်ပေါ်ရှိ တစ်နေနေရာတွင် ဖိထားပါ။\n"<ul><li>"ဖန်သားပြင်တစ်လျှောက် ရွှေ့ကြည့်ရန် ဖိဆွဲပါ"</li>\n<li>"ဇူးမ်ဖြုတ်ရန် လက်ချောင်းကို မ လိုက်ပါ"</li></ul>\n\n"ကီးဘုတ် သို့မဟုတ် လမ်းညွှန်ဘားကို ဇူးမ်ဆွဲ၍ မရပါ။"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"စာမျက်နှာ <xliff:g id="NUM_PAGES">%2$d</xliff:g> မျက်နှာအနက် <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> မျက်နှာ"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"သုံးနိုင်မှုခလုတ် ဖြတ်လမ်းလင့်ခ်"</string>
@@ -3362,16 +3365,11 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"အရေးကြီးပုဂ္ဂိုလ်များနှင့် အက်ပ်များထံမှသာ အကြောင်းကြားချက် ရယူပါ"</string>
-    <!-- no translation found for zen_mode_select_schedule (5135520719771212697) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time (1761728920617757652) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time_example (3071816060919446355) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar (4320676795917533667) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar_example (6549820995975678001) -->
-    <skip />
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"စသုံးခြင်းအမျိုးအစား ရွေးရန်"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"အချိန်"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"ဥပမာ- “နံနက် ၉:၃၀ - ညနေ ၅:၀၀”"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"ပြက္ခဒိန်"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"ဥပမာ- “ကိုယ်ပိုင်ပြက္ခဒိန်”"</string>
     <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
     <skip />
     <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
@@ -3398,6 +3396,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"အချိန်ဇယား သတ်မှတ်ပါ"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"အချိန်ဇယားဆွဲရန်"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> နာရီ၊ <xliff:g id="MINUTES">%2$d</xliff:g> မိနစ်"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"အချိန်ဇယား"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"အချို့အချိန်၌ ဖုန်းအသံတိတ်ခြင်း"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\'မနှောင့်ယှက်ရ\' စည်းမျဉ်းများထည့်ရန်"</string>
@@ -3407,8 +3407,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"အသံပေးသည့် ကြားဖြတ်မှုများ ခွင့်ပြုပါ"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"မြင်ကွင်းပိတ်ခြင်းမှတားဆီးပါ"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"ပြသမှုများကို ခွင့်ပြုရန်"</string>
-    <!-- no translation found for mode_interruption_filter_title (3343846700214702347) -->
-    <skip />
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"အာရုံမပျက်ပါစေနှင့်"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"နောက်ထပ် လုပ်ဆောင်ချက်များ"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"ဖန်သားပြင် ဆက်တင်များ"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"ဖန်သားပြင်တွင် ပြသမှုရွေးစရာများ"</string>
@@ -3425,10 +3424,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"အမှောင်နောက်ခံ သုံးရန်"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"အမှောင်နောက်ခံတွင် လင်းသောစာသားကို ပိုမိုနှစ်သက်ပါက OS နှင့် အက်ပ်များကို ပြောင်းနိုင်သည်။ ၎င်းသည် မျက်လုံးအားစိုက်ရမှု ပိုမိုသက်သာစေနိုင်ပြီး စက်ပစ္စည်းအချို့တွင် ဘက်ထရီ သိသာစွာ ချွေတာနိုင်သည်"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ဖန်သားပြင်တွင် အပြောင်းအလဲ မရှိပါ}=1{{effect_1}}=2{{effect_1} နှင့် {effect_2}}=3{{effect_1}၊ {effect_2} နှင့် {effect_3}}other{{effect_1}၊ {effect_2} နှင့် နောက်ထပ် # ခု}}"</string>
-    <!-- no translation found for mode_notification_filter_title (443728483176031977) -->
-    <skip />
-    <!-- no translation found for mode_no_notification_filter (7119188047783404890) -->
-    <skip />
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"အနှောင့်အယှက်များ စစ်ထုတ်ရန်"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"အနှောင့်အယှက်များကို စစ်ထုတ်ထားခြင်း မရှိပါ"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"စစ်ထုတ်ထားသော အကြောင်းကြားချက်များအတွက် ပြသမှု ရွေးစရာများ"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"\'မနှောင့်ယှက်ရ\' ဖွင့်ထားသည့်အခါ"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"အကြောင်းကြားချက် အသံမဖွင့်ရန်"</string>
@@ -3725,6 +3722,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"အမျိုးအစားများ"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"အခြား"</string>
     <string name="no_channels" msgid="4716199078612071915">"ဤအက်ပ်က မည်သည့် အကြောင်းကြားချက်ကိုမျှ ပို့စ်တင်မထားပါ"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"မသုံးသော အမျိုးအစားများကို ပြပါ"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"အက်ပ်အတွင်း နောက်ထပ်ဆက်တင်များ"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"မသုံးသော အမျိုးအစားများကို ပြရန်"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"မသုံးသော အမျိုးအစားများကို ဝှက်ရန်"</string>
@@ -4929,14 +4927,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"၁၆ KB ဆော့ဖ်ဝဲရေးသူအတွက် ရွေးစရာများကို အသုံးမပြုမီ ဤစက်၏ ဒေတာအပိုင်းကို ext4 သို့ ပြောင်းရမည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ၁၆ KB ရွေးစရာကို စဖွင့်ရန်အတွက် ဤသို့ပြောင်းပြီးနောက်တွင် နောက်တစ်ကြိမ်ပြန်လည်စတင်ရန် လိုပါမည်။ ဤမုဒ်သို့ ရောက်သည်နှင့် သင်သည် ၄ KB နှင့် ၁၆ KB မုဒ်အကြား တစ်ကြိမ်ပြန်လည်စတင်ရုံဖြင့် အပြန်အလှန်ပြောင်းနိုင်ပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ စက်ကို ထုတ်ကုန်မုဒ်သို့ ပြန်ထားရန် ၄ KB မုဒ်သို့ ပြန်ပြောင်းပြီး စက်ကို စက်ရုံထုတ်အတိုင်း ပြင်ဆင်သတ်မှတ်ပေးသည့် စနစ်စတင်မှုကို လော့ခ်ချရမည်။ စက်ကို Android သို့ စတင်ပြီးနောက် ‘ဆော့ဖ်ဝဲရေးသူအတွက် ရွေးစရာများ’ ရှိ OEM ဖွင့်ခြင်းကို ပိတ်ပါ။ အတည်ပြုပြီးနောက် စက်ကို ရှင်းလင်းပြီး ဖိုင်စနစ်ကို ext4 သို့ ပြောင်းပါမည်။ ဤသို့ပြုလုပ်ပြီးနောက် ၁၆ KB ထပ်ဖွင့်ရန် ပြန်လာပါ။"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"ဒေတာအားလုံး ဖျက်ရန်"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ဒေတာအပိုင်းကို ext4 သို့ ပြန်လည်ဖော်မက်လုပ်ပြီး ရှင်းလင်း၍ မရပါ။"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"၁၆ KB မုဒ်အတွက် စနစ်စတင်မှု ဖွင့်ရန်လိုအပ်သည်"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"၁၆ KB ဆော့ဖ်ဝဲရေးသူအတွက် ရွေးစရာများကို အသုံးမပြုမီ ဤစက်ကို စနစ်စတင်မှု ဖွင့်ရမည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ၁၆ KB မုဒ်ကို စတင်နေသောအခါ အသုံးပြုသူဒေတာနှင့် ဆက်တင်အားလုံးကို ရှင်းလင်းပါမည်။ စနစ်စတင်မှုကို ဖွင့်ပြီးပါက ၁၆ KB ရွေးစရာကို စတင်ရာတွင် နှစ်ကြိမ်ပြန်လည်စတင်ရန်လိုပါမည်။ ဤမုဒ်သို့ ရောက်သည်နှင့် သင်သည် ၄ KB နှင့် ၁၆ KB မုဒ်အကြား တစ်ကြိမ်ပြန်လည်စတင်ရုံဖြင့် အပြန်အလှန်ပြောင်းနိုင်ပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ စက်ကို ထုတ်ကုန်မုဒ်သို့ ပြန်ထားရန် ၄ KB မုဒ်သို့ ပြန်ပြောင်းပြီး စက်ကို (စက်ရုံထုတ်အတိုင်း ပြင်ဆင်သတ်မှတ်ပေးသည့်) OEM/စနစ်စတင်မှုကို လော့ခ်ချရမည်။ စနစ်စတင်မှုကို ဖွင့်ပြီး ထပ်စမ်းကြည့်ပါ။ ယင်းသို့ ပြုလုပ်ပုံ ညွှန်ကြားချက်များကို &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&amp;gt တွင် တွေ့နိုင်ပါသည်၊"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သော ၄ KB မုဒ်ကို အသုံးပြုခြင်း"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"သင်သည် စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သောမုဒ်၏ ၄ KB မုဒ်တွင် ရှိနေပါသည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ ထုတ်ကုန်မုဒ်သို့ ပြန်ဝင်ရန် စက်၏ စနစ်စတင်မှုကို လော့ခ်ချရပါမည်။ နောက်ထပ်ဖတ်ရန် တို့ပါ။"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"သင်သည် စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သောမုဒ်၏ ၄ KB မုဒ်တွင် ရှိနေပါသည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ ထုတ်ကုန်မုဒ်သို့ ပြန်ဝင်ရန် စက်၏ စနစ်စတင်မှုကို လော့ခ်ချရပါမည်။ ၎င်းသည် စက်ကို စက်ရုံထုတ်အတိုင်း ပြင်ဆင်သတ်မှတ်ပေးပြီး ထုတ်ကုန် ဆက်တင်များအတိုင်း ပြန်ပြောင်းပေးပါမည်။ စက်ကို Android သို့ စတင်ပြီးနောက် ‘ဆော့ဖ်ဝဲရေးသူအတွက် ရွေးစရာများ’ ရှိ OEM ဖွင့်ခြင်းကို ပိတ်ပါ။ စက်ကို Android သို့ စတင်၍မရပါက သို့မဟုတ် မတည်ငြိမ်ပါက href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&amp;gt မှ နောက်ဆုံးပေါ် စက်ရုံထုတ် မူလပုံများဖြင့် စက်ကို ပြန်စပါ သို့မဟုတ် &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&amp;gt ကို အသုံးပြုကာ ‘စက်ရှင်းလင်းရန်’၊ ‘စနစ်စတင်မှု လော့ခ်ချရန်’ နှင့် ‘အပိုင်းအားလုံး မဖြစ်မနေ ပြန်စရန်’ ကို ရွေးပါ။"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သော ၁၆ KB မုဒ်ကို အသုံးပြုခြင်း"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"သင်သည် စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သောမုဒ်၏ ၁၆ KB မုဒ်တွင် ရှိနေပါသည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ ထုတ်ကုန်မုဒ်သို့ ပြန်ဝင်ရန် ၄K မုဒ်သို့ ပြန်ပြောင်းပြီး စက်၏ စနစ်စတင်မှုကို လော့ခ်ချရပါမည်။ နောက်ထပ်ဖတ်ရန် တို့ပါ။"</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"သင်သည် စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သောမုဒ်၏ ၁၆ KB မုဒ်တွင် ရှိနေပါသည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ ထုတ်ကုန်မုဒ်သို့ ပြန်ဝင်ရန် ၄K မုဒ်သို့ ပြန်ပြောင်းပြီး စက်၏ စနစ်စတင်မှုကို လော့ခ်ချရပါမည်။ ၎င်းသည် စက်ကို စက်ရုံထုတ်အတိုင်း ပြင်ဆင်သတ်မှတ်ပေးပြီး ထုတ်ကုန် ဆက်တင်များအတိုင်း ပြန်ပြောင်းပေးပါမည်။ စက်ကို Android သို့ စတင်ပြီးနောက် ‘ဆော့ဖ်ဝဲရေးသူအတွက် ရွေးစရာများ’ ရှိ OEM ဖွင့်ခြင်းကို ပိတ်ပါ။ စက်ကို Android သို့ စတင်၍မရပါက သို့မဟုတ် မတည်ငြိမ်ပါက href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&amp;gt မှ နောက်ဆုံးပေါ် စက်ရုံထုတ် မူလပုံများဖြင့် စက်ကို ပြန်မွမ်းမံပါ သို့မဟုတ် &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&amp;gt ကို အသုံးပြုကာ ‘စက်ရှင်းလင်းရန်’၊ ‘စနစ်စတင်မှု လော့ခ်ချရန်’ နှင့် ‘အပိုင်းအားလုံး မဖြစ်မနေ မွမ်းမံရန်’ ကို ရွေးပါ။"</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သော ၁၆KB မုဒ်"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"နောက်ထပ်ဖတ်ရန်"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"ချွတ်ယွင်းချက်အစီရင်ခံစာ စီမံသူ"</string>
