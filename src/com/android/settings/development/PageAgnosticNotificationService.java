@@ -134,6 +134,6 @@ public class PageAgnosticNotificationService extends Service {
 
         // No updates should be allowed in page-agnostic mode
         disableAutomaticUpdates();
-        return Service.START_NOT_STICKY;
+        return Service.START_REDELIVER_INTENT;
     }
 }
