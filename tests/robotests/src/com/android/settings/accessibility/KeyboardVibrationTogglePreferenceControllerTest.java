@@ -88,10 +88,9 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_featureSupported_available() {
         mSetFlagsRule.enableFlags(Flags.FLAG_KEYBOARD_CATEGORY_ENABLED);
-        when(mResources.getBoolean(R.bool.config_keyboard_vibration_supported)).thenReturn(true);
-        when(mResources.getFloat(
-                com.android.internal.R.dimen.config_keyboardHapticFeedbackFixedAmplitude))
-                .thenReturn(0.8f);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsSupported))
+                .thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -99,7 +98,9 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_featureNotSupported_unavailable() {
         mSetFlagsRule.enableFlags(Flags.FLAG_KEYBOARD_CATEGORY_ENABLED);
-        when(mResources.getBoolean(R.bool.config_keyboard_vibration_supported)).thenReturn(false);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsSupported))
+                .thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
@@ -107,7 +108,9 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_keyboardCategoryDisabled_unavailable() {
         mSetFlagsRule.disableFlags(Flags.FLAG_KEYBOARD_CATEGORY_ENABLED);
-        when(mResources.getBoolean(R.bool.config_keyboard_vibration_supported)).thenReturn(true);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsSupported))
+                .thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }

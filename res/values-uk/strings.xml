@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Налаштування слухового апарата"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Ярлик, сумісність зі слуховими апаратами"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Набір налаштувань"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Немає наборів налаштувань, запрограмованих вашим аудіологом"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Не вдалось оновити набір налаштувань"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудіовихід"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Про аудіовихід"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Докладніше про розблокування годинником"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Додати годинник"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Вилучити годинник"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Розблокування відбитком пальця й фейс-контроль"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Фейс-контроль і розблокування відбитком пальця"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Фейс-контроль і відбиток пальця для роботи"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Потрібно налаштувати"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Обличчя й відбитки пальців додано"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Установіть додатки"</b>\n"Установіть додатки, які хочете приватно використовувати у своєму просторі"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Важливо"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Під час блокування простору додатки припиняють роботу"</b>\n"Якщо ви заблокуєте свій простір, включені в нього додатки припинять роботу й ви не отримуватимете сповіщень від них"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Приватні простори не підходять для додатків (наприклад, медичних), які мають працювати у фоновому режимі або надсилати важливі сповіщення. Це пов’язано з тим, що надсилання сповіщень і робота у фоновому режимі припиняються, коли ваш простір заблоковано.\n\nКоли приватний простір заблоковано, його додатки не відображаються в менеджері дозволів, на панелі керування дозволами й в інших налаштуваннях.\n\nПриватний простір не можна перенести на інший пристрій. Якщо ви хочете використовувати приватний простір на іншому пристрої, потрібно налаштувати новий.\n\nЯкщо хтось установить на вашому пристрої шкідливі додатки або підключить його до комп’ютера, то може отримати доступ до вашого приватного простору."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Приватні простори не підходять для додатків (наприклад, медичних), які мають працювати у фоновому режимі або надсилати важливі сповіщення. Це пов’язано з тим, що надсилання сповіщень і робота у фоновому режимі припиняються, коли ваш простір заблоковано.\n\nКоли приватний простір заблоковано, його додатки не відображатимуться в менеджері дозволів, на панелі керування дозволами й в інших налаштуваннях.\n\nПриватний простір не можна відновити на іншому пристрої. Якщо ви хочете використовувати приватний простір на іншому пристрої, потрібно налаштувати новий.\n\nЯкщо хтось установить на вашому пристрої шкідливі додатки або підключить його до комп’ютера, то може отримати доступ до вашого приватного простору."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Докладніше про приватний простір"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Це може зайняти кілька хвилин"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Налаштування приватного простору…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Адаптивні"</string>
     <string name="brightness" msgid="6216871641021779698">"Рівень яскравості"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Адаптивна яскравість"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Про адаптивну яскравість"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Яскравість екрана автоматично пристосовується до середовища й ваших дій. Ви можете пересунути повзунок вручну, щоб відкоригувати яскравість за власним бажанням."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Увімкнено"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Вимкнено"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Усе одно продовжити"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Скасувати"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Налаштування збільшення"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Панорамування одним пальцем"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Переміщуйте область збільшення, перетягуючи одним пальцем."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Переміщуйте область збільшення, перетягуючи двома пальцями."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Недоступно, коли збільшено лише частину екрана"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Торкніться кнопки, щоб збільшити вміст"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Щоб краще роздивитися вміст екрана, його можна наблизити."</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Щоб наблизити зображення:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Активуйте збільшення, скориставшись призначеною для цього кнопкою чи відповідним жестом.&lt;br/&gt; {1,number,integer}. Торкніться екрана.&lt;br/&gt; {2,number,integer}. Щоб перейти до іншої області на екрані, потягніть по ньому двома пальцями.&lt;br/&gt; {3,number,integer}. Зведіть або розведіть два пальці, щоб змінити масштаб.&lt;br/&gt; {4,number,integer}. Вимкніть збільшення, скориставшись призначеною для цього кнопкою чи відповідним жестом.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Щоб ненадовго наблизити зображення:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Переконайтеся, що вибрано тип збільшення \"На весь екран\".&lt;br/&gt; {1,number,integer}. Активуйте збільшення, скориставшись призначеною для цього кнопкою чи відповідним жестом.&lt;br/&gt; {2,number,integer}. Натисніть і втримуйте будь-яке місце на екрані.&lt;br/&gt; {3,number,integer}. Щоб переглянути іншу область на екрані, пересуньте палець.&lt;br/&gt; {4,number,integer}. Підніміть палець, щоб припинити збільшення."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Коли функцію збільшення ввімкнено, ви можете наближувати вміст на екрані.\n\n"<b>"Щоб наблизити вміст"</b>", увімкніть збільшення, а потім торкніться будь-якого місця на екрані.\n"<ul><li>"Щоб прокрутити вміст, проведіть по екрану принаймні двома пальцями"</li>\n<li>"Щоб змінити масштаб, стисніть або розведіть принаймні два пальці"</li></ul>\n\n<b>"Щоб тимчасово збільшити вміст"</b>", увімкніть збільшення, а потім натисніть і утримуйте будь-яке місце на екрані.\n"<ul><li>"Пересувайте палець, щоб переміщатись екраном"</li>\n<li>"Підніміть палець, щоб знову зменшити елемент"</li></ul>\n\n"Масштабування не підтримується на клавіатурі та панелі навігації."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Сторінка <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> з <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Швидка дія кнопкою функцій доступності"</string>
@@ -3362,16 +3369,11 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Отримуйте сповіщення лише від важливих людей і додатків"</string>
-    <!-- no translation found for zen_mode_select_schedule (5135520719771212697) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time (1761728920617757652) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time_example (3071816060919446355) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar (4320676795917533667) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar_example (6549820995975678001) -->
-    <skip />
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Вибрати тип активації"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Час"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Приклад: \"9:30 – 17:00\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Календар"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Приклад: \"Особистий календар\""</string>
     <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
     <skip />
     <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
@@ -3398,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Налаштуйте розклад"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Розклад"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> год, <xliff:g id="MINUTES">%2$d</xliff:g> хв"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Розклад"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Вимикати звук телефона в певний час"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Налаштувати правила режиму \"Не турбувати\""</string>
@@ -3407,8 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Дозволити сповіщення зі звуком"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Блокувати візуальні сповіщення"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Дозволити візуальні сигнали"</string>
-    <!-- no translation found for mode_interruption_filter_title (3343846700214702347) -->
-    <skip />
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Не відволікайтесь"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Додаткові дії"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Налаштування дисплея"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Параметри відображення"</string>
@@ -3425,10 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"увімкнути темну тему"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Змініть налаштування ОС і додатків, щоб використовувати світлий текст на темному фоні. Це може бути комфортніше для очей і допомагає суттєво економити заряд акумулятора на деяких пристроях."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Немає змін параметрів відображення}=1{{effect_1}}=2{{effect_1} і {effect_2}}=3{{effect_1}, {effect_2} і {effect_3}}one{{effect_1}, {effect_2} і ще #}few{{effect_1}, {effect_2} і ще #}many{{effect_1}, {effect_2} і ще #}other{{effect_1}, {effect_2} і ще #}}"</string>
-    <!-- no translation found for mode_notification_filter_title (443728483176031977) -->
-    <skip />
-    <!-- no translation found for mode_no_notification_filter (7119188047783404890) -->
-    <skip />
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Фільтрувати сповіщення"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Сповіщення не фільтруються"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Параметри відображення відфільтрованих сповіщень"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Коли ввімкнено режим \"Не турбувати\""</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Вимкнути звук сповіщень"</string>
@@ -3725,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Категорії"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Інше"</string>
     <string name="no_channels" msgid="4716199078612071915">"Цей додаток не надсилав сповіщень"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Показати категорії, що не використовуються"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Розширені налаштування в додатку"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Показати категорії, що не використ."</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Сховати категорії, що не використ."</string>
@@ -4929,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Щоб використовувати режим для розробників зі сторінками розміром 16 КБ, розділ даних на цьому пристрої потрібно відформувати у файловій системі ext4. У цьому режимі цілісність програмного забезпечення не гарантується, і будь-які дані, що зберігаються на телефоні, поки завантажувач операційної системи розблоковано, можуть бути під загрозою. Після цього для активації режиму 16 КБ потрібно буде ще раз перезапустити пристрій. Коли ви перейдете в цей режим, то для зміни режиму розміру сторінки з 16 КБ на 4 КБ та навпаки пристрій потрібно буде перезапустити лише один раз. Деякі функції в цих режимах буде вимкнено, тому зможуть працювати не всі додатки. Щоб повернути пристрій у виробничий режим, вам буде потрібно повернутися в режим 4 КБ й заблокувати завантажувач операційної системи. Після цього налаштування пристрою буде скинуто. Коли ОС Android завантажиться, вимкніть розблокування завантажувача в параметрах розробника. Після підтвердження на пристрої буде очищено всі дані, а файлову систему буде змінено на ext4. Коли цей процес завершиться, знову ввімкніть режим із розміром сторінок 16 КБ."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Видалити всі дані"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Не вдалося очистити розділ даних і переформатувати на ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Для режиму 16 КБ потрібно розблокувати завантажувач ОС"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Щоб використовувати режим для розробників зі сторінками розміром 16 КБ на цьому пристрої, необхідно розблокувати завантажувач операційної системи. У цьому режимі цілісність програмного забезпечення не гарантується, і будь-які дані, що зберігаються на телефоні, поки завантажувач операційної системи розблоковано, можуть бути під загрозою. Під час активації режиму 16 КБ усі дані й налаштування користувача буде очищено. Коли завантажувач операційної системи буде розблоковано, для активації режиму 16 КБ потрібно буде перезапустити пристрій двічі. Коли ви перейдете в цей режим, то для зміни режиму розміру сторінки з 16 КБ на 4 КБ та навпаки пристрій потрібно буде перезапустити лише один раз. Деякі функції в цих режимах буде вимкнено, тому зможуть працювати не всі додатки. Щоб повернути пристрій у виробничий режим, вам буде потрібно повернутися в режим 4 КБ й заблокувати завантажувач операційної системи. Після цього налаштування пристрою буде скинуто. Докладні вказівки наведено на сторінці &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Режим, незалежний від розміру сторінок, з ядром 4 КБ"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Ви працюєте в режимі, незалежному від розміру сторінок, з ядром 4 КБ. Цілісність програмного забезпечення не гарантується, і будь-які дані, що зберігаються на телефоні, поки завантажувач ОС розблоковано, можуть бути під загрозою. Деякі функції буде вимкнено, тому працюватимуть не всі додатки. Щоб повернутися у виробничий режим, заблокуйте завантажувач ОС пристрою."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Ви працюєте в режимі, незалежному від розміру сторінок, з ядром для сторінок 4 КБ. У цьому режимі цілісність програмного забезпечення не гарантується, і будь-які дані, що зберігаються на телефоні, поки завантажувач операційної системи розблоковано, можуть бути під загрозою. Деякі функції в цих режимах буде вимкнено, тому зможуть працювати не всі додатки. Щоб повернутися у виробничий режим, вам потрібно заблокувати завантажувач операційної системи пристрою. Тоді налаштування пристрою знову буде скинуто й відновляться виробничі налаштування. Коли ОС Android завантажиться на пристрій, вимкніть розблокування завантажувача в параметрах розробника. Якщо ОС Android не завантажується на пристрій або працює нестабільно, відновіть на пристрої останні заводські образи (завантаживши їх звідси: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;) або перейдіть на сторінку &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; і виберіть \"Очистити пристрій\", \"Заблокувати завантажувач операційної системи\" й \"Примусово оновити всі розділи\"."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Режим, незалежний від розміру сторінок, з ядром 16 КБ"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Ви працюєте в режимі, незалежному від розміру сторінок, з ядром 16 КБ. Цілісність програмного забезпечення не гарантується, і будь-які дані, що зберігаються на телефоні, поки завантажувач ОС розблоковано, можуть бути під загрозою. Деякі функції буде вимкнено, тому працюватимуть не всі додатки. Щоб повернутися у виробничий режим, заблокуйте завантажувач ОС пристрою."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Ви працюєте в режимі, незалежному від розміру сторінок, з ядром для сторінок 16 КБ. У цьому режимі цілісність програмного забезпечення не гарантується, і будь-які дані, що зберігаються на телефоні, поки завантажувач операційної системи розблоковано, можуть бути під загрозою. Деякі функції в цих режимах буде вимкнено, тому зможуть працювати не всі додатки. Щоб повернутися у виробничий режим, вам потрібно знову перейти в режим 4 КБ й заблокувати завантажувач операційної системи пристрою. Тоді налаштування пристрою знову буде скинуто й відновляться виробничі налаштування. Коли ОС Android завантажиться, вимкніть розблокування завантажувача в параметрах розробника. Якщо ОС Android не завантажується або працює нестабільно, відновіть мікропрограму, завантаживши останні заводські образи на сайті &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; або перейдіть на сторінку &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; і виберіть \"Очистити пристрій\", \"Заблокувати завантажувач операційної системи\" й \"Примусово оновити всі розділи\"."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Режим, незалежний від розміру сторінок, з ядром для сторінок 16 КБ"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Докладніше"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Обробник звітів про помилки"</string>

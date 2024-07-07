@@ -50,6 +50,12 @@
         settings:controller="com.android.settings.notification.app.BubbleSummaryPreferenceController">
     </Preference>
 
+    <!-- Bundles added here -->
+    <PreferenceCategory
+        android:key="bundles"
+        android:title="@string/notification_bundles"
+        android:visibility="gone" />
+
     <!-- Channels/Channel groups added here -->
     <PreferenceCategory
         android:key="channels"

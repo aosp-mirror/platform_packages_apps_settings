@@ -38,7 +38,6 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
 
 import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
 
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.applications.ApplicationsState;
@@ -51,7 +50,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -118,15 +116,12 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
     @Test
     public void testUpdateSetsIntent() {
         // Creates the preference
-        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
+        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
         // Create a zen mode that allows priority channels to breakthrough.
         ZenMode zenMode = createPriorityChannelsZenMode();
 
-        // Capture the intent
-        ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        mController.updateState((Preference) preference, zenMode);
-        verify(preference).setIntent(captor.capture());
-        Intent launcherIntent = captor.getValue();
+        mController.updateState(preference, zenMode);
+        Intent launcherIntent = preference.getIntent();
 
         assertThat(launcherIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo("com.android.settings.notification.modes.ZenModeAppsFragment");
@@ -154,13 +149,12 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
     @Test
     public void testUpdateTriggersRebuild() {
         // Creates the preference
-        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
+        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
         // Create a zen mode that allows priority channels to breakthrough.
         ZenMode zenMode = createPriorityChannelsZenMode();
 
         // Create some applications.
-        ArrayList<ApplicationsState.AppEntry> appEntries =
-                new ArrayList<ApplicationsState.AppEntry>();
+        ArrayList<ApplicationsState.AppEntry> appEntries = new ArrayList<>();
         appEntries.add(createAppEntry("test", "pkgLabel"));
 
         when(mHelperBackend.getPackagesBypassingDnd(
@@ -168,18 +162,19 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
                 .thenReturn(List.of("test"));
 
         // Updates the preference with the zen mode. We expect that this causes the app session
-        // to trigger a rebuild.
-        mController.updateZenMode((Preference) preference, zenMode);
+        // to trigger a rebuild (and display a temporary text in the meantime).
+        mController.updateZenMode(preference, zenMode);
         verify(mSession).rebuild(any(), any(), eq(false));
+        assertThat(String.valueOf(preference.getSummary())).isEqualTo("Calculating…");
 
         // Manually triggers the callback that will happen on rebuild.
         mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
-        verify(preference).setSummary("pkgLabel can interrupt");
+        assertThat(String.valueOf(preference.getSummary())).isEqualTo("pkgLabel can interrupt");
     }
 
     @Test
     public void testOnPackageListChangedTriggersRebuild() {
-        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
+        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
         // Create a zen mode that allows priority channels to breakthrough.
         ZenMode zenMode = createPriorityChannelsZenMode();
         mController.updateState(preference, zenMode);
@@ -191,7 +186,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
     @Test
     public void testOnLoadEntriesCompletedTriggersRebuild() {
-        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
+        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
         // Create a zen mode that allows priority channels to breakthrough.
         ZenMode zenMode = createPriorityChannelsZenMode();
         mController.updateState(preference, zenMode);

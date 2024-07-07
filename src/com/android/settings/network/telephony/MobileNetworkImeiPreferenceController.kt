@@ -113,7 +113,6 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
     private fun refreshUi(){
         preference.title = title
         preference.summary = imei
-        preference.isVisible = true
     }
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {

@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Mipangilio ya vifaa vya kusikilizia"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Njia ya mkato, uoanifu wa kifaa cha kusaidia kusikia"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Mipangilio iliyowekwa mapema"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Hakuna mipangilio iliyowekwa mapema na audiolojia wako"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Imeshindwa kusasisha mipangilio iliyowekwa mapema"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Vifaa vya kutoa sauti"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Kuhusu vifaa vya kutoa sauti"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Pata maelezo zaidi kuhusu Kufungua Kupitia Saa"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Weka saa"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Ondoa saa"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Alama ya Kidole na Kufungua kwa Uso"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Kufungua kwa Alama ya Kidole na Uso"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Kazini: Kufungua kwa Uso na Alama ya Kidole"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Unahitaji kuweka mipangilio"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Uso na alama za vidole zimeongezwa"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Weka programu"</b>\n"Weka programu ambazo ungependa ziwe za faragha katika sehemu yako ya faragha"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Kumbuka"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Programu huacha kufanya kazi ukifunga sehemu yako ya faragha"</b>\n"Ukifunga sehemu yako ya faragha, programu zilizo katika sehemu hiyo zitaacha kufanya kazi na hazitakutumia arifa"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Sehemu za faragha hazifai kwa programu zinazohitaji kutumika chinichini au kutuma arifa muhimu, kama vile programu za matibabu. Hii ni kwa sababu arifa na shughuli za chinichini hukomeshwa wakati sehemu yako imefungwa.\n\nProgramu zilizo kwenye sehemu yako ya faragha hazitaonekana kwenye kidhibiti cha ruhusa, dashibodi ya faragha na mipangilio mingine wakati sehemu yako ya faragha imefungwa.\n\nSehemu yako ya faragha haiwezi kuhamishiwa kwenye kifaa kipya. Utahitaji kuweka mipangilio ya sehemu nyingine ya faragha iwapo ungependa kuitumia kwenye kifaa kingine.\n\nYeyote anayeunganisha kifaa chako na kompyuta au anayeweka programu hatari kwenye kifaa chako huenda akafikia sehemu yako ya faragha."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Sehemu za faragha hazifai kwa programu zinazohitaji kutumika chinichini au kutuma arifa muhimu, kama vile programu za matibabu. Hii ni kwa sababu arifa na shughuli za chinichini hukomeshwa wakati sehemu yako imefungwa.\n\nProgramu zilizo kwenye sehemu yako ya faragha hazitaonekana kwenye kidhibiti cha ruhusa, dashibodi ya faragha na mipangilio mingine wakati sehemu ya faragha imefungwa.\n\nSehemu yako ya faragha haiwezi kurejeshwa kwenye kifaa kipya. Utahitaji kuweka mipangilio ya sehemu nyingine ya faragha iwapo ugependa kuitumia kwenye kifaa kingine.\n\nYeyote anayeunganisha kifaa chako na kompyuta au kuweka programu hasidi kwenye kifaa chako huenda akafikia sehemu yako ya faragha."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Pata maelezo kuhusu sehemu ya faragha"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Hatua hii itachukua dakika chache"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Inaweka mipangilio ya sehemu ya faragha…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Inayojirekebisha"</string>
     <string name="brightness" msgid="6216871641021779698">"Kiwango cha mwangaza"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Mwangaza unaojirekebisha"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Kuhusu mwangaza unaojirekebisha"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Itarekebisha mwangaza wa skrini kiotomatiki ili uendane na mazingira na shughuli zako. Unaweza kusogeza kitelezi mwenyewe ili kusaidia kipengele cha mwangaza unaojirekebisha kijifunze mapendeleo yako."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Umewashwa"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Kimezimwa"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Endelea tu"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Ghairi"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Mipangilio ya ukuzaji"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Kubuta kwa kidole kimoja"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Sogeza sehemu ya ukuzaji kwa kuburuta kwa kidole kimoja."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Sogeza sehemu ya ukuzaji kwa kuburuta kwa vidole viwili."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Haipatikani unapokuza tu sehemu fulani ya skrini"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Gusa kitufe ili ukuze"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Vuta karibu kwa haraka kwenye skrini ili ufanye maudhui yawe makubwa"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Ili uvute karibu:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Tumia njia ya mkato ili uanze kukuza&lt;br/&gt; {1,number,integer}. Gusa skrini&lt;br/&gt; {2,number,integer}. Buruta vidole viwili ili usogeze kwenye skrini&lt;br/&gt; {3,number,integer}. Bana kwa vidole viwili ili ubadilishe ukuzaji&lt;br/&gt; {4,number,integer}. Tumia njia ya mkato ili uache kukuza&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Ili uvute karibu kwa muda:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Hakikisha umechagua aina ya ukuzaji kuwa skrini nzima&lt;br/&gt; {1,number,integer}. Tumia njia ya mkato ili uanze kukuza&lt;br/&gt; {2,number,integer}. Gusa na ushikilie mahali popote kwenye skrini&lt;br/&gt; {3,number,integer}. Buruta kidole ili usogeze kwenye skrini&lt;br/&gt; {4,number,integer}. Inua kidole ili uache kukuza"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Ukiwasha ukuzaji, unaweza kuvuta karibu kwenye skrini yako.\n\n"<b>"Ili ukuze"</b>", anzisha ukuzaji kisha uguse mahali popote kwenye skrini.\n"<ul><li>"Buruta vidole 2 au zaidi ili usogeze"</li>\n<li>"Bana vidole 2 au zaidi ili urekebishe ukuzaji"</li></ul>\n\n<b>"Ili ukuze kwa muda"</b>", anzisha ukuzaji kisha uguse na ushikilie mahali popote kwenye skrini.\n"<ul><li>"Buruta ili usogeze kwenye skrini"</li>\n<li>"Inua kidole ili usogeze mbali"</li></ul>\n\n"Huwezi kuvuta karibu kwenye kibodi au sehemu ya viungo muhimu."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Ukurasa wa <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> kati ya <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Njia ya mkato ya kitufe cha zana za ufikivu"</string>
@@ -3393,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Weka ratiba"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Ratiba"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"Saa <xliff:g id="HOURS">%1$d</xliff:g>, dak <xliff:g id="MINUTES">%2$d</xliff:g>"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Ratibu"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Zima simu katika vipindi fulani"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Weka sheria za Usinisumbue"</string>
@@ -3717,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Aina"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Nyingine"</string>
     <string name="no_channels" msgid="4716199078612071915">"Programu hii haijachapisha arifa zozote"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Onyesha aina ambazo hazijatumika"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Mipangilio ya ziada katika programu"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Onyesha aina zisizotumika"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Ficha aina zisizotumika"</string>
@@ -4921,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Sehemu ya data ya kifaa hiki inahitaji kugeuzwa kuwa ext4 kabla ya kutumia chaguo la wasanidi programu la KB 16. Hatuwezi kukuhakikishia uadilifu wa programu katika hali hii na huenda data yoyote iliyohifadhiwa kwenye simu wakati programu ya kuwasha mfumo wa uendeshaji imefunguliwa ikawa katika hatari. Hatua ya kuwasha chaguo la KB 16 itahitaji kifaa kiwashwe tena baada ya hatua hii. Ukiwa katika hali hii, unaweza kubadilisha kati ya hali za KB 4 na KB 16 kwa kuwasha tena kifaa. Baadhi ya vipengele vitazimwa katika hali hizi, kwa hivyo huenda baadhi ya programu zisifanye kazi. Ili urudishe kifaa kwenye hali ya toleo la umma, utahitaji kurudi kwenye hali ya KB 4 kisha ufunge programu ya kuwasha mfumo wa uendeshaji, hatua itakayorejesha mipangilio ambayo kifaa kilitoka nayo kiwandani. Baada ya kifaa kuwashwa katika Android, zima mipangilio ya kufungua OEM katika Chaguo za wasanidi programu. Data na mipangilio yote ya kifaa itafutwa na mfumo wa faili utabadilishwa kuwa ext4 baada ya uthibitishaji. Baada ya hili kukamilika, tafadhali rudi ili uwashe tena hali ya KB 16."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Futa data yote"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Imeshindwa kubadilisha muundo na kufuta sehemu ya data kuwa ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Unahitaji Kufungua Programu ya Kuwasha Mfumo wa Uendeshaji katika Hali ya KB 16"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Kifaa hiki kinahitaji programu ya kuwasha mfumo wa uendeshaji ifunguliwe kabla ya kutumia chaguo la wasanidi programu la KB 16. Hatuwezi kukuhakikishia uadilifu wa programu katika hali hii na huenda data yoyote iliyohifadhiwa kwenye simu wakati programu ya kuwasha mfumo wa uendeshaji imefunguliwa ikawa katika hatari. Mipangilio na data yote ya mtumiaji itafutwa hali ya KB 16 ikiwashwa. Baada ya programu ya kuwasha mfumo wa uendeshaji kufunguliwa, hatua ya kuwasha chaguo la KB 16 itahitaji kifaa kuwashwa tena mara mbili. Ukiwa katika hali hii, unaweza kubadilisha kati ya hali za KB 4 na KB 16 kwa kuwasha tena kifaa. Baadhi ya vipengele vitazimwa katika hali hizi, kwa hivyo huenda baadhi ya programu zisifanye kazi. Ili urejeshe kifaa kwenye hali ya toleo la umma, utahitaji kurudi kwenye hali ya KB 4 kisha ufunge programu ya kuwasha mfumo wa uendeshaji au urejeshe mipangilio ya kampuni halisi iliyotengeneza kifaa (OEM), (hatua itakayorejesha mipangilio ambayo kifaa kilitoka nayo kiwandani). Tafadhali fungua programu ya kuwasha mfumo wa uendeshaji kisha ujaribu tena. Unaweza kuona maagizo kuhusu jinsi ya kufanya hivyo katika &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Kutumia hali isiyotegemea ukurasa ya KB 4"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Unatumia hali ya KB 4 kwenye hali isiyotegemea ukurasa. Hatuwezi kukuhakikishia uadilifu wa programu katika hali hii na huenda data yoyote iliyohifadhiwa kwenye simu wakati programu ya kuwasha mfumo wa uendeshaji imefunguliwa ikawa katika hatari. Baadhi ya vipengele vitazimwa katika hali hizi, kwa hivyo huenda baadhi ya programu zisifanye kazi. Ili uingie tena katika hali ya toleo la umma, lazima ufunge programu ya kuwasha mfumo wa uendeshaji kwenye kifaa. Gusa ili uendelee kusoma."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Unatumia hali ya KB 4 kwenye hali isiyotegemea ukurasa. Hatuwezi kukuhakikishia uadilifu wa programu katika hali hii na huenda data yoyote iliyohifadhiwa kwenye simu wakati programu ya kuwasha mfumo wa uendeshaji imefunguliwa ikawa katika hatari. Baadhi ya vipengele vitazimwa katika hali hizi, kwa hivyo huenda baadhi ya programu zisifanye kazi. Ili uingie tena katika hali ya toleo la umma, lazima ufunge programu ya kuwasha mfumo wa uendeshaji kwenye kifaa. Hatua hii itarejesha tena mipangilio ambayo kifaa kilitoka nayo kiwandani na kuirejesha katika mipangilio ya toleo la umma. Baada ya kifaa kuwashwa katika Android, zima mipangilio ya kufungua OEM katika Chaguo za wasanidi programu. Iwapo kifaa kitashindwa kuwaka katika Android au si thabiti, weka upya data ya kifaa ukitumia faili mpya kabisa za kiwandani kutoka &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; kisha uchague \'Futa Data Yote ya Kifaa\', \'Funga Programu ya Kuwasha Mfumo wa Uendeshaji\' na \'Lazimisha Kuweka kwenye sehemu zote\'."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Kutumia hali ya KB 16 isiyotegemea ukurasa"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Unatumia hali ya KB 16 kwenye hali isiyotegemea ukurasa. Hatuwezi kukuhakikishia uadilifu wa programu katika hali hii na huenda data yoyote iliyohifadhiwa kwenye simu wakati programu ya kuwasha mfumo wa uendeshaji imefunguliwa ikawa katika hatari. Baadhi ya vipengele vitazimwa katika hali hizi, kwa hivyo huenda baadhi ya programu zisifanye kazi. Ili uingie tena katika hali ya toleo la umma, lazima urudi katika hali ya 4K kisha ufunge programu ya kuwasha mfumo wa uendeshaji kwenye kifaa. Gusa ili uendelee kusoma."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Unatumia hali ya KB 16 kwenye hali isiyotegemea ukurasa. Hatuwezi kukuhakikishia uadilifu wa programu katika hali hii na huenda data yoyote iliyohifadhiwa kwenye simu wakati programu ya kuwasha mfumo wa uendeshaji imefunguliwa ikawa katika hatari. Baadhi ya vipengele vitazimwa katika hali hizi, kwa hivyo huenda baadhi ya programu zisifanye kazi. Ili uingie tena katika hali ya toleo la umma, lazima urudi katika hali ya KB 4 kisha ufunge programu ya kuwasha mfumo wa uendeshaji kwenye kifaa. Hatua hii itarejesha tena mipangilio ambayo kifaa kilitoka nayo kiwandani na kuirejesha katika mipangilio ya toleo la umma. Baada ya kifaa kuwashwa katika Android, zima mipangilio ya kufungua OEM katika Chaguo za wasanidi programu. Iwapo kifaa kitashindwa kuwaka katika Android au si thabiti, weka upya data ya kifaa ukitumia faili mpya kabisa za kiwandani kutoka &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; au utumie &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; kisha uchague \'Futa Data Yote ya Kifaa\', \'Funga Programu ya Kuwasha Mfumo wa Uendeshaji\' na \'Lazimisha Kuweka kwenye sehemu zote\'."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Hali ya KB 16 Isiyotegemea Ukurasa"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Endelea kusoma"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Kidhibiti cha ripoti ya hitilafu"</string>
