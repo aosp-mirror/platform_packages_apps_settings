@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Eşitmə cihazı ayarları"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Qısayol, eşitmə cihazı uyğunluğu"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Hazır ayar"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Audioloq tərəfindən proqramlaşdırılmış hazır ayar yoxdur"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Hazır ayar güncəllənmədi"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audio çıxışı"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Audio çıxışı haqqında"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Saatla Kilidaçma haqqında ətraflı məlumat"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Saat əlavə edin"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Saatı silin"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Barmaq İzi və Üz ilə Kiliddən Açma"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Üz və barmaq izi ilə kiliddən çıxarma"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"İş üçün Üz və Barmaq izi ilə kiliddən çıxarma"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Ayarlamaq lazımdır"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Üz və barmaq izləri əlavə edildi"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Tətbiqlər quraşdırın"</b>\n"Sahənizdə məxfi saxlamaq istədiyiniz tətbiqləri quraşdırın"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Nəzərdə saxlayın"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Sahəni kilidlədikdə tətbiqlər dayanır"</b>\n"Sahəni kilidlədikdə sahədəki tətbiqlər dayandırılır və onlardan bildirişlər almayacaqsınız"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Şəxsi sahələr arxa fonda icra edilməli və ya tibbi tətbiqlər kimi kritik bildirişlər göndərməli olan tətbiqlər üçün uyğun deyil. Bunun səbəbi sahə kilidləndikdə bildirişlərin və arxa fon fəaliyyətinin dayandırılmasıdır.\n\nŞəxsi sahə kilidləndikdə şəxsi sahədəki tətbiqlər icazə menecerində, məxfilik panelində və digər ayarlarda görünməyəcək.\n\nŞəxsi sahə yeni cihaza köçürülə bilməz. Başqa cihazda istifadə etmək istəsəniz, başqa şəxsi sahə ayarlamalısınız.\n\nCihazı kompüterə qoşan və ya cihazda zərərli tətbiqlər quraşdıran istənilən şəxs şəxsi sahəyə daxil ola bilər."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Şəxsi sahələr arxa fonda icra edilməli və ya tibbi tətbiqlər kimi kritik bildirişlər göndərməli olan tətbiqlər üçün uyğun deyil. Bunun səbəbi sahə kilidləndikdə bildirişlərin və arxa fon fəaliyyətinin dayandırılmasıdır.\n\nŞəxsi sahə kilidləndikdə şəxsi sahədəki tətbiqlər icazə menecerində, məxfilik panelində və digər ayarlarda görünməyəcək.\n\nŞəxsi sahə yeni cihaza bərpa edilə bilməz. Başqa cihazda istifadə etmək istəsəniz, başqa sahə ayarlamalısınız.\n\nCihazı kompüterə qoşan və ya cihazınızda zərərli tətbiqlər quraşdıran istənilən şəxs şəxsi sahəyə daxil ola bilər."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Şəxsi sahə haqqında ətraflı məlumat"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Bir neçə dəqiqə çəkəcək"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Məxfi yer ayarlanır…"</string>
@@ -1222,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptiv"</string>
     <string name="brightness" msgid="6216871641021779698">"Parlaqlıq səviyyəsi"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Adaptiv parlaqlıq"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Adaptiv parlaqlıq haqqında"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Ekran parlaqlığı avtomatik olaraq ətraf mühitə və fəaliyyətlrinizə görə tənzimlənəcək. Ayarlana bilən parlaqlığın təcihlərinizi öyrənməsi üçün slayderi əlinizlə hərəkət etdirin."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Aktiv"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Deaktiv"</string>
@@ -2130,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Yenə də davam edin"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Ləğv edin"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Böyütmə ayarları"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Bir barmaqla hərəkət"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Bir barmaqla sürüşdürməklə böyütmə sahəsini hərəkət etdirin."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"İki barmaqla sürüşdürməklə böyütmə sahəsini hərəkət etdirin."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Yalnız ekranın bir hissəsini böyüdərkən əlçatan deyil"</string>
@@ -2154,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Yaxınlaşdırmaq üçün düyməyə klikləyin"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Məzmunu böyütmək üçün ekranı sürətlə yaxınlaşdırın"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Yaxınlaşdırmaq üçün:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Böyütməyə başlamaq üçün qısayoldan istifadə edin&lt;br/&gt; {1,number,integer}. Ekrana toxunun&lt;br/&gt; {2,number,integer}. Ekranın ətrafında hərəkət etmək üçün 2 barmağınızı sürüşdürün&lt;br/&gt; {3,number,integer}. Miqyası tənzimləmək üçün 2 barmaqla yaxınlaşdırıb-uzaqlaşdırın&lt;br/&gt; {4,number,integer}. Böyütməni dayandırmaq üçün qısayoldan istifadə edin&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Müvəqqəti böyütmək üçün:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Böyütmə növünün tam ekrana ayarlandığına əmin olun&lt;br/&gt; {1,number,integer}. Böyütməyə başlamaq üçün qısayoldan istifadə edin&lt;br/&gt; {2,number,integer}. Ekranın istənilən yerinə toxunub saxlayın&lt;br/&gt; {3,number,integer}. Ekranın ətrafında hərəkət etmək üçün barmağınızı sürüşdürün&lt;br/&gt; {4,number,integer}. Böyütməni dayandırmaq üçün barmağınızı qaldırın"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Böyütmə aktiv edildikdə ekranda yaxınlaşdıra bilərsiniz.\n\n"<b>"Miqyası dəyişmək üçün"</b>" böyütməni başlatdıqdan sonra ekranda istənilən yerə toxunun.\n"<ul><li>"Sürüşdürmək üçün ən azı 2 barmağınızla çəkin"</li>\n<li>"Miqyası tənzimləmək üçün ən azı 2 barmağınızla sürüşdürərək yaxınlaşdırın"</li></ul>\n\n<b>"Miqyası müvəqqəti dəyişmək üçün"</b>" böyütməni başladıb ekranda istənilən yerə basın &amp; saxlayın.\n"<ul><li>"Ekranda hərəkət etmək üçün çəkin"</li>\n<li>"Uzaqlaşdırmaq üçün barmağınızı qaldırın"</li></ul>\n\n"Klaviatura və ya naviqasiya panelində yaxınlaşdıra bilməzsiniz."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Səhifə <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Xüsusi imkanlar düyməsi qısayolu"</string>
@@ -3393,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Cədvəl ayarlayın"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Cədvəl"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> saat <xliff:g id="MINUTES">%2$d</xliff:g> dəq"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Rutin"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Müəyyən vaxtlarda telefonu səssiz edin"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\"Narahat etməyin\" qaydaları ayarlayın"</string>
@@ -3717,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Kateqoriyalar"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Digər"</string>
     <string name="no_channels" msgid="4716199078612071915">"Bu tətbiq heç bir bildiriş paylaşmayıb"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"İstifadəsiz kateqoriyaları göstərin"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Tətbiqdə əlavə ayarlar"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"İstifadəsiz kateqoriyaları göstərin"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"İstifadəsiz kateqoriyaları gizlədin"</string>
@@ -4921,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16KB developer seçimindən istifadə etməzdən əvvəl bu cihazın data bölməsi ext4-ə çevrilməlidir. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. 16 KB seçimini aktivləşdirmək üçün bundan sonra daha bir yenidən başlatma tələb ediləcək. Bu rejimdə bir dəfə yenidən başlatma ilə 4KB və 16KB rejimi arasında dəyişə bilərsiniz. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi proqramlar işləməyə bilər. Cihazı istehsal rejiminə qaytarmaq üçün 4KB rejiminə qaytarmalı və sonra yükləyicini kilidləməlisiniz ki, bu da cihazı zavod ayarlarına sıfırlayır. Cihaz Android-ə yükləndikdən sonra Developer seçimlərində OEM kiliddən çıxarılmasını deaktiv edin. Təsdiqdən sonra cihaz datası silinəcək və fayl sistemi ext4-ə dəyişdiriləcək. Bu tamamlandıqdan sonra 16KB-ni yenidən aktivləşdirmək üçün geri qayıdın."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Bütün datanı silin"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Data bölməsini yenidən formatlamaq və ext4-ə ayarlamaq alınmadı."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"16KB rejimi üçün yükləyici kilidaçması tələb edilir"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Bu cihaz 16KB developer seçimindən istifadə etməzdən əvvəl yükləyicinin kilidini açmalıdır. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. 16KB rejimi aktivləşdirildikdə bütün istifadəçi datası və ayarları silinəcək. Yükləyici kilidi açıldıqdan sonra 16KB seçimini aktivləşdirmək üçün iki dəfə yenidən başlatma tələb olunacaq. Bu rejimdə bir dəfə yenidən başlatma ilə 4KB və 16KB rejimi arasında dəyişə bilərsiniz. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi proqramlar işləməyə bilər. Cihazı istehsal rejiminə qaytarmaq üçün yenidən 4KB rejiminə keçməli və sonra cihazda OEM/yükləyici kilidləməsi (zavod ayarlarına sıfırlayır) icra etməlisiniz. Yükləyicini kiliddən çıxarın və yenidən cəhd edin. Təlimatlara burada baxa bilərsiniz: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4KB səhifə-aqnostik rejimindən istifadə"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Səhifə-aqnostik rejiminin 4KB rejimindəsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi proqramlar işləməyə bilər. İstehsal rejiminə yenidən daxil olmaq üçün cihazın yükləyicisini kilidləməlisiniz. Toxunaraq ətraflı oxuyun."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Səhifə-aqnostik rejiminin 4KB rejimindəsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi proqramlar işləməyə bilər. İstehsal rejiminə yenidən daxil olmaq üçün cihazın yükləyicisini kilidləməlisiniz. Bununla cihaz yenidən zavod ayarlarına qayıdacaq və istehsal ayarları bərpa ediləcək. Cihaz Android-ə yükləndikdən sonra Developer seçimlərində OEM kiliddən çıxarılmasını deaktiv edin. Cihaz Android-ə yüklənmirsə və ya qeyri-sabitdirsə, cihazı buradan əldə edilən ən son fabrik şəkilləri ilə yenidən işə salın: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; yaxud &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; istifadə edin və \"Cihaz datasını silin\", \"Yükləyicini kilidləyin\" və \"Bütün hissələri məcburi yükləyin\" seçin."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16KB səhifə-aqnostik rejimindən istifadə"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Səhifə-aqnostik rejiminin 16KB rejimindəsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi proqramlar işləməyə bilər. İstehsal rejiminə yenidən daxil olmaq üçün yenidən 4K rejiminə keçməli və sonra cihazın yükləyicisini kilidləməlisiniz. Toxunaraq ətraflı oxuyun."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Səhifə-aqnostik rejiminin 16KB rejimindəsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi proqramlar işləməyə bilər. İstehsal rejiminə yenidən daxil olmaq üçün yenidən 4K rejiminə keçməli və sonra cihazın yükləyicisini kilidləməlisiniz. Bununla cihaz yenidən zavod ayarlarına qayıdacaq və istehsal ayarları bərpa ediləcək. Cihaz Android-ə yükləndikdən sonra Developer seçimlərində OEM kiliddən çıxarılmasını deaktiv edin. Cihaz Android-ə yüklənmirsə və ya qeyri-sabitdirsə, cihazı buradan əldə edilən ən son fabrik şəkilləri ilə yenidən işə salın: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; yaxud &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; istifadə edin və \"Cihaz datasını silin\", \"Yükləyicini kilidləyin\" və \"Bütün hissələri məcburi yükləyin\" seçin."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB səhifə-aqnostik rejimi"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ətraflı məlumat"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Baq hesabatı idarəedicisi"</string>

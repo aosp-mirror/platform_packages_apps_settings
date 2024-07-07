@@ -76,8 +76,7 @@ object AppOptModeSharedPreferencesUtils {
     fun resetExpiredAppOptModeBeforeTimestamp(context: Context, queryTimestampMs: Long) =
         synchronized(appOptimizationModeLock) {
             val forceExpireEnabled =
-                featureFactory
-                    .powerUsageFeatureProvider.isForceExpireAppOptimizationModeEnabled
+                featureFactory.powerUsageFeatureProvider.isForceExpireAppOptimizationModeEnabled
             val eventsMap = getAppOptModeEventsMap(context)
             val expirationUids = ArrayList<Int>(eventsMap.size)
             for ((uid, event) in eventsMap) {
@@ -113,12 +112,22 @@ object AppOptModeSharedPreferencesUtils {
         getBatteryOptimizeUtils: (Int, String) -> BatteryOptimizeUtils,
     ) =
         synchronized(appOptimizationModeLock) {
+            val restrictedModeOverwriteEnabled =
+                featureFactory.powerUsageFeatureProvider.isRestrictedModeOverwriteEnabled
             val eventsMap = getAppOptModeEventsMap(context)
             val expirationEvents: MutableMap<Int, AppOptimizationModeEvent> = ArrayMap()
             for (i in uids.indices) {
                 val uid = uids[i]
                 val packageName = packageNames[i]
                 val optimizationMode = optimizationModes[i]
+                if (
+                    !restrictedModeOverwriteEnabled &&
+                        optimizationMode == BatteryOptimizeUtils.MODE_RESTRICTED
+                ) {
+                    // Unable to set restricted mode due to flag protection.
+                    Log.w(TAG, "setOptimizationMode($packageName) into restricted ignored")
+                    continue
+                }
                 val originalOptMode: Int =
                     updateBatteryOptimizationMode(
                         context,

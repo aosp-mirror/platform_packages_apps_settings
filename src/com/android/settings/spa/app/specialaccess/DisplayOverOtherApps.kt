@@ -44,6 +44,16 @@ class DisplayOverOtherAppsListModel(context: Context) : AppOpPermissionListModel
         logPermissionChange(newAllowed)
     }
 
+    // TODO (b/349195999)
+    override fun isChangeable(record: AppOpPermissionRecord): Boolean {
+        if (record.app.packageName in
+            context.resources.getStringArray(R.array.display_over_apps_permission_change_exempt)
+            && record.app.isSystemApp()) {
+            return false
+        }
+        return super.isChangeable(record)
+    }
+
     private fun logPermissionChange(newAllowed: Boolean) {
         val category = when {
             newAllowed -> SettingsEnums.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW

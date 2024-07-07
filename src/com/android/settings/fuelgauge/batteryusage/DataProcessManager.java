@@ -522,7 +522,7 @@ public class DataProcessManager {
                         FeatureFactory.getFeatureFactory()
                                 .getPowerUsageFeatureProvider();
                 featureProvider.processBatteryReattributeData(
-                        mContext, batteryDiffDataMap, mIsFromPeriodJob);
+                        mContext, batteryDiffDataMap, mBatteryEventList, mIsFromPeriodJob);
 
                 Log.d(
                         TAG,
