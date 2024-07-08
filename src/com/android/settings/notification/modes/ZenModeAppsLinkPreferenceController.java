@@ -21,6 +21,7 @@ import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.ArraySet;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import androidx.core.text.BidiFormatter;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.notification.modes.ZenMode;
@@ -82,6 +84,9 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
                 .toIntent());
         mZenMode = zenMode;
         mPreference = preference;
+        if (TextUtils.isEmpty(mPreference.getSummary())) {
+            mPreference.setSummary(R.string.zen_mode_apps_calculating);
+        }
         if (mApplicationsState != null && mHost != null) {
             mAppSession = mApplicationsState.newSession(mAppSessionCallbacks, mHost.getLifecycle());
         }
