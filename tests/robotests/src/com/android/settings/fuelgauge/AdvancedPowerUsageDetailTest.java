@@ -894,4 +894,9 @@ public class AdvancedPowerUsageDetailTest {
 
         verifyZeroInteractions(mBackupManager);
     }
+
+    @Test
+    public void shouldSkipForInitialSUW_returnTrue() {
+        assertThat(mFragment.shouldSkipForInitialSUW()).isTrue();
+    }
 }
