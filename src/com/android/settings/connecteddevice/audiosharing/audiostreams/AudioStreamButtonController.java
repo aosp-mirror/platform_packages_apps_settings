@@ -27,6 +27,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
@@ -48,7 +49,9 @@ public class AudioStreamButtonController extends BasePreferenceController
     private static final String TAG = "AudioStreamButtonController";
     private static final String KEY = "audio_stream_button";
     private static final int SOURCE_ORIGIN_REPOSITORY = SourceOriginForLogging.REPOSITORY.ordinal();
-    private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+
+    @VisibleForTesting
+    final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new AudioStreamsBroadcastAssistantCallback() {
                 @Override
                 public void onSourceRemoved(BluetoothDevice sink, int sourceId, int reason) {
@@ -97,8 +100,7 @@ public class AudioStreamButtonController extends BasePreferenceController
                 }
             };
 
-    private final AudioStreamsRepository mAudioStreamsRepository =
-            AudioStreamsRepository.getInstance();
+    private AudioStreamsRepository mAudioStreamsRepository = AudioStreamsRepository.getInstance();
     private final Executor mExecutor;
     private final AudioStreamsHelper mAudioStreamsHelper;
     private final @Nullable LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
@@ -227,5 +229,10 @@ public class AudioStreamButtonController extends BasePreferenceController
     /** Initialize with broadcast id */
     void init(int broadcastId) {
         mBroadcastId = broadcastId;
+    }
+
+    @VisibleForTesting
+    void setAudioStreamsRepositoryForTesting(AudioStreamsRepository repository) {
+        mAudioStreamsRepository = repository;
     }
 }

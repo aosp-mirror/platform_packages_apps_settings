@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Paramètres de l\'appareil auditif"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Raccourci, compatibilité avec les prothèses auditives"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Préréglage"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Aucun préréglage n\'a été programmé par votre audiologiste"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Impossible de mettre à jour le préréglage"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Sortie audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"À propos de la sortie audio"</string>
@@ -281,7 +282,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Position"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Utiliser ma position"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Désactivé"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activée / # application a accès à la position}one{Activée / # application a accès à la position}other{Activée / # applications ont accès à la position}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activée / # appli a accès à la position}one{Activée / # appli a accès à la position}other{Activée / # applis ont accès à la position}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Chargement en cours…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Les applications qui disposent de l\'autorisation de détection des appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accès à la position est désactivé pour les applications et les services. La position de votre appareil pourrait quand même être envoyée aux intervenants d\'urgence lorsque vous appelez ou textez un numéro d\'urgence."</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"En savoir plus sur le Déverrouillage à l\'aide d\'une montre"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Ajouter une montre"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Retirer une montre"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Déverrouillage empreinte digitale et reconnaissance faciale"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Déverr. par reconn. faciale et empreinte digitale"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Déverr. par reconn. faciale et empreinte digitale pour le travail"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Configuration requise"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Empreintes digitales et visage ajoutés"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installer les applis"</b>\n"Installez les applis que vous voulez garder privées dans votre espace"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Garder à l\'esprit"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Les applis s\'arrêtent lorsque vous verrouillez votre espace"</b>\n"Lorsque vous verrouillez votre espace, les applis qui s\'y trouvent sont arrêtées, et vous ne recevez aucune notification de leur part"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Les espaces privés ne conviennent pas aux applis qui doivent être exécutées en arrière-plan ou qui doivent envoyer des notifications critiques, comme les applis médicales. En effet, les notifications et les activités en arrière-plan sont interrompues lorsque votre espace est verrouillé.\n\nLes applications contenues dans votre espace privé n\'apparaîtront pas dans le gestionnaire des autorisations, sur le tableau de bord de confidentialité ni dans les autres paramètres quand l\'espace privé est verrouillé.\n\nVotre espace privé ne peut être déplacé vers un autre appareil. Vous devrez créer un autre espace privé si vous souhaitez l\'utiliser sur un autre appareil.\n\nToute personne qui connecte votre appareil à un ordinateur ou installe des applis nuisibles sur votre appareil peut être en mesure d\'accéder à votre espace privé."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Les espaces privés ne conviennent pas aux applis qui doivent être exécutées en arrière-plan ou qui doivent envoyer des notifications critiques, comme les applis médicales. En effet, les notifications et les activités en arrière-plan sont interrompues lorsque votre espace est verrouillé.\n\nLes applis contenues dans votre espace privé n\'apparaîtront pas dans le gestionnaire des autorisations, sur le tableau de bord de confidentialité ni dans les autres paramètres quand l\'espace privé est verrouillé.\n\nVotre espace privé ne peut être restauré sur un autre appareil. Vous devrez créer un autre espace si vous souhaitez l\'utiliser sur un autre appareil.\n\nToute personne qui connecte votre appareil à un ordinateur ou installe des applis malveillantes sur votre appareil peut être en mesure d\'accéder à votre espace privé."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"En savoir plus sur l\'Espace privé"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"L\'opération prendra quelques instants"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configuration de l\'Espace privé en cours…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Redémarrer l\'appareil?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Les détails de la journalisation CCP sont enregistrés à des fins de développement uniquement. Des données CCP supplémentaires sont comprises dans les rapports de bogue, qui peuvent contenir des renseignements confidentiels. Redémarrez votre appareil pour modifier ce paramètre."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Redémarrer"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Diffusion"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"miroir"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activer l\'affichage sans fil"</string>
@@ -1192,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptatives"</string>
     <string name="brightness" msgid="6216871641021779698">"Niveau de luminosité"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Luminosité adaptative"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"À propos de la luminosité adaptative"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"La luminosité de votre écran s\'adapte automatiquement à votre environnement et à vos activités. Vous pouvez déplacer le curseur manuellement pour aider la luminosité adaptative à apprendre vos préférences."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Activé"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Désactivée"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Utilisateur sélectionné : <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Parole"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Vitesse du pointeur"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Manette de jeu"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Rediriger les vibrations"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Rediriger les vibrations vers la manette de jeu lorsqu\'elle est connectée"</string>
@@ -2094,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuer quand même"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Annuler"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Paramètres d\'agrandissement"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Effectuez un panoramique avec un doigt"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Déplacez la zone d\'agrand. en faisant glisser un doigt."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Déplacez la zone d\'agrand. en faisant glisser deux doigts."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Non disponible lorsque vous agrandissez seulement une partie de l\'écran"</string>
@@ -2118,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Touchez un bouton pour zoomer"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zoomez rapidement pour agrandir le contenu"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Pour zoomer :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {1,number,integer}. Touchez l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour naviguer dans l\'écran&lt;br/&gt; {3,number,integer}. Pincez l\'écran avec deux doigts pour ajuster le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Pour zoomer temporairement :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Assurez-vous que le type d\'agrandissement est défini à plein écran&lt;br/&gt; {1,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {2,number,integer}. Maintenez le doigt sur une zone de l\'écran&lt;br/&gt; {3,number,integer}. Faites glisser un doigt pour naviguer dans l\'écran&lt;br/&gt; {4,number,integer}. Levez le doigt pour arrêter l\'agrandissement"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"Pour effectuer un zoom,"</b>", activez cette fonction, puis touchez une zone de l\'écran.\n"<ul><li>"Glissez deux doigts ou plus sur l\'écran pour le faire défiler"</li>\n<li>"Pincez deux doigts ou plus pour ajuster le zoom"</li></ul>\n\n<b>"Pour zoomer temporairement l\'écran"</b>", touchez le bouton d\'accessibilité, puis maintenez le doigt sur ailleurs sur l\'écran.\n"<ul><li>"Glissez votre doigt sur l\'écran à l\'endroit désiré"</li>\n<li>"Relevez le doigt pour zoomer vers l\'arrière"</li></ul>\n\n"On ne peut pas zoomer sur le clavier ou la barre de navigation."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> sur <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Raccourci du bouton d\'accessibilité"</string>
@@ -3326,12 +3369,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recevez uniquement les notifications des personnes et des applications importantes"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Sélectionner le type d\'activation"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Heure"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"P. ex. « De 9 h 30 à 17 h »"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Agenda"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"P. ex. « Agenda personnel »"</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limiter les interruptions"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Activer le mode Ne pas déranger"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Les alarmes et les sons des éléments multimédias peuvent provoquer des interruptions"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Horaires"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Supprimer les horaires"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Supprimer"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Modifier"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Horaires"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Horaire"</string>
@@ -3339,11 +3397,10 @@
     <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Ajoutez un agenda"</string>
     <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Utiliser votre agenda"</string>
     <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Programme"</string>
-    <!-- no translation found for zen_mode_set_schedule_title (8023100831320026233) -->
-    <skip />
-    <!-- no translation found for zen_mode_set_schedule_link (2534032127923435737) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_duration (299332195675875111) -->
+    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Définissez un horaire"</string>
+    <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programmer"</string>
+    <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
     <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Horaire"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Tél. en silence à certains moments"</string>
@@ -3354,7 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Autoriser les interruptions qui émettent des sons"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloquer dérangements visuels"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Autoriser les signaux visuels"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Des notifications qui peuvent vous parvenir"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Rester concentré"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Actions supplémentaires"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Paramètres d\'affichage"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Options d\'affichage"</string>
@@ -3371,6 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"activer le thème sombre"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Faire en sorte que le SE et les applis utilisent plutôt une écriture pâle sur un fond foncé, ce qui peut être plus doux pour les yeux et permettre une économie considérable de la pile sur certains appareils"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Aucune modification apportée à l\'affichage}=1{{effect_1}}=2{{effect_1} et {effect_2}}=3{{effect_1}, {effect_2} et {effect_3}}one{{effect_1}, {effect_2} et # autre}other{{effect_1}, {effect_2} et # autres}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtrer les interruptions"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Aucune interruption n\'est filtrée"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Afficher les options pour les notifications filtrées"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quand le mode Ne pas déranger est activé"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Aucun son des notifications"</string>
@@ -3667,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Catégories"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Autre"</string>
     <string name="no_channels" msgid="4716199078612071915">"Cette appli n\'a publié aucune notification"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Afficher les catégories inutilisées"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Paramètres supplémentaires dans l\'appli"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Afficher les catégories inutilisées"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Masquer les catégories inutilisées"</string>
@@ -3814,12 +3874,9 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Ne recevoir que les alarmes pendant une heure jusqu\'à {time}}one{Ne recevoir que les alarmes pendant # heure jusqu\'à {time}}other{Ne recevoir que les alarmes pendant # heures jusqu\'à {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Ne recevoir que les alarmes jusqu\'à <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Activer le mode Toujours interrompre"</string>
-    <!-- no translation found for zen_mode_action_change_name (766639614789907016) -->
-    <skip />
-    <!-- no translation found for zen_mode_action_change_icon (6192187791750301778) -->
-    <skip />
-    <!-- no translation found for zen_mode_icon_picker_title (6845490379143557472) -->
-    <skip />
+    <string name="zen_mode_action_change_name" msgid="766639614789907016">"Renommer"</string>
+    <string name="zen_mode_action_change_icon" msgid="6192187791750301778">"Changer d\'icône"</string>
+    <string name="zen_mode_icon_picker_title" msgid="6845490379143557472">"Changer d\'icône"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Mise en garde"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fermer"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Commentaires sur cet appareil"</string>
@@ -4874,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"La partition de données de cet appareil doit être convertie en système de fichiers ext4 avant d\'utiliser l\'option de 16 Ko pour les développeurs. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toutes les données stockées sur le téléphone pendant que le programme d\'amorçage est déverrouillé pourraient être compromises. L\'activation de l\'option de 16 Ko nécessitera ensuite un autre redémarrage. Une fois que vous êtes dans ce mode, vous pouvez basculer entre le mode 4 Ko et le mode 16 Ko avec un seul redémarrage. Certaines fonctionnalités seront désactivées dans ces modes, de sorte que certaines applications peuvent ne pas fonctionner. Pour remettre l\'appareil en mode production, vous devrez revenir en mode 4 Ko et ensuite verrouiller le programme d\'amorçage, ce qui réinitialise l\'appareil à ses paramètres par défaut. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage par le fabricant d\'équipement d\'origine dans les Options pour les développeurs. L\'appareil sera nettoyé et le système de fichiers sera remplacé par le système de fichiers ext4 après la confirmation. Une fois cette opération terminée, revenez pour activer à nouveau l\'option de 16 Ko."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Effacer toutes les données"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Échec du reformatage de la partition vers le système de fichiers ext4 et du nettoyage de ses données."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Déverrouillage du programme d\'amorçage requis pour le mode 16 Ko"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Cet appareil doit avoir le programme d\'amorçage déverrouillé avant d\'utiliser l\'option 16 Ko pour les développeurs. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toutes les données stockées sur le téléphone pendant que le programme d\'amorçage est déverrouillé pourraient être compromises. Toutes les données et tous les paramètres de l\'utilisateur seront nettoyés lors de l\'activation du mode 16 Ko. Une fois le programme d\'amorçage déverrouillé, l\'activation de l\'option de 16 Ko nécessitera deux redémarrages. Une fois que vous êtes dans ce mode, vous pouvez basculer entre le mode 4 Ko et le mode 16 Ko avec un seul redémarrage. Certaines fonctionnalités seront désactivées dans ces modes, de sorte que certaines applications peuvent ne pas fonctionner. Pour remettre l\'appareil en mode production, vous devrez revenir en mode 4 Ko et ensuite activer le verrouillage par le fabricant d\'équipement d\'origine et verrouiller le programme d\'amorçage de l\'appareil (ce qui le réinitialise à ses paramètres par défaut). Veuillez déverrouiller le programme d\'amorçage et réessayer. Vous trouverez des instructions à ce sujet à la page &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Utilisation du mode agnostique de page 4 Ko"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Vous êtes dans le mode 4 Ko du mode agnostique de page. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toutes les données stockées sur le téléphone pendant que le programme d\'amorçage est déverrouillé pourraient être compromises. Certaines fonctionnalités seront désactivées dans ces modes, de sorte que certaines applications peuvent ne pas fonctionner. Pour repasser en mode production, vous devez verrouiller le programme d\'amorçage de l\'appareil. Touchez l\'écran pour en savoir plus."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Vous êtes dans le mode 4 Ko du mode agnostique de page. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toutes les données stockées sur le téléphone pendant que le programme d\'amorçage est déverrouillé pourraient être compromises. Certaines fonctionnalités seront désactivées dans ces modes, de sorte que certaines applications peuvent ne pas fonctionner. Pour repasser en mode production, vous devez verrouiller le programme d\'amorçage de l\'appareil. Cette opération réinitialisera à nouveau l\'appareil et rétablira ses paramètres par défaut. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage par le fabricant d\'équipement d\'origine dans les Options pour les développeurs. Si l\'appareil ne démarre pas sous Android ou s\'il est instable, flashez à nouveau l\'appareil avec les dernières images par défaut à partir de la page &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou utilisez la page &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; et sélectionnez « Nettoyer l\'appareil », « Verrouiller le programme d\'amorçage » et « Forcer le flash de toutes les partitions »."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Utilisation du mode agnostique de page 16 Ko"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Vous êtes dans le mode 16 Ko du mode agnostique de page. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toutes les données stockées sur le téléphone pendant que le programme d\'amorçage est déverrouillé pourraient être compromises. Certaines fonctionnalités seront désactivées dans ces modes, de sorte que certaines applications peuvent ne pas fonctionner. Pour repasser en mode production, vous devez basculer vers le mode 4 Ko, puis verrouiller le programme d\'amorçage de l\'appareil. Touchez l\'écran pour en savoir plus."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Vous êtes dans le mode 16 Ko du mode agnostique de page. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toutes les données stockées sur le téléphone pendant que le programme d\'amorçage est déverrouillé pourraient être compromises. Certaines fonctionnalités seront désactivées dans ces modes, de sorte que certaines applications peuvent ne pas fonctionner. Pour repasser en mode production, vous devez basculer vers le mode 4 Ko, puis verrouiller le programme d\'amorçage de l\'appareil. Cette opération réinitialisera à nouveau l\'appareil et rétablira ses paramètres par défaut. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage par le fabricant d\'équipement d\'origine dans les Options pour les développeurs. Si l\'appareil ne démarre pas sous Android ou s\'il est instable, flashez à nouveau l\'appareil avec les dernières images par défaut à partir de la page &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou utilisez la page &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; et sélectionnez « Nettoyer l\'appareil », « Verrouiller le programme d\'amorçage » et « Forcer le flash de toutes les partitions »."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Mode agnostique de page 16 Ko"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Lire la suite"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gestionnaire de rapport de bogue"</string>
@@ -5013,7 +5073,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Utiliser l\'Épinglage d\'application"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Utiliser les options pour les développeurs"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Utiliser le service d\'impression"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Autoriser plusieurs utilisateurs"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"autoriser, plusieurs, utilisateur, permettre, beaucoup"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"multiples, utilisateurs, profils, personnes, comptes, commutateur, plusieurs"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Utiliser le débogage sans fil"</string>
@@ -5357,4 +5418,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Écouter le flux"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Balayez le code QR d\'un flux audio pour l\'écouter avec votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Impossible de modifier le mot de passe lors du partage. Pour modifier le mot de passe, désactivez d\'abord le partage audio."</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

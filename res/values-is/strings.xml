@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Stillingar heyrnartækis"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Flýtileið, samhæfi við heyrnartæki"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Forstilling"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Heyrnarsérfræðingurinn þinn hefur ekki valið neinar forstillingar"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Tókst ekki að uppfæra forstillingu"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Hljóðúttak"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Um hljóðúttak"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Nánar um opnun með úri"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Bæta við úri"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Fjarlægja úr"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Fingrafar og andlitskenni"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Andlits- og fingrafarskenni"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Andlits- og fingrafarskenni fyrir vinnu"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Þörf er á uppsetningu"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Andliti og fingraförum bætt við"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Settu upp forrit"</b>\n"Settu upp forrit sem þú vilt halda leyndum í rýminu þínu"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Hafðu í huga"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Forrit stöðvast þegar þú læsir rýminu þínu"</b>\n"Þegar þú læsir rýminu þínu eru forrit í því rými stöðvuð og þú færð ekki tilkynningar frá þeim"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Leynirými henta ekki fyrir forrit sem þurfa að keyra í bakgrunni eða senda mikilvægar tilkynningar, s.s. forrit sem notuð eru í læknisfræðilegum tilgangi. Það er vegna þess að tilkynningar og bakgrunnsvirkni stöðvast þegar rýmið er læst.\n\nForrit í leynirýminu þínu birtast ekki í leyfisstjóra, á persónuverndarstjórnborði og í öðrum stillingum þegar leynirýmið er læst.\n\nEkki er hægt að flytja leynirými yfir í nýtt tæki. Þú þarft að setja upp nýtt leynirými ef þú vilt nota það í öðru tæki.\n\nHver sem tengir tækið þitt við tölvu eða setur upp skaðleg forrit í tækinu gæti fengið aðgang að leynirýminu."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Leynirými henta ekki fyrir forrit sem þurfa að keyra í bakgrunni eða senda mikilvægar tilkynningar, s.s. forrit sem notuð eru í læknisfræðilegum tilgangi. Það er vegna þess að tilkynningar og bakgrunnsvirkni stöðvast þegar rýmið er læst.\n\nForrit í leynirýminu þínu birtast ekki í leyfisstjóra, á persónuverndarstjórnborði og í öðrum stillingum þegar leynirýmið er læst.\n\nEkki er hægt að endurheimta leynirými í nýju tæki. Þú þarft að setja upp annað rými ef þú vilt nota það í öðru tæki.\n\nHver sem tengir tækið þitt við tölvu eða setur upp skaðleg forrit í tækinu gæti fengið aðgang að leynirýminu."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Nánar um leynirými"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Þetta tekur stutta stund"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Setur upp leynirými…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Endurræsa tæki?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Ítarleg NFC-skráning er aðeins ætluð í þróunartilgangi. Viðbótargögn um NFC fylgja villutilkynningum sem kunna að innihalda lokaðar upplýsingar. Endurræstu tækið til að breyta þessari stillingu."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Endurræsa"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Útsending"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spegla"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Leyfa þráðlausan skjá"</string>
@@ -1192,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Breytilegir"</string>
     <string name="brightness" msgid="6216871641021779698">"Birtustig"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Aðlögun birtustigs"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Um aðlögun birtustigs"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Birtustigi skjásins verður breytt sjálfkrafa í samræmi við umhverfið og hvað þú ert að gera. Þú getur fært sleðann til að hjálpa aðlögun birtustigs að læra inn á hvernig þú vilt hafa birtuna."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Kveikt"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Slökkt"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Valið af notanda: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Tal"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Hraði bendils"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Leikjafjarstýring"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Endurbeina titringi"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Senda titring í leikjafjarstýringu þegar hún er tengd"</string>
@@ -2094,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Halda samt áfram"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Hætta við"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Stillingar stækkunar"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Hliðrun með einum fingri"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Færðu stækkaða svæðið með því að draga einn fingur."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Færðu stækkaða svæðið með því að draga tvo fingur."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Ótiltækt þegar aðeins hluti skjásins er stækkaður"</string>
@@ -2118,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ýttu á hnapp til að stækka"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Auktu aðdráttinn á skjánum til að stækka efnið"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Gerðu eftirfarandi til að auka aðdrátt:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Notaðu flýtileið til að hefja stækkun&lt;br/&gt; {1,number,integer}. Ýttu á skjáinn&lt;br/&gt; {2,number,integer}. Dragðu 2 fingur til að ferðast um skjáinn&lt;br/&gt; {3,number,integer}. Færðu tvo fingur saman til að stilla aðdráttinn&lt;br/&gt; {4,number,integer}. Notaðu flýtileið til að hætta stækkun&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Til að auka aðdrátt tímabundið:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gakktu úr skugga um að stækkunaraðferðin sé stillt til að birtast á öllum skjánum&lt;br/&gt; {1,number,integer}. Notaðu flýtileið til að hefja stækkun&lt;br/&gt; {2,number,integer}. Haltu fingri hvar sem er á skjánum&lt;br/&gt; {3,number,integer}. Dragðu fingurinn til að ferðast um skjáinn&lt;br/&gt; {4,number,integer}. Lyftu fingri til að hætta stækkun"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Þegar kveikt er á stækkun geturðu aukið aðdráttinn á skjánum.\n\n"<b>"Til að stækka"</b>" skaltu hefja stækkun og ýta svo hvar sem er á skjáinn.\n"<ul><li>"Dragðu með tveimur eða fleiri fingrum til að fletta"</li>\n<li>"Færðu tvo eða fleiri fingur saman til að stilla aðdrátt"</li></ul>\n\n<b>"Til að stækka tímabundið"</b>" skaltu hefja stækkun og halda síðan fingri hvar sem er á skjánum.\n"<ul><li>"Dragðu til að fara um skjáinn"</li>\n<li>"Lyftu fingrinum til að minnka aðdrátt"</li></ul>\n\n"Þú getur ekki stækkað á lyklaborðinu eða yfirlitsstikunni."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Síða <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> af <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Flýtileið fyrir aðgengishnapp"</string>
@@ -3326,12 +3369,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Fáðu aðeins tilkynningar frá mikilvægum einstaklingum og forritum"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Veldu virkjunartegund"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Tími"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"T.d. „9:30 – 17:00“"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Dagatal"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"T.d. „Persónulegt dagatal“"</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Takmarka truflanir"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Kveikja á „Ónáðið ekki“"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Vekjarar og hljóð efnis mega trufla"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Tímaáætlanir"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Eyða áætlunum"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Eyða"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Breyta"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Áætlanir"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Áætlun"</string>
@@ -3342,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Stilla áætlun"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Áætlun"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> klst. og <xliff:g id="MINUTES">%2$d</xliff:g> mín."</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Áætlun"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Þagga í símanum á vissum tíma"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Stilla reglur fyrir „Ónáðið ekki“"</string>
@@ -3351,7 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Leyfa truflanir sem gefa frá sér hljóð"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Útiloka sjónrænt áreiti"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Leyfa sjónræn merki"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Tilkynningar sem geta náð til þín"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Haltu einbeitingunni"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Fleiri aðgerðir"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Skjástillingar"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Birtingarvalkostir"</string>
@@ -3368,6 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"kveikja á dökku þema"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Stilltu stýrikerfið og forrit á að hafa ljósan texta á dökkum bakgrunni, sem getur verið þægilegra fyrir augun og hefur í för með sér umtalsverðan rafhlöðusparnað í sumum tækjum"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Engar skjábreytingar}=1{{effect_1}}=2{{effect_1} og {effect_2}}=3{{effect_1}, {effect_2} og {effect_3}}one{{effect_1}, {effect_2} og # í viðbót}other{{effect_1}, {effect_2} og # í viðbót}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Sía truflanir"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Engar truflanir eru síaðar"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Skjávalkostir fyrir síaðar tilkynningar"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Þegar kveikt er á „Ónáðið ekki“"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ekkert hljóð frá tilkynningum"</string>
@@ -3664,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Flokkar"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Annað"</string>
     <string name="no_channels" msgid="4716199078612071915">"Þetta forrit hefur ekki birt neinar tilkynningar"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Sýna ónotaða flokka"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Fleiri stillingar í forritinu"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Sýna ónotaða flokka"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Fela ónotaða flokka"</string>
@@ -4868,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Þú þarft að breyta gagnaskiptingu tækisins í ext4 áður en þú getur valið 16 kB-forritunarkostinn. Ekki er hægt að tryggja heilleika hugbúnaðarins í þessari stillingu og öll gögn símans kunna að vera í hættu á meðan ræsiforritið er ólæst. Virkjun 16 kB-valkostsins krefst þess að tækið sé endurræst einu sinni í viðbót. Þegar þú hefur virkjað þessa stillingu geturðu skipt á milli 4 kB- og 16 kB-stillinganna með því að endurræsa tækið einu sinni. Í þessum stillingum er slökkt á tilteknum eiginleikum og því munu einhver forrit ekki virka. Til að kveikja á framleiðslustillingu tækisins á ný þarftu að núllstilla tækið með því að skipta aftur yfir í 4 kB-stillingu og læsa ræsiforritinu. Slökktu síðan á „Taka ræsiforrit úr lás“ í forritunarkostunum þegar tækið hefur ræst Android. Að lokinni staðfestingu verður tækið straujað og skráarkerfinu breytt í ext4. Að því loknu skaltu koma hingað aftur til að virkja 16 kB á ný."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Eyða öllum gögnum"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Ekki tókst að endursníða og strauja gagnaskiptinguna til að breyta henni í ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"16 kB-stilling krefst þess að ræsiforritið sé tekið úr lás"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Þú þarft að taka ræsiforrit tækisins úr lás áður en þú getur valið 16 kB-forritunarkostinn. Ekki er hægt að tryggja heilleika hugbúnaðarins í þessari stillingu og öll gögn símans kunna að vera í hættu á meðan ræsiforritið er ólæst. Öll notandagögn og stillingar verða straujaðar þegar 16 kB-stillingin er virkjuð. Þegar ræsiforritið hefur verið tekið úr lás mun virkjun 16 kB-stillingarinnar krefjast þess að tækið sé endurræst tvisvar sinnum. Þegar þú hefur virkjað þessa stillingu geturðu skipt á milli 4 kB- og 16 kB-stillinganna með því að endurræsa tækið einu sinni. Í þessum stillingum er slökkt á tilteknum eiginleikum og því munu einhver forrit ekki virka. Til að kveikja á framleiðslustillingu tækisins á ný þarftu að núllstilla tækið með því að skipta aftur yfir í 4 kB-stillingu og læsa ræsiforritinu. Taktu ræsiforritið úr lás og reyndu aftur. Leiðbeiningar um hvernig þetta er framkvæmt má finna á &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Notar 4 kB-stillingu óháðrar síðustillingar"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Þú ert að nota 4 kB-stillingu óháðrar síðustillingar. Ekki er hægt að tryggja heilleika hugbúnaðarins í þessari stillingu og öll gögn símans kunna að vera í hættu á meðan ræsiforritið er ólæst. Í þessum stillingum er slökkt á tilteknum eiginleikum og því munu einhver forrit ekki virka. Til að kveikja á framleiðslustillingu tækisins á ný þarfðu að læsa ræsiforriti tækisins. Ýttu til að lesa meira."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Þú ert að nota 4 kB-stillingu óháðrar síðustillingar. Ekki er hægt að tryggja heilleika hugbúnaðarins í þessari stillingu og öll gögn símans kunna að vera í hættu á meðan ræsiforritið er ólæst. Í þessum stillingum er slökkt á tilteknum eiginleikum og því munu einhver forrit ekki virka. Til að kveikja á framleiðslustillingu tækisins á ný þarfðu að læsa ræsiforriti tækisins. Við þetta mun tækið núllstillast og kveikja á framleiðslustillingu á ný. Slökktu síðan á „Taka ræsiforrit úr lás“ í forritunarkostunum þegar tækið hefur ræst Android. Ef tækið er óstöðugt eða því tekst ekki að ræsa Android skaltu uppfæra tækið aftur með nýjustu útgáfu núllstillingarmynda af &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; eða fara á &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; og velja „Strauja tæki“, „Læsa ræsiforriti“ og „Þvinga uppfærslu allra deilda“."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Notar 16 kB-stillingu óháðrar síðustillingar"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Þú ert að nota 16 kB-stillingu óháðrar síðustillingar. Ekki er hægt að tryggja heilleika hugbúnaðarins í þessari stillingu og öll gögn símans kunna að vera í hættu á meðan ræsiforritið er ólæst. Í þessum stillingum er slökkt á tilteknum eiginleikum og því munu einhver forrit ekki virka. Til að kveikja á framleiðslustillingu tækisins á ný þarftu að skipta aftur yfir í 4 kB-stillingu og læsa ræsiforriti tækisins. Ýttu til að lesa meira."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Þú ert að nota 16 kB-stillingu óháðrar síðustillingar. Ekki er hægt að tryggja heilleika hugbúnaðarins í þessari stillingu og öll gögn símans kunna að vera í hættu á meðan ræsiforritið er ólæst. Í þessum stillingum er slökkt á tilteknum eiginleikum og því munu einhver forrit ekki virka. Til að kveikja á framleiðslustillingu tækisins á ný þarftu að skipta aftur yfir í 4 kB-stillingu og læsa ræsiforriti tækisins. Við þetta mun tækið núllstillast og kveikja á framleiðslustillingu á ný. Slökktu síðan á „Taka ræsiforrit úr lás“ í forritunarkostunum þegar tækið hefur ræst Android. Ef tækið er óstöðugt eða því tekst ekki að ræsa Android skaltu uppfæra tækið aftur með nýjustu útgáfu núllstillingarmynda af &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; eða fara á &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; og velja „Strauja tæki“, „Læsa ræsiforriti“ og „Þvinga uppfærslu allra deilda“."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 kB-stilling óháðrar síðustillingar"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Lesa meira"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Meðhöndlun villutilkynningar"</string>
@@ -5007,7 +5073,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Nota forritsfestingu"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Nota forritunarkosti"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Nota prentþjónustu"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Leyfa marga notendur"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"leyfa, margir, notandi, leyfi, margir"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"margir, notendur, prófílar, fólk, reikningar, skipta, margt"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Nota þráðlausa villuleit"</string>
@@ -5351,4 +5418,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Hlusta á streymi"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skannaðu QR-kóða hljóðstreymis til að hlusta með <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Ekki hægt að breyta aðgangsorði á meðan deilt er. Til að breyta aðgangsorðinu skaltu fyrst slökkva á hljóðdeilingu."</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

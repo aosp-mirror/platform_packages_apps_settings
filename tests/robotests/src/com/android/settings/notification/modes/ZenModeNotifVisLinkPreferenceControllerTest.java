@@ -16,19 +16,14 @@
 
 package com.android.settings.notification.modes;
 
-import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.service.notification.ZenPolicy;
 
 import androidx.preference.Preference;
 
@@ -50,7 +45,6 @@ public final class ZenModeNotifVisLinkPreferenceControllerTest {
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
-    @Mock private ZenModesBackend mBackend;
     @Mock private ZenHelperBackend mHelperBackend;
 
     @Before
@@ -60,20 +54,14 @@ public final class ZenModeNotifVisLinkPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
 
         mController = new ZenModeNotifVisLinkPreferenceController(
-                mContext, "something", mBackend, mHelperBackend);
+                mContext, "something", mHelperBackend);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_MODES_UI)
     public void testHasSummary() {
         Preference pref = mock(Preference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                .setType(AutomaticZenRule.TYPE_DRIVING)
-                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                .setZenPolicy(new ZenPolicy.Builder().allowAllSounds().build())
-                .build(), true);
-        mController.updateZenMode(pref, zenMode);
+        mController.updateZenMode(pref, TestModeBuilder.EXAMPLE);
         verify(pref).setSummary(any());
     }
 }

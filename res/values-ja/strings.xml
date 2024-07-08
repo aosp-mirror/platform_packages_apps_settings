@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"補聴器の設定"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"ショートカット、補聴器両立性"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"プリセット"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"言語聴覚士によってプログラムされたプリセットはありません"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"プリセットを更新できませんでした"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音声出力"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"音声出力について"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"ウォッチ認証の詳細"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"スマートウォッチを追加"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"スマートウォッチを削除"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"指紋認証と顔認証"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"顔認証と指紋認証"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"仕事用の顔認証と指紋認証"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"セットアップが必要です"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"顔と指紋を登録しました"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"アプリをインストールする"</b>\n"スペース内で非公開にするアプリをインストールします"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"注意事項"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"スペースをロックするとアプリが停止する"</b>\n"スペースをロックするとアプリが停止して、アプリからの通知が届かなくなります"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"プライベート スペースは、バックグラウンドでの実行や重要な通知の送信が必要なアプリ（医療アプリなど）には適していません。その理由は、スペースがロックされている場合、通知とバックグラウンド アクティビティが停止するためです。\n\nプライベート スペースがロックされている場合、プライベート スペース内のアプリは権限マネージャ、プライバシー ダッシュボード、その他の設定に表示されません。\n\nプライベート スペースを新しいデバイスに移動することはできません。別のデバイスで使用したい場合は、別のプライベート スペースを設定する必要があります。\n\n誰かがあなたのデバイスをパソコンに接続したり、あなたのデバイスに有害なアプリをインストールしたりすると、そのユーザーもあなたのプライベート スペースにアクセスできる可能性があります。"</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"プライベート スペースは、バックグラウンドでの実行や重要な通知の送信が必要なアプリ（医療アプリなど）には適していません。その理由は、スペースがロックされている場合、通知とバックグラウンド アクティビティが停止するためです。\n\nプライベート スペースがロックされている場合、プライベート スペース内のアプリは権限マネージャ、プライバシー ダッシュボード、その他の設定に表示されません。\n\nプライベート スペースを新しいデバイスに復元することはできません。別のデバイスで使用したい場合は、別のスペースを設定する必要があります。\n\n誰かがあなたのデバイスをパソコンに接続したり、あなたのデバイスに悪意のあるアプリをインストールしたりすると、そのユーザーもあなたのプライベート スペースにアクセスできる可能性があります。"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"プライベート スペースの詳細"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"しばらくお待ちください"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"プライベート スペースを設定しています…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"デバイスを再起動しますか？"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"NFC 詳細ログは開発専用に設計されています。バグレポートには、追加の NFC データが含まれます。これには、非公開の情報が含まれることがあります。この設定を変更するには、デバイスを再起動してください。"</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"再起動"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"キャスト"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ミラー"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ワイヤレス ディスプレイの有効化"</string>
@@ -1192,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"自動調整"</string>
     <string name="brightness" msgid="6216871641021779698">"明るさのレベル"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"明るさの自動調節"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"明るさの自動調節について"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"環境やアクティビティに応じて画面の明るさが自動的に調整されます。スライダーを手動で動かして、明るさの自動調節機能に設定を学習させることもできます。"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"ON"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"OFF"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"ユーザーによる選択: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"読み上げ"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"ポインタの速度"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"ゲーム用コントローラ"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"リダイレクトのバイブレーション"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"接続時にバイブレーションをゲーム用コントローラに送信"</string>
@@ -2094,7 +2130,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"無視して続行"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"キャンセル"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"画面の拡大設定"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"指 1 本でのパン操作"</string>
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"1 本の指で拡大鏡を移動"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"1 本の指でドラッグして画面上を移動"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"1 本の指でドラッグして拡大領域を移動します。"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"2 本の指でドラッグして拡大領域を移動します。"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"画面の一部のみを拡大している間は利用できません"</string>
@@ -2118,6 +2155,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"ボタンをタップしてズームします"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"画面をすばやくズームインして、コンテンツを拡大できます"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;ズームインするには:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ショートカットを使って拡大を開始します&lt;br/&gt; {1,number,integer}. 画面をタップします&lt;br/&gt; {2,number,integer}. 2 本の指でドラッグして画面上を移動します&lt;br/&gt; {3,number,integer}. 2 本の指でピンチ操作してズームを調整します&lt;br/&gt; {4,number,integer}. ショートカットを使って拡大を停止します&lt;br/&gt;&lt;br/&gt; &lt;b&gt;一時的にズームインするには:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 拡大の種類が全画面に設定されていることを確認します&lt;br/&gt; {1,number,integer}. ショートカットを使って拡大を開始します&lt;br/&gt; {2,number,integer}. 画面を長押しします&lt;br/&gt; {3,number,integer}. 指をドラッグして画面上を移動します&lt;br/&gt; {4,number,integer}. 指を離して拡大を停止します"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;ズームインするには:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ショートカットを使って拡大を開始します&lt;br/&gt; {1,number,integer}. 画面をタップします&lt;br/&gt; {2,number,integer}. 2 本の指でドラッグして画面上を移動します&lt;br/&gt; {3,number,integer}. 2 本の指でピンチ操作してズームを調整します&lt;br/&gt; {4,number,integer}. ショートカットを使って拡大を停止します&lt;br/&gt;&lt;br/&gt; 一時的にズームインするなどの操作もできます。"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;ズームインするには:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ショートカットを使って拡大を開始します&lt;br/&gt; {1,number,integer}. 画面をタップします&lt;br/&gt; {2,number,integer}. 1 本または 2 本の指でドラッグして画面上を移動します&lt;br/&gt; {3,number,integer}. 2 本の指でピンチ操作してズームを調整します&lt;br/&gt; {4,number,integer}. ショートカットを使って拡大を停止します&lt;br/&gt;&lt;br/&gt; 一時的にズームインするなどの操作もできます。"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"[拡大] を ON にすると、画面で拡大操作を行えます。\n\n"<b>"ズーム"</b>"するには、[拡大] を ON にして画面をタップします。\n"<ul><li>"2 本以上の指をドラッグしてスクロール"</li>\n<li>"2 本以上の指でピンチ操作して拡大率を調節"</li></ul>\n\n<b>"一時的にズーム"</b>"するには、[拡大] を ON にして画面を長押しします。\n"<ul><li>"ドラッグで画面上を移動"</li>\n<li>"指を放してズームアウト"</li></ul>\n\n"キーボードやナビゲーション バーでは拡大操作は行えません。"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g> ページ目"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"ユーザー補助機能ボタンのショートカット"</string>
@@ -2706,7 +2745,7 @@
     <string name="cellular_security_settings_title" msgid="7779141923670352595">"モバイル ネットワーク セキュリティ"</string>
     <string name="cellular_security_notifications" msgid="4619728340612184944">"通知"</string>
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"ネットワークに関する通知"</string>
-    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"デバイスが暗号化されていないネットワークに接続された場合や、ネットワークで一意のデバイス ID や SIM ID が記録された場合に、お知らせします"</string>
+    <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"デバイスが暗号化されていないネットワークに接続された場合や、一意のデバイス ID や SIM ID がネットワークで記録された場合に、お知らせします"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"暗号化"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"ネットワークの世代"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"挿入した SIM カードごとに、3G、4G、5G 対応のネットワークにのみ接続するように設定できます。旧式の安全でない 2G ネットワークには接続できなくなります。この設定により、2G ネットワークしか利用できない場合に接続が制限されることがあります。緊急の場合は 2G が使用されることがあります。"</string>
@@ -3326,12 +3365,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"大切な人やアプリからの通知のみ受け取ります"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"有効化の種類を選択する"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"時刻"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"例: 「9 時 30 分～午後 5 時」"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"カレンダー"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"例: 「個人用のカレンダー」"</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"割り込みを制限する"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"サイレント モードを ON にする"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"アラームとメディア サウンドが割り込み可能"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"スケジュール"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"スケジュールを削除"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"削除"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"編集"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"スケジュール"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"スケジュール"</string>
@@ -3339,11 +3393,10 @@
     <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"カレンダーの追加"</string>
     <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"カレンダーを使用する"</string>
     <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"スケジュール"</string>
-    <!-- no translation found for zen_mode_set_schedule_title (8023100831320026233) -->
-    <skip />
-    <!-- no translation found for zen_mode_set_schedule_link (2534032127923435737) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_duration (299332195675875111) -->
+    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"スケジュールを設定してください"</string>
+    <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"スケジュールを設定"</string>
+    <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> 時間 <xliff:g id="MINUTES">%2$d</xliff:g> 分"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
     <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"スケジュール"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"一時的にスマートフォンを消音"</string>
@@ -3354,7 +3407,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"音が出る割り込みの許可"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"視覚的な通知のブロック"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"視覚的な割り込みを許可"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"確認できる通知"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"集中しましょう"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"その他の操作"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"表示の設定"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"表示オプション"</string>
@@ -3371,6 +3424,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ダークモードを有効にする"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"暗い背景に明るいテキストを表示するよう OS やアプリを切り替えると、見やすくなることがあり、デバイスによってはバッテリーの大幅な節約につながります"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{表示の変更なし}=1{{effect_1}}=2{{effect_1}、{effect_2}}=3{{effect_1}、{effect_2}、{effect_3}}other{{effect_1}、{effect_2}、他 # 件}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"割り込みをフィルタする"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"フィルタしている割り込みはありません"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"フィルタした通知の表示オプション"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"サイレント モードが ON のとき"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"通知音なし"</string>
@@ -3619,8 +3674,7 @@
     <skip />
     <!-- no translation found for notification_polite_main_control_title (7267191551379543859) -->
     <skip />
-    <!-- no translation found for notification_polite_description (7749280535620291610) -->
-    <skip />
+    <string name="notification_polite_description" msgid="7749280535620291610">"短時間に多くの通知が届いた場合に、通知と音の頻度を最小限に抑えます。通話、アラーム、優先度の高い会話については、通常どおり通知が届きます。受け取った通知はすべて、画面を上から下にスワイプして簡単に確認できます。"</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"仕事用プロファイルに適用する"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"仕事用プロファイルのアプリに適用する"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR ヘルパー サービス"</string>
@@ -3667,6 +3721,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"カテゴリ"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"その他"</string>
     <string name="no_channels" msgid="4716199078612071915">"このアプリの通知はありません"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"使用していないカテゴリを表示"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"アプリ内のその他の設定"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"使用していないカテゴリを表示"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"使用していないカテゴリを非表示"</string>
@@ -3814,12 +3869,9 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{{time}まで1時間、アラームのみに変更します}other{{time}まで#時間、アラームのみに変更します}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>までアラームのみに変更します"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"常に割り込みに変更します"</string>
-    <!-- no translation found for zen_mode_action_change_name (766639614789907016) -->
-    <skip />
-    <!-- no translation found for zen_mode_action_change_icon (6192187791750301778) -->
-    <skip />
-    <!-- no translation found for zen_mode_icon_picker_title (6845490379143557472) -->
-    <skip />
+    <string name="zen_mode_action_change_name" msgid="766639614789907016">"名前を変更"</string>
+    <string name="zen_mode_action_change_icon" msgid="6192187791750301778">"アイコンを変更"</string>
+    <string name="zen_mode_icon_picker_title" msgid="6845490379143557472">"アイコンの変更"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"警告"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"閉じる"</string>
     <string name="device_feedback" msgid="5351614458411688608">"このデバイスについてフィードバックを送信"</string>
@@ -4874,14 +4926,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16 KB デベロッパー オプションを使用するには、このデバイスのデータ パーティションを ext4 に変換する必要があります。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。16 KB オプションを有効にするには、この操作の後でもう 1 回再起動が必要です。このモードになったら、4 KB モードと 16 KB モードの間で切り替えることができます（切り替えのたびに 1 回再起動します）。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。デバイスを本番環境モードに戻すには、4 KB モードに戻してからブートローダーをロックする必要があります。この操作でデバイスは出荷時の設定にリセットされます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。デバイスがワイプされて、確認後にファイルシステムが ext4 に変更されます。完了したら、戻って 16 KB を再度有効にしてください。"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"すべてのデータを消去"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"データ パーティションを ext4 に再フォーマットしてワイプすることができませんでした。"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"16KB モードを使用するにはブートローダーのロック解除が必要です"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"このデバイスで 16KB デベロッパー オプションを使用するには、ブートローダーのロックを解除しておく必要があります。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。16KB モードの有効化中にユーザーデータと設定はすべてワイプされます。ブートローダーのロックが解除されたら、16KB オプションを有効にするために再起動が 2 回必要です。このモードになったら、4KB モードと 16KB モードの間で切り替えることができます（切り替えのたびに 1 回再起動します）。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。デバイスを本番環境モードに戻すには、4KB モードに戻してから、OEM / ブートローダーをロックする必要があります。この操作で、デバイスは出荷時の設定にリセットされます。ブートローダーのロックを解除してから、もう一度お試しください。この手順については、&lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; をご覧ください。"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4 KB のページ非依存モードを使用中"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"4KB のページ非依存モードです。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。再び本番環境モードにするには、デバイスのブートローダーをロックする必要があります。タップすると詳細が表示されます。"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"4 KB のページ非依存モードです。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。再び本番環境モードにするには、デバイスのブートローダーをロックする必要があります。この操作で、デバイスは再び出荷時の設定にリセットされ、製品版の設定に復元されます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。デバイスが Android で起動しなかった場合や不安定な場合は、&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; の最新のファクトリー イメージでデバイスの再書き込みを行うか、&lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; を使用し、[Wipe Device]、[Lock Bootloader]、[Force Flash all partitions] を選択してください。"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16 KB のページ非依存モードを使用中"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"16 KB のページ非依存モードです。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。再び本番環境モードにするには、4 KB モードに戻してからデバイスのブートローダーをロックする必要があります。タップすると詳細が表示されます。"</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"16KB のページ非依存モードです。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。再び本番環境モードにするには、4KB モードに戻してから、デバイスのブートローダーをロックする必要があります。この操作で、デバイスは再び出荷時の設定にリセットされ、製品版の設定に復元されます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。デバイスが Android で起動しなかった場合や不安定な場合は、&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; の最新のファクトリー イメージでデバイスの再書き込みを行うか、&lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; を使用し、[Wipe Device]、[Lock Bootloader]、[Force Flash all partitions] を選択してください。"</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB のページ非依存モード"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"詳細"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"バグレポート ハンドラ"</string>
@@ -5013,7 +5068,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"アプリ固定機能を使用"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"開発者向けオプションを使用"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"印刷サービスを使用"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"複数のユーザーを許可する"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"許可, 複数, ユーザー, 認可, 大勢"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"複数、ユーザー、プロフィール、複数のユーザー、アカウント、切り替え、多数"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ワイヤレス デバッグの使用"</string>
@@ -5357,4 +5413,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ストリームを聴く"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>で聴くには、音声ストリームの QR コードをスキャンします"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"共有中はパスワードを編集できません。パスワードを変更するには、まず音声の共有を OFF にしてください。"</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

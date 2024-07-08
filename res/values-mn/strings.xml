@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Сонсголын төхөөрөмжийн тохиргоо"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Товчлол, сонсголын төхөөрөмжийн зохицол"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Урьдчилсан тохируулга"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Сонсгол судлаачийн программчилсан урьдчилсан тохируулга алга"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Урьдчилсан тохируулгыг шинэчилж чадсангүй"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудио гаралт"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Аудио оролтын тухай"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Утасны түгжээг цагаараа тайлах онцлогийн талаар нэмэлт мэдээлэл авах"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Цаг нэмэх"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Цагийг хасах"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Хурууны хээ болон Царайгаар түгжээ тайлах"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Царай, хурууны хээгээр түгжээ тайлах"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ажилд зориулсан Царай, хурууны хээгээр түгжээ тайлах"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Тохируулга шаардлагатай"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Царай болон хурууны хээнүүд нэмсэн"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Аппуудыг суулгах"</b>\n"Та орон зайдаа хувийн байлгахыг хүсэж буй аппуудаа суулгана уу"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Санамж"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Таныг орон зайгаа түгжихэд аппууд зогсдог"</b>\n"Таныг орон зайгаа түгжихэд таны орон зай дахь аппууд зогсох бөгөөд та тухайн аппуудаас мэдэгдэл хүлээн авахгүй"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Хаалттай орон зай нь эрүүл мэндийн апп зэрэг ард ажиллах эсвэл чухал мэдэгдэл илгээх шаардлагатай аппуудад тохиромжгүй. Энэ нь таны орон зайг түгжээтэй үед мэдэгдэл болон арын үйл ажиллагаа зогсдогтой холбоотой юм.\n\nТаны хаалттай орон зай түгжээтэй үед таны хаалттай орон зай дахь аппууд зөвшөөрлийн менежер, нууцлалын хяналтын самбар болон бусад тохиргоонд гарч ирэхгүй.\n\nТаны хаалттай орон зайг шинэ төхөөрөмж рүү зөөх боломжгүй. Хэрэв та үүнийг өөр төхөөрөмжид ашиглахыг хүсвэл өөр хаалттай орон зай тохируулах шаардлагатай болно.\n\nТаны төхөөрөмжийг компьютерт холбох эсвэл таны төхөөрөмжид хортой апп суулгах аливаа хүн таны хаалттай орон зайд хандах боломжтой байж магадгүй."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Хаалттай орон зай нь эрүүл мэндийн апп зэрэг ард ажиллах эсвэл чухал мэдэгдэл илгээх шаардлагатай аппуудад тохиромжгүй. Энэ нь таны орон зай түгжээтэй үед мэдэгдэл болон арын үйл ажиллагаа зогсдогтой холбоотой юм.\n\nХаалттай орон зай түгжээтэй үед таны хаалттай орон зай дахь аппууд зөвшөөрлийн менежер, нууцлалын хяналтын самбар болон бусад тохиргоонд гарч ирэхгүй.\n\nТаны хаалттай орон зайг шинэ төхөөрөмж рүү сэргээх боломжгүй. Хэрэв та үүнийг өөр төхөөрөмжид ашиглахыг хүсвэл өөр орон зай тохируулах шаардлагатай болно.\n\nТаны төхөөрөмжийг компьютерт холбох эсвэл таны төхөөрөмжид хортой апп суулгах аливаа хүн таны хаалттай орон зайд хандах боломжтой байж магадгүй."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Хаалттай орон зайн нэмэлт мэдээлэл авах"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Үүнд хэдэн хором зарцуулна"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Хаалттай орон зайг тохируулж байна…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Төхөөрөмжийг дахин эхлүүлэх үү?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Нарийвчилсан NFC лог нь зөвхөн хөгжүүлэлтийн зориулалттай. Нэмэлт NFC өгөгдлийг алдааны мэдээнд багтаасан бөгөөд энэ нь хувийн мэдээлэл агуулж байж магадгүй. Энэ тохиргоог өөрчлөхийн тулд төхөөрөмжөө дахин эхлүүлнэ үү."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Дахин эхлүүлэх"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Дамжуулах"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"тусгал"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Утасгүй дэлгэцийг идэвхжүүлэх"</string>
@@ -1192,7 +1221,8 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Дасан зохицох"</string>
     <string name="brightness" msgid="6216871641021779698">"Гэрэлтүүлгийн түвшин"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Орчинтой зохицох гэрэлтүүлэг"</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"Дэлгэцийн гэрэлтүүлэг таны хүрээлэн буй орчин болон үйл ажиллагаанд автоматаар тохирно. Орчинтой зохицох гэрэлтүүлгийн таны тохиргоог мэдэхэд нь туслахын тулд гулсуулагчийг гараараа зөөх боломжтой."</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Орчинтой зохицох гэрэлтүүлгийн тухай"</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"Дэлгэцийн гэрэлтүүлэг таны хүрээлэн буй орчин болон үйл ажиллагаанд автоматаар тохирно. Орчинтой зохицох гэрэлтүүлэгт таны тохиргоог мэдэхэд нь туслахын тулд гулсуулагчийг гараараа хөдөлгөх боломжтой."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Асаасан"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Идэвхгүй"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Дэлгэцийн цайралтын тэнцвэр"</string>
@@ -1260,7 +1290,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Унтлагын цагийн горимын тохиргоо"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Илүү бүдэг"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Төхөөрөмжид ердийнхөөс илүү бүдэг болохыг нь зөвшөөрөх"</string>
-    <string name="screen_timeout" msgid="7709947617767439410">"Дэлгэцийн завсарлага"</string>
+    <string name="screen_timeout" msgid="7709947617767439410">"Дэлгэц автоматаар амрах"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Идэвхгүй <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> болсны дараа"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Тохируулаагүй"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Дэлгэцийн зураг"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Хэрэглэгчийн сонгосон: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Яриа"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Заагчийн хурд"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Тоглоом Контроллер"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Чичиргээг дахин чиглүүлэх"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Холбогдсон үедээ тоглоомын хянагчид чичиргээ илгээнэ үү"</string>
@@ -2094,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Ямартай ч үргэлжлүүлэх"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Цуцлах"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Томруулах тохиргоо"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Нэг хуруугаар чиглүүлэх"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Нэг хуруугаар чирч, томруулах хэсгийг зөөнө үү."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Хоёр хуруугаар чирч, томруулах хэсгийг зөөнө үү."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Дэлгэцийн зөвхөн нэг хэсгийг томруулж байхад боломжгүй"</string>
@@ -2118,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Томруулахын тулд товчлуурыг товшино уу"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Контентыг илүү том болгохын тулд дэлгэц дээр шуурхай томруулна уу"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Томруулахын тулд:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Томруулах онцлогийг эхлүүлэхийн тулд товчлол ашиглана уу&lt;br/&gt; {1,number,integer}. Дэлгэцийг товшино уу&lt;br/&gt; {2,number,integer}. Дэлгэцийн эргэн тойронд шилжихийн тулд 2 хуруугаа чирнэ үү&lt;br/&gt; {3,number,integer}. Томруулалтыг тохируулахын тулд 2 хуруугаараа чимхэнэ үү&lt;br/&gt; {4,number,integer}. Томруулах онцлогийг зогсоохын тулд товчлол ашиглана уу&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Түр хугацаанд томруулахын тулд:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Таны томруулах төрлийг бүтэн дэлгэц болгож тохируулсан эсэхийг шалгана уу&lt;br/&gt; {1,number,integer}. Томруулах онцлогийг эхлүүлэхийн тулд товчлол ашиглана уу&lt;br/&gt; {2,number,integer}. Дэлгэцийн аль нэг хэсгийг удаан дарна уу&lt;br/&gt; {3,number,integer}. Дэлгэцийн эргэн тойронд шилжихийн тулд хуруугаа чирнэ үү&lt;br/&gt; {4,number,integer}. Томруулах онцлогийг зогсоохын тулд хуруугаа хөндийрүүлнэ үү"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Томруулах сонголт асаалттай үед та дэлгэцээ томруулж болно.\n\n"<b>"Томруулахын тулд "</b>" томруулах сонголтыг эхлүүлж, дэлгэцийн аль нэг хэсгийг товшино уу.\n"<ul><li>"Гүйлгэхийн тулд 2 эсвэл түүнээс дээш хуруугаараа чирнэ үү"</li>\n<li>"Томруулах хэмжээг тохируулахын тулд 2 эсвэл түүнээс дээш хуруугаараа чимхэнэ үү"</li></ul>\n\n<b>"Түр хугацаанд томруулахын тулд "</b>" томруулах сонголтыг эхлүүлээд, дэлгэцийн аль нэг хэсэг дээр удаан дарна уу.\n"<ul><li>"Дэлгэцийн эргэн тойронд очихын тулд чирнэ үү"</li>\n<li>"Жижигрүүлэхийн тулд хуруугаа авна уу"</li></ul>\n\n"Та гар эсвэл навигацын самбарт томруулах боломжгүй."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g>-н <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>-р хуудас"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Хандалтын товчлуурын товчлол"</string>
@@ -3326,12 +3369,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Зөвхөн чухал хүмүүс болон аппуудаас мэдэгдэл авах"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Идэвхжүүлэлтийн төрлийг сонгох"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Хугацаа"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Ж.нь \"9:30 – 17:00\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Календарь"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Ж.нь \"Хувийн календарь\""</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Саад болох зүйлсийг хязгаарлах"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Бүү саад бол горимыг асаах"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Сэрүүлэг болон медиагийн ая нь тасалдуулах боломжтой"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Хуваарь"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Хуваарийг устгах"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Устгах"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Засах"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Хуваарь"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Хуваарь"</string>
@@ -3342,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Хуваарь тохируулах"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Хуваарь"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> цаг, <xliff:g id="MINUTES">%2$d</xliff:g> мин"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Хуваарь"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Утасны дууг тодорхой цагт хаах"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Бүү саад бол горимын дүрмийг тохируулах"</string>
@@ -3351,7 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Дуу гаргадаг саад болох зүйлсийг зөвшөөрөх"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Харааны саадыг блоклох"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Харагдаж буй дохиог зөвшөөрөх"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Танд хүрэх боломжтой мэдэгдэл"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Төвлөрсөөр байгаарай"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Нэмэлт үйлдлүүд"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Дэлгэцийн тохиргоо"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Дэлгэцийн сонголтууд"</string>
@@ -3368,6 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"бараан загварыг идэвхжүүлэх"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"OS, аппуудыг бараан дэвсгэр дээрх цайвар текстийг илүүд үзэх болгож сэлгэнэ үү. Энэ нь нүдэнд амар байж болох бөгөөд зарим төхөөрөмж дээр батарей ихээр хэмнэдэг"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Дэлгэцийн ямар ч өөрчлөлт байхгүй}=1{{effect_1}}=2{{effect_1}, {effect_2}}=3{{effect_1}, {effect_2}, {effect_3}}other{{effect_1}, {effect_2}, өөр #}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Тасалдлуудыг шүүх"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Ямар ч тасалдлыг шүүгээгүй"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Шүүсэн мэдэгдэлд зориулсан дэлгэцийн сонголтууд"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Бүү саад бол горим асаалттай үед"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Мэдэгдлийн дууг хаах"</string>
@@ -3664,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Ангилал"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Бусад"</string>
     <string name="no_channels" msgid="4716199078612071915">"Энэ апп ямар ч мэдэгдэл нийтлээгүй"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Ашиглаагүй ангиллуудыг харуулах"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Аппын нэмэлт тохиргоо"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Ашиглаагүй ангиллуудыг харуулах"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Ашиглаагүй ангиллуудыг нуух"</string>
@@ -4868,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16 КБ-ын хөгжүүлэгчийн тохиргоог ашиглаж эхлэхийн өмнө энэ төхөөрөмжийн өгөгдлийн хуваалтыг ext4 рүү хөрвүүлэх шаардлагатай. Энэ горимд программ хангамжийн халдашгүй байдалд баталгаа өгөх боломжгүй бөгөөд эхэлж ачаалагчийн түгжээг тайлсан байхад утсан дээр хадгалсан аливаа өгөгдөл эрсдэлд орж магадгүй. 16 КБ-ын тохиргоог идэвхжүүлэхэд үүний дараа ахин нэг удаа дахин асаах шаардлагатай болно. Та энэ горимд орсны дараа нэг удаа дахин асааснаар 4 КБ, 16 КБ-ын хооронд нааш, цааш сэлгэх боломжтой. Зарим онцлогийг эдгээр горимд идэвхгүй болгох тул зарим аппликэйшн ажиллахгүй байж магадгүй. Төхөөрөмжийг үйлдвэрлэлийн горим руу буцаахын тулд та 4 КБ горим руу буцаж сэлгэж, дараа нь эхэлж ачаалагчийг түгжих шаардлагатай бөгөөд энэ нь төхөөрөмжийг үйлдвэрийн тохиргоонд шинэчилнэ. Тухайн төхөөрөмжийг Android руу амжилттай ачаалсны дараа Хөгжүүлэгчийн тохиргоонд OEM түгжээг тайлахыг идэвхгүй болгоно уу. Баталгаажуулсны дараа тухайн төхөөрөмжийг арчих бөгөөд файлын системийг ext4 болгож өөрчилнө. Үүнийг дууссаны дараа 16 КБ-ыг дахин идэвхжүүлэхийн тулд буцаж ирнэ үү."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Бүх өгөгдлийг устгах"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Өгөгдлийн хуваалтыг ext4 болгож дахин форматалж, арчиж чадсангүй."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"16 КБ-ын горимд эхэлж ачаалагчийн түгжээг тайлахыг шаарддаг"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"16 КБ-ын хөгжүүлэгчийн тохиргоог ашиглахын өмнө энэ төхөөрөмжид эхэлж ачаалагчийн түгжээг тайлсан байх шаардлагатай. Энэ горимд программ хангамжийн халдашгүй байдалд баталгаа өгөх боломжгүй бөгөөд эхэлж ачаалагчийн түгжээг тайлсан байхад утсан дээр хадгалсан аливаа өгөгдөл эрсдэлд орж магадгүй. 16 КБ-ын горимыг идэвхжүүлэх үед хэрэглэгчийн бүх өгөгдөл, тохиргоог арчина. Эхэлж ачаалагчийн түгжээг тайлсны дараа 16 КБ-ын тохиргоог идэвхжүүлэхэд хоёр удаа дахин асаахыг шаардана. Та энэ горимд орсны дараа нэг удаа дахин асааснаар 4 КБ, 16 КБ-ын хооронд нааш, цааш сэлгэх боломжтой. Зарим онцлогийг эдгээр горимд идэвхгүй болгох тул зарим аппликэйшн ажиллахгүй байж магадгүй. Төхөөрөмжийг үйлдвэрлэлийн горим руу буцаахын тулд та 4 КБ горим руу буцаж сэлгэж, дараа нь төхөөрөмжийн OEM/эхэлж ачаалагчийг түгжинэ (энэ нь төхөөрөмжийг үйлдвэрийн тохиргоонд шинэчилнэ). Эхэлж ачаалагчийн түгжээг тайлаад, дахин оролдоно уу. Та үүнийг хэрхэн хийх зааварчилгааг &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; дээрээс харах боломжтой"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4 КБ дурын хэмжээтэй хуудасны (page-agnostic) горимыг ашиглаж байна"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Та хуудасны хэмжээгээ сэлгэж болох (page-agnostic) горимын 4 КБ горимд байна. Энэ горимд программ хангамжийн халдашгүй байдалд баталгаа өгөх боломжгүй бөгөөд эхэлж ачаалагчийн түгжээг тайлсан байхад утсан дээр хадгалсан аливаа өгөгдөл эрсдэлд орж магадгүй. Зарим онцлогийг эдгээр горимд идэвхгүй болгох тул зарим аппликэйшн ажиллахгүй байж магадгүй. Үйлдвэрлэлийн горимд дахин орохын тулд та төхөөрөмжийн эхэлж ачаалагчийг түгжих ёстой. Илүү ихийг уншихын тулд товшино уу."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Та хуудасны хэмжээгээ сэлгэж болох (page-agnostic) горимын 4 КБ горимд байна. Энэ горимд программ хангамжийн халдашгүй байдалд баталгаа өгөх боломжгүй бөгөөд эхэлж ачаалагчийн түгжээг тайлсан байхад утсан дээр хадгалсан аливаа өгөгдөл эрсдэлд орж магадгүй. Зарим онцлогийг эдгээр горимд идэвхгүй болгох тул зарим аппликэйшн ажиллахгүй байж магадгүй. Үйлдвэрлэлийн горимд дахин орохын тулд та төхөөрөмжийн эхэлж ачаалагчийг түгжих ёстой. Энэ нь төхөөрөмжийг үйлдвэрийн тохиргоонд дахин шинэчилж, үйлдвэрлэлийн тохиргоо руу сэргээнэ. Тухайн төхөөрөмжийг Android руу амжилттай ачаалсны дараа Хөгжүүлэгчийн тохиргоонд OEM түгжээг тайлахыг идэвхгүй болгоно уу. Хэрэв төхөөрөмжийг Android руу ачаалж чадаагүй эсвэл энэ нь тогтворгүй байвал &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; дээрээс төхөөрөмжийг хамгийн сүүлийн үеийн үйлдвэрийн зургаар солих эсвэл &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;-г ашиглаад, \'Төхөөрөмжийг арчих\', \'Эхэлж ачаалагчийг түгжих\' болон \'Бүх хуваалтыг хүчээр солих\'-ыг сонгоно уу."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16 КБ хуудасны хэмжээгээ сэлгэж болох (page-agnostic) горимыг ашиглаж байна"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Та хуудасны хэмжээгээ сэлгэж болох (page-agnostic) горимын 16 КБ горимд байна. Энэ горимд программ хангамжийн халдашгүй байдалд баталгаа өгөх боломжгүй бөгөөд эхэлж ачаалагчийн түгжээг тайлсан байхад утсан дээр хадгалсан аливаа өгөгдөл эрсдэлд орж магадгүй. Зарим онцлогийг эдгээр горимд идэвхгүй болгох тул зарим аппликэйшн ажиллахгүй байж магадгүй. Үйлдвэрлэлийн горимд дахин орохын тулд та 4 КБ горим руу буцаж сэлгэж, дараа нь төхөөрөмжийн эхэлж ачаалагчийг түгжих ёстой. Илүү ихийг уншихын тулд товшино уу."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Та хуудасны хэмжээгээ сэлгэж болох (page-agnostic) горимын 16 КБ горимд байна. Энэ горимд программ хангамжийн халдашгүй байдалд баталгаа өгөх боломжгүй бөгөөд эхэлж ачаалагчийн түгжээг тайлсан байхад утсан дээр хадгалсан аливаа өгөгдөл эрсдэлд орж магадгүй. Зарим онцлогийг эдгээр горимд идэвхгүй болгох тул зарим аппликэйшн ажиллахгүй байж магадгүй. Үйлдвэрлэлийн горимд дахин орохын тулд та 4 КБ горим руу буцаж сэлгэж, дараа нь төхөөрөмжийн эхэлж ачаалагчийг түгжих ёстой. Энэ нь төхөөрөмжийг үйлдвэрийн тохиргоонд дахин шинэчилж, үйлдвэрлэлийн тохиргоо руу сэргээнэ. Тухайн төхөөрөмжийг Android руу амжилттай ачаалсны дараа Хөгжүүлэгчийн тохиргоонд OEM түгжээг тайлахыг идэвхгүй болгоно уу. Хэрэв төхөөрөмжийг Android руу ачаалж чадаагүй эсвэл энэ нь тогтворгүй байвал &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; дээрээс төхөөрөмжийг хамгийн сүүлийн үеийн үйлдвэрийн зургаар солих эсвэл &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;-г ашиглаад, \'Төхөөрөмжийг арчих\', \'Эхэлж ачаалагчийг түгжих\' болон \'Бүх хуваалтыг хүчээр солих\'-ыг сонгоно уу."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 КБ дурын хэмжээтэй хуудасны (page-agnostic) горим"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Цааш унших"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Алдааны мэдээний удирдагч"</string>
@@ -5007,7 +5073,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Апп бэхлэхийг ашиглах"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Хөгжүүлэгчийн тохиргоог ашиглах"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Хэвлэгчийн үйлчилгээ ашиглах"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Олон хэрэглэгчийг зөвшөөрөх"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"зөвшөөрөх, хэд хэдэн, хэрэглэгч, зөвшөөрөл олгох, олон"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"олон, хэрэглэгч, профайл, хүмүүс, бүртгэл, сэлгүүр, хэд хэдэн"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Wireless debugging-г ашиглах"</string>
@@ -5351,4 +5418,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Дамжуулалтыг сонсох"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-р сонсохын тулд аудио дамжуулалтын QR кодыг скан хийнэ үү"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Хуваалцаж байхад нууц үгийг засах боломжгүй. Нууц үгийг өөрчлөхийн тулд эхлээд аудио хуваалцахыг унтраана уу."</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

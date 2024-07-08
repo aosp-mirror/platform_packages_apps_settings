@@ -20,11 +20,14 @@ import static com.android.settings.network.MobileNetworkListFragment.collectAirp
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -79,7 +82,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @VisibleForTesting
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
-    private static final String KEY_ROAMING_PREF = "button_roaming_key";
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
     private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
@@ -106,6 +108,15 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Nullable
     private SubscriptionInfoEntity mSubscriptionInfoEntity;
     private MobileNetworkInfoEntity mMobileNetworkInfoEntity;
+
+    private BroadcastReceiver mBrocastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED)) {
+                redrawPreferenceControllers();
+            }
+        }
+    };
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -178,8 +189,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         return Arrays.asList(
                 new DataUsageSummaryPreferenceController(context, mSubId),
-                new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
-                        this, mSubId),
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
                         getSettingsLifecycle(), this),
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
@@ -263,8 +272,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         final RoamingPreferenceController roamingPreferenceController =
                 use(RoamingPreferenceController.class);
         if (roamingPreferenceController != null) {
-            roamingPreferenceController.init(getFragmentManager(), mSubId,
-                    mMobileNetworkInfoEntity);
+            roamingPreferenceController.init(getParentFragmentManager(), mSubId);
         }
         final SatelliteSettingPreferenceController satelliteSettingPreferenceController = use(
                 SatelliteSettingPreferenceController.class);
@@ -355,6 +363,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         mMobileNetworkRepository.updateEntity();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
+        getContext().registerReceiver(mBrocastReceiver, intentFilter, Context.RECEIVER_EXPORTED);
     }
 
     private void onSubscriptionDetailChanged() {
@@ -374,6 +386,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onPause() {
         mMobileNetworkRepository.removeRegister(this);
+        getContext().unregisterReceiver(mBrocastReceiver);
         super.onPause();
     }
 

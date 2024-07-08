@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Indstillinger for høreapparat"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Genvej, høreapparatskompatibilitet"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Forindstilling"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Din audiolog har ingen forprogrammerede indstillinger"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Forindstillingen kunne ikke opdateres"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Lydudgang"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Om lydudgang"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Få flere oplysninger om uroplåsning"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Tilføj ur"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Fjern ur"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Fingeraftryk og ansigtsoplåsning"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ansigtsoplåsning og fingeroplåsning"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ansigtsoplåsning og fingeroplåsning til arbejdsprofil"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Konfiguration er påkrævet"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansigt og fingeraftryk er tilføjet"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installer apps"</b>\n"Installer apps, du vil holde private i dit område"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Husk!"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Apps afbrydes, når du låser dit område"</b>\n"Hvis du låser dit område, afbrydes apps i området, og du modtager ikke notifikationer fra dem"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Private områder er ikke egnet til apps, der skal køre i baggrunden eller sende kritiske notifikationer, f.eks. medicinske apps. Dette skyldes, at notifikationer og baggrundsaktivitet stoppes, når dit område er låst.\n\nApps i dit private område vises ikke i Tilladelsesadministrator, privatlivspanelet eller andre indstillinger, når dit private område er låst.\n\nDu kan ikke flytte dit private område til en ny enhed. Du skal konfigurere et andet privat område, hvis du vil bruge det på en anden enhed.\n\nPersoner, der forbinder din enhed til en computer eller installerer skadelige apps på enheden, kan muligvis tilgå dit private område."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Private områder er ikke egnet til apps, der skal køre i baggrunden eller sende kritiske notifikationer, f.eks. medicinske apps. Dette skyldes, at notifikationer og baggrundsaktivitet stoppes, når dit område er låst.\n\nApps i dit private område vises ikke i Tilladelsesadministrator, privatlivspanelet eller andre indstillinger, når dit private område er låst.\n\nDu kan ikke gendanne dit private område på en ny enhed. Du skal konfigurere et andet område, hvis du vil bruge det på en anden enhed.\n\nPersoner, der forbinder din enhed til en computer eller installerer skadelige apps på enheden, kan muligvis tilgå dit private område."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Få flere oplysninger om privat område"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Det tager et øjeblik"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Konfigurerer et privat område…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Vil du genstarte enheden?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detaljeret NFC-logging er kun beregnet til udvikling. Yderligere NFC-data inkluderes i fejlrapporter, som muligvis indeholder private oplysninger. Genstart enheden for at ændre denne indstilling."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Genstart"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spejl"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivér trådløs skærm"</string>
@@ -1192,7 +1221,8 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Selvjusterende"</string>
     <string name="brightness" msgid="6216871641021779698">"Lysstyrke"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Automatisk lysstyrke"</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"Skærmens lysstyrke tilpasses automatisk på baggrund af dine omgivelser og dine aktiviteter. Du kan flytte skyderen manuelt for at hjælpe Automatisk lysstyrke med at lære dine præferencer."</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Om automatisk lysstyrke"</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"Skærmens lysstyrke tilpasses automatisk på baggrund af dine omgivelser og dine aktiviteter. Du kan flytte skyderen manuelt for at hjælpe automatisk lysstyrke med at lære dine præferencer."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Til"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Fra"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Skærmens hvidbalance"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Brugervalgt: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Tale"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Markørens hastighed"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Spillekontroller"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Omdiriger vibration"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Send vibration til spillecontroller, når den er tilsluttet"</string>
@@ -2094,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Fortsæt alligevel"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Annuller"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Indstillinger for forstørrelse"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Panorering med én finger"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Flyt forstørrelsesområdet ved at trække med én finger."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Flyt forstørrelsesområdet ved at trække med to fingre."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Utilgængelig, når kun en del af skærmen forstørres"</string>
@@ -2118,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tryk på en knap for at zoome"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zoom hurtigt ind på skærmen for at forstørre indhold"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Sådan zoomer du ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {1,number,integer}. Tryk på skærmen&lt;br/&gt; {2,number,integer}. Træk med to fingre for at navigere rundt på skærmen&lt;br/&gt; {3,number,integer}. Knib med to fingre for at zoome ind eller ud&lt;br/&gt; {4,number,integer}. Brug genvejen til at stoppe forstørrelse&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Sådan zoomer du midlertidigt ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Sørg for, at forstørrelsestypen er indstillet til fuld skærm&lt;br/&gt; {1,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {2,number,integer}. Hold fingeren nede et vilkårligt sted på skærmen&lt;br/&gt; {3,number,integer}. Træk fingeren for at navigere rundt på skærmen&lt;br/&gt; {4,number,integer}. Løft fingeren for at stoppe forstørrelse"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Når forstørrelse er aktiveret, kan du zoome ind på skærmen.\n\n"<b>"Hvis du vil zoome"</b>", skal du åbne forstørrelse og derefter trykke et vilkårligt sted på skærmen.\n"<ul><li>"Træk med to eller flere fingre for at rulle"</li>\n<li>"Knib sammen med to eller flere fingre for at justere zoomniveauet"</li></ul>\n\n<b>"Hvis du vil zoome midlertidigt"</b>", skal du åbne forstørrelse og holde fingeren nede et vilkårligt sted på skærmen.\n"<ul><li>"Træk for at udforske forskellige dele af skærmen"</li>\n<li>"Løft fingeren for at zoome ud"</li></ul>\n\n"Du kan ikke zoome ind på tastaturet eller navigationslinjen."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Side <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> af <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Genvej til knappen til hjælpefunktioner"</string>
@@ -3326,12 +3369,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få kun notifikationer fra vigtige personer og apps"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Vælg aktiveringstype"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Tidspunkt"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"F.eks. \"9.30 – 17.00\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalender"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"F.eks. \"Personlig kalender\""</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Begræns antallet af afbrydelser"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Aktivér Forstyr ikke"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmer og medielyde kan afbryde"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Tidsplaner"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Slet tidsplaner"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Slet"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Rediger"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Tidsplaner"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Tidsplan"</string>
@@ -3342,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Angiv en tidsplan"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Tidsplan"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> t. <xliff:g id="MINUTES">%2$d</xliff:g> min."</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Planlæg"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Gør telefonen lydløs på bestemte tidspunkter"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Angiv regler for Forstyr ikke"</string>
@@ -3351,7 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Tillad afbrydelser, der laver lyd"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloker visuelle forstyrrelser"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Tillad visuelle signaler"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Notifikationer, du kan modtage"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Hold fokus"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Yderligere handlinger"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Indstillinger for visning"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Visningsmuligheder"</string>
@@ -3368,6 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"aktivér mørkt tema"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Indstil OS og apps til at foretrække lys tekst på en mørk baggrund, hvilket kan være mere behageligt for øjnene og medføre betydelig batteribesparelse på nogle enheder"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ingen ændringer af visningen}=1{{effect_1}}=2{{effect_1} og {effect_2}}=3{{effect_1}, {effect_2} og {effect_3}}one{{effect_1}, {effect_2} og # anden}other{{effect_1}, {effect_2} og # andre}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Bortfiltrér forstyrrelser"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Ingen forstyrrelser bortfiltreres"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Visningsmuligheder for filtrerede notifikationer"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Når Forstyr ikke er aktiveret"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ingen lyd fra notifikationer"</string>
@@ -3664,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Kategorier"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Andre"</string>
     <string name="no_channels" msgid="4716199078612071915">"Denne app har ikke sendt nogen notifikationer"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Vis ikke-anvendte kategorier"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Flere indstillinger i appen"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Vis ikke-anvendte kategorier"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Skjul ikke-anvendte kategorier"</string>
@@ -4868,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Denne enheds datapartition skal konverteres til ext4, før du kan bruge udviklerindstillingen med 16 kB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Aktivering af indstillingen med 16 kB kræver én yderligere genstart efter dette. Når du er i denne tilstand, kan du skifte mellem tilstanden med 4 kB og tilstanden med 16 kB ved blot at genstarte en enkelt gang. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil skifte tilbage til produktionstilstand på enheden, skal du skifte tilbage til tilstanden med 4 kB og derefter låse bootloaderen, hvilket vil gendanne enhedens fabriksindstillinger. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning i Indstillinger for udviklere. Enheden ryddes, og filsystemet ændres til ext4 efter bekræftelse. Når dette er gjort, skal du vende tilbage for at aktivere 16 kB igen."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Ryd alle data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Datapartitionen kunne ikke omformateres og ryddes til ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Oplåsning af bootloader er påkrævet ved brug af tilstanden med 16 kB"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Bootloader skal være låst op på denne enhed, før du kan bruge udviklerindstillingen med 16 kB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Alle brugerdata og -indstillinger ryddes, når du aktiverer tilstanden med 16 kB. Når bootloaderen er låst op, forudsætter brug af indstillingen med 16 kB to genstarter. Når du er i denne tilstand, kan du skifte mellem tilstanden med 4 kB og tilstanden med 16 kB ved blot at genstarte en enkelt gang. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil skifte tilbage til produktionstilstand på enheden, skal du skifte tilbage til tilstanden med 4 kB og derefter låse OEM/bootloaderen, hvilket gendanner enheden fabriksindstillinger. Lås bootloaderen op, og prøv igen. Du kan se, hvordan du gør dette, på &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Brug af den sideagnostiske tilstand med 4 kB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Du er i tilstanden med 4 kB i den sideagnostiske tilstand. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil skifte tilbage til produktionstilstand, skal du låse bootloaderen på enheden. Tryk for at læse mere."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Du er i tilstanden med 4 kB i den sideagnostiske tilstand. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil skifte tilbage til produktionstilstand, skal du låse bootloaderen på enheden. Denne handling gendanner enhedens fabriksindstillinger til produktionsindstillingerne. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning i Indstillinger for udviklere. Hvis enheden ikke kan starte i Android, eller hvis den er ustabil, skal du flashe enheden igen med de oprindelige systembilleder fra &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; eller bruge &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; og vælge \"Ryd enhed\", \"Lås bootloader\" og \"Gennemtving flash af alle partitioner\"."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Brug af den sideagnostiske tilstand med 16 kB"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Du er i den sideagnostiske tilstand med 16 kB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil vende tilbage til produktionstilstand, skal du skifte tilbage til tilstanden med 4 kB og derefter låse bootloaderen på enheden. Tryk for at læse mere."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Du er i den sideagnostiske tilstand med 16 kB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil vende tilbage til produktionstilstand, skal du skifte tilbage til tilstanden med 4 kB og derefter låse bootloaderen på enheden. Denne handling gendanner enhedens fabriksindstillinger til produktionsindstillingerne. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning i Indstillinger for udviklere. Hvis enheden ikke kan starte i Android, eller hvis den er ustabil, skal du flashe enheden igen med de oprindelige systembilleder fra &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; eller bruge &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; og vælge \"Ryd enhed\", \"Lås bootloader\" og \"Gennemtving flash af alle partitioner\"."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Den sideagnostiske tilstanden med 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Læs mere"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Håndtering af fejlrapport"</string>
@@ -5007,7 +5073,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Brug appfastgørelse"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Brug Indstillinger for udviklere"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Brug en udskrivningstjeneste"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Tillad flere brugere"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"tillad, flere, brugere, mange"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"flere, brugere, profiler, personer, konti, skift, mange"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Brug trådløs fejlretning"</string>
@@ -5351,4 +5418,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Lyt til stream"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scan en QR-kode til en lydstream for at lytte via <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Adgangskoden kan ikke ændres under deling. Deaktiver lyddeling for at ændre adgangskoden."</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

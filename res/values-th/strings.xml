@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"การตั้งค่าเครื่องช่วยฟัง"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"ทางลัด ความเข้ากันได้กับเครื่องช่วยฟัง"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"ค่าที่กำหนดล่วงหน้า"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"ไม่มีค่าที่กำหนดล่วงหน้าที่นักโสตสัมผัสวิทยาตั้งโปรแกรมไว้"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"ไม่สามารถอัปเดตค่าที่กำหนดล่วงหน้า"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"เอาต์พุตเสียง"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"เกี่ยวกับเอาต์พุตเสียง"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการปลดล็อกด้วยนาฬิกา"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"เพิ่มนาฬิกา"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"นำนาฬิกาออก"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"การปลดล็อกด้วยลายนิ้วมือและใบหน้า"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"การปลดล็อกด้วยใบหน้าและลายนิ้วมือ"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"การปลดล็อกด้วยใบหน้าและลายนิ้วมือสำหรับงาน"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"ต้องตั้งค่า"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"เพิ่มใบหน้าและลายนิ้วมือแล้ว"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"ติดตั้งแอป"</b>\n"ติดตั้งแอปที่คุณต้องการเก็บไว้เป็นส่วนตัวในพื้นที่ทำงาน"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"ข้อควรจำ"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"แอปหยุดทำงานเมื่อคุณล็อกพื้นที่ทำงาน"</b>\n"เมื่อคุณล็อกพื้นที่ทำงาน จะทำให้แอปในพื้นที่ทำงานดังกล่าวหยุดทำงานโดยไม่มีการแจ้งเตือนคุณ"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"พื้นที่ส่วนตัวไม่เหมาะสำหรับแอปที่ต้องทำงานเบื้องหลังหรือส่งการแจ้งเตือนที่สำคัญ เช่น แอปการแพทย์ เนื่องจากการแจ้งเตือนและกิจกรรมเบื้องหลังจะหยุดเมื่อมีการล็อกพื้นที่\n\nแอปในพื้นที่ส่วนตัวจะไม่ปรากฏในเครื่องมือจัดการสิทธิ์ แดชบอร์ดความเป็นส่วนตัว และการตั้งค่าอื่นๆ เมื่อล็อกพื้นที่ส่วนตัวไว้\n\nคุณย้ายพื้นที่ส่วนตัวไปยังอุปกรณ์ใหม่ไม่ได้ และจะต้องตั้งค่าพื้นที่ส่วนตัวอีกแห่งหากต้องการใช้ในอุปกรณ์เครื่องอื่น\n\nใครก็ตามที่เชื่อมต่ออุปกรณ์ของคุณเข้ากับคอมพิวเตอร์หรือติดตั้งแอปที่เป็นอันตรายในอุปกรณ์ดังกล่าวอาจเข้าถึงพื้นที่ส่วนตัวของคุณได้"</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"พื้นที่ส่วนตัวไม่เหมาะสำหรับแอปที่ต้องทำงานเบื้องหลังหรือส่งการแจ้งเตือนที่สำคัญ เช่น แอปการแพทย์ เนื่องจากการแจ้งเตือนและกิจกรรมเบื้องหลังจะหยุดเมื่อมีการล็อกพื้นที่\n\nแอปในพื้นที่ส่วนตัวจะไม่ปรากฏในเครื่องมือจัดการสิทธิ์ แดชบอร์ดความเป็นส่วนตัว และการตั้งค่าอื่นๆ เมื่อล็อกพื้นที่ส่วนตัวไว้\n\nคุณคืนค่าพื้นที่ส่วนตัวไปยังอุปกรณ์ใหม่ไม่ได้ และจะต้องตั้งค่าพื้นที่อีกแห่งหากต้องการใช้ในอุปกรณ์เครื่องอื่น\n\nใครก็ตามที่เชื่อมต่ออุปกรณ์ของคุณเข้ากับคอมพิวเตอร์หรือติดตั้งแอปที่เป็นอันตรายในอุปกรณ์ดังกล่าวอาจเข้าถึงพื้นที่ส่วนตัวของคุณได้"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"ดูข้อมูลเพิ่มเติมเกี่ยวกับพื้นที่ส่วนตัว"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"การดำเนินการนี้จะใช้เวลาสักครู่"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"กำลังตั้งค่าพื้นที่ส่วนตัว…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"รีสตาร์ทอุปกรณ์ใช่ไหม"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"การบันทึกรายละเอียดของ NFC มีไว้เพื่อการพัฒนาเท่านั้น ข้อมูลเพิ่มเติมของ NFC จะรวมอยู่ในรายงานข้อบกพร่อง ซึ่งอาจมีข้อมูลส่วนตัว รีสตาร์ทอุปกรณ์เพื่อเปลี่ยนการตั้งค่านี้"</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"รีสตาร์ท"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"แคสต์"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"มิเรอร์"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"เปิดใช้การแสดงผลแบบไร้สาย"</string>
@@ -1192,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"ปรับอัตโนมัติ"</string>
     <string name="brightness" msgid="6216871641021779698">"ระดับความสว่าง"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"ปรับความสว่างอัตโนมัติ"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"เกี่ยวกับฟีเจอร์ปรับความสว่างอัตโนมัติ"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"ความสว่างของหน้าจอจะปรับให้เหมาะสมกับสภาพแวดล้อมและกิจกรรมที่คุณทำโดยอัตโนมัติ คุณเลื่อนแถบเลื่อนด้วยตนเองได้เพื่อช่วยให้การปรับความสว่างอัตโนมัติทราบความสว่างที่คุณต้องการ"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"เปิด"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"ปิด"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"ผู้ใช้เลือก: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"เสียงพูด"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"ความเร็วของตัวชี้"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"อุปกรณ์ควบคุมเกม"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"เปลี่ยนเส้นทางการสั่น"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"ส่งการสั่นเตือนไปที่อุปกรณ์ควบคุมเกมเมื่อมีการเชื่อมต่อ"</string>
@@ -2094,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"ดำเนินการต่อ"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"ยกเลิก"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"การตั้งค่าการขยาย"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"การแพนกล้องด้วยนิ้วเดียว"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"ย้ายพื้นที่ในการขยายโดยลากนิ้วเพียงนิ้วเดียว"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"ย้ายพื้นที่ในการขยายโดยลากนิ้ว 2 นิ้ว"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"ไม่พร้อมใช้งานในขณะที่ขยายเพียงบางส่วนของหน้าจอ"</string>
@@ -2118,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"แตะปุ่มเพื่อซูม"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"ซูมเข้าอย่างรวดเร็วบนหน้าจอเพื่อทำให้เนื้อหาใหญ่ขึ้น"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer}. แตะหน้าจอ&lt;br/&gt; {2,number,integer}. ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer}. บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer}. ใช้ทางลัดเพื่อหยุดการขยาย&lt;br/&gt;&lt;br/&gt; &lt;b&gt;วิธีซูมเข้าชั่วคราว&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ตรวจสอบว่าตั้งค่าประเภทการขยายเป็นแบบเต็มหน้าจอ&lt;br/&gt; {1,number,integer}. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {2,number,integer}. แตะที่ใดก็ได้บนหน้าจอค้างไว้&lt;br/&gt; {3,number,integer}. ลากนิ้วเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {4,number,integer}. ยกนิ้วขึ้นเพื่อหยุดการขยาย"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"คุณจะซูมหน้าจอเข้าได้เมื่อเปิดการขยาย\n\n"<b>"วิธีซูมคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอ\n"<ul><li>"ลากนิ้วอย่างน้อย 2 นิ้วเพื่อเลื่อน"</li>\n<li>"บีบนิ้วอย่างน้อย 2 นิ้วเพื่อปรับการซูม"</li></ul>\n\n<b>"วิธีซูมชั่วคราวคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอค้างไว้\n"<ul><li>"ลากเพื่อไปยังส่วนต่างๆ ในหน้าจอ"</li>\n<li>"ยกนิ้วขึ้นเพื่อซูมออก"</li></ul>\n\n"คุณซูมเข้าโดยใช้แป้นพิมพ์หรือแถบนำทางไม่ได้"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"หน้า <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> จาก <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"ทางลัดปุ่มการช่วยเหลือพิเศษ"</string>
@@ -3326,12 +3369,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"รับเฉพาะการแจ้งเตือนจากผู้คนและแอปที่สำคัญ"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"เลือกประเภทการเปิดใช้งาน"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"เวลา"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"เช่น \"21:30 น. - 17:00 น.\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"ปฏิทิน"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"เช่น \"ปฏิทินส่วนตัว\""</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"จำกัดการรบกวน"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"เปิด \"ห้ามรบกวน\""</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"ให้เสียงของการแจ้งเตือนและสื่อรบกวนได้"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"กำหนดการ"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"ลบกำหนดการ"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"ลบ"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"แก้ไข"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"กำหนดการ"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"กำหนดการ"</string>
@@ -3339,11 +3397,10 @@
     <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"เพิ่มปฏิทิน"</string>
     <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"ใช้ปฏิทินของคุณ"</string>
     <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"กำหนดเวลา"</string>
-    <!-- no translation found for zen_mode_set_schedule_title (8023100831320026233) -->
-    <skip />
-    <!-- no translation found for zen_mode_set_schedule_link (2534032127923435737) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_duration (299332195675875111) -->
+    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"ตั้งกำหนดเวลา"</string>
+    <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"กำหนดเวลา"</string>
+    <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ชั่วโมง <xliff:g id="MINUTES">%2$d</xliff:g> นาที"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
     <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"กำหนดการ"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"ปิดเสียงโทรศัพท์ในบางช่วงเวลา"</string>
@@ -3354,7 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"อนุญาตการรบกวนที่มีเสียง"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"บล็อกสิ่งรบกวนการมองเห็น"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"อนุญาตสัญญาณที่มองเห็น"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"การแจ้งเตือนที่ส่งถึงคุณได้"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"มีสมาธิอยู่เสมอ"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"การทำงานเพิ่มเติม"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"การตั้งค่าการแสดงผล"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"ตัวเลือกการแสดงผล"</string>
@@ -3371,6 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"เปิดใช้ธีมมืด"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"สลับระบบปฏิบัติการและแอปเพื่อให้ได้ข้อความสีอ่อนและพื้นหลังสีเข้มตามที่ต้องการ ซึ่งอาจสบายตากว่ารวมถึงประหยัดแบตเตอรี่ได้อย่างมากในอุปกรณ์บางเครื่อง"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ไม่มีการเปลี่ยนแปลงการแสดงผล}=1{{effect_1}}=2{{effect_1} และ {effect_2}}=3{{effect_1}, {effect_2} และ {effect_3}}other{{effect_1}, {effect_2} และอีก # รายการ}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"กรองการรบกวน"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"ไม่ได้กรองการรบกวน"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"ตัวเลือกการแสดงผลสำหรับการแจ้งเตือนที่กรอง"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"เมื่อเปิดโหมดห้ามรบกวน"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"ไม่มีเสียงเวลาแจ้งเตือน"</string>
@@ -3667,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"หมวดหมู่"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"อื่นๆ"</string>
     <string name="no_channels" msgid="4716199078612071915">"แอปนี้ไม่ได้โพสต์การแจ้งเตือนใดๆ"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"แสดงหมวดหมู่ที่ไม่ได้ใช้"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"การตั้งค่าเพิ่มเติมในแอป"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"แสดงหมวดหมู่ที่ไม่ได้ใช้"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"ซ่อนหมวดหมู่ที่ไม่ได้ใช้"</string>
@@ -3814,12 +3874,9 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{เปลี่ยนเป็นเฉพาะปลุกเท่านั้นเป็นเวลา 1 ชั่วโมงจนถึง {time}}other{เปลี่ยนเป็นเฉพาะปลุกเท่านั้นเป็นเวลา # ชั่วโมงจนถึง {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"เปลี่ยนเป็นเฉพาะปลุกเท่านั้นจนถึง <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"เปลี่ยนเป็นรบกวนได้เสมอ"</string>
-    <!-- no translation found for zen_mode_action_change_name (766639614789907016) -->
-    <skip />
-    <!-- no translation found for zen_mode_action_change_icon (6192187791750301778) -->
-    <skip />
-    <!-- no translation found for zen_mode_icon_picker_title (6845490379143557472) -->
-    <skip />
+    <string name="zen_mode_action_change_name" msgid="766639614789907016">"เปลี่ยนชื่อ"</string>
+    <string name="zen_mode_action_change_icon" msgid="6192187791750301778">"เปลี่ยนไอคอน"</string>
+    <string name="zen_mode_icon_picker_title" msgid="6845490379143557472">"เปลี่ยนไอคอน"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"คำเตือน"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"ปิด"</string>
     <string name="device_feedback" msgid="5351614458411688608">"ส่งความคิดเห็นเกี่ยวกับอุปกรณ์นี้"</string>
@@ -4073,7 +4130,7 @@
     <string name="storage_summary" msgid="5903562203143572768">"ใช้ไป <xliff:g id="PERCENTAGE">%1$s</xliff:g> - เหลือ <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"ธีมมืด ขนาดตัวอักษร ความสว่าง"</string>
     <string name="memory_summary" msgid="8221954450951651735">"ใช้หน่วยความจำไป <xliff:g id="USED_MEMORY">%1$s</xliff:g> จาก <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> โดยเฉลี่ย"</string>
-    <string name="users_summary" msgid="8473589474976307510">"ลงชื่อเข้าใช้ในฐานะ<xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="users_summary" msgid="8473589474976307510">"ลงชื่อเข้าใช้ในชื่อ <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"อัปเดตเป็น Android <xliff:g id="VERSION">%1$s</xliff:g> แล้ว"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"มีเวอร์ชันอัปเดต"</string>
     <string name="disabled_by_policy_title" msgid="6852347040813204503">"บล็อกไว้ตามนโยบายการทำงาน"</string>
@@ -4874,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"ต้องแปลงพาร์ติชันข้อมูลของอุปกรณ์นี้เป็น ext4 ก่อนที่จะใช้ตัวเลือกสำหรับนักพัฒนาแอปแบบ 16KB ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง การเปิดใช้งานตัวเลือก 16KB จะต้องมีการรีบูตอีกครั้งหลังจากนี้ เมื่ออยู่ในโหมดนี้แล้ว คุณจะเปลี่ยนไปมาระหว่างโหมด 4KB กับ 16KB ได้ด้วยการรีบูตครั้งเดียว ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการให้อุปกรณ์กลับสู่โหมดโปรดักชัน คุณต้องเปลี่ยนกลับไปใช้โหมด 4KB จากนั้นล็อก Bootloader ซึ่งจะรีเซ็ตอุปกรณ์เป็นค่าเริ่มต้น หลังจากที่อุปกรณ์บูตเข้าสู่ Android ได้สำเร็จ ให้ปิดการปลดล็อก OEM ในตัวเลือกสำหรับนักพัฒนาแอป อุปกรณ์จะถูกล้างข้อมูลและระบบไฟล์จะเปลี่ยนเป็น ext4 หลังจากการยืนยัน หลังจากการดำเนินการนี้เสร็จสมบูรณ์ โปรดกลับมาเปิดใช้โหมด 16KB อีกครั้ง"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"ลบข้อมูลทั้งหมด"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ฟอร์แมตใหม่และล้างพาร์ติชันข้อมูลเป็น ext4 ไม่สำเร็จ"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"ต้องปลดล็อก Bootloader สำหรับโหมด 16KB"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"อุปกรณ์นี้ต้องมีการปลดล็อก Bootloader ก่อนที่จะใช้ตัวเลือกสำหรับนักพัฒนาแอปแบบ 16KB ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ข้อมูลผู้ใช้และการตั้งค่าทั้งหมดจะถูกล้างเมื่อเปิดใช้งานโหมด 16KB เมื่อปลดล็อก Bootloader แล้ว การเปิดใช้งานตัวเลือก 16KB จะต้องมีการรีบูต 2 ครั้ง เมื่ออยู่ในโหมดนี้แล้ว คุณจะเปลี่ยนไปมาระหว่างโหมด 4KB กับ 16KB ได้ด้วยการรีบูตครั้งเดียว ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการให้อุปกรณ์กลับสู่โหมดโปรดักชัน คุณต้องเปลี่ยนกลับไปใช้โหมด 4KB จากนั้นล็อก OEM/Bootloader (ซึ่งจะรีเซ็ตอุปกรณ์เป็นค่าเริ่มต้น) โปรดปลดล็อก Bootloader แล้วลองอีกครั้ง ดูวิธีการได้ที่ &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"กำลังใช้โหมด 4KB ในโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"คุณอยู่ในโหมด 4KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการกลับสู่โหมดโปรดักชันอีกครั้ง คุณต้องล็อก Bootloader ของอุปกรณ์ แตะเพื่ออ่านเพิ่มเติม"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"คุณอยู่ในโหมด 4KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการกลับสู่โหมดโปรดักชันอีกครั้ง คุณต้องล็อก Bootloader ของอุปกรณ์ การดำเนินการนี้จะรีเซ็ตอุปกรณ์เป็นค่าเริ่มต้นอีกครั้งและคืนค่าเป็นโหมดโปรดักชัน หลังจากที่อุปกรณ์บูตเข้าสู่ Android ได้สำเร็จ ให้ปิดการปลดล็อก OEM ในตัวเลือกสำหรับนักพัฒนาแอป หากอุปกรณ์ไม่สามารถบูตเข้าสู่ Android หรือไม่เสถียร ให้แฟลชอุปกรณ์อีกครั้งโดยใช้ค่าเริ่มต้นล่าสุดจาก &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; หรือใช้ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; และเลือก \"ล้างข้อมูลอุปกรณ์\" \"ล็อก Bootloader\" และ \"บังคับให้แฟลชทุกพาร์ติชัน\""</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"กำลังใช้โหมด 16KB ในโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"คุณอยู่ในโหมด 16KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการกลับสู่โหมดโปรดักชันอีกครั้ง คุณต้องเปลี่ยนกลับไปใช้โหมด 4K แล้วล็อก Bootloader ของอุปกรณ์ แตะเพื่ออ่านเพิ่มเติม"</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"คุณอยู่ในโหมด 16KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการกลับสู่โหมดโปรดักชันอีกครั้ง คุณต้องเปลี่ยนกลับไปใช้โหมด 4K แล้วล็อก Bootloader ของอุปกรณ์ การดำเนินการนี้จะรีเซ็ตอุปกรณ์เป็นค่าเริ่มต้นอีกครั้งและคืนค่าเป็นโหมดโปรดักชัน หลังจากที่อุปกรณ์บูตเข้าสู่ Android ได้สำเร็จ ให้ปิดการปลดล็อก OEM ในตัวเลือกสำหรับนักพัฒนาแอป หากอุปกรณ์ไม่สามารถบูตเข้าสู่ Android หรือไม่เสถียร ให้แฟลชอุปกรณ์อีกครั้งโดยใช้ค่าเริ่มต้นล่าสุดจาก &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; หรือใช้ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; และเลือก \"ล้างข้อมูลอุปกรณ์\" \"ล็อก Bootloader\" และ \"บังคับให้แฟลชทุกพาร์ติชัน\""</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"โหมด 16KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"อ่านเพิ่มเติม"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"เครื่องจัดการรายงานข้อบกพร่อง"</string>
@@ -5013,7 +5073,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"ใช้การปักหมุดแอป"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"ใช้ตัวเลือกสำหรับนักพัฒนาแอป"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"ใช้บริการพิมพ์"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"อนุญาตให้มีผู้ใช้หลายคน"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"อนุญาต, หลายคน, ผู้ใช้, อนุมัติ, จำนวนมาก"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"หลายรายการ, ผู้ใช้, โปรไฟล์, ผู้คน, บัญชี, เปลี่ยน, มากมาย"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ใช้การแก้ไขข้อบกพร่องผ่าน Wi-Fi"</string>
@@ -5357,4 +5418,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ฟังสตรีม"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"สแกนคิวอาร์โค้ดของสตรีมเสียงเพื่อฟังกับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"แก้ไขรหัสผ่านในระหว่างการแชร์ไม่ได้ หากต้องการเปลี่ยนรหัสผ่าน โปรดปิดการแชร์เสียงก่อน"</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

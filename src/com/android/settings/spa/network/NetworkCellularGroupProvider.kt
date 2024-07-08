@@ -48,13 +48,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
 import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settings.network.telephony.DataSubscriptionRepository
-import com.android.settings.network.telephony.TelephonyRepository
+import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.spa.network.PrimarySimRepository.PrimarySimInfo
 import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
+import com.android.settingslib.spa.framework.compose.rememberContext
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -202,21 +203,18 @@ fun MobileDataSectionImpl(
 ) {
     val context = LocalContext.current
     val localLifecycleOwner = LocalLifecycleOwner.current
-    val wifiPickerTrackerHelper = getWifiPickerTrackerHelper(context, localLifecycleOwner)
-
-    val subscriptionManager: SubscriptionManager? =
-            context.getSystemService(SubscriptionManager::class.java)
+    val mobileDataRepository = rememberContext(::MobileDataRepository)
 
     Category(title = stringResource(id = R.string.mobile_data_settings_title)) {
         val isAutoDataEnabled by remember(nonDds.intValue) {
-            TelephonyRepository(context).isMobileDataPolicyEnabledFlow(
+            mobileDataRepository.isMobileDataPolicyEnabledFlow(
                 subId = nonDds.intValue,
                 policy = TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH
             )
         }.collectAsStateWithLifecycle(initialValue = null)
 
         val mobileDataStateChanged by remember(mobileDataSelectedId.intValue) {
-            TelephonyRepository(context).isDataEnabledFlow(mobileDataSelectedId.intValue)
+            mobileDataRepository.isMobileDataEnabledFlow(mobileDataSelectedId.intValue)
         }.collectAsStateWithLifecycle(initialValue = false)
         val coroutineScope = rememberCoroutineScope()
 
@@ -226,8 +224,8 @@ fun MobileDataSectionImpl(
                 coroutineScope.launch {
                     setMobileData(
                         context,
-                        subscriptionManager,
-                        wifiPickerTrackerHelper,
+                        context.getSystemService(SubscriptionManager::class.java),
+                        getWifiPickerTrackerHelper(context, localLifecycleOwner),
                         mobileDataSelectedId.intValue,
                         newEnabled
                     )
@@ -238,7 +236,7 @@ fun MobileDataSectionImpl(
             AutomaticDataSwitchingPreference(
                 isAutoDataEnabled = { isAutoDataEnabled },
                 setAutoDataEnabled = { newEnabled ->
-                    TelephonyRepository(context).setAutomaticData(nonDds.intValue, newEnabled)
+                    mobileDataRepository.setAutoDataSwitch(nonDds.intValue, newEnabled)
                 },
             )
         }
@@ -281,14 +279,14 @@ fun PrimarySimImpl(
 ) {
     CreatePrimarySimListPreference(
         stringResource(id = R.string.primary_sim_calls_title),
-        primarySimInfo.callsAndSmsList,
+        primarySimInfo.callsList,
         callsSelectedId,
         ImageVector.vectorResource(R.drawable.ic_phone),
         actionSetCalls
     )
     CreatePrimarySimListPreference(
         stringResource(id = R.string.primary_sim_texts_title),
-        primarySimInfo.callsAndSmsList,
+        primarySimInfo.smsList,
         textsSelectedId,
         Icons.AutoMirrored.Outlined.Message,
         actionSetTexts
@@ -426,6 +424,6 @@ suspend fun setMobileData(
             Log.d(NetworkCellularGroupProvider.fileName, "setDefaultData: [$targetSubId]")
             subscriptionManager?.setDefaultDataSubId(targetSubId)
         }
-        TelephonyRepository(context)
-            .setMobileData(targetSubId, enabled, wifiPickerTrackerHelper)
+        MobileDataRepository(context)
+            .setMobileDataEnabled(targetSubId, enabled, wifiPickerTrackerHelper)
     }

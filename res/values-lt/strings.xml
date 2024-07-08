@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Klausos įrenginio nustatymai"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Spartusis klavišas, klausos aparato suderinamumas"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Išankstiniai nustatymai"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Nėra jūsų audiologo suprogramuotų išankstinių nustatymų"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Išankstinių nustatymų atnaujinti nepavyko"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Garso išvestis"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Apie garso išvestį"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Sužinokite daugiau apie funkciją „Laikrodžio atrakinimas“"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Pridėti laikrodį"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Pašalinti laikrodį"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Atrakinimas piršto atspaudu ir pagal veidą"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Atrakinimas pagal veidą ir piršto atspaudu"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Atrakinimas pagal veidą ir piršto atspaudu darbe"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Reikia nustatyti"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Pridėtas veidas ir kontroliniai kodai"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Įdiekite programų"</b>\n"Įdiekite programų, kurias norite laikyti privačiai savo erdvėje"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Ką verta atminti"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Programos sustabdomos, kai užrakinate erdvę"</b>\n"Kai užrakinate erdvę, erdvėje esančios programos sustabdomos ir negaunate iš jų pranešimų"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Privačios erdvės netinkamos programoms, kurios turi veikti fone ar siųsti svarbius pranešimus, pvz., medicinos programoms. Taip yra todėl, kad pranešimai ir veikla fone sustabdomi, užrakinus erdvę.\n\nProgramos privačioje erdvėje nebus rodomos leidimų tvarkytuvėje, privatumo informacijos suvestinėje ir kituose nustatymuose, kai privati erdvė bus užrakinta.\n\nPrivačios erdvės negalima perkelti į naują įrenginį. Turėsite nustatyti kitą privačią erdvę, jei norėsite ją naudoti kitame įrenginyje.\n\nBet kuris naudotojas, prijungęs jūsų įrenginį prie kompiuterio ar įdiegęs žalingų programų įrenginyje, galės pasiekti jūsų privačią erdvę."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Privačios erdvės netinkamos programoms, kurios turi veikti fone ar siųsti svarbius pranešimus, pvz., medicinos programoms. Taip yra todėl, kad pranešimai ir veikla fone sustabdomi, užrakinus erdvę.\n\nProgramos privačioje erdvėje nebus rodomos leidimų tvarkytuvėje, privatumo informacijos suvestinėje ir kituose nustatymuose, kai privati erdvė bus užrakinta.\n\nPrivačios erdvės negalima atkurti naujame įrenginyje. Jei norite ją naudoti kitame įrenginyje, reikės sukurti kitą erdvę.\n\nAsmenys, prijungę jūsų įrenginį prie kompiuterio ar įrenginyje įdiegę kenkėjiškų programų, gali pasiekti jūsų privačią erdvę."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Sužinokite daugiau apie privačią erdvę"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Tai užtruks kelias akimirkas"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Nustatoma privati erdvė…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Paleisti įrenginį iš naujo?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Išsamių NFC duomenų įrašymas gali būti naudojamas tik kuriant produktą. Į pranešimus apie riktus įtraukiama papildomų NFC duomenų, kuriuose gali būti privačios informacijos. Jei norite pakeisti šį nustatymą, paleiskite įrenginį iš naujo."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Paleisti iš naujo"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Perdavimas"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ekrano vaizdo bendrinimas"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Įgalinti belaidį rodymą"</string>
@@ -1192,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Prisitaikanti"</string>
     <string name="brightness" msgid="6216871641021779698">"Šviesumo lygis"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Prisitaikantis šviesumas"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Apie prisitaikantį šviesumą"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Ekrano šviesumas automatiškai prisitaikys prie jūsų aplinkos ir veiklos. Galite šliaužiklį perkelti patys, kad prisitaikantis šviesumas įsimintų jūsų nuostatas."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Įjungta"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Išjungta"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Pasirinktas naudotojo: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Kalba"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Žymiklio greitis"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Žaidimų valdiklis"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Nukreipti vibravimą"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Siųsti vibraciją į žaidimų valdiklį, kai jis prijungtas"</string>
@@ -2094,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Vis tiek tęsti"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Atšaukti"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Didinimo nustatymai"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Stumdymas vienu pirštu"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Perkelkite didinimo sritį vilkdami vienu pirštu."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Perkelkite didinimo sritį vilkdami dviem pirštais."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Nepasiekiama, kol didinama tik dalis ekrano"</string>
@@ -2118,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Palieskite mygtuką, kad keistumėte mastelį"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Sparčiai artinkite ekrane, kad turinys būtų didesnis"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Kad priartintumėte, atlikite toliau nurodytus veiksmus.&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Paleiskite didinimo funkciją sparčiuoju klavišu.&lt;br/&gt; {1,number,integer}. Palieskite ekraną.&lt;br/&gt; {2,number,integer}. Pereikite nuo vieno ekrano elemento prie kito vilkdami dviem pirštais.&lt;br/&gt; {3,number,integer}. Koreguokite mastelį suėmę dviem pirštais.&lt;br/&gt; {4,number,integer}. Sustabdykite didinimo funkciją sparčiuoju klavišu.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Kad laikinai priartintumėte, atlikite toliau nurodytus veiksmus.&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Įsitikinkite, kad didinimo tipas nustatytas į viso ekrano.&lt;br/&gt; {1,number,integer}. Paleiskite didinimo funkciją sparčiuoju klavišu.&lt;br/&gt; {2,number,integer}. Palieskite ir palaikykite bet kurią ekrano vietą.&lt;br/&gt; {3,number,integer}. Pereikite nuo vieno ekrano elemento prie kito vilkdami pirštu.&lt;br/&gt; {4,number,integer}. Sustabdykite didinimo funkciją pakeldami pirštą."</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Kai didinimas įjungtas, galite artinti ekraną.\n\n"<b>"Jei norite keisti mastelį,"</b>", įjunkite didinimą, tada palieskite bet kurioje ekrano vietoje.\n"<ul><li>"Slinkite vilkdami dviem ar daugiau pirštų"</li>\n<li>"Koreguokite mastelį suimdami dviem ar daugiau pirštų"</li></ul>\n\n<b>"Jei norite laikinai pakeisti mastelį"</b>", įjunkite didinimą, tada palieskite ir palaikykite bet kurioje ekrano vietoje.\n"<ul><li>"Naršykite ekraną vilkdami pirštu"</li>\n<li>"Pakelkite pirštą, kad tolintumėte"</li></ul>\n\n"Negalite artinti naudodami klaviatūrą ar naršymo juostą."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g> psl. iš <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Pritaikomumo mygtuko spartusis klavišas"</string>
@@ -3326,12 +3369,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Gauti pranešimus tik iš svarbių žmonių ar programų"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Pasirinkti suaktyvinimo tipą"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Laikas"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Pvz.: „9.30–17.00 val.“"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalendorius"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Pvz.: „Asmeninis kalendorius“"</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Pertraukčių apribojimas"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Netrukdymo režimo įjungimas"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Signalai ir medijos garsai gali trikdyti"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Tvarkaraščiai"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Tvarkaraščių trynimas"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Ištrinti"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Redaguoti"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Tvarkaraščiai"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Tvarkaraštis"</string>
@@ -3342,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Nustatykite tvarkaraštį"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Tvarkaraštis"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> val. <xliff:g id="MINUTES">%2$d</xliff:g> min."</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Tvarkaraštis"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Nutildykite telefoną tam tikru metu"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Nustatykite netrukdymo režimo taisykles"</string>
@@ -3351,7 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Leisti pertrauktis, skleidžiančias garsą"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokuoti vaizdinius trikdžius"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Leisti vaizdinius signalus"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Leidžiami pranešimai"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Susikaupkite"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Papildomi veiksmai"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Vaizdo nustatymai"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Pateikties parinktys"</string>
@@ -3368,6 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"įgalinti tamsiąją temą"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Perjunkite, kad OS ir programos teiktų pirmenybę šviesiam tekstui tamsiame fone, nes taip mažiau pavargsta akys ir labai tausojamas akumuliatorius kai kuriuose įrenginiuose"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nėra vaizdo pakeitimų}=1{{effect_1}}=2{{effect_1} ir {effect_2}}=3{{effect_1}, {effect_2} ir {effect_3}}one{{effect_1}, {effect_2} ir dar #}few{{effect_1}, {effect_2} ir dar #}many{{effect_1}, {effect_2} ir dar #}other{{effect_1}, {effect_2} ir dar #}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtruoti trukdžius"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nefiltruojami jokie trukdžiai"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Išfiltruotų pranešimų rodymo parinktys"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kai įjungtas netrukdymo režimas"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Neskambėti gavus pranešimų"</string>
@@ -3664,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Kategorijos"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Kita"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ši programa nepaskelbė jokių pranešimų"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Rodyti nenaudojamas kategorijas"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Papildomi programos nustatymai"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Rodyti nenaudojamas kategorijas"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Slėpti nenaudojamas kategorijas"</string>
@@ -4868,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Šio įrenginio duomenų skaidinį reikia konvertuoti į „ext4“ prieš naudojant 16 KB kūrėjo parinktį. Šiuo režimu negalima garantuoti programinės įrangos vientisumo ir visiems telefone saugomiems duomenims, kai panaikintas paleidyklės operatoriaus pasirinkimo ribojimas, gali kilti pavojus. Suaktyvinus 16 KB parinktį, po to reikės dar vieno paleidimo iš naujo. Dirbdami šiuo režimu galėsite perjungti 4 KB ir 16 KB režimus paleidę iš naujo vieną kartą. Kai kurios funkcijos gali būti išjungtos šiais režimais, todėl kai kurios programos gali neveikti. Jei norite vėl įjungti įrenginio generavimo režimą, turite vėl perjungti į 4 KB režimą ir užrakinti paleidyklę, tada bus atkurti įrenginio gamykliniai nustatymai. Kai įrenginys bus sėkmingai paleistas sistemoje „Android“, išjunkite OĮG operatoriaus pasirinkimo ribojimo panaikinimą „Kūrėjo parinkčių“ skiltyje. Įrenginio duomenys bus panaikinti ir patvirtinus failų sistema bus pakeista į „ext4“. Kai tai bus baigta, grįžkite ir vėl įgalinkite 16 KB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Ištrinti visus duomenis"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Nepavyko performatuoti į „ext4“ ir panaikinti duomenų skaidinio."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Norint naudoti 16 KB režimą, reikia panaikinti paleidyklės operatoriaus pasirinkimo ribojimą"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Kad būtų galima naudoti 16 KB kūrėjo parinktį, turi būti panaikintas šio įrenginio paleidyklės operatoriaus pasirinkimo ribojimas. Šiuo režimu negalima garantuoti programinės įrangos vientisumo ir visiems telefone saugomiems duomenims, kai panaikintas paleidyklės operatoriaus pasirinkimo ribojimas, gali kilti pavojus. Suaktyvinus 16 KB režimą, visi naudotojo duomenys ir nustatymai bus panaikinti. Panaikinus paleidyklės operatoriaus pasirinkimo ribojimą, norint suaktyvinti 16 KB parinktį, reikės du kartus paleisti iš naujo. Dirbdami šiuo režimu galėsite perjungti 4 KB ir 16 KB režimus paleidę iš naujo vieną kartą. Kai kurios funkcijos gali būti išjungtos šiais režimais, todėl kai kurios programos gali neveikti. Jei norite vėl įjungti įrenginio generavimo režimą, turite vėl perjungti į 4 KB režimą ir taikyti įrenginio OĮG ir (arba) paleidyklės užrakinimą (tada bus atkurti gamykliniai nustatymai). Panaikinkite paleidyklės operatoriaus pasirinkimo ribojimą ir bandykite dar kartą. Instrukcijas, kaip tai atlikti, rasite adresu &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4 KB nepriklausomo puslapio dydžio režimo naudojimas"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Dirbate 4 KB nepriklausomo puslapio dydžio režimu. Šiuo režimu negalima garantuoti programinės įrangos vientisumo ir visiems telefone saugomiems duomenims, kai panaikintas paleidyklės operatoriaus pasirinkimo ribojimas, gali kilti pavojus. Kai kurios funkcijos gali būti išjungtos šiais režimais, todėl kai kurios programos gali neveikti. Jei norite vėl įjungti generavimo režimą, turite užrakinti įrenginio paleidyklę. Palieskite, jei norite skaityti daugiau."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Dirbate 4 KB nepriklausomo puslapio dydžio režimu. Šiuo režimu negalima garantuoti programinės įrangos vientisumo ir visiems telefone saugomiems duomenims, kai panaikintas paleidyklės operatoriaus pasirinkimo ribojimas, gali kilti pavojus. Kai kurios funkcijos gali būti išjungtos šiais režimais, todėl kai kurios programos gali neveikti. Jei norite vėl įjungti generavimo režimą, turite užrakinti įrenginio paleidyklę. Tada vėl bus atkurti įrenginio gamykliniai nustatymai. Kai įrenginys bus sėkmingai paleistas sistemoje „Android“, išjunkite OĮG operatoriaus pasirinkimo ribojimo panaikinimą „Kūrėjo parinkčių“ skiltyje. Jei nepavyksta paleisti įrenginio sistemoje „Android“ arba jis nestabilus, iš naujo įdiekite įrenginį „Android“ ROM vidinėje atmintyje su naujausiais gamykliniais disko atvaizdžiais iš &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; arba naudokite &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ir pasirinkite „Naikinti įrenginio duomenis“, „Užrakinti paleidyklę“ ir „Priverstinai įdiegti visus skaidinius „Android“ ROM vidinėje atmintyje“."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16 KB nepriklausomo puslapio dydžio režimo naudojimas"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Dirbate 16 KB nepriklausomo puslapio dydžio režimu. Šiuo režimu negalima garantuoti programinės įrangos vientisumo ir visiems telefone saugomiems duomenims, kai panaikintas paleidyklės operatoriaus pasirinkimo ribojimas, gali kilti pavojus. Kai kurios funkcijos gali būti išjungtos šiais režimais, todėl kai kurios programos gali neveikti. Jei norite vėl įjungti generavimo režimą, turite vėl perjungti į 4 KB režimą ir užrakinti įrenginio paleidyklę. Palieskite, jei norite skaityti daugiau."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Dirbate 16 KB nepriklausomo puslapio dydžio režimu. Šiuo režimu negalima garantuoti programinės įrangos vientisumo ir visiems telefone saugomiems duomenims, kai panaikintas paleidyklės operatoriaus pasirinkimo ribojimas, gali kilti pavojus. Kai kurios funkcijos gali būti išjungtos šiais režimais, todėl kai kurios programos gali neveikti. Jei norite vėl įjungti generavimo režimą, turite vėl perjungti į 4 KB režimą ir užrakinti įrenginio paleidyklę. Tada vėl bus atkurti įrenginio gamykliniai nustatymai. Kai įrenginys bus sėkmingai paleistas sistemoje „Android“, išjunkite OĮG operatoriaus pasirinkimo ribojimo panaikinimą „Kūrėjo parinkčių“ skiltyje. Jei nepavyksta paleisti įrenginio sistemoje „Android“ arba jis nestabilus, iš naujo įdiekite įrenginį „Android“ ROM vidinėje atmintyje su naujausiais gamykliniais disko atvaizdžiais iš &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; arba naudokite &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ir pasirinkite „Naikinti įrenginio duomenis“, „Užrakinti paleidyklę“ ir „Priverstinai įdiegti visus skaidinius „Android“ ROM vidinėje atmintyje“."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 KB nepriklausomo puslapio dydžio režimas"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Skaityti daugiau"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Pranešimų apie riktus doroklė"</string>
@@ -5009,7 +5075,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Programos prisegimo naudojimas"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Kūrėjo parinkčių naudojimas"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Naudoti spausdinimo paslaugą"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Kelių naudotojų leidimas"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"leisti, keli, naudotojas, leidimas, daug"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"keli, naudotojai, profiliai, žmonės, paskyros, perjungti, daug"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Belaidžio ryšio derinimo naudojimas"</string>
@@ -5353,4 +5420,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Klausyti srauto"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Nuskaitykite garso srauto QR kodą, kad galėtumėte klausyti naudodami „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Bendrinant negalima redaguoti slaptažodžio. Jei norite pakeisti slaptažodį, pirmiausia išjunkite garso įrašų bendrinimą."</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

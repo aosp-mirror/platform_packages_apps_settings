@@ -76,6 +76,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Hearing device settings"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Shortcut, hearing aid compatibility"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Preset"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"There are no presets programmed by your audiologist"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Couldn’t update preset"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audio output"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"About audio output"</string>
@@ -436,7 +437,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Learn more about Watch Unlock"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Add watch"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Remove watch"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Fingerprint &amp; Face Unlock"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Face and Fingerprint Unlock"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Face and Fingerprint Unlock for work"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Setup needed"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Face and fingerprints added"</string>
@@ -848,6 +849,21 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Restart Device?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detail NFC logging is intended for development purposes only. Additional NFC data is included in bug reports, which may contain private information. Restart your device to change this setting."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Restart"</string>
+    <string name="keywords_external_display" msgid="4181375057920134909">"mirror, external display, connected display, usb display, resolution, rotation"</string>
+    <string name="external_display_on" msgid="2560104443500154333">"On"</string>
+    <string name="external_display_off" msgid="5634413756025351374">"Off"</string>
+    <string name="external_display_settings_title" msgid="6256884595821605779">"External Display"</string>
+    <string name="external_display_use_title" msgid="8198257340836261386">"Use external display"</string>
+    <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Display resolution"</string>
+    <string name="external_display_not_found" msgid="1912355133386555798">"External display is disconnected"</string>
+    <string name="external_display_rotation" msgid="7160062306817490204">"Rotation"</string>
+    <string name="external_display_standard_rotation" msgid="545969032327487219">"Standard"</string>
+    <string name="external_display_rotation_90" msgid="7371530414227542947">"90°"</string>
+    <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
+    <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
+    <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Changing rotation or resolution may stop any apps that are currently running"</string>
+    <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Your device must be connected to an external display to mirror your screen"</string>
+    <string name="external_display_more_options_title" msgid="1222751990705118774">"More options"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirror"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Enable wireless display"</string>
@@ -1189,6 +1205,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptive"</string>
     <string name="brightness" msgid="6216871641021779698">"Brightness level"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Adaptive brightness"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"About adaptive brightness"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"On"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Off"</string>
@@ -1969,6 +1986,9 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"User selected: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Speech"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Pointer speed"</string>
+    <string name="pointer_scale" msgid="4941564570571663964">"Pointer scale"</string>
+    <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Decrease pointer scale"</string>
+    <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Increase pointer scale"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Game Controller"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirect vibration"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Send vibration to game controller when connected"</string>
@@ -2091,7 +2111,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continue anyway"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Cancel"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Magnification settings"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"One-finger panning"</string>
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"Move magnifier with 1 finger"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"Drag 1 finger to move around the screen"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Move the magnification area by dragging one finger."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Move the magnification area by dragging two fingers."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Unavailable while only magnifying part of the screen"</string>
@@ -2115,6 +2136,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tap a button to zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Quickly zoom in on the screen to make content larger"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag two fingers to move around screen&lt;br/&gt; {3,number,integer}. Pinch with two fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; &lt;b&gt;To zoom in temporarily:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Make sure your magnification type is set to full screen&lt;br/&gt; {1,number,integer}. Use shortcut to start magnification&lt;br/&gt; {2,number,integer}. Touch and hold anywhere on the screen&lt;br/&gt; {3,number,integer}. Drag finger to move around screen&lt;br/&gt; {4,number,integer}. Lift finger to stop magnification"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag 2 fingers to move around the screen&lt;br/&gt; {3,number,integer}. Pinch with 2 fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; You can also zoom in temporarily and more."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag 1 or 2 fingers to move around the screen&lt;br/&gt; {3,number,integer}. Pinch with 2 fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; You can also zoom in temporarily and more."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"To zoom"</b>", start magnification, then tap the screen anywhere.\n"<ul><li>"Drag two or more fingers to scroll"</li>\n<li>"Pinch two or more fingers to adjust the zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", start magnification, then touch and hold the screen anywhere.\n"<ul><li>"Drag to move around the screen"</li>\n<li>"Lift finger to zoom out"</li></ul>\n\n"You can\'t zoom in on the keyboard or navigation bar."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> of <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Accessibility button shortcut"</string>
@@ -3320,15 +3343,24 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{None}=1{1 schedule set}other{# schedules set}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Do Not Disturb"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Priority Modes"</string>
-    <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
-    <skip />
+    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Add a mode"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Only get notified by important people and apps"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Select activation type"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Time"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Ex. \"9:30 – 5:00 PM\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Calendar"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Ex. \"Personal calendar\""</string>
+    <string name="zen_mode_active_text" msgid="5002406772481439437">"ON"</string>
+    <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Not set"</string>
+    <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Disabled"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limit interruptions"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Turn on Do Not Disturb"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarms and media sounds can interrupt"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Schedules"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Delete schedules"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Delete"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="3190031534736428573">"Delete mode"</string>
+    <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"Delete \"<xliff:g id="MODE">%1$s</xliff:g>\" mode?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Edit"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Schedules"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Schedule"</string>
@@ -3339,6 +3371,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Set a schedule"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Schedule"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> hr, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Schedule"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silence phone at certain times"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Set Do Not Disturb rules"</string>
@@ -3348,7 +3382,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Allow interruptions that make sound"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Block visual disturbances"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Allow visual signals"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Notifications that can reach you"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Stay focused"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Additional actions"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Display settings"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Display options"</string>
@@ -3365,6 +3399,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"enable dark theme"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Switch the OS and apps to prefer light text on a dark background, which may be easier on the eyes and confers significant battery savings on some devices"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{No display changes}=1{{effect_1}}=2{{effect_1} and {effect_2}}=3{{effect_1}, {effect_2}, and {effect_3}}other{{effect_1}, {effect_2}, and # more}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filter interruptions"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"No interruptions are filtered"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Display options for filtered notifications"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"When Do Not Disturb is on"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"No sound from notifications"</string>
@@ -3658,6 +3694,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Categories"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Other"</string>
     <string name="no_channels" msgid="4716199078612071915">"This app has not posted any notifications"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Show unused categories"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Additional settings in the app"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Show unused categories"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Hide unused categories"</string>
@@ -3767,8 +3804,7 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Selected apps"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"None"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"All"</string>
-    <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
-    <skip />
+    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{No apps can interrupt}=1{{app_1} can interrupt}=2{{app_1} and {app_2} can interrupt}=3{{app_1}, {app_2}, and {app_3} can interrupt}other{{app_1}, {app_2}, and # more can interrupt}}"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Allow apps to override"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps that can interrupt"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Select more apps"</string>
@@ -4862,14 +4898,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"This device’s data partition needs to be converted to ext4 before using the 16KB developer option. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Activating the 16KB option will require one more reboot after this. Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options. The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16KB again."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Erase all data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Failed to reformat and wipe the data partition to ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Bootloader Unlock Required for 16KB Mode"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"This device needs to have the bootloader unlocked before using the 16KB developer option. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. All user data and settings will be wiped when activating 16KB mode. Once the bootloader is unlocked, activating the 16KB option will require two reboots. Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and then OEM/bootloader lock (which factory resets) the device. Please unlock the bootloader and try again. You can see instructions for how to do this at &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Using 4KB page-agnostic mode"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"You are in the 4KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must lock the bootloader of the device. Tap to read more."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"You are in the 4KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must lock the bootloader of the device. This would factory reset the device again and restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options. If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Using 16KB page-agnostic mode"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must, switch back to 4K mode and then lock the bootloader of the device. Tap to read more."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must, switch back to 4K mode and then lock the bootloader of the device. This would factory reset the device again and restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options. If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB Page-agnostic Mode"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Read more"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Bug report handler"</string>
@@ -5001,7 +5040,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Use app pinning"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Use developer options"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Use print service"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Allow multiple users"</string>
+    <string name="multiple_users_main_switch_title" msgid="9158796544835843201">"Allow user switch"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"allow, multiple, user, permit, many"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"multiple, users, profiles, people, accounts, switch, many"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Use wireless debugging"</string>
@@ -5345,4 +5384,5 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Listen to stream"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scan an audio stream QR code to listen with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Can\'t edit password while sharing. To change the password, first turn off audio sharing."</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Search Settings"</string>
 </resources>

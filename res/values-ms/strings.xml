@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Tetapan peranti pendengaran"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Pintasan, keserasian alat bantu pendengaran"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Pratetapan"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Tiada pratetapan yang diaturkan oleh ahli audiologi anda"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Tidak dapat mengemaskinikan pratetapan"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Output audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Perihal output audio"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Ketahui lebih lanjut tentang Buka Kunci Jam Tangan"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Tambahkan jam tangan"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Alih keluar jam tangan"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Buka Kunci Cap Jari &amp; Wajah"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Buka Kunci Wajah &amp; Cap Jari"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Buka Kunci Wajah &amp; Cap Jari untuk kerja"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Persediaan diperlukan"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Wajah dan cap jari ditambahkan"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Pasang apl"</b>\n"Pasang apl yang mahu anda rahsiakan dalam ruang anda"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Sentiasa ingat"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Apl dihentikan apabila anda mengunci ruang anda"</b>\n"Apabila anda mengunci ruang anda, apl dalam ruang anda akan dihentikan dan anda tidak akan menerima pemberitahuan daripada apl itu"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Ruang privasi tidak sesuai untuk apl yang perlu dijalankan pada latar atau menghantar pemberitahuan genting seperti apl perubatan. Hal ini kerana pemberitahuan dan aktiviti latar dihentikan semasa ruang anda dikunci.\n\nApl dalam ruang privasi anda tidak akan dipaparkan dalam pengurus kebenaran, papan pemuka privasi dan tetapan lain apabila ruang privasi anda dikunci.\n\nRuang privasi anda tidak boleh dialihkan kepada peranti baharu. Anda perlu menyediakan ruang privasi lain jika anda mahu menggunakan ruang privasi itu pada peranti lain.\n\nSesiapa sahaja yang menyambungkan peranti anda kepada komputer atau memasang apl berbahaya pada peranti anda mungkin dapat mengakses ruang privasi anda."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Ruang privasi tidak sesuai untuk apl yang perlu dijalankan pada latar atau menghantar pemberitahuan genting seperti apl perubatan. Hal ini kerana pemberitahuan dan aktiviti latar dihentikan semasa ruang anda dikunci.\n\nApl dalam ruang privasi anda tidak akan dipaparkan dalam pengurus kebenaran, papan pemuka privasi dan tetapan lain apabila ruang privasi dikunci.\n\nRuang privasi anda tidak boleh dipulihkan pada peranti baharu. Anda perlu menyediakan ruang privasi lain jika anda mahu menggunakan ruang privasi pada peranti lain.\n\nSesiapa sahaja yang menyambungkan peranti anda kepada komputer atau memasang apl berbahaya pada peranti anda mungkin dapat mengakses ruang privasi anda."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Ketahui lebih lanjut tentang ruang privasi"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Proses ini akan mengambil sedikit masa"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Menyediakan ruang privasi…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Mulakan Semula Peranti?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Pengelogan butiran NFC adalah khusus untuk tujuan pembangunan sahaja. Data tambahan NFC disertakan dalam laporan pepijat yang mungkin mengandungi maklumat peribadi. Mulakan semula peranti anda untuk menukar tetapan ini."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Mulakan semula"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"cermin"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Dayakan paparan wayarles"</string>
@@ -1192,7 +1221,8 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Boleh suai"</string>
     <string name="brightness" msgid="6216871641021779698">"Tahap kecerahan"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Kecerahan boleh suai"</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"Kecerahan skrin anda akan dilaraskan secara automatik dengan persekitaran dan aktiviti. Anda boleh mengalihkan peluncur secara manual untuk membantu kecerahan boleh suai mempelajari pilihan anda."</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Perihal kecerahan boleh suai"</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"Kecerahan skrin akan dilaraskan secara automatik dengan persekitaran dan aktiviti anda. Anda boleh mengalihkan peluncur secara manual untuk membantu kecerahan boleh suai mempelajari pilihan anda."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Hidup"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Mati"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Paparkan imbangan putih"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Pengguna dipilih: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Pertuturan"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Kelajuan penuding"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Pengawal Permainan"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Ubah hala getaran"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Hantar getaran ke pengawal permainan apabila disambungkan"</string>
@@ -2094,7 +2130,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Teruskan juga"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Batal"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Tetapan pembesaran"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Penyorotan satu jari"</string>
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"Gerakkan kanta pembesar menggunakan 1 jari"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"Seret 1 jari untuk menerokai skrin"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Alihkan kawasan pembesaran dengan menyeret satu jari."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Alihkan kawasan pembesaran dengan menyeret dua jari."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Tidak tersedia semasa hanya membesarkan sebahagian daripada skrin"</string>
@@ -2118,6 +2155,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ketik butang untuk mengezum"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zum masuk dengan pantas pada skrin untuk menjadikan kandungan lebih besar"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Ketik skrin&lt;br/&gt; {2,number,integer}. Seret 2 jari untuk menerokai skrin&lt;br/&gt; {3,number,integer}. Jepit dengan 2 jari untuk melaraskan zum&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk mengezum masuk sementara:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Pastikan jenis pembesaran ditetapkan kepada skrin penuh&lt;br/&gt; {1,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {2,number,integer}. Sentuh &amp; tahan di mana-mana pada skrin&lt;br/&gt; {3,number,integer}. Seret jari untuk menerokai skrin&lt;br/&gt; {4,number,integer}. Angkat jari untuk menghentikan pembesaran"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Ketik skrin&lt;br/&gt; {2,number,integer}. Seret 2 jari untuk menerokai skrin&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk melaraskan zum&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; Anda juga boleh mengezum masuk untuk sementara waktu dan banyak lagi."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; {1,number,integer}. Ketik skrin&lt;br/&gt; {2,number,integer}. Seret 1 atau 2 jari untuk menerokai skrin&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk melaraskan zum&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; Anda juga boleh mengezum masuk untuk sementara waktu dan banyak lagi."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Apabila pembesaran dihidupkan, anda boleh mengezum masuk pada skrin.\n\n"<b>"Untuk mengezum"</b>", mulakan pembesaran, kemudian ketik di mana-mana pada skrin.\n"<ul><li>"Seret sekurang-kurangnya 2 jari untuk menatal"</li>\n<li>"Cubit menggunakan sekurang-kurangnya 2 jari untuk melaraskan zum"</li></ul>\n\n<b>"Untuk mengezum sementara"</b>", mulakan pembesaran, kemudian sentuh &amp; tahan di mana-mana pada skrin.\n"<ul><li>"Seret untuk beralih-alih di sekitar skrin"</li>\n<li>"Angkat jari untuk mengezum keluar"</li></ul>\n\n"Anda tidak boleh mengezum masuk pada papan kekunci atau bar navigasi."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Halaman <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> daripada <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Pintasan butang kebolehaksesan"</string>
@@ -3326,12 +3365,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Dapatkan pemberitahuan daripada orang dan apl penting sahaja"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Pilih jenis pengaktifan"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Masa"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Cth. \"9:30 – 5:00 PTG\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalendar"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Cth. \"Kalendar peribadi\""</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Hadkan gangguan"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Hidupkan Jangan Ganggu"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Bunyi penggera dan media boleh ganggu"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Jadual"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Padamkan jadual"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Padam"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Edit"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Jadual"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Jadual"</string>
@@ -3342,6 +3396,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Tetapkan jadual"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Jadual"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> jam, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Jadual"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Senyapkan telefon pd masa tertentu"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Tetapkan peraturan Jangan Ganggu"</string>
@@ -3351,7 +3407,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Benarkan gangguan yang berbunyi"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Sekat gangguan visual"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Benarkan isyarat visual"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Pemberitahuan yang boleh anda terima"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Tumpukan perhatian"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Tindakan tambahan"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Tetapan paparan"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Pilihan paparan"</string>
@@ -3368,6 +3424,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"dayakan tema gelap"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Tukar OS dan apl untuk mengutamakan teks terang pada latar gelap, yang mungkin lebih mudah dilihat dan memperoleh penjimatan bateri yang ketara pada sesetengah peranti"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Tiada perubahan paparan}=1{{effect_1}}=2{{effect_1} dan {effect_2}}=3{{effect_1}, {effect_2} dan {effect_3}}other{{effect_1}, {effect_2} dan # lagi}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Tapis gangguan"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Tiada gangguan ditapis"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Pilihan paparan untuk pemberitahuan yang ditapis"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Apabila Jangan Ganggu dihidupkan"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Tiada bunyi daripada pemberitahuan"</string>
@@ -3664,6 +3722,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Kategori"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Lain-lain"</string>
     <string name="no_channels" msgid="4716199078612071915">"Apl ini belum menyiarkan sebarang pemberitahuan"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Tunjukkan kategori tidak digunakan"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Tetapan tambahan dalam apl"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Tunjukkan kategori tidak digunakan"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Sembunyikan kategori tidak digunakan"</string>
@@ -4868,14 +4927,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Pemetakan data peranti ini perlu ditukar kepada ext4 sebelum menggunakan pilihan pembangun 16KB. Integriti perisian tidak dapat dijamin dalam mod ini dan sebarang data yang disimpan pada telefon semasa pemuat but tidak berkunci mungkin berisiko. Pengaktifan pilihan 16KB akan memerlukan satu lagi but semula selepas ini. Setelah anda berada dalam mod ini, anda boleh bertukar berulang kali antara mod 4KB dengan 16KB menggunakan satu but semula. Sesetengah ciri akan dilumpuhkan dalam mod ini, maka sesetengah aplikasi mungkin tidak berfungsi. Untuk mengembalikan peranti kepada mod pengeluaran, anda perlu menukar kembali kepada mod 4KB dan mengunci pemuat but, yang akan menetapkan semula peranti kepada tetapan kilang. Selepas peranti berjaya dibut kepada Android, lumpuhkan pembukaan kunci OEM dalam Pilihan pembangun. Data peranti akan dihapuskan dan sistem fail akan ditukar kepada ext4 selepas pengesahan. Selepas proses ini selesai, sila kembali untuk mendayakan semula 16KB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Padamkan semua data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Gagal memformat semula dan menghapuskan pemetakan data kepada ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Buka Kunci Pemuat But Diperlukan untuk mod 16KB"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Peranti ini perlu membuka kunci pemuat but sebelum menggunakan pilihan pembangun 16KB. Integriti perisian tidak boleh dijamin dalam mod ini dan sebarang data yang disimpan pada telefon semasa pemuat but tidak berkunci mungkin dalam risiko. Semua data dan tetapan pengguna akan dihapuskan semasa pengaktifan mod 16KB. Setelah pemuat but tidak berkunci, pengaktifan pilihan 16KB memerlukan dua but semula. Setelah anda menggunakan mod ini, anda boleh bertukar berulang kali antara mod 4KB dengan 16KB menerusi satu but semula. Sesetengah ciri akan dilumpuhkan dalam mod ini, maka sesetengah aplikasi mungkin tidak berfungsi. Untuk mengembalikan peranti kepada mod pengeluaran, anda perlu menukar semula kepada mod 4KB dan melakukan penguncian OEM/pemuat but (yang akan melakukan tetapan semula kilang) pada peranti. Sila buka kunci pemuat but dan cuba lagi. Anda boleh melihat arahan tentang cara melakukan perkara ini menerusi &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Menggunakan mod halaman agnostik 4KB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Anda menggunakan mod 4KB bagi mod halaman agnostik. Integriti perisian tidak dapat dijamin dalam mod ini, dan sebarang data yang disimpan pada telefon semasa pemuat but tidak berkunci mungkin berisiko. Sesetengah ciri akan dilumpuhkan dalam mod ini, maka sesetengah aplikasi mungkin tidak berfungsi. Untuk memasuki semula mod pengeluaran, anda perlu mengunci pemuat but peranti. Ketik untuk mengetahui lebih lanjut."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Anda menggunakan mod 4KB bagi mod halaman agnostik. Integriti perisian tidak dapat dijamin dalam mod ini dan sebarang data yang disimpan pada telefon semasa pemuat but tidak berkunci mungkin berisiko. Sesetengah ciri akan dilumpuhkan dalam mod ini, maka sesetengah aplikasi mungkin tidak berfungsi. Untuk memasuki semula mod pengeluaran, anda perlu mengunci pemuat but peranti. Tindakan ini akan menetapkan semula peranti kepada tetapan kilang dan mengembalikan peranti kepada tetapan pengeluaran. Selepas peranti berjaya dibut kepada Android, lumpuhkan pembukaan kunci OEM dalam Pilihan pembangun. Jika peranti gagal mengebut kepada Android atau tidak stabil, denyar semula peranti dengan imej kilang terkini daripada &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; atau gunakan &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dan pilih \'Hapuskan Peranti\', \'Kunci Pemuat But\' dan \'Denyar Paksa semua pemetakan\'."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Menggunakan mod halaman agnostik 16KB"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Anda menggunakan mod 16KB bagi mod halaman agnostik. Integriti perisian tidak dapat dijamin dalam mod ini dan sebarang data yang disimpan pada telefon semasa pemuat but tidak berkunci mungkin berisiko. Sesetengah ciri akan dilumpuhkan dalam mod ini, maka sesetengah aplikasi mungkin tidak berfungsi. Untuk memasuki semula mod pengeluaran, anda perlu menukar kembali kepada mod 4K dan mengunci pemuat but peranti. Ketik untuk mengetahui lebih lanjut."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Anda menggunakan mod 16KB bagi mod halaman agnostik. Integriti perisian tidak boleh dijamin dalam mod ini dan sebarang data yang disimpan pada telefon semasa pemuat but tidak berkunci mungkin dalam risiko. Sesetengah ciri akan dilumpuhkan dalam mod ini, maka sesetengah aplikasi mungkin tidak berfungsi. Untuk memasuki semula mod pengeluaran, anda perlu menukar kembali kepada mod 4K dan mengunci pemuat but peranti. Tindakan ini akan menetapkan semula peranti kepada tetapan kilang dan memulihkan peranti pada tetapan pengeluaran. Selepas peranti berjaya dibut masuk dalam Android, lumpuhkan pembukaan kunci OEM dalam Pilihan pembangun. Jika peranti gagal mengebut masuk dalam Android atau tidak stabil, denyar semula peranti dengan imej kilang terkini daripada &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dan pilih \'Hapuskan Peranti\', \'Kunci Pemuat But\' dan \'Denyar Paksa semua pemetakan\'."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Mod Halaman agnostik 16KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Baca lebih lanjut"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Pengendali laporan pepijat"</string>
@@ -5007,7 +5069,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Gunakan penyematan apl"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Gunakan pilihan pembangun"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Gunakan perkhidmatan cetakan"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Benarkan berbilang pengguna"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"izinkan, beberapa, pengguna, benarkan, banyak"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"berbilang, pengguna, profil, pengguna, akaun, tukar, pelbagai"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Gunakan nyahpepijat wayarles"</string>
@@ -5351,4 +5414,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Dengar strim"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Imbas kod QR strim audio untuk mendengar dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Tidak dapat mengedit kata laluan semasa perkongsian. Untuk mengubah kata laluan, matikan perkongsian audio dahulu."</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

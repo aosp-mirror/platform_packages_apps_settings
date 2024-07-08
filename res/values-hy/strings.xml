@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Լսողական սարքի կարգավորումներ"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Դյուրանցում, լսողական սարքի համատեղելիություն"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Կարգավորումների հավաքածու"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Մասնագետի կողմից կազմված կարգավորումների հավաքածուներ չկան"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Չհաջողվեց թարմացնել կարգավորումների հավաքածուն"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Աուդիո ելք"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Աուդիո ելքի մասին"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Իմանալ ավելին ժամացույցով ապակողպման մասին"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Ավելացնել ժամացույց"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Հեռացնել ժամացույցը"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Մատնահետքով և դեմքով ապակողպում"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Դեմքով և մատնահետքով ապա­կողպում"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Դեմքով և մատնահետքով ապակողպում աշխատանքի համար"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Պահանջվում է կարգավորում"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Դեմքի և մատնահետքի նմուշներն ավելացվեցին"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Տեղադրեք հավելվածներ"</b>\n"Ձեր տարածքում տեղադրեք հավելվածներ, որոնք չեք ուզում, որ ցուցադրվեն"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Հիշեք"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Եթե կողպեք տարածքը, հավելվածները կդադարեն աշխատել"</b>\n"Երբ կողպեք ձեր տարածքը, տարածքի հավելվածները կդադարեն աշխատել, և դուք դրանցից ծանուցումներ չեք ստանա"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Մասնավոր տարածքները հարմար չեն հավելվածների համար, որոնք պետք է աշխատեն ֆոնային ռեժիմում և ուղարկեն կարևոր ծանուցումներ, օրինակ՝ բժշկական հավելվածների։ Պատճառն այն է, որ ծանուցումները և ֆոնային ռեժիմում աշխատանքը դադարում են, երբ ձեր տարածքը կողպվում է։\n\nՁեր մասնավոր տարածքի հավելվածները չեն հայտնվի թույլտվությունների կառավարչում, թույլտվությունների կառավարման վահանակում և այլ կարգավորումներում, երբ մասնավոր տարածքը կողպված է։\n\nՄասնավոր տարածքը հնարավոր չի լինի վերականգնել նոր սարքում։ Դուք պետք է այլ անձնական տարածք կարգավորեք, եթե ուզում եք այն օգտագործել ուրիշ սարքում։\n\nՑանկացած մեկը, ով ձեր սարքը միացնի համակարգչի կամ վնասաբեր հավելվածներ տեղադրի ձեր սարքում, կկարողանա բացել ձեր մասնավոր տարածքը։"</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Մասնավոր տարածքները հարմար չեն հավելվածների համար, որոնք պետք է աշխատեն ֆոնային ռեժիմում և ուղարկեն կարևոր ծանուցումներ, օրինակ՝ բժշկական հավելվածների։ Պատճառն այն է, որ ծանուցումները և ֆոնային ռեժիմում աշխատանքը դադարում են, երբ ձեր տարածքը կողպվում է։\n\nՁեր մասնավոր տարածքի հավելվածները չեն հայտնվի թույլտվությունների կառավարչում, թույլտվությունների կառավարման վահանակում և այլ կարգավորումներում, երբ մասնավոր տարածքը կողպված է։\n\nՄասնավոր տարածքը հնարավոր չի լինի վերականգնել նոր սարքում։ Դուք պետք է այլ տարածք կարգավորեք, եթե ուզում եք այն օգտագործել ուրիշ սարքում։\n\nՑանկացած մեկը, ով ձեր սարքը միացնի համակարգչի կամ վնասաբեր հավելվածներ տեղադրի ձեր սարքում, կկարողանա բացել ձեր մասնավոր տարածքը։"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Իմանալ ավելին մասնավոր տարածքի մասին"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Դա կտևի մի քանի րոպե"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Մասնավոր տարածքի կարգավորում…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Վերագործարկե՞լ սարքը"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"NFC-ի միջոցով մանրամասն մատյանի վարումը նախատեսված է ոչ միայն ծրագրավորման նպատակներով։ NFC-ի լրացուցիչ տվյալները ավելացվում են նաև վրիպակների մասին զեկույցներում, որոնք կարող են անձնական տեղեկություններ պարունակել։ Այս կարգավորումը փոխելու համար վերագործարկեք ձեր սարքը։"</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Վերագործարկել"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Հեռարձակում"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"հայելապատճենում"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Միացնել անլար էկրանը"</string>
@@ -1192,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Հարմարվող"</string>
     <string name="brightness" msgid="6216871641021779698">"Պայծառության մակարդակ"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Հարմարվող պայծառություն"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Հարմարվող պայծառության մասին"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Էկրանի պայծառությունն ավտոմատ կկարգավորվի՝ կախված միջավայրի պայմաններից և ձեր գործողություններից։ Դուք կարող եք տեղաշարժել սահիչը՝ թույլ տալով հարմարվող պայծառությանը հիշել ձեր կարգավորումները։"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Միացված է"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Անջատված է"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Օգտատիրոջ ընտրած՝ <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Խոսք"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Նշորդի արագությունը"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Խաղերի կարգավորիչ"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Թրթռոցի վերաուղղորդում"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Ուղարկել թրթռոցը խաղի կարգավորիչին, եթե վերջինս միացված է"</string>
@@ -2094,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Շարունակել"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Չեղարկել"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Խոշորացման կարգավորումներ"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Մեկ մատով տեղաշարժ"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Տեղափոխեք խոշորացման ընդգրկույթը՝ մեկ մատով քաշելով։"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Տեղափոխեք խոշորացման ընդգրկույթը՝ երկու մատով քաշելով։"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Հասանելի չէ, երբ միայն էկրանի մի մասն է խոշորացվում"</string>
@@ -2118,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Հպել որևէ կոճակի՝ մեծացնելու համար"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Արագ խոշորացրեք էկրանը՝ բովանդակությունն ավելի պարզ տեսնելու համար"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Խոշորացնելու համար՝&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Օգտագործեք դյուրանցումը&lt;br/&gt; {1,number,integer}. Հպեք էկրանին&lt;br/&gt; {2,number,integer}. Քաշեք երկու մատով՝ էկրանի վրա տեղաշարժվելու համար&lt;br/&gt; {3,number,integer}. Շարժեք երկու մատը՝ խոշորացումը կարգավորելու համար&lt;br/&gt; {4,number,integer}. Դյուրանցման միջոցով դադարեցրեք խոշորացումը&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Ժամանակավորապես խոշորացնելու համար՝&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Համոզվեք, որ խոշորացման համար նշված է լիաէկրան ռեժիմը&lt;br/&gt; {1,number,integer}. Օգտագործեք դյուրանցումը&lt;br/&gt; {2,number,integer}. Հպեք էկրանի որևէ մասի և պահեք&lt;br/&gt; {3,number,integer}. Քաշեք մատով՝ էկրանի վրա տեղաշարժվելու համար&lt;br/&gt; {4,number,integer}. Հեռացրեք մատը էկրանից՝ խոշորացումը դադարեցնելու համար"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Երբ խոշորացումը միացված է, դուք կարող եք մեծացնել էկրանի մասշտաբը:\n\n"<b>"Մասշտաբը մեծացնելու համար"</b>"միացրեք խոշորացումը և հպեք էկրանի ցանկացած հատվածին:\n"<ul><li>"Ոլորելու համար 2 կամ ավելի մատները քաշեք էկրանի վրայով։"</li>\n<li>"Մասշտաբը փոխելու համար 2 կամ ավելի մատները մոտեցրեք միմյանց։"</li></ul>\n\n<b>"Մասշտաբը ժամանակավորապես փոխելու համար"</b>" միացրեք խոշորացումը, ապա հպեք էկրանի ցանկացած հատվածին և պահեք։\n"<ul><li>"Քաշեք՝ էկրանով մեկ շարժելու համար։"</li>\n<li>"Բարձրացրեք մատը՝ փոքրացնելու համար։"</li></ul>\n\n"Ստեղնաշարի կամ նավիգացիայի գոտու միջոցով հնարավոր չէ մեծացնել:"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Էջ <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"«Հատուկ գործառույթներ» կոճակի դյուրանցում"</string>
@@ -3326,12 +3369,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ծանուցում ստանալ միայն կարևոր մարդկանցից և հավելվածներից"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Ընտրել ակտիվացման տեսակը"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Ժամ"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Օրինակ՝ «9:30 – 17:00»"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Օրացույց"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Օրինակ՝ «Անձնական օրացույց»"</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Ընդհատումների սահմանափակում"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Միացրեք «Չանհանգստացնել» ռեժիմը"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Զարթուցիչներն ու մեդիայի ձայները"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Ժամանակացույցներ"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Ժամանակացույցների ջնջում"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Ջնջել"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Փոփոխել"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Ժամանակա­ցույցներ"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Ժամանակացույց"</string>
@@ -3339,11 +3397,10 @@
     <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Ավելացնել օրացույց"</string>
     <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Օգտագործել իմ օրացույցը"</string>
     <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Ժամանակացույց"</string>
-    <!-- no translation found for zen_mode_set_schedule_title (8023100831320026233) -->
-    <skip />
-    <!-- no translation found for zen_mode_set_schedule_link (2534032127923435737) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_duration (299332195675875111) -->
+    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Սահմանեք ժամանակացույց"</string>
+    <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Ժամանակացույց"</string>
+    <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ժ <xliff:g id="MINUTES">%2$d</xliff:g> ր"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
     <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Ժամանակացույց"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Հեռախոսի ձայնի անջատում որոշակի ժամերի"</string>
@@ -3354,7 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Թույլատրել ձայնային ազդանշանները"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Արգելափակել տեսողական ծանուցումները"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Թույլատրել տեսողական ազդանշանները"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Ծանուցումներ, որոնք միևնույն է կստանաք"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Կենտրոնացում"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Լրացուցիչ գործողություններ"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Ցուցադրման կարգավորումներ"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Ցուցադրման տարբերակներ"</string>
@@ -3371,6 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"միացնել մուգ թեման"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Օպերացիոն համակարգն ու հավելվածները դարձրեք բաց տեքստով՝ մուգ ֆոնի վրա։ Դա կարող է աչքերին ավելի հաճելի լինել և նշանակալի կերպով տնտեսել մարտկոցի լիցքը որոշ սարքերում"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Առանց փոփոխությունների}=1{{effect_1}}=2{{effect_1} և {effect_2}}=3{{effect_1}, {effect_2} և {effect_3}}one{{effect_1}, {effect_2} ու ևս #-ը}other{{effect_1}, {effect_2} ու ևս #-ը}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Զտել ընդհատումները"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Ընդհատումները չեն զտվում"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Զտվող ծանուցումների ցուցադրման տարբերակներ"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Երբ «Չանհանգստացնել» ռեժիմը միացված է"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Անջատել ծանուցումների ձայնը"</string>
@@ -3667,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Կատեգորիաներ"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Այլ"</string>
     <string name="no_channels" msgid="4716199078612071915">"Այս հավելվածը ծանուցումներ չի փակցրել"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Ցույց տալ չկիրառվող կատեգորիաները"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Հավելվածի լրացուցիչ կարգավորումները"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Ցույց տալ չկիրառվող կատեգորիաները"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Թաքցնել չկիրառվող կատեգորիաները"</string>
@@ -3814,12 +3874,9 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Ակտիվացնել «Միայն զարթուցիչը» ռեժիմը մեկ ժամով մինչև {time}}one{Ակտիվացնել «Միայն զարթուցիչը» ռեժիմը # ժամով մինչև {time}}other{Ակտիվացնել «Միայն զարթուցիչը» ռեժիմը # ժամով մինչև {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Ակտիվացնել «Միայն զարթուցիչը» ռեժիմը մինչև <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>-ը"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Ակտիվացնել «Միշտ ընդհատել» ռեժիմը"</string>
-    <!-- no translation found for zen_mode_action_change_name (766639614789907016) -->
-    <skip />
-    <!-- no translation found for zen_mode_action_change_icon (6192187791750301778) -->
-    <skip />
-    <!-- no translation found for zen_mode_icon_picker_title (6845490379143557472) -->
-    <skip />
+    <string name="zen_mode_action_change_name" msgid="766639614789907016">"Վերանվանել"</string>
+    <string name="zen_mode_action_change_icon" msgid="6192187791750301778">"Փոխել պատկերակը"</string>
+    <string name="zen_mode_icon_picker_title" msgid="6845490379143557472">"Փոխել պատկերակը"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Նախազգուշացում"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Փակել"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Կարծիք հայտնել սարքի մասին"</string>
@@ -4874,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Նախքան մշակողի 16 ԿԲ ընտրանքն օգտագործելը սարքի տվյալների բաժինն անհրաժեշտ է փոխարկել ext4 ֆայլային համակարգի։ Ծրագրի ամբողջականությունը հնարավոր չէ երաշխավորել այս ռեժիմում, և ցանկացած տվյալ, որը պահվում է հեռախոսում, քանի դեռ բեռնիչը ապակողպված է, կարող է վտանգված լինել։ 16 ԿԲ ընտրանքի ակտիվացման համար կարող է պահանջվել ևս մեկ վերագործարկում։ Երբ անցնեք այս ռեժիմին, մեկ վերագործարկմամբ կկարողանաք անցում կատարել 4 ԿԲ և 16 ԿԲ ռեժիմների միջև։ Որոշ գործառույթներ կանջատվեն այս ռեժիմներում, ուստի հնարավոր է՝ ոչ բոլոր հավելվածներն աշխատեն։ Սարքն արտադրական ռեժիմին վերադարձնելու համար պետք է նորից անցնեք 4 ԿԲ ռեժիմին և կողպեք օպերացիոն համակարգի բեռնիչը, որը վերականգնում է սարքի գործարանային կարգավորումները։ Android-ը հաջողությամբ գործարկելուց հետո Մշակողի ընտրանքներում անջատեք OEM-ի ապակողպումը։ Հաստատումից հետո սարքի տվյալները կսրբվեն, և ֆայլային համակարգը կփոխարինվի ext4-ով։ Դրանից հետո նորից վերադարձեք՝ 16 ԿԲ-ը կրկին միացնելու համար։"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Ջնջել բոլոր տվյալները"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Չհաջողվեց վերաֆորմատավորել սարքը ext4 ֆայլային համակարգի և սրբել տվյալների բաժինը։"</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"16 ԿԲ ռեժիմի համար պահանջվում է ապակողպել օպերացիոն համակարգի բեռնիչը"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Նախքան մշակողի 16 ԿԲ ընտրանքն օգտագործելը հարկավոր է ապակողպել օպերացիոն համակարգի բեռնիչը։ Ծրագրի ամբողջականությունը հնարավոր չէ երաշխավորել այս ռեժիմում, և ցանկացած տվյալ, որը պահվում է հեռախոսում, քանի դեռ բեռնիչը ապակողպված է, կարող է վտանգված լինել։ Երբ 16 ԿԲ ռեժիմն ակտիվացվի, օգտատիրոջ բոլոր տվյալները և կարգավորումները կսրբվեն։ Հենց որ օպերացիոն համակարգի բեռնիչն ապակողպվի, 16 ԿԲ ընտրանքի ակտիվացման համար կպահանջվի երկու վերագործարկում։ Երբ անցնեք այս ռեժիմին, մեկ վերագործարկմամբ կկարողանաք անցում կատարել 4 ԿԲ և 16 ԿԲ ռեժիմների միջև։ Որոշ գործառույթներ կանջատվեն այս ռեժիմներում, ուստի հնարավոր է՝ ոչ բոլոր հավելվածներն աշխատեն։ Սարքը արտադրական ռեժիմին վերադարձնելու համար անհրաժեշտ է նորից անցնել 4 ԿԲ ռեժիմին և կողպել OEM-ը / օպերացիոն համակարգի բեռնիչը, որը վերականգնում է սարքի գործարանային կարգավորումները։ Ապակողպեք օպերացիոն համակարգի բեռնիչը և նորից փորձեք։ Թե ինչպես կարող եք դա անել, կարդացեք այստեղ՝ &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Էջաչափից անկախ 4 ԿԲ ռեժիմի օգտագործում"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Դուք էջաչափից անկախ 4 ԿԲ ռեժիմում եք։ Ծրագրի ամբողջականությունը հնարավոր չէ երաշխավորել այս ռեժիմում, և ցանկացած տվյալ, որը պահվում է հեռախոսում, քանի դեռ բեռնիչը ապակողպված է, կարող է վտանգված լինել։ Որոշ գործառույթներ կանջատվեն այս ռեժիմներում, ուստի հնարավոր է՝ ոչ բոլոր հավելվածներն աշխատեն։ Արտադրական ռեժիմին վերադառնալու համար պետք է կողպեք սարքի օպերացիոն համակարգի բեռնիչը։ Հպեք՝ ավելին իմանալու համար։"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Դուք էջաչափից անկախ ռեժիմի 4 ԿԲ ռեժիմում եք։ Ծրագրի ամբողջականությունը հնարավոր չէ երաշխավորել այս ռեժիմում, և ցանկացած տվյալ, որը պահվում է հեռախոսում, քանի դեռ բեռնիչը ապակողպված է, կարող է վտանգված լինել։ Որոշ գործառույթներ կանջատվեն այս ռեժիմներում, ուստի հնարավոր է՝ ոչ բոլոր հավելվածներն աշխատեն։ Արտադրական ռեժիմին վերադառնալու համար պետք է կողպեք սարքի օպերացիոն համակարգի բեռնիչը։ Սարքի գործարանային կարգավորումները նորից կվերականգնվեն, և այն կանցնի արտադրական կարգավորումների ռեժիմ։ Android-ը հաջողությամբ գործարկելուց հետո Մշակողի ընտրանքներում անջատեք OEM-ի ապակողպումը։ Եթե սարքն անկայուն է աշխատում, կամ չհաջողվի այն գործարկել Android-ով, թարմացրեք սարքը՝ օգտագործելով գործարանային պատկերներ &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; էջից կամ անցեք &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; և ընտրեք «Սրբել սարքը», «Կողպել օպերացիոն համակարգի բեռնիչը» և «Ստիպողաբար թարմացնել բոլոր բաժինները»։"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Էջաչափից անկախ 16 ԿԲ ռեժիմի օգտագործում"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Դուք էջաչափից անկախ 16 ԿԲ ռեժիմում եք։ Ծրագրի ամբողջականությունը հնարավոր չէ երաշխավորել այս ռեժիմում, և ցանկացած տվյալ, որը պահվում է հեռախոսում, քանի դեռ բեռնիչը ապակողպված է, կարող է վտանգված լինել։ Որոշ գործառույթներ կանջատվեն այս ռեժիմներում, ուստի հնարավոր է՝ ոչ բոլոր հավելվածներն աշխատեն։ Արտադրական ռեժիմին վերադառնալու համար պետք է նորից անցնեք 4 ԿԲ ռեժիմին և կողպեք սարքի օպերացիոն համակարգի բեռնիչը։ Հպեք՝ ավելին իմանալու համար։"</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Դուք էջաչափից անկախ ռեժիմի 16 ԿԲ ռեժիմում եք։ Ծրագրի ամբողջականությունը հնարավոր չէ երաշխավորել այս ռեժիմում, և ցանկացած տվյալ, որը պահվում է հեռախոսում, քանի դեռ բեռնիչը ապակողպված է, կարող է վտանգված լինել։ Որոշ գործառույթներ կանջատվեն այս ռեժիմներում, ուստի հնարավոր է՝ ոչ բոլոր հավելվածներն աշխատեն։ Արտադրական ռեժիմին վերադառնալու համար պետք է նորից անցնեք 4 ԿԲ ռեժիմին և կողպեք սարքի օպերացիոն համակարգի բեռնիչը։ Սարքի գործարանային կարգավորումները նորից կվերականգնվեն, և այն կանցնի արտադրական կարգավորումների ռեժիմ։ Android-ը հաջողությամբ գործարկելուց հետո Մշակողի ընտրանքներում անջատեք OEM-ի ապակողպումը։ Եթե սարքն անկայուն է աշխատում, կամ չհաջողվի այն գործարկել Android-ով, թարմացրեք սարքը՝ օգտագործելով գործարանային պատկերներ &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; էջից կամ անցեք &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; և ընտրեք «Սրբել սարքը», «Կողպել օպերացիոն համակարգի բեռնիչը» և «Ստիպողաբար թարմացնել բոլոր բաժինները»։"</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Էջաչափից անկախ 16 ԿԲ ռեժիմ"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Կարդալ ավելին"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Վրիպակների մասին հաշվետվությունների մշակիչ"</string>
@@ -5013,7 +5073,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Օգտագործել հավելվածների ամրացումը"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Օգտագործել մշակողի ընտրանքները"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Օգտագործել տպման ծառայությունը"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Թույլատրել մեկից ավելի օգտատերեր"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"թույլ տալ, մի քանի, օգտատեր, թույլատրել, շատ"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"մի քանի, օգտատերեր, պրոֆիլներ, մարդիկ, հաշիվներ, փոխել հաշիվը, շատ"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Օգտագործել անլար վրիպազերծումը"</string>
@@ -5357,4 +5418,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Լսել հոսքը"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Սկանավորեք աուդիո հոսքի QR կոդը՝ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքով լսելու համար"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Փոխանցման ժամանակ հնարավոր չէ փոխել գաղտնաբառը։ Գաղտնաբառը փոխելու համար նախ անջատեք աուդիոյի փոխանցումը։"</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

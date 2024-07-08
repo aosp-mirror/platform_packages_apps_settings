@@ -16,22 +16,48 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamDetailsFragment.BROADCAST_ID_ARG;
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamDetailsFragment.BROADCAST_NAME_ARG;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
+import android.app.settings.SettingsEnums;
+import android.content.Context;
+import android.os.Bundle;
+
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.R;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class AudioStreamDetailsFragmentTest {
-    private AudioStreamDetailsFragment mFragment;
+    @Rule public final MockitoRule mocks = MockitoJUnit.rule();
+    private static final String BROADCAST_NAME = "name";
+    private static final int BROADCAST_ID = 1;
+    private final Context mContext = ApplicationProvider.getApplicationContext();
+    @Mock private AudioStreamHeaderController mHeaderController;
+    @Mock private AudioStreamButtonController mButtonController;
+    private TestFragment mFragment;
 
     @Before
     public void setUp() {
-        mFragment = new AudioStreamDetailsFragment();
+        mFragment = spy(new TestFragment());
+        doReturn(mHeaderController).when(mFragment).use(AudioStreamHeaderController.class);
+        doReturn(mButtonController).when(mFragment).use(AudioStreamButtonController.class);
     }
 
     @Test
@@ -43,5 +69,30 @@ public class AudioStreamDetailsFragmentTest {
     @Test
     public void getLogTag_returnsCorrectTag() {
         assertThat(mFragment.getLogTag()).isEqualTo(AudioStreamDetailsFragment.TAG);
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectEnum() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(SettingsEnums.AUDIO_STREAM_DETAIL);
+    }
+
+    @Test
+    public void onAttach_getArguments() {
+        Bundle bundle = new Bundle();
+        bundle.putString(BROADCAST_NAME_ARG, BROADCAST_NAME);
+        bundle.putInt(BROADCAST_ID_ARG, BROADCAST_ID);
+        mFragment.setArguments(bundle);
+
+        mFragment.onAttach(mContext);
+
+        verify(mButtonController).init(BROADCAST_ID);
+        verify(mHeaderController).init(mFragment, BROADCAST_NAME, BROADCAST_ID);
+    }
+
+    public static class TestFragment extends AudioStreamDetailsFragment {
+        @Override
+        protected <T extends AbstractPreferenceController> T use(Class<T> clazz) {
+            return super.use(clazz);
+        }
     }
 }

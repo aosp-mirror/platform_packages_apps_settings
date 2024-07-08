@@ -20,13 +20,13 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.HashMap;
@@ -41,14 +41,10 @@ import java.util.Map;
 class ZenModesListPreferenceController extends BasePreferenceController {
     protected static final String KEY = "zen_modes_list";
 
-    @Nullable
-    protected Fragment mParent;
     protected ZenModesBackend mBackend;
 
-    public ZenModesListPreferenceController(Context context, @Nullable Fragment parent,
-            @NonNull ZenModesBackend backend) {
+    ZenModesListPreferenceController(Context context, @NonNull ZenModesBackend backend) {
         super(context, KEY);
-        mParent = parent;
         mBackend = backend;
     }
 

@@ -133,23 +133,23 @@ public class MagnificationOneFingerPanningPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_switchModeAndSettingsOff_disabledSummaryTextUsed() {
+    public void getSummary_switchModeAndSettingsOff_defaultSummaryTextUsed() {
         MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.ALL);
         Settings.Secure.putInt(mContext.getContentResolver(), ONE_FINGER_PANNING_KEY, OFF);
 
         mController.updateState(mSwitchPreference);
 
-        assertThat(mController.getSummary()).isEqualTo(disabledSummary());
+        assertThat(mController.getSummary().toString()).isEqualTo(defaultSummary());
     }
 
     @Test
-    public void getSummary_switchModeAndSettingsOn_enabledSummaryTextUsed() {
+    public void getSummary_switchModeAndSettingsOn_defaultSummaryTextUsed() {
         MagnificationCapabilities.setCapabilities(mContext, MagnificationMode.ALL);
         Settings.Secure.putInt(mContext.getContentResolver(), ONE_FINGER_PANNING_KEY, ON);
 
         mController.updateState(mSwitchPreference);
 
-        assertThat(mController.getSummary()).isEqualTo(enabledSummary());
+        assertThat(mController.getSummary().toString()).isEqualTo(defaultSummary());
     }
 
     @Test
@@ -158,7 +158,7 @@ public class MagnificationOneFingerPanningPreferenceControllerTest {
 
         mController.updateState(mSwitchPreference);
 
-        assertThat(mController.getSummary()).isEqualTo(unavailableSummary());
+        assertThat(mController.getSummary().toString()).isEqualTo(unavailableSummary());
     }
 
     @Test
@@ -199,14 +199,9 @@ public class MagnificationOneFingerPanningPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
-    private String enabledSummary() {
+    private String defaultSummary() {
         return mContext.getString(
-                R.string.accessibility_magnification_one_finger_panning_summary_on);
-    }
-
-    private String disabledSummary() {
-        return mContext.getString(
-                R.string.accessibility_magnification_one_finger_panning_summary_off);
+                R.string.accessibility_magnification_one_finger_panning_summary);
     }
 
     private String unavailableSummary() {

@@ -28,11 +28,14 @@ import android.content.pm.ServiceInfo;
 import android.util.ArraySet;
 import android.util.Slog;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class ZenServiceListing {
+    private static final String TAG = "ZenServiceListing";
 
     private final Context mContext;
     private final ManagedServiceSettings.Config mConfig;
@@ -40,9 +43,18 @@ public class ZenServiceListing {
     private final List<Callback> mZenCallbacks = new ArrayList<>();
     private final NotificationManager mNm;
 
+    // only used when android.app.modes_ui flag is true
+    @Nullable
+    private String mPkg = null;
+
     public ZenServiceListing(Context context, ManagedServiceSettings.Config config) {
+        this(context, config, null);
+    }
+
+    public ZenServiceListing(Context context, ManagedServiceSettings.Config config, @Nullable String pkg) {
         mContext = context;
         mConfig = config;
+        mPkg = pkg;
         mNm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
@@ -89,12 +101,16 @@ public class ZenServiceListing {
         }
     }
 
-    private static void getServices(ManagedServiceSettings.Config c, List<ComponentInfo> list,
+    private void getServices(ManagedServiceSettings.Config c, List<ComponentInfo> list,
             PackageManager pm) {
         final int user = ActivityManager.getCurrentUser();
 
+        Intent queryIntent = new Intent(c.intentAction);
+        if (mPkg != null) {
+            queryIntent.setPackage(mPkg);
+        }
         List<ResolveInfo> installedServices = pm.queryIntentServicesAsUser(
-                new Intent(c.intentAction),
+                queryIntent,
                 PackageManager.GET_SERVICES | PackageManager.GET_META_DATA,
                 user);
 
@@ -115,12 +131,16 @@ public class ZenServiceListing {
         }
     }
 
-    private static void getActivities(ManagedServiceSettings.Config c, List<ComponentInfo> list,
+    private void getActivities(ManagedServiceSettings.Config c, List<ComponentInfo> list,
             PackageManager pm) {
         final int user = ActivityManager.getCurrentUser();
 
+        Intent queryIntent = new Intent(c.configIntentAction);
+        if (mPkg != null) {
+            queryIntent.setPackage(mPkg);
+        }
         List<ResolveInfo> resolveInfos = pm.queryIntentActivitiesAsUser(
-                new Intent(c.configIntentAction),
+                queryIntent,
                 PackageManager.GET_ACTIVITIES | PackageManager.GET_META_DATA,
                 user);
 

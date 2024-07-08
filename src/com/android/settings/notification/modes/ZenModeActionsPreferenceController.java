@@ -16,24 +16,23 @@
 
 package com.android.settings.notification.modes;
 
-import static com.android.settings.notification.modes.ZenModeFragmentBase.MODE_ID;
+import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
 class ZenModeActionsPreferenceController extends AbstractZenModePreferenceController {
 
-    ZenModeActionsPreferenceController(@NonNull Context context, @NonNull String key,
-            @Nullable ZenModesBackend backend) {
-        super(context, key, backend);
+    ZenModeActionsPreferenceController(@NonNull Context context, @NonNull String key) {
+        super(context, key);
     }
 
     @Override
@@ -50,7 +49,7 @@ class ZenModeActionsPreferenceController extends AbstractZenModePreferenceContro
         buttonsPreference.setButton2Enabled(zenMode.canEditIcon());
         buttonsPreference.setButton2OnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putString(MODE_ID, zenMode.getId());
+            bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
             new SubSettingLauncher(mContext)
                     .setDestination(ZenModeIconPickerFragment.class.getName())
                     // TODO: b/332937635 - Update metrics category

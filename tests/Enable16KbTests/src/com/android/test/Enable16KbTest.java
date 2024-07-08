@@ -76,11 +76,13 @@ public class Enable16KbTest extends BaseHostJUnit4Test {
         installTestApp();
 
         // Enable developer option and switch to 16kb kernel and Check page size
+        getDevice().enableAdbRoot();
         runTestAndWait(SWITCH_TO_16KB);
         result = getDevice().executeShellCommand("getconf PAGE_SIZE");
         assertEquals("16384", result.strip());
 
         // switch back to 4kb kernel and check page size
+        getDevice().enableAdbRoot();
         runTestAndWait(SWITCH_TO_4KB);
         result = getDevice().executeShellCommand("getconf PAGE_SIZE");
         assertEquals("4096", result.strip());

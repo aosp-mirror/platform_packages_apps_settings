@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Hörgeräteeinstellungen"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Verknüpfung, Kompatibilität mit Hörgeräten"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Voreinstellung"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Der Hörgeräteakustiker hat keine Voreinstellungen festgelegt"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Voreinstellung konnte nicht aktualisiert werden"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audioausgabe"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informationen zur Audioausgabe"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Weitere Informationen zu „Mit Smartwatch entsperren“"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Smartwatch hinzufügen"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Smartwatch entfernen"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Entsperrung per Gesichtserkennung und Fingerabdruck"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Entsperrung per Gesichtserkennung &amp; Fingerabdruck"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Entsperrung per Gesichtserkennung &amp; Fingerabdruck für die Arbeit"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Einrichtung erforderlich"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gesicht und Fingerabdrücke hinzugefügt"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Apps installieren"</b>\n"Du kannst in deinem Profil Apps installieren, die privat bleiben sollen"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Wichtige Hinweise"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Apps werden beendet, wenn du dein Profil sperrst"</b>\n"Wenn du dein Profil sperrst, werden die Apps darin beendet und du erhältst von ihnen keine Benachrichtigungen"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Vertrauliche Profile eignen sich nicht für Apps, die im Hintergrund laufen oder wichtige Benachrichtigungen senden müssen, wie z. B. medizinische Apps. Das liegt daran, dass Benachrichtigungen und Hintergrundaktivitäten gestoppt werden, wenn dein Profil gesperrt ist.\n\nWenn dein vertrauliches Profil gesperrt ist, werden Apps darin nicht im Berechtigungsmanager, Privatsphäre-Dashboard und anderen Einstellungen angezeigt.\n\nDein vertrauliches Profil kann nicht auf ein neues Gerät übertragen werden. Du musst ein weiteres vertrauliches Profil einrichten, wenn du es auf einem anderen Gerät verwenden möchtest.\n\nJeder, der dein Gerät mit einem Computer verbindet oder auf dem Gerät schädliche Apps installiert, kann möglicherweise auf dein vertrauliches Profil zugreifen."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Vertrauliche Profile eignen sich nicht für Apps, die im Hintergrund laufen oder wichtige Benachrichtigungen senden müssen, wie z. B. medizinische Apps. Das liegt daran, dass Benachrichtigungen und Hintergrundaktivitäten gestoppt werden, wenn dein Profil gesperrt ist.\n\nWenn dein vertrauliches Profil gesperrt ist, werden Apps darin nicht im Berechtigungsmanager, Privatsphäre-Dashboard und anderen Einstellungen angezeigt.\n\nDein vertrauliches Profil kann nicht auf ein neues Gerät übertragen werden. Wenn du auf einem anderen Gerät ein vertrauliches Profil nutzen möchtest, musst du ein neues einrichten.\n\nPersonen, die dein Gerät mit einem Computer verbinden oder schädliche Apps auf deinem Gerät installieren, haben möglicherweise auch Zugriff auf dein vertrauliches Profil."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Informationen zum vertraulichen Profil"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Das kann einen Moment dauern"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Das vertrauliche Profil wird eingerichtet…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Gerät neu starten?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Die detaillierte NFC-Protokollierung wird nur zu Entwicklungszwecken verwendet. Dazu gehören auch zusätzliche NFC-Daten in Fehlerberichten, die private Informationen enthalten können. Starte dein Gerät neu, um diese Einstellung zu ändern."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Neu starten"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Streamen"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spiegeln"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Kabellose Übertragung aktivieren"</string>
@@ -1192,7 +1221,8 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptiv"</string>
     <string name="brightness" msgid="6216871641021779698">"Helligkeit"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Automatische Helligkeit"</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"Die Helligkeit des Displays passt sich automatisch an deine Umgebung und deine Aktivitäten an. Mit dem Schieberegler kannst du manuell nachjustieren und die Funktion „Automatische Helligkeit“ merkt sich deine Präferenz."</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Informationen zur automatischen Helligkeit"</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"Die Helligkeit des Displays passt sich automatisch an deine Umgebung und deine Aktivitäten an. Mit dem Schieberegler kannst du sie manuell nach Wunsch anpassen und die Funktion „Automatische Helligkeit“ merkt sich deine Präferenz."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"An"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Aus"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Weißabgleich des Bildschirms"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Nutzerauswahl: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Spracheingabe, -erkennung und -ausgabe"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Zeigergeschwindigkeit"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Gamecontroller"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Vibration weiterleiten"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Vibration an Gamecontroller senden, sofern eine Verbindung besteht"</string>
@@ -2094,7 +2130,10 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Trotzdem fortfahren"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Abbrechen"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Vergrößerungseinstellungen"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Schwenken mit einem Finger"</string>
+    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
+    <skip />
+    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
+    <skip />
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Verschiebe den Vergrößerungsbereich mit einem Finger."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Verschiebe den Vergrößerungsbereich mit zwei Fingern."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Nicht verfügbar, solange nur ein Teil des Bildschirms vergrößert wird"</string>
@@ -2118,6 +2157,10 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Zum Zoomen auf eine Schaltfläche tippen"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Du kannst auf dem Display schnell heranzoomen, um Inhalte zu vergrößern"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über den Kurzbefehl&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit zwei Fingern, um den angezeigten Bildschirmausschnitt zu ändern&lt;br/&gt; {3,number,integer}. Ziehe zwei Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Beende die Vergrößerung über den Kurzbefehl&lt;br/&gt;&lt;br/&gt; &lt;b&gt;So zoomst du vorübergehend heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Achte darauf, dass als Art der Vergrößerung „Vollbild“ ausgewählt ist&lt;br/&gt; {1,number,integer}. Starte die Vergrößerung über den Kurzbefehl&lt;br/&gt; {2,number,integer}. Halte eine beliebige Stelle auf dem Display gedrückt&lt;br/&gt; {3,number,integer}. Ziehe mit dem Finger, um den angezeigten Bildschirmausschnitt zu ändern&lt;br/&gt; {4,number,integer}. Hebe den Finger, um die Vergrößerung zu beenden"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Wenn die Vergrößerung aktiviert ist, kannst du Elemente auf dem Bildschirm heranzoomen.\n\n"<b>"Wenn du zoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm.\n"<ul><li>"Zum Scrollen ziehe mit zwei oder mehr Fingern"</li>\n<li>"Zum Anpassen des Zooms ziehe zwei oder mehr Finger zusammen bzw. auseinander"</li></ul>\n\n<b>"Wenn du vorübergehend heranzoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm und halte sie gedrückt.\n"<ul><li>"Wenn du den angezeigten Bildschirmausschnitt verschieben möchtest, ziehe den Bildschirm"</li>\n<li>"Zum Herauszoomen hebe den Finger"</li></ul>\n\n"In die Tastatur oder Navigationsleiste kann nicht hineingezoomt werden."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Seite <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> von <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Kurzbefehl: Schaltfläche „Bedienungshilfen“"</string>
@@ -3326,12 +3369,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Benachrichtigungen nur von wichtigen Personen und Apps"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Aktivierungstyp auswählen"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Uhrzeit"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Beispiel: „09:30 bis 17:00 Uhr“"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalender"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Beispiel: „Persönlicher Kalender“"</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Unterbrechungen einschränken"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"„Bitte nicht stören“ aktivieren"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Wecker und Medientöne können ihn unterbrechen"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Zeitpläne"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Zeitpläne löschen"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Löschen"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Bearbeiten"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Zeitpläne"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Zeitplan"</string>
@@ -3342,6 +3400,8 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Zeitplan festlegen"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Zeitplan"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> Std. <xliff:g id="MINUTES">%2$d</xliff:g> Min."</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
+    <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Zeitplan"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Smartphone zu bestimmten Zeiten stummschalten"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"„Bitte nicht stören“-Regeln einrichten"</string>
@@ -3351,7 +3411,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Unterbrechungen mit Tönen zulassen"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Visuelle Störungen blockieren"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Visuelle Signale zulassen"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Benachrichtigungen, die dich erreichen können"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Mehr Konzentration"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Weitere Aktionen"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Anzeigeeinstellungen"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Optionen anzeigen"</string>
@@ -3368,6 +3428,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"Dunkles Design aktivieren"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Stelle das Betriebssystem und die Apps so ein, dass vor einem dunklen Hintergrund heller Text bevorzugt wird. Das strengt die Augen weniger an und kann auf manchen Geräten die Akkulaufzeit erheblich verlängern."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Keine Änderungen der Anzeige}=1{{effect_1}}=2{{effect_1} und {effect_2}}=3{{effect_1}, {effect_2} und {effect_3}}other{{effect_1}, {effect_2} und # mehr}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Unterbrechungen filtern"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Es werden keine Unterbrechungen gefiltert"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Anzeigeoptionen für gefilterte Benachrichtigungen"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Wenn „Bitte nicht stören“ aktiviert ist"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Kein akustisches Signal bei Benachrichtigungen"</string>
@@ -3664,6 +3726,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Kategorien"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Andere"</string>
     <string name="no_channels" msgid="4716199078612071915">"Für diese App gibt es keine Benachrichtigungen"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Ungenutzte Kategorien anzeigen"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Zusätzliche Einstellungen in der App"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Ungenutzte Kategorien anzeigen"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Ungenutzte Kategorien ausblenden"</string>
@@ -4868,14 +4931,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Bevor die 16‑KB-Entwickleroption verwendet werden kann, muss die Datenpartition des Geräts in ext4 umgewandelt werden. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Zum Aktivieren der 16‑KB-Option muss das Gerät danach noch einmal neu gestartet werden. Wenn du dann in diesem Modus bist, reicht für den Wechsel zwischen dem 4‑KB-Modus und dem 16‑KB-Modus ein einmaliger Neustart aus. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du das Gerät in den Produktionsmodus zurückversetzen möchtest, musst du zurück in den 4‑KB-Modus wechseln und dann den Bootloader sperren. Dadurch wird das Gerät auf die Werkseinstellungen zurückgesetzt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung. Alle Daten auf dem Gerät werden gelöscht und das Dateisystem wird nach entsprechender Bestätigung in ext4 geändert. Nach Abschluss dieses Vorgangs kannst du hierher zurückkehren, um den 16‑KB-Modus zu aktivieren."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Alle Daten löschen"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Die Datenpartition konnte nicht gelöscht und mit ext4 neu formatiert werden."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Für den 16‑KB-Modus muss der Bootloader entsperrt werden"</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Bevor auf diesem Gerät die 16‑KB-Entwickleroption verwendet werden kann, muss der Bootloader entsperrt werden. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Durch Aktivieren des 16‑KB-Modus werden alle Nutzerdaten und ‑einstellungen gelöscht. Nachdem der Bootloader entsperrt wurde, sind zur Aktivierung des 16‑KB-Modus zwei Neustarts erforderlich. Wenn du dann in diesem Modus bist, reicht für den Wechsel zwischen dem 4‑KB-Modus und dem 16‑KB-Modus ein einmaliger Neustart aus. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du das Gerät in den Produktionsmodus zurückversetzen möchtest, musst du zurück in den 4‑KB-Modus wechseln und dann die OEM-/Bootloader-Sperre einrichten. Dadurch wird das Gerät auf die Werkseinstellungen zurückgesetzt. Bitte entsperre den Bootloader und versuch es noch einmal. Eine Anleitung hierzu findest du unter &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;."</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Speicherseitenunabhängigen 4‑KB-Modus verwenden"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Du befindest dich im 4‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du den Bootloader des Geräts sperren. Wenn du mehr erfahren möchtest, tippe hier."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Du befindest dich im 4‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du den Bootloader des Geräts sperren. Dadurch wird das Gerät wieder auf die Werkseinstellungen zurückgesetzt und die Produktionseinstellungen werden wiederhergestellt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung. Wenn Android auf dem Gerät nicht gestartet werden kann oder das Gerät instabil ist, flashe das aktuelle Factory Image unter &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; oder verwende &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; und wähle „Gerätedaten löschen“, „Bootloader sperren“ und „Flashen aller Partitionen erzwingen“ aus."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Hinweis zu speicherseitenunabhängigem 16‑KB-Modus"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Du befindest dich im 16‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du zurück zum 4‑KB-Modus wechseln und dann den Bootloader des Geräts sperren. Wenn du mehr erfahren möchtest, tippe hier."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Du befindest dich im 16‑KB-Modus des speicherseitenunabhängigen Modus. Beachte, dass bei entsperrtem Bootloader die Softwareintegrität nicht sichergestellt werden kann und alle auf dem Smartphone gespeicherten Daten gefährdet sind. Einige Funktionen werden in diesen Modi deaktiviert, weshalb bestimmte Anwendungen möglicherweise nicht funktionieren. Wenn du wieder in den Produktionsmodus wechseln möchtest, musst du zurück zum 4‑KB-Modus wechseln und dann den Bootloader des Geräts sperren. Dadurch wird das Gerät wieder auf die Werkseinstellungen zurückgesetzt und die Produktionseinstellungen werden wiederhergestellt. Nachdem das Gerät hochgefahren und Android gestartet wurde, deaktiviere in den Entwickleroptionen die OEM-Entsperrung. Wenn Android auf dem Gerät nicht gestartet werden kann oder das Gerät instabil läuft, flashe das aktuelle Factory Image unter &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; oder verwende &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; und wähle „Gerätedaten löschen“, „Bootloader sperren“ und „Flashen aller Partitionen erzwingen“ aus."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Speicherseitenunabhängiger 16‑KB-Modus"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Weitere Informationen"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Fehlerbericht-Handler"</string>
@@ -5007,7 +5073,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Bildschirmfixierung verwenden"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Entwickleroptionen verwenden"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Druckdienst verwenden"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Mehrere Nutzer zulassen"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"zulassen, mehrere, Nutzer, Erlaubnis, viele"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"mehrere, Nutzer, Profile, Personen, Konten, wechseln, viele"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Debugging über WLAN verwenden"</string>
@@ -5351,4 +5418,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Stream anhören"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Den QR-Code eines Audiostreams scannen, um den Stream auf <xliff:g id="DEVICE_NAME">%1$s</xliff:g> anzuhören"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Während der Freigabe kann das Passwort nicht geändert werden. Wenn du das Passwort ändern möchtest, deaktiviere zuerst die Audiofreigabe."</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

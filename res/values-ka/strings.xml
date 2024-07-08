@@ -77,6 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"სმენის აპარატის პარამეტრები"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"მალსახმობი, სმენის აპარატებთან თავსებადობა"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"წინასწარ დაყენებული"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"აუდიოლოგისტს არ დაუპროგრამებია წინასწარ დაყენებული პარამეტრ."</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"წინასწარ დაყენებულის განახლება ვერ მოხერხდა"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"გამომავალი აუდიო"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"აუდიოს გამოსატანის შესახებ"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"შეიტყვეთ მეტი საათის განბლოკვის შესახებ"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"საათის დამატება"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"საათის ამოშლა"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"თითის ანაბეჭდით და სახით განბლოკვა"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"სახით და ანაბეჭდით განბლოკვა"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"სახით და თითის ანაბეჭდით განბლოკვა სამსახურისთვის"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"საჭიროა დაყენება"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"სახე და თითის ანაბეჭდები დამატებულია"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"აპების ინსტალაცია"</b>\n"დააინსტალირეთ აპები, რომლებიც გსურთ კონფიდენციალურად შეინახოთ თქვენს სივრცეში"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"გაითვალისწინეთ"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"აპების მუშაობის შეწყვეტა თქვენი კერძო სივრცის ჩაკეტვისას"</b>\n"თქვენს კერძო სივრცეში არსებული აპების ჩაკეტვისას, ისინი შეწყვეტენ მუშაობას და მათგან შეტყობინებებს აღარ მიიღებთ"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"„კერძო სივრცეები“ არ არის შესაფერისი ისეთი აპებისთვის, რომლებიც ფონურად მუშაობს ან აგზავნის კრიტიკულ შეტყობინებებს. ასეთია, მაგალითად, სამედიცინო აპები. ამის მიზეზი შემდეგია: როცა თქვენი სივრცე იკეტება, შეტყობინებები და ფონური აქტივობა ჩერდება.\n\nროცა თქვენი კერძო სივრცე ჩაკეტილია, იქ არსებული აპები არ გამოჩნდება ნებართვების მმართველში, კონფიდენციალურობის საინფორმაციო დაფაზე და სხვა პარამეტრებში.\n\nკერძო სივრცის ახალ მოწყობილობაში გადატანა შეუძლებელია. თქვენ უნდა დააყენოთ სხვა კერძო სივრცე, თუ გსურთ მისი სხვა მოწყობილობაზე გამოყენება.\n\nნებისმიერს, ვინც თქვენს მოწყობილობას აკავშირებს კომპიუტერთან ან დააინსტალირებს მავნე აპებს თქვენს მოწყობილობაზე, შეიძლება ჰქონდეს წვდომა თქვენს კერძო სივრცეზე."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"„კერძო სივრცეები“ არ არის შესაფერისი ისეთი აპებისთვის, რომლებიც ფონურად მუშაობს ან აგზავნის კრიტიკულ შეტყობინებებს. ასეთია, მაგალითად, სამედიცინო აპები. ამის მიზეზი შემდეგია: როცა თქვენი სივრცე იკეტება, შეტყობინებები და ფონური აქტივობა ჩერდება.\n\nროცა კერძო სივრცე ჩაკეტილია, იქ არსებული აპები არ გამოჩნდება ნებართვების მმართველში, კონფიდენციალურობის საინფორმაციო დაფაზე და სხვა პარამეტრებში.\n\nკერძო სივრცის ახალ მოწყობილობაში აღდგენა შეუძლებელია. თქვენ უნდა დააყენოთ სხვა სივრცე, თუ გსურთ მისი სხვა მოწყობილობაზე გამოყენება.\n\nნებისმიერს, ვინც თქვენს მოწყობილობას აკავშირებს კომპიუტერთან ან დააინსტალირებს მავნე აპებს თქვენს მოწყობილობაზე, შეიძლება ჰქონდეს წვდომა თქვენს კერძო სივრცეზე."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"შეიტყვეთ მეტი კერძო სივრცის შესახებ"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"ამას ცოტა ხანი დასჭირდება"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"მიმდინარეობს პირადი სივრცის დაყენება…"</string>
@@ -851,6 +850,36 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"გსურთ მოწყობილობის გადატვირთვა?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"დეტალური NFC აღრიცხვა გათვალისწინებულია მხოლოდ დეველოპერული მიზნებისთვის. დამატებითი NFC მონაცემები მოყვანილია სისტემის ხარვეზის ანგარიშებში, რომლებიც შეიძლება მოიცავდეს პირად ინფორმაციას. გადატვირთეთ თქვენი მოწყობილობა ამ პარამეტრის შესაცვლელად."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"გადატვირთვა"</string>
+    <!-- no translation found for keywords_external_display (4181375057920134909) -->
+    <skip />
+    <!-- no translation found for external_display_on (2560104443500154333) -->
+    <skip />
+    <!-- no translation found for external_display_off (5634413756025351374) -->
+    <skip />
+    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
+    <skip />
+    <!-- no translation found for external_display_use_title (8198257340836261386) -->
+    <skip />
+    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
+    <skip />
+    <!-- no translation found for external_display_not_found (1912355133386555798) -->
+    <skip />
+    <!-- no translation found for external_display_rotation (7160062306817490204) -->
+    <skip />
+    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
+    <skip />
+    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
+    <skip />
+    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
+    <skip />
+    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
+    <skip />
+    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ტრანსლირება"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"გამოსახულების ასლი"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"უსადენო ეკრანის ჩართვა"</string>
@@ -1192,6 +1221,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"ადაპტაციური"</string>
     <string name="brightness" msgid="6216871641021779698">"სიკაშკაშის დონე"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"მორგებადი სიკაშკაშე"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"მორგებადი სიკაშკაშის შესახებ"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"თქვენი ეკრანის სიკაშკაშე ავტომატურად დარეგულირდება თქვენი გარემოსა და აქტივობების გათვალისწინებით. ამ სლაიდერის ამოძრავებას ხელითაც შეძლებთ, რითაც დაეხმარებით მორგებადი სიკაშკაშის პარამეტრს, შეიტყოს, თუ რას ანიჭებთ უპირატესობას."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"ჩართული"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"გამორთული"</string>
@@ -1972,6 +2002,12 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"მომხმარებლის მიერ არჩეული: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"მეტყველება"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"მანიშნებლის სიჩქარე"</string>
+    <!-- no translation found for pointer_scale (4941564570571663964) -->
+    <skip />
+    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
+    <skip />
+    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"თამაშის მეთვალყურე"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"ვიბრაციის გადამისამართება"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"დაკავშირებისას ვიბრაციის სათამაშო კონტოლერზე გადამისამართება"</string>
@@ -2094,7 +2130,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"მაინც გაგრძელება"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"გაუქმება"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"გადიდების პარამეტრები"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"ერთი თითით პანირება"</string>
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"გადაადგილეთ გამადიდებელი 1 თითით"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"ეკრანზე გადასაადგილებლად ჩაავლეთ 1 თითით"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"გაამოძრავეთ გადიდების ზონა ერთი თითის ჩავლებით."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"გაამოძრავეთ გადიდების ზონა ორი თითის ჩავლებით."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"მიუწვდომელია ეკრანის მხოლოდ ნაწილის გადიდებისას"</string>
@@ -2118,6 +2155,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"მასშტაბირება ღილაკზე შეხებით"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"კონტენტის გასადიდებლად სწრაფად გაადიდეთ მასშტაბი ეკრანზე"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;მასშტაბის გასადიდებლად:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. გადიდების დასაწყებად გამოიყენეთ მალსახმობი&lt;br/&gt; {1,number,integer}. შეეხეთ ეკრანს&lt;br/&gt; {2,number,integer}. ჩაავლეთ 2 თითი ეკრანზე გადასაადგილებლად&lt;br/&gt; {3,number,integer}. მასშტაბის კორექტირებისთვის გამოიყენეთ თითებით მასშტაბირება 2 თითით&lt;br/&gt; {4,number,integer}. გადიდების შესაწყვეტად გამოიყენეთ მალსახმობი&lt;br/&gt;&lt;br/&gt;&lt;b&gt;მასშტაბის დროებით გასადიდებლად:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. გადიდების მასშტაბი სრულ ეკრანზე უნდა იყოს დაყენებული&lt;br/&gt; {1,number,integer}. გადიდების დასაწყებად გამოიყენეთ მალსახმობი&lt;br/&gt; {2,number,integer}. ხანგრძლივად შეეხეთ ეკრანს ნებისმიერ ადგილას&lt;br/&gt; {3,number,integer}. ჩაავლეთ თითი ეკრანზე გადასაადგილებლად&lt;br/&gt; {4,number,integer}. გადიდების შესაწყვეტად მოაშორეთ თითი"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;მასშტაბის გასადიდებლად:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. გადიდების დასაწყებად გამოიყენეთ მალსახმობი&lt;br/&gt; {1,number,integer}. შეეხეთ ეკრანს&lt;br/&gt; {2,number,integer}. ეკრანზე გადასაადგილებლად ჩაავლეთ 2 თითით&lt;br/&gt; {3,number,integer}. მასშტაბის კორექტირებისთვის გამოიყენეთ თითებით მასშტაბირება 2 თითით&lt;br/&gt; {4,number,integer}. გადიდების შეწყვეტისთვის გამოიყენეთ მალსახმობი&lt;br/&gt;&lt;br/&gt; თქვენ ასევე შეგიძლიათ დროებით გაადიდოთ მასშტაბი და შეასრულოთ სხვა მოქმედებები."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;მასშტაბის გასადიდებლად:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. გადიდების დასაწყებად გამოიყენეთ მალსახმობი&lt;br/&gt; {1,number,integer}. შეეხეთ ეკრანს&lt;br/&gt; {2,number,integer}. ეკრანზე გადასაადგილებლად ჩაავლეთ 1 ან 2 თითით&lt;br/&gt; {3,number,integer}. მასშტაბის კორექტირებისთვის გამოიყენეთ თითებით მასშტაბირება 2 თითით&lt;br/&gt; {4,number,integer}. გადიდების შეწყვეტისთვის გამოიყენეთ მალსახმობი&lt;br/&gt;&lt;br/&gt; თქვენ ასევე შეგიძლიათ დროებით გაადიდოთ მასშტაბი და შეასრულოთ სხვა მოქმედებები."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"როდესაც გადიდება ჩართულია, შეგიძლიათ გაადიდოთ მასშტაბი თქვენს ეკრანზე.\n\n"<b>"მასშტაბირებისთვის"</b>", დაიწყეთ გადიდება, შემდეგ შეეხეთ ეკრანის ნებისმიერ ადგილს.\n"<ul><li>"გადასაადგილებლად გადაატარეთ ეკრანს 2 ან მეტი თითი"</li>\n<li>"მასშტაბის დასარეგულირებლად ეკრანზე შეაერთეთ 2 ან მეტი თითი"</li></ul>\n\n<b>"მასშტაბის დროებით გასადიდებლად"</b>", დაიწყეთ გადიდება, შემდეგ ხანგრძლივად შეეხეთ ეკრანის ნებისმიერ ნაწილს.\n"<ul><li>"გადაატარეთ თითი ეკრანს მისი სხვადასხვა ნაწილის დასათვალიერებლად"</li>\n<li>"მასშტაბის შესამცირებლად ასწიეთ თითი"</li></ul>\n\n"კლავიატურისა და ნავიგაციის ზოლის მასშტაბის გაზრდა ვერ მოხერხდება."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"გვერდი <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> / <xliff:g id="NUM_PAGES">%2$d</xliff:g>-დან"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"მარტივი წვდომის ღილაკის მალსახმობი"</string>
@@ -3326,12 +3365,27 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"შეტყობინებების მიღება მხოლოდ მნიშვნელოვანი ხალხისგან და აპებიდან"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"აქტივაციის ტიპის არჩევა"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"დრო"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"მაგ. „09:30 — 17:00“"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"კალენდარი"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"მაგ. „პირადი კალენდარი“"</string>
+    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
+    <skip />
+    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"წყვეტების შეზღუდვა"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"„არ შემაწუხოთ“ რეჟიმის ჩართვა"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"შეწყვეტა შეუძლია მაღვიძარებს და მედიის ხმებს"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"განრიგები"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"განრიგების წაშლა"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"წაშლა"</string>
+    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
+    <skip />
+    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
+    <skip />
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"რედაქტირება"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"განრიგები"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"განრიგი"</string>
@@ -3339,11 +3393,10 @@
     <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"კალენდრის დამატება"</string>
     <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"თქვენი კალენდრის გამოყენება"</string>
     <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"განრიგი"</string>
-    <!-- no translation found for zen_mode_set_schedule_title (8023100831320026233) -->
-    <skip />
-    <!-- no translation found for zen_mode_set_schedule_link (2534032127923435737) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_duration (299332195675875111) -->
+    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"განრიგის დაყენება"</string>
+    <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"განრიგი"</string>
+    <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> სთ, <xliff:g id="MINUTES">%2$d</xliff:g> წთ"</string>
+    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
     <skip />
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"განრიგი"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"ტელეფონის დადუმება გარკვეულ მომენტებში"</string>
@@ -3354,7 +3407,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"ხმის გამომცემი წყვეტების დაშვება"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"ვიზუალური სიგნალების დაბლოკვა"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"ვიზუალური სიგნალების დაშვება"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"შეტყობინებები, რომლებსაც თქვენთან დაკავშირება შეუძლიათ"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"ფოკუსის შენარჩუნება"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"დამატებითი მოქმედებები"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"ეკრანის პარამეტრები"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"ეკრანის ვარიანტები"</string>
@@ -3371,6 +3424,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"მუქი თემის ჩართვა"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"შეცვალეთ ოპერაციული სისტემა და აპები და უპირატესობა მიანიჭეთ ნათელ ტექსტს მუქ ფონზე, რაც თვალისთვის უფრო ადვილი აღსაქმელია და მნიშვნელოვნად ზოგავს ბატარეას ზოგიერთ მოწყობილობაზე"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ეკრანის ცვლილებები არ დაფიქსირებულა}=1{{effect_1}}=2{{effect_1} და {effect_2}}=3{{effect_1}, {effect_2} და {effect_3}}other{{effect_1}, {effect_2} და # სხვა}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"შეფერხებების გაფილტვრა"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"შეფერხებები არ გაფილტრულა"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"გაფილტრული შეტყობინებების ეკრანის ვარიანტები"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"როცა ჩართულია „არ შემაწუხოთ“ რეჟიმი"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"შეტყობინებები ხმის გარეშე"</string>
@@ -3667,6 +3722,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"კატეგორიები"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"სხვა"</string>
     <string name="no_channels" msgid="4716199078612071915">"ამ აპს შეტყობინებები არ გამოუქვეყნებია"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"გამოუყენებელი კატეგორიების ჩვენება"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"დამატებითი პარამეტრები აპში"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"გამოუყენებელი კატეგორიების ჩვენება"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"გამოუყენებელი კატეგორიების დამალვა"</string>
@@ -3814,12 +3870,9 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{შეცვალეთ სიგნალიზაცია მხოლოდ ერთი საათის განმავლობაში {time}-მდე}other{მაღვიძარების შეცვლა მხოლოდ # საათის განმავლობაში {time}-მდე}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"მაღვიძარებზე მხოლოდ <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>-მდე გადაყვანა"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"„მუდმივად შეწყვეტის“ რეჟიმზე გადაყვანა"</string>
-    <!-- no translation found for zen_mode_action_change_name (766639614789907016) -->
-    <skip />
-    <!-- no translation found for zen_mode_action_change_icon (6192187791750301778) -->
-    <skip />
-    <!-- no translation found for zen_mode_icon_picker_title (6845490379143557472) -->
-    <skip />
+    <string name="zen_mode_action_change_name" msgid="766639614789907016">"გადარქმევა"</string>
+    <string name="zen_mode_action_change_icon" msgid="6192187791750301778">"ხატულის შეცვლა"</string>
+    <string name="zen_mode_icon_picker_title" msgid="6845490379143557472">"ხატულის შეცვლა"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"შენიშვნა"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"დახურვა"</string>
     <string name="device_feedback" msgid="5351614458411688608">"გამოხმაურება ამ მოწყობილობის შესახებ"</string>
@@ -4874,14 +4927,17 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"დეველოპერთა 16-კბაიტიანი პარამეტრების გამოყენებამდე ამ მოწყობილობის მონაცემთა დანაყოფი უნდა დაკონვერტირდეს ext4-ზე. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. 16-კბაიტიანი ვარიანტის გააქტიურება მოითხოვს კიდევ ერთ გადატვირთვას. ამ რეჟიმში შესვლის შემდეგ, 4-კბაიტიან და 16-კბაიტიან რეჟიმებს შორის შეგიძლიათ ერთი გადატვირთვით გადაერთოთ. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმზე დასაბრუნებლად, უკან უნდა გადმოერთოთ 4-კბაიტიან რეჟიმზე და შემდეგ ჩაკეტოთ ჩამტვირთავი, რაც მოწყობილობას ქარხნულ პარამეტრებზე დააბრუნებს. მოწყობილობის Android-ში წარმატებით ჩატვირთვის შემდეგ, დეველოპერთა პარამეტრებში გათიშეთ OEM-ის მხრიდან განბლოკვა. თანხმობის შემდეგ, ეს მოწყობილობა ამოიშლება და ფაილის სისტემა შეიცვლება ext4-ზე. მას შემდეგ რაც ეს დასრულდება, გთხოვთ დაბრუნდეთ რათა თავიდან ჩართოთ 16-კბაიტიანი რეჟიმი."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"ყველა მონაცემის ამოშლა"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ფორმატის შეცვლა და მონაცემთა დანაყოფის ext4-მდე ამოშლა ვერ მოხერხდა."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"16-კბაიტიანი რეჟიმისათვის აუცილებელია ჩამტვირთავის განბლოკვა."</string>
+    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
+    <skip />
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"დეველოპერთა 16-კბაიტიანი პარამეტრების გამოყენებამდე ამ მოწყობილობის ჩამტვირთავი განბლოკილი უნდა იყოს. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. 16-კბაიტიანი რეჟიმის აქტივაციის შემდეგ, ყველა მომხმარებლის მონაცემები და პარამეტრები ამოიშლება. 16-კბაიტიან ვარიანტს ესაჭიროება ორჯერ გადატვირთვა ჩამტვირთავის განბლოკვის შემდეგ. ამ რეჟიმში შესვლის შემდეგ, 4-კბაიტიან და 16-კბაიტიან რეჟიმებს შორის შეგიძლიათ ერთი გადატვირთვით გადაერთოთ. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში დასაბრუნებლად, უკან უნდა გადმოერთოთ 4-კბაიტიან რეჟიმზე და შემდეგ ჩაკეტოთ OEM/ჩამტვირთავი (რაც მოწყობილობას ქარხნულ პარამეტრებზე დააბრუნებს). გთხოვთ, განბლოკოთ ჩამტვირთავი და ხელახლა ცადოთ. მოცემულ ბმულზე შეგიძლიათ იხილოთ ამ პროცესის ინსტრუქცია: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"იყენებთ 4-კბაიტიან გვერდ-აგნოსტიკურ რეჟიმს"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"თქვენ იმყოფებით გვერდ-აგნოსტიკური რეჟიმის 4-კბაიტიან რეჟიმში. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში თავიდან შესასვლელად უნდა ჩაკეტოთ მოწყობილობის ჩამტვირთავი. მეტის წასაკითხად შეეხეთ."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"თქვენ იმყოფებით გვერდ-აგნოსტიკური რეჟიმის 4-კბაიტიან რეჟიმში. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში თავიდან შესასვლელად უნდა ჩაკეტოთ მოწყობილობის ჩამტვირთავი. ეს მოწყობილობას კვლავ ქარხნულ პარამეტრებზე დააბრუნებს და შესაბამისად, აღადგენს მისი წარმოების პარამეტრებს. მოწყობილობის Android-ში წარმატებით ჩატვირთვის შემდეგ, დეველოპერთა პარამეტრებში გათიშეთ OEM-ის მხრიდან განბლოკვა. თუ მოწყობილობა ვერ იტვირთება Android-ში ან არასტაბილურია, განაახლეთ ჩაშენებული პროგრამული უზრუნველყოფა უახლესი ქარხნული იმიჯებით შემდეგი ბმულიდან: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; და აირჩიეთ „მოწყობილობის წაშლა“, „ჩამტვირთავის ჩაკეტვა“ და „ყველა დანაყოფზე იძულებითი ჩატვირთვა“."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"იყენებთ 16-კბაიტიან გვერდ-აგნოსტიკურ რეჟიმს"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"თქვენ იმყოფებით გვერდ-აგნოსტიკური რეჟიმის 16-კბაიტიან რეჟიმში. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში ხელახლა შესასვლელად უნდა გადაერთოთ 4-კბაიტიან რეჟიმზე და შემდეგ ჩაკეტოთ მოწყობილობის ჩამტვირთავი. მეტის წასაკითხად შეეხეთ."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"თქვენ იმყოფებით გვერდ-აგნოსტიკური რეჟიმის 16-კბაიტიან რეჟიმში. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში ხელახლა შესასვლელად უნდა გადაერთოთ 4-კბაიტიან რეჟიმზე და შემდეგ ჩაკეტოთ მოწყობილობის ჩამტვირთავი. ეს მოწყობილობას კვლავ ქარხნულ პარამეტრებზე დააბრუნებს და შესაბამისად, აღადგენს მისი წარმოების პარამეტრებს. მოწყობილობის Android-ში წარმატებით ჩატვირთვის შემდეგ, დეველოპერთა პარამეტრებში გათიშეთ OEM-ის მხრიდან განბლოკვა. თუ მოწყობილობა ვერ იტვირთება Android-ში ან არასტაბილურია, განაახლეთ ჩაშენებული პროგრამული უზრუნველყოფა უახლესი ქარხნული იმიჯებით შემდეგი ბმულიდან: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; და აირჩიეთ „მოწყობილობის წაშლა“, „ჩამტვირთავის ჩაკეტვა“ და „ყველა დანაყოფზე იძულებითი ჩატვირთვა“."</string>
+    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
+    <skip />
+    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
+    <skip />
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16-კბაიტიანი გვერდ-აგნოსტიკური რეჟიმი"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"ვრცლად"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"სისტემის ხარვეზის ანგარიშის დამმუშავებელი"</string>
@@ -5013,7 +5069,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"აპის ჩამაგრების გამოყენება"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"დეველოპერთა პარამეტრების გამოყენება"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"ბეჭდვის სერვისის გამოყენება"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"მრავალი მომხმარებლის დაშვება"</string>
+    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
+    <skip />
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"დაშვება, მრავალჯერადი, მომხმარებელი, ნებართვა, ბევრი"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"რამდენიმე მომხმარებელი, პროფილი, ადამიანები, ანგარიშები, გადართვა, ბევრი"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"უსადენო გამართვის გამოყენება"</string>
@@ -5357,4 +5414,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ნაკადის მოსმენა"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"დაასკანირეთ აუდიო ნაკადის QR კოდი<xliff:g id="DEVICE_NAME">%1$s</xliff:g> მოწყობილობასთან ერთად მოსასმენად"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"გაზიარების დროს შეუძლებელია პაროლის რედაქტირება. პაროლის შესაცვლელად, პირველ რიგში, გამორთეთ აუდიოს გაზიარება."</string>
+    <!-- no translation found for homepage_search (6759334912284663559) -->
+    <skip />
 </resources>

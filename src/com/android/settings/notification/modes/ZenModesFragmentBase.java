@@ -26,7 +26,10 @@ import android.os.UserManager;
 import android.provider.Settings.Global;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 /**
  * Base class for all Settings pages controlling Modes behavior.
@@ -54,6 +57,11 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    void setBackend(ZenModesBackend backend) {
+        mBackend = backend;
     }
 
     @Override
