@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"הפנים וה-<xliff:g id="WATCH">%s</xliff:g> נוספו"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"הפנים, טביעת האצבע וה-<xliff:g id="WATCH">%s</xliff:g> נוספו"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"הפנים, טביעות האצבע וה-<xliff:g id="WATCH">%s</xliff:g> נוספו"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"זה נחוץ כי בדיקת הזהות מופעלת"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"‏ביטול הנעילה של Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"נוסף שעון"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"הגדרת השעון"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"אפשרויות"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"נגישות"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"מקלדת פיזית"</string>
-    <string name="show_ime" msgid="4334255501724746849">"שימוש במקלדת שמופיעה במסך"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"תישאר במסך בזמן שהמקלדת הפיזית פעילה"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"מקשים חוזרים"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"המקלדת מתעלמת מלחיצות מהירות חוזרות על אותו המקש שנעשות תוך <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> אלפיות השנייה"</string>
     <string name="slow_keys" msgid="2891452895499690837">"מקשים איטיים"</string>
@@ -2585,7 +2584,7 @@
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"יש להקיש לקבלת מידע נוסף על השגיאה הזו"</string>
     <string name="power_screen" msgid="4596900105850963806">"מסך"</string>
-    <string name="power_cpu" msgid="1820472721627148746">"‏(CPU) מעבד"</string>
+    <string name="power_cpu" msgid="1820472721627148746">"‏מעבד (CPU)"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"פנס"</string>
     <string name="power_camera" msgid="4778315081581293923">"מצלמה"</string>
     <string name="power_gps" msgid="6352380895542498164">"GPS"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"יצירה של מצב"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"בהתאמה אישית"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"הגבלת הפרעות"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"הפעלת מצב \'נא לא להפריע\'"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"שעונים מעוררים וצלילי מדיה יכולים להפריע"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"הגדרת לוח זמנים"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"לוח זמנים"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"‫<xliff:g id="HOURS">%1$d</xliff:g> שע\', <xliff:g id="MINUTES">%2$d</xliff:g> דק\'"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"הפעלה אוטומטית"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"לוח זמנים"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"השתקת הטלפון בזמנים מסוימים"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"הגדרת כללים ל\'נא לא להפריע\'"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"פתיחת ההתראה"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"הפעלת האפשרות להעביר התראות למצב \'נודניק\'"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"סימן ההתראות בסמל האפליקציה"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"חבילות התראות"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"בועות"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"בועות"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"הוספת בועה לשיחה"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"אף אחת מהאפשרויות"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"הכול"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ניתן לאפשר לאפליקציות לבטל הגדרה זו"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"אפליקציות שיכולות להפריע"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"נרתיק"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"סוללה"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"חלונית ההגדרות"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"אילוץ מצב שולחן עבודה"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"אילוץ מצב שולחן עבודה ניסיוני במסכים משניים"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"הפעלת האפשרות לשנות את הגודל והמיקום של החלונות"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"הפעלת תמיכה בשינוי הגודל והמיקום של החלונות."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"הפעלת שינוי הגודל והמיקום של החלונות במסך השני"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"הפעלת שינוי הגודל והמיקום של החלונות רק במסך השני."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"הפעלת אפליקציות שלא ניתן לשנות את גודלן בריבוי חלונות"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"ההגדרה מאפשרת להפעיל בריבוי חלונות אפליקציות שלא ניתן לשנות את גודלן"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"‏שינוי התכונה SmartDark"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"‏צריך להמיר את מחיצת הנתונים של המכשיר הזה ל-ext4 לפני השימוש באפשרות למפתחים של 16KB. לא ניתן להבטיח את תקינות התוכנה במצב הזה. כל הנתונים שמאוחסנים בטלפון בזמן שתוכנת האתחול לא נעולה עלולים להיות בסיכון. לאחר הפעלת האפשרות של 16KB תידרש הפעלה נוספת מחדש. מהמצב הזה, אפשר לעבור בין מצב 4KB למצב 16KB בהפעלה אחת מחדש. חלק מהתכונות יושבתו במצבים האלה, כך שחלק מהאפליקציות לא יפעלו. כדי להחזיר את המכשיר למצב ייצור, עליך לחזור למצב 4KB ולנעול את תוכנת האתחול. המכשיר יאופס להגדרות המקוריות. אחרי שהמכשיר מאותחל ל-Android, צריך להשבית את מצב OEM באפשרויות למפתחים. לאחר האישור, הנתונים במכשיר יאופסו ומערכת הקבצים תשתנה ל-ext4. לאחר השלמת הפעולה הזו, צריך לחזור כדי להפעיל את מצב 16KB שוב."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"מחיקת כל הנתונים"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"‏הניסיון לפרמט מחדש את המכשיר ולאפס את מחיצת הנתונים ל-ext4 נכשל."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"צריך לבטל את הנעילה של תוכנת האתחול"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"‏לפני השימוש באפשרות למפתחים של 16KB, צריך לבטל את הנעילה של תוכנת האתחול במכשיר הזה. לא ניתן להבטיח את תקינות התוכנה במצב הזה. כל הנתונים שמאוחסנים בטלפון בזמן שתוכנת האתחול לא נעולה עלולים להיות בסיכון. כל נתוני המשתמש וההגדרות יאופסו בהפעלת מצב 16KB. לאחר ביטול הנעילה של תוכנת האתחול יידרשו שתי הפעלות מחדש כדי שמצב 16KB ייכנס לתוקף. מהמצב הזה, אפשר לעבור בין מצב 4KB למצב 16KB בהפעלה אחת מחדש. חלק מהתכונות יושבתו במצבים האלה, כך שחלק מהאפליקציות לא יפעלו. כדי להחזיר את המכשיר למצב ייצור, צריך לחזור למצב 4KB ואז לנעול את תוכנת האתחול או את מצב ה-OEM של המכשיר (המכשיר יאופס להגדרות המקוריות). צריך לבטל את הנעילה של תוכנת האתחול ולנסות שוב. הוראות לביצוע הפעולה זמינות בכתובת &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"‏שימוש במצב לא מותאם לדף של 4KB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"‏הפעילות שלך מתרחשת במצב לא מותאם לדף של 4KB. לא ניתן להבטיח את תקינות התוכנה במצב הזה. כל הנתונים שמאוחסנים בטלפון בזמן שתוכנת האתחול לא נעולה עלולים להיות בסיכון. חלק מהתכונות יושבתו במצבים האלה, כך שחלק מהאפליקציות לא יפעלו. כדי להיכנס שוב למצב ייצור, עליך לנעול את תוכנת האתחול של המכשיר. אפשר להקיש כדי לקרוא עוד."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"‏הפעילות שלך מתרחשת במצב 4KB השייך למצב שבו גודל הדף לא נקבע מראש על ידי מערכת ההפעלה. לא ניתן להבטיח את תקינות התוכנה במצב הזה. כל הנתונים שמאוחסנים בטלפון בזמן שתוכנת האתחול לא נעולה עלולים להיות בסיכון. חלק מהתכונות יושבתו במצבים האלה, כך שחלק מהאפליקציות לא יפעלו. כדי להיכנס שוב למצב ייצור, עליך לנעול את תוכנת האתחול של המכשיר. הפעולה הזו תאפס שוב את המכשיר להגדרות המקוריות ותשחזר את הגדרות הייצור. אחרי שהמכשיר מאותחל ל-Android, צריך להשבית את מצב OEM באפשרויות למפתחים. אם לא ניתן לאתחל את המכשיר ל-Android או שהוא לא יציב, צריך לעדכן במכשיר את גיבויי הקושחה בכתובת &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers .google.com/android/images&lt;/a&gt; או להשתמש ב-&lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ולבחור באפשרות \'איפוס נתונים במכשיר\' > \'נעילת תוכנת האתחול\' > \'כפיית עדכון על כל המחיצות\'."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"‏שימוש במצב מותאם לדף של 16KB"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"‏הפעילות שלך מתרחשת במצב שמסתגל לגודל דף של 16KB. לא בטוח שהתוכנה תעבוד כראוי במצב הזה, וכל הנתונים שמאוחסנים בטלפון עלולים להיות בסיכון בזמן שתוכנת האתחול לא נעולה. חלק מהתכונות יושבתו במצבים האלה, כך שחלק מהאפליקציות לא יפעלו. כדי להיכנס שוב למצב ייצור, עליך לחזור למצב 4KB ואז לנעול את תוכנת האתחול של המכשיר. אפשר להקיש כדי לקרוא עוד."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"‏הפעילות שלך מתרחשת במצב שמסתגל לגודל דף של 16KB. לא בטוח שהתוכנה תעבוד כראוי במצב הזה, וכל הנתונים שמאוחסנים בטלפון עלולים להיות בסיכון בזמן שתוכנת האתחול לא נעולה. חלק מהתכונות יושבתו במצבים האלה, כך שחלק מהאפליקציות לא יפעלו. כדי להיכנס שוב למצב ייצור, עליך לחזור למצב 4KB ואז לנעול את תוכנת האתחול של המכשיר. הפעולה הזו תאפס שוב את המכשיר להגדרות המקוריות ותשחזר את הגדרות הייצור. אחרי שהמכשיר מאותחל ל-Android, צריך להשבית את מצב OEM באפשרויות למפתחים. אם לא ניתן לאתחל את המכשיר ל-Android או שהוא לא יציב, צריך לעדכן במכשיר את גיבויי הקושחה בכתובת &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers .google.com/android/images&lt;/a&gt; או להשתמש ב-&lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ולבחור באפשרות \'איפוס נתונים במכשיר\' > \'נעילת תוכנת האתחול\' > \'כפיית עדכון על כל המחיצות\'."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"‏מצב לא מותאם לדף של 16KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"עוד פרטים"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"טיפול בדוחות על באגים"</string>
@@ -5185,8 +5187,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"אפשר לבחור מה יוצג במסך כשהטאבלט בעגינה. יכול להיות שהמכשיר ינצל יותר אנרגיה בזמן השימוש בשומר מסך."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"התאמה אישית"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"התאמה אישית של <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"צריך להפעיל מחדש כדי להפעיל את התמיכה במצב החופשי."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"צריך להפעיל מחדש כדי לאלץ את הצגת הגרסה למחשב במסכים המשניים."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"צריך להפעיל מחדש כדי להפעיל תמיכה בשינוי הגודל והמיקום של החלונות מדור קודם."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"צריך להפעיל מחדש כדי לשנות את התמיכה בשינוי הגודל והמיקום של החלונות."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"צריך להפעיל מחדש כדי לאלץ את שינוי הגודל והמיקום של החלונות רק במסך השני."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"להפעיל מחדש עכשיו"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"להפעיל מחדש מאוחר יותר"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"אודיו מרחבי"</string>

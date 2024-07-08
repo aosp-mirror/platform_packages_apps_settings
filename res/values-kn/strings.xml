@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"ಮುಖ ಮತ್ತು <xliff:g id="WATCH">%s</xliff:g> ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"ಮುಖ, ಫಿಂಗರ್‌‍‍‍ಪ್ರಿಂಟ್‌ ಮತ್ತು <xliff:g id="WATCH">%s</xliff:g> ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"ಮುಖ ಮತ್ತು ಫಿಂಗರ್‌‍‍‍ಪ್ರಿಂಟ್‌ಗಳನ್ನು, ಮತ್ತು <xliff:g id="WATCH">%s</xliff:g> ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"ಗುರುತಿನ ಪರಿಶೀಲನೆ ಆನ್ ಆಗಿರುವುದರಿಂದ ಇದರ ಅಗತ್ಯವಿದೆ"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"ರಿಮೋಟ್ Authenticator ಅನ್‌ಲಾಕ್"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"ವಾಚ್ ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"ನಿಮ್ಮ ವಾಚ್ ಸೆಟಪ್ ಮಾಡಿ"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ಆಯ್ಕೆಗಳು"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ಆ್ಯಕ್ಸೆಸಿಬಿಲಿಟಿ"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ಭೌತಿಕ ಕೀಬೋರ್ಡ್‌"</string>
-    <string name="show_ime" msgid="4334255501724746849">"ಆನ್-ಸ್ಕ್ರೀನ್ ಕೀಬೋರ್ಡ್ ಬಳಸಿ"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"ಭೌತಿಕ ಕೀಬೋರ್ಡ್ ಸಕ್ರಿಯವಾಗಿರುವಾಗ ಅದನ್ನು ಪರದೆಯ ಮೇಲೆ ಇರಿಸಿಕೊಳ್ಳಿ"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"ಬೌನ್ಸ್ ಕೀಗಳು"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ಮಿ.ಸೆ. ಒಳಗೆ ಒಂದೇ ಕೀಯ ಪುನರಾವರ್ತಿತ ಒತ್ತುವಿಕೆಗಳನ್ನು ಕೀಬೋರ್ಡ್ ತ್ವರಿತವಾಗಿ ನಿರ್ಲಕ್ಷಿಸುತ್ತದೆ"</string>
     <string name="slow_keys" msgid="2891452895499690837">"ಸ್ಲೋ ಕೀಗಳು"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"ಮೋಡ್ ಅನ್ನು ರಚಿಸಿ"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"ಕಸ್ಟಮ್"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"ಅಡಚಣೆಗಳನ್ನು ಮಿತಿಗೊಳಿಸಿ"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು ಆನ್ ಮಾಡಿ"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"ಅಲಾರಾಂಗಳು ಮತ್ತು ಮೀಡಿಯಾ ಧ್ವನಿಗಳು ಅಡಚಣೆಯಾಗಬಹುದು"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"ವೇಳಾಪಟ್ಟಿಯನ್ನು ಸೆಟ್ ಮಾಡಿ"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"ವೇಳಾಪಟ್ಟಿ"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ಗಂ, <xliff:g id="MINUTES">%2$d</xliff:g> ನಿಮಿ"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆನ್ ಮಾಡಿ"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"ಅವಧಿ"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"ಕೆಲವು ಸಮಯ ಫೋನ್‌ ನಿಶ್ಯಬ್ಧವಾಗಿಸಿ"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ನಿಯಮ ಹೊಂದಿಸಿ"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"ಅಧಿಸೂಚನೆಯನ್ನು ತೆರೆಯಿರಿ"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"ನೋಟಿಫಿಕೇಶನ್‌ಗಳನ್ನು ಸ್ನೂಜ್ ಮಾಡಲು ಅನುಮತಿಸಿ"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"ಆ್ಯಪ್ ಐಕಾನ್‌ ಮೇಲೆ ನೋಟಿಫಿಕೇಶನ್‌ ಡಾಟ್"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"ನೋಟಿಫಿಕೇಶನ್ ಬಂಡಲ್‌ಗಳು"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"ಬಬಲ್ಸ್"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ಬಬಲ್ಸ್"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"ಈ ಸಂಭಾಷಣೆಗೆ ಬಬಲ್ ಗುರುತು ಮಾಡಿ"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"ಯಾವುದೂ ಅಲ್ಲ"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"ಎಲ್ಲಾ"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ಅತಿಕ್ರಮಿಸಲು ಆ್ಯಪ್‌ಗಳಿಗೆ ಅನುಮತಿಸಿ"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"ಅಡಚಣೆ ಉಂಟುಮಾಡಬಹುದಾದ ಆ್ಯಪ್‌ಗಳು"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"ಕೇಸ್"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ಬ್ಯಾಟರಿ"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಪ್ಯಾನಲ್"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"ಡೆಸ್ಕ್‌ಟಾಪ್ ಮೋಡ್ ಅನ್ನು ಒತ್ತಾಯ ಮಾಡಿ"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"ಸೆಕೆಂಡರಿ ಡಿಸ್‌ಪ್ಲೇಗಳಲ್ಲಿ ಪ್ರಾಯೋಗಿಕ ಡೆಸ್ಕ್‌ಟಾಪ್ ಮೋಡ್ ಅನ್ನು ಒತ್ತಾಯ ಮಾಡಿ"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"ಫ್ರೀಫಾರ್ಮ್ ವಿಂಡೋಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"ಫ್ರೀಫಾರ್ಮ್ ವಿಂಡೋಗಳಿಗಾಗಿ ಬೆಂಬಲವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"ಎರಡನೇ ಡಿಸ್‌ಪ್ಲೇಯಲ್ಲಿ ಫ್ರೀಫಾರ್ಮ್ ವಿಂಡೋಯಿಂಗ್ ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"ದ್ವಿತೀಯ ಡಿಸ್‌ಪ್ಲೇಯಲ್ಲಿ ಮಾತ್ರ ಫ್ರೀಫಾರ್ಮ್ ವಿಂಡೋಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"ಬಹು-ವಿಂಡೋದಲ್ಲಿ ಮರುಗಾತ್ರಗೊಳಿಸಲು ಆಗದಿರುವುದನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"ಮರುಗಾತ್ರಗೊಳಿಸಲು ಆಗದ ಆ್ಯಪ್‌ಗಳನ್ನು ಬಹು-ವಿಂಡೋದಲ್ಲಿ ಇರಲು ಅನುಮತಿಸುತ್ತದೆ"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"ಫೋರ್ಸ್-ಡಾರ್ಕ್ ಅನ್ನು ಓವರ್‌ರೈಡ್ ಮಾಡಿ"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16KB ಡೆವಲಪರ್ ಆಯ್ಕೆಯನ್ನು ಬಳಸುವ ಮೊದಲು ಈ ಸಾಧನದ ಡೇಟಾ ಪಾರ್ಟಿಶನ್ ಅನ್ನು ext4 ಗೆ ಪರಿವರ್ತಿಸುವ ಅಗತ್ಯವಿದೆ. ಈ ಮೋಡ್‌ನಲ್ಲಿ ಸಾಫ್ಟ್‌ವೇರ್ ಇಂಟಿಗ್ರಿಟಿಯ ಭರವಸೆ ನೀಡಲಾಗುವುದಿಲ್ಲ ಮತ್ತು ಬೂಟ್‌ಲೋಡರ್ ಅನ್‌ಲಾಕ್ ಆಗಿರುವಾಗ ಫೋನ್‌ನಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಯಾವುದೇ ಡೇಟಾ ಅಪಾಯದಲ್ಲಿರಬಹುದು. 16KB ಆಯ್ಕೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಇದರ ನಂತರ ಮತ್ತೊಮ್ಮೆ ರೀಬೂಟ್ ಮಾಡಬೇಕಾಗುತ್ತದೆ. ಒಮ್ಮೆ ನೀವು ಈ ಮೋಡ್‌ನಲ್ಲಿದ್ದರೆ, ಒಂದೇ ರೀಬೂಟ್‌ನೊಂದಿಗೆ ನೀವು 4KB ಮತ್ತು 16KB ಮೋಡ್‌ಗಳ ನಡುವೆ ಹಿಂದಕ್ಕೆ ಮತ್ತು ಮುಂದಕ್ಕೆ ಬದಲಾಯಿಸಬಹುದು. ಈ ಮೋಡ್‌ಗಳಲ್ಲಿ ಕೆಲವು ಫೀಚರ್ ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ, ಹಾಗಾಗಿ ಕೆಲವು ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸದೇ ಇರಬಹುದು. ಸಾಧನವನ್ನು ಪ್ರೊಡಕ್ಷನ್ ಮೋಡ್‌ಗೆ ಹಿಂತಿರುಗಿಸಲು, ನೀವು 4KB ಮೋಡ್‌ಗೆ ಹಿಂತಿರುಗಿ ನಂತರ ಬೂಟ್‌ಲೋಡರ್ ಅನ್ನು ಲಾಕ್ ಮಾಡಬೇಕಾಗುತ್ತದೆ, ಅದು ಸಾಧನವನ್ನು ಫ್ಯಾಕ್ಟರಿ ರೀಸೆಟ್ ಮಾಡುತ್ತದೆ. ಸಾಧನವು ಯಶಸ್ವಿಯಾಗಿ Android ಗೆ ಬೂಟ್ ಆದ ನಂತರ, ಡೆವಲಪರ್ ಆಯ್ಕೆಗಳಲ್ಲಿ OEM ಅನ್‌ಲಾಕಿಂಗ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ. ಸಾಧನವನ್ನು ಅಳಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ದೃಢೀಕರಣದ ನಂತರ ಫೈಲ್‌ಸಿಸ್ಟಮ್ ಅನ್ನು ext4 ಗೆ ಬದಲಾಯಿಸಲಾಗುತ್ತದೆ. ಇದು ಪೂರ್ಣಗೊಂಡ ನಂತರ, ಮತ್ತೆ 16KB ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಹಿಂತಿರುಗಿ."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"ಎಲ್ಲಾ ಡೇಟಾವನ್ನು ಅಳಿಸಿ"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ಡೇಟಾ ವಿಭಾಗವನ್ನು ext4 ಗೆ ಮರು ಫಾರ್ಮ್ಯಾಟ್ ಮಾಡಲು ಮತ್ತು ಅಳಿಸಲು ವಿಫಲವಾಗಿದೆ."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"ಬೂಟ್‌ಲೋಡರ್ ಅನ್‌ಲಾಕ್ ಮಾಡುವ ಅಗತ್ಯವಿದೆ"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"16KB ಡೆವಲಪರ್ ಆಯ್ಕೆಯನ್ನು ಬಳಸುವ ಮೊದಲು ಈ ಸಾಧನದಲ್ಲಿ ಬೂಟ್‌ಲೋಡರ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಬೇಕಾಗಿದೆ. ಈ ಮೋಡ್‌ನಲ್ಲಿ ಸಾಫ್ಟ್‌ವೇರ್ ಇಂಟಿಗ್ರಿಟಿಯ ಭರವಸೆ ನೀಡಲಾಗುವುದಿಲ್ಲ ಮತ್ತು ಬೂಟ್‌ಲೋಡರ್ ಅನ್‌ಲಾಕ್ ಆಗಿರುವಾಗ ಫೋನ್‌ನಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಯಾವುದೇ ಡೇಟಾ ಅಪಾಯದಲ್ಲಿರಬಹುದು. 16KB ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುವಾಗ ಎಲ್ಲಾ ಬಳಕೆದಾರರ ಡೇಟಾ ಮತ್ತು ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಅಳಿಸಲಾಗುತ್ತದೆ. ಒಮ್ಮೆ ಬೂಟ್‌ಲೋಡರ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲಾದ ನಂತರ, 16KB ಆಯ್ಕೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಎರಡು ರೀಬೂಟ್‌ಗಳ ಅಗತ್ಯವಿರುತ್ತದೆ. ಒಮ್ಮೆ ನೀವು ಈ ಮೋಡ್‌ನಲ್ಲಿದ್ದರೆ, ಒಂದೇ ರೀಬೂಟ್‌ನೊಂದಿಗೆ ನೀವು 4KB ಮತ್ತು 16KB ಮೋಡ್‌ಗಳ ನಡುವೆ ಹಿಂದಕ್ಕೆ ಮತ್ತು ಮುಂದಕ್ಕೆ ಬದಲಾಯಿಸಬಹುದು. ಈ ಮೋಡ್‌ಗಳಲ್ಲಿ ಕೆಲವು ಫೀಚರ್ ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ, ಹಾಗಾಗಿ ಕೆಲವು ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸದೇ ಇರಬಹುದು. ಸಾಧನವನ್ನು ಪ್ರೊಡಕ್ಷನ್ ಮೋಡ್‌ಗೆ ಹಿಂತಿರುಗಿಸಲು, ನೀವು 4KB ಮೋಡ್‌ಗೆ ಹಿಂತಿರುಗಬೇಕು ಮತ್ತು ನಂತರ OEM/ಬೂಟ್‌ಲೋಡರ್ ಸಾಧನವನ್ನು ಲಾಕ್ (ಫ್ಯಾಕ್ಟರಿ ರೀಸೆಟ್) ಮಾಡುತ್ತದೆ. ಬೂಟ್‌ಲೋಡರ್ ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಿ ಮತ್ತು ಪುನಃ ಪ್ರಯತ್ನಿಸಿ. ಇದನ್ನು ಹೇಗೆ ಮಾಡುವುದು ಎಂಬುದರ ಸೂಚನೆಗಳನ್ನು ನೀವು &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; ಇಲ್ಲಿ ನೋಡಬಹುದು"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4KB ಪೇಜ್-ಅಗ್ನೋಸ್ಟಿಕ್ ಮೋಡ್ ಅನ್ನು ಬಳಸಲಾಗುತ್ತಿದೆ"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"ನೀವು ಪೇಜ್-ಅಗ್ನೋಸ್ಟಿಕ್ ಮೋಡ್‌ನ 4KB ಮೋಡ್‌ನಲ್ಲಿರುವಿರಿ. ಈ ಮೋಡ್‌ನಲ್ಲಿ ಸಾಫ್ಟ್‌ವೇರ್ ಇಂಟಿಗ್ರಿಟಿಯ ಭರವಸೆ ನೀಡಲಾಗುವುದಿಲ್ಲ ಮತ್ತು ಬೂಟ್‌ಲೋಡರ್ ಅನ್‌ಲಾಕ್ ಆಗಿರುವಾಗ ಫೋನ್‌ನಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಯಾವುದೇ ಡೇಟಾ ಅಪಾಯದಲ್ಲಿರಬಹುದು. ಈ ಮೋಡ್‌ಗಳಲ್ಲಿ ಕೆಲವು ಫೀಚರ್ ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ, ಹಾಗಾಗಿ ಕೆಲವು ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸದೇ ಇರಬಹುದು. ಪ್ರೊಡಕ್ಷನ್ ಮೋಡ್ ಅನ್ನು ಮರು-ಪ್ರವೇಶಿಸಲು, ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿನ ಬೂಟ್‌ಲೋಡರ್ ಅನ್ನು ನೀವು ಲಾಕ್ ಮಾಡಬೇಕು. ಇನ್ನಷ್ಟು ಓದಲು ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"ನೀವು ಪೇಜ್-ಅಗ್ನೋಸ್ಟಿಕ್ ಮೋಡ್‌ನ 4KB ಮೋಡ್‌ನಲ್ಲಿರುವಿರಿ. ಈ ಮೋಡ್‌ನಲ್ಲಿ ಸಾಫ್ಟ್‌ವೇರ್ ಇಂಟಿಗ್ರಿಟಿಯ ಭರವಸೆ ನೀಡಲಾಗುವುದಿಲ್ಲ ಮತ್ತು ಬೂಟ್‌ಲೋಡರ್ ಅನ್‌ಲಾಕ್ ಆಗಿರುವಾಗ ಫೋನ್‌ನಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಯಾವುದೇ ಡೇಟಾ ಅಪಾಯದಲ್ಲಿರಬಹುದು. ಈ ಮೋಡ್‌ಗಳಲ್ಲಿ ಕೆಲವು ಫೀಚರ್ ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ, ಹಾಗಾಗಿ ಕೆಲವು ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸದೇ ಇರಬಹುದು. ಪ್ರೊಡಕ್ಷನ್ ಮೋಡ್ ಅನ್ನು ಮರು-ಪ್ರವೇಶಿಸಲು, ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿನ ಬೂಟ್‌ಲೋಡರ್ ಅನ್ನು ನೀವು ಲಾಕ್ ಮಾಡಬೇಕು. ಇದು ಸಾಧನವನ್ನು ಮತ್ತೆ ಫ್ಯಾಕ್ಟರಿ ರೀಸೆಟ್ ಮಾಡುತ್ತದೆ ಮತ್ತು ಅದನ್ನು ಪ್ರೊಡಕ್ಷನ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಮರುಸ್ಥಾಪಿಸುತ್ತದೆ. ಸಾಧನವು ಯಶಸ್ವಿಯಾಗಿ Android ಗೆ ಬೂಟ್ ಆದ ನಂತರ, ಡೆವಲಪರ್ ಆಯ್ಕೆಗಳಲ್ಲಿ OEM ಅನ್‌ಲಾಕಿಂಗ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ. ಸಾಧನವು Android ಗೆ ಬೂಟ್ ಮಾಡಲು ವಿಫಲವಾದಲ್ಲಿ ಅಥವಾ ಅಸ್ಥಿರವಾಗಿದ್ದರೆ, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers ನಿಂದ ಇತ್ತೀಚಿನ ಫ್ಯಾಕ್ಟರಿ ಚಿತ್ರಗಳೊಂದಿಗೆ ಸಾಧನವನ್ನು ಮರು-ಫ್ಲಾಶ್ ಮಾಡಿ .google.com/android/images&lt;/a&gt; ಅಥವಾ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ಮತ್ತು \'ವೈಪ್ ಡಿವೈಸ್\', \'ಲಾಕ್ ಬೂಟ್‌ಲೋಡರ್\' ಮತ್ತು \'ಎಲ್ಲಾ ಪಾರ್ಟಿಶನ್‌ಗಳನ್ನು ಫೋರ್ಸ್ ಫ್ಲ್ಯಾಶ್ ಮಾಡಿ\' ಎಂಬುದನ್ನು ಆಯ್ಕೆಮಾಡಿ."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16KB ಪೇಜ್-ಅಗ್ನೋಸ್ಟಿಕ್ ಮೋಡ್ ಅನ್ನು ಬಳಸಲಾಗುತ್ತಿದೆ"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"ನೀವು ಪೇಜ್-ಅಗ್ನಾಸ್ಟಿಕ್ ಮೋಡ್‌ನ 16KB ಮೋಡ್‌ನಲ್ಲಿರುವಿರಿ. ಈ ಮೋಡ್‌ನಲ್ಲಿ ಸಾಫ್ಟ್‌ವೇರ್ ಇಂಟಿಗ್ರಿಟಿಯ ಭರವಸೆ ನೀಡಲಾಗುವುದಿಲ್ಲ ಮತ್ತು ಬೂಟ್‌ಲೋಡರ್ ಅನ್‌ಲಾಕ್ ಆಗಿರುವಾಗ ಫೋನ್‌ನಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಯಾವುದೇ ಡೇಟಾ ಅಪಾಯದಲ್ಲಿರಬಹುದು. ಈ ಮೋಡ್‌ಗಳಲ್ಲಿ ಕೆಲವು ಫೀಚರ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ, ಹಾಗಾಗಿ ಕೆಲವು ಆ್ಯಪ್‌ಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸದೇ ಇರಬಹುದು. ಪ್ರೊಡಕ್ಷನ್ ಮೋಡ್ ಅನ್ನು ಮರು-ಪ್ರವೇಶಿಸಲು, ನೀವು 4KB ಮೋಡ್‌ಗೆ ಹಿಂತಿರುಗಿ ಮತ್ತು ನಂತರ ಸಾಧನದ ಬೂಟ್‌ಲೋಡರ್ ಅನ್ನು ಲಾಕ್ ಮಾಡಬೇಕು. ಇನ್ನಷ್ಟು ಓದಲು ಟ್ಯಾಪ್ ಮಾಡಿ."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"ನೀವು ಪೇಜ್-ಅಗ್ನಾಸ್ಟಿಕ್ ಮೋಡ್‌ನ 16KB ಮೋಡ್‌ನಲ್ಲಿರುವಿರಿ. ಈ ಮೋಡ್‌ನಲ್ಲಿ ಸಾಫ್ಟ್‌ವೇರ್ ಇಂಟಿಗ್ರಿಟಿಯ ಭರವಸೆ ನೀಡಲಾಗುವುದಿಲ್ಲ ಮತ್ತು ಬೂಟ್‌ಲೋಡರ್ ಅನ್‌ಲಾಕ್ ಆಗಿರುವಾಗ ಫೋನ್‌ನಲ್ಲಿ ಸಂಗ್ರಹವಾಗಿರುವ ಯಾವುದೇ ಡೇಟಾ ಅಪಾಯದಲ್ಲಿರಬಹುದು. ಈ ಮೋಡ್‌ಗಳಲ್ಲಿ ಕೆಲವು ಫೀಚರ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತದೆ, ಹಾಗಾಗಿ ಕೆಲವು ಆ್ಯಪ್‌ಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸದೇ ಇರಬಹುದು. ಪ್ರೊಡಕ್ಷನ್ ಮೋಡ್ ಅನ್ನು ಮರು-ಪ್ರವೇಶಿಸಲು, ನೀವು 4KB ಮೋಡ್‌ಗೆ ಹಿಂತಿರುಗಿ ಮತ್ತು ನಂತರ ಸಾಧನದ ಬೂಟ್‌ಲೋಡರ್ ಅನ್ನು ಲಾಕ್ ಮಾಡಬೇಕು. ಇದು ಸಾಧನವನ್ನು ಮತ್ತೆ ಫ್ಯಾಕ್ಟರಿ ರೀಸೆಟ್ ಮಾಡುತ್ತದೆ ಮತ್ತು ಅದನ್ನು ಪ್ರೊಡಕ್ಷನ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಮರುಸ್ಥಾಪಿಸುತ್ತದೆ. ಸಾಧನವು ಯಶಸ್ವಿಯಾಗಿ Android ಗೆ ಬೂಟ್ ಆದ ನಂತರ, ಡೆವಲಪರ್ ಆಯ್ಕೆಗಳಲ್ಲಿ OEM ಅನ್‌ಲಾಕಿಂಗ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ. ಸಾಧನವು Android ಗೆ ಬೂಟ್ ಮಾಡಲು ವಿಫಲವಾದಲ್ಲಿ ಅಥವಾ ಸ್ಥಿರವಾಗಿಲ್ಲದಿದ್ದರೆ, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers ನಿಂದ ಇತ್ತೀಚಿನ ಫ್ಯಾಕ್ಟರಿ ಚಿತ್ರಗಳೊಂದಿಗೆ ಸಾಧನವನ್ನು ಮರು-ಫ್ಲಾಶ್ ಮಾಡಿ .google.com/android/images&lt;/a&gt; ಅಥವಾ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ಮತ್ತು \'ವೈಪ್ ಡಿವೈಸ್\', \'ಲಾಕ್ ಬೂಟ್‌ಲೋಡರ್\' ಮತ್ತು \'ಎಲ್ಲಾ ಪಾರ್ಟಿಶನ್‌ಗಳನ್ನು ಫೋರ್ಸ್ ಫ್ಲ್ಯಾಶ್ ಮಾಡಿ\' ಎಂಬುದನ್ನು ಆಯ್ಕೆಮಾಡಿ."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB ಪೇಜ್-ಅಗ್ನೋಸ್ಟಿಕ್ ಮೋಡ್"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"ಇನ್ನಷ್ಟು ಓದಿ"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"ಬಗ್ ವರದಿ ಹ್ಯಾಂಡ್‌ಲರ್"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ಅನ್ನು ಡಾಕ್ ಮಾಡಿದಾಗ ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‌ನ ಮೇಲೆ ನಿಮಗೇನು ಕಾಣಿಸುತ್ತದೆ ಎಂಬುದನ್ನು ಆಯ್ಕೆಮಾಡಿ. ಸ್ಕ್ರೀನ್ ಸೇವರ್ ಬಳಸಿದಾಗ ನಿಮ್ಮ ಸಾಧನ ಹೆಚ್ಚಿನ ಶಕ್ತಿಯನ್ನು ಬಳಸಬಹುದು."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"ಕಸ್ಟಮೈಸ್ ಮಾಡಿ"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> ಕಸ್ಟಮೈಸ್ ಮಾಡಿ"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ಫ್ರೀಫಾರ್ಮ್ ಬೆಂಬಲವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ರೀಬೂಟ್ ಮಾಡುವ ಅಗತ್ಯವಿದೆ."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"ಸೆಕೆಂಡರಿ ಡಿಸ್‌ಪ್ಲೇಗಳಲ್ಲಿ ಡೆಸ್ಕ್‌ಟಾಪ್ ಮೋಡ್ ಅನ್ನು ಬಲವಂತವಾಗಿ ಸಕ್ರಿಯಗೊಳಿಸಲು ರೀಬೂಟ್ ಮಾಡುವ ಅಗತ್ಯವಿದೆ."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"ಲೆಗಸಿ ಫ್ರೀಫಾರ್ಮ್ ವಿಂಡೊಯಿಂಗ್ ಬೆಂಬಲವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ರೀಬೂಟ್ ಮಾಡುವ ಅಗತ್ಯವಿದೆ."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"ಫ್ರೀಫಾರ್ಮ್ ವಿಂಡೊಯಿಂಗ್ ಬೆಂಬಲವನ್ನು ಬದಲಾಯಿಸಲು ರೀಬೂಟ್ ಮಾಡುವ ಅಗತ್ಯವಿದೆ."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"ಸೆಕೆಂಡರಿ ಡಿಸ್ಪ್ಲೇಗಳಲ್ಲಿ ಫ್ರೀಫಾರ್ಮ್ ವಿಂಡೊಯಿಂಗ್ ಅನ್ನು ಬಲವಂತವಾಗಿ ರೀಬೂಟ್ ಮಾಡುವ ಅಗತ್ಯವಿದೆ."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"ಈಗಲೇ ರೀಬೂಟ್ ಮಾಡಿ"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"ನಂತರ ರೀಬೂಟ್ ಮಾಡಿ"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"ಸ್ಪೇಷಿಯಲ್ ಆಡಿಯೋ"</string>

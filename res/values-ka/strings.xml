@@ -77,7 +77,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"სმენის აპარატის პარამეტრები"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"მალსახმობი, სმენის აპარატებთან თავსებადობა"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"წინასწარ დაყენებული"</string>
-    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"აუდიოლოგისტს არ დაუპროგრამებია წინასწარ დაყენებული პარამეტრ."</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"აუდიოლოგისტს არ დაუპროგრამებია წინასწარ დაყენებული პარამეტრები."</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"წინასწარ დაყენებულის განახლება ვერ მოხერხდა"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"გამომავალი აუდიო"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"აუდიოს გამოსატანის შესახებ"</string>
@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"დაემატა სახე და <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"დაემატა სახე, თითის ანაბეჭდი და <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"დაემატა სახე, თითის ანაბეჭდები და <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"ეს საჭიროა, რადგან ვინაობის დადასტურებაა ჩართული"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Authenticator-ით დისტანციურად განბლოკვა"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"დაემატა საათი"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"თქვენი საათის დაყენება"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ვარიანტები"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"წვდომა"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ფიზიკური კლავიატურა"</string>
-    <string name="show_ime" msgid="4334255501724746849">"ეკრანული კლავიატურის გამოყენება"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"აქტიური ფიზიკური კლავიატურისას ეკრანზე შენარჩუნება"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"კლავიშების ასხლეტა"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"კლავიატურა აიგნორებს <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> მილიწამის განმავლობაში ერთსა და იმავე კლავიშზე სწრაფ, განმეორებით დაჭერებს"</string>
     <string name="slow_keys" msgid="2891452895499690837">"ნელი კლავიშები"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"რეჟიმის შექმნა"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"მორგებული"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"წყვეტების შეზღუდვა"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"„არ შემაწუხოთ“ რეჟიმის ჩართვა"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"შეწყვეტა შეუძლია მაღვიძარებს და მედიის ხმებს"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"განრიგის დაყენება"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"განრიგი"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> სთ, <xliff:g id="MINUTES">%2$d</xliff:g> წთ"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"ავტომატურად ჩართვა"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"განრიგი"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"ტელეფონის დადუმება გარკვეულ მომენტებში"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"„არ შემაწუხოთ“ რეჟიმის წესების დაყენება"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"შეტყობინების გახსნა"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"შეტყობინებების ჩაჩუმების დაშვება"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"შეტყობ. ნიშნული აპის ხატულაზე"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"შეტყობინების ნაკრებები"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"ბუშტები"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ბუშტები"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"ამ მიმოწერის ბუშტად ჩვენება"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"არცერთი"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"ყველა"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"აპებისთვის უგულებელყოფის დაშვება"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"აპები, რომლებსაც შეწყვეტა შეუძლია"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"ფუტლარი"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ბატარეა"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"პარამეტრების პანელი"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"დესკტოპის რეჟიმის იძულებით გააქტიურება"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"დესკტოპის ექსპერიმენტული რეჟიმის იძულებით გააქტიურება მეორეულ ეკრანებზე"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"თავისუფალი ფორმის ფანჯრების ჩართვა"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"მხარდაჭერის ჩართვა თავისუფალი ფორმის ფანჯრებისთვის"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"თავისუფალი ფორმის ფანჯრების ჩართვა მეორე ეკრანზე"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"თავისუფალი ფორმის ფანჯრების ჩართვა მხოლოდ დამატებით ეკრანზე."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"ფიქსირებული ზომის აპის ჩართვა მრავალი ფანჯრის რეჟიმში"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"ეს პარამეტრი საშუალებას იძლევა, აპი ზომის შეუცვლელად გამოჩნდეს მრავალი ფანჯრის რეჟიმში"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"გამუქების იძულების უგულებელყოფა"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"დეველოპერთა 16-კბაიტიანი პარამეტრების გამოყენებამდე ამ მოწყობილობის მონაცემთა დანაყოფი უნდა დაკონვერტირდეს ext4-ზე. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. 16-კბაიტიანი ვარიანტის გააქტიურება მოითხოვს კიდევ ერთ გადატვირთვას. ამ რეჟიმში შესვლის შემდეგ, 4-კბაიტიან და 16-კბაიტიან რეჟიმებს შორის შეგიძლიათ ერთი გადატვირთვით გადაერთოთ. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმზე დასაბრუნებლად, უკან უნდა გადმოერთოთ 4-კბაიტიან რეჟიმზე და შემდეგ ჩაკეტოთ ჩამტვირთავი, რაც მოწყობილობას ქარხნულ პარამეტრებზე დააბრუნებს. მოწყობილობის Android-ში წარმატებით ჩატვირთვის შემდეგ, დეველოპერთა პარამეტრებში გათიშეთ OEM-ის მხრიდან განბლოკვა. თანხმობის შემდეგ, ეს მოწყობილობა ამოიშლება და ფაილის სისტემა შეიცვლება ext4-ზე. მას შემდეგ რაც ეს დასრულდება, გთხოვთ დაბრუნდეთ რათა თავიდან ჩართოთ 16-კბაიტიანი რეჟიმი."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"ყველა მონაცემის ამოშლა"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ფორმატის შეცვლა და მონაცემთა დანაყოფის ext4-მდე ამოშლა ვერ მოხერხდა."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"საჭიროა ჩამტვირთავის განბლოკვა"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"დეველოპერთა 16-კბაიტიანი პარამეტრების გამოყენებამდე ამ მოწყობილობის ჩამტვირთავი განბლოკილი უნდა იყოს. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. 16-კბაიტიანი რეჟიმის აქტივაციის შემდეგ, ყველა მომხმარებლის მონაცემები და პარამეტრები ამოიშლება. 16-კბაიტიან ვარიანტს ესაჭიროება ორჯერ გადატვირთვა ჩამტვირთავის განბლოკვის შემდეგ. ამ რეჟიმში შესვლის შემდეგ, 4-კბაიტიან და 16-კბაიტიან რეჟიმებს შორის შეგიძლიათ ერთი გადატვირთვით გადაერთოთ. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში დასაბრუნებლად, უკან უნდა გადმოერთოთ 4-კბაიტიან რეჟიმზე და შემდეგ ჩაკეტოთ OEM/ჩამტვირთავი (რაც მოწყობილობას ქარხნულ პარამეტრებზე დააბრუნებს). გთხოვთ, განბლოკოთ ჩამტვირთავი და ხელახლა ცადოთ. მოცემულ ბმულზე შეგიძლიათ იხილოთ ამ პროცესის ინსტრუქცია: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"იყენებთ 4-კბაიტიან გვერდ-აგნოსტიკურ რეჟიმს"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"თქვენ იმყოფებით გვერდ-აგნოსტიკური რეჟიმის 4-კბაიტიან რეჟიმში. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში თავიდან შესასვლელად უნდა ჩაკეტოთ მოწყობილობის ჩამტვირთავი. მეტის წასაკითხად შეეხეთ."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"თქვენ იმყოფებით გვერდ-აგნოსტიკური რეჟიმის 4-კბაიტიან რეჟიმში. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში თავიდან შესასვლელად უნდა ჩაკეტოთ მოწყობილობის ჩამტვირთავი. ეს მოწყობილობას კვლავ ქარხნულ პარამეტრებზე დააბრუნებს და შესაბამისად, აღადგენს მისი წარმოების პარამეტრებს. მოწყობილობის Android-ში წარმატებით ჩატვირთვის შემდეგ, დეველოპერთა პარამეტრებში გათიშეთ OEM-ის მხრიდან განბლოკვა. თუ მოწყობილობა ვერ იტვირთება Android-ში ან არასტაბილურია, განაახლეთ ჩაშენებული პროგრამული უზრუნველყოფა უახლესი ქარხნული იმიჯებით შემდეგი ბმულიდან: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; და აირჩიეთ „მოწყობილობის წაშლა“, „ჩამტვირთავის ჩაკეტვა“ და „ყველა დანაყოფზე იძულებითი ჩატვირთვა“."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"იყენებთ 16-კბაიტიან გვერდ-აგნოსტიკურ რეჟიმს"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"თქვენ იმყოფებით გვერდ-აგნოსტიკური რეჟიმის 16-კილობაიტიან რეჟიმში. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში ხელახლა შესასვლელად უნდა გადაერთოთ 4-კილობაიტიან რეჟიმზე და შემდეგ ჩაკეტოთ მოწყობილობის ჩამტვირთავი. მეტის წასაკითხად შეეხეთ."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"თქვენ იმყოფებით გვერდ-აგნოსტიკური რეჟიმის 16-კილობაიტიან რეჟიმში. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში ხელახლა შესასვლელად უნდა გადაერთოთ 4-კილობაიტიან რეჟიმზე და შემდეგ ჩაკეტოთ მოწყობილობის ჩამტვირთავი. ეს მოწყობილობას კვლავ ქარხნულ პარამეტრებზე დააბრუნებს და შესაბამისად, აღადგენს მისი წარმოების პარამეტრებს. მოწყობილობის Android-ში წარმატებით ჩატვირთვის შემდეგ, დეველოპერთა პარამეტრებში გათიშეთ OEM-ის მხრიდან განბლოკვა. თუ მოწყობილობა ვერ იტვირთება Android-ში ან არასტაბილურია, განაახლეთ ჩაშენებული პროგრამული უზრუნველყოფა უახლესი ქარხნული იმიჯებით შემდეგი ბმულიდან: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; და აირჩიეთ „მოწყობილობის წაშლა“, „ჩამტვირთავის ჩაკეტვა“ და „ყველა დანაყოფზე იძულებითი ჩატვირთვა“."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16-კბაიტიანი გვერდ-აგნოსტიკური რეჟიმი"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"ვრცლად"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"სისტემის ხარვეზის ანგარიშის დამმუშავებელი"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"აირჩიეთ, რას იხილავთ თქვენს ეკრანზე, როცა თქვენი ტაბლეტი დოკ-სადგურთან იქნება მიერთებული. ეკრანმზოგის გამოყენების შემთხვევაში თქვენმა მოწყობილობამ შეიძლება მეტი ენერგია გამოიყენოს."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"მორგება"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>-ის მორგება"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"თავისუფალი ფორმის მხარდაჭერის ჩასართავად საჭიროა გადატვირთვა."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"მეორეულ ეკრანზე დესკტოპ რეჟიმის იძულებით გასააქტიურებლად საჭიროა გადატვირთვა."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"მოძველებული თავისუფალი ფორმის ფანჯრების მხარდაჭერის ჩასართავად საჭიროა გადატვირთვა."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"თავისუფალი ფანჯრების მხარდაჭერის შესაცვლელად საჭიროა გადატვირთვა."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"დამატებით ეკრანებზე თავისუფალი ფორმის ფანჯრების გასააქტიურებლად საჭიროა გადატვირთვა."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"ახლავე გადატვირთვა"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"გადატვირთვა მოგვიანებით"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"სივრცითი აუდიო"</string>
