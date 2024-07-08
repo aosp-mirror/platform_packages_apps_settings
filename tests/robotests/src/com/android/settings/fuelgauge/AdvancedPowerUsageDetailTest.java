@@ -780,4 +780,9 @@ public class AdvancedPowerUsageDetailTest {
                     new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, "app label")
                 });
     }
+
+    @Test
+    public void shouldSkipForInitialSUW_returnTrue() {
+        assertThat(mFragment.shouldSkipForInitialSUW()).isTrue();
+    }
 }
