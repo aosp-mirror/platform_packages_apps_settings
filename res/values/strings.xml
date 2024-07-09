@@ -8114,6 +8114,14 @@
     <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_device_effects_title">Additional actions</string>
 
+    <!-- Summary for the Sound Do not Disturb option when DND isn't currently on. [CHAR LIMIT=NONE]-->
+    <string name="modes_sound_summary_off">
+        {count, plural,
+        =0    {Off}
+        =1    {Off / 1 mode can turn on automatically}
+        other {Off / # modes can turn on automatically}
+        }
+    </string>
 
     <!-- Do not disturb: display settings title [CHAR LIMIT=80] -->
     <string name="mode_display_settings_title">Display settings</string>
@@ -9451,6 +9459,18 @@
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Title for the "choose mode icon" screen -->
     <string name="zen_mode_icon_picker_title">Change icon</string>
+
+    <!-- Priority Modes: Title for the "rename mode" screen [CHAR LIMIT=20] -->
+    <string name="zen_mode_rename_title">Rename</string>
+
+    <!-- Priority Modes: Title for the "add mode" screen [CHAR LIMIT=20] -->
+    <string name="zen_mode_new_custom_title">Add mode</string>
+
+    <!-- Priority Modes: Default name for new custom modes [CHAR LIMIT=30] -->
+    <string name="zen_mode_new_custom_default_name">Custom mode</string>
+
+    <!-- Priority Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
+    <string name="zen_mode_edit_name_hint">Mode name</string>
 
     <!-- Content description for help icon button [CHAR LIMIT=20] -->
     <string name="warning_button_text">Warning</string>

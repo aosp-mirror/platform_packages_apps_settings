@@ -31,10 +31,10 @@ import android.os.BatteryManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -77,17 +77,17 @@ public class BatteryManufactureDatePreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
-    @Ignore("b/315267179")
     @Test
     public void getSummary_available_returnExpectedDate() {
         when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable(eq(mContext),
                 anyLong())).thenReturn(true);
         mShadowBatteryManager.setLongProperty(BatteryManager.BATTERY_PROPERTY_MANUFACTURING_DATE,
                 1669680000L);
+        final CharSequence expectedDate = BatteryUtils.getBatteryInfoFormattedDate(1669680000000L);
 
         final CharSequence result = mController.getSummary();
 
-        assertThat(result.toString()).isEqualTo("November 29, 2022");
+        assertThat(result).isEqualTo(expectedDate);
     }
 
     @Test
