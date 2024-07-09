@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Yüz ve <xliff:g id="WATCH">%s</xliff:g> eklendi"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Yüz, parmak izi ve <xliff:g id="WATCH">%s</xliff:g> eklendi"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Yüz, parmak izleri ve <xliff:g id="WATCH">%s</xliff:g> eklendi"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Kimlik Kontrolü açık olduğu için bu zorunludur"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Uzaktan Kimlik Doğrulayıcı Kilidini Açma"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Kol saati eklendi"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Kol saatinizi kurma"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Seçenekler"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Erişilebilirlik"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fiziksel klavye"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Ekran klavyesi kullan"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Fiziksel klavye etkin durumdayken ekranda tut"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Geri sekme tuşları"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"Klavye, aynı tuşa <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms. içinde hızlı bir şekilde tekrarlanan basma işlemlerini yoksayar"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Yavaş tuşlar"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Mod oluşturun"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Özel"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Kesintileri sınırlayın"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Rahatsız Etmeyin\'i açın"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarm ve medya sesleri kesintiye neden olabilir"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Program ayarlama"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Program"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> sa. <xliff:g id="MINUTES">%2$d</xliff:g> dk."</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Otomatik olarak aç"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Program"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Telefonun sesini belirli zamanlarda kapat"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Rahatsız Etmeyin kurallarını ayarlayın"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"bildirimi aç"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Bildirimin ertelenmesine izin ver"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Uygulama simgesinde bildirim noktası"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Bildirim paketleri"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Baloncuklar"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Baloncuklar"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Bu görüşmeyi baloncuk olarak göster"</string>
@@ -3834,6 +3835,8 @@
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Tümü"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
     <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Uygulamaların geçersiz kılmasına izin ver"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Kesintiye neden olabilecek uygulamalar"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Daha fazla uygulama seçin"</string>
@@ -4082,7 +4085,7 @@
     <string name="draw_overlay" msgid="7902083260500573027">"Diğer uyg. üzerinde göster"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Diğer uygulamaların üzerinde göster"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Diğer uygulamalar üzerinde gösterime izin ver"</string>
-    <string name="allow_overlay_description" msgid="1607235723669496298">"Bu uygulamaya, kullandığınız diğer uygulamaların üzerinde gösterme izin verir. Bu uygulama, ekranda nereye dokunduğunuzu görebilecek veya ekranda görüntülenenleri değiştirebilecek."</string>
+    <string name="allow_overlay_description" msgid="1607235723669496298">"Bu uygulamaya, kullandığınız diğer uygulamaların üzerinde gösterim izni verir. Bu uygulama, ekranda nereye dokunduğunuzu görebilecek veya ekranda görüntülenenleri değiştirebilecek."</string>
     <string name="media_routing_control_title" msgid="6402800638960066807">"Medya çıkışını değiştir"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"Uygulamanın, medya çıkışını değiştirmesine izin verin"</string>
     <string name="allow_media_routing_description" msgid="8343709701298051207">"Bu uygulamanın, diğer uygulamalardan ses veya video oynatabilecek bağlı cihazı seçmesine izin verin. İzin verildiği takdirde bu uygulama, kulaklık ve hoparlör gibi kullanılabilir cihazların listesine erişip ses veya video akışı ya da yayını için kullanılacak çıkış cihazını seçebilir."</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Kılıf"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Pil"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Ayarlar Paneli"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Masaüstü modunu zorunlu kıl"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"İkincil ekranlarda deneysel masaüstü modunu zorunlu kıl"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Serbest biçimli pencereleri etkinleştir"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Serbest biçimli pencere desteğini etkinleştir."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"İkincil ekranda serbest biçimli pencerelemeyi etkinleştir"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Serbest biçimli pencereleri yalnızca ikincil ekranda etkinleştir."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Çoklu pencerede yeniden boyutlandırılamayan uygulamalara izin ver"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Çoklu pencerede yeniden boyutlandırılamayan uygulamalara izin verir"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Zorunlu koyu modu geçersiz kıl"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16 KB geliştirici seçeneğini kullanmadan önce bu cihazın veri bölümünün ext4\'e dönüştürülmesi gerekir. Bu modda yazılım bütünlüğü garanti edilemez ve bootloader\'ın kilidi açıkken telefonda saklanan veriler risk altında olabilir. 16 KB seçeneğini etkinleştirdikten sonra bir kez daha yeniden başlatma yapılması gerekir. Bu moddayken tek bir yeniden başlatma işlemiyle 4 KB ve 16 KB modları arasında geçiş yapabilirsiniz. Bu modlarda bazı özellikler devre dışı bırakılacağı için bazı uygulamalar çalışmayabilir. Cihazı üretim moduna döndürmek için 4 KB moduna geri dönmeniz ve bootloader\'ı kilitlemeniz gerekir. Bu durumda cihaz fabrika ayarlarına sıfırlanır. Cihaz başarılı bir şekilde Android\'de başlatıldıktan sonra Geliştirici seçeneklerinde OEM kilit açma özelliğini devre dışı bırakın. Onayınızın ardından cihaz temizlenecek ve dosya sistemi ext4 olarak değiştirilecektir. Bu işlem tamamlandıktan sonra lütfen geri gelerek 16 KB modunu tekrar etkinleştirin."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Tüm verileri sil"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Veriler temizlenemedi ve ext4 olarak yeniden biçimlendirilemedi."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Bootloader Kilidinin Açılması Gerekiyor"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"16 KB geliştirici seçeneğini kullanmadan önce bu cihazın bootloader\'ının kilidinin açılması gerekir. Bu modda yazılım bütünlüğü garanti edilemez ve bootloader\'ın kilidi açıkken telefonda saklanan veriler risk altında olabilir. 16 KB modu etkinleştirildiğinde tüm kullanıcı verileri ve ayarlar silinir. Bootloader\'ın kilidi açıldıktan sonra 16 KB seçeneğinin etkinleştirilmesi için iki kez yeniden başlatma yapılması gerekir. Bu moddayken tek bir yeniden başlatma işlemiyle 4 KB ve 16 KB modları arasında geçiş yapabilirsiniz. Bu modlarda bazı özellikler devre dışı bırakılacağı için bazı uygulamalar çalışmayabilir. Cihazı üretim moduna döndürmek için 4 KB moduna geri dönmeniz ve cihazda OEM/bootloader kilidini etkinleştirmeniz gerekir. Bu durumda cihaz fabrika ayarlarına sıfırlanır. Lütfen bootloader\'ın kilidini açıp tekrar deneyin. Bu işlemle ilgili talimatları görmek için &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; adresine gidin."</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4 KB sayfadan bağımsız modunu kullanıyorsunuz"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Sayfadan bağımsız moddaki 4 KB modundasınız. Bu modda yazılım bütünlüğü garanti edilemez ve bootloader\'ın kilidi açıkken telefonda saklanan veriler risk altında olabilir. Bu modlarda bazı özellikler devre dışı bırakılacağı için bazı uygulamalar çalışmayabilir. Üretim moduna tekrar girmek için cihazın bootloader\'ını kilitlemeniz gerekir. Daha fazla bilgi için dokunun."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Sayfadan bağımsız moddaki 4 KB modundasınız. Bu modda yazılım bütünlüğü garanti edilemez ve bootloader\'ın kilidi açıkken telefonda saklanan veriler risk altında olabilir. Bu modlarda bazı özellikler devre dışı bırakılacağı için bazı uygulamalar çalışmayabilir. Üretim moduna tekrar girmek için cihazın bootloader\'ını kilitlemeniz gerekir. Bu durumda cihaz tekrar fabrika ayarlarına sıfırlanır ve üretim ayarlarına geri döner. Cihaz başarılı bir şekilde Android\'de başlatıldıktan sonra Geliştirici seçeneklerinde OEM kilit açma özelliğini devre dışı bırakın. Cihaz Android\'de başlatılamıyorsa veya kararsızsa cihazı &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; adresindeki en güncel fabrika ayarı görüntüleriyle yeniden yükleyin veya &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; adresine gidip \"Cihazı Temizle\", \"Bootloader\'ı Kilitle\" ve \"Tüm bölümleri zorla yükle\"yi seçin."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16 KB sayfadan bağımsız modunu kullanıyorsunuz"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Sayfadan bağımsız moddaki 16 KB modundasınız. Bu modda yazılım bütünlüğü garanti edilemez ve bootloader\'ın kilidi açıkken telefonda saklanan veriler risk altında olabilir. Bu modlarda bazı özellikler devre dışı bırakılacağı için bir takım uygulamalar çalışmayabilir. Üretim moduna tekrar girmek için 4 KB moduna geçtikten sonra cihazın bootloader\'ını kilitlemeniz gerekir. Daha fazla bilgi için dokunun."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Sayfadan bağımsız moddaki 16 KB modundasınız. Bu modda yazılım bütünlüğü garanti edilemez ve bootloader\'ın kilidi açıkken telefonda saklanan veriler risk altında olabilir. Bu modlarda bazı özellikler devre dışı bırakılacağı için bir takım uygulamalar çalışmayabilir. Üretim moduna tekrar girmek için 4 KB moduna geçtikten sonra cihazın bootloader\'ını kilitlemeniz gerekir. Bu durumda cihaz tekrar fabrika ayarlarına sıfırlanır ve üretim ayarlarına geri döner. Cihaz başarılı bir şekilde Android\'de başlatıldıktan sonra Geliştirici seçeneklerinde OEM kilit açma özelliğini devre dışı bırakın. Cihaz Android\'de başlatılamıyorsa veya kararsızsa cihazı &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; adresindeki en güncel fabrika ayarı görüntüleriyle yeniden yükleyin veya &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; adresine gidip \"Cihazı Temizle\", \"Bootloader\'ı Kilitle\" ve \"Tüm bölümleri zorla yükle\"yi seçin."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 KB Sayfadan Bağımsız Mod"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Devamı"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Hata raporu işleyici"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Tabletiniz yuvaya yerleştirildiğinde ekranınızda nelerin görünmesini istediğinizi seçin. Ekran koruyucu kullanıldığında cihazınız daha fazla enerji tüketebilir."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Özelleştir"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Özelleştir <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Serbest biçimli desteğin etkinleştirilmesi için yeniden başlatma gerekir."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"İkincil ekranlarda masaüstü modunu zorlamak için yeniden başlatma gerekir."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Eski serbest biçimli pencereleme desteğinin etkinleştirilmesi için yeniden başlatma gerekir."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Serbest biçimli pencereleme desteğini değiştirmek için yeniden başlatma gerekir."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"İkincil ekranlarda serbest biçimli pencerelemeyi zorlamak için yeniden başlatma gerekir."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Şimdi yeniden başlat"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Sonra yeniden başlat"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Üç Boyutlu Ses"</string>

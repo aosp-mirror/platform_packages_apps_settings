@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Gehitu dira aurpegia eta <xliff:g id="WATCH">%s</xliff:g> erlojua"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Gehitu dira aurpegia, hatz-marka eta <xliff:g id="WATCH">%s</xliff:g> erlojua"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Gehitu dira aurpegia, hatz-markak eta <xliff:g id="WATCH">%s</xliff:g> erlojua"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Beharrezkoa da identitate-egiaztapena aktibatuta dagoelako"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator-en desblokeoa"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Gehitu da erlojua"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Konfiguratu erlojua"</string>
@@ -615,8 +616,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Instalatu aplikazioak"</b>\n"Instalatu zure eremuan eduki nahi dituzun aplikazio pribatuak"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Gogoratu"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Aplikazioak gelditu egiten dira eremua blokeatzen duzunean"</b>\n"Eremua blokeatzen duzunean, bertan dauzkazun aplikazioak gelditu egiten dira, eta haien jakinarazpenak jasotzeari uzten diozu"</string>
-    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Eremu pribatuak ez dira egokiak atzeko planoan exekutatu behar diren edo funtsezko jakinarazpenak bidali behar dituzten aplikazioetarako (adibidez, medikuntza-aplikazioak). Izan ere, jakinarazpenak eta atzeko planoko jarduerak gelditu egiten dira eremua blokeatuta dagoenean.\n\nZure eremu pribatuko aplikazioak ez dira agertuko baimenen kudeatzailean, pribatutasun-panelean eta beste ezarpenetan eremu pribatua blokeatuta dagoenean.\n\nEremu pribatua ezin da eraman beste gailu batera. Eremu pribatua beste gailu batean erabili nahi baduzu, beste bat konfiguratu beharko duzu.\n\nBaliteke zure gailua ordenagailu batekin konektatzen duten edo gailuan aplikazio kaltegarriak instalatzen dituzten guztiek zure eremu pribatua atzitu ahal izatea."</string>
-    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Eremu pribatuak ez dira egokiak atzeko planoan exekutatu behar diren edo funtsezko jakinarazpenak bidali behar dituzten aplikazioetarako (adibidez, medikuntza-aplikazioak). Izan ere, jakinarazpenak eta atzeko planoko jarduerak gelditu egiten dira eremua blokeatuta dagoenean.\n\nZure eremu pribatuko aplikazioak ez dira agertuko baimenen kudeatzailean, pribatutasun-panelean eta beste ezarpenetan eremu pribatua blokeatuta dagoenean.\n\nEremu pribatua ezin da leheneratu beste gailu batean. Eremua beste gailu batean erabili nahi baduzu, beste bat konfiguratu beharko duzu.\n\nBaliteke zure gailua ordenagailu batekin konektatzen duten edo gailuan asmo txarreko aplikazioak instalatzen dituzten guztiek zure eremu pribatua atzitu ahal izatea."</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Eremu pribatuak ez dira egokiak atzeko planoan exekutatu behar diren edo jakinarazpen larriak bidali behar dituzten aplikazioetarako (adibidez, medikuntza-aplikazioak). Izan ere, jakinarazpenak eta atzeko planoko jarduerak gelditu egiten dira eremua blokeatuta dagoenean.\n\nZure eremu pribatuko aplikazioak ez dira agertuko baimenen kudeatzailean, pribatutasun-panelean eta beste ezarpenetan eremu pribatua blokeatuta dagoenean.\n\nEremu pribatua ezin da eraman beste gailu batera. Eremu pribatua beste gailu batean erabili nahi baduzu, beste bat konfiguratu beharko duzu.\n\nBaliteke zure gailua ordenagailu batekin konektatzen duten edo gailuan aplikazio kaltegarriak instalatzen dituzten guztiek zure eremu pribatua atzitu ahal izatea."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Eremu pribatuak ez dira egokiak atzeko planoan exekutatu behar diren edo jakinarazpen larriak bidali behar dituzten aplikazioetarako (adibidez, medikuntza-aplikazioak). Izan ere, jakinarazpenak eta atzeko planoko jarduerak gelditu egiten dira eremua blokeatuta dagoenean.\n\nZure eremu pribatuko aplikazioak ez dira agertuko baimenen kudeatzailean, pribatutasun-panelean eta beste ezarpenetan eremu pribatua blokeatuta dagoenean.\n\nEremu pribatua ezin da leheneratu beste gailu batean. Eremua beste gailu batean erabili nahi baduzu, beste bat konfiguratu beharko duzu.\n\nBaliteke zure gailua ordenagailu batekin konektatzen duten edo gailuan asmo txarreko aplikazioak instalatzen dituzten guztiek zure eremu pribatua atzitu ahal izatea."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Lortu eremu pribatuari buruzko informazio gehiago"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Une bat beharko da"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Eremu pribatua konfiguratzen…"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Aukerak"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Erabilerraztasuna"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teklatu fisikoa"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Erabili pantailako teklatua"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Erakutsi pantailan teklatu fisikoa aktibo dagoen bitartean"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Errebote-teklak"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"Teklatuak ez ikusi egiten dio tekla bera <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms igaro baino lehen behin eta berriro sakatzen bada"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Tekla motelak"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Egin aurrera, halere"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Utzi"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Luparen ezarpenak"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"Mugitu lupa hatz batekin"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"Arrastatu hatz 1 pantailatik mugitzeko."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Mugitu luparen eremua hatz bat arrastatuta."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Mugitu luparen eremua bi hatz arrastatuta."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Ez dago erabilgarri pantailaren zati bat soilik handitzean"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Zooma aplikatzeko, sakatu botoi bat"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Handitu pantaila bizkor edukia hobeto ikusteko"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Pantaila handitzeko:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Erabili lupa aktibatzeko lasterbidea.&lt;br/&gt; {1,number,integer}. Sakatu pantaila.&lt;br/&gt; {2,number,integer}. Arrastatu bi hatz pantailan zehar mugitzeko.&lt;br/&gt; {3,number,integer}. Atximurkatu pantaila bi hatz erabilita zooma doitzeko.&lt;br/&gt; {4,number,integer}. Erabili lupa desaktibatzeko lasterbidea.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pantaila une batez handitzeko:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Ziurtatu lupa mota pantaila oso gisa ezarrita dagoela.&lt;br/&gt; {1,number,integer}. Erabili lupa aktibatzeko lasterbidea.&lt;br/&gt; {2,number,integer}. Eduki sakatuta pantailako edozein puntu.&lt;br/&gt; {3,number,integer}. Arrastatu hatz bat pantailan zehar mugitzeko.&lt;br/&gt; {4,number,integer}. Jaso hatza lupa desaktibatzeko."</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Pantaila handitzeko:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Erabili lupa aktibatzeko lasterbidea.&lt;br/&gt; {1,number,integer}. Sakatu pantaila.&lt;br/&gt; {2,number,integer}. Arrastatu 2 hatz pantailan zehar mugitzeko.&lt;br/&gt; {3,number,integer}. Atximurkatu 2 hatz zooma doitzeko.&lt;br/&gt; {4,number,integer}. Erabili lasterbidea luparen eginbidea gelditzeko.&lt;br/&gt;&lt;br/&gt; Gainera, aldi baterako handi dezakezu, besteak beste."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Pantaila handitzeko:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Erabili lupa aktibatzeko lasterbidea.&lt;br/&gt; {1,number,integer}. Sakatu pantaila.&lt;br/&gt; {2,number,integer}. Arrastatu 1 edo 2 hatz pantailan barna mugitzeko.&lt;br/&gt; {3,number,integer}. Atximurkatu 2 hatz zooma doitzeko.&lt;br/&gt; {4,number,integer}. Erabili lasterbidea luparen eginbidea gelditzeko.&lt;br/&gt;&lt;br/&gt; Gainera, aldi baterako handi dezakezu, besteak beste."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Zooma aktibatuta badago, pantailan aplika dezakezu.\n\n"<b>"Handitzeko"</b>", ireki zooma eta sakatu pantailako edozein puntu.\n"<ul><li>"Arrastatu bi hatz edo gehiago gora eta behera egiteko."</li>\n<li>"Atximurkatu pantaila bi hatz edo gehiago erabilita zooma doitzeko."</li></ul>\n\n<b>"Zooma unetxo batez aplikatzeko"</b>", ireki zooma eta eduki sakatuta pantailako edozein puntu.\n"<ul><li>"Arrastatu hatza toki batetik bestera joateko."</li>\n<li>"Altxatu hatza txikitzeko."</li></ul>\n\n"Ezin da aplikatu zooma teklatuan edo nabigazio-barran."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g> orria"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Erabilerraztasuna botoiaren lasterbidea"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Sortu modu bat"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Pertsonalizatua"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Mugatu etenaldiak"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Aktibatu ez molestatzeko modua"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmek eta multimedia-soinuek eten dezakete"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Ezarri programazio bat"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programazioa"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h eta <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Aktibatu automatikoki"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programazioa"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Isilarazi telefonoa ordu jakinetan"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Ezarri ez molestatzeko moduaren arauak"</string>
@@ -3545,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"jakinarazpena ireki"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Eman jakinarazpenak atzeratzeko baimena"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Jakinarazpen-biribiltxoa aplikazioaren ikonoan"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Jakinarazpen multzoak"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Burbuilak"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Burbuilak"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Bistaratu elkarrizketa hau burbuila gisa"</string>
@@ -3837,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Bat ere ez"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Guztiak"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Eman \"Ez molestatu\" ez aplikatzeko baimena aplikazioei"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Eten zaitzaketen aplikazioak"</string>
@@ -4862,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Kutxa"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Bateria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Ezarpenen panela"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Behartu ordenagailuetarako modua erabiltzera"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Behartu ordenagailuetarako modu esperimentala erabiltzera bigarren mailako pantailetan"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Gaitu estilo libreko leihoak"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Onartu estilo libreko leihoak."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Gaitu estilo libreko leihoak bigarren pantailan"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Gaitu estilo libreko leihoak bigarren mailako pantailan soilik."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Gaitu tamaina aldagarria ez duten aplikazioak leiho bat baino gehiagoko moduan"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Tamaina aldagarria ez duten aplikazioak leiho bat baino gehiagoko moduan izateko aukera ematen du"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Ez aplikatu gai iluna"</string>
@@ -4931,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Gailu honen datuen partizioa ext4-ra bihurtu behar da 16 kB-ko garatzaileentzako aukera erabili baino lehen. Modu horretan ezin da bermatu softwarearen osotasuna, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. 16 kB-ko aukera aktibatzeko, berriro berrabiarazi beharko da berrabiarazte honen ondoren. Modu horretan zaudenean, 4 kB-ko eta 16 kB-ko moduen artean aldatu ahal izango duzu behin soilik berrabiarazita. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Gailua jatorrizko modura itzultzeko, aldatu berriro 4 kB-ko modura eta blokeatu sistema eragilearen abiarazlea. Gailuaren jatorrizko datuak berrezarriko dira. Gailuak Android behar bezala abiarazten duenean, desgaitu OEMa desblokeatzeko aukera Garatzaileentzako aukerak atalean. Berretsi ondoren, gailua xahutuko da eta fitxategi-sistema ext4-ra aldatuko da. Prozesu hori osatu ondoren, itzuli hona 16 kB-ko modua berriro gaitzeko."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Ezabatu datu guztiak"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Ezin izan da formateatu eta xahutu datu-partizioa ext4-ra."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Sistema eragilearen abiarazlea desblokeatu behar da"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"16 kB-ko garatzaileentzako aukera erabili baino lehen, gailuaren sistema eragilearen abiarazlea desblokeatu behar da. Modu horretan ezin da bermatu softwarearen osotasuna, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. 16 kB-ko modua aktibatzean, erabiltzaile-datu eta -ezarpen guztiak xahutuko dira. Sistema eragilearen abiarazlea desblokeatu ondoren, gailua 2 aldiz berrabiarazi beharko da 16 kB-ko moduaren aukera aktibatzeko. Modu horretan zaudenean, 4 kB-ko eta 16 kB-ko moduen artean aldatu ahal izango duzu behin soilik berrabiarazita. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Gailua jatorrizko modura itzultzeko, aldatu berriro 4 kB-ko modura eta blokeatu gailuaren sistema eragilearen abiarazlea edo OEMa. Gailuaren jatorrizko datuak berrezarriko dira. Desblokeatu sistema eragilearen abiarazlea eta saiatu berriro. Hori egiteko argibideak jasotzeko, joan &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; helbidera."</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Orri-tamaina guztiekin bateragarria den 4 kB-ko modua erabiltzen"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Orri-tamaina guztiekin bateragarria den moduko 4 kB-ko moduan zaude. Modu horretan ezin da bermatu softwarearen osotasuna, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Jatorrizko modura itzultzeko, blokeatu gailuaren sistema eragilearen abiarazlea. Informazio gehiago irakurtzeko, sakatu hau."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Orri-tamaina guztiekin bateragarria den moduko 4 kB-ko moduan zaude. Modu horretan ezin da bermatu softwarearen osotasuna, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Jatorrizko modura itzultzeko, blokeatu gailuaren sistema eragilearen abiarazlea. Gailuaren jatorrizko datuak berrezarriko dira, eta jatorrizko ezarpenetara leheneratuko. Gailuak Android behar bezala abiarazten duenean, desgaitu OEMa desblokeatzeko aukera Garatzaileentzako aukerak atalean. Gailuak Android abiarazi ezin badu edo ezegonkorra bada, instala itzazu fabrikako firmwarearen azken irudiak (&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; helbidetik) gailuan. Bestela, erabili &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; eta hautatu \"Wipe Device\" (xahutu gailua), \"Lock Bootloader\" (blokeatu sistema eragilearen abiarazlea) eta \"Force Flash all partitions\" (behartu partizio guztiak berriro instalatzera)."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Orri-tamaina guztiekin bateragarria den 16 kB-ko modua erabiltzen"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Orri guztiekin bateragarria den moduko 16 kB-ko moduan zaude. Modu horretan ezin da bermatu softwarearen osotasuna, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Jatorrizko modura itzultzeko, aldatu berriro 4 kB-ko modura eta blokeatu gailuaren sistema eragilearen abiarazlea. Informazio gehiago irakurtzeko, sakatu hau."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Orri guztiekin bateragarria den moduko 16 kB-ko moduan zaude. Modu horretan ezin da bermatu softwarearen osotasuna, eta baliteke telefonoan gordetako datuak arriskuan egotea sistema eragilearen abiarazlea desblokeatuta dagoen bitartean. Modu horietan, eginbide batzuk desgaituko dira; beraz, baliteke aplikazio batzuek ez funtzionatzea. Jatorrizko modura itzultzeko, aldatu berriro 4 kB-ko modura eta blokeatu gailuaren sistema eragilearen abiarazlea. Gailuaren jatorrizko datuak berrezarriko dira, eta jatorrizko ezarpenetara leheneratuko. Gailuak Android behar bezala abiarazten duenean, desgaitu OEMa desblokeatzeko aukera Garatzaileentzako aukerak atalean. Gailuak Android abiarazi ezin badu edo ezegonkorra bada, instala itzazu fabrikako firmwarearen azken irudiak (&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; helbidetik) gailuan. Bestela, erabili &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; eta hautatu \"Wipe Device\" (xahutu gailua), \"Lock Bootloader\" (blokeatu sistema eragilearen abiarazlea) eta \"Force Flash all partitions\" (behartu partizio guztiak berriro instalatzera)."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Orri-tamaina guztiekin bateragarria den 16 kB-ko modua"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Irakurri informazio gehiago"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Akatsen txostenen kudeatzailea"</string>
@@ -5188,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Aukeratu zer ikusiko den pantailan tableta oinarrian dagoenean. Baliteke gailuak energia gehiago erabiltzea pantaila-babeslea erabiltzen denean."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Pertsonalizatu"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Pertsonalizatu <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Estilo librerako bateragarritasuna gaitzeko, gailua berrabiarazi egin behar da."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Mahaigaineko modua bigarren mailako pantailetan erabiltzera behartzeko, gailua berrabiarazi egin behar da."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Aurreko bertsioko estilo libreko leihoak onartu ahal izateko, gailua berrabiarazi egin behar da."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Estilo libreko leihoak onartzeko aukera aldatzeko, gailua berrabiarazi egin behar da."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"Bigarren mailako pantailetan estilo libreko leihoak onartzera behartzeko, gailua berrabiarazi egin behar da."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Berrabiarazi"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Berrabiarazi geroago"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Audio espaziala"</string>
