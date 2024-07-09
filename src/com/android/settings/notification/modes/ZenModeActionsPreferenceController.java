@@ -51,7 +51,7 @@ class ZenModeActionsPreferenceController extends AbstractZenModePreferenceContro
             Bundle bundle = new Bundle();
             bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
             new SubSettingLauncher(mContext)
-                    .setDestination(ZenModeIconPickerFragment.class.getName())
+                    .setDestination(ZenModeEditNameIconFragment.class.getName())
                     // TODO: b/332937635 - Update metrics category
                     .setSourceMetricsCategory(0)
                     .setArguments(bundle)
