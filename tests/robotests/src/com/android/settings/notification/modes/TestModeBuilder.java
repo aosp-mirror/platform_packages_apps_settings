@@ -54,6 +54,16 @@ class TestModeBuilder {
         mConfigZenRule.pkg = "some_package";
     }
 
+    TestModeBuilder(ZenMode previous) {
+        mId = previous.getId();
+        mRule = previous.getRule();
+
+        mConfigZenRule = new ZenModeConfig.ZenRule();
+        mConfigZenRule.enabled = previous.getRule().isEnabled();
+        mConfigZenRule.pkg = previous.getRule().getPackageName();
+        setActive(previous.isActive());
+    }
+
     TestModeBuilder setId(String id) {
         mId = id;
         return this;
