@@ -345,4 +345,6 @@ public class AudioSharingDialogFactory {
             return dialog;
         }
     }
+
+    private AudioSharingDialogFactory() {}
 }

@@ -96,13 +96,13 @@ public class PageAgnosticNotificationService extends Service {
                                 notifyPendingIntent)
                         .build();
 
+        // TODO:(b/349860833) Change text style to BigTextStyle once the ellipsis issue is fixed.
         Notification.Builder builder =
                 new Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
                         .setContentTitle(title)
                         .setContentText(text)
                         .setOngoing(true)
                         .setSmallIcon(R.drawable.ic_settings_24dp)
-                        .setStyle(new Notification.BigTextStyle().bigText(text))
                         .setContentIntent(notifyPendingIntent)
                         .addAction(action);
 
@@ -134,6 +134,6 @@ public class PageAgnosticNotificationService extends Service {
 
         // No updates should be allowed in page-agnostic mode
         disableAutomaticUpdates();
-        return Service.START_NOT_STICKY;
+        return Service.START_REDELIVER_INTENT;
     }
 }

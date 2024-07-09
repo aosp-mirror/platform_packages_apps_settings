@@ -22,16 +22,10 @@
     android:title="@string/private_space_title"
     settings:searchable="false">
 
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="private_space_illustration"
-        settings:searchable="false"
-        settings:lottie_rawRes="@raw/private_space_illustration"/>
-
-    <Preference
+    <com.android.settingslib.widget.TopIntroPreference
         android:key="private_space_description"
-        android:summary="@string/private_space_description"
-        android:selectable="false"
-        settings:searchable="false" />
+        android:title="@string/private_space_description"
+        settings:searchable="false"/>
 
     <PreferenceCategory
         android:title="@string/private_space_category_lock">

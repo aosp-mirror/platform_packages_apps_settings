@@ -675,6 +675,12 @@
             android:title="@string/immediately_destroy_activities"
             android:summary="@string/immediately_destroy_activities_summary" />
 
+        <ListPreference
+            android:key="app_process_limit"
+            android:title="@string/app_process_limit_title"
+            android:entries="@array/app_process_limit_entries"
+            android:entryValues="@array/app_process_limit_values" />
+
         <Preference
             android:key="background_check"
             android:fragment="com.android.settings.applications.appops.BackgroundCheckSummary"
@@ -730,6 +736,11 @@
             android:key="force_resizable_activities"
             android:title="@string/force_resizable_activities"
             android:summary="@string/force_resizable_activities_summary" />
+
+        <SwitchPreferenceCompat
+            android:key="override_desktop_mode_features"
+            android:title="@string/enable_desktop_mode"
+            android:summary="@string/enable_desktop_mode_summary" />
 
         <SwitchPreferenceCompat
             android:key="enable_freeform_support"

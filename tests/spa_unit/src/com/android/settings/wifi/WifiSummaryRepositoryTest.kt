@@ -20,13 +20,19 @@ import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.wifi.repository.WifiPickerRepository
+import com.android.settings.wifi.repository.WifiStatusRepository
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
 import com.android.settingslib.wifi.WifiStatusTracker
+import com.android.wifitrackerlib.HotspotNetworkEntry
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class WifiSummaryRepositoryTest {
@@ -35,11 +41,22 @@ class WifiSummaryRepositoryTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    private val repository = WifiSummaryRepository(context) { mockWifiStatusTracker }
+    private val mockWifiStatusRepository =
+        mock<WifiStatusRepository> {
+            on { wifiStatusTrackerFlow() } doReturn flowOf(mockWifiStatusTracker)
+        }
+
+    private val mockWifiPickerRepository = mock<WifiPickerRepository>()
 
     @Test
     fun summaryFlow_wifiDisabled_returnOff() = runBlocking {
         mockWifiStatusTracker.enabled = false
+        val repository =
+            WifiSummaryRepository(
+                context = context,
+                wifiStatusRepository = mockWifiStatusRepository,
+                wifiPickerRepository = null,
+            )
 
         val summary = repository.summaryFlow().firstWithTimeoutOrNull()
 
@@ -52,6 +69,12 @@ class WifiSummaryRepositoryTest {
             enabled = true
             connected = false
         }
+        val repository =
+            WifiSummaryRepository(
+                context = context,
+                wifiStatusRepository = mockWifiStatusRepository,
+                wifiPickerRepository = null,
+            )
 
         val summary = repository.summaryFlow().firstWithTimeoutOrNull()
 
@@ -65,6 +88,12 @@ class WifiSummaryRepositoryTest {
             connected = true
             ssid = TEST_SSID
         }
+        val repository =
+            WifiSummaryRepository(
+                context = context,
+                wifiStatusRepository = mockWifiStatusRepository,
+                wifiPickerRepository = null,
+            )
 
         val summary = repository.summaryFlow().firstWithTimeoutOrNull()
 
@@ -79,14 +108,40 @@ class WifiSummaryRepositoryTest {
             ssid = TEST_SSID
             statusLabel = STATUS_LABEL
         }
+        val repository =
+            WifiSummaryRepository(
+                context = context,
+                wifiStatusRepository = mockWifiStatusRepository,
+                wifiPickerRepository = null,
+            )
 
         val summary = repository.summaryFlow().firstWithTimeoutOrNull()
 
         assertThat(summary).isEqualTo("$TEST_SSID / $STATUS_LABEL")
     }
 
+    @Test
+    fun summaryFlow_withWifiPickerRepository() = runBlocking {
+        val hotspotNetworkEntry =
+            mock<HotspotNetworkEntry> { on { alternateSummary } doReturn ALTERNATE_SUMMARY }
+        mockWifiPickerRepository.stub {
+            on { connectedWifiEntryFlow() } doReturn flowOf(hotspotNetworkEntry)
+        }
+        val repository =
+            WifiSummaryRepository(
+                context = context,
+                wifiStatusRepository = mockWifiStatusRepository,
+                wifiPickerRepository = mockWifiPickerRepository,
+            )
+
+        val summary = repository.summaryFlow().firstWithTimeoutOrNull()
+
+        assertThat(summary).isEqualTo(ALTERNATE_SUMMARY)
+    }
+
     private companion object {
         const val TEST_SSID = "Test Ssid"
         const val STATUS_LABEL = "Very Fast"
+        const val ALTERNATE_SUMMARY = "Alternate Summary"
     }
 }

@@ -15,19 +15,18 @@
  */
 package com.android.settings.notification.modes;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
 import android.content.res.Resources;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.HashMap;
@@ -42,14 +41,10 @@ import java.util.Map;
 class ZenModesListPreferenceController extends BasePreferenceController {
     protected static final String KEY = "zen_modes_list";
 
-    @Nullable
-    protected Fragment mParent;
     protected ZenModesBackend mBackend;
 
-    public ZenModesListPreferenceController(Context context, @Nullable Fragment parent,
-            @NonNull ZenModesBackend backend) {
+    ZenModesListPreferenceController(Context context, @NonNull ZenModesBackend backend) {
         super(context, KEY);
-        mParent = parent;
         mBackend = backend;
     }
 
@@ -74,24 +69,27 @@ class ZenModesListPreferenceController extends BasePreferenceController {
         // category for each rule that exists.
         PreferenceCategory category = (PreferenceCategory) preference;
 
-        Map<String, ZenModeListPreference> originalPreferences = new HashMap<>();
+        Map<String, ZenModesListItemPreference> originalPreferences = new HashMap<>();
         for (int i = 0; i < category.getPreferenceCount(); i++) {
-            ZenModeListPreference pref = (ZenModeListPreference) category.getPreference(i);
+            ZenModesListItemPreference pref = (ZenModesListItemPreference) category.getPreference(
+                    i);
             originalPreferences.put(pref.getKey(), pref);
         }
 
         // Loop through each rule, either updating the existing rule or creating the rule's
         // preference
-        for (ZenMode mode : mBackend.getModes()) {
-            if (originalPreferences.containsKey(mode.getId())) {
+        List<ZenMode> modes = mBackend.getModes();
+        for (ZenMode mode : modes) {
+            ZenModesListItemPreference modePreference = originalPreferences.get(mode.getId());
+            if (modePreference != null) {
                 // existing rule; update its info if it's changed since the last display
-                AutomaticZenRule rule = mode.getRule();
-                originalPreferences.get(mode.getId()).setZenMode(mode);
+                modePreference.setZenMode(mode);
             } else {
                 // new rule; create a new ZenRulePreference & add it to the preference category
-                Preference pref = new ZenModeListPreference(mContext, mode);
-                category.addPreference(pref);
+                modePreference = new ZenModesListItemPreference(mContext, mode);
+                category.addPreference(modePreference);
             }
+            modePreference.setOrder(modes.indexOf(mode));
 
             originalPreferences.remove(mode.getId());
         }

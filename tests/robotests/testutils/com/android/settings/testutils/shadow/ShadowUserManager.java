@@ -363,6 +363,10 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     }
 
     @Implementation
+    protected boolean isAdminUser() {
+        return getUserInfo(UserHandle.myUserId()).isAdmin();
+    }
+    @Implementation
     protected boolean isGuestUser() {
         return mIsGuestUser;
     }
