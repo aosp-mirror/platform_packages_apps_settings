@@ -1423,13 +1423,15 @@ public final class Utils extends com.android.settingslib.Utils {
     public static void setupEdgeToEdge(@NonNull FragmentActivity activity) {
         ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
                 (v, windowInsets) -> {
-                    Insets insets = windowInsets.getInsets(
+                    final Insets insets = windowInsets.getInsets(
                             WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime()
                                     | WindowInsetsCompat.Type.displayCutout());
-                    int statusBarHeight = activity.getWindow().getDecorView().getRootWindowInsets()
-                            .getInsets(WindowInsetsCompat.Type.statusBars()).top;
+                    int newInsetsTop = activity.getWindow().getDecorView().getRootWindowInsets()
+                            .getInsets(WindowInsetsCompat.Type.statusBars()
+                                    | WindowInsetsCompat.Type.captionBar()).top;
+
                     // Apply the insets paddings to the view.
-                    v.setPadding(insets.left, statusBarHeight, insets.right, insets.bottom);
+                    v.setPadding(insets.left, newInsetsTop, insets.right, insets.bottom);
 
                     // Return CONSUMED if you don't want the window insets to keep being
                     // passed down to descendant views.
