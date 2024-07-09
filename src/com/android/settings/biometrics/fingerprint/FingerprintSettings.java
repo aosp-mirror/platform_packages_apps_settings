@@ -44,7 +44,6 @@ import android.os.UserManager;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImeAwareEditText;
@@ -69,8 +68,6 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.GatekeeperPasswordProvider;
-import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
-import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
@@ -801,15 +798,8 @@ public class FingerprintSettings extends SubSettings {
             if (KEY_FINGERPRINT_ADD.equals(key)) {
                 mIsEnrolling = true;
                 Intent intent = new Intent();
-                if (FeatureFlagUtils.isEnabled(getContext(),
-                        FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)) {
-                    intent.setClassName(SETTINGS_PACKAGE_NAME,
-                            FingerprintEnrollmentActivity.InternalActivity.class.getName());
-                    intent.putExtra(EnrollmentRequest.EXTRA_SKIP_FIND_SENSOR, true);
-                } else {
-                    intent.setClassName(SETTINGS_PACKAGE_NAME,
-                            FingerprintEnrollEnrolling.class.getName());
-                }
+                intent.setClassName(SETTINGS_PACKAGE_NAME,
+                        FingerprintEnrollEnrolling.class.getName());
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
                 if (mCalibrator != null) {
@@ -1087,12 +1077,7 @@ public class FingerprintSettings extends SubSettings {
         private void addFirstFingerprint(@Nullable Long gkPwHandle) {
             Intent intent = new Intent();
             intent.setClassName(SETTINGS_PACKAGE_NAME,
-                    FeatureFlagUtils.isEnabled(getActivity(),
-                            FeatureFlagUtils.SETTINGS_BIOMETRICS2_ENROLLMENT)
-                            ? FingerprintEnrollmentActivity.InternalActivity.class.getName()
-                            : FingerprintEnrollIntroductionInternal.class.getName()
-            );
-
+                    FingerprintEnrollIntroductionInternal.class.getName());
             intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
             intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
                     SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
