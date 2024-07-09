@@ -24,3 +24,10 @@ flag {
       purpose: PURPOSE_BUGFIX
   }
 }
+
+flag {
+  name: "enable_bluetooth_device_details_polish"
+  namespace: "cross_device_experiences"
+  description: "Gates whether to enable bluetooth device details polish"
+  bug: "343317785"
+}
