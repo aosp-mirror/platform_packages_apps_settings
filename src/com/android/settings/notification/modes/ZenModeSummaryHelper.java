@@ -41,8 +41,11 @@ import static android.service.notification.ZenPolicy.VISUAL_EFFECT_STATUS_BAR;
 
 import android.content.Context;
 import android.icu.text.MessageFormat;
+import android.provider.Settings;
 import android.service.notification.ZenDeviceEffects;
+import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
+import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -447,5 +450,34 @@ class ZenModeSummaryHelper {
             }
         }
         return msgFormat.format(args);
+    }
+
+    String getSoundSummary(int zenMode, ZenModeConfig config) {
+        if (zenMode != Settings.Global.ZEN_MODE_OFF) {
+            String description = ZenModeConfig.getDescription(mContext, true, config, false);
+
+            if (description == null) {
+                return mContext.getString(R.string.zen_mode_sound_summary_on);
+            } else {
+                return mContext.getString(R.string.zen_mode_sound_summary_on_with_info,
+                        description);
+            }
+        } else {
+            int count = 0;
+            final ArrayMap<String, ZenModeConfig.ZenRule> ruleMap = config.automaticRules;
+            if (ruleMap != null) {
+                for (ZenModeConfig.ZenRule rule : ruleMap.values()) {
+                    if (rule != null && rule.enabled) {
+                        count++;
+                    }
+                }
+            }
+            MessageFormat msgFormat = new MessageFormat(
+                    mContext.getString(R.string.modes_sound_summary_off),
+                    Locale.getDefault());
+            Map<String, Object> msgArgs = new HashMap<>();
+            msgArgs.put("count", count);
+            return msgFormat.format(msgArgs);
+        }
     }
 }
