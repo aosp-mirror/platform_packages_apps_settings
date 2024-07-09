@@ -18,9 +18,9 @@ package com.android.settings.development;
 
 import static android.provider.Settings.Global.DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES;
 
-import static com.android.settings.development.DesktopModePreferenceController.SETTING_VALUE_OFF;
-import static com.android.settings.development.DesktopModePreferenceController.SETTING_VALUE_ON;
-import static com.android.settings.development.DesktopModePreferenceController.SETTING_VALUE_UNSET;
+import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride.OVERRIDE_ON;
+import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride.OVERRIDE_OFF;
+import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride.OVERRIDE_UNSET;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -132,7 +132,7 @@ public class DesktopModePreferenceControllerTest {
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, -1 /* default */);
-        assertThat(mode).isEqualTo(SETTING_VALUE_ON);
+        assertThat(mode).isEqualTo(OVERRIDE_ON.getSetting());
         verify(mTransaction).add(any(RebootConfirmationDialogFragment.class), any());
     }
 
@@ -142,14 +142,14 @@ public class DesktopModePreferenceControllerTest {
 
         int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, -1 /* default */);
-        assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
+        assertThat(mode).isEqualTo(OVERRIDE_OFF.getSetting());
         verify(mTransaction).add(any(RebootConfirmationDialogFragment.class), any());
     }
 
     @Test
     public void updateState_overrideOn_checksPreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, SETTING_VALUE_ON);
+                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, OVERRIDE_ON.getSetting());
 
         mController.updateState(mPreference);
 
@@ -159,7 +159,7 @@ public class DesktopModePreferenceControllerTest {
     @Test
     public void updateState_overrideOff_unchecksPreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, SETTING_VALUE_OFF);
+                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, OVERRIDE_OFF.getSetting());
 
         mController.updateState(mPreference);
 
@@ -170,7 +170,7 @@ public class DesktopModePreferenceControllerTest {
     @EnableFlags(Flags.FLAG_ENABLE_DESKTOP_WINDOWING_MODE)
     public void updateState_overrideUnset_defaultDevOptionStatusOn_checksPreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, SETTING_VALUE_UNSET);
+                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, OVERRIDE_UNSET.getSetting());
 
         mController.updateState(mPreference);
 
@@ -181,7 +181,7 @@ public class DesktopModePreferenceControllerTest {
     @DisableFlags(Flags.FLAG_ENABLE_DESKTOP_WINDOWING_MODE)
     public void updateState_overrideUnset_defaultDevOptionStatusOff_unchecksPreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, SETTING_VALUE_UNSET);
+                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, OVERRIDE_UNSET.getSetting());
 
         mController.updateState(mPreference);
 
@@ -253,6 +253,6 @@ public class DesktopModePreferenceControllerTest {
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, -2 /* default */);
-        assertThat(mode).isEqualTo(DesktopModePreferenceController.SETTING_VALUE_UNSET);
+        assertThat(mode).isEqualTo(OVERRIDE_UNSET.getSetting());
     }
 }
