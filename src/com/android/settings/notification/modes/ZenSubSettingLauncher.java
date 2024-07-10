@@ -23,6 +23,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 
 class ZenSubSettingLauncher {
 
@@ -32,7 +33,7 @@ class ZenSubSettingLauncher {
     }
 
     static SubSettingLauncher forModeFragment(Context context,
-            Class<? extends ZenModeFragmentBase> fragmentClass, String modeId,
+            Class<? extends DashboardFragment> fragmentClass, String modeId,
             int sourceMetricsCategory) {
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, modeId);
