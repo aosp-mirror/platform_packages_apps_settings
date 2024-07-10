@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"เพิ่มใบหน้าและ<xliff:g id="WATCH">%s</xliff:g> แล้ว"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"เพิ่มใบหน้า ลายนิ้วมือ และ<xliff:g id="WATCH">%s</xliff:g> แล้ว"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"เพิ่มใบหน้า ลายนิ้วมือ และ<xliff:g id="WATCH">%s</xliff:g> แล้ว"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"ต้องดำเนินการเนื่องจากการตรวจสอบตัวตนเปิดอยู่"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"การปลดล็อก Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"เพิ่มนาฬิกาแล้ว"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"ตั้งค่านาฬิกา"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ตัวเลือก"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"การช่วยเหลือพิเศษ"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"แป้นพิมพ์จริง"</string>
-    <string name="show_ime" msgid="4334255501724746849">"ใช้แป้นพิมพ์บนหน้าจอ"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"เปิดทิ้งไว้บนหน้าจอในระหว่างใช้งานแป้นพิมพ์จริง"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"คีย์ตีกลับ"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"แป้นพิมพ์จะละเว้นการกดปุ่มเดียวกันซ้ำๆ อย่างรวดเร็วภายใน <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> มิลลิวินาที"</string>
     <string name="slow_keys" msgid="2891452895499690837">"เพิ่มระยะเวลาในการกดปุ่ม"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"ดำเนินการต่อ"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"ยกเลิก"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"การตั้งค่าการขยาย"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"ย้ายแว่นขยายด้วย 1 นิ้ว"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"ใช้ 1 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"ย้ายพื้นที่ในการขยายโดยลากนิ้วเพียงนิ้วเดียว"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"ย้ายพื้นที่ในการขยายโดยลากนิ้ว 2 นิ้ว"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"ไม่พร้อมใช้งานในขณะที่ขยายเพียงบางส่วนของหน้าจอ"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"แตะปุ่มเพื่อซูม"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"ซูมเข้าอย่างรวดเร็วบนหน้าจอเพื่อทำให้เนื้อหาใหญ่ขึ้น"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer}. แตะหน้าจอ&lt;br/&gt; {2,number,integer}. ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer}. บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer}. ใช้ทางลัดเพื่อหยุดการขยาย&lt;br/&gt;&lt;br/&gt; &lt;b&gt;วิธีซูมเข้าชั่วคราว&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ตรวจสอบว่าตั้งค่าประเภทการขยายเป็นแบบเต็มหน้าจอ&lt;br/&gt; {1,number,integer}. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {2,number,integer}. แตะที่ใดก็ได้บนหน้าจอค้างไว้&lt;br/&gt; {3,number,integer}. ลากนิ้วเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {4,number,integer}. ยกนิ้วขึ้นเพื่อหยุดการขยาย"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer} แตะหน้าจอ&lt;br/&gt; {2,number,integer} ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer} บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer} ใช้ทางลัดเพื่อหยุดใช้งานการขยาย&lt;br/&gt;&lt;br/&gt; คุณยังซูมเข้าชั่วคราวและอื่นๆ ได้ด้วย"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer} แตะหน้าจอ&lt;br/&gt; {2,number,integer} ใช้ 1 หรือ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer}. บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer} ใช้ทางลัดเพื่อหยุดใช้งานการขยาย&lt;br/&gt;&lt;br/&gt; คุณยังซูมเข้าชั่วคราวและอื่นๆ ได้ด้วย"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"คุณจะซูมหน้าจอเข้าได้เมื่อเปิดการขยาย\n\n"<b>"วิธีซูมคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอ\n"<ul><li>"ลากนิ้วอย่างน้อย 2 นิ้วเพื่อเลื่อน"</li>\n<li>"บีบนิ้วอย่างน้อย 2 นิ้วเพื่อปรับการซูม"</li></ul>\n\n<b>"วิธีซูมชั่วคราวคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอค้างไว้\n"<ul><li>"ลากเพื่อไปยังส่วนต่างๆ ในหน้าจอ"</li>\n<li>"ยกนิ้วขึ้นเพื่อซูมออก"</li></ul>\n\n"คุณซูมเข้าโดยใช้แป้นพิมพ์หรือแถบนำทางไม่ได้"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"หน้า <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> จาก <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"ทางลัดปุ่มการช่วยเหลือพิเศษ"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"สร้างโหมด"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"กำหนดเอง"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"จำกัดการรบกวน"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"เปิด \"ห้ามรบกวน\""</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"ให้เสียงของการแจ้งเตือนและสื่อรบกวนได้"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"ตั้งกำหนดเวลา"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"กำหนดเวลา"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ชั่วโมง <xliff:g id="MINUTES">%2$d</xliff:g> นาที"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"เปิดอัตโนมัติ"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"กำหนดการ"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"ปิดเสียงโทรศัพท์ในบางช่วงเวลา"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"ตั้งกฎห้ามรบกวน"</string>
@@ -3545,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"เปิดการแจ้งเตือน"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"อนุญาตให้เลื่อนการแจ้งเตือน"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"เครื่องหมายจุดแสดงการแจ้งเตือนบนไอคอนแอป"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"กลุ่มการแจ้งเตือน"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"บับเบิล"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"บับเบิล"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"แสดงการสนทนานี้เป็นบับเบิล"</string>
@@ -3837,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"ไม่มี"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"ทั้งหมด"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"อนุญาตให้แอปลบล้าง"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"แอปที่รบกวนคุณได้"</string>
@@ -4862,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"กล่อง"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"แบตเตอรี่"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"แผงควบคุมการตั้งค่า"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"บังคับใช้โหมดเดสก์ท็อป"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"บังคับใช้โหมดเดสก์ท็อปแบบทดลองในจอแสดงผลรอง"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"เปิดใช้หน้าต่างรูปแบบอิสระ"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"เปิดใช้การรองรับหน้าต่างรูปแบบอิสระ"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"เปิดใช้หน้าต่างรูปแบบอิสระบนจอแสดงผลสำรอง"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"เปิดใช้หน้าต่างรูปแบบอิสระบนจอแสดงผลสำรองเท่านั้น"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"เปิดใช้แอปแบบปรับขนาดไม่ได้ในหลายหน้าต่าง"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"อนุญาตให้แอปแบบปรับขนาดไม่ได้แสดงในหลายหน้าต่าง"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"ลบล้างฟีเจอร์บังคับใช้ธีมมืด"</string>
@@ -4931,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"ต้องแปลงพาร์ติชันข้อมูลของอุปกรณ์นี้เป็น ext4 ก่อนที่จะใช้ตัวเลือกสำหรับนักพัฒนาแอปแบบ 16KB ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง การเปิดใช้งานตัวเลือก 16KB จะต้องมีการรีบูตอีกครั้งหลังจากนี้ เมื่ออยู่ในโหมดนี้แล้ว คุณจะเปลี่ยนไปมาระหว่างโหมด 4KB กับ 16KB ได้ด้วยการรีบูตครั้งเดียว ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการให้อุปกรณ์กลับสู่โหมดโปรดักชัน คุณต้องเปลี่ยนกลับไปใช้โหมด 4KB จากนั้นล็อก Bootloader ซึ่งจะรีเซ็ตอุปกรณ์เป็นค่าเริ่มต้น หลังจากที่อุปกรณ์บูตเข้าสู่ Android ได้สำเร็จ ให้ปิดการปลดล็อก OEM ในตัวเลือกสำหรับนักพัฒนาแอป อุปกรณ์จะถูกล้างข้อมูลและระบบไฟล์จะเปลี่ยนเป็น ext4 หลังจากการยืนยัน หลังจากการดำเนินการนี้เสร็จสมบูรณ์ โปรดกลับมาเปิดใช้โหมด 16KB อีกครั้ง"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"ลบข้อมูลทั้งหมด"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ฟอร์แมตใหม่และล้างพาร์ติชันข้อมูลเป็น ext4 ไม่สำเร็จ"</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"ต้องปลดล็อก Bootloader"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"อุปกรณ์นี้ต้องมีการปลดล็อก Bootloader ก่อนที่จะใช้ตัวเลือกสำหรับนักพัฒนาแอปแบบ 16KB ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ข้อมูลผู้ใช้และการตั้งค่าทั้งหมดจะถูกล้างเมื่อเปิดใช้งานโหมด 16KB เมื่อปลดล็อก Bootloader แล้ว การเปิดใช้งานตัวเลือก 16KB จะต้องมีการรีบูต 2 ครั้ง เมื่ออยู่ในโหมดนี้แล้ว คุณจะเปลี่ยนไปมาระหว่างโหมด 4KB กับ 16KB ได้ด้วยการรีบูตครั้งเดียว ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการให้อุปกรณ์กลับสู่โหมดโปรดักชัน คุณต้องเปลี่ยนกลับไปใช้โหมด 4KB จากนั้นล็อก OEM/Bootloader (ซึ่งจะรีเซ็ตอุปกรณ์เป็นค่าเริ่มต้น) โปรดปลดล็อก Bootloader แล้วลองอีกครั้ง ดูวิธีการได้ที่ &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"กำลังใช้โหมด 4KB ในโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"คุณอยู่ในโหมด 4KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการกลับสู่โหมดโปรดักชันอีกครั้ง คุณต้องล็อก Bootloader ของอุปกรณ์ แตะเพื่ออ่านเพิ่มเติม"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"คุณอยู่ในโหมด 4KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการกลับสู่โหมดโปรดักชันอีกครั้ง คุณต้องล็อก Bootloader ของอุปกรณ์ การดำเนินการนี้จะรีเซ็ตอุปกรณ์เป็นค่าเริ่มต้นอีกครั้งและคืนค่าเป็นโหมดโปรดักชัน หลังจากที่อุปกรณ์บูตเข้าสู่ Android ได้สำเร็จ ให้ปิดการปลดล็อก OEM ในตัวเลือกสำหรับนักพัฒนาแอป หากอุปกรณ์ไม่สามารถบูตเข้าสู่ Android หรือไม่เสถียร ให้แฟลชอุปกรณ์อีกครั้งโดยใช้ค่าเริ่มต้นล่าสุดจาก &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; หรือใช้ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; และเลือก \"ล้างข้อมูลอุปกรณ์\" \"ล็อก Bootloader\" และ \"บังคับให้แฟลชทุกพาร์ติชัน\""</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"กำลังใช้โหมด 16KB ในโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"คุณอยู่ในโหมด 16KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการกลับสู่โหมดโปรดักชันอีกครั้ง คุณต้องเปลี่ยนกลับไปใช้โหมด 4KB แล้วล็อก Bootloader ของอุปกรณ์ แตะเพื่ออ่านเพิ่มเติม"</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"คุณอยู่ในโหมด 16KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการกลับสู่โหมดโปรดักชันอีกครั้ง คุณต้องเปลี่ยนกลับไปใช้โหมด 4KB แล้วล็อก Bootloader ของอุปกรณ์ การดำเนินการนี้จะรีเซ็ตอุปกรณ์เป็นค่าเริ่มต้นอีกครั้งและคืนค่าเป็นโหมดโปรดักชัน หลังจากที่อุปกรณ์บูตเข้าสู่ Android ได้สำเร็จ ให้ปิดการปลดล็อก OEM ในตัวเลือกสำหรับนักพัฒนาแอป หากอุปกรณไม่สามารถเปิดเครื่องเพื่อเข้าสู่ Android หรือไม่เสถียร ให้แฟลชอุปกรณ์อีกครั้งโดยใช้ค่าเริ่มต้นล่าสุดจาก &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; หรือใช้ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; และเลือก \"ล้างข้อมูลอุปกรณ์\" \"ล็อก Bootloader\" และ \"บังคับให้แฟลชทุกพาร์ติชัน\""</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"โหมด 16KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"อ่านเพิ่มเติม"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"เครื่องจัดการรายงานข้อบกพร่อง"</string>
@@ -5188,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"เลือกสิ่งที่คุณจะเห็นในหน้าจอเมื่อวางแท็บเล็ตบนแท่นชาร์จ อุปกรณ์อาจใช้พลังงานมากขึ้นเมื่อใช้ภาพพักหน้าจอ"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"ปรับแต่ง"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"ปรับแต่ง <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ต้องรีบูตเพื่อเปิดใช้การสนับสนุนแบบอิสระ"</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"ต้องรีบูตเพื่อบังคับให้จอแสดงผลสำรองใช้โหมดเดสก์ท็อป"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"ต้องรีบูตเพื่อเปิดใช้การรองรับหน้าต่างรูปแบบอิสระแบบเดิม"</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"ต้องรีบูตเพื่อเปลี่ยนการรองรับหน้าต่างรูปแบบอิสระ"</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"ต้องรีบูตเพื่อบังคับให้เปิดใช้หน้าต่างรูปแบบอิสระบนจอแสดงผลสำรอง"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"รีบูตเลย"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"รีบูตภายหลัง"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"เสียงรอบทิศทาง"</string>

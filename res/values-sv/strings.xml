@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Ansikte och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Ansikte, fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansikte, fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Detta behövs eftersom identitetskontroll är på"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Upplåsning med fjärrverifierare"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Klockan har lagts till"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Konfigurera klockan"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Alternativ"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Tillgänglighet"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fysiskt tangentbord"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Använd skärmtangentbord"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Ha kvar det på skärmen när det fysiska tangentbordet används"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Studsande tangenter"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"Tangentbordet ignorerar snabbt upprepade tryck på samma tangent inom <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Långsamma tangenter"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Fortsätt ändå"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Avbryt"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Inställningar för förstoring"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"Flytta förstoringsglaset med ett finger"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"Navigera på skärmen: dra med ett finger."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Flytta förstoringsområdet genom att dra med ett finger."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Flytta förstoringsområdet genom att dra med två fingrar."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Inte tillgänglig när bara förstoringsdelen av skärmen visas"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tryck på en knapp för att zooma"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zooma in snabbt så att innehåll på skärmen förstoras"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Så här zoomar du in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starta förstoring med genvägen&lt;br/&gt; {1,number,integer}. Tryck på skärmen&lt;br/&gt; {2,number,integer}. Navigera på skärmen genom att dra med två fingrar&lt;br/&gt; {3,number,integer}. Nyp med två fingrar för att justera zoomnivån&lt;br/&gt; {4,number,integer}. Stoppa förstoringen med genvägen&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Så här zoomar du in tillfälligt:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Kontrollera att förstoringstyp är inställd som helskärm&lt;br/&gt; {1,number,integer}. Starta förstoring med genvägen&lt;br/&gt; {2,number,integer}. Tryck länge var som helst på skärmen&lt;br/&gt; {3,number,integer}. Navigera på skärmen genom att dra med fingret&lt;br/&gt; {4,number,integer}. Stoppa förstoringen genom att lyfta fingret"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Så här zoomar du in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starta förstoring med kortkommando&lt;br/&gt; {1,number,integer}. Tryck på skärmen&lt;br/&gt; {2,number,integer}. Navigera på skärmen genom att dra med två fingrar&lt;br/&gt; {3,number,integer}. Nyp med två fingrar för att justera zoomnivån&lt;br/&gt; {4,number,integer}. Stoppa förstoring med kortkommando&lt;br/&gt;&lt;br/&gt; Du kan även zooma in tillfälligt med mera."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Så här zoomar du in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starta förstoring med kortkommando&lt;br/&gt; {1,number,integer}. Tryck på skärmen&lt;br/&gt; {2,number,integer}. Navigera på skärmen genom att dra med ett finger eller två fingrar&lt;br/&gt; {3,number,integer}. Nyp med två fingrar för att justera zoomnivån&lt;br/&gt; {4,number,integer}. Stoppa förstoring med kortkommando&lt;br/&gt;&lt;br/&gt; Du kan även zooma in tillfälligt med mera."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"När förstoring har aktiverats kan du zooma in på skärmen.\n\n"<b>"Om du vill zooma"</b>" aktiverar du förstoring och trycker var som helst på skärmen.\n"<ul><li>"Scrolla genom att dra med minst två fingrar."</li>\n<li>"Justera zoomen genom att nypa med minst två fingrar."</li></ul>\n\n<b>"Om du vill zooma tillfälligt"</b>" aktiverar du förstoring och trycker länge var som helst på skärmen.\n"<ul><li>"Flytta runt på skärmen genom att dra."</li>\n<li>"Zooma ut genom att lyfta fingret."</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Sida <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> av <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Kortkommando med tillgänglighetsknappen"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Skapa ett läge"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Anpassa"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Begränsa antalet avbrott"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Aktivera Stör ej."</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarm och medieljud får avbryta"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Ställ in ett schema"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Schemalägg"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Aktivera automatiskt"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Schemalägg"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Stäng av mobilljud vid vissa tider"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Ange regler för Stör ej"</string>
@@ -3545,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"öppna avisering"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Tillåt att aviseringar snoozas"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Aviseringsprick på appikonen"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Aviseringspaket"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubblor"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bubblor"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Visa en bubbla för konversationen"</string>
@@ -3837,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Ingen"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Alla"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Tillåt att appar åsidosätter funktionen"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Appar som får störa dig"</string>
@@ -4862,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Fodral"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteri"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panelen Inställningar"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Tvinga fram skrivbordsläge"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Tvinga fram experimentellt skrivbordsläge på sekundära skärmar"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Aktivera frihandsfönster"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Aktivera stöd för frihandsfönster."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Aktivera frihandsfönster på en sekundär skärm"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Aktivera frihandsfönster på endast en sekundär skärm"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Aktivera appar vars storlek inte kan ändras i flerfönsterläge"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Låter appar vars storlek inte kan ändras finnas i flerfönsterläge"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Åsidosätter tvingat mörkt läge"</string>
@@ -4931,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Du måste konvertera enhetens datapartition till ext4 innan du använder utvecklaralternativet för 16 kB. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. Om du aktiverar 16 kB-alternativet måste du starta om en gång till efteråt. När läget är aktiverat kan du byta fram och tillbaka mellan 4 kB och 16 kB genom att starta om. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återställa produktionsläget på enheten måste du byta tillbaka till 4 kB-läget och låsa starthanteraren. Enheten återställs då till standardinställningarna. När enheten startas med Android ska du inaktivera OEM-upplåsning i utvecklaralternativen. Enheten rensas och filsystemet ändras till ext4 när du har bekräftat. När det är klart kommer du tillbaka för att aktivera 16 kB igen."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Radera all data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Det gick inte att formatera om och rensa datapartionen till ext4."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Starthanteraren måste låsas upp"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Starthanteraren måste vara upplåst på den här enheten innan du kan använda utvecklaralternativet för 16 kB. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. Alla användaruppgifter och inställningar rensas när 16 kB-läget aktiveras. När starthanteraren har låsts upp krävs två omstarter för att aktivera 16 kB-alternativet. När läget är aktiverat kan du byta fram och tillbaka mellan 4 kB och 16 kB genom att starta om. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återställa produktionsläget på enheten måste du byta tillbaka till 4 kB-läget och låsa OEM/starthanteraren. Enheten återställs då till standardinställningarna. Lås upp starthanteraren och försök igen. Du hittar anvisningar om hur du gör detta på &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4 kB-versionen av det sidagnostiska läget används"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Du använder 4 kB-versionen av det sidagnostiska läget. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återgå till produktionsläget måste du låsa starthanteraren på enheten. Tryck för att läsa mer."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Du använder 4 kB-versionen av det sidagnostiska läget. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återgå till produktionsläget måste du låsa starthanteraren på enheten. Detta återställer enheten till produktionsinställningarna igen. När enheten startas med Android ska du inaktivera OEM-upplåsning i utvecklaralternativen. Om det inte går att starta enheten med Android eller om den inte är stabil flashar du om enheten med de senaste systemavbildningarna från &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; och väljer Rensa enhet, Lås starthanteraren och Tvångsflasha alla partitioner."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16 kB-versionen av det sidagnostiska läget används"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Du använder 16 kB-versionen av det sidagnostiska läget. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återgå till produktionsläget måste du byta tillbaka till 4 kB-läget och sedan låsa starthanteraren på enheten. Tryck för att läsa mer."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Du använder 16 kB-versionen av det sidagnostiska läget. Det går inte att garantera mjukvarans integritet i detta läge och all data som lagras på telefonen när starthanteraren är olåst kan vara i farozonen. En del funktioner inaktiveras i dessa lägen. Det kan innebära att vissa program inte fungerar. Om du vill återgå till produktionsläget måste du byta tillbaka till 4 kB-läget och sedan låsa starthanteraren på enheten. Detta återställer enheten till produktionsinställningarna igen. När enheten startas med Android ska du inaktivera OEM-upplåsning i utvecklaralternativen. Om det inte går att starta enheten med Android eller om den inte är stabil flashar du om enheten med de senaste systemavbildningarna från &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; och väljer Rensa enhet, Lås starthanteraren och Tvångsflasha alla partitioner."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 kB-versionen av det sidagnostiska läget"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Läs mer"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Felrapportshanterare"</string>
@@ -5188,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Välj vad som ska visas på skärmen när surfplattan har dockats. Energiförbrukningen kan öka när en skärmsläckare används."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Anpassa"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Anpassa <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Du måste starta om enheten för att aktivera stöd för flytande läge."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Du måste starta om enheten om du vill tvinga fram datorläge på sekundära skärmar."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Du måste starta om enheten för att aktivera stöd för äldre frihandsfönster."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Du måste starta om enheten för att ändra stödet för frihandsfönster."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"Du måste starta om enheten för att tvinga frihandsfönster på sekundära skärmar."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Starta om nu"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Starta om senare"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Rumsligt ljud"</string>

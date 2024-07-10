@@ -16,6 +16,10 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -57,7 +61,6 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
-import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.widget.TopIntroPreference;
@@ -204,7 +207,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.mComponentName.flattenToString());
         // Compare to default UserShortcutType
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(SOFTWARE);
     }
 
     @Test
@@ -219,21 +222,21 @@ public class ToggleFeaturePreferenceFragmentTest {
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.mComponentName.flattenToString());
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+        assertThat(expectedType).isEqualTo(SOFTWARE | HARDWARE);
     }
 
     @Test
     public void updateShortcutPreferenceData_hasValueInSharedPreference_assignToVariable() {
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
         final PreferredShortcut hardwareShortcut = new PreferredShortcut(
-                PLACEHOLDER_COMPONENT_NAME.flattenToString(), UserShortcutType.HARDWARE);
+                PLACEHOLDER_COMPONENT_NAME.flattenToString(), HARDWARE);
 
         putUserShortcutTypeIntoSharedPreference(mContext, hardwareShortcut);
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.mComponentName.flattenToString());
-        assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE);
+        assertThat(expectedType).isEqualTo(HARDWARE);
     }
 
     @Test
@@ -272,7 +275,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.setupEditShortcutDialog(dialog);
 
         final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.EMPTY);
+        assertThat(checkboxValue).isEqualTo(DEFAULT);
     }
 
     @Test
@@ -283,7 +286,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
                 null);
         final PreferredShortcut hardwareShortcut = new PreferredShortcut(
-                PLACEHOLDER_COMPONENT_NAME.flattenToString(), UserShortcutType.HARDWARE);
+                PLACEHOLDER_COMPONENT_NAME.flattenToString(), HARDWARE);
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
         mFragment.mShortcutPreference = shortcutPreference;
 
@@ -292,7 +295,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.setupEditShortcutDialog(dialog);
 
         final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.HARDWARE);
+        assertThat(checkboxValue).isEqualTo(HARDWARE);
     }
 
     @Test
@@ -308,7 +311,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.mShortcutPreference = shortcutPreference;
 
         savedInstanceState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE,
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+                SOFTWARE | HARDWARE);
         mFragment.onCreate(savedInstanceState);
         mFragment.setupEditShortcutDialog(dialog);
         final int value = mFragment.getShortcutTypeCheckBoxValue();
@@ -316,7 +319,7 @@ public class ToggleFeaturePreferenceFragmentTest {
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.mComponentName.flattenToString());
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+        assertThat(expectedType).isEqualTo(SOFTWARE | HARDWARE);
     }
 
     @Test
@@ -470,7 +473,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     public void getShortcutTypeSummary_shortcutSummaryIsCorrectlySet() {
         final PreferredShortcut userPreferredShortcut = new PreferredShortcut(
                 PLACEHOLDER_COMPONENT_NAME.flattenToString(),
-                UserShortcutType.HARDWARE | UserShortcutType.QUICK_SETTINGS);
+                HARDWARE | QUICK_SETTINGS);
         putUserShortcutTypeIntoSharedPreference(mContext, userPreferredShortcut);
         final ShortcutPreference shortcutPreference =
                 new ShortcutPreference(mContext, /* attrs= */ null);

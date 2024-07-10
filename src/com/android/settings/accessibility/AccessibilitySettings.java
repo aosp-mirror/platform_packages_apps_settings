@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.settings.SettingsEnums;
@@ -283,7 +285,7 @@ public class AccessibilitySettings extends DashboardFragment implements
                     info.getResolveInfo().serviceInfo.packageName,
                     info.getResolveInfo().serviceInfo.name);
             final boolean shortcutEnabled = AccessibilityUtil.getUserShortcutTypesFromSettings(
-                    context, componentName) != AccessibilityUtil.UserShortcutType.EMPTY;
+                    context, componentName) != DEFAULT;
             serviceState = shortcutEnabled
                     ? context.getText(R.string.accessibility_summary_shortcut_enabled)
                     : context.getText(R.string.generic_accessibility_feature_shortcut_off);

@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"تمت إضافة وجه و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"تمت إضافة وجه وبصمة إصبع و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"تمت إضافة وجه وبصمات أصابع و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"هذا الإجراء مطلوب عندما تكون ميزة \"التحقّق من الهوية\" مفعَّلة"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"‏فتح قفل Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"تمت إضافة الساعة"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"ضبط إعدادات ساعتك"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"الخيارات"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"تسهيل الاستخدام"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"لوحة المفاتيح الخارجية"</string>
-    <string name="show_ime" msgid="4334255501724746849">"استخدام لوحة المفاتيح على الشاشة"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"استمرار عرضها على الشاشة عندما تكون لوحة المفاتيح الخارجية متصلة"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"تجاهُل النقرات المتكرّرة"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"تتجاهل لوحة المفاتيح الضغطات المتكررة بسرعة على المفتاح نفسه خلال <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ملي ثانية"</string>
     <string name="slow_keys" msgid="2891452895499690837">"المفاتيح البطيئة"</string>
@@ -2234,7 +2233,7 @@
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"الموقع"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"حجم الزر"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"تلاشي الزر عند عدم استخدامه"</string>
-    <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"يتلاشى الزر بعد بضع ثوانٍ، ما يسهِّل عليك رؤية الشاشة"</string>
+    <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"تلاشي الزر بعد بضع ثوانٍ، ما يسهِّل عليك رؤية الشاشة"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"شفافية الزر عند عدم استخدامه"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"شفاف"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"غير شفاف"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"إنشاء وضع"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"مخصَّص"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"الحد من المقاطعات"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"تفعيل ميزة \"عدم الإزعاج\""</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"السماح للمنبهات وأصوات الوسائط بمقاطعة عمل الميزة"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"ضبط جدول زمني"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"الجدول الزمني"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"‫<xliff:g id="HOURS">%1$d</xliff:g> ساعة و<xliff:g id="MINUTES">%2$d</xliff:g> دقيقة"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"التفعيل تلقائيًا"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"الجدول الزمني"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"كتم صوت الهاتف في أوقات معيّنة"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"تعيين قواعد عدم الإزعاج"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"فتح الإشعار"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"السماح بتأجيل الإشعارات"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"نقطة الإشعار على رموز التطبيقات"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"حِزم الإشعارات"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"فقاعات المحادثات"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"فقاعات المحادثات"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"إظهار هذه المحادثة كفقاعة"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"ما مِن تطبيقات"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"كل التطبيقات"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"السماح للتطبيقات بإلغاء وضع \"عدم الإزعاج\""</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"التطبيقات التي يمكنها مقاطعة عمل الميزة"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"الحافظة"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"البطارية"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"لوحة الإعدادات"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"فرض وضع سطح المكتب"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"فرض وضع سطح المكتب التجريبي على شاشات العرض الثانوية"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"تفعيل النوافذ الحرة"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"سيتم تفعيل عرض النوافذ الحرة."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"تفعيل عرض النوافذ الحرة على شاشة عرض أخرى"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"سيتم تفعيل النوافذ الحرة فقط على شاشة عرض ثانوية."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"استخدام التطبيقات التي لا يتغير حجمها في النوافذ المتعددة"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"السماح باستخدام التطبيقات التي لا يتغير حجمها في النوافذ المتعددة"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"إلغاء ميزة فرض تعتيم الشاشة"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"‏يجب تحويل قسم البيانات في هذا الجهاز إلى نظام الملفات ext4 لتتمكّن من استخدام الوضع ١٦ كيلوبايت ضِمن خيارات المطوِّرين. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. لتفعيل الخيار ١٦ كيلوبايت، يجب إعادة تشغيل الجهاز مرة أخرى بعد ذلك. بعد تفعيل هذا الوضع، يمكنك التبديل بين الوضعَين ٤ كيلوبايت و١٦ كيلوبايت من خلال إعادة تشغيل الجهاز لمرّة واحدة. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة الجهاز إلى وضع الإنتاج، عليك التبديل مرة أخرى إلى الوضع ٤ كيلوبايت وقفل برنامج الإقلاع، وسيؤدي ذلك إلى إعادة ضبط الجهاز على الإعدادات الأصلية. بعد تشغيل نظام Android على الجهاز بنجاح، أوقِف الإعداد \"فتح قفل المصنّع الأصلي للجهاز\" ضِمن \"خيارات المطوّرين\". بعد التأكيد، سيتم حجب بيانات الجهاز وتغيير نظام الملفات إلى ext4. بعد إتمام هذه الخطوات، يُرجى إعادة تفعيل الوضع ١٦ كيلوبايت."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"محو جميع البيانات"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"‏تعذَّر حجب قسم البيانات وإعادة تنسيقه إلى ext4."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"يجب فتح قفل برنامج الإقلاع"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"‏يجب فتح قفل برنامج الإقلاع على هذا الجهاز قبل استخدام الوضع 16 كيلوبايت ضِمن خيارات المطوِّرين. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. وعند تفعيل الوضع 16 كيلوبايت، سيتم حجب كل بيانات المستخدم وإعداداته. بعد فتح قفل برنامج الإقلاع، سيكون عليك إعادة تشغيل الجهاز مرّتين لتفعيل الخيار 16 كيلوبايت. بعد تفعيل هذا الوضع، يمكنك التبديل بين الوضعَين 4 كيلوبايت و16 كيلوبايت من خلال إعادة تشغيل الجهاز لمرّة واحدة. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة الجهاز إلى وضع الإنتاج، عليك التبديل مرة أخرى إلى الوضع 4 كيلوبايت وقفل برنامج الإقلاع أو إعدادات المصنّع الأصلي للجهاز، وسيؤدي ذلك إلى إعادة ضبط الجهاز على الإعدادات الأصلية. يُرجى فتح قفل برنامج الإقلاع ثم إعادة المحاولة. يمكنك الاطّلاع على تعليمات حول كيفية تنفيذ هذا الإجراء من خلال الانتقال إلى: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"استخدام الوضع ٤ كيلوبايت غير المستند إلى حجم الصفحة"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"جهازك الآن في الوضع ٤ كيلوبايت ضِمن الوضع غير المستند إلى حجم الصفحة. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة تفعيل وضع الإنتاج، عليك قفل برنامج إقلاع الجهاز. انقر لقراءة المزيد."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"‏جهازك الآن في الوضع ٤ كيلوبايت ضِمن الوضع غير المستند إلى حجم الصفحة. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. سيتم إيقاف بعض الميزات في هذَين الوضعَين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة تفعيل وضع الإنتاج، عليك قفل برنامج إقلاع الجهاز. سيؤدي هذا الإجراء إلى إعادة ضبط الجهاز على الإعدادات الأصلية لوضع الإنتاج. بعد تشغيل نظام Android على الجهاز بنجاح، أوقِف الإعداد \"فتح قفل المصنّع الأصلي للجهاز\" ضِمن \"خيارات المطوّرين\". إذا تعذَّر تشغيل نظام Android أو كان يعمل بشكل غير مستقر، عليك إعادة تثبيت أحدث نسخ برامج الجهة المصنِّعة من خلال &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; أو &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;، وتحديد الخيارات التالية: \"حجب بيانات الجهاز\" (Wipe Device)، و\"قفل برنامج الإقلاع\" (Lock Bootloader)، و\"فرض تثبيت البيانات في جميع الأقسام\" (Force Flash all partitions)."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"استخدام الوضع ١٦ كيلوبايت غير المستند إلى حجم الصفحة"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"جهازك الآن في الوضع 16 كيلوبايت ضِمن الوضع غير المستند إلى حجم الصفحة. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. وسيتم إيقاف بعض الميزات في هذين الوضعين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة تفعيل وضع الإنتاج، عليك التبديل مرة أخرى إلى الوضع 4 كيلوبايت وقفل برنامج الإقلاع للجهاز. انقر لقراءة المزيد."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"‏جهازك الآن في الوضع 16 كيلوبايت ضِمن الوضع غير المستند إلى حجم الصفحة. وفي هذا الوضع، لا يمكن ضمان سلامة برنامج النظام. وعندما يكون برنامج الإقلاع غير مقفل، قد تصبح بياناتك المخزَّنة على الهاتف معرَّضة للخطر. وسيتم إيقاف بعض الميزات في هذين الوضعين، وبالتالي قد لا تعمل بعض التطبيقات. لإعادة تفعيل وضع الإنتاج، عليك التبديل مرة أخرى إلى الوضع 4 كيلوبايت وقفل برنامج الإقلاع للجهاز. سيؤدي هذا الإجراء إلى إعادة ضبط الجهاز على الإعدادات الأصلية لوضع الإنتاج. بعد تشغيل نظام Android على الجهاز بنجاح، أوقِف الإعداد \"فتح قفل المصنّع الأصلي للجهاز\" ضِمن \"خيارات المطوّرين\". إذا تعذَّر تشغيل نظام Android أو كان يعمل بشكل غير مستقر، عليك إعادة تثبيت أحدث نُسخ برامج الجهة المصنِّعة من خلال &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; أو استخدام &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;، وتحديد الخيارات التالية: \"حجب بيانات الجهاز\" (Wipe Device)، و\"قفل برنامج الإقلاع\" (Lock Bootloader)، و\"فرض تثبيت البيانات في جميع الأقسام\" (Force Flash all partitions)."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"الوضع 16 كيلوبايت غير المستند إلى حجم الصفحة"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"قراءة المزيد"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"معالِج تقارير الأخطاء"</string>
@@ -5188,8 +5190,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"اختَر ما تريد أن يظهر على شاشتك عندما يكون جهازك اللوحي في حالة إرساء. قد يستهلك جهازك قدرًا أكبر من الطاقة عند استخدام شاشة الاستراحة."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"تخصيص"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"تخصيص <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"يجب إعادة التشغيل لتفعيل النوافذ الحرة."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"يجب إعادة التشغيل لفرض وضع الكمبيوتر المكتبي على الشاشات الثانوية."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"يجب إعادة التشغيل لتفعيل عرض النوافذ الحرة القديمة."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"يجب إعادة التشغيل لتغيير إعدادات عرض النوافذ الحرة."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"يجب إعادة التشغيل لفرض عرض النوافذ الحرة على شاشات العرض الثانوية."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"إعادة التشغيل الآن"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"إعادة التشغيل لاحقًا"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"الصوت المكاني"</string>

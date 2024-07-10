@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"चेहरा और <xliff:g id="WATCH">%s</xliff:g> सेट अप की गई"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"चेहरा, फ़िंगरप्रिंट, और <xliff:g id="WATCH">%s</xliff:g> सेट अप की गई"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"चेहरा, फ़िंगरप्रिंट, और <xliff:g id="WATCH">%s</xliff:g> सेट अप की गई"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"बायोमेट्रिक्स इस्तेमाल करना ज़रूरी है, क्योंकि पहचान की पुष्टि करने की सेटिंग चालू है"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator अनलॉक करें"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"स्मार्टवॉच जोड़ दी गई"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"अपनी स्मार्ट वॉच सेट अप करें"</string>
@@ -615,8 +616,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"ऐप्लिकेशन इंस्टॉल करें"</b>\n"ऐसे ऐप्लिकेशन इंस्टॉल करें जिन्हें आपको अपने स्पेस में निजी रखना है"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"ध्यान रखें"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"स्पेस को लॉक करने से, ऐप्लिकेशन बंद हो जाते हैं"</b>\n"स्पेस को लॉक करने से, स्पेस में मौजूद ऐप्लिकेशन बंद हो जाते हैं, जिस वजह से आपको ऐप्लिकेशन से सूचनाएं नहीं मिलती हैं"</string>
-    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"प्राइवेट स्पेस का इस्तेमाल, बैकग्राउंड में चलाए जाने वाले या ज़रूरी सूचनाएं भेजने वाले ऐप्लिकेशन के लिए नहीं किया जा सकता. जैसे, चिकित्सा से जुड़े ऐप्लिकेशन. ऐसा इसलिए है, क्योंकि स्पेस के लॉक होने पर सूचनाएं भेजने की सुविधा और बैकग्राउंड में चल रही गतिविधि बंद हो जाती है.\n\nप्राइवेट स्पेस के लॉक होने पर, उसमें मौजूद ऐप्लिकेशन, \'अनुमतियों को मैनेज करें\' सेक्शन, प्राइवसी डैशबोर्ड, और अन्य सेटिंग में नहीं दिखेंगे.\n\nआपके प्राइवेट स्पेस को किसी नए डिवाइस में ट्रांसफ़र नहीं किया जा सकता. किसी दूसरे डिवाइस में इस्तेमाल करने के लिए, आपको दूसरा प्राइवेट स्पेस सेट अप करना होगा.\n\nआपके डिवाइस को कंप्यूटर से कनेक्ट करने या डिवाइस में, नुकसान पहुंचाने वाले ऐप्लिकेशन इंस्टॉल करने वाला व्यक्ति आपके प्राइवेट स्पेस को ऐक्सेस कर सकता है."</string>
-    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"प्राइवेट स्पेस का इस्तेमाल, बैकग्राउंड में चलाए जाने वाले या ज़रूरी सूचनाएं भेजने वाले ऐप्लिकेशन के लिए नहीं किया जा सकता. जैसे, चिकित्सा से जुड़े ऐप्लिकेशन. ऐसा इसलिए है, क्योंकि स्पेस के लॉक होने पर सूचनाएं भेजने की सुविधा और बैकग्राउंड में चल रही गतिविधि बंद हो जाती है.\n\nप्राइवेट स्पेस के लॉक होने पर, उसमें मौजूद ऐप्लिकेशन, \'अनुमतियों को मैनेज करें\' सेक्शन, प्राइवसी डैशबोर्ड, और अन्य सेटिंग में नहीं दिखेंगे.\n\nआपके प्राइवेट स्पेस को किसी नए डिवाइस पर नहीं ले जाया जा सकता. किसी दूसरे डिवाइस में इस्तेमाल करने के लिए, आपको दूसरा स्पेस सेट अप करना होगा.\n\nआपके डिवाइस को कंप्यूटर से कनेक्ट करने या डिवाइस में, नुकसान पहुंचाने वाले ऐप्लिकेशन इंस्टॉल करने वाला व्यक्ति आपके प्राइवेट स्पेस को ऐक्सेस कर सकता है."</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"प्राइवेट स्पेस उन ऐप्लिकेशन के लिए सही नहीं है जो बैकग्राउंड में गतिविधियां जारी रखते हैं या ज़रूरी सूचनाएं भेजते हैं, जैसे- चिकित्सा से जुड़े ऐप्लिकेशन. ऐसा इसलिए, क्योंकि स्पेस के लॉक होने पर सूचनाएं भेजने की सुविधा और बैकग्राउंड में चल रही गतिविधियां भी बंद हो जाती हैं.\n\nप्राइवेट स्पेस के लॉक होने पर, उसमें मौजूद ऐप्लिकेशन \'अनुमतियों को मैनेज करें\' सेक्शन, प्राइवसी डैशबोर्ड, और अन्य सेटिंग में नहीं दिखेंगे.\n\nआपका प्राइवेट स्पेस किसी नए डिवाइस में ट्रांसफ़र नहीं किया जा सकता. किसी दूसरे डिवाइस में इसका इस्तेमाल करने के लिए, आपको दूसरा प्राइवेट स्पेस सेट अप करना होगा.\n\nकोई भी ऐसा व्यक्ति जो आपके डिवाइस को कंप्यूटर से कनेक्ट कर सकता है या आपके डिवाइस में नुकसान पहुंचाने वाले ऐप्लिकेशन इंस्टॉल कर सकता है, वह आपके प्राइवेट स्पेस को ऐक्सेस कर सकता है."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"प्राइवेट स्पेस उन ऐप्लिकेशन के लिए सही नहीं है जो बैकग्राउंड में गतिविधियां जारी रखते हैं या ज़रूरी सूचनाएं भेजते हैं, जैसे- चिकित्सा से जुड़े ऐप्लिकेशन. ऐसा इसलिए, क्योंकि स्पेस के लॉक होने पर सूचनाएं भेजने की सुविधा और बैकग्राउंड में चल रही गतिविधियां भी बंद हो जाती हैं.\n\nप्राइवेट स्पेस के लॉक होने पर, उसमें मौजूद ऐप्लिकेशन \'अनुमतियों को मैनेज करें\' सेक्शन, प्राइवसी डैशबोर्ड, और अन्य सेटिंग में नहीं दिखेंगे.\n\nआपके प्राइवेट स्पेस को किसी नए डिवाइस पर नहीं ले जाया जा सकता. किसी दूसरे डिवाइस में इसका इस्तेमाल करने के लिए, आपको दूसरा स्पेस सेट अप करना होगा.\n\nकोई भी ऐसा व्यक्ति जो आपके डिवाइस को कंप्यूटर से कनेक्ट कर सकता है या आपके डिवाइस में नुकसान पहुंचाने वाले ऐप्लिकेशन इंस्टॉल कर सकता है, वह आपके प्राइवेट स्पेस को ऐक्सेस कर सकता है."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"प्राइवेट स्पेस के बारे में ज़्यादा जानें"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"इसमें कुछ समय लगेगा"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"प्राइवेट स्पेस सेट अप किया जा रहा है…"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"अन्य विकल्प"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"सुलभता सुविधा"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"सामान्य कीबोर्ड"</string>
-    <string name="show_ime" msgid="4334255501724746849">"ऑन-स्क्रीन कीबोर्ड का इस्तेमाल करें"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"इसे सामान्य कीबोर्ड चालू रहने के दौरान भी स्‍क्रीन पर दिखाएं"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"बाउंस बटन"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"एक ही कुंजी को <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> मि॰से॰ के अंदर बार-बार दबाने पर, कीबोर्ड उसे अनदेखा कर देता है"</string>
     <string name="slow_keys" msgid="2891452895499690837">"स्लो बटन"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"कोई मोड बनाएं"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"कस्टम मोड"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"रुकावटों को कम करें"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"\'परेशान न करें\' चालू करें"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"अलार्म और मीडिया की आवाज़ें \'परेशान न करें\' मोड को बायपास कर सकती हैं"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"शेड्यूल सेट करें"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"शेड्यूल"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> घंटे <xliff:g id="MINUTES">%2$d</xliff:g> मिनट"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"अपने-आप चालू करें"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"शेड्यूल"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"कुछ खास समय पर फ़ोन साइलेंट करें"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\'परेशान न करें\' सुविधा के नियम सेट करें"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"सूचना खोलें"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"सूचनाएं स्नूज़ करने की अनुमति दें"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"ऐप्लिकेशन आइकॉन पर सूचनाएं बताने वाला डॉट"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"सूचनाओं के बंडल"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"बबल्स"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"बबल्स"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"इस बातचीत को बबल के रूप में दिखाएं"</string>
@@ -3561,7 +3562,7 @@
     <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"इस बातचीत के लिए बबल्स चालू करें"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"खारिज करने के लिए दाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए बाईं ओर"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"खारिज करने के लिए बाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए दाईं ओर"</string>
-    <string name="silent_notifications_status_bar" msgid="6113307620588767516">"साइलेंट मोड पर सेट की गई सूचनाएं, स्टेटस बार में न दिखाएं"</string>
+    <string name="silent_notifications_status_bar" msgid="6113307620588767516">"साइलेंट मोड में मिली सूचनाएं, स्टेटस बार में न दिखाएं"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"ब्लिंक लाइट"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"निजता सेटिंग"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"पिछली खुली स्क्रीन पर जाएं"</string>
@@ -3573,7 +3574,7 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"लॉक स्क्रीन पर दिखने वाली सूचनाएं"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"डिफ़ॉल्ट और साइलेंट, दोनों मोड वाली सूचनाएं और बातचीत दिखाएं"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"बातचीत, डिफ़ॉल्ट, और साइलेंट मोड पर सेट की गई सूचनाएं दिखाएं"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"साइलेंट मोड पर सेट की गई सूचनाएं और बातचीत छिपाएं"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"साइलेंट मोड में मिली सूचनाएं और बातचीत छिपाएं"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"कोई भी सूचना न दिखाएं"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"संवेदनशील सूचनाएं"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"स्क्रीन लॉक रहने पर भी संवेदनशील कॉन्टेंट दिखाएं"</string>
@@ -3645,10 +3646,10 @@
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"क्या आपको <xliff:g id="SERVICE">%1$s</xliff:g> को सूचना ऐक्सेस करने की अनुमति देनी है?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ऐप्लिकेशन, सभी सूचनाओं को पढ़ पाएगा. इसमें आपकी निजी जानकारी शामिल है. जैसे, संपर्कों के नाम, फ़ोटो, और आपको मिलने वाले मैसेज. यह ऐप्लिकेशन, सूचनाओं के साथ दिखने वाले बटन से कार्रवाई कर सकता है या सूचनाओं को स्नूज़/खारिज भी कर पाएगा. यह फ़ोन कॉल का जवाब भी दे पाएगा. \n\nइससे यह ऐप्लिकेशन, \'परेशान न करें\' मोड चालू या बंद कर पाएगा और इससे जुड़ी सेटिंग भी बदल पाएगा."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ऐप्लिकेशन ये काम कर पाएगा:"</string>
-    <string name="nls_feature_read_title" msgid="7629713268744220437">"आपकी सूचनाएं पढ़ना"</string>
-    <string name="nls_feature_read_summary" msgid="1064698238110273593">"यह ऐप्लिकेशन आपकी सूचनाओं को पढ़ सकता है. इनमें आपकी निजी जानकारी, जैसे कि संपर्कों के नाम, आपको मिलने वाले मैसेज, और फ़ोटो शामिल हैं."</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"आपकी सूचनाएं ऐक्सेस करना"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"यह ऐप्लिकेशन आपकी सूचनाओं को ऐक्सेस कर सकता है. साथ ही, आपके संपर्क, मैसेज, और फ़ोटो जैसी निजी जानकारी को भी ऐक्सेस कर सकता है."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"मैसेज का जवाब देना"</string>
-    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"यह ऐप्लिकेशन मैसेज के जवाब दे सकता है और सूचनाओं में मौजूद बटन से कार्रवाई कर सकती है. जैसे, सूचनाओं को स्नूज़ (थोड़ी देर के लिए बंद करना) या उन्हें खारिज करना और फ़ोन कॉल का जवाब देना."</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"यह ऐप्लिकेशन मैसेज के जवाब दे सकता है. साथ ही, सूचनाओं में दिखने वाले बटन से कार्रवाइयां भी कर सकता है, जैसे- सूचनाओं को स्नूज़ (थोड़ी देर के लिए बंद) या खारिज करना. यह फ़ोन कॉल के जवाब भी दे सकता है."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"सेटिंग में बदलाव करना"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"यह ऐप्लिकेशन \'परेशान न करें\' मोड को चालू या बंद कर सकता है और इससे जुड़ी सेटिंग में बदलाव कर सकता है."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"अगर <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> के लिए सूचना का ऐक्सेस बंद किया जाता है, तो \'परेशान न करें\' सेवा का ऐक्सेस भी बंद हो सकता है."</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"कोई नहीं"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"सभी"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ऐप्लिकेशन को ओवरराइड करने की मंज़ूरी दें"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"ऐप्लिकेशन जो \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
@@ -4080,8 +4083,8 @@
     <string name="app_list_preference_none" msgid="1635406344616653756">"कोई नहीं"</string>
     <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"इस ऐप के इस्तेमाल का ऐक्सेस बंद करने के बाद भी आपका एडमिन आपकी वर्क प्रोफ़ाइल के ऐप का डेटा खर्च ट्रैक कर सकते हैं"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"दूसरे ऐप्लिकेशन के ऊपर दिखाएं"</string>
-    <string name="system_alert_window_settings" msgid="6458633954424862521">"दूसरे ऐप्लिकेशन के ऊपर दिखाने की अनुमति"</string>
-    <string name="permit_draw_overlay" msgid="4468994037192804075">"दूसरे ऐप्लिकेशन के ऊपर दिखाने की अनुमति दें"</string>
+    <string name="system_alert_window_settings" msgid="6458633954424862521">"दूसरे ऐप्लिकेशन के ऊपर दिखाएं"</string>
+    <string name="permit_draw_overlay" msgid="4468994037192804075">"दूसरे ऐप्लिकेशन के ऊपर दिखने की अनुमति दें"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"इस ऐप्लिकेशन को, उन सभी ऐप्लिकेशन के ऊपर दिखने की अनुमति दें जो इस्तेमाल में हैं. यह ऐप्लिकेशन देख पाएगा कि आपने कहां टैप किया है. इसके अलावा, स्क्रीन पर दिखने वाली चीज़ों को भी बदल पाएगा."</string>
     <string name="media_routing_control_title" msgid="6402800638960066807">"मीडिया आउटपुट बदलने की अनुमति"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"ऐप को मीडिया आउटपुट बदलने की अनुमति दें"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"चार्ज करने वाला डिब्बा"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"बैटरी"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"सेटिंग पैनल"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"डेस्कटॉप मोड चालू करें"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"दूसरी स्क्रीन पर डेस्कटॉप मोड आज़माने की सुविधा चालू करें"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"फ़्रीफ़ॉर्म विंडो मोड चालू करें"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"फ़्रीफ़ॉर्म विंडो मोड के लिए सेटिंग चालू करें."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"सेकंडरी डिसप्ले पर फ़्रीफ़ॉर्म विंडो मोड चालू करें"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"सिर्फ़ सेकंडरी डिसप्ले पर फ़्रीफ़ॉर्म विंडो चालू करें."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"मल्टी-विंडो में विंडो का साइज़ न बदलने का विकल्प चालू करें"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"साइज़ न बदलने वाले ऐप्लिकेशन को मल्टी-विंडो (एक से ज़्यादा ऐप्लिकेशन, एक साथ) में दिखाने की अनुमति दें"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"गहरे रंग वाली थीम को तुरंत लागू करने की सुविधा ओवरराइड करें"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16 केबी मोड का इस्तेमाल करने से पहले, इस डिवाइस के डेटा पार्टिशन को ext4 में बदलना होगा. इस मोड में सॉफ़्टवेयर के रखरखाव की गारंटी नहीं है. साथ ही, बूटलोडर अनलॉक रहने पर आपके फ़ोन में सेव डेटा की सुरक्षा खतरे में पड़ सकती है. अगर आपने 16 केबी मोड चालू किया है, तो इसके बाद डिवाइस को एक और बार चालू करना होगा. इस मोड में आ जाने के बाद, डिवाइस को फिर से चालू करके 4 केबी और 16 केबी मोड के बीच स्विच किया जा सकता है. इन मोड में कुछ सुविधाएं बंद हो जाएंगी. इसलिए, हो सकता है कि कुछ ऐप्लिकेशन काम न करें. डिवाइस को प्रोडक्शन मोड में वापस लाने के लिए, आपको फिर से 4 केबी मोड पर स्विच करना होगा और बूटलोडर लॉक करना होगा. ऐसा करने पर, डिवाइस फ़ैक्ट्री रीसेट हो जाता है. डिवाइस का Android ऑपरेटिंग सिस्टम चालू हो जाने के बाद, \'डेवलपर के लिए सेटिंग और टूल\' में जाकर ओईएम से अनलॉक करने की सेटिंग बंद करें. इससे डिवाइस का डेटा वाइप हो जाएगा और पुष्टि करने के बाद, फ़ाइलसिस्टम ext4 में बदल दिया जाएगा. इस प्रक्रिया के बाद, कृपया फिर से 16 केबी मोड को चालू करें."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"डिवाइस का सारा डेटा हमेशा के लिए मिटाएं"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"डेटा के हिस्से को ext4 में फिर से फ़ॉर्मैट नहीं किया जा सका, न ही इसे वाइप किया जा सका."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"बूटलोडर को अनलॉक करना ज़रूरी है"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"16 केबी मोड इस्तेमाल करने के लिए, इस डिवाइस के बूटलोडर को अनलॉक करना ज़रूरी है. इस मोड में सॉफ़्टवेयर के रखरखाव की गारंटी नहीं है. साथ ही, बूटलोडर अनलॉक रहने पर आपके फ़ोन में सेव डेटा की सुरक्षा खतरे में पड़ सकती है. अगर 16 केबी मोड चालू किया जाता है, तो उपयोगकर्ता का पूरा डेटा और सभी सेटिंग वाइप हो जाती हैं. बूटलोडर अनलॉक करने के बाद, 16 केबी मोड चालू करने के लिए डिवाइस को दो बार फिर से चालू करने की ज़रूरत होती है. इस मोड के चालू हो जाने के बाद, डिवाइस को फिर से चालू करके 4 केबी और 16 केबी मोड के बीच स्विच किया जा सकता है. इन मोड में कुछ सुविधाएं बंद हो जाएंगी. इसलिए, हो सकता है कि कुछ ऐप्लिकेशन काम न करें. डिवाइस को प्रोडक्शन मोड में वापस लाने के लिए, आपको 4 केबी मोड पर स्विच करना होगा. इसके बाद, ओईएम/बूटलोडर लॉक करना होगा. इससे डिवाइस फ़ैक्ट्री रीसेट हो जाएगा. कृपया बूटलोडर अनलॉक करें और फिर से कोशिश करें. बूटलोडर अनलॉक करने के निर्देश यहां देखे जा सकते हैं: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4 केबी पेज-एग्नोस्टिक मोड का इस्तेमाल किया जा रहा है"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"आप 4 केबी पेज साइज़ के साथ काम करने वाले मोड (पेज-ऐग्नोस्टिक मोड) में है. इस मोड में सॉफ़्टवेयर के रखरखाव की गारंटी नहीं है. साथ ही, बूटलोडर अनलॉक रहने पर आपके फ़ोन में सेव डेटा की सुरक्षा खतरे में पड़ सकती है. इन मोड में कुछ सुविधाएं बंद हो जाएंगी. इसलिए, हो सकता है कि कुछ ऐप्लिकेशन काम न करें. इसे वापस प्रोडक्शन मोड पर सेट करने के लिए, आपको डिवाइस का बूटलोडर लॉक करना होगा. ज़्यादा पढ़ने के लिए टैप करें."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"आप 4 केबी पेज साइज़ के साथ काम करने वाले मोड (पेज-ऐग्नोस्टिक मोड) में है. इस मोड में सॉफ़्टवेयर के रखरखाव की गारंटी नहीं है. साथ ही, बूटलोडर अनलॉक रहने पर आपके फ़ोन में सेव डेटा की सुरक्षा खतरे में पड़ सकती है. इन मोड में कुछ सुविधाएं बंद हो जाएंगी. इसलिए, हो सकता है कि कुछ ऐप्लिकेशन काम न करें. प्रोडक्शन मोड में वापस जाने के लिए, आपको डिवाइस का बूटलोडर लॉक करना होगा. ऐसा करने पर, डिवाइस फिर से फ़ैक्ट्री रीसेट हो जाएगा और इसकी प्रोडक्शन सेटिंग पहले जैसी हो जाएंगी. डिवाइस का Android ऑपरेटिंग सिस्टम चालू हो जाने के बाद, \'डेवलपर के लिए सेटिंग और टूल\' में जाकर ओईएम से अनलॉक करने की सेटिंग बंद करें. अगर Android ऑपरेटिंग सिस्टम चालू नहीं होता है या ठीक से काम नहीं करता है, तो &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; पर मौजूद नई फ़ैक्ट्री इमेज की मदद से डिवाइस को फिर से फ़्लैश करें या &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; का इस्तेमाल करें. इसके बाद, \'डिवाइस वाइप करें\', \'बूटलोडर को लॉक करें\', और \'सभी हिस्सों को ज़बरदस्ती फ़्लैश करें\' को चुनें."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16 केबी पेज-ऐग्नोस्टिक मोड का इस्तेमाल किया जा रहा है"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"आप पेज-ऐग्नोस्टिक मोड के 16 केबी मोड में हैं. इस मोड में, सॉफ़्टवेयर के रखरखाव की गारंटी नहीं है. साथ ही, बूटलोडर अनलॉक होने के दौरान आपके फ़ोन में सेव डेटा की सुरक्षा खतरे में हो सकती है. इन मोड में, कुछ सुविधाएं बंद हो जाएंगी. इसलिए, ऐसा हो सकता है कि कुछ ऐप्लिकेशन काम न करें. प्रोडक्शन मोड पर वापस जाने के लिए, आपको 4 केबी मोड पर फिर से स्विच करना होगा. इसके बाद, आपको डिवाइस का बूटलोडर लॉक करना होगा. ज़्यादा पढ़ने के लिए टैप करें."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"आप पेज-ऐग्नोस्टिक मोड के 16 केबी मोड में हैं. इस मोड में, सॉफ़्टवेयर के रखरखाव की गारंटी नहीं है. साथ ही, बूटलोडर अनलॉक होने के दौरान आपके फ़ोन में सेव डेटा की सुरक्षा खतरे में हो सकती है. इन मोड में, कुछ सुविधाएं बंद हो जाएंगी. इसलिए, ऐसा हो सकता है कि कुछ ऐप्लिकेशन काम न करें. प्रोडक्शन मोड पर वापस जाने के लिए, आपको 4 केबी मोड पर फिर से स्विच करना होगा. इसके बाद, आपको डिवाइस का बूटलोडर लॉक करना होगा. ऐसा करने पर, डिवाइस फिर से फ़ैक्ट्री रीसेट हो जाएगा और इसकी प्रोडक्शन सेटिंग पहले जैसी हो जाएंगी. डिवाइस के Android में बूट हो जाने के बाद, \'डेवलपर के लिए सेटिंग और टूल\' में जाकर ओईएम से अनलॉक करने की सेटिंग बंद करें. अगर डिवाइस Android में बूट नहीं होता या ठीक से काम नहीं करता, तो &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; पर जाकर नई फ़ैक्ट्री इमेज का इस्तेमाल करके डिवाइस को फिर से फ़्लैश करें या &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; पर दिए गए टूल का इस्तेमाल करें. इसके बाद, \'डिवाइस वाइप करें\', \'बूटलोडर को लॉक करें\', और \'सभी हिस्से ज़बरदस्ती फ़्लैश करें\' को चुनें."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 केबी पेज-एग्नोस्टिक मोड"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"ज़्यादा पढ़ें"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"गड़बड़ी की रिपोर्ट हैंडल करने वाला"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"चुनें कि डॉक से टैबलेट के जुड़े होने के दौरान, आपको स्क्रीन पर क्या दिखे. स्क्रीन सेवर का इस्तेमाल करने पर, आपके डिवाइस की बैटरी ज़्यादा खर्च हो सकती है."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"मनमुताबिक बनाएं"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> को पसंद के मुताबिक बनाएं"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"फ़्रीफ़ॉर्म सहायता मोड को चालू करने के लिए, डिवाइस को फिर से चालू करना होगा."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"दूसरे डिसप्ले पर डेस्कटॉप मोड को ज़बरदस्ती चलाने के लिए, डिवाइस को फिर से चालू करना होगा."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"फ़्रीफ़ॉर्म विंडो वाला लेगसी मोड चालू करने के लिए, डिवाइस को फिर चालू करना होगा."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"फ़्रीफ़ॉर्म विंडो मोड की सेटिंग बदलने के लिए, डिवाइस को फिर से चालू करना होगा."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"सेकंडरी डिसप्ले पर फ़्रीफ़ॉर्म विंडो मोड ज़बरदस्ती चालू करने के लिए, डिवाइस को फिर से चालू करना होगा."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"अभी रीबूट (फिर से चालू) करें"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"बाद में रीबूट (फिर से चालू) करें"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"स्पेशल ऑडियो"</string>

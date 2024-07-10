@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"မျက်နှာနှင့် <xliff:g id="WATCH">%s</xliff:g> ကို ထည့်လိုက်ပါပြီ"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"မျက်နှာ၊ လက်ဗွေနှင့် <xliff:g id="WATCH">%s</xliff:g> ကို ထည့်လိုက်ပါပြီ"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"မျက်နှာ၊ လက်ဗွေများနှင့် <xliff:g id="WATCH">%s</xliff:g> ကို ထည့်လိုက်ပါပြီ"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"‘အထောက်အထား စစ်ဆေးခြင်း’ ကို ဖွင့်ပြီးနောက်ပိုင်း ၎င်းကို လိုအပ်သည်"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"အဝေးထိန်း Authenticator ဖွင့်ခြင်း"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"နာရီထည့်လိုက်ပြီ"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"လက်ပတ်နာရီ စနစ်ထည့်သွင်းခြင်း"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ရွေးစရာများ"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"အများသုံးနိုင်မှု"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"စက်၏ ကီးဘုတ်"</string>
-    <string name="show_ime" msgid="4334255501724746849">"မျက်နှာပြင်လက်ကွက်ကို သုံးခြင်း"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"စက်၏ကီးဘုတ် ဖွင့်ထားစဉ်တွင် ၎င်းကို ဖန်သားပြင်ပေါ်တွင် ဆက်ထားပါ"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"ပြန်ကန်ကီးများ"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"ကီးဘုတ်သည် <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms အတွင်း ကီးတစ်ခုတည်း အကြိမ်ကြိမ် အမြန်နှိပ်ခြင်းကို လျစ်လျူရှုသည်"</string>
     <string name="slow_keys" msgid="2891452895499690837">"အနှေးကီးများ"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"မုဒ် ပြုလုပ်ခြင်း"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"စိတ်ကြိုက်"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"အနှောင့်အယှက်များကို တားဆီးသည်"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"\'မနှောင့်ယှက်ရ\' ဖွင့်ခြင်း"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"နိုးစက်နှင့် မီဒီယာအသံများ ကြားဖြတ်နိုင်သည်"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"အချိန်ဇယား သတ်မှတ်ပါ"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"အချိန်ဇယားဆွဲရန်"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> နာရီ၊ <xliff:g id="MINUTES">%2$d</xliff:g> မိနစ်"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"အလိုအလျောက်ဖွင့်ရန်"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"အချိန်ဇယား"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"အချို့အချိန်၌ ဖုန်းအသံတိတ်ခြင်း"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\'မနှောင့်ယှက်ရ\' စည်းမျဉ်းများထည့်ရန်"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"အကြောင်းကြားချက်ကို ဖွင့်ရန်"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"အကြောင်းကြားချက် ဆိုင်းငံ့ခြင်းကို ခွင့်ပြုပါ"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"အက်ပ်သင်္ကေတပေါ်ရှိ အကြောင်းကြားချက် အစက်"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"အတွဲလိုက် အကြောင်းကြားချက်များ"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"ပူဖောင်းကွက်များ"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ပူဖောင်းကွက်များ"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"ဤစကားဝိုင်းကို ပူဖောင်းကွက်အဖြစ် ပြရန်"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"မရှိ"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"အားလုံး"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"အက်ပ်များကို အစားထိုးခွင့်ပြုပါ"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"ကြားဖြတ်နိုင်သည့် အက်ပ်များ"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"နားကြပ်အိတ်"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ဘက်ထရီ"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"ဆက်တင်များ အကန့်"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"ဒက်စ်တော့ပုံစံ မဖြစ်မနေ ပြောင်းရန်"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"ဒုတိယ မျက်နှာပြင်ပြသမှုများတွင် ဒက်စ်တော့ပုံစံ မဖြစ်မနေ စမ်းသပ်ရန်"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"အလွတ်ပုံစံဝင်းဒိုးများ ဖွင့်ခြင်း"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"အလွတ်ပုံစံ ဝင်းဒိုးများအတွက် ပံ့ပိုးမှု ရယူရန်။"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"ဒုတိယဖန်သားပြင်၌ အလွတ်ပုံစံဝင်းဒိုးစနစ် ဖွင့်ရန်"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"ဒုတိယဖန်သားပြင်တွင် အလွတ်ပုံစံ ဝင်းဒိုးများ ဖွင့်နိုင်သည်။"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"အရွယ်မပြင်နိုင်သည်များကို ဝင်းဒိုးများစွာတွင် ဖွင့်ရန်"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"အရွယ်မပြင်နိုင်သည့် အက်ပ်များကို ဝင်းဒိုးများစွာတွင် ဖွင့်ခွင့်ပြုသည်"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"မဖြစ်မနေအမှောင်ချခြင်းကို အစားထိုးရန်"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"၁၆ KB ဆော့ဖ်ဝဲရေးသူအတွက် ရွေးစရာများကို အသုံးမပြုမီ ဤစက်၏ ဒေတာအပိုင်းကို ext4 သို့ ပြောင်းရမည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ၁၆ KB ရွေးစရာကို စဖွင့်ရန်အတွက် ဤသို့ပြောင်းပြီးနောက်တွင် နောက်တစ်ကြိမ်ပြန်လည်စတင်ရန် လိုပါမည်။ ဤမုဒ်သို့ ရောက်သည်နှင့် သင်သည် ၄ KB နှင့် ၁၆ KB မုဒ်အကြား တစ်ကြိမ်ပြန်လည်စတင်ရုံဖြင့် အပြန်အလှန်ပြောင်းနိုင်ပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ စက်ကို ထုတ်ကုန်မုဒ်သို့ ပြန်ထားရန် ၄ KB မုဒ်သို့ ပြန်ပြောင်းပြီး စက်ကို စက်ရုံထုတ်အတိုင်း ပြင်ဆင်သတ်မှတ်ပေးသည့် စနစ်စတင်မှုကို လော့ခ်ချရမည်။ စက်ကို Android သို့ စတင်ပြီးနောက် ‘ဆော့ဖ်ဝဲရေးသူအတွက် ရွေးစရာများ’ ရှိ OEM ဖွင့်ခြင်းကို ပိတ်ပါ။ အတည်ပြုပြီးနောက် စက်ကို ရှင်းလင်းပြီး ဖိုင်စနစ်ကို ext4 သို့ ပြောင်းပါမည်။ ဤသို့ပြုလုပ်ပြီးနောက် ၁၆ KB ထပ်ဖွင့်ရန် ပြန်လာပါ။"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"ဒေတာအားလုံး ဖျက်ရန်"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ဒေတာအပိုင်းကို ext4 သို့ ပြန်လည်ဖော်မက်လုပ်ပြီး ရှင်းလင်း၍ မရပါ။"</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"စနစ်စတင်မှု ဖွင့်ရန်လိုအပ်သည်"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"၁၆ KB ဆော့ဖ်ဝဲရေးသူအတွက် ရွေးစရာများကို အသုံးမပြုမီ ဤစက်ကို စနစ်စတင်မှု ဖွင့်ရမည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ၁၆ KB မုဒ်ကို စတင်နေသောအခါ အသုံးပြုသူဒေတာနှင့် ဆက်တင်အားလုံးကို ရှင်းလင်းပါမည်။ စနစ်စတင်မှုကို ဖွင့်ပြီးပါက ၁၆ KB ရွေးစရာကို စတင်ရာတွင် နှစ်ကြိမ်ပြန်လည်စတင်ရန်လိုပါမည်။ ဤမုဒ်သို့ ရောက်သည်နှင့် သင်သည် ၄ KB နှင့် ၁၆ KB မုဒ်အကြား တစ်ကြိမ်ပြန်လည်စတင်ရုံဖြင့် အပြန်အလှန်ပြောင်းနိုင်ပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ စက်ကို ထုတ်ကုန်မုဒ်သို့ ပြန်ထားရန် ၄ KB မုဒ်သို့ ပြန်ပြောင်းပြီး စက်ကို (စက်ရုံထုတ်အတိုင်း ပြင်ဆင်သတ်မှတ်ပေးသည့်) OEM/စနစ်စတင်မှုကို လော့ခ်ချရမည်။ စနစ်စတင်မှုကို ဖွင့်ပြီး ထပ်စမ်းကြည့်ပါ။ ယင်းသို့ ပြုလုပ်ပုံ ညွှန်ကြားချက်များကို &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&amp;gt တွင် တွေ့နိုင်ပါသည်၊"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သော ၄ KB မုဒ်ကို အသုံးပြုခြင်း"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"သင်သည် စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သောမုဒ်၏ ၄ KB မုဒ်တွင် ရှိနေပါသည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ ထုတ်ကုန်မုဒ်သို့ ပြန်ဝင်ရန် စက်၏ စနစ်စတင်မှုကို လော့ခ်ချရပါမည်။ နောက်ထပ်ဖတ်ရန် တို့ပါ။"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"သင်သည် စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သောမုဒ်၏ ၄ KB မုဒ်တွင် ရှိနေပါသည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ ထုတ်ကုန်မုဒ်သို့ ပြန်ဝင်ရန် စက်၏ စနစ်စတင်မှုကို လော့ခ်ချရပါမည်။ ၎င်းသည် စက်ကို စက်ရုံထုတ်အတိုင်း ပြင်ဆင်သတ်မှတ်ပေးပြီး ထုတ်ကုန် ဆက်တင်များအတိုင်း ပြန်ပြောင်းပေးပါမည်။ စက်ကို Android သို့ စတင်ပြီးနောက် ‘ဆော့ဖ်ဝဲရေးသူအတွက် ရွေးစရာများ’ ရှိ OEM ဖွင့်ခြင်းကို ပိတ်ပါ။ စက်ကို Android သို့ စတင်၍မရပါက သို့မဟုတ် မတည်ငြိမ်ပါက href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&amp;gt မှ နောက်ဆုံးပေါ် စက်ရုံထုတ် မူလပုံများဖြင့် စက်ကို ပြန်စပါ သို့မဟုတ် &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&amp;gt ကို အသုံးပြုကာ ‘စက်ရှင်းလင်းရန်’၊ ‘စနစ်စတင်မှု လော့ခ်ချရန်’ နှင့် ‘အပိုင်းအားလုံး မဖြစ်မနေ ပြန်စရန်’ ကို ရွေးပါ။"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သော ၁၆ KB မုဒ်ကို အသုံးပြုခြင်း"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"သင်သည် စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သောမုဒ်၏ ၁၆ KB မုဒ်တွင် ရှိနေပါသည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ ထုတ်ကုန်မုဒ်သို့ ပြန်ဝင်ရန် ၄ KB mode မုဒ်သို့ ပြန်ပြောင်းပြီး စက်၏ စနစ်စတင်မှုကို လော့ခ်ချရပါမည်။ နောက်ထပ်ဖတ်ရန် တို့ပါ။"</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"သင်သည် စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သောမုဒ်၏ ၁၆ KB မုဒ်တွင် ရှိနေပါသည်။ ဤမုဒ်တွင် ဆော့ဖ်ဝဲစစ်မှန်မှုကို အာမ မခံနိုင်သည့်အပြင် စနစ်စတင်မှု ဖွင့်ထားချိန်၌ ဖုန်းတွင် သိုလှောင်ထားသည့် မည်သည့်ဒေတာမဆို ဆုံးရှုံးနိုင်ခြေ ရှိပါသည်။ ဤမုဒ်များတွင် အင်္ဂါရပ်အချို့ကို ပိတ်ထားမည်ဖြစ်သဖြင့် အချို့အပလီကေးရှင်းများ အလုပ်မလုပ်နိုင်ပါ။ ထုတ်ကုန်မုဒ်သို့ ပြန်ဝင်ရန် ၄ KB mode မုဒ်သို့ ပြန်ပြောင်းပြီး စက်၏ စနစ်စတင်မှုကို လော့ခ်ချရပါမည်။ ၎င်းသည် စက်ကို စက်ရုံထုတ်အတိုင်း ပြင်ဆင်သတ်မှတ်ပေးပြီး ထုတ်ကုန် ဆက်တင်များအတိုင်း ပြန်ပြောင်းပေးပါမည်။ စက်ကို Android သို့ စတင်ပြီးနောက် ‘ဆော့ဖ်ဝဲရေးသူအတွက် ရွေးစရာများ’ ရှိ OEM ဖွင့်ခြင်းကို ပိတ်ပါ။ စက်ကို Android သို့ စတင်၍မရပါက သို့မဟုတ် မတည်ငြိမ်ပါက href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&amp;gt မှ နောက်ဆုံးပေါ် စက်ရုံထုတ် မူလပုံများဖြင့် စက်ကို ပြန်မွမ်းမံပါ သို့မဟုတ် &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&amp;gt ကို အသုံးပြုကာ ‘စက်ရှင်းလင်းရန်’၊ ‘စနစ်စတင်မှု လော့ခ်ချရန်’ နှင့် ‘အပိုင်းအားလုံး မဖြစ်မနေ မွမ်းမံရန်’ ကို ရွေးပါ။"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"စာမျက်နှာအမျိုးမျိုးနှင့် အသုံးပြုနိုင်သော ၁၆KB မုဒ်"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"နောက်ထပ်ဖတ်ရန်"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"ချွတ်ယွင်းချက်အစီရင်ခံစာ စီမံသူ"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"တက်ဘလက် တပ်ဆင်ထားချိန် စခရင်တွင် မြင်ရမည့်အရာကို ရွေးနိုင်သည်။ စခရင်နားချိန်ပုံသုံးပါက သင်၏စက်က စွမ်းအင်ပိုသုံးနိုင်သည်။"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"စိတ်ကြိုက်လုပ်ရန်"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> ကို စိတ်ကြိုက်လုပ်ရန်"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"freeform အကူအညီကို ဖွင့်ရန်အတွက် ပြန်လည်စတင်ရန် လိုအပ်သည်။"</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"အရန်ဖန်သားပြင်တွင် ဒက်စ်တော့မုဒ်ကို မဖြစ်မနေ အသုံးပြုရန်အတွက် ပြန်လည်စတင်ရန် လိုအပ်သည်။"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"အလွတ်ပုံစံ ဝင်းဒိုးစနစ်ပံ့ပိုးမှု ဖွင့်ရန်အတွက် ပြန်လည်စတင်ရန် လိုအပ်သည်။"</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"အလွတ်ပုံစံ ဝင်းဒိုးစနစ်ပံ့ပိုးမှုကို ပြောင်းရန်အတွက် ပြန်လည်စတင်ရန် လိုအပ်သည်။"</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"ဒုတိယဖန်သားပြင်၌ အလွတ်ပုံစံ ဝင်းဒိုးစနစ်ကို မဖြစ်မနေ သုံးရန်အတွက် ပြန်လည်စတင်ရန် လိုအပ်သည်။"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"ယခု ပြန်လည်စတင်ရန်"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"နောက်မှ ပြန်လည်စတင်ရန်"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"ထောင့်စုံအော်ဒီယို"</string>

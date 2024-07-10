@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Rostro y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rostro, huella dactilar y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rostro, huellas dactilares y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Esta acción es necesaria porque Identity Check está activada"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Authenticator Unlock remoto"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Se agregó el reloj"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configura el reloj"</string>
@@ -615,8 +616,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Instala apps"</b>\n"Instala apps que quieres mantener privadas en tu espacio"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Importante"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Las apps se detienen cuando bloqueas tu espacio"</b>\n"Cuando bloquees tu espacio, las apps en él se detendrán, y no recibirás notificaciones de ellas"</string>
-    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"No se recomienda el uso de espacios privados para apps que necesitan ejecutarse en segundo plano o enviar notificaciones críticas, como apps médicas. Esto se debe a que las notificaciones y la actividad en segundo plano se detienen cuando el espacio está bloqueado.\n\nLas apps del espacio privado no se mostrarán en el Administrador de permisos, el Panel de privacidad ni en otras secciones de configuración cuando el espacio privado esté bloqueado.\n\nNo se puede transferir el espacio privado a un dispositivo nuevo. Deberás configurar un espacio privado nuevo si quieres usar la función en otro dispositivo.\n\nCualquier persona que conecte tu dispositivo a una computadora o le instale apps dañinas podría acceder a tu espacio privado."</string>
-    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"No se recomienda el uso de espacios privados para apps que necesitan ejecutarse en segundo plano o enviar notificaciones críticas, como apps médicas. Esto se debe a que las notificaciones y la actividad en segundo plano se detienen cuando el espacio está bloqueado.\n\nLas apps del espacio privado no se mostrarán en el Administrador de permisos, el Panel de privacidad ni en otras secciones de configuración cuando el espacio privado esté bloqueado.\n\nNo se puede restablecer el espacio privado en un dispositivo nuevo. Deberás configurar otro espacio si quieres usarlo en otro dispositivo.\n\nCualquier persona que conecte tu dispositivo a una computadora o le instale apps maliciosas podría acceder a tu espacio privado."</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"No se recomienda el uso de espacios privados para apps que necesitan ejecutarse en segundo plano o enviar notificaciones críticas, como apps médicas. Esto se debe a que las notificaciones y la actividad en segundo plano se detienen cuando el espacio está bloqueado.\n\nLas apps del espacio privado no se mostrarán en el Administrador de permisos, el panel de privacidad ni en otras secciones de configuración cuando el espacio privado esté bloqueado.\n\nNo se puede transferir el espacio privado a un dispositivo nuevo. Deberás configurar un espacio privado nuevo si quieres usar la función en otro dispositivo.\n\nCualquier persona que conecte tu dispositivo a una computadora o le instale apps dañinas podría acceder a tu espacio privado."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"No se recomienda el uso de espacios privados para apps que necesitan ejecutarse en segundo plano o enviar notificaciones críticas, como apps médicas. Esto se debe a que las notificaciones y la actividad en segundo plano se detienen cuando el espacio está bloqueado.\n\nLas apps del espacio privado no se mostrarán en el Administrador de permisos, el panel de privacidad ni en otras secciones de configuración cuando el espacio privado esté bloqueado.\n\nNo se puede restablecer el espacio privado en un dispositivo nuevo. Deberás configurar otro espacio si quieres usarlo en otro dispositivo.\n\nCualquier persona que conecte tu dispositivo a una computadora o le instale apps maliciosas podría acceder a tu espacio privado."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Más información sobre el espacio privado"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"El proceso tardará unos minutos"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configurando espacio privado…"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opciones"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accesibilidad"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Usar teclado en pantalla"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Mientras el teclado físico está activo"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Rechazo de teclas"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"El teclado ignora las presiones de la misma tecla repetidas con rapidez dentro de los <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Teclas lentas"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuar de todos modos"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Cancelar"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Configuración de ampliación"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"Mueve la lupa con 1 dedo"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"Arrastra con 1 dedo para moverte por la pantalla"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Arrastrar un dedo para mover el área de ampliación."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Arrastrar dos dedos para mover el área de ampliación."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"No disponible mientras se amplía parte de la pantalla"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Presiona un botón para ampliar"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Acerca rápidamente la pantalla para que el contenido se muestre en un tamaño más grande"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Para acercar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa la combinación para comenzar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona la pantalla.&lt;br/&gt; {2,number,integer}. Arrastra 2 dedos para moverte por la pantalla.&lt;br/&gt; {3,number,integer}. Pellizca con 2 dedos para ajustar el zoom.&lt;br/&gt; {4,number,integer}. Usa la combinación para detener la ampliación.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Para acercar de manera temporal, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Asegúrate de que el tipo de ampliación esté configurado en pantalla completa.&lt;br/&gt; {1,number,integer}. Usa la combinación para comenzar la ampliación.&lt;br/&gt; {2,number,integer}. Mantén presionada cualquier parte de la pantalla.&lt;br/&gt; {3,number,integer}. Arrastra un dedo para moverte por la pantalla.&lt;br/&gt; {4,number,integer}. Levanta el dedo para detener la ampliación."</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Para acercar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa el atajo para comenzar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona la pantalla.&lt;br/&gt; {2,number,integer}. Arrastra 2 dedos para moverte por la pantalla.&lt;br/&gt; {3,number,integer}. Pellizca con 2 dedos para ajustar el zoom.&lt;br/&gt; {4,number,integer}. Usa el atajo para detener la ampliación.&lt;br/&gt;&lt;br/&gt; También puedes acercar temporalmente y realizar otras acciones."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Para acercar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa el atajo para comenzar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona la pantalla.&lt;br/&gt; {2,number,integer}. Arrastra con 1 o 2 dedos para moverte por la pantalla.&lt;br/&gt; {3,number,integer}. Pellizca con 2 dedos para ajustar el zoom.&lt;br/&gt; {4,number,integer}. Usa el atajo para detener la ampliación.&lt;br/&gt;&lt;br/&gt; También puedes acercar temporalmente y realizar otras acciones."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Cuando la ampliación esté activada, podrás acercar el contenido en pantalla.\n\n"<b>"Para usar el zoom"</b>", inicia la ampliación y, luego, presiona cualquier parte de la pantalla.\n"<ul><li>"Arrastra 2 o más dedos para desplazarte."</li>\n<li>"Pellizca con 2 o más dedos para ajustar el zoom."</li></ul>\n\n<b>"Para hacer zoom de manera temporal"</b>", inicia la ampliación y, luego, mantén presionada cualquier parte de la pantalla.\n"<ul><li>"Arrastra el dedo para moverte por la pantalla."</li>\n<li>"Levanta el dedo para alejar el contenido."</li></ul>\n\n"No puedes acercar con el teclado ni en la barra de navegación."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Página <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> de <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Acceso directo al botón de accesibilidad"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Crea un modo"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Personalizado"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitar las interrupciones"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Activar No interrumpir"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Los sonidos multimedia y las alarmas pueden interrumpir"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Establecer un programa"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programa"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Activar automáticamente"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programa"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silenciar en ciertos momentos"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Definir reglas de No interrumpir"</string>
@@ -3545,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"notificación abierta"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir posponer notificaciones"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Punto de notificación en ícono de app"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Paquetes de notificaciones"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Burbujas"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Burbujas"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Mostrar esta conversación en una burbuja"</string>
@@ -3837,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Ninguna"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Todo"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permitir que las apps anulen No interrumpir"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps que pueden interrumpir"</string>
@@ -4862,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Funda"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batería"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel de Configuración"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Forzar modo de escritorio"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Fuerza el modo de escritorio experimental en pantallas secundarias."</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Habilitar ventanas de formato libre"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Habilitar la compatibilidad con las ventanas de formato libre"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Habilitar renderización libre en pant. secundaria"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Habilitar las ventanas de formato libre solo en la pantalla secundarias"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Habilitar apps que no cambian de tamaño en Multiventana"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permite que las apps que no cambian de tamaño aparezcan en Multiventana."</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Anular forzar el modo oscuro"</string>
@@ -4931,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"La partición de datos del dispositivo debe convertirse a ext4 antes de usar la opción para desarrolladores de 16 KB. No se puede garantizar la integridad del software en este modo, y los datos almacenados en el teléfono podrían estar en riesgo durante el desbloqueo del bootloader. Si activas la opción de 16 KB, deberás volver a reiniciar. Una vez que se habilite este modo, podrás cambiar entre los modos de 4 KB y 16 KB con un único reinicio. Algunas funciones quedan inhabilitadas en estos modos, así que algunas aplicaciones podrían no ejecutarse. Para revertir el dispositivo al modo de producción, debes volver al modo de 4 KB y bloquear el bootloader, lo que restablecerá la configuración del dispositivo. Una vez que el dispositivo se inicie correctamente ejecutando Android, inhabilita el desbloqueo para OEM en Opciones para desarrolladores. Después de la confirmación, se limpiará el dispositivo, y el sistema de archivos cambiará a ext4. Una vez que se complete el proceso, vuelve a habilitar nuevamente el modo de 16 KB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Borrar todos los datos"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"No se pudo volver a formatear el dispositivo y falló la limpieza de la partición de datos a ext4."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Se requiere desbloquear el bootloader"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Este dispositivo debe tener el bootloader desbloqueado para poder usar la opción para desarrolladores de 16 KB. No se puede garantizar la integridad del software en este modo, y los datos almacenados en el teléfono podrían estar en riesgo durante el desbloqueo del bootloader. Se limpiarán la configuración y los datos del usuario cuando se active el modo de 16 KB. Una vez que se desbloquee el bootloader, deberás reiniciar dos veces para activar la opción de 16 KB. Una vez que se habilite este modo, podrás cambiar entre los modos de 4 KB y 16 KB con un único reinicio. Algunas funciones quedan inhabilitadas en estos modos, así que algunas aplicaciones podrían no ejecutarse. Para revertir el dispositivo al modo de producción, debes volver al modo de 4 KB y bloquear el dispositivo con OEM/bootloader (lo que restablecerá la configuración de fábrica). Desbloquea el bootloader y vuelve a intentarlo. Puedes ver las instrucciones de este proceso en &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Modo independiente de la página de 4 KB en uso"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Estás en el modo de 4 KB del modo independiente de la página. No se puede garantizar la integridad del software en este modo, y los datos almacenados en el teléfono podrían estar en riesgo durante el desbloqueo del bootloader. Algunas funciones quedan inhabilitadas en estos modos, así que algunas aplicaciones podrían no ejecutarse. Para volver a entrar al modo de producción, debes bloquear el bootloader del dispositivo. Presiona para obtener más información."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Estás en el modo de 4 KB del modo independiente de la página. No se puede garantizar la integridad del software en este modo, y los datos almacenados en el teléfono podrían estar en riesgo durante el desbloqueo del bootloader. Algunas funciones quedan inhabilitadas en estos modos, así que algunas aplicaciones podrían no ejecutarse. Para volver a entrar al modo de producción, debes bloquear el bootloader del dispositivo. Se restablecerá la configuración de fábrica del dispositivo, que quedará en modo de producción. Una vez que el dispositivo se inicie correctamente ejecutando Android, inhabilita el desbloqueo para OEM en Opciones para desarrolladores. Si el dispositivo no se puede iniciar ejecutando Android o si es inestable, actualízalo con las imágenes de fábrica más recientes de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;, o bien usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; y selecciona \"Limpiar el dispositivo\", \"Bloquear el bootloader\" y \"Forzar la escritura de todas las particiones en la memoria flash\"."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Modo independiente de la página de 16 KB en uso"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Estás en el modo de 16 KB del modo independiente de la página. No se puede garantizar la integridad del software en este modo, y los datos almacenados en el teléfono podrían estar en riesgo durante el desbloqueo del bootloader. Algunas funciones quedan inhabilitadas en estos modos, así que algunas aplicaciones podrían no ejecutarse. Para volver a entrar al modo de producción, debes volver al modo de 4 KB y bloquear el bootloader del dispositivo. Presiona para obtener más información."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Estás en el modo de 16 KB del modo independiente de la página. No se puede garantizar la integridad del software en este modo, y los datos almacenados en el teléfono podrían estar en riesgo durante el desbloqueo del bootloader. Algunas funciones quedan inhabilitadas en estos modos, así que algunas aplicaciones podrían no ejecutarse. Para volver a entrar al modo de producción, debes volver al modo de 4 KB y bloquear el bootloader del dispositivo. Esta acción restablecerá el dispositivo a la configuración de fábrica y hará que sus parámetros de configuración vuelvan a los de producción. Una vez que el dispositivo se inicie correctamente ejecutando Android, inhabilita el desbloqueo para OEM en Opciones para desarrolladores. Si el dispositivo no se puede iniciar ejecutando Android o si es inestable, actualízalo con las imágenes de fábrica más recientes de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;, o bien usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; y selecciona \"Limpiar el dispositivo\", \"Bloquear el bootloader\" y \"Forzar la escritura de todas las particiones en la memoria flash\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modo independiente de la página de 16 KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Leer más"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador de informes de errores"</string>
@@ -5188,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Elige lo que quieres ver en la pantalla cuando la tablet está conectada. Es posible que el dispositivo use más energía cuando se utiliza el protector de pantalla."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizar"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personalizar <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Se debe reiniciar para habilitar la asistencia de formato libre."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Se debe reiniciar para forzar el modo de computadora en las pantallas secundarias."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Se debe reiniciar para habilitar la compatibilidad con la renderización heredada en ventanas de formato libre."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Se debe reiniciar para cambiar la compatibilidad de la renderización en ventanas de formato libre."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"Se debe reiniciar para forzar la renderización en ventanas de formato libre para pantallas secundarias."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reiniciar ahora"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reiniciar más adelante"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Audio espacial"</string>
