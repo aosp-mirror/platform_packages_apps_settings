@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"ເພີ່ມໃບໜ້າ ແລະ <xliff:g id="WATCH">%s</xliff:g> ແລ້ວ"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"ເພີ່ມໃບໜ້າ, ລາຍນິ້ວມື ແລະ <xliff:g id="WATCH">%s</xliff:g> ແລ້ວ"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"ເພີ່ມໃບໜ້າ, ລາຍນິ້ວມື ແລະ <xliff:g id="WATCH">%s</xliff:g> ແລ້ວ"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"ຕ້ອງດຳເນີນການເນື່ອງຈາກການກວດສອບຕົວຕົນເປີດຢູ່"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"ການປົດລັອກ Authenticator ຈາກທາງໄກ"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"ເພີ່ມໂມງແລ້ວ"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"ຕັ້ງຄ່າໂມງຂອງທ່ານ"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ຕົວເລືອກ"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ການຊ່ວຍເຂົ້າເຖິງ"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ແປ້ນພິມພາຍນອກ"</string>
-    <string name="show_ime" msgid="4334255501724746849">"ໃຊ້ແປ້ນພິມຢູ່ໜ້າຈໍ"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"ປະມັນໄວ້ໃນໜ້າຈໍເມື່ອໃຊ້ແປ້ນພິມພາຍນອກ"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"ປຸ່ມດີດກັບ"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"ແປ້ນພິມຈະລະເວັ້ນການກົດປຸ່ມດຽວຊ້ຳໆຢ່າງວ່ອງໄວພາຍໃນ <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"ເພີ່ມໄລຍະເວລາໃນການກົດປຸ່ມ"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"ຢືນຢັນດຳເນີນການຕໍ່"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"ຍົກເລີກ"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"ການຕັ້ງຄ່າການຂະຫຍາຍ"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"ໃຊ້ 1 ນິ້ວຍ້າຍແວ່ນຂະຫຍາຍ"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"ໃຊ້ 1 ນິ້ວລາກເພື່ອຍ້າຍໄປອ້ອມຮອບໜ້າຈໍ"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"ຍ້າຍພື້ນທີ່ການຂະຫຍາຍໂດຍການລາກໜຶ່ງນິ້ວ."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"ຍ້າຍພື້ນທີ່ການຂະຫຍາຍໂດຍການລາກສອງນິ້ວ."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"ບໍ່ສາມາດໃຊ້ໄດ້ໃນລະຫວ່າງທີ່ກຳລັງຂະຫຍາຍພາກສ່ວນຂອງໜ້າຈໍ"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"ແຕະປຸ່ມເພື່ອຊູມ"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"ຊູມເຂົ້າໄວໆຢູ່ໜ້າຈໍເພື່ອເຮັດໃຫ້ເນື້ອຫາໃຫຍ່ຂຶ້ນ"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;ເພື່ອຊູມເຂົ້າ:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ໃຊ້ທາງລັດເພື່ອເລີ່ມການຂະຫຍາຍ&lt;br/&gt; {1,number,integer}. ແຕະໃສ່ໜ້າຈໍ&lt;br/&gt; {2,number,integer}. ລາກ 2 ນິ້ວເພື່ອເລື່ອນໄປມາຢູ່ໜ້າຈໍ&lt;br/&gt; {3,number,integer}. ບີບດ້ວຍ 2 ນິ້ວເພື່ອປັບແກ້ການຊູມ&lt;br/&gt; {4,number,integer}. ໃຊ້ທາງລັດເພື່ອຢຸດການຂະຫຍາຍ&lt;br/&gt;&lt;br/&gt;&lt;b&gt;ເພື່ອຊູມເຂົ້າຊົ່ວຄາວ:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ກວດສອບວ່າປະເພດການຂະຫຍາຍຂອງທ່ານແມ່ນຕັ້ງເປັນເຕັມຈໍແລ້ວ&lt;br/&gt; {1,number,integer}. ໃຊ້ທາງລັດເພື່ອເລີ່ມການຂະຫຍາຍ&lt;br/&gt; {2,number,integer}. ແຕະຢູ່ບ່ອນໃດກໍໄດ້ຢູ່ໜ້າຈໍຄ້າງໄວ້&lt;br/&gt; {3,number,integer}. ລາກນິ້ວເພື່ອເລື່ອນໄປມາຢູ່ໜ້າຈໍ&lt;br/&gt; {4,number,integer}. ຍົກນິ້ວຂຶ້ນເພື່ອຢຸດການຂະຫຍາຍ"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;ເພື່ອຊູມເຂົ້າ:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ໃຊ້ທາງລັດເພື່ອເລີ່ມການຂະຫຍາຍ&lt;br/&gt; {1,number,integer}. ແຕະໜ້າຈໍ&lt;br/&gt; {2,number,integer}. ໃຊ້ 2 ນິ້ວລາກເພື່ອຍ້າຍໄປອ້ອມຮອບໜ້າຈໍ&lt;br/&gt; {3,number,integer}. ໃຊ້ 2 ນິ້ວບີບເພື່ອປັບການຊູມ&lt;br/&gt; {4,number,integer}. ໃຊ້ທາງລັດເພື່ອຢຸດການຂະຫຍາຍ&lt;br/&gt;&lt;br/&gt; ທ່ານຍັງສາມາດຊູມເຂົ້າຊົ່ວຄາວ ແລະ ເຮັດສິ່ງອື່ນໆໄດ້ນຳ."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;ເພື່ອຊູມເຂົ້າ:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ໃຊ້ທາງລັດເພື່ອເລີ່ມການຂະຫຍາຍ&lt;br/&gt; {1,number,integer}. ແຕະໜ້າຈໍ&lt;br/&gt; {2,number,integer}. ໃຊ້ 1 ຫຼື 2 ນິ້ວລາກເພື່ອຍ້າຍໄປອ້ອມຮອບໜ້າຈໍ&lt;br/&gt; {3,number,integer}. ໃຊ້ 2 ນິ້ວບີບເພື່ອປັບການຊູມ&lt;br/&gt; {4,number,integer}. ໃຊ້ທາງລັດເພື່ອຢຸດການຂະຫຍາຍ&lt;br/&gt;&lt;br/&gt; ທ່ານຍັງສາມາດຊູມເຂົ້າຊົ່ວຄາວ ແລະ ເຮັດສິ່ງອື່ນໆໄດ້ນຳ."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"ເມື່ອເປີດໃຊ້ການຂະຫຍາຍແລ້ວ, ທ່ານສາມາດຊູມເຂົ້າຢູ່ໜ້າຈໍຂອງທ່ານໄດ້.\n\n"<b>"ເພື່ອຊູມ"</b>", ໃຫ້ເລີ່ມການຂະຫຍາຍ, ຈາກນັ້ນແຕະໃສ່ບ່ອນໃດກໍໄດ້ຢູ່ໜ້າຈໍ.\n"<ul><li>"ລາກ 2 ນິ້ວ ຫຼື ຫຼາຍກວ່ານັ້ນເພື່ອເລື່ອນ"</li>\n<li>"ຖ່າງ 2 ນິ້ວ ຫຼື ຫຼາຍກວ່ານັ້ນເພື່ອປັບແຕ່ງການຊູມ"</li></ul>\n\n<b>"ເພື່ອຊູມຊົ່ວຄາວ"</b>", ໃຫ້ເລີ່ມການຂະຫຍາຍ, ຈາກນັ້ນແຕະໃສ່ບ່ອນໃດກໍໄດ້ຢູ່ໜ້າຈໍຄ້າງໄວ້.\n"<ul><li>"ລາກເພື່ອຍ້າຍໄປມາຢູ່ໜ້າຈໍ"</li>\n<li>"ຍົກນິ້ວຂຶ້ນເພື່ອຊູມອອກ"</li></ul>\n\n"ທ່ານບໍ່ສາມາດຊູມໃສ່ແປ້ນພິມ ຫຼື ແຖບການນຳທາງໄດ້."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"ໜ້າທີ <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> ຈາກທັງໝົດ <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"ທາງລັດຂອງປຸ່ມການຊ່ວຍເຂົ້າເຖິງ"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"ສ້າງໂໝດ"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"ກຳນົດເອງ"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"ຈຳກັດການລົບກວນ"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"ເປີດໂໝດຫ້າມລົບກວນ"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"ສຽງໂມງປຸກ ແລະ ມີເດຍສາມາດລົບກວນໄດ້"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"ຕັ້ງກຳນົດເວລາ"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"ກຳນົດເວລາ"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ຊມ, <xliff:g id="MINUTES">%2$d</xliff:g> ນທ"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"ເປີດໃຊ້ອັດຕະໂນມັດ"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"ກຳນົດເວລາ"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"ປິດສຽງໂທລະສັບໃນບາງເວລາ"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"ຕັ້ງກົດຂອງການຫ້າມລົບກວນ"</string>
@@ -3545,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"ເປີດການແຈ້ງເຕືອນ"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"ອະນຸຍາດໃຫ້ເລື່ອນການແຈ້ງເຕືອນ"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"ໄອຄອນຈຸດການແຈ້ງເຕືອນຢູ່ແອັບ"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"ກຸ່ມການແຈ້ງເຕືອນ"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbles"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bubbles"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"ສະແດງການສົນທະນານີ້ເປັນຟອງ"</string>
@@ -3837,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"ບໍ່ມີ"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"ທັງໝົດ"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ອະນຸຍາດໃຫ້ແອັບຍົກເລີກໄດ້"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"ແອັບທີ່ສາມາດລົບກວນໄດ້"</string>
@@ -4862,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"ເຄສ"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ແບັດເຕີຣີ"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"ແຜງການຕັ້ງຄ່າ"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"ບັງຄັບໂໝດເດັສທັອບ"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"ບັງຄັບໂໝດເດັສທັອບແບບທົດລອງໃຊ້ຢູ່ໜ້າຈໍທີສອງ"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"ເປີດການນຳໃຊ້ໜ້າຈໍຮູບແບບອິດສະຫຼະ"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"ເປີດການນຳໃຊ້ການຮອງຮັບໜ້າຈໍຮູບແບບອິດສະຫຼະ."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"ເປີດການນຳໃຊ້ໜ້າຈໍຮູບແບບອິດສະຫຼະຢູ່ຈໍສະແດງຜົນສຳຮອງ"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"ເປີດການນຳໃຊ້ໜ້າຈໍຮູບແບບອິດສະຫຼະຢູ່ຈໍສະແດງຜົນສຳຮອງເທົ່ານັ້ນ."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"ເປີດການນຳໃຊ້ແບບບໍ່ສາມາດປັບຂະໜາດໃນການໃຊ້ຫຼາຍໜ້າຈໍ"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"ອະນຸຍາດໃຫ້ມີແອັບແບບບໍ່ສາມາດປັບຂະໜາດໄດ້ໃນການໃຊ້ຫຼາຍໜ້າຈໍ"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"ຍົກເລີກການບັງຄັບໃຫ້ໃຊ້ແບບມືດ"</string>
@@ -4931,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"ພາທິຊັນຂໍ້ມູນຂອງອຸປະກອນນີ້ຈະຕ້ອງປ່ຽນແປງເປັນ ext4 ກ່ອນທີ່ຈະໃຊ້ຕົວເລືອກນັກພັດທະນາແບບ 16KB. ບໍ່ຮັບປະກັນຄວາມສົມບູນຂອງຊອບແວໃນໂໝດນີ້ ແລະ ຂໍ້ມູນໃດກໍຕາມທີ່ຈັດເກັບໃນໂທລະສັບໃນລະຫວ່າງທີ່ bootloader ປົດລັອກຢູ່ອາດມີຄວາມສ່ຽງ. ການເປີດນຳໃຊ້ຕົວເລືອກ 16KB ຈະຕ້ອງມີການປິດເປີດໃໝ່ອີກເທື່ອໜຶ່ງຫຼັງຈາກນີ້. ເມື່ອທ່ານຢູ່ໃນໂໝດນີ້ແລ້ວ, ທ່ານສາມາດປ່ຽນໄປມາລະຫວ່າງໂໝດ 4KB ແລະ 16KB ໄດ້ໂດຍການປິດເປີດໃໝ່ເທື່ອດຽວ. ຄຸນສົມບັດບາງຢ່າງອາດຖືກປິດການນຳໃຊ້ໃນໂໝດເຫຼົ່ານີ້, ດັ່ງນັ້ນບາງແອັບພລິເຄຊັນຈຶ່ງອາດບໍ່ເຮັດວຽກ. ເພື່ອໃຫ້ອຸປະກອນກັບຄືນເປັນໂໝດໂປຣດັກຊັນ, ທ່ານຈະຕ້ອງປ່ຽນກັບໄປໃຊ້ໂໝດ 4KB ຈາກນັ້ນລັອກ bootloader, ເຊິ່ງຈະຣີເຊັດອຸປະກອນເປັນຄ່າຈາກໂຮງງານ. ຫຼັງຈາກທີ່ອຸປະກອນເປີດເຂົ້າເປັນ Android ໄດ້ສຳເລັດ, ໃຫ້ປິດການນຳໃຊ້ການປົດລັອກ OEM ໃນຕົວເລືອກນັກພັດທະນາ. ອຸປະກອນຈະຖືກລ້າງຂໍ້ມູນ ແລະ ລະບົບໄຟລ໌ຈະປ່ຽນເປັນ ext4 ຫຼັງຈາກການຢືນຢັນ. ຫຼັງຈາກການດຳເນີນການນີ້ສຳເລັດ, ກະລຸນາກັບຄືນມາເປີດການນຳໃຊ້ໂໝດ 16KB ອີກເທື່ອໜຶ່ງ."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"ລຶບຂໍ້ມູນທັງໝົດ"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ຟໍແມັດໃໝ່ ແລະ ລ້າງພາທິຊັນຂໍ້ມູນເປັນ ext4 ບໍ່ສຳເລັດ."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"ຕ້ອງປົດລັອກ Bootloader"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"ອຸປະກອນນີ້ຕ້ອງມີການປົດລັອກ bootloader ກ່ອນທີ່ຈະໃຊ້ຕົວເລືອກນັກພັດທະນາແບບ 16KB. ບໍ່ຮັບປະກັນຄວາມສົມບູນຂອງຊອບແວໃນໂໝດນີ້ ແລະ ຂໍ້ມູນໃດກໍຕາມທີ່ຈັດເກັບໃນໂທລະສັບໃນລະຫວ່າງທີ່ bootloader ປົດລັອກຢູ່ອາດມີຄວາມສ່ຽງ. ຂໍ້ມູນຜູ້ໃຊ້ ແລະ ການຕັ້ງຄ່າທັງໝົດຈະຖືກລ້າງເມື່ອເປີດນຳໃຊ້ໂໝດ 16KB. ເມື່ອປົດລັອກ bootloader ແລ້ວ, ການເປີດນຳໃຊ້ຕົວເລືອກ 16KB ຈະຕ້ອງມີການປິດເປີດໃໝ່ສອງເທື່ອ. ເມື່ອທ່ານຢູ່ໃນໂໝດນີ້ແລ້ວ, ທ່ານສາມາດປ່ຽນໄປມາລະຫວ່າງໂໝດ 4KB ແລະ 16KB ໄດ້ໂດຍການປິດເປີດໃໝ່ເທື່ອດຽວ. ຄຸນສົມບັດບາງຢ່າງອາດຖືກປິດການນຳໃຊ້ໃນໂໝດເຫຼົ່ານີ້, ດັ່ງນັ້ນບາງແອັບພລິເຄຊັນຈຶ່ງອາດບໍ່ເຮັດວຽກ. ເພື່ອໃຫ້ອຸປະກອນກັບຄືນເປັນໂໝດໂປຣດັກຊັນ, ທ່ານຈະຕ້ອງປ່ຽນກັບໄປໃຊ້ໂໝດ 4KB ຈາກນັ້ນລັອກ OEM/bootloader (ເຊິ່ງຈະຣີເຊັດອຸປະກອນເປັນຄ່າຈາກໂຮງງານ). ກະລຸນາປົດລັອກ bootloader ແລ້ວລອງໃໝ່. ທ່ານສາມາດເບິ່ງຄຳແນະນຳສຳລັບວິທີການນີ້ໄດ້ຢູ່ &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"ກຳລັງໃຊ້ໂໝດບໍ່ເນັ້ນການໃຊ້ໜ້າ ໂດຍໃຊ້ຂະໜາດ 4KB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"ທ່ານຢູ່ໃນໂໝດ 4KB ຂອງໂໝດບໍ່ເນັ້ນການໃຊ້ໜ້າ. ບໍ່ຮັບປະກັນຄວາມສົມບູນຂອງຊອບແວໃນໂໝດນີ້ ແລະ ຂໍ້ມູນໃດກໍຕາມທີ່ຈັດເກັບໃນໂທລະສັບໃນລະຫວ່າງທີ່ bootloader ປົດລັອກຢູ່ອາດມີຄວາມສ່ຽງ. ຄຸນສົມບັດບາງຢ່າງອາດຖືກປິດການນຳໃຊ້ໃນໂໝດເຫຼົ່ານີ້, ດັ່ງນັ້ນບາງແອັບພລິເຄຊັນຈຶ່ງອາດບໍ່ເຮັດວຽກ. ເພື່ອກັບຄືນເປັນໂໝດໂປຣດັກຊັນອີກເທື່ອໜຶ່ງ, ທ່ານຕ້ອງລັອກ bootloader ຂອງອຸປະກອນ. ແຕະເພື່ອອ່ານເພີ່ມເຕີມ."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"ທ່ານຢູ່ໃນໂໝດ 4KB ຂອງໂໝດບໍ່ເນັ້ນການໃຊ້ໜ້າ. ບໍ່ຮັບປະກັນຄວາມສົມບູນຂອງຊອບແວໃນໂໝດນີ້ ແລະ ຂໍ້ມູນໃດກໍຕາມທີ່ຈັດເກັບໃນໂທລະສັບໃນລະຫວ່າງທີ່ bootloader ປົດລັອກຢູ່ອາດມີຄວາມສ່ຽງ. ຄຸນສົມບັດບາງຢ່າງອາດຖືກປິດການນຳໃຊ້ໃນໂໝດເຫຼົ່ານີ້, ດັ່ງນັ້ນບາງແອັບພລິເຄຊັນຈຶ່ງອາດບໍ່ເຮັດວຽກ. ເພື່ອກັບຄືນເປັນໂໝດໂປຣດັກຊັນອີກເທື່ອໜຶ່ງ, ທ່ານຕ້ອງລັອກ bootloader ຂອງອຸປະກອນ. ການດຳເນີນການນີ້ຈະຣີເຊັດອຸປະກອນເປັນຄ່າຈາກໂຮງງານອີກເທື່ອໜຶ່ງ ແລະ ກູ້ຄືນເປັນການຕັ້ງຄ່າໂປຣດັກຊັນ. ຫຼັງຈາກທີ່ອຸປະກອນເປີດເຂົ້າເປັນ Android ໄດ້ສຳເລັດ, ໃຫ້ປິດການນຳໃຊ້ການປົດລັອກ OEM ໃນຕົວເລືອກນັກພັດທະນາ. ຫາກອຸປະກອນບໍ່ສາມາດເປີດເຂົ້າເປັນ Android ຫຼື ບໍ່ສະຖຽນ, ໃຫ້ແຟລຊອຸປະກອນອີກເທື່ອໜຶ່ງໂດຍໃຊ້ຮູບພາບໂຮງງານຫຼ້າສຸດຈາກ &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ຫຼື ໃຊ້ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ແລະ ເລືອກ \'ລ້າງຂໍ້ມູນອຸປະກອນ\', \'ລັອກ Bootloader\' ແລະ \'ບັງຄັບໃຫ້ແຟລຊທຸກພາທິຊັນ\'."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"ກຳລັງໃຊ້ໂໝດບໍ່ເນັ້ນການໃຊ້ໜ້າ ໂດຍໃຊ້ຂະໜາດ 16KB"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"ທ່ານຢູ່ໃນໂໝດ 16KB ຂອງໂໝດບໍ່ຂຶ້ນກັບໜ້າ. ບໍ່ຮັບປະກັນຄວາມສົມບູນຂອງຊອບແວໃນໂໝດນີ້ ແລະ ຂໍ້ມູນໃດກໍຕາມທີ່ຈັດເກັບໃນໂທລະສັບໃນລະຫວ່າງທີ່ Bootloader ປົດລັອກຢູ່ອາດມີຄວາມສ່ຽງ. ຄຸນສົມບັດບາງຢ່າງອາດຖືກປິດການນຳໃຊ້ໃນໂໝດເຫຼົ່ານີ້, ດັ່ງນັ້ນບາງແອັບພລິເຄຊັນຈຶ່ງອາດບໍ່ເຮັດວຽກ. ເພື່ອກັບຄືນເປັນໂໝດໂປຣດັກຊັນອີກເທື່ອໜຶ່ງ, ທ່ານຕ້ອງປ່ຽນກັບໄປໃຊ້ໂໝດ 4KB ຈາກນັ້ນລັອກ Bootloader ຂອງອຸປະກອນ. ແຕະເພື່ອອ່ານເພີ່ມເຕີມ."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"ທ່ານຢູ່ໃນໂໝດ 16KB ຂອງໂໝດບໍ່ຂຶ້ນກັບໜ້າ. ບໍ່ຮັບປະກັນຄວາມສົມບູນຂອງຊອບແວໃນໂໝດນີ້ ແລະ ຂໍ້ມູນໃດກໍຕາມທີ່ຈັດເກັບໃນໂທລະສັບໃນລະຫວ່າງທີ່ Bootloader ປົດລັອກຢູ່ອາດມີຄວາມສ່ຽງ. ຄຸນສົມບັດບາງຢ່າງອາດຖືກປິດການນຳໃຊ້ໃນໂໝດເຫຼົ່ານີ້, ດັ່ງນັ້ນບາງແອັບພລິເຄຊັນຈຶ່ງອາດບໍ່ເຮັດວຽກ. ເພື່ອກັບຄືນເປັນໂໝດໂປຣດັກຊັນອີກເທື່ອໜຶ່ງ, ທ່ານຕ້ອງປ່ຽນກັບໄປໃຊ້ໂໝດ 4KB ຈາກນັ້ນລັອກ Bootloader ຂອງອຸປະກອນ. ການດຳເນີນການນີ້ຈະຣີເຊັດອຸປະກອນເປັນຄ່າຈາກໂຮງງານອີກເທື່ອໜຶ່ງ ແລະ ກູ້ຄືນເປັນການຕັ້ງຄ່າໂປຣດັກຊັນ. ຫຼັງຈາກທີ່ອຸປະກອນເປີດເຂົ້າເປັນ Android ໄດ້ສຳເລັດ, ໃຫ້ປິດການນຳໃຊ້ການປົດລັອກ OEM ໃນຕົວເລືອກນັກພັດທະນາ. ຫາກອຸປະກອນບໍ່ສາມາດເປີດເຂົ້າເປັນ Android ຫຼື ບໍ່ສະຖຽນ, ໃຫ້ແຟລຊອຸປະກອນອີກເທື່ອໜຶ່ງໂດຍໃຊ້ຮູບພາບໂຮງງານຫຼ້າສຸດຈາກ &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ຫຼື ໃຊ້ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ແລະ ເລືອກ \'ລ້າງຂໍ້ມູນອຸປະກອນ\', \'ລັອກ Bootloader\' ແລະ \'ບັງຄັບໃຫ້ແຟລຊທຸກພາທິຊັນ\'."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"ໂໝດບໍ່ເນັ້ນການໃຊ້ໜ້າ ໂດຍໃຊ້ຂະໜາດ 16KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"ອ່ານເພີ່ມເຕີມ"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"ເຄື່ອງຈັດການລາຍງານຂໍ້ຜິດພາດ"</string>
@@ -5188,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"ເລືອກວ່າທ່ານຈະເຫັນຫຍັງຢູ່ໜ້າຈໍຂອງທ່ານເມື່ອແທັບເລັດຂອງທ່ານຕັ້ງຢູ່ດັອກ. ອຸປະກອນຂອງທ່ານອາດໃຊ້ພະລັງງານຫຼາຍຂຶ້ນເມື່ອໃຊ້ສະກຣີນເຊບເວີ."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"ປັບແຕ່ງ"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"ປັບແຕ່ງ <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ຕ້ອງປິດ​ເປີດ​ໃໝ່ເພື່ອເປີດການນຳໃຊ້ການຊ່ວຍເຫຼືອຮູບແບບອິດສະລະ."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"ຕ້ອງປິດ​ເປີດ​ໃໝ່ເພື່ອບັງຄັບໂໝດເດັສທັອບຢູ່ໜ້າຈໍທີສອງ."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"ຕ້ອງປິດເປີດໃໝ່ເພື່ອເປີດການນຳໃຊ້ການຮອງຮັບໜ້າຈໍຮູບແບບອິດສະຫຼະແບບເກົ່າ."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"ຕ້ອງປິດເປີດໃໝ່ເພື່ອປ່ຽນການຮອງຮັບໜ້າຈໍຮູບແບບອິດສະຫຼະ."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"ຕ້ອງປິດເປີດໃໝ່ເພື່ອບັງຄັບໃຫ້ເປີດການນຳໃຊ້ໜ້າຈໍຮູບແບບອິດສະຫຼະຢູ່ຈໍສະແດງຜົນສຳຮອງ."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"ປິດ​ເປີດ​ໃໝ່ໃນຕອນນີ້"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"ປິດ​ເປີດ​ໃໝ່ໃນພາຍຫຼັງ"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"ສຽງຮອບທິດທາງ"</string>

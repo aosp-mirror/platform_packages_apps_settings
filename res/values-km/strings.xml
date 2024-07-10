@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"បានបញ្ចូលមុខ និង <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"បានបញ្ចូលមុខ ស្នាមម្រាមដៃ និង <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"បានបញ្ចូលមុខ ស្នាមម្រាមដៃ និង <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"ចាំបាច់ធ្វើសកម្មភាពនេះ​ ដោយសារតែការត្រួតពិនិត្យអត្តសញ្ញាណត្រូវបានបើក"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"ការដោះសោពីចម្ងាយតាមកម្មវិធីផ្ទៀងផ្ទាត់"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"បានបញ្ចូលនាឡិកាហើយ"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"រៀបចំនាឡិការបស់អ្នក"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ជម្រើស"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ភាពងាយស្រួល"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ក្ដារចុច​រូបវ័ន្ត"</string>
-    <string name="show_ime" msgid="4334255501724746849">"ប្រើក្ដារចុច​លើអេក្រង់"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"រក្សា​នៅលើអេក្រង់ ពេលក្តារចុចរូបវ័ន្តកំពុងធ្វើ​​ប្រតិបត្តិការ"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"គ្រាប់ចុចឡង"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"ក្ដារចុចមិនអើពើនឹងការចុចដដែលៗយ៉ាងរហ័សនៃគ្រាប់ចុចដដែលក្នុងរយៈពេល <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> មិល្លីវិនាទី"</string>
     <string name="slow_keys" msgid="2891452895499690837">"គ្រាប់ចុចយឺត"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"មិនអីទេ បន្តចុះ"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"បោះបង់"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"ការកំណត់​ការពង្រីក"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"ផ្លាស់ទីកែវពង្រីកដោយប្រើម្រាមដៃ 1"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"អូសម្រាមដៃ 1 ដើម្បីផ្លាស់ទីជុំវិញអេក្រង់"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"ផ្លាស់ទីផ្ទៃពង្រីកដោយអូសម្រាមដៃមួយ។"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"ផ្លាស់ទីផ្ទៃពង្រីកដោយអូសម្រាមដៃពីរ។"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"មិនអាចប្រើបានទេ ពេលពង្រីកតែផ្នែកនៃអេក្រង់"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"ចុចប៊ូតុងដើម្បីពង្រីក ឬបង្រួម"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"ពង្រីកនៅលើអេក្រង់យ៉ាងរហ័ស ដើម្បីបង្ហាញខ្លឹមសារធំជាងមុន"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;ដើម្បីពង្រីក៖&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ប្រើ​ផ្លូវកាត់ ដើម្បីចាប់ផ្ដើម​ការពង្រីក&lt;br/&gt; {1,number,integer}. ចុច​អេក្រង់&lt;br/&gt; {2,number,integer}. អូស​ម្រាមដៃ 2 ដើម្បីផ្លាស់ទីនៅជុំវិញអេក្រង់&lt;br/&gt;{3,number,integer}. ច្បិច​ដោយប្រើ​ម្រាមដៃ 2 ដើម្បី​កែតម្រូវ​ការពង្រីកបង្រួម&lt;br/&gt; {4,number,integer}. ប្រើ​ផ្លូវកាត់ ដើម្បី​បញ្ឈប់​ការពង្រីក&lt;br/&gt;&lt;br/&gt; &lt;b&gt;ដើម្បីពង្រីក​ជាបណ្ដោះអាសន្ន៖&lt;/b&gt;&lt;br/&gt; {0,number,integer}. សូមប្រាកដថា ប្រភេទនៃការ​ពង្រីករបស់អ្នកត្រូវបានកំណត់ទៅពេញអេក្រង់&lt;br/&gt; {1,number,integer}. ប្រើ​ផ្លូវកាត់ ដើម្បី​ចាប់ផ្ដើម​ការពង្រីក&lt;br/&gt; {2,number,integer}. ចុចកន្លែងណាមួយ​នៅលើ​អេក្រង់ឱ្យជាប់&lt;br/&gt; {3,number,integer}. អូស​ម្រាមដៃ ដើម្បីផ្លាស់ទី​នៅជុំវិញ​អេក្រង់&lt;br/&gt; {4,number,integer}. ដកម្រាមដៃចេញ ដើម្បី​បញ្ឈប់​ការ​ពង្រីក"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;ដើម្បីពង្រីក៖&lt;/b&gt;&lt;br/&gt; {0,number,integer}។ ប្រើ​ផ្លូវកាត់ ដើម្បីចាប់ផ្ដើម​ការពង្រីក&lt;br/&gt; {1,number,integer}។ ចុច​អេក្រង់&lt;br/&gt; {2,number,integer}។ អូស​ម្រាមដៃ 2 ដើម្បីផ្លាស់ទីលើអេក្រង់&lt;br/&gt;{3,number,integer}។ ច្បិច​ដោយប្រើ​ម្រាមដៃ 2 ដើម្បី​កែតម្រូវ​ការពង្រីកបង្រួម&lt;br/&gt; {4,number,integer}។ ប្រើផ្លូវកាត់ ដើម្បីបញ្ឈប់ការ​ពង្រីក&lt;br/&gt;&lt;br/&gt; អ្នកក៏អាចពង្រីកជាបណ្ដោះអាសន្ន និងធ្វើអ្វីៗជាច្រើនទៀតបានផងដែរ។"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;ដើម្បីពង្រីក៖&lt;/b&gt;&lt;br/&gt; {0,number,integer}។ ប្រើ​ផ្លូវកាត់ ដើម្បីចាប់ផ្ដើម​ការពង្រីក&lt;br/&gt; {1,number,integer}។ ចុច​អេក្រង់&lt;br/&gt; {2,number,integer}។ អូសម្រាមដៃ 1 ឬ 2 ដើម្បីផ្លាស់ទីលើអេក្រង់&lt;br/&gt; {3,number,integer}។ ច្បិច​ដោយប្រើ​ម្រាមដៃ 2 ដើម្បី​កែតម្រូវ​ការពង្រីកបង្រួម&lt;br/&gt; {4,number,integer}។ ប្រើផ្លូវកាត់ ដើម្បីបញ្ឈប់ការ​ពង្រីក&lt;br/&gt;&lt;br/&gt; អ្នកក៏អាចពង្រីកជាបណ្ដោះអាសន្ន និងធ្វើអ្វីៗជាច្រើនទៀតបានផងដែរ។"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"នៅពេល​បើកការពង្រីក អ្នក​អាចពង្រីក​នៅលើអេក្រង់​របស់អ្នកបាន។\n\n"<b>"ដើម្បី​ពង្រីកបង្រួម"</b>" សូម​ចាប់ផ្ដើម​ការពង្រីក រួច​ចុចលើកន្លែងណាមួយ​នៅលើអេក្រង់។\n"<ul><li>"អូសដោយប្រើម្រាមដៃ 2 ឬច្រើនដើម្បីរំកិល"</li>\n<li>"ច្បិចដោយប្រើម្រាមដៃ 2 ឬច្រើន ដើម្បីកែតម្រូវ​ការពង្រីកបង្រួម"</li></ul>\n\n<b>"ដើម្បី​ពង្រីកបង្រួម​ជាបណ្តោះអាសន្ន"</b>" ចាប់ផ្តើម​ការពង្រីក បន្ទាប់មកចុចសង្កត់​កន្លែងណាមួយនៅលើអេក្រង់ឱ្យជាប់។\n"<ul><li>"អូសដើម្បីផ្លាស់ទីនៅលើអេក្រង់"</li>\n<li>"លើកម្រាមដៃឡើងដើម្បីបង្រួម"</li></ul>\n\n"អ្នកមិនអាចពង្រីកនៅលើក្តារចុច ឬរបាររុករកបានទេ។"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"ទំព័រទី <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> នៃ <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"ផ្លូវកាត់ប៊ូតុង​ភាពងាយស្រួល"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"បង្កើតមុខងារ"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"ផ្ទាល់ខ្លួន"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"កាត់បន្ថយ​ការរំខាន"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"បើកមុខងារកុំរំខាន"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"សំឡេង​មេឌៀ និង​ម៉ោងរោទ៍​អាច​ផ្អាកបាន"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"កំណត់​កាលវិភាគ"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"កាលវិភាគ"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ម៉ <xliff:g id="MINUTES">%2$d</xliff:g> ន"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"បើកដោយស្វ័យប្រវត្តិ"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"កាលវិភាគ"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"បិទ​សំឡេង​ទូរសព្ទ​ក្នុង​ពេល​ជាក់​លាក់"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"កំណត់ច្បាប់សម្រាប់មុខងារកុំរំខាន"</string>
@@ -3545,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"បើក​ការជូនដំណឹង"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"អនុញ្ញាត​ការផ្អាក​ការជូនដំណឹង"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"ស្លាក​ជូនដំណឹង​នៅលើ​រូបកម្មវិធី"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"កញ្ចប់នៃការ​ជូនដំណឹង"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"ពពុះ"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ពពុះ"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"បង្ហាញ​ការសន្ទនានេះ​ជាពពុះ"</string>
@@ -3837,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"គ្មាន"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"ទាំងអស់"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"អនុញ្ញាតឱ្យកម្មវិធី​លុបពីលើ"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"កម្មវិធី​ដែលអាច​ផ្អាកបាន"</string>
@@ -4862,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"ស្រោម"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ថ្ម"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"ផ្ទាំងការកំណត់"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"បង្ខំ​មុខងារ​អេក្រង់ដើម"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"បង្ខំ​មុខងារ​អេក្រង់​ដើម​សាកល្បង​នៅលើ​អេក្រង់​ទី​ពីរ"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"បើកវិនដូទម្រង់សេរី"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"បើកជំនួយសម្រាប់វិនដូទម្រង់សេរី។"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"បើកវិនដូទម្រង់សេរីលើផ្ទាំងអេក្រង់ទីពីរ"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"បើកវិនដូទម្រង់សេរីតែផ្ទាំងអេក្រង់ទីពីរប៉ុណ្ណោះ។"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"បើក​កម្មវិធីដែលមិនអាចប្ដូរទំហំបាន​នៅក្នុង​ពហុវិនដូ"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"អនុញ្ញាតឱ្យ​កម្មវិធីដែលមិនអាចប្ដូរទំហំបាន​ស្ថិតនៅក្នុង​ពហុវិនដូ"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"លុបពីលើ​មុខងារបង្ខំ​ឱ្យងងឹត"</string>
@@ -4931,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"ផ្នែកទិន្នន័យរបស់ឧបករណ៍នេះត្រូវបំប្លែងទៅជា ext4 មុនពេលប្រើជម្រើសសម្រាប់អ្នកអភិវឌ្ឍន៍ 16KB។ មិនអាចធានាសុក្រឹតភាពកម្មវិធីនៅក្នុងមុខងារនេះទេ ហើយទិន្នន័យទាំងឡាយដែលបានរក្សាទុកនៅលើទូរសព្ទ នៅពេលកម្មវិធីដំណើរការប្រព័ន្ធត្រូវបានដោះសោ អាច​ប្រឈមនឹងហានិភ័យ។ ការបើកដំណើរការជម្រើស 16KB នឹងតម្រូវឱ្យមានការចាប់ផ្ដើមឡើងវិញម្ដងទៀតបន្ទាប់ពីនេះ។ នៅពេលដែលអ្នកកំពុងប្រើមុខងារនេះ អ្នកអាចប្ដូរទៅមករវាងមុខងារ 4KB និង 16KB តាមរយៈការចាប់​ផ្ដើម​ឡើង​វិញតែម្ដងគត់។ មុខងារមួយចំនួននឹងត្រូវបានបិទនៅក្នុងមុខងារទាំងនេះ ដូច្នេះកម្មវិធីមួយចំនួនប្រហែលជាមិនដំណើរការទេ។ ដើម្បីត្រឡប់ឧបករណ៍ទៅមុខងារផលិតកម្ម អ្នកនឹងត្រូវប្ដូរត្រឡប់ទៅមុខងារ 4KB វិញ បន្ទាប់មកចាក់សោកម្មវិធីដំណើរការប្រព័ន្ធ ដែល​កំណត់​ឧបករណ៍ដូច​ចេញ​ពី​រោងចក្រ។ បន្ទាប់ពីឧបករណ៍ចាប់ផ្ដើមចូល Android ដោយជោគជ័យ សូមបិទការដោះសោ OEM នៅក្នុងជម្រើសសម្រាប់អ្នកអភិវឌ្ឍន៍។ ឧបករណ៍នឹងត្រូវបានឈូស ហើយប្រព័ន្ធឯកសារនឹងត្រូវបានប្ដូរទៅជា ext4 បន្ទាប់ពីបញ្ជាក់រួច។ បន្ទាប់​ពី​ដំណើរការ​នេះ​ចប់ សូម​ត្រឡប់​មក​បើក 16KB ម្ដង​ទៀត។"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"លុប​ទិន្នន័យ​ទាំង​អស់"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"មិនអាច​ឈូស និងកំណត់​ទម្រង់​ផ្នែក​ទិន្នន័យ​ឡើងវិញ​ទៅជា ext4 បានទេ។"</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"តម្រូវឱ្យមានការដោះសោកម្មវិធីដំណើរការប្រព័ន្ធ"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"ឧបករណ៍នេះត្រូវដោះសោកម្មវិធីដំណើរការប្រព័ន្ធ មុនពេលប្រើជម្រើសសម្រាប់អ្នកអភិវឌ្ឍន៍ 16KB។ មិនអាចធានាសុក្រឹតភាពកម្មវិធីនៅក្នុងមុខងារនេះទេ ហើយទិន្នន័យទាំងឡាយដែលបានរក្សាទុកនៅលើទូរសព្ទ នៅពេលកម្មវិធីដំណើរការប្រព័ន្ធត្រូវបានដោះសោ អាច​ប្រឈមនឹងហានិភ័យ។ ទិន្នន័យ និងការកំណត់ទាំងអស់របស់អ្នកប្រើប្រាស់នឹងត្រូវបានឈូស នៅពេលបើកដំណើរការមុខងារ 16KB។ នៅពេលកម្មវិធីដំណើរការប្រព័ន្ធត្រូវបានដោះសោ ការបើកដំណើរការជម្រើស 16KB នឹងតម្រូវឱ្យមានការចាប់ផ្ដើមឡើងវិញពីរដង។ នៅពេលដែលអ្នកកំពុងប្រើមុខងារនេះ អ្នកអាចប្ដូរទៅមករវាងមុខងារ 4KB និង 16KB តាមរយៈការចាប់​ផ្ដើម​ឡើង​វិញតែម្ដងគត់។ មុខងារមួយចំនួននឹងត្រូវបានបិទនៅក្នុងមុខងារទាំងនេះ ដូច្នេះកម្មវិធីមួយចំនួនប្រហែលជាមិនដំណើរការទេ។ ដើម្បី​ត្រឡប់​ឧបករណ៍​ទៅ​មុខងារ​ផលិតកម្ម អ្នក​ត្រូវ​ប្ដូរ​ទៅ​មុខងារ 4KB វិញ បន្ទាប់​មក​ ការចាក់សោ OEM/កម្មវិធីដំណើរការប្រព័ន្ធ (ដែលកំណត់​ឧបករណ៍ដូច​ចេញ​ពី​រោងចក្រ​)។ សូមដោះសោកម្មវិធីដំណើរការប្រព័ន្ធ រួចព្យាយាមម្ដងទៀត។ អ្នកអាចមើលការណែនាំអំពីរបៀបអនុវត្តសកម្មភាពនេះតាម &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"ការប្រើមុខងារ Page-Agnostic 4KB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"អ្នកកំពុងប្រើមុខងារ 4KB នៃមុខងារ Page-Agnostic។ មិនអាចធានាសុក្រឹតភាពកម្មវិធីនៅក្នុងមុខងារនេះទេ ហើយទិន្នន័យទាំងឡាយដែលបានរក្សាទុកនៅលើទូរសព្ទ នៅពេលកម្មវិធីដំណើរការប្រព័ន្ធត្រូវបានដោះសោ អាច​ប្រឈមនឹងហានិភ័យ។ មុខងារមួយចំនួននឹងត្រូវបានបិទនៅក្នុងមុខងារទាំងនេះ ដូច្នេះកម្មវិធីមួយចំនួនប្រហែលជាមិនដំណើរការទេ។ ដើម្បីបញ្ចូលមុខងារផលិតកម្មឡើងវិញ អ្នកត្រូវតែចាក់សោកម្មវិធីដំណើរការប្រព័ន្ធរបស់ឧបករណ៍។ ចុចដើម្បីអានបន្ថែម។"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"អ្នកកំពុងប្រើមុខងារ 4KB នៃមុខងារ Page-Agnostic។ មិនអាចធានាសុក្រឹតភាពកម្មវិធីនៅក្នុងមុខងារនេះទេ ហើយទិន្នន័យទាំងឡាយដែលបានរក្សាទុកនៅលើទូរសព្ទ នៅពេលកម្មវិធីដំណើរការប្រព័ន្ធត្រូវបានដោះសោ អាច​ប្រឈមនឹងហានិភ័យ។ មុខងារមួយចំនួននឹងត្រូវបានបិទនៅក្នុងមុខងារទាំងនេះ ដូច្នេះកម្មវិធីមួយចំនួនប្រហែលជាមិនដំណើរការទេ។ ដើម្បីបញ្ចូលមុខងារផលិតកម្មឡើងវិញ អ្នកត្រូវតែចាក់សោកម្មវិធីដំណើរការប្រព័ន្ធរបស់ឧបករណ៍។ ដំណើរការនេះនឹង​កំណត់​ឧបករណ៍​ដូចចេញពីរោងចក្រ រួចត្រឡប់ឧបករណ៍ទៅ​ការកំណត់​ផលិតកម្មវិញ។ បន្ទាប់ពីឧបករណ៍ចាប់ផ្ដើមចូល Android ដោយជោគជ័យ សូមបិទការដោះសោ OEM នៅក្នុងជម្រើសសម្រាប់អ្នកអភិវឌ្ឍន៍។ ប្រសិនបើ​ឧបករណ៍​មិនអាចចាប់ផ្ដើម​ប្រព័ន្ធ​ប្រតិបត្តិការ Android ឬ​មិន​មានស្ថិរភាព សូម​ជំនួសកម្មវិធីឧបករណ៍​ឡើងវិញដោយប្រើរូបភាពពីរោងចក្រចុងក្រោយបំផុតពី &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ឬប្រើ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; រួចជ្រើសរើស \'ឈូសឧបករណ៍\' \'ចាក់​សោកម្មវិធីដំណើរការប្រព័ន្ធ\' និង \'បង្ខំឱ្យជំនួសផ្នែកទាំងអស់\'។"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"ដោយប្រើមុខងារ Page-Agnostic 16KB"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"អ្នកកំពុងប្រើមុខងារ 16KB នៃមុខងារ Page-Agnostic។ មិនអាចធានាសុក្រឹតភាពកម្មវិធីនៅក្នុងមុខងារនេះទេ ហើយទិន្នន័យទាំងឡាយដែលបានរក្សាទុកនៅលើទូរសព្ទ នៅពេលកម្មវិធីដំណើរការប្រព័ន្ធត្រូវបានដោះសោ អាច​ប្រឈមនឹងហានិភ័យ។ មុខងារមួយចំនួននឹងត្រូវបានបិទនៅក្នុងមុខងារទាំងនេះ ដូច្នេះកម្មវិធីមួយចំនួនប្រហែលជាមិនដំណើរការទេ។ ដើម្បីចូលទៅក្នុងមុខងារផលិតកម្មឡើងវិញ អ្នកត្រូវតែប្ដូរត្រឡប់ទៅមុខងារ 4KB បន្ទាប់មកចាក់សោកម្មវិធីដំណើរការប្រព័ន្ធរបស់ឧបករណ៍។ ចុចដើម្បីអានបន្ថែម។"</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"អ្នកកំពុងប្រើមុខងារ 16KB នៃមុខងារ Page-Agnostic។ មិនអាចធានាសុក្រឹតភាពកម្មវិធីនៅក្នុងមុខងារនេះទេ ហើយទិន្នន័យទាំងឡាយដែលបានរក្សាទុកនៅលើទូរសព្ទ នៅពេលកម្មវិធីដំណើរការប្រព័ន្ធត្រូវបានដោះសោ អាច​ប្រឈមនឹងហានិភ័យ។ មុខងារមួយចំនួននឹងត្រូវបានបិទនៅក្នុងមុខងារទាំងនេះ ដូច្នេះកម្មវិធីមួយចំនួនប្រហែលជាមិនដំណើរការទេ។ ដើម្បីចូលទៅក្នុងមុខងារផលិតកម្មឡើងវិញ អ្នកត្រូវតែប្ដូរត្រឡប់ទៅមុខងារ 4KB បន្ទាប់មកចាក់សោកម្មវិធីដំណើរការប្រព័ន្ធរបស់ឧបករណ៍។ ដំណើរការនេះនឹង​កំណត់​ឧបករណ៍​ដូចចេញពីរោងចក្រ រួចត្រឡប់ឧបករណ៍ទៅ​ការកំណត់​ផលិតកម្មវិញ។ បន្ទាប់ពីឧបករណ៍ចាប់ផ្ដើមចូល Android ដោយជោគជ័យ សូមបិទការដោះសោ OEM នៅក្នុងជម្រើសសម្រាប់អ្នកអភិវឌ្ឍន៍។ ប្រសិនបើ​ឧបករណ៍​មិនអាចចាប់ផ្ដើម​ប្រព័ន្ធ​ប្រតិបត្តិការ Android ឬ​មិន​មានស្ថិរភាព សូម​ជំនួសកម្មវិធីឧបករណ៍​ឡើងវិញដោយប្រើរូបភាពពីរោងចក្រចុងក្រោយបំផុតពី &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ឬប្រើ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; រួចជ្រើសរើស \'ឈូសឧបករណ៍\' \'ចាក់​សោកម្មវិធីដំណើរការប្រព័ន្ធ\' និង \'បង្ខំឱ្យជំនួសផ្នែកទាំងអស់\'។"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"មុខងារ Page-Agnostic 16KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"អានបន្ថែម"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"ឧបករណ៍​ដោះស្រាយ​របាយការណ៍​អំពី​បញ្ហា"</string>
@@ -5188,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"ជ្រើសរើសអ្វីដែលអ្នកនឹងមើលឃើញនៅលើអេក្រង់របស់អ្នក នៅពេលភ្ជាប់ថេប្លេតរបស់អ្នក។ ឧបករណ៍របស់អ្នកអាចប្រើថាមពលកាន់តែច្រើន នៅពេលប្រើធាតុរក្សាអេក្រង់។"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"ប្ដូរតាមបំណង"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"ប្ដូរ <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> តាម​បំណង"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"តម្រូវឱ្យចាប់ផ្ដើមឡើងវិញ ដើម្បីបើកជំនួយទម្រង់សេរី។"</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"តម្រូវឱ្យចាប់ផ្ដើមឡើងវិញ ដើម្បីបង្ខំមុខងារកុំព្យូទ័រនៅលើផ្ទាំងអេក្រង់បន្ទាប់បន្សំ។"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"តម្រូវឱ្យចាប់ផ្ដើមឡើងវិញ ដើម្បីបើកជំនួយវិនដូទម្រង់សេរីចាស់។"</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"តម្រូវឱ្យចាប់ផ្ដើមឡើងវិញ ដើម្បីប្ដូរជំនួយវិនដូទម្រង់សេរី។"</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"តម្រូវឱ្យចាប់ផ្ដើមឡើងវិញ ដើម្បីបង្ខំឱ្យបើកវិនដូទម្រង់សេរីលើផ្ទាំងអេក្រង់ទីពីរ។"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"ចាប់ផ្ដើមឡើងវិញ​ឥឡូវនេះ"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"ចាប់​ផ្ដើម​ឡើង​វិញ​ពេល​ក្រោយ"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"សំឡេងលំហ"</string>

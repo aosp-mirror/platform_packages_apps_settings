@@ -16,10 +16,13 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment.KEY_SAVED_QS_TOOLTIP_RESHOW;
 import static com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
 import static com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
-import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -128,7 +131,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.getComponentName().flattenToString());
         // Compare to default UserShortcutType
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(SOFTWARE);
     }
 
     @Test
@@ -140,20 +143,20 @@ public class AccessibilityShortcutPreferenceFragmentTest {
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.getComponentName().flattenToString());
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+        assertThat(expectedType).isEqualTo(SOFTWARE | HARDWARE);
     }
 
     @Test
     public void updateShortcutPreferenceData_hasValueInSharedPreference_assignToVariable() {
         final PreferredShortcut hardwareShortcut = new PreferredShortcut(
-                PLACEHOLDER_COMPONENT_NAME.flattenToString(), UserShortcutType.HARDWARE);
+                PLACEHOLDER_COMPONENT_NAME.flattenToString(), HARDWARE);
 
         putUserShortcutTypeIntoSharedPreference(mContext, hardwareShortcut);
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.getComponentName().flattenToString());
-        assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE);
+        assertThat(expectedType).isEqualTo(HARDWARE);
     }
 
     @Test
@@ -171,7 +174,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.setupEditShortcutDialog(dialog);
 
         final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.EMPTY);
+        assertThat(checkboxValue).isEqualTo(DEFAULT);
     }
 
     @Test
@@ -184,7 +187,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
                 null);
         final PreferredShortcut hardwareShortcut = new PreferredShortcut(
-                PLACEHOLDER_COMPONENT_NAME.flattenToString(), UserShortcutType.HARDWARE);
+                PLACEHOLDER_COMPONENT_NAME.flattenToString(), HARDWARE);
         mFragment.mShortcutPreference = shortcutPreference;
 
         PreferredShortcuts.saveUserShortcutType(mContext, hardwareShortcut);
@@ -192,7 +195,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.setupEditShortcutDialog(dialog);
 
         final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.HARDWARE);
+        assertThat(checkboxValue).isEqualTo(HARDWARE);
     }
 
     @Test
@@ -209,7 +212,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.mShortcutPreference = shortcutPreference;
 
         savedInstanceState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE,
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+                SOFTWARE | HARDWARE);
         mFragment.onAttach(mContext);
         mFragment.onCreate(savedInstanceState);
         mFragment.setupEditShortcutDialog(dialog);
@@ -218,7 +221,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.getComponentName().flattenToString());
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+        assertThat(expectedType).isEqualTo(SOFTWARE | HARDWARE);
     }
 
     @Test
@@ -290,7 +293,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     public void getShortcutTypeSummary_shortcutSummaryIsCorrectlySet() {
         final PreferredShortcut userPreferredShortcut = new PreferredShortcut(
                 PLACEHOLDER_COMPONENT_NAME.flattenToString(),
-                UserShortcutType.HARDWARE | UserShortcutType.QUICK_SETTINGS);
+                HARDWARE | QUICK_SETTINGS);
         putUserShortcutTypeIntoSharedPreference(mContext, userPreferredShortcut);
         final ShortcutPreference shortcutPreference =
                 new ShortcutPreference(mContext, /* attrs= */ null);
