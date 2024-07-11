@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Твар і гадзіннік \"<xliff:g id="WATCH">%s</xliff:g>\" дададзены"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Твар, адбітак пальца і гадзіннік \"<xliff:g id="WATCH">%s</xliff:g>\" дададзены"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Твар, адбіткі пальцаў і гадзіннік \"<xliff:g id="WATCH">%s</xliff:g>\" дададзены"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Гэта неабходна, паколькі ўключана функцыя праверкі асобы"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Разблакіраваць Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Гадзіннік дададзены"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Наладжванне гадзінніка"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Іншыя версіі"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Спецыяльныя магчымасці"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Фізічная клавіятура"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Выкарыстоўваць экранную клавіятуру"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Захоўваць яе на экране ў той час, калі фізічная клавіятура актыўная"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Ігнараванне паўторнага націскання"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"Паўторныя націсканні адной і той жа клавішы, ажыццёўленыя на працягу <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> мс, ігнаруюцца"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Запавольванне рэакцыі на націсканне"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Стварыць рэжым"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Карыстальніцкі"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Абмежаванне колькасці непатрэбных апавяшчэнняў"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Уключэнне рэжыму \"Не турбаваць\""</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Гэты рэжым не распаўсюджваецца на сігналы будзільнікаў і гукі мультымедыя"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Задаць расклад"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Расклад"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> гадз <xliff:g id="MINUTES">%2$d</xliff:g> хв"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Уключаць аўтаматычна"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Расклад"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Выключаць гук тэлефона ў пэўны час"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Правілы рэжыму \"Не турбаваць\""</string>
@@ -3541,6 +3541,8 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"адкрыць апавяшчэнне"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Дазволіць адкладванне апавяшчэнняў"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Значок апавяшчэнняў на значку праграмы"</string>
+    <!-- no translation found for notification_bundles (3614044525822580826) -->
+    <skip />
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Усплывальныя чаты"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Усплывальныя чаты"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Паказваць гэту размову ў выглядзе ўсплывальных апавяшчэнняў"</string>
@@ -3833,6 +3835,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Ніякія"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Усе"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Дазволіць праграмам перавызначаць"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Гэты рэжым не распаўсюджваецца на наступныя праграмы"</string>
@@ -4858,8 +4862,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Чахол"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Акумулятар"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Панель налад"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Прымусова ўключаць рэжым працоўнага стала"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Прымусова ўключаць эксперыментальны рэжым працоўнага стала на дадатковых экранах"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Уключыць адвольную форму вокнаў"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Уключыць падтрымку адвольнай формы вокнаў."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Уключыць адвольную форму вокнаў на другасным дысплэі"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Уключыць адвольную форму вокнаў толькі на другасным дысплэі."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"У рэжыме некалькіх вокнаў уключыць нязменны памер"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Дазваляе выкарыстоўваць праграмы, якія маюць нязменны памер, у рэжыме некалькіх вокнаў"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Перавызначэнне ўключэння цёмнай тэмы"</string>
@@ -4927,17 +4933,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Каб выкарыстоўваць рэжым 16 КБ у параметрах распрацоўшчыка, раздзел даных на гэтай прыладзе трэба пераўтварыць у ext4. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Для ўключэння параметра 16 КБ патрабуецца паўторная перазагрузка. Пасля таго як вы ўключыце гэты рэжым, пераключэнне паміж рэжымамі 4 КБ і 16 КБ будзе суправаджацца толькі адной перазагрузкай. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб вярнуць прыладу ў эксплуатацыйны рэжым, вам трэба пераключыцца ў рэжым 4 КБ і заблакіраваць загрузчык, што прывядзе да скіду прылады да заводскіх налад. Пасля загрузкі Android на прыладзе выключыце разблакіроўку OEM у Параметрах распрацоўшчыка. Усе даныя будуць выдалены з прылады, а файлавая сістэма пасля пацвярджэння будзе зменена на ext4. Пасля завяршэння вярніцеся, каб зноў уключыць рэжым 16 КБ."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Сцерці ўсе даныя"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Не ўдалося ачысціць раздзел даных і перафармаціраваць яго ў ext4."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Патрабуецца разблакіроўка загрузчыка"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Каб выкарыстоўваць рэжым 16 КБ у параметрах распрацоўшчыка, трэба разблакіраваць загрузчык на прыладзе. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Калі рэжым 16 КБ уключыцца, усе даныя і налады карыстальніка будуць выдалены. Калі загрузчык будзе разблакіраваны, для ўключэння параметра 16 КБ спатрэбяцца дзве перазагрузкі. Пасля таго як вы ўключыце гэты рэжым, пераключэнне паміж рэжымамі 4 КБ і 16 КБ будзе суправаджацца толькі адной перазагрузкай. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб вярнуць прыладу ў эксплуатацыйны рэжым, вам трэба пераключыцца ў рэжым 4 КБ і заблакіраваць OEM ці загрузчык (што прывядзе да скіду прылады да заводскіх налад). Разблакіруйце загрузчык і паўтарыце спробу. Інструкцыі, як гэта зрабіць, глядзіце на старонцы &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;."</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Дзейнічае рэжым 4 КБ, які не залежыць ад памеру старонкі памяці"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 4 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, заблакіруйце загрузчык на прыладзе. Націсніце, каб чытаць далей."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 4 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, заблакіруйце загрузчык на прыладзе. Пасля гэтага адбудзецца яе паўторны скід да заводскіх налад. Пасля загрузкі Android на прыладзе выключыце разблакіроўку OEM у Параметрах распрацоўшчыка. Калі на прыладзе не ўдаецца запусціць АС Android ці яе праца нестабільная, перапрашыйце прыладу, выкарыстоўваючы апошнія версіі заводскіх вобразаў, якія можна спампаваць тут: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;. Або перайдзіце па спасылцы &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; і выберыце \"Ачысціць прыладу\", \"Заблакіраваць загрузчык\" і \"Перапрашыць усе раздзелы\"."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Дзейнічае рэжым 16 КБ, які не залежыць ад памеру старонкі памяці"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца і ёсць рызыка страціць даныя, якія захоўваюцца на тэлефоне пры разблакіраваным загрузчыку. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, пераключыцеся на рэжым 4 КБ і заблакіруйце загрузчык на прыладзе. Націсніце, каб чытаць далей."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца і ёсць рызыка страціць даныя, якія захоўваюцца на тэлефоне пры разблакіраваным загрузчыку. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, пераключыцеся на рэжым 4 КБ і заблакіруйце загрузчык на прыладзе. Пасля гэтага адбудзецца яе паўторны скід да заводскіх налад. Пасля загрузкі Android выключыце разблакіроўку OEM у Параметрах распрацоўшчыка. Калі на прыладзе не ўдаецца запусціць АС Android ці яе праца нестабільная, перапрашыйце прыладу, выкарыстоўваючы апошнія версіі заводскіх вобразаў, якія можна спампаваць тут: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;. Або перайдзіце па спасылцы &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; і выберыце \"Ачысціць прыладу\", \"Заблакіраваць загрузчык\" і \"Перапрашыць усе раздзелы\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Чытаць далей"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Апрацоўшчык справаздачы пра памылкі"</string>
@@ -5186,8 +5189,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Выберыце змесціва, якое будзе паказвацца на экране, калі планшэт падключаны да док-станцыі. Пры выкарыстанні экраннай застаўкі прылада можа спажываць больш энергіі."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Наладзіць"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Наладзіць застаўку \"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>\""</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Каб уключыць падтрымку адвольнай формы, патрабуецца перазагрузка."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Каб прымусова ўключыць на дадатковых дысплэях рэжым працоўнага стала, патрабуецца перазагрузка."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Каб уключыць падтрымку адвольнай формы вокнаў (устарэлую наладу), патрабуецца перазагрузка."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Каб змяніць падтрымку адвольнай формы вокнаў, патрабуецца перазагрузка."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"Каб прымусова ўключыць падтрымку адвольнай формы вокнаў (устарэлую наладу) на другасных дысплэях, патрабуецца перазагрузка."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перазагрузіць зараз"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Перазагрузіць пазней"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Прасторавае гучанне"</string>

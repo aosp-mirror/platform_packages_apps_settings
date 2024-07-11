@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"ফেস ও <xliff:g id="WATCH">%s</xliff:g> যোগ করা হয়েছে"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"ফেস, ফিঙ্গারপ্রিন্ট এবং <xliff:g id="WATCH">%s</xliff:g> যোগ করা হয়েছে"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"ফেস, ফিঙ্গারপ্রিন্ট এবং <xliff:g id="WATCH">%s</xliff:g> যোগ করা হয়েছে"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"এটি করতে হবে কারণ আইডেন্টিটি চেক চালু আছে"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"রিমোট Authenticator আনলক করুন"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"স্মার্টওয়াচ যোগ করা হয়েছে"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"আপনার ঘড়ি সেট-আপ করুন"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"বিকল্প"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"অ্যাক্সেসিবিলিটি"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ফিজিক্যাল কীবোর্ড"</string>
-    <string name="show_ime" msgid="4334255501724746849">"অন-স্ক্রিন কীবোর্ড ব্যবহার করুন"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"ফিজিক্যাল কীবোর্ড সক্রিয় থাকার সময় এটিকে স্ক্রীনে রাখুন"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"বাউন্স \'কী\'"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> মিলি সেকেন্ডের মধ্যে একই কী বারবার প্রেস করলে তা কীবোর্ড উপেক্ষা করে"</string>
     <string name="slow_keys" msgid="2891452895499690837">"স্লো কী"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"তা সত্ত্বেও চালিয়ে যান"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"বাতিল করুন"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"বড় করে দেখার সেটিংস"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"১টি আঙুল দিয়ে ম্যাগনিফায়ার সরান"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"স্ক্রিনের মধ্যে যে কোনও জায়গায় সরাতে ১টি আঙুল দিয়ে টেনে আনুন"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"\'বড় করে দেখা\' এলাকা একটি আঙুল দিয়ে টেনে সরান।"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"\'বড় করে দেখা\' এলাকা দুটি আঙুল দিয়ে টেনে সরান।"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"শুধুমাত্র স্ক্রিনের বড় করে দেখানো অংশে উপলভ্য থাকে না"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"জুম করার জন্য বোতামে ট্যাপ করুন"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"কন্টেন্ট আরও বড় সাইজে দেখার জন্য, স্ক্রিনে দ্রুত জুম বাড়ান"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;জুম ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. \'বড় করে দেখা\' ফিচার চালু করার জন্য শর্টকাট ব্যবহার করুন&lt;br/&gt; {1,number,integer}। স্ক্রিনে ট্যাপ করুন&lt;br/&gt; {2,number,integer}। স্ক্রিনের চারদিকে ঘোরাতে ২টি আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {3,number,integer}। জুম অ্যাডজাস্ট করার জন্য ২টি আঙুল দিয়ে পিঞ্চ করুন&lt;br/&gt; {4,number,integer}। \'বড় করে দেখা\' ফিচার বন্ধ করার জন্য শর্টকাট ব্যবহার করুন&lt;br/&gt;&lt;br/&gt; &lt;b&gt;সাময়িকভাবে জুম ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}। আপনার \'বড় করে দেখা\' ফিচারের ধরন ফুল স্ক্রিনে সেট হয়েছে কিনা ভাল করে দেখে নিন&lt;br/&gt; {1,number,integer}। \'বড় করে দেখা\' ফিচার চালু করতে শর্টকাট ব্যবহার করুন&lt;br/&gt; {2,number,integer}। স্ক্রিনের যেকোনও জায়গা টাচ করে ধরে থাকুন&lt;br/&gt; {3,number,integer}। স্ক্রিনের চারদিকে ঘোরাতে আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {4,number,integer}। \'বড় করে দেখা\' ফিচার বন্ধ করতে স্ক্রিনের উপর থেকে আঙুল সরিয়ে নিন"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;জুম-ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. \'বড় করে দেখা\' ফিচার চালু করতে শর্টকাট ব্যবহার করুন&lt;br/&gt; {1,number,integer}. স্ক্রিনে ট্যাপ করুন&lt;br/&gt; {2,number,integer}. স্ক্রিনের মধ্যে যে কোনও জায়গায় সরাতে ২টি আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {3,number,integer}. জুম অ্যাডজাস্ট করার জন্য ২টি আঙুল দিয়ে পিঞ্চ করুন zoom&lt;br/&gt; {4,number,integer}. \'বড় করে দেখা\' ফিচার বন্ধ করতে শর্টকাট ব্যবহার করুন&lt;br/&gt;&lt;br/&gt; এছাড়াও সাময়িকভাবে জুম-ইন এবং আরও অনেক কিছু করুন।"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;জুম-ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. \'বড় করে দেখা\' ফিচার চালু করতে শর্টকাট ব্যবহার করুন&lt;br/&gt; {1,number,integer}. স্ক্রিনে ট্যাপ করুন&lt;br/&gt; {2,number,integer}. স্ক্রিনের মধ্যে যে কোনও জায়গায় সরাতে ১টি অথবা ২টি আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {3,number,integer}. জুম অ্যাডজাস্ট করার জন্য ২টি আঙুল দিয়ে পিঞ্চ করুন zoom&lt;br/&gt; {4,number,integer}. \'বড় করে দেখা\' ফিচার বন্ধ করতে শর্টকাট ব্যবহার করুন&lt;br/&gt;&lt;br/&gt; এছাড়াও সাময়িকভাবে জুম-ইন এবং আরও অনেক কিছু করুন।"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"ম্যাগনিফিকেশন চালু করা থাকলে, আপনি স্ক্রিনে জুম বাড়াতে পারবেন।\n\n"<b>"জুম করতে"</b>", ম্যাগনিফিকেশন চালু করে স্ক্রিনের যেকোনও জায়গায় ট্যাপ করুন।\n"<ul><li>"• স্ক্রল করতে ২ বা তার বেশি আঙ্গুল দিয়ে টানুন"</li>\n<li>"• জুম অ্যাডজাস্ট করতে ২ বা তার বেশি আঙ্গুল দিয়ে পিঞ্চ করুন"</li></ul>\n\n<b>"সাময়িকভাবে জুম করতে"</b>", ম্যাগনিফিকেশন চালু করে স্ক্রিনের যেকোনও জায়গায় টাচ করে ধরে থাকুন।\n"<ul><li>"• টেনে স্ক্রিনের বিভিন্ন জায়গায় সরান"</li>\n<li>"• জুম কমাতে স্ক্রিন থেকে আঙ্গুল তুলে নিন"</li></ul>\n\n"কীবোর্ড বা নেভিগেশন বারে আপনি জুম করতে পারবেন না।"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g>টি মধ্যে <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> নম্বর পৃষ্ঠা"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"অ্যাক্সেসিবিলিটি বোতামের শর্টকার্ট"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"মোড তৈরি করুন"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"কাস্টম"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"বিরক্তিকর কন্টেন্ট বন্ধ করা"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"\'বিরক্ত করবে না\' মোড চালু করুন"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"অ্যালার্ম ও মিডিয়া সাউন্ড বাধা দিতে পারবে"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"একটি শিডিউল সেট করুন"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"শিডিউল করুন"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ঘণ্টা, <xliff:g id="MINUTES">%2$d</xliff:g> মিনিট"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"অটোমেটিক চালু করুন"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"সময়সূচি"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"নির্দিষ্ট সময়ে ফোন সাইলেন্ট করুন"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\'বিরক্ত করবে না\' মোডের নিয়ম সেট-আপ করুন"</string>
@@ -3545,6 +3541,8 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"বিজ্ঞপ্তি খুলুন"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"বিজ্ঞপ্তি স্নুজ করার অনুমতি দিন"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"অ্যাপ আইকনে বিজ্ঞপ্তির ডট"</string>
+    <!-- no translation found for notification_bundles (3614044525822580826) -->
+    <skip />
     <string name="notification_bubbles_title" msgid="5681506665322329301">"বাবল"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"বাবল"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"বাবল আইকন হিসেবে হোম স্ক্রিনে কথোপকথন যোগ করা"</string>
@@ -3837,6 +3835,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"কোনওটিই নয়"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"সব"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"অ্যাপ ওভাররাইডের অনুমতি দিন"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"যে অ্যাপগুলি \'বিরক্ত করবে না\' মোড এড়িয়ে নিজের কাজ করতে পারে"</string>
@@ -4862,8 +4862,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"কেস"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ব্যাটারি"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"সেটিংস প্যানেল"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"ফোর্স ডেস্কটপ মোড"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"সেকেন্ডারি ডিসপ্লেতে ফোর্স এক্সপেরিমেন্টাল ডেস্কটপ মোড চালু করা আছে"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"ফ্রিফর্ম উইন্ডো চালু করুন"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"ফ্রিফর্ম উইন্ডোর জন্য সহায়তা চালু করুন।"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"সেকেন্ড ডিসপ্লেতে ফ্রিফর্ম উইন্ডো চালু করুন"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"শুধুমাত্র সেকেন্ডারি ডিসপ্লেতে ফ্রিফর্ম উইন্ডো চালু করুন।"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"ছোট বড় করা যায় না এমন একাধিক উইন্ডো চালু করুন"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"একাধিক উইন্ডোয় ছোট বড় করা যায় না এমন অ্যাপের অনুমতি দিন"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"ফোর্স-ডার্ক ফিচার ওভাররাইড করুন"</string>
@@ -4931,17 +4933,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"১৬ কেবি ডেভেলপার বিকল্প ব্যবহার করার আগে, এই ডিভাইসের ডেটা পার্টিশন ext4-এ পরিবর্তন করতে হবে। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। ১৬ কেবি ডেভেলপার বিকল্প অ্যাক্টিভেট করে দিলে, এর পরে ডিভাইসটি আরও একবার রিবুট করতে হবে। আপনি এই মোড থাকলে, একবার রিবুট করার মাধ্যমে ৪ কেবি এবং ১৬ কেবি মোডের মধ্যে সুইচ করতে পারবেন। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। ডিভাইসটি প্রোডাকশন মোডে রাখতে, আপনাকে ৪ কেবি মোডে ফিরে আসতে হবে ও তারপরে বুটলোডার লক করতে হবে যেটি ডিভাইসকে ফ্যাক্টরি রিসেট করবে। ডিভাইসটি Android-এ বুট করা হয়ে গেলে, ডেভেলপার বিকল্পে OEM আনলক করা বন্ধ করুন। নিশ্চিত করার পরে ডিভাইস ওয়াইপ করা হবে এবং ফাইল সিস্টেম ext4-এ পরিবর্তিত হয়ে যাবে। এটি হয়ে যাওয়ার পরে, আবার ১৬ কেবি মোড চালু করুন।"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"সব ডেটা মুছুন"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ডেটা পার্টিশানকে ext4 ফর্ম্যাটে আবার ফর্ম্যাট করা ও ওয়াইপ করা যায়নি।"</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"বুটলোডার আনলক করতে হবে"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"১৬ কেবি ডেভেলপার বিকল্প ব্যবহার করতে হলে, এই ডিভাইসের জন্য বুটলোডার আনলক করতে হবে। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। ১৬ কেবি মোড অ্যাক্টিভেট করে দিলে, ব্যবহারকারীর সব ডেটা ও সেটিংস ওয়াইপ হয়ে যাবে। বুটলোডার আনলক হয়ে গেলে, ১৬ কেবি মোড বিকল্প চালু করার জন্য ডিভাইস দুবার রিবুট করার প্রয়োজন হয়। আপনি এই মোড থাকলে, একবার রিবুট করার মাধ্যমে ৪ কেবি এবং ১৬ কেবি মোডের মধ্যে সুইচ করতে পারবেন। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। ডিভাইসটিকে আবার প্রোডাকশন মোডে রাখতে, আপনাকে ৪ কেবি মোডে ফিরে আসতে হবে ও তারপরে OEM/বুটলোডার লক করতে হবে (যেটি ডিভাইসকে ফ্যাক্টরি রিসেট করবে)। বুটলোডার আনলক করে আবার চেষ্টা করুন। বুটলোডার কীভাবে আনলক করবেন তার নির্দেশাবলী এখানে দেখতে পারেন &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"৪ কেবি পেজ-অ্যাগনোস্টিক মোড ব্যবহার করা হচ্ছে"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"আপনি পেজ-অ্যাগনোস্টিক মোডের ৪ কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, অবশ্যই ডিভাইসের বুটলোডার লক করতে হবে। আরও পড়তে ট্যাপ করুন।"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"আপনি পেজ-অ্যাগনোস্টিক মোডের ৪ কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, অবশ্যই ডিভাইসের বুটলোডার লক করতে হবে। এটি ডিভাইসটিকে আবার ফ্যাক্টরি রিসেট করবে এবং এটির প্রোডাকশন সেটিংস আগের মতো হয়ে যাবে। ডিভাইসটি Android-এ বুট করা হয়ে গেলে, ডেভেলপার বিকল্পে OEM আনলক করা বন্ধ করুন। ডিভাইসটি Android-এ বুট করা না গেলে বা স্থিতিশীল না হলে, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; সাম্প্রতিক ফ্যাক্টরি ইমেজের সাথে ডিভাইসটি আবার ফ্ল্যাশ করুন এবং \'ডিভাইস ওয়াইপ করুন\', \'বুটলোডার লক করুন\' ও \'সব পার্টিশন জোরপূর্বক ফ্ল্যাশ করুন\' বিকল্প বেছে নিন।"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"১৬ কেবি পেজ-অ্যাগনোস্টিক মোড ব্যবহার করা হচ্ছে"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"আপনি পেজ-অ্যাগনোস্টিক মোডের ১৬কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারান্টি দেওয়া যায় না এবং বুটলোডার আনলক করা অবস্থায় ফোনে সেভ করে রাখা ডেটা নিয়ে ঝুঁকি থাকতে পারে। এই মোডে কিছু ফিচার বন্ধ করা থাকে, তাই কোনও কোনও অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, আপনাকে অবশ্যই ৪কেবি মোডে ফিরে যেতে হবে ও তারপরে ডিভাইসের বুটলোডার লক করতে হবে। আরও পড়তে ট্যাপ করুন।"</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"আপনি পেজ-অ্যাগনোস্টিক মোডের ১৬কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারান্টি দেওয়া যায় না এবং বুটলোডার আনলক করা অবস্থায় ফোনে সেভ করে রাখা ডেটা নিয়ে ঝুঁকি থাকতে পারে। এই মোডে কিছু ফিচার বন্ধ করা থাকে, তাই কোনও কোনও অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, আপনাকে অবশ্যই ৪কেবি মোডে ফিরে যেতে হবে ও তারপরে ডিভাইসের বুটলোডার লক করতে হবে। এটি ডিভাইসটিকে আবার ফ্যাক্টরি রিসেট করবে এবং এটির প্রোডাকশন সেটিংস আগের মতো হয়ে যাবে। ডিভাইস Android-এ বুট হয়ে গেলে, ডেভেলপার বিকল্প থেকে OEM আনলক বন্ধ করুন। ডিভাইসটি Android-এ বুট করা না গেলে বা স্থিতিশীল না হলে, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; থেকে সাম্প্রতিক ফ্যাক্টরি ইমেজের সাথে ডিভাইসটি আবার ফ্ল্যাশ করুন অথবা &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ব্যবহার করুন এবং \'ডিভাইস ওয়াইপ করুন\', \'বুটলোডার লক করুন\' ও \'সব পার্টিশন ফোর্স ফ্ল্যাশ করুন\' বিকল্প বেছে নিন।"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"১৬ কেবি পেজ-অ্যাগনোস্টিক মোড"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"আরও পড়ুন"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"সমস্যার রিপোর্টের পরিচালক"</string>
@@ -5188,8 +5187,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"ট্যাবলেট ডক করা থাকলে, আপনি স্ক্রিনে কী কী দেখবেন তা বেছে নিন। স্ক্রিন সেভার ব্যবহার করার সময়, আপনার ডিভাইস ব্যাটারির চার্জ বেশি ব্যবহার করতে পারে।"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"কাস্টমাইজ করুন"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> কাস্টমাইজ করুন"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ফ্রিফর্ম সহায়তা চালু করার জন্য, ডিভাইস রিবুট করতে হবে।"</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"সেকেন্ডারি ডিসপ্লেতে ডেস্কটপ মোড জোর করে চালানোর জন্য রিবুট করতে হবে।"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"ফ্রিফর্ম উইন্ডো সহায়তার লিগ্যাসি মোড চালু করতে রিবুট করতে হবে।"</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"ফ্রিফর্ম উইন্ডো সহায়তা পরিবর্তন করতে রিবুট করতে হবে।"</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"সেকেন্ডারি ডিসপ্লেতে ফ্রিফর্ম উইন্ডো জোর করে চালু করতে রিবুট করতে হবে।"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"এখনই রিবুট করুন"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"পরে রিবুট করুন"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"স্পেশিয়ল অডিও"</string>

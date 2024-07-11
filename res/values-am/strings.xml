@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"መልክ እና <xliff:g id="WATCH">%s</xliff:g> ታክለዋል"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"መልክ፣ የጣት አሻራ እና <xliff:g id="WATCH">%s</xliff:g> ታክለዋል"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"መልክ፣ የጣት አሻራዎች እና <xliff:g id="WATCH">%s</xliff:g> ታክለዋል"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"የማንነት ፍተሻ ስለበራ ይህ ያስፈልጋል"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"የርቀት መቆጣጠሪያ ማረጋገጫ ተከፍቷል"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"የእጅ ሰዓት ታክሏል"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"የእጅ ሰዓትዎን ያዋቅሩ"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"አማራጮች"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ተደራሽነት"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"አካላዊ ቁልፍ ሰሌዳ"</string>
-    <string name="show_ime" msgid="4334255501724746849">"የማያ ገፅ የቁልፍ ሰሌዳ ይጠቀሙ"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"አካላዊ የቁልፍ ሰሌዳ ገቢር ሆኖ ሳለ በማያ ገፅ ላይ አቆየው"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"የመንጠሪያ ቁልፎች"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"ቁልፍ ሰሌዳው በ<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ሚሊሰከንድ ውስጥ ተመሳሳዩ ቁልፍ በፍጥነት መጫኑን ችላ ይላል"</string>
     <string name="slow_keys" msgid="2891452895499690837">"ቀርፋፋ ቁልፎች"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"ሁነታ ይፍጠሩ"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"ብጁ"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"መቆራረጦችን ይገድቡ"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"አትረብሽን አብራ"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"ማንቂያዎች እና የሚዲያ ድምፆች ሊያቋርጡ ይችላሉ"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"መርሐግብር ያቀናብሩ"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"መርሐግብር"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ሰዓት፣ <xliff:g id="MINUTES">%2$d</xliff:g> ደ"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"በራስ-ሰር አብራ"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"መርሐግብር"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"በተወሰኑ ሰዓታት ላይ የስልክ ድምፅ አጥፋ"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"የአትረብሽ ደንቦችን ያቀናብሩ"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"ማሳወቂያን ክፈት"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"የማሳወቂያ ማሸለብን ፍቀድ"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"የማሳወቂያ ነቁጥ በመተግበሪያ አዶ ላይ"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"የማሳወቂያ ቅርቅቦች"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"አረፋዎች"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"አረፋዎች"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"ይህን ውይይት በአረፋ አድርግ"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"ምንም"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"ሁሉም"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"መተግበሪያዎች እንዲሽሩ ይፍቀዱ"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"አቋርጠው መግባት የሚችሉ መተግበሪያዎች"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"መያዣ"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ባትሪ"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"የቅንብሮች ፓነል"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"የዴስክቶፕ ሁነታን አስገድድ"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"በሁለተኛ ማሳያዎች ላይ የሙከራ ዴስክቶፕ ሁነታን አስገድድ"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"የነጻ ቅርጽ መስኮቶችን ያንቁ"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"የነጻ ቅርጽ መስኮቶች ድጋፍ ያንቁ።"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"በሁለተኛ ማሳያ ላይ የነጻ ቅርጽ በመስኮት ማሳየትን አንቃ"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"የነጻ ቅርጽ መስኮቶችን በሁለተኛ ማሳያ ላይ ብቻ አንቃ።"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"በብዝሃ-መስኮት ውስጥ መጠን መቀየር የማይቻለውን አንቃ"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"መጠን መቀየር የማይቻሉትን መተግበሪያዎች በብዝሃ-መስኮት ውስጥ እንዲሆኑ ይፈቅዳል"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"አስገዳጅ ጨለማን ሻር"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"የ16 ኪባ ገንቢ አማራጭን ከመጠቀምዎ በፊት የዚህ መሣሪያ የውሂብ ክፍልፍል ወደ ext4 መቀየር አለበት። የሶፍትዌር ታማኝነት በዚህ ሁነታ ሊረጋገጥ አይችልም፣ እና bootloader ክፍት ሆኖ ሳለ በስልኩ ላይ የተከማቸ ማንኛውም መረጃ ለአደጋ ሊጋለጥ ይችላል። የ16 ኪባ አማራጩን ማግበር ከዚህ በኋላ አንድ ተጨማሪ ዳግም ማስነሳት ያስፈልገዋል። አንዴ በዚህ ሁነታ ላይ ከሆኑ፣ በአንድ ዳግም ማስነሳት ከ4 ኪባ ወደ 16 ኪባ ሁነታ መካከል መቀያየር ይችላሉ። አንዳንድ ባህሪያት በእነዚህ ሁነታዎችላይ ይሰናከላሉ፣ ስለዚህ አንዳንድ መተግበሪያዎች ላይሰሩ ይችላሉ። መሣሪያውን ወደ የምርት ሁነታ መመለስ እንዲችሉ ወደ የ4 ኪባ ሁነታ መመለስ እና bootloaderን መቆለፍ ይኖርብዎታል፣ ይህም መሣሪያውን ወደ ፋብሪካ ዳግም ያስጀምረዋል። መሣሪያው በተሳካ ሁኔታ ወደ Android ከተነሳ በኋላ በገንቢ አማራጮች ውስጥ የOEM መክፈቻን ያሰናክሉ። መሣሪያው ይጠረጋል እና የፋይል ሥርዓቱ ከተረጋገጠ በኋላ ወደ ext4 ይቀየራል። ይህ ከተጠናቀቀ በኋላ እባክዎ 16 ኪባን እንደገና ለማንቃት ይመለሱ።"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"ሁሉንም ውሂብ ደምስስ"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ቅርጸት መሥራት እና የውሂብ ክፍልፋይን ወደ ext4 መጥረግ አልተሳካም።"</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"በBootloader መክፈት ያስፈልጋል"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"ይህ መሣሪያ የ16 ኪባ ገንቢ አማራጩን ከመጠቀሙ በፊት bootloaderን መክፈት አለበት። የሶፍትዌር ታማኝነት በዚህ ሁነታ ሊረጋገጥ አይችልም፣ እና bootloader ክፍት ሆኖ ሳለ በስልኩ ላይ የተከማቸ ማንኛውም መረጃ ለአደጋ ሊጋለጥ ይችላል። የ16 ኪባ ሁነታ ሲነቃ ሁሉም የተጠቃሚ ውሂብ እና ቅንብሮች ይጠረጋሉ። አንዴ bootloader ከተከፈተ በኋላ የ16 ኪባ አማራጩን ለማንቃት ሁለት ዳግም ማስነሳት ያስፈልገዋል። አንዴ በዚህ ሁነታ ላይ ከሆኑ፣ በአንድ ዳግም ማስነሳት ከ4 ኪባ ወደ 16 ኪባ ሁነታ መካከል መቀያየር ይችላሉ። አንዳንድ ባህሪያት በእነዚህ ሁነታዎችላይ ይሰናከላሉ፣ ስለዚህ አንዳንድ መተግበሪያዎች ላይሰሩ ይችላሉ። መሣሪያውን ወደ የምርት ሁነታ መመለስ እንዲችሉ ወደ የ4 ኪባ ሁነታ መመለስ እና OEM/bootloader መቆለፍ ይኖርብዎታል፣ ይህም መሣሪያውን ወደ (ፋብሪካ ዳግም ያስጀምረዋል)። እባክዎ bootloaderን ይክፈቱ እና እንደገና ይሞክሩ። &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; ላይ ይህንን እንዴት እንደሚያደርጉ መመሪያዎችን ማየት ይችላሉ"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"የ4 ኪባ ለሁሉም ገጽ ተስማሚ ሁነታን በመጠቀም ላይ"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"የሁሉም ገጽ ተስማሚ ሁነታ 4 ኪባ ሁነታ ውስጥ ነዎት። የሶፍትዌር ታማኝነት በዚህ ሁነታ ሊረጋገጥ አይችልም፣ እና bootloader ክፍት ሆኖ ሳለ በስልኩ ላይ የተከማቸ ማንኛውም መረጃ ለአደጋ ሊጋለጥ ይችላል። አንዳንድ ባህሪያት በእነዚህ ሁነታዎችላይ ይሰናከላሉ፣ ስለዚህ አንዳንድ መተግበሪያዎች ላይሰሩ ይችላሉ። ወደ የምርት ሁነታ እንደገና ለመግባት የመሣሪያውን bootloader መቆለፍ አለብዎት። የበለጠ ለማንበብ መታ ያድርጉ።"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"የሁሉም ገጽ ተስማሚ ሁነታ 4 ኪባ ሁነታ ውስጥ ነዎት። የሶፍትዌር ታማኝነት በዚህ ሁነታ ሊረጋገጥ አይችልም፣ እና bootloader ክፍት ሆኖ ሳለ በስልኩ ላይ የተከማቸ ማንኛውም መረጃ ለአደጋ ሊጋለጥ ይችላል። አንዳንድ ባህሪያት በእነዚህ ሁነታዎችላይ ይሰናከላሉ፣ ስለዚህ አንዳንድ መተግበሪያዎች ላይሰሩ ይችላሉ። ወደ የምርት ሁነታ እንደገና ለመግባት የመሣሪያውን bootloader መቆለፍ አለብዎት። ይህ መሣሪያውን ወደ የፋብሪካ ዳግም ያስጀምረዋል እና የምርት ቅንብሮችን ወደነበሩበት ይመልሳል። መሣሪያው በተሳካ ሁኔታ ወደ Android ከተነሳ በኋላ በገንቢ አማራጮች ውስጥ የOEM መክፈቻን ያሰናክሉ። መሣሪያው ወደ Android መነሳት ካልቻለ ወይም ያልተረጋጋ ከሆነ መሣሪያውን &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/ምስሎች&lt;/a&gt; በመጡ የቅርብ ጊዜዎቹ የፋብሪካ ምስሎች ዳግም ፍላሽ ያድርጉት ወይም &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ይጠቀሙ እና «መሣሪያን ጥረግ»፣ «Bootloaderን ቆልፍ» እና «የሁሉንም ክፍልፋዮች ፍላሽ አስገድድ» የሚለውን ይምረጡ።"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"የ16 ኪባ ለሁሉም ገጽ ተስማሚ ሁነታን በመጠቀም ላይ"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"የገጽ-አግኖስቲክ ሁነታ የ16 ኪባ ሁነታ ላይ ነዎት። የሶፍትዌር ታማኝነት በዚህ ሁነታ ሊረጋገጥ አይችልም፣ እና bootloader ክፍት ሆኖ ሳለ በስልኩ ላይ የተከማቸ ማንኛውም ውሂብ ለአደጋ ሊጋለጥ ይችላል። አንዳንድ ባህሪያት በእነዚህ ሁነታዎች ላይ ይሰናከላሉ፣ ስለዚህ አንዳንድ መተግበሪያዎች ላይሰሩ ይችላሉ። ወደ የምርት ሁነታ እንደገና ለመግባት ወደ የ4ኪባ ሁነታ መመለስ እና ከዚያ የመሣሪያውን bootloader መቆለፍ አለብዎት። የበለጠ ለማንበብ መታ ያድርጉ።"</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"የገጽ-አግኖስቲክ ሁነታ የ16 ኪባ ሁነታ ላይ ነዎት። የሶፍትዌር ታማኝነት በዚህ ሁነታ ሊረጋገጥ አይችልም፣ እና bootloader ክፍት ሆኖ ሳለ በስልኩ ላይ የተከማቸ ማንኛውም ውሂብ ለአደጋ ሊጋለጥ ይችላል። አንዳንድ ባህሪያት በእነዚህ ሁነታዎች ላይ ይሰናከላሉ፣ ስለዚህ አንዳንድ መተግበሪያዎች ላይሰሩ ይችላሉ። ወደ የምርት ሁነታ እንደገና ለመግባት ወደ የ4ኪባ ሁነታ መመለስ እና ከዚያ የመሣሪያውን bootloader መቆለፍ አለብዎት። ይህ መሣሪያውን ወደ የፋብሪካ ዳግም ያስጀምረዋል እና የምርት ቅንብሮችን ወደነበሩበት ይመልሳል። መሣሪያው በተሳካ ሁኔታ ወደ Android ከተነሳ በኋላ በገንቢ አማራጮች ውስጥ የOEM መክፈቻን ያሰናክሉ። መሣሪያው ወደ Android መነሳት ካልቻለ ወይም ያልተረጋጋ ከሆነ መሣሪያውን ከ&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; በመጡ የቅርብ ጊዜዎቹ የፋብሪካ ምስሎች ዳግም ፍላሽ ያድርጉት ወይም &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ይጠቀሙ እና «መሣሪያን ጥረግ»፣ «Bootloaderን ቆልፍ» እና «የሁሉንም ክፍልፋዮች ፍላሽ አስገድድ» የሚለውን ይምረጡ።"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"የ16 ኪባ ለሁሉም ገጽ ተስማሚ ሁነታ"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"ተጨማሪ ያንብቡ"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"የሳንካ ሪፖርት ተቆጣጣሪ"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"ጡባዊዎ ሲተከል በማያ ገፅዎ ላይ የሚያዩትን ይምረጡ። የማያ ገፅ ማቆያ ሥራ ላይ ሲውል መሣሪያዎ የበለጠ ኃይል ሊጠቀም ይችላል።"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"አብጅ"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> አብጅ"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"የነጻ ቅርጽ ድጋፍን ለማንቃት ዳግም ማስነሳት ያስፈልጋል።"</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"የዴስክቶፕ ሁነታን በሁለተኛ ደረጃ ማሳያዎች ላይ ለማስገደድ ዳግም ማስነሳት ያስፈልጋል።"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"የቆየ በነጻ ቅርጽ በመስኮት የማሳየት ድጋፍን ለማንቃት ዳግም ማስነሳት ያስፈልጋል።"</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"የነጻ ቅርጽ በመስኮት የማሳየት ድጋፍን ለመለወጥ ዳግም ማስነሳት ያስፈልጋል።"</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"በሁለተኛ ማሳያዎች ላይ የነጻ ቅርጽ በመስኮት ማሳየትን ለማስገደድ ዳግም ማስነሳት ያስፈልጋል።"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"ዳግም አስነሳ"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"በኋላ ዳግም አስነሳ"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"ከባቢያዊ ኦዲዮ"</string>

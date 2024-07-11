@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"顔、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"本人確認が ON になっているため、これが必要です"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"リモート認証のロック解除"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"スマートウォッチを追加しました"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"スマートウォッチのセットアップ"</string>
@@ -615,8 +616,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"アプリをインストールする"</b>\n"スペース内で非公開にするアプリをインストールします"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"注意事項"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"スペースをロックするとアプリが停止する"</b>\n"スペースをロックするとアプリが停止して、アプリからの通知が届かなくなります"</string>
-    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"プライベート スペースは、バックグラウンドでの実行や重要な通知の送信が必要なアプリ（医療アプリなど）には適していません。その理由は、スペースがロックされている場合、通知とバックグラウンド アクティビティが停止するためです。\n\nプライベート スペースがロックされている場合、プライベート スペース内のアプリは権限マネージャ、プライバシー ダッシュボード、その他の設定に表示されません。\n\nプライベート スペースを新しいデバイスに移動することはできません。別のデバイスで使用したい場合は、別のプライベート スペースを設定する必要があります。\n\n誰かがあなたのデバイスをパソコンに接続したり、あなたのデバイスに有害なアプリをインストールしたりすると、そのユーザーもあなたのプライベート スペースにアクセスできる可能性があります。"</string>
-    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"プライベート スペースは、バックグラウンドでの実行や重要な通知の送信が必要なアプリ（医療アプリなど）には適していません。その理由は、スペースがロックされている場合、通知とバックグラウンド アクティビティが停止するためです。\n\nプライベート スペースがロックされている場合、プライベート スペース内のアプリは権限マネージャ、プライバシー ダッシュボード、その他の設定に表示されません。\n\nプライベート スペースを新しいデバイスに復元することはできません。別のデバイスで使用したい場合は、別のスペースを設定する必要があります。\n\n誰かがあなたのデバイスをパソコンに接続したり、あなたのデバイスに悪意のあるアプリをインストールしたりすると、そのユーザーもあなたのプライベート スペースにアクセスできる可能性があります。"</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"プライベート スペースは、バックグラウンドでの実行や重要な通知の送信が必要なアプリ（医療アプリなど）には適していません。その理由は、スペースがロックされている場合、通知とバックグラウンド アクティビティが停止するためです。\n\nプライベート スペースがロックされている場合、プライベート スペース内のアプリは権限マネージャ、プライバシー ダッシュボード、その他の設定画面に表示されません。\n\nプライベート スペースはデバイスごとに設定する必要があり、新しいデバイスに移動することはできません。\n\n他のユーザーによってデバイスがパソコンに接続されたり、有害なアプリをインストールされたりすると、プライベート スペースにアクセスされる可能性があります。"</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"プライベート スペースは、バックグラウンドでの実行や重要な通知の送信が必要なアプリ（医療アプリなど）には適していません。その理由は、スペースがロックされている場合、通知とバックグラウンド アクティビティが停止するためです。\n\nプライベート スペースがロックされている場合、プライベート スペース内のアプリは権限マネージャ、プライバシー ダッシュボード、その他の設定画面に表示されません。\n\nプライベート スペースはデバイスごとに設定する必要があり、新しいデバイスに復元することはできません。\n\n他のユーザーによってデバイスがパソコンに接続されたり、有害なアプリをインストールされたりすると、プライベート スペースにアクセスされる可能性があります。"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"プライベート スペースの詳細"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"しばらくお待ちください"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"プライベート スペースを設定しています…"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"オプション"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ユーザー補助"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"物理キーボード"</string>
-    <string name="show_ime" msgid="4334255501724746849">"画面キーボードを使用"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"物理キーボードが有効になっていても画面に表示させます"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"バウンスキー"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ミリ秒以内にキーボードの同じキーが連続で押された場合は、その操作を無視します"</string>
     <string name="slow_keys" msgid="2891452895499690837">"スローキー"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"モードの作成"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"カスタム"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"割り込みを制限する"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"サイレント モードを ON にする"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"アラームとメディア サウンドが割り込み可能"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"スケジュールを設定してください"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"スケジュールを設定"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> 時間 <xliff:g id="MINUTES">%2$d</xliff:g> 分"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"自動的に ON"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"スケジュール"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"一時的にスマートフォンを消音"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"サイレント モード ルールの設定"</string>
@@ -3541,6 +3541,8 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"通知を開く"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"通知のスヌーズを許可する"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"アプリアイコン上の通知ドット"</string>
+    <!-- no translation found for notification_bundles (3614044525822580826) -->
+    <skip />
     <string name="notification_bubbles_title" msgid="5681506665322329301">"バブル"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"バブル"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"この会話をバブルで表示"</string>
@@ -3832,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"なし"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"すべて"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"アプリのオーバーライドを許可"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"割り込み可能なアプリ"</string>
@@ -4857,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"ケース"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"バッテリー"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"設定パネル"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"デスクトップ モードに強制的に切り替え"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"セカンダリ ディスプレイで試験運用版デスクトップ モードに強制的に切り替えます"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"フリーフォーム ウィンドウを有効にする"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"フリーフォーム ウィンドウのサポートを有効にします。"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"2 つ目のディスプレイでフリーフォーム ウィンドウを有効にする"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"2 つ目のディスプレイでのみフリーフォーム ウィンドウを有効にします。"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"マルチウィンドウでのサイズ変更不可を有効にする"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"サイズ変更できないアプリをマルチウィンドウでも使用可能にします"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"フォースダークのオーバーライド"</string>
@@ -4926,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16 KB デベロッパー オプションを使用するには、このデバイスのデータ パーティションを ext4 に変換する必要があります。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。16 KB オプションを有効にするには、この操作の後でもう 1 回再起動が必要です。このモードになったら、4 KB モードと 16 KB モードの間で切り替えることができます（切り替えのたびに 1 回再起動します）。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。デバイスを本番環境モードに戻すには、4 KB モードに戻してからブートローダーをロックする必要があります。この操作でデバイスは出荷時の設定にリセットされます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。デバイスがワイプされて、確認後にファイルシステムが ext4 に変更されます。完了したら、戻って 16 KB を再度有効にしてください。"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"すべてのデータを消去"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"データ パーティションを ext4 に再フォーマットしてワイプすることができませんでした。"</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"ブートローダーのロック解除が必要です"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"このデバイスで 16KB デベロッパー オプションを使用するには、ブートローダーのロックを解除しておく必要があります。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。16KB モードの有効化中にユーザーデータと設定はすべてワイプされます。ブートローダーのロックが解除されたら、16KB オプションを有効にするために再起動が 2 回必要です。このモードになったら、4KB モードと 16KB モードの間で切り替えることができます（切り替えのたびに 1 回再起動します）。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。デバイスを本番環境モードに戻すには、4KB モードに戻してから、OEM / ブートローダーをロックする必要があります。この操作で、デバイスは出荷時の設定にリセットされます。ブートローダーのロックを解除してから、もう一度お試しください。この手順については、&lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; をご覧ください。"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4 KB のページ非依存モードを使用中"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"4KB のページ非依存モードです。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。再び本番環境モードにするには、デバイスのブートローダーをロックする必要があります。タップすると詳細が表示されます。"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"4 KB のページ非依存モードです。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。再び本番環境モードにするには、デバイスのブートローダーをロックする必要があります。この操作で、デバイスは再び出荷時の設定にリセットされ、製品版の設定に復元されます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。デバイスが Android で起動しなかった場合や不安定な場合は、&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; の最新のファクトリー イメージでデバイスの再書き込みを行うか、&lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; を使用し、[Wipe Device]、[Lock Bootloader]、[Force Flash all partitions] を選択してください。"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16 KB のページ非依存モードを使用中"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"16KB のページ非依存モードです。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。再び本番環境モードにするには、4KB モードに戻してから、デバイスのブートローダーをロックする必要があります。タップすると詳細が表示されます。"</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"16KB のページ非依存モードです。ソフトウェアの完全性はこのモードでは保証されないため、ブートローダーのロック解除中にスマートフォンに保存されているデータが失われる恐れがあります。これらのモードで無効になる機能があるため、一部のアプリが動作しないことがあります。再び本番環境モードにするには、4KB モードに戻してから、デバイスのブートローダーをロックする必要があります。この操作で、デバイスは再び出荷時の設定にリセットされ、製品版の設定に復元されます。デバイスが Android で起動したら、開発者向けオプションで [OEM のロック解除] を無効にします。デバイスが Android で起動しなかった場合や不安定な場合は、&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; の最新のファクトリー イメージでデバイスの再書き込みを行うか、&lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; を使用し、[Wipe Device]、[Lock Bootloader]、[Force Flash all partitions] を選択してください。"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB のページ非依存モード"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"詳細"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"バグレポート ハンドラ"</string>
@@ -5183,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"タブレットが装着されているときに画面に表示するものを選択してください。スクリーン セーバーを使用すると、デバイスの電力使用量が増えることがあります。"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"カスタマイズ"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> をカスタマイズ"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"フリーフォームのサポートを有効にするには、再起動が必要です。"</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"セカンダリ ディスプレイをデスクトップ モードに強制的に切り替えるには、再起動が必要です。"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"従来のフリーフォームのウィンドウ処理のサポートを有効にするには、再起動が必要です。"</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"フリーフォームのウィンドウ処理のサポートを変更するには、再起動が必要です。"</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"2 つ目のディスプレイでフリーフォームのウィンドウ処理を強制するには、再起動が必要です。"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"今すぐ再起動する"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"後で再起動する"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"空間オーディオ"</string>
