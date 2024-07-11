@@ -8043,8 +8043,11 @@
     <!-- Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_delete">Delete</string>
 
+    <!-- Priority Modes: Menu option for renaming a mode on its configuration page [CHAR LIMIT=40] -->
+    <string name="zen_mode_menu_rename_mode">Rename</string>
+
     <!-- Do not disturb: Menu option for deleting a mode on its configuration page [CHAR LIMIT=40] -->
-    <string name="zen_mode_menu_delete_mode">Delete mode</string>
+    <string name="zen_mode_menu_delete_mode">Delete</string>
 
     <!-- Do not disturb: Confirmation dialog asking the user whether they would like to delete the named mode [CHAR LIMIT: 40] -->
     <string name="zen_mode_delete_mode_confirmation">Delete \"<xliff:g id="mode" example="My Schedule">%1$s</xliff:g>\" mode?</string>
@@ -9451,17 +9454,8 @@
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
     <string name="zen_mode_summary_always">Change to always interrupt</string>
 
-    <!-- [CHAR LIMIT=20] Caption of the action button to change the name of a mode. -->
-    <string name="zen_mode_action_change_name">Rename</string>
-
-    <!-- [CHAR LIMIT=20] Caption of the action button to change the icon of a mode. -->
-    <string name="zen_mode_action_change_icon">Change icon</string>
-
-    <!-- [CHAR LIMIT=40] Zen mode settings: Title for the "choose mode icon" screen -->
-    <string name="zen_mode_icon_picker_title">Change icon</string>
-
     <!-- Priority Modes: Title for the "rename mode" screen [CHAR LIMIT=20] -->
-    <string name="zen_mode_rename_title">Rename</string>
+    <string name="zen_mode_rename_title">Edit mode</string>
 
     <!-- Priority Modes: Title for the "add mode" screen [CHAR LIMIT=20] -->
     <string name="zen_mode_new_custom_title">Add mode</string>
@@ -13489,6 +13483,10 @@
     <string name="live_caption_disabled">Off</string>
     <!-- Summary of the Live Caption enabled state. -->
     <string name="live_caption_enabled">On</string>
+    <!-- State description for the Audio Balance seek bar, with left reported before right. -->
+    <string name="audio_seek_bar_state_left_first">Audio %1$d%% left, %2$d%% right</string>
+    <!-- State description for the Audio Balance seek bar, with right reported before left. -->
+    <string name="audio_seek_bar_state_right_first">Audio %1$d%% right, %2$d%% left</string>
 
     <!--  Warning text about the visibility of device name. [CHAR LIMIT=NONE] -->
     <string name="about_phone_device_name_warning">Your device name is visible to apps you installed. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot.</string>

@@ -38,8 +38,9 @@ import java.util.List;
 
 public class ZenModeFragment extends ZenModeFragmentBase {
 
-    // for mode deletion menu
-    private static final int DELETE_MODE = 1;
+    // for mode context menu
+    private static final int RENAME_MODE = 1;
+    private static final int DELETE_MODE = 2;
 
     private ModeMenuProvider mModeMenuProvider;
 
@@ -54,7 +55,6 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         prefControllers.add(new ZenModeHeaderController(context, "header", this));
         prefControllers.add(
                 new ZenModeButtonPreferenceController(context, "activate", this, mBackend));
-        prefControllers.add(new ZenModeActionsPreferenceController(context, "actions"));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
                 context, "zen_mode_people", mHelperBackend));
         prefControllers.add(new ZenModeAppsLinkPreferenceController(
@@ -127,14 +127,18 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     }
 
     private class ModeMenuProvider implements MenuProvider {
-        private ZenMode mZenMode;
-        ModeMenuProvider(ZenMode mode) {
+        @NonNull private final ZenMode mZenMode;
+
+        ModeMenuProvider(@NonNull ZenMode mode) {
             mZenMode = mode;
         }
 
         @Override
         public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
-            if (mZenMode != null && mZenMode.canBeDeleted()) {
+            if (mZenMode.canEditNameAndIcon()) {
+                menu.add(Menu.NONE, RENAME_MODE, Menu.NONE, R.string.zen_mode_menu_rename_mode);
+            }
+            if (mZenMode.canBeDeleted()) {
                 // Only deleteable modes should get a delete menu option.
                 menu.add(Menu.NONE, DELETE_MODE, Menu.NONE, R.string.zen_mode_menu_delete_mode);
             }
@@ -142,23 +146,25 @@ public class ZenModeFragment extends ZenModeFragmentBase {
 
         @Override
         public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
-            if (mZenMode != null) {
-                if (menuItem.getItemId() == DELETE_MODE) {
-                    new AlertDialog.Builder(mContext)
-                            .setTitle(mContext.getString(R.string.zen_mode_delete_mode_confirmation,
-                                    mZenMode.getRule().getName()))
-                            .setPositiveButton(R.string.zen_mode_schedule_delete,
-                                    (dialog, which) -> {
-                                        // start finishing before calling removeMode() so that we
-                                        // don't try to update this activity with a nonexistent mode
-                                        // when the zen mode config is updated
-                                        finish();
-                                        mBackend.removeMode(mZenMode);
-                                    })
-                            .setNegativeButton(R.string.cancel, null)
-                            .show();
-                    return true;
-                }
+            if (menuItem.getItemId() == RENAME_MODE) {
+                // TODO: b/332937635 - Update metrics category
+                ZenSubSettingLauncher.forModeFragment(mContext, ZenModeEditNameIconFragment.class,
+                        mZenMode.getId(), 0).launch();
+            } else if (menuItem.getItemId() == DELETE_MODE) {
+                new AlertDialog.Builder(mContext)
+                        .setTitle(mContext.getString(R.string.zen_mode_delete_mode_confirmation,
+                                mZenMode.getRule().getName()))
+                        .setPositiveButton(R.string.zen_mode_schedule_delete,
+                                (dialog, which) -> {
+                                    // start finishing before calling removeMode() so that we
+                                    // don't try to update this activity with a nonexistent mode
+                                    // when the zen mode config is updated
+                                    finish();
+                                    mBackend.removeMode(mZenMode);
+                                })
+                        .setNegativeButton(R.string.cancel, null)
+                        .show();
+                return true;
             }
             return false;
         }
