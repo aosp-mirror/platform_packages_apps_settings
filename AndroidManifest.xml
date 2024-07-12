@@ -5187,15 +5187,6 @@
         <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
         <activity android:name=".spa.SpaAppBridgeActivity" android:exported="false"/>
 
-        <activity
-            android:name=".spa.search.SpaSearchLandingActivity"
-            android:exported="true">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.SPA_SEARCH_LANDING" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name=".Settings$FingerprintSettingsActivityV2"
             android:label="@string/security_settings_fingerprint_preference_title"
             android:exported="false"
