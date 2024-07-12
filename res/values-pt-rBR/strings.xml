@@ -137,7 +137,7 @@
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Stylus"</string>
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"Pressionar o botão da stylus"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (perfil de trabalho)"</string>
-    <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Escreva nos campos de texto"</string>
+    <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Escrever nos campos de texto"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorar todos os pressionamentos de botão com a stylus"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Stylus"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Data e hora"</string>
@@ -558,7 +558,7 @@
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Desbloqueio por impressão digital para o espaço privado"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Desbloqueio facial para o espaço privado"</string>
     <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Desbloqueio facial e por digital para espaço privado"</string>
-    <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Configurar o Desbloqueio por impressão digital para o espaço privado"</string>
+    <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Configurar Desbloqueio por digital para o espaço privado"</string>
     <string name="private_space_fingerprint_enroll_introduction_message" msgid="9092068873421435300">"Use sua impressão digital para desbloquear seu espaço privado ou confirmar sua identidade e acessar apps ou aprovar uma compra"</string>
     <string name="private_space_fingerprint_enroll_introduction_footer_message" msgid="7125255484447984854">"O espaço privado poderá ser desbloqueado mesmo se essa não for sua intenção. Por exemplo, se alguém colocar seu dedo no sensor."</string>
     <string name="private_space_fingerprint_enroll_finish_message" msgid="4754797926493316965">"Use sua impressão digital para desbloquear o espaço privado ou aprovar compras"</string>
@@ -614,10 +614,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Instale apps"</b>\n"Instale os apps que você quer guardar no seu espaço com privacidade"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Observação importante"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Os apps são interrompidos quando você bloqueia o espaço"</b>\n"Ao bloquear o espaço, os apps nele serão interrompidos e você não vai receber notificações deles"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Os espaços privados não são adequados para apps que precisam ser executados em segundo plano ou enviam notificações importantes, como os que lidam com informações médicas, porque notificações e atividades em segundo plano são interrompidas quando o espaço é bloqueado.\n\nEm um espaço bloqueado, os apps não aparecem na Gestão de permissões, no painel de privacidade e nem em outras configurações.\n\nNão é possível transferir seu espaço privado para outro dispositivo. Você precisará configurar um novo espaço privado se quiser usá-lo em outro dispositivo.\n\nCaso alguém conecte seu dispositivo a um computador ou instale apps nocivos nele, essa pessoa poderá ter acesso ao seu espaço privado."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Os espaços privados não são adequados para apps que precisam ser executados em segundo plano ou enviar notificações importantes, como apps médicos. Isso porque as notificações e atividades em segundo plano são interrompidas quando o espaço é bloqueado.\n\nOs apps no espaço privado não vão aparecer na Gestão de permissões, no painel de privacidade nem em outras configurações quando o espaço estiver bloqueado.\n\nNão é possível restaurar seu espaço privado em outro dispositivo. Você precisará configurar um novo espaço privado se quiser usá-lo em outro dispositivo.\n\nCaso alguém conecte seu dispositivo a um computador ou instale apps maliciosos nele, essa pessoa poderá ter acesso ao seu espaço privado."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Saiba mais sobre o espaço privado"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Isso vai levar alguns instantes"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configurando o espaço privado…"</string>
@@ -3323,6 +3321,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nenhuma}=1{1 programação definida}one{# programação definida}other{# programações definidas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Não perturbe"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Modos prioritários"</string>
+    <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
+    <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Receber notificações apenas de pessoas e apps importantes"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitar interrupções"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Ativar o Não perturbe"</string>
@@ -3337,12 +3337,9 @@
     <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Adicione uma agenda"</string>
     <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Use sua agenda"</string>
     <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Programação"</string>
-    <!-- no translation found for zen_mode_set_schedule_title (8023100831320026233) -->
-    <skip />
-    <!-- no translation found for zen_mode_set_schedule_link (2534032127923435737) -->
-    <skip />
-    <!-- no translation found for zen_mode_schedule_duration (299332195675875111) -->
-    <skip />
+    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Definir uma programação"</string>
+    <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programação"</string>
+    <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g>h e <xliff:g id="MINUTES">%2$d</xliff:g>min"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programação"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silenciar smartphone em horários específicos"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Definir regras do modo \"Não perturbe\""</string>
@@ -3774,6 +3771,8 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Apps selecionados"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Nenhum"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Todos"</string>
+    <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permitir que apps modifiquem o \"Não perturbe\""</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps que podem fazer interrupções"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Selecionar mais apps"</string>
@@ -3810,12 +3809,9 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Mudar para somente alarmes por uma hora até {time}}one{Mudar para somente alarmes por # hora até {time}}other{Mudar para somente alarmes por # horas até {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Alterar para \"Somente alarmes\" até <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Alterar para \"Sempre interromper\""</string>
-    <!-- no translation found for zen_mode_action_change_name (766639614789907016) -->
-    <skip />
-    <!-- no translation found for zen_mode_action_change_icon (6192187791750301778) -->
-    <skip />
-    <!-- no translation found for zen_mode_icon_picker_title (6845490379143557472) -->
-    <skip />
+    <string name="zen_mode_action_change_name" msgid="766639614789907016">"Renomear"</string>
+    <string name="zen_mode_action_change_icon" msgid="6192187791750301778">"Mudar ícone"</string>
+    <string name="zen_mode_icon_picker_title" msgid="6845490379143557472">"Mudar ícone"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Alerta"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fechar"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Enviar feedback sobre o dispositivo"</string>
@@ -4043,8 +4039,8 @@
     <string name="keywords_vr_listener" msgid="902737490270081131">"rv realidade virtual ouvinte estéreo serviço de ajuda"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Sobrepor a outros apps"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Apps com permissão"</string>
-    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitidas"</string>
-    <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Não permitidas"</string>
+    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitidos(as)"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Não permitidos(as)"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"instalar apps fontes desconhecidas"</string>
     <string name="write_settings" msgid="6864794401614425894">"Mudar configurações do sistema"</string>
     <string name="keywords_write_settings" msgid="6908708078855507813">"gravar modificar configurações de modificação"</string>
