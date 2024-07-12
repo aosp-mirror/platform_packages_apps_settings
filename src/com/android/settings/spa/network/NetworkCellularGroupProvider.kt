@@ -46,14 +46,10 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
-import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionInfoListViewModel
-import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.DataSubscriptionRepository
 import com.android.settings.network.telephony.MobileDataRepository
-import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.spa.network.PrimarySimRepository.PrimarySimInfo
-import com.android.settings.spa.search.SearchablePage
 import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
@@ -66,7 +62,6 @@ import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spaprivileged.framework.common.broadcastReceiverFlow
-import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBooleanFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -83,7 +78,7 @@ import kotlinx.coroutines.withContext
 /**
  * Showing the sim onboarding which is the process flow of sim switching on.
  */
-open class NetworkCellularGroupProvider : SettingsPageProvider, SearchablePage {
+open class NetworkCellularGroupProvider : SettingsPageProvider {
     override val name = fileName
     override val metricsCategory = SettingsEnums.MOBILE_NETWORK_LIST
     private val owner = createSettingsPage()
@@ -196,24 +191,8 @@ open class NetworkCellularGroupProvider : SettingsPageProvider, SearchablePage {
     open fun OtherSection(){
         // Do nothing
     }
-
-    override fun getSearchableTitles(context: Context): List<String> {
-        if (!isPageSearchable(context)) return emptyList()
-        return buildList {
-            if (context.requireSubscriptionManager().activeSubscriptionInfoCount > 0) {
-                add(context.getString(R.string.mobile_data_settings_title))
-            }
-        }
-    }
-
     companion object {
         const val fileName = "NetworkCellularGroupProvider"
-
-        private fun isPageSearchable(context: Context) =
-            Flags.isDualSimOnboardingEnabled() &&
-            SubscriptionUtil.isSimHardwareVisible(context) &&
-                !com.android.settingslib.Utils.isWifiOnly(context) &&
-                context.userManager.isAdminUser
     }
 }
 
