@@ -474,30 +474,16 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             return null;
         } else {
             getUiccInfoBySubscriptionInfo(uiccSlotInfos, subInfo);
-            SubscriptionInfo firstRemovableSubInfo = SubscriptionUtil.getFirstRemovableSubscription(
-                    context);
             if (DEBUG) {
                 Log.d(TAG, "convert subscriptionInfo to entity for subId = " + subId);
             }
-            return new SubscriptionInfoEntity(String.valueOf(subId),
-                    subInfo.getSimSlotIndex(),
-                    subInfo.getCarrierId(), subInfo.getDisplayName().toString(),
-                    subInfo.getCarrierName() != null ? subInfo.getCarrierName().toString() : "",
-                    subInfo.getDataRoaming(), subInfo.getMccString(), subInfo.getMncString(),
-                    subInfo.getCountryIso(), subInfo.isEmbedded(), mCardId,
-                    subInfo.getPortIndex(), subInfo.isOpportunistic(),
-                    String.valueOf(subInfo.getGroupUuid()),
-                    subInfo.getSubscriptionType(),
+            return new SubscriptionInfoEntity(String.valueOf(subId), subInfo.getSimSlotIndex(),
+                    subInfo.isEmbedded(), subInfo.isOpportunistic(),
                     SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, context).toString(),
                     SubscriptionUtil.isSubscriptionVisible(mSubscriptionManager, context, subInfo),
-                    SubscriptionUtil.getFormattedPhoneNumber(context, subInfo),
-                    firstRemovableSubInfo == null ? false
-                            : firstRemovableSubInfo.getSubscriptionId() == subId,
                     SubscriptionUtil.isDefaultSubscription(context, subId),
                     mSubscriptionManager.isValidSubscriptionId(subId),
-                    mSubscriptionManager.isUsableSubscriptionId(subId),
                     mSubscriptionManager.isActiveSubscriptionId(subId),
-                    true /*availableSubInfo*/,
                     mSubscriptionManager.getActiveDataSubscriptionId() == subId);
         }
     }

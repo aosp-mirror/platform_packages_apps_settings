@@ -68,6 +68,12 @@
         android:order="50"
         settings:controller="com.android.settings.inputmethod.PointerFillStylePreferenceController"/>
 
+    <com.android.settings.inputmethod.PointerStrokeStylePreference
+        android:key="pointer_stroke_style"
+        android:title="@string/pointer_stroke_style"
+        android:order="60"
+        settings:controller="com.android.settings.inputmethod.PointerStrokeStylePreferenceController"/>
+
     <com.android.settings.widget.LabeledSeekBarPreference
         android:key="pointer_scale"
         android:title="@string/pointer_scale"
