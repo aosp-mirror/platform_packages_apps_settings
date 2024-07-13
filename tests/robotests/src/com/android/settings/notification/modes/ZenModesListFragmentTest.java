@@ -37,6 +37,7 @@ import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.android.settings.notification.modes.ZenModesListAddModePreferenceController.ModeType;
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
@@ -56,6 +57,9 @@ public class ZenModesListFragmentTest {
 
     private static final ModeType APP_PROVIDED_MODE_TYPE = new ModeType("Mode", new ColorDrawable(),
             "Details", new Intent().setComponent(new ComponentName("pkg", "configActivity")));
+
+    private static final ModeType CUSTOM_MANUAL_TYPE = new ModeType("Custom", new ColorDrawable(),
+            null, null); // null creationActivityIntent means custom_manual.
 
     private static final ImmutableList<ZenMode> EXISTING_MODES = ImmutableList.of(
             new TestModeBuilder().setId("A").build(),
@@ -92,6 +96,16 @@ public class ZenModesListFragmentTest {
         IntentForResult intent = shadowOf(mActivity).getNextStartedActivityForResult();
         assertThat(intent).isNotNull();
         assertThat(intent.intent).isEqualTo(APP_PROVIDED_MODE_TYPE.creationActivityIntent());
+    }
+
+    @Test
+    public void onChosenModeTypeForAdd_customManualMode_startsNameAndIconPicker() {
+        mFragment.onChosenModeTypeForAdd(CUSTOM_MANUAL_TYPE);
+
+        Intent nextIntent = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(nextIntent).isNotNull();
+        assertThat(nextIntent.getStringExtra(EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(ZenModeNewCustomFragment.class.getName());
     }
 
     @Test

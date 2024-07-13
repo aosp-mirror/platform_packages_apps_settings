@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"चेहरा आणि <xliff:g id="WATCH">%s</xliff:g> जोडले"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"चेहरा, फिंगरप्रिंट आणि <xliff:g id="WATCH">%s</xliff:g> जोडले"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"चेहरा, फिंगरप्रिंट आणि <xliff:g id="WATCH">%s</xliff:g> जोडले"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"ओळख तपासणी सुरू असल्यामुळे हे आवश्यक आहे"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator अनलॉक करा"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"वॉच जोडले आहे"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"तुमचे वॉच सेट करा"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"पर्याय"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"अ‍ॅक्सेसिबिलिटी"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"वास्तविक कीबोर्ड"</string>
-    <string name="show_ime" msgid="4334255501724746849">"ऑन-स्क्रीन कीबोर्ड वापरा"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"वास्तविक कीबोर्ड अ‍ॅक्टिव्ह असताना त्यास स्क्रीनवर ठेवा"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"बाउन्स की"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"कीबोर्ड <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> मिसेमध्ये एकच की वारंवार प्रेस करण्याकडे दुर्लक्ष करतो"</string>
     <string name="slow_keys" msgid="2891452895499690837">"स्लो की"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"मोड तयार करा"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"कस्टम"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"व्यत्यय मर्यादित करा"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"व्यत्यय आणू नका सुरू करा"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"अलार्म आणि मीडियाचे आवाज व्यत्यय आणू शकतात"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"शेड्यूल सेट करा"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"शेड्यूल"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> तास <xliff:g id="MINUTES">%2$d</xliff:g> मिनिटे"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"आपोआप सुरू करा"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"शेड्युल"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"काही वेळेला फोन शांत करा"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"व्यत्यय आणू नका नियम सेट करा"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"सूचना उघडा"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"सूचना स्नूझ करण्याची अनुमती द्या"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"ॲप आयकनवर सूचना बिंदू"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"नोटिफिकेशन बंडल"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"बबल"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"बबल"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"हे संभाषण बबल करा"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"कोणतेही नाही"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"सर्व"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ॲप्सना ओव्हरराइड करण्याची अनुमती द्या"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"व्यत्यय आणू शकणारी ॲप्स"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"केस"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"बॅटरी"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"सेटिंग्ज पॅनल"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"डेस्कटॉप मोडची सक्ती करा"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"दुसऱ्या डिस्प्लेवर प्रायोगिक डेस्कटॉप मोडला सक्ती करा"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"फ्रीफॉर्म विंडो सुरू करा"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"फ्रीफॉर्म विंडोसाठी सपोर्ट सुरू करा."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"दुसऱ्या डिस्प्लेवर फ्रीफॉर्म विंडोइंग सुरू करा"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"फक्त दुय्यम डिस्प्लेवर फ्रीफॉर्म विंडो सुरू करा."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"मल्टी विंडोमध्ये आकार बदलू न शकणारे ॲप सुरू करा"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"आकार बदलू न शकणाऱ्या ॲप्सना मल्टी विंडोमध्ये राहण्याची परवानगी देते"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"फोर्स-डार्क ओव्हरराइड करते"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"१६KB डेव्हलपर पर्याय वापरण्यापूर्वी या डिव्हाइसच्या डेटा पार्टिशनचे ext4 मध्ये रूपांतर करणे आवश्यक आहे. या मोडमध्ये सॉफ्टवेअर इंटेग्रिटीची हमी देता येणार नाही आणि बूटलोडर अनलॉक केलेला असताना फोनवर स्टोअर केलेल्या कोणत्याही डेटाला धोका असू शकतो. १६KB पर्याय अ‍ॅक्टिव्हेट करण्यासाठी यानंतर आणखी एकदा रीबूट करावे लागेल. तुम्ही या मोडमध्ये असाल, तेव्हा तुम्ही एकदाच रीबूट करून ४KB आणि १६KB मोडमध्ये मागे व पुढे स्विच करू शकता. या मोडमध्ये काही वैशिष्ट्ये बंद केली जातील, त्यामुळे काही अ‍ॅप्लिकेशन कदाचित काम करणार नाहीत. डिव्हाइसला उत्पादन मोडवर परत आणण्यासाठी, तुम्हाला ४kB मोडवर परत स्विच करावे लागेल आणि त्यानंतर डिव्हाइसला फॅक्टरी रीसेट करणारा बूटलोडर लॉक करावा लागेल. Android मध्ये डिव्हाइस यशस्वीरीत्या बूट झाल्यानंतर, डेव्हलपर पर्यायांमध्ये OEM अनलॉक करणे हे बंद करा. डिव्हाइस पुसून टाकले जाईल आणि कन्फर्मेशननंतर फाइलसिस्टीम ext4 वर बदलली जाईल. हे पूर्ण झाल्यानंतर, कृपया १६KB पुन्हा सुरू करण्यासाठी परत या."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"सर्व डेटा मिटवा"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"डेटाचे पार्टिशन ext4 वर पुन्हा फॉरमॅट करून पुसून टाकता आले नाही."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"बूटलोडर अनलॉक करणे आवश्यक आहे"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"१६KB डेव्हलपर पर्याय वापरण्यापूर्वी या डिव्हाइसचा बूटलोडर अनलॉक करावा लागेल. या मोडमध्ये सॉफ्टवेअर इंटेग्रिटीची हमी देता येणार नाही आणि बूटलोडर अनलॉक केलेला असताना फोनवर स्टोअर केलेल्या कोणत्याही डेटाला धोका असू शकतो. १६KB मोड अ‍ॅक्टिव्हेट केल्यावर सर्व वापरकर्ता डेटा आणि सेटिंग्ज पुसून टाकली जातील. बूटलोडर अनलॉक केल्यावर, १६KB पर्याय अ‍ॅक्टिव्हेट करण्यासाठी दोन वेळा रीबूट करावे लागेल. तुम्ही या मोडमध्ये असाल, तेव्हा तुम्ही एकदाच रीबूट करून ४KB आणि १६KB मोडमध्ये मागे व पुढे स्विच करू शकता. या मोडमध्ये काही वैशिष्ट्ये बंद केली जातील, त्यामुळे काही अ‍ॅप्लिकेशन कदाचित काम करणार नाहीत. डिव्हाइसला उत्पादन मोडवर परत आणण्यासाठी, तुम्हाला ४KB मोडवर परत स्विच करावे लागेल आणि त्यानंतर डिव्हाइस (फॅक्टरी रीसेट करणारा) OEM/बूटलोडर लॉक करावा लागेल. कृपया बूटलोडर अनलॉक करा आणि पुन्हा प्रयत्न करा. हे कसे करावे यासाठीच्या सूचना तुम्ही &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; येथे पाहू शकता"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"४KB पेज अज्ञात मोड वापरत आहे"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"तुम्ही पेज अज्ञात मोडच्या ४KB मोडमध्ये आहात. या मोडमध्ये सॉफ्टवेअर इंटेग्रिटीची हमी देता येणार नाही आणि बूटलोडर अनलॉक केलेला असताना फोनवर स्टोअर केलेल्या कोणत्याही डेटाला धोका असू शकतो. या मोडमध्ये काही वैशिष्ट्ये बंद केली जातील, त्यामुळे काही अ‍ॅप्लिकेशन कदाचित काम करणार नाहीत. उत्पादन मोडमध्ये पुन्हा एंटर करण्यासाठी, तुम्हाला डिव्हाइसचा बूटलोडर लॉक करावा लागेल. आणखी वाचण्यासाठी टॅप करा."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"तुम्ही पेज अज्ञात मोडच्या ४KB मोडमध्ये आहात. या मोडमध्ये सॉफ्टवेअर इंटेग्रिटीची हमी देता येणार नाही आणि बूटलोडर अनलॉक केलेला असताना फोनवर स्टोअर केलेल्या कोणत्याही डेटाला धोका असू शकतो. या मोडमध्ये काही वैशिष्ट्ये बंद केली जातील, त्यामुळे काही अ‍ॅप्लिकेशन कदाचित काम करणार नाहीत. उत्पादन मोडमध्ये पुन्हा एंटर करण्यासाठी, तुम्हाला डिव्हाइसचा बूटलोडर लॉक करावा लागेल. यामुळे डिव्हाइस पुन्हा फॅक्टरी रीसेट होईल आणि उत्पादन सेटिंग्जवर रिस्टोअर केले जाईल. Android मध्ये डिव्हाइस यशस्वीरीत्या बूट झाल्यानंतर, डेव्हलपर पर्यायांमध्ये OEM अनलॉक करणे हे बंद करा. डिव्हाइस Android मध्ये बूट होत नसल्यास किंवा ते अस्थिर असल्यास, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; येथील नवीनतम फॅक्टरी इमेजच्या मदतीने डिव्हाइस पुन्हा फ्लॅश करा किंवा &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; वापरा आणि \'डिव्हाइस पुसून टाका\', \'बूटलोडर लॉक करा\' व \'सर्व पार्टिशन सक्तीने फ्लॅश करा\' हे निवडा."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"१६KB पेज अज्ञात मोड वापरत आहे"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"तुम्ही पेज-अ‍ॅग्नॉस्टिक मोडच्या १६KB मोडमध्ये आहात. या मोडमध्ये सॉफ्टवेअर इंटेग्रिटीची हमी देता येणार नाही आणि बूटलोडर अनलॉक केलेला असताना फोनवर स्टोअर केलेल्या कोणत्याही डेटाला धोका असू शकतो. या मोडमध्ये काही वैशिष्ट्ये बंद केली जातील, त्यामुळे काही अ‍ॅप्लिकेशन कदाचित काम करणार नाहीत. उत्पादन मोडमध्ये पुन्हा एंटर करण्यासाठी, तुम्हाला ४KB मोडवर परत स्विच करावे लागेल आणि त्यानंतर डिव्हाइसचा बूटलोडर लॉक करावा लागेल. आणखी वाचण्यासाठी टॅप करा."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"तुम्ही पेज-अ‍ॅग्नॉस्टिक मोडच्या १६KB मोडमध्ये आहात. या मोडमध्ये सॉफ्टवेअर इंटेग्रिटीची हमी देता येणार नाही आणि बूटलोडर अनलॉक केलेला असताना फोनवर स्टोअर केलेल्या कोणत्याही डेटाला धोका असू शकतो. या मोडमध्ये काही वैशिष्ट्ये बंद केली जातील, त्यामुळे काही अ‍ॅप्लिकेशन कदाचित काम करणार नाहीत. उत्पादन मोडमध्ये पुन्हा एंटर करण्यासाठी, तुम्हाला ४KB मोडवर परत स्विच करावे लागेल आणि त्यानंतर डिव्हाइसचा बूटलोडर लॉक करावा लागेल. यामुळे डिव्हाइस पुन्हा फॅक्टरी रीसेट होईल आणि उत्पादन सेटिंग्जवर रिस्टोअर केले जाईल. Android मध्ये डिव्हाइस यशस्वीरीत्या बूट झाल्यानंतर, डेव्हलपर पर्यायांमध्ये OEM अनलॉक करणे हे बंद करा. डिव्हाइस Android मध्ये बूट होत नसल्यास किंवा ते अस्थिर असल्यास, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; येथील नवीनतम फॅक्टरी इमेजच्या मदतीने डिव्हाइस पुन्हा फ्लॅश करा किंवा &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; वापरा आणि \'डिव्हाइस पुसून टाका\', \'बूटलोडर लॉक करा\' व \'सर्व पार्टिशन सक्तीने फ्लॅश करा\' हे निवडा."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"१६KB पेज अज्ञात मोड"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"आणखी वाचा"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"बग रिपोर्ट हँडलर"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"तुमचा टॅबलेट डॉक केलेला असतो, तेव्हा तुम्ही तुमच्या स्क्रीनवर काय पाहाल ते निवडा. स्क्रीन सेव्हर वापरला जातो, तेव्हा तुमचे डिव्हाइस आणखी ऊर्जा वापरू शकते."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"कस्टमाइझ करा"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> कस्टमाइझ करा"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"फ्रीफॉर्म सपोर्ट सुरू करण्यासाठी, रीबूट करणे आवश्यक आहे."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"दुय्यम डिस्प्लेवर डेस्कटॉप मोडची सक्ती करण्यासाठी, रीबूट करणे आवश्यक आहे."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"लेगसी फ्रीफॉर्म विंडोइंग सपोर्ट सुरू करण्यासाठी रीबूट करणे आवश्यक आहे."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"फ्रीफॉर्म विंडोइंग सपोर्ट बदलण्यासाठी रीबूट करणे आवश्यक आहे."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"दुय्यम डिस्प्लेवर सक्तीने फ्रीफॉर्म विंडोइंग करण्यासाठी रीबूट करणे आवश्यक आहे."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"आता रीबूट करा"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"नंतर रीबूट करा"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"स्पेशियल ऑडिओ"</string>

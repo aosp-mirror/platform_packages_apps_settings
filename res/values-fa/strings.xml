@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"چهره و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"چهره، اثر انگشت، و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"چهره، اثر انگشت، و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"این مورد الزامی است چون «بررسی هویت» روشن است"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"قفل‌گشایی برنامه اصالت‌سنجی از دور"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"ساعت اضافه شد"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"راه‌اندازی ساعت"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"گزینه‌ها"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"دسترس‌پذیری"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"صفحه‌کلید فیزیکی"</string>
-    <string name="show_ime" msgid="4334255501724746849">"استفاده از صفحه‌کلید مجازی"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"وقتی صفحه‌کلید فیزیکی فعال است این ویرایشگر را روی صفحه نگه‌می‌دارد"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"کلیدهای واگشت"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"صفحه‌کلید فشردن‌های تکراری و سریع یک کلید در <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> میلی‌ثانیه را نادیده می‌گیرد"</string>
     <string name="slow_keys" msgid="2891452895499690837">"کلیدهای آهسته"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"ایجاد حالت"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"سفارشی"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"محدود کردن وقفه‌ها"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"روشن کردن «مزاحم نشوید»"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"صداهای رسانه و هشدارها می‌توانند وقفه ایجاد کنند"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"تنظیم زمان‌بندی"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"زمان‌بندی"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ساعت، <xliff:g id="MINUTES">%2$d</xliff:g> دقیقه"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"روشن شدن خودکار"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"زمان‌بندی"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"بی‌صدا کردن تلفن در زمان‌های خاصی"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"تنظیم قانون‌های «مزاحم نشوید»"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"باز کردن اعلان"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"مجاز کردن تعویق اعلان"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"نقطه اعلان روی نماد برنامه‌ها"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"دسته‌های اعلان"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"حبابک‌ها"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"حبابک‌ها"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"نمایش مکالمه به‌صورت حباب"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"هیچ‌کدام"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"همه"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"مجاز کردن برنامه‌ها برای لغو"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"برنامه‌هایی که می‌توانند وقفه ایجاد کنند"</string>
@@ -4349,7 +4352,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"برای رفتن به صفحه اصلی، از پایین صفحه تند به‌بالا بکشید. برای جابه‌جایی بین برنامه‌ها، از پایین صفحه تند به‌بالا بکشید، نگه دارید، سپس رها کنید. برای برگشتن، از لبه راست یا چپ تند بکشید."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"پیمایش ۳ دکمه‌ای"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"برگشت، صفحه اصلی، و جابه‌جایی بین برنامه‌ها با دکمه‌های پایین صفحه."</string>
-    <string name="nav_tutorial_button_description" msgid="6880450051535137024">"شروع آموزش گام‌به‌گام پیمایش اشاره‌ای، دکمه. برای فعال کردن، دوضربه بزنید."</string>
+    <string name="nav_tutorial_button_description" msgid="6880450051535137024">"شروع آموزش گام‌به‌گام پیمایش اشاره‌ای، دکمه. برای فعال کردن، دو تک‌ضرب بزنید."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"پیمایش سیستمی، پیمایش ۲دکمه‌ای، پیمایش ۳ دکمه‌ای، پیمایش اشاره‌ای، تند کشیدن"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"دستیار دیجیتالی"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"تند کشیدن برای فراخواندن دستیار"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"جلد محاف"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"باتری"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"پانل تنظیمات"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"اجرای اجباری حالت دسک‌‌تاپ"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"اجرای اجباری حالت دسک‌تاپ آزمایشی در نمایشگرهای ثانوی"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"فعال کردن پنجره‌های با قالب آزاد"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"پشتیبانی از پنجره‌های با قالب آزاد فعال می‌شود."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"فعال کردن پنجره‌های با قالب آزاد در نمایشگر دوم"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"پنجره‌های با قالب آزاد فقط در نمایشگر دوم فعال می‌شود."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"فعال کردن اندازه غیرقابل‌تغییر در چندپنجره"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"مجاز کردن برنامه‌های با اندازه غیرقابل‌تغییر برای قرارگیری در چندپنجره"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"لغو اجبار حالت تاریک"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"‏پیش‌از استفاده از گزینه توسعه‌دهنده ۱۶ کیلوبایتی، پارتیشن داده‌های این دستگاه باید به ext4 تبدیل شود. در این حالت تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. فعال کردن گزینه ۱۶ کیلوبایتی به بازراه‌اندازی دیگری بعداز این بازراه‌اندازی نیاز خواهد داشت. بعداز رفتن به این حالت، می‌توانید با یک بار بازراه‌اندازی بین حالت‌های ۴ کیلوبایتی و ۱۶ کیلوبایتی جابجا شوید. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای برگرداندن دستگاه به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader را قفل کنید که با این کار،‌ دستگاه بازنشانی کارخانه‌ای می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید. داده‌های دستگاه محو می‌شود و سیستم فایل به ext4 تغییر می‌کند. بعداز تکمیل کار،‌ لطفاً به اینجا برگردید تا دوباره حالت ۱۶ کیلوبایتی را فعال کنید."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"پاک کردن همه داده‌ها"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"‏محو کردن داده و قالب‌بندی مجدد پارتیشن داده به ext4 انجام نشد."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"‏قفل Bootloader باید باز شود"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"‏پیش‌از استفاده از گزینه توسعه‌دهنده ۱۶ کیلوبایتی، قفل bootloader باید در این دستگاه باز شود. نمی‌توان تمامیت نرم‌افزار را در این حالت تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. با فعال کردن حالت ۱۶ کیلوبایتی، همه تنظیمات و داده‌های کاربر محو خواهند شد. بعداز باز کردن قفل bootloader، گزینه ۱۶ کیلوبایتی به انجام دو بازراه‌اندازی نیاز دارد. بعداز رفتن به این حالت، می‌توانید با یک بار بازراه‌اندازی بین حالت‌های ۴ کیلوبایتی و ۱۶ کیلوبایتی جابجا شوید. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای برگرداندن دستگاه به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس سازنده اصلی محصول/ bootloader دستگاه را قفل کنید (که با این کار،‌ دستگاه بازنشانی کارخانه‌ای می‌شود). لطفاً قفل bootloader را باز و دوباره امتحان کنید. می‌توانید دستورالعمل‌های نحوه انجام این کار را از اینجا دریافت کنید: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"درحال استفاده از حالت مستقل با صفحه ۴ کیلوبایتی"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"‏در حالت ۴ کیلوبایتی حالت مستقل از صفحه هستید. در این حالت، تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید bootloader دستگاه را قفل کنید. برای مطالعه بیشتر، تک‌ضرب بزنید."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"‏در حالت ۴ کیلوبایتی حالت مستقل از صفحه هستید. در این حالت تمامیت نرم‌افزار را نمی‌توان تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند در معرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید bootloader دستگاه را قفل کنید. با این کار، دستگاه دوباره بازنشانی کارخانه‌ای می‌شود و به تنظیمات تولید بازگردانده می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید. اگر دستگاه نتوانست باموفقیت با سیستم‌عامل Android راه‌اندازی شود یا ناپایدار بود، دستگاه را با جدیدترین تصویر تنظیمات کارخانه از &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; دوباره فلاش کنید و «محو کردن داده‌های دستگاه»، «قفل کردن bootloader»، و «فلاش کردن اجباری همه پارتیشن‌ها» را انتخاب کنید."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"درحال استفاده از حالت مستقل از صفحه ۱۶ کیلوبایتی"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"‏در حالت ۱۶ کیلوبایتی حالت مستقل از صفحه هستید. نمی‌توان تمامیت نرم‌افزار را در این حالت تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند درمعرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader دستگاه را قفل کنید. برای مطالعه بیشتر، تک‌ضرب بزنید."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"‏در حالت ۱۶ کیلوبایتی حالت مستقل از صفحه هستید. نمی‌توان تمامیت نرم‌افزار را در این حالت تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند درمعرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader دستگاه را قفل کنید. با این کار، دستگاه دوباره بازنشانی کارخانه‌ای می‌شود و به تنظیمات تولید بازگردانده می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید. اگر دستگاه نتوانست باموفقیت با سیستم‌عامل Android راه‌اندازی شود یا ناپایدار بود، دستگاه را با جدیدترین تصویر تنظیمات کارخانه از &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; دوباره فلاش کنید و «محو کردن داده‌های دستگاه»، «قفل کردن Bootloader»، و «فلاش کردن اجباری همه پارتیشن‌ها» را انتخاب کنید."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"حالت مستقل از صفحه ۱۶ کیلوبایتی"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"بیشتر بخوانید"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"کنترل‌کننده گزارش اشکال"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"انتخاب کنید وقتی رایانه لوحی روی پایه قرار می‌گیرد چه چیزی روی صفحه‌نمایش نشان داده شود. هنگام استفاده از محافظ صفحه، دستگاه ممکن است انرژی بیشتری مصرف کند."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"سفارشی کردن"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"سفارشی کردن <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"برای فعال کردن پشتیبانی قالب آزاد، راه‌اندازی مجدد الزامی است."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"برای رفتن به حالت میز کار در نمایشگرهای ثانویه، بازراه‌اندازی الزامی است."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"برای فعال کردن پشتیبانی از پنجره‌های با قالب آزاد قدیمی، به بازراه‌اندازی نیاز است."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"برای تغییر دادن پشتیبانی از پنجره‌های با قالب آزاد، به بازراه‌اندازی نیاز است."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"برای اجباری کردن پنجره‌های با قالب آزاد در نمایشگرهای دوم، به بازراه‌اندازی نیاز است."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"اکنون بازراه‌اندازی شود"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"بعداً بازراه‌اندازی شود"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"صدای فضایی"</string>

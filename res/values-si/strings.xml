@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"මුහුණ සහ <xliff:g id="WATCH">%s</xliff:g> එක් කර ඇත"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"මුහුණ, ඇඟිලි සලකුණ, සහ <xliff:g id="WATCH">%s</xliff:g> එක් කර ඇත"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"මුහුණ, ඇඟිලි සලකුණු, සහ <xliff:g id="WATCH">%s</xliff:g> එක් කර ඇත"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"හැඳුනුම් පරීක්ෂාව ක්‍රියාත්මක බැවින් මෙය අවශ්‍ය වේ"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"දුරස්ථ සත්‍යාපක අගුලු හරින්න"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"ඔරලෝසුව එක් කර ඇත"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"ඔබේ ඔරලෝසුව පිහිටුවන්න"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"විකල්ප"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ප්‍රවේශ්‍යතාව"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"භෞතික යතුරු පුවරුව"</string>
-    <string name="show_ime" msgid="4334255501724746849">"තිරය මත යතුරු පුවරුව භාවිත කරන්න"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"භෞතික යතුරු පුවරුව සක්‍රිය අතරතුර එය තිරය මත තබා ගන්න"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"පනින යතුරු"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"යතුරුපුවරුව <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms ඇතුළත එකම යතුර නැවත නැවතත් එබීම් නොසලකා හරියි"</string>
     <string name="slow_keys" msgid="2891452895499690837">"මන්දගාමී යතුරු"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"කෙසේ වෙතත් ඉදිරියට යන්න"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"අවලංගු කරන්න"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"විශාලන සැකසීම්"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"1 ඇඟිල්ලකින් විශාලකය ගෙන යන්න"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"තිරය වටා ගමන් කිරීමට 1 ඇඟිල්ලක් අදින්න"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"එක ඇඟිල්ලක් ඇදීමෙන් විශාලන ප්‍රදේශය එහා මෙහා කරන්න."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"ඇඟිලි දෙකක් ඇදීමෙන් විශාලන ප්‍රදේශය එහා මෙහා කරන්න."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"තිරයේ කොටසක් පමණක් විශාලනය කරන අතරේ ලබා ගත නොහැක"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"විශාලනය කිරීමට බොත්තමක් තට්ටු කරන්න"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"අන්තර්ගතය වඩා විශාල කිරීමට තිරය මත ඉක්මනින් විශාලනය කරන්න"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;විශාලනය වැඩි කිරීමට:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. විශාලනය කිරීම ආරම්භ කිරීමට කෙටිමග භාවිත කරන්න&lt;br/&gt; {1,number,integer}. තිරය තට්ටු කරන්න&lt;br/&gt; {2,number,integer}. තිරය වටා යාමට ඇඟිලි 2කින් අදින්න&lt;br/&gt; {3,number,integer}. විශාලනය සීරුමාරු කිරීමට ඇඟිලි 2කින් පින්ච් කරන්න&lt;br/&gt; {4,number,integer}. විශාලනය කිරීම නතර කිරීමට කෙටි මග භාවිත කරන්න&lt;br/&gt;&lt;br/&gt; &lt;b&gt;තාවකාලිකව විශාලනය වැඩි කිරීමට:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ඔබගේ විශාලන වර්ගය පූර්ණ තිරයට සකසා ඇති බවට සහතික කර ගන්න&lt;br/&gt; {1,number,integer}. විශාලනය කිරීම ආරම්භ කිරීමට කෙටිමග භාවිත කරන්න&lt;br/&gt; {2,number,integer}. තිර‍යේ ඕනෑම තැනක ස්පර්ශ කර අල්ලා ගන්න&lt;br/&gt; {3,number,integer}. තිරය වටා යාමට ඇඟිල්ල අදින්න&lt;br/&gt; {4,number,integer}. විශාලනය කිරීම නතර කිරීමට ඇඟිල්ල ඔසවන්න"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"<b>විශාලනය වැඩි කිරීමට:</b><br/> {0,number,integer}. විශාලනය කිරීම ආරම්භ කිරීමට කෙටිමග භාවිත කරන්න<br/> {1,number,integer}. තිරය තට්ටු කරන්න<br/> {2,number,integer}. තිරය වටා යාමට ඇඟිලි 2කින් අදින්න<br/> {3,number,integer}. විශාලනය සීරුමාරු කිරීමට ඇඟිලි 2කින් පින්ච් කරන්න<br/> {4,number,integer}. විශාලනය නැවැත්වීමට කෙටිමඟ භාවිතා කරන්න&lt;br/&gt;&lt;br/&gt; ඔබට තාවකාලිකව සහ තවත් විශාලනය කිරීමට ද හැක."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"<b>විශාලනය වැඩි කිරීමට:</b><br/> {0,number,integer}. විශාලනය කිරීම ආරම්භ කිරීමට කෙටිමග භාවිත කරන්න<br/> {1,number,integer}. තිරය තට්ටු කරන්න<br/> {2,number,integer}. තිරය ​​වටා ගමන් කිරීමට ඇඟිලි 1ක් හෝ 2ක් අදින්න&lt;br/&gt; {3,number,integer}. විශාලනය සීරුමාරු කිරීමට ඇඟිලි 2කින් පින්ච් කරන්න<br/> {4,number,integer}. විශාලනය නැවැත්වීමට කෙටිමඟ භාවිතා කරන්න&lt;br/&gt;&lt;br/&gt; ඔබට තාවකාලිකව සහ තවත් විශාලනය කිරීමට ද හැක."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"විශාලනය ක්‍රියාත්මක කර ඇති විට, ඔබට ඔබේ තිරයේ දී විශාලනය වැඩි කළ හැකිය.\n\n"<b>"විශාලනය කිරීමට"</b>", විශාලනය ආරම්භ කර, අනතුරුව තිරයේ ඕනෑම තැනක තට්ටු කරන්න.\n"<ul><li>"අනුචලනය කිරීමට ඇඟිලි 2ක් හෝ ඊට වැඩි ගණනක් අදින්න"</li>\n<li>"විශාලනය සීරුමාරු කිරීමට ඇඟිලි 2ක් හෝ ඊට වැඩි ගණනක් කොනහන්න"</li></ul>\n\n<b>"තාවකාලිකව විශාලනය කිරීමට"</b>", විශාලනය ආරම්භ කර, අනතුරුව තිරයේ ඕනෑම තැනක ස්පර්ශ කර &amp; අල්ලාගෙන සිටින්න.\n"<ul><li>"තිරය වටා චලනය කිරීමට අදින්න"</li>\n<li>"විශාලනය අඩු කිරීමට ඇඟිල්ල ඔසවන්න"</li></ul>\n\n"ඔබට යතුරු පුවරුවේ හෝ සංචාලන තීරුවේ දී විශාලනය වැඩි කළ නොහැකිය."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> න් <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> පිටුව"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"ප්‍රවේශ්‍යතා බොත්තම් කෙටිමඟ"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"ප්‍රකාරයක් තනන්න"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"අභිරුචි"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"බාධා සීමා කරන්න"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"බාධා නොකරන්න ක්‍රියාත්මක කරන්න"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"එලාම සහ මාධ්‍ය හඬවල්වලට බාධා කළ හැකිය"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"කාලසටහනක් සකසන්න"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"කාල සටහන"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"පැය <xliff:g id="HOURS">%1$d</xliff:g>යි, විනාඩි <xliff:g id="MINUTES">%2$d</xliff:g>ක්"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"ස්වයංක්‍රීයව ක්‍රියාත්මක කරන්න"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"කාල සටහන"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"නිශ්චිත වේලාවලදී දුරකථනය නිහඬ කරන්න"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"බාධා නොකරන්න රීති සැකසීම"</string>
@@ -3545,6 +3541,8 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"දැනුම් දීම විවෘත කරන්න"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"දැනුම්දීම කල් දැමීමට ඉඩ දෙන්න"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"යෙදුම් අයිකනයෙහි දැනුම් දීම් තිත"</string>
+    <!-- no translation found for notification_bundles (3614044525822580826) -->
+    <skip />
     <string name="notification_bubbles_title" msgid="5681506665322329301">"බුබුළු"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"බුබුළු"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"මෙම සංවාදය බුබුලු දමන්න"</string>
@@ -3837,6 +3835,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"කිසිවක් නැත"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"සියලු"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ප්‍රතික්ෂේප කිරිමට යෙදුම්වලට ඉඩ දෙන්න"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"බාධා කළ හැකි යෙදුම්"</string>
@@ -4347,7 +4347,7 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"සංචාලනය ප්‍රකාරය"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2-බොත්තම් සංචලනය"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"යෙදුම් මාරු කිරීමට, මුල් පිටු බොත්තම මත ස්වයිප් කරන්න. යෙදුම් සියල්ල බැලීමට, නැවතත් ස්වයිප් කරන්න. ආපසු යාමට, ආපසු බොත්තමට තට්ටු කරන්න."</string>
-    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"සුරක්ෂිතතාව &amp; හදිසි අවස්ථාව"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"සුරක්ෂිතතාව සහ හදිසි අවස්ථාව"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"හදිසි අවස්ථා SOS, වෛද්‍යමය තතු, ඇඟවීම්"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"අභින සංචලනය"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"නිවසට යාම සඳහා, තිරයෙහි පහළින් උඩට ස්වයිප් කරන්න. යෙදුම් මාරු කිරීම සඳහා, පහළින් උඩට ස්වයිප් කර, අල්ලා සිට, පසුව මුදා හරින්න. ආපසු යාම සඳහා, වම් හෝ දකුණු දාරයෙන් ස්වයිප් කරන්න."</string>
@@ -4862,8 +4862,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"කේස්"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"බැටරිය"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"සැකසීම් පුවරුව"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"වැඩතල ප්‍රකාරය බල කරන්න"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"ද්විතීයික සංදර්ශන කෙරෙහි අත්හදා බැලීමේ වැඩතල ප්‍රකාරය බල කරන්න"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"අනියම් හැඩැති කවුළු සබල කරන්න"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"නිදහස් ආකෘති කවුළු සඳහා සහය සබල කරන්න."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"දෙවන සංදර්ශකය මත නිදහස් ආකෘති කවුළු සබල කරන්න"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"ද්විතියික සංදර්ශකය මත පමණක් නිදහස් ආකෘති කවුළු සබල කරන්න."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"බහු කවුළුව තුළ ප්‍රතිප්‍රමාණ කළ නොහැකි සබල කරන්න"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"බහු කවුළුව තුළ ප්‍රතිප්‍රමාණ කළ නොහැකි යෙදුම් තිබීමට ඉඩ දෙයි"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"force-dark ප්‍රතික්ෂේප කරන්න"</string>
@@ -4931,17 +4933,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16KB සංවර්ධක විකල්පය භාවිත කිරීමට පෙර මෙම උපාංගයේ දත්ත කොටස ext4 වෙත පරිවර්තනය කළ යුතු ය. මෙම ප්‍රකාරයේ දී මෘදුකාංග අඛණ්ඩතාව සහතික කළ නොහැකි අතර, ආරම්භකය අගුළු හැර ඇති විට දුරකථනයේ ගබඩා කර ඇති ඕනෑම දත්තයක් අවදානමට ලක් විය හැක. 16KB විකල්පය සක්‍රිය කිරීමට මෙයින් පසු තවත් එක් නැවත පණගැන්වීමක් අවශ්‍ය වේ. ඔබ මෙම ප්‍රකාරයට පැමිණි පසු, ඔබට තනි නැවත පණ ගැන්වීමකින් 4KB සහ 16KB ප්‍රකාරය අතර මාරු විය හැක. මෙම ප්‍රකාර තුළ සමහර විශේෂාංග ක්‍රියාවිරහිත වනු ඇත, එබැවින් සමහර යෙදුම් ක්‍රියා නොකරනු ඇත. උපාංගය නිෂ්පාදන ප්‍රකාරයට ආපසු යාමට, ඔබට නැවත 4KB ප්‍රකාරයට මාරු වීමට අවශ්‍ය වන අතර පසුව උපාංගය කර්මාන්තශාලා යළි සකසන ආරම්භකය අගුළු දැමිය යුතු ය. උපාංගය සාර්ථකව Android සමග ආරම්භ වූ පසු, සංවර්ධක විකල්ප තුළ OEM අගුළු හැරීම ක්‍රියාවිරහිත කරන්න. උපාංගය මකා දමන අතර තහවුරු කිරීමෙන් පසු ගොනු පද්ධතිය ext4 වෙත වෙනස් කරනු ඇත. මෙය සම්පූර්ණ වූ පසු, කරුණාකර නැවත 16KB සබල කිරීමට ආපසු එන්න."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"සියලු දත්ත මකන්න"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ext4 වෙත දත්ත කොටස් යළි ෆෝමැට් කිරීම සහ පිස දැමීම අසමත් විය."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"ආරම්භකය අගුළු ඇරීම අවශ්‍යයි"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"මෙම උපාංගයට 16KB සංවර්ධක විකල්පය භාවිත කිරීමට පෙර ආරම්භකය අගුළු හැර තිබිය යුතු ය. මෙම ප්‍රකාරයේ දී මෘදුකාංග අඛණ්ඩතාව සහතික කළ නොහැකි අතර, ආරම්භකය අගුළු හැර ඇති විට දුරකථනයේ ගබඩා කර ඇති ඕනෑම දත්තයක් අවදානමට ලක් විය හැක. 16KB ප්‍රකාරය සක්‍රිය කරන විට සියලුම පරිශීලක දත්ත සහ සැකසුම් මකා දමනු ලැබේ. ආරම්භකය අගුළු හැරීමෙන් පසු, 16KB විකල්පය සක්‍රිය කිරීමට නැවත පණ ගැන්වීම් දෙකක් අවශ්‍ය වේ. ඔබ මෙම ප්‍රකාරයට පැමිණි පසු, ඔබට තනි නැවත පණ ගැන්වීමකින් 4KB සහ 16KB ප්‍රකාරය අතර මාරු විය හැක. මෙම ප්‍රකාර තුළ සමහර විශේෂාංග ක්‍රියාවිරහිත වනු ඇත, එබැවින් සමහර යෙදුම් ක්‍රියා නොකරනු ඇත. උපාංගය නිෂ්පාදන ප්‍රකාරයට ආපසු යාමට, ඔබට නැවත 4KB ප්‍රකාරයට මාරු කිරීමට අවශ්‍ය වන අතර පසුව OEM/අගුළු ආරම්භකය (මෙම කර්මාන්තශාලාව යළි සකසන) අගුළු දැමීම අවශ්‍ය වේ. කරුණාකර ආරම්භකය අගුළු ඇර නැවත උත්සාහ කරන්න. &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; හි දී ඔබට මෙය කරන ආකාරය ගැන උපදෙස් බැලිය හැක"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4KB පිටු-දෘෂ්ටික ප්‍රකාරය භාවිත කරමින්"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"ඔබ සිටින්නේ පිටු-දෘෂ්ටික ප්‍රකාරයේ 4KB ප්‍රකාරයේ ය. මෙම ප්‍රකාරයේ දී මෘදුකාංග අඛණ්ඩතාව සහතික කළ නොහැකි අතර, ආරම්භකය අගුළු හැර ඇති විට දුරකථනයේ ගබඩා කර ඇති ඕනෑම දත්තයක් අවදානමට ලක් විය හැක. මෙම ප්‍රකාර තුළ සමහර විශේෂාංග ක්‍රියාවිරහිත වනු ඇත, එබැවින් සමහර යෙදුම් ක්‍රියා නොකරනු ඇත. නිෂ්පාදන ප්‍රකාරය නැවත ඇතුල් කිරීම සඳහා, ඔබ උපාංගයේ ආරම්භකය අගුළු දැමිය යුතු ය. වැඩිදුර කියවීමට තට්ටු කරන්න."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"ඔබ සිටින්නේ පිටු-දෘෂ්ටික ප්‍රකාරයේ 4KB ප්‍රකාරයේ ය. මෙම ප්‍රකාරයේ දී මෘදුකාංග අඛණ්ඩතාව සහතික කළ නොහැකි අතර, ආරම්භකය අගුළු හැර ඇති විට දුරකථනයේ ගබඩා කර ඇති ඕනෑම දත්තයක් අවදානමට ලක් විය හැක. මෙම ප්‍රකාර තුළ සමහර විශේෂාංග ක්‍රියාවිරහිත වනු ඇත, එබැවින් සමහර යෙදුම් ක්‍රියා නොකරනු ඇත. නිෂ්පාදන ප්‍රකාරය නැවත ඇතුල් කිරීම සඳහා, ඔබ උපාංගයේ ආරම්භකය අගුළු දැමිය යුතු ය. මෙමඟින් උපාංගයට නැවත කර්මාන්තශාලා යළි සැකසීම සිදු කරන අතර එය නිෂ්පාදන සැකසුම් වෙත ප්‍රතිසාධනය කරයි. උපාංගය සාර්ථකව Android සමග ආරම්භ වූ පසු, සංවර්ධක විකල්ප තුළ OEM අගුළු හැරීම ක්‍රියාවිරහිත කරන්න. උපාංගය Android වෙත පණ ගැන්වීමට අපොහොසත් වුවහොත් හෝ අස්ථායී නම්, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; වෙතින් නවතම කර්මාන්තශාලා පින්තූර සමග උපාංගය නැවත ෆ්ලෑෂ් කර; \'උපාංගය පිස දමන්න\', \'අගුළු ආරම්භකය\' සහ \'සියලුම කොටස් ෆ්ලෑෂ් කිරීමට බල කරන්න\' තෝරන්න."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16KB පිටු-දෘෂ්ටික ප්‍රකාරය භාවිත කරමින්"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"ඔබ සිටින්නේ පිටු-දෘෂ්ටික ප්‍රකාරයේ 16KB ප්‍රකාරයේ ය. මෙම ප්‍රකාරයේ මෘදුකාංග අඛණ්ඩතාව සහතික කළ නොහැකි අතර, ආරම්භකය අගුලු හැර ඇති විට දුරකථනයේ ගබඩා කර ඇති ඕනෑම දත්තක් අවදානමට ලක් වේවි. මෙම ප්‍රකාර තුළ සමහර විශේෂාංග අබල වෙයි, එබැවින් සමහර යෙදුම් ක්‍රියා නොකරයි. නිෂ්පාදන ප්‍රකාරයට නැවත ඇතුළු වීමට, ඔබ 4KB ප්‍රකාරයට ආපසු මාරු කර උපාංගයේ ආරම්භකය අගුළු දැමිය යුතු ය. වැඩිදුර කියවීමට තට්ටු කරන්න."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"ඔබ සිටින්නේ පිටු-දෘෂ්ටික ප්‍රකාරයේ 16KB ප්‍රකාරයේ ය. මෙම ප්‍රකාරයේ මෘදුකාංග අඛණ්ඩතාව සහතික කළ නොහැකි අතර, ආරම්භකය අගුලු හැර ඇති විට දුරකථනයේ ගබඩා කර ඇති ඕනෑම දත්තක් අවදානමට ලක් වේවි. මෙම ප්‍රකාර තුළ සමහර විශේෂාංග අබල වෙයි, එබැවින් සමහර යෙදුම් ක්‍රියා නොකරයි. නිෂ්පාදන ප්‍රකාරයට නැවත ඇතුළු වීමට, ඔබ 4KB ප්‍රකාරයට ආපසු මාරු කර උපාංගයේ ආරම්භකය අගුළු දැමිය යුතු ය. මෙමඟින් උපාංගයට නැවත කර්මාන්තශාලා යළි සැකසීම සිදු කරන අතර එය නිෂ්පාදන සැකසුම් වෙත ප්‍රතිසාධනය කරයි. උපාංගය සාර්ථකව Android සමග ආරම්භ වූ පසු, සංවර්ධක විකල්ප තුළ OEM අගුලු හැරීම අබල කරන්න. උපාංගය Android වෙත පණ ගැන්වීමට අපොහොසත් වුවහොත් හෝ අස්ථායී නම්, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; වෙතින් නවතම කර්මාන්තශාලා පින්තූර සමග උපාංගය නැවත ෆ්ලෑෂ් කර; \'උපාංගය පිස දමන්න\', \'අගුළු ආරම්භකය\' සහ \'සියලුම කොටස් ෆ්ලෑෂ් කිරීමට බල කරන්න\' තෝරන්න."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB පිටු-දෘෂ්ටික ප්‍රකාරය"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"තව කියවන්න"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"දෝෂ වාර්තා හසුරුවනය"</string>
@@ -5188,8 +5187,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"ඔබගේ ටැබ්ලටය ඈඳා ඇති විට ඔබ ඔබගේ තිරය මත දකිනු ඇති දේ තෝරන්න. තිර සුරැකුමක් භාවිත කරන විට ඔබගේ උපාංගය ශක්තිය වැඩියෙන් භාවිත කළ හැකිය."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"අභිරුචිකරණය කරන්න"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> අභිරුචිකරණය කරන්න"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"නිදහස් ආකෘති සහාය සබල කිරීමට නැවත පණ ගැන්වීමක් අවශ්‍ය වේ."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"ද්විතීයික සංදර්ශකවල ඩෙස්ක්ටොප් ප්‍රකාරය බල කිරීමට නැවත පණ ගැන්වීමක් අවශ්‍ය වේ."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"ලෙගසි නිදහස් ආකෘති කවුළු සහාය සබල කිරීමට නැවත පණ ගැන්වීමක් අවශ්‍ය වේ."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"නිදහස් ආකෘති කවුළු සහාය වෙනස් කිරීමට නැවත පණ ගැන්වීමක් අවශ්‍ය වේ."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"ද්විතියික සංදර්ශක මත නිදහස් ආකෘති කවුළුව බල කිරීමට නැවත පණගැන්වීමක් අවශ්‍ය වේ."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"දැන් නැවත පණ ගන්වන්න"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"පසුව නැවත පණ ගන්වන්න"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"අවකාශීය ශ්‍රව්‍ය"</string>

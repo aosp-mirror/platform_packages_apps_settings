@@ -34,6 +34,7 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.service.notification.ConditionProviderService;
 
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 
 import org.junit.Before;

@@ -27,6 +27,7 @@ import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
