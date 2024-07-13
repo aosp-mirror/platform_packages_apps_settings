@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Volto e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Volto, impronta e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Volto, impronte e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"È necessario perché la verifica dell\'identità è attiva"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Sblocco Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Smartwatch aggiunto"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configura l\'orologio"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opzioni"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibilità"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Tastiera fisica"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Usa tastiera sullo schermo"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Tienila sullo schermo quando è attiva la tastiera fisica"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Tasti rimbalzati"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"La tastiera ignora pressioni ripetute velocemente dello stesso tasto entro <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Tasti lenti"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Crea una modalità"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Personalizzato"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitare le interruzioni"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Attiva Non disturbare"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Sveglie e suoni multimediali possono interrompere"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Imposta una programmazione"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programmazione"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Attiva automaticamente"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Pianificazione"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Disattiva la suoneria in orari specifici"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Imposta regole Non disturbare"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"viene aperta la notifica"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Consenti posticipazione delle notifiche"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Indicatore di notifica su icona app"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Bundle di notifiche"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bolle"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bolle"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Mostra conversazione sotto forma di bolla"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Nessuna"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Tutti"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Consenti alle app di ignorarla"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"App che possono interrompere"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Custodia"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Riquadro delle impostazioni"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Forza la modalità desktop"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Forza la modalità desktop sperimentale su display secondari"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Attiva finestre a forma libera"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Attiva il supporto delle finestre a forma libera."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Attiva finestre a forma libera sul secondo display"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Attiva le finestre a forma libera solo sul secondo display."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Attiva app non ridimensionabili in multi-finestra"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Consente la presenza di app non ridimensionabili in modalità multi-finestra"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Esegui override modalità Buio forzata"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"La partizione dei dati del dispositivo deve essere convertita in ext4 prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Se attivi l\'opzione a 16 kB, sarà necessario un ulteriore riavvio. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Tutti i dati verranno cancellati dal dispositivo e il file system verrà convertito in ext4 dopo la conferma. Quando termina l\'operazione, riabilita nuovamente la modalità a 16 kB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Resetta tutti i dati"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Impossibile riformattare e cancellare la partizione di dati in ext4."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Sblocco bootloader richiesto"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"È necessario sbloccare il bootloader del dispositivo prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Tutti i dati utente e le impostazioni verranno cancellati quando attivi la modalità a 16 kB. Dopo aver sbloccato il bootloader, l\'attivazione dell\'opzione a 16 kB richiederà due riavvii. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo, il che ripristina i dati di fabbrica del dispositivo. Sblocca il bootloader e riprova. Puoi consultare le istruzioni su come fare all\'indirizzo &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Modalità indipendente dalla pagina a 4 kB in uso"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Hai attivato l\'opzione a 4 kB della modalità indipendente dalla pagina. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi bloccare il bootloader del dispositivo. Tocca per leggere altro."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Hai attivato l\'opzione a 4 kB della modalità indipendente dalla pagina. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi bloccare il bootloader del dispositivo. Questo eseguirà nuovamente il ripristino dei dati di fabbrica del dispositivo e ripristinerà le impostazioni di produzione. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Se l\'avvio di Android sul dispositivo non riesce o è instabile, esegui nuovamente il flashing del dispositivo con le immagini del produttore più recenti da &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e seleziona \"Cancella dati dispositivo\", \"Blocca bootloader\" e \"Esegui il flash forzato di tutte le partizioni\"."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Modalità indipendente dalla pagina a 16 kB in uso"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Hai attivato l\'opzione a 16 kB della modalità page-agnostic. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo. Tocca per leggere altro."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Hai attivato l\'opzione a 16 kB della modalità page-agnostic. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo. Questo eseguirà nuovamente il ripristino dei dati di fabbrica del dispositivo e ripristinerà le impostazioni di produzione. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Se l\'avvio di Android sul dispositivo non riesce o è instabile, esegui nuovamente il flashing del dispositivo con le immagini del produttore più recenti da &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e seleziona \"Cancella dati dispositivo\", \"Blocca bootloader\" e \"Esegui il flash forzato di tutte le partizioni\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modalità indipendente dalla pagina a 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Leggi tutto"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gestore segnalazione di bug"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Scegli cosa visualizzare sullo schermo quando il tablet è agganciato alla base. Il dispositivo potrebbe consumare più energia quando viene usato un salvaschermo."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizza"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personalizza <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"È necessario riavviare per attivare il supporto del formato libero."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"È necessario riavviare per forzare la modalità desktop su display secondari."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"È necessario riavviare per abilitare il supporto delle finestre a forma libera legacy."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"È necessario riavviare per modificare il supporto delle finestre a forma libera."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"È necessario riavviare per forzare le finestre a forma libera sul secondo display."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Riavvia ora"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Riavvia più tardi"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Audio spaziale"</string>

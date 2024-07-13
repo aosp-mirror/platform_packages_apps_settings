@@ -140,13 +140,13 @@
             settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController" />
 
         <com.android.settingslib.RestrictedPreference
-            android:key="fingerprint_settings_profile"
-            android:title="@string/security_settings_work_fingerprint_preference_title"
+            android:key="face_settings_profile"
+            android:title="@string/security_settings_face_profile_preference_title"
             android:summary="@string/summary_placeholder" />
 
         <com.android.settingslib.RestrictedPreference
-            android:key="face_settings_profile"
-            android:title="@string/security_settings_face_profile_preference_title"
+            android:key="fingerprint_settings_profile"
+            android:title="@string/security_settings_work_fingerprint_preference_title"
             android:summary="@string/summary_placeholder" />
 
         <com.android.settingslib.RestrictedPreference

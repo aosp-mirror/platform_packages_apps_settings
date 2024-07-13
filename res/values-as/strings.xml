@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"মুখাৱয়ব আৰু <xliff:g id="WATCH">%s</xliff:g> যোগ দিয়া হৈছে"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"মুখাৱয়ব, ফিংগাৰপ্ৰিণ্ট আৰু <xliff:g id="WATCH">%s</xliff:g> যোগ দিয়া হৈছে"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"মুখাৱয়ব, ফিংগাৰপ্ৰিণ্ট আৰু <xliff:g id="WATCH">%s</xliff:g> যোগ দিয়া হৈছে"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"যিহেতু পৰিচয় পৰীক্ষা কৰাৰ সুবিধাটো অন হৈ আছে, এইটো আৱশ্যকীয়"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Authenticatorৰ দ্বাৰা দূৰৰ পৰা আনলক কৰা"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"ঘড়ী যোগ দিয়া হৈছে"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"আপোনাৰ ঘড়ীটো ছেট আপ কৰক"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"বিকল্পসমূহ"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"সাধ্য সুবিধা"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"কায়িক কীব\'ৰ্ড"</string>
-    <string name="show_ime" msgid="4334255501724746849">"অন-স্ক্ৰীন কীব’ৰ্ড ব্যৱহাৰ কৰক"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"কায়িক কীব’ৰ্ড সক্ৰিয় হৈ থাকিলে ইয়াক স্ক্ৰীনত ৰাখিব"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"বাউন্স কী"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"কীব’ৰ্ডে <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> এমএছৰ ভিতৰত একেটা কী ক্ষিপ্ৰতাৰে বাৰে বাৰে টিপাটো উপেক্ষা কৰে।"</string>
     <string name="slow_keys" msgid="2891452895499690837">"ধীৰ গতিৰ কী"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"এটা ম’ড সৃষ্টি কৰক"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"কাষ্টম"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"বাধাবোৰ সীমিত কৰক"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"অসুবিধা নিদিব অন কৰক"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"এলাৰ্ম আৰু মিডিয়া ধ্বনিসমূহে ব্যাঘাত জন্মাব পাৰে"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"সময়সূচী ছেট কৰক"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"সময়সূচী"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ঘণ্টা, <xliff:g id="MINUTES">%2$d</xliff:g> মিনিট"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"স্বয়ংক্ৰিয়ভাৱে অন কৰক"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"সময়সূচী"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"নিৰ্দ্দিষ্ট সময়ৰ মূৰত ফ\'ন নিৰৱ কৰক"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"অসুবিধা নিদিবৰ নিয়ম ছেট কৰক"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"জাননী খোলক"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"জাননী স্নুজ কৰাৰ অনুমতি দিয়ক"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"এপ্‌ চিহ্নত জাননী বিন্দু"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"জাননীৰ বাণ্ডল"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbles"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bubbles"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"এই বাৰ্তালাপটো বাবল কৰক"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"এটাও নহয়"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"আটাইবোৰ"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"এপক অ\'ভাৰৰাইডৰ অনুমতি দিয়ক"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"ব্যাঘাত জন্মাব পৰা এপ্‌সমূহ"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"কে’ছ"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"বেটাৰী"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"ছেটিঙৰ পেনেল"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"বলপূৰ্বক ডেস্কটপ ম’ড"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"দ্বিতীয় ডিছপ্লে’ত পৰীক্ষামূলক ডেস্কটপ ম’ড বলপূৰ্বকভাৱে প্ৰয়োগ কৰক"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"ফ্ৰীফৰ্ম ৱিণ্ড’ সক্ষম কৰক"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"ফ্ৰীফৰ্ম ৱিণ্ড’ৰ সমৰ্থন সক্ষম কৰক।"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"দ্বিতীয় ডিছপ্লে’ত ফ্ৰীফৰ্ম ৱিণ্ড’ৱিং সক্ষম কৰক"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"কেৱল গৌণ ডিছপ্লে’ত ফ্ৰীফৰ্ম ৱিণ্ড’ সক্ষম কৰক।"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"একাধিক ৱিণ্ড’ত আকাৰ সলনি কৰিব নোৱৰা সুবিধাটো সক্ষম কৰক"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"আকাৰ সলনি কৰিব নোৱৰা এপক একাধিক ৱিণ্ড’ত থকাৰ অনুমতি দিয়ে"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"বলপূর্বকভাৱে গাঢ় ৰঙৰ থীম ব্যৱহাৰ কৰা সুবিধাটো অ\'ভাৰৰাইড কৰক"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"১৬ কেবি বিকাশকৰ্তাৰ বিকল্প ব্যৱহাৰ কৰাৰ আগতে এই ডিভাইচৰ ডেটা বিভাজন ext4 লৈ ৰূপান্তৰ কৰিব লাগিব। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। ১৬ কেবি বিকল্প সক্ৰিয় কৰাৰ বাবে ইয়াৰ পাছত আৰু এবাৰ ৰিবুট কৰাৰ প্ৰয়োজন হ’ব। আপুনি এবাৰ এই ম’ডত থাকিলে, আপুনি এবাৰ ৰিবুট কৰিয়েই ৪ কেবি আৰু ১৬ কেবি ম’ডৰ মাজত আগ-পিছ কৰিব পাৰিব। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। ডিভাইচটোক উৎপাদন ম’ডলৈ উভতাই নিবলৈ, আপুনি ৪ কেবি ম’ডলৈ পুনৰ সলনি কৰিব লাগিব আৰু বুটল’ডাৰ লক কৰিব লাগিব, যিয়ে ডিভাইচটো ফেক্টৰী ৰিছেট কৰে। ডিভাইচটোৱে Androidত সফলতাৰে বুট কৰাৰ পাছত, বিকাশকৰ্তাৰ বিকল্পসমূহত OEM আনলক কৰাটো অক্ষম কৰক। ডিভাইচটো মচি পেলোৱা হ’ব আৰু নিশ্চিতকৰণৰ পাছত ফাইলছিষ্টেম ext4লৈ সলনি কৰা হ’ব। এইটো সম্পূৰ্ণ হোৱাৰ পাছত, ১৬ কেবি পুনৰ সক্ষম কৰিবলৈ কৰিবলৈ অনুগ্ৰহ কৰি উভতি আহক।"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"আটাইবোৰ ডেটা মচক"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ডেটা বিভাজন মচিব আৰু ext4 হিচাপে পুনৰ ফৰ্মেট কৰিব পৰা নগ’ল।"</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"বুটল’ডাৰ আনলক কৰাৰ আৱশ্যক"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"১৬ কেবি বিকাশকৰ্তাৰ বিকল্প ব্যৱহাৰ কৰাৰ আগতে এই ডিভাইচত বুটল’ডাৰ আনলক কৰিব লাগিব। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। ১৬ কেবি ম’ড সক্ৰিয় কৰাৰ সময়ত ব্যৱহাৰকাৰীৰ আটাইবোৰ ডেটা আৰু ছেটিং মচি পেলোৱা হ’ব। এবাৰ বুটল’ডাৰ আনলক কৰা হ’লে, ১৬ কেবি বিকল্প সক্ৰিয় কৰিবলৈ দুবাৰ ৰিবুট কৰাৰ প্ৰয়োজন হ’ব। আপুনি এবাৰ এই ম’ডত থাকিলে, আপুনি এবাৰ ৰিবুট কৰিয়েই ৪ কেবি আৰু ১৬ কেবি ম’ডৰ মাজত আগ-পিছ কৰিব পাৰিব। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। ডিভাইচটোক উৎপাদন ম’ডলৈ উভতাই নিবলৈ, আপুনি ৪ কেবি ম’ডলৈ পুনৰ সলনি কৰিব লাগিব আৰু ডিভাইচটো OEM/বুটল’ডাৰ লক (যিয়ে ফেক্টৰী ৰিছেট কৰে) কৰিব লাগিব। অনুগ্ৰহ কৰি বুটল’ডাৰ আনলক কৰক আৰু পুনৰ চেষ্টা কৰক। আপুনি এইটো কেনেকৈ কৰিব লাগে তাৰ নিৰ্দেশনা &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;ত চাব পাৰে"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"৪ কেবি পেজ-এগন’ষ্টিক ম’ড ব্যৱহাৰ কৰি থকা হৈছে"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"আপুনি পেজ-এগন’ষ্টিক ম’ডৰ ৪ কেবি ম’ডত আছে। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। উৎপাদন ম’ডত পুনৰ প্ৰৱেশ কৰিবলৈ, আপুনি ডিভাইচৰ বুটল’ডাৰ লক কৰিবই লাগিব। অধিক পঢ়িবলৈ টিপক।"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"আপুনি পেজ-এগন’ষ্টিক ম’ডৰ ৪ কেবি ম’ডত আছে। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। উৎপাদন ম’ডত পুনৰ প্ৰৱেশ কৰিবলৈ, আপুনি ডিভাইচৰ বুটল’ডাৰ লক কৰিবই লাগিব। ই ডিভাইচটো পুনৰ ফেক্টৰী ৰিছেট কৰিব আৰু সেইটোক উৎপাদন ছেটিঙলৈ পুনঃস্থাপন কৰিব। ডিভাইচটোৱে Androidত সফলতাৰে বুট কৰাৰ পাছত, বিকাশকৰ্তাৰ বিকল্পসমূহত OEM আনলক কৰাটো অক্ষম কৰক। যদি ডিভাইচটো Androidত বুট কৰিব পৰা নাযায় বা অস্থিৰ হয়, তেন্তে &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;ৰ পৰা শেহতীয়া ফেক্টৰী প্ৰতিচ্ছবিসমূহৰ সৈতে ডিভাইচটো পুনৰ ফ্লেশ্ব কৰক আৰু \'ডিভাইচ মচি পেলাওক\', \'বুটল’ডাৰ লক কৰক\' আৰু \'আটাইবোৰ বিভাজন বলপূৰ্বক ফ্লেশ্ব কৰক\' বাছনি কৰক।"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"১৬ কেবি পেজ-এগন’ষ্টিক ম’ড ব্যৱহাৰ কৰি থকা হৈছে"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"আপুনি পেজ-এগন’ষ্টিক ম’ডৰ ১৬ কেবি ম’ডত আছে। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। উৎপাদন ম’ডত পুনৰ প্ৰৱেশ কৰিবলৈ, আপুনি ৪ কেবি ম’ডলৈ উভতি যাবই লাগিব আৰু তাৰ পাছত ডিভাইচৰ বুটল’ডাৰ লক কৰিবই লাগিব। অধিক পঢ়িবলৈ টিপক।"</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"আপুনি পেজ-এগন’ষ্টিক ম’ডৰ ১৬ কেবি ম’ডত আছে। এই ম’ডত ছফ্টৱেৰৰ অখণ্ডতা নিশ্চিত কৰিব নোৱাৰি আৰু বুটল’ডাৰ আনলক হৈ থকাৰ সময়ত ফ’নত ষ্ট’ৰ কৰা যিকোনো ডেটাৰ ক্ষেত্ৰত বিপদাশংকা থাকিব পাৰে। এই ম’ডসমূহত কিছুমান সুবিধা অক্ষম কৰা হ’ব, গতিকে কিছুমান এপ্লিকেশ্বনে কাম নকৰিবও পাৰে। উৎপাদন ম’ডত পুনৰ প্ৰৱেশ কৰিবলৈ, আপুনি ৪ কেবি ম’ডলৈ উভতি যাবই লাগিব আৰু তাৰ পাছত ডিভাইচৰ বুটল’ডাৰ লক কৰিবই লাগিব। ই ডিভাইচটো পুনৰ ফেক্টৰী ৰিছেট কৰিব আৰু সেইটোক উৎপাদন ছেটিঙলৈ পুনঃস্থাপন কৰিব। ডিভাইচটোৱে Androidত সফলতাৰে বুট কৰাৰ পাছত, বিকাশকৰ্তাৰ বিকল্পসমূহত OEM আনলক কৰাটো অক্ষম কৰক। যদি ডিভাইচটো Androidত বুট কৰিব পৰা নাযায় বা অস্থিৰ হয়, তেন্তে &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;ৰ পৰা শেহতীয়া ফেক্টৰী প্ৰতিচ্ছবিসমূহৰ সৈতে ডিভাইচটো পুনৰ ফ্লেশ্ব কৰক আৰু \'ডিভাইচৰ ডেটা মচি পেলাওক\', \'বুটল’ডাৰ লক কৰক\' আৰু \'আটাইবোৰ বিভাজন বলপূৰ্বক ফ্লেশ্ব কৰক\' বাছনি কৰক।"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"১৬ কেবি পেজ-এগন’ষ্টিক ম’ড"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"অধিক পঢ়ক"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"বাগ ৰিপ’ৰ্ট নিয়ন্ত্ৰণ কৰোঁতা"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"আপোনাৰ টেবলেটটো লক হৈ থাকিলে আপুনি সেইটোৰ স্ক্ৰীনত কি দেখা পাব সেয়া বাছনি কৰক। স্ক্ৰীন ছেভাৰ ব্যৱহাৰ কৰাৰ সময়ত আপোনাৰ ডিভাইচটোৱে হয়তো অধিক শক্তি ব্যৱহাৰ কৰিব।"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"কাষ্টমাইজ কৰক"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> কাষ্টমাইজ কৰক"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ফ্ৰীফৰ্ম সমৰ্থন সক্ষম কৰিবৰ বাবে ৰিবুটৰ প্ৰয়োজন।"</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"গৌণ ডিছপ্লেত ডেস্কটপ ম’ড সক্ষম কৰিবৰ বাবে ৰিবুটৰ প্ৰয়োজন।"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"লিগেচী ফ্ৰীফৰ্ম ৱিণ্ড’ৱিং সমৰ্থন সক্ষম কৰিবলৈ এবাৰ ৰিবুট কৰাৰ আৱশ্যক।"</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"ফ্ৰীফৰ্ম ৱিণ্ড’ৱিঙৰ সমৰ্থন সলনি কৰিবলৈ এবাৰ ৰিবুট কৰাৰ আৱশ্যক।"</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"গৌণ ডিছপ্লে’ত বলপূৰ্বকভাৱে ফ্ৰীফৰ্ম ৱিণ্ড’ৱিং কৰাৰ বাবে এবাৰ ৰিবুট কৰাৰ আৱশ্যক।"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"এতিয়াই ৰিবুট কৰক"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"পাছত ৰিবুট কৰক"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"প্ৰকৃত অভিজ্ঞতা প্ৰদান কৰা অডিঅ’"</string>

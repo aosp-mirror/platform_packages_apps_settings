@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"முகம் மற்றும் <xliff:g id="WATCH">%s</xliff:g> சேர்க்கப்பட்டன"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"முகம், கைரேகை மற்றும் <xliff:g id="WATCH">%s</xliff:g> சேர்க்கப்பட்டன"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"முகம், கைரேகைகள் மற்றும் <xliff:g id="WATCH">%s</xliff:g> சேர்க்கப்பட்டன"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"அடையாளச் சரிபார்ப்பு இயக்கத்தில் உள்ளதால் இது தேவை"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticatorரை அன்லாக் செய்தல்"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"வாட்ச் சேர்க்கப்பட்டது"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"உங்கள் வாட்ச்சை அமையுங்கள்"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"விருப்பங்கள்"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"அணுகல்தன்மை"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"கைமுறை கீபோர்டு"</string>
-    <string name="show_ime" msgid="4334255501724746849">"ஸ்கிரீன் கீபோர்டைப் பயன்படுத்து"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"கைமுறை கீபோர்டு இயக்கத்தில் இருக்கும் போது இதைத் திரையில் வைத்திருக்கும்"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"பவுன்ஸ் விசைகள்"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> மில்லி வினாடிக்குள் ஒரே பட்டனைத் தொடர்ச்சியாக அழுத்துவதைக் கீபோர்டு புறக்கணிக்கிறது"</string>
     <string name="slow_keys" msgid="2891452895499690837">"ஸ்லோ கீஸ்"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"பரவாயில்லை, தொடர்க"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"ரத்துசெய்"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"பெரிதாக்கல் அமைப்புகள்"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"1 விரலால் Magnifierரை நகர்த்துங்கள்"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"திரையில் எங்கேனும் நகர்த்த 1 விரலால் இழுங்கள்"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"ஒரு விரலால் இழுத்து பெரிதாக்கல் பகுதியை நகர்த்தலாம்."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"இரண்டு விரல்களால் இழுத்து பெரிதாக்கல் பகுதியை நகர்த்தலாம்."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"திரையின் ஒரு பகுதியை மட்டும் பெரிதாக்கும்போது இருக்காது"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"திரையைப் பெரிதாக்க, பட்டனைத் தட்டவும்"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"உள்ளடக்கத்தை மேலும் தெளிவாகக் காட்ட திரையைப் பெரிதாக்கலாம்"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;பெரிதாக்க:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. பெரிதாக்கத் தொடங்குவதற்கு ஷார்ட்கட்டைப் பயன்படுத்தவும்&lt;br/&gt; {1,number,integer}. திரையைத் தட்டவும்&lt;br/&gt; {2,number,integer}. திரையில் நகர்த்த இரு விரல்களால் இழுக்கவும்&lt;br/&gt; {3,number,integer}. அளவை மாற்ற இரு விரல்களால் பின்ச் செய்யவும்&lt;br/&gt; {4,number,integer}. பெரிதாக்குவதை நிறுத்த ஷார்ட்கட்டைப் பயன்படுத்தவும்&lt;br/&gt;&lt;br/&gt; &lt;b&gt;தற்காலிகமாகப் பெரிதாக்க:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. பெரிதாக்கல் வகை முழுத்திரைக்கு அமைக்கப்பட்டிருப்பதை உறுதிசெய்து கொள்ளவும்&lt;br/&gt; {1,number,integer}. பெரிதாக்கத் தொடங்குவதற்கு ஷார்ட்கட்டைப் பயன்படுத்தவும்&lt;br/&gt; {2,number,integer}. திரையில் எங்கேனும் தொட்டுப் பிடித்திருக்கவும்&lt;br/&gt; {3,number,integer}. திரையில் எங்கேனும் செல்ல விரலை நகர்த்தவும்&lt;br/&gt; {4,number,integer}. பெரிதாக்குவதை நிறுத்த விரலைத் திரையிலிருந்து எடுக்கவும்"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;பெரிதாக்க:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. பெரிதாக்கலைத் தொடங்க, ஷார்ட்கட் பயன்படுத்தவும்&lt;br/&gt; {1,number,integer}. திரையைத் தட்டவும்&lt;br/&gt; {2,number,integer}. திரையில் எங்கேனும் நகர்த்த 2 விரல்களால் இழுக்கவும்&lt;br/&gt; {3,number,integer}. அளவை மாற்ற 2 விரல்களால் பின்ச் செய்யவும்&lt;br/&gt; {4,number,integer}. பெரிதாக்கலை நிறுத்த, ஷார்ட்கட் பயன்படுத்தவும்&lt;br/&gt;&lt;br/&gt; தற்காலிகமாகப் பெரிதாக்கலாம், பலவற்றைச் செய்யலாம்."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;பெரிதாக்க:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. பெரிதாக்கலைத் தொடங்க, ஷார்ட்கட் பயன்படுத்தவும்&lt;br/&gt; {1,number,integer}. திரையைத் தட்டவும்&lt;br/&gt; {2,number,integer}. திரையில் எங்கேனும் நகர்த்த 1 அல்லது 2 விரல்களால் இழுக்கவும்&lt;br/&gt; {3,number,integer}. அளவை மாற்ற 2 விரல்களால் பின்ச் செய்யவும்&lt;br/&gt; {4,number,integer}. பெரிதாக்கலை நிறுத்த, ஷார்ட்கட் பயன்படுத்தவும்&lt;br/&gt;&lt;br/&gt; தற்காலிகமாகப் பெரிதாக்கலாம், பலவற்றைச் செய்யலாம்."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"’பெரிதாக்கல்’ அம்சம் ஆன் செய்யப்பட்டுள்ளபோது திரையைப் பெரிதாக்கிப் பார்க்கலாம்.\n\n"<b>"அதற்கு "</b>", இந்த அம்சத்தைத் தொடங்கி திரையில் எங்கு வேண்டுமானாலும் தட்டவும்.\n"<ul><li>"ஸ்க்ரோல் செய்ய இரண்டு அல்லது மேற்பட்ட விரல்களில் இழுக்கவும்"</li>\n<li>"அளவை மாற்ற இரண்டு அல்லது மேற்பட்ட விரல்களில் பின்ச் செய்யவும்"</li></ul>\n\n<b>"தற்காலிகமாகப் பெரிதாக்க"</b>", இந்த அம்சத்தைத் தொடங்கி திரையில் எங்கு வேண்டுமானாலும் தொட்டுப் பிடிக்கவும்.\n"<ul><li>"திரையில் எங்கு வேண்டுமானாலும் செல்ல இழுக்கவும்"</li>\n<li>"சிறிதாக்க விரல்களால் பின்ச் செய்து மேலே இழுக்கவும்"</li></ul>\n\n"கீபோர்டிலோ வழிசெலுத்தல் பட்டியையோ பெரிதாக்க இயலாது."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"பக்கம் <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> / <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"அணுகல்தன்மை பட்டனுக்கான ஷார்ட்கட்"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"பயன்முறையை உருவாக்குதல்"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"பிரத்தியேகம்"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"குறுக்கீடுகளைக் குறைத்தல்"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"தொந்தரவு செய்ய வேண்டாம் என்பதை ஆன் செய்யும்"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"அலாரங்களும் மீடியா ஒலிகளும் குறுக்கிட முடியும்"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"திட்ட அட்டவணையை அமையுங்கள்"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"திட்டமிடுங்கள்"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ம.நே <xliff:g id="MINUTES">%2$d</xliff:g> நிமி"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"தானாகவே இயக்குதல்"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"நேர அட்டவணை"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"குறிப்பிட்ட நேரத்தில் ஒலி முடக்கு"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\'தொந்தரவு செய்ய வேண்டாம்’ விதிகளை அமைத்தல்"</string>
@@ -3545,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"அறிவிப்பைத் திறக்கும்"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"அறிவிப்புகளை ஸ்னூஸ் செய்ய அனுமதி"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"ஆப்ஸ் ஐகானில் அறிவிப்பு புள்ளி"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"அறிவிப்புத் தொகுப்புகள்"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"குமிழ்கள்"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"குமிழ்கள்"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"இந்த உரையாடலைக் குமிழாக்கு"</string>
@@ -3837,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"எதுவுமில்லை"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"அனைத்தும்"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ஆப்ஸை மீறிச் செயல்பட அனுமதிக்கின்றன"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"குறுக்கிட முடிகின்ற ஆப்ஸ்"</string>
@@ -4862,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"சார்ஜ் செய்யும் பெட்டி"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"பேட்டரி"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"அமைப்புகளுக்கான பேனல்"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"கட்டாய டெஸ்க்டாப் பயன்முறை"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"இரண்டாம்நிலை திரைகளில் \'கட்டாயப் பரிசோதனை டெஸ்க்டாப்\' பயன்முறை"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"குறிப்பிட்ட வடிவமில்லாத சாளரங்களை இயக்குதல்"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"குறிப்பிட்ட வடிவமில்லாத சாளரங்களுக்கான ஆதரவை இயக்கலாம்."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"குறிப்பிட்ட வடிவமில்லாத சாளரத்தை இரண்டாம் திரையில் இயக்குதல்"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"குறிப்பிட்ட வடிவமில்லாத சாளரத்தை இரண்டாம் நிலைத் திரையில் மட்டும் இயக்குதல்."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"அளவு மாற்ற இயலாதவற்றைப் பல சாளரத்தில் இயக்கு"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"அளவு மாற்ற இயலாத ஆப்ஸைப் பல சாளரத்தில் இயக்க அனுமதிக்கும்"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"force-dark அம்சத்தை மீறிச் செயல்படுதல்"</string>
@@ -4931,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16 கி.பை. டெவெலப்பர் விருப்பத்தைப் பயன்படுத்தும் முன்பு இந்தச் சாதனத்தின் தரவுப் பிரிப்பு ext4 ஃபைல் அமைப்பிற்கு மாற்றப்பட வேண்டும். இந்தப் பயன்முறையில் மென்பொருளின் முழுமைத்தன்மைக்கு உத்திரவாதம் இல்லை. அத்துடன் பூட்லோடர் அன்லாக் செய்யப்பட்டிருக்கும்போது மொபைலில் சேமிக்கப்பட்ட அனைத்துத் தரவும் ஆபத்தில் இருக்கக்கூடும். 16 கி.பை. விருப்பத்தைச் செயல்படுத்த, இதற்குப் பின் மீண்டும் ஒருமுறை மறுபடி தொடங்க வேண்டும். இந்தப் பயன்முறையில் இருக்கும்போது, ஒருமுறை மறுபடி தொடங்கி 4 கி.பை. மற்றும் 16 கி.பை. இடையே முன்னும் பின்னும் மாறிக்கொள்ளலாம். இந்தப் பயன்முறைகளில் சில அம்சங்கள் முடக்கப்படும் என்பதால் சில ஆப்ஸ் வேலை செய்யாமல் போகக்கூடும். தயாரிப்புப் பயன்முறைக்குச் சாதனத்தை அமைக்க 4 கி.பை. பயன்முறைக்கு மாறி பூட்லோடரைப் பூட்டுங்கள், இது சாதனத்தை ஆரம்பநிலைக்கு மீட்டமைக்கும். சாதனம் Androidல் தொடங்கியதும், டெவெலப்பர் விருப்பங்களில் OEM அன்லாக்கை முடக்கவும். சாதனம் படிக்க முடியாதபடி செய்யப்படும் மற்றும் உறுதிசெய்த பின் ஃபைல் அமைப்பு ext4 ஃபைல் அமைப்பிற்கு மாற்றப்படும். இது முடிந்ததும், மீண்டும் வந்து 16 கி.பை பயன்முறையை இயக்க வேண்டும்."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"அனைத்துத் தரவையும் அழி"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"தரவுப் பிரிப்பை ext4 ஃபைல் அமைப்பிற்கு மாற்றியமைக்கவும் படிக்க முடியாதபடி செய்யவும் முடியவில்லை."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"பூட்லோடர் அன்லாக் தேவை"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"16 கி.பை. டெவெலப்பர் விருப்பத்தைப் பயன்படுத்தத் தொடங்கும் முன் இந்தச் சாதனத்தில் பூட்லோடர் அன்லாக் செய்யப்பட்டிருக்க வேண்டும். இந்தப் பயன்முறையில் மென்பொருளின் முழுமைத்தன்மைக்கு உத்திரவாதம் இல்லை. அத்துடன் பூட்லோடர் அன்லாக் செய்யப்பட்டிருக்கும்போது மொபைலில் சேமிக்கப்பட்ட அனைத்துத் தரவும் ஆபத்தில் இருக்கக்கூடும். 16 கி.பை. பயன்முறையைச் செயல்படுத்தும்போது அனைத்துப் பயனர் தரவும் அமைப்புகளும் படிக்க முடியாதபடி செய்யப்படும். பூட்லோடர் அன்லாக் செய்யப்பட்டதும், 16 கி.பை. விருப்பத்தைச் செயல்படுத்த இருமுறை மறுபடி தொடங்க வேண்டும். இந்தப் பயன்முறையில் இருக்கும்போது, ஒருமுறை மறுபடி தொடங்கி 4 கி.பை. மற்றும் 16 கி.பை. இடையே முன்னும் பின்னும் மாறிக்கொள்ளலாம். இந்தப் பயன்முறைகளில் சில அம்சங்கள் முடக்கப்படும் என்பதால் சில ஆப்ஸ் வேலை செய்யாமல் போகக்கூடும். தயாரிப்புப் பயன்முறைக்குச் சாதனத்தை அமைக்க 4 கி.பை. பயன்முறைக்கு மாற்ற வேண்டும். பின்பு OEM/பூட்லோடர் (சாதனத்தை ஆரம்பநிலைக்கு மீட்டமைக்கும்) சாதனத்தைப் பூட்டும். பூட்லோடரை அன்லாக் செய்து மீண்டும் முயலவும். இங்கே இதைச் செய்யும் வழிமுறையைப் பார்க்கலாம்: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4 கி.பை. பக்கம் சாராத பயன்முறையைப் பயன்படுத்துகிறது"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"4 கி.பை. இல் இயங்கும் பக்கம் சாராத பயன்முறையில் உள்ளீர்கள். இந்தப் பயன்முறையில் மென்பொருளின் முழுமைத்தன்மைக்கு உத்திரவாதம் இல்லை. அத்துடன் பூட்லோடர் அன்லாக் செய்யப்பட்டிருக்கும்போது மொபைலில் சேமிக்கப்பட்ட அனைத்துத் தரவும் ஆபத்தில் இருக்கக்கூடும். இந்தப் பயன்முறைகளில் சில அம்சங்கள் முடக்கப்படும் என்பதால் சில ஆப்ஸ் வேலை செய்யாமல் போகக்கூடும். தயாரிப்புப் பயன்முறைக்குத் திரும்ப, சாதனத்தின் பூட்லோடரைப் பூட்ட வேண்டும். மேலும் படிக்க தட்டவும்."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"4 கி.பை. இல் இயங்கும் பக்கம் சாராத பயன்முறையில் உள்ளீர்கள். இந்தப் பயன்முறையில் மென்பொருளின் முழுமைத்தன்மைக்கு உத்திரவாதம் இல்லை. அத்துடன் பூட்லோடர் அன்லாக் செய்யப்பட்டிருக்கும்போது மொபைலில் சேமிக்கப்பட்ட அனைத்துத் தரவும் ஆபத்தில் இருக்கக்கூடும். இந்தப் பயன்முறைகளில் சில அம்சங்கள் முடக்கப்படும் என்பதால் சில ஆப்ஸ் வேலை செய்யாமல் போகக்கூடும். தயாரிப்புப் பயன்முறைக்குத் திரும்ப, சாதனத்தின் பூட்லோடரைப் பூட்ட வேண்டும். இது சாதனத்தை மீண்டும் ஆரம்பநிலைக்கு மீட்டமைக்கும் மற்றும் தயாரிப்பு அமைப்புகளுக்கு மீட்டெடுக்கும். சாதனம் Androidல் தொடங்கியதும், டெவெலப்பர் விருப்பங்களில் OEM அன்லாக்கை முடக்கவும். சாதனம் Androidல் தொடங்கவில்லை அல்லது நிலையற்றதாக இருந்தால் &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; பக்கத்தில் இருந்து சமீபத்திய ஃபேக்டரி பிரதியுடன் சாதனத்தை மீண்டும் ஃபிளாஷ் செய்யவும் அல்லது &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; இணைப்பைப் பயன்படுத்தி \'சாதனத்தைப் படிக்க முடியாதபடி செய்\', \'பூட்லோடரைப் பூட்டு\' மற்றும் \'அனைத்துப் பிரிப்பையும் வேகமாக ஃபிளாஷ் செய்\' என்பதைத் தேர்ந்தெடுக்கவும்."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16 கி.பை. பக்கம் சாராத பயன்முறையைப் பயன்படுத்துகிறது"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"பக்கம் சாராத பயன்முறையின் 16 கி.பை. பயன்முறையில் உள்ளீர்கள். இந்தப் பயன்முறையில் மென்பொருளின் முழுமைத்தன்மைக்கு உத்திரவாதம் இல்லை. அத்துடன் பூட்லோடர் அன்லாக் செய்யப்பட்டிருக்கும்போது மொபைலில் சேமிக்கப்பட்ட அனைத்துத் தரவும் ஆபத்தில் இருக்கக்கூடும். இந்தப் பயன்முறைகளில் சில அம்சங்கள் முடக்கப்படும் என்பதால் சில ஆப்ஸ் வேலை செய்யாமல் போகக்கூடும். தயாரிப்புப் பயன்முறைக்குத் திரும்ப, 4 கி.பை. பயன்முறைக்கு அமைத்து சாதனத்தின் பூட்லோடரைப் பூட்ட வேண்டும். மேலும் படிக்க தட்டவும்."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"பக்கம் சாராத பயன்முறையின் 16 கி.பை. பயன்முறையில் உள்ளீர்கள். இந்தப் பயன்முறையில் மென்பொருளின் முழுமைத்தன்மைக்கு உத்திரவாதம் இல்லை. அத்துடன் பூட்லோடர் அன்லாக் செய்யப்பட்டிருக்கும்போது மொபைலில் சேமிக்கப்பட்ட அனைத்துத் தரவும் ஆபத்தில் இருக்கக்கூடும். இந்தப் பயன்முறைகளில் சில அம்சங்கள் முடக்கப்படும் என்பதால் சில ஆப்ஸ் வேலை செய்யாமல் போகக்கூடும். தயாரிப்புப் பயன்முறைக்குத் திரும்ப, 4 கி.பை. பயன்முறைக்கு அமைத்து சாதனத்தின் பூட்லோடரைப் பூட்ட வேண்டும். இது சாதனத்தை மீண்டும் ஆரம்பநிலைக்கு மீட்டமைக்கும் மற்றும் தயாரிப்பு அமைப்புகளுக்கு மீட்டெடுக்கும். சாதனம் Androidல் தொடங்கியதும், டெவெலப்பர் விருப்பங்களில் OEM அன்லாக்கை முடக்கவும். சாதனம் Androidல் தொடங்கவில்லை அல்லது நிலையற்றதாக இருந்தால் &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; பக்கத்தில் இருந்து சமீபத்திய ஃபேக்டரி பிரதி மூலம் சாதனத்தை மீண்டும் ஃபிளாஷ் செய்யவும் அல்லது &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; இணைப்பைப் பயன்படுத்தி \'சாதனத்தைப் படிக்க முடியாதபடி செய்\', \'பூட்லோடரைப் பூட்டு\' மற்றும் \'அனைத்துப் பார்டிஷன்களையும் வேகமாக ஃபிளாஷ் செய்\' என்பதைத் தேர்ந்தெடுக்கவும்."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 கி.பை. பக்கம் சாராத பயன்முறை"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"மேலும் காட்டு"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"பிழை அறிக்கை ஹேண்ட்லர்"</string>
@@ -5188,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"உங்கள் டேப்லெட் டாக் செய்யப்பட்டிருக்கும்போது திரையில் என்ன காட்டப்பட வேண்டும் என்பதைத் தேர்வுசெய்யலாம். ஸ்கிரீன் சேவரைப் பயன்படுத்தும்போது உங்கள் சாதனம் அதிக பேட்டரியைப் பயன்படுத்தக்கூடும்."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"தனிப்பயனாக்கு"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> ஐப் பிரத்தியேகமாக்கும்"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"குறிப்பிட்ட வடிவமில்லாத சாளரங்களுக்கான ஆதரவை இயக்க சாதனத்தை மீண்டும் தொடங்கவும்."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"இரண்டாம் நிலைத் திரையில் டெஸ்க்டாப் பயன்முறையைப் பயன்படுத்த, சாதனத்தை மீண்டும் தொடங்குதல் அவசியம்."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"குறிப்பிட்ட வடிவமில்லாத பழைய சாளரத்திற்கான ஆதரவை இயக்க, சாதனத்தை மீண்டும் தொடங்கவும்."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"குறிப்பிட்ட வடிவமில்லாத சாளரத்திற்கான ஆதரவை மாற்ற, சாதனத்தை மீண்டும் தொடங்கவும்."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"இரண்டாம் நிலைத் திரையில் குறிப்பிட்ட வடிவமில்லாத சாளரத்தைப் பயன்படுத்த, சாதனத்தை மீண்டும் தொடங்கவும்."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"இப்போதே மீண்டும் தொடங்கு"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"பிறகு மீண்டும் தொடங்கு"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"சுற்றிலும் கேட்கும் ஆடியோ"</string>
