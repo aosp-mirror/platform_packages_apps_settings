@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"얼굴 및 <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"얼굴, 지문, <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"얼굴, 지문, <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"신원 확인이 설정되어 필수입니다."</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator 잠금 해제"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"시계 추가됨"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"시계 설정하기"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"옵션"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"접근성"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"물리적 키보드"</string>
-    <string name="show_ime" msgid="4334255501724746849">"터치 키보드 사용"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"물리적 키보드가 활성 상태인 경우 화면에 켜 둠"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"바운스 키"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g>밀리초 이내에 동일한 키를 빠르게 반복해서 누를 시 키보드에서 이를 무시합니다."</string>
     <string name="slow_keys" msgid="2891452895499690837">"느린 키"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"무시하고 계속하기"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"취소"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"확대 설정"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"한 손가락으로 돋보기 이동"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"한 손가락으로 드래그하여 화면을 움직입니다"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"한 손가락으로 드래그하여 확대 영역을 이동하세요."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"두 손가락으로 드래그하여 확대 영역을 이동하세요."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"화면의 일부만 확대하는 동안에는 사용할 수 없음"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"버튼을 탭하여 확대/축소"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"화면을 빠르게 확대하여 콘텐츠를 더 크게 표시합니다."</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;확대하는 방법:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 바로가기를 사용하여 확대를 시작합니다.&lt;br/&gt; {1,number,integer}. 화면을 탭합니다.&lt;br/&gt; {2,number,integer}. 두 손가락으로 드래그하여 화면을 움직입니다.&lt;br/&gt; {3,number,integer}. 두 손가락을 모아서 배율을 조정합니다.&lt;br/&gt; {4,number,integer}. 바로가기를 사용하여 확대를 멈춥니다.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;일시적으로 확대하는 방법:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 확대 유형이 전체 화면으로 설정되어 있어야 합니다.&lt;br/&gt; {1,number,integer}. 바로가기를 사용하여 확대를 시작합니다.&lt;br/&gt; {2,number,integer}. 화면 아무 곳이나 길게 터치합니다.&lt;br/&gt; {3,number,integer}. 손가락으로 드래그하여 화면을 움직입니다.&lt;br/&gt; {4,number,integer}. 손가락을 떼어 확대를 멈춥니다."</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;확대하는 방법:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 단축키를 사용하여 확대를 시작합니다.&lt;br/&gt; {1,number,integer}. 화면을 탭합니다.&lt;br/&gt; {2,number,integer}. 두 손가락으로 드래그하여 화면을 움직입니다.&lt;br/&gt; {3,number,integer}. 두 손가락을 모으거나 벌려서 확대/축소 배율을 조정합니다.&lt;br/&gt; {4,number,integer}. 단축키를 사용해 확대를 멈춥니다.&lt;br/&gt;&lt;br/&gt; 일시적으로 확대하는 등의 작업을 수행할 수도 있습니다."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;확대하는 방법:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 단축키를 사용하여 확대를 시작합니다.&lt;br/&gt; {1,number,integer}. 화면을 탭합니다.&lt;br/&gt; {2,number,integer}. 한 손가락 또는 두 손가락으로 드래그하여 화면을 움직입니다.&lt;br/&gt; {3,number,integer}. 두 손가락을 모으거나 벌려서 확대/축소 배율을 조정합니다.&lt;br/&gt; {4,number,integer}. 단축키를 사용해 확대를 멈춥니다.&lt;br/&gt;&lt;br/&gt; 일시적으로 확대하는 등의 작업을 수행할 수도 있습니다."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"확대 기능을 사용 설정하면 화면을 확대할 수 있습니다.\n\n"<b>"화면을 확대하려면"</b>" 확대 기능을 시작한 다음 화면에서 아무 곳이나 탭합니다.\n"<ul><li>"스크롤하려면 2개 이상의 손가락으로 드래그합니다."</li>\n<li>"확대/축소 수준을 조정하려면 2개 이상의 손가락을 모읍니다."</li></ul>\n\n<b>"화면을 일시적으로 확대하려면"</b>" 확대를 시작한 다음 화면에서 아무 곳이나 길게 터치합니다.\n"<ul><li>"화면에서 이동하려면 드래그합니다."</li>\n<li>"축소하려면 손가락을 뗍니다."</li></ul>\n\n"키보드 또는 탐색 메뉴는 확대할 수 없습니다."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g>페이지 중 <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>페이지"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"접근성 버튼 바로가기"</string>
@@ -3369,7 +3364,7 @@
     <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
     <skip />
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"중요한 사람과 앱의 알림만 받기"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"활동 유형 선택"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"활성화 유형 선택"</string>
     <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"시간"</string>
     <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"예: \"9시 30분부터 오후 5시까지\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"캘린더"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"모드 만들기"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"커스텀"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"방해 요소 제한"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"방해 금지 모드 사용 설정"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"알람 및 미디어 소리 예외"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"일정 설정"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"일정"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g>시간 <xliff:g id="MINUTES">%2$d</xliff:g>분"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"자동으로 사용 설정"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"예약"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"특정 시간 동안 휴대전화 무음 설정"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"방해 금지 모드 규칙 설정"</string>
@@ -3429,7 +3425,7 @@
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"어두운 배경에 밝은 텍스트를 표시하도록 OS와 앱을 전환합니다. 이렇게 하면 눈의 피로도를 낮출 수 있고, 일부 기기에서는 배터리를 크게 절약할 수 있습니다."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{디스플레이 변경사항 없음}=1{{effect_1}}=2{{effect_1} 및 {effect_2}}=3{{effect_1}, {effect_2}, {effect_3}}other{{effect_1}, {effect_2} 외 #개}}"</string>
     <string name="mode_notification_filter_title" msgid="443728483176031977">"방해 금지 필터링"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"방해 금지 필터링 안 함"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"방해 금지 필터링 안함"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"필터링한 알림에 대한 표시 옵션"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"방해 금지 모드 사용 시"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"알림 소리 차단"</string>
@@ -3545,6 +3541,8 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"알림 열기"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"다시 알림 허용"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"앱 아이콘에 알림 표시 점 사용"</string>
+    <!-- no translation found for notification_bundles (3614044525822580826) -->
+    <skip />
     <string name="notification_bubbles_title" msgid="5681506665322329301">"대화창"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"대화창"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"이 대화를 대화창으로 표시"</string>
@@ -3838,6 +3836,8 @@
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"모두"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
     <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"앱에서 무시하도록 허용"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"예외 앱"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"앱 추가 선택"</string>
@@ -4086,7 +4086,7 @@
     <string name="draw_overlay" msgid="7902083260500573027">"다른 앱 위에 표시"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"다른 앱 위에 표시"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"다른 앱 위에 표시 허용"</string>
-    <string name="allow_overlay_description" msgid="1607235723669496298">"이 앱이 사용 중인 다른 앱 위에 표시되도록 허용합니다. 앱에서 내가 탭하는 위치를 확인하고 화면에 표시되는 내용을 변경할 수 있습니다."</string>
+    <string name="allow_overlay_description" msgid="1607235723669496298">"이 앱이 사용 중인 다른 앱 위에 표시되도록 허용합니다. 앱에서 내가 탭하는 위치를 확인하거나 화면에 표시되는 내용을 변경할 수 있습니다."</string>
     <string name="media_routing_control_title" msgid="6402800638960066807">"미디어 출력을 변경하세요"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"앱이 미디어 출력을 전환하도록 허용"</string>
     <string name="allow_media_routing_description" msgid="8343709701298051207">"이 앱이 다른 앱에서 오디오나 동영상을 재생할 연결된 기기를 선택하도록 허용합니다. 허용할 경우, 이 앱은 헤드폰이나 스피커와 같은 사용 가능한 기기의 목록에 액세스하여 오디오 또는 동영상을 스트리밍하거나 전송할 출력 장치를 선택할 수 있습니다."</string>
@@ -4862,8 +4862,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"케이스"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"배터리"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"설정 패널"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"데스크톱 모드 강제 사용"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"보조 디스플레이에서 실험적 데스크톱 모드 강제 사용"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"자유 형식 창 사용"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"자유 형식 창 지원을 사용하도록 설정합니다."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"보조 디스플레이에서 자유 형식 창 모드 사용"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"보조 디스플레이에서만 자유 형식 창을 사용하도록 설정합니다."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"멀티 윈도우에서 크기 조정 불가 앱 사용"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"멀티 윈도우에서 크기 조정 불가 앱 허용"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"강제로 어둡게 재정의"</string>
@@ -4931,17 +4933,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16KB 개발자 옵션을 사용하기 전에 이 기기의 데이터 파티션을 ext4로 변환해야 합니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 16KB 옵션을 활성화하려면 이후에 한 번 더 재부팅해야 합니다. 이 모드에서는 한 번의 재부팅으로 4KB와 16KB 모드 사이를 오가며 전환할 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 기기를 프로덕션 모드로 되돌리려면 4KB 모드로 다시 전환한 후 부트로더를 잠가야 하며, 이렇게 하면 기기가 초기화됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지하세요. 확인 후에는 기기가 완전 삭제되며 파일 시스템이 ext4로 변경됩니다. 이 과정을 완료한 후에는 다시 돌아와 16KB를 사용 설정하세요."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"모든 데이터 삭제"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"데이터 파티션을 ext4로 재포맷하고 완전 삭제할 수 없습니다."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"부트로더를 잠금 해제해야 합니다"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"16KB 개발자 옵션을 사용하려면 이 기기의 부트로더가 잠금 해제되어 있어야 합니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 16KB 모드를 활성화하면 모든 사용자 데이터와 설정이 완전 삭제됩니다. 부트로더가 잠금 해제되고 나서 16KB 옵션을 활성화하려면 두 번 재부팅해야 합니다. 이 모드에서는 한 번의 재부팅으로 4KB와 16KB 모드 사이를 오가며 전환할 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 기기를 프로덕션 모드로 되돌리려면 4KB 모드로 다시 전환한 후 OEM/부트로더로 기기를 잠가 초기화해야 합니다. 부트로더를 잠금 해제한 후 다시 시도해 주세요. &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;에서 방법에 대한 안내를 참고하세요."</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"페이지에 구속받지 않는 4KB 모드 사용"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"현재 페이지에 구속받지 않는 4KB 모드입니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 프로덕션 모드로 다시 들어가려면 기기의 부트로더를 잠가야 합니다. 탭하여 자세히 알아보세요."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"현재 페이지에 구속받지 않는 4KB 모드입니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 프로덕션 모드로 다시 들어가려면 기기의 부트로더를 잠가야 합니다. 이렇게 하면 기기가 다시 초기화되고 프로덕션 설정으로 복원됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지하세요. 기기가 Android로 부팅되지 않거나 불안정한 경우 &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;의 최신 공장 출고 시 이미지로 기기를 다시 플래시하거나 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;을 사용하여 \'Wipe Device\'(기기 완전 삭제), \'Lock Bootloader\'(부트로더 잠금), \'Force Flash all partitions\'(모든 파티션 강제 플래시)를 선택하세요."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"페이지에 구속받지 않는 16KB 모드 사용"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"현재 페이지 크기에 구속받지 않는 16KB 모드입니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 프로덕션 모드로 다시 들어가려면 4KB 모드로 다시 전환한 후 기기의 부트로더를 잠가야 합니다. 탭하여 자세히 알아보세요."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"현재 페이지 크기에 구속받지 않는 16KB 모드입니다. 이 모드에서는 소프트웨어 무결성이 보장되지 않기 때문에 부트로더가 잠금 해제된 상태에서는 휴대전화에 저장된 모든 데이터가 위험에 노출될 수 있습니다. 이 모드에서는 일부 기능이 사용 중지되므로 일부 애플리케이션이 작동하지 않을 수 있습니다. 프로덕션 모드로 다시 들어가려면 4KB 모드로 다시 전환한 후 기기의 부트로더를 잠가야 합니다. 이렇게 하면 기기가 다시 초기화되고 프로덕션 설정으로 복원됩니다. 기기를 Android로 부팅 완료한 후에는 개발자 옵션에서 OEM 잠금 해제를 사용 중지하세요. 기기가 Android로 부팅되지 않거나 불안정한 경우 &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;의 최신 공장 출고 시 이미지로 기기를 다시 플래시하거나 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;을 사용하여 \'기기 완전 삭제\', \'부트로더 잠금\', \'모든 파티션 강제 플래시\'를 선택하세요."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"페이지에 구속받지 않는 16KB 모드"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"자세히 알아보기"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"버그 신고 핸들러"</string>
@@ -5188,8 +5187,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"태블릿이 도킹되었을 때 화면에 표시할 항목을 선택하세요. 화면 보호기를 사용하면 기기에서 더 많은 에너지를 사용할 수 있습니다."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"맞춤설정"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> 맞춤설정"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"자유 형식 지원을 사용 설정하려면 재부팅해야 합니다."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"보조 디스플레이에서 데스크톱 모드를 강제 실행하려면 재부팅해야 합니다."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"레거시 자유 형식 창 모드 지원을 사용하려면 재부팅해야 합니다."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"자유 형식 창 모드 지원을 변경하려면 재부팅해야 합니다."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"보조 디스플레이에서 자유 형식 창 모드를 강제 실행하려면 재부팅해야 합니다."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"지금 재부팅"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"나중에 재부팅"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"공간 음향"</string>

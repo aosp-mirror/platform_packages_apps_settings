@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"മുഖവും <xliff:g id="WATCH">%s</xliff:g> എന്നതും ചേർത്തു"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"മുഖവും ഫിംഗർപ്രിന്റും <xliff:g id="WATCH">%s</xliff:g> എന്നതും ചേർത്തു"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"മുഖവും ഫിംഗർപ്രിന്റുകളും <xliff:g id="WATCH">%s</xliff:g> എന്നതും ചേർത്തു"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"ഐഡന്റിറ്റി പരിശോധന ഓണായിരിക്കുന്നതിനാൽ ഇത് ആവശ്യമാണ്"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"വിദൂര Authenticator അൺലോക്ക്"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"വാച്ച് ചേർത്തു"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"നിങ്ങളുടെ വാച്ച് സജ്ജീകരിക്കൂ"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ഓപ്‌ഷനുകൾ"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ഉപയോഗസഹായി"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ഫിസിക്കൽ കീബോർഡ്"</string>
-    <string name="show_ime" msgid="4334255501724746849">"ഓൺ-സ്‌ക്രീൻ കീബോർഡ് ഉപയോഗിക്കുക"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"ഫിസിക്കൽ കീബോർഡ് സജീവമായിരിക്കുമ്പോൾ സ്ക്രീനിൽ നിലനിർത്തുക"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"ബൗൺസ് കീകൾ"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> മില്ലിസെക്കൻഡിനുള്ളിൽ ഒരേ കീ അതിവേഗം ആവർത്തിച്ച് അമർത്തുന്നത് കീബോർഡ് അവഗണിക്കും"</string>
     <string name="slow_keys" msgid="2891452895499690837">"സ്ലോ കീകൾ"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"എന്തായാലും തുടരുക"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"റദ്ദാക്കുക"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"മാഗ്നിഫിക്കേഷൻ ക്രമീകരണം"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"ഒരു വിരൽ ഉപയോഗിച്ച് മാഗ്നിഫയർ നീക്കുക"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"സ്ക്രീനിലുടനീളം നീങ്ങാൻ ഒരു വിരൽ ഉപയോഗിച്ച് വലിച്ചിടുക"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"ഒരു വിരൽ കൊണ്ട് വലിച്ച് മാഗ്നിഫിക്കേഷൻ ഏരിയ നീക്കുക."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"രണ്ട് വിരലുകൾ കൊണ്ട് വലിച്ച് മാഗ്നിഫിക്കേഷൻ ഏരിയ നീക്കുക."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"സ്ക്രീനിന്റെ ഒരു ഭാഗം മാത്രം വലുതാക്കിയിരിക്കുമ്പോൾ ലഭ്യമല്ല"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"സൂം ചെയ്യുന്നതിന് ബട്ടണിൽ ടാപ്പ് ചെയ്യുക"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"ഉള്ളടക്കം വലുതാക്കാൻ സ്ക്രീനിൽ വേഗത്തിൽ സൂം ഇൻ ചെയ്യുക"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;സൂം ഇൻ ചെയ്യാൻ:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. മാഗ്നിഫിക്കേഷൻ ആരംഭിക്കാൻ കുറുക്കുവഴി ഉപയോഗിക്കുക&lt;br/&gt; {1,number,integer}. സ്ക്രീനിൽ ടാപ്പ് ചെയ്യുക&lt;br/&gt; {2,number,integer}. സ്ക്രീനിലുടനീളം നീക്കാൻ 2 വിരലുകൾ ഉപയോഗിച്ച് വലിച്ചിടുക&lt;br/&gt; {3,number,integer}. സൂം ക്രമീകരിക്കാൻ 2 വിരലുകൾ ഉപയോഗിച്ച് പിഞ്ച് ചെയ്യുക&lt;br/&gt; {4,number,integer}. മാഗ്നിഫിക്കേഷൻ നിർത്താൻ കുറുക്കുവഴി ഉപയോഗിക്കുക&lt;br/&gt;&lt;br/&gt; &lt;b&gt;താൽക്കാലികമായി സൂം ഇൻ ചെയ്യാൻ:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. നിങ്ങളുടെ മാഗ്‌നിഫിക്കേഷൻ തരം പൂർണ്ണ സ്‌ക്രീനിലേക്ക് സജ്ജീകരിച്ചിട്ടുണ്ടെന്ന് ഉറപ്പാക്കുക&lt;br/&gt; {1,number,integer}. മാഗ്നിഫിക്കേഷൻ ആരംഭിക്കാൻ കുറുക്കുവഴി ഉപയോഗിക്കുക&lt;br/&gt; {2,number,integer}. സ്ക്രീനിൽ എവിടെയെങ്കിലും സ്‌പർശിച്ച് പിടിക്കുക&lt;br/&gt; {3,number,integer}. സ്ക്രീനിലുടനീളം നീക്കാൻ വിരൽ ഉപയോഗിച്ച് വലിച്ചിടുക&lt;br/&gt; {4,number,integer}. മാഗ്നിഫിക്കേഷൻ നിർത്താൻ വിരൽ സ്ക്രീനിൽ നിന്ന് എടുക്കുക"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;സൂം ഇൻ ചെയ്യാൻ:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. മാഗ്നിഫിക്കേഷൻ ആരംഭിക്കാൻ കുറുക്കുവഴി ഉപയോഗിക്കുക&lt;br/&gt; {1,number,integer}. സ്ക്രീനിൽ ടാപ്പ് ചെയ്യുക&lt;br/&gt; {2,number,integer}. സ്ക്രീനിലുടനീളം നീക്കാൻ 2 വിരലുകൾ ഉപയോഗിച്ച് വലിച്ചിടുക&lt;br/&gt; {3,number,integer}. സൂം ക്രമീകരിക്കാൻ 2 വിരലുകൾ ഉപയോഗിച്ച് പിഞ്ച് ചെയ്യുക&lt;br/&gt; {4,number,integer}. മാഗ്നിഫിക്കേഷൻ നിർത്താൻ കുറുക്കുവഴി ഉപയോഗിക്കുക&lt;br/&gt;&lt;br/&gt; നിങ്ങൾക്ക് താൽകാലികമായും മറ്റും സൂം ഇൻ ചെയ്യാനും കഴിയും."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;സൂം ഇൻ ചെയ്യാൻ:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. മാഗ്നിഫിക്കേഷൻ ആരംഭിക്കാൻ കുറുക്കുവഴി ഉപയോഗിക്കുക&lt;br/&gt; {1,number,integer}. സ്ക്രീനിൽ ടാപ്പ് ചെയ്യുക&lt;br/&gt; {2,number,integer}. സ്ക്രീനിലുടനീളം നീക്കാൻ 1 അല്ലെങ്കിൽ 2 വിരലുകൾ ഉപയോഗിച്ച് വലിച്ചിടുക&lt;br/&gt; {3,number,integer}. സൂം ക്രമീകരിക്കാൻ 2 വിരലുകൾ ഉപയോഗിച്ച് പിഞ്ച് ചെയ്യുക&lt;br/&gt; {4,number,integer}. മാഗ്നിഫിക്കേഷൻ നിർത്താൻ കുറുക്കുവഴി ഉപയോഗിക്കുക&lt;br/&gt;&lt;br/&gt; നിങ്ങൾക്ക് താൽകാലികമായും മറ്റും സൂം ഇൻ ചെയ്യാനും കഴിയും."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"മാഗ്നിഫിക്കേഷൻ ഓണാക്കിയിരിക്കുമ്പോൾ, നിങ്ങളുടെ സ്‌ക്രീനിൽ സൂം ഇൻ ചെയ്യാവുന്നതാണ്.\n\n"<b>"സൂം ചെയ്യാൻ"</b>", മാഗ്നിഫിക്കേഷൻ ആരംഭിച്ച ശേഷം നിങ്ങളുടെ സ്‌ക്രീനിൽ എവിടെയെങ്കിലും ടാപ്പ് ചെയ്യുക.\n"<ul><li>"സ്‌ക്രോൾ ചെയ്യാൻ രണ്ടോ അതിലധികമോ വിരലുകൾ ഇഴയ്‌ക്കുക"</li>\n<li>"സൂം ക്രമീകരിക്കാൻ രണ്ടോ അതിലധികമോ വിരലുകൾ പിഞ്ച് ചെയ്യുക"</li></ul>\n\n<b>"താൽക്കാലികമായി സൂം ചെയ്യാൻ"</b>", മാഗ്നിഫിക്കേഷൻ ആരംഭിച്ച ശേഷം സ്‌ക്രീനിൽ എവിടെയെങ്കിലും സ്‌പർശിച്ചുപിടിക്കുക.\n"<ul><li>"സ്‌ക്രീനിന് ചുറ്റും നീക്കാൻ വലിച്ചിടുക"</li>\n<li>"സൂം ഔട്ട് ചെയ്യാൻ വിരൽ എടുക്കുക"</li></ul>\n\n"കീബോർഡിലും നാവിഗേഷൻ ബാറിലും നിങ്ങൾക്ക് സൂം ഇൻ ചെയ്യാനാവില്ല."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> പേജുകളിൽ <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>-ാമത്തെ പേജ്"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"ഉപയോഗസഹായി ബട്ടണിന്റെ കുറുക്കുവഴി"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"മോഡ് സൃഷ്ടിക്കുക"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"ഇഷ്‌ടാനുസൃതം"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"തടസ്സങ്ങൾ പരിമിതപ്പെടുത്തുക"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"\'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കുക"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"അലാറങ്ങൾക്കും മീഡിയ ശബ്‌ദങ്ങൾക്കും തടസ്സപ്പെടുത്താൻ കഴിയും"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"ഷെഡ്യൂൾ സജ്ജീകരിക്കുക"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"ഷെഡ്യൂൾ"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> മണിക്കൂർ, <xliff:g id="MINUTES">%2$d</xliff:g> മിനിറ്റ്"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"സ്വയമേവ ഓണാക്കുക"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"ഷെഡ്യൂള്‍‌ ചെയ്യുക"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"ചില സമയങ്ങളിൽ ഫോൺ നിശബ്‌ദമാക്കുക"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\'ശല്യപ്പെടുത്തരുത്\' നിയമങ്ങൾ സജ്ജമാക്കുക"</string>
@@ -3545,6 +3541,8 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"അറിയിപ്പ് തുറക്കുക"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"അറിയിപ്പ് സ്‌നൂസ് ചെയ്യൽ അനുവദിക്കുക"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"ആപ്പ് ഐക്കണിലെ അറിയിപ്പ് ഡോട്ട്"</string>
+    <!-- no translation found for notification_bundles (3614044525822580826) -->
+    <skip />
     <string name="notification_bubbles_title" msgid="5681506665322329301">"ബബിളുകൾ"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ബബിളുകൾ"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"ഈ സംഭാഷണം ബബിൾ ചെയ്യുക"</string>
@@ -3837,6 +3835,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"ഒന്നുമില്ല"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"എല്ലാം"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"അസാധുവാക്കാൻ ആപ്പുകളെ അനുവദിക്കുക"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"തടസ്സപ്പെടുത്താൻ കഴിയുന്ന ആപ്പുകൾ"</string>
@@ -4862,8 +4862,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"കെയ്‌സ്"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ബാറ്ററി"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"ക്രമീകരണ പാനൽ"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"ഡെസ്ക്ടോപ്പ് മോഡിലേക്ക് നിർബന്ധിച്ച് വരുത്തുക"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"ദ്വിതീയ ഡിസ്‌പ്ലേകളിൽ, പരീക്ഷണാത്മക ഡെസ്ക്ടോപ്പ് മോഡിലേക്ക് നിർബന്ധിച്ച് വരുത്തുക"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"ഫ്രീഫോം വിൻഡോകൾ പ്രവർത്തനക്ഷമമാക്കുക"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"ഫ്രീഫോം വിൻഡോകൾക്കുള്ള പിന്തുണ പ്രവർത്തനക്ഷമമാക്കുക."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"സെക്കൻഡ് ഡിസ്പ്ലേയിൽ ഫ്രീഫോം വിൻഡോയിംഗ് സജീവമാക്കൂ"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"സെക്കൻഡറി ഡിസ്പ്ലേയിൽ മാത്രം ഫ്രീഫോം വിൻഡോകൾ പ്രവർത്തനക്ഷമമാക്കൂ."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"വലുപ്പം മാറ്റാനാകാത്തവ മൾട്ടി വിൻഡോയിൽ പ്രവർത്തനക്ഷമമാക്കൂ"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"വലുപ്പം മാറ്റാൻ കഴിയാത്ത ആപ്പുകൾ മൾട്ടി വിൻഡോയിൽ അനുവദിക്കുന്നു"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"നിർബന്ധിത ഡാർക്ക് മോഡ് അസാധുവാക്കുക"</string>
@@ -4931,17 +4933,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16KB ഡെവലപ്പർ ഓപ്‌ഷൻ ഉപയോഗിക്കുന്നതിന് മുമ്പ് ഈ ഉപകരണത്തിന്റെ ഡാറ്റ പാർട്ടീഷൻ ext4 എന്നതിലേക്ക് പരിവർത്തനം ചെയ്യേണ്ടതുണ്ട്. ഈ മോഡിൽ സോഫ്‌റ്റ്‌വെയർ സമഗ്രത സംബന്ധിച്ച് ഉറപ്പ് നൽകാനാകില്ല, കൂടാതെ ബൂട്ട് ലോഡർ അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഫോണിൽ സംഭരിച്ചിരിക്കുന്ന ഏതെങ്കിലും ഡാറ്റ അപകടത്തിലായേക്കാം. 16KB ഓപ്‌ഷൻ സജീവമാക്കുന്നതിന് ഇതിന് ശേഷം ഒരു റീബൂട്ട് കൂടി വേണ്ടി വരും. നിങ്ങൾ ഈ മോഡിൽ ആയിക്കഴിഞ്ഞ്, ഒരു സിംഗിൾ റീബൂട്ടിലൂടെ 4KB, 16KB മോഡുകൾക്കിടയിൽ പരസ്‌പരം മാറാം. ഈ മോഡുകളിൽ ചില ഫീച്ചറുകൾ പ്രവർത്തനരഹിതമാക്കുന്നതിനാൽ, ചില ആപ്പുകൾ പ്രവർത്തിച്ചേക്കില്ല. ഉപകരണത്തെ തിരികെ പ്രൊഡക്ഷൻ മോഡിലേക്ക് മാറ്റുന്നതിന്, നിങ്ങൾ 4KB മോഡിലേക്ക് തിരികെ മാറുകയും ബൂട്ട് ലോഡർ ലോക്ക് ചെയ്യുകയും വേണം, ഇത് ഉപകരണത്തെ ഫാക്‌ടറി റീസെറ്റ് ചെയ്യും. ഉപകരണം വിജയകരമായി Android-ലേക്ക് ബൂട്ട് ചെയ്ത് കഴിഞ്ഞ്, ഡെവലപ്പർ ഓപ്‌ഷനുകളിൽ OEM അൺലോക്ക് ചെയ്യൽ പ്രവർത്തനരഹിതമാക്കുക. സ്ഥിരീകരണത്തിന് ശേഷം ഉപകരണം തുടച്ചുനീക്കുകയും ഫയൽസിസ്‌റ്റം ext4 എന്നതിലേക്ക് മാറ്റുകയും ചെയ്യും. ഇത് പൂർത്തിയായി കഴിഞ്ഞ്, 16KB വീണ്ടും പ്രവർത്തനക്ഷമമാക്കാൻ തിരികെ വരിക."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"എല്ലാ ഡാറ്റയും മായ്ക്കുക"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ഡാറ്റ പാർട്ടീഷൻ ext4 എന്നതിലേക്ക് വീണ്ടും ഫോർമാറ്റ് ചെയ്യാനും തുടച്ചുനീക്കാനും കഴിഞ്ഞില്ല."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"ബൂട്ട് ലോഡർ അൺലോക്ക് ആവശ്യമാണ്"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"16KB ഡെവലപ്പർ ഓപ്‌ഷൻ ഉപയോഗിക്കുന്നതിന് മുമ്പ് ഈ ഉപകരണത്തിന്റെ ബൂട്ട് ലോഡർ അൺലോക്ക് ചെയ്യണം. ഈ മോഡിൽ സോഫ്‌റ്റ്‌വെയർ സമഗ്രത സംബന്ധിച്ച് ഉറപ്പ് നൽകാനാകില്ല, കൂടാതെ ബൂട്ട് ലോഡർ അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഫോണിൽ സംഭരിച്ചിരിക്കുന്ന ഏതെങ്കിലും ഡാറ്റ അപകടത്തിലായേക്കാം. 16KB മോഡ് സജീവമാക്കുമ്പോൾ എല്ലാ ഉപയോക്തൃ ഡാറ്റയും ക്രമീകരണവും തുടച്ചുനീക്കും. ബൂട്ട് ലോഡർ അൺലോക്ക് ചെയ്‌ത് കഴിഞ്ഞ്, 16KB ഓപ്‌ഷൻ സജീവമാക്കുന്നതിന് രണ്ട് റീബൂട്ടുകൾ വേണ്ടി വരും. നിങ്ങൾ ഈ മോഡിൽ ആയിക്കഴിഞ്ഞ്, ഒരു സിംഗിൾ റീബൂട്ടിലൂടെ 4KB, 16KB മോഡുകൾക്കിടയിൽ പരസ്‌പരം മാറാം. ഈ മോഡുകളിൽ ചില ഫീച്ചറുകൾ പ്രവർത്തനരഹിതമാക്കുന്നതിനാൽ, ചില ആപ്പുകൾ പ്രവർത്തിച്ചേക്കില്ല. ഉപകരണത്തെ തിരികെ പ്രൊഡക്ഷൻ മോഡിലേക്ക് മാറ്റുന്നതിന്, നിങ്ങൾ 4KB മോഡിലേക്ക് തിരികെ മാറുകയും OEM/ബൂട്ട് ലോഡർ ലോക്ക് ചെയ്യുകയും വേണം (ഇത് ഉപകരണത്തെ ഫാക്‌ടറി റീസെറ്റ് ചെയ്യും). ബൂട്ട് ലോഡർ അൺലോക്ക് ചെയ്യുക അമർത്തിയ ശേഷം വീണ്ടും ശ്രമിക്കുക. ഇത് എങ്ങനെ ചെയ്യണമെന്നത് സംബന്ധിച്ച നിർദ്ദേശങ്ങൾ at &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; എന്നതിൽ കാണാനാകും"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4KB പേജ്-ആഗ്നോസ്റ്റിക് മോഡ് ഉപയോഗിക്കുന്നു"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"നിങ്ങൾ പേജ്-ആഗ്നോസ്റ്റിക് മോഡിന്റെ 4KB മോഡിലാണ്. ഈ മോഡിൽ സോഫ്‌റ്റ്‌വെയർ സമഗ്രത സംബന്ധിച്ച് ഉറപ്പ് നൽകാനാകില്ല, കൂടാതെ ബൂട്ട് ലോഡർ അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഫോണിൽ സംഭരിച്ചിരിക്കുന്ന ഏതെങ്കിലും ഡാറ്റ അപകടത്തിലായേക്കാം. ഈ മോഡുകളിൽ ചില ഫീച്ചറുകൾ പ്രവർത്തനരഹിതമാക്കുന്നതിനാൽ, ചില ആപ്പുകൾ പ്രവർത്തിച്ചേക്കില്ല. പ്രൊഡക്ഷൻ മോഡിൽ തിരികെ പ്രവേശിക്കുന്നതിന്, നിങ്ങൾ ഉപകരണത്തിന്റെ ബൂട്ട് ലോഡർ ലോക്ക് ചെയ്യണം. കൂടുതൽ വായിക്കാൻ ടാപ്പ് ചെയ്യുക."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"നിങ്ങൾ പേജ്-ആഗ്നോസ്റ്റിക് മോഡിന്റെ 4KB മോഡിലാണ്. ഈ മോഡിൽ സോഫ്‌റ്റ്‌വെയർ സമഗ്രത സംബന്ധിച്ച് ഉറപ്പ് നൽകാനാകില്ല, കൂടാതെ ബൂട്ട് ലോഡർ അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഫോണിൽ സംഭരിച്ചിരിക്കുന്ന ഏതെങ്കിലും ഡാറ്റ അപകടത്തിലായേക്കാം. ഈ മോഡുകളിൽ ചില ഫീച്ചറുകൾ പ്രവർത്തനരഹിതമാക്കുന്നതിനാൽ, ചില ആപ്പുകൾ പ്രവർത്തിച്ചേക്കില്ല. പ്രൊഡക്ഷൻ മോഡിൽ തിരികെ പ്രവേശിക്കുന്നതിന്, നിങ്ങൾ ഉപകരണത്തിന്റെ ബൂട്ട് ലോഡർ ലോക്ക് ചെയ്യണം. ഇത് ഉപകരണത്തെ വീണ്ടും ഫാക്‌ടറി റീസെറ്റ് ചെയ്യുകയും പ്രൊഡക്ഷൻ ക്രമീകരണത്തിലേക്ക് പുനഃസ്ഥാപിക്കുകയും ചെയ്യും. ഉപകരണം വിജയകരമായി Android-ലേക്ക് ബൂട്ട് ചെയ്ത് കഴിഞ്ഞ്, ഡെവലപ്പർ ഓപ്‌ഷനുകളിൽ OEM അൺലോക്ക് ചെയ്യൽ പ്രവർത്തനരഹിതമാക്കുക. ഉപകരണം Android-ലേക്ക് ബൂട്ട് ചെയ്യാനായില്ലെങ്കിലോ അസ്ഥിരമാണെങ്കിലോ, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; എന്നതിൽ നിന്നുള്ള ഏറ്റവും പുതിയ ഫാക്‌ടറി ചിത്രങ്ങൾ ഉപയോഗിച്ച് ഉപകരണം അപ്‌ഡേറ്റ് ചെയ്ത ശേഷം \'ഉപകരണം തുടച്ചുനീക്കുക\', \'ബൂട്ട് ലോഡർ ലോക്ക് ചെയ്യുക\', \'എല്ലാ പാർട്ടീഷനുകളും ഫോഴ്‌സ് ഫ്ലാഷ് ചെയ്യുക\' എന്നതിലേക്ക് പോകുക."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16KB പേജ്-ആഗ്നോസ്റ്റിക് മോഡ് ഉപയോഗിക്കുന്നു"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"നിങ്ങൾ പേജ് വലുപ്പം തിരിച്ചറിയൽ മോഡിന്റെ 16KB മോഡിലാണ്. ഈ മോഡിൽ സോഫ്റ്റ്‌വെയർ സമഗ്രത സംബന്ധിച്ച് ഉറപ്പ് നൽകാനാകില്ല, കൂടാതെ ബൂട്ട് ലോഡർ അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഫോണിൽ സംഭരിച്ചിരിക്കുന്ന ഏതെങ്കിലും ഡാറ്റ അപകടത്തിലായേക്കാം. ഈ മോഡുകളിൽ ചില ഫീച്ചറുകൾ പ്രവർത്തനരഹിതമാക്കുന്നതിനാൽ, ചില ആപ്പുകൾ പ്രവർത്തിച്ചേക്കില്ല. പ്രൊഡക്ഷൻ മോഡിൽ തിരികെ പ്രവേശിക്കുന്നതിന്, നിങ്ങൾ 4KB മോഡിലേക്ക് തിരികെ മാറുകയും ഉപകരണത്തിന്റെ ബൂട്ട് ലോഡർ ലോക്ക് ചെയ്യുകയും വേണം. കൂടുതൽ വായിക്കാൻ ടാപ്പ് ചെയ്യുക."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"നിങ്ങൾ പേജ് വലുപ്പം തിരിച്ചറിയൽ മോഡിന്റെ 16KB മോഡിലാണ്. ഈ മോഡിൽ സോഫ്റ്റ്‌വെയർ സമഗ്രത സംബന്ധിച്ച് ഉറപ്പ് നൽകാനാകില്ല, കൂടാതെ ബൂട്ട് ലോഡർ അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഫോണിൽ സംഭരിച്ചിരിക്കുന്ന ഏതെങ്കിലും ഡാറ്റ അപകടത്തിലായേക്കാം. ഈ മോഡുകളിൽ ചില ഫീച്ചറുകൾ പ്രവർത്തനരഹിതമാക്കുന്നതിനാൽ, ചില ആപ്പുകൾ പ്രവർത്തിച്ചേക്കില്ല. പ്രൊഡക്ഷൻ മോഡിൽ തിരികെ പ്രവേശിക്കുന്നതിന്, നിങ്ങൾ 4KB മോഡിലേക്ക് തിരികെ മാറുകയും ഉപകരണത്തിന്റെ ബൂട്ട് ലോഡർ ലോക്ക് ചെയ്യുകയും വേണം. ഇത് ഉപകരണത്തെ വീണ്ടും ഫാക്‌ടറി റീസെറ്റ് ചെയ്യുകയും പ്രൊഡക്ഷൻ ക്രമീകരണത്തിലേക്ക് പുനഃസ്ഥാപിക്കുകയും ചെയ്യും. ഉപകരണം വിജയകരമായി Android-ലേക്ക് ബൂട്ട് ചെയ്ത് കഴിഞ്ഞ്, ഡെവലപ്പർ ഓപ്ഷനുകളിൽ OEM അൺലോക്ക് ചെയ്യൽ പ്രവർത്തനരഹിതമാക്കുക. ഉപകരണം Android-ലേക്ക് ബൂട്ട് ചെയ്യാനായില്ലെങ്കിലോ അസ്ഥിരമാണെങ്കിലോ, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; -ൽ നിന്നുള്ള ഏറ്റവും പുതിയ ഫാക്ടറി ഇമേജുകൾ ഉപയോഗിച്ച് ഉപകരണം വീണ്ടും ഫ്ലാഷ് ചെയ്യുക അല്ലെങ്കിൽ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ഉപയോഗിക്കുക, തുടർന്ന് \'ഉപകരണം തുടച്ചുനീക്കുക\', \'ബൂട്ട് ലോഡർ ലോക്ക് ചെയ്യുക\', \'എല്ലാ പാർട്ടീഷനുകളും ഫോഴ്‌സ് ഫ്ലാഷ് ചെയ്യുക\' എന്നിവ തിരഞ്ഞെടുക്കുക."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB പേജ്-ആഗ്നോസ്റ്റിക് മോഡ്"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"കൂടുതൽ വായിക്കുക"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"ബഗ് റിപ്പോർട്ട് ഹാൻഡ്‍ലർ"</string>
@@ -5188,8 +5187,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് ഡോക്ക് ചെയ്തിരിക്കുമ്പോൾ സ്ക്രീനിൽ എന്ത് കാണണമെന്ന് തിരഞ്ഞെടുക്കുക. സ്ക്രീൻ സേവർ ഉപയോഗിക്കുമ്പോൾ ഉപകരണം കൂടുതൽ ഊർജ്ജം ഉപയോഗിച്ചേക്കാം."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"ഇഷ്‌ടാനുസൃതമാക്കുക"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> ഇഷ്‌ടാനുസൃതമാക്കുക"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ഫ്രീംഫോം പിന്തുണ പ്രവർത്തനക്ഷമമാക്കാൻ റീബൂട്ട് ചെയ്യേണ്ടതുണ്ട്."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"ദ്വിതീയ ഡിസ്പ്ലേകളെ നിർബന്ധിതമായി ഡെസ്ക്ക്ടോപ്പ് മോഡിലാക്കാൻ റീബൂട്ട് ചെയ്യേണ്ടതുണ്ട്."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"ലെഗസി ഫ്രീഫോം വിൻഡോയിംഗ് പിന്തുണ പ്രവർത്തനക്ഷമമാക്കാൻ റീബൂട്ട് ചെയ്യേണ്ടതുണ്ട്."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"ഫ്രീഫോം വിൻഡോയിംഗ് പിന്തുണ മാറ്റാൻ റീബൂട്ട് ചെയ്യേണ്ടതുണ്ട്."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"സെക്കൻഡറി ഡിസ്പ്ലേകളിൽ ഫ്രീഫോം വിൻഡോയിംഗ് നിർബന്ധമാക്കാൻ റീബൂട്ട് ചെയ്യേണ്ടതുണ്ട്."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"ഇപ്പോൾ റീബൂട്ട് ചെയ്യുക"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"പിന്നീട് റീബൂട്ട് ചെയ്യുക"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"സ്പേഷ്യൽ ഓഡിയോ"</string>
