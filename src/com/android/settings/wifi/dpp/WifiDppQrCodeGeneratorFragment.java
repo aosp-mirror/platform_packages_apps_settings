@@ -44,6 +44,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.chooser.DisplayResolveInfo;
 import com.android.internal.app.chooser.TargetInfo;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.qrcode.QrCodeGenerator;
 
 import com.google.zxing.WriterException;
@@ -69,6 +70,10 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
     @Override
     public int getMetricsCategory() {
+        if (Flags.enableWifiSharingRuntimeFragment()) {
+            return SettingsEnums.SETTINGS_WIFI_DPP_QR_SHARING;
+        }
+
         return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
