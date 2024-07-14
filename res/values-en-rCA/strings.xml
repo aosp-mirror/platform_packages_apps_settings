@@ -410,6 +410,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Face and <xliff:g id="WATCH">%s</xliff:g> added"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Face, fingerprint, and <xliff:g id="WATCH">%s</xliff:g> added"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Face, fingerprints, and <xliff:g id="WATCH">%s</xliff:g> added"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"This is needed since Identity Check is on"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator Unlock"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Watch added"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Set up your watch"</string>
@@ -1911,8 +1912,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibility"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Physical keyboard"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Use on-screen keyboard"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Keep it on screen while physical keyboard is active"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Bounce keys"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"The keyboard ignores quickly repeated presses of the same key within <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Slow keys"</string>
@@ -3353,6 +3352,8 @@
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ON"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Not set"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Disabled"</string>
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Create a mode"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Custom"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limit interruptions"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Turn on Do Not Disturb"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarms and media sounds can interrupt"</string>
@@ -3371,8 +3372,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Set a schedule"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Schedule"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> hr, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Turn on automatically"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Schedule"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silence phone at certain times"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Set Do Not Disturb rules"</string>
@@ -3516,6 +3516,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"open notification"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Allow notification snoozing"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Notification dot on app icon"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Notification bundles"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbles"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bubbles"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Bubble this conversation"</string>
@@ -3805,6 +3806,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"None"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"All"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{No apps can interrupt}=1{{app_1} can interrupt}=2{{app_1} and {app_2} can interrupt}=3{{app_1}, {app_2}, and {app_3} can interrupt}other{{app_1}, {app_2}, and # more can interrupt}}"</string>
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Allow apps to override"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps that can interrupt"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Select more apps"</string>
@@ -4829,8 +4832,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Case"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Battery"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Settings Panel"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Force desktop mode"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Force experimental desktop mode on secondary displays"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Enable freeform windows"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Enable support for freeform windows."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Enable freeform windowing on second display"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Enable freeform windows only on secondary display."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Enable non-resizable in multi window"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Allows non-resizable apps to be in multi window"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Override force-dark"</string>
@@ -4898,17 +4903,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"This device’s data partition needs to be converted to ext4 before using the 16KB developer option. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Activating the 16KB option will require one more reboot after this. Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and then lock the bootloader, which factory resets the device. After the device successfully boots into Android, disable OEM unlocking in Developer options. The device will be wiped and the filesystem will be changed to ext4 after confirmation. After this completes, please come back to enable 16KB again."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Erase all data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Failed to reformat and wipe the data partition to ext4."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Bootloader Unlock Required"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"This device needs to have the bootloader unlocked before using the 16KB developer option. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. All user data and settings will be wiped when activating 16KB mode. Once the bootloader is unlocked, activating the 16KB option will require two reboots. Once you are in this mode, you can switch back and forth between 4KB and 16KB mode with a single reboot. Some features will be disabled in these modes, so some applications may not work. To return the device to production mode, you would need to switch back to 4KB mode and then OEM/bootloader lock (which factory resets) the device. Please unlock the bootloader and try again. You can see instructions for how to do this at &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Using 4KB page-agnostic mode"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"You are in the 4KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must lock the bootloader of the device. Tap to read more."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"You are in the 4KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must lock the bootloader of the device. This would factory reset the device again and restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options. If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Using 16KB page-agnostic mode"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. Tap to read more."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"You are in the 16KB mode of the page-agnostic mode. Software integrity cannot be guaranteed in this mode, and any data stored on the phone while the bootloader is unlocked may be at risk. Some features will be disabled in these modes, so some applications may not work. In order to re-enter the production mode, you must, switch back to 4KB mode and then lock the bootloader of the device. This would factory reset the device again and restore it to production settings. After the device successfully boots into Android, disable OEM unlocking in Developer options. If the device fails to boot into Android or is unstable, re-flash the device with the latest factory images from &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB Page-agnostic Mode"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Read more"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Bug report handler"</string>
@@ -5154,8 +5156,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Choose what you’ll see on your screen when your tablet is docked. Your device may use more energy when a screen saver is used."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Customize"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Customize <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"A reboot is required to enable freeform support."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"A reboot is required to force desktop mode on secondary displays."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"A reboot is required to enable legacy freeform windowing support."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"A reboot is required to change freeform windowing support."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"A reboot is required to force freeform windowing on secondary displays."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reboot now"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reboot later"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Spatial Audio"</string>

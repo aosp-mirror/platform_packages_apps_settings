@@ -31,9 +31,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricManager;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
@@ -102,6 +104,8 @@ public class CombinedBiometricProfileSettingsTest {
     private FaceStatusPreferenceController mFaceStatusPreferenceController;
     @Mock
     private FaceManager mFaceManager;
+    @Mock
+    private BiometricManager mBiometricManager;
 
     @Before
     public void setUp() {
@@ -114,6 +118,10 @@ public class CombinedBiometricProfileSettingsTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mFragment = spy(new TestCombinedBiometricProfileSettings(mContext));
         doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mBiometricManager).when(mActivity).getSystemService(BiometricManager.class);
+        when(mBiometricManager.canAuthenticate(
+                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
 
         ReflectionHelpers.setField(mFragment, "mDashboardFeatureProvider",
                 FakeFeatureFactory.setupForTest().dashboardFeatureProvider);

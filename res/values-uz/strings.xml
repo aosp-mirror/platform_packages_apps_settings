@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Yuz va <xliff:g id="WATCH">%s</xliff:g> qoʻshildi"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Yuz, barmoq izi va <xliff:g id="WATCH">%s</xliff:g> qoʻshildi"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Yuz, barmoq izlari va <xliff:g id="WATCH">%s</xliff:g> qoʻshildi"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Bu shaxsni tasdiqlash yoniqligi uchun talab etiladi"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Masofaviy Authenticator qulfini ochish"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Soat kiritildi"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Soatingizni sozlang"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Variantlar"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Qulayliklar"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Tashqi klaviatura"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Ekrandagi klaviaturadan foydalanish"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Tashqi klaviatura ulanganida ekranda chiqib turadi"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Qayta bosishni nazorat qilish"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms ichida tugmalar takroriy bosilsa, eʼtiborsiz qoldiriladi"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Sekin tugmalar"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Rejim yarating"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Maxsus"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Bildirishnomalarni kamaytirish"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Bezovta qilinmasin rejimini yoqing"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Bezovta qilinmasin rejimi signal va media tovushlari uchun ishlamaydi"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Jadval tuzing"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Jadval"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> soat <xliff:g id="MINUTES">%2$d</xliff:g> daqiqa"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Avtomatik yoqish"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Jadval"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Muayyan vaqtlarda ovozsiz qilish"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Bezovta qilmaslik qoidalari"</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"bildirishnomani ochish"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Bildirishnomalarni keyinga qoldirish"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Ilova belgisi ustida bildirishnoma belgisi"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Bildirishnoma jamlanmalari"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bulutchalar"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bulutchalar"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Bu suhbatni bulutchaga chiqarish"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Hech biri"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Hammasi"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Ilovalarga Bezovta qilinmasin rejimiga amal qilmasligiga ruxsat berish"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Bezovta qilinmasin rejimi ishlamaydigan ilovalar"</string>
@@ -4343,7 +4346,7 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigatsiya rejimi"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2 tugmali navigatsiya"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Bir ilovadan boshqasiga almashish uchun bosh ekran tugmasi ustida tepaga suring. Barcha ilovalarni koʻrish uchun yana tepaga suring. Avvalgi ekranga qaytish uchun esa Orqaga tugmasini bosing."</string>
-    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Xavfsizlik va favqulodda holatlar"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Jismoniy xavfsizlik va favqulodda holatlar"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Favqulodda yordam, tibbiy axborot, ogohlantiruvlar"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Ishorali navigatsiya"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Bosh ekranga qaytish uchun ekranning pastidan tepaga qarab suring. Bir ilovadan boshqasiga oʻtish uchun pastdan tepaga surib, bosib turing va qoʻyib yuboring. Orqaga qaytish uchun chap yoki oʻng burchakdan teskari tomonga suring."</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Quvvatlash gʻilofi"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batareya"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Sozlamalar paneli"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Desktop rejimini majburiy ochish"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Ikkilamchi displeylarda tajribaviy desktop rejimini majburiy ochish"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Erkin shakldagi oynalarni yoqish"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Erkin shakldagi oynalar uchun dastaklashni yoqish"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Ikkinchi ekranda erkin shakldagi oynalarni yoqish"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Faqat ikkinchi ekranda erkin shakldagi oynalarni yoqish"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Koʻp oynali hajmi oʻzgarmas ilovalarni yoqish"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Hajmi oʻzgarmas ilovalar koʻp oynali rejimda ochilishiga ruxsat beradi."</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Tungi mavzuni yoqish ustidan yozadi"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16KB dasturchi variantidan foydalanishdan oldin ushbu qurilmaning maʼlumotlar boʻlimi ext4 tizimiga oʻgirilishi kerak. Ushbu rejimda dasturning yaxlitligini kafolatlab boʻlmaydi va bootloader qulfdan chiqarilganda telefonda saqlangan har qanday maʼlumotlar xavf ostida qolishi mumkin. 16 KB rejim faollashtirilgandan keyin yana bir marta qayta yoqishni talab qiladi. Ushbu rejimga almashtirganingizdan keyin bir marta qayta yoqish bilan 4 KB va 16 KB rejimlari orasida almashtirishingiz mumkin. Ayrim funksiyalar bu rejimlarda faolsizlantiriladi, shu sababdan ayrim ilovalar ishlamasligi mumkin. Qurilmani ishchi rejimiga qaytarish uchun siz 4 KB rejimiga qaytishingiz va qurilmani zavod sozlamalariga qaytaradigan bootloaderni qulflashingiz kerak. Qurilma Android tizimiga muvaffaqiyatli yuklangandan keyin Dasturchi sozlamalarida OEM qulfini ochish funksiyasini faolsizlantiring. Tasdiqlangandan keyin qurilma tozalanadi va fayl ext4 tizimiga oʻzgartiriladi. Buni tugatgandan keyin 16 KB rejimni qayta yoqish uchun qaytib keling."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Hamma narsani tozalash"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ext4 tizimida qayta formatlanmadi va axborot segmentlari tozalanmadi."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Bootloader qulfini ochish zarur"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"16 KB dasturchi variantidan foydalanishdan oldin bu qurilma bootloaderni qulfdan chiqarishi kerak. Ushbu rejimda dasturning yaxlitligini kafolatlab boʻlmaydi va bootloader qulfdan chiqarilganda telefonda saqlangan har qanday maʼlumotlar xavf ostida qolishi mumkin. 16 KB rejimi faollashtirilganda barcha foydalanuvchi maʼlumotlari va sozlamalari tozalab tashlanadi. Bootloader qulfdan chiqarilgandan keyin 16 KB rejimni faollashtirish uchun ikki marta qayta yoqish kerak boʻladi. Ushbu rejimga almashtirganingizdan keyin bir marta qayta yoqish bilan 4 KB va 16 KB rejimlari orasida almashtirishingiz mumkin. Ayrim funksiyalar bu rejimlarda faolsizlantiriladi, shu sababdan ayrim ilovalar ishlamasligi mumkin. Qurilmani ishchi rejimiga qaytarish uchun siz 4 KB rejimiga qaytishingiz va qurilmani zavod sozlamalariga qaytaradigan OEM/bootloaderni qulflashingiz kerak. Bootloaderni qulfdan chiqaring va qaytadan urining. Buni qanday qilish haqida koʻrsatmalar bilan &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt; sahifasi orqali tanishib chiqishingiz mumkin."</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Sahifadan mustaqil 4 KB rejimdan foydalanilmoqda"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Siz sahifadan mustaqil 4 KB rejimdasiz. Ushbu rejimda dasturning yaxlitligini kafolatlab boʻlmaydi va bootloader qulfdan chiqarilganda telefonda saqlangan har qanday maʼlumotlar xavf ostida qolishi mumkin. Ayrim funksiyalar bu rejimlarda faolsizlantiriladi, shu sababdan ayrim ilovalar ishlamasligi mumkin. Ishchi rejimiga qayta kirish uchun qurilmaning bootloaderini qulflashingiz kerak. Batafsil axborot olish uchun bosing."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Siz sahifadan mustaqil 4 KB rejimdasiz. Ushbu rejimda dasturning yaxlitligini kafolatlab boʻlmaydi va bootloader qulfdan chiqarilganda telefonda saqlangan har qanday maʼlumotlar xavf ostida qolishi mumkin. Ayrim funksiyalar bu rejimlarda faolsizlantiriladi, shu sababdan ayrim ilovalar ishlamasligi mumkin. Ishchi rejimiga qayta kirish uchun qurilmaning bootloaderini qulflashingiz kerak. Bu qurilmani zavod sozlamalariga qaytaradi va uni ishchi sozlamalariga qaytaradi. Qurilma Android tizimiga muvaffaqiyatli yuklangandan keyin Dasturchi sozlamalarida OEM qulfini ochish funksiyasini faolsizlantiring. Agar qurilma Android tizimiga yuklanmasa yoki barqaror ishlamasa, qurilmani eng oxirgi dasturning asl tasvirini &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; orqali olib qayta yuklang yoki &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ishlating va “Qurilmani tozalash”, “Bootloaderni qulflash” va “Barcha boʻlimlarni majburiy fleshlash” bandlarini tanlang."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Sahifadan mustaqil 16 KB rejimdan foydalanilmoqda"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Siz sahifadan mustaqil 16 KB rejimdasiz. Ushbu rejimda dasturning yaxlitligini kafolatlab boʻlmaydi va bootloader qulfdan chiqarilganda telefonda saqlangan har qanday maʼlumotlar xavf ostida qolishi mumkin. Ayrim funksiyalar bu rejimlarda faolsizlantiriladi, shu sababdan ayrim ilovalar ishlamasligi mumkin. Ishchi rejimiga qayta kirish uchun siz 4 KB rejimiga qaytishingiz va keyin qurilmaning bootloaderini qulflashingiz kerak. Batafsil axborot olish uchun bosing."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Siz sahifadan mustaqil 16 KB rejimdasiz. Ushbu rejimda dasturning yaxlitligini kafolatlab boʻlmaydi va bootloader qulfdan chiqarilganda telefonda saqlangan har qanday maʼlumotlar xavf ostida qolishi mumkin. Ayrim funksiyalar bu rejimlarda faolsizlantiriladi, shu sababdan ayrim ilovalar ishlamasligi mumkin. Ishchi rejimiga qayta kirish uchun siz 4 KB rejimiga qaytishingiz va keyin qurilmaning bootloaderini qulflashingiz kerak. Bu qurilmani zavod sozlamalariga qaytaradi va uni ishchi sozlamalariga qaytaradi. Qurilma Android tizimiga muvaffaqiyatli yuklangandan keyin Dasturchi sozlamalarida OEM qulfini ochish funksiyasini faolsizlantiring. Agar qurilma Android tizimiga yuklanmasa yoki barqaror ishlamasa, qurilmani eng oxirgi dasturning asl tasvirini &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; orqali olib qayta yuklang yoki &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ishlating va “Qurilmani tozalash”, “Bootloaderni qulflash” va “Barcha boʻlimlarni majburiy fleshlash” bandlarini tanlang."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 KB sahifadan mustaqil rejim"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Batafsil"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Xatoliklarni xabar qilish vositasi"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Planshet dokka joylanganda ekranda nima chiqishini tanlang. Ekranda lavhasi chiqsa, qurilmangiz koʻproq quvvat sarflashi mumkin."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Moslash"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Moslash: <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Erkin shakllarni yoqish uchun qayta ishga tushirish zarur."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Ikkilamchi displeylar majburan ish stoli rejimida ishlashi uchun qayta ishga tushirish zarur."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Eskirgan erkin shakldagi oynalarni dastaklashni yoqish uchun qayta yoqish talab etiladi."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Erkin shakldagi oynalarni dastaklashni oʻzgartirish uchun qayta yoqish talab etiladi."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"Erkin shakldagi oynalarni ikkilamchi displeylarda majburan ochish uchun qayta yoqish talab etiladi."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Hozir qayta ishga tushirish"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Keyinroq qayta ishga tushirish"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Qamrovli ovoz"</string>

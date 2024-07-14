@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Déverrouillage par reconnaissance faciale et la <xliff:g id="WATCH">%s</xliff:g> ajouté"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Visage, empreinte digitale et <xliff:g id="WATCH">%s</xliff:g> ajoutés"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Visage, empreintes digitales et <xliff:g id="WATCH">%s</xliff:g> ajoutés"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Cette action est nécessaire, car la vérification de l\'identité est activée"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Déblocage de l\'authentificateur distant"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Montre ajoutée"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configurer votre montre"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibilité"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Clavier physique"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Utiliser le clavier à l\'écran"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Afficher le clavier virtuel même lorsque le clavier physique est actif"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Touches à rebonds"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"Le clavier ignore les frappes rapides et consécutives d\'une même touche dans un intervalle de <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Touches lentes"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuer"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Annuler"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Paramètres d\'agrandissement"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"Déplacer la loupe avec un doigt"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"Faites glisser un doigt pour vous déplacer sur l\'écran."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Déplacez la zone d\'agrandissement en faisant glisser un doigt sur cette dernière."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Déplacez la zone d\'agrandissement en faisant glisser deux doigts sur cette dernière."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Indisponible lors de l\'agrandissement d\'une partie de l\'écran uniquement"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Appuyer sur un bouton pour zoomer"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Faites un zoom avant rapide sur l\'écran pour agrandir le contenu"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Pour faire un zoom avant :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour démarrer l\'agrandissement&lt;br/&gt; {1,number,integer}. Appuyez sur l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour vous déplacer sur l\'écran&lt;br/&gt; {3,number,integer}. Pincez avec deux doigts pour régler le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pour faire un zoom avant temporaire :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Assurez-vous que le type d\'agrandissement est défini sur plein écran&lt;br/&gt; {1,number,integer}. Utilisez le raccourci pour démarrer l\'agrandissement&lt;br/&gt; {2,number,integer}. Appuyez de manière prolongée n\'importe où sur l\'écran&lt;br/&gt; {3,number,integer}. Faites glisser un doigt pour vous déplacer sur l\'écran&lt;br/&gt; {4,number,integer}. Relevez le doigt pour arrêter l\'agrandissement"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Pour faire un zoom avant :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour agrandir&lt;br/&gt; {1,number,integer}. Appuyez sur l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour vous déplacer sur l\'écran&lt;br/&gt; {3,number,integer}. Pincez avec les deux doigts pour régler le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter de zoomer&lt;br/&gt;&lt;br/&gt; Vous pouvez également faire un zoom avant temporaire, et plus encore."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Pour faire un zoom avant :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour agrandir&lt;br/&gt; {1,number,integer}. Appuyez sur l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser un ou deux doigts pour vous déplacer sur l\'écran&lt;br/&gt; {3,number,integer}. Pincez avec les deux doigts pour régler le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter de zoomer&lt;br/&gt;&lt;br/&gt; Vous pouvez également faire un zoom avant temporaire, et plus encore."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Lorsque l\'option \"Agrandissement\" est activée, vous pouvez effectuer un zoom avant sur votre écran.\n\n"<b>"Pour zoomer"</b>", activez l\'option \"Agrandissement\", puis appuyez n\'importe où sur l\'écran.\n"<ul><li>"Pour faire défiler l\'écran, faites glisser deux doigts ou plus dessus."</li>\n<li>"Pour régler le niveau de zoom, pincez l\'écran avec deux doigts ou plus."</li></ul>\n\n<b>"Pour faire un zoom temporaire"</b>", lancez l\'option \"Agrandissement\", puis appuyez de manière prolongée n\'importe où sur l\'écran.\n"<ul><li>"Pour vous déplacer sur l\'écran, faites glisser un doigt dessus."</li>\n<li>"Pour faire un zoom arrière, relevez le doigt."</li></ul>\n\n"Il est impossible de faire un zoom avant sur le clavier ni sur la barre de navigation."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> sur <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Raccourci du bouton Accessibilité"</string>
@@ -2232,14 +2227,14 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"En savoir plus sur le bouton et le geste d\'accessibilité"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilisation du bouton Accessibilité. Geste indisponible avec la navigation à trois boutons."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accès rapide aux fonctionnalités d\'accessibilité"</string>
-    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Pour démarrer&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Accédez aux paramètres d\'accessibilité&lt;br/&gt; {1,number,integer}. Sélectionnez une fonctionnalité et appuyez sur le raccourci&lt;br/&gt; {2,number,integer}. Précisez si vous souhaitez utiliser un bouton ou un geste pour accéder au paramètre&lt;br/&gt;."</string>
+    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Pour démarrer&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Accédez aux paramètres d\'accessibilité&lt;br/&gt; {1,number,integer}. Sélectionnez une fonctionnalité et appuyez sur le raccourci&lt;br/&gt; {2,number,integer}. Précisez si vous souhaitez utiliser un bouton ou un geste pour accéder au paramètre&lt;br/&gt;"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Pour démarrer&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Accédez aux paramètres d\'accessibilité&lt;br/&gt; {1,number,integer}. Sélectionnez une fonctionnalité et appuyez sur le raccourci&lt;br/&gt; {2,number,integer}. Choisissez le bouton pour accéder à cette fonctionnalité&lt;br/&gt;."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Utiliser bouton ou geste"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Position"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Taille"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Disparaît s\'il n\'est pas utilisé"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Disparaît après quelques secondes pour que vous puissiez mieux voir l\'écran"</string>
-    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparent s\'il n\'est pas utilisé"</string>
+    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparence quand il n\'est pas utilisé"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Transparent"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Opaque"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texte avec contraste élevé"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Créer un mode"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Personnalisé"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limiter les interruptions"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Activer le mode Ne pas déranger"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Les alarmes et les sons des contenus multimédias peuvent interrompre le mode Ne pas déranger"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Définir une programmation"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programmation"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Activer automatiquement"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programme"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Tél. en silence à certains moments"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Définir les règles du mode Ne pas déranger"</string>
@@ -3545,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"Ouvrir la notification"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Autoriser la mise en attente des notifications"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Pastille de notification sur l\'icône de l\'application"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Groupes de notifications"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bulles"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bulles"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Afficher cette conversation sous forme de bulle"</string>
@@ -3837,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Aucune"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Toutes"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Autoriser des applications à ignorer ce mode"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Applis qui peuvent interrompre"</string>
@@ -4862,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Étui de transport"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batterie"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panneau des paramètres"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Forcer le mode ordinateur"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Forcer le mode ordinateur expérimental sur les écrans secondaires"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Activer les fenêtres de forme libre"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Permet d\'activer la compatibilité avec les fenêtres de forme libre."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Activer le fenêtrage de forme libre sur l\'écran secondaire"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Permet d\'activer les fenêtres de forme libre sur l\'écran secondaire uniquement."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Activer les applis non redimensionnables en mode multifenêtre"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Autoriser le mode multifenêtre pour les applis non redimensionnables"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Forcer l\'activation du thème sombre"</string>
@@ -4931,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"La partition des données de cet appareil doit être convertie en ext4 avant d\'utiliser l\'option 16 kB pour les développeurs. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toute donnée stockée sur le téléphone alors que le bootloader est déverrouillé peut être exposée à un risque. L\'activation du mode 16 kB nécessitera un ou plusieurs redémarrages après cette opération. Une fois que vous êtes dans ce mode, vous pouvez passer du mode 4 kB au mode 16 kB et inversement par le biais d\'un seul redémarrage. Certaines fonctionnalités seront désactivées dans ces modes, et certaines applications sont susceptibles de ne pas fonctionner. Pour remettre l\'appareil en mode Production, il vous faut repasser en mode 4 kB, puis verrouiller le bootloader, ce qui rétablit la configuration d\'usine de l\'appareil. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage OEM dans les Options pour les développeurs. Après confirmation, l\'appareil sera nettoyé et le système de fichiers sera remplacé par ext4. Une fois cette opération terminée, revenez pour repasser en mode 16 kB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Effacer les données"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Échec du reformatage et de l\'effacement de la partition de données vers ext4."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Nécessite le déverrouillage du bootloader"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Le bootloader de cet appareil doit être déverrouillé pour pouvoir utiliser l\'option 16 kB pour les développeurs. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toute donnée stockée sur le téléphone alors que le bootloader est déverrouillé peut être exposée à un risque. L\'ensemble des données et paramètres de l\'utilisateur seront effacés après l\'activation du mode 16 kB. Une fois le bootloader déverrouillé, l\'activation du mode 16 kB nécessitera deux redémarrages. Une fois que vous êtes dans ce mode, vous pouvez passer du mode 4 kB au mode 16 kB et inversement par le biais d\'un seul redémarrage. Certaines fonctionnalités seront désactivées dans ces modes, et certaines applications sont susceptibles de ne pas fonctionner. Pour remettre l\'appareil en mode Production, il vous faut repasser en mode 4 kB, puis verrouiller l\'OEM/le bootloader (ce qui rétablit la configuration d\'usine de l\'appareil). Verrouillez le bootloader, puis réessayez. Vous trouverez des instructions pour vous aider à réaliser cette opération à l\'adresse &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Utilisation du mode agnostique de page mémoire 4 kB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Vous utilisez le mode 4 kB du mode agnostique de page mémoire. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toute donnée stockée sur le téléphone alors que le bootloader est déverrouillé peut être exposée à un risque. Certaines fonctionnalités seront désactivées dans ces modes, et certaines applications sont susceptibles de ne pas fonctionner. Pour repasser en mode Production, vous devez verrouiller le bootloader de l\'appareil. Appuyez ici pour en savoir plus."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Vous utilisez le mode 4 kB du mode agnostique de page mémoire. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toute donnée stockée sur le téléphone alors que le bootloader est déverrouillé peut être exposée à un risque. Certaines fonctionnalités seront désactivées dans ces modes, et certaines applications sont susceptibles de ne pas fonctionner. Pour repasser en mode Production, vous devez verrouiller le bootloader de l\'appareil. Cela permet de rétablir la configuration d\'usine de l\'appareil à nouveau et d\'en rétablir les paramètres de production. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage OEM dans les Options pour les développeurs. Si l\'appareil ne parvient pas à démarrer sous Android ou s\'il est instable, flashez de nouveau l\'appareil à l\'aide des dernières images d\'usine disponibles à l\'adresse &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou utilisez &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; et sélectionnez \"Nettoyer l\'appareil\", \"Verrouiller le bootloader\", puis \"Forcer le flash de l\'ensemble des partitions\"."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Utilisation du mode agnostique de page mémoire 16 kB"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Vous utilisez le mode 16 Ko du mode agnostique de page mémoire. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toute donnée stockée sur le téléphone alors que le bootloader est déverrouillé peut être exposée à un risque. Certaines fonctionnalités seront désactivées dans ces modes, et certaines applications sont susceptibles de ne pas fonctionner. Pour remettre l\'appareil en mode Production, vous devez repasser au mode 4 Ko, puis verrouiller le bootloader de l\'appareil. Appuyez ici pour en savoir plus."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Vous utilisez le mode 16 Ko du mode agnostique de page mémoire. L\'intégrité du logiciel ne peut pas être garantie dans ce mode, et toute donnée stockée sur le téléphone alors que le bootloader est déverrouillé peut être exposée à un risque. Certaines fonctionnalités seront désactivées dans ces modes, et certaines applications sont susceptibles de ne pas fonctionner. Pour remettre l\'appareil en mode Production, vous devez repasser au mode 4 Ko, puis verrouiller le bootloader de l\'appareil. Cela permet de rétablir la configuration d\'usine de l\'appareil à nouveau et d\'en rétablir les paramètres de production. Une fois que l\'appareil a bien démarré sous Android, désactivez le déverrouillage OEM dans les Options pour les développeurs. Si l\'appareil ne parvient pas à démarrer sous Android ou s\'il est instable, flashez de nouveau l\'appareil à l\'aide des dernières images d\'usine disponibles à l\'adresse &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou utilisez &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; et sélectionnez \"Nettoyer l\'appareil\", \"Verrouiller le bootloader\", puis \"Forcer le flash de l\'ensemble des partitions\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Mode agnostique de page mémoire 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Lire la suite"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gestionnaire de rapport de bug"</string>
@@ -5188,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Choisissez le contenu à afficher à l\'écran quand la tablette est sur la station d\'accueil. Votre appareil peut consommer plus d\'énergie quand un économiseur d\'écran est utilisé."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personnaliser"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personnaliser <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Un redémarrage est nécessaire pour activer la prise en charge du format libre."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Un redémarrage est nécessaire pour forcer le mode bureau sur les écrans secondaires."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Un redémarrage est nécessaire pour activer la prise en charge de l\'ancienne fonctionnalité de fenêtrage de forme libre."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Un redémarrage est nécessaire pour modifier la prise en charge du fenêtrage de forme libre."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"Un redémarrage est nécessaire pour forcer le fenêtrage de forme libre sur les écrans secondaires."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Redémarrer maintenant"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Redémarrer plus tard"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Son spatial"</string>
