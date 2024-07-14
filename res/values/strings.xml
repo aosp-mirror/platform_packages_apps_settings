@@ -4501,6 +4501,14 @@
     <string name="pointer_fill_style_pink_button">Change pointer fill style to pink</string>
     <!-- Content description for blue pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_blue_button">Change pointer fill style to blue</string>
+    <!-- Title text for mouse pointer stroke style. [CHAR LIMIT=35] -->
+    <string name="pointer_stroke_style">Pointer stroke style</string>
+    <!-- White value for pointer stroke style. [CHAR LIMIT=35] -->
+    <string name="pointer_stroke_style_name_white">White</string>
+    <!-- Black value pointer stroke style. [CHAR LIMIT=35] -->
+    <string name="pointer_stroke_style_name_black">Black</string>
+    <!-- None value for pointer stroke style. [CHAR LIMIT=35] -->
+    <string name="pointer_stroke_style_name_none">None</string>
     <!-- Title for the button to trigger the 'touch gesture' education. [CHAR LIMIT=35] -->
     <string name="trackpad_touch_gesture">Learn touchpad gestures</string>
     <!-- Search keywords for "touchpad" -->
@@ -8043,8 +8051,11 @@
     <!-- Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_delete">Delete</string>
 
+    <!-- Priority Modes: Menu option for renaming a mode on its configuration page [CHAR LIMIT=40] -->
+    <string name="zen_mode_menu_rename_mode">Rename</string>
+
     <!-- Do not disturb: Menu option for deleting a mode on its configuration page [CHAR LIMIT=40] -->
-    <string name="zen_mode_menu_delete_mode">Delete mode</string>
+    <string name="zen_mode_menu_delete_mode">Delete</string>
 
     <!-- Do not disturb: Confirmation dialog asking the user whether they would like to delete the named mode [CHAR LIMIT: 40] -->
     <string name="zen_mode_delete_mode_confirmation">Delete \"<xliff:g id="mode" example="My Schedule">%1$s</xliff:g>\" mode?</string>
@@ -8114,6 +8125,14 @@
     <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_device_effects_title">Additional actions</string>
 
+    <!-- Summary for the Sound Do not Disturb option when DND isn't currently on. [CHAR LIMIT=NONE]-->
+    <string name="modes_sound_summary_off">
+        {count, plural,
+        =0    {Off}
+        =1    {Off / 1 mode can turn on automatically}
+        other {Off / # modes can turn on automatically}
+        }
+    </string>
 
     <!-- Do not disturb: display settings title [CHAR LIMIT=80] -->
     <string name="mode_display_settings_title">Display settings</string>
@@ -9328,8 +9347,6 @@
     <string name="zen_mode_apps_priority_apps">Selected apps</string>
     <!-- [CHAR LIMIT=60] Zen mode settings: no apps will be able to bypass dnd -->
     <string name="zen_mode_apps_none_apps">None</string>
-    <!-- [CHAR LIMIT=60] Zen mode settings: all apps will be able to bypass dnd -->
-    <string name="zen_mode_apps_all_apps">All</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Lists apps that can bypass DND. For example, "Nest, Messages, and 2 more can interrupt". -->
     <string name="zen_mode_apps_subtext">
         {count, plural, offset:2
@@ -9443,14 +9460,17 @@
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
     <string name="zen_mode_summary_always">Change to always interrupt</string>
 
-    <!-- [CHAR LIMIT=20] Caption of the action button to change the name of a mode. -->
-    <string name="zen_mode_action_change_name">Rename</string>
+    <!-- Priority Modes: Title for the "rename mode" screen [CHAR LIMIT=20] -->
+    <string name="zen_mode_rename_title">Edit mode</string>
 
-    <!-- [CHAR LIMIT=20] Caption of the action button to change the icon of a mode. -->
-    <string name="zen_mode_action_change_icon">Change icon</string>
+    <!-- Priority Modes: Title for the "add mode" screen [CHAR LIMIT=20] -->
+    <string name="zen_mode_new_custom_title">Add mode</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Title for the "choose mode icon" screen -->
-    <string name="zen_mode_icon_picker_title">Change icon</string>
+    <!-- Priority Modes: Default name for new custom modes [CHAR LIMIT=30] -->
+    <string name="zen_mode_new_custom_default_name">Custom mode</string>
+
+    <!-- Priority Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
+    <string name="zen_mode_edit_name_hint">Mode name</string>
 
     <!-- Content description for help icon button [CHAR LIMIT=20] -->
     <string name="warning_button_text">Warning</string>
@@ -13469,6 +13489,10 @@
     <string name="live_caption_disabled">Off</string>
     <!-- Summary of the Live Caption enabled state. -->
     <string name="live_caption_enabled">On</string>
+    <!-- State description for the Audio Balance seek bar, with left reported before right. -->
+    <string name="audio_seek_bar_state_left_first">Audio %1$d%% left, %2$d%% right</string>
+    <!-- State description for the Audio Balance seek bar, with right reported before left. -->
+    <string name="audio_seek_bar_state_right_first">Audio %1$d%% right, %2$d%% left</string>
 
     <!--  Warning text about the visibility of device name. [CHAR LIMIT=NONE] -->
     <string name="about_phone_device_name_warning">Your device name is visible to apps you installed. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot.</string>

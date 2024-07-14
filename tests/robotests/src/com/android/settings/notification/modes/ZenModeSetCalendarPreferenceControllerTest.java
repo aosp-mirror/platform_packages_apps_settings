@@ -39,6 +39,7 @@ import androidx.preference.DropDownPreference;
 import androidx.preference.PreferenceCategory;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
