@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Üz və <xliff:g id="WATCH">%s</xliff:g> əlavə edilib"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Üz, barmaq izi və <xliff:g id="WATCH">%s</xliff:g> əlavə edilib"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Üz, barmaq izləri və <xliff:g id="WATCH">%s</xliff:g> əlavə edilib"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Kimlik yoxlanışı aktiv olduğu üçün lazımdır"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Uzaqdan doğrulayıcı kilidaçması"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Saat əlavə edildi"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Saatı ayarlayın"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Seçimlər"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Əlçatımlıq"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fiziki klaviatura"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Ekran klaviaturası istifadə edin"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Fiziki klaviatura aktiv olanda görünsün"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Sıçrama düymələri"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"Klaviatura <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms ərzində eyni düymənin tez-tez basılmasını nəzərə almır"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Asta düymələr"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Yenə də davam edin"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Ləğv edin"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Böyütmə ayarları"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"1 barmaq ilə böyüdücünü hərəkət etdirin"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"Ekranda hərəkət üçün 1 barmağı sürüşdürün"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Bir barmaqla sürüşdürməklə böyütmə sahəsini hərəkət etdirin."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"İki barmaqla sürüşdürməklə böyütmə sahəsini hərəkət etdirin."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Yalnız ekranın bir hissəsini böyüdərkən əlçatan deyil"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Yaxınlaşdırmaq üçün düyməyə klikləyin"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Məzmunu böyütmək üçün ekranı sürətlə yaxınlaşdırın"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Yaxınlaşdırmaq üçün:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Böyütməyə başlamaq üçün qısayoldan istifadə edin&lt;br/&gt; {1,number,integer}. Ekrana toxunun&lt;br/&gt; {2,number,integer}. Ekranın ətrafında hərəkət etmək üçün 2 barmağınızı sürüşdürün&lt;br/&gt; {3,number,integer}. Miqyası tənzimləmək üçün 2 barmaqla yaxınlaşdırıb-uzaqlaşdırın&lt;br/&gt; {4,number,integer}. Böyütməni dayandırmaq üçün qısayoldan istifadə edin&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Müvəqqəti böyütmək üçün:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Böyütmə növünün tam ekrana ayarlandığına əmin olun&lt;br/&gt; {1,number,integer}. Böyütməyə başlamaq üçün qısayoldan istifadə edin&lt;br/&gt; {2,number,integer}. Ekranın istənilən yerinə toxunub saxlayın&lt;br/&gt; {3,number,integer}. Ekranın ətrafında hərəkət etmək üçün barmağınızı sürüşdürün&lt;br/&gt; {4,number,integer}. Böyütməni dayandırmaq üçün barmağınızı qaldırın"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Yaxınlaşdırmaq üçün:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Böyütməyə başlamaq üçün qısayoldan istifadə edin&lt;br/&gt; {1,number,integer}. Ekrana toxunun&lt;br/&gt; {2,number,integer}. Ekranda hərəkət etmək üçün 2 barmağı sürüşdürün&lt;br/&gt; {3,number,integer}. Miqyası tənzimləmək üçün 2 barmaqla yaxınlaşdırıb-uzaqlaşdırın&lt;br/&gt; {4,number,integer}. Böyütməni dayandırmaq üçün qısayoldan istifadə edin&lt;br/&gt;&lt;br/&gt; Həmçinin müvəqqəti böyüdə və s. əməliyyatları edə bilərsiniz."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Yaxınlaşdırmaq üçün:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Böyütməyə başlamaq üçün qısayoldan istifadə edin&lt;br/&gt; {1,number,integer}. Ekrana toxunun&lt;br/&gt; {2,number,integer}. Ekranda hərəkət etmək üçün 1 və ya 2 barmağı sürüşdürün&lt;br/&gt; {3,number,integer}. Miqyası tənzimləmək üçün 2 barmaqla yaxınlaşdırıb-uzaqlaşdırın&lt;br/&gt; {4,number,integer}. Böyütməni dayandırmaq üçün qısayoldan istifadə edin&lt;br/&gt;&lt;br/&gt; Həmçinin müvəqqəti böyüdə və s. əməliyyatları edə bilərsiniz."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Böyütmə aktiv edildikdə ekranda yaxınlaşdıra bilərsiniz.\n\n"<b>"Miqyası dəyişmək üçün"</b>" böyütməni başlatdıqdan sonra ekranda istənilən yerə toxunun.\n"<ul><li>"Sürüşdürmək üçün ən azı 2 barmağınızla çəkin"</li>\n<li>"Miqyası tənzimləmək üçün ən azı 2 barmağınızla sürüşdürərək yaxınlaşdırın"</li></ul>\n\n<b>"Miqyası müvəqqəti dəyişmək üçün"</b>" böyütməni başladıb ekranda istənilən yerə basın &amp; saxlayın.\n"<ul><li>"Ekranda hərəkət etmək üçün çəkin"</li>\n<li>"Uzaqlaşdırmaq üçün barmağınızı qaldırın"</li></ul>\n\n"Klaviatura və ya naviqasiya panelində yaxınlaşdıra bilməzsiniz."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Səhifə <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Xüsusi imkanlar düyməsi qısayolu"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Rejim yaradın"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Fərdi"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Kəsintiləri məhdudlaşdırın"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"\"Narahat Etməyin\" rejimini aktiv edin"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Siqnallar və media səsləri narahat edə bilər"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Cədvəl ayarlayın"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Cədvəl"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> saat <xliff:g id="MINUTES">%2$d</xliff:g> dəq"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Avtomatik yandırın"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Rutin"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Müəyyən vaxtlarda telefonu səssiz edin"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\"Narahat etməyin\" qaydaları ayarlayın"</string>
@@ -3545,6 +3541,8 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"bildirişi açın"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Bildirişin ertələnməsinə icazə verin"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Tətbiq ikonunda bildiriş nöqtəsi"</string>
+    <!-- no translation found for notification_bundles (3614044525822580826) -->
+    <skip />
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Köpüklər"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Köpüklər"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Söhbət üzə çıxsın"</string>
@@ -3837,6 +3835,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Heç biri"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Hamısı"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Tətbiqlərin rejimdən imtina etməsinə icazə verin"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Narahat etmiş sayılmayan tətbiqlər"</string>
@@ -4862,8 +4862,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Qutu"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batareya"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Ayarlar Paneli"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Masaüstü rejiminə keçid məcburi olsun"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Əlavə ekranlarda masaüstünün eksperimental rejiminə keçid məcburi olsun"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"İxtiyari formada pəncərələri aktivləşdirin"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"İxtiyari formada pəncərələr üçün dəstəyi aktivləşdirin."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"İkinci displeydə ixtiyari formada pəncərə imkanı"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"İxtiyari formada pəncərələri yalnız ikinci displeydə aktivləşdirin."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Dəyişməyən miqyas çoxpəncərəli rejimdə açılsın"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Miqyası dəyişməyən tətbiqləri çoxpəncərəli rejimdə açır"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"icbari qaranlıq rejim etibarsız edilsin"</string>
@@ -4931,17 +4933,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"16KB developer seçimindən istifadə etməzdən əvvəl bu cihazın data bölməsi ext4-ə çevrilməlidir. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. 16 KB seçimini aktivləşdirmək üçün bundan sonra daha bir yenidən başlatma tələb ediləcək. Bu rejimdə bir dəfə yenidən başlatma ilə 4KB və 16KB rejimi arasında dəyişə bilərsiniz. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi proqramlar işləməyə bilər. Cihazı istehsal rejiminə qaytarmaq üçün 4KB rejiminə qaytarmalı və sonra yükləyicini kilidləməlisiniz ki, bu da cihazı zavod ayarlarına sıfırlayır. Cihaz Android-ə yükləndikdən sonra Developer seçimlərində OEM kiliddən çıxarılmasını deaktiv edin. Təsdiqdən sonra cihaz datası silinəcək və fayl sistemi ext4-ə dəyişdiriləcək. Bu tamamlandıqdan sonra 16KB-ni yenidən aktivləşdirmək üçün geri qayıdın."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Bütün datanı silin"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Data bölməsini yenidən formatlamaq və ext4-ə ayarlamaq alınmadı."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Yükləyici kilidaçması tələb edilir"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Bu cihaz 16KB developer seçimindən istifadə etməzdən əvvəl yükləyicinin kilidini açmalıdır. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. 16KB rejimi aktivləşdirildikdə bütün istifadəçi datası və ayarları silinəcək. Yükləyici kilidi açıldıqdan sonra 16KB seçimini aktivləşdirmək üçün iki dəfə yenidən başlatma tələb olunacaq. Bu rejimdə bir dəfə yenidən başlatma ilə 4KB və 16KB rejimi arasında dəyişə bilərsiniz. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi proqramlar işləməyə bilər. Cihazı istehsal rejiminə qaytarmaq üçün yenidən 4KB rejiminə keçməli və sonra cihazda OEM/yükləyici kilidləməsi (zavod ayarlarına sıfırlayır) icra etməlisiniz. Yükləyicini kiliddən çıxarın və yenidən cəhd edin. Təlimatlara burada baxa bilərsiniz: &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"4KB səhifə-aqnostik rejimindən istifadə"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Səhifə-aqnostik rejiminin 4KB rejimindəsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi proqramlar işləməyə bilər. İstehsal rejiminə yenidən daxil olmaq üçün cihazın yükləyicisini kilidləməlisiniz. Toxunaraq ətraflı oxuyun."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Səhifə-aqnostik rejiminin 4KB rejimindəsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi proqramlar işləməyə bilər. İstehsal rejiminə yenidən daxil olmaq üçün cihazın yükləyicisini kilidləməlisiniz. Bununla cihaz yenidən zavod ayarlarına qayıdacaq və istehsal ayarları bərpa ediləcək. Cihaz Android-ə yükləndikdən sonra Developer seçimlərində OEM kiliddən çıxarılmasını deaktiv edin. Cihaz Android-ə yüklənmirsə və ya qeyri-sabitdirsə, cihazı buradan əldə edilən ən son fabrik şəkilləri ilə yenidən işə salın: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; yaxud &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; istifadə edin və \"Cihaz datasını silin\", \"Yükləyicini kilidləyin\" və \"Bütün hissələri məcburi yükləyin\" seçin."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"16KB səhifə-aqnostik rejimindən istifadə"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Səhifədən asılı olmayan rejimin 16 KB rejimindəsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi tətbiqlər işləməyə bilər. İstehsal rejiminə yenidən daxil olmaq üçün yenidən 4 KB rejiminə keçməli və sonra cihazın yükləyicisini kilidləməlisiniz. Toxunaraq ətraflı oxuyun."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Səhifədən asılı olmayan rejimin 16 KB rejimindəsiniz. Bu rejimdə proqram təminatının bütövlüyü təmin edilə bilməz və yükləyicinin kilidi açıq halda telefonda saxlanılan data risk altında ola bilər. Bu rejimlərdə bəzi funksiyalar deaktiv ediləcək, buna görə də bəzi tətbiqlər işləməyə bilər. İstehsal rejiminə yenidən daxil olmaq üçün yenidən 4 KB rejiminə keçməli və sonra cihazın yükləyicisini kilidləməlisiniz. Bununla cihaz yenidən zavod ayarlarına qayıdacaq və istehsal ayarları bərpa ediləcək. Cihaz Android-ə yükləndikdən sonra Developer seçimlərində OEM kiliddən çıxarılmasını deaktiv edin. Cihaz Android-ə yüklənmirsə və ya qeyri-sabitdirsə, cihazı buradan əldə edilən ən son fabrik şəkilləri ilə yenidən işə salın: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; yaxud &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; istifadə edin və \"Cihaz datasını silin\", \"Yükləyicini kilidləyin\" və \"Bütün hissələri məcburi yükləyin\" seçin."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB səhifə-aqnostik rejimi"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ətraflı məlumat"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Baq hesabatı idarəedicisi"</string>
@@ -5188,8 +5187,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Planşet doka yerləşdirildikdə ekranda nə görəcəyinizi seçin. Ekran qoruyucusu istifadə edildikdə cihazınız daha çox enerji sərf edə bilər."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Fərdiləşdirin"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Fərdiləşdirin: <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Sərbəst forma dəstəyini aktivləşdirmək üçün yenidən başlatma tələb olunur."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"İkinci dərəcəli displeylərdə masaüstü rejimini məcburi aktiv etmək üçün yenidən başlatma tələb olunur."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Köhnə ixtiyari formada pəncərə dəstəyini aktivləşdirmək üçün yenidən yükləmə tələb olunur."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"İxtiyari formada pəncərə dəstəyini dəyişmək üçün yenidən yükləmə tələb olunur."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"İkinci displeylərdə ixtiyari formada pəncərələri məcbur etmək üçün yenidən yükləmə tələb olunur."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"İndi yenidən başladın"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Sonra yeniden başladın"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Uzaysal Audio"</string>

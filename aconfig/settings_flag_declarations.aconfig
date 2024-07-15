@@ -42,3 +42,10 @@ flag {
     description: "Feature flag to remove relevant slices dependencies."
     bug: "297367302"
 }
+
+flag {
+    name: "support_raw_dynamic_icons"
+    namespace: "android_settings"
+    description: "Flag to gate support of injected preference icons containing raw data"
+    bug: "351884562"
+}

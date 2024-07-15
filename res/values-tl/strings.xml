@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Naidagdag ang mukha at <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Naidagdag ang mukha, fingerprint, at <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Naidagdag ang mukha, mga fingerprint, at <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Kailangan ito dahil naka-on ang Pagsusuri sa Pagkakakilanlan"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator Unlock"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Idinagdag ang relo"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"I-set up ang iyong relo"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Mga Opsyon"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibility"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Aktwal na keyboard"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Gumamit ng on-screen na keyboard"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Panatilihin ito sa screen habang aktibo ang pisikal na keyboard"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Mga bounce key"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"Binabalewala ng keyboard ang mabilis na paulit-ulit na pagpindot sa parehong key sa loob ng <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Mga slow key"</string>
@@ -2130,10 +2129,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Magpatuloy pa rin"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Kanselahin"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Mga setting ng pag-magnify"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"Igalaw ang magnifier gamit ang 1 daliri"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"I-drag ang 1 daliri para gumalaw sa screen"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Galawin ang magnification area sa pag-drag sa 1 daliri."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Galawin ang magnification area sa pag-drag sa 2 daliri."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Hindi available habang naka-magnify ang isang bahagi lang ng screen"</string>
@@ -2157,10 +2154,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Mag-tap ng button upang mag-zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Mabilisang mag-zoom in sa screen para palakihin ang content"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Para mag-zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {1,number,integer}. I-tap ang screen&lt;br/&gt; {2,number,integer}. I-drag ang 2 daliri para gumalaw sa screen&lt;br/&gt; {3,number,integer}. Mag-pinch gamit ang 2 daliri para i-adjust ang pag-zoom&lt;br/&gt; {4,number,integer}. Gamitin ang shortcut para ihinto ang pag-magnify&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Para mag-zoom in nang pansamantala:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Tiyaking nakatakda sa full screen ang iyong uri ng pag-magnify&lt;br/&gt; {1,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {2,number,integer}. Pumindot nang matagal kahit saan sa screen&lt;br/&gt; {3,number,integer}. I-drag ang daliri para gumalaw sa screen&lt;br/&gt; {4,number,integer}. Iangat ang daliri para ihinto ang pag-magnify"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Para mag-zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {1,number,integer}. I-tap ang screen&lt;br/&gt; {2,number,integer}. I-drag ang 2 daliri para gumalaw sa screen&lt;br/&gt; {3,number,integer}. Mag-pinch gamit ang 2 daliri para i-adjust ang pag-zoom&lt;br/&gt; {4,number,integer}. Gumamit ng shortcut para ihinto ang pag-magnify&lt;br/&gt;&lt;br/&gt; Puwede ka ring mag-zoom in pansamantala at higit pa."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Para mag-zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gamitin ang shortcut para simulan ang pag-magnify&lt;br/&gt; {1,number,integer}. I-tap ang screen&lt;br/&gt; {2,number,integer}. I-drag ang 1 o 2 daliri para gumalaw sa screen&lt;br/&gt; {3,number,integer}. Mag-pinch gamit ang 2 daliri para i-adjust ang pag-zoom&lt;br/&gt; {4,number,integer}. Gumamit ng shortcut para ihinto ang pag-magnify&lt;br/&gt;&lt;br/&gt; Puwede ka ring mag-zoom in pansamantala at higit pa."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Kapag naka-on ang pag-magnify, makakapag-zoom in ka sa iyong screen.\n\n"<b>"Para mag-zoom"</b>", simulan ang pag-magnify, pagkatapos ay mag-tap kahit saan sa screen.\n"<ul><li>"Mag-drag ng 2 o higit pang daliri para mag-scroll"</li>\n<li>"Mag-pinch ng 2 o higit pang daliri para isaayos ang pag-zoom"</li></ul>\n\n<b>"Para mag-zoom pansamantala"</b>", simulan ang pag-magnify, pagkatapos ay pumindot nang matagal kahit saan sa screen.\n"<ul><li>"Mag-drag para gumalaw-galaw sa screen"</li>\n<li>"Iangat ang daliri para mag-zoom out"</li></ul>\n\n"Hindi ka makakapag-zoom in sa keyboard o navigation bar."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> sa <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Shortcut ng button ng accessibility"</string>
@@ -3380,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Gumawa ng mode"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Custom"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitahan ang mga pagkaantala"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"I-on ang Huwag Istorbohin"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Puwedeng makaabala ang mga alarm at tunog ng media"</string>
@@ -3400,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Magtakda ng iskedyul"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Iskedyul"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> (na) oras, <xliff:g id="MINUTES">%2$d</xliff:g> (na) minuto"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Awtomatikong i-on"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Iskedyul"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"I-silent ang phone sa ilang panahon"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Magtakda ng mga panuntunan ng Huwag Istorbohin"</string>
@@ -3545,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"buksan ang notification"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Payagan ang pag-snooze ng notification"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Notification dot sa icon ng app"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Mga bundle ng notification"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Mga Bubble"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Mga Bubble"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"I-bubble ang pag-uusap na ito"</string>
@@ -3837,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Wala"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Lahat"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Payagan ang mga app na mag-override"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Mga app na puwedeng umabala"</string>
@@ -4862,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Case"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Baterya"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel ng Mga Setting"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Force desktop mode"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Force experimental desktop mode sa mga pangalawang display"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"I-enable ang mga freeform window"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"I-enable ang suporta para sa mga freeform window."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"I-on ang freeform windowing sa pangalawang display"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Sa pangalawang display lang i-enable ang mga freeform window."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"I-enable ang hindi nare-resize sa multi-window"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Nagpapahintulot sa mga hindi nare-resize na app na lumabas sa multi-window"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"I-override ang force-dark"</string>
@@ -4931,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Kailangang i-convert sa ext4 ang partition ng data ng device na ito bago magamit ang 16KB na opsyon ng developer. Hindi magagarantiya ang integridad ng software, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Kailangan ng isa pang pag-reboot pagkatapos nito para sa pag-activate ng 16KB na opsyon. Kapag nasa mode na ito ka na, puwede kang magpalipat-lipat sa 4KB at 16KB mode pagkatapos ng isang pag-reboot lang. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para ibalik sa production mode ang device, kakailanganin mong bumalik sa 4KB mode at pagkatapos ay i-lock ang bootloader, na magfa-factory reset sa device. Pagkatapos mag-boot ng device sa Android, i-disable ang pag-unlock ng OEM sa Mga opsyon ng developer. Mawa-wipe ang device at gagawing ext4 ang filesystem pagkatapos magkumpirma. Pagkatapos nito, bumalik para i-enable ulit ang 16KB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Burahin ang lahat ng data"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Hindi na-reformat at na-wipe ang partition ng data sa ext4."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Required ang Pag-unlock ng Bootloader"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Kailangang naka-unlock ang bootloader sa device na ito bago magamit ang 16KB na opsyon ng developer. Hindi magagarantiya ang integridad ng software, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Mawa-wipe ang lahat ng data at setting ng user kapag ina-activate ang 16KB mode. Kapag na-unlock na ang bootloader, kailangan ng dalawang pag-reboot para sa pag-activate ng 16KB na opsyon. Kapag nasa mode na ito ka na, puwede kang magpalipat-lipat sa 4KB at 16KB mode pagkatapos ng isang pag-reboot lang. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para ibalik sa production mode ang device, kakailanganin mong bumalik sa 4KB mode at pagkatapos ay i-lock ang OEM/bootloader sa device (na magfa-factory reset nito). I-unlock ang bootloader at subukan ulit. Mahahanap mo ang mga tagubilin kung paano ito gawin sa &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Ginagamit ang 4KB page-agnostic mode"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Nasa 4KB mode ka ng page-agnostic mode. Hindi magagarantiya ang integridad ng software, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para makabalik sa production mode, kailangan mong i-lock ang bootloader ng device. I-tap para magbasa pa."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Nasa 4KB mode ka ng page-agnostic mode. Hindi magagarantiya ang integridad ng software, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para makabalik sa production mode, kailangan mong i-lock ang bootloader ng device. Ifa-factory reset nito ulit ang device at ire-restore ito sa mga setting sa production. Pagkatapos mag-boot ng device sa Android, i-disable ang pag-unlock ng OEM sa Mga opsyon ng developer. Kung hindi magbu-boot sa Android ang device o unstable ito, mag-flash ulit sa device ng mga pinakabagong factory image mula sa &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o gamitin ang &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; at piliin ang \'I-wipe ang Device,\' \'I-lock ang Bootloader,\' at \'Sapilitang I-flash ang lahat ng partition.\'"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Ginagamit ang 16KB page-agnostic mode"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Nasa 16KB mode ka ng page-agnostic mode. Hindi magagarantiya ang integridad ng software sa mode na ito, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para makabalik sa production mode, kailangan mong bumalik sa 4KB mode at pagkatapos ay i-lock ang bootloader ng device. I-tap para magbasa pa."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Nasa 16KB mode ka ng page-agnostic mode. Hindi magagarantiya ang integridad ng software sa mode na ito, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para makabalik sa production mode, kailangan mong bumalik sa 4KB mode at pagkatapos ay i-lock ang bootloader ng device. Ifa-factory reset nito ulit ang device at ire-restore ito sa mga setting sa production. Pagkatapos mag-boot ng device sa Android, i-disable ang OEM na pag-unlock sa Mga opsyon ng developer. Kung hindi magbu-boot sa Android ang device o unstable ito, mag-flash ulit sa device ng mga pinakabagong factory image mula sa &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o gamitin ang &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; at piliin ang \'I-wipe ang Device,\' \'I-lock ang Bootloader,\' at \'Sapilitang I-flash ang lahat ng partition.\'"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB Page-agnostic Mode"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Magbasa pa"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Tagapangasiwa ng ulat ng bug"</string>
@@ -5188,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Piliin ang makikita mo sa iyong screen kapag naka-dock ang iyong tablet. Posibleng gumamit ng mas maraming enerhiya ang iyong device kapag gumagamit ng screen saver."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"I-customize"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"I-customize ang <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Kinakailangang mag-reboot para ma-enable ang freeform na suporta"</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Kinakailangang mag-reboot para sapilitang mailapat ang desktop mode sa mga pangalawang display."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Kailangang mag-reboot para ma-enable ang suporta sa legacy na freeform windowing."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Kailangang mag-reboot para mabago ang suporta sa freeform windowing."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"Kailangang mag-reboot para sapilitang ma-enable ang freeform windowing sa mga pangalawang display."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Mag-reboot ngayon"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Mag-reboot sa ibang pagkakataon"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Spatial Audio"</string>

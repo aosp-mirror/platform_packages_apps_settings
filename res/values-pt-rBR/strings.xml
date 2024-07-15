@@ -411,6 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Rosto e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rosto, impressão digital e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rosto, impressões digitais e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Isso é necessário porque a verificação de identidade está ativada"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Desbloqueio do Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Relógio adicionado"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configurar o relógio"</string>
@@ -615,7 +616,7 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Instale apps"</b>\n"Instale os apps que você quer guardar no seu espaço com privacidade"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Observação importante"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Os apps são interrompidos quando você bloqueia o espaço"</b>\n"Ao bloquear o espaço, os apps nele serão interrompidos e você não vai receber notificações deles"</string>
-    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Os espaços privados não são adequados para apps que precisam ser executados em segundo plano ou enviar notificações importantes, como apps médicos. Isso porque as notificações e atividades em segundo plano são interrompidas quando o espaço é bloqueado.\n\nOs apps no espaço privado não vão aparecer na Gestão de permissões, no painel de privacidade nem em outras configurações quando o espaço estiver bloqueado.\n\nNão é possível transferir seu espaço privado para outro dispositivo. Você precisará configurar um novo espaço privado se quiser usá-lo em outro dispositivo.\n\nCaso alguém conecte seu dispositivo a um computador ou instale apps nocivos nele, essa pessoa poderá ter acesso ao seu espaço privado."</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Os espaços privados não são adequados para apps que precisam ser executados em segundo plano ou enviam notificações importantes, como os que lidam com informações médicas, porque notificações e atividades em segundo plano são interrompidas quando o espaço é bloqueado.\n\nEm um espaço bloqueado, os apps não aparecem na Gestão de permissões, no painel de privacidade e nem em outras configurações.\n\nNão é possível transferir seu espaço privado para outro dispositivo. Você precisará configurar um novo espaço privado se quiser usá-lo em outro dispositivo.\n\nCaso alguém conecte seu dispositivo a um computador ou instale apps nocivos nele, essa pessoa poderá ter acesso ao seu espaço privado."</string>
     <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Os espaços privados não são adequados para apps que precisam ser executados em segundo plano ou enviar notificações importantes, como apps médicos. Isso porque as notificações e atividades em segundo plano são interrompidas quando o espaço é bloqueado.\n\nOs apps no espaço privado não vão aparecer na Gestão de permissões, no painel de privacidade nem em outras configurações quando o espaço estiver bloqueado.\n\nNão é possível restaurar seu espaço privado em outro dispositivo. Você precisará configurar um novo espaço privado se quiser usá-lo em outro dispositivo.\n\nCaso alguém conecte seu dispositivo a um computador ou instale apps maliciosos nele, essa pessoa poderá ter acesso ao seu espaço privado."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Saiba mais sobre o espaço privado"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Isso vai levar alguns instantes"</string>
@@ -1927,8 +1928,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opções"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Acessibilidade"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Usar teclado na tela"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Manter na tela enquanto o teclado físico estiver ativo"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Teclas de filtro"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"O teclado ignora pressionamentos rápidos e repetidos da mesma tecla dentro de <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Teclas lentas"</string>
@@ -3376,6 +3375,8 @@
     <skip />
     <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
     <skip />
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Criar um modo"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Personalizado"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitar interrupções"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Ativar o Não perturbe"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmes e sons de mídia podem interromper"</string>
@@ -3396,8 +3397,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Definir uma programação"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programação"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g>h e <xliff:g id="MINUTES">%2$d</xliff:g>min"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Ativar automaticamente"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programação"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silenciar smartphone em horários específicos"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Definir regras do modo \"Não perturbe\""</string>
@@ -3541,6 +3541,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"abrir notificação"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir adiar notificações"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Ponto de notificação no ícone do app"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Pacotes de notificações"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Balões"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Balões"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Mostrar conversa em um balão"</string>
@@ -3833,6 +3834,8 @@
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Nenhum"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Todos"</string>
     <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <skip />
+    <!-- no translation found for zen_mode_apps_calculating (5420121396943539286) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permitir que apps modifiquem o \"Não perturbe\""</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps que podem fazer interrupções"</string>
@@ -4858,8 +4861,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Estojo"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Bateria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Painel de configurações"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Forçar modo de área de trabalho"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Forçar o modo de área de trabalho experimental em telas secundárias"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Ativar janelas de forma livre"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Permitir compatibilidade com janelas de forma livre"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Permitir janelamento de forma livre na segunda tela"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Permitir janelas de forma livre apenas na tela secundária."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Ativar recursos não redimensionáveis em várias janelas"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permitir que apps não redimensionáveis sejam usados em várias janelas"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Manter o recurso Forçar modo escuro ativado"</string>
@@ -4927,17 +4932,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"A partição de dados deste dispositivo precisa ser convertida em ext4 antes do uso da opção para desenvolvedores de 16 KB. A integridade do software não é garantida nesse modo, e todos os dados armazenados no smartphone enquanto o carregador de inicialização está desbloqueado podem ser expostos a riscos. A ativação da opção de 16 KB exigirá uma segunda reinicialização. Neste modo, você pode alternar entre os modos 4 KB e 16 KB com uma única reinicialização. Como alguns recursos serão desativados nesses modos, alguns aplicativos podem não funcionar. Para voltar o dispositivo ao modo de produção, será necessário voltar para o modo 4 KB e, depois, bloquear o carregador de inicialização, o que redefine o dispositivo para os padrões de fábrica. Depois que o dispositivo for inicializado corretamente no Android, desative o desbloqueio de OEM nas Opções do desenvolvedor. Todos os dados serão excluídos permanentemente do dispositivo, e o sistema de arquivos vai mudar para ext4 após a confirmação. Depois disso, reative o modo 16 KB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Limpar todos os dados"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Falha ao apagar e reformatar a partição de dados para ext4."</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"É necessário desbloquear o carregador de inicialização"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"O carregador de inicialização precisa ser desbloqueado neste dispositivo antes do uso da opção para desenvolvedores de 16 KB. A integridade do software não é garantida nesse modo, e todos os dados armazenados no smartphone enquanto o carregador de inicialização está desbloqueado podem ser expostos a riscos. Todos os dados do usuário e configurações serão apagados permanentemente durante a ativação do modo 16 KB. Após o desbloqueio do carregador de inicialização, a ativação da opção de 16 KB vai exigir duas reinicializações. Neste modo, você pode alternar entre os modos 4 KB e 16 KB com uma única reinicialização. Como alguns recursos serão desativados nesses modos, alguns aplicativos podem não funcionar. Para voltar o dispositivo ao modo de produção, será necessário voltar para o modo 4 KB e, depois, bloquear o carregador de inicialização/OEM, o que redefine o dispositivo para os padrões de fábrica. Desbloqueie o carregador de inicialização e tente de novo. Para conferir instruções de como fazer isso, acesse &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Uso do modo agnóstico de páginas de 4 KB"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Você está no modo agnóstico de páginas de 4 KB. A integridade do software não é garantida nesse modo, e todos os dados armazenados no smartphone enquanto o carregador de inicialização está desbloqueado podem ser expostos a riscos. Como alguns recursos serão desativados nesses modos, alguns aplicativos podem não funcionar. Para entrar de novo no modo de produção, desbloqueie o carregador de inicialização no dispositivo. Toque para ler mais."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Você está no modo agnóstico de páginas de 4 KB. A integridade do software não é garantida nesse modo, e todos os dados armazenados no smartphone enquanto o carregador de inicialização está desbloqueado podem ser expostos a riscos. Como alguns recursos serão desativados nesses modos, alguns aplicativos podem não funcionar. Para entrar de novo no modo de produção, desbloqueie o carregador de inicialização no dispositivo. Essa ação vai redefinir o dispositivo para os padrões de fábrica novamente. Depois que o dispositivo for inicializado corretamente no Android, desative o desbloqueio de OEM nas Opções do desenvolvedor. Se o dispositivo não for inicializado no Android ou estiver instável, atualize-o novamente com as imagens de fábrica mais recentes especificadas em &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e selecione \"Excluir o dispositivo permanentemente\", \"Bloquear carregador de inicialização\" e \"Forçar a atualização de todas as partições\"."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Uso do modo agnóstico de páginas de 16 KB"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Você está no modo agnóstico de páginas de 16 KB. A integridade do software não é garantida nesse modo, e todos os dados armazenados no smartphone enquanto o carregador de inicialização está desbloqueado podem ser expostos a riscos. Como alguns recursos serão desativados nesses modos, alguns aplicativos podem não funcionar. Para entrar de novo no modo de produção, volte para o modo 4 KB e, em seguida, bloqueie o carregador de inicialização no dispositivo. Toque para ler mais."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Você está no modo agnóstico de páginas de 16 KB. A integridade do software não é garantida nesse modo, e todos os dados armazenados no smartphone enquanto o carregador de inicialização está desbloqueado podem ser expostos a riscos. Como alguns recursos serão desativados nesses modos, alguns aplicativos podem não funcionar. Para entrar de novo no modo de produção, volte para o modo 4 KB e, em seguida, bloqueie o carregador de inicialização no dispositivo. Essa ação vai fazer a redefinição de fábrica do dispositivo novamente. Depois que o dispositivo for inicializado corretamente no Android, desative o desbloqueio de OEM nas Opções do desenvolvedor. Se o dispositivo não for inicializado no Android ou estiver instável, atualize-o novamente com as imagens de fábrica mais recentes especificadas em &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e selecione \"Excluir o dispositivo permanentemente\", \"Bloquear carregador de inicialização\" e \"Forçar a atualização de todas as partições\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modo agnóstico de páginas de 16 KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Leia mais"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gerenciador de relatórios de bugs"</string>
@@ -5184,8 +5186,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Escolha o que ver na tela quando o tablet estiver na base. O dispositivo pode consumir mais energia quando o protetor de tela é usado."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizar"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personalizar <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"É necessário reiniciar o dispositivo para ativar o suporte ao formato livre."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"É necessário reiniciar o dispositivo para forçar o modo área de trabalho em telas secundárias."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Uma reinicialização é necessária para ativar a compatibilidade com o janelamento legado de forma livre."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Uma reinicialização é necessária para mudar a compatibilidade com janelamento de forma livre."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"Uma reinicialização é necessária para forçar o janelamento de forma livre em telas secundárias."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reiniciar agora"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reiniciar mais tarde"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Áudio espacial"</string>
