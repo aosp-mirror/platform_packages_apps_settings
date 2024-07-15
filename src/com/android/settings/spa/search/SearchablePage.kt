@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.biometrics2.ui.model
 
-/** Enrolling status message (help or error) */
-class EnrollmentStatusMessage(val msgId: Int, string: CharSequence?) {
+package com.android.settings.spa.search
 
-    /** Status string */
-    val str: CharSequence = string ?: ""
+import android.content.Context
 
-    override fun toString(): String {
-        return "${javaClass.simpleName}@${Integer.toHexString(hashCode())}{id:$msgId, str:$str}"
-    }
+interface SearchablePage {
+
+    /** Gets the searchable titles at the current moment. */
+    fun getSearchableTitles(context: Context): List<String>
 }
