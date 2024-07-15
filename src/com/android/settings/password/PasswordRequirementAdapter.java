@@ -36,6 +36,7 @@ public class PasswordRequirementAdapter extends
 
     private String[] mRequirements;
     private Context mContext;
+    private boolean mIsTooShortError = true;
 
     public PasswordRequirementAdapter(Context context) {
         mContext = context;
@@ -54,8 +55,9 @@ public class PasswordRequirementAdapter extends
         return  mRequirements.length;
     }
 
-    public void setRequirements(String[] requirements) {
+    public void setRequirements(String[] requirements, boolean isPasswordShort) {
         mRequirements = requirements;
+        mIsTooShortError = isPasswordShort;
         notifyDataSetChanged();
     }
 
@@ -74,7 +76,12 @@ public class PasswordRequirementAdapter extends
         final int fontSize = mContext.getResources().getDimensionPixelSize(
                 R.dimen.password_requirement_font_size);
         holder.mDescriptionText.setText(mRequirements[position]);
-        holder.mDescriptionText.setTextAppearance(R.style.ScreenLockPasswordHintTextFontStyle);
+        if (mIsTooShortError) {
+            holder.mDescriptionText.setTextAppearance(R.style.ScreenLockPasswordHintTextFontStyle);
+        } else {
+            holder.mDescriptionText.
+                    setTextAppearance(R.style.ScreenLockPasswordHintTextFontStyleError);
+        }
         holder.mDescriptionText.setTextSize(fontSize / mContext.getResources()
                 .getDisplayMetrics().scaledDensity);
     }
