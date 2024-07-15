@@ -2815,20 +2815,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".biometrics2.ui.view.FingerprintEnrollmentActivity"
-            android:exported="true"
-            android:theme="@style/GlifTheme.Light" />
-
-        <activity android:name=".biometrics2.ui.view.FingerprintEnrollmentActivity$InternalActivity"
-            android:exported="false"
-            android:theme="@style/GlifTheme.Light"
-            android:taskAffinity="com.android.settings.root" />
-
-        <activity android:name=".biometrics2.ui.view.FingerprintEnrollmentActivity$SetupActivity"
-            android:exported="true"
-            android:permission="android.permission.MANAGE_FINGERPRINT"
-            android:theme="@style/GlifTheme.Light" />
-
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroductionInternal"
                   android:exported="false"
                   android:theme="@style/GlifTheme.Light"
