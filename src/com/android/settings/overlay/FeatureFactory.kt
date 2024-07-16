@@ -22,7 +22,6 @@ import com.android.settings.accounts.AccountFeatureProvider
 import com.android.settings.applications.ApplicationFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
-import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
@@ -117,11 +116,6 @@ abstract class FeatureFactory {
      * Retrieves implementation for Fingerprint feature.
      */
     abstract val fingerprintFeatureProvider: FingerprintFeatureProvider
-
-    /**
-     * Gets implementation for Biometrics repository provider.
-     */
-    abstract val biometricsRepositoryProvider: BiometricsRepositoryProvider
 
     /**
      * Gets implementation for the WifiTrackerLib.

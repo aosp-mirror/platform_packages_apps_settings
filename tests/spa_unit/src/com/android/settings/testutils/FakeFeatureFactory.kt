@@ -23,7 +23,6 @@ import com.android.settings.accounts.AccountFeatureProvider
 import com.android.settings.applications.ApplicationFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
-import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
@@ -125,8 +124,6 @@ class FakeFeatureFactory : FeatureFactory() {
     override val faceFeatureProvider: FaceFeatureProvider
         get() = TODO("Not yet implemented")
     override val fingerprintFeatureProvider: FingerprintFeatureProvider
-        get() = TODO("Not yet implemented")
-    override val biometricsRepositoryProvider: BiometricsRepositoryProvider
         get() = TODO("Not yet implemented")
     override val wifiTrackerLibProvider: WifiTrackerLibProvider
         get() = TODO("Not yet implemented")
