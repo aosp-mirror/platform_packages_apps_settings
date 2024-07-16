@@ -213,9 +213,9 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     public abstract boolean isFilterMatched(CachedBluetoothDevice cachedBluetoothDevice);
 
     /**
-     * Return a preference key for logging
+     * Return a preference key prefix for logging
      */
-    protected abstract String getPreferenceKey();
+    protected abstract String getPreferenceKeyPrefix();
 
     /**
      * Update whether to show {@link CachedBluetoothDevice} in the list.
@@ -248,7 +248,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
                     new BluetoothDevicePreference(mPrefContext, cachedDevice,
                             true /* showDeviceWithoutNames */,
                             type);
-            btPreference.setKey(getPreferenceKey());
+            btPreference.setKey(getPreferenceKeyPrefix() + cachedDevice.hashCode());
             btPreference.setOnGearClickListener(mDeviceProfilesListener);
             if (this instanceof Preference.OnPreferenceClickListener) {
                 btPreference.setOnPreferenceClickListener(
