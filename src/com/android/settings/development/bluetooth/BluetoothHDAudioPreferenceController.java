@@ -21,6 +21,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
@@ -36,11 +37,11 @@ public class BluetoothHDAudioPreferenceController extends AbstractBluetoothPrefe
     private static final String KEY = "bluetooth_hd_audio_settings";
     private static final String TAG = "BtHDAudioCtr";
 
-    private final Callback mCallback;
+    @Nullable private final Callback mCallback;
 
     public BluetoothHDAudioPreferenceController(Context context, Lifecycle lifecycle,
                                                 BluetoothA2dpConfigStore store,
-                                                Callback callback) {
+                                                @Nullable Callback callback) {
         super(context, lifecycle, store);
         mCallback = callback;
     }

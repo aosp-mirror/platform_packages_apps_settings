@@ -16,22 +16,23 @@
 
 package com.android.settings.notification.modes;
 
-import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
-import static android.service.notification.ZenPolicy.STATE_ALLOW;
-import static android.service.notification.ZenPolicy.STATE_UNSET;
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenDeviceEffects;
-import android.service.notification.ZenPolicy;
+
 import androidx.preference.TwoStatePreference;
+
+import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -62,15 +63,11 @@ public final class ZenModeDisplayEffectPreferenceControllerTest {
     @Test
     public void testUpdateState_grayscale() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(true).build())
-                        .setDeviceEffects(new ZenDeviceEffects.Builder()
-                                .setShouldDisplayGrayscale(true)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldDisplayGrayscale(true)
+                        .build())
+                .build();
 
         ZenModeDisplayEffectPreferenceController controller =
                 new ZenModeDisplayEffectPreferenceController(
@@ -84,15 +81,11 @@ public final class ZenModeDisplayEffectPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_grayscale() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowAlarms(false).build())
-                        .setDeviceEffects(new ZenDeviceEffects.Builder()
-                                .setShouldDisplayGrayscale(true)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldDisplayGrayscale(true)
+                        .build())
+                .build();
 
         ZenModeDisplayEffectPreferenceController controller =
                 new ZenModeDisplayEffectPreferenceController(mContext, "effect_greyscale", mBackend);
@@ -103,22 +96,18 @@ public final class ZenModeDisplayEffectPreferenceControllerTest {
 
         ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
         verify(mBackend).updateMode(captor.capture());
-        assertThat(captor.getValue().getRule().getDeviceEffects().shouldDisplayGrayscale())
+        assertThat(captor.getValue().getDeviceEffects().shouldDisplayGrayscale())
                 .isFalse();
     }
 
     @Test
     public void testUpdateState_aod() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowMedia(true).build())
-                        .setDeviceEffects(new ZenDeviceEffects.Builder()
-                                .setShouldSuppressAmbientDisplay(true)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldSuppressAmbientDisplay(true)
+                        .build())
+                .build();
 
         ZenModeDisplayEffectPreferenceController controller =
                 new ZenModeDisplayEffectPreferenceController(mContext, "effect_aod", mBackend);
@@ -131,15 +120,11 @@ public final class ZenModeDisplayEffectPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_aod() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowMedia(false).build())
-                        .setDeviceEffects(new ZenDeviceEffects.Builder()
-                                .setShouldSuppressAmbientDisplay(true)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldSuppressAmbientDisplay(true)
+                        .build())
+                .build();
 
         ZenModeDisplayEffectPreferenceController controller =
                 new ZenModeDisplayEffectPreferenceController(mContext, "effect_aod", mBackend);
@@ -150,22 +135,18 @@ public final class ZenModeDisplayEffectPreferenceControllerTest {
 
         ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
         verify(mBackend).updateMode(captor.capture());
-        assertThat(captor.getValue().getRule().getDeviceEffects().shouldSuppressAmbientDisplay())
+        assertThat(captor.getValue().getDeviceEffects().shouldSuppressAmbientDisplay())
                 .isFalse();
     }
 
     @Test
     public void testUpdateState_wallpaper() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowSystem(true).build())
-                        .setDeviceEffects(new ZenDeviceEffects.Builder()
-                                .setShouldDimWallpaper(true)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldDimWallpaper(true)
+                        .build())
+                .build();
 
         ZenModeDisplayEffectPreferenceController controller =
                 new ZenModeDisplayEffectPreferenceController(
@@ -179,15 +160,11 @@ public final class ZenModeDisplayEffectPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_wallpaper() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowSystem(false).build())
-                        .setDeviceEffects(new ZenDeviceEffects.Builder()
-                                .setShouldDimWallpaper(true)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldDimWallpaper(true)
+                        .build())
+                .build();
 
         ZenModeDisplayEffectPreferenceController controller =
                 new ZenModeDisplayEffectPreferenceController(
@@ -199,21 +176,17 @@ public final class ZenModeDisplayEffectPreferenceControllerTest {
 
         ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
         verify(mBackend).updateMode(captor.capture());
-        assertThat(captor.getValue().getRule().getDeviceEffects().shouldDimWallpaper()).isFalse();
+        assertThat(captor.getValue().getDeviceEffects().shouldDimWallpaper()).isFalse();
     }
 
     @Test
     public void testUpdateState_darkTheme() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowReminders(true).build())
-                        .setDeviceEffects(new ZenDeviceEffects.Builder()
-                                .setShouldUseNightMode(true)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldUseNightMode(true)
+                        .build())
+                .build();
 
         ZenModeDisplayEffectPreferenceController controller =
                 new ZenModeDisplayEffectPreferenceController(mContext, "effect_dark_theme",
@@ -227,15 +200,11 @@ public final class ZenModeDisplayEffectPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange_darkTheme() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowReminders(false).build())
-                        .setDeviceEffects(new ZenDeviceEffects.Builder()
-                                .setShouldUseNightMode(true)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setDeviceEffects(new ZenDeviceEffects.Builder()
+                        .setShouldUseNightMode(true)
+                        .build())
+                .build();
 
         ZenModeDisplayEffectPreferenceController controller =
                 new ZenModeDisplayEffectPreferenceController(mContext, "effect_dark_theme",
@@ -247,6 +216,6 @@ public final class ZenModeDisplayEffectPreferenceControllerTest {
 
         ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
         verify(mBackend).updateMode(captor.capture());
-        assertThat(captor.getValue().getRule().getDeviceEffects().shouldUseNightMode()).isFalse();
+        assertThat(captor.getValue().getDeviceEffects().shouldUseNightMode()).isFalse();
     }
 }

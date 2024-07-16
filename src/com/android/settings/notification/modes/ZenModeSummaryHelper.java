@@ -15,6 +15,7 @@
  */
 package com.android.settings.notification.modes;
 
+import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_ANYONE;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_IMPORTANT;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_NONE;
@@ -40,10 +41,20 @@ import static android.service.notification.ZenPolicy.VISUAL_EFFECT_STATUS_BAR;
 
 import android.content.Context;
 import android.icu.text.MessageFormat;
+import android.provider.Settings;
 import android.service.notification.ZenDeviceEffects;
+import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
+import android.util.ArrayMap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.text.BidiFormatter;
 
 import com.android.settings.R;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.notification.modes.ZenMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,9 +66,9 @@ import java.util.function.Predicate;
 class ZenModeSummaryHelper {
 
     private final Context mContext;
-    private final ZenModesBackend mBackend;
+    private final ZenHelperBackend mBackend;
 
-    public ZenModeSummaryHelper(Context context, ZenModesBackend backend) {
+    ZenModeSummaryHelper(Context context, ZenHelperBackend backend) {
         mContext = context;
         mBackend = backend;
     }
@@ -182,11 +193,12 @@ class ZenModeSummaryHelper {
     String getDisplayEffectsSummary(ZenMode zenMode) {
         boolean isFirst = true;
         List<String> enabledEffects = new ArrayList<>();
-        if (!zenMode.getPolicy().shouldShowAllVisualEffects()) {
+        if (!zenMode.getPolicy().shouldShowAllVisualEffects()
+                && zenMode.getRule().getInterruptionFilter() != INTERRUPTION_FILTER_ALL) {
             enabledEffects.add(getBlockedEffectsSummary(zenMode));
             isFirst = false;
         }
-        ZenDeviceEffects currEffects =  zenMode.getRule().getDeviceEffects();
+        ZenDeviceEffects currEffects = zenMode.getRule().getDeviceEffects();
         if (currEffects != null) {
             if (currEffects.shouldDisplayGrayscale()) {
                 if (isFirst) {
@@ -397,17 +409,82 @@ class ZenModeSummaryHelper {
     }
 
     /**
-     * Generates a summary to display under the top level "Apps" preference for a mode.
+     * Generates a summary to display under the top level "Apps" preference for a mode, based
+     * on the given mode and provided set of apps.
      */
-    public String getAppsSummary(ZenMode zenMode) {
-        // TODO: b/308819928 - Set summary using priority app list if Selected Apps Chosen.
+    public @NonNull String getAppsSummary(@NonNull ZenMode zenMode,
+            @Nullable List<AppEntry> appsBypassing) {
         if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_PRIORITY) {
-            return mContext.getResources().getString(R.string.zen_mode_apps_priority_apps);
+            return formatAppsList(appsBypassing);
         } else if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_NONE) {
             return mContext.getResources().getString(R.string.zen_mode_apps_none_apps);
-        } else if (zenMode.getPolicy().getAllowedChannels() == ZenMode.CHANNEL_POLICY_ALL) {
-            return mContext.getResources().getString(R.string.zen_mode_apps_all_apps);
         }
         return "";
+    }
+
+    /**
+     * Generates a formatted string declaring which apps can interrupt in the style of
+     * "App, App2, and 4 more can interrupt."
+     * Apps selected for explicit mention are picked in order from the provided list.
+     */
+    @VisibleForTesting
+    public @NonNull String formatAppsList(@Nullable List<AppEntry> appsBypassingDnd) {
+        if (appsBypassingDnd == null) {
+            return mContext.getResources().getString(R.string.zen_mode_apps_priority_apps);
+        }
+        List<String> appNames = appsBypassingDnd.stream().limit(3)
+                .map(app -> {
+                    String appName = BidiFormatter.getInstance().unicodeWrap(app.label);
+                    if (app.isManagedProfile()) {
+                        appName = mContext.getString(R.string.zen_mode_apps_work_app, appName);
+                    }
+                    return appName;
+                })
+                .toList();
+
+        MessageFormat msgFormat = new MessageFormat(
+                mContext.getString(R.string.zen_mode_apps_subtext),
+                Locale.getDefault());
+        Map<String, Object> args = new HashMap<>();
+        args.put("count", appsBypassingDnd.size());
+        if (appNames.size() >= 1) {
+            args.put("app_1", appNames.get(0));
+            if (appNames.size() >= 2) {
+                args.put("app_2", appNames.get(1));
+                if (appNames.size() == 3) {
+                    args.put("app_3", appNames.get(2));
+                }
+            }
+        }
+        return msgFormat.format(args);
+    }
+
+    String getSoundSummary(int zenMode, ZenModeConfig config) {
+        if (zenMode != Settings.Global.ZEN_MODE_OFF) {
+            String description = ZenModeConfig.getDescription(mContext, true, config, false);
+
+            if (description == null) {
+                return mContext.getString(R.string.zen_mode_sound_summary_on);
+            } else {
+                return mContext.getString(R.string.zen_mode_sound_summary_on_with_info,
+                        description);
+            }
+        } else {
+            int count = 0;
+            final ArrayMap<String, ZenModeConfig.ZenRule> ruleMap = config.automaticRules;
+            if (ruleMap != null) {
+                for (ZenModeConfig.ZenRule rule : ruleMap.values()) {
+                    if (rule != null && rule.enabled) {
+                        count++;
+                    }
+                }
+            }
+            MessageFormat msgFormat = new MessageFormat(
+                    mContext.getString(R.string.modes_sound_summary_off),
+                    Locale.getDefault());
+            Map<String, Object> msgArgs = new HashMap<>();
+            msgArgs.put("count", count);
+            return msgFormat.format(msgArgs);
+        }
     }
 }

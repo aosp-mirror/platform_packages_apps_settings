@@ -22,12 +22,15 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -36,6 +39,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
+import android.bluetooth.BluetoothLeBroadcastMetadata;
+import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.BroadcastReceiver;
@@ -75,6 +80,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.truth.Correspondence;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -181,7 +187,7 @@ public class AudioSharingSwitchBarControllerTest {
         doNothing()
                 .when(mAssistant)
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
-        mSwitchBar = new SettingsMainSwitchBar(mContext);
+        mSwitchBar = spy(new SettingsMainSwitchBar(mContext));
         mSwitchBar.setDisabledByAdmin(mock(RestrictedLockUtils.EnforcedAdmin.class));
         mOnAudioSharingStateChanged = false;
         mOnAudioSharingServiceConnected = false;
@@ -205,6 +211,12 @@ public class AudioSharingSwitchBarControllerTest {
                 0 /* containerViewId */,
                 null /* bundle */);
         mController.init(mParentFragment);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowBluetoothUtils.reset();
+        ShadowThreadUtils.reset();
     }
 
     @Test
@@ -258,15 +270,15 @@ public class AudioSharingSwitchBarControllerTest {
     public void onStart_flagOff_doNothing() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStart(mLifecycleOwner);
-        verify(mContext, times(0))
+        verify(mContext, never())
                 .registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class), anyInt());
-        verify(mBroadcast, times(0))
+        verify(mBroadcast, never())
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcast.Callback.class));
-        verify(mAssistant, times(0))
+        verify(mAssistant, never())
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
-        verify(mBtProfileManager, times(0)).addServiceListener(mController);
+        verify(mBtProfileManager, never()).addServiceListener(mController);
     }
 
     @Test
@@ -279,10 +291,10 @@ public class AudioSharingSwitchBarControllerTest {
 
         verify(mContext)
                 .registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class), anyInt());
-        verify(mBroadcast, times(0))
+        verify(mBroadcast, never())
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcast.Callback.class));
-        verify(mAssistant, times(0))
+        verify(mAssistant, never())
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
         verify(mBtProfileManager).addServiceListener(mController);
@@ -305,7 +317,7 @@ public class AudioSharingSwitchBarControllerTest {
         verify(mAssistant)
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
-        verify(mBtProfileManager, times(0)).addServiceListener(mController);
+        verify(mBtProfileManager, never()).addServiceListener(mController);
         assertThat(mSwitchBar.isChecked()).isTrue();
         assertThat(mSwitchBar.isEnabled()).isTrue();
     }
@@ -314,12 +326,12 @@ public class AudioSharingSwitchBarControllerTest {
     public void onStop_flagOff_doNothing() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStop(mLifecycleOwner);
-        verify(mContext, times(0)).unregisterReceiver(any(BroadcastReceiver.class));
-        verify(mBroadcast, times(0))
+        verify(mContext, never()).unregisterReceiver(any(BroadcastReceiver.class));
+        verify(mBroadcast, never())
                 .unregisterServiceCallBack(any(BluetoothLeBroadcast.Callback.class));
-        verify(mAssistant, times(0))
+        verify(mAssistant, never())
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
-        verify(mBtProfileManager, times(0)).removeServiceListener(mController);
+        verify(mBtProfileManager, never()).removeServiceListener(mController);
     }
 
     @Test
@@ -331,9 +343,9 @@ public class AudioSharingSwitchBarControllerTest {
 
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
         verify(mBtProfileManager).removeServiceListener(mController);
-        verify(mBroadcast, times(0))
+        verify(mBroadcast, never())
                 .unregisterServiceCallBack(any(BluetoothLeBroadcast.Callback.class));
-        verify(mAssistant, times(0))
+        verify(mAssistant, never())
                 .unregisterServiceCallBack(any(BluetoothLeBroadcastAssistant.Callback.class));
     }
 
@@ -358,7 +370,7 @@ public class AudioSharingSwitchBarControllerTest {
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mBroadcast.isEnabled(null)).thenReturn(true);
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
-        verify(mBroadcast, times(0)).startPrivateBroadcast();
+        verify(mBroadcast, never()).startPrivateBroadcast();
     }
 
     @Test
@@ -372,7 +384,7 @@ public class AudioSharingSwitchBarControllerTest {
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
         assertThat(mSwitchBar.isChecked()).isFalse();
-        verify(mBroadcast, times(0)).startPrivateBroadcast();
+        verify(mBroadcast, never()).startPrivateBroadcast();
     }
 
     @Test
@@ -407,7 +419,7 @@ public class AudioSharingSwitchBarControllerTest {
         when(mBroadcast.isEnabled(null)).thenReturn(false);
         when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
         mController.onCheckedChanged(mBtnView, /* isChecked= */ false);
-        verify(mBroadcast, times(0)).stopBroadcast(anyInt());
+        verify(mBroadcast, never()).stopBroadcast(anyInt());
     }
 
     @Test
@@ -418,6 +430,38 @@ public class AudioSharingSwitchBarControllerTest {
         doNothing().when(mBroadcast).stopBroadcast(anyInt());
         mController.onCheckedChanged(mBtnView, /* isChecked= */ false);
         verify(mBroadcast).stopBroadcast(1);
+    }
+
+    @Test
+    public void onPlaybackStarted_notInit_noDialog() {
+        FeatureFlagUtils.setEnabled(
+                mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
+        when(mBtnView.isEnabled()).thenReturn(true);
+        when(mAssistant.getDevicesMatchingConnectionStates(
+                        new int[] {BluetoothProfile.STATE_CONNECTED}))
+                .thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        doNothing().when(mBroadcast).startPrivateBroadcast();
+        mController =
+                new AudioSharingSwitchBarController(
+                        mContext,
+                        mSwitchBar,
+                        new AudioSharingSwitchBarController.OnAudioSharingStateChangedListener() {
+                            @Override
+                            public void onAudioSharingStateChanged() {}
+
+                            @Override
+                            public void onAudioSharingProfilesConnected() {}
+                        });
+        mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        verify(mBroadcast).startPrivateBroadcast();
+        mController.mBroadcastCallback.onPlaybackStarted(0, 0);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
+
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).isEmpty();
     }
 
     @Test
@@ -464,5 +508,96 @@ public class AudioSharingSwitchBarControllerTest {
                                 AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
                                         .ordinal(),
                                 1));
+    }
+
+    @Test
+    public void testBluetoothLeBroadcastCallbacks_updateSwitch() {
+        mOnAudioSharingStateChanged = false;
+        mSwitchBar.setChecked(false);
+        when(mBroadcast.isEnabled(any())).thenReturn(false);
+        mController.mBroadcastCallback.onBroadcastStartFailed(/* reason= */ 1);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mSwitchBar.isChecked()).isFalse();
+        assertThat(mOnAudioSharingStateChanged).isFalse();
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_AUDIO_SHARING_START_FAILED,
+                        SettingsEnums.AUDIO_SHARING_SETTINGS);
+
+        when(mBroadcast.isEnabled(any())).thenReturn(true);
+        mController.mBroadcastCallback.onBroadcastStarted(/* reason= */ 1, /* broadcastId= */ 1);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mSwitchBar.isChecked()).isTrue();
+        assertThat(mOnAudioSharingStateChanged).isTrue();
+
+        mOnAudioSharingStateChanged = false;
+        mController.mBroadcastCallback.onBroadcastStopFailed(/* reason= */ 1);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mSwitchBar.isChecked()).isTrue();
+        assertThat(mOnAudioSharingStateChanged).isFalse();
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_AUDIO_SHARING_STOP_FAILED,
+                        SettingsEnums.AUDIO_SHARING_SETTINGS);
+
+        when(mBroadcast.isEnabled(any())).thenReturn(false);
+        mController.mBroadcastCallback.onBroadcastStopped(/* reason= */ 1, /* broadcastId= */ 1);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mSwitchBar.isChecked()).isFalse();
+        assertThat(mOnAudioSharingStateChanged).isTrue();
+    }
+
+    @Test
+    public void testBluetoothLeBroadcastCallbacks_doNothing() {
+        BluetoothLeBroadcastMetadata metadata = mock(BluetoothLeBroadcastMetadata.class);
+        mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, metadata);
+        mController.mBroadcastCallback.onBroadcastUpdated(/* reason= */ 1, /* broadcastId= */ 1);
+        mController.mBroadcastCallback.onPlaybackStarted(/* reason= */ 1, /* broadcastId= */ 1);
+        mController.mBroadcastCallback.onPlaybackStopped(/* reason= */ 1, /* broadcastId= */ 1);
+        mController.mBroadcastCallback.onBroadcastUpdateFailed(
+                /* reason= */ 1, /* broadcastId= */ 1);
+        verify(mSwitchBar, never()).setChecked(anyBoolean());
+        assertThat(mOnAudioSharingStateChanged).isFalse();
+    }
+
+    @Test
+    public void testBluetoothLeBroadcastAssistantCallbacks_logAction() {
+        BluetoothLeBroadcastMetadata metadata = mock(BluetoothLeBroadcastMetadata.class);
+        mController.mBroadcastAssistantCallback.onSourceAddFailed(
+                mDevice1, metadata, /* reason= */ 1);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        mContext,
+                        SettingsEnums.ACTION_AUDIO_SHARING_JOIN_FAILED,
+                        SettingsEnums.AUDIO_SHARING_SETTINGS);
+    }
+
+    @Test
+    public void testBluetoothLeBroadcastAssistantCallbacks_doNothing() {
+        BluetoothLeBroadcastReceiveState state = mock(BluetoothLeBroadcastReceiveState.class);
+        BluetoothLeBroadcastMetadata metadata = mock(BluetoothLeBroadcastMetadata.class);
+
+        // Do nothing
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
+                mDevice1, /* sourceId= */ 1, state);
+        mController.mBroadcastAssistantCallback.onSearchStarted(/* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSearchStartFailed(/* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSearchStopped(/* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSearchStopFailed(/* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceAdded(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceRemoved(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceRemoveFailed(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceModified(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceModifyFailed(
+                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        mController.mBroadcastAssistantCallback.onSourceFound(metadata);
+        mController.mBroadcastAssistantCallback.onSourceLost(/* broadcastId= */ 1);
+        verifyNoMoreInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 }

@@ -28,6 +28,7 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
@@ -59,9 +60,12 @@ public class AudioSharingDialogHandler {
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private List<BluetoothDevice> mTargetSinks = new ArrayList<>();
+    // The target sinks to join broadcast onPlaybackStarted
+    @Nullable private List<BluetoothDevice> mTargetSinks;
+    private boolean mIsStoppingBroadcast = false;
 
-    private final BluetoothLeBroadcast.Callback mBroadcastCallback =
+    @VisibleForTesting
+    final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastStarted(int reason, int broadcastId) {
@@ -76,8 +80,15 @@ public class AudioSharingDialogHandler {
                 @Override
                 public void onBroadcastStartFailed(int reason) {
                     Log.d(TAG, "onBroadcastStartFailed(), reason = " + reason);
-                    AudioSharingUtils.toastMessage(
-                            mContext, "Fail to start broadcast, reason " + reason);
+                    if (mTargetSinks != null) {
+                        mMetricsFeatureProvider.action(
+                                mContext,
+                                SettingsEnums.ACTION_AUDIO_SHARING_START_FAILED,
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
+                        AudioSharingUtils.toastMessage(
+                                mContext, "Fail to start broadcast, reason " + reason);
+                        mTargetSinks = null;
+                    }
                 }
 
                 @Override
@@ -99,13 +110,21 @@ public class AudioSharingDialogHandler {
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
+                    mIsStoppingBroadcast = false;
                 }
 
                 @Override
                 public void onBroadcastStopFailed(int reason) {
                     Log.d(TAG, "onBroadcastStopFailed(), reason = " + reason);
-                    AudioSharingUtils.toastMessage(
-                            mContext, "Fail to stop broadcast, reason " + reason);
+                    if (mIsStoppingBroadcast) {
+                        mMetricsFeatureProvider.action(
+                                mContext,
+                                SettingsEnums.ACTION_AUDIO_SHARING_STOP_FAILED,
+                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
+                        AudioSharingUtils.toastMessage(
+                                mContext, "Fail to stop broadcast, reason " + reason);
+                        mIsStoppingBroadcast = false;
+                    }
                 }
 
                 @Override
@@ -122,7 +141,7 @@ public class AudioSharingDialogHandler {
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
-                    if (!mTargetSinks.isEmpty()) {
+                    if (mTargetSinks != null) {
                         AudioSharingUtils.addSourceToTargetSinks(mTargetSinks, mLocalBtManager);
                         new SubSettingLauncher(mContext)
                                 .setDestination(AudioSharingDashboardFragment.class.getName())
@@ -132,7 +151,7 @@ public class AudioSharingDialogHandler {
                                                         .getMetricsCategory()
                                                 : SettingsEnums.PAGE_UNKNOWN)
                                 .launch();
-                        mTargetSinks = new ArrayList<>();
+                        mTargetSinks = null;
                     }
                 }
 
@@ -201,6 +220,7 @@ public class AudioSharingDialogHandler {
             AudioSharingStopDialogFragment.DialogEventListener listener =
                     () -> {
                         cachedDevice.setActive();
+                        mIsStoppingBroadcast = true;
                         AudioSharingUtils.stopBroadcasting(mLocalBtManager);
                     };
             Pair<Integer, Object>[] eventData =
@@ -238,6 +258,8 @@ public class AudioSharingDialogHandler {
             boolean userTriggered) {
         Map<Integer, List<CachedBluetoothDevice>> groupedDevices =
                 AudioSharingUtils.fetchConnectedDevicesByGroupId(mLocalBtManager);
+        BluetoothDevice btDevice = cachedDevice.getDevice();
+        String deviceAddress = btDevice == null ? "" : btDevice.getAnonymizedAddress();
         if (isBroadcasting) {
             // If another device within the same is already in the sharing session, add source to
             // the device automatically.
@@ -251,10 +273,10 @@ public class AudioSharingDialogHandler {
                 Log.d(
                         TAG,
                         "Automatically add another device within the same group to the sharing: "
-                                + cachedDevice.getDevice().getAnonymizedAddress());
+                                + deviceAddress);
                 if (mAssistant != null && mBroadcast != null) {
                     mAssistant.addSource(
-                            cachedDevice.getDevice(),
+                            btDevice,
                             mBroadcast.getLatestBluetoothLeBroadcastMetadata(),
                             /* isGroupOp= */ false);
                 }
@@ -293,6 +315,7 @@ public class AudioSharingDialogHandler {
                                     cachedDevice,
                                     listener,
                                     eventData);
+                            Log.d(TAG, "Show disconnect dialog, device = " + deviceAddress);
                         });
             } else {
                 // Show audio sharing join dialog when the first or second eligible (LE audio)
@@ -323,9 +346,11 @@ public class AudioSharingDialogHandler {
                                     cachedDevice,
                                     listener,
                                     eventData);
+                            Log.d(TAG, "Show join dialog, device = " + deviceAddress);
                         });
             }
         } else {
+            // Build a list of AudioSharingDeviceItem for connected devices other than cachedDevice.
             List<AudioSharingDeviceItem> deviceItems = new ArrayList<>();
             for (List<CachedBluetoothDevice> devices : groupedDevices.values()) {
                 // Use random device in the group within the sharing session to represent the group.
@@ -338,7 +363,7 @@ public class AudioSharingDialogHandler {
             }
             // Show audio sharing join dialog when the second eligible (LE audio) remote
             // device connect and no sharing session.
-            if (deviceItems.size() == 1) {
+            if (groupedDevices.size() == 2 && deviceItems.size() == 1) {
                 AudioSharingJoinDialogFragment.DialogEventListener listener =
                         new AudioSharingJoinDialogFragment.DialogEventListener() {
                             @Override
@@ -376,16 +401,26 @@ public class AudioSharingDialogHandler {
                             closeOpeningDialogsOtherThan(AudioSharingJoinDialogFragment.tag());
                             AudioSharingJoinDialogFragment.show(
                                     mHostFragment, deviceItems, cachedDevice, listener, eventData);
+                            Log.d(TAG, "Show start dialog, device = " + deviceAddress);
                         });
             } else if (userTriggered) {
                 cachedDevice.setActive();
+                Log.d(TAG, "Set active device = " + deviceAddress);
+            } else {
+                Log.d(TAG, "Fail to handle LE audio device connected, device = " + deviceAddress);
             }
         }
     }
 
     private void closeOpeningDialogsOtherThan(String tag) {
         if (mHostFragment == null) return;
-        List<Fragment> fragments = mHostFragment.getChildFragmentManager().getFragments();
+        List<Fragment> fragments;
+        try {
+            fragments = mHostFragment.getChildFragmentManager().getFragments();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to closeOpeningDialogsOtherThan " + tag + ": " + e.getMessage());
+            return;
+        }
         for (Fragment fragment : fragments) {
             if (fragment instanceof DialogFragment
                     && fragment.getTag() != null
@@ -401,7 +436,13 @@ public class AudioSharingDialogHandler {
     public void closeOpeningDialogsForLeaDevice(@NonNull CachedBluetoothDevice cachedDevice) {
         if (mHostFragment == null) return;
         int groupId = AudioSharingUtils.getGroupId(cachedDevice);
-        List<Fragment> fragments = mHostFragment.getChildFragmentManager().getFragments();
+        List<Fragment> fragments;
+        try {
+            fragments = mHostFragment.getChildFragmentManager().getFragments();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to closeOpeningDialogsForLeaDevice: " + e.getMessage());
+            return;
+        }
         for (Fragment fragment : fragments) {
             CachedBluetoothDevice device = getCachedBluetoothDeviceFromDialog(fragment);
             if (device != null
@@ -418,7 +459,13 @@ public class AudioSharingDialogHandler {
     public void closeOpeningDialogsForNonLeaDevice(@NonNull CachedBluetoothDevice cachedDevice) {
         if (mHostFragment == null) return;
         String address = cachedDevice.getAddress();
-        List<Fragment> fragments = mHostFragment.getChildFragmentManager().getFragments();
+        List<Fragment> fragments;
+        try {
+            fragments = mHostFragment.getChildFragmentManager().getFragments();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to closeOpeningDialogsForNonLeaDevice: " + e.getMessage());
+            return;
+        }
         for (Fragment fragment : fragments) {
             CachedBluetoothDevice device = getCachedBluetoothDeviceFromDialog(fragment);
             if (device != null && address != null && address.equals(device.getAddress())) {

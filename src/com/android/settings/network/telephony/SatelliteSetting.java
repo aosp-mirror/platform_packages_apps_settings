@@ -92,6 +92,14 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         }
 
         mActivity = getActivity();
+
+        mSatelliteManager = mActivity.getSystemService(SatelliteManager.class);
+        if (mSatelliteManager == null) {
+            Log.d(TAG, "SatelliteManager is null, do nothing.");
+            finish();
+            return;
+        }
+
         mSubId = mActivity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
@@ -104,7 +112,6 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         }
 
         mTelephonymanager = mActivity.getSystemService(TelephonyManager.class);
-        mSatelliteManager = mActivity.getSystemService(SatelliteManager.class);
     }
 
     @Override

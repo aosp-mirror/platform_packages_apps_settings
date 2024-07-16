@@ -16,6 +16,10 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 
 import android.app.Activity;
@@ -55,11 +59,11 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
-import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
@@ -101,6 +105,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     protected SettingsMainSwitchPreference mToggleServiceSwitchPreference;
     protected ShortcutPreference mShortcutPreference;
     protected Preference mSettingsPreference;
+    @Nullable protected AccessibilityFooterPreference mHtmlFooterPreference;
     protected AccessibilityFooterPreferenceController mFooterPreferenceController;
     protected String mPreferenceKey;
     protected Dialog mDialog;
@@ -589,25 +594,38 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     }
 
     private void initHtmlTextPreference() {
-        if (TextUtils.isEmpty(mHtmlDescription)) {
+        if (TextUtils.isEmpty(getCurrentHtmlDescription())) {
             return;
         }
         final PreferenceScreen screen = getPreferenceScreen();
-        final CharSequence htmlDescription = Html.fromHtml(mHtmlDescription.toString(),
-                Html.FROM_HTML_MODE_COMPACT, mImageGetter, /* tagHandler= */ null);
 
-        final AccessibilityFooterPreference htmlFooterPreference =
+        mHtmlFooterPreference =
                 new AccessibilityFooterPreference(screen.getContext());
-        htmlFooterPreference.setKey(KEY_HTML_DESCRIPTION_PREFERENCE);
-        htmlFooterPreference.setSummary(htmlDescription);
-        screen.addPreference(htmlFooterPreference);
+        mHtmlFooterPreference.setKey(KEY_HTML_DESCRIPTION_PREFERENCE);
+        updateHtmlTextPreference();
+        screen.addPreference(mHtmlFooterPreference);
 
         // TODO(b/171272809): Migrate to DashboardFragment.
         final String title = getString(R.string.accessibility_introduction_title, mPackageName);
         mFooterPreferenceController = new AccessibilityFooterPreferenceController(
-                screen.getContext(), htmlFooterPreference.getKey());
+                screen.getContext(), mHtmlFooterPreference.getKey());
         mFooterPreferenceController.setIntroductionTitle(title);
         mFooterPreferenceController.displayPreference(screen);
+    }
+
+    protected void updateHtmlTextPreference() {
+        if (mHtmlFooterPreference == null) {
+            return;
+        }
+
+        String description = getCurrentHtmlDescription().toString();
+        final CharSequence htmlDescription = Html.fromHtml(description,
+                Html.FROM_HTML_MODE_COMPACT, mImageGetter, /* tagHandler= */ null);
+        mHtmlFooterPreference.setSummary(htmlDescription);
+    }
+
+    CharSequence getCurrentHtmlDescription() {
+        return mHtmlDescription;
     }
 
     private void initFooterPreference() {
@@ -616,7 +634,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                     getString(R.string.accessibility_introduction_title, mPackageName));
         }
     }
-
 
     /**
      * Creates {@link AccessibilityFooterPreference} and append into {@link PreferenceScreen}
@@ -664,13 +681,13 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         if (value == NOT_SET) {
             final int lastNonEmptyUserShortcutType = getUserPreferredShortcutTypes();
             value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
-                    : UserShortcutType.EMPTY;
+                    : DEFAULT;
         }
 
         mSoftwareTypeCheckBox.setChecked(
-                hasShortcutType(value, UserShortcutType.SOFTWARE));
+                hasShortcutType(value, SOFTWARE));
         mHardwareTypeCheckBox.setChecked(
-                hasShortcutType(value, UserShortcutType.HARDWARE));
+                hasShortcutType(value, HARDWARE));
     }
 
     private int restoreOnConfigChangedValue() {
@@ -692,12 +709,12 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
             return NOT_SET;
         }
 
-        int value = UserShortcutType.EMPTY;
+        int value = DEFAULT;
         if (mSoftwareTypeCheckBox.isChecked()) {
-            value |= UserShortcutType.SOFTWARE;
+            value |= SOFTWARE;
         }
         if (mHardwareTypeCheckBox.isChecked()) {
-            value |= UserShortcutType.HARDWARE;
+            value |= HARDWARE;
         }
         return value;
     }
@@ -717,16 +734,16 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
         final List<CharSequence> list = new ArrayList<>();
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if (hasShortcutType(shortcutTypes, UserShortcutType.QUICK_SETTINGS)) {
+            if (hasShortcutType(shortcutTypes, QUICK_SETTINGS)) {
                 final CharSequence qsTitle = context.getText(
                         R.string.accessibility_feature_shortcut_setting_summary_quick_settings);
                 list.add(qsTitle);
             }
         }
-        if (hasShortcutType(shortcutTypes, UserShortcutType.SOFTWARE)) {
+        if (hasShortcutType(shortcutTypes, SOFTWARE)) {
             list.add(getSoftwareShortcutTypeSummary(context));
         }
-        if (hasShortcutType(shortcutTypes, UserShortcutType.HARDWARE)) {
+        if (hasShortcutType(shortcutTypes, HARDWARE)) {
             final CharSequence hardwareTitle = context.getText(
                     R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
@@ -780,7 +797,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         saveNonEmptyUserShortcutType(value);
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), value, mComponentName);
         AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), ~value, mComponentName);
-        final boolean shortcutAssigned = value != UserShortcutType.EMPTY;
+        final boolean shortcutAssigned = value != DEFAULT;
         mShortcutPreference.setChecked(shortcutAssigned);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
 
@@ -801,7 +818,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
         final int shortcutTypes = AccessibilityUtil.getUserShortcutTypesFromSettings(
                 getPrefContext(), mComponentName);
-        if (shortcutTypes != UserShortcutType.EMPTY) {
+        if (shortcutTypes != DEFAULT) {
             final PreferredShortcut shortcut = new PreferredShortcut(
                     mComponentName.flattenToString(), shortcutTypes);
             PreferredShortcuts.saveUserShortcutType(getPrefContext(), shortcut);
@@ -896,7 +913,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
     @VisibleForTesting
     void saveNonEmptyUserShortcutType(int type) {
-        if (type == UserShortcutType.EMPTY) {
+        if (type == DEFAULT) {
             return;
         }
 
@@ -983,7 +1000,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
      */
     @ShortcutConstants.UserShortcutType
     protected int getDefaultShortcutTypes() {
-        return ShortcutConstants.UserShortcutType.SOFTWARE;
+        return SOFTWARE;
     }
 
     /**

@@ -25,6 +25,7 @@ import android.util.Log;
 import android.widget.SeekBar;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.bluetooth.BluetoothDevicePreference;
@@ -41,7 +42,8 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
 
     private static final String TAG = "AudioSharingDeviceVolumeControlUpdater";
 
-    private static final String PREF_KEY = "audio_sharing_volume_control";
+    @VisibleForTesting
+    static final String PREF_KEY_PREFIX = "audio_sharing_volume_control_";
 
     @Nullable private final LocalBluetoothManager mBtManager;
     @Nullable private final VolumeControlProfile mVolumeControl;
@@ -119,7 +121,7 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
                     new AudioSharingDeviceVolumePreference(mPrefContext, cachedDevice);
             vPreference.initialize();
             vPreference.setOnSeekBarChangeListener(listener);
-            vPreference.setKey(getPreferenceKey());
+            vPreference.setKey(getPreferenceKeyPrefix() + cachedDevice.hashCode());
             vPreference.setIcon(com.android.settingslib.R.drawable.ic_bt_untethered_earbuds);
             vPreference.setTitle(cachedDevice.getName());
             mPreferenceMap.put(device, vPreference);
@@ -128,8 +130,8 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
     }
 
     @Override
-    protected String getPreferenceKey() {
-        return PREF_KEY;
+    protected String getPreferenceKeyPrefix() {
+        return PREF_KEY_PREFIX;
     }
 
     @Override

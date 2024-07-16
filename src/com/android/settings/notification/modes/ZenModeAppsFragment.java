@@ -37,10 +37,6 @@ public class ZenModeAppsFragment extends ZenModeFragmentBase {
                 context, ZenModeAppsPreferenceController.KEY_PRIORITY, mBackend));
         controllers.add(new ZenModeAppsPreferenceController(
                 context, ZenModeAppsPreferenceController.KEY_NONE, mBackend));
-        // TODO: b/308819928 - The manual DND mode cannot have the ALL type;
-        // unify the controllers into one and only create a preference if isManualDnd is false.
-        controllers.add(new ZenModeAppsPreferenceController(
-                context, ZenModeAppsPreferenceController.KEY_ALL, mBackend));
         return controllers;
     }
 
