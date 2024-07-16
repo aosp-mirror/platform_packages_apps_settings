@@ -22,17 +22,22 @@ import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Flags;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
@@ -41,6 +46,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
@@ -58,6 +64,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @RunWith(RobolectricTestRunner.class)
 @EnableFlags(Flags.FLAG_MODES_UI)
@@ -90,13 +97,13 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
                 mZenModesBackend, mHelperBackend);
     }
 
-    private ApplicationsState.AppEntry createAppEntry(String packageName, String label) {
-        ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
-        entry.info = new ApplicationInfo();
-        entry.info.packageName = packageName;
-        entry.label = label;
-        entry.info.uid = 0;
-        return entry;
+    private AppEntry createAppEntry(String packageName, int userId) {
+        ApplicationInfo applicationInfo = new ApplicationInfo();
+        applicationInfo.packageName = packageName;
+        applicationInfo.uid = UserHandle.getUid(userId, new Random().nextInt(100));
+        AppEntry appEntry = new AppEntry(mContext, applicationInfo, 1);
+        appEntry.label = packageName;
+        return appEntry;
     }
 
     private ZenMode createPriorityChannelsZenMode() {
@@ -137,14 +144,52 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
     @Test
     public void testGetAppsBypassingDnd() {
-        ApplicationsState.AppEntry entry = createAppEntry("test", "testLabel");
-        ApplicationsState.AppEntry entryConv = createAppEntry("test_conv", "test_convLabel");
-        List<ApplicationsState.AppEntry> appEntries = List.of(entry, entryConv);
+        ApplicationsState.AppEntry app1 = createAppEntry("app1", mContext.getUserId());
+        ApplicationsState.AppEntry app2 = createAppEntry("app2", mContext.getUserId());
+        List<ApplicationsState.AppEntry> allApps = List.of(app1, app2);
 
         when(mHelperBackend.getPackagesBypassingDnd(mContext.getUserId(),
-                false)).thenReturn(List.of("test"));
+                false)).thenReturn(List.of("app1"));
 
-        assertThat(mController.getAppsBypassingDnd(appEntries)).containsExactly("testLabel");
+        assertThat(mController.getAppsBypassingDndSortedByName(allApps)).containsExactly(app1);
+    }
+
+    @Test
+    public void testGetAppsBypassingDnd_sortsByName() {
+        ApplicationsState.AppEntry appC = createAppEntry("C", mContext.getUserId());
+        ApplicationsState.AppEntry appA = createAppEntry("A", mContext.getUserId());
+        ApplicationsState.AppEntry appB = createAppEntry("B", mContext.getUserId());
+        List<ApplicationsState.AppEntry> allApps = List.of(appC, appA, appB);
+
+        when(mHelperBackend.getPackagesBypassingDnd(eq(mContext.getUserId()), anyBoolean()))
+                .thenReturn(List.of("B", "C", "A"));
+
+        assertThat(mController.getAppsBypassingDndSortedByName(allApps))
+                .containsExactly(appA, appB, appC).inOrder();
+    }
+
+    @Test
+    public void testGetAppsBypassingDnd_withWorkProfile_includesProfileAndSorts() {
+        UserInfo workProfile = new UserInfo(10, "Work Profile", 0);
+        workProfile.userType = UserManager.USER_TYPE_PROFILE_MANAGED;
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        shadowOf(userManager).addProfile(mContext.getUserId(), 10, workProfile);
+
+        ApplicationsState.AppEntry personalCopy = createAppEntry("app", mContext.getUserId());
+        ApplicationsState.AppEntry workCopy = createAppEntry("app", 10);
+        ApplicationsState.AppEntry otherPersonal = createAppEntry("p2", mContext.getUserId());
+        ApplicationsState.AppEntry otherWork = createAppEntry("w2", 10);
+        List<ApplicationsState.AppEntry> allApps = List.of(workCopy, personalCopy, otherPersonal,
+                otherWork);
+
+        when(mHelperBackend.getPackagesBypassingDnd(eq(mContext.getUserId()), anyBoolean()))
+                .thenReturn(List.of("app", "p2"));
+        when(mHelperBackend.getPackagesBypassingDnd(eq(10), anyBoolean()))
+                .thenReturn(List.of("app"));
+
+        // Personal copy before work copy (names match).
+        assertThat(mController.getAppsBypassingDndSortedByName(allApps))
+                .containsExactly(personalCopy, workCopy, otherPersonal).inOrder();
     }
 
     @Test
@@ -156,7 +201,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
         // Create some applications.
         ArrayList<ApplicationsState.AppEntry> appEntries = new ArrayList<>();
-        appEntries.add(createAppEntry("test", "pkgLabel"));
+        appEntries.add(createAppEntry("test", mContext.getUserId()));
 
         when(mHelperBackend.getPackagesBypassingDnd(
                 mContext.getUserId(), false))
@@ -170,7 +215,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
         // Manually triggers the callback that will happen on rebuild.
         mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
-        assertThat(String.valueOf(preference.getSummary())).isEqualTo("pkgLabel can interrupt");
+        assertThat(String.valueOf(preference.getSummary())).isEqualTo("test can interrupt");
     }
 
     @Test
