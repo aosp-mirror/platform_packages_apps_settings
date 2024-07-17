@@ -1182,7 +1182,7 @@ public class FingerprintSettings extends SubSettings {
 
             @Override
             public int getMetricsCategory() {
-                return SettingsEnums.DIALOG_FINGERPINT_EDIT;
+                return SettingsEnums.DIALOG_FINGERPRINT_DELETE;
             }
 
             @Override
@@ -1344,7 +1344,7 @@ public class FingerprintSettings extends SubSettings {
 
             @Override
             public int getMetricsCategory() {
-                return SettingsEnums.DIALOG_FINGERPINT_EDIT;
+                return SettingsEnums.DIALOG_FINGERPRINT_RENAME;
             }
         }
 
