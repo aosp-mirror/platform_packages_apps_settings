@@ -160,7 +160,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         static final int CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST = 103;
         @VisibleForTesting
         static final int SKIP_FINGERPRINT_REQUEST = 104;
-        private static final int BIOMETRIC_AUTH_REQUEST = 105;
+        @VisibleForTesting
+        static final int BIOMETRIC_AUTH_REQUEST = 105;
 
         private LockPatternUtils mLockPatternUtils;
         private DevicePolicyManager mDpm;

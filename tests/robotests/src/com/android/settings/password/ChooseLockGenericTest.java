@@ -50,9 +50,13 @@ import android.app.admin.PasswordMetrics;
 import android.app.admin.PasswordPolicy;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.Flags;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings.Global;
 import android.widget.TextView;
 
@@ -86,9 +90,13 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowBiometricManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
@@ -98,18 +106,23 @@ import org.robolectric.shadows.ShadowApplication;
                 ShadowStorageManager.class,
                 ShadowUserManager.class,
                 ShadowUtils.class,
-                ShadowInteractionJankMonitor.class
+                ShadowInteractionJankMonitor.class,
+                ShadowBiometricManager.class
         })
 @Ignore("b/179136903: Tests failed with collapsing toolbar, plan to figure out root cause later.")
 public class ChooseLockGenericTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private ActivityController<ChooseLockGeneric> mActivityController;
     private FakeFeatureFactory mFakeFeatureFactory;
     private ChooseLockGenericFragment mFragment;
     private ChooseLockGeneric mActivity;
+    private ShadowBiometricManager mShadowBiometricManager;
+    private ShadowActivity mShadowActivity;
     @Mock
     private FingerprintManager mFingerprintManager;
     @Mock
@@ -125,6 +138,7 @@ public class ChooseLockGenericTest {
                 .postCreate(null)
                 .resume()
                 .get();
+        mShadowActivity = Shadows.shadowOf(mActivity);
 
         Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         mFragment = new ChooseLockGenericFragment();
@@ -295,6 +309,21 @@ public class ChooseLockGenericTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void onActivityResult_requestcode100_shouldLaunchBiometricPrompt() {
+        initActivity(null);
+        mShadowBiometricManager.setCanAuthenticate(true);
+
+        mFragment.onActivityResult(
+                ChooseLockGenericFragment.CONFIRM_EXISTING_REQUEST,
+                Activity.RESULT_OK, null /* data */);
+
+        assertThat(mActivity.isFinishing()).isFalse();
+        assertThat(mShadowActivity.getNextStartedActivity().getComponent().getClassName())
+                .isEqualTo(ConfirmDeviceCredentialActivity.class.getName());
+    }
+
+    @Test
     public void onActivityResult_requestcode102_shouldFinish() {
         initActivity(null);
 
@@ -334,6 +363,17 @@ public class ChooseLockGenericTest {
                 null /* data */);
 
         assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    @Test
+    public void onActivityResult_requestcode105_shouldNotFinish() {
+        initActivity(null);
+
+        mFragment.onActivityResult(
+                ChooseLockGenericFragment.BIOMETRIC_AUTH_REQUEST, Activity.RESULT_OK,
+                null /* data */);
+
+        assertThat(mActivity.isFinishing()).isFalse();
     }
 
     @Test
@@ -676,6 +716,13 @@ public class ChooseLockGenericTest {
         mActivity = Robolectric.buildActivity(ChooseLockGeneric.InternalActivity.class, intent)
                 .create().start().postCreate(null).resume().get();
         mActivity.getSupportFragmentManager().beginTransaction().add(mFragment, null).commitNow();
+        mShadowBiometricManager = Shadow.extract(mFragment.getContext().getSystemService(
+                BiometricManager.class));
+        //TODO(b/352603684): Should be Authenticators.MANDATORY_BIOMETRICS,
+        // but it is not supported by ShadowBiometricManager
+        mShadowBiometricManager.setAuthenticatorType(
+                BiometricManager.Authenticators.BIOMETRIC_STRONG);
+        mShadowBiometricManager.setCanAuthenticate(false);
     }
 
     private static String capitalize(final String input) {
