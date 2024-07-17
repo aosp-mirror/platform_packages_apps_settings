@@ -49,17 +49,18 @@ import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.text.BidiFormatter;
 
 import com.android.settings.R;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.notification.modes.ZenMode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Predicate;
 
 class ZenModeSummaryHelper {
@@ -412,7 +413,7 @@ class ZenModeSummaryHelper {
      * on the given mode and provided set of apps.
      */
     public @NonNull String getAppsSummary(@NonNull ZenMode zenMode,
-            @Nullable Set<String> appsBypassing) {
+            @Nullable List<AppEntry> appsBypassing) {
         if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_PRIORITY) {
             return formatAppsList(appsBypassing);
         } else if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_NONE) {
@@ -424,28 +425,34 @@ class ZenModeSummaryHelper {
     /**
      * Generates a formatted string declaring which apps can interrupt in the style of
      * "App, App2, and 4 more can interrupt."
-     * Apps selected for explicit mention are selected in order from the provided set sorted
-     * alphabetically.
+     * Apps selected for explicit mention are picked in order from the provided list.
      */
-    public @NonNull String formatAppsList(@Nullable Set<String> appsBypassingDnd) {
+    @VisibleForTesting
+    public @NonNull String formatAppsList(@Nullable List<AppEntry> appsBypassingDnd) {
         if (appsBypassingDnd == null) {
             return mContext.getResources().getString(R.string.zen_mode_apps_priority_apps);
         }
-        final int numAppsBypassingDnd = appsBypassingDnd.size();
-        String[] appsBypassingDndArr = appsBypassingDnd.toArray(new String[numAppsBypassingDnd]);
-        // Sorts the provided apps alphabetically.
-        Arrays.sort(appsBypassingDndArr);
+        List<String> appNames = appsBypassingDnd.stream().limit(3)
+                .map(app -> {
+                    String appName = BidiFormatter.getInstance().unicodeWrap(app.label);
+                    if (app.isManagedProfile()) {
+                        appName = mContext.getString(R.string.zen_mode_apps_work_app, appName);
+                    }
+                    return appName;
+                })
+                .toList();
+
         MessageFormat msgFormat = new MessageFormat(
                 mContext.getString(R.string.zen_mode_apps_subtext),
                 Locale.getDefault());
         Map<String, Object> args = new HashMap<>();
-        args.put("count", numAppsBypassingDnd);
-        if (numAppsBypassingDnd >= 1) {
-            args.put("app_1", appsBypassingDndArr[0]);
-            if (numAppsBypassingDnd >= 2) {
-                args.put("app_2", appsBypassingDndArr[1]);
-                if (numAppsBypassingDnd == 3) {
-                    args.put("app_3", appsBypassingDndArr[2]);
+        args.put("count", appsBypassingDnd.size());
+        if (appNames.size() >= 1) {
+            args.put("app_1", appNames.get(0));
+            if (appNames.size() >= 2) {
+                args.put("app_2", appNames.get(1));
+                if (appNames.size() == 3) {
+                    args.put("app_3", appNames.get(2));
                 }
             }
         }

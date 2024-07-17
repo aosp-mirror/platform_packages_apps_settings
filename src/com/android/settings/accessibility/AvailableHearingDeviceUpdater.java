@@ -27,7 +27,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
  */
 public class AvailableHearingDeviceUpdater extends AvailableMediaBluetoothDeviceUpdater {
 
-    private static final String PREF_KEY = "connected_hearing_device";
+    private static final String PREF_KEY_PREFIX = "connected_hearing_device_";
 
     public AvailableHearingDeviceUpdater(Context context,
             DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
@@ -42,7 +42,7 @@ public class AvailableHearingDeviceUpdater extends AvailableMediaBluetoothDevice
     }
 
     @Override
-    protected String getPreferenceKey() {
-        return PREF_KEY;
+    protected String getPreferenceKeyPrefix() {
+        return PREF_KEY_PREFIX;
     }
 }
