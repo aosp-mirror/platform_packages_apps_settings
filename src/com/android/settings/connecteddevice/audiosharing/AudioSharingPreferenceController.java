@@ -52,7 +52,7 @@ public class AudioSharingPreferenceController extends BasePreferenceController
     private final Executor mExecutor;
 
     @VisibleForTesting
-    protected final BluetoothLeBroadcast.Callback mBroadcastCallback =
+    final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastStarted(int reason, int broadcastId) {

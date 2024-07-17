@@ -21,12 +21,15 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.service.notification.ZenModeConfig;
 
 import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,10 +68,9 @@ public class ZenModeExitAtAlarmPreferenceControllerTest {
         scheduleInfo.endHour = 2;
         scheduleInfo.exitAtAlarm = false;
 
-        ZenMode mode = new ZenMode("id",
-                new AutomaticZenRule.Builder("name",
-                        ZenModeConfig.toScheduleConditionId(scheduleInfo)).build(),
-                true);  // is active
+        ZenMode mode = new TestModeBuilder()
+                .setConditionId(ZenModeConfig.toScheduleConditionId(scheduleInfo))
+                .build();
 
         // need to call updateZenMode for the first call
         mPrefController.updateZenMode(preference, mode);
@@ -94,10 +96,9 @@ public class ZenModeExitAtAlarmPreferenceControllerTest {
         scheduleInfo.endHour = 2;
         scheduleInfo.exitAtAlarm = true;
 
-        ZenMode mode = new ZenMode("id",
-                new AutomaticZenRule.Builder("name",
-                        ZenModeConfig.toScheduleConditionId(scheduleInfo)).build(),
-                true);  // is active
+        ZenMode mode = new TestModeBuilder()
+                .setConditionId(ZenModeConfig.toScheduleConditionId(scheduleInfo))
+                .build();
         mPrefController.updateZenMode(preference, mode);
 
         // turn off exit at alarm

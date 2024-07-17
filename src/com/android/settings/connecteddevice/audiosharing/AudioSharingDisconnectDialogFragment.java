@@ -84,7 +84,13 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
             @NonNull DialogEventListener listener,
             @NonNull Pair<Integer, Object>[] eventData) {
         if (!AudioSharingUtils.isFeatureEnabled()) return;
-        FragmentManager manager = host.getChildFragmentManager();
+        final FragmentManager manager;
+        try {
+            manager = host.getChildFragmentManager();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+            return;
+        }
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
         if (dialog != null) {
             int newGroupId = AudioSharingUtils.getGroupId(newDevice);
@@ -145,9 +151,17 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
         return sNewDevice;
     }
 
+    /** Test only: get the {@link DialogEventListener} passed to the dialog. */
+    @VisibleForTesting
+    @Nullable
+    DialogEventListener getListener() {
+        return sListener;
+    }
+
     /** Test only: get the event data passed to the dialog. */
     @VisibleForTesting
-    protected @NonNull Pair<Integer, Object>[] getEventData() {
+    @NonNull
+    Pair<Integer, Object>[] getEventData() {
         return sEventData;
     }
 

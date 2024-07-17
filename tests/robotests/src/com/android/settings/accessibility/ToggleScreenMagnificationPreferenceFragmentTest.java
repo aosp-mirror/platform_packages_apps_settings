@@ -16,14 +16,20 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
@@ -394,11 +400,45 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void onResume_oneFingerPanningFlagOn_registerToSpecificUri() {
+        ShadowContentResolver shadowContentResolver = Shadows.shadowOf(
+                mContext.getContentResolver());
+        Uri observedUri = Settings.Secure.getUriFor(
+                Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED);
+        // verify no one finger panning settings observer registered before launching the fragment
+        assertThat(shadowContentResolver.getContentObservers(observedUri)).isEmpty();
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+
+        Collection<ContentObserver> observers =
+                shadowContentResolver.getContentObservers(observedUri);
+        assertThat(observers.size()).isEqualTo(1);
+        assertThat(observers.stream().findFirst().get()).isInstanceOf(
+                AccessibilitySettingsContentObserver.class);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void onResume_oneFingerPanningFlagOff_notRegisterToSpecificUri() {
+        ShadowContentResolver shadowContentResolver = Shadows.shadowOf(
+                mContext.getContentResolver());
+        Uri observedUri = Settings.Secure.getUriFor(
+                Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED);
+        // verify no one finger panning settings observer registered before launching the fragment
+        assertThat(shadowContentResolver.getContentObservers(observedUri)).isEmpty();
+
+        mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
+        // verify no one finger panning settings observer registered after launching the fragment
+        assertThat(shadowContentResolver.getContentObservers(observedUri)).isEmpty();
+    }
+
+    @Test
     public void hasValueInSettings_putValue_hasValue() {
         setMagnificationTripleTapEnabled(/* enabled= */ true);
 
         assertThat(ToggleScreenMagnificationPreferenceFragment.hasMagnificationValuesInSettings(
-                mContext, UserShortcutType.TRIPLETAP)).isTrue();
+                mContext, TRIPLETAP)).isTrue();
     }
 
     @Test
@@ -408,7 +448,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 mContext.getContentResolver(), TWO_FINGER_TRIPLE_TAP_SHORTCUT_KEY, ON);
 
         assertThat(ToggleScreenMagnificationPreferenceFragment.hasMagnificationValuesInSettings(
-                mContext, UserShortcutType.TWOFINGER_DOUBLETAP)).isTrue();
+                mContext, TWOFINGER_DOUBLETAP)).isTrue();
     }
 
     @Test
@@ -418,13 +458,13 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 mContext.getContentResolver(), TWO_FINGER_TRIPLE_TAP_SHORTCUT_KEY, OFF);
 
         assertThat(ToggleScreenMagnificationPreferenceFragment.hasMagnificationValuesInSettings(
-                mContext, UserShortcutType.TWOFINGER_DOUBLETAP)).isFalse();
+                mContext, TWOFINGER_DOUBLETAP)).isFalse();
     }
 
     @Test
     @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void optInAllValuesToSettings_optInValue_haveMatchString() {
-        int shortcutTypes = UserShortcutType.SOFTWARE | UserShortcutType.TRIPLETAP;
+        int shortcutTypes = SOFTWARE | TRIPLETAP;
 
         ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(mContext,
                 shortcutTypes);
@@ -438,24 +478,24 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void optInAllValuesToSettings_optInValue_callA11yManager() {
         int shortcutTypes =
-                UserShortcutType.SOFTWARE | UserShortcutType.TRIPLETAP | UserShortcutType.HARDWARE
-                        | UserShortcutType.QUICK_SETTINGS;
+                SOFTWARE | TRIPLETAP | HARDWARE
+                        | QUICK_SETTINGS;
         Set<String> shortcutTargets = Set.of(MAGNIFICATION_CONTROLLER_NAME);
 
         ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(mContext,
                 shortcutTypes);
 
         verify(mAccessibilityManager).enableShortcutsForTargets(
-                /* enable= */ true, UserShortcutType.SOFTWARE,
+                /* enable= */ true, SOFTWARE,
                 shortcutTargets, UserHandle.myUserId());
         verify(mAccessibilityManager).enableShortcutsForTargets(
-                /* enable= */ true, UserShortcutType.HARDWARE,
+                /* enable= */ true, HARDWARE,
                 shortcutTargets, UserHandle.myUserId());
         verify(mAccessibilityManager).enableShortcutsForTargets(
-                /* enable= */ true, UserShortcutType.QUICK_SETTINGS,
+                /* enable= */ true, QUICK_SETTINGS,
                 shortcutTargets, UserHandle.myUserId());
         verify(mAccessibilityManager).enableShortcutsForTargets(
-                /* enable= */ true, UserShortcutType.TRIPLETAP,
+                /* enable= */ true, TRIPLETAP,
                 shortcutTargets, UserHandle.myUserId());
         verifyNoMoreInteractions(mAccessibilityManager);
     }
@@ -464,7 +504,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void optInAllValuesToSettings_twoFingerTripleTap_haveMatchString() {
-        int shortcutTypes = UserShortcutType.TWOFINGER_DOUBLETAP;
+        int shortcutTypes = TWOFINGER_DOUBLETAP;
 
         ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(mContext,
                 shortcutTypes);
@@ -479,7 +519,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, PLACEHOLDER_COMPONENT_NAME.flattenToString());
 
         ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(mContext,
-                UserShortcutType.SOFTWARE);
+                SOFTWARE);
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
                 PLACEHOLDER_COMPONENT_NAME.flattenToString() + ":" + MAGNIFICATION_CONTROLLER_NAME);
@@ -491,7 +531,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         ShadowSettings.ShadowSecure.reset();
 
         ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(mContext,
-                UserShortcutType.SOFTWARE);
+                SOFTWARE);
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
@@ -508,7 +548,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
             ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(
                     mContext,
-                    UserShortcutType.SOFTWARE);
+                    SOFTWARE);
 
             assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
@@ -527,7 +567,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
             ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(
                     mContext,
-                    UserShortcutType.HARDWARE);
+                    HARDWARE);
 
             assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, size + 1)).isEqualTo(
@@ -545,7 +585,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
             ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(
                     mContext,
-                    UserShortcutType.TRIPLETAP);
+                    TRIPLETAP);
 
             assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, size + 1)).isEqualTo(
@@ -560,7 +600,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         putStringIntoSettings(HARDWARE_SHORTCUT_KEY, MAGNIFICATION_CONTROLLER_NAME);
         setMagnificationTripleTapEnabled(/* enabled= */ true);
         int shortcutTypes =
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP;
+                SOFTWARE | HARDWARE | TRIPLETAP;
 
         ToggleScreenMagnificationPreferenceFragment.optOutAllMagnificationValuesFromSettings(
                 mContext, shortcutTypes);
@@ -578,19 +618,19 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         putStringIntoSettings(HARDWARE_SHORTCUT_KEY, MAGNIFICATION_CONTROLLER_NAME);
         setMagnificationTripleTapEnabled(/* enabled= */ true);
         int shortcutTypes =
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP;
+                SOFTWARE | HARDWARE | TRIPLETAP;
 
         ToggleScreenMagnificationPreferenceFragment.optOutAllMagnificationValuesFromSettings(
                 mContext, shortcutTypes);
 
         verify(mAccessibilityManager).enableShortcutsForTargets(
-                /* enable= */ false, UserShortcutType.SOFTWARE,
+                /* enable= */ false, SOFTWARE,
                 shortcutTargets, UserHandle.myUserId());
         verify(mAccessibilityManager).enableShortcutsForTargets(
-                /* enable= */ false, UserShortcutType.HARDWARE,
+                /* enable= */ false, HARDWARE,
                 shortcutTargets, UserHandle.myUserId());
         verify(mAccessibilityManager).enableShortcutsForTargets(
-                /* enable= */ false, UserShortcutType.TRIPLETAP,
+                /* enable= */ false, TRIPLETAP,
                 shortcutTargets, UserHandle.myUserId());
         verifyNoMoreInteractions(mAccessibilityManager);
     }
@@ -603,7 +643,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 TWO_FINGER_TRIPLE_TAP_SHORTCUT_KEY, ON);
 
         ToggleScreenMagnificationPreferenceFragment.optOutAllMagnificationValuesFromSettings(
-                mContext, UserShortcutType.TWOFINGER_DOUBLETAP);
+                mContext, TWOFINGER_DOUBLETAP);
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 TWO_FINGER_TRIPLE_TAP_SHORTCUT_KEY, ON)).isEqualTo(OFF);
@@ -616,7 +656,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 PLACEHOLDER_COMPONENT_NAME.flattenToString() + ":" + MAGNIFICATION_CONTROLLER_NAME);
         putStringIntoSettings(HARDWARE_SHORTCUT_KEY,
                 PLACEHOLDER_COMPONENT_NAME.flattenToString() + ":" + MAGNIFICATION_CONTROLLER_NAME);
-        int shortcutTypes = UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE;
+        int shortcutTypes = SOFTWARE | HARDWARE;
 
         ToggleScreenMagnificationPreferenceFragment.optOutAllMagnificationValuesFromSettings(
                 mContext, shortcutTypes);
@@ -636,7 +676,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME);
         // Compare to default UserShortcutType
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(SOFTWARE);
     }
 
     @Test
@@ -649,13 +689,13 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME);
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.TRIPLETAP);
+        assertThat(expectedType).isEqualTo(SOFTWARE | TRIPLETAP);
     }
 
     @Test
     public void updateShortcutPreferenceData_hasValueInSharedPreference_assignToVariable() {
         final PreferredShortcut tripleTapShortcut = new PreferredShortcut(
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.TRIPLETAP);
+                MAGNIFICATION_CONTROLLER_NAME, TRIPLETAP);
         putUserShortcutTypeIntoSharedPreference(mContext, tripleTapShortcut);
         mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
@@ -663,7 +703,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME);
-        assertThat(expectedType).isEqualTo(UserShortcutType.TRIPLETAP);
+        assertThat(expectedType).isEqualTo(TRIPLETAP);
     }
 
     @Test
@@ -677,14 +717,14 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME);
-        assertThat(expectedType).isEqualTo(UserShortcutType.TWOFINGER_DOUBLETAP);
+        assertThat(expectedType).isEqualTo(TWOFINGER_DOUBLETAP);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     public void updateShortcutPreferenceData_hasTwoFingerTripleTapInSharedPref_assignToVariable() {
         final PreferredShortcut tripleTapShortcut = new PreferredShortcut(
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.TWOFINGER_DOUBLETAP);
+                MAGNIFICATION_CONTROLLER_NAME, TWOFINGER_DOUBLETAP);
         putUserShortcutTypeIntoSharedPreference(mContext, tripleTapShortcut);
         mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
@@ -692,7 +732,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME);
-        assertThat(expectedType).isEqualTo(UserShortcutType.TWOFINGER_DOUBLETAP);
+        assertThat(expectedType).isEqualTo(TWOFINGER_DOUBLETAP);
     }
 
     @Test
@@ -707,7 +747,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 createEditShortcutDialog(fragment.getActivity()));
 
         final int checkboxValue = fragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.EMPTY);
+        assertThat(checkboxValue).isEqualTo(DEFAULT);
     }
 
     @Test
@@ -718,7 +758,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
                 null);
         final PreferredShortcut tripletapShortcut = new PreferredShortcut(
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.TRIPLETAP);
+                MAGNIFICATION_CONTROLLER_NAME, TRIPLETAP);
         fragment.mShortcutPreference = shortcutPreference;
 
         PreferredShortcuts.saveUserShortcutType(mContext, tripletapShortcut);
@@ -727,7 +767,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 createEditShortcutDialog(fragment.getActivity()));
 
         final int checkboxValue = fragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.TRIPLETAP);
+        assertThat(checkboxValue).isEqualTo(TRIPLETAP);
     }
 
     @Test
@@ -739,7 +779,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
                 null);
         final PreferredShortcut twoFingerTripleTapShortcut = new PreferredShortcut(
-                MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.TWOFINGER_DOUBLETAP);
+                MAGNIFICATION_CONTROLLER_NAME, TWOFINGER_DOUBLETAP);
         fragment.mShortcutPreference = shortcutPreference;
 
         PreferredShortcuts.saveUserShortcutType(mContext, twoFingerTripleTapShortcut);
@@ -748,13 +788,13 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
                 createEditShortcutDialog(fragment.getActivity()));
 
         final int checkboxValue = fragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.TWOFINGER_DOUBLETAP);
+        assertThat(checkboxValue).isEqualTo(TWOFINGER_DOUBLETAP);
     }
 
     @Test
     public void restoreValueFromSavedInstanceState_assignToVariable() {
         final Bundle fragmentState = createFragmentSavedInstanceState(
-                UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP);
+                HARDWARE | TRIPLETAP);
         ToggleScreenMagnificationPreferenceFragment fragment = mFragController.get();
         // Had to use reflection to pass the savedInstanceState when launching the fragment
         ReflectionHelpers.setField(fragment, "mSavedFragmentState", fragmentState);
@@ -769,14 +809,14 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME);
         assertThat(value).isEqualTo(6);
-        assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP);
+        assertThat(expectedType).isEqualTo(HARDWARE | TRIPLETAP);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
     public void restoreValueFromSavedInstanceState_twoFingerTripleTap_assignToVariable() {
         final Bundle fragmentState =
-                createFragmentSavedInstanceState(UserShortcutType.TWOFINGER_DOUBLETAP);
+                createFragmentSavedInstanceState(TWOFINGER_DOUBLETAP);
         ToggleScreenMagnificationPreferenceFragment fragment = mFragController.get();
         // Had to use reflection to pass the savedInstanceState when launching the fragment
         ReflectionHelpers.setField(fragment, "mSavedFragmentState", fragmentState);
@@ -790,8 +830,8 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 MAGNIFICATION_CONTROLLER_NAME);
-        assertThat(value).isEqualTo(UserShortcutType.TWOFINGER_DOUBLETAP);
-        assertThat(expectedType).isEqualTo(UserShortcutType.TWOFINGER_DOUBLETAP);
+        assertThat(value).isEqualTo(TWOFINGER_DOUBLETAP);
+        assertThat(expectedType).isEqualTo(TWOFINGER_DOUBLETAP);
     }
 
     @Test
@@ -934,7 +974,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    public void onProcessArguments_defaultArgumentUnavailable_shouldSetDefaultArguments() {
+    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void
+            onProcessArguments_defaultArgumentUnavailableAndFlagOff_shouldSetDefaultArguments() {
         ToggleScreenMagnificationPreferenceFragment fragment =
                 mFragController.create(
                         R.id.main_content, /* bundle= */ null).start().resume().get();
@@ -945,6 +987,32 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_PREFERENCE_KEY));
         assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_INTRO));
         assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void
+            onProcessArguments_defaultArgumentUnavailableAndFlagOn_shouldSetDefaultArguments() {
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(
+                        R.id.main_content, /* bundle= */ null).start().resume().get();
+        Bundle arguments = new Bundle();
+
+        fragment.onProcessArguments(arguments);
+
+        assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_PREFERENCE_KEY));
+        assertTrue(arguments.containsKey(AccessibilitySettings.EXTRA_INTRO));
+        // If OneFingerPanning flag is on, the EXTRA_HTML_DESCRIPTION should not be set. The html
+        // description would be decided dynamically based on the OneFingerPanning preference state.
+        assertFalse(arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION));
+    }
+
+    @Test
+    public void getCurrentHtmlDescription_shouldNotBeEmpty() {
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(
+                        R.id.main_content, /* bundle= */ null).start().resume().get();
+        assertThat(fragment.getCurrentHtmlDescription().toString()).isNotEmpty();
     }
 
     @Test
@@ -1006,7 +1074,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     public void getShortcutTypeSummary_shortcutSummaryIsCorrectlySet() {
         final PreferredShortcut userPreferredShortcut = new PreferredShortcut(
                 MAGNIFICATION_CONTROLLER_NAME,
-                UserShortcutType.HARDWARE | UserShortcutType.QUICK_SETTINGS);
+                HARDWARE | QUICK_SETTINGS);
         putUserShortcutTypeIntoSharedPreference(mContext, userPreferredShortcut);
         final ShortcutPreference shortcutPreference =
                 new ShortcutPreference(mContext, /* attrs= */ null);

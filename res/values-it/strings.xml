@@ -65,7 +65,7 @@
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Scollegare il dispositivo?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Accoppia nuovo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <string name="bluetooth_screen_auto_on_title" msgid="8496443490064988240">"Riattiva automaticamente domani"</string>
+    <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Attiva automaticamente domani"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Accoppia orecchio dx"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Accoppia orecchio sx"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Accoppia l\'altro orecchio"</string>
@@ -76,6 +76,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Impostazioni protesi uditive"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Scorciatoia, compatibilità con apparecchi acustici"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Preset"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Non sono presenti preset programmati dal tuo audiologo"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Impossibile aggiornare preset"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Uscita audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Informazioni su uscita audio"</string>
@@ -277,10 +278,10 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Testo su schermata di blocco"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Nessuno"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Ad es. Dispositivo Android di Anna"</string>
-    <string name="location_settings_title" msgid="8375074508036087178">"Geolocalizzazione"</string>
+    <string name="location_settings_title" msgid="8375074508036087178">"Posizione"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usa posizione"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Off"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Opzione attiva: # app ha accesso alla posizione}other{Opzione attiva: # app hanno accesso alla posizione}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{On / # app ha accesso alla posizione}other{On / # app hanno accesso alla posizione}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Caricamento…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Le app con l\'autorizzazione Dispositivi nelle vicinanze possono stabilire la posizione relativa dei dispositivi connessi."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accesso alla posizione è disattivato per app e servizi. La posizione del dispositivo potrebbe essere comunque inviata ai servizi di emergenza se chiami o invii un SMS a un numero di emergenza."</string>
@@ -312,8 +313,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Annulla"</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_no_thanks (6603178409726203187) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"Non ora"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Accetto"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Altro"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Sblocca con il volto"</string>
@@ -374,8 +374,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Ricorda"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Utilizza la tua impronta per sbloccare il telefono o approvare un acquisto.\n\nNota: non puoi utilizzare la tua impronta per sbloccare questo dispositivo. Per ulteriori informazioni, contatta l\'amministratore dell\'organizzazione."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Annulla"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_no_thanks (1663906389456119842) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Non ora"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Accetto"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Saltare la configurazione?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"La configurazione dell\'impronta richiede solo un paio di minuti. Se salti questo passaggio, potrai aggiungere l\'impronta in seguito nelle impostazioni."</string>
@@ -384,7 +383,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Come funziona"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Lo Sblocco con l\'Impronta crea un modello univoco della tua impronta per poter verificare la tua identità. Per creare il modello dell\'impronta durante la configurazione, dovrai acquisire immagini della tua impronta da diverse posizioni."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Lo Sblocco con l\'Impronta crea un modello univoco dell\'impronta di tuo figlio per poter verificare la sua identità. Per creare il modello dell\'impronta durante la configurazione, dovrà acquisire immagini della sua impronta da diverse posizioni."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Per risultati ottimali, usa una protezione per lo schermo con la certificazione Made For Google. Con altre protezioni per lo schermo la tua impronta potrebbe non funzionare."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Per risultati ottimali, usa una protezione per lo schermo con certificazione Made For Google. Con altre protezioni per lo schermo la tua impronta potrebbe non funzionare."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Per risultati ottimali, usa una protezione per lo schermo con la certificazione Made For Google. Con altre protezioni per lo schermo l\'impronta di tuo figlio potrebbe non funzionare."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Sblocco dall\'orologio"</string>
@@ -411,6 +410,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Volto e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Volto, impronta e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Volto, impronte e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"È necessario perché la verifica dell\'identità è attiva"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Sblocco Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Smartwatch aggiunto"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configura l\'orologio"</string>
@@ -438,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Scopri di più su Sblocco dall\'orologio"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Aggiungi smartwatch"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Rimuovi smartwatch"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Sblocco con il Volto e l\'Impronta"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Sblocco con il Volto e con l\'Impronta"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Sblocco con il Volto e l\'Impronta per lavoro"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Configurazione richiesta"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Impronte e volto aggiunti"</string>
@@ -579,7 +579,6 @@
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Ogni volta che il dispositivo si blocca"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 min. dopo lo spegnimento dello schermo"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Solo dopo il riavvio del dispositivo"</string>
-    <string name="private_space_auto_lock_footer_message" msgid="2752467351969856487">"Se usi un blocco diverso per lo spazio privato, potresti dover verificare la tua identità per aprire le app nello spazio privato."</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Nascondi lo spazio privato"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Nascondi lo spazio privato quando è bloccato"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Per evitare che altre persone sappiano che hai uno spazio privato sul tuo dispositivo, puoi nasconderlo dal tuo elenco di app"</string>
@@ -610,20 +609,14 @@
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Configurazione"</string>
     <string name="private_space_setup_title" msgid="2272968244329821450">"Spazio privato"</string>
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Nascondi o blocca le app private in uno spazio separato. Usa un Account Google dedicato per una maggiore sicurezza."</string>
-    <!-- no translation found for private_space_setup_sub_header (550476876393954356) -->
-    <skip />
-    <!-- no translation found for private_space_separate_account_text (790319706810190320) -->
-    <skip />
+    <string name="private_space_setup_sub_header" msgid="550476876393954356">"Come funziona"</string>
+    <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Crea un Account Google per il tuo spazio"</b>\n"L\'utilizzo di un account dedicato consente di interrompere la sincronizzazione di file, foto e email al di fuori del tuo spazio"</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Imposta un blocco"</b>\n"Blocca il tuo spazio per impedire ad altre persone di aprirlo."</string>
-    <!-- no translation found for private_space_install_apps_text (8072027796190028830) -->
-    <skip />
-    <!-- no translation found for private_space_keep_in_mind_text (7721081172657563800) -->
-    <skip />
-    <!-- no translation found for private_space_apps_stopped_text (4034574118911250169) -->
-    <skip />
-    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Le app presenti nello spazio privato non vengono visualizzate nella gestione autorizzazioni, nella dashboard della privacy e in altre impostazioni quando lo spazio privato è bloccato.\n\nLo spazio privato non può essere spostato su un nuovo dispositivo. Dovrai configurare un altro spazio privato per poterlo usare su un altro dispositivo.\n\nChiunque colleghi il dispositivo a un computer o installi app dannose sul dispositivo può avere accesso al tuo spazio privato."</string>
-    <!-- no translation found for private_space_settings_footer_text (4877745497351782272) -->
-    <skip />
+    <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installa le app"</b>\n"Installa le app che vuoi mantenere private nel tuo spazio"</string>
+    <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Aspetti da considerare"</string>
+    <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Le app vengono interrotte quando blocchi il tuo spazio"</b>\n"Quando blocchi il tuo spazio, le app al suo interno verranno interrotte e non ti invieranno notifiche"</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Gli spazi privati non sono adatti per le app che devono essere eseguite in background o inviare notifiche critiche, come le app mediche. Questo perché le notifiche e le attività in background vengono interrotte quando il tuo spazio è bloccato.\n\nLe app nel tuo spazio privato non verranno visualizzate nella gestione autorizzazioni, nella dashboard della privacy e in altre impostazioni quando lo spazio privato è bloccato.\n\nIl tuo spazio privato non può essere ripristinato su un nuovo dispositivo. Dovrai configurare un altro spazio privato per poterlo usare su un altro dispositivo.\n\nChiunque colleghi il dispositivo a un computer o installi app dannose sul dispositivo può avere accesso al tuo spazio privato."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Gli spazi privati non sono adatti per le app che devono essere eseguite in background o inviare notifiche critiche, come le app mediche. Questo perché le notifiche e le attività in background vengono interrotte quando lo spazio è bloccato.\n\nLe app nel tuo spazio privato non verranno visualizzate nella gestione autorizzazioni, nella dashboard della privacy e in altre impostazioni quando lo spazio privato è bloccato.\n\nIl tuo spazio privato non può essere ripristinato su un nuovo dispositivo. Dovrai configurare un altro spazio se vuoi usarlo su un altro dispositivo.\n\nChiunque colleghi il tuo dispositivo a un computer o installi app dannose sul tuo dispositivo potrebbe accedere al tuo spazio privato."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Scopri di più sullo spazio privato"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"L\'operazione richiederà alcuni istanti"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configurazione dello spazio privato in corso…"</string>
@@ -633,7 +626,7 @@
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Puoi impostare un nuovo blocco solo per lo spazio privato o mantenere lo stesso che usi per sbloccare il dispositivo"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Usa il blocco schermo"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Scegli un nuovo blocco"</string>
-    <string name="private_space_pre_finish_title" msgid="2314776598615113267">"Solo un secondo…"</string>
+    <string name="private_space_wait_screen_title" msgid="1535431437075585381">"Solo un secondo…"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Fatto."</string>
     <string name="private_space_access_text" msgid="4433988836344567888">"Per trovare il tuo spazio privato, vai all\'elenco delle app e scorri verso il basso"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Fine"</string>
@@ -647,14 +640,6 @@
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Imposta PIN per lo spazio privato"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Imposta password per lo spazio privato"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Imposta sequenza per lo spazio privato"</string>
-    <string name="private_space_gaia_education_title" msgid="3787414895669666563">"Crea un Account Google per mantenere privati i tuoi dati"</string>
-    <string name="private_space_gaia_education_description" msgid="1592753570023264559">"Nella schermata successiva puoi accedere a un account da usare con lo spazio privato"</string>
-    <string name="private_space_gaia_education_header" msgid="7835879839637613495"><b>"Crea un account dedicato per impedire la visualizzazione dei dati al di fuori dello spazio privato, ad esempio:"</b></string>
-    <string name="private_space_gaia_education_bullet1" msgid="641701340908301992">"Foto, file, contatti email, eventi nel calendario e altri dati sincronizzati"</string>
-    <string name="private_space_gaia_education_bullet2" msgid="3679859681253672976">"Cronologia dei download delle app e consigli"</string>
-    <string name="private_space_gaia_education_bullet3" msgid="1703614225321289717">"Cronologia di navigazione, preferiti e password salvate"</string>
-    <string name="private_space_gaia_education_bullet4" msgid="515761604505366164">"Contenuti suggeriti in base alla tua attività nelle app dello spazio privato"</string>
-    <string name="private_space_gaia_education_got_it" msgid="7824029819615566806">"Ok"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Blocca"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Nascondi"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puoi aggiungere fino a <xliff:g id="COUNT">%d</xliff:g> impronte digitali"</string>
@@ -675,7 +660,7 @@
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Scegli un blocco schermo"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Scegli un nuovo blocco schermo"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Scegli un blocco per le app di lavoro"</string>
-    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Scegli nuovo blocco profilo di lavoro"</string>
+    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Scegli nuovo blocco per profilo lavoro"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Per maggiore sicurezza, imposta un blocco schermo alternativo"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Scegli il metodo di blocco schermo alternativo"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Se dimentichi il blocco schermo, l\'amministratore IT non può reimpostarlo."</string>
@@ -865,6 +850,21 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Vuoi riavviare il dispositivo?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Il logging NFC dettagliato è a solo scopo di sviluppo. Vengono inclusi dati NFC aggiuntivi nelle segnalazioni di bug, che potrebbero contenere informazioni private. Riavvia il dispositivo per cambiare questa impostazione."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Riavvia"</string>
+    <string name="keywords_external_display" msgid="4181375057920134909">"mirroring, display esterno, display connesso, display usb, risoluzione, ruota"</string>
+    <string name="external_display_on" msgid="2560104443500154333">"On"</string>
+    <string name="external_display_off" msgid="5634413756025351374">"Off"</string>
+    <string name="external_display_settings_title" msgid="6256884595821605779">"Display esterno"</string>
+    <string name="external_display_use_title" msgid="8198257340836261386">"Usa display esterno"</string>
+    <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Risoluzione del display"</string>
+    <string name="external_display_not_found" msgid="1912355133386555798">"Display esterno disconnesso"</string>
+    <string name="external_display_rotation" msgid="7160062306817490204">"Rotazione"</string>
+    <string name="external_display_standard_rotation" msgid="545969032327487219">"Standard"</string>
+    <string name="external_display_rotation_90" msgid="7371530414227542947">"90°"</string>
+    <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
+    <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
+    <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Se modifichi la rotazione o la risoluzione, le eventuali app in esecuzione potrebbero interrompersi"</string>
+    <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Il dispositivo deve essere connesso a un display esterno per eseguire il mirroring dello schermo"</string>
+    <string name="external_display_more_options_title" msgid="1222751990705118774">"Altre opzioni"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Trasmissione"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirroring"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Attiva display wireless"</string>
@@ -1065,8 +1065,7 @@
     <string name="wifi_certificate_summary_system" msgid="6521297326433133669">"Certificato di sistema"</string>
     <string name="wifi_certificate_summary_pinning" msgid="5901067790901727957">"Blocco dei certificati"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Dettagli rete"</string>
-    <!-- no translation found for wep_network_less_secure_warning_title (2118823633436946728) -->
-    <skip />
+    <string name="wep_network_less_secure_warning_title" msgid="2118823633436946728">"Questa rete utilizza un protocollo di sicurezza meno recente chiamato WEP, che è meno sicuro"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Subnet mask"</string>
     <string name="server_name_title" msgid="7257095185810299066">"Nome server"</string>
     <string name="wifi_type_title" msgid="2174893488722015838">"Tipo"</string>
@@ -1191,7 +1190,7 @@
     <string name="display_settings" msgid="7197750639709493852">"Display"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Rotazione automatica dello schermo"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Off"</string>
-    <string name="auto_rotate_option_on" msgid="5776678230808498171">"On"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Attiva"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"On - Rotazione basata sul viso"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Riconoscimento facciale"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Scopri di più sulla rotazione automatica"</string>
@@ -1207,6 +1206,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adattivi"</string>
     <string name="brightness" msgid="6216871641021779698">"Livello di luminosità"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Luminosità adattiva"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Informazioni sulla luminosità adattiva"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"La luminosità dello schermo verrà regolata automaticamente in base all\'ambiente e alle attività. Puoi spostare manualmente il cursore per far sì che la luminosità adattiva memorizzi le tue preferenze."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"On"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Off"</string>
@@ -1595,12 +1595,12 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Consenti ad app e servizi di cercare reti Wi-Fi in qualsiasi momento, anche quando il Wi-Fi non è attivo. Questa funzione è utile, ad esempio, per migliorare funzioni e servizi basati sulla posizione."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Ricerca di dispositivi Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Consenti ad app e servizi di cercare dispositivi nelle vicinanze in qualsiasi momento, anche quando il Bluetooth non è attivo. Questa funzione è utile, ad esempio, per migliorare funzioni e servizi basati sulla posizione."</string>
-    <string name="location_services_preference_title" msgid="604317859531782159">"Servizi di geolocalizzazione"</string>
-    <string name="location_services_screen_title" msgid="5640002489976602476">"Servizi di geolocalizzazione"</string>
+    <string name="location_services_preference_title" msgid="604317859531782159">"Servizi di localizzazione"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Servizi di localizzazione"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Usa posizione"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Impossibile impostare automaticamente il fuso orario"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
-    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Geolocalizzazione o Servizi di geolocalizzazione non attivi"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Geolocalizzazione o Servizi di localizzazione non attivi"</string>
     <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
     <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"È necessario attivare la geolocalizzazione del dispositivo"</string>
@@ -1912,8 +1912,6 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opzioni"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibilità"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Tastiera fisica"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Usa tastiera sullo schermo"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Tienila sullo schermo quando è attiva la tastiera fisica"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Tasti rimbalzati"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"La tastiera ignora pressioni ripetute velocemente dello stesso tasto entro <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Tasti lenti"</string>
@@ -1938,6 +1936,20 @@
     <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Tocco in basso a destra"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Per più opzioni tocca l\'angolo destro in basso del touchpad"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Velocità del puntatore"</string>
+    <string name="pointer_fill_style" msgid="8413840032931637595">"Stile riempimento puntatore"</string>
+    <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Cambia riempim. puntatore in nero"</string>
+    <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Cambia riempim. puntatore in verde"</string>
+    <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Cambia riempim. puntatore in giallo"</string>
+    <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Cambia riempim. puntatore in rosa"</string>
+    <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Cambia riempim. puntatore in blu"</string>
+    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
+    <skip />
+    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
+    <skip />
+    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
+    <skip />
+    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
+    <skip />
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Impara i gesti con il touchpad"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"trackpad, track pad, mouse, cursore, scorrimento, scorrere, clic con il tasto destro del mouse, clic, puntatore"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"clic con il tasto destro del mouse, tocco"</string>
@@ -1981,6 +1993,9 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Selezionato dall\'utente: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Voce"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Velocità del puntatore"</string>
+    <string name="pointer_scale" msgid="4941564570571663964">"Scala puntatore"</string>
+    <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Diminuisci scala puntatore"</string>
+    <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Aumenta scala puntatore"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controller di gioco"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Reindirizza vibrazione"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Invia la vibrazione al controller di gioco quando è collegato"</string>
@@ -2103,7 +2118,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continua comunque"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Annulla"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Impostazioni ingrandimento"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Panning con un dito"</string>
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"Muovi Lente d\'ingrandimento con 1 dito"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"Trascina 1 dito per spostarti nella schermata"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Sposta l\'area di ingrandimento trascinando un dito."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Sposta l\'area di ingrandimento trascinando due dita."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Non disponibile quando viene ingrandita solo una parte dello schermo"</string>
@@ -2127,6 +2143,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tocca un pulsante per eseguire lo zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Aumenta velocemente lo zoom sullo schermo per ingrandire i contenuti"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Per aumentare lo zoom:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa la scorciatoia per avviare l\'ingrandimento&lt;br/&gt; {1,number,integer}. Tocca lo schermo&lt;br/&gt; {2,number,integer}. Trascina 2 dita per spostarti sullo schermo&lt;br/&gt; {3,number,integer}. Pizzica con 2 dita per regolare lo zoom&lt;br/&gt; {4,number,integer}. Usa la scorciatoia per interrompere l\'ingrandimento&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Per aumentare lo zoom temporaneamente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Assicurati che sia impostato il tipo di ingrandimento a schermo intero&lt;br/&gt; {1,number,integer}. Usa la scorciatoia per avviare l\'ingrandimento&lt;br/&gt; {2,number,integer}. Tocca e tieni premuto un punto qualsiasi dello schermo&lt;br/&gt; {3,number,integer}. Trascina il dito per spostarti sullo schermo&lt;br/&gt; {4,number,integer}. Solleva il dito per interrompere l\'ingrandimento"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Per aumentare lo zoom:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa la scorciatoia per avviare l\'ingrandimento.&lt;br/&gt; {1,number,integer}. Tocca lo schermo.&lt;br/&gt; {2,number,integer}. Trascina 2 dita per spostarti sullo schermo.&lt;br/&gt; {3,number,integer}. Pizzica con 2 dita per regolare lo zoom.&lt;br/&gt; {4,number,integer}. Utilizza la scorciatoia per interrompere l\'ingrandimento&lt;br/&gt;&lt;br/&gt; Puoi anche aumentare lo zoom temporaneamente e altro ancora."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Per aumentare lo zoom:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa la scorciatoia per avviare l\'ingrandimento.&lt;br/&gt; {1,number,integer}. Tocca lo schermo.&lt;br/&gt; {2,number,integer}. Trascina 1 o 2 dita per spostarti sullo schermo&lt;br/&gt; {3,number,integer}. Pizzica con 2 dita per regolare lo zoom.&lt;br/&gt; {4,number,integer}. Utilizza la scorciatoia per interrompere l\'ingrandimento&lt;br/&gt;&lt;br/&gt; Puoi anche aumentare lo zoom temporaneamente e altro ancora."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Quando è attivo l\'ingrandimento, puoi aumentare lo zoom sullo schermo.\n\n"<b>"Per eseguire lo zoom"</b>", avvia l\'ingrandimento, quindi tocca un punto qualsiasi sullo schermo.\n"<ul><li>"Trascina almeno due dita per scorrere"</li>\n<li>"Pizzica con almeno due dita per regolare lo zoom."</li></ul>\n\n<b>"Per ingrandire temporaneamente"</b>", avvia l\'ingrandimento, quindi tocca e tieni premuto un punto qualsiasi sullo schermo.\n"<ul><li>"Trascina per spostarti sullo schermo"</li>\n<li>"Solleva il dito per ridurre lo zoom"</li></ul>\n\n"Non puoi aumentare lo zoom sulla tastiera o nella barra di navigazione."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Pagina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> di <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Scorciatoia pulsante Accessibilità"</string>
@@ -3332,13 +3350,29 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nessuna}=1{1 pianificazione impostata}other{# pianificazioni impostate}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Non disturbare"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Modalità priorità"</string>
+    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Aggiungi una modalità"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ricevi soltanto le notifiche di app e persone importanti"</string>
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Seleziona tipo di attivazione"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Ora"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Ad esempio, \"9:30 – 17:00\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Calendario"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Ad esempio, \"Calendario personale\""</string>
+    <string name="zen_mode_active_text" msgid="5002406772481439437">"ON"</string>
+    <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Non impostata"</string>
+    <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Disattivata"</string>
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Crea una modalità"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Personalizzato"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitare le interruzioni"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Attiva Non disturbare"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Sveglie e suoni multimediali possono interrompere"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Pianificazioni"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Elimina pianificazioni"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Elimina"</string>
+    <!-- no translation found for zen_mode_menu_rename_mode (4681802125016390837) -->
+    <skip />
+    <!-- no translation found for zen_mode_menu_delete_mode (5380084696402157428) -->
+    <skip />
+    <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"Vuoi eliminare la modalità \"<xliff:g id="MODE">%1$s</xliff:g>\"?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Modifica"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Pianificazioni"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Pianificazione"</string>
@@ -3346,6 +3380,10 @@
     <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Aggiungi un calendario"</string>
     <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Utilizza il calendario"</string>
     <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Programma"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Imposta una programmazione"</string>
+    <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programmazione"</string>
+    <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Attiva automaticamente"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Pianificazione"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Disattiva la suoneria in orari specifici"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Imposta regole Non disturbare"</string>
@@ -3355,8 +3393,10 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Consenti le interruzioni sonore"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blocca interruzioni visive"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Consenti segnali visivi"</string>
-    <string name="mode_interruption_filter_title" msgid="6657431939996264417">"Notifiche che possono arrivarti"</string>
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Mantieni la concentrazione"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Azioni aggiuntive"</string>
+    <!-- no translation found for modes_sound_summary_off (6972648204528227879) -->
+    <skip />
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Impostazioni di visualizzazione"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Opzioni di visualizzazione"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Scala di grigi"</string>
@@ -3372,6 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"attiva tema scuro"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Scegli l\'opzione Testo chiaro su sfondo scuro per il sistema operativo e le app per non stancare gli occhi e consentire un notevole risparmio della batteria su alcuni dispositivi"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nessuna modifica del display}=1{{effect_1}}=2{{effect_1} e {effect_2}}=3{{effect_1}, {effect_2} e {effect_3}}other{{effect_1}, {effect_2} e altri #}}"</string>
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtra interruzioni"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nessuna interruzione filtrata"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Mostra opzioni per le notifiche filtrate"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quando è attiva la modalità Non disturbare"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Notifiche senza audio"</string>
@@ -3487,6 +3529,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"viene aperta la notifica"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Consenti posticipazione delle notifiche"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Indicatore di notifica su icona app"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Bundle di notifiche"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bolle"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bolle"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Mostra conversazione sotto forma di bolla"</string>
@@ -3601,11 +3644,11 @@
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Disattiva"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Annulla"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"In tempo reale"</string>
-    <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"Comunicazione costante da app in uso, navigazione, telefonate e tanto altro"</string>
+    <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"Comunicazione costante da app in uso, navigazione, telefonate e altro"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"Conversazioni"</string>
     <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, messaggi di testo e altre comunicazioni"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"Notifiche"</string>
-    <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Il telefono potrebbe suonare o vibrare in base alle impostazioni"</string>
+    <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Il dispositivo potrebbe suonare o vibrare in base alle impostazioni"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Silenziose"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Notifiche che non emettono mai suoni o vibrazioni"</string>
     <string name="notification_listener_allowed" msgid="5536962633536318551">"Autorizzazione concessa"</string>
@@ -3616,9 +3659,9 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Questa app non supporta le impostazioni avanzate"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Altre impostazioni"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Altre impostazioni sono disponibili all\'interno di quest\'app"</string>
-    <string name="notification_polite_title" msgid="3801775758735739286">"Attenuazione"</string>
-    <string name="notification_polite_main_control_title" msgid="855117131309844580">"Usa l\'attenuazione"</string>
-    <string name="notification_polite_description" msgid="6414215800132666462">"Quando ricevi molte notifiche in un breve lasso di tempo, il tuo dispositivo ridurrà al minimo le interruzioni audio e i popup sullo schermo. Continuerai a ricevere avvisi relativi a chiamate, sveglie e conversazioni prioritarie, che potrai trovare facilmente nell\'area notifiche."</string>
+    <string name="notification_polite_title" msgid="4737150709382859870">"Notifiche adattive"</string>
+    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Usa le notifiche adattive"</string>
+    <string name="notification_polite_description" msgid="7749280535620291610">"Quando ricevi molte notifiche in un breve periodo di tempo, lo smartphone abbasserà il volume e ridurrà al minimo i popup sullo schermo per un massimo di due minuti. Chiamate, sveglie e conversazioni prioritarie continueranno a essere segnalate con vibrazione, suoneria o verranno mostrate sullo schermo. Tutte le notifiche possono essere trovate facilmente scorrendo verso il basso dalla parte superiore dello schermo."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Applica ai profili di lavoro"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Applica alle app del profilo di lavoro"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servizi di supporto VR"</string>
@@ -3665,6 +3708,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Categorie"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Altro"</string>
     <string name="no_channels" msgid="4716199078612071915">"L\'app non ha pubblicato alcuna notifica"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Mostra le categorie inutilizzate"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Altre impostazioni nell\'app"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Mostra le categorie inutilizzate"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Nascondi le categorie inutilizzate"</string>
@@ -3773,7 +3817,8 @@
     <string name="zen_mode_apps_category" msgid="4082380323683889391">"App che possono interrompere"</string>
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"App selezionate"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Nessuna"</string>
-    <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Tutti"</string>
+    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Nessuna app può interrompere}=1{{app_1} può interrompere}=2{{app_1} e {app_2} possono interrompere}=3{{app_1}, {app_2} e {app_3} possono interrompere}other{{app_1}, {app_2} e altre # possono interrompere}}"</string>
+    <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Calcolo in corso…"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Consenti alle app di ignorarla"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"App che possono interrompere"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Seleziona altre app"</string>
@@ -3810,6 +3855,14 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Passa alla modalità Solo sveglie per un\'ora, fino alle ore {time}}other{Passa alla modalità Solo sveglie per # ore, fino alle ore {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Cambia su Solo sveglie fino alle <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Cambia su Interrompi sempre"</string>
+    <!-- no translation found for zen_mode_rename_title (8146882272966214558) -->
+    <skip />
+    <!-- no translation found for zen_mode_new_custom_title (321750898430776191) -->
+    <skip />
+    <!-- no translation found for zen_mode_new_custom_default_name (2778307946775085105) -->
+    <skip />
+    <!-- no translation found for zen_mode_edit_name_hint (4584652062167540536) -->
+    <skip />
     <string name="warning_button_text" msgid="1274234338874005639">"Avviso"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Chiudi"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Invia feedback sul dispositivo"</string>
@@ -4793,11 +4846,12 @@
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Sinistra"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Destra"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Custodia"</string>
-    <!-- no translation found for bluetooth_header_battery_content_description (3804237436331504879) -->
-    <skip />
+    <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Riquadro delle impostazioni"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Forza la modalità desktop"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Forza la modalità desktop sperimentale su display secondari"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Attiva finestre a forma libera"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Attiva il supporto delle finestre a forma libera."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Attiva finestre a forma libera sul secondo display"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Attiva le finestre a forma libera solo sul secondo display."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Attiva app non ridimensionabili in multi-finestra"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Consente la presenza di app non ridimensionabili in modalità multi-finestra"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Esegui override modalità Buio forzata"</string>
@@ -4865,14 +4919,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"La partizione dei dati del dispositivo deve essere convertita in ext4 prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Se attivi l\'opzione a 16 kB, sarà necessario un ulteriore riavvio. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Tutti i dati verranno cancellati dal dispositivo e il file system verrà convertito in ext4 dopo la conferma. Quando termina l\'operazione, riabilita nuovamente la modalità a 16 kB."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Resetta tutti i dati"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Impossibile riformattare e cancellare la partizione di dati in ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Sblocco del bootloader richiesto per la modalità a 16 kB"</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Sblocco bootloader richiesto"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"È necessario sbloccare il bootloader del dispositivo prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Tutti i dati utente e le impostazioni verranno cancellati quando attivi la modalità a 16 kB. Dopo aver sbloccato il bootloader, l\'attivazione dell\'opzione a 16 kB richiederà due riavvii. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo, il che ripristina i dati di fabbrica del dispositivo. Sblocca il bootloader e riprova. Puoi consultare le istruzioni su come fare all\'indirizzo &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Modalità indipendente dalla pagina a 4 kB in uso"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"Hai attivato l\'opzione a 4 kB della modalità indipendente dalla pagina. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi bloccare il bootloader del dispositivo. Tocca per leggere altro."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"Hai attivato l\'opzione a 4 kB della modalità indipendente dalla pagina. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi bloccare il bootloader del dispositivo. Questo eseguirà nuovamente il ripristino dei dati di fabbrica del dispositivo e ripristinerà le impostazioni di produzione. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Se l\'avvio di Android sul dispositivo non riesce o è instabile, esegui nuovamente il flashing del dispositivo con le immagini del produttore più recenti da &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e seleziona \"Cancella dati dispositivo\", \"Blocca bootloader\" e \"Esegui il flash forzato di tutte le partizioni\"."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Modalità indipendente dalla pagina a 16 kB in uso"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"Hai attivato l\'opzione a 16 kB della modalità indipendente dalla pagina. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo. Tocca per leggere altro."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"Hai attivato l\'opzione a 16 kB della modalità indipendente dalla pagina. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo. Questo eseguirà nuovamente il ripristino dei dati di fabbrica del dispositivo e ripristinerà le impostazioni di produzione. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Se l\'avvio di Android sul dispositivo non riesce o è instabile, esegui nuovamente il flashing del dispositivo con le immagini del produttore più recenti da &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e seleziona \"Cancella dati dispositivo\", \"Blocca bootloader\" e \"Esegui il flash forzato di tutte le partizioni\"."</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"Hai attivato l\'opzione a 16 kB della modalità page-agnostic. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo. Tocca per leggere altro."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Hai attivato l\'opzione a 16 kB della modalità page-agnostic. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per tornare alla modalità di produzione, devi tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo. Questo eseguirà nuovamente il ripristino dei dati di fabbrica del dispositivo e ripristinerà le impostazioni di produzione. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Se l\'avvio di Android sul dispositivo non riesce o è instabile, esegui nuovamente il flashing del dispositivo con le immagini del produttore più recenti da &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e seleziona \"Cancella dati dispositivo\", \"Blocca bootloader\" e \"Esegui il flash forzato di tutte le partizioni\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modalità indipendente dalla pagina a 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Leggi tutto"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gestore segnalazione di bug"</string>
@@ -5004,7 +5058,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Usa Blocco app su schermo"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Usa Opzioni sviluppatore"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usa servizio di stampa"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Consenti utenti multipli"</string>
+    <string name="multiple_users_main_switch_title" msgid="9158796544835843201">"Consenti cambio utente"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"consentire, multiplo, utente, autorizzare, molti"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"più, utenti, profili, persone, account, sensore, molti"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usa debug wireless"</string>
@@ -5118,8 +5172,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Scegli cosa visualizzare sullo schermo quando il tablet è agganciato alla base. Il dispositivo potrebbe consumare più energia quando viene usato un salvaschermo."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizza"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personalizza <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"È necessario riavviare per attivare il supporto del formato libero."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"È necessario riavviare per forzare la modalità desktop su display secondari."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"È necessario riavviare per abilitare il supporto delle finestre a forma libera legacy."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"È necessario riavviare per modificare il supporto delle finestre a forma libera."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"È necessario riavviare per forzare le finestre a forma libera sul secondo display."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Riavvia ora"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Riavvia più tardi"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Audio spaziale"</string>
@@ -5237,6 +5292,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"On"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Off"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"On"</string>
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Audio %1$d%% a sinistra, %2$d%% a destra"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Audio %1$d%% a destra, %2$d%% a sinistra"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Il nome del tuo dispositivo è visibile alle app installate. Potrebbe essere visibile anche ad altre persone quando ti connetti a dispositivi Bluetooth, a una rete Wi-Fi o configuri un hotspot Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genere grammaticale"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Seleziona genere grammaticale"</string>
@@ -5348,4 +5405,5 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Ascolta lo stream"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scansiona il codice QR di uno stream audio da ascoltare con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Impossibile modificare la password durante la condivisione. Per modificarla, devi prima disattivare la condivisione audio."</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Cerca in Impostazioni"</string>
 </resources>

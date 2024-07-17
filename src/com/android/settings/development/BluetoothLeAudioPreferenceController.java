@@ -23,6 +23,7 @@ import android.content.Context;
 import android.os.SystemProperties;
 import android.sysprop.BluetoothProperties;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
@@ -45,7 +46,7 @@ public class BluetoothLeAudioPreferenceController
     static final String LE_AUDIO_SWITCHER_DISABLED_PROPERTY =
             "persist.bluetooth.leaudio_switcher.disabled";
 
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
 
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
@@ -54,7 +55,7 @@ public class BluetoothLeAudioPreferenceController
     boolean mChanged = false;
 
     public BluetoothLeAudioPreferenceController(Context context,
-            DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
         mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();

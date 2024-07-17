@@ -31,7 +31,6 @@ import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.testutils.shadow.ShadowNotificationManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -92,35 +91,18 @@ public class DndConditionalCardControllerTest {
 
     private ZenModeConfig getCustomConfig() {
         final ZenModeConfig config = new ZenModeConfig();
-        // Some sounds allowed
-        config.allowAlarms = true;
-        config.allowMedia = false;
-        config.allowSystem = false;
-        config.allowCalls = true;
-        config.allowRepeatCallers = true;
-        config.allowMessages = false;
-        config.allowReminders = false;
-        config.allowEvents = false;
-        config.areChannelsBypassingDnd = false;
-        config.allowCallsFrom = ZenModeConfig.SOURCE_ANYONE;
-        config.allowMessagesFrom = ZenModeConfig.SOURCE_ANYONE;
-        config.suppressedVisualEffects = 0;
+        config.applyNotificationPolicy(new NotificationManager.Policy(
+                NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS
+                        | NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS
+                        |  NotificationManager.Policy.PRIORITY_CATEGORY_CALLS,
+                NotificationManager.Policy.PRIORITY_SENDERS_ANY, 0));
         return config;
     }
 
     private ZenModeConfig getMutedAllConfig() {
         final ZenModeConfig config = new ZenModeConfig();
-        // No sounds allowed
-        config.allowAlarms = false;
-        config.allowMedia = false;
-        config.allowSystem = false;
-        config.allowCalls = false;
-        config.allowRepeatCallers = false;
-        config.allowMessages = false;
-        config.allowReminders = false;
-        config.allowEvents = false;
+        config.applyNotificationPolicy(new NotificationManager.Policy(0, 0, 0));
         config.areChannelsBypassingDnd = false;
-        config.suppressedVisualEffects = 0;
         return config;
     }
 }

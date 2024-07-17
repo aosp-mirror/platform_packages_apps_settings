@@ -17,7 +17,6 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
-import android.telephony.SubscriptionManager
 import android.telephony.TelephonyCallback
 import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
@@ -27,6 +26,7 @@ import com.android.settingslib.spa.testutils.toListWithTimeout
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -49,20 +49,15 @@ class CallStateRepositoryTest {
         }
     }
 
-    private val mockSubscriptionManager = mock<SubscriptionManager> {
-        on { activeSubscriptionIdList } doReturn intArrayOf(SUB_ID)
-        on { addOnSubscriptionsChangedListener(any(), any()) } doAnswer {
-            val listener = it.arguments[1] as SubscriptionManager.OnSubscriptionsChangedListener
-            listener.onSubscriptionsChanged()
-        }
+    private val mockSubscriptionRepository = mock<SubscriptionRepository> {
+        on { activeSubscriptionIdListFlow() } doReturn flowOf(listOf(SUB_ID))
     }
 
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
         on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
-        on { subscriptionManager } doReturn mockSubscriptionManager
     }
 
-    private val repository = CallStateRepository(context)
+    private val repository = CallStateRepository(context, mockSubscriptionRepository)
 
     @Test
     fun callStateFlow_initial_sendInitialState() = runBlocking {
@@ -89,8 +84,8 @@ class CallStateRepositoryTest {
 
     @Test
     fun isInCallFlow_noActiveSubscription() = runBlocking {
-        mockSubscriptionManager.stub {
-            on { activeSubscriptionIdList } doReturn intArrayOf()
+        mockSubscriptionRepository.stub {
+            on { activeSubscriptionIdListFlow() } doReturn flowOf(emptyList())
         }
 
         val isInCall = repository.isInCallFlow().firstWithTimeoutOrNull()

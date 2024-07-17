@@ -28,16 +28,20 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.DeviceConfig;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SettingsUIDeviceConfig;
+import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -48,12 +52,13 @@ import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.HashSet;
@@ -62,6 +67,8 @@ import java.util.Set;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowDeviceConfig.class})
 public class AdvancedBluetoothDetailsHeaderControllerTest {
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final int BATTERY_LEVEL_MAIN = 30;
     private static final int BATTERY_LEVEL_LEFT = 25;
     private static final int BATTERY_LEVEL_RIGHT = 45;
@@ -93,7 +100,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = Robolectric.buildActivity(SettingsActivity.class).get();
         mController = new AdvancedBluetoothDetailsHeaderController(mContext, "pref_Key");
         when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
         mController.init(mCachedDevice);
@@ -272,6 +279,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
                 View.GONE);
         assertThat(layout.findViewById(R.id.bt_battery_icon).getVisibility()).isEqualTo(View.GONE);
         assertThat(layout.findViewById(R.id.header_icon).getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(layout.findViewById(R.id.battery_ring).getVisibility()).isEqualTo(View.GONE);
     }
 
     @Ignore
@@ -546,6 +554,10 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
         final TextView textView = linearLayout.findViewById(R.id.bt_battery_summary);
         assertThat(textView.getText().toString()).isEqualTo(
                 com.android.settings.Utils.formatPercentage(batteryLevel));
+        if (Flags.enableBluetoothDeviceDetailsPolish()) {
+            final ProgressBar bar = linearLayout.findViewById(R.id.battery_ring);
+            assertThat(bar.getProgress()).isEqualTo(batteryLevel);
+        }
     }
 
     private void assertBatteryIcon(LinearLayout linearLayout, int resId) {

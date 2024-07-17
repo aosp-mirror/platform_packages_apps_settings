@@ -9,18 +9,41 @@ flag {
 }
 
 flag {
+  name: "rotation_connected_display_setting"
+  namespace: "display_manager"
+  description: "Allow changing rotation of the connected display."
+  bug: "294015706"
+}
+
+flag {
+  name: "resolution_and_enable_connected_display_setting"
+  namespace: "display_manager"
+  description: "Allow enabling/disabling and changing resolution of the connected display."
+  bug: "253296253"
+}
+
+flag {
   name: "enable_auth_challenge_for_usb_preferences"
   namespace: "safety_center"
   description: "Gates whether to require an auth challenge for changing USB preferences"
   bug: "317367746"
 }
 
-
 flag {
     name: "enable_bonded_bluetooth_device_searchable"
     namespace: "pixel_cross_device_control"
     description: "Set bonded bluetooth devices under connected devices page to be searchable by Settings search."
     bug: "319056077"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}
+
+flag {
+    name: "exclude_webcam_auth_challenge"
+    namespace: "safety_center"
+    description: "Gates whether to exclude webcam from USB preferences auth challenge."
+    bug: "349370229"
     metadata {
         purpose: PURPOSE_BUGFIX
     }

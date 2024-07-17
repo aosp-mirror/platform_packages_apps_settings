@@ -34,6 +34,8 @@ public class PageAgnosticNotificationService extends Service {
 
     private static final String NOTIFICATION_CHANNEL_ID =
             "com.android.settings.development.PageAgnosticNotificationService";
+    public static final String INTENT_ACTION_DISMISSED =
+            "com.android.settings.development.NOTIFICATION_DISMISSED";
     private static final int NOTIFICATION_ID = 1;
 
     static final int DISABLE_UPDATES_SETTING = 1;
@@ -63,6 +65,9 @@ public class PageAgnosticNotificationService extends Service {
     public void onCreate() {
         super.onCreate();
         createNotificationChannel();
+
+        // No updates should be allowed in page-agnostic mode
+        disableAutomaticUpdates();
     }
 
     private Notification buildNotification() {
@@ -89,6 +94,15 @@ public class PageAgnosticNotificationService extends Service {
                         notifyIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
+        Intent dismissIntent = new Intent(this, Enable16KBootReceiver.class);
+        dismissIntent.setAction(INTENT_ACTION_DISMISSED);
+        PendingIntent dismissPendingIntent =
+                PendingIntent.getBroadcast(
+                        this.getApplicationContext(),
+                        0,
+                        dismissIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
         Notification.Action action =
                 new Notification.Action.Builder(
                                 R.drawable.empty_icon,
@@ -96,14 +110,15 @@ public class PageAgnosticNotificationService extends Service {
                                 notifyPendingIntent)
                         .build();
 
+        // TODO:(b/349860833) Change text style to BigTextStyle once the ellipsis issue is fixed.
         Notification.Builder builder =
                 new Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
                         .setContentTitle(title)
                         .setContentText(text)
                         .setOngoing(true)
                         .setSmallIcon(R.drawable.ic_settings_24dp)
-                        .setStyle(new Notification.BigTextStyle().bigText(text))
                         .setContentIntent(notifyPendingIntent)
+                        .setDeleteIntent(dismissPendingIntent)
                         .addAction(action);
 
         return builder.build();
@@ -131,9 +146,6 @@ public class PageAgnosticNotificationService extends Service {
         if (mNotificationManager != null) {
             mNotificationManager.notify(NOTIFICATION_ID, notification);
         }
-
-        // No updates should be allowed in page-agnostic mode
-        disableAutomaticUpdates();
-        return Service.START_NOT_STICKY;
+        return Service.START_REDELIVER_INTENT;
     }
 }
