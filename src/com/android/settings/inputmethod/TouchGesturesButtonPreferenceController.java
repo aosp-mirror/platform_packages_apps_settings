@@ -72,7 +72,8 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        boolean isTouchpad = NewKeyboardSettingsUtils.isTouchpad();
+        return isTouchpad ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     private void showTouchpadGestureEducation() {

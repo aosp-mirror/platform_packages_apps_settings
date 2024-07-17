@@ -53,5 +53,11 @@
             android:title="@string/slow_keys"
             android:defaultValue="false" />
 
+        <SwitchPreferenceCompat
+            android:key="accessibility_mouse_keys"
+            android:title="@string/mouse_keys"
+            android:summary="@string/mouse_keys_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 </PreferenceScreen>

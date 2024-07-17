@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingBluetoothDeviceUpdater.PREF_KEY_PREFIX;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -85,7 +87,6 @@ import java.util.List;
 public class AudioSharingBluetoothDeviceUpdaterTest {
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
     private static final String TEST_DEVICE_NAME = "test";
-    private static final String PREF_KEY = "audio_sharing_bt";
     private static final String TAG = "AudioSharingBluetoothDeviceUpdater";
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -263,7 +264,7 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
 
     @Test
     public void getPreferenceKey_returnsCorrectKey() {
-        assertThat(mDeviceUpdater.getPreferenceKey()).isEqualTo(PREF_KEY);
+        assertThat(mDeviceUpdater.getPreferenceKeyPrefix()).isEqualTo(PREF_KEY_PREFIX);
     }
 
     @Test
