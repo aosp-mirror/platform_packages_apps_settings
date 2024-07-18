@@ -156,7 +156,7 @@ class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenc
         public void onBindViewHolder(@NonNull IconHolder holder, int position) {
             IconOptionsProvider.IconInfo iconInfo = mIconResources.get(position);
             Drawable iconDrawable = mIconCache.computeIfAbsent(iconInfo,
-                    info -> IconUtil.makeSmallIconCircle(mContext, info.resId()));
+                    info -> IconUtil.makeIconPickerItem(mContext, info.resId()));
             holder.bindIcon(iconInfo, iconDrawable);
         }
 
