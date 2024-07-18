@@ -24,6 +24,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.service.notification.ZenPolicy;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -59,7 +61,7 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
     private ApplicationsState.Session mAppSession;
     private final ZenHelperBackend mHelperBackend;
     private ZenMode mZenMode;
-    private Preference mPreference;
+    private CircularIconsPreference mPreference;
     private final Fragment mHost;
 
     ZenModeAppsLinkPreferenceController(Context context, String key, Fragment host,
@@ -97,14 +99,21 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
                 .setArguments(bundle)
                 .toIntent());
         mZenMode = zenMode;
-        mPreference = preference;
-        if (TextUtils.isEmpty(mPreference.getSummary())) {
-            mPreference.setSummary(R.string.zen_mode_apps_calculating);
+        mPreference = (CircularIconsPreference) preference;
+
+        if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_NONE) {
+            mPreference.setSummary(R.string.zen_mode_apps_none_apps);
+            mPreference.displayIcons(CircularIconSet.EMPTY);
+        } else {
+            if (TextUtils.isEmpty(mPreference.getSummary())) {
+                mPreference.setSummary(R.string.zen_mode_apps_calculating);
+            }
+            if (mApplicationsState != null && mHost != null) {
+                mAppSession = mApplicationsState.newSession(mAppSessionCallbacks,
+                        mHost.getLifecycle());
+            }
+            triggerUpdateAppsBypassingDnd();
         }
-        if (mApplicationsState != null && mHost != null) {
-            mAppSession = mApplicationsState.newSession(mAppSessionCallbacks, mHost.getLifecycle());
-        }
-        triggerUpdateAppsBypassingDnd();
     }
 
     private void triggerUpdateAppsBypassingDnd() {
@@ -126,6 +135,9 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
         ImmutableList<AppEntry> apps = getAppsBypassingDndSortedByName(allApps);
 
         mPreference.setSummary(mSummaryHelper.getAppsSummary(mZenMode, apps));
+
+        mPreference.displayIcons(new CircularIconSet<>(apps,
+                app -> Utils.getBadgedIcon(mContext, app.info)));
     }
 
     @VisibleForTesting
