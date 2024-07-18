@@ -24,7 +24,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -36,9 +38,12 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.Flags;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.AndroidRuntimeException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +62,7 @@ import com.android.settings.R;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
@@ -92,6 +98,8 @@ public class CombinedBiometricProfileSettingsTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Captor
     private ArgumentCaptor<Preference> mPreferenceCaptor;
     @Mock
@@ -166,6 +174,26 @@ public class CombinedBiometricProfileSettingsTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void testLaunchBiometricPrompt_onCreateFragment() {
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mFragment).startActivityForResult(any(), anyInt());
+        when(mBiometricManager.canAuthenticate(
+                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
+
+        mFragment.onAttach(mContext);
+        mFragment.onCreate(null);
+
+        verify(mFragment).startActivityForResult(intentArgumentCaptor.capture(),
+                eq(BiometricsSettingsBase.BIOMETRIC_AUTH_REQUEST));
+
+        Intent intent = intentArgumentCaptor.getValue();
+        assertThat(intent.getComponent().getClassName()).isEqualTo(
+                ConfirmDeviceCredentialActivity.class.getName());
     }
 
     @Test
