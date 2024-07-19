@@ -259,7 +259,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         appEntries.add(createAppEntry("test2", mContext.getUserId()));
         mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
 
-        assertThat(mPreference.getIconViews()).hasSize(2);
+        assertThat(mPreference.getIcons()).hasSize(2);
     }
 
     @Test

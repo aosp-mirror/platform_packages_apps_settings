@@ -22,6 +22,7 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
@@ -59,6 +60,15 @@ class CircularIconSet<T> {
         mDrawableLoader = drawableLoader;
         mBackgroundExecutor = MoreExecutors.listeningDecorator(sExecutorService);
         mCachedIcons = new ConcurrentHashMap<>();
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("items", mItems).toString();
+    }
+
+    boolean hasSameItemsAs(CircularIconSet<?> other) {
+        return other != null && this.mItems.equals(other.mItems);
     }
 
     int size() {

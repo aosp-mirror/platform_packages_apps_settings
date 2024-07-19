@@ -55,7 +55,7 @@ class IconUtil {
      * Returns a variant of the supplied {@code icon} to be used as the header in the icon picker.
      * The inner icon is 48x48dp and it's contained into a circle of diameter 90dp.
      */
-    static Drawable makeBigIconCircle(@NonNull Context context, Drawable icon) {
+    static Drawable makeIconPickerHeader(@NonNull Context context, Drawable icon) {
         return composeIconCircle(
                 Utils.getColorAttr(context,
                         com.android.internal.R.attr.materialColorSecondaryContainer),
@@ -73,7 +73,7 @@ class IconUtil {
      * The inner icon is 36x36dp and it's contained into a circle of diameter 54dp. It's also set up
      * so that selection and pressed states are represented in the color.
      */
-    static Drawable makeSmallIconCircle(@NonNull Context context, @DrawableRes int iconResId) {
+    static Drawable makeIconPickerItem(@NonNull Context context, @DrawableRes int iconResId) {
         return composeIconCircle(
                 context.getColorStateList(R.color.modes_icon_picker_item_background),
                 context.getResources().getDimensionPixelSize(
@@ -82,6 +82,24 @@ class IconUtil {
                 context.getColorStateList(R.color.modes_icon_picker_item_icon),
                 context.getResources().getDimensionPixelSize(
                         R.dimen.zen_mode_icon_list_item_icon_size));
+    }
+
+    /**
+     * Returns a variant of the supplied icon to be used in a {@link CircularIconsPreference}. The
+     * inner icon is 20x20 dp and it's contained in a circle of diameter 32dp, and is tinted
+     * with the "material secondary container" color combination.
+     */
+    static Drawable makeSoundIcon(@NonNull Context context, @DrawableRes int iconResId) {
+        return composeIconCircle(
+                Utils.getColorAttr(context,
+                        com.android.internal.R.attr.materialColorSecondaryContainer),
+                context.getResources().getDimensionPixelSize(
+                        R.dimen.zen_mode_circular_icon_diameter),
+                checkNotNull(context.getDrawable(iconResId)),
+                Utils.getColorAttr(context,
+                        com.android.internal.R.attr.materialColorOnSecondaryContainer),
+                context.getResources().getDimensionPixelSize(
+                        R.dimen.zen_mode_circular_icon_inner_icon_size));
     }
 
     private static Drawable composeIconCircle(ColorStateList circleColor, @Px int circleDiameterPx,
@@ -93,11 +111,11 @@ class IconUtil {
 
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { background, foreground });
 
-        layerDrawable.setBounds(0, 0, circleDiameterPx, circleDiameterPx);
         layerDrawable.setLayerSize(0, circleDiameterPx, circleDiameterPx);
         layerDrawable.setLayerGravity(1, Gravity.CENTER);
         layerDrawable.setLayerSize(1, iconSizePx, iconSizePx);
 
+        layerDrawable.setBounds(0, 0, circleDiameterPx, circleDiameterPx);
         return layerDrawable;
     }
 }

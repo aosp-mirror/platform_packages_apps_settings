@@ -9366,6 +9366,8 @@
     <string name="zen_mode_apps_work_app"><xliff:g id="app_label" example="Chrome">%s</xliff:g> (Work)</string>
     <!-- Text displayed (for a brief time) while the list of bypassing apps is being fetched. Will be replaced by a zen_mode_apps_subtext. [CHAR_LIMIT=60] -->
     <string name="zen_mode_apps_calculating">Calculating\u2026</string>
+    <!-- Priority Modes: Format for a string displayed when there are more items (e.g. apps, contacts) that can be shown. For example, we show (A)(B)(C)(+5), where this string represents the "+5" value. Needs to be as compact as possible, since it will be drawn in a really small area. [CHAR_LIMIT=4] -->
+    <string name="zen_mode_plus_n_items">+<xliff:g id="number" example="42">%d</xliff:g></string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
