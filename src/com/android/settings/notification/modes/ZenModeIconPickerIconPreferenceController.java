@@ -64,7 +64,7 @@ class ZenModeIconPickerIconPreferenceController extends AbstractZenModePreferenc
 
         FutureUtil.whenDone(
                 zenMode.getIcon(mContext, ZenIconLoader.getInstance()),
-                icon -> mHeaderController.setIcon(IconUtil.makeBigIconCircle(mContext, icon))
+                icon -> mHeaderController.setIcon(IconUtil.makeIconPickerHeader(mContext, icon))
                         .done(/* rebindActions= */ false),
                 mContext.getMainExecutor());
     }
