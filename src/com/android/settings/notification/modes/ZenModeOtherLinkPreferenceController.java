@@ -17,18 +17,43 @@
 package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
+import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_ALARMS;
+import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_EVENTS;
+import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_MEDIA;
+import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS;
+import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
 
 import android.content.Context;
+import android.service.notification.ZenPolicy;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
 import com.android.settingslib.notification.modes.ZenMode;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+
+import java.util.Map;
+
 /**
  * Preference with a link and summary about what other sounds can break through the mode
  */
 class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceController {
+
+    // TODO: b/346551087 - Use proper icons
+    private static final ImmutableMap</* @PriorityCategory */ Integer, /* @DrawableRes */ Integer>
+            PRIORITIES_TO_ICONS = ImmutableMap.of(
+                    PRIORITY_CATEGORY_ALARMS,
+                    com.android.internal.R.drawable.ic_audio_alarm,
+                    PRIORITY_CATEGORY_MEDIA,
+                    com.android.settings.R.drawable.ic_media_stream,
+                    PRIORITY_CATEGORY_SYSTEM,
+                    com.android.settings.R.drawable.ic_settings_keyboards,
+                    PRIORITY_CATEGORY_REMINDERS,
+                    com.android.internal.R.drawable.ic_popup_reminder,
+                    PRIORITY_CATEGORY_EVENTS,
+                    com.android.internal.R.drawable.ic_zen_mode_type_schedule_calendar);
 
     private final ZenModeSummaryHelper mSummaryHelper;
 
@@ -51,7 +76,17 @@ class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceCont
                         zenMode.getId(), 0).toIntent());
 
         preference.setSummary(mSummaryHelper.getOtherSoundCategoriesSummary(zenMode));
-        // TODO: b/346551087 - Show media icons
-        ((CircularIconsPreference) preference).displayIcons(CircularIconSet.EMPTY);
+        ((CircularIconsPreference) preference).displayIcons(getSoundIcons(zenMode.getPolicy()));
+    }
+
+    private CircularIconSet<Integer> getSoundIcons(ZenPolicy policy) {
+        ImmutableList.Builder<Integer> icons = new ImmutableList.Builder<>();
+        for (Map.Entry<Integer, Integer> entry : PRIORITIES_TO_ICONS.entrySet()) {
+            if (policy.isCategoryAllowed(entry.getKey(), false)) {
+                icons.add(entry.getValue());
+            }
+        }
+        return new CircularIconSet<>(icons.build(),
+                iconResId -> IconUtil.makeSoundIcon(mContext, iconResId));
     }
 }
