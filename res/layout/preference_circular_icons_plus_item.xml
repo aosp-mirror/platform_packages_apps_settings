@@ -15,10 +15,18 @@
   limitations under the License.
   -->
 
-<ImageView
+<TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:layout_width="@dimen/zen_mode_circular_icon_diameter"
     android:layout_height="@dimen/zen_mode_circular_icon_diameter"
     android:layout_marginTop="@dimen/zen_mode_circular_icon_margin_vertical"
     android:layout_marginBottom="@dimen/zen_mode_circular_icon_margin_vertical"
-    android:layout_marginEnd="@dimen/zen_mode_circular_icon_margin_between" />
+    android:gravity="center"
+    android:padding="4dp"
+    android:drawablePadding="0dp"
+    android:background="@drawable/preference_circular_icons_plus_item_background"
+    android:textColor="?androidprv:attr/materialColorOnSecondaryContainer"
+    android:maxLines="1"
+    android:autoSizeTextType="uniform"
+    android:autoSizeMinTextSize="6sp" />
