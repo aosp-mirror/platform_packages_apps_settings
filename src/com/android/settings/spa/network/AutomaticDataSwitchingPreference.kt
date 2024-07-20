@@ -34,7 +34,9 @@ fun AutomaticDataSwitchingPreference(
 ) {
     val autoDataSummary = stringResource(id = R.string.primary_sim_automatic_data_msg)
     val coroutineScope = rememberCoroutineScope()
-    val crossSimCallingViewModel = viewModel<CrossSimCallingViewModel>() // handles backup calling
+    // CrossSimCallingViewModel is responsible for maintaining the correct cross sim calling
+    // settings (backup calling).
+    viewModel<CrossSimCallingViewModel>()
     SwitchPreference(
         object : SwitchPreferenceModel {
             override val title = stringResource(id = R.string.primary_sim_automatic_data_title)
@@ -43,7 +45,6 @@ fun AutomaticDataSwitchingPreference(
             override val onCheckedChange: (Boolean) -> Unit = { newEnabled ->
                 coroutineScope.launch(Dispatchers.Default) {
                     setAutoDataEnabled(newEnabled)
-                    crossSimCallingViewModel.updateCrossSimCalling()
                 }
             }
         }
