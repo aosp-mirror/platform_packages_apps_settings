@@ -54,6 +54,36 @@ public class CircularIconSetTest {
     }
 
     @Test
+    public void equals_sameItems_true() {
+        CircularIconSet<Integer> items1 = new CircularIconSet<>(ImmutableList.of(1, 2),
+                num -> new ColorDrawable(Color.BLUE));
+        CircularIconSet<Integer> items2 = new CircularIconSet<>(ImmutableList.of(1, 2),
+                num -> new ColorDrawable(Color.GREEN));
+
+        assertThat(items1.hasSameItemsAs(items2)).isTrue();
+    }
+
+    @Test
+    public void equals_differentTypes_false() {
+        CircularIconSet<Integer> items1 = new CircularIconSet<>(ImmutableList.of(1, 2),
+                num -> new ColorDrawable(Color.BLUE));
+        CircularIconSet<String> items2 = new CircularIconSet<>(ImmutableList.of("a", "b"),
+                str -> new ColorDrawable(Color.GREEN));
+
+        assertThat(items1.hasSameItemsAs(items2)).isFalse();
+    }
+
+    @Test
+    public void equals_differentItems_false() {
+        CircularIconSet<String> items1 = new CircularIconSet<>(ImmutableList.of("a", "b"),
+                str -> new ColorDrawable(Color.GREEN));
+        CircularIconSet<String> items2 = new CircularIconSet<>(ImmutableList.of("a", "b", "c"),
+                str -> new ColorDrawable(Color.GREEN));
+
+        assertThat(items1.hasSameItemsAs(items2)).isFalse();
+    }
+
+    @Test
     public void getIcons_loadsAllIcons() {
         CircularIconSet<Integer> set = new CircularIconSet<>(ImmutableList.of(1, 2, 3),
                 mDrawableLoader);
