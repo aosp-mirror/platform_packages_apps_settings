@@ -87,6 +87,6 @@ class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceCont
             }
         }
         return new CircularIconSet<>(icons.build(),
-                iconResId -> IconUtil.makeSoundIcon(mContext, iconResId));
+                iconResId -> IconUtil.makeCircularIconPreferenceItem(mContext, iconResId));
     }
 }
