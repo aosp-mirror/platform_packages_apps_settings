@@ -17,7 +17,6 @@
 package com.android.settings.notification.modes;
 
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.Menu;
@@ -29,7 +28,6 @@ import androidx.annotation.NonNull;
 import androidx.core.view.MenuProvider;
 
 import com.android.settings.R;
-import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.notification.modes.ZenMode;
 
@@ -58,9 +56,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
                 context, "zen_mode_people", mHelperBackend));
         prefControllers.add(new ZenModeAppsLinkPreferenceController(
-                context, "zen_mode_apps", this,
-                ApplicationsState.getInstance((Application) context.getApplicationContext()),
-                mBackend, mHelperBackend));
+                context, "zen_mode_apps", this, mBackend, mHelperBackend));
         prefControllers.add(new ZenModeOtherLinkPreferenceController(
                 context, "zen_other_settings", mHelperBackend));
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(

@@ -37,6 +37,7 @@ public class WifiConfigInfo extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WifiUtils.setupEdgeToEdge(this);
 
         mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         setContentView(R.layout.wifi_config_info);
