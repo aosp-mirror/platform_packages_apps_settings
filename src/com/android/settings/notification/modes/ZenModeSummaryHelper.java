@@ -56,6 +56,8 @@ import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.notification.modes.ZenMode;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,14 +87,18 @@ class ZenModeSummaryHelper {
             PRIORITY_CATEGORY_REPEAT_CALLERS,
     };
 
+    static final ImmutableList</* @PriorityCategory */ Integer> OTHER_SOUND_CATEGORIES =
+            ImmutableList.of(
+                PRIORITY_CATEGORY_ALARMS,
+                PRIORITY_CATEGORY_MEDIA,
+                PRIORITY_CATEGORY_SYSTEM,
+                PRIORITY_CATEGORY_REMINDERS,
+                PRIORITY_CATEGORY_EVENTS);
+
     String getOtherSoundCategoriesSummary(ZenMode zenMode) {
         List<String> enabledCategories = getEnabledCategories(
                 zenMode.getPolicy(),
-                category -> PRIORITY_CATEGORY_ALARMS == category
-                        || PRIORITY_CATEGORY_MEDIA == category
-                        || PRIORITY_CATEGORY_SYSTEM == category
-                        || PRIORITY_CATEGORY_REMINDERS == category
-                        || PRIORITY_CATEGORY_EVENTS == category,
+                OTHER_SOUND_CATEGORIES::contains,
                 true);
         int numCategories = enabledCategories.size();
         MessageFormat msgFormat = new MessageFormat(
