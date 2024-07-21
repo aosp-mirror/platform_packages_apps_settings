@@ -23,10 +23,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -41,8 +44,11 @@ import android.os.UserManager;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.applications.ApplicationsState;
@@ -51,7 +57,9 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.MoreExecutors;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -71,6 +79,7 @@ import java.util.Random;
 public final class ZenModeAppsLinkPreferenceControllerTest {
 
     private ZenModeAppsLinkPreferenceController mController;
+    private CircularIconsPreference mPreference;
 
     private Context mContext;
     @Mock
@@ -91,10 +100,21 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        CircularIconSet.sExecutorService = MoreExecutors.newDirectExecutorService();
+        mPreference = new CircularIconsPreference(mContext, MoreExecutors.directExecutor());
+
         when(mApplicationsState.newSession(any(), any())).thenReturn(mSession);
         mController = new ZenModeAppsLinkPreferenceController(
                 mContext, "controller_key", mock(Fragment.class), mApplicationsState,
                 mZenModesBackend, mHelperBackend);
+
+        // Ensure the preference view is bound & measured (needed to add child ImageViews).
+        View preferenceView = LayoutInflater.from(mContext).inflate(mPreference.getLayoutResource(),
+                null);
+        preferenceView.measure(View.MeasureSpec.makeMeasureSpec(1000, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(1000, View.MeasureSpec.EXACTLY));
+        PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(preferenceView);
+        mPreference.onBindViewHolder(holder);
     }
 
     private AppEntry createAppEntry(String packageName, int userId) {
@@ -123,13 +143,11 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
     @Test
     public void testUpdateSetsIntent() {
-        // Creates the preference
-        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
         // Create a zen mode that allows priority channels to breakthrough.
         ZenMode zenMode = createPriorityChannelsZenMode();
 
-        mController.updateState(preference, zenMode);
-        Intent launcherIntent = preference.getIntent();
+        mController.updateState(mPreference, zenMode);
+        Intent launcherIntent = mPreference.getIntent();
 
         assertThat(launcherIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo("com.android.settings.notification.modes.ZenModeAppsFragment");
@@ -193,9 +211,20 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateTriggersRebuild() {
-        // Creates the preference
-        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
+    public void updateState_withPolicyAllowingNoChannels_doesNotLoadPriorityApps() {
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowPriorityChannels(false).build())
+                .build();
+
+        mController.updateState(mPreference, zenMode);
+
+        verifyNoMoreInteractions(mSession);
+        verify(mHelperBackend, never()).getPackagesBypassingDnd(anyInt(), anyBoolean());
+        assertThat(String.valueOf(mPreference.getSummary())).isEqualTo("None");
+    }
+
+    @Test
+    public void updateState_withPolicyAllowingPriorityChannels_triggersRebuild() {
         // Create a zen mode that allows priority channels to breakthrough.
         ZenMode zenMode = createPriorityChannelsZenMode();
 
@@ -209,21 +238,35 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
         // Updates the preference with the zen mode. We expect that this causes the app session
         // to trigger a rebuild (and display a temporary text in the meantime).
-        mController.updateZenMode(preference, zenMode);
+        mController.updateZenMode(mPreference, zenMode);
         verify(mSession).rebuild(any(), any(), eq(false));
-        assertThat(String.valueOf(preference.getSummary())).isEqualTo("Calculating…");
+        assertThat(String.valueOf(mPreference.getSummary())).isEqualTo("Calculating…");
 
         // Manually triggers the callback that will happen on rebuild.
         mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
-        assertThat(String.valueOf(preference.getSummary())).isEqualTo("test can interrupt");
+        assertThat(String.valueOf(mPreference.getSummary())).isEqualTo("test can interrupt");
+    }
+
+    @Test
+    public void updateState_withPolicyAllowingPriorityChannels_loadsIcons() {
+        ZenMode zenMode = createPriorityChannelsZenMode();
+
+        mController.updateState(mPreference, zenMode);
+        when(mHelperBackend.getPackagesBypassingDnd(anyInt(), anyBoolean()))
+                .thenReturn(ImmutableList.of("test1", "test2"));
+        ArrayList<ApplicationsState.AppEntry> appEntries = new ArrayList<>();
+        appEntries.add(createAppEntry("test1", mContext.getUserId()));
+        appEntries.add(createAppEntry("test2", mContext.getUserId()));
+        mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
+
+        assertThat(mPreference.getIcons()).hasSize(2);
     }
 
     @Test
     public void testOnPackageListChangedTriggersRebuild() {
-        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
         // Create a zen mode that allows priority channels to breakthrough.
         ZenMode zenMode = createPriorityChannelsZenMode();
-        mController.updateState(preference, zenMode);
+        mController.updateState(mPreference, zenMode);
         verify(mSession).rebuild(any(), any(), eq(false));
 
         mController.mAppSessionCallbacks.onPackageListChanged();
@@ -232,10 +275,9 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
     @Test
     public void testOnLoadEntriesCompletedTriggersRebuild() {
-        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
         // Create a zen mode that allows priority channels to breakthrough.
         ZenMode zenMode = createPriorityChannelsZenMode();
-        mController.updateState(preference, zenMode);
+        mController.updateState(mPreference, zenMode);
         verify(mSession).rebuild(any(), any(), eq(false));
 
         mController.mAppSessionCallbacks.onLoadEntriesCompleted();

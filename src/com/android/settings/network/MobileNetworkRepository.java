@@ -29,7 +29,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
-import android.telephony.UiccCardInfo;
 import android.telephony.UiccPortInfo;
 import android.telephony.UiccSlotInfo;
 import android.util.ArrayMap;
@@ -86,12 +85,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private AirplaneModeObserver mAirplaneModeObserver;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private int mPhysicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
-    private int mLogicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
-    private int mCardState = UiccSlotInfo.CARD_STATE_INFO_ABSENT;
-    private int mPortIndex = TelephonyManager.INVALID_PORT_INDEX;
-    private int mCardId = TelephonyManager.UNINITIALIZED_CARD_ID;
-    private boolean mIsEuicc = false;
-    private boolean mIsRemovable = false;
     private boolean mIsActive = false;
     private Map<Integer, SubscriptionInfo> mSubscriptionInfoMap = new ArrayMap<>();
     private Map<Integer, TelephonyManager> mTelephonyManagerMap = new HashMap<>();
@@ -301,19 +294,13 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             UiccSlotInfo curSlotInfo = uiccSlotInfos[i];
             if (curSlotInfo != null && curSlotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT) {
                 final int index = i;
-                mIsEuicc = curSlotInfo.getIsEuicc();
-                mCardState = curSlotInfo.getCardStateInfo();
-                mIsRemovable = curSlotInfo.isRemovable();
-                mCardId = subInfo.getCardId();
 
                 Collection<UiccPortInfo> uiccPortInfos = curSlotInfo.getPorts();
                 uiccPortInfos.forEach(portInfo -> {
                     if (portInfo.getPortIndex() == subInfo.getPortIndex()
                             && portInfo.getLogicalSlotIndex() == subInfo.getSimSlotIndex()) {
                         mPhysicalSlotIndex = index;
-                        mLogicalSlotIndex = portInfo.getLogicalSlotIndex();
                         mIsActive = portInfo.isActive();
-                        mPortIndex = portInfo.getPortIndex();
                     } else if (DEBUG) {
                         Log.d(TAG, "Can not get port index and physicalSlotIndex for subId "
                                 + subInfo.getSubscriptionId());
@@ -433,7 +420,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 mMobileNetworkDatabase.insertSubsInfo(subInfoEntity);
                 mMetricsFeatureProvider.action(mContext,
                         SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO, subId);
-                insertUiccInfo(subId, telephonyManager);
+                insertUiccInfo(subId);
                 insertMobileNetworkInfo(subId, telephonyManager);
             }
         } else if (DEBUG) {
@@ -488,8 +475,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private void insertUiccInfo(int subId, TelephonyManager telephonyManager) {
-        UiccInfoEntity uiccInfoEntity = convertToUiccInfoEntity(subId, telephonyManager);
+    private void insertUiccInfo(int subId) {
+        UiccInfoEntity uiccInfoEntity = convertToUiccInfoEntity(subId);
         if (DEBUG) {
             Log.d(TAG, "uiccInfoEntity = " + uiccInfoEntity);
         }
@@ -532,27 +519,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         );
     }
 
-    private UiccInfoEntity convertToUiccInfoEntity(int subId, TelephonyManager telephonyManager) {
-        return new UiccInfoEntity(String.valueOf(subId), String.valueOf(mPhysicalSlotIndex),
-                mLogicalSlotIndex, mCardId, mIsEuicc,
-                isMultipleEnabledProfilesSupported(telephonyManager), mCardState, mIsRemovable,
-                mIsActive, mPortIndex
-        );
-    }
-
-    private boolean isMultipleEnabledProfilesSupported(TelephonyManager telephonyManager) {
-        if (telephonyManager == null) {
-            Log.d(TAG, "TelephonyManager is null");
-            return false;
-        }
-
-        List<UiccCardInfo> cardInfos = telephonyManager.getUiccCardsInfo();
-        if (cardInfos == null) {
-            Log.d(TAG, "UICC card info list is empty.");
-            return false;
-        }
-        return cardInfos.stream().anyMatch(
-                cardInfo -> cardInfo.isMultipleEnabledProfilesSupported());
+    private UiccInfoEntity convertToUiccInfoEntity(int subId) {
+        return new UiccInfoEntity(String.valueOf(subId), mIsActive);
     }
 
     @Override

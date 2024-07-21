@@ -65,7 +65,8 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     static final int CONFIRM_REQUEST = 2001;
     private static final int CHOOSE_LOCK_REQUEST = 2002;
     protected static final int ACTIVE_UNLOCK_REQUEST = 2003;
-    private static final int BIOMETRIC_AUTH_REQUEST = 2004;
+    @VisibleForTesting
+    static final int BIOMETRIC_AUTH_REQUEST = 2004;
 
     private static final String SAVE_STATE_CONFIRM_CREDETIAL = "confirm_credential";
     private static final String DO_NOT_FINISH_ACTIVITY = "do_not_finish_activity";

@@ -33,6 +33,7 @@ import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 
 class DataSubscriptionRepository(
@@ -53,6 +54,7 @@ class DataSubscriptionRepository(
             .onStart { emit(SubscriptionManager.getDefaultDataSubscriptionId()) }
             .distinctUntilChanged()
             .conflate()
+            .onEach { Log.d(TAG, "defaultDataSubscriptionIdFlow: $it") }
             .flowOn(Dispatchers.Default)
 
     fun activeDataSubscriptionIdFlow(): Flow<Int> =
