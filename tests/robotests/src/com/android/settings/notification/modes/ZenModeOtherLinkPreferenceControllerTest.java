@@ -17,6 +17,7 @@
 package com.android.settings.notification.modes;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -24,10 +25,10 @@ import android.app.Flags;
 import android.content.Context;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-
-import androidx.preference.Preference;
+import android.service.notification.ZenPolicy;
 
 import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenMode;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -61,10 +62,40 @@ public final class ZenModeOtherLinkPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
-    public void testHasSummary() {
-        Preference pref = mock(Preference.class);
+    public void updateState_loadsSummary() {
+        CircularIconsPreference pref = mock(CircularIconsPreference.class);
         mController.updateZenMode(pref, TestModeBuilder.EXAMPLE);
+
         verify(pref).setSummary(any());
+    }
+
+    @Test
+    public void updateState_loadsIcons() {
+        CircularIconsPreference pref = mock(CircularIconsPreference.class);
+        ZenMode mode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .disallowAllSounds()
+                        .allowMedia(true)
+                        .allowSystem(true)
+                        .allowReminders(true)
+                        .build())
+                .build();
+
+        mController.updateState(pref, mode);
+
+        verify(pref).displayIcons(argThat(iconSet -> iconSet.size() == 3));
+    }
+
+    @Test
+    public void updateState_loadsAllIcons() {
+        CircularIconsPreference pref = mock(CircularIconsPreference.class);
+        ZenMode mode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowAllSounds().build())
+                .build();
+
+        mController.updateState(pref, mode);
+
+        verify(pref).displayIcons(argThat(iconSet ->
+                iconSet.size() == ZenModeSummaryHelper.OTHER_SOUND_CATEGORIES.size()));
     }
 }

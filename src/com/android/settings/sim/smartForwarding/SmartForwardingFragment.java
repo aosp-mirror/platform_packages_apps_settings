@@ -48,8 +48,7 @@ public class SmartForwardingFragment extends PreferenceFragmentCompat
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.smart_forwarding_switch, rootKey);
 
-        String title = getResources().getString(R.string.smart_forwarding_title);
-        getActivity().getActionBar().setTitle(title);
+        getActivity().setTitle(R.string.smart_forwarding_title);
 
         TwoStatePreference smartForwardingSwitch = findPreference(KEY_SMART_FORWARDING_SWITCH);
         if (turnOffSwitch) {

@@ -2815,20 +2815,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".biometrics2.ui.view.FingerprintEnrollmentActivity"
-            android:exported="true"
-            android:theme="@style/GlifTheme.Light" />
-
-        <activity android:name=".biometrics2.ui.view.FingerprintEnrollmentActivity$InternalActivity"
-            android:exported="false"
-            android:theme="@style/GlifTheme.Light"
-            android:taskAffinity="com.android.settings.root" />
-
-        <activity android:name=".biometrics2.ui.view.FingerprintEnrollmentActivity$SetupActivity"
-            android:exported="true"
-            android:permission="android.permission.MANAGE_FINGERPRINT"
-            android:theme="@style/GlifTheme.Light" />
-
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroductionInternal"
                   android:exported="false"
                   android:theme="@style/GlifTheme.Light"
@@ -5186,6 +5172,15 @@
             android:exported="false" />
         <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
         <activity android:name=".spa.SpaAppBridgeActivity" android:exported="false"/>
+
+        <activity
+            android:name=".spa.search.SpaSearchLandingActivity"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SPA_SEARCH_LANDING" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".Settings$FingerprintSettingsActivityV2"
             android:label="@string/security_settings_fingerprint_preference_title"
