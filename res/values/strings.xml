@@ -8871,9 +8871,10 @@
     <string name="notif_listener_more_settings_desc">More settings are available inside this app</string>
 
     <!-- Title for Polite Notifications setting  [CHAR LIMIT=45]-->
-    <string name="notification_polite_title">Adaptive Notifications</string>
-    <string name="notification_polite_main_control_title">Use adaptive notifications</string>
-    <string name="notification_polite_description">When you get many notifications within a short time, your phone will lower volume and minimize pop-ups on screen for up to two minutes. Calls, alarms, and priority conversations still vibrate, make a sound, or show up on the screen, and all notifications are easy to find when you pull down from the top of the screen.</string>
+    <string name="notification_polite_title">Notification cooldown</string>
+    <string name="notification_polite_main_control_title">Use notification cooldown</string>
+    <string name="notification_polite_description">When you receive many notifications within a short time, your device will lower its volume and minimize alerts for up to 2 minutes. Calls, alarms, and priority conversations are not affected.
+        \n\nNotifications received during the cooldown can be found by pulling down from the top of the screen.</string>
     <string name="notification_polite_work">Apply to work profiles</string>
     <string name="notification_polite_work_summary">Apply to work profile apps</string>
 
@@ -9365,6 +9366,8 @@
     <string name="zen_mode_apps_work_app"><xliff:g id="app_label" example="Chrome">%s</xliff:g> (Work)</string>
     <!-- Text displayed (for a brief time) while the list of bypassing apps is being fetched. Will be replaced by a zen_mode_apps_subtext. [CHAR_LIMIT=60] -->
     <string name="zen_mode_apps_calculating">Calculating\u2026</string>
+    <!-- Priority Modes: Format for a string displayed when there are more items (e.g. apps, contacts) that can be shown. For example, we show (A)(B)(C)(+5), where this string represents the "+5" value. Needs to be as compact as possible, since it will be drawn in a really small area. [CHAR_LIMIT=4] -->
+    <string name="zen_mode_plus_n_items">+<xliff:g id="number" example="42">%d</xliff:g></string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>

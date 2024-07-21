@@ -955,8 +955,13 @@
         <item name="biometricsEnrollProgressHelpWithTalkback">@color/udfps_enroll_progress_help_with_talkback</item>
     </style>
 
-    <style name="ScreenLockPasswordHintTextFontStyle">
+    <style name="ScreenLockPasswordHintTextFontStyleError">
         <item name="android:textColor">?android:attr/colorError</item>
+        <item name="android:fontFamily">google-sans-text</item>
+    </style>
+
+    <style name="ScreenLockPasswordHintTextFontStyle">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:fontFamily">google-sans-text</item>
     </style>
 
