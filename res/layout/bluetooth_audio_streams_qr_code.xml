@@ -47,7 +47,9 @@
             <ImageView
                 android:id="@+id/qrcode_view"
                 android:layout_width="@dimen/qrcode_size"
-                android:layout_height="@dimen/qrcode_size"/>
+                android:layout_height="@dimen/qrcode_size"
+                android:contentDescription="@string/audio_streams_qr_code_page_image_label"
+                android:focusable="true"/>
 
             <TextView
                 android:id="@+id/password"
