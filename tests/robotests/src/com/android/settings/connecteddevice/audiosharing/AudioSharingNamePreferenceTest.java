@@ -117,6 +117,7 @@ public class AudioSharingNamePreferenceTest {
         assertThat(shareButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(shareButton.getDrawable()).isNotNull();
         assertThat(shareButton.hasOnClickListeners()).isTrue();
+        assertThat(shareButton.getContentDescription()).isNotNull();
         assertThat(divider).isNotNull();
         assertThat(divider.getVisibility()).isEqualTo(View.VISIBLE);
 
