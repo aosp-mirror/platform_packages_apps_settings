@@ -69,7 +69,8 @@ public class DesktopModeSecondaryDisplayPreferenceController extends
                 isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
         if (isEnabled && mFragment != null) {
             RebootConfirmationDialogFragment.show(
-                    mFragment, R.string.reboot_dialog_force_desktop_mode, this);
+                    mFragment, R.string.reboot_dialog_enable_desktop_mode_on_secondary_display,
+                    this);
         }
         return true;
     }
