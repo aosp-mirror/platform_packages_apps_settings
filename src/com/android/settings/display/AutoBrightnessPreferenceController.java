@@ -18,11 +18,15 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 
 import android.content.Context;
+import android.os.Process;
+import android.os.UserManager;
 import android.provider.Settings;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-
+import com.android.settingslib.PrimarySwitchPreference;
 
 public class AutoBrightnessPreferenceController extends TogglePreferenceController {
 
@@ -53,6 +57,21 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
                 com.android.internal.R.bool.config_automatic_brightness_available)
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!(preference instanceof PrimarySwitchPreference)) {
+            return;
+        }
+
+        PrimarySwitchPreference pref = (PrimarySwitchPreference) preference;
+        if (pref.isEnabled() && UserManager.get(mContext).hasBaseUserRestriction(
+                UserManager.DISALLOW_CONFIG_BRIGHTNESS, Process.myUserHandle())) {
+            pref.setEnabled(false);
+            pref.setSwitchEnabled(false);
+        }
     }
 
     @Override
