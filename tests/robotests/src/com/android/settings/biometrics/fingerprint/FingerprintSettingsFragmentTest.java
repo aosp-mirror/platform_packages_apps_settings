@@ -176,7 +176,7 @@ public class FingerprintSettingsFragmentTest {
 
         Intent intent = intentArgumentCaptor.getValue();
         assertThat(intent.getComponent().getClassName()).isEqualTo(
-                ConfirmDeviceCredentialActivity.class.getName());
+                ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
     }
 
     // Test the case when FingerprintAuthenticateSidecar receives an error callback from the
