@@ -777,6 +777,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                         entries.removePreference(pref);
                     } else if (!enabled) {
                         pref.setEnabled(false);
+                        pref.setSummary(
+                                com.android.settingslib.widget
+                                        .restricted.R.string.disabled_by_admin);
                     }
                 }
             }
