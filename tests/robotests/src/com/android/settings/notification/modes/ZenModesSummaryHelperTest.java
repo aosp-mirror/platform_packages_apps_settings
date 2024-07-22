@@ -89,31 +89,38 @@ public class ZenModesSummaryHelperTest {
 
     @Test
     public void getPeopleSummary_noOne() {
-        ZenMode zenMode = new TestModeBuilder()
-                .setZenPolicy(new ZenPolicy.Builder().disallowAllSounds().build())
-                .build();
+        ZenPolicy policy = new ZenPolicy.Builder().disallowAllSounds().build();
 
-        assertThat(mSummaryHelper.getPeopleSummary(zenMode)).isEqualTo("No one can interrupt");
+        assertThat(mSummaryHelper.getPeopleSummary(policy)).isEqualTo("No one can interrupt");
     }
 
     @Test
     public void getPeopleSummary_some() {
-        ZenMode zenMode = new TestModeBuilder()
-                .setZenPolicy(new ZenPolicy.Builder().allowCalls(PEOPLE_TYPE_CONTACTS).build())
+        ZenPolicy policy = new ZenPolicy.Builder().allowCalls(PEOPLE_TYPE_CONTACTS).build();
+
+        assertThat(mSummaryHelper.getPeopleSummary(policy)).isEqualTo("Some people can interrupt");
+    }
+
+    @Test
+    public void getPeopleSummary_onlyRepeatCallers() {
+        ZenPolicy policy = new ZenPolicy.Builder()
+                .disallowAllSounds()
+                .allowRepeatCallers(true)
                 .build();
 
-        assertThat(mSummaryHelper.getPeopleSummary(zenMode)).isEqualTo("Some people can interrupt");
+        assertThat(mSummaryHelper.getPeopleSummary(policy)).isEqualTo(
+                "Repeat callers can interrupt");
     }
 
     @Test
     public void getPeopleSummary_all() {
-        ZenMode zenMode = new TestModeBuilder()
-                .setZenPolicy(new ZenPolicy.Builder().allowCalls(PEOPLE_TYPE_ANYONE).
-                        allowConversations(CONVERSATION_SENDERS_ANYONE)
-                        .allowMessages(PEOPLE_TYPE_ANYONE).build())
+        ZenPolicy policy = new ZenPolicy.Builder()
+                .allowCalls(PEOPLE_TYPE_ANYONE)
+                .allowConversations(CONVERSATION_SENDERS_ANYONE)
+                .allowMessages(PEOPLE_TYPE_ANYONE)
                 .build();
 
-        assertThat(mSummaryHelper.getPeopleSummary(zenMode)).isEqualTo("All people can interrupt");
+        assertThat(mSummaryHelper.getPeopleSummary(policy)).isEqualTo("All people can interrupt");
     }
 
     @Test
