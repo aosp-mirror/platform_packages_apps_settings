@@ -16,7 +16,9 @@
 
 package com.android.settings.biometrics.fingerprint2
 
+import android.content.pm.PackageManager
 import android.hardware.fingerprint.FingerprintManager
+import android.os.ServiceManager.ServiceNotFoundException
 import android.view.MotionEvent
 import android.view.accessibility.AccessibilityManager
 import androidx.fragment.app.FragmentActivity
@@ -74,8 +76,15 @@ class BiometricsEnvironment(context: SettingsApplication) : ViewModelStoreOwner 
   private val backgroundDispatcher = executorService.asCoroutineDispatcher()
   private val applicationScope = MainScope()
   private val gateKeeperPasswordProvider = GatekeeperPasswordProvider(LockPatternUtils(context))
-  private val fingerprintManager =
-    context.getSystemService(FragmentActivity.FINGERPRINT_SERVICE) as FingerprintManager?
+  private val fingerprintManager = try {
+    if (context.packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+      context.getSystemService(FragmentActivity.FINGERPRINT_SERVICE) as FingerprintManager?
+    } else {
+      null
+    }
+  } catch (exception: ServiceNotFoundException){
+    null
+  }
 
   private val fingerprintSensorRepository: FingerprintSensorRepository =
     FingerprintSensorRepositoryImpl(fingerprintManager, backgroundDispatcher, applicationScope)
