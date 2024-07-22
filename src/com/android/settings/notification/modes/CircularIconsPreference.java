@@ -41,6 +41,7 @@ import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 
+import com.google.common.base.Equivalence;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -105,8 +106,12 @@ public class CircularIconsPreference extends RestrictedPreference {
         }
     }
 
-    void displayIcons(CircularIconSet<?> iconSet) {
-        if (mIconSet != null && mIconSet.hasSameItemsAs(iconSet)) {
+    <T> void displayIcons(CircularIconSet<T> iconSet) {
+        displayIcons(iconSet, null);
+    }
+
+    <T> void displayIcons(CircularIconSet<T> iconSet, @Nullable Equivalence<T> itemEquivalence) {
+        if (mIconSet != null && mIconSet.hasSameItemsAs(iconSet, itemEquivalence)) {
             return;
         }
         mIconSet = iconSet;
@@ -189,7 +194,6 @@ public class CircularIconsPreference extends RestrictedPreference {
         }
         // ... plus 0/1 TextViews at the end.
         if (extraItems > 0 && !(getLastChild(mIconContainer) instanceof TextView)) {
-            // TODO: b/346551087 - Check TODO in preference_circular_icons_plus_item_background
             TextView plusView = (TextView) inflater.inflate(
                     R.layout.preference_circular_icons_plus_item, mIconContainer, false);
             mIconContainer.addView(plusView);

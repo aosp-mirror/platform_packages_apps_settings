@@ -29,6 +29,7 @@ import android.service.notification.ZenPolicy;
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settingslib.notification.modes.ZenMode;
 
 import com.google.common.collect.ImmutableList;
@@ -41,19 +42,13 @@ import java.util.Map;
  */
 class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceController {
 
-    // TODO: b/346551087 - Use proper icons
     private static final ImmutableMap</* @PriorityCategory */ Integer, /* @DrawableRes */ Integer>
             PRIORITIES_TO_ICONS = ImmutableMap.of(
-                    PRIORITY_CATEGORY_ALARMS,
-                    com.android.internal.R.drawable.ic_audio_alarm,
-                    PRIORITY_CATEGORY_MEDIA,
-                    com.android.settings.R.drawable.ic_media_stream,
-                    PRIORITY_CATEGORY_SYSTEM,
-                    com.android.settings.R.drawable.ic_settings_keyboards,
-                    PRIORITY_CATEGORY_REMINDERS,
-                    com.android.internal.R.drawable.ic_popup_reminder,
-                    PRIORITY_CATEGORY_EVENTS,
-                    com.android.internal.R.drawable.ic_zen_mode_type_schedule_calendar);
+                    PRIORITY_CATEGORY_ALARMS, R.drawable.ic_zen_mode_sound_alarms,
+                    PRIORITY_CATEGORY_MEDIA, R.drawable.ic_zen_mode_sound_media,
+                    PRIORITY_CATEGORY_SYSTEM, R.drawable.ic_zen_mode_sound_system,
+                    PRIORITY_CATEGORY_REMINDERS, R.drawable.ic_zen_mode_sound_reminders,
+                    PRIORITY_CATEGORY_EVENTS, R.drawable.ic_zen_mode_sound_events);
 
     private final ZenModeSummaryHelper mSummaryHelper;
 
