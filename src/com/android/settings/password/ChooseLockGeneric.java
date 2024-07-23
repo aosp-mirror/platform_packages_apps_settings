@@ -492,9 +492,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                     : null;
                 updatePreferencesOrFinish(false /* isRecreatingActivity */);
                 if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getContext(),
-                        mBiometricsAuthSuccessful, mWaitingForConfirmation)) {
+                        mBiometricsAuthSuccessful, mWaitingForConfirmation, mUserId)) {
                     mWaitingForConfirmation = true;
-                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
+                            mUserId);
                 }
             } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
                 if (resultCode == Activity.RESULT_OK) {
