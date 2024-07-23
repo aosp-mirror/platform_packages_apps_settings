@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Mati"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Hidup / # apl memiliki akses kepada lokasi}other{Hidup / # apl memiliki akses kepada lokasi}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Memuatkan…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Apl dengan kebenaran peranti Berdekatan boleh menentukan kedudukan relatif peranti tersambung."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Apl dengan kebenaran peranti berdekatan boleh menentukan kedudukan relatif peranti tersambung."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Akses lokasi dimatikan untuk apl dan perkhidmatan. Lokasi peranti anda mungkin tetap dihantar kepada pasukan bantuan kecemasan apabila anda menghubungi atau menghantar teks kepada nombor kecemasan."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Ketahui lebih lanjut tentang tetapan Lokasi"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Untuk membuat perubahan, lawati Tetapan ChromeOS &gt; Privasi dan keselamatan &gt; Kawalan privasi &gt; Akses lokasi"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Melaraskan masa yang diambil untuk mengaktifkan tekanan kekunci kepada <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Kekunci Lekit"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Tekan satu kekunci pada satu-satu masa untuk pintasan, bukan menahan beberapa kekunci secara serentak"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Kekunci tetikus"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Gunakan papan kekunci fizikal untuk mengawal tetikus."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Pintasan papan kekunci"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Tunjukkan senarai pintasan"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Papan kekunci &amp; alatan profil kerja"</string>
@@ -3652,9 +3654,10 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Apl ini tidak menyokong tetapan dipertingkatkan"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Lagi tetapan"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Lagi tetapan tersedia dalam apl ini"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Pemberitahuan Boleh Suai"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Gunakan pemberitahuan boleh suai"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Apabila anda menerima banyak pemberitahuan dalam tempoh masa yang singkat, telefon anda akan mengurangkan kelantangan dan meminimumkan tetingkap timbul pada skrin hingga dua minit. Panggilan, penggera dan perbualan keutamaan masih bergetar, mengeluarkan bunyi atau dipaparkan pada skrin dan semua pemberitahuan mudah ditemukan apabila anda menarik bahagian atas skrin ke bawah."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Tempoh bertenang pemberitahuan"</string>
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Gunakan tempoh bertenang pemberitahuan"</string>
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Gunakan pada profil kerja"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Gunakan pada apl profil kerja"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Perkhidmatan pembantu VR"</string>
@@ -3811,7 +3814,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Apl yang dipilih"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Tiada"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Tiada apl yang boleh ganggu}=1{{app_1} boleh ganggu}=2{{app_1} dan {app_2} boleh ganggu}=3{{app_1}, {app_2} dan {app_3} boleh ganggu}other{{app_1}, {app_2} dan # lagi boleh ganggu}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (Kerja)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Mengira…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Benarkan apl membatalkan Jangan Ganggu"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apl yang boleh ganggu"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Pilih lagi apl"</string>
@@ -3829,6 +3835,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Tiada apa-apa yang boleh ganggu"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Tiada seorang pun boleh ganggu"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Sesetengah orang boleh ganggu"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Semua orang boleh ganggu"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Pemanggil berulang"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Benarkan pemanggil berulang"</string>
