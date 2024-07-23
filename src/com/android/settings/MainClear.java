@@ -182,10 +182,13 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         }
 
         if (requestCode == KEYGUARD_REQUEST) {
+            final int userId = getActivity().getUserId();
             if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
                     false /* biometricsSuccessfullyAuthenticated */,
-                    false /* biometricsAuthenticationRequested */)) {
-                Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRICS_REQUEST);
+                    false /* biometricsAuthenticationRequested */,
+                    userId)) {
+                Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRICS_REQUEST,
+                        userId);
                 return;
             }
         }
