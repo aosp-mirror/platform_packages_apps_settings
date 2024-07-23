@@ -25,6 +25,7 @@ import static android.service.notification.ZenModeConfig.tryParseScheduleConditi
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -231,12 +232,40 @@ class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenc
             });
 
     private final Preference.OnPreferenceChangeListener mSwitchChangeListener = (p, newValue) -> {
-        final boolean newEnabled = (Boolean) newValue;
-        return saveMode((zenMode) -> {
-            if (newEnabled != zenMode.getRule().isEnabled()) {
-                zenMode.getRule().setEnabled(newEnabled);
+        confirmChangeEnabled(p, (boolean) newValue);
+        return true;
+    };
+
+    private void confirmChangeEnabled(Preference preference, boolean enabled) {
+        @StringRes int title = enabled ? R.string.zen_mode_confirm_enable_title
+                : R.string.zen_mode_confirm_disable_title;
+        @StringRes int message = enabled ? R.string.zen_mode_confirm_enable_message
+                : R.string.zen_mode_confirm_disable_message;
+        @StringRes int confirmButton = enabled ? R.string.zen_mode_action_enable
+                : R.string.zen_mode_action_disable;
+
+        new AlertDialog.Builder(mContext)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(confirmButton,
+                        (dialog, which) -> setModeEnabled(enabled))
+                .setNegativeButton(R.string.cancel,
+                        (dialog, which) -> undoToggleSwitch(preference, enabled))
+                .setOnCancelListener(dialog -> undoToggleSwitch(preference, enabled))
+                .show();
+    }
+
+    private void setModeEnabled(boolean enabled) {
+        saveMode((zenMode) -> {
+            if (enabled != zenMode.getRule().isEnabled()) {
+                zenMode.getRule().setEnabled(enabled);
             }
             return zenMode;
         });
-    };
+    }
+
+    private void undoToggleSwitch(Preference preference, boolean wasSwitchedTo) {
+        PrimarySwitchPreference switchPreference = (PrimarySwitchPreference) preference;
+        switchPreference.setChecked(!wasSwitchedTo);
+    }
 }
