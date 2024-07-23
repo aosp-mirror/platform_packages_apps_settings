@@ -21,7 +21,8 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="private_space_hide_illustration"
         settings:searchable="false"
-        settings:lottie_rawRes="@raw/private_space_hide_when_locked_illustration"/>
+        settings:lottie_rawRes="@raw/private_space_hide_when_locked_illustration"
+        settings:controller="com.android.settings.privatespace.HidePrivateSpaceIllustrationController"/>
 
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="hide_when_locked"
@@ -35,7 +36,9 @@
         settings:searchable="false" />
 
     <PreferenceCategory
-        android:title="@string/private_space_access_header">
+        android:key="private_space_access"
+        android:title="@string/private_space_access_header"
+        settings:controller="com.android.settings.privatespace.HidePrivateSpaceCategoryController">
 
         <Preference
         android:key="search_when_locked_footer"
