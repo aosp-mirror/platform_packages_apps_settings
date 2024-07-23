@@ -70,6 +70,7 @@ public final class DatabaseUtils {
 
     /** Clear memory threshold for device booting phase. */
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
+
     private static final long CLEAR_MEMORY_DELAYED_MS = Duration.ofSeconds(2).toMillis();
     private static final long INVALID_TIMESTAMP = 0L;
 
@@ -527,9 +528,11 @@ public final class DatabaseUtils {
         return startCalendar.getTimeInMillis();
     }
 
-    /** Returns the context with profile parent identity when current user is work profile. */
+    /**
+     * Returns the context with profile parent identity when current user is an additional profile.
+     */
     public static Context getParentContext(Context context) {
-        if (com.android.settingslib.fuelgauge.BatteryUtils.isWorkProfile(context)) {
+        if (com.android.settingslib.fuelgauge.BatteryUtils.isAdditionalProfile(context)) {
             try {
                 return context.createPackageContextAsUser(
                         /* packageName= */ context.getPackageName(),

@@ -18,6 +18,9 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.AlarmManager;
@@ -26,6 +29,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -37,6 +41,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowAlarmManager;
@@ -55,10 +61,15 @@ public final class BootBroadcastReceiverTest {
     private ShadowAlarmManager mShadowAlarmManager;
     private PeriodicJobManager mPeriodicJobManager;
 
+    @Mock
+    private UserManager mUserManager;
+
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        mContext = ApplicationProvider.getApplicationContext();
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         mPeriodicJobManager = PeriodicJobManager.getInstance(mContext);
         mShadowAlarmManager = shadowOf(mContext.getSystemService(AlarmManager.class));
         mReceiver = new BootBroadcastReceiver();
@@ -78,7 +89,15 @@ public final class BootBroadcastReceiverTest {
 
     @Test
     public void onReceive_withWorkProfile_notRefreshesJob() {
-        BatteryTestUtils.setWorkProfile(mContext);
+        doReturn(true).when(mUserManager).isManagedProfile();
+        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
+
+        assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
+    }
+
+    @Test
+    public void onReceive_withPrivateProfile_notRefreshesJob() {
+        doReturn(true).when(mUserManager).isPrivateProfile();
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
 
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
