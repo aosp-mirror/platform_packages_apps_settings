@@ -47,7 +47,6 @@ import android.os.UserManager;
 
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
-import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -440,6 +439,26 @@ public final class DatabaseUtilsTest {
         doReturn(UserHandle.CURRENT).when(mContext).getUser();
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         doReturn(true).when(mUserManager).isManagedProfile();
+        doReturn(UserHandle.SYSTEM).when(mUserManager).getProfileParent(UserHandle.CURRENT);
+
+        DatabaseUtils.sFakeSupplier = () -> getMatrixCursor();
+
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
+                DatabaseUtils.getHistoryMapSinceQueryTimestamp(mContext, 0);
+
+        assertThat(batteryHistMap).isEmpty();
+    }
+
+    @Test
+    public void getHistoryMap_withPrivateProfile_returnExpectedMap()
+            throws PackageManager.NameNotFoundException {
+        doReturn("com.fake.package").when(mContext).getPackageName();
+        doReturn(mMockContext)
+                .when(mContext)
+                .createPackageContextAsUser("com.fake.package", /* flags= */ 0, UserHandle.OWNER);
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(UserHandle.CURRENT).when(mContext).getUser();
+        doReturn(true).when(mUserManager).isPrivateProfile();
         doReturn(UserHandle.SYSTEM).when(mUserManager).getProfileParent(UserHandle.CURRENT);
 
         DatabaseUtils.sFakeSupplier = () -> getMatrixCursor();
