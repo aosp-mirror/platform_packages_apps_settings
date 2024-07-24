@@ -80,6 +80,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     public static final String BIOMETRIC_PROMPT_AUTHENTICATORS = "biometric_prompt_authenticators";
     public static final String BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT =
             "biometric_prompt_negative_button_text";
+    public static final String BIOMETRIC_PROMPT_HIDE_BACKGROUND =
+            "biometric_prompt_hide_background";
 
     public static class InternalActivity extends ConfirmDeviceCredentialActivity {
     }
@@ -165,15 +167,20 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        final Intent intent = getIntent();
+        if (intent.getBooleanExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND, false)) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            getWindow().setDimAmount(1);
+            intent.removeExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND);
+        } else {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
 
         mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
         mUserManager = UserManager.get(this);
         mTrustManager = getSystemService(TrustManager.class);
         mLockPatternUtils = new LockPatternUtils(this);
-
-        Intent intent = getIntent();
         mContext = this;
         mCheckDevicePolicyManager = intent
                 .getBooleanExtra(KeyguardManager.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false);
