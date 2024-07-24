@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,12 @@ package com.android.settings.inputmethod;
 import static android.view.flags.Flags.enableVectorCursorA11ySettings;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.inputmethod.PointerFillStylePreferenceController.KEY_POINTER_FILL_STYLE;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assume.assumeTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,16 +33,16 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.widget.SeekBar;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowSystemSettings;
-import com.android.settings.widget.LabeledSeekBarPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -51,34 +52,43 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-/** Tests for {@link PointerScaleSeekBarController} */
+/** Tests for {@link PointerFillStylePreferenceController} */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowSystemSettings.class,
 })
-public class PointerScaleSeekBarControllerTest {
+public class PointerFillStylePreferenceControllerTest {
+    @Rule
+    public MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    private static final String PREFERENCE_KEY = "pointer_scale";
-
-    @Rule public MockitoRule mMockitoRule = MockitoJUnit.rule();
-
-    @Mock private PreferenceScreen mPreferenceScreen;
-    @Mock private LifecycleOwner mLifecycleOwner;
+    @Mock
+    PreferenceScreen mPreferenceScreen;
+    @Mock
+    LifecycleOwner mLifecycleOwner;
 
     private Context mContext;
-    private LabeledSeekBarPreference mPreference;
-    private PointerScaleSeekBarController mController;
+    private PointerFillStylePreferenceController mController;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mPreference = new LabeledSeekBarPreference(mContext, null);
-        mController = new PointerScaleSeekBarController(mContext, PREFERENCE_KEY);
+        mController = new PointerFillStylePreferenceController(mContext);
+    }
+
+    @Test
+    public void displayPreference_initializeDataStore() {
+        Preference fillPreference = new Preference(mContext);
+        fillPreference.setKey(KEY_POINTER_FILL_STYLE);
+        when(mPreferenceScreen.findPreference(eq(KEY_POINTER_FILL_STYLE))).thenReturn(
+                fillPreference);
+
+        mController.displayPreference(mPreferenceScreen);
+
+        assertNotNull(fillPreference.getPreferenceDataStore());
     }
 
     @Test
@@ -89,30 +99,15 @@ public class PointerScaleSeekBarControllerTest {
     }
 
     @Test
-    public void onProgressChanged_changeListenerUpdatesSetting() {
-        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mPreference);
-        mController.displayPreference(mPreferenceScreen);
-        SeekBar seekBar = mPreference.getSeekbar();
-        int sliderValue = 1;
-
-        mPreference.onProgressChanged(seekBar, sliderValue, false);
-
-        float expectedScale = 1.5f;
-        float currentScale = Settings.System.getFloatForUser(mContext.getContentResolver(),
-                Settings.System.POINTER_SCALE, -1, UserHandle.USER_CURRENT);
-        assertEquals(expectedScale, currentScale, /* delta= */ 0.001f);
-    }
-
-    @Test
-    public void onPause_logCurrentScaleValue() {
-        float scale = 1.5f;
-        Settings.System.putFloatForUser(mContext.getContentResolver(),
-                Settings.System.POINTER_SCALE, scale, UserHandle.USER_CURRENT);
+    public void onPause_logCurrentFillValue() {
+        int fillStyle = 1;
+        Settings.System.putIntForUser(mContext.getContentResolver(),
+                Settings.System.POINTER_FILL_STYLE, fillStyle, UserHandle.USER_CURRENT);
 
         mController.onStateChanged(mLifecycleOwner, Lifecycle.Event.ON_PAUSE);
 
         verify(mFeatureFactory.metricsFeatureProvider).action(
-                    any(), eq(SettingsEnums.ACTION_POINTER_ICON_SCALE_CHANGED),
-                    eq(Float.toString(scale)));
+                    any(), eq(SettingsEnums.ACTION_POINTER_ICON_FILL_STYLE_CHANGED),
+                    eq(fillStyle));
     }
 }
