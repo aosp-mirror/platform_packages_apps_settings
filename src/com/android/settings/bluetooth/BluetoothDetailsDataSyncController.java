@@ -20,13 +20,13 @@ import android.companion.AssociationInfo;
 import android.companion.CompanionDeviceManager;
 import android.companion.datatransfer.PermissionSyncRequest;
 import android.content.Context;
-import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -69,7 +69,7 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
                 a -> Objects.equal(mCachedDevice.getAddress(),
                         a.getDeviceMacAddress().toString().toUpperCase())).max(
                 Comparator.comparingLong(AssociationInfo::getTimeApprovedMs)).ifPresent(
-                    a -> mAssociationId = a.getId());
+                a -> mAssociationId = a.getId());
     }
 
     @Override
@@ -82,7 +82,7 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        SwitchPreference switchPreference = (SwitchPreference) preference;
+        TwoStatePreference switchPreference = (TwoStatePreference) preference;
         String key = switchPreference.getKey();
         if (key.equals(KEY_PERM_SYNC)) {
             if (switchPreference.isChecked()) {
@@ -91,7 +91,7 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
                 mCompanionDeviceManager.disablePermissionsSync(mAssociationId);
             }
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
 
     @Override
     protected void refresh() {
-        SwitchPreference permSyncPref = mPreferenceCategory.findPreference(KEY_PERM_SYNC);
+        TwoStatePreference permSyncPref = mPreferenceCategory.findPreference(KEY_PERM_SYNC);
         if (permSyncPref == null) {
             permSyncPref = createPermSyncPreference(mPreferenceCategory.getContext());
             mPreferenceCategory.addPreference(permSyncPref);
@@ -133,13 +133,11 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
     }
 
     @VisibleForTesting
-    SwitchPreference createPermSyncPreference(Context context) {
-        SwitchPreference pref = new SwitchPreference(context);
+    TwoStatePreference createPermSyncPreference(Context context) {
+        TwoStatePreference pref = new SwitchPreferenceCompat(context);
         pref.setKey(KEY_PERM_SYNC);
         pref.setTitle(context.getString(R.string.bluetooth_details_permissions_sync_title));
-        pref.setSummary(context.getString(R.string.bluetooth_details_permissions_sync_summary,
-                mCachedDevice.getName(),
-                Settings.Global.getString(context.getContentResolver(), "device_name")));
+        pref.setSummary(context.getString(R.string.bluetooth_details_permissions_sync_summary));
         pref.setOnPreferenceClickListener(this);
         return pref;
     }

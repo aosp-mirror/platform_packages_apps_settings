@@ -21,7 +21,7 @@ import android.os.SystemProperties;
 import android.view.ThreadedRenderer;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -54,13 +54,13 @@ public class GpuViewUpdatesPreferenceController extends DeveloperOptionsPreferen
     public void updateState(Preference preference) {
         final boolean isEnabled = SystemProperties.getBoolean(
                 ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, false /* default */);
-        ((SwitchPreference) mPreference).setChecked(isEnabled);
+        ((TwoStatePreference) mPreference).setChecked(isEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         SystemProperties.set(ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, null);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

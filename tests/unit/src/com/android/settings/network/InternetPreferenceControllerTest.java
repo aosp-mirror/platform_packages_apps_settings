@@ -22,9 +22,7 @@ import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,7 +36,6 @@ import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -53,13 +50,19 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.testutils.ResourcesUtils;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
+import com.android.settings.wifi.WifiSummaryUpdater;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
+import com.android.wifitrackerlib.HotspotNetworkEntry;
+import com.android.wifitrackerlib.StandardWifiEntry;
+import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -70,6 +73,7 @@ import java.util.List;
 public class InternetPreferenceControllerTest {
 
     private static final String TEST_SUMMARY = "test summary";
+    private static final String TEST_ALTERNATE_SUMMARY = "test alternate summary";
     private static final String NOT_CONNECTED = "Not connected";
     private static final String SUB_ID_1 = "1";
     private static final String SUB_ID_2 = "2";
@@ -85,6 +89,8 @@ public class InternetPreferenceControllerTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    private Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private SubscriptionInfoEntity mActiveSubInfo;
     @Mock
@@ -93,10 +99,19 @@ public class InternetPreferenceControllerTest {
     private ConnectivityManager mConnectivityManager;
     @Mock
     private LifecycleOwner mLifecycleOwner;
+    @Mock
+    private WifiManager mWifiManager;
+    @Mock
+    private WifiSummaryUpdater mSummaryHelper;
+    @Mock
+    private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
+    @Mock
+    private WifiPickerTracker mWifiPickerTracker;
+    @Mock
+    private HotspotNetworkEntry mHotspotNetworkEntry;
 
     private LifecycleRegistry mLifecycleRegistry;
 
-    private Context mContext;
     private MockInternetPreferenceController mController;
     private PreferenceScreen mScreen;
     private Preference mPreference;
@@ -104,13 +119,15 @@ public class InternetPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mContext.getSystemService(NetworkScoreManager.class))
                 .thenReturn(mock(NetworkScoreManager.class));
-        final WifiManager wifiManager = mock(WifiManager.class);
-        when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(wifiManager);
-        when(wifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
+        when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
+        when(mWifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
+        when(mWifiPickerTrackerHelper.getWifiPickerTracker()).thenReturn(mWifiPickerTracker);
+        when(mWifiPickerTracker.getConnectedWifiEntry()).thenReturn(null /* WifiEntry */);
+        when(mHotspotNetworkEntry.getAlternateSummary()).thenReturn(TEST_ALTERNATE_SUMMARY);
+
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
@@ -119,6 +136,7 @@ public class InternetPreferenceControllerTest {
         mController = new MockInternetPreferenceController(mContext, mock(Lifecycle.class),
                 mLifecycleOwner);
         mController.sIconMap.put(INTERNET_WIFI, 0);
+        mController.mWifiPickerTrackerHelper = mWifiPickerTrackerHelper;
 
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
         mScreen = preferenceManager.createPreferenceScreen(mContext);
@@ -200,6 +218,8 @@ public class InternetPreferenceControllerTest {
 
     @Test
     public void onSummaryChanged_internetWifi_updateSummary() {
+        when(mSummaryHelper.getSummary()).thenReturn(TEST_SUMMARY);
+        mController.mSummaryHelper = mSummaryHelper;
         mController.onInternetTypeChanged(INTERNET_WIFI);
         mController.displayPreference(mScreen);
 
@@ -210,6 +230,8 @@ public class InternetPreferenceControllerTest {
 
     @Test
     public void onSummaryChanged_internetNetworksAvailable_notUpdateSummary() {
+        when(mSummaryHelper.getSummary()).thenReturn(TEST_SUMMARY);
+        mController.mSummaryHelper = mSummaryHelper;
         mController.onInternetTypeChanged(INTERNET_NETWORKS_AVAILABLE);
         mController.displayPreference(mScreen);
         mPreference.setSummary(NOT_CONNECTED);
@@ -251,5 +273,36 @@ public class InternetPreferenceControllerTest {
                         DISPLAY_NAME_1);
         mController.updateCellularSummary();
         assertThat(mPreference.getSummary()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    public void updateHotspotNetwork_isHotspotNetworkEntry_updateAlternateSummary() {
+        when(mWifiPickerTracker.getConnectedWifiEntry()).thenReturn(mHotspotNetworkEntry);
+        mController.onInternetTypeChanged(INTERNET_WIFI);
+        mController.displayPreference(mScreen);
+        mPreference.setSummary(TEST_SUMMARY);
+
+        mController.updateHotspotNetwork();
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(TEST_ALTERNATE_SUMMARY);
+    }
+
+    @Test
+    public void updateHotspotNetwork_notHotspotNetworkEntry_notChangeSummary() {
+        when(mWifiPickerTracker.getConnectedWifiEntry()).thenReturn(mock(StandardWifiEntry.class));
+        mController.onInternetTypeChanged(INTERNET_WIFI);
+        mController.displayPreference(mScreen);
+        mPreference.setSummary(TEST_SUMMARY);
+
+        mController.updateHotspotNetwork();
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(TEST_SUMMARY);
+    }
+
+    @Test
+    public void updateHotspotNetwork_hotspotNetworkNotEnabled_returnFalse() {
+        mController.mWifiPickerTrackerHelper = null;
+
+        assertThat(mController.updateHotspotNetwork()).isFalse();
     }
 }

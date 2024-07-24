@@ -34,7 +34,7 @@ import java.util.List;
  * {@link InputManager.InputDeviceListener}s.
  */
 @Implements(value = InputManager.class, callThroughByDefault = false)
-public class ShadowInputManager {
+public class ShadowInputManager extends org.robolectric.shadows.ShadowInputManager {
 
     private List<InputManager.InputDeviceListener> mInputDeviceListeners;
 

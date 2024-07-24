@@ -50,6 +50,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -90,6 +91,7 @@ public class SetNewPasswordActivityTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void testChooseLockGeneric() {
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 1);

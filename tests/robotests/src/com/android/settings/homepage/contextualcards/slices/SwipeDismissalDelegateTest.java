@@ -36,6 +36,7 @@ import com.android.settings.homepage.contextualcards.conditional.ConditionContex
 import com.android.settings.homepage.contextualcards.slices.SliceFullCardRendererHelper.SliceViewHolder;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -67,12 +68,14 @@ public class SwipeDismissalDelegateTest {
         mDismissalDelegate = new SwipeDismissalDelegate(mDismissalDelegateListener);
     }
 
+    @Ignore("b/313598030")
     @Test
     public void getMovementFlags_conditionalViewHolder_shouldDisableSwipe() {
         assertThat(mDismissalDelegate.getMovementFlags(mRecyclerView, getConditionalViewHolder()))
                 .isEqualTo(0);
     }
 
+    @Ignore("b/313598030")
     @Test
     public void getMovementFlags_dismissalView_shouldDisableSwipe() {
         final RecyclerView.ViewHolder holder = getSliceViewHolder();
@@ -81,6 +84,7 @@ public class SwipeDismissalDelegateTest {
         assertThat(mDismissalDelegate.getMovementFlags(mRecyclerView, holder)).isEqualTo(0);
     }
 
+    @Ignore("b/313598030")
     @Test
     public void getMovementFlags_SliceViewHolder_shouldEnableSwipe() {
         final RecyclerView.ViewHolder holder = getSliceViewHolder();
@@ -90,6 +94,7 @@ public class SwipeDismissalDelegateTest {
                 .isNotEqualTo(0);
     }
 
+    @Ignore("b/313598030")
     @Test
     public void onSwipe_shouldNotifyListener() {
         mDismissalDelegate.onSwiped(getSliceViewHolder(), 1);

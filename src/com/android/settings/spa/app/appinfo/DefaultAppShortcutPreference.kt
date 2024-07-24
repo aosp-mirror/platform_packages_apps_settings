@@ -22,6 +22,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -57,11 +58,12 @@ fun DefaultAppShortcutPreference(shortcut: DefaultAppShortcut, app: ApplicationI
     if (remember(presenter) { !presenter.isAvailable() }) return
     if (presenter.isVisible().observeAsState().value != true) return
 
+    val summary by presenter.summaryFlow.collectAsStateWithLifecycle(
+        initialValue = stringResource(R.string.summary_placeholder),
+    )
     Preference(object : PreferenceModel {
         override val title = stringResource(shortcut.titleResId)
-        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
-            initialValue = stringResource(R.string.summary_placeholder),
-        )
+        override val summary = { summary }
         override val onClick = presenter::startActivity
     })
 }

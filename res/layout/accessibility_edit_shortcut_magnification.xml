@@ -46,6 +46,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp" />
 
+            <include
+                android:id="@+id/two_finger_triple_tap_shortcut"
+                layout="@layout/accessibility_edit_shortcut_component"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:visibility="gone" />
+
             <LinearLayout
                 android:id="@+id/advanced_shortcut"
                 android:layout_width="match_parent"

@@ -28,7 +28,6 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import org.junit.After;
 import org.junit.Before;
@@ -53,8 +52,6 @@ public class DreamMainSwitchPreferenceControllerTest {
     private DreamMainSwitchPreferenceController mController;
     private MainSwitchPreference mPreference;
     private DreamBackend mBackend;
-    @Mock
-    private OnMainSwitchChangeListener mChangeListener;
     private ShadowContentResolver mShadowContentResolver;
 
     @Before

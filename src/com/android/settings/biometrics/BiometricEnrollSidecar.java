@@ -16,13 +16,14 @@
 
 package com.android.settings.biometrics;
 
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.UserHandle;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;

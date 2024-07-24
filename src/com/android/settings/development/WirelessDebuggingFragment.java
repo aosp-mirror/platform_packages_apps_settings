@@ -211,7 +211,8 @@ public class WirelessDebuggingFragment extends DashboardFragment
 
         mOffMessagePreference =
                 new FooterPreference(mFooterCategory.getContext());
-        final CharSequence title = getText(R.string.adb_wireless_list_empty_off);
+        final CharSequence title =
+                getText(com.android.settingslib.R.string.adb_wireless_list_empty_off);
         mOffMessagePreference.setTitle(title);
         mFooterCategory.addPreference(mOffMessagePreference);
     }
@@ -418,7 +419,7 @@ public class WirelessDebuggingFragment extends DashboardFragment
         // For sending to the device details fragment.
         p.savePairedDeviceToExtras(p.getExtras());
         new SubSettingLauncher(getContext())
-                .setTitleRes(R.string.adb_wireless_device_details_title)
+                .setTitleRes(com.android.settingslib.R.string.adb_wireless_device_details_title)
                 .setDestination(AdbDeviceDetailsFragment.class.getName())
                 .setArguments(p.getExtras())
                 .setSourceMetricsCategory(getMetricsCategory())

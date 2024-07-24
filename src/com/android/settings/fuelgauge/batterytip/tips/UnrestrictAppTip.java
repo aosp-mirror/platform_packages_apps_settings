@@ -84,13 +84,14 @@ public class UnrestrictAppTip extends BatteryTip {
         dest.writeParcelable(mAppInfo, flags);
     }
 
-    public static final Creator CREATOR = new Creator() {
-        public BatteryTip createFromParcel(Parcel in) {
-            return new UnrestrictAppTip(in);
-        }
+    public static final Creator CREATOR =
+            new Creator() {
+                public BatteryTip createFromParcel(Parcel in) {
+                    return new UnrestrictAppTip(in);
+                }
 
-        public BatteryTip[] newArray(int size) {
-            return new UnrestrictAppTip[size];
-        }
-    };
+                public BatteryTip[] newArray(int size) {
+                    return new UnrestrictAppTip[size];
+                }
+            };
 }

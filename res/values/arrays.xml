@@ -233,6 +233,26 @@
 
     <!-- Bluetooth Settings -->
 
+    <!-- Bluetooth developer settings: Bluetooth LE Audio modes -->
+    <string-array name="bluetooth_leaudio_mode">
+        <!-- Do not translate. -->
+        <item>Disabled</item>
+        <!-- Do not translate. -->
+        <item>Unicast</item>
+        <!-- Do not translate. -->
+        <item>Unicast and Broadcast</item>
+    </string-array>
+
+    <!-- Values for Bluetooth LE Audio mode -->
+    <string-array name="bluetooth_leaudio_mode_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>disabled</item>
+        <!-- Do not translate. -->
+        <item>unicast</item>
+        <!-- Do not translate. -->
+        <item>broadcast</item>
+    </string-array>
+
     <!-- Bluetooth developer settings: Titles for maximum number of connected audio devices -->
     <string-array name="bluetooth_max_connected_audio_devices">
         <item>Use System Default: <xliff:g id="default_bluetooth_max_connected_audio_devices">%1$d</xliff:g></item>
@@ -1411,7 +1431,7 @@
 
     <string-array name="battery_tips_card_colors" translatable="false">
         <item>color_accent_selector</item>
-        <item>color_battery_anomaly_yellow_selector</item>
+        <item>color_battery_anomaly_app_warning_selector</item>
     </string-array>
 
     <!-- The following 4 arrays are for power anomaly tips card. Please keep them the same size. -->
@@ -1457,6 +1477,44 @@
         <item>@string/battery_app_item_hint_in_bg</item>
         <item>@string/battery_app_item_hint_in_fg</item>
         <item>@string/battery_app_item_hint_in_fg</item>
+    </string-array>
+
+    <!-- A locale list of not supporting Terms of Address. [DO NOT TRANSLATE] -->
+    <string-array name="terms_of_address_unsupported_locales">
+        <item>fr-CA</item> <!-- French (Canada) -->
+    </string-array>
+
+    <!-- A language list of supporting Terms of Address. [DO NOT TRANSLATE] -->
+    <string-array name="terms_of_address_supported_languages">
+        <item>fr</item> <!-- French -->
+    </string-array>
+
+    <!-- Values for notification cooldown -->
+    <string-array name="notification_polite_options">
+        <item>@string/notification_polite_all_apps</item>
+        <item>@string/notification_polite_conversations</item>
+        <item>@string/notification_polite_disabled</item>
+    </string-array>
+
+    <!-- Values for notification cooldown -->
+    <string-array name="notification_polite_options_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Entries for private space auto lock option -->
+    <string-array name="private_space_auto_lock_options">
+        <item>@string/private_space_auto_lock_every_time</item>
+        <item>@string/private_space_auto_lock_after_inactivity</item>
+        <item>@string/private_space_auto_lock_never</item>
+    </string-array>
+
+    <!-- Values for private space auto lock option -->
+    <string-array name="private_space_auto_lock_options_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
 </resources>

@@ -379,7 +379,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 DIALOG_TAG_DISABLE_SIM_CONFIRMATION,
                 title,
                 null,
-                getString(R.string.condition_turn_off),
+                getString(R.string.sim_action_turn_off),
                 getString(R.string.sim_action_cancel));
     }
 

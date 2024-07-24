@@ -52,6 +52,8 @@ public class PhysicalKeyboardPreferenceControllerTest {
     private static final String DEVICE_NAME = "deviceName";
     private static final String LAYOUT_LABEL = "deviceLayutLabel";
     private static final String BLUETOOTHADDRESS = "deviceBluetoothAddress";
+    private static final int VENDOR_ID = 123;
+    private static final int PRODUCT_ID = 456;
 
     @Mock
     private Context mContext;
@@ -84,7 +86,9 @@ public class PhysicalKeyboardPreferenceControllerTest {
                 DEVICE_NAME,
                 mIdentifier,
                 LAYOUT_LABEL,
-                BLUETOOTHADDRESS));
+                BLUETOOTHADDRESS,
+                VENDOR_ID,
+                PRODUCT_ID));
         mController = spy(new PhysicalKeyboardPreferenceController(context, null));
         when(mController.getKeyboards()).thenReturn(keyboards);
 

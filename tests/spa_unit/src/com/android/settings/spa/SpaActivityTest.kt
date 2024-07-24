@@ -18,13 +18,10 @@ package com.android.settings.spa
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.os.UserHandle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.spa.SpaActivity.Companion.isSuwAndPageBlocked
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
-import com.android.settings.spa.SpaActivity.Companion.startSpaActivityForApp
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settingslib.spa.framework.util.KEY_DESTINATION
@@ -34,19 +31,18 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentCaptor
-import org.mockito.Mock
-import org.mockito.Mockito.verify
 import org.mockito.MockitoSession
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
-import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class SpaActivityTest {
     private lateinit var mockSession: MockitoSession
 
-    @Mock
-    private lateinit var context: Context
+    private val context = mock<Context>()
 
     @Before
     fun setUp() {
@@ -71,7 +67,7 @@ class SpaActivityTest {
     }
 
     @Test
-    fun isSuwAndPageBlocked_blocklistedPageInSuw_blocked() {
+    fun isSuwAndPageBlocked_suwBlockedPageInSuw_blocked() {
         whenever(WizardManagerHelper.isDeviceProvisioned(context)).thenReturn(false)
 
         val isBlocked = context.isSuwAndPageBlocked(AppInfoSettingsProvider.name)
@@ -80,7 +76,7 @@ class SpaActivityTest {
     }
 
     @Test
-    fun isSuwAndPageBlocked_blocklistedPageNotInSuw_notBlocked() {
+    fun isSuwAndPageBlocked_SuwBlockedPageNotInSuw_notBlocked() {
         whenever(WizardManagerHelper.isDeviceProvisioned(context)).thenReturn(true)
 
         val isBlocked = context.isSuwAndPageBlocked(AppInfoSettingsProvider.name)
@@ -92,31 +88,14 @@ class SpaActivityTest {
     fun startSpaActivity() {
         context.startSpaActivity(DESTINATION)
 
-        val intentCaptor = ArgumentCaptor.forClass(Intent::class.java)
-        verify(context).startActivity(intentCaptor.capture())
-        val intent = intentCaptor.value
+        val intent = argumentCaptor<Intent> {
+            verify(context).startActivity(capture())
+        }.firstValue
         assertThat(intent.component?.className).isEqualTo(SpaActivity::class.qualifiedName)
         assertThat(intent.getStringExtra(KEY_DESTINATION)).isEqualTo(DESTINATION)
     }
 
-    @Test
-    fun startSpaActivityForApp() {
-        val intent = Intent().apply {
-            data = Uri.parse("package:$PACKAGE_NAME")
-        }
-
-        context.startSpaActivityForApp(DESTINATION, intent)
-
-        val intentCaptor = ArgumentCaptor.forClass(Intent::class.java)
-        verify(context).startActivity(intentCaptor.capture())
-        val capturedIntent = intentCaptor.value
-        assertThat(capturedIntent.component?.className).isEqualTo(SpaActivity::class.qualifiedName)
-        assertThat(capturedIntent.getStringExtra(KEY_DESTINATION))
-            .isEqualTo("Destination/package.name/${UserHandle.myUserId()}")
-    }
-
     private companion object {
         const val DESTINATION = "Destination"
-        const val PACKAGE_NAME = "package.name"
     }
 }

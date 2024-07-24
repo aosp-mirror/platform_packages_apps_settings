@@ -18,6 +18,8 @@ package com.android.settings.biometrics;
 
 import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FACE;
 
+import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_SKIP;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
@@ -34,23 +36,33 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
  */
 public class BiometricsSplitScreenDialog extends InstrumentedDialogFragment {
     private static final String KEY_BIOMETRICS_MODALITY = "biometrics_modality";
+    private static final String KEU_DESTROY_ACTIVITY = "destroy_activity";
 
     @BiometricAuthenticator.Modality
     private int mBiometricsModality;
+    private boolean mDestroyActivity;
 
-    /** Returns the new instance of the class */
+    /**
+     * Returns the new instance of the class
+     * @param biometricsModality Biometric modality.
+     * @param destroyActivity Whether to destroy the activity
+     * @return the current {@link BiometricsSplitScreenDialog}
+     */
     public static BiometricsSplitScreenDialog newInstance(
-            @BiometricAuthenticator.Modality int biometricsModality) {
+            @BiometricAuthenticator.Modality int biometricsModality, boolean destroyActivity) {
         final BiometricsSplitScreenDialog dialog = new BiometricsSplitScreenDialog();
         final Bundle args = new Bundle();
         args.putInt(KEY_BIOMETRICS_MODALITY, biometricsModality);
+        args.putBoolean(KEU_DESTROY_ACTIVITY, destroyActivity);
         dialog.setArguments(args);
+        dialog.setCancelable(false);
         return dialog;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         mBiometricsModality = getArguments().getInt(KEY_BIOMETRICS_MODALITY);
+        mDestroyActivity = getArguments().getBoolean(KEU_DESTROY_ACTIVITY);
         int titleId;
         int messageId;
         switch (mBiometricsModality) {
@@ -65,9 +77,16 @@ public class BiometricsSplitScreenDialog extends InstrumentedDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(titleId)
                 .setMessage(messageId)
+                .setCancelable(false)
                 .setPositiveButton(
                         R.string.biometric_settings_add_biometrics_in_split_mode_ok,
-                        (DialogInterface.OnClickListener) (dialog, which) -> dialog.dismiss());
+                        (DialogInterface.OnClickListener) (dialog, which) -> {
+                            dialog.dismiss();
+                            if (mDestroyActivity) {
+                                getActivity().setResult(RESULT_SKIP);
+                                getActivity().finish();
+                            }
+                        });
         return builder.create();
     }
 

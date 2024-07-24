@@ -18,9 +18,12 @@ package com.android.settings.datetime;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.time.TimeCapabilitiesAndConfig;
+import android.app.time.TimeManager;
 import android.content.Context;
 
 import com.android.settingslib.RestrictedPreference;
@@ -36,12 +39,11 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class TimePreferenceControllerTest {
 
-    @Mock
     private Context mContext;
     @Mock
     private TimePreferenceController.TimePreferenceHost mHost;
     @Mock
-    private DatePreferenceController mDatePreferenceController;
+    private TimeManager mTimeManager;
 
     private TimePreferenceController mController;
     private RestrictedPreference mPreference;
@@ -49,13 +51,11 @@ public class TimePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mPreference = new RestrictedPreference(RuntimeEnvironment.application);
-        mController = new TimePreferenceController(mContext, mHost, mDatePreferenceController);
-    }
-
-    @Test
-    public void isAlwaysAvailable() {
-        assertThat(mController.isAvailable()).isTrue();
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
+        mPreference = new RestrictedPreference(mContext);
+        mController = new TimePreferenceController(mContext, "test_key");
+        mController.setHost(mHost);
     }
 
     @Test
@@ -63,7 +63,10 @@ public class TimePreferenceControllerTest {
         // Make sure not disabled by admin.
         mPreference.setDisabledByAdmin(null);
 
-        when(mDatePreferenceController.isEnabled()).thenReturn(false);
+        TimeCapabilitiesAndConfig capabilitiesAndConfig =
+                DatePreferenceControllerTest.createCapabilitiesAndConfig(/* suggestManualAllowed= */
+                        false);
+        when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
@@ -74,7 +77,10 @@ public class TimePreferenceControllerTest {
         // Make sure not disabled by admin.
         mPreference.setDisabledByAdmin(null);
 
-        when(mDatePreferenceController.isEnabled()).thenReturn(true);
+        TimeCapabilitiesAndConfig capabilitiesAndConfig =
+                DatePreferenceControllerTest.createCapabilitiesAndConfig(/* suggestManualAllowed= */
+                        true);
+        when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isTrue();

@@ -21,6 +21,7 @@ import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationResult;
 import android.hardware.biometrics.PromptInfo;
+import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 
@@ -126,10 +127,9 @@ public class BiometricFragment extends InstrumentedFragment {
         final Bundle bundle = getArguments();
         final PromptInfo promptInfo = bundle.getParcelable(KEY_PROMPT_INFO);
 
-        mBiometricPrompt = new BiometricPrompt.Builder(getContext())
+        BiometricPrompt.Builder promptBuilder = new BiometricPrompt.Builder(getContext())
                 .setTitle(promptInfo.getTitle())
                 .setUseDefaultTitle() // use default title if title is null/empty
-                .setUseDefaultSubtitle() // use default subtitle if subtitle is null/empty
                 .setDeviceCredentialAllowed(true)
                 .setSubtitle(promptInfo.getSubtitle())
                 .setDescription(promptInfo.getDescription())
@@ -140,9 +140,21 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setConfirmationRequired(promptInfo.isConfirmationRequested())
                 .setDisallowBiometricsIfPolicyExists(
                         promptInfo.isDisallowBiometricsIfPolicyExists())
-                .setReceiveSystemEvents(true)
-                .setAllowBackgroundAuthentication(true)
-                .build();
+                .setShowEmergencyCallButton(promptInfo.isShowEmergencyCallButton())
+                .setReceiveSystemEvents(true);
+
+        if (Flags.enableBiometricsToUnlockPrivateSpace()) {
+            promptBuilder = promptBuilder.setAllowBackgroundAuthentication(true /* allow */,
+                    promptInfo.shouldUseParentProfileForDeviceCredential());
+        } else {
+            promptBuilder = promptBuilder.setAllowBackgroundAuthentication(true /* allow */);
+        }
+
+        // Check if the default subtitle should be used if subtitle is null/empty
+        if (promptInfo.isUseDefaultSubtitle()) {
+            promptBuilder.setUseDefaultSubtitle();
+        }
+        mBiometricPrompt = promptBuilder.build();
     }
 
     @Override

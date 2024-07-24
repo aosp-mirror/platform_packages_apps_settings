@@ -17,11 +17,10 @@ package com.android.settings.wifi;
 
 import android.content.Intent;
 
-import androidx.preference.PreferenceFragmentCompat;
-
 import com.android.settings.ButtonBarHandler;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.network.NetworkProviderSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 
@@ -31,7 +30,7 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         if (!modIntent.hasExtra(EXTRA_SHOW_FRAGMENT)) {
-            modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getWifiSettingsClass().getName());
+            modIntent.putExtra(EXTRA_SHOW_FRAGMENT, NetworkProviderSettings.class.getName());
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.wifi_select_network);
         }
         return modIntent;
@@ -39,18 +38,8 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        final boolean isSavedAccessPointsWifiSettings =
-                SavedAccessPointsWifiSettings2.class.getName().equals(fragmentName);
-
-        if (WifiSettings.class.getName().equals(fragmentName)
+        return NetworkProviderSettings.class.getName().equals(fragmentName)
                 || WifiP2pSettings.class.getName().equals(fragmentName)
-                || isSavedAccessPointsWifiSettings) {
-            return true;
-        }
-        return false;
-    }
-
-    /* package */ Class<? extends PreferenceFragmentCompat> getWifiSettingsClass() {
-        return WifiSettings.class;
+                || SavedAccessPointsWifiSettings2.class.getName().equals(fragmentName);
     }
 }

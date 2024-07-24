@@ -51,16 +51,13 @@ public class BatteryTipsController extends BasePreferenceController {
     private OnAnomalyConfirmListener mOnAnomalyConfirmListener;
     private OnAnomalyRejectListener mOnAnomalyRejectListener;
 
-    @VisibleForTesting
-    BatteryTipsCardPreference mCardPreference;
-    @VisibleForTesting
-    AnomalyEventWrapper mAnomalyEventWrapper = null;
-    @VisibleForTesting
-    Boolean mIsAcceptable = false;
+    @VisibleForTesting BatteryTipsCardPreference mCardPreference;
+    @VisibleForTesting AnomalyEventWrapper mAnomalyEventWrapper = null;
+    @VisibleForTesting Boolean mIsAcceptable = false;
 
     public BatteryTipsController(Context context) {
         super(context, ROOT_PREFERENCE_KEY);
-        final FeatureFactory featureFactory = FeatureFactory.getFactory(context);
+        final FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
     }
 
@@ -94,8 +91,11 @@ public class BatteryTipsController extends BasePreferenceController {
         }
         mCardPreference.setVisible(false);
         mMetricsFeatureProvider.action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT,
-                mAnomalyEventWrapper.getEventId());
+                /* attribution= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                /* action= */ SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT,
+                /* pageId= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                /* key= */ mAnomalyEventWrapper.getEventId(),
+                /* value= */ mAnomalyEventWrapper.getAnomalyKeyNumber());
     }
 
     void handleBatteryTipsCardUpdated(
@@ -107,8 +107,8 @@ public class BatteryTipsController extends BasePreferenceController {
             return;
         }
 
-        // Get card preference strings and navigate fragment info
         final String eventId = mAnomalyEventWrapper.getEventId();
+        final int anomalyKeyNumber = mAnomalyEventWrapper.getAnomalyKeyNumber();
 
         // Update card & buttons preference
         if (!mAnomalyEventWrapper.updateTipsCardPreference(mCardPreference)) {
@@ -117,31 +117,46 @@ public class BatteryTipsController extends BasePreferenceController {
         }
 
         // Set battery tips card listener
-        mCardPreference.setOnConfirmListener(() -> {
-            mCardPreference.setVisible(false);
-            if (mOnAnomalyConfirmListener != null) {
-                mOnAnomalyConfirmListener.onAnomalyConfirm();
-            } else if (mAnomalyEventWrapper.launchSubSetting()) {
-                mMetricsFeatureProvider.action(
-                        mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT, eventId);
-            }
-        });
-        mCardPreference.setOnRejectListener(() -> {
-            mCardPreference.setVisible(false);
-            if (mOnAnomalyRejectListener != null) {
-                mOnAnomalyRejectListener.onAnomalyReject();
-            }
-            // For anomaly events with same record key, dismissed until next time full charged.
-            final String dismissRecordKey = mAnomalyEventWrapper.getDismissRecordKey();
-            if (!TextUtils.isEmpty(dismissRecordKey)) {
-                DatabaseUtils.setDismissedPowerAnomalyKeys(mContext, dismissRecordKey);
-            }
-            mMetricsFeatureProvider.action(
-                    mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, eventId);
-        });
+        mCardPreference.setOnConfirmListener(
+                () -> {
+                    mCardPreference.setVisible(false);
+                    if (mOnAnomalyConfirmListener != null) {
+                        mOnAnomalyConfirmListener.onAnomalyConfirm();
+                    } else if (mAnomalyEventWrapper.launchSubSetting()) {
+                        mMetricsFeatureProvider.action(
+                                /* attribution= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                                /* action= */ SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT,
+                                /* pageId= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                                /* key= */ eventId,
+                                /* value= */ anomalyKeyNumber);
+                    }
+                });
+        mCardPreference.setOnRejectListener(
+                () -> {
+                    mCardPreference.setVisible(false);
+                    if (mOnAnomalyRejectListener != null) {
+                        mOnAnomalyRejectListener.onAnomalyReject();
+                    }
+                    // For anomaly events with same record key, dismissed until next time full
+                    // charged.
+                    final String dismissRecordKey = mAnomalyEventWrapper.getDismissRecordKey();
+                    if (!TextUtils.isEmpty(dismissRecordKey)) {
+                        DatabaseUtils.setDismissedPowerAnomalyKeys(mContext, dismissRecordKey);
+                    }
+                    mMetricsFeatureProvider.action(
+                            /* attribution= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                            /* action= */ SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS,
+                            /* pageId= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                            /* key= */ eventId,
+                            /* value= */ anomalyKeyNumber);
+                });
 
         mCardPreference.setVisible(true);
         mMetricsFeatureProvider.action(
-                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, eventId);
+                /* attribution= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                /* action= */ SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW,
+                /* pageId= */ SettingsEnums.FUELGAUGE_BATTERY_HISTORY_DETAIL,
+                /* key= */ eventId,
+                /* value= */ anomalyKeyNumber);
     }
 }

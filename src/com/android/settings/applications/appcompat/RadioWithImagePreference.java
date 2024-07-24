@@ -127,7 +127,7 @@ public class RadioWithImagePreference extends CheckBoxPreference {
     }
 
     private void init() {
-        setWidgetLayoutResource(com.android.settingslib.R.layout.preference_widget_radiobutton);
+        setWidgetLayoutResource(R.layout.preference_widget_radiobutton);
         setLayoutResource(R.layout.radio_with_image_preference);
         setIconSpaceReserved(false);
     }

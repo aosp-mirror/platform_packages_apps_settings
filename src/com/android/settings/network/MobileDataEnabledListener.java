@@ -20,7 +20,12 @@ import android.content.Context;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 
-/** Helper class to listen for changes in the enabled state of mobile data. */
+/**
+ *  Helper class to listen for changes in the enabled state of mobile data.
+ *
+ * @deprecated use {@link MobileDataEnabledFlowKt} instead
+ */
+@Deprecated
 public class MobileDataEnabledListener {
     private Context mContext;
     private Client mClient;

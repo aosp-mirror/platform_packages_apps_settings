@@ -30,7 +30,6 @@ import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory
 import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
-import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
@@ -54,10 +53,10 @@ object AppsMainPageProvider : SettingsPageProvider {
     fun buildInjectEntry() =
         SettingsEntryBuilder.createInject(owner = owner)
             .setUiLayoutFn {
+                val summary = stringResource(R.string.app_and_notification_dashboard_summary)
                 Preference(object : PreferenceModel {
                     override val title = stringResource(R.string.apps_dashboard_title)
-                    override val summary =
-                        stringResource(R.string.app_and_notification_dashboard_summary).toState()
+                    override val summary = { summary }
                     override val onClick = navigator(name)
                     override val icon = @Composable {
                         SettingsIcon(imageVector = Icons.Outlined.Apps)

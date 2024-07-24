@@ -62,28 +62,27 @@ public class LowBatteryTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, SettingsEnums.ACTION_LOW_BATTERY_TIP,
-                mState);
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_LOW_BATTERY_TIP, mState);
     }
 
     @Override
     public void updateState(BatteryTip tip) {
         final LowBatteryTip lowBatteryTip = (LowBatteryTip) tip;
-        mState = lowBatteryTip.mPowerSaveModeOn
-                ? StateType.INVISIBLE : lowBatteryTip.getState();
+        mState = lowBatteryTip.mPowerSaveModeOn ? StateType.INVISIBLE : lowBatteryTip.getState();
     }
 
     boolean isPowerSaveModeOn() {
         return mPowerSaveModeOn;
     }
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public BatteryTip createFromParcel(Parcel in) {
-            return new LowBatteryTip(in);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() {
+                public BatteryTip createFromParcel(Parcel in) {
+                    return new LowBatteryTip(in);
+                }
 
-        public BatteryTip[] newArray(int size) {
-            return new LowBatteryTip[size];
-        }
-    };
+                public BatteryTip[] newArray(int size) {
+                    return new LowBatteryTip[size];
+                }
+            };
 }

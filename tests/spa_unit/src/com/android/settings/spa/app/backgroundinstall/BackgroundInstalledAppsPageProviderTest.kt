@@ -29,12 +29,9 @@ import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.testutils.FakeNavControllerWrapper
-import com.android.settingslib.spa.testutils.any
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
-import com.google.common.truth.Truth
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -42,12 +39,13 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
+import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class BackgroundInstalledAppsPageProviderTest {
@@ -68,26 +66,25 @@ class BackgroundInstalledAppsPageProviderTest {
     @Mock
     private lateinit var mockBackgroundInstallControlService: IBackgroundInstallControlService
 
-    private var packageInfoFlagsCaptor =
-        ArgumentCaptor.forClass(PackageManager.PackageInfoFlags::class.java)
+    private var packageInfoFlagsCaptor = argumentCaptor<PackageManager.PackageInfoFlags>()
 
     private val fakeNavControllerWrapper = FakeNavControllerWrapper()
 
     @Before
     fun setup() {
-        Mockito.`when`(mockContext.packageManager).thenReturn(mockPackageManager)
+        whenever(mockContext.packageManager).thenReturn(mockPackageManager)
     }
     @Test
     fun allAppListPageProvider_name() {
-        Truth.assertThat(BackgroundInstalledAppsPageProvider.name)
+        assertThat(BackgroundInstalledAppsPageProvider.name)
             .isEqualTo(EXPECTED_PROVIDER_NAME)
     }
 
     @Test
     fun injectEntry_title() {
-        Mockito.`when`(mockBackgroundInstallControlService
-            .getBackgroundInstalledPackages(any(Long::class.java), any(Int::class.java)))
+        whenever(mockBackgroundInstallControlService.getBackgroundInstalledPackages(any(), any()))
             .thenReturn(ParceledListSlice(listOf()))
+
         setInjectEntry(false)
 
         composeTestRule.onNodeWithText(
@@ -104,9 +101,9 @@ class BackgroundInstalledAppsPageProviderTest {
 
     @Test
     fun injectEntry_summary() {
-        Mockito.`when`(mockBackgroundInstallControlService
-            .getBackgroundInstalledPackages(any(Long::class.java), any(Int::class.java)))
+        whenever(mockBackgroundInstallControlService.getBackgroundInstalledPackages(any(), any()))
             .thenReturn(ParceledListSlice(listOf()))
+
         setInjectEntry(false)
 
         composeTestRule.onNodeWithText("0 apps").assertIsDisplayed()
@@ -121,15 +118,14 @@ class BackgroundInstalledAppsPageProviderTest {
 
     @Test
     fun injectEntry_onClick_navigate() {
-        Mockito.`when`(mockBackgroundInstallControlService
-            .getBackgroundInstalledPackages(any(Long::class.java), any(Int::class.java)))
+        whenever(mockBackgroundInstallControlService.getBackgroundInstalledPackages(any(), any()))
             .thenReturn(ParceledListSlice(listOf()))
         setInjectEntry(false)
 
         composeTestRule.onNodeWithText(
             context.getString(R.string.background_install_title)).performClick()
 
-        Truth.assertThat(fakeNavControllerWrapper.navigateCalledWith)
+        assertThat(fakeNavControllerWrapper.navigateCalledWith)
             .isEqualTo(EXPECTED_PROVIDER_NAME)
     }
 
@@ -167,11 +163,10 @@ class BackgroundInstalledAppsPageProviderTest {
 
         composeTestRule.onNodeWithText(TEST_LABEL).performClick()
 
-        Truth.assertThat(fakeNavControllerWrapper.navigateCalledWith)
+        assertThat(fakeNavControllerWrapper.navigateCalledWith)
             .isEqualTo("AppInfoSettings/package.name/0")
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun backgroundInstalledAppsWithGroupingListModel_getGroupTitleOne() = runTest {
         val listModel = BackgroundInstalledAppsWithGroupingListModel(context)
@@ -183,10 +178,9 @@ class BackgroundInstalledAppsPageProviderTest {
                     System.currentTimeMillis()
                 ))
 
-        Truth.assertThat(actualGroupTitle).isEqualTo("Apps installed in the last 6 months")
+        assertThat(actualGroupTitle).isEqualTo("Apps installed in the last 6 months")
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun backgroundInstalledAppsWithGroupingListModel_getGroupTitleTwo() = runTest {
         val listModel = BackgroundInstalledAppsWithGroupingListModel(context)
@@ -198,14 +192,13 @@ class BackgroundInstalledAppsPageProviderTest {
                     0L
         ))
 
-        Truth.assertThat(actualGroupTitle).isEqualTo("Apps installed more than 6 months ago")
+        assertThat(actualGroupTitle).isEqualTo("Apps installed more than 6 months ago")
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun backgroundInstalledAppsWithGroupingListModel_transform() = runTest {
         val listModel = BackgroundInstalledAppsWithGroupingListModel(mockContext)
-        Mockito.`when`(mockPackageManager.getPackageInfoAsUser(
+        whenever(mockPackageManager.getPackageInfoAsUser(
             eq(TEST_PACKAGE_NAME),
             packageInfoFlagsCaptor.capture(),
             eq(TEST_USER_ID))
@@ -215,17 +208,16 @@ class BackgroundInstalledAppsPageProviderTest {
 
         val recordList = recordListFlow.first()
 
-        Truth.assertThat(recordList).hasSize(1)
-        Truth.assertThat(recordList[0].app).isSameInstanceAs(APP)
-        Truth.assertThat(packageInfoFlagsCaptor.value.value).isEqualTo(EXPECTED_PACKAGE_INFO_FLAG)
+        assertThat(recordList).hasSize(1)
+        assertThat(recordList[0].app).isSameInstanceAs(APP)
+        assertThat(packageInfoFlagsCaptor.firstValue.value).isEqualTo(EXPECTED_PACKAGE_INFO_FLAG)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun backgroundInstalledAppsWithGroupingListModel_filter() = runTest {
         val listModel = BackgroundInstalledAppsWithGroupingListModel(mockContext)
         listModel.setBackgroundInstallControlService(mockBackgroundInstallControlService)
-        Mockito.`when`(mockBackgroundInstallControlService.getBackgroundInstalledPackages(
+        whenever(mockBackgroundInstallControlService.getBackgroundInstalledPackages(
             PackageManager.MATCH_ALL.toLong(),
             TEST_USER_ID
         )).thenReturn(ParceledListSlice(listOf(PACKAGE_INFO)))
@@ -236,10 +228,9 @@ class BackgroundInstalledAppsPageProviderTest {
             flowOf(listOf(APP_RECORD_WITH_PACKAGE_MATCH, APP_RECORD_WITHOUT_PACKAGE_MATCH))
         )
 
-
         val recordList = recordListFlow.first()
-        Truth.assertThat(recordList).hasSize(1)
-        Truth.assertThat(recordList[0]).isSameInstanceAs(APP_RECORD_WITH_PACKAGE_MATCH)
+        assertThat(recordList).hasSize(1)
+        assertThat(recordList[0]).isSameInstanceAs(APP_RECORD_WITH_PACKAGE_MATCH)
     }
 
     private fun setItemContent() {
@@ -252,7 +243,7 @@ class BackgroundInstalledAppsPageProviderTest {
                                 app = APP,
                                 dateOfInstall = TEST_FIRST_INSTALL_TIME),
                             label = TEST_LABEL,
-                            summary = stateOf(TEST_SUMMARY),
+                            summary = { TEST_SUMMARY },
                         ).AppItem()
                     }
                 }

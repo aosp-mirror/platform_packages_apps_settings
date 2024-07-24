@@ -26,8 +26,9 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
+
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -53,6 +54,7 @@ public class RebootWithMtePreferenceControllerTest {
         mContext = ApplicationProvider.getApplicationContext();
         mController = new RebootWithMtePreferenceController(mContext);
         mController.setFragment(mFragment);
+        DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(mContext, true);
     }
 
     @Test
@@ -60,7 +62,6 @@ public class RebootWithMtePreferenceControllerTest {
         assertFalse(mController.isAvailable());
     }
 
-    @Ignore
     @Test
     public void onAvailable_sysPropEnabled() {
         SystemProperties.set("ro.arm64.memtag.bootctl_supported", "1");

@@ -25,7 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.Utils
-import com.android.settings.overlay.FeatureFactory
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
 import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
@@ -43,8 +43,7 @@ class AppDisableButton(
     private val packageManager = context.packageManager
     private val userManager = context.userManager
     private val devicePolicyManager = context.devicePolicyManager
-    private val applicationFeatureProvider =
-        FeatureFactory.getFactory(context).getApplicationFeatureProvider(context)
+    private val applicationFeatureProvider = featureFactory.applicationFeatureProvider
 
     @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton? {

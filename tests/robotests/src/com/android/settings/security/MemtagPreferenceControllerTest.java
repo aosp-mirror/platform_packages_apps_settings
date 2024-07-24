@@ -24,11 +24,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.os.Bundle;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.test.rule.ActivityTestRule;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
@@ -42,11 +40,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSystemProperties;
 
-@Ignore
+@Ignore("b/313564061")
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
@@ -59,8 +56,8 @@ public class MemtagPreferenceControllerTest {
     private final String mMemtagSupportedProperty = "ro.arm64.memtag.bootctl_supported";
 
     @Rule
-    public ActivityTestRule<TestActivity> mActivityTestRule =
-            new ActivityTestRule<>(TestActivity.class);
+    public ActivityScenarioRule<TestActivity> mActivityScenario =
+                        new ActivityScenarioRule<>(TestActivity.class);
 
     private MemtagPage mMemtagPage;
     private MemtagPreferenceController mController;
@@ -72,17 +69,18 @@ public class MemtagPreferenceControllerTest {
     @Before
     public void setUp() {
         ShadowSystemProperties.override(mMemtagSupportedProperty, "true");
-
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mMemtagPage = new MemtagPage();
-        mActivity = mActivityTestRule.getActivity();
-        mActivity
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .add(TestActivity.CONTAINER_VIEW_ID, mMemtagPage)
-                .commit();
-        mController = new MemtagPreferenceController(mContext, FRAGMENT_TAG);
-        mController.setFragment(mMemtagPage);
+        System.out.println("Activity: " + mActivity);
+        mActivityScenario.getScenario().onActivity(a -> {
+            a.getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(TestActivity.CONTAINER_VIEW_ID, mMemtagPage)
+                    .commitNow();
+            mController = new MemtagPreferenceController(a, FRAGMENT_TAG);
+            mController.setFragment(mMemtagPage);
+        });
+        System.out.println("Committed");
     }
 
     @Test
@@ -156,19 +154,5 @@ public class MemtagPreferenceControllerTest {
         RestrictedSwitchPreference preference = new RestrictedSwitchPreference(mContext);
         mController.updateState(preference);
         assertThat(preference.isDisabledByAdmin()).isTrue();
-    }
-
-    private static final class TestActivity extends FragmentActivity {
-
-        private static final int CONTAINER_VIEW_ID = 1234;
-
-        @Override
-        protected void onCreate(Bundle bundle) {
-            super.onCreate(bundle);
-
-            FragmentContainerView contentView = new FragmentContainerView(this);
-            contentView.setId(CONTAINER_VIEW_ID);
-            setContentView(contentView);
-        }
     }
 }

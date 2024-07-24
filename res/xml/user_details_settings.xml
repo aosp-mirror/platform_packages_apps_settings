@@ -21,11 +21,11 @@
     <com.android.settingslib.RestrictedPreference
             android:key="switch_user"
             android:icon="@drawable/ic_swap" />
-    <SwitchPreference
+    <SwitchPreferenceCompat
             android:key="user_grant_admin"
             android:icon="@drawable/ic_admin_panel_settings"
             android:title="@string/user_grant_admin" />
-    <SwitchPreference
+    <SwitchPreferenceCompat
             android:key="enable_calling"
             android:icon="@drawable/ic_phone"
             android:title="@string/user_enable_calling_sms" />

@@ -17,11 +17,13 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.PERSONAL_TAB;
+import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.PRIVATE_TAB;
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.WORK_TAB;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -47,6 +49,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.storage.StorageUtils.SystemInfoFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -108,33 +111,33 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private final Fragment mFragment;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final StorageVolumeProvider mSvp;
-    private VolumeInfo mVolume;
+    @Nullable private VolumeInfo mVolume;
     private int mUserId;
     private long mUsedBytes;
     private long mTotalSize;
 
-    private List<StorageItemPreference> mPrivateStorageItemPreferences;
-    private PreferenceScreen mScreen;
+    @Nullable private List<StorageItemPreference> mPrivateStorageItemPreferences;
+    @Nullable private PreferenceScreen mScreen;
     @VisibleForTesting
-    Preference mPublicStoragePreference;
+    @Nullable Preference mPublicStoragePreference;
     @VisibleForTesting
-    StorageItemPreference mImagesPreference;
+    @Nullable StorageItemPreference mImagesPreference;
     @VisibleForTesting
-    StorageItemPreference mVideosPreference;
+    @Nullable StorageItemPreference mVideosPreference;
     @VisibleForTesting
-    StorageItemPreference mAudioPreference;
+    @Nullable StorageItemPreference mAudioPreference;
     @VisibleForTesting
-    StorageItemPreference mAppsPreference;
+    @Nullable StorageItemPreference mAppsPreference;
     @VisibleForTesting
-    StorageItemPreference mGamesPreference;
+    @Nullable StorageItemPreference mGamesPreference;
     @VisibleForTesting
-    StorageItemPreference mDocumentsAndOtherPreference;
+    @Nullable StorageItemPreference mDocumentsAndOtherPreference;
     @VisibleForTesting
-    StorageItemPreference mSystemPreference;
+    @Nullable StorageItemPreference mSystemPreference;
     @VisibleForTesting
-    StorageItemPreference mTrashPreference;
+    @Nullable StorageItemPreference mTrashPreference;
 
-    private boolean mIsWorkProfile;
+    private final int mProfileType;
 
     private StorageCacheHelper mStorageCacheHelper;
     // The mIsDocumentsPrefShown being used here is to prevent a flicker problem from displaying
@@ -142,16 +145,25 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private boolean mIsDocumentsPrefShown;
     private boolean mIsPreferenceOrderedBySize;
 
-    public StorageItemPreferenceController(Context context, Fragment hostFragment,
-            VolumeInfo volume, StorageVolumeProvider svp, boolean isWorkProfile) {
+    public StorageItemPreferenceController(
+            Context context, Fragment hostFragment, VolumeInfo volume, StorageVolumeProvider svp) {
+        this(context, hostFragment, volume, svp, ProfileSelectFragment.ProfileType.PERSONAL);
+    }
+
+    public StorageItemPreferenceController(
+            Context context,
+            Fragment hostFragment,
+            @Nullable VolumeInfo volume,
+            StorageVolumeProvider svp,
+            @ProfileSelectFragment.ProfileType int profileType) {
         super(context);
         mPackageManager = context.getPackageManager();
         mUserManager = context.getSystemService(UserManager.class);
         mFragment = hostFragment;
         mVolume = volume;
         mSvp = svp;
-        mIsWorkProfile = isWorkProfile;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mProfileType = profileType;
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mUserId = getCurrentUserId();
         mIsDocumentsPrefShown = isDocumentsPrefShown();
         mStorageCacheHelper = new StorageCacheHelper(mContext, mUserId);
@@ -168,7 +180,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     @VisibleForTesting
     int getCurrentUserId() {
-        return Utils.getCurrentUserId(mUserManager, mIsWorkProfile);
+        return Utils.getCurrentUserIdOfType(mUserManager, mProfileType);
     }
 
     @Override
@@ -229,7 +241,9 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mVolume = volume;
 
         if (mPublicStoragePreference != null) {
-            mPublicStoragePreference.setVisible(isValidPublicVolume() && !mIsWorkProfile);
+            mPublicStoragePreference.setVisible(
+                    isValidPublicVolume()
+                            && mProfileType == ProfileSelectFragment.ProfileType.PERSONAL);
         }
 
         // If isValidPrivateVolume() is true, these preferences will become visible at
@@ -327,8 +341,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
      * Sets the user id for which this preference controller is handling.
      */
     public void setUserId(UserHandle userHandle) {
-        if (mIsWorkProfile && !mUserManager.isManagedProfile(userHandle.getIdentifier())) {
+        if (mProfileType == ProfileSelectFragment.ProfileType.WORK
+                && !mUserManager.isManagedProfile(userHandle.getIdentifier())) {
             throw new IllegalArgumentException("Only accept work profile userHandle");
+        }
+
+        UserInfo userInfo = mUserManager.getUserInfo(userHandle.getIdentifier());
+        if (mProfileType == ProfileSelectFragment.ProfileType.PRIVATE
+                && (userInfo == null || userInfo.isPrivateProfile())) {
+            throw new IllegalArgumentException("Only accept private profile userHandle");
         }
         mUserId = userHandle.getIdentifier();
 
@@ -498,8 +519,13 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
         final Bundle args = new Bundle(1 + additionalCapacity);
-        args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB,
-                mIsWorkProfile ? WORK_TAB : PERSONAL_TAB);
+        if (mProfileType == ProfileSelectFragment.ProfileType.WORK) {
+            args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, WORK_TAB);
+        } else if (mProfileType == ProfileSelectFragment.ProfileType.PRIVATE) {
+            args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, PRIVATE_TAB);
+        } else {
+            args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, PERSONAL_TAB);
+        }
         return args;
     }
 

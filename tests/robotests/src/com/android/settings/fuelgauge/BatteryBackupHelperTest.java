@@ -94,33 +94,24 @@ public final class BatteryBackupHelperTest {
     private BatteryBackupHelper mBatteryBackupHelper;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
-    @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private BackupDataOutput mBackupDataOutput;
-    @Mock
-    private BackupDataInputStream mBackupDataInputStream;
-    @Mock
-    private IDeviceIdleController mDeviceController;
-    @Mock
-    private IPackageManager mIPackageManager;
-    @Mock
-    private AppOpsManager mAppOpsManager;
-    @Mock
-    private UserManager mUserManager;
-    @Mock
-    private PowerAllowlistBackend mPowerAllowlistBackend;
-    @Mock
-    private BatteryOptimizeUtils mBatteryOptimizeUtils;
+    @Mock private PackageManager mPackageManager;
+    @Mock private BackupDataOutput mBackupDataOutput;
+    @Mock private BackupDataInputStream mBackupDataInputStream;
+    @Mock private IDeviceIdleController mDeviceController;
+    @Mock private IPackageManager mIPackageManager;
+    @Mock private AppOpsManager mAppOpsManager;
+    @Mock private UserManager mUserManager;
+    @Mock private PowerAllowlistBackend mPowerAllowlistBackend;
+    @Mock private BatteryOptimizeUtils mBatteryOptimizeUtils;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mPowerUsageFeatureProvider =
-                FakeFeatureFactory.setupForTest().powerUsageFeatureProvider;
+        mPowerUsageFeatureProvider = FakeFeatureFactory.setupForTest().powerUsageFeatureProvider;
         mContext = spy(RuntimeEnvironment.application);
         mStringWriter = new StringWriter();
         mPrintWriter = new PrintWriter(mStringWriter);
+        BatteryUtils.getInstance(mContext).reset();
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mAppOpsManager).when(mContext).getSystemService(AppOpsManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
@@ -172,7 +163,7 @@ public final class BatteryBackupHelperTest {
     public void backupOptimizationMode_nullInstalledApps_ignoreBackupOptimization()
             throws Exception {
         final UserInfo userInfo =
-                new UserInfo(/*userId=*/ 0, /*userName=*/ "google", /*flag=*/ 0);
+                new UserInfo(/* userId= */ 0, /* userName= */ "google", /* flag= */ 0);
         doReturn(Arrays.asList(userInfo)).when(mUserManager).getProfiles(anyInt());
         doThrow(new RuntimeException())
                 .when(mIPackageManager)
@@ -198,8 +189,7 @@ public final class BatteryBackupHelperTest {
     }
 
     @Test
-    public void backupOptimizationMode_backupOptimizationModeAndIgnoreSystemApp()
-            throws Exception {
+    public void backupOptimizationMode_backupOptimizationModeAndIgnoreSystemApp() throws Exception {
         final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);
         createTestingData(PACKAGE_NAME1, UID1, PACKAGE_NAME2, PACKAGE_NAME3);
         // Sets "com.android.testing.1" as system app.
@@ -293,8 +283,7 @@ public final class BatteryBackupHelperTest {
         // Invoke the restoreEntity() method 2nd time.
         mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
 
-        assertThat(TestUtils.getScheduledLevel(mContext))
-                .isEqualTo(invalidScheduledLevel);
+        assertThat(TestUtils.getScheduledLevel(mContext)).isEqualTo(invalidScheduledLevel);
     }
 
     @Test
@@ -312,9 +301,14 @@ public final class BatteryBackupHelperTest {
     @Test
     public void restoreOptimizationMode_invalidModeFormat_skipRestore() throws Exception {
         final String invalidNumberFormat = "google";
-        final String packageModes =
-                PACKAGE_NAME1 + DELIMITER_MODE + MODE_RESTRICTED + DELIMITER +
-                PACKAGE_NAME2 + DELIMITER_MODE + invalidNumberFormat;
+        final String package1Mode = PACKAGE_NAME1
+                + DELIMITER_MODE
+                + MODE_RESTRICTED
+                + DELIMITER;
+        final String package2Mode = PACKAGE_NAME2
+                + DELIMITER_MODE
+                + invalidNumberFormat;
+        final String packageModes = package1Mode + package2Mode;
 
         mBatteryBackupHelper.restoreOptimizationMode(packageModes.getBytes());
         TimeUnit.SECONDS.sleep(1);
@@ -327,10 +321,19 @@ public final class BatteryBackupHelperTest {
 
     @Test
     public void restoreOptimizationMode_restoreExpectedModes() throws Exception {
-        final String packageModes =
-                PACKAGE_NAME1 + DELIMITER_MODE + MODE_RESTRICTED + DELIMITER +
-                PACKAGE_NAME2 + DELIMITER_MODE + MODE_UNRESTRICTED + DELIMITER +
-                PACKAGE_NAME3 + DELIMITER_MODE + MODE_RESTRICTED + DELIMITER;
+        final String package1Mode = PACKAGE_NAME1
+                + DELIMITER_MODE
+                + MODE_RESTRICTED
+                + DELIMITER;
+        final String package2Mode = PACKAGE_NAME2
+                + DELIMITER_MODE
+                + MODE_UNRESTRICTED
+                + DELIMITER;
+        final String package3Mode = PACKAGE_NAME3
+                + DELIMITER_MODE
+                + MODE_RESTRICTED
+                + DELIMITER;
+        final String packageModes = package1Mode + package2Mode + package3Mode;
 
         mBatteryBackupHelper.restoreOptimizationMode(packageModes.getBytes());
         TimeUnit.SECONDS.sleep(1);
@@ -357,13 +360,14 @@ public final class BatteryBackupHelperTest {
         verifyBackupData(inOrder, BatteryBackupHelper.KEY_BUILD_PRODUCT, Build.PRODUCT);
         verifyBackupData(inOrder, BatteryBackupHelper.KEY_BUILD_MANUFACTURER, Build.MANUFACTURER);
         verifyBackupData(inOrder, BatteryBackupHelper.KEY_BUILD_FINGERPRINT, Build.FINGERPRINT);
-        inOrder.verify(mBackupDataOutput, never()).writeEntityHeader(
-                eq(BatteryBackupHelper.KEY_BUILD_METADATA_1), anyInt());
+        inOrder.verify(mBackupDataOutput, never())
+                .writeEntityHeader(eq(BatteryBackupHelper.KEY_BUILD_METADATA_1), anyInt());
         verifyBackupData(inOrder, BatteryBackupHelper.KEY_BUILD_METADATA_2, deviceMetadata);
     }
 
     private void mockUid(int uid, String packageName) throws Exception {
-        doReturn(uid).when(mPackageManager)
+        doReturn(uid)
+                .when(mPackageManager)
                 .getPackageUid(packageName, PackageManager.GET_META_DATA);
     }
 
@@ -383,8 +387,8 @@ public final class BatteryBackupHelperTest {
         final Set<String> expectedResultSet =
                 Set.of(expectedResult.split(BatteryBackupHelper.DELIMITER));
 
-        verify(mBackupDataOutput).writeEntityHeader(
-                BatteryBackupHelper.KEY_OPTIMIZATION_LIST, expectedBytes.length);
+        verify(mBackupDataOutput)
+                .writeEntityHeader(BatteryBackupHelper.KEY_OPTIMIZATION_LIST, expectedBytes.length);
         verify(mBackupDataOutput).writeEntityData(captor.capture(), eq(expectedBytes.length));
         final String actualResult = new String(captor.getValue());
         final Set<String> actualResultSet =
@@ -392,11 +396,12 @@ public final class BatteryBackupHelperTest {
         assertThat(actualResultSet).isEqualTo(expectedResultSet);
     }
 
-    private void createTestingData(String packageName1, int uid1, String packageName2,
-            String packageName3) throws Exception {
+    private void createTestingData(
+            String packageName1, int uid1, String packageName2, String packageName3)
+            throws Exception {
         // Sets the getInstalledApplications() method for testing.
         final UserInfo userInfo =
-                new UserInfo(/*userId=*/ 0, /*userName=*/ "google", /*flag=*/ 0);
+                new UserInfo(/* userId= */ 0, /* userName= */ "google", /* flag= */ 0);
         doReturn(Arrays.asList(userInfo)).when(mUserManager).getProfiles(anyInt());
         final ApplicationInfo applicationInfo1 = new ApplicationInfo();
         applicationInfo1.enabled = true;
@@ -412,10 +417,12 @@ public final class BatteryBackupHelperTest {
         applicationInfo3.uid = 3;
         applicationInfo3.packageName = packageName3;
         applicationInfo3.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
-        doReturn(new ParceledListSlice<ApplicationInfo>(
-                Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3)))
-            .when(mIPackageManager)
-            .getInstalledApplications(anyLong(), anyInt());
+        doReturn(
+                        new ParceledListSlice<ApplicationInfo>(
+                                Arrays.asList(
+                                        applicationInfo1, applicationInfo2, applicationInfo3)))
+                .when(mIPackageManager)
+                .getInstalledApplications(anyLong(), anyInt());
         // Sets the AppOpsManager for checkOpNoThrow() method.
         doReturn(AppOpsManager.MODE_ALLOWED)
                 .when(mAppOpsManager)
@@ -433,8 +440,8 @@ public final class BatteryBackupHelperTest {
                 new ArraySet<>(Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3));
     }
 
-    private void verifyBackupData(
-            InOrder inOrder, String dataKey, String dataContent) throws Exception {
+    private void verifyBackupData(InOrder inOrder, String dataKey, String dataContent)
+            throws Exception {
         final byte[] expectedBytes = dataContent.getBytes();
         inOrder.verify(mBackupDataOutput).writeEntityHeader(dataKey, expectedBytes.length);
         inOrder.verify(mBackupDataOutput).writeEntityData(expectedBytes, expectedBytes.length);

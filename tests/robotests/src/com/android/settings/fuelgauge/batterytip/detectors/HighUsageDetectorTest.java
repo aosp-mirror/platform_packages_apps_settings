@@ -62,18 +62,12 @@ public class HighUsageDetectorTest {
     private static final double POWER_LOW = 10000;
 
     private Context mContext;
-    @Mock
-    private UidBatteryConsumer mHighBatteryConsumer;
-    @Mock
-    private UidBatteryConsumer mLowBatteryConsumer;
-    @Mock
-    private UidBatteryConsumer mSystemBatteryConsumer;
-    @Mock
-    private HighUsageDataParser mDataParser;
-    @Mock
-    private BatteryUsageStats mBatteryUsageStats;
-    @Mock
-    private BatteryStatsManager mBatteryStatsManager;
+    @Mock private UidBatteryConsumer mHighBatteryConsumer;
+    @Mock private UidBatteryConsumer mLowBatteryConsumer;
+    @Mock private UidBatteryConsumer mSystemBatteryConsumer;
+    @Mock private HighUsageDataParser mDataParser;
+    @Mock private BatteryUsageStats mBatteryUsageStats;
+    @Mock private BatteryStatsManager mBatteryStatsManager;
 
     private AppInfo mHighAppInfo;
     private AppInfo mLowAppInfo;
@@ -94,11 +88,17 @@ public class HighUsageDetectorTest {
         when(mBatteryStatsManager.getBatteryUsageStats(any(BatteryUsageStatsQuery.class)))
                 .thenReturn(mBatteryUsageStats);
 
-        mContext.sendStickyBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-                .putExtra(BatteryManager.EXTRA_PLUGGED, 0));
+        mContext.sendStickyBroadcast(
+                new Intent(Intent.ACTION_BATTERY_CHANGED)
+                        .putExtra(BatteryManager.EXTRA_PLUGGED, 0));
 
-        mHighUsageDetector = spy(new HighUsageDetector(mContext, mPolicy, mBatteryUsageStats,
-                mBatteryUtils.getBatteryInfo(TAG)));
+        mHighUsageDetector =
+                spy(
+                        new HighUsageDetector(
+                                mContext,
+                                mPolicy,
+                                mBatteryUsageStats,
+                                mBatteryUtils.getBatteryInfo(TAG)));
         mHighUsageDetector.mBatteryUtils = mBatteryUtils;
         mHighUsageDetector.mDataParser = mDataParser;
         doNothing().when(mHighUsageDetector).parseBatteryData();
@@ -111,12 +111,8 @@ public class HighUsageDetectorTest {
         when(mBatteryUsageStats.getDischargePercentage()).thenReturn(100);
         when(mBatteryUsageStats.getConsumedPower()).thenReturn(POWER_HIGH + POWER_LOW);
 
-        mHighAppInfo = new AppInfo.Builder()
-                .setUid(UID_HIGH)
-                .build();
-        mLowAppInfo = new AppInfo.Builder()
-                .setUid(UID_LOW)
-                .build();
+        mHighAppInfo = new AppInfo.Builder().setUid(UID_HIGH).build();
+        mLowAppInfo = new AppInfo.Builder().setUid(UID_LOW).build();
 
         ArrayList<UidBatteryConsumer> consumers = new ArrayList<>();
         consumers.add(mSystemBatteryConsumer);

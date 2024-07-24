@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 
@@ -40,6 +41,24 @@ import com.google.android.setupdesign.GlifPreferenceLayout;
  * to the text and reading option in the SetupWizard.
  */
 public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPreferenceFragment {
+
+    @Override
+    public void addPreferencesFromResource(int preferencesResId) {
+        super.addPreferencesFromResource(preferencesResId);
+
+        adjustPreviewPaddingsForSetupWizard();
+    }
+
+    @VisibleForTesting
+    void adjustPreviewPaddingsForSetupWizard() {
+        TextReadingPreviewPreference textReadingPreviewPreference = findPreference(PREVIEW_KEY);
+        textReadingPreviewPreference.setLayoutMinHorizontalPadding(
+                getContext().getResources().getDimensionPixelSize(
+                        R.dimen.text_reading_preview_layout_padding_horizontal_min_suw));
+        textReadingPreviewPreference.setBackgroundMinHorizontalPadding(
+                getContext().getResources().getDimensionPixelSize(
+                        R.dimen.text_reading_preview_background_padding_horizontal_min_suw));
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

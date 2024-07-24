@@ -24,7 +24,7 @@ import android.util.Log;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -41,7 +41,7 @@ public class ChangeNfcTagAppsStateDetails extends AppInfoWithHeader
     private static final String LOG_TAG = "ChangeNfcTagAppsStateDetails";
 
     private AppStateNfcTagAppsBridge mAppBridge;
-    private SwitchPreference mSwitchPref;
+    private TwoStatePreference mSwitchPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class ChangeNfcTagAppsStateDetails extends AppInfoWithHeader
 
         // find preferences
         addPreferencesFromResource(R.xml.change_nfc_tag_apps_details);
-        mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
+        mSwitchPref = (TwoStatePreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
 
         // set title/summary for all of them
         mSwitchPref.setTitle(R.string.change_nfc_tag_apps_detail_switch);

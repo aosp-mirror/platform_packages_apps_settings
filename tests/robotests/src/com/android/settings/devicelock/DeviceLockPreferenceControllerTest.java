@@ -93,4 +93,17 @@ public final class DeviceLockPreferenceControllerTest {
         outcomeReceiver.onResult(TEST_KIOSK_APPS);
         assertThat(preference.isVisible()).isTrue();
     }
+
+    @Test
+    public void testUpdateState_preferenceBecomesInvisibleIfDeviceLockManagerIsNotAvailable() {
+        Context context = spy(mContext);
+        when(context.getSystemService(DeviceLockManager.class)).thenReturn(null);
+        mController = new DeviceLockPreferenceController(context, TEST_PREFERENCE_KEY);
+
+        Preference preference = new Preference(mContext, null, 0, 0);
+        preference.setVisible(true);
+
+        mController.updateState(preference);
+        assertThat(preference.isVisible()).isFalse();
+    }
 }

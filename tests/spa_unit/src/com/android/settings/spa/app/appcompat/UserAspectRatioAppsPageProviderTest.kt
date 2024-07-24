@@ -21,7 +21,6 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN
 import android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET
 import android.os.Build
-import androidx.compose.runtime.State
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -29,12 +28,10 @@ import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.testutils.FakeNavControllerWrapper
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -105,7 +102,6 @@ class UserAspectRatioAppsPageProviderTest {
         composeTestRule.onNodeWithText(LABEL).assertIsDisplayed()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun aspectRatioAppListModel_transform() = runTest {
         val listModel = UserAspectRatioAppListModel(context)
@@ -116,7 +112,6 @@ class UserAspectRatioAppsPageProviderTest {
         assertThat(recordList[0].app).isSameInstanceAs(APP)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun aspectRatioAppListModel_filter() = runTest {
         val listModel = UserAspectRatioAppListModel(context)
@@ -135,7 +130,7 @@ class UserAspectRatioAppsPageProviderTest {
                     AppListItemModel(
                         record = APP_RECORD_SUGGESTED,
                         label = LABEL,
-                        summary = stateOf(SUMMARY)
+                        summary = { SUMMARY }
                     ).AppItem()
                 }
             }
@@ -144,23 +139,23 @@ class UserAspectRatioAppsPageProviderTest {
 
     @Test
     fun aspectRatioAppListModel_getSummaryDefault() {
-        val summaryState = setSummaryState(USER_MIN_ASPECT_RATIO_UNSET)
-        assertThat(summaryState.value)
-            .isEqualTo(context.getString(R.string.user_aspect_ratio_app_default))
+        val summary = getSummary(USER_MIN_ASPECT_RATIO_UNSET)
+
+        assertThat(summary).isEqualTo(context.getString(R.string.user_aspect_ratio_app_default))
     }
 
     @Test
     fun aspectRatioAppListModel_getSummaryWhenSplitScreen() {
-        val summaryState = setSummaryState(USER_MIN_ASPECT_RATIO_SPLIT_SCREEN)
-        assertThat(summaryState.value)
-            .isEqualTo(context.getString(R.string.user_aspect_ratio_half_screen))
+        val summary = getSummary(USER_MIN_ASPECT_RATIO_SPLIT_SCREEN)
+
+        assertThat(summary).isEqualTo(context.getString(R.string.user_aspect_ratio_half_screen))
     }
 
-    private fun setSummaryState(userOverride: Int): State<String> {
+    private fun getSummary(userOverride: Int): String {
         val listModel = UserAspectRatioAppListModel(context)
-        lateinit var summaryState: State<String>
+        lateinit var summary: () -> String
         composeTestRule.setContent {
-            summaryState = listModel.getSummary(option = 0,
+            summary = listModel.getSummary(option = 0,
                 record = UserAspectRatioAppListItemModel(
                     app = APP,
                     userOverride = userOverride,
@@ -168,7 +163,7 @@ class UserAspectRatioAppsPageProviderTest {
                     canDisplay = true,
                 ))
         }
-        return summaryState
+        return summary()
     }
 
 

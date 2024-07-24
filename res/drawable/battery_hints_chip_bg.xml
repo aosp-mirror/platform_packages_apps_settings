@@ -16,7 +16,8 @@
   -->
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:shape="rectangle">
-    <solid android:color="@color/settingslib_dialog_background" />
+    <solid android:color="?androidprv:attr/materialColorPrimaryContainer" />
     <corners android:radius="@dimen/battery_hints_chip_corner_radius" />
 </shape>

@@ -14,13 +14,13 @@
 
 package com.android.settings.datausage;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -47,7 +47,6 @@ public class SpinnerPreference extends Preference implements CycleAdapter.Spinne
         notifyChanged();
     }
 
-    @Override
     public void setOnItemSelectedListener(AdapterView.OnItemSelectedListener listener) {
         mListener = listener;
     }
@@ -95,7 +94,6 @@ public class SpinnerPreference extends Preference implements CycleAdapter.Spinne
                 @Override
                 public void onItemSelected(
                         AdapterView<?> parent, View view, int position, long id) {
-                    if (mPosition == position) return;
                     mPosition = position;
                     mCurrentObject = mAdapter.getItem(position);
                     if (mListener != null) {

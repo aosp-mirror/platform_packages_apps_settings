@@ -41,13 +41,13 @@ public final class TextViewPreferenceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mTextViewPreference = new TextViewPreference(mContext, /*attrs=*/ null);
+        mTextViewPreference = new TextViewPreference(mContext, /* attrs= */ null);
     }
 
     @Test
     public void constructor_returnExpectedResult() {
-        assertThat(mTextViewPreference.getLayoutResource()).isEqualTo(
-                R.layout.preference_text_view);
+        assertThat(mTextViewPreference.getLayoutResource())
+                .isEqualTo(R.layout.preference_text_view);
     }
 
     @Test

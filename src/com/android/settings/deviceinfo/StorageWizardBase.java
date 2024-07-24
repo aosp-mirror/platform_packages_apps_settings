@@ -20,7 +20,6 @@ import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
 import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
 
 import android.annotation.LayoutRes;
-import android.annotation.NonNull;
 import android.content.Intent;
 import android.content.res.Resources.Theme;
 import android.graphics.drawable.Drawable;
@@ -38,6 +37,7 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
@@ -116,7 +116,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
                 .setText(R.string.wizard_back)
                 .setListener(this::onNavigateBack)
                 .setButtonType(FooterButton.ButtonType.OTHER)
-                .setTheme(R.style.SudGlifButton_Secondary)
+                .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                 .build()
         );
         mFooterBarMixin.setPrimaryButton(
@@ -124,7 +124,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
                 .setText(R.string.wizard_next)
                 .setListener(this::onNavigateNext)
                 .setButtonType(FooterButton.ButtonType.NEXT)
-                .setTheme(R.style.SudGlifButton_Primary)
+                .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                 .build()
         );
         mBack = mFooterBarMixin.getSecondaryButton();

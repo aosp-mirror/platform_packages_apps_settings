@@ -16,8 +16,6 @@
 
 <resources
     xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
-    <color name="switchbar_switch_track_tint">#82000000</color>
-    <color name="switchbar_switch_thumb_tint">@android:color/black</color>
     <color name="homepage_accessibility_background">#783BE5</color>
     <color name="homepage_support_background">#3F5FBD</color>
     <color name="contextual_card_background">@*android:color/material_grey_900</color>
@@ -58,6 +56,9 @@
     <!-- Icon tint color for battery usage system icon -->
     <color name="battery_usage_system_icon_color">@android:color/white</color>
 
+    <!-- Power anomaly color for icons, button and text -->
+    <color name="power_anomaly_app_warning_hint_color">#FDD663</color>
+    <color name="power_anomaly_primary_button_text_color">#2E3300</color>
 
     <!-- UDFPS colors -->
     <color name="udfps_enroll_icon">#7DA7F1</color>
@@ -68,6 +69,8 @@
     <color name="udfps_enroll_progress_help">#607DA7F1</color>
     <color name="udfps_enroll_progress_help_with_talkback">#FFEE675C</color>
 
+    <!-- Accessibility colors -->
+    <color name="accessibility_text_reading_background">@android:color/black</color>
     <!-- Flash notifications colors -->
     <!-- Screen flash notification color selected stroke in color selection dialog -->
     <color name="screen_flash_color_button_outer_circle_stroke_color">#FFFFFF</color>

@@ -18,6 +18,7 @@ package com.android.settings.spa.home
 
 import android.os.Bundle
 import com.android.settings.R
+import com.android.settings.spa.about.AboutPhonePageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.network.NetworkAndInternetPageProvider
 import com.android.settings.spa.notification.NotificationMainPageProvider
@@ -40,6 +41,7 @@ object HomePageProvider : SettingsPageProvider {
             AppsMainPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
             NotificationMainPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
             SystemMainPageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
+            AboutPhonePageProvider.buildInjectEntry().setLink(fromPage = owner).build(),
         )
     }
 

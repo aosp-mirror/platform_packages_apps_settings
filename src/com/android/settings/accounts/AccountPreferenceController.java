@@ -46,6 +46,7 @@ import android.content.pm.UserProperties;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.BidiFormatter;
@@ -101,7 +102,6 @@ public class AccountPreferenceController extends AbstractPreferenceController
     private SparseArray<ProfileData> mProfiles = new SparseArray<ProfileData>();
     private ManagedProfileBroadcastReceiver mManagedProfileBroadcastReceiver =
             new ManagedProfileBroadcastReceiver();
-    private Preference mProfileNotAvailablePreference;
     private String[] mAuthorities;
     private int mAuthoritiesCount = 0;
     private DashboardFragment mFragment;
@@ -165,7 +165,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         if (mAuthorities != null) {
             mAuthoritiesCount = mAuthorities.length;
         }
-        final FeatureFactory featureFactory = FeatureFactory.getFactory(mContext);
+        final FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mHelper = helper;
         mType = type;
@@ -185,6 +185,11 @@ public class AccountPreferenceController extends AbstractPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         updateUi();
+    }
+
+    @Override
+    public void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
+        rawData.add(newAddAccountRawData());
     }
 
     @Override
@@ -297,14 +302,25 @@ public class AccountPreferenceController extends AbstractPreferenceController
             updateProfileUi(userInfo);
         } else {
             List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
-            final int profilesCount = profiles.size();
-            for (int i = 0; i < profilesCount; i++) {
-                if (profiles.get(i).isManagedProfile()
-                        && (mType & ProfileSelectFragment.ProfileType.WORK) != 0) {
-                    updateProfileUi(profiles.get(i));
-                } else if (!profiles.get(i).isManagedProfile()
-                        && (mType & ProfileSelectFragment.ProfileType.PERSONAL) != 0) {
-                    updateProfileUi(profiles.get(i));
+            for (UserInfo profile : profiles) {
+                // Check if this controller can handle this profile - e.g. if this controller's
+                // mType has the WORK flag set and this profile is a managed profile.
+                // If there are no tabs then this controller will support all profile types -
+                // - ProfileType.ALL.
+                // At the same time we should check the user property to make sure if this profile
+                // should be shown or not.
+                if (((profile.isManagedProfile()
+                        && (mType & ProfileSelectFragment.ProfileType.WORK) != 0)
+                        || (Flags.allowPrivateProfile()
+                            && profile.isPrivateProfile()
+                            && (mType & ProfileSelectFragment.ProfileType.PRIVATE) != 0)
+                        || (!profile.isManagedProfile()
+                            && !(Flags.allowPrivateProfile() && profile.isPrivateProfile())
+                            && (mType & ProfileSelectFragment.ProfileType.PERSONAL) != 0))
+                        && !(mUm.getUserProperties(profile.getUserHandle())
+                            .getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
+                            && profile.isQuietModeEnabled())) {
+                    updateProfileUi(profile);
                 }
             }
         }
@@ -357,7 +373,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         } else if (userInfo.isManagedProfile()) {
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 setCategoryTitleFromDevicePolicyResource(preferenceGroup, WORK_CATEGORY_HEADER,
-                        R.string.category_work);
+                        com.android.settingslib.R.string.category_work);
                 final String workGroupSummary = getWorkGroupSummary(context, userInfo);
                 preferenceGroup.setSummary(workGroupSummary);
                 setContentDescriptionFromDevicePolicyResource(preferenceGroup,
@@ -371,7 +387,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         } else if (userInfo.isCloneProfile()) {
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 setCategoryTitleFromDevicePolicyResource(preferenceGroup, CLONE_CATEGORY_HEADER,
-                        R.string.category_clone);
+                        com.android.settingslib.R.string.category_clone);
                 setContentDescriptionFromDevicePolicyResource(preferenceGroup,
                         ACCESSIBILITY_CATEGORY_CLONE, R.string.accessibility_category_clone,
                         null);
@@ -380,7 +396,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
             // Primary Profile
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 setCategoryTitleFromDevicePolicyResource(preferenceGroup, PERSONAL_CATEGORY_HEADER,
-                        R.string.category_personal);
+                        com.android.settingslib.R.string.category_personal);
                 setContentDescriptionFromDevicePolicyResource(preferenceGroup,
                         ACCESSIBILITY_CATEGORY_PERSONAL, R.string.accessibility_category_personal,
                         null);
@@ -419,6 +435,14 @@ public class AccountPreferenceController extends AbstractPreferenceController
             }
             return mContext.getString(resourceIdentifier);
         }));
+    }
+
+    private SearchIndexableRaw newAddAccountRawData() {
+        SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+        data.key = PREF_KEY_ADD_ACCOUNT;
+        data.title = mContext.getString(R.string.add_account_label);
+        data.iconResId = R.drawable.ic_add_24dp;
+        return data;
     }
 
     private RestrictedPreference newAddAccountPreference() {
@@ -535,18 +559,19 @@ public class AccountPreferenceController extends AbstractPreferenceController
         } else {
             profileData.preferenceGroup.removeAll();
             // Put a label instead of the accounts list
-            if (mProfileNotAvailablePreference == null) {
-                mProfileNotAvailablePreference =
-                        new Preference(mFragment.getPreferenceManager().getContext());
-            }
-            mProfileNotAvailablePreference.setEnabled(false);
-            mProfileNotAvailablePreference.setIcon(R.drawable.empty_icon);
-            mProfileNotAvailablePreference.setTitle(null);
-            mProfileNotAvailablePreference.setSummary(
-                    mDpm.getResources().getString(
-                            WORK_PROFILE_NOT_AVAILABLE, () -> mContext.getString(
-                    R.string.managed_profile_not_available_label)));
-            profileData.preferenceGroup.addPreference(mProfileNotAvailablePreference);
+            final Preference profileNotAvailablePreference =
+                    new Preference(mFragment.getPreferenceManager().getContext());
+            profileNotAvailablePreference.setEnabled(false);
+            profileNotAvailablePreference.setIcon(R.drawable.empty_icon);
+            profileNotAvailablePreference.setTitle(null);
+            profileNotAvailablePreference.setSummary(
+                    mDpm.getResources()
+                            .getString(
+                                    WORK_PROFILE_NOT_AVAILABLE,
+                                    () ->
+                                            mContext.getString(
+                                                    R.string.managed_profile_not_available_label)));
+            profileData.preferenceGroup.addPreference(profileNotAvailablePreference);
         }
         if (profileData.removeWorkProfilePreference != null) {
             profileData.preferenceGroup.addPreference(profileData.removeWorkProfilePreference);

@@ -38,14 +38,10 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryHistoryPreferenceTest {
-    @Mock
-    private PreferenceViewHolder mViewHolder;
-    @Mock
-    private TextView mTextView;
-    @Mock
-    private BatteryChartView mDailyChartView;
-    @Mock
-    private BatteryChartView mHourlyChartView;
+    @Mock private PreferenceViewHolder mViewHolder;
+    @Mock private TextView mTextView;
+    @Mock private BatteryChartView mDailyChartView;
+    @Mock private BatteryChartView mHourlyChartView;
     private BatteryHistoryPreference mBatteryHistoryPreference;
 
     @Before

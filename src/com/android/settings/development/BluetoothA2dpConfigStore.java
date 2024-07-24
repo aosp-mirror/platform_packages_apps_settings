@@ -16,15 +16,19 @@
 
 package com.android.settings.development;
 
+import android.annotation.FlaggedApi;
 import android.bluetooth.BluetoothCodecConfig;
+import android.bluetooth.BluetoothCodecType;
 
-/**
- * Utility class for storing current Bluetooth A2DP profile values
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+/** Utility class for storing current Bluetooth A2DP profile values */
 public class BluetoothA2dpConfigStore {
 
     // init default values
-    private int mCodecType = BluetoothCodecConfig.SOURCE_CODEC_TYPE_INVALID;
+    private int mCodecTypeNative = BluetoothCodecConfig.SOURCE_CODEC_TYPE_INVALID;
+    @Nullable private BluetoothCodecType mCodecType = null;
     private int mCodecPriority = BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
     private int mSampleRate = BluetoothCodecConfig.SAMPLE_RATE_NONE;
     private int mBitsPerSample = BluetoothCodecConfig.BITS_PER_SAMPLE_NONE;
@@ -35,6 +39,10 @@ public class BluetoothA2dpConfigStore {
     private long mCodecSpecific4Value;
 
     public void setCodecType(int codecType) {
+        mCodecTypeNative = codecType;
+    }
+
+    public void setCodecType(@Nullable BluetoothCodecType codecType) {
         mCodecType = codecType;
     }
 
@@ -70,9 +78,26 @@ public class BluetoothA2dpConfigStore {
         mCodecSpecific4Value = codecSpecific4Value;
     }
 
+    /** Create codec config utilizing {@link BluetoothCodecConfig.SourceCodecType} */
     public BluetoothCodecConfig createCodecConfig() {
         return new BluetoothCodecConfig.Builder()
-                .setCodecType(mCodecType)
+                .setCodecType(mCodecTypeNative)
+                .setCodecPriority(mCodecPriority)
+                .setSampleRate(mSampleRate)
+                .setBitsPerSample(mBitsPerSample)
+                .setChannelMode(mChannelMode)
+                .setCodecSpecific1(mCodecSpecific1Value)
+                .setCodecSpecific2(mCodecSpecific2Value)
+                .setCodecSpecific3(mCodecSpecific3Value)
+                .setCodecSpecific4(mCodecSpecific4Value)
+                .build();
+    }
+
+    /** Create codec config utilizing {@link BluetoothCodecType} */
+    @FlaggedApi(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
+    public @NonNull BluetoothCodecConfig createCodecConfigFromCodecType() {
+        return new BluetoothCodecConfig.Builder()
+                .setExtendedCodecType(mCodecType)
                 .setCodecPriority(mCodecPriority)
                 .setSampleRate(mSampleRate)
                 .setBitsPerSample(mBitsPerSample)

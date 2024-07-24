@@ -47,15 +47,16 @@ import java.util.List;
 public class InactiveApps extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
-    private static final CharSequence[] FULL_SETTABLE_BUCKETS_NAMES =
-            {"ACTIVE", "WORKING_SET", "FREQUENT", "RARE", "RESTRICTED"};
+    private static final CharSequence[] FULL_SETTABLE_BUCKETS_NAMES = {
+        "ACTIVE", "WORKING_SET", "FREQUENT", "RARE", "RESTRICTED"
+    };
 
     private static final CharSequence[] FULL_SETTABLE_BUCKETS_VALUES = {
-            Integer.toString(STANDBY_BUCKET_ACTIVE),
-            Integer.toString(STANDBY_BUCKET_WORKING_SET),
-            Integer.toString(STANDBY_BUCKET_FREQUENT),
-            Integer.toString(STANDBY_BUCKET_RARE),
-            Integer.toString(STANDBY_BUCKET_RESTRICTED)
+        Integer.toString(STANDBY_BUCKET_ACTIVE),
+        Integer.toString(STANDBY_BUCKET_WORKING_SET),
+        Integer.toString(STANDBY_BUCKET_FREQUENT),
+        Integer.toString(STANDBY_BUCKET_RARE),
+        Integer.toString(STANDBY_BUCKET_RESTRICTED)
     };
 
     private UsageStatsManager mUsageStats;
@@ -71,7 +72,7 @@ public class InactiveApps extends SettingsPreferenceFragment
 
         mUsageStats = getActivity().getSystemService(UsageStatsManager.class);
         addPreferencesFromResource(R.xml.placeholder_preference_screen);
-        getActivity().setTitle(R.string.inactive_apps_title);
+        getActivity().setTitle(com.android.settingslib.R.string.inactive_apps_title);
     }
 
     @Override
@@ -118,7 +119,7 @@ public class InactiveApps extends SettingsPreferenceFragment
             return possibleBuckets;
         }
         if (minBucket < STANDBY_BUCKET_ACTIVE) {
-            return new CharSequence[]{};
+            return new CharSequence[] {};
         }
         // Use FULL_SETTABLE_BUCKETS_VALUES since we're searching using the int value. The index
         // should apply no matter which array we're going to copy from.
@@ -133,13 +134,20 @@ public class InactiveApps extends SettingsPreferenceFragment
 
     static String bucketToName(int bucket) {
         switch (bucket) {
-            case STANDBY_BUCKET_EXEMPTED: return "EXEMPTED";
-            case STANDBY_BUCKET_ACTIVE: return "ACTIVE";
-            case STANDBY_BUCKET_WORKING_SET: return "WORKING_SET";
-            case STANDBY_BUCKET_FREQUENT: return "FREQUENT";
-            case STANDBY_BUCKET_RARE: return "RARE";
-            case STANDBY_BUCKET_RESTRICTED: return "RESTRICTED";
-            case STANDBY_BUCKET_NEVER: return "NEVER";
+            case STANDBY_BUCKET_EXEMPTED:
+                return "EXEMPTED";
+            case STANDBY_BUCKET_ACTIVE:
+                return "ACTIVE";
+            case STANDBY_BUCKET_WORKING_SET:
+                return "WORKING_SET";
+            case STANDBY_BUCKET_FREQUENT:
+                return "FREQUENT";
+            case STANDBY_BUCKET_RARE:
+                return "RARE";
+            case STANDBY_BUCKET_RESTRICTED:
+                return "RESTRICTED";
+            case STANDBY_BUCKET_NEVER:
+                return "NEVER";
         }
         return "";
     }
@@ -148,12 +156,13 @@ public class InactiveApps extends SettingsPreferenceFragment
         final Resources res = getActivity().getResources();
         final int appBucket = mUsageStats.getAppStandbyBucket(p.getKey());
         final String bucketName = bucketToName(appBucket);
-        p.setSummary(res.getString(R.string.standby_bucket_summary, bucketName));
+        p.setSummary(
+                res.getString(com.android.settingslib.R.string.standby_bucket_summary, bucketName));
         // Buckets outside of the range of the dynamic ones are only used for special
         // purposes and can either not be changed out of, or might have undesirable
         // side-effects in combination with other assumptions.
-        final boolean changeable = appBucket >= STANDBY_BUCKET_ACTIVE
-                && appBucket <= STANDBY_BUCKET_RESTRICTED;
+        final boolean changeable =
+                appBucket >= STANDBY_BUCKET_ACTIVE && appBucket <= STANDBY_BUCKET_RESTRICTED;
         if (changeable) {
             p.setValue(Integer.toString(appBucket));
         }

@@ -81,7 +81,6 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, true /* new value */);
         final boolean isEnabled = SystemProperties.getBoolean(
                 LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, false);
-
         assertThat(isEnabled).isTrue();
     }
 
@@ -91,7 +90,6 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, false /* new value */);
         final boolean isEnabled = SystemProperties.getBoolean(
                 LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, true);
-
         assertThat(isEnabled).isFalse();
     }
 
@@ -99,6 +97,7 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.FEATURE_SUPPORTED;
         SystemProperties.set(LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, "true");
+        mController.mLeAudioEnabledByDefault = false;
         mController.updateState(mPreference);
         verify(mPreference).setChecked(true);
     }
@@ -107,13 +106,14 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.FEATURE_SUPPORTED;
         SystemProperties.set(LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, "false");
+        mController.mLeAudioEnabledByDefault = false;
         mController.updateState(mPreference);
-
         verify(mPreference).setChecked(false);
     }
 
     @Test
     public void isAvailable_leAudioSupported() {
+        mController.mLeAudioEnabledByDefault = false;
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.ERROR_UNKNOWN;
         when(mBluetoothAdapter.isLeAudioSupported())
                 .thenReturn(BluetoothStatusCodes.FEATURE_SUPPORTED);
@@ -122,9 +122,16 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
 
     @Test
     public void isAvailable_leAudioNotSupported() {
+        mController.mLeAudioEnabledByDefault = false;
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.ERROR_UNKNOWN;
         when(mBluetoothAdapter.isLeAudioSupported())
                 .thenReturn(BluetoothStatusCodes.FEATURE_NOT_SUPPORTED);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isUnAvailable_ifLeAudioConnectionByDefault() {
+        mController.mLeAudioEnabledByDefault = true;
         assertThat(mController.isAvailable()).isFalse();
     }
 }

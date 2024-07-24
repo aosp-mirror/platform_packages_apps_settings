@@ -26,16 +26,14 @@ import android.util.Log;
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 
 import java.time.Duration;
 
 /** Receives broadcasts to start or stop the periodic fetching job. */
 public final class BootBroadcastReceiver extends BroadcastReceiver {
     private static final String TAG = "BootBroadcastReceiver";
-    private static final long RESCHEDULE_FOR_BOOT_ACTION_WITH_DELAY =
-            Duration.ofMinutes(40).toMillis();
-    private static final long RESCHEDULE_FOR_BOOT_ACTION_WITHOUT_DELAY =
+    private static final long RESCHEDULE_FOR_BOOT_ACTION_DELAY_MILLIS =
             Duration.ofSeconds(6).toMillis();
 
     private final Handler mHandler = new Handler(Looper.getMainLooper());
@@ -56,7 +54,7 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent == null ? "" : intent.getAction();
-        if (DatabaseUtils.isWorkProfile(context)) {
+        if (BatteryUtils.isWorkProfile(context)) {
             Log.w(TAG, "do not start job for work profile action=" + action);
             return;
         }
@@ -70,8 +68,7 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
                 break;
             case Intent.ACTION_TIME_CHANGED:
                 Log.d(TAG, "refresh job and clear all data from action=" + action);
-                DatabaseUtils.clearAll(context);
-                PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ false);
+                DatabaseUtils.clearDataAfterTimeChangedIfNeeded(context, intent);
                 break;
             default:
                 Log.w(TAG, "receive unsupported action=" + action);
@@ -81,7 +78,7 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
         if (Intent.ACTION_BOOT_COMPLETED.equals(action)) {
             final Intent recheckIntent = new Intent(ACTION_PERIODIC_JOB_RECHECK);
             recheckIntent.setClass(context, BootBroadcastReceiver.class);
-            final long delayedTime = getRescheduleTimeForBootAction(context);
+            final long delayedTime = RESCHEDULE_FOR_BOOT_ACTION_DELAY_MILLIS;
             mHandler.postDelayed(() -> context.sendBroadcast(recheckIntent), delayedTime);
 
             // Refreshes the usage source from UsageStatsManager when booting.
@@ -93,17 +90,7 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
-    private long getRescheduleTimeForBootAction(Context context) {
-        final boolean delayHourlyJobWhenBooting =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .delayHourlyJobWhenBooting();
-        return delayHourlyJobWhenBooting
-                ? RESCHEDULE_FOR_BOOT_ACTION_WITH_DELAY
-                : RESCHEDULE_FOR_BOOT_ACTION_WITHOUT_DELAY;
-    }
-
     private static void refreshJobs(Context context) {
-        PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ true);
+        PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ true);
     }
 }

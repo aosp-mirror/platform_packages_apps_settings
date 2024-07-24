@@ -70,6 +70,10 @@ import java.util.List;
 
 // TODO: Improve this test class so that it starts up the real activity and fragment.
 @RunWith(RobolectricTestRunner.class)
+@Config(
+        shadows = {
+            com.android.settings.testutils.shadow.ShadowFragment.class,
+        })
 public class PowerUsageSummaryTest {
     private static Intent sAdditionalBatteryInfoIntent;
 
@@ -78,26 +82,16 @@ public class PowerUsageSummaryTest {
         sAdditionalBatteryInfoIntent = new Intent("com.example.app.ADDITIONAL_BATTERY_INFO");
     }
 
-    @Mock
-    private SettingsActivity mSettingsActivity;
-    @Mock
-    private LoaderManager mLoaderManager;
-    @Mock
-    private Loader<BatteryTip> mBatteryTipLoader;
-    @Mock
-    private Loader<BatteryInfo> mBatteryInfoLoader;
-    @Mock
-    private ContentResolver mContentResolver;
-    @Mock
-    private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
-    @Mock
-    private VisibilityLoggerMixin mVisibilityLoggerMixin;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private Preference mBatteryUsagePreference;
-    @Mock
-    private Preference mHelpPreference;
+    @Mock private SettingsActivity mSettingsActivity;
+    @Mock private LoaderManager mLoaderManager;
+    @Mock private Loader<BatteryTip> mBatteryTipLoader;
+    @Mock private Loader<BatteryInfo> mBatteryInfoLoader;
+    @Mock private ContentResolver mContentResolver;
+    @Mock private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
+    @Mock private VisibilityLoggerMixin mVisibilityLoggerMixin;
+    @Mock private PreferenceScreen mPreferenceScreen;
+    @Mock private Preference mBatteryUsagePreference;
+    @Mock private Preference mHelpPreference;
 
     private Context mRealContext;
     private TestFragment mFragment;
@@ -117,8 +111,8 @@ public class PowerUsageSummaryTest {
                 .thenReturn(sAdditionalBatteryInfoIntent);
         mFragment.mBatteryUtils = Mockito.spy(new BatteryUtils(mRealContext));
         ReflectionHelpers.setField(mFragment, "mVisibilityLoggerMixin", mVisibilityLoggerMixin);
-        ReflectionHelpers.setField(mFragment, "mBatteryBroadcastReceiver",
-                mBatteryBroadcastReceiver);
+        ReflectionHelpers.setField(
+                mFragment, "mBatteryBroadcastReceiver", mBatteryBroadcastReceiver);
         doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
         when(mFragment.getContentResolver()).thenReturn(mContentResolver);
         when(mFragment.findPreference(KEY_BATTERY_USAGE)).thenReturn(mBatteryUsagePreference);
@@ -154,41 +148,45 @@ public class PowerUsageSummaryTest {
 
     @Test
     public void restartBatteryTipLoader() {
-        //TODO: add policy logic here when BatteryTipPolicy is implemented
-        doReturn(mBatteryTipLoader).when(mLoaderManager).getLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER);
+        // TODO: add policy logic here when BatteryTipPolicy is implemented
+        doReturn(mBatteryTipLoader)
+                .when(mLoaderManager)
+                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER);
         doReturn(false).when(mBatteryTipLoader).isReset();
 
         mFragment.restartBatteryTipLoader();
 
-        verify(mLoaderManager).restartLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER),
-                eq(Bundle.EMPTY), any());
+        verify(mLoaderManager)
+                .restartLoader(
+                        eq(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER), eq(Bundle.EMPTY), any());
     }
 
     @Test
     public void restartBatteryTipLoader_nullLoader_initLoader() {
-        doReturn(null).when(mLoaderManager).getLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER);
+        doReturn(null)
+                .when(mLoaderManager)
+                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER);
 
         mFragment.restartBatteryTipLoader();
 
-        verify(mLoaderManager).initLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER),
-                eq(Bundle.EMPTY), any());
+        verify(mLoaderManager)
+                .initLoader(
+                        eq(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER), eq(Bundle.EMPTY), any());
     }
 
     @Test
     public void restartBatteryTipLoader_loaderReset_initLoader() {
-        doReturn(mBatteryTipLoader).when(mLoaderManager).getLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER);
+        doReturn(mBatteryTipLoader)
+                .when(mLoaderManager)
+                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER);
         doReturn(true).when(mBatteryTipLoader).isReset();
 
         mFragment.restartBatteryTipLoader();
 
-
-        verify(mLoaderManager).initLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER),
-                eq(Bundle.EMPTY), any());
+        verify(mLoaderManager)
+                .initLoader(
+                        eq(PowerUsageBase.LoaderIndex.BATTERY_TIP_LOADER), eq(Bundle.EMPTY), any());
     }
-
 
     @Test
     public void refreshUi_contextNull_doNothing() {
@@ -253,18 +251,19 @@ public class PowerUsageSummaryTest {
     public void onResume_registerContentObserver() {
         mFragment.onResume();
 
-        verify(mContentResolver).registerContentObserver(
-                Settings.Global.getUriFor(Settings.Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
-                false,
-                mFragment.mSettingsObserver);
+        verify(mContentResolver)
+                .registerContentObserver(
+                        Settings.Global.getUriFor(
+                                Settings.Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
+                        false,
+                        mFragment.mSettingsObserver);
     }
 
     @Test
     public void onPause_unregisterContentObserver() {
         mFragment.onPause();
 
-        verify(mContentResolver).unregisterContentObserver(
-                mFragment.mSettingsObserver);
+        verify(mContentResolver).unregisterContentObserver(mFragment.mSettingsObserver);
     }
 
     @Test
@@ -273,9 +272,11 @@ public class PowerUsageSummaryTest {
 
         mFragment.restartBatteryInfoLoader();
 
-        verify(mLoaderManager, never()).restartLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER, Bundle.EMPTY,
-                mFragment.mBatteryInfoLoaderCallbacks);
+        verify(mLoaderManager, never())
+                .restartLoader(
+                        PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER,
+                        Bundle.EMPTY,
+                        mFragment.mBatteryInfoLoaderCallbacks);
     }
 
     @Test
@@ -284,45 +285,59 @@ public class PowerUsageSummaryTest {
 
         mFragment.restartBatteryInfoLoader();
 
-        verify(mLoaderManager, never()).restartLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER, Bundle.EMPTY,
-                mFragment.mBatteryInfoLoaderCallbacks);
+        verify(mLoaderManager, never())
+                .restartLoader(
+                        PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER,
+                        Bundle.EMPTY,
+                        mFragment.mBatteryInfoLoaderCallbacks);
     }
 
     @Test
     public void restartBatteryInfoLoader() {
-        doReturn(mBatteryInfoLoader).when(mLoaderManager).getLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER);
+        doReturn(mBatteryInfoLoader)
+                .when(mLoaderManager)
+                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER);
         doReturn(false).when(mBatteryTipLoader).isReset();
 
         mFragment.restartBatteryInfoLoader();
 
-        verify(mLoaderManager).restartLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER),
-                eq(Bundle.EMPTY), any());
+        verify(mLoaderManager)
+                .restartLoader(
+                        eq(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER),
+                        eq(Bundle.EMPTY),
+                        any());
     }
 
     @Test
     public void restartBatteryInfoLoader_nullLoader_initLoader() {
-        doReturn(null).when(mLoaderManager).getLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER);
+        doReturn(null)
+                .when(mLoaderManager)
+                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER);
 
         mFragment.restartBatteryInfoLoader();
 
-        verify(mLoaderManager).initLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER),
-                eq(Bundle.EMPTY), any());
+        verify(mLoaderManager)
+                .initLoader(
+                        eq(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER),
+                        eq(Bundle.EMPTY),
+                        any());
     }
 
     @Test
     public void restartBatteryInfoLoader_loaderReset_initLoader() {
         mFragment.setIsBatteryPresent(true);
-        doReturn(mBatteryInfoLoader).when(mLoaderManager).getLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER);
+        doReturn(mBatteryInfoLoader)
+                .when(mLoaderManager)
+                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER);
         doReturn(true).when(mBatteryInfoLoader).isReset();
 
         mFragment.restartBatteryInfoLoader();
 
-        verify(mLoaderManager).initLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER),
-                eq(Bundle.EMPTY), any());
+        verify(mLoaderManager)
+                .initLoader(
+                        eq(PowerUsageBase.LoaderIndex.BATTERY_INFO_LOADER),
+                        eq(Bundle.EMPTY),
+                        any());
     }
 
     private static class TestFragment extends PowerUsageSummary {
@@ -354,5 +369,4 @@ public class PowerUsageSummaryTest {
             return mLoaderManager;
         }
     }
-
 }

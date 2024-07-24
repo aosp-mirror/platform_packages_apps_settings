@@ -52,7 +52,7 @@ public final class BugReportContentProviderTest {
         mPrintWriter = new PrintWriter(mStringWriter);
         mContext = ApplicationProvider.getApplicationContext();
         mBugReportContentProvider = new BugReportContentProvider();
-        mBugReportContentProvider.attachInfo(mContext, /*info=*/ null);
+        mBugReportContentProvider.attachInfo(mContext, /* info= */ null);
         // Inserts fake data into database for testing.
         BatteryTestUtils.setUpBatteryStateDatabase(mContext);
         BatteryTestUtils.insertDataToBatteryStateTable(
@@ -60,15 +60,15 @@ public final class BugReportContentProviderTest {
         BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, System.currentTimeMillis(), PACKAGE_NAME2);
         BatteryTestUtils.insertDataToAppUsageEventTable(
-                mContext, /*userId=*/ 1, System.currentTimeMillis(), PACKAGE_NAME3);
+                mContext, /* userId= */ 1, System.currentTimeMillis(), PACKAGE_NAME3);
         BatteryTestUtils.insertDataToAppUsageEventTable(
-                mContext, /*userId=*/ 1, System.currentTimeMillis(), PACKAGE_NAME4);
+                mContext, /* userId= */ 1, System.currentTimeMillis(), PACKAGE_NAME4);
     }
 
     @Test
     public void dump_nullContext_notDumpsBatteryUsageData() {
         mBugReportContentProvider = new BugReportContentProvider();
-        mBugReportContentProvider.attachInfo(/*context=*/ null, /*info=*/ null);
+        mBugReportContentProvider.attachInfo(/* context= */ null, /* info= */ null);
 
         mBugReportContentProvider.dump(FileDescriptor.out, mPrintWriter, new String[] {});
 

@@ -45,6 +45,7 @@ public class UsbDetailsFragment extends DashboardFragment {
 
     private List<UsbDetailsController> mControllers;
     private UsbBackend mUsbBackend;
+    private boolean mUserAuthenticated = false;
 
     @VisibleForTesting
     UsbConnectionBroadcastReceiver mUsbReceiver;
@@ -55,6 +56,20 @@ public class UsbDetailsFragment extends DashboardFragment {
                     controller.refresh(connected, functions, powerRole, dataRole);
                 }
             };
+
+    boolean isUserAuthenticated() {
+        return mUserAuthenticated;
+    }
+
+    void setUserAuthenticated(boolean userAuthenticated) {
+        mUserAuthenticated = userAuthenticated;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mUserAuthenticated = false;
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

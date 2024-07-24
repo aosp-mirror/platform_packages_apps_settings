@@ -33,7 +33,7 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
@@ -119,7 +119,7 @@ public class ContactDiscoveryPreferenceController extends TelephonyTogglePrefere
             @Override
             public void onChange(boolean selfChange, Uri uri) {
                 Log.d(TAG, "UCE setting changed, re-evaluating.");
-                SwitchPreference switchPref = (SwitchPreference) preference;
+                TwoStatePreference switchPref = (TwoStatePreference) preference;
                 switchPref.setChecked(isChecked());
             }
         };

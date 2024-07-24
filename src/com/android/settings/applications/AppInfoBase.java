@@ -90,8 +90,8 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
         mFinishing = false;
         final Activity activity = getActivity();
-        mApplicationFeatureProvider = FeatureFactory.getFactory(activity)
-                .getApplicationFeatureProvider(activity);
+        mApplicationFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getApplicationFeatureProvider();
         mState = ApplicationsState.getInstance(activity.getApplication());
         mSession = mState.newSession(this, getSettingsLifecycle());
         mDpm = (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -144,10 +144,14 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         if (mAppEntry != null) {
             // Get application info again to refresh changed properties of application
             try {
-                mPackageInfo = mPm.getPackageInfoAsUser(mAppEntry.info.packageName,
-                        PackageManager.MATCH_DISABLED_COMPONENTS |
-                                PackageManager.GET_SIGNING_CERTIFICATES |
-                                PackageManager.GET_PERMISSIONS, mUserId);
+                mPackageInfo = mPm.getPackageInfoAsUser(
+                        mAppEntry.info.packageName,
+                        PackageManager.PackageInfoFlags.of(
+                                PackageManager.MATCH_DISABLED_COMPONENTS
+                                        | PackageManager.GET_SIGNING_CERTIFICATES
+                                        | PackageManager.GET_PERMISSIONS
+                                        | PackageManager.MATCH_ARCHIVED_PACKAGES),
+                        mUserId);
             } catch (NameNotFoundException e) {
                 Log.e(TAG, "Exception when retrieving package:" + mAppEntry.info.packageName, e);
             }

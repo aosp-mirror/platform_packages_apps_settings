@@ -22,7 +22,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
@@ -44,7 +44,7 @@ public class WifiTetherMaximizeCompatibilityPreferenceController extends
             WifiTetherBasePreferenceController.OnTetherConfigUpdateListener listener) {
         super(context, listener);
         // If the Wi-Fi Hotspot Speed Feature available, then hide this controller.
-        mShouldHidePreference = FeatureFactory.getFactory(context)
+        mShouldHidePreference = FeatureFactory.getFeatureFactory()
                 .getWifiFeatureProvider().getWifiHotspotRepository().isSpeedFeatureAvailable();
         Log.d(TAG, "mShouldHidePreference:" + mShouldHidePreference);
         if (mShouldHidePreference) {
@@ -72,7 +72,7 @@ public class WifiTetherMaximizeCompatibilityPreferenceController extends
             return;
         }
         mPreference.setEnabled(is5GhzBandSupported());
-        ((SwitchPreference) mPreference).setChecked(mIsChecked);
+        ((TwoStatePreference) mPreference).setChecked(mIsChecked);
         mPreference.setSummary(mWifiManager.isBridgedApConcurrencySupported()
                 ? R.string.wifi_hotspot_maximize_compatibility_dual_ap_summary
                 : R.string.wifi_hotspot_maximize_compatibility_single_ap_summary);

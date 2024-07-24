@@ -157,7 +157,11 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
         return mMediaDevices;
     }
 
+    @Nullable
     public MediaDevice getCurrentConnectedMediaDevice() {
+        if (mLocalMediaManager == null) {
+            return null;
+        }
         return mLocalMediaManager.getCurrentConnectedDevice();
     }
 

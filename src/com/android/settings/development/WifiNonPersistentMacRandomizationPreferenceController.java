@@ -20,7 +20,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -60,7 +60,7 @@ public class WifiNonPersistentMacRandomizationPreferenceController
                 NON_PERSISTENT_MAC_RANDOMIZATION_FEATURE_FLAG, 0) == 1) {
             enabled = true;
         }
-        ((SwitchPreference) mPreference).setChecked(enabled);
+        ((TwoStatePreference) mPreference).setChecked(enabled);
     }
 
     @Override
@@ -68,6 +68,6 @@ public class WifiNonPersistentMacRandomizationPreferenceController
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 NON_PERSISTENT_MAC_RANDOMIZATION_FEATURE_FLAG, 0);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

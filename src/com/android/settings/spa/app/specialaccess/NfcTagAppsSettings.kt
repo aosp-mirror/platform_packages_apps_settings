@@ -23,8 +23,8 @@ import android.content.pm.PackageManager.PackageInfoFlags
 import android.nfc.NfcAdapter
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import com.android.settings.R
+import com.android.settingslib.spa.livedata.observeAsCallback
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.userId
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListModel
@@ -100,7 +100,7 @@ class NfcTagAppsSettingsListModel(private val context: Context) :
 
     @Composable
     override fun isAllowed(record: NfcTagAppsSettingsRecord) =
-        record.controller.isAllowed.observeAsState()
+        record.controller.isAllowed.observeAsCallback()
 
     override fun isChangeable(record: NfcTagAppsSettingsRecord) = true
 

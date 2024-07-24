@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
@@ -39,7 +38,6 @@ import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settingslib.fuelgauge.EstimateKt;
 
 import org.junit.After;
 import org.junit.Before;
@@ -98,20 +96,21 @@ public class BatteryTipDialogFragmentTest {
         mPackageManager.setApplicationIcon(PACKAGE_NAME, new ColorDrawable());
 
         List<AppInfo> highUsageTips = new ArrayList<>();
-        mAppInfo = new AppInfo.Builder()
-                .setScreenOnTimeMs(SCREEN_TIME_MS)
-                .setPackageName(PACKAGE_NAME)
-                .build();
+        mAppInfo =
+                new AppInfo.Builder()
+                        .setScreenOnTimeMs(SCREEN_TIME_MS)
+                        .setPackageName(PACKAGE_NAME)
+                        .build();
         highUsageTips.add(mAppInfo);
         mHighUsageTip = new HighUsageTip(SCREEN_TIME_MS, highUsageTips);
 
         final List<AppInfo> restrictApps = new ArrayList<>();
         restrictApps.add(mAppInfo);
-        mRestrictedOneAppTip = new RestrictAppTip(BatteryTip.StateType.NEW,
-                new ArrayList<>(restrictApps));
+        mRestrictedOneAppTip =
+                new RestrictAppTip(BatteryTip.StateType.NEW, new ArrayList<>(restrictApps));
         restrictApps.add(mAppInfo);
-        mRestrictTwoAppsTip = new RestrictAppTip(BatteryTip.StateType.NEW,
-                new ArrayList<>(restrictApps));
+        mRestrictTwoAppsTip =
+                new RestrictAppTip(BatteryTip.StateType.NEW, new ArrayList<>(restrictApps));
 
         mUnrestrictAppTip = new UnrestrictAppTip(BatteryTip.StateType.NEW, mAppInfo);
         mDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW, false /* isPluggedIn */);
@@ -128,24 +127,30 @@ public class BatteryTipDialogFragmentTest {
 
         mDialogFragment = BatteryTipDialogFragment.newInstance(mHighUsageTip, METRICS_KEY);
 
-        FragmentController.setupFragment(mDialogFragment, FragmentActivity.class,
-                0 /* containerViewId */, null /* bundle */);
+        FragmentController.setupFragment(
+                mDialogFragment,
+                FragmentActivity.class,
+                0 /* containerViewId */,
+                null /* bundle */);
 
         Robolectric.getForegroundThreadScheduler().advanceToLastPostedRunnable();
 
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
-        assertThat(shadowDialog.getMessage()).isEqualTo(
-                mContext.getString(R.string.battery_tip_dialog_message, 1));
+        assertThat(shadowDialog.getMessage())
+                .isEqualTo(mContext.getString(R.string.battery_tip_dialog_message, 1));
     }
 
     @Test
     public void testOnCreateDialog_restrictOneAppTip_fireRestrictOneAppDialog() {
         mDialogFragment = BatteryTipDialogFragment.newInstance(mRestrictedOneAppTip, METRICS_KEY);
 
-        FragmentController.setupFragment(mDialogFragment, FragmentActivity.class,
-                0 /* containerViewId */, null /* bundle */);
+        FragmentController.setupFragment(
+                mDialogFragment,
+                FragmentActivity.class,
+                0 /* containerViewId */,
+                null /* bundle */);
 
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
@@ -163,9 +168,11 @@ public class BatteryTipDialogFragmentTest {
 
         mDialogFragment = BatteryTipDialogFragment.newInstance(mRestrictTwoAppsTip, METRICS_KEY);
 
-
-        FragmentController.setupFragment(mDialogFragment, FragmentActivity.class,
-                0 /* containerViewId */, null /* bundle */);
+        FragmentController.setupFragment(
+                mDialogFragment,
+                FragmentActivity.class,
+                0 /* containerViewId */,
+                null /* bundle */);
 
         Robolectric.getForegroundThreadScheduler().advanceToLastPostedRunnable();
 
@@ -189,13 +196,16 @@ public class BatteryTipDialogFragmentTest {
         for (int i = 0; i < 6; i++) {
             appInfos.add(mAppInfo);
         }
-        final RestrictAppTip restrictSixAppsTip = new RestrictAppTip(BatteryTip.StateType.NEW,
-                appInfos);
+        final RestrictAppTip restrictSixAppsTip =
+                new RestrictAppTip(BatteryTip.StateType.NEW, appInfos);
 
         mDialogFragment = BatteryTipDialogFragment.newInstance(restrictSixAppsTip, METRICS_KEY);
 
-        FragmentController.setupFragment(mDialogFragment, FragmentActivity.class,
-                0 /* containerViewId */, null /* bundle */);
+        FragmentController.setupFragment(
+                mDialogFragment,
+                FragmentActivity.class,
+                0 /* containerViewId */,
+                null /* bundle */);
 
         Robolectric.getForegroundThreadScheduler().advanceToLastPostedRunnable();
 
@@ -215,8 +225,11 @@ public class BatteryTipDialogFragmentTest {
         mDialogFragment = BatteryTipDialogFragment.newInstance(mUnrestrictAppTip, METRICS_KEY);
         ShadowUtils.setApplicationLabel(PACKAGE_NAME, DISPLAY_NAME);
 
-        FragmentController.setupFragment(mDialogFragment, FragmentActivity.class,
-                0 /* containerViewId */, null /* bundle */);
+        FragmentController.setupFragment(
+                mDialogFragment,
+                FragmentActivity.class,
+                0 /* containerViewId */,
+                null /* bundle */);
 
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);

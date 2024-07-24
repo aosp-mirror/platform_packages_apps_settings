@@ -155,12 +155,13 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
 
         // Initial radio button text
         final RadioButton offRadioButton = view.findViewById(R.id.private_dns_mode_off);
-        offRadioButton.setText(R.string.private_dns_mode_off);
+        offRadioButton.setText(com.android.settingslib.R.string.private_dns_mode_off);
         final RadioButton opportunisticRadioButton =
                 view.findViewById(R.id.private_dns_mode_opportunistic);
-        opportunisticRadioButton.setText(R.string.private_dns_mode_opportunistic);
+        opportunisticRadioButton.setText(
+                com.android.settingslib.R.string.private_dns_mode_opportunistic);
         final RadioButton providerRadioButton = view.findViewById(R.id.private_dns_mode_provider);
-        providerRadioButton.setText(R.string.private_dns_mode_provider);
+        providerRadioButton.setText(com.android.settingslib.R.string.private_dns_mode_provider);
 
         final TextView helpTextView = view.findViewById(R.id.private_dns_help_info);
         helpTextView.setMovementMethod(LinkMovementMethod.getInstance());
@@ -187,7 +188,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
                         mEditText.getText().toString());
             }
 
-            FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(context,
                     SettingsEnums.ACTION_PRIVATE_DNS_MODE, mMode);
             ConnectivitySettingsManager.setPrivateDnsMode(context, mMode);
         }

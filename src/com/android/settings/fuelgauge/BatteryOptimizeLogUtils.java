@@ -34,8 +34,7 @@ public final class BatteryOptimizeLogUtils {
     private static final String BATTERY_OPTIMIZE_FILE_NAME = "battery_optimize_historical_logs";
     private static final String LOGS_KEY = "battery_optimize_logs_key";
 
-    @VisibleForTesting
-    static final int MAX_ENTRIES = 40;
+    @VisibleForTesting static final int MAX_ENTRIES = 40;
 
     private BatteryOptimizeLogUtils() {}
 
@@ -45,8 +44,11 @@ public final class BatteryOptimizeLogUtils {
         writeLog(getSharedPreferences(context), action, packageName, actionDescription);
     }
 
-    static void writeLog(SharedPreferences sharedPreferences, Action action,
-            String packageName, String actionDescription) {
+    static void writeLog(
+            SharedPreferences sharedPreferences,
+            Action action,
+            String packageName,
+            String actionDescription) {
         writeLog(
                 sharedPreferences,
                 BatteryOptimizeHistoricalLogEntry.newBuilder()
@@ -70,10 +72,7 @@ public final class BatteryOptimizeLogUtils {
 
         String loggingContent =
                 Base64.encodeToString(newLogBuilder.build().toByteArray(), Base64.DEFAULT);
-        sharedPreferences
-                .edit()
-                .putString(LOGS_KEY, loggingContent)
-                .apply();
+        sharedPreferences.edit().putString(LOGS_KEY, loggingContent).apply();
     }
 
     private static BatteryOptimizeHistoricalLog parseLogFromString(String storedLogs) {
@@ -107,9 +106,11 @@ public final class BatteryOptimizeLogUtils {
     }
 
     private static String toString(BatteryOptimizeHistoricalLogEntry entry) {
-        return String.format("%s\t%s\taction:%s\tevent:%s",
+        return String.format(
+                "%s\t%s\taction:%s\tevent:%s",
                 ConvertUtils.utcToLocalTimeForLogging(entry.getTimestamp()),
-                entry.getPackageName(), entry.getAction(),
+                entry.getPackageName(),
+                entry.getAction(),
                 entry.getActionDescription());
     }
 

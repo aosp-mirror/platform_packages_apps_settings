@@ -29,17 +29,16 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.List;
 
-/**
- * Tip to show general summary about battery life
- */
+/** Tip to show general summary about battery life */
 public class HighUsageTip extends BatteryTip {
 
     private final long mLastFullChargeTimeMs;
-    @VisibleForTesting
-    final List<AppInfo> mHighUsageAppList;
+    @VisibleForTesting final List<AppInfo> mHighUsageAppList;
 
     public HighUsageTip(long lastFullChargeTimeMs, List<AppInfo> appList) {
-        super(TipType.HIGH_DEVICE_USAGE, appList.isEmpty() ? StateType.INVISIBLE : StateType.NEW,
+        super(
+                TipType.HIGH_DEVICE_USAGE,
+                appList.isEmpty() ? StateType.INVISIBLE : StateType.NEW,
                 true /* showDialog */);
         mLastFullChargeTimeMs = lastFullChargeTimeMs;
         mHighUsageAppList = appList;
@@ -81,13 +80,11 @@ public class HighUsageTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, SettingsEnums.ACTION_HIGH_USAGE_TIP,
-                mState);
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_HIGH_USAGE_TIP, mState);
         for (int i = 0, size = mHighUsageAppList.size(); i < size; i++) {
             final AppInfo appInfo = mHighUsageAppList.get(i);
-            metricsFeatureProvider.action(context,
-                    SettingsEnums.ACTION_HIGH_USAGE_TIP_LIST,
-                    appInfo.packageName);
+            metricsFeatureProvider.action(
+                    context, SettingsEnums.ACTION_HIGH_USAGE_TIP_LIST, appInfo.packageName);
         }
     }
 
@@ -112,14 +109,14 @@ public class HighUsageTip extends BatteryTip {
         return stringBuilder.toString();
     }
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public BatteryTip createFromParcel(Parcel in) {
-            return new HighUsageTip(in);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() {
+                public BatteryTip createFromParcel(Parcel in) {
+                    return new HighUsageTip(in);
+                }
 
-        public BatteryTip[] newArray(int size) {
-            return new HighUsageTip[size];
-        }
-    };
-
+                public BatteryTip[] newArray(int size) {
+                    return new HighUsageTip[size];
+                }
+            };
 }

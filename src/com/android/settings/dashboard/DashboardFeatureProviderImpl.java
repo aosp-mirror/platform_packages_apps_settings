@@ -55,7 +55,7 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -100,7 +100,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     public DashboardFeatureProviderImpl(Context context) {
         mContext = context.getApplicationContext();
         mCategoryManager = CategoryManager.get(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mPackageManager = context.getPackageManager();
     }
 
@@ -376,16 +376,16 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void setSwitchChecked(Preference pref, boolean checked) {
-        if (pref instanceof PrimarySwitchPreference) {
-            ((PrimarySwitchPreference) pref).setChecked(checked);
-        } else if (pref instanceof SwitchPreference) {
-            ((SwitchPreference) pref).setChecked(checked);
+        if (pref instanceof PrimarySwitchPreference primarySwitchPreference) {
+            primarySwitchPreference.setChecked(checked);
+        } else if (pref instanceof TwoStatePreference twoStatePreference) {
+            twoStatePreference.setChecked(checked);
         }
     }
 
     private void setSwitchEnabled(Preference pref, boolean enabled) {
-        if (pref instanceof PrimarySwitchPreference) {
-            ((PrimarySwitchPreference) pref).setSwitchEnabled(enabled);
+        if (pref instanceof PrimarySwitchPreference primarySwitchPreference) {
+            primarySwitchPreference.setSwitchEnabled(enabled);
         } else {
             pref.setEnabled(enabled);
         }

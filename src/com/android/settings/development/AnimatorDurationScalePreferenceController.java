@@ -25,7 +25,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -48,9 +47,10 @@ public class AnimatorDurationScalePreferenceController extends DeveloperOptionsP
 
         mWindowManager = IWindowManager.Stub.asInterface(
                 ServiceManager.getService(Context.WINDOW_SERVICE));
-        mListValues = context.getResources().getStringArray(R.array.animator_duration_scale_values);
+        mListValues = context.getResources()
+                .getStringArray(com.android.settingslib.R.array.animator_duration_scale_values);
         mListSummaries = context.getResources().getStringArray(
-                R.array.animator_duration_scale_entries);
+                com.android.settingslib.R.array.animator_duration_scale_entries);
     }
 
     @Override

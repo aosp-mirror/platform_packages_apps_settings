@@ -46,6 +46,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 
 import com.google.common.collect.ImmutableMap;
@@ -131,7 +132,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
                 LayoutInflater.class);
         final View view = layoutInflater.inflate(R.layout.dialog_mobile_network_rename, null);
         populateView(view);
-        builder.setTitle(R.string.mobile_network_sim_name)
+        builder.setTitle(R.string.mobile_network_sim_label_color_title)
                 .setView(view)
                 .setPositiveButton(R.string.mobile_network_sim_name_rename, (dialog, which) -> {
                     mSubscriptionManager.setDisplayName(mNameView.getText().toString(), mSubId,
@@ -175,14 +176,23 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         mColorSpinner.setAdapter(adapter);
         mColorSpinner.setSelection(getSimColorIndex(info.getIconTint()));
 
+        if(Flags.isDualSimOnboardingEnabled()){
+            return;
+        }
+
+        final TextView operatorTitle = view.findViewById(R.id.operator_name_label);
+        operatorTitle.setVisibility(View.VISIBLE);
+
         final TextView operatorName = view.findViewById(R.id.operator_name_value);
         mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
+        operatorName.setVisibility(View.VISIBLE);
         operatorName.setText(info.getCarrierName());
 
         final TextView phoneTitle = view.findViewById(R.id.number_label);
         phoneTitle.setVisibility(info.isOpportunistic() ? View.GONE : View.VISIBLE);
 
         final TextView phoneNumber = view.findViewById(R.id.number_value);
+        phoneNumber.setVisibility(View.VISIBLE);
         final String pn = SubscriptionUtil.getBidiFormattedPhoneNumber(getContext(), info);
         if (!TextUtils.isEmpty(pn)) {
             phoneNumber.setText(pn);

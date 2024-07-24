@@ -40,11 +40,14 @@ class BatteryChartViewModel {
     }
 
     interface LabelTextGenerator {
-        /** Generate the label text. The text may be abbreviated to save space. */
+        /** Generates the label text. The text may be abbreviated to save space. */
         String generateText(List<Long> timestamps, int index);
 
-        /** Generate the full text for accessibility. */
+        /** Generates the full text for accessibility. */
         String generateFullText(List<Long> timestamps, int index);
+
+        /** Generates the battery level text of a slot for accessibility.*/
+        String generateSlotBatteryLevelText(List<Integer> levels, int index);
     }
 
     private final List<Integer> mLevels;
@@ -53,24 +56,31 @@ class BatteryChartViewModel {
     private final LabelTextGenerator mLabelTextGenerator;
     private final String[] mTexts;
     private final String[] mFullTexts;
+    private final String[] mBatteryLevelTexts;
 
     private int mSelectedIndex = SELECTED_INDEX_ALL;
     private int mHighlightSlotIndex = SELECTED_INDEX_INVALID;
 
-    BatteryChartViewModel(@NonNull List<Integer> levels, @NonNull List<Long> timestamps,
+    BatteryChartViewModel(
+            @NonNull List<Integer> levels,
+            @NonNull List<Long> timestamps,
             @NonNull AxisLabelPosition axisLabelPosition,
             @NonNull LabelTextGenerator labelTextGenerator) {
         Preconditions.checkArgument(
                 levels.size() == timestamps.size() && levels.size() >= MIN_LEVELS_DATA_SIZE,
-                String.format(Locale.ENGLISH,
+                String.format(
+                        Locale.ENGLISH,
                         "Invalid BatteryChartViewModel levels.size: %d, timestamps.size: %d.",
-                        levels.size(), timestamps.size()));
+                        levels.size(),
+                        timestamps.size()));
         mLevels = levels;
         mTimestamps = timestamps;
         mAxisLabelPosition = axisLabelPosition;
         mLabelTextGenerator = labelTextGenerator;
         mTexts = new String[size()];
         mFullTexts = new String[size()];
+        // Last one for SELECTED_INDEX_ALL
+        mBatteryLevelTexts = new String[size() + 1];
     }
 
     public int size() {
@@ -93,6 +103,15 @@ class BatteryChartViewModel {
             mFullTexts[index] = mLabelTextGenerator.generateFullText(mTimestamps, index);
         }
         return mFullTexts[index];
+    }
+
+    public String getSlotBatteryLevelText(int index) {
+        final int textIndex = index != SELECTED_INDEX_ALL ? index : size();
+        if (mBatteryLevelTexts[textIndex] == null) {
+            mBatteryLevelTexts[textIndex] =
+                    mLabelTextGenerator.generateSlotBatteryLevelText(mLevels, index);
+        }
+        return mBatteryLevelTexts[textIndex];
     }
 
     public AxisLabelPosition axisLabelPosition() {

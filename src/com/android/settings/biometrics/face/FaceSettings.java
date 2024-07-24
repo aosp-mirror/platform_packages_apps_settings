@@ -18,7 +18,6 @@ package com.android.settings.biometrics.face;
 
 import static android.app.Activity.RESULT_OK;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_SETTINGS_FOR_WORK_TITLE;
-import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FACE;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.ENROLL_REQUEST;
@@ -43,12 +42,10 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.LayoutPreference;
@@ -104,26 +101,8 @@ public class FaceSettings extends DashboardFragment {
         mEnrollButton.setVisible(true);
     };
 
-    private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener =
-            new FaceSettingsEnrollButtonPreferenceController.Listener() {
-                @Override
-                public boolean onShowSplitScreenDialog() {
-                    if (getActivity().isInMultiWindowMode()
-                            && !ActivityEmbeddingUtils.isActivityEmbedded(getActivity())) {
-                        // If it's in split mode, show the error dialog.
-                        BiometricsSplitScreenDialog.newInstance(TYPE_FACE).show(
-                                getActivity().getSupportFragmentManager(),
-                                BiometricsSplitScreenDialog.class.getName());
-                        return true;
-                    }
-                    return false;
-                }
-
-                @Override
-                public void onStartEnrolling(Intent intent) {
-                    FaceSettings.this.startActivityForResult(intent, ENROLL_REQUEST);
-                }
-            };
+    private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener = intent ->
+            startActivityForResult(intent, ENROLL_REQUEST);
 
     /**
      * @param context
@@ -182,7 +161,7 @@ public class FaceSettings extends DashboardFragment {
 
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        mFaceFeatureProvider = FeatureFactory.getFactory(getContext()).getFaceFeatureProvider();
+        mFaceFeatureProvider = FeatureFactory.getFeatureFactory().getFaceFeatureProvider();
 
         if (mUserManager.getUserInfo(mUserId).isManagedProfile()) {
             getActivity().setTitle(
@@ -418,13 +397,9 @@ public class FaceSettings extends DashboardFragment {
                 }
 
                 private boolean isAttentionSupported(Context context) {
-                    FaceFeatureProvider featureProvider = FeatureFactory.getFactory(
-                            context).getFaceFeatureProvider();
-                    boolean isAttentionSupported = false;
-                    if (featureProvider != null) {
-                        isAttentionSupported = featureProvider.isAttentionSupported(context);
-                    }
-                    return isAttentionSupported;
+                    FaceFeatureProvider featureProvider =
+                            FeatureFactory.getFeatureFactory().getFaceFeatureProvider();
+                    return featureProvider.isAttentionSupported(context);
                 }
 
                 private boolean hasEnrolledBiometrics(Context context) {

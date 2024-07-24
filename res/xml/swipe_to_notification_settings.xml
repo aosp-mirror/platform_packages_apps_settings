@@ -26,7 +26,7 @@
         settings:searchable="false"
         app:lottie_rawRes="@raw/lottie_swipe_fingerprint"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="gesture_swipe_down_fingerprint"
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:summary="@string/fingerprint_swipe_for_notifications_summary"

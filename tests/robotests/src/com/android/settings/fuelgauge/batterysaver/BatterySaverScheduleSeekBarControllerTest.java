@@ -34,8 +34,7 @@ public class BatterySaverScheduleSeekBarControllerTest {
     private Context mContext;
     private ContentResolver mResolver;
     private BatterySaverScheduleSeekBarController mController;
-    @Mock
-    private PreferenceScreen mScreen;
+    @Mock private PreferenceScreen mScreen;
 
     @Before
     public void setUp() {
@@ -83,7 +82,9 @@ public class BatterySaverScheduleSeekBarControllerTest {
 
     @Test
     public void updateSeekBar_routineMode_hasCorrectProperties() {
-        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+        Settings.Global.putInt(
+                mResolver,
+                Global.AUTOMATIC_POWER_SAVE_MODE,
                 PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
 
         mController.updateSeekBar();
@@ -95,7 +96,9 @@ public class BatterySaverScheduleSeekBarControllerTest {
     @Test
     public void updateSeekBar_percentageMode_hasCorrectProperties() {
         final CharSequence expectedTitle = "10%";
-        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+        Settings.Global.putInt(
+                mResolver,
+                Global.AUTOMATIC_POWER_SAVE_MODE,
                 PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         setTriggerLevel(10);
 
@@ -108,7 +111,9 @@ public class BatterySaverScheduleSeekBarControllerTest {
 
     @Test
     public void updateSeekBar_noneMode_hasCorrectProperties() {
-        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+        Settings.Global.putInt(
+                mResolver,
+                Global.AUTOMATIC_POWER_SAVE_MODE,
                 PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         setTriggerLevel(0);
 
@@ -120,7 +125,9 @@ public class BatterySaverScheduleSeekBarControllerTest {
 
     @Test
     public void addToScreen_addsToEnd() {
-        Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+        Settings.Global.putInt(
+                mResolver,
+                Global.AUTOMATIC_POWER_SAVE_MODE,
                 PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         setTriggerLevel(15);
 

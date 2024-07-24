@@ -51,10 +51,8 @@ public class HighPowerDetailTest {
     private HighPowerDetail mFragment;
 
     private Context mContext;
-    @Mock
-    private PowerAllowlistBackend mPowerAllowlistBackend;
-    @Mock
-    private BatteryUtils mBatteryUtils;
+    @Mock private PowerAllowlistBackend mPowerAllowlistBackend;
+    @Mock private BatteryUtils mBatteryUtils;
 
     @Before
     public void setUp() {
@@ -73,13 +71,19 @@ public class HighPowerDetailTest {
     public void logSpecialPermissionChange() {
         // Deny means app is allowlisted to opt out of power save restrictions
         HighPowerDetail.logSpecialPermissionChange(true, "app", RuntimeEnvironment.application);
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_DENY), eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        any(Context.class),
+                        eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_DENY),
+                        eq("app"));
 
         // Allow means app is NOT allowlisted to opt out of power save restrictions
         HighPowerDetail.logSpecialPermissionChange(false, "app", RuntimeEnvironment.application);
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_ALLOW), eq("app"));
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        any(Context.class),
+                        eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_ALLOW),
+                        eq("app"));
     }
 
     @Test
@@ -87,15 +91,17 @@ public class HighPowerDetailTest {
         mFragment.mIsEnabled = true;
         when(mPowerAllowlistBackend.isAllowlisted(TEST_PACKAGE, TEST_UID)).thenReturn(false);
         mFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
-        verify(mBatteryUtils).setForceAppStandby(TEST_UID, TEST_PACKAGE,
-                AppOpsManager.MODE_ALLOWED);
+        verify(mBatteryUtils)
+                .setForceAppStandby(TEST_UID, TEST_PACKAGE, AppOpsManager.MODE_ALLOWED);
     }
 
     @Test
     public void getSummary_defaultActivePackage_returnUnavailable() {
         doReturn(true).when(mPowerAllowlistBackend).isDefaultActiveApp(TEST_PACKAGE, TEST_UID);
 
-        assertThat(HighPowerDetail.getSummary(mContext, mPowerAllowlistBackend, TEST_PACKAGE,
-                TEST_UID)).isEqualTo(mContext.getString(R.string.high_power_system));
+        assertThat(
+                        HighPowerDetail.getSummary(
+                                mContext, mPowerAllowlistBackend, TEST_PACKAGE, TEST_UID))
+                .isEqualTo(mContext.getString(R.string.high_power_system));
     }
 }

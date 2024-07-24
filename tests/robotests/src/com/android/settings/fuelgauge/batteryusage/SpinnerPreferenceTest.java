@@ -42,14 +42,13 @@ public final class SpinnerPreferenceTest {
     private Context mContext;
     private SpinnerPreference mSpinnerPreference;
 
-    @Mock
-    private Spinner mMockSpinner;
+    @Mock private Spinner mMockSpinner;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mSpinnerPreference = new SpinnerPreference(mContext, /*attrs=*/ null);
+        mSpinnerPreference = new SpinnerPreference(mContext, /* attrs= */ null);
     }
 
     @Test
@@ -59,7 +58,7 @@ public final class SpinnerPreferenceTest {
 
     @Test
     public void initializeSpinner_returnExpectedResult() {
-        final String[] items = new String[]{"item1", "item2"};
+        final String[] items = new String[] {"item1", "item2"};
         mSpinnerPreference.initializeSpinner(items, null);
         assertThat(mSpinnerPreference.mItems).isEqualTo(items);
     }

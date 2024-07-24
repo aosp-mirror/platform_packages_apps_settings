@@ -19,12 +19,13 @@ package com.android.settings.development;
 import static android.bluetooth.BluetoothStatusCodes.FEATURE_SUPPORTED;
 
 import static com.android.settings.development.BluetoothLeAudioAllowListPreferenceController
-        .LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY;
+        .BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -48,20 +49,18 @@ public class BluetoothLeAudioAllowListPreferenceControllerTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private DevelopmentSettingsDashboardFragment mFragment;
-
     @Mock
     private BluetoothAdapter mBluetoothAdapter;
-
-    private Context mContext;
+    @Mock
     private SwitchPreference mPreference;
-    private BluetoothLeAudioPreferenceController mController;
+    private Context mContext;
+    private BluetoothLeAudioAllowListPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mPreference = new SwitchPreference(mContext);
-        mController = spy(new BluetoothLeAudioPreferenceController(mContext, mFragment));
+        mController = spy(new BluetoothLeAudioAllowListPreferenceController(mContext, mFragment));
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
             .thenReturn(mPreference);
         mController.mBluetoothAdapter = mBluetoothAdapter;
@@ -71,36 +70,38 @@ public class BluetoothLeAudioAllowListPreferenceControllerTest {
     }
 
     @Test
-    public void onRebootDialogConfirmedAsLeAudioAllowListDisabled_shouldSwitchStatus() {
-        SystemProperties.set(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, Boolean.toString(false));
-        mController.mChanged = true;
-
-        mController.onRebootDialogConfirmed();
-        final boolean mode = SystemProperties.getBoolean(
-                LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-        assertThat(mode).isFalse();
-    }
-
-
-    @Test
-    public void onRebootDialogConfirmedAsLeAudioAllowListEnabled_shouldSwitchStatus() {
-        SystemProperties.set(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, Boolean.toString(true));
-        mController.mChanged = true;
-
-        mController.onRebootDialogConfirmed();
-        final boolean status = SystemProperties.getBoolean(
-                LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-        assertThat(status).isTrue();
+    public void onPreferenceChange_setCheck_shouldBypassLeAudioAllowlist() {
+        mController.onPreferenceChange(mPreference, Boolean.TRUE);
+        assertThat(SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY,
+                false)).isTrue();
     }
 
     @Test
-    public void onRebootDialogCanceled_shouldNotSwitchStatus() {
-        SystemProperties.set(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, Boolean.toString(false));
-        mController.mChanged = true;
+    public void onPreferenceChange_setUnCheck_shouldNotBypassLeAudioAllowlist() {
+        mController.onPreferenceChange(mPreference, Boolean.FALSE);
+        assertThat(SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY,
+                true)).isFalse();
+    }
 
-        mController.onRebootDialogCanceled();
-        final boolean status = SystemProperties.getBoolean(
-                LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-        assertThat(status).isFalse();
+    @Test
+    public void updateState_bluetoothOff_shouldDisableToggle() {
+        mController.mBluetoothAdapter = null;
+        mController.updateState(mPreference);
+        verify(mPreference).setEnabled(false);
+    }
+
+    @Test
+    public void updateState_bluetoothOn_shouldShowStatus() {
+        SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, Boolean.toString(true));
+        mController.updateState(mPreference);
+        verify(mPreference).setChecked(true);
+    }
+
+    @Test
+    public void onDeveloperOptionsSwitchDisabled_shouldSetBypassLeAudioAllowlistToFalse() {
+        SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, Boolean.toString(true));
+        mController.onDeveloperOptionsSwitchDisabled();
+        verify(mPreference).setEnabled(false);
+        assertThat(SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, true)).isFalse();
     }
 }

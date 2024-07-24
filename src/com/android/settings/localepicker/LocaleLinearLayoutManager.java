@@ -43,6 +43,7 @@ import com.android.settings.R;
 public class LocaleLinearLayoutManager extends LinearLayoutManager {
     private final LocaleDragAndDropAdapter mAdapter;
     private final Context mContext;
+    private LocaleListEditor mLocaleListEditor;
 
     private final AccessibilityNodeInfoCompat.AccessibilityActionCompat mActionMoveUp;
     private final AccessibilityNodeInfoCompat.AccessibilityActionCompat mActionMoveDown;
@@ -147,8 +148,12 @@ public class LocaleLinearLayoutManager extends LinearLayoutManager {
         }
 
         if (result) {
-            mAdapter.doTheUpdate();
+            mLocaleListEditor.showConfirmDialog(false, mAdapter.getFeedItemList().get(0));
         }
         return result;
+    }
+
+    public void setLocaleListEditor(LocaleListEditor localeListEditor) {
+        mLocaleListEditor = localeListEditor;
     }
 }

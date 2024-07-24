@@ -35,7 +35,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Preference controller for stylus firmware updates via USB */
+/** Preference controller for stylus firmware updates via USB **/
 public class StylusUsbFirmwareController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
     private static final String TAG = StylusUsbFirmwareController.class.getSimpleName();
@@ -85,8 +85,8 @@ public class StylusUsbFirmwareController extends BasePreferenceController
             mPreferenceScreen.removePreference(mPreference);
         }
         if (hasUsbStylusFirmwareUpdateFeature(mStylusUsbDevice)) {
-            StylusFeatureProvider featureProvider = FeatureFactory.getFactory(
-                    mContext).getStylusFeatureProvider();
+            StylusFeatureProvider featureProvider =
+                    FeatureFactory.getFeatureFactory().getStylusFeatureProvider();
             List<Preference> preferences =
                     featureProvider.getUsbFirmwareUpdatePreferences(mContext, mStylusUsbDevice);
 
@@ -134,8 +134,8 @@ public class StylusUsbFirmwareController extends BasePreferenceController
     static boolean hasUsbStylusFirmwareUpdateFeature(UsbDevice usbDevice) {
         if (usbDevice == null) return false;
 
-        StylusFeatureProvider featureProvider = FeatureFactory.getFactory(
-                FeatureFactory.getAppContext()).getStylusFeatureProvider();
+        StylusFeatureProvider featureProvider =
+                FeatureFactory.getFeatureFactory().getStylusFeatureProvider();
 
         return featureProvider.isUsbFirmwareUpdateEnabled(usbDevice);
     }

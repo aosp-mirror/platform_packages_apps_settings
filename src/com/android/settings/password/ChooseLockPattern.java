@@ -469,19 +469,25 @@ public class ChooseLockPattern extends SettingsActivity {
 
         private void updateActivityTitle() {
             final String msg;
-            if (mForFingerprint) {
+            if (mForFingerprint && !shouldShowGenericTitle()) {
                 msg = getString(R.string.lockpassword_choose_your_pattern_header_for_fingerprint);
-            } else if (mForFace) {
+            } else if (mForFace && !shouldShowGenericTitle()) {
                 msg = getString(R.string.lockpassword_choose_your_pattern_header_for_face);
             } else if (mIsManagedProfile) {
                 msg = getContext().getSystemService(DevicePolicyManager.class).getResources()
                         .getString(SET_WORK_PROFILE_PATTERN_HEADER,
                                 () -> getString(
                                         R.string.lockpassword_choose_your_profile_pattern_header));
+            } else if (android.os.Flags.allowPrivateProfile() && isPrivateProfile()) {
+                msg = getString(R.string.private_space_choose_your_pattern_header);
             } else {
                 msg = getString(R.string.lockpassword_choose_your_pattern_header);
             }
             getActivity().setTitle(msg);
+        }
+
+        protected boolean shouldShowGenericTitle() {
+            return false;
         }
 
         @SuppressLint("ClickableViewAccessibility")
@@ -514,7 +520,8 @@ public class ChooseLockPattern extends SettingsActivity {
                             .setText(R.string.lockpattern_tutorial_cancel_label)
                             .setListener(this::onSkipOrClearButtonClick)
                             .setButtonType(FooterButton.ButtonType.OTHER)
-                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .setTheme(
+                                    com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                             .build()
             );
             mixin.setPrimaryButton(
@@ -522,13 +529,14 @@ public class ChooseLockPattern extends SettingsActivity {
                             .setText(R.string.lockpattern_tutorial_continue_label)
                             .setListener(this::onNextButtonClick)
                             .setButtonType(FooterButton.ButtonType.NEXT)
-                            .setTheme(R.style.SudGlifButton_Primary)
+                            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                             .build()
             );
             mSkipOrClearButton = mixin.getSecondaryButton();
             mNextButton = mixin.getPrimaryButton();
             // TODO(b/243008023) Workaround for Glif layout on 2 panel choose lock settings.
-            mSudContent = layout.findViewById(R.id.sud_layout_content);
+            mSudContent = layout.findViewById(
+                    com.google.android.setupdesign.R.id.sud_layout_content);
             mSudContent.setPadding(mSudContent.getPaddingLeft(), 0, mSudContent.getPaddingRight(),
                     0);
 
@@ -741,7 +749,7 @@ public class ChooseLockPattern extends SettingsActivity {
             if (stage == Stage.ConfirmWrong || stage == Stage.ChoiceTooShort) {
                 TypedValue typedValue = new TypedValue();
                 Theme theme = getActivity().getTheme();
-                theme.resolveAttribute(R.attr.colorError, typedValue, true);
+                theme.resolveAttribute(androidx.appcompat.R.attr.colorError, typedValue, true);
                 mHeaderText.setTextColor(typedValue.data);
             } else if (mDefaultHeaderColorList != null) {
                 mHeaderText.setTextColor(mDefaultHeaderColorList);
@@ -869,7 +877,19 @@ public class ChooseLockPattern extends SettingsActivity {
                     startActivity(intent);
                 }
             }
+
+            if (mSudContent != null) {
+                mSudContent.announceForAccessibility(
+                        getString(R.string.accessibility_setup_password_complete));
+            }
+
             getActivity().finish();
+        }
+
+        private boolean isPrivateProfile() {
+            UserManager userManager = getContext().createContextAsUser(UserHandle.of(mUserId),
+                    /*flags=*/0).getSystemService(UserManager.class);
+            return userManager.isPrivateProfile();
         }
     }
 }

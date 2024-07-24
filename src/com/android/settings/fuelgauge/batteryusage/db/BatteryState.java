@@ -43,15 +43,17 @@ public class BatteryState {
     public final int consumerType;
     public final boolean isFullChargeCycleStart;
     public final String batteryInformation;
+
     /**
      * This field is filled only when build type is "userdebug".
-     * For now, Java Proto Lite is recommended by the Android team as the more lightweight solution
-     * designed specifically for mobile apps to process protobuf.
-     * However, converting protobuf to string through Java Proto Lite needs to parse it into a bytes
-     * field first, which leads to the strings saved in our database are encoded and hard to
-     * understand.
-     * To make it easier to debug in our daily development, this field is added.
-     * It will not be filled for the real users.
+     *
+     * <p>For now, Java Proto Lite is recommended by the Android team as the more lightweight
+     * solution designed specifically for mobile apps to process protobuf. However, converting
+     * protobuf to string through Java Proto Lite needs to parse it into a bytes field first, which
+     * leads to the strings saved in our database are encoded and hard to understand.
+     *
+     * <p>To make it easier to debug in our daily development, this field is added. It will not be
+     * filled for the real users.
      */
     public final String batteryInformationDebug;
 
@@ -91,17 +93,27 @@ public class BatteryState {
         final BatteryInformation batteryInformationInstance =
                 BatteryUtils.parseProtoFromString(
                         batteryInformation, BatteryInformation.getDefaultInstance());
-        final StringBuilder builder = new StringBuilder()
-                .append("\nBatteryState{")
-                .append(String.format(Locale.US,
-                        "\n\tpackage=%s|uid=%d|userId=%d", packageName, uid, userId))
-                .append(String.format(Locale.US, "\n\ttimestamp=%s|consumer=%d|isStart=%b",
-                        recordAtDateTime, consumerType, isFullChargeCycleStart))
-                .append(String.format(Locale.US, "\n\tbatteryInfo="))
-                .append(batteryInformationInstance.toString());
+        final StringBuilder builder =
+                new StringBuilder()
+                        .append("\nBatteryState{")
+                        .append(
+                                String.format(
+                                        Locale.US,
+                                        "\n\tpackage=%s|uid=%d|userId=%d",
+                                        packageName,
+                                        uid,
+                                        userId))
+                        .append(
+                                String.format(
+                                        Locale.US,
+                                        "\n\ttimestamp=%s|consumer=%d|isStart=%b",
+                                        recordAtDateTime,
+                                        consumerType,
+                                        isFullChargeCycleStart))
+                        .append(String.format(Locale.US, "\n\tbatteryInfo="))
+                        .append(batteryInformationInstance.toString());
         return builder.toString();
     }
-
 
     /** Creates new {@link BatteryState} from {@link ContentValues}. */
     public static BatteryState create(ContentValues contentValues) {
@@ -122,8 +134,7 @@ public class BatteryState {
             builder.setConsumerType(contentValues.getAsInteger("consumerType"));
         }
         if (contentValues.containsKey("isFullChargeCycleStart")) {
-            builder.setIsFullChargeCycleStart(
-                    contentValues.getAsBoolean("isFullChargeCycleStart"));
+            builder.setIsFullChargeCycleStart(contentValues.getAsBoolean("isFullChargeCycleStart"));
         }
         if (contentValues.containsKey("batteryInformation")) {
             builder.setBatteryInformation(contentValues.getAsString("batteryInformation"));

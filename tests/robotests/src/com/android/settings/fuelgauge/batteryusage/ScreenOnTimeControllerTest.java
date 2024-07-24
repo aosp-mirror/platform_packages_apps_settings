@@ -46,10 +46,8 @@ public final class ScreenOnTimeControllerTest {
     private Context mContext;
     private ScreenOnTimeController mScreenOnTimeController;
 
-    @Mock
-    private PreferenceCategory mRootPreference;
-    @Mock
-    private TextViewPreference mScreenOnTimeTextPreference;
+    @Mock private PreferenceCategory mRootPreference;
+    @Mock private TextViewPreference mScreenOnTimeTextPreference;
 
     @Before
     public void setUp() {

@@ -23,7 +23,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import com.android.settings.fuelgauge.batteryusage.DatabaseUtils;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -39,18 +39,26 @@ public final class BugReportContentProvider extends ContentProvider {
 
     @Override
     public void dump(FileDescriptor fd, PrintWriter writer, String[] args) {
-        final Context context = getContext();
+        Context context = getContext();
         if (context == null) {
             Log.w(TAG, "failed to dump BatteryUsage state: null context");
             return;
         }
-        if (DatabaseUtils.isWorkProfile(context)) {
+        context = context.getApplicationContext();
+        if (context == null) {
+            Log.w(TAG, "failed to dump BatteryUsage state: null application context");
+            return;
+        }
+        if (BatteryUtils.isWorkProfile(context)) {
             Log.w(TAG, "ignore battery usage states dump in the work profile");
             return;
         }
         writer.println("dump BatteryUsage and AppUsage states:");
         LogUtils.dumpBatteryUsageDatabaseHist(context, writer);
         LogUtils.dumpAppUsageDatabaseHist(context, writer);
+        LogUtils.dumpBatteryUsageSlotDatabaseHist(context, writer);
+        LogUtils.dumpBatteryEventDatabaseHist(context, writer);
+        LogUtils.dumpBatteryStateDatabaseHist(context, writer);
     }
 
     @Override
@@ -79,11 +87,7 @@ public final class BugReportContentProvider extends ContentProvider {
     }
 
     @Override
-    public int update(
-            Uri uri,
-            ContentValues values,
-            String selection,
-            String[] selectionArgs) {
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         throw new UnsupportedOperationException("unsupported!");
     }
 }

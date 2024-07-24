@@ -119,7 +119,7 @@ public class RestrictedPreferenceHelper {
             final String htmlDescription = info.loadHtmlDescription(mPm);
             final String settingsClassName = info.getSettingsActivityName();
             final String tileServiceClassName = info.getTileServiceName();
-            final int metricsCategory = FeatureFactory.getFactory(mContext)
+            final int metricsCategory = FeatureFactory.getFeatureFactory()
                     .getAccessibilityMetricsFeatureProvider()
                     .getDownloadedFeatureMetricsCategory(componentName);
 
@@ -182,7 +182,7 @@ public class RestrictedPreferenceHelper {
             final String htmlDescription = info.loadHtmlDescription(mPm);
             final String settingsClassName = info.getSettingsActivityName();
             final String tileServiceClassName = info.getTileServiceName();
-            final int metricsCategory = FeatureFactory.getFactory(mContext)
+            final int metricsCategory = FeatureFactory.getFeatureFactory()
                     .getAccessibilityMetricsFeatureProvider()
                     .getDownloadedFeatureMetricsCategory(componentName);
 
@@ -234,37 +234,63 @@ public class RestrictedPreferenceHelper {
         // permittedServices null means all accessibility services are allowed.
         boolean serviceAllowed = permittedServices == null || permittedServices.contains(
                 preference.getPackageName());
-        boolean appOpsAllowed;
-        if (serviceAllowed) {
-            try {
-                final int mode = mAppOps.noteOpNoThrow(
-                        AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
-                        preference.getUid(), preference.getPackageName());
-                final boolean ecmEnabled = mContext.getResources().getBoolean(
-                        com.android.internal.R.bool.config_enhancedConfirmationModeEnabled);
-                appOpsAllowed = !ecmEnabled || mode == AppOpsManager.MODE_ALLOWED;
-                serviceAllowed = appOpsAllowed;
-            } catch (Exception e) {
-                // Allow service in case if app ops is not available in testing.
-                appOpsAllowed = true;
+
+        if (android.permission.flags.Flags.enhancedConfirmationModeApisEnabled()
+                && android.security.Flags.extendEcmToAllSettings()) {
+            preference.checkEcmRestrictionAndSetDisabled(
+                    AppOpsManager.OPSTR_BIND_ACCESSIBILITY_SERVICE,
+                    preference.getPackageName());
+            if (preference.isDisabledByEcm()) {
+                serviceAllowed = false;
+            }
+
+            if (serviceAllowed || serviceEnabled) {
+                preference.setEnabled(true);
+            } else {
+                // Disable accessibility service that are not permitted.
+                final RestrictedLockUtils.EnforcedAdmin admin =
+                        RestrictedLockUtilsInternal.checkIfAccessibilityServiceDisallowed(
+                                mContext, preference.getPackageName(), UserHandle.myUserId());
+
+                if (admin != null) {
+                    preference.setDisabledByAdmin(admin);
+                } else if (!preference.isDisabledByEcm()) {
+                    preference.setEnabled(false);
+                }
             }
         } else {
-            appOpsAllowed = false;
-        }
-        if (serviceAllowed || serviceEnabled) {
-            preference.setEnabled(true);
-        } else {
-            // Disable accessibility service that are not permitted.
-            final RestrictedLockUtils.EnforcedAdmin admin =
-                    RestrictedLockUtilsInternal.checkIfAccessibilityServiceDisallowed(
-                            mContext, preference.getPackageName(), UserHandle.myUserId());
-
-            if (admin != null) {
-                preference.setDisabledByAdmin(admin);
-            } else if (!appOpsAllowed) {
-                preference.setDisabledByAppOps(true);
+            boolean appOpsAllowed;
+            if (serviceAllowed) {
+                try {
+                    final int mode = mAppOps.noteOpNoThrow(
+                            AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
+                            preference.getUid(), preference.getPackageName());
+                    final boolean ecmEnabled = mContext.getResources().getBoolean(
+                            com.android.internal.R.bool.config_enhancedConfirmationModeEnabled);
+                    appOpsAllowed = !ecmEnabled || mode == AppOpsManager.MODE_ALLOWED;
+                    serviceAllowed = appOpsAllowed;
+                } catch (Exception e) {
+                    // Allow service in case if app ops is not available in testing.
+                    appOpsAllowed = true;
+                }
             } else {
-                preference.setEnabled(false);
+                appOpsAllowed = false;
+            }
+            if (serviceAllowed || serviceEnabled) {
+                preference.setEnabled(true);
+            } else {
+                // Disable accessibility service that are not permitted.
+                final RestrictedLockUtils.EnforcedAdmin admin =
+                        RestrictedLockUtilsInternal.checkIfAccessibilityServiceDisallowed(
+                                mContext, preference.getPackageName(), UserHandle.myUserId());
+
+                if (admin != null) {
+                    preference.setDisabledByAdmin(admin);
+                } else if (!appOpsAllowed) {
+                    preference.setDisabledByAppOps(true);
+                } else {
+                    preference.setEnabled(false);
+                }
             }
         }
     }

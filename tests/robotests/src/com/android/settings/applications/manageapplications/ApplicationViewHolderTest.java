@@ -28,7 +28,6 @@ import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -61,7 +60,8 @@ public class ApplicationViewHolderTest {
         info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED;
         mHolder.updateDisableView(info);
 
-        assertThat(mHolder.mDisabled.getText()).isEqualTo(mContext.getText(R.string.disabled));
+        assertThat(mHolder.mDisabled.getText())
+                .isEqualTo(mContext.getText(com.android.settingslib.R.string.disabled));
     }
 
     @Test
@@ -69,8 +69,9 @@ public class ApplicationViewHolderTest {
         mHolder.setSummary("hello");
         assertThat(mHolder.mSummary.getText()).isEqualTo("hello");
 
-        mHolder.setSummary(R.string.disabled);
-        assertThat(mHolder.mSummary.getText()).isEqualTo(mContext.getText(R.string.disabled));
+        mHolder.setSummary(com.android.settingslib.R.string.disabled);
+        assertThat(mHolder.mSummary.getText())
+                .isEqualTo(mContext.getText(com.android.settingslib.R.string.disabled));
     }
 
     @Test

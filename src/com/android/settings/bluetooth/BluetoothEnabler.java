@@ -63,12 +63,6 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
     };
 
     public BluetoothEnabler(Context context, SwitchWidgetController switchController,
-            MetricsFeatureProvider metricsFeatureProvider, int metricsEvent) {
-        this(context, switchController, metricsFeatureProvider, metricsEvent,
-                new RestrictionUtils());
-    }
-
-    public BluetoothEnabler(Context context, SwitchWidgetController switchController,
             MetricsFeatureProvider metricsFeatureProvider, int metricsEvent,
             RestrictionUtils restrictionUtils) {
         mContext = context;

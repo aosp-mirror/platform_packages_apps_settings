@@ -21,6 +21,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_16_9;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_3_2;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_4_3;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_APP_DEFAULT;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_DISPLAY_SIZE;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
@@ -28,6 +29,7 @@ import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
 
 import android.app.ActivityManager;
 import android.app.IActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -44,9 +46,14 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.ActionButtonsPreference;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,29 +67,41 @@ public class UserAspectRatioDetails extends AppInfoBase implements
 
     private static final String KEY_HEADER_SUMMARY = "app_aspect_ratio_summary";
     private static final String KEY_HEADER_BUTTONS = "header_view";
-    private static final String KEY_PREF_FULLSCREEN = "fullscreen_pref";
+
     private static final String KEY_PREF_HALF_SCREEN = "half_screen_pref";
     private static final String KEY_PREF_DISPLAY_SIZE = "display_size_pref";
     private static final String KEY_PREF_16_9 = "16_9_pref";
     private static final String KEY_PREF_4_3 = "4_3_pref";
     @VisibleForTesting
+    static final String KEY_PREF_FULLSCREEN = "fullscreen_pref";
+    @VisibleForTesting
     static final String KEY_PREF_DEFAULT = "app_default_pref";
     @VisibleForTesting
     static final String KEY_PREF_3_2 = "3_2_pref";
 
+    @VisibleForTesting
+    @NonNull String mSelectedKey = KEY_PREF_DEFAULT;
+
+    /** Radio button preference key mapped to {@link PackageManager.UserMinAspectRatio} value */
+    @VisibleForTesting
+    final BiMap<String, Integer> mKeyToAspectRatioMap = HashBiMap.create();
+
     private final List<RadioWithImagePreference> mAspectRatioPreferences = new ArrayList<>();
 
     @NonNull private UserAspectRatioManager mUserAspectRatioManager;
-    @NonNull private String mSelectedKey = KEY_PREF_DEFAULT;
+    private boolean mIsOverrideToFullscreenEnabled;
 
     @Override
     public void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mUserAspectRatioManager = new UserAspectRatioManager(getContext());
+        mIsOverrideToFullscreenEnabled = getAspectRatioManager()
+                .isOverrideToFullscreenEnabled(mPackageName, mUserId);
+
         initPreferences();
         try {
-            final int userAspectRatio = mUserAspectRatioManager
+            final int userAspectRatio = getAspectRatioManager()
                     .getUserMinAspectRatioValue(mPackageName, mUserId);
             mSelectedKey = getSelectedKey(userAspectRatio);
         } catch (RemoteException e) {
@@ -104,6 +123,7 @@ public class UserAspectRatioDetails extends AppInfoBase implements
             Log.e(TAG, "Unable to set user min aspect ratio");
             return;
         }
+        logActionMetrics(selectedKey, mSelectedKey);
         // Only update to selected aspect ratio if nothing goes wrong
         mSelectedKey = selectedKey;
         updateAllPreferences(mSelectedKey);
@@ -118,8 +138,7 @@ public class UserAspectRatioDetails extends AppInfoBase implements
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/292566895): add metrics for logging
-        return 0;
+        return SettingsEnums.USER_ASPECT_RATIO_APP_INFO_SETTINGS;
     }
 
     @Override
@@ -145,43 +164,23 @@ public class UserAspectRatioDetails extends AppInfoBase implements
     }
 
     @PackageManager.UserMinAspectRatio
-    private int getSelectedUserMinAspectRatio(@NonNull String selectedKey) {
-        switch (selectedKey) {
-            case KEY_PREF_FULLSCREEN:
-                return USER_MIN_ASPECT_RATIO_FULLSCREEN;
-            case KEY_PREF_HALF_SCREEN:
-                return USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
-            case KEY_PREF_DISPLAY_SIZE:
-                return USER_MIN_ASPECT_RATIO_DISPLAY_SIZE;
-            case KEY_PREF_3_2:
-                return USER_MIN_ASPECT_RATIO_3_2;
-            case KEY_PREF_4_3:
-                return USER_MIN_ASPECT_RATIO_4_3;
-            case KEY_PREF_16_9:
-                return USER_MIN_ASPECT_RATIO_16_9;
-            default:
-                return USER_MIN_ASPECT_RATIO_UNSET;
-        }
+    @VisibleForTesting
+    int getSelectedUserMinAspectRatio(@NonNull String selectedKey) {
+        final int appDefault = mKeyToAspectRatioMap
+                .getOrDefault(KEY_PREF_DEFAULT, USER_MIN_ASPECT_RATIO_UNSET);
+        return mKeyToAspectRatioMap.getOrDefault(selectedKey, appDefault);
     }
 
     @NonNull
     private String getSelectedKey(@PackageManager.UserMinAspectRatio int userMinAspectRatio) {
-        switch (userMinAspectRatio) {
-            case USER_MIN_ASPECT_RATIO_FULLSCREEN:
-                return KEY_PREF_FULLSCREEN;
-            case USER_MIN_ASPECT_RATIO_SPLIT_SCREEN:
-                return KEY_PREF_HALF_SCREEN;
-            case USER_MIN_ASPECT_RATIO_DISPLAY_SIZE:
-                return KEY_PREF_DISPLAY_SIZE;
-            case USER_MIN_ASPECT_RATIO_3_2:
-                return KEY_PREF_3_2;
-            case USER_MIN_ASPECT_RATIO_4_3:
-                return KEY_PREF_4_3;
-            case USER_MIN_ASPECT_RATIO_16_9:
-                return KEY_PREF_16_9;
-            default:
-                return KEY_PREF_DEFAULT;
+        final String appDefault = mKeyToAspectRatioMap.inverse()
+                .getOrDefault(USER_MIN_ASPECT_RATIO_UNSET, KEY_PREF_DEFAULT);
+
+        if (userMinAspectRatio == USER_MIN_ASPECT_RATIO_UNSET && mIsOverrideToFullscreenEnabled) {
+            // Pre-select fullscreen option if device manufacturer has overridden app to fullscreen
+            userMinAspectRatio = USER_MIN_ASPECT_RATIO_FULLSCREEN;
         }
+        return mKeyToAspectRatioMap.inverse().getOrDefault(userMinAspectRatio, appDefault);
     }
 
     @Override
@@ -197,7 +196,7 @@ public class UserAspectRatioDetails extends AppInfoBase implements
                 .setHasAppInfoLink(true)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE)
-                .done(getActivity(), getPrefContext());
+                .done(getPrefContext());
 
         getPreferenceScreen().addPreference(pref);
     }
@@ -214,7 +213,11 @@ public class UserAspectRatioDetails extends AppInfoBase implements
                 .setButton1Icon(R.drawable.ic_settings_open)
                 .setButton1OnClickListener(v -> launchApplication());
 
-        addPreference(KEY_PREF_DEFAULT, USER_MIN_ASPECT_RATIO_UNSET);
+        if (mIsOverrideToFullscreenEnabled) {
+            addPreference(KEY_PREF_DEFAULT, USER_MIN_ASPECT_RATIO_APP_DEFAULT);
+        } else {
+            addPreference(KEY_PREF_DEFAULT, USER_MIN_ASPECT_RATIO_UNSET);
+        }
         addPreference(KEY_PREF_FULLSCREEN, USER_MIN_ASPECT_RATIO_FULLSCREEN);
         addPreference(KEY_PREF_DISPLAY_SIZE, USER_MIN_ASPECT_RATIO_DISPLAY_SIZE);
         addPreference(KEY_PREF_HALF_SCREEN, USER_MIN_ASPECT_RATIO_SPLIT_SCREEN);
@@ -229,18 +232,81 @@ public class UserAspectRatioDetails extends AppInfoBase implements
         if (pref == null) {
             return;
         }
-        if (!mUserAspectRatioManager.hasAspectRatioOption(aspectRatio, mPackageName)) {
+        if (!getAspectRatioManager().hasAspectRatioOption(aspectRatio, mPackageName)) {
             pref.setVisible(false);
             return;
         }
         pref.setTitle(mUserAspectRatioManager.getAccessibleEntry(aspectRatio, mPackageName));
         pref.setOnClickListener(this);
+        mKeyToAspectRatioMap.put(key, aspectRatio);
         mAspectRatioPreferences.add(pref);
     }
 
     private void updateAllPreferences(@NonNull String selectedKey) {
         for (RadioWithImagePreference pref : mAspectRatioPreferences) {
             pref.setChecked(selectedKey.equals(pref.getKey()));
+        }
+    }
+
+    private void logActionMetrics(@NonNull String selectedKey, @NonNull String unselectedKey) {
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+        final int attribution = metricsFeatureProvider.getAttribution(getActivity());
+        metricsFeatureProvider.action(
+                attribution,
+                getUnselectedAspectRatioAction(unselectedKey),
+                getMetricsCategory(),
+                mPackageName,
+                mUserId
+        );
+        metricsFeatureProvider.action(
+                attribution,
+                getSelectedAspectRatioAction(selectedKey),
+                getMetricsCategory(),
+                mPackageName,
+                mUserId
+        );
+    }
+
+    private static int getSelectedAspectRatioAction(@NonNull String selectedKey) {
+        switch (selectedKey) {
+            case KEY_PREF_DEFAULT:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_APP_DEFAULT_SELECTED;
+            case KEY_PREF_FULLSCREEN:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_FULL_SCREEN_SELECTED;
+            case KEY_PREF_HALF_SCREEN:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_HALF_SCREEN_SELECTED;
+            case KEY_PREF_4_3:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_4_3_SELECTED;
+            case KEY_PREF_16_9:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_16_9_SELECTED;
+            case KEY_PREF_3_2:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_3_2_SELECTED;
+            case KEY_PREF_DISPLAY_SIZE:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_DISPLAY_SIZE_SELECTED;
+            default:
+                return SettingsEnums.ACTION_UNKNOWN;
+        }
+    }
+
+    private static int getUnselectedAspectRatioAction(@NonNull String unselectedKey) {
+        switch (unselectedKey) {
+            case KEY_PREF_DEFAULT:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_APP_DEFAULT_UNSELECTED;
+            case KEY_PREF_FULLSCREEN:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_FULL_SCREEN_UNSELECTED;
+            case KEY_PREF_HALF_SCREEN:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_HALF_SCREEN_UNSELECTED;
+            case KEY_PREF_4_3:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_4_3_UNSELECTED;
+            case KEY_PREF_16_9:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_16_9_UNSELECTED;
+            case KEY_PREF_3_2:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_3_2_UNSELECTED;
+            case KEY_PREF_DISPLAY_SIZE:
+                return SettingsEnums.ACTION_USER_ASPECT_RATIO_DISPLAY_SIZE_UNSELECTED;
+            default:
+                return SettingsEnums.ACTION_UNKNOWN;
         }
     }
 

@@ -44,7 +44,7 @@ public class PowerButtonInstantLockPreferenceController extends AbstractPreferen
         super(context);
         mUserId = userId;
         mLockPatternUtils = lockPatternUtils;
-        mTrustAgentManager = FeatureFactory.getFactory(context)
+        mTrustAgentManager = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider().getTrustAgentManager();
     }
 
@@ -78,7 +78,7 @@ public class PowerButtonInstantLockPreferenceController extends AbstractPreferen
                     R.string.lockpattern_settings_power_button_instantly_locks_summary,
                     trustAgentLabel));
         } else {
-            preference.setSummary(R.string.summary_empty);
+            preference.setSummary(com.android.settingslib.R.string.summary_empty);
         }
     }
 

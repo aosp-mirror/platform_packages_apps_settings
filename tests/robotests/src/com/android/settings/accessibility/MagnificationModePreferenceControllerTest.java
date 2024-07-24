@@ -16,9 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import static com.android.settings.accessibility.MagnificationModePreferenceController.MagnificationModeInfo;
-import static com.android.settings.accessibility.MagnificationPreferenceFragment.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -74,7 +74,7 @@ public class MagnificationModePreferenceControllerTest {
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
         mScreen = preferenceManager.createPreferenceScreen(mContext);
         mModePreference = new Preference(mContext);

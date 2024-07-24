@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 
@@ -63,8 +62,6 @@ public class BluetoothDetailsHearingDeviceControlsControllerTest extends
 
     @Test
     public void isAvailable_isHearingAidDevice_available() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE, true);
         when(mCachedDevice.isHearingAidDevice()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -72,8 +69,6 @@ public class BluetoothDetailsHearingDeviceControlsControllerTest extends
 
     @Test
     public void isAvailable_isNotHearingAidDevice_notAvailable() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE, true);
         when(mCachedDevice.isHearingAidDevice()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();

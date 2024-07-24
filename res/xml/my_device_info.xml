@@ -52,11 +52,12 @@
             settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
 
         <!-- Phone number -->
-        <com.android.settings.deviceinfo.PhoneNumberSummaryPreference
+        <Preference
             android:key="phone_number"
             android:order="3"
             android:title="@string/status_number"
             android:summary="@string/summary_placeholder"
+            android:selectable="false"
             settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:controller="com.android.settings.deviceinfo.PhoneNumberPreferenceController"
             settings:enableCopying="true"/>
@@ -114,11 +115,10 @@
             settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"/>
 
         <!-- EID -->
-        <com.android.settings.network.telephony.TelephonyPreferenceDialog
+        <com.android.settingslib.CustomDialogPreferenceCompat
             android:key="eid_info"
             android:order="31"
             android:title="@string/status_eid"
-            android:summary="@string/device_info_protected_single_press"
             android:positiveButtonText="@string/dlg_ok"
             android:dialogLayout="@layout/dialog_eid_status"
             settings:isPreferenceVisible="@bool/config_show_sim_info"
@@ -126,7 +126,7 @@
             settings:controller="com.android.settings.deviceinfo.simstatus.SimEidPreferenceController"/>
 
         <!-- IMEI -->
-        <com.android.settings.deviceinfo.PhoneNumberSummaryPreference
+        <Preference
             android:key="imei_info"
             android:order="32"
             android:title="@string/status_imei"
@@ -151,7 +151,8 @@
             android:order="43"
             android:title="@string/battery_info"
             android:fragment="com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment"
-            settings:keywords="@string/keywords_battery_info"/>
+            settings:keywords="@string/keywords_battery_info"
+            settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryInfoPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory

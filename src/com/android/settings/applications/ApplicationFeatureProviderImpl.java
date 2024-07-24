@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static android.webkit.Flags.updateServiceV2;
+
 import android.Manifest;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -42,6 +44,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.SmsApplication;
 import com.android.settings.R;
+import com.android.settings.webview.WebViewUpdateServiceWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +58,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     private final IPackageManager mPms;
     private final DevicePolicyManager mDpm;
     private final UserManager mUm;
+    private final WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
     private final SystemConfigManager mSystemConfigManager;
 
     /** Flags to use when querying PackageManager for Euicc component implementations. */
@@ -64,11 +68,16 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
     public ApplicationFeatureProviderImpl(Context context, PackageManager pm,
             IPackageManager pms, DevicePolicyManager dpm) {
+        this(context, pm, pms, dpm, new WebViewUpdateServiceWrapper());
+    }
+    public ApplicationFeatureProviderImpl(Context context, PackageManager pm,
+            IPackageManager pms, DevicePolicyManager dpm, WebViewUpdateServiceWrapper wvusWrapper) {
         mContext = context.getApplicationContext();
         mPm = pm;
         mPms = pms;
         mDpm = dpm;
         mUm = UserManager.get(mContext);
+        mWebViewUpdateServiceWrapper = wvusWrapper;
         mSystemConfigManager = context.getSystemService(SystemConfigManager.class);
     }
 
@@ -161,6 +170,14 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         final ComponentInfo euicc = findEuiccService(mPm);
         if (euicc != null) {
             keepEnabledPackages.add(euicc.packageName);
+        }
+
+        // Keep WebView default package enabled.
+        if (updateServiceV2()) {
+            String packageName = mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName();
+            if (packageName != null) {
+                keepEnabledPackages.add(packageName);
+            }
         }
 
         keepEnabledPackages.addAll(getEnabledPackageAllowlist());

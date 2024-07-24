@@ -113,7 +113,7 @@ public class BluetoothBroadcastDialog extends InstrumentedDialogFragment {
         });
 
         mAlertDialog = new AlertDialog.Builder(mContext,
-                com.android.settingslib.R.style.Theme_AlertDialog_SettingsLib)
+                com.android.settingslib.widget.theme.R.style.Theme_AlertDialog_SettingsLib)
             .setView(layout)
             .create();
 

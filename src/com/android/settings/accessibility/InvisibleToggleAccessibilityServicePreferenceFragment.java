@@ -64,9 +64,24 @@ public class InvisibleToggleAccessibilityServicePreferenceFragment extends
     @Override
     void onDialogButtonFromShortcutToggleClicked(View view) {
         super.onDialogButtonFromShortcutToggleClicked(view);
-        if (view.getId() == R.id.permission_enable_allow_button) {
-            AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName,
-                    true);
+        if (!android.view.accessibility.Flags.cleanupAccessibilityWarningDialog()) {
+            if (view.getId() == R.id.permission_enable_allow_button) {
+                AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName,
+                        true);
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * Enables accessibility service when user clicks permission allow button.
+     */
+    @Override
+    void onAllowButtonFromShortcutToggleClicked() {
+        super.onAllowButtonFromShortcutToggleClicked();
+        if (android.view.accessibility.Flags.cleanupAccessibilityWarningDialog()) {
+            AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName, true);
         }
     }
 

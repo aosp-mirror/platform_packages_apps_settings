@@ -116,7 +116,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
                 VOLUME_HUSH_OFF);
 
-        mController.onSwitchChanged(null, true);
+        mController.onCheckedChanged(null, true);
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.VOLUME_HUSH_GESTURE, UNKNOWN)).isEqualTo(VOLUME_HUSH_VIBRATE);
@@ -127,7 +127,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
                 VOLUME_HUSH_MUTE);
 
-        mController.onSwitchChanged(null, false);
+        mController.onCheckedChanged(null, false);
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.VOLUME_HUSH_GESTURE, UNKNOWN)).isEqualTo(VOLUME_HUSH_OFF);
@@ -139,7 +139,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
                 VOLUME_HUSH_MUTE);
 
-        mController.onSwitchChanged(null, true);
+        mController.onCheckedChanged(null, true);
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.VOLUME_HUSH_GESTURE, UNKNOWN)).isEqualTo(VOLUME_HUSH_MUTE);
@@ -151,7 +151,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
                 VOLUME_HUSH_VIBRATE);
 
-        mController.onSwitchChanged(null, true);
+        mController.onCheckedChanged(null, true);
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.VOLUME_HUSH_GESTURE, UNKNOWN)).isEqualTo(VOLUME_HUSH_VIBRATE);

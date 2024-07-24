@@ -45,20 +45,12 @@ public class ProfileSelectLocationFragment extends ProfileSelectFragment {
 
     @Override
     public Fragment[] getFragments() {
-
-        final Bundle workOnly = new Bundle();
-        workOnly.putInt(EXTRA_PROFILE, ProfileSelectFragment.ProfileType.WORK);
-        final Fragment workFragment = new LocationWorkProfileSettings();
-        workFragment.setArguments(workOnly);
-
-        final Bundle personalOnly = new Bundle();
-        personalOnly.putInt(EXTRA_PROFILE, ProfileSelectFragment.ProfileType.PERSONAL);
-        final Fragment personalFragment = new LocationPersonalSettings();
-        personalFragment.setArguments(personalOnly);
-        return new Fragment[]{
-                personalFragment,
-                workFragment
-        };
+        return ProfileSelectFragment.getFragments(
+                getContext(),
+                null /* bundle */,
+                LocationPersonalSettings::new,
+                LocationWorkProfileSettings::new,
+                LocationPersonalSettings::new);
     }
 
     @Override

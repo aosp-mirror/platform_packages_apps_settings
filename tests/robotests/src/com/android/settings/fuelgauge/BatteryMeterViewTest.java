@@ -39,12 +39,9 @@ public class BatteryMeterViewTest {
     private static final int BATTERY_CRITICAL_LEVEL = 15;
     private static final int BATTERY_LOW_LEVEL = 3;
 
-    @Mock
-    private ColorFilter mErrorColorFilter;
-    @Mock
-    private ColorFilter mAccentColorFilter;
-    @Mock
-    private ColorFilter mForegroundColorFilter;
+    @Mock private ColorFilter mErrorColorFilter;
+    @Mock private ColorFilter mAccentColorFilter;
+    @Mock private ColorFilter mForegroundColorFilter;
     private Context mContext;
     private BatteryMeterView mBatteryMeterView;
     private BatteryMeterView.BatteryMeterDrawable mDrawable;

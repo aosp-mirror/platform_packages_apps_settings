@@ -31,7 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -53,7 +53,7 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
     private Fragment mFragment;
 
     @VisibleForTesting
-    SwitchPreference mPreference;
+    TwoStatePreference mPreference;
 
     @VisibleForTesting
     LocationManager mLocationManager;

@@ -24,6 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.LocaleList;
@@ -51,6 +52,7 @@ public class NumberingSystemItemControllerTest {
     private NumberingPreferencesFragment mFragment;
     private PreferenceScreen mPreferenceScreen;
     private LocaleList mCacheLocale;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     @UiThreadTest
@@ -59,6 +61,7 @@ public class NumberingSystemItemControllerTest {
             Looper.prepare();
         }
         mApplicationContext = ApplicationProvider.getApplicationContext();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFragment = spy(new NumberingPreferencesFragment());
         PreferenceManager preferenceManager = new PreferenceManager(mApplicationContext);
         mPreferenceScreen = preferenceManager.createPreferenceScreen(mApplicationContext);
@@ -94,6 +97,9 @@ public class NumberingSystemItemControllerTest {
         }
 
         assertTrue(isCallingStartActivity);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mApplicationContext,
+                SettingsEnums.ACTION_CHOOSE_LANGUAGE_FOR_NUMBERS_PREFERENCES);
     }
 
     @Test
@@ -114,6 +120,8 @@ public class NumberingSystemItemControllerTest {
         mController.handlePreferenceTreeClick(preference);
 
         verify(mFragment).setArguments(any());
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mApplicationContext, SettingsEnums.ACTION_SET_NUMBERS_PREFERENCES);
     }
 
     @Test

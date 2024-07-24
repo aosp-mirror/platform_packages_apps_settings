@@ -23,17 +23,20 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowActivityManager.class,
+})
 public class VrListenerScreenPreferenceControllerTest {
 
     private Context mContext;
@@ -42,7 +45,7 @@ public class VrListenerScreenPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mController = new VrListenerScreenPreferenceController(mContext, "key");
         mActivityManager = Shadow.extract(mContext.getSystemService(Context.ACTIVITY_SERVICE));
     }
@@ -58,7 +61,6 @@ public class VrListenerScreenPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailability_disabled_unavailable() {

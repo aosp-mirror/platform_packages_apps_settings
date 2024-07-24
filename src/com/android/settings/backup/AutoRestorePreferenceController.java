@@ -25,7 +25,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -79,7 +79,7 @@ public class AutoRestorePreferenceController extends TogglePreferenceController 
             backupManager.setAutoRestore(nextValue);
             result = true;
         } catch (RemoteException e) {
-            ((SwitchPreference) mPreference).setChecked(!nextValue);
+            ((TwoStatePreference) mPreference).setChecked(!nextValue);
             Log.e(TAG, "Error can't set setAutoRestore", e);
         }
 

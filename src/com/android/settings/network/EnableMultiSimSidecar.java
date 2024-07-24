@@ -171,8 +171,11 @@ public class EnableMultiSimSidecar extends AsyncTaskSidecar<Void, Boolean> {
         }
         int activePorts = 0;
         for (UiccSlotInfo slotInfo : slotsInfo) {
+            if (slotInfo == null) {
+                continue;
+            }
             for (UiccPortInfo portInfo : slotInfo.getPorts()) {
-                if (slotInfo != null && portInfo.isActive()) {
+                if (portInfo.isActive()) {
                     activePorts++;
                 }
             }
@@ -189,8 +192,11 @@ public class EnableMultiSimSidecar extends AsyncTaskSidecar<Void, Boolean> {
         }
         Set<Integer> activeRemovableLogicalSlotIds = new ArraySet<>();
         for (UiccSlotInfo info : infos) {
-            for (UiccPortInfo portInfo :info.getPorts()) {
-                if (info != null && portInfo.isActive() && info.isRemovable()) {
+            if (info == null) {
+                continue;
+            }
+            for (UiccPortInfo portInfo : info.getPorts()) {
+                if (portInfo.isActive() && info.isRemovable()) {
                     activeRemovableLogicalSlotIds.add(portInfo.getLogicalSlotIndex());
                 }
             }

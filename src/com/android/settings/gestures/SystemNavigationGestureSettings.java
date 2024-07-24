@@ -116,7 +116,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         super.onAttach(context);
 
         SuggestionFeatureProvider suggestionFeatureProvider =
-                FeatureFactory.getFactory(context).getSuggestionFeatureProvider();
+                FeatureFactory.getFeatureFactory().getSuggestionFeatureProvider();
         SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
         prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
 
@@ -403,6 +403,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                         SearchIndexableRaw data = new SearchIndexableRaw(context);
                         data.title = res.getString(R.string.legacy_navigation_title);
                         data.key = KEY_SYSTEM_NAV_3BUTTONS;
+                        data.keywords = res.getString(R.string.keywords_3_button_navigation);
                         result.add(data);
                     }
 

@@ -81,6 +81,7 @@ public final class IncompatibleChargerDetectorTest {
         when(mUsbPort.getStatus()).thenReturn(mUsbPortStatus);
         when(mUsbPort.supportsComplianceWarnings()).thenReturn(true);
         when(mUsbPortStatus.isConnected()).thenReturn(true);
-        when(mUsbPortStatus.getComplianceWarnings()).thenReturn(new int[]{1});
+        when(mUsbPortStatus.getComplianceWarnings())
+                .thenReturn(new int[] {UsbPortStatus.COMPLIANCE_WARNING_DEBUG_ACCESSORY});
     }
 }

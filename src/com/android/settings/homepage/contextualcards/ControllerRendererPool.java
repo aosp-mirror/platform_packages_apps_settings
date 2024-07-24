@@ -16,10 +16,10 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import android.annotation.NonNull;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.collection.ArraySet;
 import androidx.lifecycle.LifecycleOwner;
 

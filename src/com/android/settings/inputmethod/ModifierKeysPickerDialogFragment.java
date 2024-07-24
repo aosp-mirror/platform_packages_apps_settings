@@ -21,6 +21,7 @@ import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.hardware.input.InputManager;
@@ -47,6 +48,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,6 +70,7 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
     private TextView mLeftBracket;
     private TextView mRightBracket;
     private ImageView mActionKeyIcon;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     private List<int[]> mRemappableKeyList =
             new ArrayList<>(Arrays.asList(
@@ -91,7 +94,8 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
 
         mActivity = getActivity();
-        FeatureFactory featureFactory = FeatureFactory.getFactory(mActivity);
+        FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
+        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mFeatureProvider = featureFactory.getKeyboardSettingsFeatureProvider();
         InputManager inputManager = mActivity.getSystemService(InputManager.class);
         mKeyDefaultName = getArguments().getString(DEFAULT_KEY);
@@ -139,6 +143,7 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         doneButton.setOnClickListener(v -> {
             String selectedItem = modifierKeys.get(adapter.getCurrentItem());
             Spannable itemSummary;
+            logMetricsForRemapping(selectedItem);
             if (selectedItem.equals(mKeyDefaultName)) {
                 itemSummary = new SpannableString(
                         mActivity.getString(R.string.modifier_keys_default_summary));
@@ -187,6 +192,28 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         window.setType(TYPE_SYSTEM_DIALOG);
 
         return modifierKeyDialog;
+    }
+
+    private void logMetricsForRemapping(String selectedItem) {
+        if (mKeyDefaultName.equals("Caps lock")) {
+            mMetricsFeatureProvider.action(
+                    mActivity, SettingsEnums.ACTION_FROM_CAPS_LOCK_TO, selectedItem);
+        }
+
+        if (mKeyDefaultName.equals("Ctrl")) {
+            mMetricsFeatureProvider.action(
+                    mActivity, SettingsEnums.ACTION_FROM_CTRL_TO, selectedItem);
+        }
+
+        if (mKeyDefaultName.equals("Action key")) {
+            mMetricsFeatureProvider.action(
+                    mActivity, SettingsEnums.ACTION_FROM_ACTION_KEY_TO, selectedItem);
+        }
+
+        if (mKeyDefaultName.equals("Alt")) {
+            mMetricsFeatureProvider.action(
+                    mActivity, SettingsEnums.ACTION_FROM_ALT_TO, selectedItem);
+        }
     }
 
     private void setInitialFocusItem(

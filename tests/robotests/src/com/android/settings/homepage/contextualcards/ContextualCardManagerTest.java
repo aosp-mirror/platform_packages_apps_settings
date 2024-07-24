@@ -61,7 +61,6 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -152,7 +151,6 @@ public class ContextualCardManagerTest {
         assertThat(actual).containsExactlyElementsIn(expected);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void loadContextualCards_restartLoaderNotNeeded_shouldInitLoader() {
@@ -162,7 +160,6 @@ public class ContextualCardManagerTest {
                 any(ContextualCardManager.CardContentLoaderCallbacks.class));
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void loadContextualCards_restartLoaderNeeded_shouldRestartLoaderAndSetIsFirstLaunch() {
@@ -237,7 +234,7 @@ public class ContextualCardManagerTest {
     @Test
     public void sortCards_hasStickyCards_stickyShouldAlwaysBeTheLast() {
         final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI,
+        cards.add(buildContextualCard(CustomSliceRegistry.FACE_ENROLL_SLICE_URI,
                 ContextualCardProto.ContextualCard.Category.STICKY_VALUE, 1.02f));
         cards.add(buildContextualCard(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI,
                 ContextualCardProto.ContextualCard.Category.STICKY_VALUE, 1.01f));
@@ -249,7 +246,7 @@ public class ContextualCardManagerTest {
         assertThat(sortedCards.get(cards.size() - 1).getSliceUri())
                 .isEqualTo(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI);
         assertThat(sortedCards.get(cards.size() - 2).getSliceUri())
-                .isEqualTo(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI);
+                .isEqualTo(CustomSliceRegistry.FACE_ENROLL_SLICE_URI);
     }
 
     @Test
@@ -614,7 +611,7 @@ public class ContextualCardManagerTest {
     @Test
     public void getCardsWithViewType_hasOneStickySlice_shouldHaveOneStickyCard() {
         final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString()));
+        cards.add(buildContextualCard(CustomSliceRegistry.FACE_ENROLL_SLICE_URI.toString()));
         cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
         final List<Integer> categories = Arrays.asList(
                 ContextualCardProto.ContextualCard.Category.STICKY_VALUE,

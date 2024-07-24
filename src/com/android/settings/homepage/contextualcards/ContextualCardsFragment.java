@@ -66,7 +66,7 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         super.onCreate(savedInstanceState);
         final Context context = getContext();
         if (savedInstanceState == null) {
-            FeatureFactory.getFactory(context).getSlicesFeatureProvider().newUiSession();
+            FeatureFactory.getFeatureFactory().getSlicesFeatureProvider().newUiSession();
             BluetoothUpdateWorker.initLocalBtManager(getContext());
         }
         mContextualCardManager = new ContextualCardManager(context, getSettingsLifecycle(),
@@ -154,7 +154,7 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
     private void resetSession(Context context) {
         sRestartLoaderNeeded = true;
         unregisterScreenOffReceiver();
-        FeatureFactory.getFactory(context).getSlicesFeatureProvider().newUiSession();
+        FeatureFactory.getFeatureFactory().getSlicesFeatureProvider().newUiSession();
     }
 
     /**

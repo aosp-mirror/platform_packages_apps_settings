@@ -37,13 +37,13 @@
         android:summary="@string/usb_tethering_subtext"
         settings:keywords="@string/keywords_hotspot_tethering" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="enable_bluetooth_tethering"
         android:title="@string/bluetooth_tether_checkbox_text"
         android:summary="@string/bluetooth_tethering_subtext"
         settings:keywords="@string/keywords_hotspot_tethering" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="enable_ethernet_tethering"
         android:title="@string/ethernet_tether_checkbox_text"
         android:summary="@string/ethernet_tethering_subtext"

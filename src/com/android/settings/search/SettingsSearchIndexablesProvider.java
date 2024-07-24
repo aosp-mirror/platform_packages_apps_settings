@@ -173,7 +173,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     public Cursor queryDynamicRawData(String[] projection) {
         final Context context = getContext();
         final List<SearchIndexableRaw> rawList = new ArrayList<>();
-        final Collection<SearchIndexableData> bundles = FeatureFactory.getFactory(context)
+        final Collection<SearchIndexableData> bundles = FeatureFactory.getFeatureFactory()
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
 
         for (SearchIndexableData bundle : bundles) {
@@ -200,8 +200,8 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         final MatrixCursor cursor = new MatrixCursor(SITE_MAP_COLUMNS);
         final Context context = getContext();
         // Loop through all IA categories and pages and build additional SiteMapPairs
-        final List<DashboardCategory> categories = FeatureFactory.getFactory(context)
-                .getDashboardFeatureProvider(context).getAllCategories();
+        final List<DashboardCategory> categories = FeatureFactory.getFeatureFactory()
+                .getDashboardFeatureProvider().getAllCategories();
         for (DashboardCategory category : categories) {
             // Use the category key to look up parent (which page hosts this key)
             final String parentClass = CATEGORY_KEY_TO_PARENT_MAP.get(category.key);
@@ -271,7 +271,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     }
 
     private List<String> getNonIndexableKeysFromProvider(Context context) {
-        final Collection<SearchIndexableData> bundles = FeatureFactory.getFactory(context)
+        final Collection<SearchIndexableData> bundles = FeatureFactory.getFeatureFactory()
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
 
         final List<String> nonIndexableKeys = new ArrayList<>();
@@ -322,7 +322,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     }
 
     private List<SearchIndexableResource> getSearchIndexableResourcesFromProvider(Context context) {
-        final Collection<SearchIndexableData> bundles = FeatureFactory.getFactory(context)
+        final Collection<SearchIndexableData> bundles = FeatureFactory.getFeatureFactory()
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
         List<SearchIndexableResource> resourceList = new ArrayList<>();
 
@@ -348,7 +348,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     }
 
     private List<SearchIndexableRaw> getSearchIndexableRawFromProvider(Context context) {
-        final Collection<SearchIndexableData> bundles = FeatureFactory.getFactory(context)
+        final Collection<SearchIndexableData> bundles = FeatureFactory.getFeatureFactory()
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
         final List<SearchIndexableRaw> rawList = new ArrayList<>();
 
@@ -392,7 +392,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     @VisibleForTesting
     List<SearchIndexableRaw> getInjectionIndexableRawData(Context context) {
         final DashboardFeatureProvider dashboardFeatureProvider =
-                FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
+                FeatureFactory.getFeatureFactory().getDashboardFeatureProvider();
         final List<SearchIndexableRaw> rawList = new ArrayList<>();
         final String currentPackageName = context.getPackageName();
         for (DashboardCategory category : dashboardFeatureProvider.getAllCategories()) {

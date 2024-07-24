@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
 import androidx.preference.PreferenceFragmentCompat;
@@ -30,6 +31,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.ButtonPreference;
 
 import com.google.common.annotations.VisibleForTesting;
+
+import java.util.Set;
 
 /**
  * This class handles button preference logic to display for hearing aid device.
@@ -73,7 +76,6 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
     protected void refresh() {
         updateButtonPreferenceTitle(mPreference);
         setPreferencesVisibility(getButtonPreferenceVisibility(mCachedDevice));
-
     }
 
     private void updateButtonPreferenceTitle(ButtonPreference preference) {
@@ -91,7 +93,11 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
     }
 
     private boolean getButtonPreferenceVisibility(CachedBluetoothDevice cachedDevice) {
-        return isBinauralMode(cachedDevice) && isOnlyOneSideConnected(cachedDevice);
+        // The device is not connected yet. Don't show the button.
+        if (!cachedDevice.isConnectedHearingAidDevice()) {
+            return false;
+        }
+        return isBinauralMode(cachedDevice) && !isOtherSideBonded(cachedDevice);
     }
 
     private void launchPairingDetail() {
@@ -106,16 +112,16 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
         return cachedDevice.getDeviceMode() == HearingAidInfo.DeviceMode.MODE_BINAURAL;
     }
 
-    private boolean isOnlyOneSideConnected(CachedBluetoothDevice cachedDevice) {
-        if (!cachedDevice.isConnectedAshaHearingAidDevice()) {
-            return false;
-        }
-
+    private boolean isOtherSideBonded(CachedBluetoothDevice cachedDevice) {
         final CachedBluetoothDevice subDevice = cachedDevice.getSubDevice();
-        if (subDevice != null && subDevice.isConnectedAshaHearingAidDevice()) {
-            return false;
-        }
+        final boolean subDeviceBonded =
+                subDevice != null && subDevice.getBondState() == BluetoothDevice.BOND_BONDED;
 
-        return true;
+        final Set<CachedBluetoothDevice> memberDevice = cachedDevice.getMemberDevice();
+        final boolean allMemberDevicesBonded =
+                !memberDevice.isEmpty() && memberDevice.stream().allMatch(
+                        device -> device.getBondState() == BluetoothDevice.BOND_BONDED);
+
+        return subDeviceBonded || allMemberDevicesBonded;
     }
 }

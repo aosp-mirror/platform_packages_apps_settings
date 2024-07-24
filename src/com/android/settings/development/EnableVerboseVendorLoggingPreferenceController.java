@@ -16,16 +16,16 @@
 
 package com.android.settings.development;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.hardware.dumpstate.V1_0.IDumpstateDevice;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -84,7 +84,7 @@ public class EnableVerboseVendorLoggingPreferenceController
         ThreadUtils.postOnBackgroundThread(() -> {
                     final boolean enabled = getVerboseLoggingEnabled();
                     ThreadUtils.getUiThreadHandler().post(() ->
-                            ((SwitchPreference) mPreference).setChecked(enabled));
+                            ((TwoStatePreference) mPreference).setChecked(enabled));
                 }
         );
     }
@@ -95,7 +95,7 @@ public class EnableVerboseVendorLoggingPreferenceController
         super.onDeveloperOptionsSwitchDisabled();
         ThreadUtils.postOnBackgroundThread(() ->
                 setVerboseLoggingEnabled(false));
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting

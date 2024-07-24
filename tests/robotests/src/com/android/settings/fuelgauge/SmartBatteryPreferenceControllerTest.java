@@ -54,7 +54,8 @@ public class SmartBatteryPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+        doReturn(mock(DevicePolicyManager.class))
+                .when(mContext)
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
@@ -99,26 +100,26 @@ public class SmartBatteryPreferenceControllerTest {
     public void testGetAvailabilityStatus_smartBatterySupported_returnAvailable() {
         doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
     public void testGetAvailabilityStatus_smartBatteryUnSupported_returnDisabled() {
         doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     private void putSmartBatteryValue(int value) {
-        Settings.Global.putInt(mContentResolver,
-                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, value);
+        Settings.Global.putInt(
+                mContentResolver, Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, value);
     }
 
     private int getSmartBatteryValue() {
-        return Settings.Global.getInt(mContentResolver,
-                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON);
+        return Settings.Global.getInt(
+                mContentResolver, Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON);
     }
 
     @Test

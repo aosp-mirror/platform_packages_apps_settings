@@ -50,8 +50,8 @@ import android.widget.ScrollView;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import org.junit.After;
@@ -66,11 +66,15 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
+@Config(shadows = {
+        ShadowUtils.class,
+        ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class MainClearTest {
 
     private static final String TEST_ACCOUNT_TYPE = "android.test.account.type";
@@ -108,11 +112,10 @@ public class MainClearTest {
             @Override
             boolean showAnySubscriptionInfo(Context context) { return true; }
         });
-        mActivity = spy((FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get());
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mShadowActivity = Shadows.shadowOf(mActivity);
         UserManager userManager = mActivity.getSystemService(UserManager.class);
-        mShadowUserManager = Shadows.shadowOf(userManager);
+        mShadowUserManager = Shadow.extract(userManager);
         mShadowUserManager.setIsAdminUser(true);
         mContentView = LayoutInflater.from(mActivity).inflate(R.layout.main_clear, null);
 
@@ -146,7 +149,6 @@ public class MainClearTest {
                 .isTrue();
     }
 
-    @Ignore
     @Test
     public void testShowFinalConfirmation_eraseEsimVisible_eraseEsimUnchecked() {
         final Context context = mock(Context.class);
@@ -232,7 +234,7 @@ public class MainClearTest {
         assertThat(mMainClear.showWipeEuicc()).isTrue();
     }
 
-    @Ignore
+    @Ignore("b/313566998")
     @Test
     public void testShowWipeEuicc_developerMode_unprovisioned() {
         prepareEuiccState(

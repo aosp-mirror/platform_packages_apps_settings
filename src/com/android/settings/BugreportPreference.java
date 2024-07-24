@@ -87,7 +87,7 @@ public class BugreportPreference extends CustomDialogPreferenceCompat {
             final Context context = getContext();
             if (mFullTitle.isChecked()) {
                 Log.v(TAG, "Taking full bugreport right away");
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(context,
                         SettingsEnums.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
                 try {
                     ActivityManager.getService().requestFullBugReport();
@@ -96,7 +96,7 @@ public class BugreportPreference extends CustomDialogPreferenceCompat {
                 }
             } else {
                 Log.v(TAG, "Taking interactive bugreport right away");
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(context,
                         SettingsEnums.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
                 try {
                     ActivityManager.getService().requestInteractiveBugReport();

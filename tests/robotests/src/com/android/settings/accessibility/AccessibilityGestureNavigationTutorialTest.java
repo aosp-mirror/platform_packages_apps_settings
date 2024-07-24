@@ -32,12 +32,15 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
+import com.android.server.accessibility.Flags;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -51,13 +54,17 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.LooperMode;
 
 /** Tests for {@link AccessibilityGestureNavigationTutorial}. */
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public final class AccessibilityGestureNavigationTutorialTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     @Mock
     private DialogInterface.OnClickListener mOnClickListener;
     @Mock
@@ -67,7 +74,7 @@ public final class AccessibilityGestureNavigationTutorialTest {
 
     @Before
     public void setUp() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         mShortcutTypes = /* initial */ 0;
     }
 
@@ -79,6 +86,19 @@ public final class AccessibilityGestureNavigationTutorialTest {
     @Test
     public void createTutorialPages_turnOnTripleTapShortcut_hasOnePage() {
         mShortcutTypes |= UserShortcutType.TRIPLETAP;
+
+        final AlertDialog alertDialog =
+                createAccessibilityTutorialDialog(mContext, mShortcutTypes);
+
+        assertThat(createShortcutTutorialPages(mContext,
+                mShortcutTypes)).hasSize(/* expectedSize= */ 1);
+        assertThat(alertDialog).isNotNull();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_MAGNIFICATION_MULTIPLE_FINGER_MULTIPLE_TAP_GESTURE)
+    public void createTutorialPages_turnOnTwoFingerTripleTapShortcut_hasOnePage() {
+        mShortcutTypes |= UserShortcutType.TWOFINGERTRIPLETAP;
 
         final AlertDialog alertDialog =
                 createAccessibilityTutorialDialog(mContext, mShortcutTypes);

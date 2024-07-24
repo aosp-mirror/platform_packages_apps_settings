@@ -17,15 +17,15 @@
 package com.android.settings.deviceinfo.batteryinfo;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-/**
- * A fragment that shows battery hardware information.
- */
+/** A fragment that shows battery hardware information. */
 @SearchIndexable
 public class BatteryInfoFragment extends DashboardFragment {
 
@@ -47,5 +47,12 @@ public class BatteryInfoFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.battery_info);
+            new BaseSearchIndexProvider(R.xml.battery_info) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return FeatureFactory.getFeatureFactory()
+                            .getBatterySettingsFeatureProvider()
+                            .isBatteryInfoEnabled(context);
+                }
+            };
 }

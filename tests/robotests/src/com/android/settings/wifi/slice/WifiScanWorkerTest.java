@@ -26,19 +26,25 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
+import android.net.wifi.WifiManager;
+
 import androidx.lifecycle.Lifecycle;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 
@@ -47,17 +53,24 @@ public class WifiScanWorkerTest {
 
     private static final int SUB_ID = 2;
 
-    private WifiScanWorker mWifiScanWorker;
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    Context mContext = ApplicationProvider.getApplicationContext();
+    @Mock
+    WifiManager mWifiManager;
     @Mock
     WifiPickerTracker mWifiPickerTracker;
     @Mock
     WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
+    private WifiScanWorker mWifiScanWorker;
+
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
 
-        mWifiScanWorker = new WifiScanWorker(RuntimeEnvironment.application, WIFI_SLICE_URI);
+        mWifiScanWorker = new WifiScanWorker(mContext, WIFI_SLICE_URI);
         mWifiScanWorker.mWifiPickerTracker = mWifiPickerTracker;
         mWifiScanWorker.mWifiPickerTrackerHelper = mWifiPickerTrackerHelper;
         when(mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(SUB_ID)).thenReturn(false);

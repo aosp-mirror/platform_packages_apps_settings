@@ -18,11 +18,10 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.autofill.AutofillManager;
-
-import com.android.settings.applications.defaultapps.DefaultAutofillPicker;
+import com.android.settings.applications.credentials.DefaultCombinedPicker;
 
 /**
- * Standalone activity used to launch a {@link DefaultAutofillPicker} fragment from a
+ * Standalone activity used to launch a {@link DefaultCombinedPicker} fragment from a
  * {@link android.provider.Settings#ACTION_REQUEST_SET_AUTOFILL_SERVICE} intent.
  *
  * <p>It first check for cases that can fail fast, then forward to {@link AutofillPickerActivity}

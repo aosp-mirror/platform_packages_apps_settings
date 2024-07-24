@@ -61,7 +61,7 @@ public final class BatteryUsageSlotDaoTest {
     @After
     public void closeDb() {
         mDatabase.close();
-        BatteryStateDatabase.setBatteryStateDatabase(/*database=*/ null);
+        BatteryStateDatabase.setBatteryStateDatabase(/* database= */ null);
     }
 
     @Test

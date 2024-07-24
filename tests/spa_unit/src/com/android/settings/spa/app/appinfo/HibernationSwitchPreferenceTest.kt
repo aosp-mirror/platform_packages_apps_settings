@@ -24,8 +24,9 @@ import android.app.AppOpsManager.OP_AUTO_REVOKE_PERMISSIONS_IF_UNUSED
 import android.apphibernation.AppHibernationManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.pm.Flags as PmFlags
 import android.os.Build
-import android.os.UserHandle
+import android.os.SystemProperties
 import android.permission.PermissionControllerManager
 import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_ELIGIBLE
 import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_EXEMPT_BY_SYSTEM
@@ -48,6 +49,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED
 import com.android.settings.Utils.PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS
+import com.android.settings.flags.Flags
 import com.android.settings.testutils.TestDeviceConfig
 import com.android.settings.testutils.mockAsUser
 import com.android.settingslib.spaprivileged.framework.common.appHibernationManager
@@ -63,7 +65,6 @@ import org.mockito.Mockito.any
 import org.mockito.Mockito.anyBoolean
 import org.mockito.Mockito.anyString
 import org.mockito.Mockito.doAnswer
-import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.eq
 import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
@@ -71,6 +72,7 @@ import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import java.util.function.IntConsumer
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
@@ -99,6 +101,8 @@ class HibernationSwitchPreferenceTest {
 
     private val hibernationTargetsPreSConfig =
         TestDeviceConfig(NAMESPACE_APP_HIBERNATION, PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS)
+
+    private val isHibernationSwitchEnabledStateFlow = MutableStateFlow(true)
 
     @Before
     fun setUp() {
@@ -147,12 +151,20 @@ class HibernationSwitchPreferenceTest {
 
         setContent()
 
-        composeTestRule.onNodeWithText(context.getString(R.string.unused_apps_switch))
+        val text = if (isArchivingEnabled()) {
+            context.getString(R.string.unused_apps_switch_v2)
+        } else {
+            context.getString(R.string.unused_apps_switch)
+        }
+        composeTestRule.onNodeWithText(text)
             .assertIsDisplayed()
             .assertIsNotEnabled()
             .assertIsOff()
     }
 
+    private fun isArchivingEnabled() =
+            PmFlags.archiving() || SystemProperties.getBoolean("pm.archiving.enabled", false)
+                    || Flags.appArchiving()
     @Test
     fun `An app targets Q with ops mode default when hibernation targets pre S - not exempted`() {
         mockOpsMode(MODE_DEFAULT)
@@ -227,7 +239,7 @@ class HibernationSwitchPreferenceTest {
     private fun setContent(app: ApplicationInfo = TARGET_R_APP) {
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
-                HibernationSwitchPreference(app)
+                HibernationSwitchPreference(app, isHibernationSwitchEnabledStateFlow)
             }
         }
     }

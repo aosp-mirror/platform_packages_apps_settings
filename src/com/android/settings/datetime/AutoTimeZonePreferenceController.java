@@ -27,36 +27,42 @@ import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
-
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 
-public class AutoTimeZonePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
+public class AutoTimeZonePreferenceController extends TogglePreferenceController {
 
-    private static final String KEY_AUTO_TIME_ZONE = "auto_zone";
-
-    private final boolean mIsFromSUW;
-    private final UpdateTimeAndDateCallback mCallback;
+    private boolean mIsFromSUW;
+    private UpdateTimeAndDateCallback mCallback;
     private final TimeManager mTimeManager;
 
-    public AutoTimeZonePreferenceController(Context context, UpdateTimeAndDateCallback callback,
-            boolean isFromSUW) {
-        super(context);
+    public AutoTimeZonePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         mTimeManager = context.getSystemService(TimeManager.class);
+    }
+
+    /**
+     * Set the Time and Date callback
+     */
+    public AutoTimeZonePreferenceController setTimeAndDateCallback(
+            UpdateTimeAndDateCallback callback) {
         mCallback = callback;
+        return this;
+    }
+
+    /**
+     * Set if current fragment is launched via SUW
+     */
+    public AutoTimeZonePreferenceController setFromSUW(boolean isFromSUW) {
         mIsFromSUW = isFromSUW;
+        return this;
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         if (mIsFromSUW) {
-            return false;
+            return DISABLED_DEPENDENT_SETTING;
         }
 
         TimeZoneCapabilities timeZoneCapabilities =
@@ -67,48 +73,41 @@ public class AutoTimeZonePreferenceController extends AbstractPreferenceControll
         // This method handles the "is visible?" check.
         switch (capability) {
             case CAPABILITY_NOT_SUPPORTED:
-                return false;
+                return DISABLED_DEPENDENT_SETTING;
             case CAPABILITY_POSSESSED:
-                return true;
             case CAPABILITY_NOT_ALLOWED:
                 // This case is expected for enterprise restrictions, where the toggle should be
                 // present but disabled. Disabling is handled declaratively via the
                 // settings:userRestriction attribute in .xml. The client-side logic is expected to
                 // concur with the capabilities logic in the system server.
-                return true;
             case CAPABILITY_NOT_APPLICABLE:
                 // CAPABILITY_NOT_APPLICABLE is not currently expected, so this is return value is
                 // arbitrary.
-                return true;
+                return AVAILABLE;
             default:
                 throw new IllegalStateException("Unknown capability=" + capability);
         }
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_AUTO_TIME_ZONE;
+    public boolean isChecked() {
+        return isEnabled();
     }
 
     @Override
-    public void updateState(Preference preference) {
-        if (!(preference instanceof SwitchPreference)) {
-            return;
-        }
-
-        ((SwitchPreference) preference).setChecked(isEnabled());
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean autoZoneEnabled = (Boolean) newValue;
+    public boolean setChecked(boolean isChecked) {
         TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
-                .setAutoDetectionEnabled(autoZoneEnabled)
+                .setAutoDetectionEnabled(isChecked)
                 .build();
         boolean result = mTimeManager.updateTimeZoneConfiguration(configuration);
 
         mCallback.updateTimeAndDateDisplay(mContext);
         return result;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
     }
 
     @Override
@@ -122,12 +121,6 @@ public class AutoTimeZonePreferenceController extends AbstractPreferenceControll
         // If the user has a dedicated toggle to control location use, the summary can
         // be empty because the use of location is explicit.
         return "";
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        refreshSummary(screen.findPreference(getPreferenceKey()));
     }
 
     @VisibleForTesting

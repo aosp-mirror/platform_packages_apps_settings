@@ -35,7 +35,7 @@
         settings:controller="com.android.settings.privacy.MicToggleController"/>
 
     <!-- Clipboard access notifications -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="show_clip_access_notification"
         android:title="@string/show_clip_access_notification"
         android:summary="@string/show_clip_access_notification_summary"

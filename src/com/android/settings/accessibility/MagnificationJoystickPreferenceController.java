@@ -26,7 +26,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -41,7 +41,7 @@ public class MagnificationJoystickPreferenceController extends TogglePreferenceC
             MagnificationJoystickPreferenceController.class.getSimpleName();
     static final String PREF_KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED;
 
-    private SwitchPreference mSwitchPreference;
+    private TwoStatePreference mSwitchPreference;
 
     public MagnificationJoystickPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);

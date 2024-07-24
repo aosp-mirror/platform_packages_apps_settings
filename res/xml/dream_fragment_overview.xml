@@ -40,13 +40,13 @@
             android:layout="@layout/dream_picker_layout"/>
     </PreferenceCategory>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="dream_complications_toggle"
         android:title="@string/dream_complications_toggle_title"
         android:summary="@string/dream_complications_toggle_summary"
         settings:controller="com.android.settings.dream.DreamComplicationPreferenceController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="dream_home_controls_toggle"
         android:title="@string/dream_home_controls_toggle_title"
         android:summary="@string/dream_home_controls_toggle_summary"

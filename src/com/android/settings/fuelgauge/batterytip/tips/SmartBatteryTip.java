@@ -23,9 +23,7 @@ import android.os.Parcel;
 import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-/**
- * Tip to suggest turn on smart battery if it is not on
- */
+/** Tip to suggest turn on smart battery if it is not on */
 public class SmartBatteryTip extends BatteryTip {
 
     public SmartBatteryTip(@StateType int state) {
@@ -58,18 +56,17 @@ public class SmartBatteryTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, SettingsEnums.ACTION_SMART_BATTERY_TIP,
-                mState);
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_SMART_BATTERY_TIP, mState);
     }
 
-    public static final Creator CREATOR = new Creator() {
-        public BatteryTip createFromParcel(Parcel in) {
-            return new SmartBatteryTip(in);
-        }
+    public static final Creator CREATOR =
+            new Creator() {
+                public BatteryTip createFromParcel(Parcel in) {
+                    return new SmartBatteryTip(in);
+                }
 
-        public BatteryTip[] newArray(int size) {
-            return new SmartBatteryTip[size];
-        }
-    };
-
+                public BatteryTip[] newArray(int size) {
+                    return new SmartBatteryTip[size];
+                }
+            };
 }

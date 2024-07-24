@@ -35,7 +35,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +44,7 @@ import com.android.settings.R;
 public class TareHomePage extends Activity {
     private static final String TAG = "TareHomePage";
 
-    private Switch mOnSwitch;
+    private CompoundButton mOnSwitch;
     private Button mRevButton;
     private TextView mAlarmManagerView;
     private TextView mJobSchedulerView;

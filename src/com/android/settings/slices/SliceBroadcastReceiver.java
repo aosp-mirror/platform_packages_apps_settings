@@ -77,7 +77,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 BluetoothSliceBuilder.handleUriChange(context, intent);
                 break;
             case ACTION_WIFI_CALLING_CHANGED:
-                FeatureFactory.getFactory(context)
+                FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(context)
                         .handleWifiCallingChanged(intent);
@@ -86,7 +86,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 ZenModeSliceBuilder.handleUriChange(context, intent);
                 break;
             case ACTION_ENHANCED_4G_LTE_CHANGED:
-                FeatureFactory.getFactory(context)
+                FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewEnhanced4gLteSliceHelper(context)
                         .handleEnhanced4gLteChanged(intent);
@@ -94,7 +94,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
             case ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY:
             case ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED:
             case ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED:
-                FeatureFactory.getFactory(context)
+                FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(context)
                         .handleWifiCallingPreferenceChanged(intent);
@@ -172,7 +172,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
      * follows the pattern in SharedPreferenceLogger.
      */
     private void logSliceValueChange(Context context, String sliceKey, int newValue) {
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .action(SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_SETTINGS_SLICE_CHANGED,
                         SettingsEnums.PAGE_UNKNOWN,

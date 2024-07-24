@@ -14,6 +14,7 @@
 package com.android.settings.display;
 
 import static android.content.Intent.ACTION_SHOW_BRIGHTNESS_DIALOG;
+import static android.content.Intent.EXTRA_BRIGHTNESS_DIALOG_IS_FULL_WIDTH;
 
 import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX;
 import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN;
@@ -53,7 +54,6 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     private static final String TAG = "BrightnessPrefCtrl";
     private static final String KEY_BRIGHTNESS = "brightness";
     private static final Uri BRIGHTNESS_ADJ_URI;
-
     private final ContentResolver mContentResolver;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final DisplayManager mDisplayManager;
@@ -141,6 +141,7 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
         final Intent intent = new Intent(ACTION_SHOW_BRIGHTNESS_DIALOG);
         intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
                 SettingsTransitionHelper.TransitionType.TRANSITION_NONE);
+        intent.putExtra(EXTRA_BRIGHTNESS_DIALOG_IS_FULL_WIDTH, true);
 
         // Start activity in the same task and pass fade animations
         final ActivityOptions options = ActivityOptions.makeCustomAnimation(mContext,

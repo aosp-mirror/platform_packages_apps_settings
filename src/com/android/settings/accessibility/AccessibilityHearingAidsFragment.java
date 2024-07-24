@@ -36,7 +36,6 @@ import com.android.settingslib.search.SearchIndexable;
 /** Accessibility settings for hearing aids. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPreferenceFragment {
-
     private static final String TAG = "AccessibilityHearingAidsFragment";
     private static final String KEY_HEARING_OPTIONS_CATEGORY = "hearing_options_category";
     private static final int SHORTCUT_PREFERENCE_IN_CATEGORY_INDEX = 20;

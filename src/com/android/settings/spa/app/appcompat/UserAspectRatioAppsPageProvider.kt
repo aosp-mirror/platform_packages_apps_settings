@@ -16,11 +16,13 @@
 
 package com.android.settings.spa.app.appcompat
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.GET_ACTIVITIES
+import android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_APP_DEFAULT
 import android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET
 import android.os.Build
 import android.os.Bundle
@@ -28,7 +30,7 @@ import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -41,15 +43,14 @@ import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory
 import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
-import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.framework.util.asyncMap
 import com.android.settingslib.spa.framework.util.filterItem
-import com.android.settingslib.spa.widget.preference.Preference
-import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.illustration.Illustration
 import com.android.settingslib.spa.widget.illustration.IllustrationModel
 import com.android.settingslib.spa.widget.illustration.ResourceType
+import com.android.settingslib.spa.widget.preference.Preference
+import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.ui.SettingsBody
 import com.android.settingslib.spa.widget.ui.SpinnerOption
 import com.android.settingslib.spaprivileged.model.app.AppListModel
@@ -80,12 +81,14 @@ object UserAspectRatioAppsPageProvider : SettingsPageProvider {
 
     @Composable
     @VisibleForTesting
-    fun EntryItem() =
+    fun EntryItem() {
+        val summary = getSummary()
         Preference(object : PreferenceModel {
             override val title = stringResource(R.string.aspect_ratio_experimental_title)
-            override val summary = getSummary().toState()
+            override val summary = { summary }
             override val onClick = navigator(name)
         })
+    }
 
     @VisibleForTesting
     fun buildInjectEntry() = SettingsEntryBuilder
@@ -137,7 +140,9 @@ class UserAspectRatioAppListModel(private val context: Context)
         recordList: List<UserAspectRatioAppListItemModel>
     ): List<SpinnerOption> {
         val hasSuggested = recordList.any { it.suggested }
-        val hasOverride = recordList.any { it.userOverride != USER_MIN_ASPECT_RATIO_UNSET }
+        val hasOverride = recordList.any {
+            userAspectRatioManager.isAppOverridden(it.app, it.userOverride)
+        }
         val options = mutableListOf(SpinnerItem.All)
         // Add suggested filter first as default
         if (hasSuggested) options.add(0, SpinnerItem.Suggested)
@@ -154,7 +159,13 @@ class UserAspectRatioAppListModel(private val context: Context)
     override fun AppListItemModel<UserAspectRatioAppListItemModel>.AppItem() {
         val app = record.app
         AppListItem(
-            onClick = { navigateToAppAspectRatioSettings(context, app) }
+            onClick = {
+                navigateToAppAspectRatioSettings(
+                    context,
+                    app,
+                    SettingsEnums.USER_ASPECT_RATIO_APP_LIST_SETTINGS
+                )
+            }
         )
     }
 
@@ -177,21 +188,25 @@ class UserAspectRatioAppListModel(private val context: Context)
         option: Int,
         recordListFlow: Flow<List<UserAspectRatioAppListItemModel>>
     ): Flow<List<UserAspectRatioAppListItemModel>> = recordListFlow.filterItem(
-        when (SpinnerItem.values().getOrNull(option)) {
+        when (SpinnerItem.entries.getOrNull(option)) {
             SpinnerItem.Suggested -> ({ it.canDisplay && it.suggested })
-            SpinnerItem.Overridden -> ({ it.userOverride != USER_MIN_ASPECT_RATIO_UNSET })
+            SpinnerItem.Overridden -> ({
+                userAspectRatioManager.isAppOverridden(it.app, it.userOverride)
+            })
             else -> ({ it.canDisplay })
         }
     )
 
     @Composable
-    override fun getSummary(option: Int, record: UserAspectRatioAppListItemModel) : State<String> =
-        remember(record.userOverride) {
+    override fun getSummary(option: Int, record: UserAspectRatioAppListItemModel): () -> String {
+        val summary by remember(record.userOverride) {
             flow {
                 emit(userAspectRatioManager.getUserMinAspectRatioEntry(record.userOverride,
-                    record.app.packageName))
+                    record.app.packageName, record.app.userId))
             }.flowOn(Dispatchers.IO)
         }.collectAsStateWithLifecycle(initialValue = stringResource(R.string.summary_placeholder))
+        return { summary }
+    }
 
     private fun getPackageAndActivityInfo(app: ApplicationInfo): PackageInfo? = try {
         packageManager.getPackageInfoAsUser(app.packageName, GET_ACTIVITIES_FLAGS, app.userId)

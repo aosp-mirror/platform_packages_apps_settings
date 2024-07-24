@@ -53,6 +53,7 @@ import androidx.preference.PreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageWizardMoveConfirm;
+import com.android.settings.fuelgauge.datasaver.DynamicDenylistManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
@@ -359,6 +360,8 @@ public class AppStorageSettings extends AppInfoWithHeader
         mButtonsPref.setButton1Enabled(false);
         // Invoke uninstall or clear user data based on sysPackage
         String packageName = mAppEntry.info.packageName;
+        DynamicDenylistManager.getInstance(getContext())
+                .resetDenylistIfNeeded(packageName, /* force= */ false);
         Log.i(TAG, "Clearing user data for package : " + packageName);
         if (mClearDataObserver == null) {
             mClearDataObserver = new ClearUserDataObserver();

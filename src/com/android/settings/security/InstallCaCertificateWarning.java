@@ -18,13 +18,14 @@ package com.android.settings.security;
 
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.security.Credentials;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
@@ -58,7 +59,7 @@ public class InstallCaCertificateWarning extends Activity {
                         .setText(R.string.certificate_warning_install_anyway)
                         .setListener(installCaCertificate())
                         .setButtonType(FooterButton.ButtonType.OTHER)
-                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build()
         );
         mixin.getSecondaryButtonView().setFilterTouchesWhenObscured(true);
@@ -68,7 +69,7 @@ public class InstallCaCertificateWarning extends Activity {
                         .setText(R.string.certificate_warning_dont_install)
                         .setListener(returnToInstallCertificateFromStorage())
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SudGlifButton_Primary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build()
         );
         mixin.getPrimaryButtonView().setFilterTouchesWhenObscured(true);

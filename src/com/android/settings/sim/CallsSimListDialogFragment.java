@@ -26,6 +26,8 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import com.android.internal.telephony.flags.Flags;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +58,9 @@ public class CallsSimListDialogFragment extends SimListDialogFragment {
 
             SubscriptionInfo info = subscriptionManager.getActiveSubscriptionInfo(subId);
             if (info == null || (info.isEmbedded()
-                    && info.getProfileClass() == PROFILE_CLASS_PROVISIONING)) {
+                && (info.getProfileClass() == PROFILE_CLASS_PROVISIONING
+                    || (Flags.oemEnabledSatelliteFlag()
+                        && info.isOnlyNonTerrestrialNetwork())))) {
                 continue;
             }
             result.add(subscriptionManager.getActiveSubscriptionInfo(subId));

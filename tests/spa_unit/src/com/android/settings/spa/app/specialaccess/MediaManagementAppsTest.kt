@@ -33,33 +33,12 @@ class MediaManagementAppsTest {
     private val listModel = MediaManagementAppsListModel(context)
 
     @Test
-    fun pageTitleResId() {
+    fun modelResourceIdAndProperties() {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.media_management_apps_title)
-    }
-
-    @Test
-    fun switchTitleResId() {
-        assertThat(listModel.switchTitleResId)
-            .isEqualTo(R.string.media_management_apps_toggle_label)
-    }
-
-    @Test
-    fun footerResId() {
+        assertThat(listModel.switchTitleResId).isEqualTo(R.string.media_management_apps_toggle_label)
         assertThat(listModel.footerResId).isEqualTo(R.string.media_management_apps_description)
-    }
-
-    @Test
-    fun appOp() {
         assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_MANAGE_MEDIA)
-    }
-
-    @Test
-    fun permission() {
         assertThat(listModel.permission).isEqualTo(Manifest.permission.MANAGE_MEDIA)
-    }
-
-    @Test
-    fun setModeByUid() {
         assertThat(listModel.setModeByUid).isTrue()
     }
 }

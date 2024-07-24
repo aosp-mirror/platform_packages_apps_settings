@@ -16,14 +16,9 @@
 
 package com.android.settings.fuelgauge;
 
-/**
- * Feature Provider used to retrieve battery status
- */
+/** Feature Provider used to retrieve battery status */
 public interface BatteryStatusFeatureProvider {
 
-    /**
-     * Trigger a battery status update; return false if built-in status should be used.
-     */
-    boolean triggerBatteryStatusUpdate(
-            BatteryPreferenceController controller, BatteryInfo info);
+    /** Trigger a battery status update; return false if built-in status should be used. */
+    boolean triggerBatteryStatusUpdate(BatteryPreferenceController controller, BatteryInfo info);
 }

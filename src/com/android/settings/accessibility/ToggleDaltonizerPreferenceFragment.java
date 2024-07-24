@@ -95,8 +95,10 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mComponentName = DALTONIZER_COMPONENT_NAME;
-        mPackageName = getText(R.string.accessibility_display_daltonizer_preference_title);
-        mHtmlDescription = getText(R.string.accessibility_display_daltonizer_preference_subtitle);
+        mPackageName = getText(com.android.settingslib.R
+                .string.accessibility_display_daltonizer_preference_title);
+        mHtmlDescription = getText(com.android.settingslib.R
+                .string.accessibility_display_daltonizer_preference_subtitle);
         mTopIntroTitle = getText(R.string.accessibility_daltonizer_about_intro_text);
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         updateFooterPreference();
@@ -108,8 +110,8 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         super.onViewCreated(view, savedInstanceState);
         final View rootView = getActivity().getWindow().peekDecorView();
         if (rootView != null) {
-            rootView.setAccessibilityPaneTitle(getString(
-                    R.string.accessibility_display_daltonizer_preference_title));
+            rootView.setAccessibilityPaneTitle(getString(com.android.settingslib.R
+                    .string.accessibility_display_daltonizer_preference_title));
         }
     }
 

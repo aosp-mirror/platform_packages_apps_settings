@@ -55,14 +55,10 @@ public final class PowerUsageAdvancedTest {
     private Predicate<PowerAnomalyEvent> mCardFilterPredicate;
     private Predicate<PowerAnomalyEvent> mSlotFilterPredicate;
 
-    @Mock
-    private BatteryTipsController mBatteryTipsController;
-    @Mock
-    private BatteryChartPreferenceController mBatteryChartPreferenceController;
-    @Mock
-    private ScreenOnTimeController mScreenOnTimeController;
-    @Mock
-    private BatteryUsageBreakdownController mBatteryUsageBreakdownController;
+    @Mock private BatteryTipsController mBatteryTipsController;
+    @Mock private BatteryChartPreferenceController mBatteryChartPreferenceController;
+    @Mock private ScreenOnTimeController mScreenOnTimeController;
+    @Mock private BatteryUsageBreakdownController mBatteryUsageBreakdownController;
 
     @Before
     public void setUp() {
@@ -75,10 +71,13 @@ public final class PowerUsageAdvancedTest {
         mPowerUsageAdvanced.mBatteryChartPreferenceController = mBatteryChartPreferenceController;
         mPowerUsageAdvanced.mScreenOnTimeController = mScreenOnTimeController;
         mPowerUsageAdvanced.mBatteryUsageBreakdownController = mBatteryUsageBreakdownController;
-        mPowerUsageAdvanced.mBatteryLevelData = Optional.of(new BatteryLevelData(Map.of(
-                1694354400000L, 1,      // 2023-09-10 22:00:00
-                1694361600000L, 2,      // 2023-09-11 00:00:00
-                1694368800000L, 3)));    // 2023-09-11 02:00:00
+        mPowerUsageAdvanced.mBatteryLevelData =
+                Optional.of(
+                        new BatteryLevelData(
+                                Map.of(
+                                        1694354400000L, 1, // 2023-09-10 22:00:00
+                                        1694361600000L, 2, // 2023-09-11 00:00:00
+                                        1694368800000L, 3))); // 2023-09-11 02:00:00
         doReturn(mContext).when(mPowerUsageAdvanced).getContext();
         mSlotFilterPredicate = PowerAnomalyEvent::hasWarningItemInfo;
     }
@@ -86,15 +85,17 @@ public final class PowerUsageAdvancedTest {
     @Test
     public void getFilterAnomalyEvent_withEmptyOrNullList_getNull() {
         prepareCardFilterPredicate(null);
-        assertThat(PowerUsageAdvanced
-                .getAnomalyEvent(null, mCardFilterPredicate)).isNull();
-        assertThat(PowerUsageAdvanced
-                .getAnomalyEvent(null, mSlotFilterPredicate)).isNull();
-        assertThat(PowerUsageAdvanced.getAnomalyEvent(
-                BatteryTestUtils.createEmptyPowerAnomalyEventList(), mCardFilterPredicate))
+        assertThat(PowerUsageAdvanced.getAnomalyEvent(null, mCardFilterPredicate)).isNull();
+        assertThat(PowerUsageAdvanced.getAnomalyEvent(null, mSlotFilterPredicate)).isNull();
+        assertThat(
+                        PowerUsageAdvanced.getAnomalyEvent(
+                                BatteryTestUtils.createEmptyPowerAnomalyEventList(),
+                                mCardFilterPredicate))
                 .isNull();
-        assertThat(PowerUsageAdvanced.getAnomalyEvent(
-                BatteryTestUtils.createEmptyPowerAnomalyEventList(), mSlotFilterPredicate))
+        assertThat(
+                        PowerUsageAdvanced.getAnomalyEvent(
+                                BatteryTestUtils.createEmptyPowerAnomalyEventList(),
+                                mSlotFilterPredicate))
                 .isNull();
     }
 
@@ -104,12 +105,10 @@ public final class PowerUsageAdvancedTest {
                 BatteryTestUtils.createNonEmptyPowerAnomalyEventList();
 
         final PowerAnomalyEvent slotEvent =
-                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList,
-                        mSlotFilterPredicate);
+                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList, mSlotFilterPredicate);
         prepareCardFilterPredicate(slotEvent);
         final PowerAnomalyEvent cardEvent =
-                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList,
-                        mCardFilterPredicate);
+                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList, mCardFilterPredicate);
 
         assertThat(cardEvent).isEqualTo(BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent());
         assertThat(slotEvent).isNull();
@@ -123,12 +122,10 @@ public final class PowerUsageAdvancedTest {
         DatabaseUtils.setDismissedPowerAnomalyKeys(mContext, PowerAnomalyKey.KEY_BRIGHTNESS.name());
 
         final PowerAnomalyEvent slotEvent =
-                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList,
-                        mSlotFilterPredicate);
+                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList, mSlotFilterPredicate);
         prepareCardFilterPredicate(slotEvent);
         final PowerAnomalyEvent cardEvent =
-                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList,
-                        mCardFilterPredicate);
+                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList, mCardFilterPredicate);
 
         assertThat(cardEvent).isEqualTo(BatteryTestUtils.createScreenTimeoutAnomalyEvent());
         assertThat(slotEvent).isNull();
@@ -144,12 +141,10 @@ public final class PowerUsageAdvancedTest {
         }
 
         final PowerAnomalyEvent slotEvent =
-                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList,
-                        mSlotFilterPredicate);
+                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList, mSlotFilterPredicate);
         prepareCardFilterPredicate(slotEvent);
         final PowerAnomalyEvent cardEvent =
-                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList,
-                        mCardFilterPredicate);
+                PowerUsageAdvanced.getAnomalyEvent(powerAnomalyEventList, mCardFilterPredicate);
 
         assertThat(cardEvent).isNull();
         assertThat(slotEvent).isNull();
@@ -165,9 +160,10 @@ public final class PowerUsageAdvancedTest {
                 .isEqualTo(event.getEventId());
         verify(mPowerUsageAdvanced.mBatteryTipsController).setOnAnomalyConfirmListener(isNull());
         verify(mPowerUsageAdvanced.mBatteryTipsController).setOnAnomalyRejectListener(isNull());
-        verify(mPowerUsageAdvanced.mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(
-                eq(BatteryChartViewModel.SELECTED_INDEX_INVALID),
-                eq(BatteryChartViewModel.SELECTED_INDEX_INVALID));
+        verify(mPowerUsageAdvanced.mBatteryChartPreferenceController)
+                .onHighlightSlotIndexUpdate(
+                        eq(BatteryChartViewModel.SELECTED_INDEX_INVALID),
+                        eq(BatteryChartViewModel.SELECTED_INDEX_INVALID));
     }
 
     @Test
@@ -180,10 +176,14 @@ public final class PowerUsageAdvancedTest {
                 .isEqualTo(event.getEventId());
         verify(mBatteryTipsController).setOnAnomalyConfirmListener(isNull());
         verify(mBatteryTipsController).setOnAnomalyRejectListener(isNull());
-        assertThat(mPowerUsageAdvanced.mBatteryLevelData.get().getIndexByTimestamps(
-                event.getWarningItemInfo().getStartTimestamp(),
-                event.getWarningItemInfo().getEndTimestamp()
-        )).isEqualTo(Pair.create(1, 0));
+        assertThat(
+                        mPowerUsageAdvanced
+                                .mBatteryLevelData
+                                .get()
+                                .getIndexByTimestamps(
+                                        event.getWarningItemInfo().getStartTimestamp(),
+                                        event.getWarningItemInfo().getEndTimestamp()))
+                .isEqualTo(Pair.create(1, 0));
         verify(mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(eq(1), eq(0));
         verify(mBatteryTipsController).setOnAnomalyConfirmListener(notNull());
     }
@@ -192,8 +192,7 @@ public final class PowerUsageAdvancedTest {
     public void onDisplayAnomalyEventUpdated_withSettingsCardAndAppsSlotEvent_showExpected() {
         final PowerAnomalyEvent settingsEvent =
                 BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent();
-        final PowerAnomalyEvent appsEvent =
-                BatteryTestUtils.createAppAnomalyEvent();
+        final PowerAnomalyEvent appsEvent = BatteryTestUtils.createAppAnomalyEvent();
 
         mPowerUsageAdvanced.onDisplayAnomalyEventUpdated(settingsEvent, appsEvent);
 
@@ -207,8 +206,9 @@ public final class PowerUsageAdvancedTest {
     private void prepareCardFilterPredicate(PowerAnomalyEvent slotEvent) {
         final Set<String> dismissedPowerAnomalyKeys =
                 DatabaseUtils.getDismissedPowerAnomalyKeys(mContext);
-        mCardFilterPredicate = event -> !dismissedPowerAnomalyKeys.contains(
-                event.getDismissRecordKey())
-                && (event.equals(slotEvent) || !event.hasWarningItemInfo());
+        mCardFilterPredicate =
+                event ->
+                        !dismissedPowerAnomalyKeys.contains(event.getDismissRecordKey())
+                                && (event.equals(slotEvent) || !event.hasWarningItemInfo());
     }
 }

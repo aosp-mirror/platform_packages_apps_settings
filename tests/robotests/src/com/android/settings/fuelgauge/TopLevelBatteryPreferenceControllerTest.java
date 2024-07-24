@@ -17,17 +17,14 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
@@ -46,10 +43,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class TopLevelBatteryPreferenceControllerTest {
@@ -57,12 +50,9 @@ public class TopLevelBatteryPreferenceControllerTest {
     private TopLevelBatteryPreferenceController mController;
     private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
 
-    @Mock
-    private UsbPort mUsbPort;
-    @Mock
-    private UsbManager mUsbManager;
-    @Mock
-    private UsbPortStatus mUsbPortStatus;
+    @Mock private UsbPort mUsbPort;
+    @Mock private UsbManager mUsbManager;
+    @Mock private UsbPortStatus mUsbPortStatus;
 
     @Before
     public void setUp() {
@@ -132,8 +122,7 @@ public class TopLevelBatteryPreferenceControllerTest {
         info.discharging = false;
         info.chargeLabel = "5% - charging";
 
-        assertThat(mController.getDashboardLabel(mContext, info, true))
-                .isEqualTo(info.chargeLabel);
+        assertThat(mController.getDashboardLabel(mContext, info, true)).isEqualTo(info.chargeLabel);
     }
 
     @Test
@@ -141,9 +130,14 @@ public class TopLevelBatteryPreferenceControllerTest {
         BatteryTestUtils.setupIncompatibleEvent(mUsbPort, mUsbManager, mUsbPortStatus);
         mController.mPreference = new Preference(mContext);
         BatteryInfo info = new BatteryInfo();
+        info.batteryPercentString = "66%";
 
         assertThat(mController.getDashboardLabel(mContext, info, true))
-                .isEqualTo(mContext.getString(R.string.battery_info_status_not_charging));
+                .isEqualTo(
+                        mContext.getString(
+                                com.android.settingslib.R.string
+                                        .power_incompatible_charging_settings_home_page,
+                                info.batteryPercentString));
     }
 
     @Test
@@ -153,8 +147,7 @@ public class TopLevelBatteryPreferenceControllerTest {
         info.batteryStatus = BatteryManager.BATTERY_STATUS_NOT_CHARGING;
         info.statusLabel = "expected returned label";
 
-        assertThat(mController.getDashboardLabel(mContext, info, true))
-                .isEqualTo(info.statusLabel);
+        assertThat(mController.getDashboardLabel(mContext, info, true)).isEqualTo(info.statusLabel);
     }
 
     @Test

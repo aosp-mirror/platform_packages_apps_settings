@@ -29,8 +29,9 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.ims.VolteQueryImsState;
@@ -54,6 +55,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     @VisibleForTesting
     Integer mCallState;
     private MobileDataEnabledListener mDataContentObserver;
+    private CallingPreferenceCategoryController mCallingPreferenceCategoryController;
 
     public VideoCallingPreferenceController(Context context, String key) {
         super(context, key);
@@ -94,9 +96,11 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             Log.d(TAG, "Skip update under mCallState=" + mCallState);
             return;
         }
-        final SwitchPreference switchPreference = (SwitchPreference) preference;
+        final TwoStatePreference switchPreference = (TwoStatePreference) preference;
         final boolean videoCallEnabled = isVideoCallEnabled(mSubId);
         switchPreference.setVisible(videoCallEnabled);
+        mCallingPreferenceCategoryController
+                .updateChildVisible(getPreferenceKey(), videoCallEnabled);
         if (videoCallEnabled) {
             final boolean videoCallEditable = queryVoLteState(mSubId).isEnabledByUser()
                     && queryImsState(mSubId).isAllowUserControl();
@@ -136,8 +140,13 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
                 PackageManager.FEATURE_TELEPHONY_IMS);
     }
 
-    public VideoCallingPreferenceController init(int subId) {
+    /**
+     * Init instance of VideoCallingPreferenceController.
+     */
+    public VideoCallingPreferenceController init(
+            int subId, CallingPreferenceCategoryController callingPreferenceCategoryController) {
         mSubId = subId;
+        mCallingPreferenceCategoryController = callingPreferenceCategoryController;
 
         return this;
     }
@@ -187,7 +196,16 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             }
             // assign current call state so that it helps to show correct preference state even
             // before first onCallStateChanged() by initial registration.
-            mCallState = mTelephonyManager.getCallState(subId);
+            if (Flags.enforceTelephonyFeatureMappingForPublicApis()) {
+                try {
+                    mCallState = mTelephonyManager.getCallState(subId);
+                } catch (UnsupportedOperationException e) {
+                    // Device doesn't support FEATURE_TELEPHONY_CALLING
+                    mCallState = TelephonyManager.CALL_STATE_IDLE;
+                }
+            } else {
+                mCallState = mTelephonyManager.getCallState(subId);
+            }
             mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(), this);
         }
 

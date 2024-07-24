@@ -16,22 +16,31 @@
 
 package com.android.settings.bluetooth;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Process;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
+@Ignore("b/313014781")
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothPermissionActivityTest {
 
@@ -41,14 +50,27 @@ public class BluetoothPermissionActivityTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = mock(ContextWrapper.class);
         mActivity = new BluetoothPermissionActivity();
     }
 
     @Test
-    public void sendBroadcastWithPermission() {
+    public void sendBroadcastWithPermission() throws Exception {
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         ReflectionHelpers.setField(mActivity, "mBase", mContext);
+        when(mContext.createContextAsUser(any(), anyInt())).thenReturn(mContext);
+
+        final String btPkgName = "com.android.bluetooth";
+        ActivityInfo btOppLauncherActivityInfo = new ActivityInfo();
+        btOppLauncherActivityInfo.name = "com.android.bluetooth.opp.BluetoothOppLauncherActivity";
+
+        PackageInfo btPkgInfo = new PackageInfo();
+        btPkgInfo.activities = new ActivityInfo[] {btOppLauncherActivityInfo};
+
+        PackageManager pm = mock(PackageManager.class);
+        when(pm.getPackagesForUid(Process.BLUETOOTH_UID)).thenReturn(new String[] {btPkgName});
+        when(pm.getPackageInfo(eq(btPkgName), anyInt())).thenReturn(btPkgInfo);
+        when(mContext.getPackageManager()).thenReturn(pm);
 
         mActivity.sendReplyIntentToReceiver(true, true);
 

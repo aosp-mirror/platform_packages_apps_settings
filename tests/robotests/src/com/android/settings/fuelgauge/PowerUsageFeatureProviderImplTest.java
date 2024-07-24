@@ -46,8 +46,8 @@ public class PowerUsageFeatureProviderImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    @Mock
-    private PackageManager mPackageManager;
+
+    @Mock private PackageManager mPackageManager;
     private PowerUsageFeatureProviderImpl mPowerFeatureProvider;
 
     @Before
@@ -117,18 +117,25 @@ public class PowerUsageFeatureProviderImplTest {
 
     @Test
     public void testIsSmartBatterySupported_smartBatterySupported_returnTrue() {
-        when(mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_smart_battery_available)).thenReturn(true);
+        when(mContext.getResources()
+                        .getBoolean(com.android.internal.R.bool.config_smart_battery_available))
+                .thenReturn(true);
 
         assertThat(mPowerFeatureProvider.isSmartBatterySupported()).isTrue();
     }
 
     @Test
     public void testIsSmartBatterySupported_smartBatteryNotSupported_returnFalse() {
-        when(mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_smart_battery_available)).thenReturn(false);
+        when(mContext.getResources()
+                        .getBoolean(com.android.internal.R.bool.config_smart_battery_available))
+                .thenReturn(false);
 
         assertThat(mPowerFeatureProvider.isSmartBatterySupported()).isFalse();
+    }
+
+    @Test
+    public void testIsAdaptiveChargingSupported_returnFalse() {
+        assertThat(mPowerFeatureProvider.isAdaptiveChargingSupported()).isFalse();
     }
 
     @Test

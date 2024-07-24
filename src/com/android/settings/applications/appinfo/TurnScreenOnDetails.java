@@ -28,7 +28,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -46,7 +46,7 @@ public class TurnScreenOnDetails extends AppInfoWithHeader implements OnPreferen
 
     private AppStateTurnScreenOnBridge mAppBridge;
     private AppOpsManager mAppOpsManager;
-    private SwitchPreference mSwitchPref;
+    private TwoStatePreference mSwitchPref;
     private AppStateAppOpsBridge.PermissionState mPermissionState;
 
 
@@ -60,7 +60,7 @@ public class TurnScreenOnDetails extends AppInfoWithHeader implements OnPreferen
 
         // find preferences
         addPreferencesFromResource(R.xml.turn_screen_on_permissions_details);
-        mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
+        mSwitchPref = (TwoStatePreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
         mSwitchPref.setOnPreferenceChangeListener(this);
     }
 
