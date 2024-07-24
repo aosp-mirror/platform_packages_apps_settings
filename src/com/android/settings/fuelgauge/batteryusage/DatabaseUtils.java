@@ -455,6 +455,21 @@ public final class DatabaseUtils {
                 });
     }
 
+    /** Clears generated cache data in the battery usage database. */
+    public static void clearEvenHourCacheData(Context context) {
+        AsyncTask.execute(
+                () -> {
+                    try {
+                        final BatteryStateDatabase database =
+                                BatteryStateDatabase.getInstance(context.getApplicationContext());
+                        database.batteryEventDao().clearEvenHourEvent();
+                        database.batteryUsageSlotDao().clearAll();
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "clearEvenHourCacheData() failed", e);
+                    }
+                });
+    }
+
     /** Clears all out-of-date data in the battery usage database. */
     public static void clearExpiredDataIfNeeded(Context context) {
         AsyncTask.execute(
@@ -923,14 +938,12 @@ public final class DatabaseUtils {
         final String logInfo =
                 String.format(
                         Locale.ENGLISH,
-                        "clear database for new time zone = %s",
+                        "clear database cache for new time zone = %s",
                         TimeZone.getDefault().toString());
         BatteryUsageLogUtils.writeLog(context, Action.TIMEZONE_UPDATED, logInfo);
         Log.d(TAG, logInfo);
-        DatabaseUtils.clearAll(context);
+        DatabaseUtils.clearEvenHourCacheData(context);
         PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ false);
-        // Take a snapshot of battery usage data immediately
-        BatteryUsageDataLoader.enqueueWork(context, /* isFullChargeStart= */ true);
     }
 
     private static long loadLongFromContentProvider(
