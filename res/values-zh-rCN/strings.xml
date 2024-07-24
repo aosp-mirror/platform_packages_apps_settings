@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"已关闭"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{已开启 / # 个应用有权访问位置信息}other{已开启 / # 个应用有权访问位置信息}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"正在加载…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"具有附近设备权限的应用可以确定已连接的设备的相对位置。"</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"具有附近设备权限的应用可以确定已连接设备的相对位置。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"应用和服务的位置信息使用权处于关闭状态。在您拨打紧急电话号码或向该号码发送短信时，系统可能仍会将您的设备位置信息发送给紧急救援人员。"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"详细了解位置信息设置"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"如要进行更改，请依次前往 ChromeOS 的“设置”&gt;“隐私和安全”&gt;“隐私控制”&gt;“位置信息使用权”"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"将按键启用时长调整为 <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> 毫秒"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"粘滞键"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"只需一次按下一个键即可执行快捷操作，而不用同时按住多个键"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"鼠标按键"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"使用实体键盘控制鼠标。"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"键盘快捷键"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"显示快捷键列表"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"工作资料键盘和工具"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"将指针填充样式更改为黄色"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"将指针填充样式更改为粉色"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"将指针填充样式更改为蓝色"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"指针描边样式"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"白色"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"黑色"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"无"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"了解触控板手势"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"触控板, 鼠标, 光标, 滚动, 滑动, 右键点击, 点击, 指针, trackpad, track pad, mouse, cursor, scroll, swipe, right click, click, pointer"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"右键点击, 点按, right click, tap"</string>
@@ -3368,10 +3366,8 @@
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"时间表"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"删除时间表"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"删除"</string>
-    <!-- no translation found for zen_mode_menu_rename_mode (4681802125016390837) -->
-    <skip />
-    <!-- no translation found for zen_mode_menu_delete_mode (5380084696402157428) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"重命名"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"删除"</string>
     <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"要删除“<xliff:g id="MODE">%1$s</xliff:g>”模式吗？"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"修改"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"时间表"</string>
@@ -3395,8 +3391,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"允许视觉信号"</string>
     <string name="mode_interruption_filter_title" msgid="3343846700214702347">"保持专注"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"其他操作"</string>
-    <!-- no translation found for modes_sound_summary_off (6972648204528227879) -->
-    <skip />
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{关闭}=1{关闭/1 个模式可以自动开启}other{关闭/# 个模式可以自动开启}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"显示设置"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"显示选项"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"灰度模式"</string>
@@ -3659,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"此应用不支持增强型设置"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"更多设置"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"您可以在此应用中使用更多设置"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"自适应通知"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"使用自适应通知"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"如果您在短时间内收到很多通知，手机会降低音量并将屏幕上的弹出式窗口最小化，这种状况最长可持续两分钟。来电、闹钟和优先对话仍会发出振动/声音提醒或显示在屏幕上，并且您只要从屏幕顶部向下拉，即可轻松找到所有通知。"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"通知音量渐降"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"应用于工作资料"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"应用至工作资料应用"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服务"</string>
@@ -3818,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"所选应用"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"无"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{任何应用均不例外}=1{“{app_1}”例外}=2{“{app_1}”和“{app_2}”例外}=3{“{app_1}”“{app_2}”和“{app_3}”例外}other{“{app_1}”“{app_2}”以及另外 # 款应用例外}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g>（工作）"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"正在计算…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"允许应用覆盖"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"例外的应用"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"选择更多应用"</string>
@@ -3836,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"任何音效均不能例外"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"任何人均不能例外"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"部分人例外"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"所有人都例外"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"重复来电者"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"不屏蔽重复来电者"</string>
@@ -3855,14 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{更改为仅限闹钟并持续 1 小时，直到 {time}}other{更改为仅限闹钟并持续 # 小时，直到 {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"更改为仅限闹钟（到<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>）"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"更改为一律允许打扰"</string>
-    <!-- no translation found for zen_mode_rename_title (8146882272966214558) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_title (321750898430776191) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_default_name (2778307946775085105) -->
-    <skip />
-    <!-- no translation found for zen_mode_edit_name_hint (4584652062167540536) -->
-    <skip />
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"修改模式"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"添加模式"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"自定义模式"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"模式名称"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"警告"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"关闭"</string>
     <string name="device_feedback" msgid="5351614458411688608">"发送有关此设备的反馈"</string>
@@ -5292,10 +5290,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"已开启"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"已关闭"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"已开启"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"音频向左%1$d%%，向右%2$d%%"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"音频向右%1$d%%，向左%2$d%%"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"您安装的应用可以查看您的设备名称。此外，当您连接到蓝牙设备、连接到 WLAN 网络或设置 WLAN 热点时，其他人可能也会看到您的设备名称。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"语法性别"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"选择语法性别"</string>

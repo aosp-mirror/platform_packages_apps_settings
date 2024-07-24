@@ -303,7 +303,7 @@ public class AccessibilitySettings extends DashboardFragment implements
 
         final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
         final String stateSummaryCombo = context.getString(
-                R.string.preference_summary_default_combination,
+                com.android.settingslib.R.string.preference_summary_default_combination,
                 serviceState, serviceSummary);
 
         return TextUtils.isEmpty(serviceSummary) ? serviceState : stateSummaryCombo;

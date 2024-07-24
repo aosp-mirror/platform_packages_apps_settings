@@ -1022,7 +1022,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertThat(
                 ToggleScreenMagnificationPreferenceFragment.getServiceSummary(mContext).toString())
                 .isEqualTo(
-                        mContext.getString(R.string.preference_summary_default_combination,
+                        mContext.getString(
+                                com.android.settingslib.R.string
+                                        .preference_summary_default_combination,
                                 mContext.getText(R.string.accessibility_summary_shortcut_enabled),
                                 mContext.getText(R.string.magnification_feature_summary)));
     }
@@ -1034,7 +1036,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertThat(
                 ToggleScreenMagnificationPreferenceFragment.getServiceSummary(mContext).toString())
                 .isEqualTo(
-                        mContext.getString(R.string.preference_summary_default_combination,
+                        mContext.getString(
+                                com.android.settingslib.R.string
+                                        .preference_summary_default_combination,
                                 mContext.getText(
                                         R.string.generic_accessibility_feature_shortcut_off),
                                 mContext.getText(R.string.magnification_feature_summary)));
@@ -1049,7 +1053,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertThat(
                 ToggleScreenMagnificationPreferenceFragment.getServiceSummary(mContext).toString())
                 .isEqualTo(
-                        mContext.getString(R.string.preference_summary_default_combination,
+                        mContext.getString(
+                                com.android.settingslib.R.string
+                                        .preference_summary_default_combination,
                                 mContext.getText(R.string.accessibility_summary_shortcut_enabled),
                                 mContext.getText(R.string.magnification_feature_summary)));
     }
@@ -1063,7 +1069,9 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertThat(
                 ToggleScreenMagnificationPreferenceFragment.getServiceSummary(mContext).toString())
                 .isEqualTo(
-                        mContext.getString(R.string.preference_summary_default_combination,
+                        mContext.getString(
+                                com.android.settingslib.R.string
+                                        .preference_summary_default_combination,
                                 mContext.getText(
                                         R.string.generic_accessibility_feature_shortcut_off),
                                 mContext.getText(R.string.magnification_feature_summary)));
