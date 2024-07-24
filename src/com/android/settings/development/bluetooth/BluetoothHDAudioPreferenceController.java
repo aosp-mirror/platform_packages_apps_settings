@@ -22,7 +22,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.development.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -64,7 +64,7 @@ public class BluetoothHDAudioPreferenceController extends AbstractBluetoothPrefe
         if (supported) {
             final boolean isEnabled = bluetoothA2dp.isOptionalCodecsEnabled(activeDevice)
                     == BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED;
-            ((SwitchPreference) mPreference).setChecked(isEnabled);
+            ((TwoStatePreference) mPreference).setChecked(isEnabled);
         }
     }
 

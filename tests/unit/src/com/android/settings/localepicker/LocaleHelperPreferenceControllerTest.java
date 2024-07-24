@@ -19,12 +19,14 @@ package com.android.settings.localepicker;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.verify;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Looper;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Before;
@@ -37,6 +39,7 @@ import org.mockito.MockitoAnnotations;
 public class LocaleHelperPreferenceControllerTest {
     private Context mContext;
     private LocaleHelperPreferenceController mLocaleHelperPreferenceController;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Mock
     private FooterPreference mMockFooterPreference;
@@ -49,11 +52,16 @@ public class LocaleHelperPreferenceControllerTest {
         }
         mContext = ApplicationProvider.getApplicationContext();
         mLocaleHelperPreferenceController = new LocaleHelperPreferenceController(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
     public void updateFooterPreference_setFooterPreference_hasClickAction() {
         mLocaleHelperPreferenceController.updateFooterPreference(mMockFooterPreference);
         verify(mMockFooterPreference).setLearnMoreText(anyString());
+        mMockFooterPreference.setLearnMoreAction(v -> {
+            verify(mFeatureFactory.metricsFeatureProvider).action(
+                    mContext, SettingsEnums.ACTION_LANGUAGES_LEARN_MORE);
+        });
     }
 }

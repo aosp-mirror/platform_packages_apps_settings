@@ -16,18 +16,24 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class TrackpadGoBackPreferenceController extends TogglePreferenceController {
 
     private static final String SETTING_KEY = Settings.Secure.TRACKPAD_GESTURE_BACK_ENABLED;
 
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+
     public TrackpadGoBackPreferenceController(Context context, String key) {
         super(context, key);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -38,6 +44,8 @@ public class TrackpadGoBackPreferenceController extends TogglePreferenceControll
     @Override
     public boolean setChecked(boolean isChecked) {
         Settings.Secure.putInt(mContext.getContentResolver(), SETTING_KEY, isChecked ? 1 : 0);
+        mMetricsFeatureProvider.action(
+                mContext, SettingsEnums.ACTION_GESTURE_GO_BACK_CHANGED, isChecked);
         return true;
     }
 

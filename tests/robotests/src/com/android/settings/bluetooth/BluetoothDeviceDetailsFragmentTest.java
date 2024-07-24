@@ -18,6 +18,8 @@ package com.android.settings.bluetooth;
 
 import static android.bluetooth.BluetoothDevice.BOND_NONE;
 
+import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceControlsController.KEY_DEVICE_CONTROLS_GENERAL_GROUP;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -29,7 +31,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
+import android.companion.CompanionDeviceManager;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -46,9 +51,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,10 +70,14 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenu;
-import org.robolectric.shadows.ShadowUserManager;
+
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUserManager.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class BluetoothDeviceDetailsFragmentTest {
 
     private static final String TEST_ADDRESS = "55:66:77:88:99:AA";
@@ -87,12 +99,17 @@ public class BluetoothDeviceDetailsFragmentTest {
     private UserManager mUserManager;
     @Mock
     private InputManager mInputManager;
+    @Mock
+    private CompanionDeviceManager mCompanionDeviceManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mInputManager).when(mContext).getSystemService(InputManager.class);
+        doReturn(mCompanionDeviceManager).when(mContext)
+                .getSystemService(CompanionDeviceManager.class);
+        when(mCompanionDeviceManager.getAllAssociations()).thenReturn(ImmutableList.of());
         removeInputDeviceWithMatchingBluetoothAddress();
         FakeFeatureFactory.setupForTest();
 
@@ -207,6 +224,38 @@ public class BluetoothDeviceDetailsFragmentTest {
         verify(mFragment).finish();
     }
 
+    @Test
+    public void createPreferenceControllers_launchFromHAPage_deviceControllerNotExist() {
+        BluetoothDeviceDetailsFragment fragment = setupFragment();
+        Intent intent = fragment.getActivity().getIntent();
+        intent.putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
+                SettingsEnums.ACCESSIBILITY_HEARING_AID_SETTINGS);
+        fragment.onAttach(mContext);
+
+        List<AbstractPreferenceController> controllerList = fragment.createPreferenceControllers(
+                mContext);
+
+        assertThat(controllerList.stream()
+                .anyMatch(controller -> controller.getPreferenceKey().equals(
+                        KEY_DEVICE_CONTROLS_GENERAL_GROUP))).isFalse();
+    }
+
+    @Test
+    public void createPreferenceControllers_notLaunchFromHAPage_deviceControllerExist() {
+        BluetoothDeviceDetailsFragment fragment = setupFragment();
+        Intent intent = fragment.getActivity().getIntent();
+        intent.putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
+                SettingsEnums.PAGE_UNKNOWN);
+        fragment.onAttach(mContext);
+
+        List<AbstractPreferenceController> controllerList = fragment.createPreferenceControllers(
+                mContext);
+
+        assertThat(controllerList.stream()
+                .anyMatch(controller -> controller.getPreferenceKey().equals(
+                        KEY_DEVICE_CONTROLS_GENERAL_GROUP))).isTrue();
+    }
+
     private InputDevice createInputDeviceWithMatchingBluetoothAddress() {
         doReturn(new int[]{0}).when(mInputManager).getInputDeviceIds();
         InputDevice device = mock(InputDevice.class);
@@ -229,9 +278,7 @@ public class BluetoothDeviceDetailsFragmentTest {
         doReturn(mPreferenceScreen).when(fragment).getPreferenceScreen();
         doReturn(mUserManager).when(fragment).getUserManager();
 
-        mActivity = spy((FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get());
-
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
         doReturn(mActivity).when(fragment).getActivity();
         doReturn(mContext).when(fragment).getContext();
 

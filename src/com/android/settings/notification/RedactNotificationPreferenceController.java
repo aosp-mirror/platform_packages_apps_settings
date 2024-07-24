@@ -130,7 +130,7 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
                 ? UserHandle.myUserId() : mProfileUserId;
 
         // hide if lockscreen isn't secure for this user
-        final LockPatternUtils utils = FeatureFactory.getFactory(mContext)
+        final LockPatternUtils utils = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(mContext);
         if (!utils.isSecure(userId)) {

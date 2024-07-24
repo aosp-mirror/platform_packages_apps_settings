@@ -52,11 +52,12 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
+            Size.UNKNOWN,
             Size.SMALL,
             Size.LARGE,
     })
-    @VisibleForTesting
-    @interface Size {
+    public @interface Size {
+        int UNKNOWN = -1;
         int SMALL = 0;
         int LARGE = 1;
     }

@@ -26,8 +26,6 @@ import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,7 +46,7 @@ public final class AccessibilityFooterPreferenceTest {
 
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view =
-                inflater.inflate(R.layout.preference_footer, null);
+                inflater.inflate(com.android.settingslib.widget.preference.footer.R.layout.preference_footer, null);
         mPreferenceViewHolder = PreferenceViewHolder.createInstanceForTests(view);
     }
 

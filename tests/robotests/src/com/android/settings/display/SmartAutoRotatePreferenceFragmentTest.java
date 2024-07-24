@@ -16,6 +16,8 @@
 
 package com.android.settings.display;
 
+import static android.provider.Settings.Secure.DEVICE_STATE_ROTATION_LOCK_LOCKED;
+
 import static com.android.settings.display.SmartAutoRotatePreferenceFragment.AUTO_ROTATE_MAIN_SWITCH_PREFERENCE_KEY;
 import static com.android.settings.display.SmartAutoRotatePreferenceFragment.AUTO_ROTATE_SWITCH_PREFERENCE_KEY;
 
@@ -50,7 +52,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -63,10 +64,16 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
         ShadowDeviceStateRotationLockSettingsManager.class,
         ShadowRotationPolicy.class
 })
 public class SmartAutoRotatePreferenceFragmentTest {
+
+    private static final int STATE_FOLDED = 0;
+    private static final int STATE_HALF_FOLDED = 1;
+    private static final int STATE_UNFOLDED = 2;
+    private static final int STATE_REAR_DISPLAY = 3;
 
     private static final String PACKAGE_NAME = "package_name";
 
@@ -97,6 +104,7 @@ public class SmartAutoRotatePreferenceFragmentTest {
         ContentResolver mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
+        when(mContext.getApplicationContext()).thenReturn(mContext);
         doReturn(PACKAGE_NAME).when(mPackageManager).getRotationResolverPackageName();
         doReturn(PackageManager.PERMISSION_GRANTED).when(mPackageManager).checkPermission(
                 Manifest.permission.CAMERA, PACKAGE_NAME);
@@ -119,11 +127,18 @@ public class SmartAutoRotatePreferenceFragmentTest {
         when(mFragment.findPreference(AUTO_ROTATE_SWITCH_PREFERENCE_KEY)).thenReturn(
                 mRotateSwitchPreference);
 
+        when(mFragment.findPreference(AUTO_ROTATE_MAIN_SWITCH_PREFERENCE_KEY))
+                .thenReturn(mRotateMainSwitchPreference);
 
-        when(mFragment.findPreference(AUTO_ROTATE_MAIN_SWITCH_PREFERENCE_KEY)).thenReturn(
-                mRotateMainSwitchPreference);
+        when(mResources.getIntArray(com.android.internal.R.array.config_foldedDeviceStates))
+                .thenReturn(new int[] {STATE_FOLDED});
+        when(mResources.getIntArray(com.android.internal.R.array.config_halfFoldedDeviceStates))
+                .thenReturn(new int[] {STATE_HALF_FOLDED});
+        when(mResources.getIntArray(com.android.internal.R.array.config_openDeviceStates))
+                .thenReturn(new int[] {STATE_UNFOLDED});
+        when(mResources.getIntArray(com.android.internal.R.array.config_rearDisplayDeviceStates))
+                .thenReturn(new int[] {STATE_REAR_DISPLAY});
     }
-
 
     @Test
     public void createHeader_faceDetectionSupported_switchBarIsEnabled() {
@@ -168,7 +183,7 @@ public class SmartAutoRotatePreferenceFragmentTest {
 
     @Test
     public void createPreferenceControllers_noSettableDeviceStates_returnsEmptyList() {
-        enableDeviceStateSettableRotationStates(new String[]{}, new String[]{});
+        enableDeviceStateSettableRotationStates(new String[] {}, new String[] {});
 
         List<AbstractPreferenceController> preferenceControllers =
                 mFragment.createPreferenceControllers(mContext);
@@ -176,20 +191,23 @@ public class SmartAutoRotatePreferenceFragmentTest {
         assertThat(preferenceControllers).isEmpty();
     }
 
-    @Ignore
     @Test
     public void createPreferenceControllers_settableDeviceStates_returnsDeviceStateControllers() {
-        enableDeviceStateSettableRotationStates(new String[]{"0:1", "1:1"},
-                new String[]{"Folded", "Unfolded"});
+        enableDeviceStateSettableRotationStates(
+                new String[] {
+                    STATE_FOLDED + ":" + DEVICE_STATE_ROTATION_LOCK_LOCKED,
+                    STATE_UNFOLDED + ":" + DEVICE_STATE_ROTATION_LOCK_LOCKED
+                },
+                new String[] {"Folded", "Unfolded"});
 
         List<AbstractPreferenceController> preferenceControllers =
                 mFragment.createPreferenceControllers(mContext);
 
         assertThat(preferenceControllers).hasSize(2);
-        assertThat(preferenceControllers.get(0)).isInstanceOf(
-                DeviceStateAutoRotateSettingController.class);
-        assertThat(preferenceControllers.get(1)).isInstanceOf(
-                DeviceStateAutoRotateSettingController.class);
+        assertThat(preferenceControllers.get(0))
+                .isInstanceOf(DeviceStateAutoRotateSettingController.class);
+        assertThat(preferenceControllers.get(1))
+                .isInstanceOf(DeviceStateAutoRotateSettingController.class);
     }
 
     @Test
@@ -205,16 +223,15 @@ public class SmartAutoRotatePreferenceFragmentTest {
         verify(mFragment, times(1)).addHelpLink();
     }
 
-    private void enableDeviceStateSettableRotationStates(String[] settableStates,
-            String[] settableStatesDescriptions) {
+    private void enableDeviceStateSettableRotationStates(
+            String[] settableStates, String[] settableStatesDescriptions) {
         when(mResources.getStringArray(
-                com.android.internal.R.array.config_perDeviceStateRotationLockDefaults)).thenReturn(
-                settableStates);
-        when(mResources.getStringArray(
-                R.array.config_settableAutoRotationDeviceStatesDescriptions)).thenReturn(
-                settableStatesDescriptions);
-        when(mResources.getBoolean(R.bool.config_auto_rotate_face_detection_available)).thenReturn(
-                true);
+                        com.android.internal.R.array.config_perDeviceStateRotationLockDefaults))
+                .thenReturn(settableStates);
+        when(mResources.getStringArray(R.array.config_settableAutoRotationDeviceStatesDescriptions))
+                .thenReturn(settableStatesDescriptions);
+        when(mResources.getBoolean(R.bool.config_auto_rotate_face_detection_available))
+                .thenReturn(true);
         DeviceStateRotationLockSettingsManager.resetInstance();
         DeviceStateRotationLockSettingsManager.getInstance(mContext)
                 .resetStateForTesting(mResources);

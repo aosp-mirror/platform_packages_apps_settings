@@ -31,11 +31,11 @@ public final class BatteryUsageSlotEntityTest {
         final long timestamp = 10001L;
         final String batteryUsageSlotString = "batteryUsageSlotString";
 
-        BatteryUsageSlotEntity entity = BatteryUsageSlotEntity
-                .newBuilder()
-                .setTimestamp(timestamp)
-                .setBatteryUsageSlot(batteryUsageSlotString)
-                .build();
+        BatteryUsageSlotEntity entity =
+                BatteryUsageSlotEntity.newBuilder()
+                        .setTimestamp(timestamp)
+                        .setBatteryUsageSlot(batteryUsageSlotString)
+                        .build();
 
         // Verifies the app relative information.
         assertThat(entity.timestamp).isEqualTo(timestamp);

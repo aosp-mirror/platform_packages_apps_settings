@@ -18,9 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 
-/**
- * Used to override battery status string in Battery Header.
- */
+/** Used to override battery status string in Battery Header. */
 public class BatteryStatusFeatureProviderImpl implements BatteryStatusFeatureProvider {
 
     protected Context mContext;

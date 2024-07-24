@@ -29,7 +29,6 @@ import android.content.res.Resources;
 import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -61,7 +60,6 @@ public class PremiumSmsControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailability_disabledByCarrier_returnUnavailable() {

@@ -219,7 +219,7 @@ public class BatteryTestUtils {
         when(mockUsbPort.supportsComplianceWarnings()).thenReturn(true);
         when(mockUsbPortStatus.isConnected()).thenReturn(true);
         when(mockUsbPortStatus.getComplianceWarnings())
-                .thenReturn(new int[]{UsbPortStatus.COMPLIANCE_WARNING_OTHER});
+                .thenReturn(new int[]{UsbPortStatus.COMPLIANCE_WARNING_DEBUG_ACCESSORY});
     }
 
     /**

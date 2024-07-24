@@ -18,8 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="22dp"
-    android:paddingBottom="32dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="16dp"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:orientation="vertical"
@@ -99,6 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="12dp"
+        android:minHeight="54dp"
         android:orientation="vertical">
 
         <TextView
@@ -120,15 +121,6 @@
             android:textColor="?android:attr/textColorSecondary" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/launch_mdp_app_button"
-        android:layout_marginTop="12dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:text="@string/launch_mdp_app_text"
-        style="@style/ActionPrimaryButton" />
 
 </LinearLayout>
 

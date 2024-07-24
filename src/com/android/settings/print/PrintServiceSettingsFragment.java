@@ -43,12 +43,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,7 +62,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SettingsMainSwitchBar;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -72,7 +72,7 @@ import java.util.Map;
  * Fragment with print service settings.
  */
 public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
-        implements OnMainSwitchChangeListener,
+        implements OnCheckedChangeListener,
         LoaderManager.LoaderCallbacks<List<PrintServiceInfo>> {
 
     private static final String LOG_TAG = "PrintServiceSettings";
@@ -240,7 +240,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
 
-        mSwitchBar.setOnBeforeCheckedChangeListener((toggleSwitch, checked) -> {
+        mSwitchBar.setOnBeforeCheckedChangeListener((checked) -> {
             onPreferenceToggled(mPreferenceKey, checked);
             return false;
         });
@@ -250,7 +250,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         updateEmptyView();
     }
 

@@ -215,7 +215,7 @@ public class KeyboardLayoutDialogFragment extends InstrumentedDialogFragment
     private void updateSwitchHintVisibility() {
         AlertDialog dialog = (AlertDialog)getDialog();
         if (dialog != null) {
-            View customPanel = dialog.findViewById(R.id.customPanel);
+            View customPanel = dialog.findViewById(com.google.android.material.R.id.customPanel);
             customPanel.setVisibility(mAdapter.getCount() > 1 ? View.VISIBLE : View.GONE);
         }
     }

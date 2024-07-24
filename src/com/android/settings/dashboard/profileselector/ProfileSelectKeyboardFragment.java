@@ -16,8 +16,6 @@
 
 package com.android.settings.dashboard.profileselector;
 
-import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
@@ -39,19 +37,11 @@ public final class ProfileSelectKeyboardFragment extends ProfileSelectFragment {
 
     @Override
     public Fragment[] getFragments() {
-        final Bundle personalOnly = new Bundle();
-        personalOnly.putInt(EXTRA_PROFILE, ProfileType.PERSONAL);
-        final Fragment personalFragment = new AvailableVirtualKeyboardFragment();
-        personalFragment.setArguments(personalOnly);
-
-        final Bundle workOnly = new Bundle();
-        workOnly.putInt(EXTRA_PROFILE, ProfileType.WORK);
-        final Fragment workFragment = new AvailableVirtualKeyboardFragment();
-        workFragment.setArguments(workOnly);
-
-        return new Fragment[]{
-                personalFragment,
-                workFragment
-        };
+        return ProfileSelectFragment.getFragments(
+                getContext(),
+                null /* bundle */,
+                AvailableVirtualKeyboardFragment::new,
+                AvailableVirtualKeyboardFragment::new,
+                AvailableVirtualKeyboardFragment::new);
     }
 }

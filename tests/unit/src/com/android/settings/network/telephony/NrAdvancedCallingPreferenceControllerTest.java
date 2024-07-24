@@ -29,7 +29,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -57,7 +57,7 @@ public class NrAdvancedCallingPreferenceControllerTest {
     private CarrierConfigCache mCarrierConfigCache;
 
     private NrAdvancedCallingPreferenceController mController;
-    private SwitchPreference mPreference;
+    private TwoStatePreference mPreference;
     private PersistableBundle mCarrierConfig;
     private Context mContext;
 

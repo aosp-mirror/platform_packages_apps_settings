@@ -30,10 +30,10 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
-import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /** Fingerprint error dialog, will be shown when an error occurs during fingerprint enrollment. */
@@ -95,7 +95,7 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         return dialog;
     }
 
-    public static void showErrorDialog(BiometricEnrollBase host, int errMsgId, boolean isSetup) {
+    public static void showErrorDialog(FragmentActivity host, int errMsgId, boolean isSetup) {
         if (host.isFinishing()) {
             return;
         }

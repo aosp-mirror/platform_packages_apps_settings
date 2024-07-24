@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="satellite_setting"
+    android:title="@string/satellite_setting"
+    settings:keywords="@string/keywords_satellite_setting">
+
+    <PreferenceCategory
+        android:title="@string/category_name_about_satellite_messaging">
+
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="key_about_satellite_messaging"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="key_category_your_satellite_plan"
+        android:title="@string/category_title_your_satellite_plan">
+
+        <Preference
+            android:key="key_your_satellite_plan"
+            android:icon="?android:attr/textColorPrimary"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="key_category_how_it_works"
+        android:title="@string/category_name_how_it_works"
+        android:clickable="false"
+        android:focusable="false">
+
+        <Preference
+            android:key="key_satellite_connection_guide"
+            android:title="@string/title_satellite_connection_guide"
+            android:summary="@string/summary_satellite_connection_guide"
+            android:icon="@drawable/ic_signal_cellular_nodata_24px"/>
+
+        <Preference
+            android:key="key_supported_service"
+            android:title="@string/title_supported_service"
+            android:summary="@string/summary_supported_service"
+            android:icon="@drawable/ic_satellite_alt_24px"/>
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="satellite_setting_extra_info_footer_pref"
+        android:layout="@layout/satellite_setting_more_information_layout"
+        android:selectable="false"
+        settings:searchable="false"/>
+
+</PreferenceScreen>

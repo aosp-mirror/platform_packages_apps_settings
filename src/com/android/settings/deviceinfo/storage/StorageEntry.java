@@ -16,7 +16,6 @@
 
 package com.android.settings.deviceinfo.storage;
 
-import android.annotation.NonNull;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -25,6 +24,8 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 

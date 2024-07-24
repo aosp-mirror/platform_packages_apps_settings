@@ -99,7 +99,7 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
 
             if (showOptionsButton && anyOptionsShown) {
                 mOptionsButton = new Button(new ContextThemeWrapper(getActivity(),
-                        R.style.SudGlifButton_Tertiary));
+                        com.google.android.setupdesign.R.style.SudGlifButton_Tertiary));
                 mOptionsButton.setId(R.id.screen_lock_options);
                 PasswordUtils.setupScreenLockOptionsButton(getActivity(), view, mOptionsButton);
                 mOptionsButton.setVisibility(View.VISIBLE);

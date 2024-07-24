@@ -22,7 +22,6 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
-import android.annotation.Nullable;
 import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.app.RemoteLockscreenValidationSession;
@@ -48,6 +47,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
@@ -417,6 +417,10 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         if (timeout != 0) {
             mHandler.postDelayed(mResetErrorRunnable, timeout);
         }
+    }
+
+    protected void clearResetErrorRunnable() {
+        mHandler.removeCallbacks(mResetErrorRunnable);
     }
 
     protected void validateGuess(LockscreenCredential credentialGuess) {

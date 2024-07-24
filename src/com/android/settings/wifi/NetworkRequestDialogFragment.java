@@ -112,7 +112,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
             }
         };
         final Context context = getContext();
-        mWifiPickerTracker = FeatureFactory.getFactory(context)
+        mWifiPickerTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(getSettingsLifecycle(), context,
                         new Handler(Looper.getMainLooper()),
@@ -142,7 +142,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
         // Prepares adapter.
         mDialogAdapter = new WifiEntryAdapter(context,
-                R.layout.preference_access_point, mFilteredWifiEntries);
+                com.android.settingslib.R.layout.preference_access_point, mFilteredWifiEntries);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setCustomTitle(customTitle)
@@ -326,7 +326,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
                 view = mInflater.inflate(mResourceId, parent, false);
 
                 final View divider = view.findViewById(
-                        com.android.settingslib.R.id.two_target_divider);
+                        com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider);
                 divider.setVisibility(View.GONE);
             }
 

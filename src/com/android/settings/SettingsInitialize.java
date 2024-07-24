@@ -32,6 +32,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.pm.UserInfo;
+import android.os.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
@@ -67,6 +68,7 @@ public class SettingsInitialize extends BroadcastReceiver {
         final PackageManager pm = context.getPackageManager();
         managedProfileSetup(context, pm, broadcast, userInfo);
         cloneProfileSetup(context, pm, userInfo);
+        privateProfileSetup(context, pm, userInfo);
         webviewSettingSetup(context, pm, userInfo);
         ThreadUtils.postOnBackgroundThread(() -> refreshExistingShortcuts(context));
         enableTwoPaneDeepLinkActivityIfNecessary(pm, context);
@@ -104,17 +106,29 @@ public class SettingsInitialize extends BroadcastReceiver {
             }
         }
 
-        // Disable launcher icon
-        disableComponent(pm, new ComponentName(context, Settings.class));
-        // Disable shortcut picker.
-        disableComponent(pm, new ComponentName(context, CreateShortcutActivity.class));
+        disableComponentsToHideSettings(context, pm);
     }
 
     private void cloneProfileSetup(Context context, PackageManager pm, UserInfo userInfo) {
         if (userInfo == null || !userInfo.isCloneProfile()) {
             return;
         }
-        // Disable launcher icon
+
+        disableComponentsToHideSettings(context, pm);
+    }
+
+    private void privateProfileSetup(Context context, PackageManager pm, UserInfo userInfo) {
+        if (Flags.allowPrivateProfile()) {
+            if (userInfo == null || !userInfo.isPrivateProfile()) {
+                return;
+            }
+
+            disableComponentsToHideSettings(context, pm);
+        }
+    }
+
+    private void disableComponentsToHideSettings(Context context, PackageManager pm) {
+        // Disable settings app launcher icon
         disableComponent(pm, new ComponentName(context, Settings.class));
 
         //Disable Shortcut picker

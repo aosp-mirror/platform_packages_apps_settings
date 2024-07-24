@@ -38,11 +38,5 @@
         android:layout_marginEnd="8dip"
         android:contentDescription="@string/sync_active" />
 
-    <Switch
-        android:id="@android:id/switch_widget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:focusable="false"
-        android:clickable="false" />
+    <include layout="@layout/preference_widget_switch_compat" />
 </LinearLayout>

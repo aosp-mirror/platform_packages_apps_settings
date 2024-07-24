@@ -17,6 +17,8 @@
 package com.android.settings.development;
 
 import android.content.Context;
+import android.os.Flags;
+import android.provider.Settings;
 import android.text.format.Formatter;
 
 import androidx.annotation.VisibleForTesting;
@@ -65,9 +67,13 @@ public class MemoryUsagePreferenceController extends DeveloperOptionsPreferenceC
                     (long) memInfo.realUsedRam);
             final String totalResult = Formatter.formatShortFileSize(mContext,
                     (long) memInfo.realTotalRam);
-            ThreadUtils.postOnMainThread(
-                    () -> mPreference.setSummary(mContext.getString(R.string.memory_summary,
-                            usedResult, totalResult)));
+            boolean displayMemorySummary = !Flags.removeAppProfilerPssCollection();
+            displayMemorySummary |= Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.FORCE_ENABLE_PSS_PROFILING, 0) == 1;
+            String summary = displayMemorySummary
+                    ? mContext.getString(R.string.memory_summary, usedResult, totalResult)
+                    : mContext.getString(R.string.pss_profiling_disabled);
+            ThreadUtils.postOnMainThread(() -> mPreference.setSummary(summary));
         });
     }
 

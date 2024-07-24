@@ -47,13 +47,14 @@ public final class BatteryLevelData {
         private final List<Integer> mLevels;
 
         public PeriodBatteryLevelData(
-                @NonNull Map<Long, Integer> batteryLevelMap,
-                @NonNull List<Long> timestamps) {
+                @NonNull Map<Long, Integer> batteryLevelMap, @NonNull List<Long> timestamps) {
             mTimestamps = timestamps;
             mLevels = new ArrayList<>(timestamps.size());
             for (Long timestamp : timestamps) {
-                mLevels.add(batteryLevelMap.containsKey(timestamp)
-                        ? batteryLevelMap.get(timestamp) : BATTERY_LEVEL_UNKNOWN);
+                mLevels.add(
+                        batteryLevelMap.containsKey(timestamp)
+                                ? batteryLevelMap.get(timestamp)
+                                : BATTERY_LEVEL_UNKNOWN);
             }
         }
 
@@ -67,8 +68,11 @@ public final class BatteryLevelData {
 
         @Override
         public String toString() {
-            return String.format(Locale.ENGLISH, "timestamps: %s; levels: %s",
-                    Objects.toString(mTimestamps), Objects.toString(mLevels));
+            return String.format(
+                    Locale.ENGLISH,
+                    "timestamps: %s; levels: %s",
+                    Objects.toString(mTimestamps),
+                    Objects.toString(mLevels));
         }
 
         private int getIndexByTimestamps(long startTimestamp, long endTimestamp) {
@@ -83,14 +87,15 @@ public final class BatteryLevelData {
     }
 
     /**
-     * There could be 2 cases for the daily battery levels:
+     * There could be 2 cases for the daily battery levels: <br>
      * 1) length is 2: The usage data is within 1 day. Only contains start and end data, such as
-     *    data of 2022-01-01 06:00 and 2022-01-01 16:00.
+     * data of 2022-01-01 06:00 and 2022-01-01 16:00. <br>
      * 2) length > 2: The usage data is more than 1 days. The data should be the start, end and 0am
-     *    data of every day between the start and end, such as data of 2022-01-01 06:00,
-     *    2022-01-02 00:00, 2022-01-03 00:00 and 2022-01-03 08:00.
+     * data of every day between the start and end, such as data of 2022-01-01 06:00, 2022-01-02
+     * 00:00, 2022-01-03 00:00 and 2022-01-03 08:00.
      */
     private final PeriodBatteryLevelData mDailyBatteryLevels;
+
     // The size of hourly data must be the size of daily data - 1.
     private final List<PeriodBatteryLevelData> mHourlyBatteryLevelsPerDay;
 
@@ -118,8 +123,9 @@ public final class BatteryLevelData {
         final int hourlyHighlightIndex =
                 (dailyHighlightIndex == BatteryChartViewModel.SELECTED_INDEX_INVALID)
                         ? BatteryChartViewModel.SELECTED_INDEX_INVALID
-                        : mHourlyBatteryLevelsPerDay.get(dailyHighlightIndex)
-                        .getIndexByTimestamps(startTimestamp, endTimestamp);
+                        : mHourlyBatteryLevelsPerDay
+                                .get(dailyHighlightIndex)
+                                .getIndexByTimestamps(startTimestamp, endTimestamp);
         return Pair.create(dailyHighlightIndex, hourlyHighlightIndex);
     }
 
@@ -133,14 +139,16 @@ public final class BatteryLevelData {
 
     @Override
     public String toString() {
-        return String.format(Locale.ENGLISH,
+        return String.format(
+                Locale.ENGLISH,
                 "dailyBatteryLevels: %s; hourlyBatteryLevelsPerDay: %s",
                 Objects.toString(mDailyBatteryLevels),
                 Objects.toString(mHourlyBatteryLevelsPerDay));
     }
 
     @Nullable
-    static BatteryLevelData combine(@Nullable BatteryLevelData existingBatteryLevelData,
+    static BatteryLevelData combine(
+            @Nullable BatteryLevelData existingBatteryLevelData,
             List<BatteryEvent> batteryLevelRecordEvents) {
         final Map<Long, Integer> batteryLevelMap = new ArrayMap<>(batteryLevelRecordEvents.size());
         for (BatteryEvent event : batteryLevelRecordEvents) {
@@ -152,7 +160,8 @@ public final class BatteryLevelData {
             for (int dayIndex = 0; dayIndex < multiDaysData.size(); dayIndex++) {
                 PeriodBatteryLevelData oneDayData = multiDaysData.get(dayIndex);
                 for (int hourIndex = 0; hourIndex < oneDayData.getLevels().size(); hourIndex++) {
-                    batteryLevelMap.put(oneDayData.getTimestamps().get(hourIndex),
+                    batteryLevelMap.put(
+                            oneDayData.getTimestamps().get(hourIndex),
                             oneDayData.getLevels().get(hourIndex));
                 }
             }
@@ -163,11 +172,10 @@ public final class BatteryLevelData {
     /**
      * Computes expected daily timestamp slots.
      *
-     * The valid result should be composed of 3 parts:
-     * 1) start timestamp
-     * 2) every 00:00 timestamp (default timezone) between the start and end
-     * 3) end timestamp
-     * Otherwise, returns an empty list.
+     * <p>The valid result should be composed of 3 parts: <br>
+     * 1) start timestamp <br>
+     * 2) every 00:00 timestamp (default timezone) between the start and end <br>
+     * 3) end timestamp Otherwise, returns an empty list.
      */
     @VisibleForTesting
     static List<Long> getDailyTimestamps(final List<Long> timestampList) {
@@ -176,7 +184,8 @@ public final class BatteryLevelData {
         final List<Long> dailyTimestampList = new ArrayList<>();
         final long startTimestamp = timestampList.get(0);
         final long endTimestamp = timestampList.get(timestampList.size() - 1);
-        for (long timestamp = startTimestamp; timestamp < endTimestamp;
+        for (long timestamp = startTimestamp;
+                timestamp < endTimestamp;
                 timestamp = TimestampUtils.getNextDayTimestamp(timestamp)) {
             dailyTimestampList.add(timestamp);
         }
@@ -193,7 +202,8 @@ public final class BatteryLevelData {
 
             hourlyTimestampsPerDay.add(startTime);
             for (long timestamp = TimestampUtils.getNextEvenHourTimestamp(startTime);
-                    timestamp < endTime; timestamp += TIME_SLOT) {
+                    timestamp < endTime;
+                    timestamp += TIME_SLOT) {
                 hourlyTimestampsPerDay.add(timestamp);
             }
             hourlyTimestampsPerDay.add(endTime);
@@ -203,4 +213,3 @@ public final class BatteryLevelData {
         return hourlyTimestamps;
     }
 }
-

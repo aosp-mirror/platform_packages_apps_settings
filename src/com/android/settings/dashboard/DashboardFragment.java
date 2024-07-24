@@ -38,7 +38,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -94,8 +94,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         super.onAttach(context);
         mSuppressInjectedTileKeys = Arrays.asList(context.getResources().getStringArray(
                 R.array.config_suppress_injected_tile_keys));
-        mDashboardFeatureProvider = FeatureFactory.getFactory(context).
-                getDashboardFeatureProvider(context);
+        mDashboardFeatureProvider =
+                FeatureFactory.getFeatureFactory().getDashboardFeatureProvider();
         // Load preference controllers from code
         final List<AbstractPreferenceController> controllersFromCode =
                 createPreferenceControllers(context);
@@ -600,7 +600,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                         .setWidgetLayoutResource(R.layout.preference_external_action_icon);
                 return externalActionPreference;
             case SWITCH:
-                return new SwitchPreference(getPrefContext());
+                return new SwitchPreferenceCompat(getPrefContext());
             case SWITCH_WITH_ACTION:
                 return new PrimarySwitchPreference(getPrefContext());
             case GROUP:

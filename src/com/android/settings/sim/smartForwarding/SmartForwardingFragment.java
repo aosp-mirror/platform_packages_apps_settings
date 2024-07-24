@@ -27,7 +27,7 @@ import android.util.Log;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -48,10 +48,9 @@ public class SmartForwardingFragment extends PreferenceFragmentCompat
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.smart_forwarding_switch, rootKey);
 
-        String title = getResources().getString(R.string.smart_forwarding_title);
-        getActivity().getActionBar().setTitle(title);
+        getActivity().setTitle(R.string.smart_forwarding_title);
 
-        SwitchPreference smartForwardingSwitch = findPreference(KEY_SMART_FORWARDING_SWITCH);
+        TwoStatePreference smartForwardingSwitch = findPreference(KEY_SMART_FORWARDING_SWITCH);
         if (turnOffSwitch) {
             smartForwardingSwitch.setChecked(false);
         }
@@ -93,7 +92,7 @@ public class SmartForwardingFragment extends PreferenceFragmentCompat
     }
 
     public void turnOnSwitchPreference() {
-        SwitchPreference smartForwardingSwitch = findPreference(KEY_SMART_FORWARDING_SWITCH);
+        TwoStatePreference smartForwardingSwitch = findPreference(KEY_SMART_FORWARDING_SWITCH);
         smartForwardingSwitch.setChecked(true);
     }
 

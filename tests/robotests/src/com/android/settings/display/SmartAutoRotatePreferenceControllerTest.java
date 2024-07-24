@@ -42,6 +42,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResolveInfoBuilder;
 import com.android.settings.testutils.shadow.ShadowDeviceStateRotationLockSettingsManager;
 import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
+import com.android.settings.testutils.shadow.ShadowSystemSettings;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +56,7 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
+        ShadowSystemSettings.class,
         ShadowSensorPrivacyManager.class,
         ShadowDeviceStateRotationLockSettingsManager.class
 })
@@ -234,15 +236,17 @@ public class SmartAutoRotatePreferenceControllerTest {
     private void enableAutoRotationPreference() {
         when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
         when(mResources.getBoolean(anyInt())).thenReturn(true);
-        Settings.System.putInt(mContentResolver,
-                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 0);
+        Settings.System.putIntForUser(mContentResolver,
+                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 0,
+                UserHandle.USER_CURRENT);
     }
 
     private void disableAutoRotationPreference() {
         when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
         when(mResources.getBoolean(anyInt())).thenReturn(true);
-        Settings.System.putInt(mContentResolver,
-                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 1);
+        Settings.System.putIntForUser(mContentResolver,
+                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 1,
+                UserHandle.USER_CURRENT);
     }
 
     private void enableAutoRotation() {

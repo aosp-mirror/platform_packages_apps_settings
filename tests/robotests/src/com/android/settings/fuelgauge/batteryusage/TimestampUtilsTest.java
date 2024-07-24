@@ -36,11 +36,9 @@ public class TimestampUtilsTest {
     @Test
     public void getNextHourTimestamp_returnExpectedResult() {
         // 2021-02-28 06:00:00 => 2021-02-28 07:00:00
-        assertThat(TimestampUtils.getNextHourTimestamp(1614463200000L))
-                .isEqualTo(1614466800000L);
+        assertThat(TimestampUtils.getNextHourTimestamp(1614463200000L)).isEqualTo(1614466800000L);
         // 2021-12-31 23:59:59 => 2022-01-01 00:00:00
-        assertThat(TimestampUtils.getNextHourTimestamp(16409663999999L))
-                .isEqualTo(16409664000000L);
+        assertThat(TimestampUtils.getNextHourTimestamp(16409663999999L)).isEqualTo(16409664000000L);
     }
 
     @Test
@@ -66,11 +64,9 @@ public class TimestampUtilsTest {
     @Test
     public void getTimestampOfNextDay_returnExpectedResult() {
         // 2021-02-28 06:00:00 => 2021-03-01 00:00:00
-        assertThat(TimestampUtils.getNextDayTimestamp(1614463200000L))
-                .isEqualTo(1614528000000L);
+        assertThat(TimestampUtils.getNextDayTimestamp(1614463200000L)).isEqualTo(1614528000000L);
         // 2021-12-31 16:00:00 => 2022-01-01 00:00:00
-        assertThat(TimestampUtils.getNextDayTimestamp(1640937600000L))
-                .isEqualTo(1640966400000L);
+        assertThat(TimestampUtils.getNextDayTimestamp(1640937600000L)).isEqualTo(1640966400000L);
     }
 
     @Test

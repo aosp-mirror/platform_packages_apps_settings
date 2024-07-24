@@ -22,6 +22,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.hardware.input.InputManager;
 import android.net.Uri;
@@ -53,6 +54,7 @@ import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -173,8 +175,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
         use(KeyboardSettingsPreferenceController.class).init(mCachedDevice);
 
-        final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
-                context).getBluetoothFeatureProvider();
+        final BluetoothFeatureProvider featureProvider =
+                FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider();
         final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
 
@@ -184,8 +186,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     }
 
     private void updateExtraControlUri(int viewWidth) {
-        BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
-                getContext()).getBluetoothFeatureProvider();
+        BluetoothFeatureProvider featureProvider =
+                FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider();
         boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
         Uri controlUri = null;
@@ -203,6 +205,16 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         slicePreferenceController.setSliceUri(sliceEnabled ? controlUri : null);
         slicePreferenceController.onStart();
         slicePreferenceController.displayPreference(getPreferenceScreen());
+
+        // Temporarily fix the issue that the page will be automatically scrolled to a wrong
+        // position when entering the page. This will make sure the bluetooth header is shown on top
+        // of the page.
+        use(LeAudioBluetoothDetailsHeaderController.class).displayPreference(
+                getPreferenceScreen());
+        use(AdvancedBluetoothDetailsHeaderController.class).displayPreference(
+                getPreferenceScreen());
+        use(BluetoothDetailsHeaderController.class).displayPreference(
+                getPreferenceScreen());
     }
 
     private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
@@ -295,7 +307,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         if (mCachedDevice != null) {
             Lifecycle lifecycle = getSettingsLifecycle();
             controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
-                    lifecycle, mManager));
+                    lifecycle));
             controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new BluetoothDetailsCompanionAppsController(context, this,
@@ -314,10 +326,16 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     lifecycle));
             controllers.add(new BluetoothDetailsPairOtherController(context, this, mCachedDevice,
                     lifecycle));
-            controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
-                    mCachedDevice, lifecycle));
+            // Don't need to show hearing device again when launched from the same page.
+            if (!isLaunchFromHearingDevicePage()) {
+                controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
+                        mCachedDevice, lifecycle));
+            }
             controllers.add(new BluetoothDetailsDataSyncController(context, this,
                     mCachedDevice, lifecycle));
+            controllers.add(
+                    new BluetoothDetailsExtraOptionsController(
+                            context, this, mCachedDevice, lifecycle));
         }
         return controllers;
     }
@@ -333,6 +351,16 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                 + resolvedAttributes.getDimensionPixelSize(1, 0);
         resolvedAttributes.recycle();
         return width;
+    }
+
+    private boolean isLaunchFromHearingDevicePage() {
+        final Intent intent = getIntent();
+        if (intent == null) {
+            return false;
+        }
+
+        return intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
+                SettingsEnums.PAGE_UNKNOWN) == SettingsEnums.ACCESSIBILITY_HEARING_AID_SETTINGS;
     }
 
     @VisibleForTesting

@@ -36,7 +36,6 @@ import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -167,7 +166,6 @@ public class RingVibrationIntensityPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void setProgress_updatesIntensityAndDependentSettings() throws Exception {
         mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_OFF);
         assertThat(readSetting(Settings.System.RING_VIBRATION_INTENSITY))

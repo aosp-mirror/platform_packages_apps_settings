@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import java.time.Duration;
 import java.util.Calendar;
 
 /** A utility class for timestamp operations. */
@@ -46,6 +47,10 @@ final class TimestampUtils {
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         return calendar.getTimeInMillis();
+    }
+
+    static long getSeconds(final long timeInMs) {
+        return Duration.ofMillis(timeInMs).getSeconds();
     }
 
     static boolean isMidnight(final long timestamp) {

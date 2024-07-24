@@ -32,6 +32,7 @@ import java.util.Locale;
 public class BatteryUsageSlotEntity {
     /** Keys for accessing {@link ContentValues}. */
     public static final String KEY_TIMESTAMP = "timestamp";
+
     public static final String KEY_BATTERY_USAGE_SLOT = "batteryUsageSlot";
 
     @PrimaryKey(autoGenerate = true)
@@ -58,11 +59,16 @@ public class BatteryUsageSlotEntity {
     @Override
     public String toString() {
         final String recordAtDateTime = ConvertUtils.utcToLocalTimeForLogging(timestamp);
-        final StringBuilder builder = new StringBuilder()
-                .append("\nBatteryUsageSlot{")
-                .append(String.format(Locale.US, "\n\ttimestamp=%s|batteryUsageSlot=%s",
-                        recordAtDateTime, batteryUsageSlot))
-                .append("\n}");
+        final StringBuilder builder =
+                new StringBuilder()
+                        .append("\nBatteryUsageSlot{")
+                        .append(
+                                String.format(
+                                        Locale.US,
+                                        "\n\ttimestamp=%s|batteryUsageSlot=%s",
+                                        recordAtDateTime,
+                                        batteryUsageSlot))
+                        .append("\n}");
         return builder.toString();
     }
 

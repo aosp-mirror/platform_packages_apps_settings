@@ -28,6 +28,7 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
@@ -81,7 +82,7 @@ public class FlashNotificationsPreviewPreferenceController extends
         if (getPreferenceKey().equals(preference.getKey())) {
             Intent intent = new Intent(ACTION_FLASH_NOTIFICATION_START_PREVIEW);
             intent.putExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, TYPE_SHORT_PREVIEW);
-            mContext.sendBroadcast(intent);
+            mContext.sendBroadcastAsUser(intent, UserHandle.SYSTEM);
             return true;
         }
 

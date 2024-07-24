@@ -61,7 +61,8 @@ public class RestrictedCheckBox extends CheckBox {
             RestrictedLockUtilsInternal.setTextViewAsDisabledByAdmin(mContext, this,
                     mDisabledByAdmin);
             if (mDisabledByAdmin) {
-                getButtonDrawable().setColorFilter(mContext.getColor(R.color.disabled_text_color),
+                getButtonDrawable().setColorFilter(
+                        mContext.getColor(com.android.settingslib.R.color.disabled_text_color),
                         PorterDuff.Mode.MULTIPLY);
             } else {
                 getButtonDrawable().clearColorFilter();

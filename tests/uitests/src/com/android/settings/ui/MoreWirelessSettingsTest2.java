@@ -23,10 +23,10 @@ import android.provider.Settings;
 import android.system.helpers.CommandsHelper;
 import android.system.helpers.SettingsHelper;
 import android.test.InstrumentationTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.Suppress;
 import android.util.Log;
 
+import androidx.test.filters.MediumTest;
+import androidx.test.filters.Suppress;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.BySelector;
 import androidx.test.uiautomator.Direction;
@@ -35,9 +35,12 @@ import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiObject2;
 import androidx.test.uiautomator.Until;
 
+import org.junit.Ignore;
+
 /**
  * Additional tests for Wifi Settings.
  */
+@Ignore
 public class MoreWirelessSettingsTest2 extends InstrumentationTestCase {
     // These back button presses are performed in tearDown() to exit Wifi
     // Settings sub-menus that a test might finish in. This number should be

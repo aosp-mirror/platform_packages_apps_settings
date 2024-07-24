@@ -21,7 +21,6 @@ import android.app.AppOpsManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 public class ActionDisabledByAppOpsDialog extends Activity
         implements DialogInterface.OnDismissListener {

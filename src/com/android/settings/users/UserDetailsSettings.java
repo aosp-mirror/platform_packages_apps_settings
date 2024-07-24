@@ -32,7 +32,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -89,7 +89,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @VisibleForTesting
     RestrictedPreference mSwitchUserPref;
-    private SwitchPreference mPhonePref;
+    private TwoStatePreference mPhonePref;
     @VisibleForTesting
     Preference mAppAndContentAccessPref;
     @VisibleForTesting
@@ -97,7 +97,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     Preference mRemoveUserPref;
     @VisibleForTesting
-    SwitchPreference mGrantAdminPref;
+    TwoStatePreference mGrantAdminPref;
 
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
@@ -376,7 +376,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             if (!Utils.isVoiceCapable(context)) { // no telephony
                 removePreference(KEY_ENABLE_TELEPHONY);
             }
-
+            if (mUserInfo.isMain()) {
+                removePreference(KEY_ENABLE_TELEPHONY);
+            }
             if (mUserInfo.isRestricted()) {
                 removePreference(KEY_ENABLE_TELEPHONY);
                 if (isNewUser) {
@@ -474,9 +476,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private void enableCallsAndSms(boolean enabled) {
         mPhonePref.setChecked(enabled);
-        UserHandle userHandle = UserHandle.of(mUserInfo.id);
-        mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled, userHandle);
-        mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, userHandle);
+        int[] userProfiles = mUserManager.getProfileIdsWithDisabled(mUserInfo.id);
+        for (int userId : userProfiles) {
+            UserHandle user = UserHandle.of(userId);
+            mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled, user);
+            mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, user);
+        }
     }
 
     /**

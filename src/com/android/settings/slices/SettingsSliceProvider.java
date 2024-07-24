@@ -164,7 +164,7 @@ public class SettingsSliceProvider extends SliceProvider {
             Log.d(TAG, "onSlicePinned: " + sliceUri);
             mFirstSlicePinned = true;
         }
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .action(SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_SETTINGS_SLICE_REQUESTED,
                         SettingsEnums.PAGE_UNKNOWN,
@@ -173,7 +173,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
         if (CustomSliceRegistry.isValidUri(sliceUri)) {
             final Context context = getContext();
-            final CustomSliceable sliceable = FeatureFactory.getFactory(context)
+            final CustomSliceable sliceable = FeatureFactory.getFeatureFactory()
                     .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri);
             final IntentFilter filter = sliceable.getIntentFilter();
             if (filter != null) {
@@ -227,7 +227,7 @@ public class SettingsSliceProvider extends SliceProvider {
             final boolean nightMode = Utils.isNightMode(getContext());
             if (mNightMode == null) {
                 mNightMode = nightMode;
-                getContext().setTheme(R.style.Theme_SettingsBase);
+                getContext().setTheme(com.android.settingslib.widget.theme.R.style.Theme_SettingsBase);
             } else if (mNightMode != nightMode) {
                 Log.d(TAG, "Night mode changed, reload theme");
                 mNightMode = nightMode;
@@ -246,13 +246,13 @@ public class SettingsSliceProvider extends SliceProvider {
             // from the Settings team.
             if (CustomSliceRegistry.isValidUri(sliceUri)) {
                 final Context context = getContext();
-                return FeatureFactory.getFactory(context)
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri)
                         .getSlice();
             }
 
             if (CustomSliceRegistry.WIFI_CALLING_URI.equals(sliceUri)) {
-                return FeatureFactory.getFactory(getContext())
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingSlice(sliceUri);
@@ -261,12 +261,12 @@ public class SettingsSliceProvider extends SliceProvider {
             } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
                 return BluetoothSliceBuilder.getSlice(getContext());
             } else if (CustomSliceRegistry.ENHANCED_4G_SLICE_URI.equals(sliceUri)) {
-                return FeatureFactory.getFactory(getContext())
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewEnhanced4gLteSliceHelper(getContext())
                         .createEnhanced4gLteSlice(sliceUri);
             } else if (CustomSliceRegistry.WIFI_CALLING_PREFERENCE_URI.equals(sliceUri)) {
-                return FeatureFactory.getFactory(getContext())
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingPreferenceSlice(sliceUri);
@@ -474,18 +474,25 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     boolean isPrivateSlicesNeeded(Uri uri) {
-        final String queryUri = getContext().getString(R.string.config_non_public_slice_query_uri);
+        final Context context = getContext();
+        final String queryUri = context.getString(R.string.config_non_public_slice_query_uri);
 
         if (!TextUtils.isEmpty(queryUri) && TextUtils.equals(uri.toString(), queryUri)) {
             // check if the calling package is eligible for private slices
             final int callingUid = Binder.getCallingUid();
-            final boolean hasPermission = getContext().checkPermission(
-                    android.Manifest.permission.READ_SEARCH_INDEXABLES, Binder.getCallingPid(),
-                    callingUid) == PackageManager.PERMISSION_GRANTED;
-            final String callingPackage = getContext().getPackageManager()
-                    .getPackagesForUid(callingUid)[0];
-            return hasPermission && TextUtils.equals(callingPackage,
-                    getContext().getString(R.string.config_settingsintelligence_package_name));
+            final boolean hasPermission =
+                    context.checkPermission(
+                                    android.Manifest.permission.READ_SEARCH_INDEXABLES,
+                                    Binder.getCallingPid(),
+                                    callingUid)
+                            == PackageManager.PERMISSION_GRANTED;
+            final String[] packages = context.getPackageManager().getPackagesForUid(callingUid);
+            final String callingPackage =
+                    packages != null && packages.length > 0 ? packages[0] : null;
+            return hasPermission
+                    && TextUtils.equals(
+                            callingPackage,
+                            context.getString(R.string.config_settingsintelligence_package_name));
         }
         return false;
     }

@@ -54,6 +54,7 @@ import androidx.core.widget.TextViewCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.server.accessibility.Flags;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.widget.LottieColorUtils;
@@ -169,13 +170,6 @@ public final class AccessibilityGestureNavigationTutorial {
 
     static AlertDialog createAccessibilityTutorialDialogForSetupWizard(Context context,
             int shortcutTypes, @Nullable DialogInterface.OnClickListener actionButtonListener) {
-
-        final int category = SettingsEnums.SWITCH_SHORTCUT_DIALOG_ACCESSIBILITY_BUTTON_SETTINGS;
-        final DialogInterface.OnClickListener linkButtonListener =
-                (dialog, which) -> new SubSettingLauncher(context)
-                        .setDestination(AccessibilityButtonFragment.class.getName())
-                        .setSourceMetricsCategory(category)
-                        .launch();
 
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setPositiveButton(R.string.accessibility_tutorial_dialog_button,
@@ -418,6 +412,23 @@ public final class AccessibilityGestureNavigationTutorial {
         return new TutorialPage(type, title, image, indicatorIcon, instruction);
     }
 
+    private static TutorialPage createTwoFingerTripleTapTutorialPage(@NonNull Context context) {
+        // TODO(b/308088945): Update tutorial string and image when UX provides them
+        final int type = UserShortcutType.TWOFINGERTRIPLETAP;
+        final CharSequence title =
+                context.getText(R.string.accessibility_tutorial_dialog_title_two_finger_double);
+        final View image =
+                createIllustrationViewWithImageRawResource(context,
+                        R.raw.a11y_shortcut_type_triple_tap);
+        final CharSequence instruction =
+                context.getText(R.string.accessibility_tutorial_dialog_message_two_finger_triple);
+        final ImageView indicatorIcon =
+                createImageView(context, R.drawable.ic_accessibility_page_indicator);
+        indicatorIcon.setEnabled(false);
+
+        return new TutorialPage(type, title, image, indicatorIcon, instruction);
+    }
+
     @VisibleForTesting
     static List<TutorialPage> createShortcutTutorialPages(@NonNull Context context,
             int shortcutTypes) {
@@ -432,6 +443,13 @@ public final class AccessibilityGestureNavigationTutorial {
 
         if ((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP) {
             tutorialPages.add(createTripleTapTutorialPage(context));
+        }
+
+        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+            if ((shortcutTypes & UserShortcutType.TWOFINGERTRIPLETAP)
+                    == UserShortcutType.TWOFINGERTRIPLETAP) {
+                tutorialPages.add(createTwoFingerTripleTapTutorialPage(context));
+            }
         }
 
         return tutorialPages;

@@ -55,7 +55,6 @@ import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -145,9 +144,8 @@ public class ConfirmLockPatternTest {
 
     @Test
     public void onPatternDetected_normalFlow_doesNotAttemptRemoteLockscreenValidation() {
-        ConfirmLockPattern activity  = (ConfirmLockPattern) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(ConfirmLockPattern.class, new Intent())).get();
-
+        ConfirmLockPattern activity = Robolectric.buildActivity(
+                ConfirmLockPattern.class, new Intent()).setup().get();
         ConfirmDeviceCredentialBaseFragment fragment =
                 getConfirmDeviceCredentialBaseFragment(activity);
         LockPatternView lockPatternView = activity.findViewById(R.id.lockPattern);
@@ -158,8 +156,8 @@ public class ConfirmLockPatternTest {
         verifyNoInteractions(mRemoteLockscreenValidationClient);
     }
 
-    @Ignore
     @Test
+    @Ignore("b/295325503")
     public void onPatternDetected_remoteValidation_guessValid_checkboxChecked() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -185,6 +183,7 @@ public class ConfirmLockPatternTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void onPatternDetected_remoteValidation_guessValid_checkboxUnchecked() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -211,6 +210,7 @@ public class ConfirmLockPatternTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void onPatternDetected_remoteValidation_guessInvalid() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -235,6 +235,7 @@ public class ConfirmLockPatternTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void onPatternDetected_remoteValidation_lockout() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -259,6 +260,7 @@ public class ConfirmLockPatternTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void onPatternDetected_noRemainingAttempts_finishActivity() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(

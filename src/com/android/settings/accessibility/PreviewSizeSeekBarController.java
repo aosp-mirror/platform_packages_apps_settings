@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.Optional;
 
@@ -204,6 +207,13 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
         final ComponentName tileComponentName = getTileComponentName();
         if (tileComponentName == null) {
             // Returns if no tile service assigned.
+            return;
+        }
+
+        if (Flags.removeQsTooltipInSuw()
+                && mContext instanceof Activity
+                && WizardManagerHelper.isAnySetupWizard(((Activity) mContext).getIntent())) {
+            // Don't show QuickSettingsTooltip in Setup Wizard
             return;
         }
 

@@ -112,7 +112,6 @@ public class WifiNetworkDetailsViewModel extends AndroidViewModel {
     }
 
     private void log(String msg) {
-        FeatureFactory.getFactory(getApplication().getApplicationContext()).getWifiFeatureProvider()
-                .verboseLog(TAG, msg);
+        FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }

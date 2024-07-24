@@ -20,7 +20,6 @@ package com.android.settings.search;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
@@ -33,7 +32,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -55,11 +53,7 @@ public class SearchFeatureProviderImplTest {
     @Before
     public void setUp() {
         FakeFeatureFactory.setupForTest();
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
-
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mProvider = new SearchFeatureProviderImpl();
         mPackageManager = Shadows.shadowOf(mActivity.getPackageManager());
         Settings.Global.putInt(mActivity.getContentResolver(),
@@ -136,20 +130,22 @@ public class SearchFeatureProviderImplTest {
 
     @Test(expected = SecurityException.class)
     public void verifyLaunchSearchResultPageCaller_badCaller_shouldCrash() {
-        final ComponentName cn = new ComponentName("pkg", "class");
-        mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
+        final String packageName = "pkg";
+
+        mProvider.verifyLaunchSearchResultPageCaller(mActivity, packageName);
     }
 
     @Test
     public void verifyLaunchSearchResultPageCaller_settingsCaller_shouldNotCrash() {
-        final ComponentName cn = new ComponentName(mActivity.getPackageName(), "class");
-        mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
+        final String packageName = mActivity.getPackageName();
+
+        mProvider.verifyLaunchSearchResultPageCaller(mActivity, packageName);
     }
 
     @Test
     public void verifyLaunchSearchResultPageCaller_settingsIntelligenceCaller_shouldNotCrash() {
         final String packageName = mProvider.getSettingsIntelligencePkgName(mActivity);
-        final ComponentName cn = new ComponentName(packageName, "class");
-        mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
+
+        mProvider.verifyLaunchSearchResultPageCaller(mActivity, packageName);
     }
 }

@@ -41,7 +41,6 @@ import com.android.settings.network.ProviderModelSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
 import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
-import com.android.settings.wifi.slice.ContextualWifiSlice;
 import com.android.settings.wifi.slice.WifiSlice;
 import com.android.settingslib.media.MediaOutputConstants;
 
@@ -82,15 +81,6 @@ public class CustomSliceRegistry {
             .appendPath("bluetooth_devices")
             .build();
 
-    /**
-     * Backing Uri for the Wifi Slice.
-     */
-    public static final Uri CONTEXTUAL_WIFI_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSlicesContract.AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("contextual_wifi")
-            .build();
     /**
      * Slice Uri for Enhanced 4G slice
      */
@@ -193,16 +183,6 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("media_volume")
-            .build();
-
-    /**
-     * Full {@link Uri} for the Ringer volume Slice. (Ring & notification combined)
-     */
-    public static final Uri VOLUME_RINGER_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("ring_volume")
             .build();
 
     /**
@@ -331,7 +311,6 @@ public class CustomSliceRegistry {
         // Slices for contextual card.
         sUriToSlice.put(FACE_ENROLL_SLICE_URI, FaceSetupSlice.class);
         sUriToSlice.put(CONTEXTUAL_ADAPTIVE_SLEEP_URI, ContextualAdaptiveSleepSlice.class);
-        sUriToSlice.put(CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
         sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
         sUriToSlice.put(BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
     }

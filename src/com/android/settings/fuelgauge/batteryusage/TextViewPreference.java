@@ -30,8 +30,7 @@ import com.android.settings.R;
 public class TextViewPreference extends Preference {
     private static final String TAG = "TextViewPreference";
 
-    @VisibleForTesting
-    CharSequence mText;
+    @VisibleForTesting CharSequence mText;
 
     public TextViewPreference(Context context, AttributeSet attrs) {
         super(context, attrs);

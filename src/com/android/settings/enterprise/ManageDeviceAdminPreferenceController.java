@@ -31,8 +31,8 @@ public class ManageDeviceAdminPreferenceController extends BasePreferenceControl
 
     public ManageDeviceAdminPreferenceController(Context context, String key) {
         super(context, key);
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getEnterprisePrivacyFeatureProvider(context);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getEnterprisePrivacyFeatureProvider();
         mDevicePolicyManager =
                 mContext.getSystemService(DevicePolicyManager.class);
     }

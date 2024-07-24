@@ -27,6 +27,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType;
 import com.android.settings.deviceinfo.storage.StorageCacheHelper;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
@@ -62,8 +63,8 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
 
     @VisibleForTesting
     protected Future refreshSummaryThread(Preference preference) {
-        int userId = Utils.getCurrentUserId(mContext.getSystemService(UserManager.class),
-                /* isWorkProfile */ false);
+        int userId = Utils.getCurrentUserIdOfType(
+                mContext.getSystemService(UserManager.class), ProfileType.PERSONAL);
         final StorageCacheHelper storageCacheHelper = new StorageCacheHelper(mContext, userId);
         long cachedUsedSize = storageCacheHelper.retrieveUsedSize();
         long cachedTotalSize = storageCacheHelper.retrieveCachedSize().totalSize;

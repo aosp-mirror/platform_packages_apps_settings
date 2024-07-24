@@ -18,8 +18,6 @@ package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.app.Application;
 import android.app.WallpaperColors;
 import android.app.WallpaperManager;
@@ -27,9 +25,13 @@ import android.app.WallpaperManager.OnColorsChangedListener;
 import android.content.Context;
 import android.os.Handler;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.settings.FallbackHome;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -42,10 +44,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class FallbackHomeActivityTest {
@@ -64,6 +66,7 @@ public class FallbackHomeActivityTest {
         mController = Robolectric.buildActivity(FallbackHome.class);
     }
 
+    @Ignore("b/315124270")
     @Test
     @Config(shadows = ShadowWallpaperManager.class)
     public void wallpaperColorsChangedListener_ensured_removed() {

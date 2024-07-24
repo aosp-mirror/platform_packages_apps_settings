@@ -18,11 +18,8 @@ package com.android.settings.notification;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.provider.Settings;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -31,9 +28,6 @@ import com.android.settings.core.BasePreferenceController;
  * Summary of the feature setting for bubbles, available through notification menu.
  */
 public class BubbleSummaryNotificationPreferenceController extends BasePreferenceController {
-
-    @VisibleForTesting
-    static final int ON = 1;
 
     public BubbleSummaryNotificationPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -49,12 +43,11 @@ public class BubbleSummaryNotificationPreferenceController extends BasePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        ActivityManager am = mContext.getSystemService(ActivityManager.class);
-        return am.isLowRamDevice() ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
+        return BubbleHelper.isSupportedByDevice(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     private boolean areBubblesEnabled() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, ON) == ON;
+                NOTIFICATION_BUBBLES, BubbleHelper.SYSTEM_WIDE_ON) == BubbleHelper.SYSTEM_WIDE_ON;
     }
 }

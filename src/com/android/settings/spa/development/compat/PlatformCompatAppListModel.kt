@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.core.os.bundleOf
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.development.compat.PlatformCompatDashboard
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.framework.util.filterItem
 import com.android.settingslib.spa.framework.util.mapItem
 import com.android.settingslib.spaprivileged.model.app.AppListModel
@@ -53,8 +52,9 @@ class PlatformCompatAppListModel(
     }
 
     @Composable
-    override fun getSummary(option: Int, record: PlatformCompatAppRecord) =
-        stateOf(record.app.packageName)
+    override fun getSummary(option: Int, record: PlatformCompatAppRecord): () -> String = {
+        record.app.packageName
+    }
 
     @Composable
     override fun AppListItemModel<PlatformCompatAppRecord>.AppItem() {

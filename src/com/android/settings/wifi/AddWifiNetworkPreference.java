@@ -20,10 +20,12 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageButton;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -40,8 +42,11 @@ public class AddWifiNetworkPreference extends RestrictedPreference {
     private final Drawable mScanIconDrawable;
 
     public AddWifiNetworkPreference(Context context) {
-        super(context);
+        this(context, null);
+    }
 
+    public AddWifiNetworkPreference(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
         setLayoutResource(com.android.settingslib.R.layout.preference_access_point);
         setWidgetLayoutResource(R.layout.wifi_button_preference_widget);
         setIcon(R.drawable.ic_add_24dp);

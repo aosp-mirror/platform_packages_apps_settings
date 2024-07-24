@@ -38,6 +38,7 @@ public class AppDataUsagePreference extends AppPreference {
     public AppDataUsagePreference(Context context, AppItem item, int percent,
             UidDetailProvider provider) {
         super(context);
+        setKey("app_data_usage_" + item.key);
         mItem = item;
         mPercent = percent;
 

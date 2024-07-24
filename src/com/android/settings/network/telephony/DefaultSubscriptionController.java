@@ -32,6 +32,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.DefaultSubscriptionReceiver;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -88,6 +89,9 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public int getAvailabilityStatus(int subId) {
+        if (Flags.isDualSimOnboardingEnabled()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return AVAILABLE;
     }
 
@@ -96,9 +100,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mMobileNetworkRepository.updateEntity();
-        // Can not get default subId from database until get the callback, add register by subId
-        // later.
-        mMobileNetworkRepository.addRegisterBySubId(getDefaultSubscriptionId());
         mDataSubscriptionChangedReceiver.registerReceiver();
     }
 
@@ -112,8 +113,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        // Set a summary placeholder to reduce flicker.
-        mPreference.setSummaryProvider(pref -> mContext.getString(R.string.summary_placeholder));
         updateEntries();
     }
 

@@ -31,13 +31,19 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 
+import com.android.settings.testutils.shadow.ShadowSystemSettings;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowSystemSettings.class,
+})
 public class BalanceSeekBarTest {
     // Fix the maximum process value to 200 for testing the BalanceSeekBar.
     // It affects the SeekBar value of center(100) and snapThreshold(200 * SNAP_TO_PERCENTAGE).

@@ -66,22 +66,14 @@ import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryChartPreferenceControllerTest {
-    @Mock
-    private Intent mIntent;
-    @Mock
-    private UserManager mUserManager;
-    @Mock
-    private SettingsActivity mSettingsActivity;
-    @Mock
-    private TextView mChartSummaryTextView;
-    @Mock
-    private BatteryChartView mDailyChartView;
-    @Mock
-    private BatteryChartView mHourlyChartView;
-    @Mock
-    private ViewPropertyAnimator mViewPropertyAnimator;
-    @Mock
-    private LinearLayout.LayoutParams mLayoutParams;
+    @Mock private Intent mIntent;
+    @Mock private UserManager mUserManager;
+    @Mock private SettingsActivity mSettingsActivity;
+    @Mock private TextView mChartSummaryTextView;
+    @Mock private BatteryChartView mDailyChartView;
+    @Mock private BatteryChartView mHourlyChartView;
+    @Mock private ViewPropertyAnimator mViewPropertyAnimator;
+    @Mock private LinearLayout.LayoutParams mLayoutParams;
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
@@ -97,11 +89,9 @@ public final class BatteryChartPreferenceControllerTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mContext).when(mContext).getApplicationContext();
-        doReturn(mUserManager)
-                .when(mContext)
-                .getSystemService(UserManager.class);
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         doReturn(true).when(mUserManager).isUserUnlocked(anyInt());
-        doReturn(new int[]{0}).when(mUserManager).getProfileIdsWithDisabled(anyInt());
+        doReturn(new int[] {0}).when(mUserManager).getProfileIdsWithDisabled(anyInt());
         final Resources resources = spy(mContext.getResources());
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         doReturn(resources).when(mContext).getResources();
@@ -122,7 +112,7 @@ public final class BatteryChartPreferenceControllerTest {
         // Adds fake testing data.
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
-                new BatteryEntry.NameAndIcon("fakeName", /*icon=*/ null, /*iconId=*/ 1));
+                new BatteryEntry.NameAndIcon("fakeName", /* icon= */ null, /* iconId= */ 1));
     }
 
     @Test
@@ -156,15 +146,18 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mDailyChartView, atLeastOnce()).setVisibility(View.GONE);
         // Ignore fast refresh ui from the data processor callback.
         verify(mHourlyChartView, atLeast(0)).setViewModel(null);
-        verify(mHourlyChartView, atLeastOnce()).setViewModel(new BatteryChartViewModel(
-                List.of(100, 99, 97, 95, 66),
-                List.of(1619247660000L /* 7:01 AM */,
-                        1619251200000L /* 8 AM */,
-                        1619258400000L /* 10 AM */,
-                        1619265600000L /* 12 PM */,
-                        1619265720000L /* now (12:02 PM) */),
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
-                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
+        verify(mHourlyChartView, atLeastOnce())
+                .setViewModel(
+                        new BatteryChartViewModel(
+                                List.of(100, 99, 97, 95, 66),
+                                List.of(
+                                        1619247660000L /* 7:01 AM */,
+                                        1619251200000L /* 8 AM */,
+                                        1619258400000L /* 10 AM */,
+                                        1619265600000L /* 12 PM */,
+                                        1619265720000L /* now (12:02 PM) */),
+                                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
+                                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
     }
 
     @Test
@@ -173,15 +166,17 @@ public final class BatteryChartPreferenceControllerTest {
         reset(mHourlyChartView);
         setupHourlyChartViewAnimationMock();
 
-        BatteryChartViewModel expectedDailyViewModel = new BatteryChartViewModel(
-                List.of(100, 83, 59, 66),
-                // "Sat", "Sun", "Mon", "Mon"
-                List.of(1619247660000L /* Sat */,
-                        1619308800000L /* Sun */,
-                        1619395200000L /* Mon */,
-                        1619460120000L /* Mon */),
-                BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS,
-                mBatteryChartPreferenceController.mDailyChartLabelTextGenerator);
+        BatteryChartViewModel expectedDailyViewModel =
+                new BatteryChartViewModel(
+                        List.of(100, 83, 59, 66),
+                        // "Sat", "Sun", "Mon", "Mon"
+                        List.of(
+                                1619247660000L /* Sat */,
+                                1619308800000L /* Sun */,
+                                1619395200000L /* Mon */,
+                                1619460120000L /* Mon */),
+                        BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS,
+                        mBatteryChartPreferenceController.mDailyChartLabelTextGenerator);
 
         mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(60));
 
@@ -202,20 +197,23 @@ public final class BatteryChartPreferenceControllerTest {
 
         expectedDailyViewModel.setSelectedIndex(0);
         verify(mDailyChartView).setViewModel(expectedDailyViewModel);
-        verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
-                List.of(100, 99, 97, 95, 93, 91, 89, 87, 85, 83),
-                List.of(1619247660000L /* 7:01 AM */,
-                        1619251200000L /* 8 AM */,
-                        1619258400000L /* 10 AM */,
-                        1619265600000L /* 12 PM */,
-                        1619272800000L /* 2 PM */,
-                        1619280000000L /* 4 PM */,
-                        1619287200000L /* 6 PM */,
-                        1619294400000L /* 8 PM */,
-                        1619301600000L /* 10 PM */,
-                        1619308800000L /* 12 AM */),
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
-                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
+        verify(mHourlyChartView)
+                .setViewModel(
+                        new BatteryChartViewModel(
+                                List.of(100, 99, 97, 95, 93, 91, 89, 87, 85, 83),
+                                List.of(
+                                        1619247660000L /* 7:01 AM */,
+                                        1619251200000L /* 8 AM */,
+                                        1619258400000L /* 10 AM */,
+                                        1619265600000L /* 12 PM */,
+                                        1619272800000L /* 2 PM */,
+                                        1619280000000L /* 4 PM */,
+                                        1619287200000L /* 6 PM */,
+                                        1619294400000L /* 8 PM */,
+                                        1619301600000L /* 10 PM */,
+                                        1619308800000L /* 12 AM */),
+                                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
+                                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
@@ -228,23 +226,25 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mViewPropertyAnimator, atLeastOnce()).alpha(1f);
         expectedDailyViewModel.setSelectedIndex(1);
         verify(mDailyChartView).setViewModel(expectedDailyViewModel);
-        BatteryChartViewModel expectedHourlyViewModel = new BatteryChartViewModel(
-                List.of(83, 81, 79, 77, 75, 73, 71, 69, 67, 65, 63, 61, 59),
-                List.of(1619308800000L /* 12 AM */,
-                        1619316000000L /* 2 AM */,
-                        1619323200000L /* 4 AM */,
-                        1619330400000L /* 6 AM */,
-                        1619337600000L /* 8 AM */,
-                        1619344800000L /* 10 AM */,
-                        1619352000000L /* 12 PM */,
-                        1619359200000L /* 2 PM */,
-                        1619366400000L /* 4 PM */,
-                        1619373600000L /* 6 PM */,
-                        1619380800000L /* 8 PM */,
-                        1619388000000L /* 10 PM */,
-                        1619395200000L /* 12 AM */),
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
-                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator);
+        BatteryChartViewModel expectedHourlyViewModel =
+                new BatteryChartViewModel(
+                        List.of(83, 81, 79, 77, 75, 73, 71, 69, 67, 65, 63, 61, 59),
+                        List.of(
+                                1619308800000L /* 12 AM */,
+                                1619316000000L /* 2 AM */,
+                                1619323200000L /* 4 AM */,
+                                1619330400000L /* 6 AM */,
+                                1619337600000L /* 8 AM */,
+                                1619344800000L /* 10 AM */,
+                                1619352000000L /* 12 PM */,
+                                1619359200000L /* 2 PM */,
+                                1619366400000L /* 4 PM */,
+                                1619373600000L /* 6 PM */,
+                                1619380800000L /* 8 PM */,
+                                1619388000000L /* 10 PM */,
+                                1619395200000L /* 12 AM */),
+                        BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
+                        mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator);
         expectedHourlyViewModel.setSelectedIndex(6);
         verify(mHourlyChartView).setViewModel(expectedHourlyViewModel);
 
@@ -259,22 +259,24 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mViewPropertyAnimator, atLeastOnce()).alpha(1f);
         expectedDailyViewModel.setSelectedIndex(2);
         verify(mDailyChartView).setViewModel(expectedDailyViewModel);
-        verify(mHourlyChartView).setViewModel(new BatteryChartViewModel(
-                List.of(59, 57, 55, 53, 51, 49, 47, 45, 43, 41, 66),
-                List.of(1619395200000L /* 12 AM */,
-                        1619402400000L /* 2 AM */,
-                        1619409600000L /* 4 AM */,
-                        1619416800000L /* 6 AM */,
-                        1619424000000L /* 8 AM */,
-                        1619431200000L /* 10 AM */,
-                        1619438400000L /* 12 PM */,
-                        1619445600000L /* 2 PM */,
-                        1619452800000L /* 4 PM */,
-                        1619460000000L /* 6 PM */,
-                        1619460120000L /* now (6:02 PM) */),
-                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
-                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
-
+        verify(mHourlyChartView)
+                .setViewModel(
+                        new BatteryChartViewModel(
+                                List.of(59, 57, 55, 53, 51, 49, 47, 45, 43, 41, 66),
+                                List.of(
+                                        1619395200000L /* 12 AM */,
+                                        1619402400000L /* 2 AM */,
+                                        1619409600000L /* 4 AM */,
+                                        1619416800000L /* 6 AM */,
+                                        1619424000000L /* 8 AM */,
+                                        1619431200000L /* 10 AM */,
+                                        1619438400000L /* 12 PM */,
+                                        1619445600000L /* 2 PM */,
+                                        1619452800000L /* 4 PM */,
+                                        1619460000000L /* 6 PM */,
+                                        1619460120000L /* now (6:02 PM) */),
+                                BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
+                                mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
     }
 
     @Test
@@ -335,6 +337,29 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
+    public void showEmptyChart_dailyChartViewIsNull_ignoreShowEmptyChart() {
+        mBatteryChartPreferenceController.mDailyChartView = null;
+        doReturn(View.GONE).when(mHourlyChartView).getVisibility();
+
+        mBatteryChartPreferenceController.showEmptyChart();
+
+        verify(mChartSummaryTextView, never()).setVisibility(View.VISIBLE);
+        verify(mDailyChartView, never()).setVisibility(View.GONE);
+        verify(mHourlyChartView, never()).setVisibility(View.VISIBLE);
+    }
+
+    @Test
+    public void showEmptyChart_hourlyChartViewIsNull_ignoreShowEmptyChart() {
+        mBatteryChartPreferenceController.mHourlyChartView = null;
+
+        mBatteryChartPreferenceController.showEmptyChart();
+
+        verify(mChartSummaryTextView, never()).setVisibility(View.VISIBLE);
+        verify(mDailyChartView, never()).setVisibility(View.GONE);
+        verify(mHourlyChartView, never()).setVisibility(View.VISIBLE);
+    }
+
+    @Test
     public void refreshUi_dailyChartViewIsNull_ignoreRefresh() {
         mBatteryChartPreferenceController.mDailyChartView = null;
 
@@ -359,6 +384,8 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(null);
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 100% to 66%");
     }
 
     @Test
@@ -368,6 +395,8 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(null);
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 100% to 66%");
     }
 
     @Test
@@ -377,6 +406,8 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo("Sunday");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 83% to 59%");
     }
 
     @Test
@@ -385,8 +416,10 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 2;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
-                "10 AM - 12 PM");
+        assertThat(mBatteryChartPreferenceController.getSlotInformation())
+                .isEqualTo("10 AM - 12 PM");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 97% to 95%");
     }
 
     @Test
@@ -395,8 +428,10 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mDailyChartIndex = 1;
         mBatteryChartPreferenceController.mHourlyChartIndex = 8;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
-                "Sunday 4 PM - 6 PM");
+        assertThat(mBatteryChartPreferenceController.getSlotInformation())
+                .isEqualTo("Sunday 4 PM - 6 PM");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 67% to 65%");
     }
 
     @Test
@@ -405,8 +440,10 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 0;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
-                "7:01 AM - 8 AM");
+        assertThat(mBatteryChartPreferenceController.getSlotInformation())
+                .isEqualTo("7:01 AM - 8 AM");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 100% to 99%");
     }
 
     @Test
@@ -415,8 +452,9 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 3;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
-                "12 PM - now");
+        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo("12 PM - now");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 95% to 66%");
     }
 
     @Test
@@ -425,8 +463,10 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 0;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(
-                "7:01 AM - now");
+        assertThat(mBatteryChartPreferenceController.getSlotInformation())
+                .isEqualTo("7:01 AM - now");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 100% to 66%");
     }
 
     @Test
@@ -485,7 +525,7 @@ public final class BatteryChartPreferenceControllerTest {
     private BatteryChartPreferenceController createController() {
         final BatteryChartPreferenceController controller =
                 new BatteryChartPreferenceController(
-                        mContext, /*lifecycle=*/ null, mSettingsActivity);
+                        mContext, /* lifecycle= */ null, mSettingsActivity);
         controller.mPrefContext = mContext;
         return controller;
     }

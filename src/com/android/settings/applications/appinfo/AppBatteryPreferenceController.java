@@ -124,8 +124,9 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                     mParent.getMetricsCategory(),
                     mBatteryDiffEntry,
                     Utils.formatPercentage(
-                            mBatteryDiffEntry.getPercentage(), /* round */ true),
-                    /*slotInformation=*/ null, /*showTimeInformation=*/ false);
+                            mBatteryDiffEntry.getPercentage(), /*round=*/ true),
+                    /*slotInformation=*/ null, /*showTimeInformation=*/ false,
+                    /*anomalyHintPrefKey=*/ null, /*anomalyHintText=*/ null);
             return true;
         }
 

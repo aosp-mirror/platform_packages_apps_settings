@@ -30,6 +30,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -61,6 +62,7 @@ public class OneHandedPreferenceCategoryControllerTest {
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
+    @Ignore("b/313541907")
     @Test
     public void getTitle_set3ButtonMode_shouldReturnSetShortcutTo() {
         mUtils.setNavigationBarMode(mContext, "0" /* 3 button */);

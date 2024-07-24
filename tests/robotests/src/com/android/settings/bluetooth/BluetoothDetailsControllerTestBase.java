@@ -29,7 +29,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -39,8 +38,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+        com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal.class,
+})
 public abstract class BluetoothDetailsControllerTestBase {
 
     protected Context mContext;
@@ -140,7 +144,8 @@ public abstract class BluetoothDetailsControllerTestBase {
                 .setAddress("B4:B0:34:B5:3B:1B")
                 .setMajorDeviceClass(BluetoothClass.Device.Major.AUDIO_VIDEO)
                 .setConnected(true)
-                .setConnectionSummary(mContext.getString(R.string.bluetooth_connected));
+                .setConnectionSummary(
+                        mContext.getString(com.android.settingslib.R.string.bluetooth_connected));
     }
 
     /**

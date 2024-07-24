@@ -51,6 +51,7 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
 
     static final int DIALOG_CONFIRM_SYSTEM_DEFAULT = 1;
     static final int DIALOG_NOT_AVAILABLE_LOCALE = 2;
+    static final int DIALOG_ADD_SYSTEM_LOCALE = 3;
 
     static final String ARG_DIALOG_TYPE = "arg_dialog_type";
     static final String ARG_TARGET_LOCALE = "arg_target_locale";
@@ -95,7 +96,8 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
             mShouldKeepDialog = savedInstanceState.getBoolean(ARG_SHOW_DIALOG, false);
             // Keep the dialog if user rotates the device, otherwise close the confirm system
             // default dialog only when user changes the locale.
-            if (type == DIALOG_CONFIRM_SYSTEM_DEFAULT && !mShouldKeepDialog) {
+            if ((type == DIALOG_CONFIRM_SYSTEM_DEFAULT || type == DIALOG_ADD_SYSTEM_LOCALE)
+                    && !mShouldKeepDialog) {
                 dismiss();
             }
         }
@@ -185,14 +187,15 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
             Bundle arguments = dialogFragment.getArguments();
             mDialogType = arguments.getInt(ARG_DIALOG_TYPE);
             mLocaleInfo = (LocaleStore.LocaleInfo) arguments.getSerializable(ARG_TARGET_LOCALE);
-            mMetricsFeatureProvider = FeatureFactory.getFactory(
-                    mContext).getMetricsFeatureProvider();
+            mMetricsFeatureProvider =
+                    FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
             mParent = parentFragment;
         }
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            if (mDialogType == DIALOG_CONFIRM_SYSTEM_DEFAULT) {
+            if (mDialogType == DIALOG_CONFIRM_SYSTEM_DEFAULT
+                    || mDialogType == DIALOG_ADD_SYSTEM_LOCALE) {
                 int result = Activity.RESULT_CANCELED;
                 boolean changed = false;
                 if (which == DialogInterface.BUTTON_POSITIVE) {
@@ -201,9 +204,12 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                 }
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
-                bundle.putInt(ARG_DIALOG_TYPE, DIALOG_CONFIRM_SYSTEM_DEFAULT);
+                bundle.putInt(ARG_DIALOG_TYPE, mDialogType);
+                bundle.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, mLocaleInfo);
                 intent.putExtras(bundle);
-                mParent.onActivityResult(DIALOG_CONFIRM_SYSTEM_DEFAULT, result, intent);
+                mParent.onActivityResult(mDialogType, result, intent);
+                mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_CHANGE_LANGUAGE,
+                        changed);
             }
             mShouldKeepDialog = false;
         }
@@ -226,6 +232,15 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                             R.string.title_unavailable_locale), mLocaleInfo.getFullNameNative());
                     dialogContent.mMessage = mContext.getString(R.string.desc_unavailable_locale);
                     dialogContent.mPositiveButton = mContext.getString(R.string.okay);
+                    break;
+                case DIALOG_ADD_SYSTEM_LOCALE:
+                    dialogContent.mTitle = String.format(mContext.getString(
+                                    R.string.title_system_locale_addition),
+                            mLocaleInfo.getFullNameNative());
+                    dialogContent.mMessage = mContext.getString(
+                            R.string.desc_system_locale_addition);
+                    dialogContent.mPositiveButton = mContext.getString(R.string.add);
+                    dialogContent.mNegativeButton = mContext.getString(R.string.cancel);
                     break;
                 default:
                     break;

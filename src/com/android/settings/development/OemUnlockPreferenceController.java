@@ -159,7 +159,7 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     }
 
     private void updateOemUnlockSettingDescription() {
-        int oemUnlockSummary = R.string.oem_unlock_enable_summary;
+        int oemUnlockSummary = com.android.settingslib.R.string.oem_unlock_enable_summary;
         if (isBootloaderUnlocked()) {
             oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_bootloader_unlocked;
         } else if (isSimLockedDevice()) {
@@ -203,7 +203,7 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
         final ChooseLockSettingsHelper.Builder builder =
                 new ChooseLockSettingsHelper.Builder(mActivity, mFragment);
         return builder.setRequestCode(requestCode)
-                .setTitle(resources.getString(R.string.oem_unlock_enable))
+                .setTitle(resources.getString(com.android.settingslib.R.string.oem_unlock_enable))
                 .show();
     }
 

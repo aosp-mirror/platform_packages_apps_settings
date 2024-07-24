@@ -23,7 +23,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.UserHandle
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -79,12 +79,14 @@ class AppLanguagesListModel(private val context: Context) : AppListModel<AppLang
     ) = recordListFlow.filterItem { it.isAppLocaleSupported }
 
     @Composable
-    override fun getSummary(option: Int, record: AppLanguagesRecord): State<String> =
-        remember(record.app) {
+    override fun getSummary(option: Int, record: AppLanguagesRecord): () -> String {
+        val summary by remember(record.app) {
             flow {
                 emit(getSummary(record.app))
             }.flowOn(Dispatchers.IO)
         }.collectAsStateWithLifecycle(initialValue = stringResource(R.string.summary_placeholder))
+        return { summary }
+    }
 
     private fun getSummary(app: ApplicationInfo): String =
         AppLocaleDetails.getSummary(context, app).toString()

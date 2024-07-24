@@ -17,18 +17,18 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.widget.SettingsMainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /** Preference controller for captioning more options. */
 public class CaptioningTogglePreferenceController extends TogglePreferenceController
-        implements OnMainSwitchChangeListener {
+        implements OnCheckedChangeListener {
 
     private final CaptionHelper mCaptionHelper;
 
@@ -63,7 +63,7 @@ public class CaptioningTogglePreferenceController extends TogglePreferenceContro
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked != isChecked()) {
             setChecked(isChecked);
         }

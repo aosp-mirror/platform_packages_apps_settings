@@ -52,8 +52,6 @@
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Widget.ActionBar</item>
 
-        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
-
         <item name="preferenceBackgroundColor">@drawable/preference_background</item>
 
         <!-- For AndroidX AlertDialog -->
@@ -88,7 +86,6 @@
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Widget.ActionBar.SubSettings</item>
 
-        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
@@ -109,23 +106,9 @@
         <item name="android:textColorHint">?android:attr/textColorSecondary</item>
     </style>
 
-    <style name="ThemeOverlay.SwitchBar.Settings.Base" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar">
-        <item name="android:elevation">1dp</item>
-        <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
-        <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
-        <item name="switchBarBackgroundColor">@color/switchbar_background_color</item>
-        <item name="switchBarBackgroundActivatedColor">?android:attr/colorAccent</item>
-        <item name="switchBarRestrictionIcon">@*android:drawable/ic_info</item>
-    </style>
-
-    <style name="ThemeOverlay.SwitchBar.Settings" parent="ThemeOverlay.SwitchBar.Settings.Base"/>
-
-    <style name="Widget.SwitchBar.Switch" parent="@android:style/Widget.Material.CompoundButton.Switch">
-        <item name="android:trackTint">@color/switchbar_switch_track_tint</item>
-        <item name="android:thumbTint">@color/switchbar_switch_thumb_tint</item>
-        <item name="android:minHeight">@dimen/min_tap_target_size</item>
-        <item name="android:minWidth">@dimen/min_tap_target_size</item>
-    </style>
+    <!-- TODO: Clean up this -->
+    <style name="ThemeOverlay.SwitchBar.Settings"
+        parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar" />
 
     <style name="ThemeOverlay.AlertDialog" parent="@android:style/ThemeOverlay.Material.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
@@ -240,6 +223,7 @@
 
     <style name="Theme.Panel.Material" parent="Theme.Panel">
         <item name="android:switchStyle">@style/Switch.SettingsLib</item>
+        <item name="switchStyle">@style/SwitchCompat.SettingsLib</item>
 
         <item name="notification_importance_button_background_color_unselected">@android:color/transparent</item>
         <item name="notification_importance_button_border_color_unselected">@android:color/system_outline_variant_light</item>

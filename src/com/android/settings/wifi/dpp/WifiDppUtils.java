@@ -30,6 +30,8 @@ import android.os.Looper;
 import android.os.UserHandle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.security.keystore.KeyGenParameterSpec;
+import android.security.keystore.KeyProperties;
 import android.text.TextUtils;
 
 import com.android.settings.R;
@@ -37,8 +39,18 @@ import com.android.settings.Utils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.wifitrackerlib.WifiEntry;
 
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.util.List;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
 
 /**
  * Here are the items shared by both WifiDppConfiguratorActivity & WifiDppEnrolleeActivity
@@ -96,6 +108,8 @@ public class WifiDppUtils {
     static final int EASY_CONNECT_EVENT_SUCCESS = 1;
 
     private static final Duration VIBRATE_DURATION_QR_CODE_RECOGNITION = Duration.ofMillis(3);
+
+    private static final String AES_CBC_PKCS7_PADDING = "AES/CBC/PKCS7Padding";
 
     /**
      * Returns whether the device support WiFi DPP.
@@ -367,6 +381,48 @@ public class WifiDppUtils {
     }
 
     /**
+     * Checks whether the device is unlocked recently.
+     *
+     * @param keyStoreAlias key
+     * @param seconds how many seconds since the device is unlocked
+     * @return whether the device is unlocked within the time
+     */
+    public static boolean isUnlockedWithinSeconds(String keyStoreAlias, int seconds) {
+        try {
+            Cipher cipher = Cipher.getInstance(AES_CBC_PKCS7_PADDING);
+            cipher.init(Cipher.ENCRYPT_MODE, generateSecretKey(keyStoreAlias, seconds));
+            cipher.doFinal();
+            return true;
+        } catch (NoSuchPaddingException
+                 | IllegalBlockSizeException
+                 | NoSuchAlgorithmException
+                 | BadPaddingException
+                 | InvalidKeyException e) {
+            return false;
+        }
+    }
+
+    private static SecretKey generateSecretKey(String keyStoreAlias, int seconds) {
+        KeyGenParameterSpec spec = new KeyGenParameterSpec
+                .Builder(keyStoreAlias, KeyProperties.PURPOSE_ENCRYPT)
+                .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+                .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                .setUserAuthenticationRequired(true)
+                .setUserAuthenticationParameters(
+                        seconds,
+                        KeyProperties.AUTH_DEVICE_CREDENTIAL | KeyProperties.AUTH_BIOMETRIC_STRONG)
+                .build();
+        try {
+            KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES);
+            keyGenerator.init(spec);
+            return keyGenerator.generateKey();
+        } catch (NoSuchAlgorithmException
+                 | InvalidAlgorithmParameterException e) {
+            return null;
+        }
+    }
+
+    /**
      * Shows authentication screen to confirm credentials (pin, pattern or password) for the current
      * user of the device.
      *
@@ -396,8 +452,7 @@ public class WifiDppUtils {
             final int userId = UserHandle.myUserId();
 
             final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(context)
-                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title))
-                    .setUseDefaultSubtitle();
+                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title));
 
             if (keyguardManager.isDeviceSecure()) {
                 builder.setDeviceCredentialAllowed(true);

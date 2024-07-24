@@ -221,7 +221,7 @@ public class PanelFragment extends Fragment {
         final String callingPackageName =
                 arguments.getString(SettingsPanelActivity.KEY_CALLING_PACKAGE_NAME);
 
-        mPanel = FeatureFactory.getFactory(activity)
+        mPanel = FeatureFactory.getFeatureFactory()
                 .getPanelFeatureProvider()
                 .getPanel(activity, arguments);
 
@@ -235,7 +235,7 @@ public class PanelFragment extends Fragment {
             getLifecycle().addObserver((LifecycleObserver) mPanel);
         }
 
-        mMetricsProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
+        mMetricsProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         updateProgressBar();
 

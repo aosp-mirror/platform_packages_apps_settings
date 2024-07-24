@@ -18,6 +18,11 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
+
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -25,25 +30,33 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 /** Tests for {@link TrackpadNotificationsPreferenceController} */
 @RunWith(RobolectricTestRunner.class)
 public class TrackpadNotificationsPreferenceControllerTest {
+    @Rule
+    public MockitoRule rule = MockitoJUnit.rule();
 
     private static final String PREFERENCE_KEY = "gesture_notifications";
     private static final String SETTING_KEY = Settings.Secure.TRACKPAD_GESTURE_NOTIFICATION_ENABLED;
 
     private Context mContext;
     private TrackpadNotificationsPreferenceController mController;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new TrackpadNotificationsPreferenceController(mContext, PREFERENCE_KEY);
     }
 
@@ -65,6 +78,10 @@ public class TrackpadNotificationsPreferenceControllerTest {
         int result = Settings.Secure.getInt(mContext.getContentResolver(), SETTING_KEY, 1);
 
         assertThat(result).isEqualTo(1);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(),
+                eq(SettingsEnums.ACTION_GESTURE_NOTIFICATION_CHANGED),
+                eq(true));
     }
 
     @Test
@@ -74,6 +91,10 @@ public class TrackpadNotificationsPreferenceControllerTest {
         int result = Settings.Secure.getInt(mContext.getContentResolver(), SETTING_KEY, 1);
 
         assertThat(result).isEqualTo(0);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(),
+                eq(SettingsEnums.ACTION_GESTURE_NOTIFICATION_CHANGED),
+                eq(false));
     }
 
     @Test

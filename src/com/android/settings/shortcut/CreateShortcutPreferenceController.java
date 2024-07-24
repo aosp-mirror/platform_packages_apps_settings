@@ -86,7 +86,7 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mShortcutManager = context.getSystemService(ShortcutManager.class);
         mPackageManager = context.getPackageManager();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context)
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory()
                 .getMetricsFeatureProvider();
     }
 

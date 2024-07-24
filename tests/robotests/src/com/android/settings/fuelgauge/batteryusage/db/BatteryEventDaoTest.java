@@ -57,22 +57,23 @@ public final class BatteryEventDaoTest {
     @After
     public void closeDb() {
         mDatabase.close();
-        BatteryStateDatabase.setBatteryStateDatabase(/*database=*/ null);
+        BatteryStateDatabase.setBatteryStateDatabase(/* database= */ null);
     }
-
 
     @Test
     public void getLastFullChargeTimestamp_normalFlow_expectedBehavior() throws Exception {
-        mBatteryEventDao.insert(BatteryEventEntity.newBuilder()
-                .setTimestamp(TIMESTAMP1)
-                .setBatteryEventType(3)
-                .setBatteryLevel(100)
-                .build());
-        mBatteryEventDao.insert(BatteryEventEntity.newBuilder()
-                .setTimestamp(TIMESTAMP2)
-                .setBatteryEventType(4)
-                .setBatteryLevel(96)
-                .build());
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(TIMESTAMP1)
+                        .setBatteryEventType(3)
+                        .setBatteryLevel(100)
+                        .build());
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(TIMESTAMP2)
+                        .setBatteryEventType(4)
+                        .setBatteryLevel(96)
+                        .build());
 
         final Cursor cursor = mBatteryEventDao.getLastFullChargeTimestamp();
         assertThat(cursor.getCount()).isEqualTo(1);
@@ -83,11 +84,12 @@ public final class BatteryEventDaoTest {
     @Test
     public void getLastFullChargeTimestamp_noLastFullChargeTime_returns0() throws Exception {
         mBatteryEventDao.clearAll();
-        mBatteryEventDao.insert(BatteryEventEntity.newBuilder()
-                .setTimestamp(TIMESTAMP2)
-                .setBatteryEventType(4)
-                .setBatteryLevel(96)
-                .build());
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(TIMESTAMP2)
+                        .setBatteryEventType(4)
+                        .setBatteryLevel(96)
+                        .build());
 
         final Cursor cursor = mBatteryEventDao.getLastFullChargeTimestamp();
 
@@ -98,26 +100,25 @@ public final class BatteryEventDaoTest {
 
     @Test
     public void getAllAfter_normalFlow_returnExpectedResult() {
-        mBatteryEventDao.insert(BatteryEventEntity.newBuilder()
-                .setTimestamp(100L)
-                .setBatteryEventType(1)
-                .setBatteryLevel(66)
-                .build());
-        mBatteryEventDao.insert(BatteryEventEntity.newBuilder()
-                .setTimestamp(200L)
-                .setBatteryEventType(2)
-                .setBatteryLevel(88)
-                .build());
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(100L)
+                        .setBatteryEventType(1)
+                        .setBatteryLevel(66)
+                        .build());
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(200L)
+                        .setBatteryEventType(2)
+                        .setBatteryLevel(88)
+                        .build());
 
         final Cursor cursor = mBatteryEventDao.getAllAfter(160L, List.of(1, 2));
         assertThat(cursor.getCount()).isEqualTo(1);
         cursor.moveToFirst();
-        assertThat(cursor.getLong(cursor.getColumnIndex(KEY_TIMESTAMP)))
-                .isEqualTo(200L);
-        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_EVENT_TYPE)))
-                .isEqualTo(2);
-        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_LEVEL)))
-                .isEqualTo(88);
+        assertThat(cursor.getLong(cursor.getColumnIndex(KEY_TIMESTAMP))).isEqualTo(200L);
+        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_EVENT_TYPE))).isEqualTo(2);
+        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_LEVEL))).isEqualTo(88);
 
         mBatteryEventDao.clearAll();
         assertThat(mBatteryEventDao.getAll()).isEmpty();
@@ -125,26 +126,51 @@ public final class BatteryEventDaoTest {
 
     @Test
     public void getAllAfter_filterBatteryTypes_returnExpectedResult() {
-        mBatteryEventDao.insert(BatteryEventEntity.newBuilder()
-                .setTimestamp(100L)
-                .setBatteryEventType(1)
-                .setBatteryLevel(66)
-                .build());
-        mBatteryEventDao.insert(BatteryEventEntity.newBuilder()
-                .setTimestamp(200L)
-                .setBatteryEventType(2)
-                .setBatteryLevel(88)
-                .build());
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(100L)
+                        .setBatteryEventType(1)
+                        .setBatteryLevel(66)
+                        .build());
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(200L)
+                        .setBatteryEventType(2)
+                        .setBatteryLevel(88)
+                        .build());
 
         final Cursor cursor = mBatteryEventDao.getAllAfter(0L, List.of(1));
         assertThat(cursor.getCount()).isEqualTo(1);
         cursor.moveToFirst();
-        assertThat(cursor.getLong(cursor.getColumnIndex(KEY_TIMESTAMP)))
-                .isEqualTo(100L);
-        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_EVENT_TYPE)))
-                .isEqualTo(1);
-        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_LEVEL)))
-                .isEqualTo(66);
+        assertThat(cursor.getLong(cursor.getColumnIndex(KEY_TIMESTAMP))).isEqualTo(100L);
+        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_EVENT_TYPE))).isEqualTo(1);
+        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_LEVEL))).isEqualTo(66);
+
+        mBatteryEventDao.clearAll();
+        assertThat(mBatteryEventDao.getAll()).isEmpty();
+    }
+
+    @Test
+    public void getAllAfter_filterTimestamp_returnExpectedResult() {
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(100L)
+                        .setBatteryEventType(1)
+                        .setBatteryLevel(66)
+                        .build());
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(200L)
+                        .setBatteryEventType(1)
+                        .setBatteryLevel(88)
+                        .build());
+
+        final Cursor cursor = mBatteryEventDao.getAllAfter(200L, List.of(1));
+        assertThat(cursor.getCount()).isEqualTo(1);
+        cursor.moveToFirst();
+        assertThat(cursor.getLong(cursor.getColumnIndex(KEY_TIMESTAMP))).isEqualTo(200L);
+        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_EVENT_TYPE))).isEqualTo(1);
+        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_LEVEL))).isEqualTo(88);
 
         mBatteryEventDao.clearAll();
         assertThat(mBatteryEventDao.getAll()).isEmpty();

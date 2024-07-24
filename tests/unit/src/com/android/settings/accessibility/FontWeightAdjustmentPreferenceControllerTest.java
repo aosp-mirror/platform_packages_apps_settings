@@ -27,6 +27,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.core.BasePreferenceController;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,6 +50,11 @@ public class FontWeightAdjustmentPreferenceControllerTest {
         mPreference = new SwitchPreference(mContext);
         mController = new FontWeightAdjustmentPreferenceController(
                 mContext, "font_weight_adjustment");
+    }
+
+    @After
+    public void teardown() {
+        Settings.Secure.resetToDefaults(mContext.getContentResolver(), /* tag= */ null);
     }
 
     @Test

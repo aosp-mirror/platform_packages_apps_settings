@@ -38,8 +38,8 @@ public class BatteryFirstUseDatePreferenceController extends BasePreferenceContr
 
     public BatteryFirstUseDatePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mBatterySettingsFeatureProvider = FeatureFactory.getFactory(
-                context).getBatterySettingsFeatureProvider();
+        mBatterySettingsFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getBatterySettingsFeatureProvider();
         mBatteryManager = mContext.getSystemService(BatteryManager.class);
     }
 

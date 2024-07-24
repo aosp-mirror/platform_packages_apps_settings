@@ -21,7 +21,7 @@ import android.os.SystemProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -57,13 +57,13 @@ public class BluetoothAbsoluteVolumePreferenceController extends
     public void updateState(Preference preference) {
         final boolean isEnabled = SystemProperties.getBoolean(
                 BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false /* default */);
-        ((SwitchPreference) mPreference).setChecked(isEnabled);
+        ((TwoStatePreference) mPreference).setChecked(isEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         SystemProperties.set(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, "false");
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

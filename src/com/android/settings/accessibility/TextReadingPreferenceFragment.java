@@ -62,7 +62,7 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     static final String BOLD_TEXT_KEY = "toggle_force_bold_text";
     static final String HIGH_TEXT_CONTRAST_KEY = "toggle_high_text_contrast_preference";
     static final String RESET_KEY = "reset";
-    private static final String PREVIEW_KEY = "preview";
+    static final String PREVIEW_KEY = "preview";
     private static final String NEED_RESET_SETTINGS = "need_reset_settings";
     private static final String LAST_PREVIEW_INDEX = "last_preview_index";
     private static final int UNKNOWN_INDEX = -1;
@@ -116,6 +116,11 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
                     mPreviewController.setCurrentItem(lastPreviewIndex);
                 }
             }
+        }
+
+        if (Flags.enableColorContrastControl()) {
+            // High text contrast toggle will be added inside Color Contrast page on V+.
+            removePreference(HIGH_TEXT_CONTRAST_KEY);
         }
     }
 
@@ -203,10 +208,12 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         mFontWeightAdjustmentController.setEntryPoint(mEntryPoint);
         controllers.add(mFontWeightAdjustmentController);
 
-        final HighTextContrastPreferenceController highTextContrastController =
-                new HighTextContrastPreferenceController(context, HIGH_TEXT_CONTRAST_KEY);
-        highTextContrastController.setEntryPoint(mEntryPoint);
-        controllers.add(highTextContrastController);
+        if (!Flags.enableColorContrastControl()) {
+            final HighTextContrastPreferenceController highTextContrastController =
+                    new HighTextContrastPreferenceController(context, HIGH_TEXT_CONTRAST_KEY);
+            highTextContrastController.setEntryPoint(mEntryPoint);
+            controllers.add(highTextContrastController);
+        }
 
         final TextReadingResetController resetController =
                 new TextReadingResetController(context, RESET_KEY,

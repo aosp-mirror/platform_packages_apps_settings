@@ -74,7 +74,7 @@ public class ContrastPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
-    @Ignore
+    @Ignore("b/313614100")
     @Test
     public void testHandlePreferenceTreeClick() {
         Preference preference = new Preference(mContext);

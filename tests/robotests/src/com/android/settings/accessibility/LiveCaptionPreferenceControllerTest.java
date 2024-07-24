@@ -21,13 +21,19 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.Context;
 import android.content.pm.ResolveInfo;
+import android.provider.Settings;
+
+import androidx.preference.Preference;
+import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPackageManager;
 
@@ -36,18 +42,21 @@ import java.util.Collections;
 @RunWith(RobolectricTestRunner.class)
 public class LiveCaptionPreferenceControllerTest {
 
+    private Context mContext;
     private LiveCaptionPreferenceController mController;
+    private Preference mLiveCaptionPreference;
 
     @Before
     public void setUp() {
-        mController = new LiveCaptionPreferenceController(RuntimeEnvironment.application,
-                "test_key");
+        mContext = ApplicationProvider.getApplicationContext();
+        mController = new LiveCaptionPreferenceController(mContext, "test_key");
+        mLiveCaptionPreference = new Preference(mContext);
+        mLiveCaptionPreference.setSummary(R.string.live_caption_summary);
     }
 
     @Test
     public void getAvailabilityStatus_canResolveIntent_shouldReturnAvailable() {
-        final ShadowPackageManager pm = Shadows.shadowOf(
-                RuntimeEnvironment.application.getPackageManager());
+        final ShadowPackageManager pm = Shadows.shadowOf(mContext.getPackageManager());
         pm.addResolveInfoForIntent(LiveCaptionPreferenceController.LIVE_CAPTION_INTENT,
                 new ResolveInfo());
 
@@ -56,11 +65,37 @@ public class LiveCaptionPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_noResolveIntent_shouldReturnUnavailable() {
-        final ShadowPackageManager pm = Shadows.shadowOf(
-                RuntimeEnvironment.application.getPackageManager());
+        final ShadowPackageManager pm = Shadows.shadowOf(mContext.getPackageManager());
         pm.setResolveInfosForIntent(LiveCaptionPreferenceController.LIVE_CAPTION_INTENT,
                 Collections.emptyList());
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void updateState_liveCaptionEnabled_subtextShowsOnSummary() {
+        setLiveCaptionEnabled(true);
+
+        mController.updateState(mLiveCaptionPreference);
+
+        assertThat(mLiveCaptionPreference.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.live_caption_summary)
+        );
+    }
+
+    @Test
+    public void updateState_liveCaptionDisabled_subtextShowsOffSummary() {
+        setLiveCaptionEnabled(false);
+
+        mController.updateState(mLiveCaptionPreference);
+
+        assertThat(mLiveCaptionPreference.getSummary()).isEqualTo(
+                mContext.getString(R.string.live_caption_summary)
+        );
+    }
+
+    private void setLiveCaptionEnabled(boolean enabled) {
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.ODI_CAPTIONS_ENABLED,
+                enabled ? AccessibilityUtil.State.ON: AccessibilityUtil.State.OFF);
     }
 }

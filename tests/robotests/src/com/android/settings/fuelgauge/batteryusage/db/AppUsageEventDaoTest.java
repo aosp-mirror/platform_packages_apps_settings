@@ -61,13 +61,13 @@ public final class AppUsageEventDaoTest {
         BatteryTestUtils.insertDataToAppUsageEventTable(
                 mContext, USER_ID2, TIMESTAMP2, PACKAGE_NAME2);
         BatteryTestUtils.insertDataToAppUsageEventTable(
-                mContext, USER_ID1, TIMESTAMP1, PACKAGE_NAME1, /*multiple=*/ true);
+                mContext, USER_ID1, TIMESTAMP1, PACKAGE_NAME1, /* multiple= */ true);
     }
 
     @After
     public void closeDb() {
         mDatabase.close();
-        BatteryStateDatabase.setBatteryStateDatabase(/*database=*/ null);
+        BatteryStateDatabase.setBatteryStateDatabase(/* database= */ null);
     }
 
     @Test
@@ -147,7 +147,7 @@ public final class AppUsageEventDaoTest {
 
     @Test
     public void getInstance_createNewInstance() throws Exception {
-        BatteryStateDatabase.setBatteryStateDatabase(/*database=*/ null);
+        BatteryStateDatabase.setBatteryStateDatabase(/* database= */ null);
         assertThat(BatteryStateDatabase.getInstance(mContext)).isNotNull();
     }
 

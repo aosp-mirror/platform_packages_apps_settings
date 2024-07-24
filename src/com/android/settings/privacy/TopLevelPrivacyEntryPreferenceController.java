@@ -16,8 +16,9 @@
 
 package com.android.settings.privacy;
 
-import android.annotation.NonNull;
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;

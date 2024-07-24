@@ -24,7 +24,6 @@ import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
-import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
@@ -42,9 +41,10 @@ object LanguageAndInputPageProvider : SettingsPageProvider {
 
     @Composable
     fun EntryItem() {
+        val summary = stringResource(R.string.language_settings)
         Preference(object : PreferenceModel {
             override val title = stringResource(R.string.language_settings)
-            override val summary = stringResource(R.string.language_settings).toState()
+            override val summary = { summary }
             override val onClick = navigator(name)
             override val icon = @Composable {
                 SettingsIcon(imageVector = Icons.Outlined.Language)

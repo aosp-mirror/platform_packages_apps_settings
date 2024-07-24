@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.credentials;
 
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -26,8 +25,11 @@ import android.content.pm.ServiceInfo;
 import android.credentials.CredentialManager;
 import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
+import android.credentials.flags.Flags;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -36,6 +38,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 
@@ -43,7 +46,6 @@ import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
@@ -64,6 +66,8 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
     private CredentialManager mCredentialManager;
     private int mIntentSenderUserId = -1;
+
+    private static final Handler sMainHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,6 +114,18 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             setCancelListener(target.mCancelListener);
             super.onCreate(savedInstanceState);
         }
+
+        @Override
+        protected CharSequence getPositiveButtonText() {
+            final Bundle bundle = getArguments();
+            if (TextUtils.isEmpty(bundle.getString(EXTRA_KEY))) {
+                return getContext().getString(
+                    R.string.credman_confirmation_turn_off_positive_button);
+            }
+
+            return getContext().getString(
+                R.string.credman_confirmation_change_provider_positive_button);
+        }
     }
 
     @Override
@@ -132,17 +148,44 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             new PackageMonitor() {
                 @Override
                 public void onPackageAdded(String packageName, int uid) {
-                    ThreadUtils.postOnMainThread(() -> update());
+                    sMainHandler.post(
+                            () -> {
+                                // See b/296164461 for context
+                                if (getContext() == null) {
+                                    Log.w(TAG, "context is null");
+                                    return;
+                                }
+
+                                update();
+                            });
                 }
 
                 @Override
                 public void onPackageModified(String packageName) {
-                    ThreadUtils.postOnMainThread(() -> update());
+                    sMainHandler.post(
+                            () -> {
+                                // See b/296164461 for context
+                                if (getContext() == null) {
+                                    Log.w(TAG, "context is null");
+                                    return;
+                                }
+
+                                update();
+                            });
                 }
 
                 @Override
                 public void onPackageRemoved(String packageName, int uid) {
-                    ThreadUtils.postOnMainThread(() -> update());
+                    sMainHandler.post(
+                            () -> {
+                                // See b/296164461 for context
+                                if (getContext() == null) {
+                                    Log.w(TAG, "context is null");
+                                    return;
+                                }
+
+                                update();
+                            });
                 }
             };
 
@@ -278,14 +321,18 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             final String message =
                     getContext()
                             .getString(
-                                    R.string.credman_confirmation_message);
+                                    Flags.newSettingsUi()
+                                            ? R.string.credman_confirmation_message_new_ui
+                                            : R.string.credman_confirmation_message);
             return Html.fromHtml(message);
         }
         final CharSequence appName = appInfo.loadLabel();
         final String message =
                 getContext()
                         .getString(
-                                R.string.credman_autofill_confirmation_message,
+                                Flags.newSettingsUi()
+                                        ? R.string.credman_autofill_confirmation_message_new_ui
+                                        : R.string.credman_autofill_confirmation_message,
                                 Html.escapeHtml(appName));
         return Html.fromHtml(message);
     }

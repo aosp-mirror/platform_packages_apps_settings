@@ -26,7 +26,7 @@ import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -45,7 +45,7 @@ public class FloatingMenuFadePreferenceController extends BasePreferenceControll
     final ContentObserver mContentObserver;
 
     @VisibleForTesting
-    SwitchPreference mPreference;
+    TwoStatePreference mPreference;
 
     public FloatingMenuFadePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -81,7 +81,7 @@ public class FloatingMenuFadePreferenceController extends BasePreferenceControll
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final SwitchPreference switchPreference = (SwitchPreference) preference;
+        final TwoStatePreference switchPreference = (TwoStatePreference) preference;
 
         switchPreference.setChecked(getFloatingMenuFadeValue() == ON);
     }

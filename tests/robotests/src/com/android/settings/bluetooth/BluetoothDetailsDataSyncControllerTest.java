@@ -25,7 +25,7 @@ import android.companion.CompanionDeviceManager;
 import android.companion.datatransfer.PermissionSyncRequest;
 
 import androidx.preference.PreferenceCategory;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -56,7 +56,7 @@ public class BluetoothDetailsDataSyncControllerTest extends BluetoothDetailsCont
     private CompanionDeviceManager mCompanionDeviceManager;
 
     private PermissionSyncRequest mPermissionSyncRequest;
-    private SwitchPreference mPermSyncPreference;
+    private TwoStatePreference mPermSyncPreference;
 
     @Before
     public void setUp() {
@@ -87,12 +87,20 @@ public class BluetoothDetailsDataSyncControllerTest extends BluetoothDetailsCont
     }
 
     @Test
-    public void isAvailable_hasAssociations_returnsTrue() {
+    public void isAvailable_hasAssociations_returnTrue() {
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void refresh_permSyncNull_preferenceVisibleFalse() {
+    public void refresh_noAssociations_checkPreferenceInvisible() {
+        mController.mAssociationId = DUMMY_ASSOCIATION_ID;
+        mController.refresh();
+
+        assertThat(mPermSyncPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void refresh_permSyncNull_checkPreferenceInvisible() {
         mPermissionSyncRequest = null;
         when(mCompanionDeviceManager.getPermissionSyncRequest(ASSOCIATION_ID)).thenReturn(
                 mPermissionSyncRequest);
@@ -102,7 +110,7 @@ public class BluetoothDetailsDataSyncControllerTest extends BluetoothDetailsCont
     }
 
     @Test
-    public void refresh_permSyncEnabled_preferenceCheckedTrue() {
+    public void refresh_permSyncEnabled_checkPreferenceOn() {
         mPermissionSyncRequest.setUserConsented(true);
         mController.refresh();
 
@@ -111,7 +119,7 @@ public class BluetoothDetailsDataSyncControllerTest extends BluetoothDetailsCont
     }
 
     @Test
-    public void refresh_permSyncDisabled_preferenceCheckedFalse() {
+    public void refresh_permSyncDisabled_checkPreferenceOff() {
         mPermissionSyncRequest.setUserConsented(false);
         mController.refresh();
 

@@ -31,7 +31,8 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.datausage.DataUsageUtils
 import com.android.settings.datausage.lib.DataUsageLib
-import com.android.settingslib.net.DataUsageController
+import com.android.settings.datausage.lib.NetworkCycleDataRepository
+import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTimeRange
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -44,9 +45,6 @@ class DataUsagePreferenceController(context: Context, key: String) :
 
     private lateinit var preference: Preference
     private var networkTemplate: NetworkTemplate? = null
-
-    @VisibleForTesting
-    var dataUsageControllerFactory: (Context) -> DataUsageController = { DataUsageController(it) }
 
     fun init(subId: Int) {
         mSubId = subId
@@ -64,7 +62,7 @@ class DataUsagePreferenceController(context: Context, key: String) :
         preference = screen.findPreference(preferenceKey)!!
     }
 
-    fun whenViewCreated(viewLifecycleOwner: LifecycleOwner) {
+    override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 update()
@@ -83,16 +81,12 @@ class DataUsagePreferenceController(context: Context, key: String) :
     }
 
     private suspend fun update() {
-        val summary = withContext(Dispatchers.Default) {
+        val (summary, enabled) = withContext(Dispatchers.Default) {
             networkTemplate = getNetworkTemplate()
-            getDataUsageSummary()
+            getDataUsageSummaryAndEnabled()
         }
-        if (summary == null) {
-            preference.isEnabled = false
-        } else {
-            preference.isEnabled = true
-            preference.summary = summary
-        }
+        preference.isEnabled = enabled
+        preference.summary = summary
     }
 
     private fun getNetworkTemplate(): NetworkTemplate? = when {
@@ -103,25 +97,23 @@ class DataUsagePreferenceController(context: Context, key: String) :
         else -> null
     }
 
-    private fun getDataUsageSummary(): String? {
-        val networkTemplate = networkTemplate ?: return null
-        val controller = dataUsageControllerFactory(mContext).apply {
-            setSubscriptionId(mSubId)
-        }
-        val usageInfo = controller.getDataUsageInfo(networkTemplate)
-        if (usageInfo != null && usageInfo.usageLevel > 0) {
+    @VisibleForTesting
+    fun createNetworkCycleDataRepository(): NetworkCycleDataRepository? =
+        networkTemplate?.let { NetworkCycleDataRepository(mContext, it) }
+
+    private fun getDataUsageSummaryAndEnabled(): Pair<String?, Boolean> {
+        val repository = createNetworkCycleDataRepository() ?: return null to false
+
+        repository.loadFirstCycle()?.let { usageData ->
             return mContext.getString(
                 R.string.data_usage_template,
-                DataUsageUtils.formatDataUsage(mContext, usageInfo.usageLevel),
-                usageInfo.period,
-            )
+                usageData.formatUsage(mContext),
+                usageData.formatDateRange(mContext),
+            ) to (usageData.usage > 0 || repository.queryUsage(AllTimeRange).usage > 0)
         }
 
-        return controller.getHistoricalUsageLevel(networkTemplate).takeIf { it > 0 }?.let {
-            mContext.getString(
-                R.string.data_used_template,
-                DataUsageUtils.formatDataUsage(mContext, it),
-            )
-        }
+        val allTimeUsage = repository.queryUsage(AllTimeRange)
+        if (allTimeUsage.usage > 0) return allTimeUsage.getDataUsedString(mContext) to true
+        return null to false
     }
 }

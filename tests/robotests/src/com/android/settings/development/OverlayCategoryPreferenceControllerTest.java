@@ -31,6 +31,9 @@ import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
 
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 
 import org.junit.Before;
@@ -40,16 +43,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceScreen;
-
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class OverlayCategoryPreferenceControllerTest {
 
     private static final OverlayInfo ONE_DISABLED = createFakeOverlay("overlay.one", false, 1);

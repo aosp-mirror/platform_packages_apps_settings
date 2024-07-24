@@ -37,12 +37,16 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
+import com.android.settingslib.utils.ThreadUtils;
+
+import com.google.common.base.Supplier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,13 +71,13 @@ public final class Utils {
     public static int getConnectionStateSummary(int connectionState) {
         switch (connectionState) {
             case BluetoothProfile.STATE_CONNECTED:
-                return R.string.bluetooth_connected;
+                return com.android.settingslib.R.string.bluetooth_connected;
             case BluetoothProfile.STATE_CONNECTING:
-                return R.string.bluetooth_connecting;
+                return com.android.settingslib.R.string.bluetooth_connecting;
             case BluetoothProfile.STATE_DISCONNECTED:
-                return R.string.bluetooth_disconnected;
+                return com.android.settingslib.R.string.bluetooth_disconnected;
             case BluetoothProfile.STATE_DISCONNECTING:
-                return R.string.bluetooth_disconnecting;
+                return com.android.settingslib.R.string.bluetooth_disconnecting;
             default:
                 return 0;
         }
@@ -106,7 +110,7 @@ public final class Utils {
 
     @VisibleForTesting
     static void showConnectingError(Context context, String name, LocalBluetoothManager manager) {
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider().visible(context,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().visible(context,
                 SettingsEnums.PAGE_UNKNOWN, SettingsEnums.ACTION_SETTINGS_BLUETOOTH_CONNECT_ERROR,
                 0);
         showError(context, name, R.string.bluetooth_connecting_error_message, manager);
@@ -271,5 +275,23 @@ public final class Utils {
                 + " , cachedBluetoothDevice = " + cachedBluetoothDevice
                 + " , deviceList = " + cachedBluetoothDevices);
         return cachedBluetoothDevices;
+    }
+
+    /**
+     * Preloads the values and run the Runnable afterwards.
+     * @param suppliers the value supplier, should be a memoized supplier
+     * @param runnable the runnable to be run after value is preloaded
+     */
+    public static void preloadAndRun(List<Supplier<?>> suppliers, Runnable runnable) {
+        if (!Flags.enableOffloadBluetoothOperationsToBackgroundThread()) {
+            runnable.run();
+            return;
+        }
+        ThreadUtils.postOnBackgroundThread(() -> {
+            for (Supplier<?> supplier : suppliers) {
+                supplier.get();
+            }
+            ThreadUtils.postOnMainThread(runnable);
+        });
     }
 }

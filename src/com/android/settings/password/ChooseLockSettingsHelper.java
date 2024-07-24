@@ -18,8 +18,6 @@ package com.android.settings.password;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.KeyguardManager;
@@ -33,6 +31,8 @@ import android.os.UserManager;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
@@ -117,6 +117,14 @@ public final class ChooseLockSettingsHelper {
      */
     public static final String EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY =
             "device_password_requirement_only";
+
+    /** Intent extra for passing the screen title resource ID to show in the set lock screen. */
+    public static final String EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE =
+            "choose_lock_setup_screen_title";
+
+    /** Intent extra for passing the description resource ID to show in the set lock screen. */
+    public static final String EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION =
+            "choose_lock_setup_screen_description";
 
     @VisibleForTesting @NonNull LockPatternUtils mLockPatternUtils;
     @NonNull private final Activity mActivity;

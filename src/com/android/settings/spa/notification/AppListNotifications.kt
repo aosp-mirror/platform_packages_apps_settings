@@ -23,7 +23,6 @@ import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
-import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.template.app.AppListPage
@@ -41,9 +40,10 @@ object AppListNotificationsPageProvider : SettingsPageProvider {
 
     @Composable
     fun EntryItem() {
+        val summary = stringResource(R.string.app_notification_field_summary)
         Preference(object : PreferenceModel {
             override val title = stringResource(R.string.app_notifications_title)
-            override val summary = stringResource(R.string.app_notification_field_summary).toState()
+            override val summary = { summary }
             override val onClick = navigator(name)
         })
     }

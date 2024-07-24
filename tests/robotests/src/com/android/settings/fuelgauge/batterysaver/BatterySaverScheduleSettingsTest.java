@@ -1,6 +1,7 @@
 package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -90,18 +91,25 @@ public final class BatterySaverScheduleSettingsTest {
     }
 
     private void setSchedule(int scheduleType, int schedulePercentage) {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AUTOMATIC_POWER_SAVE_MODE, scheduleType);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, schedulePercentage);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                Settings.Global.AUTOMATIC_POWER_SAVE_MODE,
+                scheduleType);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL,
+                schedulePercentage);
     }
 
     private void verifySchedule(String scheduleTypeKey, int schedulePercentage) {
         waitAWhile();
-        verify(mMetricsFeatureProvider).action(SettingsEnums.FUELGAUGE_BATTERY_SAVER,
-                SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
-                scheduleTypeKey, schedulePercentage);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        SettingsEnums.FUELGAUGE_BATTERY_SAVER,
+                        SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
+                        SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
+                        scheduleTypeKey,
+                        schedulePercentage);
     }
 
     private void waitAWhile() {

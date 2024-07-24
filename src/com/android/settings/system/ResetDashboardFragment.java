@@ -65,6 +65,11 @@ public class ResetDashboardFragment extends DashboardFragment {
         if (SubscriptionUtil.isSimHardwareVisible(context)) {
             use(EraseEuiccDataController.class).setFragment(this);
         }
+        FactoryResetPreferenceController factoryResetPreferenceController =
+                use(FactoryResetPreferenceController.class);
+        if (factoryResetPreferenceController != null) {
+            factoryResetPreferenceController.setFragment(this);
+        }
     }
 
     @Override

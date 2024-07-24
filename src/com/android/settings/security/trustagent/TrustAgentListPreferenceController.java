@@ -74,7 +74,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
     public TrustAgentListPreferenceController(Context context, SettingsPreferenceFragment host,
             Lifecycle lifecycle) {
         super(context);
-        final SecurityFeatureProvider provider = FeatureFactory.getFactory(context)
+        final SecurityFeatureProvider provider = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider();
         mHost = host;
         mLockPatternUtils = provider.getLockPatternUtils(context);

@@ -15,10 +15,12 @@
  */
 
 package com.android.settings.dashboard.profileselector;
+
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.accounts.AccountPersonalDashboardFragment;
+import com.android.settings.accounts.AccountPrivateDashboardFragment;
 import com.android.settings.accounts.AccountWorkProfileDashboardFragment;
 
 /**
@@ -28,10 +30,12 @@ public class ProfileSelectAccountFragment extends ProfileSelectFragment {
 
     @Override
     public Fragment[] getFragments() {
-        return new Fragment[] {
-                new AccountPersonalDashboardFragment(),
-                new AccountWorkProfileDashboardFragment()
-        };
+        return ProfileSelectFragment.getFragments(
+                getContext(),
+                null /* bundle */,
+                AccountPersonalDashboardFragment::new,
+                AccountWorkProfileDashboardFragment::new,
+                AccountPrivateDashboardFragment::new);
     }
 
     @Override

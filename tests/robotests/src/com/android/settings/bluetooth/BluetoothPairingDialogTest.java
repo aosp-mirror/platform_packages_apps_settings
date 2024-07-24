@@ -33,7 +33,6 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -276,7 +275,7 @@ public class BluetoothPairingDialogTest {
     }
 
     @Test
-    public void contactSharingCheckbox_conditionIsReady_showsUi() {
+    public void contactSharingToggle_conditionIsReady_showsUi() {
         // set the dialog variant to confirmation/consent
         when(controller.getDialogType()).thenReturn(BluetoothPairingController.CONFIRMATION_DIALOG);
         // set a fake device name and pretend the profile has not been set up for it
@@ -286,14 +285,14 @@ public class BluetoothPairingDialogTest {
         // build the fragment
         BluetoothPairingDialogFragment frag = makeFragment();
 
-        // verify that the checkbox is visible and that the device name is correct
-        CheckBox sharingCheckbox =
-                frag.getmDialog().findViewById(R.id.phonebook_sharing_message_confirm_pin);
-        assertThat(sharingCheckbox.getVisibility()).isEqualTo(View.VISIBLE);
+        // verify that the toggle is visible
+        View sharingToggle =
+                frag.getmDialog().findViewById(R.id.phonebook_sharing);
+        assertThat(sharingToggle.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
-    public void contactSharingCheckbox_conditionIsNotReady_doesNotShowUi() {
+    public void contactSharingToggle_conditionIsNotReady_doesNotShowUi() {
         // set the dialog variant to confirmation/consent
         when(controller.getDialogType()).thenReturn(BluetoothPairingController.CONFIRMATION_DIALOG);
         // set a fake device name and pretend the profile has been set up for it
@@ -303,10 +302,10 @@ public class BluetoothPairingDialogTest {
         // build the fragment
         BluetoothPairingDialogFragment frag = makeFragment();
 
-        // verify that the checkbox is gone
-        CheckBox sharingCheckbox =
-                frag.getmDialog().findViewById(R.id.phonebook_sharing_message_confirm_pin);
-        assertThat(sharingCheckbox.getVisibility()).isEqualTo(View.GONE);
+        // verify that the toggle is gone
+        View sharingToggle =
+                frag.getmDialog().findViewById(R.id.phonebook_sharing);
+        assertThat(sharingToggle.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test

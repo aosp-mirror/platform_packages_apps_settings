@@ -23,7 +23,9 @@ import android.util.FeatureFlagUtils;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
+@SearchIndexable
 public class TrackpadTouchGestureSettings extends DashboardFragment {
 
     private static final String TAG = "TrackpadTouchGestureSettings";
@@ -50,7 +52,7 @@ public class TrackpadTouchGestureSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.trackpad_settings) {
+            new BaseSearchIndexProvider(R.xml.trackpad_gesture_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return FeatureFlagUtils

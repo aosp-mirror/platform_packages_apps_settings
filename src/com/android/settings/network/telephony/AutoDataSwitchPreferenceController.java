@@ -37,11 +37,12 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionsChangeListener;
@@ -64,7 +65,7 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
     private static final String LOG_TAG = "AutoDataSwitchPrefCtrl";
 
-    private SwitchPreference mPreference;
+    private TwoStatePreference mPreference;
     private SubscriptionsChangeListener mChangeListener;
     private TelephonyManager mManager;
     private MobileDataContentObserver mMobileDataContentObserver;
@@ -75,7 +76,7 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
     public AutoDataSwitchPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     void init(int subId) {
@@ -194,7 +195,8 @@ public class AutoDataSwitchPreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        if (!SubscriptionManager.isValidSubscriptionId(subId)
+        if (Flags.isDualSimOnboardingEnabled()
+                || !SubscriptionManager.isValidSubscriptionId(subId)
                 || SubscriptionManager.getDefaultDataSubscriptionId() == subId
                 || (!hasMobileData())) {
             return CONDITIONALLY_UNAVAILABLE;

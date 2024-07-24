@@ -28,7 +28,7 @@
             android:title="@string/biometric_settings_use_biometric_unlock_phone"
             settings:keywords="@string/keywords_face_unlock"
             settings:controller="com.android.settings.biometrics.face.FaceSettingsKeyguardPreferenceController"/>
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="security_settings_face_app"
             android:title="@string/biometric_settings_use_biometric_for_apps"
             settings:keywords="@string/keywords_face_unlock"
@@ -44,14 +44,14 @@
     <PreferenceCategory
         android:key="security_settings_face_manage_category"
         android:title="@string/security_settings_face_settings_preferences_category">
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="security_settings_face_require_attention"
             android:title="@string/security_settings_face_settings_require_attention"
             android:summary="@string/security_settings_face_settings_require_attention_details"
             settings:keywords="@string/keywords_face_unlock"
             settings:controller="com.android.settings.biometrics.face.FaceSettingsAttentionPreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="security_settings_face_require_confirmation"
             android:title="@string/security_settings_face_settings_require_confirmation"
             android:summary="@string/security_settings_face_settings_require_confirmation_details"

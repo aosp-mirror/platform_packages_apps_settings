@@ -35,33 +35,10 @@
 
         <Space
             android:layout_width="@dimen/secondary_app_icon_size"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/battery_hints_chip_bg_ripple">
+            android:layout_marginEnd="16dp"/>
 
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_gravity="center_vertical|start"
-                android:contentDescription="@string/battery_hints_warning_icon_a11y"
-                android:src="@drawable/ic_battery_tips_warning_icon" />
-
-            <TextView
-                android:id="@+id/warning_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:layout_gravity="center_vertical|start"
-                android:textAlignment="viewStart"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?android:attr/textColorPrimary"/>
-        </LinearLayout>
+        <include layout="@layout/power_anomaly_hints" />
 
     </LinearLayout>
 </LinearLayout>

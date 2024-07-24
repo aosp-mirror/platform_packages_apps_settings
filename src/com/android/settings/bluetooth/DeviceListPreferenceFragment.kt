@@ -36,9 +36,11 @@ import com.android.settings.R
 import com.android.settings.dashboard.RestrictedDashboardFragment
 import com.android.settingslib.bluetooth.BluetoothCallback
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter
+import com.android.settingslib.bluetooth.BluetoothUtils
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager
 import com.android.settingslib.bluetooth.LocalBluetoothManager
+import com.android.settingslib.flags.Flags
 import java.util.concurrent.ConcurrentHashMap
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -55,7 +57,12 @@ import kotlinx.coroutines.withContext
 abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
     RestrictedDashboardFragment(restrictedKey), BluetoothCallback {
 
-    private var filter: BluetoothDeviceFilter.Filter? = BluetoothDeviceFilter.ALL_FILTER
+    enum class ScanType {
+        CLASSIC, LE
+    }
+
+    private var scanType = ScanType.CLASSIC
+    private var filter: BluetoothDeviceFilter.Filter = BluetoothDeviceFilter.ALL_FILTER
     private var leScanFilters: List<ScanFilter>? = null
 
     @JvmField
@@ -91,7 +98,8 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
     private var showDevicesWithoutNames = false
 
     protected fun setFilter(filterType: Int) {
-        filter = BluetoothDeviceFilter.getFilter(filterType)
+        this.scanType = ScanType.CLASSIC
+        this.filter = BluetoothDeviceFilter.getFilter(filterType)
     }
 
     /**
@@ -101,7 +109,7 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
      * @param leScanFilters list of settings to filter scan result
      */
     fun setFilter(leScanFilters: List<ScanFilter>?) {
-        filter = null
+        this.scanType = ScanType.LE
         this.leScanFilters = leScanFilters
     }
 
@@ -191,11 +199,14 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
 
     private suspend fun addDevice(cachedDevice: CachedBluetoothDevice) =
         withContext(Dispatchers.Default) {
-            // TODO(b/289189853): Replace checking if `filter` is null or not to decide which type
-            // of Bluetooth scanning method will be used
-            val filterMatched = filter == null || filter!!.matches(cachedDevice.device) == true
-            // Prevent updates while the list shows one of the state messages
-            if (mBluetoothAdapter!!.state == BluetoothAdapter.STATE_ON && filterMatched) {
+            if (mBluetoothAdapter!!.state != BluetoothAdapter.STATE_ON) {
+                // Prevent updates while the list shows one of the state messages
+                return@withContext
+            }
+            // LE filters was already applied at scan time. We just need to check if the classic
+            // filter matches
+            if (scanType == ScanType.LE
+                || (scanType == ScanType.CLASSIC && filter.matches(cachedDevice.device) == true)) {
                 createDevicePreference(cachedDevice)
             }
         }
@@ -207,6 +218,14 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
                 "Trying to create a device preference before the list group/category exists!",
             )
             return
+        }
+        if (Flags.enableHideExclusivelyManagedBluetoothDevice()) {
+            if (cachedDevice.device.bondState == BluetoothDevice.BOND_BONDED
+                && BluetoothUtils.isExclusivelyManagedBluetoothDevice(
+                    prefContext, cachedDevice.device)) {
+                Log.d(TAG, "Trying to create preference for a exclusively managed device")
+                return
+            }
         }
         // Only add device preference when it's not found in the map and there's no other state
         // message showing in the list
@@ -277,19 +296,19 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
 
     @VisibleForTesting
     open fun startScanning() {
-        if (filter != null) {
-            startClassicScanning()
-        } else if (leScanFilters != null) {
+        if (scanType == ScanType.LE) {
             startLeScanning()
+        } else {
+            startClassicScanning()
         }
     }
 
     @VisibleForTesting
     open fun stopScanning() {
-        if (filter != null) {
-            stopClassicScanning()
-        } else if (leScanFilters != null) {
+        if (scanType == ScanType.LE) {
             stopLeScanning()
+        } else {
+            stopClassicScanning()
         }
     }
 

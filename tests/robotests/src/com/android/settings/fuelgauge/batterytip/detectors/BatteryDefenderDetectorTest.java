@@ -38,8 +38,7 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class BatteryDefenderDetectorTest {
 
-    @Mock
-    private BatteryInfo mBatteryInfo;
+    @Mock private BatteryInfo mBatteryInfo;
     private BatteryDefenderDetector mBatteryDefenderDetector;
     private Context mContext;
 
@@ -53,8 +52,7 @@ public class BatteryDefenderDetectorTest {
 
         mContext = ApplicationProvider.getApplicationContext();
 
-        mBatteryDefenderDetector = new BatteryDefenderDetector(
-            mBatteryInfo, mContext);
+        mBatteryDefenderDetector = new BatteryDefenderDetector(mBatteryInfo, mContext);
 
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
     }

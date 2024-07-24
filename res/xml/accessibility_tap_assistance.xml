@@ -27,14 +27,16 @@
         android:summary="%s"
         android:persistent="false"
         android:title="@string/accessibility_long_press_timeout_preference_title"
-        settings:controller="com.android.settings.accessibility.SelectLongPressTimeoutPreferenceController"/>
+        settings:controller="com.android.settings.accessibility.SelectLongPressTimeoutPreferenceController"
+        settings:keywords="@string/keywords_touch_and_hold_delay"/>
 
     <Preference
         android:fragment="com.android.settings.accessibility.AccessibilityControlTimeoutPreferenceFragment"
         android:key="accessibility_control_timeout_preference_fragment"
         android:persistent="false"
         android:title="@string/accessibility_setting_item_control_timeout_title"
-        settings:controller="com.android.settings.accessibility.AccessibilityTimeoutPreferenceController"/>
+        settings:controller="com.android.settings.accessibility.AccessibilityTimeoutPreferenceController"
+        settings:keywords="@string/keywords_accessibility_timeout"/>
 
     <Preference
         android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"

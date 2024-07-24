@@ -47,6 +47,11 @@ public final class DeviceLockPreferenceController extends BasePreferenceControll
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        if (mDeviceLockManager == null) {
+            Log.w(TAG, "DeviceLockManager is not available");
+            preference.setVisible(false);
+            return;
+        }
         mDeviceLockManager.getKioskApps(mContext.getMainExecutor(),
                 result -> {
                     // if kiosk apps present on the device, the device is provisioned by Device Lock

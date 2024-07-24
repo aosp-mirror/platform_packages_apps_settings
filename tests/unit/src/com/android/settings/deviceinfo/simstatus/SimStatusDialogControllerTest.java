@@ -35,7 +35,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -53,7 +52,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
-import android.telephony.UiccPortInfo;
 import android.telephony.euicc.EuiccManager;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -61,7 +59,6 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.R;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -73,13 +70,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 @RunWith(AndroidJUnit4.class)
 public class SimStatusDialogControllerTest {
@@ -405,7 +399,7 @@ public class SimStatusDialogControllerTest {
         mController.initialize();
 
         verify(mDialog).setText(IMS_REGISTRATION_STATE_VALUE_ID,
-                mContext.getString(R.string.ims_reg_status_registered));
+                mContext.getString(com.android.settingslib.R.string.ims_reg_status_registered));
     }
 
     @Test
@@ -418,7 +412,7 @@ public class SimStatusDialogControllerTest {
         mController.initialize();
 
         verify(mDialog).setText(IMS_REGISTRATION_STATE_VALUE_ID,
-                mContext.getString(R.string.ims_reg_status_not_registered));
+                mContext.getString(com.android.settingslib.R.string.ims_reg_status_not_registered));
     }
 
     @Test

@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import android.content.Context;
-import android.net.NetworkStats;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.Process;
@@ -34,8 +33,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.datausage.AppDataUsage;
-import com.android.settings.datausage.DataUsageUtils;
-import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.datausage.lib.NetworkTemplates;
+import com.android.settings.spa.app.appinfo.AppDataUsagePreferenceKt;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -46,6 +45,10 @@ import com.android.settingslib.net.NetworkCycleDataForUidLoader;
 
 import java.util.List;
 
+/**
+ * @deprecated Will be removed, use {@link AppDataUsagePreferenceKt} instead.
+ */
+@Deprecated(forRemoval = true)
 public class AppDataUsagePreferenceController extends AppInfoPreferenceControllerBase
         implements LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>>, LifecycleObserver,
         OnResume, OnPause {
@@ -92,7 +95,7 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
 
     @Override
     public Loader<List<NetworkCycleDataForUid>> onCreateLoader(int id, Bundle args) {
-        final NetworkTemplate template = getTemplate(mContext);
+        final NetworkTemplate template = NetworkTemplates.INSTANCE.getDefaultTemplate(mContext);
         final int uid = mParent.getAppEntry().info.uid;
 
         final NetworkCycleDataForUidLoader.Builder builder =
@@ -145,18 +148,6 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
                             DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH));
         }
         return mContext.getString(R.string.computing_size);
-    }
-
-    private static NetworkTemplate getTemplate(Context context) {
-        if (SubscriptionUtil.isSimHardwareVisible(context)
-                && DataUsageUtils.hasReadyMobileRadio(context)) {
-            return new NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE).setMeteredness(
-                    NetworkStats.METERED_YES).build();
-        }
-        if (DataUsageUtils.hasWifiRadio(context)) {
-            return new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build();
-        }
-        return new NetworkTemplate.Builder(NetworkTemplate.MATCH_ETHERNET).build();
     }
 
     @VisibleForTesting

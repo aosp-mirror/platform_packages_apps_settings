@@ -51,9 +51,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link ToggleScreenReaderPreferenceFragmentForSetupWizard}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ToggleScreenReaderPreferenceFragmentForSetupWizardTest {
 
     private static final String TEST_TITLE = "test_title";

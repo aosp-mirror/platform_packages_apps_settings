@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -31,7 +30,7 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
 
     private static final String TAG = "OPTIMIZED_PREF";
 
-    @VisibleForTesting String KEY_OPTIMIZED_PREF = "optimized_pref";
+    @VisibleForTesting static final String KEY_OPTIMIZED_PREF = "optimized_preference";
     @VisibleForTesting BatteryOptimizeUtils mBatteryOptimizeUtils;
 
     public OptimizedPreferenceController(Context context, int uid, String packageName) {
@@ -46,24 +45,13 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        if (mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()) {
-            Log.d(TAG, "disable preference for " + mBatteryOptimizeUtils.getPackageName());
-            preference.setEnabled(true);
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
-            return;
-        }
+        preference.setEnabled(mBatteryOptimizeUtils.isSelectorPreferenceEnabled());
 
-        if (mBatteryOptimizeUtils.getAppOptimizationMode()
-                == BatteryOptimizeUtils.MODE_OPTIMIZED) {
-            Log.d(TAG, "is optimized states");
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
-        } else {
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
-            if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-                Log.d(TAG, "is system or default app, disable pref");
-                preference.setEnabled(false);
-            }
-        }
+        final boolean isOptimized =
+                mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()
+                        || mBatteryOptimizeUtils.getAppOptimizationMode()
+                                == BatteryOptimizeUtils.MODE_OPTIMIZED;
+        ((SelectorWithWidgetPreference) preference).setChecked(isOptimized);
     }
 
     @Override

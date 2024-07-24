@@ -33,7 +33,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.compat.CompatibilityChangeConfig;
 import com.android.internal.compat.CompatibilityChangeInfo;
@@ -171,7 +172,7 @@ public class PlatformCompatDashboard extends DashboardFragment {
     Preference createPreferenceForChange(Context context, CompatibilityChangeInfo change,
             CompatibilityChangeConfig configMappings) {
         final boolean currentValue = configMappings.isChangeEnabled(change.getId());
-        final SwitchPreference item = new SwitchPreference(context);
+        final TwoStatePreference item = new SwitchPreferenceCompat(context);
         final String changeName =
                 change.getName() != null ? change.getName() : "Change_" + change.getId();
         item.setSummary(changeName);

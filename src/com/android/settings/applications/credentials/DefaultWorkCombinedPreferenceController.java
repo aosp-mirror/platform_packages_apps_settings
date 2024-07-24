@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.os.UserHandle;
 
 import com.android.settings.Utils;
-import com.android.settingslib.applications.DefaultAppInfo;
 
 public class DefaultWorkCombinedPreferenceController extends DefaultCombinedPreferenceController {
     private final UserHandle mUserHandle;
@@ -42,17 +41,6 @@ public class DefaultWorkCombinedPreferenceController extends DefaultCombinedPref
     @Override
     public String getPreferenceKey() {
         return "default_credman_autofill_main_work";
-    }
-
-    @Override
-    protected Intent getSettingIntent(DefaultAppInfo info) {
-        if (info == null) {
-            return null;
-        }
-        final AutofillSettingIntentProvider intentProvider =
-                new AutofillSettingIntentProvider(
-                        mContext, mUserHandle.getIdentifier(), info.getKey());
-        return intentProvider.getIntent();
     }
 
     @Override

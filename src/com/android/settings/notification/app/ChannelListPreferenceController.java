@@ -18,6 +18,7 @@ package com.android.settings.notification.app;
 
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
+import static com.android.server.notification.Flags.notificationHideUnusedChannels;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -34,7 +35,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -57,6 +58,8 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
 
     private List<NotificationChannelGroup> mChannelGroupList;
     private PreferenceCategory mPreference;
+
+    private boolean mShowAll;
 
     public ChannelListPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
@@ -96,7 +99,16 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... unused) {
-                mChannelGroupList = mBackend.getGroups(mAppRow.pkg, mAppRow.uid).getList();
+                if (notificationHideUnusedChannels()) {
+                    if (mShowAll) {
+                        mChannelGroupList = mBackend.getGroups(mAppRow.pkg, mAppRow.uid).getList();
+                    } else {
+                        mChannelGroupList = mBackend.getGroupsWithRecentBlockedFilter(mAppRow.pkg,
+                                mAppRow.uid).getList();
+                    }
+                } else {
+                    mChannelGroupList = mBackend.getGroups(mAppRow.pkg, mAppRow.uid).getList();
+                }
                 Collections.sort(mChannelGroupList, CHANNEL_GROUP_COMPARATOR);
                 return null;
             }
@@ -109,6 +121,10 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 updateFullList(mPreference, mChannelGroupList);
             }
         }.execute();
+    }
+
+    protected void setShowAll(boolean showAll) {
+        mShowAll = showAll;
     }
 
     /**
@@ -313,7 +329,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 && isChannelGroupBlockable(group));
         preference.setChecked(!group.isBlocked());
         preference.setOnPreferenceClickListener(preference1 -> {
-            final boolean allowGroup = ((SwitchPreference) preference1).isChecked();
+            final boolean allowGroup = ((TwoStatePreference) preference1).isChecked();
             group.setBlocked(!allowGroup);
             mBackend.updateChannelGroup(mAppRow.pkg, mAppRow.uid, group);
 

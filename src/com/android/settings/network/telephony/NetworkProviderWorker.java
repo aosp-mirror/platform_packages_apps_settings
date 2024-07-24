@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import static com.android.settings.network.InternetUpdater.INTERNET_ETHERNET;
+import static com.android.settings.network.MobileIconGroupExtKt.getSummaryForSub;
 import static com.android.settingslib.mobile.MobileMappings.getIconKey;
 import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
 
@@ -284,19 +285,14 @@ public class NetworkProviderWorker extends WifiScanWorker implements
 
     private String updateNetworkTypeName(Context context, Config config,
             TelephonyDisplayInfo telephonyDisplayInfo, int subId) {
-        String iconKey = getIconKey(telephonyDisplayInfo);
-        int resId = mapIconSets(config).get(iconKey).dataContentDescription;
         if (mWifiPickerTrackerHelper != null
                 && mWifiPickerTrackerHelper.isCarrierNetworkActive()) {
             MobileIconGroup carrierMergedWifiIconGroup = TelephonyIcons.CARRIER_MERGED_WIFI;
-            resId = carrierMergedWifiIconGroup.dataContentDescription;
-            return resId != 0
-                    ? SubscriptionManager.getResourcesForSubId(context, subId)
-                    .getString(resId) : "";
+            return getSummaryForSub(carrierMergedWifiIconGroup, context, subId);
         }
 
-        return resId != 0
-                ? SubscriptionManager.getResourcesForSubId(context, subId).getString(resId) : "";
+        String iconKey = getIconKey(telephonyDisplayInfo);
+        return getSummaryForSub(mapIconSets(config).get(iconKey), context, subId);
     }
 
     @VisibleForTesting

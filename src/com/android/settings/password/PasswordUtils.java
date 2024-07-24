@@ -18,7 +18,6 @@ package com.android.settings.password;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
-import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.IActivityManager;
 import android.content.Context;
@@ -32,6 +31,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -107,7 +108,7 @@ public final class PasswordUtils extends com.android.settingslib.Utils {
     /** Setup screen lock options button under the Glif Header. */
     public static void setupScreenLockOptionsButton(Context context, View view, Button optButton) {
         final LinearLayout headerLayout = view.findViewById(
-                R.id.sud_layout_header);
+                com.google.android.setupdesign.R.id.sud_layout_header);
         final TextView sucTitleView = headerLayout.findViewById(R.id.suc_layout_title);
         if (headerLayout != null && sucTitleView != null) {
             final ViewGroup.MarginLayoutParams layoutTitleParams =

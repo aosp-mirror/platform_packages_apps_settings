@@ -32,12 +32,12 @@ public final class BatteryEventEntityTest {
         final int batteryEventType = 1;
         final int batteryLevel = 66;
 
-        BatteryEventEntity entity = BatteryEventEntity
-                .newBuilder()
-                .setTimestamp(timestamp)
-                .setBatteryEventType(batteryEventType)
-                .setBatteryLevel(batteryLevel)
-                .build();
+        BatteryEventEntity entity =
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(timestamp)
+                        .setBatteryEventType(batteryEventType)
+                        .setBatteryLevel(batteryLevel)
+                        .build();
 
         // Verifies the app relative information.
         assertThat(entity.timestamp).isEqualTo(timestamp);

@@ -31,14 +31,17 @@ import com.android.settings.R;
 import com.android.settings.applications.autofill.PasswordsPreferenceController;
 import com.android.settings.applications.credentials.CredentialManagerPreferenceController;
 import com.android.settings.applications.credentials.DefaultCombinedPreferenceController;
+import com.android.settings.applications.credentials.DefaultPrivateCombinedPreferenceController;
 import com.android.settings.applications.credentials.DefaultWorkCombinedPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultPrivateAutofillPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.users.AutoSyncDataPreferenceController;
 import com.android.settings.users.AutoSyncPersonalDataPreferenceController;
+import com.android.settings.users.AutoSyncPrivateDataPreferenceController;
 import com.android.settings.users.AutoSyncWorkDataPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -111,9 +114,11 @@ public class AccountDashboardFragment extends DashboardFragment {
         if (CredentialManager.isServiceEnabled(context)) {
             controllers.add(new DefaultCombinedPreferenceController(context));
             controllers.add(new DefaultWorkCombinedPreferenceController(context));
+            controllers.add(new DefaultPrivateCombinedPreferenceController(context));
         } else {
             controllers.add(new DefaultAutofillPreferenceController(context));
             controllers.add(new DefaultWorkAutofillPreferenceController(context));
+            controllers.add(new DefaultPrivateAutofillPreferenceController(context));
         }
     }
 
@@ -132,6 +137,7 @@ public class AccountDashboardFragment extends DashboardFragment {
         controllers.add(new AutoSyncDataPreferenceController(context, parent));
         controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent));
         controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
+        controllers.add(new AutoSyncPrivateDataPreferenceController(context, parent));
     }
 
     private static int getPreferenceLayoutResId(Context context) {

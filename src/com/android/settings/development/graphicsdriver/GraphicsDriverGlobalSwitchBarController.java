@@ -43,16 +43,13 @@ public class GraphicsDriverGlobalSwitchBarController
                    GraphicsDriverContentObserver.OnGraphicsDriverContentChangedListener,
                    LifecycleObserver, OnStart, OnStop {
 
-    private final Context mContext;
     private final ContentResolver mContentResolver;
-    @VisibleForTesting
-    SwitchWidgetController mSwitchWidgetController;
+    private final SwitchWidgetController mSwitchWidgetController;
     @VisibleForTesting
     GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
     GraphicsDriverGlobalSwitchBarController(
             Context context, SwitchWidgetController switchWidgetController) {
-        mContext = context;
         mContentResolver = context.getContentResolver();
         mGraphicsDriverContentObserver =
                 new GraphicsDriverContentObserver(new Handler(Looper.getMainLooper()), this);

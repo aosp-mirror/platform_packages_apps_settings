@@ -26,11 +26,10 @@ import com.android.settingslib.utils.AsyncLoaderCompat;
  * automatically grab enhanced battery estimates if available or fall back to the system estimate
  * when not available.
  */
-public class BatteryInfoLoader extends AsyncLoaderCompat<BatteryInfo>{
+public class BatteryInfoLoader extends AsyncLoaderCompat<BatteryInfo> {
     private static final String LOG_TAG = "BatteryInfoLoader";
 
-    @VisibleForTesting
-    BatteryUtils mBatteryUtils;
+    @VisibleForTesting BatteryUtils mBatteryUtils;
 
     public BatteryInfoLoader(Context context) {
         super(context);
@@ -38,9 +37,7 @@ public class BatteryInfoLoader extends AsyncLoaderCompat<BatteryInfo>{
     }
 
     @Override
-    protected void onDiscardResult(BatteryInfo result) {
-
-    }
+    protected void onDiscardResult(BatteryInfo result) {}
 
     @Override
     public BatteryInfo loadInBackground() {

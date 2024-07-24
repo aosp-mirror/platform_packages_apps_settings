@@ -26,10 +26,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -43,6 +45,9 @@ public class VibrationSettings extends DashboardFragment {
     private static final String TAG = "VibrationSettings";
 
     private static int getVibrationXmlResourceId(Context context) {
+        if (Flags.separateAccessibilityVibrationSettingsFragments()) {
+            return R.xml.accessibility_vibration_settings;
+        }
         final int supportedIntensities = context.getResources().getInteger(
                 R.integer.config_vibration_supported_intensity_levels);
         return supportedIntensities > 1
@@ -74,6 +79,9 @@ public class VibrationSettings extends DashboardFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        if (Flags.separateAccessibilityVibrationSettingsFragments()) {
+            return super.onCreateView(inflater, container, savedInstanceState);
+        }
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         final RecyclerView rv = getListView();
         final Resources res = view.getResources();
@@ -81,19 +89,30 @@ public class VibrationSettings extends DashboardFragment {
                 R.integer.config_vibration_supported_intensity_levels);
         if (rv != null && supportedIntensities > 1) {
             final int bottom_padding = res.getDimensionPixelSize(
-                    R.dimen.settingslib_listPreferredItemPaddingEnd);
+                    com.android.settingslib.widget.theme.R.dimen.settingslib_listPreferredItemPaddingEnd);
             rv.setPaddingRelative(rv.getPaddingStart(), rv.getPaddingTop(), rv.getPaddingEnd(),
                     rv.getPaddingBottom() + bottom_padding);
         }
         return view;
     }
 
+    @VisibleForTesting
+    static boolean isPageSearchEnabled(Context context) {
+        final int supportedIntensityLevels = context.getResources().getInteger(
+                R.integer.config_vibration_supported_intensity_levels);
+        final boolean hasVibrator = context.getSystemService(Vibrator.class).hasVibrator();
+        if (Flags.separateAccessibilityVibrationSettingsFragments()) {
+            return hasVibrator && supportedIntensityLevels == 1;
+        } else {
+            return hasVibrator;
+        }
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return context.getSystemService(Vibrator.class).hasVibrator();
+                    return VibrationSettings.isPageSearchEnabled(context);
                 }
 
                 @Override

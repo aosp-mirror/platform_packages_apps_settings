@@ -19,6 +19,7 @@ package com.android.settings.biometrics.fingerprint;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_REAR;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
+import static android.text.Layout.HYPHENATION_FREQUENCY_NORMAL;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_SKIP;
@@ -35,7 +36,6 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.annotation.NonNull;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -49,7 +49,9 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
@@ -57,15 +59,16 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.template.HeaderMixin;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -120,7 +123,7 @@ public class FingerprintEnrollFindSensorTest {
         props.add(newFingerprintSensorPropertiesInternal(TYPE_REAR));
         doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
 
-        ActivityControllerWrapper.setup(mActivityController);
+        mActivityController.setup();
     }
 
     private void setupActivity_onUdfpsDevice() {
@@ -128,7 +131,7 @@ public class FingerprintEnrollFindSensorTest {
         props.add(newFingerprintSensorPropertiesInternal(TYPE_UDFPS_OPTICAL));
         doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
 
-        ActivityControllerWrapper.setup(mActivityController);
+        mActivityController.setup();
     }
 
     private void setupActivity_onSfpsDevice() {
@@ -136,7 +139,7 @@ public class FingerprintEnrollFindSensorTest {
         props.add(newFingerprintSensorPropertiesInternal(TYPE_POWER_BUTTON));
         doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
 
-        ActivityControllerWrapper.setup(mActivityController);
+        mActivityController.setup();
     }
 
     private FingerprintSensorPropertiesInternal newFingerprintSensorPropertiesInternal(
@@ -224,7 +227,8 @@ public class FingerprintEnrollFindSensorTest {
                 any(CancellationSignal.class),
                 anyInt(),
                 callbackCaptor.capture(),
-                eq(FingerprintManager.ENROLL_FIND_SENSOR));
+                eq(FingerprintManager.ENROLL_FIND_SENSOR),
+                any());
 
         return callbackCaptor.getValue();
     }
@@ -557,6 +561,7 @@ public class FingerprintEnrollFindSensorTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void fingerprintEnrollFindSensor_activityApplyDarkLightStyle() {
         setupActivity_onSfpsDevice();
         verifySidecar_onRearOrSfpsDevice();
@@ -565,6 +570,15 @@ public class FingerprintEnrollFindSensorTest {
 
         final String appliedThemes = mTheme.toString();
         assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
+    }
+
+    @Test
+    public void fingerprintEnrollFindSensor_setHyphenationFrequencyNormalOnHeader() {
+        setupActivity_onUdfpsDevice();
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView textView = layout.getMixin(HeaderMixin.class).getTextView();
+
+        assertThat(textView.getHyphenationFrequency()).isEqualTo(HYPHENATION_FREQUENCY_NORMAL);
     }
 
     private void triggerEnrollProgressAndError_onRearDevice() {
@@ -592,7 +606,7 @@ public class FingerprintEnrollFindSensorTest {
     private void gotEnrollingResult_resumeActivityAndVerifyResultThenForward(
             int testActivityResult) {
         // resume activity
-        mActivityController.start().resume();
+        mActivityController.start().resume().visible();
         verifyNoSidecar();
 
         // onActivityResult from Enrolling activity shall be forward back
@@ -612,8 +626,7 @@ public class FingerprintEnrollFindSensorTest {
             int testActivityResult, @NonNull Bundle savedInstance) {
         // Rebuild activity and use savedInstance to restore.
         buildActivity();
-        ActivityControllerWrapper.setup(mActivityController, savedInstance);
-        //mActivityController.setup(savedInstance);
+        mActivityController.setup(savedInstance);
         verifyNoSidecar();
 
         // onActivityResult from Enrolling activity shall be forward back

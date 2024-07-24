@@ -21,7 +21,7 @@ import android.net.wifi.WifiManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -59,7 +59,7 @@ public class WifiVerboseLoggingPreferenceController extends DeveloperOptionsPref
     @Override
     public void updateState(Preference preference) {
         final boolean enabled = mWifiManager.isVerboseLoggingEnabled();
-        ((SwitchPreference) mPreference).setChecked(enabled);
+        ((TwoStatePreference) mPreference).setChecked(enabled);
 
     }
 
@@ -67,6 +67,6 @@ public class WifiVerboseLoggingPreferenceController extends DeveloperOptionsPref
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         mWifiManager.setVerboseLoggingEnabled(false);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

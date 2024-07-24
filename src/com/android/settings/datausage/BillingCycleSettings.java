@@ -40,10 +40,11 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.datausage.lib.NetworkTemplates;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -82,8 +83,8 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
     NetworkTemplate mNetworkTemplate;
     private Preference mBillingCycle;
     private Preference mDataWarning;
-    private SwitchPreference mEnableDataWarning;
-    private SwitchPreference mEnableDataLimit;
+    private TwoStatePreference mEnableDataWarning;
+    private TwoStatePreference mEnableDataLimit;
     private Preference mDataLimit;
     private DataUsageController mDataUsageController;
 
@@ -92,8 +93,8 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
             Preference billingCycle,
             Preference dataLimit,
             Preference dataWarning,
-            SwitchPreference enableLimit,
-            SwitchPreference enableWarning) {
+            TwoStatePreference enableLimit,
+            TwoStatePreference enableWarning) {
         services.mPolicyEditor = policyEditor;
         mBillingCycle = billingCycle;
         mDataLimit = dataLimit;
@@ -128,15 +129,14 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         }
 
         if (mNetworkTemplate == null) {
-            mNetworkTemplate = DataUsageUtils.getDefaultTemplate(context,
-                DataUsageUtils.getDefaultSubscriptionId(context));
+            mNetworkTemplate = NetworkTemplates.INSTANCE.getDefaultTemplate(context);
         }
 
         mBillingCycle = findPreference(KEY_BILLING_CYCLE);
-        mEnableDataWarning = (SwitchPreference) findPreference(KEY_SET_DATA_WARNING);
+        mEnableDataWarning = (TwoStatePreference) findPreference(KEY_SET_DATA_WARNING);
         mEnableDataWarning.setOnPreferenceChangeListener(this);
         mDataWarning = findPreference(KEY_DATA_WARNING);
-        mEnableDataLimit = (SwitchPreference) findPreference(KEY_SET_DATA_LIMIT);
+        mEnableDataLimit = (TwoStatePreference) findPreference(KEY_SET_DATA_LIMIT);
         mEnableDataLimit.setOnPreferenceChangeListener(this);
         mDataLimit = findPreference(KEY_DATA_LIMIT);
     }

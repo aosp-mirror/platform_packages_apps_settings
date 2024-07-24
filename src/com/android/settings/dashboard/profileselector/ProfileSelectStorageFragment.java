@@ -193,20 +193,12 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
             return mFragments;
         }
 
-        final Bundle workBundle = new Bundle();
-        workBundle.putInt(EXTRA_PROFILE, ProfileType.WORK);
-        final Fragment workFragment = new StorageCategoryFragment();
-        workFragment.setArguments(workBundle);
-
-        final Bundle personalBundle = new Bundle();
-        personalBundle.putInt(EXTRA_PROFILE, ProfileType.PERSONAL);
-        final Fragment personalFragment = new StorageCategoryFragment();
-        personalFragment.setArguments(personalBundle);
-
-        mFragments = new Fragment[] {
-            personalFragment,
-            workFragment
-        };
+        mFragments = ProfileSelectFragment.getFragments(
+                getContext(),
+                null /* bundle */,
+                StorageCategoryFragment::new,
+                StorageCategoryFragment::new,
+                StorageCategoryFragment::new);
         return mFragments;
     }
 

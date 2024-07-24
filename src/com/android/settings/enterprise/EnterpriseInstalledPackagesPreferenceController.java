@@ -34,8 +34,8 @@ public class EnterpriseInstalledPackagesPreferenceController
 
     public EnterpriseInstalledPackagesPreferenceController(Context context, boolean async) {
         super(context);
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getApplicationFeatureProvider(context);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getApplicationFeatureProvider();
         mAsync = async;
     }
 

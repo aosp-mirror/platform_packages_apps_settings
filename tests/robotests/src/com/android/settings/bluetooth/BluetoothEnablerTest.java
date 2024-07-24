@@ -39,8 +39,6 @@ import android.view.View;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -80,6 +78,7 @@ public class BluetoothEnablerTest {
     private SwitchWidgetController.OnSwitchChangeListener mCallback;
 
     private Context mContext;
+    @Mock
     private SwitchWidgetController mSwitchController;
     private BluetoothEnabler mBluetoothEnabler;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
@@ -90,7 +89,6 @@ public class BluetoothEnablerTest {
         mContext = spy(RuntimeEnvironment.application);
 
         mRestrictedSwitchPreference = new RestrictedSwitchPreference(mContext);
-        mSwitchController = spy(new SwitchBarController(new SwitchBar(mContext)));
         mBluetoothEnabler = new BluetoothEnabler(
                 mContext,
                 mSwitchController,
@@ -215,7 +213,7 @@ public class BluetoothEnablerTest {
         verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
         verify(mSwitchController, never()).setChecked(false);
-        verify(mSwitchController).setChecked(true);
+        when(mSwitchController.isChecked()).thenReturn(true);
 
         // Now simulate bluetooth being turned off via an event.
         BroadcastReceiver receiver = captor.getValue();

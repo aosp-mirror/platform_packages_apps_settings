@@ -39,7 +39,6 @@ import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,7 +52,6 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 /** Tests for {@link AccessibilityButtonFragment}. */
-@Ignore
 @Config(shadows = ShadowFragment.class)
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityButtonFragmentTest {
@@ -69,6 +67,7 @@ public class AccessibilityButtonFragmentTest {
     @Before
     public void setUp() {
         mFragment = spy(new TestAccessibilityButtonFragment(mContext));
+        when(mContext.getResources()).thenReturn(mResources);
         when(mFragment.getResources()).thenReturn(mResources);
         when(mFragment.getActivity()).thenReturn(Robolectric.setupActivity(FragmentActivity.class));
     }

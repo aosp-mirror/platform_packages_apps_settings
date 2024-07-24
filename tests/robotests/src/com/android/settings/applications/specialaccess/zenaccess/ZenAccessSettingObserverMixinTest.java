@@ -29,6 +29,7 @@ import android.provider.Settings;
 
 import androidx.lifecycle.LifecycleOwner;
 
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -38,10 +39,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        ShadowActivityManager.class,
+})
 public class ZenAccessSettingObserverMixinTest {
 
     @Mock

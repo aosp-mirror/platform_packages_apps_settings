@@ -37,6 +37,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType;
 import com.android.settings.deviceinfo.storage.ManageStoragePreferenceController;
 import com.android.settings.deviceinfo.storage.NonCurrentUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
@@ -85,7 +86,7 @@ public class StorageCategoryFragment extends DashboardFragment
 
     private StorageItemPreferenceController mPreferenceController;
     private List<NonCurrentUserController> mNonCurrentUsers;
-    private boolean mIsWorkProfile;
+    private @ProfileType int mProfileType;
     private int mUserId;
     private boolean mIsLoadedFromCache;
     private StorageCacheHelper mStorageCacheHelper;
@@ -163,9 +164,9 @@ public class StorageCategoryFragment extends DashboardFragment
         // These member variables are initialized befoer super.onAttach for
         // createPreferenceControllers to work correctly.
         mUserManager = context.getSystemService(UserManager.class);
-        mIsWorkProfile = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE)
-                == ProfileSelectFragment.ProfileType.WORK;
-        mUserId = Utils.getCurrentUserId(mUserManager, mIsWorkProfile);
+        mProfileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
+        mUserId = Utils.getCurrentUserIdOfType(mUserManager, mProfileType);
+
         mStorageCacheHelper = new StorageCacheHelper(getContext(), mUserId);
 
         super.onAttach(context);
@@ -229,8 +230,12 @@ public class StorageCategoryFragment extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return mIsWorkProfile ? SettingsEnums.SETTINGS_STORAGE_CATEGORY_WORK :
-                SettingsEnums.SETTINGS_STORAGE_CATEGORY;
+        if (mProfileType == ProfileSelectFragment.ProfileType.WORK) {
+            return SettingsEnums.SETTINGS_STORAGE_CATEGORY_WORK;
+        } else if (mProfileType == ProfileSelectFragment.ProfileType.PRIVATE) {
+            return SettingsEnums.SETTINGS_STORAGE_CATEGORY_PRIVATE;
+        }
+        return SettingsEnums.SETTINGS_STORAGE_CATEGORY;
     }
 
     @Override
@@ -248,11 +253,12 @@ public class StorageCategoryFragment extends DashboardFragment
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final StorageManager sm = context.getSystemService(StorageManager.class);
         mPreferenceController = new StorageItemPreferenceController(context, this,
-                null /* volume */, new StorageManagerVolumeProvider(sm), mIsWorkProfile);
+                null /* volume */, new StorageManagerVolumeProvider(sm), mProfileType);
         controllers.add(mPreferenceController);
 
-        mNonCurrentUsers = mIsWorkProfile ? EMPTY_LIST :
-                NonCurrentUserController.getNonCurrentUserControllers(context, mUserManager);
+        mNonCurrentUsers = mProfileType == ProfileSelectFragment.ProfileType.PERSONAL
+                ? NonCurrentUserController.getNonCurrentUserControllers(context, mUserManager)
+                : EMPTY_LIST;
         controllers.addAll(mNonCurrentUsers);
         return controllers;
     }

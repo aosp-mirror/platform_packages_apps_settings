@@ -17,16 +17,25 @@
 package com.android.settings.spa.app.appinfo
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.content.pm.FakeFeatureFlagsImpl
+import android.content.pm.Flags
 import android.content.pm.PackageInfo
+import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
+import com.android.settings.R
+import com.android.settings.flags.Flags as SettingsFlags
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.spa.testutils.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,6 +47,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoSession
 import org.mockito.Spy
+import org.mockito.kotlin.any
 import org.mockito.quality.Strictness
 import org.mockito.Mockito.`when` as whenever
 
@@ -45,6 +55,8 @@ import org.mockito.Mockito.`when` as whenever
 class AppButtonsTest {
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
 
     private lateinit var mockSession: MockitoSession
 
@@ -57,6 +69,12 @@ class AppButtonsTest {
     @Mock
     private lateinit var packageManager: PackageManager
 
+    @Mock
+    private lateinit var packageInstaller: PackageInstaller
+
+    private val featureFlags = FakeFeatureFlagsImpl()
+    private val isHibernationSwitchEnabledStateFlow = MutableStateFlow(true)
+
     @Before
     fun setUp() {
         mockSession = ExtendedMockito.mockitoSession()
@@ -67,8 +85,11 @@ class AppButtonsTest {
         whenever(packageInfoPresenter.context).thenReturn(context)
         whenever(packageInfoPresenter.packageName).thenReturn(PACKAGE_NAME)
         whenever(packageInfoPresenter.userPackageManager).thenReturn(packageManager)
+        whenever(packageManager.getApplicationLabel(any())).thenReturn(APP_LABEL)
+        whenever(packageManager.packageInstaller).thenReturn(packageInstaller)
         whenever(packageManager.getPackageInfo(PACKAGE_NAME, 0)).thenReturn(PACKAGE_INFO)
         whenever(AppUtils.isMainlineModule(packageManager, PACKAGE_NAME)).thenReturn(false)
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
     }
 
     @After
@@ -92,10 +113,79 @@ class AppButtonsTest {
         composeTestRule.onRoot().assertIsDisplayed()
     }
 
-    private fun setContent() {
-        whenever(packageInfoPresenter.flow).thenReturn(MutableStateFlow(PACKAGE_INFO))
+    @Test
+    fun launchButton_displayed_archivingDisabled() {
+        whenever(packageManager.getLaunchIntentForPackage(PACKAGE_NAME)).thenReturn(Intent())
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, false)
+        setFlagsRule.disableFlags(SettingsFlags.FLAG_APP_ARCHIVING)
+        setContent()
+
+        composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app))
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun launchButton_notDisplayed_archivingEnabled() {
+        whenever(packageManager.getLaunchIntentForPackage(PACKAGE_NAME)).thenReturn(Intent())
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+        setContent()
+
+        composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app))
+            .assertIsNotDisplayed()
+    }
+
+    @Test
+    fun uninstallButton_enabled_whenAppIsArchived() {
+        whenever(packageManager.getLaunchIntentForPackage(PACKAGE_NAME)).thenReturn(Intent())
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+        val packageInfo = PackageInfo().apply {
+            applicationInfo = ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                isArchived = true
+            }
+            packageName = PACKAGE_NAME
+        }
+        setContent(packageInfo)
+
+        composeTestRule.onNodeWithText(context.getString(R.string.uninstall_text)).assertIsEnabled()
+    }
+
+    @Test
+    fun archiveButton_displayed_whenAppIsNotArchived() {
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+        val packageInfo = PackageInfo().apply {
+            applicationInfo = ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                isArchived = false
+            }
+            packageName = PACKAGE_NAME
+        }
+        setContent(packageInfo)
+
+        composeTestRule.onNodeWithText(context.getString(R.string.archive)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.restore)).assertIsNotDisplayed()
+    }
+
+    @Test
+    fun restoreButton_displayed_whenAppIsArchived() {
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+        val packageInfo = PackageInfo().apply {
+            applicationInfo = ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                isArchived = true
+            }
+            packageName = PACKAGE_NAME
+        }
+        setContent(packageInfo)
+
+        composeTestRule.onNodeWithText(context.getString(R.string.restore)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.archive)).assertIsNotDisplayed()
+    }
+
+    private fun setContent(packageInfo: PackageInfo = PACKAGE_INFO) {
+        whenever(packageInfoPresenter.flow).thenReturn(MutableStateFlow(packageInfo))
         composeTestRule.setContent {
-            AppButtons(packageInfoPresenter)
+            AppButtons(packageInfoPresenter, isHibernationSwitchEnabledStateFlow, featureFlags)
         }
 
         composeTestRule.delay()
@@ -103,6 +193,7 @@ class AppButtonsTest {
 
     private companion object {
         const val PACKAGE_NAME = "package.name"
+        const val APP_LABEL = "App label"
         val PACKAGE_INFO = PackageInfo().apply {
             applicationInfo = ApplicationInfo().apply {
                 packageName = PACKAGE_NAME

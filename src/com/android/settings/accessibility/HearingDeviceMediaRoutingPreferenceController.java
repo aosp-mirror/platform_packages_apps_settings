@@ -19,7 +19,6 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
 
 /**
@@ -27,9 +26,6 @@ import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
  */
 public class HearingDeviceMediaRoutingPreferenceController extends
         HearingDeviceAudioRoutingBasePreferenceController {
-
-    private CachedBluetoothDevice mHearingDevice;
-
     public HearingDeviceMediaRoutingPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }

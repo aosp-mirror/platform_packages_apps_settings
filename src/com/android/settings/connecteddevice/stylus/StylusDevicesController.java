@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.hardware.input.InputSettings;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -32,6 +33,7 @@ import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.InputDevice;
+import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
@@ -40,7 +42,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
@@ -71,6 +74,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
     static final String KEY_IGNORE_BUTTON = "ignore_button";
     @VisibleForTesting
     static final String KEY_DEFAULT_NOTES = "default_notes";
+    @VisibleForTesting
+    static final String KEY_SHOW_STYLUS_POINTER_ICON = "show_stylus_pointer_icon";
 
     private static final String TAG = "StylusDevicesController";
 
@@ -104,6 +109,17 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         RoleManager rm = mContext.getSystemService(RoleManager.class);
         if (rm == null || !rm.isRoleAvailable(RoleManager.ROLE_NOTES)) {
             return null;
+        }
+
+        // Check if the connected stylus supports the tail button. A connected device is when input
+        // device is available (mInputDevice != null). For a cached device (mInputDevice == null)
+        // there isn't way to check if the device supports the button so assume it does.
+        if (mInputDevice != null) {
+            boolean doesStylusSupportTailButton =
+                    mInputDevice.hasKeys(KeyEvent.KEYCODE_STYLUS_BUTTON_TAIL)[0];
+            if (!doesStylusSupportTailButton) {
+                return null;
+            }
         }
 
         Preference pref = preference == null ? new Preference(mContext) : preference;
@@ -157,14 +173,34 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         return pref;
     }
 
-    private SwitchPreference createButtonPressPreference() {
-        SwitchPreference pref = new SwitchPreference(mContext);
+    private TwoStatePreference createButtonPressPreference() {
+        TwoStatePreference pref = new SwitchPreferenceCompat(mContext);
         pref.setKey(KEY_IGNORE_BUTTON);
         pref.setTitle(mContext.getString(R.string.stylus_ignore_button));
         pref.setIcon(R.drawable.ic_block);
         pref.setOnPreferenceClickListener(this);
         pref.setChecked(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.STYLUS_BUTTONS_ENABLED, 1) == 0);
+        return pref;
+    }
+
+    @Nullable
+    private SwitchPreferenceCompat createShowStylusPointerIconPreference(
+            SwitchPreferenceCompat preference) {
+        if (!mContext.getResources()
+                .getBoolean(com.android.internal.R.bool.config_enableStylusPointerIcon)) {
+            // If the config is not enabled, no need to show the preference to user
+            return null;
+        }
+        SwitchPreferenceCompat pref = preference == null ? new SwitchPreferenceCompat(mContext)
+                : preference;
+        pref.setKey(KEY_SHOW_STYLUS_POINTER_ICON);
+        pref.setTitle(mContext.getString(R.string.show_stylus_pointer_icon));
+        pref.setIcon(R.drawable.ic_stylus);
+        pref.setOnPreferenceClickListener(this);
+        pref.setChecked(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_POINTER_ICON_ENABLED,
+                InputSettings.DEFAULT_STYLUS_POINTER_ICON_ENABLED) == 1);
         return pref;
     }
 
@@ -198,7 +234,12 @@ public class StylusDevicesController extends AbstractPreferenceController implem
             case KEY_IGNORE_BUTTON:
                 Settings.Secure.putInt(mContext.getContentResolver(),
                         Secure.STYLUS_BUTTONS_ENABLED,
-                        ((SwitchPreference) preference).isChecked() ? 0 : 1);
+                        ((TwoStatePreference) preference).isChecked() ? 0 : 1);
+                break;
+            case KEY_SHOW_STYLUS_POINTER_ICON:
+                Settings.Secure.putInt(mContext.getContentResolver(),
+                        Secure.STYLUS_POINTER_ICON_ENABLED,
+                        ((SwitchPreferenceCompat) preference).isChecked() ? 1 : 0);
                 break;
         }
         return true;
@@ -254,6 +295,13 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         Preference buttonPref = mPreferencesContainer.findPreference(KEY_IGNORE_BUTTON);
         if (buttonPref == null) {
             mPreferencesContainer.addPreference(createButtonPressPreference());
+        }
+        SwitchPreferenceCompat currShowStylusPointerIconPref = mPreferencesContainer
+                .findPreference(KEY_SHOW_STYLUS_POINTER_ICON);
+        Preference showStylusPointerIconPref =
+                createShowStylusPointerIconPreference(currShowStylusPointerIconPref);
+        if (currShowStylusPointerIconPref == null && showStylusPointerIconPref != null) {
+            mPreferencesContainer.addPreference(showStylusPointerIconPref);
         }
     }
 
