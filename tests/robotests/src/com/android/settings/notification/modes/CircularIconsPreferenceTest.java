@@ -226,4 +226,32 @@ public class CircularIconsPreferenceTest {
         mPreference.displayIcons(one);
         mPreference.displayIcons(same); // if no exception, wasn't called.
     }
+
+    @Test
+    public void setEnabled_afterDisplayIcons_showsEnabledOrDisabledImages() {
+        CircularIconSet<Integer> iconSet = new CircularIconSet<>(ImmutableList.of(1, 2),
+                ColorDrawable::new);
+        bindAndMeasureViewHolder(VIEW_WIDTH);
+        mPreference.displayIcons(iconSet);
+        assertThat(mPreference.getViews()).hasSize(2);
+
+        mPreference.setEnabled(false);
+        assertThat(mPreference.getViews().get(0).getAlpha()).isLessThan(1f);
+
+        mPreference.setEnabled(true);
+        assertThat(mPreference.getViews().get(0).getAlpha()).isEqualTo(1f);
+    }
+
+    @Test
+    public void setEnabled_beforeDisplayIcons_showsEnabledOrDisabledImages() {
+        CircularIconSet<Integer> iconSet = new CircularIconSet<>(ImmutableList.of(1, 2),
+                ColorDrawable::new);
+
+        mPreference.setEnabled(false);
+        bindAndMeasureViewHolder(VIEW_WIDTH);
+        mPreference.displayIcons(iconSet);
+
+        assertThat(mPreference.getViews()).hasSize(2);
+        assertThat(mPreference.getViews().get(0).getAlpha()).isLessThan(1f);
+    }
 }

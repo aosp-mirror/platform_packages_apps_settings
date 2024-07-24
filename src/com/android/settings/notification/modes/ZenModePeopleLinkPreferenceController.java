@@ -92,6 +92,7 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModePeopleFragment.class,
                         zenMode.getId(), 0).toIntent());
 
+        preference.setEnabled(zenMode.isEnabled());
         preference.setSummary(mSummaryHelper.getPeopleSummary(zenMode.getPolicy()));
         ((CircularIconsPreference) preference).displayIcons(getPeopleIcons(zenMode.getPolicy()));
     }

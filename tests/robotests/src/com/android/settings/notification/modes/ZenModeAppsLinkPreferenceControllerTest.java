@@ -142,6 +142,17 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
     }
 
     @Test
+    public void testUpdateState_disabled() {
+        ZenMode zenMode = new TestModeBuilder()
+                .setEnabled(false)
+                .build();
+
+        mController.updateState(mPreference, zenMode);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
     public void testUpdateSetsIntent() {
         // Create a zen mode that allows priority channels to breakthrough.
         ZenMode zenMode = createPriorityChannelsZenMode();
