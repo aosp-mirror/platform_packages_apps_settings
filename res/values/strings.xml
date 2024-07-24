@@ -5477,6 +5477,8 @@
     <string name="daltonizer_mode_grayscale_title">Grayscale</string>
     <!-- Title shown for settings that controls color correction saturation level [CHAR LIMIT=45] -->
     <string name="daltonizer_saturation_title">Intensity</string>
+    <!-- The summary shown for settings that controls color correction intensity/saturation level. It is shown when intensity slider is grayed out and is not usable and it explains why it's not usable to the user. [CHAR LIMIT=NONE] -->
+    <string name="daltonizer_saturation_unavailable_summary">Unavailable for grayscale mode or when color correction is disabled</string>
     <!-- Summary shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_deuteranomaly_summary">Green weak, deuteranomaly</string>
     <!-- Summary shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
@@ -8124,9 +8126,9 @@
     <!--  Do not disturb: Subtitle for the Visual signals option to toggle on/off visual signals/alerts when the screen is on/when screen is off. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
-    <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
+    <!-- Priority Modes: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_interruption_filter_title">Stay focused</string>
-    <!-- Do not disturb: mode page section title [CHAR LIMIT=80] -->
+    <!-- Priority Modes: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_device_effects_title">Additional actions</string>
 
     <!-- Summary for the Sound Do not Disturb option when DND isn't currently on. [CHAR LIMIT=NONE]-->
@@ -9482,6 +9484,19 @@
 
     <!-- Priority Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
     <string name="zen_mode_edit_name_hint">Mode name</string>
+
+    <!-- Priority Modes: Trigger title for modes of type SCHEDULE_CALENDAR. [CHAR LIMIT=30] -->
+    <string name="zen_mode_trigger_title_schedule_calendar">Calendar events</string>
+    <!-- Priority Modes: Trigger title for modes of type BEDTIME. [CHAR LIMIT=30] -->
+    <string name="zen_mode_trigger_title_bedtime">Sleep schedule</string>
+    <!-- Priority Modes: Trigger title for modes of type DRIVING. [CHAR LIMIT=30] -->
+    <string name="zen_mode_trigger_title_driving">While driving</string>
+    <!-- Priority Modes: Generic trigger title for modes of other types [CHAR LIMIT=30] -->
+    <string name="zen_mode_trigger_title_generic">Linked to app</string>
+    <!-- Priority Modes: Generic trigger summary for modes where the owner app did not provide a triggerDescription but did provide a configurationActivity to call [CHAR LIMIT=60] -->
+    <string name="zen_mode_trigger_summary_settings_in_app">Info and settings in <xliff:g id="app_name" example="The Awesome App">%1$s</xliff:g></string>
+    <!-- Priority Modes: Generic trigger summary for modes where the owner app did not provide neither a triggerDescription nor a configurationActivity to call [CHAR LIMIT=60] -->
+    <string name="zen_mode_trigger_summary_managed_by_app">Managed by <xliff:g id="app_name" example="The Awesome App">%1$s</xliff:g></string>
 
     <!-- Content description for help icon button [CHAR LIMIT=20] -->
     <string name="warning_button_text">Warning</string>
@@ -13737,6 +13752,10 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary">Scan an audio stream QR code to listen with <xliff:g example="LE headset" id="device_name">%1$s</xliff:g></string>
     <!-- Le audio streams password dialog  [CHAR LIMIT=NONE] -->
     <string name="audio_streams_main_page_password_dialog_cannot_edit">Can\u0027t edit password while sharing. To change the password, first turn off audio sharing.</string>
+    <!-- Text for audio sharing qrcode image [CHAR LIMIT=none]-->
+    <string name="audio_streams_qr_code_page_image_label">QR code</string>
+    <!-- Text for audio sharing qrcode scanner [CHAR LIMIT=none]-->
+    <string name="audio_streams_qr_code_scanner_label">QR code scanner</string>
 
 
     <!-- url for learning more about bluetooth audio sharing -->

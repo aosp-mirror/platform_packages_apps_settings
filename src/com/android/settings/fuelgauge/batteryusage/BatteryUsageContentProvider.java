@@ -110,8 +110,8 @@ public class BatteryUsageContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        if (BatteryUtils.isWorkProfile(getContext())) {
-            Log.w(TAG, "do not create provider for work profile");
+        if (BatteryUtils.isAdditionalProfile(getContext())) {
+            Log.w(TAG, "do not create provider for an additional profile");
             return false;
         }
         mClock = Clock.systemUTC();

@@ -1487,23 +1487,25 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /**
      * Request biometric authentication if all requirements for mandatory biometrics is satisfied.
-     * @param context of the corresponding activity/fragment
+     *
+     * @param context                             of the corresponding activity/fragment
      * @param biometricsSuccessfullyAuthenticated if the user has already authenticated using
      *                                            biometrics
-     * @param biometricsAuthenticationRequested if the activity/fragment has already requested for
-     *                                          biometric prompt
+     * @param biometricsAuthenticationRequested   if the activity/fragment has already requested for
+     *                                            biometric prompt
+     * @param userId                              user id for the authentication request
      * @return true if all requirements for mandatory biometrics is satisfied
      */
     public static boolean requestBiometricAuthenticationForMandatoryBiometrics(
             @NonNull Context context,
             boolean biometricsSuccessfullyAuthenticated,
-            boolean biometricsAuthenticationRequested) {
+            boolean biometricsAuthenticationRequested, int userId) {
         final BiometricManager biometricManager = context.getSystemService(BiometricManager.class);
         if (biometricManager == null) {
             Log.e(TAG, "Biometric Manager is null.");
             return false;
         }
-        final int status = biometricManager.canAuthenticate(
+        final int status = biometricManager.canAuthenticate(userId,
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
         return android.hardware.biometrics.Flags.mandatoryBiometrics()
                 && status == BiometricManager.BIOMETRIC_SUCCESS
@@ -1513,15 +1515,16 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /**
      * Launch biometric prompt for mandatory biometrics. Call
-     * {@link #requestBiometricAuthenticationForMandatoryBiometrics(Context, boolean, boolean)}
+     * {@link #requestBiometricAuthenticationForMandatoryBiometrics(Context, boolean, boolean, int)}
      * to check if all requirements for mandatory biometrics is satisfied
      * before launching biometric prompt.
      *
-     * @param fragment corresponding fragment of the surface
+     * @param fragment    corresponding fragment of the surface
      * @param requestCode for starting the new activity
+     * @param userId      user id for the authentication request
      */
     public static void launchBiometricPromptForMandatoryBiometrics(@NonNull Fragment fragment,
-            int requestCode) {
+            int requestCode, int userId) {
         final Intent intent = new Intent();
         intent.putExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
@@ -1529,8 +1532,10 @@ public final class Utils extends com.android.settingslib.Utils {
                 fragment.getString(R.string.cancel));
         intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION,
                 fragment.getString(R.string.mandatory_biometrics_prompt_description));
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, true);
+        intent.putExtra(EXTRA_USER_ID, userId);
         intent.setClassName(SETTINGS_PACKAGE_NAME,
-                ConfirmDeviceCredentialActivity.class.getName());
+                ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
         fragment.startActivityForResult(intent, requestCode);
     }
 

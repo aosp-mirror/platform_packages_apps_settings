@@ -144,9 +144,10 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             launchChooseOrConfirmLock();
         } else if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(
                 getActivity(), mBiometricsSuccessfullyAuthenticated,
-                mBiometricsAuthenticationRequested)) {
+                mBiometricsAuthenticationRequested, mUserId)) {
             mBiometricsAuthenticationRequested = true;
-            Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+            Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
+                    mUserId);
         }
 
         updateUnlockPhonePreferenceSummary();
@@ -161,10 +162,11 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     public void onResume() {
         super.onResume();
         if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
-                mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested)
+                mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested, mUserId)
                 && mGkPwHandle != 0L) {
             mBiometricsAuthenticationRequested = true;
-            Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+            Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
+                    mUserId);
         }
         if (!mConfirmCredential) {
             mDoNotFinishActivity = false;
