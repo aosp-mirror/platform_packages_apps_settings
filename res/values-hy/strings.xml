@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Անջատված է"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Միացված է / Տեղադրության տվյալները հասանելի են # հավելվածի}one{Միացված է / Տեղադրության տվյալները հասանելի են # հավելվածի}other{Միացված է / Տեղադրության տվյալները հասանելի են # հավելվածի}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Բեռնում…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Հավելվածները, որոնց հասանելի են մոտակա սարքերը, կարող են որոշել միացված սարքերի հարաբերական դիրքավորումը։"</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Հավելվածները, որոնց հասանելի են մոտակա սարքերը, կարող են որոշել միացված սարքերի հարաբերական դիրքավորումը։"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Տեղադրության տվյալների օգտագործման թույլտվությունն անջատված է հավելվածների և ծառայությունների համար։ Ձեր սարքի տեղադրության տվյալները կարող են ուղարկվել փրկարար ծառայություններին, եթե դուք զանգեք կամ հաղորդագրություն գրեք արտակարգ իրավիճակների հեռախոսահամարով։"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Իմանալ ավելին տեղադրության կարգավորումների մասին"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Փոխելու համար անցեք ChromeOS-ի կարգավորումներ &gt; Գաղտնիություն և անվտանգություն &gt; Գաղտնիության կարգավորումներ &gt; Տեղորոշման թույլտվություն"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Կարգավորում է ժամանակի տևողությունը, որից հետո ստեղնը արձագանքում է սեղմմանը՝ <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> մվ"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Կպչուն ստեղներ"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Դյուրանցումների համար միաժամանակ սեղմեք մեկ ստեղն, այլ ոչ թե միասին սեղմած պահեք մի քանիսը"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Մկնիկի ստեղներ"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Կառավարեք մկնիկը ֆիզիկական ստեղնաշարի միջոցով։"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Ստեղնային դյուրանցումներ"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Ցույց տալ ստեղնաշարի դյուրանցումների ցանկը"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Աշխատանքային պրոֆիլի ստեղնաշարեր և գործիքներ"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Ցուցիչի լցման ոճը դարձնել դեղին"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Ցուցիչի լցման ոճը դարձնել վարդագույն"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Ցուցիչի լցման ոճը դարձնել կապույտ"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Նշորդի ոճը"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Սպիտակ"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Սև"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Ընտրված չէ"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Սովորել հպահարթակի ժեստերը"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"հպահարթակ, մկնիկ, նշորդ, ոլորել, թերթել, աջ սեղմել, սեղմում, ցուցիչ"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"սեղմել մկնիկի աջ կոճակը, հպել"</string>
@@ -3656,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Այս հավելվածում ընդլայնված կարգավորումները չեն աջակցվում"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Լրացուցիչ կարգավորումներ"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Լրացուցիչ կարգավորումները հասանելի են հավելվածում"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Հարմարվող ծանուցումներ"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Օգտագործել հարմարվող ծանուցումները"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Եթե կարճ ժամանակահատվածում շատ ծանուցումներ ստանաք, ձեր հեռախոսը երկու րոպեով կիջեցնի ձայնը և կնվազեցնի ելնող ծանուցումների քանակը։ Սա չի վերաբերում զանգերին, զարթուցիչներին և կարևոր զրույցներին։ Բոլոր ծանուցումները տեսնելու համար պարզապես սահեցրեք մատը էկրանի վերևից ներքև։"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Ծանուցումների ձայնի նվազեցում"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Կիրառել աշխատանքային պրոֆիլների համար"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Կիրառել աշխատանքային պրոֆիլի հավելվածների նկատմամբ"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR օգնության ծառայություններ"</string>
@@ -3815,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Ընտրված հավելվածները"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Ոչ մեկը"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Ոչ մի հավելված չի կարող ընդհատել}=1{{app_1} հավելվածը կարող է ընդհատել}=2{{app_1} և {app_2} հավելվածները կարող են ընդհատել}=3{{app_1}, {app_2} և {app_3} հավելվածները կարող են ընդհատել}one{{app_1} և {app_2} հավելվածներն ու ևս # հավելված կարող են ընդհատել}other{{app_1} և {app_2} հավելվածներն ու ևս # հավելված կարող են ընդհատել}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (աշխատանքային)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Հաշվարկում…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Թույլատրել հավելվածներին փոխել «Չանհանգստացնել» ռեժիմի կարգավորումները"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Հավելվածներ, որոնք կարող են ընդհատել"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Ընտրեք այլ հավելվածներ"</string>
@@ -3833,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Ոչինչ չի կարող ընդհատել"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Ոչ ոք չի կարող ընդհատել"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Որոշ մարդիկ"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Բոլոր մարդիկ"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Կրկնվող զանգեր"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Թույլատրել կրկնվող զանգեր"</string>
@@ -5285,10 +5290,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Միացված է"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Անջատված է"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Միացված է"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Աուդիո %1$d%% ձախ, %2$d%% աջ"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Աուդիո %1$d%% աջ, %2$d%% ձախ"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Ձեր սարքի անունը տեսանելի է ձեր տեղադրած հավելվածներին։ Այն կարող են տեսնել օգտատերերը, երբ միանում եք Bluetooth սարքերի, Wi-Fi ցանցի, կամ կարգավորում եք Wi-Fi թեժ կետ։"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Քերականական սեռ"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Ընտրեք քերականական սեռը"</string>

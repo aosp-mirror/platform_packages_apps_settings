@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Вимкнено"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Увімкнено / # додаток має доступ до геоданих}one{Увімкнено / # додаток має доступ до геоданих}few{Увімкнено / # додатки мають доступ до геоданих}many{Увімкнено / # додатків мають доступ до геоданих}other{Увімкнено / # додатка мають доступ до геоданих}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Завантаження…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Додатки з дозволами на доступ до пристроїв поблизу можуть визначати відносне розташування підключених пристроїв."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Додатки з дозволами на доступ до пристроїв поблизу можуть визначати відносне розташування підключених пристроїв."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Доступ до геоданих вимкнено для додатків і сервісів. Однак дані про місцезнаходження вашого пристрою можуть надсилатися в екстрених випадках, якщо ви зателефонуєте або надішлете SMS на екстрений номер."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Докладніше про доступ до геоданих"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Щоб змінити налаштування, виберіть \"Налаштування ChromeOS\" &gt; \"Конфіденційність і безпека\" &gt; \"Налаштування конфіденційності\" &gt; \"Доступ до геоданих\""</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Установлює проміжок часу, через який клавіша реагує на натискання: <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> мс"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Залипання клавіш"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Натискайте клавіші по одній, замість того щоб утримувати їх одночасно"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Клавіші для керування мишею"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Використовувати фізичну клавіатуру для керування мишею."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Комбінації клавіш"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Показати список комбінацій клавіш"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавіатури та інструменти робочого профілю"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Змінити стиль курсора на жовтий"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Змінити стиль курсора на рожевий"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Змінити стиль курсора на синій"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Стиль накреслення вказівника"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Білий"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Чорний"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Немає"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Жести сенсорної панелі: докладніше"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"сенсорна панель, трекпад, миша, курсор, прокрутити, гортати, права кнопка, натиснути, вказівник"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"натиснути правою кнопкою миші, натиснути"</string>
@@ -3368,10 +3366,8 @@
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Розклад"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Видалити розклади"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Видалити"</string>
-    <!-- no translation found for zen_mode_menu_rename_mode (4681802125016390837) -->
-    <skip />
-    <!-- no translation found for zen_mode_menu_delete_mode (5380084696402157428) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"Перейменувати"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"Видалити"</string>
     <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"Видалити режим \"<xliff:g id="MODE">%1$s</xliff:g>\"?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Редагувати"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Розклад"</string>
@@ -3395,8 +3391,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Дозволити візуальні сигнали"</string>
     <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Не відволікайтесь"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Додаткові дії"</string>
-    <!-- no translation found for modes_sound_summary_off (6972648204528227879) -->
-    <skip />
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Вимкнено}=1{Вимкнено / 1 режим може вмикатись автоматично}one{Вимкнено / # режим може вмикатись автоматично}few{Вимкнено / # режими можуть вмикатись автоматично}many{Вимкнено / # режимів можуть вмикатись автоматично}other{Вимкнено / # режиму можуть вмикатись автоматично}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Налаштування дисплея"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Параметри відображення"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Відтінки сірого"</string>
@@ -3659,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Цей додаток не підтримує розширені налаштування"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Інші налаштування"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Інші налаштування доступні в цьому додатку"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Адаптивні сповіщення"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Використовувати адаптивні сповіщення"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Коли ви отримуєте багато повідомлень за короткий проміжок часу, телефон знижує гучність і зменшує кількість спливаючих вікон на екрані на період до двох хвилин. Вібрація, звук і показ дзвінків, будильників та важливих розмов не зміняться, а всі сповіщення можна буде переглянути, пpовівши пальцем зверху вниз по екрану."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Зниження гучності сповіщень"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Застосувати до робочих профілів"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Застосувати до додатків робочого профілю"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Допоміжні VR-сервіси"</string>
@@ -3818,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Вибрані додатки"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Жодний"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Додатки не можуть переривати}=1{Додаток {app_1} може переривати}=2{Додатки {app_1} і {app_2} можуть переривати}=3{Додатки {app_1}, {app_2} і {app_3} можуть переривати}one{Додатки {app_1}, {app_2} і ще # можуть переривати}few{Додатки {app_1}, {app_2} і ще # можуть переривати}many{Додатки {app_1}, {app_2} і ще # можуть переривати}other{Додатки {app_1}, {app_2} і ще # можуть переривати}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (робочий)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Обчислення…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Дозволити додаткам замінювати режим \"Не турбувати\""</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Додатки, які можуть переривати"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Виберіть інші додатки"</string>
@@ -3836,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Ніщо не може переривати"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Ніхто не може переривати"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Деякі люди можуть переривати"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Усі люди можуть переривати"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Повторні вхідні виклики"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Дозволити повторні дзвінки"</string>
@@ -3855,14 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Активувати режим \"Лише будильник\" на одну годину до {time}}one{Активувати режим \"Лише будильник\" на # годину до {time}}few{Активувати режим \"Лише будильник\" на # години до {time}}many{Активувати режим \"Лише будильник\" на # годин до {time}}other{Активувати режим \"Лише будильник\" на # години до {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Активувати режим \"Лише будильник\" до <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Вибрати опцію \"Завжди надсилати\""</string>
-    <!-- no translation found for zen_mode_rename_title (8146882272966214558) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_title (321750898430776191) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_default_name (2778307946775085105) -->
-    <skip />
-    <!-- no translation found for zen_mode_edit_name_hint (4584652062167540536) -->
-    <skip />
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"Редагувати режим"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Додати режим"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Спеціальний режим"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Назва режиму"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Застереження"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Закрити"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Надіслати відгук про цей пристрій"</string>
@@ -5294,10 +5292,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Увімкнено"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Вимкнено"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Увімкнено"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Аудіо: %1$d%% ліворуч, %2$d%% праворуч"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Аудіо: %1$d%% праворуч, %2$d%% ліворуч"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Назва пристрою відображається в установлених додатках. Її також можуть бачити інші користувачі, коли ви підключаєтеся до пристроїв із Bluetooth чи мережі Wi-Fi або налаштовуєте точку доступу Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Граматичний рід"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Виберіть граматичний рід"</string>

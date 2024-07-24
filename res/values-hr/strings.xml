@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Isključeno"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Uključeno / # aplikacija ima pristup lokaciji}one{Uključeno / # aplikacija ima pristup lokaciji}few{Uključeno / # aplikacije imaju pristup lokaciji}other{Uključeno / # aplikacija ima pristup lokaciji}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Učitavanje…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacije s dopuštenjem za uređaje u blizini mogu odrediti približni položaj povezanih uređaja."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Aplikacije s dopuštenjem za uređaje u blizini mogu odrediti približni položaj povezanih uređaja."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Pristup lokaciji isključen je za aplikacije i usluge. Lokacija vašeg uređaja i dalje se može poslati djelatnicima hitnih službi kada nazovete broj hitne službe ili na njega pošaljete SMS."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Saznajte više o postavkama lokacije"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Da biste promijenili, otvorite Postavke ChromeOS-a &gt; Privatnost i sigurnost &gt; Kontrole privatnosti &gt; Pristup lokaciji"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Vrijeme potrebno za aktivaciju pritiska tipke prilagođava se na <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Ljepljive tipke"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Pritisnite jednu po jednu tipku za prečace umjesto da ih pritisnete zajedno"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Tipke miša"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Upotrijebite fizičku tipkovnicu za upravljanje mišem."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tipkovni prečaci"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Prikaži popis prečaca"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tipkovnice i alati radnog profila"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Promjena ispunj. pokaz. na žuto"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Promjena ispunj. pokaz. na ružič."</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Promjena ispunj. pokaz. na plavo"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Stil poteza pokazivačem"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Bijelo"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Crno"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Ništa"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Učenje pokreta za dodirnu podlogu"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"dodirna površina, miš, pokazivač, pomicanje, prijeći prstom, kliknuti desnom tipkom, kliknuti, pokazivači"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"kliknuti desnom tipkom, dodirnuti"</string>
@@ -3656,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Ta aplikacija ne podržava napredne postavke"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Više postavki"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Više postavki dostupno je unutar aplikacije"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Prilagodljive obavijesti"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Koristi prilagodljive obavijesti"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Kad u kratkom vremenskom razdoblju primite velik broj obavijesti, telefon će smanjiti glasnoću i minimizirati skočne prozore na zaslonu u trajanju do dvije minute. Pozivi, alarmi i prioritetni razgovori i dalje će vibrirati, zvučno se oglašavati ili prikazivati na zaslonu, a sve obavijesti jednostavno ćete pronaći tako da povučete prstom od vrha zaslona prema dolje."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Postupno stišavanje obavijesti"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Primijeni na poslovne profile"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Primijeni na aplikacije poslovnog profila"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pomoćne usluge za virtualnu stvarnost"</string>
@@ -3815,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Odabrane aplikacije"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Nijedna"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Nijedna aplikacija ne može prekidati}=1{{app_1} može prekidati}=2{{app_1} i {app_2} mogu prekidati}=3{{app_1}, {app_2} i {app_3} mogu prekidati}one{{app_1}, {app_2} i još # aplikacija mogu prekidati}few{{app_1}, {app_2} i još # aplikacije mogu prekidati}other{{app_1}, {app_2} i još # aplikacija mogu prekidati}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (posao)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Izračun u tijeku…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Dopusti aplikacijama da nadjačaju"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikacije koje mogu prekidati"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Odaberite više aplikacija"</string>
@@ -3833,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Ništa ne može prekidati"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Nitko ne može prekidati"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Neke osobe mogu prekidati"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Sve osobe mogu prekidati"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Uzastopni pozivi"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Dopusti ponovne pozivatelje"</string>
@@ -5286,10 +5291,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Uključeno"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Isključeno"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Uključeno"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Zvuk %1$d%% lijevo, %2$d%% desno"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Zvuk %1$d%% desno, %2$d%% lijevo"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Naziv vašeg uređaja vidljiv je aplikacijama koje ste instalirali. Mogu ga vidjeti i druge osobe kada se povežete s Bluetooth uređajima ili Wi-Fi mrežom ili kada postavite Wi-Fi žarišnu točku."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gramatički rod"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Odaberite gramatički rod"</string>
