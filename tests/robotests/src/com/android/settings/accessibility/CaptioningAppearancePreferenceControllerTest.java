@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
@@ -188,7 +189,8 @@ public class CaptioningAppearancePreferenceControllerTest {
                 R.array.captioning_font_size_selector_titles);
         final String[] presetArray = mContext.getResources().getStringArray(
                 R.array.captioning_preset_selector_titles);
-        return mContext.getString(R.string.preference_summary_default_combination,
+        return mContext.getString(
+                com.android.settingslib.R.string.preference_summary_default_combination,
                 fontScaleArray[fontScaleIndex], presetArray[presetIndex]);
     }
 }
