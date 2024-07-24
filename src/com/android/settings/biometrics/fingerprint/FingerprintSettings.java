@@ -485,9 +485,11 @@ public class FingerprintSettings extends SubSettings {
                     mLaunchedConfirm = true;
                     launchChooseOrConfirmLock();
                 } else if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
-                        mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested)) {
+                        mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested,
+                        mUserId)) {
                     mBiometricsAuthenticationRequested = true;
-                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
+                            mUserId);
                 } else if (!mHasFirstEnrolled) {
                     mIsEnrolling = true;
                     addFirstFingerprint(null);
@@ -777,9 +779,11 @@ public class FingerprintSettings extends SubSettings {
                     .getUdfpsEnrollCalibrator(getActivity().getApplicationContext(), null, null);
 
             if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
-                    mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested)) {
+                    mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested,
+                    mUserId)) {
                 mBiometricsAuthenticationRequested = true;
-                Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+                Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                        BIOMETRIC_AUTH_REQUEST, mUserId);
             }
         }
 
