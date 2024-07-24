@@ -75,7 +75,8 @@ public class AccessibilitySettings extends DashboardFragment implements
     private static final String CATEGORY_AUDIO = "audio_category";
     private static final String CATEGORY_SPEECH = "speech_category";
     private static final String CATEGORY_DISPLAY = "display_category";
-    private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
+    @VisibleForTesting
+    static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
     private static final String CATEGORY_KEYBOARD_OPTIONS = "physical_keyboard_options_category";
     @VisibleForTesting
     static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
@@ -380,6 +381,7 @@ public class AccessibilitySettings extends DashboardFragment implements
     }
 
     protected void updateServicePreferences() {
+        final AccessibilityManager a11yManager = AccessibilityManager.getInstance(getPrefContext());
         // Since services category is auto generated we have to do a pass
         // to generate it since services can come and go and then based on
         // the global accessibility state to decided whether it is enabled.
@@ -410,8 +412,18 @@ public class AccessibilitySettings extends DashboardFragment implements
                 AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM,
                 mCategoryToPrefCategoryMap.get(CATEGORY_INTERACTION_CONTROL));
 
-        final List<RestrictedPreference> preferenceList = getInstalledAccessibilityList(
-                getPrefContext());
+        final List<AccessibilityShortcutInfo> installedShortcutList =
+                a11yManager.getInstalledAccessibilityShortcutListAsUser(getPrefContext(),
+                        UserHandle.myUserId());
+        final List<AccessibilityServiceInfo> modifiableInstalledServiceList =
+                new ArrayList<>(a11yManager.getInstalledAccessibilityServiceList());
+        final List<RestrictedPreference> preferenceList = getInstalledAccessibilityPreferences(
+                getPrefContext(), installedShortcutList, modifiableInstalledServiceList);
+
+        if (Flags.checkPrebundledIsPreinstalled()) {
+            removeNonPreinstalledComponents(mPreBundledServiceComponentToCategoryMap,
+                    installedShortcutList, modifiableInstalledServiceList);
+        }
 
         final PreferenceCategory downloadedServicesCategory =
                 mCategoryToPrefCategoryMap.get(CATEGORY_DOWNLOADED_SERVICES);
@@ -456,13 +468,21 @@ public class AccessibilitySettings extends DashboardFragment implements
         updatePreferenceCategoryVisibility(CATEGORY_KEYBOARD_OPTIONS);
     }
 
-    private List<RestrictedPreference> getInstalledAccessibilityList(Context context) {
-        final AccessibilityManager a11yManager = AccessibilityManager.getInstance(context);
+    /**
+     * Gets a list of {@link RestrictedPreference}s for the provided a11y shortcuts and services.
+     *
+     * <p>{@code modifiableInstalledServiceList} may be modified to remove any entries with
+     * matching package name and label as an entry in {@code installedShortcutList}.
+     *
+     * @param installedShortcutList          A list of installed {@link AccessibilityShortcutInfo}s.
+     * @param modifiableInstalledServiceList A modifiable list of installed
+     *                                       {@link AccessibilityServiceInfo}s.
+     */
+    private List<RestrictedPreference> getInstalledAccessibilityPreferences(Context context,
+            List<AccessibilityShortcutInfo> installedShortcutList,
+            List<AccessibilityServiceInfo> modifiableInstalledServiceList) {
         final RestrictedPreferenceHelper preferenceHelper = new RestrictedPreferenceHelper(context);
 
-        final List<AccessibilityShortcutInfo> installedShortcutList =
-                a11yManager.getInstalledAccessibilityShortcutListAsUser(context,
-                        UserHandle.myUserId());
         final List<AccessibilityActivityPreference> activityList =
                 preferenceHelper.createAccessibilityActivityPreferenceList(installedShortcutList);
         final Set<Pair<String, CharSequence>> packageLabelPairs =
@@ -471,22 +491,36 @@ public class AccessibilitySettings extends DashboardFragment implements
                                 a11yActivityPref.getPackageName(), a11yActivityPref.getLabel())
                         ).collect(Collectors.toSet());
 
-        // Remove duplicate item here, new a ArrayList to copy unmodifiable list result
-        // (getInstalledAccessibilityServiceList).
-        final List<AccessibilityServiceInfo> installedServiceList = new ArrayList<>(
-                a11yManager.getInstalledAccessibilityServiceList());
+        // Remove duplicate A11yServices that are already shown as A11yActivities.
         if (!packageLabelPairs.isEmpty()) {
-            installedServiceList.removeIf(
+            modifiableInstalledServiceList.removeIf(
                     target -> containsPackageAndLabelInList(packageLabelPairs, target));
         }
         final List<RestrictedPreference> serviceList =
-                preferenceHelper.createAccessibilityServicePreferenceList(installedServiceList);
+                preferenceHelper.createAccessibilityServicePreferenceList(
+                        modifiableInstalledServiceList);
 
         final List<RestrictedPreference> preferenceList = new ArrayList<>();
         preferenceList.addAll(activityList);
         preferenceList.addAll(serviceList);
 
         return preferenceList;
+    }
+
+    private static void removeNonPreinstalledComponents(
+            Map<ComponentName, PreferenceCategory> componentToCategory,
+            List<AccessibilityShortcutInfo> shortcutInfos,
+            List<AccessibilityServiceInfo> serviceInfos) {
+        for (AccessibilityShortcutInfo info : shortcutInfos) {
+            if (!info.getActivityInfo().applicationInfo.isSystemApp()) {
+                componentToCategory.remove(info.getComponentName());
+            }
+        }
+        for (AccessibilityServiceInfo info : serviceInfos) {
+            if (!info.getResolveInfo().serviceInfo.applicationInfo.isSystemApp()) {
+                componentToCategory.remove(info.getComponentName());
+            }
+        }
     }
 
     private boolean containsPackageAndLabelInList(
