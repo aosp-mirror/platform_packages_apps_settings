@@ -77,6 +77,7 @@ public class MainClearConfirmTest {
 
         when(mMockActivity.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
+        when(mPersistentDataBlockManager.isFactoryResetProtectionActive()).thenReturn(false);
     }
 
     @Test
@@ -110,6 +111,13 @@ public class MainClearConfirmTest {
     @Test
     public void shouldWipePersistentDataBlock_noPersistentDataBlockManager_shouldReturnFalse() {
         assertThat(mMainClearConfirm.shouldWipePersistentDataBlock(null)).isFalse();
+    }
+
+    @Test
+    public void shouldWipePersistentDataBlock_frpIsAlive_shouldReturnFalse() {
+        when(mPersistentDataBlockManager.isFactoryResetProtectionActive()).thenReturn(true);
+        assertThat(mMainClearConfirm.shouldWipePersistentDataBlock(mPersistentDataBlockManager))
+                .isFalse();
     }
 
     @Test
