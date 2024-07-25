@@ -98,15 +98,28 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
-        <ImageView
-            android:id="@+id/image"
+        <FrameLayout
+            android:id="@+id/image_frame"
             android:layout_height="0dp"
             android:layout_width="0dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
-            android:paddingStart="12dp" />
+            android:paddingHorizontal="12dp">
+
+            <ImageView
+                android:id="@+id/image"
+                android:clickable="false"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
+
+ />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

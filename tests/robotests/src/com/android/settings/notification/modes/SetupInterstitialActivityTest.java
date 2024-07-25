@@ -23,13 +23,19 @@ import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENT
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.test.core.app.ActivityScenario;
 
@@ -53,6 +59,15 @@ public class SetupInterstitialActivityTest {
     @Mock
     private ZenModesBackend mBackend;
 
+    @Mock
+    private ImageView mImage;
+
+    @Mock
+    private Drawable mDrawable;
+
+    @Mock
+    private FrameLayout mFrame;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -60,6 +75,10 @@ public class SetupInterstitialActivityTest {
         // set global backend instance so that when the interstitial activity launches, it'll get
         // this mock backend
         ZenModesBackend.setInstance(mBackend);
+
+        when(mBackend.getMode(MODE_ID)).thenReturn(new TestModeBuilder().build());
+        when(mImage.getDrawable()).thenReturn(mDrawable);
+        when(mImage.getLayoutParams()).thenReturn(new ViewGroup.LayoutParams(0, 0));
     }
 
     @Test
@@ -93,6 +112,136 @@ public class SetupInterstitialActivityTest {
             Bundle fragmentArgs = openModePageIntent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
             assertThat(fragmentArgs).isNotNull();
             assertThat(fragmentArgs.getString(EXTRA_AUTOMATIC_ZEN_RULE_ID)).isEqualTo(MODE_ID);
+        });
+        scenario.close();
+    }
+
+    @Test
+    public void setImageToFrame_sizeZero() {
+        ActivityScenario<SetupInterstitialActivity> scenario =
+                ActivityScenario.launch(new Intent(Intent.ACTION_MAIN)
+                        .setClass(RuntimeEnvironment.getApplication(),
+                                SetupInterstitialActivity.class)
+                        .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, MODE_ID));
+        scenario.onActivity(activity -> {
+            // when either the image or the frame has a size 0, we do nothing
+            when(mDrawable.getIntrinsicWidth()).thenReturn(0);
+            when(mDrawable.getIntrinsicHeight()).thenReturn(25);
+            when(mFrame.getMeasuredWidth()).thenReturn(40);
+            when(mFrame.getMeasuredHeight()).thenReturn(50);
+
+            activity.sizeImageToFrame(mImage, mFrame);
+            verify(mImage, never()).setLayoutParams(any());
+        });
+        scenario.close();
+    }
+
+    @Test
+    public void setImageToFrame_imageLargerThanFrame() {
+        ActivityScenario<SetupInterstitialActivity> scenario =
+                ActivityScenario.launch(new Intent(Intent.ACTION_MAIN)
+                        .setClass(RuntimeEnvironment.getApplication(),
+                                SetupInterstitialActivity.class)
+                        .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, MODE_ID));
+        scenario.onActivity(activity -> {
+            // image: 900(w)x1500(h); frame: 600(w)x500(h)
+            // image expected to be scaled down to match the height of the frame -> 300(w)x500(h)
+            when(mDrawable.getIntrinsicWidth()).thenReturn(900);
+            when(mDrawable.getIntrinsicHeight()).thenReturn(1500);
+            when(mFrame.getMeasuredWidth()).thenReturn(600);
+            when(mFrame.getMeasuredHeight()).thenReturn(500);
+
+            ArgumentCaptor<ViewGroup.LayoutParams> captor = ArgumentCaptor.forClass(
+                    ViewGroup.LayoutParams.class);
+            activity.sizeImageToFrame(mImage, mFrame);
+            verify(mImage).setLayoutParams(captor.capture());
+            ViewGroup.LayoutParams out = captor.getValue();
+            assertThat(out.width).isEqualTo(300);
+            assertThat(out.height).isEqualTo(500);
+        });
+        scenario.close();
+    }
+
+    @Test
+    public void setImageToFrame_imageSmallerThanFrame() {
+        ActivityScenario<SetupInterstitialActivity> scenario =
+                ActivityScenario.launch(new Intent(Intent.ACTION_MAIN)
+                        .setClass(RuntimeEnvironment.getApplication(),
+                                SetupInterstitialActivity.class)
+                        .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, MODE_ID));
+        scenario.onActivity(activity -> {
+            // image: 300(w)x200(h); frame: 900(w)x1200(h)
+            // image expected to be scaled up to match the width of the frame -> 900(w)x600(h)
+            when(mDrawable.getIntrinsicWidth()).thenReturn(300);
+            when(mDrawable.getIntrinsicHeight()).thenReturn(200);
+            when(mFrame.getMeasuredWidth()).thenReturn(900);
+            when(mFrame.getMeasuredHeight()).thenReturn(1200);
+
+            ArgumentCaptor<ViewGroup.LayoutParams> captor = ArgumentCaptor.forClass(
+                    ViewGroup.LayoutParams.class);
+            activity.sizeImageToFrame(mImage, mFrame);
+            verify(mImage).setLayoutParams(captor.capture());
+            ViewGroup.LayoutParams out = captor.getValue();
+            assertThat(out.width).isEqualTo(900);
+            assertThat(out.height).isEqualTo(600);
+        });
+        scenario.close();
+    }
+
+    @Test
+    public void setImageToFrame_horizontalImageNarrowerThanFrame() {
+        ActivityScenario<SetupInterstitialActivity> scenario =
+                ActivityScenario.launch(new Intent(Intent.ACTION_MAIN)
+                        .setClass(RuntimeEnvironment.getApplication(),
+                                SetupInterstitialActivity.class)
+                        .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, MODE_ID));
+        scenario.onActivity(activity -> {
+            // image: 600(w)x400(h); frame: 1000(w)x100(h)
+            // both image and frame are wider than tall, but frame is much narrower
+            // so should fit image to height of frame -> 150(w)x100(h)
+            when(mDrawable.getIntrinsicWidth()).thenReturn(600);
+            when(mDrawable.getIntrinsicHeight()).thenReturn(400);
+            when(mFrame.getMeasuredWidth()).thenReturn(1000);
+            when(mFrame.getMeasuredHeight()).thenReturn(100);
+
+            ArgumentCaptor<ViewGroup.LayoutParams> captor = ArgumentCaptor.forClass(
+                    ViewGroup.LayoutParams.class);
+            activity.sizeImageToFrame(mImage, mFrame);
+            verify(mImage).setLayoutParams(captor.capture());
+            ViewGroup.LayoutParams out = captor.getValue();
+            assertThat(out.width).isEqualTo(150);
+            assertThat(out.height).isEqualTo(100);
+        });
+        scenario.close();
+    }
+
+    @Test
+    public void setImageToFrame_accountsForPadding() {
+        ActivityScenario<SetupInterstitialActivity> scenario =
+                ActivityScenario.launch(new Intent(Intent.ACTION_MAIN)
+                        .setClass(RuntimeEnvironment.getApplication(),
+                                SetupInterstitialActivity.class)
+                        .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, MODE_ID));
+        scenario.onActivity(activity -> {
+            // image: 200(w)x300(h); frame: 1000(w)x1000(h), 50 top/bottom padding, 100 l/r padding
+            // effective size of frame is therefore 800(w)x900(h)
+            // scale image to the height of the effective frame -> 600(w)x900(h)
+            when(mDrawable.getIntrinsicWidth()).thenReturn(200);
+            when(mDrawable.getIntrinsicHeight()).thenReturn(300);
+            when(mFrame.getMeasuredWidth()).thenReturn(1000);
+            when(mFrame.getMeasuredHeight()).thenReturn(1000);
+            when(mFrame.getPaddingTop()).thenReturn(50);
+            when(mFrame.getPaddingBottom()).thenReturn(50);
+            when(mFrame.getPaddingLeft()).thenReturn(100);
+            when(mFrame.getPaddingRight()).thenReturn(100);
+
+            ArgumentCaptor<ViewGroup.LayoutParams> captor = ArgumentCaptor.forClass(
+                    ViewGroup.LayoutParams.class);
+            activity.sizeImageToFrame(mImage, mFrame);
+            verify(mImage).setLayoutParams(captor.capture());
+            ViewGroup.LayoutParams out = captor.getValue();
+            assertThat(out.width).isEqualTo(600);
+            assertThat(out.height).isEqualTo(900);
         });
         scenario.close();
     }

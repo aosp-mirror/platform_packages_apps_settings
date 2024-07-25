@@ -43,13 +43,23 @@
         android:orientation="vertical">
 
         <!-- image goes here -->
-        <ImageView
-            android:id="@+id/image"
+        <FrameLayout
+            android:id="@+id/image_frame"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clickable="false"
             app:layout_constraintBottom_toTopOf="@+id/mode_name_title"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:clickable="false"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/mode_name_title"
