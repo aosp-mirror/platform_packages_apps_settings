@@ -45,9 +45,10 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceController extends
         super(context);
 
         final BluetoothManager bluetoothManager = context.getSystemService(BluetoothManager.class);
-
-        mDefaultMaxConnectedAudioDevices =
-              bluetoothManager.getAdapter().getMaxConnectedAudioDevices();
+        if(bluetoothManager != null && bluetoothManager.getAdapter() != null) {
+            mDefaultMaxConnectedAudioDevices =
+                bluetoothManager.getAdapter().getMaxConnectedAudioDevices();
+        }
     }
 
     @Override
