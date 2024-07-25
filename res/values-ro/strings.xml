@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Dezactivat"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activată / # aplicație are acces la locație}few{Activată / # aplicații au acces la locație}other{Activată / # de aplicații au acces la locație}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Se încarcă…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplicațiile cu permisiunea pentru Dispozitive din apropiere pot stabili poziția relativă a dispozitivelor conectate."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Aplicațiile cu permisiunea Dispozitive din apropiere pot stabili poziția relativă a dispozitivelor conectate."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Accesul la locație este dezactivat pentru aplicații și servicii. Locația dispozitivului poate fi trimisă serviciilor de urgență atunci când suni sau trimiți un mesaj la un număr de urgență."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Află mai multe despre Setările privind locația"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Ca să schimbi, accesează Setările ChromeOS &gt; Confidențialitate și securitate &gt; Opțiuni de confidențialitate &gt; Acces la locație"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Ajustează timpul necesar pentru ca o apăsare de tastă să se activeze la <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Taste adezive"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Apasă câte o tastă pentru comenzile rapide în loc să ții apăsate tastele împreună"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Butoanele mouse-ului"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Folosește tastatura fizică pentru a controla mouse-ul."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Comenzi rapide de la tastatură"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Afișează lista de comenzi rapide"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastaturi și instrumente pt. profilul de serviciu"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Schimbă stilul de umplere în galben"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Schimbă stilul de umplere în roz"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Schimbă stilul de umplere în albastru"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Stilul pointerului"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Alb"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Negru"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Niciunul"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Învață gesturi pentru touchpad"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"trackpad, track pad, mouse, cursor, derulează, glisează, dă clic dreapta, dă clic, indicator"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"dă clic dreapta, atinge"</string>
@@ -3368,10 +3366,8 @@
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Programe"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Șterge programele"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Ștergeți"</string>
-    <!-- no translation found for zen_mode_menu_rename_mode (4681802125016390837) -->
-    <skip />
-    <!-- no translation found for zen_mode_menu_delete_mode (5380084696402157428) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"Redenumește"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"Șterge"</string>
     <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"Ștergi modul <xliff:g id="MODE">%1$s</xliff:g>?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Editează"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Programe"</string>
@@ -3395,8 +3391,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permite semnale vizuale"</string>
     <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Concentrează-te"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Acțiuni suplimentare"</string>
-    <!-- no translation found for modes_sound_summary_off (6972648204528227879) -->
-    <skip />
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Dezactivat}=1{Dezactivat / Un mod se poate activa automat}few{Dezactivat / # moduri se pot activa automat}other{Dezactivat / # de moduri se pot activa automat}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Setări de afișare"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Opțiuni de afișare"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Tonuri de gri"</string>
@@ -3659,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Aplicația nu acceptă setările optimizate"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Mai multe setări"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Mai multe setări sunt disponibile în această aplicație"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Notificări adaptabile"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Folosește notificări adaptabile"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Când primești multe notificări într-un timp scurt, telefonul va reduce volumul și va minimiza ferestrele pop-up de pe ecran timp de până la două minute. Apelurile, alarmele și conversațiile prioritare vor declanșa în continuare vibrații sau alerte sonore ori vor apărea pe ecran. Găsești ușor toate notificările dacă tragi în jos din partea de sus a ecranului."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Reducerea sunetului notificărilor"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Aplică profilurilor de serviciu"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Aplică pentru aplicațiile din profilul de serviciu"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicii de ajutor pentru RV"</string>
@@ -3818,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Aplicațiile selectate"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Niciuna"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Nicio aplicație nu îl poate întrerupe}=1{{app_1} îl poate întrerupe}=2{{app_1} și {app_2} îl pot întrerupe}=3{{app_1}, {app_2} și {app_3} îl pot întrerupe}few{{app_1}, {app_2} și încă # îl pot întrerupe}other{{app_1}, {app_2} și încă # îl pot întrerupe}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (Serviciu)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Se calculează..."</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permite aplicațiilor să ignore"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplicații care pot întrerupe"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Selectează mai multe aplicații"</string>
@@ -3836,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Nimic nu îl poate întrerupe"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Nimeni nu îl poate întrerupe"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Anumite persoane îl pot întrerupe"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Oricine îl poate întrerupe"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Apelanți care revin"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Permite apelanți care revin"</string>
@@ -3855,14 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Schimbă la Numai alarme pentru o oră, până la {time}}few{Schimbă la Numai alarme pentru # ore, până la {time}}other{Schimbă la Numai alarme pentru # de ore, până la {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Schimbă la „Numai alarme” până la <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Schimbă la „Întrerupe întotdeauna”"</string>
-    <!-- no translation found for zen_mode_rename_title (8146882272966214558) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_title (321750898430776191) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_default_name (2778307946775085105) -->
-    <skip />
-    <!-- no translation found for zen_mode_edit_name_hint (4584652062167540536) -->
-    <skip />
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"Editează modul"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Adaugă un mod"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Mod personalizat"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Numele modului"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Avertisment"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Închide"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Trimite feedback despre dispozitiv"</string>
@@ -5293,10 +5291,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Activată"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Dezactivate"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activate"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Audio %1$d%% stânga, %2$d%% dreapta"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Audio %1$d%% dreapta, %2$d%% stânga"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Numele dispozitivului este vizibil pentru aplicațiile instalate. Poate fi văzut și de alte persoane când te conectezi la dispozitivele Bluetooth sau la o rețea Wi-Fi sau când configurezi un hotspot Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genul gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selectează genul gramatical"</string>

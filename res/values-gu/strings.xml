@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"બંધ છે"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ચાલુ છે / # ઍપ લોકેશનનો ઍક્સેસ ધરાવે છે}one{ચાલુ છે / # ઍપ લોકેશનનો ઍક્સેસ ધરાવે છે}other{ચાલુ છે / # ઍપ લોકેશનનો ઍક્સેસ ધરાવે છે}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"લોડ કરી રહ્યું છે…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"નજીકના ડિવાઇસ જોવાની પરવાનગી ધરાવતી ઍપ, કનેક્ટ કરેલા ડિવાઇસના સ્થાનની માહિતી મેળવી શકે છે."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"નજીકના ડિવાઇસ જોવાની પરવાનગી ધરાવતી બધી ઍપ, કનેક્ટ કરેલા ડિવાઇસના લોકેશન નિર્ધારિત કરી શકે છે."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"ઍપ અને સેવાઓને આપવામાં આવેલો લોકેશનની માહિતીનો ઍક્સેસ બંધ છે. આમ છતાં જ્યારે તમે કૉલ કે ટેક્સ્ટ મારફતે ઇમર્જન્સી નંબરનો સંપર્ક કરશો, ત્યારે ઇમર્જન્સીમાં પ્રતિસાદ આપનારાઓને તમારા ડિવાઇસના લોકેશનની માહિતી મોકલવામાં આવી શકે છે."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"લોકેશન સેટિંગ વિશે વધુ જાણો"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"ફેરફાર કરવા માટે, ChromeOS સેટિંગ &gt; પ્રાઇવસી અને સુરક્ષા &gt; પ્રાઇવસીને લગતા નિયંત્રણો &gt; લોકેશન ઍક્સેસ પર જાઓ"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"<xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms સુધીમાં સક્રિય થવા માટે, કોઈ કીને દબાવવામાં લાગતા સમયની ગોઠવણી કરે છે"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"સ્ટીકી કી"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"શૉર્ટકટ માટે કીને એકસાથે દબાવી રાખવાને બદલે એક સમયે એક જ કી દબાવો"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"માઉસની કી"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"માઉસને નિયંત્રિત કરવા માટે, વાસ્તવિક કીબોર્ડનો ઉપયોગ કરો."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"કીબોર્ડ શૉર્ટકટ"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"શૉર્ટકટની સૂચિ બતાવો"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"કાર્યાલયનું પ્રોફાઇલ અને સાધનો"</string>
@@ -3364,10 +3366,8 @@
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"શેડ્યૂલ"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"શેડ્યૂલ ડિલીટ કરો"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"ડિલીટ કરો"</string>
-    <!-- no translation found for zen_mode_menu_rename_mode (4681802125016390837) -->
-    <skip />
-    <!-- no translation found for zen_mode_menu_delete_mode (5380084696402157428) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"નામ બદલો"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"ડિલીટ કરો"</string>
     <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"\"<xliff:g id="MODE">%1$s</xliff:g>\" મોડ ડિલીટ કરીએ?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"ફેરફાર કરો"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"શેડ્યૂલ"</string>
@@ -3391,8 +3391,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"વિઝ્યુઅલ સંકેતોને મંજૂરી આપો"</string>
     <string name="mode_interruption_filter_title" msgid="3343846700214702347">"એકાગ્રચિત્ત રહો"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"અતિરિક્ત ક્રિયાઓ"</string>
-    <!-- no translation found for modes_sound_summary_off (6972648204528227879) -->
-    <skip />
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{બંધ}=1{બંધ / 1 મોડ ઑટોમૅટિક રીતે ચાલુ થઈ શકે છે}one{બંધ / # મોડ ઑટોમૅટિક રીતે ચાલુ થઈ શકે છે}other{બંધ / # મોડ ઑટોમૅટિક રીતે ચાલુ થઈ શકે છે}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"ડિસ્પ્લે સેટિંગ"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"ડિસ્પ્લેનાં વિકલ્પો"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"ગ્રેસ્કેલ"</string>
@@ -3655,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"આ ઍપ વધારાના સેટિંગને સપોર્ટ કરતી નથી"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"વધુ સેટિંગ"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"આ ઍપમાં વધુ સેટિંગ ઉપલબ્ધ છે"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"અડૅપ્ટિવ નોટિફિકેશન"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"અડૅપ્ટિવ નોટિફિકેશનનો ઉપયોગ કરો"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"જ્યારે ટૂંકા સમયગાળામાં તમને ઘણા નોટિફિકેશન મળે, ત્યારે તમારો ફોન વૉલ્યૂમ ઘટાડશે અને બે મિનિટ સુધી સ્ક્રીન પરના પૉપ-અપને ઓછા કરશે. કૉલ, અલાર્મ અને પ્રાધાન્યતા ધરાવતી વાતચીતોને કારણે હજી પણ ફોન વાઇબ્રેટ થશે, વગાડશે અથવા સ્ક્રીન પર બતાવશે અને જ્યારે તમે સ્ક્રીનની સૌથી ઉપરથી નીચે તરફ ખેંચો, ત્યારે તમામ નોટિફિકેશન શોધવા સરળ છે."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"નોટિફિકેશન કૂલડાઉન"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"ઑફિસની પ્રોફાઇલ પર લાગુ કરો"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"ઑફિસની પ્રોફાઇલ ઍપ પર લાગુ કરો"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR સહાયક સેવાઓ"</string>
@@ -3814,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"પસંદગીની ઍપ"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"એકપણ નહીં"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{કોઈપણ ઍપ વિક્ષેપ કરી શકશે નહીં}=1{{app_1} વિક્ષેપ કરી શકે છે}=2{{app_1} અને {app_2} વિક્ષેપ કરી શકે છે}=3{{app_1}, {app_2} અને {app_3} વિક્ષેપ કરી શકે છે}one{{app_1}, {app_2} અને વધુ # વિક્ષેપ કરી શકે છે}other{{app_1}, {app_2} અને વધુ # વિક્ષેપ કરી શકે છે}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (ઑફિસ)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"ગણતરી કરી રહ્યાં છીએ…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"અ‍ૅપને ઓવરરાઇડ કરવાની મંજૂરી આપો"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"વિક્ષેપ ઊભો કરી શકે તેવી ઍપ"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"વધુ ઍપ પસંદ કરો"</string>
@@ -3832,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"કોઈપણ સાઉન્ડ \'ખલેલ પાડશો નહીં\' મોડને વિક્ષેપ કરી શકશે નહીં"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"કોઈપણ વિક્ષેપ કરી શકશે નહીં"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"અમુક લોકો વિક્ષેપ કરી શકે છે"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"બધા લોકો વિક્ષેપ કરી શકે છે"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"પુનરાવર્તિત કૉલર્સ"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"રિપીટ કૉલરને મંજૂરી આપો"</string>
@@ -3851,14 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{{time} સુધી ફક્ત એક કલાક માટે અલાર્મમાં બદલો}one{{time} સુધી ફક્ત # કલાક માટે અલાર્મમાં બદલો}other{{time} સુધી ફક્ત # કલાક માટે અલાર્મમાં બદલો}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"એલાર્મ્સ પર ફક્ત <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> સુધી બદલો"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"હંમેશાં ખલેલ પાડો પર બદલો"</string>
-    <!-- no translation found for zen_mode_rename_title (8146882272966214558) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_title (321750898430776191) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_default_name (2778307946775085105) -->
-    <skip />
-    <!-- no translation found for zen_mode_edit_name_hint (4584652062167540536) -->
-    <skip />
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"ફેરફાર કરવાનો મોડ"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"મોડ ઉમેરો"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"કસ્ટમ મોડ"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"મોડનું નામ"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"ચેતવણી"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"બંધ કરો"</string>
     <string name="device_feedback" msgid="5351614458411688608">"આ ડિવાઇસ વિશે પ્રતિસાદ મોકલો"</string>

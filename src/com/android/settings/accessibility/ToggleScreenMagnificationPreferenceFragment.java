@@ -974,7 +974,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 ? context.getText(R.string.accessibility_summary_shortcut_enabled)
                 : context.getText(R.string.generic_accessibility_feature_shortcut_off);
         final CharSequence featureSummary = context.getText(R.string.magnification_feature_summary);
-        return context.getString(R.string.preference_summary_default_combination,
+        return context.getString(
+                com.android.settingslib.R.string.preference_summary_default_combination,
                 featureState, featureSummary);
     }
 
