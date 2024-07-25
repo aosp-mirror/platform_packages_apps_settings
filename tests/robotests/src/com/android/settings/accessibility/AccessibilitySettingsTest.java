@@ -169,7 +169,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED);
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.accessibility_summary_shortcut_enabled),
                         DEFAULT_SUMMARY));
     }
@@ -184,7 +185,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED);
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_feature_shortcut_off),
                         DEFAULT_SUMMARY));
     }
@@ -246,7 +248,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_on),
                         DEFAULT_SUMMARY));
     }
@@ -260,7 +263,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_on),
                         DEFAULT_SUMMARY));
     }
@@ -274,7 +278,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_DISABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_off),
                         DEFAULT_SUMMARY));
     }
@@ -288,7 +293,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_DISABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_off),
                         DEFAULT_SUMMARY));
     }
