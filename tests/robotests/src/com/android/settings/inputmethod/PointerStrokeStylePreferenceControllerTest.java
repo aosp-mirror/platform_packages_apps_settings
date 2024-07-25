@@ -24,14 +24,25 @@ import static com.android.settings.inputmethod.PointerStrokeStylePreferenceContr
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assume.assumeTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.UserHandle;
+import android.provider.Settings;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowSystemSettings;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -41,22 +52,30 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link PointerStrokeStylePreferenceController} */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowSystemSettings.class,
+})
 public class PointerStrokeStylePreferenceControllerTest {
     @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     PreferenceScreen mPreferenceScreen;
+    @Mock
+    LifecycleOwner mLifecycleOwner;
 
     private Context mContext;
     private PointerStrokeStylePreferenceController mController;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new PointerStrokeStylePreferenceController(mContext);
     }
 
@@ -77,5 +96,18 @@ public class PointerStrokeStylePreferenceControllerTest {
         assumeTrue(enableVectorCursorA11ySettings());
 
         assertEquals(mController.getAvailabilityStatus(), AVAILABLE);
+    }
+
+    @Test
+    public void onPause_logCurrentStrokeValue() {
+        int strokeStyle = 1;
+        Settings.System.putIntForUser(mContext.getContentResolver(),
+                Settings.System.POINTER_STROKE_STYLE, strokeStyle, UserHandle.USER_CURRENT);
+
+        mController.onStateChanged(mLifecycleOwner, Lifecycle.Event.ON_PAUSE);
+
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                    any(), eq(SettingsEnums.ACTION_POINTER_ICON_STROKE_STYLE_CHANGED),
+                    eq(strokeStyle));
     }
 }

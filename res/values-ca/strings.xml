@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desactivat"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activada (# aplicació té accés a la ubicació)}other{Activada (# aplicacions tenen accés a la ubicació)}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Carregant…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Les aplicacions amb permís per trobar dispositius propers poden determinar la posició relativa dels dispositius connectats."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Les aplicacions que tenen el permís de dispositius propers poden determinar la posició relativa dels dispositius connectats."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accés a la ubicació està desactivat per a aplicacions i serveis. Tanmateix, la ubicació del dispositiu es pot continuar enviant als serveis d\'emergències quan truquis o enviïs un missatge de text a un número d\'emergència."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Més informació sobre la configuració d\'ubicació"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Per canviar-ho, ves a Configuració de ChromeOS &gt; Privadesa i seguretat &gt; Controls de privadesa &gt; Accés a la ubicació"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Ajusta el temps que tarda la pulsació d\'una tecla en activar-se a <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Tecles permanents"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Prem una tecla cada vegada per a les dreceres en lloc de mantenir premudes les tecles alhora"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Tecles del ratolí"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Utilitza el teclat físic per controlar el ratolí."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tecles de drecera"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostra la llista de dreceres"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclats i eines del perfil de treball"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Canvia emplenament del punter a groc"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Canvia emplenament del punter a rosa"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Canvia emplenament del punter a blau"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Estil de traç de punter"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Blanc"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Negre"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Cap"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Aprèn els gestos del ratolí tàctil"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"ratolí tàctil, ratolí, cursor, desplaçar-se, lliscar, fer clic amb el botó dret, fer clic, punter"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"fer clic amb el botó dret, tocar"</string>
@@ -3656,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Aquesta aplicació no és compatible amb la configuració avançada"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Més opcions de configuració"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Hi ha més opcions de configuració disponibles en aquesta aplicació"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Notificacions adaptatives"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Utilitza les notificacions adaptatives"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Quan rebis moltes notificacions en poc temps, el telèfon abaixarà el volum i minimitzarà les finestres emergents en pantalla durant un màxim de dos minuts. Les alertes de trucades, alarmes i converses prioritàries continuaran vibrant, emetent sons i mostrant-se a la pantalla. Totes les notificacions es poden trobar fàcilment en lliscar cap avall des de la part superior de la pantalla."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Moderació de notificacions"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Aplica als perfils de treball"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Aplica a les aplicacions del perfil de treball"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Serveis d\'ajuda per a RV"</string>
@@ -3815,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Aplicacions seleccionades"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Cap"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Cap aplicació no pot interrompre}=1{{app_1} pot interrompre}=2{{app_1} i {app_2} poden interrompre}=3{{app_1}, {app_2} i {app_3} poden interrompre}other{{app_1}, {app_2} i # més poden interrompre}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (treball)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"S\'està calculant…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permet que les aplicacions ignorin el mode No molestis"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplicacions que poden interrompre"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Selecciona més aplicacions"</string>
@@ -3833,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Res no pot interrompre"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Ningú no pot interrompre"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Algunes persones poden interrompre"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Tothom pot interrompre"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Trucades repetides"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Permet les trucades repetides"</string>
@@ -5285,10 +5290,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Activat"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Desactivat"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activat"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Àudio: %1$d%% esquerra, %2$d%% dreta"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Àudio %1$d%% dreta, %2$d%% esquerra"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"El nom del dispositiu és visible per a les aplicacions que has instal·lat. També el poden veure altres persones si el connectes a un dispositiu Bluetooth o a una xarxa Wi‑Fi, o si configures un punt d\'accés Wi‑Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gènere gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selecciona el gènere gramatical"</string>

@@ -32,9 +32,12 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
@@ -42,6 +45,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Looper;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.SystemZenRules;
@@ -74,6 +78,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadows.ShadowAlertDialog;
 
 import java.util.Calendar;
 
@@ -161,19 +166,86 @@ public class ZenModeSetTriggerLinkPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_updatesMode() {
+    public void onPreferenceChange_toggleOn_enablesModeAfterConfirmation() {
+        // Start with a disabled mode
         ZenMode zenMode = new TestModeBuilder().setEnabled(false).build();
-
-        // start with disabled rule
         mController.updateZenMode(mPrefCategory, zenMode);
 
-        // then flip the switch
+        // Flip the switch
         mConfigPreference.callChangeListener(true);
+        verify(mBackend, never()).updateMode(any());
 
-        // verify the backend got asked to update the mode to be enabled
+        // Oh wait, I forgot to confirm! Let's do that
+        assertThat(ShadowAlertDialog.getLatestAlertDialog()).isNotNull();
+        assertThat(ShadowAlertDialog.getLatestAlertDialog().isShowing()).isTrue();
+        ShadowAlertDialog.getLatestAlertDialog()
+                .getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // Verify the backend got asked to update the mode to be enabled
         ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
         verify(mBackend).updateMode(captor.capture());
         assertThat(captor.getValue().getRule().isEnabled()).isTrue();
+        assertThat(ShadowAlertDialog.getLatestAlertDialog().isShowing()).isFalse();
+    }
+
+    @Test
+    public void onPreferenceChange_toggleOff_disablesModeAfterConfirmation() {
+        // Start with an enabled mode
+        ZenMode zenMode = new TestModeBuilder().setEnabled(true).build();
+        mController.updateZenMode(mPrefCategory, zenMode);
+
+        // Flip the switch
+        mConfigPreference.callChangeListener(false);
+        verify(mBackend, never()).updateMode(any());
+
+        // Oh wait, I forgot to confirm! Let's do that
+        assertThat(ShadowAlertDialog.getLatestAlertDialog()).isNotNull();
+        assertThat(ShadowAlertDialog.getLatestAlertDialog().isShowing()).isTrue();
+        ShadowAlertDialog.getLatestAlertDialog()
+                .getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // Verify the backend got asked to update the mode to be disabled
+        ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
+        verify(mBackend).updateMode(captor.capture());
+        assertThat(captor.getValue().getRule().isEnabled()).isFalse();
+        assertThat(ShadowAlertDialog.getLatestAlertDialog().isShowing()).isFalse();
+    }
+
+    @Test
+    public void onPreferenceChange_ifPressCancelButton_doesNotUpdateMode() {
+        // Start with a disabled mode
+        ZenMode zenMode = new TestModeBuilder().setEnabled(false).build();
+        mController.updateZenMode(mPrefCategory, zenMode);
+
+        // Flip the switch, then have second thoughts about it
+        mConfigPreference.callChangeListener(true);
+        ShadowAlertDialog.getLatestAlertDialog()
+                .getButton(AlertDialog.BUTTON_NEGATIVE).performClick();
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // Verify nothing changed, and the switch shows the correct (pre-change) value.
+        verify(mBackend, never()).updateMode(any());
+        assertThat(mConfigPreference.isChecked()).isFalse();
+        assertThat(ShadowAlertDialog.getLatestAlertDialog().isShowing()).isFalse();
+    }
+
+    @Test
+    public void onPreferenceChange_ifExitingDialog_doesNotUpdateMode() {
+        // Start with a disabled mode
+        ZenMode zenMode = new TestModeBuilder().setEnabled(false).build();
+        mController.updateZenMode(mPrefCategory, zenMode);
+
+        // Flip the switch, but close the dialog without selecting either button.
+        mConfigPreference.callChangeListener(true);
+        ShadowAlertDialog.getLatestAlertDialog().dismiss();
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // Verify nothing changed, and the switch shows the correct (pre-change) value.
+        verify(mBackend, never()).updateMode(any());
+        assertThat(mConfigPreference.isChecked()).isFalse();
+        assertThat(ShadowAlertDialog.getLatestAlertDialog().isShowing()).isFalse();
     }
 
     @Test

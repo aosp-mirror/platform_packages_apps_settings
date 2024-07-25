@@ -205,7 +205,6 @@ public class PrivateSpaceMaintainer {
             return mKeyguardManager.createConfirmDeviceCredentialIntent(
                     /* title= */ null,  /* description= */null, mUserHandle.getIdentifier());
         }
-        // TODO(b/304796434) Need to try changing this intent to use BiometricPrompt
         return mKeyguardManager.createConfirmDeviceCredentialIntent(
                 /* title= */ null, /* description= */ null);
     }
