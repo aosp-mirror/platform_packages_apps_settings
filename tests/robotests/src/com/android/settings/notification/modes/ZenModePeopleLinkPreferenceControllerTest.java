@@ -112,6 +112,17 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_disabled() {
+        ZenMode zenMode = new TestModeBuilder()
+                .setEnabled(false)
+                .build();
+
+        mController.updateState(mPreference, zenMode);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
     public void updateState_setsSummary() {
         mController.updateState(mPreference, TestModeBuilder.EXAMPLE);
 

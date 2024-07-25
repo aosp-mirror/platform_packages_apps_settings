@@ -70,6 +70,7 @@ class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceCont
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModeOtherFragment.class,
                         zenMode.getId(), 0).toIntent());
 
+        preference.setEnabled(zenMode.isEnabled());
         preference.setSummary(mSummaryHelper.getOtherSoundCategoriesSummary(zenMode));
         ((CircularIconsPreference) preference).displayIcons(getSoundIcons(zenMode.getPolicy()));
     }

@@ -53,12 +53,15 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         prefControllers.add(new ZenModeHeaderController(context, "header", this));
         prefControllers.add(
                 new ZenModeButtonPreferenceController(context, "activate", this, mBackend));
+        prefControllers.add(new ZenModePreferenceCategoryController(context, "modes_filters"));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
                 context, "zen_mode_people", mHelperBackend));
         prefControllers.add(new ZenModeAppsLinkPreferenceController(
                 context, "zen_mode_apps", this, mBackend, mHelperBackend));
         prefControllers.add(new ZenModeOtherLinkPreferenceController(
                 context, "zen_other_settings", mHelperBackend));
+        prefControllers.add(
+                new ZenModePreferenceCategoryController(context, "modes_additional_actions"));
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(
                 context, "mode_display_settings", mBackend, mHelperBackend));
         prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
