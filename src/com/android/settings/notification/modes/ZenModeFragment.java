@@ -51,6 +51,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeHeaderController(context, "header", this));
+        prefControllers.add(new ZenModeBlurbPreferenceController(context, "mode_blurb"));
         prefControllers.add(
                 new ZenModeButtonPreferenceController(context, "activate", this, mBackend));
         prefControllers.add(new ZenModePreferenceCategoryController(context, "modes_filters"));
