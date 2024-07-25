@@ -60,7 +60,6 @@ import com.android.internal.accessibility.dialog.AccessibilityTargetHelper;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.accessibility.AccessibilitySetupWizardUtils;
-import com.android.settings.accessibility.Flags;
 import com.android.settings.accessibility.PreferredShortcuts;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -199,8 +198,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
         Activity activity = getActivity();
 
         if (!activity.getIntent().getAction().equals(
-                Settings.ACTION_ACCESSIBILITY_SHORTCUT_SETTINGS)
-                || !Flags.editShortcutsInFullScreen()) {
+                Settings.ACTION_ACCESSIBILITY_SHORTCUT_SETTINGS)) {
             return;
         }
 
