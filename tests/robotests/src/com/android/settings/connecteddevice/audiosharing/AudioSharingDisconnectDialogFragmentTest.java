@@ -154,6 +154,23 @@ public class AudioSharingDisconnectDialogFragmentTest {
     }
 
     @Test
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mDeviceItems = new ArrayList<>();
+        mDeviceItems.add(TEST_DEVICE_ITEM1);
+        mDeviceItems.add(TEST_DEVICE_ITEM2);
+        AudioSharingDisconnectDialogFragment.show(
+                new Fragment(),
+                mDeviceItems,
+                mCachedDevice3,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
+        shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
     public void onCreateDialog_flagOn_dialogShowBtnForTwoDevices() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mDeviceItems = new ArrayList<>();

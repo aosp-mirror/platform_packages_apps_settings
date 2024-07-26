@@ -23,12 +23,19 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.AutomaticZenRule;
 import android.app.Flags;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
+
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
@@ -42,6 +49,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.time.Duration;
+
 @EnableFlags(Flags.FLAG_MODES_UI)
 @RunWith(RobolectricTestRunner.class)
 public final class ZenModeButtonPreferenceControllerTest {
@@ -51,19 +60,24 @@ public final class ZenModeButtonPreferenceControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
-
     private Context mContext;
+    private ContentResolver mContentResolver;
+
     @Mock
     private ZenModesBackend mBackend;
+
+    @Mock
+    private Fragment mParent;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
+        mContentResolver = RuntimeEnvironment.application.getContentResolver();
 
         mController = new ZenModeButtonPreferenceController(
-                mContext, "something", mBackend);
+                mContext, "something", mParent, mBackend);
     }
 
     @Test
@@ -73,6 +87,16 @@ public final class ZenModeButtonPreferenceControllerTest {
                 .build();
         mController.setZenMode(zenMode);
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_ifModeActiveEvenIfAppOptsOut() {
+        ZenMode zenMode = new TestModeBuilder()
+                .setManualInvocationAllowed(false)
+                .setActive(true)
+                .build();
+        mController.setZenMode(zenMode);
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
@@ -105,7 +129,6 @@ public final class ZenModeButtonPreferenceControllerTest {
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
         ZenMode zenMode = new TestModeBuilder()
-                .setManualInvocationAllowed(true)
                 .setActive(true)
                 .build();
 
@@ -137,7 +160,6 @@ public final class ZenModeButtonPreferenceControllerTest {
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
         ZenMode zenMode = new TestModeBuilder()
-                .setManualInvocationAllowed(true)
                 .setActive(true)
                 .build();
 
@@ -159,6 +181,36 @@ public final class ZenModeButtonPreferenceControllerTest {
 
         mController.updateZenMode(pref, zenMode);
 
+        button.callOnClick();
+        verify(mBackend).activateMode(zenMode, null);
+    }
+
+    @Test
+    public void updateStateThenClick_withDuration() {
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ZEN_DURATION,
+                45 /* minutes */);
+        Button button = new Button(mContext);
+        LayoutPreference pref = mock(LayoutPreference.class);
+        when(pref.findViewById(anyInt())).thenReturn(button);
+        ZenMode zenMode = ZenMode.manualDndMode(
+                new AutomaticZenRule.Builder("manual", Uri.EMPTY).build(), false);
+
+        mController.updateZenMode(pref, zenMode);
+        button.callOnClick();
+        verify(mBackend).activateMode(zenMode, Duration.ofMinutes(45));
+    }
+
+    @Test
+    public void updateStateThenClick_durationForever() {
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ZEN_DURATION,
+                Settings.Secure.ZEN_DURATION_FOREVER);
+        Button button = new Button(mContext);
+        LayoutPreference pref = mock(LayoutPreference.class);
+        when(pref.findViewById(anyInt())).thenReturn(button);
+        ZenMode zenMode = ZenMode.manualDndMode(
+                new AutomaticZenRule.Builder("manual", Uri.EMPTY).build(), false);
+
+        mController.updateZenMode(pref, zenMode);
         button.callOnClick();
         verify(mBackend).activateMode(zenMode, null);
     }

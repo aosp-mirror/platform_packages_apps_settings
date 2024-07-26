@@ -65,8 +65,7 @@
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Адключыць прыладу?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Спалучыць новую прыладу"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_title (2203993262483477532) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Аўтаматычна ўключыць заўтра"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Спалучыць справа"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Спалучыць злева"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Спалучыце для іншага вуха"</string>
@@ -77,6 +76,7 @@
     <string name="bluetooth_hearing_device_settings_title" msgid="6060072560486755057">"Налады слыхавога апарата"</string>
     <string name="bluetooth_hearing_device_settings_summary" msgid="3822646075744075158">"Хуткае ўключэнне спецыяльных магчымасцей, сумяшчальнасць са слыхавымі апаратамі"</string>
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Набор налад"</string>
+    <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Ваш сурдолаг не запраграмаваў ніякіх набораў налад"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Не ўдалося абнавіць набор налад"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аўдыявыхад"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Пра аўдыявыхад"</string>
@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Выкл."</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Уключана – # праграма мае доступ да даных месцазнаходжання}one{Уключана – # праграма мае доступ да даных месцазнаходжання}few{Уключана – # праграмы маюць доступ да даных месцазнаходжання}many{Уключана – # праграм маюць доступ да даных месцазнаходжання}other{Уключана – # праграмы маюць доступ да даных месцазнаходжання}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Ідзе загрузка…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Праграмы з дазволам на доступ да прылад паблізу могуць вызначаць прыблізнае месцазнаходжанне падключаных прылад."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Праграмы з дазволам на доступ да прылад паблізу могуць вызначаць прыблізнае месцазнаходжанне падключаных прылад"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Для праграм і сэрвісаў доступ да геаданых выключаны. Інфармацыя пра месцазнаходжанне вашай прылады можа адпраўляцца экстранным службам, калі вы робіце выклік на іх нумар ці адпраўляеце ім SMS."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Даведацца больш пра налады месцазнаходжання"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Каб змяніць, у ChromeOS перайдзіце ў раздзел \"Налады &gt; Прыватнасць і бяспека &gt; Налады прыватнасці &gt; Доступ да даных геалакацыі\""</string>
@@ -410,6 +410,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Твар і гадзіннік \"<xliff:g id="WATCH">%s</xliff:g>\" дададзены"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Твар, адбітак пальца і гадзіннік \"<xliff:g id="WATCH">%s</xliff:g>\" дададзены"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Твар, адбіткі пальцаў і гадзіннік \"<xliff:g id="WATCH">%s</xliff:g>\" дададзены"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Гэта неабходна, паколькі ўключана функцыя праверкі асобы"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Разблакіраваць Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Гадзіннік дададзены"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Наладжванне гадзінніка"</string>
@@ -437,7 +438,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Даведацца больш пра разблакіроўку гадзіннікам"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Дадаць гадзіннік"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Выдаліць гадзіннік"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Разблакіроўка тварам і адбіткам пальца"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Распазнаванне твару і разблакіроўка адбіткам пальца"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Разблакіроўка тварам і адбіткам пальца для працоўнага профілю"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Патрабуецца наладжванне"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Дададзены твар і адбіткі пальцаў"</string>
@@ -614,10 +615,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Усталюйце праграмы"</b>\n"Усталюйце праграмы, якія будуць заставацца прыватнымі дзякуючы прасторы"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Што трэба мець на ўвазе"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Пры заблакіраваным доступе да прасторы дададзеныя ў яе праграмы перастаюць працаваць"</b>\n"Калі доступ да прасторы заблакіраваны, дададзеныя ў яе праграмы перастаюць працаваць і апавяшчэнні з іх не паказваюцца"</string>
-    <!-- no translation found for private_space_apps_permission_text (4416201648436201393) -->
-    <skip />
-    <!-- no translation found for private_space_settings_footer_text (3742468470394835356) -->
-    <skip />
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Не дадавайце ў прыватную прастору праграмы, якія працуюць у фонавым рэжыме або адпраўляюць крытычныя апавяшчэнні, напрыклад медыцынскія праграмы. Пры блакіраванні прыватнай прасторы адпраўка апавяшчэнняў і фонавая дзейнасць праграм спыняюцца.\n\nКалі доступ да прыватнай прасторы заблакіраваны, праграмы з яе не паказваюцца ў менеджары дазволаў і на панэлі кіравання доступам, а таксама ў іншых наладах.\n\nПрыватную прастору нельга перамясціць на іншую прыладу. Для кожнай прылады трэба будзе наладжваць асобную прыватную прастору.\n\nДоступ да прыватнай прасторы можа атрымаць чалавек, які ўсталюе на вашай прыладзе шкодныя праграмы або падключыць яе да камп’ютара."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Не дадавайце ў прыватную прастору праграмы, якія працуюць у фонавым рэжыме або адпраўляюць крытычныя апавяшчэнні, напрыклад медыцынскія праграмы. Пры блакіраванні прыватнай прасторы адпраўка апавяшчэнняў і фонавая дзейнасць праграм спыняюцца.\n\nКалі доступ да прыватнай прасторы заблакіраваны, праграмы з яе не паказваюцца ў менеджары дазволаў і на панэлі кіравання доступам, а таксама ў іншых наладах.\n\nПрыватную прастору нельга перамясціць на іншую прыладу. Для кожнай прылады трэба будзе наладжваць асобную прыватную прастору.\n\nДоступ да прыватнай прасторы можа атрымаць чалавек, які ўсталюе на вашай прыладзе шкодныя праграмы або падключыць яе да камп’ютара."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Даведацца больш пра прыватную прастору"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Гэты працэс зойме крыху часу"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Ідзе наладжванне прыватнай прасторы…"</string>
@@ -851,36 +850,21 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Перазапусціць прыладу?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Падрабязнае вядзенне журналаў NFC прызначана толькі для мэт распрацоўкі. У справаздачы пра памылкі ўключаюцца дадатковыя даныя NFC, якія могуць утрымліваць прыватную інфармацыю. Перазапусціце прыладу, каб змяніць гэту наладу."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Перазапусціць"</string>
-    <!-- no translation found for keywords_external_display (4181375057920134909) -->
-    <skip />
-    <!-- no translation found for external_display_on (2560104443500154333) -->
-    <skip />
-    <!-- no translation found for external_display_off (5634413756025351374) -->
-    <skip />
-    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
-    <skip />
-    <!-- no translation found for external_display_use_title (8198257340836261386) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
-    <skip />
-    <!-- no translation found for external_display_not_found (1912355133386555798) -->
-    <skip />
-    <!-- no translation found for external_display_rotation (7160062306817490204) -->
-    <skip />
-    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
-    <skip />
-    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
-    <skip />
-    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
-    <skip />
-    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
-    <skip />
-    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
-    <skip />
-    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
-    <skip />
-    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
-    <skip />
+    <string name="keywords_external_display" msgid="4181375057920134909">"дубліраваць, знешні дысплэй, падключаны дысплэй, usb-дысплэй, раздзяляльнасць, паварот"</string>
+    <string name="external_display_on" msgid="2560104443500154333">"Уключаны"</string>
+    <string name="external_display_off" msgid="5634413756025351374">"Выключаны"</string>
+    <string name="external_display_settings_title" msgid="6256884595821605779">"Знешні дысплэй"</string>
+    <string name="external_display_use_title" msgid="8198257340836261386">"Выкарыстоўваць знешні дысплэй"</string>
+    <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Раздзяляльнасць дысплэя"</string>
+    <string name="external_display_not_found" msgid="1912355133386555798">"Знешні дысплэй адключаны"</string>
+    <string name="external_display_rotation" msgid="7160062306817490204">"Паварот"</string>
+    <string name="external_display_standard_rotation" msgid="545969032327487219">"Стандартна"</string>
+    <string name="external_display_rotation_90" msgid="7371530414227542947">"90°"</string>
+    <string name="external_display_rotation_180" msgid="6469137724447819841">"180°"</string>
+    <string name="external_display_rotation_270" msgid="7819322302457740514">"270°"</string>
+    <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Змяненне налад павароту або раздзяляльнасці можа прывесці да спынення актыўных праграм"</string>
+    <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Для дубліравання экрана неабходна падключыць прыладу да знешняга дысплэя"</string>
+    <string name="external_display_more_options_title" msgid="1222751990705118774">"Дадатковыя параметры"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Трансляцыя"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"адлюстраванне"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Уключыць бесправадны дысплей"</string>
@@ -1222,6 +1206,7 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Адаптыўныя"</string>
     <string name="brightness" msgid="6216871641021779698">"Узровень яркасці"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Адаптыўная яркасць"</string>
+    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Інфармацыя пра адаптыўную яркасць"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Яркасць экрана будзе мяняцца аўтаматычна, у залежнасці ад наваколля і вашых дзеянняў. Можна пераключаць паўзунок уручную, каб дастасаваць функцыю да вашых параметраў."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Уключана"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Выключана"</string>
@@ -1927,14 +1912,14 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Іншыя версіі"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Спецыяльныя магчымасці"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Фізічная клавіятура"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Выкарыстоўваць экранную клавіятуру"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Захоўваць яе на экране ў той час, калі фізічная клавіятура актыўная"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Ігнараванне паўторнага націскання"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"Паўторныя націсканні адной і той жа клавішы, ажыццёўленыя на працягу <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> мс, ігнаруюцца"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Запавольванне рэакцыі на націсканне"</string>
     <string name="slow_keys_summary" msgid="1784371292745423292">"Рэгістрацыя націскання клавішы ажыццяўляецца пасля заканчэння зададзенага часу: <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> мс"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Заліпанне клавіш"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Замест таго каб утрымліваць усе клавішы са спалучэння, націскайце іх па адной"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Кнопкі мышы"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Выкарыстоўвайце фізічную клавіятуру, каб кіраваць мышшу."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Гарачыя клавішы"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Паказаць спіс спалучэнняў клавіш"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавіятуры і інструменты працоўнага профілю"</string>
@@ -1959,6 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Змяніць стыль заліўкі на жоўты"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Змяніць стыль заліўкі на ружовы"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Змяніць стыль заліўкі на сіні"</string>
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Контур паказальніка"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Белы"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Чорны"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Няма"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Даведацца пра жэсты сэнсарнай панэлі"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"сэнсарная панэль, мыш, курсор, прагартаць, правесці пальцам, націснуць правай кнопкай мышы, націснуць, націсканне, паказальнік"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"націснуць правай кнопкай мышы, дакрануцца, націснуць, дотык"</string>
@@ -2002,12 +1991,9 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Выбрана карыстальнікам: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Маўленне"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Хуткасць указальніка"</string>
-    <!-- no translation found for pointer_scale (4941564570571663964) -->
-    <skip />
-    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
-    <skip />
-    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
-    <skip />
+    <string name="pointer_scale" msgid="4941564570571663964">"Памер паказальніка"</string>
+    <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Паменшыць памер паказальніка"</string>
+    <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Павялічыць памер паказальніка"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Прылада кiравання гульнёй"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Перанакіраванне вібрасігналу"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Адпраўляць вібрасігнал на гульнявы кантролер пры падключэнні."</string>
@@ -2130,7 +2116,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Усё роўна працягнуць"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Скасаваць"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Налады павелічэння"</string>
-    <string name="accessibility_magnification_one_finger_panning_title" msgid="4503949739883092989">"Зрушэнне адным пальцам"</string>
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"Перамяшчайце лупу адным пальцам"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"Для перамяшчэння па экране перасоўвайце адзін палец"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"Вобласць павелічэння перацягваецца адным пальцам."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"Вобласць павелічэння перацягваецца двума пальцамі."</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"Недаступна, калі павялічваецца толькі частка экрана"</string>
@@ -2154,6 +2141,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Дакраніцеся да кнопкі, каб павялічыць маштаб"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Хутка павялічвайце маштаб экрана"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Каб павялічыць маштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Скарыстайце хуткі доступ для запуску функцыі павелічэння&lt;br/&gt; {1,number,integer}. Націсніце на экран&lt;br/&gt; {2,number,integer}. Каб перамясціць выяву, перацягніце яе двума пальцамі&lt;br/&gt; {3,number,integer}. Звядзіце ці развядзіце два пальцы для змены маштабу&lt;br/&gt; {4,number,integer}. Скарыстайце хуткі доступ, каб выключыць функцыю павелічэння&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Каб часова павялічыць маштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Упэўніцеся, што ў якасці тыпу павелічэння выбраны поўнаэкранны рэжым&lt;br/&gt; {1,number,integer}. Скарыстайце хуткі доступ для запуску функцыі павелічэння&lt;br/&gt; {2,number,integer}. Утрымлівайце палец націснутым у любым месцы экрана&lt;br/&gt; {3,number,integer}. Каб перамясціць выяву, перацягніце яе пальцам&lt;br/&gt; {4,number,integer}. Падніміце палец, каб спыніць функцыю павелічэння"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Каб павялічыць маштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Скарыстайце хуткі доступ для запуску функцыі павелічэння&lt;br/&gt; {1,number,integer}. Націсніце на экран&lt;br/&gt; {2,number,integer}. Для перамяшчэння па экране перасоўвайце два пальцы&lt;br/&gt; {3,number,integer}. Звядзіце ці развядзіце два пальцы для змены маштабу&lt;br/&gt; {4,number,integer}. Скарыстайце хуткі доступ для выключэння функцыі павелічэння&lt;br/&gt;&lt;br/&gt; Таксама вы можаце часова павялічыць маштаб і выканаць іншыя дзеянні."</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Каб павялічыць маштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Скарыстайце хуткі доступ для запуску функцыі павелічэння&lt;br/&gt; {1,number,integer}. Націсніце на экран&lt;br/&gt; {2,number,integer}. Для перамяшчэння па экране перасоўвайце адзін або два пальцы&lt;br/&gt; {3,number,integer}. Звядзіце ці развядзіце два пальцы для змены маштабу&lt;br/&gt; {4,number,integer}. Скарыстайце хуткі доступ для выключэння функцыі павелічэння&lt;br/&gt;&lt;br/&gt; Таксама вы можаце часова павялічыць маштаб і выканаць іншыя дзеянні."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Калі ўключана функцыя павелічэння, вы можаце павялічыць маштаб на экране.\n\n"<b>"Для гэтага"</b>" запусціце функцыю павелічэння, а пасля націсніце ў любым месцы экрана.\n"<ul><li>"Каб прагартаць, перацягніце пальцамі (двума ці больш)."</li>\n<li>"Каб адрэгуляваць маштаб, звядзіце ці развядзіце пальцы (два ці больш)."</li></ul>\n\n<b>"Каб часова змяніць маштаб"</b>", запусціце функцыю павелічэння, потым утрымлівайце націснутым любое месца на экране.\n"<ul><li>"Перацягніце для навігацыі па экране."</li>\n<li>"Падыміце палец, каб паменшыць маштаб."</li></ul>\n\n"Павелічэнне маштабу клавіятуры ці панэлі навігацыі не прадугледжана."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Старонка <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> з <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Хуткае ўключэнне: кнопка спецыяльных магчымасцей"</string>
@@ -3359,35 +3348,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ніводнага}=1{Зададзены 1 расклад}one{Зададзены # расклад}few{Зададзена # расклады}many{Зададзена # раскладаў}other{Зададзена # раскладу}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не турбаваць"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Прыярытэтныя рэжымы"</string>
-    <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
-    <skip />
+    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Дадаць рэжым"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Атрымліваць апавяшчэнні толькі ад важных людзей і праграм"</string>
-    <!-- no translation found for zen_mode_select_schedule (5135520719771212697) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time (1761728920617757652) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_time_example (3071816060919446355) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar (4320676795917533667) -->
-    <skip />
-    <!-- no translation found for zen_mode_select_schedule_calendar_example (6549820995975678001) -->
-    <skip />
-    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
-    <skip />
-    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
-    <skip />
-    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
-    <skip />
+    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Выбраць тып актывацыі"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Час"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Напрыклад: \"9:30 – 17:00\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Каляндар"</string>
+    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Напрыклад: \"асабісты каляндар\""</string>
+    <string name="zen_mode_active_text" msgid="5002406772481439437">"УКЛЮЧАНА"</string>
+    <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Не зададзена"</string>
+    <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Адключана"</string>
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Стварыць рэжым"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Карыстальніцкі"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Абмежаванне колькасці непатрэбных апавяшчэнняў"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Уключэнне рэжыму \"Не турбаваць\""</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Гэты рэжым не распаўсюджваецца на сігналы будзільнікаў і гукі мультымедыя"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Расклады"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Выдаліць расклады"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Выдаліць"</string>
-    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
-    <skip />
-    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"Перайменаваць"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"Выдаліць"</string>
+    <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"Выдаліць рэжым \"<xliff:g id="MODE">%1$s</xliff:g>\"?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Змяніць"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Расклады"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Расклад"</string>
@@ -3398,6 +3379,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Задаць расклад"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Расклад"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> гадз <xliff:g id="MINUTES">%2$d</xliff:g> хв"</string>
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Уключаць аўтаматычна"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Расклад"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Выключаць гук тэлефона ў пэўны час"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Правілы рэжыму \"Не турбаваць\""</string>
@@ -3407,9 +3389,9 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Дазволіць гукавыя апавяшчэнні"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Блакіроўка візуальных апавяшчэнняў"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Дазволіць візуальныя сігналы"</string>
-    <!-- no translation found for mode_interruption_filter_title (3343846700214702347) -->
-    <skip />
+    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Захоўвайце канцэнтрацыю"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Дадатковыя дзеянні"</string>
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Выключана}=1{Выключана / аўтаматычна можна ўключыць 1 рэжым}one{Выключана / аўтаматычна можна ўключыць # рэжым}few{Выключана / аўтаматычна можна ўключыць # рэжымы}many{Выключана / аўтаматычна можна ўключыць # рэжымаў}other{Выключана / аўтаматычна можна ўключыць # рэжыму}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Налады адлюстравання"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Параметры адлюстравання"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Адценні шэрага"</string>
@@ -3425,10 +3407,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"уключыць цёмную тэму"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Пераключэнне АС і праграм на адлюстраванне светлага тэксту на цёмным фоне, што дазваляе знізіць нагрузку на зрок і на некаторых прыладах значна эканоміць зарад акумулятара"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Няма змен у адлюстраванні}=1{{effect_1}}=2{{effect_1} і {effect_2}}=3{{effect_1}, {effect_2} і {effect_3}}one{{effect_1}, {effect_2} і яшчэ #}few{{effect_1}, {effect_2} і яшчэ #}many{{effect_1}, {effect_2} і яшчэ #}other{{effect_1}, {effect_2} і яшчэ #}}"</string>
-    <!-- no translation found for mode_notification_filter_title (443728483176031977) -->
-    <skip />
-    <!-- no translation found for mode_no_notification_filter (7119188047783404890) -->
-    <skip />
+    <string name="mode_notification_filter_title" msgid="443728483176031977">"Адфільтроўваць апавяшчэнні"</string>
+    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Апавяшчэнні не адфільтроўваюцца"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Параметры адлюстравання для адфільтраваных апавяшчэнняў"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Калі рэжым \"Не турбаваць\" уключаны"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Апавяшчэнні без гуку"</string>
@@ -3544,6 +3524,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"адкрыць апавяшчэнне"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Дазволіць адкладванне апавяшчэнняў"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Значок апавяшчэнняў на значку праграмы"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"Групы апавяшчэнняў"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Усплывальныя чаты"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Усплывальныя чаты"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Паказваць гэту размову ў выглядзе ўсплывальных апавяшчэнняў"</string>
@@ -3673,11 +3654,10 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Гэта праграма не падтрымлівае пашыраныя налады"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Дадатковыя налады"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Іншыя налады даступныя ўнутры гэтай праграмы"</string>
-    <!-- no translation found for notification_polite_title (4737150709382859870) -->
+    <string name="notification_polite_title" msgid="6121016426991791557">"Зніжэнне гучнасці апавяшчэнняў"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
     <skip />
-    <!-- no translation found for notification_polite_main_control_title (7267191551379543859) -->
-    <skip />
-    <!-- no translation found for notification_polite_description (7749280535620291610) -->
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
     <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Прымяніць да працоўных профіляў"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Прымяняць да праграм працоўнага профілю"</string>
@@ -3725,6 +3705,7 @@
     <string name="notification_channels" msgid="1502969522886493799">"Катэгорыі"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Іншае"</string>
     <string name="no_channels" msgid="4716199078612071915">"Гэта праграма не размяшчала ніякіх апавяшчэнняў"</string>
+    <string name="no_recent_channels" msgid="5068574296267584043">"Паказаць катэгорыі, якія не выкарыстоўваюцца"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Дадатковыя налады ў праграме"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Паказаць неўжывальныя катэгорыі"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Схаваць неўжывальныя катэгорыі"</string>
@@ -3833,8 +3814,10 @@
     <string name="zen_mode_apps_category" msgid="4082380323683889391">"Гэты рэжым не распаўсюджваецца на наступныя праграмы"</string>
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Выбраныя праграмы"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Ніякія"</string>
-    <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"Усе"</string>
-    <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Рэжым \"Не турбаваць\" распаўсюджваецца на ўсе праграмы}=1{Рэжым \"Не турбаваць\" не распаўсюджваецца на праграму \"{app_1}\"}=2{Рэжым \"Не турбаваць\" не распаўсюджваецца на праграмы \"{app_1}\" і \"{app_2}\"}=3{Рэжым \"Не турбаваць\" не распаўсюджваецца на праграмы \"{app_1}\", \"{app_2}\" і \"{app_3}\"}one{Рэжым \"Не турбаваць\" не распаўсюджваецца на праграмы \"{app_1}\", \"{app_2}\" і яшчэ на # праграму}few{Рэжым \"Не турбаваць\" не распаўсюджваецца на праграмы \"{app_1}\", \"{app_2}\" і яшчэ на # праграмы}many{Рэжым \"Не турбаваць\" не распаўсюджваецца на праграмы \"{app_1}\", \"{app_2}\" і яшчэ на # праграм}other{Рэжым \"Не турбаваць\" не распаўсюджваецца на праграмы \"{app_1}\", \"{app_2}\" і яшчэ на # праграмы}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (праца)"</string>
+    <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Вядзецца падлік…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Дазволіць праграмам перавызначаць"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Гэты рэжым не распаўсюджваецца на наступныя праграмы"</string>
@@ -3853,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Рэжым \"Не турбаваць\" распаўсюджваецца на ўсё без выключэння"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Гэты рэжым распаўсюджваецца на ўсіх людзей"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Гэты рэжым не распаўсюджваецца на некаторыя кантакты"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Гэты рэжым не распаўсюджваецца на людзей"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Паўторныя выклікі"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Дазволіць паўторныя выклікі"</string>
@@ -3872,9 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Пераключэнне на рэжым \"Толькі будзільнікі\" на адну гадзіну да {time}}one{Пераключэнне на рэжым \"Толькі будзільнікі\" на # гадзіну да {time}}few{Пераключэнне на рэжым \"Толькі будзільнікі\" на # гадзіны да {time}}many{Пераключэнне на рэжым \"Толькі будзільнікі\" на # гадзін да {time}}other{Пераключэнне на рэжым \"Толькі будзільнікі\" на # гадзіны да {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Пераключыцца на рэжым «толькі будзільнікі» да <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Уключыць усе апавяшчэнні"</string>
-    <string name="zen_mode_action_change_name" msgid="766639614789907016">"Перайменаваць"</string>
-    <string name="zen_mode_action_change_icon" msgid="6192187791750301778">"Змяніць значок"</string>
-    <string name="zen_mode_icon_picker_title" msgid="6845490379143557472">"Змяніць значок"</string>
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"Змяніць рэжым"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Дадаць рэжым"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Карыстальніцкі рэжым"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Назва рэжыму"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Заўвага"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Закрыць"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Адправіць водгук пра гэту прыладу"</string>
@@ -4345,7 +4331,7 @@
     <string name="system_navigation_title" msgid="4890381153527184636">"Рэжым навігацыі"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"2-кнопачная навігацыя"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Каб пераключыцца на іншую праграму, правядзіце пальцам уверх па кнопцы галоўнага экрана. Каб убачыць усе праграмы, правядзіце яшчэ раз. Каб вярнуцца, націсніце кнопку \"Назад\"."</string>
-    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Бяспека і экстранны выклік"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Фізічная бяспека і экстранныя сітуацыі"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Экстранны выклік, медыцынская інфармацыя, абвесткі"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навігацыя жэстамі"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Каб вярнуцца на галоўную старонку, правядзіце па экране пальцам знізу ўверх. Каб пераключыцца на іншую праграму, правядзіце па экране пальцам знізу ўверх, затрымайцеся, а потым адпусціце. Каб вярнуцца назад, правядзіце па экране пальцам управа ці ўлева."</string>
@@ -4860,8 +4846,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Чахол"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Акумулятар"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Панель налад"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"Прымусова ўключаць рэжым працоўнага стала"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Прымусова ўключаць эксперыментальны рэжым працоўнага стала на дадатковых экранах"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"Уключыць адвольную форму вокнаў"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Уключыць падтрымку адвольнай формы вокнаў."</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"Уключыць адвольную форму вокнаў на другасным дысплэі"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Уключыць адвольную форму вокнаў толькі на другасным дысплэі."</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"У рэжыме некалькіх вокнаў уключыць нязменны памер"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Дазваляе выкарыстоўваць праграмы, якія маюць нязменны памер, у рэжыме некалькіх вокнаў"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Перавызначэнне ўключэння цёмнай тэмы"</string>
@@ -4929,14 +4917,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"Каб выкарыстоўваць рэжым 16 КБ у параметрах распрацоўшчыка, раздзел даных на гэтай прыладзе трэба пераўтварыць у ext4. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Для ўключэння параметра 16 КБ патрабуецца паўторная перазагрузка. Пасля таго як вы ўключыце гэты рэжым, пераключэнне паміж рэжымамі 4 КБ і 16 КБ будзе суправаджацца толькі адной перазагрузкай. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб вярнуць прыладу ў эксплуатацыйны рэжым, вам трэба пераключыцца ў рэжым 4 КБ і заблакіраваць загрузчык, што прывядзе да скіду прылады да заводскіх налад. Пасля загрузкі Android на прыладзе выключыце разблакіроўку OEM у Параметрах распрацоўшчыка. Усе даныя будуць выдалены з прылады, а файлавая сістэма пасля пацвярджэння будзе зменена на ext4. Пасля завяршэння вярніцеся, каб зноў уключыць рэжым 16 КБ."</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Сцерці ўсе даныя"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Не ўдалося ачысціць раздзел даных і перафармаціраваць яго ў ext4."</string>
-    <string name="confirm_oem_unlock_for_16k_title" msgid="5374451262432025419">"Для рэжыму 16 КБ патрабуецца разблакіроўка загрузчыка"</string>
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Патрабуецца разблакіроўка загрузчыка"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"Каб выкарыстоўваць рэжым 16 КБ у параметрах распрацоўшчыка, трэба разблакіраваць загрузчык на прыладзе. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Калі рэжым 16 КБ уключыцца, усе даныя і налады карыстальніка будуць выдалены. Калі загрузчык будзе разблакіраваны, для ўключэння параметра 16 КБ спатрэбяцца дзве перазагрузкі. Пасля таго як вы ўключыце гэты рэжым, пераключэнне паміж рэжымамі 4 КБ і 16 КБ будзе суправаджацца толькі адной перазагрузкай. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб вярнуць прыладу ў эксплуатацыйны рэжым, вам трэба пераключыцца ў рэжым 4 КБ і заблакіраваць OEM ці загрузчык (што прывядзе да скіду прылады да заводскіх налад). Разблакіруйце загрузчык і паўтарыце спробу. Інструкцыі, як гэта зрабіць, глядзіце на старонцы &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;."</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"Дзейнічае рэжым 4 КБ, які не залежыць ад памеру старонкі памяці"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 4 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, заблакіруйце загрузчык на прыладзе. Націсніце, каб чытаць далей."</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 4 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, заблакіруйце загрузчык на прыладзе. Пасля гэтага адбудзецца яе паўторны скід да заводскіх налад. Пасля загрузкі Android на прыладзе выключыце разблакіроўку OEM у Параметрах распрацоўшчыка. Калі на прыладзе не ўдаецца запусціць АС Android ці яе праца нестабільная, перапрашыйце прыладу, выкарыстоўваючы апошнія версіі заводскіх вобразаў, якія можна спампаваць тут: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;. Або перайдзіце па спасылцы &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; і выберыце \"Ачысціць прыладу\", \"Заблакіраваць загрузчык\" і \"Перапрашыць усе раздзелы\"."</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"Дзейнічае рэжым 16 КБ, які не залежыць ад памеру старонкі памяці"</string>
-    <string name="page_agnostic_16k_pages_text_short" msgid="269039281591806585">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, пераключыцеся на рэжым 4 КБ і заблакіруйце загрузчык на прыладзе. Націсніце, каб чытаць далей."</string>
-    <string name="page_agnostic_16k_pages_text" msgid="6208765386837706582">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца. Існуе рызыка страціць даныя, якія былі захаваны на тэлефоне, калі загрузчык быў разблакіраваны. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, пераключыцеся на рэжым 4 КБ і заблакіруйце загрузчык на прыладзе. Пасля гэтага адбудзецца яе паўторны скід да заводскіх налад. Пасля загрузкі Android на прыладзе выключыце разблакіроўку OEM у Параметрах распрацоўшчыка. Калі на прыладзе не ўдаецца запусціць АС Android ці яе праца нестабільная, перапрашыйце прыладу, выкарыстоўваючы апошнія версіі заводскіх вобразаў, якія можна спампаваць тут: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;. Або перайдзіце па спасылцы &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; і выберыце \"Ачысціць прыладу\", \"Заблакіраваць загрузчык\" і \"Перапрашыць усе раздзелы\"."</string>
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца і ёсць рызыка страціць даныя, якія захоўваюцца на тэлефоне пры разблакіраваным загрузчыку. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, пераключыцеся на рэжым 4 КБ і заблакіруйце загрузчык на прыладзе. Націсніце, каб чытаць далей."</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"У вас уключаны рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ. У гэтым рэжыме цэласнасць праграмнага забеспячэння не гарантуецца і ёсць рызыка страціць даныя, якія захоўваюцца на тэлефоне пры разблакіраваным загрузчыку. Асобныя функцыі будуць адключаны ў гэтых рэжымах, з-за чаго некаторыя праграмы могуць не працаваць. Каб паўторна ўвайсці ў эксплуатацыйны рэжым, пераключыцеся на рэжым 4 КБ і заблакіруйце загрузчык на прыладзе. Пасля гэтага адбудзецца яе паўторны скід да заводскіх налад. Пасля загрузкі Android выключыце разблакіроўку OEM у Параметрах распрацоўшчыка. Калі на прыладзе не ўдаецца запусціць АС Android ці яе праца нестабільная, перапрашыйце прыладу, выкарыстоўваючы апошнія версіі заводскіх вобразаў, якія можна спампаваць тут: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;. Або перайдзіце па спасылцы &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; і выберыце \"Ачысціць прыладу\", \"Заблакіраваць загрузчык\" і \"Перапрашыць усе раздзелы\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Рэжым, які не залежыць ад памеру старонкі памяці і працуе з ядром для старонак памяці памерам 16 КБ"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Чытаць далей"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Апрацоўшчык справаздачы пра памылкі"</string>
@@ -5070,8 +5058,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Выкарыстоўваць замацаванне праграмы"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Выкарыстоўваць параметры распрацоўшчыка"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Скарыстаць сэрвіс друку"</string>
-    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="9158796544835843201">"Дазволіць пераключэнне карыстальнікаў"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"дазволіць, некалькі, карыстальнік, дазволіць, шмат"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"некалькі, карыстальнікі, профілі, людзі, уліковыя запісы, пераключыць, многа"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Выкарыстоўваць адладку па Wi-Fi"</string>
@@ -5185,8 +5172,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Выберыце змесціва, якое будзе паказвацца на экране, калі планшэт падключаны да док-станцыі. Пры выкарыстанні экраннай застаўкі прылада можа спажываць больш энергіі."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Наладзіць"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Наладзіць застаўку \"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>\""</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Каб уключыць падтрымку адвольнай формы, патрабуецца перазагрузка."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Каб прымусова ўключыць на дадатковых дысплэях рэжым працоўнага стала, патрабуецца перазагрузка."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Каб уключыць падтрымку адвольнай формы вокнаў (устарэлую наладу), патрабуецца перазагрузка."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Каб змяніць падтрымку адвольнай формы вокнаў, патрабуецца перазагрузка."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"Каб прымусова ўключыць падтрымку адвольнай формы вокнаў (устарэлую наладу) на другасных дысплэях, патрабуецца перазагрузка."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перазагрузіць зараз"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Перазагрузіць пазней"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Прасторавае гучанне"</string>
@@ -5304,6 +5292,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Уключана"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Выключана"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Уключана"</string>
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Гук: %1$d%% злева, %2$d%% справа"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Гук: %1$d%% справа, %2$d%% злева"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Назва прылады даступная для ўсталяваных вамі праграм. Яе таксама могуць пабачыць іншыя людзі, калі вы падключыцеся да прылад з Bluetooth або да сеткі Wi-Fi ці наладзіце хот-спот Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Граматычны род"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Выберыце граматычны род"</string>
@@ -5415,6 +5405,5 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Слухаць плынь"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Адсканіруйце QR-код аўдыяплыні для праслухоўвання на прыладзе \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Калі ажыццяўляецца абагульванне, змяняць пароль нельга. Каб змяніць пароль, выключыце абагульванне аўдыя."</string>
-    <!-- no translation found for homepage_search (6759334912284663559) -->
-    <skip />
+    <string name="homepage_search" msgid="6759334912284663559">"Шукаць у наладах"</string>
 </resources>

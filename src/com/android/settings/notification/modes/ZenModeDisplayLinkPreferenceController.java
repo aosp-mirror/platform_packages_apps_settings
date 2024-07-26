@@ -24,7 +24,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
-import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
@@ -43,11 +42,10 @@ class ZenModeDisplayLinkPreferenceController extends AbstractZenModePreferenceCo
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
         // TODO(b/332937635): Update metrics category
-        preference.setIntent(new SubSettingLauncher(mContext)
-                .setDestination(ZenModeDisplayFragment.class.getName())
-                .setSourceMetricsCategory(0)
-                .setArguments(bundle)
-                .toIntent());
+        preference.setIntent(
+                ZenSubSettingLauncher.forModeFragment(mContext, ZenModeDisplayFragment.class,
+                        zenMode.getId(), 0).toIntent());
+        preference.setEnabled(zenMode.isEnabled());
     }
 
     @Override

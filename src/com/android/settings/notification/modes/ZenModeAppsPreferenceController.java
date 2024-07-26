@@ -24,7 +24,6 @@ import android.os.Bundle;
 import android.service.notification.ZenPolicy;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -44,7 +43,7 @@ public class ZenModeAppsPreferenceController extends
     String mModeId;
 
     public ZenModeAppsPreferenceController(@NonNull Context context,
-            @NonNull String key, @Nullable ZenModesBackend backend) {
+            @NonNull String key, @NonNull ZenModesBackend backend) {
         super(context, key, backend);
     }
 

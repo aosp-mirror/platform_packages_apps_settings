@@ -648,6 +648,15 @@ public class AudioSharingDialogHandlerTest {
     }
 
     @Test
+    public void closeOpeningDialogsForLeaDevice_unattachedFragment_doNothing() {
+        mParentFragment = new Fragment();
+        mHandler = new AudioSharingDialogHandler(mContext, mParentFragment);
+        mHandler.closeOpeningDialogsForLeaDevice(mCachedDevice1);
+        shadowOf(Looper.getMainLooper()).idle();
+        verifyNoMoreInteractions(mFeatureFactory.metricsFeatureProvider);
+    }
+
+    @Test
     public void closeOpeningDialogsForLeaDevice_closeDisconnectDialog() {
         // Show disconnect dialog
         setUpBroadcast(true);
@@ -672,6 +681,15 @@ public class AudioSharingDialogHandlerTest {
                         mContext,
                         SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS,
                         SettingsEnums.DIALOG_AUDIO_SHARING_SWITCH_DEVICE);
+    }
+
+    @Test
+    public void closeOpeningDialogsForNonLeaDevice_unattachedFragment_doNothing() {
+        mParentFragment = new Fragment();
+        mHandler = new AudioSharingDialogHandler(mContext, mParentFragment);
+        mHandler.closeOpeningDialogsForNonLeaDevice(mCachedDevice2);
+        shadowOf(Looper.getMainLooper()).idle();
+        verifyNoMoreInteractions(mFeatureFactory.metricsFeatureProvider);
     }
 
     @Test

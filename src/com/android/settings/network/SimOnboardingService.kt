@@ -237,6 +237,7 @@ class SimOnboardingService {
 
     fun addItemForRenaming(subInfo: SubscriptionInfo, newName: String) {
         if (subInfo.displayName == newName) {
+            renameMutableMap.remove(subInfo.subscriptionId)
             return
         }
         renameMutableMap[subInfo.subscriptionId] = newName

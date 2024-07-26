@@ -269,6 +269,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     }
 
     @Override
+    protected boolean shouldSkipForInitialSUW() {
+        return true;
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
 

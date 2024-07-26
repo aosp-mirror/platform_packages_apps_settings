@@ -35,7 +35,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     private static final String TAG = "AvailableMediaBluetoothDeviceUpdater";
     private static final boolean DBG = Log.isLoggable(BluetoothDeviceUpdater.TAG, Log.DEBUG);
 
-    private static final String PREF_KEY = "available_media_bt";
+    private static final String PREF_KEY_PREFIX = "available_media_bt_";
 
     private final AudioManager mAudioManager;
     private final LocalBluetoothManager mLocalBtManager;
@@ -141,8 +141,8 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     }
 
     @Override
-    protected String getPreferenceKey() {
-        return PREF_KEY;
+    protected String getPreferenceKeyPrefix() {
+        return PREF_KEY_PREFIX;
     }
 
     @Override

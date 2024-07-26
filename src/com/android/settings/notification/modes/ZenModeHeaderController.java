@@ -15,59 +15,29 @@
  */
 package com.android.settings.notification.modes;
 
-import android.app.Flags;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
-import com.android.settingslib.notification.modes.ZenModesBackend;
-import com.android.settingslib.widget.LayoutPreference;
 
-class ZenModeHeaderController extends AbstractZenModePreferenceController {
-
-    private final DashboardFragment mFragment;
-    private EntityHeaderController mHeaderController;
+class ZenModeHeaderController extends AbstractZenModeHeaderController {
 
     ZenModeHeaderController(
             @NonNull  Context context,
             @NonNull String key,
-            @NonNull DashboardFragment fragment,
-            @Nullable ZenModesBackend backend) {
-        super(context, key, backend);
-        mFragment = fragment;
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return Flags.modesApi();
+            @NonNull DashboardFragment fragment) {
+        super(context, key, fragment);
     }
 
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        if (mFragment == null) {
-            return;
-        }
-        preference.setSelectable(false);
-
-        if (mHeaderController == null) {
-            final LayoutPreference pref = (LayoutPreference) preference;
-            mHeaderController = EntityHeaderController.newInstance(
-                    mFragment.getActivity(),
-                    mFragment,
-                    pref.findViewById(R.id.entity_header));
-        }
-
-        FutureUtil.whenDone(
-                zenMode.getIcon(mContext, ZenIconLoader.getInstance()),
-                icon -> mHeaderController.setIcon(IconUtil.applyNormalTint(mContext, icon))
-                        .done(/* rebindActions= */ false),
-                mContext.getMainExecutor());
+        updateIcon(preference, zenMode,
+                mContext.getResources().getDimensionPixelSize(R.dimen.zen_mode_header_size),
+                icon -> IconUtil.makeModeHeader(mContext, icon),
+                iconView -> iconView.setSelected(zenMode.isActive()));
     }
 }
