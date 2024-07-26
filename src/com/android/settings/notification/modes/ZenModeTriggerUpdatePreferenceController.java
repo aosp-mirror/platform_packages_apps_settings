@@ -22,8 +22,6 @@ import static android.app.AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
 import static android.service.notification.ZenModeConfig.tryParseScheduleConditionId;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -39,46 +37,36 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import com.google.common.base.Strings;
 
-/**
- * Preference controller for the link to an individual mode's configuration page.
- */
-class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenceController {
-    private static final String TAG = "ZenModeSetTriggerLink";
+class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreferenceController {
 
-    @VisibleForTesting
-    static final String AUTOMATIC_TRIGGER_KEY = "zen_automatic_trigger_settings";
-    static final String ADD_TRIGGER_KEY = "zen_add_automatic_trigger";
+    private static final String TAG = "ZenModeTriggerUpdate";
 
-    private final DashboardFragment mFragment;
     private final PackageManager mPackageManager;
     private final ConfigurationActivityHelper mConfigurationActivityHelper;
     private final ZenServiceListing mServiceListing;
 
-    ZenModeSetTriggerLinkPreferenceController(Context context, String key,
-            DashboardFragment fragment, ZenModesBackend backend) {
-        this(context, key, fragment, backend, context.getPackageManager(),
+    ZenModeTriggerUpdatePreferenceController(Context context, String key,
+            ZenModesBackend backend) {
+        this(context, key, backend, context.getPackageManager(),
                 new ConfigurationActivityHelper(context.getPackageManager()),
                 new ZenServiceListing(context));
     }
 
     @VisibleForTesting
-    ZenModeSetTriggerLinkPreferenceController(Context context, String key,
-            DashboardFragment fragment, ZenModesBackend backend, PackageManager packageManager,
+    ZenModeTriggerUpdatePreferenceController(Context context, String key,
+            ZenModesBackend backend, PackageManager packageManager,
             ConfigurationActivityHelper configurationActivityHelper,
             ZenServiceListing serviceListing) {
         super(context, key, backend);
-        mFragment = fragment;
         mPackageManager = packageManager;
         mConfigurationActivityHelper = configurationActivityHelper;
         mServiceListing = serviceListing;
@@ -86,7 +74,7 @@ class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenc
 
     @Override
     public boolean isAvailable(@NonNull ZenMode zenMode) {
-        return !zenMode.isManualDnd();
+        return !zenMode.isCustomManual() && !zenMode.isManualDnd();
     }
 
     @Override
@@ -97,39 +85,18 @@ class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenc
     }
 
     @Override
-    public void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        // This controller is expected to govern a preference category so that it controls the
-        // availability of the entire preference category if the mode doesn't have a way to
-        // automatically trigger (such as manual DND).
-        if (zenMode.isManualDnd()) {
+    void updateState(Preference preference, @NonNull ZenMode zenMode) {
+        if (!isAvailable(zenMode)) {
             return;
         }
-        PrimarySwitchPreference triggerPref = checkNotNull(
-                ((PreferenceCategory) preference).findPreference(AUTOMATIC_TRIGGER_KEY));
-        Preference addTriggerPref = checkNotNull(
-                ((PreferenceCategory) preference).findPreference(ADD_TRIGGER_KEY));
 
-        boolean isAddTrigger = zenMode.isSystemOwned() && zenMode.getType() != TYPE_SCHEDULE_TIME
-                && zenMode.getType() != TYPE_SCHEDULE_CALENDAR;
-
-        if (isAddTrigger) {
-            triggerPref.setVisible(false);
-            addTriggerPref.setVisible(true);
-            addTriggerPref.setOnPreferenceClickListener(unused -> {
-                ZenModeScheduleChooserDialog.show(mFragment, mOnScheduleOptionListener);
-                return true;
-            });
+        PrimarySwitchPreference triggerPref = (PrimarySwitchPreference) preference;
+        triggerPref.setChecked(zenMode.getRule().isEnabled());
+        triggerPref.setOnPreferenceChangeListener(mSwitchChangeListener);
+        if (zenMode.isSystemOwned()) {
+            setUpForSystemOwnedTrigger(triggerPref, zenMode);
         } else {
-            addTriggerPref.setVisible(false);
-            triggerPref.setVisible(true);
-            triggerPref.setChecked(zenMode.getRule().isEnabled());
-            triggerPref.setOnPreferenceChangeListener(mSwitchChangeListener);
-
-            if (zenMode.isSystemOwned()) {
-                setUpForSystemOwnedTrigger(triggerPref, zenMode);
-            } else {
-                setUpForAppTrigger(triggerPref, zenMode);
-            }
+            setUpForAppTrigger(triggerPref, zenMode);
         }
     }
 
@@ -222,14 +189,6 @@ class ZenModeSetTriggerLinkPreferenceController extends AbstractZenModePreferenc
         preference.setIcon(icon);
         preference.setIntent(configurationIntent);
     }
-
-    @VisibleForTesting
-    final ZenModeScheduleChooserDialog.OnScheduleOptionListener mOnScheduleOptionListener =
-            conditionId -> saveMode(mode -> {
-                mode.setCustomModeConditionId(mContext, conditionId);
-                return mode;
-                // TODO: b/342156843 - Maybe jump to the corresponding schedule editing screen?
-            });
 
     private final Preference.OnPreferenceChangeListener mSwitchChangeListener = (p, newValue) -> {
         confirmChangeEnabled(p, (boolean) newValue);

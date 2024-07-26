@@ -65,8 +65,13 @@ public class ZenModeFragment extends ZenModeFragmentBase {
                 new ZenModePreferenceCategoryController(context, "modes_additional_actions"));
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(
                 context, "mode_display_settings", mBackend, mHelperBackend));
-        prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
-                "zen_automatic_trigger_category", this, mBackend));
+        prefControllers.add(new ZenModeTriggerCategoryPreferenceController(context,
+                "zen_automatic_trigger_category"));
+        prefControllers.add(new ZenModeTriggerUpdatePreferenceController(context,
+                "zen_automatic_trigger_settings", mBackend));
+        prefControllers.add(
+                new ZenModeTriggerAddPreferenceController(context, "zen_add_automatic_trigger",
+                        this, mBackend));
         prefControllers.add(new InterruptionFilterPreferenceController(
                 context, "allow_filtering", mBackend));
         prefControllers.add(new ManualDurationPreferenceController(
