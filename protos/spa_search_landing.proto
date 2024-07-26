@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+package com.android.settings.spa;
+
+message SpaSearchLandingKey {
+  oneof page {
+    SpaSearchLandingSpaPage spa_page = 1;
+  }
+}
+
+message SpaSearchLandingSpaPage {
+  /** The destination of SPA page. */
+  optional string destination = 1;
+}

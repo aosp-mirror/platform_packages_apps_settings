@@ -18,25 +18,45 @@ package com.android.settings.spa.search
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.password.PasswordUtils
 import com.android.settings.spa.SpaDestination
+import com.android.settings.spa.SpaSearchLanding
+import com.google.protobuf.ByteString
+import com.google.protobuf.InvalidProtocolBufferException
 
 class SpaSearchLandingActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!isValidCall()) return
 
-        val destination = intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY)
-        if (destination.isNullOrBlank()) return
+        val keyString = intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY)
+        val key =
+            try {
+                SpaSearchLanding.SpaSearchLandingKey.parseFrom(ByteString.copyFromUtf8(keyString))
+            } catch (e: InvalidProtocolBufferException) {
+                Log.w(TAG, "arg key ($keyString) invalid", e)
+                finish()
+                return
+            }
 
-        SpaDestination(destination = destination, highlightMenuKey = null)
-            .startFromExportedActivity(this)
+        if (key.hasSpaPage()) {
+            val destination = key.spaPage.destination
+            if (destination.isNotEmpty()) {
+                SpaDestination(destination = destination, highlightMenuKey = null)
+                    .startFromExportedActivity(this)
+            }
+        }
         finish()
     }
 
     private fun isValidCall() =
         PasswordUtils.getCallingAppPackageName(activityToken) ==
             featureFactory.searchFeatureProvider.getSettingsIntelligencePkgName(this)
+
+    private companion object {
+        private const val TAG = "SpaSearchLandingActivity"
+    }
 }
