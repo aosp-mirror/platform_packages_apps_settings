@@ -62,6 +62,18 @@ public final class ZenModeOtherLinkPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_disabled() {
+        CircularIconsPreference pref = mock(CircularIconsPreference.class);
+        ZenMode zenMode = new TestModeBuilder()
+                .setEnabled(false)
+                .build();
+
+        mController.updateZenMode(pref, zenMode);
+
+        verify(pref).setEnabled(false);
+    }
+
+    @Test
     public void updateState_loadsSummary() {
         CircularIconsPreference pref = mock(CircularIconsPreference.class);
         mController.updateZenMode(pref, TestModeBuilder.EXAMPLE);

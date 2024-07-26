@@ -15,7 +15,9 @@
   ~ limitations under the License.
   -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:scrollbars="none">
@@ -60,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="4dp"
+            android:textColor="?androidprv:attr/textColorOnAccent"
             android:background="@drawable/audio_sharing_rounded_bg_ripple"
             android:visibility="gone" />
 
@@ -70,6 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="4dp"
+            android:textColor="?androidprv:attr/textColorOnAccent"
             android:background="@drawable/audio_sharing_rounded_bg_ripple"
             android:visibility="gone" />
     </LinearLayout>

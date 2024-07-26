@@ -23,10 +23,22 @@
             android:key="header"
             android:layout="@layout/settings_entity_header" />
 
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="16dp" />
+
+    <com.android.settings.notification.modes.ZenModeBlurbPreference
+        android:key="mode_blurb" />
+
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="8dp" />
+
     <com.android.settingslib.widget.LayoutPreference
             android:key="activate"
             android:selectable="false"
             android:layout="@layout/modes_activation_button"/>
+
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="16dp" />
 
     <!-- automatic trigger section; preference changes programmatically depending on type -->
     <PreferenceCategory
