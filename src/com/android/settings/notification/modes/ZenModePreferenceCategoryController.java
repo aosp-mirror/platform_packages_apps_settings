@@ -21,24 +21,19 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.notification.modes.ZenMode;
 
-/** Controller used for displaying the currently-chosen icon at the top of the icon picker. */
-class ZenModeIconPickerIconPreferenceController extends AbstractZenModeHeaderController {
-
-    ZenModeIconPickerIconPreferenceController(@NonNull Context context, @NonNull String key,
-            @NonNull DashboardFragment fragment) {
-        super(context, key, fragment);
+/**
+ * Simple {@link AbstractZenModePreferenceController} used for all {@code PreferenceCategory}
+ * entries in {@link ZenModeFragment} that should be disabled when the mode is disabled.
+ */
+class ZenModePreferenceCategoryController extends AbstractZenModePreferenceController {
+    ZenModePreferenceCategoryController(@NonNull Context context, @NonNull String key) {
+        super(context, key);
     }
 
     @Override
     void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        updateIcon(preference, zenMode,
-                mContext.getResources().getDimensionPixelSize(
-                        R.dimen.zen_mode_icon_list_header_circle_diameter),
-                icon -> IconUtil.makeIconPickerHeader(mContext, icon),
-                null);
+        preference.setEnabled(zenMode.isEnabled());
     }
 }

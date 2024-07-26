@@ -459,46 +459,45 @@ public class WifiConfigController2Test {
     public void loadMacRandomizedValue_shouldPersistentAsDefault() {
         final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
         final int prefPersist =
-                WifiPrivacyPreferenceController2.translateMacRandomizedValueToPrefValue(
-                        WifiConfiguration.RANDOMIZATION_PERSISTENT);
+                WifiPrivacyPreferenceController2.translateWifiEntryPrivacyToPrefValue(
+                        WifiEntry.PRIVACY_RANDOMIZED_MAC);
 
         assertThat(privacySetting.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(privacySetting.getSelectedItemPosition()).isEqualTo(prefPersist);
     }
 
     @Test
-    public void loadSavedMacRandomizedPersistentValue_shouldCorrectMacValue() {
-        checkSavedMacRandomizedValue(WifiConfiguration.RANDOMIZATION_PERSISTENT);
+    public void loadSavedPrivacyRandomizedMacValue_shouldCorrectMacValue() {
+        checkSavedMacRandomizedValue(WifiEntry.PRIVACY_RANDOMIZED_MAC);
     }
 
     @Test
-    public void loadSavedMacRandomizedNoneValue_shouldCorrectMacValue() {
-        checkSavedMacRandomizedValue(WifiConfiguration.RANDOMIZATION_NONE);
+    public void loadSavedPrivacyDeviceMacValue_shouldCorrectMacValue() {
+        checkSavedMacRandomizedValue(WifiEntry.PRIVACY_DEVICE_MAC);
     }
 
-    private void checkSavedMacRandomizedValue(int macRandomizedValue) {
+    private void checkSavedMacRandomizedValue(@WifiEntry.Privacy int privacy) {
         when(mWifiEntry.isSaved()).thenReturn(true);
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.macRandomizationSetting = macRandomizedValue;
+        when(mWifiEntry.getPrivacy()).thenReturn(privacy);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
         final int expectedPrefValue =
-                WifiPrivacyPreferenceController2.translateMacRandomizedValueToPrefValue(
-                        macRandomizedValue);
+                WifiPrivacyPreferenceController2.translateWifiEntryPrivacyToPrefValue(privacy);
 
         assertThat(privacySetting.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(privacySetting.getSelectedItemPosition()).isEqualTo(expectedPrefValue);
     }
 
     @Test
-    public void saveMacRandomizedValue_noChanged_shouldPersistentAsDefault() {
+    public void saveMacRandomizedValue_noChanged_shouldAutoAsDefault() {
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
         WifiConfiguration config = mController.getConfig();
         assertThat(config.macRandomizationSetting).isEqualTo(
-                WifiConfiguration.RANDOMIZATION_PERSISTENT);
+                WifiConfiguration.RANDOMIZATION_AUTO);
     }
 
     @Test
@@ -506,7 +505,7 @@ public class WifiConfigController2Test {
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
         final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
         final int prefMacNone =
-                WifiPrivacyPreferenceController2.translateMacRandomizedValueToPrefValue(
+                WifiPrivacyPreferenceController2.translateWifiEntryPrivacyToPrefValue(
                         WifiConfiguration.RANDOMIZATION_NONE);
         privacySetting.setSelection(prefMacNone);
 

@@ -34,7 +34,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.notification.modes.ZenMode;
@@ -95,11 +94,11 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
         // TODO(b/332937635): Update metrics category
-        preference.setIntent(new SubSettingLauncher(mContext)
-                .setDestination(ZenModeAppsFragment.class.getName())
-                .setSourceMetricsCategory(0)
-                .setArguments(bundle)
-                .toIntent());
+        preference.setIntent(
+                ZenSubSettingLauncher.forModeFragment(mContext, ZenModeAppsFragment.class,
+                        zenMode.getId(), 0).toIntent());
+        preference.setEnabled(zenMode.isEnabled());
+
         mZenMode = zenMode;
         mPreference = (CircularIconsPreference) preference;
 

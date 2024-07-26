@@ -101,7 +101,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         CircularIconSet.sExecutorService = MoreExecutors.newDirectExecutorService();
-        mPreference = new CircularIconsPreference(mContext, MoreExecutors.directExecutor());
+        mPreference = new TestableCircularIconsPreference(mContext);
 
         when(mApplicationsState.newSession(any(), any())).thenReturn(mSession);
         mController = new ZenModeAppsLinkPreferenceController(
@@ -139,6 +139,17 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
     @Test
     public void testIsAvailable() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void testUpdateState_disabled() {
+        ZenMode zenMode = new TestModeBuilder()
+                .setEnabled(false)
+                .build();
+
+        mController.updateState(mPreference, zenMode);
+
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
@@ -259,7 +270,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         appEntries.add(createAppEntry("test2", mContext.getUserId()));
         mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
 
-        assertThat(mPreference.getIcons()).hasSize(2);
+        assertThat(mPreference.getLoadedIcons().icons()).hasSize(2);
     }
 
     @Test

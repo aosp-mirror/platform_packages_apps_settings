@@ -89,7 +89,7 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         CircularIconSet.sExecutorService = MoreExecutors.newDirectExecutorService();
-        mPreference = new CircularIconsPreference(mContext, MoreExecutors.directExecutor());
+        mPreference = new TestableCircularIconsPreference(mContext);
 
         // Ensure the preference view is bound & measured (needed to add icons).
         View preferenceView = LayoutInflater.from(mContext).inflate(mPreference.getLayoutResource(),
@@ -112,6 +112,17 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_disabled() {
+        ZenMode zenMode = new TestModeBuilder()
+                .setEnabled(false)
+                .build();
+
+        mController.updateState(mPreference, zenMode);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
     public void updateState_setsSummary() {
         mController.updateState(mPreference, TestModeBuilder.EXAMPLE);
 
@@ -131,8 +142,9 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
         mController.updateState(mPreference, mode);
 
-        assertThat(mPreference.getIcons()).hasSize(2);
-        assertThat(mPreference.getIcons().stream()
+        assertThat(mPreference.getLoadedIcons()).isNotNull();
+        assertThat(mPreference.getLoadedIcons().icons()).hasSize(2);
+        assertThat(mPreference.getLoadedIcons().icons().stream()
                 .map(ColorDrawable.class::cast)
                 .map(d -> d.getColor()).toList())
                 .containsExactly(2, 3).inOrder();
@@ -150,8 +162,9 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
         mController.updateState(mPreference, mode);
 
-        assertThat(mPreference.getIcons()).hasSize(4);
-        assertThat(mPreference.getIcons().stream()
+        assertThat(mPreference.getLoadedIcons()).isNotNull();
+        assertThat(mPreference.getLoadedIcons().icons()).hasSize(4);
+        assertThat(mPreference.getLoadedIcons().icons().stream()
                 .map(ColorDrawable.class::cast)
                 .map(d -> d.getColor()).toList())
                 .containsExactly(1, 2, 3, 4).inOrder();
@@ -169,7 +182,8 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
         mController.updateState(mPreference, mode);
 
-        assertThat(mPreference.getIcons()).hasSize(1);
+        assertThat(mPreference.getLoadedIcons()).isNotNull();
+        assertThat(mPreference.getLoadedIcons().icons()).hasSize(1);
         verify(mHelperBackend, never()).getContactPhoto(any());
     }
 
@@ -187,7 +201,8 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
         mController.updateState(mPreference, mode);
 
-        assertThat(mPreference.getIcons()).hasSize(3);
+        assertThat(mPreference.getLoadedIcons()).isNotNull();
+        assertThat(mPreference.getLoadedIcons().icons()).hasSize(3);
         verify(mConversationIconFactory, times(3)).getConversationDrawable((ShortcutInfo) any(),
                 any(), anyInt(), anyBoolean());
     }
