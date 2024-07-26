@@ -30,6 +30,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.BluetoothPairingDetail;
+import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsQrCodeFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
@@ -130,9 +133,27 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
             builder.setTitle(R.string.audio_sharing_share_dialog_title)
                     .setCustomImage(R.drawable.audio_sharing_guidance)
                     .setCustomMessage(R.string.audio_sharing_dialog_connect_device_content)
-                    .setNegativeButton(
-                            R.string.audio_sharing_close_button_label,
-                            (dig, which) -> onCancelClick());
+                    .setCustomPositiveButton(
+                            R.string.audio_sharing_pair_button_label,
+                            v -> {
+                                dismiss();
+                                new SubSettingLauncher(getContext())
+                                        .setDestination(BluetoothPairingDetail.class.getName())
+                                        .setSourceMetricsCategory(getMetricsCategory())
+                                        .launch();
+                                logDialogPositiveBtnClick();
+                            })
+                    .setCustomNegativeButton(
+                            R.string.audio_sharing_qrcode_button_label,
+                            v -> {
+                                dismiss();
+                                new SubSettingLauncher(getContext())
+                                        .setTitleRes(R.string.audio_streams_qr_code_page_title)
+                                        .setDestination(AudioStreamsQrCodeFragment.class.getName())
+                                        .setSourceMetricsCategory(getMetricsCategory())
+                                        .launch();
+                                logDialogNegativeBtnClick();
+                            });
         } else if (deviceItems.size() == 1) {
             AudioSharingDeviceItem deviceItem = Iterables.getOnlyElement(deviceItems);
             builder.setTitle(
@@ -145,11 +166,7 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                             v -> {
                                 if (sListener != null) {
                                     sListener.onItemClick(deviceItem);
-                                    mMetricsFeatureProvider.action(
-                                            getContext(),
-                                            SettingsEnums
-                                            .ACTION_AUDIO_SHARING_DIALOG_POSITIVE_BTN_CLICKED,
-                                            sEventData);
+                                    logDialogPositiveBtnClick();
                                 }
                                 dismiss();
                             })
@@ -165,6 +182,7 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                                     (AudioSharingDeviceItem item) -> {
                                         if (sListener != null) {
                                             sListener.onItemClick(item);
+                                            logDialogPositiveBtnClick();
                                         }
                                         dismiss();
                                     },
@@ -178,11 +196,22 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
     private void onCancelClick() {
         if (sListener != null) {
             sListener.onCancelClick();
-            mMetricsFeatureProvider.action(
-                    getContext(),
-                    SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_NEGATIVE_BTN_CLICKED,
-                    sEventData);
+            logDialogNegativeBtnClick();
         }
         dismiss();
+    }
+
+    private void logDialogPositiveBtnClick() {
+        mMetricsFeatureProvider.action(
+                getContext(),
+                SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_POSITIVE_BTN_CLICKED,
+                sEventData);
+    }
+
+    private void logDialogNegativeBtnClick() {
+        mMetricsFeatureProvider.action(
+                getContext(),
+                SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_NEGATIVE_BTN_CLICKED,
+                sEventData);
     }
 }
