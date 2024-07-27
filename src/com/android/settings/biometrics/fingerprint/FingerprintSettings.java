@@ -702,6 +702,7 @@ public class FingerprintSettings extends SubSettings {
             if (isSfps()) {
                 updateFingerprintUnlockCategoryVisibility();
             }
+            updatePreferences();
         }
 
         private void updateAddPreference() {
