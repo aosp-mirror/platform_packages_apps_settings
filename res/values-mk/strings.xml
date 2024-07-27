@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Исклучено"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Вклучено/# апликација има пристап до локацијата}one{Вклучено/# апликација имаат пристап до локацијата}other{Вклучено/# апликации имаат пристап до локацијата}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Се вчитува…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Апликациите со дозвола за пристап до уредите во близина може да ја утврдуваат релативната положба на поврзаните уреди."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Апликациите со дозвола за уреди во близина може да ја одредат релативната положба на поврзаните уреди."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Пристапот до локацијата е исклучен за апликации и услуги. Сепак, можно е локацијата на уредот да се испрати до службите за спасување во итни случаи кога ќе ги повикате или кога ќе испратите порака на број за итни случаи."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Дознајте повеќе за „Поставките за локација“"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"За да промените, одете во „Поставките за ChromeOS &gt; Приватност и безбедност &gt; Контроли на приватноста &gt; Пристап до локацијата“"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Времето за активирање по притискање копче го приспособува на <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Лепливи копчиња"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Притискајте ги копчињата за кратенки едно по едно наместо да ги држите копчињата притиснати заедно"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Копчиња на глувчето"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Користете ја физичката тастатура за да го контролирате глувчето."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Кратенки на тастатурата"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Прикажи список со кратенки"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Тастатури и алатки за работниот профил"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Промена на стил. на покаж. во жолт"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Промена на стил. на покаж. во розов"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Промена на стил. на покаж. во син"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Стил на потег со покажувачот"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Бела"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Црна"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Нема"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Научете движења за подлога за допир"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"подлога на допир, допирна подлога, глувче, курсор, лизгање, повлекување, кликнување со десното копче, клик, покажувач"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"кликнување со десното копче, допир"</string>
@@ -3368,10 +3366,8 @@
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Распореди"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Избришете ги распоредите"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Избриши"</string>
-    <!-- no translation found for zen_mode_menu_rename_mode (4681802125016390837) -->
-    <skip />
-    <!-- no translation found for zen_mode_menu_delete_mode (5380084696402157428) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"Преименувај"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"Избриши"</string>
     <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"Да се избрише режимот „<xliff:g id="MODE">%1$s</xliff:g>“?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Измени"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Распореди"</string>
@@ -3395,8 +3391,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Дозволи визуелни сигнали"</string>
     <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Останете фокусирани"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Дополнителни дејства"</string>
-    <!-- no translation found for modes_sound_summary_off (6972648204528227879) -->
-    <skip />
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Исклучено}=1{Исклучено/1 режим може да се вклучи автоматски}one{Исклучено/# режим може да се вклучат автоматски}other{Исклучено/# режими може да се вклучат автоматски}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Поставки за екранот"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Опции за екранот"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Сиви тонови"</string>
@@ -3659,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Апликацијава не поддржува подобрени поставки"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Повеќе поставки"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Повеќе поставки се достапни во апликацијава"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Адаптивни известувања"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Користи „Адаптивни известувања“"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Кога ќе добиете многу известувања во краток временски период, вашиот телефон ќе го намали звукот и ќе ги минимизира скокачките прозорци на екранот во период до две минути. Известувањата за повиците, алармите и приоритетните разговори сè уште вибрираат, испуштаат звук или се појавуваат на екранот, а сите известувања може да се најдат лесно кога ќе повлечете одозгора надолу на екранот."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Намалување на известувањата"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Примени на работни профили"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Применете на апликациите во работниот профил"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Помошни услуги за VR"</string>
@@ -3818,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Избрани апликации"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Нема"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Ниедна апликација не може да го прекинува}=1{{app_1} може да го прекинува}=2{{app_1} и {app_2} може да го прекинуваат}=3{{app_1}, {app_2} и{app_3} може да го прекинуваат}one{{app_1}, {app_2} и уште # може да го прекинуваат}other{{app_1}, {app_2} и уште # може да го прекинуваат}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (работа)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Се пресметува…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Дозволете апликациите да занемаруваат"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Апликации што може да го прекинуваат режимот"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Изберете уште апликации"</string>
@@ -3836,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Ништо не може да го прекинува"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Никој не може да го прекинува"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Некои луѓе може да го прекинуваат"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Сите луѓе може да го прекинуваат"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Редовни повикувачи"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Дозволи повторни повикувачи"</string>
@@ -3855,14 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Смени само на аларми во траење од еден час до {time}}one{Смени само на аларми во траење од # час до {time}}other{Смени само на аларми во траење од # часа до {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Промена на аларми само до <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Промени секогаш да се прекине"</string>
-    <!-- no translation found for zen_mode_rename_title (8146882272966214558) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_title (321750898430776191) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_default_name (2778307946775085105) -->
-    <skip />
-    <!-- no translation found for zen_mode_edit_name_hint (4584652062167540536) -->
-    <skip />
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"Изменете режим"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Додајте режим"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Приспособете го режимот"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Име на режимот"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Опомена"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Затвори"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Повратни информации за уредов"</string>
@@ -5292,10 +5290,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Вклучено"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Исклучено"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Вклучено"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Аудио: %1$d%% одлево, %2$d%% оддесно"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Аудио: %1$d%% оддесно, %2$d%% одлево"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Името на уредот е видливо за апликациите што сте ги инсталирале. Може да го видат и други луѓе кога ќе се поврзете со уреди со Bluetooth, на Wi-Fi мрежа или кога ќе поставите точка на пристап за Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Граматички род"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Изберете граматички род"</string>

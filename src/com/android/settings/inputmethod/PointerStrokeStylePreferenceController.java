@@ -16,25 +16,39 @@
 
 package com.android.settings.inputmethod;
 
+import static android.view.PointerIcon.POINTER_ICON_VECTOR_STYLE_STROKE_WHITE;
+
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceDataStore;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-public class PointerStrokeStylePreferenceController extends BasePreferenceController {
+public class PointerStrokeStylePreferenceController extends BasePreferenceController
+    implements LifecycleEventObserver {
+
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @VisibleForTesting
     static final String KEY_POINTER_STROKE_STYLE = "pointer_stroke_style";
 
     public PointerStrokeStylePreferenceController(@NonNull Context context) {
         super(context, KEY_POINTER_STROKE_STYLE);
+
+        mMetricsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @AvailabilityStatus
@@ -64,4 +78,17 @@ public class PointerStrokeStylePreferenceController extends BasePreferenceContro
             }
         });
     }
+
+    @Override
+        public void onStateChanged(@NonNull LifecycleOwner lifecycleOwner,
+                @NonNull Lifecycle.Event event) {
+            if (event == Lifecycle.Event.ON_PAUSE) {
+                int currentValue =
+                        Settings.System.getIntForUser(mContext.getContentResolver(),
+                                Settings.System.POINTER_STROKE_STYLE,
+                                POINTER_ICON_VECTOR_STYLE_STROKE_WHITE, UserHandle.USER_CURRENT);
+                mMetricsFeatureProvider.action(mContext,
+                            SettingsEnums.ACTION_POINTER_ICON_STROKE_STYLE_CHANGED, currentValue);
+            }
+        }
 }

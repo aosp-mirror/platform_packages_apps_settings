@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.content.DialogInterface;
 
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
@@ -62,18 +61,5 @@ public class InvisibleToggleAccessibilityServicePreferenceFragment extends
     void onAllowButtonFromShortcutToggleClicked() {
         super.onAllowButtonFromShortcutToggleClicked();
         AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName, true);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * Enables accessibility service when shortcutPreference is checked.
-     */
-    @Override
-    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
-        super.callOnAlertDialogCheckboxClicked(dialog, which);
-
-        final boolean enabled = mShortcutPreference.isChecked();
-        AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName, enabled);
     }
 }

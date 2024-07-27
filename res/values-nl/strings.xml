@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Uit"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Aan: # app heeft toegang tot de locatie}other{Aan: # apps hebben toegang tot de locatie}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laden…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps met rechten voor apparaten in de buurt kunnen ongeveer inschatten waar verbonden apparaten zijn."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Apps met rechten voor apparaten in de buurt kunnen de relatieve positie van verbonden apparaten bepalen."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Toegang tot de locatie staat uit voor apps en services. De locatie van je apparaat kan nog steeds worden gestuurd naar nooddiensten als je een alarmnummer belt of sms\'t."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Meer informatie over locatie-instellingen"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Wijzig dit via ChromeOS-instellingen &gt; Privacy en beveiliging &gt; Privacyopties &gt; Locatietoegang"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Past de tijd voordat een toetsaanslag wordt geactiveerd aan naar <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Plaktoetsen"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Druk toetsen één voor één in voor snelkoppelingen in plaats van meerdere toetsen tegelijkertijd"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Muisknoppen"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Gebruik het fysieke toetsenbord om de muis te bedienen."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Sneltoetsen"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Toon lijst met sneltoetsen"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Toetsenborden en tools van werkprofiel"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Vulstijl voor aanwijzer wijzigen in geel"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Vulstijl voor aanwijzer wijzigen in roze"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Vulstijl voor aanwijzer wijzigen in blauw"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Streekstijl van aanwijzer"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Wit"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Zwart"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Geen"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Touchpadgebaren leren"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"trackpad, track pad, muis, cursor, aanwijzer, scrollen, swipen, vegen, klikken met de rechtermuisknop, rechtsklikken, klikken, klik"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"klikken met de rechtermuisknop, rechtsklikken, tikken"</string>
@@ -3656,9 +3654,10 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Deze app ondersteunt geen uitgebreide instellingen"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Meer instellingen"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Er zijn meer instellingen beschikbaar in deze app"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Aanpasbare meldingen"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Aanpasbare meldingen gebruiken"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Als je in korte tijd veel meldingen krijgt, wordt het volume op je telefoon lager gezet en worden pop-ups op het scherm geminimaliseerd gedurende maximaal 2 minuten. Gesprekken, wekkers en prioriteitsgesprekken trillen nog wel, laten een geluid horen of worden op het scherm getoond. Alle meldingen zijn makkelijk te vinden als je omlaag swipet vanaf de bovenkant van het scherm."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Afkoelperiode voor meldingen"</string>
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Afkoelperiode van meldingen gebruiken"</string>
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Toepassen op werkprofielen"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Toepassen op apps in werkprofiel"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-helperservices"</string>
@@ -3815,7 +3814,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Geselecteerde apps"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Geen"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Apps mogen je niet storen}=1{{app_1} mag je storen}=2{{app_1} en {app_2} mogen je storen}=3{{app_1}, {app_2} en {app_3} mogen je storen}other{{app_1}, {app_2} en nog # mogen je storen}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (werk)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Berekenen…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Apps toestaan dit te negeren"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps die je mogen storen"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Meer apps selecteren"</string>
@@ -3833,6 +3835,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Niets mag onderbreken"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Niemand mag onderbreken"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Bepaalde mensen mogen je storen"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Alle mensen mogen onderbreken"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Terugkerende bellers"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Terugkerende bellers toestaan"</string>

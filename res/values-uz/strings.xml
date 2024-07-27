@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Oʻchiq"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Yoniq / # ta ilova joylashuvdan foydalanadi}other{Yoniq / # ta ilova joylashuvdan foydalanadi}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Yuklanmoqda…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Yaqin-atrofdagi qurilmalarga ruxsati bor ilovalar ulangan qurilmalarning nisbiy holatini aniqlay oladi."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Yaqin-atrofdagi qurilmalarga ruxsati bor ilovalar ulangan qurilmalarning nisbiy holatini aniqlay oladi."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Ilovalar va xizmatlar uchun joylashuv axborotiga ruxsat yoqilmagan. Favqulodda holatlar raqamiga murojaat qilganingizda, qurilmangiz favqulodda xizmatlarga joylashuvingizni yuborishi mumkin."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Joylashuv sozlamalari haqida batafsil"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Oʻzgartirish uchun ChromeOS sozlamalari &gt; Maxfiylik va xavfsizlik &gt; Maxfiylik sozlamalari &gt; Joylashuv axborotiga ruxsat sahifasini oching"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"<xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms dan keyin tugma bosilsa, qayd etiladi"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Yopishqoq tugmalar"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Barcha tugmalar kombinatsiyasini bosib turish oʻrniga ularni birma-bir bosing"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Sinchqoncha tugmalari"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Sichqonchani tashqi klaviatura yordamida boshqarish."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tezkor tugmalar"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Tezkor tugmalar roʻyxatini ochish"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Ish profili klaviaturalari va vositalari"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Kursor ichini sariqqa boʻyash"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Kursor ichini pushtiga boʻyash"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Kursor ichini koʻkka boʻyash"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Kursor chiziqlari uslubi"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Oq"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Qora"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Hech qanday"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Sensorli panel ishoralari haqida"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"sensorli panel, sichqoncha, kursor, varaqlash, surish, oʻng klik, klik, koʻrsatkich"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"oʻng klik, bosish"</string>
@@ -3656,9 +3654,10 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Bu ilovada kengaytirilgan sozlamalar ishlamaydi"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Boshqa sozlamalar"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Boshqa sozlamalar bu ilova ichida joylashgan"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Adaptiv bildirishnomalar"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Adaptiv bildirishnomalardan foydalanish"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Qisqa vaqt oraligʻida koʻp bildirishnoma kelsa, telefondagi tovush balandligi hamda bildirgi oynalar soni ikki daqiqagacha kamaytiriladi. Chaqiruvlar, signallar va muhim suhbatlar tebranish, tovush chiqarish va ekranda chiqishda davom etadi va barcha bildirishnomalarni ekranning tepasidan pastga surish orqali koʻrish mumkin."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Bildirishnomalarni cheklash"</string>
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Bildirishnomalarni sekinlatishdan foydalanish"</string>
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Ish profillariga tatbiq qilinsin"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Ish profilidagi ilovalar uchun qoʻllash"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Yordamchi VR xizmatlar"</string>
@@ -3815,7 +3814,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Tanlangan ilovalar"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Hech biri"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Bezovta qilinmasin rejimi barcha ilovalar uchun ishlaydi}=1{Bezovta qilinmasin rejimi {app_1} uchun ishlamaydi}=2{Bezovta qilinmasin rejimi {app_1} va {app_2} uchun ishlamaydi}=3{Bezovta qilinmasin rejimi {app_1}, {app_2} va {app_3} uchun ishlamaydi}other{Bezovta qilinmasin rejimi {app_1}, {app_2} va yana # ta tovushlar uchun ishlamaydi}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (ish)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Hisoblanmoqda…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Ilovalarga Bezovta qilinmasin rejimiga amal qilmasligiga ruxsat berish"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Bezovta qilinmasin rejimi ishlamaydigan ilovalar"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Boshqa ilovalarni tanlang"</string>
@@ -3833,6 +3835,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Bezovta qilinmasin rejimi barcha tovushlar uchun ishlaydi"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Bezovta qilinmasin rejimi barcha xabar va chaqiruvlar uchun ishlaydi"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Bezovta qilinmasin rejimi ayrim foydalanuvchilardan keladigan xabar va chaqiruvlar uchun ishlamaydi"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Bezovta qilinmasin rejimi foydalanuvchilardan keladigan xabar va chaqiruvlar uchun ishlamaydi"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Qayta chaqiruvlar"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Qayta chaqiruvlar"</string>
@@ -5285,10 +5289,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Yoniq"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Oʻchiq"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Yoniq"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Audio %1$d%% chap, %2$d%% oʻng"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Audio %1$d%% oʻng, %2$d%% chap"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Qurilma nomi siz oʻrnatgan ilovalarga koʻrinadi. Bluetooth qurilmalarga yoki Wi-Fi tarmoqqa ulanganingizda, Wi-Fi hotspot sozlaganingizda boshqalarga ham koʻrinishi mumkin."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammatik jins"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Grammatik jinsni tanlang"</string>
