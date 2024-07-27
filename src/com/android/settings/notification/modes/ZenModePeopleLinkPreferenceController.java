@@ -46,9 +46,10 @@ import com.android.settings.notification.modes.ZenHelperBackend.Contact;
 import com.android.settingslib.notification.ConversationIconFactory;
 import com.android.settingslib.notification.modes.ZenMode;
 
+import com.google.common.base.Equivalence;
 import com.google.common.collect.ImmutableList;
 
-import java.util.function.Function;
+import java.util.Objects;
 
 /**
  * Preference with a link and summary about what calls and messages can break through the mode,
@@ -94,29 +95,60 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
 
         preference.setEnabled(zenMode.isEnabled());
         preference.setSummary(mSummaryHelper.getPeopleSummary(zenMode.getPolicy()));
-        ((CircularIconsPreference) preference).displayIcons(getPeopleIcons(zenMode.getPolicy()));
+        ((CircularIconsPreference) preference).displayIcons(getPeopleIcons(zenMode.getPolicy()),
+                PEOPLE_ITEM_EQUIVALENCE);
     }
 
-    // Represents "Either<Contact, ConversationChannelWrapper>".
-    record PeopleItem(@Nullable Contact contact,
-                      @Nullable ConversationChannelWrapper conversation) {
+    // Represents "Either<All, Contact, ConversationChannelWrapper>".
+    private record PeopleItem(boolean all,
+                              @Nullable Contact contact,
+                              @Nullable ConversationChannelWrapper conversation) {
+
+        private static final PeopleItem ALL = new PeopleItem(true, null, null);
 
         PeopleItem(@NonNull Contact contact) {
-            this(contact, null);
+            this(false, contact, null);
         }
 
         PeopleItem(@NonNull ConversationChannelWrapper conversation) {
-            this(null, conversation);
+            this(false, null, conversation);
         }
-
     }
 
-    private CircularIconSet<?> getPeopleIcons(ZenPolicy policy) {
+    private static final Equivalence<PeopleItem> PEOPLE_ITEM_EQUIVALENCE = new Equivalence<>() {
+        @Override
+        protected boolean doEquivalent(@NonNull PeopleItem a, @NonNull PeopleItem b) {
+            if (a.all && b.all) {
+                return true;
+            } else if (a.contact != null && b.contact != null) {
+                return a.contact.equals(b.contact);
+            } else if (a.conversation != null && b.conversation != null) {
+                ConversationChannelWrapper c1 = a.conversation;
+                ConversationChannelWrapper c2 = b.conversation;
+                // Skip comparing ShortcutInfo which doesn't implement equals(). We assume same
+                // conversation channel means same icon (which is not 100% correct but unlikely to
+                // change while on this screen).
+                return Objects.equals(c1.getNotificationChannel(), c2.getNotificationChannel())
+                        && Objects.equals(c1.getGroupLabel(), c2.getGroupLabel())
+                        && Objects.equals(c1.getParentChannelLabel(), c2.getParentChannelLabel())
+                        && Objects.equals(c1.getPkg(), c2.getPkg())
+                        && Objects.equals(c1.getUid(), c2.getUid());
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        protected int doHash(@NonNull PeopleItem item) {
+            return Objects.hash(item.all, item.contact, item.conversation);
+        }
+    };
+
+    private CircularIconSet<PeopleItem> getPeopleIcons(ZenPolicy policy) {
         if (getCallersOrMessagesAllowed(policy) == PEOPLE_TYPE_ANYONE) {
             return new CircularIconSet<>(
-                    ImmutableList.of(IconUtil.makeCircularIconPreferenceItem(mContext,
-                            R.drawable.ic_zen_mode_people_all)),
-                    Function.identity());
+                    ImmutableList.of(PeopleItem.ALL),
+                    this::loadPeopleIcon);
         }
 
         ImmutableList.Builder<PeopleItem> peopleItems = ImmutableList.builder();
@@ -181,7 +213,10 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
 
     @WorkerThread
     private Drawable loadPeopleIcon(PeopleItem peopleItem) {
-        if (peopleItem.contact != null) {
+        if (peopleItem.all) {
+            return IconUtil.makeCircularIconPreferenceItem(mContext,
+                    R.drawable.ic_zen_mode_people_all);
+        } else if (peopleItem.contact != null) {
             return mHelperBackend.getContactPhoto(peopleItem.contact);
         } else if (peopleItem.conversation != null) {
             return mConversationIconFactory.getConversationDrawable(
@@ -190,7 +225,7 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
                     peopleItem.conversation.getUid(),
                     /* important= */ true);
         } else {
-            throw new IllegalArgumentException("Neither contact nor conversation!");
+            throw new IllegalArgumentException("Neither all nor contact nor conversation!");
         }
     }
 }

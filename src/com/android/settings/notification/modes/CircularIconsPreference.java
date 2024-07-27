@@ -17,13 +17,10 @@
 package com.android.settings.notification.modes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +36,12 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.Utils;
 
 import com.google.common.base.Equivalence;
+import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -53,12 +49,14 @@ public class CircularIconsPreference extends RestrictedPreference {
 
     private static final float DISABLED_ITEM_ALPHA = 0.3f;
 
-    private Executor mUiExecutor;
-    @Nullable private LinearLayout mIconContainer;
+    record LoadedIcons(ImmutableList<Drawable> icons, int extraItems) { }
 
+    private Executor mUiExecutor;
+
+    // Chronologically, fields will be set top-to-bottom.
     @Nullable private CircularIconSet<?> mIconSet;
-    @Nullable private CircularIconSet<?> mPendingDisplayIconSet;
     @Nullable private ListenableFuture<List<Drawable>> mPendingLoadIconsFuture;
+    @Nullable private LoadedIcons mLoadedIcons;
 
     public CircularIconsPreference(Context context) {
         super(context);
@@ -92,30 +90,6 @@ public class CircularIconsPreference extends RestrictedPreference {
         setLayoutResource(R.layout.preference_circular_icons);
     }
 
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
-        super.onBindViewHolder(holder);
-
-        mIconContainer = checkNotNull((LinearLayout) holder.findViewById(R.id.circles_container));
-        displayIconsIfPending();
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        super.setEnabled(enabled);
-        if (mIconContainer != null) {
-            applyEnabledToIcons(mIconContainer, enabled);
-        }
-    }
-
-    private void displayIconsIfPending() {
-        CircularIconSet<?> pendingIconSet = mPendingDisplayIconSet;
-        if (pendingIconSet != null) {
-            mPendingDisplayIconSet = null;
-            displayIconsInternal(pendingIconSet);
-        }
-    }
-
     <T> void displayIcons(CircularIconSet<T> iconSet) {
         displayIcons(iconSet, null);
     }
@@ -125,38 +99,55 @@ public class CircularIconsPreference extends RestrictedPreference {
             return;
         }
         mIconSet = iconSet;
-        displayIconsInternal(iconSet);
+
+        mLoadedIcons = null;
+        if (mPendingLoadIconsFuture != null) {
+            mPendingLoadIconsFuture.cancel(true);
+            mPendingLoadIconsFuture = null;
+        }
+
+        notifyChanged();
     }
 
-    void displayIconsInternal(CircularIconSet<?> iconSet) {
-        if (mIconContainer == null) {
-            // Too soon, wait for bind.
-            mPendingDisplayIconSet = iconSet;
-            return;
-        }
-        mIconContainer.setVisibility(iconSet.size() != 0 ? View.VISIBLE : View.GONE);
-        if (iconSet.size() == 0) {
-            return;
-        }
-        if (mIconContainer.getMeasuredWidth() == 0) {
-            // Too soon, wait for first measure to know width.
-            mPendingDisplayIconSet = iconSet;
-            mIconContainer.getViewTreeObserver().addOnGlobalLayoutListener(
-                    new ViewTreeObserver.OnGlobalLayoutListener() {
-                        @Override
-                        public void onGlobalLayout() {
-                            checkNotNull(mIconContainer).getViewTreeObserver()
-                                    .removeOnGlobalLayoutListener(this);
-                            displayIconsIfPending();
-                        }
-                    }
-            );
-            return;
-        }
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
 
-        mIconContainer.setVisibility(View.VISIBLE);
+        LinearLayout iconContainer = checkNotNull(
+                (LinearLayout) holder.findViewById(R.id.circles_container));
+        bindIconContainer(iconContainer);
+    }
+
+    private void bindIconContainer(LinearLayout container) {
+        if (mLoadedIcons != null) {
+            // We have the icons ready to display already, show them.
+            setDrawables(container, mLoadedIcons);
+        } else if (mIconSet != null) {
+            // We know what icons we want, but haven't yet loaded them.
+            if (mIconSet.size() == 0) {
+                container.setVisibility(View.GONE);
+                return;
+            }
+            container.setVisibility(View.VISIBLE);
+            if (container.getMeasuredWidth() != 0) {
+                startLoadingIcons(container, mIconSet);
+            } else {
+                container.getViewTreeObserver().addOnGlobalLayoutListener(
+                        new ViewTreeObserver.OnGlobalLayoutListener() {
+                            @Override
+                            public void onGlobalLayout() {
+                                container.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                                startLoadingIcons(container, mIconSet);
+                            }
+                        }
+                );
+            }
+        }
+    }
+
+    private void startLoadingIcons(LinearLayout container, CircularIconSet<?> iconSet) {
         Resources res = getContext().getResources();
-        int availableSpace = mIconContainer.getMeasuredWidth();
+        int availableSpace = container.getMeasuredWidth();
         int iconHorizontalSpace = res.getDimensionPixelSize(R.dimen.zen_mode_circular_icon_diameter)
                 + res.getDimensionPixelSize(R.dimen.zen_mode_circular_icon_margin_between);
         int numIconsThatFit = availableSpace / iconHorizontalSpace;
@@ -177,77 +168,58 @@ public class CircularIconsPreference extends RestrictedPreference {
             extraItems = 0;
         }
 
-        displayIconsWhenReady(iconFutures, extraItems);
-    }
-
-    private void displayIconsWhenReady(List<ListenableFuture<Drawable>> iconFutures,
-            int extraItems) {
-        checkState(mIconContainer != null);
-        if (mPendingLoadIconsFuture != null) {
-            mPendingLoadIconsFuture.cancel(true);
-        }
-
-        // Rearrange child views until we have <numImages> ImageViews...
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        int numImages = iconFutures.size();
-        int numImageViews = getChildCount(mIconContainer, ImageView.class);
-        if (numImages > numImageViews) {
-            for (int i = 0; i < numImages - numImageViews; i++) {
-                ImageView imageView = (ImageView) inflater.inflate(
-                        R.layout.preference_circular_icons_item, mIconContainer, false);
-                mIconContainer.addView(imageView, 0);
-            }
-        } else if (numImageViews > numImages) {
-            for (int i = 0; i < numImageViews - numImages; i++) {
-                mIconContainer.removeViewAt(0);
-            }
-        }
-        // ... plus 0/1 TextViews at the end.
-        if (extraItems > 0 && !(getLastChild(mIconContainer) instanceof TextView)) {
-            TextView plusView = (TextView) inflater.inflate(
-                    R.layout.preference_circular_icons_plus_item, mIconContainer, false);
-            mIconContainer.addView(plusView);
-        } else if (extraItems == 0 && (getLastChild(mIconContainer) instanceof TextView)) {
-            mIconContainer.removeViewAt(mIconContainer.getChildCount() - 1);
-        }
-
-        // Set up placeholders and extra items indicator.
-        for (int i = 0; i < numImages; i++) {
-            ImageView imageView = (ImageView) mIconContainer.getChildAt(i);
-            imageView.setImageDrawable(getPlaceholderImage(getContext()));
-        }
-        if (extraItems > 0) {
-            TextView textView = (TextView) checkNotNull(getLastChild(mIconContainer));
-            textView.setText(getContext().getString(R.string.zen_mode_plus_n_items, extraItems));
-        }
-
-        applyEnabledToIcons(mIconContainer, isEnabled());
-
         // Display icons when all are ready (more consistent than randomly loading).
         mPendingLoadIconsFuture = Futures.allAsList(iconFutures);
         FutureUtil.whenDone(
                 mPendingLoadIconsFuture,
                 icons -> {
-                    checkState(mIconContainer != null);
-                    for (int i = 0; i < icons.size(); i++) {
-                        ((ImageView) mIconContainer.getChildAt(i)).setImageDrawable(icons.get(i));
-                    }
+                    mLoadedIcons = new LoadedIcons(ImmutableList.copyOf(icons), extraItems);
+                    notifyChanged(); // So that view is rebound and icons actually shown.
                 },
                 mUiExecutor);
     }
 
-    private void applyEnabledToIcons(ViewGroup container, boolean enabled) {
+    private void setDrawables(LinearLayout container, LoadedIcons loadedIcons) {
+        // Rearrange child views until we have <numImages> ImageViews...
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        int numImages = loadedIcons.icons.size();
+        int numImageViews = getChildCount(container, ImageView.class);
+        if (numImages > numImageViews) {
+            for (int i = 0; i < numImages - numImageViews; i++) {
+                ImageView imageView = (ImageView) inflater.inflate(
+                        R.layout.preference_circular_icons_item, container, false);
+                container.addView(imageView, 0);
+            }
+        } else if (numImageViews > numImages) {
+            for (int i = 0; i < numImageViews - numImages; i++) {
+                container.removeViewAt(0);
+            }
+        }
+        // ... plus 0/1 TextViews at the end.
+        if (loadedIcons.extraItems > 0 && !(getLastChild(container) instanceof TextView)) {
+            TextView plusView = (TextView) inflater.inflate(
+                    R.layout.preference_circular_icons_plus_item, container, false);
+            container.addView(plusView);
+        } else if (loadedIcons.extraItems == 0 && (getLastChild(container) instanceof TextView)) {
+            container.removeViewAt(container.getChildCount() - 1);
+        }
+
+        // Show images (and +n if needed).
+        for (int i = 0; i < numImages; i++) {
+            ImageView imageView = (ImageView) container.getChildAt(i);
+            imageView.setImageDrawable(loadedIcons.icons.get(i));
+        }
+        if (loadedIcons.extraItems > 0) {
+            TextView textView = (TextView) checkNotNull(getLastChild(container));
+            textView.setText(getContext().getString(R.string.zen_mode_plus_n_items,
+                    loadedIcons.extraItems));
+        }
+
+        // Apply enabled/disabled style.
         for (int i = 0; i < container.getChildCount(); i++) {
             View child = container.getChildAt(i);
-            child.setAlpha(enabled ? 1.0f : DISABLED_ITEM_ALPHA);
+            child.setAlpha(isEnabled() ? 1.0f : DISABLED_ITEM_ALPHA);
         }
-    }
-
-    private static Drawable getPlaceholderImage(Context context) {
-        ShapeDrawable placeholder = new ShapeDrawable(new OvalShape());
-        placeholder.setTintList(Utils.getColorAttr(context,
-                com.android.internal.R.attr.materialColorSecondaryContainer));
-        return placeholder;
     }
 
     private static int getChildCount(ViewGroup parent, Class<? extends View> childClass) {
@@ -269,40 +241,8 @@ public class CircularIconsPreference extends RestrictedPreference {
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    List<View> getViews() {
-        if (mIconContainer == null) {
-            return List.of();
-        }
-        ArrayList<View> views = new ArrayList<>();
-        for (int i = 0; i < mIconContainer.getChildCount(); i++) {
-            views.add(mIconContainer.getChildAt(i));
-        }
-        return views;
-    }
-
-    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    List<Drawable> getIcons() {
-        if (mIconContainer == null) {
-            return List.of();
-        }
-        ArrayList<Drawable> drawables = new ArrayList<>();
-        for (int i = 0; i < getChildCount(mIconContainer, ImageView.class); i++) {
-            drawables.add(((ImageView) mIconContainer.getChildAt(i)).getDrawable());
-        }
-        return drawables;
-    }
-
-    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     @Nullable
-    String getPlusText() {
-        if (mIconContainer == null) {
-            return null;
-        }
-        View lastChild = getLastChild(mIconContainer);
-        if (lastChild instanceof TextView tv) {
-            return tv.getText() != null ? tv.getText().toString() : null;
-        } else {
-            return null;
-        }
+    LoadedIcons getLoadedIcons() {
+        return mLoadedIcons;
     }
 }

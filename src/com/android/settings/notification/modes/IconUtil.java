@@ -64,8 +64,26 @@ class IconUtil {
     }
 
     /**
+     * Returns a variant of the supplied mode icon to be used as the header in the mode page. The
+     * inner icon is 64x64 dp and it's contained in a 12-sided-cookie of 136dp diameter. It's
+     * tinted with the "material secondary" color combination and the "selected" color variant
+     * should be used for modes currently active.
+     */
+    static Drawable makeModeHeader(@NonNull Context context, Drawable modeIcon) {
+        return composeIcons(
+                checkNotNull(context.getDrawable(R.drawable.ic_zen_mode_icon_cookie)),
+                context.getColorStateList(R.color.modes_icon_selectable_background),
+                context.getResources().getDimensionPixelSize(
+                        R.dimen.zen_mode_header_size),
+                modeIcon,
+                context.getColorStateList(R.color.modes_icon_selectable_icon),
+                context.getResources().getDimensionPixelSize(
+                        R.dimen.zen_mode_header_inner_icon_size));
+    }
+
+    /**
      * Returns a variant of the supplied {@code icon} to be used as the header in the icon picker.
-     * The inner icon is 48x48dp and it's contained into a circle of diameter 90dp.
+     * The inner icon is 48x48dp and it's contained in a circle of diameter 90dp.
      */
     static Drawable makeIconPickerHeader(@NonNull Context context, Drawable icon) {
         return composeIconCircle(
@@ -82,16 +100,16 @@ class IconUtil {
 
     /**
      * Returns a variant of the supplied {@code icon} to be used as an option in the icon picker.
-     * The inner icon is 36x36dp and it's contained into a circle of diameter 54dp. It's also set up
+     * The inner icon is 36x36dp and it's contained in a circle of diameter 54dp. It's also set up
      * so that selection and pressed states are represented in the color.
      */
     static Drawable makeIconPickerItem(@NonNull Context context, @DrawableRes int iconResId) {
         return composeIconCircle(
-                context.getColorStateList(R.color.modes_icon_picker_item_background),
+                context.getColorStateList(R.color.modes_icon_selectable_background),
                 context.getResources().getDimensionPixelSize(
                         R.dimen.zen_mode_icon_list_item_circle_diameter),
                 checkNotNull(context.getDrawable(iconResId)),
-                context.getColorStateList(R.color.modes_icon_picker_item_icon),
+                context.getColorStateList(R.color.modes_icon_selectable_icon),
                 context.getResources().getDimensionPixelSize(
                         R.dimen.zen_mode_icon_list_item_icon_size));
     }
@@ -164,18 +182,24 @@ class IconUtil {
 
     private static Drawable composeIconCircle(ColorStateList circleColor, @Px int circleDiameterPx,
             Drawable icon, ColorStateList iconColor, @Px int iconSizePx) {
-        ShapeDrawable background = new ShapeDrawable(new OvalShape());
-        background.setTintList(circleColor);
+        return composeIcons(new ShapeDrawable(new OvalShape()), circleColor, circleDiameterPx, icon,
+                iconColor, iconSizePx);
+    }
+
+    private static Drawable composeIcons(Drawable outer, ColorStateList outerColor,
+            @Px int outerSizePx, Drawable icon, ColorStateList iconColor, @Px int iconSizePx) {
+        Drawable background = checkNotNull(outer.getConstantState()).newDrawable().mutate();
+        background.setTintList(outerColor);
         Drawable foreground = checkNotNull(icon.getConstantState()).newDrawable().mutate();
         foreground.setTintList(iconColor);
 
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { background, foreground });
 
-        layerDrawable.setLayerSize(0, circleDiameterPx, circleDiameterPx);
+        layerDrawable.setLayerSize(0, outerSizePx, outerSizePx);
         layerDrawable.setLayerGravity(1, Gravity.CENTER);
         layerDrawable.setLayerSize(1, iconSizePx, iconSizePx);
 
-        layerDrawable.setBounds(0, 0, circleDiameterPx, circleDiameterPx);
+        layerDrawable.setBounds(0, 0, outerSizePx, outerSizePx);
         return layerDrawable;
     }
 }
