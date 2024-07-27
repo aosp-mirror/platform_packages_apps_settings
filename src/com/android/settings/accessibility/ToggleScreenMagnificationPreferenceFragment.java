@@ -33,7 +33,6 @@ import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.icu.text.CaseMap;
 import android.icu.text.MessageFormat;
@@ -48,7 +47,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
-import android.widget.CheckBox;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -62,7 +60,6 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.server.accessibility.Flags;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.utils.LocaleUtils;
@@ -92,10 +89,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     // TODO(b/147021230): Move duplicated functions with android/internal/accessibility into util.
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
-    private CheckBox mSoftwareTypeCheckBox;
-    private CheckBox mHardwareTypeCheckBox;
-    private CheckBox mTripleTapTypeCheckBox;
-    @Nullable private CheckBox mTwoFingerTripleTapTypeCheckBox;
     private DialogCreatable mDialogDelegate;
 
     @Nullable
@@ -119,7 +112,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 .appendPath(String.valueOf(R.raw.a11y_magnification_banner))
                 .build();
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
-            removeDialog(DialogEnums.EDIT_SHORTCUT);
             mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         };
 
@@ -184,15 +176,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
                 return AccessibilityShortcutsTutorial
                         .showAccessibilityGestureTutorialDialog(getPrefContext());
-            case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getShortcutTitle();
-                final int dialogType = mInSetupWizard
-                        ? DialogType.EDIT_SHORTCUT_MAGNIFICATION_SUW
-                        : DialogType.EDIT_SHORTCUT_MAGNIFICATION;
-                mDialog = AccessibilityDialogUtils.showEditShortcutDialog(getPrefContext(),
-                        dialogType, dialogTitle, this::callOnAlertDialogCheckboxClicked);
-                setupMagnificationEditShortcutDialog(mDialog);
-                return mDialog;
             default:
                 return super.onCreateDialog(dialogId);
         }
@@ -365,95 +348,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mDialogDelegate = delegate;
     }
 
-    @Override
-    protected int getShortcutTypeCheckBoxValue() {
-        if (mSoftwareTypeCheckBox == null || mHardwareTypeCheckBox == null) {
-            return NOT_SET;
-        }
-
-        int value = DEFAULT;
-        if (mSoftwareTypeCheckBox.isChecked()) {
-            value |= SOFTWARE;
-        }
-        if (mHardwareTypeCheckBox.isChecked()) {
-            value |= HARDWARE;
-        }
-        if (mTripleTapTypeCheckBox.isChecked()) {
-            value |= TRIPLETAP;
-        }
-        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (mTwoFingerTripleTapTypeCheckBox.isChecked()) {
-                value |= TWOFINGER_DOUBLETAP;
-            }
-        }
-        return value;
-    }
-
-    @VisibleForTesting
-    void setupMagnificationEditShortcutDialog(Dialog dialog) {
-        final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
-        mSoftwareTypeCheckBox = dialogSoftwareView.findViewById(R.id.checkbox);
-        setDialogTextAreaClickListener(dialogSoftwareView, mSoftwareTypeCheckBox);
-
-        final View dialogHardwareView = dialog.findViewById(R.id.hardware_shortcut);
-        mHardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
-        setDialogTextAreaClickListener(dialogHardwareView, mHardwareTypeCheckBox);
-
-        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            final View dialogTwoFignerTripleTapView =
-                    dialog.findViewById(R.id.two_finger_triple_tap_shortcut);
-            mTwoFingerTripleTapTypeCheckBox = dialogTwoFignerTripleTapView.findViewById(
-                    R.id.checkbox);
-            setDialogTextAreaClickListener(
-                    dialogTwoFignerTripleTapView, mTwoFingerTripleTapTypeCheckBox);
-        }
-
-        final View dialogTripleTapView = dialog.findViewById(R.id.triple_tap_shortcut);
-        mTripleTapTypeCheckBox = dialogTripleTapView.findViewById(R.id.checkbox);
-        setDialogTextAreaClickListener(dialogTripleTapView, mTripleTapTypeCheckBox);
-
-        final View advancedView = dialog.findViewById(R.id.advanced_shortcut);
-        if (mTripleTapTypeCheckBox.isChecked()) {
-            advancedView.setVisibility(View.GONE);
-            dialogTripleTapView.setVisibility(View.VISIBLE);
-        }
-
-        updateMagnificationEditShortcutDialogCheckBox();
-    }
-
-    private void setDialogTextAreaClickListener(View dialogView, CheckBox checkBox) {
-        final View dialogTextArea = dialogView.findViewById(R.id.container);
-        dialogTextArea.setOnClickListener(v -> checkBox.toggle());
-    }
-
-    private void updateMagnificationEditShortcutDialogCheckBox() {
-        // If it is during onConfigChanged process then restore the value, or get the saved value
-        // when shortcutPreference is checked.
-        int value = restoreOnConfigChangedValue();
-        if (value == NOT_SET) {
-            final int lastNonEmptyUserShortcutType = getUserPreferredShortcutTypes();
-            value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
-                    : DEFAULT;
-        }
-
-        mSoftwareTypeCheckBox.setChecked(
-                hasShortcutType(value, SOFTWARE));
-        mHardwareTypeCheckBox.setChecked(
-                hasShortcutType(value, HARDWARE));
-        mTripleTapTypeCheckBox.setChecked(
-                hasShortcutType(value, TRIPLETAP));
-        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            mTwoFingerTripleTapTypeCheckBox.setChecked(
-                    hasShortcutType(value, TWOFINGER_DOUBLETAP));
-        }
-    }
-
-    private int restoreOnConfigChangedValue() {
-        final int savedValue = mSavedCheckBoxValue;
-        mSavedCheckBoxValue = NOT_SET;
-        return savedValue;
-    }
-
     private boolean hasShortcutType(int value, @UserShortcutType int type) {
         return (value & type) == type;
     }
@@ -573,22 +467,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
-        final int value = getShortcutTypeCheckBoxValue();
-
-        saveNonEmptyUserShortcutType(value);
-        optInAllMagnificationValuesToSettings(getPrefContext(), value);
-        optOutAllMagnificationValuesFromSettings(getPrefContext(), ~value);
-        mShortcutPreference.setChecked(value != DEFAULT);
-        mShortcutPreference.setSummary(
-                getShortcutTypeSummary(getPrefContext()));
-
-        if (mHardwareTypeCheckBox.isChecked()) {
-            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(getPrefContext());
-        }
-    }
-
-    @Override
     public int getHelpResource() {
         return R.string.help_url_magnification;
     }
@@ -613,8 +491,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_GESTURE_NAVIGATION;
             case DialogEnums.ACCESSIBILITY_BUTTON_TUTORIAL:
                 return SettingsEnums.DIALOG_TOGGLE_SCREEN_MAGNIFICATION_ACCESSIBILITY_BUTTON;
-            case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
-                return SettingsEnums.DIALOG_MAGNIFICATION_EDIT_SHORTCUT;
             default:
                 return super.getDialogMetricsCategory(dialogId);
         }
@@ -664,16 +540,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        if (com.android.settings.accessibility.Flags.editShortcutsInFullScreen()) {
-            EditShortcutsPreferenceFragment.showEditShortcutScreen(
-                    requireContext(),
-                    getMetricsCategory(),
-                    getShortcutTitle(),
-                    MAGNIFICATION_COMPONENT_NAME,
-                    getIntent());
-        } else {
-            showDialog(DialogEnums.MAGNIFICATION_EDIT_SHORTCUT);
-        }
+        EditShortcutsPreferenceFragment.showEditShortcutScreen(
+                requireContext(),
+                getMetricsCategory(),
+                getShortcutTitle(),
+                MAGNIFICATION_COMPONENT_NAME,
+                getIntent());
     }
 
     @Override
@@ -710,17 +582,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mShortcutPreference.setChecked(
                 hasMagnificationValuesInSettings(getPrefContext(), shortcutTypes));
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
-    }
-
-    @VisibleForTesting
-    void saveNonEmptyUserShortcutType(int type) {
-        if (type == DEFAULT) {
-            return;
-        }
-
-        final PreferredShortcut shortcut = new PreferredShortcut(
-                MAGNIFICATION_CONTROLLER_NAME, type);
-        PreferredShortcuts.saveUserShortcutType(getPrefContext(), shortcut);
     }
 
     @VisibleForTesting
