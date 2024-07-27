@@ -90,6 +90,16 @@ public final class ZenModeButtonPreferenceControllerTest {
     }
 
     @Test
+    public void isAvailable_ifModeActiveEvenIfAppOptsOut() {
+        ZenMode zenMode = new TestModeBuilder()
+                .setManualInvocationAllowed(false)
+                .setActive(true)
+                .build();
+        mController.setZenMode(zenMode);
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
     public void isAvailable_notIfModeDisabled() {
         ZenMode zenMode = new TestModeBuilder()
                 .setManualInvocationAllowed(true)
@@ -119,7 +129,6 @@ public final class ZenModeButtonPreferenceControllerTest {
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
         ZenMode zenMode = new TestModeBuilder()
-                .setManualInvocationAllowed(true)
                 .setActive(true)
                 .build();
 
@@ -151,7 +160,6 @@ public final class ZenModeButtonPreferenceControllerTest {
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
         ZenMode zenMode = new TestModeBuilder()
-                .setManualInvocationAllowed(true)
                 .setActive(true)
                 .build();
 

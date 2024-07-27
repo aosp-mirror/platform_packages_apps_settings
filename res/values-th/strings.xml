@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"ปิด"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{เปิดอยู่/แอป # แอปมีสิทธิ์เข้าถึงตำแหน่ง}other{เปิดอยู่/แอป # แอปมีสิทธิ์เข้าถึงตำแหน่ง}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"กำลังโหลด…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"แอปที่มีสิทธิ์เข้าถึงอุปกรณ์ที่อยู่ใกล้เคียงจะสามารถระบุตำแหน่งซึ่งสัมพันธ์กับอุปกรณ์ที่เชื่อมต่อ"</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"แอปที่มีสิทธิ์เข้าถึงอุปกรณ์ที่อยู่ใกล้เคียงจะสามารถระบุตำแหน่งซึ่งสัมพันธ์กับอุปกรณ์ที่เชื่อมต่อได้"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"สิทธิ์เข้าถึงตำแหน่งปิดอยู่สำหรับแอปและบริการต่างๆ ระบบอาจยังส่งตำแหน่งของอุปกรณ์ไปให้หน่วยกู้ภัยฉุกเฉินเมื่อคุณโทรหาหรือส่ง SMS ถึงหมายเลขฉุกเฉิน"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าตำแหน่ง"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"หากต้องการเปลี่ยน ให้ไปที่การตั้งค่า ChromeOS &gt; ความเป็นส่วนตัวและความปลอดภัย &gt; การควบคุมความเป็นส่วนตัว &gt; การเข้าถึงตำแหน่ง"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"ปรับเวลาที่ใช้ในการกดปุ่มเพื่อเปิดใช้เป็น <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> มิลลิวินาที"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"คีย์ติดหนึบ"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"กดทีละปุ่มเพื่อใช้แป้นพิมพ์ลัดแทนการกดปุ่มค้างไว้พร้อมกัน"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"แป้นเมาส์"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"ใช้แป้นพิมพ์จริงเพื่อควบคุมเมาส์"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"แป้นพิมพ์ลัด"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"แสดงรายการแป้นพิมพ์ลัด"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"แป้นพิมพ์และเครื่องมือของโปรไฟล์งาน"</string>
@@ -3652,9 +3654,10 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"แอปนี้ไม่รองรับการตั้งค่าที่ปรับปรุง"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"การตั้งค่าเพิ่มเติม"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"สามารถใช้งานการตั้งค่าเพิ่มเติมได้ในแอปนี้"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"การแจ้งเตือนแบบปรับอัตโนมัติ"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"ใช้การแจ้งเตือนแบบปรับอัตโนมัติ"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"เมื่อคุณได้รับการแจ้งเตือนจำนวนมากภายในเวลาสั้นๆ โทรศัพท์จะลดเสียงและจำนวนป๊อปอัปบนหน้าจอลงสูงสุด 2 นาที โดยที่การโทร การปลุก และการสนทนาสำคัญจะยังคงสั่น ส่งเสียง หรือแสดงบนหน้าจอ อีกทั้งคุณยังค้นหาการแจ้งเตือนทั้งหมดได้ง่ายๆ เพียงเลื่อนลงจากด้านบนของหน้าจอ"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"การพักการแจ้งเตือน"</string>
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"ใช้การพักการแจ้งเตือน"</string>
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"ใช้กับโปรไฟล์งาน"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"ใช้กับแอปในโปรไฟล์งาน"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"บริการตัวช่วย VR"</string>
@@ -3811,7 +3814,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"แอปที่เลือก"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"ไม่มี"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{ไม่ให้แอปใดรบกวนเลย}=1{{app_1} รบกวนได้}=2{{app_1} และ {app_2} รบกวนได้}=3{{app_1}, {app_2} และ {app_3} รบกวนได้}other{{app_1}, {app_2} และอีก # แอปรบกวนได้}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (งาน)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"กำลังคำนวณ…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"อนุญาตให้แอปลบล้าง"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"แอปที่รบกวนคุณได้"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"เลือกแอปเพิ่มเติม"</string>
@@ -3829,6 +3835,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"ไม่ให้อะไรรบกวนเลย"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"ไม่ให้ใครรบกวนเลย"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"ให้รบกวนได้แค่บางคน"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"ให้ทุกคนรบกวนได้"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"ผู้โทรซ้ำ"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"อนุญาตผู้โทรซ้ำ"</string>
@@ -3963,7 +3971,7 @@
     <string name="usage_access" msgid="5487993885373893282">"การเข้าถึงการใช้งาน"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"อนุญาตการเข้าถึงการใช้งาน"</string>
     <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"เวลาอยู่หน้าจอ"</string>
-    <string name="usage_access_description" msgid="8547716253713890707">"การเข้าถึงการใช้งานทำให้แอปสามารถติดตามว่าคุณกำลังใช้​แอปอื่นใดอยู่ ความถี่ในการใช้ รวมทั้งผู้ให้บริการ การตั้งค่าภาษา และรายละเอียดอื่นๆ"</string>
+    <string name="usage_access_description" msgid="8547716253713890707">"การเข้าถึงการใช้งานทำให้แอปสามารถติดตามว่าคุณกำลังใช้​แอปอื่นใดอยู่ ความถี่ในการใช้ รวมทั้งผู้ให้บริการ การตั้งค่าภาษา และรายละ⁠เอียดอื่นๆ"</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"หน่วยความจำ"</string>
     <string name="always_running" msgid="9012705720688200252">"ทำงานตลอดเวลา (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
     <string name="sometimes_running" msgid="7954947311082655448">"ทำงานบางครั้ง (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -5281,10 +5289,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"เปิด"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"ปิด"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"เปิด"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"เสียง %1$d%% ซ้าย %2$d%% ขวา"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"เสียง %1$d%% ขวา %2$d%% ซ้าย"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"แอปที่คุณติดตั้งจะเห็นชื่อของอุปกรณ์ และคนอื่นก็อาจเห็นเช่นกันหากคุณเชื่อมต่อกับอุปกรณ์บลูทูธหรือเครือข่าย Wi-Fi หรือตั้งค่าฮอตสปอต Wi-Fi"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"เพศทางไวยากรณ์"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"เลือกเพศทางไวยากรณ์"</string>

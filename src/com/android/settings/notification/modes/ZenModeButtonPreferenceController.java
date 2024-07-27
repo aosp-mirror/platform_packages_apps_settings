@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.modes;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.annotation.NonNull;
 import android.content.Context;
 import android.provider.Settings;
@@ -36,8 +38,8 @@ class ZenModeButtonPreferenceController extends AbstractZenModePreferenceControl
     private static final String TAG = "ZenModeButtonPrefController";
 
     private Button mZenButton;
-    private Fragment mParent;
-    private ManualDurationHelper mDurationHelper;
+    private final Fragment mParent;
+    private final ManualDurationHelper mDurationHelper;
 
     ZenModeButtonPreferenceController(Context context, String key, Fragment parent,
             ZenModesBackend backend) {
@@ -48,7 +50,8 @@ class ZenModeButtonPreferenceController extends AbstractZenModePreferenceControl
 
     @Override
     public boolean isAvailable(ZenMode zenMode) {
-        return zenMode.getRule().isManualInvocationAllowed() && zenMode.getRule().isEnabled();
+        return zenMode.isEnabled()
+                && (zenMode.isActive() || zenMode.getRule().isManualInvocationAllowed());
     }
 
     @Override
@@ -57,6 +60,7 @@ class ZenModeButtonPreferenceController extends AbstractZenModePreferenceControl
             mZenButton = ((LayoutPreference) preference).findViewById(R.id.activate_mode);
         }
         mZenButton.setOnClickListener(v -> {
+            checkNotNull(mBackend, "Backend not available!");
             if (zenMode.isActive()) {
                 mBackend.deactivateMode(zenMode);
             } else {

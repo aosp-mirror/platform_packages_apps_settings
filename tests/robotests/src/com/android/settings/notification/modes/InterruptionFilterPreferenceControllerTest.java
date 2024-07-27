@@ -68,6 +68,18 @@ public final class InterruptionFilterPreferenceControllerTest {
     }
 
     @Test
+    public void testUpdateState_disabled() {
+        TwoStatePreference preference = mock(TwoStatePreference.class);
+        ZenMode zenMode = new TestModeBuilder()
+                .setEnabled(false)
+                .build();
+
+        mController.updateZenMode(preference, zenMode);
+
+        verify(preference).setEnabled(false);
+    }
+
+    @Test
     public void testUpdateState_all() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
         ZenMode zenMode = new TestModeBuilder()

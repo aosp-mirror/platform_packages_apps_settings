@@ -226,6 +226,7 @@ public class FingerprintSettings extends SubSettings {
         private static final int MSG_FINGER_AUTH_FAIL = 1002;
         private static final int MSG_FINGER_AUTH_ERROR = 1003;
         private static final int MSG_FINGER_AUTH_HELP = 1004;
+        private static final int MSG_RELOAD_FINGERPRINT_TEMPLATES = 1005;
 
         private static final int CONFIRM_REQUEST = 101;
         @VisibleForTesting
@@ -313,6 +314,8 @@ public class FingerprintSettings extends SubSettings {
                         if (activity != null) {
                             Toast.makeText(activity, errString, Toast.LENGTH_SHORT);
                         }
+                        mHandler.obtainMessage(MSG_RELOAD_FINGERPRINT_TEMPLATES)
+                                .sendToTarget();
                         updateDialog();
                     }
 
@@ -331,11 +334,7 @@ public class FingerprintSettings extends SubSettings {
                 switch (msg.what) {
                     case MSG_REFRESH_FINGERPRINT_TEMPLATES:
                         removeFingerprintPreference(msg.arg1);
-                        updateAddPreference();
-                        if (isSfps()) {
-                            updateFingerprintUnlockCategoryVisibility();
-                        }
-                        updatePreferences();
+                        updatePreferencesAfterFingerprintRemoved();
                         break;
                     case MSG_FINGER_AUTH_SUCCESS:
                         highlightFingerprintItem(msg.arg1);
@@ -346,6 +345,9 @@ public class FingerprintSettings extends SubSettings {
                         break;
                     case MSG_FINGER_AUTH_ERROR:
                         handleError(msg.arg1 /* errMsgId */, (CharSequence) msg.obj /* errStr */);
+                        break;
+                    case MSG_RELOAD_FINGERPRINT_TEMPLATES:
+                        updatePreferencesAfterFingerprintRemoved();
                         break;
                     case MSG_FINGER_AUTH_HELP: {
                         // Not used
@@ -483,9 +485,11 @@ public class FingerprintSettings extends SubSettings {
                     mLaunchedConfirm = true;
                     launchChooseOrConfirmLock();
                 } else if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
-                        mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested)) {
+                        mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested,
+                        mUserId)) {
                     mBiometricsAuthenticationRequested = true;
-                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
+                            mUserId);
                 } else if (!mHasFirstEnrolled) {
                     mIsEnrolling = true;
                     addFirstFingerprint(null);
@@ -568,6 +572,7 @@ public class FingerprintSettings extends SubSettings {
 
         protected void removeFingerprintPreference(int fingerprintId) {
             String name = genKey(fingerprintId);
+            Log.e(TAG, "removeFingerprintPreference : " + fingerprintId);
             Preference prefToRemove = findPreference(name);
             if (prefToRemove != null) {
                 if (!getPreferenceScreen().removePreference(prefToRemove)) {
@@ -692,6 +697,14 @@ public class FingerprintSettings extends SubSettings {
                     });
         }
 
+        private void updatePreferencesAfterFingerprintRemoved() {
+            updateAddPreference();
+            if (isSfps()) {
+                updateFingerprintUnlockCategoryVisibility();
+            }
+            updatePreferences();
+        }
+
         private void updateAddPreference() {
             if (getActivity() == null) {
                 return; // Activity went away
@@ -767,9 +780,11 @@ public class FingerprintSettings extends SubSettings {
                     .getUdfpsEnrollCalibrator(getActivity().getApplicationContext(), null, null);
 
             if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
-                    mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested)) {
+                    mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested,
+                    mUserId)) {
                 mBiometricsAuthenticationRequested = true;
-                Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+                Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                        BIOMETRIC_AUTH_REQUEST, mUserId);
             }
         }
 
@@ -1182,7 +1197,7 @@ public class FingerprintSettings extends SubSettings {
 
             @Override
             public int getMetricsCategory() {
-                return SettingsEnums.DIALOG_FINGERPINT_EDIT;
+                return SettingsEnums.DIALOG_FINGERPRINT_DELETE;
             }
 
             @Override
@@ -1344,7 +1359,7 @@ public class FingerprintSettings extends SubSettings {
 
             @Override
             public int getMetricsCategory() {
-                return SettingsEnums.DIALOG_FINGERPINT_EDIT;
+                return SettingsEnums.DIALOG_FINGERPRINT_RENAME;
             }
         }
 

@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Απενεργοποίηση"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Ενεργή / # εφαρμογή έχει πρόσβαση στην τοποθεσία}other{Ενεργή / # εφαρμογές έχουν πρόσβαση στην τοποθεσία}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Φόρτωση…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Οι εφαρμογές με άδεια Συσκευές σε κοντινή απόσταση μπορούν να προσδιορίσουν τη σχετική θέση των συνδεδεμένων συσκευών."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Οι εφαρμογές που έχουν την άδεια Συσκευές σε κοντινή απόσταση μπορούν να προσδιορίσουν τη σχετική θέση των συνδεδεμένων συσκευών."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Η πρόσβαση στην τοποθεσία είναι απενεργοποιημένη για τις εφαρμογές και τις υπηρεσίες. Η τοποθεσία της συσκευής σας ενδέχεται ωστόσο να αποστέλλεται στους χειριστές των κέντρων εκτάκτων αναγκών, όταν καλείτε ή στέλνετε μήνυμα σε έναν αριθμό έκτακτης ανάγκης."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Μάθετε περισσότερα σχετικά με τις Ρυθμίσεις τοποθεσίας"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Για αλλαγή, μεταβείτε στις Ρυθμίσεις του ChromeOS &gt; Απόρρητο και ασφάλεια &gt; Στοιχεία ελέγχου απορρήτου &gt; Πρόσβαση στην τοποθεσία"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Προσαρμόζει τον χρόνο που απαιτείται για την ενεργοποίηση ενός πατήματος πλήκτρου στα <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Ασύγχρονα πλήκτρα"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Για τις συντομεύσεις, αντί να πατάτε παρατεταμένα όλα τα κουμπιά μαζί, φροντίστε να πατάτε ένα πλήκτρο κάθε φορά"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Πλήκτρα ποντικιού"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Χρησιμοποιήστε το πληκτρολόγιο για να χειριστείτε το ποντίκι."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Συντομεύσεις πληκτρολογίου"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Εμφάνιση λίστας συντομεύσεων"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Πληκτρολόγιο και εργαλεία προφίλ εργασίας"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Αλλαγή στιλ γεμίσ. δείκ. σε κίτρινο"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Αλλαγή στιλ γεμίσματ. δείκτη σε ροζ"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Αλλαγή στιλ γεμίσμ. δείκτη σε μπλε"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Στιλ πινελιάς δείκτη"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Λευκό"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Μαύρο"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Κανένα"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Μάθετε κινήσεις επιφάνειας αφής"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"επιφάνειας αφής, επιφάνεια, ποντίκι, δείκτης, κύλιση, σάρωση, δεξί κλικ, κλικ, δείκτης"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"δεξί κλικ, πάτημα"</string>
@@ -3368,10 +3366,8 @@
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Προγράμματα"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Διαγραφή προγραμμάτων"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Διαγραφή"</string>
-    <!-- no translation found for zen_mode_menu_rename_mode (4681802125016390837) -->
-    <skip />
-    <!-- no translation found for zen_mode_menu_delete_mode (5380084696402157428) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"Μετονομασία"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"Διαγραφή"</string>
     <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"Διαγραφή λειτουργίας <xliff:g id="MODE">%1$s</xliff:g>;"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Επεξεργασία"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Προγράμματα"</string>
@@ -3395,8 +3391,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Να επιτρέπονται οπτικά σήματα"</string>
     <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Παραμείνετε συγκεντρωμένοι"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Επιπλέον ενέργειες"</string>
-    <!-- no translation found for modes_sound_summary_off (6972648204528227879) -->
-    <skip />
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Ανενεργή}=1{Ανενεργή / 1 λειτουργία μπορεί να ενεργοποιηθεί αυτόματα}other{Ανενεργή / # λειτουργίες μπορούν να ενεργοποιηθούν αυτόματα}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Ρυθμίσεις προβολής"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Επιλογές προβολής"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Κλίμακα του γκρι"</string>
@@ -3659,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Αυτή η εφαρμογή δεν υποστηρίζει βελτιωμένες ρυθμίσεις"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Περισσότερες ρυθμίσεις"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Περισσότερες ρυθμίσεις είναι διαθέσιμες μέσα σε αυτή την εφαρμογή"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Προσαρμοστικές ειδοποιήσεις"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Χρήση προσαρμοστικών ειδοποιήσεων"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Όταν λαμβάνετε πολλές ειδοποιήσεις μέσα σε σύντομο χρονικό διάστημα, το τηλέφωνό σας θα μειώσει την ένταση του ήχου και θα ελαχιστοποιήσει τα αναδυόμενα παράθυρα στην οθόνη σας για έως και δύο λεπτά. Οι κλήσεις, τα ξυπνητήρια και οι συζητήσεις προτεραιότητας θα εξακολουθούν να προκαλούν δόνηση, να παράγουν ήχο ή να εμφανίζονται στην οθόνη και θα μπορείτε να βρείτε όλες τις ειδοποιήσεις με ευκολία εάν σύρετε προς τα κάτω από το επάνω μέρος της οθόνης."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Περίοδος cooldown ειδοποιήσεων"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Εφαρμογή σε προφίλ εργασίας"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Εφαρμογή σε εφαρμογές με προφίλ εργασίας"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Βοηθητικές υπηρεσίες Εικονικής Πραγματικότητας"</string>
@@ -3818,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Επιλεγμένες εφαρμογές"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Καμία"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Καμία εφαρμογή δεν μπορεί να διακόπτει}=1{Η εφαρμογη {app_1} μπορεί να διακόπτει}=2{Οι εφαρμογές {app_1} και {app_2} μπορούν να διακόπτουν}=3{Οι εφαρμογές {app_1}, {app_2} και {app_3} μπορούν να διακόπτουν}other{Οι εφαρμογές {app_1}, {app_2} και # ακόμα εφαρμογή μπορούν να διακόπτουν}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (Εργασία)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Υπολογισμός…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Να επιτρέπεται στις εφαρμογές η παράκαμψη"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Εφαρμογές που μπορούν να διακόπτουν"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Επιλέξτε περισσότερες εφαρμογές"</string>
@@ -3836,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Τίποτα δεν μπορεί να διακόπτει."</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Κανείς δεν μπορεί να διακόπτει."</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Ορισμένα άτομα μπορούν να διακόπτουν."</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Όλα τα άτομα μπορούν να διακόπτουν."</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Καλούντες κατ\' επανάληψη"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Να επιτρέπονται οι καλούντες κατ\' επανάληψη"</string>
@@ -3855,14 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Αλλαγή σε λειτουργία Μόνο ξυπνητήρια για μία ώρα, έως {time}}other{Αλλαγή σε λειτουργία Μόνο ξυπνητήρια για # ώρες, έως {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Αλλαγή σε ξυπνητήρια μόνο έως τις <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Αλλαγή σε διακοπές πάντα"</string>
-    <!-- no translation found for zen_mode_rename_title (8146882272966214558) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_title (321750898430776191) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_default_name (2778307946775085105) -->
-    <skip />
-    <!-- no translation found for zen_mode_edit_name_hint (4584652062167540536) -->
-    <skip />
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"Λειτουργία επεξεργασίας"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Λειτουργία προσθήκης"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Προσαρμοσμένη λειτουργία"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Όνομα λειτουργίας"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Ειδοποίηση"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Κλείσιμο"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Αποστολή σχολίων για τη συσκευή"</string>
@@ -5292,10 +5290,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Ενεργή"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Ανενεργή"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Ενεργή"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Ήχος %1$d%% αριστερά, %2$d%% δεξιά"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Ήχος %1$d%% δεξιά, %2$d%% αριστερά"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Το όνομα της συσκευής σας είναι ορατό στις εφαρμογές που εγκαθιστάτε. Ενδέχεται επίσης να είναι ορατό και σε άλλα άτομα, όταν συνδέεστε σε συσκευές Bluetooth, συνδέεστε σε ένα δίκτυο Wi-Fi ή ρυθμίζετε ένα σημείο πρόσβασης Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Γραμματικό γένος"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Επιλογή γραμματικού γένους"</string>

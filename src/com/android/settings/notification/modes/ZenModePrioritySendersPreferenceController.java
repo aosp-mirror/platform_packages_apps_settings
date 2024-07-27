@@ -30,10 +30,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ParceledListSlice;
 import android.icu.text.MessageFormat;
 import android.provider.Contacts;
-import android.service.notification.ConversationChannelWrapper;
 import android.service.notification.ZenPolicy;
 import android.view.View;
 
@@ -167,17 +165,7 @@ class ZenModePrioritySendersPreferenceController
     }
 
     private void updateChannelCounts() {
-        ParceledListSlice<ConversationChannelWrapper> impConversations =
-                mHelperBackend.getConversations(true);
-        int numImportantConversations = 0;
-        if (impConversations != null) {
-            for (ConversationChannelWrapper conversation : impConversations.getList()) {
-                if (!conversation.getNotificationChannel().isDemoted()) {
-                    numImportantConversations++;
-                }
-            }
-        }
-        mNumImportantConversations = numImportantConversations;
+        mNumImportantConversations = mHelperBackend.getImportantConversations().size();
     }
 
     private int getPrioritySenders(ZenPolicy policy) {

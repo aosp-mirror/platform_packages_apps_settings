@@ -31,6 +31,7 @@ import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_MESSAGES;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REPEAT_CALLERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
+import static android.service.notification.ZenPolicy.STATE_ALLOW;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_AMBIENT;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_BADGE;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_FULL_SCREEN_INTENT;
@@ -45,6 +46,8 @@ import android.provider.Settings;
 import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
+import android.service.notification.ZenPolicy.ConversationSenders;
+import android.service.notification.ZenPolicy.PeopleType;
 import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
@@ -56,6 +59,7 @@ import com.android.settings.R;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.notification.modes.ZenMode;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
@@ -365,7 +369,12 @@ class ZenModeSummaryHelper {
     }
 
     public String getStarredContactsSummary() {
-        List<String> starredContacts = mBackend.getStarredContacts();
+        List<String> starredContacts = mBackend.getStarredContacts().stream()
+                .map(ZenHelperBackend.Contact::displayName)
+                .map(name -> Strings.isNullOrEmpty(name)
+                        ? mContext.getString(R.string.zen_mode_starred_contacts_empty_name)
+                        : name)
+                .toList();
         int numStarredContacts = starredContacts.size();
         MessageFormat msgFormat = new MessageFormat(
                 mContext.getString(R.string.zen_mode_starred_contacts_summary_contacts),
@@ -389,26 +398,32 @@ class ZenModeSummaryHelper {
                 mContext.getString(R.string.zen_mode_contacts_count),
                 Locale.getDefault());
         Map<String, Object> args = new HashMap<>();
-        args.put("count", mBackend.queryAllContactsData().getCount());
+        args.put("count", mBackend.getAllContactsCount());
         return msgFormat.format(args);
     }
 
-    public String getPeopleSummary(ZenMode zenMode) {
-        final int callersAllowed = zenMode.getPolicy().getPriorityCallSenders();
-        final int messagesAllowed = zenMode.getPolicy().getPriorityMessageSenders();
-        final int conversationsAllowed = zenMode.getPolicy().getPriorityConversationSenders();
+    public String getPeopleSummary(ZenPolicy policy) {
+        @PeopleType int callersAllowed = policy.getPriorityCategoryCalls() == STATE_ALLOW
+                ? policy.getPriorityCallSenders() : PEOPLE_TYPE_NONE;
+        @PeopleType int messagesAllowed = policy.getPriorityCategoryMessages() == STATE_ALLOW
+                ? policy.getPriorityMessageSenders() : PEOPLE_TYPE_NONE;
+        @ConversationSenders int conversationsAllowed =
+                policy.getPriorityCategoryConversations() == STATE_ALLOW
+                        ? policy.getPriorityConversationSenders()
+                        : CONVERSATION_SENDERS_NONE;
         final boolean areRepeatCallersAllowed =
-                zenMode.getPolicy().isCategoryAllowed(PRIORITY_CATEGORY_REPEAT_CALLERS, false);
+                policy.isCategoryAllowed(PRIORITY_CATEGORY_REPEAT_CALLERS, false);
 
         if (callersAllowed == PEOPLE_TYPE_ANYONE
                 && messagesAllowed == PEOPLE_TYPE_ANYONE
                 && conversationsAllowed == CONVERSATION_SENDERS_ANYONE) {
-            return mContext.getResources().getString(R.string.zen_mode_people_all);
+            return mContext.getString(R.string.zen_mode_people_all);
         } else if (callersAllowed == PEOPLE_TYPE_NONE
                 && messagesAllowed == PEOPLE_TYPE_NONE
-                && conversationsAllowed == CONVERSATION_SENDERS_NONE
-                && !areRepeatCallersAllowed) {
-            return mContext.getResources().getString(R.string.zen_mode_people_none);
+                && conversationsAllowed == CONVERSATION_SENDERS_NONE) {
+            return mContext.getString(
+                    areRepeatCallersAllowed ? R.string.zen_mode_people_repeat_callers
+                            : R.string.zen_mode_people_none);
         } else {
             return mContext.getResources().getString(R.string.zen_mode_people_some);
         }

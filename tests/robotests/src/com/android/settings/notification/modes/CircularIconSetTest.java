@@ -27,6 +27,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
+import com.google.common.base.Equivalence;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -54,33 +55,111 @@ public class CircularIconSetTest {
     }
 
     @Test
-    public void equals_sameItems_true() {
+    public void hasSameItemsAs_sameItems_true() {
         CircularIconSet<Integer> items1 = new CircularIconSet<>(ImmutableList.of(1, 2),
                 num -> new ColorDrawable(Color.BLUE));
         CircularIconSet<Integer> items2 = new CircularIconSet<>(ImmutableList.of(1, 2),
                 num -> new ColorDrawable(Color.GREEN));
 
-        assertThat(items1.hasSameItemsAs(items2)).isTrue();
+        assertThat(items1.hasSameItemsAs(items2, null)).isTrue();
     }
 
     @Test
-    public void equals_differentTypes_false() {
+    public void hasSameItemsAs_differentTypes_false() {
         CircularIconSet<Integer> items1 = new CircularIconSet<>(ImmutableList.of(1, 2),
                 num -> new ColorDrawable(Color.BLUE));
         CircularIconSet<String> items2 = new CircularIconSet<>(ImmutableList.of("a", "b"),
                 str -> new ColorDrawable(Color.GREEN));
 
-        assertThat(items1.hasSameItemsAs(items2)).isFalse();
+        assertThat(items1.hasSameItemsAs(items2, null)).isFalse();
     }
 
     @Test
-    public void equals_differentItems_false() {
+    public void hasSameItemsAs_differentItems_false() {
         CircularIconSet<String> items1 = new CircularIconSet<>(ImmutableList.of("a", "b"),
                 str -> new ColorDrawable(Color.GREEN));
         CircularIconSet<String> items2 = new CircularIconSet<>(ImmutableList.of("a", "b", "c"),
                 str -> new ColorDrawable(Color.GREEN));
 
-        assertThat(items1.hasSameItemsAs(items2)).isFalse();
+        assertThat(items1.hasSameItemsAs(items2, null)).isFalse();
+    }
+
+    private static class WrapperWithoutEquals<T> {
+        private final T mValue;
+        private WrapperWithoutEquals(T value) {
+            mValue = value;
+        }
+    }
+
+    @Test
+    public void hasSameItemsAs_withEquivalence_trueIfEquivalentItems() {
+        CircularIconSet<WrapperWithoutEquals<Integer>> items1 = new CircularIconSet<>(
+                ImmutableList.of(
+                        new WrapperWithoutEquals<>(1),
+                        new WrapperWithoutEquals<>(2)),
+                unused -> new ColorDrawable(Color.BLACK));
+        CircularIconSet<WrapperWithoutEquals<Integer>> items2 = new CircularIconSet<>(
+                ImmutableList.of(
+                        new WrapperWithoutEquals<>(1),
+                        new WrapperWithoutEquals<>(2)),
+                unused -> new ColorDrawable(Color.BLACK));
+        CircularIconSet<WrapperWithoutEquals<Integer>> items3 = new CircularIconSet<>(
+                ImmutableList.of(
+                        new WrapperWithoutEquals<>(2),
+                        new WrapperWithoutEquals<>(3)),
+                unused -> new ColorDrawable(Color.BLACK));
+        // Needs special equivalence, equals is not enough.
+        assertThat(items1.hasSameItemsAs(items2, null)).isFalse();
+
+        Equivalence<WrapperWithoutEquals<Integer>> equivalence = new Equivalence<>() {
+            @Override
+            protected boolean doEquivalent(WrapperWithoutEquals<Integer> a,
+                    WrapperWithoutEquals<Integer> b) {
+                return a.mValue.equals(b.mValue);
+            }
+
+            @Override
+            protected int doHash(WrapperWithoutEquals<Integer> t) {
+                return t.mValue;
+            }
+        };
+
+        assertThat(items1.hasSameItemsAs(items2, equivalence)).isTrue();
+        assertThat(items1.hasSameItemsAs(items3, equivalence)).isFalse();
+    }
+
+    @Test
+    public void hasSameItemsAs_withEquivalenceButDifferentTypes_falseAndNoClassCastExceptions() {
+        CircularIconSet<Integer> items1 = new CircularIconSet<>(ImmutableList.of(1, 2),
+                num -> new ColorDrawable(Color.BLUE));
+        CircularIconSet<String> items2 = new CircularIconSet<>(ImmutableList.of("one", "two"),
+                num -> new ColorDrawable(Color.GREEN));
+
+        Equivalence<String> stringEquivalence = new Equivalence<String>() {
+            @Override
+            protected boolean doEquivalent(String a, String b) {
+                return a.equals(b);
+            }
+
+            @Override
+            protected int doHash(String t) {
+                return t.hashCode();
+            }
+        };
+        Equivalence<Integer> integerEquivalence = new Equivalence<Integer>() {
+            @Override
+            protected boolean doEquivalent(Integer a, Integer b) {
+                return a.equals(b);
+            }
+
+            @Override
+            protected int doHash(Integer t) {
+                return t.hashCode();
+            }
+        };
+
+        assertThat(items1.hasSameItemsAs(items2, stringEquivalence)).isFalse();
+        assertThat(items2.hasSameItemsAs(items1, integerEquivalence)).isFalse();
     }
 
     @Test
