@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"बंद है"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{चालू है / # ऐप्लिकेशन के पास जगह की जानकारी का ऐक्सेस है}one{चालू है / # ऐप्लिकेशन के पास जगह की जानकारी का ऐक्सेस है}other{चालू है / # ऐप्लिकेशन के पास जगह की जानकारी का ऐक्सेस है}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"लोड हो रहा है…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"ऐसे ऐप्लिकेशन, जिन्हें आस-पास मौजूद डिवाइसों के साथ इंटरैक्ट करने की अनुमति मिली है वे कनेक्ट किए गए डिवाइसों की जगह की जानकारी का पता लगा सकते हैं."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"जिन ऐप्लिकेशन को आस-पास मौजूद डिवाइसों के साथ इंटरैक्ट करने की अनुमति मिली है वे कनेक्ट किए गए डिवाइसों की जगह की जानकारी का पता लगा सकते हैं."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"ऐप्लिकेशन और सेवाओं के लिए, जगह की जानकारी का ऐक्सेस बंद है. आपके डिवाइस की जगह की जानकारी, आपातकालीन स्थिति में मदद करने वाले लोगों को अब भी दी जा सकती है. ऐसा आपके किसी आपातकालीन नंबर पर कॉल करने या मैसेज भेजने पर किया जाएगा."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"जगह की जानकारी की सेटिंग के बारे में ज़्यादा जानें"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"इसे बदलने के लिए, ChromeOS की सेटिंग &gt; निजता और सुरक्षा &gt; निजता सेटिंग &gt; जगह की जानकारी के ऐक्सेस पर जाएं"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"किसी कुंजी को दबाने पर, स्क्रीन पर होने वाली प्रतिक्रिया का समय <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> मि॰से॰ तक अडजस्ट किया जा सकता है"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"स्टिकी बटन"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"शॉर्टकट के लिए, कई कुंजियों को एक साथ दबाकर रखने के बजाय एक बार में एक कुंजी दबाएं"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"माउस का काम करने वाले बटन"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"माउस से कंट्रोल करने के लिए, फ़िज़िकल कीबोर्ड का इस्तेमाल करें."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"कीबोर्ड शॉर्टकट"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"शॉर्टकट की सूची दिखाएं"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"काम के प्रोफ़ाइल से जुड़े कीबोर्ड और टूल"</string>
@@ -3364,10 +3366,8 @@
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"शेड्यूल"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"शेड्यूल मिटाएं"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"मिटाएं"</string>
-    <!-- no translation found for zen_mode_menu_rename_mode (4681802125016390837) -->
-    <skip />
-    <!-- no translation found for zen_mode_menu_delete_mode (5380084696402157428) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"नाम बदलें"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"मिटाएं"</string>
     <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"क्या आपको \"<xliff:g id="MODE">%1$s</xliff:g>\" मोड मिटाना है?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"बदलाव करें"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"शेड्यूल"</string>
@@ -3391,8 +3391,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"संकेत दिखाए जाने की अनुमति दें"</string>
     <string name="mode_interruption_filter_title" msgid="3343846700214702347">"फ़ोकस बनाए रखें"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"अन्य कार्रवाइयां"</string>
-    <!-- no translation found for modes_sound_summary_off (6972648204528227879) -->
-    <skip />
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{बंद है}=1{बंद है / 1 मोड अपने-आप चालू हो सकता है}one{बंद है / # मोड अपने-आप चालू हो सकता है}other{बंद है / # मोड अपने-आप चालू हो सकते हैं}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"डिसप्ले की सेटिंग"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"डिसप्ले के विकल्प"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"ग्रेस्केल"</string>
@@ -3655,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"यह ऐप्लिकेशन, बेहतर सेटिंग के साथ काम नहीं करता है"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"अन्य सेटिंग"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"इस ऐप्लिकेशन में ज़्यादा सेटिंग उपलब्ध हैं"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"ज़रूरत के हिसाब से सूचनाएं पाने की सुविधा"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"ज़रूरत के हिसाब से सूचनाएं पाने की सुविधा इस्तेमाल करें"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"कम समय में काफ़ी सूचनाएं मिलने पर, दो मिनट के लिए आपका फ़ोन इन सूचनाओं से होने वाली आवाज़ों को कम करेगा और स्क्रीन पर कम पॉप-अप दिखाएगा. कॉल, अलार्म, और अहम बातचीत से जुड़ी सूचनाएं अब भी पहले की तरह ही मिलेंगी या स्क्रीन पर दिखेंगी. साथ ही, आपको मिली सभी सूचनाएं, स्क्रीन पर सबसे ऊपर से नीचे की ओर स्वाइप करके आसानी से मिल जाएंगी."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"लगातार सूचनाएं आने पर आवाज़ कम करने की सेटिंग"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"वर्क प्रोफ़ाइल पर लागू करें"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"वर्क प्रोफ़ाइल ऐप्लिकेशन पर लागू करें"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"वीआर के साथ काम करने वाली सेवाएं"</string>
@@ -3814,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"चुने गए ऐप्लिकेशन"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"कोई नहीं"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{कोई भी ऐप्लिकेशन \'परेशान न करें\' मोड को बायपास नहीं कर सकता}=1{{app_1} \'परेशान न करें\' मोड को बायपास कर सकता है}=2{{app_1} और {app_2} \'परेशान न करें\' मोड को बायपास कर सकते हैं}=3{{app_1}, {app_2}, और {app_3} \'परेशान न करें\' मोड को बायपास कर सकते हैं}one{{app_1}, {app_2}, और # अन्य ऐप्लिकेशन \'परेशान न करें\' मोड को बायपास कर सकते हैं}other{{app_1}, {app_2}, और # अन्य ऐप्लिकेशन \'परेशान न करें\' मोड को बायपास कर सकते हैं}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (काम के लिए)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"डेटा फ़ेच किया जा रहा है…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ऐप्लिकेशन को ओवरराइड करने की मंज़ूरी दें"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"ऐप्लिकेशन जो \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"और ऐप्लिकेशन चुनें"</string>
@@ -3832,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"कोई भी आवाज़ \'परेशान न करें\' मोड को बायपास नहीं कर सकती"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"कोई भी व्यक्ति \'परेशान न करें\' मोड को बायपास नहीं कर सकता"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"कुछ चुने हुए लोग \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"कोई भी व्यक्ति \'परेशान न करें\' मोड को बायपास कर सकता है"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"बार-बार कॉल करने वाले (कॉलर)"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"दोबारा काॅल करने वालों को बायपास करने की अनुमति दें"</string>
@@ -3851,14 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{{time} तक, सिर्फ़ एक घंटे के लिए अलार्म मोड पर स्विच करें}one{{time} तक, सिर्फ़ # घंटे के लिए अलार्म मोड पर स्विच करें}other{{time} तक, सिर्फ़ # घंटों के लिए अलार्म मोड पर स्विच करें}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"केवल <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> तक के लिए अलार्म को बदलें"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"हमेशा बाधित करें में बदलें"</string>
-    <!-- no translation found for zen_mode_rename_title (8146882272966214558) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_title (321750898430776191) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_default_name (2778307946775085105) -->
-    <skip />
-    <!-- no translation found for zen_mode_edit_name_hint (4584652062167540536) -->
-    <skip />
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"मोड में बदलाव करें"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"मोड जोड़ें"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"कस्टम मोड"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"मोड का नाम"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"चेतावनी"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"बंद करें"</string>
     <string name="device_feedback" msgid="5351614458411688608">"इस डिवाइस के बारे में सुझाव भेजें"</string>

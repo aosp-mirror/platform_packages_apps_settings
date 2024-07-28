@@ -20,8 +20,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
+import com.google.common.base.Equivalence;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -29,6 +31,7 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -67,8 +70,25 @@ class CircularIconSet<T> {
         return MoreObjects.toStringHelper(this).add("items", mItems).toString();
     }
 
-    boolean hasSameItemsAs(CircularIconSet<?> other) {
-        return other != null && this.mItems.equals(other.mItems);
+    @SuppressWarnings("unchecked")
+    <OtherT> boolean hasSameItemsAs(CircularIconSet<OtherT> other,
+            @Nullable Equivalence<OtherT> equivalence) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (equivalence == null) {
+            return mItems.equals(other.mItems);
+        }
+        // Check that types match before applying equivalence (statically unsafe). :(
+        Optional<Class<?>> thisItemClass = this.mItems.stream().findFirst().map(T::getClass);
+        Optional<Class<?>> otherItemClass = other.mItems.stream().findFirst().map(OtherT::getClass);
+        if (!thisItemClass.equals(otherItemClass)) {
+            return false;
+        }
+        return equivalence.pairwise().equivalent((Iterable<OtherT>) this.mItems, other.mItems);
     }
 
     int size() {
