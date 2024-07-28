@@ -63,8 +63,8 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
         }
         final String action = intent.getAction();
         Log.d(TAG, "onReceive:" + action);
-        if (com.android.settingslib.fuelgauge.BatteryUtils.isWorkProfile(context)) {
-            Log.w(TAG, "do nothing for work profile action=" + action);
+        if (com.android.settingslib.fuelgauge.BatteryUtils.isAdditionalProfile(context)) {
+            Log.w(TAG, "do nothing for an additional profile action=" + action);
             return;
         }
         DatabaseUtils.recordDateTime(context, action);

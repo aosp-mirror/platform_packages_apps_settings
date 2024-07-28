@@ -74,6 +74,7 @@ import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.display.DisplayDensityUtils;
+import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieComposition;
@@ -89,7 +90,6 @@ import com.google.android.setupdesign.template.HeaderMixin;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
@@ -197,8 +197,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
 
-    @NonNull
-    private SfpsEnrollmentFeature mSfpsEnrollmentFeature = new EmptySfpsEnrollmentFeature();
+    private boolean mIsFolded = false;
+
+    private SfpsEnrollmentFeature mSfpsEnrollmentFeature;
+
     @Nullable
     private UdfpsEnrollCalibrator mCalibrator;
 
@@ -386,10 +388,24 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     protected void onStart() {
         super.onStart();
+        setupScreenFoldCallbackWhenNecessary();
         updateProgress(false /* animate */);
         updateTitleAndDescription(true);
         if (mRestoring) {
             startIconAnimation();
+        }
+    }
+
+    private void setupScreenFoldCallbackWhenNecessary() {
+        if (mCanAssumeSfps) {
+            // These two fields will be cleaned up in BiometricEnrollBase#onStop.
+            mScreenSizeFoldProvider = new ScreenSizeFoldProvider(getApplicationContext());
+            mFoldCallback = isFolded -> {
+                mIsFolded = isFolded;
+                maybeHideSfpsText(getResources().getConfiguration());
+            };
+            // The callback will be unregistered in BiometricEnrollBase#onStop.
+            mScreenSizeFoldProvider.registerCallback(mFoldCallback, getMainExecutor());
         }
     }
 
@@ -1156,13 +1172,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private void maybeHideSfpsText(@NonNull Configuration newConfig) {
         final HeaderMixin headerMixin = getLayout().getMixin(HeaderMixin.class);
         final DescriptionMixin descriptionMixin = getLayout().getMixin(DescriptionMixin.class);
-        final boolean isLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
 
         if (mCanAssumeSfps) {
             // hide the description
             descriptionMixin.getTextView().setVisibility(View.GONE);
             headerMixin.getTextView().setHyphenationFrequency(HYPHENATION_FREQUENCY_NONE);
-            if (isLandscape) {
+            if (mSfpsEnrollmentFeature.shouldAdjustHeaderText(newConfig, mIsFolded)) {
                 headerMixin.setAutoTextSizeEnabled(true);
                 headerMixin.getTextView().setMinLines(0);
                 headerMixin.getTextView().setMaxLines(10);
@@ -1209,32 +1224,4 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
     }
 
-    private static class EmptySfpsEnrollmentFeature implements SfpsEnrollmentFeature {
-        private final String exceptionStr = "Assume sfps but no SfpsEnrollmentFeature impl.";
-
-        @Override
-        public int getCurrentSfpsEnrollStage(int progressSteps, Function<Integer, Integer> mapper) {
-            throw new IllegalStateException(exceptionStr);
-        }
-
-        @Override
-        public int getFeaturedStageHeaderResource(int stage) {
-            throw new IllegalStateException(exceptionStr);
-        }
-
-        @Override
-        public int getSfpsEnrollLottiePerStage(int stage) {
-            throw new IllegalStateException(exceptionStr);
-        }
-
-        @Override
-        public float getEnrollStageThreshold(@NonNull Context context, int index) {
-            throw new IllegalStateException(exceptionStr);
-        }
-
-        @Override
-        public Animator getHelpAnimator(@NonNull View target) {
-            throw new IllegalStateException(exceptionStr);
-        }
-    }
 }

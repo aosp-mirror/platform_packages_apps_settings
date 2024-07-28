@@ -289,9 +289,11 @@ public class FaceSettings extends DashboardFragment {
                 finish();
             }
         } else if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
-                mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested)) {
+                mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested,
+                mUserId)) {
             mBiometricsAuthenticationRequested = true;
-            Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+            Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
+                    mUserId);
         } else {
             mAttentionController.setToken(mToken);
             mEnrollController.setToken(mToken);

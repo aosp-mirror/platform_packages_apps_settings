@@ -51,18 +51,27 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeHeaderController(context, "header", this));
+        prefControllers.add(new ZenModeBlurbPreferenceController(context, "mode_blurb"));
         prefControllers.add(
                 new ZenModeButtonPreferenceController(context, "activate", this, mBackend));
+        prefControllers.add(new ZenModePreferenceCategoryController(context, "modes_filters"));
         prefControllers.add(new ZenModePeopleLinkPreferenceController(
                 context, "zen_mode_people", mHelperBackend));
         prefControllers.add(new ZenModeAppsLinkPreferenceController(
                 context, "zen_mode_apps", this, mBackend, mHelperBackend));
         prefControllers.add(new ZenModeOtherLinkPreferenceController(
                 context, "zen_other_settings", mHelperBackend));
+        prefControllers.add(
+                new ZenModePreferenceCategoryController(context, "modes_additional_actions"));
         prefControllers.add(new ZenModeDisplayLinkPreferenceController(
                 context, "mode_display_settings", mBackend, mHelperBackend));
-        prefControllers.add(new ZenModeSetTriggerLinkPreferenceController(context,
-                "zen_automatic_trigger_category", this, mBackend));
+        prefControllers.add(new ZenModeTriggerCategoryPreferenceController(context,
+                "zen_automatic_trigger_category"));
+        prefControllers.add(new ZenModeTriggerUpdatePreferenceController(context,
+                "zen_automatic_trigger_settings", mBackend));
+        prefControllers.add(
+                new ZenModeTriggerAddPreferenceController(context, "zen_add_automatic_trigger",
+                        this, mBackend));
         prefControllers.add(new InterruptionFilterPreferenceController(
                 context, "allow_filtering", mBackend));
         prefControllers.add(new ManualDurationPreferenceController(

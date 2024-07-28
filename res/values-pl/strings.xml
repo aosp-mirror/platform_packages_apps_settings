@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Wyłączono"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Włączona / # aplikacja ma dostęp do lokalizacji}few{Włączona / # aplikacje mają dostęp do lokalizacji}many{Włączona / # aplikacji ma dostęp do lokalizacji}other{Włączona / # aplikacji ma dostęp do lokalizacji}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Wczytuję…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacje z uprawnieniami dostępu do urządzeń w pobliżu mogą określać położenie połączonych urządzeń względem siebie."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Aplikacje z uprawnieniami dostępu do urządzeń w pobliżu mogą określać położenie połączonych urządzeń względem siebie."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Dostęp aplikacji i usług do lokalizacji jest wyłączony. Informacje o lokalizacji urządzenia mogą jednak zostać przesłane do ratowników, gdy zadzwonisz lub wyślesz SMS-a na numer alarmowy."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Więcej informacji o ustawieniach lokalizacji"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Aby to zmienić, otwórz Ustawienia ChromeOS &gt; Prywatność i bezpieczeństwo &gt; Ustawienia prywatności &gt; Dostęp do lokalizacji"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Czas wymagany do aktywacji naciśnięcia klawisza zmienia się na <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Klawisze trwałe"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Naciśnij 1 klawisz, aby zyskać dostęp do skrótów, zamiast przytrzymywać kilka jednocześnie"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Klawisze sterowania myszą"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Używaj fizycznej klawiatury do sterowania myszą."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Skróty klawiszowe"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Lista skrótów"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klawiatura i narzędzia w profilu służbowym"</string>
@@ -3652,9 +3654,10 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Ta aplikacja nie obsługuje ustawień zaawansowanych"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Więcej ustawień"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Więcej ustawień znajdziesz w tej aplikacji"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Powiadomienia adaptacyjne"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Używaj powiadomień adaptacyjnych"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Gdy w krótkim czasie otrzymasz wiele powiadomień, telefon zmniejszy głośność i ograniczy liczbę wyskakujących okienek na ekranie przez maksymalnie 2 minuty. Połączenia, alarmy i rozmowy priorytetowe nadal będą sygnalizowane wibracjami, dźwiękowo lub wyświetlą się na ekranie, a wszystkie powiadomienia będzie można łatwo znaleźć, przesuwając palcem z góry ekranu w dół."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Wyciszanie powiadomień"</string>
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Używaj wyciszenia powiadomień"</string>
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Zastosuj do profili służbowych"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Zastosuj w aplikacjach profilu służbowego"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Usługi pomocnicze rzeczywistości wirtualnej"</string>
@@ -3811,7 +3814,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Wybrane aplikacje"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Brak"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Żadna aplikacja nie może ignorować trybu Nie przeszkadzać}=1{Aplikacja {app_1} może ignorować tryb Nie przeszkadzać}=2{Aplikacje {app_1} i {app_2} mogą ignorować tryb Nie przeszkadzać}=3{Aplikacje {app_1}, {app_2} i {app_3} mogą ignorować tryb Nie przeszkadzać}few{Aplikacje {app_1}, {app_2} i jeszcze # inne mogą ignorować tryb Nie przeszkadzać}many{Aplikacje {app_1}, {app_2} i jeszcze # innych mogą ignorować tryb Nie przeszkadzać}other{Aplikacje {app_1}, {app_2} i jeszcze inne (#) mogą ignorować tryb Nie przeszkadzać}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (służbowa)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Obliczam…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Zezwól na zastępowanie przez aplikacje"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikacje, które mogą ignorować tryb Nie przeszkadzać"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Wybierz więcej aplikacji"</string>
@@ -3829,6 +3835,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Nic nie może ignorować trybu Nie przeszkadzać"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Nikt nie może ignorować trybu Nie przeszkadzać"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Niektóre osoby mogą ignorować tryb Nie przeszkadzać"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Wszyscy mogą ignorować tryb Nie przeszkadzać"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Dzwoniący powtórnie"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Zezwalaj na połączenia od dzwoniących powtórnie"</string>
@@ -5283,10 +5291,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Włączone"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Wyłączono"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Włączono"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Dźwięk %1$d%% lewa strona, %2$d%% prawa strona"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Dźwięk %1$d%% prawa strona, %2$d%% lewa strona"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Nazwa urządzenia jest widoczna dla zainstalowanych przez Ciebie aplikacji. Mogą ją też zobaczyć inne osoby, gdy łączysz się z urządzeniami przez Bluetooth, łączysz się z siecią Wi-Fi lub konfigurujesz hotspot Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Rodzaj gramatyczny"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Wybierz rodzaj gramatyczny"</string>

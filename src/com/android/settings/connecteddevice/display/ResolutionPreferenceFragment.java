@@ -52,7 +52,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase {
-    private static final String TAG = "ResolutionPreferenceFragment";
+    private static final String TAG = "ResolutionPreference";
     static final int DEFAULT_LOW_REFRESH_RATE = 60;
     static final String MORE_OPTIONS_KEY = "more_options";
     static final String TOP_OPTIONS_KEY = "top_options";
@@ -60,6 +60,8 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
             R.string.external_display_more_options_title;
     static final int EXTERNAL_DISPLAY_RESOLUTION_SETTINGS_RESOURCE =
             R.xml.external_display_resolution_settings;
+    static final String DISPLAY_MODE_LIMIT_OVERRIDE_PROP = "persist.sys.com.android.server.display"
+            + ".feature.flags.enable_mode_limit_for_external_display-override";
     @Nullable
     private Injector mInjector;
     @Nullable
@@ -323,16 +325,29 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         }
     }
 
+    private boolean isDisplayResolutionLimitEnabled() {
+        if (mInjector == null) {
+            return false;
+        }
+        var flagOverride = mInjector.getSystemProperty(DISPLAY_MODE_LIMIT_OVERRIDE_PROP);
+        var isOverrideEnabled = "true".equals(flagOverride);
+        var isOverrideEnabledOrNotSet = !"false".equals(flagOverride);
+        return (mInjector.isModeLimitForExternalDisplayEnabled() && isOverrideEnabledOrNotSet)
+                || isOverrideEnabled;
+    }
+
     private void updateDisplayModeLimits(@Nullable Context context) {
         if (context == null) {
             return;
         }
         mExternalDisplayPeakRefreshRate = getResources(context).getInteger(
                     com.android.internal.R.integer.config_externalDisplayPeakRefreshRate);
-        mExternalDisplayPeakWidth = getResources(context).getInteger(
+        if (isDisplayResolutionLimitEnabled()) {
+            mExternalDisplayPeakWidth = getResources(context).getInteger(
                     com.android.internal.R.integer.config_externalDisplayPeakWidth);
-        mExternalDisplayPeakHeight = getResources(context).getInteger(
+            mExternalDisplayPeakHeight = getResources(context).getInteger(
                     com.android.internal.R.integer.config_externalDisplayPeakHeight);
+        }
         mRefreshRateSynchronizationEnabled = getResources(context).getBoolean(
                     com.android.internal.R.bool.config_refreshRateSynchronizationEnabled);
         Log.d(TAG, "mExternalDisplayPeakRefreshRate=" + mExternalDisplayPeakRefreshRate);

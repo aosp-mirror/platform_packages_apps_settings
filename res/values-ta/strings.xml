@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"ஆஃப்"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ஆன் / # ஆப்ஸ் இருப்பிடத்திற்கான அணுகலைக் கொண்டுள்ளது}other{ஆன் / # ஆப்ஸ் இருப்பிடத்திற்கான அணுகலைக் கொண்டுள்ளன}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"ஏற்றுகிறது…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"இணைக்கப்பட்டுள்ள சாதனங்களின் தூரத்தை \'அருகிலுள்ள சாதனங்களுக்கான\' அனுமதியைப் பெற்ற ஆப்ஸால் தீர்மானிக்க முடியும்."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"இணைக்கப்பட்டுள்ள சாதனங்கள் எவ்வளவு தூரத்தில், எந்தத் திசையில் உள்ளன என்பதை அருகிலுள்ள சாதனங்களைக் கண்டறிவதற்கான அனுமதியைப் பெற்றுள்ள ஆப்ஸால் தீர்மானிக்க முடியும்."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"ஆப்ஸுக்கும் சேவைகளுக்கும் இருப்பிட அணுகல் முடக்கப்பட்டுள்ளது. எனினும் அவசர உதவி எண்ணை அழைத்தாலோ அதற்கு மெசேஜ் அனுப்பினாலோ, சாதனத்தின் இருப்பிடம் அவசரக் காலத்தில் உதவிபுரிவோருக்கு அனுப்பப்படக்கூடும்."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"இருப்பிட அமைப்புகள் குறித்து மேலும் அறிக"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"மாற்ற, ChromeOS அமைப்புகள் &gt; தனியுரிமை மற்றும் பாதுகாப்பு &gt; தனியுரிமைக் கட்டுப்பாடுகள் &gt; இருப்பிட அணுகல் என்பதற்குச் செல்லவும்"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"ஒரு பட்டனை அழுத்துவதற்கு எடுக்கும் நேரத்தை <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> மில்லி வினாடியாகச் சரிசெய்துகொள்கிறது"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"ஸ்டிக்கி கீஸ்"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"ஷார்ட்கட்களுக்கு பட்டன்களை ஒன்றாகப் பிடிப்பதற்குப் பதிலாக ஒரு நேரத்தில் ஒரு பட்டனை அழுத்தலாம்"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"மவுஸ் பட்டன்கள்"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"மவுஸைக் கட்டுப்படுத்த கீபோர்டைப் பயன்படுத்தவும்."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"கீபோர்டு ஷார்ட்கட்கள்"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"ஷார்ட்கட்களின் பட்டியலைக் காட்டும்"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"பணிக் கணக்கிற்கான கீபோர்டுகள் &amp; கருவிகள்"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"பாயிண்ட்டர் ஃபில் ஸ்டைலை மஞ்சளாக மாற்றலாம்"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"பாயிண்ட்டர் ஃபில் ஸ்டைலை இளஞ்சிவப்பாக மாற்றலாம்"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"பாயிண்ட்டர் ஃபில் ஸ்டைலை நீலமாக மாற்றலாம்"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"பாயிண்டர் ஸ்ட்ரோக் ஸ்டைல்"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"வெள்ளை"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"கருப்பு"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"ஏதுமில்லை"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"டச்பேட் சைகைகளை அறிந்துகொள்ளுங்கள்"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"டிராக்பேட், டிராக் பேட், மவுஸ், கர்சர், ஸ்க்ரோல், ஸ்வைப், வலது கிளிக், கிளிக், பாயிண்ட்டர்"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"வலது கிளிக், தட்டு"</string>
@@ -3368,10 +3366,8 @@
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"நேர அட்டவணைகள்"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"திட்டமிட்டவைகளை நீக்கு"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"நீக்கு"</string>
-    <!-- no translation found for zen_mode_menu_rename_mode (4681802125016390837) -->
-    <skip />
-    <!-- no translation found for zen_mode_menu_delete_mode (5380084696402157428) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"பெயர் மாற்று"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"நீக்கு"</string>
     <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"\"<xliff:g id="MODE">%1$s</xliff:g>\" பயன்முறையை நீக்கவா?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"மாற்று"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"திட்டமிடல்"</string>
@@ -3395,8 +3391,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"விஷுவல் சிக்னல்களை அனுமதி"</string>
     <string name="mode_interruption_filter_title" msgid="3343846700214702347">"கவனமாக இருங்கள்"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"கூடுதல் செயல்கள்"</string>
-    <!-- no translation found for modes_sound_summary_off (6972648204528227879) -->
-    <skip />
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{ஆஃப்}=1{ஆஃப் / 1 பயன்முறை தானாக ஆன் ஆகலாம்}other{ஆஃப் / # பயன்முறைகள் தானாக ஆன் ஆகலாம்}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"டிஸ்பிளே அமைப்புகள்"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"டிஸ்பிளே விருப்பங்கள்"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"கிரேஸ்கேல்"</string>
@@ -3659,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"இந்த ஆப்ஸ் மேம்படுத்தப்பட்ட அமைப்புகளை ஆதரிக்காது"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"கூடுதல் அமைப்புகள்"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"இந்த ஆப்ஸில் கூடுதல் அமைப்புகள் உள்ளன"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"சூழல்சார் அறிவிப்புகள்"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"சூழல்சார் அறிவிப்புகளைப் பயன்படுத்துதல்"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"குறுகிய காலத்தில் பல அறிவிப்புகளைப் பெறும்போது, இரண்டு நிமிடங்கள் வரை ஒலியளவையும் திரையில் தோன்றும் பாப்-அப்களையும் உங்கள் மொபைல் குறைக்கும். அழைப்புகள், அலாரங்கள், முக்கியமான உரையாடல்கள் ஆகியவற்றுக்குத் தொடர்ந்து அதிர்வுறும், ஒலி எழுப்பும் அல்லது அவற்றைத் திரையில் காட்டும். மேலும் அனைத்து அறிவிப்புகளையும் திரையின் மேல் பகுதியில் இருந்து கீழே இழுக்கும்போது எளிதாகக் கண்டறியலாம்."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"அறிவிப்புக்கான கூல்டவுன்"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"பணிக் கணக்குகளுக்குப் பயன்படுத்துதல்"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"பணிக் கணக்கு ஆப்ஸுக்குப் பயன்படுத்தும்"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR உதவிச் சேவைகள்"</string>
@@ -3818,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"தேர்ந்தெடுக்கப்பட்ட ஆப்ஸ்"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"எதுவுமில்லை"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{எந்த ஆப்ஸும் குறுக்கிட முடியாது}=1{{app_1} குறுக்கிட முடியும்}=2{{app_1}, {app_2} ஆகியவை குறுக்கிட முடியும்}=3{{app_1}, {app_2}, {app_3} ஆகியவை குறுக்கிட முடியும்}other{{app_1}, {app_2} மற்றும் # ஆப்ஸ் குறுக்கிட முடியும்}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (பணி)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"கணக்கிடுகிறது…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ஆப்ஸை மீறிச் செயல்பட அனுமதிக்கின்றன"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"குறுக்கிட முடிகின்ற ஆப்ஸ்"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"கூடுதல் ஆப்ஸைத் தேர்ந்தெடுங்கள்"</string>
@@ -3836,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"எதுவும் குறுக்கிட முடியாது"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"யாரும் குறுக்கிட முடியாது"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"சிலரால் குறுக்கிட முடியும்"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"அனைவரும் குறுக்கிட முடியும்"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"மீண்டும் மீண்டும் அழைப்பவர்கள்"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"மீண்டும் அழைப்பவர்களை அனுமதி"</string>
@@ -3855,14 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{{time} வரை ஒரு மணிநேரத்திற்கு மட்டும் அலாரங்கள் என மாற்றும்}other{{time} வரை # மணிநேரத்திற்கு மட்டும் அலாரங்கள் என மாற்றும்}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g> வரை அலாரங்கள் மட்டும் என மாற்று"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"எப்போதும் குறுக்கிடு என மாற்று"</string>
-    <!-- no translation found for zen_mode_rename_title (8146882272966214558) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_title (321750898430776191) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_default_name (2778307946775085105) -->
-    <skip />
-    <!-- no translation found for zen_mode_edit_name_hint (4584652062167540536) -->
-    <skip />
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"திருத்துதல் பயன்முறை"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"சேர்த்தல் பயன்முறை"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"பிரத்தியேகப் பயன்முறை"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"பயன்முறையின் பெயர்"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"எச்சரிக்கும்"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"மூடுக"</string>
     <string name="device_feedback" msgid="5351614458411688608">"சாதனம் பற்றி கருத்தை அனுப்புக"</string>
@@ -5292,10 +5290,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"இயக்கப்பட்டுள்ளது"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"முடக்கப்பட்டுள்ளது"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"இயக்கப்பட்டுள்ளது"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"ஆடியோ %1$d%% இடது, %2$d%% வலது"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"ஆடியோ %1$d%% வலது, %2$d%% இடது"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"நீங்கள் நிறுவிய ஆப்ஸால் உங்கள் சாதனத்தின் பெயரைப் பார்க்க முடியும். புளூடூத் சாதனங்கள், வைஃபை நெட்வொர்க் ஆகியவற்றுடன் இணைக்கும்போதோ வைஃபை ஹாட்ஸ்பாட்டை அமைக்கும்போதோ அப்பெயர் பிறருக்கும் காட்டப்படக்கூடும்."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"இலக்கணப் பாலினம்"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"இலக்கணப் பாலினத்தைத் தேர்ந்தெடுத்தல்"</string>

@@ -43,6 +43,8 @@ import com.android.settings.fuelgauge.batteryusage.WarningBannerInfo;
 import com.android.settings.fuelgauge.batteryusage.WarningItemInfo;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventDao;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
@@ -182,6 +184,15 @@ public class BatteryTestUtils {
         } else {
             dao.insert(entity);
         }
+    }
+
+    /** Inserts a fake data into the database for testing. */
+    public static void insertDataToBatteryEventTable(
+            Context context, long timestamp, int batteryEventType, int batteryLevel) {
+        final BatteryEventEntity entity =
+                new BatteryEventEntity(timestamp, batteryEventType, batteryLevel);
+        BatteryEventDao dao = BatteryStateDatabase.getInstance(context).batteryEventDao();
+        dao.insert(entity);
     }
 
     /** Gets customized battery changed intent. */

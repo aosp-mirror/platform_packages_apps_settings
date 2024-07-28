@@ -22,16 +22,24 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assume.assumeTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.widget.SeekBar;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowSystemSettings;
 import com.android.settings.widget.LabeledSeekBarPreference;
 
@@ -58,14 +66,17 @@ public class PointerScaleSeekBarControllerTest {
     @Rule public MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock private PreferenceScreen mPreferenceScreen;
+    @Mock private LifecycleOwner mLifecycleOwner;
 
     private Context mContext;
     private LabeledSeekBarPreference mPreference;
     private PointerScaleSeekBarController mController;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPreference = new LabeledSeekBarPreference(mContext, null);
         mController = new PointerScaleSeekBarController(mContext, PREFERENCE_KEY);
     }
@@ -90,5 +101,18 @@ public class PointerScaleSeekBarControllerTest {
         float currentScale = Settings.System.getFloatForUser(mContext.getContentResolver(),
                 Settings.System.POINTER_SCALE, -1, UserHandle.USER_CURRENT);
         assertEquals(expectedScale, currentScale, /* delta= */ 0.001f);
+    }
+
+    @Test
+    public void onPause_logCurrentScaleValue() {
+        float scale = 1.5f;
+        Settings.System.putFloatForUser(mContext.getContentResolver(),
+                Settings.System.POINTER_SCALE, scale, UserHandle.USER_CURRENT);
+
+        mController.onStateChanged(mLifecycleOwner, Lifecycle.Event.ON_PAUSE);
+
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                    any(), eq(SettingsEnums.ACTION_POINTER_ICON_SCALE_CHANGED),
+                    eq(Float.toString(scale)));
     }
 }
