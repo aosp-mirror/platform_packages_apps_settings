@@ -54,8 +54,8 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent == null ? "" : intent.getAction();
-        if (BatteryUtils.isWorkProfile(context)) {
-            Log.w(TAG, "do not start job for work profile action=" + action);
+        if (BatteryUtils.isAdditionalProfile(context)) {
+            Log.w(TAG, "do not start job for an additional profile action=" + action);
             return;
         }
 

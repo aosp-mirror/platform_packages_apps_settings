@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Désactivé"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activée/# appli a accès à la position}one{Activée/# appli a accès à la position}other{Activée/# applis ont accès à la position}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Chargement…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Les applis ayant l\'autorisation de détecter les appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Les applis ayant l\'autorisation de détecter les appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accès à la position est désactivé pour les applis et les services. La position de votre appareil peut toujours être envoyée aux services d\'urgence lorsque vous les contactez par téléphone ou SMS."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"En savoir plus sur les paramètres de localisation."</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Pour apporter des modifications, rendez-vous dans Paramètres de ChromeOS &gt; Confidentialité et sécurité &gt; Paramètres de confidentialité &gt; Accès à la position"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Règle le temps de réponse d\'une pression de touche sur <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Touches persistantes"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Pour les raccourcis, appuyez sur une touche à la fois au lieu de maintenir les touches enfoncées"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Touches pour la souris"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Utiliser le clavier physique pour contrôler la souris."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Raccourcis clavier"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Afficher la liste des raccourcis"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Claviers et outils du profil professionnel"</string>
@@ -1942,14 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Définir rempl. pointeur sur jaune"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Définir rempl. pointeur sur rose"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Définir rempl. pointeur sur bleu"</string>
-    <!-- no translation found for pointer_stroke_style (1886986630216050665) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_white (673686194443825383) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_black (4655806167067437330) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style_name_none (8953927511729800247) -->
-    <skip />
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"Style de trait du pointeur"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Blanc"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Noir"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Aucun"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Découvrir gestes au pavé tactile"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"pavé tactile, pavé tactile, souris, curseur, faire défiler, balayer, clic droit, clic, pointeur"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"clic droit, appuyer"</string>
@@ -2138,7 +2136,7 @@
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Des projets pour le week-end ?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Je vais à la plage. Tu veux venir ?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Options"</string>
-    <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoom avant sur l\'écran"</string>
+    <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoomez sur l\'écran"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Appuyer trois fois pour zoomer"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Appuyer sur un bouton pour zoomer"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Faites un zoom avant rapide sur l\'écran pour agrandir le contenu"</string>
@@ -3368,10 +3366,8 @@
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Programmes"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Supprimer des programmes"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Supprimer"</string>
-    <!-- no translation found for zen_mode_menu_rename_mode (4681802125016390837) -->
-    <skip />
-    <!-- no translation found for zen_mode_menu_delete_mode (5380084696402157428) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"Renommer"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"Supprimer"</string>
     <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"Supprimer le mode <xliff:g id="MODE">%1$s</xliff:g> ?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Modifier"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Programmes"</string>
@@ -3395,8 +3391,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Autoriser les signaux visuels"</string>
     <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Restez concentré"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"Autres actions"</string>
-    <!-- no translation found for modes_sound_summary_off (6972648204528227879) -->
-    <skip />
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Désactivé}=1{Désactivé/1 mode peut s\'activer automatiquement}one{Désactivé/# mode peut s\'activer automatiquement}other{Désactivé/# modes peuvent s\'activer automatiquement}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Paramètres d\'affichage"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Options d\'affichage"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Nuances de gris"</string>
@@ -3659,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Cette appli n\'est pas compatible avec les paramètres avancés"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Autres paramètres"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"D\'autres paramètres sont disponibles dans l\'appli"</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Notifications intelligentes"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Utiliser les notifications intelligentes"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Si vous recevez de nombreuses notifications en peu de temps, votre téléphone baisse le volume et minimise les pop-ups à l\'écran pendant deux minutes maximum. Les appels, les alarmes et les conversations prioritaires continuent de vibrer, d\'émettre un son ou de s\'afficher à l\'écran. Retrouvez facilement toutes les notifications en faisant glisser le volet des notifications vers le bas."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Limitation des notifications"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Appliquer aux profils professionnels"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Appliquer aux applis du profil professionnel"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Services d\'assistance RV"</string>
@@ -3818,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Applis sélectionnées"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Aucune"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Aucune application ne peut interrompre le mode Ne pas déranger}=1{{app_1} peut interrompre le mode Ne pas déranger}=2{{app_1} et {app_2} peuvent interrompre le mode Ne pas déranger}=3{{app_1}, {app_2} et {app_3} peuvent interrompre le mode Ne pas déranger}one{{app_1}, {app_2} et # autre appli peuvent interrompre le mode Ne pas déranger}other{{app_1}, {app_2} et # autres applis peuvent interrompre le mode Ne pas déranger}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (professionnel)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Calcul en cours"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Autoriser des applications à ignorer ce mode"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Applis qui peuvent interrompre"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Sélectionnez plus d\'applications"</string>
@@ -3836,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Rien ne peut l\'interrompre"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Personne ne peut interrompre le mode Ne pas déranger"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Certaines personnes peuvent l\'interrompre"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Toutes les personnes peuvent interrompre le mode Ne pas déranger"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Appels répétés"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Autoriser les appels répétés"</string>
@@ -3855,14 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Ne recevoir que les alarmes pendant 1 heure jusqu\'à {time}}one{Ne recevoir que les alarmes pendant # heure jusqu\'à {time}}other{Ne recevoir que les alarmes pendant # heures jusqu\'à {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Ne recevoir que les alarmes jusqu\'à <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Toujours interrompre"</string>
-    <!-- no translation found for zen_mode_rename_title (8146882272966214558) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_title (321750898430776191) -->
-    <skip />
-    <!-- no translation found for zen_mode_new_custom_default_name (2778307946775085105) -->
-    <skip />
-    <!-- no translation found for zen_mode_edit_name_hint (4584652062167540536) -->
-    <skip />
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"Modifier le mode"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Ajouter un mode"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Mode personnalisé"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Nom du mode"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Avertissement"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fermer"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Envoyer commentaires sur l\'appareil"</string>
@@ -5292,8 +5290,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Activé"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Désactivés"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activés"</string>
+    <!-- String.format failed for translation -->
     <!-- no translation found for audio_seek_bar_state_left_first (8814986910920838972) -->
     <skip />
+    <!-- String.format failed for translation -->
     <!-- no translation found for audio_seek_bar_state_right_first (1999368979633398876) -->
     <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Les applis que vous avez installées ont accès au nom de votre appareil. D\'autres personnes peuvent aussi le voir lorsque vous vous connectez à des appareils Bluetooth ou à un réseau Wi-Fi, ou lorsque vous configurez un point d\'accès Wi-Fi."</string>
@@ -5407,5 +5407,5 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Écouter le flux"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scanner le code QR d\'un flux audio pour l\'écouter avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Impossible de modifier le mot de passe lors du partage. Pour modifier le mot de passe, il faut d\'abord désactiver le partage audio."</string>
-    <string name="homepage_search" msgid="6759334912284663559">"Paramètres de recherche"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Rechercher un paramètre"</string>
 </resources>

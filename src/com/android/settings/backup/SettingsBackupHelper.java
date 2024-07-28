@@ -28,17 +28,28 @@ import com.android.settingslib.datastore.BackupRestoreStorageManager;
 /** Backup agent for Settings APK */
 public class SettingsBackupHelper extends BackupAgentHelper {
     public static final String SOUND_BACKUP_HELPER = "SoundSettingsBackup";
+    public static final String ACCESSIBILITY_APPEARANCE_BACKUP_HELPER =
+            "AccessibilityAppearanceSettingsBackup";
 
     @Override
     public void onCreate() {
         super.onCreate();
         BackupRestoreStorageManager.getInstance(this).addBackupAgentHelpers(this);
+        OnboardingFeatureProvider onboardingFeatureProvider =
+                FeatureFactory.getFeatureFactory().getOnboardingFeatureProvider();
+
         if (Flags.enableSoundBackup()) {
-            OnboardingFeatureProvider onboardingFeatureProvider =
-                    FeatureFactory.getFeatureFactory().getOnboardingFeatureProvider();
             if (onboardingFeatureProvider != null) {
                 addHelper(SOUND_BACKUP_HELPER, onboardingFeatureProvider.
                         getSoundBackupHelper(this, this.getBackupRestoreEventLogger()));
+            }
+        }
+
+        if (Flags.accessibilityAppearanceSettingsBackupEnabled()) {
+            if (onboardingFeatureProvider != null) {
+                addHelper(ACCESSIBILITY_APPEARANCE_BACKUP_HELPER,
+                        onboardingFeatureProvider.getAccessibilityAppearanceBackupHelper(
+                            this, this.getBackupRestoreEventLogger()));
             }
         }
     }

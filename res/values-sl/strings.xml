@@ -283,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Izklopljeno"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Vklopljeno/dostop do lokacije ima # aplikacija}one{Vklopljeno/dostop do lokacije ima # aplikacija}two{Vklopljeno/dostop do lokacije imata # aplikaciji}few{Vklopljeno/dostop do lokacije imajo # aplikacije}other{Vklopljeno/dostop do lokacije ima # aplikacij}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Nalaganje …"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacije z dovoljenjem za naprave v bližini lahko določijo relativno lokacijo povezanih naprav."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"Aplikacije z dovoljenjem za naprave v bližini lahko določijo relativno lokacijo povezanih naprav."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Dostop do lokacije je izklopljen za aplikacije in storitve. Lokacija naprave bo morda kljub temu poslana službam za nujne primere, ko pokličete številko za klic v sili ali nanjo pošljete sporočilo SMS."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Preberite več o nastavitvah lokacije"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Če želite spremeniti, odprite nastavitve sistema ChromeOS &gt; Zasebnost in varnost &gt; Nastavitve zasebnosti &gt; Dostop do lokacije"</string>
@@ -1918,6 +1918,8 @@
     <string name="slow_keys_summary" msgid="1784371292745423292">"Čas, potreben za aktiviranje pritiska tipke, prilagodi na <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Zaklepanje tipk"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Za bližnjice pritisnite eno tipko hkrati namesto več tipk hkrati"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"Tipke za miško"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Upravljanje miške s fizično tipkovnico."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Bližnjične tipke"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Prikaz seznama bližnjic"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tipkovnice in orodja delovnega profila"</string>
@@ -3652,9 +3654,11 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Ta aplikacija ne podpira naprednih nastavitev."</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Več nastavitev"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Več nastavitev je na voljo v tej aplikaciji."</string>
-    <string name="notification_polite_title" msgid="4737150709382859870">"Prilagodljiva obvestila"</string>
-    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"Uporaba prilagodljivih obvestil"</string>
-    <string name="notification_polite_description" msgid="7749280535620291610">"Ko v kratkem času prejmete veliko obvestil, telefon zmanjša glasnost in minimira pojavne elemente na zaslonu za največ dve minuti. Klici, alarmi in prednostni pogovori bodo še vedno vibrirali, zvonili ali se prikazali na zaslonu, vsa obvestila pa zlahka najdete, ko povlečete navzdol z vrha zaslona."</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Zmanjševanje glasnosti za obvestila"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
+    <skip />
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
+    <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"Uporaba za delovne profile"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Uporabi za aplikacije v delovnem profilu"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Storitve za pomoč za VR"</string>
@@ -3811,7 +3815,10 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Izbrane aplikacije"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Nobena"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Preglasitev ni dovoljena za nobeno aplikacijo}=1{Preglasitev je dovoljena za aplikacijo {app_1}}=2{Preglasitev je dovoljena za aplikaciji {app_1} in {app_2}}=3{Preglasitev je dovoljena za aplikacije {app_1}, {app_2} in {app_3}}one{Preglasitev je dovoljena za aplikaciji {app_1} in {app_2} ter še # aplikacijo}two{Preglasitev je dovoljena za aplikaciji {app_1} in {app_2} ter še # aplikaciji}few{Preglasitev je dovoljena za aplikaciji {app_1} in {app_2} ter še # aplikacije}other{Preglasitev je dovoljena za aplikaciji {app_1} in {app_2} ter še # aplikacij}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (delo)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Izračunavanje …"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Aplikacijam dovoli preglasitev"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikacije, ki lahko preglasijo"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Izberite več aplikacij"</string>
@@ -3829,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Nič ne sme preglasiti"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Nihče ne sme preglasiti"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Nekatere osebe lahko preglasijo"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"Vsakdo lahko preglasi"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Klicatelji, ki večkrat kličejo"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Dovoli večkratne klicatelje"</string>

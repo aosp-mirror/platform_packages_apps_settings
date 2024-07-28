@@ -114,6 +114,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mQrCodeView = view.findViewById(R.id.qrcode_view);
+        mQrCodeView.setContentDescription(getString(R.string.qr_code_content_description));
 
         final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
         if (wifiNetworkConfig.isHotspot()) {

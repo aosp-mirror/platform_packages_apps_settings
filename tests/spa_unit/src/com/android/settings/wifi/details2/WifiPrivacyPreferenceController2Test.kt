@@ -59,7 +59,7 @@ class WifiPrivacyPreferenceController2Test {
 
         controller.updateState(preference)
 
-        val prefValue = WifiPrivacyPreferenceController2.translateMacRandomizedValueToPrefValue(
+        val prefValue = WifiPrivacyPreferenceController2.translateWifiEntryPrivacyToPrefValue(
             WifiEntry.PRIVACY_DEVICE_MAC
         )
         assertThat(preference.entry).isEqualTo(preferenceStrings[prefValue])
@@ -73,7 +73,7 @@ class WifiPrivacyPreferenceController2Test {
 
         controller.updateState(preference)
 
-        val prefValue = WifiPrivacyPreferenceController2.translateMacRandomizedValueToPrefValue(
+        val prefValue = WifiPrivacyPreferenceController2.translateWifiEntryPrivacyToPrefValue(
             WifiEntry.PRIVACY_RANDOMIZED_MAC
         )
         assertThat(preference.entry).isEqualTo(preferenceStrings[prefValue])
