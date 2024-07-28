@@ -18,7 +18,11 @@ package com.android.settings.fuelgauge.batteryusage.bugreport;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+
 import android.content.Context;
+import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -27,6 +31,8 @@ import com.android.settings.testutils.BatteryTestUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 import java.io.FileDescriptor;
@@ -46,11 +52,17 @@ public final class BugReportContentProviderTest {
     private StringWriter mStringWriter;
     private BugReportContentProvider mBugReportContentProvider;
 
+    @Mock
+    private UserManager mUserManager;
+
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mStringWriter = new StringWriter();
         mPrintWriter = new PrintWriter(mStringWriter);
-        mContext = ApplicationProvider.getApplicationContext();
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        doReturn(mContext).when(mContext).getApplicationContext();
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         mBugReportContentProvider = new BugReportContentProvider();
         mBugReportContentProvider.attachInfo(mContext, /* info= */ null);
         // Inserts fake data into database for testing.
@@ -77,7 +89,14 @@ public final class BugReportContentProviderTest {
 
     @Test
     public void dump_inWorkProfileMode_notDumpsBatteryUsageData() {
-        BatteryTestUtils.setWorkProfile(mContext);
+        doReturn(true).when(mUserManager).isManagedProfile();
+        mBugReportContentProvider.dump(FileDescriptor.out, mPrintWriter, new String[] {});
+        assertThat(mStringWriter.toString()).isEmpty();
+    }
+
+    @Test
+    public void dump_inPrivateProfileMode_notDumpsBatteryUsageData() {
+        doReturn(true).when(mUserManager).isPrivateProfile();
         mBugReportContentProvider.dump(FileDescriptor.out, mPrintWriter, new String[] {});
         assertThat(mStringWriter.toString()).isEmpty();
     }

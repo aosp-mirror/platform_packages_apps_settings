@@ -42,7 +42,7 @@ class FingerprintDeletionDialog : InstrumentedDialogFragment() {
   lateinit var onCancelListener: DialogInterface.OnCancelListener
 
   override fun getMetricsCategory(): Int {
-    return SettingsEnums.DIALOG_FINGERPINT_EDIT
+    return SettingsEnums.DIALOG_FINGERPRINT_DELETE
   }
 
   override fun onCancel(dialog: DialogInterface) {

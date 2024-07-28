@@ -35,13 +35,11 @@ import static com.android.settings.notification.modes.ZenModePrioritySendersPref
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Flags;
 import android.content.Context;
-import android.database.Cursor;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
@@ -55,6 +53,8 @@ import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -105,22 +105,11 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
         mPreferenceScreen.addPreference(mCallsPrefCategory);
         mPreferenceScreen.addPreference(mMessagesPrefCategory);
 
-        Cursor cursor = mock(Cursor.class);
-        when(cursor.getCount()).thenReturn(1);
-        when(mHelperBackend.queryAllContactsData()).thenReturn(cursor);
-    }
-
-    // Makes a preference with the provided key and whether it's a checkbox with
-    // mSelectorClickListener as the onClickListener set.
-    private SelectorWithWidgetPreference makePreference(
-            String key, boolean isCheckbox, boolean isMessages) {
-        final SelectorWithWidgetPreference pref =
-                new SelectorWithWidgetPreference(mContext, isCheckbox);
-        pref.setKey(key);
-        pref.setOnClickListener(
-                isMessages ? mMessagesController.mSelectorClickListener
-                        : mCallsController.mSelectorClickListener);
-        return pref;
+        when(mHelperBackend.getStarredContacts()).thenReturn(ImmutableList.of());
+        when(mHelperBackend.getAllContacts()).thenReturn(
+                ImmutableList.of(new ZenHelperBackend.Contact(1, "The only contact", null)));
+        when(mHelperBackend.getAllContactsCount()).thenReturn(1);
+        when(mHelperBackend.getImportantConversations()).thenReturn(ImmutableList.of());
     }
 
     @Test
