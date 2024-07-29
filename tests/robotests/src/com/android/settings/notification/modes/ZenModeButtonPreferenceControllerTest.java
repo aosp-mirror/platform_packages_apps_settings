@@ -35,6 +35,7 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
@@ -89,6 +90,16 @@ public final class ZenModeButtonPreferenceControllerTest {
     }
 
     @Test
+    public void isAvailable_ifModeActiveEvenIfAppOptsOut() {
+        ZenMode zenMode = new TestModeBuilder()
+                .setManualInvocationAllowed(false)
+                .setActive(true)
+                .build();
+        mController.setZenMode(zenMode);
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
     public void isAvailable_notIfModeDisabled() {
         ZenMode zenMode = new TestModeBuilder()
                 .setManualInvocationAllowed(true)
@@ -118,7 +129,6 @@ public final class ZenModeButtonPreferenceControllerTest {
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
         ZenMode zenMode = new TestModeBuilder()
-                .setManualInvocationAllowed(true)
                 .setActive(true)
                 .build();
 
@@ -150,7 +160,6 @@ public final class ZenModeButtonPreferenceControllerTest {
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
         ZenMode zenMode = new TestModeBuilder()
-                .setManualInvocationAllowed(true)
                 .setActive(true)
                 .build();
 

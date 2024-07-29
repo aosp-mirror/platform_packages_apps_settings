@@ -109,20 +109,4 @@ public class ZenModePreferenceControllerTest {
 
         verify(mPreference, never()).setSummary(anyString());
     }
-
-    @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
-    public void updateState_modesUi_resetsTitleAndFragment() {
-        mController.updateState(mPreference);
-        verify(mPreference).setTitle(anyInt());  // Resource IDs are ints
-        verify(mPreference).setFragment(ZenModesListFragment.class.getCanonicalName());
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_MODES_UI)
-    public void updateState_noModesUi_doesNotSetTitleAndFragment() {
-        mController.updateState(mPreference);
-        verify(mPreference, never()).setTitle(anyInt());
-        verify(mPreference, never()).setFragment(anyString());
-    }
 }

@@ -65,8 +65,7 @@
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"ডিভাইসের ডিসকানেক্ট করবেন?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"নতুন ডিভাইস পেয়ার করুন"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ব্লুটুথ"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_title (2203993262483477532) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"আগামীকাল অটোমেটিক চালু হয়ে যাবে"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"ডান কানে পেয়ার করুন"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"বাঁ কানে পেয়ার করুন"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"অন্য হিয়ারিং এড পেয়ার করুন"</string>
@@ -284,7 +283,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"বন্ধ আছে"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{চালু আছে / #টি অ্যাপ লোকেশন অ্যাক্সেস করতে পারবে}one{চালু আছে / #টি অ্যাপ লোকেশন অ্যাক্সেস করতে পারবে}other{চালু আছে / #টি অ্যাপ লোকেশন অ্যাক্সেস করতে পারবে}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"লোড হচ্ছে…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"আশেপাশের ডিভাইসের অনুমতি থাকা অ্যাপগুলি কানেক্ট করা ডিভাইসের আপেক্ষিক অবস্থান নির্ণয় করতে পারে।"</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"কাছাকাছি ডিভাইসের অনুমতি থাকা অ্যাপ, কানেক্ট করা ডিভাইসের আপেক্ষিক অবস্থান নির্ণয় করতে পারে।"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"অ্যাপ ও পরিষেবার লোকেশন অ্যাক্সেস বন্ধ রয়েছে। জরুরি নম্বরে কল অথবা টেক্সট করলে সাহায্যকারীর কাছে আপনার ডিভাইসের লোকেশন এখনও পাঠানো হতে পারে।"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"\'লোকেশন সেটিংস\' সম্পর্কে আরও জানুন"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"পরিবর্তন করতে, \'ChromeOS সেটিংস &gt; গোপনীয়তা ও সুরক্ষা &gt; গোপনীয়তা নিয়ন্ত্রণ &gt; লোকেশন অ্যাক্সেস\' বিকল্পে যান"</string>
@@ -411,6 +410,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"ফেস ও <xliff:g id="WATCH">%s</xliff:g> যোগ করা হয়েছে"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"ফেস, ফিঙ্গারপ্রিন্ট এবং <xliff:g id="WATCH">%s</xliff:g> যোগ করা হয়েছে"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"ফেস, ফিঙ্গারপ্রিন্ট এবং <xliff:g id="WATCH">%s</xliff:g> যোগ করা হয়েছে"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"এটি করতে হবে কারণ আইডেন্টিটি চেক চালু আছে"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"রিমোট Authenticator আনলক করুন"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"স্মার্টওয়াচ যোগ করা হয়েছে"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"আপনার ঘড়ি সেট-আপ করুন"</string>
@@ -615,7 +615,7 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"অ্যাপ ইনস্টল করুন"</b>\n"আপনি নিজের স্পেসে যেসব অ্যাপ ব্যক্তিগত রাখতে চান সেগুলি ইনস্টল করুন"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"মনে রাখবেন"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"আপনি নিজের স্পেস লক করলে অ্যাপ বন্ধ হয়"</b>\n"আপনি নিজের স্পেস লক করলে, আপনার স্পেসে থাকা অ্যাপগুলি বন্ধ হয়ে যাবে এবং আপনি সেগুলি থেকে কোনও বিজ্ঞপ্তি পাবেন না"</string>
-    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"যেসব অ্যাপ ব্যাকগ্রাউন্ডে চালাতে হয় বা গুরুত্বপূর্ণ বিজ্ঞপ্তি পাঠায়, সেগুলির জন্য প্রাইভেট স্পেস ব্যবহার করা যাবে না। যেমন, চিকিৎসা সম্পর্কিত অ্যাপ। এর কারণ হল, স্পেস লক হলে বিজ্ঞপ্তি পাঠানোর সুবিধা ও ব্যাকগ্রাউন্ড অ্যাক্টিভিটি বন্ধ হয়ে যায়। \n\nপ্রাইভেট স্পেস লক থাকলে, প্রাইভেট স্পেসে থাকা অ্যাপ পার্মিশন ম্যানেজার, প্রাইভেসি ড্যাশবোর্ড এবং অন্যান্য সেটিংসে দেখা যাবে না।\n\nআপনার প্রাইভেট স্পেস নতুন ডিভাইসে সরানো যাবে না। আপনি অন্য ডিভাইসে প্রাইভেট স্পেস ব্যবহার করতে চাইলে, আপনাকে অন্য একটি প্রাইভেট স্পেস সেট-আপ করতে হবে।\n\nযদি কেউ আপনার ডিভাইস একটি কম্পিউটারের সাথে কানেক্ট করেন বা ডিভাইসে ক্ষতিকারক অ্যাপ ইনস্টল করেন, তাহলে তিনি আপনার প্রাইভেট স্পেস হয়ত অ্যাক্সেস করতে পারবেন।"</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"যেসব অ্যাপ ব্যাকগ্রাউন্ডে চালাতে হয় বা গুরুত্বপূর্ণ বিজ্ঞপ্তি পাঠায়, সেগুলির জন্য প্রাইভেট স্পেস ব্যবহার করা যাবে না। যেমন, চিকিৎসা সম্পর্কিত অ্যাপ। এর কারণ হল, স্পেস লক হলে বিজ্ঞপ্তি পাঠানোর সুবিধা ও ব্যাকগ্রাউন্ড অ্যাক্টিভিটি বন্ধ হয়ে যায়।\n\nপ্রাইভেট স্পেস লক থাকলে, প্রাইভেট স্পেসে থাকা অ্যাপ পার্মিশন ম্যানেজার, প্রাইভেসি ড্যাশবোর্ড এবং অন্যান্য সেটিংসে দেখা যাবে না।\n\nআপনার প্রাইভেট স্পেস নতুন ডিভাইসে সরানো যাবে না। আপনি অন্য ডিভাইসে প্রাইভেট স্পেস ব্যবহার করতে চাইলে, আপনাকে অন্য একটি প্রাইভেট স্পেস সেট-আপ করতে হবে।\n\nযদি কেউ আপনার ডিভাইস একটি কম্পিউটারের সাথে কানেক্ট করেন বা ডিভাইসে ক্ষতিকারক অ্যাপ ইনস্টল করেন, তাহলে তিনি আপনার প্রাইভেট স্পেস হয়ত অ্যাক্সেস করতে পারবেন।"</string>
     <string name="private_space_settings_footer_text" msgid="3742468470394835356">"যেসব অ্যাপ ব্যাকগ্রাউন্ডে চালাতে হয় বা গুরুত্বপূর্ণ বিজ্ঞপ্তি পাঠায়, সেগুলির জন্য প্রাইভেট স্পেস ব্যবহার করা যাবে না। যেমন, চিকিৎসা সম্পর্কিত অ্যাপ। এর কারণ হল, স্পেস লক হলে বিজ্ঞপ্তি পাঠানোর সুবিধা ও ব্যাকগ্রাউন্ড অ্যাক্টিভিটি বন্ধ হয়ে যায়।\n\nপ্রাইভেট স্পেস লক থাকলে, প্রাইভেট স্পেসে থাকা অ্যাপ পার্মিশন ম্যানেজার, প্রাইভেসি ড্যাশবোর্ড এবং অন্যান্য সেটিংসে দেখা যাবে না।\n\nআপনার প্রাইভেট স্পেস নতুন ডিভাইসে ফিরিয়ে আনা যাবে না। আপনি অন্য ডিভাইসে স্পেস ব্যবহার করতে চাইলে আপনাকে অন্য একটি স্পেস সেট-আপ করতে হবে।\n\nকেউ আপনার ডিভাইস কোনও কম্পিউটারের সাথে কানেক্ট করলে বা ডিভাইসে ক্ষতিকর অ্যাপ ইনস্টল করলে, তিনি হয়ত আপনার প্রাইভেট স্পেস অ্যাক্সেস করতে পারবেন।"</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"প্রাইভেট স্পেস সম্পর্কে আরও জানুন"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"এর জন্য কিছুক্ষণ সময় লাগতে পারে"</string>
@@ -850,36 +850,21 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"ডিভাইস রিস্টার্ট করবেন?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"শুধুমাত্র উন্নতির উদ্দেশ্যে বিস্তারিত NFC লগিং করা হয়েছে। NFC সংক্রান্ত অতিরিক্ত ডেটা সমস্যার রিপোর্টে অন্তর্ভুক্ত করা হয়েছে, যার মধ্যে ব্যক্তিগত তথ্যও থাকতে পারে। এই সেটিং পরিবর্তন করতে, আপনার ডিভাইস রিস্টার্ট করুন।"</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"রিস্টার্ট করুন"</string>
-    <!-- no translation found for keywords_external_display (4181375057920134909) -->
-    <skip />
-    <!-- no translation found for external_display_on (2560104443500154333) -->
-    <skip />
-    <!-- no translation found for external_display_off (5634413756025351374) -->
-    <skip />
-    <!-- no translation found for external_display_settings_title (6256884595821605779) -->
-    <skip />
-    <!-- no translation found for external_display_use_title (8198257340836261386) -->
-    <skip />
-    <!-- no translation found for external_display_resolution_settings_title (2446784716488289268) -->
-    <skip />
-    <!-- no translation found for external_display_not_found (1912355133386555798) -->
-    <skip />
-    <!-- no translation found for external_display_rotation (7160062306817490204) -->
-    <skip />
-    <!-- no translation found for external_display_standard_rotation (545969032327487219) -->
-    <skip />
-    <!-- no translation found for external_display_rotation_90 (7371530414227542947) -->
-    <skip />
-    <!-- no translation found for external_display_rotation_180 (6469137724447819841) -->
-    <skip />
-    <!-- no translation found for external_display_rotation_270 (7819322302457740514) -->
-    <skip />
-    <!-- no translation found for external_display_change_resolution_footer_title (9024291681663573443) -->
-    <skip />
-    <!-- no translation found for external_display_not_found_footer_title (8882902921634316363) -->
-    <skip />
-    <!-- no translation found for external_display_more_options_title (1222751990705118774) -->
-    <skip />
+    <string name="keywords_external_display" msgid="4181375057920134909">"মিরর, এক্সটার্নাল ডিসপ্লে, কানেক্টেড ডিসপ্লে, USB ডিসপ্লে, রেজোলিউশন, রোটেশন"</string>
+    <string name="external_display_on" msgid="2560104443500154333">"চালু আছে"</string>
+    <string name="external_display_off" msgid="5634413756025351374">"বন্ধ আছে"</string>
+    <string name="external_display_settings_title" msgid="6256884595821605779">"এক্সটার্নাল ডিসপ্লে"</string>
+    <string name="external_display_use_title" msgid="8198257340836261386">"এক্সটার্নাল ডিসপ্লে ব্যবহার করুন"</string>
+    <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ডিসপ্লে রেজোলিউশন"</string>
+    <string name="external_display_not_found" msgid="1912355133386555798">"এক্সটার্নাল ডিসপ্লে ডিসকানেক্ট হয়ে গেছে"</string>
+    <string name="external_display_rotation" msgid="7160062306817490204">"রোটেশন"</string>
+    <string name="external_display_standard_rotation" msgid="545969032327487219">"স্ট্যান্ডার্ড"</string>
+    <string name="external_display_rotation_90" msgid="7371530414227542947">"৯০°"</string>
+    <string name="external_display_rotation_180" msgid="6469137724447819841">"১৮০°"</string>
+    <string name="external_display_rotation_270" msgid="7819322302457740514">"২৭০°"</string>
+    <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"রোটেশন বা রেজোলিউশন পরিবর্তন করা হলে, বর্তমানে চালু থাকা যেকোনও অ্যাপ বন্ধ হয়ে যেতে পারে"</string>
+    <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"আপনার স্ক্রিন মিরর করার জন্য আপনার ডিভাইসকে কোনও এক্সটার্নাল ডিসপ্লের সাথে কানেক্ট করা থাকতে হবে"</string>
+    <string name="external_display_more_options_title" msgid="1222751990705118774">"আরও বিকল্প"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"কাস্ট করুন"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"মিরর"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ওয়্যারলেস প্রদর্শন সক্ষম করুন"</string>
@@ -1927,14 +1912,14 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"বিকল্প"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"অ্যাক্সেসিবিলিটি"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ফিজিক্যাল কীবোর্ড"</string>
-    <string name="show_ime" msgid="4334255501724746849">"অন-স্ক্রিন কীবোর্ড ব্যবহার করুন"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"ফিজিক্যাল কীবোর্ড সক্রিয় থাকার সময় এটিকে স্ক্রীনে রাখুন"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"বাউন্স \'কী\'"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> মিলি সেকেন্ডের মধ্যে একই কী বারবার প্রেস করলে তা কীবোর্ড উপেক্ষা করে"</string>
     <string name="slow_keys" msgid="2891452895499690837">"স্লো কী"</string>
     <string name="slow_keys_summary" msgid="1784371292745423292">"কোনও কী প্রেস করলে সেটি অ্যাক্টিভেট হতে যে সময় লাগে তা <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> মিলি সেকেন্ডে অ্যাডজাস্ট হয়"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"স্টিকি \'কী\'"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"শর্টকাটের জন্য কীগুলি একসাথে ধরে রাখার পরিবর্তে একবারে একটি কী প্রেস করুন"</string>
+    <string name="mouse_keys" msgid="6237254627808525540">"মাউস \'কী\'"</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"মাউস কন্ট্রোল করতে ফিজিক্যাল কীবোর্ড ব্যবহার করুন।"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"কীবোর্ড শর্টকাট"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"শর্টকাটের তালিকা দেখান"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"অফিসের প্রোফাইলের কীবোর্ড ও টুল"</string>
@@ -1959,6 +1944,10 @@
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"পয়েন্টার ফিল স্টাইল বদলে হলুদ করুন"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"পয়েন্টার ফিল স্টাইল বদলে গোলাপি করুন"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"পয়েন্টার ফিল স্টাইল বদলে নীল করুন"</string>
+    <string name="pointer_stroke_style" msgid="1886986630216050665">"পয়েন্টার স্ট্রোক স্টাইল"</string>
+    <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"সাদা"</string>
+    <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"কালো"</string>
+    <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"কোনওটিই নয়"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"টাচপ্যাডের জেসচার সম্পর্কে জানুন"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"ট্র্যাকপ্যাড, ট্র্যাক প্যাড, মাউস, কার্সর, স্ক্রল, সোয়াইপ, ডানদিকের বোতামে ক্লিক, ক্লিক, পয়েন্টার"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"ডানদিকের বোতামে ক্লিক, ট্যাপ"</string>
@@ -2002,12 +1991,9 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"ব্যবহারকারী বেছে নেওয়া হয়েছে: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"স্পিচ"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"পয়েন্টারের গতি"</string>
-    <!-- no translation found for pointer_scale (4941564570571663964) -->
-    <skip />
-    <!-- no translation found for pointer_scale_decrease_content_description (4479646756230008068) -->
-    <skip />
-    <!-- no translation found for pointer_scale_increase_content_description (1049632123702664450) -->
-    <skip />
+    <string name="pointer_scale" msgid="4941564570571663964">"পয়েন্টার স্কেল"</string>
+    <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"পয়েন্টার স্কেল ছোট করুন"</string>
+    <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"পয়েন্টার স্কেল বড় করুন"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"গেম নিয়ন্ত্রক"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"ইনপুট ডিভাইসে ভাইব্রেশন হতে দিন"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"গেমের কন্ট্রোলার কানেক্ট করা থাকলে সেটিতে ভাইব্রেশন হতে দিন"</string>
@@ -2130,10 +2116,8 @@
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"তা সত্ত্বেও চালিয়ে যান"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"বাতিল করুন"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"বড় করে দেখার সেটিংস"</string>
-    <!-- no translation found for accessibility_magnification_one_finger_panning_title (1338811559457209339) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_one_finger_panning_summary (1861473044337453019) -->
-    <skip />
+    <string name="accessibility_magnification_one_finger_panning_title" msgid="1338811559457209339">"১টি আঙুল দিয়ে ম্যাগনিফায়ার সরান"</string>
+    <string name="accessibility_magnification_one_finger_panning_summary" msgid="1861473044337453019">"স্ক্রিনের মধ্যে যে কোনও জায়গায় সরাতে ১টি আঙুল দিয়ে টেনে আনুন"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_on" msgid="9133125894310777539">"\'বড় করে দেখা\' এলাকা একটি আঙুল দিয়ে টেনে সরান।"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_off" msgid="8979146350396559805">"\'বড় করে দেখা\' এলাকা দুটি আঙুল দিয়ে টেনে সরান।"</string>
     <string name="accessibility_magnification_one_finger_panning_summary_unavailable" msgid="4302567514781245318">"শুধুমাত্র স্ক্রিনের বড় করে দেখানো অংশে উপলভ্য থাকে না"</string>
@@ -2157,10 +2141,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"জুম করার জন্য বোতামে ট্যাপ করুন"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"কন্টেন্ট আরও বড় সাইজে দেখার জন্য, স্ক্রিনে দ্রুত জুম বাড়ান"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;জুম ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. \'বড় করে দেখা\' ফিচার চালু করার জন্য শর্টকাট ব্যবহার করুন&lt;br/&gt; {1,number,integer}। স্ক্রিনে ট্যাপ করুন&lt;br/&gt; {2,number,integer}। স্ক্রিনের চারদিকে ঘোরাতে ২টি আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {3,number,integer}। জুম অ্যাডজাস্ট করার জন্য ২টি আঙুল দিয়ে পিঞ্চ করুন&lt;br/&gt; {4,number,integer}। \'বড় করে দেখা\' ফিচার বন্ধ করার জন্য শর্টকাট ব্যবহার করুন&lt;br/&gt;&lt;br/&gt; &lt;b&gt;সাময়িকভাবে জুম ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}। আপনার \'বড় করে দেখা\' ফিচারের ধরন ফুল স্ক্রিনে সেট হয়েছে কিনা ভাল করে দেখে নিন&lt;br/&gt; {1,number,integer}। \'বড় করে দেখা\' ফিচার চালু করতে শর্টকাট ব্যবহার করুন&lt;br/&gt; {2,number,integer}। স্ক্রিনের যেকোনও জায়গা টাচ করে ধরে থাকুন&lt;br/&gt; {3,number,integer}। স্ক্রিনের চারদিকে ঘোরাতে আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {4,number,integer}। \'বড় করে দেখা\' ফিচার বন্ধ করতে স্ক্রিনের উপর থেকে আঙুল সরিয়ে নিন"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_off (1779959623535122324) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_summary_one_finger_panning_on (7323930759240678965) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;জুম-ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. \'বড় করে দেখা\' ফিচার চালু করতে শর্টকাট ব্যবহার করুন&lt;br/&gt; {1,number,integer}. স্ক্রিনে ট্যাপ করুন&lt;br/&gt; {2,number,integer}. স্ক্রিনের মধ্যে যে কোনও জায়গায় সরাতে ২টি আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {3,number,integer}. জুম অ্যাডজাস্ট করার জন্য ২টি আঙুল দিয়ে পিঞ্চ করুন zoom&lt;br/&gt; {4,number,integer}. \'বড় করে দেখা\' ফিচার বন্ধ করতে শর্টকাট ব্যবহার করুন&lt;br/&gt;&lt;br/&gt; এছাড়াও সাময়িকভাবে জুম-ইন এবং আরও অনেক কিছু করুন।"</string>
+    <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;জুম-ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. \'বড় করে দেখা\' ফিচার চালু করতে শর্টকাট ব্যবহার করুন&lt;br/&gt; {1,number,integer}. স্ক্রিনে ট্যাপ করুন&lt;br/&gt; {2,number,integer}. স্ক্রিনের মধ্যে যে কোনও জায়গায় সরাতে ১টি অথবা ২টি আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {3,number,integer}. জুম অ্যাডজাস্ট করার জন্য ২টি আঙুল দিয়ে পিঞ্চ করুন zoom&lt;br/&gt; {4,number,integer}. \'বড় করে দেখা\' ফিচার বন্ধ করতে শর্টকাট ব্যবহার করুন&lt;br/&gt;&lt;br/&gt; এছাড়াও সাময়িকভাবে জুম-ইন এবং আরও অনেক কিছু করুন।"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"ম্যাগনিফিকেশন চালু করা থাকলে, আপনি স্ক্রিনে জুম বাড়াতে পারবেন।\n\n"<b>"জুম করতে"</b>", ম্যাগনিফিকেশন চালু করে স্ক্রিনের যেকোনও জায়গায় ট্যাপ করুন।\n"<ul><li>"• স্ক্রল করতে ২ বা তার বেশি আঙ্গুল দিয়ে টানুন"</li>\n<li>"• জুম অ্যাডজাস্ট করতে ২ বা তার বেশি আঙ্গুল দিয়ে পিঞ্চ করুন"</li></ul>\n\n<b>"সাময়িকভাবে জুম করতে"</b>", ম্যাগনিফিকেশন চালু করে স্ক্রিনের যেকোনও জায়গায় টাচ করে ধরে থাকুন।\n"<ul><li>"• টেনে স্ক্রিনের বিভিন্ন জায়গায় সরান"</li>\n<li>"• জুম কমাতে স্ক্রিন থেকে আঙ্গুল তুলে নিন"</li></ul>\n\n"কীবোর্ড বা নেভিগেশন বারে আপনি জুম করতে পারবেন না।"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g>টি মধ্যে <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> নম্বর পৃষ্ঠা"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"অ্যাক্সেসিবিলিটি বোতামের শর্টকার্ট"</string>
@@ -2987,7 +2969,7 @@
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"সর্বদা-চালু VPN এর সার্ভার্র এবং DNS উভয়েরই জন্য আইপি অ্যাড্রেস প্রয়োজন।"</string>
     <string name="vpn_no_network" msgid="7187593680049843763">"কোনো নেটওয়ার্ক কানেকশন নেই। দয়া করে পরে আবার চেষ্টা করুন।"</string>
     <string name="vpn_disconnected" msgid="7694522069957717501">"VPN থেকে ডিসকানেক্ট হয়েছে"</string>
-    <string name="vpn_disconnected_summary" msgid="721699709491697712">"কোনো কিছুই নয়"</string>
+    <string name="vpn_disconnected_summary" msgid="721699709491697712">"কোনওটাই নয়"</string>
     <string name="vpn_missing_cert" msgid="5397309964971068272">"একটি সার্টিফিকেট পাওয়া যাচ্ছে না। প্রোফাইলটি সম্পাদনা করুন।"</string>
     <string name="trusted_credentials_system_tab" msgid="675362923690364722">"সিস্টেম"</string>
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"ব্যবহারকারী"</string>
@@ -3366,30 +3348,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{একটিও নেই}=1{১টি শিডিউল সেট করা হয়েছে}one{#টি শিডিউল সেট করা হয়েছে}other{#টি শিডিউল সেট করা হয়েছে}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"বিরক্ত করবে না"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"অগ্রাধিকার মোড"</string>
-    <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
-    <skip />
+    <string name="zen_modes_add_mode" msgid="4806287336036228772">"মোড যোগ করুন"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"শুধু গুরুত্বপূর্ণ লোকজন এবং অ্যাপ থেকে বিজ্ঞপ্তি পান"</string>
     <string name="zen_mode_select_schedule" msgid="5135520719771212697">"অ্যাক্টিভেশনের ধরন বেছে নিন"</string>
     <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"সময়"</string>
     <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"যেমন, \"৯:৩০ – ৫:০০ PM\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"ক্যালেন্ডার"</string>
     <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"যেমন, \"ব্যক্তিগত ক্যালেন্ডার\""</string>
-    <!-- no translation found for zen_mode_active_text (5002406772481439437) -->
-    <skip />
-    <!-- no translation found for zen_mode_disabled_needs_setup (389269759040103728) -->
-    <skip />
-    <!-- no translation found for zen_mode_disabled_by_user (138592173630683253) -->
-    <skip />
+    <string name="zen_mode_active_text" msgid="5002406772481439437">"চালু আছে"</string>
+    <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"সেট করা নেই"</string>
+    <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"বন্ধ করা হয়েছে"</string>
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"মোড তৈরি করুন"</string>
+    <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"কাস্টম"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"বিরক্তিকর কন্টেন্ট বন্ধ করা"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"\'বিরক্ত করবে না\' মোড চালু করুন"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"অ্যালার্ম ও মিডিয়া সাউন্ড বাধা দিতে পারবে"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"সময়সূচি"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"সময়সূচি মুছে দিন"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"মুছে দিন"</string>
-    <!-- no translation found for zen_mode_menu_delete_mode (3190031534736428573) -->
-    <skip />
-    <!-- no translation found for zen_mode_delete_mode_confirmation (7594340592051947392) -->
-    <skip />
+    <string name="zen_mode_menu_rename_mode" msgid="4681802125016390837">"নাম পরিবর্তন করুন"</string>
+    <string name="zen_mode_menu_delete_mode" msgid="5380084696402157428">"মুছুন"</string>
+    <string name="zen_mode_delete_mode_confirmation" msgid="7594340592051947392">"\"<xliff:g id="MODE">%1$s</xliff:g>\" মোড মুছতে চান?"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"এডিট করুন"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"সময়সূচি"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"সময়সূচি"</string>
@@ -3400,8 +3379,7 @@
     <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"একটি শিডিউল সেট করুন"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"শিডিউল করুন"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ঘণ্টা, <xliff:g id="MINUTES">%2$d</xliff:g> মিনিট"</string>
-    <!-- no translation found for zen_mode_configuration_link_title (4718358055721023371) -->
-    <skip />
+    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"অটোমেটিক চালু করুন"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"সময়সূচি"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"নির্দিষ্ট সময়ে ফোন সাইলেন্ট করুন"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"\'বিরক্ত করবে না\' মোডের নিয়ম সেট-আপ করুন"</string>
@@ -3413,6 +3391,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"ভিজুয়াল সঙ্কেতগুলি চালু করুন"</string>
     <string name="mode_interruption_filter_title" msgid="3343846700214702347">"মনোযোগ বজায় রাখুন"</string>
     <string name="mode_device_effects_title" msgid="5857008332618433744">"অতিরিক্ত অ্যাকশন"</string>
+    <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{বন্ধ আছে}=1{বন্ধ আছে / ১টি মোড অটোমেটিক চালু হতে পারে}one{বন্ধ আছে / #টি মোড অটোমেটিক চালু হতে পারে}other{বন্ধ আছে / #টি মোড অটোমেটিক চালু হতে পারে}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"ডিসপ্লে সেটিংস"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"ডিসপ্লে বিকল্প"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"গ্রেস্কেল"</string>
@@ -3545,6 +3524,7 @@
     <string name="notification_history_open_notification" msgid="2655071846911258371">"বিজ্ঞপ্তি খুলুন"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"বিজ্ঞপ্তি স্নুজ করার অনুমতি দিন"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"অ্যাপ আইকনে বিজ্ঞপ্তির ডট"</string>
+    <string name="notification_bundles" msgid="3614044525822580826">"বিজ্ঞপ্তির বান্ডেল"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"বাবল"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"বাবল"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"বাবল আইকন হিসেবে হোম স্ক্রিনে কথোপকথন যোগ করা"</string>
@@ -3674,11 +3654,10 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"এই অ্যাপে উন্নত সেটিংস কাজ করে না"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"আরও সেটিংস"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"এই অ্যাপের মধ্যে আরও সেটিংস উপলভ্য আছে"</string>
-    <!-- no translation found for notification_polite_title (4737150709382859870) -->
+    <string name="notification_polite_title" msgid="6121016426991791557">"বিজ্ঞপ্তির কুলডাউন"</string>
+    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
     <skip />
-    <!-- no translation found for notification_polite_main_control_title (7267191551379543859) -->
-    <skip />
-    <!-- no translation found for notification_polite_description (7749280535620291610) -->
+    <!-- no translation found for notification_polite_description (5497748284893832854) -->
     <skip />
     <string name="notification_polite_work" msgid="8823596456640216391">"অফিস প্রোফাইলে প্রয়োগ করুন"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"অফিস প্রোফাইল অ্যাপে প্রয়োগ করুন"</string>
@@ -3835,8 +3814,10 @@
     <string name="zen_mode_apps_category" msgid="4082380323683889391">"যেসব অ্যাপ বিরক্ত করবে না মোড এড়িয়ে নিজের কাজ করতে পারে"</string>
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"বেছে নেওয়া অ্যাপ"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"কোনওটিই নয়"</string>
-    <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"সব"</string>
-    <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
+    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{কোনও অ্যাপ বিঘ্ন ঘটাতে পারবে না}=1{{app_1} অ্যাপ বিঘ্ন ঘটাতে পারবে}=2{{app_1} ও {app_2} অ্যাপ বিঘ্ন ঘটাতে পারবে}=3{{app_1}, {app_2} ও {app_3} অ্যাপ বিঘ্ন ঘটাতে পারবে}one{{app_1}, {app_2}, ও আরও #টি অ্যাপ বিঘ্ন ঘটাতে পারবে}other{{app_1}, {app_2}, ও আরও #টি অ্যাপ বিঘ্ন ঘটাতে পারবে}}"</string>
+    <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (অফিস)"</string>
+    <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"গণনা করা হচ্ছে…"</string>
+    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
     <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"অ্যাপ ওভাররাইডের অনুমতি দিন"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"যে অ্যাপগুলি \'বিরক্ত করবে না\' মোড এড়িয়ে নিজের কাজ করতে পারে"</string>
@@ -3855,6 +3836,8 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"কেউ বাধা দিতে পারবে না"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"কেউই বাধা দিতে পারবে না"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"কিছু লোকজন বাধা দিতে পারবে"</string>
+    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
+    <skip />
     <string name="zen_mode_people_all" msgid="311036110283015205">"সবাই বাধা দিতে পারবে"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"রিপিট কলার"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"রিপিট কলারদের অনুমতি দিন"</string>
@@ -3874,9 +3857,10 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{{time} পর্যন্ত এক ঘণ্টার জন্য অ্যালার্ম পরিবর্তন করুন}one{{time} পর্যন্ত # ঘণ্টার জন্য অ্যালার্ম পরিবর্তন করুন}other{{time} পর্যন্ত # ঘণ্টার জন্য অ্যালার্ম পরিবর্তন করুন}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"শুধুমাত্র <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> পর্যন্ত অ্যালার্মগুলি পরিবর্তন করুন"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"সর্বদা বাধা দেওয়াতে পরিবর্তন করুন"</string>
-    <string name="zen_mode_action_change_name" msgid="766639614789907016">"নাম পরিবর্তন করুন"</string>
-    <string name="zen_mode_action_change_icon" msgid="6192187791750301778">"আইকন পরিবর্তন করুন"</string>
-    <string name="zen_mode_icon_picker_title" msgid="6845490379143557472">"আইকন পরিবর্তন করুন"</string>
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"মোড এডিট করুন"</string>
+    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"মোড যোগ করুন"</string>
+    <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"কাস্টম মোড"</string>
+    <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"মোডের নাম"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"সতর্কতা"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"বন্ধ করুন"</string>
     <string name="device_feedback" msgid="5351614458411688608">"এই ডিভাইসের সম্পর্কে মতামত পাঠান"</string>
@@ -4862,8 +4846,10 @@
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"কেস"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ব্যাটারি"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"সেটিংস প্যানেল"</string>
-    <string name="force_desktop_mode" msgid="1336913605091334238">"ফোর্স ডেস্কটপ মোড"</string>
-    <string name="force_desktop_mode_summary" msgid="4587416867846930479">"সেকেন্ডারি ডিসপ্লেতে ফোর্স এক্সপেরিমেন্টাল ডেস্কটপ মোড চালু করা আছে"</string>
+    <string name="enable_desktop_mode" msgid="5644818402534562302">"ফ্রিফর্ম উইন্ডো চালু করুন"</string>
+    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"ফ্রিফর্ম উইন্ডোর জন্য সহায়তা চালু করুন।"</string>
+    <string name="force_desktop_mode" msgid="8292039809783522466">"সেকেন্ড ডিসপ্লেতে ফ্রিফর্ম উইন্ডো চালু করুন"</string>
+    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"শুধুমাত্র সেকেন্ডারি ডিসপ্লেতে ফ্রিফর্ম উইন্ডো চালু করুন।"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"ছোট বড় করা যায় না এমন একাধিক উইন্ডো চালু করুন"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"একাধিক উইন্ডোয় ছোট বড় করা যায় না এমন অ্যাপের অনুমতি দিন"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"ফোর্স-ডার্ক ফিচার ওভাররাইড করুন"</string>
@@ -4931,17 +4917,14 @@
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"১৬ কেবি ডেভেলপার বিকল্প ব্যবহার করার আগে, এই ডিভাইসের ডেটা পার্টিশন ext4-এ পরিবর্তন করতে হবে। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। ১৬ কেবি ডেভেলপার বিকল্প অ্যাক্টিভেট করে দিলে, এর পরে ডিভাইসটি আরও একবার রিবুট করতে হবে। আপনি এই মোড থাকলে, একবার রিবুট করার মাধ্যমে ৪ কেবি এবং ১৬ কেবি মোডের মধ্যে সুইচ করতে পারবেন। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। ডিভাইসটি প্রোডাকশন মোডে রাখতে, আপনাকে ৪ কেবি মোডে ফিরে আসতে হবে ও তারপরে বুটলোডার লক করতে হবে যেটি ডিভাইসকে ফ্যাক্টরি রিসেট করবে। ডিভাইসটি Android-এ বুট করা হয়ে গেলে, ডেভেলপার বিকল্পে OEM আনলক করা বন্ধ করুন। নিশ্চিত করার পরে ডিভাইস ওয়াইপ করা হবে এবং ফাইল সিস্টেম ext4-এ পরিবর্তিত হয়ে যাবে। এটি হয়ে যাওয়ার পরে, আবার ১৬ কেবি মোড চালু করুন।"</string>
     <string name="confirm_ext4_button_text" msgid="6045501984773738407">"সব ডেটা মুছুন"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"ডেটা পার্টিশানকে ext4 ফর্ম্যাটে আবার ফর্ম্যাট করা ও ওয়াইপ করা যায়নি।"</string>
-    <!-- no translation found for confirm_oem_unlock_for_16k_title (6062041826568112078) -->
-    <skip />
+    <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"বুটলোডার আনলক করতে হবে"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"১৬ কেবি ডেভেলপার বিকল্প ব্যবহার করতে হলে, এই ডিভাইসের জন্য বুটলোডার আনলক করতে হবে। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। ১৬ কেবি মোড অ্যাক্টিভেট করে দিলে, ব্যবহারকারীর সব ডেটা ও সেটিংস ওয়াইপ হয়ে যাবে। বুটলোডার আনলক হয়ে গেলে, ১৬ কেবি মোড বিকল্প চালু করার জন্য ডিভাইস দুবার রিবুট করার প্রয়োজন হয়। আপনি এই মোড থাকলে, একবার রিবুট করার মাধ্যমে ৪ কেবি এবং ১৬ কেবি মোডের মধ্যে সুইচ করতে পারবেন। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। ডিভাইসটিকে আবার প্রোডাকশন মোডে রাখতে, আপনাকে ৪ কেবি মোডে ফিরে আসতে হবে ও তারপরে OEM/বুটলোডার লক করতে হবে (যেটি ডিভাইসকে ফ্যাক্টরি রিসেট করবে)। বুটলোডার আনলক করে আবার চেষ্টা করুন। বুটলোডার কীভাবে আনলক করবেন তার নির্দেশাবলী এখানে দেখতে পারেন &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
     <string name="page_agnostic_4k_pages_title" msgid="1184703958249093215">"৪ কেবি পেজ-অ্যাগনোস্টিক মোড ব্যবহার করা হচ্ছে"</string>
     <string name="page_agnostic_4k_pages_text_short" msgid="2894243902906666242">"আপনি পেজ-অ্যাগনোস্টিক মোডের ৪ কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, অবশ্যই ডিভাইসের বুটলোডার লক করতে হবে। আরও পড়তে ট্যাপ করুন।"</string>
     <string name="page_agnostic_4k_pages_text" msgid="8284806650260868833">"আপনি পেজ-অ্যাগনোস্টিক মোডের ৪ কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারেন্টি দেওয়া যায় না এবং বুটলোডার আনলক থাকা অবস্থায় ফোনে স্টোর করে রাখা কোনও ডেটা সুরক্ষিত নাও থাকতে পারে। এইসব মোডে কিছু ফিচার বন্ধ করে দেওয়া হবে, তাই কিছু অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, অবশ্যই ডিভাইসের বুটলোডার লক করতে হবে। এটি ডিভাইসটিকে আবার ফ্যাক্টরি রিসেট করবে এবং এটির প্রোডাকশন সেটিংস আগের মতো হয়ে যাবে। ডিভাইসটি Android-এ বুট করা হয়ে গেলে, ডেভেলপার বিকল্পে OEM আনলক করা বন্ধ করুন। ডিভাইসটি Android-এ বুট করা না গেলে বা স্থিতিশীল না হলে, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; সাম্প্রতিক ফ্যাক্টরি ইমেজের সাথে ডিভাইসটি আবার ফ্ল্যাশ করুন এবং \'ডিভাইস ওয়াইপ করুন\', \'বুটলোডার লক করুন\' ও \'সব পার্টিশন জোরপূর্বক ফ্ল্যাশ করুন\' বিকল্প বেছে নিন।"</string>
     <string name="page_agnostic_16k_pages_title" msgid="7762533464569818498">"১৬ কেবি পেজ-অ্যাগনোস্টিক মোড ব্যবহার করা হচ্ছে"</string>
-    <!-- no translation found for page_agnostic_16k_pages_text_short (3282018880292691631) -->
-    <skip />
-    <!-- no translation found for page_agnostic_16k_pages_text (2999817238546170627) -->
-    <skip />
+    <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"আপনি পেজ-অ্যাগনোস্টিক মোডের ১৬কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারান্টি দেওয়া যায় না এবং বুটলোডার আনলক করা অবস্থায় ফোনে সেভ করে রাখা ডেটা নিয়ে ঝুঁকি থাকতে পারে। এই মোডে কিছু ফিচার বন্ধ করা থাকে, তাই কোনও কোনও অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, আপনাকে অবশ্যই ৪কেবি মোডে ফিরে যেতে হবে ও তারপরে ডিভাইসের বুটলোডার লক করতে হবে। আরও পড়তে ট্যাপ করুন।"</string>
+    <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"আপনি পেজ-অ্যাগনোস্টিক মোডের ১৬কেবি মোডে আছেন। এই মোডে সফ্টওয়্যার ইন্টিগ্রিটির গ্যারান্টি দেওয়া যায় না এবং বুটলোডার আনলক করা অবস্থায় ফোনে সেভ করে রাখা ডেটা নিয়ে ঝুঁকি থাকতে পারে। এই মোডে কিছু ফিচার বন্ধ করা থাকে, তাই কোনও কোনও অ্যাপ্লিকেশন কাজ নাও করতে পারে। প্রোডাকশন মোডে আবার যেতে চাইলে, আপনাকে অবশ্যই ৪কেবি মোডে ফিরে যেতে হবে ও তারপরে ডিভাইসের বুটলোডার লক করতে হবে। এটি ডিভাইসটিকে আবার ফ্যাক্টরি রিসেট করবে এবং এটির প্রোডাকশন সেটিংস আগের মতো হয়ে যাবে। ডিভাইস Android-এ বুট হয়ে গেলে, ডেভেলপার বিকল্প থেকে OEM আনলক বন্ধ করুন। ডিভাইসটি Android-এ বুট করা না গেলে বা স্থিতিশীল না হলে, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; থেকে সাম্প্রতিক ফ্যাক্টরি ইমেজের সাথে ডিভাইসটি আবার ফ্ল্যাশ করুন অথবা &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ব্যবহার করুন এবং \'ডিভাইস ওয়াইপ করুন\', \'বুটলোডার লক করুন\' ও \'সব পার্টিশন ফোর্স ফ্ল্যাশ করুন\' বিকল্প বেছে নিন।"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"১৬ কেবি পেজ-অ্যাগনোস্টিক মোড"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"আরও পড়ুন"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"সমস্যার রিপোর্টের পরিচালক"</string>
@@ -5073,8 +5056,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"অ্যাপ পিন বিকল্প ব্যবহার করুন"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"ডেভেলপার বিকল্প ব্যবহার করুন"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"প্রিন্ট পরিষেবা ব্যবহার করুন"</string>
-    <!-- no translation found for multiple_users_main_switch_title (9158796544835843201) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="9158796544835843201">"ব্যবহারকারী পরিবর্তনের অনুমতি দিন"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"অনুমতি, একাধিক, ব্যবহারকারী, অনুমতি, অনেক"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"একাধিক, ব্যবহারকারী, প্রোফাইল, লোকজন, অ্যাকাউন্ট, পরিবর্তন করুন, অনেক"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ওয়্যারলেস ডিবাগিং বিকল্প ব্যবহার করুন"</string>
@@ -5188,8 +5170,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"ট্যাবলেট ডক করা থাকলে, আপনি স্ক্রিনে কী কী দেখবেন তা বেছে নিন। স্ক্রিন সেভার ব্যবহার করার সময়, আপনার ডিভাইস ব্যাটারির চার্জ বেশি ব্যবহার করতে পারে।"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"কাস্টমাইজ করুন"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> কাস্টমাইজ করুন"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ফ্রিফর্ম সহায়তা চালু করার জন্য, ডিভাইস রিবুট করতে হবে।"</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"সেকেন্ডারি ডিসপ্লেতে ডেস্কটপ মোড জোর করে চালানোর জন্য রিবুট করতে হবে।"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"ফ্রিফর্ম উইন্ডো সহায়তার লিগ্যাসি মোড চালু করতে রিবুট করতে হবে।"</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"ফ্রিফর্ম উইন্ডো সহায়তা পরিবর্তন করতে রিবুট করতে হবে।"</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"সেকেন্ডারি ডিসপ্লেতে ফ্রিফর্ম উইন্ডো জোর করে চালু করতে রিবুট করতে হবে।"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"এখনই রিবুট করুন"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"পরে রিবুট করুন"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"স্পেশিয়ল অডিও"</string>
@@ -5307,6 +5290,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"চালু আছে"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"বন্ধ আছে"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"চালু আছে"</string>
+    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"অডিও %1$d%% বাঁদিক, %2$d%% ডানদিক"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"অডিও %1$d%% ডানদিক, %2$d%% বাঁদিক"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"আপনার ইনস্টল করা অ্যাপে আপনার ডিভাইসের নাম দেখা যাচ্ছে। আপনি ব্লুটুথ ডিভাইস বা কোনও ওয়াই-ফাই নেটওয়ার্কে কানেক্ট অথবা ওয়াই-ফাই হটস্পট সেট-আপ করলে অন্য লোকজনও এটি দেখতে পেতে পারেন।"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"ব্যাকরণগতভাবে লিঙ্গ পরিচয়"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"ব্যাকরণগতভাবে লিঙ্গ পরিচয় বেছে নিন"</string>
@@ -5418,6 +5403,5 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"স্ট্রিম শুনুন"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-এর মাধ্যমে শুনতে অডিও স্ট্রিম QR কোড স্ক্যান করুন"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"শেয়ারিং চলাকালীন পাসওয়ার্ড এডিট করতে পারবেন না। পাসওয়ার্ড পরিবর্তন করতে, প্রথমে অডিও শেয়ারিং বন্ধ করুন।"</string>
-    <!-- no translation found for homepage_search (6759334912284663559) -->
-    <skip />
+    <string name="homepage_search" msgid="6759334912284663559">"সেটিংস সার্চ করুন"</string>
 </resources>

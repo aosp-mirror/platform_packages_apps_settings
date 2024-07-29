@@ -160,7 +160,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         static final int CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST = 103;
         @VisibleForTesting
         static final int SKIP_FINGERPRINT_REQUEST = 104;
-        private static final int BIOMETRIC_AUTH_REQUEST = 105;
+        @VisibleForTesting
+        static final int BIOMETRIC_AUTH_REQUEST = 105;
 
         private LockPatternUtils mLockPatternUtils;
         private DevicePolicyManager mDpm;
@@ -491,9 +492,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                     : null;
                 updatePreferencesOrFinish(false /* isRecreatingActivity */);
                 if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getContext(),
-                        mBiometricsAuthSuccessful, mWaitingForConfirmation)) {
+                        mBiometricsAuthSuccessful, mWaitingForConfirmation, mUserId)) {
                     mWaitingForConfirmation = true;
-                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
+                            mUserId);
                 }
             } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
                 if (resultCode == Activity.RESULT_OK) {
@@ -776,6 +778,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                         entries.removePreference(pref);
                     } else if (!enabled) {
                         pref.setEnabled(false);
+                        pref.setSummary(
+                                com.android.settingslib.widget
+                                        .restricted.R.string.disabled_by_admin);
                     }
                 }
             }

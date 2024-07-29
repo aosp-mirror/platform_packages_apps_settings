@@ -55,7 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:gravity="center"
-            android:clipChildren="true">
+            android:clipChildren="true"
+            android:contentDescription="@string/audio_streams_qr_code_scanner_label"
+            android:focusable="true">
             <TextureView
                 android:id="@+id/preview_view"
                 android:layout_marginStart="@dimen/qrcode_preview_margin"

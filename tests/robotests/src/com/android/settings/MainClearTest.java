@@ -138,7 +138,11 @@ public class MainClearTest {
         // Make scrollView only have one child
         when(mScrollView.getChildAt(0)).thenReturn(mLinearLayout);
         when(mScrollView.getChildCount()).thenReturn(1);
-        doReturn(mActivity).when(mMainClear).getActivity();
+        doReturn(mMockActivity).when(mMainClear).getActivity();
+        when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
     }
 
     @After
@@ -366,8 +370,8 @@ public class MainClearTest {
         when(mContext.getResources()).thenReturn(mResources);
         when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
         when(mResources.getString(anyInt())).thenReturn(TEST_ACCOUNT_NAME);
-        when(mBiometricManager.canAuthenticate(
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
         doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
         doNothing().when(mMainClear).startActivityForResult(any(), anyInt());
