@@ -37,7 +37,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.PrimarySwitchPreference;
@@ -75,13 +74,6 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
     @Override
     public boolean isAvailable(@NonNull ZenMode zenMode) {
         return !zenMode.isCustomManual() && !zenMode.isManualDnd();
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen, @NonNull ZenMode zenMode) {
-        // Preload approved components, but only for the package that owns the rule (since it's the
-        // only package that can have a valid configurationActivity).
-        mServiceListing.loadApprovedComponents(zenMode.getRule().getPackageName());
     }
 
     @Override
@@ -137,6 +129,7 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
     @SuppressLint("SwitchIntDef")
     private void setUpForAppTrigger(Preference preference, ZenMode mode) {
         // App-owned mode may have triggerDescription, configurationActivity, or both/neither.
+        mServiceListing.loadApprovedComponents(mode.getRule().getPackageName());
         Intent configurationIntent =
                 mConfigurationActivityHelper.getConfigurationActivityIntentForMode(
                         mode, mServiceListing::findService);
