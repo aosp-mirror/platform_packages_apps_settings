@@ -5587,12 +5587,6 @@
     <string name="color_magenta">Magenta</string>
     <!-- Label for custom colors, formats as a HTML color. -->
     <string name="color_custom" translatable="false">#%1$02X%2$02X%3$02X</string>
-
-    <!-- Title for a warning about security implications of enabling an accessibility
-         service. [CHAR LIMIT=NONE] -->
-    <string name="enable_service_title">Allow
-         <xliff:g id="service" example="TalkBack">%1$s</xliff:g> to have full control of your
-        device?</string>
     <!-- Title for the list of capabilities of an accessibility service. -->
     <string name="capabilities_list_title"><xliff:g id="service" example="TalkBack">%1$s</xliff:g>
         needs to:</string>
@@ -5601,35 +5595,6 @@
          can't verify user consent. [CHAR LIMIT=NONE] -->
     <string name="touch_filtered_warning">Because an app is obscuring a permission request, Settings
         can’t verify your response.</string>
-
-    <!-- Warning that explains that accessibility services have a lot of access to user data [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_warning"><xliff:g id="service"
-        example="TalkBack">%1$s</xliff:g> is requesting full control of this device. The service
-        can read the screen and act on behalf of users with accessibility needs.
-        This level of control is not appropriate for most apps.
-    </string>
-
-    <!-- Warning description that explains that it's appropriate for accessibility
-         services to have full control to help users with accessibility needs. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_warning_description">Full control is appropriate for apps
-        that help you with accessibility needs, but not for most apps.
-    </string>
-
-    <!-- Title for the screen control in accessibility dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_screen_control_title">View and control screen</string>
-
-    <!-- Description for the screen control in accessibility dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_screen_control_description">It can read all content on the
-        screen and display content over other apps.
-    </string>
-
-    <!-- Title for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_action_perform_title">View and perform actions</string>
-
-    <!-- Description for the action perform in accessibility dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_action_perform_description">It can track your interactions
-        with an app or a hardware sensor, and interact with apps on your behalf.
-    </string>
 
     <!-- String for the allow button in accessibility permission dialog. [CHAR LIMIT=10] -->
     <string name="accessibility_dialog_button_allow">Allow</string>
