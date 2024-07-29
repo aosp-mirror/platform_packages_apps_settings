@@ -20,6 +20,7 @@ import android.content.Context
 import android.provider.SearchIndexableResource
 import android.util.Log
 import androidx.annotation.VisibleForTesting
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingKey
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingSpaPage
 import com.android.settingslib.search.Indexable
@@ -39,7 +40,7 @@ class SpaSearchRepository(
                 page.createSearchIndexableData(
                     page::getPageTitleForSearch, page::getSearchableTitles)
             } else null
-        }
+        } + MobileNetworkSettingsSearchIndex().createSearchIndexableData()
     }
 
     companion object {
@@ -50,50 +51,56 @@ class SpaSearchRepository(
             getPageTitleForSearch: (context: Context) -> String,
             titlesProvider: (context: Context) -> List<String>,
         ): SearchIndexableData {
-            val searchIndexProvider =
-                object : Indexable.SearchIndexProvider {
-                    override fun getXmlResourcesToIndex(
-                        context: Context,
-                        enabled: Boolean,
-                    ): List<SearchIndexableResource> = emptyList()
-
-                    override fun getRawDataToIndex(
-                        context: Context,
-                        enabled: Boolean,
-                    ): List<SearchIndexableRaw> = emptyList()
-
-                    override fun getDynamicRawDataToIndex(
-                        context: Context,
-                        enabled: Boolean,
-                    ): List<SearchIndexableRaw> {
-                        val pageTitle = getPageTitleForSearch(context)
-                        return titlesProvider(context).map { itemTitle ->
-                            createSearchIndexableRaw(context, itemTitle, pageTitle)
-                        }
-                    }
-
-                    override fun getNonIndexableKeys(context: Context): List<String> = emptyList()
+            val key =
+                SpaSearchLandingKey.newBuilder()
+                    .setSpaPage(SpaSearchLandingSpaPage.newBuilder().setDestination(name))
+                    .build()
+            val indexableClass = this::class.java
+            val searchIndexProvider = searchIndexProviderOf { context ->
+                val pageTitle = getPageTitleForSearch(context)
+                titlesProvider(context).map { itemTitle ->
+                    createSearchIndexableRaw(context, key, itemTitle, indexableClass, pageTitle)
                 }
-            return SearchIndexableData(this::class.java, searchIndexProvider)
+            }
+            return SearchIndexableData(indexableClass, searchIndexProvider)
         }
 
-        private fun SettingsPageProvider.createSearchIndexableRaw(
+        fun searchIndexProviderOf(
+            getDynamicRawDataToIndex: (context: Context) -> List<SearchIndexableRaw>,
+        ) =
+            object : Indexable.SearchIndexProvider {
+                override fun getXmlResourcesToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableResource> = emptyList()
+
+                override fun getRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> = emptyList()
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> = getDynamicRawDataToIndex(context)
+
+                override fun getNonIndexableKeys(context: Context): List<String> = emptyList()
+            }
+
+        fun createSearchIndexableRaw(
             context: Context,
+            spaSearchLandingKey: SpaSearchLandingKey,
             itemTitle: String,
+            indexableClass: Class<*>,
             pageTitle: String,
         ) =
             SearchIndexableRaw(context).apply {
-                key =
-                    SpaSearchLandingKey.newBuilder()
-                        .setSpaPage(SpaSearchLandingSpaPage.newBuilder().setDestination(name))
-                        .build()
-                        .toByteString()
-                        .toStringUtf8()
+                key = spaSearchLandingKey.toByteString().toStringUtf8()
                 title = itemTitle
                 intentAction = SEARCH_LANDING_ACTION
                 intentTargetClass = SpaSearchLandingActivity::class.qualifiedName
                 packageName = context.packageName
-                className = this@createSearchIndexableRaw::class.java.name
+                className = indexableClass.name
                 screenTitle = pageTitle
             }
 
