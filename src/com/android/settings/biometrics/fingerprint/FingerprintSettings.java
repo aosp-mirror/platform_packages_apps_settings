@@ -489,7 +489,7 @@ public class FingerprintSettings extends SubSettings {
                         mUserId)) {
                     mBiometricsAuthenticationRequested = true;
                     Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
-                            mUserId);
+                            mUserId, true /* hideBackground */);
                 } else if (!mHasFirstEnrolled) {
                     mIsEnrolling = true;
                     addFirstFingerprint(null);
@@ -784,7 +784,7 @@ public class FingerprintSettings extends SubSettings {
                     mUserId)) {
                 mBiometricsAuthenticationRequested = true;
                 Utils.launchBiometricPromptForMandatoryBiometrics(this,
-                        BIOMETRIC_AUTH_REQUEST, mUserId);
+                        BIOMETRIC_AUTH_REQUEST, mUserId, true /* hideBackground */);
             }
         }
 
