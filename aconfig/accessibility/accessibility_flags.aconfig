@@ -62,6 +62,16 @@ flag {
 }
 
 flag {
+  name: "never_restrict_accessibility_activity"
+  namespace: "accessibility"
+  description: "Stops possibly restricting AccessibilityActivityPreferences"
+  bug: "331990900"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}
+
+flag {
   name: "remove_qs_tooltip_in_suw"
   namespace: "accessibility"
   description: "Don't show quick settings tooltip in SUW, since the user can't use quick settings there."
