@@ -80,14 +80,6 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        // allow duration preference controller to listen for settings changes
-        use(ManualDurationPreferenceController.class).registerSettingsObserver();
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
 
@@ -99,6 +91,9 @@ public class ZenModeFragment extends ZenModeFragmentBase {
             mModeMenuProvider = new ModeMenuProvider(mode);
             activity.addMenuProvider(mModeMenuProvider);
         }
+
+        // allow duration preference controller to listen for settings changes
+        use(ManualDurationPreferenceController.class).registerSettingsObserver();
     }
 
     @Override
@@ -106,13 +101,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         if (getActivity() != null) {
             getActivity().removeMenuProvider(mModeMenuProvider);
         }
-        super.onStop();
-    }
-
-    @Override
-    public void onDetach() {
         use(ManualDurationPreferenceController.class).unregisterSettingsObserver();
-        super.onDetach();
+        super.onStop();
     }
 
     @Override
@@ -122,13 +112,13 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     }
 
     @Override
-    protected void updateZenModeState() {
+    protected void onUpdatedZenModeState() {
         // Because this fragment may be asked to finish by the delete menu but not be done doing
         // so yet, ignore any attempts to update info in that case.
         if (getActivity() != null && getActivity().isFinishing()) {
             return;
         }
-        super.updateZenModeState();
+        super.onUpdatedZenModeState();
     }
 
     private class ModeMenuProvider implements MenuProvider {

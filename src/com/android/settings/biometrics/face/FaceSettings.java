@@ -293,7 +293,7 @@ public class FaceSettings extends DashboardFragment {
                 mUserId)) {
             mBiometricsAuthenticationRequested = true;
             Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
-                    mUserId);
+                    mUserId, true /* hideBackground */);
         } else {
             mAttentionController.setToken(mToken);
             mEnrollController.setToken(mToken);

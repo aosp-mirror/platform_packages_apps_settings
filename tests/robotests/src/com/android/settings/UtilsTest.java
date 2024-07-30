@@ -22,6 +22,7 @@ import static android.hardware.biometrics.SensorProperties.STRENGTH_WEAK;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_AUTHENTICATORS;
+import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_HIDE_BACKGROUND;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -581,7 +582,8 @@ public class UtilsTest {
 
         final int requestCode = 1;
         final ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        Utils.launchBiometricPromptForMandatoryBiometrics(mFragment, requestCode, USER_ID);
+        Utils.launchBiometricPromptForMandatoryBiometrics(mFragment, requestCode, USER_ID,
+                false /* hideBackground */);
 
         verify(mFragment).startActivityForResult(intentArgumentCaptor.capture(), eq(requestCode));
 
@@ -593,6 +595,8 @@ public class UtilsTest {
         assertThat(intent.getExtra(KeyguardManager.EXTRA_DESCRIPTION)).isNotNull();
         assertThat(intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, false))
                 .isTrue();
+        assertThat(intent.getBooleanExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND, true))
+                .isFalse();
         assertThat(intent.getIntExtra(Intent.EXTRA_USER_ID, 0)).isEqualTo(USER_ID);
         assertThat(intent.getComponent().getPackageName()).isEqualTo(SETTINGS_PACKAGE_NAME);
         assertThat(intent.getComponent().getClassName()).isEqualTo(

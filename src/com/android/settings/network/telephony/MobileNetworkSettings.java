@@ -257,7 +257,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
 
         use(MobileNetworkSpnPreferenceController.class).init(this, mSubId);
-        use(MobileNetworkPhoneNumberPreferenceController.class).init(this, mSubId);
+        use(MobileNetworkPhoneNumberPreferenceController.class).init(mSubId);
         use(MobileNetworkImeiPreferenceController.class).init(this, mSubId);
 
         final MobileDataPreferenceController mobileDataPreferenceController =

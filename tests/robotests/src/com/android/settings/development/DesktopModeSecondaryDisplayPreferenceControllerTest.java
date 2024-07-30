@@ -16,6 +16,7 @@
 
 package com.android.settings.development;
 
+import static android.provider.Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT;
 import static android.provider.Settings.Global.DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS;
 
 import static com.android.settings.development.DesktopModeSecondaryDisplayPreferenceController.SETTING_VALUE_OFF;
@@ -55,6 +56,7 @@ public class DesktopModeSecondaryDisplayPreferenceControllerTest {
 
     private static final String ENG_BUILD_TYPE = "eng";
     private static final String USER_BUILD_TYPE = "user";
+    private static final int SETTING_VALUE_INVALID = -1;
 
     @Mock
     private SwitchPreference mPreference;
@@ -102,21 +104,41 @@ public class DesktopModeSecondaryDisplayPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_switchEnabled_enablesDesktopModeOnSecondaryDisplay() {
-        mController.onPreferenceChange(mPreference, true /* new value */);
+        mController.onPreferenceChange(mPreference, /* newValue= */ true);
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, -1 /* default */);
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS,
+                /* def= */ SETTING_VALUE_INVALID);
         assertThat(mode).isEqualTo(SETTING_VALUE_ON);
 
         verify(mTransaction).add(any(RebootConfirmationDialogFragment.class), any());
     }
 
     @Test
-    public void onPreferenceChange_switchDisabled_disablesDesktopModeOnSecondaryDisplay() {
-        mController.onPreferenceChange(mPreference, false /* new value */);
+    public void onPreferenceChange_switchEnabled_enablesFreeformSupport() {
+        mController.onPreferenceChange(mPreference, /* newValue= */ true);
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, -1 /* default */);
+                DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, /* def= */ SETTING_VALUE_INVALID);
+        assertThat(mode).isEqualTo(SETTING_VALUE_ON);
+    }
+
+    @Test
+    public void onPreferenceChange_switchDisabled_disablesDesktopModeOnSecondaryDisplay() {
+        mController.onPreferenceChange(mPreference, /* newValue= */ false);
+
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS,
+                /* def= */ SETTING_VALUE_INVALID);
+        assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
+    }
+
+    @Test
+    public void onPreferenceChange_switchDisabled_disablesFreeformSupport() {
+        mController.onPreferenceChange(mPreference, /* newValue= */ false);
+
+        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
+                DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, /* def= */ SETTING_VALUE_INVALID);
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
     }
 
@@ -145,7 +167,8 @@ public class DesktopModeSecondaryDisplayPreferenceControllerTest {
         mController.onDeveloperOptionsSwitchDisabled();
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, -1 /* default */);
+                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS,
+                /* def= */ SETTING_VALUE_INVALID);
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
         verify(mPreference).setEnabled(false);
     }

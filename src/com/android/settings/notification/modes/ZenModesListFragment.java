@@ -65,7 +65,7 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
     }
 
     @Override
-    protected void updateZenModeState() {
+    protected void onUpdatedZenModeState() {
         // TODO: b/322373473 -- update any overall description of modes state here if necessary.
         // Note the preferences linking to individual rules do not need to be updated, as
         // updateState() is called on all preference controllers whenever the page is resumed.

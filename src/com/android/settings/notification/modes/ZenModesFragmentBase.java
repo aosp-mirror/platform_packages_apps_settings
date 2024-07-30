@@ -16,14 +16,11 @@
 
 package com.android.settings.notification.modes;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
 import android.os.UserManager;
-import android.provider.Settings.Global;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -38,17 +35,10 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
     protected static final String TAG = "ZenModesSettings";
     protected static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    private final Handler mHandler = new Handler();
-    private final SettingsObserver mSettingsObserver = new SettingsObserver();
-
     protected Context mContext;
-
     protected ZenModesBackend mBackend;
     protected ZenHelperBackend mHelperBackend;
-
-    // Individual pages must implement this method based on what they should do when
-    // the device's zen mode state changes.
-    protected abstract void updateZenModeState();
+    private ZenSettingsObserver mSettingsObserver;
 
     ZenModesFragmentBase() {
         super(UserManager.DISALLOW_ADJUST_VOLUME);
@@ -69,8 +59,8 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
         mContext = context;
         mBackend = ZenModesBackend.getInstance(context);
         mHelperBackend = ZenHelperBackend.getInstance(context);
+        mSettingsObserver = new ZenSettingsObserver(context, this::onUpdatedZenModeState);
         super.onAttach(context);
-        mSettingsObserver.register();
     }
 
     @Override
@@ -83,45 +73,20 @@ abstract class ZenModesFragmentBase extends RestrictedDashboardFragment {
                 finish();
             }
         }
+
+        onUpdatedZenModeState(); // Maybe, while we weren't observing.
+        checkNotNull(mSettingsObserver).register();
     }
+
+    /**
+     * Called by this fragment when we know or suspect that Zen Modes data or state has changed.
+     * Individual pages must implement this method to refresh whatever they're displaying.
+     */
+    protected abstract void onUpdatedZenModeState();
 
     @Override
-    public void onResume() {
-        super.onResume();
-        updateZenModeState();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mSettingsObserver.unregister();
-    }
-
-    private final class SettingsObserver extends ContentObserver {
-        private static final Uri ZEN_MODE_URI = Global.getUriFor(Global.ZEN_MODE);
-        private static final Uri ZEN_MODE_CONFIG_ETAG_URI = Global.getUriFor(
-                Global.ZEN_MODE_CONFIG_ETAG);
-
-        private SettingsObserver() {
-            super(mHandler);
-        }
-
-        public void register() {
-            getContentResolver().registerContentObserver(ZEN_MODE_URI, false, this);
-            getContentResolver().registerContentObserver(ZEN_MODE_CONFIG_ETAG_URI, false, this);
-        }
-
-        public void unregister() {
-            getContentResolver().unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, @Nullable Uri uri) {
-            super.onChange(selfChange, uri);
-            // Shouldn't have any other URIs trigger this method, but check just in case.
-            if (ZEN_MODE_URI.equals(uri) || ZEN_MODE_CONFIG_ETAG_URI.equals(uri)) {
-                updateZenModeState();
-            }
-        }
+    public void onStop() {
+        checkNotNull(mSettingsObserver).unregister();
+        super.onStop();
     }
 }
