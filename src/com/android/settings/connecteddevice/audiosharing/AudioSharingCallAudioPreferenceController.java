@@ -72,7 +72,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     private static final String PREF_KEY = "calls_and_alarms";
 
     @VisibleForTesting
-    protected enum ChangeCallAudioType {
+    enum ChangeCallAudioType {
         UNKNOWN,
         CONNECTED_EARLIER,
         CONNECTED_LATER
@@ -90,7 +90,9 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     Map<Integer, List<CachedBluetoothDevice>> mGroupedConnectedDevices = new HashMap<>();
     private List<AudioSharingDeviceItem> mDeviceItemsInSharingSession = new ArrayList<>();
     private final AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
-    private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+
+    @VisibleForTesting
+    final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
                 @Override
                 public void onSearchStarted(int reason) {}
@@ -276,7 +278,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
 
     /** Test only: set callback registration status in tests. */
     @VisibleForTesting
-    public void setCallbacksRegistered(boolean registered) {
+    void setCallbacksRegistered(boolean registered) {
         mCallbacksRegistered.set(registered);
     }
 
@@ -385,7 +387,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     }
 
     @VisibleForTesting
-    protected void logCallAudioDeviceChange(int currentGroupId, CachedBluetoothDevice target) {
+    void logCallAudioDeviceChange(int currentGroupId, CachedBluetoothDevice target) {
         var unused =
                 ThreadUtils.postOnBackgroundThread(
                         () -> {

@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.modes;
 
-import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_ANYONE;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_IMPORTANT;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_NONE;
@@ -36,15 +35,11 @@ import static com.android.settings.notification.modes.ZenModePrioritySendersPref
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
@@ -54,7 +49,12 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -77,8 +77,8 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
-    @Mock
-    private ZenModesBackend mBackend;
+    @Mock private ZenModesBackend mBackend;
+    @Mock private ZenHelperBackend mHelperBackend;
 
     private PreferenceCategory mMessagesPrefCategory, mCallsPrefCategory;
 
@@ -90,10 +90,11 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
 
         mContext = RuntimeEnvironment.application;
 
-        mMessagesController = new ZenModePrioritySendersPreferenceController(
-                mContext, "messages", true, mBackend);
-        mCallsController = new ZenModePrioritySendersPreferenceController(
-                mContext, "calls", false, mBackend);
+        mMessagesController = new ZenModePrioritySendersPreferenceController(mContext, "messages",
+                true, mBackend, mHelperBackend);
+        mCallsController = new ZenModePrioritySendersPreferenceController(mContext, "calls", false,
+                mBackend, mHelperBackend);
+
         mMessagesPrefCategory = new PreferenceCategory(mContext);
         mMessagesPrefCategory.setKey(mMessagesController.getPreferenceKey());
         mCallsPrefCategory = new PreferenceCategory(mContext);
@@ -104,22 +105,11 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
         mPreferenceScreen.addPreference(mCallsPrefCategory);
         mPreferenceScreen.addPreference(mMessagesPrefCategory);
 
-        Cursor cursor = mock(Cursor.class);
-        when(cursor.getCount()).thenReturn(1);
-        when(mBackend.queryAllContactsData()).thenReturn(cursor);
-    }
-
-    // Makes a preference with the provided key and whether it's a checkbox with
-    // mSelectorClickListener as the onClickListener set.
-    private SelectorWithWidgetPreference makePreference(
-            String key, boolean isCheckbox, boolean isMessages) {
-        final SelectorWithWidgetPreference pref =
-                new SelectorWithWidgetPreference(mContext, isCheckbox);
-        pref.setKey(key);
-        pref.setOnClickListener(
-                isMessages ? mMessagesController.mSelectorClickListener
-                        : mCallsController.mSelectorClickListener);
-        return pref;
+        when(mHelperBackend.getStarredContacts()).thenReturn(ImmutableList.of());
+        when(mHelperBackend.getAllContacts()).thenReturn(
+                ImmutableList.of(new ZenHelperBackend.Contact(1, "The only contact", null)));
+        when(mHelperBackend.getAllContactsCount()).thenReturn(1);
+        when(mHelperBackend.getImportantConversations()).thenReturn(ImmutableList.of());
     }
 
     @Test
@@ -438,20 +428,17 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
 
     @Test
     public void testPreferenceClick_passesCorrectCheckedState_startingUnchecked_messages() {
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .disallowAllSounds()
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .disallowAllSounds()
+                        .build())
+                .build();
 
         mMessagesController.displayPreference(mPreferenceScreen);
         mMessagesController.updateZenMode(mMessagesPrefCategory, zenMode);
 
         assertThat(((SelectorWithWidgetPreference) mMessagesPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
+                .isChecked()).isTrue();
 
         mMessagesPrefCategory.findPreference(KEY_STARRED).performClick();
 
@@ -463,14 +450,11 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
 
     @Test
     public void testPreferenceClick_passesCorrectCheckedState_startingChecked_messages() {
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowAllSounds()
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowAllSounds()
+                        .build())
+                .build();
 
         mMessagesController.displayPreference(mPreferenceScreen);
         mMessagesController.updateZenMode(mMessagesPrefCategory, zenMode);
@@ -489,14 +473,11 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
 
     @Test
     public void testPreferenceClick_passesCorrectCheckedState_startingUnchecked_calls() {
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .disallowAllSounds()
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .disallowAllSounds()
+                        .build())
+                .build();
 
         mCallsController.displayPreference(mPreferenceScreen);
         mCallsController.updateZenMode(mCallsPrefCategory, zenMode);
@@ -514,14 +495,11 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
 
     @Test
     public void testPreferenceClick_passesCorrectCheckedState_startingChecked_calls() {
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .disallowAllSounds()
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .disallowAllSounds()
+                        .build())
+                .build();
 
         mCallsController.displayPreference(mPreferenceScreen);
         mCallsController.updateZenMode(mCallsPrefCategory, zenMode);

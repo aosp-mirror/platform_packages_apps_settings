@@ -157,22 +157,26 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
 
     /** Start new activity in private profile to add an account to private profile */
     private void startAccountLogin() {
-        Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
-        intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
-        mMetricsFeatureProvider.action(
-                getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_START);
-        getActivity().startActivityForResult(intent, ACCOUNT_LOGIN_ACTION);
+        if (isAdded() && getContext() != null && getActivity() != null) {
+            Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
+            intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_START);
+            getActivity().startActivityForResult(intent, ACCOUNT_LOGIN_ACTION);
+        }
     }
 
     private void registerReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_PROFILE_ACCESSIBLE);
-        getActivity().registerReceiver(mProfileAccessReceiver, filter);
+        if (getContext() != null) {
+            getContext().registerReceiver(mProfileAccessReceiver, filter);
+        }
     }
 
     private void unRegisterReceiver() {
-        if (mProfileAccessReceiver != null) {
-            getActivity().unregisterReceiver(mProfileAccessReceiver);
+        if (mProfileAccessReceiver != null && isAdded() && getContext() != null) {
+            getContext().unregisterReceiver(mProfileAccessReceiver);
         }
     }
 }

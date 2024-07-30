@@ -30,10 +30,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ParceledListSlice;
 import android.icu.text.MessageFormat;
 import android.provider.Contacts;
-import android.service.notification.ConversationChannelWrapper;
 import android.service.notification.ZenPolicy;
 import android.view.View;
 
@@ -46,6 +44,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.app.ConversationListSettings;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
@@ -83,6 +83,7 @@ class ZenModePrioritySendersPreferenceController
     private static final Intent FALLBACK_INTENT = new Intent(Intent.ACTION_MAIN)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
+    private final ZenHelperBackend mHelperBackend;
     private final PackageManager mPackageManager;
     private PreferenceCategory mPreferenceCategory;
     private List<SelectorWithWidgetPreference> mSelectorPreferences = new ArrayList<>();
@@ -90,9 +91,10 @@ class ZenModePrioritySendersPreferenceController
     private final ZenModeSummaryHelper mZenModeSummaryHelper;
 
     public ZenModePrioritySendersPreferenceController(Context context, String key,
-            boolean isMessages, ZenModesBackend backend) {
+            boolean isMessages, ZenModesBackend backend, ZenHelperBackend helperBackend) {
         super(context, key, backend);
         mIsMessages = isMessages;
+        mHelperBackend = helperBackend;
 
         String contactsPackage = context.getString(R.string.config_contacts_package_name);
         ALL_CONTACTS_INTENT.setPackage(contactsPackage);
@@ -103,7 +105,7 @@ class ZenModePrioritySendersPreferenceController
         if (!FALLBACK_INTENT.hasCategory(Intent.CATEGORY_APP_CONTACTS)) {
             FALLBACK_INTENT.addCategory(Intent.CATEGORY_APP_CONTACTS);
         }
-        mZenModeSummaryHelper = new ZenModeSummaryHelper(mContext, mBackend);
+        mZenModeSummaryHelper = new ZenModeSummaryHelper(mContext, mHelperBackend);
     }
 
     @Override
@@ -163,17 +165,7 @@ class ZenModePrioritySendersPreferenceController
     }
 
     private void updateChannelCounts() {
-        ParceledListSlice<ConversationChannelWrapper> impConversations =
-                mBackend.getConversations(true);
-        int numImportantConversations = 0;
-        if (impConversations != null) {
-            for (ConversationChannelWrapper conversation : impConversations.getList()) {
-                if (!conversation.getNotificationChannel().isDemoted()) {
-                    numImportantConversations++;
-                }
-            }
-        }
-        mNumImportantConversations = numImportantConversations;
+        mNumImportantConversations = mHelperBackend.getImportantConversations().size();
     }
 
     private int getPrioritySenders(ZenPolicy policy) {

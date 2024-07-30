@@ -50,10 +50,10 @@ public final class PeriodicJobReceiver extends BroadcastReceiver {
             Log.w(TAG, "receive unexpected action=" + action);
             return;
         }
-        if (BatteryUtils.isWorkProfile(context)) {
+        if (BatteryUtils.isAdditionalProfile(context)) {
             BatteryUsageLogUtils.writeLog(
-                    context, Action.SCHEDULE_JOB, "do not refresh job for work profile");
-            Log.w(TAG, "do not refresh job for work profile action=" + action);
+                    context, Action.SCHEDULE_JOB, "do not refresh job for an additional profile");
+            Log.w(TAG, "do not refresh job for an additional profile action=" + action);
             return;
         }
         BatteryUsageLogUtils.writeLog(context, Action.EXECUTE_JOB, "");

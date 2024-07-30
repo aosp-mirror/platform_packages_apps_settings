@@ -23,7 +23,6 @@ import com.android.settings.accounts.AccountFeatureProvider
 import com.android.settings.applications.ApplicationFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
-import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
@@ -41,7 +40,6 @@ import com.android.settings.localepicker.LocaleFeatureProvider
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
-import com.android.settings.overlay.SurveyFeatureProvider
 import com.android.settings.panel.PanelFeatureProvider
 import com.android.settings.privatespace.PrivateSpaceLoginFeatureProvider
 import com.android.settings.search.SearchFeatureProvider
@@ -99,9 +97,7 @@ class FakeFeatureFactory : FeatureFactory() {
     override val searchFeatureProvider: SearchFeatureProvider
         get() = TODO("Not yet implemented")
 
-    override fun getSurveyFeatureProvider(context: Context): SurveyFeatureProvider? {
-        TODO("Not yet implemented")
-    }
+    override fun getSurveyFeatureProvider(context: Context) = null
 
     override val securityFeatureProvider: SecurityFeatureProvider
         get() = TODO("Not yet implemented")
@@ -125,8 +121,6 @@ class FakeFeatureFactory : FeatureFactory() {
     override val faceFeatureProvider: FaceFeatureProvider
         get() = TODO("Not yet implemented")
     override val fingerprintFeatureProvider: FingerprintFeatureProvider
-        get() = TODO("Not yet implemented")
-    override val biometricsRepositoryProvider: BiometricsRepositoryProvider
         get() = TODO("Not yet implemented")
     override val wifiTrackerLibProvider: WifiTrackerLibProvider
         get() = TODO("Not yet implemented")

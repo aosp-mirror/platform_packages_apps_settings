@@ -23,6 +23,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ParceledListSlice
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -30,6 +31,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settingslib.spa.testutils.FakeNavControllerWrapper
+import com.android.settingslib.spa.testutils.waitUntilExists
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
@@ -146,8 +148,9 @@ class BackgroundInstalledAppsPageProviderTest {
             BackgroundInstalledAppList()
         }
 
-        composeTestRule.onNodeWithText(
-            context.getString(R.string.background_install_title)).assertIsDisplayed()
+        composeTestRule.waitUntilExists(
+            hasText(context.getString(R.string.background_install_title))
+        )
     }
 
     @Test
