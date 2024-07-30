@@ -132,7 +132,7 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
 
         new Thread(() -> {
             try {
-                mIsSatelliteOn.set(mSatelliteRepository.requestIsSessionStarted(
+                mIsSatelliteOn.set(mSatelliteRepository.requestIsEnabled(
                         Executors.newSingleThreadExecutor()).get(3000, TimeUnit.MILLISECONDS));
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
                 Log.e(TAG, "Error to get satellite status : " + e);
