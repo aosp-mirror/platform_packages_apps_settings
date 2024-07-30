@@ -38,6 +38,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -54,6 +55,7 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,9 +82,26 @@ public class SettingsHomepageActivityTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
+    @Before
+    public void setup() {
+        Settings.Global.putInt(ApplicationProvider.getApplicationContext().getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
+    }
+
     @After
     public void tearDown() {
         ShadowPasswordUtils.reset();
+    }
+
+    @Test
+    public void launch_deviceUnprovisioned_finish() {
+        Settings.Global.putInt(ApplicationProvider.getApplicationContext().getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0);
+
+        SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+
+        assertThat(activity.isFinishing()).isTrue();
     }
 
     @Test
