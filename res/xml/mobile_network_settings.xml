@@ -293,10 +293,10 @@
             settings:controller=
                 "com.android.settings.network.telephony.NullAlgorithmsPreferenceController"/>
 
+        <!-- Settings search is handled by NrAdvancedCallingSearchItem. -->
         <com.android.settings.spa.preference.ComposePreference
             android:key="nr_advanced_calling"
-            android:title="@string/nr_advanced_calling_title"
-            settings:keywords="@string/keywords_nr_advanced_calling"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.NrAdvancedCallingPreferenceController"/>
     </PreferenceCategory>
 

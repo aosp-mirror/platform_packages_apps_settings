@@ -22,6 +22,7 @@ import android.telephony.SubscriptionInfo
 import com.android.settings.R
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MmsMessagePreferenceController.Companion.MmsMessageSearchItem
+import com.android.settings.network.telephony.NrAdvancedCallingPreferenceController.Companion.NrAdvancedCallingSearchItem
 import com.android.settings.spa.SpaSearchLanding.BundleValue
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingFragment
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingKey
@@ -40,6 +41,9 @@ class MobileNetworkSettingsSearchIndex(
         val key: String
 
         val title: String
+
+        val keywords: String?
+            get() = null
 
         fun isAvailable(subId: Int): Boolean
     }
@@ -89,6 +93,7 @@ class MobileNetworkSettingsSearchIndex(
             context = context,
             spaSearchLandingKey = key,
             itemTitle = searchItem.title,
+            keywords = searchItem.keywords,
             indexableClass = MobileNetworkSettings::class.java,
             pageTitle = "$simsTitle > ${subInfo.displayName}",
         )
@@ -107,6 +112,7 @@ class MobileNetworkSettingsSearchIndex(
         fun createSearchItems(context: Context): List<MobileNetworkSettingsSearchItem> =
             listOf(
                 MmsMessageSearchItem(context),
+                NrAdvancedCallingSearchItem(context),
             )
     }
 }
