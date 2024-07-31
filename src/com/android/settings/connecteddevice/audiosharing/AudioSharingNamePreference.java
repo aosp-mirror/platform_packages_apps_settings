@@ -92,6 +92,8 @@ public class AudioSharingNamePreference extends ValidatedEditTextPreference {
         shareButton.setVisibility(View.VISIBLE);
         shareButton.setImageDrawable(getContext().getDrawable(R.drawable.ic_qrcode_24dp));
         shareButton.setOnClickListener(unused -> launchAudioSharingQrCodeFragment());
+        shareButton.setContentDescription(
+                getContext().getString(R.string.audio_sharing_qrcode_button_label));
     }
 
     private void configureInvisibleStateForQrCodeIcon(ImageButton shareButton, View divider) {

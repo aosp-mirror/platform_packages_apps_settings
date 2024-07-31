@@ -20,8 +20,10 @@ import static android.app.Activity.RESULT_OK;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_SETTINGS_FOR_WORK_TITLE;
 
 import static com.android.settings.Utils.isPrivateProfile;
+import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.ENROLL_REQUEST;
+import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_BIOMETRICS_AUTHENTICATED_SUCCESSFULLY;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
 
@@ -66,6 +68,8 @@ public class FaceSettings extends DashboardFragment {
     private static final String TAG = "FaceSettings";
     private static final String KEY_TOKEN = "hw_auth_token";
     private static final String KEY_RE_ENROLL_FACE = "re_enroll_face_unlock";
+    private static final String KEY_BIOMETRICS_SUCCESSFULLY_AUTHENTICATED =
+            "biometrics_successfully_authenticated";
 
     private static final String PREF_KEY_DELETE_FACE_DATA =
             "security_settings_face_delete_faces_container";
@@ -93,6 +97,8 @@ public class FaceSettings extends DashboardFragment {
     private FaceFeatureProvider mFaceFeatureProvider;
 
     private boolean mConfirmingPassword;
+    private boolean mBiometricsAuthenticationRequested;
+    private boolean mBiometricsSuccessfullyAuthenticated;
 
     private final FaceSettingsRemoveButtonPreferenceController.Listener mRemovalListener = () -> {
 
@@ -144,6 +150,8 @@ public class FaceSettings extends DashboardFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putByteArray(KEY_TOKEN, mToken);
+        outState.putBoolean(KEY_BIOMETRICS_SUCCESSFULLY_AUTHENTICATED,
+                mBiometricsSuccessfullyAuthenticated);
     }
 
     @Override
@@ -163,6 +171,8 @@ public class FaceSettings extends DashboardFragment {
         mToken = getIntent().getByteArrayExtra(KEY_TOKEN);
         mSensorId = getIntent().getIntExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, -1);
         mChallenge = getIntent().getLongExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, 0L);
+        mBiometricsSuccessfullyAuthenticated = getIntent().getBooleanExtra(
+                EXTRA_BIOMETRICS_AUTHENTICATED_SUCCESSFULLY, false);
 
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
@@ -231,6 +241,8 @@ public class FaceSettings extends DashboardFragment {
 
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
+            mBiometricsSuccessfullyAuthenticated = savedInstanceState.getBoolean(
+                    KEY_BIOMETRICS_SUCCESSFULLY_AUTHENTICATED);
         }
     }
 
@@ -276,6 +288,12 @@ public class FaceSettings extends DashboardFragment {
                 Log.e(TAG, "Password not set");
                 finish();
             }
+        } else if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
+                mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested,
+                mUserId)) {
+            mBiometricsAuthenticationRequested = true;
+            Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
+                    mUserId, true /* hideBackground */);
         } else {
             mAttentionController.setToken(mToken);
             mEnrollController.setToken(mToken);
@@ -316,6 +334,13 @@ public class FaceSettings extends DashboardFragment {
         } else if (requestCode == ENROLL_REQUEST) {
             if (resultCode == RESULT_TIMEOUT) {
                 setResult(resultCode, data);
+                finish();
+            }
+        } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
+            mBiometricsAuthenticationRequested = false;
+            if (resultCode == RESULT_OK) {
+                mBiometricsSuccessfullyAuthenticated = true;
+            } else {
                 finish();
             }
         }

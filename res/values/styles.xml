@@ -955,8 +955,13 @@
         <item name="biometricsEnrollProgressHelpWithTalkback">@color/udfps_enroll_progress_help_with_talkback</item>
     </style>
 
-    <style name="ScreenLockPasswordHintTextFontStyle">
+    <style name="ScreenLockPasswordHintTextFontStyleError">
         <item name="android:textColor">?android:attr/colorError</item>
+        <item name="android:fontFamily">google-sans-text</item>
+    </style>
+
+    <style name="ScreenLockPasswordHintTextFontStyle">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:fontFamily">google-sans-text</item>
     </style>
 
@@ -982,14 +987,15 @@
     </style>
 
     <style name="PrivateSpaceBulletPointTextFontStyle" parent="@style/PrivateSpaceSetupTextFontStyle">
-        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingStart">16dp</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">viewStart</item>
     </style>
 
     <style name="PrivateSpaceBulletPointIconStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_alignParentStart">true</item>
         <item name="android:layout_alignParentTop">true</item>
     </style>
 

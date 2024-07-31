@@ -55,7 +55,7 @@ public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
     @Override
     public final View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.xml.bluetooth_audio_streams_qr_code, container, false);
+        return inflater.inflate(R.layout.bluetooth_audio_streams_qr_code, container, false);
     }
 
     @Override

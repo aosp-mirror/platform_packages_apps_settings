@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
 
@@ -51,7 +52,8 @@ public class FingerprintRemoveSidecar extends InstrumentedFragment {
         }
     }
 
-    private FingerprintManager.RemovalCallback
+    @VisibleForTesting
+    FingerprintManager.RemovalCallback
             mRemoveCallback = new FingerprintManager.RemovalCallback() {
         @Override
         public void onRemovalSucceeded(Fingerprint fingerprint, int remaining) {

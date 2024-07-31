@@ -17,6 +17,7 @@
 package com.android.settings.notification.modes;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -24,10 +25,10 @@ import android.app.Flags;
 import android.content.Context;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.service.notification.ZenPolicy;
 
-import androidx.preference.Preference;
-
-import com.android.settingslib.notification.modes.ZenModesBackend;
+import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenMode;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -48,7 +49,6 @@ public final class ZenModeOtherLinkPreferenceControllerTest {
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
-    @Mock private ZenModesBackend mBackend;
     @Mock private ZenHelperBackend mHelperBackend;
 
     @Before
@@ -58,14 +58,56 @@ public final class ZenModeOtherLinkPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
 
         mController = new ZenModeOtherLinkPreferenceController(
-                mContext, "something", mBackend, mHelperBackend);
+                mContext, "something", mHelperBackend);
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
-    public void testHasSummary() {
-        Preference pref = mock(Preference.class);
+    public void updateState_disabled() {
+        CircularIconsPreference pref = mock(CircularIconsPreference.class);
+        ZenMode zenMode = new TestModeBuilder()
+                .setEnabled(false)
+                .build();
+
+        mController.updateZenMode(pref, zenMode);
+
+        verify(pref).setEnabled(false);
+    }
+
+    @Test
+    public void updateState_loadsSummary() {
+        CircularIconsPreference pref = mock(CircularIconsPreference.class);
         mController.updateZenMode(pref, TestModeBuilder.EXAMPLE);
+
         verify(pref).setSummary(any());
+    }
+
+    @Test
+    public void updateState_loadsIcons() {
+        CircularIconsPreference pref = mock(CircularIconsPreference.class);
+        ZenMode mode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .disallowAllSounds()
+                        .allowMedia(true)
+                        .allowSystem(true)
+                        .allowReminders(true)
+                        .build())
+                .build();
+
+        mController.updateState(pref, mode);
+
+        verify(pref).displayIcons(argThat(iconSet -> iconSet.size() == 3));
+    }
+
+    @Test
+    public void updateState_loadsAllIcons() {
+        CircularIconsPreference pref = mock(CircularIconsPreference.class);
+        ZenMode mode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowAllSounds().build())
+                .build();
+
+        mController.updateState(pref, mode);
+
+        verify(pref).displayIcons(argThat(iconSet ->
+                iconSet.size() == ZenModeSummaryHelper.OTHER_SOUND_CATEGORIES.size()));
     }
 }
