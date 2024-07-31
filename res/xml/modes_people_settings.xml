@@ -17,6 +17,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/zen_category_people" >
 
    <!-- Calls & Messages -->
@@ -34,4 +35,10 @@
           android:title="@string/zen_mode_calls_title"
           android:icon="@drawable/ic_zen_mode_people_calls" />
    </PreferenceCategory>
+
+   <com.android.settingslib.widget.FooterPreference
+       android:key="info_footer"
+       android:title="@string/zen_mode_people_footer"
+       android:selectable="false"
+       settings:searchable="false"/>
 </PreferenceScreen>

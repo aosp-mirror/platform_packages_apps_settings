@@ -47,6 +47,7 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
+import android.widget.TextView;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -174,18 +175,21 @@ public class ZenModeTriggerUpdatePreferenceControllerTest {
     @Test
     public void onPreferenceChange_toggleOn_enablesModeAfterConfirmation() {
         // Start with a disabled mode
-        ZenMode zenMode = new TestModeBuilder().setEnabled(false).build();
+        ZenMode zenMode = new TestModeBuilder().setName("The mode").setEnabled(false).build();
         mController.updateZenMode(mPreference, zenMode);
 
         // Flip the switch
         mPreference.callChangeListener(true);
         verify(mBackend, never()).updateMode(any());
 
+        AlertDialog confirmDialog = ShadowAlertDialog.getLatestAlertDialog();
+        assertThat(confirmDialog).isNotNull();
+        assertThat(confirmDialog.isShowing()).isTrue();
+        assertThat(((TextView) confirmDialog.findViewById(com.android.internal.R.id.alertTitle))
+                .getText()).isEqualTo("Enable The mode?");
+
         // Oh wait, I forgot to confirm! Let's do that
-        assertThat(ShadowAlertDialog.getLatestAlertDialog()).isNotNull();
-        assertThat(ShadowAlertDialog.getLatestAlertDialog().isShowing()).isTrue();
-        ShadowAlertDialog.getLatestAlertDialog()
-                .getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+        confirmDialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
         shadowOf(Looper.getMainLooper()).idle();
 
         // Verify the backend got asked to update the mode to be enabled
@@ -198,18 +202,21 @@ public class ZenModeTriggerUpdatePreferenceControllerTest {
     @Test
     public void onPreferenceChange_toggleOff_disablesModeAfterConfirmation() {
         // Start with an enabled mode
-        ZenMode zenMode = new TestModeBuilder().setEnabled(true).build();
+        ZenMode zenMode = new TestModeBuilder().setName("The mode").setEnabled(true).build();
         mController.updateZenMode(mPreference, zenMode);
 
         // Flip the switch
         mPreference.callChangeListener(false);
         verify(mBackend, never()).updateMode(any());
 
+        AlertDialog confirmDialog = ShadowAlertDialog.getLatestAlertDialog();
+        assertThat(confirmDialog).isNotNull();
+        assertThat(confirmDialog.isShowing()).isTrue();
+        assertThat(((TextView) confirmDialog.findViewById(com.android.internal.R.id.alertTitle))
+                .getText()).isEqualTo("Disable The mode?");
+
         // Oh wait, I forgot to confirm! Let's do that
-        assertThat(ShadowAlertDialog.getLatestAlertDialog()).isNotNull();
-        assertThat(ShadowAlertDialog.getLatestAlertDialog().isShowing()).isTrue();
-        ShadowAlertDialog.getLatestAlertDialog()
-                .getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+        confirmDialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
         shadowOf(Looper.getMainLooper()).idle();
 
         // Verify the backend got asked to update the mode to be disabled
@@ -314,7 +321,7 @@ public class ZenModeTriggerUpdatePreferenceControllerTest {
         mController.updateState(mPreference, mode);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getTitle()).isEqualTo("Linked to app");
+        assertThat(mPreference.getTitle()).isEqualTo("App settings");
         assertThat(mPreference.getSummary()).isEqualTo("When The Music's Over");
         assertThat(mPreference.getIntent()).isEqualTo(configurationIntent);
     }
@@ -331,7 +338,7 @@ public class ZenModeTriggerUpdatePreferenceControllerTest {
         mController.updateState(mPreference, mode);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getTitle()).isEqualTo("Linked to app");
+        assertThat(mPreference.getTitle()).isEqualTo("App settings");
         assertThat(mPreference.getSummary()).isEqualTo("When the saints go marching in");
         assertThat(mPreference.getIntent()).isNull();
     }
@@ -349,7 +356,7 @@ public class ZenModeTriggerUpdatePreferenceControllerTest {
         mController.updateState(mPreference, mode);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getTitle()).isEqualTo("Linked to app");
+        assertThat(mPreference.getTitle()).isEqualTo("App settings");
         assertThat(mPreference.getSummary()).isEqualTo("Info and settings in The App Name");
     }
 
@@ -365,7 +372,7 @@ public class ZenModeTriggerUpdatePreferenceControllerTest {
         mController.updateState(mPreference, mode);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getTitle()).isEqualTo("Linked to app");
+        assertThat(mPreference.getTitle()).isEqualTo("App settings");
         assertThat(mPreference.getSummary()).isEqualTo("Managed by The App Name");
     }
 }

@@ -53,6 +53,8 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
     private final ConfigurationActivityHelper mConfigurationActivityHelper;
     private final ZenServiceListing mServiceListing;
 
+    private String mModeName;
+
     ZenModeTriggerUpdatePreferenceController(Context context, String key,
             ZenModesBackend backend) {
         this(context, key, backend, context.getPackageManager(),
@@ -82,6 +84,7 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
             return;
         }
 
+        mModeName = zenMode.getName();
         PrimarySwitchPreference triggerPref = (PrimarySwitchPreference) preference;
         triggerPref.setChecked(zenMode.getRule().isEnabled());
         triggerPref.setOnPreferenceChangeListener(mSwitchChangeListener);
@@ -189,15 +192,15 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
     };
 
     private void confirmChangeEnabled(Preference preference, boolean enabled) {
-        @StringRes int title = enabled ? R.string.zen_mode_confirm_enable_title
-                : R.string.zen_mode_confirm_disable_title;
+        @StringRes int titleFormat = enabled ? R.string.zen_mode_confirm_enable_mode_title
+                : R.string.zen_mode_confirm_disable_mode_title;
         @StringRes int message = enabled ? R.string.zen_mode_confirm_enable_message
                 : R.string.zen_mode_confirm_disable_message;
         @StringRes int confirmButton = enabled ? R.string.zen_mode_action_enable
                 : R.string.zen_mode_action_disable;
 
         new AlertDialog.Builder(mContext)
-                .setTitle(title)
+                .setTitle(mContext.getString(titleFormat, mModeName))
                 .setMessage(message)
                 .setPositiveButton(confirmButton,
                         (dialog, which) -> setModeEnabled(enabled))
