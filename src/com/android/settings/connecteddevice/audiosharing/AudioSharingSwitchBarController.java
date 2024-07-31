@@ -23,7 +23,6 @@ import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
-import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +44,7 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
@@ -327,7 +327,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             return;
         }
         mSwitchBar.setEnabled(false);
-        boolean isBroadcasting = AudioSharingUtils.isBroadcasting(mBtManager);
+        boolean isBroadcasting = BluetoothUtils.isBroadcasting(mBtManager);
         if (isChecked) {
             if (isBroadcasting) {
                 Log.d(TAG, "Skip startAudioSharing, already broadcasting.");
@@ -339,10 +339,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             if (FeatureFlagUtils.isEnabled(
                             mContext,
                             FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST)
-                    && mAssistant
-                            .getDevicesMatchingConnectionStates(
-                                    new int[] {BluetoothProfile.STATE_CONNECTED})
-                            .isEmpty()) {
+                    && mAssistant.getAllConnectedDevices().isEmpty()) {
                 // Pop up dialog to ask users to connect at least one lea buds before audio sharing.
                 AudioSharingUtils.postOnMainThread(
                         mContext,
@@ -368,7 +365,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AudioSharingUtils.isFeatureEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return BluetoothUtils.isAudioSharingEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -483,7 +480,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         var unused =
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
-                            boolean isBroadcasting = AudioSharingUtils.isBroadcasting(mBtManager);
+                            boolean isBroadcasting = BluetoothUtils.isBroadcasting(mBtManager);
                             boolean isStateReady =
                                     isBluetoothOn()
                                             && AudioSharingUtils.isAudioSharingProfileReady(

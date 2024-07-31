@@ -33,6 +33,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class AudioSharingPlaySoundPreferenceController
@@ -56,7 +57,7 @@ public class AudioSharingPlaySoundPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return (mRingtone != null && AudioSharingUtils.isFeatureEnabled())
+        return (mRingtone != null && BluetoothUtils.isAudioSharingEnabled())
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

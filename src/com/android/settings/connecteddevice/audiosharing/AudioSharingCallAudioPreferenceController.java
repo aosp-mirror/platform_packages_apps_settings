@@ -16,8 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID;
-
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCsipSetCoordinator;
@@ -197,13 +195,15 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                         }
                         updateDeviceItemsInSharingSession();
                         if (!mDeviceItemsInSharingSession.isEmpty()) {
+                            int checkedItemIndex = getActiveItemIndex(mDeviceItemsInSharingSession);
                             AudioSharingCallAudioDialogFragment.show(
                                     mFragment,
                                     mDeviceItemsInSharingSession,
+                                    checkedItemIndex,
                                     (AudioSharingDeviceItem item) -> {
                                         int currentGroupId =
-                                                AudioSharingUtils.getFallbackActiveGroupId(
-                                                        mContext);
+                                                BluetoothUtils.getPrimaryGroupIdForBroadcast(
+                                                        mContext.getContentResolver());
                                         if (item.getGroupId() == currentGroupId) {
                                             Log.d(
                                                     TAG,
@@ -220,7 +220,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                                                     TAG,
                                                     "Set fallback active device: "
                                                             + lead.getDevice()
-                                                                    .getAnonymizedAddress());
+                                                            .getAnonymizedAddress());
                                             lead.setActive();
                                             logCallAudioDeviceChange(currentGroupId, lead);
                                         } else {
@@ -300,7 +300,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
             Log.d(TAG, "registerCallbacks()");
             mEventManager.registerCallback(this);
             mContentResolver.registerContentObserver(
-                    Settings.Secure.getUriFor(SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID),
+                    Settings.Secure.getUriFor(BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
                     false,
                     mSettingsObserver);
             mAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
@@ -347,7 +347,8 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
      */
     private void updateSummary() {
         updateDeviceItemsInSharingSession();
-        int fallbackActiveGroupId = AudioSharingUtils.getFallbackActiveGroupId(mContext);
+        int fallbackActiveGroupId = BluetoothUtils.getPrimaryGroupIdForBroadcast(
+                mContext.getContentResolver());
         if (fallbackActiveGroupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
             for (AudioSharingDeviceItem item : mDeviceItemsInSharingSession) {
                 if (item.getGroupId() == fallbackActiveGroupId) {
@@ -386,6 +387,18 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                         mBtManager, mGroupedConnectedDevices, /* filterByInSharing= */ true);
     }
 
+    private int getActiveItemIndex(List<AudioSharingDeviceItem> deviceItems) {
+        int checkedItemIndex = -1;
+        int fallbackActiveGroupId =
+                BluetoothUtils.getPrimaryGroupIdForBroadcast(mContext.getContentResolver());
+        for (AudioSharingDeviceItem item : deviceItems) {
+            if (item.getGroupId() == fallbackActiveGroupId) {
+                return deviceItems.indexOf(item);
+            }
+        }
+        return checkedItemIndex;
+    }
+
     @VisibleForTesting
     void logCallAudioDeviceChange(int currentGroupId, CachedBluetoothDevice target) {
         var unused =
@@ -393,7 +406,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                         () -> {
                             ChangeCallAudioType type = ChangeCallAudioType.UNKNOWN;
                             if (mCacheManager != null) {
-                                int targetDeviceGroupId = AudioSharingUtils.getGroupId(target);
+                                int targetDeviceGroupId = BluetoothUtils.getGroupId(target);
                                 List<BluetoothDevice> mostRecentDevices =
                                         BluetoothAdapter.getDefaultAdapter()
                                                 .getMostRecentlyConnectedDevices();
@@ -405,7 +418,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                                             mCacheManager.findDevice(device);
                                     int groupId =
                                             cachedDevice != null
-                                                    ? AudioSharingUtils.getGroupId(cachedDevice)
+                                                    ? BluetoothUtils.getGroupId(cachedDevice)
                                                     : BluetoothCsipSetCoordinator.GROUP_ID_INVALID;
                                     if (groupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
                                         if (groupId == targetDeviceGroupId) {
