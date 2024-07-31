@@ -67,9 +67,16 @@ public class DesktopModeSecondaryDisplayPreferenceController extends
         Settings.Global.putInt(mContext.getContentResolver(),
                 DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS,
                 isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        // Update freeform window support on device.
+        // DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT setting enables freeform support on device
+        // where it's not present by default.
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT,
+                isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
         if (isEnabled && mFragment != null) {
             RebootConfirmationDialogFragment.show(
-                    mFragment, R.string.reboot_dialog_force_desktop_mode, this);
+                    mFragment, R.string.reboot_dialog_enable_desktop_mode_on_secondary_display,
+                    this);
         }
         return true;
     }

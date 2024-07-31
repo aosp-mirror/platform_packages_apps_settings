@@ -23,6 +23,8 @@ import static android.hardware.display.DisplayManager.EVENT_FLAG_DISPLAY_CONNECT
 import static android.hardware.display.DisplayManager.EVENT_FLAG_DISPLAY_REMOVED;
 import static android.view.Display.INVALID_DISPLAY;
 
+import static com.android.server.display.feature.flags.Flags.enableModeLimitForExternalDisplay;
+
 import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.DisplayManagerGlobal;
@@ -270,6 +272,13 @@ public class ExternalDisplaySettingsConfiguration {
          */
         public void setUserPreferredDisplayMode(int displayId, @NonNull Mode mode) {
             DisplayManagerGlobal.getInstance().setUserPreferredDisplayMode(displayId, mode);
+        }
+
+        /**
+         * @return true if the display mode limit flag enabled.
+         */
+        public boolean isModeLimitForExternalDisplayEnabled() {
+            return enableModeLimitForExternalDisplay();
         }
     }
 

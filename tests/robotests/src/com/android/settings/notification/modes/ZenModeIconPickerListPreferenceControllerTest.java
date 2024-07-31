@@ -19,7 +19,6 @@ package com.android.settings.notification.modes;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -33,8 +32,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
-import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
 import com.google.common.collect.ImmutableList;
@@ -64,7 +63,7 @@ public class ZenModeIconPickerListPreferenceControllerTest {
 
         mController = new ZenModeIconPickerListPreferenceController(
                 RuntimeEnvironment.getApplication(), "icon_list", mListener,
-                new TestIconOptionsProvider(), mock(ZenModesBackend.class));
+                new TestIconOptionsProvider());
 
         mRecyclerView = new RecyclerView(mContext);
         mRecyclerView.setId(R.id.icon_list);

@@ -301,7 +301,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 return connectionState;
             } else {
                 result = mContext.getString(
-                        R.string.preference_summary_default_combination, connectionState, result);
+                        com.android.settingslib.R.string.preference_summary_default_combination,
+                        connectionState, result);
             }
         } else if (!isDataInService) {
             return mContext.getString(R.string.mobile_data_no_connection);
