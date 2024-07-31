@@ -50,16 +50,15 @@ public class ZenModeScheduleChooserDialog extends InstrumentedDialogFragment {
     static final int OPTION_TIME = 0;
     static final int OPTION_CALENDAR = 1;
 
-    private record ScheduleOption(@StringRes int nameResId,
-                                  @Nullable @StringRes Integer exampleResId,
-                                  @DrawableRes int iconResId) { }
+    private record ScheduleOption(@StringRes int nameResId, @StringRes int exampleResId,
+                                  @DrawableRes int iconResId) {}
 
     private static final ImmutableList<ScheduleOption> SCHEDULE_OPTIONS = ImmutableList.of(
             new ScheduleOption(R.string.zen_mode_select_schedule_time,
                     R.string.zen_mode_select_schedule_time_example,
                     com.android.internal.R.drawable.ic_zen_mode_type_schedule_time),
             new ScheduleOption(R.string.zen_mode_select_schedule_calendar,
-                    null,
+                    R.string.zen_mode_select_schedule_calendar_example,
                     com.android.internal.R.drawable.ic_zen_mode_type_schedule_calendar));
 
     private OnScheduleOptionListener mOptionListener;
@@ -86,7 +85,7 @@ public class ZenModeScheduleChooserDialog extends InstrumentedDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         checkState(getContext() != null);
         return new AlertDialog.Builder(getContext())
-                .setTitle(R.string.zen_mode_select_schedule_title)
+                .setTitle(R.string.zen_mode_choose_rule_type)
                 .setAdapter(new OptionsAdapter(getContext()),
                         (dialog, which) -> onScheduleTypeSelected(which))
                 .setNegativeButton(R.string.cancel, null)
@@ -116,12 +115,7 @@ public class ZenModeScheduleChooserDialog extends InstrumentedDialogFragment {
             ScheduleOption option = checkNotNull(getItem(position));
             imageView.setImageResource(option.iconResId());
             title.setText(option.nameResId());
-            if (option.exampleResId() != null) {
-                subtitle.setVisibility(View.VISIBLE);
-                subtitle.setText(option.exampleResId());
-            } else {
-                subtitle.setVisibility(View.GONE);
-            }
+            subtitle.setText(option.exampleResId());
 
             return convertView;
         }

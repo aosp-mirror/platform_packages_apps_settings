@@ -84,9 +84,9 @@ class ZenModeButtonPreferenceController extends AbstractZenModePreferenceControl
             }
         });
         if (zenMode.isActive()) {
-            mZenButton.setText(R.string.zen_mode_action_deactivate);
+            mZenButton.setText(R.string.zen_mode_button_turn_off);
         } else {
-            mZenButton.setText(R.string.zen_mode_action_activate);
+            mZenButton.setText(R.string.zen_mode_button_turn_on);
         }
     }
 }
