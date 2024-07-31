@@ -23,20 +23,18 @@
     android:title="@string/zen_mode_set_calendar_title">
 
     <PreferenceCategory
-        android:key="zen_mode_event_category"
-        android:title="@string/zen_mode_set_calendar_category_title">
+        android:key="zen_mode_event_category">
 
-        <!-- TODO: b/333682392 - use correct strings for below two prefs -->
         <!-- During events for -->
         <DropDownPreference
             android:key="calendar"
-            android:title="@string/zen_mode_event_rule_calendar"
+            android:title="@string/zen_mode_set_calendar_which_calendar"
             android:summary="%s" />
 
         <!-- Where reply is -->
         <DropDownPreference
             android:key="reply"
-            android:title="@string/zen_mode_event_rule_reply"
+            android:title="@string/zen_mode_set_calendar_which_reply"
             android:summary="%s" />
 
     </PreferenceCategory>
