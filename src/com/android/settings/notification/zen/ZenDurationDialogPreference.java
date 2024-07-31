@@ -23,7 +23,7 @@ import android.util.AttributeSet;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settingslib.CustomDialogPreferenceCompat;
-import com.android.settingslib.notification.ZenDurationDialog;
+import com.android.settingslib.notification.modes.ZenDurationDialog;
 
 public class ZenDurationDialogPreference extends CustomDialogPreferenceCompat {
 

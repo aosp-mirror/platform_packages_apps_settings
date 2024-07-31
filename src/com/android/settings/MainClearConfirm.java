@@ -89,8 +89,7 @@ public class MainClearConfirm extends InstrumentedFragment {
             final PersistentDataBlockManager pdbManager;
             // pre-flight check hardware support PersistentDataBlockManager
             if (!SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("")) {
-                pdbManager = (PersistentDataBlockManager)
-                    getActivity().getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+                pdbManager = getActivity().getSystemService(PersistentDataBlockManager.class);
             } else {
                 pdbManager = null;
             }
@@ -149,6 +148,11 @@ public class MainClearConfirm extends InstrumentedFragment {
     @VisibleForTesting
     boolean shouldWipePersistentDataBlock(PersistentDataBlockManager pdbManager) {
         if (pdbManager == null) {
+            return false;
+        }
+
+        // Do not try to erase factory reset protection data if the protection is alive.
+        if (pdbManager.isFactoryResetProtectionActive()) {
             return false;
         }
 

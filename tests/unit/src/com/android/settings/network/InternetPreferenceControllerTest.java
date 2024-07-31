@@ -36,8 +36,6 @@ import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
@@ -78,15 +76,8 @@ public class InternetPreferenceControllerTest {
     private static final String NOT_CONNECTED = "Not connected";
     private static final String SUB_ID_1 = "1";
     private static final String SUB_ID_2 = "2";
-    private static final String INVALID_SUB_ID = "-1";
     private static final String DISPLAY_NAME_1 = "Sub 1";
     private static final String DISPLAY_NAME_2 = "Sub 2";
-    private static final String SUB_MCC_1 = "123";
-    private static final String SUB_MNC_1 = "456";
-    private static final String SUB_MCC_2 = "223";
-    private static final String SUB_MNC_2 = "456";
-    private static final String SUB_COUNTRY_ISO_1 = "Sub 1";
-    private static final String SUB_COUNTRY_ISO_2 = "Sub 2";
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -178,14 +169,10 @@ public class InternetPreferenceControllerTest {
     }
 
     private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, int slotId,
-            int carrierId, String displayName, String mcc, String mnc, String countryIso,
-            int cardId, boolean isVisible, boolean isValid, boolean isActive, boolean isAvailable,
+            String displayName, boolean isVisible, boolean isValid, boolean isActive,
             boolean isActiveData) {
-        return new SubscriptionInfoEntity(subId, slotId, carrierId,
-                displayName, displayName, 0, mcc, mnc, countryIso, false, cardId,
-                TelephonyManager.DEFAULT_PORT_INDEX, false, null,
-                SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, isVisible,
-                "1234567890", true, false, isValid, true, isActive, isAvailable, isActiveData);
+        return new SubscriptionInfoEntity(subId, slotId, false, false, displayName, isVisible,
+                false, isValid, isActive, isActiveData);
     }
 
     @Test
@@ -253,10 +240,10 @@ public class InternetPreferenceControllerTest {
     @Test
     public void updateCellularSummary_getActiveSubscriptionInfo_cbrs() {
         mController.setDefaultDataSubscriptionId(Integer.parseInt(SUB_ID_2));
-        mActiveSubInfo = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, false, true, true, true, true);
-        mDefaultDataSubInfo = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, false, true, true, true, false);
+        mActiveSubInfo = setupSubscriptionInfoEntity(SUB_ID_1, 1, DISPLAY_NAME_1,
+                false, true, true, true);
+        mDefaultDataSubInfo = setupSubscriptionInfoEntity(SUB_ID_2, 1, DISPLAY_NAME_2,
+                false, true, true, false);
         mSubscriptionInfoEntityList.add(mActiveSubInfo);
         mSubscriptionInfoEntityList.add(mDefaultDataSubInfo);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
@@ -265,8 +252,8 @@ public class InternetPreferenceControllerTest {
         mController.updateCellularSummary();
         assertThat(mPreference.getSummary()).isEqualTo(DISPLAY_NAME_2);
 
-        mActiveSubInfo = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, true);
+        mActiveSubInfo = setupSubscriptionInfoEntity(SUB_ID_1, 1, DISPLAY_NAME_1,
+                true, true, true, true);
         mSubscriptionInfoEntityList.add(mActiveSubInfo);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
         mController.onAvailableSubInfoChanged(mSubscriptionInfoEntityList);

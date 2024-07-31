@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -83,7 +84,7 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
             @NonNull CachedBluetoothDevice newDevice,
             @NonNull DialogEventListener listener,
             @NonNull Pair<Integer, Object>[] eventData) {
-        if (!AudioSharingUtils.isFeatureEnabled()) return;
+        if (!BluetoothUtils.isAudioSharingEnabled()) return;
         final FragmentManager manager;
         try {
             manager = host.getChildFragmentManager();
@@ -93,8 +94,8 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
         }
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
         if (dialog != null) {
-            int newGroupId = AudioSharingUtils.getGroupId(newDevice);
-            if (sNewDevice != null && newGroupId == AudioSharingUtils.getGroupId(sNewDevice)) {
+            int newGroupId = BluetoothUtils.getGroupId(newDevice);
+            if (sNewDevice != null && newGroupId == BluetoothUtils.getGroupId(sNewDevice)) {
                 Log.d(
                         TAG,
                         String.format(

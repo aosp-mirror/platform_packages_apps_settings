@@ -103,6 +103,7 @@ public class AppNotificationSettings extends NotificationSettings {
         mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
         mControllers.add(new ShowMorePreferenceController(
                 context, mDependentFieldListener, mBackend));
+        mControllers.add(new BundleListPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
 }

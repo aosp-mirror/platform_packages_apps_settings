@@ -20,13 +20,13 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:paddingTop="@dimen/bluetooth_dialog_padding_top">
 
     <LinearLayout
         android:paddingStart="16dip"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/bluetooth_dialog_padding_top"
         android:orientation="vertical">
 
         <TextView
@@ -85,7 +85,7 @@
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="10dp"
                 android:orientation="vertical">
@@ -105,7 +105,6 @@
                 android:id="@+id/phonebook_sharing_message_confirm_pin"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:layout_weight="0"
                 android:gravity="center_vertical"
                 android:contentDescription="@string/bluetooth_pairing_phonebook_toggle_text"
                 android:switchMinWidth="48dp" />

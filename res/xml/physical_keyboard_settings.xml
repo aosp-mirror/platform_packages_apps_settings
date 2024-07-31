@@ -21,12 +21,6 @@
     <PreferenceCategory
         android:key="keyboard_options_category"
         android:title="@string/keyboard_options_category">
-        <SwitchPreferenceCompat
-            android:key="show_virtual_keyboard_switch"
-            android:title="@string/show_ime"
-            android:summary="@string/show_ime_summary"
-            android:defaultValue="false" />
-
         <Preference
             android:key="keyboard_shortcuts_helper"
             android:title="@string/keyboard_shortcuts_helper"
@@ -57,6 +51,12 @@
         <SwitchPreferenceCompat
             android:key="accessibility_slow_keys"
             android:title="@string/slow_keys"
+            android:defaultValue="false" />
+
+        <SwitchPreferenceCompat
+            android:key="accessibility_mouse_keys"
+            android:title="@string/mouse_keys"
+            android:summary="@string/mouse_keys_summary"
             android:defaultValue="false" />
 
     </PreferenceCategory>

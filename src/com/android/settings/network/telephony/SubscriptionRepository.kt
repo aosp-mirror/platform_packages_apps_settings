@@ -24,13 +24,14 @@ import androidx.lifecycle.LifecycleOwner
 import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterNot
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -52,7 +53,7 @@ class SubscriptionRepository(private val context: Context) {
     /** Flow of whether the subscription enabled for the given [subId]. */
     fun isSubscriptionEnabledFlow(subId: Int): Flow<Boolean> {
         if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)
-        return context.subscriptionsChangedFlow()
+        return subscriptionsChangedFlow()
             .map { subscriptionManager.isSubscriptionEnabled(subId) }
             .conflate()
             .onEach { Log.d(TAG, "[$subId] isSubscriptionEnabledFlow: $it") }
@@ -87,12 +88,30 @@ class SubscriptionRepository(private val context: Context) {
     }.conflate().onEach { Log.d(TAG, "subscriptions changed") }.flowOn(Dispatchers.Default)
 
     /** Flow of active subscription ids. */
-    fun activeSubscriptionIdListFlow(): Flow<List<Int>> = context.subscriptionsChangedFlow()
-        .map { subscriptionManager.activeSubscriptionIdList.sorted() }
-        .distinctUntilChanged()
-        .conflate()
-        .onEach { Log.d(TAG, "activeSubscriptionIdList: $it") }
-        .flowOn(Dispatchers.Default)
+    fun activeSubscriptionIdListFlow(): Flow<List<Int>> =
+        subscriptionsChangedFlow()
+            .map { subscriptionManager.activeSubscriptionIdList.sorted() }
+            .distinctUntilChanged()
+            .conflate()
+            .onEach { Log.d(TAG, "activeSubscriptionIdList: $it") }
+            .flowOn(Dispatchers.Default)
+
+    fun activeSubscriptionInfoFlow(subId: Int): Flow<SubscriptionInfo?> =
+        subscriptionsChangedFlow()
+            .map { subscriptionManager.getActiveSubscriptionInfo(subId) }
+            .distinctUntilChanged()
+            .conflate()
+            .flowOn(Dispatchers.Default)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun phoneNumberFlow(subId: Int): Flow<String?> =
+        activeSubscriptionInfoFlow(subId).flatMapLatest { subInfo ->
+            if (subInfo != null) {
+                context.phoneNumberFlow(subInfo)
+            } else {
+                flowOf(null)
+            }
+        }
 }
 
 val Context.subscriptionManager: SubscriptionManager?
@@ -100,9 +119,12 @@ val Context.subscriptionManager: SubscriptionManager?
 
 fun Context.requireSubscriptionManager(): SubscriptionManager = subscriptionManager!!
 
-fun Context.phoneNumberFlow(subscriptionInfo: SubscriptionInfo) = subscriptionsChangedFlow().map {
-    SubscriptionUtil.getBidiFormattedPhoneNumber(this, subscriptionInfo)
-}.filterNot { it.isNullOrEmpty() }.flowOn(Dispatchers.Default)
+fun Context.phoneNumberFlow(subscriptionInfo: SubscriptionInfo): Flow<String?> =
+    subscriptionsChangedFlow()
+        .map { SubscriptionUtil.getBidiFormattedPhoneNumber(this, subscriptionInfo) }
+        .distinctUntilChanged()
+        .conflate()
+        .flowOn(Dispatchers.Default)
 
 fun Context.subscriptionsChangedFlow(): Flow<Unit> =
     SubscriptionRepository(this).subscriptionsChangedFlow()

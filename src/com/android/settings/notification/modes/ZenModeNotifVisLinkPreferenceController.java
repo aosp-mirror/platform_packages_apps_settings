@@ -27,15 +27,14 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.notification.modes.ZenMode;
-import com.android.settingslib.notification.modes.ZenModesBackend;
 
 class ZenModeNotifVisLinkPreferenceController extends AbstractZenModePreferenceController  {
 
     private final ZenModeSummaryHelper mSummaryBuilder;
 
     public ZenModeNotifVisLinkPreferenceController(Context context, String key,
-            ZenModesBackend backend, ZenHelperBackend helperBackend) {
-        super(context, key, backend);
+            ZenHelperBackend helperBackend) {
+        super(context, key);
         mSummaryBuilder = new ZenModeSummaryHelper(context, helperBackend);
     }
 

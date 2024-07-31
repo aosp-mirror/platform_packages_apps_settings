@@ -39,4 +39,12 @@ interface OnboardingFeatureProvider {
      * @param logger To log B&R stats.
      */
     fun getSoundBackupHelper(context: Context, logger: BackupRestoreEventLogger): BackupHelper
+
+    /**
+     * Return a BackupHelper for backup accessibility appearance related settings.
+     *
+     * @param context App context
+     * @param logger To log B&R stats.
+     */
+    fun getAccessibilityAppearanceBackupHelper(context: Context, logger: BackupRestoreEventLogger): BackupHelper
 }

@@ -263,7 +263,7 @@ public class AudioSharingDialogHandler {
         if (isBroadcasting) {
             // If another device within the same is already in the sharing session, add source to
             // the device automatically.
-            int groupId = AudioSharingUtils.getGroupId(cachedDevice);
+            int groupId = BluetoothUtils.getGroupId(cachedDevice);
             if (groupedDevices.containsKey(groupId)
                     && groupedDevices.get(groupId).stream()
                             .anyMatch(
@@ -355,8 +355,8 @@ public class AudioSharingDialogHandler {
             for (List<CachedBluetoothDevice> devices : groupedDevices.values()) {
                 // Use random device in the group within the sharing session to represent the group.
                 CachedBluetoothDevice device = devices.get(0);
-                if (AudioSharingUtils.getGroupId(device)
-                        == AudioSharingUtils.getGroupId(cachedDevice)) {
+                if (BluetoothUtils.getGroupId(device)
+                        == BluetoothUtils.getGroupId(cachedDevice)) {
                     continue;
                 }
                 deviceItems.add(AudioSharingUtils.buildAudioSharingDeviceItem(device));
@@ -435,7 +435,7 @@ public class AudioSharingDialogHandler {
     /** Close opening dialogs for le audio device */
     public void closeOpeningDialogsForLeaDevice(@NonNull CachedBluetoothDevice cachedDevice) {
         if (mHostFragment == null) return;
-        int groupId = AudioSharingUtils.getGroupId(cachedDevice);
+        int groupId = BluetoothUtils.getGroupId(cachedDevice);
         List<Fragment> fragments;
         try {
             fragments = mHostFragment.getChildFragmentManager().getFragments();
@@ -447,7 +447,7 @@ public class AudioSharingDialogHandler {
             CachedBluetoothDevice device = getCachedBluetoothDeviceFromDialog(fragment);
             if (device != null
                     && groupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID
-                    && AudioSharingUtils.getGroupId(device) == groupId) {
+                    && BluetoothUtils.getGroupId(device) == groupId) {
                 Log.d(TAG, "Remove staled opening dialog for group " + groupId);
                 ((DialogFragment) fragment).dismiss();
                 logDialogDismissEvent(fragment);
