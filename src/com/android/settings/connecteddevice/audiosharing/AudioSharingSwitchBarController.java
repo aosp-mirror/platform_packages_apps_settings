@@ -30,6 +30,9 @@ import android.content.IntentFilter;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.Pair;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
@@ -284,6 +287,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                         : mProfileManager.getLeAudioBroadcastAssistantProfile();
         mExecutor = Executors.newSingleThreadExecutor();
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+        mSwitchBar.getRootView().setAccessibilityDelegate(new MainSwitchAccessibilityDelegate());
     }
 
     @Override
@@ -563,5 +567,20 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                 mFragment, mDeviceItemsForSharing, listener, eventData);
                     }
                 });
+    }
+
+    private static final class MainSwitchAccessibilityDelegate extends View.AccessibilityDelegate {
+        @Override
+        public boolean onRequestSendAccessibilityEvent(
+                @NonNull ViewGroup host, @NonNull View view, @NonNull AccessibilityEvent event) {
+            if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
+                    && (event.getContentChangeTypes()
+                                    & AccessibilityEvent.CONTENT_CHANGE_TYPE_ENABLED)
+                            != 0) {
+                Log.d(TAG, "Skip accessibility event for CONTENT_CHANGE_TYPE_ENABLED");
+                return false;
+            }
+            return super.onRequestSendAccessibilityEvent(host, view, event);
+        }
     }
 }
