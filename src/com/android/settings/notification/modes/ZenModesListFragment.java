@@ -49,15 +49,11 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, this::onAvailableModeTypesForAdd);
+        return buildPreferenceControllers(context, mBackend, this::onAvailableModeTypesForAdd);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            OnAddModeListener onAddModeListener) {
-        // We need to redefine ZenModesBackend here even though mBackend exists so that this method
-        // can be static; it must be static to be able to be used in SEARCH_INDEX_DATA_PROVIDER.
-        ZenModesBackend backend = ZenModesBackend.getInstance(context);
-
+            ZenModesBackend backend, OnAddModeListener onAddModeListener) {
         return ImmutableList.of(
                 new ZenModesListPreferenceController(context, backend),
                 new ZenModesListAddModePreferenceController(context, onAddModeListener)
@@ -150,7 +146,10 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, ignoredType -> {});
+                    // We need to redefine ZenModesBackend here even though mBackend exists so that
+                    // SEARCH_INDEX_DATA_PROVIDER can be static.
+                    return buildPreferenceControllers(context, ZenModesBackend.getInstance(context),
+                            ignoredType -> {});
                 }
             };
 }
