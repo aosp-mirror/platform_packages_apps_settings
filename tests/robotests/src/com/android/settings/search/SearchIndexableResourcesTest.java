@@ -29,6 +29,7 @@ import android.database.Cursor;
 import android.text.TextUtils;
 
 import com.android.settings.network.NetworkProviderSettings;
+import com.android.settings.spa.search.SearchablePage;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settingslib.search.SearchIndexableData;
@@ -117,8 +118,10 @@ public class SearchIndexableResourcesTest {
     public void testAllClassNamesHaveProviders() {
         for (SearchIndexableData data :
                 mSearchProvider.getSearchIndexableResources().getProviderValues()) {
-            if (DatabaseIndexingUtils.getSearchIndexProvider(data.getTargetClass()) == null) {
-                fail(data.getTargetClass().getName() + "is not an index provider");
+            Class<?> targetClass = data.getTargetClass();
+            if (DatabaseIndexingUtils.getSearchIndexProvider(targetClass) == null
+                    && !SearchablePage.class.isAssignableFrom(targetClass)) {
+                fail(targetClass.getName() + " is not an index provider");
             }
         }
     }

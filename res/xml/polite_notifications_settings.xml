@@ -17,20 +17,20 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/notification_polite_title">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="polite_notification_desc"
         android:title="@string/notification_polite_description"/>
 
-<!--    TODO(b/330606963): add the illustration back when animation is ready-->
-<!--    <com.android.settingslib.widget.IllustrationPreference-->
-<!--        android:key="bubbles_illustration"-->
-<!--        settings:searchable="false"-->
-<!--        android:selectable="false"-->
-<!--        app:lottie_rawRes="@raw/lottie_bubbles"-->
-<!--        app:lottie_cacheComposition="false"-->
-<!--        settings:dynamicColor="true" />-->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="notification_cooldown_illustration"
+        settings:searchable="false"
+        android:selectable="false"
+        app:lottie_rawRes="@raw/lottie_notification_cooldown"
+        app:lottie_cacheComposition="false"
+        settings:dynamicColor="true"/>
 
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="polite_notification_global_pref"

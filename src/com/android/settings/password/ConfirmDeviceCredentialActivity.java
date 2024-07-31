@@ -17,10 +17,10 @@
 
 package com.android.settings.password;
 
+import static android.Manifest.permission.SET_BIOMETRIC_DIALOG_ADVANCED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PATTERN_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PIN_HEADER;
-import static android.Manifest.permission.SET_BIOMETRIC_DIALOG_ADVANCED;
 import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import static com.android.systemui.biometrics.Utils.toBitmap;
@@ -40,6 +40,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.hardware.biometrics.BiometricConstants;
+import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.PromptInfo;
@@ -76,6 +77,11 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     /** Use this extra value to provide a custom logo description for the biometric prompt. **/
     public static final String CUSTOM_BIOMETRIC_PROMPT_LOGO_DESCRIPTION_KEY =
             "custom_logo_description";
+    public static final String BIOMETRIC_PROMPT_AUTHENTICATORS = "biometric_prompt_authenticators";
+    public static final String BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT =
+            "biometric_prompt_negative_button_text";
+    public static final String BIOMETRIC_PROMPT_HIDE_BACKGROUND =
+            "biometric_prompt_hide_background";
 
     public static class InternalActivity extends ConfirmDeviceCredentialActivity {
     }
@@ -161,15 +167,20 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        final Intent intent = getIntent();
+        if (intent.getBooleanExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND, false)) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            getWindow().setDimAmount(1);
+            intent.removeExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND);
+        } else {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
 
         mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
         mUserManager = UserManager.get(this);
         mTrustManager = getSystemService(TrustManager.class);
         mLockPatternUtils = new LockPatternUtils(this);
-
-        Intent intent = getIntent();
         mContext = this;
         mCheckDevicePolicyManager = intent
                 .getBooleanExtra(KeyguardManager.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false);
@@ -177,6 +188,11 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mDetails = intent.getCharSequenceExtra(KeyguardManager.EXTRA_DESCRIPTION);
         String alternateButton = intent.getStringExtra(
                 KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
+        final int authenticators = intent.getIntExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
+                BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                        | BiometricManager.Authenticators.BIOMETRIC_WEAK);
+        final String negativeButtonText = intent.getStringExtra(
+                BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT);
         final boolean frp =
                 KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
         final boolean repairMode =
@@ -213,6 +229,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         promptInfo.setTitle(mTitle);
         promptInfo.setDescription(mDetails);
         promptInfo.setDisallowBiometricsIfPolicyExists(mCheckDevicePolicyManager);
+        promptInfo.setAuthenticators(authenticators);
+        promptInfo.setNegativeButtonText(negativeButtonText);
 
         if (android.multiuser.Flags.enablePrivateSpaceFeatures()
                 && android.multiuser.Flags.usePrivateSpaceIconInBiometricPrompt()

@@ -87,6 +87,7 @@ public class ExternalDisplayTestBase {
         doReturn(mHandler).when(mMockedInjector).getHandler();
         doReturn("").when(mMockedInjector).getSystemProperty(
                 VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY);
+        doReturn(true).when(mMockedInjector).isModeLimitForExternalDisplayEnabled();
         doAnswer((arg) -> {
             mListener = arg.getArgument(0);
             return null;

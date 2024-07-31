@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.service.notification.ZenModeConfig;
 
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 
 import org.junit.Before;

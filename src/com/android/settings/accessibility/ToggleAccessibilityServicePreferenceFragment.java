@@ -40,7 +40,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.CompoundButton;
 
@@ -411,17 +410,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         }
     }
 
-    private void onDialogButtonFromEnableToggleClicked(View view) {
-        final int viewId = view.getId();
-        if (viewId == R.id.permission_enable_allow_button) {
-            onAllowButtonFromEnableToggleClicked();
-        } else if (viewId == R.id.permission_enable_deny_button) {
-            onDenyButtonFromEnableToggleClicked();
-        } else {
-            throw new IllegalArgumentException("Unexpected view id");
-        }
-    }
-
     private void onDialogButtonFromUninstallClicked() {
         mWarningDialog.dismiss();
         final Intent uninstallIntent = createUninstallPackageActivityIntent();
@@ -491,17 +479,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mWarningDialog.dismiss();
     }
 
-    void onDialogButtonFromShortcutToggleClicked(View view) {
-        final int viewId = view.getId();
-        if (viewId == R.id.permission_enable_allow_button) {
-            onAllowButtonFromShortcutToggleClicked();
-        } else if (viewId == R.id.permission_enable_deny_button) {
-            onDenyButtonFromShortcutToggleClicked();
-        } else {
-            throw new IllegalArgumentException("Unexpected view id");
-        }
-    }
-
     void onAllowButtonFromShortcutToggleClicked() {
         mShortcutPreference.setChecked(true);
 
@@ -526,17 +503,13 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private void onAllowButtonFromShortcutClicked() {
         mIsDialogShown.set(false);
-        if (Flags.editShortcutsInFullScreen()) {
-            EditShortcutsPreferenceFragment.showEditShortcutScreen(
-                    getContext(),
-                    getMetricsCategory(),
-                    getShortcutTitle(),
-                    mComponentName,
-                    getIntent()
-            );
-        } else {
-            showPopupDialog(DialogEnums.EDIT_SHORTCUT);
-        }
+        EditShortcutsPreferenceFragment.showEditShortcutScreen(
+                getContext(),
+                getMetricsCategory(),
+                getShortcutTitle(),
+                mComponentName,
+                getIntent()
+        );
 
         if (mWarningDialog != null) {
             mWarningDialog.dismiss();

@@ -43,9 +43,9 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothCallback;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
@@ -122,7 +122,7 @@ public class AudioStreamMediaService extends Service {
 
     @Override
     public void onCreate() {
-        if (!AudioSharingUtils.isFeatureEnabled()) {
+        if (!BluetoothUtils.isAudioSharingEnabled()) {
             return;
         }
 
@@ -172,7 +172,7 @@ public class AudioStreamMediaService extends Service {
     public void onDestroy() {
         Log.d(TAG, "onDestroy()");
         super.onDestroy();
-        if (!AudioSharingUtils.isFeatureEnabled()) {
+        if (!BluetoothUtils.isAudioSharingEnabled()) {
             return;
         }
         if (mLocalBtManager != null) {
