@@ -33,9 +33,9 @@ import android.widget.TextView;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
@@ -43,6 +43,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
@@ -72,7 +73,7 @@ public class StylusUsiHeaderControllerTest {
         when(mBatteryState.getCapacity()).thenReturn(1f);
         when(mBatteryState.isPresent()).thenReturn(true);
 
-        mContext = spy(ApplicationProvider.getApplicationContext());
+        mContext = spy(Robolectric.buildActivity(SettingsActivity.class).get());
         when(mContext.getSystemService(InputManager.class)).thenReturn(mInputManager);
         mController = new StylusUsiHeaderController(mContext, mInputDevice);
 

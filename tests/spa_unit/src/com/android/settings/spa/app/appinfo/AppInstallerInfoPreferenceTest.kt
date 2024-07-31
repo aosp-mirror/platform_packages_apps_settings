@@ -68,7 +68,6 @@ class AppInstallerInfoPreferenceTest {
     @Before
     fun setUp() {
         mockSession = mockitoSession()
-            .initMocks(this)
             .mockStatic(AppStoreUtil::class.java)
             .mockStatic(Utils::class.java)
             .mockStatic(AppUtils::class.java)
@@ -77,8 +76,7 @@ class AppInstallerInfoPreferenceTest {
         whenever(AppStoreUtil.getInstallerPackageName(any(), eq(PACKAGE_NAME)))
             .thenReturn(INSTALLER_PACKAGE_NAME)
         whenever(AppStoreUtil.getInstallerPackageNameAndInstallSourceInfo(any(), eq(PACKAGE_NAME)))
-            .thenReturn(
-                    Pair<String, InstallSourceInfo>(INSTALLER_PACKAGE_NAME, INSTALL_SOURCE_INFO))
+            .thenReturn(Pair(INSTALLER_PACKAGE_NAME, INSTALL_SOURCE_INFO))
         whenever(AppStoreUtil.getAppStoreLink(context, INSTALLER_PACKAGE_NAME, PACKAGE_NAME))
             .thenReturn(STORE_LINK)
         whenever(AppStoreUtil.isInitiatedFromDifferentPackage(eq(INSTALL_SOURCE_INFO)))
@@ -97,7 +95,8 @@ class AppInstallerInfoPreferenceTest {
 
     @Test
     fun whenNoInstaller_notDisplayed() {
-        whenever(AppStoreUtil.getInstallerPackageName(any(), eq(PACKAGE_NAME))).thenReturn(null)
+        whenever(AppStoreUtil.getInstallerPackageNameAndInstallSourceInfo(any(), eq(PACKAGE_NAME)))
+            .thenReturn(Pair(null, INSTALL_SOURCE_INFO))
 
         setContent()
 

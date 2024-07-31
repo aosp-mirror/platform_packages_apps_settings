@@ -20,12 +20,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.android.settings.fuelgauge.batteryusage.BatteryEventType
 
 /** Data access object for accessing [BatteryEventEntity] in the database. */
 @Dao
 interface BatteryEventDao {
     /** Inserts a [BatteryEventEntity] data into the database. */
-    @Insert(onConflict = OnConflictStrategy.REPLACE) fun insert(event: BatteryEventEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(event: BatteryEventEntity)
 
     /** Gets all recorded data. */
     @Query("SELECT * FROM BatteryEventEntity ORDER BY timestamp DESC")
@@ -68,6 +70,14 @@ interface BatteryEventDao {
     @Query("DELETE FROM BatteryEventEntity WHERE timestamp >= :timestamp")
     fun clearAllAfter(timestamp: Long)
 
+    /** Deletes even_hour event data in the database. */
+    @Query(
+        "DELETE FROM BatteryEventEntity " +
+            "WHERE batteryEventType = 4" // BatteryEventType.EVEN_HOUR = 4
+    )
+    fun clearEvenHourEvent()
+
     /** Clears all recorded data in the database. */
-    @Query("DELETE FROM BatteryEventEntity") fun clearAll()
+    @Query("DELETE FROM BatteryEventEntity")
+    fun clearAll()
 }

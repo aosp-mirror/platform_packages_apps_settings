@@ -65,7 +65,6 @@ public class WifiDisplayPreferenceController extends BasePreferenceController im
     public WifiDisplayPreferenceController(Context context, String key) {
         super(context, key);
         mRouter = context.getSystemService(MediaRouter.class);
-        mRouter.setRouterGroupId(MediaRouter.MIRRORING_GROUP_ID);
     }
 
     @Override

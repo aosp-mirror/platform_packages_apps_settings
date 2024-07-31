@@ -44,6 +44,7 @@ class InterruptionFilterPreferenceController extends AbstractZenModePreferenceCo
 
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
+        preference.setEnabled(zenMode.isEnabled());
         boolean filteringNotifications = zenMode.getRule().getInterruptionFilter()
                 != INTERRUPTION_FILTER_ALL;
         ((TwoStatePreference) preference).setChecked(filteringNotifications);

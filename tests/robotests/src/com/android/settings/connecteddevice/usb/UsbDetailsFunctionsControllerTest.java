@@ -35,6 +35,8 @@ import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.net.TetheringManager;
 import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceCategory;
@@ -48,6 +50,7 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -82,6 +85,8 @@ public class UsbDetailsFunctionsControllerTest {
     private FragmentActivity mActivity;
     @Mock
     private TetheringManager mTetheringManager;
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Before
     public void setUp() {
@@ -347,6 +352,30 @@ public class UsbDetailsFunctionsControllerTest {
         mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
 
         assertThat(mFragment.isUserAuthenticated()).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_EXCLUDE_WEBCAM_AUTH_CHALLENGE)
+    public void onRadioButtonClicked_webcamNoAuthNeeded() {
+        mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_UVC));
+        doReturn(UsbManager.FUNCTION_MTP).when(mUsbBackend).getCurrentFunctions();
+        setAuthPassesAutomatically();
+
+        mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
+
+        assertThat(mFragment.isUserAuthenticated()).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_EXCLUDE_WEBCAM_AUTH_CHALLENGE)
+    public void onRadioButtonClicked_MidiNoAuthNeeded() {
+        mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MIDI));
+        doReturn(UsbManager.FUNCTION_MTP).when(mUsbBackend).getCurrentFunctions();
+        setAuthPassesAutomatically();
+
+        mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
+
+        assertThat(mFragment.isUserAuthenticated()).isFalse();
     }
 
     private void setAuthPassesAutomatically() {

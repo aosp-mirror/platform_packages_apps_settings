@@ -33,6 +33,7 @@ import android.service.notification.ZenPolicy;
 
 import androidx.preference.TwoStatePreference;
 
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
@@ -64,6 +65,18 @@ public final class InterruptionFilterPreferenceControllerTest {
 
         mContext = RuntimeEnvironment.application;
         mController = new InterruptionFilterPreferenceController(mContext, "something",  mBackend);
+    }
+
+    @Test
+    public void testUpdateState_disabled() {
+        TwoStatePreference preference = mock(TwoStatePreference.class);
+        ZenMode zenMode = new TestModeBuilder()
+                .setEnabled(false)
+                .build();
+
+        mController.updateZenMode(preference, zenMode);
+
+        verify(preference).setEnabled(false);
     }
 
     @Test
