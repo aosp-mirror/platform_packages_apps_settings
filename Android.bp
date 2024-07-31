@@ -68,6 +68,9 @@ android_library {
     static_libs: [
         // External dependencies
         "androidx.navigation_navigation-fragment-ktx",
+        "androidx.slice_slice-builders",
+        "androidx.slice_slice-core",
+        "androidx.slice_slice-view",
         "androidx.window_window-java",
         "gson",
         "guava",
@@ -85,6 +88,8 @@ android_library {
         "notification_flags_lib",
         "securebox",
         "android.os.flags-aconfig-java",
+        "//frameworks/libs/systemui:com_android_systemui_shared_flags_lib",
+        "WindowManager-Shell-shared-desktopMode",
 
         // Settings dependencies
         "FingerprintManagerInteractor",

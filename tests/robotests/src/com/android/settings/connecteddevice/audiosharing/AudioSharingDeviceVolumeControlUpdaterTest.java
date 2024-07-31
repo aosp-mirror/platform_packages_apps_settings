@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingDeviceVolumeControlUpdater.PREF_KEY_PREFIX;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -79,7 +81,6 @@ import java.util.List;
 public class AudioSharingDeviceVolumeControlUpdaterTest {
     private static final String TEST_DEVICE_NAME = "test";
     private static final String TAG = "AudioSharingDeviceVolumeControlUpdater";
-    private static final String PREF_KEY = "audio_sharing_volume_control";
     private static final String TEST_SETTINGS_KEY =
             "bluetooth_le_broadcast_fallback_active_group_id";
     private static final int TEST_DEVICE_GROUP_ID = 1;
@@ -326,7 +327,7 @@ public class AudioSharingDeviceVolumeControlUpdaterTest {
 
     @Test
     public void getPreferenceKey_returnsCorrectKey() {
-        assertThat(mDeviceUpdater.getPreferenceKey()).isEqualTo(PREF_KEY);
+        assertThat(mDeviceUpdater.getPreferenceKeyPrefix()).isEqualTo(PREF_KEY_PREFIX);
     }
 
     @Test

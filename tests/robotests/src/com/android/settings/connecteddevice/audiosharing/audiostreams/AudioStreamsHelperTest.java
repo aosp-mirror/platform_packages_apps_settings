@@ -91,7 +91,7 @@ public class AudioStreamsHelperTest {
 
     @Test
     public void addSource_noDevice_doNothing() {
-        when(mAssistant.getDevicesMatchingConnectionStates(any()))
+        when(mAssistant.getAllConnectedDevices())
                 .thenReturn(Collections.emptyList());
         mHelper.addSource(mMetadata);
 
@@ -102,7 +102,7 @@ public class AudioStreamsHelperTest {
     public void addSource_hasDevice() {
         List<BluetoothDevice> devices = new ArrayList<>();
         devices.add(mDevice);
-        when(mAssistant.getDevicesMatchingConnectionStates(any())).thenReturn(devices);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
         when(mDeviceManager.findDevice(any())).thenReturn(mCachedDevice);
         when(mCachedDevice.getDevice()).thenReturn(mDevice);
         when(mCachedDevice.getGroupId()).thenReturn(GROUP_ID);
@@ -114,7 +114,7 @@ public class AudioStreamsHelperTest {
 
     @Test
     public void removeSource_noDevice_doNothing() {
-        when(mAssistant.getDevicesMatchingConnectionStates(any()))
+        when(mAssistant.getAllConnectedDevices())
                 .thenReturn(Collections.emptyList());
         mHelper.removeSource(BROADCAST_ID_1);
 
@@ -125,7 +125,7 @@ public class AudioStreamsHelperTest {
     public void removeSource_noConnectedSource_doNothing() {
         List<BluetoothDevice> devices = new ArrayList<>();
         devices.add(mDevice);
-        when(mAssistant.getDevicesMatchingConnectionStates(any())).thenReturn(devices);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
         BluetoothLeBroadcastReceiveState source = mock(BluetoothLeBroadcastReceiveState.class);
         when(source.getBroadcastId()).thenReturn(BROADCAST_ID_2);
         when(mDeviceManager.findDevice(any())).thenReturn(mCachedDevice);
@@ -142,7 +142,7 @@ public class AudioStreamsHelperTest {
     public void removeSource_hasConnectedSource() {
         List<BluetoothDevice> devices = new ArrayList<>();
         devices.add(mDevice);
-        when(mAssistant.getDevicesMatchingConnectionStates(any())).thenReturn(devices);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
         BluetoothLeBroadcastReceiveState source = mock(BluetoothLeBroadcastReceiveState.class);
         when(source.getBroadcastId()).thenReturn(BROADCAST_ID_2);
         when(mDeviceManager.findDevice(any())).thenReturn(mCachedDevice);
@@ -164,7 +164,7 @@ public class AudioStreamsHelperTest {
         var memberDevice = mock(BluetoothDevice.class);
         devices.add(mDevice);
         devices.add(memberDevice);
-        when(mAssistant.getDevicesMatchingConnectionStates(any())).thenReturn(devices);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
         BluetoothLeBroadcastReceiveState source = mock(BluetoothLeBroadcastReceiveState.class);
         when(source.getBroadcastId()).thenReturn(BROADCAST_ID_2);
         when(mDeviceManager.findDevice(any())).thenReturn(mCachedDevice);
@@ -196,7 +196,7 @@ public class AudioStreamsHelperTest {
     public void getAllConnectedSources_returnSource() {
         List<BluetoothDevice> devices = new ArrayList<>();
         devices.add(mDevice);
-        when(mAssistant.getDevicesMatchingConnectionStates(any())).thenReturn(devices);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
         BluetoothLeBroadcastReceiveState source = mock(BluetoothLeBroadcastReceiveState.class);
         when(mDeviceManager.findDevice(any())).thenReturn(mCachedDevice);
         when(mCachedDevice.getDevice()).thenReturn(mDevice);
@@ -222,7 +222,7 @@ public class AudioStreamsHelperTest {
     public void startMediaService_hasDevice() {
         List<BluetoothDevice> devices = new ArrayList<>();
         devices.add(mDevice);
-        when(mAssistant.getDevicesMatchingConnectionStates(any())).thenReturn(devices);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
         BluetoothLeBroadcastReceiveState source = mock(BluetoothLeBroadcastReceiveState.class);
         when(mDeviceManager.findDevice(any())).thenReturn(mCachedDevice);
         when(mCachedDevice.getDevice()).thenReturn(mDevice);

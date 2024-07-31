@@ -378,9 +378,7 @@ public class AudioSharingSwitchBarControllerTest {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of());
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
         assertThat(mSwitchBar.isChecked()).isFalse();
@@ -392,9 +390,7 @@ public class AudioSharingSwitchBarControllerTest {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, false);
         when(mBtnView.isEnabled()).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of());
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
         verify(mBroadcast).startPrivateBroadcast();
@@ -405,9 +401,7 @@ public class AudioSharingSwitchBarControllerTest {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice1));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1));
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
         verify(mBroadcast).startPrivateBroadcast();
@@ -437,9 +431,7 @@ public class AudioSharingSwitchBarControllerTest {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController =
                 new AudioSharingSwitchBarController(
@@ -469,9 +461,7 @@ public class AudioSharingSwitchBarControllerTest {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
         verify(mBroadcast).startPrivateBroadcast();

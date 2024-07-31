@@ -17,6 +17,7 @@ package com.android.settings.connecteddevice.display;
 
 import static android.view.Display.INVALID_DISPLAY;
 
+import static com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.DISPLAY_MODE_LIMIT_OVERRIDE_PROP;
 import static com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.EXTERNAL_DISPLAY_RESOLUTION_SETTINGS_RESOURCE;
 import static com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.MORE_OPTIONS_KEY;
 import static com.android.settings.connecteddevice.display.ResolutionPreferenceFragment.TOP_OPTIONS_KEY;
@@ -29,6 +30,7 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Pair;
 import android.view.View;
 import android.widget.TextView;
 
@@ -83,16 +85,50 @@ public class ResolutionPreferenceFragmentTest extends ExternalDisplayTestBase {
 
     @Test
     @UiThreadTest
-    public void testModePreferences() {
-        mDisplayIdArg = 1;
-        initFragment();
-        mHandler.flush();
-        PreferenceCategory topPref = mPreferenceScreen.findPreference(TOP_OPTIONS_KEY);
-        assertThat(topPref).isNotNull();
-        PreferenceCategory morePref = mPreferenceScreen.findPreference(MORE_OPTIONS_KEY);
-        assertThat(morePref).isNotNull();
+    public void testModePreferences_modeLimitFlagIsOn_noOverride() {
+        doReturn(true).when(mMockedInjector).isModeLimitForExternalDisplayEnabled();
+        doReturn(null).when(mMockedInjector).getSystemProperty(
+                DISPLAY_MODE_LIMIT_OVERRIDE_PROP);
+        var topAndMorePref = runTestModePreferences();
+        PreferenceCategory topPref = topAndMorePref.first, morePref = topAndMorePref.second;
         assertThat(topPref.getPreferenceCount()).isEqualTo(3);
         assertThat(morePref.getPreferenceCount()).isEqualTo(1);
+    }
+
+    @Test
+    @UiThreadTest
+    public void testModePreferences_noModeLimitFlag_overrideIsTrue() {
+        doReturn(false).when(mMockedInjector).isModeLimitForExternalDisplayEnabled();
+        doReturn("true").when(mMockedInjector).getSystemProperty(
+                DISPLAY_MODE_LIMIT_OVERRIDE_PROP);
+        var topAndMorePref = runTestModePreferences();
+        PreferenceCategory topPref = topAndMorePref.first, morePref = topAndMorePref.second;
+        assertThat(topPref.getPreferenceCount()).isEqualTo(3);
+        assertThat(morePref.getPreferenceCount()).isEqualTo(1);
+    }
+
+    @Test
+    @UiThreadTest
+    public void testModePreferences_noModeLimitFlag_noOverride() {
+        doReturn(false).when(mMockedInjector).isModeLimitForExternalDisplayEnabled();
+        doReturn(null).when(mMockedInjector).getSystemProperty(
+                DISPLAY_MODE_LIMIT_OVERRIDE_PROP);
+        var topAndMorePref = runTestModePreferences();
+        PreferenceCategory topPref = topAndMorePref.first, morePref = topAndMorePref.second;
+        assertThat(topPref.getPreferenceCount()).isEqualTo(3);
+        assertThat(morePref.getPreferenceCount()).isEqualTo(2);
+    }
+
+    @Test
+    @UiThreadTest
+    public void testModePreferences_modeLimitFlagIsOn_butOverrideIsFalse() {
+        doReturn(true).when(mMockedInjector).isModeLimitForExternalDisplayEnabled();
+        doReturn("false").when(mMockedInjector).getSystemProperty(
+                DISPLAY_MODE_LIMIT_OVERRIDE_PROP);
+        var topAndMorePref = runTestModePreferences();
+        PreferenceCategory topPref = topAndMorePref.first, morePref = topAndMorePref.second;
+        assertThat(topPref.getPreferenceCount()).isEqualTo(3);
+        assertThat(morePref.getPreferenceCount()).isEqualTo(2);
     }
 
     @Test
@@ -107,6 +143,17 @@ public class ResolutionPreferenceFragmentTest extends ExternalDisplayTestBase {
         modePref.onClick();
         var mode = mDisplays[mDisplayIdArg].getSupportedModes()[1];
         verify(mMockedInjector).setUserPreferredDisplayMode(mDisplayIdArg, mode);
+    }
+
+    private Pair<PreferenceCategory, PreferenceCategory> runTestModePreferences() {
+        mDisplayIdArg = 1;
+        initFragment();
+        mHandler.flush();
+        PreferenceCategory topPref = mPreferenceScreen.findPreference(TOP_OPTIONS_KEY);
+        assertThat(topPref).isNotNull();
+        PreferenceCategory morePref = mPreferenceScreen.findPreference(MORE_OPTIONS_KEY);
+        assertThat(morePref).isNotNull();
+        return new Pair<>(topPref, morePref);
     }
 
     private void initFragment() {

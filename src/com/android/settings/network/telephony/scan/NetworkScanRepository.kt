@@ -30,8 +30,8 @@ import com.android.settings.R
 import com.android.settings.network.telephony.CellInfoUtil.getNetworkTitle
 import com.android.settings.network.telephony.telephonyManager
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
+import java.util.concurrent.Executors
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -96,7 +96,9 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
 
         val networkScan = telephonyManager.requestNetworkScan(
             createNetworkScan(),
-            Dispatchers.Default.asExecutor(),
+            // requestNetworkScan() could call callbacks concurrently, so we use a single thread
+            // to avoid racing conditions.
+            Executors.newSingleThreadExecutor(),
             callback,
         )
 

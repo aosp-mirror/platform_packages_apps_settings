@@ -16,8 +16,9 @@
 
 package com.android.settings.development;
 
+import static android.content.pm.PackageManager.FEATURE_FREEFORM_WINDOW_MANAGEMENT;
+
 import android.content.Context;
-import android.os.Build;
 import android.provider.Settings;
 
 import androidx.annotation.Nullable;
@@ -40,12 +41,20 @@ public class FreeformWindowsPreferenceController extends DeveloperOptionsPrefere
     @VisibleForTesting
     static final int SETTING_VALUE_ON = 1;
 
-    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable
+    private final DevelopmentSettingsDashboardFragment mFragment;
 
     public FreeformWindowsPreferenceController(
             Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        // When devices have the system feature FEATURE_FREEFORM_WINDOW_MANAGEMENT, freeform
+        // mode is enabled automatically, and this toggle is not needed.
+        return !mContext.getPackageManager().hasSystemFeature(FEATURE_FREEFORM_WINDOW_MANAGEMENT);
     }
 
     @Override
@@ -79,10 +88,5 @@ public class FreeformWindowsPreferenceController extends DeveloperOptionsPrefere
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, SETTING_VALUE_OFF);
         ((TwoStatePreference) mPreference).setChecked(false);
-    }
-
-    @VisibleForTesting
-    String getBuildType() {
-        return Build.TYPE;
     }
 }

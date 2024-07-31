@@ -18,7 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/trackpad_settings">
+    android:title="@string/trackpad_mouse_settings">
     <Preference
         android:key="trackpad_gesture_settings"
         android:title="@string/trackpad_touchpad_gesture_title"
@@ -67,6 +67,12 @@
         android:title="@string/pointer_fill_style"
         android:order="50"
         settings:controller="com.android.settings.inputmethod.PointerFillStylePreferenceController"/>
+
+    <com.android.settings.inputmethod.PointerStrokeStylePreference
+        android:key="pointer_stroke_style"
+        android:title="@string/pointer_stroke_style"
+        android:order="60"
+        settings:controller="com.android.settings.inputmethod.PointerStrokeStylePreferenceController"/>
 
     <com.android.settings.widget.LabeledSeekBarPreference
         android:key="pointer_scale"
