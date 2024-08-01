@@ -19,15 +19,20 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.hardware.input.InputSettings;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+
+import java.util.List;
 
 /**
  * A toggle preference controller for keyboard sticky key.
  */
 public class KeyboardStickyKeyPreferenceController extends TogglePreferenceController {
-
+    private static final String TAG = "StickyKeyPrefController";
     static final String PREF_KEY = "toggle_keyboard_sticky_keys";
 
     public KeyboardStickyKeyPreferenceController(Context context, String preferenceKey) {
@@ -54,5 +59,18 @@ public class KeyboardStickyKeyPreferenceController extends TogglePreferenceContr
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_accessibility;
+    }
+
+    @Override
+    public void updateNonIndexableKeys(@NonNull List<String> keys) {
+        super.updateNonIndexableKeys(keys);
+
+        if (Flags.fixA11ySettingsSearch() && !AccessibilitySettings.isAnyHardKeyboardsExist()) {
+            if (keys.contains(getPreferenceKey())) {
+                Log.w(TAG, "Skipping updateNonIndexableKeys, key already in list.");
+                return;
+            }
+            keys.add(getPreferenceKey());
+        }
     }
 }

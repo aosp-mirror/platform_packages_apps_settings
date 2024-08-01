@@ -23,7 +23,6 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,10 +35,10 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 
 public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
@@ -211,7 +210,7 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     }
 
     private int getDialogId(boolean hasMetadata, boolean hasConnectedDevice) {
-        if (!AudioSharingUtils.isFeatureEnabled()) {
+        if (!BluetoothUtils.isAudioSharingEnabled()) {
             return SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_FEATURE_UNSUPPORTED;
         }
         if (!hasConnectedDevice) {
@@ -233,9 +232,7 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
         if (assistant == null) {
             return null;
         }
-        var devices =
-                assistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED});
+        var devices = assistant.getAllConnectedDevices();
         return devices.isEmpty() ? null : devices.get(0);
     }
 

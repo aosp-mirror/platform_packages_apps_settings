@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 
 public class AudioSharingConfirmDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "AudioSharingConfirmDialog";
@@ -44,7 +45,7 @@ public class AudioSharingConfirmDialogFragment extends InstrumentedDialogFragmen
      * @param host The Fragment this dialog will be hosted.
      */
     public static void show(Fragment host) {
-        if (!AudioSharingUtils.isFeatureEnabled()) return;
+        if (!BluetoothUtils.isAudioSharingEnabled()) return;
         final FragmentManager manager;
         try {
             manager = host.getChildFragmentManager();

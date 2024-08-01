@@ -79,7 +79,7 @@ public class BluetoothPairingDetail extends BluetoothDevicePairingDetailBase imp
         boolean isSatelliteOn = true;
         try {
             isSatelliteOn =
-                    satelliteRepository.requestIsEnabled(
+                    satelliteRepository.requestIsSessionStarted(
                             Executors.newSingleThreadExecutor()).get(3000, TimeUnit.MILLISECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             Log.e(TAG, "Error to get satellite status : " + e);
