@@ -41,6 +41,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
+@EnableFlags(Flags.FLAG_MODES_UI)
 public final class ZenModeDisplayLinkPreferenceControllerTest {
 
     private ZenModeDisplayLinkPreferenceController mController;
@@ -75,7 +76,6 @@ public final class ZenModeDisplayLinkPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
     public void testHasSummary() {
         Preference pref = mock(Preference.class);
         mController.updateZenMode(pref, TestModeBuilder.EXAMPLE);

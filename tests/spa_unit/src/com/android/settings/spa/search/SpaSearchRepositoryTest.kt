@@ -18,9 +18,12 @@ package com.android.settings.spa.search
 
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingKey
+import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingSpaPage
 import com.android.settings.spa.search.SpaSearchRepository.Companion.createSearchIndexableData
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.google.common.truth.Truth.assertThat
+import com.google.protobuf.ByteString
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
@@ -35,17 +38,31 @@ class SpaSearchRepositoryTest {
                 override val name = PAGE_NAME
             }
 
-        val searchIndexableData = pageProvider.createSearchIndexableData { listOf(TITLE) }
+        val searchIndexableData =
+            pageProvider.createSearchIndexableData({ PAGE_TITLE }) { listOf(ITEM_TITLE) }
         val dynamicRawDataToIndex =
             searchIndexableData.searchIndexProvider.getDynamicRawDataToIndex(mock<Context>(), true)
 
         assertThat(searchIndexableData.targetClass).isEqualTo(pageProvider::class.java)
         assertThat(dynamicRawDataToIndex).hasSize(1)
-        assertThat(dynamicRawDataToIndex[0].title).isEqualTo(TITLE)
+        val rawData = dynamicRawDataToIndex[0]
+        val key = SpaSearchLandingKey.parseFrom(ByteString.copyFromUtf8(rawData.key))
+        assertThat(key)
+            .isEqualTo(
+                SpaSearchLandingKey.newBuilder()
+                    .setSpaPage(SpaSearchLandingSpaPage.newBuilder().setDestination(PAGE_NAME))
+                    .build())
+        assertThat(rawData.title).isEqualTo(ITEM_TITLE)
+        assertThat(rawData.intentAction).isEqualTo("android.settings.SPA_SEARCH_LANDING")
+        assertThat(rawData.intentTargetClass)
+            .isEqualTo(SpaSearchLandingActivity::class.qualifiedName)
+        assertThat(rawData.className).isEqualTo(pageProvider::class.java.name)
+        assertThat(rawData.screenTitle).isEqualTo(PAGE_TITLE)
     }
 
     private companion object {
         const val PAGE_NAME = "PageName"
-        const val TITLE = "Title"
+        const val PAGE_TITLE = "Page Title"
+        const val ITEM_TITLE = "Item Title"
     }
 }
