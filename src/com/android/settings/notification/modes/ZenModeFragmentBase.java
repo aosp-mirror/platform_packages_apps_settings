@@ -131,7 +131,7 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
     }
 
     private void toastAndFinish() {
-        Toast.makeText(mContext, R.string.zen_mode_rule_not_found_text, Toast.LENGTH_SHORT)
+        Toast.makeText(mContext, R.string.zen_mode_not_found_text, Toast.LENGTH_SHORT)
                 .show();
         this.finish();
     }

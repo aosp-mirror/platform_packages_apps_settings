@@ -20,6 +20,9 @@ import android.content.Context
 import android.provider.SearchIndexableResource
 import android.util.Log
 import androidx.annotation.VisibleForTesting
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex
+import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingKey
+import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingSpaPage
 import com.android.settingslib.search.Indexable
 import com.android.settingslib.search.SearchIndexableData
 import com.android.settingslib.search.SearchIndexableRaw
@@ -34,9 +37,10 @@ class SpaSearchRepository(
         Log.d(TAG, "getSearchIndexableDataList")
         return spaEnvironment.pageProviderRepository.value.getAllProviders().mapNotNull { page ->
             if (page is SearchablePage) {
-                page.createSearchIndexableData(page::getSearchableTitles)
+                page.createSearchIndexableData(
+                    page::getPageTitleForSearch, page::getSearchableTitles)
             } else null
-        }
+        } + MobileNetworkSettingsSearchIndex().createSearchIndexableData()
     }
 
     companion object {
@@ -44,40 +48,62 @@ class SpaSearchRepository(
 
         @VisibleForTesting
         fun SettingsPageProvider.createSearchIndexableData(
+            getPageTitleForSearch: (context: Context) -> String,
             titlesProvider: (context: Context) -> List<String>,
         ): SearchIndexableData {
-            val searchIndexProvider =
-                object : Indexable.SearchIndexProvider {
-                    override fun getXmlResourcesToIndex(
-                        context: Context,
-                        enabled: Boolean,
-                    ): List<SearchIndexableResource> = emptyList()
-
-                    override fun getRawDataToIndex(
-                        context: Context,
-                        enabled: Boolean,
-                    ): List<SearchIndexableRaw> = emptyList()
-
-                    override fun getDynamicRawDataToIndex(
-                        context: Context,
-                        enabled: Boolean,
-                    ): List<SearchIndexableRaw> =
-                        titlesProvider(context).map { title ->
-                            createSearchIndexableRaw(context, title)
-                        }
-
-                    override fun getNonIndexableKeys(context: Context): List<String> = emptyList()
+            val key =
+                SpaSearchLandingKey.newBuilder()
+                    .setSpaPage(SpaSearchLandingSpaPage.newBuilder().setDestination(name))
+                    .build()
+            val indexableClass = this::class.java
+            val searchIndexProvider = searchIndexProviderOf { context ->
+                val pageTitle = getPageTitleForSearch(context)
+                titlesProvider(context).map { itemTitle ->
+                    createSearchIndexableRaw(context, key, itemTitle, indexableClass, pageTitle)
                 }
-            return SearchIndexableData(this::class.java, searchIndexProvider)
+            }
+            return SearchIndexableData(indexableClass, searchIndexProvider)
         }
 
-        private fun SettingsPageProvider.createSearchIndexableRaw(context: Context, title: String) =
+        fun searchIndexProviderOf(
+            getDynamicRawDataToIndex: (context: Context) -> List<SearchIndexableRaw>,
+        ) =
+            object : Indexable.SearchIndexProvider {
+                override fun getXmlResourcesToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableResource> = emptyList()
+
+                override fun getRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> = emptyList()
+
+                override fun getDynamicRawDataToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableRaw> = getDynamicRawDataToIndex(context)
+
+                override fun getNonIndexableKeys(context: Context): List<String> = emptyList()
+            }
+
+        fun createSearchIndexableRaw(
+            context: Context,
+            spaSearchLandingKey: SpaSearchLandingKey,
+            itemTitle: String,
+            indexableClass: Class<*>,
+            pageTitle: String,
+            keywords: String? = null,
+        ) =
             SearchIndexableRaw(context).apply {
-                key = name
-                this.title = title
+                key = spaSearchLandingKey.toByteString().toStringUtf8()
+                title = itemTitle
+                this.keywords = keywords
                 intentAction = SEARCH_LANDING_ACTION
+                intentTargetClass = SpaSearchLandingActivity::class.qualifiedName
                 packageName = context.packageName
-                className = SpaSearchLandingActivity::class.qualifiedName
+                className = indexableClass.name
+                screenTitle = pageTitle
             }
 
         private const val SEARCH_LANDING_ACTION = "android.settings.SPA_SEARCH_LANDING"
