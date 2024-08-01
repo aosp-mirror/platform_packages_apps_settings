@@ -51,6 +51,8 @@ import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.FeatureFlagUtils;
 import android.util.Pair;
+import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.CompoundButton;
 
 import androidx.fragment.app.DialogFragment;
@@ -589,5 +591,27 @@ public class AudioSharingSwitchBarControllerTest {
         mController.mBroadcastAssistantCallback.onSourceFound(metadata);
         mController.mBroadcastAssistantCallback.onSourceLost(/* broadcastId= */ 1);
         verifyNoMoreInteractions(mFeatureFactory.metricsFeatureProvider);
+    }
+
+    @Test
+    public void testAccessibilityDelegate() {
+        View view = new View(mContext);
+        AccessibilityEvent event =
+                new AccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED);
+        event.setContentChangeTypes(AccessibilityEvent.CONTENT_CHANGE_TYPE_UNDEFINED);
+        assertThat(
+                        mSwitchBar
+                                .getRootView()
+                                .getAccessibilityDelegate()
+                                .onRequestSendAccessibilityEvent(mSwitchBar, view, event))
+                .isTrue();
+
+        event.setContentChangeTypes(AccessibilityEvent.CONTENT_CHANGE_TYPE_ENABLED);
+        assertThat(
+                        mSwitchBar
+                                .getRootView()
+                                .getAccessibilityDelegate()
+                                .onRequestSendAccessibilityEvent(mSwitchBar, view, event))
+                .isFalse();
     }
 }
