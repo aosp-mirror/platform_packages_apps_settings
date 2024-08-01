@@ -613,7 +613,7 @@ public class AccessibilitySettings extends DashboardFragment implements
         }
     }
 
-    private boolean isAnyHardKeyboardsExist() {
+    static boolean isAnyHardKeyboardsExist() {
         for (int deviceId : InputDevice.getDeviceIds()) {
             final InputDevice device = InputDevice.getDevice(deviceId);
             if (device != null && !device.isVirtual() && device.isFullKeyboard()) {

@@ -112,10 +112,12 @@
             android:selectable="false"
             settings:searchable="false"/>
 
+        <!-- Settings search is handled by MmsMessageSearchItem. -->
         <SwitchPreferenceCompat
             android:key="mms_message"
             android:title="@string/mms_message_title"
             android:summary="@string/mms_message_summary"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.MmsMessagePreferenceController"/>
 
         <SwitchPreferenceCompat
