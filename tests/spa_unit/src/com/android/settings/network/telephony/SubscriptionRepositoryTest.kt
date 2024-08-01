@@ -204,6 +204,22 @@ class SubscriptionRepositoryTest {
         assertThat(phoneNumber).isEqualTo(NUMBER_1)
     }
 
+    @Test
+    fun phoneNumberFlow_withSubId() = runBlocking {
+        val subInfo = SubscriptionInfo.Builder().apply {
+            setId(SUB_ID_IN_SLOT_1)
+            setMcc(MCC)
+        }.build()
+        mockSubscriptionManager.stub {
+            on { getActiveSubscriptionInfo(SUB_ID_IN_SLOT_1) } doReturn subInfo
+            on { getPhoneNumber(SUB_ID_IN_SLOT_1) } doReturn NUMBER_1
+        }
+
+        val phoneNumber = repository.phoneNumberFlow(SUB_ID_IN_SLOT_1).firstWithTimeoutOrNull()
+
+        assertThat(phoneNumber).isEqualTo(NUMBER_1)
+    }
+
     private companion object {
         const val SIM_SLOT_INDEX_0 = 0
         const val SUB_ID_IN_SLOT_0 = 2
