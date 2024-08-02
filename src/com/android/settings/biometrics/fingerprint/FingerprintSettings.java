@@ -159,10 +159,26 @@ public class FingerprintSettings extends SubSettings {
 
         public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
                 new BaseSearchIndexProvider(R.xml.security_settings_fingerprint) {
+
+                    @Override
+                    protected boolean isPageSearchEnabled(Context context) {
+                        return super.isPageSearchEnabled(context) &&
+                                hasEnrolledFingerprints(context);
+                    }
+
                     @Override
                     public List<AbstractPreferenceController>
                             createPreferenceControllers(Context context) {
                         return createThePreferenceControllers(context);
+                    }
+
+                    private boolean hasEnrolledFingerprints(Context context) {
+                        final FingerprintManager fingerprintManager =
+                                Utils.getFingerprintManagerOrNull(context);
+                        if (fingerprintManager != null) {
+                            return fingerprintManager.hasEnrolledTemplates(UserHandle.myUserId());
+                        }
+                        return false;
                     }
                 };
 
@@ -489,7 +505,7 @@ public class FingerprintSettings extends SubSettings {
                         mUserId)) {
                     mBiometricsAuthenticationRequested = true;
                     Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
-                            mUserId);
+                            mUserId, true /* hideBackground */);
                 } else if (!mHasFirstEnrolled) {
                     mIsEnrolling = true;
                     addFirstFingerprint(null);
@@ -784,7 +800,7 @@ public class FingerprintSettings extends SubSettings {
                     mUserId)) {
                 mBiometricsAuthenticationRequested = true;
                 Utils.launchBiometricPromptForMandatoryBiometrics(this,
-                        BIOMETRIC_AUTH_REQUEST, mUserId);
+                        BIOMETRIC_AUTH_REQUEST, mUserId, true /* hideBackground */);
             }
         }
 

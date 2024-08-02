@@ -67,12 +67,18 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
         LayoutPreference layoutPref = (LayoutPreference) preference;
 
         TextView start = layoutPref.findViewById(R.id.start_time);
-        start.setText(timeString(mSchedule.startHour, mSchedule.startMinute));
+        String startTimeString = timeString(mSchedule.startHour, mSchedule.startMinute);
+        start.setText(startTimeString);
+        start.setContentDescription(
+                mContext.getString(R.string.zen_mode_start_time) + "\n" + startTimeString);
         start.setOnClickListener(
                 timePickerLauncher(mSchedule.startHour, mSchedule.startMinute, mStartSetter));
 
         TextView end = layoutPref.findViewById(R.id.end_time);
-        end.setText(timeString(mSchedule.endHour, mSchedule.endMinute));
+        String endTimeString = timeString(mSchedule.endHour, mSchedule.endMinute);
+        end.setText(endTimeString);
+        end.setContentDescription(
+                mContext.getString(R.string.zen_mode_end_time) + "\n" + endTimeString);
         end.setOnClickListener(
                 timePickerLauncher(mSchedule.endHour, mSchedule.endMinute, mEndSetter));
 
@@ -198,7 +204,10 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
             // day label.
             dayToggle.setTextOn(mShortDayFormat.format(c.getTime()));
             dayToggle.setTextOff(mShortDayFormat.format(c.getTime()));
-            dayToggle.setContentDescription(mLongDayFormat.format(c.getTime()));
+            String state = dayEnabled
+                    ? mContext.getString(com.android.internal.R.string.capital_on)
+                    : mContext.getString(com.android.internal.R.string.capital_off);
+            dayToggle.setStateDescription(mLongDayFormat.format(c.getTime()) + ", " + state);
 
             dayToggle.setChecked(dayEnabled);
             dayToggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
