@@ -309,7 +309,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
      * Helper to get the list of connectable and special profiles.
      */
     private List<LocalBluetoothProfile> getProfiles() {
-        List<LocalBluetoothProfile> result = new ArrayList<LocalBluetoothProfile>();
+        List<LocalBluetoothProfile> result = new ArrayList<>();
         mProfileDeviceMap.clear();
         if (mAllOfCachedDevices == null || mAllOfCachedDevices.isEmpty()) {
             return result;
@@ -320,8 +320,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                 if (mProfileDeviceMap.containsKey(profile.toString())) {
                     mProfileDeviceMap.get(profile.toString()).add(cachedItem);
                 } else {
-                    List<CachedBluetoothDevice> tmpCachedDeviceList =
-                            new ArrayList<CachedBluetoothDevice>();
+                    List<CachedBluetoothDevice> tmpCachedDeviceList = new ArrayList<>();
                     tmpCachedDeviceList.add(cachedItem);
                     mProfileDeviceMap.put(profile.toString(), tmpCachedDeviceList);
                     result.add(profile);
@@ -357,6 +356,10 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         }
         boolean hearingAidSupported = result.contains(
                 mManager.getProfileManager().getHearingAidProfile());
+        // Remove hearing aids toggle anyway since showing the toggle will confuse users
+        if (hearingAidSupported) {
+            result.remove(mManager.getProfileManager().getHearingAidProfile());
+        }
         if (leAudioSupported && !classicAudioSupported && !hearingAidSupported) {
             mIsLeAudioOnlyDevice = true;
         }
