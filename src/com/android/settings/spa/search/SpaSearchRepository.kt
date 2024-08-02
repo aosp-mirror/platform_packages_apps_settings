@@ -93,10 +93,12 @@ class SpaSearchRepository(
             itemTitle: String,
             indexableClass: Class<*>,
             pageTitle: String,
+            keywords: String? = null,
         ) =
             SearchIndexableRaw(context).apply {
                 key = spaSearchLandingKey.toByteString().toStringUtf8()
                 title = itemTitle
+                this.keywords = keywords
                 intentAction = SEARCH_LANDING_ACTION
                 intentTargetClass = SpaSearchLandingActivity::class.qualifiedName
                 packageName = context.packageName
