@@ -41,6 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"強制停止"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"不明"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"プレビュー"</string>
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR コード"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"拡大"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"常時"</string>
@@ -850,7 +851,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"デバイスを再起動しますか？"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"NFC 詳細ログは開発専用に設計されています。バグレポートには、追加の NFC データが含まれます。これには、非公開の情報が含まれることがあります。この設定を変更するには、デバイスを再起動してください。"</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"再起動"</string>
-    <string name="keywords_external_display" msgid="4181375057920134909">"ミラーリング, 外部ディスプレイ, ディスプレイの接続, USB ディスプレイ, 解像度, 回転"</string>
     <string name="external_display_on" msgid="2560104443500154333">"ON"</string>
     <string name="external_display_off" msgid="5634413756025351374">"OFF"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"外部ディスプレイ"</string>
@@ -2177,8 +2177,6 @@
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"フローティング ボタンをタップします"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"ユーザー補助操作"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"画面下部にあるユーザー補助機能ボタン <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> をタップします。機能を切り替えるには、ユーザー補助機能ボタンを長押しします。"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"2 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、2 本指で上にスワイプしたまま長押しします。"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"3 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、3 本指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{画面の下部から上にスワイプします。機能を切り替えるには、上にスワイプしたまま長押しします。}other{# 本の指で画面の下部から上にスワイプします。機能を切り替えるには、# 本の指で上にスワイプしたまま長押しします。}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"その他のオプション"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"「<xliff:g id="SERVICE">%1$s</xliff:g>」の詳細"</string>
@@ -2189,16 +2187,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"音量ボタン"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"音量ボタン"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"音量大と音量小の両方のボタンを長押しします"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"2 本の指で画面をダブルタップする"</string>
     <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"%1$d 本の指でダブルタップ"</string>
     <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"%1$d 本の指で画面をすばやく 2 回タップします"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"トリプルタップ"</string>
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"画面をすばやく %1$d 回タップします。デバイスの反応が遅くなる場合があります。"</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"%1$d 本の指でダブルタップ"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"2 本の指で画面を {0,number,integer} 回すばやくタップします"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"画面をトリプルタップ"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"トリプルタップ"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"画面をすばやく {0,number,integer} 回タップします。このショートカットを使うと、デバイスの動作が遅くなる場合があります"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"詳細設定"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"[ユーザー補助機能] ボタンが [<xliff:g id="SERVICE">%1$s</xliff:g>] に設定されています。拡大を使用するには、[ユーザー補助機能] ボタンを押し続けて [拡大] を選択してください。"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"ユーザー補助操作は「<xliff:g id="SERVICE">%1$s</xliff:g>」に設定されています。拡大を使用するには、2 本の指で画面の下から上にスワイプして長押しし、拡大を選択してください。"</string>
@@ -2367,6 +2361,7 @@
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"青 / 黄"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"グレースケール"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"強さ"</string>
+    <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"グレースケール モード選択時、または色補正が無効に設定されているときは使用できません"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"緑色弱、第二色弱"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"赤色弱、第一色弱"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"第三色弱"</string>
@@ -2416,15 +2411,8 @@
     <string name="color_cyan" msgid="4341758639597035927">"水色"</string>
     <string name="color_yellow" msgid="5957551912912679058">"黄"</string>
     <string name="color_magenta" msgid="8943538189219528423">"マゼンタ"</string>
-    <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g> にデバイスのフル コントロールを許可しますか？"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g>では以下が必要です。"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"アプリが許可リクエストを隠しているため、設定側でユーザーの応答を確認できません。"</string>
-    <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> はこのデバイスのフル コントロールをリクエストしています。これは、ユーザー補助を必要とするユーザーに代わって画面を読み上げたり操作したりするサービスです。大半のアプリに、このレベルのコントロールは適していません。"</string>
-    <string name="accessibility_service_warning_description" msgid="6573203795976134751">"フル コントロールは、ユーザー補助機能に対応しているアプリに最適です。多くのアプリではこの機能に対応していません。"</string>
-    <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"画面の表示と操作"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"画面上のすべてのコンテンツを読み取り、他のアプリの上にコンテンツを重ねて表示することができます。"</string>
-    <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"操作の表示と実行"</string>
-    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"アプリやハードウェア センサーの操作を記録したり、自動的にアプリを操作したりできます。"</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"許可"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"許可しない"</string>
     <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"OFF にする"</string>
@@ -3655,10 +3643,8 @@
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"その他の設定"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"このアプリ内でその他の設定を利用できます"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"通知のクールダウン"</string>
-    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
-    <skip />
-    <!-- no translation found for notification_polite_description (5497748284893832854) -->
-    <skip />
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"通知のクールダウンの使用"</string>
+    <string name="notification_polite_description" msgid="5497748284893832854">"短時間の間に通知が多く届いた場合に、最大 2 分間、デバイスが音量を下げて通知を最小限に抑えます。通話、アラーム、優先度の高い会話には影響しません。\n\nクールダウンの間に受信した通知は、画面上部から下にスワイプすると確認できます。"</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"仕事用プロファイルに適用する"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"仕事用プロファイルのアプリに適用する"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR ヘルパー サービス"</string>
@@ -3817,8 +3803,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{アプリは割り込み不可}=1{{app_1} が割り込み可能}=2{{app_1} と {app_2} が割り込み可能}=3{{app_1}、{app_2}、{app_3} が割り込み可能}other{{app_1}、{app_2}、他 # 個が割り込み可能}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g>（仕事用）"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"計算中…"</string>
-    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
-    <skip />
+    <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"アプリのオーバーライドを許可"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"割り込み可能なアプリ"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"他のアプリを選択"</string>
@@ -3836,8 +3821,7 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"割り込み可能なアラームなどはありません"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"割り込み可能なユーザーはいません"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"一部のユーザーが割り込み可能"</string>
-    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
-    <skip />
+    <string name="zen_mode_people_repeat_callers" msgid="4499084111069828761">"同一発信者による再着信は割り込み可能"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"すべてのユーザーが割り込み可能"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"同一番号からの再着信"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"同一番号からの再着信に割り込みを許可"</string>
@@ -3861,6 +3845,26 @@
     <string name="zen_mode_new_custom_title" msgid="321750898430776191">"モードの追加"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"カスタムモード"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"モード名"</string>
+    <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"カレンダーの予定"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"睡眠のスケジュール"</string>
+    <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"車の運転中"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"アプリにリンク済み"</string>
+    <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"<xliff:g id="APP_NAME">%1$s</xliff:g>の情報と設定"</string>
+    <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"<xliff:g id="APP_NAME">%1$s</xliff:g>によって管理されています"</string>
+    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"モードを無効にする"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"この機能を無効にすると、このモードは正常に機能しなくなり、設定も表示されなくなります。"</string>
+    <string name="zen_mode_action_disable" msgid="3552921561331044881">"無効にする"</string>
+    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"モードを有効にする"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"この機能を有効にすると、このモードはスケジュールに従って自動的に有効になります。"</string>
+    <string name="zen_mode_action_enable" msgid="1161480633223176531">"有効にする"</string>
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"通常のスケジュールに沿うモードを設定します"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"カレンダーの予定や招待の返答を同期するモードを設定します"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"心地よい眠りを習慣にできるよう、アラームを設定し、画面を暗くして、通知をブロックします。"</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"運転中の安全を向上させて、運転に集中できるようにします。"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"集中の妨げになるものをデバイスからブロックします"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"気を散らすものを排除して、静かな環境を作ります"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"デバイスの環境や設定をユーザーごとにカスタマイズします"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"大切な人やアプリからの通知のみ届くよう設定することで、割り込みを最小限に抑えます"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"警告"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"閉じる"</string>
     <string name="device_feedback" msgid="5351614458411688608">"このデバイスについてフィードバックを送信"</string>
@@ -4103,7 +4107,7 @@
     <string name="camera_gesture_title" msgid="5559439253128696180">"2回ひねる動作でカメラアプリを開く"</string>
     <string name="camera_gesture_desc" msgid="7557645057320805328">"手首を2回ひねる動作でカメラアプリを開きます"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"表示サイズ"</string>
-    <string name="screen_zoom_short_summary" msgid="756254364808639194">"すべてのサイズを変更します"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"全てのサイズを変更します"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"表示間隔、画面のズーム、スケール、拡大縮小"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"プレビュー"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"縮小"</string>
@@ -4847,9 +4851,8 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"バッテリー"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"設定パネル"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"フリーフォーム ウィンドウを有効にする"</string>
-    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"フリーフォーム ウィンドウのサポートを有効にします。"</string>
-    <string name="force_desktop_mode" msgid="8292039809783522466">"2 つ目のディスプレイでフリーフォーム ウィンドウを有効にする"</string>
-    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"2 つ目のディスプレイでのみフリーフォーム ウィンドウを有効にします。"</string>
+    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
+    <skip />
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"マルチウィンドウでのサイズ変更不可を有効にする"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"サイズ変更できないアプリをマルチウィンドウでも使用可能にします"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"フォースダークのオーバーライド"</string>
@@ -5024,7 +5027,6 @@
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"モバイルデータ"</string>
     <string name="wifi_scan_notify_message" msgid="1331238142061476869">"デバイスの利便性向上のため、アプリやサービスは、Wi-Fi が OFF の場合でもいつでも Wi-Fi ネットワークをスキャンすることができます。これは位置情報を使用する機能やサービスに特に役立ちます。この動作は Wi-Fi スキャンの設定で変更できます。"</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"変更"</string>
-    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"接続済み"</string>
     <string name="mobile_data_temp_connection_active" msgid="3430470299756236413">"一時的に接続されています"</string>
     <string name="mobile_data_temp_using" msgid="5211002380149434155">"一時的に <xliff:g id="SUBNAME">%1$s</xliff:g> を使用しています"</string>
@@ -5170,9 +5172,11 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"タブレットが装着されているときに画面に表示するものを選択してください。スクリーン セーバーを使用すると、デバイスの電力使用量が増えることがあります。"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"カスタマイズ"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> をカスタマイズ"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"従来のフリーフォームのウィンドウ処理のサポートを有効にするには、再起動が必要です。"</string>
-    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"フリーフォームのウィンドウ処理のサポートを変更するには、再起動が必要です。"</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"2 つ目のディスプレイでフリーフォームのウィンドウ処理を強制するには、再起動が必要です。"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"フリーフォーム ウィンドウ サポートを有効にするには、再起動が必要です。"</string>
+    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
+    <skip />
+    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
+    <skip />
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"今すぐ再起動する"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"後で再起動する"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"空間オーディオ"</string>
@@ -5403,5 +5407,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ストリームを聴く"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>で聴くには、音声ストリームの QR コードをスキャンします"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"共有中はパスワードを編集できません。パスワードを変更するには、まず音声の共有を OFF にしてください。"</string>
+    <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR コードスキャナ"</string>
     <string name="homepage_search" msgid="6759334912284663559">"検索設定"</string>
 </resources>
