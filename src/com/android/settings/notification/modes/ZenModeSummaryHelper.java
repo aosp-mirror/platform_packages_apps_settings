@@ -140,6 +140,14 @@ class ZenModeSummaryHelper {
     }
 
     String getMessagesSettingSummary(ZenPolicy policy) {
+        if (policy.getPriorityCategoryMessages() == STATE_ALLOW
+                && policy.getPriorityMessageSenders() == PEOPLE_TYPE_ANYONE) {
+            // Messages=anyone means anyone. Even if conversation senders is specially configured,
+            // saying "Anyone and priority conversations" 1) makes no sense and 2) is incorrect
+            // because conversations WILL get through by virtue of also being messages.
+            return mContext.getString(R.string.zen_mode_from_anyone);
+        }
+
         List<String> enabledCategories = getEnabledCategories(policy,
                 category -> PRIORITY_CATEGORY_MESSAGES == category
                         || PRIORITY_CATEGORY_CONVERSATIONS == category, true);
@@ -278,10 +286,11 @@ class ZenModeSummaryHelper {
                     continue;
                 }
 
-                // For conversations, only the "priority conversations" setting is relevant; any
-                // other setting is subsumed by the messages-specific messaging.
+                // For conversations, only the "all/priority conversations" settings are relevant;
+                // any other setting is subsumed by the messages-specific messaging.
                 if (category == PRIORITY_CATEGORY_CONVERSATIONS
                         && policy.isCategoryAllowed(PRIORITY_CATEGORY_CONVERSATIONS, false)
+                        && policy.getPriorityConversationSenders() != CONVERSATION_SENDERS_ANYONE
                         && policy.getPriorityConversationSenders()
                         != CONVERSATION_SENDERS_IMPORTANT) {
                     continue;
@@ -320,13 +329,20 @@ class ZenModeSummaryHelper {
             } else {
                 return mContext.getString(R.string.zen_mode_from_starred);
             }
-        } else if (category == PRIORITY_CATEGORY_CONVERSATIONS
-                && policy.getPriorityConversationSenders() == CONVERSATION_SENDERS_IMPORTANT) {
-            if (isFirst) {
-                return mContext.getString(R.string.zen_mode_from_important_conversations);
-            } else {
-                return mContext.getString(
-                        R.string.zen_mode_from_important_conversations_second);
+        } else if (category == PRIORITY_CATEGORY_CONVERSATIONS) {
+            if (policy.getPriorityConversationSenders() == CONVERSATION_SENDERS_IMPORTANT) {
+                if (isFirst) {
+                    return mContext.getString(R.string.zen_mode_from_important_conversations);
+                } else {
+                    return mContext.getString(
+                            R.string.zen_mode_from_important_conversations_second);
+                }
+            } else if (policy.getPriorityConversationSenders() == CONVERSATION_SENDERS_ANYONE) {
+                if (isFirst) {
+                    return mContext.getString(R.string.zen_mode_from_all_conversations);
+                } else {
+                    return mContext.getString(R.string.zen_mode_from_all_conversations_second);
+                }
             }
         } else if (category == PRIORITY_CATEGORY_EVENTS) {
             if (isFirst) {
