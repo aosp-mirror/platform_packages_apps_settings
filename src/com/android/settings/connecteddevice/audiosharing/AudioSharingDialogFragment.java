@@ -31,6 +31,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 
 import com.google.common.collect.Iterables;
 
@@ -76,7 +77,7 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
             @NonNull List<AudioSharingDeviceItem> deviceItems,
             @NonNull DialogEventListener listener,
             @NonNull Pair<Integer, Object>[] eventData) {
-        if (!AudioSharingUtils.isFeatureEnabled()) return;
+        if (!BluetoothUtils.isAudioSharingEnabled()) return;
         final FragmentManager manager;
         try {
             manager = host.getChildFragmentManager();

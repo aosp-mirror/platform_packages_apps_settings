@@ -31,3 +31,13 @@ flag {
   description: "Gates whether to enable bluetooth device details polish"
   bug: "343317785"
 }
+
+flag {
+  name: "disable_bonding_cancellation_for_orientation_change"
+  namespace: "cross_device_experiences"
+  description: "Stop cancelling bonding process when there is an orientation change"
+  bug: "349542301"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}

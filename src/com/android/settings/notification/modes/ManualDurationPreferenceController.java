@@ -18,6 +18,7 @@ package com.android.settings.notification.modes;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -49,12 +50,12 @@ public class ManualDurationPreferenceController extends AbstractZenModePreferenc
         return zenMode.isManualDnd();
     }
 
-    // Called by parent fragment onAttach().
+    // Called by parent fragment onStart().
     void registerSettingsObserver() {
         mSettingsObserver.register();
     }
 
-    // Called by parent fragment onDetach().
+    // Called by parent fragment onStop().
     void unregisterSettingsObserver() {
         mSettingsObserver.unregister();
     }
@@ -69,7 +70,7 @@ public class ManualDurationPreferenceController extends AbstractZenModePreferenc
     }
 
     @Override
-    public void updateState(Preference preference, ZenMode unusedZenMode) {
+    public void updateState(Preference preference, @NonNull ZenMode unusedZenMode) {
         // This controller is a link between a Settings value (ZEN_DURATION) and the manual DND
         // mode. The status of the zen mode object itself doesn't affect the preference
         // value, as that comes from settings; that value from settings will determine the
