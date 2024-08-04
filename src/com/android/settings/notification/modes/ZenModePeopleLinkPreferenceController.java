@@ -189,8 +189,7 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
                         : CONVERSATION_SENDERS_NONE;
         ImmutableList<ConversationChannelWrapper> conversationsAllowed = ImmutableList.of();
         if (conversationSendersAllowed == CONVERSATION_SENDERS_ANYONE) {
-            // TODO: b/354658240 - Need to handle CONVERSATION_SENDERS_ANYONE?
-            return;
+            conversationsAllowed = mHelperBackend.getAllConversations();
         } else if (conversationSendersAllowed == CONVERSATION_SENDERS_IMPORTANT) {
             conversationsAllowed = mHelperBackend.getImportantConversations();
         }
@@ -223,7 +222,7 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
                     peopleItem.conversation.getShortcutInfo(),
                     peopleItem.conversation.getPkg(),
                     peopleItem.conversation.getUid(),
-                    /* important= */ true);
+                    peopleItem.conversation.getNotificationChannel().isImportantConversation());
         } else {
             throw new IllegalArgumentException("Neither all nor contact nor conversation!");
         }
