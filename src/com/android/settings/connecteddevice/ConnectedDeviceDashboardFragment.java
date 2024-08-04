@@ -28,13 +28,13 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingDevicePreferenceController;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.HearingAidStatsLogUtils;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -87,7 +87,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                             + ", action : "
                             + action);
         }
-        if (AudioSharingUtils.isFeatureEnabled()) {
+        if (BluetoothUtils.isAudioSharingEnabled()) {
             use(AudioSharingDevicePreferenceController.class).init(this);
         }
         use(AvailableMediaDeviceGroupController.class).init(this);

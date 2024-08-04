@@ -5456,9 +5456,9 @@
     <!-- Title for the preference to show a tile for a particular feature in the Quick Settings pane. [CHAR LIMIT=NONE] -->
     <string name="enable_quick_setting">Show in Quick Settings</string>
     <!-- Title shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_title">Red-green</string>
+    <string name="daltonizer_mode_deuteranomaly_title">Red-green, green weak</string>
     <!-- Title shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_title">Red-green</string>
+    <string name="daltonizer_mode_protanomaly_title">Red-green, red weak</string>
     <!-- Title shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_tritanomaly_title">Blue-yellow</string>
     <!-- Title shown for grayscale [CHAR LIMIT=45] -->
@@ -5468,9 +5468,9 @@
     <!-- The summary shown for settings that controls color correction intensity/saturation level. It is shown when intensity slider is grayed out and is not usable and it explains why it's not usable to the user. [CHAR LIMIT=NONE] -->
     <string name="daltonizer_saturation_unavailable_summary">Unavailable for grayscale mode or when color correction is disabled</string>
     <!-- Summary shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_summary">Green weak, deuteranomaly</string>
+    <string name="daltonizer_mode_deuteranomaly_summary">Deuteranomaly</string>
     <!-- Summary shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_summary">Red weak, protanomaly</string>
+    <string name="daltonizer_mode_protanomaly_summary">Protanomaly</string>
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_tritanomaly_summary">Tritanomaly</string>
 
@@ -7955,24 +7955,28 @@
     <!-- Zen Modes: Title for the Modes option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_modes_list_title">Priority Modes</string>
 
+    <!-- Zen Modes: Intro text describing the feature. [CHAR LIMIT=NONE]-->
+    <string name="zen_modes_list_intro">Minimize distractions and take control of your attention with modes for sleep, work, driving, and everything in between.</string>
+
     <!-- Zen Modes: Caption of the "add a mode" item in the modes list -->
-    <string name="zen_modes_add_mode">Add a mode</string>
+    <string name="zen_modes_add_mode">Create your own mode</string>
 
     <!-- Zen Modes: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
     <string name="zen_mode_settings_summary">Only get notified by important people and apps</string>
 
     <!-- Zen Modes: Option to add an automatic schedule for a mode. [CHAR_LIMIT=40] -->
-    <string name="zen_mode_select_schedule">Select activation type</string>
+    <string name="zen_mode_select_schedule">Set a schedule</string>
+
+    <!-- Priority Modes: Title of the dialog used to choose an automatic schedule for a mode. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_select_schedule_title">Schedule based on</string>
 
     <!-- Priority Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
-    <string name="zen_mode_select_schedule_time">Time</string>
+    <string name="zen_mode_select_schedule_time">Day and time</string>
     <!-- Priority Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
-    <string name="zen_mode_select_schedule_time_example">Ex. \"9:30 – 5:00 PM\"</string>
+    <string name="zen_mode_select_schedule_time_example">\"9 AM - 5 PM weekdays\"</string>
 
     <!-- Priority Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
-    <string name="zen_mode_select_schedule_calendar">Calendar</string>
-    <!-- Priority Modes: Example text for the option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=60] -->
-    <string name="zen_mode_select_schedule_calendar_example">Ex. \"Personal calendar\"</string>
+    <string name="zen_mode_select_schedule_calendar">Calendar events</string>
 
     <!-- Priority Modes: Short text that indicates that a mode is currently on (active). [CHAR_LIMIT=10] -->
     <string name="zen_mode_active_text">ON</string>
@@ -7991,6 +7995,15 @@
 
     <!-- Priority Modes: Option to add a "custom" mode in the "Add a mode" dialog. [CHAR_LIMIT=20] -->
     <string name="zen_mode_new_option_custom">Custom</string>
+
+    <!-- Priority Modes: Caption of the button to turn on a mode [CHAR LIMIT=20] -->
+    <string name="zen_mode_action_activate">Turn on now</string>
+
+    <!-- Priority Modes: Caption of the button to turn off a currently active mode [CHAR LIMIT=20] -->
+    <string name="zen_mode_action_deactivate">Turn off</string>
+
+    <!-- Priority Modes: Text to display if a mode isn't found [CHAR LIMIT=40] -->
+    <string name="zen_mode_not_found_text">Mode not found</string>
 
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
@@ -8029,28 +8042,23 @@
     <string name="zen_mode_automatic_rule_settings_page_title">Schedule</string>
 
     <!-- Do not disturb: Title for settings section describing when the rule turns on automatically [CHAR LIMIT=30] -->
-    <string name="zen_mode_automatic_trigger_title">Turn on automatically</string>
+    <string name="zen_mode_automatic_trigger_title">When to turn on automatically</string>
 
-    <!-- Do not disturb: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
-    <string name="zen_mode_set_calendar_title">Add a calendar</string>
-
-    <!-- Do not disturb: Link text prompting a user to click through to setting a calendar [CHAR LIMIT=40] -->
-    <string name="zen_mode_set_calendar_link">Use your calendar</string>
-
-    <!-- Do not disturb: Title on the page where users choose a calendar to determine the schedule for an automatically-triggered DND rule. [CHAR LIMIT=30] -->
-    <string name="zen_mode_set_calendar_category_title">Schedule</string>
+    <!-- Priority Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <string name="zen_mode_set_calendar_title">Event schedule</string>
+    <!-- Priority Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <string name="zen_mode_set_calendar_which_calendar">Turn on during events for</string>
+    <!-- Priority Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <string name="zen_mode_set_calendar_which_reply">Where invite reply is</string>
 
     <!-- Do not disturb: Title prompting a user to set a time-based schedule to use for an automatic rule [CHAR LIMIT=30] -->
-    <string name="zen_mode_set_schedule_title">Set a schedule</string>
+    <string name="zen_mode_set_schedule_title">Time schedule</string>
 
     <!-- Do not disturb: Link text prompting a user to click through to setting a time-based schedule [CHAR LIMIT=40] -->
     <string name="zen_mode_set_schedule_link">Schedule</string>
 
     <!-- Duration in hours and minutes for the length of a Do Not Disturb schedule. For example "1 hr, 22 min" -->
     <string name="zen_mode_schedule_duration"><xliff:g example="10" id="hours">%1$d</xliff:g> hr, <xliff:g example="20" id="minutes">%2$d</xliff:g> min</string>
-
-    <!-- Priority Modes: Label for switch to enable/disable a rule turning on automatically; links to an app-provided configuration page [CHAR LIMIT=40] -->
-    <string name="zen_mode_configuration_link_title">Turn on automatically</string>
 
     <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_category_title">Schedule</string>
@@ -8080,9 +8088,9 @@
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
     <!-- Priority Modes: mode page section title [CHAR LIMIT=80] -->
-    <string name="mode_interruption_filter_title">Stay focused</string>
+    <string name="mode_interruption_filter_title">Notification filters</string>
     <!-- Priority Modes: mode page section title [CHAR LIMIT=80] -->
-    <string name="mode_device_effects_title">Additional actions</string>
+    <string name="mode_device_effects_title">More settings</string>
 
     <!-- Summary for the Sound Do not Disturb option when DND isn't currently on. [CHAR LIMIT=NONE]-->
     <string name="modes_sound_summary_off">
@@ -8133,7 +8141,7 @@
         }
     </string>
     <!-- Modes: setting for whether the mode should filter (silence/hide) notifications/volume streams -->
-    <string name="mode_notification_filter_title">Filter interruptions</string>
+    <string name="mode_notification_filter_title">Limit what can notify you</string>
     <!-- Modes: subtext when a mode is not filtering (silence/hide) notifications/volume streams -->
     <string name="mode_no_notification_filter">No interruptions are filtered</string>
 
@@ -9169,6 +9177,8 @@
     <!-- [CHAR LIMIT=120] Zen mode settings: Title for conversations settings page -->
     <string name="zen_mode_conversations_title">Conversations</string>
     <string name="zen_mode_from_all_conversations">All conversations</string>
+    <!-- [CHAR LIMIT=40] Version of zen_mode_from_all_conversations when it is a non-first member of a list -->
+    <string name="zen_mode_from_all_conversations_second">all conversations</string>
     <string name="zen_mode_from_important_conversations">Priority conversations</string>
     <!-- [CHAR LIMIT=40] Version of the above for "priority conversations" when it is a non-first member of a list -->
     <string name="zen_mode_from_important_conversations_second">priority conversations</string>
@@ -9430,7 +9440,7 @@
     <string name="zen_mode_rename_title">Edit mode</string>
 
     <!-- Priority Modes: Title for the "add mode" screen [CHAR LIMIT=20] -->
-    <string name="zen_mode_new_custom_title">Add mode</string>
+    <string name="zen_mode_new_custom_title">Create a mode</string>
 
     <!-- Priority Modes: Default name for new custom modes [CHAR LIMIT=30] -->
     <string name="zen_mode_new_custom_default_name">Custom mode</string>
@@ -9441,26 +9451,26 @@
     <!-- Priority Modes: Trigger title for modes of type SCHEDULE_CALENDAR. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_schedule_calendar">Calendar events</string>
     <!-- Priority Modes: Trigger title for modes of type BEDTIME. [CHAR LIMIT=30] -->
-    <string name="zen_mode_trigger_title_bedtime">Sleep schedule</string>
+    <string name="zen_mode_trigger_title_bedtime">Bedtime routine</string>
     <!-- Priority Modes: Trigger title for modes of type DRIVING. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_driving">While driving</string>
     <!-- Priority Modes: Generic trigger title for modes of other types [CHAR LIMIT=30] -->
-    <string name="zen_mode_trigger_title_generic">Linked to app</string>
+    <string name="zen_mode_trigger_title_generic">App settings</string>
     <!-- Priority Modes: Generic trigger summary for modes where the owner app did not provide a triggerDescription but did provide a configurationActivity to call [CHAR LIMIT=60] -->
     <string name="zen_mode_trigger_summary_settings_in_app">Info and settings in <xliff:g id="app_name" example="The Awesome App">%1$s</xliff:g></string>
     <!-- Priority Modes: Generic trigger summary for modes where the owner app did not provide neither a triggerDescription nor a configurationActivity to call [CHAR LIMIT=60] -->
     <string name="zen_mode_trigger_summary_managed_by_app">Managed by <xliff:g id="app_name" example="The Awesome App">%1$s</xliff:g></string>
 
-    <!-- Priority Modes: Title of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=30] -->
-    <string name="zen_mode_confirm_disable_title">Disable Mode</string>
+    <!-- Priority Modes: Title of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=20] -->
+    <string name="zen_mode_confirm_disable_mode_title">Disable <xliff:g id="mode_name" example="Driving Mode">%1$s</xliff:g>?</string>
     <!-- Priority Modes: Message body of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_confirm_disable_message">If you disable this feature, the mode will no longer work as intended and its settings will be hidden.</string>
+    <string name="zen_mode_confirm_disable_message">This mode will never turn on when disabled</string>
     <!-- Priority Modes: Button to disable a mode [CHAR LIMIT=20] -->
     <string name="zen_mode_action_disable">Disable</string>
-    <!-- Priority Modes: Title of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=30] -->
-    <string name="zen_mode_confirm_enable_title">Enable Mode</string>
+    <!-- Priority Modes: Title of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=20] -->
+    <string name="zen_mode_confirm_enable_mode_title">Enable <xliff:g id="mode_name" example="Driving Mode">%1$s</xliff:g>?</string>
     <!-- Priority Modes: Message body of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_confirm_enable_message">If you enable this feature, the mode will activate automatically according to its schedule.</string>
+    <string name="zen_mode_confirm_enable_message">This mode may turn on automatically based on its settings</string>
     <!-- Priority Modes: Button to disable a mode [CHAR LIMIT=20] -->
     <string name="zen_mode_action_enable">Enable</string>
 

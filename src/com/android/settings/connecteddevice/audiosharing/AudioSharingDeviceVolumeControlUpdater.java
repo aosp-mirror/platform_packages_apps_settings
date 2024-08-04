@@ -67,7 +67,7 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
             // If device is LE audio device and in a sharing session on current sharing device,
             // it would show in volume control group.
             if (cachedDevice.isConnectedLeAudioDevice()
-                    && AudioSharingUtils.isBroadcasting(mBtManager)
+                    && BluetoothUtils.isBroadcasting(mBtManager)
                     && BluetoothUtils.hasConnectedBroadcastSource(cachedDevice, mBtManager)) {
                 isFilterMatched = true;
             }
@@ -103,11 +103,11 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
                         @Override
                         public void onStopTrackingTouch(SeekBar seekBar) {
                             int progress = seekBar.getProgress();
-                            int groupId = AudioSharingUtils.getGroupId(cachedDevice);
+                            int groupId = BluetoothUtils.getGroupId(cachedDevice);
                             if (groupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID
                                     && groupId
-                                            == AudioSharingUtils.getFallbackActiveGroupId(
-                                                    mContext)) {
+                                            == BluetoothUtils.getPrimaryGroupIdForBroadcast(
+                                                    mContext.getContentResolver())) {
                                 // Set media stream volume for primary buds, audio manager will
                                 // update all buds volume in the audio sharing.
                                 setAudioManagerStreamVolume(progress);
