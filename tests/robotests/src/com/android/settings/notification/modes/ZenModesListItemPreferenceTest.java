@@ -22,7 +22,6 @@ import android.app.Flags;
 import android.content.Context;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.service.notification.ZenModeConfig;
 
 import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
@@ -94,14 +93,10 @@ public class ZenModesListItemPreferenceTest {
 
     @Test
     public void setZenMode_modeDisabledByApp() {
-        ZenModeConfig.ZenRule configRule = new ZenModeConfig.ZenRule();
-        configRule.enabled = false;
-        configRule.disabledOrigin = ZenModeConfig.UPDATE_ORIGIN_APP;
         ZenMode mode = new TestModeBuilder()
                 .setName("Mode disabled by app")
                 .setTriggerDescription("When the cat's away")
-                .setEnabled(false)
-                .setConfigZenRule(configRule)
+                .setEnabled(false, /* byUser= */ false)
                 .build();
 
         ZenModesListItemPreference preference = new ZenModesListItemPreference(mContext, mode);
@@ -114,14 +109,10 @@ public class ZenModesListItemPreferenceTest {
 
     @Test
     public void setZenMode_modeDisabledByUser() {
-        ZenModeConfig.ZenRule configRule = new ZenModeConfig.ZenRule();
-        configRule.enabled = false;
-        configRule.disabledOrigin = ZenModeConfig.UPDATE_ORIGIN_USER;
         ZenMode mode = new TestModeBuilder()
                 .setName("Mode disabled by user")
                 .setTriggerDescription("When the Levee Breaks")
-                .setEnabled(false)
-                .setConfigZenRule(configRule)
+                .setEnabled(false, /* byUser= */ true)
                 .build();
 
         ZenModesListItemPreference preference = new ZenModesListItemPreference(mContext, mode);
