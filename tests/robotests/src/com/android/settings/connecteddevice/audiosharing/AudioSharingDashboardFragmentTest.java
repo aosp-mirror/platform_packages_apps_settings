@@ -21,10 +21,12 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -52,6 +54,7 @@ public class AudioSharingDashboardFragmentTest {
 
     @Mock private SettingsActivity mActivity;
     @Mock private SettingsMainSwitchBar mSwitchBar;
+    @Mock private View mView;
     @Mock private AudioSharingDeviceVolumeGroupController mVolumeGroupController;
     @Mock private AudioSharingCallAudioPreferenceController mCallAudioController;
     @Mock private AudioSharingPlaySoundPreferenceController mPlaySoundController;
@@ -61,6 +64,7 @@ public class AudioSharingDashboardFragmentTest {
 
     @Before
     public void setUp() {
+        when(mSwitchBar.getRootView()).thenReturn(mView);
         mFragment = new AudioSharingDashboardFragment();
     }
 

@@ -48,7 +48,8 @@
             app:layout_constrainedWidth="true"
             app:layout_constraintHorizontal_bias="0"
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Medium"
-            android:text="@string/zen_mode_start_time" />
+            android:text="@string/zen_mode_start_time"
+            android:importantForAccessibility="no" />
 
         <!-- Start time display + setter -->
         <TextView
@@ -85,7 +86,8 @@
             app:layout_constrainedWidth="true"
             app:layout_constraintHorizontal_bias="0"
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Medium"
-            android:text="@string/zen_mode_end_time" />
+            android:text="@string/zen_mode_end_time"
+            android:importantForAccessibility="no" />
 
         <!-- End time setter; right-aligned -->
         <TextView

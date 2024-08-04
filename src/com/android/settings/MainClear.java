@@ -188,7 +188,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                     false /* biometricsAuthenticationRequested */,
                     userId)) {
                 Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRICS_REQUEST,
-                        userId);
+                        userId, false /* hideBackground */);
                 return;
             }
         }

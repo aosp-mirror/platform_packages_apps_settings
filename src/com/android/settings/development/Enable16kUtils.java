@@ -78,7 +78,6 @@ public class Enable16kUtils {
         try (BufferedReader br = new BufferedReader(new FileReader("/proc/mounts"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                Log.i(TAG, line);
                 final String[] fields = line.split(" ");
                 final String partition = fields[1];
                 final String fsType = fields[2];

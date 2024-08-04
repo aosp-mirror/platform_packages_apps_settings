@@ -37,7 +37,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.PrimarySwitchPreference;
@@ -53,6 +52,8 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
     private final PackageManager mPackageManager;
     private final ConfigurationActivityHelper mConfigurationActivityHelper;
     private final ZenServiceListing mServiceListing;
+
+    private String mModeName;
 
     ZenModeTriggerUpdatePreferenceController(Context context, String key,
             ZenModesBackend backend) {
@@ -78,18 +79,12 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen, @NonNull ZenMode zenMode) {
-        // Preload approved components, but only for the package that owns the rule (since it's the
-        // only package that can have a valid configurationActivity).
-        mServiceListing.loadApprovedComponents(zenMode.getRule().getPackageName());
-    }
-
-    @Override
     void updateState(Preference preference, @NonNull ZenMode zenMode) {
         if (!isAvailable(zenMode)) {
             return;
         }
 
+        mModeName = zenMode.getName();
         PrimarySwitchPreference triggerPref = (PrimarySwitchPreference) preference;
         triggerPref.setChecked(zenMode.getRule().isEnabled());
         triggerPref.setOnPreferenceChangeListener(mSwitchChangeListener);
@@ -137,6 +132,7 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
     @SuppressLint("SwitchIntDef")
     private void setUpForAppTrigger(Preference preference, ZenMode mode) {
         // App-owned mode may have triggerDescription, configurationActivity, or both/neither.
+        mServiceListing.loadApprovedComponents(mode.getRule().getPackageName());
         Intent configurationIntent =
                 mConfigurationActivityHelper.getConfigurationActivityIntentForMode(
                         mode, mServiceListing::findService);
@@ -196,15 +192,15 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
     };
 
     private void confirmChangeEnabled(Preference preference, boolean enabled) {
-        @StringRes int title = enabled ? R.string.zen_mode_confirm_enable_title
-                : R.string.zen_mode_confirm_disable_title;
+        @StringRes int titleFormat = enabled ? R.string.zen_mode_confirm_enable_mode_title
+                : R.string.zen_mode_confirm_disable_mode_title;
         @StringRes int message = enabled ? R.string.zen_mode_confirm_enable_message
                 : R.string.zen_mode_confirm_disable_message;
         @StringRes int confirmButton = enabled ? R.string.zen_mode_action_enable
                 : R.string.zen_mode_action_disable;
 
         new AlertDialog.Builder(mContext)
-                .setTitle(title)
+                .setTitle(mContext.getString(titleFormat, mModeName))
                 .setMessage(message)
                 .setPositiveButton(confirmButton,
                         (dialog, which) -> setModeEnabled(enabled))

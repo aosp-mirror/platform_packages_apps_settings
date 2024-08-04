@@ -21,8 +21,11 @@ import static android.provider.Settings.Global.ZEN_MODE_OFF;
 import static android.service.notification.Condition.SOURCE_UNKNOWN;
 import static android.service.notification.Condition.STATE_TRUE;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_ANYONE;
+import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_IMPORTANT;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_ANYONE;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_CONTACTS;
+import static android.service.notification.ZenPolicy.PEOPLE_TYPE_NONE;
+import static android.service.notification.ZenPolicy.PEOPLE_TYPE_STARRED;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_AMBIENT;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_LIGHTS;
 
@@ -121,6 +124,59 @@ public class ZenModesSummaryHelperTest {
                 .build();
 
         assertThat(mSummaryHelper.getPeopleSummary(policy)).isEqualTo("All people can interrupt");
+    }
+
+    @Test
+    public void getMessagesSettingSummary_allMessages() {
+        ZenPolicy policy1 = new ZenPolicy.Builder()
+                .allowMessages(PEOPLE_TYPE_ANYONE)
+                .build();
+        ZenPolicy policy2 = new ZenPolicy.Builder()
+                .allowMessages(PEOPLE_TYPE_ANYONE)
+                .allowConversations(CONVERSATION_SENDERS_IMPORTANT)
+                .build();
+        ZenPolicy policy3 = new ZenPolicy.Builder()
+                .allowMessages(PEOPLE_TYPE_ANYONE)
+                .allowConversations(CONVERSATION_SENDERS_ANYONE)
+                .build();
+
+        assertThat(mSummaryHelper.getMessagesSettingSummary(policy1)).isEqualTo("Anyone");
+        assertThat(mSummaryHelper.getMessagesSettingSummary(policy2)).isEqualTo("Anyone");
+        assertThat(mSummaryHelper.getMessagesSettingSummary(policy3)).isEqualTo("Anyone");
+    }
+
+    @Test
+    public void getMessagesSettingSummary_noMessagesButSomeConversations() {
+        ZenPolicy policy1 = new ZenPolicy.Builder()
+                .allowMessages(PEOPLE_TYPE_NONE)
+                .allowConversations(CONVERSATION_SENDERS_IMPORTANT)
+                .build();
+        ZenPolicy policy2 = new ZenPolicy.Builder()
+                .allowMessages(PEOPLE_TYPE_NONE)
+                .allowConversations(CONVERSATION_SENDERS_ANYONE)
+                .build();
+
+        assertThat(mSummaryHelper.getMessagesSettingSummary(policy1)).isEqualTo(
+                "Priority conversations");
+        assertThat(mSummaryHelper.getMessagesSettingSummary(policy2)).isEqualTo(
+                "All conversations");
+    }
+
+    @Test
+    public void getMessagesSettingSummary_contactsAndConversations() {
+        ZenPolicy policy1 = new ZenPolicy.Builder()
+                .allowMessages(PEOPLE_TYPE_STARRED)
+                .allowConversations(CONVERSATION_SENDERS_IMPORTANT)
+                .build();
+        ZenPolicy policy2 = new ZenPolicy.Builder()
+                .allowMessages(PEOPLE_TYPE_STARRED)
+                .allowConversations(CONVERSATION_SENDERS_ANYONE)
+                .build();
+
+        assertThat(mSummaryHelper.getMessagesSettingSummary(policy1)).isEqualTo(
+                "Starred contacts and priority conversations");
+        assertThat(mSummaryHelper.getMessagesSettingSummary(policy2)).isEqualTo(
+                "Starred contacts and all conversations");
     }
 
     @Test

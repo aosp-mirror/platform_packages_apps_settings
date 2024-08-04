@@ -23,7 +23,6 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -77,7 +76,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             // It would show in Available Devices group if the audio sharing flag is disabled or
             // the device is not in the audio sharing session.
             if (cachedDevice.isConnectedLeAudioDevice()) {
-                if (AudioSharingUtils.isFeatureEnabled()
+                if (BluetoothUtils.isAudioSharingEnabled()
                         && BluetoothUtils.hasConnectedBroadcastSource(
                                 cachedDevice, mLocalBtManager)) {
                     Log.d(
