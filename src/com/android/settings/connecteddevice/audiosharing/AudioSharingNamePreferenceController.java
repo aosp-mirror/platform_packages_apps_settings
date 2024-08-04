@@ -16,7 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.isBroadcasting;
+import static com.android.settingslib.bluetooth.BluetoothUtils.isBroadcasting;
 
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcast;
@@ -174,7 +174,7 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        return AudioSharingUtils.isFeatureEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return BluetoothUtils.isAudioSharingEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

@@ -147,7 +147,7 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                 mBiometricsAuthenticationRequested, mUserId)) {
             mBiometricsAuthenticationRequested = true;
             Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
-                    mUserId);
+                    mUserId, true /* hideBackground */);
         }
 
         updateUnlockPhonePreferenceSummary();
@@ -166,7 +166,7 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                 && mGkPwHandle != 0L) {
             mBiometricsAuthenticationRequested = true;
             Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
-                    mUserId);
+                    mUserId, true /* hideBackground */);
         }
         if (!mConfirmCredential) {
             mDoNotFinishActivity = false;

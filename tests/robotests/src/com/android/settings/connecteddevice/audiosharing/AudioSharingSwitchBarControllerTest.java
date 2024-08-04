@@ -51,6 +51,8 @@ import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.FeatureFlagUtils;
 import android.util.Pair;
+import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.CompoundButton;
 
 import androidx.fragment.app.DialogFragment;
@@ -378,9 +380,7 @@ public class AudioSharingSwitchBarControllerTest {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of());
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
         assertThat(mSwitchBar.isChecked()).isFalse();
@@ -392,9 +392,7 @@ public class AudioSharingSwitchBarControllerTest {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, false);
         when(mBtnView.isEnabled()).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of());
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
         verify(mBroadcast).startPrivateBroadcast();
@@ -405,9 +403,7 @@ public class AudioSharingSwitchBarControllerTest {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice1));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1));
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
         verify(mBroadcast).startPrivateBroadcast();
@@ -437,9 +433,7 @@ public class AudioSharingSwitchBarControllerTest {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController =
                 new AudioSharingSwitchBarController(
@@ -469,9 +463,7 @@ public class AudioSharingSwitchBarControllerTest {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
         verify(mBroadcast).startPrivateBroadcast();
@@ -599,5 +591,27 @@ public class AudioSharingSwitchBarControllerTest {
         mController.mBroadcastAssistantCallback.onSourceFound(metadata);
         mController.mBroadcastAssistantCallback.onSourceLost(/* broadcastId= */ 1);
         verifyNoMoreInteractions(mFeatureFactory.metricsFeatureProvider);
+    }
+
+    @Test
+    public void testAccessibilityDelegate() {
+        View view = new View(mContext);
+        AccessibilityEvent event =
+                new AccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED);
+        event.setContentChangeTypes(AccessibilityEvent.CONTENT_CHANGE_TYPE_UNDEFINED);
+        assertThat(
+                        mSwitchBar
+                                .getRootView()
+                                .getAccessibilityDelegate()
+                                .onRequestSendAccessibilityEvent(mSwitchBar, view, event))
+                .isTrue();
+
+        event.setContentChangeTypes(AccessibilityEvent.CONTENT_CHANGE_TYPE_ENABLED);
+        assertThat(
+                        mSwitchBar
+                                .getRootView()
+                                .getAccessibilityDelegate()
+                                .onRequestSendAccessibilityEvent(mSwitchBar, view, event))
+                .isFalse();
     }
 }

@@ -26,7 +26,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeAudioContentMetadata;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -277,9 +276,7 @@ public class AudioStreamsHelper {
             Log.w(TAG, "getConnectedBluetoothDevices(): LeBroadcastAssistant is null!");
             return emptyList();
         }
-        List<BluetoothDevice> connectedDevices =
-                leBroadcastAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED});
+        List<BluetoothDevice> connectedDevices = leBroadcastAssistant.getAllConnectedDevices();
         Optional<CachedBluetoothDevice> cachedBluetoothDevice =
                 inSharingOnly
                         ? getCachedBluetoothDeviceInSharing(manager)

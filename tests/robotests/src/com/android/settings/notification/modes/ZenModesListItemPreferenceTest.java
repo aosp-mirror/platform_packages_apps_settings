@@ -18,13 +18,16 @@ package com.android.settings.notification.modes;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.Flags;
 import android.content.Context;
-import android.service.notification.ZenModeConfig;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -33,7 +36,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
+@EnableFlags(Flags.FLAG_MODES_UI)
 public class ZenModesListItemPreferenceTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
 
@@ -87,14 +93,10 @@ public class ZenModesListItemPreferenceTest {
 
     @Test
     public void setZenMode_modeDisabledByApp() {
-        ZenModeConfig.ZenRule configRule = new ZenModeConfig.ZenRule();
-        configRule.enabled = false;
-        configRule.disabledOrigin = ZenModeConfig.UPDATE_ORIGIN_APP;
         ZenMode mode = new TestModeBuilder()
                 .setName("Mode disabled by app")
                 .setTriggerDescription("When the cat's away")
-                .setEnabled(false)
-                .setConfigZenRule(configRule)
+                .setEnabled(false, /* byUser= */ false)
                 .build();
 
         ZenModesListItemPreference preference = new ZenModesListItemPreference(mContext, mode);
@@ -107,14 +109,10 @@ public class ZenModesListItemPreferenceTest {
 
     @Test
     public void setZenMode_modeDisabledByUser() {
-        ZenModeConfig.ZenRule configRule = new ZenModeConfig.ZenRule();
-        configRule.enabled = false;
-        configRule.disabledOrigin = ZenModeConfig.UPDATE_ORIGIN_USER;
         ZenMode mode = new TestModeBuilder()
                 .setName("Mode disabled by user")
                 .setTriggerDescription("When the Levee Breaks")
-                .setEnabled(false)
-                .setConfigZenRule(configRule)
+                .setEnabled(false, /* byUser= */ true)
                 .build();
 
         ZenModesListItemPreference preference = new ZenModesListItemPreference(mContext, mode);

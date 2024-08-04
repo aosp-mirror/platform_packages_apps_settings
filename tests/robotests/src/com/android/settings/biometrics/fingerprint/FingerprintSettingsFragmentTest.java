@@ -40,6 +40,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.ComponentInfoInternal;
@@ -67,6 +68,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
@@ -113,6 +115,8 @@ public class FingerprintSettingsFragmentTest {
     private FingerprintManager mFingerprintManager;
     @Mock
     private FragmentTransaction mFragmentTransaction;
+    @Mock
+    private PackageManager mPackageManager;
     @Mock
     private BiometricManager mBiometricManager;
 
@@ -281,6 +285,16 @@ public class FingerprintSettingsFragmentTest {
         doReturn(false).when(mFingerprintManager).isHardwareDetected();
         setUpFragment(false);
         assertThat(mFragment.isVisible()).isTrue();
+    }
+
+    @Test
+    public void testNotIndexable_whenDisabled() {
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(false)
+                .when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
+
+        final BaseSearchIndexProvider provider = FingerprintSettingsFragment.SEARCH_INDEX_DATA_PROVIDER;
+        assertThat(provider.getDynamicRawDataToIndex(mContext, true)).isEmpty();
     }
 
     @Ignore("b/353726774")

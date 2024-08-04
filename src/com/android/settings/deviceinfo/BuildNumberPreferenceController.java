@@ -55,6 +55,7 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
     static final int REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF = 100;
+    static final int REQUEST_IDENTITY_CHECK_FOR_DEV_PREF = 101;
 
     private Activity mActivity;
     private InstrumentedPreferenceFragment mFragment;
@@ -217,10 +218,24 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
      * @return if activity result is handled.
      */
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode != REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF) {
+        if (requestCode != REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF
+                && requestCode != REQUEST_IDENTITY_CHECK_FOR_DEV_PREF) {
             return false;
         }
-        if (resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF
+                && resultCode == Activity.RESULT_OK) {
+            final int userId = mContext.getUserId();
+            if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
+                    false /* biometricsSuccessfullyAuthenticated */,
+                    false /* biometricsAuthenticationRequested */,
+                    userId)) {
+                Utils.launchBiometricPromptForMandatoryBiometrics(mFragment,
+                        REQUEST_IDENTITY_CHECK_FOR_DEV_PREF, userId, false /* hideBackground */);
+            } else {
+                enableDevelopmentSettings();
+            }
+        } else if (requestCode == REQUEST_IDENTITY_CHECK_FOR_DEV_PREF
+                && resultCode == Activity.RESULT_OK) {
             enableDevelopmentSettings();
         }
         mProcessingLastDevHit = false;

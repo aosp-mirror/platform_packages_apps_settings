@@ -25,6 +25,8 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceManager;
@@ -34,19 +36,24 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
 
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class KeyboardBounceKeyPreferenceControllerTest {
-
     private static final String KEY_ACCESSIBILITY_BOUNCE_KEYS =
             Settings.Secure.ACCESSIBILITY_BOUNCE_KEYS;
     private static final int UNKNOWN = -1;
 
+    @Rule
+    public final SetFlagsRule mSetFlagRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private final SwitchPreference mSwitchPreference = spy(new SwitchPreference(mContext));
     private final KeyboardBounceKeyPreferenceController mController =
@@ -130,5 +137,27 @@ public class KeyboardBounceKeyPreferenceControllerTest {
         assertThat(Settings.Secure.getInt(
                 mContext.getContentResolver(), KEY_ACCESSIBILITY_BOUNCE_KEYS,
                 UNKNOWN)).isNotEqualTo(OFF);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void updateNonIndexableKeys_physicalKeyboardExists_returnEmptyList() {
+        Assume.assumeTrue(AccessibilitySettings.isAnyHardKeyboardsExist());
+
+        List<String> nonIndexableKeys = new ArrayList<>();
+        mController.updateNonIndexableKeys(nonIndexableKeys);
+
+        assertThat(nonIndexableKeys).isEmpty();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void updateNonIndexableKeys_noPhysicalKeyboard_returnPreKey() {
+        Assume.assumeFalse(AccessibilitySettings.isAnyHardKeyboardsExist());
+
+        List<String> nonIndexableKeys = new ArrayList<>();
+        mController.updateNonIndexableKeys(nonIndexableKeys);
+
+        assertThat(nonIndexableKeys).contains(mController.getPreferenceKey());
     }
 }

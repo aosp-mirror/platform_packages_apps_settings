@@ -38,6 +38,8 @@ import android.os.BatteryUsageStats;
 import android.os.LocaleList;
 import android.os.UserHandle;
 
+import androidx.core.util.Pair;
+
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotEntity;
@@ -384,8 +386,9 @@ public final class ConvertUtilsTest {
                         /* cachedUsageConsumePower= */ 1.5);
         BatteryOptimizationModeCache optimizationModeCache =
                 new BatteryOptimizationModeCache(mContext);
-        optimizationModeCache.mBatteryOptimizeModeCacheMap.put(
-                (int) batteryDiffEntry.mUid, BatteryOptimizationMode.MODE_OPTIMIZED);
+        optimizationModeCache.mBatteryOptimizeModeCache.put(
+                (int) batteryDiffEntry.mUid,
+                Pair.create(BatteryOptimizationMode.MODE_OPTIMIZED, false));
 
         final BatteryUsageDiff batteryUsageDiff =
                 ConvertUtils.convertToBatteryUsageDiff(batteryDiffEntry, optimizationModeCache);
@@ -408,6 +411,7 @@ public final class ConvertUtilsTest {
         assertThat(batteryUsageDiff.getKey()).isEqualTo("key");
         assertThat(batteryUsageDiff.getAppOptimizationMode())
                 .isEqualTo(BatteryOptimizationMode.MODE_OPTIMIZED);
+        assertThat(batteryUsageDiff.getIsAppOptimizationModeMutable()).isFalse();
         assertThat(batteryUsageDiff.hasPackageName()).isFalse();
         assertThat(batteryUsageDiff.hasLabel()).isFalse();
     }

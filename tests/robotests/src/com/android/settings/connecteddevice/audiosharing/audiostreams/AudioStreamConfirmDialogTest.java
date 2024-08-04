@@ -219,7 +219,7 @@ public class AudioStreamConfirmDialogTest {
     public void showDialog_noMetadata() {
         List<BluetoothDevice> devices = new ArrayList<>();
         devices.add(mBluetoothDevice);
-        when(mAssistant.getDevicesMatchingConnectionStates(any())).thenReturn(devices);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
         when(mBluetoothDevice.getAlias()).thenReturn(DEVICE_NAME);
 
         FragmentController.setupFragment(
@@ -267,7 +267,7 @@ public class AudioStreamConfirmDialogTest {
     public void showDialog_invalidMetadata() {
         List<BluetoothDevice> devices = new ArrayList<>();
         devices.add(mBluetoothDevice);
-        when(mAssistant.getDevicesMatchingConnectionStates(any())).thenReturn(devices);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
         when(mBluetoothDevice.getAlias()).thenReturn(DEVICE_NAME);
 
         Intent intent = new Intent();
@@ -318,7 +318,7 @@ public class AudioStreamConfirmDialogTest {
     public void showDialog_confirmListen() {
         List<BluetoothDevice> devices = new ArrayList<>();
         devices.add(mBluetoothDevice);
-        when(mAssistant.getDevicesMatchingConnectionStates(any())).thenReturn(devices);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
         when(mBluetoothDevice.getAlias()).thenReturn("");
 
         Intent intent = new Intent();
