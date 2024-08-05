@@ -29,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
@@ -47,6 +48,7 @@ constructor(
 
     private var telephonyManager = context.getSystemService(TelephonyManager::class.java)!!
     private val carrierConfigRepository = CarrierConfigRepository(context)
+    private val roamingSearchItem = RoamingSearchItem(context)
 
     fun init(fragmentManager: FragmentManager, subId: Int) {
         this.fragmentManager = fragmentManager
@@ -54,14 +56,8 @@ constructor(
         telephonyManager = telephonyManager.createForSubscriptionId(subId)
     }
 
-    override fun getAvailabilityStatus(): Int {
-        if (!SubscriptionManager.isValidSubscriptionId(subId)) return CONDITIONALLY_UNAVAILABLE
-        val isForceHomeNetwork =
-            carrierConfigRepository.getBoolean(
-                subId, CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL)
-
-        return if (isForceHomeNetwork) CONDITIONALLY_UNAVAILABLE else AVAILABLE
-    }
+    override fun getAvailabilityStatus() =
+        if (roamingSearchItem.isAvailable(subId)) AVAILABLE else CONDITIONALLY_UNAVAILABLE
 
     @Composable
     override fun Content() {
@@ -101,5 +97,17 @@ constructor(
 
     companion object {
         private const val DIALOG_TAG = "MobileDataDialog"
+
+        class RoamingSearchItem(context: Context) : MobileNetworkSettingsSearchItem {
+            override val key = "button_roaming_key"
+            override val title: String = context.getString(R.string.roaming)
+
+            private val carrierConfigRepository = CarrierConfigRepository(context)
+
+            override fun isAvailable(subId: Int): Boolean =
+                SubscriptionManager.isValidSubscriptionId(subId) &&
+                    !carrierConfigRepository.getBoolean(
+                        subId, CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL)
+        }
     }
 }
