@@ -23,6 +23,7 @@ import com.android.settings.R
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MmsMessagePreferenceController.Companion.MmsMessageSearchItem
 import com.android.settings.network.telephony.NrAdvancedCallingPreferenceController.Companion.NrAdvancedCallingSearchItem
+import com.android.settings.network.telephony.RoamingPreferenceController.Companion.RoamingSearchItem
 import com.android.settings.spa.SpaSearchLanding.BundleValue
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingFragment
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingKey
@@ -111,6 +112,7 @@ class MobileNetworkSettingsSearchIndex(
 
         fun createSearchItems(context: Context): List<MobileNetworkSettingsSearchItem> =
             listOf(
+                RoamingSearchItem(context),
                 MmsMessageSearchItem(context),
                 NrAdvancedCallingSearchItem(context),
             )
