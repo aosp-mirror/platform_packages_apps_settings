@@ -106,7 +106,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         mProfileManager = mManager.getProfileManager();
         mCachedDevice = device;
         mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
-        lifecycle.addObserver(this);
     }
 
     @Override
