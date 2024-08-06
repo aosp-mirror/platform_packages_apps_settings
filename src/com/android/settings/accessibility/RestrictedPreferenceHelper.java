@@ -128,7 +128,13 @@ public class RestrictedPreferenceHelper {
             AccessibilityActivityPreference preference = new AccessibilityActivityPreference(
                     mContext, componentName.getPackageName(), activityInfo.applicationInfo.uid,
                     info);
-            setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
+            if (Flags.neverRestrictAccessibilityActivity()) {
+                // Accessibility Activities do not have elevated privileges so restricting
+                // them based on ECM or device admin does not give any value.
+                preference.setEnabled(true);
+            } else {
+                setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
+            }
             preferenceList.add(preference);
         }
         return preferenceList;
