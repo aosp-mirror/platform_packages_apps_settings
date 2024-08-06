@@ -729,7 +729,20 @@ public class UserDetailsSettingsTest {
     public void initialize_restrictUserSelected_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedUser();
         ShadowUserManager.setIsMultipleAdminEnabled(true);
+        // target user has DISALLOW_GRANT_ADMIN restriction
         mUserManager.setUserRestriction(mUserInfo.getUserHandle(),
+                UserManager.DISALLOW_GRANT_ADMIN, true);
+        mFragment.initialize(mActivity, mArguments);
+        verify(mFragment).removePreference(KEY_GRANT_ADMIN);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_UNICORN_MODE_REFACTORING_FOR_HSUM_READ_ONLY)
+    public void initialize_currentUserRestrict_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
+        setupSelectedUser();
+        ShadowUserManager.setIsMultipleAdminEnabled(true);
+        // current user has DISALLOW_GRANT_ADMIN restriction
+        mUserManager.setUserRestriction(mContext.getUser(),
                 UserManager.DISALLOW_GRANT_ADMIN, true);
         mFragment.initialize(mActivity, mArguments);
         verify(mFragment).removePreference(KEY_GRANT_ADMIN);
