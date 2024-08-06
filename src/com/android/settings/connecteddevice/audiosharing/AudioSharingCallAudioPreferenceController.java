@@ -66,7 +66,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /** PreferenceController to control the dialog to choose the active device for calls and alarms */
 public class AudioSharingCallAudioPreferenceController extends AudioSharingBasePreferenceController
         implements BluetoothCallback {
-    private static final String TAG = "CallsAndAlarmsPreferenceController";
+    private static final String TAG = "CallAudioPrefController";
     private static final String PREF_KEY = "calls_and_alarms";
 
     @VisibleForTesting
@@ -85,7 +85,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     private final ContentObserver mSettingsObserver;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     @Nullable private Fragment mFragment;
-    Map<Integer, List<CachedBluetoothDevice>> mGroupedConnectedDevices = new HashMap<>();
+    Map<Integer, List<BluetoothDevice>> mGroupedConnectedDevices = new HashMap<>();
     private List<AudioSharingDeviceItem> mDeviceItemsInSharingSession = new ArrayList<>();
     private final AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
 
@@ -210,17 +210,18 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                                                     "Skip set fallback active device: unchanged");
                                             return;
                                         }
-                                        List<CachedBluetoothDevice> devices =
+                                        List<BluetoothDevice> devices =
                                                 mGroupedConnectedDevices.getOrDefault(
                                                         item.getGroupId(), ImmutableList.of());
                                         CachedBluetoothDevice lead =
-                                                AudioSharingUtils.getLeadDevice(devices);
+                                                AudioSharingUtils.getLeadDevice(
+                                                        mCacheManager, devices);
                                         if (lead != null) {
                                             Log.d(
                                                     TAG,
                                                     "Set fallback active device: "
                                                             + lead.getDevice()
-                                                            .getAnonymizedAddress());
+                                                                    .getAnonymizedAddress());
                                             lead.setActive();
                                             logCallAudioDeviceChange(currentGroupId, lead);
                                         } else {
@@ -347,8 +348,8 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
      */
     private void updateSummary() {
         updateDeviceItemsInSharingSession();
-        int fallbackActiveGroupId = BluetoothUtils.getPrimaryGroupIdForBroadcast(
-                mContext.getContentResolver());
+        int fallbackActiveGroupId =
+                BluetoothUtils.getPrimaryGroupIdForBroadcast(mContext.getContentResolver());
         if (fallbackActiveGroupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
             for (AudioSharingDeviceItem item : mDeviceItemsInSharingSession) {
                 if (item.getGroupId() == fallbackActiveGroupId) {
