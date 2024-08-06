@@ -65,8 +65,7 @@
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"기기 연결을 해제하겠습니까?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"새 기기와 페어링"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"블루투스"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_title (2203993262483477532) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"내일 자동 사용 설정"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"오른쪽 보청기 페어링"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"왼쪽 보청기 페어링"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"반대쪽 보청기 페어링"</string>
@@ -281,7 +280,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"위치"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"위치 사용"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"사용 안함"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{사용 - 앱 #개가 위치에 액세스할 수 있음}other{사용 - 앱 #개가 위치에 액세스할 수 있음}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{사용 - 앱 #개가 위치 정보에 액세스할 수 있음}other{사용 - 앱 #개가 위치 정보에 액세스할 수 있음}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"로드 중…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"근처 기기 액세스 권한이 있는 앱은 연결된 기기 간의 상대적인 위치를 파악할 수 있습니다."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"앱 및 서비스에 대한 위치 정보 액세스가 사용 중지되어 있습니다. 그래도 긴급 전화번호로 전화를 걸거나 문자 메시지를 보내면 기기의 위치 정보가 긴급 구조원에게 전달될 수 있습니다."</string>
@@ -663,7 +662,7 @@
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"보안을 강화하려면 예비로 사용할 화면 잠금을 설정하세요."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"예비로 사용할 화면 잠금 방식을 선택하세요"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"화면 잠금을 잊어버린 경우 IT 관리자가 초기화할 수 없습니다."</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"별도의 직장 프로필 잠금을 설정하세요."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"별도의 직장 프로필 잠금을 설정하기"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"이 화면 잠금을 잊은 경우 IT 관리자에게 재설정을 요청하세요."</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"화면 잠금 옵션"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"화면 잠금 옵션"</string>
@@ -3009,7 +3008,7 @@
     <string name="user_category_title" msgid="4368580529662699083">"사용자"</string>
     <string name="other_user_category_title" msgid="7089976887307643217">"다른 사용자"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"게스트 활동 삭제"</string>
-    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"게스트 모드 종료 시 모든 게스트 앱 및 데이터 삭제"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"게스트 모드 종료 시 모든 게스트 앱 및 데이터를 삭제합니다."</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"게스트 활동을 삭제하시겠습니까?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"현재 게스트 세션의 앱과 데이터가 지금 삭제되고 이후 모든 게스트 활동은 게스트 모드를 종료할 때마다 삭제됩니다."</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"삭제, 게스트, 활동, 제거, 데이터, 방문자, 지우기"</string>
@@ -3321,8 +3320,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{없음}=1{예약 1개 설정됨}other{예약 #개 설정됨}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"방해 금지 모드"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"우선순위 모드"</string>
-    <!-- no translation found for zen_modes_add_mode (4806287336036228772) -->
-    <skip />
+    <string name="zen_modes_add_mode" msgid="4806287336036228772">"모드 추가"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"중요한 사람과 앱의 알림만 받기"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"방해 요소 제한"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"방해 금지 모드 사용 설정"</string>
@@ -3570,7 +3568,7 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"기기가 잠금 해제되어 있을 때 화면 상단에 알림 배너 표시"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"모든 ‘<xliff:g id="APP_NAME">%1$s</xliff:g>’ 알림"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"모든 <xliff:g id="APP_NAME">%1$s</xliff:g> 알림"</string>
-    <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{매일 알림 약 #개}other{매일 알림 약 #개}}"</string>
+    <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{하루에 약 #개의 알림 수신}other{하루에 약 #개의 알림 수신}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{매주 알림 약 #개}other{매주 알림 약 #개}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"전송하지 않음"</string>
     <string name="manage_notification_access_title" msgid="4154723216570646451">"알림 읽기, 답장하기, 관리하기"</string>
@@ -3597,7 +3595,7 @@
     <string name="notif_type_ongoing" msgid="135675014223627555">"실시간"</string>
     <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"사용 중인 앱, 내비게이션, 전화 통화 등의 진행 중인 통신 유형"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"대화"</string>
-    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, 문자 메시지 및 기타 통신 유형"</string>
+    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, 문자 메시지 등의 커뮤니케이션 유형"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"알림"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"설정에 따라 벨소리나 진동이 울릴 수 있음"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"무음"</string>
@@ -3610,12 +3608,9 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"이 앱은 향상된 설정을 지원하지 않습니다."</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"기타 설정"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"앱 안에서 추가 설정을 볼 수 있음"</string>
-    <!-- no translation found for notification_polite_title (4737150709382859870) -->
-    <skip />
-    <!-- no translation found for notification_polite_main_control_title (7267191551379543859) -->
-    <skip />
-    <!-- no translation found for notification_polite_description (7749280535620291610) -->
-    <skip />
+    <string name="notification_polite_title" msgid="4737150709382859870">"적응형 알림"</string>
+    <string name="notification_polite_main_control_title" msgid="7267191551379543859">"적응형 알림 사용"</string>
+    <string name="notification_polite_description" msgid="7749280535620291610">"짧은 시간 내에 많은 알림을 받으면 휴대전화에서 볼륨을 낮추고 최대 2분간 화면에 표시되는 팝업을 최소화합니다. 통화, 알람, 우선순위 대화의 경우 여전히 진동 또는 소리가 울리거나 화면에 표시되며 화면 상단을 아래로 당기면 모든 알림을 간편하게 확인할 수 있습니다."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"직장 프로필에 적용"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"직장 프로필 앱에 적용"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 도우미 서비스"</string>
@@ -3771,8 +3766,7 @@
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"선택한 앱"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"없음"</string>
     <string name="zen_mode_apps_all_apps" msgid="705700582778445484">"모두"</string>
-    <!-- no translation found for zen_mode_apps_subtext (1764211974662012877) -->
-    <skip />
+    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{예외 앱 없음}=1{{app_1} 예외}=2{{app_1} 및 {app_2} 예외}=3{{app_1}, {app_2}, {app_3} 예외}other{{app_1}, {app_2} 외 #가지 예외}}"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"앱에서 무시하도록 허용"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"예외 앱"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"앱 추가 선택"</string>
