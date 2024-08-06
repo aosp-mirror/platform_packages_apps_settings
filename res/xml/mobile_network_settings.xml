@@ -202,10 +202,12 @@
             android:title="@string/call_category"
             settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController">
 
+            <!-- Settings search is handled by WifiCallingSearchItem. -->
             <Preference
                 android:key="wifi_calling"
                 android:title="@string/wifi_calling_settings_title"
                 android:summary="@string/wifi_calling_summary"
+                settings:searchable="false"
                 settings:controller="com.android.settings.network.telephony.WifiCallingPreferenceController">
                 <intent android:action="android.intent.action.MAIN"
                         android:targetPackage="com.android.settings"
