@@ -67,7 +67,12 @@ class ZenModesListItemPreference extends RestrictedPreference {
     }
 
     public void setZenMode(ZenMode zenMode) {
+        ZenMode previous = mZenMode;
         mZenMode = zenMode;
+        if (zenMode.equals(previous)) {
+            return;
+        }
+
         setTitle(mZenMode.getName());
         CharSequence statusText = switch (mZenMode.getStatus()) {
             case ENABLED_AND_ACTIVE ->
