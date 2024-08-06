@@ -62,7 +62,6 @@ public class ZenModeTimePickerFragment extends InstrumentedDialogFragment implem
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - set correct metrics category (or decide to keep this one?)
         return SettingsEnums.DIALOG_ZEN_TIMEPICKER;
     }
 

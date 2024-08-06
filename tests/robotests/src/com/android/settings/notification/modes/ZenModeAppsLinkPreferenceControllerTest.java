@@ -34,6 +34,7 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Flags;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -163,7 +164,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         assertThat(launcherIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo("com.android.settings.notification.modes.ZenModeAppsFragment");
         assertThat(launcherIntent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
-                -1)).isEqualTo(0);
+                -1)).isEqualTo(SettingsEnums.ZEN_PRIORITY_MODE);
 
         Bundle bundle = launcherIntent.getBundleExtra(
                 SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);

@@ -20,6 +20,7 @@ import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -93,10 +94,9 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
-        // TODO(b/332937635): Update metrics category
         preference.setIntent(
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModeAppsFragment.class,
-                        zenMode.getId(), 0).toIntent());
+                        zenMode.getId(), SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
         preference.setEnabled(zenMode.isEnabled());
 
         mZenMode = zenMode;

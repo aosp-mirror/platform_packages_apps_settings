@@ -25,6 +25,7 @@ import static android.app.AutomaticZenRule.TYPE_THEATER;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.app.ActionBar;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -164,7 +165,8 @@ public class SetupInterstitialActivity extends FragmentActivity {
             // they happen to go back. Forward the activity result in case we got here (indirectly)
             // from some app that is waiting for the result.
             if (updated) {
-                ZenSubSettingLauncher.forMode(this, modeId)
+                ZenSubSettingLauncher.forModeFragment(this, ZenModeFragment.class, modeId,
+                                SettingsEnums.ZEN_MODE_INTERSTITIAL)
                         .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).launch();
             }
             finish();
