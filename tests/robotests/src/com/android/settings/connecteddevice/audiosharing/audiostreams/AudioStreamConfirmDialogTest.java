@@ -23,7 +23,6 @@ import static com.android.settings.connecteddevice.audiosharing.audiostreams.Aud
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
