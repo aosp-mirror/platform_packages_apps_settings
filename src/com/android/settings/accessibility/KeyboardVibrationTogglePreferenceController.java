@@ -29,7 +29,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.VibrationAttributes;
 import android.os.Vibrator;
-import android.os.vibrator.Flags;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -110,8 +109,7 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        if (Flags.keyboardCategoryEnabled()
-                && mContext.getResources().getBoolean(
+        if (mContext.getResources().getBoolean(
                         com.android.internal.R.bool.config_keyboardVibrationSettingsSupported)) {
             return AVAILABLE;
         }
