@@ -61,7 +61,7 @@ import java.util.Random;
 
 @RunWith(RobolectricTestRunner.class)
 @EnableFlags(Flags.FLAG_MODES_UI)
-public class ZenModesSummaryHelperTest {
+public class ZenModeSummaryHelperTest {
     private static final int WORK_PROFILE_ID = 3;
 
     private Context mContext;
@@ -489,7 +489,7 @@ public class ZenModesSummaryHelperTest {
     }
 
     @Test
-    public void getModesSummary_noRulesActive_countsOnlyAutomaticModes() {
+    public void getModesSummary_noRulesActive_countsOnlyEnabledAutomaticModes() {
         ImmutableList<ZenMode> modes = ImmutableList.of(
                 TestModeBuilder.MANUAL_DND_INACTIVE, // Not automatic
                 new TestModeBuilder().setName("Auto 1").build(), // App provided automatic
@@ -499,6 +499,10 @@ public class ZenModesSummaryHelperTest {
                         .setType(AutomaticZenRule.TYPE_OTHER)
                         .setConditionId(ZenModeConfig.toCustomManualConditionId())
                         .build(), // Custom manual, not automatic
+                new TestModeBuilder()
+                        .setName("Disabled 1")
+                        .setEnabled(false)
+                        .build(), // Would be automatic, but it's disabled.
                 new TestModeBuilder()
                         .setName("Sleep")
                         .setPackage(SystemZenRules.PACKAGE_ANDROID)
