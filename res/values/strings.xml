@@ -7984,6 +7984,26 @@
     <!-- Priority Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_calendar">Calendar events</string>
 
+    <!-- Priority Modes: Summary for the modes segment, when at least one mode is active. [CHAR LIMIT=NONE]-->
+    <string name="zen_modes_summary_some_active">
+        {count, plural, offset:2
+            =0    {}
+            =1    {{mode_1} is active}
+            =2    {{mode_1} and {mode_2} are active}
+            =3    {{mode_1}, {mode_2}, and {mode_3} are active}
+            other {{mode_1}, {mode_2}, and # more are active}
+        }
+    </string>
+
+    <!-- Priority Modes: Summary for the modes segment, when no modes are active. [CHAR LIMIT=NONE]-->
+    <string name="zen_modes_summary_none_active">
+        {count, plural,
+            =0    {}
+            =1    {1 mode can turn on automatically}
+            other {# modes can turn on automatically}
+        }
+    </string>
+
     <!-- Priority Modes: Short text that indicates that a mode is currently on (active). [CHAR_LIMIT=10] -->
     <string name="zen_mode_active_text">ON</string>
 
