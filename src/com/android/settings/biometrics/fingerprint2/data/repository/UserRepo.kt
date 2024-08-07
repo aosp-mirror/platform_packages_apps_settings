@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.domain.interactor
+package com.android.settings.biometrics.fingerprint2.data.repository
 
-import android.view.MotionEvent
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
-interface TouchEventInteractor {
+/**
+ * A repository responsible for indicating the current user.
+ */
+interface UserRepo {
+    /**
+     * This flow indicates the current user.
+     */
+    val currentUser: Flow<Int>
+}
 
-  /** A flow simulating user touches. */
-  val touchEvent: Flow<MotionEvent>
+class UserRepoImpl(val currUser: Int): UserRepo {
+    override val currentUser: Flow<Int> = flowOf(currUser)
 }

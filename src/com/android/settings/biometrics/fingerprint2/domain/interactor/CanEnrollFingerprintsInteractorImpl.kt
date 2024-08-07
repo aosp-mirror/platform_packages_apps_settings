@@ -16,11 +16,16 @@
 
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
-import android.view.MotionEvent
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintEnrollmentRepository
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.CanEnrollFingerprintsInteractor
 import kotlinx.coroutines.flow.Flow
 
-interface TouchEventInteractor {
-
-  /** A flow simulating user touches. */
-  val touchEvent: Flow<MotionEvent>
+class CanEnrollFingerprintsInteractorImpl(
+  val fingerprintEnrollmentRepository: FingerprintEnrollmentRepository
+) : CanEnrollFingerprintsInteractor {
+  override val canEnrollFingerprints: Flow<Boolean> = fingerprintEnrollmentRepository.canEnrollUser
+  /** Indicates the maximum fingerprints enrollable for a given user */
+  override fun maxFingerprintsEnrollable(): Int {
+    return fingerprintEnrollmentRepository.maxFingerprintsEnrollable()
+  }
 }

@@ -22,6 +22,7 @@ import android.os.CancellationSignal
 import android.util.Log
 import com.android.settings.biometrics.fingerprint2.conversion.Util.toEnrollError
 import com.android.settings.biometrics.fingerprint2.conversion.Util.toOriginalReason
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrollFingerprintInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintFlow
@@ -34,24 +35,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.update
 
-/** This repository is responsible for collecting all state related to the enroll API. */
-interface FingerprintEnrollInteractor {
-
-  /**
-   * By calling this function, [fingerEnrollState] will begin to be populated with data on success.
-   */
-  suspend fun enroll(
-    hardwareAuthToken: ByteArray?,
-    enrollReason: EnrollReason,
-    fingerprintEnrollOptions: FingerprintEnrollOptions,
-  ): Flow<FingerEnrollState>
-}
-
-class FingerprintEnrollInteractorImpl(
+class EnrollFingerprintInteractorImpl(
   private val userId: Int,
-  private val fingerprintManager: FingerprintManager?,
+  private val fingerprintManager: FingerprintManager,
   private val fingerprintFlow: FingerprintFlow,
-) : FingerprintEnrollInteractor {
+) : EnrollFingerprintInteractor {
   private val enrollRequestOutstanding = MutableStateFlow(false)
 
   override suspend fun enroll(
@@ -134,7 +122,7 @@ class FingerprintEnrollInteractorImpl(
 
     val cancellationSignal = CancellationSignal()
 
-    fingerprintManager?.enroll(
+    fingerprintManager.enroll(
       hardwareAuthToken,
       cancellationSignal,
       userId,

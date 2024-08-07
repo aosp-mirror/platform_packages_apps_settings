@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.domain.interactor
+package com.android.settings.biometrics.fingerprint2.lib.domain.interactor
 
-import android.view.MotionEvent
-import kotlinx.coroutines.flow.Flow
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
 
-interface TouchEventInteractor {
-
-  /** A flow simulating user touches. */
-  val touchEvent: Flow<MotionEvent>
+/** Interactor responsible for coordinating authentication. */
+interface AuthenitcateInteractor {
+  /** Runs the authenticate flow */
+  suspend fun authenticate(): FingerprintAuthAttemptModel
 }

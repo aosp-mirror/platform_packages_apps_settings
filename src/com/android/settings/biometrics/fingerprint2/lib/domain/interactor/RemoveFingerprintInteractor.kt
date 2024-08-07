@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.domain.interactor
+package com.android.settings.biometrics.fingerprint2.lib.domain.interactor
 
-import android.view.MotionEvent
-import kotlinx.coroutines.flow.Flow
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 
-interface TouchEventInteractor {
-
-  /** A flow simulating user touches. */
-  val touchEvent: Flow<MotionEvent>
+/** Interactor in charge of removing a fingerprint */
+interface RemoveFingerprintInteractor {
+  /**
+   * Removes the given fingerprint, returning true if it was successfully removed and false
+   * otherwise
+   */
+  suspend fun removeFingerprint(fp: FingerprintData): Boolean
 }

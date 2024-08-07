@@ -16,7 +16,6 @@
 
 package com.android.settings.biometrics.fingerprint2.data.repository
 
-import android.graphics.Point
 import android.view.MotionEvent
 import kotlinx.coroutines.flow.Flow
 

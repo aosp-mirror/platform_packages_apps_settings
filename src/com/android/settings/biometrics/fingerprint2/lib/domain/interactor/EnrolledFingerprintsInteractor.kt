@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.domain.interactor
+package com.android.settings.biometrics.fingerprint2.lib.domain.interactor
 
-import android.view.MotionEvent
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import kotlinx.coroutines.flow.Flow
 
-interface TouchEventInteractor {
-
-  /** A flow simulating user touches. */
-  val touchEvent: Flow<MotionEvent>
+/** Interface to obtain the enrolled fingerprints */
+interface EnrolledFingerprintsInteractor {
+  /** Returns the list of current fingerprints. */
+  val enrolledFingerprints: Flow<List<FingerprintData>?>
 }

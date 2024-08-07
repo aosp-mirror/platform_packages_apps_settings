@@ -24,7 +24,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.settings.SettingsApplication
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.GenerateChallengeInteractor
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -50,7 +50,7 @@ sealed interface GatekeeperInfo {
  * in as a parameter to this class.
  */
 class FingerprintGatekeeperViewModel(
-  private val fingerprintManagerInteractor: FingerprintManagerInteractor
+  private val generateChallengeInteractor: GenerateChallengeInteractor
 ) : ViewModel() {
 
   private var _gatekeeperInfo: MutableStateFlow<GatekeeperInfo?> = MutableStateFlow(null)
@@ -78,7 +78,7 @@ class FingerprintGatekeeperViewModel(
       _gatekeeperInfo.update { GatekeeperInfo.Invalid }
     } else {
       viewModelScope.launch {
-        val res = fingerprintManagerInteractor.generateChallenge(theGatekeeperPasswordHandle!!)
+        val res = generateChallengeInteractor.generateChallenge(theGatekeeperPasswordHandle!!)
         _gatekeeperInfo.update { GatekeeperInfo.GatekeeperPasswordInfo(res.second, res.first) }
         if (shouldStartTimer) {
           startTimeout()
@@ -119,7 +119,7 @@ class FingerprintGatekeeperViewModel(
         val settingsApplication =
           this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as SettingsApplication
         val biometricEnvironment = settingsApplication.biometricEnvironment
-        FingerprintGatekeeperViewModel(biometricEnvironment!!.fingerprintManagerInteractor)
+        FingerprintGatekeeperViewModel(biometricEnvironment!!.createGenerateChallengeInteractor())
       }
     }
   }
