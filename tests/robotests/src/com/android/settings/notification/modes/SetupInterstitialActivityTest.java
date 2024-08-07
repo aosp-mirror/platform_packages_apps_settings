@@ -82,6 +82,41 @@ public class SetupInterstitialActivityTest {
     }
 
     @Test
+    public void invalidIntent_doesNotQueryBackend() {
+        // Mode is set up sensibly
+        ZenMode mode = new TestModeBuilder().setId(MODE_ID).setEnabled(false).build();
+        when(mBackend.getMode(MODE_ID)).thenReturn(mode);
+
+        // but the intent is lacking the zen mode extra
+        ActivityScenario<SetupInterstitialActivity> scenario =
+                ActivityScenario.launch(new Intent(Intent.ACTION_MAIN)
+                        .setClass(RuntimeEnvironment.getApplication(),
+                                SetupInterstitialActivity.class));
+        // creating the scenario takes it through onResume(), which would query the backend if
+        // it had mode data.
+        scenario.onActivity(activity -> {
+            assertThat(activity.isFinishing()).isTrue();
+            verify(mBackend, never()).getMode(any());
+        });
+        scenario.close();
+    }
+
+    @Test
+    public void invalidModeId_doesNotCrash() {
+        when(mBackend.getMode(MODE_ID)).thenReturn(null);
+        ActivityScenario<SetupInterstitialActivity> scenario =
+                ActivityScenario.launch(new Intent(Intent.ACTION_MAIN)
+                        .setClass(RuntimeEnvironment.getApplication(),
+                                SetupInterstitialActivity.class)
+                        .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, MODE_ID));
+        // do nothing, but it would crash if attempting to work with a null mode at any point
+        scenario.onActivity(activity -> {
+            assertThat(activity.isFinishing()).isTrue();
+        });
+        scenario.close();
+    }
+
+    @Test
     public void enableButton_enablesModeAndRedirectsToModePage() {
         ZenMode mode = new TestModeBuilder().setId(MODE_ID).setEnabled(false).build();
         when(mBackend.getMode(MODE_ID)).thenReturn(mode);
