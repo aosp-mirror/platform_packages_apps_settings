@@ -115,18 +115,21 @@ public class SetupInterstitialActivity extends FragmentActivity {
         if (intent == null) {
             Log.w(TAG, "no intent found for modes interstitial");
             finish();
+            return;
         }
 
         String modeId = intent.getStringExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID);
         if (modeId == null) {
             Log.w(TAG, "no mode id included in intent: " + intent);
             finish();
+            return;
         }
 
         ZenMode mode = mBackend.getMode(modeId);
         if (mode == null) {
             Log.w(TAG, "mode not found for mode id: " + modeId);
             finish();
+            return;
         }
         setTitle(mode.getName());
 
@@ -237,11 +240,11 @@ public class SetupInterstitialActivity extends FragmentActivity {
             // Don't come back to this activity after sending the user to the modes page, if
             // they happen to go back. Forward the activity result in case we got here (indirectly)
             // from some app that is waiting for the result.
-            finish();
             if (updated) {
                 ZenSubSettingLauncher.forMode(this, modeId)
                         .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).launch();
             }
+            finish();
         };
     }
 
