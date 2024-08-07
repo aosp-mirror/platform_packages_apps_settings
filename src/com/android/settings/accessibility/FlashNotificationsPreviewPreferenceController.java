@@ -110,7 +110,7 @@ public class FlashNotificationsPreviewPreferenceController extends
         if (preference == null) {
             return;
         }
-        preference.setEnabled(FlashNotificationsUtil.getFlashNotificationsState(mContext)
+        preference.setVisible(FlashNotificationsUtil.getFlashNotificationsState(mContext)
                 != FlashNotificationsUtil.State.OFF);
     }
 }
