@@ -314,7 +314,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             return result;
         }
         for (CachedBluetoothDevice cachedItem : mAllOfCachedDevices) {
-            List<LocalBluetoothProfile> tmpResult = cachedItem.getConnectableProfiles();
+            List<LocalBluetoothProfile> tmpResult = cachedItem.getUiAccessibleProfiles();
             for (LocalBluetoothProfile profile : tmpResult) {
                 if (mProfileDeviceMap.containsKey(profile.toString())) {
                     mProfileDeviceMap.get(profile.toString()).add(cachedItem);
