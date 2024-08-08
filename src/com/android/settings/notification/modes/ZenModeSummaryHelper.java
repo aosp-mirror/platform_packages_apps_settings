@@ -42,13 +42,10 @@ import static android.service.notification.ZenPolicy.VISUAL_EFFECT_STATUS_BAR;
 
 import android.content.Context;
 import android.icu.text.MessageFormat;
-import android.provider.Settings;
 import android.service.notification.ZenDeviceEffects;
-import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
 import android.service.notification.ZenPolicy.ConversationSenders;
 import android.service.notification.ZenPolicy.PeopleType;
-import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -496,32 +493,36 @@ class ZenModeSummaryHelper {
         return msgFormat.format(args);
     }
 
-    String getSoundSummary(int zenMode, ZenModeConfig config) {
-        if (zenMode != Settings.Global.ZEN_MODE_OFF) {
-            String description = ZenModeConfig.getDescription(mContext, true, config, false);
+    String getModesSummary(List<ZenMode> modes) {
+        List<ZenMode> activeModes = modes.stream().filter(ZenMode::isActive).toList();
 
-            if (description == null) {
-                return mContext.getString(R.string.zen_mode_sound_summary_on);
-            } else {
-                return mContext.getString(R.string.zen_mode_sound_summary_on_with_info,
-                        description);
-            }
-        } else {
-            int count = 0;
-            final ArrayMap<String, ZenModeConfig.ZenRule> ruleMap = config.automaticRules;
-            if (ruleMap != null) {
-                for (ZenModeConfig.ZenRule rule : ruleMap.values()) {
-                    if (rule != null && rule.enabled) {
-                        count++;
-                    }
+        if (!activeModes.isEmpty()) {
+            MessageFormat msgFormat = new MessageFormat(
+                    mContext.getString(R.string.zen_modes_summary_some_active),
+                    Locale.getDefault());
+
+            Map<String, Object> args = new HashMap<>();
+            args.put("count", activeModes.size());
+            args.put("mode_1", activeModes.get(0).getName());
+            if (activeModes.size() >= 2) {
+                args.put("mode_2", activeModes.get(1).getName());
+                if (activeModes.size() == 3) {
+                    args.put("mode_3", activeModes.get(2).getName());
                 }
             }
+
+            return msgFormat.format(args);
+        } else {
+            int automaticModeCount = (int) modes.stream()
+                    .filter(m -> m.isEnabled() && !m.isManualDnd() && !m.isCustomManual())
+                    .count();
+
             MessageFormat msgFormat = new MessageFormat(
-                    mContext.getString(R.string.modes_sound_summary_off),
+                    mContext.getString(R.string.zen_modes_summary_none_active),
                     Locale.getDefault());
-            Map<String, Object> msgArgs = new HashMap<>();
-            msgArgs.put("count", count);
+            Map<String, Object> msgArgs = Map.of("count", automaticModeCount);
             return msgFormat.format(msgArgs);
         }
     }
+
 }

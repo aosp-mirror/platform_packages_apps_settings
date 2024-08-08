@@ -114,7 +114,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         setUpMockProfiles();
         when(mCachedBluetoothDeviceManager.getCachedDevicesCopy())
                 .thenReturn(ImmutableList.of(mCachedDevice));
-        when(mCachedDevice.getConnectableProfiles())
+        when(mCachedDevice.getUiAccessibleProfiles())
                 .thenAnswer(invocation -> new ArrayList<>(mConnectableProfiles));
         when(mCachedDevice.getProfiles())
                 .thenAnswer(invocation -> ImmutableList.of(mConnectableProfiles));

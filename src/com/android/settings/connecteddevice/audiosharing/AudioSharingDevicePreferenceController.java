@@ -437,7 +437,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     }
 
     private boolean isMediaDevice(CachedBluetoothDevice cachedDevice) {
-        return cachedDevice.getConnectableProfiles().stream()
+        return cachedDevice.getUiAccessibleProfiles().stream()
                 .anyMatch(
                         profile ->
                                 profile instanceof A2dpProfile

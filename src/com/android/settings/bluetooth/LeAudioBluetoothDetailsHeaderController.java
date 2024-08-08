@@ -107,7 +107,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         if (mCachedDevice == null || mProfileManager == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        boolean hasLeAudio = mCachedDevice.getConnectableProfiles()
+        boolean hasLeAudio = mCachedDevice.getUiAccessibleProfiles()
                 .stream()
                 .anyMatch(profile -> profile.getProfileId() == BluetoothProfile.LE_AUDIO);
 

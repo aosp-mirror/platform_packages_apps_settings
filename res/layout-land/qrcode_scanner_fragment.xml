@@ -15,60 +15,45 @@
      limitations under the License.
 -->
 
-<LinearLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-            <TextView
-                android:id="@android:id/summary"
-                style="@style/QrCodeScanner"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:gravity="center"
-            android:clipChildren="true"
-            android:contentDescription="@string/audio_streams_qr_code_scanner_label"
-            android:focusable="true">
-            <TextureView
-                android:id="@+id/preview_view"
-                android:layout_marginStart="@dimen/qrcode_preview_margin"
-                android:layout_marginEnd="@dimen/qrcode_preview_margin"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/qrcode_preview_size"/>
-        </FrameLayout>
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/audio_streams_qrcode_scanner_fragment_padding">
 
         <TextView
-            android:id="@+id/error_message"
-            style="@style/TextAppearance.ErrorText"
-            android:layout_width="wrap_content"
+            android:id="@android:id/summary"
+            style="@style/QrCodeScanner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:visibility="invisible"/>
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextureView
+                android:id="@+id/preview_view"
+                android:layout_width="@dimen/audio_streams_qrcode_preview_size"
+                android:layout_height="@dimen/audio_streams_qrcode_preview_size"
+                android:contentDescription="@string/audio_streams_qr_code_scanner_label"
+                android:focusable="true" />
+            <TextView
+                android:id="@+id/error_message"
+                style="@style/TextAppearance.ErrorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </LinearLayout>
 
     </LinearLayout>
 
-
-</LinearLayout>
-
+</androidx.core.widget.NestedScrollView>
