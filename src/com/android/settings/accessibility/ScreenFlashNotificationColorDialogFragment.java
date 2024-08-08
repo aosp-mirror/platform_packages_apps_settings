@@ -65,8 +65,7 @@ public class ScreenFlashNotificationColorDialogFragment extends DialogFragment i
         final ScreenFlashNotificationColorDialogFragment result =
                 new ScreenFlashNotificationColorDialogFragment();
         result.mCurrentColor = initialColor;
-        result.mConsumer = colorConsumer != null ? colorConsumer : i -> {
-        };
+        result.mConsumer = colorConsumer != null ? colorConsumer : i -> {};
         return result;
     }
 
@@ -89,7 +88,7 @@ public class ScreenFlashNotificationColorDialogFragment extends DialogFragment i
                 .setNeutralButton(R.string.flash_notifications_preview, null)
                 .setNegativeButton(R.string.color_selector_dialog_cancel, (dialog, which) -> {
                 })
-                .setPositiveButton(R.string.color_selector_dialog_done, (dialog, which) -> {
+                .setPositiveButton(R.string.color_selector_dialog_save, (dialog, which) -> {
                     mCurrentColor = colorSelectorLayout.getCheckedColor(DEFAULT_SCREEN_FLASH_COLOR);
                     mConsumer.accept(mCurrentColor);
                 })

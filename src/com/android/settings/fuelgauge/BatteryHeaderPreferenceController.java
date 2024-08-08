@@ -92,8 +92,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
                 && mBatterySettingsFeatureProvider.isChargingOptimizationMode(mContext)) {
             return info.remainingLabel;
         }
-        if (info.remainingLabel == null
-                || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
+        if (info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
             return info.statusLabel;
         }
         if (info.pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
@@ -105,6 +104,9 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
                                 .getWirelessChargingContentDescription(mContext, info));
                 return wirelessChargingLabel;
             }
+        }
+        if (info.remainingLabel == null) {
+            return info.statusLabel;
         }
         if (info.statusLabel != null && !info.discharging) {
             // Charging state
