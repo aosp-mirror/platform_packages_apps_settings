@@ -514,7 +514,7 @@ class ZenModeSummaryHelper {
             return msgFormat.format(args);
         } else {
             int automaticModeCount = (int) modes.stream()
-                    .filter(m -> !m.isManualDnd() && !m.isCustomManual())
+                    .filter(m -> m.isEnabled() && !m.isManualDnd() && !m.isCustomManual())
                     .count();
 
             MessageFormat msgFormat = new MessageFormat(
