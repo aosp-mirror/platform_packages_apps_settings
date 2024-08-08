@@ -116,6 +116,7 @@ class MobileNetworkSettingsSearchIndex(
             listOf(
                 MmsMessageSearchItem(context),
                 NrAdvancedCallingSearchItem(context),
+                PreferredNetworkModeSearchItem(context),
                 RoamingSearchItem(context),
                 WifiCallingSearchItem(context),
             )
