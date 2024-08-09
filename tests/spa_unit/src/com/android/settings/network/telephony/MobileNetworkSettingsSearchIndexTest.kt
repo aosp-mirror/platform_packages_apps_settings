@@ -25,6 +25,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.Companion.isMobileNetworkSettingsSearchable
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 import com.android.settings.spa.SpaSearchLanding.BundleValue
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingFragment
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingKey
@@ -62,10 +63,12 @@ class MobileNetworkSettingsSearchIndexTest {
     private val mobileNetworkSettingsSearchIndex = MobileNetworkSettingsSearchIndex {
         listOf(
             object : MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem {
-                override val key = KEY
-                override val title = TITLE
-
-                override fun isAvailable(subId: Int) = subId == SUB_ID_1
+                override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? =
+                    if (subId == SUB_ID_1) {
+                        MobileNetworkSettingsSearchResult(key = KEY, title = TITLE)
+                    } else {
+                        null
+                    }
             })
     }
 
