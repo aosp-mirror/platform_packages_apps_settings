@@ -499,7 +499,7 @@ public class AudioSharingDialogHandler {
     private void removeSourceForGroup(
             int groupId, Map<Integer, List<BluetoothDevice>> groupedDevices) {
         if (mAssistant == null) {
-            Log.d(TAG, "Fail to add source due to null profiles, group = " + groupId);
+            Log.d(TAG, "Fail to remove source due to null profiles, group = " + groupId);
             return;
         }
         if (!groupedDevices.containsKey(groupId)) {
