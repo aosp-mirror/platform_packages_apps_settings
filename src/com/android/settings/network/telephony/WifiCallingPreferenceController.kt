@@ -27,6 +27,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
@@ -132,11 +133,16 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
         class WifiCallingSearchItem(
             private val context: Context,
         ) : MobileNetworkSettingsSearchItem {
-            override val key: String = "wifi_calling"
-            override val title: String = context.getString(R.string.wifi_calling_settings_title)
-
-            override fun isAvailable(subId: Int): Boolean = runBlocking {
+            private fun isAvailable(subId: Int): Boolean = runBlocking {
                 WifiCallingRepository(context, subId).wifiCallingReadyFlow().first()
+            }
+
+            override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
+                if (!isAvailable(subId)) return null
+                return MobileNetworkSettingsSearchResult(
+                    key = "wifi_calling",
+                    title = context.getString(R.string.wifi_calling_settings_title),
+                )
             }
         }
     }

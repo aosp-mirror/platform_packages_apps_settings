@@ -29,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
@@ -98,16 +99,21 @@ constructor(
     companion object {
         private const val DIALOG_TAG = "MobileDataDialog"
 
-        class RoamingSearchItem(context: Context) : MobileNetworkSettingsSearchItem {
-            override val key = "button_roaming_key"
-            override val title: String = context.getString(R.string.roaming)
-
+        class RoamingSearchItem(private val context: Context) : MobileNetworkSettingsSearchItem {
             private val carrierConfigRepository = CarrierConfigRepository(context)
 
-            override fun isAvailable(subId: Int): Boolean =
+            fun isAvailable(subId: Int): Boolean =
                 SubscriptionManager.isValidSubscriptionId(subId) &&
                     !carrierConfigRepository.getBoolean(
                         subId, CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL)
+
+            override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
+                if (!isAvailable(subId)) return null
+                return MobileNetworkSettingsSearchResult(
+                    key = "button_roaming_key",
+                    title = context.getString(R.string.roaming),
+                )
+            }
         }
     }
 }

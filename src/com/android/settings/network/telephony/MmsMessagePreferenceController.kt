@@ -20,11 +20,13 @@ import android.content.Context
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.data.ApnSetting
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.Settings.MobileNetworkActivity.EXTRA_MMS_MESSAGE
 import com.android.settings.core.TogglePreferenceController
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.flow.combine
@@ -109,7 +111,7 @@ constructor(
         }
 
         class MmsMessageSearchItem(
-            context: Context,
+            private val context: Context,
             private val getDefaultDataSubId: () -> Int = {
                 SubscriptionManager.getDefaultDataSubscriptionId()
             },
@@ -117,12 +119,18 @@ constructor(
             private var telephonyManager: TelephonyManager =
                 context.getSystemService(TelephonyManager::class.java)!!
 
-            override val key: String = EXTRA_MMS_MESSAGE
-            override val title: String = context.getString(R.string.mms_message_title)
-
-            override fun isAvailable(subId: Int): Boolean =
+            @VisibleForTesting
+            fun isAvailable(subId: Int): Boolean =
                 getAvailabilityStatus(
                     telephonyManager.createForSubscriptionId(subId), subId, getDefaultDataSubId)
+
+            override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
+                if (!isAvailable(subId)) return null
+                return MobileNetworkSettingsSearchResult(
+                    key = EXTRA_MMS_MESSAGE,
+                    title = context.getString(R.string.mms_message_title),
+                )
+            }
         }
     }
 }

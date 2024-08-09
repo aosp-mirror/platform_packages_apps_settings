@@ -25,6 +25,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.SwitchPreference
@@ -79,12 +80,17 @@ class NrAdvancedCallingPreferenceController @JvmOverloads constructor(
     companion object {
         class NrAdvancedCallingSearchItem(private val context: Context) :
             MobileNetworkSettingsSearchItem {
-            override val key = "nr_advanced_calling"
-            override val title: String = context.getString(R.string.nr_advanced_calling_title)
-            override val keywords: String = context.getString(R.string.keywords_nr_advanced_calling)
 
-            override fun isAvailable(subId: Int): Boolean =
-                VoNrRepository(context, subId).isVoNrAvailable()
+            fun isAvailable(subId: Int): Boolean = VoNrRepository(context, subId).isVoNrAvailable()
+
+            override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
+                if (!isAvailable(subId)) return null
+                return MobileNetworkSettingsSearchResult(
+                    key = "nr_advanced_calling",
+                    title = context.getString(R.string.nr_advanced_calling_title),
+                    keywords = context.getString(R.string.keywords_nr_advanced_calling),
+                )
+            }
         }
     }
 }
