@@ -46,6 +46,7 @@ import android.util.Log;
  *
  */
 public class WifiQrCode {
+    private static final String TAG = "WifiQrCode";
     static final String SCHEME_DPP = "DPP";
     static final String SCHEME_ZXING_WIFI_NETWORK_CONFIG = "WIFI";
     static final String PREFIX_DPP = "DPP:";
@@ -119,13 +120,13 @@ public class WifiQrCode {
         try {
             wifiQrCode = new WifiQrCode(qrCode);
         } catch(IllegalArgumentException e) {
+            Log.e(TAG, "Failed to create WifiQrCode!", e);
             return null;
         }
-
-        if (SCHEME_DPP.equals(wifiQrCode.getScheme())) {
-            return wifiQrCode;
+        if (wifiQrCode.getScheme() != UriParserResults.URI_SCHEME_DPP) {
+            Log.e(TAG, "wifiQrCode scheme is not DPP!");
+            return null;
         }
-
-        return null;
+        return wifiQrCode;
     }
 }
