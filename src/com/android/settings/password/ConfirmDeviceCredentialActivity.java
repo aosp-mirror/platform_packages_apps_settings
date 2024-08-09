@@ -104,6 +104,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private boolean mForceVerifyPath = false;
     private boolean mGoingToBackground;
     private boolean mWaitingForBiometricCallback;
+    private int mBiometricsAuthenticators;
 
     private Executor mExecutor = (runnable -> {
         mHandler.post(runnable);
@@ -122,8 +123,14 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     Log.i(TAG, "Finishing, user no longer valid: " + mUserId);
                     finish();
                 } else {
-                    // All other errors go to some version of CC
-                    showConfirmCredentials();
+                    if ((mBiometricsAuthenticators
+                            & BiometricManager.Authenticators.DEVICE_CREDENTIAL) != 0) {
+                        // All other errors go to some version of CC
+                        showConfirmCredentials();
+                    } else {
+                        Log.i(TAG, "Finishing, device credential not requested");
+                        finish();
+                    }
                 }
             } else if (mWaitingForBiometricCallback) { // mGoingToBackground is true
                 mWaitingForBiometricCallback = false;
@@ -188,7 +195,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mDetails = intent.getCharSequenceExtra(KeyguardManager.EXTRA_DESCRIPTION);
         String alternateButton = intent.getStringExtra(
                 KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
-        final int authenticators = intent.getIntExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
+        mBiometricsAuthenticators = intent.getIntExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
                 BiometricManager.Authenticators.DEVICE_CREDENTIAL
                         | BiometricManager.Authenticators.BIOMETRIC_WEAK);
         final String negativeButtonText = intent.getStringExtra(
@@ -229,7 +236,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         promptInfo.setTitle(mTitle);
         promptInfo.setDescription(mDetails);
         promptInfo.setDisallowBiometricsIfPolicyExists(mCheckDevicePolicyManager);
-        promptInfo.setAuthenticators(authenticators);
+        promptInfo.setAuthenticators(mBiometricsAuthenticators);
         promptInfo.setNegativeButtonText(negativeButtonText);
 
         if (android.multiuser.Flags.enablePrivateSpaceFeatures()
