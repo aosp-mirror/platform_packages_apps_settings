@@ -17,6 +17,7 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
@@ -64,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceListItem"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="?androidprv:attr/materialColorOnPrimaryContainer"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"
                 android:hyphenationFrequency="normalFast"
@@ -77,7 +78,7 @@
                 android:layout_alignStart="@android:id/title"
                 android:layout_alignLeft="@android:id/title"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="?androidprv:attr/materialColorOnPrimaryContainer"
                 android:hyphenationFrequency="normalFast"
                 android:lineBreakWordStyle="phrase"
                 android:maxLines="4"

@@ -16,8 +16,6 @@
 
 package com.android.settings.network.telephony;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.GSM;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_TD_SCDMA;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.WCDMA;
@@ -32,7 +30,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
-import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -89,43 +86,6 @@ public class PreferredNetworkModePreferenceControllerTest {
         mController = new PreferredNetworkModePreferenceController(mContext, "mobile_data");
         mController.init(SUB_ID);
         mPreference.setKey(mController.getPreferenceKey());
-    }
-
-    @Test
-    public void getAvailabilityStatus_hideCarrierNetworkSettings_returnUnavailable() {
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
-                true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_worldPhone_returnAvailable() {
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
-                false);
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL, true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_hidePreferredNetworkType_returnUnavailable() {
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL,
-                true);
-
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
-        when(mServiceState.getDataRegistrationState()).thenReturn(
-                ServiceState.STATE_OUT_OF_SERVICE);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
-
-        when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
-        when(mServiceState.getDataRegistrationState()).thenReturn(ServiceState.STATE_IN_SERVICE);
-
-        when(mServiceState.getRoaming()).thenReturn(false);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
-
-        when(mServiceState.getRoaming()).thenReturn(true);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

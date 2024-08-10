@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static java.util.stream.Collectors.toList;
+
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
@@ -38,6 +40,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -49,14 +52,14 @@ import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.Executor;
 
 public class AudioSharingDialogHandler {
-    private static final String TAG = "AudioSharingDialogHandler";
+    private static final String TAG = "AudioSharingDlgHandler";
     private final Context mContext;
     private final Fragment mHostFragment;
     @Nullable private final LocalBluetoothManager mLocalBtManager;
+    @Nullable private final CachedBluetoothDeviceManager mDeviceManager;
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -163,6 +166,7 @@ public class AudioSharingDialogHandler {
         mContext = context;
         mHostFragment = fragment;
         mLocalBtManager = Utils.getLocalBluetoothManager(context);
+        mDeviceManager = mLocalBtManager != null ? mLocalBtManager.getCachedDeviceManager() : null;
         mBroadcast =
                 mLocalBtManager != null
                         ? mLocalBtManager.getProfileManager().getLeAudioBroadcastProfile()
@@ -212,7 +216,7 @@ public class AudioSharingDialogHandler {
         if (isBroadcasting) {
             // Show stop audio sharing dialog when an ineligible (non LE audio) remote device
             // connected during a sharing session.
-            Map<Integer, List<CachedBluetoothDevice>> groupedDevices =
+            Map<Integer, List<BluetoothDevice>> groupedDevices =
                     AudioSharingUtils.fetchConnectedDevicesByGroupId(mLocalBtManager);
             List<AudioSharingDeviceItem> deviceItemsInSharingSession =
                     AudioSharingUtils.buildOrderedConnectedLeadAudioSharingDeviceItem(
@@ -256,19 +260,19 @@ public class AudioSharingDialogHandler {
             @NonNull CachedBluetoothDevice cachedDevice,
             boolean isBroadcasting,
             boolean userTriggered) {
-        Map<Integer, List<CachedBluetoothDevice>> groupedDevices =
+        Map<Integer, List<BluetoothDevice>> groupedDevices =
                 AudioSharingUtils.fetchConnectedDevicesByGroupId(mLocalBtManager);
         BluetoothDevice btDevice = cachedDevice.getDevice();
         String deviceAddress = btDevice == null ? "" : btDevice.getAnonymizedAddress();
+        int groupId = BluetoothUtils.getGroupId(cachedDevice);
         if (isBroadcasting) {
             // If another device within the same is already in the sharing session, add source to
             // the device automatically.
-            int groupId = BluetoothUtils.getGroupId(cachedDevice);
             if (groupedDevices.containsKey(groupId)
                     && groupedDevices.get(groupId).stream()
                             .anyMatch(
                                     device ->
-                                            BluetoothUtils.hasConnectedBroadcastSource(
+                                            BluetoothUtils.hasConnectedBroadcastSourceForBtDevice(
                                                     device, mLocalBtManager))) {
                 Log.d(
                         TAG,
@@ -352,14 +356,17 @@ public class AudioSharingDialogHandler {
         } else {
             // Build a list of AudioSharingDeviceItem for connected devices other than cachedDevice.
             List<AudioSharingDeviceItem> deviceItems = new ArrayList<>();
-            for (List<CachedBluetoothDevice> devices : groupedDevices.values()) {
+            for (Map.Entry<Integer, List<BluetoothDevice>> entry : groupedDevices.entrySet()) {
+                if (entry.getKey() == groupId) continue;
                 // Use random device in the group within the sharing session to represent the group.
-                CachedBluetoothDevice device = devices.get(0);
-                if (BluetoothUtils.getGroupId(device)
-                        == BluetoothUtils.getGroupId(cachedDevice)) {
-                    continue;
+                for (BluetoothDevice device : entry.getValue()) {
+                    CachedBluetoothDevice cDevice =
+                            mDeviceManager != null ? mDeviceManager.findDevice(device) : null;
+                    if (cDevice != null) {
+                        deviceItems.add(AudioSharingUtils.buildAudioSharingDeviceItem(cDevice));
+                        break;
+                    }
                 }
-                deviceItems.add(AudioSharingUtils.buildAudioSharingDeviceItem(device));
             }
             // Show audio sharing join dialog when the second eligible (LE audio) remote
             // device connect and no sharing session.
@@ -368,13 +375,10 @@ public class AudioSharingDialogHandler {
                         new AudioSharingJoinDialogFragment.DialogEventListener() {
                             @Override
                             public void onShareClick() {
-                                mTargetSinks = new ArrayList<>();
-                                for (List<CachedBluetoothDevice> devices :
-                                        groupedDevices.values()) {
-                                    for (CachedBluetoothDevice device : devices) {
-                                        mTargetSinks.add(device.getDevice());
-                                    }
-                                }
+                                mTargetSinks =
+                                        groupedDevices.values().stream()
+                                                .flatMap(items -> items.stream())
+                                                .collect(toList());
                                 Log.d(TAG, "Start broadcast with sinks = " + mTargetSinks.size());
                                 if (mBroadcast != null) {
                                     mBroadcast.startPrivateBroadcast();
@@ -493,9 +497,9 @@ public class AudioSharingDialogHandler {
     }
 
     private void removeSourceForGroup(
-            int groupId, Map<Integer, List<CachedBluetoothDevice>> groupedDevices) {
+            int groupId, Map<Integer, List<BluetoothDevice>> groupedDevices) {
         if (mAssistant == null) {
-            Log.d(TAG, "Fail to add source due to null profiles, group = " + groupId);
+            Log.d(TAG, "Fail to remove source due to null profiles, group = " + groupId);
             return;
         }
         if (!groupedDevices.containsKey(groupId)) {
@@ -503,8 +507,6 @@ public class AudioSharingDialogHandler {
             return;
         }
         groupedDevices.getOrDefault(groupId, ImmutableList.of()).stream()
-                .map(CachedBluetoothDevice::getDevice)
-                .filter(Objects::nonNull)
                 .forEach(
                         device -> {
                             for (BluetoothLeBroadcastReceiveState source :
@@ -515,7 +517,7 @@ public class AudioSharingDialogHandler {
     }
 
     private void addSourceForGroup(
-            int groupId, Map<Integer, List<CachedBluetoothDevice>> groupedDevices) {
+            int groupId, Map<Integer, List<BluetoothDevice>> groupedDevices) {
         if (mBroadcast == null || mAssistant == null) {
             Log.d(TAG, "Fail to add source due to null profiles, group = " + groupId);
             return;
@@ -525,8 +527,6 @@ public class AudioSharingDialogHandler {
             return;
         }
         groupedDevices.getOrDefault(groupId, ImmutableList.of()).stream()
-                .map(CachedBluetoothDevice::getDevice)
-                .filter(Objects::nonNull)
                 .forEach(
                         device ->
                                 mAssistant.addSource(
