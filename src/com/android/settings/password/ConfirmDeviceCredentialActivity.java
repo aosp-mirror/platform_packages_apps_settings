@@ -238,6 +238,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         promptInfo.setDisallowBiometricsIfPolicyExists(mCheckDevicePolicyManager);
         promptInfo.setAuthenticators(mBiometricsAuthenticators);
         promptInfo.setNegativeButtonText(negativeButtonText);
+        promptInfo.setRealCallerForConfirmDeviceCredentialActivity(getCallingActivity());
 
         if (android.multiuser.Flags.enablePrivateSpaceFeatures()
                 && android.multiuser.Flags.usePrivateSpaceIconInBiometricPrompt()
@@ -503,8 +504,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         boolean newFragment = false;
 
         if (mBiometricFragment == null) {
-            mBiometricFragment = BiometricFragment.newInstance(promptInfo,
-                    getCallingActivity());
+            mBiometricFragment = BiometricFragment.newInstance(promptInfo);
             newFragment = true;
         }
         mBiometricFragment.setCallbacks(mExecutor, mAuthenticationCallback);
