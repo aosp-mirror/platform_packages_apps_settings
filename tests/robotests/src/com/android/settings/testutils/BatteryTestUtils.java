@@ -264,18 +264,28 @@ public class BatteryTestUtils {
 
     /** Create a power anomaly event proto of screen timeout. */
     public static PowerAnomalyEvent createScreenTimeoutAnomalyEvent() {
+        return createScreenTimeoutAnomalyEvent(false);
+    }
+
+    /** Create a power anomaly event proto of screen timeout. */
+    public static PowerAnomalyEvent createScreenTimeoutAnomalyEvent(boolean changeSettings) {
+        WarningBannerInfo.Builder warningBannerInfoBuilder =
+                WarningBannerInfo.newBuilder()
+                        .setMainButtonDestination(ScreenTimeoutSettings.class.getName())
+                        .setMainButtonSourceMetricsCategory(SettingsEnums.SCREEN_TIMEOUT)
+                        .setMainButtonSourceHighlightKey("60000");
+        if (changeSettings) {
+            warningBannerInfoBuilder
+                    .setMainButtonConfigSettingsName(Settings.System.SCREEN_OFF_TIMEOUT)
+                    .setMainButtonConfigSettingsValue(60000);
+        }
         return PowerAnomalyEvent.newBuilder()
                 .setEventId("ScreenTimeoutAnomaly")
                 .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
                 .setKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT)
                 .setDismissRecordKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT.name())
                 .setScore(1.1f)
-                .setWarningBannerInfo(
-                        WarningBannerInfo.newBuilder()
-                                .setMainButtonDestination(ScreenTimeoutSettings.class.getName())
-                                .setMainButtonSourceMetricsCategory(SettingsEnums.SCREEN_TIMEOUT)
-                                .setMainButtonSourceHighlightKey("60000")
-                                .build())
+                .setWarningBannerInfo(warningBannerInfoBuilder.build())
                 .build();
     }
 

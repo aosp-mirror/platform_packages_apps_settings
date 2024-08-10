@@ -409,7 +409,7 @@
     <string name="desc_app_locale_selection_supported">Set the language for each app.</string>
 
     <!-- Description for the introduction to language picker activity. [CHAR LIMIT=NONE]-->
-    <string name="desc_introduction_of_language_picker">Your system, apps, and websites use the first supported language from your preferred languages.</string>
+    <string name="desc_introduction_of_language_picker">Your device, apps, and websites use the first supported language from your preferred language list.\n\nMany apps will also use the region from your preferred language to format dates, numbers, and units. To change your region, add a language, then choose your preferred region.</string>
 
     <!-- Description for the notice of language picker. [CHAR LIMIT=NONE]-->
     <string name="desc_notice_of_language_picker">To select a language for each app, go to app language settings.</string>
@@ -937,7 +937,7 @@
     <!-- Message showing that multiple fingerprints, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80]-->
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary">Face, fingerprints, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
     <!-- Description for mandatory biometrics prompt-->
-    <string name="mandatory_biometrics_prompt_description">This is needed since Identity Check is on</string>
+    <string name="mandatory_biometrics_prompt_description">Identity Check is on</string>
     <!-- RemoteAuth unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
     <string name ="security_settings_remoteauth_preference_title">Remote Authenticator Unlock</string>
@@ -1374,6 +1374,12 @@
     <string name="private_space_error_screen_title">Couldn\u2019t set up a private space</string>
     <!-- Label for button to retry creating private space again on creation error. [CHAR LIMIT=30] -->
     <string name="private_space_tryagain_label">Try Again</string>
+    <!-- Label for button to exit private space setup on creation error. [CHAR LIMIT=30] -->
+    <string name="private_space_exit_label">Exit</string>
+    <!-- Description in Private space error page with a link to the Help Center page[CHAR LIMIT=NONE] -->
+    <string name="private_space_error_description">Private space isn\u2019t available.\nView possible causes</string>
+    <!-- Text in Private space error page that points to view possible error causes [CHAR LIMIT=40] -->
+    <string name="private_space_error_causes_text">View possible causes</string>
     <!-- Title for private space lock setup screen. [CHAR LIMIT=90] -->
     <string name="private_space_lockscreen_title">Choose a new lock for private space?</string>
     <!-- Summary for the private space lock setup screen. [CHAR LIMIT=NONE] -->
@@ -7978,6 +7984,26 @@
     <!-- Priority Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_calendar">Calendar events</string>
 
+    <!-- Priority Modes: Summary for the modes segment, when at least one mode is active. [CHAR LIMIT=NONE]-->
+    <string name="zen_modes_summary_some_active">
+        {count, plural, offset:2
+            =0    {}
+            =1    {{mode_1} is active}
+            =2    {{mode_1} and {mode_2} are active}
+            =3    {{mode_1}, {mode_2}, and {mode_3} are active}
+            other {{mode_1}, {mode_2}, and # more are active}
+        }
+    </string>
+
+    <!-- Priority Modes: Summary for the modes segment, when no modes are active. [CHAR LIMIT=NONE]-->
+    <string name="zen_modes_summary_none_active">
+        {count, plural,
+            =0    {}
+            =1    {1 mode can turn on automatically}
+            other {# modes can turn on automatically}
+        }
+    </string>
+
     <!-- Priority Modes: Short text that indicates that a mode is currently on (active). [CHAR_LIMIT=10] -->
     <string name="zen_mode_active_text">ON</string>
 
@@ -8007,6 +8033,12 @@
 
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
+
+    <!-- Priority Modes: Summary on a page prompting the user to set up/enable a mode [CHAR_LIMIT=NONE] -->
+    <string name="zen_mode_setup_page_summary">Block interruptions and distractions</string>
+
+    <!-- Priority Modes: Label on a button prompting the user to set up the mode with the given name. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_setup_button_label">Set up <xliff:g id="mode" example="My Mode">%1$s</xliff:g></string>
 
     <!-- Do not disturb: Title for the Do not Disturb dialog to turn on Do not disturb. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_turn_on_dialog_title">Turn on Do Not Disturb</string>
@@ -13448,7 +13480,7 @@
     <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
     <string name="screen_flash_color_violet">Violet</string>
     <!-- Button to save the selection in screen flash color selection dialog. [CHAR LIMIT=20] -->
-    <string name="color_selector_dialog_done">Done</string>
+    <string name="color_selector_dialog_save">Save</string>
     <!-- Button to close the dialog without saving in screen flash color selection dialog. [CHAR LIMIT=20] -->
     <string name="color_selector_dialog_cancel">Cancel</string>
 

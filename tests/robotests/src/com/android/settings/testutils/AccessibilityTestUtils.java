@@ -20,6 +20,8 @@ import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATIN
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -46,20 +48,15 @@ public class AccessibilityTestUtils {
 
     public static void setSoftwareShortcutMode(
             Context context, boolean gestureNavEnabled, boolean floatingButtonEnabled) {
-        int mode = floatingButtonEnabled ? ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU : -1;
+        int buttonMode = floatingButtonEnabled ? ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU : -1;
+        int navMode = gestureNavEnabled ? NAV_BAR_MODE_GESTURAL : NAV_BAR_MODE_3BUTTON;
 
         Settings.Secure.putInt(context.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, mode);
-
-        if (gestureNavEnabled) {
-            SettingsShadowResources.overrideResource(
-                    com.android.internal.R.integer.config_navBarInteractionMode,
-                    NAV_BAR_MODE_GESTURAL);
-        } else {
-            SettingsShadowResources.overrideResource(
-                    com.android.internal.R.integer.config_navBarInteractionMode,
-                    NAV_BAR_MODE_3BUTTON);
-        }
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, buttonMode);
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.integer.config_navBarInteractionMode, navMode);
+        assertThat(context.getResources().getInteger(
+                com.android.internal.R.integer.config_navBarInteractionMode)).isEqualTo(navMode);
     }
 
     /**

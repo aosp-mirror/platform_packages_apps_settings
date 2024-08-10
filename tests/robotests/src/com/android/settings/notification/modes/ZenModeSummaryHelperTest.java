@@ -16,10 +16,6 @@
 
 package com.android.settings.notification.modes;
 
-import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
-import static android.provider.Settings.Global.ZEN_MODE_OFF;
-import static android.service.notification.Condition.SOURCE_UNKNOWN;
-import static android.service.notification.Condition.STATE_TRUE;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_ANYONE;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_IMPORTANT;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_ANYONE;
@@ -33,17 +29,16 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.AutomaticZenRule;
 import android.app.Flags;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
-import android.net.Uri;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.service.notification.Condition;
+import android.service.notification.SystemZenRules;
 import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
@@ -65,7 +60,8 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.Random;
 
 @RunWith(RobolectricTestRunner.class)
-public class ZenModesSummaryHelperTest {
+@EnableFlags(Flags.FLAG_MODES_UI)
+public class ZenModeSummaryHelperTest {
     private static final int WORK_PROFILE_ID = 3;
 
     private Context mContext;
@@ -480,85 +476,90 @@ public class ZenModesSummaryHelperTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
-    public void getSoundSummary_off_noRules() {
-        ZenModeConfig config = new ZenModeConfig();
-
-        assertThat(mSummaryHelper.getSoundSummary(ZEN_MODE_OFF, config)).isEqualTo("Off");
+    public void getModesSummary_noRules_noSummary() {
+        String summary = mSummaryHelper.getModesSummary(ImmutableList.of());
+        assertThat(summary).isEmpty();
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
-    public void getSoundSummary_off_oneRule() {
-        ZenModeConfig config = new ZenModeConfig();
-        ZenModeConfig.ZenRule rule = new ZenModeConfig.ZenRule();
-        rule.enabled = true;
-        config.automaticRules.put("key", rule);
-
-        assertThat(mSummaryHelper.getSoundSummary(ZEN_MODE_OFF, config))
-                .isEqualTo("Off / 1 mode can turn on automatically");
+    public void getModesSummary_onlyDndAndNotActive_noSummary() {
+        ImmutableList<ZenMode> modes = ImmutableList.of(TestModeBuilder.MANUAL_DND_INACTIVE);
+        String summary = mSummaryHelper.getModesSummary(modes);
+        assertThat(summary).isEmpty();
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
-    public void getSoundSummary_off_twoRules() {
-        ZenModeConfig config = new ZenModeConfig();
-        ZenModeConfig.ZenRule rule = new ZenModeConfig.ZenRule();
-        rule.enabled = true;
-        ZenModeConfig.ZenRule rule2 = new ZenModeConfig.ZenRule();
-        rule2.enabled = true;
-        config.automaticRules.put("key", rule);
-        config.automaticRules.put("key2", rule2);
+    public void getModesSummary_noRulesActive_countsOnlyEnabledAutomaticModes() {
+        ImmutableList<ZenMode> modes = ImmutableList.of(
+                TestModeBuilder.MANUAL_DND_INACTIVE, // Not automatic
+                new TestModeBuilder().setName("Auto 1").build(), // App provided automatic
+                new TestModeBuilder()
+                        .setName("Custom manual 1")
+                        .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                        .setType(AutomaticZenRule.TYPE_OTHER)
+                        .setConditionId(ZenModeConfig.toCustomManualConditionId())
+                        .build(), // Custom manual, not automatic
+                new TestModeBuilder()
+                        .setName("Disabled 1")
+                        .setEnabled(false)
+                        .build(), // Would be automatic, but it's disabled.
+                new TestModeBuilder()
+                        .setName("Sleep")
+                        .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                        .setType(AutomaticZenRule.TYPE_SCHEDULE_TIME)
+                        .build() // Time based, automatic.
+        );
 
-        assertThat(mSummaryHelper.getSoundSummary(ZEN_MODE_OFF, config))
-                .isEqualTo("Off / 2 modes can turn on automatically");
+        String summary = mSummaryHelper.getModesSummary(modes);
+        assertThat(summary).isEqualTo("2 modes can turn on automatically");
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
-    public void getSoundSummary_on_noDescription() {
-        ZenModeConfig config = new ZenModeConfig();
-        config.manualRule.conditionId = Uri.EMPTY;
-        config.manualRule.pkg = "android";
-        config.manualRule.zenMode = ZEN_MODE_IMPORTANT_INTERRUPTIONS;
-        config.manualRule.condition = new Condition(Uri.EMPTY, "", STATE_TRUE, SOURCE_UNKNOWN);
-        assertThat(mSummaryHelper.getSoundSummary(ZEN_MODE_IMPORTANT_INTERRUPTIONS, config))
-                .isEqualTo("On");
+    public void getModesSummary_oneModeActive_listsMode() {
+        ImmutableList<ZenMode> modes = ImmutableList.of(
+                TestModeBuilder.MANUAL_DND_ACTIVE,
+                new TestModeBuilder().setName("Inactive").setActive(false).build());
+
+        String summary = mSummaryHelper.getModesSummary(modes);
+        assertThat(summary).isEqualTo("Do Not Disturb is active");
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
-    public void getSoundSummary_on_manualDescription() {
-        ZenModeConfig config = new ZenModeConfig();
-        config.manualRule.conditionId = ZenModeConfig.toCountdownConditionId(
-                System.currentTimeMillis() + 10000, false);
-        config.manualRule.pkg = "android";
-        config.manualRule.zenMode = ZEN_MODE_IMPORTANT_INTERRUPTIONS;
-        config.manualRule.condition = new Condition(Uri.EMPTY, "", STATE_TRUE, SOURCE_UNKNOWN);
-        assertThat(mSummaryHelper.getSoundSummary(ZEN_MODE_IMPORTANT_INTERRUPTIONS, config))
-                .startsWith("On /");
+    public void getModesSummary_twoModesActive_listsModes() {
+        ImmutableList<ZenMode> modes = ImmutableList.of(
+                TestModeBuilder.MANUAL_DND_ACTIVE,
+                new TestModeBuilder().setName("Inactive").setActive(false).build(),
+                new TestModeBuilder().setName("Active #1").setActive(true).build());
+
+        String summary = mSummaryHelper.getModesSummary(modes);
+        assertThat(summary).isEqualTo("Do Not Disturb and Active #1 are active");
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
-    public void getSoundSummary_on_automatic() {
-        ZenModeConfig config = new ZenModeConfig();
-        ZenModeConfig.ZenRule rule = new ZenModeConfig.ZenRule();
-        rule.configurationActivity = new ComponentName("a", "a");
-        rule.component = new ComponentName("b", "b");
-        rule.conditionId = new Uri.Builder().scheme("hello").build();
-        rule.condition = new Condition(rule.conditionId, "", STATE_TRUE);
-        rule.enabled = true;
-        rule.creationTime = 123;
-        rule.id = "id";
-        rule.zenMode = ZEN_MODE_IMPORTANT_INTERRUPTIONS;
-        rule.modified = true;
-        rule.name = "name";
-        rule.snoozing = false;
-        rule.pkg = "b";
-        config.automaticRules.put("key", rule);
+    public void getModesSummary_threeModesActive_listsModes() {
+        ImmutableList<ZenMode> modes = ImmutableList.of(
+                TestModeBuilder.MANUAL_DND_INACTIVE,
+                new TestModeBuilder().setName("Inactive #1").setActive(false).build(),
+                new TestModeBuilder().setName("Active #1").setActive(true).build(),
+                new TestModeBuilder().setName("Active #2").setActive(true).build(),
+                new TestModeBuilder().setName("Inactive #2").setActive(false).build(),
+                new TestModeBuilder().setName("Active #3").setActive(true).build());
 
-        assertThat(mSummaryHelper.getSoundSummary(ZEN_MODE_IMPORTANT_INTERRUPTIONS, config))
-                .startsWith("On /");
+        String summary = mSummaryHelper.getModesSummary(modes);
+        assertThat(summary).isEqualTo("Active #1, Active #2, and Active #3 are active");
+    }
+
+    @Test
+    public void getModesSummary_manyModesActive_listsACouple() {
+        ImmutableList<ZenMode> modes = ImmutableList.of(
+                TestModeBuilder.MANUAL_DND_ACTIVE,
+                new TestModeBuilder().setName("Inactive #1").setActive(false).build(),
+                new TestModeBuilder().setName("Active #1").setActive(true).build(),
+                new TestModeBuilder().setName("Active #2").setActive(true).build(),
+                new TestModeBuilder().setName("Inactive #2").setActive(false).build(),
+                new TestModeBuilder().setName("Active #3").setActive(true).build());
+
+        String summary = mSummaryHelper.getModesSummary(modes);
+        assertThat(summary).isEqualTo("Do Not Disturb, Active #1, and 2 more are active");
     }
 }

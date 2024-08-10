@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -23,10 +23,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -35,30 +34,24 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:textSize="15sp"
-            android:textColor="?android:attr/textColorPrimary"/>
+            android:textColor="?android:attr/textColorPrimary" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/qrcode_view"
+            android:layout_width="@dimen/qrcode_size"
+            android:layout_height="@dimen/qrcode_size"
+            android:contentDescription="@string/qr_code_content_description"
+            android:focusable="true"
+            android:paddingTop="70dp"/>
+
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingTop="70dp">
-
-            <ImageView
-                android:id="@+id/qrcode_view"
-                android:layout_width="@dimen/qrcode_size"
-                android:layout_height="@dimen/qrcode_size"
-                android:contentDescription="@string/qr_code_content_description"
-                android:focusable="true"/>
-
-            <TextView
-                android:id="@+id/password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="?android:attr/textColorPrimary"/>
-        </LinearLayout>
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="center" />
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
