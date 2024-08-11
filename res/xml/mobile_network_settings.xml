@@ -152,6 +152,7 @@
             android:summary="@string/contact_discovery_opt_in_summary"
             settings:controller="com.android.settings.network.telephony.ContactDiscoveryPreferenceController"/>
 
+        <!-- Settings search is handled by PreferredNetworkModeSearchItem. -->
         <ListPreference
             android:key="preferred_network_mode_key"
             android:title="@string/preferred_network_mode_title"
@@ -159,8 +160,10 @@
             android:entries="@array/preferred_network_mode_choices"
             android:entryValues="@array/preferred_network_mode_values"
             android:dialogTitle="@string/preferred_network_mode_dialogtitle"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.PreferredNetworkModePreferenceController"/>
 
+        <!-- Settings search is handled by EnabledNetworkModeSearchItem. -->
         <ListPreference
             android:key="enabled_networks_key"
             android:title="@string/preferred_network_mode_title"
@@ -168,6 +171,7 @@
             android:entries="@array/enabled_networks_choices"
             android:entryValues="@array/enabled_networks_values"
             android:dialogTitle="@string/preferred_network_mode_dialogtitle"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.EnabledNetworkModePreferenceController"/>
 
         <Preference
@@ -202,10 +206,12 @@
             android:title="@string/call_category"
             settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController">
 
+            <!-- Settings search is handled by WifiCallingSearchItem. -->
             <Preference
                 android:key="wifi_calling"
                 android:title="@string/wifi_calling_settings_title"
                 android:summary="@string/wifi_calling_summary"
+                settings:searchable="false"
                 settings:controller="com.android.settings.network.telephony.WifiCallingPreferenceController">
                 <intent android:action="android.intent.action.MAIN"
                         android:targetPackage="com.android.settings"

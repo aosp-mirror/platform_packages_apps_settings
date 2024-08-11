@@ -61,7 +61,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePreferenceController
         implements DevicePreferenceCallback {
-    private static final String TAG = "AudioSharingDeviceVolumeGroupController";
+    private static final String TAG = "AudioSharingVolCtlr";
     private static final String KEY = "audio_sharing_device_volume_group";
 
     @Nullable private final LocalBluetoothManager mBtManager;
