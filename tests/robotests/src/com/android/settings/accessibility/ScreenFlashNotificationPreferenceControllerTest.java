@@ -57,8 +57,6 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
-import java.util.function.Consumer;
-
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ScreenFlashNotificationPreferenceControllerTest
@@ -83,7 +81,6 @@ public class ScreenFlashNotificationPreferenceControllerTest {
     private FragmentManager mFragmentManager;
     @Mock
     private ScreenFlashNotificationColorDialogFragment mDialogFragment;
-
     private ScreenFlashNotificationPreferenceController mController;
     private ContentResolver mContentResolver;
 
@@ -92,6 +89,7 @@ public class ScreenFlashNotificationPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FragmentActivity fragmentActivity = Robolectric.setupActivity(FragmentActivity.class);
         Context context = fragmentActivity.getApplicationContext();
+
         ShadowScreenFlashNotificationColorDialogFragment.setInstance(mDialogFragment);
         ShadowFlashNotificationsUtils.setColorDescriptionText(COLOR_DESCRIPTION_TEXT);
 
@@ -99,8 +97,9 @@ public class ScreenFlashNotificationPreferenceControllerTest {
         mController = new ScreenFlashNotificationPreferenceController(context, PREFERENCE_KEY);
         when(mPreferenceScreen.findPreference(PREFERENCE_KEY)).thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn(PREFERENCE_KEY);
-        mController.setParentFragment(mParentFragment);
         when(mParentFragment.getParentFragmentManager()).thenReturn(mFragmentManager);
+
+        mController.setParentFragment(mParentFragment);
     }
 
     @After
@@ -181,6 +180,7 @@ public class ScreenFlashNotificationPreferenceControllerTest {
     @Test
     public void handlePreferenceTreeClick() {
         mController.handlePreferenceTreeClick(mPreference);
+
         verify(mDialogFragment).show(any(FragmentManager.class), anyString());
     }
 
@@ -194,7 +194,7 @@ public class ScreenFlashNotificationPreferenceControllerTest {
 
         @Implementation
         protected static ScreenFlashNotificationColorDialogFragment getInstance(
-                int initialColor, Consumer<Integer> colorConsumer) {
+                int initialColor) {
             return sInstance;
         }
 
