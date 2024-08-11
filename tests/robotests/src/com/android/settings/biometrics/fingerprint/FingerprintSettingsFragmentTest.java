@@ -54,6 +54,7 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Looper;
 import android.os.UserHandle;
+import android.os.Vibrator;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -128,6 +129,9 @@ public class FingerprintSettingsFragmentTest {
             mAuthenticationCallbackArgumentCaptor = ArgumentCaptor.forClass(
             FingerprintManager.AuthenticationCallback.class);
 
+    @Mock
+    private Vibrator mVibrator;
+
     private FingerprintAuthenticateSidecar mFingerprintAuthenticateSidecar;
     private FingerprintRemoveSidecar mFingerprintRemoveSidecar;
 
@@ -141,6 +145,7 @@ public class FingerprintSettingsFragmentTest {
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mBiometricManager).when(mContext).getSystemService(BiometricManager.class);
         doReturn(true).when(mFingerprintManager).isHardwareDetected();
+        doReturn(mVibrator).when(mContext).getSystemService(Vibrator.class);
         when(mBiometricManager.canAuthenticate(
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
@@ -285,6 +290,28 @@ public class FingerprintSettingsFragmentTest {
         doReturn(false).when(mFingerprintManager).isHardwareDetected();
         setUpFragment(false);
         assertThat(mFragment.isVisible()).isTrue();
+    }
+
+    @Test
+    @Ignore("b/353726774")
+    public void fingerprintVibratesOnAuthSuccess() {
+        setUpFragment(false);
+
+        doNothing().when(mFingerprintManager).authenticate(any(),
+                mCancellationSignalArgumentCaptor.capture(),
+                mAuthenticationCallbackArgumentCaptor.capture(), any(), anyInt());
+
+        mFingerprintAuthenticateSidecar.startAuthentication(1);
+
+        assertThat(mAuthenticationCallbackArgumentCaptor.getValue()).isNotNull();
+        assertThat(mCancellationSignalArgumentCaptor.getValue()).isNotNull();
+
+        mAuthenticationCallbackArgumentCaptor.getValue()
+                .onAuthenticationSucceeded(new FingerprintManager.AuthenticationResult(null,
+                        new Fingerprint("finger 1", 1, 1), 0 /* userId */, false));
+
+        shadowOf(Looper.getMainLooper()).idle();
+        verify(mVibrator).vibrate(FingerprintSettings.SUCCESS_VIBRATION_EFFECT);
     }
 
     @Test
