@@ -67,17 +67,23 @@ class ZenModesListItemPreference extends RestrictedPreference {
     }
 
     public void setZenMode(ZenMode zenMode) {
+        ZenMode previous = mZenMode;
         mZenMode = zenMode;
+        if (zenMode.equals(previous)) {
+            return;
+        }
+
         setTitle(mZenMode.getName());
+        String dynamicDescription = zenMode.getDynamicDescription(mContext);
         CharSequence statusText = switch (mZenMode.getStatus()) {
             case ENABLED_AND_ACTIVE ->
-                    Strings.isNullOrEmpty(mZenMode.getTriggerDescription())
+                    Strings.isNullOrEmpty(dynamicDescription)
                             ? mContext.getString(R.string.zen_mode_active_text)
                             : mContext.getString(
                                     R.string.zen_mode_format_status_and_trigger,
                                     mContext.getString(R.string.zen_mode_active_text),
-                                    mZenMode.getRule().getTriggerDescription());
-            case ENABLED -> mZenMode.getRule().getTriggerDescription();
+                                    dynamicDescription);
+            case ENABLED -> dynamicDescription;
             case DISABLED_BY_USER -> mContext.getString(R.string.zen_mode_disabled_by_user);
             case DISABLED_BY_OTHER -> mContext.getString(R.string.zen_mode_disabled_needs_setup);
         };
