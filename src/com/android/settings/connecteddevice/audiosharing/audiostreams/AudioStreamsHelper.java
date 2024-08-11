@@ -28,10 +28,13 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.R;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -40,6 +43,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.utils.ThreadUtils;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.common.base.Strings;
 
 import java.util.ArrayList;
@@ -345,5 +349,17 @@ public class AudioStreamsHelper {
         intent.putExtra(BROADCAST_TITLE, title);
         intent.putParcelableArrayListExtra(DEVICES, new ArrayList<>(devices));
         context.startService(intent);
+    }
+
+    static void configureAppBarByOrientation(@Nullable FragmentActivity activity) {
+        if (activity != null) {
+            AppBarLayout appBarLayout = activity.findViewById(R.id.app_bar);
+            if (appBarLayout != null) {
+                boolean canAppBarExpand =
+                        activity.getResources().getConfiguration().orientation
+                                == Configuration.ORIENTATION_PORTRAIT;
+                appBarLayout.setExpanded(canAppBarExpand);
+            }
+        }
     }
 }

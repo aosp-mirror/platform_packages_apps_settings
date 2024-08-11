@@ -47,7 +47,7 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.LayoutPreference;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * This class adds a header with device name and status (connected/disconnected, etc.).
@@ -90,7 +90,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
     LayoutPreference mLayoutPreference;
     LocalBluetoothManager mManager;
     private CachedBluetoothDevice mCachedDevice;
-    private List<CachedBluetoothDevice> mAllOfCachedDevices;
+    private Set<CachedBluetoothDevice> mCachedDeviceGroup;
     @VisibleForTesting
     Handler mHandler = new Handler(Looper.getMainLooper());
     @VisibleForTesting
@@ -107,7 +107,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         if (mCachedDevice == null || mProfileManager == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        boolean hasLeAudio = mCachedDevice.getConnectableProfiles()
+        boolean hasLeAudio = mCachedDevice.getUiAccessibleProfiles()
                 .stream()
                 .anyMatch(profile -> profile.getProfileId() == BluetoothProfile.LE_AUDIO);
 
@@ -128,7 +128,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             return;
         }
         mIsRegisterCallback = true;
-        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+        for (CachedBluetoothDevice item : mCachedDeviceGroup) {
             item.registerCallback(this);
         }
         refresh();
@@ -139,7 +139,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         if (!mIsRegisterCallback) {
             return;
         }
-        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+        for (CachedBluetoothDevice item : mCachedDeviceGroup) {
             item.unregisterCallback(this);
         }
 
@@ -155,7 +155,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         mCachedDevice = cachedBluetoothDevice;
         mManager = bluetoothManager;
         mProfileManager = bluetoothManager.getProfileManager();
-        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
+        mCachedDeviceGroup = Utils.findAllCachedBluetoothDevicesByGroupId(mManager, mCachedDevice);
     }
 
     @VisibleForTesting
@@ -230,7 +230,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         // Init the battery layouts.
         hideAllOfBatteryLayouts();
         LeAudioProfile leAudioProfile = mProfileManager.getLeAudioProfile();
-        if (mAllOfCachedDevices.isEmpty()) {
+        if (mCachedDeviceGroup.isEmpty()) {
             Log.e(TAG, "There is no LeAudioProfile.");
             return;
         }
@@ -244,7 +244,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             return;
         }
 
-        for (CachedBluetoothDevice cachedDevice : mAllOfCachedDevices) {
+        for (CachedBluetoothDevice cachedDevice : mCachedDeviceGroup) {
             int deviceId = leAudioProfile.getAudioLocation(cachedDevice.getDevice());
             Log.d(TAG, "LeAudioDevices:" + cachedDevice.getDevice().getAnonymizedAddress()
                     + ", deviceId:" + deviceId);
@@ -300,15 +300,15 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
 
     @Override
     public void onDeviceAttributesChanged() {
-        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+        for (CachedBluetoothDevice item : mCachedDeviceGroup) {
             item.unregisterCallback(this);
         }
-        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
-        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+        mCachedDeviceGroup = Utils.findAllCachedBluetoothDevicesByGroupId(mManager, mCachedDevice);
+        for (CachedBluetoothDevice item : mCachedDeviceGroup) {
             item.registerCallback(this);
         }
 
-        if (!mAllOfCachedDevices.isEmpty()) {
+        if (!mCachedDeviceGroup.isEmpty()) {
             refresh();
         }
     }

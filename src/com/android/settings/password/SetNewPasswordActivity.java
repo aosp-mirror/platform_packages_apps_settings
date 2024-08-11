@@ -124,9 +124,7 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
 
     @Override
     public void launchChooseLock(Bundle chooseLockFingerprintExtras) {
-        final boolean isInSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
-        Intent intent = isInSetupWizard ? new Intent(this, SetupChooseLockGeneric.class)
-                : new Intent(this, ChooseLockGeneric.class);
+        final Intent intent = new Intent(this, SetupChooseLockGeneric.class);
         intent.setAction(mNewPasswordAction);
         intent.putExtras(chooseLockFingerprintExtras);
         intent.putExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE,
