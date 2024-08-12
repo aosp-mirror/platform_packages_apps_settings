@@ -16,25 +16,21 @@
 
 package com.android.settings.notification.modes;
 
-import static android.graphics.drawable.GradientDrawable.LINEAR_GRADIENT;
-import static android.graphics.drawable.GradientDrawable.Orientation.BL_TR;
+import static android.app.AutomaticZenRule.TYPE_BEDTIME;
+import static android.app.AutomaticZenRule.TYPE_DRIVING;
+import static android.app.AutomaticZenRule.TYPE_IMMERSIVE;
+import static android.app.AutomaticZenRule.TYPE_MANAGED;
+import static android.app.AutomaticZenRule.TYPE_OTHER;
+import static android.app.AutomaticZenRule.TYPE_THEATER;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Outline;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewOutlineProvider;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,17 +53,6 @@ import com.android.settingslib.notification.modes.ZenModesBackend;
 public class SetupInterstitialActivity extends FragmentActivity {
     private static final String TAG = "ModeSetupInterstitial";
     private ZenModesBackend mBackend;
-
-    private final ViewOutlineProvider mOutlineProvider = new ViewOutlineProvider() {
-        @Override
-        public void getOutline(View view, Outline outline) {
-            // Provides a rounded rectangle outline whose width & height matches the View.
-            float cornerRadius = getResources().getDimensionPixelSize(
-                    R.dimen.zen_mode_interstitial_corner_radius);
-            outline.setRoundRect(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight(),
-                    cornerRadius);
-        }
-    };
 
     /**
      * Returns an intent leading to this page for the given mode and context.
@@ -150,79 +135,17 @@ public class SetupInterstitialActivity extends FragmentActivity {
     }
 
     private void setImage(@NonNull ImageView img, @NonNull ZenMode mode) {
-        img.setImageDrawable(getModeDrawable(mode));
-        img.setClipToOutline(true);
-        img.setOutlineProvider(mOutlineProvider);
+        int drawableRes = switch (mode.getType()) {
+            case TYPE_BEDTIME -> R.drawable.modes_interstitial_bedtime;
+            case TYPE_DRIVING -> R.drawable.modes_interstitial_driving;
+            case TYPE_IMMERSIVE -> R.drawable.modes_interstitial_immersive;
+            case TYPE_THEATER -> R.drawable.modes_interstitial_theater;
+            case TYPE_MANAGED -> R.drawable.modes_interstitial_managed;
+            case TYPE_OTHER -> R.drawable.modes_interstitial_other;
+            default -> R.drawable.modes_interstitial_unknown;
+        };
 
-        FrameLayout frame = findViewById(R.id.image_frame);
-        if (frame == null) {
-            return;
-        }
-        if (img.getMeasuredWidth() == 0) {
-            // set up to resize after the global layout occurs
-            img.getViewTreeObserver().addOnGlobalLayoutListener(
-                    new ViewTreeObserver.OnGlobalLayoutListener() {
-                        @Override
-                        public void onGlobalLayout() {
-                            img.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                            sizeImageToFrame(img, frame);
-                        }
-                    });
-        } else {
-            // measured already, resize it now
-            sizeImageToFrame(img, frame);
-        }
-    }
-
-    private Drawable getModeDrawable(@NonNull ZenMode mode) {
-        // TODO: b/332730534 - set actual images depending on mode type (asynchronously?)
-        GradientDrawable placeholder = new GradientDrawable();
-        placeholder.setSize(40, 60);  // 4x6 rectangle, slightly taller than wide
-        placeholder.setGradientType(LINEAR_GRADIENT);
-        placeholder.setOrientation(BL_TR);
-        placeholder.setColors(new int[]{Color.BLACK, Color.WHITE});
-        return placeholder;
-    }
-
-    @VisibleForTesting
-    protected void sizeImageToFrame(ImageView img, FrameLayout frame) {
-        // width of the space we have available = overall size of frame - relevant padding
-        int frameHeight =
-                frame.getMeasuredHeight() - frame.getPaddingTop() - frame.getPaddingBottom();
-        int frameWidth =
-                frame.getMeasuredWidth() - frame.getPaddingLeft() - frame.getPaddingRight();
-
-        int imgHeight = img.getDrawable().getIntrinsicHeight();
-        int imgWidth = img.getDrawable().getIntrinsicWidth();
-
-        // if any of these are 0, give up because we won't be able to do the relevant math (and
-        // we probably don't have the relevant data set up)
-        if (frameHeight == 0 || frameWidth == 0 || imgHeight == 0 || imgWidth == 0) {
-            Log.w(TAG, "image or frame has invalid size parameters");
-            return;
-        }
-        float frameHWRatio = ((float) frameHeight) / frameWidth;
-        float imgHWRatio = ((float) imgHeight) / imgWidth;
-
-        // fit horizontal dimension if the frame has a taller ratio (height/width) than the image;
-        // otherwise, fit the vertical direction
-        boolean fitHorizontal = frameHWRatio > imgHWRatio;
-
-        ViewGroup.LayoutParams layoutParams = img.getLayoutParams();
-        if (layoutParams == null) {
-            Log.w(TAG, "image has null LayoutParams");
-            return;
-        }
-        if (fitHorizontal) {
-            layoutParams.width = frameWidth;
-            float scaledHeight = imgHWRatio * frameWidth;
-            layoutParams.height = (int) scaledHeight;
-        } else {
-            layoutParams.height = frameHeight;
-            float scaledWidth = /* w/h ratio */ (1 / imgHWRatio) * frameHeight;
-            layoutParams.width = (int) scaledWidth;
-        }
-        img.setLayoutParams(layoutParams);
+        img.setImageResource(drawableRes);
     }
 
     private void setupButton(Button button, @NonNull ZenMode mode) {
