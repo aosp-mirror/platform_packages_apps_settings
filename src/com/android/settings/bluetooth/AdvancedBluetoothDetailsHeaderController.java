@@ -37,12 +37,14 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -97,6 +99,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     private static final int MAIN_DEVICE_ID = 4;
     private static final float HALF_ALPHA = 0.5f;
 
+    PreferenceFragmentCompat mFragment;
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
     @VisibleForTesting
@@ -170,8 +173,11 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         mIconCache.clear();
     }
 
-    public void init(CachedBluetoothDevice cachedBluetoothDevice) {
+    /** Initializes the controller. */
+    public void init(
+            CachedBluetoothDevice cachedBluetoothDevice, PreferenceFragmentCompat fragment) {
         mCachedDevice = cachedBluetoothDevice;
+        mFragment = fragment;
     }
 
     private void registerBluetoothDevice() {
@@ -325,6 +331,14 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                     MAIN_DEVICE_ID);
                         }
                     });
+            if (Flags.enableBluetoothDeviceDetailsPolish()) {
+                ImageButton renameButton = mLayoutPreference.findViewById(R.id.rename_button);
+                renameButton.setVisibility(View.VISIBLE);
+                renameButton.setOnClickListener(view -> {
+                    RemoteDeviceNameDialogFragment.newInstance(mCachedDevice).show(
+                            mFragment.getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
+                });
+            }
         }
     }
 
