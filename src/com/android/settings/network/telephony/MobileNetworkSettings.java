@@ -202,6 +202,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (isUiRestricted()) {
+            Log.d(LOG_TAG, "Mobile network page is disallowed.");
+            finish();
+            return;
+        }
 
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.d(LOG_TAG, "Invalid subId, get the default subscription to show.");
