@@ -26,7 +26,7 @@ import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.flags.Flags
 
-class DeviceDiagnosticsPreferenceController(context: Context, preferenceKey: String) :
+open class DeviceDiagnosticsPreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
 
     override fun getAvailabilityStatus(): Int {
@@ -59,6 +59,12 @@ class DeviceDiagnosticsPreferenceController(context: Context, preferenceKey: Str
         val packageName = mContext.getResources().getString(
                 R.string.config_device_diagnostics_package_name)
         intent.setPackage(packageName)
+
+        val info = mContext.getPackageManager().resolveActivity(intent, 0)
+        if (info == null) {
+            return null
+        }
+
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         return intent
     }
