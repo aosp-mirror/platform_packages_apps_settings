@@ -269,7 +269,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"Блокировать после отключения"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> после отключения"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Сразу по истечении времени ожидания (если блокировка экрана не контролируется функцией <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>)"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, если функция \"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>\" отключена"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, если не включена <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Текст на заблокированном экране"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Нет текста"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Например, Android Саши"</string>
@@ -382,9 +382,9 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Рекомендуем использовать защитное стекло или пленку из серии \"Сделано для Google\". Устройства с другими стеклами или пленками могут не распознавать отпечаток пальца ребенка."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Разблокировка с помощью часов"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Если вы настроили фейсконтроль и разблокировку по отпечатку пальца, то отпечаток будет запрашиваться, когда вы в маске или вокруг вас темно.\n\nС помощью часов удобно разблокировать телефон в различных ситуациях, например когда у вас мокрые пальцы или не распознается лицо."</string>
-    <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"С помощью часов удобно разблокировать телефон в различных ситуациях, например когда не распознается отпечаток пальца."</string>
-    <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"С помощью часов удобно разблокировать телефон в различных ситуациях, например когда не распознается лицо."</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Если вы настроили фейсконтроль и разблокировку по отпечатку пальца, то отпечаток будет запрашиваться, когда вы в маске или вокруг вас темно.\n\nКогда ваше лицо не распознается или у вас мокрые пальцы, удобно разблокировать телефон с помощью часов."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Когда отпечаток пальца не распознается, удобно разблокировать телефон с помощью часов."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Когда ваше лицо не распознается, удобно разблокировать телефон с помощью часов."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Используйте отпечаток пальца или часы, чтобы"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Используйте фейсконтроль или часы, чтобы"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Способы использования"</string>
@@ -460,7 +460,7 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Прикоснитесь к кнопке питания, не нажимая ее"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Как добавить отпечаток пальца"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Сканер находится на задней панели устройства. Приложите к нему указательный палец."</string>
-    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"На следующем экране вы сможете отсканировать отпечаток пальца с помощью такого датчика."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Датчик отпечатков пальцев находится на дисплее. Отсканируйте отпечаток на следующем экране."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Начать"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Чтобы найти сканер, проведите пальцем по экрану. Нажмите на сканер отпечатка пальца и удерживайте."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"На этом рисунке показано, где находится сканер"</string>
@@ -596,7 +596,7 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Создание личного пространства…"</string>
     <string name="private_space_notifications_hidden_title" msgid="2009112565217540581">"Когда частное пространство заблокировано, уведомления из добавленных в него приложений скрываются"</string>
     <string name="private_space_explore_settings_title" msgid="1448128245941571654">"Скройте частное пространство и настройте его автоматическую блокировку"</string>
-    <string name="private_space_apps_installed_title" msgid="4781838023423527730">"В вашем личном пространстве уже установлены нужные приложения"</string>
+    <string name="private_space_apps_installed_title" msgid="4781838023423527730">"В вашем частном пространстве уже установлены нужные приложения"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Не удалось создать частное пространство"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Повторить попытку"</string>
     <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Использовать способ, настроенный для экрана?"</string>
@@ -634,7 +634,7 @@
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Вы больше не сможете использовать отпечаток пальца для разблокировки рабочего профиля, подтверждения покупок и входа в рабочие приложения."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Шифрование"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Зашифровано"</string>
-    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Настройка блокировки экрана"</string>
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Настройте блокировку экрана"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Для дополнительной безопасности установите на этом устройстве PIN-код, графический ключ или пароль."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Настроить блокировку экрана"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Настройте блокировку экрана"</string>
@@ -643,13 +643,13 @@
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Добавьте отпечаток пальца для разблокировки"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Блокировка экрана"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Способ разблокировки экрана"</string>
-    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Выбрать новый способ блокировки экрана"</string>
+    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Выберите способ блокировки экрана"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Блокировка для рабочего профиля"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Блокировка для раб. профиля"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Для более надежной защиты настройте дополнительный способ разблокировки экрана."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Выберите дополнительный способ разблокировки экрана."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Если вы забыли данные для разблокировки экрана, восстановить их невозможно."</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Задайте отдельную блокировку для рабочего профиля."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Задать отдельный способ блокировки для рабочего профиля"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Если вы забудете, как снять блокировку, ее сможет сбросить администратор."</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Варианты блокировки экрана"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Варианты блокировки экрана"</string>
@@ -667,7 +667,7 @@
     <string name="unlock_set_unlock_pin_title" msgid="5283636759362880407">"PIN-код"</string>
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Пароль"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Не сейчас"</string>
-    <string name="current_screen_lock" msgid="1367883977261098017">"Текущий способ блокировки"</string>
+    <string name="current_screen_lock" msgid="1367883977261098017">"Текущий способ разблокировки"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Графический ключ • Отпечаток пальца"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN • Отпечаток пальца"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Пароль • Отпечаток пальца"</string>
@@ -744,11 +744,11 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Без блокировки экрана не будет работать защита устройства.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Модель отпечатка пальца, сохраненная на устройстве, будет удалена. Модель вашего лица также будет безвозвратно удалена. Вы не сможете пользоваться фейсконтролем и отпечатком пальца для аутентификации в приложениях."</string>
-    <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Не использовать"</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Отключить"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"Для стабильной работы приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" рекомендуется настроить сложный PIN-код или пароль."</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"Для стабильной работы приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" рекомендуется настроить новый PIN-код или пароль."</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"Для стабильной работы приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" рекомендуется настроить новый графический ключ, PIN-код или пароль."</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"Для приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" рекомендуется настроить новый способ блокировки экрана."</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"Приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" рекомендует настроить новый способ разблокировки экрана."</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Попробуйте ещё раз. Попытка <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> из <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Осталась одна попытка"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Если вы неправильно введете графический ключ, с устройства будут удалены все данные."</string>
@@ -1595,7 +1595,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Задайте PIN-код"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Задайте PIN-код для рабочего профиля"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Задайте графичес­кий ключ"</string>
-    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Чтобы обеспечить дополнительную безопасность, задайте графический ключ для разблокировки этого устройства."</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Чтобы лучше защитить устройство, задайте графический ключ для его разблокировки"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Задайте граф. ключ для рабочего профиля"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Задайте пароль"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Задайте графический ключ"</string>
@@ -1675,12 +1675,12 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Запрашивать ключ"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Использовать графический ключ для защиты телефона"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Показывать ключ"</string>
-    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Повыcить конфиденциальность PIN-кода"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Надежнее защищать PIN-код"</string>
     <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Отключить анимации при вводе PIN-кода"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Показывать графический ключ"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Виброотклик"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Блокировать кнопкой питания"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Если функция \"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>\" отключена"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Если не включена <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Установить ключ"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Изменить ключ"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Как начертить графический ключ разблокировки"</string>
@@ -1697,7 +1697,7 @@
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Использовать один способ блокировки"</string>
     <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Тот же способ блокировки, что и для экрана устройства"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"Управление приложениями"</string>
-    <string name="applications_settings" msgid="1941993743933425622">"Сведения о приложении"</string>
+    <string name="applications_settings" msgid="1941993743933425622">"Сведения о приложениях"</string>
     <string name="applications_settings_header" msgid="3154670675856048015">"Настройки приложения"</string>
     <string name="install_applications" msgid="3921609656584369901">"Неизвестные источники"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Разрешить из всех источников"</string>
@@ -1986,7 +1986,7 @@
     <string name="accessibility_settings" msgid="4713215774904704682">"Спец. возможности"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Настройки специальных возможностей"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Экран, элементы управления, аудио"</string>
-    <string name="vision_settings_title" msgid="8919983801864103069">"Настройки спец. возможностей"</string>
+    <string name="vision_settings_title" msgid="8919983801864103069">"Настройки для слабовидящих"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"Используйте специальные возможности для удобной работы с устройством. Эти параметры можно изменить в настройках."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Изменить размер шрифта"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Программа чтения с экрана"</string>
@@ -2074,7 +2074,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Экранная лупа"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Изменение масштаба тремя нажатиями"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Чтобы увеличить масштаб, нажмите кнопку"</string>
-    <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Быстрое увеличение масштаба."</string>
+    <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Быстрое увеличение масштаба"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Чтобы увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Выполните действие быстрого запуска для перехода в режим увеличения.&lt;br/&gt; {1,number,integer}. Коснитесь экрана.&lt;br/&gt; {2,number,integer}. Если нужно, перетащите область увеличения двумя пальцами.&lt;br/&gt; {3,number,integer}. Чтобы скорректировать масштаб, сведите или разведите два пальца.&lt;br/&gt; {4,number,integer}. Чтобы выйти из режима увеличения, выполните действие быстрого запуска.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Чтобы временно увеличить масштаб:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Убедитесь, что выбран режим увеличения \"Весь экран\".&lt;br/&gt; {1,number,integer}. Выполните действие быстрого запуска для перехода в режим увеличения.&lt;br/&gt; {2,number,integer}. Коснитесь любой области экрана и удерживайте палец.&lt;br/&gt; {3,number,integer}. Если нужно, перетащите область увеличения.&lt;br/&gt; {4,number,integer}. Чтобы вернуть исходный масштаб, уберите палец с экрана."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Благодаря функции увеличения вы сможете приближать изображение на экране.\n\n"<b>"Если вы хотите увеличить изображение"</b>", включите функцию и нажмите на экран в любом месте.\n"<ul><li>"Для прокрутки проведите двумя пальцами."</li>\n<li>"Чтобы изменить масштаб, сведите два пальца вместе или разведите их."</li></ul>\n\n<b>"Если нужно временно увеличить масштаб"</b>", включите функцию увеличения, коснитесь экрана и удерживайте.\n"<ul><li>"Для обзора проведите по экрану."</li>\n<li>"Чтобы уменьшить масштаб, отпустите палец."</li></ul>\n\n"Эти жесты не работают на клавиатуре и панели навигации."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Страница <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> из <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
@@ -3794,8 +3794,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Уведомления отключены"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Дополнительные настройки"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Разрешения"</string>
-    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Обновление сведений о передаче данных о местоположении"</string>
-    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Проверить приложения, которые изменили подход к передаче данных о вашем местоположении"</string>
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Изменения в передаче геоданных"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Проверить приложения, в которых изменились разрешения на передачу геоданных"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Включение нажатием"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Дважды нажмите в любом месте экрана, чтобы включить устройство"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Открытие ссылок"</string>
@@ -5104,7 +5104,7 @@
     <string name="color_inversion_state_on" msgid="1160969033636440368">"Включено"</string>
     <string name="color_inversion_state_off" msgid="6925638668080451724">"Отключено"</string>
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Сделать светлые цвета темными, а темные – светлыми"</string>
-    <string name="magnification_feature_summary" msgid="2053971569640663564">"Включить функцию увеличения масштаба на экране"</string>
+    <string name="magnification_feature_summary" msgid="2053971569640663564">"Увеличивать изображение на экране"</string>
     <string name="autoclick_disabled" msgid="3213396804955002120">"Отключено"</string>
     <string name="show_captions_disabled" msgid="690650956523818755">"Отключено"</string>
     <string name="show_captions_enabled" msgid="7089043007924626">"Включено"</string>
