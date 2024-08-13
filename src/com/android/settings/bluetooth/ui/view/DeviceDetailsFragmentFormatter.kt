@@ -18,20 +18,19 @@ package com.android.settings.bluetooth.ui.view
 
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
+import android.media.AudioManager
 import android.util.Log
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.android.settings.SettingsPreferenceFragment
+import com.android.settings.bluetooth.ui.composable.Icon
 import com.android.settings.bluetooth.ui.composable.MultiTogglePreferenceGroup
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayout
 import com.android.settings.bluetooth.ui.viewmodel.BluetoothDeviceDetailsViewModel
@@ -42,7 +41,6 @@ import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSetti
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.spa.framework.theme.SettingsDimension
-import com.android.settingslib.spa.widget.preference.Preference as SpaPreference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
@@ -52,6 +50,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import com.android.settingslib.spa.widget.preference.Preference as SpaPreference
+
 
 /** Handles device details fragment layout according to config. */
 interface DeviceDetailsFragmentFormatter {
@@ -72,19 +72,24 @@ class DeviceDetailsFragmentFormatterImpl(
     private val repository =
         featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
             context, bluetoothAdapter, fragment.lifecycleScope)
+    private val spatialAudioInteractor =
+        featureFactory.bluetoothFeatureProvider.getSpatialAudioInteractor(
+            context, context.getSystemService(AudioManager::class.java), fragment.lifecycleScope)
     private val viewModel: BluetoothDeviceDetailsViewModel =
         ViewModelProvider(
                 fragment,
                 BluetoothDeviceDetailsViewModel.Factory(
                     repository,
+                    spatialAudioInteractor,
                     cachedDevice,
                 ))
             .get(BluetoothDeviceDetailsViewModel::class.java)
 
     override fun getVisiblePreferenceKeysForMainPage(): List<String>? = runBlocking {
-        viewModel.getItems()?.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem>()?.map {
-            it.preferenceKey
-        }
+        viewModel
+            .getItems()
+            ?.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem>()
+            ?.mapNotNull { it.preferenceKey }
     }
 
     /** Updates bluetooth device details fragment layout. */
@@ -208,12 +213,8 @@ class DeviceDetailsFragmentFormatterImpl(
 
     @Composable
     private fun deviceSettingIcon(model: DeviceSettingModel.ActionSwitchPreference) {
-        model.icon?.let { bitmap ->
-            Icon(
-                bitmap.asImageBitmap(),
-                contentDescription = null,
-                modifier = Modifier.size(SettingsDimension.itemIconSize),
-                tint = LocalContentColor.current)
+        model.icon?.let { icon ->
+            Icon(icon, modifier = Modifier.size(SettingsDimension.itemIconSize))
         }
     }
 

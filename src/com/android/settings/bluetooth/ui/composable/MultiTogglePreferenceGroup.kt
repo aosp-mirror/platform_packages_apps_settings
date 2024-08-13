@@ -51,7 +51,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
@@ -67,6 +66,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import com.android.settings.R
+import com.android.settings.bluetooth.ui.composable.Icon as DeviceSettingComposeIcon
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.spa.framework.theme.SettingsDimension
@@ -97,35 +97,29 @@ fun MultiTogglePreferenceGroup(
                     Surface(
                         modifier = Modifier.height(64.dp),
                         shape = RoundedCornerShape(28.dp),
-                        color = MaterialTheme.colorScheme.surface
-                    ) {
-                        Button(
-                            modifier =
-                                Modifier.fillMaxSize().padding(8.dp).semantics {
-                                    role = Role.Switch
-                                    toggleableState =
-                                        if (preferenceModel.isActive) {
-                                            ToggleableState.On
-                                        } else {
-                                            ToggleableState.Off
-                                        }
-                                    contentDescription = preferenceModel.title
-                                },
-                            onClick = { settingIdForPopUp = preferenceModel.id },
-                            shape = RoundedCornerShape(20.dp),
-                            colors = getButtonColors(preferenceModel.isActive),
-                            contentPadding = PaddingValues(0.dp)
-                        ) {
-                            Icon(
-                                preferenceModel.toggles[preferenceModel.state.selectedIndex]
-                                    .icon
-                                    .asImageBitmap(),
-                                contentDescription = null,
-                                modifier = Modifier.size(24.dp),
-                                tint = LocalContentColor.current
-                            )
+                        color = MaterialTheme.colorScheme.surface) {
+                            Button(
+                                modifier =
+                                    Modifier.fillMaxSize().padding(8.dp).semantics {
+                                        role = Role.Switch
+                                        toggleableState =
+                                            if (preferenceModel.isActive) {
+                                                ToggleableState.On
+                                            } else {
+                                                ToggleableState.Off
+                                            }
+                                        contentDescription = preferenceModel.title
+                                    },
+                                onClick = { settingIdForPopUp = preferenceModel.id },
+                                shape = RoundedCornerShape(20.dp),
+                                colors = getButtonColors(preferenceModel.isActive),
+                                contentPadding = PaddingValues(0.dp)) {
+                                    DeviceSettingComposeIcon(
+                                        preferenceModel.toggles[preferenceModel.state.selectedIndex]
+                                            .icon,
+                                        modifier = Modifier.size(24.dp))
+                                }
                         }
-                    }
                 }
                 Row { Text(text = preferenceModel.title, fontSize = 12.sp) }
             }
@@ -173,8 +167,7 @@ private fun dialog(
                             Icon(
                                 painterResource(id = R.drawable.ic_close),
                                 null,
-                                tint = MaterialTheme.colorScheme.inverseSurface
-                            )
+                                tint = MaterialTheme.colorScheme.inverseSurface)
                         }
                         Box(modifier = Modifier.padding(horizontal = 8.dp, vertical = 20.dp)) {
                             dialogContent(multiTogglePreference)
@@ -182,8 +175,7 @@ private fun dialog(
                     }
                 },
             )
-        }
-    )
+        })
 }
 
 @Composable
@@ -208,9 +200,7 @@ private fun dialogContent(multiTogglePreference: DeviceSettingModel.MultiToggleP
                 Modifier.fillMaxWidth()
                     .height(64.dp)
                     .background(
-                        MaterialTheme.colorScheme.surface,
-                        shape = RoundedCornerShape(28.dp)
-                    ),
+                        MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(28.dp)),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
@@ -224,9 +214,7 @@ private fun dialogContent(multiTogglePreference: DeviceSettingModel.MultiToggleP
                                     .width(selectedRect!!.width.toDp())
                                     .background(
                                         MaterialTheme.colorScheme.tertiaryContainer,
-                                        shape = RoundedCornerShape(20.dp)
-                                    )
-                        )
+                                        shape = RoundedCornerShape(20.dp)))
                     }
                 }
                 Row {
@@ -238,9 +226,7 @@ private fun dialogContent(multiTogglePreference: DeviceSettingModel.MultiToggleP
                                     .padding(horizontal = 8.dp)
                                     .height(48.dp)
                                     .background(
-                                        Color.Transparent,
-                                        shape = RoundedCornerShape(28.dp)
-                                    )
+                                        Color.Transparent, shape = RoundedCornerShape(28.dp))
                                     .onGloballyPositioned { layoutCoordinates ->
                                         if (selected) {
                                             selectedRect = layoutCoordinates.boundsInParent()
@@ -252,22 +238,16 @@ private fun dialogContent(multiTogglePreference: DeviceSettingModel.MultiToggleP
                             Button(
                                 onClick = {
                                     multiTogglePreference.updateState(
-                                        DeviceSettingStateModel.MultiTogglePreferenceState(idx)
-                                    )
+                                        DeviceSettingStateModel.MultiTogglePreferenceState(idx))
                                 },
                                 modifier = Modifier.fillMaxSize(),
                                 colors =
                                     ButtonDefaults.buttonColors(
                                         containerColor = Color.Transparent,
-                                        contentColor = LocalContentColor.current
-                                    ),
+                                        contentColor = LocalContentColor.current),
                             ) {
-                                Icon(
-                                    bitmap = toggle.icon.asImageBitmap(),
-                                    null,
-                                    modifier = Modifier.size(24.dp),
-                                    tint = LocalContentColor.current
-                                )
+                                DeviceSettingComposeIcon(
+                                    toggle.icon, modifier = Modifier.size(24.dp))
                             }
                         }
                     }
@@ -285,8 +265,7 @@ private fun dialogContent(multiTogglePreference: DeviceSettingModel.MultiToggleP
                     text = toggle.label,
                     fontSize = 12.sp,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.weight(1f).padding(horizontal = 8.dp)
-                )
+                    modifier = Modifier.weight(1f).padding(horizontal = 8.dp))
             }
         }
     }

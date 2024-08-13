@@ -19,11 +19,13 @@ package com.android.settings.bluetooth.ui.view
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.graphics.Bitmap
+import android.media.AudioManager
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
@@ -31,6 +33,7 @@ import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigModel
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.ToggleModel
@@ -45,6 +48,7 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
+import org.mockito.Mockito.any
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
@@ -59,6 +63,7 @@ class DeviceDetailsFragmentFormatterTest {
     @Mock private lateinit var cachedDevice: CachedBluetoothDevice
     @Mock private lateinit var bluetoothAdapter: BluetoothAdapter
     @Mock private lateinit var repository: DeviceSettingRepository
+    @Mock private lateinit var spatialAudioInteractor: SpatialAudioInteractor
 
     private lateinit var fragment: TestFragment
     private lateinit var underTest: DeviceDetailsFragmentFormatter
@@ -73,6 +78,10 @@ class DeviceDetailsFragmentFormatterTest {
                 featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
                     eq(context), eq(bluetoothAdapter), any()))
             .thenReturn(repository)
+        `when`(
+            featureFactory.bluetoothFeatureProvider.getSpatialAudioInteractor(
+                eq(context), any(AudioManager::class.java), any()))
+            .thenReturn(spatialAudioInteractor)
         val fragmentActivity = Robolectric.setupActivity(FragmentActivity::class.java)
         assertThat(fragmentActivity.applicationContext).isNotNull()
         fragment = TestFragment(context)
@@ -186,7 +195,15 @@ class DeviceDetailsFragmentFormatterTest {
                             toggles =
                                 listOf(
                                     ToggleModel(
-                                        "", Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888))),
+                                        "", DeviceSettingIcon.BitmapIcon(
+                                            Bitmap.createBitmap(
+                                                1,
+                                                1,
+                                                Bitmap.Config.ARGB_8888
+                                            )
+                                        )
+                                    )
+                                ),
                             isActive = true,
                             state = DeviceSettingStateModel.MultiTogglePreferenceState(0),
                             isAllowedChangingState = true,

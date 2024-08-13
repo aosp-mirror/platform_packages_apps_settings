@@ -19,6 +19,7 @@ package com.android.settings.bluetooth.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayout
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayoutRow
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
@@ -29,6 +30,7 @@ import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSetti
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
@@ -37,6 +39,7 @@ import kotlinx.coroutines.flow.stateIn
 
 class BluetoothDeviceDetailsViewModel(
     private val deviceSettingRepository: DeviceSettingRepository,
+    private val spatialAudioInteractor: SpatialAudioInteractor,
     private val cachedDevice: CachedBluetoothDevice,
 ) : ViewModel() {
     private val items =
@@ -46,8 +49,16 @@ class BluetoothDeviceDetailsViewModel(
 
     suspend fun getItems(): List<DeviceSettingConfigItemModel>? = items.await()?.mainItems
 
-    fun getDeviceSetting(cachedDevice: CachedBluetoothDevice, @DeviceSettingId settingId: Int) =
-        deviceSettingRepository.getDeviceSetting(cachedDevice, settingId)
+    fun getDeviceSetting(
+        cachedDevice: CachedBluetoothDevice,
+        @DeviceSettingId settingId: Int
+    ): Flow<DeviceSettingModel?> {
+        return when (settingId) {
+            DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE ->
+                spatialAudioInteractor.getDeviceSetting(cachedDevice)
+            else -> deviceSettingRepository.getDeviceSetting(cachedDevice, settingId)
+        }
+    }
 
     suspend fun getLayout(): DeviceSettingLayout? {
         val configItems = getItems() ?: return null
@@ -93,11 +104,14 @@ class BluetoothDeviceDetailsViewModel(
 
     class Factory(
         private val deviceSettingRepository: DeviceSettingRepository,
+        private val spatialAudioInteractor: SpatialAudioInteractor,
         private val cachedDevice: CachedBluetoothDevice,
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return BluetoothDeviceDetailsViewModel(deviceSettingRepository, cachedDevice) as T
+            return BluetoothDeviceDetailsViewModel(
+                deviceSettingRepository, spatialAudioInteractor, cachedDevice)
+                as T
         }
     }
 

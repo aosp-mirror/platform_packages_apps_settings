@@ -20,6 +20,7 @@ import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.graphics.Bitmap
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayout
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
@@ -27,6 +28,7 @@ import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigModel
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.ToggleModel
@@ -45,6 +47,8 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
@@ -61,6 +65,8 @@ class BluetoothDeviceDetailsViewModelTest {
 
     @Mock private lateinit var repository: DeviceSettingRepository
 
+    @Mock private lateinit var spatialAudioInteractor: SpatialAudioInteractor
+
     private lateinit var underTest: BluetoothDeviceDetailsViewModel
     private lateinit var featureFactory: FakeFeatureFactory
     private val testScope = TestScope()
@@ -74,7 +80,8 @@ class BluetoothDeviceDetailsViewModelTest {
                     eq(context), eq(bluetoothAdapter), any()))
             .thenReturn(repository)
 
-        underTest = BluetoothDeviceDetailsViewModel(repository, cachedDevice)
+        underTest =
+            BluetoothDeviceDetailsViewModel(repository, spatialAudioInteractor, cachedDevice)
     }
 
     @Test
@@ -88,6 +95,66 @@ class BluetoothDeviceDetailsViewModelTest {
             val keys = underTest.getItems()
 
             assertThat(keys).containsExactly(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2)
+        }
+    }
+
+    @Test
+    fun getDeviceSetting_returnRepositoryResponse() {
+        testScope.runTest {
+            val remoteSettingId1 = 10001
+            val pref = buildMultiTogglePreference(remoteSettingId1)
+            `when`(repository.getDeviceSettingsConfig(cachedDevice))
+                .thenReturn(
+                    DeviceSettingConfigModel(
+                        listOf(
+                            BUILTIN_SETTING_ITEM_1,
+                            buildRemoteSettingItem(remoteSettingId1),
+                        ),
+                        listOf(),
+                        "footer"))
+            `when`(repository.getDeviceSetting(cachedDevice, remoteSettingId1))
+                .thenReturn(flowOf(pref))
+
+            var deviceSetting: DeviceSettingModel? = null
+            underTest
+                .getDeviceSetting(cachedDevice, remoteSettingId1)
+                .onEach { deviceSetting = it }
+                .launchIn(testScope.backgroundScope)
+            runCurrent()
+
+            assertThat(deviceSetting).isSameInstanceAs(pref)
+            verify(repository, times(1)).getDeviceSetting(cachedDevice, remoteSettingId1)
+        }
+    }
+
+    @Test
+    fun getDeviceSetting_spatialAudio_returnSpatialAudioInteractorResponse() {
+        testScope.runTest {
+            val pref =
+                buildMultiTogglePreference(
+                    DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE)
+            `when`(repository.getDeviceSettingsConfig(cachedDevice))
+                .thenReturn(
+                    DeviceSettingConfigModel(
+                        listOf(
+                            BUILTIN_SETTING_ITEM_1,
+                            buildRemoteSettingItem(
+                                DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE),
+                        ),
+                        listOf(),
+                        "footer"))
+            `when`(spatialAudioInteractor.getDeviceSetting(cachedDevice)).thenReturn(flowOf(pref))
+
+            var deviceSetting: DeviceSettingModel? = null
+            underTest
+                .getDeviceSetting(
+                    cachedDevice, DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE)
+                .onEach { deviceSetting = it }
+                .launchIn(testScope.backgroundScope)
+            runCurrent()
+
+            assertThat(deviceSetting).isSameInstanceAs(pref)
+            verify(spatialAudioInteractor, times(1)).getDeviceSetting(cachedDevice)
         }
     }
 
@@ -163,7 +230,12 @@ class BluetoothDeviceDetailsViewModelTest {
             cachedDevice,
             settingId,
             "title",
-            toggles = listOf(ToggleModel("", Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888))),
+            toggles =
+                listOf(
+                    ToggleModel(
+                        "toggle1",
+                        DeviceSettingIcon.BitmapIcon(
+                            Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)))),
             isActive = true,
             state = DeviceSettingStateModel.MultiTogglePreferenceState(0),
             isAllowedChangingState = true,
