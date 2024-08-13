@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Í bið"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Óþekkt"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Forskoðun"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR-kóði"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Minnka"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Stækka"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Alltaf"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Ekki er hægt að velja tungumál fyrir þetta forrit í stillingum."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Tungumál kann að vera frábrugðið tiltækum tungumálum í forritinu. Tiltekin forrit styðja hugsanlega ekki þessa stillingu."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Velja tungumál fyrir hvert forrit."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Kerfi, forrit og vefsvæði nota fyrsta studda tungumálið af lista kjörtungumála."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Tækið, forrit og vefsvæði nota fyrsta studda tungumálið af lista kjörtungumála.\n\nMörg forrit munu einnig nota landsvæði tungumálsins sem þú velur til að sníða dagsetningar, tölur og mælieiningar. Ef þú vilt skipta um landsvæði skaltu velja tungumál og velja síðan þitt svæði."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Til að velja tungumál fyrir hvert forrit skaltu fara í tungumálastillingar forrita."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Nánar um tungumál forrita"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Breyta kerfistungumáli í %s ?"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Andliti og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Andliti, fingrafari og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Andliti, fingraförum og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Þetta er nauðsynlegt þar sem kveikt er á auðkennisathugun"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Taka úr lás með Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Úri bætt við"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Setja upp úr"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Setur upp leynirými…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Ekki tókst að setja upp leynirými"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Reyna aftur"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Hætta"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Leynirými er ekki í boði.\nSkoða hugsanlegar ástæður"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Skoða hugsanlegar ástæður"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Velja nýjan lás fyrir leynirými?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Þú getur stillt nýjan lás bara fyrir leynirými, eða notað sama lás og þú notar til að opna tækið þitt"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Nota skjálás"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Þessi þjónusta hætti að virka."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Aðgengisflýtileiðir"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Sýna í flýtistillingum"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Rauðgræn"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rauðgræn"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Rautt-grænt, grænt veikt"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Rautt-grænt, rautt veikt"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Blágul"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Grátónar"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Styrkur"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Ekki í boði í grátónastillingu eða þegar slökkt er á litaleiðréttingu"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Græn litblinda"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Rauð litblinda"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Græn litblinda"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Rauð litblinda"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Blágul litblinda"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Mjög dökkt"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Gera skjáinn mjög dökkan"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Engin}=1{1 áætlun stillt}one{# áætlun stillt}other{# áætlanir stilltar}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ónáðið ekki"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Forgangsstillingar"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Bæta stillingu við"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Lágmarkaðu truflanir og stjórnaðu því sem vekur athygli þína með stillingum fyrir svefn, vinnu, akstur og allt þar á milli."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Búðu til þína eigin stillingu"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Fáðu aðeins tilkynningar frá mikilvægum einstaklingum og forritum"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Veldu virkjunartegund"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Tími"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"T.d. „9:30 – 17:00“"</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Dagatal"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"T.d. „Persónulegt dagatal“"</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Stilla áætlun"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Áætlun byggist á"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Dagur og tími"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"„9 f.h. - 5 e.h. á virkum dögum“"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Dagatalsviðburðir"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} er virk}=2{{mode_1} og {mode_2} eru virkar}=3{{mode_1}, {mode_2} og {mode_3} eru virkar}one{{mode_1}, {mode_2} og # í viðbót eru virkar}other{{mode_1}, {mode_2} og # í viðbót eru virkar}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{Ein stilling getur kveikt sjálfkrafa á sér}one{# stilling getur kveikt sjálfkrafa á sér}other{# stillingar geta kveikt sjálfkrafa á sér}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"KVEIKT"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Ekki stillt"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Slökkt"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Búðu til stillingu"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Sérsniðin"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Kveikja núna"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Slökkva"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Stilling fannst ekki"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Takmarka truflanir"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Loka fyrir truflanir og áreiti"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Setja upp <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Kveikja á „Ónáðið ekki“"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Vekjarar og hljóð efnis mega trufla"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Tímaáætlanir"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Breyta"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Áætlanir"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Áætlun"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Kveikja sjálfkrafa"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Bæta við dagatali"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Nota dagatalið þitt"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Áætlun"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Stilla áætlun"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Þegar á að kveikja sjálfvirkt"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Viðburðadagskrá"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Kveikja á viðburðum fyrir"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Þegar boðssvar er"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Tímaáætlun"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Áætlun"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> klst. og <xliff:g id="MINUTES">%2$d</xliff:g> mín."</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Kveikja sjálfkrafa"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Áætlun"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Þagga í símanum á vissum tíma"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Stilla reglur fyrir „Ónáðið ekki“"</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Leyfa truflanir sem gefa frá sér hljóð"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Útiloka sjónrænt áreiti"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Leyfa sjónræn merki"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Haltu einbeitingunni"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Fleiri aðgerðir"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Tilkynningasíur"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Fleiri stillingar"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Slökkt}=1{Slökkt / Ein stilling getur kveikt sjálfkrafa á sér}one{Slökkt / # stilling getur kveikt sjálfkrafa á sér}other{Slökkt / # stillingar geta kveikt sjálfkrafa á sér}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Skjástillingar"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Birtingarvalkostir"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"kveikja á dökku þema"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Stilltu stýrikerfið og forrit á að hafa ljósan texta á dökkum bakgrunni, sem getur verið þægilegra fyrir augun og hefur í för með sér umtalsverðan rafhlöðusparnað í sumum tækjum"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Engar skjábreytingar}=1{{effect_1}}=2{{effect_1} og {effect_2}}=3{{effect_1}, {effect_2} og {effect_3}}one{{effect_1}, {effect_2} og # í viðbót}other{{effect_1}, {effect_2} og # í viðbót}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Sía truflanir"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Takmarkaðu það sem getur sent þér tilkynningu"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Engar truflanir eru síaðar"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Skjávalkostir fyrir síaðar tilkynningar"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Þegar kveikt er á „Ónáðið ekki“"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Samtöl"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Öll samtöl"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"öll samtöl"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Forgangssamtöl"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"forgangssamtöl"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Engin"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Breyta í vekjara eingöngu til <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Breyta í truflanir alltaf"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Breyta stillingu"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Bæta stillingu við"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Búðu til stillingu"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Sérsniðin stilling"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Heiti stillingar"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Dagatalsviðburðir"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Svefnáætlun"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Háttatímarútína"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Meðan á akstri stendur"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Tengt við forrit"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Forritastillingar"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Upplýsingar og stillingar í <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Stýrt af <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Slökkva á stillingu"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Ef þú slekkur á þessum eiginleika mun stillingin ekki virka sem skyldi og stillingar hans verða faldar."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Slökkva á <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Það kviknar aldrei á þessari stillingu þegar slökkt er á henni"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Slökkva"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Kveikja á stillingu"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Ef þú kveikir á þessum eiginleika kvikna sjálfkrafa á stillingunni samkvæmt áætlun."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Virkja <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Kviknað gæti sjálfvirkt á þessari stillingu miðað við hvernig hún er stillt"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Kveikja"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Veldu stillingu sem fylgir reglulegri áætlun"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Veldu stillingu í samræmi við dagatalsviðburði og svör við boðum"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Búðu þér til róandi svefnvenjur. Stilltu vekjara, lækkaðu birtustig skjásins og lokaðu fyrir tilkynningar."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Settu öryggið í forgang við akstur án truflana"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Lokaðu fyrir áreiti og truflanir úr tækinu til að halda einbeitingu"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Útilokaðu allar truflanir og tryggðu þér rólegt umhverfi"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Sérsníddu upplifanir og stillingar tækisins fyrir ólíka notendur"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Dragðu úr truflunum með því að leyfa aðeins mikilvægu fólki og forritum að ná í þig"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Viðvörun"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Loka"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Senda ábendingar um þetta tæki"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Rafhlaða"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Stillingasvæði"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Virkja glugga á frjálsu sniði"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Virkja glugga á frjálsu sniði á aukaskjá"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Kveikja á „Ekki hægt að breyta stærð“ í mörgum gluggum"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Leyfir forritum sem ekki er hægt að breyta stærðinni á að opnast í mörgum gluggum"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Hnekkja dökku"</string>
@@ -5182,10 +5184,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Sérsníða"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Sérsníða <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Endurræsingar er krafist til að kveikja á stuðningi við glugga á frjálsu sniði."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Endurræsingar er krafist til að uppfæra tiltækileika glugga á frjálsu sniði."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Endurræsingar er krafist til að virkja glugga á frjálsu sniði á aukaskjáum."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Endurræsa núna"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Endurræsa seinna"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Rýmishljóð"</string>
@@ -5282,7 +5282,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Rós"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Blárauður"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Fjólublár"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Lokið"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Vista"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Hætta við"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Sjálfgefið"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Miðlungs"</string>
