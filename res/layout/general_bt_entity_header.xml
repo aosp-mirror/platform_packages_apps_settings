@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2019 The Android Open Source Project
+  Copyright (C) 2024 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -22,21 +22,29 @@
     style="@style/EntityHeader"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:gravity="center_horizontal"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/bt_header_icon"
+        android:importantForAccessibility="no"
+        style="@style/SettingsLibEntityHeaderIcon"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
         android:gravity="center">
-
         <TextView
-            android:id="@+id/entity_header_title"
+            android:id="@+id/bt_header_device_name"
             style="@style/TextAppearance.EntityHeaderTitle"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:gravity="center"
             android:ellipsize="marquee"
             android:textDirection="locale"
             android:layout_marginStart="48dp"
@@ -56,40 +64,17 @@
             android:src="@drawable/ic_mode_edit"
             android:contentDescription="@string/bluetooth_rename_button"
             android:tint="@color/settingslib_materialColorOnSurface"
-            app:layout_constraintStart_toEndOf="@+id/entity_header_title"
+            app:layout_constraintStart_toEndOf="@+id/bt_header_device_name"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:visibility="gone" />
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/entity_header_summary"
+        android:id="@+id/bt_header_connection_summary"
         style="@style/TextAppearance.EntityHeaderSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="2dp"
-        android:ellipsize="marquee"
-        android:textDirection="locale"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal">
-
-        <include
-            android:id="@+id/layout_left"
-            layout="@layout/advanced_bt_entity_sub"/>
-
-        <include
-            android:id="@+id/layout_middle"
-            layout="@layout/advanced_bt_entity_sub"/>
-
-        <include
-            android:id="@+id/layout_right"
-            layout="@layout/advanced_bt_entity_sub"/>
-
-    </LinearLayout>
-
+        android:singleLine="false"
+        android:textAlignment="center"/>
 </LinearLayout>

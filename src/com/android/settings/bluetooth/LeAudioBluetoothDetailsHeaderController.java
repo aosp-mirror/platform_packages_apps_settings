@@ -27,14 +27,17 @@ import android.os.Looper;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -86,6 +89,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
     @VisibleForTesting
     static final int INVALID_RESOURCE_ID = -1;
 
+    PreferenceFragmentCompat mFragment;
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
     LocalBluetoothManager mManager;
@@ -151,17 +155,26 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
     }
 
     public void init(CachedBluetoothDevice cachedBluetoothDevice,
-            LocalBluetoothManager bluetoothManager) {
+            LocalBluetoothManager bluetoothManager, PreferenceFragmentCompat fragment) {
         mCachedDevice = cachedBluetoothDevice;
         mManager = bluetoothManager;
         mProfileManager = bluetoothManager.getProfileManager();
         mCachedDeviceGroup = Utils.findAllCachedBluetoothDevicesByGroupId(mManager, mCachedDevice);
+        mFragment = fragment;
     }
 
     @VisibleForTesting
     void refresh() {
         if (mLayoutPreference == null || mCachedDevice == null) {
             return;
+        }
+        if (Flags.enableBluetoothDeviceDetailsPolish()) {
+            ImageButton renameButton = mLayoutPreference.findViewById(R.id.rename_button);
+            renameButton.setVisibility(View.VISIBLE);
+            renameButton.setOnClickListener(view -> {
+                RemoteDeviceNameDialogFragment.newInstance(mCachedDevice).show(
+                        mFragment.getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
+            });
         }
         final ImageView imageView = mLayoutPreference.findViewById(R.id.entity_header_icon);
         if (imageView != null) {
