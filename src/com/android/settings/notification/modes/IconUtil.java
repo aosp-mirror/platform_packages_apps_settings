@@ -82,8 +82,8 @@ class IconUtil {
     }
 
     /**
-     * Returns a variant of the supplied {@code icon} to be used as the header in the icon picker.
-     * The inner icon is 48x48dp and it's contained in a circle of diameter 90dp.
+     * Returns a variant of the supplied {@code icon} to be used as the header in the icon picker
+     * (large icon within large circle, with the "material secondary" color combination).
      */
     static Drawable makeIconPickerHeader(@NonNull Context context, Drawable icon) {
         return composeIconCircle(
@@ -99,9 +99,9 @@ class IconUtil {
     }
 
     /**
-     * Returns a variant of the supplied {@code icon} to be used as an option in the icon picker.
-     * The inner icon is 36x36dp and it's contained in a circle of diameter 54dp. It's also set up
-     * so that selection and pressed states are represented in the color.
+     * Returns a variant of the supplied {@code icon} to be used as an option in the icon picker
+     * (small icon in small circle, with "material secondary" colors for the normal state and
+     * "material primary" colors for the selected state).
      */
     static Drawable makeIconPickerItem(@NonNull Context context, @DrawableRes int iconResId) {
         return composeIconCircle(
