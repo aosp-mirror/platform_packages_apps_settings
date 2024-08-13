@@ -241,6 +241,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         if (mSubsGearPref == null) {
             mPreferenceGroup.removeAll();
             mSubsGearPref = new MutableGearPreference(mContext, null);
+            mSubsGearPref
+                    .checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
             mSubsGearPref.setOnPreferenceClickListener(preference -> {
                 connectCarrierNetwork();
                 return true;
