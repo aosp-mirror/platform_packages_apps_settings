@@ -570,7 +570,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
      *   <li>OR multiple admin support is NOT enabled.</li>
      *   <li>OR the <b>current</b> user has DISALLOW_GRANT_ADMIN restriction applied</li>
      *
-     *   <li>OR the <b>target</b> user ('mUserInfo') is a main user OR a guest user.</li>
+     *   <li>OR the <b>target</b> user ('mUserInfo') is a main user</li>
+     *   <li>OR the <b>target</b> user ('mUserInfo') is not of type
+     *   {@link UserManager#USER_TYPE_FULL_SECONDARY}</li>
      *   <li>OR the <b>target</b> user ('mUserInfo') has DISALLOW_GRANT_ADMIN restriction.</li>
      * </ul>
      *
@@ -582,7 +584,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 || mUserManager.hasUserRestriction(UserManager.DISALLOW_GRANT_ADMIN);
 
         boolean targetUserRestricted = mUserInfo.isMain()
-                || mUserInfo.isGuest()
+                || !(UserManager.USER_TYPE_FULL_SECONDARY.equals(mUserInfo.userType))
                 || mUserManager.hasUserRestrictionForUser(UserManager.DISALLOW_GRANT_ADMIN,
                 mUserInfo.getUserHandle());
 
