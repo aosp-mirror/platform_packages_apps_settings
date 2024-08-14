@@ -180,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selezione della lingua per questa app non è disponibile nelle Impostazioni."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"La lingua potrebbe essere diversa dalle lingue disponibili nell\'app. Alcune app potrebbero non supportare questa impostazione."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Imposta la lingua di ogni app."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Per il sistema, le app e i siti web viene usata la prima lingua supportata delle tue lingue preferite."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Per il dispositivo, le app e i siti web viene usata la prima lingua supportata dell\'elenco delle tue lingue preferite.\n\nPer molte app verrà usata anche la regione della tua lingua preferita per inserire il formato corretto di date, numeri e unità. Per modificare la regione, aggiungi una lingua e scegli la regione che preferisci."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Per selezionare una lingua per ogni app, vai alle impostazioni della lingua delle app."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Scopri di più sulle lingue delle app"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Impostare la lingua di sistema in %s?"</string>
@@ -411,7 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Volto e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Volto, impronta e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Volto, impronte e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"È necessario perché la verifica dell\'identità è attiva"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"Verifica dell\'identità attiva"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Sblocco Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Smartwatch aggiunto"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configura l\'orologio"</string>
@@ -623,6 +623,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configurazione dello spazio privato in corso…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Impossibile configurare uno spazio privato"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Riprova"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Esci"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Lo spazio privato non è disponibile.\nVisualizza le possibili cause"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Visualizza le possibili cause"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Scegliere un nuovo blocco per lo spazio privato?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Puoi impostare un nuovo blocco solo per lo spazio privato o mantenere lo stesso che usi per sbloccare il dispositivo"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Usa il blocco schermo"</string>
@@ -1686,7 +1689,7 @@
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Per trasferire gli Account Google, le impostazioni e altro ancora, inserisci il PIN dell\'altro dispositivo. Il tuo PIN è criptato."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Per trasferire gli Account Google, le impostazioni e altro ancora, inserisci la password dell\'altro dispositivo. La tua password è criptata."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Usa sequenza per sbloccare dispositivo"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Usa PIN per sbloccare dispositivo"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Usa il PIN per sbloccare questo dispositivo"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Usa password per sbloccare dispositivo"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Verifica sequenza"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Verifica PIN"</string>
@@ -1915,11 +1918,11 @@
     <string name="bounce_keys" msgid="7419450970351743904">"Tasti rimbalzati"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"La tastiera ignora pressioni ripetute velocemente dello stesso tasto entro <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Tasti lenti"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"Regola il tempo richiesto per l\'attivazione della pressione di un tasto su <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <string name="slow_keys_summary" msgid="1784371292745423292">"Regola il tempo di risposta per la pressione di un tasto su <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Tasti permanenti"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Premi un tasto alla volta per le scorciatoie invece di tenere premuti più tasti contemporaneamente"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Tasti del mouse"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"Usa la tastiera fisica per controllare il mouse."</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Usa la tastiera fisica per controllare il mouse"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Scorciatoie da tastiera"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostra l\'elenco di scorciatoie"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastiere e strumenti del profilo di lavoro"</string>
@@ -2131,8 +2134,8 @@
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Buongiorno.\n\nVolevo solo controllare come stanno andando i progetti. Saranno pronti prima che inizi la realizzazione dei nuovi fumetti?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Ripristina impostazioni"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Le impostazioni relative a dimensioni di visualiz. e testo sono state ripristinate"</string>
-    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Vuoi reimpostare le dimensioni di visualizzazione e testo?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Reimposta"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Vuoi ripristinare le dimensioni di visualizzazione e testo?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Ripristina"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Hai programmi per il fine settimana?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Vado al mare. Vuoi venire?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Opzioni"</string>
@@ -2356,14 +2359,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Questo servizio non funziona correttamente."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Scorciatoie di accessibilità"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Mostra in Impostazioni rapide"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Rosso-verde"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rosso-verde"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Rosso-verde, ridotta percezione del verde"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Rosso-verde, ridotta percezione del rosso"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Blu-giallo"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Scala di grigi"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensità"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Non disponibile per la modalità Scala di grigi o quando la correzione del colore è disattivata"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Ridotta percezione del verde, deuteranomalia"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Ridotta percezione del rosso, protanomalia"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalia"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalia"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalia"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Attenuazione extra"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Usa l\'attenuazione extra per lo schermo"</string>
@@ -3336,19 +3339,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nessuna}=1{1 pianificazione impostata}other{# pianificazioni impostate}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Non disturbare"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Modalità priorità"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Aggiungi una modalità"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Riduci al minimo le distrazioni e tieni sotto controllo il livello della tua attenzione con le modalità per dormire, lavorare, guidare e qualsiasi altra cosa."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Crea la tua modalità"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ricevi soltanto le notifiche di app e persone importanti"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Seleziona tipo di attivazione"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Ora"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Ad esempio, \"9:30 – 17:00\""</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Calendario"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Ad esempio, \"Calendario personale\""</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Imposta una programmazione"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Programmazione basata su"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Giorno e ora"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9:00-17:00, giorni feriali\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Eventi nel calendario"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} è attiva}=2{{mode_1} e {mode_2} sono attive}=3{{mode_1}, {mode_2} e {mode_3} sono attive}other{{mode_1}, {mode_2} e altre # sono attive}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{Può essere attivata automaticamente 1 modalità}other{Possono essere attivate automaticamente # modalità}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ON"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Non impostata"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Disattivata"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Crea una modalità"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Personalizzato"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Attiva ora"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Disattiva"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Modalità non trovata"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitare le interruzioni"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Blocca le interruzioni e le distrazioni"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Configura <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Attiva Non disturbare"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Sveglie e suoni multimediali possono interrompere"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Pianificazioni"</string>
@@ -3360,14 +3371,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Modifica"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Pianificazioni"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Pianificazione"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Attiva automaticamente"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Aggiungi un calendario"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Utilizza il calendario"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Programma"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Imposta una programmazione"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Quando l\'attivazione deve essere automatica"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Programmazione dell\'evento"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Attiva durante gli eventi per"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Dov\'è la risposta dell\'invito"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Programmazione dell\'orario"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programmazione"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Attiva automaticamente"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Pianificazione"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Disattiva la suoneria in orari specifici"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Imposta regole Non disturbare"</string>
@@ -3377,8 +3387,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Consenti le interruzioni sonore"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blocca interruzioni visive"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Consenti segnali visivi"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Mantieni la concentrazione"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Azioni aggiuntive"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Filtri per le notifiche"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Altre impostazioni"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Off}=1{Off/Può essere attivata automaticamente 1 modalità}other{Off/Possono essere attivate automaticamente # modalità}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Impostazioni di visualizzazione"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Opzioni di visualizzazione"</string>
@@ -3395,7 +3405,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"attiva tema scuro"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Scegli l\'opzione Testo chiaro su sfondo scuro per il sistema operativo e le app per non stancare gli occhi e consentire un notevole risparmio della batteria su alcuni dispositivi"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nessuna modifica del display}=1{{effect_1}}=2{{effect_1} e {effect_2}}=3{{effect_1}, {effect_2} e {effect_3}}other{{effect_1}, {effect_2} e altri #}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtra interruzioni"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Limita gli elementi che possono inviarti notifiche"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nessuna interruzione filtrata"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Mostra opzioni per le notifiche filtrate"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quando è attiva la modalità Non disturbare"</string>
@@ -3747,6 +3757,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Conversazioni"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Tutte le conversazioni"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"tutte le conversazioni"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Conversazioni prioritarie"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"Conversazioni prioritarie"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nessuna"</string>
@@ -3842,20 +3853,20 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Cambia su Solo sveglie fino alle <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Cambia su Interrompi sempre"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Modalità di modifica"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Aggiungi modalità"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Crea una modalità"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Modalità personalizzata"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Nome della modalità"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventi nel calendario"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Programmazione del sonno"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Routine Buonanotte"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Durante la guida"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Collegamento all\'app"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Impostazioni app"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informazioni e impostazioni in <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Funzionalità gestita dall\'app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Disattiva modalità"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Se disattivi questa funzionalità, la modalità non funzionerà più come previsto e le relative impostazioni saranno nascoste."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Disattivare <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Questa modalità non si attiverà mai se disattivata"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Disattiva"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Attiva modalità"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Se disattivi questa funzionalità, la modalità si attiverà automaticamente in base alla programmazione."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Attivare <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Questa modalità potrebbe attivarsi automaticamente in base alle relative impostazioni"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Attiva"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Imposta una modalità che segua una programmazione regolare"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Imposta una modalità per sincronizzare gli eventi nel calendario e le risposte agli inviti"</string>
@@ -4851,8 +4862,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Riquadro delle impostazioni"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Attiva finestre a forma libera"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Attiva finestre forma libera su display secondario"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Attiva app non ridimensionabili in multi-finestra"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Consente la presenza di app non ridimensionabili in modalità multi-finestra"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Esegui override modalità Buio forzata"</string>
@@ -4918,7 +4928,7 @@
     <string name="progress_16k_ota_title" msgid="2117218313875523741">"Applicazione della modifica in corso…"</string>
     <string name="confirm_format_ext4_title" msgid="6696191800594435577">"Riformattare il dispositivo in ext4? (Operazione necessaria per la modalità a 16 kB)"</string>
     <string name="confirm_format_ext4_text" msgid="7940372488624630214">"La partizione dei dati del dispositivo deve essere convertita in ext4 prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Se attivi l\'opzione a 16 kB, sarà necessario un ulteriore riavvio. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader, il che ripristina i dati di fabbrica del dispositivo. Dopo che Android viene avviato correttamente sul dispositivo, disattiva lo sblocco OEM nelle Opzioni sviluppatore. Tutti i dati verranno cancellati dal dispositivo e il file system verrà convertito in ext4 dopo la conferma. Quando termina l\'operazione, riabilita nuovamente la modalità a 16 kB."</string>
-    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Resetta tutti i dati"</string>
+    <string name="confirm_ext4_button_text" msgid="6045501984773738407">"Cancella tutti i dati"</string>
     <string name="format_ext4_failure_toast" msgid="8059453995800471549">"Impossibile riformattare e cancellare la partizione di dati in ext4."</string>
     <string name="confirm_oem_unlock_for_16k_title" msgid="6062041826568112078">"Sblocco bootloader richiesto"</string>
     <string name="confirm_oem_unlock_for_16k_text" msgid="3583604865119937957">"È necessario sbloccare il bootloader del dispositivo prima di usare l\'opzione sviluppatore a 16 kB. Non è possibile garantire l\'integrità del software in questa modalità e i dati archiviati sullo smartphone potrebbero essere a rischio finché il bootloader è sbloccato. Tutti i dati utente e le impostazioni verranno cancellati quando attivi la modalità a 16 kB. Dopo aver sbloccato il bootloader, l\'attivazione dell\'opzione a 16 kB richiederà due riavvii. Una volta che sarà attiva questa modalità, potrai passare dalla modalità a 4 kB a quella a 16 kB con un solo riavvio. Alcune funzionalità verranno disattivate in queste modalità, pertanto alcune applicazioni potrebbero non funzionare. Per far tornare il dispositivo in modalità di produzione, dovrai tornare alla modalità a 4 kB e bloccare il bootloader del dispositivo, il che ripristina i dati di fabbrica del dispositivo. Sblocca il bootloader e riprova. Puoi consultare le istruzioni su come fare all\'indirizzo &lt;a href=\"https://source.android.com/docs/core/architecture/bootloader/locking_unlocking\"&gt;https://source.android.com/docs/core/architecture/bootloader/locking_unlocking&lt;/a&gt;"</string>
@@ -5173,10 +5183,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizza"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personalizza <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"È necessario il riavvio per attivare il supporto delle finestre senza un formato."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"È richiesto il riavvio per aggiornare la disponibilità delle finestre a forma libera."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"È richiesto il riavvio per attivare le finestre a forma libera sui display secondari."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Riavvia ora"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Riavvia più tardi"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Audio spaziale"</string>
@@ -5197,7 +5205,7 @@
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configura il limite di velocità di download della rete"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Nessun limite"</string>
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Disattiva limitazioni per i processi secondari"</string>
-    <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Disattiva le limitazioni relative all\'utilizzo delle risorse di sistema per i processi figlio delle app"</string>
+    <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Disattiva le limitazioni relative all\'utilizzo delle risorse di sistema per i processi secondari delle app"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Forza attivazione del ruolo Note"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"Attiva le integrazioni di sistema per la creazione di note tramite il ruolo Note. Se il ruolo Note è già attivo, non succederà nulla. Richiede il riavvio."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Trasmissione"</string>
@@ -5273,7 +5281,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Rosa"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Viola"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Fine"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Salva"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Annulla"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Predefinito"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Medio"</string>

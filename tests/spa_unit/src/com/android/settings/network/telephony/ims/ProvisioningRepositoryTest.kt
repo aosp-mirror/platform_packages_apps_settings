@@ -16,10 +16,13 @@
 
 package com.android.settings.network.telephony.ims
 
+import android.content.Context
+import android.content.pm.PackageManager
 import android.telephony.ims.ProvisioningManager
 import android.telephony.ims.ProvisioningManager.FeatureProvisioningCallback
 import android.telephony.ims.feature.MmTelFeature
 import android.telephony.ims.stub.ImsRegistrationImplBase
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.spa.testutils.toListWithTimeout
 import com.google.common.truth.Truth.assertThat
@@ -31,23 +34,52 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
-class ImsFeatureProvisionedFlowTest {
+class ProvisioningRepositoryTest {
 
     private var callback: FeatureProvisioningCallback? = null
 
-    private val mockProvisioningManager = mock<ProvisioningManager> {
-        on { registerFeatureProvisioningChangedCallback(any(), any()) } doAnswer {
-            callback = it.arguments[1] as FeatureProvisioningCallback
-            callback?.onFeatureProvisioningChanged(CAPABILITY, TECH, true)
+    private val mockProvisioningManager =
+        mock<ProvisioningManager> {
+            on { registerFeatureProvisioningChangedCallback(any(), any()) } doAnswer
+                {
+                    callback = it.arguments[1] as FeatureProvisioningCallback
+                    callback?.onFeatureProvisioningChanged(CAPABILITY, TECH, true)
+                }
         }
+
+    private val mockPackageManager =
+        mock<PackageManager> {
+            on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY_IMS) } doReturn true
+        }
+
+    private val context: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            on { packageManager } doReturn mockPackageManager
+        }
+
+    private val repository = ProvisioningRepository(context) { mockProvisioningManager }
+
+    @Test
+    fun imsFeatureProvisionedFlow_hasNotIms_returnFalse() = runBlocking {
+        mockPackageManager.stub {
+            on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY_IMS) } doReturn false
+        }
+        val flow = repository.imsFeatureProvisionedFlow(SUB_ID, CAPABILITY, TECH)
+
+        val state = flow.first()
+
+        assertThat(state).isFalse()
     }
 
     @Test
     fun imsFeatureProvisionedFlow_sendInitialValue() = runBlocking {
-        val flow = imsFeatureProvisionedFlow(SUB_ID, CAPABILITY, TECH, mockProvisioningManager)
+        val flow = repository.imsFeatureProvisionedFlow(SUB_ID, CAPABILITY, TECH)
 
         val state = flow.first()
 
@@ -57,8 +89,7 @@ class ImsFeatureProvisionedFlowTest {
     @Test
     fun imsFeatureProvisionedFlow_changed(): Unit = runBlocking {
         val listDeferred = async {
-            imsFeatureProvisionedFlow(SUB_ID, CAPABILITY, TECH, mockProvisioningManager)
-                .toListWithTimeout()
+            repository.imsFeatureProvisionedFlow(SUB_ID, CAPABILITY, TECH).toListWithTimeout()
         }
         delay(100)
 
@@ -68,7 +99,7 @@ class ImsFeatureProvisionedFlowTest {
     }
 
     private companion object {
-        const val SUB_ID = 1
+        const val SUB_ID = 10
         const val CAPABILITY = MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE
         const val TECH = ImsRegistrationImplBase.REGISTRATION_TECH_IWLAN
     }
