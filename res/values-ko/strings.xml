@@ -250,7 +250,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"위치"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"위치 사용"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"사용 안함"</string>
-    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{사용 - 앱 #개가 위치에 액세스할 수 있음}other{사용 - 앱 #개가 위치에 액세스할 수 있음}}"</string>
+    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{사용 - 앱 #개가 위치 정보에 액세스할 수 있음}other{사용 - 앱 #개가 위치 정보에 액세스할 수 있음}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"로드 중…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"근처 기기 액세스 권한이 있는 앱은 연결된 기기 간의 상대적인 위치를 파악할 수 있습니다."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"앱 및 서비스에 대한 위치 정보 액세스가 사용 중지되어 있습니다. 그래도 긴급 전화번호로 전화를 걸거나 문자 메시지를 보내면 기기의 위치 정보가 긴급 구조원에게 전달될 수 있습니다."</string>
@@ -506,7 +506,7 @@
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"보안을 강화하려면 예비로 사용할 화면 잠금을 설정하세요."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"예비로 사용할 화면 잠금 방식을 선택하세요"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"화면 잠금을 잊어버린 경우 IT 관리자가 초기화할 수 없습니다."</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"별도의 직장 프로필 잠금을 설정하세요."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"별도의 직장 프로필 잠금을 설정하기"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"이 화면 잠금을 잊은 경우 IT 관리자에게 재설정을 요청하세요."</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"화면 잠금 옵션"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"화면 잠금 옵션"</string>
@@ -1454,7 +1454,7 @@
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google 계정, 설정 등을 이전하려면 다른 기기의 PIN을 입력하세요. PIN은 암호화됩니다."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google 계정, 설정 등을 이전하려면 다른 기기의 비밀번호를 입력하세요. 비밀번호는 암호화됩니다."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"또한 패턴을 사용하여 이 기기를 잠금 해제하세요."</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"또한 PIN을 사용하여 이 기기를 잠금 해제하세요."</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"기기 잠금 해제에도 PIN 사용"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"또한 비밀번호를 사용하여 이 기기를 잠금 해제하세요."</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"잘못된 PIN입니다."</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"잘못된 비밀번호입니다."</string>
@@ -2697,7 +2697,7 @@
     <string name="user_category_title" msgid="4368580529662699083">"사용자"</string>
     <string name="other_user_category_title" msgid="7089976887307643217">"다른 사용자"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"게스트 활동 삭제"</string>
-    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"게스트 모드 종료 시 모든 게스트 앱 및 데이터 삭제"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"게스트 모드 종료 시 모든 게스트 앱 및 데이터를 삭제합니다."</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"게스트 활동을 삭제하시겠습니까?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"현재 게스트 세션의 앱과 데이터가 지금 삭제되고 이후 모든 게스트 활동은 게스트 모드를 종료할 때마다 삭제됩니다."</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"삭제, 게스트, 활동, 제거, 데이터, 방문자, 지우기"</string>
@@ -3234,7 +3234,7 @@
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"기기가 잠금 해제되어 있을 때 화면 상단에 알림 배너 표시"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"모든 ‘<xliff:g id="APP_NAME">%1$s</xliff:g>’ 알림"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"모든 <xliff:g id="APP_NAME">%1$s</xliff:g> 알림"</string>
-    <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{매일 알림 약 #개}other{매일 알림 약 #개}}"</string>
+    <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{하루에 약 #개의 알림 수신}other{하루에 약 #개의 알림 수신}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{매주 알림 약 #개}other{매주 알림 약 #개}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"전송하지 않음"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"기기 및 앱 알림"</string>
@@ -3261,7 +3261,7 @@
     <string name="notif_type_ongoing" msgid="135675014223627555">"실시간"</string>
     <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"사용 중인 앱, 내비게이션, 전화 통화 등의 진행 중인 통신 유형"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"대화"</string>
-    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, 문자 메시지 및 기타 통신 유형"</string>
+    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, 문자 메시지 등의 커뮤니케이션 유형"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"알림"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"설정에 따라 벨소리나 진동이 울릴 수 있음"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"무음"</string>
@@ -3660,7 +3660,7 @@
     <string name="draw_overlay" msgid="7902083260500573027">"다른 앱 위에 표시"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"다른 앱 위에 표시"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"다른 앱 위에 표시 허용"</string>
-    <string name="allow_overlay_description" msgid="1607235723669496298">"이 앱이 사용 중인 다른 앱 위에 표시되도록 허용합니다. 앱에서 내가 탭하는 위치를 확인하고 화면에 표시되는 내용을 변경할 수 있습니다."</string>
+    <string name="allow_overlay_description" msgid="1607235723669496298">"이 앱이 사용 중인 다른 앱 위에 표시되도록 허용합니다. 앱에서 내가 탭하는 위치를 확인하거나 화면에 표시되는 내용을 변경할 수 있습니다."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"모든 파일에 액세스"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"모든 파일 관리 허용"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"앱이 이 기기 또는 연결된 모든 저장장치에 있는 파일을 모두 읽고 수정하고 삭제하도록 허용합니다. 권한을 부여하면 앱이 나에게 명시적으로 알리지 않고도 파일에 액세스할 수 있습니다."</string>
@@ -4234,7 +4234,7 @@
     <string name="carrier_settings_title" msgid="6959295328730560529">"이동통신사 설정"</string>
     <string name="cdma_lte_data_service" msgid="6937443423651347345">"데이터 서비스 설정"</string>
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"모바일 데이터"</string>
-    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"모바일 네트워크를 사용하여 데이터 액세스"</string>
+    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"모바일 네트워크를 사용하여 데이터에 액세스합니다."</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"범위 안에 들어오면 휴대전화가 이 이동통신사로 자동 전환됩니다."</string>
     <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"사용 가능한 SIM 없음"</string>
     <string name="calls_preference" msgid="2166481296066890129">"통화 환경설정"</string>

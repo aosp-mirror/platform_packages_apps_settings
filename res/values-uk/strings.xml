@@ -349,8 +349,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Як це працює"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Функція розблокування відбитком пальця створює унікальну модель вашого відбитка, щоб підтверджувати вашу особу. Для цього під час налаштування потрібно створити зображення свого відбитка пальця в різних положеннях."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Функція розблокування відбитком пальця створює унікальну модель відбитка вашої дитини, щоб підтверджувати її особу. Для цього дитині потрібно зберегти зображення свого відбитка пальця в різних положеннях."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку Made for Google. Якщо вони не матимуть такої позначки, відбиток пальця може не розпізнаватися."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку \"Створено для Google\". Якщо вони не матимуть такої позначки, відбиток пальця дитини може не розпізнаватися."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку Made for Google. Пристрої з іншими захисними плівками чи склом можуть не розпізнавати відбиток пальця."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку Made for Google. Пристрої з іншими захисними плівками чи склом можуть не розпізнавати відбиток пальця."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Розблокування годинником"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Якщо ви налаштуєте розблокування за допомогою фейс-контролю й відбитка пальця, телефон запитуватиме ваш відбиток пальця, коли ви в масці або навколо вас темно.\n\nЯкщо не вдається розпізнати ваше обличчя або відбиток пальця, ви можете розблокувати пристрій за допомогою годинника."</string>
@@ -524,7 +524,7 @@
     <string name="unlock_set_unlock_pin_title" msgid="5283636759362880407">"PIN-код"</string>
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Пароль"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Не зараз"</string>
-    <string name="current_screen_lock" msgid="1367883977261098017">"Поточне блокування екрана"</string>
+    <string name="current_screen_lock" msgid="1367883977261098017">"Поточний спосіб розблокування"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Ключ • Відбиток пальця"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN-код • Відбиток пальця"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Пароль • Відбиток пальця"</string>
@@ -588,7 +588,7 @@
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"Щоб додаток <xliff:g id="APP_NAME">%1$s</xliff:g> правильно працював, він радить створити надійний PIN-код або пароль"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"Щоб додаток <xliff:g id="APP_NAME">%1$s</xliff:g> правильно працював, він радить створити новий PIN-код або пароль"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"Щоб додаток <xliff:g id="APP_NAME">%1$s</xliff:g> правильно працював, він радить створити новий ключ, PIN-код або пароль"</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"Додаток <xliff:g id="APP_NAME">%1$s</xliff:g> радить вибрати новий спосіб блокування екрана"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"Додаток <xliff:g id="APP_NAME">%1$s</xliff:g> рекомендує вибрати інший спосіб розблокування екрана"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Спробуйте ще. Спроба <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> із <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Ваші дані буде видалено"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Якщо наступного разу ви введете неправильний ключ, дані на цьому пристрої буде видалено"</string>
@@ -1384,7 +1384,7 @@
     <string name="about_settings_summary" msgid="4831942939227432513">"Переглянути правову інф-ю, стан, версію ПЗ"</string>
     <string name="legal_information" msgid="7509900979811934843">"Правова інформація"</string>
     <string name="manual" msgid="3651593989906084868">"Посібник"</string>
-    <string name="regulatory_labels" msgid="5960251403367154270">"Сертифікації"</string>
+    <string name="regulatory_labels" msgid="5960251403367154270">"Нормативні етикетки"</string>
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Посібник із безпеки й нормативних вимог"</string>
     <string name="copyright_title" msgid="83245306827757857">"Автор. право"</string>
     <string name="license_title" msgid="8745742085916617540">"Ліцензія"</string>
