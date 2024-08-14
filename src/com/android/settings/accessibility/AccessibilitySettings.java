@@ -21,7 +21,6 @@ import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.ServiceInfo;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,7 +28,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.util.Pair;
 import android.view.InputDevice;
 import android.view.accessibility.AccessibilityManager;
 
@@ -57,8 +55,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /** Activity with the accessibility settings. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -458,20 +454,9 @@ public class AccessibilitySettings extends DashboardFragment implements
                         UserHandle.myUserId());
         final List<AccessibilityActivityPreference> activityList =
                 preferenceHelper.createAccessibilityActivityPreferenceList(installedShortcutList);
-        final Set<Pair<String, CharSequence>> packageLabelPairs =
-                activityList.stream()
-                        .map(a11yActivityPref -> new Pair<>(
-                                a11yActivityPref.getPackageName(), a11yActivityPref.getLabel())
-                        ).collect(Collectors.toSet());
 
-        // Remove duplicate item here, new a ArrayList to copy unmodifiable list result
-        // (getInstalledAccessibilityServiceList).
         final List<AccessibilityServiceInfo> installedServiceList = new ArrayList<>(
                 a11yManager.getInstalledAccessibilityServiceList());
-        if (!packageLabelPairs.isEmpty()) {
-            installedServiceList.removeIf(
-                    target -> containsPackageAndLabelInList(packageLabelPairs, target));
-        }
         final List<RestrictedPreference> serviceList =
                 preferenceHelper.createAccessibilityServicePreferenceList(installedServiceList);
 
@@ -480,16 +465,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         preferenceList.addAll(serviceList);
 
         return preferenceList;
-    }
-
-    private boolean containsPackageAndLabelInList(
-            Set<Pair<String, CharSequence>> packageLabelPairs,
-            AccessibilityServiceInfo targetServiceInfo) {
-        final ServiceInfo serviceInfo = targetServiceInfo.getResolveInfo().serviceInfo;
-        final String servicePackageName = serviceInfo.packageName;
-        final CharSequence serviceLabel = serviceInfo.loadLabel(getPackageManager());
-
-        return packageLabelPairs.contains(new Pair<>(servicePackageName, serviceLabel));
     }
 
     private void initializePreBundledServicesMapFromArray(String categoryKey, int key) {
