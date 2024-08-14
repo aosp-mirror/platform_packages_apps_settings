@@ -109,10 +109,10 @@ public class WifiHotspotRepositoryTest {
         doReturn(SPEED_6GHZ).when(mSpeedType).getValue();
         doReturn(true).when(mWifiManager).is5GHzBandSupported();
         doReturn(Arrays.asList(new WifiAvailableChannel(FREQ_5GHZ, OP_MODE_SAP))).when(mWifiManager)
-                .getUsableChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP);
+                .getAllowedChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP);
         doReturn(true).when(mWifiManager).is6GHzBandSupported();
         doReturn(Arrays.asList(new WifiAvailableChannel(FREQ_6GHZ, OP_MODE_SAP))).when(mWifiManager)
-                .getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
+                .getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
 
         mRepository = new WifiHotspotRepository(mContext, mWifiManager, mTetheringManager);
         mRepository.mSecurityType = mSecurityType;
@@ -575,7 +575,7 @@ public class WifiHotspotRepositoryTest {
         mRepository.mIs5gBandSupported = true;
         // Reset m5gBand to trigger an update
         mRepository.mBand5g.isUsableChannelsReady = false;
-        when(mWifiManager.getUsableChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP))
+        when(mWifiManager.getAllowedChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP))
                 .thenReturn(null);
 
         assertThat(mRepository.is5gAvailable()).isFalse();
@@ -619,7 +619,7 @@ public class WifiHotspotRepositoryTest {
         mRepository.mIs6gBandSupported = true;
         // Reset m6gBand to trigger an update
         mRepository.mBand6g.isUsableChannelsReady = false;
-        when(mWifiManager.getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP))
+        when(mWifiManager.getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP))
                 .thenReturn(null);
 
         assertThat(mRepository.is6gAvailable()).isFalse();
@@ -660,7 +660,7 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void isChannelAvailable_throwIllegalArgumentException_hasUsableChannelsFalse() {
         doThrow(IllegalArgumentException.class).when(mWifiManager)
-                .getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
+                .getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
 
         mRepository.isChannelAvailable(mRepository.mBand6g);
 
@@ -671,7 +671,7 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void isChannelAvailable_throwUnsupportedOperationException_hasUsableChannelsFalse() {
         doThrow(UnsupportedOperationException.class).when(mWifiManager)
-                .getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
+                .getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
 
         mRepository.isChannelAvailable(mRepository.mBand6g);
 
