@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Atlikts"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Nezināms"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Priekšskatījums"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"Kvadrātkods"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Samazināt"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Palielināt"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Vienmēr"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Iestatījumos nav pieejama valodas atlase šai lietotnei."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Valoda var atšķirties no lietotnē pieejamās valodas. Dažās lietotnēs šis iestatījums var netikt atbalstīts."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Iestatiet valodu katrai lietotnei."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sistēmā, lietotnēs un tīmekļa vietnēs tiek izmantota pirmā atbalstītā valoda no jūsu vēlamajām valodām."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Jūsu ierīcē, lietotnēs un vietnēs tiek izmantota pirmā atbalstītā valoda no vēlamo valodu saraksta.\n\nDaudzās lietotnēs datumu, ciparu un mērvienību formātam tiks izmantots arī reģions no jūsu iestatītās vēlamās valodas. Lai mainītu reģionu, pievienojiet valodu un pēc tam izvēlēties vēlamo reģionu."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Lai atlasītu valodu katrai lietotnei, pārejiet uz lietotnes valodas iestatījumiem."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Plašāka informācija par lietotņu valodām"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Vai mainīt sistēmas valodu uz šādu: %s?"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Pievienota seja un pulkstenis <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Pievienota seja, pirksta nospiedums un pulkstenis <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Pievienota seja, pirkstu nospiedumi un pulkstenis <xliff:g id="WATCH">%s</xliff:g>"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Šāda pārbaude ir vajadzīga, jo ir ieslēgta funkcija Identity Check."</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Atbloķēšana ar Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Pulkstenis pievienots"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Pulksteņa iestatīšana"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Notiek privātās telpas iestatīšana…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Nevarēja izveidot privāto telpu"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Mēģināt vēlreiz"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Iziet"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Privātā telpa nav pieejama.\nSkatīt iespējamos cēloņus"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Skatīt iespējamos cēloņus"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Vai bloķēt privāto telpu ar jaunu metodi?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Privātajai telpai varat izmantot jaunu bloķēšanas metodi vai izmantot to pašu metodi, ko lietojat ierīces atbloķēšanai."</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Izmantot ekrāna bloķēšanu"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Šis pakalpojums nedarbojas pareizi."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Pieejamības saīsnes"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Rādīt ātrajos iestatījumos"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Sarkana/zaļa krāsa"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Sarkana/zaļa krāsa"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Sarkanā/zaļā krāsa, vāja jutība pret zaļo"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Sarkanā/zaļā krāsa, vāja jutība pret sarkano"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Zila/dzeltena krāsa"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Pelēktoņu iestatījums"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensitāte"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Nav pieejams pelēktoņu režīmā vai tad, ja ir atspējota krāsu korekcija."</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Vāja jutība pret zaļo krāsu, deiteranomālija"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Vāja jutība pret sarkano krāsu, protanomālija"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deiteranomālija"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomālija"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomālija"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Papildu aptumšošana"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Izmantot ekrāna papildu aptumšošanu"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nav}=1{Iestatīts viens grafiks}zero{Iestatīti # grafiki}one{Iestatīts # grafiks}other{Iestatīti # grafiki}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Netraucēt"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Prioritātes režīmi"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Pievienot režīmu"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Samaziniet traucēkļus un pārņemiet kontroli pār savu uzmanību, izmantojot režīmus miegam, darbam, automašīnas vadīšanai un visam pārējam."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Izveidot savu režīmu"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Saņemiet paziņojumus tikai no svarīgām personām un lietotnēm."</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Atlasiet aktivizācijas veidu"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Laiks"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Piemērs. “9:30–17:00”."</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalendārs"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Piemērs. “Personīgais kalendārs”."</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Iestatīt grafiku"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Informācija grafika pamatā"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Diena un laiks"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"“Darbdienās plkst. 9:00–17:00”"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalendāra pasākumi"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Režīms {mode_1} ir aktīvs}=2{Režīmi {mode_1} un {mode_2} ir aktīvi}=3{Režīmi {mode_1}, {mode_2} un {mode_3} ir aktīvi}zero{Režīmi {mode_1}, {mode_2} un vēl # ir aktīvi}one{Režīmi {mode_1}, {mode_2} un vēl # ir aktīvi}other{Režīmi {mode_1}, {mode_2} un vēl # ir aktīvi}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 režīmu var ieslēgt automātiski}zero{# režīmus var ieslēgt automātiski}one{# režīmu var ieslēgt automātiski}other{# režīmus var ieslēgt automātiski}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"IESLĒGTS"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nav iestatīts"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Atspējots"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Režīma izveide"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Pielāgots"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Ieslēgt tūlīt"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Izslēgt"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Režīms nav atrasts"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Traucējumu ierobežošana"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Bloķējiet pārtraukumus un traucējumus"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Iestatiet: <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Režīma “Netraucēt” ieslēgšana"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Modinātāji un multivides skaņas, kam atļauts pārtraukt"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Grafiki"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Rediģēt"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Grafiki"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Grafiks"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Automātiska ieslēgšana"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Pievienot kalendāru"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Izmantot kalendāru"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Grafiks"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Iestatiet grafiku"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Kad automātiski ieslēgt"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Pasākuma grafiks"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Kura kalendāra pasākumu laikā?"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Ja atbilde uz uzaicinājumu ir"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Laika grafiks"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Grafiks"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Ieslēgt automātiski"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Grafiks"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Skaņas izslēgšana noteiktā laikā"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Iestatīt režīma “Netraucēt” kārtulas"</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Atļaut pārtraukumus ar skaņas signālu"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloķēt vizuālos traucējumus"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Vizuālu signālu atļaušana"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Ilglaicīga koncentrēšanās"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Papildu darbības"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Paziņojumu filtri"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Citi iestatījumi"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Izslēgts}=1{Izslēgts; viens režīms var tikt ieslēgts automātiski}zero{Izslēgts; # režīmi var tikt ieslēgti automātiski}one{Izslēgts; # režīms var tikt ieslēgts automātiski}other{Izslēgts; # režīmi var tikt ieslēgti automātiski}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Attēlojuma iestatījumi"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Attēlojuma iespējas"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"iespējot tumšo motīvu"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Iestatiet, lai operētājsistēmā un lietotnēs priekšroka tiktu dota gaišam tekstam uz tumša fona. Tas var mazāk nogurdināt acis un ievērojami ietaupīt akumulatora jaudu dažās ierīcēs."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nav attēlojuma izmaiņu}=1{{effect_1}}=2{{effect_1} un {effect_2}}=3{{effect_1}, {effect_2} un {effect_3}}zero{{effect_1}, {effect_2} un vēl #}one{{effect_1}, {effect_2} un vēl #}other{{effect_1}, {effect_2} un vēl #}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtrēt traucēkļus"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Ierobežot saņemamo paziņojumu veidus"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Netiek filtrēts neviens traucēklis"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Filtrētu paziņojumu attēlojuma iespējas"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kad ir ieslēgts režīms “Netraucēt”"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Sarunas"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Visas sarunas"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"visas sarunas"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioritāras sarunas"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioritārās sarunas"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nav"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Pāriet uz režīmu “Tikai signāli” līdz plkst. <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Pāriet uz “Vienmēr pārtraukt”"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Režīma rediģēšana"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Režīma pievienošana"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Režīma izveide"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Pielāgots režīms"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Režīma nosaukums"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalendāra pasākumi"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Miega grafiks"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Gulēšanas laiks"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Braukšanas laikā"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Saistīti ar lietotni"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Lietotnes iestatījumi"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informācija un iestatījumi lietotnē <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Pārvalda <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Režīma atspējošana"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Ja atspējosiet šo funkciju, režīms vairs nedarbosies, kā paredzēts, un tā iestatījumi tiks paslēpti."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Vai jāatspējo <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Ja šis režīms būs atspējots, tas nekad netiks ieslēgts."</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Atspējot"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Režīma iespējošana"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Ja iespējosiet šo funkciju, režīms tiks aktivizēts automātiski atbilstoši tā grafikam."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Vai jāiespējo <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Šis režīms var tikt ieslēgts automātiski, ņemot vērā tā iestatījumus."</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Iespējot"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Iestatiet režīmu, kas ņem vērā parasto grafiku."</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Iestatiet režīmu sinhronizēšanai ar kalendāra pasākumiem un atbildēm uz uzaicinājumiem."</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Izveidojiet nomierinošu miega režīma darbību secību. Iestatiet modinātāja signālus, aptumšojiet ekrānu un bloķējiet paziņojumus."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Koncentrējieties uz braukšanu bez traucēkļiem, lai gādātu par drošību uz ceļa."</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloķējiet traucējumus no ierīces, lai varētu koncentrēties."</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Novērsiet visus traucēkļus, lai radītu klusu vidi."</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalizējiet ierīces lietošanas iespējas un iestatījumus dažādiem lietotājiem."</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Samaziniet traucēkļus, atļaujot paziņojumus tikai no svarīgām kontaktpersonām un lietotnēm."</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Brīdinājums"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Aizvērt"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Sūtīt atsauksmes par šo ierīci"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akumulators"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Iestatījumu panelis"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Iespējot brīvās formas logus"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Iespējot brīvās formas logus sekundārajā displejā"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Vairāku logu režīmā iespējot nemainīga lieluma lietotnes"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Šis iestatījums ļauj vairāku logu režīmā rādīt lietotnes, kuru lielums nav maināms"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Tumšā režīma piespiedu ieslēgšanas ignorēšana"</string>
@@ -5183,10 +5185,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Pielāgot"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Pielāgot ekrānsaudzētāju “<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>”"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Lai iespējotu brīvās formas logu atbalstu, nepieciešama atkārtota palaišana."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Lai atjauninātu brīvās formas logu pieejamību, nepieciešama atkārtota palaišana."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Lai iespējotu brīvās formas logus sekundāros displejos, nepieciešama atkārtota palaišana."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Atkārtoti palaist tūlīt"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Atkārtoti palaist vēlāk"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Telpiskais audio"</string>
@@ -5283,7 +5283,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Sārta"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Fuksīnsarkana"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violeta"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Gatavs"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Saglabāt"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Atcelt"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Noklusējums"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Vidējs"</string>

@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Felfüggesztve"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Ismeretlen"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Előnézet"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR-kód"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Kisebb"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Nagyobb"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Mindig"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A Nyelvválasztás nem áll rendelkezésre ehhez az alkalmazáshoz a Beállításokban."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"A nyelv eltérhet az alkalmazásban rendelkezésre álló nyelvektől. Előfordulhat, hogy egyes alkalmazások nem támogatják ezt a beállítást."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Az egyes alkalmazások nyelvének beállítása."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"A rendszer, az alkalmazások és a webhelyek a preferált nyelvek közül az első támogatottat fogják használni."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Az eszköz, az alkalmazások és a webhelyek a preferált nyelvek közül az első támogatottat fogják használni.\n\nA dátumok, a számok és a mértékegységek formázása érdekében több alkalmazás használja majd a preferált nyelvhez tartozó régiót is. A régió módosításához adjon hozzá nyelvet, majd módosítsa a preferált régiót."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Ha minden alkalmazásnál Ön szeretné kiválasztani a nyelvet, lépjen az egyes alkalmazások nyelvi beállításaihoz."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"További információ az alkalmazások nyelveiről"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Módosítja a rendszer nyelvét a következőre: %s?"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Arc és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Arc, ujjlenyomat és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Arc, ujjlenyomatok és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Ez szükséges, mert a személyazonosság-ellenőrzés be van kapcsolva"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Távoli hitelesítő alapú feloldás"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Óra hozzáadva"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Az óra beállítása"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"A privát terület beállítása…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Nem sikerült a privát terület beállítása"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Újra"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Kilépés"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"A privát terület nem áll rendelkezésre.\nTekintse meg a lehetséges okokat."</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"A lehetséges okok megtekintése"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Új zárolást választ a privát területhez?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Beállíthat egy új zárolást csak a privát terület számára, vagy használhatja ugyanazt a zárolást, amelyet a készülék feloldásához használ."</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Képernyőzár használata"</string>
@@ -1920,7 +1923,7 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Beragadó billentyűk"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Egyszerre egy billentyű lenyomásával használhat billentyűparancsokat több billentyű egyszeri lenyomva tartása helyett"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Egérgombok"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"Használhatja a fizikai billentyűzetet az egér vezérlésére."</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"A fizikai billentyűzettel irányíthatja az egeret."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Billentyűparancsok"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Billentyűparancsok listájának megjelenítése"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Munkaprofil billentyűzetei és eszközei"</string>
@@ -2129,7 +2132,7 @@
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"A szöveg megjelenésének beállítása"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Tárgy: Hőlégballondizájnok"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Feladó: Bill"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Jó reggelt!\n\nCsak a tervekről szeretnék érdeklődni. Készen lesznek, mielőtt elkezdjük elkészíteni az új hőlégballonokat?"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Jó reggelt!\n\nCsak a tervekről szeretnék érdeklődni. Készen lesznek, mielőtt hozzákezdünk az új hőlégballonok gyártásához?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Visszaállítás"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"A megjelenítési méret és a szöveg beállításait visszaállította"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Visszaállítja a megjelenítési méretet és a szöveg beállításait?"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Ez a szolgáltatás nem működik megfelelően."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Kisegítő lehetőségek gyorsparancsai"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Megjelenítés a Gyorsbeállítások között"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Vörös-zöld"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Vörös-zöld"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Piros-zöld, a zöld gyenge"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Piros-zöld, a piros gyenge"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Kék-sárga"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Szürkeárnyalatos"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intenzitás"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Nem áll rendelkezésre szürkeárnyalatos módban, és amikor le van tiltva a színjavítás"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Zöldszín-tévesztés (deuteranomália)"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Vörösszín-tévesztés (protanomália)"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomália"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomália"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomália"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Extrasötét"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"A képernyő legyen extrasötét"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nincs}=1{1 ütemezés beállítva}other{# ütemezés beállítva}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne zavarjanak"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Prioritási módok"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Mód hozzáadása"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimalizálja a zavaró tényezőket, és vegye kezébe a figyelem irányítását különböző módokkal, legyen szó alvásról, munkáról, vezetésről vagy bármiről ezek mellett."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Hozza létre a saját módját"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Értesítés fogadása csak fontos személyektől és alkalmazásoktól"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Aktiválástípus kiválasztása"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Idő"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Pl.: „9:30 – 17:00”"</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Naptár"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Pl.: „Személyes naptár”"</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Állítson be ütemezést"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Ütemezés alapja:"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Nap és időpont"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"„Reggel kilenctől délután ötig, hétköznapokon”"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Naptáresemények"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{A(z) {mode_1} aktív}=2{{mode_1} és {mode_2} aktív}=3{{mode_1}, {mode_2} és {mode_3} aktív}other{{mode_1}, {mode_2} és # egyéb aktív}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 mód automatikusan bekapcsolódhat}other{# mód automatikusan bekapcsolódhat}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"BE"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nincs beállítva"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Kikapcsolva"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Mód létrehozása"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Egyéni"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Bekapcsolás most"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Kikapcsolás"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Mód nem található"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"A megszakítások korlátozása"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Megszakító vagy zavaró tényezők kizárása"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"A(z) <xliff:g id="MODE">%1$s</xliff:g> beállítása"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"A Ne zavarjanak mód bekapcsolása"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Az ébresztések és médiahangok megszakíthatják a „Ne zavarjanak” módot"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Ütemezések"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Szerkesztés"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Ütemezések"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Ütemezés"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Automatikus bekapcsolás"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Naptár hozzáadása"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Naptár használata"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Ütemezés"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Állítson be ütemezést"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Automatikus bekapcsolás esete"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Eseménynaptár"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Bekapcsol a következő esetben:"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Amikor a meghívó válasza:"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Időbeosztás"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Ütemezés"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ó, <xliff:g id="MINUTES">%2$d</xliff:g> p"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Automatikus bekapcsolás"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Ütemezés"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Telefonnémítás ütemezése"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"A Ne zavarjanak szabályai"</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Hanggal járó jelzések engedélyezése"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Megjelenő értesítések tiltása"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Vizuális jelek engedélyezése"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Folyamatosan figyeljen"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"További műveletek"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Értesítési szűrők"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"További beállítások"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Ki}=1{Ki / 1 mód automatikusan bekapcsolhat}other{Ki/ # mód automatikusan bekapcsolhat}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Megjelenítési beállítások"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Megjelenítési beállítások"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"sötét téma engedélyezése"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Módosíthatja az operációs rendszer és az alkalmazások beállításait úgy, hogy a sötét háttér előtti világos szöveget részesítsék előnyben, ami kevésbé megterhelő a szemnek, valamint jóval energiatakarékosabb használatot eredményez egyes eszközökön."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nincs megjelenítésmódosítás}=1{{effect_1}}=2{{effect_1} és {effect_2}}=3{{effect_1}, {effect_2} és {effect_3}}other{{effect_1}, {effect_2}, és # további}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Megszakítások szűrése"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Korlátozhatja, hogy miről kapjon értesítést"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"A rendszer nem szűrt ki megszakításokat"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"A szűrt értesítések megjelenítési beállításai"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Ha a „Ne zavarjanak” mód aktív"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Beszélgetések"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Az összes beszélgetés"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"az összes beszélgetés"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Fontos beszélgetések"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"fontos beszélgetések"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nincs"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Váltás „Csak ébresztésekre” eddig: <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Módosítás a bármikor történő megszakításra"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Szerkesztési mód"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Mód hozzáadása"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Mód létrehozása"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Egyéni mód"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Mód neve"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Naptáresemények"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Alvásritmus"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Alvásidő rutin"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Vezetés közben"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Apphoz társítva"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Alkalmazásbeállítások"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Információk és beállítások a(z) <xliff:g id="APP_NAME">%1$s</xliff:g> appban"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Kezelő: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Mód kikapcsolása"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Ha kikapcsolja ezt a funkciót, a mód nem a várt módon fog működni, a beállításai pedig el lesznek rejtve."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Tiltja a(z) <xliff:g id="MODE_NAME">%1$s</xliff:g> módot?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Ez a mód soha nem kapcsol be, ha tiltva van"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Kikapcsolás"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Mód bekapcsolása"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Ha bekapcsolja ezt a funkciót, a mód automatikusan aktiválódik az ütemezésének megfelelően."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Engedélyezi ezt: <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Ez a mód automatikusan is bekapcsolhat a beállítások függvényében"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Bekapcsolás"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Állítson be olyan módot, amely rendszeres időbeosztást követ"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Állítson be egy módot a naptári eseményekkel való szinkronizáláshoz és a meghívók megválaszolásához"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Tervezzen nyugtató alvásrutint. Állítson be ébresztőket, vegye vissza a képernyő fényerejét, és kapcsolja ki az értesítéseket."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Helyezze előtérbe a biztonságot az úton, hogy a zavartalan vezetésre koncentrálhasson"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Zárja ki a zavaró vagy megszakító tényezőket az eszközről, hogy nyugodtan koncentrálhasson"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Szüntessen meg minden zavaró tényezőt a nyugodt környezet érdekében"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Szabja személyre az eszközélményt a különböző felhasználók számára"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimalizálja a megzavarás lehetőségét azáltal, hogy csak a fontos emberek és alkalmazások érhetik el Önt"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Figyelmeztetés"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Bezárás"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Visszajelzés küldése az eszközről"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akkumulátor"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Beállítások panel"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Szabad formájú ablakok engedélyezése"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Szabad formájú ablakok a másodlagos kijelzőn"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Nem átméretezhető appok engedélyezése többablakos nézetben"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Engedélyezi a nem átméretezhető alkalmazásokat a többablakos nézetben"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"A kényszerített sötétítés felülírása"</string>
@@ -5182,10 +5184,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Szerkesztés"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> személyre szabása"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"A szabad formátumú ablak támogatásának engedélyezéséhez újraindításra van szükség."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"A szabad formájú ablakok rendelkezésre állásának frissítéséhez újraindításra van szükség."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"A szabad formájú ablakok másodlagos kijelzőkön való engedélyezéséhez újraindításra van szükség."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Újraindítás most"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Újraindítás később"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Térbeli hangzás"</string>
@@ -5282,7 +5282,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Rózsaszín"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Ibolyaszín"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Kész"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Mentés"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Mégse"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Alapértelmezett"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Közepes"</string>

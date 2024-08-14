@@ -23,6 +23,7 @@
 
     <PreferenceCategory
         android:key="battery_tips_category"
+        android:layout="@layout/preference_category_no_label"
         settings:controller=
             "com.android.settings.fuelgauge.batteryusage.BatteryTipsController"
         settings:isPreferenceVisible="false">
@@ -62,6 +63,7 @@
 
         <PreferenceCategory
             android:key="app_list"
+            android:layout="@layout/preference_category_no_label"
             settings:isPreferenceVisible="false" />
 
         <com.android.settingslib.widget.FooterPreference

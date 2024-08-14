@@ -113,7 +113,7 @@ public class NetworkProviderSimListController extends BasePreferenceController i
                     if (!info.isEmbedded && !isActiveSubscriptionId
                             && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
                         SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId,
-                                true);
+                                true, false);
                     } else {
                         MobileNetworkUtils.launchMobileNetworkSettings(mContext, info);
                     }
