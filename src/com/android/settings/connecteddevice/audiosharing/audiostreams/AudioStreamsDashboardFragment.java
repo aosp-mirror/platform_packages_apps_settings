@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,23 +19,21 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController.REQUEST_SCAN_BT_BROADCAST_QR_CODE;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
-import com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode.QrCodeScanModeFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
-import com.google.common.base.Strings;
-
 public class AudioStreamsDashboardFragment extends DashboardFragment {
+    public static final String KEY_BROADCAST_METADATA = "key_broadcast_metadata";
     private static final String TAG = "AudioStreamsDashboardFrag";
     private static final boolean DEBUG = BluetoothUtils.D;
     private AudioStreamsProgressCategoryController mAudioStreamsProgressCategoryController;
@@ -46,8 +44,7 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: update category id.
-        return 0;
+        return SettingsEnums.AUDIO_STREAM_MAIN;
     }
 
     @Override
@@ -66,11 +63,6 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         use(AudioStreamsScanQrCodeController.class).setFragment(this);
@@ -78,24 +70,19 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
         mAudioStreamsProgressCategoryController.setFragment(this);
 
         if (getArguments() != null) {
-            String broadcastMetadataStr =
-                    getArguments().getString(AudioStreamConfirmDialog.KEY_BROADCAST_METADATA);
-            if (!Strings.isNullOrEmpty(broadcastMetadataStr)) {
-                BluetoothLeBroadcastMetadata broadcastMetadata =
-                        BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(
-                                broadcastMetadataStr);
-                if (broadcastMetadata == null) {
-                    Log.w(TAG, "onAttach() broadcastMetadata is null!");
-                } else {
-                    mAudioStreamsProgressCategoryController.setSourceFromQrCode(broadcastMetadata);
-                }
+            var broadcastMetadata =
+                    getArguments()
+                            .getParcelable(
+                                    KEY_BROADCAST_METADATA, BluetoothLeBroadcastMetadata.class);
+            if (broadcastMetadata != null) {
+                mAudioStreamsProgressCategoryController.setSourceFromQrCode(
+                        broadcastMetadata, SourceOriginForLogging.QR_CODE_SCAN_OTHER);
+                mMetricsFeatureProvider.action(
+                        getContext(),
+                        SettingsEnums.ACTION_AUDIO_STREAM_QR_CODE_SCAN_SUCCEED,
+                        SourceOriginForLogging.QR_CODE_SCAN_OTHER.ordinal());
             }
         }
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -112,9 +99,7 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
         if (requestCode == REQUEST_SCAN_BT_BROADCAST_QR_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String broadcastMetadata =
-                        data != null
-                                ? data.getStringExtra(QrCodeScanModeFragment.KEY_BROADCAST_METADATA)
-                                : "";
+                        data != null ? data.getStringExtra(KEY_BROADCAST_METADATA) : "";
                 BluetoothLeBroadcastMetadata source =
                         BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(
                                 broadcastMetadata);
@@ -131,7 +116,12 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
                             "onActivityResult() AudioStreamsProgressCategoryController is null!");
                     return;
                 }
-                mAudioStreamsProgressCategoryController.setSourceFromQrCode(source);
+                mAudioStreamsProgressCategoryController.setSourceFromQrCode(
+                        source, SourceOriginForLogging.QR_CODE_SCAN_SETTINGS);
+                mMetricsFeatureProvider.action(
+                        getContext(),
+                        SettingsEnums.ACTION_AUDIO_STREAM_QR_CODE_SCAN_SUCCEED,
+                        SourceOriginForLogging.QR_CODE_SCAN_SETTINGS.ordinal());
             }
         }
     }

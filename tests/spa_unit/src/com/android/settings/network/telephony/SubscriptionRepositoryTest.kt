@@ -77,7 +77,7 @@ class SubscriptionRepositoryTest {
 
     @Test
     fun subscriptionsChangedFlow_hasInitialValue() = runBlocking {
-        val initialValue = context.subscriptionsChangedFlow().firstWithTimeoutOrNull()
+        val initialValue = repository.subscriptionsChangedFlow().firstWithTimeoutOrNull()
 
         assertThat(initialValue).isSameInstanceAs(Unit)
     }
@@ -85,13 +85,24 @@ class SubscriptionRepositoryTest {
     @Test
     fun subscriptionsChangedFlow_changed() = runBlocking {
         val listDeferred = async {
-            context.subscriptionsChangedFlow().toListWithTimeout()
+            repository.subscriptionsChangedFlow().toListWithTimeout()
         }
         delay(100)
 
         subInfoListener?.onSubscriptionsChanged()
 
         assertThat(listDeferred.await()).hasSize(2)
+    }
+
+    @Test
+    fun activeSubscriptionIdListFlow(): Unit = runBlocking {
+        mockSubscriptionManager.stub {
+            on { activeSubscriptionIdList } doReturn intArrayOf(SUB_ID_IN_SLOT_0)
+        }
+
+        val activeSubIds = repository.activeSubscriptionIdListFlow().firstWithTimeoutOrNull()
+
+        assertThat(activeSubIds).containsExactly(SUB_ID_IN_SLOT_0)
     }
 
     @Test
@@ -189,6 +200,22 @@ class SubscriptionRepositoryTest {
         }.build()
 
         val phoneNumber = context.phoneNumberFlow(subInfo).firstWithTimeoutOrNull()
+
+        assertThat(phoneNumber).isEqualTo(NUMBER_1)
+    }
+
+    @Test
+    fun phoneNumberFlow_withSubId() = runBlocking {
+        val subInfo = SubscriptionInfo.Builder().apply {
+            setId(SUB_ID_IN_SLOT_1)
+            setMcc(MCC)
+        }.build()
+        mockSubscriptionManager.stub {
+            on { getActiveSubscriptionInfo(SUB_ID_IN_SLOT_1) } doReturn subInfo
+            on { getPhoneNumber(SUB_ID_IN_SLOT_1) } doReturn NUMBER_1
+        }
+
+        val phoneNumber = repository.phoneNumberFlow(SUB_ID_IN_SLOT_1).firstWithTimeoutOrNull()
 
         assertThat(phoneNumber).isEqualTo(NUMBER_1)
     }

@@ -19,7 +19,11 @@ package com.android.settings.fuelgauge.batteryusage.bugreport;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
+import com.android.settings.fuelgauge.batteryusage.AppOptimizationModeEvent;
 import com.android.settings.fuelgauge.batteryusage.BatteryUsageSlot;
 import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 import com.android.settings.fuelgauge.batteryusage.DatabaseUtils;
@@ -27,11 +31,14 @@ import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryReattributeDao;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryReattributeEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotEntity;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.io.PrintWriter;
 import java.time.Clock;
@@ -46,6 +53,13 @@ public final class LogUtils {
     private static final String TAG = "LogUtils";
     private static final Duration DUMP_TIME_OFFSET = Duration.ofHours(24);
     private static final Duration DUMP_TIME_OFFSET_FOR_ENTRY = Duration.ofHours(4);
+
+    static void dumpAppOptimizationModeEventHist(Context context, PrintWriter writer) {
+        writer.println("\n\tApp Optimization Mode Event History:");
+        final List<AppOptimizationModeEvent> events =
+                AppOptModeSharedPreferencesUtils.getAllEvents(context);
+        dumpListItems(writer, events, event -> event);
+    }
 
     static void dumpBatteryUsageDatabaseHist(Context context, PrintWriter writer) {
         // Dumps periodic job events.
@@ -116,6 +130,33 @@ public final class LogUtils {
         final List<BatteryEventEntity> entities =
                 dao.getAllAfterForLog(getLastFullChargeTimestamp(context));
         dumpListItems(writer, entities, entity -> entity);
+    }
+
+    static void dumpBatteryReattributeDatabaseHist(Context context, PrintWriter writer) {
+        try {
+            dumpBatteryReattributeDatabaseHist(
+                    BatteryStateDatabase.getInstance(context).batteryReattributeDao(),
+                    writer);
+        } catch (Exception e) {
+            Log.e(TAG, "failed to run dumpBatteryReattributeDatabaseHist()", e);
+        }
+    }
+
+    @VisibleForTesting
+    static void dumpBatteryReattributeDatabaseHist(
+            BatteryReattributeDao batteryReattributeDao, PrintWriter writer) {
+        if (!FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider()
+                .isBatteryUsageReattributeEnabled()) {
+            writer.println("\n\tBatteryReattribute is disabled!");
+            return;
+        }
+        writer.println("\n\tBatteryReattribute DatabaseHistory:");
+        final List<BatteryReattributeEntity> entities =
+                batteryReattributeDao.getAllAfter(
+                        Clock.systemUTC().millis() - DUMP_TIME_OFFSET.toMillis());
+        if (entities != null && !entities.isEmpty()) {
+            dumpListItems(writer, entities, entity -> entity);
+        }
     }
 
     private static <T, S> void dumpListItems(

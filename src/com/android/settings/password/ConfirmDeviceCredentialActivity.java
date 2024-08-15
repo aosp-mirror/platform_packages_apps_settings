@@ -17,10 +17,13 @@
 
 package com.android.settings.password;
 
+import static android.Manifest.permission.SET_BIOMETRIC_DIALOG_ADVANCED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PATTERN_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PIN_HEADER;
 import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
+
+import static com.android.systemui.biometrics.Utils.toBitmap;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -31,10 +34,13 @@ import android.app.trust.TrustManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.UserProperties;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.hardware.biometrics.BiometricConstants;
+import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.PromptInfo;
@@ -44,6 +50,7 @@ import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.WindowManager;
 
@@ -64,6 +71,17 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     public static final String TAG = ConfirmDeviceCredentialActivity.class.getSimpleName();
 
     private static final String TAG_BIOMETRIC_FRAGMENT = "fragment";
+
+    /** Use this extra value to provide a custom logo for the biometric prompt. **/
+    public static final String CUSTOM_BIOMETRIC_PROMPT_LOGO_RES_ID_KEY = "custom_logo_res_id";
+    /** Use this extra value to provide a custom logo description for the biometric prompt. **/
+    public static final String CUSTOM_BIOMETRIC_PROMPT_LOGO_DESCRIPTION_KEY =
+            "custom_logo_description";
+    public static final String BIOMETRIC_PROMPT_AUTHENTICATORS = "biometric_prompt_authenticators";
+    public static final String BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT =
+            "biometric_prompt_negative_button_text";
+    public static final String BIOMETRIC_PROMPT_HIDE_BACKGROUND =
+            "biometric_prompt_hide_background";
 
     public static class InternalActivity extends ConfirmDeviceCredentialActivity {
     }
@@ -86,6 +104,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private boolean mForceVerifyPath = false;
     private boolean mGoingToBackground;
     private boolean mWaitingForBiometricCallback;
+    private int mBiometricsAuthenticators;
 
     private Executor mExecutor = (runnable -> {
         mHandler.post(runnable);
@@ -104,8 +123,14 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     Log.i(TAG, "Finishing, user no longer valid: " + mUserId);
                     finish();
                 } else {
-                    // All other errors go to some version of CC
-                    showConfirmCredentials();
+                    if ((mBiometricsAuthenticators
+                            & BiometricManager.Authenticators.DEVICE_CREDENTIAL) != 0) {
+                        // All other errors go to some version of CC
+                        showConfirmCredentials();
+                    } else {
+                        Log.i(TAG, "Finishing, device credential not requested");
+                        finish();
+                    }
                 }
             } else if (mWaitingForBiometricCallback) { // mGoingToBackground is true
                 mWaitingForBiometricCallback = false;
@@ -149,15 +174,20 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        final Intent intent = getIntent();
+        if (intent.getBooleanExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND, false)) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            getWindow().setDimAmount(1);
+            intent.removeExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND);
+        } else {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
 
         mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
         mUserManager = UserManager.get(this);
         mTrustManager = getSystemService(TrustManager.class);
         mLockPatternUtils = new LockPatternUtils(this);
-
-        Intent intent = getIntent();
         mContext = this;
         mCheckDevicePolicyManager = intent
                 .getBooleanExtra(KeyguardManager.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false);
@@ -165,6 +195,11 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mDetails = intent.getCharSequenceExtra(KeyguardManager.EXTRA_DESCRIPTION);
         String alternateButton = intent.getStringExtra(
                 KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
+        mBiometricsAuthenticators = intent.getIntExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
+                BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                        | BiometricManager.Authenticators.BIOMETRIC_WEAK);
+        final String negativeButtonText = intent.getStringExtra(
+                BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT);
         final boolean frp =
                 KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
         final boolean repairMode =
@@ -201,6 +236,25 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         promptInfo.setTitle(mTitle);
         promptInfo.setDescription(mDetails);
         promptInfo.setDisallowBiometricsIfPolicyExists(mCheckDevicePolicyManager);
+        promptInfo.setAuthenticators(mBiometricsAuthenticators);
+        promptInfo.setNegativeButtonText(negativeButtonText);
+        promptInfo.setRealCallerForConfirmDeviceCredentialActivity(getCallingActivity());
+
+        if (android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && android.multiuser.Flags.usePrivateSpaceIconInBiometricPrompt()
+                && hasSetBiometricDialogAdvanced(mContext, getLaunchedFromUid())
+        ) {
+            final int iconResId = intent.getIntExtra(CUSTOM_BIOMETRIC_PROMPT_LOGO_RES_ID_KEY, 0);
+            if (iconResId != 0) {
+                final Bitmap iconBitmap = toBitmap(mContext.getDrawable(iconResId));
+                promptInfo.setLogo(iconResId, iconBitmap);
+            }
+            String logoDescription = intent.getStringExtra(
+                    CUSTOM_BIOMETRIC_PROMPT_LOGO_DESCRIPTION_KEY);
+            if (!TextUtils.isEmpty(logoDescription)) {
+                promptInfo.setLogoDescription(logoDescription);
+            }
+        }
 
         final int policyType = mDevicePolicyManager.getManagedSubscriptionsPolicy().getPolicyType();
 
@@ -409,6 +463,14 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Checks if the calling uid has the permission to set biometric dialog icon and description.
+     */
+    private static boolean hasSetBiometricDialogAdvanced(@NonNull Context context, int callingUid) {
+        return context.checkPermission(SET_BIOMETRIC_DIALOG_ADVANCED, /* pid */ -1, callingUid)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
     // User could be locked while Effective user is unlocked even though the effective owns the
     // credential. Otherwise, biometric can't unlock fbe/keystore through
     // verifyTiedProfileChallenge. In such case, we also wanna show the user message that
@@ -442,8 +504,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         boolean newFragment = false;
 
         if (mBiometricFragment == null) {
-            mBiometricFragment = BiometricFragment.newInstance(promptInfo,
-                    getCallingActivity());
+            mBiometricFragment = BiometricFragment.newInstance(promptInfo);
             newFragment = true;
         }
         mBiometricFragment.setCallbacks(mExecutor, mAuthenticationCallback);

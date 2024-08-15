@@ -16,7 +16,7 @@
 
 package com.android.settings.biometrics.fingerprint2.lib.domain.interactor
 
-import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
+import android.hardware.fingerprint.FingerprintEnrollOptions
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
@@ -32,7 +32,7 @@ import kotlinx.coroutines.flow.Flow
  */
 interface FingerprintManagerInteractor {
   /** Returns the list of current fingerprints. */
-  val enrolledFingerprints: Flow<List<FingerprintData>>
+  val enrolledFingerprints: Flow<List<FingerprintData>?>
 
   /** Returns the max enrollable fingerprints, note during SUW this might be 1 */
   val maxEnrollableFingerprints: Flow<Int>
@@ -62,6 +62,7 @@ interface FingerprintManagerInteractor {
   suspend fun enroll(
     hardwareAuthToken: ByteArray?,
     enrollReason: EnrollReason,
+    fingerprintEnrollOptions: FingerprintEnrollOptions,
   ): Flow<FingerEnrollState>
 
   /**
@@ -74,5 +75,5 @@ interface FingerprintManagerInteractor {
   suspend fun renameFingerprint(fp: FingerprintData, newName: String)
 
   /** Indicates if the device has side fingerprint */
-  suspend fun hasSideFps(): Boolean
+  suspend fun hasSideFps(): Boolean?
 }

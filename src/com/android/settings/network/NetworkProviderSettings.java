@@ -36,6 +36,7 @@ import android.os.PowerManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.EventLog;
@@ -99,17 +100,12 @@ import java.util.Optional;
 
 /**
  * UI for Mobile network and Wi-Fi network settings.
- *
- * TODO(b/167474581): Define the intent android.settings.NETWORK_PROVIDER_SETTINGS in Settings.java.
  */
 @SearchIndexable
 public class NetworkProviderSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener,
         AirplaneModeEnabler.OnAirplaneModeChangedListener, InternetUpdater.InternetChangeListener {
-
-    public static final String ACTION_NETWORK_PROVIDER_SETTINGS =
-            "android.settings.NETWORK_PROVIDER_SETTINGS";
 
     private static final String TAG = "NetworkProviderSettings";
     // IDs of context menu
@@ -375,7 +371,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
         mDataUsagePreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
-                        .build(), 0 /*subId*/);
+                        .build(), SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mResetInternetPreference = findPreference(PREF_KEY_RESET_INTERNET);
         if (mResetInternetPreference != null) {
             mResetInternetPreference.setVisible(false);
@@ -1072,6 +1068,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
         final WifiEntry wifiEntry = pref.getWifiEntry();
+        if (!wifiEntry.isSaved()) {
+            Log.w(TAG, "launchNetworkDetailsFragment: Don't launch because WifiEntry isn't saved!");
+            return;
+        }
         final Context context = requireContext();
 
         final Bundle bundle = new Bundle();

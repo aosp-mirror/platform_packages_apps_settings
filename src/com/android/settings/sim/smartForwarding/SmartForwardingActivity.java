@@ -85,12 +85,7 @@ public class SmartForwardingActivity extends SettingsBaseActivity {
 
     public void enableSmartForwarding(String[] phoneNumber) {
         // Pop-up ongoing dialog
-        ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setTitle(R.string.smart_forwarding_ongoing_title);
-        dialog.setIndeterminate(true);
-        dialog.setMessage(getText(R.string.smart_forwarding_ongoing_text));
-        dialog.setCancelable(false);
-        dialog.show();
+        ProgressDialog dialog = showOngoingDialog();
 
         // Enable feature
         ListenableFuture<FeatureResult> enableTask =
@@ -140,6 +135,9 @@ public class SmartForwardingActivity extends SettingsBaseActivity {
         boolean[] callWaitingStatus = getAllSlotCallWaitingStatus(this, tm);
         CallForwardingInfo[] callForwardingInfo = getAllSlotCallForwardingStatus(this, sm, tm);
 
+        // Pop-up ongoing dialog
+        ProgressDialog dialog = showOngoingDialog();
+
         // Disable feature
         ListenableFuture disableTask = service.submit(new DisableSmartForwardingTask(
                 tm, callWaitingStatus, callForwardingInfo));
@@ -147,11 +145,13 @@ public class SmartForwardingActivity extends SettingsBaseActivity {
             @Override
             public void onSuccess(Object result) {
                 clearAllBackupData(SmartForwardingActivity.this, sm, tm);
+                dialog.dismiss();
             }
 
             @Override
             public void onFailure(Throwable t) {
                 Log.e(TAG, "Disable Feature exception" + t);
+                dialog.dismiss();
             }
         }, ContextCompat.getMainExecutor(this));
     }
@@ -173,5 +173,16 @@ public class SmartForwardingActivity extends SettingsBaseActivity {
                         (dialog, which) -> { dialog.dismiss(); })
                 .create();
         mDialog.show();
+    }
+
+    private ProgressDialog showOngoingDialog() {
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setTitle(R.string.smart_forwarding_ongoing_title);
+        dialog.setIndeterminate(true);
+        dialog.setMessage(getText(R.string.smart_forwarding_ongoing_text));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        return dialog;
     }
 }

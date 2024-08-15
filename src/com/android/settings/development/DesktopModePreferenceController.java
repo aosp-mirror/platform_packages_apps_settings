@@ -16,74 +16,88 @@
 
 package com.android.settings.development;
 
-import static android.provider.Settings.Global.DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS;
+import static android.provider.Settings.Global.DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES;
+
+import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.convertToToggleOverrideWithFallback;
+import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride.OVERRIDE_OFF;
+import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride.OVERRIDE_ON;
+import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride.OVERRIDE_UNSET;
 
 import android.content.Context;
-import android.os.Build;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride;
+import com.android.wm.shell.shared.desktopmode.DesktopModeStatus;
 
+/**
+ * Preference controller to control Desktop mode features
+ */
 public class DesktopModePreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin,
         RebootConfirmationDialogHost {
 
-    private static final String FORCE_DESKTOP_MODE_KEY = "force_desktop_mode_on_external_displays";
+    private static final String OVERRIDE_DESKTOP_MODE_FEATURES_KEY =
+            "override_desktop_mode_features";
 
-    @VisibleForTesting
-    static final int SETTING_VALUE_OFF = 0;
-    @VisibleForTesting
-    static final int SETTING_VALUE_ON = 1;
-
+    @Nullable
     private final DevelopmentSettingsDashboardFragment mFragment;
 
     public DesktopModePreferenceController(
-            Context context, DevelopmentSettingsDashboardFragment fragment) {
+            Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return FORCE_DESKTOP_MODE_KEY;
+    public boolean isAvailable() {
+        return DesktopModeStatus.canShowDesktopModeDevOption(mContext);
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    public String getPreferenceKey() {
+        return OVERRIDE_DESKTOP_MODE_FEATURES_KEY;
+    }
+
+    @Override
+    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
         Settings.Global.putInt(mContext.getContentResolver(),
-                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS,
-                isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
-        if (isEnabled) {
+                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES,
+                isEnabled ? OVERRIDE_ON.getSetting() : OVERRIDE_OFF.getSetting());
+        if (mFragment != null) {
             RebootConfirmationDialogFragment.show(
-                    mFragment, R.string.reboot_dialog_force_desktop_mode, this);
+                    mFragment, R.string.reboot_dialog_override_desktop_mode, this);
         }
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, SETTING_VALUE_OFF);
-        ((TwoStatePreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
+        // Use overridden state, if not present, then use default state
+        final int overrideInt = Settings.Global.getInt(mContext.getContentResolver(),
+                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, OVERRIDE_UNSET.getSetting());
+        final ToggleOverride toggleOverride = convertToToggleOverrideWithFallback(overrideInt,
+                OVERRIDE_UNSET);
+        final boolean shouldDevOptionBeEnabled = switch (toggleOverride) {
+            case OVERRIDE_OFF -> false;
+            case OVERRIDE_ON -> true;
+            case OVERRIDE_UNSET -> DesktopModeStatus.shouldDevOptionBeEnabledByDefault();
+        };
+        ((TwoStatePreference) mPreference).setChecked(shouldDevOptionBeEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
-                DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, SETTING_VALUE_OFF);
-        ((TwoStatePreference) mPreference).setChecked(false);
-    }
-
-    @VisibleForTesting
-    String getBuildType() {
-        return Build.TYPE;
+                DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, OVERRIDE_UNSET.getSetting());
     }
 }

@@ -311,7 +311,9 @@ public class WifiConfigController2 implements TextWatcher,
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
         if (!mHideMeteredAndPrivacy && mWifiManager.isConnectedMacRandomizationSupported()) {
             mPrivacySettingsSpinner = mView.findViewById(R.id.privacy_settings);
-            mDhcpSettingsSpinner  = mView.findViewById(R.id.dhcp_settings);
+            if (Flags.androidVWifiApi()) {
+                mDhcpSettingsSpinner = mView.findViewById(R.id.dhcp_settings);
+            }
             mView.findViewById(R.id.privacy_settings_fields).setVisibility(View.VISIBLE);
         }
         mHiddenSettingsSpinner.setOnItemSelectedListener(this);
@@ -342,7 +344,7 @@ public class WifiConfigController2 implements TextWatcher,
 
                 if (mPrivacySettingsSpinner != null) {
                     final int prefMacValue = WifiPrivacyPreferenceController2
-                            .translateMacRandomizedValueToPrefValue(config.macRandomizationSetting);
+                            .translateWifiEntryPrivacyToPrefValue(mWifiEntry.getPrivacy());
                     mPrivacySettingsSpinner.setSelection(prefMacValue);
                 }
 
@@ -861,7 +863,7 @@ public class WifiConfigController2 implements TextWatcher,
 
         if (mPrivacySettingsSpinner != null) {
             config.macRandomizationSetting = WifiPrivacyPreferenceController2
-                    .translatePrefValueToMacRandomizedValue(mPrivacySettingsSpinner
+                    .translatePrefValueToWifiConfigSetting(mPrivacySettingsSpinner
                             .getSelectedItemPosition());
         }
 

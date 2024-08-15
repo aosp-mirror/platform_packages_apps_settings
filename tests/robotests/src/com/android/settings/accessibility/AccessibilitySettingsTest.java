@@ -26,11 +26,9 @@ import static org.robolectric.Shadows.shadowOf;
 import static java.util.Collections.singletonList;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -110,9 +108,7 @@ public class AccessibilitySettingsTest {
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Spy
     private final AccessibilityServiceInfo mServiceInfo = getMockAccessibilityServiceInfo(
-            PACKAGE_NAME, CLASS_NAME);
-    @Mock
-    private AccessibilityShortcutInfo mShortcutInfo;
+            new ComponentName(PACKAGE_NAME, CLASS_NAME));
     private ShadowAccessibilityManager mShadowAccessibilityManager;
     @Mock
     private LocalBluetoothManager mLocalBluetoothManager;
@@ -125,7 +121,6 @@ public class AccessibilitySettingsTest {
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
         mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
-        setMockAccessibilityShortcutInfo(mShortcutInfo);
 
         Intent intent = new Intent();
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT,
@@ -174,7 +169,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED);
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.accessibility_summary_shortcut_enabled),
                         DEFAULT_SUMMARY));
     }
@@ -189,7 +185,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED);
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_feature_shortcut_off),
                         DEFAULT_SUMMARY));
     }
@@ -251,7 +248,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_on),
                         DEFAULT_SUMMARY));
     }
@@ -265,7 +263,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_on),
                         DEFAULT_SUMMARY));
     }
@@ -279,7 +278,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_DISABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_off),
                         DEFAULT_SUMMARY));
     }
@@ -293,7 +293,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_DISABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
+                mContext.getString(
+                        com.android.settingslib.R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_off),
                         DEFAULT_SUMMARY));
     }
@@ -385,6 +386,7 @@ public class AccessibilitySettingsTest {
 
         mFragment.onContentChanged();
         mFragment.onStart();
+        mFragment.onResume();
 
         RestrictedPreference preference = mFragment.getPreferenceScreen().findPreference(
                 COMPONENT_NAME.flattenToString());
@@ -397,14 +399,25 @@ public class AccessibilitySettingsTest {
     public void testAccessibilityMenuInSystem_IncludedInInteractionControl() {
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
                 List.of(getMockAccessibilityServiceInfo(
-                        AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM)));
+                        AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM,
+                        /*isSystemApp=*/true)));
         setupFragment();
 
-        final RestrictedPreference pref = mFragment.getPreferenceScreen().findPreference(
-                AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM.flattenToString());
-        final String prefCategory = mFragment.mServicePreferenceToPreferenceCategoryMap.get(
-                pref).getKey();
-        assertThat(prefCategory).isEqualTo(AccessibilitySettings.CATEGORY_INTERACTION_CONTROL);
+        assertThat(getPreferenceCategory(AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM))
+                .isEqualTo(AccessibilitySettings.CATEGORY_INTERACTION_CONTROL);
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_CHECK_PREBUNDLED_IS_PREINSTALLED)
+    public void testNonPreinstalledApp_IncludedInDownloadedCategory() {
+        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
+                List.of(getMockAccessibilityServiceInfo(
+                        AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM,
+                        /*isSystemApp=*/false)));
+        setupFragment();
+
+        assertThat(getPreferenceCategory(AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM))
+                .isEqualTo(AccessibilitySettings.CATEGORY_DOWNLOADED_SERVICES);
     }
 
     @Test
@@ -417,13 +430,20 @@ public class AccessibilitySettingsTest {
         assertThat(pref).isNull();
     }
 
-    private AccessibilityServiceInfo getMockAccessibilityServiceInfo(String packageName,
-            String className) {
-        return getMockAccessibilityServiceInfo(new ComponentName(packageName, className));
+    private String getPreferenceCategory(ComponentName componentName) {
+        return mFragment.mServicePreferenceToPreferenceCategoryMap.get(
+                        mFragment.getPreferenceScreen().findPreference(
+                                componentName.flattenToString())).getKey();
     }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo(ComponentName componentName) {
-        final ApplicationInfo applicationInfo = new ApplicationInfo();
+        return getMockAccessibilityServiceInfo(componentName, true);
+    }
+
+    private AccessibilityServiceInfo getMockAccessibilityServiceInfo(ComponentName componentName,
+            boolean isSystemApp) {
+        final ApplicationInfo applicationInfo = Mockito.mock(ApplicationInfo.class);
+        when(applicationInfo.isSystemApp()).thenReturn(isSystemApp);
         final ServiceInfo serviceInfo = new ServiceInfo();
         applicationInfo.packageName = componentName.getPackageName();
         serviceInfo.packageName = componentName.getPackageName();
@@ -442,16 +462,6 @@ public class AccessibilitySettingsTest {
         }
 
         return null;
-    }
-
-    private void setMockAccessibilityShortcutInfo(AccessibilityShortcutInfo mockInfo) {
-        final ActivityInfo activityInfo = Mockito.mock(ActivityInfo.class);
-        activityInfo.applicationInfo = new ApplicationInfo();
-        when(mockInfo.getActivityInfo()).thenReturn(activityInfo);
-        when(activityInfo.loadLabel(any())).thenReturn(DEFAULT_LABEL);
-        when(mockInfo.loadSummary(any())).thenReturn(DEFAULT_SUMMARY);
-        when(mockInfo.loadDescription(any())).thenReturn(DEFAULT_DESCRIPTION);
-        when(mockInfo.getComponentName()).thenReturn(COMPONENT_NAME);
     }
 
     private void setInvisibleToggleFragmentType(AccessibilityServiceInfo info) {

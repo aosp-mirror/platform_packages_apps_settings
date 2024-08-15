@@ -40,7 +40,9 @@ public class AppChannelsBypassingDndSettings extends NotificationSettings {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DND_APPS_BYPASSING;
+        return android.app.Flags.modesUi()
+                ? SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP_CHANNELS
+                : SettingsEnums.DND_APPS_BYPASSING;
     }
 
     @Override

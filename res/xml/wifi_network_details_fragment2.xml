@@ -35,6 +35,11 @@
         android:icon="@drawable/ic_info_outline_24dp"
         android:selectable="false"/>
 
+    <com.android.settingslib.widget.BannerMessagePreference
+        android:key="wep_less_secure_warning"
+        android:title="@string/wep_network_less_secure_warning_title"
+        settings:controller="com.android.settings.wifi.WepLessSecureWarningController"/>
+
     <!-- Buttons -->
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="buttons"

@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.media.AudioAttributes;
@@ -31,6 +32,9 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class AudioSharingPlaySoundPreferenceController
         extends AudioSharingBasePreferenceController {
@@ -39,6 +43,7 @@ public class AudioSharingPlaySoundPreferenceController
 
     private static final String PREF_KEY = "audio_sharing_play_sound";
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private Ringtone mRingtone;
 
     public AudioSharingPlaySoundPreferenceController(Context context) {
@@ -47,11 +52,12 @@ public class AudioSharingPlaySoundPreferenceController
         if (mRingtone != null) {
             mRingtone.setStreamType(AudioManager.STREAM_MUSIC);
         }
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return (mRingtone != null && AudioSharingUtils.isFeatureEnabled())
+        return (mRingtone != null && BluetoothUtils.isAudioSharingEnabled())
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
@@ -74,6 +80,9 @@ public class AudioSharingPlaySoundPreferenceController
                                             .build());
                             if (!mRingtone.isPlaying()) {
                                 mRingtone.play();
+                                mMetricsFeatureProvider.action(
+                                        mContext,
+                                        SettingsEnums.ACTION_AUDIO_SHARING_PLAY_TEST_SOUND);
                             }
                         } catch (Throwable e) {
                             Log.w(TAG, "Fail to play sample, error = " + e);
@@ -97,7 +106,7 @@ public class AudioSharingPlaySoundPreferenceController
     }
 
     @VisibleForTesting
-    protected void setRingtone(Ringtone ringtone) {
+    void setRingtone(Ringtone ringtone) {
         mRingtone = ringtone;
     }
 

@@ -19,9 +19,11 @@ package com.android.settings.network.telephony;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
+import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.getNetworkModePreferenceType;
 import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.setAllowedNetworkTypes;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
@@ -44,6 +46,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionsChangeListener;
@@ -61,16 +64,17 @@ import java.util.stream.Stream;
  * Preference controller for "Enabled network mode"
  */
 public class EnabledNetworkModePreferenceController extends
-        TelephonyBasePreferenceController implements
+        BasePreferenceController implements
         ListPreference.OnPreferenceChangeListener, LifecycleObserver,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
 
     private static final String LOG_TAG = "EnabledNetworkMode";
+
+    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
     private Preference mPreference;
     private PreferenceScreen mPreferenceScreen;
     private TelephonyManager mTelephonyManager;
-    private CarrierConfigCache mCarrierConfigCache;
     private PreferenceEntriesBuilder mBuilder;
     private SubscriptionsChangeListener mSubscriptionsListener;
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
@@ -81,36 +85,16 @@ public class EnabledNetworkModePreferenceController extends
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
-        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
         if (mTelephonyCallback == null) {
             mTelephonyCallback = new PhoneCallStateTelephonyCallback();
         }
     }
 
     @Override
-    public int getAvailabilityStatus(int subId) {
-        boolean visible;
-
-        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
-        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            visible = false;
-        } else if (carrierConfig == null
-                || !CarrierConfigManager.isConfigForIdentifiedCarrier(carrierConfig)) {
-            visible = false;
-        } else if (carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
-                || carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)) {
-            visible = false;
-        } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
-            visible = false;
-        } else if (!isCallStateIdle()) {
-            return AVAILABLE_UNSEARCHABLE;
-        } else {
-            visible = true;
-        }
-
-        return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+    public int getAvailabilityStatus() {
+        return getNetworkModePreferenceType(mContext, mSubId)
+                == NetworkModePreferenceType.EnabledNetworkMode
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     protected boolean isCallStateIdle() {
@@ -507,7 +491,9 @@ public class EnabledNetworkModePreferenceController extends
                     }
                 }
             } else if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
-                if (MobileNetworkUtils.isTdscdmaSupported(mContext, mSubId)) {
+                if (mIsGlobalCdma) {
+                    enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_CDMA_CHOICES;
+                } else if (MobileNetworkUtils.isTdscdmaSupported(mContext, mSubId)) {
                     enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_TDSCDMA_CHOICES;
                 } else if (!mDisplay2gOptions && !mDisplay3gOptions) {
                     enabledNetworkType = mShow4gForLTE
@@ -521,8 +507,6 @@ public class EnabledNetworkModePreferenceController extends
                             : EnabledNetworks.ENABLED_NETWORKS_EXCEPT_GSM_CHOICES;
                 } else if (!mLteEnabled) {
                     enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_EXCEPT_LTE_CHOICES;
-                } else if (mIsGlobalCdma) {
-                    enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_CDMA_CHOICES;
                 } else {
                     enabledNetworkType = mShow4gForLTE ? EnabledNetworks.ENABLED_NETWORKS_4G_CHOICES
                             : EnabledNetworks.ENABLED_NETWORKS_CHOICES;
@@ -953,9 +937,14 @@ public class EnabledNetworkModePreferenceController extends
         }
     }
 
+    /**
+     * Returns the resources associated with Subscription.
+     *
+     * @return Resources associated with Subscription.
+     */
     @VisibleForTesting
-    PhoneCallStateTelephonyCallback getTelephonyCallback() {
-        return mTelephonyCallback;
+    Resources getResourcesForSubId() {
+        return SubscriptionManager.getResourcesForSubId(mContext, mSubId);
     }
 
     @Override

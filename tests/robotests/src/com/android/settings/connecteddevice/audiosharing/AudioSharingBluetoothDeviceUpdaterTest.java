@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingBluetoothDeviceUpdater.PREF_KEY_PREFIX;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -26,6 +28,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -43,6 +46,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
@@ -56,6 +60,7 @@ import com.android.settingslib.flags.Flags;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -82,7 +87,6 @@ import java.util.List;
 public class AudioSharingBluetoothDeviceUpdaterTest {
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
     private static final String TEST_DEVICE_NAME = "test";
-    private static final String PREF_KEY = "audio_sharing_bt";
     private static final String TAG = "AudioSharingBluetoothDeviceUpdater";
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -102,6 +106,7 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
     private AudioSharingBluetoothDeviceUpdater mDeviceUpdater;
     private Collection<CachedBluetoothDevice> mCachedDevices;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
@@ -113,6 +118,7 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
         mShadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mLocalBtManager = Utils.getLocalBtManager(mContext);
         when(mLocalBtManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBtManager.getProfileManager()).thenReturn(mLocalBtProfileManager);
@@ -137,6 +143,12 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
                         new AudioSharingBluetoothDeviceUpdater(
                                 mContext, mDevicePreferenceCallback, /* metricsCategory= */ 0));
         mDeviceUpdater.setPrefContext(mContext);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowThreadUtils.reset();
+        ShadowBluetoothUtils.reset();
     }
 
     @Test
@@ -252,7 +264,15 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
 
     @Test
     public void getPreferenceKey_returnsCorrectKey() {
-        assertThat(mDeviceUpdater.getPreferenceKey()).isEqualTo(PREF_KEY);
+        assertThat(mDeviceUpdater.getPreferenceKeyPrefix()).isEqualTo(PREF_KEY_PREFIX);
+    }
+
+    @Test
+    public void onPreferenceClick_logClick() {
+        Preference preference = new Preference(mContext);
+        mDeviceUpdater.onPreferenceClick(preference);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_DEVICE_CLICK);
     }
 
     private void setupPreferenceMapWithDevice() {

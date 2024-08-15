@@ -16,8 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID;
-
 import android.annotation.IntRange;
 import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
@@ -63,7 +61,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePreferenceController
         implements DevicePreferenceCallback {
-    private static final String TAG = "AudioSharingDeviceVolumeGroupController";
+    private static final String TAG = "AudioSharingVolCtlr";
     private static final String KEY = "audio_sharing_device_volume_group";
 
     @Nullable private final LocalBluetoothManager mBtManager;
@@ -79,12 +77,9 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
     private Map<Integer, Integer> mValueMap = new HashMap<Integer, Integer>();
     private AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
 
-    private BluetoothVolumeControl.Callback mVolumeControlCallback =
+    @VisibleForTesting
+    BluetoothVolumeControl.Callback mVolumeControlCallback =
             new BluetoothVolumeControl.Callback() {
-                @Override
-                public void onVolumeOffsetChanged(
-                        @NonNull BluetoothDevice device, int volumeOffset) {}
-
                 @Override
                 public void onDeviceVolumeChanged(
                         @NonNull BluetoothDevice device,
@@ -94,11 +89,11 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
                                     ? null
                                     : mBtManager.getCachedDeviceManager().findDevice(device);
                     if (cachedDevice == null) return;
-                    int groupId = AudioSharingUtils.getGroupId(cachedDevice);
+                    int groupId = BluetoothUtils.getGroupId(cachedDevice);
                     mValueMap.put(groupId, volume);
                     for (AudioSharingDeviceVolumePreference preference : mVolumePreferences) {
                         if (preference.getCachedDevice() != null
-                                && AudioSharingUtils.getGroupId(preference.getCachedDevice())
+                                && BluetoothUtils.getGroupId(preference.getCachedDevice())
                                         == groupId) {
                             // If the callback return invalid volume, try to
                             // get the volume from AudioManager.STREAM_MUSIC
@@ -117,7 +112,8 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
                 }
             };
 
-    private BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+    @VisibleForTesting
+    BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
                 @Override
                 public void onSearchStarted(int reason) {}
@@ -258,7 +254,7 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
             volumePref.setOrder(getPreferenceOrderForDevice(cachedDevice));
             mVolumePreferences.add(volumePref);
             if (volumePref.getProgress() > 0) return;
-            int volume = mValueMap.getOrDefault(AudioSharingUtils.getGroupId(cachedDevice), -1);
+            int volume = mValueMap.getOrDefault(BluetoothUtils.getGroupId(cachedDevice), -1);
             // If the volume is invalid, try to get the volume from AudioManager.STREAM_MUSIC
             int finalVolume = getAudioVolumeIfNeeded(volume);
             Log.d(
@@ -323,26 +319,26 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
     }
 
     @VisibleForTesting
-    public void setDeviceUpdater(@Nullable AudioSharingDeviceVolumeControlUpdater updater) {
+    void setDeviceUpdater(@Nullable AudioSharingDeviceVolumeControlUpdater updater) {
         mBluetoothDeviceUpdater = updater;
     }
 
     /** Test only: set callback registration status in tests. */
     @VisibleForTesting
-    public void setCallbacksRegistered(boolean registered) {
+    void setCallbacksRegistered(boolean registered) {
         mCallbacksRegistered.set(registered);
     }
 
     /** Test only: set volume map in tests. */
     @VisibleForTesting
-    public void setVolumeMap(@Nullable Map<Integer, Integer> map) {
+    void setVolumeMap(@Nullable Map<Integer, Integer> map) {
         mValueMap.clear();
         mValueMap.putAll(map);
     }
 
     /** Test only: set value for private preferenceGroup in tests. */
     @VisibleForTesting
-    public void setPreferenceGroup(@Nullable PreferenceGroup group) {
+    void setPreferenceGroup(@Nullable PreferenceGroup group) {
         mPreferenceGroup = group;
         mPreference = group;
     }
@@ -371,7 +367,7 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
             mVolumeControl.registerCallback(mExecutor, mVolumeControlCallback);
             mBluetoothDeviceUpdater.registerCallback();
             mContentResolver.registerContentObserver(
-                    Settings.Secure.getUriFor(SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID),
+                    Settings.Secure.getUriFor(BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
                     false,
                     mSettingsObserver);
             mCallbacksRegistered.set(true);
@@ -417,10 +413,10 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
     }
 
     private int getPreferenceOrderForDevice(@NonNull CachedBluetoothDevice cachedDevice) {
-        int groupId = AudioSharingUtils.getGroupId(cachedDevice);
+        int groupId = BluetoothUtils.getGroupId(cachedDevice);
         // The fallback device rank first among the audio sharing device list.
         return (groupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID
-                        && groupId == AudioSharingUtils.getFallbackActiveGroupId(mContext))
+                && groupId == BluetoothUtils.getPrimaryGroupIdForBroadcast(mContentResolver))
                 ? 0
                 : 1;
     }

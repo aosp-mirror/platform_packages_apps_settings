@@ -16,8 +16,11 @@
 
 package com.android.settings.inputmethod;
 
+import static com.android.systemui.shared.Flags.newTouchpadGesturesTutorial;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.util.FeatureFlagUtils;
 
 import androidx.fragment.app.Fragment;
@@ -34,6 +37,7 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
     private static final int ORDER_BOTTOM = 100;
     private static final String PREFERENCE_KEY = "trackpad_touch_gesture";
     private static final String GESTURE_DIALOG_TAG = "GESTURE_DIALOG_TAG";
+    private static final String TUTORIAL_ACTION = "com.android.systemui.action.TOUCHPAD_TUTORIAL";
 
     private Fragment mParent;
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -68,13 +72,21 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        boolean isTouchpad = NewKeyboardSettingsUtils.isTouchpad();
+        return isTouchpad ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     private void showTouchpadGestureEducation() {
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_LEARN_TOUCHPAD_GESTURE_CLICK);
-        TrackpadGestureDialogFragment fragment = new TrackpadGestureDialogFragment();
-        fragment.setTargetFragment(mParent, 0);
-        fragment.show(mParent.getActivity().getSupportFragmentManager(), GESTURE_DIALOG_TAG);
+        if (newTouchpadGesturesTutorial()) {
+            Intent intent = new Intent(TUTORIAL_ACTION);
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+        } else {
+            TrackpadGestureDialogFragment fragment = new TrackpadGestureDialogFragment();
+            fragment.setTargetFragment(mParent, 0);
+            fragment.show(mParent.getActivity().getSupportFragmentManager(), GESTURE_DIALOG_TAG);
+        }
     }
 }

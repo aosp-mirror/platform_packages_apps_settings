@@ -37,15 +37,19 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -95,6 +99,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     private static final int MAIN_DEVICE_ID = 4;
     private static final float HALF_ALPHA = 0.5f;
 
+    PreferenceFragmentCompat mFragment;
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
     @VisibleForTesting
@@ -168,8 +173,11 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         mIconCache.clear();
     }
 
-    public void init(CachedBluetoothDevice cachedBluetoothDevice) {
+    /** Initializes the controller. */
+    public void init(
+            CachedBluetoothDevice cachedBluetoothDevice, PreferenceFragmentCompat fragment) {
         mCachedDevice = cachedBluetoothDevice;
+        mFragment = fragment;
     }
 
     private void registerBluetoothDevice() {
@@ -323,6 +331,14 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                     MAIN_DEVICE_ID);
                         }
                     });
+            if (Flags.enableBluetoothDeviceDetailsPolish()) {
+                ImageButton renameButton = mLayoutPreference.findViewById(R.id.rename_button);
+                renameButton.setVisibility(View.VISIBLE);
+                renameButton.setOnClickListener(view -> {
+                    RemoteDeviceNameDialogFragment.newInstance(mCachedDevice).show(
+                            mFragment.getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
+                });
+            }
         }
     }
 
@@ -456,18 +472,24 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                         com.android.settings.Utils.formatPercentage(batteryLevel));
                 batterySummaryView.setVisibility(View.VISIBLE);
                 showBatteryIcon(linearLayout, batteryLevel, lowBatteryLevel, charging);
+                showBatteryRing(linearLayout, batteryLevel);
             } else {
                 if (deviceId == MAIN_DEVICE_ID) {
                     linearLayout.setVisibility(View.VISIBLE);
                     linearLayout.findViewById(R.id.bt_battery_icon).setVisibility(View.GONE);
+
                     int level = preloadedNativeBatteryLevel.get();
                     if (level != BluetoothDevice.BATTERY_LEVEL_UNKNOWN
                             && level != BluetoothDevice.BATTERY_LEVEL_BLUETOOTH_OFF) {
                         batterySummaryView.setText(
                                 com.android.settings.Utils.formatPercentage(level));
                         batterySummaryView.setVisibility(View.VISIBLE);
+                        showBatteryRing(linearLayout, level);
                     } else {
                         batterySummaryView.setVisibility(View.GONE);
+                        if (Flags.enableBluetoothDeviceDetailsPolish()) {
+                            linearLayout.findViewById(R.id.battery_ring).setVisibility(View.GONE);
+                        }
                     }
                 } else {
                     // Hide it if it doesn't have battery information
@@ -481,6 +503,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                         com.android.settings.Utils.formatPercentage(batteryLevel));
                 batterySummaryView.setVisibility(View.VISIBLE);
                 showBatteryIcon(linearLayout, batteryLevel, lowBatteryLevel, charging);
+                showBatteryRing(linearLayout, batteryLevel);
             } else {
                 batterySummaryView.setVisibility(View.GONE);
             }
@@ -610,6 +633,14 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         imageView.setVisibility(View.VISIBLE);
     }
 
+    private void showBatteryRing(LinearLayout linearLayout, int level) {
+        if (Flags.enableBluetoothDeviceDetailsPolish()) {
+            ProgressBar batteryProgress = linearLayout.findViewById(R.id.battery_ring);
+            batteryProgress.setProgress(level);
+            batteryProgress.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void updateDisconnectLayout() {
         mLayoutPreference.findViewById(R.id.layout_left).setVisibility(View.GONE);
         mLayoutPreference.findViewById(R.id.layout_right).setVisibility(View.GONE);
@@ -620,6 +651,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         linearLayout.findViewById(R.id.header_title).setVisibility(View.GONE);
         linearLayout.findViewById(R.id.bt_battery_summary).setVisibility(View.GONE);
         linearLayout.findViewById(R.id.bt_battery_icon).setVisibility(View.GONE);
+        if (Flags.enableBluetoothDeviceDetailsPolish()) {
+            linearLayout.findViewById(R.id.battery_ring).setVisibility(View.GONE);
+        }
 
         // Only show bluetooth icon
         final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();

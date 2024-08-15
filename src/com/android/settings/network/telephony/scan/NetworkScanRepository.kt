@@ -30,8 +30,8 @@ import com.android.settings.R
 import com.android.settings.network.telephony.CellInfoUtil.getNetworkTitle
 import com.android.settings.network.telephony.telephonyManager
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
+import java.util.concurrent.Executors
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -52,9 +52,8 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
     private val telephonyManager = context.telephonyManager(subId)
 
     /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
-    fun launchNetworkScan(lifecycleOwner: LifecycleOwner, onResult: (NetworkScanResult) -> Unit) {
+    fun launchNetworkScan(lifecycleOwner: LifecycleOwner, onResult: (NetworkScanResult) -> Unit) =
         networkScanFlow().collectLatestWithLifecycle(lifecycleOwner, action = onResult)
-    }
 
     data class CellInfoScanKey(
         val title: String?,
@@ -97,11 +96,16 @@ class NetworkScanRepository(private val context: Context, subId: Int) {
 
         val networkScan = telephonyManager.requestNetworkScan(
             createNetworkScan(),
-            Dispatchers.Default.asExecutor(),
+            // requestNetworkScan() could call callbacks concurrently, so we use a single thread
+            // to avoid racing conditions.
+            Executors.newSingleThreadExecutor(),
             callback,
         )
 
-        awaitClose { networkScan.stopScan() }
+        awaitClose {
+            networkScan.stopScan()
+            Log.d(TAG, "network scan stopped")
+        }
     }.conflate().onEach { Log.d(TAG, "networkScanFlow: $it") }.flowOn(Dispatchers.Default)
 
     /** Create network scan for allowed network types. */

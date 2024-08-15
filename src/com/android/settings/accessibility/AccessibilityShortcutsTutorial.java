@@ -19,7 +19,11 @@ package com.android.settings.accessibility;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -171,7 +175,7 @@ public final class AccessibilityShortcutsTutorial {
             AlertDialog dialog, List<TutorialPage> pages, int selectedPageIndex) {
         final Button button = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
         final int pageType = pages.get(selectedPageIndex).getType();
-        final int buttonVisibility = pageType == UserShortcutType.SOFTWARE ? VISIBLE : GONE;
+        final int buttonVisibility = (pageType == SOFTWARE) ? VISIBLE : GONE;
         button.setVisibility(buttonVisibility);
         if (buttonVisibility == VISIBLE) {
             final int textResId = AccessibilityUtil.isFloatingMenuEnabled(dialog.getContext())
@@ -246,8 +250,9 @@ public final class AccessibilityShortcutsTutorial {
 
         final ImageView imageView = view.findViewById(R.id.image);
         final int gestureSettingsImageResId =
-                isTouchExploreEnabled ? R.drawable.a11y_gesture_navigation_three_finger_preview
-                        : R.drawable.a11y_gesture_navigation_two_finger_preview;
+                isTouchExploreEnabled
+                        ? R.drawable.accessibility_shortcut_type_gesture_preview_touch_explore_on
+                        : R.drawable.accessibility_shortcut_type_gesture_preview;
         imageView.setImageResource(gestureSettingsImageResId);
 
         final TextView textView = view.findViewById(R.id.gesture_tutorial_message);
@@ -392,7 +397,7 @@ public final class AccessibilityShortcutsTutorial {
     }
 
     private static TutorialPage createSoftwareTutorialPage(@NonNull Context context) {
-        final int type = UserShortcutType.SOFTWARE;
+        final int type = SOFTWARE;
         final CharSequence title = getSoftwareTitle(context);
         final View image = createSoftwareImage(context);
         final CharSequence instruction = getSoftwareInstruction(context);
@@ -404,11 +409,11 @@ public final class AccessibilityShortcutsTutorial {
     }
 
     private static TutorialPage createHardwareTutorialPage(@NonNull Context context) {
-        final int type = UserShortcutType.HARDWARE;
+        final int type = HARDWARE;
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_volume);
         final View image =
-                createIllustrationView(context, R.drawable.a11y_shortcut_type_hardware);
+                createIllustrationView(context, R.drawable.accessibility_shortcut_type_volume_keys);
         final ImageView indicatorIcon =
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
         final CharSequence instruction =
@@ -419,12 +424,12 @@ public final class AccessibilityShortcutsTutorial {
     }
 
     private static TutorialPage createTripleTapTutorialPage(@NonNull Context context) {
-        final int type = UserShortcutType.TRIPLETAP;
+        final int type = TRIPLETAP;
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_triple);
         final View image =
                 createIllustrationViewWithImageRawResource(context,
-                        R.raw.a11y_shortcut_type_triple_tap);
+                        R.raw.accessibility_shortcut_type_tripletap);
         final CharSequence instruction = context.getString(
                 R.string.accessibility_tutorial_dialog_tripletap_instruction, 3);
         final ImageView indicatorIcon =
@@ -435,14 +440,13 @@ public final class AccessibilityShortcutsTutorial {
     }
 
     private static TutorialPage createTwoFingerTripleTapTutorialPage(@NonNull Context context) {
-        final int type = UserShortcutType.TWOFINGER_DOUBLETAP;
+        final int type = TWOFINGER_DOUBLETAP;
         final int numFingers = 2;
         final CharSequence title = context.getString(
                 R.string.accessibility_tutorial_dialog_title_two_finger_double, numFingers);
-        // TODO(b/308088945): Update tutorial image when UX provides them
         final View image =
                 createIllustrationViewWithImageRawResource(context,
-                        R.raw.a11y_shortcut_type_triple_tap);
+                        R.raw.accessibility_shortcut_type_2finger_doubletap);
         final CharSequence instruction = context.getString(
                 R.string.accessibility_tutorial_dialog_twofinger_doubletap_instruction, numFingers);
         final ImageView indicatorIcon =
@@ -454,12 +458,12 @@ public final class AccessibilityShortcutsTutorial {
 
     private static TutorialPage createQuickSettingsTutorialPage(
             @NonNull Context context, @NonNull CharSequence featureName, boolean inSetupWizard) {
-        final int type = UserShortcutType.QUICK_SETTINGS;
+        final int type = QUICK_SETTINGS;
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_quick_setting);
         final View image =
                 createIllustrationView(context,
-                        R.drawable.a11y_shortcut_type_quick_settings);
+                        R.drawable.accessibility_shortcut_type_quick_settings);
         // Remove the unneeded background, since the main image already includes a background
         image.findViewById(R.id.image_background).setVisibility(GONE);
         final int numFingers = AccessibilityUtil.isTouchExploreEnabled(context) ? 2 : 1;
@@ -494,28 +498,28 @@ public final class AccessibilityShortcutsTutorial {
         // LINT.IfChange(shortcut_type_ui_order)
         final List<TutorialPage> tutorialPages = new ArrayList<>();
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if ((shortcutTypes & UserShortcutType.QUICK_SETTINGS)
-                    == UserShortcutType.QUICK_SETTINGS) {
+            if ((shortcutTypes & QUICK_SETTINGS)
+                    == QUICK_SETTINGS) {
                 tutorialPages.add(
                         createQuickSettingsTutorialPage(context, featureName, inSetupWizard));
             }
         }
-        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+        if ((shortcutTypes & SOFTWARE) == SOFTWARE) {
             tutorialPages.add(createSoftwareTutorialPage(context));
         }
 
-        if ((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE) {
+        if ((shortcutTypes & HARDWARE) == HARDWARE) {
             tutorialPages.add(createHardwareTutorialPage(context));
         }
 
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if ((shortcutTypes & UserShortcutType.TWOFINGER_DOUBLETAP)
-                    == UserShortcutType.TWOFINGER_DOUBLETAP) {
+            if ((shortcutTypes & TWOFINGER_DOUBLETAP)
+                    == TWOFINGER_DOUBLETAP) {
                 tutorialPages.add(createTwoFingerTripleTapTutorialPage(context));
             }
         }
 
-        if ((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP) {
+        if ((shortcutTypes & TRIPLETAP) == TRIPLETAP) {
             tutorialPages.add(createTripleTapTutorialPage(context));
         }
         // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
@@ -526,13 +530,14 @@ public final class AccessibilityShortcutsTutorial {
     private static View createSoftwareImage(Context context) {
         int resId;
         if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.drawable.a11y_shortcut_type_software_floating;
+            return createIllustrationViewWithImageRawResource(
+                    context, R.raw.accessibility_shortcut_type_fab);
         } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.drawable.a11y_shortcut_type_software_gesture_talkback
-                    : R.drawable.a11y_shortcut_type_software_gesture;
+                    ? R.drawable.accessibility_shortcut_type_gesture_touch_explore_on
+                    : R.drawable.accessibility_shortcut_type_gesture;
         } else {
-            resId = R.drawable.a11y_shortcut_type_software;
+            resId = R.drawable.accessibility_shortcut_type_navbar;
         }
         return createIllustrationView(context, resId);
     }

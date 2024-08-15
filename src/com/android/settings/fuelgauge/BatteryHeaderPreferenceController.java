@@ -81,7 +81,10 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_not_charging);
         }
-        if (BatteryUtils.isBatteryDefenderOn(info)) {
+        if (BatteryUtils.isBatteryDefenderOn(info)
+                || FeatureFactory.getFeatureFactory()
+                .getPowerUsageFeatureProvider()
+                .isExtraDefend()) {
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_charging_on_hold);
         }
@@ -89,16 +92,21 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
                 && mBatterySettingsFeatureProvider.isChargingOptimizationMode(mContext)) {
             return info.remainingLabel;
         }
-        if (info.remainingLabel == null
-                || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
+        if (info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
             return info.statusLabel;
         }
         if (info.pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
             final CharSequence wirelessChargingLabel =
                     mBatterySettingsFeatureProvider.getWirelessChargingLabel(mContext, info);
             if (wirelessChargingLabel != null) {
+                mBatteryUsageProgressBarPref.setBottomSummaryContentDescription(
+                        mBatterySettingsFeatureProvider
+                                .getWirelessChargingContentDescription(mContext, info));
                 return wirelessChargingLabel;
             }
+        }
+        if (info.remainingLabel == null) {
+            return info.statusLabel;
         }
         if (info.statusLabel != null && !info.discharging) {
             // Charging state

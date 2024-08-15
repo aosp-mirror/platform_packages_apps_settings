@@ -20,11 +20,14 @@ import static com.android.settings.network.MobileNetworkListFragment.collectAirp
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -65,13 +68,9 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkSettings extends AbstractMobileNetworkSettings implements
@@ -83,7 +82,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @VisibleForTesting
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
-    private static final String KEY_ROAMING_PREF = "button_roaming_key";
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
     private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
@@ -107,9 +105,18 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     private MobileNetworkRepository mMobileNetworkRepository;
     private List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
-    private Map<Integer, SubscriptionInfoEntity> mSubscriptionInfoMap = new HashMap<>();
+    @Nullable
     private SubscriptionInfoEntity mSubscriptionInfoEntity;
     private MobileNetworkInfoEntity mMobileNetworkInfoEntity;
+
+    private BroadcastReceiver mBrocastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED)) {
+                redrawPreferenceControllers();
+            }
+        }
+    };
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -182,8 +189,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         return Arrays.asList(
                 new DataUsageSummaryPreferenceController(context, mSubId),
-                new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
-                        this, mSubId),
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
                         getSettingsLifecycle(), this),
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
@@ -197,7 +202,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.d(LOG_TAG, "Invalid subId, get the default subscription to show.");
             SubscriptionInfo info = SubscriptionUtil.getSubscriptionOrDefault(context, mSubId);
@@ -242,16 +246,17 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
         use(BillingCyclePreferenceController.class).init(mSubId);
         use(MmsMessagePreferenceController.class).init(mSubId);
-        final var crossSimCallingViewModel =
-                new ViewModelProvider(this).get(CrossSimCallingViewModel.class);
-        use(AutoDataSwitchPreferenceController.class).init(mSubId, crossSimCallingViewModel);
+        // CrossSimCallingViewModel is responsible for maintaining the correct cross sim calling
+        // settings (backup calling).
+        new ViewModelProvider(this).get(CrossSimCallingViewModel.class);
+        use(AutoDataSwitchPreferenceController.class).init(mSubId);
         use(DisabledSubscriptionController.class).init(mSubId);
         use(DeleteSimProfilePreferenceController.class).init(mSubId);
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
 
         use(MobileNetworkSpnPreferenceController.class).init(this, mSubId);
-        use(MobileNetworkPhoneNumberPreferenceController.class).init(this, mSubId);
+        use(MobileNetworkPhoneNumberPreferenceController.class).init(mSubId);
         use(MobileNetworkImeiPreferenceController.class).init(this, mSubId);
 
         final MobileDataPreferenceController mobileDataPreferenceController =
@@ -267,8 +272,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         final RoamingPreferenceController roamingPreferenceController =
                 use(RoamingPreferenceController.class);
         if (roamingPreferenceController != null) {
-            roamingPreferenceController.init(getFragmentManager(), mSubId,
-                    mMobileNetworkInfoEntity);
+            roamingPreferenceController.init(getParentFragmentManager(), mSubId);
         }
         final SatelliteSettingPreferenceController satelliteSettingPreferenceController = use(
                 SatelliteSettingPreferenceController.class);
@@ -336,6 +340,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 setTelephonyAvailabilityStatus(getPreferenceControllersAsList());
 
         super.onCreate(icicle);
+        if (isUiRestricted()) {
+            Log.d(LOG_TAG, "Mobile network page is disallowed.");
+            finish();
+            return;
+        }
         final Context context = getContext();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
@@ -359,31 +368,30 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         mMobileNetworkRepository.updateEntity();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
+        getContext().registerReceiver(mBrocastReceiver, intentFilter, Context.RECEIVER_EXPORTED);
     }
 
     private void onSubscriptionDetailChanged() {
-        if (mSubscriptionInfoEntity != null) {
-            /**
-             * Update the title when SIM stats got changed
-             */
-            final Consumer<Activity> renameTitle = activity -> {
-                if (activity != null && !activity.isFinishing()) {
-                    if (activity instanceof SettingsActivity) {
-                        ((SettingsActivity) activity).setTitle(mSubscriptionInfoEntity.uniqueName);
-                    }
-                }
-            };
-
-            ThreadUtils.postOnMainThread(() -> {
-                renameTitle.accept(getActivity());
-                redrawPreferenceControllers();
-            });
+        final SubscriptionInfoEntity subscriptionInfoEntity = mSubscriptionInfoEntity;
+        if (subscriptionInfoEntity == null) {
+            return;
         }
+        ThreadUtils.postOnMainThread(() -> {
+            if (getActivity() instanceof SettingsActivity activity && !activity.isFinishing()) {
+                // Update the title when SIM stats got changed
+                activity.setTitle(subscriptionInfoEntity.uniqueName);
+            }
+            redrawPreferenceControllers();
+        });
     }
 
     @Override
     public void onPause() {
         mMobileNetworkRepository.removeRegister(this);
+        getContext().unregisterReceiver(mBrocastReceiver);
         super.onPause();
     }
 
@@ -463,14 +471,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.mobile_network_settings) {
-
-                /** suppress full page if user is not admin */
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    boolean isAirplaneOff = Settings.Global.getInt(context.getContentResolver(),
-                            Settings.Global.AIRPLANE_MODE_ON, 0) == 0;
-                    return isAirplaneOff && SubscriptionUtil.isSimHardwareVisible(context)
-                            && context.getSystemService(UserManager.class).isAdminUser();
+                    return MobileNetworkSettingsSearchIndex
+                            .isMobileNetworkSettingsSearchable(context);
                 }
             };
 
@@ -512,37 +516,26 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     @Override
     public void onAvailableSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        // Check the current subId is existed or not, if so, finish it.
-        if (!mSubscriptionInfoMap.isEmpty()) {
-
-            // Check each subInfo and remove it in the map based on the new list.
-            for (SubscriptionInfoEntity entity : subInfoEntityList) {
-                mSubscriptionInfoMap.remove(Integer.parseInt(entity.subId));
-            }
-
-            Iterator<Integer> iterator = mSubscriptionInfoMap.keySet().iterator();
-            while (iterator.hasNext()) {
-                if (iterator.next() == mSubId && getActivity() != null) {
-                    finishFragment();
-                    return;
-                }
-            }
-        }
-
         mSubInfoEntityList = subInfoEntityList;
         SubscriptionInfoEntity[] entityArray = mSubInfoEntityList.toArray(
                 new SubscriptionInfoEntity[0]);
+        mSubscriptionInfoEntity = null;
         for (SubscriptionInfoEntity entity : entityArray) {
             int subId = Integer.parseInt(entity.subId);
-            mSubscriptionInfoMap.put(subId, entity);
-            if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID && subId == mSubId) {
+            if (subId == mSubId) {
                 mSubscriptionInfoEntity = entity;
                 Log.d(LOG_TAG, "Set subInfo for subId " + mSubId);
                 break;
-            } else if (entity.isDefaultSubscriptionSelection) {
+            } else if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                    && entity.isDefaultSubscriptionSelection) {
                 mSubscriptionInfoEntity = entity;
                 Log.d(LOG_TAG, "Set subInfo to default subInfo.");
             }
+        }
+        if (mSubscriptionInfoEntity == null && getActivity() != null) {
+            // If the current subId is not existed, finish it.
+            finishFragment();
+            return;
         }
         onSubscriptionDetailChanged();
     }

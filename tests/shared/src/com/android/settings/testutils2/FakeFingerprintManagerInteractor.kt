@@ -19,6 +19,7 @@ package com.android.settings.testutils2
 import android.hardware.biometrics.ComponentInfoInternal
 import android.hardware.biometrics.SensorLocationInternal
 import android.hardware.biometrics.SensorProperties
+import android.hardware.fingerprint.FingerprintEnrollOptions
 import android.hardware.fingerprint.FingerprintSensorProperties
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
@@ -78,6 +79,7 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
   override suspend fun enroll(
     hardwareAuthToken: ByteArray?,
     enrollReason: EnrollReason,
+    fingerprintEnrollOptions: FingerprintEnrollOptions
   ): Flow<FingerEnrollState> = flowOf(*enrollStateViewModel.toTypedArray())
 
   override suspend fun removeFingerprint(fp: FingerprintData): Boolean {

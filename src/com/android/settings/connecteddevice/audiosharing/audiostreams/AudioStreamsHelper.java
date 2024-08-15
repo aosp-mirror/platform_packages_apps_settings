@@ -26,13 +26,15 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeAudioContentMetadata;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.R;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -41,6 +43,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.utils.ThreadUtils;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.common.base.Strings;
 
 import java.util.ArrayList;
@@ -71,7 +74,8 @@ public class AudioStreamsHelper {
      *
      * @param source The LE broadcast metadata representing the audio source.
      */
-    void addSource(BluetoothLeBroadcastMetadata source) {
+    @VisibleForTesting
+    public void addSource(BluetoothLeBroadcastMetadata source) {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "addSource(): LeBroadcastAssistant is null!");
             return;
@@ -97,7 +101,8 @@ public class AudioStreamsHelper {
     }
 
     /** Removes sources from LE broadcasts associated for all active sinks based on broadcast Id. */
-    void removeSource(int broadcastId) {
+    @VisibleForTesting
+    public void removeSource(int broadcastId) {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "removeSource(): LeBroadcastAssistant is null!");
             return;
@@ -139,8 +144,10 @@ public class AudioStreamsHelper {
                 .toList();
     }
 
+    /** Retrieves LocalBluetoothLeBroadcastAssistant. */
+    @VisibleForTesting
     @Nullable
-    LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
+    public LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
         return mLeBroadcastAssistant;
     }
 
@@ -273,9 +280,7 @@ public class AudioStreamsHelper {
             Log.w(TAG, "getConnectedBluetoothDevices(): LeBroadcastAssistant is null!");
             return emptyList();
         }
-        List<BluetoothDevice> connectedDevices =
-                leBroadcastAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED});
+        List<BluetoothDevice> connectedDevices = leBroadcastAssistant.getAllConnectedDevices();
         Optional<CachedBluetoothDevice> cachedBluetoothDevice =
                 inSharingOnly
                         ? getCachedBluetoothDeviceInSharing(manager)
@@ -344,5 +349,17 @@ public class AudioStreamsHelper {
         intent.putExtra(BROADCAST_TITLE, title);
         intent.putParcelableArrayListExtra(DEVICES, new ArrayList<>(devices));
         context.startService(intent);
+    }
+
+    static void configureAppBarByOrientation(@Nullable FragmentActivity activity) {
+        if (activity != null) {
+            AppBarLayout appBarLayout = activity.findViewById(R.id.app_bar);
+            if (appBarLayout != null) {
+                boolean canAppBarExpand =
+                        activity.getResources().getConfiguration().orientation
+                                == Configuration.ORIENTATION_PORTRAIT;
+                appBarLayout.setExpanded(canAppBarExpand);
+            }
+        }
     }
 }

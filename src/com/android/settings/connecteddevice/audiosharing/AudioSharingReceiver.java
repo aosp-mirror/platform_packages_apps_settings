@@ -20,6 +20,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -30,8 +31,11 @@ import androidx.core.app.NotificationCompat;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class AudioSharingReceiver extends BroadcastReceiver {
     private static final String TAG = "AudioSharingNotification";
@@ -45,7 +49,7 @@ public class AudioSharingReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (!AudioSharingUtils.isFeatureEnabled()) {
+        if (!BluetoothUtils.isAudioSharingEnabled()) {
             Log.w(TAG, "Skip handling received intent, flag is off.");
             return;
         }
@@ -54,6 +58,8 @@ public class AudioSharingReceiver extends BroadcastReceiver {
             Log.w(TAG, "Received unexpected intent with null action.");
             return;
         }
+        MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         switch (action) {
             case LocalBluetoothLeBroadcast.ACTION_LE_AUDIO_SHARING_STATE_CHANGE:
                 int state =
@@ -61,8 +67,12 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                                 LocalBluetoothLeBroadcast.EXTRA_LE_AUDIO_SHARING_STATE, -1);
                 if (state == LocalBluetoothLeBroadcast.BROADCAST_STATE_ON) {
                     showSharingNotification(context);
+                    metricsFeatureProvider.action(
+                            context, SettingsEnums.ACTION_SHOW_AUDIO_SHARING_NOTIFICATION);
                 } else if (state == LocalBluetoothLeBroadcast.BROADCAST_STATE_OFF) {
                     cancelSharingNotification(context);
+                    metricsFeatureProvider.action(
+                            context, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION);
                 } else {
                     Log.w(
                             TAG,
@@ -71,7 +81,15 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                 break;
             case ACTION_LE_AUDIO_SHARING_STOP:
                 LocalBluetoothManager manager = Utils.getLocalBtManager(context);
-                AudioSharingUtils.stopBroadcasting(manager);
+                if (BluetoothUtils.isBroadcasting(manager)) {
+                    AudioSharingUtils.stopBroadcasting(manager);
+                    metricsFeatureProvider.action(
+                            context, SettingsEnums.ACTION_STOP_AUDIO_SHARING_FROM_NOTIFICATION);
+                } else {
+                    cancelSharingNotification(context);
+                    metricsFeatureProvider.action(
+                            context, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION);
+                }
                 break;
             default:
                 Log.w(TAG, "Received unexpected intent " + intent.getAction());
@@ -98,7 +116,11 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                         stopIntent,
                         PendingIntent.FLAG_IMMUTABLE);
         Intent settingsIntent =
-                new Intent(ACTION_LE_AUDIO_SHARING_SETTINGS).setPackage(context.getPackageName());
+                new Intent(ACTION_LE_AUDIO_SHARING_SETTINGS)
+                        .setPackage(context.getPackageName())
+                        .putExtra(
+                                MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
+                                SettingsEnums.NOTIFICATION_AUDIO_SHARING);
         PendingIntent settingsPendingIntent =
                 PendingIntent.getActivity(
                         context,

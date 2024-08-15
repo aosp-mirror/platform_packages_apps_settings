@@ -44,14 +44,20 @@ public class FloatingButtonShortcutOptionController
         if (preference instanceof ShortcutOptionPreference shortcutOptionPreference) {
             shortcutOptionPreference.setTitle(
                     R.string.accessibility_shortcut_edit_dialog_title_software);
-            shortcutOptionPreference.setIntroImageResId(
-                    R.drawable.a11y_shortcut_type_software_floating);
+            shortcutOptionPreference.setIntroImageRawResId(R.raw.accessibility_shortcut_type_fab);
         }
     }
 
     @Override
     protected boolean isShortcutAvailable() {
-        return AccessibilityUtil.isFloatingMenuEnabled(mContext);
+        if (android.provider.Flags.a11yStandaloneGestureEnabled()) {
+            // FAB should be available when in gesture navigation mode,
+            // or if we're in the FAB button mode while in navbar navigation mode.
+            return AccessibilityUtil.isGestureNavigateEnabled(mContext)
+                    || AccessibilityUtil.isFloatingMenuEnabled(mContext);
+        } else {
+            return AccessibilityUtil.isFloatingMenuEnabled(mContext);
+        }
     }
 
     @Nullable

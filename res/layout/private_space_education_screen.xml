@@ -30,6 +30,7 @@
         android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/sud_layout_icon_container"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -37,8 +38,6 @@
             android:id="@+id/lottie_animation"
             style="@style/SudContentIllustration"
             android:layout_width="match_parent"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
             android:layout_height="match_parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
@@ -54,7 +53,7 @@
                 android:src="@drawable/counter_1_24dp" />
             <TextView
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
-                android:layout_toRightOf="@+id/lockIcon"
+                android:layout_toEndOf="@+id/lockIcon"
                 android:text="@string/private_space_separate_account_text"/>
         </RelativeLayout>
         <RelativeLayout
@@ -65,7 +64,7 @@
                 android:src="@drawable/counter_2_24dp" />
             <TextView
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
-                android:layout_toRightOf="@+id/bellIcon"
+                android:layout_toEndOf="@+id/bellIcon"
                 android:text="@string/private_space_protected_lock_text"/>
         </RelativeLayout>
         <RelativeLayout
@@ -78,8 +77,25 @@
                 android:src="@drawable/counter_3_24dp" />
             <TextView
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
-                android:layout_toRightOf="@+id/appsIcon"
+                android:layout_toEndOf="@+id/appsIcon"
                 android:text="@string/private_space_install_apps_text"/>
+        </RelativeLayout>
+        <TextView
+            style="@style/PrivateSpaceSetupSubHeaderStyle"
+            android:text="@string/private_space_keep_in_mind_text"/>
+        <RelativeLayout
+            style="@style/PrivateSpaceSetupBulletPointLayoutStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/eduIcon"
+                style="@style/PrivateSpaceBulletPointIconStyle"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_private_space_edu_icon" />
+            <TextView
+                style="@style/PrivateSpaceBulletPointTextFontStyle"
+                android:layout_toEndOf="@+id/eduIcon"
+                android:text="@string/private_space_apps_stopped_text"/>
         </RelativeLayout>
         <Space
             android:layout_width="wrap_content"
@@ -96,13 +112,13 @@
                 android:id="@+id/info"
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
                 android:textSize = "14sp"
-                android:layout_toRightOf="@+id/infoIcon"
+                android:layout_toEndOf="@+id/infoIcon"
                 android:text="@string/private_space_apps_permission_text"/>
             <TextView
                 android:id="@+id/learn_more"
                 style="@style/PrivateSpaceSetupSubHeaderStyle"
                 android:layout_below="@id/info"
-                android:layout_alignLeft="@+id/info"
+                android:layout_alignStart="@+id/info"
                 android:paddingTop="24dp"
                 android:paddingLeft="16dp"
                 android:text="@string/private_space_learn_more_text"/>

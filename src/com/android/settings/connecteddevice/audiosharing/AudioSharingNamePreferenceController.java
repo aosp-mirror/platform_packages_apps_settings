@@ -16,8 +16,9 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.isBroadcasting;
+import static com.android.settingslib.bluetooth.BluetoothUtils.isBroadcasting;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
@@ -25,6 +26,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -32,11 +34,13 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.concurrent.Executor;
@@ -53,7 +57,8 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
     private static final boolean DEBUG = BluetoothUtils.D;
     private static final String PREF_KEY = "audio_sharing_stream_name";
 
-    private final BluetoothLeBroadcast.Callback mBroadcastCallback =
+    @VisibleForTesting
+    final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastMetadataChanged(
@@ -116,6 +121,8 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
     @Nullable private AudioSharingNamePreference mPreference;
     private final Executor mExecutor;
     private final AudioSharingNameTextValidator mAudioSharingNameTextValidator;
+
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
 
     public AudioSharingNamePreferenceController(Context context, String preferenceKey) {
@@ -126,6 +133,7 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
                 (mProfileManager != null) ? mProfileManager.getLeAudioBroadcastProfile() : null;
         mAudioSharingNameTextValidator = new AudioSharingNameTextValidator();
         mExecutor = Executors.newSingleThreadExecutor();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -166,7 +174,7 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        return AudioSharingUtils.isFeatureEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return BluetoothUtils.isAudioSharingEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -214,14 +222,19 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
                             if (mBroadcast != null) {
+                                boolean isBroadcasting = isBroadcasting(mBtManager);
                                 mBroadcast.setBroadcastName((String) newValue);
                                 // We currently don't have a UI field for program info so we keep it
                                 // consistent with broadcast name.
                                 mBroadcast.setProgramInfo((String) newValue);
-                                if (isBroadcasting(mBtManager)) {
+                                if (isBroadcasting) {
                                     mBroadcast.updateBroadcast();
                                 }
                                 updateBroadcastName();
+                                mMetricsFeatureProvider.action(
+                                        mContext,
+                                        SettingsEnums.ACTION_AUDIO_STREAM_NAME_UPDATED,
+                                        isBroadcasting ? 1 : 0);
                             }
                         });
         return true;

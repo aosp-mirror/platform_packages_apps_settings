@@ -22,6 +22,7 @@ import static android.net.wifi.SoftApConfiguration.BAND_5GHZ;
 import static android.net.wifi.SoftApConfiguration.BAND_6GHZ;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_OPEN;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE;
+import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION;
 import static android.net.wifi.WifiAvailableChannel.OP_MODE_SAP;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_DISABLED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_ENABLED;
@@ -343,16 +344,23 @@ public class WifiHotspotRepository {
                 log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
                 configBuilder.setPassphrase(generatePassword(config), SECURITY_TYPE_WPA3_SAE);
             }
-        } else if (speedType == SPEED_5GHZ) {
-            log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
-            configBuilder.setBand(BAND_2GHZ_5GHZ);
-        } else if (mIsDualBand) {
-            log("setSpeedType(), setBands(BAND_2GHZ + BAND_2GHZ_5GHZ)");
-            int[] bands = {BAND_2GHZ, BAND_2GHZ_5GHZ};
-            configBuilder.setBands(bands);
         } else {
-            log("setSpeedType(), setBand(BAND_2GHZ)");
-            configBuilder.setBand(BAND_2GHZ);
+            if (speedType == SPEED_5GHZ) {
+                log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
+                configBuilder.setBand(BAND_2GHZ_5GHZ);
+            } else if (mIsDualBand) {
+                log("setSpeedType(), setBands(BAND_2GHZ + BAND_2GHZ_5GHZ)");
+                int[] bands = {BAND_2GHZ, BAND_2GHZ_5GHZ};
+                configBuilder.setBands(bands);
+            } else {
+                log("setSpeedType(), setBand(BAND_2GHZ)");
+                configBuilder.setBand(BAND_2GHZ);
+            }
+            // Set the security type back to WPA2/WPA3 if we're moving from 6GHz to something else.
+            if ((config.getBand() & BAND_6GHZ) != 0) {
+                configBuilder.setPassphrase(
+                        generatePassword(config), SECURITY_TYPE_WPA3_SAE_TRANSITION);
+            }
         }
         setSoftApConfiguration(configBuilder.build());
     }
@@ -465,7 +473,7 @@ public class WifiHotspotRepository {
     boolean isChannelAvailable(SapBand sapBand) {
         try {
             List<WifiAvailableChannel> channels =
-                    mWifiManager.getUsableChannels(sapBand.band, OP_MODE_SAP);
+                    mWifiManager.getAllowedChannels(sapBand.band, OP_MODE_SAP);
             log("isChannelAvailable(), band:" + sapBand.band + ", channels:" + channels);
             sapBand.hasUsableChannels = (channels != null && channels.size() > 0);
             sapBand.isUsableChannelsUnsupported = false;
