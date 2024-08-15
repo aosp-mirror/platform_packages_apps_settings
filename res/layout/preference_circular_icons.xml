@@ -61,6 +61,7 @@
         <!-- Circular icons (32dp) will be ImageViews under this LinearLayout -->
         <LinearLayout
             android:id="@+id/circles_container"
+            android:importantForAccessibility="noHideDescendants"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_width="match_parent"

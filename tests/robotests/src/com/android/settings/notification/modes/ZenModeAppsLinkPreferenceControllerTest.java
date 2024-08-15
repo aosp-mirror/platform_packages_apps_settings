@@ -34,10 +34,12 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Flags;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -102,11 +104,12 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         CircularIconSet.sExecutorService = MoreExecutors.newDirectExecutorService();
         mPreference = new TestableCircularIconsPreference(mContext);
-
         when(mApplicationsState.newSession(any(), any())).thenReturn(mSession);
+
         mController = new ZenModeAppsLinkPreferenceController(
                 mContext, "controller_key", mock(Fragment.class), mApplicationsState,
-                mZenModesBackend, mHelperBackend);
+                mZenModesBackend, mHelperBackend,
+                /* appIconRetriever= */ appInfo -> new ColorDrawable());
 
         // Ensure the preference view is bound & measured (needed to add child ImageViews).
         View preferenceView = LayoutInflater.from(mContext).inflate(mPreference.getLayoutResource(),
@@ -163,7 +166,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         assertThat(launcherIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo("com.android.settings.notification.modes.ZenModeAppsFragment");
         assertThat(launcherIntent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
-                -1)).isEqualTo(0);
+                -1)).isEqualTo(SettingsEnums.ZEN_PRIORITY_MODE);
 
         Bundle bundle = launcherIntent.getBundleExtra(
                 SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
@@ -293,6 +296,89 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
         mController.mAppSessionCallbacks.onLoadEntriesCompleted();
         verify(mSession, times(2)).rebuild(any(), any(), eq(false));
+    }
+
+    @Test
+    public void updateState_noneToPriority_loadsBypassingAppsAndListensForChanges() {
+        ZenMode zenModeWithNone = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowPriorityChannels(false).build())
+                .build();
+        ZenMode zenModeWithPriority = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowPriorityChannels(true).build())
+                .build();
+        ArrayList<ApplicationsState.AppEntry> appEntries = new ArrayList<>();
+        appEntries.add(createAppEntry("test", mContext.getUserId()));
+        when(mHelperBackend.getPackagesBypassingDnd(mContext.getUserId(), false))
+                .thenReturn(List.of("test"));
+
+        mController.updateState(mPreference, zenModeWithNone);
+
+        assertThat(mPreference.getLoadedIcons().icons()).hasSize(0);
+        verifyNoMoreInteractions(mApplicationsState);
+        verifyNoMoreInteractions(mSession);
+
+        mController.updateState(mPreference, zenModeWithPriority);
+
+        verify(mApplicationsState).newSession(any(), any());
+        verify(mSession).rebuild(any(), any(), anyBoolean());
+        mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
+        assertThat(mPreference.getLoadedIcons().icons()).hasSize(1);
+    }
+
+    @Test
+    public void updateState_priorityToNone_clearsBypassingAppsAndStopsListening() {
+        ZenMode zenModeWithNone = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowPriorityChannels(false).build())
+                .build();
+        ZenMode zenModeWithPriority = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowPriorityChannels(true).build())
+                .build();
+        ArrayList<ApplicationsState.AppEntry> appEntries = new ArrayList<>();
+        appEntries.add(createAppEntry("test", mContext.getUserId()));
+        when(mHelperBackend.getPackagesBypassingDnd(mContext.getUserId(), false))
+                .thenReturn(List.of("test"));
+
+        mController.updateState(mPreference, zenModeWithPriority);
+
+        verify(mApplicationsState).newSession(any(), any());
+        verify(mSession).rebuild(any(), any(), anyBoolean());
+        mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
+        assertThat(mPreference.getLoadedIcons().icons()).hasSize(1);
+
+        mController.updateState(mPreference, zenModeWithNone);
+
+        assertThat(mPreference.getLoadedIcons().icons()).hasSize(0);
+        verify(mSession).deactivateSession();
+        verifyNoMoreInteractions(mSession);
+        verifyNoMoreInteractions(mApplicationsState);
+
+        // An errant callback (triggered by onResume and received asynchronously after
+        // updateState()) is ignored.
+        mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
+
+        assertThat(mPreference.getLoadedIcons().icons()).hasSize(0);
+    }
+
+    @Test
+    public void updateState_priorityToNoneToPriority_restartsListening() {
+        ZenMode zenModeWithNone = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowPriorityChannels(false).build())
+                .build();
+        ZenMode zenModeWithPriority = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowPriorityChannels(true).build())
+                .build();
+
+        mController.updateState(mPreference, zenModeWithPriority);
+        verify(mApplicationsState).newSession(any(), any());
+        verify(mSession).rebuild(any(), any(), anyBoolean());
+
+        mController.updateState(mPreference, zenModeWithNone);
+        verifyNoMoreInteractions(mApplicationsState);
+        verify(mSession).deactivateSession();
+
+        mController.updateState(mPreference, zenModeWithPriority);
+        verifyNoMoreInteractions(mApplicationsState);
+        verify(mSession).activateSession();
     }
 
     @Test

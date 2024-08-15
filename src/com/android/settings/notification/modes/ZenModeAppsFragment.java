@@ -47,7 +47,6 @@ public class ZenModeAppsFragment extends ZenModeFragmentBase {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - make this the correct metrics category
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_PRIORITY;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APPS;
     }
 }

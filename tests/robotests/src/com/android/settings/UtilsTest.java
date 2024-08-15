@@ -530,40 +530,40 @@ public class UtilsTest {
 
     @Test
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
-    public void testRequestBiometricAuthentication_biometricManagerNull_shouldReturnFalse() {
+    public void testRequestBiometricAuthentication_biometricManagerNull_shouldReturnNotActive() {
         when(mContext.getSystemService(BiometricManager.class)).thenReturn(null);
         assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
-                false /* biometricsSuccessfullyAuthenticated */,
-                false /* biometricsAuthenticationRequested */, USER_ID)).isFalse();
+                false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
+                        Utils.BiometricStatus.NOT_ACTIVE);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
-    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccess_shouldReturnTrue() {
+    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccess_shouldReturnOk() {
         when(mBiometricManager.canAuthenticate(USER_ID,
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
-        final boolean requestBiometricAuthenticationForMandatoryBiometrics =
+        final Utils.BiometricStatus requestBiometricAuthenticationForMandatoryBiometrics =
                 Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
-                false /* biometricsSuccessfullyAuthenticated */,
-                false /* biometricsAuthenticationRequested */, USER_ID);
-        assertThat(requestBiometricAuthenticationForMandatoryBiometrics).isTrue();
+                        false /* biometricsAuthenticationRequested */, USER_ID);
+        assertThat(requestBiometricAuthenticationForMandatoryBiometrics).isEqualTo(
+                Utils.BiometricStatus.OK);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
-    public void testRequestBiometricAuthentication_biometricManagerReturnsError_shouldReturnFalse() {
+    public void testRequestBiometricAuthentication_biometricManagerReturnsError_shouldReturnError() {
         when(mBiometricManager.canAuthenticate(anyInt(),
                 eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
         assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
-                false /* biometricsSuccessfullyAuthenticated */,
-                false /* biometricsAuthenticationRequested */, USER_ID)).isFalse();
+                false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
+                        Utils.BiometricStatus.ERROR);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
-    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccessForDifferentUser_shouldReturnFalse() {
+    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccessForDifferentUser_shouldReturnError() {
         when(mBiometricManager.canAuthenticate(anyInt(),
                 eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
@@ -571,8 +571,8 @@ public class UtilsTest {
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
         assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
-                false /* biometricsSuccessfullyAuthenticated */,
-                false /* biometricsAuthenticationRequested */, USER_ID)).isFalse();
+                false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
+                        Utils.BiometricStatus.ERROR);
     }
 
     @Test

@@ -225,13 +225,15 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
         if (requestCode == REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF
                 && resultCode == Activity.RESULT_OK) {
             final int userId = mContext.getUserId();
-            if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
-                    false /* biometricsSuccessfullyAuthenticated */,
-                    false /* biometricsAuthenticationRequested */,
-                    userId)) {
+            final Utils.BiometricStatus biometricAuthStatus =
+                    Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
+                            false /* biometricsAuthenticationRequested */,
+                            userId);
+            if (biometricAuthStatus == Utils.BiometricStatus.OK) {
                 Utils.launchBiometricPromptForMandatoryBiometrics(mFragment,
-                        REQUEST_IDENTITY_CHECK_FOR_DEV_PREF, userId, false /* hideBackground */);
-            } else {
+                        REQUEST_IDENTITY_CHECK_FOR_DEV_PREF,
+                        userId, false /* hideBackground */);
+            } else if (biometricAuthStatus == Utils.BiometricStatus.NOT_ACTIVE) {
                 enableDevelopmentSettings();
             }
         } else if (requestCode == REQUEST_IDENTITY_CHECK_FOR_DEV_PREF
