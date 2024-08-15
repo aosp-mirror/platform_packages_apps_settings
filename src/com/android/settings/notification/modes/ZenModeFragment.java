@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.modes;
 
+import static com.android.settingslib.notification.modes.ZenMode.Status.DISABLED_BY_OTHER;
+
 import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -25,6 +27,7 @@ import android.view.MenuItem;
 
 import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 
 import com.android.settings.R;
@@ -41,6 +44,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     private static final int DELETE_MODE = 2;
 
     private ModeMenuProvider mModeMenuProvider;
+    private boolean mSettingsObserverRegistered = false; // for ManualDurationPreferenceController
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -82,9 +86,14 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     @Override
     public void onStart() {
         super.onStart();
+        ZenMode mode = getMode();
+
+        // Consider redirecting to the interstitial if the mode is disabled (but not by the user).
+        if (maybeRedirectToInterstitial(mode)) {
+            return;
+        }
 
         // Set title for the entire screen
-        ZenMode mode = getMode();
         ComponentActivity activity = getActivity();
         if (mode != null && activity != null) {
             activity.setTitle(mode.getName());
@@ -94,21 +103,33 @@ public class ZenModeFragment extends ZenModeFragmentBase {
 
         // allow duration preference controller to listen for settings changes
         use(ManualDurationPreferenceController.class).registerSettingsObserver();
+        mSettingsObserverRegistered = true;
+    }
+
+    private boolean maybeRedirectToInterstitial(@Nullable ZenMode mode) {
+        if (mode == null || mode.getStatus() != DISABLED_BY_OTHER) {
+            return false;
+        }
+        // don't come back here from the interstitial
+        finish();
+        mContext.startActivity(SetupInterstitialActivity.getIntent(mContext, mode));
+        return true;
     }
 
     @Override
     public void onStop() {
-        if (getActivity() != null) {
+        if (getActivity() != null && mModeMenuProvider != null) {
             getActivity().removeMenuProvider(mModeMenuProvider);
         }
-        use(ManualDurationPreferenceController.class).unregisterSettingsObserver();
+        if (mSettingsObserverRegistered) {
+            use(ManualDurationPreferenceController.class).unregisterSettingsObserver();
+        }
         super.onStop();
     }
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - make this the correct metrics category
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION;
+        return SettingsEnums.ZEN_PRIORITY_MODE;
     }
 
     @Override
@@ -142,9 +163,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         @Override
         public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
             if (menuItem.getItemId() == RENAME_MODE) {
-                // TODO: b/332937635 - Update metrics category
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModeEditNameIconFragment.class,
-                        mZenMode.getId(), 0).launch();
+                        mZenMode.getId(), getMetricsCategory()).launch();
             } else if (menuItem.getItemId() == DELETE_MODE) {
                 new AlertDialog.Builder(mContext)
                         .setTitle(mContext.getString(R.string.zen_mode_delete_mode_confirmation,

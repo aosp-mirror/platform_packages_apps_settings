@@ -26,6 +26,7 @@ import static android.service.notification.ZenPolicy.PEOPLE_TYPE_NONE;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_STARRED;
 import static android.service.notification.ZenPolicy.STATE_ALLOW;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.LauncherApps;
 import android.graphics.drawable.Drawable;
@@ -88,10 +89,10 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
 
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        // TODO(b/332937635): Update metrics category
+        // Passes in source ZenModeFragment metric category.
         preference.setIntent(
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModePeopleFragment.class,
-                        zenMode.getId(), 0).toIntent());
+                        zenMode.getId(), SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
 
         preference.setEnabled(zenMode.isEnabled());
         preference.setSummary(mSummaryHelper.getPeopleSummary(zenMode.getPolicy()));
@@ -189,8 +190,7 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
                         : CONVERSATION_SENDERS_NONE;
         ImmutableList<ConversationChannelWrapper> conversationsAllowed = ImmutableList.of();
         if (conversationSendersAllowed == CONVERSATION_SENDERS_ANYONE) {
-            // TODO: b/354658240 - Need to handle CONVERSATION_SENDERS_ANYONE?
-            return;
+            conversationsAllowed = mHelperBackend.getAllConversations();
         } else if (conversationSendersAllowed == CONVERSATION_SENDERS_IMPORTANT) {
             conversationsAllowed = mHelperBackend.getImportantConversations();
         }
@@ -223,7 +223,7 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
                     peopleItem.conversation.getShortcutInfo(),
                     peopleItem.conversation.getPkg(),
                     peopleItem.conversation.getUid(),
-                    /* important= */ true);
+                    peopleItem.conversation.getNotificationChannel().isImportantConversation());
         } else {
             throw new IllegalArgumentException("Neither all nor contact nor conversation!");
         }

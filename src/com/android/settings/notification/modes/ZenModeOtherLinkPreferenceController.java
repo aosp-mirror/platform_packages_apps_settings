@@ -23,6 +23,7 @@ import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_MEDIA;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.service.notification.ZenPolicy;
 
@@ -65,10 +66,9 @@ class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceCont
 
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        // TODO: b/332937635 - Update metrics category
         preference.setIntent(
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModeOtherFragment.class,
-                        zenMode.getId(), 0).toIntent());
+                        zenMode.getId(), SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
 
         preference.setEnabled(zenMode.isEnabled());
         preference.setSummary(mSummaryHelper.getOtherSoundCategoriesSummary(zenMode));

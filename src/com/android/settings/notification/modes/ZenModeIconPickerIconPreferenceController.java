@@ -20,6 +20,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -34,11 +35,16 @@ class ZenModeIconPickerIconPreferenceController extends AbstractZenModeHeaderCon
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        setUpHeader(screen, mContext.getResources().getDimensionPixelSize(
+                R.dimen.zen_mode_icon_list_header_circle_diameter));
+    }
+
+    @Override
     void updateState(Preference preference, @NonNull ZenMode zenMode) {
         updateIcon(preference, zenMode,
-                mContext.getResources().getDimensionPixelSize(
-                        R.dimen.zen_mode_icon_list_header_circle_diameter),
                 icon -> IconUtil.makeIconPickerHeader(mContext, icon),
-                null);
+                /* isSelected= */ false);
     }
 }

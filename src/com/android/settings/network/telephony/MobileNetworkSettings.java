@@ -202,7 +202,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.d(LOG_TAG, "Invalid subId, get the default subscription to show.");
             SubscriptionInfo info = SubscriptionUtil.getSubscriptionOrDefault(context, mSubId);
@@ -341,6 +340,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 setTelephonyAvailabilityStatus(getPreferenceControllersAsList());
 
         super.onCreate(icicle);
+        if (isUiRestricted()) {
+            Log.d(LOG_TAG, "Mobile network page is disallowed.");
+            finish();
+            return;
+        }
         final Context context = getContext();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
@@ -467,14 +471,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.mobile_network_settings) {
-
-                /** suppress full page if user is not admin */
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    boolean isAirplaneOff = Settings.Global.getInt(context.getContentResolver(),
-                            Settings.Global.AIRPLANE_MODE_ON, 0) == 0;
-                    return isAirplaneOff && SubscriptionUtil.isSimHardwareVisible(context)
-                            && context.getSystemService(UserManager.class).isAdminUser();
+                    return MobileNetworkSettingsSearchIndex
+                            .isMobileNetworkSettingsSearchable(context);
                 }
             };
 

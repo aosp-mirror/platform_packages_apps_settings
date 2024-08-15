@@ -34,7 +34,7 @@ object EmbeddedDeepLinkUtils {
     private const val TAG = "EmbeddedDeepLinkUtils"
 
     @JvmStatic
-    fun Activity.tryStartMultiPaneDeepLink(
+    fun Context.tryStartMultiPaneDeepLink(
         intent: Intent,
         highlightMenuKey: String? = null,
     ): Boolean {

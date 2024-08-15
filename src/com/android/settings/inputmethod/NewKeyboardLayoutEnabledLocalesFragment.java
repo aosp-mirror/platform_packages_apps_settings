@@ -88,8 +88,14 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
                 break;
             }
             case ProfileSelectFragment.ProfileType.PERSONAL: {
-                final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
-                newUserId = primaryUser.getIdentifier();
+                // Use the parent user of the current user if the current user is profile.
+                final UserHandle currentUser = UserHandle.of(currentUserId);
+                final UserHandle userProfileParent = userManager.getProfileParent(currentUser);
+                if (userProfileParent != null) {
+                    newUserId = userProfileParent.getIdentifier();
+                } else {
+                    newUserId = currentUserId;
+                }
                 break;
             }
             default:

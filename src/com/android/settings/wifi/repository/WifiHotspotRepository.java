@@ -473,7 +473,7 @@ public class WifiHotspotRepository {
     boolean isChannelAvailable(SapBand sapBand) {
         try {
             List<WifiAvailableChannel> channels =
-                    mWifiManager.getUsableChannels(sapBand.band, OP_MODE_SAP);
+                    mWifiManager.getAllowedChannels(sapBand.band, OP_MODE_SAP);
             log("isChannelAvailable(), band:" + sapBand.band + ", channels:" + channels);
             sapBand.hasUsableChannels = (channels != null && channels.size() > 0);
             sapBand.isUsableChannelsUnsupported = false;

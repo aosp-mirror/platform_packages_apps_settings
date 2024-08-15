@@ -50,7 +50,6 @@ public class ZenModeCallsFragment extends ZenModeFragmentBase {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - make this the correct metrics category
         return SettingsEnums.DND_CALLS;
     }
 
