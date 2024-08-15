@@ -49,7 +49,9 @@ public class CircularIconsPreference extends RestrictedPreference {
 
     private static final float DISABLED_ITEM_ALPHA = 0.3f;
 
-    record LoadedIcons(ImmutableList<Drawable> icons, int extraItems) { }
+    record LoadedIcons(ImmutableList<Drawable> icons, int extraItems) {
+        static final LoadedIcons EMPTY = new LoadedIcons(ImmutableList.of(), 0);
+    }
 
     private Executor mUiExecutor;
 
@@ -126,6 +128,7 @@ public class CircularIconsPreference extends RestrictedPreference {
             // We know what icons we want, but haven't yet loaded them.
             if (mIconSet.size() == 0) {
                 container.setVisibility(View.GONE);
+                mLoadedIcons = LoadedIcons.EMPTY;
                 return;
             }
             container.setVisibility(View.VISIBLE);
@@ -137,7 +140,7 @@ public class CircularIconsPreference extends RestrictedPreference {
                             @Override
                             public void onGlobalLayout() {
                                 container.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                                startLoadingIcons(container, mIconSet);
+                                notifyChanged();
                             }
                         }
                 );
