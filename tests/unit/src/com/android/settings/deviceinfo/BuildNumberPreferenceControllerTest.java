@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,6 +33,7 @@ import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.Flags;
 import android.os.Looper;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
@@ -193,6 +195,7 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     @UiThreadTest
+    @RequiresFlagsDisabled(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void onActivityResult_confirmPasswordRequestCompleted_enableDevPref() {
         when(mUserManager.isAdminUser()).thenReturn(true);
 
@@ -206,7 +209,6 @@ public class BuildNumberPreferenceControllerTest {
     }
 
     @Test
-    @UiThreadTest
     @RequiresFlagsEnabled(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void onActivityResult_confirmPasswordRequestCompleted_launchBiometricPrompt() {
         when(mUserManager.isAdminUser()).thenReturn(true);
@@ -223,6 +225,45 @@ public class BuildNumberPreferenceControllerTest {
         assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isFalse();
         verify(mFragment).startActivityForResult(any(),
                 eq(BuildNumberPreferenceController.REQUEST_IDENTITY_CHECK_FOR_DEV_PREF));
+    }
+
+    @Test
+    @UiThreadTest
+    @RequiresFlagsEnabled(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void onActivityResult_confirmPasswordRequestCompleted_mandatoryBiometricsError() {
+        when(mUserManager.isAdminUser()).thenReturn(true);
+        when(mBiometricManager.canAuthenticate(mContext.getUserId(),
+                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE);
+
+        final boolean activityResultHandled = mController.onActivityResult(
+                BuildNumberPreferenceController.REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,
+                Activity.RESULT_OK,
+                null);
+
+        assertThat(activityResultHandled).isTrue();
+        verify(mFragment, never()).startActivityForResult(any(),
+                eq(BuildNumberPreferenceController.REQUEST_IDENTITY_CHECK_FOR_DEV_PREF));
+    }
+
+    @Test
+    @UiThreadTest
+    @RequiresFlagsEnabled(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void onActivityResult_confirmPasswordRequestCompleted_lockoutError() {
+        when(mUserManager.isAdminUser()).thenReturn(true);
+        when(mBiometricManager.canAuthenticate(mContext.getUserId(),
+                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_LOCKOUT);
+
+        final boolean activityResultHandled = mController.onActivityResult(
+                BuildNumberPreferenceController.REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,
+                Activity.RESULT_OK,
+                null);
+
+        assertThat(activityResultHandled).isTrue();
+        verify(mFragment, never()).startActivityForResult(any(),
+                eq(BuildNumberPreferenceController.REQUEST_IDENTITY_CHECK_FOR_DEV_PREF));
+        assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isFalse();
     }
 
     @Test
