@@ -16,26 +16,42 @@
 
 package com.android.settings.notification.modes;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.annotation.NonNull;
 import android.content.Context;
+import android.provider.Settings;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.notification.SettingsEnableZenModeDialog;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
-public class ZenModeButtonPreferenceController extends AbstractZenModePreferenceController {
+import java.time.Duration;
+
+class ZenModeButtonPreferenceController extends AbstractZenModePreferenceController {
+    private static final String TAG = "ZenModeButtonPrefController";
 
     private Button mZenButton;
+    private final Fragment mParent;
+    private final ManualDurationHelper mDurationHelper;
 
-    public ZenModeButtonPreferenceController(Context context, String key, ZenModesBackend backend) {
+    ZenModeButtonPreferenceController(Context context, String key, Fragment parent,
+            ZenModesBackend backend) {
         super(context, key, backend);
+        mParent = parent;
+        mDurationHelper = new ManualDurationHelper(context);
     }
 
     @Override
     public boolean isAvailable(ZenMode zenMode) {
-        return zenMode.getRule().isManualInvocationAllowed() && zenMode.getRule().isEnabled();
+        return zenMode.isEnabled()
+                && (zenMode.isActive() || zenMode.getRule().isManualInvocationAllowed());
     }
 
     @Override
@@ -44,16 +60,33 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             mZenButton = ((LayoutPreference) preference).findViewById(R.id.activate_mode);
         }
         mZenButton.setOnClickListener(v -> {
+            checkNotNull(mBackend, "Backend not available!");
             if (zenMode.isActive()) {
                 mBackend.deactivateMode(zenMode);
             } else {
-                mBackend.activateMode(zenMode, null);
+                if (zenMode.isManualDnd()) {
+                    // if manual DND, potentially ask for or use desired duration
+                    int zenDuration = mDurationHelper.getZenDuration();
+                    switch (zenDuration) {
+                        case Settings.Secure.ZEN_DURATION_PROMPT:
+                            new SettingsEnableZenModeDialog().show(
+                                    mParent.getParentFragmentManager(), TAG);
+                            break;
+                        case Settings.Secure.ZEN_DURATION_FOREVER:
+                            mBackend.activateMode(zenMode, null);
+                            break;
+                        default:
+                            mBackend.activateMode(zenMode, Duration.ofMinutes(zenDuration));
+                    }
+                } else {
+                    mBackend.activateMode(zenMode, null);
+                }
             }
         });
         if (zenMode.isActive()) {
-            mZenButton.setText(R.string.zen_mode_button_turn_off);
+            mZenButton.setText(R.string.zen_mode_action_deactivate);
         } else {
-            mZenButton.setText(R.string.zen_mode_button_turn_on);
+            mZenButton.setText(R.string.zen_mode_action_activate);
         }
     }
 }

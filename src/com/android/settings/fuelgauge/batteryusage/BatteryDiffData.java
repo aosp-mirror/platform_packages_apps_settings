@@ -77,11 +77,13 @@ public class BatteryDiffData {
         processAndSortEntries(mSystemEntries);
     }
 
-    long getStartTimestamp() {
+    /** Gets the start timestamp. */
+    public long getStartTimestamp() {
         return mStartTimestamp;
     }
 
-    long getEndTimestamp() {
+    /** Gets the end timestamp. */
+    public long getEndTimestamp() {
         return mEndTimestamp;
     }
 
@@ -97,7 +99,8 @@ public class BatteryDiffData {
         return mScreenOnTime;
     }
 
-    List<BatteryDiffEntry> getAppDiffEntryList() {
+    /** Gets the {@link BatteryDiffEntry} list for apps. */
+    public List<BatteryDiffEntry> getAppDiffEntryList() {
         return mAppEntries;
     }
 
@@ -296,8 +299,7 @@ public class BatteryDiffData {
      * Sets total consume power, and adjusts the percentages to ensure the total round percentage
      * could be 100%, and then sorts entries based on the sorting key.
      */
-    @VisibleForTesting
-    static void processAndSortEntries(final List<BatteryDiffEntry> batteryDiffEntries) {
+    public static void processAndSortEntries(final List<BatteryDiffEntry> batteryDiffEntries) {
         if (batteryDiffEntries.isEmpty()) {
             return;
         }

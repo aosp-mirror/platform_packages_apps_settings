@@ -21,14 +21,16 @@ import android.telephony.AccessNetworkConstants
 import android.telephony.CarrierConfigManager
 import android.telephony.CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL
 import android.telephony.SubscriptionManager
-import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager.WiFiCallingMode
 import android.telephony.ims.feature.MmTelFeature
 import android.telephony.ims.stub.ImsRegistrationImplBase
+import androidx.lifecycle.LifecycleOwner
 import com.android.settings.network.telephony.ims.ImsMmTelRepository
 import com.android.settings.network.telephony.ims.ImsMmTelRepositoryImpl
-import com.android.settings.network.telephony.ims.imsFeatureProvisionedFlow
+import com.android.settings.network.telephony.ims.ProvisioningRepository
 import com.android.settings.network.telephony.subscriptionsChangedFlow
+import com.android.settings.network.telephony.telephonyManager
+import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -38,14 +40,21 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
-class WifiCallingRepository(
+interface IWifiCallingRepository {
+    /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
+    fun collectIsWifiCallingReadyFlow(lifecycleOwner: LifecycleOwner, action: (Boolean) -> Unit)
+}
+
+class WifiCallingRepository
+@JvmOverloads
+constructor(
     private val context: Context,
     private val subId: Int,
     private val imsMmTelRepository: ImsMmTelRepository = ImsMmTelRepositoryImpl(context, subId)
-) {
-    private val telephonyManager = context.getSystemService(TelephonyManager::class.java)!!
-        .createForSubscriptionId(subId)
+) : IWifiCallingRepository {
+    private val telephonyManager = context.telephonyManager(subId)
 
+    private val provisioningRepository = ProvisioningRepository(context)
     private val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
 
     @WiFiCallingMode
@@ -59,12 +68,20 @@ class WifiCallingRepository(
             .getConfigForSubId(subId, KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL)
             .getBoolean(KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL)
 
+    /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
+    override fun collectIsWifiCallingReadyFlow(
+        lifecycleOwner: LifecycleOwner,
+        action: (Boolean) -> Unit,
+    ) {
+        wifiCallingReadyFlow().collectLatestWithLifecycle(lifecycleOwner, action = action)
+    }
+
     @OptIn(ExperimentalCoroutinesApi::class)
     fun wifiCallingReadyFlow(): Flow<Boolean> {
         if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)
         return context.subscriptionsChangedFlow().flatMapLatest {
             combine(
-                imsFeatureProvisionedFlow(
+                provisioningRepository.imsFeatureProvisionedFlow(
                     subId = subId,
                     capability = MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
                     tech = ImsRegistrationImplBase.REGISTRATION_TECH_IWLAN,

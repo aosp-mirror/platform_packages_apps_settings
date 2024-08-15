@@ -28,7 +28,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -94,20 +93,10 @@ public class AudioStreamPreferenceTest {
     }
 
     @Test
-    public void setConnected_shouldUpdatePreferenceUI() {
-        String summary = "Connected";
-        OnPreferenceClickListener listener = mock(OnPreferenceClickListener.class);
-        mPreference.setIsConnected(true, summary, listener);
-
-        assertThat(mPreference.getSummary()).isNotNull();
-        assertThat(mPreference.getSummary().toString()).isEqualTo(summary);
-        assertThat(mPreference.getOnPreferenceClickListener()).isEqualTo(listener);
-    }
-
-    @Test
     public void setAudioStreamMetadata_shouldUpdateMetadata() {
         AudioStreamPreference p =
-                AudioStreamPreference.fromMetadata(mContext, mBluetoothLeBroadcastMetadata);
+                AudioStreamPreference.fromMetadata(
+                        mContext, mBluetoothLeBroadcastMetadata, SourceOriginForLogging.UNKNOWN);
         BluetoothLeBroadcastMetadata metadata = mock(BluetoothLeBroadcastMetadata.class);
         p.setAudioStreamMetadata(metadata);
 
@@ -117,7 +106,8 @@ public class AudioStreamPreferenceTest {
     @Test
     public void setAudioStreamState_shouldUpdateState() {
         AudioStreamPreference p =
-                AudioStreamPreference.fromMetadata(mContext, mBluetoothLeBroadcastMetadata);
+                AudioStreamPreference.fromMetadata(
+                        mContext, mBluetoothLeBroadcastMetadata, SourceOriginForLogging.UNKNOWN);
         AudioStreamState state = AudioStreamState.SOURCE_ADDED;
         p.setAudioStreamState(state);
 
@@ -127,7 +117,8 @@ public class AudioStreamPreferenceTest {
     @Test
     public void fromMetadata_shouldReturnBroadcastInfo() {
         AudioStreamPreference p =
-                AudioStreamPreference.fromMetadata(mContext, mBluetoothLeBroadcastMetadata);
+                AudioStreamPreference.fromMetadata(
+                        mContext, mBluetoothLeBroadcastMetadata, SourceOriginForLogging.UNKNOWN);
         assertThat(p.getAudioStreamBroadcastId()).isEqualTo(BROADCAST_ID);
         assertThat(p.getAudioStreamBroadcastName()).isEqualTo(BROADCAST_NAME);
         assertThat(p.getAudioStreamRssi()).isEqualTo(BROADCAST_RSSI);
@@ -144,7 +135,7 @@ public class AudioStreamPreferenceTest {
 
     @Test
     public void shouldHideSecondTarget_connected() {
-        mPreference.setIsConnected(true, "", null);
+        mPreference.setIsConnected(true);
         assertThat(mPreference.shouldHideSecondTarget()).isTrue();
     }
 
@@ -152,7 +143,8 @@ public class AudioStreamPreferenceTest {
     public void shouldHideSecondTarget_notEncrypted() {
         when(mBluetoothLeBroadcastMetadata.isEncrypted()).thenReturn(false);
         AudioStreamPreference p =
-                AudioStreamPreference.fromMetadata(mContext, mBluetoothLeBroadcastMetadata);
+                AudioStreamPreference.fromMetadata(
+                        mContext, mBluetoothLeBroadcastMetadata, SourceOriginForLogging.UNKNOWN);
         assertThat(p.shouldHideSecondTarget()).isTrue();
     }
 
@@ -160,7 +152,8 @@ public class AudioStreamPreferenceTest {
     public void shouldShowSecondTarget_encrypted() {
         when(mBluetoothLeBroadcastMetadata.isEncrypted()).thenReturn(true);
         AudioStreamPreference p =
-                AudioStreamPreference.fromMetadata(mContext, mBluetoothLeBroadcastMetadata);
+                AudioStreamPreference.fromMetadata(
+                        mContext, mBluetoothLeBroadcastMetadata, SourceOriginForLogging.UNKNOWN);
         assertThat(p.shouldHideSecondTarget()).isFalse();
     }
 

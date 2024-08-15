@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 
 public class AudioSharingConfirmDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "AudioSharingConfirmDialog";
@@ -43,8 +45,14 @@ public class AudioSharingConfirmDialogFragment extends InstrumentedDialogFragmen
      * @param host The Fragment this dialog will be hosted.
      */
     public static void show(Fragment host) {
-        if (!AudioSharingUtils.isFeatureEnabled()) return;
-        FragmentManager manager = host.getChildFragmentManager();
+        if (!BluetoothUtils.isAudioSharingEnabled()) return;
+        final FragmentManager manager;
+        try {
+            manager = host.getChildFragmentManager();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+            return;
+        }
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
         if (dialog != null) {
             Log.d(TAG, "Dialog is showing, return.");
@@ -56,6 +64,7 @@ public class AudioSharingConfirmDialogFragment extends InstrumentedDialogFragmen
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog dialog =
                 AudioSharingDialogFactory.newBuilder(getActivity())

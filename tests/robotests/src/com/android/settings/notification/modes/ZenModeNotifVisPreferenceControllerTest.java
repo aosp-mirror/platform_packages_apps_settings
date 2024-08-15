@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.modes;
 
-import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.service.notification.ZenPolicy.STATE_ALLOW;
 import static android.service.notification.ZenPolicy.STATE_DISALLOW;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_LIGHTS;
@@ -32,16 +31,18 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
 
 import androidx.preference.TwoStatePreference;
+
+import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -96,15 +97,12 @@ public final class ZenModeNotifVisPreferenceControllerTest {
     @Test
     public void updateState_notChecked() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowAlarms(true)
-                                .showAllVisualEffects()
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowAlarms(true)
+                        .showAllVisualEffects()
+                        .build())
+                .build();
 
         mController.updateZenMode(preference, zenMode);
 
@@ -115,15 +113,12 @@ public final class ZenModeNotifVisPreferenceControllerTest {
     @Test
     public void updateState_checked() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowAlarms(true)
-                                .showVisualEffect(VISUAL_EFFECT_PEEK, false)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowAlarms(true)
+                        .showVisualEffect(VISUAL_EFFECT_PEEK, false)
+                        .build())
+                .build();
 
         mController.updateZenMode(preference, zenMode);
 
@@ -138,16 +133,13 @@ public final class ZenModeNotifVisPreferenceControllerTest {
                 "zen_effect_status", VISUAL_EFFECT_STATUS_BAR,
                 new int[]{VISUAL_EFFECT_NOTIFICATION_LIST}, mBackend);
 
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowAlarms(true)
-                                .showVisualEffect(VISUAL_EFFECT_NOTIFICATION_LIST, false)
-                                .showVisualEffect(VISUAL_EFFECT_STATUS_BAR, true)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowAlarms(true)
+                        .showVisualEffect(VISUAL_EFFECT_NOTIFICATION_LIST, false)
+                        .showVisualEffect(VISUAL_EFFECT_STATUS_BAR, true)
+                        .build())
+                .build();
 
         mController.updateZenMode(preference, zenMode);
 
@@ -168,15 +160,12 @@ public final class ZenModeNotifVisPreferenceControllerTest {
                 "zen_effect_status", VISUAL_EFFECT_STATUS_BAR,
                 new int[]{VISUAL_EFFECT_NOTIFICATION_LIST}, mBackend);
 
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowAlarms(true)
-                                .showAllVisualEffects()
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowAlarms(true)
+                        .showAllVisualEffects()
+                        .build())
+                .build();
 
         mController.updateZenMode(preference, zenMode);
 
@@ -188,15 +177,12 @@ public final class ZenModeNotifVisPreferenceControllerTest {
     @Test
     public void onPreferenceChanged_checkedFalse() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowAlarms(true)
-                                .hideAllVisualEffects()
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowAlarms(true)
+                        .hideAllVisualEffects()
+                        .build())
+                .build();
 
         mController.updateZenMode(preference, zenMode);
 
@@ -213,15 +199,12 @@ public final class ZenModeNotifVisPreferenceControllerTest {
     @Test
     public void onPreferenceChanged_checkedTrue() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowAlarms(true)
-                                .showAllVisualEffects()
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowAlarms(true)
+                        .showAllVisualEffects()
+                        .build())
+                .build();
 
         mController.updateZenMode(preference, zenMode);
 

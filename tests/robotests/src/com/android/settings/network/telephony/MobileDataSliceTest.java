@@ -19,8 +19,10 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -37,6 +39,7 @@ import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
+import androidx.slice.builders.ListBuilder;
 import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
@@ -68,6 +71,7 @@ public class MobileDataSliceTest {
 
     private Context mContext;
     private MobileDataSlice mMobileDataSlice;
+    private ListBuilder mListBuilder;
 
     @Before
     public void setUp() {
@@ -86,6 +90,8 @@ public class MobileDataSliceTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
 
         mMobileDataSlice = spy(new MobileDataSlice(mContext));
+        mListBuilder = spy(mMobileDataSlice.createListBuilder());
+        doReturn(mListBuilder).when(mMobileDataSlice).createListBuilder();
     }
 
     @Test
@@ -175,25 +181,41 @@ public class MobileDataSliceTest {
     @Test
     public void isMobileDataAvailable_noSubscriptions_slicePrimaryActionIsEmpty() {
         when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(new ArrayList<>());
-        final Slice mobileData = mMobileDataSlice.getSlice();
 
-        assertThat(mobileData).isNull();
+        Slice mobileData = mMobileDataSlice.getSlice();
+
+        assertThat(mobileData).isNotNull();
+        verify(mListBuilder, never()).addRow(any());
     }
 
     @Test
     public void isMobileDataAvailable_nullSubscriptions_slicePrimaryActionIsEmpty() {
         when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(null);
-        final Slice mobileData = mMobileDataSlice.getSlice();
 
-        assertThat(mobileData).isNull();
+        Slice mobileData = mMobileDataSlice.getSlice();
+
+        assertThat(mobileData).isNotNull();
+        verify(mListBuilder, never()).addRow(any());
     }
 
     @Test
     public void airplaneModeEnabled_slicePrimaryActionIsEmpty() {
         doReturn(true).when(mMobileDataSlice).isAirplaneModeEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
-        final Slice mobileData = mMobileDataSlice.getSlice();
 
-        assertThat(mobileData).isNull();
+        Slice mobileData = mMobileDataSlice.getSlice();
+
+        assertThat(mobileData).isNotNull();
+        verify(mListBuilder, never()).addRow(any());
+    }
+
+    @Test
+    public void getSlice_disallowConfigMobileNetworks_slicePrimaryActionIsEmpty() {
+        doReturn(false).when(mMobileDataSlice).isConfigMobileNetworksAllowed();
+
+        Slice mobileData = mMobileDataSlice.getSlice();
+
+        assertThat(mobileData).isNotNull();
+        verify(mListBuilder, never()).addRow(any());
     }
 }

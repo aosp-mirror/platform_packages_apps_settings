@@ -43,6 +43,7 @@ import com.android.settings.spa.app.specialaccess.TurnScreenOnAppsAppListProvide
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.storage.StorageAppListPageProvider
+import com.android.settings.spa.core.instrumentation.SpaLogMetricsProvider
 import com.android.settings.spa.core.instrumentation.SpaLogProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.development.compat.PlatformCompatAppListPageProvider
@@ -127,6 +128,6 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
     override val logger = if (FeatureFlagUtils.isEnabled(
             context, FeatureFlagUtils.SETTINGS_ENABLE_SPA_METRICS
         )
-    ) SpaLogProvider
+    ) SpaLogMetricsProvider // ToDo: Implement 'SpaLogProvider' for SPA settings.
     else object : SpaLogger {}
 }

@@ -16,13 +16,11 @@
 
 package com.android.settings.spa.network
 
-import android.telephony.TelephonyManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
-import com.android.settings.network.telephony.TelephonyRepository
 import com.android.settings.network.telephony.wificalling.CrossSimCallingViewModel
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
@@ -36,7 +34,9 @@ fun AutomaticDataSwitchingPreference(
 ) {
     val autoDataSummary = stringResource(id = R.string.primary_sim_automatic_data_msg)
     val coroutineScope = rememberCoroutineScope()
-    val crossSimCallingViewModel = viewModel<CrossSimCallingViewModel>() // handles backup calling
+    // CrossSimCallingViewModel is responsible for maintaining the correct cross sim calling
+    // settings (backup calling).
+    viewModel<CrossSimCallingViewModel>()
     SwitchPreference(
         object : SwitchPreferenceModel {
             override val title = stringResource(id = R.string.primary_sim_automatic_data_title)
@@ -45,17 +45,8 @@ fun AutomaticDataSwitchingPreference(
             override val onCheckedChange: (Boolean) -> Unit = { newEnabled ->
                 coroutineScope.launch(Dispatchers.Default) {
                     setAutoDataEnabled(newEnabled)
-                    crossSimCallingViewModel.updateCrossSimCalling()
                 }
             }
         }
-    )
-}
-
-fun TelephonyRepository.setAutomaticData(subId: Int, newEnabled: Boolean) {
-    setMobileDataPolicyEnabled(
-        subId = subId,
-        policy = TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH,
-        enabled = newEnabled,
     )
 }

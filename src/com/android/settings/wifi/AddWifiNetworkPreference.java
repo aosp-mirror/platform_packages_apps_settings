@@ -26,11 +26,13 @@ import android.widget.ImageButton;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
 
 /**
  * The Preference for users to add Wi-Fi networks in WifiSettings
@@ -53,7 +55,7 @@ public class AddWifiNetworkPreference extends RestrictedPreference {
         setTitle(R.string.wifi_add_network);
 
         mScanIconDrawable = getDrawable(R.drawable.ic_scan_24dp);
-        checkRestrictionAndSetDisabled(UserManager.DISALLOW_ADD_WIFI_CONFIG);
+        checkRestrictionAndSetDisabled();
     }
 
     @Override
@@ -79,5 +81,16 @@ public class AddWifiNetworkPreference extends RestrictedPreference {
             Log.e(TAG, "Resource does not exist: " + iconResId);
         }
         return buttonIcon;
+    }
+
+    @VisibleForTesting
+    void checkRestrictionAndSetDisabled() {
+        checkRestrictionAndSetDisabled(UserManager.DISALLOW_ADD_WIFI_CONFIG);
+        if (isDisabledByAdmin()) {
+            return;
+        }
+        if (!WifiEnterpriseRestrictionUtils.isAddWifiConfigAllowed(getContext())) {
+            setEnabled(false);
+        }
     }
 }

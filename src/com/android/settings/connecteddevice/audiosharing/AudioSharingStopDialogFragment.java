@@ -20,16 +20,21 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.Iterables;
 
@@ -52,6 +57,7 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
 
     @Nullable private static DialogEventListener sListener;
     @Nullable private static CachedBluetoothDevice sCachedDevice;
+    private static Pair<Integer, Object>[] sEventData = new Pair[0];
 
     @Override
     public int getMetricsCategory() {
@@ -67,19 +73,27 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
      * @param deviceItems The existing connected device items in audio sharing session.
      * @param newDevice The latest connected device triggered this dialog.
      * @param listener The callback to handle the user action on this dialog.
+     * @param eventData The eventData to log with for dialog onClick events.
      */
     public static void show(
             @NonNull Fragment host,
             @NonNull List<AudioSharingDeviceItem> deviceItems,
             @NonNull CachedBluetoothDevice newDevice,
-            @NonNull DialogEventListener listener) {
-        if (!AudioSharingUtils.isFeatureEnabled()) return;
-        final FragmentManager manager = host.getChildFragmentManager();
+            @NonNull DialogEventListener listener,
+            @NonNull Pair<Integer, Object>[] eventData) {
+        if (!BluetoothUtils.isAudioSharingEnabled()) return;
+        final FragmentManager manager;
+        try {
+            manager = host.getChildFragmentManager();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+            return;
+        }
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
         if (dialog != null) {
-            int newGroupId = AudioSharingUtils.getGroupId(newDevice);
+            int newGroupId = BluetoothUtils.getGroupId(newDevice);
             if (sCachedDevice != null
-                    && newGroupId == AudioSharingUtils.getGroupId(sCachedDevice)) {
+                    && newGroupId == BluetoothUtils.getGroupId(sCachedDevice)) {
                 Log.d(
                         TAG,
                         String.format(
@@ -88,6 +102,7 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
                                 newGroupId));
                 sListener = listener;
                 sCachedDevice = newDevice;
+                sEventData = eventData;
                 return;
             } else {
                 Log.d(
@@ -98,10 +113,21 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
                                         + "dismiss current dialog.",
                                 newGroupId));
                 dialog.dismiss();
+                var unused =
+                        ThreadUtils.postOnBackgroundThread(
+                                () ->
+                                        FeatureFactory.getFeatureFactory()
+                                                .getMetricsFeatureProvider()
+                                                .action(
+                                                        dialog.getContext(),
+                                                        SettingsEnums
+                                                        .ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS,
+                                                        SettingsEnums.DIALOG_STOP_AUDIO_SHARING));
             }
         }
         sListener = listener;
         sCachedDevice = newDevice;
+        sEventData = eventData;
         Log.d(TAG, "Show up the dialog.");
         final Bundle bundle = new Bundle();
         bundle.putParcelableList(BUNDLE_KEY_DEVICE_TO_DISCONNECT_ITEMS, deviceItems);
@@ -121,23 +147,42 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
         return sCachedDevice;
     }
 
+    /** Test only: get the {@link DialogEventListener} passed to the dialog. */
+    @VisibleForTesting
+    @Nullable
+    DialogEventListener getListener() {
+        return sListener;
+    }
+
+    /** Test only: get the event data passed to the dialog. */
+    @VisibleForTesting
+    @NonNull
+    Pair<Integer, Object>[] getEventData() {
+        return sEventData;
+    }
+
     @Override
+    @NonNull
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Bundle arguments = requireArguments();
         List<AudioSharingDeviceItem> deviceItems =
                 arguments.getParcelable(BUNDLE_KEY_DEVICE_TO_DISCONNECT_ITEMS, List.class);
         String newDeviceName = arguments.getString(BUNDLE_KEY_NEW_DEVICE_NAME);
-        String customMessage =
-                deviceItems.size() == 1
-                        ? getString(
-                                R.string.audio_sharing_stop_dialog_content,
-                                Iterables.getOnlyElement(deviceItems).getName())
-                        : (deviceItems.size() == 2
-                                ? getString(
-                                        R.string.audio_sharing_stop_dialog_with_two_content,
-                                        deviceItems.get(0).getName(),
-                                        deviceItems.get(1).getName())
-                                : getString(R.string.audio_sharing_stop_dialog_with_more_content));
+        String customMessage = "";
+        if (deviceItems != null) {
+            customMessage =
+                    deviceItems.size() == 1
+                            ? getString(
+                                    R.string.audio_sharing_stop_dialog_content,
+                                    Iterables.getOnlyElement(deviceItems).getName())
+                            : (deviceItems.size() == 2
+                                    ? getString(
+                                            R.string.audio_sharing_stop_dialog_with_two_content,
+                                            deviceItems.get(0).getName(),
+                                            deviceItems.get(1).getName())
+                                    : getString(
+                                            R.string.audio_sharing_stop_dialog_with_more_content));
+        }
         AlertDialog dialog =
                 AudioSharingDialogFactory.newBuilder(getActivity())
                         .setTitle(
@@ -150,10 +195,21 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
                                 (dlg, which) -> {
                                     if (sListener != null) {
                                         sListener.onStopSharingClick();
+                                        mMetricsFeatureProvider.action(
+                                                getContext(),
+                                                SettingsEnums
+                                                .ACTION_AUDIO_SHARING_DIALOG_POSITIVE_BTN_CLICKED,
+                                                sEventData);
                                     }
                                 })
                         .setNegativeButton(
-                                com.android.settings.R.string.cancel, (dlg, which) -> dismiss())
+                                com.android.settings.R.string.cancel,
+                                (dlg, which) ->
+                                        mMetricsFeatureProvider.action(
+                                                getContext(),
+                                                SettingsEnums
+                                                .ACTION_AUDIO_SHARING_DIALOG_NEGATIVE_BTN_CLICKED,
+                                                sEventData))
                         .build();
         dialog.show();
         AudioSharingDialogHelper.updateMessageStyle(dialog);

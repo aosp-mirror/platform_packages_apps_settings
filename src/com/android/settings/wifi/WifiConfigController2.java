@@ -344,7 +344,7 @@ public class WifiConfigController2 implements TextWatcher,
 
                 if (mPrivacySettingsSpinner != null) {
                     final int prefMacValue = WifiPrivacyPreferenceController2
-                            .translateMacRandomizedValueToPrefValue(config.macRandomizationSetting);
+                            .translateWifiEntryPrivacyToPrefValue(mWifiEntry.getPrivacy());
                     mPrivacySettingsSpinner.setSelection(prefMacValue);
                 }
 
@@ -863,7 +863,7 @@ public class WifiConfigController2 implements TextWatcher,
 
         if (mPrivacySettingsSpinner != null) {
             config.macRandomizationSetting = WifiPrivacyPreferenceController2
-                    .translatePrefValueToMacRandomizedValue(mPrivacySettingsSpinner
+                    .translatePrefValueToWifiConfigSetting(mPrivacySettingsSpinner
                             .getSelectedItemPosition());
         }
 

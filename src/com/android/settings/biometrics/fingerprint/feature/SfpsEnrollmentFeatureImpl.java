@@ -26,6 +26,7 @@ import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrol
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.hardware.fingerprint.FingerprintManager;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -106,5 +107,10 @@ public class SfpsEnrollmentFeatureImpl implements SfpsEnrollmentFeature {
         help.setDuration(HELP_ANIMATOR_DURATION);
         help.setAutoCancel(false);
         return help;
+    }
+
+    @Override
+    public boolean shouldAdjustHeaderText(@NonNull Configuration conf, boolean isFolded) {
+        return conf.orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 }

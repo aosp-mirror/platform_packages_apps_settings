@@ -16,6 +16,7 @@
 
 package com.android.settings.development;
 
+import static android.app.Activity.RESULT_OK;
 import static android.provider.Settings.Global.DEVELOPMENT_SETTINGS_ENABLED;
 import static android.service.quicksettings.TileService.ACTION_QS_TILE_PREFERENCES;
 import static android.view.flags.Flags.sensitiveContentAppProtectionApi;
@@ -100,11 +101,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         NfcRebootDialog.OnNfcRebootDialogConfirmedListener, BluetoothSnoopLogHost {
 
     private static final String TAG = "DevSettingsDashboard";
+    @VisibleForTesting static final int REQUEST_BIOMETRIC_PROMPT = 100;
 
     private final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore =
             new BluetoothA2dpConfigStore();
 
     private boolean mIsAvailable = true;
+    private boolean mIsBiometricsAuthenticated;
     private SettingsMainSwitchBar mSwitchBar;
     private DevelopmentSwitchBarController mSwitchBarController;
     private List<AbstractPreferenceController> mPreferenceControllers = new ArrayList<>();
@@ -216,6 +219,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     public void onStart() {
         super.onStart();
         final ContentResolver cr = getContext().getContentResolver();
+        mIsBiometricsAuthenticated = false;
         cr.registerContentObserver(mDevelopEnabled, false, mDeveloperSettingsObserver);
 
         // Restore UI state based on whether developer options is enabled
@@ -360,7 +364,25 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext());
         if (isChecked != developmentEnabledState) {
             if (isChecked) {
-                EnableDevelopmentSettingWarningDialog.show(this /* host */);
+                final int userId = getContext().getUserId();
+
+                final Utils.BiometricStatus biometricAuthStatus =
+                        Utils.requestBiometricAuthenticationForMandatoryBiometrics(
+                                getContext(),
+                                mIsBiometricsAuthenticated,
+                                userId);
+                if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                    mSwitchBar.setChecked(false);
+                    Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                            REQUEST_BIOMETRIC_PROMPT,
+                            userId, false /* hideBackground */);
+                } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                    mSwitchBar.setChecked(false);
+                } else {
+                    //Reset biometrics once enable dialog is shown
+                    mIsBiometricsAuthenticated = false;
+                    EnableDevelopmentSettingWarningDialog.show(this /* host */);
+                }
             } else {
                 final BluetoothA2dpHwOffloadPreferenceController a2dpController =
                         getDevelopmentOptionsController(
@@ -534,6 +556,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean handledResult = false;
+        if (requestCode == REQUEST_BIOMETRIC_PROMPT) {
+            if (resultCode == RESULT_OK) {
+                mIsBiometricsAuthenticated = true;
+                mSwitchBar.setChecked(true);
+            }
+        }
         for (AbstractPreferenceController controller : mPreferenceControllers) {
             if (controller instanceof OnActivityResultListener) {
                 // We do not break early because it is possible for multiple controllers to
@@ -655,7 +683,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BugReportPreferenceController(context));
         controllers.add(new BugReportHandlerPreferenceController(context));
         controllers.add(new SystemServerHeapDumpPreferenceController(context));
-        controllers.add(new DevelopmentMemtagPagePreferenceController(context, fragment));
+        controllers.add(new DevelopmentMemtagPagePreferenceController(context));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         controllers.add(new HdcpCheckingPreferenceController(context));
@@ -706,7 +734,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothLeAudioPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioModePreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioDeviceDetailsPreferenceController(context));
-        controllers.add(new BluetoothLeAudioAllowListPreferenceController(context, fragment));
+        controllers.add(new BluetoothLeAudioAllowListPreferenceController(context));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
@@ -715,6 +743,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
         controllers.add(new ShowKeyPressesPreferenceController(context));
+        controllers.add(new TouchpadVisualizerPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
         controllers.add(new ShowLayoutBoundsPreferenceController(context));
         controllers.add(new ShowHdrSdrRatioPreferenceController(context));
@@ -740,6 +769,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new StrictModePreferenceController(context));
         controllers.add(new ProfileGpuRenderingPreferenceController(context));
         controllers.add(new KeepActivitiesPreferenceController(context));
+        controllers.add(new BackgroundProcessLimitPreferenceController(context));
         controllers.add(new CachedAppsFreezerPreferenceController(context));
         controllers.add(new ShowFirstCrashDialogPreferenceController(context));
         controllers.add(new AppsNotRespondingPreferenceController(context));
@@ -748,6 +778,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ResizableActivityPreferenceController(context));
         controllers.add(new FreeformWindowsPreferenceController(context, fragment));
         controllers.add(new DesktopModePreferenceController(context, fragment));
+        controllers.add(new DesktopModeSecondaryDisplayPreferenceController(context, fragment));
         controllers.add(new NonResizableMultiWindowPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));

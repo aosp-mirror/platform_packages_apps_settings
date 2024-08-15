@@ -242,9 +242,14 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         final String slotInformation =
                 mBatteryChartPreferenceController.getSlotInformation(
                         /* isAccessibilityText= */ false);
+        final String accessibilitySlotInformation =
+                mBatteryChartPreferenceController.getSlotInformation(
+                        /* isAccessibilityText= */ true);
         final BatteryDiffData slotUsageData = mBatteryUsageMap.get(dailyIndex).get(hourlyIndex);
-        mScreenOnTimeController.handleSceenOnTimeUpdated(
-                slotUsageData != null ? slotUsageData.getScreenOnTime() : 0L, slotInformation);
+        mScreenOnTimeController.handleScreenOnTimeUpdated(
+                slotUsageData != null ? slotUsageData.getScreenOnTime() : 0L,
+                slotInformation,
+                accessibilitySlotInformation);
         // Hide card tips if the related highlight slot was clicked.
         if (isAppsAnomalyEventFocused()) {
             mBatteryTipsController.acceptTipsCard();
@@ -252,6 +257,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mBatteryUsageBreakdownController.handleBatteryUsageUpdated(
                 slotUsageData,
                 slotInformation,
+                accessibilitySlotInformation,
                 isBatteryUsageMapNullOrEmpty(),
                 isAppsAnomalyEventFocused(),
                 mHighlightEventWrapper);

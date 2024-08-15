@@ -29,6 +29,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -125,9 +126,14 @@ public class ReduceBrightColorsPreferenceController
         mContext.getContentResolver().unregisterContentObserver(mSettingsContentObserver);
     }
 
+    @Nullable
     @Override
     protected ComponentName getTileComponentName() {
-        return REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME;
+        // TODO: When clean up the feature flag, change the parent class from
+        // AccessibilityQuickSettingsPrimarySwitchPreferenceController to
+        // TogglePreferenceController
+        return android.view.accessibility.Flags.a11yQsShortcut()
+                ? null : REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME;
     }
 
     @Override
