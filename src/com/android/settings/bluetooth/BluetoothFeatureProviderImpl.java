@@ -16,6 +16,9 @@
 
 package com.android.settings.bluetooth;
 
+import static com.android.settings.bluetooth.utils.DeviceSettingUtilsKt.createDeviceSettingRepository;
+
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
 import android.content.Context;
@@ -23,10 +26,16 @@ import android.media.AudioManager;
 import android.media.Spatializer;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleCoroutineScope;
 import androidx.preference.Preference;
 
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter;
+import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatterImpl;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -72,5 +81,25 @@ public class BluetoothFeatureProviderImpl implements BluetoothFeatureProvider {
     public Set<String> getInvisibleProfilePreferenceKeys(
             Context context, BluetoothDevice bluetoothDevice) {
         return ImmutableSet.of();
+    }
+
+    @Override
+    @NonNull
+    public DeviceSettingRepository getDeviceSettingRepository(
+            @NonNull Context context,
+            @NonNull BluetoothAdapter bluetoothAdapter,
+            @NonNull LifecycleCoroutineScope scope) {
+        return createDeviceSettingRepository(context, bluetoothAdapter, scope);
+    }
+
+    @Override
+    @NonNull
+    public DeviceDetailsFragmentFormatter getDeviceDetailsFragmentFormatter(
+            @NonNull Context context,
+            @NonNull SettingsPreferenceFragment fragment,
+            @NonNull BluetoothAdapter bluetoothAdapter,
+            @NonNull CachedBluetoothDevice cachedDevice) {
+        return new DeviceDetailsFragmentFormatterImpl(
+                context, fragment, bluetoothAdapter, cachedDevice);
     }
 }
