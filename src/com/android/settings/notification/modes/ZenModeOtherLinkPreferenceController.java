@@ -72,7 +72,7 @@ class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceCont
 
         preference.setEnabled(zenMode.isEnabled());
         preference.setSummary(mSummaryHelper.getOtherSoundCategoriesSummary(zenMode));
-        ((CircularIconsPreference) preference).displayIcons(getSoundIcons(zenMode.getPolicy()));
+        ((CircularIconsPreference) preference).setIcons(getSoundIcons(zenMode.getPolicy()));
     }
 
     private CircularIconSet<Integer> getSoundIcons(ZenPolicy policy) {

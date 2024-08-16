@@ -61,19 +61,20 @@ abstract class AbstractZenModeHeaderController extends AbstractZenModePreference
         LayoutPreference preference = checkNotNull(screen.findPreference(getPreferenceKey()));
         preference.setSelectable(false);
 
-        if (mHeaderController == null) {
-            mHeaderController = EntityHeaderController.newInstance(
-                    mFragment.getActivity(),
-                    mFragment,
-                    preference.findViewById(R.id.entity_header));
-        }
-
         ImageView iconView = checkNotNull(preference.findViewById(R.id.entity_header_icon));
         ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
         if (layoutParams.width != iconSizePx || layoutParams.height != iconSizePx) {
             layoutParams.width = iconSizePx;
             layoutParams.height = iconSizePx;
             iconView.setLayoutParams(layoutParams);
+        }
+
+        if (mHeaderController == null) {
+            mHeaderController = EntityHeaderController.newInstance(
+                    mFragment.getActivity(),
+                    mFragment,
+                    preference.findViewById(R.id.entity_header));
+            mHeaderController.done(false); // Make the space for the (unused) name go away.
         }
     }
 

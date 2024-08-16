@@ -95,7 +95,7 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
 
         preference.setEnabled(zenMode.isEnabled());
         preference.setSummary(mSummaryHelper.getPeopleSummary(zenMode.getPolicy()));
-        ((CircularIconsPreference) preference).displayIcons(getPeopleIcons(zenMode.getPolicy()),
+        ((CircularIconsPreference) preference).setIcons(getPeopleIcons(zenMode.getPolicy()),
                 PEOPLE_ITEM_EQUIVALENCE);
     }
 

@@ -19,6 +19,7 @@ package com.android.settings.notification.modes;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -51,6 +52,7 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -81,6 +83,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
     private ZenModeAppsLinkPreferenceController mController;
     private CircularIconsPreference mPreference;
+    private CircularIconsView mIconsView;
 
     private Context mContext;
     @Mock
@@ -113,6 +116,8 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         // Ensure the preference view is bound & measured (needed to add child ImageViews).
         View preferenceView = LayoutInflater.from(mContext).inflate(mPreference.getLayoutResource(),
                 null);
+        mIconsView = checkNotNull(preferenceView.findViewById(R.id.circles_container));
+        mIconsView.setUiExecutor(MoreExecutors.directExecutor());
         preferenceView.measure(View.MeasureSpec.makeMeasureSpec(1000, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(1000, View.MeasureSpec.EXACTLY));
         PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(preferenceView);
@@ -272,7 +277,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         appEntries.add(createAppEntry("test2", mContext.getUserId()));
         mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
 
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(2);
+        assertThat(mIconsView.getDisplayedIcons().icons()).hasSize(2);
     }
 
     @Test
@@ -312,7 +317,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
         mController.updateState(mPreference, zenModeWithNone);
 
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(0);
+        assertThat(mIconsView.getDisplayedIcons().icons()).hasSize(0);
         verifyNoMoreInteractions(mApplicationsState);
         verifyNoMoreInteractions(mSession);
 
@@ -321,7 +326,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         verify(mApplicationsState).newSession(any(), any());
         verify(mSession).rebuild(any(), any(), anyBoolean());
         mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(1);
+        assertThat(mIconsView.getDisplayedIcons().icons()).hasSize(1);
     }
 
     @Test
@@ -342,11 +347,11 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         verify(mApplicationsState).newSession(any(), any());
         verify(mSession).rebuild(any(), any(), anyBoolean());
         mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(1);
+        assertThat(mIconsView.getDisplayedIcons().icons()).hasSize(1);
 
         mController.updateState(mPreference, zenModeWithNone);
 
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(0);
+        assertThat(mIconsView.getDisplayedIcons().icons()).hasSize(0);
         verify(mSession).deactivateSession();
         verifyNoMoreInteractions(mSession);
         verifyNoMoreInteractions(mApplicationsState);
@@ -355,7 +360,7 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
         // updateState()) is ignored.
         mController.mAppSessionCallbacks.onRebuildComplete(appEntries);
 
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(0);
+        assertThat(mIconsView.getDisplayedIcons().icons()).hasSize(0);
     }
 
     @Test
