@@ -29,6 +29,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
     private static final String TAG = "PrivateSpaceCreateFrag";
     private static final int PRIVATE_SPACE_CREATE_POST_DELAY_MS = 1000;
     private static final int PRIVATE_SPACE_ACCOUNT_LOGIN_POST_DELAY_MS = 5000;
+    private static final int PRIVATE_SPACE_SETUP_NO_ERROR = 0;
     private static final Handler sHandler = new Handler(Looper.getMainLooper());
     private Runnable mRunnable =
             () -> {
@@ -122,6 +124,11 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
             Log.i(TAG, "Private Space created");
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED, true);
+            if (android.multiuser.Flags.showDifferentCreationErrorForUnsupportedDevices()) {
+                mMetricsFeatureProvider.action(
+                        getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_ERRORS,
+                        PRIVATE_SPACE_SETUP_NO_ERROR);
+            }
             if (isConnectedToInternet()) {
                 registerReceiver();
                 sHandler.postDelayed(
@@ -132,8 +139,18 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
             }
         } else {
             mMetricsFeatureProvider.action(
-                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED, false);
-            showPrivateSpaceErrorScreen();
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
+                    false);
+            if (android.multiuser.Flags.showDifferentCreationErrorForUnsupportedDevices()) {
+                int errorCode = PrivateSpaceMaintainer.getInstance(
+                        getActivity()).getPrivateSpaceCreateError();
+                mMetricsFeatureProvider.action(
+                        getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_ERRORS,
+                        errorCode);
+                showPrivateSpaceErrorScreen(errorCode);
+            } else {
+                showPrivateSpaceErrorScreen();
+            }
         }
     }
 
@@ -147,6 +164,16 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
                 .navigate(R.id.action_create_profile_error);
     }
 
+    private void showPrivateSpaceErrorScreen(int errorCode) {
+        if (errorCode == UserManager.USER_OPERATION_ERROR_USER_RESTRICTED
+                || errorCode == UserManager.USER_OPERATION_ERROR_PRIVATE_PROFILE) {
+            NavHostFragment.findNavController(PrivateSpaceCreationFragment.this)
+                    .navigate(R.id.action_create_profile_error_restrict);
+        } else {
+            showPrivateSpaceErrorScreen();
+        }
+    }
+
     /** Returns true if device has an active internet connection, false otherwise. */
     private boolean isConnectedToInternet() {
         ConnectivityManager cm =
@@ -157,22 +184,26 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
 
     /** Start new activity in private profile to add an account to private profile */
     private void startAccountLogin() {
-        Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
-        intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
-        mMetricsFeatureProvider.action(
-                getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_START);
-        getActivity().startActivityForResult(intent, ACCOUNT_LOGIN_ACTION);
+        if (isAdded() && getContext() != null && getActivity() != null) {
+            Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
+            intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_START);
+            getActivity().startActivityForResult(intent, ACCOUNT_LOGIN_ACTION);
+        }
     }
 
     private void registerReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_PROFILE_ACCESSIBLE);
-        getActivity().registerReceiver(mProfileAccessReceiver, filter);
+        if (getContext() != null) {
+            getContext().registerReceiver(mProfileAccessReceiver, filter);
+        }
     }
 
     private void unRegisterReceiver() {
-        if (mProfileAccessReceiver != null) {
-            getActivity().unregisterReceiver(mProfileAccessReceiver);
+        if (mProfileAccessReceiver != null && isAdded() && getContext() != null) {
+            getContext().unregisterReceiver(mProfileAccessReceiver);
         }
     }
 }

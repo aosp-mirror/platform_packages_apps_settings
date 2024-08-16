@@ -21,6 +21,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
@@ -35,7 +36,8 @@ public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     private static final String TAG = "AudioSharingBluetoothDeviceUpdater";
 
-    private static final String PREF_KEY = "audio_sharing_bt";
+    @VisibleForTesting
+    static final String PREF_KEY_PREFIX = "audio_sharing_bt_";
 
     @Nullable private LocalBluetoothManager mLocalBtManager;
 
@@ -53,7 +55,7 @@ public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         if (isDeviceConnected(cachedDevice) && isDeviceInCachedDevicesList(cachedDevice)) {
             // If device is LE audio device and has a broadcast source,
             // it would show in audio sharing devices group.
-            if (AudioSharingUtils.isFeatureEnabled()
+            if (BluetoothUtils.isAudioSharingEnabled()
                     && cachedDevice.isConnectedLeAudioDevice()
                     && BluetoothUtils.hasConnectedBroadcastSource(cachedDevice, mLocalBtManager)) {
                 isFilterMatched = true;
@@ -76,8 +78,8 @@ public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     }
 
     @Override
-    protected String getPreferenceKey() {
-        return PREF_KEY;
+    protected String getPreferenceKeyPrefix() {
+        return PREF_KEY_PREFIX;
     }
 
     @Override

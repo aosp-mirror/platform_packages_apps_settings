@@ -16,24 +16,28 @@
 
 package com.android.settings.notification.modes;
 
-import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_ANYONE;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_STARRED;
-import static android.service.notification.ZenPolicy.STATE_ALLOW;
 import static android.service.notification.ZenPolicy.STATE_DISALLOW;
 import static android.service.notification.ZenPolicy.STATE_UNSET;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
+
 import androidx.preference.TwoStatePreference;
+
+import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -64,14 +68,11 @@ public final class ZenModeRepeatCallersPreferenceControllerTest {
     @Test
     public void testUpdateState_allCalls() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowCalls(PEOPLE_TYPE_ANYONE)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowCalls(PEOPLE_TYPE_ANYONE)
+                        .build())
+                .build();
 
         ZenModeRepeatCallersPreferenceController controller =
                 new ZenModeRepeatCallersPreferenceController(mContext, "repeat", mBackend, 1);
@@ -85,15 +86,12 @@ public final class ZenModeRepeatCallersPreferenceControllerTest {
     @Test
     public void testUpdateState_someCalls() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder()
-                                .allowCalls(PEOPLE_TYPE_STARRED)
-                                .allowRepeatCallers(true)
-                                .build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder()
+                        .allowCalls(PEOPLE_TYPE_STARRED)
+                        .allowRepeatCallers(true)
+                        .build())
+                .build();
 
         ZenModeRepeatCallersPreferenceController controller =
                 new ZenModeRepeatCallersPreferenceController(mContext, "repeat", mBackend, 1);
@@ -107,12 +105,9 @@ public final class ZenModeRepeatCallersPreferenceControllerTest {
     @Test
     public void testOnPreferenceChange() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode zenMode = new ZenMode("id",
-                new AutomaticZenRule.Builder("Driving", Uri.parse("drive"))
-                        .setType(AutomaticZenRule.TYPE_DRIVING)
-                        .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                        .setZenPolicy(new ZenPolicy.Builder().allowRepeatCallers(true).build())
-                        .build(), true);
+        ZenMode zenMode = new TestModeBuilder()
+                .setZenPolicy(new ZenPolicy.Builder().allowRepeatCallers(true).build())
+                .build();
 
         ZenModeRepeatCallersPreferenceController controller =
                 new ZenModeRepeatCallersPreferenceController(mContext, "repeat", mBackend, 1);

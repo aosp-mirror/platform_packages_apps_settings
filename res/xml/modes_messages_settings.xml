@@ -26,4 +26,10 @@
         android:key="zen_mode_settings_category_messages"
         android:title="@string/zen_mode_messages_header">
     </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="info_footer"
+        android:title="@string/zen_mode_messages_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

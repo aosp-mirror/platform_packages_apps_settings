@@ -44,6 +44,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.chooser.DisplayResolveInfo;
 import com.android.internal.app.chooser.TargetInfo;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.qrcode.QrCodeGenerator;
 
 import com.google.zxing.WriterException;
@@ -56,7 +57,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     private static final String TAG = "WifiDppQrCodeGeneratorFragment";
 
     private ImageView mQrCodeView;
-    private String mQrCode;
+    protected String mQrCode;
 
     private static final String CHIP_LABEL_METADATA_KEY = "android.service.chooser.chip_label";
     private static final String CHIP_ICON_METADATA_KEY = "android.service.chooser.chip_icon";
@@ -69,6 +70,10 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
     @Override
     public int getMetricsCategory() {
+        if (Flags.enableWifiSharingRuntimeFragment()) {
+            return SettingsEnums.SETTINGS_WIFI_DPP_QR_SHARING;
+        }
+
         return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
@@ -109,6 +114,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mQrCodeView = view.findViewById(R.id.qrcode_view);
+        mQrCodeView.setContentDescription(getString(R.string.qr_code_content_description));
 
         final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
         if (wifiNetworkConfig.isHotspot()) {
@@ -258,7 +264,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         return button;
     }
 
-    private void setQrCode() {
+    protected void setQrCode() {
         try {
             final int qrcodeSize = getContext().getResources().getDimensionPixelSize(
                     R.dimen.qrcode_size);

@@ -34,6 +34,7 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
@@ -57,9 +58,10 @@ public class AudioSharingCompatibilityPreferenceController extends TogglePrefere
     @Nullable private TwoStatePreference mPreference;
     private final Executor mExecutor;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
+    private final AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
 
-    private final BluetoothLeBroadcast.Callback mBroadcastCallback =
+    @VisibleForTesting
+    final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastStarted(int reason, int broadcastId) {
@@ -153,7 +155,7 @@ public class AudioSharingCompatibilityPreferenceController extends TogglePrefere
 
     @Override
     public int getAvailabilityStatus() {
-        return AudioSharingUtils.isFeatureEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return BluetoothUtils.isAudioSharingEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -218,7 +220,7 @@ public class AudioSharingCompatibilityPreferenceController extends TogglePrefere
 
     /** Test only: set callbacks registration state for test setup. */
     @VisibleForTesting
-    public void setCallbacksRegistered(boolean registered) {
+    void setCallbacksRegistered(boolean registered) {
         mCallbacksRegistered.set(registered);
     }
 
@@ -241,7 +243,7 @@ public class AudioSharingCompatibilityPreferenceController extends TogglePrefere
         var unused =
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
-                            boolean isBroadcasting = AudioSharingUtils.isBroadcasting(mBtManager);
+                            boolean isBroadcasting = BluetoothUtils.isBroadcasting(mBtManager);
                             AudioSharingUtils.postOnMainThread(
                                     mContext,
                                     () -> {

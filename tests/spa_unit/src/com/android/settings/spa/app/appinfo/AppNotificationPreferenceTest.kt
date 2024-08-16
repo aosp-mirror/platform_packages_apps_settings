@@ -20,8 +20,8 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -34,36 +34,35 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.notification.app.AppNotificationSettings
 import com.android.settings.spa.notification.IAppNotificationRepository
 import com.android.settingslib.spa.testutils.delay
+import com.android.settingslib.spa.testutils.waitUntilExists
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.MockitoSession
-import org.mockito.Spy
 import org.mockito.quality.Strictness
 
 @RunWith(AndroidJUnit4::class)
 class AppNotificationPreferenceTest {
-    @get:Rule
-    val composeTestRule = createComposeRule()
+    @get:Rule val composeTestRule = createComposeRule()
 
     private lateinit var mockSession: MockitoSession
 
-    @Spy
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    private val repository = object : IAppNotificationRepository {
-        override fun getNotificationSummary(app: ApplicationInfo) = SUMMARY
-    }
+    private val repository =
+        object : IAppNotificationRepository {
+            override fun getNotificationSummary(app: ApplicationInfo) = SUMMARY
+        }
 
     @Before
     fun setUp() {
-        mockSession = ExtendedMockito.mockitoSession()
-            .initMocks(this)
-            .mockStatic(AppInfoDashboardFragment::class.java)
-            .strictness(Strictness.LENIENT)
-            .startMocking()
+        mockSession =
+            ExtendedMockito.mockitoSession()
+                .mockStatic(AppInfoDashboardFragment::class.java)
+                .strictness(Strictness.LENIENT)
+                .startMocking()
     }
 
     @After
@@ -75,25 +74,26 @@ class AppNotificationPreferenceTest {
     fun title_displayed() {
         setContent(APP)
 
-        composeTestRule.onNodeWithText(context.getString(R.string.notifications_label))
-            .assertIsDisplayed()
+        composeTestRule.waitUntilExists(hasText(context.getString(R.string.notifications_label)))
     }
 
     @Test
     fun summary_displayed() {
         setContent(APP)
 
-        composeTestRule.onNodeWithText(SUMMARY).assertIsDisplayed()
+        composeTestRule.waitUntilExists(hasText(SUMMARY))
     }
 
     @Test
     fun whenNotInstalled_disable() {
-        setContent(ApplicationInfo().apply {
-            packageName = PACKAGE_NAME
-            uid = UID
-        })
+        setContent(
+            ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                uid = UID
+            })
 
-        composeTestRule.onNodeWithText(context.getString(R.string.notifications_label))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.notifications_label))
             .assertIsNotEnabled()
     }
 
@@ -125,11 +125,12 @@ class AppNotificationPreferenceTest {
     private companion object {
         const val PACKAGE_NAME = "package.name"
         const val UID = 123
-        val APP = ApplicationInfo().apply {
-            packageName = PACKAGE_NAME
-            uid = UID
-            flags = ApplicationInfo.FLAG_INSTALLED
-        }
+        val APP =
+            ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                uid = UID
+                flags = ApplicationInfo.FLAG_INSTALLED
+            }
         const val SUMMARY = "Summary"
     }
 }

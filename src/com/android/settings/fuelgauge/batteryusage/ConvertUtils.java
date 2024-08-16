@@ -35,6 +35,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.util.Pair;
 
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
@@ -199,6 +200,20 @@ public final class ConvertUtils {
                     cursor.getString(columnIndex), defaultInstance);
         }
         return defaultInstance;
+    }
+
+    /** Gets the encoded string from {@link BatteryReattribute} instance. */
+    @NonNull
+    public static String encodeBatteryReattribute(
+            @NonNull BatteryReattribute batteryReattribute) {
+        return Base64.encodeToString(batteryReattribute.toByteArray(), Base64.DEFAULT);
+    }
+
+    /** Gets the decoded {@link BatteryReattribute} instance from string. */
+    @NonNull
+    public static BatteryReattribute decodeBatteryReattribute(@NonNull String content) {
+        return BatteryUtils.parseProtoFromString(
+                content, BatteryReattribute.getDefaultInstance());
     }
 
     /** Converts to {@link BatteryHistEntry} */
@@ -528,9 +543,11 @@ public final class ConvertUtils {
         }
         // Log the battery optimization mode of AppEntry while converting to batteryUsageSlot.
         if (optimizationModeCache != null && !batteryDiffEntry.isSystemEntry()) {
-            builder.setAppOptimizationMode(
-                    optimizationModeCache.getBatteryOptimizeMode(
-                            (int) batteryDiffEntry.mUid, batteryDiffEntry.getPackageName()));
+            final Pair<BatteryOptimizationMode, Boolean> batteryOptimizationModeInfo =
+                    optimizationModeCache.getBatteryOptimizeModeInfo(
+                            (int) batteryDiffEntry.mUid, batteryDiffEntry.getPackageName());
+            builder.setAppOptimizationMode(batteryOptimizationModeInfo.first)
+                    .setIsAppOptimizationModeMutable(batteryOptimizationModeInfo.second);
         }
         return builder.build();
     }

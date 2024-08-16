@@ -58,7 +58,8 @@ public class TrackpadTouchGestureSettings extends DashboardFragment {
                     return FeatureFlagUtils
                             .isEnabled(
                                     context,
-                                    FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD_GESTURE);
+                                    FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD_GESTURE)
+                            && NewKeyboardSettingsUtils.isTouchpad();
                 }
             };
 }

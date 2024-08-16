@@ -49,12 +49,13 @@ public final class BugReportContentProvider extends ContentProvider {
             Log.w(TAG, "failed to dump BatteryUsage state: null application context");
             return;
         }
-        if (BatteryUtils.isWorkProfile(context)) {
-            Log.w(TAG, "ignore battery usage states dump in the work profile");
+        if (BatteryUtils.isAdditionalProfile(context)) {
+            Log.w(TAG, "ignore battery usage states dump in the additional profile");
             return;
         }
         writer.println("dump BatteryUsage and AppUsage states:");
         LogUtils.dumpAppOptimizationModeEventHist(context, writer);
+        LogUtils.dumpBatteryReattributeDatabaseHist(context, writer);
         LogUtils.dumpBatteryUsageDatabaseHist(context, writer);
         LogUtils.dumpAppUsageDatabaseHist(context, writer);
         LogUtils.dumpBatteryUsageSlotDatabaseHist(context, writer);

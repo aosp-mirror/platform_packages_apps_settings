@@ -27,9 +27,8 @@ import android.telephony.UiccCardInfo
 import android.telephony.UiccSlotInfo
 import android.util.Log
 import com.android.settings.network.SimOnboardingActivity.Companion.CallbackType
-import com.android.settings.network.telephony.TelephonyRepository
+import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.sim.SimActivationNotifier
-import com.android.settings.spa.network.setAutomaticData
 import com.android.settings.spa.network.setDefaultData
 import com.android.settings.spa.network.setDefaultSms
 import com.android.settings.spa.network.setDefaultVoice
@@ -238,6 +237,7 @@ class SimOnboardingService {
 
     fun addItemForRenaming(subInfo: SubscriptionInfo, newName: String) {
         if (subInfo.displayName == newName) {
+            renameMutableMap.remove(subInfo.subscriptionId)
             return
         }
         renameMutableMap[subInfo.subscriptionId] = newName
@@ -366,7 +366,7 @@ class SimOnboardingService {
                     wifiPickerTrackerHelper,
                     targetPrimarySimMobileData
                 )
-                TelephonyRepository(context).setAutomaticData(
+                MobileDataRepository(context).setAutoDataSwitch(
                     targetNonDds,
                     targetPrimarySimAutoDataSwitch.value
                 )

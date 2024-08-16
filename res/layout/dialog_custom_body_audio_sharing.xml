@@ -15,57 +15,67 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingHorizontal="?android:dialogPreferredPadding"
-    android:paddingBottom="?android:dialogPreferredPadding">
+    android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/description_text"
-        style="@style/DeviceAudioSharingText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingBottom="24dp"
-        android:visibility="gone" />
+        android:orientation="vertical"
+        android:paddingBottom="?android:dialogPreferredPadding"
+        android:paddingHorizontal="?android:dialogPreferredPadding">
 
-    <ImageView
-        android:id="@+id/description_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:contentDescription="@null"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/description_text"
+            style="@style/DeviceAudioSharingText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="24dp"
+            android:visibility="gone" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/device_btn_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:nestedScrollingEnabled="false"
-        android:overScrollMode="never"
-        android:visibility="gone" />
+        <ImageView
+            android:id="@+id/description_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:paddingBottom="24dp"
+            android:visibility="gone" />
 
-    <Button
-        android:id="@+id/positive_btn"
-        style="@style/SettingsLibActionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/audio_sharing_rounded_bg_ripple"
-        android:visibility="gone" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/device_btn_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:visibility="gone" />
 
-    <Button
-        android:id="@+id/negative_btn"
-        style="@style/SettingsLibActionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/audio_sharing_rounded_bg_ripple"
-        android:visibility="gone" />
-</LinearLayout>
+        <Button
+            android:id="@+id/positive_btn"
+            style="@style/SettingsLibActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:textColor="?androidprv:attr/textColorOnAccent"
+            android:background="@drawable/audio_sharing_rounded_bg_ripple"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/negative_btn"
+            style="@style/SettingsLibActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:textColor="?androidprv:attr/textColorOnAccent"
+            android:background="@drawable/audio_sharing_rounded_bg_ripple"
+            android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>

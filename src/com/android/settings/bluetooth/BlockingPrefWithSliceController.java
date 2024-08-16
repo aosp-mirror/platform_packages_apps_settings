@@ -101,7 +101,8 @@ public class BlockingPrefWithSliceController extends BasePreferenceController im
         return mUri != null ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
-    public void setSliceUri(Uri uri) {
+    /** Sets Slice uri for the preference. */
+    public void setSliceUri(@Nullable Uri uri) {
         mUri = uri;
         mLiveData = SliceLiveData.fromUri(mContext, mUri, (int type, Throwable source) -> {
             Log.w(TAG, "Slice may be null. uri = " + uri + ", error = " + type);

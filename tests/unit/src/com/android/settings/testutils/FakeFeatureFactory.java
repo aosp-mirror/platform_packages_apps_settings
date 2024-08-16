@@ -25,7 +25,6 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider;
-import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider;
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
@@ -82,7 +81,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final BluetoothFeatureProvider mBluetoothFeatureProvider;
     public final FaceFeatureProvider mFaceFeatureProvider;
     public final FingerprintFeatureProvider mFingerprintFeatureProvider;
-    public final BiometricsRepositoryProvider mBiometricsRepositoryProvider;
 
     public PanelFeatureProvider panelFeatureProvider;
     public SlicesFeatureProvider slicesFeatureProvider;
@@ -140,7 +138,6 @@ public class FakeFeatureFactory extends FeatureFactory {
         mBluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
         mFaceFeatureProvider = mock(FaceFeatureProvider.class);
         mFingerprintFeatureProvider = mock(FingerprintFeatureProvider.class);
-        mBiometricsRepositoryProvider = mock(BiometricsRepositoryProvider.class);
         wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
         securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
         mAccessibilitySearchFeatureProvider = mock(AccessibilitySearchFeatureProvider.class);
@@ -270,11 +267,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public FingerprintFeatureProvider getFingerprintFeatureProvider() {
         return mFingerprintFeatureProvider;
-    }
-
-    @Override
-    public BiometricsRepositoryProvider getBiometricsRepositoryProvider() {
-        return mBiometricsRepositoryProvider;
     }
 
     @Override
