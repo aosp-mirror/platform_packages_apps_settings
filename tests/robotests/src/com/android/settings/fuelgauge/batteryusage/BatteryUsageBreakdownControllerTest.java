@@ -29,6 +29,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.LocaleList;
 import android.text.format.DateUtils;
 
@@ -57,6 +58,7 @@ public final class BatteryUsageBreakdownControllerTest {
     private static final String PREF_KEY = "pref_key";
     private static final String PREF_KEY2 = "pref_key2";
     private static final String PREF_SUMMARY = "fake preference summary";
+    private static final String KEY_SPINNER_POSITION = "spinner_position";
     private static final long TIME_LESS_THAN_HALF_MINUTE  = DateUtils.MINUTE_IN_MILLIS / 2  - 1;
 
     @Mock private InstrumentedPreferenceFragment mFragment;
@@ -146,6 +148,15 @@ public final class BatteryUsageBreakdownControllerTest {
     public void onDestroy_removeAllPreferenceFromPreferenceGroup() {
         mBatteryUsageBreakdownController.onDestroy();
         verify(mAppListPreferenceGroup).removeAll();
+    }
+
+    @Test
+    public void onSaveInstanceState_returnExpectedResult() {
+        mBatteryUsageBreakdownController.mSpinnerPosition = 1;
+        final Bundle savedInstanceState = new Bundle();
+        mBatteryUsageBreakdownController.onSaveInstanceState(savedInstanceState);
+
+        assertThat(savedInstanceState.getInt(KEY_SPINNER_POSITION)).isEqualTo(1);
     }
 
     @Test

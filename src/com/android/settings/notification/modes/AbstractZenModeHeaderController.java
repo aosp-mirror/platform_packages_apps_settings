@@ -15,6 +15,8 @@
  */
 package com.android.settings.notification.modes;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.app.Flags;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -22,8 +24,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -32,13 +34,15 @@ import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.widget.LayoutPreference;
 
-import java.util.function.Consumer;
+import com.google.common.base.Objects;
+
 import java.util.function.Function;
 
 abstract class AbstractZenModeHeaderController extends AbstractZenModePreferenceController {
 
     private final DashboardFragment mFragment;
     private EntityHeaderController mHeaderController;
+    private String mCurrentIconKey;
 
     AbstractZenModeHeaderController(
             @NonNull Context context,
@@ -53,40 +57,44 @@ abstract class AbstractZenModeHeaderController extends AbstractZenModePreference
         return Flags.modesApi() && Flags.modesUi();
     }
 
-    protected void updateIcon(Preference preference, @NonNull ZenMode zenMode, int iconSizePx,
-            Function<Drawable, Drawable> modeIconStylist,
-            @Nullable Consumer<ImageView> iconViewCustomizer) {
-        if (mFragment == null) {
-            return;
-        }
+    protected void setUpHeader(PreferenceScreen screen, int iconSizePx) {
+        LayoutPreference preference = checkNotNull(screen.findPreference(getPreferenceKey()));
         preference.setSelectable(false);
 
         if (mHeaderController == null) {
-            final LayoutPreference pref = (LayoutPreference) preference;
             mHeaderController = EntityHeaderController.newInstance(
                     mFragment.getActivity(),
                     mFragment,
-                    pref.findViewById(R.id.entity_header));
+                    preference.findViewById(R.id.entity_header));
         }
 
-        ImageView iconView = ((LayoutPreference) preference).findViewById(R.id.entity_header_icon);
-        if (iconView != null) {
-            if (iconViewCustomizer != null) {
-                iconViewCustomizer.accept(iconView);
-            }
-            ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
-            if (layoutParams.width != iconSizePx || layoutParams.height != iconSizePx) {
-                layoutParams.width = iconSizePx;
-                layoutParams.height = iconSizePx;
-                iconView.setLayoutParams(layoutParams);
-            }
+        ImageView iconView = checkNotNull(preference.findViewById(R.id.entity_header_icon));
+        ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
+        if (layoutParams.width != iconSizePx || layoutParams.height != iconSizePx) {
+            layoutParams.width = iconSizePx;
+            layoutParams.height = iconSizePx;
+            iconView.setLayoutParams(layoutParams);
         }
+    }
 
-        FutureUtil.whenDone(
-                zenMode.getIcon(mContext, ZenIconLoader.getInstance()),
-                icon -> mHeaderController
-                        .setIcon(modeIconStylist.apply(icon))
-                        .done(/* rebindActions= */ false),
-                mContext.getMainExecutor());
+    protected void updateIcon(Preference preference, @NonNull ZenMode zenMode,
+            Function<Drawable, Drawable> iconStylist, boolean isSelected) {
+
+        ImageView iconView = checkNotNull(
+                ((LayoutPreference) preference).findViewById(R.id.entity_header_icon));
+        iconView.setSelected(isSelected);
+
+        if (!Objects.equal(mCurrentIconKey, zenMode.getIconKey())) {
+            mCurrentIconKey = zenMode.getIconKey();
+            FutureUtil.whenDone(
+                    zenMode.getIcon(mContext, ZenIconLoader.getInstance()),
+                    icon -> {
+                        checkNotNull(mHeaderController)
+                                .setIcon(iconStylist.apply(icon))
+                                .done(/* rebindActions= */ false);
+                        iconView.jumpDrawablesToCurrentState(); // Skip animation on first load.
+                    },
+                    mContext.getMainExecutor());
+        }
     }
 }

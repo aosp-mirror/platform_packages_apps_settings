@@ -16,37 +16,46 @@
 
 package com.android.settings.accessibility.shortcuts;
 
-import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
-import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_GESTURE;
-
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.spy;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.provider.Settings;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Flags;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.AccessibilityTestUtils;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Set;
 
 /**
  * Tests for {@link FloatingButtonShortcutOptionController}
  */
+@Config(shadows = SettingsShadowResources.class)
 @RunWith(RobolectricTestRunner.class)
 public class FloatingButtonShortcutOptionControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final String PREF_KEY = "prefKey";
     private static final String TARGET =
             new ComponentName("FakePackage", "FakeClass").flattenToString();
-    private final Context mContext = ApplicationProvider.getApplicationContext();
+    private final Context mContext = spy(ApplicationProvider.getApplicationContext());
     private FloatingButtonShortcutOptionController mController;
     private ShortcutOptionPreference mShortcutOptionPreference;
 
@@ -61,7 +70,6 @@ public class FloatingButtonShortcutOptionControllerTest {
         mShortcutOptionPreference.setKey(PREF_KEY);
         mPreferenceScreen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         mPreferenceScreen.addPreference(mShortcutOptionPreference);
-        setFloatingButtonEnabled(true);
     }
 
     @Test
@@ -95,23 +103,26 @@ public class FloatingButtonShortcutOptionControllerTest {
 
     @Test
     public void isShortcutAvailable_floatingMenuEnabled_returnTrue() {
-        setFloatingButtonEnabled(true);
+        AccessibilityTestUtils.setSoftwareShortcutMode(
+                mContext, /* gestureNavEnabled= */ false, /* floatingButtonEnabled= */ true);
 
         assertThat(mController.isShortcutAvailable()).isTrue();
     }
 
     @Test
     public void isShortcutAvailable_floatingMenuDisabled_returnFalse() {
-        setFloatingButtonEnabled(false);
+        AccessibilityTestUtils.setSoftwareShortcutMode(
+                mContext, /* gestureNavEnabled= */ false, /* floatingButtonEnabled= */ false);
 
         assertThat(mController.isShortcutAvailable()).isFalse();
     }
 
-    private void setFloatingButtonEnabled(boolean enable) {
-        int mode = enable
-                ? ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU : ACCESSIBILITY_BUTTON_MODE_GESTURE;
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void isShortcutAvailable_gestureNavigationMode_returnsTrue() {
+        AccessibilityTestUtils.setSoftwareShortcutMode(
+                mContext, /* gestureNavEnabled= */ true, /* floatingButtonEnabled= */ false);
 
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, mode);
+        assertThat(mController.isShortcutAvailable()).isTrue();
     }
 }

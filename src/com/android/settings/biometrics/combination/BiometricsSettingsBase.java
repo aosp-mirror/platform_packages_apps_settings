@@ -75,14 +75,11 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     @VisibleForTesting
     static final String RETRY_PREFERENCE_BUNDLE = "retry_preference_bundle";
     private static final String BIOMETRICS_AUTH_REQUESTED = "biometrics_auth_requested";
-    private static final String BIOMETRICS_AUTHENTICATED_SUCCESSFULLY =
-            "biometrics_authenticated_successfully";
 
     protected int mUserId;
     protected long mGkPwHandle;
     private boolean mConfirmCredential;
     private boolean mBiometricsAuthenticationRequested;
-    private boolean mBiometricsSuccessfullyAuthenticated;
     @Nullable private FaceManager mFaceManager;
     @Nullable private FingerprintManager mFingerprintManager;
     // Do not finish() if choosing/confirming credential, showing fp/face settings, or launching
@@ -120,9 +117,6 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(getIntent());
         }
 
-        mBiometricsSuccessfullyAuthenticated = getIntent().getBooleanExtra(
-                BIOMETRICS_AUTHENTICATED_SUCCESSFULLY, false);
-
         if (savedInstanceState != null) {
             mConfirmCredential = savedInstanceState.getBoolean(SAVE_STATE_CONFIRM_CREDETIAL);
             mDoNotFinishActivity = savedInstanceState.getBoolean(DO_NOT_FINISH_ACTIVITY);
@@ -135,21 +129,12 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             }
             mBiometricsAuthenticationRequested = savedInstanceState.getBoolean(
                     BIOMETRICS_AUTH_REQUESTED);
-            mBiometricsSuccessfullyAuthenticated = savedInstanceState.getBoolean(
-                    BIOMETRICS_AUTHENTICATED_SUCCESSFULLY);
         }
 
         if (mGkPwHandle == 0L && !mConfirmCredential) {
             mConfirmCredential = true;
             launchChooseOrConfirmLock();
-        } else if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(
-                getActivity(), mBiometricsSuccessfullyAuthenticated,
-                mBiometricsAuthenticationRequested, mUserId)) {
-            mBiometricsAuthenticationRequested = true;
-            Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
-                    mUserId);
         }
-
         updateUnlockPhonePreferenceSummary();
 
         final Preference useInAppsPreference = findPreference(getUseInAppsPreferenceKey());
@@ -161,13 +146,6 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
-                mBiometricsSuccessfullyAuthenticated, mBiometricsAuthenticationRequested, mUserId)
-                && mGkPwHandle != 0L) {
-            mBiometricsAuthenticationRequested = true;
-            Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST,
-                    mUserId);
-        }
         if (!mConfirmCredential) {
             mDoNotFinishActivity = false;
         }
@@ -204,9 +182,6 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                     extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
                     extras.putInt(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
                     extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
-                    extras.putBoolean(
-                            BiometricEnrollBase.EXTRA_BIOMETRICS_AUTHENTICATED_SUCCESSFULLY,
-                            mBiometricsSuccessfullyAuthenticated);
                     onFaceOrFingerprintPreferenceTreeClick(preference);
                 } catch (IllegalStateException e) {
                     if (retry) {
@@ -236,9 +211,6 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                     final Bundle extras = preference.getExtras();
                     extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
                     extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
-                    extras.putBoolean(
-                            BiometricEnrollBase.EXTRA_BIOMETRICS_AUTHENTICATED_SUCCESSFULLY,
-                            mBiometricsSuccessfullyAuthenticated);
                     onFaceOrFingerprintPreferenceTreeClick(preference);
                 } catch (IllegalStateException e) {
                     if (retry) {
@@ -323,8 +295,6 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         }
         outState.putBoolean(BIOMETRICS_AUTH_REQUESTED,
                 mBiometricsAuthenticationRequested);
-        outState.putBoolean(BIOMETRICS_AUTHENTICATED_SUCCESSFULLY,
-                mBiometricsSuccessfullyAuthenticated);
     }
 
     @Override
@@ -342,6 +312,20 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                                 com.google.android.setupdesign.R.anim.sud_slide_next_out);
                         retryPreferenceKey(mRetryPreferenceKey, mRetryPreferenceExtra);
                     }
+                    final Utils.BiometricStatus biometricAuthStatus =
+                            Utils.requestBiometricAuthenticationForMandatoryBiometrics(
+                                    getActivity(),
+                                    mBiometricsAuthenticationRequested,
+                                    mUserId);
+                    if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                        mBiometricsAuthenticationRequested = true;
+                        Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                                BIOMETRIC_AUTH_REQUEST,
+                                mUserId, true /* hideBackground */);
+                    } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                        finish();
+                        return;
+                    }
                 } else {
                     Log.d(getLogTag(), "Data null or GK PW missing.");
                     finish();
@@ -354,9 +338,7 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             mRetryPreferenceExtra = null;
         } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
             mBiometricsAuthenticationRequested = false;
-            if (resultCode == RESULT_OK) {
-                mBiometricsSuccessfullyAuthenticated = true;
-            } else {
+            if (resultCode != RESULT_OK) {
                 finish();
             }
         }

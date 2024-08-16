@@ -50,6 +50,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -101,6 +102,8 @@ public class BluetoothDeviceDetailsFragmentTest {
     private InputManager mInputManager;
     @Mock
     private CompanionDeviceManager mCompanionDeviceManager;
+    @Mock
+    private DeviceDetailsFragmentFormatter mFormatter;
 
     @Before
     public void setUp() {
@@ -111,7 +114,10 @@ public class BluetoothDeviceDetailsFragmentTest {
                 .getSystemService(CompanionDeviceManager.class);
         when(mCompanionDeviceManager.getAllAssociations()).thenReturn(ImmutableList.of());
         removeInputDeviceWithMatchingBluetoothAddress();
-        FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory fakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(fakeFeatureFactory.mBluetoothFeatureProvider.getDeviceDetailsFragmentFormatter(any(),
+                any(), any(), eq(mCachedDevice))).thenReturn(mFormatter);
+        when(mFormatter.getVisiblePreferenceKeysForMainPage()).thenReturn(null);
 
         mFragment = setupFragment();
         mFragment.onAttach(mContext);

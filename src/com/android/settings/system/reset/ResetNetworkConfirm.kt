@@ -18,6 +18,7 @@ package com.android.settings.system.reset
 
 import android.app.ProgressDialog
 import android.app.settings.SettingsEnums
+import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Looper
 import android.telephony.SubscriptionManager
@@ -56,7 +57,8 @@ import kotlinx.coroutines.withContext
  * This is the confirmation screen.
  */
 class ResetNetworkConfirm : InstrumentedFragment() {
-    @VisibleForTesting lateinit var resetNetworkRequest: ResetNetworkRequest
+    @VisibleForTesting
+    lateinit var resetNetworkRequest: ResetNetworkRequest
     private var progressDialog: ProgressDialog? = null
     private var alertDialog: AlertDialog? = null
     private var resetStarted = false
@@ -87,10 +89,7 @@ class ResetNetworkConfirm : InstrumentedFragment() {
     /** Configure the UI for the final confirmation interaction */
     private fun View.establishFinalConfirmationState() {
         requireViewById<View>(R.id.execute_reset_network).setOnClickListener {
-            if (!Utils.isMonkeyRunning() && !resetStarted) {
-                resetStarted = true
-                viewLifecycleOwner.lifecycleScope.launch { onResetClicked() }
-            }
+            showResetInternetDialog();
         }
     }
 
@@ -118,10 +117,10 @@ class ResetNetworkConfirm : InstrumentedFragment() {
     private fun invalidSubIdFlow(): Flow<Int> {
         val subIdsInRequest =
             listOf(
-                    resetNetworkRequest.resetTelephonyAndNetworkPolicyManager,
-                    resetNetworkRequest.resetApnSubId,
-                    resetNetworkRequest.resetImsSubId,
-                )
+                resetNetworkRequest.resetTelephonyAndNetworkPolicyManager,
+                resetNetworkRequest.resetApnSubId,
+                resetNetworkRequest.resetImsSubId,
+            )
                 .distinct()
                 .filter(SubscriptionManager::isUsableSubscriptionId)
 
@@ -162,6 +161,24 @@ class ResetNetworkConfirm : InstrumentedFragment() {
         }
     }
 
+    private fun showResetInternetDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        val resetInternetClickListener =
+            DialogInterface.OnClickListener { dialog, which ->
+                if (!Utils.isMonkeyRunning() && !resetStarted) {
+                    resetStarted = true
+                    viewLifecycleOwner.lifecycleScope.launch { onResetClicked() }
+                }
+            }
+
+        builder.setTitle(R.string.reset_your_internet_title)
+            .setMessage(R.string.reset_internet_text)
+            .setPositiveButton(R.string.tts_reset, resetInternetClickListener)
+            .setNegativeButton(android.R.string.cancel, null)
+            .create()
+            .show()
+    }
+
     /**
      * Do all reset task.
      *
@@ -173,7 +190,8 @@ class ResetNetworkConfirm : InstrumentedFragment() {
         withContext(Dispatchers.Default) {
             val builder =
                 resetNetworkRequest.toResetNetworkOperationBuilder(
-                    requireContext(), Looper.getMainLooper())
+                    requireContext(), Looper.getMainLooper()
+                )
             resetNetworkRequest.resetEsimPackageName?.let { resetEsimPackageName ->
                 builder.resetEsim(resetEsimPackageName)
                 builder.resetEsimResultCallback { resetEsimSuccess = it }
@@ -199,8 +217,8 @@ class ResetNetworkConfirm : InstrumentedFragment() {
         } else {
             Toast.makeText(activity, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                 .show()
+            activity.finish()
         }
-        activity.finish()
     }
 
     override fun onDestroy() {

@@ -30,7 +30,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.util.StateSet;
 import android.view.Gravity;
 
 import androidx.annotation.AttrRes;
@@ -65,25 +67,47 @@ class IconUtil {
 
     /**
      * Returns a variant of the supplied mode icon to be used as the header in the mode page. The
-     * inner icon is 64x64 dp and it's contained in a 12-sided-cookie of 136dp diameter. It's
-     * tinted with the "material secondary" color combination and the "selected" color variant
-     * should be used for modes currently active.
+     * mode icon is contained in a 12-sided-cookie. The color combination is "material secondary"
+     * when unselected and "material primary" when selected; the switch between these two color sets
+     * is animated with a cross-fade. The selected colors should be used when the mode is currently
+     * active.
      */
     static Drawable makeModeHeader(@NonNull Context context, Drawable modeIcon) {
-        return composeIcons(
-                checkNotNull(context.getDrawable(R.drawable.ic_zen_mode_icon_cookie)),
-                context.getColorStateList(R.color.modes_icon_selectable_background),
-                context.getResources().getDimensionPixelSize(
-                        R.dimen.zen_mode_header_size),
+        Resources res = context.getResources();
+        Drawable background = checkNotNull(context.getDrawable(R.drawable.ic_zen_mode_icon_cookie));
+        @Px int outerSizePx = res.getDimensionPixelSize(R.dimen.zen_mode_header_size);
+        @Px int innerSizePx = res.getDimensionPixelSize(R.dimen.zen_mode_header_inner_icon_size);
+
+        Drawable base = composeIcons(
+                background,
+                Utils.getColorAttr(context,
+                        com.android.internal.R.attr.materialColorSecondaryContainer),
+                outerSizePx,
                 modeIcon,
-                context.getColorStateList(R.color.modes_icon_selectable_icon),
-                context.getResources().getDimensionPixelSize(
-                        R.dimen.zen_mode_header_inner_icon_size));
+                Utils.getColorAttr(context,
+                        com.android.internal.R.attr.materialColorOnSecondaryContainer),
+                innerSizePx);
+
+        Drawable selected = composeIcons(
+                background,
+                Utils.getColorAttr(context, com.android.internal.R.attr.materialColorPrimary),
+                outerSizePx,
+                modeIcon,
+                Utils.getColorAttr(context, com.android.internal.R.attr.materialColorOnPrimary),
+                innerSizePx);
+
+        StateListDrawable result = new StateListDrawable();
+        result.setEnterFadeDuration(res.getInteger(android.R.integer.config_mediumAnimTime));
+        result.setExitFadeDuration(res.getInteger(android.R.integer.config_mediumAnimTime));
+        result.addState(new int[] { android.R.attr.state_selected }, selected);
+        result.addState(StateSet.WILD_CARD, base);
+        result.setBounds(0, 0, outerSizePx, outerSizePx);
+        return result;
     }
 
     /**
-     * Returns a variant of the supplied {@code icon} to be used as the header in the icon picker.
-     * The inner icon is 48x48dp and it's contained in a circle of diameter 90dp.
+     * Returns a variant of the supplied {@code icon} to be used as the header in the icon picker
+     * (large icon within large circle, with the "material secondary" color combination).
      */
     static Drawable makeIconPickerHeader(@NonNull Context context, Drawable icon) {
         return composeIconCircle(
@@ -99,9 +123,9 @@ class IconUtil {
     }
 
     /**
-     * Returns a variant of the supplied {@code icon} to be used as an option in the icon picker.
-     * The inner icon is 36x36dp and it's contained in a circle of diameter 54dp. It's also set up
-     * so that selection and pressed states are represented in the color.
+     * Returns a variant of the supplied {@code icon} to be used as an option in the icon picker
+     * (small icon in small circle, with "material secondary" colors for the normal state and
+     * "material primary" colors for the selected state).
      */
     static Drawable makeIconPickerItem(@NonNull Context context, @DrawableRes int iconResId) {
         return composeIconCircle(

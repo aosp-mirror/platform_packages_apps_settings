@@ -99,7 +99,7 @@ public class AudioSharingCallAudioDialogFragmentTest {
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
-        AudioSharingCallAudioDialogFragment.show(mParent, new ArrayList<>(), (item) -> {});
+        AudioSharingCallAudioDialogFragment.show(mParent, new ArrayList<>(), -1, (item) -> {});
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
@@ -109,7 +109,7 @@ public class AudioSharingCallAudioDialogFragmentTest {
     public void onCreateDialog_unattachedFragment_dialogNotExist() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mParent = new Fragment();
-        AudioSharingCallAudioDialogFragment.show(mParent, new ArrayList<>(), (item) -> {});
+        AudioSharingCallAudioDialogFragment.show(mParent, new ArrayList<>(), -1, (item) -> {});
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
@@ -138,7 +138,7 @@ public class AudioSharingCallAudioDialogFragmentTest {
         ArrayList<AudioSharingDeviceItem> deviceItemList = new ArrayList<>();
         deviceItemList.add(TEST_DEVICE_ITEM1);
         deviceItemList.add(TEST_DEVICE_ITEM2);
-        AudioSharingCallAudioDialogFragment.show(mParent, deviceItemList, (item) -> {});
+        AudioSharingCallAudioDialogFragment.show(mParent, deviceItemList, 0, (item) -> {});
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();

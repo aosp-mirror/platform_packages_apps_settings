@@ -41,6 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Začasno ustavljeno"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Neznano"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Predogled"</string>
+    <string name="qr_code_content_description" msgid="1852208464419291347">"Koda QR"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Pomanjšanje"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Povečanje"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Vedno"</string>
@@ -179,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"V nastavitvah ni na voljo izbire jezika za to aplikacijo."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Jezik se morda razlikuje od jezikov, ki so na voljo v aplikaciji. Nekatere aplikacije morda ne podpirajo te nastavitve."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Nastavite jezik za posamezno aplikacijo."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sistem, aplikacije in spletna mesta uporabijo prvi podprti jezik izmed prednostnih jezikov."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Naprava, aplikacije in spletna mesta uporabijo prvi podprti jezik na seznamu prednostnih jezikov.\n\nŠtevilne aplikacije bodo na podlagi regije prednostnega jezika tudi oblikovale zapis datumov, števil in merskih enot. Če želite spremeniti regijo, dodajte jezik in nato izberite prednostno regijo."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Če želite izbrati jezik za posamezno aplikacijo, odprite nastavitve jezika aplikacije."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Več o jezikih aplikacij"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Želite sistemski jezik spremeniti v jezik »%s«?"</string>
@@ -410,7 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Obraz in <xliff:g id="WATCH">%s</xliff:g> sta dodana"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Obraz, prstni odtis in <xliff:g id="WATCH">%s</xliff:g> so dodani"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Obraz, prstni odtisi in <xliff:g id="WATCH">%s</xliff:g> so dodani"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"To je potrebno, ker je preverjanje identitete vklopljeno"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"Preverjanje identitete je vklopljeno"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Odklepanje storitve Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Ura je dodana"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Nastavitev ure"</string>
@@ -622,6 +623,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Nastavljanje zasebnega prostora …"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Zasebnega prostora ni bilo mogoče nastaviti"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Poskusi znova"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Zapri"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Zasebni prostor ni na voljo.\nOgled možnih vzrokov"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Ogled možnih vzrokov"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Želite izbrati novo zaklepanje za zasebni prostor?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Nastavite lahko novo zaklepanje samo za zasebni prostor ali pa uporabite enako zaklepanje, kakršnega uporabljate za odklepanje naprave"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Uporabi zaklepanje zaslona"</string>
@@ -850,7 +854,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Vnovični zagon?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Podrobno zapisovanje dnevnika za NFC je namenjeno samo za razvoj. Dodatni podatki NFC so vključeni v poročilih o napakah, ki morda vsebujejo zasebne podatke. Če želite spremeniti to nastavitev, znova zaženite napravo."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Zaženi znova"</string>
-    <string name="keywords_external_display" msgid="4181375057920134909">"zrcaljenje, zunanji zaslon, povezan zaslon, zaslon prek usb, ločljivost, vrtenje"</string>
     <string name="external_display_on" msgid="2560104443500154333">"Vklopljeno"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Izklopljeno"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Zunanji zaslon"</string>
@@ -1686,7 +1689,7 @@
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Če želite prenesti račune Google, nastavitve in druge podatke, vnesite kodo PIN druge naprave. Koda PIN je šifrirana."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Če želite prenesti račune Google, nastavitve in druge podatke, vnesite geslo druge naprave. Geslo je šifrirano."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Ta naprava se lahko odklepa tudi z vzorcem"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Ta naprava se lahko odklepa tudi s kodo PIN"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Kodo PIN uporabi tudi za odklepanje te naprave"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Ta naprava se lahko odklepa tudi z geslom"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Potrdite vzorec"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Potrdite kodo PIN"</string>
@@ -2177,8 +2180,6 @@
     <string name="accessibility_shortcut_edit_dialog_summary_floating_button" msgid="6266489864614886247">"Dotaknite se plavajočega gumba."</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="4775049370625630546">"Poteza za dostopnost"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8315934725362849788">"Dotaknite se gumba za dostopnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dnu zaslona. Če želite preklopiti med funkcijami, pridržite gumb za dostopnost."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"S tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, s tremi prsti povlecite navzgor in pridržite."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_gesture" msgid="2081123009255579884">"{count,plural, =1{S prstom povlecite navzgor z dna zaslona. Če želite preklopiti med funkcijami, povlecite navzgor in pridržite.}one{Z # prstom povlecite navzgor z dna zaslona. Če želite preklopiti med funkcijami, z # prstom povlecite navzgor in pridržite.}two{Z # prstoma povlecite navzgor z dna zaslona. Če želite preklopiti med funkcijami, z # prstoma povlecite navzgor in pridržite.}few{S # prsti povlecite navzgor z dna zaslona. Če želite preklopiti med funkcijami, s # prsti povlecite navzgor in pridržite.}other{S # prsti povlecite navzgor z dna zaslona. Če želite preklopiti med funkcijami, s # prsti povlecite navzgor in pridržite.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Več možnosti"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Več o storitvi <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2189,16 +2190,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Gumba za glasnost"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"gumba za glasnost"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Pritisnite in pridržite obe tipki za glasnost."</string>
-    <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Dvakratni dotik zaslona z dvema prstoma"</string>
     <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Dvakratni dotik z %1$d prstoma"</string>
     <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Z %1$d prstoma se dvakrat hitro dotaknite zaslona."</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Trikratni dotik"</string>
     <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"%1$d-krat se hitro dotaknite zaslona. To bo morda upočasnilo delovanje naprave."</string>
     <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="6271718715836961167">"Dvakratni dotik z %1$d prstoma"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"Z dvema prstoma se {0,number,integer}-krat hitro dotaknite zaslona"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Trikratni dotik zaslona"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"trikratni dotik"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"{0,number,integer}-krat se hitro dotaknite zaslona. Ta bližnjica bo morda upočasnila delovanje naprave."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Dodatno"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Gumb »Dostopnost« je nastavljen na <xliff:g id="SERVICE">%1$s</xliff:g>. Če želite uporabiti povečavo, se dotaknite gumba »Dostopnost« in ga pridržite, nato pa izberite povečavo."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Poteza za dostopnost je nastavljena na <xliff:g id="SERVICE">%1$s</xliff:g>. Če želite uporabiti povečavo, z dvema prstoma povlecite z dna zaslona navzgor in pridržite. Nato izberite povečavo."</string>
@@ -2362,13 +2359,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Ta storitev ne deluje pravilno."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Bližnjice za dostopnost"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Prikaži v »Hitrih nastavitvah«"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Rdeča-zelena"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rdeča-zelena"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Rdeča in zelena, šibka zelena"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Rdeča in zelena, šibka rdeča"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Modra-rumena"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Sivine"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intenzivnost"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Šibka zelena, devteranomalija"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Šibka rdeča, protanomalija"</string>
+    <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Ni na voljo v načinu sivin ali pri onemogočenem popravljanju barv"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Devteranomalija"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalija"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalija"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Zelo zatemnjen zaslon"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Zelo zatemni zaslon"</string>
@@ -2416,15 +2414,8 @@
     <string name="color_cyan" msgid="4341758639597035927">"Cijan"</string>
     <string name="color_yellow" msgid="5957551912912679058">"Rumena"</string>
     <string name="color_magenta" msgid="8943538189219528423">"Magenta"</string>
-    <string name="enable_service_title" msgid="7231533866953706788">"Ali storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dovolite popoln nadzor nad svojo napravo?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> mora:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Ker aplikacija zakriva zahtevo za dovoljenje, z nastavitvami ni mogoče preveriti vašega odziva."</string>
-    <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> zahteva popoln nadzor nad to napravo. Storitev lahko prebere zaslon in deluje v imenu uporabnikov s posebnimi potrebami. Ta raven nadzora za večino aplikacij ni primerna."</string>
-    <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Popoln nadzor je ustrezen za aplikacije, ki vam pomagajo pri funkcijah dostopnosti, vendar ne za večino aplikacij."</string>
-    <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Ogledovanje in upravljanje zaslona"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Bere lahko vso vsebino na zaslonu ter prikaže vsebino prek drugih aplikacij."</string>
-    <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Ogledovanje in izvajanje dejanj"</string>
-    <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Spremlja lahko vaše interakcije z aplikacijo ali tipalom ter komunicira z aplikacijami v vašem imenu."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Dovoli"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Zavrni"</string>
     <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Izklopi"</string>
@@ -3348,19 +3339,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Noben}=1{Nastavljen je 1 razpored}one{Nastavljen je # razpored}two{Nastavljena sta # razporeda}few{Nastavljeni so # razporedi}other{Nastavljenih je # razporedov}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne moti"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Prednostni načini"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Dodajte način"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Zmanjšajte število motenj in z načini za spanje, delo, vožnjo in vse drugo poskrbite, da nič ne bo zmanjšalo vaše pozornosti."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Ustvarite svoj način"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Prejemajte samo obvestila pomembnih oseb in aplikacij."</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Izbira vrste aktiviranja"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Čas"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Primer: »9.30–17.00«"</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Koledar"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Primer: »Osebni koledar«"</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Nastavitev razporeda"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Razpored glede na"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Dan in ura"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"»9.00–17.00 ob delavnikih«"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Dogodki na koledarju"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Način {mode_1} je aktiven}=2{Načina {mode_1} in {mode_2} sta aktivna}=3{Načini {mode_1}, {mode_2} in {mode_3} so aktivni}one{Načina {mode_1} in {mode_2} ter še # način so aktivni}two{Načina {mode_1} in {mode_2} ter še # načina so aktivni}few{Načina {mode_1} in {mode_2} ter še # načini so aktivni}other{Načina {mode_1} in {mode_2} ter še # načinov so aktivni}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 način se lahko samodejno vklopi}one{# način se lahko samodejno vklopi}two{# načina se lahko samodejno vklopita}few{# načini se lahko samodejno vklopijo}other{# načinov se lahko samodejno vklopi}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"VKLOPLJENO"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Ni nastavljeno"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Onemogočeno"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Ustvarjanje načina"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Po meri"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Vklopi zdaj"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Izklopi"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Način ni najden"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Omejitev prekinitev"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Blokiranje prekinitev in motenj"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Nastavite ta način: <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Vklop načina »Ne moti«"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmi in zvoki predstavnosti lahko preglasijo"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Časovni razporedi"</string>
@@ -3372,14 +3371,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Uredi"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Razporedi"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Razpored"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Samodejni vklop"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Dodajte koledar"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Uporabite koledar"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Razpored"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Nastavitev razporeda"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Kdaj naj se samodejno vklopi"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Razpored dogodka"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Vklop med dogodki za"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Kjer je odgovor na povabilo"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Časovni razpored"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Razpored"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Samodejni vklop"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Časovni razpored"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Utišanje telefona ob določenih urah"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Nastavitev pravil za način »Ne moti«"</string>
@@ -3389,8 +3387,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Dovoljene zvočne motnje"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokiranje vizualnih motenj"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Dovoli vizualne znake"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Ostanite zbrani"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Dodatna dejanja"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Filtri obvestil"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Več nastavitev"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Izklopljeno}=1{Izklopljeno / 1 način se lahko samodejno vklopi}one{Izklopljeno / # način se lahko samodejno vklopi}two{Izklopljeno / # načina se lahko samodejno vklopita}few{Izklopljeno / # načini se lahko samodejno vklopijo}other{Izklopljeno / # načinov se lahko samodejno vklopi}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Nastavitve zaslona"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Možnosti prikaza"</string>
@@ -3407,7 +3405,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"omogoči temno temo"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Preklopite nastavitev operacijskega sistema in aplikacij na svetlo besedilo na temnem ozadju, saj je to manj naporno za oči in v nekaterih napravah bistveno prispeva k varčevanju z energijo baterije"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Brez sprememb prikaza}=1{{effect_1}}=2{{effect_1} in {effect_2}}=3{{effect_1}, {effect_2} in {effect_3}}one{{effect_1}, {effect_2} in še #}two{{effect_1}, {effect_2} in še #}few{{effect_1}, {effect_2} in še #}other{{effect_1}, {effect_2} in še #}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtriraj prekinitve"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Omejite, kaj vas lahko obvesti"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nobene prekinitve niso filtrirane"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Možnosti prikaza za filtrirana obvestila"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Ko je vklopljen način »Ne moti«"</string>
@@ -3655,10 +3653,8 @@
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Več nastavitev"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Več nastavitev je na voljo v tej aplikaciji."</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Zmanjševanje glasnosti za obvestila"</string>
-    <!-- no translation found for notification_polite_main_control_title (5812529809151927149) -->
-    <skip />
-    <!-- no translation found for notification_polite_description (5497748284893832854) -->
-    <skip />
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Uporaba utišanja obvestil"</string>
+    <string name="notification_polite_description" msgid="5497748284893832854">"Ko v kratkem času prejmete veliko obvestil, naprava zmanjša glasnost in minimira opozorila za največ dve minuti. To ne vpliva na klice, alarme in prednostne pogovore. \n\nObvestila, ki jih prejmete med utišanjem, si lahko ogledate tako, da z vrha zaslona povlečete navzdol."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Uporaba za delovne profile"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Uporabi za aplikacije v delovnem profilu"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Storitve za pomoč za VR"</string>
@@ -3761,6 +3757,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Pogovori"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Vsi pogovori"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"vsi pogovori"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prednostni pogovori"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prednostni pogovori"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Noben"</string>
@@ -3817,8 +3814,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Preglasitev ni dovoljena za nobeno aplikacijo}=1{Preglasitev je dovoljena za aplikacijo {app_1}}=2{Preglasitev je dovoljena za aplikaciji {app_1} in {app_2}}=3{Preglasitev je dovoljena za aplikacije {app_1}, {app_2} in {app_3}}one{Preglasitev je dovoljena za aplikaciji {app_1} in {app_2} ter še # aplikacijo}two{Preglasitev je dovoljena za aplikaciji {app_1} in {app_2} ter še # aplikaciji}few{Preglasitev je dovoljena za aplikaciji {app_1} in {app_2} ter še # aplikacije}other{Preglasitev je dovoljena za aplikaciji {app_1} in {app_2} ter še # aplikacij}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (delo)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Izračunavanje …"</string>
-    <!-- no translation found for zen_mode_plus_n_items (6136713354369243421) -->
-    <skip />
+    <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Aplikacijam dovoli preglasitev"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikacije, ki lahko preglasijo"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Izberite več aplikacij"</string>
@@ -3836,8 +3832,7 @@
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Nič ne sme preglasiti"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Nihče ne sme preglasiti"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Nekatere osebe lahko preglasijo"</string>
-    <!-- no translation found for zen_mode_people_repeat_callers (4499084111069828761) -->
-    <skip />
+    <string name="zen_mode_people_repeat_callers" msgid="4499084111069828761">"Klicatelji, ki večkrat kličejo, lahko preglasijo"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Vsakdo lahko preglasi"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Klicatelji, ki večkrat kličejo"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Dovoli večkratne klicatelje"</string>
@@ -3858,9 +3853,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Sprememba na samo alarme do <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Sprememba na vedno prekini"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Urejanje načina"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Dodajanje načina"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Ustvarjanje načina"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Način po meri"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Ime načina"</string>
+    <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Dogodki na koledarju"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina za spanje"</string>
+    <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Med vožnjo"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Nastavitve aplikacij"</string>
+    <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informacije in nastavitve v aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Upravlja <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Želite onemogočiti <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Če je ta način onemogočen, se ne bo nikoli vklopil"</string>
+    <string name="zen_mode_action_disable" msgid="3552921561331044881">"Onemogoči"</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Želite omogočiti <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Ta način se lahko samodejno vklopi, če je tako določeno v nastavitvah"</string>
+    <string name="zen_mode_action_enable" msgid="1161480633223176531">"Omogoči"</string>
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Nastavite način, ki sledi rednemu urniku"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Nastavite način za sinhroniziranje dogodkov na koledarju in odzivov na povabila"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Pripravite vse potrebno za umiritev pred spanjem. Nastavite alarme, zatemnite zaslon in blokirajte obvestila."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Dajte prednost varnosti na cesti za zbrano vožnjo brez motenj"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blokirajte motnje ali prekinitve iz naprave za večjo zbranost"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Odstranite vse motnje za tiho okolje"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Individualno prilagodite izkušnje in nastavitve v napravi za različne uporabnike"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Poskrbite za čim manj prekinitev tako, da boste dosegljivi le za pomembne osebe in aplikacije"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Opozorilo"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Zapri"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Povratne informacije o tej napravi"</string>
@@ -4847,9 +4862,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Baterija"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Podokno nastavitev"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Omogoči okna svobodne oblike"</string>
-    <string name="enable_desktop_mode_summary" msgid="7606643229185242771">"Omogoči podporo za okna svobodne oblike."</string>
-    <string name="force_desktop_mode" msgid="8292039809783522466">"Omogoči okna svobodne oblike na drugem zaslonu"</string>
-    <string name="force_desktop_mode_summary" msgid="6534513232678335875">"Omogoči okna svobodne oblike samo na sekundarnem zaslonu."</string>
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Omogoči okna proste oblike na sekundarnem zaslonu"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Omogoči okna nespremenljive velikosti v načinu z več okni"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Omogoča uporabo aplikacij brez možnosti spreminjanja velikosti v načinu z več okni."</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Preglasi vsiljenje temnega načina"</string>
@@ -5026,7 +5039,6 @@
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"prenos podatkov v mobilnem omrežju"</string>
     <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Za izboljšano izkušnjo pri uporabi naprave lahko aplikacije in storitve kadar koli iščejo omrežja Wi‑Fi, tudi ko je Wi‑Fi izklopljen. To funkcijo lahko na primer uporabite, če želite izboljšati funkcije in storitve, ki pri delovanju uporabljajo lokacijo. To lahko spremenite v nastavitvah iskanja omrežij Wi-Fi."</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"Spremeni"</string>
-    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Povezano"</string>
     <string name="mobile_data_temp_connection_active" msgid="3430470299756236413">"Začasno vzpostavljena povezava"</string>
     <string name="mobile_data_temp_using" msgid="5211002380149434155">"Začasna uporaba storitve <xliff:g id="SUBNAME">%1$s</xliff:g>"</string>
@@ -5058,7 +5070,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Uporabi pripenjanje aplikacije"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Uporabi možnosti za razvijalce"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Uporabi storitev tiskanja"</string>
-    <string name="multiple_users_main_switch_title" msgid="9158796544835843201">"Dovoli preklop uporabnikov"</string>
+    <string name="multiple_users_main_switch_title" msgid="9158796544835843201">"Dovoli preklop med uporabniki"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"dovoli, več, uporabnik, dovoljenje"</string>
     <string name="multiple_users_title_keywords" msgid="2395593167746225172">"več, uporabniki, profili, osebe, računi, preklopi, veliko"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Uporabi brezžično odpravljanje napak"</string>
@@ -5091,7 +5103,7 @@
     <string name="all_apps" msgid="3054120149509114789">"Vse aplikacije"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Ne dovoli"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"Izjemno širok pas (UWB)"</string>
-    <string name="uwb_settings_summary" msgid="3074271396764672268">"Pomaga določiti relativni položaj naprav v bližini, ki imajo UWB."</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"Pomaga določiti relativni položaj naprav v bližini, ki imajo UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Če želite uporabljati UWB, izklopite način za letalo."</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Na trenutni lokaciji UWB ni na voljo."</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
@@ -5172,9 +5184,9 @@
     <string name="dream_setup_description" msgid="7508547154038580296">"Izberite, kaj bo prikazano na zaslonu, ko je tablični računalnik priklopljen na nosilec. Naprava bo med uporabo ohranjevalnika zaslona morda porabljala več energije."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Prilagodi"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Prilagajanje ohranjevalnika zaslona <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="reboot_dialog_enable_freeform_support" msgid="5526979569538289810">"Če želite omogočiti podporo za okna svobodne oblike starejše različice, morate znova zagnati napravo."</string>
-    <string name="reboot_dialog_override_desktop_mode" msgid="1557714416232280288">"Če želite spremeniti podporo za okna svobodne oblike, morate znova zagnati napravo."</string>
-    <string name="reboot_dialog_force_desktop_mode" msgid="3647484086248450029">"Če želite vsiliti okna svobodne oblike na sekundarnih zaslonih, morate znova zagnati napravo."</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Če želite omogočiti podporo za okna proste oblike, morate znova zagnati napravo."</string>
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Če želite spremeniti razpoložljivost oken proste oblike, morate znova zagnati napravo."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Če želite omogočiti okna proste oblike na sekundarnem zaslonu, morate znova zagnati napravo."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Znova zaženi"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Znova zaženi pozneje"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Prostorski zvok"</string>
@@ -5271,7 +5283,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Rožnata"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Vijolična"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Končano"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Shrani"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Prekliči"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Privzet"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Srednji"</string>
@@ -5405,5 +5417,6 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Poslušaj pretočno predvajanje"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Optično preberite kodo QR pretočnega predvajanja zvoka, če želite poslušati z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Gesla ni mogoče urejati med deljenjem. Če želite spremeniti geslo, najprej izklopite deljenje zvoka."</string>
+    <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Optični bralnik kod QR"</string>
     <string name="homepage_search" msgid="6759334912284663559">"Iskanje po nastavitvah"</string>
 </resources>
