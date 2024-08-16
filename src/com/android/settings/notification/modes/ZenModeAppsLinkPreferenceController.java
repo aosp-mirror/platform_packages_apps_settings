@@ -20,7 +20,10 @@ import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.app.Application;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -48,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * Preference with a link and summary about what apps can break through the mode
@@ -64,24 +68,26 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
     private ZenMode mZenMode;
     private CircularIconsPreference mPreference;
     private final Fragment mHost;
+    private final Function<ApplicationInfo, Drawable> mAppIconRetriever;
 
     ZenModeAppsLinkPreferenceController(Context context, String key, Fragment host,
             ZenModesBackend backend, ZenHelperBackend helperBackend) {
         this(context, key, host,
                 ApplicationsState.getInstance((Application) context.getApplicationContext()),
-                backend, helperBackend);
+                backend, helperBackend, appInfo -> Utils.getBadgedIcon(context, appInfo));
     }
 
     @VisibleForTesting
     ZenModeAppsLinkPreferenceController(Context context, String key, Fragment host,
             ApplicationsState applicationsState, ZenModesBackend backend,
-            ZenHelperBackend helperBackend) {
+            ZenHelperBackend helperBackend, Function<ApplicationInfo, Drawable> appIconRetriever) {
         super(context, key, backend);
         mSummaryHelper = new ZenModeSummaryHelper(mContext, helperBackend);
         mHelperBackend = helperBackend;
         mApplicationsState = applicationsState;
         mUserManager = context.getSystemService(UserManager.class);
         mHost = host;
+        mAppIconRetriever = appIconRetriever;
     }
 
     @Override
@@ -93,10 +99,9 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
-        // TODO(b/332937635): Update metrics category
         preference.setIntent(
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModeAppsFragment.class,
-                        zenMode.getId(), 0).toIntent());
+                        zenMode.getId(), SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
         preference.setEnabled(zenMode.isEnabled());
 
         mZenMode = zenMode;
@@ -105,13 +110,18 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
         if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_NONE) {
             mPreference.setSummary(R.string.zen_mode_apps_none_apps);
             mPreference.displayIcons(CircularIconSet.EMPTY);
+            if (mAppSession != null) {
+                mAppSession.deactivateSession();
+            }
         } else {
             if (TextUtils.isEmpty(mPreference.getSummary())) {
                 mPreference.setSummary(R.string.zen_mode_apps_calculating);
             }
-            if (mApplicationsState != null && mHost != null) {
+            if (mAppSession == null) {
                 mAppSession = mApplicationsState.newSession(mAppSessionCallbacks,
                         mHost.getLifecycle());
+            } else {
+                mAppSession.activateSession();
             }
             triggerUpdateAppsBypassingDnd();
         }
@@ -133,12 +143,16 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
     }
 
     private void displayAppsBypassingDnd(List<AppEntry> allApps) {
+        if (mZenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_NONE) {
+            // Can get this callback when resuming, if we had CHANNEL_POLICY_PRIORITY and just
+            // switched to CHANNEL_POLICY_NONE.
+            return;
+        }
+
         ImmutableList<AppEntry> apps = getAppsBypassingDndSortedByName(allApps);
-
         mPreference.setSummary(mSummaryHelper.getAppsSummary(mZenMode, apps));
-
         mPreference.displayIcons(new CircularIconSet<>(apps,
-                app -> Utils.getBadgedIcon(mContext, app.info)),
+                app -> mAppIconRetriever.apply(app.info)),
                 APP_ENTRY_EQUIVALENCE);
     }
 

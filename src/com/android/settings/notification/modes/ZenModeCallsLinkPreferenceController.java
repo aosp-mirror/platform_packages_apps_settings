@@ -18,6 +18,7 @@ package com.android.settings.notification.modes;
 
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -41,10 +42,9 @@ class ZenModeCallsLinkPreferenceController extends AbstractZenModePreferenceCont
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
-        // TODO(b/332937635): Update metrics category
         preference.setIntent(new SubSettingLauncher(mContext)
                 .setDestination(ZenModeCallsFragment.class.getName())
-                .setSourceMetricsCategory(0)
+                .setSourceMetricsCategory(SettingsEnums.DND_PEOPLE)
                 .setArguments(bundle)
                 .toIntent());
         preference.setSummary(mSummaryHelper.getCallsSettingSummary(zenMode));
