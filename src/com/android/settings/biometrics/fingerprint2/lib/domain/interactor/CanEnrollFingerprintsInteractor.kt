@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.domain.interactor
+package com.android.settings.biometrics.fingerprint2.lib.domain.interactor
 
-import android.view.MotionEvent
 import kotlinx.coroutines.flow.Flow
 
-interface TouchEventInteractor {
-
-  /** A flow simulating user touches. */
-  val touchEvent: Flow<MotionEvent>
+/** Returns whether or not a user can enroll a fingerprint */
+interface CanEnrollFingerprintsInteractor {
+  /** Returns true if a user can enroll a fingerprint false otherwise. */
+  val canEnrollFingerprints: Flow<Boolean>
+  /** Indicates the maximum fingerprints enrollable for a given user */
+  fun maxFingerprintsEnrollable(): Int
 }

@@ -96,8 +96,8 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
   }
 
   /**
-   * View models below this line are not used by this class but must be initialized
-   * in the activity view model store to be used by other view models.
+   * View models below this line are not used by this class but must be initialized in the activity
+   * view model store to be used by other view models.
    */
   private val fingerprintEnrollViewModel: FingerprintEnrollViewModel by viewModels {
     FingerprintEnrollViewModel.Factory

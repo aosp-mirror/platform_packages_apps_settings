@@ -18,7 +18,9 @@ package com.android.settings;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.ContentObserver;
+import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.provider.Settings;
 import android.util.FeatureFlagUtils;
@@ -74,9 +76,6 @@ public class SettingsApplication extends Application {
 
         // Set Spa environment.
         setSpaEnvironment();
-        if (Flags.fingerprintV2Enrollment()) {
-            mBiometricsEnvironment = new BiometricsEnvironment(this);
-        }
 
         if (ActivityEmbeddingUtils.isSettingsSplitEnabled(this)
                 && FeatureFlagUtils.isEnabled(this,
@@ -120,7 +119,20 @@ public class SettingsApplication extends Application {
 
     @Nullable
     public BiometricsEnvironment getBiometricEnvironment() {
-        return mBiometricsEnvironment;
+        if (Flags.fingerprintV2Enrollment()) {
+            if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+                final FingerprintManager fpm = getSystemService(FingerprintManager.class);
+                if (mBiometricsEnvironment == null) {
+                    mBiometricsEnvironment = new BiometricsEnvironment(this, fpm);
+                }
+                return  mBiometricsEnvironment;
+
+            } else {
+                return null;
+            }
+
+        }
+        return null;
     }
 
     @Override

@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.domain.interactor
+package com.android.settings.biometrics.fingerprint2.lib.domain.interactor
 
-import android.view.MotionEvent
+import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import kotlinx.coroutines.flow.Flow
 
-interface TouchEventInteractor {
-
-  /** A flow simulating user touches. */
-  val touchEvent: Flow<MotionEvent>
+/** Interactor that has various information about a fingerprint sensor */
+interface SensorInteractor {
+  /** Retrieves the sensor properties of the device */
+  val sensorPropertiesInternal: Flow<FingerprintSensor?>
+  /** Indicates if the device supports side fps */
+  val hasSideFps: Flow<Boolean>
 }

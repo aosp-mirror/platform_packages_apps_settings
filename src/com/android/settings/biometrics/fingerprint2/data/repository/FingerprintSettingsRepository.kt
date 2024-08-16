@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.domain.interactor
+package com.android.settings.biometrics.fingerprint2.data.repository
 
-import android.view.MotionEvent
-import kotlinx.coroutines.flow.Flow
+/**
+ * Repository for storing metadata about fingerprint enrollments.
+ */
+interface FingerprintSettingsRepository {
+    /**
+     * Indicates the maximum number of fingerprints enrollable
+     */
+    fun maxEnrollableFingerprints(): Int
+}
 
-interface TouchEventInteractor {
-
-  /** A flow simulating user touches. */
-  val touchEvent: Flow<MotionEvent>
+class FingerprintSettingsRepositoryImpl(private val maxFingerprintsEnrollable: Int) :
+    FingerprintSettingsRepository {
+    override fun maxEnrollableFingerprints() = maxFingerprintsEnrollable
 }

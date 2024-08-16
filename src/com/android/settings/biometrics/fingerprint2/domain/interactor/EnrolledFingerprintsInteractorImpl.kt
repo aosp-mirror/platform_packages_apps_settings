@@ -16,11 +16,22 @@
 
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
-import android.view.MotionEvent
+import android.hardware.fingerprint.FingerprintManager
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrolledFingerprintsInteractor
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-interface TouchEventInteractor {
-
-  /** A flow simulating user touches. */
-  val touchEvent: Flow<MotionEvent>
+class EnrolledFingerprintsInteractorImpl(
+  private val fingerprintManager: FingerprintManager,
+  userId: Int,
+) : EnrolledFingerprintsInteractor {
+  override val enrolledFingerprints: Flow<List<FingerprintData>?> = flow {
+    emit(
+      fingerprintManager
+        .getEnrolledFingerprints(userId)
+        ?.map { (FingerprintData(it.name.toString(), it.biometricId, it.deviceId)) }
+        ?.toList()
+    )
+  }
 }

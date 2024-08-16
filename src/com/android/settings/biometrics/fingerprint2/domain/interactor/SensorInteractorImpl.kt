@@ -16,11 +16,12 @@
 
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
-import android.view.MotionEvent
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.SensorInteractor
 import kotlinx.coroutines.flow.Flow
 
-interface TouchEventInteractor {
-
-  /** A flow simulating user touches. */
-  val touchEvent: Flow<MotionEvent>
+class SensorInteractorImpl(private val repo: FingerprintSensorRepository) :
+  SensorInteractor {
+  override val sensorPropertiesInternal = repo.fingerprintSensor
+  override val hasSideFps: Flow<Boolean> = repo.hasSideFps
 }
