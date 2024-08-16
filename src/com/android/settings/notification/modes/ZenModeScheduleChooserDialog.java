@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -70,8 +71,7 @@ public class ZenModeScheduleChooserDialog extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - Update metrics category
-        return 0;
+        return SettingsEnums.ZEN_SCHEDULE_CHOOSER_DIALOG;
     }
 
     static void show(DashboardFragment parent, OnScheduleOptionListener optionListener) {

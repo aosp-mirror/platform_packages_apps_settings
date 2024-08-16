@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.modes;
 
+import android.app.settings.SettingsEnums;
+
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
@@ -50,15 +52,15 @@ public class ZenModeNewCustomFragment extends ZenModeEditNameIconFragmentBase {
         if (created != null) {
             // Open the mode view fragment and close the "add mode" fragment, so exiting the mode
             // view goes back to previous screen (which should be the modes list).
-            ZenSubSettingLauncher.forMode(requireContext(), created.getId()).launch();
+            ZenSubSettingLauncher.forModeFragment(requireContext(), ZenModeFragment.class,
+                    created.getId(), getMetricsCategory()).launch();
             finish();
         }
     }
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - make this the correct metrics category
-        return 0;
+        return SettingsEnums.ZEN_MODE_ADD_NEW;
     }
 
     @Override
