@@ -21,9 +21,13 @@ import static android.app.AutomaticZenRule.TYPE_DRIVING;
 import static android.app.AutomaticZenRule.TYPE_IMMERSIVE;
 import static android.app.AutomaticZenRule.TYPE_MANAGED;
 import static android.app.AutomaticZenRule.TYPE_OTHER;
+import static android.app.AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
+import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
 import static android.app.AutomaticZenRule.TYPE_THEATER;
+import static android.app.AutomaticZenRule.TYPE_UNKNOWN;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +42,7 @@ import android.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 
@@ -123,6 +128,11 @@ public class SetupInterstitialActivity extends FragmentActivity {
             title.setText(mode.getName());
         }
 
+        TextView subtitle = findViewById(R.id.mode_name_subtitle);
+        if (subtitle != null) {
+            subtitle.setText(getSubtitle(mode));
+        }
+
         ImageView img = findViewById(R.id.image);
         if (img != null) {
             setImage(img, mode);
@@ -134,6 +144,27 @@ public class SetupInterstitialActivity extends FragmentActivity {
         }
     }
 
+    @StringRes
+    @SuppressLint("SwitchIntDef")
+    private static int getSubtitle(ZenMode mode) {
+        if (mode.isSystemOwned()) {
+            return switch (mode.getType()) {
+                case TYPE_SCHEDULE_TIME -> R.string.zen_mode_inspiration_schedule_time;
+                case TYPE_SCHEDULE_CALENDAR -> R.string.zen_mode_inspiration_schedule_calendar;
+                default -> R.string.zen_mode_inspiration_generic; // Custom Manual
+            };
+        } else {
+            return switch (mode.getType()) {
+                case TYPE_BEDTIME -> R.string.zen_mode_inspiration_bedtime;
+                case TYPE_DRIVING -> R.string.zen_mode_inspiration_driving;
+                case TYPE_IMMERSIVE -> R.string.zen_mode_inspiration_immersive;
+                case TYPE_THEATER -> R.string.zen_mode_inspiration_theater;
+                case TYPE_MANAGED -> R.string.zen_mode_inspiration_managed;
+                default -> R.string.zen_mode_inspiration_generic; // Including OTHER, UNKNOWN.
+            };
+        }
+    }
+
     private void setImage(@NonNull ImageView img, @NonNull ZenMode mode) {
         int drawableRes = switch (mode.getType()) {
             case TYPE_BEDTIME -> R.drawable.modes_interstitial_bedtime;
@@ -141,7 +172,9 @@ public class SetupInterstitialActivity extends FragmentActivity {
             case TYPE_IMMERSIVE -> R.drawable.modes_interstitial_immersive;
             case TYPE_THEATER -> R.drawable.modes_interstitial_theater;
             case TYPE_MANAGED -> R.drawable.modes_interstitial_managed;
-            case TYPE_OTHER -> R.drawable.modes_interstitial_other;
+            case TYPE_OTHER, TYPE_SCHEDULE_CALENDAR, TYPE_SCHEDULE_TIME ->
+                    R.drawable.modes_interstitial_other;
+            case TYPE_UNKNOWN -> R.drawable.modes_interstitial_unknown;
             default -> R.drawable.modes_interstitial_unknown;
         };
 
