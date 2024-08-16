@@ -40,7 +40,6 @@ import com.android.settings.localepicker.LocaleFeatureProvider
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
-import com.android.settings.overlay.SurveyFeatureProvider
 import com.android.settings.panel.PanelFeatureProvider
 import com.android.settings.privatespace.PrivateSpaceLoginFeatureProvider
 import com.android.settings.search.SearchFeatureProvider
@@ -98,9 +97,7 @@ class FakeFeatureFactory : FeatureFactory() {
     override val searchFeatureProvider: SearchFeatureProvider
         get() = TODO("Not yet implemented")
 
-    override fun getSurveyFeatureProvider(context: Context): SurveyFeatureProvider? {
-        TODO("Not yet implemented")
-    }
+    override fun getSurveyFeatureProvider(context: Context) = null
 
     override val securityFeatureProvider: SecurityFeatureProvider
         get() = TODO("Not yet implemented")

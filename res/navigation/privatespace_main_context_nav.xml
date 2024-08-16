@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_set_lock_fragment"
             app:destination="@id/ps_profile_lock_fragment"/>
+        <action
+            android:id="@+id/action_create_profile_error_restrict"
+            app:destination="@id/ps_profile_error_restricted_fragment"/>
     </fragment>
     <fragment android:id="@+id/ps_profile_error_fragment"
               android:name="com.android.settings.privatespace.PrivateProfileCreationError"
@@ -67,6 +70,9 @@
             android:id="@+id/action_lock_success_fragment"
             app:destination="@id/ps_pre_finish_delay_fragment"/>
     </fragment>
+    <fragment android:id="@+id/ps_profile_error_restricted_fragment"
+              android:name="com.android.settings.privatespace.PrivateProfileCreationRestrictedError"
+              android:label="fragment_ps_error_exit"/>
     <action android:id="@+id/action_pre_finish_delay_fragment"
             app:destination="@id/ps_pre_finish_delay_fragment"/>
     <action android:id="@+id/action_advance_login_error"

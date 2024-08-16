@@ -43,6 +43,8 @@ import com.android.settings.fuelgauge.batteryusage.WarningBannerInfo;
 import com.android.settings.fuelgauge.batteryusage.WarningItemInfo;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventDao;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
@@ -184,6 +186,15 @@ public class BatteryTestUtils {
         }
     }
 
+    /** Inserts a fake data into the database for testing. */
+    public static void insertDataToBatteryEventTable(
+            Context context, long timestamp, int batteryEventType, int batteryLevel) {
+        final BatteryEventEntity entity =
+                new BatteryEventEntity(timestamp, batteryEventType, batteryLevel);
+        BatteryEventDao dao = BatteryStateDatabase.getInstance(context).batteryEventDao();
+        dao.insert(entity);
+    }
+
     /** Gets customized battery changed intent. */
     public static Intent getCustomBatteryIntent(int plugged, int level, int scale, int status) {
         Intent intent = new Intent();
@@ -253,18 +264,28 @@ public class BatteryTestUtils {
 
     /** Create a power anomaly event proto of screen timeout. */
     public static PowerAnomalyEvent createScreenTimeoutAnomalyEvent() {
+        return createScreenTimeoutAnomalyEvent(false);
+    }
+
+    /** Create a power anomaly event proto of screen timeout. */
+    public static PowerAnomalyEvent createScreenTimeoutAnomalyEvent(boolean changeSettings) {
+        WarningBannerInfo.Builder warningBannerInfoBuilder =
+                WarningBannerInfo.newBuilder()
+                        .setMainButtonDestination(ScreenTimeoutSettings.class.getName())
+                        .setMainButtonSourceMetricsCategory(SettingsEnums.SCREEN_TIMEOUT)
+                        .setMainButtonSourceHighlightKey("60000");
+        if (changeSettings) {
+            warningBannerInfoBuilder
+                    .setMainButtonConfigSettingsName(Settings.System.SCREEN_OFF_TIMEOUT)
+                    .setMainButtonConfigSettingsValue(60000);
+        }
         return PowerAnomalyEvent.newBuilder()
                 .setEventId("ScreenTimeoutAnomaly")
                 .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
                 .setKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT)
                 .setDismissRecordKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT.name())
                 .setScore(1.1f)
-                .setWarningBannerInfo(
-                        WarningBannerInfo.newBuilder()
-                                .setMainButtonDestination(ScreenTimeoutSettings.class.getName())
-                                .setMainButtonSourceMetricsCategory(SettingsEnums.SCREEN_TIMEOUT)
-                                .setMainButtonSourceHighlightKey("60000")
-                                .build())
+                .setWarningBannerInfo(warningBannerInfoBuilder.build())
                 .build();
     }
 

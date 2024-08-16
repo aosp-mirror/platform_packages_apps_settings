@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -32,8 +34,13 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -307,5 +314,35 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
     @VisibleForTesting
     public static void setCanShowWifiHotspotCached(Boolean cached) {
         sCanShowWifiHotspotCached = cached;
+    }
+
+    /**
+     * Enable new edge to edge feature.
+     *
+     * @param activity the Activity need to setup the edge to edge feature.
+     */
+    public static void setupEdgeToEdge(@NonNull Activity activity) {
+        final ActionBar actionBar = activity.getActionBar();
+        if (actionBar == null) {
+            return;
+        }
+
+        final TypedValue typedValue = new TypedValue();
+        if (activity.getTheme().resolveAttribute(
+                com.android.internal.R.attr.actionBarSize, typedValue, true)) {
+            ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
+                    (v, windowInsets) -> {
+                        Insets insets = windowInsets.getInsets(
+                                WindowInsetsCompat.Type.systemBars() |
+                                WindowInsetsCompat.Type.ime());
+
+                        // Apply the insets paddings to the view.
+                        v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+
+                        // Return CONSUMED if you don't want the window insets to keep being
+                        // passed down to descendant views.
+                        return WindowInsetsCompat.CONSUMED;
+                    });
+        }
     }
 }

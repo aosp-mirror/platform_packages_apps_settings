@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ import java.util.List;
 public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "CallsAndAlarmsDialog";
     private static final String BUNDLE_KEY_DEVICE_ITEMS = "bundle_key_device_items";
+    private static final String BUNDLE_KEY_CHECKED_ITEM_INDEX = "bundle_key_checked_index";
 
     // The host creates an instance of this dialog fragment must implement this interface to receive
     // event callbacks.
@@ -65,8 +67,9 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
     public static void show(
             @NonNull Fragment host,
             @NonNull List<AudioSharingDeviceItem> deviceItems,
+            int checkedItemIndex,
             @NonNull DialogEventListener listener) {
-        if (!AudioSharingUtils.isFeatureEnabled()) return;
+        if (!BluetoothUtils.isAudioSharingEnabled()) return;
         final FragmentManager manager;
         try {
             manager = host.getChildFragmentManager();
@@ -78,6 +81,7 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
         if (manager.findFragmentByTag(TAG) == null) {
             final Bundle bundle = new Bundle();
             bundle.putParcelableList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
+            bundle.putInt(BUNDLE_KEY_CHECKED_ITEM_INDEX, checkedItemIndex);
             final AudioSharingCallAudioDialogFragment dialog =
                     new AudioSharingCallAudioDialogFragment();
             dialog.setArguments(bundle);
@@ -91,6 +95,7 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
         Bundle arguments = requireArguments();
         List<AudioSharingDeviceItem> deviceItems =
                 arguments.getParcelable(BUNDLE_KEY_DEVICE_ITEMS, List.class);
+        int checkedItemIndex = arguments.getInt(BUNDLE_KEY_CHECKED_ITEM_INDEX, -1);
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.audio_sharing_call_audio_title);
@@ -98,18 +103,11 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
             Log.d(TAG, "Create dialog error: null deviceItems");
             return builder.create();
         }
-        int checkedItem = -1;
-        for (AudioSharingDeviceItem item : deviceItems) {
-            int fallbackActiveGroupId = AudioSharingUtils.getFallbackActiveGroupId(getContext());
-            if (item.getGroupId() == fallbackActiveGroupId) {
-                checkedItem = deviceItems.indexOf(item);
-            }
-        }
         String[] choices =
                 deviceItems.stream().map(AudioSharingDeviceItem::getName).toArray(String[]::new);
         builder.setSingleChoiceItems(
                 choices,
-                checkedItem,
+                checkedItemIndex,
                 (dialog, which) -> {
                     if (sListener != null) {
                         sListener.onItemClick(deviceItems.get(which));

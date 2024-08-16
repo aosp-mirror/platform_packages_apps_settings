@@ -491,10 +491,16 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ? data.getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD)
                     : null;
                 updatePreferencesOrFinish(false /* isRecreatingActivity */);
-                if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getContext(),
-                        mBiometricsAuthSuccessful, mWaitingForConfirmation)) {
-                    mWaitingForConfirmation = true;
-                    Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRIC_AUTH_REQUEST);
+                final Utils.BiometricStatus biometricAuthStatus =
+                        Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
+                                false /* biometricsAuthenticationRequested */,
+                                mUserId);
+                if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                    Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                            BIOMETRIC_AUTH_REQUEST,
+                            mUserId, true /* hideBackground */);
+                } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                    finish();
                 }
             } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
                 if (resultCode == Activity.RESULT_OK) {
@@ -777,6 +783,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                         entries.removePreference(pref);
                     } else if (!enabled) {
                         pref.setEnabled(false);
+                        pref.setSummary(
+                                com.android.settingslib.widget
+                                        .restricted.R.string.disabled_by_admin);
                     }
                 }
             }

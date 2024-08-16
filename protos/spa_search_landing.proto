@@ -1,0 +1,34 @@
+syntax = "proto2";
+
+package com.android.settings.spa;
+
+message SpaSearchLandingKey {
+  oneof page {
+    SpaSearchLandingSpaPage spa_page = 1;
+    SpaSearchLandingFragment fragment = 2;
+  }
+}
+
+message SpaSearchLandingSpaPage {
+  /** The destination of SPA page. */
+  optional string destination = 1;
+}
+
+message SpaSearchLandingFragment {
+  /** The fragment class name. */
+  optional string fragment_name = 1;
+
+  /** The key of the preference to highlight the item. */
+  optional string preference_key = 2;
+
+  /** The arguments passed to the page. */
+  map<string, BundleValue> arguments = 3;
+}
+
+/** A value in an Android Bundle. */
+message BundleValue {
+  oneof value {
+    /** A 32-bit signed integer value. */
+    int32 int_value = 1;
+  }
+}

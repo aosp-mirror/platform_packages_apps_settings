@@ -127,9 +127,9 @@ public class CombinedBiometricProfileSettingsTest {
         mFragment = spy(new TestCombinedBiometricProfileSettings(mContext));
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mBiometricManager).when(mActivity).getSystemService(BiometricManager.class);
-        when(mBiometricManager.canAuthenticate(
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
-                .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE);
 
         ReflectionHelpers.setField(mFragment, "mDashboardFeatureProvider",
                 FakeFeatureFactory.setupForTest().dashboardFeatureProvider);
@@ -181,19 +181,21 @@ public class CombinedBiometricProfileSettingsTest {
     public void testLaunchBiometricPrompt_onCreateFragment() {
         ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
         doNothing().when(mFragment).startActivityForResult(any(), anyInt());
-        when(mBiometricManager.canAuthenticate(
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
 
         mFragment.onAttach(mContext);
         mFragment.onCreate(null);
+        mFragment.onActivityResult(CONFIRM_REQUEST, RESULT_FINISHED,
+                new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L));
 
         verify(mFragment).startActivityForResult(intentArgumentCaptor.capture(),
                 eq(BiometricsSettingsBase.BIOMETRIC_AUTH_REQUEST));
 
         Intent intent = intentArgumentCaptor.getValue();
         assertThat(intent.getComponent().getClassName()).isEqualTo(
-                ConfirmDeviceCredentialActivity.class.getName());
+                ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
     }
 
     @Test

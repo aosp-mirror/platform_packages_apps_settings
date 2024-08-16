@@ -197,6 +197,9 @@ open class NetworkCellularGroupProvider : SettingsPageProvider, SearchablePage {
         // Do nothing
     }
 
+    override fun getPageTitleForSearch(context: Context): String =
+        context.getString(R.string.provider_network_settings_title)
+
     override fun getSearchableTitles(context: Context): List<String> {
         if (!isPageSearchable(context)) return emptyList()
         return buildList {

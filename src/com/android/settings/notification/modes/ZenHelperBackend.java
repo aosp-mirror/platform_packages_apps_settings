@@ -21,15 +21,22 @@ import android.app.INotificationManager;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.ServiceManager;
 import android.provider.ContactsContract;
 import android.service.notification.ConversationChannelWrapper;
 import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
-import com.android.settings.R;
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,46 +81,108 @@ class ZenHelperBackend {
         }
     }
 
+    ImmutableList<ConversationChannelWrapper> getAllConversations() {
+        return getConversations(false);
+    }
+
+    ImmutableList<ConversationChannelWrapper> getImportantConversations() {
+        return getConversations(true);
+    }
+
     @SuppressWarnings("unchecked")
-    ParceledListSlice<ConversationChannelWrapper> getConversations(boolean onlyImportant) {
+    private ImmutableList<ConversationChannelWrapper> getConversations(boolean onlyImportant) {
         try {
-            return mInm.getConversations(onlyImportant);
+            ImmutableList.Builder<ConversationChannelWrapper> list = new ImmutableList.Builder<>();
+            ParceledListSlice<ConversationChannelWrapper> parceledList = mInm.getConversations(
+                    onlyImportant);
+            if (parceledList != null) {
+                for (ConversationChannelWrapper conversation : parceledList.getList()) {
+                    if (!conversation.getNotificationChannel().isDemoted()) {
+                        list.add(conversation);
+                    }
+                }
+            }
+            return list.build();
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return ParceledListSlice.emptyList();
+            return ImmutableList.of();
         }
     }
 
-    List<String> getStarredContacts() {
+    record Contact(long id, @Nullable String displayName, @Nullable Uri photoUri) { }
+
+    ImmutableList<Contact> getAllContacts() {
+        try (Cursor cursor = queryAllContactsData()) {
+            return getContactsFromCursor(cursor);
+        }
+    }
+
+    ImmutableList<Contact> getStarredContacts() {
         try (Cursor cursor = queryStarredContactsData()) {
-            return getStarredContacts(cursor);
+            return getContactsFromCursor(cursor);
         }
     }
 
-    @VisibleForTesting
-    List<String> getStarredContacts(Cursor cursor) {
-        List<String> starredContacts = new ArrayList<>();
+    private ImmutableList<Contact> getContactsFromCursor(Cursor cursor) {
+        ImmutableList.Builder<Contact> list = new ImmutableList.Builder<>();
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                String contact = cursor.getString(0);
-                starredContacts.add(contact != null ? contact :
-                        mContext.getString(R.string.zen_mode_starred_contacts_empty_name));
-
+                long id = cursor.getLong(0);
+                String name = Strings.emptyToNull(cursor.getString(1));
+                String photoUriStr = cursor.getString(2);
+                Uri photoUri = !Strings.isNullOrEmpty(photoUriStr) ? Uri.parse(photoUriStr) : null;
+                list.add(new Contact(id, name, photoUri));
             } while (cursor.moveToNext());
         }
-        return starredContacts;
+        return list.build();
     }
+
+    int getAllContactsCount() {
+        try (Cursor cursor = queryAllContactsData()) {
+            return cursor != null ? cursor.getCount() : 0;
+        }
+    }
+
+    private static final String[] CONTACTS_PROJECTION = new String[] {
+            ContactsContract.Contacts._ID,
+            ContactsContract.Contacts.DISPLAY_NAME_PRIMARY,
+            ContactsContract.Contacts.PHOTO_THUMBNAIL_URI
+    };
 
     private Cursor queryStarredContactsData() {
-        return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
-                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
-                ContactsContract.Data.STARRED + "=1", null,
-                ContactsContract.Data.TIMES_CONTACTED);
+        return mContext.getContentResolver().query(
+                ContactsContract.Contacts.CONTENT_URI,
+                CONTACTS_PROJECTION,
+                /* selection= */ ContactsContract.Data.STARRED + "=1", /* selectionArgs= */ null,
+                /* sortOrder= */ ContactsContract.Contacts.DISPLAY_NAME_PRIMARY);
     }
 
-    Cursor queryAllContactsData() {
-        return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
-                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
-                null, null, null);
+    private Cursor queryAllContactsData() {
+        return mContext.getContentResolver().query(
+                ContactsContract.Contacts.CONTENT_URI,
+                CONTACTS_PROJECTION,
+                /* selection= */ null, /* selectionArgs= */ null,
+                /* sortOrder= */ ContactsContract.Contacts.DISPLAY_NAME_PRIMARY);
+    }
+
+    @NonNull
+    Drawable getContactPhoto(Contact contact) {
+        if (contact.photoUri != null) {
+            try (InputStream is = mContext.getContentResolver().openInputStream(contact.photoUri)) {
+                if (is != null) {
+                    RoundedBitmapDrawable rbd = RoundedBitmapDrawableFactory.create(
+                            mContext.getResources(), is);
+                    if (rbd != null && rbd.getBitmap() != null) {
+                        rbd.setCircular(true);
+                        return rbd;
+                    }
+                }
+            } catch (IOException e) {
+                Log.w(TAG, "Couldn't load photo for " + contact, e);
+            }
+        }
+
+        // Fall back to a monogram if no picture.
+        return IconUtil.makeContactMonogram(mContext, contact.displayName);
     }
 }

@@ -17,20 +17,21 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
-import android.telephony.AccessNetworkConstants
-import android.telephony.NetworkRegistrationInfo
-import android.telephony.ServiceState
-import android.telephony.TelephonyManager
+import android.os.PersistableBundle
+import android.telephony.*
+import android.telephony.satellite.SatelliteManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.network.telephony.scan.NetworkScanRepositoryTest
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class NetworkSelectRepositoryTest {
@@ -49,8 +50,16 @@ class NetworkSelectRepositoryTest {
         on { serviceState } doReturn mockServiceState
     }
 
+    private val mockSatelliteManager = mock<SatelliteManager> {
+        on { getSatellitePlmnsForCarrier(anyInt()) } doReturn SatellitePlmns
+    }
+
+    private var mockCarrierConfigManager = mock<CarrierConfigManager>()
+
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
         on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
+        on { getSystemService(SatelliteManager::class.java) } doReturn mockSatelliteManager
+        on { getSystemService(CarrierConfigManager::class.java) } doReturn mockCarrierConfigManager
     }
 
     private val repository = NetworkSelectRepository(context, SUB_ID)
@@ -105,6 +114,14 @@ class NetworkSelectRepositoryTest {
             on { forbiddenPlmns } doReturn arrayOf(FORBIDDEN_PLMN)
         }
 
+        val config = PersistableBundle()
+        config.putBoolean(
+            CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL,
+            false)
+        whenever(mockCarrierConfigManager.getConfigForSubId(
+            SUB_ID, CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL))
+            .thenReturn(config)
+
         val info = repository.getNetworkRegistrationInfo()
 
         assertThat(info).isEqualTo(
@@ -115,9 +132,76 @@ class NetworkSelectRepositoryTest {
         )
     }
 
+    @Test
+    fun getNetworkRegistrationInfo_filterSatellitePlmn() {
+
+        val info1 = createTestNetworkRegistrationInfo("310", "260")
+        val info2 = createTestNetworkRegistrationInfo("310", "261")
+        val satelliteInfo = createTestNetworkRegistrationInfo(satelliteMcc, satelliteMnc)
+        val registrationInfos = listOf(info1, info2, satelliteInfo)
+        val filteredRegistrationInfos = listOf(info1, info2)
+
+        mockServiceState.stub {
+            on {
+                getNetworkRegistrationInfoListForTransportType(
+                    AccessNetworkConstants.TRANSPORT_TYPE_WWAN
+                )
+            } doReturn registrationInfos
+        }
+        mockTelephonyManager.stub {
+            on { forbiddenPlmns } doReturn arrayOf(FORBIDDEN_PLMN)
+        }
+
+        // disable satellite plmn filter
+        var config = PersistableBundle()
+        config.putBoolean(
+            CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL,
+            false)
+        whenever(mockCarrierConfigManager.getConfigForSubId(
+            SUB_ID, CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL))
+            .thenReturn(config)
+
+        var infoList = repository.getNetworkRegistrationInfo()
+
+        assertThat(infoList).isEqualTo(
+            NetworkSelectRepository.NetworkRegistrationAndForbiddenInfo(
+                networkList = registrationInfos,
+                forbiddenPlmns = listOf(FORBIDDEN_PLMN),
+            )
+        )
+
+        // enable satellite plmn filter
+        config = PersistableBundle()
+        config.putBoolean(
+            CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL,
+            true)
+        whenever(mockCarrierConfigManager.getConfigForSubId(
+            SUB_ID, CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL))
+            .thenReturn(config)
+
+        infoList = repository.getNetworkRegistrationInfo()
+
+        assertThat(infoList).isEqualTo(
+            NetworkSelectRepository.NetworkRegistrationAndForbiddenInfo(
+                networkList = filteredRegistrationInfos,
+                forbiddenPlmns = listOf(FORBIDDEN_PLMN),
+            )
+        )
+    }
+
     private companion object {
         const val SUB_ID = 1
         val NetworkRegistrationInfos = listOf(NetworkRegistrationInfo.Builder().build())
         const val FORBIDDEN_PLMN = "Forbidden PLMN"
+        const val satelliteMcc = "310"
+        const val satelliteMnc = "810"
+        val SatellitePlmns = listOf(satelliteMcc + satelliteMnc)
+
+        fun createTestNetworkRegistrationInfo(mcc: String, mnc: String): NetworkRegistrationInfo {
+            val cellInfo = CellIdentityLte(0, 0, 0, 0, IntArray(2) { 0 },
+                0, mcc, mnc, "", "", emptyList(), null)
+
+            return NetworkRegistrationInfo.Builder().setCellIdentity(cellInfo).build()
+        }
     }
 }
