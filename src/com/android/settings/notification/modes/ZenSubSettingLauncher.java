@@ -18,7 +18,6 @@ package com.android.settings.notification.modes;
 
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -26,12 +25,6 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 
 class ZenSubSettingLauncher {
-
-    static SubSettingLauncher forMode(Context context, String modeId) {
-        return forModeFragment(context, ZenModeFragment.class, modeId,
-                SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION);
-    }
-
     static SubSettingLauncher forModeFragment(Context context,
             Class<? extends DashboardFragment> fragmentClass, String modeId,
             int sourceMetricsCategory) {

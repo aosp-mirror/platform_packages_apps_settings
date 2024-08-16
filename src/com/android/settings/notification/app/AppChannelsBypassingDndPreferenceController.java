@@ -226,7 +226,10 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
                         .setArguments(channelArgs)
                         .setUserHandle(UserHandle.of(mAppRow.userId))
                         .setTitleRes(com.android.settings.R.string.notification_channel_title)
-                        .setSourceMetricsCategory(SettingsEnums.DND_APPS_BYPASSING)
+                        .setSourceMetricsCategory(
+                                android.app.Flags.modesUi()
+                                    ? SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP_CHANNELS
+                                        : SettingsEnums.DND_APPS_BYPASSING)
                         .launch();
                 return true;
             });

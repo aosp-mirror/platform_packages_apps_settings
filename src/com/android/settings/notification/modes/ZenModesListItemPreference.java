@@ -15,6 +15,7 @@
  */
 package com.android.settings.notification.modes;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.widget.TextView;
 
@@ -63,7 +64,8 @@ class ZenModesListItemPreference extends RestrictedPreference {
 
     @Override
     public void onClick() {
-        ZenSubSettingLauncher.forMode(mContext, mZenMode.getId()).launch();
+        ZenSubSettingLauncher.forModeFragment(mContext, ZenModeFragment.class, mZenMode.getId(),
+                SettingsEnums.ZEN_PRIORITY_MODES_LIST).launch();
     }
 
     public void setZenMode(ZenMode zenMode) {

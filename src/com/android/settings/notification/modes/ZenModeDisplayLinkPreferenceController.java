@@ -18,6 +18,7 @@ package com.android.settings.notification.modes;
 
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -41,10 +42,9 @@ class ZenModeDisplayLinkPreferenceController extends AbstractZenModePreferenceCo
     void updateState(Preference preference, @NonNull ZenMode zenMode) {
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, zenMode.getId());
-        // TODO(b/332937635): Update metrics category
         preference.setIntent(
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModeDisplayFragment.class,
-                        zenMode.getId(), 0).toIntent());
+                        zenMode.getId(), SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
         preference.setEnabled(zenMode.isEnabled());
     }
 
