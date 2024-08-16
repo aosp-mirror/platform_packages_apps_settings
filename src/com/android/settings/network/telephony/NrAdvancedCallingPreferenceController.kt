@@ -25,6 +25,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
@@ -41,6 +43,7 @@ class NrAdvancedCallingPreferenceController @JvmOverloads constructor(
 ) : ComposePreferenceController(context, key) {
     private var subId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     private var repository: VoNrRepository? = null
+    private val searchItem = NrAdvancedCallingSearchItem(context)
 
     /** Initial this PreferenceController. */
     @JvmOverloads
@@ -50,7 +53,7 @@ class NrAdvancedCallingPreferenceController @JvmOverloads constructor(
     }
 
     override fun getAvailabilityStatus() =
-        if (repository?.isVoNrAvailable() == true) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+        if (searchItem.isAvailable(subId)) AVAILABLE else CONDITIONALLY_UNAVAILABLE
 
     @Composable
     override fun Content() {
@@ -72,5 +75,22 @@ class NrAdvancedCallingPreferenceController @JvmOverloads constructor(
                 }
             }
         })
+    }
+
+    companion object {
+        class NrAdvancedCallingSearchItem(private val context: Context) :
+            MobileNetworkSettingsSearchItem {
+
+            fun isAvailable(subId: Int): Boolean = VoNrRepository(context, subId).isVoNrAvailable()
+
+            override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
+                if (!isAvailable(subId)) return null
+                return MobileNetworkSettingsSearchResult(
+                    key = "nr_advanced_calling",
+                    title = context.getString(R.string.nr_advanced_calling_title),
+                    keywords = context.getString(R.string.keywords_nr_advanced_calling),
+                )
+            }
+        }
     }
 }

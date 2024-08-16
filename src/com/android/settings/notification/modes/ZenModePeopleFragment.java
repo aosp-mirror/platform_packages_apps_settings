@@ -35,9 +35,9 @@ public class ZenModePeopleFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
         prefControllers.add(new ZenModeCallsLinkPreferenceController(
-                context, "zen_mode_people_calls", mBackend, mHelperBackend));
+                context, "zen_mode_people_calls", mHelperBackend));
         prefControllers.add(new ZenModeMessagesLinkPreferenceController(
-                context, "zen_mode_people_messages", mBackend, mHelperBackend));
+                context, "zen_mode_people_messages", mHelperBackend));
         return prefControllers;
     }
 
@@ -48,7 +48,6 @@ public class ZenModePeopleFragment extends ZenModeFragmentBase {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - make this the correct metrics category
         return SettingsEnums.DND_PEOPLE;
     }
 }

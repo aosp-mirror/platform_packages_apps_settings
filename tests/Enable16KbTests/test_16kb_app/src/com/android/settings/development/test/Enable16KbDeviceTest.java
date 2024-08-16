@@ -68,6 +68,8 @@ public class Enable16KbDeviceTest {
             throw new RuntimeException("failed to freeze device orientation", e);
         }
 
+        mDevice.executeShellCommand("am start -a com.android.setupwizard.FOUR_CORNER_EXIT");
+        mDevice.waitForWindowUpdate(null, TIMEOUT);
         mDevice.executeShellCommand("input keyevent KEYCODE_WAKEUP");
         mDevice.executeShellCommand("wm dismiss-keyguard");
     }
@@ -150,6 +152,7 @@ public class Enable16KbDeviceTest {
 
     private void openPersistentNotification(String title) {
         mDevice.openNotification();
+        mDevice.waitForWindowUpdate(null, TIMEOUT);
         verifyTextOnScreen(title);
         mDevice.wait(Until.findObject(By.text(title)), TIMEOUT).click();
         mDevice.waitForWindowUpdate(null, TIMEOUT);

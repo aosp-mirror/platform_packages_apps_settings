@@ -40,6 +40,11 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
     public AutoTimeZonePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mTimeManager = context.getSystemService(TimeManager.class);
+        // This is a no-op implementation of UpdateTimeAndDateCallback to avoid a NPE when
+        // setTimeAndDateCallback() isn't called, e.g. for slices and other cases where the
+        // controller is instantiated outside of the context of the real Date & Time settings
+        // screen.
+        mCallback  = (c) -> {};
     }
 
     /**

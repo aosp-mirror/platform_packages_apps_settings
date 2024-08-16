@@ -389,6 +389,28 @@ public class BatteryHeaderPreferenceControllerTest {
         verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
     }
 
+    @Test
+    public void updateBatteryStatus_dockDefend_chargingOnHold() {
+        var expected = "Charging on hold";
+        mBatteryInfo.isBatteryDefender = false;
+        when(mFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(true);
+
+        mController.updateBatteryStatus(/* label= */ null, mBatteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(expected);
+    }
+
+    @Test
+    public void updateBatteryStatus_batteryDefender_chargingOnHold() {
+        var expected = "Charging on hold";
+        mBatteryInfo.isBatteryDefender = true;
+        when(mFactory.powerUsageFeatureProvider.isExtraDefend()).thenReturn(false);
+
+        mController.updateBatteryStatus(/* label= */ null, mBatteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(expected);
+    }
+
     private BatteryInfo arrangeUpdateBatteryStatusTestWithRemainingLabel(
             String remainingLabel,
             String statusLabel,

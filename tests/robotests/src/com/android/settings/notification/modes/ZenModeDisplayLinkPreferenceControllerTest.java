@@ -27,6 +27,8 @@ import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 
+import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
@@ -39,6 +41,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
+@EnableFlags(Flags.FLAG_MODES_UI)
 public final class ZenModeDisplayLinkPreferenceControllerTest {
 
     private ZenModeDisplayLinkPreferenceController mController;
@@ -61,7 +64,18 @@ public final class ZenModeDisplayLinkPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
+    public void testUpdateState_disabled() {
+        Preference preference = mock(Preference.class);
+        ZenMode zenMode = new TestModeBuilder()
+                .setEnabled(false)
+                .build();
+
+        mController.updateState(preference, zenMode);
+
+        verify(preference).setEnabled(false);
+    }
+
+    @Test
     public void testHasSummary() {
         Preference pref = mock(Preference.class);
         mController.updateZenMode(pref, TestModeBuilder.EXAMPLE);

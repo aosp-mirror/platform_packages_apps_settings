@@ -20,8 +20,6 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
@@ -40,23 +38,15 @@ import java.util.Map;
  * containing links to each individual mode. This is a central controller that populates and updates
  * all the preferences that then lead to a mode configuration page.
  */
-class ZenModesListPreferenceController extends BasePreferenceController {
+class ZenModesListPreferenceController extends BasePreferenceController
+        implements BasePreferenceController.UiBlocker {
     protected static final String KEY = "zen_modes_list";
 
-    @Nullable
-    protected Fragment mParent;
     protected ZenModesBackend mBackend;
 
-    public ZenModesListPreferenceController(Context context, @Nullable Fragment parent,
-            @NonNull ZenModesBackend backend) {
+    ZenModesListPreferenceController(Context context, @NonNull ZenModesBackend backend) {
         super(context, KEY);
-        mParent = parent;
         mBackend = backend;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY;
     }
 
     @Override
@@ -103,6 +93,8 @@ class ZenModesListPreferenceController extends BasePreferenceController {
         for (String key : originalPreferences.keySet()) {
             category.removePreferenceRecursively(key);
         }
+
+        setUiBlockerFinished(true);
     }
 
     // Provide search data for the modes, which will allow users to reach the modes page if they

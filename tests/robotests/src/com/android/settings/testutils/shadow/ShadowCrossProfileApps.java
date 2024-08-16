@@ -19,9 +19,8 @@ package com.android.settings.testutils.shadow;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.CrossProfileApps;
-import android.content.pm.ICrossProfileApps;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageInfo;
 
 import androidx.annotation.NonNull;
 
@@ -35,15 +34,7 @@ import java.util.Set;
 @Implements(CrossProfileApps.class)
 public class ShadowCrossProfileApps extends org.robolectric.shadows.ShadowCrossProfileApps {
     private static final Set<String> configurableInteractAcrossProfilePackages = new HashSet<>();
-    private Context mContext;
-    private PackageManager mPackageManager;
 
-    @Implementation
-    protected void __constructor__(Context context, ICrossProfileApps service) {
-        super.__constructor__(context, service);
-        this.mContext = context;
-        this.mPackageManager = context.getPackageManager();
-    }
     public void addCrossProfilePackage(String packageName) {
         configurableInteractAcrossProfilePackages.add(packageName);
     }
@@ -57,7 +48,9 @@ public class ShadowCrossProfileApps extends org.robolectric.shadows.ShadowCrossP
     protected boolean canUserAttemptToConfigureInteractAcrossProfiles(@NonNull String packageName) {
         PackageInfo packageInfo;
         try {
-            packageInfo = mPackageManager.getPackageInfo(packageName, /* flags= */ 0);
+            packageInfo = getContext().getPackageManager().getPackageInfo(
+                packageName,
+                /* flags= */ 0);
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }

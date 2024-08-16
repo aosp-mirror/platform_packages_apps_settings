@@ -296,7 +296,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return AudioSharingUtils.isFeatureEnabled() && mBluetoothDeviceUpdater != null
+        return BluetoothUtils.isAudioSharingEnabled() && mBluetoothDeviceUpdater != null
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
@@ -437,7 +437,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     }
 
     private boolean isMediaDevice(CachedBluetoothDevice cachedDevice) {
-        return cachedDevice.getConnectableProfiles().stream()
+        return cachedDevice.getUiAccessibleProfiles().stream()
                 .anyMatch(
                         profile ->
                                 profile instanceof A2dpProfile

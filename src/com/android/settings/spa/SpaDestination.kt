@@ -16,7 +16,7 @@
 
 package com.android.settings.spa
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import com.android.settings.activityembedding.ActivityEmbeddingUtils
 import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.tryStartMultiPaneDeepLink
@@ -27,16 +27,16 @@ data class SpaDestination(
     val destination: String,
     val highlightMenuKey: String?,
 ) {
-    fun startFromExportedActivity(activity: Activity) {
-        val intent = Intent(activity, SpaActivity::class.java)
+    fun startFromExportedActivity(context: Context) {
+        val intent = Intent(context, SpaActivity::class.java)
             .appendSpaParams(
                 destination = destination,
                 sessionName = SESSION_EXTERNAL,
             )
-        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(activity) ||
-            !activity.tryStartMultiPaneDeepLink(intent, highlightMenuKey)
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context) ||
+            !context.tryStartMultiPaneDeepLink(intent, highlightMenuKey)
         ) {
-            activity.startActivity(intent)
+            context.startActivity(intent)
         }
     }
 }

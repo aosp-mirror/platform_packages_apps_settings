@@ -24,7 +24,6 @@ import android.os.Bundle;
 import android.service.notification.ZenPolicy;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -44,7 +43,7 @@ public class ZenModeAppsPreferenceController extends
     String mModeId;
 
     public ZenModeAppsPreferenceController(@NonNull Context context,
-            @NonNull String key, @Nullable ZenModesBackend backend) {
+            @NonNull String key, @NonNull ZenModesBackend backend) {
         super(context, key, backend);
     }
 
@@ -107,10 +106,9 @@ public class ZenModeAppsPreferenceController extends
         if (mModeId != null) {
             bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, mModeId);
         }
-        // TODO(b/332937635): Update metrics category
         new SubSettingLauncher(mContext)
                 .setDestination(ZenModeSelectBypassingAppsFragment.class.getName())
-                .setSourceMetricsCategory(SettingsEnums.SETTINGS_ZEN_NOTIFICATIONS)
+                .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APPS)
                 .setArguments(bundle)
                 .launch();
     }
