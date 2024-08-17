@@ -21,6 +21,7 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+import static com.android.settings.accessibility.DaltonizerPreferenceUtil.isSecureAccessibilityDaltonizerEnabled;
 
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -145,7 +146,8 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        final boolean isEnabled = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
+        final boolean isEnabled =
+                isSecureAccessibilityDaltonizerEnabled(getContentResolver());
         if (enabled == isEnabled) {
             return;
         }
