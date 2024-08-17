@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Pozastaveno"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Neznámé"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Náhled"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR kód"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Zmenšit"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Zvětšit"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Vždy"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"V Nastavení nelze vybrat jazyk pro tuto aplikaci."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Jazyky nemusí odpovídat jazykům dostupným v aplikaci. Toto nastavení mohou podporovat jen některé aplikace."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Nastavení jazyka pro jednotlivé aplikace."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Z preferovaných jazyků použijí systém, aplikace a weby první podporovaný jazyk."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Ze seznamu preferovaných jazyků použijí zařízení, aplikace a weby první podporovaný jazyk.\n\nMnoho aplikací bude také formátovat data, čísla a jednotky na základě oblasti preferovaného jazyka. Pokud chcete oblast změnit, přidejte jazyk a potom zvolte preferovanou oblast."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Pokud chcete zvolit jazyk jednotlivých aplikací, přejděte do nastavení jazyka aplikace."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Další informace o jazycích aplikací"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Změnit jazyk systému na %s ?"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Obličej a hodinky <xliff:g id="WATCH">%s</xliff:g> byly přidány"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Obličej, otisk prstu a hodinky <xliff:g id="WATCH">%s</xliff:g> byly přidány"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Obličej, otisky prstů a hodinky <xliff:g id="WATCH">%s</xliff:g> byly přidány"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Je to potřeba, protože je zapnutá kontrola identity"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Odemknutí pomocí nástroje Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Hodinky byly přidány"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Nastavení hodinek"</string>
@@ -500,7 +500,7 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrace otisku prstu: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisk byl přidán"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Odemknout dotykem kdykoli"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Když se dotknete snímače, zařízení se odemkne, i když je obrazovka vypnutá. Nezamýšlené odemknutí je tak pravděpodobnější."</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Když se dotknete snímače, zařízení se odemkne, i když je obrazovka vypnutá. Tím se zvyšuje pravděpodobnost nezamýšleného odemknutí."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Obrazovka, odemknutí"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Později"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Zvedněte prst a dotkněte se znovu"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Nastavování soukromého prostoru…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Soukromý prostor se nepodařilo nastavit"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Zkusit znovu"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Ukončit"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Soukromý prostor není k dispozici.\nZobrazit možné příčiny"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Zobrazit možné příčiny"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Vybrat nový zámek pro soukromý prostor?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Můžete si nastavit nový zámek pouze pro soukromý prostor, nebo použít stejný zámek, jaký používáte k odemykání zařízení"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Používat zámek obrazovky"</string>
@@ -925,7 +928,7 @@
     <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Pokud chcete zpřesnit určování polohy, zapněte vyhledávání Wi-Fi v <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>nastavení vyhledávání Wi-Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Automaticky přepínat na mobilní data"</string>
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Když Wi-Fi nebude mít přístup k internetu, použije se mobilní datové připojení. Za využití dat mohou být účtovány poplatky."</string>
-    <string name="wifi_add_network" msgid="4178564862173751181">"Přidat síť"</string>
+    <string name="wifi_add_network" msgid="4178564862173751181">"Přidejte síť"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Předvolby Wi-Fi"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi‑Fi se automaticky znovu zapne"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi‑Fi se automaticky znovu nezapne"</string>
@@ -987,7 +990,7 @@
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Náhodná adresa MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Přidání zařízení"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Chcete-li zařízení přidat do sítě <xliff:g id="SSID">%1$s</xliff:g>, níže vycentrujte QR kód"</string>
-    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Naskenovat QR kód"</string>
+    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Naskenujte QR kód"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Chcete-li se připojit k síti <xliff:g id="SSID">%1$s</xliff:g>, níže vycentrujte QR kód"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Naskenováním QR kódu se připojíte k síti Wi-Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Sdílení sítě Wi-Fi"</string>
@@ -1920,7 +1923,7 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Jedním prstem"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Místo držení více kláves aktivujte zkratky postupným tisknutím jednotlivých kláves"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Klávesy pro myš"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"Ovládat myš pomocí fyzické klávesnice."</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Ovládání myši pomocí fyzické klávesnice"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Klávesové zkratky"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Zobrazit seznam zkratek"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klávesnice a nástroje v pracovním profilu"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Tato služba nefunguje."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Zkratky pro usnadnění přístupu"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Zobrazit v rychlém nastavení"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Červená a zelená"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Červená a zelená"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Červenozelená, slabá zelená"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Červenozelená, slabá červená"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Modrá a žlutá"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Zešednutí obrazovky"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intenzita"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"V režimu stupňů šedi a při vypnuté korekci barev tato funkce není k dispozici"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Oslabené vidění zelené barvy, deuteranomálie"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Oslabené vidění červené barvy, protanomálie"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomálie"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomálie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomálie"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Velmi tmavé zobrazení"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Nastavit velmi tmavou obrazovku"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Žádný}=1{Nastaven 1 plán}few{Nastaveny # plány}many{Nastaveno # plánu}other{Nastaveno # plánů}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Nerušit"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Režim priority"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Přidat režim"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Omezte vyrušení a soustřeďte se na spánek, práci, řízení nebo cokoli jiného."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Vytvoření vlastního režimu"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Přijímat pouze oznámení od důležitých lidí a z důležitých aplikací"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Vyberte typ aktivace"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Čas"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Příklad: 9:30–17:00"</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalendář"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Příklad: Osobní kalendář"</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Nastavení plánu"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Plán založen na"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Den a čas"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"„9:00–17:00, pracovní dny“"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Události v kalendáři"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Režim {mode_1} je aktivní}=2{Režimy {mode_1} a {mode_2} jsou aktivní}=3{Režimy {mode_1}, {mode_2} a {mode_3} jsou aktivní}few{Režimy {mode_1}, {mode_2} a # další jsou aktivní}many{Režimy {mode_1}, {mode_2} a # dalšího jsou aktivní}other{Režimy {mode_1}, {mode_2} a # dalších je aktivních}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 režim se může zapnout automaticky}few{# režimy se mohou zapnout automaticky}many{# režimu se může zapnout automaticky}other{# režimů se může zapnout automaticky}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ZAPNUTO"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nenastaveno"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Vypnuto"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Vytvoření režimu"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Vlastní"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Zapnout"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Vypnout"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Režim nenalezen"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Omezení vyrušení"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Blokujte vyrušení"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Nastavit režim <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Zapněte funkci Nerušit"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Vyrušovat mohou budíky a zvuky médií"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Plány"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Upravit"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Plány"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Plán"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Zapnout automaticky"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Přidejte kalendář"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Použít kalendář"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Plán"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Nastavení plánu"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Kdy zapnout automaticky"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Plán události"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Zapnout během událostí pro"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Když je odpověď na pozvánku"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Časový plán"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Plán"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Zapnout automaticky"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Plán"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Ztlumit telefon v určitou dobu"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Nastavit pravidla režimu Nerušit"</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Povolit vyrušení, která vydávají zvuk"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokovat vizuální vyrušení"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Povolit vizuální signály"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Soustřeďte se"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Další akce"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Filtry oznámení"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Další nastavení"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Vypnuto}=1{Vypnuto / 1 režim se může automaticky zapnout}few{Vypnuto / # režimy se můžou automaticky zapnout}many{Vypnuto / # režimu se může automaticky zapnout}other{Vypnuto / # režimů se může automaticky zapnout}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Nastavení displeje"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Možnosti zobrazení"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"zapnout tmavý motiv"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Přepněte operační systém a aplikace tak, aby upřednostňovaly světlý text na tmavém pozadí. Může to být příjemnější pro oči a na některých zařízeních to výrazně šetří baterii"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Žádné změny zobrazení}=1{{effect_1}}=2{{effect_1} a {effect_2}}=3{{effect_1}, {effect_2} a {effect_3}}few{{effect_1}, {effect_2} a ještě #}many{{effect_1}, {effect_2} a ještě #}other{{effect_1}, {effect_2} a ještě #}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtrovat přerušení"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Omezte, co vám může posílat oznámení"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Žádná přerušení se nefiltrují"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Možnosti zobrazení filtrovaných oznámení"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Když je zapnutý režim Nerušit"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Konverzace"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Všechny konverzace"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"všechny konverzace"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioritní konverzace"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioritní konverzace"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Žádné"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Přepnout do režimu Pouze budíky až do <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Přejít do režimu Vždy vyrušit"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Upravit režim"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Přidat režim"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Vytvoření režimu"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Vlastní režim"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Název režimu"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Události v kalendáři"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Spánkový plán"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Sled činností Noční klid"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Při řízení"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Propojeno s aplikací"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Nastavení aplikace"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informace a nastavení najdete v aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Spravováno aplikací <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Vypnout režim"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Pokut tuto funkci vypnete, režim už nebude fungovat, jak by měl, a jeho nastavení budou skryta."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Deaktivovat režim <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Když bude tento režim deaktivován, nikdy se nezapne"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Vypnout"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Zapnout režim"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Pokud tuto funkci zapnete, režim se aktivuje automaticky podle plánu."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Aktivovat režim <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Tento režim se může v závislosti na nastavení zapnout automaticky"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Zapnout"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Nastavte si režim pro pravidelný program"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Nastavte si režim k synchronizaci s událostmi v kalendáři a odpověďmi na pozvánky"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Vytvořte si uklidňující sled činností pro usínání. Nastavte si budíky, ztlumte obrazovku a zablokujte oznámení."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Jeďte soustředěně a bez vyrušení s ohledem na bezpečnost"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Zablokujte vyrušení v zařízení, abyste se mohli soustředit"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Zbavte se všech vyrušení a užijte si tiché prostředí"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Přizpůsobte si prostředí zařízení a nastavení pro různé uživatele"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Omezte vyrušení pouze na důležité lidi a aplikace"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Varování"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Zavřít"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Odeslat zpětnou vazbu o tomto zařízení"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Baterie"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel nastavení"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Aktivovat okna s volným tvarem"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Aktivovat okna s volným tvarem na 2. displeji"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Aktivovat neměnnou velikost v režimu několika oken"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Povolí aplikace s neměnnou velikostí v režimu několika oken"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Přepsat vynucení tmavého režimu"</string>
@@ -5184,10 +5186,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Přizpůsobit"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Přizpůsobit <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"K zapnutí podpory plovoucích oken je potřeba restart."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"K aktualizaci dostupnosti oken s volným tvarem je potřeba restart."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"K aktivaci oken s volným tvarem na sekundárních displejích je potřeba restart."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Restartovat hned"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Restartovat později"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Prostorový zvuk"</string>
@@ -5284,7 +5284,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Růžová"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Purpurová"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Fialová"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Hotovo"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Uložit"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Zrušit"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Výchozí"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Střední"</string>

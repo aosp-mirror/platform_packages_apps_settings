@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Satt på vent"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Ukjent"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Forhåndsvisning"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR-kode"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Gjør mindre"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Gjør større"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Alltid"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Språkvalg for denne appen er ikke tilgjengelig fra innstillingene."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Språket kan være forskjellig fra språkene som er tilgjengelige i appen. Noen apper støtter muligens ikke denne innstillingen."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Velg språk for hver app."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Systemet, apper og nettsteder bruker det første språket som støttes, av de foretrukne språkene dine."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Enheten, appene og nettstedet bruker det første språket som støttes, av språkene på listen over foretrukne språk.\n\nMange apper bruker også regionen fra det foretrukne språket ditt til å formatere datoer, tall og enheter. For å endre regionen, legg til et språk og velg foretrukket region."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"For å velge et språk for hver app, gå til innstillingene for appspråk."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Finn ut mer om appspråk"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Vil du bytte systemspråk til %s?"</string>
@@ -394,7 +393,7 @@
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Klokkelåsen er en annen praktisk løsning for å låse opp telefonen – for eksempel når ansiktet ditt ikke gjenkjennes."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Bruk fingeravtrykk eller klokke til å"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Bruk ansikt eller klokke til å"</string>
-    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Bruk ansikt, fingeravtrykk eller klokke til å"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Bruk ansikt, fingeravtrykk eller klokke til å gjøre dette:"</string>
     <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"Bruk klokke til å"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Bruk ansiktet eller klokken"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Bruk fingeravtrykket eller klokken"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Ansiktet og <xliff:g id="WATCH">%s</xliff:g> er lagt til"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Ansiktet, fingeravtrykket og <xliff:g id="WATCH">%s</xliff:g> er lagt til"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansiktet, fingeravtrykkene og <xliff:g id="WATCH">%s</xliff:g> er lagt til"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Dette kreves fordi Identity Check er på"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Opplåsing med Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Klokken er lagt til"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Konfigurer klokken"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Konfigurerer det private området …"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Kunne ikke konfigurere et privat område"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Prøv på nytt"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Avslutt"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Det private området er ikke tilgjengelig.\nSe mulige årsaker"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Se mulige årsaker"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Vil du velge en ny lås for det private området?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Du kan angi en ny lås for det private området eller bruke den samme låsen som du bruker til å låse opp enheten"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Bruk skjermlåsen"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Denne tjenesten fungerer ikke som den skal."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Hurtigtaster for tilgjengelighet"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Vis i hurtiginnstillingene"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Rød-grønn"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rød-grønn"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Rød-grønn – grønn er svak"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Rød-grønn – rød er svak"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Blå-gul"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Gråtoner"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensitet"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Utilgjengelig for gråtonemodus eller når fargekorrigering er slått av"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Svak grønn, deuteranomali"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Svak rød, protanomali"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomali"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomali"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomali"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra dimmet"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Ekstra dimmet skjerm"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angitt}other{# tidsplaner er angitt}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ikke forstyrr"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Prioritetsmoduser"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Legg til en modus"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Reduser distraksjoner til et minimum, og ta kontroll på oppmerksomheten med moduser for søvn, jobb, kjøring og alt mulig annet."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Lag din egen modus"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Bli bare varslet av viktige personer og apper"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Velg aktiveringstype"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Tidspunkt"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Eksempel: «09:30–17:00»"</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalender"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Eksempel: «Personlig kalender»"</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Angi en tidsplan"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Tidsplanen er basert på"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Dag og klokkeslett"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"«9:00–17:00 på hverdager»"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalenderaktiviteter"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} er aktiv}=2{{mode_1} og {mode_2} er aktive}=3{{mode_1}, {mode_2} og {mode_3} er aktive}other{{mode_1}, {mode_2} og # til er aktive}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 modus kan slås på automatisk}other{# moduser kan slås på automatisk}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"PÅ"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Ikke angitt"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Deaktivert"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Opprett en modus"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Egendefinert"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Slå på nå"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Slå av"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Fant ikke modusen"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Begrens forstyrrelser"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Blokker forstyrrelser og distraksjoner"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Konfigurer <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Slå på Ikke forstyrr"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmer og medielyder kan forstyrre"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Tidsplaner"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Endre"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Tidsplaner"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Tidsplan"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Slå på automatisk"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Legg til en kalender"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Bruk kalenderen"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Tidsplan"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Angi en tidsplan"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Tidspunkt for auto-påslåing"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Aktivitetsoversikt"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Slå på under aktiviteter for"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Der invitasjonssvaret er"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Tidsplan"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Tidsplan"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> t, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Slå på automatisk"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Tidsplan"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Demp telefonen til bestemte tider"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Angi Ikke forstyrr-regler"</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Tillat forstyrrelser som lager lyd"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokkér visuelle forstyrrelser"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Tillat visuelle signaler"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Hold fokus"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Flere handlinger"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Varselsfiltre"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Flere innstillinger"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Av}=1{Av / 1 modus kan slås på automatisk}other{Av / # moduser kan slås på automatisk}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Visningsinnstillinger"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Visningsalternativer"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"slå på mørkt tema"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Bytt til at OS-et og appene foretrekker lys tekst på mørk bakgrunn, som kan være mer behagelig for øynene og gir betydelig batterisparing på noen enheter."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ingen visningsendringer}=1{{effect_1}}=2{{effect_1} og {effect_2}}=3{{effect_1}, {effect_2} og {effect_3}}other{{effect_1}, {effect_2} og # andre}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtrer bort avbrytelser"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Begrens hva du får varsler for"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Ingen avbrytelser blir filtrert bort"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Visningsalternativer for filtrerte varsler"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Når «Ikke forstyrr» er på"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Samtaler"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Alle samtaler"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"alle samtaler"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioriterte samtaler"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioriterte samtaler"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ingen"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Endre til Bare alarmer frem til <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Bytt til Alltid forstyrr"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Rediger modusen"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Legg til modus"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Opprett en modus"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Egendefinert modus"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Modusnavn"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalenderaktiviteter"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Søvntidsplan"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Sengetidsrutine"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Under kjøring"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Tilknyttet app"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Appinnstillinger"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informasjon og innstillinger i <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Administreres av <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Slå av modusen"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Hvis du slår av denne funksjonen, fungerer ikke modusen som den skal, og innstillingene blir skjult."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Vil du slå av <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Denne modusen slås aldri på når den er slått av"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Slå av"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Slå på modusen"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Hvis du slår på denne funksjonen, aktiveres modusen automatisk i henhold til tidsplanen sin."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Vil du slå på <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Denne modusen kan slås på automatisk basert på innstillingene"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Slå på"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Angi en modus som følger en regelmessig tidsplan"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Angi en modus for å synkronisere med kalenderaktiviteter og svare på invitasjoner"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Lag en avslappende søvnrutine. Angi alarmer, demp skjermen og blokker varsler."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Prioriter sikkerhet på veien for fokusert kjøring uten distraksjoner"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blokker distraksjoner og forstyrrelser fra enheten for å fokusere"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Fjern alle distraksjoner for å få et stille miljø"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Gi enhetsopplevelser og innstillinger personlig preg for forskjellige brukere"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimer distraksjoner ved å bare la viktige personer og apper nå deg"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Varsel"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Lukk"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Send tilbakemelding om enheten"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteri"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Innstillinger-panel"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Slå på vinduer i fritt format"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Slå på vinduer i fritt format på sekundærskjermen"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Slå på apper som ikke kan endre størrelse, i flervindusmodus"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Tillater apper som ikke kan endre størrelse, i flervindusmodus"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Overstyr tving mørk"</string>
@@ -5182,10 +5184,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Tilpass"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Tilpass <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"En omstart kreves for å slå på støtte for vinduer i fritt format."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"En omstart kreves for å oppdatere tilgjengeligheten for vinduer i fritt format."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"En omstart kreves for å slå på vinduer i fritt format på sekundærskjermer."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Start på nytt nå"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Start på nytt senere"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Romlig lyd"</string>
@@ -5282,7 +5282,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Rosa"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Fiolett"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Ferdig"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Lagre"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Avbryt"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Standard"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Middels"</string>

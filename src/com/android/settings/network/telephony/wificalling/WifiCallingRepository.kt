@@ -27,7 +27,7 @@ import android.telephony.ims.stub.ImsRegistrationImplBase
 import androidx.lifecycle.LifecycleOwner
 import com.android.settings.network.telephony.ims.ImsMmTelRepository
 import com.android.settings.network.telephony.ims.ImsMmTelRepositoryImpl
-import com.android.settings.network.telephony.ims.imsFeatureProvisionedFlow
+import com.android.settings.network.telephony.ims.ProvisioningRepository
 import com.android.settings.network.telephony.subscriptionsChangedFlow
 import com.android.settings.network.telephony.telephonyManager
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
@@ -54,6 +54,7 @@ constructor(
 ) : IWifiCallingRepository {
     private val telephonyManager = context.telephonyManager(subId)
 
+    private val provisioningRepository = ProvisioningRepository(context)
     private val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
 
     @WiFiCallingMode
@@ -80,7 +81,7 @@ constructor(
         if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)
         return context.subscriptionsChangedFlow().flatMapLatest {
             combine(
-                imsFeatureProvisionedFlow(
+                provisioningRepository.imsFeatureProvisionedFlow(
                     subId = subId,
                     capability = MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
                     tech = ImsRegistrationImplBase.REGISTRATION_TECH_IWLAN,

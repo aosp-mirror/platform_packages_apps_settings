@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"일시 정지됨"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"알 수 없음"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"미리보기"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR 코드"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"축소"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"확대"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"항상"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"설정에서 이 앱의 언어를 선택할 수 없습니다."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"언어가 앱에서 사용 가능한 언어와 다를 수 있습니다. 일부 앱에서는 이 설정을 지원하지 않을 수도 있습니다."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"각 앱에 사용할 언어를 설정하세요."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"시스템, 앱, 웹사이트는 기본 언어 중 최우선 지원 언어를 사용합니다."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"기기, 앱, 웹사이트는 사용자의 선호 언어 목록 중 최우선 지원 언어를 사용합니다.\n\n많은 앱에서도 사용자의 선호 언어 지역을 사용해 날짜, 숫자, 단위의 형식을 지정합니다. 지역을 변경하려면 언어를 추가한 후 원하는 지역을 선택하세요."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"앱별로 언어를 선택하려면 앱 언어 설정으로 이동하세요."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"앱 언어 자세히 알아보기"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"시스템 언어를 %s 언어로 변경하시겠습니까?"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"얼굴 및 <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"얼굴, 지문, <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"얼굴, 지문, <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"신원 확인이 설정되어 필수입니다."</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator 잠금 해제"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"시계 추가됨"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"시계 설정하기"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"비공개 스페이스 설정 중…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"비공개 스페이스를 설정할 수 없음"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"다시 시도"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"종료"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"비공개 스페이스를 사용할 수 없습니다.\n가능한 원인 보기"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"가능한 원인 보기"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"새로운 비공개 스페이스용 잠금 방식을 선택하시겠습니까?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"비공개 스페이스에만 새 잠금 방식을 설정하거나 기기 잠금 해제에 사용하는 것과 동일한 잠금 방식을 사용할 수 있습니다."</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"화면 잠금 사용"</string>
@@ -666,7 +669,7 @@
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"보안을 강화하려면 예비로 사용할 화면 잠금을 설정하세요."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"예비로 사용할 화면 잠금 방식을 선택하세요"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"화면 잠금을 잊어버린 경우 IT 관리자가 초기화할 수 없습니다."</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"별도의 직장 프로필 잠금을 설정하세요."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"별도의 직장 프로필 잠금을 설정하기"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"이 화면 잠금을 잊은 경우 IT 관리자에게 재설정을 요청하세요."</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"화면 잠금 옵션"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"화면 잠금 옵션"</string>
@@ -1687,7 +1690,7 @@
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google 계정, 설정 등을 이전하려면 다른 기기의 PIN을 입력하세요. PIN은 암호화됩니다."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google 계정, 설정 등을 이전하려면 다른 기기의 비밀번호를 입력하세요. 비밀번호는 암호화됩니다."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"또한 패턴을 사용하여 이 기기를 잠금 해제하세요."</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"또한 PIN을 사용하여 이 기기를 잠금 해제하세요."</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"기기 잠금 해제에도 PIN 사용"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"또한 비밀번호를 사용하여 이 기기를 잠금 해제하세요."</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"패턴 확인"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"PIN 확인"</string>
@@ -2060,7 +2063,7 @@
     <string name="color_contrast_preview" msgid="6791430227535363883">"미리보기"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"헬렌, 아담"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2일 전"</string>
-    <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"후속 조치를 하시겠습니까?"</string>
+    <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"후속 조치할까요?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"출장 보고서"</string>
     <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"추가 지원이 필요하면 저나 헬렌에게 문의하세요. 이 보고서는"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"클라이언트 비용"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"이 서비스가 제대로 작동하지 않습니다."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"접근성 단축키"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"빠른 설정에 표시"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"빨간색과 초록색"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"빨간색과 초록색"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"적녹색약, 녹색약"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"적녹색약, 적색약"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"파란색과 노란색"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"그레이 스케일"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"강도"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"그레이 스케일 모드에서나 색상 보정이 사용 중지된 경우 사용할 수 없습니다"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"녹색약"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"적색약"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"녹색약"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"적색약"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"청색약"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"더 어둡게"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"화면 더 어둡게 하기"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{없음}=1{예약 1개 설정됨}other{예약 #개 설정됨}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"방해 금지 모드"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"우선순위 모드"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"모드 추가"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"수면, 업무, 운전 등 모든 상황에 맞는 모드로 방해 요소를 최소화하고 중요한 사항에 집중하세요."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"나만의 모드 만들기"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"중요한 사람과 앱의 알림만 받기"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"활성화 유형 선택"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"시간"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"예: \"9시 30분부터 오후 5시까지\""</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"캘린더"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"예: \"개인 캘린더\""</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"일정 설정"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"다음 자동 일정"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"요일 및 시간"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\'평일 오전 9시~오후 5시\'"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"캘린더 일정"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} 모드가 활성화됨}=2{{mode_1} 및 {mode_2} 모드가 활성화됨}=3{{mode_1}, {mode_2}, {mode_3} 모드가 활성화됨}other{{mode_1}, {mode_2} 외 #개 모드가 활성화됨}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{모드 1개가 자동으로 사용 설정될 수 있음}other{모드 #개가 자동으로 사용 설정될 수 있음}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"사용"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"설정되지 않음"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"사용 중지됨"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"모드 만들기"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"커스텀"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"지금 사용 설정"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"사용 중지"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"모드를 찾을 수 없음"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"방해 요소 제한"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"방해 요소 차단"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"<xliff:g id="MODE">%1$s</xliff:g> 설정"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"방해 금지 모드 사용 설정"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"알람 및 미디어 소리 예외"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"예약"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"수정"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"예약"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"예약"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"자동으로 사용 설정"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"캘린더 추가"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"내 캘린더 사용"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"일정"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"일정 설정"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"자동으로 사용 설정되는 시기"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"이벤트 일정"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"다음 이벤트 중에 사용 설정"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"초대 답장 위치"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"시간 일정"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"일정"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g>시간 <xliff:g id="MINUTES">%2$d</xliff:g>분"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"자동으로 사용 설정"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"예약"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"특정 시간 동안 휴대전화 무음 설정"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"방해 금지 모드 규칙 설정"</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"소리를 내는 방해 요소 허용"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"시각적 방해 차단"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"시각적 신호 허용"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"집중"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"추가 작업"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"알림 필터"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"설정 더보기"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{꺼짐}=1{꺼짐/모드 1개가 자동으로 사용 설정될 수 있음}other{꺼짐/모드 #개가 자동으로 사용 설정될 수 있음}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"디스플레이 설정"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"디스플레이 옵션"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"어두운 테마 사용"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"어두운 배경에 밝은 텍스트를 표시하도록 OS와 앱을 전환합니다. 이렇게 하면 눈의 피로도를 낮출 수 있고, 일부 기기에서는 배터리를 크게 절약할 수 있습니다."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{디스플레이 변경사항 없음}=1{{effect_1}}=2{{effect_1} 및 {effect_2}}=3{{effect_1}, {effect_2}, {effect_3}}other{{effect_1}, {effect_2} 외 #개}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"방해 금지 필터링"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"알림을 허용할 항목 제한"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"방해 금지 필터링 안함"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"필터링한 알림에 대한 표시 옵션"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"방해 금지 모드 사용 시"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>~<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"대화"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"모든 대화"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"모든 대화"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"우선순위 대화"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"우선순위 대화"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"없음"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>까지 알람만 수신 모드로 변경"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"항상 알림 모드로 변경"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"수정 모드"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"추가 모드"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"모드 만들기"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"커스텀 모드"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"모드 이름"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"캘린더 일정"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"수면 일정"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"취침 시간 루틴"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"운전 중"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"앱에 연결됨"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"앱 설정"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"<xliff:g id="APP_NAME">%1$s</xliff:g>의 정보 및 설정"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"관리자: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"모드 사용 중지"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"이 기능을 사용 중지하면 모드가 더 이상 의도한 대로 작동하지 않으며 해당 설정이 숨겨집니다."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"<xliff:g id="MODE_NAME">%1$s</xliff:g> 모드를 사용 중지하시겠습니까?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"이 모드를 사용 중지하면 다시 사용 설정할 수 없습니다."</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"사용 중지"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"모드 사용"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"이 기능을 사용 설정하면 해당 모드가 일정에 따라 자동으로 활성화됩니다."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"<xliff:g id="MODE_NAME">%1$s</xliff:g> 모드를 사용 설정하시겠습니까?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"이 모드는 해당 설정에 따라 자동으로 사용 설정될 수 있습니다."</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"사용"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"규칙적인 일정을 따르는 모드를 설정합니다."</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"캘린더 일정 및 초대 응답을 동기화하는 모드를 설정합니다."</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"마음이 차분해지는 수면 루틴을 설계합니다. 알람을 설정하고, 화면을 어둡게 하고, 알림을 차단합니다."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"방해받지 않으며 집중되는 운전을 위해 도로에서의 안전을 최우선으로 고려합니다."</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"기기의 방해 요소를 차단하여 집중력을 높입니다."</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"조용한 환경을 위해 모든 방해 요소를 제거합니다."</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"다양한 사용자에 맞게 기기 환경 및 설정을 맞춤설정합니다."</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"중요한 사람 및 앱만 연락할 수 있도록 허용하여 방해를 최소화합니다."</string>
     <string name="warning_button_text" msgid="1274234338874005639">"주의"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"닫기"</string>
     <string name="device_feedback" msgid="5351614458411688608">"이 기기에 대한 의견 보내기"</string>
@@ -4688,7 +4691,7 @@
     <string name="carrier_settings_title" msgid="6959295328730560529">"이동통신사 설정"</string>
     <string name="cdma_lte_data_service" msgid="6937443423651347345">"데이터 서비스 설정"</string>
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"모바일 데이터"</string>
-    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"모바일 네트워크를 사용하여 데이터 액세스"</string>
+    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"모바일 네트워크를 사용하여 데이터에 액세스합니다."</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"범위 안에 들어오면 휴대전화가 이 이동통신사로 자동 전환됩니다."</string>
     <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"사용 가능한 SIM 없음"</string>
     <string name="calls_preference" msgid="2166481296066890129">"통화 환경설정"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"배터리"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"설정 패널"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"자유 형식 창 사용"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"보조 디스플레이에서 자유 형식 창을 사용하도록 설정"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"멀티 윈도우에서 크기 조정 불가 앱 사용"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"멀티 윈도우에서 크기 조정 불가 앱 허용"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"강제로 어둡게 재정의"</string>
@@ -5182,10 +5184,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"맞춤설정"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> 맞춤설정"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"자유 형식 창 지원을 사용 설정하려면 재부팅해야 합니다."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"자유 형식 창의 사용 가능 여부를 업데이트하려면 재부팅해야 합니다."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"보조 디스플레이에서 자유 형식 창을 사용하려면 재부팅해야 합니다."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"지금 재부팅"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"나중에 재부팅"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"공간 음향"</string>
@@ -5282,7 +5282,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"장미색"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"자홍색"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"보라색"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"완료"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"저장"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"취소"</string>
     <string name="contrast_default" msgid="8918545965525226966">"기본값"</string>
     <string name="contrast_medium" msgid="384414510709285811">"보통"</string>
@@ -5417,5 +5417,5 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"오디오 스트림 QR 코드를 스캔하여 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기로 들으세요."</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"공유 중에는 비밀번호를 수정할 수 없습니다. 비밀번호를 변경하려면 먼저 오디오 공유를 사용 중지하세요."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR 코드 스캐너"</string>
-    <string name="homepage_search" msgid="6759334912284663559">"검색 설정"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"설정 검색"</string>
 </resources>

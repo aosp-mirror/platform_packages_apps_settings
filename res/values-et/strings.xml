@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Peatatud"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Teadmata"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Eelvaade"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR-kood"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Vähendamine"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Suurendamine"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Alati"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Selle rakenduse jaoks pole seadetes keele valimine saadaval."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Keel võib rakenduses saadaolevatest keeltest erineda. Mõni rakendus ei pruugi seda seadet toetada."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Määrake iga rakenduse jaoks keel."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Teie süsteem, rakendused ja veebisaidid kasutavad teie eelistatud keelte hulgast esimest toetatud keelt."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Teie seade, rakendused ja veebisaidid kasutavad esimest toetatud keelt teie eelistatud keelte loendist.\n\nSamuti kasutavad paljud rakendused teie eelistatud keelega seotud piirkonnas kehtivaid vormindusreegleid kuupäevade, numbrite ja ühikute puhul. Piirkonna muutmiseks lisage keel ja seejärel valige eelistatud piirkond."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Iga rakenduse puhul keele valimiseks avage rakenduse keeleseaded."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Lisateave rakenduse keelte kohta"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Kas valida süsteemi keeleks %s ?"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Nägu ja kell <xliff:g id="WATCH">%s</xliff:g> on lisatud"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Nägu, sõrmejälg ja kell <xliff:g id="WATCH">%s</xliff:g> on lisatud"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Nägu, sõrmejäljed ja kell <xliff:g id="WATCH">%s</xliff:g> on lisatud"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"See on vajalik, kuna identiteedi kontrollimine on sisse lülitatud"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Kaugautentija avamine"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Kell on lisatud"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Kella seadistamine"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Privaatse ruumi seadistamine …"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Privaatset ruumi ei saanud seadistada"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Proovi uuesti"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Välju"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Privaatne ruum pole saadaval.\nVaadake võimalikke põhjuseid"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Vaadake võimalikke põhjuseid"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Kas valida privaatse ruumi jaoks uus lukk?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Saate seadistada uue luku vaid privaatse ruumi jaoks või kasutada sama lukku, mida kasutate seadme avamiseks"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Kasuta ekraanilukku"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Selle teenuse töös esineb häireid."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Juurdepääsetavuse otseteed"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Kuva kiirseadetes"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Punane-roheline"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Punane-roheline"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Punane-roheline, rohelise vähenenud tajumine"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Punane-roheline, punase vähenenud tajumine"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Sinine-kollane"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Halltoonid"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensiivsus"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Pole saadaval halltoonide reziimis ega siis, kui värvide korrigeerimine on keelatud"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Rohelise vähenenud tajumine, deuteranomaalia"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Punase vähenenud tajumine, protanomaalia"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomaalia"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomaalia"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomaalia"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Eriti tume"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Ekraanikuva eriti tumedaks muutmine"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Puudub}=1{1 ajakava on määratud}other{# ajakava on määratud}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Mitte segada"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Prioriteetsed režiimid"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Lisa režiim"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimeerige segajad ning juhtige oma tähelepanu une-, töö-, sõidu- ja kõigi teiste režiimide abil."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Omaenda režiimi loomine"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ainult oluliste inimeste ja rakendustega seotud märguanded"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Aktiveerimistüübi valimine"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Aeg"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Näide. „9:30 – 17:00”"</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalender"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Näide. „Isiklik kalender”"</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Ajakava määramine"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Režiimipõhine ajakava"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Kuupäev ja kellaaeg"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"„9.00–17.00 tööpäevadel”"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalendrisündmused"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} on aktiivne}=2{{mode_1} ja {mode_2} on aktiivsed}=3{{mode_1}, {mode_2} ja {mode_3} on aktiivsed}other{{mode_1}, {mode_2} ja veel # režiimi on aktiivsed}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 režiim võib automaatselt sisse lülituda}other{# režiimi võivad automaatselt sisse lülituda}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"SEES"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Määramata"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Keelatud"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Mudeli loomine"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Kohandatud"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Lülita kohe sisse"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Lülita välja"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Režiimi ei leitud"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Katkestuste piiramine"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Blokeerige häirivad tegurid"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Režiimi <xliff:g id="MODE">%1$s</xliff:g> seadistamine"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Valiku Mitte segada sisselülitamine"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmid ja meediahelid saavad katkestada"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Ajakavad"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Muuda"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Ajakavad"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Ajakava"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Automaatselt sisselülitamine"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Lisage kalender"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Kasutage oma kalendrit"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Ajastamine"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Ajakava määramine"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Automaatselt sisselülitamine"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Sündmuse ajakava"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Lülitage sündmuste ajal sisse"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Kui kutse vastus on"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Ajapõhine kava"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Ajakava"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Lülita automaatselt sisse"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Ajastamine"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Telefoni vaigistamine teatud ajal"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Režiimi Mitte segada reeglite määramine"</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Helimärguandega katkestuste lubamine"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Visuaalsete häirimiste blok."</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Luba visuaalsed signaalid"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Olge ümbritsevast teadlik"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Lisatoimingud"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Märguandefiltrid"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Rohkem seadeid"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Väljas}=1{Väljas / 1 režiimi saab automaatselt sisse lülitada}other{Väljas / # režiimi saab automaatselt sisse lülitada}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Kuvaseaded"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Kuvavalikud"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"tumeda teema lubamine"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Lülitage OS ja rakendused heleda teksti ja tumeda tausta eelistusele, mis võib hõlbustada teksti lugemist ning säästab teatud seadmetes oluliselt akut"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ekraanikuva muudatusi pole}=1{{effect_1}}=2{{effect_1} ja {effect_2}}=3{{effect_1}, {effect_2} ja {effect_3}}other{{effect_1}, {effect_2} ja veel #}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Katkestuste filtreerimine"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Piira teavituste hulka"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Katkestusi ei filtreerita"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Filtreeritud märguannete kuvavalikud"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kui funktsioon Mitte segada on sisse lülitatud"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Vestlused"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Kõik vestlused"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"kõik vestlused"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioriteetsed vestlused"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioriteetsed vestlused"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Mitte ükski"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Muudetakse valikule Ainult alarmid kuni kella <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Muudetakse valikule Katkesta alati"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Muutmisrežiim"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Režiimi lisamine"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Režiimi loomine"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Kohandatud režiim"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Režiimi nimi"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalendrisündmused"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Une ajakava"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Uneaja rutiin"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Sõitmise ajal"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Rakendusega lingitud"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Rakenduse seaded"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Teave ja seaded rakenduses <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Haldab <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Keela režiim"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Kui keelate selle funktsiooni, ei tööta režiim enam ettenähtud viisil ja selle seaded peidetakse."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Kas keelata režiim <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"See režiim ei lülitu kunagi sisse, kui see on keelatud"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Keela"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Luba režiim"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Kui lubate selle funktsiooni, aktiveerub režiim automaatselt ajakava kohaselt."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Kas lubada režiim <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"See režiim võib oma seadete alusel automaatselt sisse lülituda"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Luba"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Seadistage režiim, mis järgib tavapärast ajakava"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Määrake kalendrisündmustega sünkroonimise ja kutsetele vastamise režiim"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Looge rahustav unerutiin. Seadistage alarmid, hämardage ekraan ja blokeerige märguanded."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Sõitke keskendunult ja segamatult, et tagada teel ohutus"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blokeerige seadme segavad märguanded, et tagada hea keskendumine"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Eemaldage kõik segajad, et tagada vaikne keskkond"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Isikupärastage seadme kasutuskogemust ja seadeid eri kasutajate jaoks"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Vähendage katkestusi, lubades ainult olulistel inimestel ja rakendustel teiega ühendust võtta"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Hoiatus"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Sule"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Seadme kohta tagasiside saatmine"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Aku"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Seadete paneel"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Luba vabas vormis aknad"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Luba vabas vormis aknad teisesel ekraanil"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Luba fikseeritud suurus mitmes aknas"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Lubab fikseeritud suurusega rakenduste kuvamise mitmes aknas"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Alista funktsioon Sunnitud tume"</string>
@@ -5182,10 +5184,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Kohanda"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Kohanda ekraanisäästjat <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Vabas vormis akende toe jaoks on vaja taaskäivitada."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Vabas vormis akende saadavuse värskendamiseks on vaja taaskäivitada."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Vabas vormis akende lubamiseks teisestel ekraanidel on vaja taaskäivitada."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Taaskäivita kohe"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Taaskäivita hiljem"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Ruumiline heli"</string>
@@ -5282,7 +5282,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Roos"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Lilla"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Valmis"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Salvesta"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Tühista"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Vaikeseade"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Keskmine"</string>
@@ -5328,7 +5328,7 @@
     <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Kõned ja äratused"</string>
     <string name="audio_sharing_description" msgid="1660255584523640628">"Andke inimestele võimalus kuulata meediasisu koos teiega. Kuulajatel on vaja enda LE Audio kõrvaklappe."</string>
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Aktiivsed meediaseadmed"</string>
-    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Kõne heliväljund"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Telefonikõne heliväljund"</string>
     <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Esitatakse ainult seadmes <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Testheli esitamine"</string>
     <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Kõik kuulajad peaksid seda kuulma"</string>
