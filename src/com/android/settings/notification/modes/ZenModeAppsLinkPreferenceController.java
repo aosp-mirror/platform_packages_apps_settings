@@ -109,7 +109,7 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
 
         if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_NONE) {
             mPreference.setSummary(R.string.zen_mode_apps_none_apps);
-            mPreference.displayIcons(CircularIconSet.EMPTY);
+            mPreference.setIcons(CircularIconSet.EMPTY);
             if (mAppSession != null) {
                 mAppSession.deactivateSession();
             }
@@ -151,7 +151,7 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
 
         ImmutableList<AppEntry> apps = getAppsBypassingDndSortedByName(allApps);
         mPreference.setSummary(mSummaryHelper.getAppsSummary(mZenMode, apps));
-        mPreference.displayIcons(new CircularIconSet<>(apps,
+        mPreference.setIcons(new CircularIconSet<>(apps,
                 app -> mAppIconRetriever.apply(app.info)),
                 APP_ENTRY_EQUIVALENCE);
     }
