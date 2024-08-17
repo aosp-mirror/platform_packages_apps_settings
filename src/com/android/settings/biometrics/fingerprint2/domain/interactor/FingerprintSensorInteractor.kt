@@ -20,9 +20,7 @@ import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintS
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import kotlinx.coroutines.flow.Flow
 
-/**
- * Interactor that propagates the type of [FingerprintSensor] this device supports.
- */
+/** Interactor that propagates the type of [FingerprintSensor] this device supports. */
 interface FingerprintSensorInteractor {
   /** Get the [FingerprintSensor] */
   val fingerprintSensor: Flow<FingerprintSensor>

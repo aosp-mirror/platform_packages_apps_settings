@@ -79,6 +79,7 @@ class IconUtil {
         @Px int innerSizePx = res.getDimensionPixelSize(R.dimen.zen_mode_header_inner_icon_size);
 
         Drawable base = composeIcons(
+                context.getResources(),
                 background,
                 Utils.getColorAttr(context,
                         com.android.internal.R.attr.materialColorSecondaryContainer),
@@ -89,6 +90,7 @@ class IconUtil {
                 innerSizePx);
 
         Drawable selected = composeIcons(
+                context.getResources(),
                 background,
                 Utils.getColorAttr(context, com.android.internal.R.attr.materialColorPrimary),
                 outerSizePx,
@@ -111,6 +113,7 @@ class IconUtil {
      */
     static Drawable makeIconPickerHeader(@NonNull Context context, Drawable icon) {
         return composeIconCircle(
+                context.getResources(),
                 Utils.getColorAttr(context,
                         com.android.internal.R.attr.materialColorSecondaryContainer),
                 context.getResources().getDimensionPixelSize(
@@ -129,6 +132,7 @@ class IconUtil {
      */
     static Drawable makeIconPickerItem(@NonNull Context context, @DrawableRes int iconResId) {
         return composeIconCircle(
+                context.getResources(),
                 context.getColorStateList(R.color.modes_icon_selectable_background),
                 context.getResources().getDimensionPixelSize(
                         R.dimen.zen_mode_icon_list_item_circle_diameter),
@@ -146,6 +150,7 @@ class IconUtil {
     static Drawable makeCircularIconPreferenceItem(@NonNull Context context,
             @DrawableRes int iconResId) {
         return composeIconCircle(
+                context.getResources(),
                 Utils.getColorAttr(context,
                         com.android.internal.R.attr.materialColorSecondaryContainer),
                 context.getResources().getDimensionPixelSize(
@@ -166,6 +171,7 @@ class IconUtil {
         Resources res = context.getResources();
         if (Strings.isNullOrEmpty(displayName)) {
             return composeIconCircle(
+                    context.getResources(),
                     Utils.getColorAttr(context,
                             com.android.internal.R.attr.materialColorTertiaryContainer),
                     res.getDimensionPixelSize(R.dimen.zen_mode_circular_icon_diameter),
@@ -204,17 +210,17 @@ class IconUtil {
         return new BitmapDrawable(context.getResources(), bitmap);
     }
 
-    private static Drawable composeIconCircle(ColorStateList circleColor, @Px int circleDiameterPx,
-            Drawable icon, ColorStateList iconColor, @Px int iconSizePx) {
-        return composeIcons(new ShapeDrawable(new OvalShape()), circleColor, circleDiameterPx, icon,
-                iconColor, iconSizePx);
+    private static Drawable composeIconCircle(Resources res, ColorStateList circleColor,
+            @Px int circleDiameterPx, Drawable icon, ColorStateList iconColor, @Px int iconSizePx) {
+        return composeIcons(res, new ShapeDrawable(new OvalShape()), circleColor, circleDiameterPx,
+                icon, iconColor, iconSizePx);
     }
 
-    private static Drawable composeIcons(Drawable outer, ColorStateList outerColor,
+    private static Drawable composeIcons(Resources res, Drawable outer, ColorStateList outerColor,
             @Px int outerSizePx, Drawable icon, ColorStateList iconColor, @Px int iconSizePx) {
-        Drawable background = checkNotNull(outer.getConstantState()).newDrawable().mutate();
+        Drawable background = checkNotNull(outer.getConstantState()).newDrawable(res).mutate();
         background.setTintList(outerColor);
-        Drawable foreground = checkNotNull(icon.getConstantState()).newDrawable().mutate();
+        Drawable foreground = checkNotNull(icon.getConstantState()).newDrawable(res).mutate();
         foreground.setTintList(iconColor);
 
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { background, foreground });
