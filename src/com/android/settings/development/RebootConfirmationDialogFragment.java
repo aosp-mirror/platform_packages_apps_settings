@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -57,7 +58,8 @@ public class RebootConfirmationDialogFragment extends InstrumentedDialogFragment
         }
     }
 
-    private RebootConfirmationDialogFragment(
+    @VisibleForTesting
+    RebootConfirmationDialogFragment(
             int messageId, int cancelButtonId, RebootConfirmationDialogHost host) {
         mMessageId = messageId;
         mCancelButtonId = cancelButtonId;
@@ -91,5 +93,12 @@ public class RebootConfirmationDialogFragment extends InstrumentedDialogFragment
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
         mHost.onRebootDialogDismissed();
+    }
+
+    @Override
+    public void onPause() {
+        dismiss();
+
+        super.onPause();
     }
 }

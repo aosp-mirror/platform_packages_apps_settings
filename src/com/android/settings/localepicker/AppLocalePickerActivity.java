@@ -37,6 +37,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.view.ViewCompat;
 
@@ -67,6 +68,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     private View mAppLocaleDetailContainer;
     private NotificationController mNotificationController;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Nullable private String mParentLocale;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,6 +129,11 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
             broadcastAppLocaleChange(localeInfo);
         }
         finish();
+    }
+
+    @Override
+    public void onParentLocaleSelected(LocaleStore.LocaleInfo localeInfo) {
+        mParentLocale = localeInfo.getFullNameNative();
     }
 
     @Override
@@ -258,6 +265,12 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
                         super.onFragmentViewCreated(fm, f, v, s);
                         ListView listView = (ListView) v.findViewById(android.R.id.list);
                         if (listView != null) {
+                            if (mParentLocale != null) {
+                                mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName,
+                                        getUserId());
+                                mAppLocaleDetailContainer = launchAppLocaleDetailsPage();
+                                mAppLocaleDetails.setParentLocale(mParentLocale);
+                            }
                             listView.addHeaderView(mAppLocaleDetailContainer);
                         }
                     }
