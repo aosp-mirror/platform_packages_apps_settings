@@ -19,6 +19,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -34,10 +35,16 @@ class ZenModeHeaderController extends AbstractZenModeHeaderController {
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        setUpHeader(screen,
+                mContext.getResources().getDimensionPixelSize(R.dimen.zen_mode_header_size));
+    }
+
+    @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         updateIcon(preference, zenMode,
-                mContext.getResources().getDimensionPixelSize(R.dimen.zen_mode_header_size),
                 icon -> IconUtil.makeModeHeader(mContext, icon),
-                iconView -> iconView.setSelected(zenMode.isActive()));
+                /* isSelected= */ zenMode.isActive());
     }
 }

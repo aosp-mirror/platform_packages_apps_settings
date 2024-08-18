@@ -270,10 +270,9 @@ class ZenModePrioritySendersPreferenceController
                 mContext.startActivity(ALL_CONTACTS_INTENT);
             } else if (KEY_ANY_CONVERSATIONS.equals(key)
                     || KEY_IMPORTANT_CONVERSATIONS.equals(key)) {
-                // TODO: b/332937635 - set correct metrics category
                 new SubSettingLauncher(mContext)
                         .setDestination(ConversationListSettings.class.getName())
-                        .setSourceMetricsCategory(SettingsEnums.DND_CONVERSATIONS)
+                        .setSourceMetricsCategory(SettingsEnums.DND_MESSAGES)
                         .launch();
             } else {
                 mContext.startActivity(FALLBACK_INTENT);

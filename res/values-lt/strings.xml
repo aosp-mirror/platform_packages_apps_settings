@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Pristabdyta"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Nežinoma"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Peržiūra"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR kodas"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Padaryti mažesnius"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Padaryti didesnius"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Visada"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Šios programos kalbos pasirinkimas nepasiekiamas iš skilties „Nustatymai“."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Kalba gali skirtis nuo programoje pasiekiamų kalbų. Kai kuriose programose šis nustatymas gali būti nepalaikomas."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Nustatykite kiekvienos programos kalbą."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Jūsų sistema, programos ir svetainės naudoja pirmąją palaikomą kalbą iš pageidaujamų sąrašo."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Jūsų įrenginys, programos ir svetainės naudoja pirmąją palaikomą kalbą iš pageidaujamų kalbų sąrašo.\n\nDaug programų taip pat naudos regioną pagal pageidaujamą kalbą, kad nustatytų datų, skaičių ir matavimo vienetų formatą. Jei norite pakeisti regioną, pridėkite kalbą, tada pasirinkite pageidaujamą regioną."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Norėdami pasirinkti kalbą kiekvienai programai, eikite į programų kalbų nustatymus."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Sužinokite daugiau apie programos kalbas"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Pakeisti sistemos kalbą į %s ?"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Pridėti veido ir <xliff:g id="WATCH">%s</xliff:g> duomenys"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Pridėti veido, piršto atspaudo ir <xliff:g id="WATCH">%s</xliff:g> duomenys"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Pridėti veido, piršto atspaudų ir <xliff:g id="WATCH">%s</xliff:g> duomenys"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Tai reikia padaryti todėl, kad įjungta tapatybės patikra"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Nuotolinės Autentifikavimo priemonės atrakinimas"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Laikrodis pridėtas"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Nustatykite laikrodį"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Nustatoma privati erdvė…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Nepavyko nustatyti privačios erdvės"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Bandyti dar kartą"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Išeiti"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Privati erdvė nepasiekiama.\nPeržiūrėkite galimas priežastis."</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Peržiūrėti galimas priežastis"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Pasirinkti naują privačios erdvės užraktą?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Galite nustatyti naują užraktą tik privačiai erdvei arba naudoti tą patį užraktą, kurį naudojate įrenginiui užrakinti"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Naudoti ekrano užraktą"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Ši paslauga veikia netinkamai."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Pritaikomumo spartieji klavišai"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Rodyti sparčiuosiuose nustatymuose"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Raudona, žalia"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Raudona, žalia"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Raudona-žalia, silpna žalia"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Raudona-žalia, silpna raudona"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Mėlyna, geltona"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Pilkumo tonas"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensyvumas"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Nepasiekiama naudojant pilkumo tono režimą arba kai spalvų taisymas yra išjungtas"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Silpna žalia (deuteranomalija)"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Silpna raudona (protanomalija)"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalija"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalija"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalija"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Itin blanku"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Padaryti ekraną itin blankų"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nė vieno}=1{Nustatytas 1 tvarkaraštis}one{Nustatytas # tvarkaraštis}few{Nustatyti # tvarkaraščiai}many{Nustatyta # tvarkaraščio}other{Nustatyta # tvarkaraščių}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Netrukdymo režimas"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Prioriteto režimai"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Pridėti režimą"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Sumažinkite blaškančių veiksnių ir valdykite savo dėmesį naudodami miego, darbo, vairavimo ir įvairius kitus režimus."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Sukurkite savo režimą"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Gauti pranešimus tik iš svarbių žmonių ar programų"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Pasirinkti suaktyvinimo tipą"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Laikas"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Pvz.: „9.30–17.00 val.“"</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalendorius"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Pvz.: „Asmeninis kalendorius“"</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Nustatyti tvarkaraštį"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Tvarkaraštis pagal"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Diena ir laikas"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"„9.00–17.00 darbo dienomis“"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalendoriaus įvykiai"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Aktyvus režimas „{mode_1}“}=2{Aktyvūs režimai „{mode_1}“ ir „{mode_2}“}=3{Aktyvūs režimai „{mode_1}“, „{mode_2}“ ir „{mode_3}“}one{Aktyvūs režimai „{mode_1}“ ir „{mode_2}“ ir dar #}few{Aktyvūs režimai „{mode_1}“ ir „{mode_2}“ ir dar #}many{Aktyvūs režimai „{mode_1}“ ir „{mode_2}“ ir dar #}other{Aktyvūs režimai „{mode_1}“ ir „{mode_2}“ ir dar #}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{Vieną režimą galima įjungti automatiškai}one{# režimą galima įjungti automatiškai}few{# režimus galima įjungti automatiškai}many{# režimo galima įjungti automatiškai}other{# režimų galima įjungti automatiškai}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ĮJUNGTA"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nenustatyta"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Išjungta"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Režimo kūrimas"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Tinkinta"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Įjungti dabar"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Išjungti"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Režimas nerastas"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Pertraukčių apribojimas"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Blokuoti pertrauktis ir trukdžius"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Nustatyti „<xliff:g id="MODE">%1$s</xliff:g>“"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Netrukdymo režimo įjungimas"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Signalai ir medijos garsai gali trikdyti"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Tvarkaraščiai"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Redaguoti"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Tvarkaraščiai"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Tvarkaraštis"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Įjungti automatiškai"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Pridėti kalendorių"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Naudoti kalendorių"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Tvarkaraštis"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Nustatykite tvarkaraštį"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Kada įjungti automatiškai"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Įvykio tvarkaraštis"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Įjungti per įvykius, skirtus"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Kur yra atsakymas į kvietimą"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Tvarkaraštis pagal laiką"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Tvarkaraštis"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> val. <xliff:g id="MINUTES">%2$d</xliff:g> min."</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Įjungti automatiškai"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Tvarkaraštis"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Nutildykite telefoną tam tikru metu"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Nustatykite netrukdymo režimo taisykles"</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Leisti pertrauktis, skleidžiančias garsą"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokuoti vaizdinius trikdžius"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Leisti vaizdinius signalus"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Susikaupkite"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Papildomi veiksmai"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Pranešimų filtrai"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Daugiau nustatymų"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Išjungta}=1{Išjungta / vienas režimas gali įsijungti automatiškai}one{Išjungta / # režimas gali įsijungti automatiškai}few{Išjungta / # režimai gali įsijungti automatiškai}many{Išjungta / # režimo gali įsijungti automatiškai}other{Išjungta / # režimų gali įsijungti automatiškai}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Vaizdo nustatymai"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Pateikties parinktys"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"įgalinti tamsiąją temą"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Perjunkite, kad OS ir programos teiktų pirmenybę šviesiam tekstui tamsiame fone, nes taip mažiau pavargsta akys ir labai tausojamas akumuliatorius kai kuriuose įrenginiuose"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nėra vaizdo pakeitimų}=1{{effect_1}}=2{{effect_1} ir {effect_2}}=3{{effect_1}, {effect_2} ir {effect_3}}one{{effect_1}, {effect_2} ir dar #}few{{effect_1}, {effect_2} ir dar #}many{{effect_1}, {effect_2} ir dar #}other{{effect_1}, {effect_2} ir dar #}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtruoti trukdžius"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Apribokite, kokius pranešimus gausite"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nefiltruojami jokie trukdžiai"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Išfiltruotų pranešimų rodymo parinktys"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kai įjungtas netrukdymo režimas"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Pokalbiai"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Visi pokalbiai"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"visi pokalbiai"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Svarbiausi pokalbiai"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioritetiniai pokalbiai"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nėra"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Pakeisti tik į signalus iki <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Pakeisti į pertraukimo nustatymą visam laikui"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Redagavimo režimas"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Pridėti režimą"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Režimo kūrimas"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Tinkintas režimas"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Režimo pavadinimas"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalendoriaus įvykiai"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Miego tvarkaraštis"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Laiko miegoti veiksmų seka"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Vairuojant"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Susieta su programa"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Programos nustatymai"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informacija ir nustatymai programoje „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Tvarko „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Išjungti režimą"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Jei išjungsite šią funkciją, režimas nebeveiks, kaip numatyta, ir nustatymai bus paslėpti."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Išjungti režimą: <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Šis režimas niekada neįsijungs, kai yra išjungtas"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Išjungti"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Įgalinti režimą"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Jei įgalinsite šią funkciją, režimas bus suaktyvintas automatiškai pagal tvarkaraštį."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Įgalinti režimą: <xliff:g id="MODE_NAME">%1$s</xliff:g>“?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Šis režimas gali būti įjungtas automatiškai, atsižvelgiant į jo nustatymus"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Įgalinti"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Nustatykite režimą, atitinkantį įprastą tvarkaraštį"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Nustatykite režimą, kad būtų sinchronizuojama su kalendoriaus įvykiais ir atsakymais į kvietimus"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Sukurkite raminančią miego veiksmų seką. Nustatykite signalus, pritemdykite ekraną ir užblokuokite pranešimus."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Teikite pirmenybę saugumui kelyje, kad užtikrintumėte dėmesingą vairavimą be dėmesį blaškančių elementų"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blokuokite dėmesį blaškančius ar trikdančius elementus įrenginyje, kad sutelktumėte dėmesį"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Pašalinkite visus dėmesį blaškančius elementus, kad užtikrintumėte tylią aplinką"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Suasmeninkite įrenginio funkcijas ir nustatymus skirtingiems naudotojams"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Sumažinkite trikdžius leisdami tik svarbiems žmonėms ir programoms jus pasiekti"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Perspėjimas"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Uždaryti"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Siųsti atsiliepimą apie šį įrenginį"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akumuliatorius"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Nustatymų skydelis"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Įgalinti laisvos formos langus"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Įgalinti laisvos formos langus papildomame ekrane"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Įgalinti nekeičiamo dydžio progr. naud. kelių langų funkciją"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Leidžiama naudoti nekeičiamo dydžio programas su kelių langų funkcija"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Nepaisyti priverst. tamsaus rež. įgalin."</string>
@@ -5184,10 +5186,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Tinkinti"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Tinkinti skiltį „<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>“"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Norint įgalinti laisvos formos langų palaikymą, būtina paleisti iš naujo."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Norint atnaujinti laisvos formos langų pasiekiamumą, būtina paleisti iš naujo."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Norint įgalinti laisvos formos langus papildomuose ekranuose, būtina paleisti iš naujo."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Paleisti iš naujo dabar"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Paleisti iš naujo vėliau"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Erdvinis garsas"</string>
@@ -5284,7 +5284,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Rožinė"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Purpurinė"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violetinė"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Atlikta"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Išsaugoti"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Atšaukti"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Numatytasis"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Vidutinis"</string>

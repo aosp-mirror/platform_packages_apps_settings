@@ -62,8 +62,7 @@ public class CircularIconsPreferenceTest {
 
     private Context mContext;
     private CircularIconsPreference mPreference;
-    private PreferenceViewHolder mViewHolder;
-    private ViewGroup mContainer;
+    private CircularIconsView mContainer;
 
     private int mOneIconWidth;
 
@@ -73,179 +72,211 @@ public class CircularIconsPreferenceTest {
         mContext = RuntimeEnvironment.application;
         CircularIconSet.sExecutorService = MoreExecutors.newDirectExecutorService();
         mPreference = new TestableCircularIconsPreference(mContext);
-        // Tests should call bindAndMeasureViewHolder() so that icons can be added.
+        // Tests should call bindAndLayoutViewHolder() so that icons can be added.
 
         Resources res = mContext.getResources();
         mOneIconWidth = res.getDimensionPixelSize(R.dimen.zen_mode_circular_icon_diameter)
                 + res.getDimensionPixelSize(R.dimen.zen_mode_circular_icon_margin_between);
     }
 
-    private void bindAndMeasureViewHolder(int viewWidth) {
+    private void bindAndLayoutViewHolder(int viewWidth) {
         bindViewHolder();
-        measureViewHolder(viewWidth);
+        layoutViewHolder(viewWidth);
     }
 
     private void bindViewHolder() {
         View preferenceView = LayoutInflater.from(mContext).inflate(mPreference.getLayoutResource(),
                 null);
         mContainer = checkNotNull(preferenceView.findViewById(R.id.circles_container));
-        mViewHolder = PreferenceViewHolder.createInstanceForTests(preferenceView);
-        mPreference.onBindViewHolder(mViewHolder);
+        mContainer.setUiExecutor(MoreExecutors.directExecutor());
+        PreferenceViewHolder viewHolder = PreferenceViewHolder.createInstanceForTests(
+                preferenceView);
+        mPreference.onBindViewHolder(viewHolder);
     }
 
-    private void measureViewHolder(int viewWidth) {
+    private void layoutViewHolder(int viewWidth) {
         checkState(mContainer != null, "Call bindViewHolder() first!");
         mContainer.measure(makeMeasureSpec(viewWidth, View.MeasureSpec.EXACTLY),
                 makeMeasureSpec(1000, View.MeasureSpec.EXACTLY));
-        mContainer.getViewTreeObserver().dispatchOnGlobalLayout();
+        mContainer.layout(0, 0, viewWidth, 1000);
     }
 
     @Test
-    public void displayIcons_loadsIcons() {
+    public void setIcons_loadsIcons() {
         CircularIconSet<Integer> iconSet = new CircularIconSet<>(ImmutableList.of(1, 2),
                 ColorDrawable::new);
 
-        bindAndMeasureViewHolder(VIEW_WIDTH);
-        mPreference.displayIcons(iconSet);
+        bindAndLayoutViewHolder(VIEW_WIDTH);
+        mPreference.setIcons(iconSet);
 
-        assertThat(getIcons(mContainer)).hasSize(2);
-        assertThat(((ColorDrawable) getIcons(mContainer).get(0)).getColor()).isEqualTo(1);
-        assertThat(((ColorDrawable) getIcons(mContainer).get(1)).getColor()).isEqualTo(2);
+        assertThat(getDrawables(mContainer)).hasSize(2);
+        assertThat(((ColorDrawable) getDrawables(mContainer).get(0)).getColor()).isEqualTo(1);
+        assertThat(((ColorDrawable) getDrawables(mContainer).get(1)).getColor()).isEqualTo(2);
         assertThat(getPlusText(mContainer)).isNull();
     }
 
     @Test
-    public void displayIcons_noIcons_hidesRow() {
+    public void setIcons_noIcons_hidesRow() {
         CircularIconSet<Integer> iconSet = new CircularIconSet<>(ImmutableList.of(),
                 ColorDrawable::new);
 
-        bindAndMeasureViewHolder(VIEW_WIDTH);
-        mPreference.displayIcons(iconSet);
+        bindAndLayoutViewHolder(VIEW_WIDTH);
+        mPreference.setIcons(iconSet);
 
         assertThat(mContainer.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
-    public void displayIcons_exactlyMaxIcons_loadsAllIcons() throws Exception {
+    public void setIcons_exactlyMaxIcons_loadsAllIcons() throws Exception {
         int width = 300;
         int fittingCircles = width / mOneIconWidth;
         CircularIconSet<Integer> iconSet = new CircularIconSet<>(
                 IntStream.range(0, fittingCircles).boxed().toList(),
                 ColorDrawable::new);
 
-        bindAndMeasureViewHolder(width);
-        mPreference.displayIcons(iconSet);
+        bindAndLayoutViewHolder(width);
+        mPreference.setIcons(iconSet);
 
-        assertThat(getIcons(mContainer)).hasSize(fittingCircles);
-        assertThat(getIcons(mContainer)).containsExactlyElementsIn(
+        assertThat(getDrawables(mContainer)).hasSize(fittingCircles);
+        assertThat(getDrawables(mContainer)).containsExactlyElementsIn(
                 Futures.allAsList(iconSet.getIcons()).get()).inOrder();
         assertThat(getPlusText(mContainer)).isNull();
-
     }
 
     @Test
-    public void displayIcons_tooManyIcons_loadsFirstNAndPlusIcon() throws Exception {
+    public void setIcons_tooManyIcons_loadsFirstNAndPlusIcon() throws Exception {
         int width = 300;
         int fittingCircles = width / mOneIconWidth;
         CircularIconSet<Integer> iconSet = new CircularIconSet<>(
                 IntStream.range(0, fittingCircles + 5).boxed().toList(),
                 ColorDrawable::new);
 
-        bindAndMeasureViewHolder(width);
-        mPreference.displayIcons(iconSet);
+        bindAndLayoutViewHolder(width);
+        mPreference.setIcons(iconSet);
 
         // N-1 icons, plus (+6) text.
-        assertThat(getIcons(mContainer)).hasSize(fittingCircles - 1);
-        assertThat(getIcons(mContainer)).containsExactlyElementsIn(
+        assertThat(getDrawables(mContainer)).hasSize(fittingCircles - 1);
+        assertThat(getDrawables(mContainer)).containsExactlyElementsIn(
                         Futures.allAsList(iconSet.getIcons(fittingCircles - 1)).get())
                 .inOrder();
         assertThat(getPlusText(mContainer)).isEqualTo("+6");
     }
 
     @Test
-    public void displayIcons_teenyTinySpace_showsPlusIcon_noCrash() {
+    public void setIcons_teenyTinySpace_showsPlusIcon_noCrash() {
         CircularIconSet<Integer> iconSet = new CircularIconSet<>(ImmutableList.of(1, 2),
                 ColorDrawable::new);
 
-        bindAndMeasureViewHolder(1);
-        mPreference.displayIcons(iconSet);
+        bindAndLayoutViewHolder(1);
+        mPreference.setIcons(iconSet);
 
-        assertThat(getIcons(mContainer)).isEmpty();
+        assertThat(getDrawables(mContainer)).isEmpty();
         assertThat(getPlusText(mContainer)).isEqualTo("+2");
     }
 
     @Test
-    public void displayIcons_beforeBind_loadsIconsOnBindAndMeasure() {
+    public void setIcons_beforeBind_loadsIconsOnBindAndMeasure() {
         CircularIconSet<Integer> iconSet = new CircularIconSet<>(ImmutableList.of(1, 2, 3),
                 ColorDrawable::new);
 
-        mPreference.displayIcons(iconSet);
-        assertThat(mPreference.getLoadedIcons()).isNull(); // Hold...
+        mPreference.setIcons(iconSet);
+        assertThat(mContainer).isNull(); // Hold...
 
         bindViewHolder();
-        assertThat(mPreference.getLoadedIcons()).isNull(); // Hooooold...
+        assertThat(getDrawables(mContainer)).hasSize(0); // Hooooold...
 
-        measureViewHolder(VIEW_WIDTH);
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(3);
-        assertThat(getIcons(mContainer)).hasSize(3);
+        layoutViewHolder(VIEW_WIDTH);
+        assertThat(getDrawables(mContainer)).hasSize(3);
     }
 
     @Test
-    public void displayIcons_beforeMeasure_loadsIconsOnMeasure() {
+    public void setIcons_beforeMeasure_loadsIconsOnMeasure() {
         CircularIconSet<Integer> iconSet = new CircularIconSet<>(ImmutableList.of(1, 2, 3),
                 ColorDrawable::new);
         bindViewHolder();
 
-        mPreference.displayIcons(iconSet);
-        assertThat(mPreference.getLoadedIcons()).isNull();
+        mPreference.setIcons(iconSet);
+        assertThat(getDrawables(mContainer)).hasSize(0);
 
-        measureViewHolder(VIEW_WIDTH);
-        assertThat(getIcons(mContainer)).hasSize(3);
+        layoutViewHolder(VIEW_WIDTH);
+        assertThat(getDrawables(mContainer)).hasSize(3);
     }
 
     @Test
-    public void displayIcons_calledAgain_reloadsIcons() {
+    public void setIcons_calledAgain_reloadsIcons() {
         CircularIconSet<Integer> threeIcons = new CircularIconSet<>(ImmutableList.of(1, 2, 3),
                 ColorDrawable::new);
         CircularIconSet<Integer> twoIcons = new CircularIconSet<>(ImmutableList.of(1, 2),
                 ColorDrawable::new);
         CircularIconSet<Integer> fourIcons = new CircularIconSet<>(ImmutableList.of(1, 2, 3, 4),
                 ColorDrawable::new);
-        bindAndMeasureViewHolder(VIEW_WIDTH);
+        bindAndLayoutViewHolder(VIEW_WIDTH);
 
-        mPreference.displayIcons(threeIcons);
-        assertThat(mPreference.getLoadedIcons()).isNotNull();
-        assertThat(getIcons(mContainer)).hasSize(3);
+        mPreference.setIcons(threeIcons);
+        assertThat(getDrawables(mContainer)).hasSize(3);
 
-        mPreference.displayIcons(twoIcons);
-        assertThat(mPreference.getLoadedIcons()).isNotNull();
-        assertThat(getIcons(mContainer)).hasSize(2);
+        mPreference.setIcons(twoIcons);
+        assertThat(getDrawables(mContainer)).hasSize(2);
 
-        mPreference.displayIcons(fourIcons);
-        assertThat(mPreference.getLoadedIcons()).isNotNull();
-        assertThat(getIcons(mContainer)).hasSize(4);
+        mPreference.setIcons(fourIcons);
+        assertThat(getDrawables(mContainer)).hasSize(4);
     }
 
     @Test
-    public void displayIcons_sameSet_doesNotReloadIcons() {
+    public void setIcons_sameSet_doesNotReloadIcons() {
         CircularIconSet<Integer> one = new CircularIconSet<>(ImmutableList.of(1, 2, 3),
                 ColorDrawable::new);
         CircularIconSet<Integer> same = Mockito.spy(new CircularIconSet<>(ImmutableList.of(1, 2, 3),
                 ColorDrawable::new));
         when(same.getIcons()).thenThrow(new RuntimeException("Shouldn't be called!"));
 
-        bindAndMeasureViewHolder(VIEW_WIDTH);
+        bindAndLayoutViewHolder(VIEW_WIDTH);
 
-        mPreference.displayIcons(one);
+        mPreference.setIcons(one);
 
-        mPreference.displayIcons(same); // if no exception, wasn't called.
+        mPreference.setIcons(same); // if no exception, wasn't called.
     }
+
+    @Test
+    public void sizeChanged_reloadsIconsIfDifferentFit() {
+        CircularIconSet<Integer> largeIconSet = new CircularIconSet<>(
+                IntStream.range(0, 100).boxed().toList(),
+                ColorDrawable::new);
+        mPreference.setIcons(largeIconSet);
+
+        // Base space -> some icons
+        int firstWidth = 600;
+        int firstFittingCircles = firstWidth / mOneIconWidth;
+        bindAndLayoutViewHolder(firstWidth);
+
+        assertThat(getDrawables(mContainer)).hasSize(firstFittingCircles - 1);
+        assertThat(getPlusText(mContainer)).isEqualTo("+" + (100 - (firstFittingCircles - 1)));
+
+        // More space -> more icons
+        int secondWidth = 1000;
+        int secondFittingCircles = secondWidth / mOneIconWidth;
+        assertThat(secondFittingCircles).isGreaterThan(firstFittingCircles);
+        bindAndLayoutViewHolder(secondWidth);
+
+        assertThat(getDrawables(mContainer)).hasSize(secondFittingCircles - 1);
+        assertThat(getPlusText(mContainer)).isEqualTo("+" + (100 - (secondFittingCircles - 1)));
+
+        // Less space -> fewer icons
+        int thirdWidth = 600;
+        int thirdFittingCircles = thirdWidth / mOneIconWidth;
+        bindAndLayoutViewHolder(thirdWidth);
+
+        assertThat(getDrawables(mContainer)).hasSize(thirdFittingCircles - 1);
+        assertThat(getPlusText(mContainer)).isEqualTo("+" + (100 - (thirdFittingCircles - 1)));
+    }
+
 
     @Test
     public void onBindViewHolder_withDifferentView_reloadsIconsCorrectly() {
         View preferenceViewOne = LayoutInflater.from(mContext).inflate(
                 mPreference.getLayoutResource(), null);
-        ViewGroup containerOne = preferenceViewOne.findViewById(R.id.circles_container);
+        CircularIconsView containerOne = preferenceViewOne.findViewById(R.id.circles_container);
+        containerOne.setUiExecutor(MoreExecutors.directExecutor());
         PreferenceViewHolder viewHolderOne = PreferenceViewHolder.createInstanceForTests(
                 preferenceViewOne);
         containerOne.measure(makeMeasureSpec(1000, View.MeasureSpec.EXACTLY),
@@ -253,7 +284,8 @@ public class CircularIconsPreferenceTest {
 
         View preferenceViewTwo = LayoutInflater.from(mContext).inflate(
                 mPreference.getLayoutResource(), null);
-        ViewGroup containerTwo = preferenceViewTwo.findViewById(R.id.circles_container);
+        CircularIconsView containerTwo = preferenceViewTwo.findViewById(R.id.circles_container);
+        containerTwo.setUiExecutor(MoreExecutors.directExecutor());
         PreferenceViewHolder viewHolderTwo = PreferenceViewHolder.createInstanceForTests(
                 preferenceViewTwo);
         containerTwo.measure(makeMeasureSpec(1000, View.MeasureSpec.EXACTLY),
@@ -265,25 +297,25 @@ public class CircularIconsPreferenceTest {
                 ColorDrawable::new);
 
         mPreference.onBindViewHolder(viewHolderOne);
-        mPreference.displayIcons(iconSetOne);
-        assertThat(getIcons(containerOne)).hasSize(3);
+        mPreference.setIcons(iconSetOne);
+        assertThat(getDrawables(containerOne)).hasSize(3);
 
         mPreference.onBindViewHolder(viewHolderTwo);
-        assertThat(getIcons(containerTwo)).hasSize(3);
+        assertThat(getDrawables(containerTwo)).hasSize(3);
 
-        mPreference.displayIcons(iconSetTwo);
+        mPreference.setIcons(iconSetTwo);
 
         // The second view is updated and the first view is unaffected.
-        assertThat(getIcons(containerTwo)).hasSize(2);
-        assertThat(getIcons(containerOne)).hasSize(3);
+        assertThat(getDrawables(containerTwo)).hasSize(2);
+        assertThat(getDrawables(containerOne)).hasSize(3);
     }
 
     @Test
-    public void setEnabled_afterDisplayIcons_showsEnabledOrDisabledImages() {
+    public void setEnabled_afterSetIcons_showsEnabledOrDisabledImages() {
         CircularIconSet<Integer> iconSet = new CircularIconSet<>(ImmutableList.of(1, 2),
                 ColorDrawable::new);
-        bindAndMeasureViewHolder(VIEW_WIDTH);
-        mPreference.displayIcons(iconSet);
+        bindAndLayoutViewHolder(VIEW_WIDTH);
+        mPreference.setIcons(iconSet);
         assertThat(getViews(mContainer)).hasSize(2);
 
         mPreference.setEnabled(false);
@@ -294,13 +326,13 @@ public class CircularIconsPreferenceTest {
     }
 
     @Test
-    public void setEnabled_beforeDisplayIcons_showsEnabledOrDisabledImages() {
+    public void setEnabled_beforeSetIcons_showsEnabledOrDisabledImages() {
         CircularIconSet<Integer> iconSet = new CircularIconSet<>(ImmutableList.of(1, 2),
                 ColorDrawable::new);
 
         mPreference.setEnabled(false);
-        bindAndMeasureViewHolder(VIEW_WIDTH);
-        mPreference.displayIcons(iconSet);
+        bindAndLayoutViewHolder(VIEW_WIDTH);
+        mPreference.setIcons(iconSet);
 
         assertThat(getViews(mContainer)).hasSize(2);
         assertThat(getViews(mContainer).get(0).getAlpha()).isLessThan(1f);
@@ -314,7 +346,7 @@ public class CircularIconsPreferenceTest {
         return views;
     }
 
-    private static List<Drawable> getIcons(ViewGroup container) {
+    private static List<Drawable> getDrawables(ViewGroup container) {
         ArrayList<Drawable> drawables = new ArrayList<>();
         for (int i = 0; i < container.getChildCount(); i++) {
             if (container.getChildAt(i) instanceof ImageView imageView) {

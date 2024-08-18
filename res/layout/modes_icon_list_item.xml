@@ -17,10 +17,9 @@
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/zen_mode_icon_list_item_size"
     android:layout_height="@dimen/zen_mode_icon_list_item_size"
     android:clickable="true">
-    <!-- width is match_parent to distribute remaining horizontal space -->
 
     <ImageView
         android:id="@+id/icon_image_view"

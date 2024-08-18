@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Suspenso"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Desconhecido"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Pré-visualização"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR code"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Tornar menor"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Tornar maior"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Sempre"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A seleção de idioma para este app não está disponível nas configurações."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"O idioma pode ser diferente dos disponíveis no app. Alguns apps podem não ter suporte a essa configuração."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Defina o idioma de cada app."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"O sistema, os apps e os sites usam o primeiro idioma disponível na sua lista."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"O dispositivo, os apps e os sites usam o primeiro idioma disponível na sua lista.\n\nMuitos apps também vão usar a região do idioma de sua preferência para formatar datas, números e unidades. Se quiser mudar sua região, adicione um idioma e escolha o local que prefere."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para selecionar um idioma para cada app, acesse as configurações de idioma dele."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Saiba mais sobre idiomas de apps"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Mudar o idioma do sistema para %s?"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Rosto e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rosto, impressão digital e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rosto, impressões digitais e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Isso é necessário porque a verificação de identidade está ativada"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Desbloqueio do Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Relógio adicionado"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configurar o relógio"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configurando o espaço privado…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Não foi possível configurar um espaço privado"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Tentar de novo"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Sair"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"O espaço privado não está disponível.\nConferir possíveis causas."</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Conferir possíveis causas"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Escolher outro bloqueio para o espaço privado?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Você pode definir um novo bloqueio para o espaço privado ou usar o mesmo que você usa para desbloquear seu dispositivo"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Usar o bloqueio de tela"</string>
@@ -765,7 +768,7 @@
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"Há uma recomendação de um PIN ou uma senha forte pelo app <xliff:g id="APP_NAME">%1$s</xliff:g>. Ele pode não funcionar adequadamente sem essa configuração."</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"Há uma recomendação de novo PIN ou senha pelo app <xliff:g id="APP_NAME">%1$s</xliff:g>. Ele pode não funcionar adequadamente sem essa configuração."</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"Há uma recomendação de novo padrão, PIN ou senha pelo app <xliff:g id="APP_NAME">%1$s</xliff:g>. Ele pode não funcionar adequadamente sem essa configuração."</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"Recomendação de um novo bloqueio de tela pelo app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"Um novo bloqueio de tela é recomendado pelo app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Tente novamente. Tentativa <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> de <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Seus dados serão excluídos"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Se você informar um padrão incorreto na próxima tentativa, os dados deste dispositivo serão excluídos"</string>
@@ -987,9 +990,9 @@
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"MAC aleatório"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Adicionar um dispositivo"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centralize o QR code abaixo para adicionar o dispositivo a “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Ler QR code"</string>
+    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Fazer a leitura do QR code"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Centralize o QR code abaixo para conectar a “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Para acessar a rede Wi-Fi, leia o QR code"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Para acessar a rede Wi-Fi, aponte a câmera para o QR code"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Compartilhar Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Faça a leitura deste QR code com outro dispositivo para entrar na rede “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Faça a leitura deste QR code para conectar-se a “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
@@ -2044,7 +2047,7 @@
     <string name="accessibility_settings" msgid="4713215774904704682">"Acessibilidade"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Configurações de acessibilidade"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Exibição, interação, áudio"</string>
-    <string name="vision_settings_title" msgid="8919983801864103069">"Configuração visual"</string>
+    <string name="vision_settings_title" msgid="8919983801864103069">"Configurações visuais"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"Você pode personalizar este dispositivo do jeito que quiser. Esses recursos de acessibilidade podem ser alterados depois nas Configurações."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Mudar o tamanho da fonte"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Leitor de tela"</string>
@@ -2127,12 +2130,12 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Texto e tamanho de exibição"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Mudar a exibição do texto"</string>
-    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Assunto: Tipos de balões de ar quente"</string>
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Assunto: Balões de ar quente"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De: Bruno"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Bom dia.\n\nEu só queria saber como a criação dos designs está indo. Eles vão estar prontos antes de começarmos a criar os novos balões?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Redefinir configurações"</string>
-    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"As definições de tamanho e texto da tela foram redefinidas"</string>
-    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Redefinir o texto e o tamanho da tela?"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"As definições dos tamanhos do texto e da exibição foram redefinidas"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Redefinir o texto e o tamanho da exibição?"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Redefinir"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Algum plano para o fim de semana?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Vou para a praia. Quer ir também?"</string>
@@ -2141,7 +2144,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tocar três vezes para ampliar"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Toque em um botão para aplicar zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Aplique zoom rapidamente na tela para ampliar o conteúdo"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Para aumentar o zoom, faça o seguinte:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use o atalho para iniciar a ampliação.&lt;br/&gt; {1,number,integer}. Toque na tela.&lt;br/&gt; {2,number,integer}. Arraste dois dedos para navegar pela tela.&lt;br/&gt; {3,number,integer}. Faça um gesto de pinça com dois dedos para ajustar o zoom.&lt;br/&gt; {4,number,integer}. Use o atalho para interromper a ampliação.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Se quiser aumentar o zoom temporariamente, faça o seguinte:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Confira se o tipo de ampliação está definido como tela cheia.&lt;br/&gt; {1,number,integer}. Use o atalho para iniciar a ampliação.&lt;br/&gt; {2,number,integer}. Toque em qualquer lugar da tela e a mantenha pressionada.&lt;br/&gt; {3,number,integer}. Arraste o dedo para navegar pela tela.&lt;br/&gt; {4,number,integer}. Solte para interromper a ampliação."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Para aumentar o zoom, faça o seguinte:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use o atalho para iniciar a ampliação.&lt;br/&gt; {1,number,integer}. Toque na tela.&lt;br/&gt; {2,number,integer}. Arraste dois dedos para navegar pela tela.&lt;br/&gt; {3,number,integer}. Faça um gesto de pinça com dois dedos para ajustar o zoom.&lt;br/&gt; {4,number,integer}. Use o atalho para interromper a ampliação.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Se quiser aumentar o zoom temporariamente, faça o seguinte:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Confira se o tipo de ampliação está definido como tela cheia.&lt;br/&gt; {1,number,integer}. Use o atalho para iniciar a ampliação.&lt;br/&gt; {2,number,integer}. Toque e pressione em qualquer lugar da tela.&lt;br/&gt; {3,number,integer}. Arraste o dedo para navegar pela tela.&lt;br/&gt; {4,number,integer}. Solte para interromper a ampliação."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Para aumentar o zoom, faça o seguinte:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use o atalho para iniciar a ampliação.&lt;br/&gt; {1,number,integer}. Toque na tela.&lt;br/&gt; {2,number,integer}. Arraste 2 dedos para navegar pela tela.&lt;br/&gt; {3,number,integer}. Faça um gesto de pinça com 2 dedos para ajustar o zoom.&lt;br/&gt; {4,number,integer}. Pare a ampliação usando um atalho&lt;br/&gt;&lt;br/&gt; Você também pode aumentar o zoom temporariamente e fazer várias outras ações|."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Para aumentar o zoom, faça o seguinte:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use o atalho para iniciar a ampliação.&lt;br/&gt; {1,number,integer}. Toque na tela.&lt;br/&gt; {2,number,integer}. Arraste 1 ou 2 dedos para navegar pela tela.&lt;br/&gt; {3,number,integer}. Faça um gesto de pinça com 2 dedos para ajustar o zoom.&lt;br/&gt; {4,number,integer}. Pare a ampliação usando um atalho&lt;br/&gt;&lt;br/&gt; Você também pode aumentar o zoom temporariamente e fazer várias outras ações|."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Quando a ampliação está ativada, você pode aumentar o zoom na tela.\n\n"<b>"Para aplicar zoom"</b>", inicie a ampliação e toque em qualquer lugar da tela.\n"<ul><li>"Arraste dois dedos ou mais para rolar a tela."</li>\n<li>"Faça um gesto de pinça com dois ou mais dedos para ajustar o zoom."</li></ul>\n\n<b>"Para aplicar zoom temporariamente"</b>", inicie a ampliação e depois toque em qualquer ponto na tela e mantenha-o pressionado.\n"<ul><li>"Arraste para mover a tela."</li>\n<li>"Levante o dedo para diminuir o zoom."</li></ul>\n\n"Não é possível aumentar o zoom no teclado e na barra de navegação."</string>
@@ -2220,7 +2223,7 @@
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Transparente"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Não transparente"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texto em alto contraste"</string>
-    <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Mudar a cor do texto para preto ou branco. Maximiza o contraste com o plano de fundo."</string>
+    <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Muda a cor do texto para preto ou branco, maximizando o contraste com o plano de fundo."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Realce o texto aumentando o contraste"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Adicionar um fundo preto ou branco ao redor do texto para aumentar o contraste"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Atual. autom. da ampliação da tela"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Este serviço está com problemas."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Atalhos de acessibilidade"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Mostrar em \"Configurações rápidas\""</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Vermelho-verde"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Vermelho-verde"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Vermelho e verde, dificuldade com a cor verde"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Vermelho e verde, dificuldade com a cor vermelha"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Azul-amarelo"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Escala de cinza"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensidade"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Indisponível para o modo escala de cinza ou quando a correção de cor está desativada"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Dificuldade com a cor verde, deuteranomalia"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Dificuldade com a cor vermelha, protanomalia"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalia"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalia"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalia"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Escurecer mais a tela"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Deixar a tela ainda mais escura"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nenhuma}=1{1 programação definida}one{# programação definida}other{# programações definidas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Não perturbe"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Modos prioritários"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Adicionar um modo"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimize as distrações e controle seu foco com modos de sono, trabalho, direção e tudo mais."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Crie seu próprio modo"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Receber notificações apenas de pessoas e apps importantes"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Selecionar tipo de ativação"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Horário"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Exemplo: \"Das 9h30 às 17h\""</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Agenda"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Exemplo: \"Agenda pessoal\""</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Definir uma programação"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Programação baseada em"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Dia e hora"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"Das 9h às 17h em dias de semana\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Eventos da agenda"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} está ativo}=2{{mode_1} e {mode_2} estão ativos}=3{{mode_1}, {mode_2} e {mode_3} estão ativos}one{{mode_1}, {mode_2} e mais # modo estão ativos}other{{mode_1}, {mode_2} e mais # modos estão ativos}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 modo pode ser ativado automaticamente}one{# modo pode ser ativado automaticamente}other{# modos podem ser ativados automaticamente}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ATIVADO"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Não definido"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Desativado"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Criar um modo"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Personalizado"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Ativar agora"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Desativar"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Modo não encontrado"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitar interrupções"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Bloquear interrupções e distrações"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Configurar <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Ativar o Não perturbe"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmes e sons de mídia podem interromper"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Programações"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Editar"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Programações"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Programação"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Ativar automaticamente"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Adicione uma agenda"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Use sua agenda"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Programação"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Definir uma programação"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Quando ativar automaticamente"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Programação de eventos"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Ativar durante eventos para"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Em que a resposta do convite seja"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Programação de horário"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programação"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g>h e <xliff:g id="MINUTES">%2$d</xliff:g>min"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Ativar automaticamente"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programação"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silenciar smartphone em horários específicos"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Definir regras do modo \"Não perturbe\""</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Permitir interrupções que emitem sons"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloquear perturbações visuais"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permitir sinais visuais"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Mantenha o foco"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Ações adicionais"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Filtros de notificações"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Mais configurações"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Desativado}=1{Desativado / 1 modo pode ser ativado automaticamente}one{Desativado / # modo pode ser ativado automaticamente}other{Desativado / # modos podem ser ativados automaticamente}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Configurações de tela"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Opções de exibição"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ativar tema escuro"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Muda o SO e os apps para dar preferência a texto claro em um fundo escuro, o que pode facilitar a visualização e oferecer uma economia de bateria significativa em alguns dispositivos"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nenhuma mudança na tela}=1{{effect_1}}=2{{effect_1} e {effect_2}}=3{{effect_1}, {effect_2} e {effect_3}}one{{effect_1}, {effect_2} e mais #}other{{effect_1}, {effect_2} e mais #}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtrar interrupções"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Limitar quem pode enviar notificações"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nenhuma interrupção está sendo filtrada"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opções de exibição para notificações filtradas"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quando o Não perturbe estiver ativado"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Conversas"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Todas as conversas"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"todas as conversas"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Conversas prioritárias"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"conversas prioritárias"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nenhuma"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Alterar para \"Somente alarmes\" até <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Alterar para \"Sempre interromper\""</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Modo de edição"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Modo de adição"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Criar um modo"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Modo personalizado"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Nome do modo"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventos da agenda"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Rotina de sono"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rotina Hora de dormir"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Ao dirigir"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Vinculado ao app"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Configurações do app"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informações e configurações em <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Gerenciado por <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Desativar modo"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Ao desativar o recurso, o modo não vai mais funcionar conforme esperado e suas configurações ficarão ocultas."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Desativar o <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Este modo nunca será ativado quando estiver desativado"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Desativar"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Ativar modo"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Ao ativar o recurso, o modo será ativado automaticamente de acordo com a programação dele."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Ativar <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Esse modo pode ser ativado automaticamente de acordo com as configurações"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Ativar"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Defina um modo que siga uma programação regular"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Defina um modo para sincronizar com eventos da agenda e respostas a convites"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Crie uma rotina de sono relaxante. Defina alarmes, escureça a tela e bloqueie notificações."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Priorize a segurança na estrada para dirigir com foco e sem distrações"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloqueie distrações ou interrupções de seu dispositivo para manter o foco"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimine todas as distrações para ter um ambiente silencioso"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalize as experiências e configurações do dispositivo para diferentes usuários"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimize interrupções, permitindo que apenas pessoas e apps importantes entrem em contato com você"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Alerta"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fechar"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Enviar feedback sobre o dispositivo"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Bateria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Painel de configurações"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Ativar janelas de forma livre"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Permitir janelas de forma livre na tela secundária"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Ativar recursos não redimensionáveis em várias janelas"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permitir que apps não redimensionáveis sejam usados em várias janelas"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Manter o recurso Forçar modo escuro ativado"</string>
@@ -5182,10 +5184,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizar"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personalizar <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"É necessário reiniciar o dispositivo para permitir as janelas em formato livre."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"É necessário reiniciar o dispositivo para atualizar a disponibilidade de janelas em formato livre."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"É necessário reiniciar o dispositivo para permitir janelas em formato livre em telas secundárias."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reiniciar agora"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reiniciar mais tarde"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Áudio espacial"</string>
@@ -5282,7 +5282,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Rosa"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violeta"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Concluído"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Salvar"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Cancelar"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Padrão"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Médio"</string>

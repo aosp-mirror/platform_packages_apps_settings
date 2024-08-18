@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Afgelas"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Onbekend"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Voorskou"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR-kode"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Maak kleiner"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Maak groter"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Altyd"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Taalkeuse vir hierdie program is nie in Instellings beskikbaar nie."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Taal kan verskil van tale wat in die program beskikbaar is. Sommige programme steun dalk nie hierdie instelling nie."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Stel die taal vir elke app."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Jou stelsel, apps en webwerwe gebruik die eerste gesteunde taal uit jou voorkeurtale."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Jou toestel, apps en webwerwe gebruik die eerste gesteunde taal uit jou voorkeurtaallys.\n\nBaie apps sal ook die streek van jou voorkeurtaal gebruik om datums, getalle en eenhede te formateer. Voeg ’n taal by en kies dan jou voorkeurstreek as jy jou streek wil verander."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Gaan na apptaalinstellings vir elke app om ’n taal te kies."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Meer inligting oor apptale"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Verander stelseltaal na %s ?"</string>
@@ -394,7 +393,7 @@
     <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Horlosieontsluiting is nog ’n gerieflike manier om jou foon te ontsluit, byvoorbeeld wanneer jou gesig nie herken word nie."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Gebruik vingerafdruk of horlosie om te"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Gebruik gesig of horlosie om te"</string>
-    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Gebruik gesig, vingerafdruk of horlosie om te"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Gebruik gesig, vingerafdruk of horlosie:"</string>
     <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"Gebruik horlosie om te"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Gebruik gesig of horlosie"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Gebruik vingerafdruk of horlosie"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Gesig en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Gesig, vingerafdruk en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Gesig, vingerafdrukke en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Dit is nodig omdat Identiteitkontrole aan is"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator-ontsluiting"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Horlosie is bygevoeg"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Stel jou horlosie op"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Stel tans privaat ruimte op …"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Kon nie privaat ruimte opstel nie"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Probeer weer"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Gaan uit"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Privaat ruimte is nie beskikbaar nie.\nBekyk moontlike oorsake"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Bekyk moontlike oorsake"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Wil jy ’n nuwe slot vir privaat ruimte kies?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Jy kan ’n nuwe slot net vir privaat ruimte stel, of dieselfde slot gebruik wat jy gebruik om jou toestel te ontsluit"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Gebruik skermslot"</string>
@@ -1763,7 +1766,7 @@
     <string name="controls_label" msgid="8671492254263626383">"Kontroles"</string>
     <string name="force_stop" msgid="2681771622136916280">"Verplig stop"</string>
     <string name="archive" msgid="9074663845068632127">"Argiveer"</string>
-    <string name="restore" msgid="7622486640713967157">"Stel terug"</string>
+    <string name="restore" msgid="7622486640713967157">"Laai terug"</string>
     <string name="restoring_step_one" msgid="3465050101254272874">"Stel tans terug"</string>
     <string name="restoring_step_two" msgid="140484846432595108">"Stel tans terug."</string>
     <string name="restoring_step_three" msgid="3712883580876329811">"Stel tans terug …"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Hierdie diens werk nie."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Toeganklikheidkortpaaie"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Wys in Vinnige instellings"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Rooi-groen"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rooi-groen"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Rooi-groen, groen is swak"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Rooi-groen, rooi is swak"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Blou-geel"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Grysskaal"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensiteit"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Onbeskikbaar vir grysskaalmodus of wanneer kleurregstelling gedeaktiveer is"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Groen swak, deuteranomalie"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Rooi swak, protanomalie"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalie"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalie"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra flou"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Maak skerm ekstra donker"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Geen}=1{1 skedule gestel}other{# skedules gestel}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Moenie Steur Nie"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Prioriteitmodusse"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Voeg ’n modus by"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Verminder afleidings en neem beheer oor jou aandag met modusse vir slaap, werk, bestuur en alles tussenin."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Skep jou eie modus"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Word net deur belangrike mense en apps in kennis gestel"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Kies aktiveringtipe"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Tyd"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Bv. \"09:30-17:00\""</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalender"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Bv. \"Persoonlike kalender\""</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Stel ’n skedule"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Skedule gebaseer op"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Dag en tyd"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9:00-17:00 weeksdae\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalendergeleenthede"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} is aktief}=2{{mode_1} en {mode_2} is aktief}=3{{mode_1}, {mode_2} en {mode_3} is aktief}other{{mode_1}, {mode_2} en nog # is aktief}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 modus kan outomaties aanskakel}other{# modusse kan outomaties aanskakel}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"AAN"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nie gestel nie"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Gedeaktiveer"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Skep ’n modus"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Gepasmaak"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Skakel nou aan"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Skakel af"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Modus nie gevind nie"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Beperk onderbrekings"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Blokkeer onderbrekings en afleidings"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Stel <xliff:g id="MODE">%1$s</xliff:g> op"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Skakel Moenie steur nie aan"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Wekkers en mediaklanke kan onderbreek"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Skedules"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Wysig"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Skedules"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Skedule"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Skakel outomaties aan"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Voeg ’n kalender by"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Gebruik jou kalender"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Skedule"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Stel ’n skedule"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Wanneer om outomaties aan te skakel"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Geleentheidskedule"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Skakel aan tydens geleenthede vir"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Waar uitnodigingantwoord die volgende is"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Tydskedule"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Skedule"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> uur, <xliff:g id="MINUTES">%2$d</xliff:g> min."</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Skakel outomaties aan"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Skedule"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Maak foon op sekere tye stil"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Stel Moenie Steur Nie-reëls"</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Laat onderbrekings wat klanke maak toe"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokkeer visuele steurings"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Laat visuele tekens toe"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Bly gefokus"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Bykomende handelinge"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Kennisgewingfilters"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Nog instellings"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Af}=1{Af / 1 modus kan automaties aanskakel}other{Af / # modusse kan automaties aanskakel}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Vertooninstellings"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Vertoon opsies"</string>
@@ -3396,9 +3406,9 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"aktiveer donkertema"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Wissel die bedryfstelsel en apps om ligte teks op ’n donker agtergrond te verkies, wat makliker vir die oë kan wees en aansienlike batterybesparings op sekere toestelle bied"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Geen skermveranderinge nie}=1{{effect_1}}=2{{effect_1} en {effect_2}}=3{{effect_1}, {effect_2} en {effect_3}}other{{effect_1}, {effect_2}, en nog #}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filter onderbrekings"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Beperk wat vir jou kennisgewings kan stuur"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Geen onderbrekings is gefilter nie"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Vertoon opsies vir gefiltreerde kennisgewings"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Vertoonopsies vir gefiltreerde kennisgewings"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Wanneer Moenie Steur Nie aan is"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Geen klank van kennisgewings af nie"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Jy sal kennisgewings op jou skerm sien"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Gesprekke"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Alle gesprekke"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"alle gesprekke"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioriteitgesprekke"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioriteitgesprekke"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Geen"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Verander tot <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> na net wekkers"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Verander na onderbreek altyd"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Wysig modus"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Voeg modus by"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Skep ’n modus"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Gepasmaakte modus"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Modusnaam"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalendergeleenthede"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Slaapskedule"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Slaaptydroetine"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Terwyl jy bestuur"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Gekoppel aan app"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Appinstellings"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Inligting en instellings in <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Bestuur deur <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Deaktiveer modus"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"As jy hierdie kenmerk deaktiveer, sal die modus nie meer werk soos dit moet nie en sal sy instellings versteek word."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Deaktiveer <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Hierdie modus sal nooit aanskakel wanneer dit gedeaktiveer is nie"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Deaktiveer"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Aktiveer modus"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"As jy hierdie kenmerk aktiveer, sal die modus outomaties aktiveer volgens sy skedule."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Aktiveer <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Hierdie modus kan dalk outomaties aanskakel, afhangende van die instellings"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Aktiveer"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Stel ’n modus wat ’n gereelde skedule volg"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Stel ’n modus om met kalendergeleenthede en antwoorde op uitnodigings te sinkroniseer"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Ontwerp ’n kalmerende slaaproetine. Stel wekkers, verdof die skerm en blokkeer kennisgewings."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Prioritiseer veiligheid op die pad vir ’n gefokusde en afleidingsvrye rit"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blokkeer afleidings of onderbrekings van jou toestel af om fokus te verkry"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimineer alle afleidings vir ’n stil omgewing"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personaliseer toestelervarings en -instellings vir verskillende gebruikers"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimaliseer onderbrekings deur slegs belangrike mense en apps toe te laat om jou te bereik"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Waarskuwing"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Maak toe"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Stuur terugvoer oor hierdie toestel"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Battery"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Instellingspaneel"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Aktiveer vryevormvensters"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Aktiveer vryevormvensters op sekondêre skerm"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Aktiveer nieveranderbare grootte in multivenster"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Laat programme met nieveranderbare grootte toe in multivenster"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Ignoreer gedwonge donkermodus"</string>
@@ -5182,10 +5184,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Pasmaak"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Pasmaak <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"’n Herselflaai word vereis om vryevormvenstersteun te aktiveer."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"’n Herselflaai word vereis om die beskikbaarheid van vryevormvensters op te dateer."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"’n Herselflaai word vereis om vryevormvensters op sekondêre skerms te aktiveer."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Herselflaai nou"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Herselflaai later"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Ruimtelike Oudio"</string>
@@ -5282,7 +5282,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Roos"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Pers"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Klaar"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Stoor"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Kanselleer"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Verstek"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Medium"</string>
