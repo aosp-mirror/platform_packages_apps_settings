@@ -95,7 +95,7 @@ public final class ZenModeOtherLinkPreferenceControllerTest {
 
         mController.updateState(pref, mode);
 
-        verify(pref).displayIcons(argThat(iconSet -> iconSet.size() == 3));
+        verify(pref).setIcons(argThat(iconSet -> iconSet.size() == 3));
     }
 
     @Test
@@ -107,7 +107,7 @@ public final class ZenModeOtherLinkPreferenceControllerTest {
 
         mController.updateState(pref, mode);
 
-        verify(pref).displayIcons(argThat(iconSet ->
+        verify(pref).setIcons(argThat(iconSet ->
                 iconSet.size() == ZenModeSummaryHelper.OTHER_SOUND_CATEGORIES.size()));
     }
 }

@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Pidätetty"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Ei tiedossa"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Esikatselu"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR-koodi"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Pienennä"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Suurenna"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Aina"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sovellukselle ei voi valita kieltä asetuksista."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Kieli saattaa erota sovelluksessa saatavilla olevista kielistä. Jotkin sovellukset eivät ehkä tue tätä asetusta."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Valitse kieli kullekin sovellukselle."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Järjestelmä, sovellukset ja verkkosivustot käyttävät valitsemistasi kielistä ensimmäistä, jota tuetaan."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Laite, sovellukset ja verkkosivustot käyttävät valitsemistasi kielistä ensimmäistä, jota tuetaan.\n\nMonet sovellukset valitsevat myös päivämäärien, numeroiden ja yksiköiden muodon ensisijaisen kielesi alueen perusteella. Jos haluat vaihtaa aluetta, lisää kieli ja valitse ensisijainen alue."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Voit valita kielen kullekin sovellukselle sen kieliasetuksista."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Lue lisää sovellusten kielistä"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Muutetaanko järjestelmän kieleksi %s?"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Kasvot ja <xliff:g id="WATCH">%s</xliff:g> lisätty"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Kasvot, sormenjälki ja <xliff:g id="WATCH">%s</xliff:g> lisätty"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Kasvot, sormenjäljet ja <xliff:g id="WATCH">%s</xliff:g> lisätty"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Tätä tarvitaan, koska henkilöllisyyden tunnistaminen on päällä"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticatorin lukituksen avaus"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Kello lisätty"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Kellon käyttöönotto"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Yksityistä tilaa otetaan käyttöön…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Yksityisen tilan käyttöönotto epäonnistui"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Yritä uudelleen"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Poistu"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Yksityinen tila ei ole saatavilla.\nKatso mahdolliset syyt"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Katso mahdolliset syyt"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Valitaanko yksityiselle tilalle uusi lukitus?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Voit valita uuden lukituksen pelkästään yksityiselle tilalle tai käyttää laitteen lukitustapaa"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Käytä näytön lukitusta"</string>
@@ -663,7 +666,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Valitse uusi näytön lukitus"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Valitse työsovellusten lukitus"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Valitse uusi työlukitus"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Paranna suojausta määrittämällä näytön varalukitustapa"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Paranna suojausta valitsemalla näytön varalukitustapa"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Valitse toissijainen näytönlukitustapa"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"IT-järjestelmänvalvoja ei voi nollata näytön lukituksen avaustapaa, jos unohdat sen."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Valitse erillinen työlukitus"</string>
@@ -2130,10 +2133,10 @@
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Aihe: Kuumailmapallot"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Lähettäjä: Mika"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Huomenta!\n\nHalusin vain tarkistaa, miten suunnitelmat etenevät. Ovatko ne valmiina ennen kuin alamme rakentaa uusia kuumailmapalloja?"</string>
-    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Nollaa asetukset"</string>
-    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Näytön koko ja tekstin asetukset on nollattu"</string>
-    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Palautetaanko näytön koko ja teksti?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Nollaa"</string>
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Palauta asetukset"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Näyttökoko ja tekstiasetukset on nollattu"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Palautetaanko näyttökoko ja teksti?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Palauta"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Suunnitelmia viikonlopuksi?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Lähden rannalle. Liitytkö seuraan?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Asetukset"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Tämä palvelu ei toimi oikein."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Saavutettavuuden pikanäppäimet"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Näytä pika-asetuksissa"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Puna-vihersokeus"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Puna-vihersokeus"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Puna-vihersokeus, viherheikkous"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Puna-vihersokeus, punaheikkous"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Sini-keltasokeus"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Harmaasävy"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Voimakkuus"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Ei saatavilla harmaasävytilassa tai värinkorjauksen ollessa poissa käytöstä"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Vihreän värin heikkous, deuteranomalia"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Punaisen värin heikkous, protanomalia"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalia"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalia"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalia"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Erittäin himmeä"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Tee näytöstä erittäin himmeä"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ei yhtään}=1{1 aikataulu luotu}other{# aikataulua luotu}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Älä häiritse"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Prioriteettitilat"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Lisää tila"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimoi häiriötekijät ja paranna keskittymistäsi esimerkiksi uni-, työskentely- ja ajotiloilla."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Luo oma tila"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Salli ilmoitukset vain tärkeiltä ihmisiltä ja sovelluksilta"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Valitse aktivointityyppi"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Aika"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Esim. \"Klo 9.30–17.00\""</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Kalenteri"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Esim. \"Henkilökohtainen kalenteri\""</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Luo aikataulu"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Aikataulu tämän perusteella:"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Päivä ja aika"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"klo 9–17 arkipäivisin\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalenteritapahtumat"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} on aktiivinen}=2{{mode_1} ja {mode_2} ovat aktiivisia}=3{{mode_1}, {mode_2} ja {mode_3} ovat aktiivisia}other{{mode_1}, {mode_2} ja # muuta ovat aktiivisia}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 tila voi mennä päälle automaattisesti}other{# tilaa voi mennä päälle automaattisesti}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"PÄÄLLÄ"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Ei asetettu"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Ei käytössä"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Tilan luominen"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Oma"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Laita päälle nyt"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Laita pois päältä"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Tilaa ei löytynyt"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Keskeytysten rajoittaminen"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Estä keskeytykset ja häiriöt"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Ota <xliff:g id="MODE">%1$s</xliff:g> käyttöön"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Laita Älä häiritse ‑tila päälle"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Hälytykset ja median äänet voivat keskeyttää"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Aikataulut"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Muokkaa"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Aikataulut"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Aikataulu"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Ota käyttöön automaattisesti"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Kalenterin lisääminen"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Käytä kalenteria"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Aikataulu"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Luo aikataulu"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Milloin automaattisesti päällä"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Tapahtuman aikataulu"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Päällä tapahtumien aikana:"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Jos kutsun vastaus on"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Aikaan perustuva aikataulu"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Aikataulu"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h, <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Ota käyttöön automaattisesti"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Aikataulu"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Hiljennä puhelin tiettyinä aikoina"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Määritä Älä häiritse ‑säännöt"</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Salli keskeytykset äänen kanssa"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Estä näkyvät häiriötekijät"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Salli visuaaliset signaalit"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Keskity"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Lisätoiminnot"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Ilmoitusten suodattimet"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Lisää asetuksia"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Pois päältä}=1{Pois päältä / 1 tila voi mennä päälle automaattisesti}other{Pois päältä / # tilaa voi mennä päälle automaattisesti}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Näyttöasetukset"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Näyttöasetukset"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ota tumma teema käyttöön"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Vaihda käyttöjärjestelmään ja sovelluksiin vaalea teksti tummalla taustalla, mikä voi rasittaa silmiä vähemmän ja säästää akkua merkittävästi joillakin laitteilla"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ei muutoksia näyttöön}=1{{effect_1}}=2{{effect_1} ja {effect_2}}=3{{effect_1}, {effect_2} ja {effect_3}}other{{effect_1}, {effect_2} ja # muuta}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Suodata häiritöt"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Rajoita mistä voit saada ilmoituksia"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Häiriöitä ei suodateta"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Suodatettujen ilmoitusten näyttövalinnat"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kun Älä häiritse -tila on käytössä"</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Keskustelut"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Kaikki keskustelut"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"kaikki keskustelut"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Tärkeät keskustelut"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"tärkeät keskustelut"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"–"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Ota vain herätykset käyttöön kello <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> asti."</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Salli keskeytykset aina."</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Muokkaustila"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Lisää tila"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Luo tila"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Oma tila"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Tilan nimi"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalenteritapahtumat"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Nukkumisaikataulu"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Nukkumaanmeno-ohjelma"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Ajon aikana"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Linkitetty sovellukseen"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Sovellusasetukset"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Tiedot ja asetukset: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Ylläpitäjä: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Poista tila käytöstä"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Jos poistat ominaisuuden käytöstä, tämä tila ei enää toimi tarkoitetulla tavalla ja sen asetukset piilotetaan."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Poistetaanko <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Kun tila on pois käytöstä, se ei mene koskaan päälle"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Poista käytöstä"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Laita tila päälle"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Jos laitat ominaisuuden päälle, tila aktivoituu automaattisesti aikataulun mukaan."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Otetaanko <xliff:g id="MODE_NAME">%1$s</xliff:g> käyttöön?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Tila voi mennä automaattisesti päälle asetuksista riippuen"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Ota käyttöön"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Valitse tila, joka noudattaa säännöllistä aikataulua"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Valitse tila kalenteritapahtumien ja kutsuvastausten synkronointia varten"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Suunnittele rauhoittava rutiini nukkumaankäyntiä varten. Lisää herätykset, himmennä näyttö ja estä ilmoitukset."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Priorisoi turvallisuutta, jotta voit keskittyä ajamiseen ilman häiriöitä"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Estä häiriöt laitteelta, jotta voit keskittyä paremmin"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Eliminoi kaikki häiriöt, jotta voit nauttia hiljaisuudesta"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personoi laitteen käyttökokemuksia ja asetuksia eri käyttäjille"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimoi häiriöt sallimalla ilmoitukset vain tärkeiltä ihmisiltä ja sovelluksilta"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Varoitus"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Sulje"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Lähetä palautetta tästä laitteesta"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akku"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Asetuspaneeli"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Ota vapaamuotoiset ikkunat käyttöön"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Vapaamuotoiset ikkunat toissijaisella näytöllä"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Ota käyttöön kiinteän kokoiset usean ikkunan tilassa"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Sallii kiinteän kokoiset sovellukset usean ikkunan tilassa"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Ohita SmartDarkin pakottaminen päälle"</string>
@@ -5182,10 +5184,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Yksilöi"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Muokkaa <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Laite täytyy käynnistää uudelleen, jos haluat ottaa vapaamuotoisten ikkunoiden tuen käyttöön."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Laite täytyy käynnistää uudelleen, jos haluat päivittää vapaamuotoisten ikkunoiden saatavuuden."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Laite täytyy käynnistää uudelleen, jos haluat ottaa vapaamuotoiset ikkunat käyttöön toissijaisilla näytöillä."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Käynnistä uudelleen nyt"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Käynnistä uudelleen myöhemmin"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Tila-audio"</string>
@@ -5282,7 +5282,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Ruusu"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violetti"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Valmis"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Tallenna"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Peru"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Oletus"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Keskitaso"</string>

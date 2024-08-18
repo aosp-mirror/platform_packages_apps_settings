@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -56,8 +57,7 @@ public class ZenModesListAddModeTypeChooserDialog extends InstrumentedDialogFrag
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - Update metrics category
-        return 0;
+        return SettingsEnums.ZEN_MODE_NEW_TYPE_CHOOSER_DIALOG;
     }
 
     static void show(DashboardFragment parent,

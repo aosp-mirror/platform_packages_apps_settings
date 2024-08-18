@@ -365,12 +365,19 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         if (isChecked != developmentEnabledState) {
             if (isChecked) {
                 final int userId = getContext().getUserId();
-                if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getContext(),
-                        mIsBiometricsAuthenticated,
-                        false /* biometricsAuthenticationRequested */, userId)) {
+
+                final Utils.BiometricStatus biometricAuthStatus =
+                        Utils.requestBiometricAuthenticationForMandatoryBiometrics(
+                                getContext(),
+                                mIsBiometricsAuthenticated,
+                                userId);
+                if (biometricAuthStatus == Utils.BiometricStatus.OK) {
                     mSwitchBar.setChecked(false);
                     Utils.launchBiometricPromptForMandatoryBiometrics(this,
-                            REQUEST_BIOMETRIC_PROMPT, userId, false /* hideBackground */);
+                            REQUEST_BIOMETRIC_PROMPT,
+                            userId, false /* hideBackground */);
+                } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                    mSwitchBar.setChecked(false);
                 } else {
                     //Reset biometrics once enable dialog is shown
                     mIsBiometricsAuthenticated = false;

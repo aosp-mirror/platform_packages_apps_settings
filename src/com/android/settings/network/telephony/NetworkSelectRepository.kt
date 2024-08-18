@@ -18,8 +18,10 @@ package com.android.settings.network.telephony
 
 import android.content.Context
 import android.telephony.AccessNetworkConstants
+import android.telephony.CarrierConfigManager
 import android.telephony.NetworkRegistrationInfo
 import android.telephony.TelephonyManager
+import android.telephony.satellite.SatelliteManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -28,9 +30,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class NetworkSelectRepository(context: Context, subId: Int) {
+class NetworkSelectRepository(context: Context, private val subId: Int) {
     private val telephonyManager =
         context.getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)
+    private val satelliteManager = context.getSystemService(SatelliteManager::class.java)
+    private val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)
 
     data class NetworkRegistrationAndForbiddenInfo(
         val networkList: List<NetworkRegistrationInfo>,
@@ -55,10 +59,21 @@ class NetworkSelectRepository(context: Context, subId: Int) {
         if (telephonyManager.dataState != TelephonyManager.DATA_CONNECTED) return null
         // Try to get the network registration states
         val serviceState = telephonyManager.serviceState ?: return null
-        val networkList = serviceState.getNetworkRegistrationInfoListForTransportType(
+        var networkList = serviceState.getNetworkRegistrationInfoListForTransportType(
             AccessNetworkConstants.TRANSPORT_TYPE_WWAN
         )
         if (networkList.isEmpty()) return null
+
+        val satellitePlmn = getSatellitePlmns()
+        // If connected network is Satellite, filter out
+        if (satellitePlmn.isNotEmpty()) {
+            val filteredNetworkList = networkList.filter {
+                val cellIdentity = it.cellIdentity
+                val plmn = cellIdentity?.plmn
+                plmn != null && !satellitePlmn.contains(plmn)
+            }
+            networkList = filteredNetworkList
+        }
         // Due to the aggregation of cell between carriers, it's possible to get CellIdentity
         // containing forbidden PLMN.
         // Getting current network from ServiceState is no longer a good idea.
@@ -71,5 +86,25 @@ class NetworkSelectRepository(context: Context, subId: Int) {
      */
     private fun getForbiddenPlmns(): List<String> {
         return telephonyManager.forbiddenPlmns?.toList() ?: emptyList()
+    }
+
+    /**
+     * Update satellite PLMNs from the satellite framework.
+     */
+    private fun getSatellitePlmns(): List<String> {
+        val config = carrierConfigManager.getConfigForSubId(
+            subId,
+            CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL
+        )
+
+        val shouldFilter = config.getBoolean(
+            CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL,
+            true)
+
+        return if (shouldFilter) {
+            satelliteManager.getSatellitePlmnsForCarrier(subId)
+        } else {
+            emptyList();
+        }
     }
 }
