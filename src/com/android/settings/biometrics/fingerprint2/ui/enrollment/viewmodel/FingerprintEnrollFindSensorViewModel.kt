@@ -27,7 +27,7 @@ import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.fingerprint2.domain.interactor.AccessibilityInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.SensorInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.lib.model.SetupWizard
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Education
@@ -44,20 +44,20 @@ import kotlinx.coroutines.launch
 
 /** Models the UI state for fingerprint enroll education */
 class FingerprintEnrollFindSensorViewModel(
-  private val navigationViewModel: FingerprintNavigationViewModel,
-  private val fingerprintEnrollViewModel: FingerprintEnrollViewModel,
-  private val gatekeeperViewModel: FingerprintGatekeeperViewModel,
-  backgroundViewModel: BackgroundViewModel,
-  fingerprintFlowViewModel: FingerprintFlowViewModel,
-  accessibilityInteractor: AccessibilityInteractor,
-  foldStateInteractor: FoldStateInteractor,
-  orientationInteractor: OrientationInteractor,
-  fingerprintManagerInteractor: FingerprintManagerInteractor,
+    private val navigationViewModel: FingerprintNavigationViewModel,
+    private val fingerprintEnrollViewModel: FingerprintEnrollViewModel,
+    private val gatekeeperViewModel: FingerprintGatekeeperViewModel,
+    backgroundViewModel: BackgroundViewModel,
+    fingerprintFlowViewModel: FingerprintFlowViewModel,
+    accessibilityInteractor: AccessibilityInteractor,
+    foldStateInteractor: FoldStateInteractor,
+    orientationInteractor: OrientationInteractor,
+    sensorInteractor: SensorInteractor,
 ) : ViewModel() {
 
   /** Represents the stream of sensor type. */
   val sensorType: Flow<FingerprintSensorType> =
-    fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
+    sensorInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
   private val _isUdfps: Flow<Boolean> =
     sensorType.map {
       it == FingerprintSensorType.UDFPS_OPTICAL || it == FingerprintSensorType.UDFPS_ULTRASONIC
@@ -216,7 +216,7 @@ class FingerprintEnrollFindSensorViewModel(
           biometricEnvironment.accessibilityInteractor,
           biometricEnvironment.foldStateInteractor,
           biometricEnvironment.orientationInteractor,
-          biometricEnvironment.fingerprintManagerInteractor,
+          biometricEnvironment.createSensorPropertiesInteractor(),
         )
       }
     }

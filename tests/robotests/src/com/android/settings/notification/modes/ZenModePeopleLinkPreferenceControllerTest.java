@@ -22,6 +22,7 @@ import static android.service.notification.ZenPolicy.PEOPLE_TYPE_CONTACTS;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_NONE;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_STARRED;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -50,6 +51,7 @@ import android.view.View;
 
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settings.R;
 import com.android.settings.notification.modes.ZenHelperBackend.Contact;
 import com.android.settingslib.notification.ConversationIconFactory;
 import com.android.settingslib.notification.modes.TestModeBuilder;
@@ -76,6 +78,7 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
     private ZenModePeopleLinkPreferenceController mController;
     private CircularIconsPreference mPreference;
+    private CircularIconsView mIconsView;
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -94,6 +97,8 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
         // Ensure the preference view is bound & measured (needed to add icons).
         View preferenceView = LayoutInflater.from(mContext).inflate(mPreference.getLayoutResource(),
                 null);
+        mIconsView = checkNotNull(preferenceView.findViewById(R.id.circles_container));
+        mIconsView.setUiExecutor(MoreExecutors.directExecutor());
         preferenceView.measure(View.MeasureSpec.makeMeasureSpec(1000, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(1000, View.MeasureSpec.EXACTLY));
         PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(preferenceView);
@@ -142,9 +147,9 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
         mController.updateState(mPreference, mode);
 
-        assertThat(mPreference.getLoadedIcons()).isNotNull();
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(2);
-        assertThat(mPreference.getLoadedIcons().icons().stream()
+        assertThat(mIconsView.getDisplayedIcons()).isNotNull();
+        assertThat(mIconsView.getDisplayedIcons().icons()).hasSize(2);
+        assertThat(mIconsView.getDisplayedIcons().icons().stream()
                 .map(ColorDrawable.class::cast)
                 .map(d -> d.getColor()).toList())
                 .containsExactly(2, 3).inOrder();
@@ -162,9 +167,9 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
         mController.updateState(mPreference, mode);
 
-        assertThat(mPreference.getLoadedIcons()).isNotNull();
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(4);
-        assertThat(mPreference.getLoadedIcons().icons().stream()
+        assertThat(mIconsView.getDisplayedIcons()).isNotNull();
+        assertThat(mIconsView.getDisplayedIcons().icons()).hasSize(4);
+        assertThat(mIconsView.getDisplayedIcons().icons().stream()
                 .map(ColorDrawable.class::cast)
                 .map(d -> d.getColor()).toList())
                 .containsExactly(1, 2, 3, 4).inOrder();
@@ -182,8 +187,8 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
         mController.updateState(mPreference, mode);
 
-        assertThat(mPreference.getLoadedIcons()).isNotNull();
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(1);
+        assertThat(mIconsView.getDisplayedIcons()).isNotNull();
+        assertThat(mIconsView.getDisplayedIcons().icons()).hasSize(1);
         verify(mHelperBackend, never()).getContactPhoto(any());
     }
 
@@ -201,8 +206,8 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
         mController.updateState(mPreference, mode);
 
-        assertThat(mPreference.getLoadedIcons()).isNotNull();
-        assertThat(mPreference.getLoadedIcons().icons()).hasSize(3);
+        assertThat(mIconsView.getDisplayedIcons()).isNotNull();
+        assertThat(mIconsView.getDisplayedIcons().icons()).hasSize(3);
         verify(mConversationIconFactory, times(3)).getConversationDrawable((ShortcutInfo) any(),
                 any(), anyInt(), anyBoolean());
     }

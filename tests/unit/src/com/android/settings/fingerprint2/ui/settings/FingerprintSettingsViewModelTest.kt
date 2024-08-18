@@ -73,19 +73,25 @@ class FingerprintSettingsViewModelTest {
     navigationViewModel =
       FingerprintSettingsNavigationViewModel.FingerprintSettingsNavigationModelFactory(
           defaultUserId,
-          fakeFingerprintManagerInteractor,
           backgroundDispatcher,
           null,
           null,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
         )
         .create(FingerprintSettingsNavigationViewModel::class.java)
 
     underTest =
       FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
           defaultUserId,
-          fakeFingerprintManagerInteractor,
           backgroundDispatcher,
           navigationViewModel,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
         )
         .create(FingerprintSettingsViewModel::class.java)
   }
@@ -114,14 +120,7 @@ class FingerprintSettingsViewModelTest {
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
         mutableListOf(FingerprintData("a", 1, 3L))
 
-      underTest =
-        FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
-            defaultUserId,
-            fakeFingerprintManagerInteractor,
-            backgroundDispatcher,
-            navigationViewModel,
-          )
-          .create(FingerprintSettingsViewModel::class.java)
+      recreateSettingsViewModel()
 
       var authAttempt: FingerprintAuthAttemptModel? = null
       val job = launch { underTest.authFlow.take(5).collectLatest { authAttempt = it } }
@@ -156,14 +155,7 @@ class FingerprintSettingsViewModelTest {
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
         mutableListOf(FingerprintData("a", 1, 3L))
 
-      underTest =
-        FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
-            defaultUserId,
-            fakeFingerprintManagerInteractor,
-            backgroundDispatcher,
-            navigationViewModel,
-          )
-          .create(FingerprintSettingsViewModel::class.java)
+      recreateSettingsViewModel()
 
       var authAttempt: FingerprintAuthAttemptModel? = null
       val job = launch { underTest.authFlow.take(5).collectLatest { authAttempt = it } }
@@ -198,14 +190,7 @@ class FingerprintSettingsViewModelTest {
       val success = FingerprintAuthAttemptModel.Success(1)
       fakeFingerprintManagerInteractor.authenticateAttempt = success
 
-      underTest =
-        FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
-            defaultUserId,
-            fakeFingerprintManagerInteractor,
-            backgroundDispatcher,
-            navigationViewModel,
-          )
-          .create(FingerprintSettingsViewModel::class.java)
+      recreateSettingsViewModel()
 
       var authAttempt: FingerprintAuthAttemptModel? = null
 
@@ -225,14 +210,7 @@ class FingerprintSettingsViewModelTest {
     fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
       mutableListOf(fingerprintToDelete)
 
-    underTest =
-      FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
-          defaultUserId,
-          fakeFingerprintManagerInteractor,
-          backgroundDispatcher,
-          navigationViewModel,
-        )
-        .create(FingerprintSettingsViewModel::class.java)
+    recreateSettingsViewModel()
 
     var dialog: PreferenceViewModel? = null
     val dialogJob = launch { underTest.isShowingDialog.collect { dialog = it } }
@@ -261,14 +239,7 @@ class FingerprintSettingsViewModelTest {
     fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
       mutableListOf(fingerprintToRename)
 
-    underTest =
-      FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
-          defaultUserId,
-          fakeFingerprintManagerInteractor,
-          backgroundDispatcher,
-          navigationViewModel,
-        )
-        .create(FingerprintSettingsViewModel::class.java)
+    recreateSettingsViewModel()
 
     var dialog: PreferenceViewModel? = null
     val dialogJob = launch { underTest.isShowingDialog.collect { dialog = it } }
@@ -299,14 +270,7 @@ class FingerprintSettingsViewModelTest {
     fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
       mutableListOf(fingerprintToDelete)
 
-    underTest =
-      FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
-          defaultUserId,
-          fakeFingerprintManagerInteractor,
-          backgroundDispatcher,
-          navigationViewModel,
-        )
-        .create(FingerprintSettingsViewModel::class.java)
+    recreateSettingsViewModel()
 
     var dialog: PreferenceViewModel? = null
     val dialogJob = launch { underTest.isShowingDialog.collect { dialog = it } }
@@ -390,6 +354,22 @@ class FingerprintSettingsViewModelTest {
       assertThat(authAttempt).isEqualTo(null)
     }
 
+  private fun recreateSettingsViewModel() {
+    underTest =
+      FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
+          defaultUserId,
+          backgroundDispatcher,
+          navigationViewModel,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
+        )
+        .create(FingerprintSettingsViewModel::class.java)
+  }
+
   private fun setupAuth(): MutableList<FingerprintData> {
     fakeFingerprintManagerInteractor.sensorProp =
       FingerprintSensorPropertiesInternal(
@@ -409,14 +389,7 @@ class FingerprintSettingsViewModelTest {
     val success = FingerprintAuthAttemptModel.Success(1)
     fakeFingerprintManagerInteractor.authenticateAttempt = success
 
-    underTest =
-      FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
-          defaultUserId,
-          fakeFingerprintManagerInteractor,
-          backgroundDispatcher,
-          navigationViewModel,
-        )
-        .create(FingerprintSettingsViewModel::class.java)
+    recreateSettingsViewModel()
 
     return fingerprints
   }

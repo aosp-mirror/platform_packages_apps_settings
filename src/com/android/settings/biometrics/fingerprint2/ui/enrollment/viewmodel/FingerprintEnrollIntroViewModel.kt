@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.settings.SettingsApplication
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.SensorInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintFlow
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Introduction
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
@@ -30,13 +30,13 @@ import kotlinx.coroutines.flow.Flow
 
 /** A view model for fingerprint enroll introduction. */
 class FingerprintEnrollIntroViewModel(
-  val navigationViewModel: FingerprintNavigationViewModel,
-  fingerprintFlowViewModel: FingerprintFlowViewModel,
-  fingerprintManagerInteractor: FingerprintManagerInteractor,
+    val navigationViewModel: FingerprintNavigationViewModel,
+    fingerprintFlowViewModel: FingerprintFlowViewModel,
+    sensorInteractor: SensorInteractor,
 ) : ViewModel() {
 
   /** Represents a stream of [FingerprintSensor] */
-  val sensor: Flow<FingerprintSensor?> = fingerprintManagerInteractor.sensorPropertiesInternal
+  val sensor: Flow<FingerprintSensor?> = sensorInteractor.sensorPropertiesInternal
 
   /** Represents a stream of [FingerprintFlow] */
   val fingerprintFlow: Flow<FingerprintFlow?> = fingerprintFlowViewModel.fingerprintFlow
@@ -67,7 +67,7 @@ class FingerprintEnrollIntroViewModel(
         FingerprintEnrollIntroViewModel(
           provider[FingerprintNavigationViewModel::class],
           provider[FingerprintFlowViewModel::class],
-          biometricEnvironment!!.fingerprintManagerInteractor,
+          biometricEnvironment!!.createSensorPropertiesInteractor(),
         )
       }
     }

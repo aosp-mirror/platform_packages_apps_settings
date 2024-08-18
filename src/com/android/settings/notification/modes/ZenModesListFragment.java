@@ -74,8 +74,7 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - add new & set metrics categories correctly
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION;
+        return SettingsEnums.ZEN_PRIORITY_MODES_LIST;
     }
 
     private void onAvailableModeTypesForAdd(List<ModeType> types) {
@@ -97,10 +96,9 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
             startActivityForResult(type.creationActivityIntent(), REQUEST_NEW_MODE);
         } else {
             // Custom-manual mode -> "add a mode" screen.
-            // TODO: b/332937635 - set metrics categories correctly
             new SubSettingLauncher(requireContext())
                     .setDestination(ZenModeNewCustomFragment.class.getName())
-                    .setSourceMetricsCategory(0)
+                    .setSourceMetricsCategory(SettingsEnums.ZEN_PRIORITY_MODES_LIST)
                     .launch();
         }
     }
@@ -125,7 +123,9 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
                 .filter(m -> m.getRule().getPackageName().equals(activityInvoked.getPackageName()))
                 .findFirst();
         createdZenMode.ifPresent(
-                mode -> ZenSubSettingLauncher.forMode(mContext, mode.getId()).launch());
+                mode ->
+                        ZenSubSettingLauncher.forModeFragment(mContext, ZenModeFragment.class,
+                                mode.getId(), getMetricsCategory()).launch());
     }
 
     /**

@@ -68,19 +68,8 @@ public abstract class VibrationPreferenceConfig {
     /** Play a vibration effect with intensity just selected by the user. */
     public static void playVibrationPreview(Vibrator vibrator,
             @VibrationAttributes.Usage int vibrationUsage) {
-        playVibrationPreview(vibrator, createPreviewVibrationAttributes(vibrationUsage));
-    }
-
-    /**
-     * Play a vibration effect with intensity just selected by the user.
-     *
-     * @param vibrator The {@link Vibrator} used to play the vibration.
-     * @param vibrationAttributes The {@link VibrationAttributes} to indicate the
-     *        vibration information.
-     */
-    public static void playVibrationPreview(Vibrator vibrator,
-            VibrationAttributes vibrationAttributes) {
-        vibrator.vibrate(PREVIEW_VIBRATION_EFFECT, vibrationAttributes);
+        vibrator.vibrate(PREVIEW_VIBRATION_EFFECT,
+                createPreviewVibrationAttributes(vibrationUsage));
     }
 
     public VibrationPreferenceConfig(Context context, String settingKey,

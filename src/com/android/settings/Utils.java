@@ -200,6 +200,15 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Enum for returning biometric status.
+     * {@link OK} no error detected when requesting mandatory biometrics authentication
+     * {@link NOT_ACTIVE} mandatory biometrics is not active
+     * {@link LOCKOUT} biometric sensors are in lockout mode
+     * {@link ERROR} corresponds to other errors
+     */
+    public enum BiometricStatus {OK, NOT_ACTIVE, LOCKOUT, ERROR}
+
+    /**
      * Returns whether the device is voice-capable (meaning, it is also a phone).
      */
     public static boolean isVoiceCapable(Context context) {
@@ -1489,34 +1498,41 @@ public final class Utils extends com.android.settingslib.Utils {
     /**
      * Request biometric authentication if all requirements for mandatory biometrics is satisfied.
      *
-     * @param context                             of the corresponding activity/fragment
-     * @param biometricsSuccessfullyAuthenticated if the user has already authenticated using
-     *                                            biometrics
-     * @param biometricsAuthenticationRequested   if the activity/fragment has already requested for
-     *                                            biometric prompt
-     * @param userId                              user id for the authentication request
-     * @return true if all requirements for mandatory biometrics is satisfied
+     * @param context                           of the corresponding activity/fragment
+     * @param biometricsAuthenticationRequested if the activity/fragment has already requested for
+     *                                          biometric prompt
+     * @param userId                            user id for the authentication request
+     * @return biometric status when mandatory biometrics authentication is requested
      */
-    public static boolean requestBiometricAuthenticationForMandatoryBiometrics(
+    public static BiometricStatus requestBiometricAuthenticationForMandatoryBiometrics(
             @NonNull Context context,
-            boolean biometricsSuccessfullyAuthenticated,
             boolean biometricsAuthenticationRequested, int userId) {
         final BiometricManager biometricManager = context.getSystemService(BiometricManager.class);
         if (biometricManager == null) {
             Log.e(TAG, "Biometric Manager is null.");
-            return false;
+            return BiometricStatus.NOT_ACTIVE;
         }
         final int status = biometricManager.canAuthenticate(userId,
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
-        return android.hardware.biometrics.Flags.mandatoryBiometrics()
-                && status == BiometricManager.BIOMETRIC_SUCCESS
-                && !biometricsSuccessfullyAuthenticated
-                && !biometricsAuthenticationRequested;
+        if (android.hardware.biometrics.Flags.mandatoryBiometrics()
+                && !biometricsAuthenticationRequested) {
+            switch(status) {
+                case BiometricManager.BIOMETRIC_SUCCESS:
+                    return BiometricStatus.OK;
+                case BiometricManager.BIOMETRIC_ERROR_LOCKOUT:
+                    return BiometricStatus.LOCKOUT;
+                case BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE:
+                    return BiometricStatus.NOT_ACTIVE;
+                default:
+                    return BiometricStatus.ERROR;
+            }
+        }
+        return BiometricStatus.NOT_ACTIVE;
     }
 
     /**
      * Launch biometric prompt for mandatory biometrics. Call
-     * {@link #requestBiometricAuthenticationForMandatoryBiometrics(Context, boolean, boolean, int)}
+     * {@link #requestBiometricAuthenticationForMandatoryBiometrics(Context, boolean, int)}
      * to check if all requirements for mandatory biometrics is satisfied
      * before launching biometric prompt.
      *
