@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Призупинено"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Невідомо"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Переглянути"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR-код"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Зменшити"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Збільшити"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Завжди"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Вибір мови для цього додатка в налаштуваннях неможливий"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Мова може відрізнятися від мов, доступних у додатку. Деякі додатки можуть не підтримувати це налаштування."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Виберіть мову для кожного додатка."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Система, додатки й веб-сайти використовують першу підтримувану мову з вибраних вами."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Пристрій, додатки й вебсайти використовують першу підтримувану мову з вашого списку бажаних мов.\n\nБагато додатків також використовуватимуть формат дат, чисел і одиниць вимірювання, прийнятих у регіоні, що відповідає вибраній вами мові. Щоб змінити регіон, додайте мову, а потім виберіть потрібний регіон."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Щоб вибрати мову для кожного додатка, перейдіть у його налаштування мови."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Докладніше про мови додатків"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Змінити мову системи на таку: %s?"</string>
@@ -412,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Додано обличчя та годинник \"<xliff:g id="WATCH">%s</xliff:g>\""</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Додано обличчя, відбиток пальця та годинник \"<xliff:g id="WATCH">%s</xliff:g>\""</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Додано обличчя, відбитки пальців і годинник \"<xliff:g id="WATCH">%s</xliff:g>\""</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Це потрібно, оскільки ввімкнено перевірку особи"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Розблокування (Remote Authenticator)"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Годинник додано"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Налаштуйте свій годинник"</string>
@@ -624,6 +624,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Налаштування приватного простору…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Не вдалося налаштувати приватний простір"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Повторити"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Вийти"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Приватний простір недоступний.\nПереглянути можливі причини"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Перегляньте можливі причини"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Вибрати новий спосіб розблокування для приватного простору?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Ви можете налаштувати новий спосіб розблокування лише для приватного простору або використовувати той самий, що й для розблокування пристрою"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Доступ розблокуванням екрана"</string>
@@ -684,7 +687,7 @@
     <string name="unlock_set_unlock_pin_title" msgid="5283636759362880407">"PIN-код"</string>
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Пароль"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Не зараз"</string>
-    <string name="current_screen_lock" msgid="1367883977261098017">"Поточне блокування екрана"</string>
+    <string name="current_screen_lock" msgid="1367883977261098017">"Поточний спосіб розблокування"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Ключ • Відбиток пальця"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN-код • Відбиток пальця"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Пароль • Відбиток пальця"</string>
@@ -765,7 +768,7 @@
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"Щоб додаток <xliff:g id="APP_NAME">%1$s</xliff:g> правильно працював, він радить створити надійний PIN-код або пароль"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"Щоб додаток <xliff:g id="APP_NAME">%1$s</xliff:g> правильно працював, він радить створити новий PIN-код або пароль"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"Щоб додаток <xliff:g id="APP_NAME">%1$s</xliff:g> правильно працював, він радить створити новий ключ, PIN-код або пароль"</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"Додаток <xliff:g id="APP_NAME">%1$s</xliff:g> радить вибрати новий спосіб блокування екрана"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"Додаток <xliff:g id="APP_NAME">%1$s</xliff:g> рекомендує вибрати інший спосіб розблокування екрана"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Спробуйте ще. Спроба <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> із <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Ваші дані буде видалено"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Якщо наступного разу ви введете неправильний ключ, дані на цьому пристрої буде видалено"</string>
@@ -1920,7 +1923,7 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Залипання клавіш"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Натискайте клавіші по одній, замість того щоб утримувати їх одночасно"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Клавіші для керування мишею"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"Використовувати фізичну клавіатуру для керування мишею."</string>
+    <string name="mouse_keys_summary" msgid="2396247040177734245">"Використовувати фізичну клавіатуру для керування мишею"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Комбінації клавіш"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Показати список комбінацій клавіш"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавіатури та інструменти робочого профілю"</string>
@@ -2357,14 +2360,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Ця служба не працює."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Швидке ввімкнення функцій доступності"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Показувати на панелі швидкого налаштування"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Червоний – зелений"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Червоний – зелений"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Червоний–зелений, слабке сприйняття зеленого"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Червоний–зелений, слабке сприйняття червоного"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Синій – жовтий"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Відтінки сірого"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Інтенсивність"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Недоступно для режиму \"Відтінки сірого\" і якщо вимкнено корекцію кольору"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Слабкість сприйняття зеленого, дейтераномалія"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Слабкість сприйняття червоного, протаномалія"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Дейтераномалія"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Протаномалія"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Тританомалія"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Додаткове зменшення яскравості"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Додатково зменшувати яскравість екрана"</string>
@@ -3337,19 +3340,27 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Немає}=1{Налаштовано 1 розклад}one{Налаштовано # розклад}few{Налаштовано # розклади}many{Налаштовано # розкладів}other{Налаштовано # розкладу}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не турбувати"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Режими пріоритету"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Додати режим"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Менше відволікайтеся й зберігайте концентрацію уваги завдяки режимам для сну, роботи, керування автомобілем тощо."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Створіть власний режим"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Отримуйте сповіщення лише від важливих людей і додатків"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Вибрати тип активації"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Час"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Приклад: \"9:30 – 17:00\""</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Календар"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Приклад: \"Особистий календар\""</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Налаштувати розклад"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Розклад на основі"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"День і час"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"09:00–17:00 у будні\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Події в календарі"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Активовано режим \"{mode_1}\"}=2{Активовано режими \"{mode_1}\" і \"{mode_2}\"}=3{Активовано режими \"{mode_1}\", \"{mode_2}\" і \"{mode_3}\"}one{Активовано режими \"{mode_1}\", \"{mode_2}\" і ще #}few{Активовано режими \"{mode_1}\", \"{mode_2}\" і ще #}many{Активовано режими \"{mode_1}\", \"{mode_2}\" і ще #}other{Активовано режими \"{mode_1}\", \"{mode_2}\" і ще #}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 режим може вмикатись автоматично}one{# режим може вмикатись автоматично}few{# режими можуть вмикатись автоматично}many{# режимів можуть вмикатись автоматично}other{# режиму можуть вмикатись автоматично}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"УВІМКНЕНО"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Не налаштовано"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Вимкнено"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Створити режим"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Спеціальний"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Увімкнути зараз"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Вимкнути"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Режим не знайдено"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Обмеження сповіщень"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Блокування сповіщень"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Налаштувати режим \"<xliff:g id="MODE">%1$s</xliff:g>\""</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Увімкнути режим \"Не турбувати\""</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Звуки будильників і медіа можуть переривати"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Розклад"</string>
@@ -3361,14 +3372,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Редагувати"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Розклад"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Розклад"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Вмикати автоматично"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Додати календар"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Використовувати календар"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Розклад"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Налаштуйте розклад"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Коли вмикати автоматично"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Розклад на основі подій"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Вмикати під час таких подій:"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Коли відповідь на запрошення:"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Розклад на основі часу"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Розклад"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> год, <xliff:g id="MINUTES">%2$d</xliff:g> хв"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Вмикати автоматично"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Розклад"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Вимикати звук телефона в певний час"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Налаштувати правила режиму \"Не турбувати\""</string>
@@ -3378,8 +3388,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Дозволити сповіщення зі звуком"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Блокувати візуальні сповіщення"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Дозволити візуальні сигнали"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Не відволікайтесь"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Додаткові дії"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Фільтри сповіщень"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Інші налаштування"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Вимкнено}=1{Вимкнено / 1 режим може вмикатись автоматично}one{Вимкнено / # режим може вмикатись автоматично}few{Вимкнено / # режими можуть вмикатись автоматично}many{Вимкнено / # режимів можуть вмикатись автоматично}other{Вимкнено / # режиму можуть вмикатись автоматично}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Налаштування дисплея"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Параметри відображення"</string>
@@ -3396,7 +3406,7 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"увімкнути темну тему"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Змініть налаштування ОС і додатків, щоб використовувати світлий текст на темному фоні. Це може бути комфортніше для очей і допомагає суттєво економити заряд акумулятора на деяких пристроях."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Немає змін параметрів відображення}=1{{effect_1}}=2{{effect_1} і {effect_2}}=3{{effect_1}, {effect_2} і {effect_3}}one{{effect_1}, {effect_2} і ще #}few{{effect_1}, {effect_2} і ще #}many{{effect_1}, {effect_2} і ще #}other{{effect_1}, {effect_2} і ще #}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Фільтрувати сповіщення"</string>
+    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Виберіть, які сповіщення дозволені"</string>
     <string name="mode_no_notification_filter" msgid="7119188047783404890">"Сповіщення не фільтруються"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Параметри відображення відфільтрованих сповіщень"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Коли ввімкнено режим \"Не турбувати\""</string>
@@ -3748,6 +3758,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Розмови"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Усі розмови"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"усі розмови"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Важливі розмови"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"важливі розмови"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Не дозволено"</string>
@@ -3843,37 +3854,29 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Активувати режим \"Лише будильник\" до <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Вибрати опцію \"Завжди надсилати\""</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Редагувати режим"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Додати режим"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Створити режим"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Спеціальний режим"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Назва режиму"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Події в календарі"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Розклад сну"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Програма \"Час спати\""</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"За кермом"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Зв’язані з додатком"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Налаштування додатка"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Інформація і налаштування в додатку <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Керує додаток <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Вимкнути режим"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Якщо вимкнути цю функцію, режим більше не працюватиме належним чином, а його налаштування буде приховано."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Вимкнути <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Цей режим ніколи не активуватиметься, коли його вимкнено"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Вимкнути"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Увімкнути режим"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Якщо ввімкнути цю функцію, режим активуватиметься автоматично відповідно до розкладу."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Увімкнути <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Цей режим може активуватися автоматично залежно від налаштувань"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Увімкнути"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Налаштуйте режим, що працюватиме регулярно протягом певного часу дня"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Налаштуйте режим для синхронізації з подіями в календарі й відповідями на запрошення"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Налаштуйте спокійний режим на час сну. Установіть будильники, зменште яскравість екрана й заблокуйте сповіщення."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Першочергово дбайте про безпеку на дорозі, не втрачайте концентрацію і не відволікайтеся за кермом"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Заблокуйте сповіщення на пристрої, щоб зосередитися"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Заблокуйте все, що може вас відволікати, щоб створити спокійну атмосферу"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Персоналізуйте роботу з пристроєм і налаштування для різних користувачів"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Щоб менше відволікатися, дозвольте сповіщення лише від важливих людей і додатків"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Застереження"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Закрити"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Надіслати відгук про цей пристрій"</string>
@@ -4860,8 +4863,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Акумулятор"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Панель налаштувань"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Увімкнути вікна змінного розміру"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Увімкнути вікна змінного розміру на додатк. екрані"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Дозволити немасштабовані додатки в багатоекранному режимі"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Дає змогу користуватися в багатоекранному режимі додатками, розмір яких не можна змінити"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Замінити примусовий темний режим"</string>
@@ -5184,10 +5186,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Налаштувати"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Налаштувати <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Щоб увімкнути підтримку вікон змінного розміру, перезапустіть пристрій."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Щоб оновити доступність вікон змінного розміру, перезапустіть пристрій."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Щоб увімкнути вікна змінного розміру на додаткових екранах, перезапустіть пристрій."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перезапустити зараз"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Перезапустити пізніше"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Просторове звучання"</string>
@@ -5210,7 +5210,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Вимкнути обмеження для дочірніх процесів"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Вимкнути обмеження на використання системних ресурсів дочірніми процесами додатка"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Примусово ввімкнути набір функцій \"Нотатки\""</string>
-    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Увімкніть системні інтеграції для створення нотаток за допомогою набору функцій \"Нотатки\". Якщо набір функцій \"Нотатки\" вже ввімкнено, нічого не відбудеться. Потрібен перезапуск."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Увімкнути системні інтеграції для створення нотаток за допомогою набору функцій \"Нотатки\". Якщо набір функцій \"Нотатки\" вже ввімкнено, нічого не відбудеться. Потрібен перезапуск."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Трансляція"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Змінити додаток для трансляції на <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Слухайте трансляції з пристроїв поблизу"</string>
@@ -5284,7 +5284,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Рожевий"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Пурпуровий"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Ліловий"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Готово"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Зберегти"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Скасувати"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Стандартний"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Середній"</string>

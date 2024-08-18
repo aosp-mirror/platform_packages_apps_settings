@@ -588,11 +588,14 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         fun startSimOnboardingActivity(
             context: Context,
             subId: Int,
+            isNewTask: Boolean = false,
         ) {
             val intent = Intent(context, SimOnboardingActivity::class.java).apply {
                 putExtra(SUB_ID, subId)
+                if(isNewTask) {
+                    setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
             }
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
 

@@ -872,6 +872,17 @@ public class NetworkProviderSettingsTest {
         verify(mWifiEntry, never()).getKey();
     }
 
+    @Test
+    public void launchNetworkDetailsFragment_wifiEntryIsNotSaved_ignoreWifiEntry() {
+        when(mWifiEntry.isSaved()).thenReturn(false);
+        LongPressWifiEntryPreference preference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+
+        mNetworkProviderSettings.launchNetworkDetailsFragment(preference);
+
+        verify(mWifiEntry, never()).getKey();
+    }
+
     @Implements(PreferenceFragmentCompat.class)
     public static class ShadowPreferenceFragmentCompat {
 

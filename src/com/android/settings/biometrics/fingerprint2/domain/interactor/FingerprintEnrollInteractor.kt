@@ -16,7 +16,6 @@
 
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
-import android.content.Context
 import android.hardware.fingerprint.FingerprintEnrollOptions
 import android.hardware.fingerprint.FingerprintManager
 import android.os.CancellationSignal
@@ -49,7 +48,7 @@ interface FingerprintEnrollInteractor {
 }
 
 class FingerprintEnrollInteractorImpl(
-  private val applicationContext: Context,
+  private val userId: Int,
   private val fingerprintManager: FingerprintManager?,
   private val fingerprintFlow: FingerprintFlow,
 ) : FingerprintEnrollInteractor {
@@ -138,7 +137,7 @@ class FingerprintEnrollInteractorImpl(
     fingerprintManager?.enroll(
       hardwareAuthToken,
       cancellationSignal,
-      applicationContext.userId,
+      userId,
       enrollmentCallback,
       enrollReason.toOriginalReason(),
       fingerprintEnrollOptions,

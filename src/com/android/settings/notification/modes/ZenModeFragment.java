@@ -129,8 +129,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - make this the correct metrics category
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION;
+        return SettingsEnums.ZEN_PRIORITY_MODE;
     }
 
     @Override
@@ -164,9 +163,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         @Override
         public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
             if (menuItem.getItemId() == RENAME_MODE) {
-                // TODO: b/332937635 - Update metrics category
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModeEditNameIconFragment.class,
-                        mZenMode.getId(), 0).launch();
+                        mZenMode.getId(), getMetricsCategory()).launch();
             } else if (menuItem.getItemId() == DELETE_MODE) {
                 new AlertDialog.Builder(mContext)
                         .setTitle(mContext.getString(R.string.zen_mode_delete_mode_confirmation,
