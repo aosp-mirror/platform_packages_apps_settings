@@ -19,6 +19,7 @@ package com.android.settings.applications.specialaccess.zenaccess;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserManager;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.TwoStatePreference;
@@ -49,6 +50,11 @@ public class ZenAccessDetails extends AppInfoWithHeader implements
     @Override
     protected boolean refreshUi() {
         final Context context = getContext();
+        // don't show for managed profiles
+        if (UserManager.get(context).isManagedProfile(context.getUserId())
+            && !ZenAccessController.hasAccess(context, mPackageName)) {
+            finish();
+        }
         // If this app didn't declare this permission in their manifest, don't bother showing UI.
         final Set<String> needAccessApps =
                 ZenAccessController.getPackagesRequestingNotificationPolicyAccess();
