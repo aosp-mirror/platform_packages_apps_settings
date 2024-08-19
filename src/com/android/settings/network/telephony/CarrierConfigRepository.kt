@@ -199,7 +199,7 @@ class CarrierConfigRepository(private val context: Context) {
         }
 
         @VisibleForTesting
-        fun setStringForTest(subId: Int, key: String, value: String) {
+        fun setStringForTest(subId: Int, key: String, value: String?) {
             check(key.endsWith("_string")) { "String key should ends with _string" }
             getPerSubCache(subId)[key] = StringConfigValue(value)
         }
