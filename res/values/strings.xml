@@ -8851,8 +8851,12 @@
     <string name="nls_feature_reply_summary">It can reply to messages and take action on buttons in notifications, including snoozing or dismissing notifications and answering calls.</string>
     <string name="nls_feature_settings_title">Change settings</string>
     <string name="nls_feature_settings_summary">It can turn Do Not Disturb on or off and change related settings.</string>
+    <string name="nls_feature_modes_settings_summary">It can manage and activate Priority Modes, and change related settings.</string>
     <string name="notification_listener_disable_warning_summary">
         If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Do Not Disturb access may also be turned off.
+    </string>
+    <string name="notification_listener_disable_modes_warning_summary">
+        If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Priority Modes access may also be turned off.
     </string>
     <string name="notification_listener_disable_warning_confirm">Turn off</string>
     <string name="notification_listener_disable_warning_cancel">Cancel</string>
@@ -9029,6 +9033,15 @@
 
     <!-- Sound & notification > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
     <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb access</string>
+
+    <!-- Special App Access: Title for managing Priority Modes access option. [CHAR LIMIT=40] -->
+    <string name="manage_zen_modes_access_title">Priority Modes access</string>
+
+    <!-- Button title that grants 'Priority Modes' permission to an app [CHAR_LIMIT=60]-->
+    <string name="zen_modes_access_detail_switch">Allow Priority Modes access</string>
+
+    <!-- Special App Access > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_empty_text">No installed apps have requested Priority Modes access</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
     <string name="app_notifications_off_desc">You haven\'t allowed notifications from this app</string>
@@ -10150,6 +10163,18 @@
 
     <!-- Zen mode access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
     <string name="zen_access_revoke_warning_dialog_summary">All Do Not Disturb rules created by this app will be removed.</string>
+
+    <!-- Priority modes access settings - title for warning dialog when enabling access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_warning_dialog_title">Allow access to Priority Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+
+    <!-- Priority modes access settings - summary for warning dialog when enabling access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb, manage and activate Priority Modes, and make changes to related settings.</string>
+
+    <!-- Priority modes access settings - title for warning dialog when revoking access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access Priority Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+
+    <!-- Priority modes access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_revoke_warning_dialog_summary">All modes created by this app will be removed.</string>
 
     <!-- Ignore battery optimizations on label [CHAR LIMIT=30] -->
     <string name="ignore_optimizations_on">Don\u2019t optimize</string>
