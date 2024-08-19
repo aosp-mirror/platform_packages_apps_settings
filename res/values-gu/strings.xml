@@ -411,8 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"ફેસ અને <xliff:g id="WATCH">%s</xliff:g> ઉમેર્યા"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"ફેસ, ફિંગરપ્રિન્ટ અને <xliff:g id="WATCH">%s</xliff:g> ઉમેર્યા"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"ફેસ, ફિંગરપ્રિન્ટ અને <xliff:g id="WATCH">%s</xliff:g> ઉમેર્યા"</string>
-    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
-    <skip />
+    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"ઓળખની તપાસ ચાલુ છે"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator અનલૉક"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"વૉચ ઉમેરી"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"તમારી વૉચનું સેટઅપ કરો"</string>
@@ -768,7 +767,7 @@
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> સશક્ત પિન અથવા પાસવર્ડની ભલામણ કરે છે અને તેના વિના અપેક્ષા મુજબ કાર્ય ન કરે તેમ બની શકે છે"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> નવા પિન અથવા પાસવર્ડની ભલામણ કરે છે અને તેના વિના અપેક્ષા મુજબ કાર્ય ન કરે તેમ બની શકે છે"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> નવી પૅટર્ન, પિન અથવા પાસવર્ડની ભલામણ કરે છે અને તેના વિના અપેક્ષા મુજબ કાર્ય ન કરે તેમ બની શકે છે"</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> નવા સ્ક્રીન લૉકની ભલામણ કરે છે"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> નવા સ્ક્રીન લૉકનો સુઝાવ આપે છે"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"ફરી પ્રયાસ કરો. <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> માંથી <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> પ્રયત્ન."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"તમારો ડેટા ડિલીટ કરવામાં આવશે"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"જો તમે આગલા પ્રયત્નમાં ખોટી પૅટર્ન દાખલ કરશો, તો આ ઉપકરણનો ડેટા કાઢી નાખવામાં આવશે"</string>
@@ -3337,6 +3336,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"ચાલુ / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> અને <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"તમે બ્લૂટૂથ ડિવાઇસ માટે સ્પેશલ ઑડિયો પણ ચાલુ કરી શકો છો."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"કનેક્ટ કરેલા ડિવાઇસના સેટિંગ"</string>
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"સ્પેશલ ઑડિયો"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"બંધ"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"બંધ"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"બંધ"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{એકપણ નહીં}=1{એક શેડ્યૂલ સેટ કરવામાં આવ્યું}one{# શેડ્યૂલ સેટ કરવામાં આવ્યું}other{# શેડ્યૂલ સેટ કરવામાં આવ્યા}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"ખલેલ પાડશો નહીં"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"પ્રાધાન્યતાના મોડ"</string>
@@ -3634,7 +3637,11 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"નોટિફિકેશન સ્નૂઝ કરવા કે છોડી દેવા અને કૉલનો જવાબ આપવા સહિત તે મેસેજનો જવાબ આપી શકે અને નોટિફિકેશનમાંના બટન પર ક્રિયા કરી શકે છે."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"સેટિંગ બદલો"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"તે ખલેલ પાડશો નહીં સુવિધા ચાલુ કે બંધ કરી શકે છે અને સંબંધિત સેટિંગ બદલી શકે છે."</string>
+    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"જો તમે <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> માટે નોટિફિકેશન ઍક્સેસને બંધ કરો છો, તો ખલેલ પાડશો નહીં ઍક્સેસ પણ બંધ કરવામાં આવી શકે છે."</string>
+    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
+    <skip />
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"બંધ કરો"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"રદ કરો"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"રિઅલ ટાઇમ"</string>
@@ -3695,6 +3702,12 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"ખલેલ પાડશો નહીંનો ઍક્સેસ"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"ખલેલ પાડશો નહીંને મંજૂરી આપો"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"કોઇ ઇન્સ્ટોલ કરેલ એપ્લિકેશન્સએ ખલેલ પાડશો નહીં ઍક્સેસ કરવાની વિનંતી કરી નથી"</string>
+    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
+    <skip />
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"તમે આ ઍપમાંથી નોટિફિકેશનને મંજૂરી આપી નથી"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"તમારી વિનંતી મુજબ Android આ ઍપના નોટિફિકેશનની કૅટેગરીને આ ડિવાઇસ પર પ્રદર્શિત થતા બ્લૉક કરી રહ્યું છે"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"તમારી વિનંતી મુજબ Android આ ઍપના નોટિફિકેશનના ગ્રૂપને આ ડિવાઇસ પર પ્રદર્શિત થતા બ્લૉક કરી રહ્યું છે"</string>
@@ -3877,6 +3890,22 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"શાંત વાતાવરણ માટે ધ્યાન ભટકાવનારા અવરોધો દૂર કરો"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"અલગ-અલગ વપરાશકર્તાઓ અનુસાર ડિવાઇસના અનુભવ અને સેટિંગ મનગમતા બનાવો"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"માત્ર મહત્ત્વના હોય એવા લોકો અને ઍપને જ તમારી સુધી પહોંચવાની મંજૂરી આપીને ધ્યાન ભટકાવનારા અવરોધો ઓછા કરો"</string>
+    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
+    <skip />
     <string name="warning_button_text" msgid="1274234338874005639">"ચેતવણી"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"બંધ કરો"</string>
     <string name="device_feedback" msgid="5351614458411688608">"આ ડિવાઇસ વિશે પ્રતિસાદ મોકલો"</string>
@@ -4077,6 +4106,14 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"ચાલુ રહેવું આવશ્યક છે કારણ કે નોટિફિકેશન ઍક્સેસ ચાલુ છે"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"<xliff:g id="APP">%1$s</xliff:g> માટે ખલેલ પહોંચાડશો નહિ ની એક્સેસ રદબાતલ કરીએ?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"આ ઍપ્લિકેશન દ્વારા બનાવાયેલ તમામ ખલેલ પહોંચાડશો નહિ નિયમો દૂર કરવામાં આવશે."</string>
+    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
+    <skip />
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"ઓપ્ટિમાઇઝ કરશો નહીં"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"ઑપ્ટિમાઇઝ કરો"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"તમારી બૅટરી વધુ ઝડપથી ખાલી થઈ શકે છે. ઍપ હવે બૅકગ્રાઉન્ડ બૅટરીનો ઉપયોગ કરવાથી પ્રતિબંધિત રહેશે નહીં."</string>
