@@ -17,8 +17,10 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.provider.Settings;
+import android.hardware.input.InputSettings;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
@@ -26,22 +28,12 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import android.hardware.input.InputSettings;
-
-/** PreferenceController that controls the "Touchpad visualizer" developer option. */
+/** PreferenceController that controls the "Show touchpad input" developer option. */
 public class TouchpadVisualizerPreferenceController extends
         DeveloperOptionsPreferenceController implements
         Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String TOUCHPAD_VISUALIZER_KEY = "touchpad_visualizer";
-
-    @VisibleForTesting
-    static final int SETTING_VALUE_ON = 1;
-    @VisibleForTesting
-    static final int SETTING_VALUE_OFF = 0;
 
     public TouchpadVisualizerPreferenceController(@NonNull Context context) {
         super(context);
@@ -60,24 +52,22 @@ public class TouchpadVisualizerPreferenceController extends
     @Override
     public boolean onPreferenceChange(@NonNull Preference preference, @Nullable Object newValue) {
         final boolean isEnabled = newValue != null ? (Boolean) newValue : false;
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.TOUCHPAD_VISUALIZER,
-                isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        InputSettings.setTouchpadVisualizer(mContext, isEnabled);
+
         return true;
     }
 
     @Override
     public void updateState(@NonNull Preference preference) {
-        int touchpadVisualizer = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.TOUCHPAD_VISUALIZER, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(touchpadVisualizer != SETTING_VALUE_OFF);
+        boolean touchpadVisualizerEnabled = InputSettings.useTouchpadVisualizer(mContext);
+        ((SwitchPreference) mPreference).setChecked(touchpadVisualizerEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        Settings.System.putInt(mContext.getContentResolver(), Settings.System.TOUCHPAD_VISUALIZER,
-                SETTING_VALUE_OFF);
+        InputSettings.setTouchpadVisualizer(mContext, false);
+
         ((SwitchPreference) mPreference).setChecked(false);
     }
 }
