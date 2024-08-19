@@ -583,7 +583,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     }
 
     private boolean isRemovableSimEnabled() {
-        return UiccSlotUtil.isRemovableSimEnabled(mTelMgr);
+        return new UiccSlotRepository(mTelMgr).anyRemovablePhysicalSimEnabled();
     }
 
     private boolean isMultipleEnabledProfilesSupported() {
