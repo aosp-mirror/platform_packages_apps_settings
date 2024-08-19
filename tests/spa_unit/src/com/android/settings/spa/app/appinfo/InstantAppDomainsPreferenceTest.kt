@@ -22,9 +22,9 @@ import android.content.pm.PackageManager
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -96,10 +96,9 @@ class InstantAppDomainsPreferenceTest {
     fun title_displayed() {
         setContent()
 
-        composeTestRule
-            .onNodeWithText(context.getString(R.string.app_launch_supported_domain_urls_title))
-            .assertIsDisplayed()
-            .assertIsEnabled()
+        composeTestRule.waitUntilExists(
+            hasText(context.getString(R.string.app_launch_supported_domain_urls_title)) and
+                isEnabled())
     }
 
     @Test
