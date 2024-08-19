@@ -111,9 +111,10 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
 
   var fingerprintEnrollViewModel =
     FingerprintEnrollViewModel(
-      fingerprintManagerInteractor,
       gatekeeperViewModel,
       navigationViewModel,
+      fingerprintManagerInteractor,
+      fingerprintManagerInteractor,
     )
 
   var fingerprintEnrollEnrollingViewModel =

@@ -51,6 +51,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -319,7 +320,8 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.onCreate(Bundle.EMPTY);
 
         verify(mDataUsagePreference).setVisible(true);
-        verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/);
+        verify(mDataUsagePreference)
+                .setTemplate(any(), eq(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
     }
 
     @Test
@@ -866,6 +868,17 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.mIsRestricted = true;
 
         mNetworkProviderSettings.launchConfigNewNetworkFragment(mWifiEntry);
+
+        verify(mWifiEntry, never()).getKey();
+    }
+
+    @Test
+    public void launchNetworkDetailsFragment_wifiEntryIsNotSaved_ignoreWifiEntry() {
+        when(mWifiEntry.isSaved()).thenReturn(false);
+        LongPressWifiEntryPreference preference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+
+        mNetworkProviderSettings.launchNetworkDetailsFragment(preference);
 
         verify(mWifiEntry, never()).getKey();
     }

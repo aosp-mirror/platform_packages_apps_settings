@@ -27,11 +27,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.display.AutoBrightnessSettings;
 import com.android.settingslib.Utils;
+import com.android.settingslib.widget.FooterPreference;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
@@ -41,9 +43,13 @@ import com.google.android.setupdesign.GlifPreferenceLayout;
  */
 public class AutoBrightnessPreferenceFragmentForSetupWizard extends AutoBrightnessSettings {
 
+    private static final String FOOTER_PREFERENCE_KEY = "auto_brightness_footer";
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        updateFooterContentDescription();
 
         if (view instanceof GlifPreferenceLayout) {
             final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
@@ -77,5 +83,16 @@ public class AutoBrightnessPreferenceFragmentForSetupWizard extends AutoBrightne
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SUW_ACCESSIBILITY_AUTO_BRIGHTNESS;
+    }
+
+    private void updateFooterContentDescription() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        final FooterPreference footerPreference = screen.findPreference(FOOTER_PREFERENCE_KEY);
+        if (footerPreference != null) {
+            String title = getString(R.string.auto_brightness_content_description_title);
+            final StringBuilder sb = new StringBuilder();
+            sb.append(title).append("\n\n").append(footerPreference.getTitle());
+            footerPreference.setContentDescription(sb);
+        }
     }
 }

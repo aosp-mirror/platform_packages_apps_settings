@@ -31,7 +31,18 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenPolicy;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexableRaw;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -43,20 +54,22 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class ZenModesListPreferenceControllerTest {
     private static final String TEST_MODE_ID = "test_mode";
     private static final String TEST_MODE_NAME = "Test Mode";
-    private static final ZenMode TEST_MODE = new ZenMode(
-            TEST_MODE_ID,
-            new AutomaticZenRule.Builder(TEST_MODE_NAME, Uri.parse("test_uri"))
+
+    private static final ZenMode TEST_MODE = new TestModeBuilder()
+            .setId(TEST_MODE_ID)
+            .setAzr(new AutomaticZenRule.Builder(TEST_MODE_NAME, Uri.parse("test_uri"))
                     .setType(AutomaticZenRule.TYPE_BEDTIME)
                     .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
                     .setZenPolicy(new ZenPolicy.Builder().allowAllSounds().build())
-                    .build(),
-            false);
+                    .build())
+            .build();
 
     private static final ZenMode TEST_MANUAL_MODE = ZenMode.manualDndMode(
             new AutomaticZenRule.Builder("Do Not Disturb", Uri.EMPTY)
@@ -75,13 +88,64 @@ public class ZenModesListPreferenceControllerTest {
     private ZenModesBackend mBackend;
 
     private ZenModesListPreferenceController mPrefController;
+    private PreferenceCategory mPreference;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
 
-        mPrefController = new ZenModesListPreferenceController(mContext, null, mBackend);
+        mPreference = new PreferenceCategory(mContext);
+        PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
+        preferenceScreen.addPreference(mPreference);
+
+        mPrefController = new ZenModesListPreferenceController(mContext, mBackend);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MODES_UI)
+    public void updateState_addsPreferences() {
+        ImmutableList<ZenMode> modes = ImmutableList.of(newMode("One"), newMode("Two"),
+                newMode("Three"), newMode("Four"), newMode("Five"));
+        when(mBackend.getModes()).thenReturn(modes);
+
+        mPrefController.updateState(mPreference);
+
+        assertThat(mPreference.getPreferenceCount()).isEqualTo(5);
+        List<ZenModesListItemPreference> itemPreferences = getModeListItems(mPreference);
+        assertThat(itemPreferences.stream().map(ZenModesListItemPreference::getZenMode).toList())
+                .containsExactlyElementsIn(modes)
+                .inOrder();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MODES_UI)
+    public void updateState_secondTime_updatesPreferences() {
+        ImmutableList<ZenMode> modes = ImmutableList.of(newMode("One"), newMode("Two"),
+                newMode("Three"), newMode("Four"), newMode("Five"));
+        when(mBackend.getModes()).thenReturn(modes);
+        mPrefController.updateState(mPreference);
+
+        assertThat(mPreference.getPreferenceCount()).isEqualTo(5);
+        List<ZenModesListItemPreference> oldPreferences = getModeListItems(mPreference);
+
+        ImmutableList<ZenMode> updatedModes = ImmutableList.of(modes.get(0), modes.get(1),
+                newMode("Two.1"), newMode("Two.2"), modes.get(2), /* deleted "Four" */
+                modes.get(4));
+        when(mBackend.getModes()).thenReturn(updatedModes);
+        mPrefController.updateState(mPreference);
+
+        List<ZenModesListItemPreference> newPreferences = getModeListItems(mPreference);
+        assertThat(newPreferences.stream().map(ZenModesListItemPreference::getZenMode).toList())
+                .containsExactlyElementsIn(updatedModes)
+                .inOrder();
+
+        // Verify that the old preference controllers were reused instead of creating new ones.
+        assertThat(newPreferences.get(0)).isSameInstanceAs(oldPreferences.get(0));
+        assertThat(newPreferences.get(1)).isSameInstanceAs(oldPreferences.get(1));
+        assertThat(newPreferences.get(4)).isSameInstanceAs(oldPreferences.get(2));
+        assertThat(newPreferences.get(5)).isSameInstanceAs(oldPreferences.get(4));
     }
 
     @Test
@@ -129,7 +193,7 @@ public class ZenModesListPreferenceControllerTest {
         assertThat(newData).hasSize(1);
 
         SearchIndexableRaw newItem = newData.get(0);
-        assertThat(newItem.key).isEqualTo(ZenMode.MANUAL_DND_MODE_ID);
+        assertThat(newItem.key).isEqualTo(TEST_MANUAL_MODE.getId());
         assertThat(newItem.title).isEqualTo("Do Not Disturb");  // set above
     }
 
@@ -144,11 +208,29 @@ public class ZenModesListPreferenceControllerTest {
 
         // Should keep the order presented by getModes()
         SearchIndexableRaw item0 = data.get(0);
-        assertThat(item0.key).isEqualTo(ZenMode.MANUAL_DND_MODE_ID);
+        assertThat(item0.key).isEqualTo(TEST_MANUAL_MODE.getId());
         assertThat(item0.title).isEqualTo("Do Not Disturb");  // set above
 
         SearchIndexableRaw item1 = data.get(1);
         assertThat(item1.key).isEqualTo(TEST_MODE_ID);
         assertThat(item1.title).isEqualTo(TEST_MODE_NAME);
+    }
+
+    private static ZenMode newMode(String id) {
+        return new TestModeBuilder().setId(id).setName("Mode " + id).build();
+    }
+
+    /**
+     * Returns the child preferences of the {@code group}, sorted by their
+     * {@link Preference#getOrder} value (which is the order they will be sorted by and displayed
+     * in the UI).
+     */
+    private List<ZenModesListItemPreference> getModeListItems(PreferenceGroup group) {
+        ArrayList<ZenModesListItemPreference> items = new ArrayList<>();
+        for (int i = 0; i < group.getPreferenceCount(); i++) {
+            items.add((ZenModesListItemPreference) group.getPreference(i));
+        }
+        items.sort(Comparator.comparing(Preference::getOrder));
+        return items;
     }
 }

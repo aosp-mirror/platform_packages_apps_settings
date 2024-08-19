@@ -16,8 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID;
-
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCsipSetCoordinator;
@@ -68,11 +66,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /** PreferenceController to control the dialog to choose the active device for calls and alarms */
 public class AudioSharingCallAudioPreferenceController extends AudioSharingBasePreferenceController
         implements BluetoothCallback {
-    private static final String TAG = "CallsAndAlarmsPreferenceController";
+    private static final String TAG = "CallAudioPrefController";
     private static final String PREF_KEY = "calls_and_alarms";
 
     @VisibleForTesting
-    protected enum ChangeCallAudioType {
+    enum ChangeCallAudioType {
         UNKNOWN,
         CONNECTED_EARLIER,
         CONNECTED_LATER
@@ -87,10 +85,12 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
     private final ContentObserver mSettingsObserver;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     @Nullable private Fragment mFragment;
-    Map<Integer, List<CachedBluetoothDevice>> mGroupedConnectedDevices = new HashMap<>();
+    Map<Integer, List<BluetoothDevice>> mGroupedConnectedDevices = new HashMap<>();
     private List<AudioSharingDeviceItem> mDeviceItemsInSharingSession = new ArrayList<>();
     private final AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
-    private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+
+    @VisibleForTesting
+    final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
                 @Override
                 public void onSearchStarted(int reason) {}
@@ -195,24 +195,27 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                         }
                         updateDeviceItemsInSharingSession();
                         if (!mDeviceItemsInSharingSession.isEmpty()) {
+                            int checkedItemIndex = getActiveItemIndex(mDeviceItemsInSharingSession);
                             AudioSharingCallAudioDialogFragment.show(
                                     mFragment,
                                     mDeviceItemsInSharingSession,
+                                    checkedItemIndex,
                                     (AudioSharingDeviceItem item) -> {
                                         int currentGroupId =
-                                                AudioSharingUtils.getFallbackActiveGroupId(
-                                                        mContext);
+                                                BluetoothUtils.getPrimaryGroupIdForBroadcast(
+                                                        mContext.getContentResolver());
                                         if (item.getGroupId() == currentGroupId) {
                                             Log.d(
                                                     TAG,
                                                     "Skip set fallback active device: unchanged");
                                             return;
                                         }
-                                        List<CachedBluetoothDevice> devices =
+                                        List<BluetoothDevice> devices =
                                                 mGroupedConnectedDevices.getOrDefault(
                                                         item.getGroupId(), ImmutableList.of());
                                         CachedBluetoothDevice lead =
-                                                AudioSharingUtils.getLeadDevice(devices);
+                                                AudioSharingUtils.getLeadDevice(
+                                                        mCacheManager, devices);
                                         if (lead != null) {
                                             Log.d(
                                                     TAG,
@@ -276,7 +279,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
 
     /** Test only: set callback registration status in tests. */
     @VisibleForTesting
-    public void setCallbacksRegistered(boolean registered) {
+    void setCallbacksRegistered(boolean registered) {
         mCallbacksRegistered.set(registered);
     }
 
@@ -298,7 +301,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
             Log.d(TAG, "registerCallbacks()");
             mEventManager.registerCallback(this);
             mContentResolver.registerContentObserver(
-                    Settings.Secure.getUriFor(SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID),
+                    Settings.Secure.getUriFor(BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
                     false,
                     mSettingsObserver);
             mAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
@@ -345,7 +348,8 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
      */
     private void updateSummary() {
         updateDeviceItemsInSharingSession();
-        int fallbackActiveGroupId = AudioSharingUtils.getFallbackActiveGroupId(mContext);
+        int fallbackActiveGroupId =
+                BluetoothUtils.getPrimaryGroupIdForBroadcast(mContext.getContentResolver());
         if (fallbackActiveGroupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
             for (AudioSharingDeviceItem item : mDeviceItemsInSharingSession) {
                 if (item.getGroupId() == fallbackActiveGroupId) {
@@ -384,14 +388,26 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                         mBtManager, mGroupedConnectedDevices, /* filterByInSharing= */ true);
     }
 
+    private int getActiveItemIndex(List<AudioSharingDeviceItem> deviceItems) {
+        int checkedItemIndex = -1;
+        int fallbackActiveGroupId =
+                BluetoothUtils.getPrimaryGroupIdForBroadcast(mContext.getContentResolver());
+        for (AudioSharingDeviceItem item : deviceItems) {
+            if (item.getGroupId() == fallbackActiveGroupId) {
+                return deviceItems.indexOf(item);
+            }
+        }
+        return checkedItemIndex;
+    }
+
     @VisibleForTesting
-    protected void logCallAudioDeviceChange(int currentGroupId, CachedBluetoothDevice target) {
+    void logCallAudioDeviceChange(int currentGroupId, CachedBluetoothDevice target) {
         var unused =
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
                             ChangeCallAudioType type = ChangeCallAudioType.UNKNOWN;
                             if (mCacheManager != null) {
-                                int targetDeviceGroupId = AudioSharingUtils.getGroupId(target);
+                                int targetDeviceGroupId = BluetoothUtils.getGroupId(target);
                                 List<BluetoothDevice> mostRecentDevices =
                                         BluetoothAdapter.getDefaultAdapter()
                                                 .getMostRecentlyConnectedDevices();
@@ -403,7 +419,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                                             mCacheManager.findDevice(device);
                                     int groupId =
                                             cachedDevice != null
-                                                    ? AudioSharingUtils.getGroupId(cachedDevice)
+                                                    ? BluetoothUtils.getGroupId(cachedDevice)
                                                     : BluetoothCsipSetCoordinator.GROUP_ID_INVALID;
                                     if (groupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
                                         if (groupId == targetDeviceGroupId) {

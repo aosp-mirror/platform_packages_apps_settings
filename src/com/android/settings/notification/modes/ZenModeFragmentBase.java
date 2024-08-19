@@ -16,19 +16,18 @@
 
 package com.android.settings.notification.modes;
 
-import android.app.AutomaticZenRule;
-import android.content.Context;
+import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenMode;
 
 import java.util.List;
 
@@ -37,116 +36,102 @@ import java.util.List;
  */
 abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
     static final String TAG = "ZenModeSettings";
-    static final String MODE_ID = "MODE_ID";
 
-    @Nullable  // only until reloadMode() is called
-    private ZenMode mZenMode;
+    @Nullable private ZenMode mZenMode;
+    @Nullable private ZenMode mModeOnLastControllerUpdate;
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        // TODO: b/322373473 - Update if modes page ends up using a different method of passing id
-        Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey(MODE_ID)) {
-            String id = bundle.getString(MODE_ID);
-            if (!reloadMode(id)) {
-                Log.e(TAG, "Mode id " + id + " not found");
-                toastAndFinish();
-                return;
+    public void onCreate(Bundle icicle) {
+        mZenMode = loadModeFromArguments();
+        if (mZenMode != null) {
+            // Propagate mode info through to controllers. Must be done before super.onCreate(),
+            // because that one calls AbstractPreferenceController.isAvailable().
+            for (var controller : getZenPreferenceControllers()) {
+                controller.setZenMode(mZenMode);
             }
         } else {
-            Log.e(TAG, "Mode id required to set mode config settings");
             toastAndFinish();
-            return;
         }
-        if (mZenMode != null) {
-            // Propagate mode info through to controllers.
-            for (List<AbstractPreferenceController> list : getPreferenceControllers()) {
-                try {
-                    for (AbstractPreferenceController controller : list) {
-                        // mZenMode guaranteed non-null from reloadMode() above
-                        ((AbstractZenModePreferenceController) controller).setZenMode(mZenMode);
-                    }
-                } catch (ClassCastException e) {
-                    // ignore controllers that aren't AbstractZenModePreferenceController
-                }
-            }
-        }
+
+        super.onCreate(icicle);
     }
 
-    /**
-     * Refresh stored ZenMode data.
-     * @param id the mode ID
-     * @return whether we successfully got mode data from the backend.
-     */
-    private boolean reloadMode(String id) {
-        mZenMode = mBackend.getMode(id);
-        if (mZenMode == null) {
-            return false;
+    @Nullable
+    private ZenMode loadModeFromArguments() {
+        String id = null;
+        if (getActivity() != null && getActivity().getIntent() != null) {
+            id = getActivity().getIntent().getStringExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID);
         }
-        return true;
+        Bundle bundle = getArguments();
+        if (id == null && bundle != null && bundle.containsKey(EXTRA_AUTOMATIC_ZEN_RULE_ID)) {
+            id = bundle.getString(EXTRA_AUTOMATIC_ZEN_RULE_ID);
+        }
+        if (id == null) {
+            Log.d(TAG, "No id provided");
+            return null;
+        }
+
+        ZenMode mode = mBackend.getMode(id);
+        if (mode == null) {
+            Log.d(TAG, "Mode with id " + id + " not found");
+            return null;
+        }
+        return mode;
     }
 
-    /**
-     * Refresh ZenMode data any time the system's zen mode state changes (either the zen mode value
-     * itself, or the config), and also (once updated) update the info for all controllers.
-     */
+    private Iterable<AbstractZenModePreferenceController> getZenPreferenceControllers() {
+        return getPreferenceControllers().stream()
+                .flatMap(List::stream)
+                .filter(AbstractZenModePreferenceController.class::isInstance)
+                .map(AbstractZenModePreferenceController.class::cast)
+                .toList();
+    }
+
     @Override
-    protected void updateZenModeState() {
+    protected void onUpdatedZenModeState() {
         if (mZenMode == null) {
-            // This shouldn't happen, but guard against it in case
+            Log.wtf(TAG, "mZenMode is null in onUpdatedZenModeState");
             toastAndFinish();
             return;
         }
+
         String id = mZenMode.getId();
-        if (!reloadMode(id)) {
+        ZenMode mode = mBackend.getMode(id);
+        if (mode == null) {
             Log.d(TAG, "Mode id=" + id + " not found");
             toastAndFinish();
             return;
         }
-        updateControllers();
+
+        mZenMode = mode;
+        maybeUpdateControllersState(mode);
     }
 
-    private void updateControllers() {
-        if (getPreferenceControllers() == null || mZenMode == null) {
-            return;
+    /**
+     * Updates all {@link AbstractZenModePreferenceController} based on the loaded mode info.
+     * For each controller, {@link AbstractZenModePreferenceController#setZenMode} will be called.
+     * Then, {@link AbstractZenModePreferenceController#updateState} will be called as well, unless
+     * we determine it's not necessary (for example, if we know that {@code DashboardFragment} will
+     * do it soon).
+     */
+    private void maybeUpdateControllersState(@NonNull ZenMode zenMode) {
+        boolean needsFullUpdate =
+                getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)
+                && (mModeOnLastControllerUpdate == null
+                        || !mModeOnLastControllerUpdate.equals(zenMode));
+        mModeOnLastControllerUpdate = zenMode.copy();
+
+        for (var controller : getZenPreferenceControllers()) {
+            controller.setZenMode(zenMode);
         }
 
-        final PreferenceScreen screen = getPreferenceScreen();
-        if (screen == null) {
-            Log.d(TAG, "PreferenceScreen not found");
-            return;
-        }
-        for (List<AbstractPreferenceController> list : getPreferenceControllers()) {
-            for (AbstractPreferenceController controller : list) {
-                if (!controller.isAvailable()) {
-                    continue;
-                }
-
-                try {
-                    // Find preference associated with controller
-                    final String key = controller.getPreferenceKey();
-                    final Preference preference = screen.findPreference(key);
-                    if (preference != null) {
-                        AbstractZenModePreferenceController zenController =
-                                (AbstractZenModePreferenceController) controller;
-                        zenController.updateZenMode(preference, mZenMode);
-                    } else {
-                        Log.d(TAG,
-                                String.format("Cannot find preference with key %s in Controller %s",
-                                        key, controller.getClass().getSimpleName()));
-                    }
-                } catch (ClassCastException e) {
-                    // Skip any controllers that aren't AbstractZenModePreferenceController.
-                    Log.d(TAG, "Could not cast: " + controller.getClass().getSimpleName());
-                }
-            }
+        if (needsFullUpdate) {
+            forceUpdatePreferences();
         }
     }
 
     private void toastAndFinish() {
-        Toast.makeText(mContext, R.string.zen_mode_rule_not_found_text, Toast.LENGTH_SHORT)
+        Toast.makeText(mContext, R.string.zen_mode_not_found_text, Toast.LENGTH_SHORT)
                 .show();
         this.finish();
     }
@@ -157,16 +142,5 @@ abstract class ZenModeFragmentBase extends ZenModesFragmentBase {
     @Nullable
     public ZenMode getMode() {
         return mZenMode;
-    }
-
-    /**
-     * Get AutomaticZenRule associated with current mode data, or null if it doesn't exist.
-     */
-    @Nullable
-    public AutomaticZenRule getAZR() {
-        if (mZenMode == null) {
-            return null;
-        }
-        return mZenMode.getRule();
     }
 }

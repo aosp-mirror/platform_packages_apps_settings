@@ -17,6 +17,7 @@
 package com.android.settings.users;
 
 import android.content.Context;
+import android.multiuser.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -25,6 +26,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.widget.SwitchWidgetController;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -53,17 +55,24 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
         mUserCapabilities = UserCapabilities.create(context);
         mSwitchBar.setChecked(mUserCapabilities.mUserSwitcherEnabled);
 
-        if (mUserCapabilities.mDisallowSwitchUser) {
-            mSwitchBar.setDisabledByAdmin(RestrictedLockUtilsInternal
+        if (Flags.fixDisablingOfMuToggleWhenRestrictionApplied()) {
+            RestrictedLockUtils.EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal
                     .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_USER_SWITCH,
-                            UserHandle.myUserId()));
-
-        } else if (mUserCapabilities.mDisallowAddUser) {
-            mSwitchBar.setDisabledByAdmin(RestrictedLockUtilsInternal
-                    .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_ADD_USER,
-                            UserHandle.myUserId()));
+                            UserHandle.myUserId());
+            if (enforcedAdmin != null) {
+                mSwitchBar.setDisabledByAdmin(enforcedAdmin);
+            } else {
+                mSwitchBar.setEnabled(mUserCapabilities.mIsMain
+                        && !mUserCapabilities.mDisallowSwitchUser);
+            }
         } else {
-            mSwitchBar.setEnabled(mUserCapabilities.mIsMain);
+            if (mUserCapabilities.mDisallowSwitchUser) {
+                mSwitchBar.setDisabledByAdmin(RestrictedLockUtilsInternal
+                        .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_USER_SWITCH,
+                                UserHandle.myUserId()));
+            } else {
+                mSwitchBar.setEnabled(mUserCapabilities.mIsMain);
+            }
         }
         mSwitchBar.setListener(this);
     }

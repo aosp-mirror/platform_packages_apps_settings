@@ -24,12 +24,11 @@ import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.UiccCardInfo
-import android.telephony.UiccSlotInfo
 import android.util.Log
 import com.android.settings.network.SimOnboardingActivity.Companion.CallbackType
-import com.android.settings.network.telephony.TelephonyRepository
+import com.android.settings.network.telephony.MobileDataRepository
+import com.android.settings.network.telephony.UiccSlotRepository
 import com.android.settings.sim.SimActivationNotifier
-import com.android.settings.spa.network.setAutomaticData
 import com.android.settings.spa.network.setDefaultData
 import com.android.settings.spa.network.setDefaultSms
 import com.android.settings.spa.network.setDefaultVoice
@@ -47,7 +46,6 @@ class SimOnboardingService {
     var targetSubInfo: SubscriptionInfo? = null
     var availableSubInfoList: List<SubscriptionInfo> = listOf()
     var activeSubInfoList: List<SubscriptionInfo> = listOf()
-    var slotInfoList: List<UiccSlotInfo> = listOf()
     var uiccCardInfoList: List<UiccCardInfo> = listOf()
     var targetPrimarySimCalls: Int = INVALID_SUBSCRIPTION_ID
     var targetPrimarySimTexts: Int = INVALID_SUBSCRIPTION_ID
@@ -73,14 +71,6 @@ class SimOnboardingService {
                 return false
             }
             return  uiccCardInfoList.any { it.isMultipleEnabledProfilesSupported }
-        }
-    var isRemovablePsimProfileEnabled: Boolean = false
-        get() {
-            if(slotInfoList.isEmpty()) {
-                Log.w(TAG, "UICC Slot info list is empty.")
-                return false
-            }
-            return UiccSlotUtil.isRemovableSimEnabled(slotInfoList)
         }
     var isEsimProfileEnabled: Boolean = false
         get() {
@@ -138,19 +128,11 @@ class SimOnboardingService {
             return telephonyManager?.doesSwitchMultiSimConfigTriggerReboot() ?: false
         }
 
-    fun isValid(): Boolean {
-        return targetSubId != INVALID_SUBSCRIPTION_ID
-            && targetSubInfo != null
-            && activeSubInfoList.isNotEmpty()
-            && slotInfoList.isNotEmpty()
-    }
-
     fun clear() {
         targetSubId = -1
         targetSubInfo = null
         availableSubInfoList = listOf()
         activeSubInfoList = listOf()
-        slotInfoList = listOf()
         uiccCardInfoList = listOf()
         targetPrimarySimCalls = -1
         targetPrimarySimTexts = -1
@@ -182,8 +164,6 @@ class SimOnboardingService {
                 availableSubInfoList.find { subInfo -> subInfo.subscriptionId == targetSubId }
             targetSubInfo?.let { userSelectedSubInfoList.add(it) }
             Log.d(TAG, "targetSubId: $targetSubId , targetSubInfo: $targetSubInfo")
-            slotInfoList = telephonyManager?.uiccSlotsInfo?.toList() ?: listOf()
-            Log.d(TAG, "slotInfoList: $slotInfoList.")
             uiccCardInfoList = telephonyManager?.uiccCardsInfo!!
             Log.d(TAG, "uiccCardInfoList: $uiccCardInfoList")
 
@@ -193,7 +173,6 @@ class SimOnboardingService {
 
             Log.d(
                 TAG,"doesTargetSimHaveEsimOperation: $doesTargetSimHaveEsimOperation" +
-                    ", isRemovableSimEnabled: $isRemovablePsimProfileEnabled" +
                     ", isMultipleEnabledProfilesSupported: $isMultipleEnabledProfilesSupported" +
                     ", targetPrimarySimCalls: $targetPrimarySimCalls" +
                     ", targetPrimarySimTexts: $targetPrimarySimTexts" +
@@ -238,6 +217,7 @@ class SimOnboardingService {
 
     fun addItemForRenaming(subInfo: SubscriptionInfo, newName: String) {
         if (subInfo.displayName == newName) {
+            renameMutableMap.remove(subInfo.subscriptionId)
             return
         }
         renameMutableMap[subInfo.subscriptionId] = newName
@@ -317,14 +297,15 @@ class SimOnboardingService {
             return true
         }
 
-        if (doesTargetSimHaveEsimOperation && isRemovablePsimProfileEnabled) {
-            Log.d(TAG,
-                "eSIM operation and removable PSIM is enabled. DSDS condition satisfied."
-            )
-            return true
-        }
-
-        if (!doesTargetSimHaveEsimOperation && isEsimProfileEnabled) {
+        if (doesTargetSimHaveEsimOperation) {
+            if (UiccSlotRepository(telephonyManager).anyRemovablePhysicalSimEnabled()) {
+                Log.d(
+                    TAG,
+                    "eSIM operation and removable PSIM is enabled. DSDS condition satisfied."
+                )
+                return true
+            }
+        } else if (isEsimProfileEnabled) {
             Log.d(TAG,
                 "Removable SIM operation and eSIM profile is enabled. DSDS condition"
                         + " satisfied."
@@ -366,7 +347,7 @@ class SimOnboardingService {
                     wifiPickerTrackerHelper,
                     targetPrimarySimMobileData
                 )
-                TelephonyRepository(context).setAutomaticData(
+                MobileDataRepository(context).setAutoDataSwitch(
                     targetNonDds,
                     targetPrimarySimAutoDataSwitch.value
                 )

@@ -28,9 +28,10 @@ import com.android.settingslib.development.AbstractEnableAdbPreferenceController
 public class AdbPreferenceController extends AbstractEnableAdbPreferenceController implements
         PreferenceControllerMixin {
 
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
 
-    public AdbPreferenceController(Context context, DevelopmentSettingsDashboardFragment fragment) {
+    public AdbPreferenceController(Context context,
+        @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
     }

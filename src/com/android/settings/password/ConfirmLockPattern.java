@@ -54,6 +54,7 @@ import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
+import com.android.settings.SetupRedactionInterstitial;
 import com.android.settingslib.animation.AppearAnimationCreator;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
@@ -751,6 +752,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             Intent result = new Intent();
             if (mRemoteValidation && containsGatekeeperPasswordHandle(resultData)) {
                 result.putExtra(EXTRA_KEY_GK_PW_HANDLE, getGatekeeperPasswordHandle(resultData));
+                SetupRedactionInterstitial.setEnabled(getContext(), true);
             }
             mCredentialCheckResultTracker.setResult(/* matched= */ true, result,
                     /* timeoutMs= */ 0, mEffectiveUserId);

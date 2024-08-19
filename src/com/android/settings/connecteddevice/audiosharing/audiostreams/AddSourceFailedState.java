@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.app.settings.SettingsEnums;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
@@ -35,6 +37,17 @@ class AddSourceFailedState extends SyncedState {
             sInstance = new AddSourceFailedState();
         }
         return sInstance;
+    }
+
+    @Override
+    void performAction(
+            AudioStreamPreference preference,
+            AudioStreamsProgressCategoryController controller,
+            AudioStreamsHelper helper) {
+        mMetricsFeatureProvider.action(
+                preference.getContext(),
+                SettingsEnums.ACTION_AUDIO_STREAM_JOIN_FAILED_OTHER,
+                preference.getSourceOriginForLogging().ordinal());
     }
 
     @Override

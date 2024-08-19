@@ -20,13 +20,10 @@ import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
 
 /**
  * Cellular Security features (insecure network notifications, network security controls, etc)
  */
-@SearchIndexable
 public class CellularSecuritySettingsFragment extends DashboardFragment {
 
     private static final String TAG = "CellularSecuritySettingsFragment";
@@ -53,7 +50,4 @@ public class CellularSecuritySettingsFragment extends DashboardFragment {
         super.onCreatePreferences(bundle, rootKey);
         setPreferencesFromResource(R.xml.cellular_security, rootKey);
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.cellular_security);
 }

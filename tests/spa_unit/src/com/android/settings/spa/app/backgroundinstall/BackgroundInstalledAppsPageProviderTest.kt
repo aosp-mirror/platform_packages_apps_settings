@@ -23,6 +23,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ParceledListSlice
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -30,50 +31,38 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settingslib.spa.testutils.FakeNavControllerWrapper
+import com.android.settingslib.spa.testutils.waitUntilExists
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class BackgroundInstalledAppsPageProviderTest {
-    @get:Rule
-    val composeTestRule = createComposeRule()
+    @get:Rule val composeTestRule = createComposeRule()
 
-    @get:Rule
-    val mockito: MockitoRule = MockitoJUnit.rule()
+    private val mockPackageManager = mock<PackageManager>()
 
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val context: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            on { packageManager } doReturn mockPackageManager
+        }
 
-    @Mock
-    private lateinit var mockContext: Context
-
-    @Mock
-    private lateinit var mockPackageManager: PackageManager
-
-    @Mock
-    private lateinit var mockBackgroundInstallControlService: IBackgroundInstallControlService
-
-    private var packageInfoFlagsCaptor = argumentCaptor<PackageManager.PackageInfoFlags>()
+    private val mockBackgroundInstallControlService = mock<IBackgroundInstallControlService>()
 
     private val fakeNavControllerWrapper = FakeNavControllerWrapper()
 
-    @Before
-    fun setup() {
-        whenever(mockContext.packageManager).thenReturn(mockPackageManager)
-    }
     @Test
     fun allAppListPageProvider_name() {
         assertThat(BackgroundInstalledAppsPageProvider.name)
@@ -106,7 +95,7 @@ class BackgroundInstalledAppsPageProviderTest {
 
         setInjectEntry(false)
 
-        composeTestRule.onNodeWithText("0 apps").assertIsDisplayed()
+        composeTestRule.waitUntilExists(hasText("0 apps"))
     }
 
     @Test
@@ -146,8 +135,9 @@ class BackgroundInstalledAppsPageProviderTest {
             BackgroundInstalledAppList()
         }
 
-        composeTestRule.onNodeWithText(
-            context.getString(R.string.background_install_title)).assertIsDisplayed()
+        composeTestRule.waitUntilExists(
+            hasText(context.getString(R.string.background_install_title))
+        )
     }
 
     @Test
@@ -197,7 +187,8 @@ class BackgroundInstalledAppsPageProviderTest {
 
     @Test
     fun backgroundInstalledAppsWithGroupingListModel_transform() = runTest {
-        val listModel = BackgroundInstalledAppsWithGroupingListModel(mockContext)
+        val packageInfoFlagsCaptor = argumentCaptor<PackageManager.PackageInfoFlags>()
+        val listModel = BackgroundInstalledAppsWithGroupingListModel(context)
         whenever(mockPackageManager.getPackageInfoAsUser(
             eq(TEST_PACKAGE_NAME),
             packageInfoFlagsCaptor.capture(),
@@ -215,7 +206,7 @@ class BackgroundInstalledAppsPageProviderTest {
 
     @Test
     fun backgroundInstalledAppsWithGroupingListModel_filter() = runTest {
-        val listModel = BackgroundInstalledAppsWithGroupingListModel(mockContext)
+        val listModel = BackgroundInstalledAppsWithGroupingListModel(context)
         listModel.setBackgroundInstallControlService(mockBackgroundInstallControlService)
         whenever(mockBackgroundInstallControlService.getBackgroundInstalledPackages(
             PackageManager.MATCH_ALL.toLong(),

@@ -92,6 +92,14 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         }
 
         mActivity = getActivity();
+
+        mSatelliteManager = mActivity.getSystemService(SatelliteManager.class);
+        if (mSatelliteManager == null) {
+            Log.d(TAG, "SatelliteManager is null, do nothing.");
+            finish();
+            return;
+        }
+
         mSubId = mActivity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
@@ -104,7 +112,6 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         }
 
         mTelephonymanager = mActivity.getSystemService(TelephonyManager.class);
-        mSatelliteManager = mActivity.getSystemService(SatelliteManager.class);
     }
 
     @Override
@@ -143,7 +150,7 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
             /* In case satellite is allowed by carrier's entitlement server, the page will show
                the check icon with guidance that satellite is included in user's mobile plan */
             preference.setTitle(R.string.title_have_satellite_plan);
-            icon = getResources().getDrawable(R.drawable.ic_check_circle_24px);
+            icon = getContext().getDrawable(R.drawable.ic_check_circle_24px);
         } else {
             /* Or, it will show the blocked icon with the guidance that satellite is not included
                in user's mobile plan */
