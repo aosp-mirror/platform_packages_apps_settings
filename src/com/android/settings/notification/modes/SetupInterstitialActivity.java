@@ -25,6 +25,7 @@ import static android.app.AutomaticZenRule.TYPE_THEATER;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
 import android.app.ActionBar;
+import android.app.AutomaticZenRule;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -151,22 +152,28 @@ public class SetupInterstitialActivity extends FragmentActivity {
 
     private void setupButton(Button button, @NonNull ZenMode mode) {
         button.setText(getString(R.string.zen_mode_setup_button_label, mode.getName()));
-        button.setOnClickListener(enableButtonListener(mode.getId()));
+        button.setOnClickListener(enableButtonListener(mode.getId(), mode.getType()));
     }
 
     @VisibleForTesting
-    View.OnClickListener enableButtonListener(String modeId) {
+    View.OnClickListener enableButtonListener(String modeId, @AutomaticZenRule.Type int modeType) {
         return unused -> {
             // When clicked, we first reload mode info in case it has changed in the interim,
             // then enable the mode and then send the user to the mode's configuration page.
             boolean updated = enableMode(modeId);
+
+            int metricsCategory = switch (modeType) {
+                case TYPE_BEDTIME -> SettingsEnums.ZEN_MODE_INTERSTITIAL_BEDTIME;
+                case TYPE_DRIVING -> SettingsEnums.ZEN_MODE_INTERSTITIAL_DRIVING;
+                default -> SettingsEnums.ZEN_MODE_INTERSTITIAL;
+            };
 
             // Don't come back to this activity after sending the user to the modes page, if
             // they happen to go back. Forward the activity result in case we got here (indirectly)
             // from some app that is waiting for the result.
             if (updated) {
                 ZenSubSettingLauncher.forModeFragment(this, ZenModeFragment.class, modeId,
-                                SettingsEnums.ZEN_MODE_INTERSTITIAL)
+                                metricsCategory)
                         .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT).launch();
             }
             finish();
