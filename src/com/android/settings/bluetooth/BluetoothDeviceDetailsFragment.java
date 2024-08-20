@@ -48,6 +48,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.ui.model.FragmentTypeModel;
 import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter;
 import com.android.settings.connecteddevice.stylus.StylusDevicesController;
 import com.android.settings.core.SettingsUIDeviceConfig;
@@ -343,7 +344,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     public void onCreatePreferences(@NonNull Bundle savedInstanceState, @NonNull String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
         if (Flags.enableBluetoothDeviceDetailsPolish()) {
-            mFormatter.updateLayout();
+            mFormatter.updateLayout(FragmentTypeModel.DeviceDetailsMainFragment.INSTANCE);
         }
     }
 
@@ -400,7 +401,9 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     @Override
     protected void addPreferenceController(AbstractPreferenceController controller) {
         if (Flags.enableBluetoothDeviceDetailsPolish()) {
-            List<String> keys = mFormatter.getVisiblePreferenceKeysForMainPage();
+            List<String> keys =
+                    mFormatter.getVisiblePreferenceKeys(
+                            FragmentTypeModel.DeviceDetailsMainFragment.INSTANCE);
             Lifecycle lifecycle = getSettingsLifecycle();
             if (keys == null || keys.contains(controller.getPreferenceKey())) {
                 super.addPreferenceController(controller);
