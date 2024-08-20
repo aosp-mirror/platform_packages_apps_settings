@@ -117,17 +117,17 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
         super.onPause();
 
         final int currentOptimizeMode = mBatteryOptimizeUtils.getAppOptimizationMode();
+        final Context applicationContext = requireContext().getApplicationContext();
         mLogStringBuilder.append(", onPause mode = ").append(currentOptimizeMode);
         logMetricCategory(currentOptimizeMode);
-
         mExecutor.execute(
                 () -> {
                     if (currentOptimizeMode != mOptimizationMode) {
                         AppOptModeSharedPreferencesUtils.deleteAppOptimizationModeEventByUid(
-                                getContext(), mBatteryOptimizeUtils.getUid());
+                                applicationContext, mBatteryOptimizeUtils.getUid());
                     }
                     BatteryOptimizeLogUtils.writeLog(
-                            getContext().getApplicationContext(),
+                            applicationContext,
                             Action.LEAVE,
                             BatteryOptimizeLogUtils.getPackageNameWithUserId(
                                     mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),

@@ -110,9 +110,10 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         if (mode == null || mode.getStatus() != DISABLED_BY_OTHER) {
             return false;
         }
+
+        mContext.startActivity(SetupInterstitialActivity.getIntent(mContext, mode));
         // don't come back here from the interstitial
         finish();
-        mContext.startActivity(SetupInterstitialActivity.getIntent(mContext, mode));
         return true;
     }
 
