@@ -176,12 +176,11 @@
             settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.EnabledNetworkModePreferenceController"/>
 
+        <!-- Settings search is handled by CarrierSettingsVersionSearchItem. -->
         <Preference
             android:key="carrier_settings_version_key"
             android:title="@string/carrier_settings_version"
-            android:enabled="false"
-            android:shouldDisableView="false"
-            android:selectable="false"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.CarrierSettingsVersionPreferenceController"
             settings:enableCopying="true"/>
 
