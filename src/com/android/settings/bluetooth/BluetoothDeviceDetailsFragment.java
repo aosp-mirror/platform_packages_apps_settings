@@ -256,8 +256,17 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     public void onDetach() {
         super.onDetach();
         mManager.getEventManager().unregisterCallback(mBluetoothCallback);
-        mBluetoothAdapter.removeOnMetadataChangedListener(
-                mCachedDevice.getDevice(), mExtraControlMetadataListener);
+        BluetoothDevice device = mCachedDevice.getDevice();
+        try {
+            mBluetoothAdapter.removeOnMetadataChangedListener(
+                    device, mExtraControlMetadataListener);
+        } catch (IllegalArgumentException e) {
+            Log.w(
+                    TAG,
+                    "Unable to unregister metadata change callback for "
+                            + mCachedDevice,
+                    e);
+        }
     }
 
     private void updateExtraControlUri(int viewWidth) {
