@@ -21,6 +21,7 @@ import android.provider.Settings
 import android.telephony.SubscriptionInfo
 import com.android.settings.R
 import com.android.settings.network.SubscriptionUtil
+import com.android.settings.network.telephony.DataUsagePreferenceController.Companion.DataUsageSearchItem
 import com.android.settings.network.telephony.MmsMessagePreferenceController.Companion.MmsMessageSearchItem
 import com.android.settings.network.telephony.NrAdvancedCallingPreferenceController.Companion.NrAdvancedCallingSearchItem
 import com.android.settings.network.telephony.RoamingPreferenceController.Companion.RoamingSearchItem
@@ -114,6 +115,7 @@ class MobileNetworkSettingsSearchIndex(
 
         fun createSearchItems(context: Context): List<MobileNetworkSettingsSearchItem> =
             listOf(
+                DataUsageSearchItem(context),
                 MmsMessageSearchItem(context),
                 NrAdvancedCallingSearchItem(context),
                 PreferredNetworkModeSearchItem(context),

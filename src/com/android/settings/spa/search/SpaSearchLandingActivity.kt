@@ -27,9 +27,6 @@ import com.android.settings.core.SubSettingLauncher
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.password.PasswordUtils
 import com.android.settings.spa.SpaDestination
-import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingKey
-import com.google.protobuf.ByteString
-import com.google.protobuf.InvalidProtocolBufferException
 
 class SpaSearchLandingActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,22 +45,17 @@ class SpaSearchLandingActivity : Activity() {
     companion object {
         @VisibleForTesting
         fun tryLaunch(context: Context, keyString: String) {
-            val key =
-                try {
-                    SpaSearchLandingKey.parseFrom(ByteString.copyFromUtf8(keyString))
-                } catch (e: InvalidProtocolBufferException) {
-                    Log.w(TAG, "arg key ($keyString) invalid", e)
-                    return
-                }
-
+            val key = decodeToSpaSearchLandingKey(keyString) ?: return
             if (key.hasSpaPage()) {
                 val destination = key.spaPage.destination
                 if (destination.isNotEmpty()) {
+                    Log.d(TAG, "Launch SPA search result: ${key.spaPage}")
                     SpaDestination(destination = destination, highlightMenuKey = null)
                         .startFromExportedActivity(context)
                 }
             }
             if (key.hasFragment()) {
+                Log.d(TAG, "Launch fragment search result: ${key.fragment}")
                 val arguments =
                     Bundle().apply {
                         key.fragment.argumentsMap.forEach { (k, v) ->
