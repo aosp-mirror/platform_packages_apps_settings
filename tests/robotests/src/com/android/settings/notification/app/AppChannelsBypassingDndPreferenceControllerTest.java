@@ -48,6 +48,7 @@ import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
@@ -175,12 +176,7 @@ public class AppChannelsBypassingDndPreferenceControllerTest {
                 NotificationManager.IMPORTANCE_DEFAULT));
 
         ParceledListSlice<NotificationChannelGroup> groups = new ParceledListSlice<>(
-                new ArrayList<NotificationChannelGroup>() {
-                    {
-                        add(group1);
-                        add(group2);
-                    }
-                }
+                Arrays.asList(group1, group2)
         );
 
         when(mBackend.getGroups(eq(mAppRow.pkg), eq(mAppRow.uid))).thenReturn(groups);
