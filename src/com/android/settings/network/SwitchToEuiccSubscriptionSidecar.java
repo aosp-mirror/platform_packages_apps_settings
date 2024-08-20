@@ -30,8 +30,6 @@ import android.util.Log;
 import com.android.settings.SidecarFragment;
 import com.android.settings.network.telephony.EuiccOperationSidecar;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -205,10 +203,10 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
     }
 
     private int getLogicalSlotIndex(int physicalSlotIndex, int portIndex) {
-        ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(mTelephonyManager);
-        if (slotInfos != null && physicalSlotIndex >= 0 && physicalSlotIndex < slotInfos.size()
-                && slotInfos.get(physicalSlotIndex) != null) {
-            for (UiccPortInfo portInfo : slotInfos.get(physicalSlotIndex).getPorts()) {
+        UiccSlotInfo[] slotInfos = mTelephonyManager.getUiccSlotsInfo();
+        if (slotInfos != null && physicalSlotIndex >= 0 && physicalSlotIndex < slotInfos.length
+                && slotInfos[physicalSlotIndex] != null) {
+            for (UiccPortInfo portInfo : slotInfos[physicalSlotIndex].getPorts()) {
                 if (portInfo.getPortIndex() == portIndex) {
                     return portInfo.getLogicalSlotIndex();
                 }
