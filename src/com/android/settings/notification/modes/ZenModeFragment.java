@@ -77,7 +77,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
                 new ZenModeTriggerAddPreferenceController(context, "zen_add_automatic_trigger",
                         this, mBackend));
         prefControllers.add(new InterruptionFilterPreferenceController(
-                context, "allow_filtering", mBackend));
+                context, "allow_all", mBackend));
         prefControllers.add(new ManualDurationPreferenceController(
                 context, "mode_manual_duration", this, mBackend));
         return prefControllers;
@@ -110,9 +110,10 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         if (mode == null || mode.getStatus() != DISABLED_BY_OTHER) {
             return false;
         }
+
+        mContext.startActivity(SetupInterstitialActivity.getIntent(mContext, mode));
         // don't come back here from the interstitial
         finish();
-        mContext.startActivity(SetupInterstitialActivity.getIntent(mContext, mode));
         return true;
     }
 

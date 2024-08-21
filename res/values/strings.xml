@@ -1864,6 +1864,10 @@
     <string name="device_details_title">Device details</string>
     <!-- Title for keyboard settings preferences. [CHAR LIMIT=50] -->
     <string name="bluetooth_device_keyboard_settings_preference_title">Keyboard settings</string>
+    <!-- Title for more settings preferences. [CHAR LIMIT=50] -->
+    <string name="bluetooth_device_more_settings_preference_title">More settings</string>
+    <!-- Title for more settings summary. [CHAR LIMIT=50] -->
+    <string name="bluetooth_device_more_settings_preference_summary">Firmware updates, about, and more</string>
     <!-- Title of the item to show device MAC address -->
     <string name="bluetooth_device_mac_address">Device\'s Bluetooth address: <xliff:g id="address">%1$s</xliff:g></string>
     <!-- Title of the items to show multuple devices MAC address [CHAR LIMIT=NONE]-->
@@ -1883,6 +1887,9 @@
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
     <!-- Bluetooth device details companion apps. In the confirmation dialog for removing an associated app, this is the label on the button that will complete the disassociate action. [CHAR LIMIT=80] -->
     <string name = "bluetooth_companion_app_remove_association_confirm_button">Disconnect app</string>
+
+    <!-- Title of device details screen [CHAR LIMIT=28]-->
+    <string name="device_details_more_settings">More settings</string>
 
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_string">Maximum connected Bluetooth audio devices</string>
@@ -4493,10 +4500,10 @@
     <string name="trackpad_reverse_scrolling_title">Reverse scrolling</string>
     <!-- Summary text for 'Reverse scrolling' [CHAR LIMIT=60] -->
     <string name="trackpad_reverse_scrolling_summary">Content moves up when you scroll down</string>
-    <!-- Title text for 'Bottom-right tap' [CHAR LIMIT=35] -->
-    <string name="trackpad_bottom_right_tap_title">Bottom-right tap</string>
-    <!-- Summary text for 'Bottom-right tap' [CHAR LIMIT=60] -->
-    <string name="trackpad_bottom_right_tap_summary">Tap the bottom right corner of the touchpad for more options</string>
+    <!-- Title text for 'Bottom-right click', a setting that allows the user to right-click by pressing in the bottom-right corner of a touchpad. [CHAR LIMIT=35] -->
+    <string name="trackpad_bottom_right_tap_title">Bottom-right click</string>
+    <!-- Summary text for 'Bottom-right click', a setting that allows the user to right-click by pressing in the bottom-right corner of a touchpad [CHAR LIMIT=60] -->
+    <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
     <string name="trackpad_pointer_speed">Pointer speed</string>
     <!-- Title text for mouse pointer fill style. [CHAR LIMIT=35] -->
@@ -8184,10 +8191,10 @@
         other {{effect_1}, {effect_2}, and # more}
         }
     </string>
-    <!-- Modes: setting for whether the mode should filter (silence/hide) notifications/volume streams -->
-    <string name="mode_notification_filter_title">Limit what can notify you</string>
-    <!-- Modes: subtext when a mode is not filtering (silence/hide) notifications/volume streams -->
-    <string name="mode_no_notification_filter">No interruptions are filtered</string>
+    <!-- Modes: setting for a mode to allow all notifications and sounds through -->
+    <string name="zen_mode_allow_all_notifications">Allow all notifications</string>
+    <!-- Modes: subtext when a mode is allowing all notifications and sounds (i.e. no filtering) -->
+    <string name="zen_mode_all_notifications_allowed">People, apps, and sounds can interrupt</string>
 
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for filtered

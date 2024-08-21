@@ -56,7 +56,7 @@ public class ImsQueryProvisioningStat implements ImsQuery {
             final ProvisioningManager privisionManager =
                     ProvisioningManager.createForSubscriptionId(mSubId);
             return privisionManager.getProvisioningStatusForCapability(mCapability, mTech);
-        } catch (IllegalArgumentException exception) {
+        } catch (UnsupportedOperationException exception) {
             Log.w(LOG_TAG, "fail to get Provisioning stat. subId=" + mSubId, exception);
         }
         return false;

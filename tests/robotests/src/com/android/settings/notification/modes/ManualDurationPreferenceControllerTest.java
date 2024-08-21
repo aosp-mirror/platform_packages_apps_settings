@@ -18,11 +18,9 @@ package com.android.settings.notification.modes;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -31,7 +29,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settingslib.notification.modes.TestModeBuilder;
-import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
@@ -73,10 +70,8 @@ public class ManualDurationPreferenceControllerTest {
     @Test
     public void testIsAvailable_onlyForManualDnd() {
         assertThat(mPrefController.isAvailable(TestModeBuilder.EXAMPLE)).isFalse();
-
-        ZenMode manualDnd = ZenMode.manualDndMode(
-                new AutomaticZenRule.Builder("id", Uri.EMPTY).build(), false);
-        assertThat(mPrefController.isAvailable(manualDnd)).isTrue();
+        assertThat(mPrefController.isAvailable(TestModeBuilder.MANUAL_DND_ACTIVE)).isTrue();
+        assertThat(mPrefController.isAvailable(TestModeBuilder.MANUAL_DND_INACTIVE)).isTrue();
     }
 
     @Test
