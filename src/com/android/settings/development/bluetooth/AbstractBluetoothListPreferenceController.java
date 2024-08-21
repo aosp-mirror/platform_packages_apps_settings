@@ -43,7 +43,6 @@ public abstract class AbstractBluetoothListPreferenceController
         implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "AbstrBtListPrefCtrl";
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     protected static final int DEFAULT_VALUE_INT = 1000;
 
@@ -74,9 +73,7 @@ public abstract class AbstractBluetoothListPreferenceController
 
     @Override
     public boolean onPreferenceChange(@Nullable Preference preference, @NonNull Object newValue) {
-        if (DEBUG) {
-            Log.d(TAG, "onPreferenceChange: newValue=" + (String) newValue);
-        }
+        Log.d(TAG, "onPreferenceChange: newValue=" + (String) newValue);
         if (mListPreference == null) {
             Log.e(TAG, "onPreferenceChange: List preference is null");
             return false;
@@ -99,9 +96,7 @@ public abstract class AbstractBluetoothListPreferenceController
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        if (DEBUG) {
-            Log.d(TAG, "onDeveloperOptionsSwitchDisabled");
-        }
+        Log.d(TAG, "onDeveloperOptionsSwitchDisabled");
         if (mListPreference == null) {
             Log.e(TAG, "onDeveloperOptionsSwitchDisabled: List preference is null");
             return;
@@ -230,14 +225,12 @@ public abstract class AbstractBluetoothListPreferenceController
     }
 
     private void setupDefaultListPreference() {
-        if (DEBUG) {
-            Log.d(
-                    TAG,
-                    "setupDefaultListPreference: mDefaultEntry="
-                            + mDefaultEntry
-                            + ", mDefaultValue="
-                            + mDefaultValue);
-        }
+        Log.d(
+                TAG,
+                "setupDefaultListPreference: mDefaultEntry="
+                        + mDefaultEntry
+                        + ", mDefaultValue="
+                        + mDefaultValue);
         if (mListPreference == null) {
             Log.e(TAG, "setupListPreference: List preference is null");
             return;
