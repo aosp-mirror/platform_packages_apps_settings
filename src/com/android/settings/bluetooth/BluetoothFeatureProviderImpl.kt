@@ -101,6 +101,12 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
         bluetoothAdapter: BluetoothAdapter,
         cachedDevice: CachedBluetoothDevice
     ): DeviceDetailsFragmentFormatter {
-        return DeviceDetailsFragmentFormatterImpl(context, fragment, bluetoothAdapter, cachedDevice)
+        return DeviceDetailsFragmentFormatterImpl(
+            context,
+            fragment,
+            bluetoothAdapter,
+            cachedDevice,
+            Dispatchers.IO
+        )
     }
 }

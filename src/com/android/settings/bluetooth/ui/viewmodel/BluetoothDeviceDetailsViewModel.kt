@@ -21,6 +21,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.android.settings.R
 import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayout
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayoutRow
@@ -30,8 +31,10 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -47,10 +50,11 @@ class BluetoothDeviceDetailsViewModel(
     private val deviceSettingRepository: DeviceSettingRepository,
     private val spatialAudioInteractor: SpatialAudioInteractor,
     private val cachedDevice: CachedBluetoothDevice,
+    backgroundCoroutineContext: CoroutineContext,
 ) : AndroidViewModel(application){
 
     private val items =
-        viewModelScope.async(Dispatchers.IO, start = CoroutineStart.LAZY) {
+        viewModelScope.async(backgroundCoroutineContext, start = CoroutineStart.LAZY) {
             deviceSettingRepository.getDeviceSettingsConfig(cachedDevice)
         }
 
@@ -59,6 +63,13 @@ class BluetoothDeviceDetailsViewModel(
             is FragmentTypeModel.DeviceDetailsMainFragment -> items.await()?.mainItems
             is FragmentTypeModel.DeviceDetailsMoreSettingsFragment ->
                 items.await()?.moreSettingsItems
+        }
+
+    suspend fun getHelpItem(fragment: FragmentTypeModel): DeviceSettingConfigItemModel? =
+        when (fragment) {
+            is FragmentTypeModel.DeviceDetailsMainFragment -> null
+            is FragmentTypeModel.DeviceDetailsMoreSettingsFragment ->
+                items.await()?.moreSettingsHelpItem
         }
 
     fun getDeviceSetting(
@@ -101,6 +112,13 @@ class BluetoothDeviceDetailsViewModel(
             }
             is DeviceSettingModel.FooterPreference ->
                 DeviceSettingPreferenceModel.FooterPreference(id = id, footerText = footerText)
+            is DeviceSettingModel.HelpPreference ->
+                DeviceSettingPreferenceModel.HelpPreference(
+                    id = id,
+                    icon = DeviceSettingIcon.ResourceIcon(R.drawable.ic_help),
+                    onClick = {
+                        application.startActivity(intent)
+                    })
             is DeviceSettingModel.MultiTogglePreference ->
                 DeviceSettingPreferenceModel.MultiTogglePreference(
                     id = id,
@@ -163,11 +181,14 @@ class BluetoothDeviceDetailsViewModel(
         private val deviceSettingRepository: DeviceSettingRepository,
         private val spatialAudioInteractor: SpatialAudioInteractor,
         private val cachedDevice: CachedBluetoothDevice,
+        private val backgroundCoroutineContext: CoroutineContext,
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
             return BluetoothDeviceDetailsViewModel(
-                application, deviceSettingRepository, spatialAudioInteractor, cachedDevice)
+                application, deviceSettingRepository, spatialAudioInteractor,
+                cachedDevice,
+                backgroundCoroutineContext)
                 as T
         }
     }
