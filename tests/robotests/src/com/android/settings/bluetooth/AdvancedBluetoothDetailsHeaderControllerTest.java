@@ -30,7 +30,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.provider.DeviceConfig;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -44,7 +43,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
@@ -339,9 +337,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_untetheredHeadsetWithConfigOn_returnAvailable() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
+    public void getAvailabilityStatus_untetheredHeadset_returnAvailable() {
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("true".getBytes());
 
@@ -350,31 +346,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_untetheredHeadsetWithConfigOff_returnUnavailable() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "false", true);
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
-                .thenReturn("true".getBytes());
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_notUntetheredHeadsetWithConfigOn_returnUnavailable() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
-                .thenReturn("false".getBytes());
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_notUntetheredHeadsetWithConfigOff_returnUnavailable() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "false", true);
+    public void getAvailabilityStatus_notUntetheredHeadset_returnUnavailable() {
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("false".getBytes());
 
@@ -393,8 +365,6 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
 
     @Test
     public void onStart_isAvailable_registerCallback() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("true".getBytes());
         Set<CachedBluetoothDevice> cacheBluetoothDevices = new HashSet<>();
@@ -424,8 +394,6 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
 
     @Test
     public void onStart_isAvailableButNoBluetoothDevice_notNeedToRegisterCallback() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("true".getBytes());
         when(mCachedDevice.getDevice()).thenReturn(null);
@@ -452,8 +420,6 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
 
     @Test
     public void onStop_noBluetoothDevice_noNeedToUnregisterCallback() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("true".getBytes());
         when(mCachedDevice.getDevice()).thenReturn(null);
@@ -549,8 +515,6 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_BLUETOOTH_DEVICE_DETAILS_POLISH)
     public void enablePolishFlag_renameButtonShown() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("true".getBytes());
         Set<CachedBluetoothDevice> cacheBluetoothDevices = new HashSet<>();
