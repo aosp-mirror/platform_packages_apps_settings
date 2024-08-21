@@ -66,15 +66,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import com.android.settings.R
+import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 import com.android.settings.bluetooth.ui.composable.Icon as DeviceSettingComposeIcon
-import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
-import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.dialog.getDialogWidth
 
 @Composable
 fun MultiTogglePreferenceGroup(
-    preferenceModels: List<DeviceSettingModel.MultiTogglePreference>,
+    preferenceModels: List<DeviceSettingPreferenceModel.MultiTogglePreference>,
 ) {
     var settingIdForPopUp by remember { mutableStateOf<Int?>(null) }
 
@@ -115,7 +114,7 @@ fun MultiTogglePreferenceGroup(
                                 colors = getButtonColors(preferenceModel.isActive),
                                 contentPadding = PaddingValues(0.dp)) {
                                     DeviceSettingComposeIcon(
-                                        preferenceModel.toggles[preferenceModel.state.selectedIndex]
+                                        preferenceModel.toggles[preferenceModel.selectedIndex]
                                             .icon,
                                         modifier = Modifier.size(24.dp))
                                 }
@@ -144,7 +143,7 @@ private fun getButtonColors(isActive: Boolean) =
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun dialog(
-    multiTogglePreference: DeviceSettingModel.MultiTogglePreference,
+    multiTogglePreference: DeviceSettingPreferenceModel.MultiTogglePreference,
     onDismiss: () -> Unit
 ) {
     BasicAlertDialog(
@@ -179,7 +178,7 @@ private fun dialog(
 }
 
 @Composable
-private fun dialogContent(multiTogglePreference: DeviceSettingModel.MultiTogglePreference) {
+private fun dialogContent(multiTogglePreference: DeviceSettingPreferenceModel.MultiTogglePreference) {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth().height(24.dp),
@@ -219,7 +218,7 @@ private fun dialogContent(multiTogglePreference: DeviceSettingModel.MultiToggleP
                 }
                 Row {
                     for ((idx, toggle) in multiTogglePreference.toggles.withIndex()) {
-                        val selected = idx == multiTogglePreference.state.selectedIndex
+                        val selected = idx == multiTogglePreference.selectedIndex
                         Column(
                             modifier =
                                 Modifier.weight(1f)
@@ -237,8 +236,7 @@ private fun dialogContent(multiTogglePreference: DeviceSettingModel.MultiToggleP
                         ) {
                             Button(
                                 onClick = {
-                                    multiTogglePreference.updateState(
-                                        DeviceSettingStateModel.MultiTogglePreferenceState(idx))
+                                    multiTogglePreference.onSelectedChange(idx)
                                 },
                                 modifier = Modifier.fillMaxSize(),
                                 colors =

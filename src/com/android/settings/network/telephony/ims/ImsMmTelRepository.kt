@@ -36,6 +36,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
@@ -47,6 +48,11 @@ interface ImsMmTelRepository {
 
     fun imsReadyFlow(): Flow<Boolean>
 
+    fun isSupportedFlow(
+        @MmTelFeature.MmTelCapabilities.MmTelCapability capability: Int,
+        @AccessNetworkConstants.TransportType transportType: Int,
+    ): Flow<Boolean>
+
     suspend fun isSupported(
         @MmTelFeature.MmTelCapabilities.MmTelCapability capability: Int,
         @AccessNetworkConstants.TransportType transportType: Int,
@@ -55,6 +61,11 @@ interface ImsMmTelRepository {
     suspend fun setCrossSimCallingEnabled(enabled: Boolean)
 }
 
+/**
+ * A repository for the IMS MMTel.
+ *
+ * @throws IllegalArgumentException if the [subId] is invalid.
+ */
 class ImsMmTelRepositoryImpl(
     context: Context,
     private val subId: Int,
@@ -126,7 +137,11 @@ class ImsMmTelRepositoryImpl(
         awaitClose { imsMmTelManager.unregisterImsStateCallback(callback) }
     }.catch { e ->
         Log.w(TAG, "[$subId] error while imsReadyFlow", e)
+        emit(false)
     }.conflate().flowOn(Dispatchers.Default)
+
+    override fun isSupportedFlow(capability: Int, transportType: Int): Flow<Boolean> =
+        imsReadyFlow().map { imsReady -> imsReady && isSupported(capability, transportType) }
 
     override suspend fun isSupported(
         @MmTelFeature.MmTelCapabilities.MmTelCapability capability: Int,

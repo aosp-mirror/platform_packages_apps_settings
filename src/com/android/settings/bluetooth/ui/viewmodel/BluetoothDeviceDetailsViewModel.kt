@@ -16,17 +16,22 @@
 
 package com.android.settings.bluetooth.ui.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayout
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayoutRow
+import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
+import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -38,30 +43,81 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class BluetoothDeviceDetailsViewModel(
+    private val application: Application,
     private val deviceSettingRepository: DeviceSettingRepository,
     private val spatialAudioInteractor: SpatialAudioInteractor,
     private val cachedDevice: CachedBluetoothDevice,
-) : ViewModel() {
+) : AndroidViewModel(application){
+
     private val items =
         viewModelScope.async(Dispatchers.IO, start = CoroutineStart.LAZY) {
             deviceSettingRepository.getDeviceSettingsConfig(cachedDevice)
         }
 
-    suspend fun getItems(): List<DeviceSettingConfigItemModel>? = items.await()?.mainItems
+    suspend fun getItems(fragment: FragmentTypeModel): List<DeviceSettingConfigItemModel>? =
+        when (fragment) {
+            is FragmentTypeModel.DeviceDetailsMainFragment -> items.await()?.mainItems
+            is FragmentTypeModel.DeviceDetailsMoreSettingsFragment ->
+                items.await()?.moreSettingsItems
+        }
 
     fun getDeviceSetting(
         cachedDevice: CachedBluetoothDevice,
         @DeviceSettingId settingId: Int
-    ): Flow<DeviceSettingModel?> {
+    ): Flow<DeviceSettingPreferenceModel?> {
+        if (settingId == DeviceSettingId.DEVICE_SETTING_ID_MORE_SETTINGS) {
+            return flowOf(DeviceSettingPreferenceModel.MoreSettingsPreference(settingId))
+        }
         return when (settingId) {
             DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE ->
                 spatialAudioInteractor.getDeviceSetting(cachedDevice)
             else -> deviceSettingRepository.getDeviceSetting(cachedDevice, settingId)
+        }.map { it?.toPreferenceModel() }
+    }
+
+    private fun DeviceSettingModel.toPreferenceModel(): DeviceSettingPreferenceModel? {
+        return when (this) {
+            is DeviceSettingModel.ActionSwitchPreference -> {
+                if (switchState != null) {
+                    DeviceSettingPreferenceModel.SwitchPreference(
+                        id = id,
+                        title = title,
+                        summary = summary,
+                        icon = icon,
+                        checked = switchState?.checked ?: false,
+                        onCheckedChange = { newState ->
+                            updateState?.invoke(
+                                DeviceSettingStateModel.ActionSwitchPreferenceState(newState))
+                        },
+                        onPrimaryClick = { intent?.let { application.startActivity(it) } })
+                } else {
+                    DeviceSettingPreferenceModel.PlainPreference(
+                        id = id,
+                        title = title,
+                        summary = summary,
+                        icon = icon,
+                        onClick = { intent?.let { application.startActivity(it) } })
+                }
+            }
+            is DeviceSettingModel.FooterPreference ->
+                DeviceSettingPreferenceModel.FooterPreference(id = id, footerText = footerText)
+            is DeviceSettingModel.MultiTogglePreference ->
+                DeviceSettingPreferenceModel.MultiTogglePreference(
+                    id = id,
+                    title = title,
+                    toggles = toggles,
+                    isActive = isActive,
+                    selectedIndex = state.selectedIndex,
+                    isAllowedChangingState = isAllowedChangingState,
+                    onSelectedChange = { newState ->
+                        updateState(DeviceSettingStateModel.MultiTogglePreferenceState(newState))
+                    })
+            is DeviceSettingModel.Unknown -> null
         }
     }
 
-    suspend fun getLayout(): DeviceSettingLayout? {
-        val configItems = getItems() ?: return null
+    suspend fun getLayout(fragment: FragmentTypeModel): DeviceSettingLayout? {
+        val configItems = getItems(fragment) ?: return null
         val idToDeviceSetting =
             configItems
                 .filterIsInstance<DeviceSettingConfigItemModel.AppProvidedItem>()
@@ -80,7 +136,7 @@ class BluetoothDeviceDetailsViewModel(
                         if (!isXmlPreference && setting == null) {
                             continue
                         }
-                        if (setting !is DeviceSettingModel.MultiTogglePreference) {
+                        if (setting !is DeviceSettingPreferenceModel.MultiTogglePreference) {
                             multiToggleSettingIds = null
                             positionMapping[i] = listOf(configItem.settingId)
                             continue
@@ -103,6 +159,7 @@ class BluetoothDeviceDetailsViewModel(
     }
 
     class Factory(
+        private val application: Application,
         private val deviceSettingRepository: DeviceSettingRepository,
         private val spatialAudioInteractor: SpatialAudioInteractor,
         private val cachedDevice: CachedBluetoothDevice,
@@ -110,7 +167,7 @@ class BluetoothDeviceDetailsViewModel(
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
             return BluetoothDeviceDetailsViewModel(
-                deviceSettingRepository, spatialAudioInteractor, cachedDevice)
+                application, deviceSettingRepository, spatialAudioInteractor, cachedDevice)
                 as T
         }
     }
