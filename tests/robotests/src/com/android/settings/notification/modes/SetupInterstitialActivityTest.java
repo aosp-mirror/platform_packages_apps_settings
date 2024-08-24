@@ -128,7 +128,7 @@ public class SetupInterstitialActivityTest {
                                 SetupInterstitialActivity.class)
                         .putExtra(EXTRA_AUTOMATIC_ZEN_RULE_ID, MODE_ID));
         scenario.onActivity(activity -> {
-            View.OnClickListener listener = activity.enableButtonListener(MODE_ID);
+            View.OnClickListener listener = activity.enableButtonListener(MODE_ID, mode.getType());
 
             // simulate button press even though we don't actually have a button
             listener.onClick(null);
