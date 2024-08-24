@@ -411,8 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Tvár a hodinky <xliff:g id="WATCH">%s</xliff:g> boli pridané"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Tvár, odtlačok prsta a hodinky <xliff:g id="WATCH">%s</xliff:g> boli pridané"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Tvár, odtlačky prstov a hodinky <xliff:g id="WATCH">%s</xliff:g> boli pridané"</string>
-    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
-    <skip />
+    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"Overenie totožnosti je zapnuté"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Odomknutie Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Hodinky boli pridané"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Nastavte si hodinky"</string>
@@ -661,12 +660,12 @@
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Zvýšte si zabezpečenie tak, že pre toto zariadenie nastavíte PIN, vzor alebo heslo."</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Zabezpečenie telefónu"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Odomknutie vyžaduje pridanie odtlačku prsta"</string>
-    <string name="lock_settings_picker_title" msgid="9219376327364915334">"Výber zámky obrazovky"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Výber zámky obrazovky"</string>
+    <string name="lock_settings_picker_title" msgid="9219376327364915334">"Vyberte zámku obrazovky"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Vyberte zámku obrazovky"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Vyberte novú zámku obrazovky"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vyberte zámku pre pracovné aplikácie"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Vyberte novú pracovnú zámku"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Zlepšite svoje zabezpečenie nastavením dodatočnej zámky obrazovky"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Zlepšite svoje zabezpečenie nastavením dodatočnej zámky obrazovky."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Zvoľte záložnú metódu zámky obrazovky"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ak zabudnete zámku obrazovky, váš správca IT ju nemôže resetovať."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Nastavte samostatnú pracovnú zámku"</string>
@@ -768,7 +767,7 @@
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> odporúča silný kód PIN alebo heslo, bez ktorého nemusí fungovať podľa očakávaní"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> odporúča nový kód PIN alebo heslo, bez ktorého nemusí fungovať podľa očakávaní"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> odporúča nový vzor, PIN alebo heslo, bez ktorého nemusí fungovať podľa očakávaní"</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"Aplikácia <xliff:g id="APP_NAME">%1$s</xliff:g> odporúča novú zámku obrazovky"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"Aplikácia <xliff:g id="APP_NAME">%1$s</xliff:g> odporúča novú zámku obrazovky."</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Skúste to znova. <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g>. z <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> pokusov."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Vaše dáta budú odstránené"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Ak pri ďalšom pokuse zadáte nesprávny vzor, dáta tohto zariadenia budú odstránené"</string>
@@ -3337,6 +3336,14 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Zapnuté / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> a <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Priestorový zvuk môžete zapnúť aj pre zariadenia s rozhraním Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Nastavenia pripojených zariadení"</string>
+    <!-- no translation found for spatial_audio_multi_toggle_title (6175786400035541273) -->
+    <skip />
+    <!-- no translation found for spatial_audio_multi_toggle_off (2086359413991193164) -->
+    <skip />
+    <!-- no translation found for spatial_audio_multi_toggle_on (2988769235357633788) -->
+    <skip />
+    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (861779551619033627) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Žiadne}=1{Bol nastavený 1 plán}few{Boli nastavené # plány}many{# schedules set}other{Bolo nastavených # plánov}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Režim bez vyrušení"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Režimy priority"</string>
@@ -3625,7 +3632,7 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Prístup k upozorneniam si nevyžiadali žiadne nainštalované aplikácie"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Povoliť prístup k upozorneniam"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Adaptívne upozornenia Androidu boli v Androide 12 nahradené zlepšenými upozorneniami. Táto funkcia zobrazuje navrhované akcie aj odpovede a organizuje vaše upozornenia. \n\nZlepšené upozornenia majú prístup k obsahu upozornení vrátane osobných údajov, ako sú mená kontaktov a správy. Táto funkcia tiež môže zavrieť upozornenia alebo na ne reagovať, napríklad prijať telefonáty a ovládať režim bez vyrušení."</string>
-    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Povoliť prístup k upozorneniam pre službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Povoliť službe <xliff:g id="SERVICE">%1$s</xliff:g> prístup k upozorneniam?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"Aplikácia <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude môcť čítať všetky upozornenia vrátane osobných údajov, ako sú mená kontaktov, fotky a texty prijatých správ. Bude môcť aj stlmiť alebo zrušiť upozornenia, prípadne spustiť v nich obsiahnuté tlačidlá spúšťajúce akcie vrátane prijatia telefonického hovoru. \n\nAplikácia tým získa aj možnosť vypnúť alebo zapnúť režim bez vyrušení a meniť súvisiace nastavenia."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"Aplikácia <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude môcť:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Čítať vaše upozornenia"</string>
@@ -3634,7 +3641,11 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Môže odpovedať na správy a podniknúť akcie v súvislosti s tlačidlami v upozorneniach vrátane stlmenia alebo zavretia upozornení a prijímania hovorov."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Meniť nastavenia"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Môže zapnúť alebo vypnúť režim bez vyrušení a zmeniť súvisiace nastavenia."</string>
+    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ak vypnete prístup k upozorneniam pre aplikáciu <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, môžete tým vypnúť aj prístup pre režim bez vyrušení."</string>
+    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
+    <skip />
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Vypnúť"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Zrušiť"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Reálny čas"</string>
@@ -3695,6 +3706,12 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Prístup k režimu bez vyrušení"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Povoliť režim bez vyrušení"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Prístup k režimu bez vyrušení si nevyžiadali žiadne nainštalované aplikácie"</string>
+    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
+    <skip />
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Nepovolili ste upozornenia z tejto aplikácie"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Táto kategória upozornení je v zariadení na vašu žiadosť blokovaná Androidom"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Táto skupina upozornení je v zariadení na vašu žiadosť blokovaná Androidom"</string>
@@ -3877,6 +3894,22 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Eliminujte všetky možnosti rozptyľovania, aby vás nič nerušilo"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Prispôsobte prostredia a nastavenia zariadenia pre rôznych používateľov"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Povoľte, aby vás mohli kontaktovať iba dôležití ľudia a aplikácie, čím minimalizujete vyrušenia"</string>
+    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
+    <skip />
     <string name="warning_button_text" msgid="1274234338874005639">"Upozornenie"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Zavrieť"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Odoslať spätnú väzbu o zariadení"</string>
@@ -4077,6 +4110,14 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Musí zostať zapnuté, pretože je zapnutý prístup k upozorneniam"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Odvolať prístup k režimu bez vyrušení pre aplikáciu <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Všetky pravidlá režimu bez vyrušení vytvorené touto aplikáciou budú odstránené."</string>
+    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
+    <skip />
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Neoptimalizovať"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimalizovať"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Batéria sa môže vybíjať rýchlejšie. Aplikácie už nebudú mať obmedzené používanie batérie na pozadí."</string>
@@ -4619,7 +4660,7 @@
     <string name="media_output_label_title" msgid="4139048973886819148">"Pustiť <xliff:g id="LABEL">%s</xliff:g> cez"</string>
     <string name="media_output_title_without_playing" msgid="3339321669132875821">"Zvuk sa prehrá cez"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Toto zariadenie"</string>
-    <string name="media_output_audio_sharing" msgid="8169294522817470115">"Zdieľa sa zvuk"</string>
+    <string name="media_output_audio_sharing" msgid="8169294522817470115">"Zvuk sa zdieľa"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Počas hovorov nie je k dispozícii"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Prijať hovor v zariadení"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Tento názov prístupového bodu sa nedá zmeniť."</string>
@@ -5331,7 +5372,7 @@
     <string name="audio_sharing_description" msgid="1660255584523640628">"Umožnite ľuďom počúvať vaše médiá spolu s vami. Poslucháči potrebujú vlastné slúchadlá podporujúce LE Audio."</string>
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Aktívne mediálne zariadenia"</string>
     <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Zvuk hovoru"</string>
-    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Prehrávajte iba v zariadení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Prehrávať iba v zariadení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Prehranie testovacieho zvuku"</string>
     <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Počuť by ho mal každý poslucháč"</string>
     <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Nastavenia zvukového streamu"</string>
@@ -5357,17 +5398,17 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Zavrieť"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Pripojte ďalší pár kompatibilných slúchadiel alebo zdieľajte s druhou osobou názov a heslo svojho streamu"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Spárujte ďalše kompatibilné slúchadlá alebo zdieľajte s druhou osobou QR kód svojho zvukového streamu"</string>
-    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Zdieľa sa zvuk"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Zvuk sa zdieľa"</string>
     <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Spárovať nové zariadenie"</string>
     <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Zobraziť QR kód"</string>
     <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Zdieľate zvuk"</string>
     <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Poslucháči počujú vaše médiá. Nepočujú hovory."</string>
     <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Prestať zdieľať"</string>
     <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Nastavenia"</string>
-    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Výber zariadenia na odpojenie"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Ktoré zariadenie chcete odpojiť?"</string>
     <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Zvuk môžu naraz zdieľať iba dve zariadenia"</string>
     <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Odpojiť <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Chcete pripojiť <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ?"</string>
+    <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Chcete pripojiť zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="audio_sharing_stop_dialog_content" msgid="6371546856710692910">"Prestanete zdieľať zvuk so zariadením <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Prestanete zdieľať zvuk so zariadeniami <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> a <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
     <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Prestanete zdieľať zvuk s pripojenými slúchadlami"</string>
@@ -5390,11 +5431,11 @@
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Zvukový stream nie je k dispozícii"</string>
     <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Tento zvukový stream momentálne nič neprehráva"</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Zavrieť"</string>
-    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Počúvanie"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Počúvať"</string>
     <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Skúsiť znova"</string>
     <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Počúvanie zvukového streamu"</string>
     <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Zvukový stream sa prehrá v zariadení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Hlasitosť ovládajte pomocou neho."</string>
-    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Zvukový stream nedá počúvať"</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Zvukový stream sa nedá počúvať"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"kompatibilné slúchadlá sú pripojené"</string>
     <string name="audio_streams_activity_title" msgid="6766869545769831935">"Zvukové streamy"</string>
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Žiadne heslo"</string>
