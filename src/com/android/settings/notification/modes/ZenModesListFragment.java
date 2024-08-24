@@ -23,6 +23,7 @@ import android.content.Intent;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -62,9 +63,12 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
 
     @Override
     protected void onUpdatedZenModeState() {
-        // TODO: b/322373473 -- update any overall description of modes state here if necessary.
-        // Note the preferences linking to individual rules do not need to be updated, as
-        // updateState() is called on all preference controllers whenever the page is resumed.
+        // Preferences linking to individual rules do not need to be updated as part of onStart(),
+        // because DashboardFragment does that in onResume(). However, we force the update if we
+        // detect Modes changes in the background with the page open.
+        if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
+            forceUpdatePreferences();
+        }
     }
 
     @Override

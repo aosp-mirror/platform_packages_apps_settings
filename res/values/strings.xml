@@ -1864,6 +1864,10 @@
     <string name="device_details_title">Device details</string>
     <!-- Title for keyboard settings preferences. [CHAR LIMIT=50] -->
     <string name="bluetooth_device_keyboard_settings_preference_title">Keyboard settings</string>
+    <!-- Title for more settings preferences. [CHAR LIMIT=50] -->
+    <string name="bluetooth_device_more_settings_preference_title">More settings</string>
+    <!-- Title for more settings summary. [CHAR LIMIT=50] -->
+    <string name="bluetooth_device_more_settings_preference_summary">Firmware updates, about, and more</string>
     <!-- Title of the item to show device MAC address -->
     <string name="bluetooth_device_mac_address">Device\'s Bluetooth address: <xliff:g id="address">%1$s</xliff:g></string>
     <!-- Title of the items to show multuple devices MAC address [CHAR LIMIT=NONE]-->
@@ -1883,6 +1887,9 @@
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
     <!-- Bluetooth device details companion apps. In the confirmation dialog for removing an associated app, this is the label on the button that will complete the disassociate action. [CHAR LIMIT=80] -->
     <string name = "bluetooth_companion_app_remove_association_confirm_button">Disconnect app</string>
+
+    <!-- Title of device details screen [CHAR LIMIT=28]-->
+    <string name="device_details_more_settings">More settings</string>
 
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_string">Maximum connected Bluetooth audio devices</string>
@@ -4493,10 +4500,10 @@
     <string name="trackpad_reverse_scrolling_title">Reverse scrolling</string>
     <!-- Summary text for 'Reverse scrolling' [CHAR LIMIT=60] -->
     <string name="trackpad_reverse_scrolling_summary">Content moves up when you scroll down</string>
-    <!-- Title text for 'Bottom-right tap' [CHAR LIMIT=35] -->
-    <string name="trackpad_bottom_right_tap_title">Bottom-right tap</string>
-    <!-- Summary text for 'Bottom-right tap' [CHAR LIMIT=60] -->
-    <string name="trackpad_bottom_right_tap_summary">Tap the bottom right corner of the touchpad for more options</string>
+    <!-- Title text for 'Bottom-right click', a setting that allows the user to right-click by pressing in the bottom-right corner of a touchpad. [CHAR LIMIT=35] -->
+    <string name="trackpad_bottom_right_tap_title">Bottom-right click</string>
+    <!-- Summary text for 'Bottom-right click', a setting that allows the user to right-click by pressing in the bottom-right corner of a touchpad [CHAR LIMIT=60] -->
+    <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
     <string name="trackpad_pointer_speed">Pointer speed</string>
     <!-- Title text for mouse pointer fill style. [CHAR LIMIT=35] -->
@@ -8184,10 +8191,10 @@
         other {{effect_1}, {effect_2}, and # more}
         }
     </string>
-    <!-- Modes: setting for whether the mode should filter (silence/hide) notifications/volume streams -->
-    <string name="mode_notification_filter_title">Limit what can notify you</string>
-    <!-- Modes: subtext when a mode is not filtering (silence/hide) notifications/volume streams -->
-    <string name="mode_no_notification_filter">No interruptions are filtered</string>
+    <!-- Modes: setting for a mode to allow all notifications and sounds through -->
+    <string name="zen_mode_allow_all_notifications">Allow all notifications</string>
+    <!-- Modes: subtext when a mode is allowing all notifications and sounds (i.e. no filtering) -->
+    <string name="zen_mode_all_notifications_allowed">People, apps, and sounds can interrupt</string>
 
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for filtered
@@ -8851,8 +8858,12 @@
     <string name="nls_feature_reply_summary">It can reply to messages and take action on buttons in notifications, including snoozing or dismissing notifications and answering calls.</string>
     <string name="nls_feature_settings_title">Change settings</string>
     <string name="nls_feature_settings_summary">It can turn Do Not Disturb on or off and change related settings.</string>
+    <string name="nls_feature_modes_settings_summary">It can manage and activate Priority Modes, and change related settings.</string>
     <string name="notification_listener_disable_warning_summary">
         If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Do Not Disturb access may also be turned off.
+    </string>
+    <string name="notification_listener_disable_modes_warning_summary">
+        If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Priority Modes access may also be turned off.
     </string>
     <string name="notification_listener_disable_warning_confirm">Turn off</string>
     <string name="notification_listener_disable_warning_cancel">Cancel</string>
@@ -9029,6 +9040,15 @@
 
     <!-- Sound & notification > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
     <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb access</string>
+
+    <!-- Special App Access: Title for managing Priority Modes access option. [CHAR LIMIT=40] -->
+    <string name="manage_zen_modes_access_title">Priority Modes access</string>
+
+    <!-- Button title that grants 'Priority Modes' permission to an app [CHAR_LIMIT=60]-->
+    <string name="zen_modes_access_detail_switch">Allow Priority Modes access</string>
+
+    <!-- Special App Access > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_empty_text">No installed apps have requested Priority Modes access</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
     <string name="app_notifications_off_desc">You haven\'t allowed notifications from this app</string>
@@ -10150,6 +10170,18 @@
 
     <!-- Zen mode access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
     <string name="zen_access_revoke_warning_dialog_summary">All Do Not Disturb rules created by this app will be removed.</string>
+
+    <!-- Priority modes access settings - title for warning dialog when enabling access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_warning_dialog_title">Allow access to Priority Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+
+    <!-- Priority modes access settings - summary for warning dialog when enabling access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb, manage and activate Priority Modes, and make changes to related settings.</string>
+
+    <!-- Priority modes access settings - title for warning dialog when revoking access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access Priority Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+
+    <!-- Priority modes access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_revoke_warning_dialog_summary">All modes created by this app will be removed.</string>
 
     <!-- Ignore battery optimizations on label [CHAR LIMIT=30] -->
     <string name="ignore_optimizations_on">Don\u2019t optimize</string>

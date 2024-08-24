@@ -411,8 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Rostro y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rostro, huella dactilar y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rostro, huellas dactilares y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
-    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
-    <skip />
+    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"La Verificación de identidad está activada"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Authenticator Unlock remoto"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Se agregó el reloj"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configura el reloj"</string>
@@ -3337,9 +3336,13 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Sí (<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> y <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>)"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"También puedes activar el audio espacial para dispositivos Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Parámetros de configuración de dispositivos conectados"</string>
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Audio espacial"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Desactivado"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Desactivado"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Desactivado"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ninguno}=1{1 programa establecido}other{# programas establecidos}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No interrumpir"</string>
-    <string name="zen_modes_list_title" msgid="5138745349253275428">"Modos de prioridad"</string>
+    <string name="zen_modes_list_title" msgid="5138745349253275428">"Modos prioritarios"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimiza las distracciones y gestiona tu atención con modos de sueño, trabajo, conducción y otras situaciones."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Crea tu propio modo"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Solo recibe notificaciones de las personas y apps que más te interesan"</string>
@@ -3634,7 +3637,11 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Puede responder a mensajes y realizar acciones en los botones de las notificaciones, como posponerlas o descartarlas, y responder llamadas."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Cambiar parámetros de configuración"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Puede activar o desactivar el modo No interrumpir y cambia los parámetros de configuración relacionados."</string>
+    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si desactivas el acceso a las notificaciones de <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, es posible que también se desactive el modo No interrumpir."</string>
+    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
+    <skip />
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desactivar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Tiempo real"</string>
@@ -3695,6 +3702,12 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acceso en No interrumpir"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir opción No interrumpir"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ninguna aplicación instalada solicitó acceso en No interrumpir."</string>
+    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
+    <skip />
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"No permitiste las notificaciones de esta app"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Como lo solicitaste, Android bloquea esta categoría de notificaciones para que no se muestren en el dispositivo"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Como lo solicitaste, Android bloquea este grupo de notificaciones para que no se muestren en el dispositivo"</string>
@@ -3877,6 +3890,22 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimina todas las distracciones para un entorno tranquilo"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personaliza la experiencia y la configuración del dispositivo para los distintos usuarios"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Para minimizar las interrupciones, permite que solo las personas y apps importantes se comuniquen contigo"</string>
+    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
+    <skip />
     <string name="warning_button_text" msgid="1274234338874005639">"Advertencia"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Cerrar"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Enviar comentarios sobre el dispositivo"</string>
@@ -4077,6 +4106,14 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Debe seguir activado porque el acceso a las notificaciones está activado"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"¿Quieres revocar el acceso de la app <xliff:g id="APP">%1$s</xliff:g> a No interrumpir?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Se quitarán todas las reglas del modo No interrumpir que creó esta app."</string>
+    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
+    <skip />
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"No optimizar"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizar"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Es posible que la batería se agote más rápido. La app ya no tendrá restricciones para usar batería en segundo plano."</string>
@@ -5290,7 +5327,7 @@
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Esta app solo puede estar abierta en 1 ventana"</string>
     <string name="generic_accessibility_service_on" msgid="4466229372357726824">"Función activada"</string>
     <string name="generic_accessibility_service_off" msgid="4759859497651675724">"Función desactivada"</string>
-    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Combinación desactivada"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Función desactivada"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Desactivada"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"Activada"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"Desactivada"</string>
@@ -5330,7 +5367,7 @@
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Dispositivos multimedia activos"</string>
     <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Audio de llamadas"</string>
     <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Reproducir solo en <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Reproduce un sonido de prueba"</string>
+    <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Reproducir un sonido de prueba"</string>
     <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Todos los que escuchan deberían oírlo"</string>
     <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Configuración de la reproducción de audio"</string>
     <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Nombre"</string>

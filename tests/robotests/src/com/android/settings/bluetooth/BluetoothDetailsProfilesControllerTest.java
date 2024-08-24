@@ -554,7 +554,6 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void prefKeyInBlockingList_hideToggle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_BLUETOOTH_PROFILE_TOGGLE_VISIBILITY_CHECKER);
         setupDevice(makeDefaultDeviceConfig());
 
         addA2dpProfileToDevice(true, true, true);
@@ -569,7 +568,6 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void prefKeyNotInBlockingList_showToggle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_BLUETOOTH_PROFILE_TOGGLE_VISIBILITY_CHECKER);
         setupDevice(makeDefaultDeviceConfig());
 
         addA2dpProfileToDevice(true, true, true);

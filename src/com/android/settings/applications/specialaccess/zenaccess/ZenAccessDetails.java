@@ -16,9 +16,11 @@
 
 package com.android.settings.applications.specialaccess.zenaccess;
 
+import android.app.Flags;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserManager;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.TwoStatePreference;
@@ -42,6 +44,9 @@ public class ZenAccessDetails extends AppInfoWithHeader implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.zen_access_permission_details);
+        requireActivity().setTitle(Flags.modesApi() && Flags.modesUi()
+                ? R.string.manage_zen_modes_access_title
+                : R.string.manage_zen_access_title);
         getSettingsLifecycle().addObserver(
                 new ZenAccessSettingObserverMixin(getContext(), this /* listener */));
     }
@@ -49,6 +54,11 @@ public class ZenAccessDetails extends AppInfoWithHeader implements
     @Override
     protected boolean refreshUi() {
         final Context context = getContext();
+        // don't show for managed profiles
+        if (UserManager.get(context).isManagedProfile(context.getUserId())
+            && !ZenAccessController.hasAccess(context, mPackageName)) {
+            finish();
+        }
         // If this app didn't declare this permission in their manifest, don't bother showing UI.
         final Set<String> needAccessApps =
                 ZenAccessController.getPackagesRequestingNotificationPolicyAccess();
@@ -74,6 +84,9 @@ public class ZenAccessDetails extends AppInfoWithHeader implements
             preference.setSummary(getString(R.string.zen_access_disabled_package_warning));
             return;
         }
+        preference.setTitle(Flags.modesApi() && Flags.modesUi()
+                ? R.string.zen_modes_access_detail_switch
+                : R.string.zen_access_detail_switch);
         preference.setChecked(ZenAccessController.hasAccess(context, mPackageName));
         preference.setOnPreferenceChangeListener((p, newValue) -> {
             final boolean access = (Boolean) newValue;

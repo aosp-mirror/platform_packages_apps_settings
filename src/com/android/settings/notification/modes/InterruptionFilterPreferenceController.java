@@ -45,20 +45,21 @@ class InterruptionFilterPreferenceController extends AbstractZenModePreferenceCo
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
         preference.setEnabled(zenMode.isEnabled());
-        boolean filteringNotifications = zenMode.getRule().getInterruptionFilter()
-                != INTERRUPTION_FILTER_ALL;
-        ((TwoStatePreference) preference).setChecked(filteringNotifications);
-        preference.setSummary(filteringNotifications ? "" :
-                mContext.getResources().getString(R.string.mode_no_notification_filter));
+        boolean allowingAll = zenMode.getRule().getInterruptionFilter() == INTERRUPTION_FILTER_ALL;
+
+        ((TwoStatePreference) preference).setChecked(allowingAll);
+        preference.setSummary(allowingAll
+                ? mContext.getString(R.string.zen_mode_all_notifications_allowed)
+                : "");
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean filterNotifications = ((Boolean) newValue);
+    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+        final boolean allowAll = ((Boolean) newValue);
         return saveMode(zenMode -> {
-            zenMode.getRule().setInterruptionFilter(filterNotifications
-                    ? INTERRUPTION_FILTER_PRIORITY
-                    : INTERRUPTION_FILTER_ALL);
+            zenMode.getRule().setInterruptionFilter(allowAll
+                    ? INTERRUPTION_FILTER_ALL
+                    : INTERRUPTION_FILTER_PRIORITY);
             return zenMode;
         });
     }
