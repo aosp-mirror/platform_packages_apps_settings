@@ -218,6 +218,8 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
             }
             return zenMode;
         });
+        getMetricsFeatureProvider().action(mContext, SettingsEnums.ACTION_ZEN_MODE_ENABLE_TOGGLE,
+                enabled);
     }
 
     private void undoToggleSwitch(Preference preference, boolean wasSwitchedTo) {
