@@ -28,7 +28,6 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
@@ -63,11 +62,6 @@ public class GeneralBluetoothDetailsHeaderControllerTest
     public void setUp() {
         super.setUp();
         FakeFeatureFactory.setupForTest();
-        android.provider.DeviceConfig.setProperty(
-                android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED,
-                "true",
-                true);
         mController =
                 new GeneralBluetoothDetailsHeaderController(
                         mContext, mFragment, mCachedDevice, mLifecycle);

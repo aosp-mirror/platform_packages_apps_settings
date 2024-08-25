@@ -28,7 +28,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
@@ -43,12 +45,13 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
 
     @Nullable protected final ZenModesBackend mBackend;
 
-
     @Nullable  // only until setZenMode() is called
     private ZenMode mZenMode;
 
     @NonNull
     private final String mKey;
+
+    @NonNull private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     /**
      * Constructor suitable for "read-only" controllers (e.g. link to a different sub-screen.
@@ -59,6 +62,7 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
         super(context);
         mKey = key;
         mBackend = null;
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     /**
@@ -71,12 +75,18 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
         super(context);
         mKey = key;
         mBackend = backend;
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
     @NonNull
     public String getPreferenceKey() {
         return mKey;
+    }
+
+    @NonNull
+    public MetricsFeatureProvider getMetricsFeatureProvider() {
+        return mMetricsFeatureProvider;
     }
 
     @Override

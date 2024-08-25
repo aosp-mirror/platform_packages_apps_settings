@@ -18,15 +18,12 @@ package com.android.settings.notification.modes;
 
 import static android.app.AutomaticZenRule.TYPE_OTHER;
 import static android.app.AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
-import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.SystemZenRules;
@@ -116,12 +113,7 @@ public class ZenModeTriggerCategoryPreferenceControllerTest {
 
     @Test
     public void isAvailable_manualDND_false() {
-        ZenMode manualMode = ZenMode.manualDndMode(new AutomaticZenRule.Builder("Do Not Disturb",
-                Uri.parse("manual"))
-                .setInterruptionFilter(INTERRUPTION_FILTER_PRIORITY)
-                .build(), /* isActive= */ false);
-
-        mController.setZenMode(manualMode);
+        mController.setZenMode(TestModeBuilder.MANUAL_DND_INACTIVE);
         assertThat(mController.isAvailable()).isFalse();
     }
 }
