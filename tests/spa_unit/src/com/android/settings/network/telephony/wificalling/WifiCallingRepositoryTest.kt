@@ -55,7 +55,8 @@ class WifiCallingRepositoryTest {
         on { getWiFiCallingMode(any()) } doReturn ImsMmTelManager.WIFI_MODE_UNKNOWN
     }
 
-    private val repository = WifiCallingRepository(context, SUB_ID, mockImsMmTelRepository)
+    private val repository =
+        WifiCallingRepository(context, SUB_ID, imsMmTelRepository = mockImsMmTelRepository)
 
     @Test
     fun getWiFiCallingMode_roamingAndNotUseWfcHomeModeForRoaming_returnRoamingSetting() {

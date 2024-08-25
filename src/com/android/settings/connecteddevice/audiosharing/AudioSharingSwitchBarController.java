@@ -43,6 +43,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -128,6 +129,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                     + ", broadcastId = "
                                     + broadcastId);
                     updateSwitch();
+                    AudioSharingUtils.toastMessage(
+                            mContext, mContext.getString(R.string.audio_sharing_sharing_label));
                     mListener.onAudioSharingStateChanged();
                 }
 
@@ -161,6 +164,9 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                     + ", broadcastId = "
                                     + broadcastId);
                     updateSwitch();
+                    AudioSharingUtils.toastMessage(
+                            mContext,
+                            mContext.getString(R.string.audio_sharing_sharing_stopped_label));
                     mListener.onAudioSharingStateChanged();
                 }
 

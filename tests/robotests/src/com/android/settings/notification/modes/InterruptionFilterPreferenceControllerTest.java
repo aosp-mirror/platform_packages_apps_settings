@@ -87,7 +87,7 @@ public final class InterruptionFilterPreferenceControllerTest {
                 .build();
         mController.updateZenMode(preference, zenMode);
 
-        verify(preference).setChecked(false);
+        verify(preference).setChecked(true);
     }
 
     @Test
@@ -99,7 +99,7 @@ public final class InterruptionFilterPreferenceControllerTest {
 
         mController.updateZenMode(preference, zenMode);
 
-        mController.onPreferenceChange(preference, true);
+        mController.onPreferenceChange(preference, false);
 
         ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
         verify(mBackend).updateMode(captor.capture());
@@ -118,7 +118,7 @@ public final class InterruptionFilterPreferenceControllerTest {
                 .build();
         mController.updateZenMode(preference, zenMode);
 
-        verify(preference).setChecked(true);
+        verify(preference).setChecked(false);
     }
 
     @Test
@@ -131,7 +131,7 @@ public final class InterruptionFilterPreferenceControllerTest {
 
         mController.updateZenMode(preference, zenMode);
 
-        mController.onPreferenceChange(preference, false);
+        mController.onPreferenceChange(preference, true);
 
         ArgumentCaptor<ZenMode> captor = ArgumentCaptor.forClass(ZenMode.class);
         verify(mBackend).updateMode(captor.capture());
