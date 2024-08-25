@@ -22,21 +22,34 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.provider.Settings;
+import android.hardware.input.InputSettings;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.hardware.input.Flags;
+import com.android.settings.testutils.shadow.ShadowSystemSettings;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowSystemSettings.class,
+})
 public class TouchpadVisualizerPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private PreferenceScreen mScreen;
@@ -57,54 +70,51 @@ public class TouchpadVisualizerPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags({Flags.FLAG_TOUCHPAD_VISUALIZER})
     public void updateState_touchpadVisualizerEnabled_shouldCheckedPreference() {
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.TOUCHPAD_VISUALIZER, ShowTapsPreferenceController.SETTING_VALUE_ON);
-
+        InputSettings.setTouchpadVisualizer(mContext, true);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
     }
 
     @Test
+    @EnableFlags({Flags.FLAG_TOUCHPAD_VISUALIZER})
     public void updateState_touchpadVisualizerDisabled_shouldUncheckedPreference() {
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.TOUCHPAD_VISUALIZER,
-                ShowTapsPreferenceController.SETTING_VALUE_OFF);
-
+        InputSettings.setTouchpadVisualizer(mContext, false);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
     }
 
     @Test
+    @EnableFlags({Flags.FLAG_TOUCHPAD_VISUALIZER})
     public void onPreferenceChange_preferenceChecked_shouldEnableTouchpadVisualizer() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final int touchpadVisualizer = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.TOUCHPAD_VISUALIZER, -1 /* default */);
+        final boolean touchpadVisualizer = InputSettings.useTouchpadVisualizer(mContext);
 
-        assertThat(touchpadVisualizer).isEqualTo(ShowTapsPreferenceController.SETTING_VALUE_ON);
+        assertThat(touchpadVisualizer).isTrue();
     }
 
     @Test
+    @EnableFlags({Flags.FLAG_TOUCHPAD_VISUALIZER})
     public void onPreferenceChange_preferenceUnchecked_shouldDisableTouchpadVisualizer() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final int showTapsMode = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.TOUCHPAD_VISUALIZER, -1 /* default */);
+        final boolean touchpadVisualizer = InputSettings.useTouchpadVisualizer(mContext);
 
-        assertThat(showTapsMode).isEqualTo(ShowTapsPreferenceController.SETTING_VALUE_OFF);
+        assertThat(touchpadVisualizer).isFalse();
     }
 
     @Test
+    @EnableFlags({Flags.FLAG_TOUCHPAD_VISUALIZER})
     public void onDeveloperOptionsSwitchDisabled_preferenceShouldBeEnabled() {
         mController.onDeveloperOptionsSwitchDisabled();
 
-        final int showTapsMode = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.TOUCHPAD_VISUALIZER, -1 /* default */);
+        final boolean touchpadVisualizer = InputSettings.useTouchpadVisualizer(mContext);
 
-        assertThat(showTapsMode).isEqualTo(ShowTapsPreferenceController.SETTING_VALUE_OFF);
+        assertThat(touchpadVisualizer).isFalse();
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
     }

@@ -21,11 +21,13 @@ import static com.android.systemui.shared.Flags.newTouchpadGesturesTutorial;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserHandle;
 import android.util.FeatureFlagUtils;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -79,10 +81,12 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
     private void showTouchpadGestureEducation() {
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_LEARN_TOUCHPAD_GESTURE_CLICK);
         if (newTouchpadGesturesTutorial()) {
-            Intent intent = new Intent(TUTORIAL_ACTION);
-            intent.addCategory(Intent.CATEGORY_DEFAULT);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(intent);
+            Intent intent = new Intent(TUTORIAL_ACTION)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .setPackage(Utils.SYSTEMUI_PACKAGE_NAME);
+            // touchpad tutorial must be started as system user as it needs to have access to state
+            // of user 0 sysui instance
+            mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
         } else {
             TrackpadGestureDialogFragment fragment = new TrackpadGestureDialogFragment();
             fragment.setTargetFragment(mParent, 0);

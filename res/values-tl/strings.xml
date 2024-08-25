@@ -3336,6 +3336,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Naka-on / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> at <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Puwede mo ring i-on ang Spatial Audio para sa mga Bluetooth device."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Mga setting ng mga nakakonektang device"</string>
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Spatial Audio"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Naka-off"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Naka-off"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Naka-off"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Wala}=1{Naitakda ang 1 iskedyul}one{Naitakda ang # iskedyul}other{Naitakda ang # na iskedyul}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Huwag Istorbohin"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Mga Priyoridad na Mode"</string>
@@ -3633,7 +3637,11 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Puwede nitong sagutin ang mga mensahe at gamitin ang mga button sa mga notification, kabilang ang pag-snooze o pag-dismiss ng mga notification at pagsagot ng mga tawag."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Baguhin ang mga setting"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Puwede nitong i-on o i-off ang Huwag Istorbohin at baguhin ang mga nauugnay na setting."</string>
+    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Kung io-off mo ang access sa notification para kay <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, mao-off din ang access sa Huwag Istorbohin."</string>
+    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
+    <skip />
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"I-off"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Kanselahin"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Real-time"</string>
@@ -3694,6 +3702,12 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Access na Huwag Istorbohin"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Payagan ang Huwag Istorbohin"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Walang mga naka-install na app ang humiling ng access na Huwag Istorbohin"</string>
+    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
+    <skip />
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Hindi mo pinayagan ang mga notification mula sa app na ito"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Bilang tugon sa iyong kahilingan, pinipigilan ng Android na lumabas sa device na ito ang ganitong kategorya ng mga notification"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Bilang tugon sa iyong kahilingan, pinipigilan ng Android na lumabas sa device na ito ang ganitong grupo ng mga notification"</string>
@@ -3876,6 +3890,22 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Alisin ang lahat ng istorbo para sa tahimik na kapaligiran"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"I-personalize ang mga karanasan sa device at mga setting para sa iba\'t ibang user"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Bawasan ang mga istorbo sa pamamagitan ng pagbibigay ng pahintulot sa mahahalagang tao at app lang para makipag-ugnayan sa iyo"</string>
+    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
+    <skip />
+    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
+    <skip />
     <string name="warning_button_text" msgid="1274234338874005639">"Babala"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Isara"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Feedback tungkol sa device"</string>
@@ -4076,6 +4106,14 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Dapat manatiling naka-on dahil naka-on ang access sa notification"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Babawiin ang access sa Huwag Istorbohin para sa <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Aalisin ang lahat ng panuntunang Huwag Istorbohin na ginawa ng app na ito."</string>
+    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
+    <skip />
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
+    <skip />
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Huwag i-optimize"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"I-optimize"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Maaaring mas mabilis na makaubos ng iyong baterya. Hindi na paghihigpitan ang app na gamitin ang background na baterya."</string>
@@ -5350,7 +5388,7 @@
     <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Huwag na lang"</string>
     <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"Ibahagi ang audio sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Ibahagi ang audio sa isa pang device"</string>
-    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Ibahagi gamit ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Ibahagi sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Isara"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Magkonekta ng isa pang pares ng compatible na headphones, o ibahagi ang pangalan at password ng iyong stream sa ibang tao"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Magpares ng isa pang hanay ng compatible na headphones, o ibahagi ang QR code ng iyong audio stream sa ibang tao"</string>
@@ -5385,7 +5423,7 @@
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Hindi makakonekta. Subukan ulit."</string>
     <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"Kumokonekta…"</string>
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Hindi available ang audio stream"</string>
-    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Hindi nagpe-play ang audio stream na ito sa ngayon"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Walang pine-play ang audio stream na ito sa ngayon"</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Isara"</string>
     <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Makinig"</string>
     <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Subukan ulit"</string>
