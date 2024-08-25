@@ -29,7 +29,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.core.BasePreferenceController.AVAILABLE
-import com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE
 import com.android.settings.datausage.DataUsageUtils
 import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
@@ -77,7 +76,6 @@ class DataUsagePreferenceControllerTest {
     @Before
     fun setUp() {
         mockSession = ExtendedMockito.mockitoSession()
-            .initMocks(this)
             .spyStatic(DataUsageUtils::class.java)
             .spyStatic(DataUsageLib::class.java)
             .strictness(Strictness.LENIENT)
@@ -101,16 +99,8 @@ class DataUsagePreferenceControllerTest {
     }
 
     @Test
-    fun getAvailabilityStatus_validSubId_returnAvailable() {
+    fun getAvailabilityStatus_returnAvailable() {
         assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
-    }
-
-    @Test
-    fun getAvailabilityStatus_invalidSubId_returnUnsearchable() {
-        val availabilityStatus =
-            controller.getAvailabilityStatus(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
-
-        assertThat(availabilityStatus).isEqualTo(AVAILABLE_UNSEARCHABLE)
     }
 
     @Test

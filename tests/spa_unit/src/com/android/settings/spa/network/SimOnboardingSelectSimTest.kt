@@ -69,7 +69,6 @@ class SimOnboardingSelectSimTest {
         on { targetSubInfo }.doReturn(null)
         on { availableSubInfoList }.doReturn(listOf())
         on { activeSubInfoList }.doReturn(listOf())
-        on { slotInfoList }.doReturn(listOf())
         on { uiccCardInfoList }.doReturn(listOf())
 
         on { targetPrimarySimCalls }.doReturn(PRIMARY_SIM_ASK_EVERY_TIME)

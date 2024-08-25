@@ -20,7 +20,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.DeviceConfig;
 import android.text.Editable;
 import android.util.Log;
 import android.widget.CompoundButton;
@@ -30,7 +29,6 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDialogFragment.BluetoothPairingDialogListener;
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -71,7 +69,6 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     private boolean mPbapAllowed;
     private boolean mIsCoordinatedSetMember;
     private boolean mIsLeAudio;
-    private boolean mIsLeContactSharingEnabled;
     private boolean mIsLateBonding;
 
     /**
@@ -106,7 +103,6 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
 
         mIsCoordinatedSetMember = false;
         mIsLeAudio = false;
-        mIsLeContactSharingEnabled = true;
         if (cachedDevice != null) {
             mIsCoordinatedSetMember = cachedDevice.isCoordinatedSetMemberDevice();
 
@@ -115,13 +111,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
                     mIsLeAudio = true;
                 }
             }
-
-            mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                    SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
-            Log.d(TAG,
-                "BT_LE_AUDIO_CONTACT_SHARING_ENABLED is "
-                    + mIsLeContactSharingEnabled + " isCooridnatedSetMember "
-                    + mIsCoordinatedSetMember);
+            Log.d(TAG, "isCooridnatedSetMember: " + mIsCoordinatedSetMember);
         }
     }
 
@@ -221,23 +211,13 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         return mIsLeAudio;
     }
 
-    @VisibleForTesting
-    boolean isLeContactSharingEnabled() {
-        return mIsLeContactSharingEnabled;
-    }
-
     /**
      * A method whether the device allows to show the le audio's contact sharing.
      *
      * @return A boolean whether the device allows to show the contact sharing.
      */
     public boolean isContactSharingVisible() {
-        boolean isContactSharingVisible = !isProfileReady();
-        // If device do not support the ContactSharing of LE audio device, hiding ContactSharing UI
-        if (isLeAudio() && !isLeContactSharingEnabled()) {
-            isContactSharingVisible = false;
-        }
-        return isContactSharingVisible;
+        return !isProfileReady();
     }
 
     /**

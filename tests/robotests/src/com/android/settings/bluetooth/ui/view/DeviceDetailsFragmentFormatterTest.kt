@@ -26,6 +26,7 @@ import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
+import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
@@ -45,7 +46,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito.any
@@ -111,10 +111,9 @@ class DeviceDetailsFragmentFormatterTest {
                             DeviceSettingConfigItemModel.BuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, "action_buttons"),
                         ),
-                        listOf(),
-                        "footer"))
+                        listOf()))
 
-            val keys = underTest.getVisiblePreferenceKeysForMainPage()
+            val keys = underTest.getVisiblePreferenceKeys(FragmentTypeModel.DeviceDetailsMainFragment)
 
             assertThat(keys).containsExactly("bluetooth_device_header", "action_buttons")
         }
@@ -125,7 +124,7 @@ class DeviceDetailsFragmentFormatterTest {
         testScope.runTest {
             `when`(repository.getDeviceSettingsConfig(cachedDevice)).thenReturn(null)
 
-            val keys = underTest.getVisiblePreferenceKeysForMainPage()
+            val keys = underTest.getVisiblePreferenceKeys(FragmentTypeModel.DeviceDetailsMainFragment)
 
             assertThat(keys).isNull()
         }
@@ -136,9 +135,9 @@ class DeviceDetailsFragmentFormatterTest {
         testScope.runTest {
             `when`(repository.getDeviceSettingsConfig(cachedDevice)).thenReturn(null)
 
-            underTest.updateLayout()
+            underTest.updateLayout(FragmentTypeModel.DeviceDetailsMainFragment)
 
-            assertThat(getDisplayedPreferences().map { it.key })
+            assertThat(getDisplayedPreferences().mapNotNull { it.key })
                 .containsExactly("bluetooth_device_header", "action_buttons", "keyboard_settings")
         }
     }
@@ -157,12 +156,11 @@ class DeviceDetailsFragmentFormatterTest {
                                 DeviceSettingId.DEVICE_SETTING_ID_KEYBOARD_SETTINGS,
                                 "keyboard_settings"),
                         ),
-                        listOf(),
-                        "footer"))
+                        listOf()))
 
-            underTest.updateLayout()
+            underTest.updateLayout(FragmentTypeModel.DeviceDetailsMainFragment)
 
-            assertThat(getDisplayedPreferences().map { it.key })
+            assertThat(getDisplayedPreferences().mapNotNull { it.key })
                 .containsExactly("bluetooth_device_header", "keyboard_settings")
         }
     }
@@ -183,8 +181,7 @@ class DeviceDetailsFragmentFormatterTest {
                                 DeviceSettingId.DEVICE_SETTING_ID_KEYBOARD_SETTINGS,
                                 "keyboard_settings"),
                         ),
-                        listOf(),
-                        "footer"))
+                        listOf()))
             `when`(repository.getDeviceSetting(cachedDevice, DeviceSettingId.DEVICE_SETTING_ID_ANC))
                 .thenReturn(
                     flowOf(
@@ -209,9 +206,9 @@ class DeviceDetailsFragmentFormatterTest {
                             isAllowedChangingState = true,
                             updateState = {})))
 
-            underTest.updateLayout()
+            underTest.updateLayout(FragmentTypeModel.DeviceDetailsMainFragment)
 
-            assertThat(getDisplayedPreferences().map { it.key })
+            assertThat(getDisplayedPreferences().mapNotNull { it.key })
                 .containsExactly(
                     "bluetooth_device_header",
                     "DEVICE_SETTING_${DeviceSettingId.DEVICE_SETTING_ID_ANC}",

@@ -38,8 +38,6 @@ import android.telephony.UiccSlotMapping;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.google.common.collect.ImmutableList;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +45,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -79,25 +76,6 @@ public class UiccSlotUtilTest {
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
         when(mSubscriptionManager.getAllSubscriptionInfoList()).thenReturn(mSubscriptionInfoList);
-    }
-
-    @Test
-    public void getSlotInfos_oneSimSlotDevice_returnTheCorrectSlotInfoList() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(oneSimSlotDeviceActivePsim());
-        ImmutableList<UiccSlotInfo> testUiccSlotInfos =
-                UiccSlotUtil.getSlotInfos(mTelephonyManager);
-
-        assertThat(testUiccSlotInfos.size()).isEqualTo(1);
-    }
-
-    @Test
-    public void getSlotInfos_twoSimSlotsDevice_returnTheCorrectSlotInfoList() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                twoSimSlotsDeviceActivePsimActiveEsim());
-        ImmutableList<UiccSlotInfo> testUiccSlotInfos =
-                UiccSlotUtil.getSlotInfos(mTelephonyManager);
-
-        assertThat(testUiccSlotInfos.size()).isEqualTo(2);
     }
 
     @Test
@@ -643,105 +621,7 @@ public class UiccSlotUtilTest {
         assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
     }
 
-    @Test
-    public void isRemovableSimEnabled_noPsim_returnsFalse() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                oneSimSlotDeviceActiveEsim());
 
-        boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
-
-        assertThat(testSlot).isFalse();
-    }
-
-    @Test
-    public void isRemovableSimEnabled_activeRemovableEsimAndInactivePsim_returnsFalse() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                twoSimSlotsDeviceActiveRemovableEsimInactivePsim());
-
-        boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
-
-        assertThat(testSlot).isFalse();
-    }
-
-    @Test
-    public void isRemovableSimEnabled_activeRemovableEsimAndActivePsim_returnsTrue() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                twoSimSlotsDeviceActivePsimActiveRemovableEsim());
-
-        boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
-
-        assertThat(testSlot).isTrue();
-    }
-
-    @Test
-    public void isRemovableSimEnabled_inactiveRemovableEsimAndActivePsim_returnsTrue() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                twoSimSlotsDeviceInactiveRemovableEsimActivePsim());
-
-        boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
-
-        assertThat(testSlot).isTrue();
-    }
-
-    @Test
-    public void isRemovableSimEnabled_twoActiveRemovableEsimsAndInactivePsim_returnsFalse() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                twoSimSlotsDeviceTwoActiveRemovableEsimsInactivePsim());
-
-        boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
-
-        assertThat(testSlot).isFalse();
-    }
-
-    @Test
-    public void isRemovableSimEnabled_oneActiveOneInactiveRemovableEsimActivePsim_returnsTrue() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                twoSimSlotsDeviceOneActiveOneInactiveRemovableEsimsActivePsim());
-
-        boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
-
-        assertThat(testSlot).isTrue();
-    }
-
-    @Test
-    public void isRemovableSimEnabled_activePsim_returnsTrue() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                oneSimSlotDeviceActivePsim());
-
-        boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
-
-        assertThat(testSlot).isTrue();
-    }
-
-    @Test
-    public void isRemovableSimEnabled_inactivePsim_returnsFalse() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                oneSimSlotDeviceinactivePsim());
-
-        boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
-
-        assertThat(testSlot).isFalse();
-    }
-
-    @Test
-    public void isRemovableSimEnabled_activeEsimAndActivePsim_returnsTrue() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                twoSimSlotsDeviceActivePsimActiveEsim());
-
-        boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
-
-        assertThat(testSlot).isTrue();
-    }
-
-    @Test
-    public void isRemovableSimEnabled_activeEsimAndInactivePsim_returnsFalse() {
-        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
-                twoSimSlotsDeviceInactivePsimActiveEsim());
-
-        boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
-
-        assertThat(testSlot).isFalse();
-    }
 
     @Test
     public void performSwitchToSlot_setSimSlotMapping() throws UiccSlotsException {
@@ -856,13 +736,6 @@ public class UiccSlotUtilTest {
         return slotMap;
     }
 
-    private List<UiccSlotMapping> createUiccSlotMappingSsModeEsimPort1Active() {
-        List<UiccSlotMapping> slotMap = new ArrayList<>();
-        slotMap.add(new UiccSlotMapping(1, ESIM_PHYSICAL_SLOT, 0));
-
-        return slotMap;
-    }
-
     private List<UiccSlotMapping> createUiccSlotMappingPsimAndPort0() {
         List<UiccSlotMapping> slotMap = new ArrayList<>();
         slotMap.add(new UiccSlotMapping(0, PSIM_PHYSICAL_SLOT, 0));
@@ -915,14 +788,6 @@ public class UiccSlotUtilTest {
         return new UiccSlotInfo[]{createUiccSlotInfo(false, true, 0, true)};
     }
 
-    private UiccSlotInfo[] oneSimSlotDeviceActiveEsim() {
-        return new UiccSlotInfo[]{createUiccSlotInfo(true, false, 1, true)};
-    }
-
-    private UiccSlotInfo[] oneSimSlotDeviceinactivePsim() {
-        return new UiccSlotInfo[]{createUiccSlotInfo(false, true, -1, false)};
-    }
-
     private UiccSlotInfo[] twoSimSlotsDeviceActivePsimActiveEsim() {
         return new UiccSlotInfo[]{
                 createUiccSlotInfo(false, true, 0, true),
@@ -941,61 +806,12 @@ public class UiccSlotUtilTest {
                 createUiccSlotInfo(true, true, 1, true)};
     }
 
-    private UiccSlotInfo[] twoSimSlotsDeviceActiveRemovableEsimInactivePsim() {
-        return new UiccSlotInfo[]{
-                createUiccSlotInfo(true, true, 0, true),
-                createUiccSlotInfo(false, true, -1, false)};
-    }
-
-    private UiccSlotInfo[] twoSimSlotsDeviceInactiveRemovableEsimActivePsim() {
-        return new UiccSlotInfo[]{
-                createUiccSlotInfo(true, true, -1, false),
-                createUiccSlotInfo(false, true, 0, true)};
-    }
-
-    private UiccSlotInfo[] twoSimSlotsDeviceTwoActiveRemovableEsimsInactivePsim() {
-        return new UiccSlotInfo[]{
-                createUiccSlotInfoForRemovableEsimMep(0, true, 1, true),
-                createUiccSlotInfo(false, true, -1, false)};
-    }
-
-    private UiccSlotInfo[] twoSimSlotsDeviceOneActiveOneInactiveRemovableEsimsActivePsim() {
-        return new UiccSlotInfo[]{
-                createUiccSlotInfoForRemovableEsimMep(1, true, -1, false),
-                createUiccSlotInfo(false, true, 0, true)};
-    }
-
     private UiccSlotInfo[] twoSimSlotsDeviceActiveEsimActivePsim() {
         return new UiccSlotInfo[]{
                 createUiccSlotInfo(true, false, 0, true),
                 createUiccSlotInfo(false, true, 1, true)};
     }
 
-    private UiccSlotInfo[] twoSimSlotsDeviceTwoActiveEsims() {
-        // device supports MEP, so device can enable two esims.
-        // If device has psim slot, the UiccSlotInfo of psim always be in UiccSlotInfo[].
-        return new UiccSlotInfo[]{
-                createUiccSlotInfo(false, true, -1, true),
-                createUiccSlotInfoForEsimMep(0, true, 1, true)};
-    }
-
-    private UiccSlotInfo[] twoSimSlotsDeviceActivePsimInactiveEsim() {
-        return new UiccSlotInfo[]{
-                createUiccSlotInfo(false, true, 0, true),
-                createUiccSlotInfo(true, false, -1, false)};
-    }
-
-    private UiccSlotInfo[] twoSimSlotsDeviceInactivePsimActiveEsim() {
-        return new UiccSlotInfo[]{
-                createUiccSlotInfo(false, true, 0, false),
-                createUiccSlotInfo(true, false, 1, true)};
-    }
-
-    private UiccSlotInfo[] twoSimSlotsDeviceNoInsertPsimActiveEsim() {
-        return new UiccSlotInfo[]{
-                createUiccSlotInfo(false, true, -1, false),
-                createUiccSlotInfo(true, false, 1, true)};
-    }
     //ToDo: add more cases.
 
     private UiccSlotInfo createUiccSlotInfo(boolean isEuicc, boolean isRemovable,
@@ -1010,37 +826,5 @@ public class UiccSlotUtilTest {
                         new UiccPortInfo("" /* iccId */, 0 /* portIdx */,
                                 logicalSlotIdx /* logicalSlotIdx */, isActive /* isActive */))
         );
-    }
-
-    private UiccSlotInfo createUiccSlotInfoForEsimMep(int logicalSlotIdx1, boolean isActiveEsim1,
-            int logicalSlotIdx2, boolean isActiveEsim2) {
-        return new UiccSlotInfo(
-                true, /* isEuicc */
-                "123", /* cardId */
-                CARD_STATE_INFO_PRESENT, /* cardStateInfo */
-                true, /* isExtendApduSupported */
-                false, /* isRemovable */
-                Arrays.asList(
-                        new UiccPortInfo("" /* iccId */, 0 /* portIdx */,
-                                logicalSlotIdx1 /* logicalSlotIdx */, isActiveEsim1 /* isActive */),
-                        new UiccPortInfo("" /* iccId */, 1 /* portIdx */,
-                                logicalSlotIdx2 /* logicalSlotIdx */,
-                                isActiveEsim2 /* isActive */)));
-    }
-
-    private UiccSlotInfo createUiccSlotInfoForRemovableEsimMep(int logicalSlotIdx1,
-            boolean isActiveEsim1, int logicalSlotIdx2, boolean isActiveEsim2) {
-        return new UiccSlotInfo(
-                true, /* isEuicc */
-                "123", /* cardId */
-                CARD_STATE_INFO_PRESENT, /* cardStateInfo */
-                true, /* isExtendApduSupported */
-                true, /* isRemovable */
-                Arrays.asList(
-                        new UiccPortInfo("" /* iccId */, 0 /* portIdx */,
-                                logicalSlotIdx1 /* logicalSlotIdx */, isActiveEsim1 /* isActive */),
-                        new UiccPortInfo("" /* iccId */, 1 /* portIdx */,
-                                logicalSlotIdx2 /* logicalSlotIdx */,
-                                isActiveEsim2 /* isActive */)));
     }
 }

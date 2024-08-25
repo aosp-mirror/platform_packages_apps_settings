@@ -52,7 +52,7 @@ class SpaSearchLandingActivityTest {
                 .setSpaPage(SpaSearchLandingSpaPage.newBuilder().setDestination(DESTINATION))
                 .build()
 
-        SpaSearchLandingActivity.tryLaunch(context, key.toByteString().toStringUtf8())
+        SpaSearchLandingActivity.tryLaunch(context, key.encodeToString())
 
         verify(context).startActivity(argThat { getStringExtra(KEY_DESTINATION) == DESTINATION })
     }
@@ -70,7 +70,7 @@ class SpaSearchLandingActivityTest {
                             BundleValue.newBuilder().setIntValue(ARGUMENT_VALUE).build()))
                 .build()
 
-        SpaSearchLandingActivity.tryLaunch(context, key.toByteString().toStringUtf8())
+        SpaSearchLandingActivity.tryLaunch(context, key.encodeToString())
 
         val intent = argumentCaptor<Intent> { verify(context).startActivity(capture()) }.firstValue
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
