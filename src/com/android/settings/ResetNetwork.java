@@ -131,7 +131,6 @@ public class ResetNetwork extends InstrumentedFragment {
         if (Flags.resetMobileNetworkSettings()) {
             resetOptions |= ResetNetworkRequest.RESET_IMS_STACK;
             resetOptions |= ResetNetworkRequest.RESET_PHONE_PROCESS;
-            resetOptions |= ResetNetworkRequest.RESET_RILD;
         }
         ResetNetworkRequest request = new ResetNetworkRequest(resetOptions);
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
