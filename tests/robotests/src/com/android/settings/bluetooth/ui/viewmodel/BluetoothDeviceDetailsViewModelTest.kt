@@ -78,7 +78,11 @@ class BluetoothDeviceDetailsViewModelTest {
 
         underTest =
             BluetoothDeviceDetailsViewModel(
-                application, repository, spatialAudioInteractor, cachedDevice)
+                application,
+                repository,
+                spatialAudioInteractor,
+                cachedDevice,
+                testScope.testScheduler)
     }
 
     @Test
@@ -87,11 +91,43 @@ class BluetoothDeviceDetailsViewModelTest {
             `when`(repository.getDeviceSettingsConfig(cachedDevice))
                 .thenReturn(
                     DeviceSettingConfigModel(
-                        listOf(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2), listOf()))
+                        listOf(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2), listOf(), null))
 
             val keys = underTest.getItems(FragmentTypeModel.DeviceDetailsMainFragment)
 
             assertThat(keys).containsExactly(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2)
+        }
+    }
+
+    @Test
+    fun getHelpItems_mainPage_returnNull() {
+        testScope.runTest {
+            `when`(repository.getDeviceSettingsConfig(cachedDevice))
+                .thenReturn(
+                    DeviceSettingConfigModel(
+                        listOf(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2),
+                        listOf(),
+                        SETTING_ITEM_HELP))
+
+            val item = underTest.getHelpItem(FragmentTypeModel.DeviceDetailsMainFragment)
+
+            assertThat(item).isNull()
+        }
+    }
+
+    @Test
+    fun getHelpItems_moreSettings_returnConfigHelpItem() {
+        testScope.runTest {
+            `when`(repository.getDeviceSettingsConfig(cachedDevice))
+                .thenReturn(
+                    DeviceSettingConfigModel(
+                        listOf(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2),
+                        listOf(),
+                        SETTING_ITEM_HELP))
+
+            val item = underTest.getHelpItem(FragmentTypeModel.DeviceDetailsMoreSettingsFragment)
+
+            assertThat(item).isSameInstanceAs(SETTING_ITEM_HELP)
         }
     }
 
@@ -107,7 +143,8 @@ class BluetoothDeviceDetailsViewModelTest {
                             BUILTIN_SETTING_ITEM_1,
                             buildRemoteSettingItem(remoteSettingId1),
                         ),
-                        listOf()))
+                        listOf(),
+                        null))
             `when`(repository.getDeviceSetting(cachedDevice, remoteSettingId1))
                 .thenReturn(flowOf(pref))
 
@@ -137,7 +174,8 @@ class BluetoothDeviceDetailsViewModelTest {
                             buildRemoteSettingItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE),
                         ),
-                        listOf()))
+                        listOf(),
+                        null))
             `when`(spatialAudioInteractor.getDeviceSetting(cachedDevice)).thenReturn(flowOf(pref))
 
             var deviceSettingPreference: DeviceSettingPreferenceModel? = null
@@ -159,7 +197,7 @@ class BluetoothDeviceDetailsViewModelTest {
             `when`(repository.getDeviceSettingsConfig(cachedDevice))
                 .thenReturn(
                     DeviceSettingConfigModel(
-                        listOf(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2), listOf()))
+                        listOf(BUILTIN_SETTING_ITEM_1, BUILDIN_SETTING_ITEM_2), listOf(), null))
 
             val layout = underTest.getLayout(FragmentTypeModel.DeviceDetailsMainFragment)!!
 
@@ -186,7 +224,8 @@ class BluetoothDeviceDetailsViewModelTest {
                             buildRemoteSettingItem(remoteSettingId2),
                             buildRemoteSettingItem(remoteSettingId3),
                         ),
-                        listOf()))
+                        listOf(),
+                        null))
             `when`(repository.getDeviceSetting(cachedDevice, remoteSettingId1))
                 .thenReturn(flowOf(buildMultiTogglePreference(remoteSettingId1)))
             `when`(repository.getDeviceSetting(cachedDevice, remoteSettingId2))
@@ -248,5 +287,6 @@ class BluetoothDeviceDetailsViewModelTest {
         val BUILDIN_SETTING_ITEM_2 =
             DeviceSettingConfigItemModel.BuiltinItem(
                 DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, "action_buttons")
+        val SETTING_ITEM_HELP = DeviceSettingConfigItemModel.AppProvidedItem(12345)
     }
 }
