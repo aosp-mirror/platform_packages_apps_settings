@@ -93,11 +93,11 @@ class ZenModesListItemPreference extends RestrictedPreference {
 
         setIconSize(ICON_SIZE_SMALL);
         FutureUtil.whenDone(
-                mZenMode.getIcon(mContext, ZenIconLoader.getInstance()),
+                ZenIconLoader.getInstance().getIcon(mContext, mZenMode),
                 icon -> setIcon(
                         zenMode.isActive()
-                                ? IconUtil.applyAccentTint(mContext, icon)
-                                : IconUtil.applyNormalTint(mContext, icon)),
+                                ? IconUtil.applyAccentTint(mContext, icon.drawable())
+                                : IconUtil.applyNormalTint(mContext, icon.drawable())),
                 mContext.getMainExecutor());
 
         updateTextColor(zenMode);
