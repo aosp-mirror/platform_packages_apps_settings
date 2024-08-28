@@ -836,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Změnit"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Podrobnosti o zařízení"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Nastavení klávesnice"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Další nastavení"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Aktualizace firmwaru, informace o produktu apod."</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresa Bluetooth zařízení: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Adresa Bluetooth zařízení:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Zapomenout zařízení?"</string>
@@ -845,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimentální. Zlepšuje kvalitu zvuku."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Zapomenout zařízení"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Odpojit aplikaci"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Další nastavení"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maximum připojených audiozařízení Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Vyberte maximální počet připojených audiozařízení Bluetooth"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Podrobné protokolování ladění dodavatelů NFC"</string>
@@ -1332,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Používat pro mobilní data <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Pro mobilní data používáte <xliff:g id="CARRIER2_0">%2$s</xliff:g>. Pokud přepnete na operátora <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> už se používat nebude."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Použít <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Aktualizovat preferovanou SIM kartu?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> je jediná SIM karta v zařízení. Chcete pomocí této SIM karty volat, posílat SMS a používat mobilní data?"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Zlepšit pokrytí mobilních dat?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Povolte zařízení, aby se pro mobilní data automaticky přepínalo na operátora <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g>, když bude mít lepší signál."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Hovory, zprávy a síťový provoz mohou být viditelné pro vaši organizaci."</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Přizpůsobte si jednotlivá navigační gesta touchpadu"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Opačné posouvání"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Při posouvání dolů se obsah posune nahoru"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Klepnutí vpravo dole"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Klepnutím na pravý dolní roh touchpadu zobrazíte další možnosti"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Kliknutí pravým tlačítkem dole"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliknutím na pravý dolní roh touchpadu zobrazíte další možnosti"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Rychlost kurzoru"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Styl vyplnění ukazatele"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Změnit vyplnění ukazatele na černé"</string>
@@ -3409,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"zapnout tmavý motiv"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Přepněte operační systém a aplikace tak, aby upřednostňovaly světlý text na tmavém pozadí. Může to být příjemnější pro oči a na některých zařízeních to výrazně šetří baterii"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Žádné změny zobrazení}=1{{effect_1}}=2{{effect_1} a {effect_2}}=3{{effect_1}, {effect_2} a {effect_3}}few{{effect_1}, {effect_2} a ještě #}many{{effect_1}, {effect_2} a ještě #}other{{effect_1}, {effect_2} a ještě #}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Omezte, co vám může posílat oznámení"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Žádná přerušení se nefiltrují"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Povolit všechna oznámení"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Vyrušovat můžou lidé, aplikace a zvuky"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Možnosti zobrazení filtrovaných oznámení"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Když je zapnutý režim Nerušit"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Oznámení bez zvukového upozornění"</string>
@@ -3637,11 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Může odpovídat na zprávy a místo tlačítek odkládat či odmítat oznámení nebo přijímat hovory."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Měnit nastavení"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Může zapínat nebo vypínat režim Nerušit a měnit související nastavení."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Může spravovat a aktivovat prioritní režimy a měnit související nastavení."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Pokud aplikaci <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vypnete přístup k oznámením, můžete tím vypnout i přístup k režimu Nerušit."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Pokud aplikaci <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vypnete přístup k oznámením, může dojít také k vypnutí přístupu k režimům priority."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Vypnout"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Zrušit"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"V reálném čase"</string>
@@ -3702,12 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Přístup při nastavení Nerušit"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Povolit režim Nerušit"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"O přístup při nastavení Nerušit nepožádaly žádné nainstalované aplikace"</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Přístup k režimům priority"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Povolit přístup k režimům priority"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Žádné nainstalované aplikace o přístup k režimům priority nepožádaly"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Oznámení z této aplikace jste nepovolili"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Tato kategorie oznámení je v zařízení na vaši žádost blokována systémem Android."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Tato skupina oznámení je v zařízení na vaši žádost blokována systémem Android"</string>
@@ -3890,22 +3888,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Zbavte se všech vyrušení a užijte si tiché prostředí"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Přizpůsobte si prostředí zařízení a nastavení pro různé uživatele"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Omezte vyrušení pouze na důležité lidi a aplikace"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Nastavte si režim s pravidelný plánem"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Synchronizujte své zařízení s událostmi v kalendáři"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Probuďte se plní energie"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Na cestách dbejte především na bezpečnost"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Nenechte se vyrušovat"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Pro chvíle, které vyžadují vybrané chování"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Používání pod vedením, se kterým budete v dobrých rukou"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Mějte svou pozornost pod kontrolou"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Varování"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Zavřít"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Odeslat zpětnou vazbu o tomto zařízení"</string>
@@ -4106,14 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Tato možnost musí zůstat zapnutá, protože je zapnut přístup k oznámením"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Odebrat aplikaci <xliff:g id="APP">%1$s</xliff:g> přístup k režimu Nerušit?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Všechna pravidla pro režim Nerušit vytvořená touto aplikací budou odstraněna."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Povolit aplikaci <xliff:g id="APP">%1$s</xliff:g> přístup k režimům priority?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Aplikace bude moct zapnout/vypnout režim Nerušit, spravovat a aktivovat režimy priority a provádět změny souvisejících nastavení."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Zrušit aplikaci <xliff:g id="APP">%1$s</xliff:g> přístup k režimům priority?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Všechny režimy vytvořené touto aplikací budou odstraněny."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Neoptimalizovat"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimalizovat"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Baterie se může vybíjet rychleji. Aplikace již nebude mít zakázáno využívat baterii na pozadí."</string>
@@ -5298,7 +5284,7 @@
     <string name="flash_notifications_title" msgid="4490438861180492311">"Světelná oznámení"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Informace o světelných oznámeních"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Vypnuto"</string>
-    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Zapnuto / blikání fotoaparátu"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Zapnuto / blikání blesku fotoaparátu"</string>
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Zapnuto / blikání obrazovky"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Zapnuto / blikání fotoaparátu a obrazovky"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Když dostanete oznámení nebo zazní budík, obrazovka nebo světlo fotoaparátu zablikají"</string>
@@ -5306,7 +5292,7 @@
     <string name="flash_notifications_note" msgid="2426125248448055075">"Pokud jste citliví na světlo, používejte světelná oznámení opatrně."</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"blikání, světlo, nedoslýchavost, ztráta sluchu"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Náhled"</string>
-    <string name="camera_flash_notification_title" msgid="2475084876382922732">"Blikání fotoaparátu"</string>
+    <string name="camera_flash_notification_title" msgid="2475084876382922732">"Blesk fotoaparátu"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Blikání obrazovky"</string>
     <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"Barva blikání obrazovky"</string>
     <string name="screen_flash_color_blue" msgid="3585766657607931371">"Modrá"</string>
