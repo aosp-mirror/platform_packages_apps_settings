@@ -18,12 +18,12 @@ package com.android.settings.development.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,7 +35,7 @@ import android.bluetooth.BluetoothCodecType;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.annotations.EnableFlags;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.ListPreference;
@@ -88,6 +88,9 @@ public class BluetoothCodecListPreferenceControllerTest {
     private Context mContext;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
+
+    private static String TEST_ENTRY = "TEST_ENTRY";
+    private static final String TEST_ENTRY_VALUE = "1000";
 
     @Before
     public void setup() {
@@ -181,21 +184,10 @@ public class BluetoothCodecListPreferenceControllerTest {
         when(mBluetoothA2dp.getSupportedCodecTypes()).thenReturn(mCodecTypes);
     }
 
-    @Test
-    public void writeConfigurationValues_selectDefault() {
-        mCodecStatus =
-                new BluetoothCodecStatus.Builder()
-                        .setCodecConfig(mCodecConfigSBC)
-                        .setCodecsSelectableCapabilities(mCodecConfigs)
-                        .build();
-        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
-        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice))
-                .thenReturn(BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
-
-        mController.onBluetoothServiceConnected(mBluetoothA2dp);
-
-        mController.writeConfigurationValues(String.valueOf(mController.DEFAULT_VALUE_INT));
-        verify(mBluetoothA2dpConfigStore, times(2)).setCodecType(mCodecTypeSBC);
+    private void verifySetupDefaultListPreference() {
+        assertTrue(mPreference.getValue() == null);
+        assertTrue(mPreference.getSummary() == null);
+        assertTrue(mPreference.isEnabled() == false);
     }
 
     @Test
@@ -208,19 +200,24 @@ public class BluetoothCodecListPreferenceControllerTest {
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
-        mController.writeConfigurationValues(String.valueOf(mCodecTypeSBC.getCodecId()));
+        assertTrue(
+                mController.writeConfigurationValues(String.valueOf(mCodecTypeSBC.getCodecId())));
         verify(mBluetoothA2dpConfigStore, atLeastOnce()).setCodecType(mCodecTypeSBC);
 
-        mController.writeConfigurationValues(String.valueOf(mCodecTypeAAC.getCodecId()));
+        assertTrue(
+                mController.writeConfigurationValues(String.valueOf(mCodecTypeAAC.getCodecId())));
         verify(mBluetoothA2dpConfigStore).setCodecType(mCodecTypeAAC);
 
-        mController.writeConfigurationValues(String.valueOf(mCodecTypeAPTX.getCodecId()));
+        assertTrue(
+                mController.writeConfigurationValues(String.valueOf(mCodecTypeAPTX.getCodecId())));
         verify(mBluetoothA2dpConfigStore).setCodecType(mCodecTypeAPTX);
 
-        mController.writeConfigurationValues(String.valueOf(mCodecTypeLDAC.getCodecId()));
+        assertTrue(
+                mController.writeConfigurationValues(String.valueOf(mCodecTypeLDAC.getCodecId())));
         verify(mBluetoothA2dpConfigStore).setCodecType(mCodecTypeLDAC);
 
-        mController.writeConfigurationValues(String.valueOf(mCodecTypeOPUS.getCodecId()));
+        assertTrue(
+                mController.writeConfigurationValues(String.valueOf(mCodecTypeOPUS.getCodecId())));
         verify(mBluetoothA2dpConfigStore).setCodecType(mCodecTypeOPUS);
     }
 
@@ -233,7 +230,8 @@ public class BluetoothCodecListPreferenceControllerTest {
                         .build();
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
-        mController.writeConfigurationValues(String.valueOf(mCodecTypeAAC.getCodecId()));
+        assertTrue(
+                mController.writeConfigurationValues(String.valueOf(mCodecTypeAAC.getCodecId())));
 
         verify(mBluetoothA2dpConfigStore, atLeastOnce())
                 .setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
@@ -246,12 +244,112 @@ public class BluetoothCodecListPreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
+    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
     public void onPreferenceChange_notifyPreference() {
         assertFalse(
                 mController.onPreferenceChange(
                         mPreference, String.valueOf(mCodecTypeAAC.getCodecId())));
+        assertFalse(mPreference.isEnabled());
 
+        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice))
+                .thenReturn(BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigAAC)
+                        .setCodecsSelectableCapabilities(mCodecConfigs)
+                        .build();
+        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
+
+        mController.onBluetoothServiceConnected(mBluetoothA2dp);
+
+        assertTrue(
+                mController.onPreferenceChange(
+                        mPreference, String.valueOf(mCodecTypeAAC.getCodecId())));
+
+        verify(mCallback).onBluetoothCodecChanged();
+        assertTrue(mPreference.isEnabled());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
+    public void onPreferenceChange_listPreferenceIsNull() {
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(null);
+        assertFalse(
+                mController.onPreferenceChange(
+                        mPreference, String.valueOf(mCodecTypeAAC.getCodecId())));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
+    public void onPreferenceChange_unknownCodecId() {
+        assertFalse(mController.onPreferenceChange(mPreference, String.valueOf(TEST_ENTRY_VALUE)));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
+    public void onPreferenceChange_codecSelection() {
+        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice))
+                .thenReturn(BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
+        mController.onBluetoothServiceConnected(mBluetoothA2dp);
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigAAC)
+                        .setCodecsSelectableCapabilities(mCodecConfigs)
+                        .build();
+        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
+        assertTrue(
+                mController.onPreferenceChange(
+                        mPreference, String.valueOf(mCodecTypeAAC.getCodecId())));
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigSBC)
+                        .setCodecsSelectableCapabilities(mCodecConfigs)
+                        .build();
+        assertTrue(
+                mController.onPreferenceChange(
+                        mPreference, String.valueOf(mCodecTypeSBC.getCodecId())));
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigLDAC)
+                        .setCodecsSelectableCapabilities(mCodecConfigs)
+                        .build();
+        assertTrue(
+                mController.onPreferenceChange(
+                        mPreference, String.valueOf(mCodecTypeLDAC.getCodecId())));
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigAPTX)
+                        .setCodecsSelectableCapabilities(mCodecConfigs)
+                        .build();
+        assertTrue(
+                mController.onPreferenceChange(
+                        mPreference, String.valueOf(mCodecTypeAPTX.getCodecId())));
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigOPUS)
+                        .setCodecsSelectableCapabilities(mCodecConfigs)
+                        .build();
+        assertTrue(
+                mController.onPreferenceChange(
+                        mPreference, String.valueOf(mCodecTypeOPUS.getCodecId())));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
+    public void updateState_notifyPreference() {
+        assertFalse(
+                mController.onPreferenceChange(
+                        mPreference, String.valueOf(mCodecTypeAAC.getCodecId())));
+
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigAAC)
+                        .setCodecsSelectableCapabilities(mCodecConfigs)
+                        .build();
+        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice))
+                .thenReturn(BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         assertTrue(
@@ -265,5 +363,97 @@ public class BluetoothCodecListPreferenceControllerTest {
     public void onHDAudioEnabled_setsPreferenceEnabled() {
         mController.onHDAudioEnabled(/* enabled= */ true);
         assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void setupListPreference_wrongSize_shouldSetupDefaultListPreference() {
+        List<String> entries = new ArrayList<>(1);
+        entries.add(TEST_ENTRY);
+        List<String> entryValues = new ArrayList<>(2);
+        entryValues.add(TEST_ENTRY_VALUE);
+        entryValues.add(TEST_ENTRY_VALUE);
+
+        mController.setupListPreference(entries, entryValues, "", "");
+        verifySetupDefaultListPreference();
+    }
+
+    @Test
+    public void setupListPreference_listEmpty_shouldSetupDefaultListPreference() {
+        List<String> entries = new ArrayList<>(1);
+        entries.add(TEST_ENTRY);
+        List<String> entryValues = new ArrayList<>();
+
+        mController.setupListPreference(entries, entryValues, "", "");
+        verifySetupDefaultListPreference();
+    }
+
+    @Test
+    public void getBluetoothCodecStatus_errorChecking() {
+        mController.onBluetoothServiceConnected(null);
+        assertThat(mController.getBluetoothCodecStatus()).isNull();
+
+        mController.onBluetoothServiceConnected(mBluetoothA2dp);
+
+        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(null);
+        assertThat(mController.getBluetoothCodecStatus()).isNull();
+    }
+
+    @Test
+    public void getCurrentCodecConfig_errorChecking() {
+        mController.onBluetoothServiceConnected(null);
+        assertThat(mController.getCurrentCodecConfig()).isNull();
+
+        mController.onBluetoothServiceConnected(mBluetoothA2dp);
+        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(null);
+        assertThat(mController.getCurrentCodecConfig()).isNull();
+    }
+
+    @Test
+    public void getCurrentCodecConfig_verifyConfig() {
+        mCodecStatus = new BluetoothCodecStatus.Builder().setCodecConfig(mCodecConfigAAC).build();
+        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
+        mController.onBluetoothServiceConnected(mBluetoothA2dp);
+
+        assertThat(mController.getCurrentCodecConfig()).isEqualTo(mCodecConfigAAC);
+    }
+
+    @Test
+    public void isHDAudioEnabled_errorChecking() {
+        mController.onBluetoothServiceConnected(null);
+        assertFalse(mController.isHDAudioEnabled());
+
+        mController.onBluetoothServiceConnected(mBluetoothA2dp);
+        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice))
+                .thenReturn(BluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED);
+        assertFalse(mController.isHDAudioEnabled());
+    }
+
+    @Test
+    public void isHDAudioEnabled_verifyEnabled() {
+        mController.onBluetoothServiceConnected(mBluetoothA2dp);
+        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice))
+                .thenReturn(BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
+        assertTrue(mController.isHDAudioEnabled());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
+    public void onBluetoothServiceConnected_verifyBluetoothA2dpConfigStore() {
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigAAC)
+                        .setCodecsSelectableCapabilities(mCodecConfigs)
+                        .build();
+        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
+        mController.onBluetoothServiceConnected(mBluetoothA2dp);
+
+        verify(mBluetoothA2dpConfigStore).setCodecType(mCodecConfigAAC.getExtendedCodecType());
+        verify(mBluetoothA2dpConfigStore).setSampleRate(mCodecConfigAAC.getSampleRate());
+        verify(mBluetoothA2dpConfigStore).setBitsPerSample(mCodecConfigAAC.getBitsPerSample());
+        verify(mBluetoothA2dpConfigStore).setChannelMode(mCodecConfigAAC.getChannelMode());
+        verify(mBluetoothA2dpConfigStore)
+                .setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
+        verify(mBluetoothA2dpConfigStore)
+                .setCodecSpecific1Value(mCodecConfigAAC.getCodecSpecific1());
     }
 }
