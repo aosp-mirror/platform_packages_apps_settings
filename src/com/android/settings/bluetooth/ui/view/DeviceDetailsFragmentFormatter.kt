@@ -52,10 +52,15 @@ import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spa.widget.preference.TwoTargetSwitchPreference
 import com.android.settingslib.spa.widget.ui.Footer
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 
 /** Handles device details fragment layout according to config. */
@@ -65,6 +70,11 @@ interface DeviceDetailsFragmentFormatter {
 
     /** Updates device details fragment layout. */
     fun updateLayout(fragmentType: FragmentTypeModel)
+
+    /** Gets the menu items of the fragment. */
+    fun getMenuItem(
+        fragmentType: FragmentTypeModel
+    ): Flow<DeviceSettingPreferenceModel.HelpPreference?>
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -72,7 +82,8 @@ class DeviceDetailsFragmentFormatterImpl(
     private val context: Context,
     private val fragment: SettingsPreferenceFragment,
     bluetoothAdapter: BluetoothAdapter,
-    private val cachedDevice: CachedBluetoothDevice
+    private val cachedDevice: CachedBluetoothDevice,
+    private val backgroundCoroutineContext: CoroutineContext,
 ) : DeviceDetailsFragmentFormatter {
     private val repository =
         featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
@@ -88,6 +99,7 @@ class DeviceDetailsFragmentFormatterImpl(
                     repository,
                     spatialAudioInteractor,
                     cachedDevice,
+                    backgroundCoroutineContext,
                 ))
             .get(BluetoothDeviceDetailsViewModel::class.java)
 
@@ -135,6 +147,19 @@ class DeviceDetailsFragmentFormatterImpl(
         fragment.preferenceScreen.addPreference(Preference(context).apply { order = 10000 })
     }
 
+    override fun getMenuItem(
+        fragmentType: FragmentTypeModel
+    ): Flow<DeviceSettingPreferenceModel.HelpPreference?> = flow {
+        val t = viewModel.getHelpItem(fragmentType)
+
+        t?.let { item ->
+            emitAll(
+                viewModel.getDeviceSetting(cachedDevice, item.settingId).map {
+                    it as? DeviceSettingPreferenceModel.HelpPreference
+                })
+        } ?: emit(null)
+    }
+
     @Composable
     private fun buildPreference(layout: DeviceSettingLayout, row: Int) {
         val contents by
@@ -174,6 +199,7 @@ class DeviceDetailsFragmentFormatterImpl(
                     is DeviceSettingPreferenceModel.MoreSettingsPreference -> {
                         buildMoreSettingsPreference()
                     }
+                    is DeviceSettingPreferenceModel.HelpPreference -> {}
                     null -> {}
                 }
             }

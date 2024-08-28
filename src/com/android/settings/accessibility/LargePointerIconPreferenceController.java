@@ -49,7 +49,8 @@ public class LargePointerIconPreferenceController extends TogglePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return android.view.flags.Flags.enableVectorCursorA11ySettings() ? CONDITIONALLY_UNAVAILABLE
+                : AVAILABLE;
     }
 
     @Override

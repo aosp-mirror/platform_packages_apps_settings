@@ -24,7 +24,10 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
+
+import com.google.common.util.concurrent.MoreExecutors;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -47,6 +50,7 @@ public class ZenModesListItemPreferenceTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        ZenIconLoader.setInstance(new ZenIconLoader(MoreExecutors.newDirectExecutorService()));
     }
 
     @Test

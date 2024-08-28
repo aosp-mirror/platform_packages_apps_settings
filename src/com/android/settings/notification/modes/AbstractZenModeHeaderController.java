@@ -24,12 +24,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.notification.modes.ZenIcon;
 import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.widget.LayoutPreference;
@@ -42,7 +44,7 @@ abstract class AbstractZenModeHeaderController extends AbstractZenModePreference
 
     private final DashboardFragment mFragment;
     private EntityHeaderController mHeaderController;
-    private String mCurrentIconKey;
+    @Nullable private ZenIcon.Key mCurrentIconKey;
 
     AbstractZenModeHeaderController(
             @NonNull Context context,
@@ -88,10 +90,10 @@ abstract class AbstractZenModeHeaderController extends AbstractZenModePreference
         if (!Objects.equal(mCurrentIconKey, zenMode.getIconKey())) {
             mCurrentIconKey = zenMode.getIconKey();
             FutureUtil.whenDone(
-                    zenMode.getIcon(mContext, ZenIconLoader.getInstance()),
+                    ZenIconLoader.getInstance().getIcon(mContext, zenMode),
                     icon -> {
                         checkNotNull(mHeaderController)
-                                .setIcon(iconStylist.apply(icon))
+                                .setIcon(iconStylist.apply(icon.drawable()))
                                 .done(/* rebindActions= */ false);
                         iconView.jumpDrawablesToCurrentState(); // Skip animation on first load.
                     },
