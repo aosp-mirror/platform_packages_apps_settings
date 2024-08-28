@@ -66,4 +66,11 @@ sealed interface DeviceSettingPreferenceModel {
     data class MoreSettingsPreference(
         @DeviceSettingId override val id: Int,
     ) : DeviceSettingPreferenceModel
+
+    /** Models a help button on the top right corner of the fragment. */
+    data class HelpPreference(
+        @DeviceSettingId override val id: Int,
+        val icon: DeviceSettingIcon,
+        val onClick: (() -> Unit),
+    ) : DeviceSettingPreferenceModel
 }

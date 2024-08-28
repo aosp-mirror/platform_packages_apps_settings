@@ -836,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Canvia"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalls del dispositiu"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Configuració de teclat"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Més opcions"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Actualitzacions de microprogramari, informació i més"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adreça de Bluetooth del dispositiu: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Adreça de Bluetooth del dispositiu:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vols que s\'oblidi el dispositiu?"</string>
@@ -845,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Millora la qualitat d\'àudio."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Oblida el dispositiu"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Desconnecta l\'aplicació"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Més opcions"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Nombre màxim de dispositius Bluetooth d\'àudio connectats"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selecciona el nombre màxim de dispositius Bluetooth d\'àudio connectats"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Registre detallat de depuració del proveïdor de l\'NFC"</string>
@@ -1332,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Utilitzar <xliff:g id="CARRIER">%1$s</xliff:g> per a dades mòbils?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Estàs utilitzant <xliff:g id="CARRIER2_0">%2$s</xliff:g> per a les dades mòbils. Si canvies a <xliff:g id="CARRIER1">%1$s</xliff:g>, ja no es farà servir <xliff:g id="CARRIER2_1">%2$s</xliff:g> per a les dades mòbils."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Utilitza <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Vols canviar la SIM preferida?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> és l\'única SIM del dispositiu. Vols fer-la servir per a les dades mòbils, les trucades i els missatges SMS?"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Millorar la cobertura de dades?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Permet que el dispositiu canviï a <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> automàticament per a les dades mòbils quan tingui millor disponibilitat."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"És possible que les trucades, els missatges i el trànsit de xarxa siguin visibles per a la teva organització."</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personalitza els gestos de navegació del ratolí tàctil"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Desplaçament invers"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"El contingut es mou cap amunt quan et desplaces cap avall"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Toc a la part inferior dreta"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Toca l\'extrem inferior dret del ratolí per veure més opcions"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Fes clic a la part inferior dreta"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Fes clic a l\'extrem inferior dret del ratolí per a més opcions"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Velocitat del punter"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Estil d\'emplenament del punter"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Canvia emplenament del punter a negre"</string>
@@ -3336,14 +3339,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Activat / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> i <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"També pots activar l\'àudio espacial per als dispositius Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Configuració dels dispositius connectats"</string>
-    <!-- no translation found for spatial_audio_multi_toggle_title (6175786400035541273) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_off (2086359413991193164) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_on (2988769235357633788) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (861779551619033627) -->
-    <skip />
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Àudio espacial"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Desactivat"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Desactivat"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Desactivat"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Cap}=1{S\'ha definit 1 programació}other{S\'han definit # programacions}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No molestis"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Modes prioritaris"</string>
@@ -3413,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"activa el tema fosc"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Canvia l\'SO i les aplicacions perquè prioritzin el text clar sobre fons fosc, que pot ser millor per a la vista i suposa un estalvi de bateria important en alguns dispositius"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{No hi ha cap canvi a la pantalla}=1{{effect_1}}=2{{effect_1} i {effect_2}}=3{{effect_1}, {effect_2} i {effect_3}}other{{effect_1}, {effect_2} i # més}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Limita què se\'t pot notificar"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"No es filtra cap interrupció"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permet totes les notificacions"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Les persones, les aplicacions i els sons poden interrompre"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opcions de pantalla per a les notificacions filtrades"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quan el mode No molestis estigui activat"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Notificacions sense so"</string>
@@ -3641,11 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Pot respondre a missatges i fer accions amb els botons de les notificacions, com ara posposar o ignorar notificacions i respondre a trucades."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Canviar la configuració"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Pot activar o desactivar el mode No Molestis i canviar la configuració que hi estigui relacionada."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Pot gestionar i activar els modes prioritaris, i canviar la configuració que hi estigui relacionada."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si desactives l\'accés a les notificacions per a <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, és possible que també es desactivi l\'accés al mode No molestis."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Si desactives l\'accés a les notificacions per a <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, és possible que també es desactivi l\'accés als modes prioritaris."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desactiva"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancel·la"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"En temps real"</string>
@@ -3706,12 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Accés a No molestis"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permet l\'accés al mode No molestis"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Cap aplicació instal·lada no ha sol·licitat accés a No molestis."</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Accés als modes prioritaris"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Permet l\'accés als modes prioritaris"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Cap aplicació instal·lada no ha sol·licitat accés als modes prioritaris"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"No has permès les notificacions d\'aquesta aplicació"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Tal com has sol·licitat, Android està bloquejant aquesta categoria de notificacions perquè no apareguin al dispositiu"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Tal com has sol·licitat, Android està bloquejant aquest grup de notificacions perquè no apareguin al dispositiu"</string>
@@ -3894,22 +3888,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimina totes les distraccions per aconseguir un entorn tranquil"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalitza les experiències i la configuració del dispositiu per a diferents usuaris"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimitza les interrupcions permetent que només et contactin persones i aplicacions importants"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Configura un mode que segueixi una programació regular"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantén el dispositiu sincronitzat amb els esdeveniments del dia"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Desperta\'t amb energia"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Prioritza la seguretat a la carretera"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentra\'t per evitar distraccions"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Per als moments en què la cortesia és important"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Ús guiat per ajudar-te a estar en bones mans"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Pren el control de la teva atenció"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Advertiment"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Tanca"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Envia suggeriments sobre el dispositiu"</string>
@@ -4110,14 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Ha d\'estar activat perquè l\'accés a les notificacions també ho està"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Vols revocar l\'accés de l\'aplicació <xliff:g id="APP">%1$s</xliff:g> a No molestis?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Se suprimiran totes les regles del mode No molestis creades per aquesta aplicació."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Vols permetre l\'accés als modes prioritaris per a <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"L\'aplicació podrà activar o desactivar No molestis, gestionar i activar els modes prioritaris, i canviar la configuració que hi estigui relacionada."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Vols revocar l\'accés als modes prioritaris per a <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Se suprimiran tots els modes creats per aquesta aplicació."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"No optimitzis la bateria"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimitza la bateria"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"És possible que la bateria s\'exhaureixi més ràpidament. L\'aplicació ja no té restringit l\'ús de la bateria en segon pla."</string>
