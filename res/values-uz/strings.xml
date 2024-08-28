@@ -836,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Oʻzgartirish"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Qurilma tafsilotlari"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Klaviatura sozlamalari"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Boshqa sozlamalar"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Mikrodastur yangilanishi, qurilma haqida va hokazo"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Qurilmaning Bluetooth manzili: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Qurilmaning Bluetooth manzili:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Qurilma unutilsinmi?"</string>
@@ -845,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Tajribaviy. Audio sifatini oshiradi."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Qurilmani unutish"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Ilovani uzish"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Boshqa sozlamalar"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimum ulangan Bluetooth audio qurilmalar"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Maksimum nechta Bluetooth audio qurilma ulash mumkinligi belgilang"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC taʼminotchisining batafsil debag jurnali"</string>
@@ -1332,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Mobil internet uchun <xliff:g id="CARRIER">%1$s</xliff:g> ishlatilsinmi?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Mobil internet uchun <xliff:g id="CARRIER2_0">%2$s</xliff:g> ishlatmoqdasiz. <xliff:g id="CARRIER1">%1$s</xliff:g> faollashtirilganda, <xliff:g id="CARRIER2_1">%2$s</xliff:g> qayta mobil internet uchun ishlatilmaydi."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> ishlatish"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Birlamchi SIM karta yangilansinmi?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> – qurilmangizdagi yagona SIM karta. Undan qo‘ng‘iroqlar, mobil internet va SMS xabarlar uchun foydalanmoqchimisiz?"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Mobil internet qamrovi yaxshilansinmi?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Qurilmangizga mobil internet uchun yaxshiroq ishlaydigan <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> operatoriga avtomatik almashishga ruxsat bering."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Chaqiruvlar, xabarlar va tarmoq trafigi tashkilotingizga koʻrinishi mumkin."</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Sensorli panelda individual navigatsiya ishoralarini sozlang"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Teskari aylantirish"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Pastga aylantirganingizda kontent yuqoriga siljiydi"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Pastki oʻng burchakka bosing"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Pastki oʻng burchakka bossangiz, boshqa parametrlar ochiladi"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Pastki oʻng burchakka bosish"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Pastki oʻng burchakka bossangiz, boshqa variantlar ochiladi"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Kursor tezligi"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Kursor ichini boʻyash uslubi"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Kursor ichini qoraga boʻyash"</string>
@@ -3409,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"tungi mavzuni yoqish"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Operatsion tizim va ilovalar sozlamalarini qorongʻi fonda yorqin matn chiqarish tanlovi bilan almashtiring, bunda koʻzlar qiynalmaydi va ayrim qurilmalarda batareya sezilarli tejaladi"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ekran oʻzgarishlarsiz}=1{{effect_1}}=2{{effect_1} va {effect_2}}=3{{effect_1}, {effect_2} va {effect_3}}other{{effect_1}, {effect_2} va yana # ta}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Chiqishi mumkin bildirishnomalarni tanlash"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Hech qanday tanaffus filtrlanmagan"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Barcha bildirishnomalarga ruxsat"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Odamlar, ilovalar va tovushlar xalaqit berishi mumkin"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Bildirishnomalarni filtrlab chiqarish parametrlari"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Bezovta qilinmasin rejimida"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Bildirishnomalar tovushsiz keladi"</string>
@@ -3637,11 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Ilova xabarlarga javob berishi, bildirishnomalarni kechiktirishi yoki yopish kabi tugmalarda amal bajarishi va chaqiruvlarga javob berishi mumkin."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Sozlamalarni tahrirlash"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Ilova Bezovta qilinmasin rejimini yoqish va oʻchirish hamda shunga aloqador sozlamalarni oʻzgartirishi ham mumkin."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Muhim rejimlarni boshqarishi va faollashtirishi va tegishli sozlamalarni oʻzgartirishi mumkin."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Agar <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> uchun bildirishnomalardan foydalanish faolsizlantirilsa, “Bezovta qilinmasin” funksiyasi ham faolsizlantiriladi."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Agar <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> uchun bildirishnomalardan foydalanish faolsizlantirilsa, Muhim rejimlarga kirish ham faolsizlantiriladi."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Faolsizlantirish"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Bekor qilish"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Real vaqt"</string>
@@ -3702,12 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Bezovta qilinmasin rejimi"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Bezovta qilinmasin rejimiga ruxsat"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Hech qanday ilova “Bezovta qilinmasin” funksiyasiga ruxsat so‘ramagan"</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Muhim rejimlarga kirish"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Muhim rejimlarga kirishga ruxsat berish"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Hech bir oʻrnatilgan ilova Muhim rejimlarga kirishni soʻramagan"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Bu ilovadan bildirishnomalarga ruxsat bermagansiz"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android bu turkumdagi bildirishnomalarni bloklamoqda"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android bunday bildirishnomalar guruhini bloklaydi"</string>
@@ -3890,22 +3888,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Tinch muhit uchun barcha chalgʻitadiganlarni yoʻq qiling"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Turli foydalanuvchilar uchun qurilma ishlashi va sozlamalarini moslang"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Faqat muhim odamlar va ilovalarga ruxsat berish orqali xalaqitlarni minimallashtiring"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Muntazam jadvalga amal qiladigan rejimni oʻrnating"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Qurilmangizni kunlik tadbirlaringiz bilan sinxronlab boring"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"100% tetik uygʻoning"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Yo‘lda xavfsizlikni birinchi oʻringa qoʻying"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Hududga kirish uchun diqqatni jamlang"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Xushmuomalalik muhim lahzalar uchun"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Yaxshi qoʻllarda qolishingizga yordam beruvchi yoʻl-yoʻriqlar"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Diqqatingizni nazorat qiling"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Diqqat"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Yopish"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Qurilma haqida fikr-mulohaza"</string>
@@ -4106,14 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Yoniq turishi shart, sababi bildirishnomalardan foydalanishga ruxsat berilgan"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"<xliff:g id="APP">%1$s</xliff:g> ilovasi uchun “Bezovta qilinmasin” rejimiga ruxsati bekor qilinsinmi?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Ushbu ilova tomonidan yaratilgan barcha “Bezovta qilinmasin” rejimi qoidalari o‘chirib tashlanadi."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"<xliff:g id="APP">%1$s</xliff:g> muhim rejimlarga kirishiga ruxsat berilsinmi?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Ilova Bezovta qilinmasin rejimini yoqish/oʻchirish, muhim rejimlarni boshqarish va faollashtirish hamda tegishli sozlamalarni oʻzgartirish imkoniyatiga ega boʻladi."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"<xliff:g id="APP">%1$s</xliff:g> uchun muhim rejimlarga ruxsat bekor qilinsinmi?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Bu ilova yaratgan barcha rejimlar olib tashlanadi."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Cheklov o‘rnatilmasin"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Cheklov o‘rnatish"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Batareya quvvati nisbatan tezroq sarflanishi mumkin. Fonda batareya sarfiga cheklov olib tashlanadi."</string>
@@ -5439,7 +5425,7 @@
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Tinglashni toʻxtatish"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Mos quloqliklarni ulash"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Qurilma ulash"</string>
-    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Audio oqim axboroti"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Audio oqim tafsilotlari"</string>
     <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Audio oqim QR kodi"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Parol: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"<xliff:g id="STREAM_NAME">%1$s</xliff:g> oqimini tinglash uchun boshqa foydalanuvchilar shaxsiy Android qurilmalariga mos quloqliklarni ulashi mumkin. Keyin bu QR kodni skanerlash kifoya."</string>

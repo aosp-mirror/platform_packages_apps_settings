@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_START_LE_AUDIO_SHARING;
+
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -27,6 +29,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.Pair;
@@ -44,6 +47,7 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -66,11 +70,12 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AudioSharingSwitchBarController extends BasePreferenceController
         implements DefaultLifecycleObserver,
-        OnCheckedChangeListener,
-        LocalBluetoothProfileManager.ServiceListener {
+                OnCheckedChangeListener,
+                LocalBluetoothProfileManager.ServiceListener {
     private static final String TAG = "AudioSharingSwitchCtlr";
     private static final String PREF_KEY = "audio_sharing_main_switch";
 
@@ -106,6 +111,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     private List<AudioSharingDeviceItem> mDeviceItemsForSharing = new ArrayList<>();
     @VisibleForTesting IntentFilter mIntentFilter;
     private final AtomicBoolean mCallbacksRegistered = new AtomicBoolean(false);
+    private AtomicInteger mIntentHandleStage =
+            new AtomicInteger(StartIntentHandleStage.TO_HANDLE.ordinal());
 
     @VisibleForTesting
     BroadcastReceiver mReceiver =
@@ -309,6 +316,12 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             return;
         }
         registerCallbacks();
+        if (mIntentHandleStage.compareAndSet(
+                StartIntentHandleStage.TO_HANDLE.ordinal(),
+                StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal())) {
+            Log.d(TAG, "onStart: handleStartAudioSharingFromIntent");
+            handleStartAudioSharingFromIntent();
+        }
     }
 
     @Override
@@ -344,8 +357,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             // FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST is always true in
             // prod. We can turn off the flag for debug purpose.
             if (FeatureFlagUtils.isEnabled(
-                    mContext,
-                    FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST)
+                            mContext,
+                            FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST)
                     && mAssistant.getAllConnectedDevices().isEmpty()) {
                 // Pop up dialog to ask users to connect at least one lea buds before audio sharing.
                 AudioSharingUtils.postOnMainThread(
@@ -385,6 +398,12 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             mListener.onAudioSharingStateChanged();
             if (mProfileManager != null) {
                 mProfileManager.removeServiceListener(this);
+            }
+            if (mIntentHandleStage.compareAndSet(
+                    StartIntentHandleStage.TO_HANDLE.ordinal(),
+                    StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal())) {
+                Log.d(TAG, "onServiceConnected: handleStartAudioSharingFromIntent");
+                handleStartAudioSharingFromIntent();
             }
         }
     }
@@ -489,7 +508,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                             boolean isStateReady =
                                     isBluetoothOn()
                                             && AudioSharingUtils.isAudioSharingProfileReady(
-                                            mProfileManager);
+                                                    mProfileManager);
                             AudioSharingUtils.postOnMainThread(
                                     mContext,
                                     () -> {
@@ -526,7 +545,24 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             AudioSharingUtils.addSourceToTargetSinks(mTargetActiveSinks, mBtManager);
             mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING);
             mTargetActiveSinks.clear();
+            if (mIntentHandleStage.compareAndSet(
+                            StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal(),
+                            StartIntentHandleStage.HANDLED.ordinal())
+                    && mDeviceItemsForSharing.size() == 1) {
+                Log.d(TAG, "handleOnBroadcastReady: auto add source to the second device");
+                AudioSharingUtils.addSourceToTargetSinks(
+                        mGroupedConnectedDevices.getOrDefault(
+                                mDeviceItemsForSharing.get(0).getGroupId(), ImmutableList.of()),
+                        mBtManager);
+                mGroupedConnectedDevices.clear();
+                mDeviceItemsForSharing.clear();
+                // TODO: Add metric for auto add by intent
+                return;
+            }
         }
+        mIntentHandleStage.compareAndSet(
+                StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal(),
+                StartIntentHandleStage.HANDLED.ordinal());
         if (mFragment == null) {
             Log.d(TAG, "handleOnBroadcastReady: dialog fail to show due to null fragment.");
             mGroupedConnectedDevices.clear();
@@ -572,12 +608,58 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 @NonNull ViewGroup host, @NonNull View view, @NonNull AccessibilityEvent event) {
             if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
                     && (event.getContentChangeTypes()
-                    & AccessibilityEvent.CONTENT_CHANGE_TYPE_ENABLED)
-                    != 0) {
+                                    & AccessibilityEvent.CONTENT_CHANGE_TYPE_ENABLED)
+                            != 0) {
                 Log.d(TAG, "Skip accessibility event for CONTENT_CHANGE_TYPE_ENABLED");
                 return false;
             }
             return super.onRequestSendAccessibilityEvent(host, view, event);
         }
+    }
+
+    private void handleStartAudioSharingFromIntent() {
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            if (mFragment == null
+                                    || mFragment.getActivity() == null
+                                    || mFragment.getActivity().getIntent() == null) {
+                                Log.d(
+                                        TAG,
+                                        "Skip handleStartAudioSharingFromIntent, "
+                                                + "fragment intent is null");
+                                return;
+                            }
+                            Intent intent = mFragment.getActivity().getIntent();
+                            Bundle args =
+                                    intent.getBundleExtra(
+                                            SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+                            Boolean shouldStart =
+                                    args != null
+                                            && args.getBoolean(EXTRA_START_LE_AUDIO_SHARING, false);
+                            if (!shouldStart) {
+                                Log.d(TAG, "Skip handleStartAudioSharingFromIntent, arg false");
+                                mIntentHandleStage.compareAndSet(
+                                        StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal(),
+                                        StartIntentHandleStage.HANDLED.ordinal());
+                                return;
+                            }
+                            if (BluetoothUtils.isBroadcasting(mBtManager)) {
+                                Log.d(TAG, "Skip handleStartAudioSharingFromIntent, in broadcast");
+                                mIntentHandleStage.compareAndSet(
+                                        StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal(),
+                                        StartIntentHandleStage.HANDLED.ordinal());
+                                return;
+                            }
+                            Log.d(TAG, "HandleStartAudioSharingFromIntent, start broadcast");
+                            AudioSharingUtils.postOnMainThread(
+                                    mContext, () -> mSwitchBar.setChecked(true));
+                        });
+    }
+
+    private enum StartIntentHandleStage {
+        TO_HANDLE,
+        HANDLE_AUTO_ADD,
+        HANDLED,
     }
 }

@@ -836,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Mudar"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalhes do dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Configurações de teclado"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Mais configurações"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Atualizações de firmware, informações e muito mais"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Endereço Bluetooth do dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Endereço Bluetooth do dispositivo:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Esquecer dispositivo?"</string>
@@ -845,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Melhora a qualidade do som."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Esquecer dispositivo"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Desconectar app"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Mais configurações"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Número máximo de dispositivos de áudio Bluetooth conectados"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selecione o número máximo de dispositivos de áudio Bluetooth conectados"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Registro detalhado de depuração NFC do fornecedor"</string>
@@ -1332,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Usar <xliff:g id="CARRIER">%1$s</xliff:g> para dados móveis?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Você está usando <xliff:g id="CARRIER2_0">%2$s</xliff:g> para dados móveis. Se alterar para <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> não será mais usada para dados móveis."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Usar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Atualizar chip preferido?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"O <xliff:g id="NEW_SIM">%1$s</xliff:g> é o único chip no seu dispositivo. Quer usá-lo para dados móveis, chamadas e mensagens SMS?"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Melhorar a cobertura de dados móveis?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Permita que o dispositivo mude automaticamente para a operadora <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> e use os dados móveis quando a disponibilidade melhorar."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Ligações, mensagens e tráfego de rede podem estar visíveis para sua organização."</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personalize gestos individuais de navegação do touchpad"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Rolagem reversa"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"O conteúdo vai para cima quando você rola a tela para baixo"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Toque no canto inferior direito"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Toque no canto inferior direito do touchpad para mais opções"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clicar no canto inferior direito"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Clique no canto inferior direito do touchpad para mais opções"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Velocidade do cursor"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Estilo de preenchimento do ponteiro"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Mudar preenchimento para preto"</string>
@@ -3336,14 +3339,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Ativado / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Também é possível ativar o áudio espacial para dispositivos Bluetooth"</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Configurações de dispositivos conectados"</string>
-    <!-- no translation found for spatial_audio_multi_toggle_title (6175786400035541273) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_off (2086359413991193164) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_on (2988769235357633788) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (861779551619033627) -->
-    <skip />
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Áudio espacial"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Desativado"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Desativado"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Desativado"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nenhuma}=1{1 programação definida}one{# programação definida}other{# programações definidas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Não perturbe"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Modos prioritários"</string>
@@ -3413,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ativar tema escuro"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Muda o SO e os apps para dar preferência a texto claro em um fundo escuro, o que pode facilitar a visualização e oferecer uma economia de bateria significativa em alguns dispositivos"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nenhuma mudança na tela}=1{{effect_1}}=2{{effect_1} e {effect_2}}=3{{effect_1}, {effect_2} e {effect_3}}one{{effect_1}, {effect_2} e mais #}other{{effect_1}, {effect_2} e mais #}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Limitar quem pode enviar notificações"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nenhuma interrupção está sendo filtrada"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permitir todas as notificações"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Pessoas, apps e sons podem interromper"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opções de exibição para notificações filtradas"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quando o Não perturbe estiver ativado"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Desativar som de notificações"</string>
@@ -3641,11 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Ele pode responder a mensagens e acionar botões nas notificações, como ativar a soneca, dispensar notificações ou atender ligações."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Mudar configurações"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Ele pode ativar e desativar o modo Não perturbe e mudar as configurações relacionadas a ele."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"O app pode gerenciar e ativar os modos prioritários e mudar as configurações relacionadas."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Se você desativar o acesso a notificações para <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, é possível que o acesso ao Não perturbe também seja desativado."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Se você desativar o acesso a notificações para <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, é possível que o acesso aos modos prioritários também seja desativado."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desativar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Em tempo real"</string>
@@ -3706,12 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acesso ao Não perturbe"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir o Não perturbe"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Nenhum app instalado solicitou o acesso \"Não perturbe\""</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Acesso aos modos prioritários"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Permitir acesso aos modos prioritários"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Nenhum app instalado solicitou acesso aos modos prioritários"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Você não permitiu notificações para este app"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"O Android está bloqueando essa categoria de notificações neste dispositivo, conforme você pediu."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"O Android está bloqueando esse grupo de notificações neste dispositivo, conforme seu pedido"</string>
@@ -3894,22 +3888,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimine todas as distrações para ter um ambiente silencioso"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalize as experiências e configurações do dispositivo para diferentes usuários"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimize interrupções, permitindo que apenas pessoas e apps importantes entrem em contato com você"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Defina um modo que siga uma programação regular"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantenha seu dispositivo sincronizado com os eventos do dia"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Acorde com 100% de energia"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Priorize a segurança na estrada"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentre-se para entrar no clima"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Para momentos em que a cortesia é importante"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Uso guiado para garantir sua segurança"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Controle sua atenção"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Alerta"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fechar"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Enviar feedback sobre o dispositivo"</string>
@@ -4110,14 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Deve permanecer ativado, pois o acesso a notificações está ativado"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Revogar acesso a \"Não perturbe\" para <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Todas as regras \"Não perturbe\" criadas por esse app serão removidas."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Permitir que <xliff:g id="APP">%1$s</xliff:g> tenha acesso aos modos prioritários?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"O app poderá ativar/desativar o recurso \"Não perturbe\", gerenciar e ativar os modos prioritários e fazer mudanças nas configurações relacionadas."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Revogar o acesso de <xliff:g id="APP">%1$s</xliff:g> aos modos prioritários?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Todos os modos criados por esse app serão removidos."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Não otimizar"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Otimizar"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Isso pode esgotar a bateria mais rapidamente. A restrição do uso de bateria em segundo plano não se aplicará mais ao app."</string>
