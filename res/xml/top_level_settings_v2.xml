@@ -82,6 +82,16 @@
             android:summary="@string/sound_dashboard_summary"
             settings:highlightableMenuKey="@string/menu_key_sound"/>
 
+        <com.android.settings.widget.RestrictedHomepagePreference
+            android:fragment="com.android.settings.notification.modes.ZenModesListFragment"
+            android:icon="@*android:drawable/ic_zen_priority_modes"
+            android:key="top_level_priority_modes"
+            android:order="-35"
+            android:title="@string/zen_modes_list_title"
+            settings:useAdminDisabledSummary="true"
+            settings:highlightableMenuKey="@string/menu_key_priority_modes"
+            settings:controller="com.android.settings.notification.modes.ZenModesLinkPreferenceController"/>
+
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.communal.CommunalDashboardFragment"
             android:icon="@drawable/ia_settings_communal"
