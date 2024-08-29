@@ -36,6 +36,7 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,28 +91,12 @@ public class FastPairDevicePreferenceController extends BasePreferenceController
 
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
-        if (mFastPairDeviceUpdater != null) {
-            mFastPairDeviceUpdater.setPreferenceContext(mContext);
-            mFastPairDeviceUpdater.registerCallback();
-        } else {
-            if (DEBUG) {
-                Log.d(TAG, "Callback register: Fast Pair device updater is null. Ignore.");
-            }
-        }
-        mContext.registerReceiver(mReceiver, mIntentFilter, Context.RECEIVER_EXPORTED_UNAUDITED);
+        var unused = ThreadUtils.postOnBackgroundThread(() -> registerCallbacks());
     }
 
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
-        if (mFastPairDeviceUpdater != null) {
-            mFastPairDeviceUpdater.setPreferenceContext(null);
-            mFastPairDeviceUpdater.unregisterCallback();
-        } else {
-            if (DEBUG) {
-                Log.d(TAG, "Callback unregister: Fast Pair device updater is null. Ignore.");
-            }
-        }
-        mContext.unregisterReceiver(mReceiver);
+        var unused = ThreadUtils.postOnBackgroundThread(() -> unregisterCallbacks());
     }
 
     @Override
@@ -207,5 +192,29 @@ public class FastPairDevicePreferenceController extends BasePreferenceController
             mPreferenceGroup.setVisible(false);
             mSeeAllPreference.setVisible(false);
         }
+    }
+
+    private void registerCallbacks() {
+        if (mFastPairDeviceUpdater != null) {
+            mFastPairDeviceUpdater.setPreferenceContext(mContext);
+            mFastPairDeviceUpdater.registerCallback();
+        } else {
+            if (DEBUG) {
+                Log.d(TAG, "Callback register: Fast Pair device updater is null. Ignore.");
+            }
+        }
+        mContext.registerReceiver(mReceiver, mIntentFilter, Context.RECEIVER_EXPORTED_UNAUDITED);
+    }
+
+    private void unregisterCallbacks() {
+        if (mFastPairDeviceUpdater != null) {
+            mFastPairDeviceUpdater.setPreferenceContext(null);
+            mFastPairDeviceUpdater.unregisterCallback();
+        } else {
+            if (DEBUG) {
+                Log.d(TAG, "Callback unregister: Fast Pair device updater is null. Ignore.");
+            }
+        }
+        mContext.unregisterReceiver(mReceiver);
     }
 }
