@@ -43,15 +43,18 @@ import java.util.function.Function;
 abstract class AbstractZenModeHeaderController extends AbstractZenModePreferenceController {
 
     private final DashboardFragment mFragment;
+    private final ZenIconLoader mIconLoader;
     private EntityHeaderController mHeaderController;
     @Nullable private ZenIcon.Key mCurrentIconKey;
 
     AbstractZenModeHeaderController(
             @NonNull Context context,
+            @NonNull ZenIconLoader iconLoader,
             @NonNull String key,
             @NonNull DashboardFragment fragment) {
         super(context, key);
         mFragment = fragment;
+        mIconLoader = iconLoader;
     }
 
     @Override
@@ -90,7 +93,7 @@ abstract class AbstractZenModeHeaderController extends AbstractZenModePreference
         if (!Objects.equal(mCurrentIconKey, zenMode.getIconKey())) {
             mCurrentIconKey = zenMode.getIconKey();
             FutureUtil.whenDone(
-                    ZenIconLoader.getInstance().getIcon(mContext, zenMode),
+                    mIconLoader.getIcon(mContext, zenMode),
                     icon -> {
                         checkNotNull(mHeaderController)
                                 .setIcon(iconStylist.apply(icon.drawable()))

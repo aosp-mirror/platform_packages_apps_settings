@@ -40,11 +40,13 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.MoreExecutors;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -95,7 +97,8 @@ public class ZenModesListPreferenceControllerTest {
         PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
         preferenceScreen.addPreference(mPreference);
 
-        mPrefController = new ZenModesListPreferenceController(mContext, mBackend);
+        mPrefController = new ZenModesListPreferenceController(mContext, mBackend,
+                new ZenIconLoader(MoreExecutors.newDirectExecutorService()));
     }
 
     @Test

@@ -50,7 +50,7 @@ class CarrierConfigRepository(private val context: Context) {
         private val keysToRetrieve = mutableMapOf<String, KeyType>()
 
         override fun getBoolean(key: String): Boolean {
-            check(key.endsWith("_bool")) { "Boolean key should ends with _bool" }
+            checkBooleanKey(key)
             val value = cache[key]
             return if (value == null) {
                 keysToRetrieve += key to KeyType.BOOLEAN
@@ -186,9 +186,18 @@ class CarrierConfigRepository(private val context: Context) {
             ListenerRegistered.getAndSet(false)
         }
 
+        private val BooleanKeysWhichNotFollowingsNamingConventions =
+            listOf(CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS)
+
+        private fun checkBooleanKey(key: String) {
+            check(key.endsWith("_bool") || key in BooleanKeysWhichNotFollowingsNamingConventions) {
+                "Boolean key should ends with _bool"
+            }
+        }
+
         @VisibleForTesting
         fun setBooleanForTest(subId: Int, key: String, value: Boolean) {
-            check(key.endsWith("_bool")) { "Boolean key should ends with _bool" }
+            checkBooleanKey(key)
             getPerSubCache(subId)[key] = BooleanConfigValue(value)
         }
 
