@@ -36,7 +36,6 @@ import com.android.settings.R;
 import com.android.settings.connecteddevice.fastpair.FastPairDeviceUpdater;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
-import com.android.settings.flags.Flags;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
@@ -94,7 +93,6 @@ public class ConnectedDeviceDashboardFragmentTest {
 
         mContext = spy(RuntimeEnvironment.application);
         mFragment = new ConnectedDeviceDashboardFragment();
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION);
         mSetFlagsRule.enableFlags(com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory
