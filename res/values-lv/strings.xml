@@ -836,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Mainīt"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Ierīces dati"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tastatūras iestatījumi"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Citi iestatījumi"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Aparātprogrammatūras atjauninājumi, par u. c."</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Ierīces Bluetooth adrese: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Ierīces Bluetooth adrese:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vai aizmirst ierīci?"</string>
@@ -845,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Eksperimentāla. Uzlabo audio kvalitāti."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Aizmirst ierīci"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Lietotnes atvienošana"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Citi iestatījumi"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Pievienoto Bluetooth audioierīču maksimālais skaits"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Pievienoto Bluetooth audioierīču maksimālā skaita atlase"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Detalizēti NFC nodrošinātāju atkļūdošanas žurnāli"</string>
@@ -1332,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Vai lietot <xliff:g id="CARRIER">%1$s</xliff:g> mobilajiem datiem?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Jūs izmantojat mobilajiem datiem <xliff:g id="CARRIER2_0">%2$s</xliff:g>. Pārslēdzoties uz <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> SIM vairs netiks izmantota mobilajiem datiem."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Izmantot operatoru <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Atjaunināt vēlamo SIM karti?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> ir vienīgā SIM karte jūsu ierīcē. Vai vēlaties izmantot šo SIM karti mobilajiem datiem, zvaniem un īsziņām?"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Uzlabot mob. datu savienojumu?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Ļaujiet ierīcē automātiski pārslēgt mobilo sakaru operatoru uz <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> mobilajiem datiem, ja tas nodrošina labāku savienojumu."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Iespējams, jūsu organizācija varēs redzēt jūsu zvanus, ziņojumus un tīkla datplūsmu."</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Varat pielāgot atsevišķus skārienpaliktņa navigācijas žestus"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Ritināšana atpakaļgaitā"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Ritinot lejup, saturs pārvietosies augšup"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Pieskaršanās apakšā pa labi"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Citas iespējas: skārienpaliktņa labais apakšējais stūris"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Noklikšķināt apakšējā labajā stūrī"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Citas iespējas: skārienpaliktņa labais apakšējais stūris"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Rādītāja ātrums"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Rādītāja aizpildījuma stils"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Mainīt aizpildījuma stilu uz melnu"</string>
@@ -3336,14 +3339,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Ieslēgts (<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> un <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>)"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Varat arī ieslēgt funkciju “Telpiskais audio” Bluetooth ierīcēm."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Saistītie ierīces iestatījumi"</string>
-    <!-- no translation found for spatial_audio_multi_toggle_title (6175786400035541273) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_off (2086359413991193164) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_on (2988769235357633788) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (861779551619033627) -->
-    <skip />
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Telpiskais audio"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Izslēgts"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Izslēgts"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Izslēgta"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nav}=1{Iestatīts viens grafiks}zero{Iestatīti # grafiki}one{Iestatīts # grafiks}other{Iestatīti # grafiki}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Netraucēt"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Prioritātes režīmi"</string>
@@ -3413,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"iespējot tumšo motīvu"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Iestatiet, lai operētājsistēmā un lietotnēs priekšroka tiktu dota gaišam tekstam uz tumša fona. Tas var mazāk nogurdināt acis un ievērojami ietaupīt akumulatora jaudu dažās ierīcēs."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nav attēlojuma izmaiņu}=1{{effect_1}}=2{{effect_1} un {effect_2}}=3{{effect_1}, {effect_2} un {effect_3}}zero{{effect_1}, {effect_2} un vēl #}one{{effect_1}, {effect_2} un vēl #}other{{effect_1}, {effect_2} un vēl #}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Ierobežot saņemamo paziņojumu veidus"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Netiek filtrēts neviens traucēklis"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Atļaut visus paziņojumus"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Personas, lietotnes un skaņas var pārtraukt"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Filtrētu paziņojumu attēlojuma iespējas"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kad ir ieslēgts režīms “Netraucēt”"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Nav skaņas signālu no paziņojumiem"</string>
@@ -3641,11 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Tā var atbildēt uz ziņojumiem un izmantot paziņojumos esošās pogas darbību veikšanai, tostarp atlikt vai noraidīt paziņojumus un atbildēt uz zvaniem."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Iestatījumu maiņa"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Tā var ieslēgt vai izslēgt režīmu “Netraucēt” un mainīt saistītos iestatījumus."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Var pārvaldīt un aktivizēt prioritātes režīmus un mainīt saistītos iestatījumus."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Izslēdzot paziņojumu piekļuvi lietotnei <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, iespējams, tiks izslēgta arī piekļuve režīmam “Netraucēt”."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Izslēdzot paziņojumu piekļuvi lietotnei <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, var tikt izslēgta arī piekļuve prioritātes režīmiem."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Izslēgt"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Atcelt"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Reāllaika paziņojumi"</string>
@@ -3706,12 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Piekļuve režīmam “Netraucēt”"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Atļaut režīmu “Netraucēt”"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Nevienā instalētajā lietotnē nav pieprasīta piekļuve režīmam “Netraucēt”."</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Piekļuve prioritātes režīmiem"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Atļaut piekļūt prioritātes režīmiem"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Nevienā instalētajā lietotnē nav pieprasīta piekļuve prioritātes režīmiem."</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Jūs neesat atļāvis paziņojumus no šīs lietotnes"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Pēc jūsu pieprasījuma Android neatļauj šīs kategorijas paziņojumu rādīšanu šajā ierīcē."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Pēc jūsu pieprasījuma Android neatļauj šīs grupas paziņojumu rādīšanu šajā ierīcē."</string>
@@ -3894,22 +3888,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Novērsiet visus traucēkļus, lai radītu klusu vidi."</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalizējiet ierīces lietošanas iespējas un iestatījumus dažādiem lietotājiem."</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Samaziniet traucēkļus, atļaujot paziņojumus tikai no svarīgām kontaktpersonām un lietotnēm."</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Iestatiet režīmu, kas ņem vērā parasto grafiku"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Pielāgojiet ierīces darbību atbilstoši dienā plānotajiem pasākumiem"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Pamostieties pilnīgi atpūties"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Auto vadīšanas laikā drošība ir pirmajā vietā"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Noskaņojieties produktīvam darbam"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Netraucētai mirkļu baudīšanai"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Pārvaldīts lietojums jūsu drošībai"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Parūpējieties, lai nekas nenovērš jūsu uzmanību"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Brīdinājums"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Aizvērt"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Sūtīt atsauksmes par šo ierīci"</string>
@@ -4110,14 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Jābūt ieslēgtam, jo ir ieslēgta piekļuve paziņojumiem"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Vai atsaukt piekļuvi kārtulām “Netraucēt” no lietotnes <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Visas šajā lietotnē izveidotās kārtulas “Netraucēt” tiks noņemtas."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Vai atļaut lietotnei <xliff:g id="APP">%1$s</xliff:g> piekļūt prioritātes režīmiem?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Lietotne varēs ieslēgt/izslēgt režīmu “Netraucēt”, pārvaldīt un aktivizēt prioritātes režīmus, kā arī mainīt saistītos iestatījumus."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Vai atsaukt lietotnes <xliff:g id="APP">%1$s</xliff:g> piekļuvi prioritātes režīmiem?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Tiks noņemti visi šajā lietotnē izveidotie režīmi."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Neoptimizēt"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizēt"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Iespējams, akumulators tiks ātrāk izlādēts. Turpmāk lietotne varēs patērēta akumulatora enerģiju fonā."</string>

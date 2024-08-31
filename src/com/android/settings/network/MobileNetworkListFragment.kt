@@ -27,7 +27,7 @@ import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragment
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
-import com.android.settings.network.telephony.MobileNetworkUtils
+import com.android.settings.network.telephony.euicc.EuiccRepository
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.network.NetworkCellularGroupProvider
@@ -58,7 +58,7 @@ class MobileNetworkListFragment : DashboardFragment() {
         listView.itemAnimator = null
 
         findPreference<Preference>(KEY_ADD_SIM)!!.isVisible =
-            MobileNetworkUtils.showEuiccSettings(context)
+            EuiccRepository(requireContext()).showEuiccSettings()
     }
 
     override fun getPreferenceScreenResId() = R.xml.network_provider_sims_list

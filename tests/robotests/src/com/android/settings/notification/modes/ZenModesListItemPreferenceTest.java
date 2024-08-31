@@ -24,7 +24,10 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
+
+import com.google.common.util.concurrent.MoreExecutors;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -33,7 +36,6 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
 @EnableFlags(Flags.FLAG_MODES_UI)
@@ -42,6 +44,8 @@ public class ZenModesListItemPreferenceTest {
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
+    private final ZenIconLoader mIconLoader = new ZenIconLoader(
+            MoreExecutors.newDirectExecutorService());
 
     @Before
     public void setup() {
@@ -51,8 +55,7 @@ public class ZenModesListItemPreferenceTest {
 
     @Test
     public void constructor_setsMode() {
-        ZenModesListItemPreference preference = new ZenModesListItemPreference(mContext,
-                TestModeBuilder.EXAMPLE);
+        ZenModesListItemPreference preference = newPreference(TestModeBuilder.EXAMPLE);
 
         assertThat(preference.getKey()).isEqualTo(TestModeBuilder.EXAMPLE.getId());
         assertThat(preference.getZenMode()).isEqualTo(TestModeBuilder.EXAMPLE);
@@ -66,8 +69,7 @@ public class ZenModesListItemPreferenceTest {
                 .setEnabled(true)
                 .build();
 
-        ZenModesListItemPreference preference = new ZenModesListItemPreference(mContext, mode);
-        ShadowLooper.idleMainLooper(); // To load icon.
+        ZenModesListItemPreference preference = newPreference(mode);
 
         assertThat(preference.getTitle()).isEqualTo("Enabled mode");
         assertThat(preference.getSummary()).isEqualTo("When the thrush knocks");
@@ -83,8 +85,7 @@ public class ZenModesListItemPreferenceTest {
                 .setActive(true)
                 .build();
 
-        ZenModesListItemPreference preference = new ZenModesListItemPreference(mContext, mode);
-        ShadowLooper.idleMainLooper();
+        ZenModesListItemPreference preference = newPreference(mode);
 
         assertThat(preference.getTitle()).isEqualTo("Active mode");
         assertThat(preference.getSummary()).isEqualTo("ON • When Birnam forest comes to Dunsinane");
@@ -99,8 +100,7 @@ public class ZenModesListItemPreferenceTest {
                 .setEnabled(false, /* byUser= */ false)
                 .build();
 
-        ZenModesListItemPreference preference = new ZenModesListItemPreference(mContext, mode);
-        ShadowLooper.idleMainLooper();
+        ZenModesListItemPreference preference = newPreference(mode);
 
         assertThat(preference.getTitle()).isEqualTo("Mode disabled by app");
         assertThat(preference.getSummary()).isEqualTo("Not set");
@@ -115,11 +115,15 @@ public class ZenModesListItemPreferenceTest {
                 .setEnabled(false, /* byUser= */ true)
                 .build();
 
-        ZenModesListItemPreference preference = new ZenModesListItemPreference(mContext, mode);
-        ShadowLooper.idleMainLooper();
+        ZenModesListItemPreference preference = newPreference(mode);
 
         assertThat(preference.getTitle()).isEqualTo("Mode disabled by user");
         assertThat(preference.getSummary()).isEqualTo("Disabled");
         assertThat(preference.getIcon()).isNotNull();
+    }
+
+    private ZenModesListItemPreference newPreference(ZenMode zenMode) {
+        return new ZenModesListItemPreference(mContext, mIconLoader, MoreExecutors.directExecutor(),
+                zenMode);
     }
 }

@@ -221,10 +221,11 @@
                 </intent>
             </Preference>
 
+            <!-- Settings search is handled by WifiCallingSearchItem. -->
             <SwitchPreferenceCompat
                 android:key="video_calling_key"
                 android:title="@string/video_calling_settings_title"
-                android:persistent="true"
+                settings:searchable="false"
                 settings:controller="com.android.settings.network.telephony.VideoCallingPreferenceController"/>
 
         </PreferenceCategory>
