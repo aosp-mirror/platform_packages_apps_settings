@@ -836,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Modifică"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalii despre dispozitiv"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Setări tastatură"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Mai multe setări"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Actualizări de firmware, informații și altele"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresa Bluetooth a dispozitivului: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Adresa Bluetooth a dispozitivului: \n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Elimini dispozitivul?"</string>
@@ -845,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Ameliorează calitatea audio."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Elimină dispozitivul"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Deconectează aplicația"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Mai multe setări"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Numărul maxim de dispozitive audio Bluetooth conectate"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selectează numărul maxim de dispozitive audio Bluetooth conectate"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Jurnal de remediere erori pentru furnizorii detaliați NFC"</string>
@@ -1332,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Folosești <xliff:g id="CARRIER">%1$s</xliff:g> pentru date mobile?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Folosești <xliff:g id="CARRIER2_0">%2$s</xliff:g> pentru datele mobile. Când comuți la <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> nu va mai fi folosit pentru date mobile."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Folosește <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Actualizezi SIM-ul preferat?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> este singurul card SIM de pe dispozitiv. Vrei să folosești acest card SIM pentru date mobile, apeluri și mesaje SMS?"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Crești acoperirea datelor mobile?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Permite ca dispozitivul să comute automat la <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> pentru date mobile când are o disponibilitate mai mare."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Apelurile, mesajele și traficul de rețea pot fi vizibile pentru organizația ta."</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personalizează gesturi individuale de navigare cu touchpadul"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Derulare inversă"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Conținutul se deplasează în sus când derulezi în jos"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Atingere în dreapta jos"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Atinge colțul din dreapta jos al touchpadului pentru alte opțiuni"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic în dreapta jos"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Dă clic în colțul din dreapta jos pe touchpad pentru opțiuni"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Viteza indicatorului"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Stilul de umplere al pointerului"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Schimbă stilul de umplere în negru"</string>
@@ -3336,14 +3339,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Activat/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> și <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Sau poți activa funcția Audio spațial pentru dispozitivele Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Setări pentru dispozitivele conectate"</string>
-    <!-- no translation found for spatial_audio_multi_toggle_title (6175786400035541273) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_off (2086359413991193164) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_on (2988769235357633788) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (861779551619033627) -->
-    <skip />
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Audio spațial"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Dezactivat"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Dezactivat"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Dezactivat"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Niciunul}=1{Un program setat}few{# programe setate}other{# de programe setate}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Nu deranja"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Moduri cu prioritate"</string>
@@ -3413,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"activează tema întunecată"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Modifică sistemul de operare și aplicațiile astfel încât să se afișeze text de culoare deschisă pe un fundal de culoare închisă, care este mai odihnitor pentru ochi și asigură economisirea considerabilă a bateriei în cazul unor dispozitive"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nicio modificare a afișării}=1{{effect_1}}=2{{effect_1} și {effect_2}}=3{{effect_1}, {effect_2} și {effect_3}}few{{effect_1}, {effect_2} și încă #}other{{effect_1}, {effect_2} și încă #}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Limitează tipurile de notificări primite"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nu sunt filtrate întreruperi"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permite toate notificările"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Persoanele, aplicațiile și sunetele îl pot întrerupe"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opțiuni de afișare pentru notificările filtrate"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Când funcția „Nu deranja” este activată"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Fără sunet de la notificări"</string>
@@ -3641,11 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Poate să răspundă la mesaje și să declanșeze butoane pentru acțiuni din notificări, inclusiv să amâne sau să închidă notificări și să răspundă la apeluri."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"să modifice setările."</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Poate să activeze sau să dezactiveze starea Nu deranja și să modifice setările aferente."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Poate să gestioneze și să activeze Modurile cu prioritate și să modifice setările asociate."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Dacă dezactivezi accesul notificărilor pentru <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, este posibil să se dezactiveze și accesul când starea este Nu deranja."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Dacă dezactivezi accesul la notificări pentru <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, este posibil să fie dezactivat și accesul la Modurile cu prioritate."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Dezactivează"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Anulează"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"În timp real"</string>
@@ -3706,12 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acces la funcția Nu deranja"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permite modul Nu deranja"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Nicio aplicație instalată nu a solicitat accesul Nu deranja"</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Acces la Moduri cu prioritate"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Permite accesul la Modurile cu prioritate"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Nicio aplicație instalată nu a solicitat accesul la Modurile cu prioritate"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Nu ai permis notificările de la această aplicație"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"La solicitarea ta, Android blochează această categorie de notificări pe dispozitiv"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"La solicitarea ta, Android blochează acest grup de notificări pe dispozitiv"</string>
@@ -3894,22 +3888,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimină toate distragerile pentru un mediu liniștit"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalizează experiențele și setările pe dispozitiv pentru utilizatori diferiți"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Redu la minimum întreruperile permițându-le doar persoanelor și aplicațiilor importante să-ți capteze atenția"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Setează un mod care respectă un program regulat"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Menține dispozitivul sincronizat cu evenimentele din ziua respectivă"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Trezește-te cu bateria 100 % încărcată"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Pune siguranța pe primul loc când conduci"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentrează-te pentru performanță maximă"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Pentru momentele în care politețea este importantă"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Folosire ghidată care te ajută să rămâi în siguranță"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Acordă atenție"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Avertisment"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Închide"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Trimite feedback despre dispozitiv"</string>
@@ -4110,14 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Trebuie să rămână activat deoarece accesul notificărilor este activat"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Revoci accesul la Nu deranja pentru <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Toate regulile din modul Nu deranja create de această aplicație vor fi eliminate."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Permiți accesul la Modurile cu prioritate pentru <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Aplicația va putea să activeze / dezactiveze modul Nu deranja, să gestioneze și să activeze Modurile cu prioritate și să modifice setările aferente."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Revoci accesul la Modurile cu prioritate pentru <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Toate modurile create de această aplicație vor fi eliminate."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Nu se optimizează"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Se optimizează"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Este posibil ca bateria să se descarce mai rapid. Aplicațiile vor putea să folosească bateria în fundal."</string>

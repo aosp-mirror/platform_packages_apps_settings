@@ -1543,19 +1543,42 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static void launchBiometricPromptForMandatoryBiometrics(@NonNull Fragment fragment,
             int requestCode, int userId, boolean hideBackground) {
+        fragment.startActivityForResult(getIntentForBiometricAuthentication(fragment.getResources(),
+                userId, hideBackground), requestCode);
+    }
+
+    /**
+     * Launch biometric prompt for mandatory biometrics. Call
+     * {@link #requestBiometricAuthenticationForMandatoryBiometrics(Context, boolean, int)}
+     * to check if all requirements for mandatory biometrics is satisfied
+     * before launching biometric prompt.
+     *
+     * @param activity       corresponding activity of the surface
+     * @param requestCode    for starting the new activity
+     * @param userId         user id for the authentication request
+     * @param hideBackground if the background activity screen needs to be hidden
+     */
+    public static void launchBiometricPromptForMandatoryBiometrics(@NonNull Activity activity,
+            int requestCode, int userId, boolean hideBackground) {
+        activity.startActivityForResult(getIntentForBiometricAuthentication(
+                activity.getResources(), userId, hideBackground), requestCode);
+    }
+
+    private static Intent getIntentForBiometricAuthentication(Resources resources, int userId,
+            boolean hideBackground) {
         final Intent intent = new Intent();
         intent.putExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
         intent.putExtra(BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT,
-                fragment.getString(R.string.cancel));
+                resources.getString(R.string.cancel));
         intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION,
-                fragment.getString(R.string.mandatory_biometrics_prompt_description));
+                resources.getString(R.string.mandatory_biometrics_prompt_description));
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, true);
         intent.putExtra(EXTRA_USER_ID, userId);
         intent.putExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND, hideBackground);
         intent.setClassName(SETTINGS_PACKAGE_NAME,
                 ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
-        fragment.startActivityForResult(intent, requestCode);
+        return intent;
     }
 
     private static void disableComponent(PackageManager pm, ComponentName componentName) {
