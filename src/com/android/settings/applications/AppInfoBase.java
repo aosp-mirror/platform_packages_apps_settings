@@ -136,14 +136,14 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
                 mPackageName = intent.getData().getSchemeSpecificPart();
             }
         }
-        if (!hasInteractAcrossUsersPermission()) {
-            Log.w(TAG, "Intent not valid.");
-            finish();
-            return "";
-        }
         if (intent != null && intent.hasExtra(Intent.EXTRA_USER_HANDLE)) {
-            mUserId = ((UserHandle) intent.getParcelableExtra(
-                    Intent.EXTRA_USER_HANDLE)).getIdentifier();
+            mUserId = ((UserHandle) intent.getParcelableExtra(Intent.EXTRA_USER_HANDLE))
+                    .getIdentifier();
+            if (mUserId != UserHandle.myUserId() && !hasInteractAcrossUsersFullPermission()) {
+                Log.w(TAG, "Intent not valid.");
+                finish();
+                return "";
+            }
         } else {
             mUserId = UserHandle.myUserId();
         }
@@ -171,7 +171,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     }
 
     @VisibleForTesting
-    protected boolean hasInteractAcrossUsersPermission() {
+    protected boolean hasInteractAcrossUsersFullPermission() {
         Activity activity = getActivity();
         if (!(activity instanceof SettingsActivity)) {
             return false;

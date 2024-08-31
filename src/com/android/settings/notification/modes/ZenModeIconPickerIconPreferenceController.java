@@ -24,14 +24,16 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 
 /** Controller used for displaying the currently-chosen icon at the top of the icon picker. */
 class ZenModeIconPickerIconPreferenceController extends AbstractZenModeHeaderController {
 
-    ZenModeIconPickerIconPreferenceController(@NonNull Context context, @NonNull String key,
+    ZenModeIconPickerIconPreferenceController(@NonNull Context context,
+            @NonNull ZenIconLoader iconLoader, @NonNull String key,
             @NonNull DashboardFragment fragment) {
-        super(context, key, fragment);
+        super(context, iconLoader, key, fragment);
     }
 
     @Override
