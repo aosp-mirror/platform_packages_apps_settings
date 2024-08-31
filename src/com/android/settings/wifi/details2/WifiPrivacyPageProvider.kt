@@ -55,6 +55,7 @@ import com.android.settingslib.spa.widget.ui.CategoryTitle
 import com.android.wifitrackerlib.WifiEntry
 import java.time.Clock
 import java.time.ZoneOffset
+import java.util.Base64
 
 const val WIFI_ENTRY_KEY = "wifiEntryKey"
 
@@ -68,7 +69,8 @@ object WifiPrivacyPageProvider : SettingsPageProvider {
 
     @Composable
     override fun Page(arguments: Bundle?) {
-        val wifiEntryKey = arguments!!.getString(WIFI_ENTRY_KEY)
+        val wifiEntryKey =
+            String(Base64.getUrlDecoder().decode(arguments!!.getString(WIFI_ENTRY_KEY)))
         if (wifiEntryKey != null) {
             val context = LocalContext.current
             val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -81,7 +83,7 @@ object WifiPrivacyPageProvider : SettingsPageProvider {
 
     fun getRoute(
         wifiEntryKey: String,
-    ): String = "${name}/$wifiEntryKey"
+    ): String = "${name}/${Base64.getUrlEncoder().encodeToString(wifiEntryKey.toByteArray())}"
 }
 
 @Composable
