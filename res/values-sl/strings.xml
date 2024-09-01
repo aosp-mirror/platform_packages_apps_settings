@@ -836,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Spremeni"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Podrobnosti o napravi"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Nastavitve tipkovnice"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Več nastavitev"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Posodobitve vdelane programske opreme, vizitka in drugo"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Naslov Bluetooth naprave: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Naslov Bluetooth naprave:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Želite, da vaša naprava pozabi seznanjeno napravo?"</string>
@@ -845,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Poskusno. Izboljša kakovost zvoka."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Pozabi napravo"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Prekini povezavo z aplikacijo"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Več nastavitev"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Največje dovoljeno število povezanih zvočnih naprav Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Izberite največje dovoljeno število povezanih zvočnih naprav Bluetooth"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Podroben dnevnik odpravljanja napak NFC za ponudnika"</string>
@@ -1332,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Želite za mobilne podatke uporabiti <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Za prenos podatkov v mobilnem omrežju uporabljate operaterja <xliff:g id="CARRIER2_0">%2$s</xliff:g>. Če preklopite na operaterja <xliff:g id="CARRIER1">%1$s</xliff:g>, operaterja <xliff:g id="CARRIER2_1">%2$s</xliff:g> ne boste več uporabljali za prenos podatkov v mobilnem omrežju."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Uporabi operaterja <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Želite posodobiti prednostno kartico SIM?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> je edina kartica SIM v napravi. Ali želite to kartico SIM uporabljati za prenos podatkov v mobilnih omrežjih, klice in pošiljanje sporočil SMS?"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Izboljšava prenosa mobilnih podatkov?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Napravi dovolite, da za prenos podatkov v mobilnem omrežju samodejno preklopi na operaterja <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g>, kadar ima ta boljšo razpoložljivost."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Klici, sporočila in omrežni promet so lahko vidni vaši organizaciji."</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Prilagajanje potez za krmarjenje na sledilni ploščici"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Obratno pomikanje"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Pri drsenju navzdol se vsebina premika navzgor"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Dotik spodnjega desnega kota"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Za več možnosti se dotaknite sledilne ploščice spodaj desno"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klik v spodnjem desnem kotu"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Za več možnosti kliknite sledilno ploščico spodaj desno"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Hitrost kazalca"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Slog zapolnitve kazalca"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"V črni slog zapolnitve kazalca"</string>
@@ -3409,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"omogoči temno temo"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Preklopite nastavitev operacijskega sistema in aplikacij na svetlo besedilo na temnem ozadju, saj je to manj naporno za oči in v nekaterih napravah bistveno prispeva k varčevanju z energijo baterije"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Brez sprememb prikaza}=1{{effect_1}}=2{{effect_1} in {effect_2}}=3{{effect_1}, {effect_2} in {effect_3}}one{{effect_1}, {effect_2} in še #}two{{effect_1}, {effect_2} in še #}few{{effect_1}, {effect_2} in še #}other{{effect_1}, {effect_2} in še #}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Omejite, kaj vas lahko obvesti"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nobene prekinitve niso filtrirane"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Dovoli vsa obvestila"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Osebe, aplikacije in zvoki lahko prekinejo"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Možnosti prikaza za filtrirana obvestila"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Ko je vklopljen način »Ne moti«"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Brez zvočnega opozarjanja na obvestila"</string>
@@ -3637,11 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Lahko odgovarja na sporočila in izvaja dejanja z gumbi v obvestilih, vključno s prelaganjem ali opuščanjem obvestil in sprejemanjem klicev."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Spreminjanje nastavitev"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Lahko vklopi ali izklopi način »ne moti« in spremeni povezane nastavitve."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Lahko upravlja in aktivira prednostne načine ter spreminja sorodne nastavitve."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Če za aplikacijo <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> izklopite dostop do obvestil, bo dostop do načina »Ne moti« morda tudi izklopljen."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Če za aplikacijo <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> izklopite dostop do obvestil, bo morda izklopljen tudi dostop do prednostnih načinov."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Izklopi"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Prekliči"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"V realnem času"</string>
@@ -3702,12 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Dostop do načina »Ne moti«"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Dovoli način »Ne moti«"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Nobena nameščena aplikacija ni zahtevala dostopa do načina »Ne moti«"</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Dostop do prednostnih načinov"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Dovoli dostop do prednostnih načinov"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Nobena nameščena aplikacija ni zahtevala dostopa do prednostnih načinov"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Niste dovolili obvestil te aplikacije"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Na vašo zahtevo je prikazovanje te kategorije obvestil blokirano v tej napravi Android"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Na vašo zahtevo je prikazovanje te skupine obvestil blokirano v tej napravi Android"</string>
@@ -3890,22 +3888,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Odstranite vse motnje za tiho okolje"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Individualno prilagodite izkušnje in nastavitve v napravi za različne uporabnike"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Poskrbite za čim manj prekinitev tako, da boste dosegljivi le za pomembne osebe in aplikacije"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Nastavite način, ki sledi rednemu urniku"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Poskrbite, da bo naprava sinhronizirana z dnevnimi dogodki"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Zbudite se polni energije"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Naj bo varnost na cesti na prvem mestu"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Povsem se osredotočite"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Za trenutke, ko je pomembna vljudnost"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Vodena uporaba, s katero ste v dobrih rokah"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Prevzemite nadzor nad svojo pozornostjo"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Opozorilo"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Zapri"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Povratne informacije o tej napravi"</string>
@@ -4106,14 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Mora biti vklopljeno, ker je vklopljen dostop do obvestil."</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Želite aplikaciji <xliff:g id="APP">%1$s</xliff:g> preklicati dostop do načina »Ne moti«?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Vsa pravila za način »Ne moti«, ki jih je ustvarila ta aplikacija, bodo odstranjena."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Želite dovoliti dostop do prednostnih načinov za aplikacijo <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Aplikacija bo lahko vklopila/izklopila način »Ne moti«, upravljala in aktivirala prednostne načine ter spreminjala sorodne nastavitve."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Želite preklicati dostop do prednostnih načinov za aplikacijo <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Vsi načini, ki jih je ustvarila ta aplikacija, bodo odstranjeni."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Brez optimizacije"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizacija"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Baterija se lahko hitreje izprazni. Aplikaciji ne bo več preprečena poraba energije baterije v ozadju."</string>
@@ -5229,7 +5215,7 @@
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Znova zaženi pozneje"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Prostorski zvok"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Zvok iz združljivih predstavnosti dobi prostornejšo razsežnost."</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Spremljanje položaja glave"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Spremljanje premikov glave"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Zvok se med premikanjem glave spreminja za naravnejšo izkušnjo."</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Sinhroniziranje dovoljenj iz telefona"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Uri dodelite enaka dovoljenja za aplikacije, kot ste jih dodelili v tem telefonu"</string>
@@ -5397,7 +5383,7 @@
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Poteka deljenje zvoka"</string>
     <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Seznanitev nove naprave"</string>
     <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Pokaži kodo QR"</string>
-    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Vi delite zvok"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Delite zvok"</string>
     <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Poslušalci lahko slišijo vašo predstavnost. Ne bodo pa slišali klicev."</string>
     <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Ustavi deljenje"</string>
     <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Nastavitve"</string>
