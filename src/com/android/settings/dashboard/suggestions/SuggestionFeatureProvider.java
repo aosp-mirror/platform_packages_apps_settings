@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 /** Interface should be implemented if you have added new suggestions */
@@ -46,6 +47,20 @@ public interface SuggestionFeatureProvider {
 
     /**
      * Returns the class of {@link Fragment} that supports contextual suggestion.
+     *
+     * @deprecated - use {@link SuggestionFeatureProvider#getSuggestionFragment()} instead.
      */
-    Class<? extends Fragment> getContextualSuggestionFragment();
+    @Deprecated
+    @Nullable
+    default Class<? extends Fragment> getContextualSuggestionFragment() {
+        return null;
+    }
+
+    /**
+     * Returns the class of {@link Fragment} that provides the UI for Suggestions.
+     */
+    @Nullable
+    default Class<? extends Fragment> getSuggestionFragment() {
+        return getContextualSuggestionFragment();
+    }
 }

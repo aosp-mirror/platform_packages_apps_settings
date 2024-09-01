@@ -31,6 +31,7 @@ import com.android.settings.notification.modes.ZenModesListAddModePreferenceCont
 import com.android.settings.notification.modes.ZenModesListAddModePreferenceController.OnAddModeListener;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexable;
@@ -56,7 +57,7 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             ZenModesBackend backend, OnAddModeListener onAddModeListener) {
         return ImmutableList.of(
-                new ZenModesListPreferenceController(context, backend),
+                new ZenModesListPreferenceController(context, backend, ZenIconLoader.getInstance()),
                 new ZenModesListAddModePreferenceController(context, onAddModeListener)
         );
     }

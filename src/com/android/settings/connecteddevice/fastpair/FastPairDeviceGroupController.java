@@ -35,7 +35,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 
 /**
@@ -66,15 +65,11 @@ public class FastPairDeviceGroupController extends BasePreferenceController
 
     public FastPairDeviceGroupController(Context context) {
         super(context, KEY);
-        if (Flags.enableSubsequentPairSettingsIntegration()) {
-            FastPairFeatureProvider fastPairFeatureProvider =
-                    FeatureFactory.getFeatureFactory().getFastPairFeatureProvider();
-            mFastPairDeviceUpdater =
-                    fastPairFeatureProvider.getFastPairDeviceUpdater(context, this);
-        } else {
-            Log.d(TAG, "Flag disabled. Ignored.");
-            mFastPairDeviceUpdater = null;
-        }
+        FastPairFeatureProvider fastPairFeatureProvider =
+                FeatureFactory.getFeatureFactory().getFastPairFeatureProvider();
+        mFastPairDeviceUpdater =
+                fastPairFeatureProvider.getFastPairDeviceUpdater(context, this);
+
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
     }

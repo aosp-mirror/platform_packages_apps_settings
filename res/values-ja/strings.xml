@@ -836,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"変更"</string>
     <string name="device_details_title" msgid="1155622417516195481">"デバイスの詳細"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"キーボードの設定"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"その他の設定"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"ファームウェアのアップデート、情報など"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"デバイスの Bluetooth アドレス: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"デバイスの Bluetooth アドレス:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"このデバイスとのペア設定を解除しますか？"</string>
@@ -845,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"試験運用中。音声の品質が向上します。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"このデバイスとのペア設定を解除"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"アプリの接続を解除する"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"その他の設定"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"接続できる Bluetooth オーディオ デバイスの上限"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"接続できる Bluetooth オーディオ デバイス数の上限の選択"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC ベンダーの詳細なデバッグログ"</string>
@@ -1332,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"モバイルデータに <xliff:g id="CARRIER">%1$s</xliff:g> を使用？"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"モバイルデータに <xliff:g id="CARRIER2_0">%2$s</xliff:g> を使用しています。<xliff:g id="CARRIER1">%1$s</xliff:g> に切り替えると、モバイルデータに <xliff:g id="CARRIER2_1">%2$s</xliff:g> は使用されなくなります。"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> を使用"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"優先 SIM を変更しますか？"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"デバイス内の SIM は <xliff:g id="NEW_SIM">%1$s</xliff:g> のみです。この SIM をモバイルデータ、通話、SMS メッセージ用に使用しますか？"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"モバイルデータの接続性を改善しますか？"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"<xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> のモバイルデータの方が安定している場合に、デバイスの接続を自動的に切り替えることができます。"</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"通話、メッセージ、ネットワーク トラフィックが組織に公開される可能性があります。"</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"個々のタッチパッド移動操作をカスタマイズします"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"逆スクロール"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"下にスクロールするとコンテンツが上に移動します"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"右下をタップ"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"タッチパッドの右下をタップすると他のオプションが表示されます"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"右下をクリック"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"タッチパッドの右下をクリックするとオプションが表示されます"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"ポインタの速度"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"ポインターの塗りつぶしスタイル"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"ポインターの塗りつぶしを黒色に変更"</string>
@@ -3409,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ダークモードを有効にする"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"暗い背景に明るいテキストを表示するよう OS やアプリを切り替えると、見やすくなることがあり、デバイスによってはバッテリーの大幅な節約につながります"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{表示の変更なし}=1{{effect_1}}=2{{effect_1}、{effect_2}}=3{{effect_1}、{effect_2}、{effect_3}}other{{effect_1}、{effect_2}、他 # 件}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"通知可能な内容を制限する"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"フィルタしている割り込みはありません"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"すべての通知を許可"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"ユーザー、アプリ、サウンドが割り込み可能"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"フィルタした通知の表示オプション"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"サイレント モードが ON のとき"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"通知音なし"</string>
@@ -3637,11 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"メッセージに返信できるほか、通知をスヌーズ、非表示にしたり、電話に出たりするなど、通知内のボタン操作を実行することもできます。"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"設定の変更"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"サイレント モード設定を切り替えたり、関連する設定を変更したりできます。"</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"優先モードの管理や有効化、関連する設定の変更を行えます。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> の通知アクセスを OFF にすると、サイレント モードの利用権限も OFF になります。"</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> の通知アクセスを OFF にすると、優先モードの利用権限も OFF になります。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"OFF にする"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"キャンセル"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"リアルタイム"</string>
@@ -3702,12 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"サイレント モードの利用"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"サイレント モードの利用を許可"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"サイレント モードの利用をリクエストしたインストール済みアプリはありません"</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"優先モードの利用"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"優先モードの利用を許可"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"優先モードの利用をリクエストしたインストール済みアプリはありません"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"このアプリからの通知を許可していません"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"選択された設定に基づき、このカテゴリの通知はこのデバイスには表示されません"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"リクエストに従い、このグループの通知はこのデバイスには表示されません"</string>
@@ -3890,22 +3888,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"気を散らすものを排除して、静かな環境を作ります"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"デバイスの環境や設定をユーザーごとにカスタマイズします"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"大切な人やアプリからの通知のみ届くよう設定することで、割り込みを最小限に抑えます"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"定期的なスケジュールに沿うモードを設定"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"一日の予定をデバイスで常に把握"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"最高の気分で目覚めましょう"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"運転中は安全第一"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"集中して力を最大限に発揮"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"礼儀を尽くす必要があるとき"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"使いこなせるようにサポート"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"集中力をコントロール"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"警告"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"閉じる"</string>
     <string name="device_feedback" msgid="5351614458411688608">"このデバイスについてフィードバックを送信"</string>
@@ -4106,14 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"通知アクセスが ON になっているため ON のままにしておく必要があります"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"<xliff:g id="APP">%1$s</xliff:g> によるサイレント モードの利用権限を取り消しますか？"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"このアプリで作成したすべてのサイレント モード ルールは削除されます。"</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"<xliff:g id="APP">%1$s</xliff:g> による優先モードの利用を許可しますか？"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"アプリはサイレント モードの ON / OFF を切り替えたり、優先モードの管理や有効化を行ったり、関連する設定を変更したりできるようになります。"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"<xliff:g id="APP">%1$s</xliff:g> による優先モードの利用権限を取り消しますか？"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"このアプリで作成したすべてのモードが削除されます。"</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"最適化しない"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"最適化する"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"電池の消耗が速くなる可能性があります。アプリによるバックグランドでの電池使用は制限されなくなります。"</string>
@@ -5390,7 +5376,7 @@
     <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"別のデバイスとの音声の共有"</string>
     <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>と共有"</string>
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"閉じる"</string>
-    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"対応する別のヘッドフォンを接続するか、ストリームの名前とパスワードを共有してください"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"対応する別のヘッドフォンを接続するか、ストリームの名前とパスワードを相手と共有してください"</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"対応する別のヘッドフォンをペア設定するか、音声ストリームの QR コードを共有してください"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"音声を共有中"</string>
     <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"新しいデバイスとペア設定"</string>

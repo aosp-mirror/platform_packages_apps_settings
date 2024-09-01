@@ -32,6 +32,7 @@ import androidx.core.view.MenuProvider;
 
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 
 import java.util.ArrayList;
@@ -54,7 +55,8 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> prefControllers = new ArrayList<>();
-        prefControllers.add(new ZenModeHeaderController(context, "header", this));
+        prefControllers.add(
+                new ZenModeHeaderController(context, ZenIconLoader.getInstance(), "header", this));
         prefControllers.add(new ZenModeBlurbPreferenceController(context, "mode_blurb"));
         prefControllers.add(
                 new ZenModeButtonPreferenceController(context, "activate", this, mBackend));

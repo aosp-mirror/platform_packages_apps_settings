@@ -79,7 +79,7 @@ public class Settings extends SettingsActivity {
     public static class WifiDetailsSettingsActivity extends SettingsActivity {
         @Override
         protected void createUiFromIntent(@Nullable Bundle savedState, Intent intent) {
-            Bundle bundle = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+            Bundle bundle = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
             if (TextUtils.isEmpty(bundle.getString(WifiUtils.KEY_CHOSEN_WIFIENTRY_KEY))) {
                 Log.e(getLocalClassName(), "The key of WifiEntry is empty!");
                 finishAndRemoveTask();

@@ -1017,4 +1017,22 @@
         <item name="android:background">@null</item>
     </style>
 
+    <style name="SuggestionCardStyle">
+        <item name="cardBackgroundColor">@color/settingslib_materialColorPrimary</item>
+        <item name="cardCornerRadius">40dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="TextAppearance.SuggestionCardTitle">
+        <item name="android:textColor">@color/settingslib_materialColorOnPrimary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+    </style>
+
+    <style name="TextAppearance.SuggestionCardSummary">
+        <item name="android:textColor">@color/settingslib_materialColorOnSecondary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
+    </style>
+
 </resources>
