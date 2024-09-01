@@ -836,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"تغییر"</string>
     <string name="device_details_title" msgid="1155622417516195481">"جزئیات دستگاه"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"تنظیمات صفحه‌کلید"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"تنظیمات بیشتر"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"به‌روزرسانی‌های سفت‌افزار، درباره، و موارد دیگر"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"نشانی بلوتوث دستگاه: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"نشانی بلوتوث دستگاه:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"دستگاه فراموش شود؟"</string>
@@ -845,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"آزمایشی. کیفیت صدا را بهبود می‌بخشد."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"فراموش کردن دستگاه"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"قطع ارتباط برنامه"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"تنظیمات بیشتر"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"حداکثر تعداد دستگاه‌های صوتی بلوتوث متصل"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"حداکثر تعداد دستگاه‌های صوتی بلوتوث متصل را انتخاب کنید"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"‏گزارش مفصل اشکال‌زدایی فروشنده NFC"</string>
@@ -1332,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"استفاده از <xliff:g id="CARRIER">%1$s</xliff:g> برای داده همراه؟"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"برای داده تلفن همراه، از <xliff:g id="CARRIER2_0">%2$s</xliff:g> استفاده می‌کنید. اگر به <xliff:g id="CARRIER1">%1$s</xliff:g> جابه‌جا شوید، دیگر <xliff:g id="CARRIER2_1">%2$s</xliff:g> برای داده تلفن همراه استفاده نمی‌شود."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"استفاده از <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"سیم‌کارت ترجیحی به‌روز شود؟"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> تنها سیم‌کارت در دستگاه شما است. می‌خواهید از این سیم‌کارت برای داده شبکه تلفن همراه، تماس تلفنی و پیامک استفاده کنید؟"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"پوشش داده تلفن همراه بهتر شود؟"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"به دستگاهتان اجازه دهید وقتی <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> دسترس‌پذیری بهتری دارد، به‌طور خودكار از آن برای داده تلفن همراه استفاده کند."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"ممکن است سازمانتان بتواند تماس‌ها، پیام‌ها، و ترافیک شبکه را ببیند."</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"سفارشی کردن هر یک از اشاره‌های پیمایش صفحه لمسی"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"پیمایش معکوس"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"وقتی به‌پایین پیمایش کنید، محتوا به‌بالا حرکت می‌کند"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"ضربه به راست پایین"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"برای گزینه‌های بیشتر، روی پایین گوشه چپ صفحه لمسی تک‌ضرب بزنید"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"کلیک پایین راست"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"برای گزینه‌های بیشتر، روی پایین گوشه راست صفحه لمسی کلیک کنید"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"سرعت اشاره‌گر"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"سبک رنگ نشانگر"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"تغییر سبک رنگ نشانگر به سیاه"</string>
@@ -3336,14 +3339,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"روشن / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> و <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"«صدای فضایی» را می‌توانید برای دستگاه‌های بلوتوث هم روشن کنید."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"تنظیمات دستگاه‌های متصل"</string>
-    <!-- no translation found for spatial_audio_multi_toggle_title (6175786400035541273) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_off (2086359413991193164) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_on (2988769235357633788) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (861779551619033627) -->
-    <skip />
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"صدای فضایی"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"خاموش"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"خاموش"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"خاموش"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{هیچ‌کدام}=1{۱ زمان‌بندی تنظیم شد}one{# زمان‌بندی تنظیم شده است}other{# زمان‌بندی تنظیم شده است}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"مزاحم نشوید"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"حالت‌های اولویت‌دار"</string>
@@ -3413,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"فعال کردن زمینه تیره"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"سیستم‌عامل و برنامه‌ها به حالتی می‌روند که در آن، نوشتار روشن روی پس‌زمینه تیره ارجحیت دارد. در این حالت، چشم‌ها کمتر اذیت می‌شود و در برخی دستگاه‌ها در مصرف باتری به‌میزان قابل‌توجهی صرفه‌جویی می‌شود"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{بدون تغییر در نمایشگر}=1{‫{effect_1}}=2{‫{effect_1} و {effect_2}}=3{‫{effect_1}، {effect_2}، و {effect_3}}one{‫{effect_1}، {effect_2}، و # مورد دیگر}other{‫{effect_1}، {effect_2}، و # مورد دیگر}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"محدود کردن مواردی که می‌تواند برایتان اعلان ارسال کند"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"هیچ وقفه‌ای فیلتر نمی‌شود"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"مجاز کردن همه اعلان‌ها"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"ممکن است افراد، برنامه‌ها، و صداها تداخل ایجاد کنند"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"گزینه‌های نمایشگر برای اعلان‌های فیلترشده"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"وقتی «مزاحم نشوید» روشن است"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"بدون صدای اعلان‌ها"</string>
@@ -3641,11 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"می‌تواند به پیام‌ها پاسخ دهد و روی دکمه‌های موجود در اعلان‌ها اقدام کند، ازجمله به‌تعویق انداختن یا رد کردن اعلان‌ها و پاسخ به تماس."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"تغییر تنظیمات"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"می‌تواند «مزاحم نشوید» را روشن یا خاموش کند و تنظیمات مربوطه را تغییر دهد."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"می‌تواند «حالت‌های اولویت‌دار» را مدیریت و فعال کند و تنظیمات مربوطه را تغییر دهد."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"اگر دسترسی اعلان را برای <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> خاموش کنید، دسترسی «مزاحم نشوید» نیز ممکن است خاموش شود."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"اگر دسترسی اعلان را برای <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> خاموش کنید، دسترسی «حالت‌های اولویت‌دار» نیز ممکن است خاموش شود."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"خاموش کردن"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"لغو"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"هم‌زمان"</string>
@@ -3706,12 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"دسترسی به «مزاحم نشوید»"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"مجاز کردن «مزاحم نشوید»"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"هیچ برنامه نصب شده‌ای دسترسی به «مزاحم نشوید» را درخواست نکرده است"</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"دسترسی به «حالت‌های اولویت‌دار»"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"مجاز کردن دسترسی به «حالت‌های اولویت‌دار»"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"هیچ برنامه نصب‌شده‌ای دسترسی به «حالت‌های اولویت‌دار» را درخواست نکرده است"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"اعلان‌های این برنامه را مجاز نکرده‌اید"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"‏طبق درخواست شما، Android این دسته از اعلان‌ها را مسدود می‌کند تا در این دستگاه نشان داده نشوند"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"‏طبق درخواست شما، Android این گروه از اعلان‌ها را مسدود می‌کند تا در این دستگاه نشان داده نشوند"</string>
@@ -3894,22 +3888,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"همه عوامل حواس‌پرتی را حذف کنید تا محیط آرامی داشته باشید"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"تجربه‌ها و تنظیمات دستگاه را برای کاربران مختلف شخصی‌سازی کنید"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"با اجازه دادن فقط به افراد و برنامه‌های مهم برای تماس با شما، مزاحمت‌ها را به‌حداقل برسانید"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"حالتی را تنظیم کنید که زمان‌بندی منظمی را دنبال می‌کند"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"دستگاهتان را با رویدادهای روزمره همگام نگه دارید"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"‏با احساس شارژ ‎٪۱۰۰ بیدار شوید"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"هنگام رانندگی، ایمنی را در اولویت قرار دهید"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"با تمرکز به اوج بهره‌وری برسید"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"برای لحظاتی که نزاکت اهمیت دارد"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"استفاده با راهنما برای مراقبت از سلامتی شما"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"کنترل حواس خود را به‌دست بگیرید"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"هشدار"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"بستن"</string>
     <string name="device_feedback" msgid="5351614458411688608">"ارسال بازخورد درباره این دستگاه"</string>
@@ -4110,14 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"چون دسترسی اعلان روشن است باید روشن بماند"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"دسترسی به «مزاحم نشوید» برای <xliff:g id="APP">%1$s</xliff:g> لغو شد؟"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"همه قوانین «مزاحم نشوید» ایجادشده توسط این برنامه حذف می‌شوند."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"دسترسی <xliff:g id="APP">%1$s</xliff:g> به «حالت‌های اولویت‌دار» مجاز شود؟"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"این برنامه می‌تواند حالت «مزاحم نشوید» را روشن/ خاموش کند، «حالت‌های اولویت‌دار» را مدیریت و فعال کند، و تغییراتی در تنظیمات مربوطه ایجاد کند."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"دسترسی <xliff:g id="APP">%1$s</xliff:g> به «حالت‌های اولویت‌دار» لغو شود؟"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"همه حالت‌هایی که این برنامه ایجاد کرده است حذف خواهد شد."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"بهینه‌سازی نشود"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"بهینه‌سازی"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"ممکن است باتری شما را سریع‌تر خالی کند. استفاده از باتری پس‌زمینه توسط برنامه دیگر محدود نخواهد شد."</string>
@@ -4981,7 +4963,7 @@
     <string name="page_agnostic_16k_pages_text_short" msgid="3282018880292691631">"‏در حالت ۱۶ کیلوبایتی حالت مستقل از صفحه هستید. نمی‌توان تمامیت نرم‌افزار را در این حالت تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند درمعرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader دستگاه را قفل کنید. برای مطالعه بیشتر، تک‌ضرب بزنید."</string>
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"‏در حالت ۱۶ کیلوبایتی حالت مستقل از صفحه هستید. نمی‌توان تمامیت نرم‌افزار را در این حالت تضمین کرد و هرگونه داده‌ای که درمدت باز بودن قفل bootloader در تلفن ذخیره می‌شود می‌تواند درمعرض خطر باشد. برخی‌از ویژگی‌ها در این حالت‌ها غیرفعال می‌شوند بنابراین ممکن است بعضی‌از برنامه‌ها کار نکنند. برای ورود دوباره به حالت تولید، باید به حالت ۴ کیلوبایتی برگردید و سپس bootloader دستگاه را قفل کنید. با این کار، دستگاه دوباره بازنشانی کارخانه‌ای می‌شود و به تنظیمات تولید بازگردانده می‌شود. پس‌از آنکه دستگاه باموفقیت با سیستم‌عامل Android راه‌اندازی شد، «باز کردن قفل سازنده اصلی محصول» را در «گزینه‌های توسعه‌دهندگان» غیرفعال کنید. اگر دستگاه نتوانست باموفقیت با سیستم‌عامل Android راه‌اندازی شود یا ناپایدار بود، دستگاه را با جدیدترین تصویر تنظیمات کارخانه از &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; دوباره فلاش کنید و «محو کردن داده‌های دستگاه»، «قفل کردن Bootloader»، و «فلاش کردن اجباری همه پارتیشن‌ها» را انتخاب کنید."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"حالت مستقل از صفحه ۱۶ کیلوبایتی"</string>
-    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"جزئیات بیشتر"</string>
+    <string name="page_agnostic_notification_action" msgid="2309805437430150456">"خواندن جزئیات بیشتر"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"کنترل‌کننده گزارش اشکال"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"تعیین می‌کند کدام برنامه میان‌بر «گزارش اشکال» را در دستگاه کنترل کند."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"شخصی"</string>

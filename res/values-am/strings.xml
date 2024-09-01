@@ -836,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"ቀይር"</string>
     <string name="device_details_title" msgid="1155622417516195481">"የመሣሪያ ዝርዝሮች"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"የቁልፍ ሰሌዳ ቅንብሮች"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"ተጨማሪ ቅንብሮች"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"የፈርምዌር ዝማኔዎች፣ ስለ እና ሌሎችም"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"የመሣሪያ የብሉቱዝ አድራሻ፦ <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"የመሣሪያ የብሉቱዝ አድራሻ፦\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"መሣሪያ ይረሳ?"</string>
@@ -845,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"የሙከራ። የኦዲዮ ጥራትን ያሻሽላል።"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"መሣሪያን እርሳ"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"የመተግበሪያን ግንኙነትን አቋርጥ"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"ተጨማሪ ቅንብሮች"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"ከፍተኛው የተገናኙ የብሉቱዝ ኦዲዮ መሣሪያዎች ብዛት"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"ከፍተኛው የተገናኙ የብሉቱዝ ኦዲዮ መሣሪያዎች ብዛትን ይምረጡ"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"የኤንኤፍሲ ብዙ ቃላት አቅራቢ ስህተት ማረሚያ ምዝግብ ማስታወሻ"</string>
@@ -1332,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"ለተንቀሳቃሽ ውሂብ <xliff:g id="CARRIER">%1$s</xliff:g> ን ይጠቀም?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"ለተንቀሳቃሽ ውሂብ <xliff:g id="CARRIER2_0">%2$s</xliff:g> ን እየተጠቀሙ ነዎት። ወደ <xliff:g id="CARRIER1">%1$s</xliff:g> ከቀየሩ፣ <xliff:g id="CARRIER2_1">%2$s</xliff:g> ከእንግዲህ ለተንቀሳቃሽ ውሂብ ጥቅም ላይ አይውልም።"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g>ን ይጠቀሙ"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"የመረጡት ሲም ይዘመን?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> በእርስዎ መሣሪያ ላይ ያለው ብቸኛ ሲም ነው። ይህን ሲም ለተንቀሳቃሽ ስልክ ውሂብ፣ ጥሪዎች እና የኤስኤምኤስ መልዕክቶች መጠቀም ይፈልጋሉ?"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"የተንቀሳቃሽ ስልክ ውሂብ ሽፋን ይሻሻል?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"<xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> የተሻለ ተገኝነት ሲኖረው መሣሪያዎ በራስ-ሰር ወደ ተንቀሳቃሽ ስልክ ውሂብ እንዲቀይር ይፍቀዱ።"</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"ጥሪዎች፣ መልዕክቶች እና የአውታረ መረብ ትራፊክ ለድርጅትዎ ሊታይ ይችላል።"</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"የግለሰብ የመዳሰሻ ሰሌዳ የአሰሳ ምልክቶችን ያብጁ"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"ኋልዮሽ መሸብለል"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"ወደ ታሽ ሲያሸበልሉ ይዘት ወደ ላይ ይንቀሳቀሳል"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"ከታች በስተቀኝ መታ"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"ለተጨማሪ አማራጮች የመዳሰሻ ሰሌዳውን የታችኛው ቀኝ ጠርዝ መታ ያድርጉ"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"የታችኛው ቀኝ ጠቅታ"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"ለተጨማሪ አማራጮች የመዳሰሻ ሰሌዳውን የታችኛው ቀኝ ጠርዝ ጠቅ ያድርጉ"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"የጠቋሚ ፍጥነት"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"የጠቋሚ ሙሌት ቅጥ"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"የጠቋሚ ሙሌት ቅጥን ወደ ጥቁር ይለውጡ"</string>
@@ -3336,14 +3339,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"በርቷል / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> እና <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"እንዲሁም ለብሉቱዝ መሣሪያዎች Spatial ኦዲዮን ማብራት ይችላሉ።"</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"የተገናኙ መሣሪያዎች ቅንብሮች"</string>
-    <!-- no translation found for spatial_audio_multi_toggle_title (6175786400035541273) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_off (2086359413991193164) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_on (2988769235357633788) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (861779551619033627) -->
-    <skip />
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Spatial ኦዲዮ"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"ጠፍቷል"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"ጠፍቷል"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"ጠፍቷል"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{ምንም}=1{1 መርሐግብር ተቀናብሯል}one{# መርሐግብሮች ተቀናብረዋል}other{# መርሐግብሮች ተቀናብረዋል}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"አይረብሹ"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"ቅድሚያ ሁነታዎች"</string>
@@ -3413,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ጥቁር ገጽታ አንቃ"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"በጨለማ ዳራ ላይ ብርሃን ጽሁፍን ለመምረጥ ሥርዓተ ክወናውን እና መተግበሪያዎችን ይቀይሩ፣ ይህም ለዓይኖች ቀላል እና በአንዳንድ መሣሪያዎች ላይ ጉልህ የሆነ የባትሪ ኃይል ቁጠባ ይሰጣል"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ምንም የማሳያ ለውጦች የሉም}=1{{effect_1}}=2{{effect_1} እና {effect_2}}=3{{effect_1}፣ {effect_2}፣ እና {effect_3}}one{{effect_1}፣ {effect_2} እና # ተጨማሪ}other{{effect_1}፣ {effect_2} እና # ተጨማሪ}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"ለእርስዎ ሊያሳውቅዎ የሚችለውን ይገድቡ"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"ምንም መቆራረጦች አልተጣሩም"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"ሁሉንም ማሳወቂያዎች ፍቀድ"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"ሰዎች፣ መተግበሪያዎች እና ድምፆች ሊያቋርጡ ይችላሉ"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"ለተጣሩ ማሳወቂያዎች ያሉ የማሳያ አማራጮች"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"አትረብሽ ሲበራ"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"ከማሳወቂያዎች ምንም ድምፅ የለም"</string>
@@ -3641,11 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"ለመልዕክቶች ምላሽ መስጠት እና ማሳወቂያዎችን ማሸለብ ወይም ማሰናከል እና ጥሪዎችን መመለስን ጨምሮ በማሳወቂያዎች ውስጥ ባሉ አዝራሮች ላይ እርምጃ መውሰድ ይችላል።"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"ቅንብሮችን ቀይር"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"አትረብሽን ማብራት ወይም ማጥፋት እና ተዛማጅ ቅንብሮችን መቀየር ይችላል።"</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"የቅድሚያ ሁነታዎችን ማስተዳደር እና ማግበር እና ተዛማጅ ቅንብሮችን መለወጥ ይችላል።"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"የ<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ማሳወቂያ መዳረሻን ካጠፉ የ«አትረብሽ» መዳረሻ እንዲሁም ሊጠፋ ይችላል።"</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"የ<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> የማሳወቂያ መዳረሻን ካጠፉ የቅድሚያ ሁነታዎች መዳረሻም ሊጠፋ ይችላል።"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"አጥፋ"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ይቅር"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"ቅጽበታዊ"</string>
@@ -3706,12 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"የአትረብሽ መዳረሻ"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"አትረብሽን ፍቀድ"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ምንም የተጫኑ መተግበሪያዎች የተጠየቀው አትረብሽ መዳረሻ የላቸውም"</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"የቅድሚያ ሁነታዎች መዳረሻ"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"የቅድሚያ ሁነታዎች መዳረሻን ፍቀድ"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"ምንም የተጫኑ መተግበሪያዎች የቅድሚያ ሁነታዎች መዳረሻ አልጠየቁም"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"ከዚህ መተግበሪያ ማሳወቂያዎችን አልፈቀዱም"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"በጥያቄዎ መሠረት Android ይህ የማሳወቂያዎች ምድብ በዚህ መሣሪያ ላይ እንዳይታይ እያገደ ነው"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"በጥያቄዎ መሠረት Android ይህን የማሳወቂያዎች ስብስብ በዚህ መሣሪያ ላይ እንዳይታይ እያገደ ነው"</string>
@@ -3894,22 +3888,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"ጸጥ ላል አካባቢ ሁሉንም የሚያዘናጉ ነገሮች ያስወግዱ"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"ለተለያዩ ተጠቃሚዎች የመሣሪያ ተሞክሮዎች እና ቅንብሮችን ግላዊነት ያላብሱ"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"አስፈላጊ ሰዎች እና መተግበሪያዎች ብቻ እርስዎን እንዲደርሱ በመፍቀድ መቆራረጦችን ይቀንሱ"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"መደበኛ መርሐግብርን የሚከተል ሁነታን ያቀናብሩ"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"ከእርስዎ ቀን ክስተቶች ጋር መሣሪያዎን በስምረት ውስጥ ያቆዩ"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"100% እየተሰማዎ ከእንቅልፍ ይንቁ"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"በመንገድ ላይ ሳሉ ለደህንነት ቅድሚያ ይስጡ"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"ዞን ውስጥ ለመግባት ትኩረት ያግኙ"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"ዕውቅና በሚቆጠርበት ጊዜ ያሉ አፍታዎች"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"በጥሩ እጆች ውስጥ ለመቆየት እንዲያግዝዎ የተመራ አጠቃቀም"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"ትኩረትዎን ይቆጣጠሩ"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"ማስጠንቀቂያ"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"ዝጋ"</string>
     <string name="device_feedback" msgid="5351614458411688608">"ስለዚህ መሣሪያ ግብረመልስ ላክ"</string>
@@ -4110,14 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"እንደበራ መቆየት አለበት፣ የማሳወቂያ መዳረሻ ስለበራ"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"ለ<xliff:g id="APP">%1$s</xliff:g> የአትረብሽ መዳረሻ ይሻር?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"በዚህ መተግበሪያ የተፈጠሩ የሁሉም አትረብሽ ደንቦች ይወገዳሉ።"</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"ለ<xliff:g id="APP">%1$s</xliff:g> የቅድሚያ ሁነታዎች መዳረሻ ይፈቀድ?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"መተግበሪያው አትረብሽ፣ አስተዳድር እና የቅድሚያ ሁነታዎችን አግብርን ማብራት/ማጥፋት እና በተዛማጅ ቅንብሮች ላይ ለውጦችን ማድረግ ይችላል።"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"ለ<xliff:g id="APP">%1$s</xliff:g> የቅድሚያ ሁነታ መዳረሻ ይወገድ?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"በዚህ መተግበሪያ የተፈጠሩ ሁሉም ሁነታዎች ይወገዳሉ።"</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"አታትባ"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"አትባ"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"ባትሪዎን በበለጠ ፍጥነት ሊጨርሰው ይችላል። መተግበሪያ ከእንግዲህ በዳራ ባትሪ ከመጠቀም ከእንግዲህ አይገደብም።"</string>
