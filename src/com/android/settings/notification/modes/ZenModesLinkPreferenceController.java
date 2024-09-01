@@ -18,6 +18,7 @@ package com.android.settings.notification.modes;
 
 import android.app.Flags;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -30,6 +31,7 @@ import com.android.settingslib.notification.modes.ZenModesBackend;
 
 public class ZenModesLinkPreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
+    private static final String TAG = "ModesLinkPrefController";
 
     private final ZenModesBackend mBackend;
     private final ZenSettingsObserver mSettingObserver;
@@ -71,7 +73,13 @@ public class ZenModesLinkPreferenceController extends BasePreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        preference.setSummary(mSummaryBuilder.getModesSummary(mBackend.getModes()));
+        try {
+            preference.setSummary(mSummaryBuilder.getModesSummary(mBackend.getModes()));
+        } catch (SecurityException e) {
+            // Standard usage should have the correct permissions to read zen state. But if we don't
+            // for whatever reason, don't crash.
+            Log.w(TAG, "No permission to read mode state");
+        }
     }
 
     @Override
