@@ -25,6 +25,7 @@ import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -64,6 +65,7 @@ public class AudioSharingDialogHandler {
     @Nullable private final CachedBluetoothDeviceManager mDeviceManager;
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
+    @Nullable private final AudioManager mAudioManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private boolean mIsStoppingBroadcast = false;
 
@@ -157,6 +159,7 @@ public class AudioSharingDialogHandler {
                 mLocalBtManager != null
                         ? mLocalBtManager.getProfileManager().getLeAudioBroadcastAssistantProfile()
                         : null;
+        mAudioManager = context.getSystemService(AudioManager.class);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
@@ -178,6 +181,22 @@ public class AudioSharingDialogHandler {
     public void handleDeviceConnected(
             @NonNull CachedBluetoothDevice cachedDevice, boolean userTriggered) {
         String anonymizedAddress = cachedDevice.getDevice().getAnonymizedAddress();
+        if (mAudioManager != null) {
+            int audioMode = mAudioManager.getMode();
+            if (audioMode == AudioManager.MODE_RINGTONE
+                    || audioMode == AudioManager.MODE_IN_CALL
+                    || audioMode == AudioManager.MODE_IN_COMMUNICATION) {
+                Log.d(TAG, "Skip handleDeviceConnected, audio mode = " + audioMode);
+                // TODO: add metric for this case
+                if (userTriggered) {
+                    // If this method is called with user triggered, e.g. manual click on the
+                    // "Connected devices" page, we need call setActive for the device, since user
+                    // intend to switch active device for the call.
+                    cachedDevice.setActive();
+                }
+                return;
+            }
+        }
         boolean isBroadcasting = isBroadcasting();
         boolean isLeAudioSupported = AudioSharingUtils.isLeAudioSupported(cachedDevice);
         if (!isLeAudioSupported) {
