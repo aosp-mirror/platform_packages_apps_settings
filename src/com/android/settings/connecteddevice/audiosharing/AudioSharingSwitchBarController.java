@@ -201,6 +201,19 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
+                    if (mAssistant == null
+                            || mAssistant.getAllConnectedDevices().stream()
+                                    .anyMatch(
+                                            device -> BluetoothUtils
+                                                    .hasActiveLocalBroadcastSourceForBtDevice(
+                                                            device, mBtManager))) {
+                        Log.d(
+                                TAG,
+                                "Skip handleOnBroadcastReady: null assistant or "
+                                        + "sink has active local source.");
+                        cleanUp();
+                        return;
+                    }
                     handleOnBroadcastReady();
                 }
 
@@ -554,8 +567,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                         mGroupedConnectedDevices.getOrDefault(
                                 mDeviceItemsForSharing.get(0).getGroupId(), ImmutableList.of()),
                         mBtManager);
-                mGroupedConnectedDevices.clear();
-                mDeviceItemsForSharing.clear();
+                cleanUp();
                 // TODO: Add metric for auto add by intent
                 return;
             }
@@ -565,8 +577,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 StartIntentHandleStage.HANDLED.ordinal());
         if (mFragment == null) {
             Log.d(TAG, "handleOnBroadcastReady: dialog fail to show due to null fragment.");
-            mGroupedConnectedDevices.clear();
-            mDeviceItemsForSharing.clear();
+            cleanUp();
             return;
         }
         showDialog(eventData);
@@ -581,14 +592,12 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                 mGroupedConnectedDevices.getOrDefault(
                                         item.getGroupId(), ImmutableList.of()),
                                 mBtManager);
-                        mGroupedConnectedDevices.clear();
-                        mDeviceItemsForSharing.clear();
+                        cleanUp();
                     }
 
                     @Override
                     public void onCancelClick() {
-                        mGroupedConnectedDevices.clear();
-                        mDeviceItemsForSharing.clear();
+                        cleanUp();
                     }
                 };
         AudioSharingUtils.postOnMainThread(
@@ -655,6 +664,11 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                             AudioSharingUtils.postOnMainThread(
                                     mContext, () -> mSwitchBar.setChecked(true));
                         });
+    }
+
+    private void cleanUp() {
+        mGroupedConnectedDevices.clear();
+        mDeviceItemsForSharing.clear();
     }
 
     private enum StartIntentHandleStage {
