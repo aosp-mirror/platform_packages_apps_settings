@@ -27,6 +27,7 @@ import android.telephony.ims.ImsStateCallback
 import android.telephony.ims.RegistrationManager
 import android.telephony.ims.feature.MmTelFeature
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import kotlin.coroutines.resume
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
@@ -52,11 +53,6 @@ interface ImsMmTelRepository {
         @MmTelFeature.MmTelCapabilities.MmTelCapability capability: Int,
         @AccessNetworkConstants.TransportType transportType: Int,
     ): Flow<Boolean>
-
-    suspend fun isSupported(
-        @MmTelFeature.MmTelCapabilities.MmTelCapability capability: Int,
-        @AccessNetworkConstants.TransportType transportType: Int,
-    ): Boolean
 
     suspend fun setCrossSimCallingEnabled(enabled: Boolean)
 }
@@ -143,7 +139,8 @@ class ImsMmTelRepositoryImpl(
     override fun isSupportedFlow(capability: Int, transportType: Int): Flow<Boolean> =
         imsReadyFlow().map { imsReady -> imsReady && isSupported(capability, transportType) }
 
-    override suspend fun isSupported(
+    @VisibleForTesting
+    suspend fun isSupported(
         @MmTelFeature.MmTelCapabilities.MmTelCapability capability: Int,
         @AccessNetworkConstants.TransportType transportType: Int,
     ): Boolean = withContext(Dispatchers.Default) {
