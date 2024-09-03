@@ -39,6 +39,7 @@ import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -113,6 +114,7 @@ public class AudioSharingDialogHandlerTest {
     @Mock private CachedBluetoothDeviceManager mCacheManager;
     @Mock private LocalBluetoothLeBroadcast mBroadcast;
     @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
+    @Mock private AudioManager mAudioManager;
     @Mock private CachedBluetoothDevice mCachedDevice1;
     @Mock private CachedBluetoothDevice mCachedDevice2;
     @Mock private CachedBluetoothDevice mCachedDevice3;
@@ -152,6 +154,8 @@ public class AudioSharingDialogHandlerTest {
         when(mLocalBtManager.getProfileManager()).thenReturn(mLocalBtProfileManager);
         when(mLocalBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
         when(mLocalBtProfileManager.getLeAudioBroadcastAssistantProfile()).thenReturn(mAssistant);
+        when(mContext.getSystemService(AudioManager.class)).thenReturn(mAudioManager);
+        when(mAudioManager.getMode()).thenReturn(AudioManager.MODE_NORMAL);
         List<Long> bisSyncState = new ArrayList<>();
         bisSyncState.add(1L);
         when(mState.getBisSyncState()).thenReturn(bisSyncState);
@@ -185,6 +189,18 @@ public class AudioSharingDialogHandlerTest {
     @After
     public void tearDown() {
         ShadowBluetoothUtils.reset();
+    }
+
+    @Test
+    public void handleUserTriggeredDeviceConnected_inCall_setActive() {
+        when(mAudioManager.getMode()).thenReturn(AudioManager.MODE_IN_CALL);
+        setUpBroadcast(true);
+        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(deviceList);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
+        mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+        verify(mCachedDevice1).setActive();
     }
 
     @Test
@@ -401,6 +417,18 @@ public class AudioSharingDialogHandlerTest {
         listener.onItemClick(AudioSharingUtils.buildAudioSharingDeviceItem(mCachedDevice3));
         verify(mAssistant).removeSource(mDevice3, TEST_SOURCE_ID);
         verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
+    }
+
+    @Test
+    public void handleDeviceConnected_inCall_doNothing() {
+        when(mAudioManager.getMode()).thenReturn(AudioManager.MODE_IN_CALL);
+        setUpBroadcast(true);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
+        mHandler.handleDeviceConnected(mCachedDevice2, /* userTriggered= */ false);
+        shadowOf(Looper.getMainLooper()).idle();
+        verify(mCachedDevice2, never()).setActive();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).isEmpty();
     }
 
     @Test
