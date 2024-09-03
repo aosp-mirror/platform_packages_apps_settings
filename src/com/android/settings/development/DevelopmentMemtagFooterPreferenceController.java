@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings.security;
+package com.android.settings.development;
 
 import android.content.Context;
 import android.text.TextUtils;
