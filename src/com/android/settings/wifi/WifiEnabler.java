@@ -139,7 +139,8 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
         // Refresh satellite mode status.
         try {
             mIsSatelliteOn.set(
-                    mSatelliteRepository.requestIsEnabled(Executors.newSingleThreadExecutor())
+                    mSatelliteRepository
+                            .requestIsSessionStarted(Executors.newSingleThreadExecutor())
                             .get(2000, TimeUnit.MILLISECONDS));
         } catch (ExecutionException | TimeoutException | InterruptedException e) {
             Log.e(TAG, "Error to get satellite status : " + e);

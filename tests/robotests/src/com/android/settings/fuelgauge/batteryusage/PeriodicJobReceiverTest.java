@@ -108,7 +108,7 @@ public final class PeriodicJobReceiverTest {
 
         mReceiver.onReceive(mContext, JOB_UPDATE_INTENT);
 
-        TimeUnit.MILLISECONDS.sleep(100);
+        TimeUnit.MILLISECONDS.sleep(1000);
         assertThat(mDao.getAllAfter(0)).hasSize(1);
     }
 
@@ -119,7 +119,7 @@ public final class PeriodicJobReceiverTest {
 
         mReceiver.onReceive(mContext, JOB_UPDATE_INTENT);
 
-        TimeUnit.MILLISECONDS.sleep(100);
+        TimeUnit.MILLISECONDS.sleep(1000);
         assertThat(mDao.getAllAfter(0)).hasSize(3);
     }
 

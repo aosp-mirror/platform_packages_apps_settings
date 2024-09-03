@@ -18,7 +18,6 @@ package com.android.settings.connecteddevice;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
-import android.provider.DeviceConfig;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -28,13 +27,12 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingDevicePreferenceController;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.HearingAidStatsLogUtils;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -71,11 +69,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        final boolean nearbyEnabled =
-                DeviceConfig.getBoolean(
-                        DeviceConfig.NAMESPACE_SETTINGS_UI,
-                        SettingsUIDeviceConfig.BT_NEAR_BY_SUGGESTION_ENABLED,
-                        true);
         String callingAppPackageName =
                 ((SettingsActivity) getActivity()).getInitialCallingPackage();
         String action = getIntent() != null ? getIntent().getAction() : "";
@@ -87,17 +80,14 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                             + ", action : "
                             + action);
         }
-        if (AudioSharingUtils.isFeatureEnabled()) {
+        if (BluetoothUtils.isAudioSharingEnabled()) {
             use(AudioSharingDevicePreferenceController.class).init(this);
         }
         use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
         use(SlicePreferenceController.class)
-                .setSliceUri(
-                        nearbyEnabled
-                                ? Uri.parse(getString(R.string.config_nearby_devices_slice_uri))
-                                : null);
+                .setSliceUri(Uri.parse(getString(R.string.config_nearby_devices_slice_uri)));
         use(DiscoverableFooterPreferenceController.class)
                 .setAlwaysDiscoverable(isAlwaysDiscoverable(callingAppPackageName, action));
 

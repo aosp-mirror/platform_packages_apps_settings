@@ -15,6 +15,9 @@
  */
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.DaltonizerPreferenceUtil.isSecureAccessibilityDaltonizerEnabled;
+import static com.android.settings.accessibility.DaltonizerPreferenceUtil.getSecureAccessibilityDaltonizerValue;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -158,14 +161,11 @@ public class DaltonizerSaturationSeekbarPreferenceController
     }
 
     private boolean shouldSeekBarEnabled() {
-        int enabled = Settings.Secure.getInt(
-                mContentResolver, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, 0);
-        int mode = Settings.Secure.getInt(
-                mContentResolver, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, -1);
+        boolean enabled = isSecureAccessibilityDaltonizerEnabled(mContentResolver);
+        int mode = getSecureAccessibilityDaltonizerValue(mContentResolver);
 
-        // enabled == 0 is disabled and also default.
         // mode == 0 is gray scale where saturation level isn't applicable.
         // mode == -1 is disabled and also default.
-        return enabled != 0 && mode != -1 && mode != 0;
+        return enabled && mode != -1 && mode != 0;
     }
 }

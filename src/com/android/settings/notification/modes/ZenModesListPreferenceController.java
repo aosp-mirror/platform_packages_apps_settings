@@ -25,6 +25,7 @@ import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexableRaw;
@@ -38,19 +39,18 @@ import java.util.Map;
  * containing links to each individual mode. This is a central controller that populates and updates
  * all the preferences that then lead to a mode configuration page.
  */
-class ZenModesListPreferenceController extends BasePreferenceController {
+class ZenModesListPreferenceController extends BasePreferenceController
+        implements BasePreferenceController.UiBlocker {
     protected static final String KEY = "zen_modes_list";
 
-    protected ZenModesBackend mBackend;
+    private final ZenModesBackend mBackend;
+    private final ZenIconLoader mIconLoader;
 
-    ZenModesListPreferenceController(Context context, @NonNull ZenModesBackend backend) {
+    ZenModesListPreferenceController(Context context, @NonNull ZenModesBackend backend, @NonNull
+            ZenIconLoader iconLoader) {
         super(context, KEY);
         mBackend = backend;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY;
+        mIconLoader = iconLoader;
     }
 
     @Override
@@ -86,7 +86,7 @@ class ZenModesListPreferenceController extends BasePreferenceController {
                 modePreference.setZenMode(mode);
             } else {
                 // new rule; create a new ZenRulePreference & add it to the preference category
-                modePreference = new ZenModesListItemPreference(mContext, mode);
+                modePreference = new ZenModesListItemPreference(mContext, mIconLoader, mode);
                 category.addPreference(modePreference);
             }
             modePreference.setOrder(modes.indexOf(mode));
@@ -97,6 +97,8 @@ class ZenModesListPreferenceController extends BasePreferenceController {
         for (String key : originalPreferences.keySet()) {
             category.removePreferenceRecursively(key);
         }
+
+        setUiBlockerFinished(true);
     }
 
     // Provide search data for the modes, which will allow users to reach the modes page if they

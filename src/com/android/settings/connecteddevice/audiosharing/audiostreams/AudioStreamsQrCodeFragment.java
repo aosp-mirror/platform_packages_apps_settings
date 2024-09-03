@@ -61,6 +61,8 @@ public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Collapse or expand the app bar based on orientation for better display the qr code image.
+        AudioStreamsHelper.configureAppBarByOrientation(getActivity());
         var unused = ThreadUtils.postOnBackgroundThread(
                 () -> {
                     BluetoothLeBroadcastMetadata broadcastMetadata = getBroadcastMetadata();

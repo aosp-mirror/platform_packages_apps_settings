@@ -58,9 +58,10 @@
             android:lineBreakWordStyle="phrase"
             android:maxLines="10"/>
 
-        <!-- Circular icons (32dp) will be ImageViews under this LinearLayout -->
-        <LinearLayout
+        <!-- Circular icons (32dp) will be ImageViews under this container -->
+        <com.android.settings.notification.modes.CircularIconsView
             android:id="@+id/circles_container"
+            android:importantForAccessibility="noHideDescendants"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_width="match_parent"

@@ -20,25 +20,33 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 
 /** Controller used for displaying the currently-chosen icon at the top of the icon picker. */
 class ZenModeIconPickerIconPreferenceController extends AbstractZenModeHeaderController {
 
-    ZenModeIconPickerIconPreferenceController(@NonNull Context context, @NonNull String key,
+    ZenModeIconPickerIconPreferenceController(@NonNull Context context,
+            @NonNull ZenIconLoader iconLoader, @NonNull String key,
             @NonNull DashboardFragment fragment) {
-        super(context, key, fragment);
+        super(context, iconLoader, key, fragment);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        setUpHeader(screen, mContext.getResources().getDimensionPixelSize(
+                R.dimen.zen_mode_icon_list_header_circle_diameter));
     }
 
     @Override
     void updateState(Preference preference, @NonNull ZenMode zenMode) {
         updateIcon(preference, zenMode,
-                mContext.getResources().getDimensionPixelSize(
-                        R.dimen.zen_mode_icon_list_header_circle_diameter),
                 icon -> IconUtil.makeIconPickerHeader(mContext, icon),
-                null);
+                /* isSelected= */ false);
     }
 }

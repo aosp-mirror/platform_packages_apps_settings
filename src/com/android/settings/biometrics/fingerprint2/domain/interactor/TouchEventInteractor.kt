@@ -24,4 +24,3 @@ interface TouchEventInteractor {
   /** A flow simulating user touches. */
   val touchEvent: Flow<MotionEvent>
 }
-

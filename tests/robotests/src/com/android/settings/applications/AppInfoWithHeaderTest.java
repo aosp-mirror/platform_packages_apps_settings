@@ -171,6 +171,32 @@ public class AppInfoWithHeaderTest {
         assertThat(mAppInfoWithHeader.mAppEntry).isNotNull();
     }
 
+    @Test
+    public void noCrossUserPermission_retrieveAppEntry_fail()
+            throws PackageManager.NameNotFoundException {
+        TestFragmentWithoutPermission testFragmentWithoutPermission =
+                new TestFragmentWithoutPermission();
+        final int userId = 1002;
+        final String packageName = "com.android.settings";
+
+        testFragmentWithoutPermission.mIntent.putExtra(Intent.EXTRA_USER_HANDLE,
+                new UserHandle(userId));
+        testFragmentWithoutPermission.mIntent.setData(Uri.fromParts("package",
+                packageName, null));
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        entry.info.packageName = packageName;
+
+        when(testFragmentWithoutPermission.mState.getEntry(packageName, userId)).thenReturn(entry);
+        when(testFragmentWithoutPermission.mPm.getPackageInfoAsUser(eq(entry.info.packageName),
+                any(), eq(userId))).thenReturn(
+                testFragmentWithoutPermission.mPackageInfo);
+
+        testFragmentWithoutPermission.retrieveAppEntry();
+
+        assertThat(testFragmentWithoutPermission.mAppEntry).isNull();
+    }
+
     public static class TestFragment extends AppInfoWithHeader {
 
         PreferenceManager mManager;
@@ -224,6 +250,11 @@ public class AppInfoWithHeaderTest {
         }
 
         @Override
+        protected boolean hasInteractAcrossUsersFullPermission() {
+            return true;
+        }
+
+        @Override
         protected void onPackageRemoved() {
             mPackageRemovedCalled = true;
         }
@@ -231,6 +262,13 @@ public class AppInfoWithHeaderTest {
         @Override
         protected Intent getIntent() {
             return mIntent;
+        }
+    }
+
+    private static final class TestFragmentWithoutPermission extends TestFragment {
+        @Override
+        protected boolean hasInteractAcrossUsersFullPermission() {
+            return false;
         }
     }
 }

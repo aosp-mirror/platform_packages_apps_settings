@@ -16,12 +16,18 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.flags.Flags.FLAG_ENABLE_VECTOR_CURSOR_A11Y_SETTINGS;
+
 import static com.android.settings.accessibility.LargePointerIconPreferenceController.OFF;
 import static com.android.settings.accessibility.LargePointerIconPreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 
 import androidx.preference.SwitchPreference;
@@ -31,11 +37,15 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 public class LargePointerIconPreferenceControllerTest {
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private static final int UNKNOWN = -1;
 
@@ -51,9 +61,17 @@ public class LargePointerIconPreferenceControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(FLAG_ENABLE_VECTOR_CURSOR_A11Y_SETTINGS)
     public void getAvailabilityStatus_shouldReturnAvailable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(FLAG_ENABLE_VECTOR_CURSOR_A11Y_SETTINGS)
+    public void getAvailabilityStatus_shouldReturnConditionallyUnavailable() {
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
