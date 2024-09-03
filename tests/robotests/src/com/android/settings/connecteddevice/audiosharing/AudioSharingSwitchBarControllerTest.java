@@ -443,6 +443,7 @@ public class AudioSharingSwitchBarControllerTest {
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController =
@@ -469,11 +470,37 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    public void onPlaybackStarted_hasLocalSource_noDialog() {
+        FeatureFlagUtils.setEnabled(
+                mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
+        when(mBtnView.isEnabled()).thenReturn(true);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        BluetoothLeBroadcastReceiveState state = mock(BluetoothLeBroadcastReceiveState.class);
+        when(state.getBroadcastId()).thenReturn(1);
+        when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
+        when(mAssistant.getAllSources(mDevice2)).thenReturn(ImmutableList.of(state));
+        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
+        doNothing().when(mBroadcast).startPrivateBroadcast();
+        mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        verify(mBroadcast).startPrivateBroadcast();
+        mController.mBroadcastCallback.onPlaybackStarted(0, 0);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mAssistant, never()).addSource(any(), any(), anyBoolean());
+        verify(mFeatureFactory.metricsFeatureProvider, never())
+                .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
+
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).isEmpty();
+    }
+
+    @Test
     public void onPlaybackStarted_showJoinAudioSharingDialog() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
@@ -519,6 +546,7 @@ public class AudioSharingSwitchBarControllerTest {
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
@@ -545,6 +573,7 @@ public class AudioSharingSwitchBarControllerTest {
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
