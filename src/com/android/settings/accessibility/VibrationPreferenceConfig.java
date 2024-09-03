@@ -27,6 +27,7 @@ import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -165,7 +166,7 @@ public abstract class VibrationPreferenceConfig {
 
         /** Creates observer for given preference. */
         public SettingObserver(VibrationPreferenceConfig preferenceConfig) {
-            super(new Handler(/* async= */ true));
+            super(Looper.myLooper() != null ? new Handler(/* async= */ true) : null);
             mUri = Settings.System.getUriFor(preferenceConfig.getSettingKey());
 
             if (preferenceConfig.isRestrictedByRingerModeSilent()) {
