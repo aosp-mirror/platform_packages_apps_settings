@@ -29,9 +29,7 @@ import com.android.settings.network.telephony.ims.ImsMmTelRepository
 import com.android.settings.network.telephony.ims.ImsMmTelRepositoryImpl
 import com.android.settings.network.telephony.telephonyManager
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
 
 interface IWifiCallingRepository {
     /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
@@ -75,11 +73,4 @@ constructor(
             tech = ImsRegistrationImplBase.REGISTRATION_TECH_IWLAN,
             transportType = AccessNetworkConstants.TRANSPORT_TYPE_WLAN,
         )
-
-    suspend fun isWifiCallingSupported(): Boolean = withContext(Dispatchers.Default) {
-        imsMmTelRepository.isSupported(
-            capability = MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
-            transportType = AccessNetworkConstants.TRANSPORT_TYPE_WLAN,
-        )
-    }
 }
