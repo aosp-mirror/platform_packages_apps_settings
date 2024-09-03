@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.modes;
 
+import static android.app.NotificationManager.INTERRUPTION_FILTER_NONE;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_IMPORTANT;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_ANYONE;
 import static android.service.notification.ZenPolicy.PEOPLE_TYPE_CONTACTS;
@@ -114,6 +115,20 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
                 (Answer<Drawable>) invocationOnMock -> photoOf(invocationOnMock.getArgument(0)));
         when(mConversationIconFactory.getConversationDrawable((ShortcutInfo) any(), any(), anyInt(),
                 anyBoolean())).thenReturn(new ColorDrawable(Color.BLACK));
+    }
+
+    @Test
+    public void updateState_dnd_enabled() {
+        ZenMode dnd = TestModeBuilder.MANUAL_DND_ACTIVE;
+        mController.updateState(mPreference, dnd);
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_specialDnd_disabled() {
+        ZenMode specialDnd = TestModeBuilder.manualDnd(INTERRUPTION_FILTER_NONE, true);
+        mController.updateState(mPreference, specialDnd);
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test

@@ -44,8 +44,8 @@ class InterruptionFilterPreferenceController extends AbstractZenModePreferenceCo
 
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        preference.setEnabled(zenMode.isEnabled());
-        boolean allowingAll = zenMode.getRule().getInterruptionFilter() == INTERRUPTION_FILTER_ALL;
+        preference.setEnabled(zenMode.isEnabled() && zenMode.canEditPolicy());
+        boolean allowingAll = zenMode.getInterruptionFilter() == INTERRUPTION_FILTER_ALL;
 
         ((TwoStatePreference) preference).setChecked(allowingAll);
         preference.setSummary(allowingAll
@@ -57,7 +57,7 @@ class InterruptionFilterPreferenceController extends AbstractZenModePreferenceCo
     public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
         final boolean allowAll = ((Boolean) newValue);
         return saveMode(zenMode -> {
-            zenMode.getRule().setInterruptionFilter(allowAll
+            zenMode.setInterruptionFilter(allowAll
                     ? INTERRUPTION_FILTER_ALL
                     : INTERRUPTION_FILTER_PRIORITY);
             return zenMode;
