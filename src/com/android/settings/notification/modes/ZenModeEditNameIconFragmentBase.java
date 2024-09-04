@@ -30,6 +30,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
@@ -102,7 +103,8 @@ public abstract class ZenModeEditNameIconFragmentBase extends DashboardFragment 
     protected final List<AbstractPreferenceController> createPreferenceControllers(
             Context context) {
         return ImmutableList.of(
-                new ZenModeIconPickerIconPreferenceController(context, "chosen_icon", this),
+                new ZenModeIconPickerIconPreferenceController(context, ZenIconLoader.getInstance(),
+                        "chosen_icon", this),
                 new ZenModeEditNamePreferenceController(context, "name", this::setModeName),
                 new ZenModeIconPickerListPreferenceController(context, "icon_list",
                         this::setModeIcon),

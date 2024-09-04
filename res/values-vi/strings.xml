@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Bị tạm ngưng"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Không xác định"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Xem trước"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"Mã QR"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Thu nhỏ"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Phóng to"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Luôn luôn"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Bạn chưa thể chọn ngôn ngữ cho ứng dụng này trong phần Cài đặt."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Ngôn ngữ có thể khác với ngôn ngữ có sẵn trong ứng dụng. Một số ứng dụng có thể không hỗ trợ cài đặt này."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Đặt ngôn ngữ cho từng ứng dụng."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Hệ thống, các ứng dụng và trang web sẽ sử dụng ngôn ngữ đầu tiên được hỗ trợ trong số các ngôn ngữ mà bạn ưu tiên."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Thiết bị của bạn, các ứng dụng và trang web sẽ sử dụng ngôn ngữ trên cùng được hỗ trợ trong danh sách ngôn ngữ mà bạn ưu tiên.\n\nNhiều ứng dụng cũng sẽ định dạng ngày tháng, số và đơn vị theo khu vực tương ứng với ngôn ngữ ưu tiên của bạn. Để thay đổi khu vực, hãy thêm một ngôn ngữ, sau đó chọn khu vực bạn muốn."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Để chọn ngôn ngữ cho từng ứng dụng, hãy chuyển đến phần cài đặt ngôn ngữ ứng dụng."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Tìm hiểu thêm về ngôn ngữ ứng dụng"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Thay đổi ngôn ngữ hệ thống thành %s ?"</string>
@@ -412,7 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Đã thêm khuôn mặt và <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Đã thêm khuôn mặt, vân tay và <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Đã thêm khuôn mặt, vân tay và <xliff:g id="WATCH">%s</xliff:g>"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Điều này là cần thiết vì tính năng Kiểm tra danh tính đang bật"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"Tính năng Kiểm tra danh tính đang bật"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Mở khoá từ xa bằng Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Đã thêm đồng hồ"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Thiết lập đồng hồ"</string>
@@ -624,6 +623,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Đang thiết lập không gian riêng tư…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Không thiết lập được không gian riêng tư"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Thử lại"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Thoát"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Không dùng được không gian riêng tư.\nXem nguyên nhân có thể gây lỗi"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Xem nguyên nhân có thể gây lỗi"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Chọn một phương thức khoá mới cho không gian riêng tư?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Bạn có thể đặt một phương thức khoá mới dành riêng cho không gian riêng tư, hoặc sử dụng phương thức khoá mà bạn dùng để mở khoá thiết bị của mình"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Dùng phương thức khoá màn hình"</string>
@@ -834,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Thay đổi"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Chi tiết thiết bị"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Cài đặt bàn phím"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Chế độ cài đặt khác"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Bản cập nhật chương trình cơ sở, giới thiệu, khác"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Địa chỉ Bluetooth của thiết bị: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Địa chỉ Bluetooth của thiết bị:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Xóa thiết bị"</string>
@@ -843,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Thử nghiệm. Tăng chất lượng âm thanh."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Xóa thiết bị"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Ngắt kết nối ứng dụng"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Chế độ cài đặt khác"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Số thiết bị âm thanh được kết nối qua Bluetooth tối đa"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Chọn số thiết bị âm thanh được kết nối qua Bluetooth tối đa"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Nhật ký gỡ lỗi chi tiết của nhà cung cấp về NFC"</string>
@@ -1330,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Sử dụng <xliff:g id="CARRIER">%1$s</xliff:g> cho dữ liệu di động?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Bạn đang sử dụng <xliff:g id="CARRIER2_0">%2$s</xliff:g> cho dữ liệu di động. Nếu chuyển sang <xliff:g id="CARRIER1">%1$s</xliff:g>, bạn sẽ không dùng được <xliff:g id="CARRIER2_1">%2$s</xliff:g> cho dữ liệu di động nữa."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Sử dụng <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Cập nhật SIM ưu tiên?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> là SIM duy nhất trong thiết bị của bạn. Bạn có muốn sử dụng SIM này cho dữ liệu di động, cuộc gọi và tin nhắn SMS không?"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Cải thiện phạm vi dữ liệu di động?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Cho phép thiết bị tự động chuyển sang <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> để dùng dữ liệu di động khi mạng này ổn định hơn."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Tổ chức của bạn có thể nhìn thấy cuộc gọi, tin nhắn và lưu lượng truy cập mạng."</string>
@@ -1936,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Tuỳ chỉnh từng cử chỉ thao tác trên bàn di chuột"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Cuộn ngược"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Nội dung di chuyển lên khi bạn cuộn xuống"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Nhấn vào góc dưới cùng bên phải"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Nhấn vào góc cuối bên phải bàn di chuột để xem tuỳ chọn khác"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Nhấp vào góc cuối bên phải"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Nhấp vào góc cuối bên phải bàn di chuột để xem lựa chọn khác"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Tốc độ con trỏ"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Kiểu màu nền con trỏ"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Đổi màu nền con trỏ thành màu đen"</string>
@@ -2129,7 +2134,7 @@
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Thay đổi cách hiển thị văn bản"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Tiêu đề: Mẫu thiết kế khinh khí cầu"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Người gửi: Tùng"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Xin chào!\n\nTôi chỉ muốn hỏi về tiến độ thiết kế. Liệu những thiết kế đó có kịp hoàn thiện trước khi chúng tôi bắt đầu tạo hộp chú giải mới không?"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Xin chào!\n\nTôi chỉ muốn hỏi về tiến độ thiết kế. Liệu những thiết kế đó có kịp hoàn thiện trước khi chúng tôi bắt đầu tạo khinh khí cầu mới không?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Đặt lại chế độ cài đặt"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Cài đặt kích thước hiển thị và văn bản đã được đặt lại"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Đặt lại văn bản và kích thước hiển thị?"</string>
@@ -2357,14 +2362,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Dịch vụ này đang hoạt động không bình thường."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Lối tắt hỗ trợ tiếp cận"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Hiển thị trong Cài đặt nhanh"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Đỏ – xanh lục"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Đỏ – xanh lục"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Khó phân biệt màu đỏ – xanh lục, xanh lục"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Khó phân biệt màu đỏ – xanh lục, đỏ"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Xanh lam – vàng"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Thang màu xám"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Cường độ"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Không dùng được ở chế độ thang màu xám hoặc khi tắt tính năng chỉnh màu"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Phân biệt màu lục kém, mù màu xanh lục"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Phân biệt màu đỏ kém, mù màu đỏ"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Mù màu xanh lục nhẹ"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Mù màu đỏ nhẹ"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Mù màu lam vàng"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Siêu tối"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Đặt màn hình ở chế độ siêu tối"</string>
@@ -3334,22 +3339,34 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Đang bật/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> và <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Bạn cũng có thể bật chế độ Âm thanh không gian cho các thiết bị Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Cài đặt thiết bị được kết nối"</string>
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Âm thanh không gian"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Đang tắt"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Đang tắt"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Đang tắt"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Không có}=1{Đã đặt 1 lịch biểu}other{Đã đặt # lịch biểu}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Không làm phiền"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Chế độ ưu tiên"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Thêm chế độ"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Bớt phân tâm và tập trung hơn nhờ các chế độ khi ngủ, làm việc, lái xe và nhiều hoạt động khác."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Tạo chế độ của riêng bạn"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Chỉ nhận thông báo của những người và ứng dụng quan trọng"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Chọn loại quy trình kích hoạt"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Thời gian"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"Ví dụ: \"9:30 – 5:00 CH\""</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Lịch"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"Ví dụ: \"Lịch cá nhân\""</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Đặt một lịch biểu"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Lịch biểu dựa vào"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Ngày và giờ"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9 giờ sáng – 5 giờ chiều các ngày trong tuần\""</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Sự kiện trên lịch"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} đang hoạt động}=2{{mode_1} và {mode_2} đang hoạt động}=3{{mode_1}, {mode_2} và {mode_3} đang hoạt động}other{{mode_1}, {mode_2} và # chế độ khác đang hoạt động}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{Có thể tự động bật 1 chế độ}other{Có thể tự động bật # chế độ}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ĐANG BẬT"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Chưa đặt"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Đã tắt"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Tạo một chế độ"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Tuỳ chỉnh"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Bật ngay"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Tắt"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Không tìm thấy chế độ nào"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Hạn chế bị gián đoạn"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Chặn các yếu tố gây gián đoạn và mất tập trung"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Thiết lập <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Bật chế độ Không làm phiền"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Chuông báo và âm thanh đa phương tiện có thể làm gián đoạn"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Lịch biểu"</string>
@@ -3361,14 +3378,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Chỉnh sửa"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Lịch biểu"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Lịch biểu"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Tự động bật"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Thêm lịch"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Dùng lịch của bạn"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Lịch biểu"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Đặt lịch biểu"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Thời điểm tự động bật"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Lịch trình sự kiện"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Bật trong các sự kiện của"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Khi thư trả lời cho thư mời là"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Lịch biểu"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Lịch biểu"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> tiếng <xliff:g id="MINUTES">%2$d</xliff:g> phút"</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Tự động bật"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Lên lịch"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Tắt tiếng điện thoại vào thời gian nhất định"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Đặt quy tắc Không làm phiền"</string>
@@ -3378,8 +3394,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Cho phép các hoạt động phát ra âm thanh có thể làm gián đoạn"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Ngăn gián đoạn hình ảnh"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Cho phép tín hiệu hình ảnh"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Luôn tập trung"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Thao tác khác"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Bộ lọc thông báo"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Chế độ cài đặt khác"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Đang tắt}=1{Đang tắt/1 chế độ có thể tự động bật}other{Đang tắt/# chế độ có thể tự động bật}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Chế độ cài đặt màn hình"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Lựa chọn hiển thị"</string>
@@ -3396,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"bật giao diện tối"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Chuyển đổi hệ điều hành và ứng dụng để ưu tiên dùng văn bản sáng trên nền tối, chế độ này có thể dễ nhìn hơn và giúp tiết kiệm pin đáng kể trên một số thiết bị"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Không thay đổi chế độ hiển thị}=1{{effect_1}}=2{{effect_1} và {effect_2}}=3{{effect_1}, {effect_2} và {effect_3}}other{{effect_1}, {effect_2} và # chế độ khác}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Lọc hoạt động gây gián đoạn"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Chưa lọc hoạt động gây gián đoạn nào"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Cho phép tất cả thông báo"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Con người, ứng dụng và âm thanh có thể gây gián đoạn"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Các lựa chọn hiển thị đối với thông báo được lọc"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Khi chế độ Không làm phiền đang bật"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Không phát âm thanh khi có thông báo"</string>
@@ -3624,7 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Ứng dụng này có thể trả lời tin nhắn và thao tác với các nút trong thông báo, bao gồm cả tạm ẩn hoặc loại bỏ thông báo và trả lời cuộc gọi."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Thay đổi chế độ cài đặt"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Ứng dụng này có thể bật hoặc tắt chế độ Không làm phiền và thay đổi các chế độ cài đặt liên quan."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Ứng dụng này có thể quản lý và kích hoạt Chế độ ưu tiên, cũng như thay đổi các chế độ cài đặt liên quan."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Nếu bạn tắt quyền truy cập thông báo của <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, quyền truy cập chế độ Không làm phiền cũng có thể bị tắt."</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Nếu bạn tắt quyền truy cập của <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vào thông báo, thì quyền truy cập vào Chế độ ưu tiên cũng có thể bị tắt."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Tắt"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Hủy"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Theo thời gian thực"</string>
@@ -3685,6 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Quyền truy cập chế độ Không làm phiền"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Cho phép tính năng Không làm phiền"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Không có ứng dụng đã cài đặt nào yêu cầu quyền truy cập chế độ Không làm phiền"</string>
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Quyền truy cập vào Chế độ ưu tiên"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Cho phép truy cập vào Chế độ ưu tiên"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Không có ứng dụng đã cài đặt nào yêu cầu quyền truy cập vào Chế độ ưu tiên"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Bạn chưa cho phép thông báo từ ứng dụng này"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Theo yêu cầu của bạn, Android đang chặn không cho danh mục thông báo này xuất hiện trên thiết bị này"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Theo yêu cầu của bạn, Android đang chặn không cho nhóm thông báo này xuất hiện trên thiết bị này"</string>
@@ -3748,6 +3769,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Cuộc trò chuyện"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Mọi cuộc trò chuyện"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"tất cả cuộc trò chuyện"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Cuộc trò chuyện ưu tiên"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"cuộc trò chuyện ưu tiên"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Không có"</string>
@@ -3843,37 +3865,37 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Đổi sang báo thức chỉ đến khi <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Đổi sang luôn làm gián đoạn"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Chỉnh sửa chế độ"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Thêm chế độ"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Tạo một chế độ"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Chế độ tuỳ chỉnh"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Tên chế độ"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Sự kiện trên lịch"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Lịch ngủ"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Quy trình đi ngủ"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Trong khi lái xe"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Đã liên kết với ứng dụng"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Cài đặt ứng dụng"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Thông tin và chế độ cài đặt trong <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Do <xliff:g id="APP_NAME">%1$s</xliff:g> quản lý"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Tắt chế độ"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Nếu bạn tắt tính năng này, thì chế độ này sẽ không hoạt động như dự kiến và các tuỳ chọn cài đặt của chế độ sẽ bị ẩn."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Tắt <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Chế độ này sẽ tuyệt đối không bật khi đã bị tắt"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Tắt"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Bật chế độ"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Nếu bạn bật tính năng này, thì chế độ này sẽ tự động kích hoạt theo lịch tương ứng."</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Bật <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Chế độ này có thể tự động bật theo chế độ cài đặt tương ứng"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Bật"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Đặt một chế độ theo lịch trình đều đặn"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Đặt một chế độ để đồng bộ hoá với các sự kiện trên lịch và phản hồi thư mời"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Thiết kế một lịch ngủ thư thái. Đặt chuông báo, giảm độ sáng màn hình và chặn thông báo."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Ưu tiên sự an toàn khi lái xe để tập trung và không bị sao lãng"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Chặn các yếu tố gây sao lãng hoặc gián đoạn trên thiết bị để giúp bạn tập trung"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Loại bỏ mọi yếu tố gây sao lãng để có một môi trường yên tĩnh"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Cá nhân hoá trải nghiệm và chế độ cài đặt thiết bị cho từng người dùng"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Chỉ hiện thông báo của những người và ứng dụng quan trọng để giảm thiểu yếu tố gây gián đoạn"</string>
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Đặt một chế độ theo lịch trình đều đặn"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Luôn đồng bộ hoá các sự kiện trong ngày với thiết bị"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Thức dậy với cảm giác tràn đầy năng lượng"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Đặt sự an toàn lên hàng đầu khi lái xe"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Tập trung cao độ"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Tình huống cần thể hiện phép lịch sự"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Sử dụng theo hướng dẫn để luôn được chăm sóc chu đáo"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Kiểm soát sự chú ý"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Cảnh báo"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Đóng"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Gửi ý kiến phản hồi về thiết bị này"</string>
@@ -4074,6 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Phải luôn bật vì quyền truy cập thông báo được bật"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Thu hồi quyền truy cập vào chế độ Không làm phiền của <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Mọi quy tắc Không làm phiền do ứng dụng này tạo sẽ đều bị xóa."</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Cho phép <xliff:g id="APP">%1$s</xliff:g> truy cập vào Chế độ ưu tiên?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Ứng dụng này sẽ có thể bật/tắt chế độ Không làm phiền, quản lý và kích hoạt Chế độ ưu tiên, cũng như thay đổi các chế độ cài đặt liên quan."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Thu hồi quyền truy cập của <xliff:g id="APP">%1$s</xliff:g> vào Chế độ ưu tiên?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Mọi chế độ do ứng dụng này tạo sẽ bị xoá."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Không tối ưu hóa"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Tối ưu hóa"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Pin của bạn có thể hết nhanh hơn. Ứng dụng sẽ không còn bị hạn chế sử dụng pin ở chế độ nền nữa."</string>
@@ -4860,8 +4886,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Pin"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Bảng Cài đặt"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Bật cửa sổ có thể đổi kích thước"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Bật cửa sổ có thể đổi kích thước trên màn hình phụ"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Bật tùy chọn không thay đổi kích thước trong nhiều cửa sổ"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Cho phép các ứng dụng không thể thay đổi kích thước xuất hiện trong nhiều cửa sổ"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Vô hiệu hoá tính năng buộc dùng chế độ tối"</string>
@@ -5182,10 +5207,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Tuỳ chỉnh"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Tuỳ chỉnh <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Bạn cần phải khởi động lại để bật tính năng hỗ trợ cửa sổ có thể đổi kích thước."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Bạn cần phải khởi động lại để xem có dùng được tính năng cửa sổ có thể đổi kích thước không."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Bạn cần phải khởi động lại để bật tính năng cửa sổ có thể đổi kích thước trên màn hình phụ."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Khởi động lại ngay"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Khởi động lại sau"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Âm thanh không gian"</string>
@@ -5282,7 +5305,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Hồng"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Đỏ tía"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Tím"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Xong"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Lưu"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Huỷ"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Mặc định"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Vừa"</string>
@@ -5359,7 +5382,7 @@
     <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Ghép nối thiết bị mới"</string>
     <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Hiện mã QR"</string>
     <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Bạn đang chia sẻ âm thanh"</string>
-    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Những người đang nghe có thể nghe thấy nội dung đa phương tiện của bạn. Họ sẽ không nghe được các cuộc gọi."</string>
+    <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Những người đang nghe có thể nghe thấy nội dung nghe nhìn của bạn nhưng sẽ không nghe được các cuộc gọi."</string>
     <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Dừng chia sẻ"</string>
     <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Cài đặt"</string>
     <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Chọn một thiết bị để ngắt kết nối"</string>
@@ -5414,7 +5437,7 @@
     <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Quét mã QR"</string>
     <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Bắt đầu nghe bằng cách quét mã QR của luồng âm thanh"</string>
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Nghe luồng âm thanh"</string>
-    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Hãy dùng <xliff:g id="DEVICE_NAME">%1$s</xliff:g> để quét mã QR của luồng âm thanh mà bạn muốn nghe"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Hãy quét mã QR của luồng âm thanh để nghe bằng <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Không thể chỉnh sửa mật khẩu trong khi chia sẻ. Để đổi mật khẩu, trước tiên hãy tắt tính năng chia sẻ âm thanh."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Trình quét mã QR"</string>
     <string name="homepage_search" msgid="6759334912284663559">"Tìm kiếm trong phần Cài đặt"</string>

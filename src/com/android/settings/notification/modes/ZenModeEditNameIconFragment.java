@@ -72,8 +72,7 @@ public class ZenModeEditNameIconFragment extends ZenModeEditNameIconFragmentBase
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - make this the correct metrics category
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION;
+        return SettingsEnums.ZEN_MODE_EDIT_NAME_ICON;
     }
 
     @Override

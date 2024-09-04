@@ -80,8 +80,7 @@ public class BluetoothA2dpConfigStore {
 
     /** Create codec config utilizing {@link BluetoothCodecConfig.SourceCodecType} */
     public BluetoothCodecConfig createCodecConfig() {
-        return new BluetoothCodecConfig.Builder()
-                .setCodecType(mCodecTypeNative)
+        BluetoothCodecConfig.Builder builder = new BluetoothCodecConfig.Builder()
                 .setCodecPriority(mCodecPriority)
                 .setSampleRate(mSampleRate)
                 .setBitsPerSample(mBitsPerSample)
@@ -89,8 +88,13 @@ public class BluetoothA2dpConfigStore {
                 .setCodecSpecific1(mCodecSpecific1Value)
                 .setCodecSpecific2(mCodecSpecific2Value)
                 .setCodecSpecific3(mCodecSpecific3Value)
-                .setCodecSpecific4(mCodecSpecific4Value)
-                .build();
+                .setCodecSpecific4(mCodecSpecific4Value);
+        if (Flags.a2dpOffloadCodecExtensibilitySettings()) {
+            builder.setExtendedCodecType(mCodecType);
+        } else {
+            builder.setCodecType(mCodecTypeNative);
+        }
+        return builder.build();
     }
 
     /** Create codec config utilizing {@link BluetoothCodecType} */

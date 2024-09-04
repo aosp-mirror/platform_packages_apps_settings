@@ -129,6 +129,10 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     private Dialog getUnsupportedDialog() {
         return new AudioStreamsDialogFragment.DialogBuilder(getActivity())
                 .setTitle(getString(R.string.audio_streams_dialog_cannot_listen))
+                .setSubTitle1(
+                        mBroadcastMetadata != null
+                                ? AudioStreamsHelper.getBroadcastName(mBroadcastMetadata)
+                                : "")
                 .setSubTitle2(getString(R.string.audio_streams_dialog_unsupported_device_subtitle))
                 .setRightButtonText(getString(R.string.audio_streams_dialog_close))
                 .setRightButtonOnClickListener(

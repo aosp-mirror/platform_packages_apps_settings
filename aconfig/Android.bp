@@ -66,3 +66,15 @@ java_aconfig_library {
     name: "development_settings_flag_lib",
     aconfig_declarations: "development_settings_flags",
 }
+
+aconfig_declarations {
+    name: "keyboard_flags",
+    package: "com.android.settings.keyboard",
+    container: "system_ext",
+    srcs: ["keyboard/*.aconfig"],
+}
+
+java_aconfig_library {
+    name: "keyboard_flags_lib",
+    aconfig_declarations: "keyboard_flags",
+}

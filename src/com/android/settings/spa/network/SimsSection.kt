@@ -40,6 +40,7 @@ import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.network.telephony.SubscriptionActivationRepository
 import com.android.settings.network.telephony.SubscriptionRepository
+import com.android.settings.network.telephony.euicc.EuiccRepository
 import com.android.settings.network.telephony.phoneNumberFlow
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
@@ -120,13 +121,17 @@ fun phoneNumber(subInfo: SubscriptionInfo): State<String?> {
 @Composable
 private fun AddSim() {
     val context = LocalContext.current
-    if (remember { MobileNetworkUtils.showEuiccSettings(context) }) {
+    val isShow by
+        remember { EuiccRepository(context).showEuiccSettingsFlow() }
+            .collectAsStateWithLifecycle(initialValue = false)
+    if (isShow) {
         RestrictedPreference(
-            model = object : PreferenceModel {
-                override val title = stringResource(id = R.string.mobile_network_list_add_more)
-                override val icon = @Composable { SettingsIcon(Icons.Outlined.Add) }
-                override val onClick = { startAddSimFlow(context) }
-            },
+            model =
+                object : PreferenceModel {
+                    override val title = stringResource(id = R.string.mobile_network_list_add_more)
+                    override val icon = @Composable { SettingsIcon(Icons.Outlined.Add) }
+                    override val onClick = { startAddSimFlow(context) }
+                },
             restrictions = Restrictions(keys = listOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)),
         )
     }

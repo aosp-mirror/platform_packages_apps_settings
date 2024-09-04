@@ -20,6 +20,9 @@ import android.content.Context
 
 interface SearchablePage {
 
-    /** Gets the searchable titles at the current moment. */
+    /** Gets the title of the page. */
+    fun getPageTitleForSearch(context: Context): String = ""
+
+    /** Gets the titles of the searchable items at the current moment. */
     fun getSearchableTitles(context: Context): List<String>
 }

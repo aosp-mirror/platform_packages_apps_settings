@@ -27,6 +27,8 @@ import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.communal.CommunalPreferenceController;
@@ -35,6 +37,7 @@ import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
+import com.android.settings.wifi.WifiUtils;
 
 import com.google.android.setupdesign.util.ThemeHelper;
 
@@ -73,7 +76,18 @@ public class Settings extends SettingsActivity {
     public static class NetworkProviderSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NetworkSelectActivity extends SettingsActivity { /* empty */ }
     /** Activity for the Wi-Fi network details settings. */
-    public static class WifiDetailsSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class WifiDetailsSettingsActivity extends SettingsActivity {
+        @Override
+        protected void createUiFromIntent(@Nullable Bundle savedState, Intent intent) {
+            Bundle bundle = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+            if (TextUtils.isEmpty(bundle.getString(WifiUtils.KEY_CHOSEN_WIFIENTRY_KEY))) {
+                Log.e(getLocalClassName(), "The key of WifiEntry is empty!");
+                finishAndRemoveTask();
+                return;
+            }
+            super.createUiFromIntent(savedState, intent);
+        }
+    }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
