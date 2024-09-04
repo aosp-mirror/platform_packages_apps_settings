@@ -328,20 +328,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     @Composable
     fun ErrorDialogImpl(){
         // EuiccSlotSidecar showErrorDialog
-        val errorDialogPresenterForEuiccSlotSidecar = rememberAlertDialogPresenter(
-                confirmButton = AlertDialogButton(
-                        stringResource(android.R.string.ok)
-                ) {
-                    finish()
-                },
-                title = stringResource(R.string.privileged_action_disable_fail_title),
-                text = {
-                    Text(stringResource(R.string.privileged_action_disable_fail_text))
-                },
-        )
-
-        // RemovableSlotSidecar showErrorDialog
-        val errorDialogPresenterForRemovableSlotSidecar = rememberAlertDialogPresenter(
+        val errorDialogPresenterForSimSwitching = rememberAlertDialogPresenter(
                 confirmButton = AlertDialogButton(
                         stringResource(android.R.string.ok)
                 ) {
@@ -368,8 +355,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
         // show error
         when (showError.value) {
-            ErrorType.ERROR_EUICC_SLOT -> errorDialogPresenterForEuiccSlotSidecar.open()
-            ErrorType.ERROR_REMOVABLE_SLOT -> errorDialogPresenterForRemovableSlotSidecar.open()
+            ErrorType.ERROR_SIM_SWITCHING -> errorDialogPresenterForSimSwitching.open()
             ErrorType.ERROR_ENABLE_DSDS -> errorDialogPresenterForMultiSimSidecar.open()
             else -> {}
         }
@@ -455,7 +441,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             SidecarFragment.State.ERROR -> {
                 Log.i(TAG, "Failed to enable the eSIM profile.")
                 switchToEuiccSubscriptionSidecar!!.reset()
-                showError.value = ErrorType.ERROR_EUICC_SLOT
+                showError.value = ErrorType.ERROR_SIM_SWITCHING
                 callbackListener(CallbackType.CALLBACK_ERROR)
             }
         }
@@ -475,7 +461,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             SidecarFragment.State.ERROR -> {
                 Log.e(TAG, "Failed switching to removable slot.")
                 switchToRemovableSlotSidecar!!.reset()
-                showError.value = ErrorType.ERROR_REMOVABLE_SLOT
+                showError.value = ErrorType.ERROR_SIM_SWITCHING
                 callbackListener(CallbackType.CALLBACK_ERROR)
             }
         }
@@ -605,9 +591,8 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
         enum class ErrorType(val value:Int){
             ERROR_NONE(-1),
-            ERROR_EUICC_SLOT(1),
-            ERROR_REMOVABLE_SLOT(2),
-            ERROR_ENABLE_DSDS(3)
+            ERROR_SIM_SWITCHING(1),
+            ERROR_ENABLE_DSDS(2)
         }
 
         enum class CallbackType(val value:Int){
