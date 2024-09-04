@@ -1142,7 +1142,7 @@ public class FingerprintSettings extends SubSettings {
         private void addFirstFingerprint(@Nullable Long gkPwHandle) {
             Intent intent = new Intent();
             intent.setClassName(SETTINGS_PACKAGE_NAME,
-                    FingerprintEnrollIntroductionInternal.class.getName());
+                    FingerprintEnroll.InternalActivity.class.getName());
             intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
             intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
                     SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
