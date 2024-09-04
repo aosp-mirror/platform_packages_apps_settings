@@ -740,6 +740,7 @@
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
             android:exported="true"
+            android:enableOnBackInvokedCallback="false"
             android:theme="@style/Theme.Settings.NoActionBar"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
@@ -755,6 +756,7 @@
         <activity android:name="Settings$FaceSettingsInternalActivity"
                   android:label="@string/security_settings_face_preference_title"
                   android:exported="false"
+                  android:enableOnBackInvokedCallback="false"
                   android:theme="@style/Theme.Settings.NoActionBar"
                   android:icon="@drawable/ic_face_header"
                   android:taskAffinity="com.android.settings.root">
@@ -767,6 +769,7 @@
         <activity android:name="Settings$FingerprintSettingsActivity"
                   android:label="@string/security_settings_fingerprint_preference_title"
                   android:exported="true"
+                  android:enableOnBackInvokedCallback="false"
                   android:icon="@drawable/ic_fingerprint_header">
             <intent-filter>
                 <action android:name="android.settings.FINGERPRINT_SETTINGS" />
@@ -781,6 +784,7 @@
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
                   android:exported="false"
+                  android:enableOnBackInvokedCallback="false"
                   android:taskAffinity="com.android.settings.root">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
@@ -1321,7 +1325,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.modes.ZenModesListFragment"/>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
+                       android:value="@string/menu_key_priority_modes" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -1367,6 +1371,12 @@
                        android:value="com.android.settings.notification.modes.ZenModeFragment"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+        </activity>
+
+        <activity
+            android:name=".notification.modes.SetupInterstitialActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Settings.NoActionBar">
         </activity>
 
         <activity

@@ -53,10 +53,10 @@ public class ImsQueryProvisioningStat implements ImsQuery {
      */
     public boolean query() {
         try {
-            final ProvisioningManager privisionManager =
+            final ProvisioningManager provisioningManager =
                     ProvisioningManager.createForSubscriptionId(mSubId);
-            return privisionManager.getProvisioningStatusForCapability(mCapability, mTech);
-        } catch (IllegalArgumentException exception) {
+            return provisioningManager.getProvisioningStatusForCapability(mCapability, mTech);
+        } catch (IllegalArgumentException | UnsupportedOperationException exception) {
             Log.w(LOG_TAG, "fail to get Provisioning stat. subId=" + mSubId, exception);
         }
         return false;

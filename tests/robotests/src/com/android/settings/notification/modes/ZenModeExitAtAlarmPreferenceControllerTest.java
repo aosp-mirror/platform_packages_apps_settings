@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.modes;
 
+import static android.service.notification.SystemZenRules.PACKAGE_ANDROID;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -77,6 +79,7 @@ public class ZenModeExitAtAlarmPreferenceControllerTest {
         scheduleInfo.exitAtAlarm = false;
 
         ZenMode mode = new TestModeBuilder()
+                .setPackage(PACKAGE_ANDROID)
                 .setConditionId(ZenModeConfig.toScheduleConditionId(scheduleInfo))
                 .build();
 
@@ -105,6 +108,7 @@ public class ZenModeExitAtAlarmPreferenceControllerTest {
         scheduleInfo.exitAtAlarm = true;
 
         ZenMode mode = new TestModeBuilder()
+                .setPackage(PACKAGE_ANDROID)
                 .setConditionId(ZenModeConfig.toScheduleConditionId(scheduleInfo))
                 .build();
         mPrefController.updateZenMode(preference, mode);

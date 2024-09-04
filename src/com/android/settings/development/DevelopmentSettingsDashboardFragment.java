@@ -63,7 +63,6 @@ import com.android.settings.development.autofill.AutofillCategoryController;
 import com.android.settings.development.autofill.AutofillLoggingLevelPreferenceController;
 import com.android.settings.development.autofill.AutofillResetOptionsPreferenceController;
 import com.android.settings.development.bluetooth.AbstractBluetoothDialogPreferenceController;
-import com.android.settings.development.bluetooth.AbstractBluetoothListPreferenceController;
 import com.android.settings.development.bluetooth.AbstractBluetoothPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothBitPerSampleDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothChannelModeDialogPreferenceController;
@@ -365,12 +364,19 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         if (isChecked != developmentEnabledState) {
             if (isChecked) {
                 final int userId = getContext().getUserId();
-                if (Utils.requestBiometricAuthenticationForMandatoryBiometrics(getContext(),
-                        mIsBiometricsAuthenticated,
-                        false /* biometricsAuthenticationRequested */, userId)) {
+
+                final Utils.BiometricStatus biometricAuthStatus =
+                        Utils.requestBiometricAuthenticationForMandatoryBiometrics(
+                                getContext(),
+                                mIsBiometricsAuthenticated,
+                                userId);
+                if (biometricAuthStatus == Utils.BiometricStatus.OK) {
                     mSwitchBar.setChecked(false);
                     Utils.launchBiometricPromptForMandatoryBiometrics(this,
-                            REQUEST_BIOMETRIC_PROMPT, userId, false /* hideBackground */);
+                            REQUEST_BIOMETRIC_PROMPT,
+                            userId, false /* hideBackground */);
+                } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                    mSwitchBar.setChecked(false);
                 } else {
                     //Reset biometrics once enable dialog is shown
                     mIsBiometricsAuthenticated = false;
@@ -837,8 +843,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 ((AbstractBluetoothDialogPreferenceController) controller).onHDAudioEnabled(
                         enabled);
             }
-            if (controller instanceof AbstractBluetoothListPreferenceController) {
-                ((AbstractBluetoothListPreferenceController) controller).onHDAudioEnabled(enabled);
+            if (controller instanceof BluetoothCodecListPreferenceController) {
+                ((BluetoothCodecListPreferenceController) controller).onHDAudioEnabled(enabled);
             }
         }
     }

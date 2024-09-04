@@ -22,14 +22,18 @@ import android.telecom.TelecomManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
+import com.android.settings.core.BasePreferenceController
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 /**
@@ -44,20 +48,21 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
     private val wifiCallingRepositoryFactory: (subId: Int) -> WifiCallingRepository = { subId ->
         WifiCallingRepository(context, subId)
     },
-) : TelephonyBasePreferenceController(context, key) {
+) : BasePreferenceController(context, key) {
 
+    private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     private lateinit var preference: Preference
     private lateinit var callingPreferenceCategoryController: CallingPreferenceCategoryController
 
     private val resourcesForSub by lazy {
-        SubscriptionManager.getResourcesForSubId(mContext, mSubId)
+        SubscriptionManager.getResourcesForSubId(mContext, subId)
     }
 
     fun init(
         subId: Int,
         callingPreferenceCategoryController: CallingPreferenceCategoryController,
     ): WifiCallingPreferenceController {
-        mSubId = subId
+        this.subId = subId
         this.callingPreferenceCategoryController = callingPreferenceCategoryController
         return this
     }
@@ -65,39 +70,38 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
     /**
      * Note: Visibility also controlled by [onViewCreated].
      */
-    override fun getAvailabilityStatus(subId: Int) =
+    override fun getAvailabilityStatus() =
         if (SubscriptionManager.isValidSubscriptionId(subId)) AVAILABLE
         else CONDITIONALLY_UNAVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         // Not call super here, to avoid preference.isVisible changed unexpectedly
         preference = screen.findPreference(preferenceKey)!!
-        preference.intent?.putExtra(Settings.EXTRA_SUB_ID, mSubId)
+        preference.intent?.putExtra(Settings.EXTRA_SUB_ID, subId)
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        if(mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID){
-            Log.e(
-                this.javaClass.simpleName,
-                "mSubId is INVALID_SUBSCRIPTION_ID"
-            )
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            // Sub id could invalid, if this page is opened from external action and no sim is
+            // active.
+            // Ignore this case, since this page will be finished soon.
             return
         }
-        wifiCallingRepositoryFactory(mSubId).wifiCallingReadyFlow()
+        wifiCallingRepositoryFactory(subId).wifiCallingReadyFlow()
             .collectLatestWithLifecycle(viewLifecycleOwner) { isReady ->
                 preference.isVisible = isReady
                 callingPreferenceCategoryController.updateChildVisible(preferenceKey, isReady)
                 if (isReady) update()
             }
 
-        callStateRepository.callStateFlow(mSubId).collectLatestWithLifecycle(viewLifecycleOwner) {
+        callStateRepository.callStateFlow(subId).collectLatestWithLifecycle(viewLifecycleOwner) {
             preference.isEnabled = (it == TelephonyManager.CALL_STATE_IDLE)
         }
     }
 
     private suspend fun update() {
         val simCallManager = mContext.getSystemService(TelecomManager::class.java)
-            ?.getSimCallManagerForSubscription(mSubId)
+            ?.getSimCallManagerForSubscription(subId)
         if (simCallManager != null) {
             val intent = withContext(Dispatchers.Default) {
                 MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext, simCallManager)
@@ -116,7 +120,7 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
     }
 
     private fun getSummaryForWfcMode(): String {
-        val resId = when (wifiCallingRepositoryFactory(mSubId).getWiFiCallingMode()) {
+        val resId = when (wifiCallingRepositoryFactory(subId).getWiFiCallingMode()) {
             ImsMmTelManager.WIFI_MODE_WIFI_ONLY ->
                 com.android.internal.R.string.wfc_mode_wifi_only_summary
 
@@ -129,5 +133,23 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
             else -> com.android.internal.R.string.wifi_calling_off_summary
         }
         return resourcesForSub.getString(resId)
+    }
+
+    companion object {
+        class WifiCallingSearchItem(
+            private val context: Context,
+        ) : MobileNetworkSettingsSearchItem {
+            private fun isAvailable(subId: Int): Boolean = runBlocking {
+                WifiCallingRepository(context, subId).wifiCallingReadyFlow().first()
+            }
+
+            override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
+                if (!isAvailable(subId)) return null
+                return MobileNetworkSettingsSearchResult(
+                    key = "wifi_calling",
+                    title = context.getString(R.string.wifi_calling_settings_title),
+                )
+            }
+        }
     }
 }

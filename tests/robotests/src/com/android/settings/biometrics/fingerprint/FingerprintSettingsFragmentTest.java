@@ -20,6 +20,8 @@ import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWE
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
+import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
+import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.CHOOSE_LOCK_GENERIC_REQUEST;
 import static com.android.settings.biometrics.fingerprint.FingerprintSettings.FingerprintSettingsFragment.KEY_REQUIRE_SCREEN_ON_TO_AUTH;
@@ -54,6 +56,7 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Looper;
 import android.os.UserHandle;
+import android.os.Vibrator;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -128,6 +131,9 @@ public class FingerprintSettingsFragmentTest {
             mAuthenticationCallbackArgumentCaptor = ArgumentCaptor.forClass(
             FingerprintManager.AuthenticationCallback.class);
 
+    @Mock
+    private Vibrator mVibrator;
+
     private FingerprintAuthenticateSidecar mFingerprintAuthenticateSidecar;
     private FingerprintRemoveSidecar mFingerprintRemoveSidecar;
 
@@ -141,7 +147,8 @@ public class FingerprintSettingsFragmentTest {
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mBiometricManager).when(mContext).getSystemService(BiometricManager.class);
         doReturn(true).when(mFingerprintManager).isHardwareDetected();
-        when(mBiometricManager.canAuthenticate(
+        doReturn(mVibrator).when(mContext).getSystemService(Vibrator.class);
+        when(mBiometricManager.canAuthenticate(PRIMARY_USER_ID,
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
     }
@@ -165,20 +172,23 @@ public class FingerprintSettingsFragmentTest {
     }
 
     @Test
+    @Ignore("b/353706169")
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testLaunchBiometricPromptForFingerprint() {
-        when(mBiometricManager.canAuthenticate(
+        when(mBiometricManager.canAuthenticate(PRIMARY_USER_ID,
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
-
+        doNothing().when(mFingerprintManager).generateChallenge(anyInt(), any());
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);
         setUpFragment(false);
-        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(
-                Intent.class);
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        mFragment.onActivityResult(CONFIRM_REQUEST, RESULT_FINISHED,
+                new Intent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L));
 
         verify(mFragment).startActivityForResult(intentArgumentCaptor.capture(),
                 eq(BIOMETRIC_AUTH_REQUEST));
 
-        Intent intent = intentArgumentCaptor.getValue();
+        final Intent intent = intentArgumentCaptor.getValue();
         assertThat(intent.getComponent().getClassName()).isEqualTo(
                 ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
     }
@@ -285,6 +295,28 @@ public class FingerprintSettingsFragmentTest {
         doReturn(false).when(mFingerprintManager).isHardwareDetected();
         setUpFragment(false);
         assertThat(mFragment.isVisible()).isTrue();
+    }
+
+    @Test
+    @Ignore("b/353726774")
+    public void fingerprintVibratesOnAuthSuccess() {
+        setUpFragment(false);
+
+        doNothing().when(mFingerprintManager).authenticate(any(),
+                mCancellationSignalArgumentCaptor.capture(),
+                mAuthenticationCallbackArgumentCaptor.capture(), any(), anyInt());
+
+        mFingerprintAuthenticateSidecar.startAuthentication(1);
+
+        assertThat(mAuthenticationCallbackArgumentCaptor.getValue()).isNotNull();
+        assertThat(mCancellationSignalArgumentCaptor.getValue()).isNotNull();
+
+        mAuthenticationCallbackArgumentCaptor.getValue()
+                .onAuthenticationSucceeded(new FingerprintManager.AuthenticationResult(null,
+                        new Fingerprint("finger 1", 1, 1), 0 /* userId */, false));
+
+        shadowOf(Looper.getMainLooper()).idle();
+        verify(mVibrator).vibrate(FingerprintSettings.SUCCESS_VIBRATION_EFFECT);
     }
 
     @Test

@@ -27,6 +27,8 @@ import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -40,6 +42,11 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
     public AutoTimeZonePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mTimeManager = context.getSystemService(TimeManager.class);
+        // This is a no-op implementation of UpdateTimeAndDateCallback to avoid a NPE when
+        // setTimeAndDateCallback() isn't called, e.g. for slices and other cases where the
+        // controller is instantiated outside of the context of the real Date & Time settings
+        // screen.
+        mCallback  = (c) -> {};
     }
 
     /**
@@ -108,6 +115,12 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_system;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        refreshSummary(preference);
     }
 
     @Override

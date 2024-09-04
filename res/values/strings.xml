@@ -409,7 +409,7 @@
     <string name="desc_app_locale_selection_supported">Set the language for each app.</string>
 
     <!-- Description for the introduction to language picker activity. [CHAR LIMIT=NONE]-->
-    <string name="desc_introduction_of_language_picker">Your system, apps, and websites use the first supported language from your preferred languages.</string>
+    <string name="desc_introduction_of_language_picker">Your device, apps, and websites use the first supported language from your preferred language list.\n\nMany apps will also use the region from your preferred language to format dates, numbers, and units. To change your region, add a language, then choose your preferred region.</string>
 
     <!-- Description for the notice of language picker. [CHAR LIMIT=NONE]-->
     <string name="desc_notice_of_language_picker">To select a language for each app, go to app language settings.</string>
@@ -937,7 +937,7 @@
     <!-- Message showing that multiple fingerprints, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80]-->
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary">Face, fingerprints, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
     <!-- Description for mandatory biometrics prompt-->
-    <string name="mandatory_biometrics_prompt_description">This is needed since Identity Check is on</string>
+    <string name="mandatory_biometrics_prompt_description">Identity Check is on and requires a biometric</string>
     <!-- RemoteAuth unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
     <string name ="security_settings_remoteauth_preference_title">Remote Authenticator Unlock</string>
@@ -1374,6 +1374,12 @@
     <string name="private_space_error_screen_title">Couldn\u2019t set up a private space</string>
     <!-- Label for button to retry creating private space again on creation error. [CHAR LIMIT=30] -->
     <string name="private_space_tryagain_label">Try Again</string>
+    <!-- Label for button to exit private space setup on creation error. [CHAR LIMIT=30] -->
+    <string name="private_space_exit_label">Exit</string>
+    <!-- Description in Private space error page with a link to the Help Center page[CHAR LIMIT=NONE] -->
+    <string name="private_space_error_description">Private space isn\u2019t available.\nView possible causes</string>
+    <!-- Text in Private space error page that points to view possible error causes [CHAR LIMIT=40] -->
+    <string name="private_space_error_causes_text">View possible causes</string>
     <!-- Title for private space lock setup screen. [CHAR LIMIT=90] -->
     <string name="private_space_lockscreen_title">Choose a new lock for private space?</string>
     <!-- Summary for the private space lock setup screen. [CHAR LIMIT=NONE] -->
@@ -1858,6 +1864,12 @@
     <string name="device_details_title">Device details</string>
     <!-- Title for keyboard settings preferences. [CHAR LIMIT=50] -->
     <string name="bluetooth_device_keyboard_settings_preference_title">Keyboard settings</string>
+    <!-- Title for more settings preferences. [CHAR LIMIT=50] -->
+    <string name="bluetooth_device_more_settings_preference_title">More settings</string>
+    <!-- Title for more settings summary. [CHAR LIMIT=50] -->
+    <string name="bluetooth_device_more_settings_preference_summary">Firmware updates, about, and more</string>
+    <!-- Title for bluetooth device tips and support. [CHAR LIMIT=50] -->
+    <string name="bluetooth_device_tip_support">Tips &amp; support</string>
     <!-- Title of the item to show device MAC address -->
     <string name="bluetooth_device_mac_address">Device\'s Bluetooth address: <xliff:g id="address">%1$s</xliff:g></string>
     <!-- Title of the items to show multuple devices MAC address [CHAR LIMIT=NONE]-->
@@ -1877,6 +1889,9 @@
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
     <!-- Bluetooth device details companion apps. In the confirmation dialog for removing an associated app, this is the label on the button that will complete the disassociate action. [CHAR LIMIT=80] -->
     <string name = "bluetooth_companion_app_remove_association_confirm_button">Disconnect app</string>
+
+    <!-- Title of device details screen [CHAR LIMIT=28]-->
+    <string name="device_details_more_settings">More settings</string>
 
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_string">Maximum connected Bluetooth audio devices</string>
@@ -3058,10 +3073,9 @@
     <string name="sim_change_data_ok">
         Use <xliff:g id="carrier" example="Verizon">%1$s</xliff:g>
     </string>
-    <!-- Title for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=30] -->
-    <string name="sim_preferred_title">Update preferred SIM?</string>
+
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
-    <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls, and SMS messages?</string>
+    <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is now your primary SIM</string>
 
     <!-- Title for the dialog asking user to enable auto data switch upon enabling multi-SIM  [CHAR LIMIT=30] -->
     <string name="enable_auto_data_switch_dialog_title">Improve mobile data coverage?</string>
@@ -4487,10 +4501,10 @@
     <string name="trackpad_reverse_scrolling_title">Reverse scrolling</string>
     <!-- Summary text for 'Reverse scrolling' [CHAR LIMIT=60] -->
     <string name="trackpad_reverse_scrolling_summary">Content moves up when you scroll down</string>
-    <!-- Title text for 'Bottom-right tap' [CHAR LIMIT=35] -->
-    <string name="trackpad_bottom_right_tap_title">Bottom-right tap</string>
-    <!-- Summary text for 'Bottom-right tap' [CHAR LIMIT=60] -->
-    <string name="trackpad_bottom_right_tap_summary">Tap the bottom right corner of the touchpad for more options</string>
+    <!-- Title text for 'Bottom-right click', a setting that allows the user to right-click by pressing in the bottom-right corner of a touchpad. [CHAR LIMIT=35] -->
+    <string name="trackpad_bottom_right_tap_title">Bottom-right click</string>
+    <!-- Summary text for 'Bottom-right click', a setting that allows the user to right-click by pressing in the bottom-right corner of a touchpad [CHAR LIMIT=60] -->
+    <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
     <string name="trackpad_pointer_speed">Pointer speed</string>
     <!-- Title text for mouse pointer fill style. [CHAR LIMIT=35] -->
@@ -7518,7 +7532,7 @@
     <string name="select_sim_for_sms">Select a SIM for SMS</string>
     <!-- Message for switching data SIM; switching takes a while -->
     <string name="data_switch_started">Switching data SIM, this may take up to a minute\u2026</string>
-    <!-- Title for selecting specific sim for data in settings.  [CHAR LIMIT=40] -->
+    <!-- Title for selecting specific sim/preferred sim for data in settings.  [CHAR LIMIT=40] -->
     <string name="select_specific_sim_for_data_title">Use <xliff:g id="new_sim" example="carrierA">%1$s</xliff:g> for mobile data?</string>
     <!-- Message for selecting specific sim for data in settings.  [CHAR LIMIT=NONE] -->
     <string name="select_specific_sim_for_data_msg">If you switch to <xliff:g id="new_sim" example="carrierA">%1$s</xliff:g>, <xliff:g id="old_sim" example="carrierB">%2$s</xliff:g> will no longer be used for mobile data.</string>
@@ -7940,6 +7954,18 @@
     <!-- Sound: Footer hyperlink text to launch the Connected devices settings page. [CHAR LIMIT=NONE]-->
     <string name="spatial_audio_footer_learn_more_text">Connected devices settings</string>
 
+    <!-- Bluetooth device details: spatial audio multi-toggle title. [CHAR LIMIT=20]-->
+    <string name="spatial_audio_multi_toggle_title">Spatial Audio</string>
+
+    <!-- Bluetooth device details: spatial audio is off. [CHAR LIMIT=20]-->
+    <string name="spatial_audio_multi_toggle_off">Off</string>
+
+    <!-- Bluetooth device details: spatial audio is on. [CHAR LIMIT=20]-->
+    <string name="spatial_audio_multi_toggle_on">Off</string>
+
+    <!-- Bluetooth device details: head tracking is on. [CHAR LIMIT=20]-->
+    <string name="spatial_audio_multi_toggle_head_tracking_on">Off</string>
+
     <!-- Zen Modes: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_schedules_summary">
         {count, plural,
@@ -7953,7 +7979,7 @@
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
     <!-- Zen Modes: Title for the Modes option and associated settings page. [CHAR LIMIT=50]-->
-    <string name="zen_modes_list_title">Priority Modes</string>
+    <string name="zen_modes_list_title">Modes</string>
 
     <!-- Zen Modes: Intro text describing the feature. [CHAR LIMIT=NONE]-->
     <string name="zen_modes_list_intro">Minimize distractions and take control of your attention with modes for sleep, work, driving, and everything in between.</string>
@@ -7967,46 +7993,72 @@
     <!-- Zen Modes: Option to add an automatic schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule">Set a schedule</string>
 
-    <!-- Priority Modes: Title of the dialog used to choose an automatic schedule for a mode. [CHAR_LIMIT=40] -->
+    <!-- Modes: Title of the dialog used to choose an automatic schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_title">Schedule based on</string>
 
-    <!-- Priority Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <!-- Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_time">Day and time</string>
-    <!-- Priority Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
+    <!-- Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
     <string name="zen_mode_select_schedule_time_example">\"9 AM - 5 PM weekdays\"</string>
 
-    <!-- Priority Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <!-- Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_calendar">Calendar events</string>
 
-    <!-- Priority Modes: Short text that indicates that a mode is currently on (active). [CHAR_LIMIT=10] -->
+    <!-- Modes: Summary for the modes segment, when at least one mode is active. [CHAR LIMIT=NONE]-->
+    <string name="zen_modes_summary_some_active">
+        {count, plural, offset:2
+            =0    {}
+            =1    {{mode_1} is active}
+            =2    {{mode_1} and {mode_2} are active}
+            =3    {{mode_1}, {mode_2}, and {mode_3} are active}
+            other {{mode_1}, {mode_2}, and # more are active}
+        }
+    </string>
+
+    <!-- Modes: Summary for the modes segment, when no modes are active. [CHAR LIMIT=NONE]-->
+    <string name="zen_modes_summary_none_active">
+        {count, plural,
+            =0    {}
+            =1    {1 mode can turn on automatically}
+            other {# modes can turn on automatically}
+        }
+    </string>
+
+    <!-- Modes: Short text that indicates that a mode is currently on (active). [CHAR_LIMIT=10] -->
     <string name="zen_mode_active_text">ON</string>
 
-    <!-- Priority Modes: Format string for the "current state + trigger description summary for rules in the list. [CHAR_LIMIT=10] -->
+    <!-- Modes: Format string for the "current state + trigger description summary for rules in the list. [CHAR_LIMIT=10] -->
     <string name="zen_mode_format_status_and_trigger" translatable="false"><xliff:g id="current_status" example="ON">%1$s</xliff:g> • <xliff:g id="trigger_description" example="Mon-Fri, 23:00-7:00">%2$s</xliff:g></string>
 
-    <!-- Priority Modes: Indicates that a mode is disabled and needs to be configured. [CHAR_LIMIT=40] -->
+    <!-- Modes: Indicates that a mode is disabled and needs to be configured. [CHAR_LIMIT=40] -->
     <string name="zen_mode_disabled_needs_setup">Not set</string>
 
-    <!-- Priority Modes: Indicates that a mode is disabled by the user. [CHAR_LIMIT=40] -->
+    <!-- Modes: Indicates that a mode is disabled by the user. [CHAR_LIMIT=40] -->
     <string name="zen_mode_disabled_by_user">Disabled</string>
 
-    <!-- Priority Modes: Title of the "Create a mode" dialog, to choose the mode type. [CHAR_LIMIT=30] -->
+    <!-- Modes: Title of the "Create a mode" dialog, to choose the mode type. [CHAR_LIMIT=30] -->
     <string name="zen_mode_new_title">Create a mode</string>
 
-    <!-- Priority Modes: Option to add a "custom" mode in the "Add a mode" dialog. [CHAR_LIMIT=20] -->
+    <!-- Modes: Option to add a "custom" mode in the "Add a mode" dialog. [CHAR_LIMIT=20] -->
     <string name="zen_mode_new_option_custom">Custom</string>
 
-    <!-- Priority Modes: Caption of the button to turn on a mode [CHAR LIMIT=20] -->
+    <!-- Modes: Caption of the button to turn on a mode [CHAR LIMIT=20] -->
     <string name="zen_mode_action_activate">Turn on now</string>
 
-    <!-- Priority Modes: Caption of the button to turn off a currently active mode [CHAR LIMIT=20] -->
+    <!-- Modes: Caption of the button to turn off a currently active mode [CHAR LIMIT=20] -->
     <string name="zen_mode_action_deactivate">Turn off</string>
 
-    <!-- Priority Modes: Text to display if a mode isn't found [CHAR LIMIT=40] -->
+    <!-- Modes: Text to display if a mode isn't found [CHAR LIMIT=40] -->
     <string name="zen_mode_not_found_text">Mode not found</string>
 
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
+
+    <!-- Modes: Summary on a page prompting the user to set up/enable a mode [CHAR_LIMIT=NONE] -->
+    <string name="zen_mode_setup_page_summary">Block interruptions and distractions</string>
+
+    <!-- Modes: Label on a button prompting the user to set up the mode with the given name. [CHAR_LIMIT=40] -->
+    <string name="zen_mode_setup_button_label">Set up <xliff:g id="mode" example="My Mode">%1$s</xliff:g></string>
 
     <!-- Do not disturb: Title for the Do not Disturb dialog to turn on Do not disturb. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_turn_on_dialog_title">Turn on Do Not Disturb</string>
@@ -8023,7 +8075,7 @@
     <!-- Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_delete">Delete</string>
 
-    <!-- Priority Modes: Menu option for renaming a mode on its configuration page [CHAR LIMIT=40] -->
+    <!-- Modes: Menu option for renaming a mode on its configuration page [CHAR LIMIT=40] -->
     <string name="zen_mode_menu_rename_mode">Rename</string>
 
     <!-- Do not disturb: Menu option for deleting a mode on its configuration page [CHAR LIMIT=40] -->
@@ -8044,11 +8096,11 @@
     <!-- Do not disturb: Title for settings section describing when the rule turns on automatically [CHAR LIMIT=30] -->
     <string name="zen_mode_automatic_trigger_title">When to turn on automatically</string>
 
-    <!-- Priority Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <!-- Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
     <string name="zen_mode_set_calendar_title">Event schedule</string>
-    <!-- Priority Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <!-- Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
     <string name="zen_mode_set_calendar_which_calendar">Turn on during events for</string>
-    <!-- Priority Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <!-- Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
     <string name="zen_mode_set_calendar_which_reply">Where invite reply is</string>
 
     <!-- Do not disturb: Title prompting a user to set a time-based schedule to use for an automatic rule [CHAR LIMIT=30] -->
@@ -8087,9 +8139,9 @@
     <!--  Do not disturb: Subtitle for the Visual signals option to toggle on/off visual signals/alerts when the screen is on/when screen is off. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
-    <!-- Priority Modes: mode page section title [CHAR LIMIT=80] -->
+    <!-- Modes: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_interruption_filter_title">Notification filters</string>
-    <!-- Priority Modes: mode page section title [CHAR LIMIT=80] -->
+    <!-- Modes: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_device_effects_title">More settings</string>
 
     <!-- Summary for the Sound Do not Disturb option when DND isn't currently on. [CHAR LIMIT=NONE]-->
@@ -8140,10 +8192,10 @@
         other {{effect_1}, {effect_2}, and # more}
         }
     </string>
-    <!-- Modes: setting for whether the mode should filter (silence/hide) notifications/volume streams -->
-    <string name="mode_notification_filter_title">Limit what can notify you</string>
-    <!-- Modes: subtext when a mode is not filtering (silence/hide) notifications/volume streams -->
-    <string name="mode_no_notification_filter">No interruptions are filtered</string>
+    <!-- Modes: setting for a mode to allow all notifications and sounds through -->
+    <string name="zen_mode_allow_all_notifications">Allow all notifications</string>
+    <!-- Modes: subtext when a mode is allowing all notifications and sounds (i.e. no filtering) -->
+    <string name="zen_mode_all_notifications_allowed">People, apps, and sounds can interrupt</string>
 
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for filtered
@@ -8807,8 +8859,12 @@
     <string name="nls_feature_reply_summary">It can reply to messages and take action on buttons in notifications, including snoozing or dismissing notifications and answering calls.</string>
     <string name="nls_feature_settings_title">Change settings</string>
     <string name="nls_feature_settings_summary">It can turn Do Not Disturb on or off and change related settings.</string>
+    <string name="nls_feature_modes_settings_summary">It can manage and activate Modes, and change related settings.</string>
     <string name="notification_listener_disable_warning_summary">
         If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Do Not Disturb access may also be turned off.
+    </string>
+    <string name="notification_listener_disable_modes_warning_summary">
+        If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Modes access may also be turned off.
     </string>
     <string name="notification_listener_disable_warning_confirm">Turn off</string>
     <string name="notification_listener_disable_warning_cancel">Cancel</string>
@@ -8985,6 +9041,15 @@
 
     <!-- Sound & notification > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
     <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb access</string>
+
+    <!-- Special App Access: Title for managing Modes access option. [CHAR LIMIT=40] -->
+    <string name="manage_zen_modes_access_title">Modes access</string>
+
+    <!-- Button title that grants 'Modes' permission to an app [CHAR_LIMIT=60]-->
+    <string name="zen_modes_access_detail_switch">Allow Modes access</string>
+
+    <!-- Special App Access > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_empty_text">No installed apps have requested Modes access</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
     <string name="app_notifications_off_desc">You haven\'t allowed notifications from this app</string>
@@ -9177,6 +9242,8 @@
     <!-- [CHAR LIMIT=120] Zen mode settings: Title for conversations settings page -->
     <string name="zen_mode_conversations_title">Conversations</string>
     <string name="zen_mode_from_all_conversations">All conversations</string>
+    <!-- [CHAR LIMIT=40] Version of zen_mode_from_all_conversations when it is a non-first member of a list -->
+    <string name="zen_mode_from_all_conversations_second">all conversations</string>
     <string name="zen_mode_from_important_conversations">Priority conversations</string>
     <!-- [CHAR LIMIT=40] Version of the above for "priority conversations" when it is a non-first member of a list -->
     <string name="zen_mode_from_important_conversations_second">priority conversations</string>
@@ -9325,11 +9392,11 @@
             other {{app_1}, {app_2}, and # more can interrupt}
         }
     </string>
-    <!-- Priority Modes: Entry in the "apps that can bypass DND" list that corresponds to a work profile app (e.g. "Chrome (Work)" [CHAR LIMIT=15]. -->
+    <!-- Modes: Entry in the "apps that can bypass DND" list that corresponds to a work profile app (e.g. "Chrome (Work)" [CHAR LIMIT=15]. -->
     <string name="zen_mode_apps_work_app"><xliff:g id="app_label" example="Chrome">%s</xliff:g> (Work)</string>
     <!-- Text displayed (for a brief time) while the list of bypassing apps is being fetched. Will be replaced by a zen_mode_apps_subtext. [CHAR_LIMIT=60] -->
     <string name="zen_mode_apps_calculating">Calculating\u2026</string>
-    <!-- Priority Modes: Format for a string displayed when there are more items (e.g. apps, contacts) that can be shown. For example, we show (A)(B)(C)(+5), where this string represents the "+5" value. Needs to be as compact as possible, since it will be drawn in a really small area. [CHAR_LIMIT=4] -->
+    <!-- Modes: Format for a string displayed when there are more items (e.g. apps, contacts) that can be shown. For example, we show (A)(B)(C)(+5), where this string represents the "+5" value. Needs to be as compact as possible, since it will be drawn in a really small area. [CHAR_LIMIT=4] -->
     <string name="zen_mode_plus_n_items">+<xliff:g id="number" example="42">%d</xliff:g></string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
@@ -9434,60 +9501,77 @@
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
     <string name="zen_mode_summary_always">Change to always interrupt</string>
 
-    <!-- Priority Modes: Title for the "rename mode" screen [CHAR LIMIT=20] -->
+    <!-- Modes: Title for the "rename mode" screen [CHAR LIMIT=20] -->
     <string name="zen_mode_rename_title">Edit mode</string>
 
-    <!-- Priority Modes: Title for the "add mode" screen [CHAR LIMIT=20] -->
+    <!-- Modes: Title for the "add mode" screen [CHAR LIMIT=20] -->
     <string name="zen_mode_new_custom_title">Create a mode</string>
 
-    <!-- Priority Modes: Default name for new custom modes [CHAR LIMIT=30] -->
+    <!-- Modes: Default name for new custom modes [CHAR LIMIT=30] -->
     <string name="zen_mode_new_custom_default_name">Custom mode</string>
 
-    <!-- Priority Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
+    <!-- Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
     <string name="zen_mode_edit_name_hint">Mode name</string>
 
-    <!-- Priority Modes: Trigger title for modes of type SCHEDULE_CALENDAR. [CHAR LIMIT=30] -->
+    <!-- Modes: Trigger title for modes of type SCHEDULE_CALENDAR. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_schedule_calendar">Calendar events</string>
-    <!-- Priority Modes: Trigger title for modes of type BEDTIME. [CHAR LIMIT=30] -->
+    <!-- Modes: Trigger title for modes of type BEDTIME. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_bedtime">Bedtime routine</string>
-    <!-- Priority Modes: Trigger title for modes of type DRIVING. [CHAR LIMIT=30] -->
+    <!-- Modes: Trigger title for modes of type DRIVING. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_driving">While driving</string>
-    <!-- Priority Modes: Generic trigger title for modes of other types [CHAR LIMIT=30] -->
+    <!-- Modes: Generic trigger title for modes of other types [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_generic">App settings</string>
-    <!-- Priority Modes: Generic trigger summary for modes where the owner app did not provide a triggerDescription but did provide a configurationActivity to call [CHAR LIMIT=60] -->
+    <!-- Modes: Generic trigger summary for modes where the owner app did not provide a triggerDescription but did provide a configurationActivity to call [CHAR LIMIT=60] -->
     <string name="zen_mode_trigger_summary_settings_in_app">Info and settings in <xliff:g id="app_name" example="The Awesome App">%1$s</xliff:g></string>
-    <!-- Priority Modes: Generic trigger summary for modes where the owner app did not provide neither a triggerDescription nor a configurationActivity to call [CHAR LIMIT=60] -->
+    <!-- Modes: Generic trigger summary for modes where the owner app did not provide neither a triggerDescription nor a configurationActivity to call [CHAR LIMIT=60] -->
     <string name="zen_mode_trigger_summary_managed_by_app">Managed by <xliff:g id="app_name" example="The Awesome App">%1$s</xliff:g></string>
 
-    <!-- Priority Modes: Title of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=20] -->
+    <!-- Modes: Title of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=20] -->
     <string name="zen_mode_confirm_disable_mode_title">Disable <xliff:g id="mode_name" example="Driving Mode">%1$s</xliff:g>?</string>
-    <!-- Priority Modes: Message body of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=NONE] -->
+    <!-- Modes: Message body of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=NONE] -->
     <string name="zen_mode_confirm_disable_message">This mode will never turn on when disabled</string>
-    <!-- Priority Modes: Button to disable a mode [CHAR LIMIT=20] -->
+    <!-- Modes: Button to disable a mode [CHAR LIMIT=20] -->
     <string name="zen_mode_action_disable">Disable</string>
-    <!-- Priority Modes: Title of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=20] -->
+    <!-- Modes: Title of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=20] -->
     <string name="zen_mode_confirm_enable_mode_title">Enable <xliff:g id="mode_name" example="Driving Mode">%1$s</xliff:g>?</string>
-    <!-- Priority Modes: Message body of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=NONE] -->
+    <!-- Modes: Message body of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=NONE] -->
     <string name="zen_mode_confirm_enable_message">This mode may turn on automatically based on its settings</string>
-    <!-- Priority Modes: Button to disable a mode [CHAR LIMIT=20] -->
+    <!-- Modes: Button to disable a mode [CHAR LIMIT=20] -->
     <string name="zen_mode_action_enable">Enable</string>
 
-    <!-- Priority Modes: Blurb for a mode that activates during a fixed time schedule (e.g. 9:00-17:00). [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode that activates during a fixed time schedule (e.g. 9:00-17:00). [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_schedule_time">Set a mode that follows a regular schedule</string>
-    <!-- Priority Modes: Blurb for a mode that activates during calendar events. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode that activates during calendar events. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_schedule_calendar">Set a mode to sync with calendar events and invite responses</string>
-    <!-- Priority Modes: Blurb for a mode of type BEDTIME. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode of type BEDTIME. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_bedtime">Design a calming sleep routine. Set alarms, dim the screen, and block notifications.</string>
-    <!-- Priority Modes: Blurb for a mode of type DRIVING. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode of type DRIVING. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_driving">Prioritize safety on the road for a focused and distraction-free drive</string>
-    <!-- Priority Modes: Blurb for a mode of type IMMERSIVE. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode of type IMMERSIVE. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_immersive">Block distractions or interruptions from your device to gain focus</string>
-    <!-- Priority Modes: Blurb for a mode of type THEATER. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode of type THEATER. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_theater">Eliminate all distractions for a quiet environment</string>
-    <!-- Priority Modes: Blurb for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_managed">Personalize device experiences and settings for different users</string>
-    <!-- Priority Modes: Blurb for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_generic">Minimize interruptions by only allowing important people and apps to reach you</string>
+
+    <!-- Modes: Inspirational text for a mode that activates during a fixed time schedule (e.g. 9:00-17:00). [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_inspiration_schedule_time">Set a mode that follows a regular schedule</string>
+    <!-- Modes: Inspirational text for a mode that activates during calendar events. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_inspiration_schedule_calendar">Keep your device in sync with your day’s events</string>
+    <!-- Modes: Inspirational text for a mode of type BEDTIME. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_inspiration_bedtime">Wake up feeling like 100%</string>
+    <!-- Modes: Inspirational text for a mode of type DRIVING. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_inspiration_driving">Put safety first while on the road</string>
+    <!-- Modes: Inspirational text for a mode of type IMMERSIVE. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_inspiration_immersive">Gain focus to get in the zone</string>
+    <!-- Modes: Inspirational text for a mode of type THEATER. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_inspiration_theater">For moments when courtesy counts</string>
+    <!-- Modes: Inspirational text for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_inspiration_managed">Guided usage to help you stay in good hands</string>
+    <!-- Modes: Inspirational text for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_inspiration_generic">Take control of your attention</string>
 
     <!-- Content description for help icon button [CHAR LIMIT=20] -->
     <string name="warning_button_text">Warning</string>
@@ -10087,6 +10171,18 @@
 
     <!-- Zen mode access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
     <string name="zen_access_revoke_warning_dialog_summary">All Do Not Disturb rules created by this app will be removed.</string>
+
+    <!-- Modes access settings - title for warning dialog when enabling access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_warning_dialog_title">Allow access to Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+
+    <!-- Modes access settings - summary for warning dialog when enabling access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb, manage and activate Modes, and make changes to related settings.</string>
+
+    <!-- Modes access settings - title for warning dialog when revoking access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+
+    <!-- Modes access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_revoke_warning_dialog_summary">All modes created by this app will be removed.</string>
 
     <!-- Ignore battery optimizations on label [CHAR LIMIT=30] -->
     <string name="ignore_optimizations_on">Don\u2019t optimize</string>
@@ -13446,7 +13542,7 @@
     <!-- Label of the color option show in the summary of screen flash preference. [CHAR LIMIT=60] -->
     <string name="screen_flash_color_violet">Violet</string>
     <!-- Button to save the selection in screen flash color selection dialog. [CHAR LIMIT=20] -->
-    <string name="color_selector_dialog_done">Done</string>
+    <string name="color_selector_dialog_save">Save</string>
     <!-- Button to close the dialog without saving in screen flash color selection dialog. [CHAR LIMIT=20] -->
     <string name="color_selector_dialog_cancel">Cancel</string>
 
@@ -13653,6 +13749,8 @@
     <string name="audio_sharing_confirm_dialog_title">Connect a compatible device</string>
     <!-- Content for audio sharing confirm dialog [CHAR LIMIT=none]-->
     <string name="audio_sharing_comfirm_dialog_content">To start sharing audio, first connect LE Audio headphones to your phone</string>
+    <!-- Text for audio sharing switch active device button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_switch_active_button_label">Switch to <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
 
     <!-- Title for audio streams preference category [CHAR LIMIT=none]-->
     <string name="audio_streams_category_title">Connect to a LE audio stream</string>
@@ -13742,6 +13840,8 @@
     <string name="audio_streams_main_page_password_dialog_cannot_edit">Can\u0027t edit password while sharing. To change the password, first turn off audio sharing.</string>
     <!-- Text for audio sharing qrcode scanner [CHAR LIMIT=none]-->
     <string name="audio_streams_qr_code_scanner_label">QR code scanner</string>
+    <!-- Learn more link for audio sharing qrcode [CHAR LIMIT=none]-->
+    <string name="audio_streams_qr_code_help_with_link"><annotation id="link">Need help?</annotation></string>
 
 
     <!-- url for learning more about bluetooth audio sharing -->
