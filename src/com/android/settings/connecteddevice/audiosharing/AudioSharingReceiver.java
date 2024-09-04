@@ -81,9 +81,15 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                 break;
             case ACTION_LE_AUDIO_SHARING_STOP:
                 LocalBluetoothManager manager = Utils.getLocalBtManager(context);
-                AudioSharingUtils.stopBroadcasting(manager);
-                metricsFeatureProvider.action(
-                        context, SettingsEnums.ACTION_STOP_AUDIO_SHARING_FROM_NOTIFICATION);
+                if (BluetoothUtils.isBroadcasting(manager)) {
+                    AudioSharingUtils.stopBroadcasting(manager);
+                    metricsFeatureProvider.action(
+                            context, SettingsEnums.ACTION_STOP_AUDIO_SHARING_FROM_NOTIFICATION);
+                } else {
+                    cancelSharingNotification(context);
+                    metricsFeatureProvider.action(
+                            context, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION);
+                }
                 break;
             default:
                 Log.w(TAG, "Received unexpected intent " + intent.getAction());

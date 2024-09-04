@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -46,9 +47,13 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.SettingsSpinnerAdapter;
+import com.android.settingslib.widget.SettingsSpinnerPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +63,7 @@ import java.util.Set;
 
 /** Controller for battery usage breakdown preference group. */
 public class BatteryUsageBreakdownController extends BasePreferenceController
-        implements LifecycleObserver, OnResume, OnDestroy {
+        implements LifecycleObserver, OnResume, OnDestroy, OnCreate, OnSaveInstanceState {
     private static final String TAG = "BatteryUsageBreakdownController";
     private static final String ROOT_PREFERENCE_KEY = "battery_usage_breakdown";
     private static final String FOOTER_PREFERENCE_KEY = "battery_usage_footer";
@@ -67,6 +72,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     private static final String PACKAGE_NAME_NONE = "none";
     private static final String SLOT_TIMESTAMP = "slot_timestamp";
     private static final String ANOMALY_KEY = "anomaly_key";
+    private static final String KEY_SPINNER_POSITION = "spinner_position";
     private static final List<BatteryDiffEntry> EMPTY_ENTRY_LIST = new ArrayList<>();
 
     private static int sUiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
@@ -78,12 +84,12 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
 
     @VisibleForTesting final Map<String, Preference> mPreferenceCache = new ArrayMap<>();
 
-    private int mSpinnerPosition;
     private String mSlotInformation;
+    private SettingsSpinnerPreference mSpinnerPreference;
+    private SettingsSpinnerAdapter<CharSequence> mSpinnerAdapter;
 
     @VisibleForTesting Context mPrefContext;
     @VisibleForTesting PreferenceCategory mRootPreference;
-    @VisibleForTesting SpinnerPreference mSpinnerPreference;
     @VisibleForTesting PreferenceGroup mAppListPreferenceGroup;
     @VisibleForTesting FooterPreference mFooterPreference;
     @VisibleForTesting BatteryDiffData mBatteryDiffData;
@@ -92,6 +98,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting String mPercentLessThanThresholdContentDescription;
     @VisibleForTesting boolean mIsHighlightSlot;
     @VisibleForTesting int mAnomalyKeyNumber;
+    @VisibleForTesting int mSpinnerPosition;
     @VisibleForTesting String mAnomalyEntryKey;
     @VisibleForTesting String mAnomalyHintString;
     @VisibleForTesting String mAnomalyHintPrefKey;
@@ -108,6 +115,15 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            return;
+        }
+        mSpinnerPosition = savedInstanceState.getInt(KEY_SPINNER_POSITION, mSpinnerPosition);
+        Log.d(TAG, "onCreate() spinnerPosition=" + mSpinnerPosition);
     }
 
     @Override
@@ -138,6 +154,15 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @Override
     public boolean isSliceable() {
         return false;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            return;
+        }
+        savedInstanceState.putInt(KEY_SPINNER_POSITION, mSpinnerPosition);
+        Log.d(TAG, "onSaveInstanceState() spinnerPosition=" + mSpinnerPosition);
     }
 
     private boolean isAnomalyBatteryDiffEntry(BatteryDiffEntry entry) {
@@ -218,11 +243,14 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                         formatPercentage);
 
         mAppListPreferenceGroup.setOrderingAsAdded(false);
-        mSpinnerPreference.initializeSpinner(
+        mSpinnerAdapter = new SettingsSpinnerAdapter<>(mPrefContext);
+        mSpinnerAdapter.addAll(
                 new String[] {
                     mPrefContext.getString(R.string.battery_usage_spinner_view_by_apps),
                     mPrefContext.getString(R.string.battery_usage_spinner_view_by_systems)
-                },
+                });
+        mSpinnerPreference.setAdapter(mSpinnerAdapter);
+        mSpinnerPreference.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(
@@ -244,6 +272,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {}
                 });
+        mSpinnerPreference.setSelection(mSpinnerPosition);
     }
 
     /**

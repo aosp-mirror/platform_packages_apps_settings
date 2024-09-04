@@ -21,8 +21,13 @@ import android.provider.Settings
 import android.telephony.SubscriptionInfo
 import com.android.settings.R
 import com.android.settings.network.SubscriptionUtil
+import com.android.settings.network.telephony.CarrierSettingsVersionPreferenceController.Companion.CarrierSettingsVersionSearchItem
+import com.android.settings.network.telephony.DataUsagePreferenceController.Companion.DataUsageSearchItem
 import com.android.settings.network.telephony.MmsMessagePreferenceController.Companion.MmsMessageSearchItem
 import com.android.settings.network.telephony.NrAdvancedCallingPreferenceController.Companion.NrAdvancedCallingSearchItem
+import com.android.settings.network.telephony.RoamingPreferenceController.Companion.RoamingSearchItem
+import com.android.settings.network.telephony.VideoCallingPreferenceController.Companion.VideoCallingSearchItem
+import com.android.settings.network.telephony.WifiCallingPreferenceController.Companion.WifiCallingSearchItem
 import com.android.settings.spa.SpaSearchLanding.BundleValue
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingFragment
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingKey
@@ -37,15 +42,14 @@ class MobileNetworkSettingsSearchIndex(
     private val searchItemsFactory: (context: Context) -> List<MobileNetworkSettingsSearchItem> =
         ::createSearchItems,
 ) {
+    data class MobileNetworkSettingsSearchResult(
+        val key: String,
+        val title: String,
+        val keywords: String? = null,
+    )
+
     interface MobileNetworkSettingsSearchItem {
-        val key: String
-
-        val title: String
-
-        val keywords: String?
-            get() = null
-
-        fun isAvailable(subId: Int): Boolean
+        fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult?
     }
 
     fun createSearchIndexableData(): SearchIndexableData {
@@ -69,13 +73,15 @@ class MobileNetworkSettingsSearchIndex(
         searchItem: MobileNetworkSettingsSearchItem,
         subInfos: List<SubscriptionInfo>
     ): List<SearchIndexableRaw> =
-        subInfos
-            .filter { searchItem.isAvailable(it.subscriptionId) }
-            .map { subInfo -> searchIndexableRaw(context, searchItem, subInfo) }
+        subInfos.mapNotNull { subInfo ->
+            searchItem.getSearchResult(subInfo.subscriptionId)?.let { searchResult ->
+                searchIndexableRaw(context, searchResult, subInfo)
+            }
+        }
 
     private fun searchIndexableRaw(
         context: Context,
-        searchItem: MobileNetworkSettingsSearchItem,
+        searchResult: MobileNetworkSettingsSearchResult,
         subInfo: SubscriptionInfo,
     ): SearchIndexableRaw {
         val key =
@@ -83,7 +89,7 @@ class MobileNetworkSettingsSearchIndex(
                 .setFragment(
                     SpaSearchLandingFragment.newBuilder()
                         .setFragmentName(MobileNetworkSettings::class.java.name)
-                        .setPreferenceKey(searchItem.key)
+                        .setPreferenceKey(searchResult.key)
                         .putArguments(
                             Settings.EXTRA_SUB_ID,
                             BundleValue.newBuilder().setIntValue(subInfo.subscriptionId).build()))
@@ -92,8 +98,8 @@ class MobileNetworkSettingsSearchIndex(
         return createSearchIndexableRaw(
             context = context,
             spaSearchLandingKey = key,
-            itemTitle = searchItem.title,
-            keywords = searchItem.keywords,
+            itemTitle = searchResult.title,
+            keywords = searchResult.keywords,
             indexableClass = MobileNetworkSettings::class.java,
             pageTitle = "$simsTitle > ${subInfo.displayName}",
         )
@@ -111,8 +117,14 @@ class MobileNetworkSettingsSearchIndex(
 
         fun createSearchItems(context: Context): List<MobileNetworkSettingsSearchItem> =
             listOf(
+                CarrierSettingsVersionSearchItem(context),
+                DataUsageSearchItem(context),
                 MmsMessageSearchItem(context),
                 NrAdvancedCallingSearchItem(context),
+                PreferredNetworkModeSearchItem(context),
+                RoamingSearchItem(context),
+                VideoCallingSearchItem(context),
+                WifiCallingSearchItem(context),
             )
     }
 }

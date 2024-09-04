@@ -17,35 +17,33 @@
 package com.android.settings.notification.modes;
 
 import android.app.Flags;
-import android.app.NotificationManager;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.UserHandle;
-import android.provider.Settings;
+import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 public class ZenModesLinkPreferenceController extends BasePreferenceController
-        implements LifecycleObserver, OnResume, OnPause {
+        implements LifecycleObserver, OnStart, OnStop {
+    private static final String TAG = "ModesLinkPrefController";
 
-    private SettingObserver mSettingObserver;
-    private ZenModeSummaryHelper mSummaryBuilder;
-    private NotificationManager mNm;
+    private final ZenModesBackend mBackend;
+    private final ZenSettingsObserver mSettingObserver;
+    private final ZenModeSummaryHelper mSummaryBuilder;
+
+    private Preference mPreference;
 
     public ZenModesLinkPreferenceController(Context context, String key) {
         super(context, key);
+        mBackend = ZenModesBackend.getInstance(context);
         mSummaryBuilder = new ZenModeSummaryHelper(context, ZenHelperBackend.getInstance(context));
-        mNm = mContext.getSystemService(NotificationManager.class);
+        mSettingObserver = new ZenSettingsObserver(context, this::onZenSettingsChanged);
     }
 
     @Override
@@ -57,64 +55,37 @@ public class ZenModesLinkPreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        Preference preference = screen.findPreference(getPreferenceKey());
-        mSettingObserver = new SettingObserver(preference);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (mSettingObserver != null) {
-            mSettingObserver.register(mContext.getContentResolver());
+            mSettingObserver.register();
         }
     }
 
-    @Override
-    public void onPause() {
-        if (mSettingObserver != null) {
-            mSettingObserver.unregister(mContext.getContentResolver());
+    private void onZenSettingsChanged() {
+        if (mPreference != null) {
+            updateState(mPreference);
         }
     }
 
     @Override
     public void updateState(Preference preference) {
-        preference.setSummary(mSummaryBuilder.getSoundSummary(
-                Settings.Global.getInt(mContext.getContentResolver(),
-                        Settings.Global.ZEN_MODE,
-                        Settings.Global.ZEN_MODE_OFF),
-                mNm.getZenModeConfig()));
+        try {
+            preference.setSummary(mSummaryBuilder.getModesSummary(mBackend.getModes()));
+        } catch (SecurityException e) {
+            // Standard usage should have the correct permissions to read zen state. But if we don't
+            // for whatever reason, don't crash.
+            Log.w(TAG, "No permission to read mode state");
+        }
     }
 
-    class SettingObserver extends ContentObserver {
-        private final Uri ZEN_MODE_URI = Settings.Global.getUriFor(Settings.Global.ZEN_MODE);
-        private final Uri ZEN_MODE_CONFIG_ETAG_URI = Settings.Global.getUriFor(
-                Settings.Global.ZEN_MODE_CONFIG_ETAG);
-
-        private final Preference mPreference;
-
-        public SettingObserver(Preference preference) {
-            super(new Handler());
-            mPreference = preference;
-        }
-
-        public void register(ContentResolver cr) {
-            cr.registerContentObserver(ZEN_MODE_URI, false, this, UserHandle.USER_ALL);
-            cr.registerContentObserver(ZEN_MODE_CONFIG_ETAG_URI, false, this, UserHandle.USER_ALL);
-        }
-
-        public void unregister(ContentResolver cr) {
-            cr.unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            super.onChange(selfChange, uri);
-            if (ZEN_MODE_URI.equals(uri)) {
-                updateState(mPreference);
-            }
-
-            if (ZEN_MODE_CONFIG_ETAG_URI.equals(uri)) {
-                updateState(mPreference);
-            }
+    @Override
+    public void onStop() {
+        if (mSettingObserver != null) {
+            mSettingObserver.unregister();
         }
     }
 }

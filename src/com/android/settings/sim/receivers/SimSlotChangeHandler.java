@@ -410,7 +410,7 @@ public class SimSlotChangeHandler {
             return;
         }
         Log.d(TAG, "Start ToggleSubscriptionDialogActivity with " + subId + " under DSDS+Mep.");
-        SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, true);
+        SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, true, true);
     }
 
     private boolean isMultipleEnabledProfilesSupported() {

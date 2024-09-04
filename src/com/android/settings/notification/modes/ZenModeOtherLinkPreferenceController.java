@@ -23,6 +23,7 @@ import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_MEDIA;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.service.notification.ZenPolicy;
 
@@ -60,19 +61,18 @@ class ZenModeOtherLinkPreferenceController extends AbstractZenModePreferenceCont
 
     @Override
     public boolean isAvailable(ZenMode zenMode) {
-        return zenMode.getRule().getInterruptionFilter() != INTERRUPTION_FILTER_ALL;
+        return zenMode.getInterruptionFilter() != INTERRUPTION_FILTER_ALL;
     }
 
     @Override
     public void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        // TODO: b/332937635 - Update metrics category
         preference.setIntent(
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModeOtherFragment.class,
-                        zenMode.getId(), 0).toIntent());
+                        zenMode.getId(), SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
 
-        preference.setEnabled(zenMode.isEnabled());
+        preference.setEnabled(zenMode.isEnabled() && zenMode.canEditPolicy());
         preference.setSummary(mSummaryHelper.getOtherSoundCategoriesSummary(zenMode));
-        ((CircularIconsPreference) preference).displayIcons(getSoundIcons(zenMode.getPolicy()));
+        ((CircularIconsPreference) preference).setIcons(getSoundIcons(zenMode.getPolicy()));
     }
 
     private CircularIconSet<Integer> getSoundIcons(ZenPolicy policy) {

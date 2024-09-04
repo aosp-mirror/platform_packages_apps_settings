@@ -20,14 +20,12 @@ import android.content.Context;
 
 import androidx.preference.PreferenceViewHolder;
 
-import com.google.common.util.concurrent.MoreExecutors;
-
 class TestableCircularIconsPreference extends CircularIconsPreference {
 
     private PreferenceViewHolder mLastViewHolder;
 
     TestableCircularIconsPreference(Context context) {
-        super(context, MoreExecutors.directExecutor());
+        super(context);
     }
 
     @Override

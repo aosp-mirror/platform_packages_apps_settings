@@ -44,6 +44,7 @@ import com.android.settings.testutils.shadow.ShadowBluetoothDevice;
 import com.android.settingslib.R;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
@@ -90,8 +91,12 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
     @Mock
     private CachedBluetoothDeviceManager mCachedBluetoothDeviceManager;
 
-    private @Mock A2dpProfile mA2dpProfile;
-    private @Mock LeAudioProfile mLeAudioProfile;
+    @Mock
+    private A2dpProfile mA2dpProfile;
+    @Mock
+    private LeAudioProfile mLeAudioProfile;
+    @Mock
+    private HearingAidProfile mHearingAidProfile;
 
     @Override
     public void setUp() {
@@ -109,7 +114,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         setUpMockProfiles();
         when(mCachedBluetoothDeviceManager.getCachedDevicesCopy())
                 .thenReturn(ImmutableList.of(mCachedDevice));
-        when(mCachedDevice.getConnectableProfiles())
+        when(mCachedDevice.getUiAccessibleProfiles())
                 .thenAnswer(invocation -> new ArrayList<>(mConnectableProfiles));
         when(mCachedDevice.getProfiles())
                 .thenAnswer(invocation -> ImmutableList.of(mConnectableProfiles));
@@ -399,18 +404,23 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         when(mProfileManager.getProfileByName(eq(mA2dpProfile.toString())))
                 .thenReturn(mA2dpProfile);
         when(mA2dpProfile.getNameResource(any()))
-                .thenReturn(com.android.settingslib.R.string.bluetooth_profile_a2dp);
+                .thenReturn(R.string.bluetooth_profile_a2dp);
         when(mA2dpProfile.getHighQualityAudioOptionLabel(any())).thenReturn(
-                mContext.getString(com.android.settingslib.R
-                        .string.bluetooth_profile_a2dp_high_quality_unknown_codec));
+                mContext.getString(R.string.bluetooth_profile_a2dp_high_quality_unknown_codec));
         when(mA2dpProfile.isProfileReady()).thenReturn(true);
         when(mProfileManager.getA2dpProfile()).thenReturn(mA2dpProfile);
 
         when(mLeAudioProfile.toString()).thenReturn("LE_AUDIO");
         when(mLeAudioProfile.getNameResource(any()))
-                .thenReturn(com.android.settingslib.R.string.bluetooth_profile_le_audio);
+                .thenReturn(R.string.bluetooth_profile_le_audio);
         when(mLeAudioProfile.isProfileReady()).thenReturn(true);
         when(mProfileManager.getLeAudioProfile()).thenReturn(mLeAudioProfile);
+
+        when(mHearingAidProfile.toString()).thenReturn("HearingAid");
+        when(mHearingAidProfile.getNameResource(any()))
+                .thenReturn(R.string.bluetooth_profile_hearing_aid);
+        when(mHearingAidProfile.isProfileReady()).thenReturn(true);
+        when(mProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
     }
 
     private void addA2dpProfileToDevice(boolean preferred, boolean supportsHighQualityAudio,
@@ -424,6 +434,11 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
     private void addLeAudioProfileToDevice(boolean enabled) {
         when(mLeAudioProfile.isEnabled(any())).thenReturn(enabled);
         mConnectableProfiles.add(mLeAudioProfile);
+    }
+
+    private void addHearingAidProfileToDevice(boolean enabled) {
+        when(mHearingAidProfile.isEnabled(any())).thenReturn(enabled);
+        mConnectableProfiles.add(mHearingAidProfile);
     }
 
     private SwitchPreferenceCompat getHighQualityAudioPref() {
@@ -539,7 +554,6 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void prefKeyInBlockingList_hideToggle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_BLUETOOTH_PROFILE_TOGGLE_VISIBILITY_CHECKER);
         setupDevice(makeDefaultDeviceConfig());
 
         addA2dpProfileToDevice(true, true, true);
@@ -554,7 +568,6 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void prefKeyNotInBlockingList_showToggle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_BLUETOOTH_PROFILE_TOGGLE_VISIBILITY_CHECKER);
         setupDevice(makeDefaultDeviceConfig());
 
         addA2dpProfileToDevice(true, true, true);
@@ -590,5 +603,28 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
         List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
         assertThat(switches.get(0).isVisible()).isFalse();
+    }
+
+    @Test
+    public void ashaHearingAid_hideAshaToggle() {
+        setupDevice(makeDefaultDeviceConfig());
+        addHearingAidProfileToDevice(true);
+
+        showScreen(mController);
+
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches.isEmpty()).isTrue();
+    }
+    @Test
+    public void ashaHearingAidWithLeAudio_showLeAudioToggle() {
+        setupDevice(makeDefaultDeviceConfig());
+        addHearingAidProfileToDevice(false);
+        addLeAudioProfileToDevice(true);
+
+        showScreen(mController);
+
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches.getFirst().getTitle()).isEqualTo(
+                mContext.getString(mLeAudioProfile.getNameResource(mDevice)));
     }
 }

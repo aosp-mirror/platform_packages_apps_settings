@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.modes;
 
+import static android.app.NotificationManager.INTERRUPTION_FILTER_NONE;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.mock;
@@ -62,6 +64,26 @@ public final class ZenModeOtherLinkPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_dnd_enabled() {
+        CircularIconsPreference preference = mock(CircularIconsPreference.class);
+        ZenMode dnd = TestModeBuilder.MANUAL_DND_ACTIVE;
+
+        mController.updateState(preference, dnd);
+
+        verify(preference).setEnabled(true);
+    }
+
+    @Test
+    public void updateState_specialDnd_disabled() {
+        CircularIconsPreference preference = mock(CircularIconsPreference.class);
+        ZenMode specialDnd = TestModeBuilder.manualDnd(INTERRUPTION_FILTER_NONE, true);
+
+        mController.updateState(preference, specialDnd);
+
+        verify(preference).setEnabled(false);
+    }
+
+    @Test
     public void updateState_disabled() {
         CircularIconsPreference pref = mock(CircularIconsPreference.class);
         ZenMode zenMode = new TestModeBuilder()
@@ -95,7 +117,7 @@ public final class ZenModeOtherLinkPreferenceControllerTest {
 
         mController.updateState(pref, mode);
 
-        verify(pref).displayIcons(argThat(iconSet -> iconSet.size() == 3));
+        verify(pref).setIcons(argThat(iconSet -> iconSet.size() == 3));
     }
 
     @Test
@@ -107,7 +129,7 @@ public final class ZenModeOtherLinkPreferenceControllerTest {
 
         mController.updateState(pref, mode);
 
-        verify(pref).displayIcons(argThat(iconSet ->
+        verify(pref).setIcons(argThat(iconSet ->
                 iconSet.size() == ZenModeSummaryHelper.OTHER_SOUND_CATEGORIES.size()));
     }
 }

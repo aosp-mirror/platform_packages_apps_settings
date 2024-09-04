@@ -556,6 +556,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return mContext.getDrawable(getHotspotIconResource(deviceType));
         }
         if (mWifiEntry.getLevel() == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
+            Log.w(TAG, "WiFi level is WIFI_LEVEL_UNREACHABLE(-1)");
             return mContext.getDrawable(R.drawable.empty_icon);
         }
         return mIconInjector.getIcon(wifiEntry.shouldShowXLevelIcon(), wifiEntry.getLevel());

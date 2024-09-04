@@ -81,12 +81,20 @@ class ZenHelperBackend {
         }
     }
 
-    @SuppressWarnings("unchecked")
+    ImmutableList<ConversationChannelWrapper> getAllConversations() {
+        return getConversations(false);
+    }
+
     ImmutableList<ConversationChannelWrapper> getImportantConversations() {
+        return getConversations(true);
+    }
+
+    @SuppressWarnings("unchecked")
+    private ImmutableList<ConversationChannelWrapper> getConversations(boolean onlyImportant) {
         try {
             ImmutableList.Builder<ConversationChannelWrapper> list = new ImmutableList.Builder<>();
             ParceledListSlice<ConversationChannelWrapper> parceledList = mInm.getConversations(
-                    /* onlyImportant= */ true);
+                    onlyImportant);
             if (parceledList != null) {
                 for (ConversationChannelWrapper conversation : parceledList.getList()) {
                     if (!conversation.getNotificationChannel().isDemoted()) {

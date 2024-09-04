@@ -25,7 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
@@ -164,8 +164,7 @@ public class AudioSharingReceiverTest {
         AudioSharingReceiver audioSharingReceiver = getAudioSharingReceiver(intent);
         audioSharingReceiver.onReceive(mContext, intent);
 
-        verify(mNm, times(1))
-                .notify(eq(R.drawable.ic_bt_le_audio_sharing), any(Notification.class));
+        verify(mNm).notify(eq(R.drawable.ic_bt_le_audio_sharing), any(Notification.class));
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(mContext, SettingsEnums.ACTION_SHOW_AUDIO_SHARING_NOTIFICATION);
     }
@@ -181,7 +180,7 @@ public class AudioSharingReceiverTest {
         AudioSharingReceiver audioSharingReceiver = getAudioSharingReceiver(intent);
         audioSharingReceiver.onReceive(mContext, intent);
 
-        verify(mNm, times(1)).cancel(R.drawable.ic_bt_le_audio_sharing);
+        verify(mNm).cancel(R.drawable.ic_bt_le_audio_sharing);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(mContext, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION);
     }
@@ -199,8 +198,10 @@ public class AudioSharingReceiverTest {
     }
 
     @Test
-    public void broadcastReceiver_receiveAudioSharingStopIntent_stopBroadcast() {
+    public void
+            broadcastReceiver_receiveAudioSharingStopIntent_notInBroadcast_cancelNotification() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        when(mBroadcast.isEnabled(null)).thenReturn(false);
         int broadcastId = 1;
         when(mBroadcast.getLatestBroadcastId()).thenReturn(broadcastId);
 
@@ -209,7 +210,25 @@ public class AudioSharingReceiverTest {
         AudioSharingReceiver audioSharingReceiver = getAudioSharingReceiver(intent);
         audioSharingReceiver.onReceive(mContext, intent);
 
-        verify(mBroadcast, times(1)).stopBroadcast(broadcastId);
+        verify(mBroadcast, never()).stopBroadcast(broadcastId);
+        verify(mNm).cancel(R.drawable.ic_bt_le_audio_sharing);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(mContext, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION);
+    }
+
+    @Test
+    public void broadcastReceiver_receiveAudioSharingStopIntent_inBroadcast_stopBroadcast() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
+        int broadcastId = 1;
+        when(mBroadcast.getLatestBroadcastId()).thenReturn(broadcastId);
+
+        Intent intent = new Intent(ACTION_LE_AUDIO_SHARING_STOP);
+        intent.setPackage(mContext.getPackageName());
+        AudioSharingReceiver audioSharingReceiver = getAudioSharingReceiver(intent);
+        audioSharingReceiver.onReceive(mContext, intent);
+
+        verify(mBroadcast).stopBroadcast(broadcastId);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(mContext, SettingsEnums.ACTION_STOP_AUDIO_SHARING_FROM_NOTIFICATION);
     }

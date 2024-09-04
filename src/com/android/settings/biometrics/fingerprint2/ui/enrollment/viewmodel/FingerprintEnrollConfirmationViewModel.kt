@@ -16,27 +16,27 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.settings.SettingsApplication
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.CanEnrollFingerprintsInteractor
 import kotlinx.coroutines.flow.Flow
 
 /** Models the UI state for [FingerprintEnrollConfirmationV2Fragment] */
 class FingerprintEnrollConfirmationViewModel(
   private val navigationViewModel: FingerprintNavigationViewModel,
-  fingerprintInteractor: FingerprintManagerInteractor,
+  private val canEnrollFingerprintsInteractor: CanEnrollFingerprintsInteractor,
 ) : ViewModel() {
 
   /**
    * Indicates if the add another button is possible. This should only be true when the user is able
    * to enroll more fingerprints.
    */
-  val isAddAnotherButtonVisible: Flow<Boolean> = fingerprintInteractor.canEnrollFingerprints
+  val isAddAnotherButtonVisible: Flow<Boolean> =
+    canEnrollFingerprintsInteractor.canEnrollFingerprints
 
   /**
    * Indicates that the user has clicked the next button and is done with fingerprint enrollment.
@@ -64,7 +64,7 @@ class FingerprintEnrollConfirmationViewModel(
         val provider = ViewModelProvider(this[VIEW_MODEL_STORE_OWNER_KEY]!!)
         FingerprintEnrollConfirmationViewModel(
           provider[FingerprintNavigationViewModel::class],
-          biometricEnvironment!!.fingerprintManagerInteractor,
+          biometricEnvironment!!.createCanEnrollFingerprintsInteractor(),
         )
       }
     }

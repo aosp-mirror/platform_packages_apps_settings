@@ -42,13 +42,10 @@ import static android.service.notification.ZenPolicy.VISUAL_EFFECT_STATUS_BAR;
 
 import android.content.Context;
 import android.icu.text.MessageFormat;
-import android.provider.Settings;
 import android.service.notification.ZenDeviceEffects;
-import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenPolicy;
 import android.service.notification.ZenPolicy.ConversationSenders;
 import android.service.notification.ZenPolicy.PeopleType;
-import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -140,6 +137,14 @@ class ZenModeSummaryHelper {
     }
 
     String getMessagesSettingSummary(ZenPolicy policy) {
+        if (policy.getPriorityCategoryMessages() == STATE_ALLOW
+                && policy.getPriorityMessageSenders() == PEOPLE_TYPE_ANYONE) {
+            // Messages=anyone means anyone. Even if conversation senders is specially configured,
+            // saying "Anyone and priority conversations" 1) makes no sense and 2) is incorrect
+            // because conversations WILL get through by virtue of also being messages.
+            return mContext.getString(R.string.zen_mode_from_anyone);
+        }
+
         List<String> enabledCategories = getEnabledCategories(policy,
                 category -> PRIORITY_CATEGORY_MESSAGES == category
                         || PRIORITY_CATEGORY_CONVERSATIONS == category, true);
@@ -204,48 +209,46 @@ class ZenModeSummaryHelper {
         boolean isFirst = true;
         List<String> enabledEffects = new ArrayList<>();
         if (!zenMode.getPolicy().shouldShowAllVisualEffects()
-                && zenMode.getRule().getInterruptionFilter() != INTERRUPTION_FILTER_ALL) {
+                && zenMode.getInterruptionFilter() != INTERRUPTION_FILTER_ALL) {
             enabledEffects.add(getBlockedEffectsSummary(zenMode));
             isFirst = false;
         }
-        ZenDeviceEffects currEffects = zenMode.getRule().getDeviceEffects();
-        if (currEffects != null) {
-            if (currEffects.shouldDisplayGrayscale()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_grayscale_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_grayscale_title_secondary_list));
-                }
-                isFirst = false;
+        ZenDeviceEffects currEffects = zenMode.getDeviceEffects();
+        if (currEffects.shouldDisplayGrayscale()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_grayscale_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_grayscale_title_secondary_list));
             }
-            if (currEffects.shouldSuppressAmbientDisplay()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_aod_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_aod_title_secondary_list));
-                }
-                isFirst = false;
+            isFirst = false;
+        }
+        if (currEffects.shouldSuppressAmbientDisplay()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_aod_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_aod_title_secondary_list));
             }
-            if (currEffects.shouldDimWallpaper()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_wallpaper_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_wallpaper_title_secondary_list));
-                }
-                isFirst = false;
+            isFirst = false;
+        }
+        if (currEffects.shouldDimWallpaper()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_wallpaper_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_wallpaper_title_secondary_list));
             }
-            if (currEffects.shouldUseNightMode()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_dark_theme_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_dark_theme_title_secondary_list));
-                }
-                isFirst = false;
+            isFirst = false;
+        }
+        if (currEffects.shouldUseNightMode()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_dark_theme_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_dark_theme_title_secondary_list));
             }
+            isFirst = false;
         }
 
         int numCategories = enabledEffects.size();
@@ -278,10 +281,11 @@ class ZenModeSummaryHelper {
                     continue;
                 }
 
-                // For conversations, only the "priority conversations" setting is relevant; any
-                // other setting is subsumed by the messages-specific messaging.
+                // For conversations, only the "all/priority conversations" settings are relevant;
+                // any other setting is subsumed by the messages-specific messaging.
                 if (category == PRIORITY_CATEGORY_CONVERSATIONS
                         && policy.isCategoryAllowed(PRIORITY_CATEGORY_CONVERSATIONS, false)
+                        && policy.getPriorityConversationSenders() != CONVERSATION_SENDERS_ANYONE
                         && policy.getPriorityConversationSenders()
                         != CONVERSATION_SENDERS_IMPORTANT) {
                     continue;
@@ -320,13 +324,20 @@ class ZenModeSummaryHelper {
             } else {
                 return mContext.getString(R.string.zen_mode_from_starred);
             }
-        } else if (category == PRIORITY_CATEGORY_CONVERSATIONS
-                && policy.getPriorityConversationSenders() == CONVERSATION_SENDERS_IMPORTANT) {
-            if (isFirst) {
-                return mContext.getString(R.string.zen_mode_from_important_conversations);
-            } else {
-                return mContext.getString(
-                        R.string.zen_mode_from_important_conversations_second);
+        } else if (category == PRIORITY_CATEGORY_CONVERSATIONS) {
+            if (policy.getPriorityConversationSenders() == CONVERSATION_SENDERS_IMPORTANT) {
+                if (isFirst) {
+                    return mContext.getString(R.string.zen_mode_from_important_conversations);
+                } else {
+                    return mContext.getString(
+                            R.string.zen_mode_from_important_conversations_second);
+                }
+            } else if (policy.getPriorityConversationSenders() == CONVERSATION_SENDERS_ANYONE) {
+                if (isFirst) {
+                    return mContext.getString(R.string.zen_mode_from_all_conversations);
+                } else {
+                    return mContext.getString(R.string.zen_mode_from_all_conversations_second);
+                }
             }
         } else if (category == PRIORITY_CATEGORY_EVENTS) {
             if (isFirst) {
@@ -480,32 +491,36 @@ class ZenModeSummaryHelper {
         return msgFormat.format(args);
     }
 
-    String getSoundSummary(int zenMode, ZenModeConfig config) {
-        if (zenMode != Settings.Global.ZEN_MODE_OFF) {
-            String description = ZenModeConfig.getDescription(mContext, true, config, false);
+    String getModesSummary(List<ZenMode> modes) {
+        List<ZenMode> activeModes = modes.stream().filter(ZenMode::isActive).toList();
 
-            if (description == null) {
-                return mContext.getString(R.string.zen_mode_sound_summary_on);
-            } else {
-                return mContext.getString(R.string.zen_mode_sound_summary_on_with_info,
-                        description);
-            }
-        } else {
-            int count = 0;
-            final ArrayMap<String, ZenModeConfig.ZenRule> ruleMap = config.automaticRules;
-            if (ruleMap != null) {
-                for (ZenModeConfig.ZenRule rule : ruleMap.values()) {
-                    if (rule != null && rule.enabled) {
-                        count++;
-                    }
+        if (!activeModes.isEmpty()) {
+            MessageFormat msgFormat = new MessageFormat(
+                    mContext.getString(R.string.zen_modes_summary_some_active),
+                    Locale.getDefault());
+
+            Map<String, Object> args = new HashMap<>();
+            args.put("count", activeModes.size());
+            args.put("mode_1", activeModes.get(0).getName());
+            if (activeModes.size() >= 2) {
+                args.put("mode_2", activeModes.get(1).getName());
+                if (activeModes.size() == 3) {
+                    args.put("mode_3", activeModes.get(2).getName());
                 }
             }
+
+            return msgFormat.format(args);
+        } else {
+            int automaticModeCount = (int) modes.stream()
+                    .filter(m -> m.isEnabled() && !m.isManualDnd() && !m.isCustomManual())
+                    .count();
+
             MessageFormat msgFormat = new MessageFormat(
-                    mContext.getString(R.string.modes_sound_summary_off),
+                    mContext.getString(R.string.zen_modes_summary_none_active),
                     Locale.getDefault());
-            Map<String, Object> msgArgs = new HashMap<>();
-            msgArgs.put("count", count);
+            Map<String, Object> msgArgs = Map.of("count", automaticModeCount);
             return msgFormat.format(msgArgs);
         }
     }
+
 }

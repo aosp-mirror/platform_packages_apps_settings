@@ -25,12 +25,13 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.Companion.isMobileNetworkSettingsSearchable
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 import com.android.settings.spa.SpaSearchLanding.BundleValue
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingFragment
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingKey
 import com.android.settings.spa.search.SpaSearchLandingActivity
+import com.android.settings.spa.search.decodeToSpaSearchLandingKey
 import com.google.common.truth.Truth.assertThat
-import com.google.protobuf.ByteString
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -62,10 +63,12 @@ class MobileNetworkSettingsSearchIndexTest {
     private val mobileNetworkSettingsSearchIndex = MobileNetworkSettingsSearchIndex {
         listOf(
             object : MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem {
-                override val key = KEY
-                override val title = TITLE
-
-                override fun isAvailable(subId: Int) = subId == SUB_ID_1
+                override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? =
+                    if (subId == SUB_ID_1) {
+                        MobileNetworkSettingsSearchResult(key = KEY, title = TITLE)
+                    } else {
+                        null
+                    }
             })
     }
 
@@ -101,7 +104,7 @@ class MobileNetworkSettingsSearchIndexTest {
             searchIndexableData.searchIndexProvider.getDynamicRawDataToIndex(context, true)
         assertThat(dynamicRawDataToIndex).hasSize(1)
         val rawData = dynamicRawDataToIndex[0]
-        val key = SpaSearchLandingKey.parseFrom(ByteString.copyFromUtf8(rawData.key))
+        val key = decodeToSpaSearchLandingKey(rawData.key)
         assertThat(key)
             .isEqualTo(
                 SpaSearchLandingKey.newBuilder()

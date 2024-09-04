@@ -23,6 +23,7 @@ import android.content.Intent;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -30,6 +31,7 @@ import com.android.settings.notification.modes.ZenModesListAddModePreferenceCont
 import com.android.settings.notification.modes.ZenModesListAddModePreferenceController.OnAddModeListener;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexable;
@@ -55,16 +57,19 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             ZenModesBackend backend, OnAddModeListener onAddModeListener) {
         return ImmutableList.of(
-                new ZenModesListPreferenceController(context, backend),
+                new ZenModesListPreferenceController(context, backend, ZenIconLoader.getInstance()),
                 new ZenModesListAddModePreferenceController(context, onAddModeListener)
         );
     }
 
     @Override
     protected void onUpdatedZenModeState() {
-        // TODO: b/322373473 -- update any overall description of modes state here if necessary.
-        // Note the preferences linking to individual rules do not need to be updated, as
-        // updateState() is called on all preference controllers whenever the page is resumed.
+        // Preferences linking to individual rules do not need to be updated as part of onStart(),
+        // because DashboardFragment does that in onResume(). However, we force the update if we
+        // detect Modes changes in the background with the page open.
+        if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
+            forceUpdatePreferences();
+        }
     }
 
     @Override
@@ -74,8 +79,7 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - add new & set metrics categories correctly
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_AUTOMATION;
+        return SettingsEnums.ZEN_PRIORITY_MODES_LIST;
     }
 
     private void onAvailableModeTypesForAdd(List<ModeType> types) {
@@ -97,10 +101,9 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
             startActivityForResult(type.creationActivityIntent(), REQUEST_NEW_MODE);
         } else {
             // Custom-manual mode -> "add a mode" screen.
-            // TODO: b/332937635 - set metrics categories correctly
             new SubSettingLauncher(requireContext())
                     .setDestination(ZenModeNewCustomFragment.class.getName())
-                    .setSourceMetricsCategory(0)
+                    .setSourceMetricsCategory(SettingsEnums.ZEN_PRIORITY_MODES_LIST)
                     .launch();
         }
     }
@@ -125,7 +128,9 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
                 .filter(m -> m.getRule().getPackageName().equals(activityInvoked.getPackageName()))
                 .findFirst();
         createdZenMode.ifPresent(
-                mode -> ZenSubSettingLauncher.forMode(mContext, mode.getId()).launch());
+                mode ->
+                        ZenSubSettingLauncher.forModeFragment(mContext, ZenModeFragment.class,
+                                mode.getId(), getMetricsCategory()).launch());
     }
 
     /**

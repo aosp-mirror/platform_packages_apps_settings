@@ -41,8 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Suspendat"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Necunoscut"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Previzualizare"</string>
-    <!-- no translation found for qr_code_content_description (1852208464419291347) -->
-    <skip />
+    <string name="qr_code_content_description" msgid="1852208464419291347">"Cod QR"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Micșorează"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Mărește"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Întotdeauna"</string>
@@ -181,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Selectarea limbii pentru această aplicație din Setări nu este disponibilă."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Limba poate fi alta decât limbile disponibile în aplicație. Este posibil ca unele aplicații să nu accepte această setare."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Setează limba pentru fiecare aplicație."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sistemul, aplicațiile și site-urile folosesc prima limbă acceptată dintre limbile preferate."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Dispozitivul, aplicațiile și site-urile dvs. folosesc prima limbă acceptată din lista de limbi preferate.\n\nMulte aplicații vor folosi și regiunea aferentă limbii preferate pentru a formata date, numere și unități. Ca să schimbi regiunea, adaugă o limbă, apoi alege regiunea preferată."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Ca să selectezi o limbă pentru fiecare aplicație, accesează setările de limbă ale aplicației"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Află mai multe despre limbile aplicațiilor"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Schimbi limba sistemului la %s?"</string>
@@ -412,7 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Au fost adăugate fața și <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Au fost adăugate fața, amprenta și <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Au fost adăugate fața, amprentele și <xliff:g id="WATCH">%s</xliff:g>"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="5461737411954922392">"Acțiunea este necesară deoarece Verificarea identității este activată"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"Verificarea identității este activată"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Deblocarea cu Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Ceasul a fost adăugat"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configurează ceasul"</string>
@@ -624,6 +623,9 @@
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Se configurează spațiul privat…"</string>
     <string name="private_space_error_screen_title" msgid="739381738044418346">"Nu s-a putut configura un spațiu privat"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Încearcă din nou"</string>
+    <string name="private_space_exit_label" msgid="2358175237993013881">"Ieși"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Spațiul privat nu este disponibil.\nVezi cauzele posibile"</string>
+    <string name="private_space_error_causes_text" msgid="1649162505129365620">"Vezi cauzele posibile"</string>
     <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Alegi o blocare nouă pentru spațiul privat?"</string>
     <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Poți să setezi o nouă blocare doar pentru spațiul privat sau să folosești aceeași blocare pe care o folosești pentru a debloca dispozitivul."</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Folosește blocarea ecranului"</string>
@@ -665,7 +667,7 @@
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Alege o nouă blocare pentru serviciu"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Pentru mai multă siguranță, configurează o blocare a ecranului de rezervă"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Alege metoda de rezervă de blocare a ecranului"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Dacă uitați parola blocării ecranului, administratorul IT nu o poate reseta."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Dacă uiți parola blocării ecranului, administratorul IT nu o poate reseta."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Setează o blocare separată pentru serviciu"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Dacă uiți blocarea, solicită-i administratorului IT să o reseteze"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opțiuni de blocare a ecranului"</string>
@@ -834,6 +836,8 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Modifică"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalii despre dispozitiv"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Setări tastatură"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Mai multe setări"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Actualizări de firmware, informații și altele"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresa Bluetooth a dispozitivului: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Adresa Bluetooth a dispozitivului: \n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Elimini dispozitivul?"</string>
@@ -843,6 +847,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Ameliorează calitatea audio."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Elimină dispozitivul"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Deconectează aplicația"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Mai multe setări"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Numărul maxim de dispozitive audio Bluetooth conectate"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selectează numărul maxim de dispozitive audio Bluetooth conectate"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Jurnal de remediere erori pentru furnizorii detaliați NFC"</string>
@@ -950,7 +955,7 @@
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Lista drop-down Opțiuni avansate"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"extindeți"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Numele rețelei"</string>
-    <string name="wifi_ssid_hint" msgid="1940577553241083524">"Introdu identificatorul SSID"</string>
+    <string name="wifi_ssid_hint" msgid="1940577553241083524">"Introdu SSID-ul"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Securitate"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Rețea ascunsă"</string>
     <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Dacă routerul nu transmite un ID de rețea, dar vrei să te conectezi la rețea în viitor, o poți seta ca ascunsă.\n\nAceasta ar putea crea un risc de securitate deoarece telefonul va transmite regulat semnal ca să găsească rețeaua.\n\nDacă setezi rețeaua ca ascunsă, setările pentru router nu se modifică."</string>
@@ -1330,8 +1335,8 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Folosești <xliff:g id="CARRIER">%1$s</xliff:g> pentru date mobile?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Folosești <xliff:g id="CARRIER2_0">%2$s</xliff:g> pentru datele mobile. Când comuți la <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> nu va mai fi folosit pentru date mobile."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Folosește <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Actualizezi SIM-ul preferat?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> este singurul card SIM de pe dispozitiv. Vrei să folosești acest card SIM pentru date mobile, apeluri și mesaje SMS?"</string>
+    <!-- no translation found for sim_preferred_message (4894337280925553873) -->
+    <skip />
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Crești acoperirea datelor mobile?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Permite ca dispozitivul să comute automat la <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> pentru date mobile când are o disponibilitate mai mare."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Apelurile, mesajele și traficul de rețea pot fi vizibile pentru organizația ta."</string>
@@ -1936,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personalizează gesturi individuale de navigare cu touchpadul"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Derulare inversă"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Conținutul se deplasează în sus când derulezi în jos"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Atingere în dreapta jos"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Atinge colțul din dreapta jos al touchpadului pentru alte opțiuni"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic în dreapta jos"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Dă clic în colțul din dreapta jos pe touchpad pentru opțiuni"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Viteza indicatorului"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Stilul de umplere al pointerului"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Schimbă stilul de umplere în negru"</string>
@@ -2357,14 +2362,14 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Acest serviciu nu funcționează corect."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Comenzi rapide pentru accesibilitate"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Afișează în Setări rapide"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Roșu-verde"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Roșu-verde"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Roșu-verde, verde pal"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Roșu-verde, roșu pal"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Albastru-galben"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Tonuri de gri"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensitate"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Indisponibil pentru modul Tonuri de gri sau când corecția culorii este dezactivată"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Percepție slabă a culorii verde, deuteranomalie"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Percepție slabă a culorii roșu, protanomalie"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalie"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalie"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Luminozitate redusă suplimentar"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Redu suplimentar luminozitatea"</string>
@@ -3334,22 +3339,34 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Activat/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> și <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Sau poți activa funcția Audio spațial pentru dispozitivele Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Setări pentru dispozitivele conectate"</string>
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Audio spațial"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Dezactivat"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Dezactivat"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Dezactivat"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Niciunul}=1{Un program setat}few{# programe setate}other{# de programe setate}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Nu deranja"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Moduri cu prioritate"</string>
-    <string name="zen_modes_add_mode" msgid="4806287336036228772">"Adaugă un mod"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimizează factorii perturbatori și concentrează-te cu moduri pentru somn, lucru, condus și orice alte activități."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Creează propriul mod"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Primește notificări doar de la persoane și aplicații importante"</string>
-    <string name="zen_mode_select_schedule" msgid="5135520719771212697">"Selectează tipul de activare"</string>
-    <string name="zen_mode_select_schedule_time" msgid="1761728920617757652">"Ora"</string>
-    <string name="zen_mode_select_schedule_time_example" msgid="3071816060919446355">"De exemplu, 9:30 – 17:00"</string>
-    <string name="zen_mode_select_schedule_calendar" msgid="4320676795917533667">"Calendar"</string>
-    <string name="zen_mode_select_schedule_calendar_example" msgid="6549820995975678001">"De exemplu, Calendar personal"</string>
+    <string name="zen_mode_select_schedule" msgid="663163931596092952">"Setează un program"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Program bazat pe"</string>
+    <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Data și ora"</string>
+    <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"În zilele lucrătoare între 09:00 și 17:00"</string>
+    <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Evenimente din calendar"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} este activ}=2{{mode_1} și {mode_2} sunt active}=3{{mode_1}, {mode_2} și {mode_3} sunt active}few{{mode_1}, {mode_2} și încă # sunt active}other{{mode_1}, {mode_2} și încă # sunt active}}"</string>
+    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{Un mod se poate activa automat}few{# moduri se pot activa automat}other{# de moduri se pot activa automat}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ACTIVAT"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nesetat"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Dezactivat"</string>
     <string name="zen_mode_new_title" msgid="4934720193004330740">"Creează un mod"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Personalizat"</string>
+    <string name="zen_mode_action_activate" msgid="4832626715234966484">"Activează acum"</string>
+    <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Dezactivează"</string>
+    <string name="zen_mode_not_found_text" msgid="692090778655810329">"Modul nu a fost găsit"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitează întreruperile"</string>
+    <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Blochează întreruperile și perturbările"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Configurează <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Activează Nu deranja"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmele și sunetele media îl pot întrerupe"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Programe"</string>
@@ -3361,14 +3378,13 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Editează"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Programe"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Program"</string>
-    <string name="zen_mode_automatic_trigger_title" msgid="9193777783079000267">"Activează automat"</string>
-    <string name="zen_mode_set_calendar_title" msgid="7216665046452644450">"Adaugă un calendar"</string>
-    <string name="zen_mode_set_calendar_link" msgid="5694504696975898068">"Folosește-ți calendarul"</string>
-    <string name="zen_mode_set_calendar_category_title" msgid="4860286061420133360">"Program"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8023100831320026233">"Setează un program"</string>
+    <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Când se activează automat"</string>
+    <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Programul evenimentelor"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Activ. în timpul evenimentelor"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Când răspunsul la invitație e"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Program pe ore"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Program"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min."</string>
-    <string name="zen_mode_configuration_link_title" msgid="4718358055721023371">"Activează automat"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Program"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Dezactivează sunetul uneori"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Setează regulile pentru Nu deranja"</string>
@@ -3378,8 +3394,8 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Permite întreruperile care emit sunete"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blochează întreruperile vizuale"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permite semnale vizuale"</string>
-    <string name="mode_interruption_filter_title" msgid="3343846700214702347">"Concentrează-te"</string>
-    <string name="mode_device_effects_title" msgid="5857008332618433744">"Acțiuni suplimentare"</string>
+    <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Filtre pentru notificări"</string>
+    <string name="mode_device_effects_title" msgid="6019908499525166737">"Mai multe setări"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Dezactivat}=1{Dezactivat / Un mod se poate activa automat}few{Dezactivat / # moduri se pot activa automat}other{Dezactivat / # de moduri se pot activa automat}}"</string>
     <string name="mode_display_settings_title" msgid="8132825978346535472">"Setări de afișare"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Opțiuni de afișare"</string>
@@ -3396,8 +3412,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"activează tema întunecată"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Modifică sistemul de operare și aplicațiile astfel încât să se afișeze text de culoare deschisă pe un fundal de culoare închisă, care este mai odihnitor pentru ochi și asigură economisirea considerabilă a bateriei în cazul unor dispozitive"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nicio modificare a afișării}=1{{effect_1}}=2{{effect_1} și {effect_2}}=3{{effect_1}, {effect_2} și {effect_3}}few{{effect_1}, {effect_2} și încă #}other{{effect_1}, {effect_2} și încă #}}"</string>
-    <string name="mode_notification_filter_title" msgid="443728483176031977">"Filtrează întreruperile"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nu sunt filtrate întreruperi"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permite toate notificările"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Persoanele, aplicațiile și sunetele îl pot întrerupe"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opțiuni de afișare pentru notificările filtrate"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Când funcția „Nu deranja” este activată"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Fără sunet de la notificări"</string>
@@ -3624,7 +3640,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Poate să răspundă la mesaje și să declanșeze butoane pentru acțiuni din notificări, inclusiv să amâne sau să închidă notificări și să răspundă la apeluri."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"să modifice setările."</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Poate să activeze sau să dezactiveze starea Nu deranja și să modifice setările aferente."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Poate să gestioneze și să activeze Modurile cu prioritate și să modifice setările asociate."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Dacă dezactivezi accesul notificărilor pentru <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, este posibil să se dezactiveze și accesul când starea este Nu deranja."</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Dacă dezactivezi accesul la notificări pentru <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, este posibil să fie dezactivat și accesul la Modurile cu prioritate."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Dezactivează"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Anulează"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"În timp real"</string>
@@ -3685,6 +3703,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acces la funcția Nu deranja"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permite modul Nu deranja"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Nicio aplicație instalată nu a solicitat accesul Nu deranja"</string>
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Acces la Moduri cu prioritate"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Permite accesul la Modurile cu prioritate"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Nicio aplicație instalată nu a solicitat accesul la Modurile cu prioritate"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Nu ai permis notificările de la această aplicație"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"La solicitarea ta, Android blochează această categorie de notificări pe dispozitiv"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"La solicitarea ta, Android blochează acest grup de notificări pe dispozitiv"</string>
@@ -3748,6 +3769,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Conversații"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Toate conversațiile"</string>
+    <string name="zen_mode_from_all_conversations_second" msgid="6781738302202989293">"toate conversațiile"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Conversații cu prioritate"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"conversații prioritare"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Niciuna"</string>
@@ -3843,37 +3865,37 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Schimbă la „Numai alarme” până la <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Schimbă la „Întrerupe întotdeauna”"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Editează modul"</string>
-    <string name="zen_mode_new_custom_title" msgid="321750898430776191">"Adaugă un mod"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Creează un mod"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Mod personalizat"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Numele modului"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Evenimente din calendar"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="5086070900588489978">"Program de somn"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina orei de culcare"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"La volan"</string>
-    <string name="zen_mode_trigger_title_generic" msgid="601273385119550420">"Conectat la aplicație"</string>
+    <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Setările aplicației"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informații și setări din <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Gestionat de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_title" msgid="1232297660775719796">"Dezactivează modul"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="7315541221665718491">"Dacă dezactivezi funcția, modul nu va mai funcționa așa cum vrei și setările sale se vor ascunde."</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Dezactivezi <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Modul nu se va activa niciodată dacă a fost dezactivat"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Dezactivează"</string>
-    <string name="zen_mode_confirm_enable_title" msgid="5683371335847448595">"Activează modul"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="7017879133260011419">"Dacă activezi funcția, modul se va activa automat în funcție de program"</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Activezi <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Modul se poate activa automat în funcție de setări"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Activează"</string>
-    <!-- no translation found for zen_mode_blurb_schedule_time (8223898702097484009) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_schedule_calendar (382177907856065945) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_bedtime (6155075956151013457) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_driving (1316054379000667305) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_immersive (5884004861848687869) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_theater (2999237960059524225) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_managed (5473921634985032149) -->
-    <skip />
-    <!-- no translation found for zen_mode_blurb_generic (3041601339807075625) -->
-    <skip />
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Setează un mod care urmează un program obișnuit"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Setează un mod de sincronizare cu evenimentele din calendar și răspunsurile la invitații"</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Creează o rutină de somn relaxantă. Setează alarme, redu luminozitatea ecranului și blochează notificările."</string>
+    <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Dă prioritate siguranței pe drum pentru concentrare deplină la volan, fără distrageri"</string>
+    <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blochează distragerile sau întreruperile pe dispozitiv pentru concentrare maximă"</string>
+    <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimină toate distragerile pentru un mediu liniștit"</string>
+    <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalizează experiențele și setările pe dispozitiv pentru utilizatori diferiți"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Redu la minimum întreruperile permițându-le doar persoanelor și aplicațiilor importante să-ți capteze atenția"</string>
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Setează un mod care respectă un program regulat"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Menține dispozitivul sincronizat cu evenimentele din ziua respectivă"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Trezește-te cu bateria 100 % încărcată"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Pune siguranța pe primul loc când conduci"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentrează-te pentru performanță maximă"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Pentru momentele în care politețea este importantă"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Folosire ghidată care te ajută să rămâi în siguranță"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Acordă atenție"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Avertisment"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Închide"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Trimite feedback despre dispozitiv"</string>
@@ -4074,6 +4096,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Trebuie să rămână activat deoarece accesul notificărilor este activat"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Revoci accesul la Nu deranja pentru <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Toate regulile din modul Nu deranja create de această aplicație vor fi eliminate."</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Permiți accesul la Modurile cu prioritate pentru <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Aplicația va putea să activeze / dezactiveze modul Nu deranja, să gestioneze și să activeze Modurile cu prioritate și să modifice setările aferente."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Revoci accesul la Modurile cu prioritate pentru <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Toate modurile create de această aplicație vor fi eliminate."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Nu se optimizează"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Se optimizează"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Este posibil ca bateria să se descarce mai rapid. Aplicațiile vor putea să folosească bateria în fundal."</string>
@@ -4860,8 +4886,7 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Bateria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panou de setări"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Activează ferestrele cu formă liberă"</string>
-    <!-- no translation found for enable_desktop_mode_on_secondary_display (2609567824593768780) -->
-    <skip />
+    <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Activează ferestrele cu formă liberă pe ecranul II"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Permite aplicații fără redimensionare în ferestre multiple"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permite aplicațiile fără redimensionare în ferestre multiple"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Modifică funcția Force-Dark"</string>
@@ -5183,10 +5208,8 @@
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizează"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personalizează <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Este nevoie de o repornire pentru a permite ferestrele cu formă liberă."</string>
-    <!-- no translation found for reboot_dialog_override_desktop_mode (7480950772574354130) -->
-    <skip />
-    <!-- no translation found for reboot_dialog_enable_desktop_mode_on_secondary_display (1153621881052401924) -->
-    <skip />
+    <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Este necesară o repornire pentru a actualiza disponibilitatea ferestrelor cu formă liberă."</string>
+    <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Este necesară o repornire pentru a permite ferestrele cu formă liberă pe ecranele secundare."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Repornește acum"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Repornește mai târziu"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Audio spațial"</string>
@@ -5283,7 +5306,7 @@
     <string name="screen_flash_color_rose" msgid="1216848195972231251">"Trandafiriu"</string>
     <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
     <string name="screen_flash_color_violet" msgid="1279950780509029495">"Violet"</string>
-    <string name="color_selector_dialog_done" msgid="121253968943363376">"Gata"</string>
+    <string name="color_selector_dialog_save" msgid="199628785429085344">"Salvează"</string>
     <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Anulează"</string>
     <string name="contrast_default" msgid="8918545965525226966">"Prestabilit"</string>
     <string name="contrast_medium" msgid="384414510709285811">"Mediu"</string>
