@@ -16,6 +16,9 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -32,9 +35,13 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
@@ -42,6 +49,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
@@ -91,8 +99,7 @@ public class AudioStreamsHelperTest {
 
     @Test
     public void addSource_noDevice_doNothing() {
-        when(mAssistant.getAllConnectedDevices())
-                .thenReturn(Collections.emptyList());
+        when(mAssistant.getAllConnectedDevices()).thenReturn(Collections.emptyList());
         mHelper.addSource(mMetadata);
 
         verify(mAssistant, never()).addSource(any(), any(), anyBoolean());
@@ -114,8 +121,7 @@ public class AudioStreamsHelperTest {
 
     @Test
     public void removeSource_noDevice_doNothing() {
-        when(mAssistant.getAllConnectedDevices())
-                .thenReturn(Collections.emptyList());
+        when(mAssistant.getAllConnectedDevices()).thenReturn(Collections.emptyList());
         mHelper.removeSource(BROADCAST_ID_1);
 
         verify(mAssistant, never()).removeSource(any(), anyInt());
@@ -235,5 +241,41 @@ public class AudioStreamsHelperTest {
         mHelper.startMediaService(mContext, BROADCAST_ID_1, BROADCAST_NAME);
 
         verify(mContext).startService(any());
+    }
+
+    @Test
+    public void configureAppBarByOrientation_landscape_shouldNotExpand() {
+        FragmentActivity fragmentActivity = mock(FragmentActivity.class);
+        // AppBarLayout requires a Theme.AppCompat.
+        mContext.setTheme(R.style.Theme_Settings_Home);
+        AppBarLayout appBarLayout = spy(new AppBarLayout(mContext));
+        setUpFragment(fragmentActivity, appBarLayout, ORIENTATION_LANDSCAPE);
+
+        AudioStreamsHelper.configureAppBarByOrientation(fragmentActivity);
+
+        verify(appBarLayout).setExpanded(eq(false));
+    }
+
+    @Test
+    public void configureAppBarByOrientation_portrait_shouldExpand() {
+        FragmentActivity fragmentActivity = mock(FragmentActivity.class);
+        // AppBarLayout requires a Theme.AppCompat.
+        mContext.setTheme(R.style.Theme_Settings_Home);
+        AppBarLayout appBarLayout = spy(new AppBarLayout(mContext));
+        setUpFragment(fragmentActivity, appBarLayout, ORIENTATION_PORTRAIT);
+
+        AudioStreamsHelper.configureAppBarByOrientation(fragmentActivity);
+
+        verify(appBarLayout).setExpanded(eq(true));
+    }
+
+    private void setUpFragment(
+            FragmentActivity fragmentActivity, AppBarLayout appBarLayout, int orientationPortrait) {
+        Resources resources = mock(Resources.class);
+        when(fragmentActivity.getResources()).thenReturn(resources);
+        Configuration configuration = new Configuration();
+        configuration.orientation = orientationPortrait;
+        when(resources.getConfiguration()).thenReturn(configuration);
+        when(fragmentActivity.findViewById(anyInt())).thenReturn(appBarLayout);
     }
 }

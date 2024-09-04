@@ -24,6 +24,7 @@ import static android.service.notification.ZenModeConfig.tryParseScheduleConditi
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -86,7 +87,7 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
 
         mModeName = zenMode.getName();
         PrimarySwitchPreference triggerPref = (PrimarySwitchPreference) preference;
-        triggerPref.setChecked(zenMode.getRule().isEnabled());
+        triggerPref.setChecked(zenMode.isEnabled());
         triggerPref.setOnPreferenceChangeListener(mSwitchChangeListener);
         if (zenMode.isSystemOwned()) {
             setUpForSystemOwnedTrigger(triggerPref, zenMode);
@@ -97,9 +98,9 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
 
     private void setUpForSystemOwnedTrigger(Preference preference, ZenMode mode) {
         if (mode.getType() == TYPE_SCHEDULE_TIME) {
-            // TODO: b/332937635 - set correct metrics category
             preference.setIntent(ZenSubSettingLauncher.forModeFragment(mContext,
-                    ZenModeSetScheduleFragment.class, mode.getId(), 0).toIntent());
+                    ZenModeSetScheduleFragment.class, mode.getId(),
+                    SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
 
             // [Clock Icon] 9:00 - 17:00 / Sun-Mon
             preference.setIcon(com.android.internal.R.drawable.ic_zen_mode_type_schedule_time);
@@ -115,9 +116,9 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
                 preference.setSummary(null);
             }
         } else if (mode.getType() == TYPE_SCHEDULE_CALENDAR) {
-            // TODO: b/332937635 - set correct metrics category
             preference.setIntent(ZenSubSettingLauncher.forModeFragment(mContext,
-                    ZenModeSetCalendarFragment.class, mode.getId(), 0).toIntent());
+                    ZenModeSetCalendarFragment.class, mode.getId(),
+                    SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
 
             // [Event Icon] Calendar Events / <Calendar name>
             preference.setIcon(
@@ -212,11 +213,13 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
 
     private void setModeEnabled(boolean enabled) {
         saveMode((zenMode) -> {
-            if (enabled != zenMode.getRule().isEnabled()) {
+            if (enabled != zenMode.isEnabled()) {
                 zenMode.getRule().setEnabled(enabled);
             }
             return zenMode;
         });
+        getMetricsFeatureProvider().action(mContext, SettingsEnums.ACTION_ZEN_MODE_ENABLE_TOGGLE,
+                enabled);
     }
 
     private void undoToggleSwitch(Preference preference, boolean wasSwitchedTo) {

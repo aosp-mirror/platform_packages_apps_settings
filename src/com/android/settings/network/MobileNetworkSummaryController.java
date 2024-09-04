@@ -35,7 +35,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.network.telephony.euicc.EuiccRepository;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
@@ -118,7 +118,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         if ((mSubInfoEntityList == null || mSubInfoEntityList.isEmpty()) || (
                 mUiccInfoEntityList == null || mUiccInfoEntityList.isEmpty()) || (
                 mMobileNetworkInfoEntityList == null || mMobileNetworkInfoEntityList.isEmpty())) {
-            if (MobileNetworkUtils.showEuiccSettingsDetecting(mContext)) {
+            if (new EuiccRepository(mContext).showEuiccSettings()) {
                 return mContext.getResources().getString(
                         R.string.mobile_network_summary_add_a_network);
             }
@@ -168,7 +168,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
                 || (mUiccInfoEntityList == null || mUiccInfoEntityList.isEmpty())
                 || (mMobileNetworkInfoEntityList == null
                 || mMobileNetworkInfoEntityList.isEmpty()))) {
-            if (MobileNetworkUtils.showEuiccSettingsDetecting(mContext)) {
+            if (new EuiccRepository(mContext).showEuiccSettings()) {
                 mPreference.setOnPreferenceClickListener((Preference pref) -> {
                     logPreferenceClick(pref);
                     startAddSimFlow();

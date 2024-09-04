@@ -50,6 +50,31 @@ class SubscriptionRepository(private val context: Context) {
     fun getSelectableSubscriptionInfoList(): List<SubscriptionInfo> =
         context.getSelectableSubscriptionInfoList()
 
+    /** Flow of whether the subscription visible for the given [subId]. */
+    fun isSubscriptionVisibleFlow(subId: Int): Flow<Boolean> {
+        return subscriptionsChangedFlow()
+            .map {
+                val subInfo =
+                    subscriptionManager.availableSubscriptionInfoList?.firstOrNull { subInfo ->
+                        subInfo.subscriptionId == subId
+                    }
+                subInfo != null &&
+                    SubscriptionUtil.isSubscriptionVisible(subscriptionManager, context, subInfo)
+            }
+            .conflate()
+            .onEach { Log.d(TAG, "[$subId] isSubscriptionVisibleFlow: $it") }
+            .flowOn(Dispatchers.Default)
+    }
+
+    /** TODO: Move this to UI layer, when UI layer migrated to Kotlin. */
+    fun collectSubscriptionVisible(
+        subId: Int,
+        lifecycleOwner: LifecycleOwner,
+        action: (Boolean) -> Unit,
+    ) {
+        isSubscriptionVisibleFlow(subId).collectLatestWithLifecycle(lifecycleOwner, action = action)
+    }
+
     /** Flow of whether the subscription enabled for the given [subId]. */
     fun isSubscriptionEnabledFlow(subId: Int): Flow<Boolean> {
         if (!SubscriptionManager.isValidSubscriptionId(subId)) return flowOf(false)

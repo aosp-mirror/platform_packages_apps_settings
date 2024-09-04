@@ -23,11 +23,12 @@
 
     <PreferenceCategory
         android:key="battery_tips_category"
+        android:layout="@layout/preference_category_no_label"
         settings:controller=
             "com.android.settings.fuelgauge.batteryusage.BatteryTipsController"
         settings:isPreferenceVisible="false">
 
-        <com.android.settings.fuelgauge.batteryusage.BatteryTipsCardPreference
+        <com.android.settings.widget.TipCardPreference
             android:key="battery_tips_card"
             settings:isPreferenceVisible="false" />
 
@@ -56,12 +57,13 @@
             "com.android.settings.fuelgauge.batteryusage.BatteryUsageBreakdownController"
         settings:isPreferenceVisible="false">
 
-        <com.android.settings.fuelgauge.batteryusage.SpinnerPreference
+        <com.android.settingslib.widget.SettingsSpinnerPreference
             android:key="battery_usage_spinner"
             settings:isPreferenceVisible="false" />
 
         <PreferenceCategory
             android:key="app_list"
+            android:layout="@layout/preference_category_no_label"
             settings:isPreferenceVisible="false" />
 
         <com.android.settingslib.widget.FooterPreference

@@ -1068,6 +1068,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
         final WifiEntry wifiEntry = pref.getWifiEntry();
+        if (!wifiEntry.isSaved()) {
+            Log.w(TAG, "launchNetworkDetailsFragment: Don't launch because WifiEntry isn't saved!");
+            return;
+        }
         final Context context = requireContext();
 
         final Bundle bundle = new Bundle();

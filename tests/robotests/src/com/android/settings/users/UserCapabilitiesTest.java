@@ -81,6 +81,17 @@ public class UserCapabilitiesTest {
     }
 
     @Test
+    public void changeAdminStatus_updateUserCapabilities_mIsAdminGetsUpdated() {
+        mUserManager.setIsAdminUser(false);
+        UserCapabilities userCapabilities = UserCapabilities.create(mContext);
+        assertThat(userCapabilities.isAdmin()).isFalse();
+
+        mUserManager.setIsAdminUser(true);
+        userCapabilities.updateAddUserCapabilities(mContext);
+        assertThat(userCapabilities.mIsAdmin).isTrue();
+    }
+
+    @Test
     public void userSwitchEnabled_off() {
         mUserManager.setUserSwitcherEnabled(false);
 
