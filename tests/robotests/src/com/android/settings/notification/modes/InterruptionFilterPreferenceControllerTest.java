@@ -17,6 +17,7 @@
 package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
+import static android.app.NotificationManager.INTERRUPTION_FILTER_NONE;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.service.notification.ZenPolicy.STATE_DISALLOW;
 
@@ -65,6 +66,26 @@ public final class InterruptionFilterPreferenceControllerTest {
 
         mContext = RuntimeEnvironment.application;
         mController = new InterruptionFilterPreferenceController(mContext, "something",  mBackend);
+    }
+
+    @Test
+    public void updateState_dnd_enabled() {
+        TwoStatePreference preference = mock(TwoStatePreference.class);
+        ZenMode dnd = TestModeBuilder.MANUAL_DND_ACTIVE;
+
+        mController.updateState(preference, dnd);
+
+        verify(preference).setEnabled(true);
+    }
+
+    @Test
+    public void updateState_specialDnd_disabled() {
+        TwoStatePreference preference = mock(TwoStatePreference.class);
+        ZenMode specialDnd = TestModeBuilder.manualDnd(INTERRUPTION_FILTER_NONE, true);
+
+        mController.updateState(preference, specialDnd);
+
+        verify(preference).setEnabled(false);
     }
 
     @Test
