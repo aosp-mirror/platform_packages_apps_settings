@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo.storage;
 
-import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -61,6 +59,7 @@ public class NonCurrentUserControllerTest {
 
     private static final String TEST_NAME = "Fred";
     private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";
+    private static final long MEGABYTE_IN_BYTES = 1000_000;
     @Mock
     private UserManager mUserManager;
     @Mock
