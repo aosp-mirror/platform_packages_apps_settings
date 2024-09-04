@@ -411,7 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Додати су лице и <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Додати су лице, отисак прста и <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Додати су лице, отисци прстију и <xliff:g id="WATCH">%s</xliff:g>"</string>
-    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <!-- no translation found for mandatory_biometrics_prompt_description (6790144699440050735) -->
     <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Откључавање уз Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Сат је додат"</string>
@@ -837,6 +837,10 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Промени"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Детаљи о уређају"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Подешавања тастатуре"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Још подешавања"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Ажурирања фирмвера, основни подаци и друго"</string>
+    <!-- no translation found for bluetooth_device_tip_support (6072338493592606897) -->
+    <skip />
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Bluetooth адреса уређаја: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Bluetooth адреса уређаја:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Желите ли да заборавите уређај?"</string>
@@ -846,6 +850,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Експериментално. Бољи квалитет звука."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Заборави уређај"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Прекини везу са апликацијом"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Још подешавања"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максималан број повезаних Bluetooth аудио уређаја"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Изаберите максимални број повезаних Bluetooth аудио уређаја"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC опширна евиденција продавца о отклањању грешака"</string>
@@ -1333,8 +1338,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Користити <xliff:g id="CARRIER">%1$s</xliff:g> за моб. податке?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Користите <xliff:g id="CARRIER2_0">%2$s</xliff:g> за мобилне податке. Ако пређете на <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> се више неће користити за мобилне податке."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Користи <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Желите да ажурирате жељени SIM?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> је једина SIM картица у уређају. Желите ли да користите ову SIM картицу за мобилне податке, позиве и SMS поруке?"</string>
+    <string name="sim_preferred_message" msgid="4894337280925553873">"<xliff:g id="NEW_SIM">%1$s</xliff:g> је сада примарни SIM"</string>
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Желите да побољшате покривеност?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Дозволите уређају да се аутоматски пребаци на <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> за мобилне податке кад доступност буде боља."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Позиви, поруке и мрежни саобраћај могу да буду видљиви вашој организацији."</string>
@@ -1939,8 +1943,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Прилагодите индивидуалне покрете за кретање по тачпеду"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Обрнуто скроловање"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Садржај се помера нагоре када скролујете надоле"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Додир у доњем десном углу"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Додирните доњи десни угао тачпеда за више опција"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Клик доле десно"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"За више опција, кликните на доњи десни угао тачпеда"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Брзина показивача"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Стил попуне показивача"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Промените стил попуне у црно"</string>
@@ -3337,6 +3341,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Укључено/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> и <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Можете да укључите и просторни звук за Bluetooth уређаје."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Подешавања повезаних уређаја"</string>
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Просторни звук"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Искључено"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Искључено"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Искључено"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ниједан}=1{1 распоред је подешен}one{# распоред је подешен}few{# распореда су подешена}other{# распореда је подешено}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не узнемиравај"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Приоритетни режими"</string>
@@ -3406,8 +3414,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"омогући тамну тему"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Пребаците ОС и апликације на светао текст на тамној позадини. То може да буде лакше за очи и доводи до знатне уштеде батерије на неким уређајима"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Нема промена екрана}=1{{effect_1}}=2{{effect_1} и {effect_2}}=3{{effect_1}, {effect_2} и {effect_3}}one{{effect_1}, {effect_2} и још #}few{{effect_1}, {effect_2} и још #}other{{effect_1}, {effect_2} и још #}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Ограничите шта може да вас обавештава"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Ниједан прекид се не филтрира"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Омогући сва обавештења"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Људи, апликације и звуци могу да прекину режим"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Опције приказа за филтрирана обавештења"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Када је укључен режим Не узнемиравај"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Без звучног сигнала за обавештења"</string>
@@ -3634,7 +3642,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Може да одговара на поруке и предузима радње повезане са дугмади у обавештењима, укључујући одлагање или одбацивање обавештења и одговарање на позиве."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"да мења подешавања"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Може да укључује или искључује режим Не узнемиравај и мења сродна подешавања."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Може да управља приоритетним режимима и активира их, као и да мења сродна подешавања."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ако искључите приступ обавештењима за <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, искључићете и приступ режиму Не узнемиравај."</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Ако искључите приступ обавештењима за <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, можда ће се искључити и приступ приоритетним режимима."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Искључи"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Откажи"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"У реалном времену"</string>
@@ -3695,6 +3705,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Приступ опцији Не узнемиравај"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Дозволи режим Не узнемиравај"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ниједна инсталирана апликација није захтевала приступ опцији Не узнемиравај"</string>
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Приступ приоритетним режимима"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Дозволи приступ приоритетним режимима"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Ниједна инсталирана апликација није захтевала приступ приоритетним режимима"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Нисте дозволили обавештења из ове апликације"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"На ваш захтев, Android блокира приказивање ове категорије обавештења на овом уређају"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"На ваш захтев, Android блокира приказивање ове групе обавештења на овом уређају"</string>
@@ -3877,6 +3890,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Елиминишите сваку могућност ометања за тихо окружење"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Персонализујте доживљај уређаја и подешавања за различите кориснике"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Смањите могућност прекида тако што ћете дозволити да вас контактирају само важне особе и апликације"</string>
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Подесите режим који прати редован распоред"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Синхронизујте уређај са дневним догађајима"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Пробудите се са 100% енергије"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Будите безбедни на путу"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Останите фокусирани"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"За тренутке када је услужност важна"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Вођено коришћење помаже да будете сигурни"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Повратите контролу над пажњом"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Упозорење"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Затвори"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Шаљи повратне информације о уређају"</string>
@@ -4077,6 +4098,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Мора да остане укључено јер је приступ обавештењима укључен"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Опозивате приступ режиму Не узнемиравај за апликацију <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Уклонићемо сва правила за режим Не узнемиравај која је ова апликација направила."</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Желите да дозволите приступ приоритетним режимима за: <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Апликација ће моћи да укључује или искључује подешавање Не узнемиравај, да управља приоритетним режимима и активира их, као и да уноси промене у сродна подешавања."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Желите да опозовете приступ приоритетним режимима за: <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Уклонићемо све режиме које је ова апликација направила."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Не оптимизуј"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Оптимизуј"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Батерија може брже да се испразни. Апликацијама више неће бити забрањено коришћење батерије у позадини."</string>

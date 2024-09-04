@@ -81,6 +81,12 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            // Sub id could invalid, if this page is opened from external action and no sim is
+            // active.
+            // Ignore this case, since this page will be finished soon.
+            return
+        }
         wifiCallingRepositoryFactory(subId).wifiCallingReadyFlow()
             .collectLatestWithLifecycle(viewLifecycleOwner) { isReady ->
                 preference.isVisible = isReady

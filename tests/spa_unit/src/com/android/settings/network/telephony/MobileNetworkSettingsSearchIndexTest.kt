@@ -30,8 +30,8 @@ import com.android.settings.spa.SpaSearchLanding.BundleValue
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingFragment
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingKey
 import com.android.settings.spa.search.SpaSearchLandingActivity
+import com.android.settings.spa.search.decodeToSpaSearchLandingKey
 import com.google.common.truth.Truth.assertThat
-import com.google.protobuf.ByteString
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -104,7 +104,7 @@ class MobileNetworkSettingsSearchIndexTest {
             searchIndexableData.searchIndexProvider.getDynamicRawDataToIndex(context, true)
         assertThat(dynamicRawDataToIndex).hasSize(1)
         val rawData = dynamicRawDataToIndex[0]
-        val key = SpaSearchLandingKey.parseFrom(ByteString.copyFromUtf8(rawData.key))
+        val key = decodeToSpaSearchLandingKey(rawData.key)
         assertThat(key)
             .isEqualTo(
                 SpaSearchLandingKey.newBuilder()

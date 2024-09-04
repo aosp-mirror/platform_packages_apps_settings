@@ -37,8 +37,8 @@ import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 
 /**
- * Presents a dialog asking the user if they want to update all services to use a given "preferred"
- * SIM. Typically this would be used in a case where a device goes from having multiple SIMs down to
+ * After androidV, presents a dialog asking the user if they want to update the mobile data.
+ * Typically this would be used in a case where a device goes from having multiple SIMs down to
  * only one.
  */
 public class PreferredSimDialogFragment extends SimDialogFragment implements
@@ -48,7 +48,7 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
     public static PreferredSimDialogFragment newInstance() {
         final PreferredSimDialogFragment fragment = new PreferredSimDialogFragment();
         final Bundle args = initArguments(SimDialogActivity.PREFERRED_PICK,
-                R.string.sim_preferred_title);
+                R.string.select_specific_sim_for_data_title);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,7 +57,6 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         final AlertDialog dialog = new AlertDialog.Builder(getContext())
-                .setTitle(getTitleResId())
                 .setPositiveButton(R.string.yes, this)
                 .setNegativeButton(R.string.no, null)
                 .create();
@@ -104,10 +103,18 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
             dismiss();
             return;
         }
+        Log.d(TAG, "SubscriptionInfo: " + info);
+        final CharSequence simName =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info, getContext());
+        final String title =
+                getContext().getString(
+                        getTitleResId(),
+                        simName);
         final String message =
                 getContext().getString(
                         R.string.sim_preferred_message,
-                        SubscriptionUtil.getUniqueSubscriptionDisplayName(info, getContext()));
+                        simName);
+        dialog.setTitle(title);
         dialog.setMessage(message);
     }
 

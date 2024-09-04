@@ -63,7 +63,6 @@ import com.android.settings.development.autofill.AutofillCategoryController;
 import com.android.settings.development.autofill.AutofillLoggingLevelPreferenceController;
 import com.android.settings.development.autofill.AutofillResetOptionsPreferenceController;
 import com.android.settings.development.bluetooth.AbstractBluetoothDialogPreferenceController;
-import com.android.settings.development.bluetooth.AbstractBluetoothListPreferenceController;
 import com.android.settings.development.bluetooth.AbstractBluetoothPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothBitPerSampleDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothChannelModeDialogPreferenceController;
@@ -844,8 +843,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 ((AbstractBluetoothDialogPreferenceController) controller).onHDAudioEnabled(
                         enabled);
             }
-            if (controller instanceof AbstractBluetoothListPreferenceController) {
-                ((AbstractBluetoothListPreferenceController) controller).onHDAudioEnabled(enabled);
+            if (controller instanceof BluetoothCodecListPreferenceController) {
+                ((BluetoothCodecListPreferenceController) controller).onHDAudioEnabled(enabled);
             }
         }
     }

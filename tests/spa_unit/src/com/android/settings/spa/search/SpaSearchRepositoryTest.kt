@@ -23,7 +23,6 @@ import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingSpaPage
 import com.android.settings.spa.search.SpaSearchRepository.Companion.createSearchIndexableData
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.google.common.truth.Truth.assertThat
-import com.google.protobuf.ByteString
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
@@ -46,7 +45,7 @@ class SpaSearchRepositoryTest {
         assertThat(searchIndexableData.targetClass).isEqualTo(pageProvider::class.java)
         assertThat(dynamicRawDataToIndex).hasSize(1)
         val rawData = dynamicRawDataToIndex[0]
-        val key = SpaSearchLandingKey.parseFrom(ByteString.copyFromUtf8(rawData.key))
+        val key = decodeToSpaSearchLandingKey(rawData.key)
         assertThat(key)
             .isEqualTo(
                 SpaSearchLandingKey.newBuilder()

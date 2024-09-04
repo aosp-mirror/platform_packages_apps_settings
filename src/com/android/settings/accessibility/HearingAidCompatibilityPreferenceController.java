@@ -25,6 +25,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 
 /** Preference controller for Hearing Aid Compatibility (HAC) settings */
 public class HearingAidCompatibilityPreferenceController extends TogglePreferenceController {
@@ -73,6 +74,8 @@ public class HearingAidCompatibilityPreferenceController extends TogglePreferenc
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(
+                getMetricsCategory(), getPreferenceKey(), isChecked ? 1 : 0);
         setAudioParameterHacEnabled(isChecked);
         return Settings.System.putInt(mContext.getContentResolver(), Settings.System.HEARING_AID,
                 (isChecked ? HAC_ENABLED : HAC_DISABLED));

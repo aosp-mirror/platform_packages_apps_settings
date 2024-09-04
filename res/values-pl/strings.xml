@@ -384,7 +384,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Jak to działa"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Odblokowywanie odciskiem palca tworzy unikalny model odcisku palca, który pozwala zweryfikować Twoją tożsamość. Aby taki model mógł powstać, musisz odcisnąć palec kilka razy pod różnymi kątami."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Odblokowywanie odciskiem palca tworzy unikalny model odcisku palca, który pozwala zweryfikować tożsamość Twojego dziecka. Aby utworzyć taki model odcisku palca podczas konfiguracji, trzeba odcisnąć palec kilka razy pod różnymi kątami."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Najlepsze efekty z osłoną ekranu z oznaczeniem „Made for Google”. W przypadku innych osłon ekranu Twój odcisk palca może nie zadziałać."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Najlepiej jest używać osłony ekranu z oznaczeniem „Made for Google”. W przypadku innych osłon ekranu Twój odcisk palca może nie zadziałać."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Najlepsze efekty daje osłona ekranu z oznaczeniem „Made for Google”. W przypadku innych osłon ekranu odcisk palca Twojego dziecka może nie zadziałać."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Odblokowywanie za pomocą zegarka"</string>
@@ -411,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Dodano skan twarzy i <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Dodano skan twarzy, odcisk palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Dodano skan twarzy, odciski palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"Weryfikacja tożsamości jest włączona"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (6790144699440050735) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Odblokowanie Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Dodano zegarek"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Skonfiguruj zegarek"</string>
@@ -836,6 +837,10 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Zmień"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Szczegóły urządzenia"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Ustawienia klawiatury"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Więcej ustawień"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Aktualizacje oprogramowania i inne informacje"</string>
+    <!-- no translation found for bluetooth_device_tip_support (6072338493592606897) -->
+    <skip />
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adres Bluetooth urządzenia: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Adres Bluetooth urządzenia: \n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Zapomnieć urządzenie?"</string>
@@ -845,6 +850,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Funkcja eksperymentalna. Poprawia jakość dźwięku."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Zapomnij urządzenie"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Odłącz aplikację"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Więcej ustawień"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksymalna liczba podłączonych urządzeń audio Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Wybierz maksymalną liczbę podłączonych urządzeń audio Bluetooth"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Dziennik debugowania szczegółowości NFC"</string>
@@ -1332,8 +1338,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Użyć: <xliff:g id="CARRIER">%1$s</xliff:g> do transmisji danych?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Używasz sieci <xliff:g id="CARRIER2_0">%2$s</xliff:g> do transmisji danych. Jeśli przełączysz się na sieć <xliff:g id="CARRIER1">%1$s</xliff:g>, sieć <xliff:g id="CARRIER2_1">%2$s</xliff:g> nie będzie już używana do mobilnej transmisji danych."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Użyj karty operatora <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Zaktualizować preferowaną kartę SIM?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> jest jedyną kartą SIM w Twoim urządzeniu. Czy chcesz jej użyć do mobilnej transmisji danych, nawiązywania połączeń i wysyłania SMS-ów?"</string>
+    <string name="sim_preferred_message" msgid="4894337280925553873">"<xliff:g id="NEW_SIM">%1$s</xliff:g> to teraz Twoja główna karta SIM"</string>
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Zwiększyć zasięg mobilnej transmisji danych?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Zezwól na automatyczne przełączanie urządzenia na operatora <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> w przypadku mobilnej transmisji danych, jeśli będzie zapewniał lepszą dostępność."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Połączenia, wiadomości i ruch w sieci mogą być widoczne dla organizacji."</string>
@@ -1938,8 +1943,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Dostosuj indywidualne gesty nawigacyjne na touchpada"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Odwrotne przewijanie"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Treści przesuwają się w górę, kiedy przewijasz w dół"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Kliknięcie w prawym dolnym rogu"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Kliknij prawy dolny róg touchpada, aby wyświetlić więcej opcji"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Kliknięcie w prawym dolnym rogu"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliknij prawy dolny róg touchpada, aby zobaczyć więcej opcji"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Szybkość wskaźnika"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Styl wypełnienia wskaźnika"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Zmień styl wypełnienia na czarny"</string>
@@ -3336,6 +3341,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Włączony / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> i <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Możesz też włączyć dźwięk przestrzenny na urządzeniach Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Ustawienia połączonych urządzeń"</string>
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Dźwięk przestrzenny"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Wył."</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Wył."</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Wył."</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Brak}=1{Ustawiono 1 harmonogram}few{Ustawiono # harmonogramy}many{Ustawiono # harmonogramów}other{Ustawiono # harmonogramu}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Nie przeszkadzać"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Tryby priorytetowe"</string>
@@ -3405,8 +3414,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"włącz ciemny motyw"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Włącz preferowanie jasnego tekstu na ciemnym tle w systemie operacyjnym i aplikacjach, co mniej obciąża oczy i może zapewnić znacznie większą oszczędność energii na niektórych urządzeniach"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Brak zmian dotyczących wyświetlania}=1{{effect_1}}=2{{effect_1} i {effect_2}}=3{{effect_1}, {effect_2} i {effect_3}}few{{effect_1}, {effect_2} i # więcej}many{{effect_1}, {effect_2} i # więcej}other{{effect_1}, {effect_2} i # więcej}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Ogranicz źródła powiadomień"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Żadne zakłócenia nie są filtrowane"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Zezwalaj na wszystkie powiadomienia"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Osoby, aplikacje i dźwięki mogą ignorować tryb Nie przeszkadzać"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opcje wyświetlania filtrowanych powiadomień"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Po włączeniu trybu Nie przeszkadzać"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Brak dźwięku powiadomień"</string>
@@ -3633,7 +3642,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Może odpowiadać na wiadomości i używać przycisków zawartych w powiadomieniach, w tym odkładać i zamykać powiadomienia oraz odbierać połączenia."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Zmienianie ustawień"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Może włączać i wyłączać tryb Nie przeszkadzać oraz zmieniać powiązane ustawienia."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Może zarządzać trybami priorytetowymi i aktywować je oraz zmieniać powiązane ustawienia."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Jeśli wyłączysz aplikacji <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> dostęp do powiadomień, możesz również wyłączyć opcję Nie przeszkadzać."</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Jeśli wyłączysz dostęp do powiadomień dla aplikacji <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, możesz również wyłączyć dostęp do trybów priorytetowych."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Wyłącz"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Anuluj"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"W czasie rzeczywistym"</string>
@@ -3694,6 +3705,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Dostęp do „Nie przeszkadzać”"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Zezwalaj na dostęp do trybu Nie przeszkadzać"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Żadne zainstalowane aplikacje nie prosiły o dostęp do funkcji „Nie przeszkadzać”."</string>
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Dostęp do trybów priorytetowych"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Zezwalaj na dostęp do trybów priorytetowych"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Żadna z zainstalowanych aplikacji nie prosiła o dostęp do trybów priorytetowych"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Nie zezwalasz na powiadomienia z tej aplikacji"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Na Twoje życzenie Android blokuje tę kategorię powiadomień na urządzeniu."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android na żądanie blokuje tę grupę powiadomień na urządzeniu"</string>
@@ -3876,6 +3890,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Zadbaj o odpowiednie warunki, wyciszając rozpraszające uwagę powiadomienia"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Spersonalizuj ustawienia i działanie urządzenia dla różnych użytkowników"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Ogranicz rozpraszające uwagę powiadomienia, zezwalając tylko na te od najważniejszych osób i z niezbędnych aplikacji"</string>
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Ustaw tryb działający według zwyczajowego harmonogramu"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Synchronizuj urządzenie z wydarzeniami dnia"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Obudź się z uczuciem pełnego wypoczęcia"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Zadbaj o bezpieczeństwo na drodze"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Skoncentruj się, aby osiągnąć sukces"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Na czas, gdy ważna jest uprzejmość"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Pomoc przy korzystaniu, aby zapewnić Ci bezpieczeństwo"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Kontroluj swoją uwagę"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Ostrzeżenie"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Zamknij"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Prześlij opinię o tym urządzeniu"</string>
@@ -4076,6 +4098,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Musi pozostać włączone, ponieważ włączony jest dostęp do powiadomień"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Unieważnić dostęp aplikacji <xliff:g id="APP">%1$s</xliff:g> do trybu Nie przeszkadzać?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Wszystkie zasady Nie przeszkadzać utworzone przez tę aplikację zostaną usunięte."</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Zezwolić aplikacji <xliff:g id="APP">%1$s</xliff:g> na dostęp do trybów priorytetowych?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Aplikacja będzie mogła włączać i wyłączać tryb Nie przeszkadzać, zarządzać trybami priorytetowymi i je aktywować oraz zmieniać powiązane ustawienia."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Unieważnić dostęp aplikacji <xliff:g id="APP">%1$s</xliff:g> do trybów priorytetowych?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Wszystkie tryby utworzone przez tę aplikację zostaną usunięte."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Nie optymalizuj"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optymalizuj"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Może powodować szybsze wyczerpywanie się baterii. Aplikacja nie będzie już miała ograniczenia dotyczącego zużywania baterii w tle."</string>
@@ -5392,7 +5418,7 @@
     <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Posłuchaj"</string>
     <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Spróbuj jeszcze raz"</string>
     <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Posłuchaj strumienia audio"</string>
-    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Strumień audio będzie odtwarzany na urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Możesz go użyć do sterowania głośnością."</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Strumień audio będzie odtwarzany na urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Możesz użyć tego urządzenia do sterowania głośnością."</string>
     <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Nie można słuchać strumienia audio"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"połączone zgodne słuchawki"</string>
     <string name="audio_streams_activity_title" msgid="6766869545769831935">"Strumienie audio"</string>

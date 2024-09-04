@@ -411,7 +411,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Rosto e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rosto, impressão digital e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rosto, impressões digitais e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"A verificação de identidade está ativada"</string>
+    <!-- no translation found for mandatory_biometrics_prompt_description (6790144699440050735) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Desbloqueio remoto do Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Relógio adicionado"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configure o seu relógio"</string>
@@ -665,7 +666,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Escolha um novo bloqueio de ecrã"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Escolha um bloqueio para apps de trabalho"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Escolha novo bloqueio de trabalho"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Para maior segurança, defina um bloqueio de ecrã de segurança"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Para maior segurança, defina um bloqueio de ecrã alternativo"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Escolha o método de bloqueio de ecrã de segurança"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Caso se esqueça do bloqueio de ecrã, o administrador de TI não consegue repô-lo."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Defina um bloqueio de trabalho separado"</string>
@@ -836,6 +837,10 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Alterar"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalhes do dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Definições do teclado"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Mais definições"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Atualizações de firmware, informações e muito mais"</string>
+    <!-- no translation found for bluetooth_device_tip_support (6072338493592606897) -->
+    <skip />
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Endereço Bluetooth do dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Endereço Bluetooth do dispositivo:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Esquecer dispositivo?"</string>
@@ -845,6 +850,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Melhora qualidade de áudio"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Esquecer dispositivo"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Desassociar app"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Mais definições"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Máximo de dispositivos de áudio Bluetooth associados"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selecione o número máximo de dispositivos de áudio Bluetooth associados."</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Registo verboso de depuração de fornecedores de NFC"</string>
@@ -1332,8 +1338,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Usar <xliff:g id="CARRIER">%1$s</xliff:g> para dados móveis?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Está a utilizar o operador <xliff:g id="CARRIER2_0">%2$s</xliff:g> para dados móveis. Se mudar para o operador <xliff:g id="CARRIER1">%1$s</xliff:g>, o operador <xliff:g id="CARRIER2_1">%2$s</xliff:g> deixa de ser utilizado para dados móveis."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Usar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Atualizar o SIM favorito?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"O <xliff:g id="NEW_SIM">%1$s</xliff:g> é o único cartão SIM no dispositivo. Quer usar este cartão SIM para dados móveis, chamadas e mensagens SMS?"</string>
+    <string name="sim_preferred_message" msgid="4894337280925553873">"<xliff:g id="NEW_SIM">%1$s</xliff:g> é agora o seu SIM principal"</string>
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Melhorar a cobertura de dados móveis?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Permita que o seu dispositivo mude automaticamente para o operador <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> para usar os dados móveis quando tiver melhor disponibilidade."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"As chamadas, as mensagens e o tráfego de rede podem ser visíveis para a sua organização."</string>
@@ -1684,7 +1689,7 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Validar padrão"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Validar o PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Validar palavra-passe"</string>
-    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Valide-se"</string>
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Valide a sua identidade"</string>
     <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Para transferir Contas Google, definições e muito mais, introduza o padrão do outro dispositivo. O padrão é encriptado."</string>
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Para transferir Contas Google, definições e muito mais, introduza o PIN do outro dispositivo. O PIN é encriptado."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Para transferir Contas Google, definições e muito mais, introduza a palavra-passe do outro dispositivo. A palavra-passe é encriptada."</string>
@@ -1938,8 +1943,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personalize gestos de navegação individuais do touchpad"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Deslocamento inverso"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"O conteúdo move-se para cima ao deslocar a página para baixo"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Tocar na parte inferior direita"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Toque no canto inferior direito do touchpad para mais opções"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clicar no canto inferior direito"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Clique no canto inferior direito do touchpad para mais opções"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Velocidade do ponteiro"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Estilo de preenchimento do ponteiro"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Alt. est. preenc. ponteiro p/ preto"</string>
@@ -3308,7 +3313,7 @@
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> desativado"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Indisponível com som do toque desativado"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Toque do telemóvel"</string>
-    <string name="notification_ringtone_title" msgid="6924501621312095512">"Som de notificação padrão"</string>
+    <string name="notification_ringtone_title" msgid="6924501621312095512">"Som de notificação predefinido"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Som fornecido pela aplicação"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"Som de notificação predefinido"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Som de alarme predefinido"</string>
@@ -3336,6 +3341,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Ativado/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Também pode ativar o áudio espacial para dispositivos Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Definições de dispositivos ligados"</string>
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Áudio espacial"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Desativado"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Desativado"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Desativado"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nenhum}=1{1 horário definido}other{# horários definidos}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Não incomodar"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Modos de prioridade"</string>
@@ -3405,8 +3414,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ativar tema escuro"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Mude as opções do sistema operativo e das apps para darem preferência a texto claro num fundo escuro, o que pode ser mais agradável para os olhos e permite poupar significativamente a bateria em alguns dispositivos"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nenhuma alteração de visualização}=1{{effect_1}}=2{{effect_1} e {effect_2}}=3{{effect_1}, {effect_2} e {effect_3}}other{{effect_1}, {effect_2} e mais #}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Limitar o que pode enviar-lhe notificações"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Sem interrupções filtradas"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permitir todas as notificações"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"As pessoas, as apps e os sons podem interromper"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opções de visualização para notificações filtradas"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quando o modo Não incomodar está ativado"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Sem som de notificações"</string>
@@ -3633,7 +3642,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Pode responder às mensagens e acionar botões em notificações, incluindo suspender ou ignorar notificações e atender chamadas."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Alterar definições"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Pode ativar ou desativar o modo Não incomodar e alterar as definições relacionadas."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Pode gerir e ativar os modos de prioridade e alterar as definições relacionadas."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Se desativar o acesso às notificações para <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, é possível que o acesso ao modo Não incomodar seja igualmente desativado."</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Se desativar o acesso às notificações para <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, é possível que o acesso aos modos de prioridade seja igualmente desativado."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desativar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Tempo real"</string>
@@ -3694,6 +3705,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acesso Não incomodar"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir o modo Não incomodar"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Nenhuma app instalada pediu acesso a Não incomodar"</string>
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Acesso aos modos de prioridade"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Permitir acesso aos modos de prioridade"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Nenhuma app instalada pediu acesso aos modos de prioridade"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Não autorizou notificações desta app"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"A seu pedido, o Android está a bloquear a apresentação desta categoria de notificações neste dispositivo."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"A seu pedido, o Android está a bloquear a apresentação deste grupo de notificações neste dispositivo."</string>
@@ -3876,6 +3890,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimine todas as distrações para um ambiente tranquilo"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalize as experiências e as definições do dispositivo para diferentes utilizadores"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimize as interrupções permitindo apenas que as pessoas e apps importantes entrem em contacto consigo"</string>
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Defina um modo que siga um horário regular"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantenha o seu dispositivo sincronizado com os eventos do seu dia"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Acorde com 100% de energia"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Ponha a segurança em primeiro lugar enquanto está na estrada"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentre-se para manter o foco"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Para momentos em que a cortesia é importante"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Utilização guiada para ajudar a ficar em segurança"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Controle a sua atenção"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Aviso"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fechar"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Enviar feedback do dispositivo"</string>
@@ -4076,6 +4098,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Tem de permanecer ativado porque o acesso às notificações está ativado"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Quer revogar o acesso a Não incomodar do <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Todas as regras Não incomodar criadas por esta app serão removidas."</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Permitir o acesso da app <xliff:g id="APP">%1$s</xliff:g> aos modos de prioridade?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"A app vai poder ativar/desativar o modo Não incomodar, gerir e ativar os modos de prioridade e fazer alterações às definições relacionadas."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Revogar o acesso da app <xliff:g id="APP">%1$s</xliff:g> aos modos de prioridade?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Todos os modos criados por esta app vão ser removidos."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Não otimizar"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Otimizar"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"A bateria pode descarregar mais rapidamente. A aplicação nunca mais será restringida ao utilizar a bateria em segundo plano."</string>
@@ -5289,7 +5315,7 @@
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Esta app só pode ser aberta em 1 janela"</string>
     <string name="generic_accessibility_service_on" msgid="4466229372357726824">"Funcionalidade ativada"</string>
     <string name="generic_accessibility_service_off" msgid="4759859497651675724">"Funcionalidade desativada"</string>
-    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Atalho desativado"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Desativado"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Desativado"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"Ativado"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"Desativada"</string>
@@ -5361,7 +5387,7 @@
     <string name="audio_sharing_notification_content" msgid="1577180829878785642">"As pessoas que estão a ouvir podem ouvir o seu conteúdo multimédia. Não vão ouvir chamadas."</string>
     <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Parar partilha"</string>
     <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Definições"</string>
-    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Escolha um dispositivo para desligar"</string>
+    <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Escolha o dispositivo para o desligar"</string>
     <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Apenas 2 dispositivos podem partilhar áudio de cada vez"</string>
     <string name="audio_sharing_disconnect_device_button_label" msgid="4272897217708930576">"Desligar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_stop_dialog_title" msgid="4872853738164232075">"Ligar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
@@ -5406,7 +5432,7 @@
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Palavra-passe: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Para ouvir a stream <xliff:g id="STREAM_NAME">%1$s</xliff:g>, as outras pessoas podem ligar auscultadores compatíveis ao respetivo dispositivo Android. Em seguida, podem ler este código QR."</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Encontre uma stream de áudio"</string>
-    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Ouça um dispositivo que está a partilhar o áudio ou uma transmissão Auracast nas proximidades"</string>
+    <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Ouça um dispositivo que esteja a partilhar o áudio ou uma transmissão Auracast nas proximidades"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"O seu dispositivo de áudio"</string>
     <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Ligue auscultadores compatíveis"</string>
     <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Streams de áudio nas proximidades"</string>

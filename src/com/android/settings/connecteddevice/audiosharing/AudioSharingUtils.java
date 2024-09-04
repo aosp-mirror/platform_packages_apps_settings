@@ -115,7 +115,7 @@ public class AudioSharingUtils {
      * sharing. The active device is placed in the first place if it exists. The devices can be
      * filtered by whether it is already in the audio sharing session.
      *
-     * @param localBtManager The BT manager to provide BT functions. *
+     * @param localBtManager The BT manager to provide BT functions.
      * @param groupedConnectedDevices devices connected to broadcast assistant grouped by CSIP group
      *     id.
      * @param filterByInSharing Whether to filter the device by if is already in the sharing
@@ -190,7 +190,7 @@ public class AudioSharingUtils {
      * sharing. The active device is placed in the first place if it exists. The devices can be
      * filtered by whether it is already in the audio sharing session.
      *
-     * @param localBtManager The BT manager to provide BT functions. *
+     * @param localBtManager The BT manager to provide BT functions.
      * @param groupedConnectedDevices devices connected to broadcast assistant grouped by CSIP group
      *     id.
      * @param filterByInSharing Whether to filter the device by if is already in the sharing
@@ -210,6 +210,22 @@ public class AudioSharingUtils {
                 .collect(toList());
     }
 
+    /** Return if there exists active connected lead device. */
+    public static boolean hasActiveConnectedLeadDevice(
+            @Nullable LocalBluetoothManager localBtManager) {
+        CachedBluetoothDeviceManager deviceManager =
+                localBtManager == null ? null : localBtManager.getCachedDeviceManager();
+        Map<Integer, List<BluetoothDevice>> groupedConnectedDevices =
+                fetchConnectedDevicesByGroupId(localBtManager);
+        for (List<BluetoothDevice> devices : groupedConnectedDevices.values()) {
+            CachedBluetoothDevice leadDevice = getLeadDevice(deviceManager, devices);
+            if (isActiveLeAudioDevice(leadDevice)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** Build {@link AudioSharingDeviceItem} from {@link CachedBluetoothDevice}. */
     public static AudioSharingDeviceItem buildAudioSharingDeviceItem(
             CachedBluetoothDevice cachedDevice) {
@@ -225,8 +241,8 @@ public class AudioSharingUtils {
      * @param cachedDevice The cached bluetooth device to check.
      * @return Whether the device is an active le audio device.
      */
-    public static boolean isActiveLeAudioDevice(CachedBluetoothDevice cachedDevice) {
-        return BluetoothUtils.isActiveLeAudioDevice(cachedDevice);
+    public static boolean isActiveLeAudioDevice(@Nullable CachedBluetoothDevice cachedDevice) {
+        return cachedDevice != null && BluetoothUtils.isActiveLeAudioDevice(cachedDevice);
     }
 
     /** Toast message on main thread. */

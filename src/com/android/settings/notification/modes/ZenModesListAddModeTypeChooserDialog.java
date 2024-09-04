@@ -70,6 +70,17 @@ public class ZenModesListAddModeTypeChooserDialog extends InstrumentedDialogFrag
         dialog.show(parent.getParentFragmentManager(), TAG);
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (mChooseModeTypeListener == null) {
+            // Probably the dialog fragment was recreated after its activity being destroyed.
+            // It's pointless to re-show the dialog if we can't do anything when its options are
+            // selected, so we don't.
+            dismiss();
+        }
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
