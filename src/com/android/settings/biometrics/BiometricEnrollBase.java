@@ -117,7 +117,6 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final int LEARN_MORE_REQUEST = 3;
     public static final int CONFIRM_REQUEST = 4;
     public static final int ENROLL_REQUEST = 5;
-    public static final int BIOMETRIC_AUTH_REQUEST = 6;
 
     /**
      * Request code when starting another biometric enrollment from within a biometric flow. For
@@ -125,6 +124,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
      */
     public static final int ENROLL_NEXT_BIOMETRIC_REQUEST = 6;
     public static final int REQUEST_POSTURE_GUIDANCE = 7;
+    public static final int BIOMETRIC_AUTH_REQUEST = 8;
 
     protected boolean mLaunchedConfirmLock;
     protected boolean mLaunchedPostureGuidance;

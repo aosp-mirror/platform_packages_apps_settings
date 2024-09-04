@@ -109,21 +109,21 @@ public class WifiHotspotRepositoryTest {
         doReturn(SPEED_6GHZ).when(mSpeedType).getValue();
         doReturn(true).when(mWifiManager).is5GHzBandSupported();
         doReturn(Arrays.asList(new WifiAvailableChannel(FREQ_5GHZ, OP_MODE_SAP))).when(mWifiManager)
-                .getUsableChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP);
+                .getAllowedChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP);
         doReturn(true).when(mWifiManager).is6GHzBandSupported();
         doReturn(Arrays.asList(new WifiAvailableChannel(FREQ_6GHZ, OP_MODE_SAP))).when(mWifiManager)
-                .getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
+                .getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
 
         mRepository = new WifiHotspotRepository(mContext, mWifiManager, mTetheringManager);
         mRepository.mSecurityType = mSecurityType;
         mRepository.mSpeedType = mSpeedType;
         mRepository.mIsDualBand = true;
-        mRepository.mBand5g.isUsableChannelsReady = true;
-        mRepository.mBand5g.isUsableChannelsUnsupported = false;
-        mRepository.mBand5g.hasUsableChannels = true;
-        mRepository.mBand6g.isUsableChannelsReady = true;
-        mRepository.mBand6g.isUsableChannelsUnsupported = false;
-        mRepository.mBand6g.hasUsableChannels = true;
+        mRepository.mBand5g.isChannelsReady = true;
+        mRepository.mBand5g.isChannelsUnsupported = false;
+        mRepository.mBand5g.hasChannels = true;
+        mRepository.mBand6g.isChannelsReady = true;
+        mRepository.mBand6g.isChannelsUnsupported = false;
+        mRepository.mBand6g.hasChannels = true;
     }
 
     @Test
@@ -382,7 +382,7 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void updateSpeedType_singleBand5gPreferredBut5gUnavailable_get2gSpeedType() {
         mRepository.mIsDualBand = false;
-        mRepository.mBand5g.hasUsableChannels = false;
+        mRepository.mBand5g.hasChannels = false;
         SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setBand(WIFI_5GHZ_BAND_PREFERRED).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
@@ -407,7 +407,7 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void updateSpeedType_singleBand6gPreferredBut6gUnavailable_get5gSpeedType() {
         mRepository.mIsDualBand = false;
-        mRepository.mBand6g.hasUsableChannels = false;
+        mRepository.mBand6g.hasChannels = false;
         SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setBand(WIFI_6GHZ_BAND_PREFERRED).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
@@ -420,8 +420,8 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void updateSpeedType_singleBand6gPreferredBut5gAnd6gUnavailable_get2gSpeedType() {
         mRepository.mIsDualBand = false;
-        mRepository.mBand5g.hasUsableChannels = false;
-        mRepository.mBand6g.hasUsableChannels = false;
+        mRepository.mBand5g.hasChannels = false;
+        mRepository.mBand6g.hasChannels = false;
         SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setBand(WIFI_6GHZ_BAND_PREFERRED).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
@@ -446,7 +446,7 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void updateSpeedType_dualBand2gAnd5gBut5gUnavailable_get2gSpeedType() {
         mRepository.mIsDualBand = true;
-        mRepository.mBand5g.hasUsableChannels = false;
+        mRepository.mBand5g.hasChannels = false;
         SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setBand(WIFI_5GHZ_BAND_PREFERRED).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
@@ -562,20 +562,20 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void is5gAvailable_hasUsableChannels_returnTrue() {
+    public void is5gAvailable_hasChannels_returnTrue() {
         mRepository.mIs5gBandSupported = true;
         // Reset m5gBand to trigger an update
-        mRepository.mBand5g.isUsableChannelsReady = false;
+        mRepository.mBand5g.isChannelsReady = false;
 
         assertThat(mRepository.is5gAvailable()).isTrue();
     }
 
     @Test
-    public void is5gAvailable_noUsableChannels_returnFalse() {
+    public void is5gAvailable_noChannels_returnFalse() {
         mRepository.mIs5gBandSupported = true;
         // Reset m5gBand to trigger an update
-        mRepository.mBand5g.isUsableChannelsReady = false;
-        when(mWifiManager.getUsableChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP))
+        mRepository.mBand5g.isChannelsReady = false;
+        when(mWifiManager.getAllowedChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP))
                 .thenReturn(null);
 
         assertThat(mRepository.is5gAvailable()).isFalse();
@@ -585,7 +585,7 @@ public class WifiHotspotRepositoryTest {
     @UiThreadTest
     public void get5gAvailable_shouldNotReturnNull() {
         // Reset m5gBand to trigger an update
-        mRepository.mBand5g.isUsableChannelsReady = false;
+        mRepository.mBand5g.isChannelsReady = false;
 
         assertThat(mRepository.get5gAvailable()).isNotNull();
     }
@@ -606,20 +606,20 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void is6gAvailable_hasUsableChannels_returnTrue() {
+    public void is6gAvailable_hasChannels_returnTrue() {
         mRepository.mIs6gBandSupported = true;
         // Reset m6gBand to trigger an update
-        mRepository.mBand6g.isUsableChannelsReady = false;
+        mRepository.mBand6g.isChannelsReady = false;
 
         assertThat(mRepository.is6gAvailable()).isTrue();
     }
 
     @Test
-    public void is6gAvailable_noUsableChannels_returnFalse() {
+    public void is6gAvailable_noChannels_returnFalse() {
         mRepository.mIs6gBandSupported = true;
         // Reset m6gBand to trigger an update
-        mRepository.mBand6g.isUsableChannelsReady = false;
-        when(mWifiManager.getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP))
+        mRepository.mBand6g.isChannelsReady = false;
+        when(mWifiManager.getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP))
                 .thenReturn(null);
 
         assertThat(mRepository.is6gAvailable()).isFalse();
@@ -658,33 +658,33 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void isChannelAvailable_throwIllegalArgumentException_hasUsableChannelsFalse() {
+    public void isChannelAvailable_throwIllegalArgumentException_hasChannelsFalse() {
         doThrow(IllegalArgumentException.class).when(mWifiManager)
-                .getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
+                .getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
 
         mRepository.isChannelAvailable(mRepository.mBand6g);
 
-        assertThat(mRepository.mBand6g.hasUsableChannels).isFalse();
-        assertThat(mRepository.mBand6g.isUsableChannelsUnsupported).isTrue();
+        assertThat(mRepository.mBand6g.hasChannels).isFalse();
+        assertThat(mRepository.mBand6g.isChannelsUnsupported).isTrue();
     }
 
     @Test
-    public void isChannelAvailable_throwUnsupportedOperationException_hasUsableChannelsFalse() {
+    public void isChannelAvailable_throwUnsupportedOperationException_hasChannelsFalse() {
         doThrow(UnsupportedOperationException.class).when(mWifiManager)
-                .getUsableChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
+                .getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
 
         mRepository.isChannelAvailable(mRepository.mBand6g);
 
-        assertThat(mRepository.mBand6g.hasUsableChannels).isFalse();
-        assertThat(mRepository.mBand6g.isUsableChannelsUnsupported).isTrue();
+        assertThat(mRepository.mBand6g.hasChannels).isFalse();
+        assertThat(mRepository.mBand6g.isChannelsUnsupported).isTrue();
     }
 
     @Test
-    public void isChannelAvailable_noExceptionAndHasUsableChannels_hasUsableChannelsTrue() {
+    public void isChannelAvailable_noExceptionAndHasChannels_hasChannelsTrue() {
         mRepository.isChannelAvailable(mRepository.mBand6g);
 
-        assertThat(mRepository.mBand6g.hasUsableChannels).isTrue();
-        assertThat(mRepository.mBand6g.isUsableChannelsUnsupported).isFalse();
+        assertThat(mRepository.mBand6g.hasChannels).isTrue();
+        assertThat(mRepository.mBand6g.isChannelsUnsupported).isFalse();
     }
 
     @Test
@@ -744,9 +744,9 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void updateCapabilityChanged_band5gUsableChannelsUnsupported_update5gAvailable() {
+    public void updateCapabilityChanged_band5gChannelsUnsupported_update5gAvailable() {
         mRepository = spy(new WifiHotspotRepository(mContext, mWifiManager, mTetheringManager));
-        mRepository.mBand5g.isUsableChannelsUnsupported = true;
+        mRepository.mBand5g.isChannelsUnsupported = true;
 
         mRepository.updateCapabilityChanged();
 
@@ -755,9 +755,9 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void updateCapabilityChanged_band6gUsableChannelsUnsupported_update5gAvailable() {
+    public void updateCapabilityChanged_band6gChannelsUnsupported_update5gAvailable() {
         mRepository = spy(new WifiHotspotRepository(mContext, mWifiManager, mTetheringManager));
-        mRepository.mBand6g.isUsableChannelsUnsupported = true;
+        mRepository.mBand6g.isChannelsUnsupported = true;
 
         mRepository.updateCapabilityChanged();
 
@@ -766,18 +766,18 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void isAvailable_isUsableChannelsUnsupportedFalse_returnHasUsableChannels() {
-        mRepository.mBand6g.isUsableChannelsUnsupported = false;
-        mRepository.mBand6g.hasUsableChannels = false;
+    public void isAvailable_isChannelsUnsupportedFalse_returnHasChannels() {
+        mRepository.mBand6g.isChannelsUnsupported = false;
+        mRepository.mBand6g.hasChannels = false;
         mRepository.mBand6g.hasCapability = true;
 
         assertThat(mRepository.mBand6g.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_isUsableChannelsUnsupportedTrue_returnHasCapability() {
-        mRepository.mBand6g.isUsableChannelsUnsupported = true;
-        mRepository.mBand6g.hasUsableChannels = false;
+    public void isAvailable_isChannelsUnsupportedTrue_returnHasCapability() {
+        mRepository.mBand6g.isChannelsUnsupported = true;
+        mRepository.mBand6g.hasChannels = false;
         mRepository.mBand6g.hasCapability = true;
 
         assertThat(mRepository.mBand6g.isAvailable()).isTrue();

@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -56,8 +57,7 @@ public class ZenModesListAddModeTypeChooserDialog extends InstrumentedDialogFrag
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - Update metrics category
-        return 0;
+        return SettingsEnums.ZEN_MODE_NEW_TYPE_CHOOSER_DIALOG;
     }
 
     static void show(DashboardFragment parent,
@@ -68,6 +68,17 @@ public class ZenModesListAddModeTypeChooserDialog extends InstrumentedDialogFrag
         dialog.mOptions = ImmutableList.copyOf(options);
         dialog.setTargetFragment(parent, 0);
         dialog.show(parent.getParentFragmentManager(), TAG);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (mChooseModeTypeListener == null) {
+            // Probably the dialog fragment was recreated after its activity being destroyed.
+            // It's pointless to re-show the dialog if we can't do anything when its options are
+            // selected, so we don't.
+            dismiss();
+        }
     }
 
     @NonNull

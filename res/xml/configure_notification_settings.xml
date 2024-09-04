@@ -135,15 +135,6 @@
             settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"
         />
 
-        <com.android.settingslib.RestrictedPreference
-            android:key="modes_notifications"
-            android:order="18"
-            android:title="@string/zen_modes_list_title"
-            settings:useAdminDisabledSummary="true"
-            android:fragment="com.android.settings.notification.modes.ZenModesListFragment"
-            settings:controller="com.android.settings.notification.modes.ZenModesLinkPreferenceController"
-        />
-
         <SwitchPreferenceCompat
             android:key="lock_screen_show_only_unseen_notifs"
             android:order="19"

@@ -24,7 +24,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.view.View;
-import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
@@ -35,8 +34,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
-
-import com.google.common.primitives.Ints;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,17 +65,6 @@ public class DaltonizerRadioButtonPreferenceController extends BasePreferenceCon
                 }
             }
         };
-    }
-
-    protected static int getSecureAccessibilityDaltonizerValue(ContentResolver resolver) {
-        final String daltonizerStringValue = Settings.Secure.getString(
-                resolver, DALTONIZER_TYPE_SETTINGS_KEY);
-        if (daltonizerStringValue == null) {
-            return AccessibilityManager.DALTONIZER_CORRECT_DEUTERANOMALY;
-        }
-        final Integer daltonizerIntValue = Ints.tryParse(daltonizerStringValue);
-        return daltonizerIntValue == null ? AccessibilityManager.DALTONIZER_CORRECT_DEUTERANOMALY
-                : daltonizerIntValue;
     }
 
     private Map<String, Integer> getDaltonizerValueToKeyMap() {
@@ -123,7 +109,8 @@ public class DaltonizerRadioButtonPreferenceController extends BasePreferenceCon
     }
 
     private int getAccessibilityDaltonizerValue() {
-        final int daltonizerValue = getSecureAccessibilityDaltonizerValue(mContentResolver);
+        final int daltonizerValue =
+                DaltonizerPreferenceUtil.getSecureAccessibilityDaltonizerValue(mContentResolver);
         return daltonizerValue;
     }
 

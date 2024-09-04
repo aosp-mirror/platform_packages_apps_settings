@@ -58,8 +58,6 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
     private ContentResolver mContentResolver;
     private DaltonizerSaturationSeekbarPreferenceController mController;
 
-    private int mOriginalSaturationLevel = -1;
-
     private PreferenceScreen mScreen;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
@@ -73,10 +71,6 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
     public void setup() {
         Context context = ApplicationProvider.getApplicationContext();
         mContentResolver = context.getContentResolver();
-        mOriginalSaturationLevel = Settings.Secure.getInt(
-                mContentResolver,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_SATURATION_LEVEL,
-                7);
 
         mPreference = new SeekBarPreference(context);
         mPreference.setKey(ToggleDaltonizerPreferenceFragment.KEY_SATURATION);
@@ -92,10 +86,18 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
 
     @After
     public void cleanup() {
-        Settings.Secure.putInt(
+        Settings.Secure.putString(
+                mContentResolver,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER,
+                null);
+        Settings.Secure.putString(
+                mContentResolver,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
+                null);
+        Settings.Secure.putString(
                 mContentResolver,
                 Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_SATURATION_LEVEL,
-                mOriginalSaturationLevel);
+                null);
     }
 
     @Test
@@ -109,6 +111,22 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
     @DisableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
     public void getAvailabilityStatus_flagDisabled_unavailable() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
+    public void getAvailabilityStatus_defaultSettings_unavailable() {
+        // By default enabled == false.
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
+    public void getAvailabilityStatus_enabledDefaultDisplayMode_available() {
+        setDaltonizerEnabled(1);
+
+        // By default display mode is deuteranomaly.
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
@@ -306,10 +324,7 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
         mLifecycle.addObserver(mController);
         mLifecycle.handleLifecycleEvent(ON_RESUME);
 
-        Settings.Secure.putInt(
-                mContentResolver,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
-                1);
+        setDaltonizerEnabled(1);
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mPreference.isEnabled()).isTrue();
@@ -324,10 +339,7 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
         mLifecycle.addObserver(mController);
         mLifecycle.handleLifecycleEvent(ON_RESUME);
 
-        Settings.Secure.putInt(
-                mContentResolver,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
-                0);
+        setDaltonizerEnabled(0);
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mPreference.isEnabled()).isFalse();
@@ -342,10 +354,7 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
         mLifecycle.addObserver(mController);
         mLifecycle.handleLifecycleEvent(ON_RESUME);
 
-        Settings.Secure.putInt(
-                mContentResolver,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER,
-                0);
+        setDaltonizerDisplay(0);
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mPreference.isEnabled()).isFalse();
@@ -361,23 +370,28 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
         mLifecycle.handleLifecycleEvent(ON_STOP);
 
         // enabled.
-        Settings.Secure.putInt(
-                mContentResolver,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
-                1);
+        setDaltonizerEnabled(1);
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mPreference.isEnabled()).isFalse();
     }
 
     private void setDaltonizerMode(int enabled, int mode) {
+        setDaltonizerEnabled(enabled);
+        setDaltonizerDisplay(mode);
+    }
+
+    private void setDaltonizerEnabled(int enabled) {
         Settings.Secure.putInt(
                 mContentResolver,
                 Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 enabled);
-        Settings.Secure.putInt(
+    }
+
+    private void setDaltonizerDisplay(int mode) {
+        Settings.Secure.putString(
                 mContentResolver,
                 Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER,
-                mode);
+                Integer.toString(mode));
     }
 }

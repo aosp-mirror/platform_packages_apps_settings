@@ -31,6 +31,8 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.withContext
@@ -43,10 +45,13 @@ import kotlinx.coroutines.withContext
 interface FingerprintSensorRepository {
   /** Get the [FingerprintSensor] */
   val fingerprintSensor: Flow<FingerprintSensor>
+
+  /** Indicates if this device supports the side fingerprint sensor */
+  val hasSideFps: Flow<Boolean>
 }
 
 class FingerprintSensorRepositoryImpl(
-  fingerprintManager: FingerprintManager?,
+  private val fingerprintManager: FingerprintManager,
   backgroundDispatcher: CoroutineDispatcher,
   activityScope: CoroutineScope,
 ) : FingerprintSensorRepository {
@@ -66,7 +71,7 @@ class FingerprintSensorRepositoryImpl(
             }
           }
         withContext(backgroundDispatcher) {
-          fingerprintManager?.addAuthenticatorsRegisteredCallback(callback)
+          fingerprintManager.addAuthenticatorsRegisteredCallback(callback)
         }
         awaitClose {}
       }
@@ -74,6 +79,9 @@ class FingerprintSensorRepositoryImpl(
 
   override val fingerprintSensor: Flow<FingerprintSensor> =
     fingerprintPropsInternal.transform { emit(it.toFingerprintSensor()) }
+
+  override val hasSideFps: Flow<Boolean> =
+    fingerprintSensor.flatMapLatest { flow { emit(fingerprintManager.isPowerbuttonFps()) } }
 
   companion object {
 

@@ -158,7 +158,11 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
                                     dismiss();
                                 })
                         .setCustomNegativeButton(
-                                R.string.audio_sharing_no_thanks_button_label,
+                                getMetricsCategory() == SettingsEnums.DIALOG_START_AUDIO_SHARING
+                                        ? getString(
+                                                R.string.audio_sharing_switch_active_button_label,
+                                                newDeviceName)
+                                        : getString(R.string.audio_sharing_no_thanks_button_label),
                                 v -> {
                                     if (sListener != null) {
                                         sListener.onCancelClick();
