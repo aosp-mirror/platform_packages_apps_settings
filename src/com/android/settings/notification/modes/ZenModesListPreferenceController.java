@@ -118,7 +118,7 @@ class ZenModesListPreferenceController extends BasePreferenceController
         for (ZenMode mode : mBackend.getModes()) {
             SearchIndexableRaw data = new SearchIndexableRaw(mContext);
             data.key = mode.getId();
-            data.title = mode.getRule().getName();
+            data.title = mode.getName();
             data.screenTitle = res.getString(R.string.zen_modes_list_title);
             rawData.add(data);
         }
