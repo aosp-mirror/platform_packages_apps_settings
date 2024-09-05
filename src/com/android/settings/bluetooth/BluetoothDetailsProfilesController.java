@@ -65,14 +65,13 @@ import java.util.concurrent.atomic.AtomicReference;
 public class BluetoothDetailsProfilesController extends BluetoothDetailsController
         implements Preference.OnPreferenceClickListener,
         LocalBluetoothProfileManager.ServiceListener {
+    public static final String HIGH_QUALITY_AUDIO_PREF_TAG = "A2dpProfileHighQualityAudio";
+
     private static final String TAG = "BtDetailsProfilesCtrl";
 
     private static final String KEY_PROFILES_GROUP = "bluetooth_profiles";
     private static final String KEY_BOTTOM_PREFERENCE = "bottom_preference";
     private static final int ORDINAL = 99;
-
-    @VisibleForTesting
-    static final String HIGH_QUALITY_AUDIO_PREF_TAG = "A2dpProfileHighQualityAudio";
 
     private static final String ENABLE_DUAL_MODE_AUDIO =
             "persist.bluetooth.enable_dual_mode_audio";
