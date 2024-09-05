@@ -2161,7 +2161,7 @@
     <string name="wifi_signal">Signal strength</string>
     <!-- Label for the status of the connection -->
     <string name="wifi_status">Status</string>
-    <!-- Label for the transmit link speed of the connection. [CHAR LIMIT=32] -->
+    <!-- Label for the transmit link speed of the connection. [CHAR LIMIT=40] -->
     <string name="tx_wifi_speed">Transmit link speed</string>
     <!-- Label for the receive link speed of the connection. [CHAR LIMIT=32] -->
     <string name="rx_wifi_speed">Receive link speed</string>
@@ -4616,6 +4616,11 @@
     <!-- Summary for the modifier key picker dialog page [CHAR LIMIT=35] -->
     <string name="modifier_keys_picker_summary">Choose a new key for <xliff:g id="modifier_key_default_name">%1$s</xliff:g>:</string>
 
+    <!-- Title for the button to trigger the 'Physical keyboard accessibility' page. [CHAR LIMIT=60] -->
+    <string name="keyboard_a11y_settings">Physical keyboard accessibility</string>
+    <!-- Summary for the button to trigger the 'Physical keyboard accessibility' page. [CHAR LIMIT=NONE] -->
+    <string name="keyboard_a11y_settings_summary">Sticky keys, Bounce keys, Mouse keys</string>
+
     <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
     <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
@@ -5119,11 +5124,11 @@
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_gesture_navigation_warning">The accessibility gesture is set to the <xliff:g id="service" example="Select to Speak">%1$s</xliff:g>. To use magnification, swipe up with two fingers from the bottom of the screen and hold. Then select magnification.</string>
     <!-- Title for the preference to configure the accessibility shortcut, which uses the volume keys. [CHAR LIMIT=35] -->
-    <string name="accessibility_global_gesture_preference_title">Volume key shortcut</string>
+    <string name="accessibility_global_gesture_preference_title">Volume keys shortcut</string>
     <!-- Label for shortcut settings button. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_settings">Shortcut settings</string>
-    <!-- Title for the switch preference that controls whether or not the accessibility shortcut works on the lock screen. [CHAR LIMIT=50] -->
-    <string name="accessibility_shortcut_service_on_lock_screen_title">Shortcut from lock screen</string>
+    <!-- Title for the switch preference that controls whether or not the accessibility volume keys shortcut works on the lock screen. [CHAR LIMIT=50] -->
+    <string name="accessibility_shortcut_service_on_lock_screen_title">Volume keys shortcut from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds.</string>
     <!-- Title for the accessibility button page. [CHAR LIMIT=35] -->
@@ -10179,7 +10184,7 @@
     <string name="zen_modes_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb, manage and activate Modes, and make changes to related settings.</string>
 
     <!-- Modes access settings - title for warning dialog when revoking access [CHAR LIMIT=NONE] -->
-    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access to Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
 
     <!-- Modes access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
     <string name="zen_modes_access_revoke_warning_dialog_summary">All modes created by this app will be removed.</string>

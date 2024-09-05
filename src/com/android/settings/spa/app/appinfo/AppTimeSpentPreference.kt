@@ -19,61 +19,75 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager.ResolveInfoFlags
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.provider.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.liveData
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
+import com.android.settingslib.spaprivileged.framework.compose.placeholder
 import com.android.settingslib.spaprivileged.model.app.hasFlag
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.model.app.userId
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 @Composable
 fun AppTimeSpentPreference(app: ApplicationInfo) {
     val context = LocalContext.current
     val presenter = remember(app) { AppTimeSpentPresenter(context, app) }
-    if (!presenter.isAvailable()) return
+    val isAvailable by presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false)
+    if (!isAvailable) return
 
-    val summary by presenter.summaryLiveData.observeAsState(
-        initial = stringResource(R.string.summary_placeholder),
+    val summary by presenter.summaryFlow.collectAsStateWithLifecycle(initialValue = placeholder())
+    Preference(
+        object : PreferenceModel {
+            override val title = stringResource(R.string.time_spent_in_app_pref_title)
+            override val summary = { summary }
+            override val enabled = { presenter.isEnabled() }
+            override val onClick = presenter::startActivity
+        }
     )
-    Preference(object : PreferenceModel {
-        override val title = stringResource(R.string.time_spent_in_app_pref_title)
-        override val summary = { summary }
-        override val enabled = { presenter.isEnabled() }
-        override val onClick = presenter::startActivity
-    })
 }
 
 private class AppTimeSpentPresenter(
     private val context: Context,
     private val app: ApplicationInfo,
 ) {
-    private val intent = Intent(Settings.ACTION_APP_USAGE_SETTINGS).apply {
-        putExtra(Intent.EXTRA_PACKAGE_NAME, app.packageName)
-    }
+    private val intent =
+        Intent(Settings.ACTION_APP_USAGE_SETTINGS).apply {
+            // Limit the package for safer intents, since string resource is not null,
+            // we restrict the target to this single package.
+            setPackage(context.getString(com.android.internal.R.string.config_systemWellbeing))
+            putExtra(Intent.EXTRA_PACKAGE_NAME, app.packageName)
+        }
+
     private val appFeatureProvider = featureFactory.applicationFeatureProvider
 
-    fun isAvailable() = context.packageManager.queryIntentActivitiesAsUser(
-        intent, ResolveInfoFlags.of(0), app.userId
-    ).any { resolveInfo ->
-        resolveInfo?.activityInfo?.applicationInfo?.isSystemApp == true
-    }
+    val isAvailableFlow = flow { emit(resolveIntent() != null) }.flowOn(Dispatchers.Default)
+
+    // Resolve the intent first with PackageManager.MATCH_SYSTEM_ONLY flag to ensure that
+    // only system apps are resolved.
+    private fun resolveIntent(): ResolveInfo? =
+        context.packageManager.resolveActivityAsUser(
+            intent,
+            PackageManager.MATCH_SYSTEM_ONLY,
+            app.userId,
+        )
 
     fun isEnabled() = app.hasFlag(ApplicationInfo.FLAG_INSTALLED)
 
-    val summaryLiveData = liveData(Dispatchers.IO) {
-        emit(appFeatureProvider.getTimeSpentInApp(app.packageName).toString())
-    }
+    val summaryFlow =
+        flow { emit(appFeatureProvider.getTimeSpentInApp(app.packageName).toString()) }
+            .flowOn(Dispatchers.Default)
 
     fun startActivity() {
         context.startActivityAsUser(intent, app.userHandle)
