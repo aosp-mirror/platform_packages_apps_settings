@@ -56,6 +56,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
@@ -870,5 +871,13 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     protected int getUserPreferredShortcutTypes() {
         return PreferredShortcuts.retrieveUserShortcutType(
                 getPrefContext(), mComponentName.flattenToString(), getDefaultShortcutTypes());
+    }
+
+    @Override
+    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
+            Bundle savedInstanceState) {
+        RecyclerView recyclerView =
+                super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView);
     }
 }
