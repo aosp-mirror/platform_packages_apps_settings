@@ -21,6 +21,7 @@ import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Vibrator;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
@@ -74,7 +75,8 @@ public class VibrationRampingRingerTogglePreferenceController
         mRingVibrationPreferenceConfig = new RingVibrationPreferenceConfig(context);
         mRingSettingObserver = new VibrationPreferenceConfig.SettingObserver(
                 mRingVibrationPreferenceConfig);
-        mSettingObserver = new ContentObserver(new Handler(/* async= */ true)) {
+        Handler handler = Looper.myLooper() != null ? new Handler(/* async= */ true) : null;
+        mSettingObserver = new ContentObserver(handler) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
                 updateState(mPreference);

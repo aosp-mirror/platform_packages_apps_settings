@@ -172,13 +172,21 @@ public final class DataProcessor {
     /** Gets the {@link BatteryUsageStats} from system service. */
     @Nullable
     public static BatteryUsageStats getBatteryUsageStats(final Context context) {
+        final long startTime = System.currentTimeMillis();
         final BatteryUsageStatsQuery batteryUsageStatsQuery =
                 new BatteryUsageStatsQuery.Builder()
                         .includeBatteryHistory()
                         .includeProcessStateData()
                         .build();
-        return context.getSystemService(BatteryStatsManager.class)
-                .getBatteryUsageStats(batteryUsageStatsQuery);
+        final BatteryUsageStats batteryUsageStats =
+                context.getSystemService(BatteryStatsManager.class)
+                        .getBatteryUsageStats(batteryUsageStatsQuery);
+        Log.d(
+                TAG,
+                String.format(
+                        "getBatteryUsageStats() from BatteryStatsManager in %d/ms",
+                        System.currentTimeMillis() - startTime));
+        return batteryUsageStats;
     }
 
     /** Gets the {@link UsageEvents} from system service for all unlocked users. */
@@ -1693,8 +1701,14 @@ public final class DataProcessor {
         final UserManager userManager = context.getSystemService(UserManager.class);
         final SparseArray<BatteryEntry> batteryEntryList = new SparseArray<>();
         final ArrayList<BatteryEntry> results = new ArrayList<>();
+        final long startTime = System.currentTimeMillis();
         final List<UidBatteryConsumer> uidBatteryConsumers =
                 batteryUsageStats.getUidBatteryConsumers();
+        Log.d(
+                TAG,
+                String.format(
+                        "get %d uidBatteryConsumers from BatteryUsageStats in %d/ms",
+                        uidBatteryConsumers.size(), (System.currentTimeMillis() - startTime)));
 
         // Sort to have all apps with "real" UIDs first, followed by apps that are supposed
         // to be combined with the real ones.
@@ -1763,9 +1777,11 @@ public final class DataProcessor {
                             deviceConsumer.getConsumedPowerForCustomComponent(componentId)));
         }
 
+        final int numComponentEntries = batteryEntryList.size();
         final List<UserBatteryConsumer> userBatteryConsumers =
                 batteryUsageStats.getUserBatteryConsumers();
-        for (int i = 0, size = userBatteryConsumers.size(); i < size; i++) {
+        final int numUserEntries = userBatteryConsumers.size();
+        for (int i = 0; i < numUserEntries; i++) {
             final UserBatteryConsumer consumer = userBatteryConsumers.get(i);
             results.add(
                     new BatteryEntry(
@@ -1784,6 +1800,13 @@ public final class DataProcessor {
         for (int i = 0; i < numUidSippers; i++) {
             results.add(batteryEntryList.valueAt(i));
         }
+
+        Log.d(
+                TAG,
+                String.format(
+                        "getCoalescedUsageList(): uidEntries = %d, "
+                                + "userEntries = %d, componentEntries = %d",
+                        numUidSippers, numUserEntries, numComponentEntries));
 
         // The sort order must have changed, so re-sort based on total power use.
         results.sort(BatteryEntry.COMPARATOR);

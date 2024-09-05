@@ -16,7 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import static java.util.stream.Collectors.toList;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_START_LE_AUDIO_SHARING;
 
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothCsipSetCoordinator;
@@ -25,6 +25,8 @@ import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
+import android.media.AudioManager;
+import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
 
@@ -34,6 +36,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -62,9 +65,8 @@ public class AudioSharingDialogHandler {
     @Nullable private final CachedBluetoothDeviceManager mDeviceManager;
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
+    @Nullable private final AudioManager mAudioManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    // The target sinks to join broadcast onPlaybackStarted
-    @Nullable private List<BluetoothDevice> mTargetSinks;
     private boolean mIsStoppingBroadcast = false;
 
     @VisibleForTesting
@@ -83,15 +85,6 @@ public class AudioSharingDialogHandler {
                 @Override
                 public void onBroadcastStartFailed(int reason) {
                     Log.d(TAG, "onBroadcastStartFailed(), reason = " + reason);
-                    if (mTargetSinks != null) {
-                        mMetricsFeatureProvider.action(
-                                mContext,
-                                SettingsEnums.ACTION_AUDIO_SHARING_START_FAILED,
-                                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
-                        AudioSharingUtils.toastMessage(
-                                mContext, "Fail to start broadcast, reason " + reason);
-                        mTargetSinks = null;
-                    }
                 }
 
                 @Override
@@ -113,6 +106,9 @@ public class AudioSharingDialogHandler {
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
+                    AudioSharingUtils.toastMessage(
+                            mContext,
+                            mContext.getString(R.string.audio_sharing_sharing_stopped_label));
                     mIsStoppingBroadcast = false;
                 }
 
@@ -144,18 +140,6 @@ public class AudioSharingDialogHandler {
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
-                    if (mTargetSinks != null) {
-                        AudioSharingUtils.addSourceToTargetSinks(mTargetSinks, mLocalBtManager);
-                        new SubSettingLauncher(mContext)
-                                .setDestination(AudioSharingDashboardFragment.class.getName())
-                                .setSourceMetricsCategory(
-                                        (mHostFragment instanceof DashboardFragment)
-                                                ? ((DashboardFragment) mHostFragment)
-                                                        .getMetricsCategory()
-                                                : SettingsEnums.PAGE_UNKNOWN)
-                                .launch();
-                        mTargetSinks = null;
-                    }
                 }
 
                 @Override
@@ -175,6 +159,7 @@ public class AudioSharingDialogHandler {
                 mLocalBtManager != null
                         ? mLocalBtManager.getProfileManager().getLeAudioBroadcastAssistantProfile()
                         : null;
+        mAudioManager = context.getSystemService(AudioManager.class);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
@@ -196,6 +181,22 @@ public class AudioSharingDialogHandler {
     public void handleDeviceConnected(
             @NonNull CachedBluetoothDevice cachedDevice, boolean userTriggered) {
         String anonymizedAddress = cachedDevice.getDevice().getAnonymizedAddress();
+        if (mAudioManager != null) {
+            int audioMode = mAudioManager.getMode();
+            if (audioMode == AudioManager.MODE_RINGTONE
+                    || audioMode == AudioManager.MODE_IN_CALL
+                    || audioMode == AudioManager.MODE_IN_COMMUNICATION) {
+                Log.d(TAG, "Skip handleDeviceConnected, audio mode = " + audioMode);
+                // TODO: add metric for this case
+                if (userTriggered) {
+                    // If this method is called with user triggered, e.g. manual click on the
+                    // "Connected devices" page, we need call setActive for the device, since user
+                    // intend to switch active device for the call.
+                    cachedDevice.setActive();
+                }
+                return;
+            }
+        }
         boolean isBroadcasting = isBroadcasting();
         boolean isLeAudioSupported = AudioSharingUtils.isLeAudioSupported(cachedDevice);
         if (!isLeAudioSupported) {
@@ -375,14 +376,18 @@ public class AudioSharingDialogHandler {
                         new AudioSharingJoinDialogFragment.DialogEventListener() {
                             @Override
                             public void onShareClick() {
-                                mTargetSinks =
-                                        groupedDevices.values().stream()
-                                                .flatMap(items -> items.stream())
-                                                .collect(toList());
-                                Log.d(TAG, "Start broadcast with sinks = " + mTargetSinks.size());
-                                if (mBroadcast != null) {
-                                    mBroadcast.startPrivateBroadcast();
-                                }
+                                Bundle args = new Bundle();
+                                args.putBoolean(EXTRA_START_LE_AUDIO_SHARING, true);
+                                new SubSettingLauncher(mContext)
+                                        .setDestination(
+                                                AudioSharingDashboardFragment.class.getName())
+                                        .setSourceMetricsCategory(
+                                                (mHostFragment instanceof DashboardFragment)
+                                                        ? ((DashboardFragment) mHostFragment)
+                                                                .getMetricsCategory()
+                                                        : SettingsEnums.PAGE_UNKNOWN)
+                                        .setArguments(args)
+                                        .launch();
                             }
 
                             @Override

@@ -21,7 +21,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.AuthenitcateInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.CanEnrollFingerprintsInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrolledFingerprintsInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.RemoveFingerprintInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.RenameFingerprintInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.SensorInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
@@ -49,9 +54,14 @@ private const val DEBUG = false
 /** Models the UI state for fingerprint settings. */
 class FingerprintSettingsViewModel(
   private val userId: Int,
-  private val fingerprintManagerInteractor: FingerprintManagerInteractor,
   private val backgroundDispatcher: CoroutineDispatcher,
   private val navigationViewModel: FingerprintSettingsNavigationViewModel,
+  private val canEnrollFingerprintsInteractor: CanEnrollFingerprintsInteractor,
+  private val sensorInteractor: SensorInteractor,
+  private val authenticateInteractor: AuthenitcateInteractor,
+  private val renameFingerprintInteractor: RenameFingerprintInteractor,
+  private val removeFingerprintInteractor: RemoveFingerprintInteractor,
+  private val enrolledFingerprintsInteractor: EnrolledFingerprintsInteractor,
 ) : ViewModel() {
   private val _enrolledFingerprints: MutableStateFlow<List<FingerprintData>?> =
     MutableStateFlow(null)
@@ -62,19 +72,18 @@ class FingerprintSettingsViewModel(
 
   /** Represents the stream of the information of "Add Fingerprint" preference. */
   val addFingerprintPrefInfo: Flow<Pair<Boolean, Int>> =
-    _enrolledFingerprints.filterOnlyWhenSettingsIsShown().transform {
-      emit(
-        Pair(
-          fingerprintManagerInteractor.canEnrollFingerprints.first(),
-          fingerprintManagerInteractor.maxEnrollableFingerprints.first(),
-        )
-      )
+    _enrolledFingerprints.filterOnlyWhenSettingsIsShown().combine(
+      canEnrollFingerprintsInteractor.canEnrollFingerprints
+    ) { _, canEnrollFingerprints ->
+      Pair(canEnrollFingerprints, canEnrollFingerprintsInteractor.maxFingerprintsEnrollable())
     }
 
   /** Represents the stream of visibility of sfps preference. */
   val isSfpsPrefVisible: Flow<Boolean> =
-    _enrolledFingerprints.filterOnlyWhenSettingsIsShown().transform {
-      emit(fingerprintManagerInteractor.hasSideFps() == true && !it.isNullOrEmpty())
+    _enrolledFingerprints.filterOnlyWhenSettingsIsShown().combine(sensorInteractor.hasSideFps) {
+      fingerprints,
+      hasSideFps ->
+      hasSideFps && !fingerprints.isNullOrEmpty()
     }
 
   private val _isShowingDialog: MutableStateFlow<PreferenceViewModel?> = MutableStateFlow(null)
@@ -90,10 +99,10 @@ class FingerprintSettingsViewModel(
   private val _consumerShouldAuthenticate: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
   private val _fingerprintSensorType: Flow<FingerprintSensorType> =
-    fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
+    sensorInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
 
   private val _sensorNullOrEmpty: Flow<Boolean> =
-    fingerprintManagerInteractor.sensorPropertiesInternal.map { it == null }
+    sensorInteractor.sensorPropertiesInternal.map { it == null }
 
   private val _isLockedOut: MutableStateFlow<FingerprintAuthAttemptModel.Error?> =
     MutableStateFlow(null)
@@ -172,7 +181,7 @@ class FingerprintSettingsViewModel(
           while (it && navigationViewModel.nextStep.value is ShowSettings) {
             Log.d(TAG, "canAuthenticate authing")
             attemptingAuth()
-            when (val authAttempt = fingerprintManagerInteractor.authenticate()) {
+            when (val authAttempt = authenticateInteractor.authenticate()) {
               is FingerprintAuthAttemptModel.Success -> {
                 onAuthSuccess(authAttempt)
                 emit(authAttempt)
@@ -243,7 +252,7 @@ class FingerprintSettingsViewModel(
   /** A request to delete a fingerprint */
   fun deleteFingerprint(fp: FingerprintData) {
     viewModelScope.launch(backgroundDispatcher) {
-      if (fingerprintManagerInteractor.removeFingerprint(fp)) {
+      if (removeFingerprintInteractor.removeFingerprint(fp)) {
         updateEnrolledFingerprints()
       }
     }
@@ -252,7 +261,7 @@ class FingerprintSettingsViewModel(
   /** A request to rename a fingerprint */
   fun renameFingerprint(fp: FingerprintData, newName: String) {
     viewModelScope.launch {
-      fingerprintManagerInteractor.renameFingerprint(fp, newName)
+      renameFingerprintInteractor.renameFingerprint(fp, newName)
       updateEnrolledFingerprints()
     }
   }
@@ -271,7 +280,7 @@ class FingerprintSettingsViewModel(
   }
 
   private suspend fun updateEnrolledFingerprints() {
-    _enrolledFingerprints.update { fingerprintManagerInteractor.enrolledFingerprints.first() }
+    _enrolledFingerprints.update { enrolledFingerprintsInteractor.enrolledFingerprints.first() }
   }
 
   /** Used to indicate whether the consumer of the view model is ready for authentication. */
@@ -288,9 +297,14 @@ class FingerprintSettingsViewModel(
 
   class FingerprintSettingsViewModelFactory(
     private val userId: Int,
-    private val interactor: FingerprintManagerInteractor,
     private val backgroundDispatcher: CoroutineDispatcher,
     private val navigationViewModel: FingerprintSettingsNavigationViewModel,
+    private val canEnrollFingerprintsInteractor: CanEnrollFingerprintsInteractor,
+    private val sensorInteractor: SensorInteractor,
+    private val authenticateInteractor: AuthenitcateInteractor,
+    private val renameFingerprintInteractor: RenameFingerprintInteractor,
+    private val removeFingerprintInteractor: RemoveFingerprintInteractor,
+    private val enrolledFingerprintsInteractor: EnrolledFingerprintsInteractor,
   ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -298,9 +312,14 @@ class FingerprintSettingsViewModel(
 
       return FingerprintSettingsViewModel(
         userId,
-        interactor,
         backgroundDispatcher,
         navigationViewModel,
+        canEnrollFingerprintsInteractor,
+        sensorInteractor,
+        authenticateInteractor,
+        renameFingerprintInteractor,
+        removeFingerprintInteractor,
+        enrolledFingerprintsInteractor,
       )
         as T
     }

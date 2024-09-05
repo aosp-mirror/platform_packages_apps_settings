@@ -411,7 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Gesig en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Gesig, vingerafdruk en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Gesig, vingerafdrukke en <xliff:g id="WATCH">%s</xliff:g> is bygevoeg"</string>
-    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <!-- no translation found for mandatory_biometrics_prompt_description (6790144699440050735) -->
     <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator-ontsluiting"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Horlosie is bygevoeg"</string>
@@ -837,6 +837,10 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Verander"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Toestelbesonderhede"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Sleutelbordinstellings"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Nog instellings"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Fermwareopdaterings, meer oor, en meer"</string>
+    <!-- no translation found for bluetooth_device_tip_support (6072338493592606897) -->
+    <skip />
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Toestel se Bluetooth-adres: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Toestel se Bluetooth-adres:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vergeet toestel?"</string>
@@ -846,6 +850,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Eksperimenteel. Verbeter oudiogehalte."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Vergeet toestel"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Ontkoppel program"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Nog instellings"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maks. gekoppelde Bluetooth-oudiotoestelle"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Kies maksimum aantal gekoppelde Bluetooth-oudiotoestelle"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC- woordryke verkoperontfoutingloglêer"</string>
@@ -1333,8 +1338,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Gebruik <xliff:g id="CARRIER">%1$s</xliff:g> vir mobiele data?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Jy gebruik tans <xliff:g id="CARRIER2_0">%2$s</xliff:g> vir mobiele data. As jy na <xliff:g id="CARRIER1">%1$s</xliff:g> oorskakel, sal <xliff:g id="CARRIER2_1">%2$s</xliff:g> nie meer vir mobiele data gebruik word nie."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Gebruik <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Dateer voorkeur-SIM op?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> is die enigste SIM in jou toestel. Wil jy hierdie SIM vir mobiele data, oproepe en SMS\'e gebruik?"</string>
+    <string name="sim_preferred_message" msgid="4894337280925553873">"<xliff:g id="NEW_SIM">%1$s</xliff:g> is nou jou primêre SIM"</string>
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Verbeter mobieldatadekking?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Laat jou toestel toe om outomaties oor te skakel na <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> vir mobiele data wanneer dit meer beskikbaar is."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Jou organisasie kan dalk oproepe, boodskappe en netwerkverkeer sien."</string>
@@ -1939,8 +1943,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Pasmaak individuele raakpaneelnavigasiegebare"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Omgekeerde rollees"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Inhoud beweeg op wanneer jy ondertoe rollees"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Tik onder regs"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Tik op die raakpaneel se hoek onder regs vir meer opsies"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klik onder regs"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Klik op die raakpaneel se hoek onder regs vir meer opsies"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Wyserspoed"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Wyserinvulstyl"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Verander wyserinvulstyl na swart"</string>
@@ -3337,6 +3341,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Aan/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> en <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Jy kan ook Ruimtelike Oudio aanskakel vir Bluetooth-toestelle."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Instellings vir gekoppelde toestelle"</string>
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Ruimtelike Oudio"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Af"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Af"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Af"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Geen}=1{1 skedule gestel}other{# skedules gestel}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Moenie Steur Nie"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Prioriteitmodusse"</string>
@@ -3406,8 +3414,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"aktiveer donkertema"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Wissel die bedryfstelsel en apps om ligte teks op ’n donker agtergrond te verkies, wat makliker vir die oë kan wees en aansienlike batterybesparings op sekere toestelle bied"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Geen skermveranderinge nie}=1{{effect_1}}=2{{effect_1} en {effect_2}}=3{{effect_1}, {effect_2} en {effect_3}}other{{effect_1}, {effect_2}, en nog #}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Beperk wat vir jou kennisgewings kan stuur"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Geen onderbrekings is gefilter nie"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Laat alle kennisgewings toe"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Mense, apps en klanke kan onderbreek"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Vertoonopsies vir gefiltreerde kennisgewings"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Wanneer Moenie Steur Nie aan is"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Geen klank van kennisgewings af nie"</string>
@@ -3634,7 +3642,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Dit kan antwoord op boodskappe en handelingknoppies in kennisgewings gebruik, insluitend om kennisgewings te sluimer of toe te maak en oproepe te beantwoord."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Verander instellings"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Dit kan Moenie Steur Nie aan- of afskakel en verwante instellings verander."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Dit kan prioriteitmodusse bestuur en aktiveer, en verwante instellings verander."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"As jy kennisgewingtoegang vir <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> afskakel, kan Moenie Steur Nie-toegang dalk ook afgeskakel word."</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"As jy kennisgewingtoegang vir <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> afskakel, kan Prioriteitmodussetoegang dalk ook afgeskakel word."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Skakel af"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Kanselleer"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Intyds"</string>
@@ -3695,6 +3705,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Toegang tot Moenie Steur Nie"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Laat Moenie Steur Nie toe"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Geen geïnstalleerde programme het toegang tot Moenie Steur Nie versoek nie"</string>
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Prioriteitmodussetoegang"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Laat Prioriteitmodussetoegang toe"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Geen geïnstalleerde apps het Prioriteitmodussetoegang versoek nie"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Jy het nie kennisgewings van hierdie app af toegelaat nie"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android keer tans op jou versoek dat hierdie kategorie kennisgewings op hierdie toestel verskyn"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android keer tans op jou versoek dat hierdie groep kennisgewings op hierdie toestel verskyn"</string>
@@ -3877,6 +3890,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimineer alle afleidings vir ’n stil omgewing"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personaliseer toestelervarings en -instellings vir verskillende gebruikers"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimaliseer onderbrekings deur slegs belangrike mense en apps toe te laat om jou te bereik"</string>
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Stel ’n modus wat ’n gereelde skedule volg"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Hou jou toestel gesinkroniseer met jou dag se gebeure"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Word wakker en voel 100%"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Stel veiligheid eerste wanneer jy op die pad is"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Kry fokus om jouself te verdiep"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Vir die tye wanneer hoflikheid tel"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Geleide gebruik om jou te help om in goeie hande te bly"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Neem beheer oor jou aandag"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Waarskuwing"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Maak toe"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Stuur terugvoer oor hierdie toestel"</string>
@@ -4077,6 +4098,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Moet aangeskakel bly want kennisgewingtoegang is aan"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Herroep <xliff:g id="APP">%1$s</xliff:g> se toegang tot Moenie Steur Nie?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Alle Moenie Steur Nie-reëls wat deur hierdie program geskep is, sal verwyder word."</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Laat toegang tot Prioriteitmodusse toe vir <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Die app sal Moenie Steur Nie aan of af kan skakel, Prioriteitmodusse kan bestuur en aktiveer, en veranderinge aan verwante instellings kan aanbring."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Herroep toegang tot Prioriteitmodusse vir <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Alle modusse wat deur hierdie app geskep is, sal verwyder word."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Moenie optimaliseer nie"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimaliseer"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Sal jou battery dalk vinniger laat afloop. Program sal nie meer beperk word om agtergrondbattery te gebruik nie."</string>

@@ -411,7 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Модель лица и часы \"<xliff:g id="WATCH">%s</xliff:g>\" добавлены"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Модель лица, отпечаток пальца и часы \"<xliff:g id="WATCH">%s</xliff:g>\" добавлены"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Модель лица, отпечатки пальцев и часы \"<xliff:g id="WATCH">%s</xliff:g>\" добавлены"</string>
-    <!-- no translation found for mandatory_biometrics_prompt_description (8928849367818726432) -->
+    <!-- no translation found for mandatory_biometrics_prompt_description (6790144699440050735) -->
     <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Разблокировка по Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Часы добавлены"</string>
@@ -837,6 +837,10 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Изменить"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Об устройстве"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Настройки клавиатуры"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Дополнительные настройки"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Обновление встроенного ПО, сведения и не только"</string>
+    <!-- no translation found for bluetooth_device_tip_support (6072338493592606897) -->
+    <skip />
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Адрес Bluetooth этого устройства: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Адрес Bluetooth этого устройства: \n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Удалить устройство?"</string>
@@ -846,6 +850,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Улучш. качества звука (экспериментальн.)"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"ОК"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Отключение приложения"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Дополнительные настройки"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максимальное количество подключенных Bluetooth-аудиоустройств"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Укажите максимальное количество подключенных Bluetooth-аудиоустройств"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Подробный журнал отладки NFC"</string>
@@ -938,7 +943,7 @@
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"У вас недостаточно прав для изменения настроек сети Wi‑Fi"</string>
     <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Включить поиск сетей Wi‑Fi?"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Чтобы включать Wi‑Fi автоматически, нужно включить поиск сетей Wi‑Fi."</string>
-    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Эта функция позволяет приложениям и сервисам искать беспроводные сети, даже когда Wi-Fi отключен. Это может использоваться, например, для улучшения работы функций и сервисов, которым нужны данные о местоположении."</string>
+    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Приложения и сервисы смогут находить беспроводные сети, даже если Wi-Fi отключен. Мы сможем улучшать функции и сервисы, которые используют геоданные."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Включить"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Поиск сетей Wi‑Fi включен."</string>
     <string name="wifi_settings_warning_wep_network" msgid="7032462362300663466">"Эта сеть использует устаревший протокол безопасности (WEP) с низким уровнем защиты."</string>
@@ -1333,8 +1338,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Переключиться на оператора \"<xliff:g id="CARRIER">%1$s</xliff:g>\"?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Вы пользуетесь мобильным Интернетом в сети оператора \"<xliff:g id="CARRIER2_0">%2$s</xliff:g>\". После переключения на SIM-карту \"<xliff:g id="CARRIER1">%1$s</xliff:g>\" вы не сможете использовать мобильный Интернет оператора \"<xliff:g id="CARRIER2_1">%2$s</xliff:g>\"."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Выбрать сеть оператора \"<xliff:g id="CARRIER">%1$s</xliff:g>\""</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Изменить основную SIM-карту?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> – единственная SIM-карта в устройстве. Использовать ее для звонков, отправки SMS-сообщений и передачи мобильных данных?"</string>
+    <string name="sim_preferred_message" msgid="4894337280925553873">"<xliff:g id="NEW_SIM">%1$s</xliff:g> теперь основная SIM-карта."</string>
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Подключаться к доступной сети?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Разрешите устройству автоматически подключаться к мобильному интернету оператора \"<xliff:g id="BACKUP_CARRIER">%1$s</xliff:g>\", когда основная сеть недоступна."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Звонки, сообщения и данные сетевого трафика могут быть доступны вашей организации."</string>
@@ -1939,8 +1943,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Настройте свои жесты для навигации на сенсорной панели"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Прокрутка в обратную сторону"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"При прокручивании вниз контент перемещается вверх"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Правый нижний угол сенсорной панели"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Показывать варианты при нажатии в правом нижнем углу"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Нажатие на правый нижний угол"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Доп. опции: нажмите на правый нижний угол сенсорной панели"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Скорость указателя"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Стиль заливки указателя"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Изменить стиль заливки на черный"</string>
@@ -2338,7 +2342,7 @@
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Слуховые аппараты"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Сохраненные аппараты"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Управление слуховым аппаратом"</string>
-    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Ярлык для слухового аппарата"</string>
+    <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Быстрый запуск слухового аппарата"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Поддержка слуховых аппаратов"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Улучшить совместимость со слуховыми аппаратами и уменьшить нежелательный шум"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"О слуховых аппаратах"</string>
@@ -3154,7 +3158,7 @@
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> дБмВт, asu: <xliff:g id="ASU">%2$d</xliff:g>"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"SIM-карты изменены"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Нажмите, чтобы настроить"</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Всегда спрашивать"</string>
+    <string name="sim_calls_ask_first_prefs_title" msgid="3077694594349657933">"Спрашивать каждый раз"</string>
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Выберите SIM-карту"</string>
     <string name="sim_selection_channel_title" msgid="3193666315607572484">"Выбор SIM-карты"</string>
     <string name="dashboard_title" msgid="5660733037244683387">"Настройки"</string>
@@ -3337,6 +3341,10 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Включено/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> и <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Пространственное звучание можно также включить для устройств Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Настройки подключенных устройств"</string>
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Пространственный звук"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Отключено"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Отключено"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Отключено"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Нет настроенных расписаний}=1{Настроено 1 расписание}one{Настроено # расписание}few{Настроено # расписания}many{Настроено # расписаний}other{Настроено # расписания}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не беспокоить"</string>
     <string name="zen_modes_list_title" msgid="5138745349253275428">"Режимы приоритета"</string>
@@ -3406,8 +3414,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"использовать темную тему"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Показывать светлый текст на темном фоне в ОС и приложениях. Такой режим значительно экономит заряд батареи на некоторых устройствах и может быть более комфортным для глаз."</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Нет изменений в настройках экрана}=1{{effect_1}}=2{{effect_1} и {effect_2}}=3{{effect_1}, {effect_2} и {effect_3}}one{{effect_1}, {effect_2} и ещё # изменение}few{{effect_1}, {effect_2} и ещё # изменения}many{{effect_1}, {effect_2} и ещё # изменений}other{{effect_1}, {effect_2} и ещё # изменения}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Ограничивать уведомления"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Уведомления не фильтруются"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Разрешить все уведомления"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Не действует для сообщений и звонков, уведомлений от приложений и других звуков"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Настройки показа фильтруемых уведомлений"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"В режиме \"Не беспокоить\""</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Отключить звук"</string>
@@ -3634,7 +3642,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Приложение может отвечать на звонки и сообщения, а также временно отключать или закрывать уведомления и нажимать кнопки в них."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Изменять настройки"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Приложение может включать и отключать режим \"Не беспокоить\", а также менять его настройки."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="6678225711796413093">"Управляет режимами приоритета и изменяет соответствующие настройки"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Если вы отключите доступ к уведомлениям для приложения \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\", также может быть отключен доступ к настройкам режима \"Не беспокоить\"."</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="2985662620702322307">"Если вы отключите доступ к уведомлениям для приложения \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\", доступ к режимам приоритета тоже может быть отключен."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Отключить"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Отмена"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"В реальном времени"</string>
@@ -3695,6 +3705,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Доступ к режиму \"Не беспокоить\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Разрешить доступ к режиму \"Не беспокоить\""</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Установленные приложения не запрашивали доступ к функции \"Не беспокоить\"."</string>
+    <string name="manage_zen_modes_access_title" msgid="7568322052929075783">"Доступ к режимам приоритета"</string>
+    <string name="zen_modes_access_detail_switch" msgid="19797205786545052">"Разрешить доступ к режимам приоритета"</string>
+    <string name="zen_modes_access_empty_text" msgid="6393146155692575897">"Нет установленных приложений, которые запрашивали доступ к режимам приоритета."</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Уведомления от этого приложения отключены"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Вы отключили уведомления этой категории."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Вы отключили эту группу уведомлений"</string>
@@ -3877,6 +3890,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Добейтесь тишины, заблокировав все отвлекающие факторы"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Персонализируйте устройство и его настройки для разных пользователей"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Выберите важные контакты и приложения, чтобы не отвлекаться на остальное"</string>
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Настройте режим, который работает по расписанию"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Настройте работу устройства с учетом мероприятий в календаре"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Просыпайтесь, чувствуя себя на все сто"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Будьте максимально внимательны за рулем"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Сосредоточьтесь и войдите в состояние потока"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Соблюдайте тишину, когда этого требует этикет"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Передайте управление устройством в надежные руки"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Управляйте своим вниманием"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Уведомление"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Закрыть"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Отправить отзыв об устройстве"</string>
@@ -3999,7 +4020,7 @@
     <string name="high_power_on" msgid="8778058701270819268">"Не экономит заряд"</string>
     <string name="high_power_off" msgid="317000444619279018">"Экономия заряда включена"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Экономия заряда недоступна"</string>
-    <string name="high_power_prompt_title" msgid="2574478825228409124">"Разрешить приложению запуск в фоновом режиме?"</string>
+    <string name="high_power_prompt_title" msgid="2574478825228409124">"Разрешить приложению всегда работать в фоновом режиме?"</string>
     <string name="high_power_prompt_body" msgid="6029266540782139941">"Если приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" будет разрешено всегда работать в фоновом режиме, батарея может разряжаться быстрее. \n\nОтозвать разрешение можно в любое время. Для этого выберите \"Настройки &gt; Приложения\"."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Использовано с момента последней полной зарядки: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"Использовано за последние 24 часа: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
@@ -4077,6 +4098,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Должно быть включено, поскольку разрешен доступ к уведомлениям"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Отменить доступ к режиму \"Не беспокоить\" для приложения <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Все правила режима \"Не беспокоить\", созданные этим приложением, будут удалены."</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="2072265702931309138">"Предоставить доступ к режимам приоритета для приложения \"<xliff:g id="APP">%1$s</xliff:g>\"?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2351013300727701273">"Приложение сможет включать и отключать режим \"Не беспокоить\", управлять режимами приоритета, а также изменять соответствующие настройки."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="2703602440018176310">"Отозвать доступ к режимам приоритета у приложения \"<xliff:g id="APP">%1$s</xliff:g>\"?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Все режимы, созданные этим приложением, будут удалены."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Не экономить"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Экономить"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Батарея может разрядиться быстрее. Ограничение на использование батареи в фоновом режиме будет снято."</string>
@@ -4235,8 +4260,8 @@
     <string name="data_saver_on" msgid="7848893946018448793">"Включено"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Отключено"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Экономия трафика"</string>
-    <string name="unrestricted_app_title" msgid="8531936851059106374">"Доступ к безлимитному мобильному интернету"</string>
-    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Разрешить доступ к безлимитному мобильному интернету в режиме экономии трафика"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Безлимитный мобильный трафик"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Не ограничивать объем мобильных данных в режиме экономии трафика"</string>
     <string name="home_app" msgid="6056850504746902747">"Главное приложение"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Добавьте ещё один отпечаток"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Добавьте отпечаток другого пальца"</string>
@@ -4696,7 +4721,7 @@
     <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Нет доступных SIM-карт"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Настройки звонков"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Настройки SMS"</string>
-    <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Всегда спрашивать"</string>
+    <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Спрашивать каждый раз"</string>
     <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Добавить сеть"</string>
     <string name="default_for_calls" msgid="2788950217176988034">"По умолчанию для звонков"</string>
     <string name="default_for_sms" msgid="1316988329407434771">"По умолчанию для SMS"</string>
@@ -5104,7 +5129,7 @@
     <string name="all_apps" msgid="3054120149509114789">"Все приложения"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Запретить"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"Сверхширокополосная связь (СШП)"</string>
-    <string name="uwb_settings_summary" msgid="3074271396764672268">"Помогает определить относительное местоположение устройств с технологией сверхширокополосной связи поблизости"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"Помогает определять относительное местоположение устройств поблизости, у которых есть сверхширокополосная связь"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Выключает режим полета, чтобы использовать сверхширокополосную связь"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Сверхширокополосная связь недоступна в вашем регионе"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
@@ -5325,12 +5350,12 @@
     <string name="sim_category_converted_sim" msgid="8575548015816988908">"Преобразовано в eSIM. Извлеките и утилизируйте."</string>
     <string name="sync_across_devices_title" msgid="3447757705383089345">"Синхронизация между устройствами"</string>
     <string name="device_diagnostics_title" msgid="2914523189695727897">"Диагностика устройства"</string>
-    <string name="audio_sharing_title" msgid="4144157137502923821">"Передача аудио"</string>
-    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Передавать аудио"</string>
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Отправка аудио"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Разрешить отправку аудио"</string>
     <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Звонки и будильники"</string>
     <string name="audio_sharing_description" msgid="1660255584523640628">"Слушайте вместе с другими. Каждому пользователю нужны наушники с поддержкой LE Audio."</string>
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Используемые медиаустройства"</string>
-    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Аудио звонков"</string>
+    <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Звук во время звонков"</string>
     <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Воспроизводится только на устройстве \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Проверить звук"</string>
     <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Он должен быть слышен всем подключенным пользователям"</string>
@@ -5347,7 +5372,7 @@
     <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Другие медиаустройства"</string>
     <string name="audio_sharing_summary_on" msgid="611197542982323788">"Включено"</string>
     <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Отключено"</string>
-    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Отправка аудио"</string>
+    <string name="audio_sharing_share_dialog_title" msgid="427514648577553621">"Передача аудио"</string>
     <string name="audio_sharing_share_dialog_subtitle" msgid="5208582843732057871">"Устройства \"<xliff:g id="DEVICE_NAME1">%1$s</xliff:g>\" и \"<xliff:g id="DEVICE_NAME2">%2$s</xliff:g>\"."</string>
     <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"Отправить аудио"</string>
     <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"Нет, спасибо"</string>
@@ -5357,12 +5382,12 @@
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Закрыть"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Подключите ещё одну пару совместимых наушников или отправьте другому пользователю название и пароль вашего потока."</string>
     <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Подключите ещё одну пару совместимых наушников или отправьте другому пользователю QR-код вашего потока."</string>
-    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Включена отправка аудио"</string>
+    <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Включена передача аудио"</string>
     <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Подключить новое устройство"</string>
     <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Показать QR-код"</string>
-    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Включена отправка аудио"</string>
+    <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Включена передача аудио"</string>
     <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Другие пользователи могут слушать ваши медиафайлы, но не звонки."</string>
-    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Остановить отправку"</string>
+    <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Остановить передачу"</string>
     <string name="audio_sharing_settings_button_label" msgid="8574808650318270491">"Настройки"</string>
     <string name="audio_sharing_disconnect_dialog_title" msgid="2192751727237748602">"Выберите, какое устройство нужно отключить"</string>
     <string name="audio_sharing_dialog_disconnect_content" msgid="3840488888970653308">"Воспроизводить аудио можно одновременно только на двух устройствах."</string>
@@ -5388,19 +5413,19 @@
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Ошибка подключения. Повторите попытку."</string>
     <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"Подключение…"</string>
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Аудиопоток недоступен"</string>
-    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"В нем сейчас нет контента."</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"В этом аудиопотоке сейчас ничего не воспроизводится."</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Закрыть"</string>
-    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Прослушивание"</string>
+    <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Воспроизвести"</string>
     <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Повторить попытку"</string>
-    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Прослушивание аудиопотока"</string>
-    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Аудиопоток будет воспроизводиться на определенном устройстве (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>). Используйте его, чтобы регулировать громкость."</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Воспроизведение аудиопотока"</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Для воспроизведения аудиопотока будет использоваться <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Громкость можно регулировать на этом устройстве."</string>
     <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Ошибка воспроизведения"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"Совместимые наушники подключены"</string>
     <string name="audio_streams_activity_title" msgid="6766869545769831935">"Аудиопотоки"</string>
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Без пароля"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Подробнее…"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Не удается воспроизвести аудиопоток на устройстве (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>)."</string>
-    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Прослушивается"</string>
+    <string name="audio_streams_listening_now" msgid="4205614429222949176">"Воспроизводится"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Остановить прослушивание"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Подключение совместимых наушников"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Подключить устройство"</string>
@@ -5414,9 +5439,9 @@
     <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Подключите совместимые наушники"</string>
     <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Аудиопотоки рядом"</string>
     <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Сканирование QR-кода"</string>
-    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Чтобы начать прослушивание, отсканируйте QR-код"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Чтобы начать воспроизведение, отсканируйте QR-код потока"</string>
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Подключиться к потоку"</string>
-    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Отсканируйте QR-код аудиопотока для прослушивания на устройстве (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>)"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Отсканируйте QR-код аудиопотока, чтобы воспроизвести его на устройстве \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Нельзя изменить пароль во время отправки аудио. Сначала отключите ее."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Сканер QR-кодов"</string>
     <string name="homepage_search" msgid="6759334912284663559">"Поиск по настройкам"</string>

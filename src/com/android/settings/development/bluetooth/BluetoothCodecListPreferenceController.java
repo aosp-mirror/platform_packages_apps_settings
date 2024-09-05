@@ -26,9 +26,11 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.development.BluetoothA2dpConfigStore;
 import com.android.settings.development.Flags;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -38,14 +40,15 @@ import java.util.Collection;
 import java.util.List;
 
 /** List preference controller to set the Bluetooth A2DP codec */
-public class BluetoothCodecListPreferenceController
-        extends AbstractBluetoothListPreferenceController {
+public class BluetoothCodecListPreferenceController extends AbstractBluetoothPreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY = "bluetooth_audio_codec_settings_list";
     private static final String TAG = "BtExtCodecCtr";
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     @Nullable private final Callback mCallback;
+    @Nullable protected final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    @Nullable protected ListPreference mListPreference;
 
     public BluetoothCodecListPreferenceController(
             @NonNull Context context,
@@ -54,14 +57,13 @@ public class BluetoothCodecListPreferenceController
             @Nullable Callback callback) {
         super(context, lifecycle, store);
         mCallback = callback;
+        mBluetoothA2dpConfigStore = store;
     }
 
     @Override
     public boolean isAvailable() {
         boolean available = Flags.a2dpOffloadCodecExtensibilitySettings();
-        if (DEBUG) {
-            Log.d(TAG, "isAvailable: " + available);
-        }
+        Log.d(TAG, "isAvailable: " + available);
         return available;
     }
 
@@ -82,37 +84,39 @@ public class BluetoothCodecListPreferenceController
             return false;
         }
 
-        if (DEBUG) {
-            Log.d(TAG, "onPreferenceChange: newValue=" + (String) newValue);
-        }
-        final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;
-        if (bluetoothA2dp == null) {
-            Log.e(TAG, "onPreferenceChange: bluetoothA2dp is null");
+        if (mListPreference == null) {
+            Log.e(TAG, "onPreferenceChange: List preference is null");
             return false;
         }
 
-        writeConfigurationValues((String) newValue);
+        Log.d(TAG, "onPreferenceChange: newValue=" + (String) newValue);
+        final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;
+        if (bluetoothA2dp == null) {
+            Log.e(TAG, "onPreferenceChange: bluetoothA2dp is null");
+            setListPreferenceEnabled(false);
+            return false;
+        }
+
+        if (!writeConfigurationValues((String) newValue)) {
+            Log.e(TAG, "onPreferenceChange: Configuration failed");
+            return false;
+        }
 
         if (mBluetoothA2dpConfigStore == null) {
             Log.e(TAG, "onPreferenceChange: Bluetooth A2dp Config Store is null");
             return false;
         }
-        BluetoothCodecConfig codecConfig;
-        if (Flags.a2dpOffloadCodecExtensibilitySettings()) {
-            codecConfig = mBluetoothA2dpConfigStore.createCodecConfigFromCodecType();
-        } else {
-            codecConfig = mBluetoothA2dpConfigStore.createCodecConfig();
-        }
 
         final BluetoothDevice activeDevice = getA2dpActiveDevice();
         if (activeDevice == null) {
             Log.e(TAG, "onPreferenceChange: active device is null");
+            setListPreferenceEnabled(false);
             return false;
         }
 
-        if (DEBUG) {
-            Log.d(TAG, "onPreferenceChange: setCodecConfigPreference: " + codecConfig.toString());
-        }
+        BluetoothCodecConfig codecConfig =
+                mBluetoothA2dpConfigStore.createCodecConfigFromCodecType();
+        Log.d(TAG, "onPreferenceChange: setCodecConfigPreference: " + codecConfig.toString());
         bluetoothA2dp.setCodecConfigPreference(activeDevice, codecConfig);
         if (mCallback != null) {
             mCallback.onBluetoothCodecChanged();
@@ -128,68 +132,74 @@ public class BluetoothCodecListPreferenceController
             return;
         }
 
+        if (!isHDAudioEnabled()) {
+            Log.d(TAG, "updateState: HD Audio is disabled");
+            setListPreferenceEnabled(false);
+            return;
+        }
+
+        final BluetoothCodecStatus codecStatus = getBluetoothCodecStatus();
+        if (codecStatus == null) {
+            Log.e(TAG, "updateState: Bluetooth Codec Status is null");
+            return;
+        }
+
+        final BluetoothCodecConfig currentCodecConfig = codecStatus.getCodecConfig();
+        if (currentCodecConfig == null) {
+            Log.e(TAG, "updateState: currentCodecConfig is null");
+            return;
+        }
+
         final List<String> codecIds = new ArrayList<>();
         final List<String> labels = new ArrayList<>();
-        String selectedCodecId = mDefaultValue;
-        String selectedLabel = mDefaultEntry;
-
-        if (isHDAudioEnabled()) {
-            final BluetoothCodecStatus codecStatus = getBluetoothCodecStatus();
-            if (codecStatus == null) {
-                Log.e(TAG, "updateState: Bluetooth Codec Status is null");
-                return;
+        String selectedCodecId = null;
+        String selectedLabel = null;
+        final List<BluetoothCodecConfig> codecConfigs =
+                codecStatus.getCodecsSelectableCapabilities();
+        for (BluetoothCodecConfig config : codecConfigs) {
+            BluetoothCodecType codecType = config.getExtendedCodecType();
+            if (codecType == null) {
+                Log.e(TAG, "codec type for config:" + config + " is null");
+                continue;
             }
-
-            final BluetoothCodecConfig currentCodecConfig = codecStatus.getCodecConfig();
-            if (currentCodecConfig == null) {
-                Log.e(TAG, "updateState: currentCodecConfig is null");
-                return;
+            labels.add(codecType.getCodecName());
+            codecIds.add(String.valueOf(codecType.getCodecId()));
+            if (currentCodecConfig != null
+                    && currentCodecConfig.getExtendedCodecType().equals(codecType)) {
+                selectedCodecId = codecIds.get(codecIds.size() - 1);
+                selectedLabel = labels.get(labels.size() - 1);
+                Log.d(
+                        TAG,
+                        "updateState: Selecting codec: "
+                                + selectedLabel
+                                + ", id: "
+                                + selectedCodecId);
             }
-
-            final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;
-            if (bluetoothA2dp == null) {
-                Log.e(TAG, "updateState: bluetoothA2dp is null");
-                return;
-            }
-
-            final Collection<BluetoothCodecType> codecTypes =
-                    bluetoothA2dp.getSupportedCodecTypes();
-            for (BluetoothCodecType codecType : codecTypes) {
-                labels.add(codecType.getCodecName());
-                codecIds.add(String.valueOf(codecType.getCodecId()));
-                if (currentCodecConfig != null
-                        && currentCodecConfig.getExtendedCodecType().equals(codecType)) {
-                    selectedCodecId = codecIds.get(codecIds.size() - 1);
-                    selectedLabel = labels.get(labels.size() - 1);
-                    if (DEBUG) {
-                        Log.d(
-                                TAG,
-                                "updateState: Current config: "
-                                        + selectedLabel
-                                        + ", id: "
-                                        + selectedCodecId);
-                    }
-                }
-            }
-
-            setupListPreference(labels, codecIds, selectedLabel, selectedCodecId);
         }
+        setupListPreference(labels, codecIds, selectedLabel, selectedCodecId);
     }
 
     @Override
+    public void onBluetoothServiceConnected(@NonNull BluetoothA2dp bluetoothA2dp) {
+        super.onBluetoothServiceConnected(bluetoothA2dp);
+        initConfigStore();
+    }
+
     public void onHDAudioEnabled(boolean enabled) {
-        if (DEBUG) {
-            Log.d(TAG, "onHDAudioEnabled: enabled=" + enabled);
-        }
+        Log.d(TAG, "onHDAudioEnabled: enabled=" + enabled);
         if (mListPreference == null) {
             Log.e(TAG, "onHDAudioEnabled: List preference is null");
             return;
         }
-        mListPreference.setEnabled(enabled);
+        setListPreferenceEnabled(enabled);
+        if (!enabled) {
+            mListPreference.setValue(null);
+            mListPreference.setSummary(null);
+        }
     }
 
-    @Override
-    protected void writeConfigurationValues(String entryValue) {
+    @VisibleForTesting
+    boolean writeConfigurationValues(String entryValue) {
         long codecIdValue = getCodecIdFromEntryValue(entryValue);
         BluetoothCodecType selectedCodecType = null;
         BluetoothCodecConfig selectedCodecConfig = null;
@@ -197,7 +207,7 @@ public class BluetoothCodecListPreferenceController
         final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;
         if (bluetoothA2dp == null) {
             Log.e(TAG, "writeConfigurationValues: bluetoothA2dp is null");
-            return;
+            return false;
         }
 
         final Collection<BluetoothCodecType> codecTypes = bluetoothA2dp.getSupportedCodecTypes();
@@ -213,16 +223,14 @@ public class BluetoothCodecListPreferenceController
                     "writeConfigurationValues: No selectable codec ID: "
                             + codecIdValue
                             + " found. Unable to change codec");
-            return;
+            return false;
         }
 
-        if (DEBUG) {
-            Log.d(TAG, "writeConfigurationValues: Selected codec: " + selectedCodecType.toString());
-        }
+        Log.d(TAG, "writeConfigurationValues: Selected codec: " + selectedCodecType.toString());
         final BluetoothCodecStatus codecStatus = getBluetoothCodecStatus();
         if (codecStatus == null) {
             Log.e(TAG, "writeConfigurationValues: Bluetooth Codec Status is null");
-            return;
+            return false;
         }
 
         final List<BluetoothCodecConfig> codecConfigs =
@@ -231,8 +239,9 @@ public class BluetoothCodecListPreferenceController
             BluetoothCodecType codecType = config.getExtendedCodecType();
             if (codecType == null) {
                 Log.e(TAG, "codec type for config:" + config + " is null");
+                continue;
             }
-            if (codecType != null && codecType.equals(selectedCodecType)) {
+            if (codecType.equals(selectedCodecType)) {
                 selectedCodecConfig = config;
             }
         }
@@ -242,12 +251,12 @@ public class BluetoothCodecListPreferenceController
                     TAG,
                     "writeConfigurationValues: No selectable codec config for codec: "
                             + selectedCodecType.toString());
-            return;
+            return false;
         }
 
         if (mBluetoothA2dpConfigStore == null) {
             Log.e(TAG, "writeConfigurationValues: Bluetooth A2dp Config Store is null");
-            return;
+            return false;
         }
 
         mBluetoothA2dpConfigStore.setCodecType(selectedCodecType);
@@ -261,13 +270,145 @@ public class BluetoothCodecListPreferenceController
         mBluetoothA2dpConfigStore.setChannelMode(
                 AbstractBluetoothDialogPreferenceController.getHighestChannelMode(
                         selectedCodecConfig));
+        return true;
     }
 
     private long getCodecIdFromEntryValue(String entryValue) {
         long codecType = BluetoothCodecType.CODEC_ID_SBC;
-        if (entryValue.isEmpty() || Long.valueOf(entryValue) == DEFAULT_VALUE_INT) {
+        if (entryValue.isEmpty()) {
             return codecType;
         }
         return Long.valueOf(entryValue);
+    }
+
+    private void setListPreferenceEnabled(boolean enable) {
+        if (mListPreference != null) {
+            mListPreference.setEnabled(enable);
+        }
+    }
+
+    @Nullable
+    @VisibleForTesting
+    BluetoothCodecStatus getBluetoothCodecStatus() {
+        final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;
+        if (bluetoothA2dp == null) {
+            Log.e(
+                    TAG,
+                    "getBluetoothCodecStatus: Unable to get codec status. Bluetooth A2dp is null.");
+            return null;
+        }
+        final BluetoothDevice activeDevice = getA2dpActiveDevice();
+        if (activeDevice == null) {
+            Log.e(TAG, "getBluetoothCodecStatus: Unable to get codec status. No active device.");
+            return null;
+        }
+        final BluetoothCodecStatus codecStatus = bluetoothA2dp.getCodecStatus(activeDevice);
+        if (codecStatus == null) {
+            Log.e(TAG, "getBluetoothCodecStatus: Codec status is null");
+            return null;
+        }
+        return codecStatus;
+    }
+
+    @Nullable
+    @VisibleForTesting
+    BluetoothCodecConfig getCurrentCodecConfig() {
+        final BluetoothCodecStatus codecStatus = getBluetoothCodecStatus();
+        if (codecStatus == null) {
+            Log.e(
+                    TAG,
+                    "getCurrentCodecConfig: Unable to get current codec config. Codec status is"
+                            + " null");
+            return null;
+        }
+
+        return codecStatus.getCodecConfig();
+    }
+
+    @VisibleForTesting
+    boolean isHDAudioEnabled() {
+        final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;
+        if (bluetoothA2dp == null) {
+            Log.e(TAG, "isHDAudioEnabled: Unable to get codec status. BluetoothA2dp is null.");
+            return false;
+        }
+        BluetoothDevice activeDevice = getA2dpActiveDevice();
+        if (activeDevice == null) {
+            Log.e(TAG, "isHDAudioEnabled: Unable to get codec status. No active device.");
+            return false;
+        }
+        return (bluetoothA2dp.isOptionalCodecsEnabled(activeDevice)
+                == BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
+    }
+
+    @VisibleForTesting
+    void initConfigStore() {
+        final BluetoothCodecConfig config = getCurrentCodecConfig();
+        if (config == null) {
+            Log.e(TAG, "initConfigStore: Current codec config is null.");
+            return;
+        }
+        if (mBluetoothA2dpConfigStore == null) {
+            Log.e(TAG, "initConfigStore: Bluetooth A2dp Config Store is null.");
+            return;
+        }
+        mBluetoothA2dpConfigStore.setCodecType(config.getExtendedCodecType());
+        mBluetoothA2dpConfigStore.setSampleRate(config.getSampleRate());
+        mBluetoothA2dpConfigStore.setBitsPerSample(config.getBitsPerSample());
+        mBluetoothA2dpConfigStore.setChannelMode(config.getChannelMode());
+        mBluetoothA2dpConfigStore.setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
+        mBluetoothA2dpConfigStore.setCodecSpecific1Value(config.getCodecSpecific1());
+    }
+
+    @VisibleForTesting
+    void setupDefaultListPreference() {
+        Log.d(TAG, "setupDefaultListPreference");
+        if (mListPreference == null) {
+            Log.e(TAG, "setupDefaultListPreference: List preference is null");
+            return;
+        }
+        mListPreference.setValue(null);
+        mListPreference.setSummary(null);
+        setListPreferenceEnabled(false);
+    }
+
+    /**
+     * Sets the {@link ListPreference}.
+     *
+     * @param entries list of String entries for the {@link ListPreference}.
+     * @param entryValues list of String entry values for the {@link ListPreference}.
+     * @param selectedEntry currently selected entry.
+     * @param selectedValue currently selected entry value.
+     */
+    @VisibleForTesting
+    void setupListPreference(
+            List<String> entries,
+            List<String> entryValues,
+            @Nullable String selectedEntry,
+            @Nullable String selectedValue) {
+        if (mListPreference == null) {
+            Log.e(TAG, "setupListPreference: List preference is null");
+            return;
+        }
+
+        if (entries.size() != entryValues.size()) {
+            Log.e(
+                    TAG,
+                    ("setupListPreference: size of entries: " + entries.size())
+                            + (", size of entryValues" + entryValues.size()));
+            setupDefaultListPreference();
+            return;
+        }
+        if (entries.isEmpty() || entryValues.isEmpty()) {
+            Log.e(TAG, "setupListPreference: entries or entryValues empty");
+            setupDefaultListPreference();
+            return;
+        }
+
+        mListPreference.setEntries(entries.toArray(new String[entries.size()]));
+        mListPreference.setEntryValues(entryValues.toArray(new String[entryValues.size()]));
+        mListPreference.setValue(selectedValue);
+        mListPreference.setSummary(selectedEntry);
+        setListPreferenceEnabled(true);
     }
 }

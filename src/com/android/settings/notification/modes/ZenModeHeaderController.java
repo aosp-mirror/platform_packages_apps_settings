@@ -23,15 +23,14 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 
 class ZenModeHeaderController extends AbstractZenModeHeaderController {
 
-    ZenModeHeaderController(
-            @NonNull  Context context,
-            @NonNull String key,
-            @NonNull DashboardFragment fragment) {
-        super(context, key, fragment);
+    ZenModeHeaderController(@NonNull Context context, @NonNull ZenIconLoader iconLoader,
+            @NonNull String key, @NonNull DashboardFragment fragment) {
+        super(context, iconLoader, key, fragment);
     }
 
     @Override
