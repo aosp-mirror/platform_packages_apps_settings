@@ -87,7 +87,7 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
 
         mModeName = zenMode.getName();
         PrimarySwitchPreference triggerPref = (PrimarySwitchPreference) preference;
-        triggerPref.setChecked(zenMode.getRule().isEnabled());
+        triggerPref.setChecked(zenMode.isEnabled());
         triggerPref.setOnPreferenceChangeListener(mSwitchChangeListener);
         if (zenMode.isSystemOwned()) {
             setUpForSystemOwnedTrigger(triggerPref, zenMode);
@@ -213,7 +213,7 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
 
     private void setModeEnabled(boolean enabled) {
         saveMode((zenMode) -> {
-            if (enabled != zenMode.getRule().isEnabled()) {
+            if (enabled != zenMode.isEnabled()) {
                 zenMode.getRule().setEnabled(enabled);
             }
             return zenMode;

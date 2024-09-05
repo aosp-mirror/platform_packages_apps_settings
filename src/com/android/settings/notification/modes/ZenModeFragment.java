@@ -171,7 +171,7 @@ public class ZenModeFragment extends ZenModeFragmentBase {
             } else if (menuItem.getItemId() == DELETE_MODE) {
                 new AlertDialog.Builder(mContext)
                         .setTitle(mContext.getString(R.string.zen_mode_delete_mode_confirmation,
-                                mZenMode.getRule().getName()))
+                                mZenMode.getName()))
                         .setPositiveButton(R.string.zen_mode_schedule_delete,
                                 (dialog, which) -> {
                                     // start finishing before calling removeMode() so that we

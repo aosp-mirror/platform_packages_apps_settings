@@ -38,6 +38,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HapClientProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -111,6 +112,7 @@ public class BluetoothDetailsHearingAidsPresetsController extends
                 final int index = listPreference.findIndexOfValue(value);
                 final String presetName = listPreference.getEntries()[index].toString();
                 final int presetIndex = Integer.parseInt(value);
+                logPresetChangedIfNeeded();
                 listPreference.setSummary(presetName);
                 if (DEBUG) {
                     Log.d(TAG, "onPreferenceChange"
@@ -371,6 +373,17 @@ public class BluetoothDetailsHearingAidsPresetsController extends
                 Log.d(TAG, "selectPreset for memberDevice, device: " + memberDevice);
             }
             mHapClientProfile.selectPreset(memberDevice.getDevice(), presetIndex);
+        }
+    }
+
+    private void logPresetChangedIfNeeded() {
+        if (mPreference == null || mPreference.getEntries() == null) {
+            return;
+        }
+        if (mFragment instanceof BluetoothDeviceDetailsFragment) {
+            int category = ((BluetoothDeviceDetailsFragment) mFragment).getMetricsCategory();
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(category,
+                    getPreferenceKey(), mPreference.getEntries().length);
         }
     }
 }
