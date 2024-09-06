@@ -783,9 +783,13 @@
 
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
-                  android:exported="false"
+                  android:exported="true"
                   android:enableOnBackInvokedCallback="false"
                   android:taskAffinity="com.android.settings.root">
+            <intent-filter>
+                <action android:name="android.settings.COMBINED_BIOMETRICS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
