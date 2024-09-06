@@ -105,14 +105,6 @@
         settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
         settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"/>
 
-    <com.android.settingslib.RestrictedPreference
-        android:key="modes_notifications"
-        android:order="-130"
-        android:title="@string/zen_modes_list_title"
-        settings:useAdminDisabledSummary="true"
-        android:fragment="com.android.settings.notification.modes.ZenModesListFragment"
-        settings:controller="com.android.settings.notification.modes.ZenModesLinkPreferenceController"/>
-
     <!-- Phone ringtone -->
     <com.android.settings.DefaultRingtonePreference
         android:key="phone_ringtone"

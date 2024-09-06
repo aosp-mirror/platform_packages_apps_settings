@@ -97,6 +97,8 @@ class UdfpsEnrollDebugRepositoryImpl :
   }
 
   override val fingerprintSensor: Flow<FingerprintSensor> = flowOf(sensorProps)
+  override val hasSideFps: Flow<Boolean>
+    get() = flowOf(false)
 
   private fun pointToLeftOfSensor(sensorLocation: Rect): MotionEvent =
     MotionEvent.obtain(

@@ -31,6 +31,8 @@ import com.android.settingslib.notification.modes.ZenMode;
 
 import com.google.common.base.Strings;
 
+import java.util.concurrent.Executor;
+
 /**
  * Preference representing a single mode item on the modes aggregator page. Clicking on this
  * preference leads to an individual mode's configuration page.
@@ -38,17 +40,28 @@ import com.google.common.base.Strings;
 class ZenModesListItemPreference extends RestrictedPreference {
 
     private final Context mContext;
+    private final ZenIconLoader mIconLoader;
+    private final Executor mUiExecutor;
     private ZenMode mZenMode;
 
     private TextView mTitleView;
     private TextView mSummaryView;
 
-    ZenModesListItemPreference(Context context, ZenMode zenMode) {
+    ZenModesListItemPreference(Context context, ZenIconLoader iconLoader, ZenMode zenMode) {
+        this(context, iconLoader, context.getMainExecutor(), zenMode);
+    }
+
+    @VisibleForTesting
+    ZenModesListItemPreference(Context context, ZenIconLoader iconLoader, Executor uiExecutor,
+            ZenMode zenMode) {
         super(context);
         mContext = context;
+        mIconLoader = iconLoader;
+        mUiExecutor = uiExecutor;
         setZenMode(zenMode);
         setKey(zenMode.getId());
     }
+
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
@@ -93,12 +106,12 @@ class ZenModesListItemPreference extends RestrictedPreference {
 
         setIconSize(ICON_SIZE_SMALL);
         FutureUtil.whenDone(
-                mZenMode.getIcon(mContext, ZenIconLoader.getInstance()),
+                mIconLoader.getIcon(mContext, mZenMode),
                 icon -> setIcon(
                         zenMode.isActive()
-                                ? IconUtil.applyAccentTint(mContext, icon)
-                                : IconUtil.applyNormalTint(mContext, icon)),
-                mContext.getMainExecutor());
+                                ? IconUtil.applyAccentTint(mContext, icon.drawable())
+                                : IconUtil.applyNormalTint(mContext, icon.drawable())),
+                mUiExecutor);
 
         updateTextColor(zenMode);
     }
