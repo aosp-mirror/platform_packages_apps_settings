@@ -84,7 +84,7 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
 
     @Override
     public boolean isAvailable(ZenMode zenMode) {
-        return zenMode.getRule().getInterruptionFilter() != INTERRUPTION_FILTER_ALL;
+        return zenMode.getInterruptionFilter() != INTERRUPTION_FILTER_ALL;
     }
 
     @Override
@@ -94,7 +94,7 @@ class ZenModePeopleLinkPreferenceController extends AbstractZenModePreferenceCon
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModePeopleFragment.class,
                         zenMode.getId(), SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
 
-        preference.setEnabled(zenMode.isEnabled());
+        preference.setEnabled(zenMode.isEnabled() && zenMode.canEditPolicy());
         preference.setSummary(mSummaryHelper.getPeopleSummary(zenMode.getPolicy()));
         ((CircularIconsPreference) preference).setIcons(getPeopleIcons(zenMode.getPolicy()),
                 PEOPLE_ITEM_EQUIVALENCE);

@@ -92,7 +92,7 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
 
     @Override
     public boolean isAvailable(ZenMode zenMode) {
-        return zenMode.getRule().getInterruptionFilter() != INTERRUPTION_FILTER_ALL;
+        return zenMode.getInterruptionFilter() != INTERRUPTION_FILTER_ALL;
     }
 
     @Override
@@ -102,7 +102,7 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
         preference.setIntent(
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModeAppsFragment.class,
                         zenMode.getId(), SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
-        preference.setEnabled(zenMode.isEnabled());
+        preference.setEnabled(zenMode.isEnabled() && zenMode.canEditPolicy());
 
         mZenMode = zenMode;
         mPreference = (CircularIconsPreference) preference;

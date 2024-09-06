@@ -27,6 +27,7 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.VibrationAttributes;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -69,7 +70,8 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     public KeyboardVibrationTogglePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mVibrator = context.getSystemService(Vibrator.class);
-        mContentObserver = new ContentObserver(new Handler(/* async= */ true)) {
+        Handler handler = Looper.myLooper() != null ? new Handler(/* async= */ true) : null;
+        mContentObserver = new ContentObserver(handler) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
                 if (uri.equals(MAIN_VIBRATION_SWITCH_URI)) {
