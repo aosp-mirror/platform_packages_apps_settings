@@ -16,9 +16,6 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ID;
-import static com.android.settings.utils.FileSizeFormatter.GIGABYTE_IN_BYTES;
-import static com.android.settings.utils.FileSizeFormatter.KILOBYTE_IN_BYTES;
-import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -73,6 +70,10 @@ import org.robolectric.annotation.Config;
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class StorageItemPreferenceControllerTest {
+
+    private static final long KILOBYTE_IN_BYTES = 1000;
+    private static final long MEGABYTE_IN_BYTES = KILOBYTE_IN_BYTES * 1000;
+    private static final long GIGABYTE_IN_BYTES = MEGABYTE_IN_BYTES * 1000;
 
     private Context mContext;
     private VolumeInfo mVolume;

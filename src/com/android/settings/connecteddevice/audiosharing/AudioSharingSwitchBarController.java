@@ -25,6 +25,7 @@ import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -52,7 +53,10 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settingslib.bluetooth.BluetoothCallback;
+import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -75,7 +79,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AudioSharingSwitchBarController extends BasePreferenceController
         implements DefaultLifecycleObserver,
                 OnCheckedChangeListener,
-                LocalBluetoothProfileManager.ServiceListener {
+                LocalBluetoothProfileManager.ServiceListener,
+                BluetoothCallback {
     private static final String TAG = "AudioSharingSwitchCtlr";
     private static final String PREF_KEY = "audio_sharing_main_switch";
 
@@ -99,6 +104,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     private final SettingsMainSwitchBar mSwitchBar;
     private final BluetoothAdapter mBluetoothAdapter;
     @Nullable private final LocalBluetoothManager mBtManager;
+    @Nullable private final BluetoothEventManager mEventManager;
     @Nullable private final LocalBluetoothProfileManager mProfileManager;
     @Nullable private final LocalBluetoothLeBroadcast mBroadcast;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mAssistant;
@@ -201,6 +207,19 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
+                    if (mAssistant == null
+                            || mAssistant.getAllConnectedDevices().stream()
+                                    .anyMatch(
+                                            device -> BluetoothUtils
+                                                    .hasActiveLocalBroadcastSourceForBtDevice(
+                                                            device, mBtManager))) {
+                        Log.d(
+                                TAG,
+                                "Skip handleOnBroadcastReady: null assistant or "
+                                        + "sink has active local source.");
+                        cleanUp();
+                        return;
+                    }
                     handleOnBroadcastReady();
                 }
 
@@ -289,6 +308,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         mBtManager = Utils.getLocalBtManager(context);
+        mEventManager = mBtManager == null ? null : mBtManager.getEventManager();
         mProfileManager = mBtManager == null ? null : mBtManager.getProfileManager();
         mBroadcast = mProfileManager == null ? null : mProfileManager.getLeAudioBroadcastProfile();
         mAssistant =
@@ -414,6 +434,13 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         // Do nothing.
     }
 
+    @Override
+    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
+        if (activeDevice != null && bluetoothProfile == BluetoothProfile.LE_AUDIO) {
+            updateSwitch();
+        }
+    }
+
     /**
      * Initialize the controller.
      *
@@ -434,7 +461,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             Log.d(TAG, "Skip registerCallbacks(). Feature is not available.");
             return;
         }
-        if (mBroadcast == null || mAssistant == null) {
+        if (mBroadcast == null || mAssistant == null || mEventManager == null) {
             Log.d(TAG, "Skip registerCallbacks(). Profile not support on this device.");
             return;
         }
@@ -443,6 +470,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             mSwitchBar.addOnSwitchChangeListener(this);
             mBroadcast.registerServiceCallBack(mExecutor, mBroadcastCallback);
             mAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
+            mEventManager.registerCallback(this);
             mCallbacksRegistered.set(true);
         }
     }
@@ -452,7 +480,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             Log.d(TAG, "Skip unregisterCallbacks(). Feature is not available.");
             return;
         }
-        if (mBroadcast == null || mAssistant == null) {
+        if (mBroadcast == null || mAssistant == null || mEventManager == null) {
             Log.d(TAG, "Skip unregisterCallbacks(). Profile not support on this device.");
             return;
         }
@@ -461,6 +489,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             mSwitchBar.removeOnSwitchChangeListener(this);
             mBroadcast.unregisterServiceCallBack(mBroadcastCallback);
             mAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
+            mEventManager.unregisterCallback(this);
             mCallbacksRegistered.set(false);
         }
     }
@@ -505,10 +534,15 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
                             boolean isBroadcasting = BluetoothUtils.isBroadcasting(mBtManager);
+                            boolean hasActiveDevice =
+                                    AudioSharingUtils.hasActiveConnectedLeadDevice(mBtManager);
                             boolean isStateReady =
                                     isBluetoothOn()
                                             && AudioSharingUtils.isAudioSharingProfileReady(
-                                                    mProfileManager);
+                                                    mProfileManager)
+                                            // Disable toggle till device gets active after
+                                            // broadcast ends.
+                                            && (isBroadcasting || hasActiveDevice);
                             AudioSharingUtils.postOnMainThread(
                                     mContext,
                                     () -> {
@@ -554,8 +588,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                         mGroupedConnectedDevices.getOrDefault(
                                 mDeviceItemsForSharing.get(0).getGroupId(), ImmutableList.of()),
                         mBtManager);
-                mGroupedConnectedDevices.clear();
-                mDeviceItemsForSharing.clear();
+                cleanUp();
                 // TODO: Add metric for auto add by intent
                 return;
             }
@@ -565,8 +598,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 StartIntentHandleStage.HANDLED.ordinal());
         if (mFragment == null) {
             Log.d(TAG, "handleOnBroadcastReady: dialog fail to show due to null fragment.");
-            mGroupedConnectedDevices.clear();
-            mDeviceItemsForSharing.clear();
+            cleanUp();
             return;
         }
         showDialog(eventData);
@@ -581,14 +613,12 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                 mGroupedConnectedDevices.getOrDefault(
                                         item.getGroupId(), ImmutableList.of()),
                                 mBtManager);
-                        mGroupedConnectedDevices.clear();
-                        mDeviceItemsForSharing.clear();
+                        cleanUp();
                     }
 
                     @Override
                     public void onCancelClick() {
-                        mGroupedConnectedDevices.clear();
-                        mDeviceItemsForSharing.clear();
+                        cleanUp();
                     }
                 };
         AudioSharingUtils.postOnMainThread(
@@ -655,6 +685,11 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                             AudioSharingUtils.postOnMainThread(
                                     mContext, () -> mSwitchBar.setChecked(true));
                         });
+    }
+
+    private void cleanUp() {
+        mGroupedConnectedDevices.clear();
+        mDeviceItemsForSharing.clear();
     }
 
     private enum StartIntentHandleStage {

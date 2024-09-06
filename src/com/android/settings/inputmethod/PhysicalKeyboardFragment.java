@@ -50,6 +50,7 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.keyboard.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -74,6 +75,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private static final String ACCESSIBILITY_SLOW_KEYS = "accessibility_slow_keys";
     private static final String ACCESSIBILITY_STICKY_KEYS = "accessibility_sticky_keys";
     private static final String ACCESSIBILITY_MOUSE_KEYS = "accessibility_mouse_keys";
+    private static final String ACCESSIBILITY_PHYSICAL_KEYBOARD_A11Y = "physical_keyboard_a11y";
     private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
     private static final String MODIFIER_KEYS_SETTINGS = "modifier_keys_settings";
     private static final String EXTRA_AUTO_SELECTION = "auto_selection";
@@ -154,20 +156,33 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
         boolean isModifierKeySettingsEnabled = FeatureFlagUtils
                 .isEnabled(getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
+        boolean isKeyboardAndTouchpadA11yNewPageEnabled =
+                Flags.keyboardAndTouchpadA11yNewPageEnabled();
         if (!isModifierKeySettingsEnabled) {
             mKeyboardAssistanceCategory.removePreference(findPreference(MODIFIER_KEYS_SETTINGS));
         }
-        if (!InputSettings.isAccessibilityBounceKeysFeatureEnabled()) {
+        if (!isKeyboardAndTouchpadA11yNewPageEnabled) {
+            mKeyboardAssistanceCategory.removePreference(
+                    findPreference(ACCESSIBILITY_PHYSICAL_KEYBOARD_A11Y));
+        }
+        if (!InputSettings.isAccessibilityBounceKeysFeatureEnabled()
+                || isKeyboardAndTouchpadA11yNewPageEnabled) {
             mKeyboardA11yCategory.removePreference(mAccessibilityBounceKeys);
         }
-        if (!InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()) {
+        if (!InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()
+                || isKeyboardAndTouchpadA11yNewPageEnabled) {
             mKeyboardA11yCategory.removePreference(mAccessibilitySlowKeys);
         }
-        if (!InputSettings.isAccessibilityStickyKeysFeatureEnabled()) {
+        if (!InputSettings.isAccessibilityStickyKeysFeatureEnabled()
+                || isKeyboardAndTouchpadA11yNewPageEnabled) {
             mKeyboardA11yCategory.removePreference(mAccessibilityStickyKeys);
         }
-        if (!InputSettings.isAccessibilityMouseKeysFeatureFlagEnabled()) {
+        if (!InputSettings.isAccessibilityMouseKeysFeatureFlagEnabled()
+                || isKeyboardAndTouchpadA11yNewPageEnabled) {
             mKeyboardA11yCategory.removePreference(mAccessibilityMouseKeys);
+        }
+        if (isKeyboardAndTouchpadA11yNewPageEnabled) {
+            mKeyboardA11yCategory.setVisible(false);
         }
         InputDeviceIdentifier inputDeviceIdentifier = activity.getIntent().getParcelableExtra(
                 KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER,

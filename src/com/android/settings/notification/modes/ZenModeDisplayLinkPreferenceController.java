@@ -45,7 +45,7 @@ class ZenModeDisplayLinkPreferenceController extends AbstractZenModePreferenceCo
         preference.setIntent(
                 ZenSubSettingLauncher.forModeFragment(mContext, ZenModeDisplayFragment.class,
                         zenMode.getId(), SettingsEnums.ZEN_PRIORITY_MODE).toIntent());
-        preference.setEnabled(zenMode.isEnabled());
+        preference.setEnabled(zenMode.isEnabled() && zenMode.canEditPolicy());
     }
 
     @Override
