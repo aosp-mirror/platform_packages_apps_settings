@@ -114,7 +114,8 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
                     throw new IllegalStateException("No fragment to start activity");
                 }
 
-                final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                        .setPackage(mContext.getPackageName());
                 mFragment.startActivityForResult(intent, WIFI_WAKEUP_REQUEST_CODE);
                 return false;
             } else if (!getWifiScanningEnabled()) {

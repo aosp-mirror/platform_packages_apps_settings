@@ -88,7 +88,10 @@ sealed interface FingerprintNavigationStep {
   }
 
   /** UiSteps should have a 1 to 1 mapping between each screen of FingerprintEnrollment */
-  sealed class UiStep : FingerprintNavigationStep
+  sealed class UiStep(
+    val enterTransition: Transition = Transition.EnterFromRight,
+    val exitTransition: Transition = Transition.ExitToLeft,
+  ) : FingerprintNavigationStep
 
   /** This is the landing page for enrollment, where no content is shown. */
   data object Init : UiStep() {
@@ -103,7 +106,7 @@ sealed interface FingerprintNavigationStep {
           } else if (state.flowType is FastEnroll) {
             TransitionStep(Enrollment(state.fingerprintSensor!!))
           } else {
-            TransitionStep(Introduction)
+            TransitionStep(Introduction())
           }
         }
         else -> null
@@ -118,7 +121,7 @@ sealed interface FingerprintNavigationStep {
       action: FingerprintAction,
     ): FingerprintNavigationStep? {
       return when (action) {
-        FingerprintAction.CONFIRM_DEVICE_SUCCESS -> TransitionStep(Introduction)
+        FingerprintAction.CONFIRM_DEVICE_SUCCESS -> TransitionStep(Introduction())
         FingerprintAction.CONFIRM_DEVICE_FAIL -> Finish(null)
         else -> null
       }
@@ -126,7 +129,10 @@ sealed interface FingerprintNavigationStep {
   }
 
   /** Indicates the FingerprintIntroduction screen is being presented to the user */
-  data object Introduction : UiStep() {
+  class Introduction(
+    enterTransition: Transition = Transition.EnterFromRight,
+    exitTransition: Transition = Transition.ExitToLeft,
+  ) : UiStep(enterTransition, exitTransition) {
     override fun update(
       state: NavigationState,
       action: FingerprintAction,
@@ -141,7 +147,11 @@ sealed interface FingerprintNavigationStep {
   }
 
   /** Indicates the FingerprintEducation screen is being presented to the user */
-  data class Education(val sensor: FingerprintSensor) : UiStep() {
+  class Education(
+    val sensor: FingerprintSensor,
+    enterTransition: Transition = Transition.EnterFromRight,
+    exitTransition: Transition = Transition.ExitToLeft,
+  ) : UiStep(enterTransition, exitTransition) {
     override fun update(
       state: NavigationState,
       action: FingerprintAction,
@@ -149,7 +159,8 @@ sealed interface FingerprintNavigationStep {
       return when (action) {
         FingerprintAction.NEXT -> TransitionStep(Enrollment(state.fingerprintSensor!!))
         FingerprintAction.NEGATIVE_BUTTON_PRESSED,
-        FingerprintAction.PREV -> TransitionStep(Introduction)
+        FingerprintAction.PREV ->
+          TransitionStep(Introduction(Transition.EnterFromLeft, Transition.ExitToRight))
         else -> null
       }
     }
@@ -179,7 +190,10 @@ sealed interface FingerprintNavigationStep {
     ): FingerprintNavigationStep? {
       return when (action) {
         FingerprintAction.NEXT -> Finish(null)
-        FingerprintAction.PREV -> TransitionStep(Education(state.fingerprintSensor!!))
+        FingerprintAction.PREV ->
+          TransitionStep(
+            Education(state.fingerprintSensor!!, Transition.EnterFromLeft, Transition.ExitToRight)
+          )
         FingerprintAction.ADD_ANOTHER -> TransitionStep(Enrollment(state.fingerprintSensor!!))
         else -> null
       }

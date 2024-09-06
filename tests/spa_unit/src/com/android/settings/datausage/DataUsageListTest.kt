@@ -26,8 +26,11 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragment
 import androidx.fragment.app.testing.withFragment
 import androidx.lifecycle.Lifecycle
+import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
+import com.android.settings.datausage.DataUsageList.Companion.KEY_WARNING
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -38,11 +41,13 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 
-private val mockUserManager: UserManager = mock<UserManager>()
+private val mockUserManager = mock<UserManager>()
 
-private val mockContext: Context = spy(ApplicationProvider.getApplicationContext()) {
+private val spyContext: Context = spy(ApplicationProvider.getApplicationContext()) {
     on { userManager } doReturn mockUserManager
 }
+
+private val spyResources = spy(spyContext.resources)
 
 private var fakeIntent = Intent()
 
@@ -51,6 +56,9 @@ class DataUsageListTest {
 
     @Before
     fun setUp() {
+        spyContext.stub {
+            on { resources } doReturn spyResources
+        }
         mockUserManager.stub {
             on { isGuestUser } doReturn false
         }
@@ -122,10 +130,60 @@ class DataUsageListTest {
             assertThat(activity!!.isFinishing).isFalse()
         }
     }
+
+    @Test
+    fun warning_wifiAndHasSim_displayNonCarrierWarning() {
+        val template = NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build()
+        spyResources.stub {
+            on { getBoolean(R.bool.config_show_sim_info) } doReturn true
+        }
+        fakeIntent = Intent().apply {
+            putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template)
+        }
+
+        val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
+
+        scenario.withFragment {
+            assertThat(findPreference<Preference>(KEY_WARNING)!!.summary)
+                .isEqualTo(context.getString(R.string.non_carrier_data_usage_warning))
+        }
+    }
+
+    @Test
+    fun warning_wifiAndNoSim_noWarning() {
+        val template = NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build()
+        spyResources.stub {
+            on { getBoolean(R.bool.config_show_sim_info) } doReturn false
+        }
+        fakeIntent = Intent().apply {
+            putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template)
+        }
+
+        val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
+
+        scenario.withFragment {
+            assertThat(findPreference<Preference>(KEY_WARNING)!!.summary).isNull()
+        }
+    }
+
+    @Test
+    fun warning_mobile_operatorWarning() {
+        val template = NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE).build()
+        fakeIntent = Intent().apply {
+            putExtra(Settings.EXTRA_NETWORK_TEMPLATE, template)
+        }
+
+        val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
+
+        scenario.withFragment {
+            assertThat(findPreference<Preference>(KEY_WARNING)!!.summary)
+                .isEqualTo(context.getString(R.string.operator_warning))
+        }
+    }
 }
 
 class TestDataUsageList : DataUsageList() {
-    override fun getContext() = mockContext
+    override fun getContext() = spyContext
 
     override fun getIntent() = fakeIntent
 }

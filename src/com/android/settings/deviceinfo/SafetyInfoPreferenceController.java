@@ -29,7 +29,8 @@ public class SafetyInfoPreferenceController extends AbstractPreferenceController
         PreferenceControllerMixin {
 
     private static final Intent INTENT_PROBE =
-            new Intent("android.settings.SHOW_SAFETY_AND_REGULATORY_INFO");
+            new Intent("android.settings.SHOW_SAFETY_AND_REGULATORY_INFO")
+                    .setPackage("com.android.safetyregulatoryinfo");
 
     private final PackageManager mPackageManager;
 

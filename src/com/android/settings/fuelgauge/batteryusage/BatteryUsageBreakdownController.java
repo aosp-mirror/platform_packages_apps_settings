@@ -87,7 +87,9 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     @VisibleForTesting PreferenceGroup mAppListPreferenceGroup;
     @VisibleForTesting FooterPreference mFooterPreference;
     @VisibleForTesting BatteryDiffData mBatteryDiffData;
+    @VisibleForTesting String mBatteryUsageBreakdownTitleLastFullChargeText;
     @VisibleForTesting String mPercentLessThanThresholdText;
+    @VisibleForTesting String mPercentLessThanThresholdContentDescription;
     @VisibleForTesting boolean mIsHighlightSlot;
     @VisibleForTesting int mAnomalyKeyNumber;
     @VisibleForTesting String mAnomalyEntryKey;
@@ -146,9 +148,10 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
 
     private void logPreferenceClickedMetrics(BatteryDiffEntry entry) {
         final int attribution = SettingsEnums.OPEN_BATTERY_USAGE;
-        final int action = entry.isSystemEntry()
-                ? SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM
-                : SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM;
+        final int action =
+                entry.isSystemEntry()
+                        ? SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM
+                        : SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM;
         final int pageId = SettingsEnums.OPEN_BATTERY_USAGE;
         final String packageName =
                 TextUtils.isEmpty(entry.getPackageName())
@@ -202,10 +205,17 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         mSpinnerPreference = screen.findPreference(SPINNER_PREFERENCE_KEY);
         mAppListPreferenceGroup = screen.findPreference(APP_LIST_PREFERENCE_KEY);
         mFooterPreference = screen.findPreference(FOOTER_PREFERENCE_KEY);
-        mPercentLessThanThresholdText =
+        mBatteryUsageBreakdownTitleLastFullChargeText =
                 mPrefContext.getString(
-                        R.string.battery_usage_less_than_percent,
-                        Utils.formatPercentage(BatteryDiffData.SMALL_PERCENTAGE_THRESHOLD, false));
+                        R.string.battery_usage_breakdown_title_since_last_full_charge);
+        final String formatPercentage =
+                Utils.formatPercentage(BatteryDiffData.SMALL_PERCENTAGE_THRESHOLD, false);
+        mPercentLessThanThresholdText =
+                mPrefContext.getString(R.string.battery_usage_less_than_percent, formatPercentage);
+        mPercentLessThanThresholdContentDescription =
+                mPrefContext.getString(
+                        R.string.battery_usage_less_than_percent_content_description,
+                        formatPercentage);
 
         mAppListPreferenceGroup.setOrderingAsAdded(false);
         mSpinnerPreference.initializeSpinner(
@@ -249,6 +259,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     void handleBatteryUsageUpdated(
             BatteryDiffData slotUsageData,
             String slotTimestamp,
+            String accessibilitySlotTimestamp,
             boolean isAllUsageDataEmpty,
             boolean isHighlightSlot,
             Optional<AnomalyEventWrapper> optionalAnomalyEventWrapper) {
@@ -271,18 +282,24 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                             : null;
         }
 
-        showCategoryTitle(slotTimestamp);
+        showCategoryTitle(slotTimestamp, accessibilitySlotTimestamp);
         showSpinnerAndAppList();
         showFooterPreference(isAllUsageDataEmpty);
     }
 
-    private void showCategoryTitle(String slotTimestamp) {
-        mRootPreference.setTitle(
+    private void showCategoryTitle(String slotTimestamp, String accessibilitySlotTimestamp) {
+        final String displayTitle =
                 slotTimestamp == null
-                        ? mPrefContext.getString(
-                                R.string.battery_usage_breakdown_title_since_last_full_charge)
+                        ? mBatteryUsageBreakdownTitleLastFullChargeText
                         : mPrefContext.getString(
-                                R.string.battery_usage_breakdown_title_for_slot, slotTimestamp));
+                                R.string.battery_usage_breakdown_title_for_slot, slotTimestamp);
+        final String accessibilityTitle =
+                accessibilitySlotTimestamp == null
+                        ? mBatteryUsageBreakdownTitleLastFullChargeText
+                        : mPrefContext.getString(
+                                R.string.battery_usage_breakdown_title_for_slot,
+                                accessibilitySlotTimestamp);
+        mRootPreference.setTitle(Utils.createAccessibleSequence(displayTitle, accessibilityTitle));
         mRootPreference.setVisible(true);
     }
 
@@ -394,12 +411,15 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
 
     @VisibleForTesting
     void setPreferencePercentage(PowerGaugePreference preference, BatteryDiffEntry entry) {
-        preference.setPercentage(
-                entry.getPercentage() < BatteryDiffData.SMALL_PERCENTAGE_THRESHOLD
-                        ? mPercentLessThanThresholdText
-                        : Utils.formatPercentage(
-                                entry.getPercentage() + entry.getAdjustPercentageOffset(),
-                                /* round= */ true));
+        if (entry.getPercentage() < BatteryDiffData.SMALL_PERCENTAGE_THRESHOLD) {
+            preference.setPercentage(mPercentLessThanThresholdText);
+            preference.setPercentageContentDescription(mPercentLessThanThresholdContentDescription);
+        } else {
+            preference.setPercentage(
+                    Utils.formatPercentage(
+                            entry.getPercentage() + entry.getAdjustPercentageOffset(),
+                            /* round= */ true));
+        }
     }
 
     @VisibleForTesting

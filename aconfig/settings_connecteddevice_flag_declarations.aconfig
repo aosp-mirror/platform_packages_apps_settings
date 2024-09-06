@@ -15,9 +15,13 @@ flag {
   bug: "317367746"
 }
 
+
 flag {
-  name: "enable_saved_devices_order_by_recency"
-  namespace: "pixel_cross_device_control"
-  description: "Order the saved bluetooth devices by most recently connected."
-  bug: "306160434"
+    name: "enable_bonded_bluetooth_device_searchable"
+    namespace: "pixel_cross_device_control"
+    description: "Set bonded bluetooth devices under connected devices page to be searchable by Settings search."
+    bug: "319056077"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
 }

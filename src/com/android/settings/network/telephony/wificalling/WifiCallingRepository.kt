@@ -29,17 +29,19 @@ import com.android.settings.network.telephony.ims.ImsMmTelRepository
 import com.android.settings.network.telephony.ims.ImsMmTelRepositoryImpl
 import com.android.settings.network.telephony.ims.imsFeatureProvisionedFlow
 import com.android.settings.network.telephony.subscriptionsChangedFlow
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 
 class WifiCallingRepository(
     private val context: Context,
     private val subId: Int,
-    private val imsMmTelRepository : ImsMmTelRepository = ImsMmTelRepositoryImpl(context, subId)
+    private val imsMmTelRepository: ImsMmTelRepository = ImsMmTelRepositoryImpl(context, subId)
 ) {
     private val telephonyManager = context.getSystemService(TelephonyManager::class.java)!!
         .createForSubscriptionId(subId)
@@ -76,10 +78,14 @@ class WifiCallingRepository(
 
     private fun isWifiCallingSupportedFlow(): Flow<Boolean> {
         return imsMmTelRepository.imsReadyFlow().map { imsReady ->
-            imsReady && imsMmTelRepository.isSupported(
-                capability = MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
-                transportType = AccessNetworkConstants.TRANSPORT_TYPE_WLAN,
-            )
+            imsReady && isWifiCallingSupported()
         }
+    }
+
+    suspend fun isWifiCallingSupported(): Boolean = withContext(Dispatchers.Default) {
+        imsMmTelRepository.isSupported(
+            capability = MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+            transportType = AccessNetworkConstants.TRANSPORT_TYPE_WLAN,
+        )
     }
 }

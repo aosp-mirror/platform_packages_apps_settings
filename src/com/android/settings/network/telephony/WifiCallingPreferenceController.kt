@@ -22,18 +22,14 @@ import android.telecom.TelecomManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager
-import androidx.lifecycle.Lifecycle
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -44,7 +40,7 @@ import kotlinx.coroutines.withContext
 open class WifiCallingPreferenceController @JvmOverloads constructor(
     context: Context,
     key: String,
-    private val callStateFlowFactory: (subId: Int) -> Flow<Int> = context::callStateFlow,
+    private val callStateRepository: CallStateRepository = CallStateRepository(context),
     private val wifiCallingRepositoryFactory: (subId: Int) -> WifiCallingRepository = { subId ->
         WifiCallingRepository(context, subId)
     },
@@ -80,19 +76,21 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        wifiCallingRepositoryFactory(mSubId).wifiCallingReadyFlow()
-            .collectLatestWithLifecycle(viewLifecycleOwner) {
-                preference.isVisible = it
-                callingPreferenceCategoryController.updateChildVisible(preferenceKey, it)
-            }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                update()
-            }
+        if(mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID){
+            Log.e(
+                this.javaClass.simpleName,
+                "mSubId is INVALID_SUBSCRIPTION_ID"
+            )
+            return
         }
+        wifiCallingRepositoryFactory(mSubId).wifiCallingReadyFlow()
+            .collectLatestWithLifecycle(viewLifecycleOwner) { isReady ->
+                preference.isVisible = isReady
+                callingPreferenceCategoryController.updateChildVisible(preferenceKey, isReady)
+                if (isReady) update()
+            }
 
-        callStateFlowFactory(mSubId).collectLatestWithLifecycle(viewLifecycleOwner) {
+        callStateRepository.callStateFlow(mSubId).collectLatestWithLifecycle(viewLifecycleOwner) {
             preference.isEnabled = (it == TelephonyManager.CALL_STATE_IDLE)
         }
     }

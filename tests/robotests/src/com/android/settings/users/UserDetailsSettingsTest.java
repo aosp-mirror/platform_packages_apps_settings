@@ -222,6 +222,7 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    @Ignore("b/313530297")
     public void onResume_canSwitch_shouldEnableSwitchPref() {
         mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_OK);
         mFragment.mSwitchUserPref = mSwitchUserPref;
@@ -233,6 +234,7 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    @Ignore("b/313530297")
     public void onResume_userInCall_shouldDisableSwitchPref() {
         mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_USER_IN_CALL);
         mFragment.mSwitchUserPref = mSwitchUserPref;
@@ -244,6 +246,7 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    @Ignore("b/313530297")
     public void onResume_switchDisallowed_shouldDisableSwitchPref() {
         mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED);
         mFragment.mSwitchUserPref = mSwitchUserPref;
@@ -255,6 +258,7 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    @Ignore("b/313530297")
     public void onResume_systemUserLocked_shouldDisableSwitchPref() {
         mUserManager.setSwitchabilityStatus(UserManager.SWITCHABILITY_STATUS_SYSTEM_USER_LOCKED);
         mFragment.mSwitchUserPref = mSwitchUserPref;

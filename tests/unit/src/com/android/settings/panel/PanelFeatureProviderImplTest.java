@@ -27,11 +27,14 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.platform.test.annotations.DisableFlags;
 import android.provider.Settings;
 import android.util.FeatureFlagUtils;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.flags.Flags;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,6 +71,7 @@ public class PanelFeatureProviderImplTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_SLICES_RETIREMENT)
     public void getPanel_volumePanel_returnsCorrectPanel() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_VOLUME_PANEL_IN_SYSTEMUI,
                 false);

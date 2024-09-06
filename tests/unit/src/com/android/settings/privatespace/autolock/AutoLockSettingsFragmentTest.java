@@ -17,8 +17,8 @@
 package com.android.settings.privatespace.autolock;
 
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK;
+import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART;
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_AFTER_INACTIVITY;
-import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_NEVER;
 import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_ON_DEVICE_LOCK;
 
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL;
@@ -94,7 +94,8 @@ public class AutoLockSettingsFragmentTest {
     public void verifyMetricsConstant() {
         mSetFlagsRule.enableFlags(
                 Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         assertThat(mFragment.getMetricsCategory()).isEqualTo(SettingsEnums.PRIVATE_SPACE_SETTINGS);
     }
 
@@ -103,7 +104,8 @@ public class AutoLockSettingsFragmentTest {
     public void getCandidates_returnsCandidateInfoListWithAllKeys() {
         mSetFlagsRule.enableFlags(
                 Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mFragment.onAttach(mContext);
 
         final List<? extends CandidateInfo> candidates = mFragment.getCandidates();
@@ -120,12 +122,15 @@ public class AutoLockSettingsFragmentTest {
     public void getDefaultKey_returnsStoredAutoLockOptionsValue() {
         mSetFlagsRule.enableFlags(
                 Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mFragment.onAttach(mContext);
 
         Settings.Secure.putInt(
-                mContentResolver, PRIVATE_SPACE_AUTO_LOCK, PRIVATE_SPACE_AUTO_LOCK_NEVER);
+                mContentResolver,
+                PRIVATE_SPACE_AUTO_LOCK,
+                PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART);
         assertThat(mFragment.getDefaultKey()).isEqualTo("2");
 
         Settings.Secure.putInt(
@@ -144,12 +149,13 @@ public class AutoLockSettingsFragmentTest {
     public void setDefaultKey_storesCorrectAutoLockOptionValue() {
         mSetFlagsRule.enableFlags(
                 Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mFragment.onAttach(mContext);
         mFragment.setDefaultKey("2");
         assertThat(Settings.Secure.getInt(mContentResolver, PRIVATE_SPACE_AUTO_LOCK, -1))
-                .isEqualTo(PRIVATE_SPACE_AUTO_LOCK_NEVER);
+                .isEqualTo(PRIVATE_SPACE_AUTO_LOCK_AFTER_DEVICE_RESTART);
 
         mFragment.setDefaultKey("1");
         assertThat(Settings.Secure.getInt(mContentResolver, PRIVATE_SPACE_AUTO_LOCK, -1))

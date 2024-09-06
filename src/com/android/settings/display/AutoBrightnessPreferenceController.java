@@ -18,19 +18,30 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 
 import android.content.Context;
+import android.os.Process;
+import android.os.UserManager;
 import android.provider.Settings;
 
-import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
+import androidx.preference.Preference;
 
+import com.android.settings.R;
+import com.android.settings.accessibility.Flags;
+import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.PrimarySwitchPreference;
 
 public class AutoBrightnessPreferenceController extends TogglePreferenceController {
 
     private final String SYSTEM_KEY = SCREEN_BRIGHTNESS_MODE;
     private final int DEFAULT_VALUE = SCREEN_BRIGHTNESS_MODE_MANUAL;
 
+    private boolean mInSetupWizard;
+
     public AutoBrightnessPreferenceController(Context context, String key) {
         super(context, key);
+    }
+
+    public void setInSetupWizard(boolean inSetupWizard) {
+        mInSetupWizard = inSetupWizard;
     }
 
     @Override
@@ -49,10 +60,29 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_automatic_brightness_available)
-                ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+        if (!mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_automatic_brightness_available)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        if (mInSetupWizard && !Flags.addBrightnessSettingsInSuw()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        return AVAILABLE_UNSEARCHABLE;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!(preference instanceof PrimarySwitchPreference)) {
+            return;
+        }
+
+        PrimarySwitchPreference pref = (PrimarySwitchPreference) preference;
+        if (pref.isEnabled() && UserManager.get(mContext).hasBaseUserRestriction(
+                UserManager.DISALLOW_CONFIG_BRIGHTNESS, Process.myUserHandle())) {
+            pref.setEnabled(false);
+            pref.setSwitchEnabled(false);
+        }
     }
 
     @Override

@@ -2,6 +2,18 @@
 <issues format="4">
 
     <issue
+        id="LintError"
+        severity="Error"
+        message="No `.class` files were found in project &quot;.&quot;, so none of the classfile based checks could be run. Does the project need to be built first?"
+        category="Lint"
+        priority="10"
+        summary="Lint Failure"
+        explanation="This issue type represents a problem running lint itself. Examples include failure to find bytecode for source files (which means certain detectors could not be run), parsing errors in lint configuration files, etc.&#xA;These errors are not errors in your own code, but they are shown to make it clear that some checks were not completed.">
+        <location
+            file="."/>
+    </issue>
+
+    <issue
         id="HardCodedColor"
         severity="Error"
         message="Avoid using hardcoded color"
@@ -649,12 +661,12 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="            android:textColor=&quot;@color/power_anomaly_primary_button_text_color&quot;"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="        &lt;item android:offset=&quot;0&quot; android:color=&quot;#00669DF6&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="res/layout/battery_tips_card.xml"
-            line="57"
-            column="13"/>
+            file="res/drawable-night/accessibility_shortcut_type_gesture_preview.xml"
+            line="26"
+            column="34"/>
     </issue>
 
     <issue
@@ -665,12 +677,300 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="            android:textColor=&quot;@color/power_anomaly_primary_button_text_color&quot;"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="        &lt;item android:offset=&quot;0&quot; android:color=&quot;#001A73E8&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="res/layout/battery_tips_card.xml"
-            line="57"
-            column="13"/>
+            file="res/drawable/accessibility_shortcut_type_gesture_preview.xml"
+            line="26"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0.69&quot; android:color=&quot;#FF669DF6&quot;/>"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable-night/accessibility_shortcut_type_gesture_preview.xml"
+            line="27"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0.69&quot; android:color=&quot;#FF669DF6&quot;/>"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_shortcut_type_gesture_preview.xml"
+            line="27"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0&quot; android:color=&quot;#00669DF6&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable-night/accessibility_shortcut_type_gesture_preview.xml"
+            line="40"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0&quot; android:color=&quot;#001A73E8&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_shortcut_type_gesture_preview.xml"
+            line="40"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0.69&quot; android:color=&quot;#FF669DF6&quot;/>"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable-night/accessibility_shortcut_type_gesture_preview.xml"
+            line="41"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0.69&quot; android:color=&quot;#FF669DF6&quot;/>"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_shortcut_type_gesture_preview.xml"
+            line="41"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0&quot; android:color=&quot;#00669DF6&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable-night/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="26"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0&quot; android:color=&quot;#001A73E8&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="26"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0.69&quot; android:color=&quot;#FF669DF6&quot;/>"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable-night/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="27"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0.69&quot; android:color=&quot;#FF669DF6&quot;/>"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="27"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0&quot; android:color=&quot;#00669DF6&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable-night/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="40"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0&quot; android:color=&quot;#001A73E8&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="40"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0.69&quot; android:color=&quot;#FF669DF6&quot;/>"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable-night/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="41"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0.69&quot; android:color=&quot;#FF669DF6&quot;/>"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="41"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0&quot; android:color=&quot;#00669DF6&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable-night/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="54"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0&quot; android:color=&quot;#001A73E8&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="54"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0.69&quot; android:color=&quot;#FF669DF6&quot;/>"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable-night/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="55"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        &lt;item android:offset=&quot;0.69&quot; android:color=&quot;#FF669DF6&quot;/>"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_shortcut_type_gesture_preview_touch_explore_on.xml"
+            line="55"
+            column="37"/>
     </issue>
 
     <issue
@@ -1321,22 +1621,6 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;power_anomaly_primary_button_text_color&quot;>#2E3300&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/values-night/colors.xml"
-            line="61"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="    &lt;color name=&quot;homepage_storage_background&quot;>#C14CE6&lt;/color>"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -1369,6 +1653,22 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;color name=&quot;udfps_enroll_icon&quot;>#7DA7F1&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-night/colors.xml"
+            line="63"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="    &lt;color name=&quot;homepage_accounts_background&quot;>#F15B8D&lt;/color>"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -1385,8 +1685,8 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;udfps_enroll_icon&quot;>#7DA7F1&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="    &lt;color name=&quot;udfps_moving_target_fill&quot;>#475670&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-night/colors.xml"
             line="64"
@@ -1417,10 +1717,10 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;udfps_moving_target_fill&quot;>#475670&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="    &lt;color name=&quot;homepage_system_background&quot;>#9E9E9E&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="res/values-night/colors.xml"
+            file="res/values/colors.xml"
             line="65"
             column="5"/>
     </issue>
@@ -1433,11 +1733,11 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;homepage_system_background&quot;>#9E9E9E&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="    &lt;color name=&quot;udfps_moving_target_fill_error&quot;>#80475670&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="res/values/colors.xml"
-            line="65"
+            file="res/values-night/colors.xml"
+            line="66"
             column="5"/>
     </issue>
 
@@ -1465,8 +1765,8 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;udfps_moving_target_fill_error&quot;>#80475670&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="    &lt;color name=&quot;udfps_enroll_progress&quot;>#7DA7F1&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-night/colors.xml"
             line="67"
@@ -1497,8 +1797,8 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;udfps_enroll_progress&quot;>#7DA7F1&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="    &lt;color name=&quot;udfps_enroll_progress_help&quot;>#607DA7F1&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-night/colors.xml"
             line="68"
@@ -1529,8 +1829,8 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;udfps_enroll_progress_help&quot;>#607DA7F1&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="    &lt;color name=&quot;udfps_enroll_progress_help_with_talkback&quot;>#FFEE675C&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-night/colors.xml"
             line="69"
@@ -1561,27 +1861,11 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;udfps_enroll_progress_help_with_talkback&quot;>#FFEE675C&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/values-night/colors.xml"
-            line="70"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="    &lt;color name=&quot;screen_flash_color_button_outer_circle_stroke_color&quot;>#FFFFFF&lt;/color>"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-night/colors.xml"
-            line="74"
+            line="75"
             column="5"/>
     </issue>
 
@@ -1629,7 +1913,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-night/colors.xml"
-            line="77"
+            line="78"
             column="5"/>
     </issue>
 
@@ -2269,7 +2553,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="141"
+            line="143"
             column="5"/>
     </issue>
 
@@ -2285,7 +2569,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="142"
+            line="144"
             column="5"/>
     </issue>
 
@@ -2301,7 +2585,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="143"
+            line="145"
             column="5"/>
     </issue>
 
@@ -2317,7 +2601,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="144"
+            line="146"
             column="5"/>
     </issue>
 
@@ -2333,7 +2617,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="146"
+            line="148"
             column="5"/>
     </issue>
 
@@ -2349,7 +2633,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="148"
+            line="150"
             column="5"/>
     </issue>
 
@@ -2365,7 +2649,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="151"
+            line="153"
             column="5"/>
     </issue>
 
@@ -2381,7 +2665,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="154"
+            line="156"
             column="5"/>
     </issue>
 
@@ -2397,7 +2681,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="155"
+            line="157"
             column="5"/>
     </issue>
 
@@ -2413,7 +2697,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="156"
+            line="158"
             column="5"/>
     </issue>
 
@@ -2429,7 +2713,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="157"
+            line="159"
             column="5"/>
     </issue>
 
@@ -2445,7 +2729,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="158"
+            line="160"
             column="5"/>
     </issue>
 
@@ -2461,23 +2745,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="173"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;power_anomaly_primary_button_text_color&quot;>#FFFFFF&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/values/colors.xml"
-            line="174"
+            line="175"
             column="5"/>
     </issue>
 
@@ -2493,7 +2761,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="177"
+            line="178"
             column="5"/>
     </issue>
 
@@ -2509,7 +2777,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="178"
+            line="179"
             column="5"/>
     </issue>
 
@@ -2525,7 +2793,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="180"
+            line="181"
             column="5"/>
     </issue>
 
@@ -2541,7 +2809,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="181"
+            line="182"
             column="5"/>
     </issue>
 
@@ -2557,7 +2825,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="182"
+            line="183"
             column="5"/>
     </issue>
 
@@ -2573,7 +2841,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="183"
+            line="184"
             column="5"/>
     </issue>
 
@@ -2589,7 +2857,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="187"
+            line="188"
             column="5"/>
     </issue>
 
@@ -2605,7 +2873,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="188"
+            line="189"
             column="5"/>
     </issue>
 
@@ -2621,7 +2889,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="191"
+            line="192"
             column="5"/>
     </issue>
 
@@ -2637,7 +2905,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="192"
+            line="193"
             column="5"/>
     </issue>
 
@@ -2653,7 +2921,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="193"
+            line="194"
             column="5"/>
     </issue>
 
@@ -2669,7 +2937,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="194"
+            line="195"
             column="5"/>
     </issue>
 
@@ -2685,7 +2953,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="195"
+            line="196"
             column="5"/>
     </issue>
 
@@ -2701,7 +2969,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="196"
+            line="197"
             column="5"/>
     </issue>
 
@@ -2717,7 +2985,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="197"
+            line="198"
             column="5"/>
     </issue>
 
@@ -2733,7 +3001,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="198"
+            line="199"
             column="5"/>
     </issue>
 
@@ -2749,7 +3017,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="199"
+            line="200"
             column="5"/>
     </issue>
 
@@ -2765,7 +3033,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="200"
+            line="201"
             column="5"/>
     </issue>
 
@@ -2781,7 +3049,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="201"
+            line="202"
             column="5"/>
     </issue>
 
@@ -2797,7 +3065,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="202"
+            line="203"
             column="5"/>
     </issue>
 
@@ -2813,7 +3081,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="205"
+            line="206"
             column="5"/>
     </issue>
 
@@ -2829,7 +3097,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="206"
+            line="207"
             column="5"/>
     </issue>
 
@@ -2845,7 +3113,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="207"
+            line="208"
             column="5"/>
     </issue>
 
@@ -2861,7 +3129,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="208"
+            line="209"
             column="5"/>
     </issue>
 
@@ -2877,7 +3145,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="209"
+            line="210"
             column="5"/>
     </issue>
 
@@ -2893,7 +3161,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="210"
+            line="211"
             column="5"/>
     </issue>
 
@@ -2909,7 +3177,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="211"
+            line="212"
             column="5"/>
     </issue>
 
@@ -2925,7 +3193,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="212"
+            line="213"
             column="5"/>
     </issue>
 
@@ -2941,7 +3209,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="213"
+            line="214"
             column="5"/>
     </issue>
 
@@ -2957,7 +3225,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="214"
+            line="215"
             column="5"/>
     </issue>
 
@@ -2973,7 +3241,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="215"
+            line="216"
             column="5"/>
     </issue>
 
@@ -2989,7 +3257,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="216"
+            line="217"
             column="5"/>
     </issue>
 
@@ -3005,7 +3273,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="219"
+            line="220"
             column="5"/>
     </issue>
 
@@ -4543,6 +4811,38 @@
             file="res/drawable/ic_shortcut_wireless.xml"
             line="18"
             column="17"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            android:color=&quot;@color/accessibility_feature_background&quot;/>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_suw_brightness_auto.xml"
+            line="22"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            android:color=&quot;@color/accessibility_feature_background&quot;/>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_suw_brightness_level.xml"
+            line="22"
+            column="13"/>
     </issue>
 
     <issue
@@ -6125,7 +6425,7 @@
         errorLine2="                                          ^">
         <location
             file="res/values/styles.xml"
-            line="944"
+            line="950"
             column="43"/>
     </issue>
 
@@ -6141,7 +6441,7 @@
         errorLine2="                                          ^">
         <location
             file="res/values/styles.xml"
-            line="944"
+            line="950"
             column="43"/>
     </issue>
 
@@ -6157,7 +6457,7 @@
         errorLine2="                                                ^">
         <location
             file="res/values/styles.xml"
-            line="945"
+            line="951"
             column="49"/>
     </issue>
 
@@ -6173,7 +6473,7 @@
         errorLine2="                                                ^">
         <location
             file="res/values/styles.xml"
-            line="945"
+            line="951"
             column="49"/>
     </issue>
 
@@ -6189,7 +6489,7 @@
         errorLine2="                                                     ^">
         <location
             file="res/values/styles.xml"
-            line="946"
+            line="952"
             column="54"/>
     </issue>
 
@@ -6205,7 +6505,7 @@
         errorLine2="                                                     ^">
         <location
             file="res/values/styles.xml"
-            line="946"
+            line="952"
             column="54"/>
     </issue>
 
@@ -6221,7 +6521,7 @@
         errorLine2="                                              ^">
         <location
             file="res/values/styles.xml"
-            line="947"
+            line="953"
             column="47"/>
     </issue>
 
@@ -6237,7 +6537,7 @@
         errorLine2="                                              ^">
         <location
             file="res/values/styles.xml"
-            line="947"
+            line="953"
             column="47"/>
     </issue>
 
@@ -6253,7 +6553,7 @@
         errorLine2="                                                  ^">
         <location
             file="res/values/styles.xml"
-            line="948"
+            line="954"
             column="51"/>
     </issue>
 
@@ -6269,7 +6569,7 @@
         errorLine2="                                                  ^">
         <location
             file="res/values/styles.xml"
-            line="948"
+            line="954"
             column="51"/>
     </issue>
 
@@ -6285,7 +6585,7 @@
         errorLine2="                                                              ^">
         <location
             file="res/values/styles.xml"
-            line="949"
+            line="955"
             column="63"/>
     </issue>
 
@@ -6301,7 +6601,7 @@
         errorLine2="                                                              ^">
         <location
             file="res/values/styles.xml"
-            line="949"
+            line="955"
             column="63"/>
     </issue>
 

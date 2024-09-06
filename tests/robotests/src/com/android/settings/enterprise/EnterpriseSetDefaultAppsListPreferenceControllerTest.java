@@ -37,6 +37,7 @@ import android.os.UserHandle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -46,22 +47,26 @@ import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.LooperMode;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.android.util.concurrent.PausedExecutorService;
+import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.shadows.ShadowPausedAsyncTask;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private static final int USER_ID = 0;
     private static final int APP_UID = 0;
@@ -82,11 +87,13 @@ public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
+    private PausedExecutorService mExecutorService;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mExecutorService = new PausedExecutorService();
+        ShadowPausedAsyncTask.overrideExecutor(mExecutorService);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mPrefenceManager.getContext()).thenReturn(mContext);
@@ -127,7 +134,8 @@ public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
                                         new UserAppInfo(user, appInfo2)));
 
         new EnterpriseSetDefaultAppsListPreferenceController(mContext, mFragment, mPackageManager);
-        ShadowApplication.runBackgroundTasks();
+        mExecutorService.runAll();
+        ShadowLooper.idleMainLooper();
 
         ArgumentCaptor<Preference> apps = ArgumentCaptor.forClass(Preference.class);
         verify(mScreen, times(2)).addPreference(apps.capture());

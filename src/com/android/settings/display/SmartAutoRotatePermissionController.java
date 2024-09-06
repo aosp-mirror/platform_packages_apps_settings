@@ -47,6 +47,7 @@ public class SmartAutoRotatePermissionController extends BasePreferenceControlle
         final String packageName = context.getPackageManager().getRotationResolverPackageName();
         mIntent = new Intent(
                 android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        mIntent.setPackage(context.getPackageName());
         mIntent.setData(Uri.parse("package:" + packageName));
     }
 

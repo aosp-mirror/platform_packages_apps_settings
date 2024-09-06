@@ -18,6 +18,8 @@ package com.android.settings.spa.app.appinfo
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.pm.InstallSourceInfo
+import android.util.Pair
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -51,8 +53,9 @@ fun AppInstallerInfoPreference(app: ApplicationInfo) {
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
     val summary by presenter.summaryFlow.collectAsStateWithLifecycle(
-        initialValue = stringResource(R.string.summary_placeholder),
+            initialValue = stringResource(R.string.summary_placeholder)
     )
+
     val enabled by presenter.enabledFlow.collectAsStateWithLifecycle(initialValue = false)
     Preference(object : PreferenceModel {
         override val title = stringResource(R.string.app_install_details_title)
@@ -63,16 +66,21 @@ fun AppInstallerInfoPreference(app: ApplicationInfo) {
 }
 
 private class AppInstallerInfoPresenter(
-    private val context: Context,
-    private val app: ApplicationInfo,
-    private val coroutineScope: CoroutineScope,
+        private val context: Context,
+        private val app: ApplicationInfo,
+        private val coroutineScope: CoroutineScope,
 ) {
     private val userContext = context.asUser(app.userHandle)
     private val packageManager = userContext.packageManager
+    private var installSourceInfo : InstallSourceInfo? = null
 
     private val installerPackageFlow = flow {
         emit(withContext(Dispatchers.IO) {
-            AppStoreUtil.getInstallerPackageName(userContext, app.packageName)
+            val result : Pair<String, InstallSourceInfo> =
+                    AppStoreUtil.getInstallerPackageNameAndInstallSourceInfo(
+                            userContext, app.packageName)
+            installSourceInfo = result.second
+            result.first
         })
     }.sharedFlow()
 
@@ -91,11 +99,23 @@ private class AppInstallerInfoPresenter(
     }
 
     val summaryFlow = installerLabelFlow.map { installerLabel ->
-        val detailsStringId = when {
-            app.isInstantApp -> R.string.instant_app_details_summary
-            else -> R.string.app_install_details_summary
+        if (app.isInstantApp) {
+            context.getString(R.string.instant_app_details_summary, installerLabel)
+        } else if (AppStoreUtil.isInitiatedFromDifferentPackage(installSourceInfo)) {
+            val initiatingLabel : CharSequence? = Utils.getApplicationLabel(
+                    context, installSourceInfo!!.initiatingPackageName!!)
+            if (initiatingLabel != null) {
+                context.getString(
+                        R.string.app_install_details_different_initiating_package_summary,
+                        installerLabel,
+                        initiatingLabel
+                )
+            } else {
+                context.getString(R.string.app_install_details_summary, installerLabel)
+            }
+        } else {
+            context.getString(R.string.app_install_details_summary, installerLabel)
         }
-        context.getString(detailsStringId, installerLabel)
     }
 
     private val intentFlow = installerPackageFlow.map { installerPackage ->
@@ -117,5 +137,5 @@ private class AppInstallerInfoPresenter(
     }
 
     private fun <T> Flow<T>.sharedFlow() =
-        shareIn(coroutineScope, SharingStarted.WhileSubscribed(), 1)
+            shareIn(coroutineScope, SharingStarted.WhileSubscribed(), 1)
 }

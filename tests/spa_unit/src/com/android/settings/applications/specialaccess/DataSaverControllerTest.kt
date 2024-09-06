@@ -90,7 +90,7 @@ class DataSaverControllerTest {
             getUnrestrictedSummary(context = context, appListRepository = FakeAppListRepository)
 
         assertThat(summary)
-            .isEqualTo("2 apps allowed to use unrestricted data when Data Saver is on")
+            .isEqualTo("2 apps allowed to use unrestricted mobile data when Data Saver is on")
     }
 
     @Test
@@ -103,7 +103,7 @@ class DataSaverControllerTest {
             getUnrestrictedSummary(context = context, appListRepository = FakeAppListRepository)
 
         assertThat(summary)
-            .isEqualTo("0 apps allowed to use unrestricted data when Data Saver is on")
+            .isEqualTo("0 apps allowed to use unrestricted mobile data when Data Saver is on")
     }
 
     private companion object {

@@ -19,6 +19,7 @@ package com.android.settings.network.telephony
 import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -66,6 +67,13 @@ class MobileNetworkPhoneNumberPreferenceController(context: Context, key: String
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        if (!this::lazyViewModel.isInitialized) {
+            Log.e(
+                this.javaClass.simpleName,
+                "lateinit property lazyViewModel has not been initialized"
+            )
+            return
+        }
         val viewModel by lazyViewModel
         val coroutineScope = viewLifecycleOwner.lifecycleScope
 

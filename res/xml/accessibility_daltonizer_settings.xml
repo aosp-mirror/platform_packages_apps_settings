@@ -51,4 +51,10 @@
         android:persistent="false"
         android:title="@string/daltonizer_mode_grayscale_title" />
 
+    <com.android.settings.widget.SeekBarPreference
+        android:key="daltonizer_saturation"
+        android:persistent="false"
+        android:title="@string/daltonizer_saturation_title"
+        settings:controller="com.android.settings.accessibility.DaltonizerSaturationSeekbarPreferenceController"
+        />
 </PreferenceScreen>

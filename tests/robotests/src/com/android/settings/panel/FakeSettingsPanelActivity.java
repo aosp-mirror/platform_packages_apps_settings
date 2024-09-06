@@ -19,6 +19,7 @@ package com.android.settings.panel;
 import android.content.ComponentName;
 import android.content.Intent;
 
+@Deprecated(forRemoval = true)
 public class FakeSettingsPanelActivity extends SettingsPanelActivity {
     @Override
     public ComponentName getCallingActivity() {

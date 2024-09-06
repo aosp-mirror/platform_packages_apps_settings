@@ -72,6 +72,9 @@ public class ConnectedDeviceDashboardFragmentTest {
     private static final String KEY_DISCOVERABLE_FOOTER = "discoverable_footer";
     private static final String KEY_SAVED_DEVICE_SEE_ALL = "previously_connected_devices_see_all";
     private static final String KEY_FAST_PAIR_DEVICE_SEE_ALL = "fast_pair_devices_see_all";
+    private static final String KEY_AUDIO_SHARING_DEVICES = "audio_sharing_device_list";
+    private static final String KEY_AUDIO_SHARING_SETTINGS =
+            "connected_device_audio_sharing_settings";
     private static final String KEY_ADD_BT_DEVICES = "add_bt_devices";
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
     private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
@@ -84,7 +87,6 @@ public class ConnectedDeviceDashboardFragmentTest {
     private Context mContext;
     private ConnectedDeviceDashboardFragment mFragment;
     private FakeFeatureFactory mFeatureFactory;
-    private AvailableMediaDeviceGroupController mMediaDeviceGroupController;
 
     @Before
     public void setUp() {
@@ -93,21 +95,13 @@ public class ConnectedDeviceDashboardFragmentTest {
         mContext = spy(RuntimeEnvironment.application);
         mFragment = new ConnectedDeviceDashboardFragment();
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION);
+        mSetFlagsRule.enableFlags(com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory
                         .getFastPairFeatureProvider()
                         .getFastPairDeviceUpdater(
                                 any(Context.class), any(DevicePreferenceCallback.class)))
                 .thenReturn(mFastPairDeviceUpdater);
-        when(mFeatureFactory
-                        .getAudioSharingFeatureProvider()
-                        .createAudioSharingDevicePreferenceController(mContext, null, null))
-                .thenReturn(null);
-        mMediaDeviceGroupController = new AvailableMediaDeviceGroupController(mContext, null, null);
-        when(mFeatureFactory
-                        .getAudioSharingFeatureProvider()
-                        .createAvailableMediaDeviceGroupController(mContext, null, null))
-                .thenReturn(mMediaDeviceGroupController);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
     }
@@ -135,7 +129,9 @@ public class ConnectedDeviceDashboardFragmentTest {
                         KEY_NEARBY_DEVICES,
                         KEY_DISCOVERABLE_FOOTER,
                         KEY_SAVED_DEVICE_SEE_ALL,
-                        KEY_FAST_PAIR_DEVICE_SEE_ALL);
+                        KEY_FAST_PAIR_DEVICE_SEE_ALL,
+                        KEY_AUDIO_SHARING_DEVICES,
+                        KEY_AUDIO_SHARING_SETTINGS);
     }
 
     @Test

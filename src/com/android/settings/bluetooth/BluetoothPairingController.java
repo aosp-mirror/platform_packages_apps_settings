@@ -448,7 +448,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION:
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY:
-                return String.format(Locale.US, "%06d", passkey);
+                return String.format(Locale.getDefault(), "%06d", passkey);
 
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN:
                 return String.format("%04d", passkey);

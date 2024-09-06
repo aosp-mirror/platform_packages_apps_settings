@@ -129,6 +129,7 @@ public class PrimaryProviderPreference extends GearPreference {
                     }
                 });
         setVisibility(mOpenButton, mOpenButtonVisible);
+        holder.itemView.setClickable(false);
 
         mChangeButton = (Button) holder.findViewById(R.id.change_button);
         mChangeButton.setOnClickListener(
@@ -167,7 +168,7 @@ public class PrimaryProviderPreference extends GearPreference {
         mButtonFrameView.setPadding(
             paddingLeft,
             mButtonFrameView.getPaddingTop(),
-            mButtonFrameView.getPaddingRight(),
+            paddingLeft,
             mButtonFrameView.getPaddingBottom());
     }
 

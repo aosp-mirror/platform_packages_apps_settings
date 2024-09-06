@@ -67,7 +67,7 @@ public class SliceDeepLinkSpringBoard extends Activity {
             finish();
         } catch (Exception e) {
             Log.w(TAG, "Couldn't launch Slice intent", e);
-            startActivity(new Intent(Settings.ACTION_SETTINGS));
+            startActivity(new Intent(Settings.ACTION_SETTINGS).setPackage(getPackageName()));
             finish();
         }
     }

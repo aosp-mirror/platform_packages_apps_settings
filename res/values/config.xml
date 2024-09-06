@@ -257,7 +257,7 @@
     <bool name="config_show_device_header_in_device_info">true</bool>
 
     <!-- Whether or not TopLevelSettings should force rounded icon for injected tiles -->
-    <bool name="config_force_rounded_icon_TopLevelSettings">true</bool>
+    <bool name="config_force_rounded_icon_TopLevelSettings">false</bool>
 
     <!-- Whether dismissal timestamp should be kept before deletion -->
     <bool name="config_keep_contextual_card_dismissal_timestamp">false</bool>
@@ -267,16 +267,31 @@
         com.android.settings.intelligence
     </string>
 
-    <!-- Package Installer package name -->
-    <string name="config_package_installer_package_name" translatable="false">
-        com.android.packageinstaller
-    </string>
-
     <!-- Settings intelligence interaction log intent action -->
     <string name="config_settingsintelligence_log_action" translatable="false"></string>
 
     <!-- Whether Settings intelligence supports presenting Slices. -->
     <bool name="config_settingsintelligence_slice_supported">false</bool>
+
+    <!-- Package Installer package name -->
+    <string name="config_package_installer_package_name" translatable="false">
+        com.android.packageinstaller
+    </string>
+
+    <!-- Device lock controller package name -->
+    <string name="config_device_lock_controller_package_name" translatable="false">
+        com.android.devicelockcontroller
+    </string>
+
+    <!-- Sound picker package name -->
+    <string name="config_sound_picker_package_name" translatable="false">
+        com.android.soundpicker
+    </string>
+
+    <!-- Contacts package name -->
+    <string name="config_contacts_package_name" translatable="false">
+        com.android.contacts
+    </string>
 
     <!-- AOSP Emergency app package name -->
     <string name="config_aosp_emergency_package_name" translatable="false">
@@ -371,6 +386,9 @@
 
     <!-- Whether Wi-Fi hotspot speed should be shown or not. -->
     <bool name="config_show_wifi_hotspot_speed">true</bool>
+
+    <!-- Whether or not Internet preference should be shown. -->
+    <bool name="config_show_internet_settings">true</bool>
 
     <!-- Whether toggle_airplane is available or not. -->
     <bool name="config_show_toggle_airplane">true</bool>
@@ -589,8 +607,11 @@
     <!-- Media Uri to view audio storage category. -->
     <string name="config_audio_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/audio_root</string>
 
-    <!-- Media Uri to view documents & other storage category. -->
-    <string name="config_documents_and_other_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/documents_root</string>
+    <!-- Media Uri to view documents storage category. -->
+    <string name="config_documents_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/documents_root</string>
+
+    <!-- Media Uri to view "other" storage category. -->
+    <string name="config_other_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/others_root</string>
 
     <!-- Whether to show Smart Storage toggle -->
     <bool name="config_show_smart_storage_toggle">true</bool>
@@ -812,4 +833,10 @@
     <!-- Array of carrier id that uses reusable activation code-->
     <integer-array name="config_carrier_use_rac" translatable="false">
     </integer-array>
+
+    <!-- The Activity intent to trigger to launch time-related feedback. -->
+    <string name="config_time_feedback_intent_uri" translatable="false" />
+
+    <!-- Package name for diagnostics app. -->
+    <string name="config_device_diagnostics_package_name" translatable="false">com.android.devicediagnostics</string>
 </resources>

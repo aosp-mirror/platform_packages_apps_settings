@@ -230,15 +230,23 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         if (bundle != null) {
             final int extraTab = bundle.getInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, -1);
             if (extraTab != -1) {
-                return ((ViewPagerAdapter) mViewPager.getAdapter()).getTabForPosition(extraTab);
+                return ((ViewPagerAdapter) mViewPager.getAdapter())
+                        .getPositionForProfileTab(extraTab);
             }
-            final int userId = bundle.getInt(EXTRA_USER_ID, UserHandle.SYSTEM.getIdentifier());
+            final UserManager userManager = getSystemService(UserManager.class);
+            UserHandle mainUser = userManager.getMainUser();
+            if (mainUser == null) {
+                mainUser = UserHandle.SYSTEM;
+            }
+            final int userId = bundle.getInt(EXTRA_USER_ID, mainUser.getIdentifier());
             final boolean isWorkProfile = UserManager.get(activity).isManagedProfile(userId);
             if (isWorkProfile) {
                 return WORK_TAB;
             }
             UserInfo userInfo = UserManager.get(activity).getUserInfo(userId);
-            if (Flags.allowPrivateProfile() && userInfo != null && userInfo.isPrivateProfile()) {
+            if (Flags.allowPrivateProfile()
+                    && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                    && userInfo != null && userInfo.isPrivateProfile()) {
                 return PRIVATE_TAB;
             }
         }
@@ -248,7 +256,9 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             return WORK_TAB;
         }
         UserInfo userInfo = UserManager.get(activity).getUserInfo(intentUser);
-        if (Flags.allowPrivateProfile() && userInfo != null && userInfo.isPrivateProfile()) {
+        if (Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && userInfo != null && userInfo.isPrivateProfile()) {
             return PRIVATE_TAB;
         }
 
@@ -259,7 +269,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         final DevicePolicyManager devicePolicyManager =
                 getContext().getSystemService(DevicePolicyManager.class);
 
-        if (Flags.allowPrivateProfile()) {
+        if (Flags.allowPrivateProfile() && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             int tabForPosition =
                     ((ViewPagerAdapter) mViewPager.getAdapter()).getTabForPosition(position);
 
@@ -320,7 +330,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             List<UserInfo> userInfos = userManager.getProfiles(UserHandle.myUserId());
 
             for (UserInfo userInfo : userInfos) {
-                if (userInfo.getUserHandle().isSystem()) {
+                if (userInfo.isMain()) {
                     fragments.add(createAndGetFragment(
                             ProfileType.PERSONAL,
                             bundle != null ? bundle : new Bundle(),
@@ -330,7 +340,9 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
                             ProfileType.WORK,
                             bundle != null ? bundle.deepCopy() : new Bundle(),
                             workFragmentConstructor));
-                } else if (Flags.allowPrivateProfile() && userInfo.isPrivateProfile()) {
+                } else if (Flags.allowPrivateProfile()
+                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                        && userInfo.isPrivateProfile()) {
                     if (!privateSpaceInfoProvider.isPrivateSpaceLocked(context)) {
                         fragments.add(createAndGetFragment(
                                 ProfileType.PRIVATE,
@@ -338,7 +350,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
                                 privateFragmentConstructor));
                     }
                 } else {
-                    Log.d(TAG, "Not showing tab for unsupported user");
+                    Log.d(TAG, "Not showing tab for unsupported user " + userInfo);
                 }
             }
 
@@ -410,7 +422,22 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             }
             @ProfileType
             int profileType = mChildFragments[position].getArguments().getInt(EXTRA_PROFILE);
+            return profileTypeToTab(profileType);
+        }
 
+        private int getPositionForProfileTab(int profileTab) {
+            for (int i = 0; i < mChildFragments.length; ++i) {
+                Bundle arguments = mChildFragments[i].getArguments();
+                if (arguments != null
+                        && profileTypeToTab(arguments.getInt(EXTRA_PROFILE)) == profileTab) {
+                    return i;
+                }
+            }
+            Log.e(TAG, "position requested for an unknown profile tab " + profileTab);
+            return 0;
+        }
+
+        private int profileTypeToTab(@ProfileType int profileType) {
             if (profileType == ProfileType.WORK) {
                 return WORK_TAB;
             }

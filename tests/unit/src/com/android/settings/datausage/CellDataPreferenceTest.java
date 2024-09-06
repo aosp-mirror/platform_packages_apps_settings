@@ -20,9 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -53,10 +50,6 @@ public class CellDataPreferenceTest {
                 return mSubInfo;
             }
         };
-
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(mPreference.getLayoutResource(),
-                new LinearLayout(mContext), false);
     }
 
     @Test

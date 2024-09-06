@@ -44,26 +44,27 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.google.common.base.Strings;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.mockito.stubbing.Answer;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowLooper;
 
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {ShadowBluetoothUtils.class})
 public class NotificationAccessSettingsTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    private Context mContext;
     private NotificationAccessSettings mAccessSettings;
     @Mock
     private NotificationManager mNotificationManager;
@@ -72,9 +73,6 @@ public class NotificationAccessSettingsTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-
-        mContext = RuntimeEnvironment.application;
         ShadowApplication shadowApp = ShadowApplication.getInstance();
         shadowApp.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
@@ -92,6 +90,7 @@ public class NotificationAccessSettingsTest {
         mAccessSettings.mNm = mNotificationManager;
         mAccessSettings.mPm = mPackageManager;
         ShadowBluetoothUtils.sLocalBluetoothManager = mock(LocalBluetoothManager.class);
+        ShadowLooper.idleMainLooper();
     }
 
     @Test

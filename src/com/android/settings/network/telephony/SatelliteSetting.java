@@ -16,6 +16,9 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL;
+import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -23,7 +26,9 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.UserManager;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.satellite.SatelliteManager;
@@ -39,6 +44,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.HelpUtils;
@@ -60,7 +66,9 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
 
     private Activity mActivity;
     private TelephonyManager mTelephonymanager;
+    private CarrierConfigManager mCarrierConfigManager;
     private SatelliteManager mSatelliteManager;
+    private PersistableBundle mConfigBundle;
     private int mSubId;
 
     public SatelliteSetting() {
@@ -76,11 +84,27 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     public void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // In case carrier roaming satellite is not supported, do nothing.
+        if (!Flags.carrierEnabledSatelliteFlag()) {
+            Log.d(TAG, "SatelliteSettings: satellite feature is not supported, do nothing.");
+            finish();
+            return;
+        }
+
         mActivity = getActivity();
-        mTelephonymanager = mActivity.getSystemService(TelephonyManager.class);
-        mSatelliteManager = mActivity.getSystemService(SatelliteManager.class);
         mSubId = mActivity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        mCarrierConfigManager = mActivity.getSystemService(CarrierConfigManager.class);
+        if (!isSatelliteAttachSupported(mSubId)) {
+            Log.d(TAG, "SatelliteSettings: KEY_SATELLITE_ATTACH_SUPPORTED_BOOL is false, "
+                    + "do nothing.");
+            finish();
+            return;
+        }
+
+        mTelephonymanager = mActivity.getSystemService(TelephonyManager.class);
+        mSatelliteManager = mActivity.getSystemService(SatelliteManager.class);
     }
 
     @Override
@@ -134,7 +158,7 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
             preference.setSummary(spannable);
             /* The link will lead users to a guide page */
             preference.setOnPreferenceClickListener(pref -> {
-                String url = getResources().getString(R.string.more_info_satellite_messaging_link);
+                String url = readSatelliteMoreInfoString(mSubId);
                 if (!url.isEmpty()) {
                     Uri uri = Uri.parse(url);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -163,7 +187,7 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
                             operatorName));
 
             final String[] link = new String[1];
-            link[0] = getResources().getString(R.string.more_info_satellite_messaging_link);
+            link[0] = readSatelliteMoreInfoString(mSubId);
             footerPreference.setLearnMoreAction(view -> {
                 if (!link[0].isEmpty()) {
                     Intent helpIntent = HelpUtils.getHelpIntent(mActivity, link[0],
@@ -190,6 +214,28 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
             loge(ex.toString());
             return false;
         }
+    }
+
+    private String readSatelliteMoreInfoString(int subId) {
+        if (mConfigBundle == null) {
+            mConfigBundle = mCarrierConfigManager.getConfigForSubId(subId,
+                    KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING);
+            if (mConfigBundle.isEmpty()) {
+                Log.d(TAG, "SatelliteSettings: getDefaultConfig");
+                mConfigBundle = CarrierConfigManager.getDefaultConfig();
+            }
+        }
+        return mConfigBundle.getString(KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING, "");
+    }
+
+    private boolean isSatelliteAttachSupported(int subId) {
+        PersistableBundle bundle = mCarrierConfigManager.getConfigForSubId(subId,
+                KEY_SATELLITE_ATTACH_SUPPORTED_BOOL);
+        if (bundle.isEmpty()) {
+            Log.d(TAG, "SatelliteSettings: getDefaultConfig");
+            bundle = CarrierConfigManager.getDefaultConfig();
+        }
+        return bundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false);
     }
 
     private static void loge(String message) {
