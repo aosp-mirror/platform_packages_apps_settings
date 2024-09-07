@@ -35,7 +35,6 @@ import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -44,6 +43,7 @@ import org.robolectric.shadows.ShadowAlarmManager;
 
 import java.time.Clock;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 /** Tests of {@link BootBroadcastReceiver}. */
@@ -57,6 +57,7 @@ public final class BootBroadcastReceiverTest {
 
     @Before
     public void setUp() {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         mContext = ApplicationProvider.getApplicationContext();
         mPeriodicJobManager = PeriodicJobManager.getInstance(mContext);
         mShadowAlarmManager = shadowOf(mContext.getSystemService(AlarmManager.class));
@@ -64,9 +65,8 @@ public final class BootBroadcastReceiverTest {
 
         // Inserts fake data into database for testing.
         final BatteryStateDatabase database = BatteryTestUtils.setUpBatteryStateDatabase(mContext);
-        BatteryTestUtils.insertDataToBatteryStateTable(
-                mContext, Clock.systemUTC().millis(), "com.android.systemui");
         mDao = database.batteryStateDao();
+        mDao.clearAll();
         clearSharedPreferences();
     }
 
@@ -129,13 +129,62 @@ public final class BootBroadcastReceiverTest {
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
     }
 
-    @Ignore("b/314921894")
     @Test
-    public void onReceive_withTimeChangedIntent_clearsAllDataAndRefreshesJob()
+    public void onReceive_withTimeChangedIntentSetEarlierTime_refreshesJob()
             throws InterruptedException {
+        BatteryTestUtils.insertDataToBatteryStateTable(
+                mContext, Clock.systemUTC().millis() + 60000, "com.android.systemui");
+        assertThat(mDao.getAllAfter(0).size()).isEqualTo(1);
+
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_TIME_CHANGED));
 
-        TimeUnit.MILLISECONDS.sleep(100);
+        TimeUnit.MILLISECONDS.sleep(1000);
+        assertThat(mDao.getAllAfter(0)).isEmpty();
+        assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
+    }
+
+    @Test
+    public void onReceive_withTimeChangedIntentSetLaterTime_clearNoDataAndRefreshesJob()
+            throws InterruptedException {
+        BatteryTestUtils.insertDataToBatteryStateTable(
+                mContext, Clock.systemUTC().millis() - 60000, "com.android.systemui");
+        assertThat(mDao.getAllAfter(0).size()).isEqualTo(1);
+
+        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_TIME_CHANGED));
+
+        TimeUnit.MILLISECONDS.sleep(1000);
+        assertThat(mDao.getAllAfter(0).size()).isEqualTo(1);
+        assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
+    }
+
+    @Test
+    public void onReceive_withTimeFormatChangedIntent_skipRefreshJob() throws InterruptedException {
+        BatteryTestUtils.insertDataToBatteryStateTable(
+                mContext, Clock.systemUTC().millis() + 60000, "com.android.systemui");
+        assertThat(mDao.getAllAfter(0).size()).isEqualTo(1);
+
+        mReceiver.onReceive(
+                mContext,
+                new Intent(Intent.EXTRA_INTENT)
+                        .putExtra(
+                                Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT,
+                                Intent.EXTRA_TIME_PREF_VALUE_USE_12_HOUR));
+
+        TimeUnit.MILLISECONDS.sleep(1000);
+        assertThat(mDao.getAllAfter(0).size()).isEqualTo(1);
+        assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
+    }
+
+    @Test
+    public void onReceive_withTimeZoneChangedIntent_clearAllDataAndRefreshesJob()
+            throws InterruptedException {
+        BatteryTestUtils.insertDataToBatteryStateTable(
+                mContext, Clock.systemUTC().millis(), "com.android.systemui");
+        assertThat(mDao.getAllAfter(0).size()).isEqualTo(1);
+
+        mReceiver.onReceive(mContext, new Intent(Intent.ACTION_TIMEZONE_CHANGED));
+
+        TimeUnit.MILLISECONDS.sleep(1000);
         assertThat(mDao.getAllAfter(0)).isEmpty();
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
     }

@@ -41,9 +41,12 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
+import android.graphics.drawable.Drawable;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.view.InputDevice;
@@ -64,6 +67,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -77,8 +81,12 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class StylusDevicesControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final String NOTES_PACKAGE_NAME = "notes.package";
     private static final CharSequence NOTES_APP_LABEL = "App Label";
+    private static final int WORK_USER_ID = 1;
+    private static final int PRIVATE_USER_ID = 2;
 
     private Context mContext;
     private StylusDevicesController mController;
@@ -95,6 +103,12 @@ public class StylusDevicesControllerTest {
     @Mock
     private UserManager mUserManager;
     @Mock
+    UserInfo mPersonalUserInfo;
+    @Mock
+    UserInfo mWorkUserInfo;
+    @Mock
+    UserInfo mPrivateUserInfo;
+    @Mock
     private RoleManager mRm;
     @Mock
     private Lifecycle mLifecycle;
@@ -102,6 +116,8 @@ public class StylusDevicesControllerTest {
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
     private BluetoothDevice mBluetoothDevice;
+    @Mock
+    private Drawable mIcon;
 
     @Before
     public void setUp() throws Exception {
@@ -134,6 +150,7 @@ public class StylusDevicesControllerTest {
         when(mPm.getApplicationInfo(eq(NOTES_PACKAGE_NAME),
                 any(PackageManager.ApplicationInfoFlags.class))).thenReturn(new ApplicationInfo());
         when(mPm.getApplicationLabel(any(ApplicationInfo.class))).thenReturn(NOTES_APP_LABEL);
+        when(mPm.getUserBadgeForDensityNoBackground(any(), anyInt())).thenReturn(mIcon);
         when(mUserManager.getUsers()).thenReturn(Arrays.asList(new UserInfo(0, "default", 0)));
         when(mUserManager.isManagedProfile(anyInt())).thenReturn(false);
 
@@ -371,14 +388,26 @@ public class StylusDevicesControllerTest {
         final String permissionPackageName = "permissions.package";
         final UserHandle currentUser = Process.myUserHandle();
         List<UserInfo> userInfos = Arrays.asList(
-                new UserInfo(currentUser.getIdentifier(), "current", 0),
-                new UserInfo(1, "profile", UserInfo.FLAG_PROFILE)
+                mPersonalUserInfo,
+                mWorkUserInfo
         );
-        when(mUserManager.getUsers()).thenReturn(userInfos);
-        when(mUserManager.isManagedProfile(1)).thenReturn(true);
-        when(mUserManager.getUserInfo(currentUser.getIdentifier())).thenReturn(userInfos.get(0));
-        when(mUserManager.getUserInfo(1)).thenReturn(userInfos.get(1));
-        when(mUserManager.getProfileParent(1)).thenReturn(userInfos.get(0));
+        UserProperties personalUserProperties =
+                new UserProperties.Builder()
+                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_DEFAULT)
+                        .build();
+        UserProperties workUserProperties =
+                new UserProperties.Builder()
+                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_PAUSED)
+                        .build();
+        when(mWorkUserInfo.isManagedProfile()).thenReturn(true);
+        when(mWorkUserInfo.getUserHandle()).thenReturn(UserHandle.of(WORK_USER_ID));
+        when(mUserManager.getProfiles(currentUser.getIdentifier())).thenReturn(userInfos);
+        when(mUserManager.getUserInfo(currentUser.getIdentifier())).thenReturn(mPersonalUserInfo);
+        when(mUserManager.getUserInfo(WORK_USER_ID)).thenReturn(mWorkUserInfo);
+        when(mUserManager.getProfileParent(WORK_USER_ID)).thenReturn(mPersonalUserInfo);
+        when(mUserManager.getUserProperties(currentUser)).thenReturn(personalUserProperties);
+        when(mUserManager.getUserProperties(UserHandle.of(WORK_USER_ID)))
+                .thenReturn(workUserProperties);
         when(mPm.getPermissionControllerPackageName()).thenReturn(permissionPackageName);
 
         showScreen(mController);
@@ -389,7 +418,55 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
-    public void defaultNotesPreferenceClick_noManagedProfile_sendsManageDefaultRoleIntent() {
+    public void defaultNotesPreferenceClick_multiUsers_showsProfileSelectorDialog() {
+        mSetFlagsRule.enableFlags(
+                android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES,
+                android.multiuser.Flags.FLAG_HANDLE_INTERLEAVED_SETTINGS_FOR_PRIVATE_SPACE);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
+        final String permissionPackageName = "permissions.package";
+        final UserHandle currentUser = Process.myUserHandle();
+        List<UserInfo> userInfos = Arrays.asList(
+                mPersonalUserInfo,
+                mPrivateUserInfo,
+                mWorkUserInfo
+        );
+        UserProperties personalUserProperties =
+                new UserProperties.Builder()
+                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_DEFAULT)
+                        .build();
+        UserProperties workUserProperties =
+                new UserProperties.Builder()
+                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_PAUSED)
+                        .build();
+        UserProperties privateUserProperties =
+                new UserProperties.Builder()
+                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_HIDDEN)
+                        .build();
+        when(mWorkUserInfo.isManagedProfile()).thenReturn(true);
+        when(mWorkUserInfo.getUserHandle()).thenReturn(UserHandle.of(WORK_USER_ID));
+        when(mPrivateUserInfo.isPrivateProfile()).thenReturn(true);
+        when(mPrivateUserInfo.getUserHandle()).thenReturn(UserHandle.of(PRIVATE_USER_ID));
+        when(mUserManager.getProfiles(currentUser.getIdentifier())).thenReturn(userInfos);
+        when(mUserManager.getUserInfo(currentUser.getIdentifier())).thenReturn(mPersonalUserInfo);
+        when(mUserManager.getUserInfo(WORK_USER_ID)).thenReturn(mWorkUserInfo);
+        when(mUserManager.getUserInfo(PRIVATE_USER_ID)).thenReturn(mPrivateUserInfo);
+        when(mUserManager.getUserProperties(currentUser)).thenReturn(personalUserProperties);
+        when(mUserManager.getUserProperties(UserHandle.of(PRIVATE_USER_ID)))
+                .thenReturn(privateUserProperties);
+        when(mUserManager.getUserProperties(UserHandle.of(WORK_USER_ID)))
+                .thenReturn(workUserProperties);
+        when(mPm.getPermissionControllerPackageName()).thenReturn(permissionPackageName);
+
+        showScreen(mController);
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        mController.onPreferenceClick(defaultNotesPref);
+
+        assertTrue(mController.mDialog.isShowing());
+    }
+
+    @Test
+    public void defaultNotesPreferenceClick_noProfiles_sendsManageDefaultRoleIntent() {
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
         mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final String permissionPackageName = "permissions.package";
@@ -398,7 +475,7 @@ public class StylusDevicesControllerTest {
                 new UserInfo(currentUser.getIdentifier(), "current", 0),
                 new UserInfo(1, "other", UserInfo.FLAG_FULL)
         );
-        when(mUserManager.getUsers()).thenReturn(userInfos);
+        when(mUserManager.getProfiles(currentUser.getIdentifier())).thenReturn(userInfos);
         when(mUserManager.isManagedProfile(1)).thenReturn(false);
         when(mUserManager.getUserInfo(currentUser.getIdentifier())).thenReturn(userInfos.get(0));
         when(mUserManager.getUserInfo(1)).thenReturn(userInfos.get(1));

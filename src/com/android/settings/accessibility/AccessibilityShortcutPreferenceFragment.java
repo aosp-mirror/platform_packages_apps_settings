@@ -42,6 +42,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
@@ -125,6 +126,9 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         final List<String> shortcutFeatureKeys = new ArrayList<>();
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
+        }
         mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
         mSettingsContentObserver.registerKeysToObserverCallback(shortcutFeatureKeys, key -> {
             updateShortcutPreferenceData();
@@ -217,15 +221,15 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
                 return mDialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-                    mDialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
-                                    getPrefContext(), getUserShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked);
+                                    getPrefContext(), getUserPreferredShortcutTypes(),
+                                    this::callOnTutorialDialogButtonClicked, getLabelName());
                 } else {
-                    mDialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialog(
-                                    getPrefContext(), getUserShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked);
+                                    getPrefContext(), getUserPreferredShortcutTypes(),
+                                    this::callOnTutorialDialogButtonClicked, getLabelName());
                 }
                 mDialog.setCanceledOnTouchOutside(false);
                 return mDialog;
@@ -271,8 +275,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
             return;
         }
 
-        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                getComponentName().flattenToString());
+        final int shortcutTypes = getUserPreferredShortcutTypes();
         if (preference.isChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                     getComponentName());
@@ -448,11 +451,17 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
             return context.getText(R.string.accessibility_shortcut_state_off);
         }
 
-        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
-                getComponentName().flattenToString());
+        final int shortcutTypes = getUserPreferredShortcutTypes();
 
+        // LINT.IfChange(shortcut_type_ui_order)
         final List<CharSequence> list = new ArrayList<>();
-
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            if (hasShortcutType(shortcutTypes, AccessibilityUtil.UserShortcutType.QUICK_SETTINGS)) {
+                final CharSequence qsTitle = context.getText(
+                        R.string.accessibility_feature_shortcut_setting_summary_quick_settings);
+                list.add(qsTitle);
+            }
+        }
         if (hasShortcutType(shortcutTypes, AccessibilityUtil.UserShortcutType.SOFTWARE)) {
             list.add(getSoftwareShortcutTypeSummary(context));
         }
@@ -461,6 +470,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
                     R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
         }
+        // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
 
         // Show software shortcut if first time to use.
         if (list.isEmpty()) {
@@ -476,9 +486,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         // when shortcutPreference is checked.
         int value = restoreOnConfigChangedValue();
         if (value == NOT_SET) {
-            final int lastNonEmptyUserShortcutType = PreferredShortcuts.retrieveUserShortcutType(
-                    getPrefContext(), getComponentName().flattenToString()
-            );
+            final int lastNonEmptyUserShortcutType = getUserPreferredShortcutTypes();
             value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
                     : AccessibilityUtil.UserShortcutType.EMPTY;
         }
@@ -518,8 +526,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
             return;
         }
 
-        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
-                getComponentName().flattenToString());
+        final int shortcutTypes = getUserPreferredShortcutTypes();
         mShortcutPreference.setChecked(
                 AccessibilityUtil.hasValuesInSettings(getPrefContext(), shortcutTypes,
                         getComponentName()));
@@ -538,6 +545,10 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
     }
 
     private void showQuickSettingsTooltipIfNeeded() {
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            // Don't show Quick Settings tooltip
+            return;
+        }
         final ComponentName tileComponentName = getTileComponentName();
         if (tileComponentName == null) {
             // Returns if no tile service assigned.
@@ -565,5 +576,15 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
                 tileComponentName);
         mNeedsQSTooltipReshow = false;
+    }
+
+    /**
+     * Returns the user preferred shortcut types or the default shortcut types if not set
+     */
+    @ShortcutConstants.UserShortcutType
+    protected int getUserPreferredShortcutTypes() {
+        return PreferredShortcuts.retrieveUserShortcutType(
+                getPrefContext(),
+                getComponentName().flattenToString());
     }
 }

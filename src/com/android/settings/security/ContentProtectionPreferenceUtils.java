@@ -15,15 +15,23 @@
  */
 package com.android.settings.security;
 
+import static android.view.contentprotection.flags.Flags.manageDevicePolicyEnabled;
+
 import static com.android.internal.R.string.config_defaultContentProtectionService;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.DeviceConfig;
 import android.view.contentcapture.ContentCaptureManager;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.settings.Utils;
 
 /** Util class for content protection preference. */
 public class ContentProtectionPreferenceUtils {
@@ -59,5 +67,50 @@ public class ContentProtectionPreferenceUtils {
                 DeviceConfig.NAMESPACE_CONTENT_CAPTURE,
                 ContentCaptureManager.DEVICE_CONFIG_PROPERTY_ENABLE_CONTENT_PROTECTION_RECEIVER,
                 ContentCaptureManager.DEFAULT_ENABLE_CONTENT_PROTECTION_RECEIVER);
+    }
+
+    /** Returns the managed profile or null if none exists. */
+    @Nullable
+    public static UserHandle getManagedProfile(@NonNull Context context) {
+        UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager == null) {
+            return null;
+        }
+        return Utils.getManagedProfile(userManager);
+    }
+
+    /** Returns the current content protection policy. */
+    @DevicePolicyManager.ContentProtectionPolicy
+    public static int getContentProtectionPolicy(
+            @NonNull Context context, @Nullable UserHandle managedProfile) {
+        if (!manageDevicePolicyEnabled()) {
+            return DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
+        }
+        Context policyContext = createContentProtectionPolicyContext(context, managedProfile);
+        return getContentProtectionPolicyWithGivenContext(policyContext);
+    }
+
+    @NonNull
+    private static Context createContentProtectionPolicyContext(
+            @NonNull Context context, @Nullable UserHandle managedProfile) {
+        if (managedProfile == null) {
+            return context;
+        }
+        try {
+            return context.createPackageContextAsUser(
+                    context.getPackageName(), /* flags= */ 0, managedProfile);
+        } catch (PackageManager.NameNotFoundException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    @DevicePolicyManager.ContentProtectionPolicy
+    private static int getContentProtectionPolicyWithGivenContext(@NonNull Context context) {
+        DevicePolicyManager devicePolicyManager =
+                context.getSystemService(DevicePolicyManager.class);
+        if (devicePolicyManager == null) {
+            return DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
+        }
+        return devicePolicyManager.getContentProtectionPolicy(/* admin= */ null);
     }
 }

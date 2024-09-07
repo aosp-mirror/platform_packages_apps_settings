@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
@@ -40,11 +41,11 @@ public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferen
 
     private static final String DEBUG_APP_KEY = "debug_app";
 
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
     private final PackageManager mPackageManager;
 
     public SelectDebugAppPreferenceController(Context context,
-            DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
         mPackageManager = mContext.getPackageManager();

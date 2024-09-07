@@ -105,4 +105,16 @@ public class BluetoothLeAudioModePreferenceControllerTest {
         assertThat(SystemProperties.get(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[0])
                         .equals(mController.mNewMode)).isFalse();
     }
+
+    @Test
+    public void onBluetoothTurnOff_shouldNotChangeLeAudioMode() {
+        SystemProperties.set(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[1]);
+        when(mBluetoothAdapter.isEnabled())
+                .thenReturn(false);
+
+        mController.updateState(mPreference);
+        final String mode = SystemProperties
+                .get(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[0]);
+        assertThat(mode.equals(mListValues[1])).isTrue();
+    }
 }

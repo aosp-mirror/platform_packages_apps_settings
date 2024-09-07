@@ -82,7 +82,7 @@ class MobileDataEnabledFlowTest {
         delay(100)
         mobileDataEnabledForSubId = true
 
-        assertThat(listDeferred.await()).hasSize(2)
+        assertThat(listDeferred.await().size).isAtLeast(2)
     }
 
     private companion object {

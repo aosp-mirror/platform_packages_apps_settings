@@ -357,6 +357,19 @@ public class NotificationBackend {
         }
     }
 
+    /**
+     * Returns all of a user's packages that have at least one channel that will bypass DND
+     */
+    public List<String> getPackagesBypassingDnd(int userId,
+            boolean includeConversationChannels) {
+        try {
+            return sINM.getPackagesBypassingDnd(userId, includeConversationChannels);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return new ArrayList<>();
+        }
+    }
+
     public void updateChannel(String pkg, int uid, NotificationChannel channel) {
         try {
             sINM.updateNotificationChannelForPackage(pkg, uid, channel);

@@ -84,6 +84,13 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        if (!this::lazyViewModel.isInitialized) {
+            Log.e(
+                this.javaClass.simpleName,
+                "lateinit property lazyViewModel has not been initialized"
+            )
+            return
+        }
         preference.isVisible = false
 
         val viewModel by lazyViewModel

@@ -30,9 +30,6 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.view.LayoutInflater;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
@@ -61,20 +58,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowLooper;
 
 /**
  * Tests for {@link PreviewSizeSeekBarController}.
  */
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {ShadowInteractionJankMonitor.class})
 public class PreviewSizeSeekBarControllerTest {
-
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Rule
     public ActivityScenarioRule<EmptyFragmentActivity> rule =
@@ -194,8 +187,9 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarPreference.setProgress(mSeekBarPreference.getMax());
         mSeekBarPreference.onProgressChanged(new SeekBar(mContext), /* progress= */
                 0, /* fromUser= */ false);
+        ShadowLooper.idleMainLooper();
 
-        verify(mInteractionListener).notifyPreferenceChanged();
+        verify(mInteractionListener).onProgressChanged();
     }
 
     @Test
@@ -213,7 +207,6 @@ public class PreviewSizeSeekBarControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_REMOVE_QS_TOOLTIP_IN_SUW)
     public void onProgressChanged_inSuw_toolTipShouldNotShown() {
         Intent intent = mContext.getIntent();
         intent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
@@ -259,6 +252,7 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarController.onCreate(savedInstanceState);
 
         mSeekBarController.displayPreference(mPreferenceScreen);
+        ShadowLooper.idleMainLooper();
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
     }

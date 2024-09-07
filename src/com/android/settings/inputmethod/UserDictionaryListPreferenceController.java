@@ -191,7 +191,8 @@ public class UserDictionaryListPreferenceController extends BasePreferenceContro
     private Preference createUserDictionaryPreference(String locale) {
         final String KEY_LOCALE = "locale";
         final Preference newPref = new Preference(mScreen.getContext());
-        final Intent intent = new Intent(USER_DICTIONARY_SETTINGS_INTENT_ACTION);
+        final Intent intent = new Intent(USER_DICTIONARY_SETTINGS_INTENT_ACTION)
+                .setPackage(mContext.getPackageName());
         if (locale == null) {
             newPref.setTitle(Locale.getDefault().getDisplayName());
             newPref.setKey(Locale.getDefault().toString());

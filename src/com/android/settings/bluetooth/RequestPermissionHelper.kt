@@ -70,7 +70,10 @@ object RequestPermissionHelper {
 private fun Context.isDisallowBluetooth() =
     if (userManager.hasUserRestriction(UserManager.DISALLOW_BLUETOOTH)) {
         devicePolicyManager.createAdminSupportIntent(UserManager.DISALLOW_BLUETOOTH)
-            ?.let { startActivity(it) }
+            ?.let {
+                it.setPackage(packageName)
+                startActivity(it)
+            }
         true
     } else false
 

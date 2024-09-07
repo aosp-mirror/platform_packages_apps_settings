@@ -138,6 +138,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_REMOVE_GUEST_ON_EXIT = "remove_guest_on_exit";
     private static final String KEY_GUEST_USER_CATEGORY = "guest_user_category";
     private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
+    private static final String KEY_USER_SETTINGS_SCREEN = "user_settings_screen";
 
     private static final String SETTING_GUEST_HAS_LOGGED_IN = "systemui.guest_has_logged_in";
 
@@ -286,7 +287,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
         switchBar.setTitle(getContext().getString(R.string.multiple_users_main_switch_title));
-        if (isCurrentUserAdmin()) {
+        if (!mUserCaps.mIsGuest) {
             switchBar.show();
         } else {
             switchBar.hide();
@@ -368,9 +369,6 @@ public class UserSettings extends SettingsPreferenceFragment
         mMePreference = new UserPreference(getPrefContext(), null /* attrs */, myUserId);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
-        if (isCurrentUserAdmin()) {
-            mMePreference.setSummary(R.string.user_admin);
-        }
 
         mGuestCategory = findPreference(KEY_GUEST_CATEGORY);
 
@@ -555,7 +553,8 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void launchChooseLockscreen() {
-        Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
+        Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD)
+                .setPackage(getContext().getPackageName());
         chooseLockIntent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS,
                 true);
         startActivityForResult(chooseLockIntent, REQUEST_CHOOSE_LOCK);
@@ -1240,12 +1239,14 @@ public class UserSettings extends SettingsPreferenceFragment
                 pref.setEnabled(canOpenUserDetails);
                 pref.setSelectable(true);
                 pref.setKey("id=" + user.id);
-                if (user.isAdmin()) {
-                    pref.setSummary(R.string.user_admin);
-                }
             }
             if (pref == null) {
                 continue;
+            }
+            if (user.isMain()) {
+                pref.setSummary(R.string.user_owner);
+            } else if (user.isAdmin()) {
+                pref.setSummary(R.string.user_admin);
             }
             if (user.id != UserHandle.myUserId() && !user.isGuest() && !user.isInitialized()) {
                 // sometimes after creating a guest the initialized flag isn't immediately set
@@ -1739,6 +1740,16 @@ public class UserSettings extends SettingsPreferenceFragment
                     if (!UserManager.supportsMultipleUsers()) {
                         return rawData;
                     }
+
+                    SearchIndexableRaw multipleUsersData = new SearchIndexableRaw(context);
+                    multipleUsersData.key = KEY_USER_SETTINGS_SCREEN;
+                    multipleUsersData.title =
+                            context.getString(R.string.user_settings_title);
+                    multipleUsersData.keywords =
+                            context.getString(R.string.multiple_users_title_keywords);
+                    multipleUsersData.screenTitle =
+                            context.getString(R.string.user_settings_title);
+                    rawData.add(multipleUsersData);
 
                     SearchIndexableRaw allowMultipleUsersResult = new SearchIndexableRaw(context);
 

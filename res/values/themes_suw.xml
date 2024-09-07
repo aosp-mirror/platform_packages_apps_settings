@@ -231,7 +231,7 @@
     <style name="SuwAlertDialogThemeCompat" parent="@style/Theme.AppCompat.Dialog.Alert">
         <!-- Referenced SudThemeGlifV3 style -->
         <item name="android:textAllCaps">false</item>
-
+        <item name="android:colorBackground">@android:color/system_neutral1_900</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
         <!-- copied from Theme.DeviceDefault.Dialog.Alert -->
         <item name="colorAccent">@*android:color/accent_device_default_dark</item>
@@ -243,7 +243,7 @@
     <style name="SuwAlertDialogThemeCompat.Light" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <!-- Referenced SudThemeGlifV3.Light style -->
         <item name="android:textAllCaps">false</item>
-
+        <item name="android:colorBackground">@android:color/system_neutral1_50</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
         <!-- copied from Theme.DeviceDefault.Light.Dialog.Alert -->
         <item name="colorAccent">@*android:color/accent_device_default_light</item>

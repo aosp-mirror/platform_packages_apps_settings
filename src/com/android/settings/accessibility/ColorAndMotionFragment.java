@@ -74,6 +74,9 @@ public class ColorAndMotionFragment extends DashboardFragment {
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED);
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
+        }
         if (Flags.forceInvertColor()) {
             mShortcutFeatureKeys.add(ToggleForceInvertPreferenceController.SETTINGS_KEY);
         }

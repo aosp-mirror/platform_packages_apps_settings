@@ -16,10 +16,14 @@
 
 package com.android.settings.network;
 
+import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -28,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.os.Looper;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
+import android.util.AndroidRuntimeException;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -73,12 +78,12 @@ public class AirplaneModePreferenceControllerTest {
         mResolver = mContext.getContentResolver();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mController = new AirplaneModePreferenceController(mContext,
-                SettingsSlicesContract.KEY_AIRPLANE_MODE);
+                KEY_AIRPLANE_MODE);
 
         mPreferenceManager = new PreferenceManager(mContext);
         mScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mPreference = new RestrictedSwitchPreference(mContext);
-        mPreference.setKey(SettingsSlicesContract.KEY_AIRPLANE_MODE);
+        mPreference.setKey(KEY_AIRPLANE_MODE);
         mScreen.addPreference(mPreference);
         mController.setFragment(null);
     }
@@ -166,5 +171,19 @@ public class AirplaneModePreferenceControllerTest {
     @Test
     public void isPublicSlice_returnsTrue() {
         assertThat(mController.isPublicSlice()).isTrue();
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_satelliteOn_startWarningActivity() {
+        mController.mIsSatelliteOn.set(true);
+        when(mAirplaneModeEnabler.isInEcmMode()).thenReturn(false);
+
+        try {
+            mController.handlePreferenceTreeClick(mPreference);
+        } catch (AndroidRuntimeException e) {
+            // Catch exception of starting activity .
+        }
+
+        verify(mContext).startActivity(any());
     }
 }

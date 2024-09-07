@@ -20,6 +20,7 @@ import android.Manifest
 import android.app.AppOpsManager
 import android.content.Context
 import com.android.settings.R
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
 
@@ -32,7 +33,9 @@ class UseFullScreenIntentListModel(context: Context) : AppOpPermissionListModel(
     override val pageTitleResId = R.string.full_screen_intent_title
     override val switchTitleResId = R.string.permit_full_screen_intent
     override val footerResId = R.string.footer_description_full_screen_intent
-    override val appOp = AppOpsManager.OP_USE_FULL_SCREEN_INTENT
+    override val appOps = AppOps(
+        op = AppOpsManager.OP_USE_FULL_SCREEN_INTENT,
+        setModeByUid = true,
+    )
     override val permission = Manifest.permission.USE_FULL_SCREEN_INTENT
-    override val setModeByUid = true
 }

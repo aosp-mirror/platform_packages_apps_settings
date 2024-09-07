@@ -24,7 +24,6 @@ import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
-import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
@@ -38,6 +37,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
+import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.onboarding.OnboardingFeatureProvider
 import com.android.settings.overlay.FeatureFactory.Companion.setFactory
 import com.android.settings.panel.PanelFeatureProvider
@@ -68,7 +68,7 @@ abstract class FeatureFactory {
     /**
      * Retrieves implementation for Hardware Info feature.
      */
-    abstract val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider
+    open val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider? = null
 
     /** Implementation for [SupportFeatureProvider]. */
     open val supportFeatureProvider: SupportFeatureProvider? = null
@@ -184,9 +184,9 @@ abstract class FeatureFactory {
     abstract val displayFeatureProvider: DisplayFeatureProvider
 
     /**
-     * Gets implementation for audio sharing related feature.
+     * Gets implementation for sync across devices related feature.
      */
-    abstract val audioSharingFeatureProvider: AudioSharingFeatureProvider
+    abstract val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider
 
     companion object {
         private var _factory: FeatureFactory? = null

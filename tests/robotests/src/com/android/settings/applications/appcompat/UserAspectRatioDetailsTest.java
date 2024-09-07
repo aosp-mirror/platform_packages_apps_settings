@@ -16,16 +16,19 @@
 
 package com.android.settings.applications.appcompat;
 
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_3_2;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_APP_DEFAULT;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
 
 import static com.android.settings.applications.AppInfoBase.ARG_PACKAGE_NAME;
+import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_HEADER_BUTTONS;
 import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_PREF_3_2;
 import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_PREF_DEFAULT;
 import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_PREF_FULLSCREEN;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -96,6 +99,31 @@ public class UserAspectRatioDetailsTest {
         mRadioButtonPref = new RadioWithImagePreference(mContext);
         final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = featureFactory.metricsFeatureProvider;
+    }
+
+    @Test
+    public void testOrderOfOptionsFollowsConfig() {
+        doReturn(true).when(mUserAspectRatioManager)
+                .hasAspectRatioOption(anyInt(), anyString());
+        doReturn(0).when(mUserAspectRatioManager)
+                .getUserMinAspectRatioOrder(USER_MIN_ASPECT_RATIO_3_2);
+        doReturn(1).when(mUserAspectRatioManager)
+                .getUserMinAspectRatioOrder(USER_MIN_ASPECT_RATIO_FULLSCREEN);
+        doReturn(2).when(mUserAspectRatioManager)
+                .getUserMinAspectRatioOrder(USER_MIN_ASPECT_RATIO_UNSET);
+        rule.getScenario().onActivity(a -> doReturn(a).when(mFragment).getActivity());
+        final Bundle args = new Bundle();
+        args.putString(ARG_PACKAGE_NAME, anyString());
+        mFragment.setArguments(args);
+        mFragment.onCreate(Bundle.EMPTY);
+
+        final int topOfList = mFragment.findPreference(KEY_HEADER_BUTTONS).getOrder();
+
+        assertTrue(topOfList < mFragment.findPreference(KEY_PREF_3_2).getOrder());
+        assertTrue(mFragment.findPreference(KEY_PREF_3_2).getOrder()
+                < mFragment.findPreference(KEY_PREF_FULLSCREEN).getOrder());
+        assertTrue(mFragment.findPreference(KEY_PREF_FULLSCREEN).getOrder()
+                < mFragment.findPreference(KEY_PREF_DEFAULT).getOrder());
     }
 
     @Test
