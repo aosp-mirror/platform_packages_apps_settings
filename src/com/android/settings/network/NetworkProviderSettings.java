@@ -19,8 +19,6 @@ package com.android.settings.network;
 import static android.net.wifi.WifiConfiguration.NetworkSelectionStatus.NETWORK_SELECTION_ENABLED;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
-import static com.android.wifitrackerlib.WifiEntry.CONNECTED_STATE_CONNECTED;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -671,7 +669,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void addModifyMenuIfSuitable(ContextMenu menu, WifiEntry wifiEntry) {
         if (mIsAdmin && wifiEntry.isSaved()
-                && wifiEntry.getConnectedState() != CONNECTED_STATE_CONNECTED) {
+                && wifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED) {
             menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
         }
     }
@@ -767,7 +765,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private void showDialog(WifiEntry wifiEntry, int dialogMode) {
         if (WifiUtils.isNetworkLockedDown(getActivity(), wifiEntry.getWifiConfiguration())
-                && wifiEntry.getConnectedState() == CONNECTED_STATE_CONNECTED) {
+                && wifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
                     RestrictedLockUtilsInternal.getDeviceOwner(getActivity()));
             return;
@@ -1070,8 +1068,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
         final WifiEntry wifiEntry = pref.getWifiEntry();
-        if (!wifiEntry.isSaved() && wifiEntry.getConnectedState() != CONNECTED_STATE_CONNECTED) {
-            Log.w(TAG, "Don't launch Wi-Fi details because WifiEntry is not saved or connected!");
+        if (!wifiEntry.isSaved()) {
+            Log.w(TAG, "launchNetworkDetailsFragment: Don't launch because WifiEntry isn't saved!");
             return;
         }
         final Context context = requireContext();

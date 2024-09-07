@@ -221,7 +221,6 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                         "showRestartDialog:${showRestartDialog.value}")
                 showStartingDialog.value = false
             } else if (onboardingService.activeSubInfoList.isNotEmpty()) {
-                Log.d(TAG, "status: showStartingDialog.value:${showStartingDialog.value}")
                 showStartingDialog.value = true
             }
         }
@@ -469,11 +468,11 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     }
 
     fun handleEnableMultiSimSidecarStateChange() {
+        showDsdsProgressDialog.value = false
         when (enableMultiSimSidecar!!.state) {
             SidecarFragment.State.SUCCESS -> {
                 enableMultiSimSidecar!!.reset()
                 Log.i(TAG, "Successfully switched to DSDS without reboot.")
-                showDsdsProgressDialog.value = false
                 // refresh data
                 initServiceData(this, onboardingService.targetSubId, callbackListener)
                 startSimOnboardingProvider()
@@ -481,7 +480,6 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
             SidecarFragment.State.ERROR -> {
                 enableMultiSimSidecar!!.reset()
-                showDsdsProgressDialog.value = false
                 Log.i(TAG, "Failed to switch to DSDS without rebooting.")
                 showError.value = ErrorType.ERROR_ENABLE_DSDS
                 callbackListener(CallbackType.CALLBACK_ERROR)

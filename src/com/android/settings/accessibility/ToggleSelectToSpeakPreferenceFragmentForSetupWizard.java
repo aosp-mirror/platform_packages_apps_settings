@@ -68,8 +68,7 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
             Bundle savedInstanceState) {
         if (parent instanceof GlifPreferenceLayout) {
             final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-            return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(
-                    layout.onCreateRecyclerView(inflater, parent, savedInstanceState));
+            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
         }
         return super.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }

@@ -1860,15 +1860,6 @@
     <!-- Bluetooth settings. Link text to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
     <string name="bluetooth_scan_change">Change</string>
 
-    <!-- Dialog title when key is missing in a Bluetooth device -->
-    <string name="bluetooth_key_missing_title"><xliff:g id="device_name">%1$s</xliff:g> not connected</string>
-    <!-- Dialog content when key is missing in a Bluetooth device -->
-    <string name="bluetooth_key_missing_message">For your security, forget this device, then pair it again</string>
-    <!-- Button text to forget device when bluetooth key is missing -->
-    <string name="bluetooth_key_missing_forget">Forget device</string>
-    <!-- Button text to cancel when bluetooth key is missing-->
-    <string name="bluetooth_key_missing_cancel">Cancel</string>
-
     <!-- Title of device details screen [CHAR LIMIT=28]-->
     <string name="device_details_title">Device details</string>
     <!-- Title for keyboard settings preferences. [CHAR LIMIT=50] -->
@@ -2170,7 +2161,7 @@
     <string name="wifi_signal">Signal strength</string>
     <!-- Label for the status of the connection -->
     <string name="wifi_status">Status</string>
-    <!-- Label for the transmit link speed of the connection. [CHAR LIMIT=40] -->
+    <!-- Label for the transmit link speed of the connection. [CHAR LIMIT=32] -->
     <string name="tx_wifi_speed">Transmit link speed</string>
     <!-- Label for the receive link speed of the connection. [CHAR LIMIT=32] -->
     <string name="rx_wifi_speed">Receive link speed</string>
@@ -4625,11 +4616,6 @@
     <!-- Summary for the modifier key picker dialog page [CHAR LIMIT=35] -->
     <string name="modifier_keys_picker_summary">Choose a new key for <xliff:g id="modifier_key_default_name">%1$s</xliff:g>:</string>
 
-    <!-- Title for the button to trigger the 'Physical keyboard accessibility' page. [CHAR LIMIT=60] -->
-    <string name="keyboard_a11y_settings">Physical keyboard accessibility</string>
-    <!-- Summary for the button to trigger the 'Physical keyboard accessibility' page. [CHAR LIMIT=NONE] -->
-    <string name="keyboard_a11y_settings_summary">Sticky keys, Bounce keys, Mouse keys</string>
-
     <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
     <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
@@ -5133,11 +5119,11 @@
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_gesture_navigation_warning">The accessibility gesture is set to the <xliff:g id="service" example="Select to Speak">%1$s</xliff:g>. To use magnification, swipe up with two fingers from the bottom of the screen and hold. Then select magnification.</string>
     <!-- Title for the preference to configure the accessibility shortcut, which uses the volume keys. [CHAR LIMIT=35] -->
-    <string name="accessibility_global_gesture_preference_title">Volume keys shortcut</string>
+    <string name="accessibility_global_gesture_preference_title">Volume key shortcut</string>
     <!-- Label for shortcut settings button. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_settings">Shortcut settings</string>
-    <!-- Title for the switch preference that controls whether or not the accessibility volume keys shortcut works on the lock screen. [CHAR LIMIT=50] -->
-    <string name="accessibility_shortcut_service_on_lock_screen_title">Volume keys shortcut from lock screen</string>
+    <!-- Title for the switch preference that controls whether or not the accessibility shortcut works on the lock screen. [CHAR LIMIT=50] -->
+    <string name="accessibility_shortcut_service_on_lock_screen_title">Shortcut from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds.</string>
     <!-- Title for the accessibility button page. [CHAR LIMIT=35] -->
@@ -10193,7 +10179,7 @@
     <string name="zen_modes_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb, manage and activate Modes, and make changes to related settings.</string>
 
     <!-- Modes access settings - title for warning dialog when revoking access [CHAR LIMIT=NONE] -->
-    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access to Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
 
     <!-- Modes access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
     <string name="zen_modes_access_revoke_warning_dialog_summary">All modes created by this app will be removed.</string>
@@ -13030,6 +13016,271 @@
     <string name="bluetooth_connect_access_dialog_negative">Don\u2019t connect</string>
     <!-- Strings for Dialog connect button -->
     <string name="bluetooth_connect_access_dialog_positive">Connect</string>
+
+    <!-- Title for the button to edit The Android Resource Economy settings. "TARE" is the name of
+    the feature that contains the AlarmManager and JobScheduler policies which are both android
+    APIs. AlarmManager and JobScheduler are the names of Android system services and cannot be
+    translated. "TARE" is not translatable. [CHAR LIMIT=NONE] -->
+    <string name="tare_title" translatable="false">TARE</string>
+    <!-- TARE settings title in developer options; "TARE" is the name of the feature and cannot be
+     translated. [CHAR LIMIT=40] -->
+    <string name="tare_settings">TARE Settings</string>
+    <!-- Summary for the TARE feature being on (ie. enabled) [CHAR LIMIT=NONE] -->
+    <string name="tare_on">On</string>
+    <!-- Summary for the TARE feature being off (ie. disabled) [CHAR LIMIT=NONE] -->
+    <string name="tare_off">Off</string>
+    <!-- Allows user to revert the TARE settings to their default values [CHAR LIMIT=40] -->
+    <string name="tare_revert">Revert to Default Settings</string>
+    <!-- Allows user to view AlarmManager policy factors. Alarm in this context is referring to the
+    possible alarm cases in the AlarmManager policy. AlarmManager is the name of an Android system
+    service and cannot be translated. [CHAR LIMIT=40]-->
+    <string name="tare_alarmmanager" translatable="false">AlarmManager</string>
+    <!-- Allows user to view JobScheduler policy factors. JobScheduler is the name of an Android
+    system service and cannot be translated.[CHAR LIMIT=40]-->
+    <string name="tare_jobscheduler" translatable="false">JobScheduler</string>
+    <!-- Toast notifying the developer that settings were reverted to their default values in
+    TARE [CHAR LIMIT=40]-->
+    <string name="tare_settings_reverted_toast">Settings reverted to default.</string>
+    <!-- Title for the TARE policy factor that determines the maximum credits an app can have in one
+    battery life cycle. Satiated means battery is fully charged; If this is not easily translatable,
+    translate "maximum balance when device is fully charged" instead. Balance is the same meaning as
+    having money in a bank account. Balance in our feature is the amount of Android Resource Credits
+    an app can have. Android Resource Credits are a form of payment used by apps to be able to
+    perform tasks. [CHAR LIMIT=80]-->
+    <string name="tare_max_satiated_balance">Maximum Satiated Balance</string>
+    <!-- Title for the TARE policy factors that affect how many credits an app may have. Balance
+    in this context is the same as "bank balance" or "account balance" (ie. how much "money" may be
+    in a bank account). [CHAR LIMIT=55]-->
+    <string name="tare_balances">Balances</string>
+    <!-- Title for the TARE section to modify consumption limits. "Consumption" refers to the idea
+     using resources that are not replenished. [CHAR LIMIT=55]-->
+    <string name="tare_consumption_limits">Consumption Limits</string>
+    <!-- Title for the TARE policy factor that determines the initial maximum amount of credits that
+    can be consumed by all the apps [CHAR LIMIT=80]-->
+    <string name="tare_initial_consumption_limit">Initial Consumption Limit</string>
+    <!-- Title for the TARE policy factor that determines the minimum consumption limit the system
+     can have [CHAR LIMIT=80]-->
+    <string name="tare_min_consumption_limit">Minimum Consumption Limit</string>
+    <!-- Title for the TARE policy factor that determines the maximum consumption limit the system
+     can have [CHAR LIMIT=80]-->
+    <string name="tare_max_consumption_limit">Maximum Consumption Limit</string>
+    <!-- Titles for the consumption limits factors. [CHAR LIMIT=40]-->
+    <string-array name="tare_consumption_limit_subfactors" translatable="false">
+        <item>@string/tare_initial_consumption_limit</item>
+        <item>@string/tare_min_consumption_limit</item>
+        <item>@string/tare_max_consumption_limit</item>
+    </string-array>
+    <!-- Title for the various modifiers that alter the cost of TARE tasks based on battery status
+    (charging, power save mode, etc.) [CHAR LIMIT=40]-->
+    <string name="tare_modifiers">Modifiers</string>
+    <!-- Title for the various TARE policy's actions' cost to produce. "Cost to produce" refers to
+     how many credits it costs the system to perform (produce) the action. [CHAR LIMIT=40]-->
+    <string name="tare_actions_ctp">Actions (Cost to Produce)</string>
+    <!-- Title for the various TARE policy's actions' starting prices [CHAR LIMIT=40]-->
+    <string name="tare_actions_base_price">Actions (Base Price)</string>
+    <!-- Title for the rewards apps can obtain for each instance of an event that implies the user
+    finds the app behavior useful. [CHAR LIMIT=40]-->
+    <string name="tare_rewards_instantaneous">Rewards per single event</string>
+    <!-- Title for the rewards apps can obtain for the total duration (in seconds) of an event that
+    implies the user finds the app behavior useful. [CHAR LIMIT=40]-->
+    <string name="tare_rewards_ongoing">Rewards per second of event duration</string>
+    <!-- Title for the max rewards apps can obtain within a 24 hour period for different actions
+    that benefit the user. [CHAR LIMIT=40]-->
+    <string name="tare_rewards_max">Maximum Rewards Per Day</string>
+    <!-- Title for the Allow While Idle Exact Wakeup Alarm set via
+    AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=50]-->
+    <string name="tare_wakeup_exact_idle" translatable="false">
+        Allow While Idle Exact Wakeup Alarm</string>
+    <!-- Title for the Allow While Idle Inexact Wakeup Alarm set via
+    AlarmManager.setAndAllowWhileIdle() [CHAR LIMIT=50]-->
+    <string name="tare_wakeup_inexact_idle" translatable="false">
+        Allow While Idle Inexact Wakeup Alarm</string>
+    <!-- Title for the Exact Wakeup Alarm set via AlarmManager.setExact() [CHAR LIMIT=50]-->
+    <string name="tare_wakeup_exact" translatable="false">Exact Wakeup Alarm</string>
+    <!-- Title for the Inexact Wakeup Alarm set via AlarmManager.set() [CHAR LIMIT=50]-->
+    <string name="tare_wakeup_inexact" translatable="false">Inexact Wakeup Alarm</string>
+    <!-- Title for the Allow While Idle Exact NonWakeup Alarm set via
+    AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=50]-->
+    <string name="tare_nonwakeup_exact_idle" translatable="false">
+        Allow While Idle Exact NonWakeup Alarm</string>
+    <!-- Title for the Exact NonWakeup Alarm set via AlarmManager.setExact() [CHAR LIMIT=50]-->
+    <string name="tare_nonwakeup_exact" translatable="false">Exact NonWakeup Alarm</string>
+    <!-- Title for the Allow While Idle Inexact NonWakeup Alarm set via
+    AlarmManager.setAndAllowWhileIdle() [CHAR LIMIT=50]-->
+    <string name="tare_nonwakeup_inexact_idle" translatable="false">
+        Allow While Idle Inexact NonWakeup Alarm</string>
+    <!-- Title for the Inexact NonWakeup Alarm set via AlarmManager.set() [CHAR LIMIT=50]-->
+    <string name="tare_nonwakeup_inexact" translatable="false">Inexact NonWakeup Alarm</string>
+    <!-- Title for the AlarmClock alarm set via AlarmManager.setAlarmClock() [CHAR LIMIT=50]-->
+    <string name="tare_alarm_clock" translatable="false">AlarmClock</string>
+    <!-- The action of installing an application onto the device [CHAR LIMIT=50]-->
+    <string name="tare_app_install">App Install</string>
+    <!-- Top activity means an app is in the TOP android process state and is thus visible to the
+    user[CHAR LIMIT=50]-->
+    <string name="tare_top_activity">Top Activity</string>
+    <!-- An event type denoting that a notification was viewed by the user, as defined in
+    UsageEvents.java [CHAR LIMIT=50]-->
+    <string name="tare_notification_seen">Notification Seen</string>
+    <!-- An event type denoting that a notification was viewed by the user within 15 minutes
+    [CHAR LIMIT=50]-->
+    <string name="tare_notification_seen_15_min">Notification Seen Within 15 Minutes</string>
+    <!-- An event type denoting that a notification was interacted with in some way by the user
+    [CHAR LIMIT=50]-->
+    <string name="tare_notification_interaction">Notification Interaction</string>
+    <!-- An event type denoting that an app's widget was interacted with in some way by the user
+    [CHAR LIMIT=50]-->
+    <string name="tare_widget_interaction">Widget Interaction</string>
+    <!-- An event type denoting that an app was interacted with in some way by the user
+    [CHAR LIMIT=50]-->
+    <string name="tare_other_interaction">Other User Interaction</string>
+    <!-- Title for the initiation of a max priority job by an app as defined in the JobScheduler
+     API [CHAR LIMIT=50]-->
+    <string name="tare_job_max_start">Job Max Start</string>
+    <!-- Title of an event where a job with max priority is running, but it does not necessarily
+     mean the max priority job is running at that moment. In this context, running is a synonym for
+     “ongoing execution of a job with max priority”. [CHAR LIMIT=50]-->
+    <string name="tare_job_max_running">Job Max Running</string>
+    <!-- Title for the initiation of a high priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=50]-->
+    <string name="tare_job_high_start">Job High Start</string>
+    <!-- Title of an event where a job with high priority is running, but it does not necessarily
+     mean the high priority job is running at that moment. In this context, running is a synonym for
+     “ongoing execution of a job with high priority”. [CHAR LIMIT=50]-->
+    <string name="tare_job_high_running">Job High Running</string>
+    <!-- Title for the initiation of a default priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=50]-->
+    <string name="tare_job_default_start">Job Default Start</string>
+    <!-- Title of an event where a job with default priority is running, but it does not necessarily
+     mean the default job is running at that moment. In this context, running is a synonym for
+     “ongoing execution of a job with default priority”. [CHAR LIMIT=50]-->
+    <string name="tare_job_default_running">Job Default Running</string>
+    <!-- Title for the initiation of a low priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=50]-->
+    <string name="tare_job_low_start">Job Low Start</string>
+    <!-- Title of an event where a job with low priority is running, but it does not necessarily
+     mean the low priority job is running at that moment. In this context, running is a synonym for
+     “ongoing execution of a job with low priority”. [CHAR LIMIT=50]-->
+    <string name="tare_job_low_running">Job Low Running</string>
+    <!-- Title for the initiation of a minimum priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=50]-->
+    <string name="tare_job_min_start">Job Min Start</string>
+    <!-- Title of an event where a job with minimum priority is running, but it does not necessarily
+     mean the job is running at that moment. In this context, running is a synonym for
+     “ongoing execution of a job with minimum priority”. [CHAR LIMIT=50]-->
+    <string name="tare_job_min_running">Job Min Running</string>
+    <!-- Title for the penalty an app receives for letting a job use the maximum execution time and
+     time out [CHAR LIMIT=50]-->
+    <string name="tare_job_timeout_penalty">Job Timeout Penalty</string>
+    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
+    device is fully charged. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account.
+    Exempted apps are those apps exempted from most power saving features. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_exempted">Minimum Satiated Balance (Exempted)</string>
+    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
+    device is fully charged. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account.
+    A headless system app is a preinstalled app that does not have any activities/UI that the
+    user can interact with. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_headless_app">Minimum Satiated Balance (Headless System App)</string>
+    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
+    device is fully charged. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account.
+    Remaining apps are those apps that don't fit into predefined categories. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_other_app">Minimum Satiated Balance (Remaining Apps)</string>
+    <!-- Title for the TARE factor that app updaters (for example, an app store) additional
+    credits. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_addition_app_updater">Minimum Satiated Balance Addition (App Updaters)</string>
+    <!-- Titles for the minimum satiated credit balances for different types of apps
+    (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
+    <string-array name="tare_app_balance_subfactors" translatable="false">
+        <item>@string/tare_max_satiated_balance</item>
+        <item>@string/tare_min_balance_exempted</item>
+        <item>@string/tare_min_balance_headless_app</item>
+        <item>@string/tare_min_balance_other_app</item>
+    </string-array>
+    <!-- Titles for the minimum satiated credit balances for different types of apps
+    (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
+    <string-array name="tare_job_scheduler_app_balance_subfactors" translatable="false">
+        <item>@string/tare_max_satiated_balance</item>
+        <item>@string/tare_min_balance_exempted</item>
+        <item>@string/tare_min_balance_headless_app</item>
+        <item>@string/tare_min_balance_other_app</item>
+        <item>@string/tare_min_balance_addition_app_updater</item>
+    </string-array>
+    <!-- Various modifier subfactors that alter the cost of TARE tasks depending on what battery
+    state the device is in [CHAR LIMIT=50]-->
+    <string-array name="tare_modifiers_subfactors">
+        <item>Charging</item>
+        <!-- Doze refers to the Android Doze feature -->
+        <item>Doze</item>
+        <item>Power Save Mode</item>
+        <!-- An app's process state is the internal level of an app's process inside the system -->
+        <item>Process State</item>
+    </string-array>
+    <!-- Various AlarmManager alarms with different costs to produce and price paid by apps
+    if they want to produce these alarms. Alarm in this context refers to the possible alarm cases
+    in AlarmManager. [CHAR LIMIT=50]-->
+    <string-array name="tare_alarm_manager_actions" translatable="false">
+        <item>@string/tare_wakeup_exact_idle</item>
+        <item>@string/tare_wakeup_inexact_idle</item>
+        <item>@string/tare_wakeup_exact</item>
+        <item>@string/tare_wakeup_inexact</item>
+        <item>@string/tare_nonwakeup_exact_idle</item>
+        <item>@string/tare_nonwakeup_exact</item>
+        <item>@string/tare_nonwakeup_inexact_idle</item>
+        <item>@string/tare_nonwakeup_inexact</item>
+        <item>@string/tare_alarm_clock</item>
+    </string-array>
+    <!-- Titles for the different rewards apps could obtain for actions that benefit the user;
+    each has instant, ongoing, and max credit rewards apps could gain [CHAR LIMIT=50]-->
+    <string-array name="tare_rewards_subfactors" translatable="false">
+        <item>@string/tare_top_activity</item>
+        <item>@string/tare_notification_seen</item>
+        <!-- TODO: add back once supported  <item>@string/tare_notification_seen_15_min</item> -->
+        <item>@string/tare_notification_interaction</item>
+        <item>@string/tare_widget_interaction</item>
+        <item>@string/tare_other_interaction</item>
+    </string-array>
+    <!-- Titles for the different rewards apps could obtain for actions that benefit the user;
+    each has instant, ongoing, and max credit rewards apps could gain [CHAR LIMIT=50]-->
+    <string-array name="tare_job_scheduler_rewards_subfactors" translatable="false">
+        <item>@string/tare_top_activity</item>
+        <item>@string/tare_notification_seen</item>
+        <item>@string/tare_notification_interaction</item>
+        <item>@string/tare_widget_interaction</item>
+        <item>@string/tare_other_interaction</item>
+        <item>@string/tare_app_install</item>
+    </string-array>
+    <!-- Various JobScheduler tasks with different costs to produce and willingness to pay by apps
+    if they want to carry out these different tasks [CHAR LIMIT=50]-->
+    <string-array name="tare_job_scheduler_actions" translatable="false">
+        <item>@string/tare_job_max_start</item>
+        <item>@string/tare_job_max_running</item>
+        <item>@string/tare_job_high_start</item>
+        <item>@string/tare_job_high_running</item>
+        <item>@string/tare_job_default_start</item>
+        <item>@string/tare_job_default_running</item>
+        <item>@string/tare_job_low_start</item>
+        <item>@string/tare_job_low_running</item>
+        <item>@string/tare_job_min_start</item>
+        <item>@string/tare_job_min_running</item>
+        <item>@string/tare_job_timeout_penalty</item>
+    </string-array>
+    <!-- Array used to populate dropdown menu with the different policies in the TARE
+    settings [CHAR LIMIT=40]-->
+    <string-array name="tare_policies" translatable="false">
+        <item>@string/tare_alarmmanager</item>
+        <item>@string/tare_jobscheduler</item>
+    </string-array>
+    <!-- TARE dialog button to proceed with a value change [CHAR LIMIT=none] -->
+    <string name="tare_dialog_confirm_button_title">Confirm</string>
+    <!-- Array used to populate dropdown menu to select the units of the factor value. Not
+    translatable since they're base units. [CHAR LIMIT=40]-->
+    <string-array name="tare_units" translatable="false">
+        <item>ARC</item>
+        <item>Cake</item>
+    </string-array>
 
     <!-- Button to preview the selected screensaver in settings [CHAR LIMIT=40] -->
     <string name="dream_preview_button_title">Preview</string>

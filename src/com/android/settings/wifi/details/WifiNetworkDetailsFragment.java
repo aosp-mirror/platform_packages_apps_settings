@@ -400,9 +400,6 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
 
     @VisibleForTesting
     void onHotspotNetworkChanged(WifiNetworkDetailsViewModel.HotspotNetworkData data) {
-        if (mIsUiRestricted) {
-            return;
-        }
         PreferenceScreen screen = getPreferenceScreen();
         if (screen == null) {
             return;

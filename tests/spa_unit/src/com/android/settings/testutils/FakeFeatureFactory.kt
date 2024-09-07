@@ -51,11 +51,14 @@ import com.android.settings.vpn2.AdvancedVpnFeatureProvider
 import com.android.settings.wifi.WifiTrackerLibProvider
 import com.android.settings.wifi.factory.WifiFeatureProvider
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider
-import org.mockito.kotlin.mock
+import org.mockito.Mockito.mock
 
 class FakeFeatureFactory : FeatureFactory() {
 
-    val mockApplicationFeatureProvider = mock<ApplicationFeatureProvider>()
+    private val mockMetricsFeatureProvider: MetricsFeatureProvider =
+        mock(MetricsFeatureProvider::class.java)
+    val mockApplicationFeatureProvider: ApplicationFeatureProvider =
+        mock(ApplicationFeatureProvider::class.java)
 
     init {
         setFactory(appContext, this)
@@ -66,9 +69,10 @@ class FakeFeatureFactory : FeatureFactory() {
     override val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider
         get() = TODO("Not yet implemented")
 
-    override val metricsFeatureProvider = mock<MetricsFeatureProvider>()
+    override val metricsFeatureProvider = mockMetricsFeatureProvider
 
-    override val powerUsageFeatureProvider = mock<PowerUsageFeatureProvider>()
+    override val powerUsageFeatureProvider: PowerUsageFeatureProvider
+        get() = TODO("Not yet implemented")
 
     override val batteryStatusFeatureProvider: BatteryStatusFeatureProvider
         get() = TODO("Not yet implemented")
