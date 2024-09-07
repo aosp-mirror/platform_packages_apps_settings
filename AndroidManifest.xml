@@ -3227,6 +3227,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".bluetooth.BluetoothKeyMissingDialog"
+                  android:permission="android.permission.BLUETOOTH_PRIVILEGED"
+                  android:excludeFromRecents="true"
+                  android:windowSoftInputMode="stateVisible|adjustResize"
+                  android:theme="@style/Theme.AlertDialog"
+                  android:exported="false"
+                  android:taskAffinity=".bluetooth.BluetoothKeyMissingDialog">
+            <intent-filter android:priority="1">
+                <action android:name="android.bluetooth.device.action.KEY_MISSING" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".bluetooth.RequestPermissionActivity"
                   android:excludeFromRecents="true"
                   android:permission="android.permission.BLUETOOTH_CONNECT"
@@ -3278,6 +3291,13 @@
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <action android:name="android.bluetooth.action.CSIS_SET_MEMBER_AVAILABLE"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".bluetooth.BluetoothKeyMissingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.KEY_MISSING" />
             </intent-filter>
         </receiver>
 
