@@ -740,6 +740,7 @@
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
             android:exported="true"
+            android:enableOnBackInvokedCallback="false"
             android:theme="@style/Theme.Settings.NoActionBar"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
@@ -755,6 +756,7 @@
         <activity android:name="Settings$FaceSettingsInternalActivity"
                   android:label="@string/security_settings_face_preference_title"
                   android:exported="false"
+                  android:enableOnBackInvokedCallback="false"
                   android:theme="@style/Theme.Settings.NoActionBar"
                   android:icon="@drawable/ic_face_header"
                   android:taskAffinity="com.android.settings.root">
@@ -767,6 +769,7 @@
         <activity android:name="Settings$FingerprintSettingsActivity"
                   android:label="@string/security_settings_fingerprint_preference_title"
                   android:exported="true"
+                  android:enableOnBackInvokedCallback="false"
                   android:icon="@drawable/ic_fingerprint_header">
             <intent-filter>
                 <action android:name="android.settings.FINGERPRINT_SETTINGS" />
@@ -781,6 +784,7 @@
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
                   android:exported="false"
+                  android:enableOnBackInvokedCallback="false"
                   android:taskAffinity="com.android.settings.root">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
@@ -1321,7 +1325,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.modes.ZenModesListFragment"/>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
+                       android:value="@string/menu_key_priority_modes" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -2270,13 +2274,6 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.privacy.PrivacyControlsFragment" />
         </activity>
-
-        <activity android:name=".development.tare.TareHomePage"
-                  android:label="@string/tare_settings"
-                  android:exported="false" />
-
-        <activity android:name=".development.tare.DropdownActivity"
-                  android:exported="false" />
 
         <activity android:name="SetFullBackupPassword"
                   android:label="@string/local_backup_password_title"
@@ -3230,6 +3227,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".bluetooth.BluetoothKeyMissingDialog"
+                  android:permission="android.permission.BLUETOOTH_PRIVILEGED"
+                  android:excludeFromRecents="true"
+                  android:windowSoftInputMode="stateVisible|adjustResize"
+                  android:theme="@style/Theme.AlertDialog"
+                  android:exported="false"
+                  android:taskAffinity=".bluetooth.BluetoothKeyMissingDialog">
+            <intent-filter android:priority="1">
+                <action android:name="android.bluetooth.device.action.KEY_MISSING" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".bluetooth.RequestPermissionActivity"
                   android:excludeFromRecents="true"
                   android:permission="android.permission.BLUETOOTH_CONNECT"
@@ -3281,6 +3291,13 @@
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <action android:name="android.bluetooth.action.CSIS_SET_MEMBER_AVAILABLE"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".bluetooth.BluetoothKeyMissingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.KEY_MISSING" />
             </intent-filter>
         </receiver>
 

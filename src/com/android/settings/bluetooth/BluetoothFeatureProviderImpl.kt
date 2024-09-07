@@ -54,7 +54,7 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
         return null
     }
 
-    override fun getSpatializer(context: Context): Spatializer? {
+    override fun getSpatializer(context: Context): Spatializer {
         val audioManager = context.getSystemService(AudioManager::class.java)
         return audioManager.spatializer
     }
@@ -89,7 +89,7 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
             context, audioManager,
             SpatializerInteractor(
                 SpatializerRepositoryImpl(
-                    audioManager.spatializer,
+                    getSpatializer(context),
                     Dispatchers.IO
                 )
             ), scope, Dispatchers.IO)
@@ -101,6 +101,12 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
         bluetoothAdapter: BluetoothAdapter,
         cachedDevice: CachedBluetoothDevice
     ): DeviceDetailsFragmentFormatter {
-        return DeviceDetailsFragmentFormatterImpl(context, fragment, bluetoothAdapter, cachedDevice)
+        return DeviceDetailsFragmentFormatterImpl(
+            context,
+            fragment,
+            bluetoothAdapter,
+            cachedDevice,
+            Dispatchers.IO
+        )
     }
 }

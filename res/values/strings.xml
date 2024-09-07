@@ -937,7 +937,7 @@
     <!-- Message showing that multiple fingerprints, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80]-->
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary">Face, fingerprints, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
     <!-- Description for mandatory biometrics prompt-->
-    <string name="mandatory_biometrics_prompt_description">Identity Check is on</string>
+    <string name="mandatory_biometrics_prompt_description">Identity Check is on and requires a biometric</string>
     <!-- RemoteAuth unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
     <string name ="security_settings_remoteauth_preference_title">Remote Authenticator Unlock</string>
@@ -1860,6 +1860,15 @@
     <!-- Bluetooth settings. Link text to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
     <string name="bluetooth_scan_change">Change</string>
 
+    <!-- Dialog title when key is missing in a Bluetooth device -->
+    <string name="bluetooth_key_missing_title"><xliff:g id="device_name">%1$s</xliff:g> not connected</string>
+    <!-- Dialog content when key is missing in a Bluetooth device -->
+    <string name="bluetooth_key_missing_message">For your security, forget this device, then pair it again</string>
+    <!-- Button text to forget device when bluetooth key is missing -->
+    <string name="bluetooth_key_missing_forget">Forget device</string>
+    <!-- Button text to cancel when bluetooth key is missing-->
+    <string name="bluetooth_key_missing_cancel">Cancel</string>
+
     <!-- Title of device details screen [CHAR LIMIT=28]-->
     <string name="device_details_title">Device details</string>
     <!-- Title for keyboard settings preferences. [CHAR LIMIT=50] -->
@@ -1868,6 +1877,8 @@
     <string name="bluetooth_device_more_settings_preference_title">More settings</string>
     <!-- Title for more settings summary. [CHAR LIMIT=50] -->
     <string name="bluetooth_device_more_settings_preference_summary">Firmware updates, about, and more</string>
+    <!-- Title for bluetooth device tips and support. [CHAR LIMIT=50] -->
+    <string name="bluetooth_device_tip_support">Tips &amp; support</string>
     <!-- Title of the item to show device MAC address -->
     <string name="bluetooth_device_mac_address">Device\'s Bluetooth address: <xliff:g id="address">%1$s</xliff:g></string>
     <!-- Title of the items to show multuple devices MAC address [CHAR LIMIT=NONE]-->
@@ -2159,7 +2170,7 @@
     <string name="wifi_signal">Signal strength</string>
     <!-- Label for the status of the connection -->
     <string name="wifi_status">Status</string>
-    <!-- Label for the transmit link speed of the connection. [CHAR LIMIT=32] -->
+    <!-- Label for the transmit link speed of the connection. [CHAR LIMIT=40] -->
     <string name="tx_wifi_speed">Transmit link speed</string>
     <!-- Label for the receive link speed of the connection. [CHAR LIMIT=32] -->
     <string name="rx_wifi_speed">Receive link speed</string>
@@ -4614,6 +4625,11 @@
     <!-- Summary for the modifier key picker dialog page [CHAR LIMIT=35] -->
     <string name="modifier_keys_picker_summary">Choose a new key for <xliff:g id="modifier_key_default_name">%1$s</xliff:g>:</string>
 
+    <!-- Title for the button to trigger the 'Physical keyboard accessibility' page. [CHAR LIMIT=60] -->
+    <string name="keyboard_a11y_settings">Physical keyboard accessibility</string>
+    <!-- Summary for the button to trigger the 'Physical keyboard accessibility' page. [CHAR LIMIT=NONE] -->
+    <string name="keyboard_a11y_settings_summary">Sticky keys, Bounce keys, Mouse keys</string>
+
     <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
     <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
@@ -5117,11 +5133,11 @@
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_gesture_navigation_warning">The accessibility gesture is set to the <xliff:g id="service" example="Select to Speak">%1$s</xliff:g>. To use magnification, swipe up with two fingers from the bottom of the screen and hold. Then select magnification.</string>
     <!-- Title for the preference to configure the accessibility shortcut, which uses the volume keys. [CHAR LIMIT=35] -->
-    <string name="accessibility_global_gesture_preference_title">Volume key shortcut</string>
+    <string name="accessibility_global_gesture_preference_title">Volume keys shortcut</string>
     <!-- Label for shortcut settings button. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_settings">Shortcut settings</string>
-    <!-- Title for the switch preference that controls whether or not the accessibility shortcut works on the lock screen. [CHAR LIMIT=50] -->
-    <string name="accessibility_shortcut_service_on_lock_screen_title">Shortcut from lock screen</string>
+    <!-- Title for the switch preference that controls whether or not the accessibility volume keys shortcut works on the lock screen. [CHAR LIMIT=50] -->
+    <string name="accessibility_shortcut_service_on_lock_screen_title">Volume keys shortcut from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds.</string>
     <!-- Title for the accessibility button page. [CHAR LIMIT=35] -->
@@ -7977,7 +7993,7 @@
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
     <!-- Zen Modes: Title for the Modes option and associated settings page. [CHAR LIMIT=50]-->
-    <string name="zen_modes_list_title">Priority Modes</string>
+    <string name="zen_modes_list_title">Modes</string>
 
     <!-- Zen Modes: Intro text describing the feature. [CHAR LIMIT=NONE]-->
     <string name="zen_modes_list_intro">Minimize distractions and take control of your attention with modes for sleep, work, driving, and everything in between.</string>
@@ -7991,18 +8007,18 @@
     <!-- Zen Modes: Option to add an automatic schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule">Set a schedule</string>
 
-    <!-- Priority Modes: Title of the dialog used to choose an automatic schedule for a mode. [CHAR_LIMIT=40] -->
+    <!-- Modes: Title of the dialog used to choose an automatic schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_title">Schedule based on</string>
 
-    <!-- Priority Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <!-- Modes: Option to choose a time-based schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_time">Day and time</string>
-    <!-- Priority Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
+    <!-- Modes: Example text for the option to choose a time-based schedule for a mode. [CHAR_LIMIT=60] -->
     <string name="zen_mode_select_schedule_time_example">\"9 AM - 5 PM weekdays\"</string>
 
-    <!-- Priority Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
+    <!-- Modes: Option to choose a calendar-events-based schedule for a mode. [CHAR_LIMIT=40] -->
     <string name="zen_mode_select_schedule_calendar">Calendar events</string>
 
-    <!-- Priority Modes: Summary for the modes segment, when at least one mode is active. [CHAR LIMIT=NONE]-->
+    <!-- Modes: Summary for the modes segment, when at least one mode is active. [CHAR LIMIT=NONE]-->
     <string name="zen_modes_summary_some_active">
         {count, plural, offset:2
             =0    {}
@@ -8013,7 +8029,7 @@
         }
     </string>
 
-    <!-- Priority Modes: Summary for the modes segment, when no modes are active. [CHAR LIMIT=NONE]-->
+    <!-- Modes: Summary for the modes segment, when no modes are active. [CHAR LIMIT=NONE]-->
     <string name="zen_modes_summary_none_active">
         {count, plural,
             =0    {}
@@ -8022,40 +8038,40 @@
         }
     </string>
 
-    <!-- Priority Modes: Short text that indicates that a mode is currently on (active). [CHAR_LIMIT=10] -->
+    <!-- Modes: Short text that indicates that a mode is currently on (active). [CHAR_LIMIT=10] -->
     <string name="zen_mode_active_text">ON</string>
 
-    <!-- Priority Modes: Format string for the "current state + trigger description summary for rules in the list. [CHAR_LIMIT=10] -->
+    <!-- Modes: Format string for the "current state + trigger description summary for rules in the list. [CHAR_LIMIT=10] -->
     <string name="zen_mode_format_status_and_trigger" translatable="false"><xliff:g id="current_status" example="ON">%1$s</xliff:g> • <xliff:g id="trigger_description" example="Mon-Fri, 23:00-7:00">%2$s</xliff:g></string>
 
-    <!-- Priority Modes: Indicates that a mode is disabled and needs to be configured. [CHAR_LIMIT=40] -->
+    <!-- Modes: Indicates that a mode is disabled and needs to be configured. [CHAR_LIMIT=40] -->
     <string name="zen_mode_disabled_needs_setup">Not set</string>
 
-    <!-- Priority Modes: Indicates that a mode is disabled by the user. [CHAR_LIMIT=40] -->
+    <!-- Modes: Indicates that a mode is disabled by the user. [CHAR_LIMIT=40] -->
     <string name="zen_mode_disabled_by_user">Disabled</string>
 
-    <!-- Priority Modes: Title of the "Create a mode" dialog, to choose the mode type. [CHAR_LIMIT=30] -->
+    <!-- Modes: Title of the "Create a mode" dialog, to choose the mode type. [CHAR_LIMIT=30] -->
     <string name="zen_mode_new_title">Create a mode</string>
 
-    <!-- Priority Modes: Option to add a "custom" mode in the "Add a mode" dialog. [CHAR_LIMIT=20] -->
+    <!-- Modes: Option to add a "custom" mode in the "Add a mode" dialog. [CHAR_LIMIT=20] -->
     <string name="zen_mode_new_option_custom">Custom</string>
 
-    <!-- Priority Modes: Caption of the button to turn on a mode [CHAR LIMIT=20] -->
+    <!-- Modes: Caption of the button to turn on a mode [CHAR LIMIT=20] -->
     <string name="zen_mode_action_activate">Turn on now</string>
 
-    <!-- Priority Modes: Caption of the button to turn off a currently active mode [CHAR LIMIT=20] -->
+    <!-- Modes: Caption of the button to turn off a currently active mode [CHAR LIMIT=20] -->
     <string name="zen_mode_action_deactivate">Turn off</string>
 
-    <!-- Priority Modes: Text to display if a mode isn't found [CHAR LIMIT=40] -->
+    <!-- Modes: Text to display if a mode isn't found [CHAR LIMIT=40] -->
     <string name="zen_mode_not_found_text">Mode not found</string>
 
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
 
-    <!-- Priority Modes: Summary on a page prompting the user to set up/enable a mode [CHAR_LIMIT=NONE] -->
+    <!-- Modes: Summary on a page prompting the user to set up/enable a mode [CHAR_LIMIT=NONE] -->
     <string name="zen_mode_setup_page_summary">Block interruptions and distractions</string>
 
-    <!-- Priority Modes: Label on a button prompting the user to set up the mode with the given name. [CHAR_LIMIT=40] -->
+    <!-- Modes: Label on a button prompting the user to set up the mode with the given name. [CHAR_LIMIT=40] -->
     <string name="zen_mode_setup_button_label">Set up <xliff:g id="mode" example="My Mode">%1$s</xliff:g></string>
 
     <!-- Do not disturb: Title for the Do not Disturb dialog to turn on Do not disturb. [CHAR LIMIT=50]-->
@@ -8073,7 +8089,7 @@
     <!-- Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_delete">Delete</string>
 
-    <!-- Priority Modes: Menu option for renaming a mode on its configuration page [CHAR LIMIT=40] -->
+    <!-- Modes: Menu option for renaming a mode on its configuration page [CHAR LIMIT=40] -->
     <string name="zen_mode_menu_rename_mode">Rename</string>
 
     <!-- Do not disturb: Menu option for deleting a mode on its configuration page [CHAR LIMIT=40] -->
@@ -8094,11 +8110,11 @@
     <!-- Do not disturb: Title for settings section describing when the rule turns on automatically [CHAR LIMIT=30] -->
     <string name="zen_mode_automatic_trigger_title">When to turn on automatically</string>
 
-    <!-- Priority Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <!-- Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
     <string name="zen_mode_set_calendar_title">Event schedule</string>
-    <!-- Priority Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <!-- Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
     <string name="zen_mode_set_calendar_which_calendar">Turn on during events for</string>
-    <!-- Priority Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
+    <!-- Modes: Title prompting a user to choose a calendar to use for an automatic rule [CHAR LIMIT=30] -->
     <string name="zen_mode_set_calendar_which_reply">Where invite reply is</string>
 
     <!-- Do not disturb: Title prompting a user to set a time-based schedule to use for an automatic rule [CHAR LIMIT=30] -->
@@ -8137,9 +8153,9 @@
     <!--  Do not disturb: Subtitle for the Visual signals option to toggle on/off visual signals/alerts when the screen is on/when screen is off. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
-    <!-- Priority Modes: mode page section title [CHAR LIMIT=80] -->
+    <!-- Modes: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_interruption_filter_title">Notification filters</string>
-    <!-- Priority Modes: mode page section title [CHAR LIMIT=80] -->
+    <!-- Modes: mode page section title [CHAR LIMIT=80] -->
     <string name="mode_device_effects_title">More settings</string>
 
     <!-- Summary for the Sound Do not Disturb option when DND isn't currently on. [CHAR LIMIT=NONE]-->
@@ -8857,12 +8873,12 @@
     <string name="nls_feature_reply_summary">It can reply to messages and take action on buttons in notifications, including snoozing or dismissing notifications and answering calls.</string>
     <string name="nls_feature_settings_title">Change settings</string>
     <string name="nls_feature_settings_summary">It can turn Do Not Disturb on or off and change related settings.</string>
-    <string name="nls_feature_modes_settings_summary">It can manage and activate Priority Modes, and change related settings.</string>
+    <string name="nls_feature_modes_settings_summary">It can manage and activate Modes, and change related settings.</string>
     <string name="notification_listener_disable_warning_summary">
         If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Do Not Disturb access may also be turned off.
     </string>
     <string name="notification_listener_disable_modes_warning_summary">
-        If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Priority Modes access may also be turned off.
+        If you turn off notification access for <xliff:g id="notification_listener_name">%1$s</xliff:g>, Modes access may also be turned off.
     </string>
     <string name="notification_listener_disable_warning_confirm">Turn off</string>
     <string name="notification_listener_disable_warning_cancel">Cancel</string>
@@ -9040,14 +9056,14 @@
     <!-- Sound & notification > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
     <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb access</string>
 
-    <!-- Special App Access: Title for managing Priority Modes access option. [CHAR LIMIT=40] -->
-    <string name="manage_zen_modes_access_title">Priority Modes access</string>
+    <!-- Special App Access: Title for managing Modes access option. [CHAR LIMIT=40] -->
+    <string name="manage_zen_modes_access_title">Modes access</string>
 
-    <!-- Button title that grants 'Priority Modes' permission to an app [CHAR_LIMIT=60]-->
-    <string name="zen_modes_access_detail_switch">Allow Priority Modes access</string>
+    <!-- Button title that grants 'Modes' permission to an app [CHAR_LIMIT=60]-->
+    <string name="zen_modes_access_detail_switch">Allow Modes access</string>
 
     <!-- Special App Access > Do Not Disturb access > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
-    <string name="zen_modes_access_empty_text">No installed apps have requested Priority Modes access</string>
+    <string name="zen_modes_access_empty_text">No installed apps have requested Modes access</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
     <string name="app_notifications_off_desc">You haven\'t allowed notifications from this app</string>
@@ -9390,11 +9406,11 @@
             other {{app_1}, {app_2}, and # more can interrupt}
         }
     </string>
-    <!-- Priority Modes: Entry in the "apps that can bypass DND" list that corresponds to a work profile app (e.g. "Chrome (Work)" [CHAR LIMIT=15]. -->
+    <!-- Modes: Entry in the "apps that can bypass DND" list that corresponds to a work profile app (e.g. "Chrome (Work)" [CHAR LIMIT=15]. -->
     <string name="zen_mode_apps_work_app"><xliff:g id="app_label" example="Chrome">%s</xliff:g> (Work)</string>
     <!-- Text displayed (for a brief time) while the list of bypassing apps is being fetched. Will be replaced by a zen_mode_apps_subtext. [CHAR_LIMIT=60] -->
     <string name="zen_mode_apps_calculating">Calculating\u2026</string>
-    <!-- Priority Modes: Format for a string displayed when there are more items (e.g. apps, contacts) that can be shown. For example, we show (A)(B)(C)(+5), where this string represents the "+5" value. Needs to be as compact as possible, since it will be drawn in a really small area. [CHAR_LIMIT=4] -->
+    <!-- Modes: Format for a string displayed when there are more items (e.g. apps, contacts) that can be shown. For example, we show (A)(B)(C)(+5), where this string represents the "+5" value. Needs to be as compact as possible, since it will be drawn in a really small area. [CHAR_LIMIT=4] -->
     <string name="zen_mode_plus_n_items">+<xliff:g id="number" example="42">%d</xliff:g></string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
@@ -9499,76 +9515,76 @@
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
     <string name="zen_mode_summary_always">Change to always interrupt</string>
 
-    <!-- Priority Modes: Title for the "rename mode" screen [CHAR LIMIT=20] -->
+    <!-- Modes: Title for the "rename mode" screen [CHAR LIMIT=20] -->
     <string name="zen_mode_rename_title">Edit mode</string>
 
-    <!-- Priority Modes: Title for the "add mode" screen [CHAR LIMIT=20] -->
+    <!-- Modes: Title for the "add mode" screen [CHAR LIMIT=20] -->
     <string name="zen_mode_new_custom_title">Create a mode</string>
 
-    <!-- Priority Modes: Default name for new custom modes [CHAR LIMIT=30] -->
+    <!-- Modes: Default name for new custom modes [CHAR LIMIT=30] -->
     <string name="zen_mode_new_custom_default_name">Custom mode</string>
 
-    <!-- Priority Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
+    <!-- Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
     <string name="zen_mode_edit_name_hint">Mode name</string>
 
-    <!-- Priority Modes: Trigger title for modes of type SCHEDULE_CALENDAR. [CHAR LIMIT=30] -->
+    <!-- Modes: Trigger title for modes of type SCHEDULE_CALENDAR. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_schedule_calendar">Calendar events</string>
-    <!-- Priority Modes: Trigger title for modes of type BEDTIME. [CHAR LIMIT=30] -->
+    <!-- Modes: Trigger title for modes of type BEDTIME. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_bedtime">Bedtime routine</string>
-    <!-- Priority Modes: Trigger title for modes of type DRIVING. [CHAR LIMIT=30] -->
+    <!-- Modes: Trigger title for modes of type DRIVING. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_driving">While driving</string>
-    <!-- Priority Modes: Generic trigger title for modes of other types [CHAR LIMIT=30] -->
+    <!-- Modes: Generic trigger title for modes of other types [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_generic">App settings</string>
-    <!-- Priority Modes: Generic trigger summary for modes where the owner app did not provide a triggerDescription but did provide a configurationActivity to call [CHAR LIMIT=60] -->
+    <!-- Modes: Generic trigger summary for modes where the owner app did not provide a triggerDescription but did provide a configurationActivity to call [CHAR LIMIT=60] -->
     <string name="zen_mode_trigger_summary_settings_in_app">Info and settings in <xliff:g id="app_name" example="The Awesome App">%1$s</xliff:g></string>
-    <!-- Priority Modes: Generic trigger summary for modes where the owner app did not provide neither a triggerDescription nor a configurationActivity to call [CHAR LIMIT=60] -->
+    <!-- Modes: Generic trigger summary for modes where the owner app did not provide neither a triggerDescription nor a configurationActivity to call [CHAR LIMIT=60] -->
     <string name="zen_mode_trigger_summary_managed_by_app">Managed by <xliff:g id="app_name" example="The Awesome App">%1$s</xliff:g></string>
 
-    <!-- Priority Modes: Title of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=20] -->
+    <!-- Modes: Title of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=20] -->
     <string name="zen_mode_confirm_disable_mode_title">Disable <xliff:g id="mode_name" example="Driving Mode">%1$s</xliff:g>?</string>
-    <!-- Priority Modes: Message body of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=NONE] -->
+    <!-- Modes: Message body of the confirmation dialog for disabling an enabled mode [CHAR LIMIT=NONE] -->
     <string name="zen_mode_confirm_disable_message">This mode will never turn on when disabled</string>
-    <!-- Priority Modes: Button to disable a mode [CHAR LIMIT=20] -->
+    <!-- Modes: Button to disable a mode [CHAR LIMIT=20] -->
     <string name="zen_mode_action_disable">Disable</string>
-    <!-- Priority Modes: Title of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=20] -->
+    <!-- Modes: Title of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=20] -->
     <string name="zen_mode_confirm_enable_mode_title">Enable <xliff:g id="mode_name" example="Driving Mode">%1$s</xliff:g>?</string>
-    <!-- Priority Modes: Message body of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=NONE] -->
+    <!-- Modes: Message body of the confirmation dialog for enabling a disabled mode [CHAR LIMIT=NONE] -->
     <string name="zen_mode_confirm_enable_message">This mode may turn on automatically based on its settings</string>
-    <!-- Priority Modes: Button to disable a mode [CHAR LIMIT=20] -->
+    <!-- Modes: Button to disable a mode [CHAR LIMIT=20] -->
     <string name="zen_mode_action_enable">Enable</string>
 
-    <!-- Priority Modes: Blurb for a mode that activates during a fixed time schedule (e.g. 9:00-17:00). [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode that activates during a fixed time schedule (e.g. 9:00-17:00). [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_schedule_time">Set a mode that follows a regular schedule</string>
-    <!-- Priority Modes: Blurb for a mode that activates during calendar events. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode that activates during calendar events. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_schedule_calendar">Set a mode to sync with calendar events and invite responses</string>
-    <!-- Priority Modes: Blurb for a mode of type BEDTIME. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode of type BEDTIME. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_bedtime">Design a calming sleep routine. Set alarms, dim the screen, and block notifications.</string>
-    <!-- Priority Modes: Blurb for a mode of type DRIVING. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode of type DRIVING. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_driving">Prioritize safety on the road for a focused and distraction-free drive</string>
-    <!-- Priority Modes: Blurb for a mode of type IMMERSIVE. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode of type IMMERSIVE. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_immersive">Block distractions or interruptions from your device to gain focus</string>
-    <!-- Priority Modes: Blurb for a mode of type THEATER. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode of type THEATER. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_theater">Eliminate all distractions for a quiet environment</string>
-    <!-- Priority Modes: Blurb for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_managed">Personalize device experiences and settings for different users</string>
-    <!-- Priority Modes: Blurb for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
+    <!-- Modes: Blurb for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
     <string name="zen_mode_blurb_generic">Minimize interruptions by only allowing important people and apps to reach you</string>
 
-    <!-- Priority Modes: Inspirational text for a mode that activates during a fixed time schedule (e.g. 9:00-17:00). [CHAR LIMIT=NONE] -->
+    <!-- Modes: Inspirational text for a mode that activates during a fixed time schedule (e.g. 9:00-17:00). [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_schedule_time">Set a mode that follows a regular schedule</string>
-    <!-- Priority Modes: Inspirational text for a mode that activates during calendar events. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Inspirational text for a mode that activates during calendar events. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_schedule_calendar">Keep your device in sync with your day’s events</string>
-    <!-- Priority Modes: Inspirational text for a mode of type BEDTIME. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Inspirational text for a mode of type BEDTIME. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_bedtime">Wake up feeling like 100%</string>
-    <!-- Priority Modes: Inspirational text for a mode of type DRIVING. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Inspirational text for a mode of type DRIVING. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_driving">Put safety first while on the road</string>
-    <!-- Priority Modes: Inspirational text for a mode of type IMMERSIVE. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Inspirational text for a mode of type IMMERSIVE. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_immersive">Gain focus to get in the zone</string>
-    <!-- Priority Modes: Inspirational text for a mode of type THEATER. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Inspirational text for a mode of type THEATER. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_theater">For moments when courtesy counts</string>
-    <!-- Priority Modes: Inspirational text for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
+    <!-- Modes: Inspirational text for a mode of type MANAGED. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_managed">Guided usage to help you stay in good hands</string>
-    <!-- Priority Modes: Inspirational text for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
+    <!-- Modes: Inspirational text for modes that are not of a specific type (OTHER, UNKNOWN). [CHAR LIMIT=NONE] -->
     <string name="zen_mode_inspiration_generic">Take control of your attention</string>
 
     <!-- Content description for help icon button [CHAR LIMIT=20] -->
@@ -10170,16 +10186,16 @@
     <!-- Zen mode access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
     <string name="zen_access_revoke_warning_dialog_summary">All Do Not Disturb rules created by this app will be removed.</string>
 
-    <!-- Priority modes access settings - title for warning dialog when enabling access [CHAR LIMIT=NONE] -->
-    <string name="zen_modes_access_warning_dialog_title">Allow access to Priority Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+    <!-- Modes access settings - title for warning dialog when enabling access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_warning_dialog_title">Allow access to Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
 
-    <!-- Priority modes access settings - summary for warning dialog when enabling access [CHAR LIMIT=NONE] -->
-    <string name="zen_modes_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb, manage and activate Priority Modes, and make changes to related settings.</string>
+    <!-- Modes access settings - summary for warning dialog when enabling access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb, manage and activate Modes, and make changes to related settings.</string>
 
-    <!-- Priority modes access settings - title for warning dialog when revoking access [CHAR LIMIT=NONE] -->
-    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access Priority Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+    <!-- Modes access settings - title for warning dialog when revoking access [CHAR LIMIT=NONE] -->
+    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access to Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
 
-    <!-- Priority modes access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
+    <!-- Modes access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
     <string name="zen_modes_access_revoke_warning_dialog_summary">All modes created by this app will be removed.</string>
 
     <!-- Ignore battery optimizations on label [CHAR LIMIT=30] -->
@@ -13015,271 +13031,6 @@
     <!-- Strings for Dialog connect button -->
     <string name="bluetooth_connect_access_dialog_positive">Connect</string>
 
-    <!-- Title for the button to edit The Android Resource Economy settings. "TARE" is the name of
-    the feature that contains the AlarmManager and JobScheduler policies which are both android
-    APIs. AlarmManager and JobScheduler are the names of Android system services and cannot be
-    translated. "TARE" is not translatable. [CHAR LIMIT=NONE] -->
-    <string name="tare_title" translatable="false">TARE</string>
-    <!-- TARE settings title in developer options; "TARE" is the name of the feature and cannot be
-     translated. [CHAR LIMIT=40] -->
-    <string name="tare_settings">TARE Settings</string>
-    <!-- Summary for the TARE feature being on (ie. enabled) [CHAR LIMIT=NONE] -->
-    <string name="tare_on">On</string>
-    <!-- Summary for the TARE feature being off (ie. disabled) [CHAR LIMIT=NONE] -->
-    <string name="tare_off">Off</string>
-    <!-- Allows user to revert the TARE settings to their default values [CHAR LIMIT=40] -->
-    <string name="tare_revert">Revert to Default Settings</string>
-    <!-- Allows user to view AlarmManager policy factors. Alarm in this context is referring to the
-    possible alarm cases in the AlarmManager policy. AlarmManager is the name of an Android system
-    service and cannot be translated. [CHAR LIMIT=40]-->
-    <string name="tare_alarmmanager" translatable="false">AlarmManager</string>
-    <!-- Allows user to view JobScheduler policy factors. JobScheduler is the name of an Android
-    system service and cannot be translated.[CHAR LIMIT=40]-->
-    <string name="tare_jobscheduler" translatable="false">JobScheduler</string>
-    <!-- Toast notifying the developer that settings were reverted to their default values in
-    TARE [CHAR LIMIT=40]-->
-    <string name="tare_settings_reverted_toast">Settings reverted to default.</string>
-    <!-- Title for the TARE policy factor that determines the maximum credits an app can have in one
-    battery life cycle. Satiated means battery is fully charged; If this is not easily translatable,
-    translate "maximum balance when device is fully charged" instead. Balance is the same meaning as
-    having money in a bank account. Balance in our feature is the amount of Android Resource Credits
-    an app can have. Android Resource Credits are a form of payment used by apps to be able to
-    perform tasks. [CHAR LIMIT=80]-->
-    <string name="tare_max_satiated_balance">Maximum Satiated Balance</string>
-    <!-- Title for the TARE policy factors that affect how many credits an app may have. Balance
-    in this context is the same as "bank balance" or "account balance" (ie. how much "money" may be
-    in a bank account). [CHAR LIMIT=55]-->
-    <string name="tare_balances">Balances</string>
-    <!-- Title for the TARE section to modify consumption limits. "Consumption" refers to the idea
-     using resources that are not replenished. [CHAR LIMIT=55]-->
-    <string name="tare_consumption_limits">Consumption Limits</string>
-    <!-- Title for the TARE policy factor that determines the initial maximum amount of credits that
-    can be consumed by all the apps [CHAR LIMIT=80]-->
-    <string name="tare_initial_consumption_limit">Initial Consumption Limit</string>
-    <!-- Title for the TARE policy factor that determines the minimum consumption limit the system
-     can have [CHAR LIMIT=80]-->
-    <string name="tare_min_consumption_limit">Minimum Consumption Limit</string>
-    <!-- Title for the TARE policy factor that determines the maximum consumption limit the system
-     can have [CHAR LIMIT=80]-->
-    <string name="tare_max_consumption_limit">Maximum Consumption Limit</string>
-    <!-- Titles for the consumption limits factors. [CHAR LIMIT=40]-->
-    <string-array name="tare_consumption_limit_subfactors" translatable="false">
-        <item>@string/tare_initial_consumption_limit</item>
-        <item>@string/tare_min_consumption_limit</item>
-        <item>@string/tare_max_consumption_limit</item>
-    </string-array>
-    <!-- Title for the various modifiers that alter the cost of TARE tasks based on battery status
-    (charging, power save mode, etc.) [CHAR LIMIT=40]-->
-    <string name="tare_modifiers">Modifiers</string>
-    <!-- Title for the various TARE policy's actions' cost to produce. "Cost to produce" refers to
-     how many credits it costs the system to perform (produce) the action. [CHAR LIMIT=40]-->
-    <string name="tare_actions_ctp">Actions (Cost to Produce)</string>
-    <!-- Title for the various TARE policy's actions' starting prices [CHAR LIMIT=40]-->
-    <string name="tare_actions_base_price">Actions (Base Price)</string>
-    <!-- Title for the rewards apps can obtain for each instance of an event that implies the user
-    finds the app behavior useful. [CHAR LIMIT=40]-->
-    <string name="tare_rewards_instantaneous">Rewards per single event</string>
-    <!-- Title for the rewards apps can obtain for the total duration (in seconds) of an event that
-    implies the user finds the app behavior useful. [CHAR LIMIT=40]-->
-    <string name="tare_rewards_ongoing">Rewards per second of event duration</string>
-    <!-- Title for the max rewards apps can obtain within a 24 hour period for different actions
-    that benefit the user. [CHAR LIMIT=40]-->
-    <string name="tare_rewards_max">Maximum Rewards Per Day</string>
-    <!-- Title for the Allow While Idle Exact Wakeup Alarm set via
-    AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=50]-->
-    <string name="tare_wakeup_exact_idle" translatable="false">
-        Allow While Idle Exact Wakeup Alarm</string>
-    <!-- Title for the Allow While Idle Inexact Wakeup Alarm set via
-    AlarmManager.setAndAllowWhileIdle() [CHAR LIMIT=50]-->
-    <string name="tare_wakeup_inexact_idle" translatable="false">
-        Allow While Idle Inexact Wakeup Alarm</string>
-    <!-- Title for the Exact Wakeup Alarm set via AlarmManager.setExact() [CHAR LIMIT=50]-->
-    <string name="tare_wakeup_exact" translatable="false">Exact Wakeup Alarm</string>
-    <!-- Title for the Inexact Wakeup Alarm set via AlarmManager.set() [CHAR LIMIT=50]-->
-    <string name="tare_wakeup_inexact" translatable="false">Inexact Wakeup Alarm</string>
-    <!-- Title for the Allow While Idle Exact NonWakeup Alarm set via
-    AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=50]-->
-    <string name="tare_nonwakeup_exact_idle" translatable="false">
-        Allow While Idle Exact NonWakeup Alarm</string>
-    <!-- Title for the Exact NonWakeup Alarm set via AlarmManager.setExact() [CHAR LIMIT=50]-->
-    <string name="tare_nonwakeup_exact" translatable="false">Exact NonWakeup Alarm</string>
-    <!-- Title for the Allow While Idle Inexact NonWakeup Alarm set via
-    AlarmManager.setAndAllowWhileIdle() [CHAR LIMIT=50]-->
-    <string name="tare_nonwakeup_inexact_idle" translatable="false">
-        Allow While Idle Inexact NonWakeup Alarm</string>
-    <!-- Title for the Inexact NonWakeup Alarm set via AlarmManager.set() [CHAR LIMIT=50]-->
-    <string name="tare_nonwakeup_inexact" translatable="false">Inexact NonWakeup Alarm</string>
-    <!-- Title for the AlarmClock alarm set via AlarmManager.setAlarmClock() [CHAR LIMIT=50]-->
-    <string name="tare_alarm_clock" translatable="false">AlarmClock</string>
-    <!-- The action of installing an application onto the device [CHAR LIMIT=50]-->
-    <string name="tare_app_install">App Install</string>
-    <!-- Top activity means an app is in the TOP android process state and is thus visible to the
-    user[CHAR LIMIT=50]-->
-    <string name="tare_top_activity">Top Activity</string>
-    <!-- An event type denoting that a notification was viewed by the user, as defined in
-    UsageEvents.java [CHAR LIMIT=50]-->
-    <string name="tare_notification_seen">Notification Seen</string>
-    <!-- An event type denoting that a notification was viewed by the user within 15 minutes
-    [CHAR LIMIT=50]-->
-    <string name="tare_notification_seen_15_min">Notification Seen Within 15 Minutes</string>
-    <!-- An event type denoting that a notification was interacted with in some way by the user
-    [CHAR LIMIT=50]-->
-    <string name="tare_notification_interaction">Notification Interaction</string>
-    <!-- An event type denoting that an app's widget was interacted with in some way by the user
-    [CHAR LIMIT=50]-->
-    <string name="tare_widget_interaction">Widget Interaction</string>
-    <!-- An event type denoting that an app was interacted with in some way by the user
-    [CHAR LIMIT=50]-->
-    <string name="tare_other_interaction">Other User Interaction</string>
-    <!-- Title for the initiation of a max priority job by an app as defined in the JobScheduler
-     API [CHAR LIMIT=50]-->
-    <string name="tare_job_max_start">Job Max Start</string>
-    <!-- Title of an event where a job with max priority is running, but it does not necessarily
-     mean the max priority job is running at that moment. In this context, running is a synonym for
-     “ongoing execution of a job with max priority”. [CHAR LIMIT=50]-->
-    <string name="tare_job_max_running">Job Max Running</string>
-    <!-- Title for the initiation of a high priority job by an app as defined in the JobScheduler
-    API [CHAR LIMIT=50]-->
-    <string name="tare_job_high_start">Job High Start</string>
-    <!-- Title of an event where a job with high priority is running, but it does not necessarily
-     mean the high priority job is running at that moment. In this context, running is a synonym for
-     “ongoing execution of a job with high priority”. [CHAR LIMIT=50]-->
-    <string name="tare_job_high_running">Job High Running</string>
-    <!-- Title for the initiation of a default priority job by an app as defined in the JobScheduler
-    API [CHAR LIMIT=50]-->
-    <string name="tare_job_default_start">Job Default Start</string>
-    <!-- Title of an event where a job with default priority is running, but it does not necessarily
-     mean the default job is running at that moment. In this context, running is a synonym for
-     “ongoing execution of a job with default priority”. [CHAR LIMIT=50]-->
-    <string name="tare_job_default_running">Job Default Running</string>
-    <!-- Title for the initiation of a low priority job by an app as defined in the JobScheduler
-    API [CHAR LIMIT=50]-->
-    <string name="tare_job_low_start">Job Low Start</string>
-    <!-- Title of an event where a job with low priority is running, but it does not necessarily
-     mean the low priority job is running at that moment. In this context, running is a synonym for
-     “ongoing execution of a job with low priority”. [CHAR LIMIT=50]-->
-    <string name="tare_job_low_running">Job Low Running</string>
-    <!-- Title for the initiation of a minimum priority job by an app as defined in the JobScheduler
-    API [CHAR LIMIT=50]-->
-    <string name="tare_job_min_start">Job Min Start</string>
-    <!-- Title of an event where a job with minimum priority is running, but it does not necessarily
-     mean the job is running at that moment. In this context, running is a synonym for
-     “ongoing execution of a job with minimum priority”. [CHAR LIMIT=50]-->
-    <string name="tare_job_min_running">Job Min Running</string>
-    <!-- Title for the penalty an app receives for letting a job use the maximum execution time and
-     time out [CHAR LIMIT=50]-->
-    <string name="tare_job_timeout_penalty">Job Timeout Penalty</string>
-    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
-    device is fully charged. "Satiated" in this context means that the battery is fully charged.
-    Balance is the same meaning as having money in a bank account.
-    Exempted apps are those apps exempted from most power saving features. [CHAR LIMIT=80]-->
-    <string name="tare_min_balance_exempted">Minimum Satiated Balance (Exempted)</string>
-    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
-    device is fully charged. "Satiated" in this context means that the battery is fully charged.
-    Balance is the same meaning as having money in a bank account.
-    A headless system app is a preinstalled app that does not have any activities/UI that the
-    user can interact with. [CHAR LIMIT=80]-->
-    <string name="tare_min_balance_headless_app">Minimum Satiated Balance (Headless System App)</string>
-    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
-    device is fully charged. "Satiated" in this context means that the battery is fully charged.
-    Balance is the same meaning as having money in a bank account.
-    Remaining apps are those apps that don't fit into predefined categories. [CHAR LIMIT=80]-->
-    <string name="tare_min_balance_other_app">Minimum Satiated Balance (Remaining Apps)</string>
-    <!-- Title for the TARE factor that app updaters (for example, an app store) additional
-    credits. "Satiated" in this context means that the battery is fully charged.
-    Balance is the same meaning as having money in a bank account. [CHAR LIMIT=80]-->
-    <string name="tare_min_balance_addition_app_updater">Minimum Satiated Balance Addition (App Updaters)</string>
-    <!-- Titles for the minimum satiated credit balances for different types of apps
-    (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
-    <string-array name="tare_app_balance_subfactors" translatable="false">
-        <item>@string/tare_max_satiated_balance</item>
-        <item>@string/tare_min_balance_exempted</item>
-        <item>@string/tare_min_balance_headless_app</item>
-        <item>@string/tare_min_balance_other_app</item>
-    </string-array>
-    <!-- Titles for the minimum satiated credit balances for different types of apps
-    (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
-    <string-array name="tare_job_scheduler_app_balance_subfactors" translatable="false">
-        <item>@string/tare_max_satiated_balance</item>
-        <item>@string/tare_min_balance_exempted</item>
-        <item>@string/tare_min_balance_headless_app</item>
-        <item>@string/tare_min_balance_other_app</item>
-        <item>@string/tare_min_balance_addition_app_updater</item>
-    </string-array>
-    <!-- Various modifier subfactors that alter the cost of TARE tasks depending on what battery
-    state the device is in [CHAR LIMIT=50]-->
-    <string-array name="tare_modifiers_subfactors">
-        <item>Charging</item>
-        <!-- Doze refers to the Android Doze feature -->
-        <item>Doze</item>
-        <item>Power Save Mode</item>
-        <!-- An app's process state is the internal level of an app's process inside the system -->
-        <item>Process State</item>
-    </string-array>
-    <!-- Various AlarmManager alarms with different costs to produce and price paid by apps
-    if they want to produce these alarms. Alarm in this context refers to the possible alarm cases
-    in AlarmManager. [CHAR LIMIT=50]-->
-    <string-array name="tare_alarm_manager_actions" translatable="false">
-        <item>@string/tare_wakeup_exact_idle</item>
-        <item>@string/tare_wakeup_inexact_idle</item>
-        <item>@string/tare_wakeup_exact</item>
-        <item>@string/tare_wakeup_inexact</item>
-        <item>@string/tare_nonwakeup_exact_idle</item>
-        <item>@string/tare_nonwakeup_exact</item>
-        <item>@string/tare_nonwakeup_inexact_idle</item>
-        <item>@string/tare_nonwakeup_inexact</item>
-        <item>@string/tare_alarm_clock</item>
-    </string-array>
-    <!-- Titles for the different rewards apps could obtain for actions that benefit the user;
-    each has instant, ongoing, and max credit rewards apps could gain [CHAR LIMIT=50]-->
-    <string-array name="tare_rewards_subfactors" translatable="false">
-        <item>@string/tare_top_activity</item>
-        <item>@string/tare_notification_seen</item>
-        <!-- TODO: add back once supported  <item>@string/tare_notification_seen_15_min</item> -->
-        <item>@string/tare_notification_interaction</item>
-        <item>@string/tare_widget_interaction</item>
-        <item>@string/tare_other_interaction</item>
-    </string-array>
-    <!-- Titles for the different rewards apps could obtain for actions that benefit the user;
-    each has instant, ongoing, and max credit rewards apps could gain [CHAR LIMIT=50]-->
-    <string-array name="tare_job_scheduler_rewards_subfactors" translatable="false">
-        <item>@string/tare_top_activity</item>
-        <item>@string/tare_notification_seen</item>
-        <item>@string/tare_notification_interaction</item>
-        <item>@string/tare_widget_interaction</item>
-        <item>@string/tare_other_interaction</item>
-        <item>@string/tare_app_install</item>
-    </string-array>
-    <!-- Various JobScheduler tasks with different costs to produce and willingness to pay by apps
-    if they want to carry out these different tasks [CHAR LIMIT=50]-->
-    <string-array name="tare_job_scheduler_actions" translatable="false">
-        <item>@string/tare_job_max_start</item>
-        <item>@string/tare_job_max_running</item>
-        <item>@string/tare_job_high_start</item>
-        <item>@string/tare_job_high_running</item>
-        <item>@string/tare_job_default_start</item>
-        <item>@string/tare_job_default_running</item>
-        <item>@string/tare_job_low_start</item>
-        <item>@string/tare_job_low_running</item>
-        <item>@string/tare_job_min_start</item>
-        <item>@string/tare_job_min_running</item>
-        <item>@string/tare_job_timeout_penalty</item>
-    </string-array>
-    <!-- Array used to populate dropdown menu with the different policies in the TARE
-    settings [CHAR LIMIT=40]-->
-    <string-array name="tare_policies" translatable="false">
-        <item>@string/tare_alarmmanager</item>
-        <item>@string/tare_jobscheduler</item>
-    </string-array>
-    <!-- TARE dialog button to proceed with a value change [CHAR LIMIT=none] -->
-    <string name="tare_dialog_confirm_button_title">Confirm</string>
-    <!-- Array used to populate dropdown menu to select the units of the factor value. Not
-    translatable since they're base units. [CHAR LIMIT=40]-->
-    <string-array name="tare_units" translatable="false">
-        <item>ARC</item>
-        <item>Cake</item>
-    </string-array>
-
     <!-- Button to preview the selected screensaver in settings [CHAR LIMIT=40] -->
     <string name="dream_preview_button_title">Preview</string>
     <!-- The title of the category to show for the screensaver selector in settings [CHAR LIMIT=none] -->
@@ -13747,6 +13498,8 @@
     <string name="audio_sharing_confirm_dialog_title">Connect a compatible device</string>
     <!-- Content for audio sharing confirm dialog [CHAR LIMIT=none]-->
     <string name="audio_sharing_comfirm_dialog_content">To start sharing audio, first connect LE Audio headphones to your phone</string>
+    <!-- Text for audio sharing switch active device button [CHAR LIMIT=none]-->
+    <string name="audio_sharing_switch_active_button_label">Switch to <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
 
     <!-- Title for audio streams preference category [CHAR LIMIT=none]-->
     <string name="audio_streams_category_title">Connect to a LE audio stream</string>
@@ -13836,6 +13589,8 @@
     <string name="audio_streams_main_page_password_dialog_cannot_edit">Can\u0027t edit password while sharing. To change the password, first turn off audio sharing.</string>
     <!-- Text for audio sharing qrcode scanner [CHAR LIMIT=none]-->
     <string name="audio_streams_qr_code_scanner_label">QR code scanner</string>
+    <!-- Learn more link for audio sharing qrcode [CHAR LIMIT=none]-->
+    <string name="audio_streams_qr_code_help_with_link"><annotation id="link">Need help?</annotation></string>
 
 
     <!-- url for learning more about bluetooth audio sharing -->

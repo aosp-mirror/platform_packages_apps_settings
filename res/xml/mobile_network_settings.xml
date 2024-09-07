@@ -98,9 +98,11 @@
             settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.DataUsagePreferenceController"/>
 
+        <!-- Settings search is handled by BillingCycleSearchItem. -->
         <com.android.settings.datausage.BillingCyclePreference
             android:key="billing_preference"
             android:title="@string/billing_cycle"
+            settings:searchable="false"
             settings:controller="com.android.settings.datausage.BillingCyclePreferenceController"/>
 
         <SwitchPreferenceCompat
@@ -221,10 +223,11 @@
                 </intent>
             </Preference>
 
+            <!-- Settings search is handled by WifiCallingSearchItem. -->
             <SwitchPreferenceCompat
                 android:key="video_calling_key"
                 android:title="@string/video_calling_settings_title"
-                android:persistent="true"
+                settings:searchable="false"
                 settings:controller="com.android.settings.network.telephony.VideoCallingPreferenceController"/>
 
         </PreferenceCategory>

@@ -59,6 +59,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Locale;
 import java.util.concurrent.Executor;
@@ -287,7 +288,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             if (AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
                 if (!mIntentHandled.get()) {
                     Log.d(TAG, "displayPreference: profile ready, handleDeviceClickFromIntent");
-                    handleDeviceClickFromIntent();
+                    var unused =
+                            ThreadUtils.postOnBackgroundThread(() -> handleDeviceClickFromIntent());
                     mIntentHandled.set(true);
                 }
             }

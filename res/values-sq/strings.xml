@@ -411,7 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Fytyra dhe <xliff:g id="WATCH">%s</xliff:g> u shtuan"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Fytyra, gjurma e gishtit dhe <xliff:g id="WATCH">%s</xliff:g> u shtuan"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Fytyra, gjurmët e gishtave dhe <xliff:g id="WATCH">%s</xliff:g> u shtuan"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"\"Kontrolli i identitetit\" është aktiv"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"\"Kontrolli i identitetit\" është aktiv dhe kërkon të dhënat biometrike"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Shkyçja me vërtetuesin në distancë"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Ora u shtua"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Konfiguro orën tënde"</string>
@@ -836,6 +836,9 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Ndrysho"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detajet e pajisjes"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Cilësimet e tastierës"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Cilësime të tjera"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Përditësime të firmuerit, informacione etj."</string>
+    <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Këshilla dhe mbështetje"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresa e Bluetooth-it e pajisjes: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Adresa e Bluetooth-it e pajisjes:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Të harrohet pajisja?"</string>
@@ -845,6 +848,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Eksperimentale. Përmirëson cilësinë e audios."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Harroje pajisjen"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Shkëput aplikacionin"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Cilësime të tjera"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Numri maksimal i pajisjeve të lidhura audio me Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Zgjidh numrin maksimal të pajisjeve të lidhura audio me Bluetooth"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Evidenca e zgjeruar e korrigjimit të shitësit të NFC-së"</string>
@@ -1332,8 +1336,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Do të përdorësh <xliff:g id="CARRIER">%1$s</xliff:g> për të dhënat celulare?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Po përdor <xliff:g id="CARRIER2_0">%2$s</xliff:g> për të dhënat celulare. Nëse kalon te <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> nuk do të përdoret më për të dhënat celulare."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Përdor <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"Të përditësohet karta e preferuar SIM?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> është karta e vetme SIM në pajisjen tënde. Dëshiron që ta përdorësh këtë kartë SIM për të dhënat celulare, telefonatat dhe mesazhet SMS?"</string>
+    <string name="sim_preferred_message" msgid="4894337280925553873">"<xliff:g id="NEW_SIM">%1$s</xliff:g> tani është karta parësore SIM"</string>
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Të përmirësohet mbulimi i të dhënave celulare?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Lejo pajisjen tënde të kalojë automatikisht në <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> për të dhënat celulare kur të ketë disponueshmëri më të mirë."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Telefonatat, mesazhet dhe trafiku i rrjetit mund të jenë të dukshme për organizatën tënde."</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personalizo gjestet individuale të navigimit me bllokun me prekje"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Lëvizja në të kundërt"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Përmbajtja zhvendoset lart kur ti lëviz poshtë"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Trokitja poshtë djathtas"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Trokit te këndi poshtë djathtas i bllokut me prekje për më shumë opsione"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klikimi në këndin poshtë djathtas"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliko te këndi poshtë djathtas i bllokut me prekje për më shumë opsione"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Shpejtësia e treguesit"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Stili i mbushjes së treguesit"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Ndrysho stilin e mbushjes së treguesit në të zezë"</string>
@@ -1988,6 +1991,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Rivendos"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Zgjidh tastin modifikues"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Zgjidh një çelës të ri për <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
+    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
+    <skip />
+    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"Struktura e <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"E parazgjedhur"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatik: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2199,9 +2206,11 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Të përparuara"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Butoni i \"Qasshmërisë\" është caktuar te <xliff:g id="SERVICE">%1$s</xliff:g>. Për të përdorur zmadhimin, prek dhe mbaj butonin e \"Qasshmërisë\" dhe më pas zgjidh zmadhimin."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Gjesti i qasshmërisë është caktuar në <xliff:g id="SERVICE">%1$s</xliff:g>. Për të përdorur zmadhimin, rrëshqit lart me dy gishta nga fundi i ekranit dhe mbaje. Më pas zgjidh zmadhimin."</string>
-    <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"Shkurtorja e tastit të volumit"</string>
+    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
+    <skip />
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Cilësimet e shkurtores"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Shkurtorja nga ekrani i kyçjes"</string>
+    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
+    <skip />
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Lejo që shkurtorja e veçorisë të aktivizohet nga ekrani i kyçjes. Mbaji të dy çelësat e volumit për disa sekonda."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Butoni i qasshmërisë"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Butoni dhe gjesti i qasshmërisë"</string>
@@ -3336,17 +3345,14 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Aktiv / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> dhe <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Mund të aktivizosh po ashtu \"Audion hapësinore\" për pajisjet me Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Cilësimet e pajisjeve të lidhura"</string>
-    <!-- no translation found for spatial_audio_multi_toggle_title (6175786400035541273) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_off (2086359413991193164) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_on (2988769235357633788) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (861779551619033627) -->
-    <skip />
+    <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Audio hapësinore"</string>
+    <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Joaktiv"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Joaktiv"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Joaktiv"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Asnjë}=1{1 orar i caktuar}other{# orare të caktuara}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Mos shqetëso"</string>
-    <string name="zen_modes_list_title" msgid="5138745349253275428">"Modalitetet e përparësisë"</string>
+    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
+    <skip />
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimizo shpërqendrimet dhe kontrollo vëmendjen tënde me modalitetet për gjumin, punën, drejtimin e makinës dhe çdo gjë tjetër."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Krijo modalitetin tënd"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Merr njoftime vetëm nga aplikacionet dhe personat e rëndësishëm"</string>
@@ -3413,8 +3419,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"aktivizo temën e errët"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Bëj që sistemi operativ dhe aplikacionet të preferojnë tekstin e ndriçuar mbi sfond të errët, gjë që mund të jetë më e lehtë për sytë dhe të mundësojë një kursim të konsiderueshëm të baterisë në disa pajisje"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Asnjë ndryshim i paraqitjes}=1{{effect_1}}=2{{effect_1} dhe {effect_2}}=3{{effect_1}, {effect_2} dhe {effect_3}}other{{effect_1}, {effect_2} dhe # të tjera}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Kufizo çfarë mund të të njoftojë"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Nuk filtrohet asnjë ndërprerje"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Lejo të gjitha njoftimet"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Personat, aplikacionet dhe tingujt mund ta ndërpresin"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Opsionet e paraqitjes për njoftimet e filtruara"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kur modaliteti \"Mos shqetëso\" është aktiv"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Asnjë tingull nga njoftimet"</string>
@@ -3641,10 +3647,10 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Mund t\'u përgjigjet mesazheve dhe të kryejë veprime te butonat në njoftime, duke përfshirë shtyrjen ose heqjen e njoftimeve dhe përgjigjen ndaj telefonatave."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Të ndryshojë cilësimet"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Mund të aktivizojë ose çaktivizojë modalitetin \"Mos shqetëso\" dhe të ndryshojë cilësimet që lidhen me të."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
+    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
     <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Nëse çaktivizon qasjen te njoftimet për \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\", mund të çaktivizohet edhe qasja te \"Mos shqetëso\"."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
+    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
     <skip />
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Çaktivizo"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Anulo"</string>
@@ -3706,11 +3712,11 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Qasja te \"Mos shqetëso\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Lejo modalitetin \"Mos shqetëso\""</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Asnjë aplikacion i instaluar nuk ka kërkuar qasje te \"Mos shqetëso\""</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
+    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
     <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
+    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
     <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
+    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
     <skip />
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Nuk i ke lejuar njoftimet nga ky aplikacion"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Me kërkesën tënde, Android po bllokon shfaqjen e kësaj kategorie njoftimesh në këtë pajisje"</string>
@@ -3894,22 +3900,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimino të gjitha shpërqendrimet për një mjedis të heshtur"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personalizo përvojat e pajisjes dhe cilësimet për përdorues të ndryshëm"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimizo ndërprerjet duke lejuar që të të arrijnë vetëm personat dhe aplikacionet e rëndësishme"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Cakto një modalitet që ndjek një program të rregullt"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mbaje pajisjen tënde të sinkronizuar me ngjarjet e ditës sate"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Zgjohu me 100% energji"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Kushtoji rëndësi sigurisë në fillim kur je në rrugë"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Fokusohu për të shmangur shpërqendrimet"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Për momentet kur mirësjellja ka rëndësi"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"Përdorimi me udhëzime për të të ndihmuar të jesh në duar të sigurta"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Merr kontrollin e vëmendjes sate"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Paralajmërim"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Mbyll"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Dërgo komente për këtë pajisje"</string>
@@ -4110,14 +4108,13 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Duhet të qëndrojë e aktivizuar sepse qasja te njoftimet është e aktivizuar"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Të anulohet qasja te \"Mos shqetëso\" për <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Të gjitha rregullat e \"Mos shqetëso\" të krijuara nga ky aplikacion do të hiqen."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
+    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
     <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
+    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
     <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
     <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Të gjitha modalitetet e krijuara nga ky aplikacioni do të hiqen."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Mos optimizo"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizo"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Mund ta shkarkojë baterinë më shpejt. Aplikacioni nuk do të kufizohet më shumë nga përdorimi i baterisë në sfond."</string>
@@ -5167,52 +5164,6 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> dëshiron të lidhet me këtë telefon.\n\nNuk je lidhur me <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> më parë."</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Mos lidh"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Lidh"</string>
-    <string name="tare_settings" msgid="3788654800004869077">"Cilësimet e TARE"</string>
-    <string name="tare_on" msgid="2386073225978684535">"Aktive"</string>
-    <string name="tare_off" msgid="6305694402929756726">"Joaktive"</string>
-    <string name="tare_revert" msgid="3855325741125236638">"Riktheji te cilësimet e parazgjedhura"</string>
-    <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Cilësimet u rikthyen te parazgjedhja."</string>
-    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Balancë maksimale e ngopur"</string>
-    <string name="tare_balances" msgid="731881382594747961">"Balancat"</string>
-    <string name="tare_consumption_limits" msgid="3230949387874396382">"Kufijtë e konsumit"</string>
-    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Kufiri fillestar i konsumit"</string>
-    <string name="tare_min_consumption_limit" msgid="3293145670921755789">"Kufiri minimal i konsumit"</string>
-    <string name="tare_max_consumption_limit" msgid="8335700580111808823">"Kufiri maksimal i konsumit"</string>
-    <string name="tare_modifiers" msgid="8919975635360280820">"Modifikues"</string>
-    <string name="tare_actions_ctp" msgid="5110104015354916401">"Veprimet (kostoja e prodhimit)"</string>
-    <string name="tare_actions_base_price" msgid="3300967942666376589">"Veprimet (çmimi bazë)"</string>
-    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Shpërblimet për çdo ngjarje"</string>
-    <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Shpërblimet e kohëzgjatjes së ngjarjes"</string>
-    <string name="tare_rewards_max" msgid="5283055625642837010">"Numri maksimal i shpërblimeve në ditë"</string>
-    <string name="tare_app_install" msgid="7955806910408116882">"Instalimi i aplikacionit"</string>
-    <string name="tare_top_activity" msgid="7266560655483385757">"Aktivitet kryesor"</string>
-    <string name="tare_notification_seen" msgid="7829963536020087742">"Njoftim i parë"</string>
-    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Njoftim i parë brenda 15 minutave"</string>
-    <string name="tare_notification_interaction" msgid="3806204222322830129">"Ndërveprim njoftimi"</string>
-    <string name="tare_widget_interaction" msgid="2260701564089214184">"Ndërveprim miniaplikacioni"</string>
-    <string name="tare_other_interaction" msgid="8069163421115212751">"Ndërveprim përdoruesi tjetër"</string>
-    <string name="tare_job_max_start" msgid="1586399578665940836">"Detyrë maksimale në nisje"</string>
-    <string name="tare_job_max_running" msgid="2897217372986518495">"Detyrë maksimale në ekzekutim"</string>
-    <string name="tare_job_high_start" msgid="7464143754932031022">"Detyrë e lartë në nisje"</string>
-    <string name="tare_job_high_running" msgid="6541171046405088669">"Detyrë e lartë në ekzekutim"</string>
-    <string name="tare_job_default_start" msgid="6744427210148953151">"Detyrë e parazgjedhur në nisje"</string>
-    <string name="tare_job_default_running" msgid="8429081804128945217">"Detyrë e parazgjedhur në ekzekutim"</string>
-    <string name="tare_job_low_start" msgid="4605440035856891746">"Detyrë e ulët në nisje"</string>
-    <string name="tare_job_low_running" msgid="831668616902849604">"Detyrë e ulët në ekzekutim"</string>
-    <string name="tare_job_min_start" msgid="6508233901992538188">"Detyrë minimale në nisje"</string>
-    <string name="tare_job_min_running" msgid="6167128996320622604">"Detyrë minimale në ekzekutim"</string>
-    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Penalizim skadimi detyre"</string>
-    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Balanca minimale në karikim të plotë (e përjashtuar)"</string>
-    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Balanca minimale në karikim të plotë (aplikacion sistemi pa kokë)"</string>
-    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Balanca minimale në karikim të plotë (aplikacionet e mbetura)"</string>
-    <string name="tare_min_balance_addition_app_updater" msgid="5391956072471201269">"Shtimi i balancës minimale në karikim të plotë (Përditësuesit e aplikacionit)"</string>
-  <string-array name="tare_modifiers_subfactors">
-    <item msgid="3325940509857535498">"Po karikohet"</item>
-    <item msgid="658627268149681677">"Një sy gjumë"</item>
-    <item msgid="1599558140284643834">"Modaliteti i kursimit të energjisë"</item>
-    <item msgid="588427840913221601">"Gjendja e procesit"</item>
-  </string-array>
-    <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Konfirmo"</string>
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Pamja paraprake"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Zgjidh një mbrojtës ekrani"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Shfaq informacione shtesë"</string>
@@ -5414,6 +5365,8 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Ndarja e audios ndaloi"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Lidh një pajisje të përputhshme"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Për të filluar të ndash audion, në fillim lidh kufjet me LE Audio me telefonin tënd"</string>
+    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
+    <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Lidh me një transmetim audio LE"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Transmetimet audio në afërsi"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Transmetimet audio"</string>
@@ -5458,5 +5411,7 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skano një kod QR të transmetimit audio për të dëgjuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Fjalëkalimi nuk mund të modifikohet gjatë ndarjes. Për të ndryshuar fjalëkalimin, në fillim çaktivizo ndarjen e audios."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Skaneri i kodeve QR"</string>
+    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
+    <skip />
     <string name="homepage_search" msgid="6759334912284663559">"Kërko te cilësimet"</string>
 </resources>

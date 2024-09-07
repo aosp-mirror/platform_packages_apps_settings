@@ -411,7 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Naidagdag ang mukha at <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Naidagdag ang mukha, fingerprint, at <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Naidagdag ang mukha, mga fingerprint, at <xliff:g id="WATCH">%s</xliff:g>"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="8928849367818726432">"Naka-on ang Pagsusuri sa Pagkakakilanlan"</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"Naka-on ang Pagsusuri sa Pagkakakilanlan at nagre-require ito ng biometric"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator Unlock"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Idinagdag ang relo"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"I-set up ang iyong relo"</string>
@@ -836,6 +836,9 @@
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Palitan"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Mga detalye ng device"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Mga setting ng keyboard"</string>
+    <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Higit pang setting"</string>
+    <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Mga update sa firmware, tungkol dito, at higit pa"</string>
+    <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Mga tip at suporta"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Bluetooth address ng device: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Address ng bluetooth ng device:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Kalimutan ang device?"</string>
@@ -845,6 +848,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Pang-eksperimento. Nagpapaayos sa audio."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Kalimutan ang device"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Idiskonekta ang app"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Higit pang setting"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maximum na nakakonektang mga Bluetooth audio device"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Piliin ang maximum na bilang ng mga nakakonektang Bluetooth audio device"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Log ng pag-debug ng verbose vendor ng NFC"</string>
@@ -1332,8 +1336,7 @@
     <string name="sim_change_data_title" msgid="4663239438584588847">"Gamitin ang <xliff:g id="CARRIER">%1$s</xliff:g> sa mobile data?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Ginagamit mo ang <xliff:g id="CARRIER2_0">%2$s</xliff:g> para sa mobile data. Kung lilipat ka sa <xliff:g id="CARRIER1">%1$s</xliff:g>, hindi na gagamitin ang <xliff:g id="CARRIER2_1">%2$s</xliff:g> para sa mobile data."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Gamitin ang <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="sim_preferred_title" msgid="8850185380445309835">"I-update ang gustong SIM?"</string>
-    <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> lang ang SIM sa iyong device. Gusto mo bang gamitin ang SIM na ito para sa mobile data, mga tawag, at SMS message?"</string>
+    <string name="sim_preferred_message" msgid="4894337280925553873">"<xliff:g id="NEW_SIM">%1$s</xliff:g> na ang iyong pangunahing SIM"</string>
     <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Pahusayin ang sakop ng mobile data?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Payagan ang iyong device na awtomatikong lumipat sa <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> para sa mobile data kapag mas available ito."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Baka nakikita ng iyong organisasyon ang mga tawag, mensahe, at trapiko ng network."</string>
@@ -1938,8 +1941,8 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"I-customize ang mga indibidwal na galaw sa pag-navigate sa touchpad"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Reverse na pag-scroll"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Gumagalaw pataas ang content kapag nag-scroll ka pababa"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="6275428879042702880">"Pag-tap sa kanang bahagi sa ibaba"</string>
-    <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"I-tap ang kanang sulok sa ibaba ng touchpad para sa higit pang opsyon"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Pag-click sa kanang bahagi sa ibaba"</string>
+    <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"I-click ang kanang sulok sa ibaba ng touchpad para sa opsyon"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Bilis ng pointer"</string>
     <string name="pointer_fill_style" msgid="8413840032931637595">"Istilo ng fill ng pointer"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Gawing itim ang fill ng pointer"</string>
@@ -1988,6 +1991,10 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"I-reset"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Pumili ng modifier key"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Pumili ng bagong key para sa <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
+    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
+    <skip />
+    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"Layout na <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Default"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Awtomatiko: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2199,9 +2206,11 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Advanced"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Nakatakda sa <xliff:g id="SERVICE">%1$s</xliff:g> ang button na Accessibility. Upang gumamit ng pag-magnify, pindutin nang matagal ang button na Accessibility, pagkatapos ay piliin ang pag-magnify."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Nakatakda sa <xliff:g id="SERVICE">%1$s</xliff:g> ang galaw ng accessibility. Para magamit ang pag-magnify, mag-swipe pataas gamit ang dalawang daliri mula sa ibaba ng screen at i-hold. Pagkatapos ay piliin ang pag-magnify."</string>
-    <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"Shortcut gamit ang volume key"</string>
+    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
+    <skip />
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Mga setting ng shortcut"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Shortcut mula sa lock screen"</string>
+    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
+    <skip />
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Payagang mag-on ang shortcut ng feature mula sa lock screen. Pindutin nang matagal ang parehong volume key nang ilang segundo."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Button ng accessibility"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Button ng accessibility at galaw"</string>
@@ -3342,7 +3351,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Naka-off"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Wala}=1{Naitakda ang 1 iskedyul}one{Naitakda ang # iskedyul}other{Naitakda ang # na iskedyul}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Huwag Istorbohin"</string>
-    <string name="zen_modes_list_title" msgid="5138745349253275428">"Mga Priyoridad na Mode"</string>
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"Mga Mode"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"Bawasan ang mga abala at kontrolin ang iyong atensyon sa pamamagitan ng mga mode para sa pagtulog, pagtatrabaho, pagmamaneho, at kahit ano pa."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Gumawa ng sarili mong mode"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Makakuha lang ng notification mula sa mahahalagang tao at app"</string>
@@ -3409,8 +3418,8 @@
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"i-enable ang madilim na tema"</string>
     <string name="mode_dark_theme_summary" msgid="8428887193785431898">"I-switch ang OS at mga app para piliin ang maliwanag na text sa madilim na background, na posibleng mas magaan sa mata at mas nakakatipid ng baterya sa ilang device"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Walang pagbabago sa display}=1{{effect_1}}=2{{effect_1} at {effect_2}}=3{{effect_1}, {effect_2}, at {effect_3}}one{{effect_1}, {effect_2}, at # pa}other{{effect_1}, {effect_2}, at # pa}}"</string>
-    <string name="mode_notification_filter_title" msgid="1977578854503464865">"Limitahan kung ano ang puwedeng mag-abiso sa iyo"</string>
-    <string name="mode_no_notification_filter" msgid="7119188047783404890">"Walang fini-filter na abala"</string>
+    <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Payagan ang lahat ng notification"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Puwedeng makaabala ang mga tao, app, at tunog"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Mga opsyon sa display para sa mga naka-filter na notification"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kapag naka-on ang Huwag Istorbohin"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Walang tunog mula sa mga notification"</string>
@@ -3637,11 +3646,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Puwede nitong sagutin ang mga mensahe at gamitin ang mga button sa mga notification, kabilang ang pag-snooze o pag-dismiss ng mga notification at pagsagot ng mga tawag."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Baguhin ang mga setting"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Puwede nitong i-on o i-off ang Huwag Istorbohin at baguhin ang mga nauugnay na setting."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (6678225711796413093) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Mapapamahalaan at maa-activate nito ang Mga Mode, at mababago nito ang mga nauugnay na setting."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Kung io-off mo ang access sa notification para kay <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, mao-off din ang access sa Huwag Istorbohin."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (2985662620702322307) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Kung io-off mo ang access sa notification para kay <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, puwede ring i-off ang access sa Mga Mode."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"I-off"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Kanselahin"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Real-time"</string>
@@ -3702,12 +3709,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Access na Huwag Istorbohin"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Payagan ang Huwag Istorbohin"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Walang mga naka-install na app ang humiling ng access na Huwag Istorbohin"</string>
-    <!-- no translation found for manage_zen_modes_access_title (7568322052929075783) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (19797205786545052) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (6393146155692575897) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Access sa mga mode"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Payagan ang access sa Mga Mode"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Walang naka-install na app na humiling ng access sa Mga Mode"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Hindi mo pinayagan ang mga notification mula sa app na ito"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Bilang tugon sa iyong kahilingan, pinipigilan ng Android na lumabas sa device na ito ang ganitong kategorya ng mga notification"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Bilang tugon sa iyong kahilingan, pinipigilan ng Android na lumabas sa device na ito ang ganitong grupo ng mga notification"</string>
@@ -3890,22 +3894,14 @@
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Alisin ang lahat ng istorbo para sa tahimik na kapaligiran"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"I-personalize ang mga karanasan sa device at mga setting para sa iba\'t ibang user"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Bawasan ang mga istorbo sa pamamagitan ng pagbibigay ng pahintulot sa mahahalagang tao at app lang para makipag-ugnayan sa iyo"</string>
-    <!-- no translation found for zen_mode_inspiration_schedule_time (5596540503159096153) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_schedule_calendar (3678727180860212700) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_bedtime (6294822414181670666) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_driving (8237825783857483135) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_immersive (4062437428955782933) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_theater (9194190183262761230) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_managed (4607010392213773917) -->
-    <skip />
-    <!-- no translation found for zen_mode_inspiration_generic (9072064817144550243) -->
-    <skip />
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Magtakda ng mode na sumusunod sa regular na iskedyul"</string>
+    <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Panatilihing naka-sync ang iyong device sa mga kaganapan sa araw mo"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Gumising na 100% ang pakiramdam"</string>
+    <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Unahin ang kaligtasan habang nasa kalsada"</string>
+    <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Mag-focus para maging handa"</string>
+    <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Para sa mga sandali kung kailan mahalaga ang kagandahang-loob"</string>
+    <string name="zen_mode_inspiration_managed" msgid="4607010392213773917">"May gabay na paggamit para matulungan kang manatili sa mabuting kalagayan"</string>
+    <string name="zen_mode_inspiration_generic" msgid="9072064817144550243">"Kontrolin ang iyong atensyon"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Babala"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Isara"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Feedback tungkol sa device"</string>
@@ -4106,14 +4102,10 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Dapat manatiling naka-on dahil naka-on ang access sa notification"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Babawiin ang access sa Huwag Istorbohin para sa <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Aalisin ang lahat ng panuntunang Huwag Istorbohin na ginawa ng app na ito."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (2072265702931309138) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2351013300727701273) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (2703602440018176310) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_summary (4669243849023204217) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Payagan ang access sa Mga Mode para sa <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Mao-on/mao-off ng app ang Huwag Istorbohin, mapapamahalaan at maa-activate ang Mga Mode, at makakagawa ng mga pagbabago sa mga nauugnay na setting."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="6288548508466545492">"Bawiin ang access sa Mga Mode para sa <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Aalisin ang lahat ng mode na ginawa ng app na ito."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Huwag i-optimize"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"I-optimize"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Maaaring mas mabilis na makaubos ng iyong baterya. Hindi na paghihigpitan ang app na gamitin ang background na baterya."</string>
@@ -5163,52 +5155,6 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"Gustong kumonekta ng <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> sa teleponong ito.\n\nHindi ka pa nakakakonekta sa <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> dati."</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Huwag kumonekta"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Kumonekta"</string>
-    <string name="tare_settings" msgid="3788654800004869077">"Mga Setting ng TARE"</string>
-    <string name="tare_on" msgid="2386073225978684535">"Naka-on"</string>
-    <string name="tare_off" msgid="6305694402929756726">"Naka-off"</string>
-    <string name="tare_revert" msgid="3855325741125236638">"Bumalik sa Mga Default na Setting"</string>
-    <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Ibinalik sa default ang mga setting."</string>
-    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Max na Balanse Kapag Ganap na Na-charge"</string>
-    <string name="tare_balances" msgid="731881382594747961">"Mga Balanse"</string>
-    <string name="tare_consumption_limits" msgid="3230949387874396382">"Mga Limitasyon sa Pagkonsumo"</string>
-    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Paunang Limitasyon sa Pagkonsumo"</string>
-    <string name="tare_min_consumption_limit" msgid="3293145670921755789">"Minimum na Limitasyon sa Pagkonsumo"</string>
-    <string name="tare_max_consumption_limit" msgid="8335700580111808823">"Maximum na Limitasyon sa Pagkonsumo"</string>
-    <string name="tare_modifiers" msgid="8919975635360280820">"Mga Modifier"</string>
-    <string name="tare_actions_ctp" msgid="5110104015354916401">"Mga Pagkilos (Halaga ng Paggawa)"</string>
-    <string name="tare_actions_base_price" msgid="3300967942666376589">"Mga Pagkilos (Batayang Presyo)"</string>
-    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Mga reward sa bawat iisang event"</string>
-    <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Mga reward kada segundo ng event"</string>
-    <string name="tare_rewards_max" msgid="5283055625642837010">"Maximum na Reward Kada Araw"</string>
-    <string name="tare_app_install" msgid="7955806910408116882">"Pag-install ng App"</string>
-    <string name="tare_top_activity" msgid="7266560655483385757">"Nangungunang Aktibidad"</string>
-    <string name="tare_notification_seen" msgid="7829963536020087742">"Nakita ang Notification"</string>
-    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Nakita ang Notification sa loob ng 15Min"</string>
-    <string name="tare_notification_interaction" msgid="3806204222322830129">"Interaction sa Notification"</string>
-    <string name="tare_widget_interaction" msgid="2260701564089214184">"Interaction sa Widget"</string>
-    <string name="tare_other_interaction" msgid="8069163421115212751">"Interaction ng Ibang User"</string>
-    <string name="tare_job_max_start" msgid="1586399578665940836">"Sinimulan: Trabaho (Max na Priyoridad)"</string>
-    <string name="tare_job_max_running" msgid="2897217372986518495">"Gumagana: Trabaho (Max na Priyoridad)"</string>
-    <string name="tare_job_high_start" msgid="7464143754932031022">"Sinimulan: Trabaho (Mataas na Priyoridad)"</string>
-    <string name="tare_job_high_running" msgid="6541171046405088669">"Gumagana: Trabaho (Mataas na Priyoridad)"</string>
-    <string name="tare_job_default_start" msgid="6744427210148953151">"Sinimulan: Trabaho (Default na Priyoridad)"</string>
-    <string name="tare_job_default_running" msgid="8429081804128945217">"Gumagana: Trabaho (Default na Priyoridad)"</string>
-    <string name="tare_job_low_start" msgid="4605440035856891746">"Sinimulan: Trabaho (Mababang Priyoridad)"</string>
-    <string name="tare_job_low_running" msgid="831668616902849604">"Gumagana: Trabaho (Mababang Priyoridad)"</string>
-    <string name="tare_job_min_start" msgid="6508233901992538188">"Sinimulan: Trabaho (Min na Priyoridad)"</string>
-    <string name="tare_job_min_running" msgid="6167128996320622604">"Gumagana: Trabaho (Min na Priyoridad)"</string>
-    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Penalty sa Timeout ng Trabaho"</string>
-    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Minimum na Balanse Kapag Ganap na Na-charge (Hindi Kasama)"</string>
-    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Minimum na Balanse Kapag Ganap na Na-charge (Headless System App)"</string>
-    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Minimum na Balanse Kapag Ganap na Na-charge (Mga Natitirang App)"</string>
-    <string name="tare_min_balance_addition_app_updater" msgid="5391956072471201269">"Minimum na Dagdag sa Balanse Kapag Ganap na Na-charge (Mga Updater ng App)"</string>
-  <string-array name="tare_modifiers_subfactors">
-    <item msgid="3325940509857535498">"Pag-charge"</item>
-    <item msgid="658627268149681677">"Pag-doze"</item>
-    <item msgid="1599558140284643834">"Power Save Mode"</item>
-    <item msgid="588427840913221601">"Status ng Pagproseso"</item>
-  </string-array>
-    <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Kumpirmahin"</string>
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Preview"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Pumili ng screen saver"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Magpakita ng karagdagang impormasyon"</string>
@@ -5410,6 +5356,8 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Inihinto ang pag-share ng audio"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Magkonekta ng compatible na device"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Para magsimulang magbahagi ng audio, ikonekta muna ang LE Audio headphones sa iyong telepono"</string>
+    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
+    <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Kumonekta sa isang LE audio stream"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Mga audio stream sa malapit"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Mga audio stream"</string>
@@ -5454,5 +5402,7 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Mag-scan ng QR code ng audio stream para makinig sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Hindi mae-edit ang password habang nagbabahagi. Para palitan ang password, i-off muna ang pag-share ng audio."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Scanner ng QR code"</string>
+    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
+    <skip />
     <string name="homepage_search" msgid="6759334912284663559">"Maghanap sa Mga Setting"</string>
 </resources>
