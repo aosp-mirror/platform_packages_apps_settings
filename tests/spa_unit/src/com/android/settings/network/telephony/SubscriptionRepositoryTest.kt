@@ -190,6 +190,32 @@ class SubscriptionRepositoryTest {
     }
 
     @Test
+    fun isSubscriptionVisibleFlow_available_returnTrue() = runBlocking {
+        mockSubscriptionManager.stub {
+            on { getAvailableSubscriptionInfoList() } doReturn
+                listOf(SubscriptionInfo.Builder().apply { setId(SUB_ID_IN_SLOT_0) }.build())
+        }
+
+        val isVisible =
+            repository.isSubscriptionVisibleFlow(SUB_ID_IN_SLOT_0).firstWithTimeoutOrNull()
+
+        assertThat(isVisible).isTrue()
+    }
+
+    @Test
+    fun isSubscriptionVisibleFlow_unavailable_returnFalse() = runBlocking {
+        mockSubscriptionManager.stub {
+            on { getAvailableSubscriptionInfoList() } doReturn
+                listOf(SubscriptionInfo.Builder().apply { setId(SUB_ID_IN_SLOT_0) }.build())
+        }
+
+        val isVisible =
+            repository.isSubscriptionVisibleFlow(SUB_ID_IN_SLOT_1).firstWithTimeoutOrNull()
+
+        assertThat(isVisible).isFalse()
+    }
+
+    @Test
     fun phoneNumberFlow() = runBlocking {
         mockSubscriptionManager.stub {
             on { getPhoneNumber(SUB_ID_IN_SLOT_1) } doReturn NUMBER_1

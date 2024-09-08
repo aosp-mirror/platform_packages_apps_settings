@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2024 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/keyboard_a11y_settings"
+    android:key="physical_keyboard_a11y">
+
+    <PreferenceCategory
+        android:key="keyboard_a11y_category"
+        android:title="@string/keyboard_a11y_category">
+
+        <SwitchPreferenceCompat
+            android:key="accessibility_sticky_keys"
+            android:title="@string/sticky_keys"
+            android:summary="@string/sticky_keys_summary"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityStickyKeysController"/>
+
+        <SwitchPreferenceCompat
+            android:key="accessibility_bounce_keys"
+            android:title="@string/bounce_keys"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityBounceKeysController"/>
+
+        <SwitchPreferenceCompat
+            android:key="accessibility_slow_keys"
+            android:title="@string/slow_keys"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.inputmethod.KeyboardAccessibilitySlowKeysController" />
+
+        <SwitchPreferenceCompat
+            android:key="accessibility_mouse_keys"
+            android:title="@string/mouse_keys"
+            android:summary="@string/mouse_keys_summary"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityMouseKeysController" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

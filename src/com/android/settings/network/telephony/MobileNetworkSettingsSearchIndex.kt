@@ -20,6 +20,7 @@ import android.content.Context
 import android.provider.Settings
 import android.telephony.SubscriptionInfo
 import com.android.settings.R
+import com.android.settings.datausage.BillingCyclePreferenceController.Companion.BillingCycleSearchItem
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.CarrierSettingsVersionPreferenceController.Companion.CarrierSettingsVersionSearchItem
 import com.android.settings.network.telephony.DataUsagePreferenceController.Companion.DataUsageSearchItem
@@ -117,6 +118,7 @@ class MobileNetworkSettingsSearchIndex(
 
         fun createSearchItems(context: Context): List<MobileNetworkSettingsSearchItem> =
             listOf(
+                BillingCycleSearchItem(context),
                 CarrierSettingsVersionSearchItem(context),
                 DataUsageSearchItem(context),
                 MmsMessageSearchItem(context),

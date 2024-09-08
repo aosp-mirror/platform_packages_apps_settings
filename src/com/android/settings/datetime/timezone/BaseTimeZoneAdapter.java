@@ -33,9 +33,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.datetime.timezone.BaseTimeZonePicker.OnListItemClickListener;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Used with {@class BaseTimeZonePicker}. It renders text in each item into list view. A list of
@@ -47,6 +49,9 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
     static final int TYPE_HEADER = 0;
     @VisibleForTesting
     static final int TYPE_ITEM = 1;
+
+    private static final Pattern PATTERN_REMOVE_DIACRITICS = Pattern.compile(
+            "\\p{InCombiningDiacriticalMarks}+");
 
     private final List<T> mOriginalItems;
     private final OnListItemClickListener<T> mOnListItemClickListener;
@@ -183,6 +188,19 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
         }
     }
 
+    /**
+     * Removes diacritics (e.g. accents) from a string
+     */
+    private static String removeDiacritics(final String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        // decomposes the original characters into a base character and a diacritic sign
+        final String decomposed = Normalizer.normalize(str, Normalizer.Form.NFKD);
+        // replaces the diacritic signs with empty strings
+        return PATTERN_REMOVE_DIACRITICS.matcher(decomposed).replaceAll("");
+    }
+
     @VisibleForTesting
     public static class ItemViewHolder<T extends BaseTimeZoneAdapter.AdapterItem>
             extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -241,13 +259,14 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
             if (TextUtils.isEmpty(prefix)) {
                 newItems = mOriginalItems;
             } else {
-                final String prefixString = prefix.toString().toLowerCase(mLocale);
+                final String prefixString = removeDiacritics(
+                        prefix.toString().toLowerCase(mLocale));
                 newItems = new ArrayList<>();
 
                 for (T item : mOriginalItems) {
                     outer:
                     for (String searchKey : item.getSearchKeys()) {
-                        searchKey = searchKey.toLowerCase(mLocale);
+                        searchKey = removeDiacritics(searchKey.toLowerCase(mLocale));
                         // First match against the whole, non-splitted value
                         if (searchKey.startsWith(prefixString)) {
                             newItems.add(item);

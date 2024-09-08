@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.modes;
 
+import static android.app.NotificationManager.INTERRUPTION_FILTER_NONE;
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 import static android.provider.Settings.EXTRA_AUTOMATIC_ZEN_RULE_ID;
 
@@ -147,6 +148,20 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
     @Test
     public void testIsAvailable() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void updateState_dnd_enabled() {
+        ZenMode dnd = TestModeBuilder.MANUAL_DND_ACTIVE;
+        mController.updateState(mPreference, dnd);
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_specialDnd_disabled() {
+        ZenMode specialDnd = TestModeBuilder.manualDnd(INTERRUPTION_FILTER_NONE, true);
+        mController.updateState(mPreference, specialDnd);
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
