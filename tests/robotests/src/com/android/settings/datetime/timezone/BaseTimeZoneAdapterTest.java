@@ -22,39 +22,43 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class BaseTimeZoneAdapterTest {
 
     @Test
     public void testFilter() throws InterruptedException {
-        TestItem US = new TestItem("United States");
-        TestItem HK = new TestItem("Hong Kong");
-        TestItem UK = new TestItem("United Kingdom", new String[] { "United Kingdom",
+        TestItem unitedStates = new TestItem("United States");
+        TestItem hongKong = new TestItem("Hong Kong");
+        TestItem unitedKingdom = new TestItem("United Kingdom", new String[]{"United Kingdom",
                 "Great Britain"});
-        TestItem secretCountry = new TestItem("no name", new String[] { "Secret"});
+        TestItem reunion = new TestItem("Réunion");
+        TestItem secretCountry = new TestItem("no name", new String[]{"Secret"});
         List<TestItem> items = new ArrayList<>();
-        items.add(US);
-        items.add(HK);
-        items.add(UK);
+        items.add(unitedStates);
+        items.add(hongKong);
+        items.add(unitedKingdom);
+        items.add(reunion);
         items.add(secretCountry);
 
         TestTimeZoneAdapter adapter = new TestTimeZoneAdapter(items);
         assertSearch(adapter, "", items.toArray(new TestItem[0]));
-        assertSearch(adapter, "Unit", US, UK);
-        assertSearch(adapter, "kon", HK);
-        assertSearch(adapter, "brit", UK);
+        assertSearch(adapter, "Unit", unitedStates, unitedKingdom);
+        assertSearch(adapter, "kon", hongKong);
+        assertSearch(adapter, "brit", unitedKingdom);
         assertSearch(adapter, "sec", secretCountry);
+        assertSearch(adapter, "reun", reunion); // no accent in search, accent in result
+        assertSearch(adapter, "Réunion", reunion); // accents in search and result
     }
 
-    private void assertSearch(TestTimeZoneAdapter adapter , String searchText, TestItem... items)
+    private void assertSearch(TestTimeZoneAdapter adapter, String searchText, TestItem... items)
             throws InterruptedException {
         Observer observer = new Observer(adapter);
         adapter.getFilter().filter(searchText);
@@ -89,7 +93,10 @@ public class BaseTimeZoneAdapterTest {
     private static class TestTimeZoneAdapter extends BaseTimeZoneAdapter<TestItem> {
 
         private TestTimeZoneAdapter(List<TestItem> items) {
-            super(items, position -> {}, Locale.US, false /* showItemSummary */,
+            super(items,
+                    position -> {},
+                    Locale.US,
+                    false /* showItemSummary */,
                     null /* headerText */);
         }
     }
@@ -100,7 +107,7 @@ public class BaseTimeZoneAdapterTest {
         private final String[] mSearchKeys;
 
         TestItem(String title) {
-            this(title, new String[] { title });
+            this(title, new String[]{title});
         }
 
         TestItem(String title, String[] searchKeys) {

@@ -228,7 +228,7 @@ public class SetupInterstitialActivity extends FragmentActivity {
             return false;
         }
 
-        modeToUpdate.getRule().setEnabled(true);
+        modeToUpdate.setEnabled(true);
         mBackend.updateMode(modeToUpdate);
         return true;
     }
