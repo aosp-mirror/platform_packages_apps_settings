@@ -74,7 +74,7 @@ class ZenModeDisplayEffectPreferenceController extends AbstractZenModePreference
                     updatedEffects.setShouldUseNightMode(allow);
                     break;
             }
-            zenMode.getRule().setDeviceEffects(updatedEffects.build());
+            zenMode.setDeviceEffects(updatedEffects.build());
             return zenMode;
         });
     }
