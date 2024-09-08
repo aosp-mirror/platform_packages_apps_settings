@@ -50,7 +50,8 @@ class ZenModeExitAtAlarmPreferenceController extends
         if (mSchedule.exitAtAlarm != exitAtAlarm) {
             mSchedule.exitAtAlarm = exitAtAlarm;
             return saveMode(mode -> {
-                mode.getRule().setConditionId(ZenModeConfig.toScheduleConditionId(mSchedule));
+                mode.setCustomModeConditionId(mContext,
+                        ZenModeConfig.toScheduleConditionId(mSchedule));
                 return mode;
             });
         }

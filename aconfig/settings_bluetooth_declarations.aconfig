@@ -34,3 +34,13 @@ flag {
       purpose: PURPOSE_BUGFIX
   }
 }
+
+flag {
+  name: "enable_bluetooth_key_missing_dialog"
+  namespace: "cross_device_experiences"
+  description: "Show a dialog if the bluetooth key is missing when reconnecting"
+  bug: "360031750"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}

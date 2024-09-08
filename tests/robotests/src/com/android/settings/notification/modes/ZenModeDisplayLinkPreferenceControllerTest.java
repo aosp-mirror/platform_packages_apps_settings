@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.modes;
 
+import static android.app.NotificationManager.INTERRUPTION_FILTER_NONE;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -61,6 +63,26 @@ public final class ZenModeDisplayLinkPreferenceControllerTest {
 
         mController = new ZenModeDisplayLinkPreferenceController(
                 mContext, "something", mBackend, mHelperBackend);
+    }
+
+    @Test
+    public void updateState_dnd_enabled() {
+        Preference preference = mock(Preference.class);
+        ZenMode dnd = TestModeBuilder.MANUAL_DND_ACTIVE;
+
+        mController.updateState(preference, dnd);
+
+        verify(preference).setEnabled(true);
+    }
+
+    @Test
+    public void updateState_specialDnd_disabled() {
+        Preference preference = mock(Preference.class);
+        ZenMode specialDnd = TestModeBuilder.manualDnd(INTERRUPTION_FILTER_NONE, true);
+
+        mController.updateState(preference, specialDnd);
+
+        verify(preference).setEnabled(false);
     }
 
     @Test
