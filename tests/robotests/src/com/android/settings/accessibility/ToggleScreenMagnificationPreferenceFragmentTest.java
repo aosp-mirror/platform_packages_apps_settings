@@ -53,9 +53,12 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.AccessibilityNodeInfo;
 
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.server.accessibility.Flags;
@@ -998,6 +1001,28 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         String summary = fragment.getShortcutTypeSummary(mContext).toString();
 
         assertThat(summary).isEqualTo(expected);
+    }
+
+    @Test
+    @EnableFlags(
+            com.android.settings.accessibility.Flags.FLAG_TOGGLE_FEATURE_FRAGMENT_COLLECTION_INFO)
+    public void fragmentRecyclerView_getCollectionInfo_hasCorrectCounts() {
+        ToggleScreenMagnificationPreferenceFragment fragment =
+                mFragController.create(R.id.main_content, /* bundle= */
+                        null).start().resume().get();
+        RecyclerView rv = fragment.getListView();
+
+        AccessibilityNodeInfoCompat node = AccessibilityNodeInfoCompat.obtain();
+        rv.getCompatAccessibilityDelegate().onInitializeAccessibilityNodeInfo(rv, node);
+        AccessibilityNodeInfo.CollectionInfo collectionInfo = node.unwrap().getCollectionInfo();
+
+        // Asserting against specific item counts will be brittle to changes to the preferences
+        // included on this page, so instead just check some properties of these counts.
+        assertThat(collectionInfo.getColumnCount()).isEqualTo(1);
+        assertThat(collectionInfo.getRowCount()).isEqualTo(collectionInfo.getItemCount());
+        assertThat(collectionInfo.getItemCount())
+                // One unimportant item: the illustration preference
+                .isEqualTo(collectionInfo.getImportantForAccessibilityItemCount() + 1);
     }
 
     private void putStringIntoSettings(String key, String componentName) {
