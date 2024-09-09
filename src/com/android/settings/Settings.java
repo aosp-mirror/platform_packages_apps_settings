@@ -95,7 +95,6 @@ public class Settings extends SettingsActivity {
     public static class InputMethodAndSubtypeEnablerActivity extends SettingsActivity { /* empty */ }
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
-    public static class LanguageAndInputSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LanguageSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the regional preferences settings. */
     public static class RegionalPreferencesActivity extends SettingsActivity { /* empty */ }
