@@ -1860,6 +1860,15 @@
     <!-- Bluetooth settings. Link text to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
     <string name="bluetooth_scan_change">Change</string>
 
+    <!-- Dialog title when key is missing in a Bluetooth device -->
+    <string name="bluetooth_key_missing_title"><xliff:g id="device_name">%1$s</xliff:g> not connected</string>
+    <!-- Dialog content when key is missing in a Bluetooth device -->
+    <string name="bluetooth_key_missing_message">For your security, forget this device, then pair it again</string>
+    <!-- Button text to forget device when bluetooth key is missing -->
+    <string name="bluetooth_key_missing_forget">Forget device</string>
+    <!-- Button text to cancel when bluetooth key is missing-->
+    <string name="bluetooth_key_missing_cancel">Cancel</string>
+
     <!-- Title of device details screen [CHAR LIMIT=28]-->
     <string name="device_details_title">Device details</string>
     <!-- Title for keyboard settings preferences. [CHAR LIMIT=50] -->
@@ -2161,7 +2170,7 @@
     <string name="wifi_signal">Signal strength</string>
     <!-- Label for the status of the connection -->
     <string name="wifi_status">Status</string>
-    <!-- Label for the transmit link speed of the connection. [CHAR LIMIT=32] -->
+    <!-- Label for the transmit link speed of the connection. [CHAR LIMIT=40] -->
     <string name="tx_wifi_speed">Transmit link speed</string>
     <!-- Label for the receive link speed of the connection. [CHAR LIMIT=32] -->
     <string name="rx_wifi_speed">Receive link speed</string>
@@ -4615,6 +4624,11 @@
     <string name="modifier_keys_picker_title">Choose modifier key</string>
     <!-- Summary for the modifier key picker dialog page [CHAR LIMIT=35] -->
     <string name="modifier_keys_picker_summary">Choose a new key for <xliff:g id="modifier_key_default_name">%1$s</xliff:g>:</string>
+
+    <!-- Title for the button to trigger the 'Physical keyboard accessibility' page. [CHAR LIMIT=60] -->
+    <string name="keyboard_a11y_settings">Physical keyboard accessibility</string>
+    <!-- Summary for the button to trigger the 'Physical keyboard accessibility' page. [CHAR LIMIT=NONE] -->
+    <string name="keyboard_a11y_settings_summary">Sticky keys, Bounce keys, Mouse keys</string>
 
     <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
     <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
@@ -10179,7 +10193,7 @@
     <string name="zen_modes_access_warning_dialog_summary">The app will be able to turn on/off Do Not Disturb, manage and activate Modes, and make changes to related settings.</string>
 
     <!-- Modes access settings - title for warning dialog when revoking access [CHAR LIMIT=NONE] -->
-    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title">Revoke access to Modes for <xliff:g id="app" example="Tasker">%1$s</xliff:g>?</string>
 
     <!-- Modes access settings - summary for warning dialog when revoking access [CHAR LIMIT=NONE] -->
     <string name="zen_modes_access_revoke_warning_dialog_summary">All modes created by this app will be removed.</string>
