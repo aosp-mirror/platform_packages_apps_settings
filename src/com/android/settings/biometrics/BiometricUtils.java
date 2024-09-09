@@ -44,9 +44,10 @@ import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.face.FaceEnrollIntroduction;
-import com.android.settings.biometrics.fingerprint.FingerprintEnroll;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
+import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -261,13 +262,13 @@ public class BiometricUtils {
     /**
      * @param context caller's context
      * @param activityIntent The intent that started the caller's activity
-     * @return Intent for starting FingerprintEnroll
+     * @return Intent for starting FingerprintEnrollIntroduction
      */
     public static Intent getFingerprintIntroIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
         final boolean isSuw = WizardManagerHelper.isAnySetupWizard(activityIntent);
         final Intent intent = new Intent(context, isSuw
-                ? FingerprintEnroll.SetupActivity.class : FingerprintEnroll.class);
+                ? SetupFingerprintEnrollIntroduction.class : FingerprintEnrollIntroduction.class);
         if (isSuw) {
             WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
         }
