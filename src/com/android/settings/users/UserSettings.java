@@ -419,6 +419,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 mTimeoutToDockUserPreferenceController.getPreferenceKey()));
         mRemoveGuestOnExitPreferenceController.updateState(screen.findPreference(
                 mRemoveGuestOnExitPreferenceController.getPreferenceKey()));
+        mSwitchBarController.updateState();
         if (mShouldUpdateUserList) {
             updateUI();
         }
