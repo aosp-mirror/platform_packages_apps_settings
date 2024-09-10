@@ -34,7 +34,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class IconOptionsProviderImplTest {
 
-    private static final int EXPECTED_NUMBER_OF_ICON_OPTIONS = 9;
+    private static final int EXPECTED_NUMBER_OF_ICON_OPTIONS = 40;
 
     @Test
     public void iconResources_correctResources() {

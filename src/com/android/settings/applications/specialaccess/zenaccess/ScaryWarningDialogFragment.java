@@ -17,6 +17,7 @@
 package com.android.settings.applications.specialaccess.zenaccess;
 
 import android.app.Dialog;
+import android.app.Flags;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -55,10 +56,15 @@ public class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
         final String pkg = args.getString(KEY_PKG);
         final String label = args.getString(KEY_LABEL);
 
-        final String title = getResources().getString(R.string.zen_access_warning_dialog_title,
+        final String title = getResources().getString(
+                Flags.modesApi() && Flags.modesUi()
+                        ? R.string.zen_modes_access_warning_dialog_title
+                        : R.string.zen_access_warning_dialog_title,
                 label);
         final String summary = getResources()
-                .getString(R.string.zen_access_warning_dialog_summary);
+                .getString(Flags.modesApi() && Flags.modesUi()
+                        ? R.string.zen_modes_access_warning_dialog_summary
+                        : R.string.zen_access_warning_dialog_summary);
 
         ZenAccessDetails parent = (ZenAccessDetails) getTargetFragment();
 

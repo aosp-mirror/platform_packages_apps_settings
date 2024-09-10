@@ -21,10 +21,10 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.Telephony
-import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.util.Log
 import com.android.settings.R
+import com.android.settings.network.telephony.telephonyManager
 import com.android.settingslib.utils.ThreadUtils
 import java.util.Locale
 
@@ -178,12 +178,11 @@ fun isItemExist(apnData: ApnData, context: Context): String? {
 }
 
 fun Context.getApnIdMap(subId: Int): Map<String, Any> {
-    val subInfo = getSystemService(SubscriptionManager::class.java)!!
-        .getActiveSubscriptionInfo(subId)
-    val carrierId = subInfo.carrierId
+    val telephonyManager = telephonyManager(subId)
+    val carrierId = telephonyManager.simSpecificCarrierId
     return if (carrierId != TelephonyManager.UNKNOWN_CARRIER_ID) {
         mapOf(Telephony.Carriers.CARRIER_ID to carrierId)
     } else {
-        mapOf(Telephony.Carriers.NUMERIC to subInfo.mccString + subInfo.mncString)
+        mapOf(Telephony.Carriers.NUMERIC to telephonyManager.simOperator)
     }.also { Log.d(TAG, "[$subId] New APN item with id: $it") }
 }

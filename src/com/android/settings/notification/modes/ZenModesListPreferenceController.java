@@ -25,6 +25,7 @@ import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexableRaw;
@@ -42,11 +43,14 @@ class ZenModesListPreferenceController extends BasePreferenceController
         implements BasePreferenceController.UiBlocker {
     protected static final String KEY = "zen_modes_list";
 
-    protected ZenModesBackend mBackend;
+    private final ZenModesBackend mBackend;
+    private final ZenIconLoader mIconLoader;
 
-    ZenModesListPreferenceController(Context context, @NonNull ZenModesBackend backend) {
+    ZenModesListPreferenceController(Context context, @NonNull ZenModesBackend backend, @NonNull
+            ZenIconLoader iconLoader) {
         super(context, KEY);
         mBackend = backend;
+        mIconLoader = iconLoader;
     }
 
     @Override
@@ -82,7 +86,7 @@ class ZenModesListPreferenceController extends BasePreferenceController
                 modePreference.setZenMode(mode);
             } else {
                 // new rule; create a new ZenRulePreference & add it to the preference category
-                modePreference = new ZenModesListItemPreference(mContext, mode);
+                modePreference = new ZenModesListItemPreference(mContext, mIconLoader, mode);
                 category.addPreference(modePreference);
             }
             modePreference.setOrder(modes.indexOf(mode));
@@ -114,7 +118,7 @@ class ZenModesListPreferenceController extends BasePreferenceController
         for (ZenMode mode : mBackend.getModes()) {
             SearchIndexableRaw data = new SearchIndexableRaw(mContext);
             data.key = mode.getId();
-            data.title = mode.getRule().getName();
+            data.title = mode.getName();
             data.screenTitle = res.getString(R.string.zen_modes_list_title);
             rawData.add(data);
         }

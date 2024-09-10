@@ -29,6 +29,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
     private static final String TAG = "PrivateSpaceCreateFrag";
     private static final int PRIVATE_SPACE_CREATE_POST_DELAY_MS = 1000;
     private static final int PRIVATE_SPACE_ACCOUNT_LOGIN_POST_DELAY_MS = 5000;
+    private static final int PRIVATE_SPACE_SETUP_NO_ERROR = 0;
     private static final Handler sHandler = new Handler(Looper.getMainLooper());
     private Runnable mRunnable =
             () -> {
@@ -122,6 +124,11 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
             Log.i(TAG, "Private Space created");
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED, true);
+            if (android.multiuser.Flags.showDifferentCreationErrorForUnsupportedDevices()) {
+                mMetricsFeatureProvider.action(
+                        getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_ERRORS,
+                        PRIVATE_SPACE_SETUP_NO_ERROR);
+            }
             if (isConnectedToInternet()) {
                 registerReceiver();
                 sHandler.postDelayed(
@@ -132,8 +139,18 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
             }
         } else {
             mMetricsFeatureProvider.action(
-                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED, false);
-            showPrivateSpaceErrorScreen();
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
+                    false);
+            if (android.multiuser.Flags.showDifferentCreationErrorForUnsupportedDevices()) {
+                int errorCode = PrivateSpaceMaintainer.getInstance(
+                        getActivity()).getPrivateSpaceCreateError();
+                mMetricsFeatureProvider.action(
+                        getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_ERRORS,
+                        errorCode);
+                showPrivateSpaceErrorScreen(errorCode);
+            } else {
+                showPrivateSpaceErrorScreen();
+            }
         }
     }
 
@@ -145,6 +162,16 @@ public class PrivateSpaceCreationFragment extends InstrumentedFragment {
     private void showPrivateSpaceErrorScreen() {
         NavHostFragment.findNavController(PrivateSpaceCreationFragment.this)
                 .navigate(R.id.action_create_profile_error);
+    }
+
+    private void showPrivateSpaceErrorScreen(int errorCode) {
+        if (errorCode == UserManager.USER_OPERATION_ERROR_USER_RESTRICTED
+                || errorCode == UserManager.USER_OPERATION_ERROR_PRIVATE_PROFILE) {
+            NavHostFragment.findNavController(PrivateSpaceCreationFragment.this)
+                    .navigate(R.id.action_create_profile_error_restrict);
+        } else {
+            showPrivateSpaceErrorScreen();
+        }
     }
 
     /** Returns true if device has an active internet connection, false otherwise. */

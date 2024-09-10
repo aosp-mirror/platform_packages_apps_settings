@@ -25,7 +25,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsDumpService;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -90,14 +89,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         controllers.add(new MobileNetworkSummaryController(context, lifecycle, lifecycleOwner));
         controllers.add(vpnPreferenceController);
-
-        if (Flags.internetPreferenceControllerV2()) {
-            controllers.add(
-                    new InternetPreferenceControllerV2(context, InternetPreferenceController.KEY));
-        } else {
-            controllers.add(new InternetPreferenceController(context, lifecycle, lifecycleOwner));
-        }
-
         controllers.add(privateDnsPreferenceController);
 
         // Start SettingsDumpService after the MobileNetworkRepository is created.

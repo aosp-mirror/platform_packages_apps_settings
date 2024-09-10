@@ -9,13 +9,6 @@ flag {
 }
 
 flag {
-  name: "enable_bluetooth_profile_toggle_visibility_checker"
-  namespace: "pixel_cross_device_control"
-  description: "Gates whether to enable checker for bluetooth profile toggle visibility"
-  bug: "321178209"
-}
-
-flag {
   name: "hide_le_audio_toggle_for_le_audio_only_device"
   namespace: "pixel_cross_device_control"
   description: "Gates whether to hide LeAudio toggle for LeAudio-only device"
@@ -37,6 +30,16 @@ flag {
   namespace: "cross_device_experiences"
   description: "Stop cancelling bonding process when there is an orientation change"
   bug: "349542301"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}
+
+flag {
+  name: "enable_bluetooth_key_missing_dialog"
+  namespace: "cross_device_experiences"
+  description: "Show a dialog if the bluetooth key is missing when reconnecting"
+  bug: "360031750"
   metadata {
       purpose: PURPOSE_BUGFIX
   }

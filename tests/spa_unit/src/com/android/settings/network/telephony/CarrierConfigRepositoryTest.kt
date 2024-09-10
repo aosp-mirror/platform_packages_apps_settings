@@ -78,6 +78,19 @@ class CarrierConfigRepositoryTest {
     }
 
     @Test
+    fun getIntArray_returnValue() {
+        val key = CarrierConfigManager.KEY_CARRIER_NR_AVAILABILITIES_INT_ARRAY
+        mockCarrierConfigManager.stub {
+            on { getConfigForSubId(any(), eq(key)) } doReturn
+                persistableBundleOf(key to intArrayOf(99))
+        }
+
+        val value = repository.getIntArray(SUB_ID, key)!!.toList()
+
+        assertThat(value).containsExactly(99)
+    }
+
+    @Test
     fun getString_returnValue() {
         val key = CarrierConfigManager.KEY_CARRIER_NAME_STRING
         mockCarrierConfigManager.stub {
@@ -104,7 +117,8 @@ class CarrierConfigRepositoryTest {
         assertThat(carrierName)
             .isEqualTo(
                 CarrierConfigManager.getDefaultConfig()
-                    .getInt(CarrierConfigManager.KEY_CARRIER_DEFAULT_WFC_IMS_MODE_INT))
+                    .getInt(CarrierConfigManager.KEY_CARRIER_DEFAULT_WFC_IMS_MODE_INT)
+            )
     }
 
     @Test

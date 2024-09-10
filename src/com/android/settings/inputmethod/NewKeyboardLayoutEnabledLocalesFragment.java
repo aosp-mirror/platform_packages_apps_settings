@@ -88,8 +88,14 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
                 break;
             }
             case ProfileSelectFragment.ProfileType.PERSONAL: {
-                final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
-                newUserId = primaryUser.getIdentifier();
+                // Use the parent user of the current user if the current user is profile.
+                final UserHandle currentUser = UserHandle.of(currentUserId);
+                final UserHandle userProfileParent = userManager.getProfileParent(currentUser);
+                if (userProfileParent != null) {
+                    newUserId = userProfileParent.getIdentifier();
+                } else {
+                    newUserId = currentUserId;
+                }
                 break;
             }
             default:
@@ -163,6 +169,19 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         preferenceScreen.removeAll();
         List<InputMethodInfo> infoList =
                 mImm.getEnabledInputMethodListAsUser(UserHandle.of(mUserId));
+
+        // Remove IMEs with no suitable ime subtypes
+        infoList.removeIf(imeInfo -> {
+            List<InputMethodSubtype> subtypes =
+                    mImm.getEnabledInputMethodSubtypeListAsUser(imeInfo.getId(), true,
+                            UserHandle.of(mUserId));
+            for (InputMethodSubtype subtype : subtypes) {
+                if (subtype.isSuitableForPhysicalKeyboardLayoutMapping()) {
+                    return false;
+                }
+            }
+            return true;
+        });
         Collections.sort(infoList, new Comparator<InputMethodInfo>() {
             public int compare(InputMethodInfo o1, InputMethodInfo o2) {
                 String s1 = o1.loadLabel(mContext.getPackageManager()).toString();
