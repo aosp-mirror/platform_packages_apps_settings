@@ -17,7 +17,6 @@
 package com.android.settings.wifi.details2
 
 import android.content.Context
-import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.os.Handler
@@ -56,6 +55,7 @@ import com.android.settingslib.spa.widget.ui.CategoryTitle
 import com.android.wifitrackerlib.WifiEntry
 import java.time.Clock
 import java.time.ZoneOffset
+import java.util.Base64
 
 const val WIFI_ENTRY_KEY = "wifiEntryKey"
 
@@ -69,7 +69,8 @@ object WifiPrivacyPageProvider : SettingsPageProvider {
 
     @Composable
     override fun Page(arguments: Bundle?) {
-        val wifiEntryKey = arguments!!.getString(WIFI_ENTRY_KEY)
+        val wifiEntryKey =
+            String(Base64.getUrlDecoder().decode(arguments!!.getString(WIFI_ENTRY_KEY)))
         if (wifiEntryKey != null) {
             val context = LocalContext.current
             val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -82,7 +83,7 @@ object WifiPrivacyPageProvider : SettingsPageProvider {
 
     fun getRoute(
         wifiEntryKey: String,
-    ): String = "${name}/$wifiEntryKey"
+    ): String = "${name}/${Base64.getUrlEncoder().encodeToString(wifiEntryKey.toByteArray())}"
 }
 
 @Composable
@@ -114,19 +115,19 @@ fun WifiPrivacyPage(wifiEntry: WifiEntry) {
                 }
             })
             wifiEntry.wifiConfiguration?.let {
-                DeviceNameSwitchPreference(it)
+                DeviceNameSwitchPreference(wifiEntry)
             }
         }
     }
 }
 
 @Composable
-fun DeviceNameSwitchPreference(wifiConfiguration: WifiConfiguration){
+fun DeviceNameSwitchPreference(wifiEntry: WifiEntry) {
     Spacer(modifier = Modifier.width(SettingsDimension.itemDividerHeight))
     CategoryTitle(title = stringResource(R.string.wifi_privacy_device_name_settings))
     Spacer(modifier = Modifier.width(SettingsDimension.itemDividerHeight))
     var checked by remember {
-        mutableStateOf(wifiConfiguration.isSendDhcpHostnameEnabled)
+        mutableStateOf(wifiEntry.wifiConfiguration?.isSendDhcpHostnameEnabled)
     }
     val context = LocalContext.current
     val wifiManager = context.getSystemService(WifiManager::class.java)!!
@@ -143,9 +144,11 @@ fun DeviceNameSwitchPreference(wifiConfiguration: WifiConfiguration){
             }
         override val checked = { checked }
         override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
-            wifiConfiguration.isSendDhcpHostnameEnabled = newChecked
-            wifiManager.save(wifiConfiguration, null /* listener */)
-            checked = newChecked
+            wifiEntry.wifiConfiguration?.let {
+                it.isSendDhcpHostnameEnabled = newChecked
+                wifiManager.save(it, null /* listener */)
+                checked = newChecked
+            }
         }
     })
 }

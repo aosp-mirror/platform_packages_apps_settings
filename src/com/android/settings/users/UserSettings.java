@@ -419,6 +419,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 mTimeoutToDockUserPreferenceController.getPreferenceKey()));
         mRemoveGuestOnExitPreferenceController.updateState(screen.findPreference(
                 mRemoveGuestOnExitPreferenceController.getPreferenceKey()));
+        mSwitchBarController.updateState();
         if (mShouldUpdateUserList) {
             updateUI();
         }
@@ -919,7 +920,7 @@ public class UserSettings extends SettingsPreferenceFragment
             d = mCreateUserDialogController.createDialog(
                     getActivity(),
                     this::startActivityForResult,
-                    UserManager.isMultipleAdminEnabled(),
+                    canCreateAdminUser(),
                     (userName, userIcon, isAdmin) -> {
                         mPendingUserIcon = userIcon;
                         mPendingUserName = userName;
@@ -935,6 +936,19 @@ public class UserSettings extends SettingsPreferenceFragment
             );
         }
         return d;
+    }
+
+    /**
+     * Checks if the creation of a new admin user is allowed.
+     * @return {@code true} if creating a new admin is allowed, {@code false} otherwise.
+     */
+    private boolean canCreateAdminUser() {
+        if (Flags.unicornModeRefactoringForHsumReadOnly()) {
+            return UserManager.isMultipleAdminEnabled()
+                    && !mUserManager.hasUserRestriction(UserManager.DISALLOW_GRANT_ADMIN);
+        } else {
+            return UserManager.isMultipleAdminEnabled();
+        }
     }
 
     @Override

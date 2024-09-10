@@ -23,10 +23,10 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.utils.ThreadUtils;
 
 /** Controller to maintain available media Bluetooth devices */
 public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
@@ -35,7 +35,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     private static final String TAG = "AvailableMediaBluetoothDeviceUpdater";
     private static final boolean DBG = Log.isLoggable(BluetoothDeviceUpdater.TAG, Log.DEBUG);
 
-    private static final String PREF_KEY = "available_media_bt";
+    private static final String PREF_KEY_PREFIX = "available_media_bt_";
 
     private final AudioManager mAudioManager;
     private final LocalBluetoothManager mLocalBtManager;
@@ -77,7 +77,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             // It would show in Available Devices group if the audio sharing flag is disabled or
             // the device is not in the audio sharing session.
             if (cachedDevice.isConnectedLeAudioDevice()) {
-                if (AudioSharingUtils.isFeatureEnabled()
+                if (BluetoothUtils.isAudioSharingEnabled()
                         && BluetoothUtils.hasConnectedBroadcastSource(
                                 cachedDevice, mLocalBtManager)) {
                     Log.d(
@@ -136,13 +136,15 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     public boolean onPreferenceClick(Preference preference) {
         mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
-        mDevicePreferenceCallback.onDeviceClick(preference);
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> mDevicePreferenceCallback.onDeviceClick(preference));
         return true;
     }
 
     @Override
-    protected String getPreferenceKey() {
-        return PREF_KEY;
+    protected String getPreferenceKeyPrefix() {
+        return PREF_KEY_PREFIX;
     }
 
     @Override

@@ -16,21 +16,28 @@
 
 package com.android.settings.notification.modes;
 
+import static android.service.notification.SystemZenRules.PACKAGE_ANDROID;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import android.app.Flags;
 import android.content.Context;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ZenModeConfig;
 
 import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -41,7 +48,11 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.Calendar;
 
 @RunWith(RobolectricTestRunner.class)
+@EnableFlags(Flags.FLAG_MODES_UI)
 public class ZenModeExitAtAlarmPreferenceControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private Context mContext;
     @Mock
     private ZenModesBackend mBackend;
@@ -68,6 +79,7 @@ public class ZenModeExitAtAlarmPreferenceControllerTest {
         scheduleInfo.exitAtAlarm = false;
 
         ZenMode mode = new TestModeBuilder()
+                .setPackage(PACKAGE_ANDROID)
                 .setConditionId(ZenModeConfig.toScheduleConditionId(scheduleInfo))
                 .build();
 
@@ -96,6 +108,7 @@ public class ZenModeExitAtAlarmPreferenceControllerTest {
         scheduleInfo.exitAtAlarm = true;
 
         ZenMode mode = new TestModeBuilder()
+                .setPackage(PACKAGE_ANDROID)
                 .setConditionId(ZenModeConfig.toScheduleConditionId(scheduleInfo))
                 .build();
         mPrefController.updateZenMode(preference, mode);

@@ -25,6 +25,7 @@ import androidx.annotation.Nullable;
 import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 public class AudioStreamConfirmDialogActivity extends SettingsActivity
@@ -49,7 +50,7 @@ public class AudioStreamConfirmDialogActivity extends SettingsActivity
 
     @Override
     protected void createUiFromIntent(@Nullable Bundle savedState, Intent intent) {
-        if (AudioSharingUtils.isFeatureEnabled()
+        if (BluetoothUtils.isAudioSharingEnabled()
                 && !AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
             Log.d(TAG, "createUiFromIntent() : supported but not ready, skip createUiFromIntent");
             mSavedState = savedState;
@@ -66,7 +67,7 @@ public class AudioStreamConfirmDialogActivity extends SettingsActivity
 
     @Override
     public void onStart() {
-        if (AudioSharingUtils.isFeatureEnabled()
+        if (BluetoothUtils.isAudioSharingEnabled()
                 && !AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
             Log.d(TAG, "onStart() : supported but not ready, listen to service ready");
             if (mProfileManager != null) {
@@ -86,7 +87,7 @@ public class AudioStreamConfirmDialogActivity extends SettingsActivity
 
     @Override
     public void onServiceConnected() {
-        if (AudioSharingUtils.isFeatureEnabled()
+        if (BluetoothUtils.isAudioSharingEnabled()
                 && AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
             if (mProfileManager != null) {
                 mProfileManager.removeServiceListener(this);

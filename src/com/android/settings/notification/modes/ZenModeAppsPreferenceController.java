@@ -106,10 +106,9 @@ public class ZenModeAppsPreferenceController extends
         if (mModeId != null) {
             bundle.putString(EXTRA_AUTOMATIC_ZEN_RULE_ID, mModeId);
         }
-        // TODO(b/332937635): Update metrics category
         new SubSettingLauncher(mContext)
                 .setDestination(ZenModeSelectBypassingAppsFragment.class.getName())
-                .setSourceMetricsCategory(SettingsEnums.SETTINGS_ZEN_NOTIFICATIONS)
+                .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APPS)
                 .setArguments(bundle)
                 .launch();
     }

@@ -24,6 +24,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
@@ -42,6 +43,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.content.pm.UserProperties;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Process;
 import android.os.UserHandle;
@@ -84,11 +86,16 @@ public class StylusDevicesControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final String NOTES_PACKAGE_NAME = "notes.package";
+    private static final ApplicationInfo DEFAULT_NOTES_APP = new ApplicationInfo();
     private static final CharSequence NOTES_APP_LABEL = "App Label";
+    private static final String NOTES_PACKAGE_NAME_WORK_PROFILE = "notes.package.work";
+    private static final ApplicationInfo DEFAULT_NOTES_APP_WORK_PROFILE = new ApplicationInfo();
+    private static final CharSequence NOTES_APP_LABEL_WORK_PROFILE = "Work Profile App Label";
     private static final int WORK_USER_ID = 1;
     private static final int PRIVATE_USER_ID = 2;
 
     private Context mContext;
+    private Resources mSpiedResources;
     private StylusDevicesController mController;
     private PreferenceCategory mPreferenceContainer;
     private PreferenceScreen mScreen;
@@ -124,8 +131,8 @@ public class StylusDevicesControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
-        final var spiedResources = spy(mContext.getResources());
-        when(mContext.getResources()).thenReturn(spiedResources);
+        mSpiedResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mSpiedResources);
 
         PreferenceManager preferenceManager = new PreferenceManager(mContext);
         mScreen = preferenceManager.createPreferenceScreen(mContext);
@@ -145,11 +152,22 @@ public class StylusDevicesControllerTest {
 
         when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES), any(UserHandle.class)))
                 .thenReturn(Collections.singletonList(NOTES_PACKAGE_NAME));
+        when(mRm.getRoleHoldersAsUser(eq(RoleManager.ROLE_NOTES),
+                argThat(userHandle -> userHandle.getIdentifier() == WORK_USER_ID)))
+                .thenReturn(Collections.singletonList(NOTES_PACKAGE_NAME_WORK_PROFILE));
         when(mRm.isRoleAvailable(RoleManager.ROLE_NOTES)).thenReturn(true);
         when(mContext.getPackageManager()).thenReturn(mPm);
+
+        when(mPm.getApplicationInfo(eq(NOTES_PACKAGE_NAME_WORK_PROFILE),
+                any(PackageManager.ApplicationInfoFlags.class))).thenReturn(
+                        DEFAULT_NOTES_APP_WORK_PROFILE);
+        when(mPm.getApplicationLabel(eq(DEFAULT_NOTES_APP_WORK_PROFILE)))
+                .thenReturn(NOTES_APP_LABEL_WORK_PROFILE);
         when(mPm.getApplicationInfo(eq(NOTES_PACKAGE_NAME),
-                any(PackageManager.ApplicationInfoFlags.class))).thenReturn(new ApplicationInfo());
-        when(mPm.getApplicationLabel(any(ApplicationInfo.class))).thenReturn(NOTES_APP_LABEL);
+                any(PackageManager.ApplicationInfoFlags.class))).thenReturn(
+                        DEFAULT_NOTES_APP);
+        when(mPm.getApplicationLabel(eq(DEFAULT_NOTES_APP))).thenReturn(NOTES_APP_LABEL);
+
         when(mPm.getUserBadgeForDensityNoBackground(any(), anyInt())).thenReturn(mIcon);
         when(mUserManager.getUsers()).thenReturn(Arrays.asList(new UserInfo(0, "default", 0)));
         when(mUserManager.isManagedProfile(anyInt())).thenReturn(false);
@@ -164,8 +182,9 @@ public class StylusDevicesControllerTest {
         when(mInputDevice.hasKeys(KEYCODE_STYLUS_BUTTON_TAIL)).thenReturn(
                 new boolean[]{true});
 
-        when(spiedResources.getBoolean(
+        when(mSpiedResources.getBoolean(
                 com.android.internal.R.bool.config_enableStylusPointerIcon)).thenReturn(true);
+        setDefaultNotesForWorkProfileEnabled(true);
 
         mController = new StylusDevicesController(mContext, mInputDevice, null, mLifecycle);
     }
@@ -383,7 +402,25 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
-    public void defaultNotesPreferenceClick_multiUserManagedProfile_showsProfileSelectorDialog() {
+    public void defaultNotesPreferenceClick_disabledForWorkProfile_sendsManageDefaultRoleIntent() {
+        setDefaultNotesForWorkProfileEnabled(false);
+        setUpMultiUserPropertiesForNotesRoleSettings();
+
+        showScreen(mController);
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        mController.onPreferenceClick(defaultNotesPref);
+        assertNull(mController.mDialog);
+    }
+
+    private void setDefaultNotesForWorkProfileEnabled(boolean value) {
+        when(mSpiedResources.getBoolean(
+                android.R.bool.config_enableDefaultNotesForWorkProfile))
+                .thenReturn(value);
+        // Recreate the controller so that the DefaultNotesForWorkProfileEnabled value is updated.
+        mController = new StylusDevicesController(mContext, mInputDevice, null, mLifecycle);
+    }
+
+    private void setUpMultiUserPropertiesForNotesRoleSettings() {
         mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final String permissionPackageName = "permissions.package";
         final UserHandle currentUser = Process.myUserHandle();
@@ -409,54 +446,11 @@ public class StylusDevicesControllerTest {
         when(mUserManager.getUserProperties(UserHandle.of(WORK_USER_ID)))
                 .thenReturn(workUserProperties);
         when(mPm.getPermissionControllerPackageName()).thenReturn(permissionPackageName);
-
-        showScreen(mController);
-        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
-        mController.onPreferenceClick(defaultNotesPref);
-
-        assertTrue(mController.mDialog.isShowing());
     }
 
     @Test
-    public void defaultNotesPreferenceClick_multiUsers_showsProfileSelectorDialog() {
-        mSetFlagsRule.enableFlags(
-                android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
-                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES,
-                android.multiuser.Flags.FLAG_HANDLE_INTERLEAVED_SETTINGS_FOR_PRIVATE_SPACE);
-        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
-        final String permissionPackageName = "permissions.package";
-        final UserHandle currentUser = Process.myUserHandle();
-        List<UserInfo> userInfos = Arrays.asList(
-                mPersonalUserInfo,
-                mPrivateUserInfo,
-                mWorkUserInfo
-        );
-        UserProperties personalUserProperties =
-                new UserProperties.Builder()
-                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_DEFAULT)
-                        .build();
-        UserProperties workUserProperties =
-                new UserProperties.Builder()
-                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_PAUSED)
-                        .build();
-        UserProperties privateUserProperties =
-                new UserProperties.Builder()
-                        .setShowInQuietMode(UserProperties.SHOW_IN_QUIET_MODE_HIDDEN)
-                        .build();
-        when(mWorkUserInfo.isManagedProfile()).thenReturn(true);
-        when(mWorkUserInfo.getUserHandle()).thenReturn(UserHandle.of(WORK_USER_ID));
-        when(mPrivateUserInfo.isPrivateProfile()).thenReturn(true);
-        when(mPrivateUserInfo.getUserHandle()).thenReturn(UserHandle.of(PRIVATE_USER_ID));
-        when(mUserManager.getProfiles(currentUser.getIdentifier())).thenReturn(userInfos);
-        when(mUserManager.getUserInfo(currentUser.getIdentifier())).thenReturn(mPersonalUserInfo);
-        when(mUserManager.getUserInfo(WORK_USER_ID)).thenReturn(mWorkUserInfo);
-        when(mUserManager.getUserInfo(PRIVATE_USER_ID)).thenReturn(mPrivateUserInfo);
-        when(mUserManager.getUserProperties(currentUser)).thenReturn(personalUserProperties);
-        when(mUserManager.getUserProperties(UserHandle.of(PRIVATE_USER_ID)))
-                .thenReturn(privateUserProperties);
-        when(mUserManager.getUserProperties(UserHandle.of(WORK_USER_ID)))
-                .thenReturn(workUserProperties);
-        when(mPm.getPermissionControllerPackageName()).thenReturn(permissionPackageName);
+    public void defaultNotesPreferenceClick_multiUserManagedProfile_showsProfileSelectorDialog() {
+        setUpMultiUserPropertiesForNotesRoleSettings();
 
         showScreen(mController);
         Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
@@ -509,6 +503,34 @@ public class StylusDevicesControllerTest {
 
         assertEquals(intent.getExtra(Intent.EXTRA_USER), user2);
         verify(mContext).startActivity(intent);
+    }
+
+    @Test
+    public void defaultNotesPreference_workProfileDisabled_ignoresOldWorkProfilePreference() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Secure.DEFAULT_NOTE_TASK_PROFILE, WORK_USER_ID);
+        setDefaultNotesForWorkProfileEnabled(false);
+
+        showScreen(mController);
+
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        assertThat(defaultNotesPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_default_notes_app));
+        assertThat(defaultNotesPref.getSummary().toString()).isEqualTo(NOTES_APP_LABEL.toString());
+    }
+
+    @Test
+    public void defaultNotesPreference_workProfileChosen_showsWorkNotesRoleApp() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Secure.DEFAULT_NOTE_TASK_PROFILE, WORK_USER_ID);
+
+        showScreen(mController);
+
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        assertThat(defaultNotesPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_default_notes_app));
+        assertThat(defaultNotesPref.getSummary().toString()).isEqualTo(
+                NOTES_APP_LABEL_WORK_PROFILE.toString());
     }
 
     @Test

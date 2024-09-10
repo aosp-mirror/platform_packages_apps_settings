@@ -24,14 +24,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.activeunlock.ActiveUnlockContentListener.OnContentChangedListener;
 import com.android.settings.biometrics.activeunlock.ActiveUnlockDeviceNameListener;
 import com.android.settings.biometrics.activeunlock.ActiveUnlockRequireBiometricSetup;
 import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -51,6 +56,10 @@ public class CombinedBiometricSettings extends BiometricsSettingsBase {
     private ActiveUnlockStatusUtils mActiveUnlockStatusUtils;
     private CombinedBiometricStatusUtils mCombinedBiometricStatusUtils;
     @Nullable private ActiveUnlockDeviceNameListener mActiveUnlockDeviceNameListener;
+
+    private final ActivityResultLauncher<Intent> mActiveUnlockPreferenceLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                    this::onActiveUnlockPreferenceResult);
 
     @Override
     public void onAttach(Context context) {
@@ -158,10 +167,23 @@ public class CombinedBiometricSettings extends BiometricsSettingsBase {
             intent = mActiveUnlockStatusUtils.getIntent();
         }
         if (intent != null) {
-            startActivityForResult(intent, ACTIVE_UNLOCK_REQUEST);
+            if (Flags.activeUnlockFinishParent()) {
+                mActiveUnlockPreferenceLauncher.launch(intent);
+            } else {
+                startActivityForResult(intent, ACTIVE_UNLOCK_REQUEST);
+            }
         }
         return true;
 
+    }
+
+    private void onActiveUnlockPreferenceResult(@Nullable ActivityResult result) {
+        if (result != null && result.getResultCode() == BiometricEnrollBase.RESULT_TIMEOUT) {
+            mDoNotFinishActivity = false;
+            // When "Watch Unlock" is closed due to entering onStop(),
+            // "Face & Fingerprint Unlock" shall also close itself and back to "Security" page.
+            finish();
+        }
     }
 
     @Override

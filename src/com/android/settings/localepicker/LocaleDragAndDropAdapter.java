@@ -54,6 +54,7 @@ class LocaleDragAndDropAdapter
     private static final String TAG = "LocaleDragAndDropAdapter";
     private static final String CFGKEY_SELECTED_LOCALES = "selectedLocales";
     private static final String CFGKEY_DRAG_LOCALE = "dragLocales";
+    private static final String CFGKEY_MOVE_LOCALE_TO= "localeMoveTo";
 
     private final Context mContext;
     private final ItemTouchHelper mItemTouchHelper;
@@ -65,6 +66,7 @@ class LocaleDragAndDropAdapter
     private boolean mDragEnabled = true;
     private NumberFormat mNumberFormatter = NumberFormat.getNumberInstance();
     private LocaleStore.LocaleInfo mDragLocale;
+    private int mMovedLocaleTo;
 
     class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener {
         private final LocaleDragCell mLocaleDragCell;
@@ -229,6 +231,7 @@ class LocaleDragAndDropAdapter
             mFeedItemList.remove(fromPosition);
             mFeedItemList.add(toPosition, saved);
             mDragLocale = saved;
+            mMovedLocaleTo = toPosition;
         } else {
             // TODO: It looks like sometimes the RecycleView tries to swap item -1
             // I did not see it in a while, but if it happens, investigate and file a bug.
@@ -391,6 +394,7 @@ class LocaleDragAndDropAdapter
             outInstanceState.putStringArrayList(CFGKEY_SELECTED_LOCALES, selectedLocales);
             // Save the dragged locale before rotation
             outInstanceState.putSerializable(CFGKEY_DRAG_LOCALE, mDragLocale);
+            outInstanceState.putInt(CFGKEY_MOVE_LOCALE_TO, mMovedLocaleTo);
         }
     }
 
@@ -418,11 +422,12 @@ class LocaleDragAndDropAdapter
                 // drag locale's original position to the top.
                 mDragLocale = (LocaleStore.LocaleInfo) savedInstanceState.getSerializable(
                         CFGKEY_DRAG_LOCALE);
+                mMovedLocaleTo = savedInstanceState.getInt(CFGKEY_MOVE_LOCALE_TO);
                 if (mDragLocale != null) {
                     mFeedItemList.removeIf(
                             localeInfo -> TextUtils.equals(localeInfo.getId(),
                                     mDragLocale.getId()));
-                    mFeedItemList.add(0, mDragLocale);
+                    mFeedItemList.add(mMovedLocaleTo, mDragLocale);
                     notifyItemRangeChanged(0, mFeedItemList.size());
                 }
             }

@@ -27,16 +27,20 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Flags;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.android.settings.notification.modes.ZenModesListAddModePreferenceController.ModeType;
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
@@ -52,7 +56,11 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowActivity.IntentForResult;
 
 @RunWith(RobolectricTestRunner.class)
+@EnableFlags(Flags.FLAG_MODES_UI)
 public class ZenModesListFragmentTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final ModeType APP_PROVIDED_MODE_TYPE = new ModeType("Mode", new ColorDrawable(),
             "Details", new Intent().setComponent(new ComponentName("pkg", "configActivity")));
@@ -76,14 +84,14 @@ public class ZenModesListFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ZenModesBackend.setInstance(mBackend);
+
         mFragment = new ZenModesListFragment();
         mActivityScenario.getScenario().onActivity(activity -> {
             activity.getSupportFragmentManager().beginTransaction()
                     .add(mFragment, "tag").commitNow();
             mActivity = activity;
         });
-
-        mFragment.setBackend(mBackend); // after onAttach()
     }
 
     @Test

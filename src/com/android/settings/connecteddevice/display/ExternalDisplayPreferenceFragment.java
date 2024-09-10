@@ -48,9 +48,6 @@ import com.android.settings.SettingsPreferenceFragmentBase;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.Injector;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
-import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
@@ -63,12 +60,8 @@ import java.util.List;
 /**
  * The Settings screen for External Displays configuration and connection management.
  */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmentBase
-        implements Indexable {
+public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmentBase {
     static final int EXTERNAL_DISPLAY_SETTINGS_RESOURCE = R.xml.external_display_settings;
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(EXTERNAL_DISPLAY_SETTINGS_RESOURCE);
     static final String DISPLAYS_LIST_PREFERENCE_KEY = "displays_list_preference";
     static final String EXTERNAL_DISPLAY_USE_PREFERENCE_KEY = "external_display_use_preference";
     static final String EXTERNAL_DISPLAY_ROTATION_KEY = "external_display_rotation";
@@ -77,7 +70,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             R.string.external_display_change_resolution_footer_title;
     static final int EXTERNAL_DISPLAY_LANDSCAPE_DRAWABLE =
             R.drawable.external_display_mirror_landscape;
-    static final int EXTERANAL_DISPLAY_TITLE_RESOURCE =
+    static final int EXTERNAL_DISPLAY_TITLE_RESOURCE =
             R.string.external_display_settings_title;
     static final int EXTERNAL_DISPLAY_USE_TITLE_RESOURCE =
             R.string.external_display_use_title;
@@ -332,7 +325,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 return;
             }
         }
-        activity.setTitle(EXTERANAL_DISPLAY_TITLE_RESOURCE);
+        activity.setTitle(EXTERNAL_DISPLAY_TITLE_RESOURCE);
     }
 
     private void showTextWhenNoDisplaysToShow(@NonNull final PreferenceScreen screen,

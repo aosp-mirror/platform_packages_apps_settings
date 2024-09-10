@@ -21,10 +21,17 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.FlashNotificationsUtil.DEFAULT_SCREEN_FLASH_COLOR;
 
 import android.content.Context;
+import android.database.ContentObserver;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Handler;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -32,22 +39,35 @@ import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
-import java.util.function.Consumer;
-
 /**
  * Controller for Screen flash notification.
  */
-public class ScreenFlashNotificationPreferenceController extends TogglePreferenceController {
+public class ScreenFlashNotificationPreferenceController extends
+        TogglePreferenceController implements DefaultLifecycleObserver {
+
+    private final FlashNotificationColorContentObserver mFlashNotificationColorContentObserver;
 
     private Fragment mParentFragment;
     private Preference mPreference;
 
     public ScreenFlashNotificationPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mFlashNotificationColorContentObserver = new FlashNotificationColorContentObserver(
+                new Handler(mContext.getMainLooper()));
     }
 
     public void setParentFragment(Fragment parentFragment) {
         this.mParentFragment = parentFragment;
+    }
+
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        mFlashNotificationColorContentObserver.register(mContext);
+    }
+
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
+        mFlashNotificationColorContentObserver.unregister(mContext);
     }
 
     @Override
@@ -100,14 +120,8 @@ public class ScreenFlashNotificationPreferenceController extends TogglePreferenc
                     Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR,
                     DEFAULT_SCREEN_FLASH_COLOR);
 
-            final Consumer<Integer> consumer = color -> {
-                Settings.System.putInt(mContext.getContentResolver(),
-                        Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, color);
-                refreshColorSummary();
-            };
-
             ScreenFlashNotificationColorDialogFragment
-                    .getInstance(initialColor, consumer)
+                    .getInstance(initialColor)
                     .show(mParentFragment.getParentFragmentManager(),
                             ScreenFlashNotificationColorDialogFragment.class.getSimpleName());
             return true;
@@ -127,5 +141,38 @@ public class ScreenFlashNotificationPreferenceController extends TogglePreferenc
 
     private void refreshColorSummary() {
         if (mPreference != null) mPreference.setSummary(getSummary());
+    }
+
+    private final class FlashNotificationColorContentObserver extends ContentObserver {
+        private final Uri mColorUri = Settings.System.getUriFor(
+                Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR);
+
+        FlashNotificationColorContentObserver(Handler handler) {
+            super(handler);
+        }
+
+        /**
+         * Register this observer to given {@link Context}, to be called from lifecycle
+         * {@code onStart} method.
+         */
+        public void register(@NonNull Context context) {
+            context.getContentResolver().registerContentObserver(
+                    mColorUri, /* notifyForDescendants= */ false, this);
+        }
+
+        /**
+         * Unregister this observer from given {@link Context}, to be called from lifecycle
+         * {@code onStop} method.
+         */
+        public void unregister(@NonNull Context context) {
+            context.getContentResolver().unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, @Nullable Uri uri) {
+            if (mColorUri.equals(uri)) {
+                refreshColorSummary();
+            }
+        }
     }
 }

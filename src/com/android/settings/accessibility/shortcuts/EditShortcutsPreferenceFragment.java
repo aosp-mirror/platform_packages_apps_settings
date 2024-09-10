@@ -20,6 +20,7 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED;
+import static android.provider.Settings.Secure.ACCESSIBILITY_GESTURE_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED;
 import static android.provider.Settings.Secure.ACCESSIBILITY_QS_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
@@ -60,7 +61,6 @@ import com.android.internal.accessibility.dialog.AccessibilityTargetHelper;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.accessibility.AccessibilitySetupWizardUtils;
-import com.android.settings.accessibility.Flags;
 import com.android.settings.accessibility.PreferredShortcuts;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -94,7 +94,8 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
             Settings.Secure.getUriFor(ACCESSIBILITY_BUTTON_MODE);
     private static final Uri BUTTON_SHORTCUT_SETTING =
             Settings.Secure.getUriFor(ACCESSIBILITY_BUTTON_TARGETS);
-
+    private static final Uri GESTURE_SHORTCUT_SETTING =
+            Settings.Secure.getUriFor(ACCESSIBILITY_GESTURE_TARGETS);
     private static final Uri TRIPLE_TAP_SHORTCUT_SETTING =
             Settings.Secure.getUriFor(ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
     private static final Uri TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING =
@@ -108,6 +109,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
             VOLUME_KEYS_SHORTCUT_SETTING,
             BUTTON_SHORTCUT_MODE_SETTING,
             BUTTON_SHORTCUT_SETTING,
+            GESTURE_SHORTCUT_SETTING,
             TRIPLE_TAP_SHORTCUT_SETTING,
             TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING,
             QUICK_SETTINGS_SHORTCUT_SETTING,
@@ -174,6 +176,8 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
                 } else if (BUTTON_SHORTCUT_MODE_SETTING.equals(uri)
                         || BUTTON_SHORTCUT_SETTING.equals(uri)) {
                     refreshSoftwareShortcutControllers();
+                } else if (GESTURE_SHORTCUT_SETTING.equals(uri)) {
+                    refreshPreferenceController(GestureShortcutOptionController.class);
                 } else if (TRIPLE_TAP_SHORTCUT_SETTING.equals(uri)) {
                     refreshPreferenceController(TripleTapShortcutOptionController.class);
                 } else if (TWO_FINGERS_DOUBLE_TAP_SHORTCUT_SETTING.equals(uri)) {
@@ -199,8 +203,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
         Activity activity = getActivity();
 
         if (!activity.getIntent().getAction().equals(
-                Settings.ACTION_ACCESSIBILITY_SHORTCUT_SETTINGS)
-                || !Flags.editShortcutsInFullScreen()) {
+                Settings.ACTION_ACCESSIBILITY_SHORTCUT_SETTINGS)) {
             return;
         }
 

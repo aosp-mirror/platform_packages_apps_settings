@@ -27,9 +27,9 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.VibrationAttributes;
 import android.os.Vibrator;
-import android.os.vibrator.Flags;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -70,7 +70,8 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     public KeyboardVibrationTogglePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mVibrator = context.getSystemService(Vibrator.class);
-        mContentObserver = new ContentObserver(new Handler(/* async= */ true)) {
+        Handler handler = Looper.myLooper() != null ? new Handler(/* async= */ true) : null;
+        mContentObserver = new ContentObserver(handler) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
                 if (uri.equals(MAIN_VIBRATION_SWITCH_URI)) {
@@ -110,9 +111,8 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        if (Flags.keyboardCategoryEnabled()
-                && mContext.getResources().getBoolean(
-                        com.android.internal.R.bool.config_keyboardVibrationSettingsSupported)) {
+        if (mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsSupported)) {
             return AVAILABLE;
         }
         return UNSUPPORTED_ON_DEVICE;
@@ -130,15 +130,9 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_KEYBOARD_VIBRATION_CHANGED, isChecked);
         if (success && isChecked) {
-            // Play the preview vibration effect when the toggle is on.
-            final VibrationAttributes touchAttrs =
-                    VibrationPreferenceConfig.createPreviewVibrationAttributes(
-                            VibrationAttributes.USAGE_TOUCH);
-            final VibrationAttributes keyboardAttrs =
-                    new VibrationAttributes.Builder(touchAttrs)
-                            .setCategory(VibrationAttributes.CATEGORY_KEYBOARD)
-                            .build();
-            VibrationPreferenceConfig.playVibrationPreview(mVibrator, keyboardAttrs);
+            // Play the preview vibration effect for the IME feedback when the toggle is on.
+            VibrationPreferenceConfig.playVibrationPreview(
+                    mVibrator, VibrationAttributes.USAGE_IME_FEEDBACK);
         }
         return true;
     }

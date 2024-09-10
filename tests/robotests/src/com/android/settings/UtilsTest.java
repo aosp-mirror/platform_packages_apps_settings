@@ -22,6 +22,7 @@ import static android.hardware.biometrics.SensorProperties.STRENGTH_WEAK;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_AUTHENTICATORS;
+import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_HIDE_BACKGROUND;
 import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -81,6 +82,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 
@@ -528,35 +530,49 @@ public class UtilsTest {
 
     @Test
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
-    public void testRequestBiometricAuthentication_biometricManagerNull_shouldReturnFalse() {
+    public void testRequestBiometricAuthentication_biometricManagerNull_shouldReturnNotActive() {
         when(mContext.getSystemService(BiometricManager.class)).thenReturn(null);
         assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
-                false /* biometricsSuccessfullyAuthenticated */,
-                false /* biometricsAuthenticationRequested */)).isFalse();
+                false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
+                        Utils.BiometricStatus.NOT_ACTIVE);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
-    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccess_shouldReturnTrue() {
-        when(mBiometricManager.canAuthenticate(
+    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccess_shouldReturnOk() {
+        when(mBiometricManager.canAuthenticate(USER_ID,
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
-        boolean requestBiometricAuthenticationForMandatoryBiometrics =
+        final Utils.BiometricStatus requestBiometricAuthenticationForMandatoryBiometrics =
                 Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
-                true /* biometricsSuccessfullyAuthenticated */,
-                false /* biometricsAuthenticationRequested */);
-        assertThat(requestBiometricAuthenticationForMandatoryBiometrics).isFalse();
+                        false /* biometricsAuthenticationRequested */, USER_ID);
+        assertThat(requestBiometricAuthenticationForMandatoryBiometrics).isEqualTo(
+                Utils.BiometricStatus.OK);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
-    public void testRequestBiometricAuthentication_biometricManagerReturnsError_shouldReturnFalse() {
-        when(mBiometricManager.canAuthenticate(
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+    public void testRequestBiometricAuthentication_biometricManagerReturnsError_shouldReturnError() {
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
         assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
-                false /* biometricsSuccessfullyAuthenticated */,
-                false /* biometricsAuthenticationRequested */)).isFalse();
+                false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
+                        Utils.BiometricStatus.ERROR);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccessForDifferentUser_shouldReturnError() {
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
+        when(mBiometricManager.canAuthenticate(0 /* userId */,
+                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
+        assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
+                false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
+                        Utils.BiometricStatus.ERROR);
     }
 
     @Test
@@ -566,7 +582,8 @@ public class UtilsTest {
 
         final int requestCode = 1;
         final ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        Utils.launchBiometricPromptForMandatoryBiometrics(mFragment, requestCode);
+        Utils.launchBiometricPromptForMandatoryBiometrics(mFragment, requestCode, USER_ID,
+                false /* hideBackground */);
 
         verify(mFragment).startActivityForResult(intentArgumentCaptor.capture(), eq(requestCode));
 
@@ -576,9 +593,14 @@ public class UtilsTest {
                 BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
         assertThat(intent.getExtra(BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT)).isNotNull();
         assertThat(intent.getExtra(KeyguardManager.EXTRA_DESCRIPTION)).isNotNull();
+        assertThat(intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, false))
+                .isTrue();
+        assertThat(intent.getBooleanExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND, true))
+                .isFalse();
+        assertThat(intent.getIntExtra(Intent.EXTRA_USER_ID, 0)).isEqualTo(USER_ID);
         assertThat(intent.getComponent().getPackageName()).isEqualTo(SETTINGS_PACKAGE_NAME);
         assertThat(intent.getComponent().getClassName()).isEqualTo(
-                ConfirmDeviceCredentialActivity.class.getName());
+                ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
     }
 
     private void setUpForConfirmCredentialString(boolean isEffectiveUserManagedProfile) {

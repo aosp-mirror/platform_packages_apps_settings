@@ -42,3 +42,24 @@ flag {
     description: "Feature flag to remove relevant slices dependencies."
     bug: "297367302"
 }
+
+flag {
+    name: "support_raw_dynamic_icons"
+    namespace: "android_settings"
+    description: "Flag to gate support of injected preference icons containing raw data"
+    bug: "351884562"
+}
+
+flag {
+  name: "catalyst_legal_information"
+  namespace: "android_settings"
+  description: "This flag controls the About phone > Legal information page migration"
+  bug: "323791114"
+}
+
+flag {
+    name: "updated_suggestion_card_aosp"
+    namespace: "android_settings"
+    description: "Use updated suggestion card(s) in AOSP Settings"
+    bug: "323258154"
+}

@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -31,6 +30,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.text.SpannableString;
 
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
@@ -39,6 +39,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -75,7 +76,9 @@ public class AudioStreamStateHandlerTest {
 
         verify(mPreference, never()).setAudioStreamState(any());
         verify(mHandler, never()).performAction(any(), any(), any());
-        verify(mPreference, never()).setIsConnected(anyBoolean(), anyString(), any());
+        verify(mPreference, never()).setIsConnected(anyBoolean());
+        verify(mPreference, never()).setSummary(any());
+        verify(mPreference, never()).setOnPreferenceClickListener(any());
     }
 
     @Test
@@ -93,7 +96,9 @@ public class AudioStreamStateHandlerTest {
                 .setAudioStreamState(
                         AudioStreamsProgressCategoryController.AudioStreamState.SOURCE_ADDED);
         verify(mHandler).performAction(any(), any(), any());
-        verify(mPreference).setIsConnected(eq(true), eq(""), eq(null));
+        verify(mPreference).setIsConnected(eq(true));
+        verify(mPreference).setSummary(eq(""));
+        verify(mPreference).setOnPreferenceClickListener(eq(null));
     }
 
     @Test
@@ -119,7 +124,13 @@ public class AudioStreamStateHandlerTest {
                         AudioStreamsProgressCategoryController.AudioStreamState
                                 .ADD_SOURCE_BAD_CODE);
         verify(mHandler).performAction(any(), any(), any());
-        verify(mPreference).setIsConnected(eq(false), eq(SUMMARY), eq(listener));
+        verify(mPreference).setIsConnected(eq(false));
+        ArgumentCaptor<SpannableString> argumentCaptor =
+                ArgumentCaptor.forClass(SpannableString.class);
+        verify(mPreference).setSummary(argumentCaptor.capture());
+        assertThat(argumentCaptor.getValue()).isNotNull();
+        assertThat(argumentCaptor.getValue().toString()).isEqualTo(SUMMARY);
+        verify(mPreference).setOnPreferenceClickListener(eq(listener));
     }
 
     @Test

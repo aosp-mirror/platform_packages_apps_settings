@@ -21,25 +21,22 @@ import static com.google.common.base.Preconditions.checkState;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -79,7 +76,11 @@ public abstract class ZenModeEditNameIconFragmentBase extends DashboardFragment 
                 ? icicle.getParcelable(MODE_KEY, ZenMode.class)
                 : onCreateInstantiateZenMode();
 
-        if (mZenMode == null) {
+        if (mZenMode != null) {
+            for (var controller : getZenPreferenceControllers()) {
+                controller.setZenMode(mZenMode);
+            }
+        } else {
             finish();
         }
     }
@@ -102,12 +103,21 @@ public abstract class ZenModeEditNameIconFragmentBase extends DashboardFragment 
     protected final List<AbstractPreferenceController> createPreferenceControllers(
             Context context) {
         return ImmutableList.of(
-                new ZenModeIconPickerIconPreferenceController(context, "chosen_icon", this),
+                new ZenModeIconPickerIconPreferenceController(context, ZenIconLoader.getInstance(),
+                        "chosen_icon", this),
                 new ZenModeEditNamePreferenceController(context, "name", this::setModeName),
                 new ZenModeIconPickerListPreferenceController(context, "icon_list",
                         this::setModeIcon),
                 new ZenModeEditDonePreferenceController(context, "done", this::saveMode)
         );
+    }
+
+    private Iterable<AbstractZenModePreferenceController> getZenPreferenceControllers() {
+        return getPreferenceControllers().stream()
+                .flatMap(List::stream)
+                .filter(AbstractZenModePreferenceController.class::isInstance)
+                .map(AbstractZenModePreferenceController.class::cast)
+                .toList();
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
@@ -116,52 +126,18 @@ public abstract class ZenModeEditNameIconFragmentBase extends DashboardFragment 
         return mZenMode;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        updateControllers();
-    }
-
     @VisibleForTesting
     final void setModeName(String name) {
         checkNotNull(mZenMode).getRule().setName(Strings.nullToEmpty(name));
-        updateControllers(); // Updates confirmation button.
+        forceUpdatePreferences(); // Updates confirmation button.
     }
 
     @VisibleForTesting
     final void setModeIcon(@DrawableRes int iconResId) {
         checkNotNull(mZenMode).getRule().setIconResId(iconResId);
-        updateControllers(); // Updates icon at the top.
+        forceUpdatePreferences();  // Updates icon at the top.
     }
 
-    protected void updateControllers() {
-        PreferenceScreen screen = getPreferenceScreen();
-        Collection<List<AbstractPreferenceController>> controllers = getPreferenceControllers();
-        if (mZenMode == null || screen == null || controllers == null) {
-            return;
-        }
-        for (List<AbstractPreferenceController> list : controllers) {
-            for (AbstractPreferenceController controller : list) {
-                try {
-                    final String key = controller.getPreferenceKey();
-                    final Preference preference = screen.findPreference(key);
-                    if (preference != null) {
-                        AbstractZenModePreferenceController zenController =
-                                (AbstractZenModePreferenceController) controller;
-                        zenController.updateZenMode(preference, mZenMode);
-                    } else {
-                        Log.d(getLogTag(),
-                                String.format("Cannot find preference with key %s in Controller %s",
-                                        key, controller.getClass().getSimpleName()));
-                    }
-                    controller.displayPreference(screen);
-                } catch (ClassCastException e) {
-                    // Skip any controllers that aren't AbstractZenModePreferenceController.
-                    Log.d(getLogTag(), "Could not cast: " + controller.getClass().getSimpleName());
-                }
-            }
-        }
-    }
 
     @VisibleForTesting
     final void saveMode() {

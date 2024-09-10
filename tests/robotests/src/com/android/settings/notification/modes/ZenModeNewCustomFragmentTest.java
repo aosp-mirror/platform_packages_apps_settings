@@ -30,8 +30,11 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
+import android.app.Flags;
 import android.content.Intent;
 import android.os.Bundle;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.fragment.app.testing.FragmentScenario;
@@ -39,6 +42,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.android.internal.R;
+import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
@@ -52,7 +56,11 @@ import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
+@EnableFlags(Flags.FLAG_MODES_UI)
 public class ZenModeNewCustomFragmentTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Rule
     public ActivityScenarioRule<EmptyFragmentActivity> mActivityScenario =

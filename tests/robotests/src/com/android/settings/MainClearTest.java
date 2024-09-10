@@ -138,7 +138,11 @@ public class MainClearTest {
         // Make scrollView only have one child
         when(mScrollView.getChildAt(0)).thenReturn(mLinearLayout);
         when(mScrollView.getChildCount()).thenReturn(1);
-        doReturn(mActivity).when(mMainClear).getActivity();
+        doReturn(mMockActivity).when(mMainClear).getActivity();
+        when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE);
     }
 
     @After
@@ -366,8 +370,8 @@ public class MainClearTest {
         when(mContext.getResources()).thenReturn(mResources);
         when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
         when(mResources.getString(anyInt())).thenReturn(TEST_ACCOUNT_NAME);
-        when(mBiometricManager.canAuthenticate(
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
         doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
         doNothing().when(mMainClear).startActivityForResult(any(), anyInt());
@@ -385,6 +389,30 @@ public class MainClearTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void testOnActivityResultInternal_keyguardRequestNotTriggeringBiometricPrompt_lockoutError() {
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
+        when(mResources.getString(anyInt())).thenReturn(TEST_ACCOUNT_NAME);
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_LOCKOUT);
+        doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        doNothing().when(mMainClear).startActivityForResult(any(), anyInt());
+        doReturn(mMockActivity).when(mMainClear).getActivity();
+        doReturn(mContext).when(mMainClear).getContext();
+
+        mMainClear
+                .onActivityResultInternal(MainClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+
+        verify(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        verify(mMainClear, never()).startActivityForResult(any(), eq(MainClear.BIOMETRICS_REQUEST));
+        verify(mMainClear, never()).establishInitialState();
+        verify(mMainClear, never()).getAccountConfirmationIntent();
+        verify(mMainClear, never()).showFinalConfirmation();
+    }
+
+    @Test
     public void testOnActivityResultInternal_biometricRequestTriggeringFinalConfirmation() {
         doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.BIOMETRICS_REQUEST));
         doReturn(null).when(mMainClear).getAccountConfirmationIntent();
@@ -393,10 +421,10 @@ public class MainClearTest {
         mMainClear
                 .onActivityResultInternal(MainClear.BIOMETRICS_REQUEST, Activity.RESULT_OK, null);
 
-        verify(mMainClear, times(1)).isValidRequestCode(eq(MainClear.BIOMETRICS_REQUEST));
-        verify(mMainClear, times(0)).establishInitialState();
-        verify(mMainClear, times(1)).getAccountConfirmationIntent();
-        verify(mMainClear, times(1)).showFinalConfirmation();
+        verify(mMainClear).isValidRequestCode(eq(MainClear.BIOMETRICS_REQUEST));
+        verify(mMainClear, never()).establishInitialState();
+        verify(mMainClear).getAccountConfirmationIntent();
+        verify(mMainClear).showFinalConfirmation();
     }
 
     @Test
