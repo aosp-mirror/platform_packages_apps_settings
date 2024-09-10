@@ -13,7 +13,7 @@ android_test {
 
     certificate: "platform",
 
-    libs: ["android.test.runner"],
+    libs: ["android.test.runner.stubs.system"],
 
     static_libs: [
         "androidx.test.rules",
