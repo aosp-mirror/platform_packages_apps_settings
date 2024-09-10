@@ -179,6 +179,8 @@ public class FallbackHome extends Activity {
                         SystemClock.uptimeMillis(), false);
                 finish();
             }
+        } else {
+            Log.d(TAG, "User not yet unlocked");
         }
     }
 
