@@ -21,33 +21,30 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 /** A preference with tick icon. */
-public class TickButtonPreference extends Preference {
+public class TickButtonPreference extends TwoTargetPreference {
     private ImageView mCheckIcon;
     private boolean mIsSelected = false;
 
     public TickButtonPreference(Context context) {
         super(context);
-        init(context, null);
-    }
-
-    public TickButtonPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context, attrs);
-    }
-
-    private void init(Context context, AttributeSet attrs) {
-        setWidgetLayoutResource(R.layout.preference_check_icon);
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+        View divider =
+                holder.findViewById(
+                        com.android.settingslib.widget.preference.twotarget.R.id
+                                .two_target_divider);
+        if (divider != null) {
+            divider.setVisibility(View.GONE);
+        }
         mCheckIcon = (ImageView) holder.findViewById(R.id.check_icon);
         setSelected(mIsSelected);
     }
@@ -64,4 +61,10 @@ public class TickButtonPreference extends Preference {
     public boolean isSelected() {
         return mIsSelected;
     }
+
+    @Override
+    protected int getSecondTargetResId() {
+        return R.layout.preference_check_icon;
+    }
+
 }
