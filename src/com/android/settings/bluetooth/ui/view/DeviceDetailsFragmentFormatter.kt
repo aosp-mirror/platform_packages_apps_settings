@@ -43,6 +43,7 @@ import com.android.settings.core.SubSettingLauncher
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
+import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.spa.framework.theme.SettingsDimension
@@ -67,6 +68,9 @@ import kotlinx.coroutines.runBlocking
 interface DeviceDetailsFragmentFormatter {
     /** Gets keys of visible preferences in built-in preference in xml. */
     fun getVisiblePreferenceKeys(fragmentType: FragmentTypeModel): List<String>?
+
+    /** Updates device details fragment layout. */
+    fun getInvisibleBluetoothProfiles(fragmentType: FragmentTypeModel): List<String>?
 
     /** Updates device details fragment layout. */
     fun updateLayout(fragmentType: FragmentTypeModel)
@@ -108,13 +112,22 @@ class DeviceDetailsFragmentFormatterImpl(
             viewModel
                 .getItems(fragmentType)
                 ?.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem>()
-                ?.mapNotNull { it.preferenceKey }
+                ?.map { it.preferenceKey }
+        }
+
+    override fun getInvisibleBluetoothProfiles(fragmentType: FragmentTypeModel): List<String>? =
+        runBlocking {
+            viewModel
+                .getItems(fragmentType)
+                ?.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem.BluetoothProfilesItem>()
+                ?.first()?.invisibleProfiles
         }
 
     /** Updates bluetooth device details fragment layout. */
     override fun updateLayout(fragmentType: FragmentTypeModel) = runBlocking {
         val items = viewModel.getItems(fragmentType) ?: return@runBlocking
         val layout = viewModel.getLayout(fragmentType) ?: return@runBlocking
+
         val prefKeyToSettingId =
             items
                 .filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem>()

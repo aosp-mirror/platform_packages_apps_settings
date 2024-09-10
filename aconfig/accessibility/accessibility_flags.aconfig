@@ -38,6 +38,13 @@ flag {
 }
 
 flag {
+  name: "enable_color_contrast_control"
+  namespace: "accessibility"
+  description: "Allows users to control color contrast in the Accessibility settings page."
+  bug: "246577325"
+}
+
+flag {
   name: "enable_hearing_aid_preset_control"
   namespace: "accessibility"
   description: "Allows users to control hearing aid preset in the Bluetooth device details page."
@@ -89,8 +96,11 @@ flag {
 }
 
 flag {
-  name: "enable_color_contrast_control"
+  name: "toggle_feature_fragment_collection_info"
   namespace: "accessibility"
-  description: "Allows users to control color contrast in the Accessibility settings page."
-  bug: "246577325"
+  description: "Provides custom CollectionInfo for ToggleFeaturePreferenceFragment"
+  bug: "318607873"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
 }
