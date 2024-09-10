@@ -282,10 +282,10 @@ class BluetoothDeviceDetailsViewModelTest {
 
     private companion object {
         val BUILTIN_SETTING_ITEM_1 =
-            DeviceSettingConfigItemModel.BuiltinItem(
+            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                 DeviceSettingId.DEVICE_SETTING_ID_HEADER, "bluetooth_device_header")
         val BUILDIN_SETTING_ITEM_2 =
-            DeviceSettingConfigItemModel.BuiltinItem(
+            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                 DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, "action_buttons")
         val SETTING_ITEM_HELP = DeviceSettingConfigItemModel.AppProvidedItem(12345)
     }
