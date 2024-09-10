@@ -17,6 +17,7 @@
 package com.android.settings.notification.zen;
 
 import android.app.AutomaticZenRule;
+import android.app.Flags;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ScheduleInfo;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
@@ -141,6 +143,11 @@ public class ZenRulePreference extends PrimarySwitchPreference {
 
     private String computeRuleSummary(AutomaticZenRule rule) {
         if (rule != null) {
+            if (Flags.modesApi() && Flags.modesUi()
+                    && !TextUtils.isEmpty(rule.getTriggerDescription())) {
+                return rule.getTriggerDescription();
+            }
+
             // handle schedule-based rules
             ScheduleInfo schedule =
                     ZenModeConfig.tryParseScheduleConditionId(rule.getConditionId());

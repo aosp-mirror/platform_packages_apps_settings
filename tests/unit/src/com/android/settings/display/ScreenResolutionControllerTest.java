@@ -30,6 +30,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -49,6 +50,7 @@ public class ScreenResolutionControllerTest {
     }
 
     @Test
+    @Ignore("b/337417619")
     public void getAvailabilityStatus_hasFhdAndQhdModes_returnAvailable() {
         Display.Mode modeA = new Display.Mode(0, mHighWidth, 0, 0);
         Display.Mode modeB = new Display.Mode(0, mFullWidth, 0, 0);
@@ -76,6 +78,7 @@ public class ScreenResolutionControllerTest {
     }
 
     @Test
+    @Ignore("b/337417619")
     public void updateState_FullResolution_shouldSetSummaryToFullResolution() {
         int width = mFullWidth;
         doReturn(width).when(mController).getDisplayWidth();

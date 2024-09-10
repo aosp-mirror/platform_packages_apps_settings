@@ -49,6 +49,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.R;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settings.wifi.WifiSummaryUpdater;
@@ -188,8 +189,9 @@ public class InternetPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_shouldBeTrue() {
-        assertThat(mController.isAvailable()).isTrue();
+    public void isAvailable_shouldMatchPrefFlag() {
+        assertThat(mController.isAvailable()).isEqualTo(
+                mContext.getResources().getBoolean(R.bool.config_show_internet_settings));
     }
 
     @Test

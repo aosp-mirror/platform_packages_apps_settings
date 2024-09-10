@@ -15,20 +15,25 @@
  */
 package com.android.settings.security;
 
+import static android.view.contentprotection.flags.Flags.FLAG_MANAGE_DEVICE_POLICY_ENABLED;
+
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.security.ContentProtectionTogglePreferenceController.KEY_CONTENT_PROTECTION_PREFERENCE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.os.UserHandle;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -42,37 +47,40 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(
-        shadows = {
-            ShadowUtils.class,
-        })
+@Config(shadows = {ShadowUtils.class})
 public class ContentProtectionTogglePreferenceControllerTest {
 
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    @Mock private PreferenceScreen mMockScreen;
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
-    private RestrictedLockUtils.EnforcedAdmin mAdmin;
-    private SettingsMainSwitchPreference mSwitchPreference;
     private final Context mContext = ApplicationProvider.getApplicationContext();
-    private ContentProtectionTogglePreferenceController mController;
+
+    @Mock private PreferenceScreen mMockPreferenceScreen;
+
+    @Mock private SettingsMainSwitchPreference mMockSwitchPreference;
+
+    @Nullable private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
+
+    @DevicePolicyManager.ContentProtectionPolicy
+    private int mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
+
+    private TestContentProtectionTogglePreferenceController mController;
+
     private int mSettingBackupValue;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mController = new TestContentProtectionTogglePreferenceController();
-        mSwitchPreference = new SettingsMainSwitchPreference(mContext);
-        when(mMockScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn(mSwitchPreference);
+        SettingsMainSwitchPreference switchPreference = new SettingsMainSwitchPreference(mContext);
+        when(mMockPreferenceScreen.findPreference(mController.getPreferenceKey()))
+                .thenReturn(switchPreference);
         mSettingBackupValue = getContentProtectionGlobalSetting();
         Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 0);
     }
@@ -87,89 +95,223 @@ public class ContentProtectionTogglePreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_alwaysAvailable() {
+    public void constructor_flagDisabled_doesNotFetchData() {
+        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mController = new TestContentProtectionTogglePreferenceController();
+
+        assertThat(mController.mCounterGetManagedProfile).isEqualTo(0);
+        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(0);
+        assertThat(mController.mCounterGetContentProtectionPolicy).isEqualTo(0);
+    }
+
+    @Test
+    public void constructor_flagEnabled_fetchesData() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mController = new TestContentProtectionTogglePreferenceController();
+
+        assertThat(mController.mCounterGetManagedProfile).isEqualTo(1);
+        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
+        assertThat(mController.mCounterGetContentProtectionPolicy).isEqualTo(1);
+    }
+
+    @Test
+    public void getAvailabilityStatus_available() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void displayPreference() {
-        setUpFullyManagedMode();
-        SettingsMainSwitchPreference mockSwitchPreference =
-                mock(SettingsMainSwitchPreference.class);
-        when(mMockScreen.findPreference(any())).thenReturn(mockSwitchPreference);
-        when(mockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
-
-        mController = new TestContentProtectionTogglePreferenceController();
-        mController.displayPreference(mMockScreen);
-
-        assertThat(mockSwitchPreference).isNotNull();
-    }
-
-    @Test
-    public void updateState_notFullyManagedMode_enabled() {
-        SettingsMainSwitchPreference mockSwitchPreference =
-                mock(SettingsMainSwitchPreference.class);
-        when(mMockScreen.findPreference(any())).thenReturn(mockSwitchPreference);
-        when(mockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
-
-        mController = new TestContentProtectionTogglePreferenceController();
-        mController.displayPreference(mMockScreen);
-        mController.updateState(mockSwitchPreference);
-
-        verify(mockSwitchPreference, never()).setDisabledByAdmin(any());
-    }
-
-    @Test
-    public void updateState_fullyManagedMode_disabled() {
-        setUpFullyManagedMode();
-        SettingsMainSwitchPreference mockSwitchPreference =
-                mock(SettingsMainSwitchPreference.class);
-        when(mMockScreen.findPreference(any())).thenReturn(mockSwitchPreference);
-        when(mockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
-
-        mController = new TestContentProtectionTogglePreferenceController();
-        mController.displayPreference(mMockScreen);
-        mController.updateState(mockSwitchPreference);
-
-        verify(mockSwitchPreference).setDisabledByAdmin(mAdmin);
-    }
-
-    @Test
-    public void isChecked_settingTurnOn() {
+    public void isChecked_noEnforcedAdmin_readsSettingsTrue() {
         Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 1);
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void isChecked_fullyManagedMode_settingTurnOff() {
-        setUpFullyManagedMode();
-        Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 1);
-        SettingsMainSwitchPreference mockSwitchPreference =
-                mock(SettingsMainSwitchPreference.class);
-        when(mMockScreen.findPreference(any())).thenReturn(mockSwitchPreference);
-        when(mockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
-
-        mController = new TestContentProtectionTogglePreferenceController();
-        mController.displayPreference(mMockScreen);
-        mController.updateState(mockSwitchPreference);
-
-        assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
-    public void isChecked_settingTurnOff() {
+    public void isChecked_noEnforcedAdmin_readsSettingsFalse() {
         Settings.Global.putInt(
                 mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, -1);
 
         assertThat(mController.isChecked()).isFalse();
-        assertThat(getContentProtectionGlobalSetting()).isEqualTo(-1);
     }
 
     @Test
-    public void isChecked_settingDefaultOn() {
+    public void isChecked_noEnforcedAdmin_readsSettingsDefaultTrue() {
         assertThat(mController.isChecked()).isTrue();
-        assertThat(getContentProtectionGlobalSetting()).isEqualTo(0);
+    }
+
+    @Test
+    public void isChecked_enforcedAdmin_flagDisabled_false() {
+        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 1);
+        setupForUpdateState();
+        mController.updateState(mMockSwitchPreference);
+
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void isChecked_enforcedAdmin_flagEnabled_policyDisabled_false() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
+        Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 1);
+        mController = new TestContentProtectionTogglePreferenceController();
+
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void isChecked_enforcedAdmin_flagEnabled_policyEnabled_true() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
+        Settings.Global.putInt(
+                mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, -1);
+        mController = new TestContentProtectionTogglePreferenceController();
+
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_enforcedAdmin_flagEnabled_policyNotControlled_readsSettingsTrue() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
+        Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 1);
+        mController = new TestContentProtectionTogglePreferenceController();
+
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_enforcedAdmin_flagEnabled_policyNotControlled_readsSettingsFalse() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
+        Settings.Global.putInt(
+                mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, -1);
+        mController = new TestContentProtectionTogglePreferenceController();
+
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void isChecked_enforcedAdmin_flagEnabled_policyNotControlled_readsSettingsDefaultTrue() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
+        mController = new TestContentProtectionTogglePreferenceController();
+
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void displayPreference() {
+        setupForDisplayPreference();
+
+        mController.displayPreference(mMockPreferenceScreen);
+
+        verify(mMockSwitchPreference).addOnSwitchChangeListener(mController);
+    }
+
+    @Test
+    public void updateState_flagDisabled_noEnforcedAdmin() {
+        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        setupForUpdateState();
+
+        mController.updateState(mMockSwitchPreference);
+
+        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(any());
+    }
+
+    @Test
+    public void updateState_flagDisabled_enforcedAdmin() {
+        mSetFlagsRule.disableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        setupForUpdateState();
+
+        mController.updateState(mMockSwitchPreference);
+
+        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
+        verify(mMockSwitchPreference).setDisabledByAdmin(mEnforcedAdmin);
+    }
+
+    @Test
+    public void updateState_flagEnabled_noEnforcedAdmin_policyDisabled() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
+        setupForUpdateState();
+
+        mController.updateState(mMockSwitchPreference);
+
+        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(any());
+    }
+
+    @Test
+    public void updateState_flagEnabled_noEnforcedAdmin_policyEnabled() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
+        setupForUpdateState();
+
+        mController.updateState(mMockSwitchPreference);
+
+        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(any());
+    }
+
+    @Test
+    public void updateState_flagEnabled_noEnforcedAdmin_policyNotControlled() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
+        setupForUpdateState();
+
+        mController.updateState(mMockSwitchPreference);
+
+        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(any());
+    }
+
+    @Test
+    public void updateState_flagEnabled_enforcedAdmin_policyDisabled() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
+        setupForUpdateState();
+
+        mController.updateState(mMockSwitchPreference);
+
+        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
+        verify(mMockSwitchPreference).setDisabledByAdmin(mEnforcedAdmin);
+    }
+
+    @Test
+    public void updateState_flagEnabled_enforcedAdmin_policyEnabled() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_ENABLED;
+        setupForUpdateState();
+
+        mController.updateState(mMockSwitchPreference);
+
+        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
+        verify(mMockSwitchPreference).setDisabledByAdmin(mEnforcedAdmin);
+    }
+
+    @Test
+    public void updateState_flagEnabled_enforcedAdmin_policyNotControlled() {
+        mSetFlagsRule.enableFlags(FLAG_MANAGE_DEVICE_POLICY_ENABLED);
+        mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin();
+        mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY;
+        setupForUpdateState();
+
+        mController.updateState(mMockSwitchPreference);
+
+        assertThat(mController.mCounterGetEnforcedAdmin).isEqualTo(1);
+        verify(mMockSwitchPreference, never()).setDisabledByAdmin(any());
     }
 
     @Test
@@ -193,20 +335,49 @@ public class ContentProtectionTogglePreferenceControllerTest {
                 mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 0);
     }
 
-    private void setUpFullyManagedMode() {
-        mAdmin = new RestrictedLockUtils.EnforcedAdmin();
+    private void setupForDisplayPreference() {
+        when(mMockPreferenceScreen.findPreference(any())).thenReturn(mMockSwitchPreference);
+        when(mMockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
+        mController = new TestContentProtectionTogglePreferenceController();
+    }
+
+    private void setupForUpdateState() {
+        setupForDisplayPreference();
+        mController.displayPreference(mMockPreferenceScreen);
     }
 
     private class TestContentProtectionTogglePreferenceController
             extends ContentProtectionTogglePreferenceController {
+
+        public int mCounterGetManagedProfile;
+
+        public int mCounterGetEnforcedAdmin;
+
+        public int mCounterGetContentProtectionPolicy;
 
         TestContentProtectionTogglePreferenceController() {
             super(ContentProtectionTogglePreferenceControllerTest.this.mContext, "key");
         }
 
         @Override
+        @Nullable
+        protected UserHandle getManagedProfile() {
+            mCounterGetManagedProfile++;
+            return null;
+        }
+
+        @Override
+        @Nullable
         protected RestrictedLockUtils.EnforcedAdmin getEnforcedAdmin() {
-            return mAdmin;
+            mCounterGetEnforcedAdmin++;
+            return mEnforcedAdmin;
+        }
+
+        @Override
+        @DevicePolicyManager.ContentProtectionPolicy
+        protected int getContentProtectionPolicy(@Nullable UserHandle userHandle) {
+            mCounterGetContentProtectionPolicy++;
+            return mContentProtectionPolicy;
         }
     }
 }

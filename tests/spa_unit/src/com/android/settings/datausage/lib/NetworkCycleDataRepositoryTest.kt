@@ -25,6 +25,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.testutils.zonedDateTime
 import com.google.common.truth.Truth.assertThat
+import java.time.ZonedDateTime
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -77,7 +78,28 @@ class NetworkCycleDataRepositoryTest {
     }
 
     @Test
-    fun loadFirstCycle_asFourWeeks() = runTest {
+    fun loadFirstCycle_policyHasNoCycle_asFourWeeks() = runTest {
+        val policy = mock<NetworkPolicy> {
+            on { cycleIterator() } doReturn emptyList<Range<ZonedDateTime>>().iterator()
+        }
+        doReturn(policy).whenever(repository).getPolicy()
+        mockNetworkStatsRepository.stub {
+            on { getTimeRange() } doReturn Range(CYCLE2_START_TIME, CYCLE2_END_TIME)
+        }
+
+        val firstCycle = repository.loadFirstCycle()
+
+        assertThat(firstCycle).isEqualTo(
+            NetworkUsageData(
+                startTime = CYCLE2_END_TIME - DateUtils.WEEK_IN_MILLIS * 4,
+                endTime = CYCLE2_END_TIME,
+                usage = CYCLE2_BYTES,
+            ),
+        )
+    }
+
+    @Test
+    fun loadFirstCycle_noPolicy_asFourWeeks() = runTest {
         doReturn(null).whenever(repository).getPolicy()
         mockNetworkStatsRepository.stub {
             on { getTimeRange() } doReturn Range(CYCLE2_START_TIME, CYCLE2_END_TIME)

@@ -85,7 +85,7 @@ public class AutoDataSwitchPreferenceControllerTest {
                 return true;
             }
         };
-        mController.init(SUB_ID_1);
+        mController.init(SUB_ID_1, null);
     }
 
     @Test

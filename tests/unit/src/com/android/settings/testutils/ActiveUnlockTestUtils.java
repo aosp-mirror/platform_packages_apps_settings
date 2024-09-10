@@ -18,12 +18,12 @@ package com.android.settings.testutils;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
@@ -31,8 +31,6 @@ import android.provider.DeviceConfig;
 import android.provider.Settings;
 
 import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
-
-import java.util.ArrayList;
 
 /** Utilities class to enable or disable the Active Unlock flag in tests. */
 public final class ActiveUnlockTestUtils {
@@ -61,15 +59,10 @@ public final class ActiveUnlockTestUtils {
         resolveInfo.activityInfo.applicationInfo = applicationInfo;
         when(packageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
 
-        PackageInfo packageInfo = new PackageInfo();
-        packageInfo.applicationInfo = applicationInfo;
         ProviderInfo providerInfo = new ProviderInfo();
         providerInfo.authority = PROVIDER;
         providerInfo.applicationInfo = applicationInfo;
-        packageInfo.providers = new ProviderInfo[] { providerInfo };
-        ArrayList<PackageInfo> packageInfos = new ArrayList<>();
-        packageInfos.add(packageInfo);
-        when(packageManager.getInstalledPackages(any())).thenReturn(packageInfos);
+        when(packageManager.resolveContentProvider(anyString(), any())).thenReturn(providerInfo);
 
         DeviceConfig.setProperty(
                 DeviceConfig.NAMESPACE_REMOTE_AUTH,

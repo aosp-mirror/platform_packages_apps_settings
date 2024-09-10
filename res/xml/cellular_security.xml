@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="cellular_security_settings_screen"
+    android:title="@string/cellular_security_settings_title">
+
+    <com.android.settingslib.widget.TopIntroPreference
+	android:key="cellular_security_prefs_top_intro"
+        android:title="@string/cellular_security_top_intro"/>
+    <PreferenceCategory
+        android:key="cellular_security_notifications_category"
+        android:title="@string/cellular_security_notifications"
+        settings:controller="com.android.settings.network.telephony.CellularSecurityNotificationsDividerController">
+        <SwitchPreferenceCompat
+           android:key="cellular_security_notifications"
+           android:title="@string/cellular_security_notifications_controller_title"
+           android:summary="@string/cellular_security_notifications_controller_summary"
+           settings:controller=
+                "com.android.settings.network.telephony.CellularSecurityNotificationsPreferenceController"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+      android:title="@string/cellular_security_settings_encryption_title"
+      settings:controller="com.android.settings.network.telephony.CellularSecurityEncryptionDividerController">
+        <SwitchPreferenceCompat
+            android:key="require_cellular_encryption"
+            android:title="@string/require_cellular_encryption_title"
+            android:summary="@string/require_cellular_encryption_summary"
+            settings:controller=
+                "com.android.settings.network.telephony.NullAlgorithmsPreferenceController"/>
+    </PreferenceCategory>
+</PreferenceScreen>

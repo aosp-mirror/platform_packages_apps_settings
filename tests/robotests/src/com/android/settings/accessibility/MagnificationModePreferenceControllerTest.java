@@ -90,7 +90,6 @@ public class MagnificationModePreferenceControllerTest {
         mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
 
         assertThat(getCheckedModeFromDialog()).isEqualTo(MAGNIFICATION_MODE_DEFAULT);
-
     }
 
     @Test

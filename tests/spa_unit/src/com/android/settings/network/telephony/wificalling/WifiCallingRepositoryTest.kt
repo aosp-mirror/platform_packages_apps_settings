@@ -17,15 +17,18 @@
 package com.android.settings.network.telephony.wificalling
 
 import android.content.Context
+import android.telephony.AccessNetworkConstants
 import android.telephony.CarrierConfigManager
 import android.telephony.CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL
 import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager
+import android.telephony.ims.feature.MmTelFeature
 import androidx.core.os.persistableBundleOf
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.network.telephony.ims.ImsMmTelRepository
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -96,6 +99,22 @@ class WifiCallingRepositoryTest {
         val wiFiCallingMode = repository.getWiFiCallingMode()
 
         assertThat(wiFiCallingMode).isEqualTo(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
+    }
+
+    @Test
+    fun isWifiCallingSupported() = runBlocking {
+        mockImsMmTelRepository.stub {
+            onBlocking {
+                isSupported(
+                    capability = MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                    transportType = AccessNetworkConstants.TRANSPORT_TYPE_WLAN,
+                )
+            } doReturn true
+        }
+
+        val isSupported = repository.isWifiCallingSupported()
+
+        assertThat(isSupported).isTrue()
     }
 
     private fun mockUseWfcHomeModeForRoaming(config: Boolean) {

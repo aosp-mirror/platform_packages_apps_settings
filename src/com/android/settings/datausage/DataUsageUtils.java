@@ -56,7 +56,10 @@ public final class DataUsageUtils {
 
     /**
      * Format byte value to readable string using IEC units.
+     *
+     * @deprecated Use {@link com.android.settings.datausage.lib.DataUsageFormatter} instead.
      */
+    @Deprecated
     public static CharSequence formatDataUsage(Context context, long byteValue) {
         final BytesResult res = Formatter.formatBytes(context.getResources(), byteValue,
                 Formatter.FLAG_IEC_UNITS);

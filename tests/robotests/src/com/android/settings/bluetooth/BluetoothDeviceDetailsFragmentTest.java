@@ -18,7 +18,7 @@ package com.android.settings.bluetooth;
 
 import static android.bluetooth.BluetoothDevice.BOND_NONE;
 
-import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceControlsController.KEY_DEVICE_CONTROLS_GENERAL_GROUP;
+import static com.android.settings.bluetooth.BluetoothDetailsHearingDeviceSettingsController.KEY_HEARING_DEVICE_SETTINGS;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -237,7 +237,7 @@ public class BluetoothDeviceDetailsFragmentTest {
 
         assertThat(controllerList.stream()
                 .anyMatch(controller -> controller.getPreferenceKey().equals(
-                        KEY_DEVICE_CONTROLS_GENERAL_GROUP))).isFalse();
+                        KEY_HEARING_DEVICE_SETTINGS))).isFalse();
     }
 
     @Test
@@ -253,7 +253,7 @@ public class BluetoothDeviceDetailsFragmentTest {
 
         assertThat(controllerList.stream()
                 .anyMatch(controller -> controller.getPreferenceKey().equals(
-                        KEY_DEVICE_CONTROLS_GENERAL_GROUP))).isTrue();
+                        KEY_HEARING_DEVICE_SETTINGS))).isTrue();
     }
 
     private InputDevice createInputDeviceWithMatchingBluetoothAddress() {

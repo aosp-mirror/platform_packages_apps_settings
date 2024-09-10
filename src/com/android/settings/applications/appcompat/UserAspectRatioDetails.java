@@ -66,7 +66,8 @@ public class UserAspectRatioDetails extends AppInfoBase implements
     private static final String TAG = UserAspectRatioDetails.class.getSimpleName();
 
     private static final String KEY_HEADER_SUMMARY = "app_aspect_ratio_summary";
-    private static final String KEY_HEADER_BUTTONS = "header_view";
+    @VisibleForTesting
+    static final String KEY_HEADER_BUTTONS = "header_view";
 
     private static final String KEY_PREF_HALF_SCREEN = "half_screen_pref";
     private static final String KEY_PREF_DISPLAY_SIZE = "display_size_pref";
@@ -237,6 +238,7 @@ public class UserAspectRatioDetails extends AppInfoBase implements
             return;
         }
         pref.setTitle(mUserAspectRatioManager.getAccessibleEntry(aspectRatio, mPackageName));
+        pref.setOrder(getAspectRatioManager().getUserMinAspectRatioOrder(aspectRatio));
         pref.setOnClickListener(this);
         mKeyToAspectRatioMap.put(key, aspectRatio);
         mAspectRatioPreferences.add(pref);

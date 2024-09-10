@@ -28,7 +28,10 @@ import java.util.List;
 
 /**
  * Represents the data class needed to create a Settings Panel. See {@link PanelFragment}.
+ *
+ * @deprecated this is no longer used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public interface PanelContent extends Instrumentable {
 
     int VIEW_TYPE_SLIDER = 1;

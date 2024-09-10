@@ -667,7 +667,11 @@ public class ManageApplications extends InstrumentedFragment
             compositeFilter =
                     new CompoundFilter(compositeFilter, ApplicationsState.FILTER_PRIVATE_PROFILE);
         }
-        if (mIsPersonalOnly) {
+
+        // We might not be showing the private tab even when there's a private profile present and
+        // there's only personal profile info to show, in which case we should still apply the
+        // personal filter.
+        if (mIsPersonalOnly || !(mIsWorkOnly || mIsPrivateProfileOnly)) {
             compositeFilter = new CompoundFilter(compositeFilter,
                     ApplicationsState.FILTER_PERSONAL);
         }
@@ -921,7 +925,9 @@ public class ManageApplications extends InstrumentedFragment
                         .setResultListener(this, ADVANCED_SETTINGS)
                         .launch();
             } else {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS);
+                Intent intent = new Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+                        .setPackage(getContext()
+                                .getPackageManager().getPermissionControllerPackageName());
                 startActivityForResult(intent, ADVANCED_SETTINGS);
             }
             return true;

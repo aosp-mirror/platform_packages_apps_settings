@@ -148,6 +148,7 @@ public class SubscriptionsPreferenceControllerTest {
         when(mUserManager.isAdminUser()).thenReturn(true);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         when(mLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
+        when(mSubscriptionManager.createForAllUserProfiles()).thenReturn(mSubscriptionManager);
 
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
@@ -164,7 +165,7 @@ public class SubscriptionsPreferenceControllerTest {
         mController =  new FakeSubscriptionsPreferenceController(mContext, mLifecycle,
                 mUpdateListener, KEY, 5);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
-        mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
+        mController.mWifiPickerTrackerHelper = mWifiPickerTrackerHelper;
     }
 
     @After

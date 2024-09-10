@@ -16,71 +16,32 @@
 
 package com.android.settings.language;
 
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.util.FeatureFlagUtils;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.Settings;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class LanguagePreferenceControllerTest {
-    private boolean mCacheFeatureFlagSwitch = false;
     private Context mContext;
     private LanguagePreferenceController mController;
 
     @Before
     public void setup() {
         mContext = ApplicationProvider.getApplicationContext();
-        mCacheFeatureFlagSwitch =
-                FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
         mController = new LanguagePreferenceController(mContext, "key");
-
-    }
-
-    @After
-    public void tearDown() {
-        FeatureFlagUtils.setEnabled(
-                mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI, mCacheFeatureFlagSwitch);
-    }
-
-    @Test
-    public void getAvailabilityStatus_featureFlagOff_returnUnavailable() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI,
-                false);
-
-        int result = mController.getAvailabilityStatus();
-
-        assertEquals(CONDITIONALLY_UNAVAILABLE, result);
-    }
-
-    @Test
-    public void getAvailabilityStatus_featureFlagOff_LanguageAndInputSettingsActivityEnabled() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI,
-                false);
-
-        mController.getAvailabilityStatus();
-
-        assertTrue(isActivityEnable(mContext, Settings.LanguageAndInputSettingsActivity.class));
-        assertFalse(isActivityEnable(mContext, Settings.LanguageSettingsActivity.class));
     }
 
     @Test
     public void getAvailabilityStatus_featureFlagOff_LanguageAndInputSettingsActivitydisabled() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI,
-                true);
-
         mController.getAvailabilityStatus();
 
         assertFalse(isActivityEnable(mContext, Settings.LanguageAndInputSettingsActivity.class));

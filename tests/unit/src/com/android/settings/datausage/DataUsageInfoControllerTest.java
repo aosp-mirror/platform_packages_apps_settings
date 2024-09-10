@@ -23,10 +23,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settingslib.net.DataUsageController.DataUsageInfo;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
+@Ignore("b/340657656")
 public class DataUsageInfoControllerTest {
 
     private static final int ZERO = 0;

@@ -114,7 +114,7 @@ public class NetworkProviderWifiCallingGroupTest {
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_CARRIER_WFC_IMS_AVAILABLE_BOOL, true);
         when(mTelecomManager.getSimCallManagerForSubscription(SUB_ID))
                 .thenReturn(mPhoneAccountHandle);
-        mMockQueryWfcState = new MockWfcQueryImsState(mContext, SUB_ID);
+        mMockQueryWfcState = spy(new MockWfcQueryImsState(mContext, SUB_ID));
 
         if (Looper.myLooper() == null) {
             Looper.prepare();
@@ -180,6 +180,7 @@ public class NetworkProviderWifiCallingGroupTest {
     shouldShowWifiCallingForSub_wifiCallingEnabledWithActivityHandleIntent_returnTrue() {
         buildPhoneAccountConfigureIntent(true);
         doReturn(mMockQueryWfcState).when(mNetworkProviderWifiCallingGroup).queryImsState(SUB_ID);
+        doReturn(true).when(mMockQueryWfcState).isReadyToWifiCalling();
         doReturn(mPhoneAccountHandle).when(mNetworkProviderWifiCallingGroup)
                 .getPhoneAccountHandleForSubscriptionId(SUB_ID);
 

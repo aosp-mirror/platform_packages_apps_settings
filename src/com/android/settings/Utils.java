@@ -54,8 +54,10 @@ import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
@@ -103,10 +105,14 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.Insets;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Lifecycle;
 
 import com.android.internal.app.UnlaunchableAppActivity;
@@ -139,6 +145,8 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
     public static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
+
+    public static final String PHONE_PACKAGE_NAME = "com.android.phone";
 
     public static final String OS_PKG = "os";
 
@@ -922,6 +930,23 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Return true if face is supported as Class 2 biometrics and above on the device, false
+     * otherwise.
+     */
+    public static boolean isFaceNotConvenienceBiometric(@NonNull Context context) {
+        FaceManager faceManager = getFaceManagerOrNull(context);
+        if (faceManager != null) {
+            final List<FaceSensorPropertiesInternal> faceProperties =
+                    faceManager.getSensorPropertiesInternal();
+            if (!faceProperties.isEmpty()) {
+                final FaceSensorPropertiesInternal props = faceProperties.get(0);
+                return props.sensorStrength != SensorProperties.STRENGTH_CONVENIENCE;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Launches an intent which may optionally have a user id defined.
      * @param fragment Fragment to use to launch the activity.
      * @param intent Intent to launch.
@@ -1228,6 +1253,7 @@ public final class Utils extends com.android.settingslib.Utils {
             UserProperties userProperties = userManager.getUserProperties(userHandle);
             if (userProperties.getShowInSettings() == UserProperties.SHOW_IN_SETTINGS_SEPARATE) {
                 if (Flags.allowPrivateProfile()
+                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
                         && userProperties.getShowInQuietMode()
                         == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN) {
                     if (!userManager.isQuietModeEnabled(userHandle)) {
@@ -1288,7 +1314,8 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     @ColorInt
     public static int getHomepageIconColor(Context context) {
-        return getColorAttrDefaultColor(context, android.R.attr.textColorPrimary);
+        return getColorAttrDefaultColor(
+                context, com.android.internal.R.attr.materialColorOnSurface);
     }
 
     /**
@@ -1363,6 +1390,48 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
+    /**
+     * Returns true if the user should be hidden in Settings when it's in quiet mode.
+     */
+    public static boolean shouldHideUser(
+            @NonNull UserHandle userHandle, @NonNull UserManager userManager) {
+        UserProperties userProperties = userManager.getUserProperties(userHandle);
+        return userProperties.getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
+                && userManager.isQuietModeEnabled(userHandle);
+    }
+
+    /**
+     * Returns true if the userId is a private profile, false otherwise.
+     */
+    public static boolean isPrivateProfile(int userId, @NonNull Context context) {
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        UserInfo userInfo = userManager.getUserInfo(userId);
+        return Flags.allowPrivateProfile() && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && userInfo.isPrivateProfile();
+    }
+
+    /**
+     * Enable new edge to edge feature.
+     *
+     * @param activity the Activity need to setup the edge to edge feature.
+     */
+    public static void setupEdgeToEdge(@NonNull FragmentActivity activity) {
+        ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
+                (v, windowInsets) -> {
+                    Insets insets = windowInsets.getInsets(
+                            WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime()
+                                    | WindowInsetsCompat.Type.displayCutout());
+                    int statusBarHeight = activity.getWindow().getDecorView().getRootWindowInsets()
+                            .getInsets(WindowInsetsCompat.Type.statusBars()).top;
+                    // Apply the insets paddings to the view.
+                    v.setPadding(insets.left, statusBarHeight, insets.right, insets.bottom);
+
+                    // Return CONSUMED if you don't want the window insets to keep being
+                    // passed down to descendant views.
+                    return WindowInsetsCompat.CONSUMED;
+                });
+    }
+
     private static FaceManager.RemovalCallback faceManagerRemovalCallback(int userId) {
         return new FaceManager.RemovalCallback() {
             @Override
@@ -1394,5 +1463,23 @@ public final class Utils extends com.android.settingslib.Utils {
                 }
             }
         };
+    }
+
+    /**
+     * Disables the launcher icon and shortcut picker component for the Settings app corresponding
+     * to the context user.
+     */
+    public static void disableComponentsToHideSettings(@NonNull Context context,
+            @NonNull PackageManager pm) {
+        // Disable settings app launcher icon
+        disableComponent(pm, new ComponentName(context, Settings.class));
+
+        //Disable Shortcut picker
+        disableComponent(pm, new ComponentName(context, Settings.CreateShortcutActivity.class));
+    }
+
+    private static void disableComponent(PackageManager pm, ComponentName componentName) {
+        pm.setComponentEnabledSetting(componentName,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 }

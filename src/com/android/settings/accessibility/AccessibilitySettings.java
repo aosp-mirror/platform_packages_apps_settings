@@ -21,7 +21,6 @@ import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ServiceInfo;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
@@ -30,6 +29,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.Pair;
 import android.view.InputDevice;
 import android.view.accessibility.AccessibilityManager;
 
@@ -44,6 +44,7 @@ import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.development.Enable16kUtils;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -56,6 +57,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /** Activity with the accessibility settings. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -97,6 +100,8 @@ public class AccessibilitySettings extends DashboardFragment implements
     static final String EXTRA_HTML_DESCRIPTION = "html_description";
     static final String EXTRA_TIME_FOR_LOGGING = "start_time_to_log_a11y_tool";
     static final String EXTRA_METRICS_CATEGORY = "metrics_category";
+
+    public static final String VOICE_ACCESS_SERVICE = "android.apps.accessibility.voiceaccess";
 
     // Timeout before we update the services if packages are added/removed
     // since the AccessibilityManagerService has to do that processing first
@@ -175,6 +180,9 @@ public class AccessibilitySettings extends DashboardFragment implements
         // Observe changes from accessibility selection menu
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
+        }
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_STICKY_KEYS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SLOW_KEYS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BOUNCE_KEYS);
@@ -205,24 +213,30 @@ public class AccessibilitySettings extends DashboardFragment implements
         super.onCreate(icicle);
         initializeAllPreferences();
         updateAllPreferences();
+        mNeedPreferencesUpdate = false;
         registerContentMonitors();
         registerInputDeviceListener();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        updateAllPreferences();
+    public void onStart() {
+        super.onStart();
+        mIsForeground = true;
     }
 
     @Override
-    public void onStart() {
+    public void onResume() {
+        super.onResume();
         if (mNeedPreferencesUpdate) {
             updateAllPreferences();
             mNeedPreferencesUpdate = false;
         }
-        mIsForeground = true;
-        super.onStart();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mNeedPreferencesUpdate = true;
     }
 
     @Override
@@ -442,17 +456,22 @@ public class AccessibilitySettings extends DashboardFragment implements
         final List<AccessibilityShortcutInfo> installedShortcutList =
                 a11yManager.getInstalledAccessibilityShortcutListAsUser(context,
                         UserHandle.myUserId());
+        final List<AccessibilityActivityPreference> activityList =
+                preferenceHelper.createAccessibilityActivityPreferenceList(installedShortcutList);
+        final Set<Pair<String, CharSequence>> packageLabelPairs =
+                activityList.stream()
+                        .map(a11yActivityPref -> new Pair<>(
+                                a11yActivityPref.getPackageName(), a11yActivityPref.getLabel())
+                        ).collect(Collectors.toSet());
 
         // Remove duplicate item here, new a ArrayList to copy unmodifiable list result
         // (getInstalledAccessibilityServiceList).
         final List<AccessibilityServiceInfo> installedServiceList = new ArrayList<>(
                 a11yManager.getInstalledAccessibilityServiceList());
-        installedServiceList.removeIf(
-                target -> containsTargetNameInList(installedShortcutList, target));
-
-        final List<RestrictedPreference> activityList =
-                preferenceHelper.createAccessibilityActivityPreferenceList(installedShortcutList);
-
+        if (!packageLabelPairs.isEmpty()) {
+            installedServiceList.removeIf(
+                    target -> containsPackageAndLabelInList(packageLabelPairs, target));
+        }
         final List<RestrictedPreference> serviceList =
                 preferenceHelper.createAccessibilityServicePreferenceList(installedServiceList);
 
@@ -463,28 +482,25 @@ public class AccessibilitySettings extends DashboardFragment implements
         return preferenceList;
     }
 
-    private boolean containsTargetNameInList(List<AccessibilityShortcutInfo> shortcutInfos,
+    private boolean containsPackageAndLabelInList(
+            Set<Pair<String, CharSequence>> packageLabelPairs,
             AccessibilityServiceInfo targetServiceInfo) {
         final ServiceInfo serviceInfo = targetServiceInfo.getResolveInfo().serviceInfo;
         final String servicePackageName = serviceInfo.packageName;
         final CharSequence serviceLabel = serviceInfo.loadLabel(getPackageManager());
 
-        for (int i = 0, count = shortcutInfos.size(); i < count; ++i) {
-            final ActivityInfo activityInfo = shortcutInfos.get(i).getActivityInfo();
-            final String activityPackageName = activityInfo.packageName;
-            final CharSequence activityLabel = activityInfo.loadLabel(getPackageManager());
-            if (servicePackageName.equals(activityPackageName)
-                    && serviceLabel.equals(activityLabel)) {
-                return true;
-            }
-        }
-        return false;
+        return packageLabelPairs.contains(new Pair<>(servicePackageName, serviceLabel));
     }
 
     private void initializePreBundledServicesMapFromArray(String categoryKey, int key) {
         String[] services = getResources().getStringArray(key);
         PreferenceCategory category = mCategoryToPrefCategoryMap.get(categoryKey);
         for (int i = 0; i < services.length; i++) {
+            // TODO(b/335443194) Voice access is not available in 16kB mode.
+            if (services[i].contains(VOICE_ACCESS_SERVICE)
+                    && Enable16kUtils.isPageAgnosticModeOn(getContext())) {
+                continue;
+            }
             ComponentName component = ComponentName.unflattenFromString(services[i]);
             mPreBundledServiceComponentToCategoryMap.put(component, category);
         }

@@ -44,8 +44,8 @@ public class UnrestrictedDataAccess extends DashboardFragment {
         super.onCreate(icicle);
         mShowSystem = icicle != null && icicle.getBoolean(EXTRA_SHOW_SYSTEM);
         use(UnrestrictedDataAccessPreferenceController.class).setFilter(
-                mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
-                        : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER);
+                mShowSystem ? ApplicationsState.FILTER_ENABLED_NOT_QUIET
+                        : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER_NOT_QUIET);
         use(UnrestrictedDataAccessPreferenceController.class).setSession(getSettingsLifecycle());
     }
 
@@ -62,8 +62,8 @@ public class UnrestrictedDataAccess extends DashboardFragment {
             mShowSystem = !mShowSystem;
             item.setTitle(mShowSystem ? R.string.menu_hide_system : R.string.menu_show_system);
             use(UnrestrictedDataAccessPreferenceController.class).setFilter(
-                    mShowSystem ? ApplicationsState.FILTER_ALL_ENABLED
-                            : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER);
+                    mShowSystem ? ApplicationsState.FILTER_ENABLED_NOT_QUIET
+                            : ApplicationsState.FILTER_DOWNLOADED_AND_LAUNCHER_NOT_QUIET);
             use(UnrestrictedDataAccessPreferenceController.class).rebuild();
             return true;
         }

@@ -767,6 +767,10 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     }
 
     private class BatteryChartAccessibilityNodeProvider extends AccessibilityNodeProvider {
+        private static final int UNDEFINED = Integer.MIN_VALUE;
+
+        private int mAccessibilityFocusNodeViewId = UNDEFINED;
+
         @Override
         public AccessibilityNodeInfo createAccessibilityNodeInfo(int virtualViewId) {
             if (virtualViewId == AccessibilityNodeProvider.HOST_VIEW_ID) {
@@ -784,7 +788,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             }
             final AccessibilityNodeInfo childInfo =
                     new AccessibilityNodeInfo(BatteryChartView.this, index);
-            final String slotTimeInfo = mViewModel.getFullText(index);
+            final String slotTimeInfo = mViewModel.getContentDescription(index);
             final String batteryLevelInfo = mViewModel.getSlotBatteryLevelText(index);
             onInitializeAccessibilityNodeInfo(childInfo);
             childInfo.setClickable(isValidToDraw(mViewModel, index));
@@ -794,6 +798,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                             R.string.battery_usage_time_info_and_battery_level,
                             slotTimeInfo,
                             batteryLevelInfo));
+            childInfo.setAccessibilityFocused(virtualViewId == mAccessibilityFocusNodeViewId);
 
             final Rect bounds = new Rect();
             getBoundsOnScreen(bounds, true);
@@ -815,10 +820,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                     return true;
 
                 case AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS:
+                    mAccessibilityFocusNodeViewId = virtualViewId;
                     return sendAccessibilityEvent(
                             virtualViewId, AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED);
 
                 case AccessibilityNodeInfo.ACTION_CLEAR_ACCESSIBILITY_FOCUS:
+                    if (mAccessibilityFocusNodeViewId == virtualViewId) {
+                        mAccessibilityFocusNodeViewId = UNDEFINED;
+                    }
                     return sendAccessibilityEvent(
                             virtualViewId,
                             AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED);

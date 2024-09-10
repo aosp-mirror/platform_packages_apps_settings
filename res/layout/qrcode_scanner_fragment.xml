@@ -35,8 +35,8 @@
             android:gravity="center"
             android:orientation="vertical">
             <TextView
+                android:id="@android:id/summary"
                 style="@style/QrCodeScanner"
-                android:text="Scan an audio stream QR code to listen with the active LE device"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,8 +70,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="?attr/sudMarginStart"
-            android:layout_marginEnd="?attr/sudMarginEnd"
             android:gravity="center"
             android:layout_gravity="center"
             android:visibility="invisible"/>

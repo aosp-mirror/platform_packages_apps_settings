@@ -55,6 +55,8 @@ import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.AddDevicePreferenceController2;
+import com.android.settings.wifi.details2.CertificateDetailsPreferenceController;
+import com.android.settings.wifi.details2.ServerNamePreferenceController;
 import com.android.settings.wifi.details2.WifiAutoConnectPreferenceController2;
 import com.android.settings.wifi.details2.WifiDetailPreferenceController2;
 import com.android.settings.wifi.details2.WifiMeteredPreferenceController2;
@@ -122,8 +124,14 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        String wifiEntryKey = getArguments().getString(KEY_CHOSEN_WIFIENTRY_KEY);
+        setupNetworksDetailTracker();
         use(WifiPrivacyPreferenceController.class)
-                .setWifiEntryKey(getArguments().getString(KEY_CHOSEN_WIFIENTRY_KEY));
+                .setWifiEntryKey(wifiEntryKey);
+        use(CertificateDetailsPreferenceController.class)
+                .setWifiEntry(mNetworkDetailsTracker.getWifiEntry());
+        use(ServerNamePreferenceController.class)
+                .setWifiEntry(mNetworkDetailsTracker.getWifiEntry());
     }
 
     @Override

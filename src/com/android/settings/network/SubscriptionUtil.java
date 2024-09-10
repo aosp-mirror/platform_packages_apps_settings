@@ -18,6 +18,7 @@ package com.android.settings.network;
 
 import static android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX;
 import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+import static android.telephony.SubscriptionManager.TRANSFER_STATUS_CONVERTED;
 import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
@@ -50,12 +51,12 @@ import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
+import com.android.settings.network.telephony.SubscriptionRepositoryKt;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -75,11 +76,13 @@ public class SubscriptionUtil {
     static final String SUB_ID = "sub_id";
     @VisibleForTesting
     static final String KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME = "unique_subscription_displayName";
-    private static final String REGEX_DISPLAY_NAME_PREFIXES = "^";
-    private static final String REGEX_DISPLAY_NAME_SUFFIXES = "\\s[0-9]+";
+    private static final String REGEX_DISPLAY_NAME_SUFFIX = "\\s[0-9]+";
+    private static final Pattern REGEX_DISPLAY_NAME_SUFFIX_PATTERN =
+            Pattern.compile(REGEX_DISPLAY_NAME_SUFFIX);
 
     private static List<SubscriptionInfo> sAvailableResultsForTesting;
     private static List<SubscriptionInfo> sActiveResultsForTesting;
+    @Nullable private static Boolean sEnableRacDialogForTesting;
 
     @VisibleForTesting
     public static void setAvailableSubscriptionsForTesting(List<SubscriptionInfo> results) {
@@ -89,6 +92,11 @@ public class SubscriptionUtil {
     @VisibleForTesting
     public static void setActiveSubscriptionsForTesting(List<SubscriptionInfo> results) {
         sActiveResultsForTesting = results;
+    }
+
+    @VisibleForTesting
+    public static void setEnableRacDialogForTesting(boolean enableRacDialog) {
+        sEnableRacDialogForTesting = enableRacDialog;
     }
 
     public static List<SubscriptionInfo> getActiveSubscriptions(SubscriptionManager manager) {
@@ -241,7 +249,8 @@ public class SubscriptionUtil {
             if (activeSlotSubInfoList.size() > 0) {
                 return (activeSlotSubInfoList.get(0).getSubscriptionId() == subId);
             }
-            return (inactiveSlotSubInfoList.get(0).getSubscriptionId() == subId);
+            return (inactiveSlotSubInfoList.size() > 0)
+                    && (inactiveSlotSubInfoList.get(0).getSubscriptionId() == subId);
         }
 
         // Allow non-opportunistic + active eSIM subscription as primary
@@ -399,7 +408,6 @@ public class SubscriptionUtil {
      *
      * @return map of active subscription ids to display names.
      */
-    @VisibleForTesting
     public static CharSequence getUniqueSubscriptionDisplayName(
             Integer subscriptionId, Context context) {
         final Map<Integer, CharSequence> displayNames = getUniqueSubscriptionDisplayNames(context);
@@ -454,12 +462,12 @@ public class SubscriptionUtil {
 
     @VisibleForTesting
     static boolean isValidCachedDisplayName(String cachedDisplayName, String originalName) {
-        if (TextUtils.isEmpty(cachedDisplayName) || TextUtils.isEmpty(originalName)) {
+        if (TextUtils.isEmpty(cachedDisplayName) || TextUtils.isEmpty(originalName)
+                || !cachedDisplayName.startsWith(originalName)) {
             return false;
         }
-        String regex = REGEX_DISPLAY_NAME_PREFIXES + originalName + REGEX_DISPLAY_NAME_SUFFIXES;
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(cachedDisplayName);
+        String displayNameSuffix = cachedDisplayName.substring(originalName.length());
+        Matcher matcher = REGEX_DISPLAY_NAME_SUFFIX_PATTERN.matcher(displayNameSuffix);
         return matcher.matches();
     }
 
@@ -499,40 +507,7 @@ public class SubscriptionUtil {
      * @return list of user selectable subscriptions.
      */
     public static List<SubscriptionInfo> getSelectableSubscriptionInfoList(Context context) {
-        SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
-        List<SubscriptionInfo> availableList = subManager.getAvailableSubscriptionInfoList();
-        if (availableList == null) {
-            return null;
-        } else {
-            // Multiple subscriptions in a group should only have one representative.
-            // It should be the current active primary subscription if any, or any
-            // primary subscription.
-            List<SubscriptionInfo> selectableList = new ArrayList<>();
-            Map<ParcelUuid, SubscriptionInfo> groupMap = new HashMap<>();
-
-            for (SubscriptionInfo info : availableList) {
-                // Opportunistic subscriptions are considered invisible
-                // to users so they should never be returned.
-                if (!isSubscriptionVisible(subManager, context, info)) continue;
-
-                ParcelUuid groupUuid = info.getGroupUuid();
-                if (groupUuid == null) {
-                    // Doesn't belong to any group. Add in the list.
-                    selectableList.add(info);
-                } else if (!groupMap.containsKey(groupUuid)
-                        || (groupMap.get(groupUuid).getSimSlotIndex() == INVALID_SIM_SLOT_INDEX
-                        && info.getSimSlotIndex() != INVALID_SIM_SLOT_INDEX)) {
-                    // If it belongs to a group that has never been recorded or it's the current
-                    // active subscription, add it in the list.
-                    selectableList.remove(groupMap.get(groupUuid));
-                    selectableList.add(info);
-                    groupMap.put(groupUuid, info);
-                }
-
-            }
-            Log.d(TAG, "getSelectableSubscriptionInfoList: " + selectableList);
-            return selectableList;
-        }
+        return SubscriptionRepositoryKt.getSelectableSubscriptionInfoList(context);
     }
 
     /**
@@ -556,20 +531,19 @@ public class SubscriptionUtil {
 
     /**
      * Starts a dialog activity to handle eSIM deletion.
+     *
      * @param context {@code Context}
      * @param subId The id of subscription need to be deleted.
+     * @param carrierId The carrier id of the subscription.
      */
-    public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId,
-            int carrierId) {
+    public static void startDeleteEuiccSubscriptionDialogActivity(
+            @NonNull Context context, int subId, int carrierId) {
         if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
             Log.i(TAG, "Unable to delete subscription due to invalid subscription ID.");
             return;
         }
-        final int[] carriersThatUseRAC = context.getResources().getIntArray(
-                R.array.config_carrier_use_rac);
-        boolean isCarrierRac = Arrays.stream(carriersThatUseRAC).anyMatch(cid -> cid == carrierId);
 
-        if (isCarrierRac && !isConnectedToWifiOrDifferentSubId(context, subId)) {
+        if (shouldShowRacDialogWhenErasingEsim(context, subId, carrierId)) {
             context.startActivity(EuiccRacConnectivityDialogActivity.getIntent(context, subId));
         } else {
             context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
@@ -668,8 +642,13 @@ public class SubscriptionUtil {
 
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class);
-        String rawPhoneNumber = subscriptionManager.getPhoneNumber(
-                subscriptionInfo.getSubscriptionId());
+        String rawPhoneNumber = "";
+        try {
+            rawPhoneNumber = subscriptionManager.getPhoneNumber(
+                    subscriptionInfo.getSubscriptionId());
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "Subscription service unavailable : " + e);
+        }
         if (TextUtils.isEmpty(rawPhoneNumber)) {
             return null;
         }
@@ -847,27 +826,135 @@ public class SubscriptionUtil {
     }
 
     /**
-     * Returns {@code true} if device is connected to Wi-Fi or mobile data provided by a different
-     * subId.
+     * Checks if the device is connected to Wi-Fi.
+     *
+     * @param context context
+     * @return {@code true} if connected to Wi-Fi
+     */
+    static boolean isConnectedToWifi(@NonNull Context context) {
+        NetworkCapabilities capabilities = getNetworkCapabilities(context);
+
+        return capabilities != null
+                && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+    }
+
+    /**
+     * Checks if the device is connected to mobile data provided by a different subId.
      *
      * @param context context
      * @param targetSubId subscription that is going to be deleted
+     * @return {@code true} if connected to mobile data provided by a different subId
      */
     @VisibleForTesting
-    static boolean isConnectedToWifiOrDifferentSubId(@NonNull Context context, int targetSubId) {
+    static boolean isConnectedToMobileDataWithDifferentSubId(
+            @NonNull Context context, int targetSubId) {
+        NetworkCapabilities capabilities = getNetworkCapabilities(context);
+
+        return capabilities != null
+                && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                && targetSubId != SubscriptionManager.getActiveDataSubscriptionId();
+    }
+
+    /**
+     * Checks if any subscription carrier use reusable activation codes.
+     *
+     * @param context The context used to retrieve carriers that uses reusable activation codes.
+     * @return {@code true} if any subscription has a matching carrier that uses reusable activation
+     *     codes
+     */
+    static boolean hasSubscriptionWithRacCarrier(@NonNull Context context) {
+        List<SubscriptionInfo> subs = getAvailableSubscriptions(context);
+        final int[] carriersThatUseRac =
+                context.getResources().getIntArray(R.array.config_carrier_use_rac);
+
+        return Arrays.stream(carriersThatUseRac)
+                .anyMatch(cid -> subs.stream().anyMatch(sub -> sub.getCarrierId() == cid));
+    }
+
+    /**
+     * Checks if a carrier use reusable activation codes.
+     *
+     * @param context The context used to retrieve carriers that uses reusable activation codes.
+     * @param carrierId The carrier id to check if it use reusable activation codes.
+     * @return {@code true} if carrier id use reusable activation codes.
+     */
+    @VisibleForTesting
+    static boolean isCarrierRac(@NonNull Context context, int carrierId) {
+        final int[] carriersThatUseRAC =
+                context.getResources().getIntArray(R.array.config_carrier_use_rac);
+
+        return Arrays.stream(carriersThatUseRAC).anyMatch(cid -> cid == carrierId);
+    }
+
+    /**
+     * Check if warning dialog should be presented when erasing all eSIMs.
+     *
+     * @param context Context to check if any sim carrier use RAC and device Wi-Fi connection.
+     * @return {@code true} if dialog should be presented to the user.
+     */
+    public static boolean shouldShowRacDialogWhenErasingAllEsims(@NonNull Context context) {
+        if (sEnableRacDialogForTesting != null) {
+            return sEnableRacDialogForTesting;
+        }
+
+        return !isConnectedToWifi(context) && hasSubscriptionWithRacCarrier(context);
+    }
+
+    /**
+     * Check if warning dialog should be presented when erasing eSIM.
+     *
+     * @param context Context to check if any sim carrier use RAC and device Wi-Fi connection.
+     * @param subId Subscription ID for the single eSIM.
+     * @param carrierId Carrier ID for the single eSIM.
+     * @return {@code true} if dialog should be presented to the user.
+     */
+    @VisibleForTesting
+    static boolean shouldShowRacDialogWhenErasingEsim(
+            @NonNull Context context, int subId, int carrierId) {
+        return isCarrierRac(context, carrierId)
+                && !isConnectedToWifi(context)
+                && !isConnectedToMobileDataWithDifferentSubId(context, subId);
+    }
+
+    /**
+     * Retrieves NetworkCapabilities for the active network.
+     *
+     * @param context context
+     * @return NetworkCapabilities or null if not available
+     */
+    private static NetworkCapabilities getNetworkCapabilities(@NonNull Context context) {
         ConnectivityManager connectivityManager =
                 context.getSystemService(ConnectivityManager.class);
-        NetworkCapabilities capabilities =
-                connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+        return connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+    }
 
-        if (capabilities != null) {
-            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                // Connected to WiFi
+    /**
+     * Checks if the subscription with the given subId is converted pSIM.
+     *
+     * @param context {@code Context}
+     * @param subId The subscription ID.
+     */
+    static boolean isConvertedPsimSubscription(@NonNull Context context, int subId) {
+        SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        List<SubscriptionInfo> allSubInofs = subscriptionManager.getAllSubscriptionInfoList();
+        for (SubscriptionInfo subInfo : allSubInofs) {
+            if (subInfo != null && subInfo.getSubscriptionId() == subId
+                    && isConvertedPsimSubscription(subInfo)) {
                 return true;
-            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                return targetSubId != SubscriptionManager.getActiveDataSubscriptionId();
             }
         }
         return false;
+    }
+
+    /**
+     * Checks if the subscription is converted pSIM.
+     */
+    public static boolean isConvertedPsimSubscription(@NonNull SubscriptionInfo subInfo) {
+        Log.d(TAG, "isConvertedPsimSubscription: isEmbedded " + subInfo.isEmbedded());
+        Log.d(TAG, "isConvertedPsimSubscription: getTransferStatus " + subInfo.getTransferStatus());
+        return com.android.internal.telephony.flags.Flags.supportPsimToEsimConversion()
+                && !subInfo.isEmbedded()
+                && subInfo.getTransferStatus() == TRANSFER_STATUS_CONVERTED;
     }
 }

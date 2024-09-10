@@ -24,12 +24,16 @@ import android.provider.Settings;
 import android.util.FeatureFlagUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.biometrics.fingerprint2.BiometricsEnvironment;
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
+import com.android.settings.development.DeveloperOptionsActivityLifecycle;
 import com.android.settings.fuelgauge.BatterySettingsStorage;
 import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.localepicker.LocaleNotificationDataManager;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.FeatureFactoryImpl;
 import com.android.settings.spa.SettingsSpaEnvironment;
@@ -45,6 +49,7 @@ import java.lang.ref.WeakReference;
 public class SettingsApplication extends Application {
 
     private WeakReference<SettingsHomepageActivity> mHomeActivity = new WeakReference<>(null);
+    private BiometricsEnvironment mBiometricsEnvironment;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -56,7 +61,10 @@ public class SettingsApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        BackupRestoreStorageManager.getInstance(this).add(new BatterySettingsStorage(this));
+        BackupRestoreStorageManager.getInstance(this)
+                .add(
+                        new BatterySettingsStorage(this),
+                        LocaleNotificationDataManager.getSharedPreferencesStorage(this));
 
         // Add null checking to avoid test case failed.
         if (getApplicationContext() != null) {
@@ -65,6 +73,7 @@ public class SettingsApplication extends Application {
 
         // Set Spa environment.
         setSpaEnvironment();
+        mBiometricsEnvironment = new BiometricsEnvironment(this);
 
         if (ActivityEmbeddingUtils.isSettingsSplitEnabled(this)
                 && FeatureFlagUtils.isEnabled(this,
@@ -75,6 +84,8 @@ public class SettingsApplication extends Application {
                 new DeviceProvisionedObserver().registerContentObserver();
             }
         }
+
+        registerActivityLifecycleCallbacks(new DeveloperOptionsActivityLifecycle());
     }
 
     @Override
@@ -102,6 +113,11 @@ public class SettingsApplication extends Application {
 
     public SettingsHomepageActivity getHomeActivity() {
         return mHomeActivity.get();
+    }
+
+    @Nullable
+    public BiometricsEnvironment getBiometricEnvironment() {
+        return mBiometricsEnvironment;
     }
 
     @Override

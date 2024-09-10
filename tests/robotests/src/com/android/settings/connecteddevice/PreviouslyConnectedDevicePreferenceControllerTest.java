@@ -31,8 +31,6 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.util.Pair;
@@ -47,13 +45,11 @@ import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.widget.SingleTargetGearPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -133,6 +129,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
         when(mContext.getSystemService(BluetoothManager.class)).thenReturn(mBluetoothManager);
         when(mBluetoothManager.getAdapter()).thenReturn(mBluetoothAdapter);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
 
         when(mCachedDevice1.getDevice()).thenReturn(mBluetoothDevice1);
@@ -223,7 +220,6 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
             AVAILABLE);
     }
 
-    @Ignore("b/322712259")
     @Test
     public void onDeviceAdded_addDevicePreference_displayIt() {
         final BluetoothDevicePreference preference1 = new BluetoothDevicePreference(
@@ -234,7 +230,6 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(2);
     }
 
-    @Ignore("b/322712259")
     @Test
     public void onDeviceAdded_addDockDevicePreference_displayIt() {
         final SingleTargetGearPreference dockPreference = new SingleTargetGearPreference(
@@ -245,7 +240,6 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(2);
     }
 
-    @Ignore("b/322712259")
     @Test
     public void onDeviceAdded_addFourDevicePreference_onlyDisplayThree() {
         final BluetoothDevicePreference preference1 = new BluetoothDevicePreference(
@@ -270,19 +264,17 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_SAVED_DEVICES_ORDER_BY_RECENCY)
     public void onDeviceAdded_addPreferenceNotExistInRecentlyDevices_noCrash() {
         final BluetoothDevicePreference preference = new BluetoothDevicePreference(
                 mContext, mCachedDevice5, true, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
 
         mPreConnectedDeviceController.onDeviceAdded(preference);
 
-        // 1 BluetoothDevicePreference and 1 see all preference
-        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(2);
+        // 1 see all preference
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SAVED_DEVICES_ORDER_BY_RECENCY)
     public void onDeviceAdded_addPreferenceNotExistInRecentlyDevices_doNothing() {
         final BluetoothDevicePreference preference = new BluetoothDevicePreference(
                 mContext, mCachedDevice5, true, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
@@ -328,7 +320,6 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SAVED_DEVICES_ORDER_BY_RECENCY)
     public void updatePreferenceGroup_bluetoothIsEnable_shouldOrderByMostRecentlyConnected() {
         when(mBluetoothAdapter.isEnabled()).thenReturn(true);
         final BluetoothDevicePreference preference4 =
@@ -364,7 +355,6 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SAVED_DEVICES_ORDER_BY_RECENCY)
     public void updatePreferenceGroup_bluetoothIsDisable_shouldShowOnlySeeAllPreference() {
         when(mBluetoothAdapter.isEnabled()).thenReturn(false);
         final BluetoothDevicePreference preference4 =

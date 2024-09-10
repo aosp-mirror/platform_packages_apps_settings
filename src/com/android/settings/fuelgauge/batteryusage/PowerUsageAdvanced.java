@@ -95,7 +95,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         super.onCreate(icicle);
         mHistPref = findPreference(KEY_BATTERY_CHART);
         setBatteryChartPreferenceController();
-        AsyncTask.execute(() -> BootBroadcastReceiver.invokeJobRecheck(getContext()));
+        AsyncTask.execute(() -> {
+            if (getContext() != null) {
+                BootBroadcastReceiver.invokeJobRecheck(getContext());
+            }
+        });
     }
 
     @Override
@@ -235,10 +239,17 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         }
         final int dailyIndex = mBatteryChartPreferenceController.getDailyChartIndex();
         final int hourlyIndex = mBatteryChartPreferenceController.getHourlyChartIndex();
-        final String slotInformation = mBatteryChartPreferenceController.getSlotInformation();
+        final String slotInformation =
+                mBatteryChartPreferenceController.getSlotInformation(
+                        /* isAccessibilityText= */ false);
+        final String accessibilitySlotInformation =
+                mBatteryChartPreferenceController.getSlotInformation(
+                        /* isAccessibilityText= */ true);
         final BatteryDiffData slotUsageData = mBatteryUsageMap.get(dailyIndex).get(hourlyIndex);
-        mScreenOnTimeController.handleSceenOnTimeUpdated(
-                slotUsageData != null ? slotUsageData.getScreenOnTime() : 0L, slotInformation);
+        mScreenOnTimeController.handleScreenOnTimeUpdated(
+                slotUsageData != null ? slotUsageData.getScreenOnTime() : 0L,
+                slotInformation,
+                accessibilitySlotInformation);
         // Hide card tips if the related highlight slot was clicked.
         if (isAppsAnomalyEventFocused()) {
             mBatteryTipsController.acceptTipsCard();
@@ -246,6 +257,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mBatteryUsageBreakdownController.handleBatteryUsageUpdated(
                 slotUsageData,
                 slotInformation,
+                accessibilitySlotInformation,
                 isBatteryUsageMapNullOrEmpty(),
                 isAppsAnomalyEventFocused(),
                 mHighlightEventWrapper);
@@ -262,7 +274,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     final PowerUsageFeatureProvider powerUsageFeatureProvider =
                             FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
                     final PowerAnomalyEventList anomalyEventList =
-                            powerUsageFeatureProvider.detectSettingsAnomaly(
+                            powerUsageFeatureProvider.detectPowerAnomaly(
                                     getContext(),
                                     /* displayDrain= */ 0,
                                     DetectRequestSourceType.TYPE_USAGE_UI);
@@ -492,6 +504,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     return DataProcessManager.getBatteryLevelData(
                             getContext(),
                             mHandler,
+                            new UserIdsSeries(getContext(), /* isNonUIRequest= */ false),
                             /* isFromPeriodJob= */ false,
                             PowerUsageAdvanced.this::onBatteryDiffDataMapUpdate);
                 }

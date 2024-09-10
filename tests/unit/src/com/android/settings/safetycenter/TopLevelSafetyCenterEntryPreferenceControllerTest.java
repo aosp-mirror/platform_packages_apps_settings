@@ -20,13 +20,16 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
@@ -52,7 +55,6 @@ public class TopLevelSafetyCenterEntryPreferenceControllerTest {
     @Mock
     private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
-    @Mock
     private Context mContext;
 
     @Before
@@ -60,7 +62,12 @@ public class TopLevelSafetyCenterEntryPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
 
-        mPreference = new Preference(ApplicationProvider.getApplicationContext());
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        PackageManager pm = spy(mContext.getPackageManager());
+        doReturn(pm).when(mContext).getPackageManager();
+        doReturn("com.android.permissioncontroller").when(pm).getPermissionControllerPackageName();
+
+        mPreference = new Preference(mContext);
         mPreference.setKey(PREFERENCE_KEY);
 
         doNothing().when(mContext).startActivity(any(Intent.class));
@@ -75,7 +82,7 @@ public class TopLevelSafetyCenterEntryPreferenceControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_forDifferentPreferenceKey_isNotHandled() {
-        Preference preference = new Preference(ApplicationProvider.getApplicationContext());
+        Preference preference = new Preference(mContext);
         preference.setKey("some_other_preference");
 
         boolean preferenceHandled =
