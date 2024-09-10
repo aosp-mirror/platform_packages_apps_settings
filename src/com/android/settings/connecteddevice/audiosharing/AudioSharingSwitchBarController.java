@@ -25,7 +25,6 @@ import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
-import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -377,9 +376,9 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             // FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST is always true in
             // prod. We can turn off the flag for debug purpose.
             if (FeatureFlagUtils.isEnabled(
-                            mContext,
-                            FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST)
-                    && mAssistant.getAllConnectedDevices().isEmpty()) {
+                    mContext,
+                    FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST)
+                    && hasEmptyConnectedSink()) {
                 // Pop up dialog to ask users to connect at least one lea buds before audio sharing.
                 AudioSharingUtils.postOnMainThread(
                         mContext,
@@ -435,8 +434,12 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     }
 
     @Override
-    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-        if (activeDevice != null && bluetoothProfile == BluetoothProfile.LE_AUDIO) {
+    public void onActiveDeviceChanged(@Nullable CachedBluetoothDevice activeDevice,
+            int bluetoothProfile) {
+        if (activeDevice != null) {
+            Log.d(TAG, "onActiveDeviceChanged: device = "
+                    + activeDevice.getDevice().getAnonymizedAddress()
+                    + ", profile = " + bluetoothProfile);
             updateSwitch();
         }
     }
@@ -536,13 +539,19 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                             boolean isBroadcasting = BluetoothUtils.isBroadcasting(mBtManager);
                             boolean hasActiveDevice =
                                     AudioSharingUtils.hasActiveConnectedLeadDevice(mBtManager);
+                            boolean hasEmptyConnectedDevice = hasEmptyConnectedSink();
                             boolean isStateReady =
                                     isBluetoothOn()
                                             && AudioSharingUtils.isAudioSharingProfileReady(
-                                                    mProfileManager)
+                                            mProfileManager)
+                                            && (isBroadcasting
+                                            // Always enable toggle when no connected sink. We have
+                                            // dialog to guide users to connect compatible devices
+                                            // for audio sharing.
+                                            || hasEmptyConnectedDevice
                                             // Disable toggle till device gets active after
                                             // broadcast ends.
-                                            && (isBroadcasting || hasActiveDevice);
+                                            || hasActiveDevice);
                             AudioSharingUtils.postOnMainThread(
                                     mContext,
                                     () -> {
@@ -564,6 +573,10 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
     private boolean isBluetoothOn() {
         return mBluetoothAdapter != null && mBluetoothAdapter.isEnabled();
+    }
+
+    private boolean hasEmptyConnectedSink() {
+        return mAssistant != null && mAssistant.getAllConnectedDevices().isEmpty();
     }
 
     private void handleOnBroadcastReady() {
