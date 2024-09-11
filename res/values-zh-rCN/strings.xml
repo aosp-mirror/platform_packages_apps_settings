@@ -834,6 +834,14 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"蓝牙功能处于开启状态时，您的设备可以与附近的其他蓝牙设备通信。\n\n为了提升设备的使用体验，即使蓝牙功能已关闭，应用和服务仍可以随时扫描附近的设备。例如，此功能可用于改进基于地理位置的功能和服务。您可以在蓝牙扫描设置中更改此设置。"</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"蓝牙处于开启状态时，您的设备可以与附近的其他蓝牙设备通信。快速分享、查找我的设备等功能会使用蓝牙。\n\n即使蓝牙已关闭，应用和服务仍可以随时扫描附近的设备。此功能有多种用途，例如可用于改进基于地理位置的功能和服务。您可在蓝牙扫描设置中更改此设置。"</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"更改"</string>
+    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"设备详细信息"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"键盘设置"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"更多设置"</string>
@@ -3351,8 +3359,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"关闭"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{无}=1{已设置 1 个时间表}other{已设置 # 个时间表}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"勿扰模式"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"模式"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"利用睡眠模式、工作模式、驾车模式和其他可用模式，尽可能减少干扰，保持专注。"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"创建您的专属模式"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"仅接收来自重要联系人和重要应用的通知"</string>
@@ -3647,12 +3654,10 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"该应用可以回复消息和触发通知中的按钮，包括暂停或关闭通知、接听来电。"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"更改设置"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"该应用可以开启或关闭“勿扰”模式，并可以更改相关设置。"</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"此功能可以管理和启用“模式”，以及更改相关设置。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知使用权，勿扰模式的使用权可能也会遭到停用。"</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
-    <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"停用"</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知访问权限，“模式访问权限”可能会一并停用。"</string>
+    <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"关闭"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"实时"</string>
     <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"来自以下来源的实时通信内容：正在使用的应用、导航、通话等"</string>
@@ -3712,12 +3717,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"“勿扰”权限"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"允许勿扰模式"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"没有任何已安装应用申请“勿扰”权限"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"模式访问权限"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"允许模式访问权限"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"已安装的应用均未申请模式访问权限"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"您尚未允许此应用显示通知"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"根据您的要求，Android 会阻止这类通知显示在此设备上"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"根据您的要求，Android 会阻止这组通知显示在此设备上"</string>
@@ -4108,11 +4110,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"必须保持启用状态，因为通知访问权限已开启"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"要撤消<xliff:g id="APP">%1$s</xliff:g>对“勿扰”模式的使用权限吗？"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"系统将移除此应用创建的所有“勿扰”规则。"</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"要为“<xliff:g id="APP">%1$s</xliff:g>”授予模式访问权限吗？"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"此应用将可以开启/关闭“勿扰”模式，管理和启用“模式”，以及更改相关设置。"</string>
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
     <skip />
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"系统将移除此应用创建的所有模式。"</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"不优化"</string>
@@ -4826,7 +4826,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"不用了"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"取消"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"切换"</string>
-    <string name="sim_action_turn_off" msgid="3506698692916473000">"停用"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"关闭"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"无法激活 SIM 卡"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"请尝试重新启用 SIM 卡。如果问题仍然存在，请重启您的设备。"</string>
     <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"设定您的 SIM 卡偏好设置"</string>
@@ -5342,7 +5342,7 @@
     <string name="audio_sharing_share_button_label" msgid="3895900668317105537">"分享音频"</string>
     <string name="audio_sharing_no_thanks_button_label" msgid="5822491984114744357">"不了，谢谢"</string>
     <string name="audio_sharing_share_with_dialog_title" msgid="3934377530640830364">"与“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”分享音频？"</string>
-    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"与另一部设备分享音频"</string>
+    <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"与其他设备分享音频"</string>
     <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"与“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”分享"</string>
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"关闭"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"再连接一对兼容耳机，或者与其他人分享您的音频流名称和密码"</string>
@@ -5365,8 +5365,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"已停止分享音频"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"连接兼容设备"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"如要开始分享音频，请先将 LE 音频耳机连接到手机"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"切换到“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"连接到 LE 音频串流"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"附近的音频流"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"音频流"</string>
@@ -5411,7 +5410,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"扫描音频流二维码即可通过“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”收听"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"分享期间无法修改密码。若要更改密码，请先关闭“音频分享”功能。"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"二维码扫描器"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"需要帮助？"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"在设置中搜索"</string>
 </resources>

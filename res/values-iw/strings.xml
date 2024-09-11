@@ -661,7 +661,7 @@
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"שמירה על אבטחת הטלפון"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"הוספת טביעת אצבע לביטול הנעילה"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"בחירת נעילת מסך"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"בחירה של נעילת מסך"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"בחירת שיטה לביטול הנעילה"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"בחירה של נעילת מסך חדשה"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"נעילת אפליקציות לעבודה"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"בחירת נעילה חדשה לפרופיל העבודה"</string>
@@ -686,7 +686,7 @@
     <string name="unlock_set_unlock_pin_title" msgid="5283636759362880407">"קוד אימות"</string>
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"סיסמה"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"לא עכשיו"</string>
-    <string name="current_screen_lock" msgid="1367883977261098017">"נעילת המסך הנוכחית"</string>
+    <string name="current_screen_lock" msgid="1367883977261098017">"השיטה הנוכחית לביטול הנעילה"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"קו ביטול נעילה • טביעת אצבע"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"קוד אימות • טביעת אצבע"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"סיסמה • טביעת אצבע"</string>
@@ -767,7 +767,7 @@
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> ממליצה על סיסמה או קוד אימות חזקים. אחרת, ייתכן שהיא לא תפעל כצפוי"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> ממליצה על סיסמה או קוד אימות חדשים. אחרת, ייתכן שהיא לא תפעל כצפוי"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> ממליצה על קו ביטול נעילה, סיסמה או קוד אימות חדשים. אחרת, ייתכן שהיא לא תפעל כצפוי"</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> ממליצה על נעילת מסך חדשה"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> ממליצה להגדיר שיטה חדשה לביטול הנעילה"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"יש לנסות שוב. ניסיון <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> מתוך <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"הנתונים שלך יימחקו"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"אם יוזן קו ביטול נעילה שגוי בניסיון הבא, הנתונים במכשיר יימחקו"</string>
@@ -834,6 +834,14 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"‏כשה-Bluetooth מופעל, המכשיר יכול לתקשר עם מכשירי Bluetooth אחרים שנמצאים בקרבת מקום.\n\nכדי לשפר את חוויית השימוש במכשיר, אפליקציות ושירותים יכולים לסרוק אחר מכשירים בקרבת מקום בכל שלב, גם כשה-Bluetooth כבוי. אפשר להשתמש בכך, למשל, כדי לשפר תכונות ושירותים שמבוססים על מיקום. ניתן לשנות זאת בהגדרות הסריקה של Bluetooth‏."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"‏כשה-Bluetooth מופעל, המכשיר יכול לתקשר עם מכשירי Bluetooth אחרים בקרבת מקום. תכונות כמו \'שיתוף מהיר\' ו\'איפה המכשיר שלי\' מתבססות על Bluetooth.\n\nאפליקציות ושירותים עדיין יכולים לסרוק כדי למצוא מכשירים קרובים בכל שלב, גם כשה-Bluetooth מושבת. זה יכול לשמש, למשל, כדי לשפר תכונות ושירותים מבוססי מיקום. אפשר לשנות את זה בהגדרות של סריקת Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"שינוי"</string>
+    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"פרטי המכשיר"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"הגדרות מקלדת"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"הגדרות נוספות"</string>
@@ -1393,7 +1401,7 @@
     <string name="status_up_time" msgid="4250719389455342087">"זמן פעולה תקינה"</string>
     <string name="battery_manufacture_date" msgid="7139426520156833987">"תאריך הייצור"</string>
     <string name="battery_first_use_date" msgid="3157207331722711317">"תאריך השימוש הראשון"</string>
-    <string name="battery_cycle_count" msgid="2912949283386571900">"מספר מחזורי הטעינה"</string>
+    <string name="battery_cycle_count" msgid="2912949283386571900">"מחזורי הסוללה שהושלמו"</string>
     <string name="battery_cycle_count_not_available" msgid="2426584515665184664">"לא זמין"</string>
     <string name="memory_calculating_size" msgid="3898240439798661242">"החישוב מתבצע…"</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"שינוי שם"</string>
@@ -1921,9 +1929,9 @@
     <string name="bounce_keys" msgid="7419450970351743904">"מקשים חוזרים"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"המקלדת מתעלמת מלחיצות מהירות חוזרות על אותו המקש שנעשות תוך <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> אלפיות השנייה"</string>
     <string name="slow_keys" msgid="2891452895499690837">"מקשים איטיים"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"שינוי משך הזמן להפעלה של לחיצה על מקש ל-<xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> אלפיות השנייה"</string>
+    <string name="slow_keys_summary" msgid="1784371292745423292">"הזמן שעובר מהקשה על מקש ועד להפעלה שלו ישתנה ל-<xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> אלפיות השנייה"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"מקשים \"דביקים\""</string>
-    <string name="sticky_keys_summary" msgid="1844953803625480623">"לוחצים על מקש אחד בכל פעם לקיצורי הדרך במקום ללחוץ על כמה מקשים בו-זמנית"</string>
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"מקישים אחד-אחד על רצף של מקשי קיצור, ולא צריך ללחוץ עליהם בו-זמנית."</string>
     <string name="mouse_keys" msgid="6237254627808525540">"מקשי העכבר"</string>
     <string name="mouse_keys_summary" msgid="2396247040177734245">"אפשר להשתמש במקלדת הפיזית כדי לשלוט בעכבר."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"מקשי קיצור"</string>
@@ -3351,8 +3359,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"כבוי"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{אין}=1{הוגדר לוח זמנים אחד}one{הוגדרו # לוחות זמנים}two{הוגדרו # לוחות זמנים}other{הוגדרו # לוחות זמנים}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"נא לא להפריע"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"מצבים"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"התכונה מאפשרת לך לצמצם הסחות דעת ולהתמקד עם מצבים לשינה, לעבודה, לנהיגה וכל מה שביניהם."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"יצירה של מצב"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"קבלת התראות רק מאפליקציות ומאנשים חשובים"</string>
@@ -3647,11 +3654,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"התכונה תוכל לענות להודעות ולהפעיל לחצנים שמופיעים בהתראות, כולל העברה למצב נודניק או ביטול של התראות ומענה לשיחות."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"לשנות הגדרות"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"התכונה יכולה להפעיל או להשבית את מצב \'נא לא להפריע\' ולשנות הגדרות קשורות."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"יש אפשרות לנהל ולהפעיל מצבים וגם לשנות הגדרות קשורות."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"אם משביתים את הגישה של <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> להתראות, יכול להיות שגם הגישה לתכונה \'נא לא להפריע\' תושבת."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"אם משביתים את הרשאת הגישה של <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> להתראות, יכול להיות שגם הגישה למצבים תושבת."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"השבתה"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ביטול"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"זמן אמת"</string>
@@ -3712,12 +3717,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"גישה אל \'נא לא להפריע\'"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"אישור גישה אל \'נא לא להפריע\'"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"אין אפליקציות מותקנות שביקשו גישה אל \'נא לא להפריע\'"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"גישה למצבים"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"להרשאת גישה למצבים"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"לא התקבלה בקשת גישה למצבים מאף אפליקציה מותקנת"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"לא הפעלת קבלת התראות מהאפליקציה הזו"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות ששייכות לקטגוריה הזו"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות מקבוצה זו"</string>
@@ -4108,11 +4110,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"צריך להיות מופעל מפני שהגישה להתראות מופעלת"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"לבטל את הגישה של <xliff:g id="APP">%1$s</xliff:g> ל\'נא לא להפריע\'?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"כל כללי \'נא לא להפריע\' שנוצרו על ידי האפליקציה הזו יוסרו."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"לתת לאפליקציה <xliff:g id="APP">%1$s</xliff:g> הרשאת גישה למצבים?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"האפליקציה תוכל להפעיל או להשבית את מצב \'נא לא להפריע\', לנהל ולהפעיל מצבים ולבצע שינויים בהגדרות קשורות."</string>
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
     <skip />
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"כל המצבים שנוצרו על ידי האפליקציה הזו יוסרו."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"אין לבצע אופטימיזציה"</string>
@@ -5366,8 +5366,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"שיתוף האודיו נפסק"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"חיבור של מכשיר תואם"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"‏כדי להתחיל לשתף אודיו, צריך לחבר את אוזניות LE Audio לטלפון"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"מעבר אל <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"‏חיבור לשידור אודיו LE"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"שידורי אודיו בקרבת מקום"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"שידורי אודיו"</string>
@@ -5412,7 +5411,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"‏צריך לסרוק קוד QR של שידור אודיו כדי להאזין עם <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"אי אפשר לערוך את הסיסמה בזמן השיתוף. כדי לשנות את הסיסמה, קודם צריך להשבית את שיתוף האודיו."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"‏סורק קודי QR"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"רוצה עזרה?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"חיפוש בהגדרות"</string>
 </resources>
