@@ -22,4 +22,7 @@ import kotlinx.coroutines.flow.Flow
 data class DeviceSettingLayout(val rows: List<DeviceSettingLayoutRow>)
 
 /** Represent a row in the layout. */
-data class DeviceSettingLayoutRow(val settingIds: Flow<List<Int>>)
+data class DeviceSettingLayoutRow(val columns: Flow<List<DeviceSettingLayoutColumn>>)
+
+/** Represent a column in a row. */
+data class DeviceSettingLayoutColumn(val settingId: Int, val highlighted: Boolean)
