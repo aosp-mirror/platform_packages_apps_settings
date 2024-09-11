@@ -293,6 +293,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     new ChooseLockSettingsHelper.Builder(this);
             launchedCDC = builder.setHeader(mTitle)
                     .setDescription(mDetails)
+                    .setAlternateButton(alternateButton)
                     .setExternal(true)
                     .setUserId(LockPatternUtils.USER_REPAIR_MODE)
                     .show();

@@ -26,6 +26,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.webkit.UserPackage;
 
@@ -149,17 +150,20 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     @VisibleForTesting
     String getDisabledReason(WebViewUpdateServiceWrapper webviewUpdateServiceWrapper,
             Context context, String packageName) {
+        UserManager userManager = context.getSystemService(UserManager.class);
         List<UserPackage> userPackages =
                 webviewUpdateServiceWrapper.getPackageInfosAllUsers(context, packageName);
         for (UserPackage userPackage : userPackages) {
             if (!userPackage.isInstalledPackage()) {
                 // Package uninstalled/hidden
                 return context.getString(
-                        R.string.webview_uninstalled_for_user, userPackage.getUserInfo().name);
+                        R.string.webview_uninstalled_for_user,
+                        userManager.getUserInfo(userPackage.getUser().getIdentifier()).name);
             } else if (!userPackage.isEnabledPackage()) {
                 // Package disabled
                 return context.getString(
-                        R.string.webview_disabled_for_user, userPackage.getUserInfo().name);
+                        R.string.webview_disabled_for_user,
+                        userManager.getUserInfo(userPackage.getUser().getIdentifier()).name);
             }
         }
         return null;

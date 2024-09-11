@@ -122,10 +122,11 @@ class DeviceDetailsFragmentFormatterTest {
                 .thenReturn(
                     DeviceSettingConfigModel(
                         listOf(
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_HEADER,
-                                "bluetooth_device_header"),
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                                "bluetooth_device_header"
+                            ),
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, "action_buttons"),
                         ),
                         listOf(),
@@ -203,10 +204,10 @@ class DeviceDetailsFragmentFormatterTest {
                 .thenReturn(
                     DeviceSettingConfigModel(
                         listOf(
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_HEADER,
                                 "bluetooth_device_header"),
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_KEYBOARD_SETTINGS,
                                 "keyboard_settings"),
                         ),
@@ -227,12 +228,12 @@ class DeviceDetailsFragmentFormatterTest {
                 .thenReturn(
                     DeviceSettingConfigModel(
                         listOf(
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_HEADER,
                                 "bluetooth_device_header"),
                             DeviceSettingConfigItemModel.AppProvidedItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_ANC),
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_KEYBOARD_SETTINGS,
                                 "keyboard_settings"),
                         ),
