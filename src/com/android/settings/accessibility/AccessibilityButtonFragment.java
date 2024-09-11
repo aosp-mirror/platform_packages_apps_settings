@@ -33,8 +33,15 @@ public class AccessibilityButtonFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final int titleResource = AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())
-                ? R.string.accessibility_button_gesture_title : R.string.accessibility_button_title;
+
+        final int titleResource;
+        if (android.provider.Flags.a11yStandaloneGestureEnabled()) {
+            titleResource = R.string.accessibility_button_title;
+        } else {
+            titleResource = AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())
+                    ? R.string.accessibility_button_gesture_title
+                    : R.string.accessibility_button_title;
+        }
         getActivity().setTitle(titleResource);
     }
 

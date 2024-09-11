@@ -215,15 +215,12 @@ public class AudioSharingUtils {
             @Nullable LocalBluetoothManager localBtManager) {
         CachedBluetoothDeviceManager deviceManager =
                 localBtManager == null ? null : localBtManager.getCachedDeviceManager();
-        Map<Integer, List<BluetoothDevice>> groupedConnectedDevices =
-                fetchConnectedDevicesByGroupId(localBtManager);
-        for (List<BluetoothDevice> devices : groupedConnectedDevices.values()) {
-            CachedBluetoothDevice leadDevice = getLeadDevice(deviceManager, devices);
-            if (isActiveLeAudioDevice(leadDevice)) {
-                return true;
-            }
+        if (deviceManager == null) {
+            Log.d(TAG, "hasActiveConnectedLeadDevice return false due to null device manager.");
+            return false;
         }
-        return false;
+        return deviceManager.getCachedDevicesCopy().stream().anyMatch(
+                BluetoothUtils::isActiveMediaDevice);
     }
 
     /** Build {@link AudioSharingDeviceItem} from {@link CachedBluetoothDevice}. */
