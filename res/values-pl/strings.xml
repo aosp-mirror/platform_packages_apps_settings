@@ -382,7 +382,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Jak to działa"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Odblokowywanie odciskiem palca tworzy unikalny model odcisku palca, który pozwala zweryfikować Twoją tożsamość. Aby taki model mógł powstać, musisz odcisnąć palec kilka razy pod różnymi kątami."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Odblokowywanie odciskiem palca tworzy unikalny model odcisku palca, który pozwala zweryfikować tożsamość Twojego dziecka. Aby utworzyć taki model odcisku palca podczas konfiguracji, trzeba odcisnąć palec kilka razy pod różnymi kątami."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Najlepsze efekty z osłoną ekranu z oznaczeniem „Made for Google”. W przypadku innych osłon ekranu Twój odcisk palca może nie zadziałać."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Najlepiej jest używać osłony ekranu z oznaczeniem „Made for Google”. W przypadku innych osłon ekranu Twój odcisk palca może nie zadziałać."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Najlepsze efekty daje osłona ekranu z oznaczeniem „Made for Google”. W przypadku innych osłon ekranu odcisk palca Twojego dziecka może nie zadziałać."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Odblokowywanie za pomocą zegarka"</string>
@@ -1896,7 +1896,7 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Klawiatura fizyczna"</string>
     <string name="show_ime" msgid="4334255501724746849">"Używaj klawiatury ekranowej"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Pozostaw na ekranie, gdy aktywna jest klawiatura fizyczna"</string>
-    <string name="bounce_keys" msgid="7419450970351743904">"Klawisze zwrócone"</string>
+    <string name="bounce_keys" msgid="7419450970351743904">"Klawisze z filtrem powtórzeń"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"Klawiatura ignoruje szybkie naciśnięcia tego samego klawisza powtórzone w ciągu <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Klawisze powolne"</string>
     <string name="slow_keys_summary" msgid="1784371292745423292">"Czas wymagany do aktywacji naciśnięcia klawisza zmienia się na <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
@@ -5255,7 +5255,7 @@
     <string name="audio_sharing_title" msgid="4144157137502923821">"Udostępnianie dźwięku"</string>
     <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Udostępniaj dźwięk"</string>
     <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Połączenia i alarmy"</string>
-    <string name="audio_sharing_description" msgid="1660255584523640628">"Słuchaj multimediów razem z innymi. Osoby te muszą mieć własne słuchawki LE Audio."</string>
+    <string name="audio_sharing_description" msgid="1660255584523640628">"Słuchaj multimediów razem z innymi. Osoby te muszą mieć własne słuchawki obsługujące LE Audio."</string>
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Aktywne urządzenia multimedialne"</string>
     <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Dźwięk rozmowy"</string>
     <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Odtwórz tylko na urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
@@ -5299,7 +5299,7 @@
     <string name="audio_sharing_stop_dialog_with_two_content" msgid="2119020725467967219">"Przestaniesz udostępniać dźwięk urządzeniom <xliff:g id="DEVICE_NAME1">%1$s</xliff:g> i <xliff:g id="DEVICE_NAME2">%2$s</xliff:g>"</string>
     <string name="audio_sharing_stop_dialog_with_more_content" msgid="5262441138981618703">"Przestaniesz udostępniać dźwięk połączonym słuchawkom"</string>
     <string name="audio_sharing_connect_button_label" msgid="4241911519063029982">"Połącz"</string>
-    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Zatrzymano udostępnianie dźwięku"</string>
+    <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Udostępnianie dźwięku zostało zatrzymane"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Połącz zgodne urządzenie"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Aby zacząć udostępniać dźwięk, najpierw połącz słuchawki LE Audio z telefonem"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Połącz się ze strumieniem LE Audio"</string>
@@ -5320,7 +5320,7 @@
     <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Posłuchaj"</string>
     <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Spróbuj jeszcze raz"</string>
     <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Posłuchaj strumienia audio"</string>
-    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Strumień audio będzie odtwarzany na urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Możesz go użyć do sterowania głośnością."</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Strumień audio będzie odtwarzany na urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Możesz użyć tego urządzenia do sterowania głośnością."</string>
     <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Nie można słuchać strumienia audio"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"połączone zgodne słuchawki"</string>
     <string name="audio_streams_activity_title" msgid="6766869545769831935">"Strumienie audio"</string>
