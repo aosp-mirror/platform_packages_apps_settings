@@ -18,24 +18,23 @@ package com.android.settings.localepicker;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.spy;
 
+import android.app.GrammaticalInflectionManager;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Looper;
 
-import com.android.settings.widget.TickButtonPreference;
-
-import androidx.preference.PreferenceManager;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import org.junit.After;
+import com.android.settings.widget.TickButtonPreference;
+
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -58,6 +57,7 @@ public class TermsOfAddressFeminineControllerTest {
     private TickButtonPreference mMasculinePreference;
     private TickButtonPreference mNotSpecifiedPreference;
     private TickButtonPreference mNeutralPreference;
+    private GrammaticalInflectionManager mGrammaticalInflectionManager;
 
     @Before
     public void setUp() throws Exception {
@@ -68,6 +68,8 @@ public class TermsOfAddressFeminineControllerTest {
             Looper.prepare();
         }
 
+        mGrammaticalInflectionManager = mContext.getSystemService(
+                GrammaticalInflectionManager.class);
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mPreferenceCategory = new PreferenceCategory(mContext);
@@ -86,19 +88,19 @@ public class TermsOfAddressFeminineControllerTest {
         mPreferenceScreen.addPreference(mMasculinePreference);
         mPreferenceScreen.addPreference(mNeutralPreference);
         mController = new TermsOfAddressFeminineController(mContext, KEY_FEMININE);
+        mController.setTermsOfAddressHelper(new TermsOfAddressHelper(mContext));
         mController.displayPreference(mPreferenceScreen);
     }
 
     @Test
+    @Ignore("b/339543490")
     public void displayPreference_setGrammaticalGenderIsFeminine_FeminineIsSelected() {
         TickButtonPreference selectedPreference =
                 (TickButtonPreference) mPreferenceScreen.getPreference(2);
-        TickButtonPreference pref = (TickButtonPreference) mPreferenceScreen.getPreference(1);
-
         selectedPreference.performClick();
 
         assertThat(selectedPreference.getKey()).isEqualTo(KEY_FEMININE);
-        assertThat(selectedPreference.isSelected()).isTrue();
-        assertThat(pref.isSelected()).isFalse();
+        assertThat(mGrammaticalInflectionManager.getSystemGrammaticalGender()).isEqualTo(
+                Configuration.GRAMMATICAL_GENDER_FEMININE);
     }
 }

@@ -22,6 +22,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
@@ -35,7 +36,7 @@ class ModifySystemSettingsListModel(context: Context) : AppOpPermissionListModel
     override val pageTitleResId = R.string.write_system_settings
     override val switchTitleResId = R.string.permit_write_settings
     override val footerResId = R.string.write_settings_description
-    override val appOp = AppOpsManager.OP_WRITE_SETTINGS
+    override val appOps = AppOps(AppOpsManager.OP_WRITE_SETTINGS)
     override val permission = Manifest.permission.WRITE_SETTINGS
 
     override fun setAllowed(record: AppOpPermissionRecord, newAllowed: Boolean) {

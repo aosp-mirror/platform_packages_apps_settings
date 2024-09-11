@@ -52,7 +52,7 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.shadows.ShadowLooper;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
@@ -61,7 +61,6 @@ import java.util.List;
 
 /** Tests for {@link TextReadingPreferenceFragment}. */
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
@@ -98,6 +97,7 @@ public class TextReadingPreferenceFragmentTest {
         dialog.show();
 
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).callOnClick();
+        ShadowLooper.idleMainLooper();
 
         assertThat(mFragment.mNeedResetSettings).isTrue();
     }
@@ -112,6 +112,7 @@ public class TextReadingPreferenceFragmentTest {
         dialog.show();
 
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).callOnClick();
+        ShadowLooper.idleMainLooper();
 
         verify(listener1).resetState();
         verify(listener2).resetState();
@@ -126,6 +127,7 @@ public class TextReadingPreferenceFragmentTest {
         dialog.show();
 
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).callOnClick();
+        ShadowLooper.idleMainLooper();
 
         assertThat(ShadowToast.getTextOfLatestToast())
                 .isEqualTo(mContext.getString(R.string.accessibility_text_reading_reset_message));

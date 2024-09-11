@@ -27,6 +27,7 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
@@ -42,6 +43,28 @@ class ClientInitiatedActionRepositoryTest {
     }
 
     private val repository = ClientInitiatedActionRepository(context)
+
+    @Test
+    fun onSystemUpdate_runtimeException_doNothing() {
+        mockCarrierConfigManager.stub {
+            on { getConfigForSubId(any(), any()) } doThrow(RuntimeException())
+        }
+
+        repository.onSystemUpdate()
+
+        verify(context, never()).sendBroadcast(any())
+    }
+
+    @Test
+    fun onSystemUpdate_illegalStateException_doNothing() {
+        mockCarrierConfigManager.stub {
+            on { getConfigForSubId(any(), any()) } doThrow(IllegalStateException())
+        }
+
+        repository.onSystemUpdate()
+
+        verify(context, never()).sendBroadcast(any())
+    }
 
     @Test
     fun onSystemUpdate_notEnabled() {

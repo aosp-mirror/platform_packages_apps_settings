@@ -26,7 +26,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.widget.CardPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -74,7 +73,7 @@ public final class IncompatibleChargerTip extends BatteryTip {
     public void updatePreference(Preference preference) {
         super.updatePreference(preference);
         final Context context = preference.getContext();
-        final CardPreference cardPreference = castToCardPreferenceSafely(preference);
+        final var cardPreference = castToTipCardPreferenceSafely(preference);
         if (cardPreference == null) {
             Log.e(TAG, "cast Preference to CardPreference failed");
             return;

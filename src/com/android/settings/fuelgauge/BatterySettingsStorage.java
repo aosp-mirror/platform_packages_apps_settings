@@ -26,7 +26,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.IDeviceIdleController;
-import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -38,7 +37,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
+import com.android.settings.fuelgauge.batteryusage.AppOptimizationModeEvent;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.datastore.BackupCodec;
 import com.android.settingslib.datastore.BackupContext;
 import com.android.settingslib.datastore.BackupRestoreEntity;
 import com.android.settingslib.datastore.BackupRestoreStorageManager;
@@ -52,11 +54,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /** An implementation to backup and restore battery configurations. */
 public final class BatterySettingsStorage extends ObservableBackupRestoreStorage {
-    public static final String TAG = "BatteryBackupHelper";
+    private static final String NAME = "BatteryBackupHelper";
+    private static final String TAG = "BatterySettingsStorage";
 
     // Definition for the device build information.
     public static final String KEY_BUILD_BRAND = "device_build_brand";
@@ -88,7 +94,7 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
      */
     public static @NonNull BatterySettingsStorage get(@NonNull Context context) {
         return (BatterySettingsStorage)
-                BackupRestoreStorageManager.getInstance(context).getOrThrow(TAG);
+                BackupRestoreStorageManager.getInstance(context).getOrThrow(NAME);
     }
 
     public BatterySettingsStorage(@NonNull Context context) {
@@ -98,7 +104,7 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
     @NonNull
     @Override
     public String getName() {
-        return TAG;
+        return NAME;
     }
 
     @Override
@@ -159,8 +165,24 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
         return Arrays.asList(allowlistedApps);
     }
 
+    @NonNull
     @Override
-    public void writeNewStateDescription(@NonNull ParcelFileDescriptor newState) {
+    public OutputStream wrapBackupOutputStream(
+            @NonNull BackupCodec codec, @NonNull OutputStream outputStream) {
+        // not using any codec for backward compatibility
+        return outputStream;
+    }
+
+    @NonNull
+    @Override
+    public InputStream wrapRestoreInputStream(
+            @NonNull BackupCodec codec, @NonNull InputStream inputStream) {
+        // not using any codec for backward compatibility
+        return inputStream;
+    }
+
+    @Override
+    public void onRestoreFinished() {
         BatterySettingsMigrateChecker.verifySaverConfiguration(mApplication);
         performRestoreIfNeeded();
     }
@@ -305,8 +327,8 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
                 @NonNull BackupContext backupContext, @NonNull OutputStream outputStream)
                 throws IOException {
             final long timestamp = System.currentTimeMillis();
-            final ArraySet<ApplicationInfo> applications = getInstalledApplications();
-            if (applications == null || applications.isEmpty()) {
+            final ApplicationInfo[] applications = getInstalledApplications();
+            if (applications.length == 0) {
                 Log.w(TAG, "no data found in the getInstalledApplications()");
                 return EntityBackupResult.DELETE;
             }
@@ -314,13 +336,18 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
             final StringBuilder builder = new StringBuilder();
             final AppOpsManager appOps = mApplication.getSystemService(AppOpsManager.class);
             final SharedPreferences sharedPreferences = getSharedPreferences(mApplication);
+            final Map<Integer, AppOptimizationModeEvent> appOptModeMap =
+                    AppOptModeSharedPreferencesUtils.getAllEvents(mApplication).stream()
+                            .collect(Collectors.toMap(AppOptimizationModeEvent::getUid, e -> e));
             // Converts application into the AppUsageState.
             for (ApplicationInfo info : applications) {
                 final int mode = BatteryOptimizeUtils.getMode(appOps, info.uid, info.packageName);
                 @BatteryOptimizeUtils.OptimizationMode
                 final int optimizationMode =
-                        BatteryOptimizeUtils.getAppOptimizationMode(
-                                mode, mAllowlistedApps.contains(info.packageName));
+                        appOptModeMap.containsKey(info.uid)
+                                ? (int) appOptModeMap.get(info.uid).getResetOptimizationMode()
+                                : BatteryOptimizeUtils.getAppOptimizationMode(
+                                        mode, mAllowlistedApps.contains(info.packageName));
                 // Ignores default optimized/unknown state or system/default apps.
                 if (optimizationMode == BatteryOptimizeUtils.MODE_OPTIMIZED
                         || optimizationMode == BatteryOptimizeUtils.MODE_UNKNOWN
@@ -344,15 +371,24 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
                     TAG,
                     String.format(
                             "backup getInstalledApplications():%d count=%d in %d/ms",
-                            applications.size(),
+                            applications.length,
                             backupCount,
                             (System.currentTimeMillis() - timestamp)));
             return EntityBackupResult.UPDATE;
         }
 
-        private @Nullable ArraySet<ApplicationInfo> getInstalledApplications() {
-            return BatteryOptimizeUtils.getInstalledApplications(
-                    mApplication, AppGlobals.getPackageManager());
+        private ApplicationInfo[] getInstalledApplications() {
+            ArraySet<ApplicationInfo> installedApplications =
+                    BatteryOptimizeUtils.getInstalledApplications(
+                            mApplication, AppGlobals.getPackageManager());
+            ApplicationInfo[] applicationInfos = new ApplicationInfo[0];
+            if (installedApplications == null || installedApplications.isEmpty()) {
+                return applicationInfos;
+            }
+            applicationInfos = installedApplications.toArray(applicationInfos);
+            // sort the list to ensure backup data is stable
+            Arrays.sort(applicationInfos, Comparator.comparing(info -> info.packageName));
+            return applicationInfos;
         }
 
         static @NonNull SharedPreferences getSharedPreferences(Context context) {

@@ -39,6 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:focusable="false"
+            android:labelFor="@id/apn_radio_button_frame"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceListItem" />
 
@@ -57,14 +58,19 @@
 
     </RelativeLayout>
 
-    <RadioButton
-        android:id="@+id/apn_radiobutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dip"
-        android:layout_marginEnd="8dip"
-        android:layout_gravity="center_vertical"
-        android:focusable="true"
-        android:clickable="true" />
+    <FrameLayout
+        android:id="@+id/apn_radio_button_frame"
+        android:layout_width="@dimen/min_tap_target_size"
+        android:layout_height="@dimen/min_tap_target_size"
+        android:layout_margin="8dp">
+
+        <RadioButton
+            android:id="@+id/apn_radiobutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:focusable="false" />
+    </FrameLayout>
 
 </LinearLayout>

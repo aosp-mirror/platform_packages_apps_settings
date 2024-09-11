@@ -57,7 +57,10 @@ import java.util.concurrent.FutureTask;
 
 /**
  * Panel data class for Volume settings.
+ *
+ * @deprecated this is no longer used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class VolumePanel implements PanelContent, LifecycleObserver {
     private static final String TAG = "VolumePanel";
 
@@ -151,7 +154,9 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
 
     @Override
     public Intent getSeeMoreIntent() {
-        return new Intent(Settings.ACTION_SOUND_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return new Intent(Settings.ACTION_SOUND_SETTINGS)
+                .setPackage(mContext.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @Override

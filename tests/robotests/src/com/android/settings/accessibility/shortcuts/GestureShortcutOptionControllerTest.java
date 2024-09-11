@@ -16,9 +16,10 @@
 
 package com.android.settings.accessibility.shortcuts;
 
+import static com.android.settings.testutils.AccessibilityTestUtils.setupMockAccessibilityManager;
+
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -33,6 +34,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.testutils.AccessibilityTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -81,10 +83,13 @@ public class GestureShortcutOptionControllerTest {
     }
 
     @Test
-    public void getSummary_touchExplorationDisabled_verifySummary() {
+    public void getSummary_touchExplorationDisabled_notInSuw_verifySummary() {
         enableTouchExploration(false);
-        String expected = mContext.getString(
-                R.string.accessibility_shortcut_edit_dialog_summary_software_gesture)
+        mController.setInSetupWizard(false);
+        String expected = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 2,
+                R.string.accessibility_shortcut_edit_dialog_summary_gesture)
                 + "\n\n"
                 + mContext.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_software_floating);
@@ -93,13 +98,40 @@ public class GestureShortcutOptionControllerTest {
     }
 
     @Test
-    public void getSummary_touchExplorationEnabled_verifySummary() {
+    public void getSummary_touchExplorationDisabled_inSuw_verifySummary() {
+        enableTouchExploration(false);
+        mController.setInSetupWizard(true);
+        String expected = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 2,
+                R.string.accessibility_shortcut_edit_dialog_summary_gesture);
+
+        assertThat(mController.getSummary().toString()).isEqualTo(expected);
+    }
+
+    @Test
+    public void getSummary_touchExplorationEnabled_notInSuw_verifySummary() {
         enableTouchExploration(true);
-        String expected = mContext.getString(
-                R.string.accessibility_shortcut_edit_dialog_summary_software_gesture_talkback)
+        mController.setInSetupWizard(false);
+        String expected = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 3,
+                R.string.accessibility_shortcut_edit_dialog_summary_gesture)
                 + "\n\n"
                 + mContext.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_software_floating);
+
+        assertThat(mController.getSummary().toString()).isEqualTo(expected);
+    }
+
+    @Test
+    public void getSummary_touchExplorationEnabled_inSuw_verifySummary() {
+        enableTouchExploration(true);
+        mController.setInSetupWizard(true);
+        String expected = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 3,
+                R.string.accessibility_shortcut_edit_dialog_summary_gesture);
 
         assertThat(mController.getSummary().toString()).isEqualTo(expected);
     }
@@ -148,8 +180,7 @@ public class GestureShortcutOptionControllerTest {
     }
 
     private void enableTouchExploration(boolean enable) {
-        AccessibilityManager am = mock(AccessibilityManager.class);
-        when(mContext.getSystemService(AccessibilityManager.class)).thenReturn(am);
+        AccessibilityManager am = setupMockAccessibilityManager(mContext);
         when(am.isTouchExplorationEnabled()).thenReturn(enable);
     }
 }

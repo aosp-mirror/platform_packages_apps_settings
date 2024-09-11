@@ -22,26 +22,13 @@
     android:title="@string/private_space_title"
     settings:searchable="false">
 
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="private_space_settings"
-        settings:searchable="false"
-        settings:lottie_rawRes="@raw/private_space_illustration"/>
-
-    <Preference
+    <com.android.settingslib.widget.TopIntroPreference
         android:key="private_space_description"
-        android:summary="@string/private_space_description"
-        android:selectable="false"
-        settings:searchable="false" />
+        android:title="@string/private_space_description"
+        settings:searchable="false"/>
 
     <PreferenceCategory
-        android:title="@string/security_header">
-
-        <Preference
-            android:key="private_space_auto_lock"
-            android:title="@string/private_space_auto_lock_title"
-            android:fragment="com.android.settings.privatespace.autolock.AutoLockSettingsFragment"
-            settings:controller="com.android.settings.privatespace.autolock.AutoLockPreferenceController"
-            settings:searchable="false" />
+        android:title="@string/private_space_category_lock">
 
         <Preference
             android:key="private_space_use_one_lock"
@@ -51,22 +38,23 @@
             settings:searchable="false" />
 
         <Preference
-            android:key="private_space_hidden"
-            android:title="@string/private_space_hide_title"
-            android:fragment="com.android.settings.privatespace.HidePrivateSpaceSettings"
-            settings:controller="com.android.settings.privatespace.HidePrivateSpaceSummaryController"
+            android:key="private_space_auto_lock"
+            android:title="@string/private_space_auto_lock_title"
+            android:fragment="com.android.settings.privatespace.autolock.AutoLockSettingsFragment"
+            settings:controller="com.android.settings.privatespace.autolock.AutoLockPreferenceController"
             settings:searchable="false" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/private_space_apps_and_notifications_header">
+        android:title="@string/private_space_category_hide">
 
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="private_space_sensitive_notifications"
-            android:title="@string/private_space_notifications_title"
-            android:summary="@string/private_space_sensitive_notifications_description"
-            settings:controller="com.android.settings.privatespace.HidePrivateSpaceSensitiveNotificationsController" />
+        <Preference
+            android:key="private_space_hidden"
+            android:title="@string/private_space_hide_page_title"
+            android:fragment="com.android.settings.privatespace.HidePrivateSpaceSettings"
+            settings:controller="com.android.settings.privatespace.HidePrivateSpaceSummaryController"
+            settings:searchable="false" />
 
     </PreferenceCategory>
 
@@ -81,10 +69,12 @@
 
     </PreferenceCategory>
 
-    <com.android.settings.accessibility.AccessibilityFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="private_space_footer"
-        android:title="@string/private_space_apps_permission_text"
+        android:title="@string/private_space_settings_footer_text"
         android:selectable="false"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        settings:controller="com.android.settings.privatespace.PrivateSpaceFooterPreferenceController"/>
+
 
 </PreferenceScreen>

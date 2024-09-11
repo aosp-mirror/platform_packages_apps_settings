@@ -44,6 +44,7 @@ open class WifiDialog2 @JvmOverloads constructor(
     @StyleRes style: Int = 0,
     private val hideSubmitButton: Boolean = mode == WifiConfigUiBase2.MODE_VIEW,
     private val hideMeteredAndPrivacy: Boolean = false,
+    private val isSysUiCaller: Boolean = false,
 ) : AlertDialog(context, style), WifiConfigUiBase2, DialogInterface.OnClickListener {
     /**
      * Host UI component of WifiDialog2 can receive callbacks by this interface.
@@ -71,7 +72,9 @@ open class WifiDialog2 @JvmOverloads constructor(
     override fun getController(): WifiConfigController2 = controller
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setWindowsOverlay()
+        if (isSysUiCaller) {
+            setWindowsOverlay()
+        }
         view = layoutInflater.inflate(R.layout.wifi_dialog, null)
         setView(view)
         controller = WifiConfigController2(this, view, wifiEntry, mode, hideMeteredAndPrivacy)

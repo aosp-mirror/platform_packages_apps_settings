@@ -120,7 +120,7 @@ class DataUsagePreferenceControllerTest {
             on { loadFirstCycle() } doReturn usageData
         }
         controller.onViewCreated(TestLifecycleOwner())
-        waitUntil { preference.summary != null }
+        waitUntil { !preference.summary.isNullOrBlank() }
 
         controller.handlePreferenceTreeClick(preference)
 

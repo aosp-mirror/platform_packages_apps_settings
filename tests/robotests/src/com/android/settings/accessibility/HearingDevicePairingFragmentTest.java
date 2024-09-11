@@ -178,7 +178,7 @@ public class HearingDevicePairingFragmentTest {
     }
 
     @Test
-    public void handleLeScanResult_isNotAndroidCompatible_() {
+    public void handleLeScanResult_isNotAndroidCompatible_discoverServices() {
         ScanResult scanResult = mock(ScanResult.class);
         doReturn(mDevice).when(scanResult).getDevice();
         doReturn(mCachedDevice).when(mCachedDeviceManager).findDevice(mDevice);
@@ -187,6 +187,19 @@ public class HearingDevicePairingFragmentTest {
         mFragment.handleLeScanResult(scanResult);
 
         verify(mFragment).discoverServices(mCachedDevice);
+    }
+
+    @Test
+    public void handleLeScanResult_alreadyBonded_doNothing() {
+        ScanResult scanResult = mock(ScanResult.class);
+        doReturn(mDevice).when(scanResult).getDevice();
+        doReturn(mCachedDevice).when(mCachedDeviceManager).findDevice(mDevice);
+        doReturn(BluetoothDevice.BOND_BONDED).when(mCachedDevice).getBondState();
+
+        mFragment.handleLeScanResult(scanResult);
+
+        verify(mFragment, never()).addDevice(mCachedDevice);
+        verify(mFragment, never()).discoverServices(mCachedDevice);
     }
 
     @Test

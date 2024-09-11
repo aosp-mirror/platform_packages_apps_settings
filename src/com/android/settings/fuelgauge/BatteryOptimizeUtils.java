@@ -33,6 +33,8 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
+import com.android.settingslib.datastore.DataChangeReason;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import java.lang.annotation.Retention;
@@ -137,7 +139,8 @@ public class BatteryOptimizeUtils {
     /** Resets optimization mode for all applications. */
     public static void resetAppOptimizationMode(
             Context context, IPackageManager ipm, AppOpsManager aom) {
-        resetAppOptimizationMode(
+        AppOptModeSharedPreferencesUtils.clearAll(context);
+        resetAppOptimizationModeInternal(
                 context,
                 ipm,
                 aom,
@@ -181,6 +184,14 @@ public class BatteryOptimizeUtils {
                 && getAppOptimizationMode() != BatteryOptimizeUtils.MODE_RESTRICTED;
     }
 
+    String getPackageName() {
+        return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
+    }
+
+    int getUid() {
+        return mUid;
+    }
+
     /** Gets the list of installed applications. */
     public static ArraySet<ApplicationInfo> getInstalledApplications(
             Context context, IPackageManager ipm) {
@@ -210,7 +221,7 @@ public class BatteryOptimizeUtils {
     }
 
     @VisibleForTesting
-    static void resetAppOptimizationMode(
+    static void resetAppOptimizationModeInternal(
             Context context,
             IPackageManager ipm,
             AppOpsManager aom,
@@ -221,6 +232,10 @@ public class BatteryOptimizeUtils {
             Log.w(TAG, "no data found in the getInstalledApplications()");
             return;
         }
+
+        // App preferences are already clear when code reach here, and there may be no
+        // setAppUsageStateInternal call to notifyChange. So always trigger notifyChange here.
+        BatterySettingsStorage.get(context).notifyChange(DataChangeReason.DELETE);
 
         allowlistBackend.refreshList();
         // Resets optimization mode for each application.
@@ -250,10 +265,6 @@ public class BatteryOptimizeUtils {
                     allowlistBackend,
                     Action.RESET);
         }
-    }
-
-    String getPackageName() {
-        return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
     }
 
     static int getMode(AppOpsManager appOpsManager, int uid, String packageName) {
@@ -340,9 +351,9 @@ public class BatteryOptimizeUtils {
         try {
             batteryUtils.setForceAppStandby(uid, packageName, appStandbyMode);
             if (allowListed) {
-                powerAllowlistBackend.addApp(packageName);
+                powerAllowlistBackend.addApp(packageName, uid);
             } else {
-                powerAllowlistBackend.removeApp(packageName);
+                powerAllowlistBackend.removeApp(packageName, uid);
             }
         } catch (Exception e) {
             // Error cases, set standby mode as -1 for logging.
@@ -351,6 +362,9 @@ public class BatteryOptimizeUtils {
         }
         BatteryOptimizeLogUtils.writeLog(
                 context, action, packageNameKey, createLogEvent(appStandbyMode, allowListed));
+        if (action != Action.RESET) { // reset has been notified in resetAppOptimizationMode
+            BatterySettingsStorage.get(context).notifyChange(toChangeReason(action));
+        }
     }
 
     private static String createLogEvent(int appStandbyMode, boolean allowListed) {
@@ -361,5 +375,9 @@ public class BatteryOptimizeUtils {
                         appStandbyMode,
                         allowListed,
                         getAppOptimizationMode(appStandbyMode, allowListed));
+    }
+
+    private static @DataChangeReason int toChangeReason(Action action) {
+        return action == Action.RESTORE ? DataChangeReason.RESTORE : DataChangeReason.UPDATE;
     }
 }

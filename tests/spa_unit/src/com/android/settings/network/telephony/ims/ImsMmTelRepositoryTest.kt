@@ -19,10 +19,14 @@ package com.android.settings.network.telephony.ims
 import android.content.Context
 import android.telephony.AccessNetworkConstants
 import android.telephony.ims.ImsMmTelManager
+import android.telephony.ims.ImsReasonInfo
+import android.telephony.ims.ImsRegistrationAttributes
 import android.telephony.ims.ImsStateCallback
+import android.telephony.ims.RegistrationManager.RegistrationCallback
 import android.telephony.ims.feature.MmTelFeature
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
 import com.android.settingslib.spa.testutils.toListWithTimeout
 import com.google.common.truth.Truth.assertThat
 import java.util.function.Consumer
@@ -39,17 +43,23 @@ import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class ImsMmTelRepositoryTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
 
+    private var registrationCallback: RegistrationCallback? = null
     private var stateCallback: ImsStateCallback? = null
 
     private val mockImsMmTelManager = mock<ImsMmTelManager> {
         on { isVoWiFiSettingEnabled } doReturn true
         on { getVoWiFiRoamingModeSetting() } doReturn ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED
         on { getVoWiFiModeSetting() } doReturn ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED
+        on { registerImsRegistrationCallback(any(), any<RegistrationCallback>()) } doAnswer {
+            registrationCallback = it.arguments[1] as RegistrationCallback
+            registrationCallback?.onRegistered(mock<ImsRegistrationAttributes>())
+        }
         on { registerImsStateCallback(any(), any()) } doAnswer {
             stateCallback = it.arguments[1] as ImsStateCallback
             stateCallback?.onAvailable()
@@ -100,6 +110,25 @@ class ImsMmTelRepositoryTest {
     }
 
     @Test
+    fun imsRegisteredFlow_sendInitialValue() = runBlocking {
+        val imsRegistered = repository.imsRegisteredFlow().firstWithTimeoutOrNull()
+
+        assertThat(imsRegistered).isTrue()
+    }
+
+    @Test
+    fun imsRegisteredFlow_changed(): Unit = runBlocking {
+        val listDeferred = async {
+            repository.imsRegisteredFlow().toListWithTimeout()
+        }
+        delay(100)
+
+        registrationCallback?.onUnregistered(ImsReasonInfo())
+
+        assertThat(listDeferred.await().last()).isFalse()
+    }
+
+    @Test
     fun imsReadyFlow_sendInitialValue() = runBlocking {
         val flow = repository.imsReadyFlow()
 
@@ -125,6 +154,13 @@ class ImsMmTelRepositoryTest {
         val isSupported = repository.isSupported(CAPABILITY, TRANSPORT)
 
         assertThat(isSupported).isTrue()
+    }
+
+    @Test
+    fun setCrossSimCallingEnabled() = runBlocking {
+        repository.setCrossSimCallingEnabled(true)
+
+        verify(mockImsMmTelManager).setCrossSimCallingEnabled(true)
     }
 
     private companion object {

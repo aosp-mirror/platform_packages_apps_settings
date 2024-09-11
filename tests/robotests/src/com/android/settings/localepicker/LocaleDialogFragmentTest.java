@@ -38,21 +38,25 @@ import com.android.internal.app.LocaleStore;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.shadows.ShadowLooper;
 
 import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowAlertDialogCompat.class})
-@LooperMode(LooperMode.Mode.LEGACY)
 public class LocaleDialogFragmentTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     private OnBackInvokedDispatcher mOnBackInvokedDispatcher;
@@ -62,8 +66,6 @@ public class LocaleDialogFragmentTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mDialogFragment = LocaleDialogFragment.newInstance();
         LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(Locale.ENGLISH);
@@ -75,6 +77,7 @@ public class LocaleDialogFragmentTest {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(mDialogFragment, null);
         fragmentTransaction.commit();
+        ShadowLooper.idleMainLooper();
     }
 
     @Test

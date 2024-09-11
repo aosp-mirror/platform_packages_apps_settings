@@ -57,6 +57,7 @@ public final class BatteryUsageBreakdownControllerTest {
     private static final String PREF_KEY = "pref_key";
     private static final String PREF_KEY2 = "pref_key2";
     private static final String PREF_SUMMARY = "fake preference summary";
+    private static final long TIME_LESS_THAN_HALF_MINUTE  = DateUtils.MINUTE_IN_MILLIS / 2  - 1;
 
     @Mock private InstrumentedPreferenceFragment mFragment;
     @Mock private SettingsActivity mSettingsActivity;
@@ -270,7 +271,7 @@ public final class BatteryUsageBreakdownControllerTest {
 
     @Test
     public void setPreferencePercent_lessThanThreshold_expectedFormat() {
-        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        final PowerGaugePreference pref = spy(new PowerGaugePreference(mContext));
         final BatteryDiffEntry batteryDiffEntry =
                 createBatteryDiffEntry(
                         /* isSystem= */ true,
@@ -281,15 +282,18 @@ public final class BatteryUsageBreakdownControllerTest {
         batteryDiffEntry.mConsumePower = 0.8;
         batteryDiffEntry.setTotalConsumePower(100);
         mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
+        mBatteryUsageBreakdownController.mPercentLessThanThresholdContentDescription =
+                "test content description";
 
         mBatteryUsageBreakdownController.setPreferencePercentage(pref, batteryDiffEntry);
 
         assertThat(pref.getPercentage()).isEqualTo("< 1%");
+        verify(pref).setPercentageContentDescription("test content description");
     }
 
     @Test
     public void setPreferencePercent_greaterThanThreshold_expectedFormat() {
-        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        final PowerGaugePreference pref = spy(new PowerGaugePreference(mContext));
         final BatteryDiffEntry batteryDiffEntry =
                 createBatteryDiffEntry(
                         /* isSystem= */ true,
@@ -300,10 +304,13 @@ public final class BatteryUsageBreakdownControllerTest {
         batteryDiffEntry.mConsumePower = 16;
         batteryDiffEntry.setTotalConsumePower(100);
         mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
+        mBatteryUsageBreakdownController.mPercentLessThanThresholdContentDescription =
+                "test content description";
 
         mBatteryUsageBreakdownController.setPreferencePercentage(pref, batteryDiffEntry);
 
         assertThat(pref.getPercentage()).isEqualTo("16%");
+        verify(pref, never()).setPercentageContentDescription(any());
     }
 
     @Test
@@ -332,10 +339,10 @@ public final class BatteryUsageBreakdownControllerTest {
                 createBatteryDiffEntry(
                         /* isSystem= */ true,
                         /* screenOnTimeInMs= */ 0,
-                        /* foregroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1,
+                        /* foregroundUsageTimeInMs= */ TIME_LESS_THAN_HALF_MINUTE,
                         /* foregroundServiceUsageTimeInMs= */ 0,
                         /* backgroundUsageTimeInMs= */ 0));
-        assertThat(pref.getSummary().toString()).isEqualTo("Total: less than a min");
+        assertThat(pref.getSummary().toString()).isEqualTo("Total: less than a minute");
     }
 
     @Test
@@ -427,12 +434,12 @@ public final class BatteryUsageBreakdownControllerTest {
                 pref,
                 createBatteryDiffEntry(
                         /* isSystem= */ false,
-                        /* screenOnTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1,
-                        /* foregroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1,
+                        /* screenOnTimeInMs= */ TIME_LESS_THAN_HALF_MINUTE,
+                        /* foregroundUsageTimeInMs= */ TIME_LESS_THAN_HALF_MINUTE,
                         /* foregroundServiceUsageTimeInMs= */ 0,
-                        /* backgroundUsageTimeInMs= */ DateUtils.MINUTE_IN_MILLIS - 1));
+                        /* backgroundUsageTimeInMs= */ TIME_LESS_THAN_HALF_MINUTE));
         assertThat(pref.getSummary().toString())
-                .isEqualTo("Screen time: less than a min\nBackground: less than a min");
+                .isEqualTo("Screen time: less than a minute\nBackground: less than a minute");
     }
 
     private BatteryDiffEntry createBatteryDiffEntry(

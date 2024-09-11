@@ -177,6 +177,11 @@ public class MessageDisplayController extends FingerprintManager.EnrollmentCallb
         mEnrollmentCallback.onEnrollmentError(errMsgId, errString);
     }
 
+    @Override
+    public void onAcquired(boolean isAcquiredGood) {
+        mEnrollmentCallback.onAcquired(isAcquiredGood);
+    }
+
     private Message getMessageToDisplay(long timeStamp) {
         ProgressMessage progressMessageToDisplay = getProgressMessageToDisplay(timeStamp);
         if (mMustDisplayProgress) {

@@ -36,4 +36,7 @@ fun CarrierConfigManager.safeGetConfig(
     // Settings should not assume Carrier config loader (and any other system services as well) are
     // always available. If not available, use default value instead.
     persistableBundleOf()
+} catch (e: RuntimeException) {
+    // The reason is same with above.
+    persistableBundleOf()
 }

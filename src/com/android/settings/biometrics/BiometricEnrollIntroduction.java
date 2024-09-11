@@ -229,13 +229,15 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                     }
 
                     // Show secondary button once scroll is completed.
-                    if (!scrollNeeded) {
-                        if (!enrollmentCompleted) {
-                            getSecondaryFooterButton().setVisibility(View.VISIBLE);
-                        }
-                        mHasScrolledToBottom = true;
-                    }
+                    getSecondaryFooterButton().setVisibility(
+                            !scrollNeeded && !enrollmentCompleted ? View.VISIBLE : View.INVISIBLE);
+                    mHasScrolledToBottom = !scrollNeeded;
                 });
+
+        final boolean isScrollNeeded = requireScrollMixin.isScrollingRequired();
+        final boolean enrollmentCompleted = checkMaxEnrolled() != 0;
+        getSecondaryFooterButton().setVisibility(
+                !isScrollNeeded && !enrollmentCompleted ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override

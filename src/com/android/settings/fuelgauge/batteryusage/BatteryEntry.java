@@ -40,6 +40,7 @@ import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.Utils;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.Comparator;
 import java.util.Locale;
@@ -654,5 +655,47 @@ public class BatteryEntry {
             Log.e(TAG, "safeGetConsumedPower failed:" + e);
             return 0.0d;
         }
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("BatteryEntry{")
+                .append(String.format("\n\tname=%s isHidden=%b", mName, mIsHidden))
+                .append(String.format("\n\tconsume=%.2f%% | %f", mPercent, mConsumedPower))
+                .append(
+                        String.format(
+                                "\n\tconsume power= foreground:%f foregroundService:%f",
+                                mConsumedPowerInForeground, mConsumedPowerInForegroundService))
+                .append(
+                        String.format(
+                                "\n\tconsume power= background:%f cached:%f",
+                                mConsumedPowerInBackground, mConsumedPowerInCached))
+                .append(
+                        String.format(
+                                "\n\ttime= foreground:%s foregroundService:%s "
+                                        + "background:%s usageDuration:%s",
+                                StringUtil.formatElapsedTime(
+                                        mContext,
+                                        (double) mTimeInForegroundMs,
+                                        /* withSeconds= */ true,
+                                        /* collapseTimeUnit= */ false),
+                                StringUtil.formatElapsedTime(
+                                        mContext,
+                                        (double) mTimeInForegroundServiceMs,
+                                        /* withSeconds= */ true,
+                                        /* collapseTimeUnit= */ false),
+                                StringUtil.formatElapsedTime(
+                                        mContext,
+                                        (double) mTimeInBackgroundMs,
+                                        /* withSeconds= */ true,
+                                        /* collapseTimeUnit= */ false),
+                                StringUtil.formatElapsedTime(
+                                        mContext,
+                                        (double) mUsageDurationMs,
+                                        /* withSeconds= */ true,
+                                        /* collapseTimeUnit= */ false)))
+                .append(String.format("\n\tpackage:%s uid:%d", mDefaultPackageName, mUid))
+                .toString();
     }
 }

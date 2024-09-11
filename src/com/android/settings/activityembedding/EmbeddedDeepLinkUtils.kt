@@ -20,6 +20,7 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.UserInfo
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.SettingsActivity
@@ -93,9 +94,17 @@ object EmbeddedDeepLinkUtils {
         }
     }
 
+
+    /**
+     * Returns whether the user is a sub profile.
+     */
+    @JvmStatic
+    fun isSubProfile(userInfo: UserInfo): Boolean =
+        userInfo.isManagedProfile || userInfo.isPrivateProfile
+
     private fun Context.startTrampolineIntent(trampolineIntent: Intent): Boolean = try {
         val userInfo = userManager.getUserInfo(user.identifier)
-        if (userInfo.isManagedProfile) {
+        if (isSubProfile(userInfo)) {
             trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal::class.java)
                 .putExtra(SettingsActivity.EXTRA_USER_HANDLE, user)
             startActivityAsUser(

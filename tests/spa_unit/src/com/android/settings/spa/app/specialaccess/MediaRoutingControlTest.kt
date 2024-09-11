@@ -29,10 +29,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.media.flags.Flags
 import com.android.settings.R
 import com.android.settings.testutils.FakeFeatureFactory
-import com.android.settingslib.spaprivileged.model.app.IAppOpsController
+import com.android.settingslib.spaprivileged.model.app.AppOps
+import com.android.settingslib.spaprivileged.model.app.IAppOpsPermissionController
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -49,7 +50,7 @@ class MediaRoutingControlTest {
     @get:Rule
     val mockito: MockitoRule = MockitoJUnit.rule()
 
-    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule();
+    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
 
     @Spy
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -74,36 +75,40 @@ class MediaRoutingControlTest {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.media_routing_control_title)
         assertThat(listModel.switchTitleResId).isEqualTo(R.string.allow_media_routing_control)
         assertThat(listModel.footerResId).isEqualTo(R.string.allow_media_routing_description)
-        assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_MEDIA_ROUTING_CONTROL)
+        assertThat(listModel.appOps).isEqualTo(
+            AppOps(
+                op = AppOpsManager.OP_MEDIA_ROUTING_CONTROL,
+                setModeByUid = true,
+            )
+        )
         assertThat(listModel.permission).isEqualTo(Manifest.permission.MEDIA_ROUTING_CONTROL)
-        assertThat(listModel.setModeByUid).isTrue()
     }
 
     @Test
     fun setAllowed_callWithNewStatusAsTrue_shouldChangeAppControllerModeToAllowed() {
-        val fakeAppOpController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT)
+        val fakeAppOpsPermissionController = FakeAppOpsPermissionController(false)
         val permissionRequestedRecord =
                 AppOpPermissionRecord(
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
                         hasRequestPermission = true,
                         hasRequestBroaderPermission = false,
-                        appOpsController = fakeAppOpController,
+                        appOpsPermissionController = fakeAppOpsPermissionController,
                 )
 
         listModel.setAllowed(permissionRequestedRecord, true)
 
-        assertThat(fakeAppOpController.getMode()).isEqualTo(AppOpsManager.MODE_ALLOWED)
+        assertThat(fakeAppOpsPermissionController.setAllowedCalledWith).isTrue()
     }
 
     @Test
     fun setAllowed_callWithNewStatusAsTrue_shouldLogPermissionToggleActionAsAllowed() {
-        val fakeAppOpController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT)
+        val fakeAppOpsPermissionController = FakeAppOpsPermissionController(false)
         val permissionRequestedRecord =
                 AppOpPermissionRecord(
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
                         hasRequestPermission = true,
                         hasRequestBroaderPermission = false,
-                        appOpsController = fakeAppOpController,
+                        appOpsPermissionController = fakeAppOpsPermissionController,
                 )
 
         listModel.setAllowed(permissionRequestedRecord, true)
@@ -114,29 +119,29 @@ class MediaRoutingControlTest {
 
     @Test
     fun setAllowed_callWithNewStatusAsFalse_shouldChangeAppControllerModeToErrored() {
-        val fakeAppOpController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT)
+        val fakeAppOpsPermissionController = FakeAppOpsPermissionController(false)
         val permissionRequestedRecord =
                 AppOpPermissionRecord(
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
                         hasRequestPermission = true,
                         hasRequestBroaderPermission = false,
-                        appOpsController = fakeAppOpController,
+                        appOpsPermissionController = fakeAppOpsPermissionController,
                 )
 
         listModel.setAllowed(permissionRequestedRecord, false)
 
-        assertThat(fakeAppOpController.getMode()).isEqualTo(AppOpsManager.MODE_ERRORED)
+        assertThat(fakeAppOpsPermissionController.setAllowedCalledWith).isFalse()
     }
 
     @Test
     fun setAllowed_callWithNewStatusAsFalse_shouldLogPermissionToggleActionAsDenied() {
-        val fakeAppOpController = FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT)
+        val fakeAppOpsPermissionController = FakeAppOpsPermissionController(false)
         val permissionRequestedRecord =
                 AppOpPermissionRecord(
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
                         hasRequestPermission = true,
                         hasRequestBroaderPermission = false,
-                        appOpsController = fakeAppOpController,
+                        appOpsPermissionController = fakeAppOpsPermissionController,
                 )
 
         listModel.setAllowed(permissionRequestedRecord, false)
@@ -153,8 +158,7 @@ class MediaRoutingControlTest {
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
                         hasRequestPermission = true,
                         hasRequestBroaderPermission = false,
-                        appOpsController =
-                            FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT),
+                        appOpsPermissionController = FakeAppOpsPermissionController(false),
                 )
         whenever(mockRoleManager.getRoleHolders(AssociationRequest.DEVICE_PROFILE_WATCH))
                 .thenReturn(listOf(PACKAGE_NAME))
@@ -172,8 +176,7 @@ class MediaRoutingControlTest {
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
                         hasRequestPermission = false,
                         hasRequestBroaderPermission = false,
-                        appOpsController =
-                            FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT),
+                        appOpsPermissionController = FakeAppOpsPermissionController(false),
                 )
         whenever(mockRoleManager.getRoleHolders(AssociationRequest.DEVICE_PROFILE_WATCH))
                 .thenReturn(listOf(PACKAGE_NAME))
@@ -191,8 +194,7 @@ class MediaRoutingControlTest {
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
                         hasRequestPermission = true,
                         hasRequestBroaderPermission = false,
-                        appOpsController =
-                            FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT),
+                        appOpsPermissionController = FakeAppOpsPermissionController(false),
                 )
         whenever(mockRoleManager.getRoleHolders(AssociationRequest.DEVICE_PROFILE_WATCH))
                 .thenReturn(listOf("other.package.name"))
@@ -210,8 +212,7 @@ class MediaRoutingControlTest {
                         app = ApplicationInfo().apply { packageName = PACKAGE_NAME },
                         hasRequestPermission = true,
                         hasRequestBroaderPermission = false,
-                        appOpsController =
-                        FakeAppOpsController(fakeMode = AppOpsManager.MODE_DEFAULT),
+                        appOpsPermissionController = FakeAppOpsPermissionController(false),
                 )
         whenever(mockRoleManager.getRoleHolders(AssociationRequest.DEVICE_PROFILE_WATCH))
                 .thenReturn(listOf(PACKAGE_NAME))
@@ -221,15 +222,14 @@ class MediaRoutingControlTest {
         assertThat(isSpecialAccessChangeable).isFalse()
     }
 
-    private class FakeAppOpsController(fakeMode: Int) : IAppOpsController {
+    private class FakeAppOpsPermissionController(allowed: Boolean) : IAppOpsPermissionController {
+        var setAllowedCalledWith: Boolean? = null
 
-        override val mode = MutableStateFlow(fakeMode)
+        override val isAllowedFlow = flowOf(allowed)
 
         override fun setAllowed(allowed: Boolean) {
-            mode.value = if (allowed) AppOpsManager.MODE_ALLOWED else AppOpsManager.MODE_ERRORED
+            setAllowedCalledWith = allowed
         }
-
-        override fun getMode(): Int = mode.value
     }
 
     companion object {
