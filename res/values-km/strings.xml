@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"នៅពេល​ប៊្លូធូស​បើក ឧបករណ៍​របស់អ្នក​អាចធ្វើទំនាក់ទំនងជាមួយ​ឧបករណ៍​ប៊្លូធូស​ដែល​នៅជិត​ផ្សេងទៀត។\n\nដើម្បី​កែលម្អ​បទពិសោធ​ប្រើប្រាស់​ឧបករណ៍ កម្មវិធី និង​សេវាកម្ម​នៅតែ​អាច​ស្កេនរកឧបករណ៍​ដែល​នៅជិត​បាន​គ្រប់ពេល ទោះបីជា​នៅពេលបិទ​ប៊្លូធូស​ក៏ដោយ។ ឧទាហរណ៍ វាអាច​ត្រូវ​បានប្រើ ដើម្បី​កែលម្អ​មុខងារ និង​សេវាកម្ម​ដែល​ផ្អែក​លើ​ទីតាំង​ជាដើម។ អ្នកអាច​ប្ដូរវា​បាននៅក្នុងការកំណត់​ការស្កេនប៊្លូធូស។"</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"នៅពេលបើកប៊្លូធូស ឧបករណ៍របស់អ្នកអាចទាក់ទងជាមួយ​ឧបករណ៍ប៊្លូធូសនៅជិត​ផ្សេងទៀតបាន។ មុខងារដូចជា Quick Share និង \"រកឧបករណ៍របស់ខ្ញុំ\" ប្រើប៊្លូធូស។ \n\nកម្មវិធី និងសេវាកម្មនៅតែអាចស្កេនរកឧបករណ៍នៅជិតបានគ្រប់ពេល ទោះបីជាប៊្លូធូសបិទក៏ដោយ។ ឧទាហរណ៍ វាអាចប្រើដើម្បីកែលម្អមុខងារ និងសេវាកម្មដែលផ្អែកលើទីតាំង។ អ្នកអាចផ្លាស់ប្ដូរលក្ខណៈនេះនៅក្នុងការ​កំណត់ការស្កេនរកប៊្លូធូស។"</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"ផ្លាស់ប្ដូរ"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> មិនត្រូវ​បាន​ភ្ជាប់ទេ"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"ដើម្បីសុវត្ថិភាពរបស់អ្នក សូមបំភ្លេចឧបករណ៍នេះ រួចផ្គូផ្គងវាម្ដងទៀត"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"បំភ្លេច​ឧបករណ៍"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"បោះបង់"</string>
     <string name="device_details_title" msgid="1155622417516195481">"ព័ត៌មានលម្អិត​អំពី​ឧបករណ៍"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"ការកំណត់​ក្ដារ​ចុច"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"ការកំណត់ច្រើនទៀត"</string>
@@ -1991,10 +1995,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"កំណត់​ឡើងវិញ"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"ជ្រើសរើស​ប៊ូតុងឧបករណ៍កែសម្រួល"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"ជ្រើសរើសប៊ូតុងថ្មីសម្រាប់ <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>៖"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"ភាពងាយស្រួលប្រើប្រាស់ក្ដារចុចរូបវន្ត"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"គ្រាប់ចុចស្អិត គ្រាប់ចុចលោត គ្រាប់ចុចម៉ៅស៍"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"ប្លង់ <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"លំនាំដើម"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"ស្វ័យប្រវត្តិ៖ <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2206,11 +2208,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"កម្រិតខ្ពស់"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"ប៊ូតុងភាពងាយស្រួលត្រូវបានកំណត់ទៅ <xliff:g id="SERVICE">%1$s</xliff:g>។ ដើម្បីប្រើការពង្រីក សូមចុចប៊ូតុងភាពងាយស្រួលឲ្យជាប់ បន្ទាប់មកជ្រើសរើសការពង្រីក។"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"ចលនា​ភាពងាយស្រួល​ត្រូវបានកំណត់​ទៅ <xliff:g id="SERVICE">%1$s</xliff:g> ។ ដើម្បី​ប្រើ​ការពង្រីក សូមអូស​ឡើងលើ​ដោយប្រើ​ម្រាមដៃ​ពីរ ពី​ផ្នែកខាងក្រោម​នៃអេក្រង់ ហើយ​សង្កត់ឱ្យជាប់។ បន្ទាប់មក ជ្រើសរើស​ការពង្រីក។"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"ផ្លូវកាត់គ្រាប់ចុចកម្រិតសំឡេង"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"ការកំណត់​ផ្លូវកាត់"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"ផ្លូវ​កាត់គ្រាប់ចុច​កម្រិតសំឡេងពីអេក្រង់ចាក់សោ"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"អនុញ្ញាត​ឱ្យផ្លូវកាត់​មុខងារបើក​ពី​អេក្រង់​ចាក់សោ។ សង្កត់​គ្រាប់ចុច​កម្រិតសំឡេង​ទាំងពីរ​ឱ្យជាប់​រយៈពេល​ពីរបី​វិនាទី។"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"ប៊ូតុង​ភាពងាយស្រួល"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"ចលនា និងប៊ូតុង​ភាពងាយស្រួល"</string>
@@ -3351,8 +3351,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"បិទ"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{គ្មាន}=1{បានកំណត់​កាលវិភាគ 1}other{បានកំណត់​កាលវិភាគ #}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"កុំ​រំខាន"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"មុខងារ"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"កាត់បន្ថយការរំខានឱ្យនៅតិចបំផុត និងគ្រប់គ្រងលើការយកចិត្តទុកដាក់របស់អ្នកដោយប្រើមុខងារសម្រាប់ការគេង ធ្វើការ បើកបរ និងគ្រប់យ៉ាងពាក់ព័ន្ធនឹងអ្វីៗទាំងនេះ។"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"បង្កើតមុខងាររបស់អ្នកផ្ទាល់"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"ទទួលការជូនដំណឹង​ពីកម្មវិធី និងមនុស្សសំខាន់ៗ​តែប៉ុណ្ណោះ"</string>
@@ -3647,11 +3646,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"វាអាចឆ្លើយតបសារ និងធ្វើសកម្មភាពលើប៊ូតុងនៅក្នុងការជូនដំណឹង រួមទាំងផ្អាក ឬច្រានចោលការជូនដំណឹង និងទទួល​ទូរសព្ទផងដែរ។"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"ប្ដូរ​ការកំណត់"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"វាអាចបើក ឬបិទមុខងារកុំ​រំខាន និងប្ដូរការកំណត់​ដែលពាក់ព័ន្ធ។"</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"វាអាចគ្រប់គ្រង និងដំណើរការមុខងារ និងផ្លាស់ប្ដូរការកំណត់ដែលពាក់ព័ន្ធ។"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"ប្រសិនបើអ្នកបិទការចូលប្រើការជូនដំណឹង​សម្រាប់ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> នោះការចូលប្រើមុខងារ​កុំរំខានក៏អាចនឹងត្រូវបានបិទដែរ។"</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"ប្រសិនបើអ្នកបិទការចូលប្រើការជូនដំណឹងសម្រាប់ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> នោះការចូលប្រើមុខងារក៏អាចបិទផងដែរ។"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"បិទ"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"បោះបង់"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"ក្នុងពេលជាក់​ស្ដែង"</string>
@@ -3712,12 +3709,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"ចូលដំណើរការមុខងារកុំរំខាន"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"អនុញ្ញាតមុខងារកុំរំខាន"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"គ្មានកម្មវិធីបានដំឡើងណាមួយបានស្នើការចូលដំណើរការមុខងារកុំរំខានទេ"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"ការចូលប្រើមុខងារ"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"អនុញ្ញាតឱ្យចូលប្រើមុខងារ"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"គ្មានកម្មវិធីដែលបានដំឡើងណាបានស្នើសុំចូលប្រើមុខងារឡើយ"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"អ្នកមិនបានអនុញ្ញាត​ការជូនដំណឹង​ពីកម្មវិធីនេះទេ"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"តាមសំណើ​របស់អ្នក ប្រព័ន្ធ​ប្រតិបត្តិការ Android កំពុង​ទប់ស្កាត់​ប្រភេទនៃការជូនដំណឹង​​នេះ​មិន​ឱ្យ​បង្ហាញ​នៅលើ​ឧបករណ៍​នេះទេ"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"តាមសំណើ​របស់អ្នក ប្រព័ន្ធ​ប្រតិបត្តិការ Android កំពុង​ទប់ស្កាត់​ក្រុមនៃ​ការជូនដំណឹង​នេះ​មិន​ឱ្យ​បង្ហាញ​នៅលើ​ឧបករណ៍​នេះទេ"</string>
@@ -4108,12 +4102,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"ត្រូវបើកជានិច្ច ដោយសារតែការចូលដំណើរការការជូនដំណឹងបានបើក"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"ដកសិទ្ធិចូលប្រើមុខងារកុំរំខានសម្រាប់ <xliff:g id="APP">%1$s</xliff:g> ឬ?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"វិធានទាំងអស់របស់មុខងារកុំរំខានដែលបានបង្កើតដោយកម្មវិធីនេះនឹងត្រូវដកចេញ។"</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"អនុញ្ញាតឱ្យចូលប្រើមុខងារសម្រាប់ <xliff:g id="APP">%1$s</xliff:g> ឬ?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"កម្មវិធីនឹងអាចបើក/បិទមុខងារ កុំ​រំខាន គ្រប់គ្រង និងដំណើរការមុខងារ និងធ្វើការផ្លាស់ប្ដូរការកំណត់ដែលពាក់ព័ន្ធ។"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"ដកសិទ្ធិចូលប្រើមុខងារសម្រាប់ <xliff:g id="APP">%1$s</xliff:g> ឬ?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"មុខងារទាំងអស់ដែលបង្កើតឡើងដោយកម្មវិធីនេះនឹងត្រូវបានដកចេញ។"</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"កុំបង្កើនប្រសិទ្ធភាព"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"បង្កើនប្រសិទ្ធភាព"</string>
@@ -5365,8 +5356,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"បានបញ្ឈប់ការស្ដាប់សំឡេងរួមគ្នា"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"ភ្ជាប់ឧបករណ៍ដែលត្រូវគ្នា"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"ដើម្បីចាប់ផ្ដើមចែករំលែកសំឡេង សូមភ្ជាប់កាស LE Audio ទៅកាន់ទូរសព្ទរបស់អ្នក"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"ប្ដូរទៅ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"ភ្ជាប់ទៅកាន់ការចាក់សំឡេងលើអ៊ីនធឺណិត LE"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"ការចាក់សំឡេងលើអ៊ីនធឺណិតដែលនៅជិត"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"ការចាក់សំឡេងលើអ៊ីនធឺណិត"</string>
@@ -5411,7 +5401,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"ស្កេនកូដ QR ការចាក់សំឡេងលើអ៊ីនធឺណិត ដើម្បីស្ដាប់ជាមួយ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"មិន​អាច​កែ​ពាក្យ​សម្ងាត់​ពេល​កំពុងស្ដាប់រួមគ្នាបានទេ។ ដើម្បីផ្លាស់ប្ដូរពាក្យសម្ងាត់ សូមបិទការស្ដាប់សំឡេងរួមគ្នាជាមុនសិន។"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"កម្មវិធី​ស្កេនកូដ QR"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"ត្រូវការ​ជំនួយ​ឬ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"ស្វែងរកការកំណត់"</string>
 </resources>
