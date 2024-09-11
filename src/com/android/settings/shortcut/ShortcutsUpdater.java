@@ -16,8 +16,10 @@
 
 package com.android.settings.shortcut;
 
-import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_ID_PREFIX;
-import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_PROBE;
+import static com.android.settings.shortcut.Shortcuts.SHORTCUT_ID_PREFIX;
+import static com.android.settings.shortcut.Shortcuts.SHORTCUT_PROBE;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,23 +28,22 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-import android.os.AsyncTask;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShortcutsUpdateTask extends AsyncTask<Void, Void, Void> {
+public class ShortcutsUpdater {
 
-    private final Context mContext;
-
-    public ShortcutsUpdateTask(Context context) {
-        mContext = context;
-    }
-
-    @Override
-    public Void doInBackground(Void... params) {
-        ShortcutManager sm = mContext.getSystemService(ShortcutManager.class);
-        PackageManager pm = mContext.getPackageManager();
+    /**
+     * Update label, icon, and intent of pinned shortcuts to Settings subpages.
+     *
+     * <p>Should be called whenever any of those could have changed, such as after changing locale,
+     * restoring a backup from a different device, or when flags controlling available features
+     * may have flipped.
+     */
+    public static void updatePinnedShortcuts(Context context) {
+        ShortcutManager sm = checkNotNull(context.getSystemService(ShortcutManager.class));
+        PackageManager pm = context.getPackageManager();
 
         List<ShortcutInfo> updates = new ArrayList<>();
         for (ShortcutInfo info : sm.getPinnedShortcuts()) {
@@ -55,12 +56,10 @@ public class ShortcutsUpdateTask extends AsyncTask<Void, Void, Void> {
             if (ri == null) {
                 continue;
             }
-            updates.add(new ShortcutInfo.Builder(mContext, info.getId())
-                    .setShortLabel(ri.loadLabel(pm)).build());
+            updates.add(Shortcuts.createShortcutInfo(context, info.getId(), ri));
         }
         if (!updates.isEmpty()) {
             sm.updateShortcuts(updates);
         }
-        return null;
     }
 }

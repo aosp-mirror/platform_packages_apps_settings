@@ -16,14 +16,12 @@
 
 package com.android.settings.shortcut;
 
-import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_ID_PREFIX;
+import static com.android.settings.shortcut.Shortcuts.SHORTCUT_ID_PREFIX;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -31,9 +29,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 
@@ -48,17 +43,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-public class ShortcutsUpdateTaskTest {
+public class ShortcutsUpdaterTest {
 
     private Context mContext;
-    private ShadowPackageManager mPackageManager;
 
     @Mock
     private ShortcutManager mShortcutManager;
@@ -69,27 +61,12 @@ public class ShortcutsUpdateTaskTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mPackageManager = Shadow.extract(mContext.getPackageManager());
     }
 
     @Test
     public void shortcutsUpdateTask() {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mShortcutManager).when(mContext).getSystemService(eq(Context.SHORTCUT_SERVICE));
-        final Intent shortcut1 = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
-                .setComponent(new ComponentName(
-                        mContext, Settings.ManageApplicationsActivity.class));
-        final ResolveInfo ri1 = mock(ResolveInfo.class);
-        ri1.nonLocalizedLabel = "label1";
-
-        final Intent shortcut2 = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
-                .setComponent(new ComponentName(
-                        mContext, Settings.SoundSettingsActivity.class));
-        final ResolveInfo ri2 = mock(ResolveInfo.class);
-        ri2.nonLocalizedLabel = "label2";
-
-        mPackageManager.addResolveInfoForIntent(shortcut1, ri1);
-        mPackageManager.addResolveInfoForIntent(shortcut2, ri2);
 
         final List<ShortcutInfo> pinnedShortcuts = Arrays.asList(
                 makeShortcut("d1"),
@@ -99,7 +76,7 @@ public class ShortcutsUpdateTaskTest {
                 makeShortcut(Settings.SoundSettingsActivity.class));
         when(mShortcutManager.getPinnedShortcuts()).thenReturn(pinnedShortcuts);
 
-        new ShortcutsUpdateTask(mContext).doInBackground();
+        ShortcutsUpdater.updatePinnedShortcuts(mContext);
 
         verify(mShortcutManager, times(1)).updateShortcuts(mListCaptor.capture());
 
@@ -108,6 +85,8 @@ public class ShortcutsUpdateTaskTest {
         assertThat(updates).hasSize(2);
         assertThat(pinnedShortcuts.get(2).getId()).isEqualTo(updates.get(0).getId());
         assertThat(pinnedShortcuts.get(4).getId()).isEqualTo(updates.get(1).getId());
+        assertThat(updates.get(0).getShortLabel().toString()).isEqualTo("App info");
+        assertThat(updates.get(1).getShortLabel().toString()).isEqualTo("Sound & vibration");
     }
 
     private ShortcutInfo makeShortcut(Class<?> className) {
