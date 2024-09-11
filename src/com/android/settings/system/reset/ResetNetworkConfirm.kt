@@ -192,8 +192,7 @@ class ResetNetworkConfirm : InstrumentedFragment() {
                 resetNetworkRequest.toResetNetworkOperationBuilder(
                     requireContext(), Looper.getMainLooper()
                 )
-            resetNetworkRequest.resetEsimPackageName?.let { resetEsimPackageName ->
-                builder.resetEsim(resetEsimPackageName)
+            resetNetworkRequest.resetEsimPackageName?.let {
                 builder.resetEsimResultCallback { resetEsimSuccess = it }
             }
             builder.build().run()

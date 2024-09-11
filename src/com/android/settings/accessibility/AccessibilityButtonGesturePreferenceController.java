@@ -50,8 +50,12 @@ public class AccessibilityButtonGesturePreferenceController extends BasePreferen
 
     @Override
     public int getAvailabilityStatus() {
-        return AccessibilityUtil.isGestureNavigateEnabled(mContext)
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        if (android.provider.Flags.a11yStandaloneGestureEnabled()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        } else {
+            return AccessibilityUtil.isGestureNavigateEnabled(mContext)
+                    ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        }
     }
 
     @Override

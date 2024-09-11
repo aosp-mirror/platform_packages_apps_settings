@@ -38,6 +38,8 @@ import android.content.Intent;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.FeatureFlagUtils;
 import android.view.InputDevice;
 import android.view.MenuInflater;
@@ -52,6 +54,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel;
 import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -61,6 +64,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -81,6 +85,7 @@ import java.util.List;
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class BluetoothDeviceDetailsFragmentTest {
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String TEST_ADDRESS = "55:66:77:88:99:AA";
 
@@ -174,6 +179,7 @@ public class BluetoothDeviceDetailsFragmentTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_BLUETOOTH_DEVICE_DETAILS_POLISH)
     public void getTitle_displayEditTitle() {
         mFragment.onCreateOptionsMenu(mMenu, mInflater);
 
@@ -210,6 +216,7 @@ public class BluetoothDeviceDetailsFragmentTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_BLUETOOTH_DEVICE_DETAILS_POLISH)
     public void editMenu_clicked_showDialog() {
         mFragment.onCreateOptionsMenu(mMenu, mInflater);
         final MenuItem item = mMenu.getItem(0);
