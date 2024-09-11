@@ -289,7 +289,7 @@ public final class Utils {
         }
         ThreadUtils.postOnBackgroundThread(() -> {
             for (Supplier<?> supplier : suppliers) {
-                supplier.get();
+                Object unused = supplier.get();
             }
             ThreadUtils.postOnMainThread(runnable);
         });
