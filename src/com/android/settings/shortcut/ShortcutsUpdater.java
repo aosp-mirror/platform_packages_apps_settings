@@ -21,6 +21,7 @@ import static com.android.settings.shortcut.Shortcuts.SHORTCUT_PROBE;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import android.app.Flags;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,11 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.settings.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,23 +49,48 @@ public class ShortcutsUpdater {
      */
     public static void updatePinnedShortcuts(Context context) {
         ShortcutManager sm = checkNotNull(context.getSystemService(ShortcutManager.class));
-        PackageManager pm = context.getPackageManager();
 
         List<ShortcutInfo> updates = new ArrayList<>();
         for (ShortcutInfo info : sm.getPinnedShortcuts()) {
-            if (!info.getId().startsWith(SHORTCUT_ID_PREFIX)) {
-                continue;
+            ResolveInfo resolvedActivity = resolveActivity(context, info);
+            if (resolvedActivity != null) {
+                // Id is preserved to update an existing shortcut, but the activity it opens might
+                // be different, according to maybeGetReplacingComponent.
+                updates.add(Shortcuts.createShortcutInfo(context, info.getId(), resolvedActivity));
             }
-            ComponentName cn = ComponentName.unflattenFromString(
-                    info.getId().substring(SHORTCUT_ID_PREFIX.length()));
-            ResolveInfo ri = pm.resolveActivity(new Intent(SHORTCUT_PROBE).setComponent(cn), 0);
-            if (ri == null) {
-                continue;
-            }
-            updates.add(Shortcuts.createShortcutInfo(context, info.getId(), ri));
         }
         if (!updates.isEmpty()) {
             sm.updateShortcuts(updates);
         }
+    }
+
+    @Nullable
+    private static ResolveInfo resolveActivity(Context context, ShortcutInfo shortcut) {
+        if (!shortcut.getId().startsWith(SHORTCUT_ID_PREFIX)) {
+            return null;
+        }
+
+        ComponentName cn = ComponentName.unflattenFromString(
+                shortcut.getId().substring(SHORTCUT_ID_PREFIX.length()));
+        if (cn == null) {
+            return null;
+        }
+
+        // Check if the componentName is obsolete and has been replaced by a different one.
+        cn = maybeGetReplacingComponent(context, cn);
+        PackageManager pm = context.getPackageManager();
+        return pm.resolveActivity(new Intent(SHORTCUT_PROBE).setComponent(cn), 0);
+    }
+
+    @NonNull
+    private static ComponentName maybeGetReplacingComponent(Context context, ComponentName cn) {
+        // ZenModeSettingsActivity is replaced by ModesSettingsActivity and will be deleted
+        // soon (so we shouldn't use ZenModeSettingsActivity.class).
+        if (Flags.modesApi() && Flags.modesUi()
+                && cn.getClassName().endsWith("Settings$ZenModeSettingsActivity")) {
+            return new ComponentName(context, Settings.ModesSettingsActivity.class);
+        }
+
+        return cn;
     }
 }

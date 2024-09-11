@@ -27,14 +27,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Flags;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settings.Settings;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -52,6 +57,9 @@ public class ShortcutsUpdaterTest {
 
     private Context mContext;
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Mock
     private ShortcutManager mShortcutManager;
     @Captor
@@ -60,14 +68,12 @@ public class ShortcutsUpdaterTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mShortcutManager).when(mContext).getSystemService(eq(Context.SHORTCUT_SERVICE));
     }
 
     @Test
-    public void shortcutsUpdateTask() {
-        mContext = spy(RuntimeEnvironment.application);
-        doReturn(mShortcutManager).when(mContext).getSystemService(eq(Context.SHORTCUT_SERVICE));
-
+    public void updatePinnedShortcuts_updatesAllShortcuts() {
         final List<ShortcutInfo> pinnedShortcuts = Arrays.asList(
                 makeShortcut("d1"),
                 makeShortcut("d2"),
@@ -87,6 +93,50 @@ public class ShortcutsUpdaterTest {
         assertThat(pinnedShortcuts.get(4).getId()).isEqualTo(updates.get(1).getId());
         assertThat(updates.get(0).getShortLabel().toString()).isEqualTo("App info");
         assertThat(updates.get(1).getShortLabel().toString()).isEqualTo("Sound & vibration");
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MODES_UI)
+    public void updatePinnedShortcuts_withModesFlag_replacesDndByModes() {
+        List<ShortcutInfo> shortcuts = List.of(
+                makeShortcut(Settings.ZenModeSettingsActivity.class));
+        when(mShortcutManager.getPinnedShortcuts()).thenReturn(shortcuts);
+
+        ShortcutsUpdater.updatePinnedShortcuts(mContext);
+
+        verify(mShortcutManager, times(1)).updateShortcuts(mListCaptor.capture());
+        final List<ShortcutInfo> updates = mListCaptor.getValue();
+        assertThat(updates).hasSize(1);
+
+        // Id hasn't changed, but intent and label has.
+        ComponentName zenCn = new ComponentName(mContext, Settings.ZenModeSettingsActivity.class);
+        ComponentName modesCn = new ComponentName(mContext, Settings.ModesSettingsActivity.class);
+        assertThat(updates.get(0).getId()).isEqualTo(
+                SHORTCUT_ID_PREFIX + zenCn.flattenToShortString());
+        assertThat(updates.get(0).getIntent().getComponent()).isEqualTo(modesCn);
+        assertThat(updates.get(0).getShortLabel().toString()).isEqualTo("Modes");
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_MODES_UI)
+    public void updatePinnedShortcuts_withoutModesFlag_leavesDndAlone() {
+        List<ShortcutInfo> shortcuts = List.of(
+                makeShortcut(Settings.ZenModeSettingsActivity.class));
+        when(mShortcutManager.getPinnedShortcuts()).thenReturn(shortcuts);
+
+        ShortcutsUpdater.updatePinnedShortcuts(mContext);
+
+        verify(mShortcutManager, times(1)).updateShortcuts(mListCaptor.capture());
+        final List<ShortcutInfo> updates = mListCaptor.getValue();
+        assertThat(updates).hasSize(1);
+
+        // Nothing has changed.
+        ComponentName zenCn = new ComponentName(mContext, Settings.ZenModeSettingsActivity.class);
+        assertThat(updates.get(0).getId()).isEqualTo(
+                SHORTCUT_ID_PREFIX + zenCn.flattenToShortString());
+        assertThat(updates.get(0).getIntent().getComponent()).isEqualTo(zenCn);
+        assertThat(updates.get(0).getShortLabel().toString()).isEqualTo("Do Not Disturb");
+
     }
 
     private ShortcutInfo makeShortcut(Class<?> className) {
