@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"ဘလူးတုသ်ဖွင့်ထားသည့်အခါ သင့်စက်သည် အနီးတစ်ဝိုက်ရှိ အခြား ဘလူးတုသ်သုံးစက်များနှင့် ချိတ်ဆက်နိုင်သည်။\n\nစက်ကို ပိုမိုကောင်းမွန်စွာ သုံးနိုင်ရန် ဘလူးတုသ်ပိတ်ထားသည့်အခါတွင်ပင် အက်ပ်နှင့် ဝန်ဆောင်မှုများသည် အနီးတစ်ဝိုက်ရှိစက်များကို အချိန်မရွေးရှာနိုင်သည်။ ဥပမာ- တည်နေရာအခြေခံသည့် တူးလ်နှင့် ဝန်ဆောင်မှုများအတွက် ၎င်းကို သုံးနိုင်သည်။ ၎င်းကို ဘလူးတုသ်ရှာသည့် ဆက်တင်များတွင် ပြောင်းနိုင်သည်။"</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"ဘလူးတုသ်ဖွင့်ထားလျှင် သင့်စက်သည် အနီးရှိ အခြားဘလူးတုသ်သုံးစက်များနှင့် ဆက်သွယ်နိုင်သည်။ ‘အမြန် မျှဝေပါ’ နှင့် Find My Device ကဲ့သို့ တူးလ်များသည် ဘလူးတုသ်သုံးသည်။\n\nဘလူးတုသ်ပိတ်ထားချိန်တွင်ပင် အက်ပ်နှင့် ဝန်ဆောင်မှုများသည် အနီးတစ်ဝိုက်ရှိ စက်များကို အချိန်မရွေး ရှာနိုင်သေးသည်။ ဥပမာ တည်နေရာအခြေပြု တူးလ်နှင့် ဝန်ဆောင်မှုများ ပိုကောင်းအောင်လုပ်ရန် ၎င်းကိုသုံးနိုင်သည်။ ၎င်းကို ဘလူးတုသ် ရှာဖွေခြင်း ဆက်တင်များတွင် ပြောင်းနိုင်သည်။"</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"ပြောင်းရန်"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ကို ချိတ်ဆက်မထားပါ"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"သင့်လုံခြုံရေးအတွက် ဤစက်ကို မေ့ပစ်ပြီးနောက် ပြန်လည်တွဲချိတ်ပါ"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"စက်ကို မေ့ပစ်ရန်"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"မလုပ်တော့"</string>
     <string name="device_details_title" msgid="1155622417516195481">"စက်အသေးစိတ်များ"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"ကီးဘုတ် ဆက်တင်များ"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"နောက်ထပ်ဆက်တင်များ"</string>
@@ -1991,10 +1995,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"ပြန်သတ်မှတ်ရန်"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"မွမ်းမံပေးရေးကီးကို ရွေးပါ"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> အတွက် ကီးအသစ်ရွေးပါ-"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"ပကတိကီးဘုတ် အများသုံးနိုင်မှု"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"ကပ်ခွာကီး၊ တစ်ကြိမ်နှိပ်ကီး၊ မောက်စ်ကီး"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> အပြင်အဆင်"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"မူရင်း"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"အလိုအလျောက်- <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2206,11 +2208,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"အဆင့်မြင့်"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"အများသုံးနိုင်မှု ခလုတ်ကို <xliff:g id="SERVICE">%1$s</xliff:g> အဖြစ် သတ်မှတ်ထားသည်။ ပုံကြီးချဲ့ခြင်းကို အသုံးပြုရန် အများသုံးနိုင်မှု ခလုတ်ကို ထိထားပြီးနောက် ပုံကြီးချဲ့ခြင်းကို ရွေးပါ။"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"အများသုံးနိုင်မှု လက်ဟန်ကို <xliff:g id="SERVICE">%1$s</xliff:g> အဖြစ် သတ်မှတ်ထားသည်။ ပုံကြီးချဲ့ခြင်းကို အသုံးပြုရန် မျက်နှာပြင်၏ အောက်ခြေမှနေ၍ အပေါ်သို့ လက်နှစ်ချောင်းဖြင့် ပွတ်ဆွဲပြီး ဖိထားပါ။ ထို့နောက် ပုံကြီးချဲ့ခြင်းကို ရွေးပါ။"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"အသံထိန်းခလုတ်ဖြတ်လမ်း"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"ဖြတ်လမ်းလင့်ခ် ဆက်တင်များ"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"လော့ခ်မျက်နှာပြင်မှ အသံထိန်းခလုတ်ဖြတ်လမ်း"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"ဝန်ဆောင်မှု ဖြတ်လမ်းလင့်ခ်အား လော့ခ်ချထားစဉ် ဖန်သားပြင်တွင် ဖွင့်ခွင့်ပြုသည်။ အသံခလုတ်နှစ်ခုလုံးကို စက္ကန့်အနည်းငယ် ဖိထားပါ။"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"အများသုံးနိုင်မှု ခလုတ်"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"အများသုံးနိုင်မှု ခလုတ်နှင့် လက်ဟန်"</string>
@@ -3351,8 +3351,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"ပိတ်"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{မရှိ}=1{အချိန်ဇယား ၁ ခု သတ်မှတ်ထားသည်}other{အချိန်ဇယား # ခု သတ်မှတ်ထားသည်}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"မနှောင့်ယှက်ရ"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"မုဒ်များ"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"အိပ်ခြင်း၊ အလုပ်လုပ်ခြင်း၊ ကားမောင်းခြင်းနှင့် ၎င်းတို့ကြားရှိ အရာရာအတွက် မုဒ်များဖြင့် အနှောင့်အယှက်များကို လျှော့ချပြီး သင့်အာရုံစိုက်မှုကို ထိန်းချုပ်နိုင်သည်။"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"ကိုယ်ပိုင်မုဒ် ပြုလုပ်ရန်"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"အရေးကြီးပုဂ္ဂိုလ်များနှင့် အက်ပ်များထံမှသာ အကြောင်းကြားချက် ရယူပါ"</string>
@@ -3647,11 +3646,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"၎င်းသည် မက်ဆေ့ဂျ်များကို စာပြန်နိုင်ပြီး နှိုးစက်သံ ဆိုင်းငံ့ခြင်း (သို့) ပယ်ခြင်းနှင့် ဖုန်းလက်ခံခြင်းများအပါအဝင် အကြောင်းကြားချက်များရှိ ခလုတ်များကို နှိပ်နိုင်သည်။"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"ဆက်တင်များ ပြောင်းခြင်း"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"၎င်းသည် ‘မနှောင့်ယှက်ရ’ ဝန်ဆောင်မှုကို ဖွင့်နိုင် (သို့) ပိတ်နိုင်ပြီး သက်ဆိုင်ရာ ဆက်တင်များကို ပြောင်းနိုင်သည်။"</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"‘မုဒ်များ’ ကို စီမံနိုင်၊ စသုံးနိုင်ပြီး သက်ဆိုင်ရာဆက်တင်များကို ပြောင်းနိုင်သည်။"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> အတွက် အကြောင်းကြားချက် အသုံးပြုခွင့်ကို ပိတ်လိုက်လျှင် \'မနှောင့်ယှက်ရ\' ကို အသုံးပြုခွင့်လည်း ပိတ်သွားပါမည်။"</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> အတွက် အကြောင်းကြားချက် သုံးခွင့်ကို ပိတ်ပါက ‘မုဒ်များ’ သုံးခွင့်ကိုလည်း ပိတ်နိုင်သည်။"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ပိတ်ရန်"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"မလုပ်တော့"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"အချိန်နှင့် တစ်ပြေးညီ"</string>
@@ -3712,12 +3709,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"\'မနှောင့်ယှက်ရ\' သုံးခွင့်"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'မနှောင့်ယှက်ရ\' ကိုခွင့်ပြုရန်"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ထည့်သွင်းထားသည့် အက်ပ်များသည် \'မနှောက်ယှက်ရ\' သုံးခွင့် တောင်းဆိုမထားပါ"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"‘မုဒ်များ’ သုံးခွင့်"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"‘မုဒ်များ’ ကို သုံးခွင့်ပြုရန်"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"ထည့်သွင်းထားသည့်အက်ပ်များသည် ‘မုဒ်များ’ သုံးခွင့်ကို တောင်းဆိုမထားပါ"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"ဤအက်ပ်မှ အကြောင်းကြားချက်များကို သင်ခွင့်ပြုမထားပါ"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"သင့်တောင်းဆိုချက်အရ Android သည် ဤအကြောင်းကြားချက်အမျိုးအစားများ ဤစက်ပစ္စည်းပေါ်တွင် ပေါ်မလာအောင် ပိတ်ထားပါသည်"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"သင့်တောင်းဆိုချက်အရ Android သည် ဤအကြောင်းကြားချက်အုပ်စုများ ဤစက်ပစ္စည်းပေါ်တွင် ပေါ်မလာအောင် ပိတ်ထားပါသည်"</string>
@@ -4108,12 +4102,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"အကြောင်းကြားချက် အသုံးပြုခွင့်ကိုဖွင့်ထားသောကြောင့် ဆက်လက်ဖွင့်ထားရပါမည်"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"<xliff:g id="APP">%1$s</xliff:g> အတွက် ‘မနှောင့်ယှက်ရ’ သုံးခွင့်ကို ပြန်ရုပ်သိမ်းမလား။"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"ဤအက်ပ်က သတ်မှတ်ခဲ့သော \'မနှောင့်ယှက်ရ’ စည်းမျဉ်းအားလုံးကို ဖယ်ရှားပါမည်။"</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"<xliff:g id="APP">%1$s</xliff:g> အတွက် ‘မုဒ်များ’ ကို သုံးခွင့်ပြုမလား။"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"အက်ပ်သည် ‘မနှောင့်ယှက်ရ’ ကို ဖွင့်/ပိတ် နိုင်ကာ ‘မုဒ်များ’ ကို စီမံနိုင်၊ စသုံးနိုင်ပြီး သက်ဆိုင်ရာဆက်တင်များကို အပြောင်းအလဲများ ပြုလုပ်နိုင်ပါမည်။"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"<xliff:g id="APP">%1$s</xliff:g> အတွက် မုဒ်များသုံးခွင့်ကို ရုပ်သိမ်းမလား။"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"ဤအက်ပ်က ပြုလုပ်ထားသည့် မုဒ်အားလုံးကို ဖယ်ရှားမည်။"</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"သင့်မြတ်အောင် မလုပ်ပါနှင့်"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"သင့်မြတ်အောင် လုပ်ကိုင်ရန်"</string>
@@ -5365,8 +5356,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"အသံမျှဝေခြင်းကို ရပ်ထားသည်"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"တွဲသုံးနိုင်သောစက်နှင့် ချိတ်ဆက်ပါ"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"အသံစတင်မျှဝေရန် LE Audio နားကြပ်များကို သင့်ဖုန်းနှင့် ဦးစွာ ချိတ်ဆက်ပါ"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> သို့ ပြောင်းရန်"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"LE အသံထုတ်လွှင့်မှုနှင့် ချိတ်ဆက်ခြင်း"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"အနီးအနားရှိ အသံထုတ်လွှင့်ခြင်းများ"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"အသံထုတ်လွှင့်ခြင်းများ"</string>
@@ -5411,7 +5401,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ဖြင့် နားထောင်ရန် အသံ ထုတ်လွှင့်ခြင်း QR ကုဒ်ကို စကင်ဖတ်နိုင်သည်"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"မျှဝေစဉ် စကားဝှက်ကို ပြင်၍မရပါ။ စကားဝှက် ပြောင်းရန် အော်ဒီယို မျှဝေခြင်းကို ဦးစွာပိတ်ပါ။"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR ကုဒ် စကင်ဖတ်စနစ်"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"အကူအညီလိုသလား။"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"ဆက်တင်များတွင် ရှာရန်"</string>
 </resources>
