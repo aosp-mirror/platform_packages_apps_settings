@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.batteryusage.db;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -30,13 +29,11 @@ import androidx.room.RoomDatabase;
             AppUsageEventEntity.class,
             BatteryEventEntity.class,
             BatteryState.class,
-            BatteryUsageSlotEntity.class,
-            BatteryReattributeEntity.class
+            BatteryUsageSlotEntity.class
         },
-        version = 2)
+        version = 1)
 public abstract class BatteryStateDatabase extends RoomDatabase {
     private static final String TAG = "BatteryStateDatabase";
-    private static final String DB_FILE_NAME = "battery-usage-db-v10";
 
     private static BatteryStateDatabase sBatteryStateDatabase;
 
@@ -52,15 +49,11 @@ public abstract class BatteryStateDatabase extends RoomDatabase {
     /** Provides DAO for battery usage slot table. */
     public abstract BatteryUsageSlotDao batteryUsageSlotDao();
 
-    /** Provides DAO for battery reattribution table. */
-    @NonNull
-    public abstract BatteryReattributeDao batteryReattributeDao();
-
     /** Gets or creates an instance of {@link RoomDatabase}. */
     public static BatteryStateDatabase getInstance(Context context) {
         if (sBatteryStateDatabase == null) {
             sBatteryStateDatabase =
-                    Room.databaseBuilder(context, BatteryStateDatabase.class, DB_FILE_NAME)
+                    Room.databaseBuilder(context, BatteryStateDatabase.class, "battery-usage-db-v9")
                             // Allows accessing data in the main thread for dumping bugreport.
                             .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()

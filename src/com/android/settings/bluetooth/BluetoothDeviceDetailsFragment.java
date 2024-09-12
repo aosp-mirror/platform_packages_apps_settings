@@ -142,23 +142,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     }
 
     @VisibleForTesting
-    @Nullable
     CachedBluetoothDevice getCachedDevice(String deviceAddress) {
         if (sTestDataFactory != null) {
             return sTestDataFactory.getDevice(deviceAddress);
         }
         BluetoothDevice remoteDevice =
                 mManager.getBluetoothAdapter().getRemoteDevice(deviceAddress);
-        if (remoteDevice == null) {
-            return null;
-        }
-        CachedBluetoothDevice cachedDevice =
-                mManager.getCachedDeviceManager().findDevice(remoteDevice);
-        if (cachedDevice != null) {
-            return cachedDevice;
-        }
-        Log.i(TAG, "Add device to cached device manager: " + remoteDevice.getAnonymizedAddress());
-        return mManager.getCachedDeviceManager().addDevice(remoteDevice);
+        return mManager.getCachedDeviceManager().findDevice(remoteDevice);
     }
 
     @VisibleForTesting
