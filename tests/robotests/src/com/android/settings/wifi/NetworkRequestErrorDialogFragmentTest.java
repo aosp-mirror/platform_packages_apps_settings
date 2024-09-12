@@ -74,7 +74,7 @@ public class NetworkRequestErrorDialogFragmentTest {
     @Test
     public void getConstructor_shouldNotThrowNoSuchMethodException() {
         try {
-            NetworkRequestErrorDialogFragment.class.getConstructor();
+            Object unused = NetworkRequestErrorDialogFragment.class.getConstructor();
         } catch (NoSuchMethodException e) {
             fail("No default constructor for configuration change!");
         }
