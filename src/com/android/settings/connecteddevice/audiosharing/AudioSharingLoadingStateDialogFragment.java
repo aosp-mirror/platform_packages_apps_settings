@@ -44,7 +44,7 @@ public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFr
     private static final String TAG = "AudioSharingLoadingDlg";
 
     private static final String BUNDLE_KEY_MESSAGE = "bundle_key_message";
-    private static final long AUTO_DISMISS_TIME_THRESHOLD_MS = TimeUnit.SECONDS.toMillis(10);
+    private static final long AUTO_DISMISS_TIME_THRESHOLD_MS = TimeUnit.SECONDS.toMillis(15);
     private static final int AUTO_DISMISS_MESSAGE_ID = R.id.message;
 
     private static String sMessage = "";
@@ -74,13 +74,15 @@ public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFr
         }
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
         if (dialog != null) {
-            if (sMessage.equals(message)) {
-                Log.d(TAG, "Dialog is showing with same message, return.");
-                return;
-            } else {
-                Log.d(TAG, "Dialog is showing with different message, dismiss and reshow.");
-                dialog.dismiss();
+            if (!sMessage.equals(message)) {
+                Log.d(TAG, "Update dialog message.");
+                TextView messageView = dialog.findViewById(R.id.message);
+                if (messageView != null) {
+                    messageView.setText(message);
+                }
             }
+            Log.d(TAG, "Dialog is showing, return.");
+            return;
         }
         sMessage = message;
         Log.d(TAG, "Show up the loading dialog.");
@@ -113,8 +115,10 @@ public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFr
     @NonNull
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         mHandler = new Handler(Looper.getMainLooper());
-        mHandler.postDelayed(() -> dismiss(), AUTO_DISMISS_MESSAGE_ID,
-                AUTO_DISMISS_TIME_THRESHOLD_MS);
+        mHandler.postDelayed(() -> {
+            Log.d(TAG, "Auto dismiss dialog after timeout");
+            dismiss();
+        }, AUTO_DISMISS_MESSAGE_ID, AUTO_DISMISS_TIME_THRESHOLD_MS);
         Bundle args = requireArguments();
         String message = args.getString(BUNDLE_KEY_MESSAGE, "");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -132,6 +136,7 @@ public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFr
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         if (mHandler != null) {
+            Log.d(TAG, "Dialog dismissed, remove auto dismiss task");
             mHandler.removeMessages(AUTO_DISMISS_MESSAGE_ID);
         }
     }
