@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Kapag naka-on ang Bluetooth, puwedeng makipag-ugnayan ang iyong device sa iba pang malapit na Bluetooth device.\n\nPara mapaganda ang experience sa device, puwede pa ring mag-scan ang mga app at serbisyo ng mga malapit na device anumang oras, kahit na naka-off ang Bluetooth. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon. Mababago mo ito sa mga setting ng pag-scan ng Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Kapag naka-on ang Bluetooth, puwedeng makipag-ugnayan ang iyong device sa iba pang kalapit na Bluetooth device. Gumagamit ng Bluetooth ang mga feature tulad ng Quick Share at Hanapin ang Aking Device.\n\nPuwede pa ring mag-scan ang mga app at serbisyo para sa mga kalapit na device anumang oras, kahit na naka-off ang Bluetooth. Magagamit ito, halimbawa, para mapahusay ang mga feature at serbisyong nakabatay sa lokasyon. Mababago mo ito sa mga setting ng Pagsa-scan para sa Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Palitan"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"Hindi nakakonekta ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Para sa iyong seguridad, kalimutan ang device na ito, at ipares ito ulit"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Kalimutan ang device"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Kanselahin"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Mga detalye ng device"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Mga setting ng keyboard"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Higit pang setting"</string>
@@ -1991,10 +1995,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"I-reset"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Pumili ng modifier key"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Pumili ng bagong key para sa <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accessibility ng pisikal na keyboard"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Mga sticky key, Mga bounce key, Mga mouse key"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Layout na <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Default"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Awtomatiko: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2206,11 +2208,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Advanced"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Nakatakda sa <xliff:g id="SERVICE">%1$s</xliff:g> ang button na Accessibility. Upang gumamit ng pag-magnify, pindutin nang matagal ang button na Accessibility, pagkatapos ay piliin ang pag-magnify."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Nakatakda sa <xliff:g id="SERVICE">%1$s</xliff:g> ang galaw ng accessibility. Para magamit ang pag-magnify, mag-swipe pataas gamit ang dalawang daliri mula sa ibaba ng screen at i-hold. Pagkatapos ay piliin ang pag-magnify."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Shortcut ng mga volume key"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Mga setting ng shortcut"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Shortcut ng mga volume key mula sa lock screen"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Payagang mag-on ang shortcut ng feature mula sa lock screen. Pindutin nang matagal ang parehong volume key nang ilang segundo."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Button ng accessibility"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Button ng accessibility at galaw"</string>
@@ -4104,7 +4104,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Aalisin ang lahat ng panuntunang Huwag Istorbohin na ginawa ng app na ito."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Payagan ang access sa Mga Mode para sa <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Mao-on/mao-off ng app ang Huwag Istorbohin, mapapamahalaan at maa-activate ang Mga Mode, at makakagawa ng mga pagbabago sa mga nauugnay na setting."</string>
-    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="6288548508466545492">"Bawiin ang access sa Mga Mode para sa <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Bawiin ang access sa Mga Mode para sa <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Aalisin ang lahat ng mode na ginawa ng app na ito."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Huwag i-optimize"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"I-optimize"</string>
@@ -5356,8 +5356,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Inihinto ang pag-share ng audio"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Magkonekta ng compatible na device"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Para magsimulang magbahagi ng audio, ikonekta muna ang LE Audio headphones sa iyong telepono"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Lumipat sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Kumonekta sa isang LE audio stream"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Mga audio stream sa malapit"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Mga audio stream"</string>
@@ -5402,7 +5401,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Mag-scan ng QR code ng audio stream para makinig sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Hindi mae-edit ang password habang nagbabahagi. Para palitan ang password, i-off muna ang pag-share ng audio."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Scanner ng QR code"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Kailangan ng tulong?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Maghanap sa Mga Setting"</string>
 </resources>

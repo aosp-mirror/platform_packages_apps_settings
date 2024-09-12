@@ -834,6 +834,14 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Quand le Bluetooth est activé, votre appareil peut communiquer avec d\'autres appareils Bluetooth à proximité.\n\nQuand il ne l\'est pas, les applis et services peuvent quand même rechercher les appareils à proximité à tout moment, afin d\'améliorer l\'expérience, par exemple, les fonctionnalités et services basés sur la localisation. Vous pouvez modifier ce réglage dans les paramètres de recherche Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"L\'activation du Bluetooth permet à votre appareil de communiquer avec les appareils Bluetooth à proximité. Certaines fonctionnalités, telles que Quick Share et Localiser mon appareil, utilisent le Bluetooth.\n\nLes applis et services sont toujours en mesure de rechercher les appareils à proximité, même si le Bluetooth est désactivé. Cela peut servir, par exemple, à améliorer les services et fonctionnalités utilisant la localisation. Rendez-vous dans les paramètres de recherche Bluetooth pour modifier cela."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Modifier"</string>
+    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"Infos sur l\'appareil"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Paramètres du clavier"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Plus de paramètres"</string>
@@ -1692,7 +1700,7 @@
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Pour transférer les comptes Google, les paramètres et plus, saisissez le code de votre autre appareil. Votre code est chiffré."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Pour transférer les comptes Google, les paramètres et plus, saisissez le mot de passe de votre autre appareil. Votre mot de passe est chiffré."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Utiliser aussi schéma pour déverrouiller appareil"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Utiliser aussi le code pour déverrouiller"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Utiliser aussi le code pour déverrouiller cet appareil"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Utiliser aussi mot de passe pour déverrouiller appareil"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Valider le schéma"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Valider le code"</string>
@@ -3351,8 +3359,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Désactivé"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Aucun}=1{1 programme défini}one{# programme défini}other{# programmes définis}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne pas déranger"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"Modes"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"Réduisez les distractions et canalisez votre attention à l\'aide de modes pour le sommeil, le travail, la conduite ou toute autre occasion."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Créer votre propre mode"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recevez uniquement les notifications des personnes et applications importantes"</string>
@@ -3647,11 +3654,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Pourra répondre aux messages et agir sur les boutons dans les notifications, y compris mettre en attente ou fermer les notifications et répondre aux appels"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Modifier les paramètres"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Pourra activer ou désactiver Ne pas déranger, et modifier les paramètres associés"</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Peut gérer et activer les modes ou encore modifier les paramètres associés."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si vous désactivez l\'accès aux notifications pour <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, l\'accès à Ne pas déranger pourra aussi être désactivé."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Si vous désactivez l\'accès aux notifications pour <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, l\'accès aux modes peut également être désactivé."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Désactiver"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Annuler"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"En temps réel"</string>
@@ -3712,12 +3717,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Accès à \"Ne pas déranger\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Autoriser \"Ne pas déranger\""</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Aucune demande d\'accès \"Ne pas déranger\" n\'a été envoyée par les applications installées."</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Accès aux modes"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Autoriser l\'accès aux modes"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Aucune des applis installées n\'a demandé l\'accès aux modes"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Vous n\'avez pas autorisé les notifications de cette appli"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"À votre demande, Android bloque l\'affichage de cette catégorie de notifications sur cet appareil"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"À votre demande, Android bloque l\'affichage de ce groupe de notifications sur cet appareil"</string>
@@ -4108,11 +4110,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Doit rester activé, car l\'accès aux notifications est activé"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Révoquer l\'accès à Ne pas déranger pour \"<xliff:g id="APP">%1$s</xliff:g>\" ?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Toutes les règles Ne pas déranger créées par cette application seront supprimées."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Autoriser l\'accès aux modes pour <xliff:g id="APP">%1$s</xliff:g> ?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"L\'appli pourra activer ou désactiver Ne pas déranger, gérer et activer les modes et modifier les paramètres associés."</string>
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
     <skip />
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Tous les modes créés par cette appli seront supprimés."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Ne pas optimiser"</string>
