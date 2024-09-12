@@ -18,7 +18,6 @@ package com.android.settings.network;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
-import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -29,13 +28,10 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Looper;
 import android.os.RecoverySystem;
-import android.os.RemoteException;
 import android.os.SystemClock;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-
-import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -261,15 +257,15 @@ public class ResetNetworkOperationBuilder {
      */
     public ResetNetworkOperationBuilder restartPhoneProcess() {
         Runnable runnable = () -> {
-            // Unstable content provider can avoid us getting killed together with phone process
-            try (ContentProviderClient client = getUnstableTelephonyContentProviderClient()) {
-                if (client != null) {
-                    client.call(METHOD_RESTART_PHONE_PROCESS, /* arg= */ null, /* extra= */ null);
-                    Log.i(TAG, "Phone process was restarted.");
-                }
-            } catch (RemoteException re) {
-                // It's normal to throw RE since phone process immediately dies
-                Log.i(TAG, "Phone process has been restarted: " + re);
+            try {
+                mContext.getContentResolver().call(
+                        getResetTelephonyContentProviderAuthority(),
+                        METHOD_RESTART_PHONE_PROCESS,
+                        /* arg= */ null,
+                        /* extras= */ null);
+                Log.i(TAG, "Phone process was restarted.");
+            } catch (IllegalArgumentException iae) {
+                Log.w(TAG, "Fail to restart phone process: " + iae);
             }
         };
         mResetSequence.add(runnable);
@@ -283,13 +279,15 @@ public class ResetNetworkOperationBuilder {
      */
     public ResetNetworkOperationBuilder restartRild() {
         Runnable runnable = () -> {
-            try (ContentProviderClient client = getUnstableTelephonyContentProviderClient()) {
-                if (client != null) {
-                    client.call(METHOD_RESTART_RILD, /* arg= */ null, /* extra= */ null);
-                    Log.i(TAG, "RILD was restarted.");
-                }
-            } catch (RemoteException re) {
-                Log.w(TAG, "Fail to restart RILD: " + re);
+            try {
+                mContext.getContentResolver().call(
+                        getResetTelephonyContentProviderAuthority(),
+                        METHOD_RESTART_RILD,
+                        /* arg= */ null,
+                        /* extras= */ null);
+                Log.i(TAG, "RILD was restarted.");
+            } catch (IllegalArgumentException iae) {
+                Log.w(TAG, "Fail to restart RILD: " + iae);
             }
         };
         mResetSequence.add(runnable);
@@ -324,18 +322,9 @@ public class ResetNetworkOperationBuilder {
      * @return the authority of the telephony content provider that support methods
      * resetPhoneProcess and resetRild.
      */
-    private String getResetTelephonyContentProviderAuthority() {
+    @VisibleForTesting
+    String getResetTelephonyContentProviderAuthority() {
         return mContext.getResources().getString(
                 R.string.reset_telephony_stack_content_provider_authority);
-    }
-
-    /**
-     * @return the unstable content provider to avoid us getting killed with phone process
-     */
-    @Nullable
-    @VisibleForTesting
-    public ContentProviderClient getUnstableTelephonyContentProviderClient() {
-        return mContext.getContentResolver().acquireUnstableContentProviderClient(
-                getResetTelephonyContentProviderAuthority());
     }
 }

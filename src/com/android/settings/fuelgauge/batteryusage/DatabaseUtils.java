@@ -429,7 +429,6 @@ public final class DatabaseUtils {
                         database.batteryEventDao().clearAll();
                         database.batteryStateDao().clearAll();
                         database.batteryUsageSlotDao().clearAll();
-                        database.batteryReattributeDao().clearAll();
                     } catch (RuntimeException e) {
                         Log.e(TAG, "clearAll() failed", e);
                     }
@@ -467,7 +466,6 @@ public final class DatabaseUtils {
                         database.batteryEventDao().clearAllBefore(earliestTimestamp);
                         database.batteryStateDao().clearAllBefore(earliestTimestamp);
                         database.batteryUsageSlotDao().clearAllBefore(earliestTimestamp);
-                        database.batteryReattributeDao().clearAllBefore(earliestTimestamp);
                     } catch (RuntimeException e) {
                         Log.e(TAG, "clearAllBefore() failed", e);
                     }
