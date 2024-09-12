@@ -834,6 +834,14 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"عندما تكون تقنية البلوتوث مفعّلة، يمكن للجهاز التواصل مع الأجهزة الأخرى المجاورة التي تتضمّن بلوتوث.\n\nولتحسين تجربة استخدام الجهاز، يمكن للتطبيقات والخدمات أيضًا البحث عن الأجهزة المجاورة في أي وقت، حتى عندما تكون تقنية البلوتوث غير مفعّلة. ويمكن استخدام هذا الإجراء لتحسين الميزات والخدمات المستندة إلى الموقع الجغرافي مثلاً. ويمكنك تغيير هذا الإعداد في إعدادات بحث البلوتوث."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"‏إذا تم تفعيل البلوتوث، فسيتمكّن الجهاز من الاتصال بالأجهزة القريبة الأخرى التي تتضمّن بلوتوث. يُستخدَم البلوتوث في ميزات مثل Quick Share و\"العثور على جهازي\".\n\nلا يزال بإمكان التطبيقات والخدمات في أي وقت البحث عن الأجهزة المجاورة حتى في حال إيقاف البلوتوث، وذلك لأغراض مثل تحسين الميزات والخدمات المستندة إلى الموقع الجغرافي. يمكنك تغيير ذلك من إعدادات البحث عن بلوتوث."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"تغيير"</string>
+    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
+    <skip />
+    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
+    <skip />
     <string name="device_details_title" msgid="1155622417516195481">"تفاصيل الجهاز"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"إعدادات لوحة المفاتيح"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"إعدادات إضافية"</string>
@@ -1019,7 +1027,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"‏جارٍ مشاركة Wi‑Fi مع هذا الجهاز…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"جارٍ الاتصال…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"مشاركة نقطة الاتصال"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"التحقق من هويتك"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"يُرجى تأكيد هويتك"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏كلمة مرور Wi-Fi هي: ‎ ‎<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"كلمة مرور نقطة الاتصال: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"اتصال تلقائي"</string>
@@ -3351,8 +3359,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"غير مفعَّلة"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{ما من جداول زمنية}=1{تم ضبط جدول زمني واحد}two{تم ضبط جدولين زمنيين}few{تم ضبط # جداول زمنية}many{تم ضبط # جدولاً زمنيًا}other{تم ضبط # جدول زمني}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"وضع \"عدم الإزعاج\""</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"الأوضاع"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"يمكنك تقليل مصادر التشتيت والحفاظ على انتباهك باستخدام أوضاع مخصّصة للنوم والعمل والقيادة وغير ذلك."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"إنشاء الوضع الخاص بك"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"ستصلك الإشعارات من الأشخاص المهمّين والتطبيقات المهمّة فقط"</string>
@@ -3647,11 +3654,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"يمكنه الردّ على الرسائل واتخاذ إجراءات من خلال الأزرار في الإشعارات، بما في ذلك تأجيل الإشعارات أو إغلاقها والردّ على المكالمات."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"تغيير الإعدادات"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"يمكنه تفعيل ميزة \"عدم الإزعاج\" أو إيقافها وتغيير الإعدادات ذات الصلة."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"يُستخدَم لإدارة \"الأوضاع\" وتفعيلها وتغيير الإعدادات ذات الصلة."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"في حال إيقاف وصول \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" إلى الإشعارات، قد يتم إيقاف الوصول إلى ميزة \"عدم الإزعاج\" أيضًا."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"في حال إيقاف الوصول إلى إشعارات \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\"، قد يتم إيقاف الوصول إلى \"الأوضاع\" أيضًا."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"إيقاف"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"إلغاء"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"الوقت الفعلي"</string>
@@ -3712,12 +3717,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"الوصول إلى إعداد \"عدم الإزعاج\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"السماح بميزة \"عدم الإزعاج\""</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"لم تطلّب أي تطبيقات مثبّتة الإذن بالوصول إلى إعداد \"عدم الإزعاج\""</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"الوصول إلى \"الأوضاع\""</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"السماح بالوصول إلى \"الأوضاع\""</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"لم تطلب أي تطبيقات مثبَّتة الوصول إلى \"الأوضاع\""</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"لم تسمح بالإشعارات من هذا التطبيق"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"‏بناءً على طلبك، يمنع Android ظهور هذه الفئة من الإشعارات على هذا الجهاز"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"‏بناءً على طلبك، يمنع Android ظهور هذه المجموعة من الإشعارات على هذا الجهاز."</string>
@@ -4108,11 +4110,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"يجب أن يظل قيد التفعيل نظرًا لأن الوصول إلى الإشعارات قيد التفعيل"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"هل تريد إبطال إمكانية وصول تطبيق \"<xliff:g id="APP">%1$s</xliff:g>\" إلى إعداد \"عدم الإزعاج\"؟"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"ستتم إزالة كل قواعد \"عدم الإزعاج\" التي أنشأها هذا التطبيق."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"هل تريد منح \"<xliff:g id="APP">%1$s</xliff:g>\" إذنًا للوصول إلى \"الأوضاع\"؟"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"سيتمكّن التطبيق من تفعيل ميزة \"عدم الإزعاج\" وإيقافها، وإدارة \"الأوضاع\" وتفعيلها، وإجراء تغييرات على الإعدادات ذات الصلة."</string>
+    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
     <skip />
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"ستتم إزالة كل الأوضاع التي أنشأها هذا التطبيق."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"عدم تحسين"</string>
@@ -5369,8 +5369,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"تم إيقاف مشاركة الصوت"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"الاتصال بجهاز متوافق"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"‏لبدء مشاركة الصوت، يجب التأكّد أولاً من أنّ هاتفك متّصل بسماعات رأس متوافقة مع LE Audio"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"التبديل إلى \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"‏الاتصال بجهاز بث صوتي منخفض الطاقة (متوافق مع ميزة Bluetooth LE Audio)"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"أجهزة بث صوتي قريبة"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"أجهزة البث الصوتي"</string>
@@ -5415,7 +5414,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"عليك أن تمسح ضوئيًا رمز الاستجابة السريعة للبث الصوتي للاستماع إليه باستخدام \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"لا يمكن تعديل كلمة المرور أثناء المشاركة. ولتعديلها، عليك أولاً إيقاف ميزة \"مشاركة الصوت\"."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"الماسح الضوئي لرمز الاستجابة السريعة"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"هل أنت بحاجة إلى مساعدة؟"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"البحث في \"الإعدادات\""</string>
 </resources>
