@@ -464,7 +464,7 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Bastırmadan güç düğmesine dokunun"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Parmak izinizi ayarlama"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Telefonunuzun arkasındadır. İşaret parmağınızı kullanın."</string>
-    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Parmak izi sensörü ekranınızın üzerindedir. Bir sonraki ekranda parmak iziniz yakalanacak."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Parmak izi sensörü ekranınızın üzerindedir. Bir sonraki ekranda parmak iziniz kaydedilecek."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Başlat"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Sensörü bulmak için parmağınızı ekranda hareket ettirin. Parmak izi sensörüne dokunup basılı tutun"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Cihaz ve parmak izi sensörünün yerini gösteren çizim"</string>
@@ -1618,7 +1618,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"PIN ayarlayın"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"İş PIN\'i ayarlayın"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Desen oluşturun"</string>
-    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Cihazın kilidini açmak için bir desen belirleyip daha fazla güvenlik sağlayın."</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Ekstra güvenlik için desenle kilit açmayı kullanın."</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"İş deseni oluşturun"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Parmak izi için şifre ayarlayın"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Parmak izi için desen ayarlayın"</string>
@@ -1668,7 +1668,7 @@
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google Hesapları, ayarlar ve diğer öğeleri aktarmak için diğer cihazınızın PIN\'ini girin. PIN\'iniz şifrelenir."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google Hesapları, ayarlar ve diğer öğeleri aktarmak için diğer cihazınızın şifresini girin. Şifreniz şifrelenir."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Bu cihazın kilidini desenle de aç"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Bu cihazın kilidini PIN\'le de aç"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Cihazın kilidini açmak için PIN de kullan"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Bu cihazın kilidini şifreyle de aç"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Deseni doğrulayın"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"PIN\'i doğrulayın"</string>
@@ -5256,7 +5256,7 @@
     <string name="audio_sharing_description" msgid="1660255584523640628">"Diğer kullanıcıların medya içeriklerinizi sizinle birlikte dinlemesine izin verin. Dinleyen kullanıcıların da LE Audio kulaklığı olması gerekir."</string>
     <string name="audio_sharing_device_group_title" msgid="3019780581643956943">"Etkin medya cihazları"</string>
     <string name="audio_sharing_call_audio_title" msgid="7978867452289583929">"Görüşme sesi"</string>
-    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Yalnızca <xliff:g id="DEVICE_NAME">%1$s</xliff:g> adlı cihazda oynatın"</string>
+    <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Yalnızca <xliff:g id="DEVICE_NAME">%1$s</xliff:g> adlı cihazda çal"</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Test sesi çal"</string>
     <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Dinleyen herkes duyabilir"</string>
     <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Ses yayını ayarları"</string>
@@ -5313,12 +5313,12 @@
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Bağlanılamıyor. Tekrar deneyin."</string>
     <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"Bağlanıyor…"</string>
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Ses yayını kullanılamıyor"</string>
-    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Bu ses yayınında şu anda hiçbir şey oynatılmıyor"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Bu ses yayınında şu anda hiçbir şey çalınmıyor"</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Kapat"</string>
     <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Dinle"</string>
     <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Tekrar deneyin"</string>
     <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Ses yayınını dinleyin"</string>
-    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Ses yayını, <xliff:g id="DEVICE_NAME">%1$s</xliff:g> adlı cihazda oynatılacak. Ses seviyesini kontrol etmek için bu cihazı kullanın."</string>
+    <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Ses yayını, <xliff:g id="DEVICE_NAME">%1$s</xliff:g> adlı cihazda yapılacak. Ses seviyesini kontrol etmek için bu cihazı kullanın."</string>
     <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Ses yayını dinlenemiyor"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"uyumlu kulaklık bağlandı"</string>
     <string name="audio_streams_activity_title" msgid="6766869545769831935">"Ses yayınları"</string>
