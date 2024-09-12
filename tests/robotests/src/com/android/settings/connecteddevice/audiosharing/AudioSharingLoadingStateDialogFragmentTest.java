@@ -150,7 +150,7 @@ public class AudioSharingLoadingStateDialogFragmentTest {
     }
 
     @Test
-    public void showDialog_newMessage_dismissAndShowNewDialog() {
+    public void showDialog_newMessage_keepAndUpdateDialog() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         AudioSharingLoadingStateDialogFragment.show(mParent, TEST_MESSAGE1);
         shadowMainLooper().idle();
@@ -163,12 +163,7 @@ public class AudioSharingLoadingStateDialogFragmentTest {
 
         AudioSharingLoadingStateDialogFragment.show(mParent, TEST_MESSAGE2);
         shadowMainLooper().idle();
-        assertThat(dialog.isShowing()).isFalse();
-        AlertDialog newDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(newDialog).isNotNull();
-        assertThat(newDialog.isShowing()).isTrue();
-        view = newDialog.findViewById(R.id.message);
-        assertThat(view).isNotNull();
+        assertThat(dialog.isShowing()).isTrue();
         assertThat(view.getText().toString()).isEqualTo(TEST_MESSAGE2);
     }
 }
