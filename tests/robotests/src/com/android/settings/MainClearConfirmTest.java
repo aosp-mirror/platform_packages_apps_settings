@@ -31,9 +31,10 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import android.security.Flags;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.view.LayoutInflater;
-import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -77,6 +78,7 @@ public class MainClearConfirmTest {
 
         when(mMockActivity.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
+        when(mPersistentDataBlockManager.isFactoryResetProtectionActive()).thenReturn(false);
     }
 
     @Test
@@ -84,12 +86,12 @@ public class MainClearConfirmTest {
         MainClearConfirm mainClearConfirm = new MainClearConfirm();
         mainClearConfirm.mEraseEsims = true;
         mainClearConfirm.mContentView =
-                LayoutInflater.from(mActivity).inflate(R.layout.main_clear_confirm, null);
+                (GlifLayout) LayoutInflater.from(mActivity)
+                        .inflate(R.layout.main_clear_confirm, null);
 
         mainClearConfirm.setSubtitle();
 
-        assertThat(((TextView) mainClearConfirm.mContentView
-                .findViewById(R.id.sud_layout_description)).getText())
+        assertThat(mainClearConfirm.mContentView.getDescriptionText())
                 .isEqualTo(mActivity.getString(R.string.main_clear_final_desc_esim));
     }
 
@@ -98,18 +100,25 @@ public class MainClearConfirmTest {
         MainClearConfirm mainClearConfirm = new MainClearConfirm();
         mainClearConfirm.mEraseEsims = false;
         mainClearConfirm.mContentView =
-                LayoutInflater.from(mActivity).inflate(R.layout.main_clear_confirm, null);
+                (GlifLayout) LayoutInflater.from(mActivity)
+                        .inflate(R.layout.main_clear_confirm, null);
 
         mainClearConfirm.setSubtitle();
 
-        assertThat(((TextView) mainClearConfirm.mContentView
-                .findViewById(R.id.sud_layout_description)).getText())
+        assertThat(mainClearConfirm.mContentView.getDescriptionText())
                 .isEqualTo(mActivity.getString(R.string.main_clear_final_desc));
     }
 
     @Test
     public void shouldWipePersistentDataBlock_noPersistentDataBlockManager_shouldReturnFalse() {
         assertThat(mMainClearConfirm.shouldWipePersistentDataBlock(null)).isFalse();
+    }
+
+    @Test
+    public void shouldWipePersistentDataBlock_frpIsAlive_shouldReturnFalse() {
+        when(mPersistentDataBlockManager.isFactoryResetProtectionActive()).thenReturn(true);
+        assertThat(mMainClearConfirm.shouldWipePersistentDataBlock(mPersistentDataBlockManager))
+                .isFalse();
     }
 
     @Test

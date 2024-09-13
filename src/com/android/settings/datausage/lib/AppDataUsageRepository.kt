@@ -28,6 +28,7 @@ import android.util.SparseArray
 import android.util.SparseBooleanArray
 import androidx.annotation.VisibleForTesting
 import androidx.core.util.keyIterator
+import androidx.core.util.valueIterator
 import com.android.settings.R
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.Bucket
 import com.android.settingslib.AppItem
@@ -49,33 +50,30 @@ class AppDataUsageRepository(
 
     @VisibleForTesting
     fun getAppPercent(carrierId: Int?, buckets: List<Bucket>): List<Pair<AppItem, Int>> {
-        val items = ArrayList<AppItem>()
         val knownItems = SparseArray<AppItem>()
         val profiles = context.userManager.userProfiles
         val userManager : UserManager = context.getSystemService(Context.USER_SERVICE) as UserManager
         val userIdToIsHiddenMap = profiles.associate { profile ->
             profile.identifier to shouldSkipProfile(userManager, profile)
         }
-        bindStats(buckets, userIdToIsHiddenMap, knownItems, items)
+        bindStats(buckets, userIdToIsHiddenMap, knownItems)
         val restrictedUids = context.getSystemService(NetworkPolicyManager::class.java)!!
             .getUidsWithPolicy(NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND)
         for (uid in restrictedUids) {
             // Only splice in restricted state for current user or managed users
-            if (!profiles.contains(UserHandle.getUserHandleForUid(uid))) {
-                continue
-            }
-            var item = knownItems[uid]
-            if (item == null) {
-                item = AppItem(uid)
-                item.total = 0
-                item.addUid(uid)
-                items.add(item)
-                knownItems.put(item.key, item)
-            }
+            if (UserHandle.getUserHandleForUid(uid) !in profiles) continue
+            val item =
+                knownItems[uid]
+                    ?: AppItem(uid).apply {
+                        category = AppItem.CATEGORY_APP
+                        addUid(uid)
+                        knownItems.put(uid, this)
+                    }
             item.restricted = true
         }
 
-        val filteredItems = filterItems(carrierId, items).sorted()
+        val filteredItems =
+            filterItems(carrierId, knownItems.valueIterator().asSequence().toList()).sorted()
         val largest: Long = filteredItems.maxOfOrNull { it.total } ?: 0
         return filteredItems.map { item ->
             val percentTotal = if (largest > 0) (item.total * 100 / largest).toInt() else 0
@@ -106,7 +104,6 @@ class AppDataUsageRepository(
         buckets: List<Bucket>,
         userIdToIsHiddenMap: Map<Int, Boolean>,
         knownItems: SparseArray<AppItem>,
-        items: ArrayList<AppItem>,
     ) {
         for (bucket in buckets) {
             // Decide how to collapse items together
@@ -126,7 +123,6 @@ class AppDataUsageRepository(
                             knownItems = knownItems,
                             bucket = bucket,
                             itemCategory = AppItem.CATEGORY_USER,
-                            items = items,
                         )
                     }
                     collapseKey = getAppUid(uid)
@@ -157,7 +153,6 @@ class AppDataUsageRepository(
                 knownItems = knownItems,
                 bucket = bucket,
                 itemCategory = category,
-                items = items,
             )
         }
     }
@@ -187,15 +182,13 @@ class AppDataUsageRepository(
         knownItems: SparseArray<AppItem>,
         bucket: Bucket,
         itemCategory: Int,
-        items: ArrayList<AppItem>,
     ) {
-        var item = knownItems[collapseKey]
-        if (item == null) {
-            item = AppItem(collapseKey)
-            item.category = itemCategory
-            items.add(item)
-            knownItems.put(item.key, item)
-        }
+        val item =
+            knownItems[collapseKey]
+                ?: AppItem(collapseKey).apply {
+                    category = itemCategory
+                    knownItems.put(collapseKey, this)
+                }
         item.addUid(bucket.uid)
         item.total += bucket.bytes
     }

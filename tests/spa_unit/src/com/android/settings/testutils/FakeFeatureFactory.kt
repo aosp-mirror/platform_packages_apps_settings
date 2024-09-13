@@ -40,7 +40,6 @@ import com.android.settings.localepicker.LocaleFeatureProvider
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
-import com.android.settings.overlay.SurveyFeatureProvider
 import com.android.settings.panel.PanelFeatureProvider
 import com.android.settings.privatespace.PrivateSpaceLoginFeatureProvider
 import com.android.settings.search.SearchFeatureProvider
@@ -52,14 +51,11 @@ import com.android.settings.vpn2.AdvancedVpnFeatureProvider
 import com.android.settings.wifi.WifiTrackerLibProvider
 import com.android.settings.wifi.factory.WifiFeatureProvider
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider
-import org.mockito.Mockito.mock
+import org.mockito.kotlin.mock
 
 class FakeFeatureFactory : FeatureFactory() {
 
-    private val mockMetricsFeatureProvider: MetricsFeatureProvider =
-        mock(MetricsFeatureProvider::class.java)
-    val mockApplicationFeatureProvider: ApplicationFeatureProvider =
-        mock(ApplicationFeatureProvider::class.java)
+    val mockApplicationFeatureProvider = mock<ApplicationFeatureProvider>()
 
     init {
         setFactory(appContext, this)
@@ -70,10 +66,9 @@ class FakeFeatureFactory : FeatureFactory() {
     override val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider
         get() = TODO("Not yet implemented")
 
-    override val metricsFeatureProvider = mockMetricsFeatureProvider
+    override val metricsFeatureProvider = mock<MetricsFeatureProvider>()
 
-    override val powerUsageFeatureProvider: PowerUsageFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val powerUsageFeatureProvider = mock<PowerUsageFeatureProvider>()
 
     override val batteryStatusFeatureProvider: BatteryStatusFeatureProvider
         get() = TODO("Not yet implemented")
@@ -98,9 +93,7 @@ class FakeFeatureFactory : FeatureFactory() {
     override val searchFeatureProvider: SearchFeatureProvider
         get() = TODO("Not yet implemented")
 
-    override fun getSurveyFeatureProvider(context: Context): SurveyFeatureProvider? {
-        TODO("Not yet implemented")
-    }
+    override fun getSurveyFeatureProvider(context: Context) = null
 
     override val securityFeatureProvider: SecurityFeatureProvider
         get() = TODO("Not yet implemented")

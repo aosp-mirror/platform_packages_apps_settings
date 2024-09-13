@@ -23,11 +23,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -90,6 +88,16 @@ public final class ZenModeButtonPreferenceControllerTest {
     }
 
     @Test
+    public void isAvailable_ifModeActiveEvenIfAppOptsOut() {
+        ZenMode zenMode = new TestModeBuilder()
+                .setManualInvocationAllowed(false)
+                .setActive(true)
+                .build();
+        mController.setZenMode(zenMode);
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
     public void isAvailable_notIfModeDisabled() {
         ZenMode zenMode = new TestModeBuilder()
                 .setManualInvocationAllowed(true)
@@ -119,7 +127,6 @@ public final class ZenModeButtonPreferenceControllerTest {
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
         ZenMode zenMode = new TestModeBuilder()
-                .setManualInvocationAllowed(true)
                 .setActive(true)
                 .build();
 
@@ -151,7 +158,6 @@ public final class ZenModeButtonPreferenceControllerTest {
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
         ZenMode zenMode = new TestModeBuilder()
-                .setManualInvocationAllowed(true)
                 .setActive(true)
                 .build();
 
@@ -184,8 +190,7 @@ public final class ZenModeButtonPreferenceControllerTest {
         Button button = new Button(mContext);
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
-        ZenMode zenMode = ZenMode.manualDndMode(
-                new AutomaticZenRule.Builder("manual", Uri.EMPTY).build(), false);
+        ZenMode zenMode = TestModeBuilder.MANUAL_DND_INACTIVE;
 
         mController.updateZenMode(pref, zenMode);
         button.callOnClick();
@@ -199,8 +204,7 @@ public final class ZenModeButtonPreferenceControllerTest {
         Button button = new Button(mContext);
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
-        ZenMode zenMode = ZenMode.manualDndMode(
-                new AutomaticZenRule.Builder("manual", Uri.EMPTY).build(), false);
+        ZenMode zenMode = TestModeBuilder.MANUAL_DND_INACTIVE;
 
         mController.updateZenMode(pref, zenMode);
         button.callOnClick();

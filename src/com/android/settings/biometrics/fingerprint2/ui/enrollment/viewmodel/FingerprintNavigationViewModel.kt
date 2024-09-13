@@ -23,7 +23,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.settings.SettingsApplication
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.SensorInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintFlow
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Finish
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.TransitionStep
@@ -46,7 +46,7 @@ import kotlinx.coroutines.flow.update
  * fragments/viewmodels that want to consume these events. It should provide no additional
  * functionality beyond what is available in [FingerprintNavigationStep].
  */
-class FingerprintNavigationViewModel(fingerprintManagerInteractor: FingerprintManagerInteractor) :
+class FingerprintNavigationViewModel(sensorInteractor: SensorInteractor) :
   ViewModel() {
 
   private val _flowInternal: MutableStateFlow<FingerprintFlow?> = MutableStateFlow(null)
@@ -55,7 +55,7 @@ class FingerprintNavigationViewModel(fingerprintManagerInteractor: FingerprintMa
     combine(
         _flowInternal,
         _hasConfirmedDeviceCredential,
-        fingerprintManagerInteractor.sensorPropertiesInternal,
+        sensorInteractor.sensorPropertiesInternal,
       ) { flow, hasConfirmed, sensorType ->
         if (flow == null || sensorType == null) {
           return@combine null
@@ -144,7 +144,7 @@ class FingerprintNavigationViewModel(fingerprintManagerInteractor: FingerprintMa
         val settingsApplication =
           this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as SettingsApplication
         val biometricEnvironment = settingsApplication.biometricEnvironment
-        FingerprintNavigationViewModel(biometricEnvironment!!.fingerprintManagerInteractor)
+        FingerprintNavigationViewModel(biometricEnvironment!!.createSensorPropertiesInteractor())
       }
     }
   }

@@ -76,7 +76,6 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         Intent intent = new Intent(context, ToggleSubscriptionDialogActivity.class);
         intent.putExtra(ARG_SUB_ID, subId);
         intent.putExtra(ARG_enable, enable);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
 
@@ -253,8 +252,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 mSwitchToEuiccSubscriptionSidecar.reset();
                 dismissProgressDialog();
                 showErrorDialog(
-                        getString(R.string.privileged_action_disable_fail_title),
-                        getString(R.string.privileged_action_disable_fail_text));
+                        getString(R.string.sim_action_enable_sim_fail_title),
+                        getString(R.string.sim_action_enable_sim_fail_text));
                 break;
         }
     }
@@ -584,7 +583,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     }
 
     private boolean isRemovableSimEnabled() {
-        return UiccSlotUtil.isRemovableSimEnabled(mTelMgr);
+        return new UiccSlotRepository(mTelMgr).anyRemovablePhysicalSimEnabled();
     }
 
     private boolean isMultipleEnabledProfilesSupported() {

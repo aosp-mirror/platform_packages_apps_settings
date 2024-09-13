@@ -34,7 +34,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.android.settings.R;
-import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -87,10 +86,7 @@ class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenc
 
     @Override
     void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        @DrawableRes int iconResId = zenMode.getRule().getIconResId();
-        if (iconResId == 0) {
-            iconResId = ZenIconLoader.getIconResourceIdFromType(zenMode.getType());
-        }
+        @DrawableRes int iconResId = zenMode.getIconKey().resId();
         updateIconSelection(iconResId);
     }
 
@@ -156,7 +152,7 @@ class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenc
         public void onBindViewHolder(@NonNull IconHolder holder, int position) {
             IconOptionsProvider.IconInfo iconInfo = mIconResources.get(position);
             Drawable iconDrawable = mIconCache.computeIfAbsent(iconInfo,
-                    info -> IconUtil.makeSmallIconCircle(mContext, info.resId()));
+                    info -> IconUtil.makeIconPickerItem(mContext, info.resId()));
             holder.bindIcon(iconInfo, iconDrawable);
         }
 

@@ -16,10 +16,12 @@
 
 package com.android.settings.privatespace.delete;
 
+import static com.android.internal.app.SetScreenLockDialogActivity.LAUNCH_REASON_RESET_PRIVATE_SPACE_SETTINGS_ACCESS;
 import static com.android.settings.system.ResetDashboardFragment.PRIVATE_SPACE_DELETE_CREDENTIAL_REQUEST;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.KeyguardManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,6 +37,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.Initializer;
+import com.android.internal.app.SetScreenLockDialogActivity;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -46,6 +49,7 @@ import com.android.settings.system.ResetDashboardFragment;
 public class ResetOptionsDeletePrivateSpaceController extends BasePreferenceController {
     private static final String TAG = "PrivateSpaceResetCtrl";
     private ResetDashboardFragment mHostFragment;
+    private KeyguardManager mKeyguardManager;
 
     public ResetOptionsDeletePrivateSpaceController(
             @NonNull Context context, @NonNull String preferenceKey) {
@@ -77,9 +81,13 @@ public class ResetOptionsDeletePrivateSpaceController extends BasePreferenceCont
 
     @VisibleForTesting
     boolean startAuthenticationForDelete() {
-        final ChooseLockSettingsHelper.Builder builder =
-                new ChooseLockSettingsHelper.Builder(mHostFragment.getActivity(), mHostFragment);
-        builder.setRequestCode(PRIVATE_SPACE_DELETE_CREDENTIAL_REQUEST).show();
+        if (getKeyguardManager().isDeviceSecure()) {
+            final ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(
+                    mHostFragment.getActivity(), mHostFragment);
+            builder.setRequestCode(PRIVATE_SPACE_DELETE_CREDENTIAL_REQUEST).show();
+        } else {
+            promptToSetDeviceLock();
+        }
         return true;
     }
 
@@ -146,5 +154,18 @@ public class ResetOptionsDeletePrivateSpaceController extends BasePreferenceCont
                             })
                     .create();
         }
+    }
+
+    private KeyguardManager getKeyguardManager() {
+        if (mKeyguardManager == null) {
+            mKeyguardManager = mContext.getSystemService(KeyguardManager.class);
+        }
+        return mKeyguardManager;
+    }
+
+    private void promptToSetDeviceLock() {
+        Intent setScreenLockPromptIntent = SetScreenLockDialogActivity.createBaseIntent(
+                LAUNCH_REASON_RESET_PRIVATE_SPACE_SETTINGS_ACCESS);
+        mContext.startActivity(setScreenLockPromptIntent);
     }
 }

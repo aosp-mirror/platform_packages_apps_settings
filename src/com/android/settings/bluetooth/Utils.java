@@ -48,8 +48,9 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.base.Supplier;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
@@ -239,12 +240,12 @@ public final class Utils {
      * @param cachedBluetoothDevice The main cachedBluetoothDevice.
      * @return all cachedBluetoothDevices with the same groupId.
      */
-    public static List<CachedBluetoothDevice> getAllOfCachedBluetoothDevices(
+    public static Set<CachedBluetoothDevice> findAllCachedBluetoothDevicesByGroupId(
             LocalBluetoothManager localBtMgr,
             CachedBluetoothDevice cachedBluetoothDevice) {
-        List<CachedBluetoothDevice> cachedBluetoothDevices = new ArrayList<>();
+        Set<CachedBluetoothDevice> cachedBluetoothDevices = new HashSet<>();
         if (cachedBluetoothDevice == null) {
-            Log.e(TAG, "getAllOfCachedBluetoothDevices: no cachedBluetoothDevice");
+            Log.e(TAG, "findAllCachedBluetoothDevicesByGroupId: no cachedBluetoothDevice");
             return cachedBluetoothDevices;
         }
         int deviceGroupId = cachedBluetoothDevice.getGroupId();
@@ -254,7 +255,7 @@ public final class Utils {
         }
 
         if (localBtMgr == null) {
-            Log.e(TAG, "getAllOfCachedBluetoothDevices: no LocalBluetoothManager");
+            Log.e(TAG, "findAllCachedBluetoothDevicesByGroupId: no LocalBluetoothManager");
             return cachedBluetoothDevices;
         }
         CachedBluetoothDevice mainDevice =
@@ -262,16 +263,14 @@ public final class Utils {
                         .filter(cachedDevice -> cachedDevice.getGroupId() == deviceGroupId)
                         .findFirst().orElse(null);
         if (mainDevice == null) {
-            Log.e(TAG, "getAllOfCachedBluetoothDevices: groupId = " + deviceGroupId
+            Log.e(TAG, "findAllCachedBluetoothDevicesByGroupId: groupId = " + deviceGroupId
                     + ", no main device.");
             return cachedBluetoothDevices;
         }
         cachedBluetoothDevice = mainDevice;
         cachedBluetoothDevices.add(cachedBluetoothDevice);
-        for (CachedBluetoothDevice member : cachedBluetoothDevice.getMemberDevice()) {
-            cachedBluetoothDevices.add(member);
-        }
-        Log.d(TAG, "getAllOfCachedBluetoothDevices: groupId = " + deviceGroupId
+        cachedBluetoothDevices.addAll(cachedBluetoothDevice.getMemberDevice());
+        Log.d(TAG, "findAllCachedBluetoothDevicesByGroupId: groupId = " + deviceGroupId
                 + " , cachedBluetoothDevice = " + cachedBluetoothDevice
                 + " , deviceList = " + cachedBluetoothDevices);
         return cachedBluetoothDevices;
@@ -289,7 +288,7 @@ public final class Utils {
         }
         ThreadUtils.postOnBackgroundThread(() -> {
             for (Supplier<?> supplier : suppliers) {
-                supplier.get();
+                Object unused = supplier.get();
             }
             ThreadUtils.postOnMainThread(runnable);
         });

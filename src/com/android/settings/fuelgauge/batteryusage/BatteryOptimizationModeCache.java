@@ -17,38 +17,47 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
-import android.util.ArrayMap;
+import android.util.SparseArray;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.core.util.Pair;
 
 import com.android.settings.fuelgauge.BatteryOptimizeUtils;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
-
-import java.util.Map;
 
 /** A cache to log battery optimization mode of an app */
 final class BatteryOptimizationModeCache {
     private static final String TAG = "BatteryOptimizationModeCache";
 
-    @VisibleForTesting final Map<Integer, BatteryOptimizationMode> mBatteryOptimizeModeCacheMap;
+    /* Stores the battery optimization mode and mutable state for each UID. */
+    @VisibleForTesting
+    final SparseArray<Pair<BatteryOptimizationMode, Boolean>> mBatteryOptimizeModeCache;
 
     private final Context mContext;
 
     BatteryOptimizationModeCache(final Context context) {
         mContext = context;
-        mBatteryOptimizeModeCacheMap = new ArrayMap<>();
+        mBatteryOptimizeModeCache = new SparseArray<>();
         PowerAllowlistBackend.getInstance(mContext).refreshList();
     }
 
-    BatteryOptimizationMode getBatteryOptimizeMode(final int uid, final String packageName) {
-        if (!mBatteryOptimizeModeCacheMap.containsKey(uid)) {
+    Pair<BatteryOptimizationMode, Boolean> getBatteryOptimizeModeInfo(
+            final int uid, final String packageName) {
+        if (!mBatteryOptimizeModeCache.contains(uid)) {
             final BatteryOptimizeUtils batteryOptimizeUtils =
                     new BatteryOptimizeUtils(mContext, uid, packageName);
-            mBatteryOptimizeModeCacheMap.put(
+            mBatteryOptimizeModeCache.put(
                     uid,
-                    BatteryOptimizationMode.forNumber(
-                            batteryOptimizeUtils.getAppOptimizationMode(/* refreshList= */ false)));
+                    Pair.create(
+                            BatteryOptimizationMode.forNumber(
+                                    batteryOptimizeUtils.getAppOptimizationMode(
+                                            /* refreshList= */ false)),
+                            batteryOptimizeUtils.isOptimizeModeMutable()));
         }
-        return mBatteryOptimizeModeCacheMap.get(uid);
+        final Pair<BatteryOptimizationMode, Boolean> batteryOptimizeModeInfo =
+                mBatteryOptimizeModeCache.get(uid);
+        return batteryOptimizeModeInfo != null
+                ? batteryOptimizeModeInfo
+                : new Pair<>(BatteryOptimizationMode.MODE_UNKNOWN, false);
     }
 }
