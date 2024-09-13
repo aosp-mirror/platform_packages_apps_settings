@@ -48,9 +48,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionInfoListViewModel
-import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.DataSubscriptionRepository
 import com.android.settings.network.telephony.MobileDataRepository
+import com.android.settings.network.telephony.SimRepository
 import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.spa.network.PrimarySimRepository.PrimarySimInfo
 import com.android.settings.spa.search.SearchablePage
@@ -66,7 +66,6 @@ import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spaprivileged.framework.common.broadcastReceiverFlow
-import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBooleanFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -213,10 +212,7 @@ open class NetworkCellularGroupProvider : SettingsPageProvider, SearchablePage {
         const val fileName = "NetworkCellularGroupProvider"
 
         private fun isPageSearchable(context: Context) =
-            Flags.isDualSimOnboardingEnabled() &&
-            SubscriptionUtil.isSimHardwareVisible(context) &&
-                !com.android.settingslib.Utils.isWifiOnly(context) &&
-                context.userManager.isAdminUser
+            Flags.isDualSimOnboardingEnabled() && SimRepository(context).showMobileNetworkPage()
     }
 }
 
