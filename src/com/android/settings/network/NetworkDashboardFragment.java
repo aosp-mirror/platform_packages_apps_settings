@@ -19,7 +19,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.lifecycle.LifecycleOwner;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.SettingsDumpService;
@@ -69,12 +69,11 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle(),
-                this /* LifecycleOwner */);
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, LifecycleOwner lifecycleOwner) {
+            @Nullable Lifecycle lifecycle) {
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
         final PrivateDnsPreferenceController privateDnsPreferenceController =
@@ -87,7 +86,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
-        controllers.add(new MobileNetworkSummaryController(context, lifecycle, lifecycleOwner));
         controllers.add(vpnPreferenceController);
         controllers.add(privateDnsPreferenceController);
 
@@ -114,8 +112,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */,
-                            null /* LifecycleOwner */);
+                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };
 }
