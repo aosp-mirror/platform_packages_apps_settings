@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.modes;
 
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -33,8 +34,8 @@ import androidx.annotation.WorkerThread;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.Utils;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -49,7 +50,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Function;
 
-class ZenModesListAddModePreferenceController extends AbstractPreferenceController {
+class ZenModesListAddModePreferenceController extends BasePreferenceController {
+    protected static final String KEY = "add_mode";
 
     private final ZenServiceListing mServiceListing;
     private final OnAddModeListener mOnAddModeListener;
@@ -83,7 +85,7 @@ class ZenModesListAddModePreferenceController extends AbstractPreferenceControll
             NotificationManager notificationManager, PackageManager packageManager,
             Function<ApplicationInfo, Drawable> appIconRetriever,
             ExecutorService backgroundExecutor, Executor uiThreadExecutor) {
-        super(context);
+        super(context, KEY);
         mOnAddModeListener = onAddModeListener;
         mServiceListing = serviceListing;
         mConfigurationActivityHelper = configurationActivityHelper;
@@ -95,13 +97,8 @@ class ZenModesListAddModePreferenceController extends AbstractPreferenceControll
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return "add_mode";
+    public int getAvailabilityStatus() {
+        return Flags.modesUi() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
