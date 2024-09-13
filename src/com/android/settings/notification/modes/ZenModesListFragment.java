@@ -142,9 +142,6 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
-                    // TODO: b/332937523 - determine if this should be removed once the preference
-                    //                     controller adds dynamic data to index
-                    keys.add(ZenModesListPreferenceController.KEY);
                     return keys;
                 }
 
