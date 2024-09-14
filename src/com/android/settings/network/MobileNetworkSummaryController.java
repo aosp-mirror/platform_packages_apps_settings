@@ -21,7 +21,6 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
 
@@ -35,10 +34,10 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.telephony.SimRepository;
 import com.android.settings.network.telephony.euicc.EuiccRepository;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
@@ -56,7 +55,6 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     private static final String KEY = "mobile_network_list";
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private UserManager mUserManager;
     private RestrictedPreference mPreference;
 
     private MobileNetworkRepository mMobileNetworkRepository;
@@ -85,7 +83,6 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
             LifecycleOwner lifecycleOwner) {
         super(context);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
-        mUserManager = context.getSystemService(UserManager.class);
         mLifecycleOwner = lifecycleOwner;
         mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mIsAirplaneModeOn = mMobileNetworkRepository.isAirplaneModeOn();
@@ -185,8 +182,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public boolean isAvailable() {
-        return SubscriptionUtil.isSimHardwareVisible(mContext) &&
-                !Utils.isWifiOnly(mContext) && mUserManager.isAdminUser();
+        return new SimRepository(mContext).showMobileNetworkPage();
     }
 
     @Override

@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-package com.android.settings.bluetooth.ui.layout
+package com.android.settings.biometrics.fingerprint
 
-import kotlinx.coroutines.flow.Flow
+import android.app.Activity
 
-/** Represent the layout of device settings. */
-data class DeviceSettingLayout(val rows: List<DeviceSettingLayoutRow>)
+open class FingerprintEnrollActivityClassProvider {
 
-/** Represent a row in the layout. */
-data class DeviceSettingLayoutRow(val columns: Flow<List<DeviceSettingLayoutColumn>>)
+    open val default: Class<out Activity>
+        get() = FingerprintEnrollIntroduction::class.java
+    open val setup: Class<out Activity>
+        get() = SetupFingerprintEnrollIntroduction::class.java
+    open val internal: Class<out Activity>
+        get() = FingerprintEnrollIntroductionInternal::class.java
 
-/** Represent a column in a row. */
-data class DeviceSettingLayoutColumn(val settingId: Int, val highlighted: Boolean)
+    companion object {
+        @JvmStatic
+        val instance = FingerprintEnrollActivityClassProvider()
+    }
+}

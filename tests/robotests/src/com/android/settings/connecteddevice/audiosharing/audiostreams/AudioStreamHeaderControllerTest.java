@@ -18,6 +18,8 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamHeaderController.AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamHeaderController.AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY;
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamHeaderController.AUDIO_STREAM_HEADER_PRESENT_NOW_SUMMARY;
+import static com.android.settingslib.flags.Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -31,6 +33,7 @@ import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
@@ -68,8 +71,9 @@ import java.util.concurrent.Executor;
             ShadowAudioStreamsHelper.class,
         })
 public class AudioStreamHeaderControllerTest {
-
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final String KEY = "audio_stream_header";
     private static final int BROADCAST_ID = 1;
     private static final String BROADCAST_NAME = "broadcast name";
@@ -81,12 +85,15 @@ public class AudioStreamHeaderControllerTest {
     @Mock private AudioStreamDetailsFragment mFragment;
     @Mock private LayoutPreference mPreference;
     @Mock private EntityHeaderController mHeaderController;
+    @Mock private BluetoothDevice mBluetoothDevice;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
     private AudioStreamHeaderController mController;
 
     @Before
     public void setUp() {
+        mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         ShadowAudioStreamsHelper.setUseMock(mAudioStreamsHelper);
         when(mAudioStreamsHelper.getLeBroadcastAssistant()).thenReturn(mAssistant);
@@ -169,6 +176,44 @@ public class AudioStreamHeaderControllerTest {
     }
 
     @Test
+    public void testDisplayPreference_sourcePresent_setSummary() {
+        mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        String address = "11:22:33:44:55:66";
+
+        when(mBroadcastReceiveState.getBroadcastId()).thenReturn(BROADCAST_ID);
+        when(mBroadcastReceiveState.getSourceDevice()).thenReturn(mBluetoothDevice);
+        when(mBluetoothDevice.getAddress()).thenReturn(address);
+        List<Long> bisSyncState = new ArrayList<>();
+        when(mBroadcastReceiveState.getBisSyncState()).thenReturn(bisSyncState);
+        when(mAudioStreamsHelper.getAllPresentSources())
+                .thenReturn(List.of(mBroadcastReceiveState));
+
+        mController.displayPreference(mScreen);
+
+        verify(mHeaderController).setLabel(BROADCAST_NAME);
+        verify(mHeaderController).setIcon(any(Drawable.class));
+        verify(mHeaderController)
+                .setSummary(mContext.getString(AUDIO_STREAM_HEADER_PRESENT_NOW_SUMMARY));
+        verify(mHeaderController).done(true);
+        verify(mScreen).addPreference(any());
+    }
+
+    @Test
+    public void testDisplayPreference_sourceNotPresent_setSummary() {
+        mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+
+        when(mAudioStreamsHelper.getAllPresentSources()).thenReturn(Collections.emptyList());
+
+        mController.displayPreference(mScreen);
+
+        verify(mHeaderController).setLabel(BROADCAST_NAME);
+        verify(mHeaderController).setIcon(any(Drawable.class));
+        verify(mHeaderController).setSummary(AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY);
+        verify(mHeaderController).done(true);
+        verify(mScreen).addPreference(any());
+    }
+
+    @Test
     public void testCallback_onSourceRemoved_updateButton() {
         when(mAudioStreamsHelper.getAllConnectedSources()).thenReturn(Collections.emptyList());
 
@@ -210,6 +255,27 @@ public class AudioStreamHeaderControllerTest {
         // Called twice, once in displayPreference, the other one in callback
         verify(mHeaderController, times(2))
                 .setSummary(mContext.getString(AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY));
+        verify(mHeaderController, times(2)).done(true);
+    }
+
+    @Test
+    public void testCallback_onReceiveStateChangedWithSourcePresent_updateButton() {
+        mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        String address = "11:22:33:44:55:66";
+
+        when(mAudioStreamsHelper.getAllPresentSources())
+                .thenReturn(List.of(mBroadcastReceiveState));
+        when(mBroadcastReceiveState.getBroadcastId()).thenReturn(BROADCAST_ID);
+        when(mBroadcastReceiveState.getSourceDevice()).thenReturn(mBluetoothDevice);
+        when(mBluetoothDevice.getAddress()).thenReturn(address);
+
+        mController.displayPreference(mScreen);
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
+                mock(BluetoothDevice.class), /* sourceId= */ 0, mBroadcastReceiveState);
+
+        // Called twice, once in displayPreference, the other one in callback
+        verify(mHeaderController, times(2))
+                .setSummary(mContext.getString(AUDIO_STREAM_HEADER_PRESENT_NOW_SUMMARY));
         verify(mHeaderController, times(2)).done(true);
     }
 }

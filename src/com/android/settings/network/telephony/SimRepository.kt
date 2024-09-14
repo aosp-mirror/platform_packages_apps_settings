@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.settings.bluetooth.ui.layout
+package com.android.settings.network.telephony
 
-import kotlinx.coroutines.flow.Flow
+import android.content.Context
+import android.content.pm.PackageManager
+import com.android.settingslib.spaprivileged.framework.common.userManager
 
-/** Represent the layout of device settings. */
-data class DeviceSettingLayout(val rows: List<DeviceSettingLayoutRow>)
+class SimRepository(context: Context) {
+    private val packageManager = context.packageManager
+    private val userManager = context.userManager
 
-/** Represent a row in the layout. */
-data class DeviceSettingLayoutRow(val columns: Flow<List<DeviceSettingLayoutColumn>>)
-
-/** Represent a column in a row. */
-data class DeviceSettingLayoutColumn(val settingId: Int, val highlighted: Boolean)
+    /** Gets whether we show mobile network settings page to the current user. */
+    fun showMobileNetworkPage(): Boolean =
+        packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY) && userManager.isAdminUser
+}
