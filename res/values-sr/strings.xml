@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Када је Bluetooth укључен, уређај може да комуницира са другим Bluetooth уређајима у близини.\n\nРади бољег доживљаја уређаја, апликације и услуге и даље могу да траже уређаје у близини у било ком тренутку, чак и када је Bluetooth искључен. Ово може да се користи, на пример, за побољшање функција и услуга заснованих на локацији. То можете да промените у подешавањима Bluetooth скенирања."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Када је Bluetooth укључен, уређај може да комуницира са другим Bluetooth уређајима у близини. Функције као што су Quick Share и Пронађи мој уређај користе Bluetooth.\n\nАпликације и услуге и даље могу да траже уређаје у близини у било ком тренутку, чак и када је Bluetooth искључен. Ово може да се користи, на пример, за побољшање функција и услуга заснованих на локацији. То можете да промените у подешавањима Bluetooth скенирања."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Промени"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"Није повезано: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Ради ваше безбедности, заборавите овај уређај, па га поново упарите"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Заборави уређај"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Откажи"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Детаљи о уређају"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Подешавања тастатуре"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Још подешавања"</string>
@@ -1991,10 +1995,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Ресетуј"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Одаберите модификујући тастер"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Одаберите нови тастер за <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Приступачност физичке тастатуре"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Лепљиви тастери, дужи одзив тастера, тастери миша"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Распоред <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Подразумевано"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Аутоматски: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2206,11 +2208,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Напредно"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Дугме за приступачност је подешено на <xliff:g id="SERVICE">%1$s</xliff:g>. Да бисте користили увећање, додирните и задржите дугме за приступачност, па изаберите увећање."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Покрет за приступачност је подешен на функцију <xliff:g id="SERVICE">%1$s</xliff:g>. Да бисте користили увећање, превлачите нагоре од дна екрана помоћу два прста и задржите. Затим одаберите увећање."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Пречица за тастере за јачину звука"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Подешавања пречица"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Пречица за тастере за јачину звука са закљ. екрана"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Дозволите пречици функције да се укључи са закључаног екрана. Задржите оба тастера за јачину звука пар секунди."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Дугме Приступачност"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Дугме и покрет за Приступачност"</string>
@@ -3351,8 +3351,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Искључено"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ниједан}=1{1 распоред је подешен}one{# распоред је подешен}few{# распореда су подешена}other{# распореда је подешено}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не узнемиравај"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"Режими"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"Смањите ометања и преузмите контролу над пажњом помоћу режима за спавање, рад, вожњу и све остало."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Направите свој режим"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Добијајте обавештења само од важних особа и апликација"</string>
@@ -3647,11 +3646,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Може да одговара на поруке и предузима радње повезане са дугмади у обавештењима, укључујући одлагање или одбацивање обавештења и одговарање на позиве."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"да мења подешавања"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Може да укључује или искључује режим Не узнемиравај и мења сродна подешавања."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Може да управља режимима и активира их, као и да мења сродна подешавања."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ако искључите приступ обавештењима за <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, искључићете и приступ режиму Не узнемиравај."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Ако искључите приступ обавештењима за <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, може да се искључи и приступ режимима."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Искључи"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Откажи"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"У реалном времену"</string>
@@ -3712,12 +3709,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Приступ опцији Не узнемиравај"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Дозволи режим Не узнемиравај"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ниједна инсталирана апликација није захтевала приступ опцији Не узнемиравај"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Приступ режимима"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Дозволи приступ режимима"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Ниједна инсталирана апликација није захтевала приступ режимима"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Нисте дозволили обавештења из ове апликације"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"На ваш захтев, Android блокира приказивање ове категорије обавештења на овом уређају"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"На ваш захтев, Android блокира приказивање ове групе обавештења на овом уређају"</string>
@@ -4108,12 +4102,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Мора да остане укључено јер је приступ обавештењима укључен"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Опозивате приступ режиму Не узнемиравај за апликацију <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Уклонићемо сва правила за режим Не узнемиравај која је ова апликација направила."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Желите да дозволите приступ режимима за: <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Апликација ће моћи да укључује или искључује подешавање Не узнемиравај, да управља режимима и активира их, као и да уноси промене у сродна подешавања."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Желите да опозовете приступ режимима за: <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Уклонићемо све режиме које је ова апликација направила."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Не оптимизуј"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Оптимизуј"</string>
@@ -5366,8 +5357,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Дељење звука је заустављено"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Повежите компатибилан уређај"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Да бисте почели да делите звук, прво повежите LE Audio слушалице са телефоном"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Пређи на <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Повежите се са LE Audio стримом"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Аудио стримови у близини"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Аудио стримови"</string>
@@ -5412,7 +5402,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Скенирајте QR кôд аудио стрима да бисте слушали помоћу: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Лозинка не може да се мења током дељења. Да бисте променили лозинку, прво искључите дељење звука."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Скенер QR кода"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Треба вам помоћ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Подешавања претраге"</string>
 </resources>

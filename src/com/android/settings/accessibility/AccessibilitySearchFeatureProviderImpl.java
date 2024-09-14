@@ -16,7 +16,11 @@
 
 package com.android.settings.accessibility;
 
+import android.content.ComponentName;
 import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settingslib.search.SearchIndexableRaw;
 
@@ -27,8 +31,16 @@ import java.util.List;
  */
 public class AccessibilitySearchFeatureProviderImpl implements AccessibilitySearchFeatureProvider {
 
+    @Nullable
     @Override
     public List<SearchIndexableRaw> getSearchIndexableRawData(Context context) {
         return null;
+    }
+
+    @NonNull
+    @Override
+    public String getSynonymsForComponent(@NonNull Context context,
+            @NonNull ComponentName componentName) {
+        return "";
     }
 }

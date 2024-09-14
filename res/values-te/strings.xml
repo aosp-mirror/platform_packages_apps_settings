@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"బ్లూటూత్ ఆన్ చేసినప్పుడు, సమీపంలోని ఇతర బ్లూటూత్ పరికరాలతో మీ పరికరం కమ్యూనికేట్ చేయగలదు.\n\nపరికర వినియోగ అనుభూతిని మెరుగుపరచడానికి, ఏ సమయంలోనైనా, బ్లూటూత్ ఆఫ్‌లో ఉన్నప్పుడు కూడా, సమీపంలోని పరికరాలను, యాప్‌లు, సర్వీస్‌లు ఇప్పటికీ స్కాన్ చేయగలవు. ఉదాహరణకు, లొకేషన్ ఆధారిత ఫీచర్‌లు, సర్వీస్‌లను మెరుగుపరచడానికి దీనిని ఉపయోగించవచ్చు. మీరు దీన్ని బ్లూటూత్ స్కానింగ్ సెట్టింగ్‌లలో మార్చవచ్చు."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"బ్లూటూత్‌ను ఆన్ చేసినప్పుడు, మీ పరికరం సమీపంలోని ఇతర బ్లూటూత్ పరికరాలతో కమ్యూనికేట్ చేయగలదు. క్విక్ షేర్, Find My Device వంటి ఫీచర్‌లు బ్లూటూత్‌ను ఉపయోగిస్తాయి.\n\nబ్లూటూత్ ఆఫ్‌లో ఉన్నా, యాప్‌లు, సర్వీస్‌లు ఇప్పటికీ సమీపంలోని పరికరాల కోసం ఏ సమయంలోనైనా స్కాన్ చేయగలవు. ఉదాహరణకు, లొకేషన్ ఆధారిత ఫీచర్‌లను, సర్వీస్‌లను మెరుగుపరచడానికి ఇది ఉపయోగించబడుతుంది. దీన్ని మీరు బ్లూటూత్ స్కానింగ్ సెట్టింగ్‌లలో మార్చవచ్చు."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"మార్చండి"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> కనెక్ట్ చేయబడలేదు"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"మీ భద్రత కోసం ఈ పరికరాన్ని మర్చిపోండి, ఆపై దీన్ని మళ్లీ పెయిర్ చేయండి"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"పరికరాన్ని మర్చిపోండి"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"రద్దు చేయండి"</string>
     <string name="device_details_title" msgid="1155622417516195481">"పరికర వివరాలు"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"కీబోర్డ్ సెట్టింగ్‌లు"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"మరిన్ని సెట్టింగ్‌లు"</string>
@@ -1991,10 +1995,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"రీసెట్ చేయండి"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"మోడిఫయర్ కీని ఎంచుకోండి"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> కొసం కొత్త కీని ఎంచుకోండి:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"ఫిజికల్ కీబోర్డ్ యాక్సెసిబిలిటీ"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"స్టిక్కీ కీలు, బౌన్స్ కీలు, మౌస్ కీలు"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> లేఅవుట్"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ఆటోమేటిక్"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"ఆటోమేటిక్: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2206,11 +2208,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"అధునాతన సెట్టింగ్‌లు"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"యాక్సెస్ సామర్థ్య బటన్ <xliff:g id="SERVICE">%1$s</xliff:g>కు సెట్ చేయబడింది. మ్యాగ్నిఫికేషన్‌ను ఉపయోగించాలంటే, యాక్సెస్ సామర్ధ్య బటన్‌ని తాకి, ఉంచి, ఆపై మ్యాగ్నిఫికేషన్‌ను ఎంచుకోండి."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"సంజ్ఞ యాక్సెసిబిలిటీ అనేది <xliff:g id="SERVICE">%1$s</xliff:g>కు సెట్ చేయబడింది. మ్యాగ్నిఫికేషన్‌ను ఉపయోగించడానికి, రెండు వేళ్లతో స్క్రీన్‌ను కింద నుండి పైకి స్వైప్ చేసి పట్టుకోండి. ఆ తర్వాత మ్యాగ్నిఫికేషన్‌ను ఎంచుకోండి."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"వాల్యూమ్ కీల షార్ట్‌కట్"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"షార్ట్‌కట్ సెట్టింగ్‌లు"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"లాక్ స్క్రీన్ నుండి వాల్యూమ్ కీల షార్ట్‌కట్"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"లాక్ స్క్రీన్‌లో \'షార్ట్‌కట్\' ఫీచర్ ఆన్ చేయడానికి అనుమతించండి. వాల్యూమ్ కీలు రెండింటినీ కొన్ని సెకన్ల పాటు నొక్కి పట్టుకోండి."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"యాక్సెసిబిలిటీ బటన్"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"యాక్సెసిబిలిటీ బటన్ &amp; సంజ్ఞ"</string>
@@ -3351,8 +3351,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"ఆఫ్‌లో ఉంది"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{ఏవీ లేవు}=1{1 షెడ్యూల్ సెట్ చేయబడింది}other{# షెడ్యూళ్లు సెట్ చేయబడ్డాయి}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"అంతరాయం కలిగించవద్దు"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"మోడ్‌లు"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"పరధ్యానాలను తగ్గించి, స్లీప్, వర్క్, డ్రైవింగ్, ఇంకా ప్రతిదానికి సంబంధించి మోడ్‌లతో మీ దృష్టిని కంట్రోల్ చేయండి."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"మీ సొంత మోడ్‌ను క్రియేట్ చేయండి"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"ముఖ్యమైన వ్యక్తులు, యాప్‌ల నుంచి వచ్చే నోటిఫికేషన్‌లను మాత్రమే అందించు"</string>
@@ -3647,11 +3646,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"ఇది మెసేజ్‌లకు రిప్లయి ఇవ్వగలదు, అలాగే నోటిఫికేషన్‌లను తాత్కాలికంగా వాయిదా వేయడం లేదా విస్మరించడం, ఇంకా కాల్స్‌కు సమాధానం ఇవ్వడంతో పాటు నోటిఫికేషన్‌లలోని బటన్‌లపై చర్య తీసుకోగలదు."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"సెట్టింగ్‌లను మార్చడం"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"ఇది \'అంతరాయం కలిగించవద్దు\'ను ఆన్ లేదా ఆఫ్ చేయగలదు, అలాగే సంబంధిత సెట్టింగ్‌లను మార్చగలదు."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"ఇది మోడ్‌లను మేనేజ్ చేయగలదు, యాక్టివేట్ చేయగలదు, ఇంకా సంబంధిత సెట్టింగ్‌లను మార్చగలదు."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"మీరు <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్‌ను ఆఫ్ చేస్తే, అంతరాయం కలిగించవద్దు ఎంపిక యాక్సెస్ కూడా ఆఫ్ చేయబడవచ్చు."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"మీరు <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్‌ను ఆఫ్ చేస్తే, మోడ్‌లు కూడా ఆఫ్ అయ్యే అవకాశం ఉంది."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ఆఫ్ చేయండి"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"రద్దు చేయండి"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"రియల్-టైమ్"</string>
@@ -3712,12 +3709,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"అంతరాయం కలిగించవద్దు యాక్సెస్"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'అంతరాయం కలిగించవద్దు\' ఫీచర్‌ను అనుమతించండి"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ఇన్‌స్టాల్ చేసిన యాప్‌లేవీ అంతరాయం కలిగించవద్దు యాక్సెస్ రిక్వెస్ట్ చేయలేదు"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"మోడ్‌ల యాక్సెస్"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"మోడ్‌లకు యాక్సెస్‌ను అనుమతించండి"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"ఇన్‌స్టాల్ చేసిన యాప్‌లేవీ మోడ్‌లకు యాక్సెస్‌ను రిక్వెస్ట్ చేయలేదు"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"మీరు ఈ యాప్ నుండి నోటిఫికేషన్‌లను అనుమతించలేదు"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"మీ రిక్వెస్ట్ మేరకు ఈ పరికరంలో ఈ కేటగిరీకి చెందిన నోటిఫికేషన్‌లు కనిపించకుండా Android బ్లాక్ చేస్తోంది"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"మీ అభ్యర్ధన మేరకు Android, ఈ పరికరంలో ఈ గ్రూప్‌ యొక్క నోటిఫికేషన్‌లను కనిపించకుండా బ్లాక్ చేస్తోంది"</string>
@@ -4108,12 +4102,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"నోటిఫికేషన్ యాక్సెస్ ఆన్‌లో ఉన్నందున తప్పనిసరిగా ఇది ఆన్‌లో ఉండాలి"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"<xliff:g id="APP">%1$s</xliff:g> కోసం అంతరాయం కలిగించవద్దు ఫీచర్‌కు ఉన్న యాక్సెస్‌ను ఉపసంహరించాలా?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"ఈ యాప్ ద్వారా రూపొందించిన అన్ని అంతరాయం కలిగించవద్దు నియమాలు తీసివేయబడతాయి."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"<xliff:g id="APP">%1$s</xliff:g> కోసం మోడ్‌లకు యాక్సెస్‌ను అనుమతించాలా?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"ఈ యాప్ అంతరాయం కలిగించవద్దు అనే ఆప్షన్‌ను ఆన్/ఆఫ్ చేయగలదు, మోడ్‌లను మేనేజ్ చేయగలదు, యాక్టివేట్ చేయగలదు, ఇంకా సంబంధిత సెట్టింగ్‌లకు మార్పులు చేయగలదు."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"<xliff:g id="APP">%1$s</xliff:g> యాప్‌నకు మోడ్స్ యాక్సెస్‌ను ఉపసంహరించాలా?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"ఈ యాప్ ద్వారా క్రియేట్ చేయబడిన అన్ని మోడ్స్ తీసివేయబడతాయి."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"ఆప్టిమైజ్ చేయవద్దు"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"ఆప్టిమైజ్ చేయి"</string>
@@ -5365,8 +5356,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"ఆడియో షేరింగ్ నిలిపివేయడం జరిగింది"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"అనుకూల పరికరాన్ని (కంపాటిబుల్ డివైజ్‌ను) కనెక్ట్ చేయండి"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"ఆడియోను షేర్ చేయడానికి, ముందుగా మీ ఫోన్‌కు LE ఆడియో హెడ్‌ఫోన్స్‌ను కనెక్ట్ చేయండి"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>‌కు స్విచ్ అవ్వండి"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"LE ఆడియో స్ట్రీమ్‌కు కనెక్ట్ చేయండి"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"సమీప ఆడియో స్ట్రీమ్‌లు"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"ఆడియో స్ట్రీమ్‌లు"</string>
@@ -5411,7 +5401,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>‌తో వినడానికి ఆడియో స్ట్రీమ్ QR కోడ్‌ను స్కాన్ చేయండి"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"షేర్ చేస్తున్నప్పుడు పాస్‌వర్డ్‌ను ఎడిట్ చేయడం సాధ్యం కాదు. పాస్‌వర్డ్ మార్చడానికి, ముందుగా ఆడియో షేరింగ్‌ను ఆఫ్ చేయండి."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR కోడ్ స్కానర్"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"సహాయం కావాలా?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"సెట్టింగ్‌లలో సెర్చ్ చేయండి"</string>
 </resources>

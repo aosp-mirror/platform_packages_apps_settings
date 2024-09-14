@@ -122,11 +122,13 @@ class DeviceDetailsFragmentFormatterTest {
                 .thenReturn(
                     DeviceSettingConfigModel(
                         listOf(
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_HEADER,
-                                "bluetooth_device_header"),
-                            DeviceSettingConfigItemModel.BuiltinItem(
-                                DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, "action_buttons"),
+                                highlighted = false,
+                                preferenceKey = "bluetooth_device_header"
+                            ),
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
+                                DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, highlighted = false, preferenceKey = "action_buttons"),
                         ),
                         listOf(),
                         null))
@@ -156,7 +158,7 @@ class DeviceDetailsFragmentFormatterTest {
             `when`(repository.getDeviceSettingsConfig(cachedDevice))
                 .thenReturn(
                     DeviceSettingConfigModel(
-                        listOf(), listOf(), DeviceSettingConfigItemModel.AppProvidedItem(12345)))
+                        listOf(), listOf(), DeviceSettingConfigItemModel.AppProvidedItem(12345, false)))
             val intent = Intent().apply {
                 setAction(Intent.ACTION_VIEW)
                 setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -203,12 +205,12 @@ class DeviceDetailsFragmentFormatterTest {
                 .thenReturn(
                     DeviceSettingConfigModel(
                         listOf(
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_HEADER,
-                                "bluetooth_device_header"),
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                                highlighted = false, preferenceKey = "bluetooth_device_header"),
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_KEYBOARD_SETTINGS,
-                                "keyboard_settings"),
+                                highlighted = false, preferenceKey = "keyboard_settings"),
                         ),
                         listOf(),
                         null))
@@ -227,14 +229,16 @@ class DeviceDetailsFragmentFormatterTest {
                 .thenReturn(
                     DeviceSettingConfigModel(
                         listOf(
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_HEADER,
-                                "bluetooth_device_header"),
+                                highlighted = false,
+                                preferenceKey = "bluetooth_device_header"),
                             DeviceSettingConfigItemModel.AppProvidedItem(
-                                DeviceSettingId.DEVICE_SETTING_ID_ANC),
-                            DeviceSettingConfigItemModel.BuiltinItem(
+                                DeviceSettingId.DEVICE_SETTING_ID_ANC, highlighted = false),
+                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_KEYBOARD_SETTINGS,
-                                "keyboard_settings"),
+                                highlighted = false,
+                                preferenceKey = "keyboard_settings"),
                         ),
                         listOf(),
                         null))
