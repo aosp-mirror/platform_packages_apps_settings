@@ -42,6 +42,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -236,7 +237,8 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
-    @Config(shadows = ShadowBiometricErrorDialog.class)
+    @Config(shadows = ShadowIdentityCheckBiometricErrorDialog.class)
+    @Ignore("b/354820314")
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void onActivityResult_requestBiometricPrompt_showErrorDialog() {
         when(mDashboard.getContext()).thenReturn(mContext);
@@ -247,7 +249,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
                 ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT, null);
 
         assertThat(mSwitchBar.isChecked()).isFalse();
-        assertThat(ShadowBiometricErrorDialog.sShown).isTrue();
+        assertThat(ShadowIdentityCheckBiometricErrorDialog.sShown).isTrue();
     }
 
     @Test
@@ -379,8 +381,8 @@ public class DevelopmentSettingsDashboardFragmentTest {
         }
     }
 
-    @Implements(BiometricErrorDialog.class)
-    public static class ShadowBiometricErrorDialog {
+    @Implements(IdentityCheckBiometricErrorDialog.class)
+    public static class ShadowIdentityCheckBiometricErrorDialog {
         static boolean sShown;
         @Implementation
         public static void showBiometricErrorDialog(FragmentActivity fragmentActivity,

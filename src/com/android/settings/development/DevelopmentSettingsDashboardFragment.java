@@ -57,6 +57,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.development.autofill.AutofillCategoryController;
@@ -378,8 +379,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                             userId, false /* hideBackground */);
                 } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                     mSwitchBar.setChecked(false);
-                    BiometricErrorDialog.showBiometricErrorDialog(
-                            getActivity(), biometricAuthStatus);
+                    IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                            biometricAuthStatus, false /* twoFactorAuthentication */);
                 } else {
                     //Reset biometrics once enable dialog is shown
                     mIsBiometricsAuthenticated = false;
@@ -564,8 +565,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 mSwitchBar.setChecked(true);
             } else if (resultCode
                     == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
-               BiometricErrorDialog.showBiometricErrorDialog(getActivity(),
-                       Utils.BiometricStatus.LOCKOUT);
+                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                        Utils.BiometricStatus.LOCKOUT, false /* twoFactorAuthentication */);
             }
         }
         for (AbstractPreferenceController controller : mPreferenceControllers) {

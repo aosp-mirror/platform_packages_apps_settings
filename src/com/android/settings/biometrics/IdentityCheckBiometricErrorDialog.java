@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development;
+package com.android.settings.biometrics;
 
 import android.annotation.NonNull;
 import android.annotation.Nullable;
@@ -45,10 +45,12 @@ import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /** Initializes and shows biometric error dialogs related to identity check. */
-public class BiometricErrorDialog extends InstrumentedDialogFragment {
+public class IdentityCheckBiometricErrorDialog extends InstrumentedDialogFragment {
     private static final String TAG = "BiometricErrorDialog";
 
     private static final String KEY_ERROR_CODE = "key_error_code";
+    private static final String KEY_TWO_FACTOR_AUTHENTICATION = "key_two_factor_authentication";
+
     private String mActionIdentityCheckSettings = Settings.ACTION_SETTINGS;
     @Nullable private BroadcastReceiver mBroadcastReceiver;
 
@@ -62,17 +64,19 @@ public class BiometricErrorDialog extends InstrumentedDialogFragment {
                 Utils.BiometricStatus.LOCKOUT.name());
         final View customView = inflater.inflate(R.layout.biometric_lockout_error_dialog,
                 null);
+        final boolean twoFactorAuthentication = getArguments().getBoolean(
+                KEY_TWO_FACTOR_AUTHENTICATION);
         final String identityCheckSettingsAction = getActivity().getString(
                 R.string.identity_check_settings_action);
         mActionIdentityCheckSettings = identityCheckSettingsAction.isEmpty()
                 ? mActionIdentityCheckSettings : identityCheckSettingsAction;
-        Log.d(TAG, mActionIdentityCheckSettings);
         setTitle(customView, isLockoutError);
-        setBody(customView, isLockoutError);
+        setBody(customView, isLockoutError, twoFactorAuthentication);
         alertDialogBuilder.setView(customView);
-        setPositiveButton(alertDialogBuilder, isLockoutError);
-        setNegativeButton(alertDialogBuilder, isLockoutError);
-
+        setPositiveButton(alertDialogBuilder, isLockoutError, twoFactorAuthentication);
+        if (!isLockoutError || !twoFactorAuthentication) {
+            setNegativeButton(alertDialogBuilder, isLockoutError);
+        }
         if (isLockoutError) {
             mBroadcastReceiver = new BroadcastReceiver() {
                 @Override
@@ -103,15 +107,16 @@ public class BiometricErrorDialog extends InstrumentedDialogFragment {
      * @param fragmentActivity calling activity
      * @param errorCode refers to the biometric error
      */
-    public static BiometricErrorDialog showBiometricErrorDialog(FragmentActivity fragmentActivity,
-            Utils.BiometricStatus errorCode) {
-        final BiometricErrorDialog biometricErrorDialog = new BiometricErrorDialog();
+    public static void showBiometricErrorDialog(FragmentActivity fragmentActivity,
+            Utils.BiometricStatus errorCode, boolean twoFactorAuthentication) {
+        final IdentityCheckBiometricErrorDialog identityCheckBiometricErrorDialog =
+                new IdentityCheckBiometricErrorDialog();
         final Bundle args = new Bundle();
         args.putCharSequence(KEY_ERROR_CODE, errorCode.name());
-        biometricErrorDialog.setArguments(args);
-        biometricErrorDialog.show(fragmentActivity.getSupportFragmentManager(),
-                BiometricErrorDialog.class.getName());
-        return biometricErrorDialog;
+        args.putBoolean(KEY_TWO_FACTOR_AUTHENTICATION, twoFactorAuthentication);
+        identityCheckBiometricErrorDialog.setArguments(args);
+        identityCheckBiometricErrorDialog.show(fragmentActivity.getSupportFragmentManager(),
+                IdentityCheckBiometricErrorDialog.class.getName());
     }
 
     private void setTitle(View view, boolean lockout) {
@@ -123,12 +128,17 @@ public class BiometricErrorDialog extends InstrumentedDialogFragment {
         }
     }
 
-    private void setBody(View view, boolean lockout) {
+    private void setBody(View view, boolean lockout, boolean twoFactorAuthentication) {
         final TextView textView1 = view.findViewById(R.id.description_1);
         final TextView textView2 = view.findViewById(R.id.description_2);
 
         if (lockout) {
-            textView1.setText(R.string.identity_check_lockout_error_description_1);
+            if (twoFactorAuthentication) {
+                textView1.setText(
+                        R.string.identity_check_lockout_error_two_factor_auth_description_1);
+            } else {
+                textView1.setText(R.string.identity_check_lockout_error_description_1);
+            }
             textView2.setText(getClickableDescriptionForLockoutError());
             textView2.setMovementMethod(LinkMovementMethod.getInstance());
         } else {
@@ -167,15 +177,22 @@ public class BiometricErrorDialog extends InstrumentedDialogFragment {
         return spannableString;
     }
 
-    private void setPositiveButton(AlertDialog.Builder alertDialogBuilder, boolean lockout) {
+    private void setPositiveButton(AlertDialog.Builder alertDialogBuilder, boolean lockout,
+            boolean twoFactorAuthentication) {
         if (lockout) {
-            DevicePolicyManager devicePolicyManager = (DevicePolicyManager)
-                    getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
-            alertDialogBuilder.setPositiveButton(R.string.identity_check_lockout_error_lock_screen,
-                    (dialog, which) -> {
-                        dialog.dismiss();
-                        devicePolicyManager.lockNow();
-                    });
+            if (twoFactorAuthentication) {
+                alertDialogBuilder.setPositiveButton((R.string.okay),
+                        (dialog, which) -> dialog.dismiss());
+            } else {
+                DevicePolicyManager devicePolicyManager = (DevicePolicyManager)
+                        getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
+                alertDialogBuilder.setPositiveButton(
+                        R.string.identity_check_lockout_error_lock_screen,
+                        (dialog, which) -> {
+                            dialog.dismiss();
+                            devicePolicyManager.lockNow();
+                        });
+            }
         } else {
             alertDialogBuilder.setPositiveButton(R.string.identity_check_biometric_error_ok,
                     (dialog, which) -> dialog.dismiss());

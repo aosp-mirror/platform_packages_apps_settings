@@ -942,8 +942,10 @@
     <string name="go_to_settings">Go to Settings</string>
     <!-- Dialog title when identity check auth is requested but biometrics is in lockout state [CHAR LIMIT=NONE] -->
     <string name="identity_check_lockout_error_title">Identity Check is on and can’t verify it’s you</string>
-    <!-- Dialog title when identity check auth is requested but biometric hardware has an error. [CHAR LIMIT=NONE] -->
+    <!-- Dialog message when identity check auth is requested but biometrics is in lockout state. [CHAR LIMIT=NONE] -->
     <string name="identity_check_lockout_error_description_1">Biometrics failed too many times. Lock and unlock your device to retry.</string>
+    <!-- Dialog message when identity check auth is requested but biometrics is in lockout state and there is a two factor authentication. [CHAR LIMIT=NONE] -->
+    <string name="identity_check_lockout_error_two_factor_auth_description_1">Biometrics failed too many times. Try again.</string>
     <!-- Dialog message when identity check auth is requested but biometrics is in lockout state. "Go to Settings" launches theft protection settings, in case user wishes to disable the feature. [CHAR LIMIT=NONE] -->
     <string name="identity_check_lockout_error_description_2">You can manage Identity Check in theft protection settings. Go to Settings</string>
     <!-- Dialog title when identity check auth is requested but biometric hardware has an error. [CHAR LIMIT=100] -->
