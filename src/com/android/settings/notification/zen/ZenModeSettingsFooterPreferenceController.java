@@ -153,7 +153,7 @@ public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePr
 
         // DND turned on by an automatic rule
         for (ZenModeConfig.ZenRule automaticRule : config.automaticRules.values()) {
-            if (automaticRule.isAutomaticActive()) {
+            if (automaticRule.isActive()) {
                 // set footer if 3rd party rule
                 if (!mZenModeConfigWrapper.isTimeRule(automaticRule.conditionId)) {
                     return mContext.getString(R.string.zen_mode_settings_dnd_automatic_rule,
@@ -180,7 +180,7 @@ public class ZenModeSettingsFooterPreferenceController extends AbstractZenModePr
         }
 
         for (ZenModeConfig.ZenRule automaticRule : config.automaticRules.values()) {
-            if (automaticRule.isAutomaticActive()) {
+            if (automaticRule.isActive()) {
                 zenRules.add(automaticRule);
             }
         }
