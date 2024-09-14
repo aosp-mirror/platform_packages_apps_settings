@@ -7867,7 +7867,9 @@
     <string name="keywords_keyboard_vibration">keyboard, haptics, vibrate,</string>
 
     <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="sound_dashboard_summary">Volume, vibration, Do Not Disturb</string>
+    <string name="sound_dashboard_summary">Volume and vibration</string>
+    <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="sound_dashboard_summary_with_dnd">Volume, vibration, Do Not Disturb</string>
 
     <!-- Sound: Title for the option managing media volume. [CHAR LIMIT=30] -->
     <string name="media_volume_option_title">Media volume</string>
@@ -13366,9 +13368,9 @@
     <!-- Summary of the Live Caption enabled state. -->
     <string name="live_caption_enabled">On</string>
     <!-- State description for the Audio Balance seek bar, with left reported before right. -->
-    <string name="audio_seek_bar_state_left_first">Audio %1$d%% left, %2$d%% right</string>
+    <string name="audio_seek_bar_state_left_first">Audio <xliff:g id="percent_left">%1$s</xliff:g> left, <xliff:g id="percent_right">%2$s</xliff:g> right</string>
     <!-- State description for the Audio Balance seek bar, with right reported before left. -->
-    <string name="audio_seek_bar_state_right_first">Audio %1$d%% right, %2$d%% left</string>
+    <string name="audio_seek_bar_state_right_first">Audio <xliff:g id="percent_right">%1$s</xliff:g> right, <xliff:g id="percent_left">%2$s</xliff:g> left</string>
 
     <!--  Warning text about the visibility of device name. [CHAR LIMIT=NONE] -->
     <string name="about_phone_device_name_warning">Your device name is visible to apps you installed. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot.</string>
@@ -13577,6 +13579,8 @@
     <string name="audio_streams_dialog_cannot_play">Can\u0027t play this audio stream on <xliff:g example="LE headset" id="device_name">%1$s</xliff:g>.</string>
     <!-- The preference summary when add source succeed [CHAR LIMIT=NONE] -->
     <string name="audio_streams_listening_now">Listening now</string>
+    <!-- The preference summary when source is present on sinks [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_present_now">Paused by host</string>
     <!-- Le audio streams service notification leave broadcast text [CHAR LIMIT=NONE] -->
     <string name="audio_streams_media_service_notification_leave_broadcast_text">Stop listening</string>
     <!-- Le audio streams no le device dialog title [CHAR LIMIT=NONE] -->

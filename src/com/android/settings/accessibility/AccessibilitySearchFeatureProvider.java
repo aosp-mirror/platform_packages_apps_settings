@@ -16,7 +16,11 @@
 
 package com.android.settings.accessibility;
 
+import android.content.ComponentName;
 import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settingslib.search.SearchIndexableRaw;
 
@@ -28,10 +32,22 @@ import java.util.List;
 public interface AccessibilitySearchFeatureProvider {
 
     /**
-     * Returns a list of raw data for indexing. See {@link SearchIndexableRaw}
+     * Returns accessibility features to be searched where the accessibility features are always on
+     * the device and their feature names won't change.
      *
      * @param context a valid context {@link Context} instance
-     * @return a list of {@link SearchIndexableRaw} references. Can be null.
+     * @return a list of {@link SearchIndexableRaw} references
      */
+    @Nullable
     List<SearchIndexableRaw> getSearchIndexableRawData(Context context);
+
+    /**
+     * Returns synonyms of the Accessibility component that is used for search.
+     *
+     * @param context the context that is used for grabbing resources
+     * @param componentName the ComponentName of the accessibility feature
+     * @return a comma separated synonyms e.g. "wifi, wi-fi, network connection"
+     */
+    @NonNull
+    String getSynonymsForComponent(@NonNull Context context, @NonNull ComponentName componentName);
 }
