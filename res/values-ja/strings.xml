@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Bluetooth を ON にすると、付近の他の Bluetooth デバイスと通信できます。\n\nBluetooth が OFF の場合でもアプリやサービスは付近のデバイスをいつでもスキャンできます。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。この設定は Bluetooth スキャンの設定で変更できます。"</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Bluetooth を ON にすると、近くにある他の Bluetooth デバイスと通信できます。Quick Share や「デバイスを探す」などの機能は Bluetooth を使用します。\n\nBluetooth が OFF でも、アプリやサービスはいつでも付近のデバイスをスキャンできます。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。この設定は Bluetooth スキャンの設定で変更できます。"</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"変更"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>、未接続"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"セキュリティ上の理由から、このデバイスとのペア設定を解除してからもう一度ペア設定してください"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"このデバイスとのペア設定を解除"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"キャンセル"</string>
     <string name="device_details_title" msgid="1155622417516195481">"デバイスの詳細"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"キーボードの設定"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"その他の設定"</string>
@@ -1991,10 +1995,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"リセット"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"修飾キーを選択"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> の新しいキーを選択してください"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"物理キーボードのユーザー補助"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"固定キー、バウンスキー、マウスキー"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"レイアウト: <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"デフォルト"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"自動: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2206,11 +2208,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"詳細設定"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"[ユーザー補助機能] ボタンが [<xliff:g id="SERVICE">%1$s</xliff:g>] に設定されています。拡大を使用するには、[ユーザー補助機能] ボタンを押し続けて [拡大] を選択してください。"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"ユーザー補助操作は「<xliff:g id="SERVICE">%1$s</xliff:g>」に設定されています。拡大を使用するには、2 本の指で画面の下から上にスワイプして長押しし、拡大を選択してください。"</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"音量ボタンのショートカット"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"ショートカットの設定"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"ロック画面での音量ボタンのショートカット"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"有効にすると、音量大と音量小の両方のボタンを数秒ほど長押しすることで、ロック画面でもショートカットを ON にできます。"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"ユーザー補助機能ボタン"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"ユーザー補助機能ボタンと操作"</string>
@@ -2553,7 +2553,7 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"解除"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"キャンセル"</string>
     <string name="battery_tip_charge_to_full_button" msgid="9172893341338732733">"オーバーライド"</string>
-    <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"充電用アクセサリを確認してください"</string>
+    <string name="battery_tip_incompatible_charging_title" msgid="1567827436103364999">"充電用アクセサリーを確認してください"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"互換性のない充電方法の詳細"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"バッテリー マネージャ"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"アプリを自動的に管理"</string>
@@ -3351,8 +3351,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"OFF"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{なし}=1{1 件のスケジュールが有効}other{# 件のスケジュールが有効}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"サイレント モード"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"モード"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"睡眠、作業、運転など、さまざまな状況において妨げとなるものを防いで集中できるようにします。"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"独自のモードを作成する"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"大切な人やアプリからの通知のみ受け取ります"</string>
@@ -3647,11 +3646,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"メッセージに返信できるほか、通知をスヌーズ、非表示にしたり、電話に出たりするなど、通知内のボタン操作を実行することもできます。"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"設定の変更"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"サイレント モード設定を切り替えたり、関連する設定を変更したりできます。"</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"モードの管理や有効化、関連する設定の変更を行えます。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> の通知アクセスを OFF にすると、サイレント モードの利用権限も OFF になります。"</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> の通知へのアクセスを OFF にすると、モードへのアクセスも OFF になります。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"OFF にする"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"キャンセル"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"リアルタイム"</string>
@@ -3712,12 +3709,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"サイレント モードの利用"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"サイレント モードの利用を許可"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"サイレント モードの利用をリクエストしたインストール済みアプリはありません"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"モードへのアクセス"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"モードへのアクセスを許可"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"モードへのアクセスをリクエストしたインストール済みアプリはありません"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"このアプリからの通知を許可していません"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"選択された設定に基づき、このカテゴリの通知はこのデバイスには表示されません"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"リクエストに従い、このグループの通知はこのデバイスには表示されません"</string>
@@ -4108,12 +4102,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"通知アクセスが ON になっているため ON のままにしておく必要があります"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"<xliff:g id="APP">%1$s</xliff:g> によるサイレント モードの利用権限を取り消しますか？"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"このアプリで作成したすべてのサイレント モード ルールは削除されます。"</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"<xliff:g id="APP">%1$s</xliff:g> によるモードへのアクセスを許可しますか？"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"アプリはサイレント モードの ON / OFF を切り替えたり、モードの管理や有効化を行ったり、関連する設定を変更したりできるようになります。"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"<xliff:g id="APP">%1$s</xliff:g> に対するモードのアクセス権限を取り消しますか？"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"このアプリで作成したすべてのモードが削除されます。"</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"最適化しない"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"最適化する"</string>
@@ -5365,8 +5356,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"音声の共有を停止済み"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"対応デバイスの接続"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"音声の共有を開始するには、まず LE Audio 対応のヘッドフォンをスマートフォンに接続します"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>に切り替える"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"LE Audio ストリームへの接続"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"付近の音声ストリーム"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"音声ストリーム"</string>
@@ -5411,7 +5401,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>で聴くには、音声ストリームの QR コードをスキャンします"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"共有中はパスワードを編集できません。パスワードを変更するには、まず音声の共有を OFF にしてください。"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR コードスキャナ"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"ご不明な点がある場合"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"検索設定"</string>
 </resources>

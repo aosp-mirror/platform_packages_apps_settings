@@ -23,8 +23,6 @@ import android.util.AttributeSet;
 import com.android.settings.R;
 import com.android.settingslib.PrimarySwitchPreference;
 
-import java.time.LocalTime;
-
 /**
  * component for the display settings dark ui summary
  */
@@ -71,36 +69,8 @@ public class DarkModePreference extends PrimarySwitchPreference {
                     ? R.string.dark_ui_mode_disabled_summary_dark_theme_on
                     : R.string.dark_ui_mode_disabled_summary_dark_theme_off;
             setSummary(getContext().getString(stringId));
-            return;
-        }
-        final int mode = mUiModeManager.getNightMode();
-        String summary;
-
-        if (mode == UiModeManager.MODE_NIGHT_AUTO) {
-            summary = getContext().getString(active
-                    ? R.string.dark_ui_summary_on_auto_mode_auto
-                    : R.string.dark_ui_summary_off_auto_mode_auto);
-        } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
-            if (mUiModeManager.getNightModeCustomType()
-                    == UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME) {
-                summary = getContext().getString(active
-                        ? R.string.dark_ui_summary_on_auto_mode_custom_bedtime
-                        : R.string.dark_ui_summary_off_auto_mode_custom_bedtime);
-            } else {
-                final LocalTime time = active
-                        ? mUiModeManager.getCustomNightModeEnd()
-                        : mUiModeManager.getCustomNightModeStart();
-                final String timeStr = mFormat.of(time);
-                summary = getContext().getString(active
-                        ? R.string.dark_ui_summary_on_auto_mode_custom
-                        : R.string.dark_ui_summary_off_auto_mode_custom, timeStr);
-            }
         } else {
-            summary = getContext().getString(active
-                    ? R.string.dark_ui_summary_on_auto_mode_never
-                    : R.string.dark_ui_summary_off_auto_mode_never);
+            setSummary(AutoDarkTheme.getStatus(getContext(), active));
         }
-
-        setSummary(summary);
     }
 }

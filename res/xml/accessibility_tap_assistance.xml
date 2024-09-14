@@ -37,12 +37,4 @@
         android:title="@string/accessibility_setting_item_control_timeout_title"
         settings:controller="com.android.settings.accessibility.AccessibilityTimeoutPreferenceController"
         settings:keywords="@string/keywords_accessibility_timeout"/>
-
-    <Preference
-        android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
-        android:key="autoclick_preference"
-        android:persistent="false"
-        android:title="@string/accessibility_autoclick_preference_title"
-        settings:keywords="@string/keywords_auto_click"
-        settings:controller="com.android.settings.accessibility.AutoclickPreferenceController"/>
 </PreferenceScreen>

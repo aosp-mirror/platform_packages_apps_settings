@@ -15,6 +15,8 @@
  */
 package com.android.settings.dashboard;
 
+import static com.android.settingslib.flags.Flags.settingsCatalyst;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
@@ -97,30 +99,34 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 R.array.config_suppress_injected_tile_keys));
         mDashboardFeatureProvider =
                 FeatureFactory.getFeatureFactory().getDashboardFeatureProvider();
-        // Load preference controllers from code
-        final List<AbstractPreferenceController> controllersFromCode =
-                createPreferenceControllers(context);
-        // Load preference controllers from xml definition
-        final List<BasePreferenceController> controllersFromXml = PreferenceControllerListHelper
-                .getPreferenceControllersFromXml(context, getPreferenceScreenResId());
-        // Filter xml-based controllers in case a similar controller is created from code already.
-        final List<BasePreferenceController> uniqueControllerFromXml =
-                PreferenceControllerListHelper.filterControllers(
-                        controllersFromXml, controllersFromCode);
 
-        // Add unique controllers to list.
-        if (controllersFromCode != null) {
-            mControllers.addAll(controllersFromCode);
-        }
-        mControllers.addAll(uniqueControllerFromXml);
+        if (!isCatalystEnabled()) {
+            // Load preference controllers from code
+            final List<AbstractPreferenceController> controllersFromCode =
+                    createPreferenceControllers(context);
+            // Load preference controllers from xml definition
+            final List<BasePreferenceController> controllersFromXml = PreferenceControllerListHelper
+                    .getPreferenceControllersFromXml(context, getPreferenceScreenResId());
+            // Filter xml-based controllers in case a similar controller is created from code
+            // already.
+            final List<BasePreferenceController> uniqueControllerFromXml =
+                    PreferenceControllerListHelper.filterControllers(
+                            controllersFromXml, controllersFromCode);
 
-        // And wire up with lifecycle.
-        final Lifecycle lifecycle = getSettingsLifecycle();
-        uniqueControllerFromXml.forEach(controller -> {
-            if (controller instanceof LifecycleObserver) {
-                lifecycle.addObserver((LifecycleObserver) controller);
+            // Add unique controllers to list.
+            if (controllersFromCode != null) {
+                mControllers.addAll(controllersFromCode);
             }
-        });
+            mControllers.addAll(uniqueControllerFromXml);
+
+            // And wire up with lifecycle.
+            final Lifecycle lifecycle = getSettingsLifecycle();
+            uniqueControllerFromXml.forEach(controller -> {
+                if (controller instanceof LifecycleObserver) {
+                    lifecycle.addObserver((LifecycleObserver) controller);
+                }
+            });
+        }
 
         // Set metrics category for BasePreferenceController.
         final int metricCategory = getMetricsCategory();
@@ -273,6 +279,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
+    protected final int getPreferenceScreenResId(@NonNull Context context) {
+        return getPreferenceScreenResId();
+    }
+
+    @Override
     protected abstract int getPreferenceScreenResId();
 
     @Override
@@ -364,10 +375,26 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         if (resId <= 0) {
             return;
         }
-        addPreferencesFromResource(resId);
-        final PreferenceScreen screen = getPreferenceScreen();
+        PreferenceScreen screen;
+        if (isCatalystEnabled()) {
+            screen = createPreferenceScreen();
+            setPreferenceScreen(screen);
+            requireActivity().setTitle(screen.getTitle());
+        } else {
+            addPreferencesFromResource(resId);
+            screen = getPreferenceScreen();
+        }
         screen.setOnExpandButtonClickListener(this);
         displayResourceTilesToScreen(screen);
+    }
+
+    /** Returns if catalyst is enabled on current screen. */
+    protected final boolean isCatalystEnabled() {
+        if (!settingsCatalyst()) {
+            return false;
+        }
+        Context context = getContext();
+        return context != null ? getPreferenceScreenCreator(context) != null : false;
     }
 
     /**

@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
@@ -93,6 +94,11 @@ public class AccessibilityServicePreference extends RestrictedPreference {
                             + "componentName: " + mComponentName);
         }
         super.performClick();
+    }
+
+    @NonNull
+    public ComponentName getComponentName() {
+        return mComponentName;
     }
 
     private Drawable getA11yServiceIcon() {

@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Apabila Bluetooth dihidupkan, peranti anda dapat berkomunikasi dengan peranti Bluetooth lain yang berada berdekatan.\n\nUntuk meningkatkan pengalaman peranti, apl dan perkhidmatan masih dapat melakukan pengimbasan untuk mengesan peranti berdekatan pada bila-bila masa, meskipun apabila Bluetooth dimatikan. Tetapan ini boleh digunakan, contohnya, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar tetapan ini dalam tetapan pengimbasan Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Apabila Bluetooth dihidupkan, peranti anda boleh berkomunikasi dengan peranti Bluetooth lain yang berdekatan. Ciri seperti Quick Share dan Find My Device menggunakan Bluetooth.\n\nApl dan perkhidmatan masih boleh mengimbas peranti berdekatan pada bila-bila masa walaupun semasa Bluetooth dimatikan. Ciri ini boleh digunakan, sebagai contoh, untuk meningkatkan ciri dan perkhidmatan berasaskan lokasi. Anda boleh menukar ciri ini dalam tetapan pengimbasan Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Tukar"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> tidak disambungkan"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Untuk keselamatan anda, lupakan peranti ini dan buat penggandingan sekali lagi"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Lupakan peranti"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Batal"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Butiran peranti"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tetapan papan kekunci"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Lagi tetapan"</string>
@@ -1991,10 +1995,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Tetapkan semula"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Pilih kunci pengubah suai"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Pilih kunci baharu untuk <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Kebolehaksesan papan kekunci fizikal"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Kekunci lekit, Kekunci lantun, Kekunci tetikus"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Reka letak <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Lalai"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatik: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2206,11 +2208,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Terperinci"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Butang Kebolehaksesan ditetapkan kepada <xliff:g id="SERVICE">%1$s</xliff:g>. Untuk menggunakan pembesaran, sentuh &amp; tahan butang Kebolehaksesan, kemudian pilih pembesaran."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Gerak isyarat kebolehaksesan ditetapkan pada <xliff:g id="SERVICE">%1$s</xliff:g>. Untuk menggunakan pembesaran, leret ke atas menggunakan dua jari dari bahagian bawah skrin dan tahan. Kemudian, pilih pembesaran."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Pintasan kekunci kelantangan"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Tetapan pintasan"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Pintasan kekunci kelantangan daripada skrin kunci"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Benarkan pintasan ciri dihidupkan daripada skrin kunci. Tekan kedua-dua kekunci kelantangan selama beberapa saat."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Butang kebolehaksesan"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Butang kebolehaksesan &amp; gerak isyarat"</string>
@@ -4104,7 +4104,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Semua peraturan Jangan Ganggu yang dibuat oleh apl ini akan dialih keluar."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Benarkan akses kepada Mod untuk <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Apl ini akan dapat menghidupkan/mematikan Jangan Ganggu, mengurus dan mengaktifkan Mod dan membuat perubahan pada tetapan yang berkaitan."</string>
-    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="6288548508466545492">"Batalkan akses Mod untuk <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Batalkan akses kepada Mod untuk <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Semua mod yang dibuat oleh apl ini akan dialih keluar."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Jangan optimumkan"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimumkan"</string>
@@ -5356,8 +5356,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Perkongsian audio dihentikan"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Sambungkan peranti yang serasi"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Untuk mula berkongsi audio, sambungkan fon kepala LE Audio pada telefon anda dahulu"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Beralih kepada <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Sambung kepada strim LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Strim audio berdekatan"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Strim audio"</string>
@@ -5402,7 +5401,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Imbas kod QR strim audio untuk mendengar dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Tidak dapat mengedit kata laluan semasa perkongsian. Untuk mengubah kata laluan, matikan perkongsian audio dahulu."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Pengimbas kod QR"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Perlukan bantuan?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Tetapan Carian"</string>
 </resources>
