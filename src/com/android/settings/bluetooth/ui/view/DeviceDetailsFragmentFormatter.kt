@@ -20,12 +20,23 @@ import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.media.AudioManager
 import android.os.Bundle
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -69,6 +80,9 @@ interface DeviceDetailsFragmentFormatter {
     fun getVisiblePreferenceKeys(fragmentType: FragmentTypeModel): List<String>?
 
     /** Updates device details fragment layout. */
+    fun getInvisibleBluetoothProfiles(fragmentType: FragmentTypeModel): List<String>?
+
+    /** Updates device details fragment layout. */
     fun updateLayout(fragmentType: FragmentTypeModel)
 
     /** Gets the menu items of the fragment. */
@@ -87,10 +101,16 @@ class DeviceDetailsFragmentFormatterImpl(
 ) : DeviceDetailsFragmentFormatter {
     private val repository =
         featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
-            context, bluetoothAdapter, fragment.lifecycleScope)
+            context,
+            bluetoothAdapter,
+            fragment.lifecycleScope,
+        )
     private val spatialAudioInteractor =
         featureFactory.bluetoothFeatureProvider.getSpatialAudioInteractor(
-            context, context.getSystemService(AudioManager::class.java), fragment.lifecycleScope)
+            context,
+            context.getSystemService(AudioManager::class.java),
+            fragment.lifecycleScope,
+        )
     private val viewModel: BluetoothDeviceDetailsViewModel =
         ViewModelProvider(
                 fragment,
@@ -100,7 +120,8 @@ class DeviceDetailsFragmentFormatterImpl(
                     spatialAudioInteractor,
                     cachedDevice,
                     backgroundCoroutineContext,
-                ))
+                ),
+            )
             .get(BluetoothDeviceDetailsViewModel::class.java)
 
     override fun getVisiblePreferenceKeys(fragmentType: FragmentTypeModel): List<String>? =
@@ -108,13 +129,23 @@ class DeviceDetailsFragmentFormatterImpl(
             viewModel
                 .getItems(fragmentType)
                 ?.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem>()
-                ?.mapNotNull { it.preferenceKey }
+                ?.map { it.preferenceKey }
+        }
+
+    override fun getInvisibleBluetoothProfiles(fragmentType: FragmentTypeModel): List<String>? =
+        runBlocking {
+            viewModel
+                .getItems(fragmentType)
+                ?.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem.BluetoothProfilesItem>()
+                ?.first()
+                ?.invisibleProfiles
         }
 
     /** Updates bluetooth device details fragment layout. */
     override fun updateLayout(fragmentType: FragmentTypeModel) = runBlocking {
         val items = viewModel.getItems(fragmentType) ?: return@runBlocking
         val layout = viewModel.getLayout(fragmentType) ?: return@runBlocking
+
         val prefKeyToSettingId =
             items
                 .filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem>()
@@ -131,7 +162,8 @@ class DeviceDetailsFragmentFormatterImpl(
             val settingId = items[row].settingId
             if (settingIdToXmlPreferences.containsKey(settingId)) {
                 fragment.preferenceScreen.addPreference(
-                    settingIdToXmlPreferences[settingId]!!.apply { order = row })
+                    settingIdToXmlPreferences[settingId]!!.apply { order = row }
+                )
             } else {
                 val pref =
                     ComposePreference(context)
@@ -156,7 +188,8 @@ class DeviceDetailsFragmentFormatterImpl(
             emitAll(
                 viewModel.getDeviceSetting(cachedDevice, item.settingId).map {
                     it as? DeviceSettingPreferenceModel.HelpPreference
-                })
+                }
+            )
         } ?: emit(null)
     }
 
@@ -164,22 +197,56 @@ class DeviceDetailsFragmentFormatterImpl(
     private fun buildPreference(layout: DeviceSettingLayout, row: Int) {
         val contents by
             remember(row) {
-                    layout.rows[row].settingIds.flatMapLatest { settingIds ->
-                        if (settingIds.isEmpty()) {
+                    layout.rows[row].columns.flatMapLatest { columns ->
+                        if (columns.isEmpty()) {
                             flowOf(emptyList<DeviceSettingPreferenceModel>())
                         } else {
                             combine(
-                                settingIds.map { settingId ->
-                                    viewModel.getDeviceSetting(cachedDevice, settingId)
-                                }) {
-                                    it.toList()
+                                columns.map { column ->
+                                    viewModel.getDeviceSetting(cachedDevice, column.settingId)
                                 }
+                            ) {
+                                it.toList()
+                            }
                         }
                     }
                 }
                 .collectAsStateWithLifecycle(initialValue = listOf())
 
+        val highlighted by
+            remember(row) {
+                    layout.rows[row].columns.map { columns -> columns.any { it.highlighted } }
+                }
+                .collectAsStateWithLifecycle(initialValue = false)
+
         val settings = contents
+        AnimatedVisibility(
+            visible = settings.isNotEmpty(),
+            enter = expandVertically(expandFrom = Alignment.Top),
+            exit = shrinkVertically(shrinkTowards = Alignment.Top),
+        ) {
+            Box {
+                Box(
+                    modifier =
+                    Modifier.matchParentSize()
+                        .padding(16.dp, 0.dp, 8.dp, 0.dp)
+                        .background(
+                            color =
+                            if (highlighted) {
+                                MaterialTheme.colorScheme.primaryContainer
+                            } else {
+                                Color.Transparent
+                            },
+                            shape = RoundedCornerShape(28.dp),
+                        ),
+                ) {}
+                buildPreferences(settings)
+            }
+        }
+    }
+
+    @Composable
+    fun buildPreferences(settings: List<DeviceSettingPreferenceModel?>) {
         when (settings.size) {
             0 -> {}
             1 -> {
@@ -204,11 +271,18 @@ class DeviceDetailsFragmentFormatterImpl(
                 }
             }
             else -> {
-                if (!settings.all { it is DeviceSettingPreferenceModel.MultiTogglePreference }) {
+                if (
+                    !settings.all {
+                        it is DeviceSettingPreferenceModel.MultiTogglePreference
+                    }
+                ) {
                     return
                 }
                 buildMultiTogglePreference(
-                    settings.filterIsInstance<DeviceSettingPreferenceModel.MultiTogglePreference>())
+                    settings.filterIsInstance<
+                            DeviceSettingPreferenceModel.MultiTogglePreference
+                            >()
+                )
             }
         }
     }
@@ -230,11 +304,19 @@ class DeviceDetailsFragmentFormatterImpl(
                 override val onCheckedChange = { newChecked: Boolean ->
                     model.onCheckedChange(newChecked)
                 }
-                override val icon = @Composable { deviceSettingIcon(model.icon) }
+                override val icon: (@Composable () -> Unit)?
+                    get() {
+                        if (model.icon == null) {
+                            return null
+                        }
+                        return { deviceSettingIcon(model.icon) }
+                    }
             }
         if (model.onPrimaryClick != null) {
             TwoTargetSwitchPreference(
-                switchPrefModel, primaryOnClick = model.onPrimaryClick::invoke)
+                switchPrefModel,
+                primaryOnClick = model.onPrimaryClick::invoke,
+            )
         } else {
             SwitchPreference(switchPrefModel)
         }
@@ -250,8 +332,15 @@ class DeviceDetailsFragmentFormatterImpl(
                     model.onClick?.invoke()
                     Unit
                 }
-                override val icon = @Composable { deviceSettingIcon(model.icon) }
-            })
+                override val icon: (@Composable () -> Unit)?
+                    get() {
+                        if (model.icon == null) {
+                            return null
+                        }
+                        return { deviceSettingIcon(model.icon) }
+                    }
+            }
+        )
     }
 
     @Composable
@@ -268,11 +357,13 @@ class DeviceDetailsFragmentFormatterImpl(
                         .setDestination(DeviceDetailsMoreSettingsFragment::class.java.name)
                         .setSourceMetricsCategory(fragment.getMetricsCategory())
                         .setArguments(
-                            Bundle().apply { putString(KEY_DEVICE_ADDRESS, cachedDevice.address) })
+                            Bundle().apply { putString(KEY_DEVICE_ADDRESS, cachedDevice.address) }
+                        )
                         .launch()
                 }
                 override val icon = @Composable { deviceSettingIcon(null) }
-            })
+            }
+        )
     }
 
     @Composable

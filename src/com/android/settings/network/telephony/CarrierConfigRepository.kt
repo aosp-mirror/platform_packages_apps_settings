@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import android.os.Build
 import android.os.PersistableBundle
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
@@ -35,7 +36,8 @@ class CarrierConfigRepository(private val context: Context) {
     private enum class KeyType {
         BOOLEAN,
         INT,
-        STRING
+        INT_ARRAY,
+        STRING,
     }
 
     interface CarrierConfigAccessor {
@@ -43,17 +45,20 @@ class CarrierConfigRepository(private val context: Context) {
 
         fun getInt(key: String): Int
 
+        fun getIntArray(key: String): IntArray?
+
         fun getString(key: String): String?
     }
 
     private class Accessor(private val cache: ConfigCache) : CarrierConfigAccessor {
         private val keysToRetrieve = mutableMapOf<String, KeyType>()
+        private var isKeysToRetrieveFrozen = false
 
         override fun getBoolean(key: String): Boolean {
             checkBooleanKey(key)
             val value = cache[key]
             return if (value == null) {
-                keysToRetrieve += key to KeyType.BOOLEAN
+                addKeyToRetrieve(key, KeyType.BOOLEAN)
                 DefaultConfig.getBoolean(key)
             } else {
                 check(value is BooleanConfigValue) { "Boolean value type wrong" }
@@ -65,10 +70,22 @@ class CarrierConfigRepository(private val context: Context) {
             check(key.endsWith("_int")) { "Int key should ends with _int" }
             val value = cache[key]
             return if (value == null) {
-                keysToRetrieve += key to KeyType.INT
+                addKeyToRetrieve(key, KeyType.INT)
                 DefaultConfig.getInt(key)
             } else {
                 check(value is IntConfigValue) { "Int value type wrong" }
+                value.value
+            }
+        }
+
+        override fun getIntArray(key: String): IntArray? {
+            checkIntArrayKey(key)
+            val value = cache[key]
+            return if (value == null) {
+                addKeyToRetrieve(key, KeyType.INT_ARRAY)
+                DefaultConfig.getIntArray(key)
+            } else {
+                check(value is IntArrayConfigValue) { "Int array value type wrong" }
                 value.value
             }
         }
@@ -77,7 +94,7 @@ class CarrierConfigRepository(private val context: Context) {
             check(key.endsWith("_string")) { "String key should ends with _string" }
             val value = cache[key]
             return if (value == null) {
-                keysToRetrieve += key to KeyType.STRING
+                addKeyToRetrieve(key, KeyType.STRING)
                 DefaultConfig.getString(key)
             } else {
                 check(value is StringConfigValue) { "String value type wrong" }
@@ -85,20 +102,35 @@ class CarrierConfigRepository(private val context: Context) {
             }
         }
 
-        fun getKeysToRetrieve(): Map<String, KeyType> = keysToRetrieve
+        private fun addKeyToRetrieve(key: String, type: KeyType) {
+            if (keysToRetrieve.put(key, type) == null && Build.IS_DEBUGGABLE) {
+                check(!isKeysToRetrieveFrozen) { "implement error for key $key" }
+            }
+        }
+
+        /**
+         * Gets the keys to retrieve.
+         *
+         * After this function is called, the keys to retrieve is frozen.
+         */
+        fun getAndFrozeKeysToRetrieve(): Map<String, KeyType> {
+            isKeysToRetrieveFrozen = true
+            return keysToRetrieve
+        }
     }
 
     /**
      * Gets the configuration values for the given [subId].
      *
      * Configuration values could be accessed in [block]. Note: [block] could be called multiple
-     * times, so it should be pure function without side effort.
+     * times, so it should be pure function without side effort. Please also make sure every key is
+     * retrieved every time, for example, we need avoid expression shortcut.
      */
     fun <T> transformConfig(subId: Int, block: CarrierConfigAccessor.() -> T): T {
         val perSubCache = getPerSubCache(subId)
         val accessor = Accessor(perSubCache)
         val result = accessor.block()
-        val keysToRetrieve = accessor.getKeysToRetrieve()
+        val keysToRetrieve = accessor.getAndFrozeKeysToRetrieve()
         // If all keys found in the first pass, no need to collect again
         if (keysToRetrieve.isEmpty()) return result
 
@@ -113,6 +145,10 @@ class CarrierConfigRepository(private val context: Context) {
     /** Gets the configuration int for the given [subId] and [key]. */
     fun getInt(subId: Int, key: String): Int = transformConfig(subId) { getInt(key) }
 
+    /** Gets the configuration int array for the given [subId] and [key]. */
+    fun getIntArray(subId: Int, key: String): IntArray? =
+        transformConfig(subId) { getIntArray(key) }
+
     /** Gets the configuration string for the given [subId] and [key]. */
     fun getString(subId: Int, key: String): String? = transformConfig(subId) { getString(key) }
 
@@ -122,6 +158,7 @@ class CarrierConfigRepository(private val context: Context) {
             when (type) {
                 KeyType.BOOLEAN -> this[key] = BooleanConfigValue(config.getBoolean(key))
                 KeyType.INT -> this[key] = IntConfigValue(config.getInt(key))
+                KeyType.INT_ARRAY -> this[key] = IntArrayConfigValue(config.getIntArray(key))
                 KeyType.STRING -> this[key] = StringConfigValue(config.getString(key))
             }
         }
@@ -195,6 +232,10 @@ class CarrierConfigRepository(private val context: Context) {
             }
         }
 
+        private fun checkIntArrayKey(key: String) {
+            check(key.endsWith("_int_array")) { "Int array key should ends with _int_array" }
+        }
+
         @VisibleForTesting
         fun setBooleanForTest(subId: Int, key: String, value: Boolean) {
             checkBooleanKey(key)
@@ -205,6 +246,12 @@ class CarrierConfigRepository(private val context: Context) {
         fun setIntForTest(subId: Int, key: String, value: Int) {
             check(key.endsWith("_int")) { "Int key should ends with _int" }
             getPerSubCache(subId)[key] = IntConfigValue(value)
+        }
+
+        @VisibleForTesting
+        fun setIntArrayForTest(subId: Int, key: String, value: IntArray?) {
+            checkIntArrayKey(key)
+            getPerSubCache(subId)[key] = IntArrayConfigValue(value)
         }
 
         @VisibleForTesting
@@ -220,6 +267,8 @@ private sealed interface ConfigValue
 private data class BooleanConfigValue(val value: Boolean) : ConfigValue
 
 private data class IntConfigValue(val value: Int) : ConfigValue
+
+private class IntArrayConfigValue(val value: IntArray?) : ConfigValue
 
 private data class StringConfigValue(val value: String?) : ConfigValue
 

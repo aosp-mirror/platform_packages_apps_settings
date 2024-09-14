@@ -58,6 +58,5 @@ class ZenModeTriggerAddPreferenceController extends AbstractZenModePreferenceCon
             conditionId -> saveMode(mode -> {
                 mode.setCustomModeConditionId(mContext, conditionId);
                 return mode;
-                // TODO: b/342156843 - Maybe jump to the corresponding schedule editing screen?
             });
 }

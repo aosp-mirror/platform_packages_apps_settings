@@ -22,7 +22,6 @@ import android.content.Context
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
@@ -63,8 +62,10 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
                 item.icon?.setColorFilter(
                     resources.getColor(
                         com.android.settingslib.widget.theme.R.color
-                            .settingslib_materialColorOnSurface),
-                    PorterDuff.Mode.SRC_ATOP)
+                            .settingslib_materialColorOnSurface
+                    ),
+                    PorterDuff.Mode.SRC_ATOP,
+                )
                 item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
             }
         }
@@ -116,14 +117,27 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
                 }
         formatter =
             featureFactory.bluetoothFeatureProvider.getDeviceDetailsFragmentFormatter(
-                requireContext(), this, bluetoothManager.adapter, cachedDevice)
+                requireContext(),
+                this,
+                bluetoothManager.adapter,
+                cachedDevice,
+            )
         helpItem =
             formatter
                 .getMenuItem(FragmentTypeModel.DeviceDetailsMoreSettingsFragment)
                 .stateIn(lifecycleScope, SharingStarted.WhileSubscribed(), initialValue = null)
         return listOf(
             BluetoothDetailsProfilesController(
-                context, this, localBluetoothManager, cachedDevice, settingsLifecycle))
+                context,
+                this,
+                localBluetoothManager,
+                cachedDevice,
+                settingsLifecycle,
+                formatter.getInvisibleBluetoothProfiles(
+                    FragmentTypeModel.DeviceDetailsMoreSettingsFragment
+                ),
+            )
+        )
     }
 
     override fun getLogTag(): String = TAG
