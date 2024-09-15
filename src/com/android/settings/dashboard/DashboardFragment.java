@@ -55,7 +55,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.metadata.PreferenceScreenRegistry;
 import com.android.settingslib.search.Indexable;
 
 import java.util.ArrayList;
@@ -101,8 +100,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mDashboardFeatureProvider =
                 FeatureFactory.getFeatureFactory().getDashboardFeatureProvider();
 
-        if (!usePreferenceScreenMetadata() || PreferenceScreenRegistry.INSTANCE.get(
-                getPreferenceScreenBindingKey(context)) == null) {
+        if (!isCatalystEnabled()) {
             // Load preference controllers from code
             final List<AbstractPreferenceController> controllersFromCode =
                     createPreferenceControllers(context);
@@ -378,7 +376,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             return;
         }
         PreferenceScreen screen;
-        if (usePreferenceScreenMetadata()) {
+        if (isCatalystEnabled()) {
             screen = createPreferenceScreen();
             setPreferenceScreen(screen);
             requireActivity().setTitle(screen.getTitle());
@@ -390,17 +388,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         displayResourceTilesToScreen(screen);
     }
 
-    @Override
-    protected final boolean usePreferenceScreenMetadata() {
-        return settingsCatalyst() && enableCatalyst();
-    }
-
-    /**
-     * Returns if settings catalyst should be enabled (e.g. check trunk stable flag) on current
-     * screen.
-     */
-    protected boolean enableCatalyst() {
-        return false;
+    /** Returns if catalyst is enabled on current screen. */
+    protected final boolean isCatalystEnabled() {
+        if (!settingsCatalyst()) {
+            return false;
+        }
+        Context context = getContext();
+        return context != null ? getPreferenceScreenCreator(context) != null : false;
     }
 
     /**
