@@ -16,29 +16,52 @@
 
 package com.android.settings.notification;
 
-import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
-import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+import static com.android.settings.notification.PoliteNotificationGlobalPreferenceController.ON;
+import static com.android.settings.notification.PoliteNotificationGlobalPreferenceController.OFF;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.server.notification.Flags;
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Controls the toggle that determines whether notification cooldown
  * should apply to work profiles.
  */
-public class PoliteNotifWorkProfileToggleController extends TogglePreferenceController {
+public class PoliteNotifWorkProfileToggleController extends TogglePreferenceController implements
+        LifecycleEventObserver {
 
     private final int mManagedProfileId;
+    private Preference mPreference;
+    private final ContentResolver mContentResolver;
 
-    public PoliteNotifWorkProfileToggleController(Context context, String preferenceKey) {
+    final ContentObserver mContentObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange, @Nullable Uri uri) {
+            updateState(mPreference);
+        }
+    };
+
+    public PoliteNotifWorkProfileToggleController(@NonNull Context context,
+            @NonNull String preferenceKey) {
         this(context, preferenceKey, new AudioHelper(context));
     }
 
@@ -47,6 +70,25 @@ public class PoliteNotifWorkProfileToggleController extends TogglePreferenceCont
                 AudioHelper helper) {
         super(context, preferenceKey);
         mManagedProfileId = helper.getManagedProfileId(UserManager.get(mContext));
+        mContentResolver = context.getContentResolver();
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public void onStateChanged(@NonNull LifecycleOwner lifecycleOwner,
+            @NonNull Lifecycle.Event event) {
+        if (event == Lifecycle.Event.ON_RESUME) {
+            mContentResolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.NOTIFICATION_COOLDOWN_ENABLED),
+                    /* notifyForDescendants= */ false, mContentObserver);
+        } else if (event == Lifecycle.Event.ON_PAUSE) {
+            mContentResolver.unregisterContentObserver(mContentObserver);
+        }
     }
 
     @Override
@@ -56,11 +98,18 @@ public class PoliteNotifWorkProfileToggleController extends TogglePreferenceCont
             return CONDITIONALLY_UNAVAILABLE;
         }
 
+        if (!isCoolDownEnabledForPrimary()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
         return (mManagedProfileId != UserHandle.USER_NULL) ? AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override
     public boolean isChecked() {
+        if (!isCoolDownEnabledForPrimary()) {
+            return false;
+        }
         return Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.NOTIFICATION_COOLDOWN_ENABLED, ON, mManagedProfileId) != OFF;
     }
@@ -74,6 +123,18 @@ public class PoliteNotifWorkProfileToggleController extends TogglePreferenceCont
 
     @Override
     public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_accessibility;
+        // not needed since it's not sliceable
+        return NO_RES;
+    }
+
+    @Override
+    public void updateState(@Nullable Preference preference) {
+        if (preference == null) return;
+        preference.setVisible(isAvailable());
+    }
+
+    private boolean isCoolDownEnabledForPrimary() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.NOTIFICATION_COOLDOWN_ENABLED, ON) == ON;
     }
 }

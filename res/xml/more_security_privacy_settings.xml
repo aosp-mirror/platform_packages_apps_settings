@@ -74,9 +74,7 @@
         <Preference
             android:key="privacy_accessibility_usage"
             android:title="@string/accessibility_usage_title"
-            settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController">
-            <intent android:action="android.intent.action.REVIEW_ACCESSIBILITY_SERVICES"/>
-        </Preference>
+            settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController"/>
 
         <!-- On lock screen notifications -->
         <com.android.settings.RestrictedListPreference
@@ -118,6 +116,13 @@
             android:summary="@string/content_capture_summary"
             settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController"/>
 
+        <Preference
+            android:key="cellular_security_settings_privacy"
+            android:title="@string/cellular_security_title"
+            android:summary="@string/cellular_security_summary"
+            android:fragment="com.android.settings.network.telephony.CellularSecuritySettingsFragment"
+            settings:controller="com.android.settings.network.CellularSecurityPreferenceController"
+            settings:searchable="false"/>
     </PreferenceCategory>
 
     <!-- Security section. -->
@@ -169,7 +174,8 @@
             android:title="@string/financed_device_info"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.devicelock.DeviceLockPreferenceController">
-            <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"/>
+            <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"
+                    android:targetPackage="@string/config_device_lock_controller_package_name"/>
         </Preference>
     </PreferenceCategory>
 

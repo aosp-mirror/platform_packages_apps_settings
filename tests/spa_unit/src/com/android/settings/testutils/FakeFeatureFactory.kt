@@ -25,7 +25,6 @@ import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
-import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
@@ -39,6 +38,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
+import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.overlay.SurveyFeatureProvider
@@ -150,6 +150,6 @@ class FakeFeatureFactory : FeatureFactory() {
         get() = TODO("Not yet implemented")
     override val displayFeatureProvider: DisplayFeatureProvider
         get() = TODO("Not yet implemented")
-    override val audioSharingFeatureProvider: AudioSharingFeatureProvider
+    override val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider
         get() = TODO("Not yet implemented")
 }

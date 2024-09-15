@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.service.dreams.DreamService;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -88,7 +89,11 @@ public class DreamSettingsTest {
     @Mock
     private Preference mComplicationsTogglePref;
     @Mock
+    private Preference mHomeControllerTogglePref;
+    @Mock
     private DreamPickerController mDreamPickerController;
+    @Mock
+    private DreamHomeControlsPreferenceController mDreamHomeControlsPreferenceController;
     @Captor
     private ArgumentCaptor<DreamPickerController.Callback> mDreamPickerCallbackCaptor;
 
@@ -236,18 +241,116 @@ public class DreamSettingsTest {
         verify(mComplicationsTogglePref).setVisible(true);
     }
 
+    @Test
+    public void homeControlToggle_enableWhenDreamCategoryIsDefault() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = prepareDreamSettings(context);
+
+         // Active dream does not support complications
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_DEFAULT;
+
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+
+        verify(mHomeControllerTogglePref).setEnabled(true);
+    }
+
+    @Test
+    public void homePanelToggle_disableWhenDreamCategoryIsHomePanel() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = prepareDreamSettings(context);
+
+        // Active dream does not support complications
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_HOME_PANEL;
+
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+
+        verify(mHomeControllerTogglePref).setEnabled(false);
+    }
+
+    @Test
+    public void homePanelToggle_disableWhenSwitchingFromDefaultToHomePanel() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = prepareDreamSettings(context);
+
+
+        // Active dream does not support complications
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_DEFAULT;
+
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+
+        verify(mHomeControllerTogglePref).setEnabled(true);
+        verify(mDreamPickerController).addCallback(mDreamPickerCallbackCaptor.capture());
+
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_HOME_PANEL;
+        mDreamPickerCallbackCaptor.getValue().onActiveDreamChanged();
+        verify(mHomeControllerTogglePref).setEnabled(false);
+    }
+
+    @Test
+    public void homePanelToggle_showWhenSwitchingFromHomePanelToDefault() {
+        MockitoAnnotations.initMocks(this);
+
+        final Context context = ApplicationProvider.getApplicationContext();
+        final DreamSettings dreamSettings = prepareDreamSettings(context);
+
+
+        // Active dream does not support complications
+        final DreamBackend.DreamInfo activeDream = new DreamBackend.DreamInfo();
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_HOME_PANEL;
+
+        when(mDreamPickerController.getActiveDreamInfo()).thenReturn(activeDream);
+
+        dreamSettings.onAttach(context);
+        dreamSettings.onCreate(Bundle.EMPTY);
+
+        verify(mHomeControllerTogglePref).setEnabled(false);
+        verify(mDreamPickerController).addCallback(mDreamPickerCallbackCaptor.capture());
+
+        activeDream.dreamCategory = DreamService.DREAM_CATEGORY_DEFAULT;
+        mDreamPickerCallbackCaptor.getValue().onActiveDreamChanged();
+        verify(mHomeControllerTogglePref).setEnabled(true);
+    }
+
     private DreamSettings prepareDreamSettings(Context context) {
         final TestDreamSettings dreamSettings = new TestDreamSettings(context);
         when(mDreamPickerController.getPreferenceKey()).thenReturn(DreamPickerController.PREF_KEY);
+        when(mDreamHomeControlsPreferenceController.getPreferenceKey())
+                .thenReturn(DreamHomeControlsPreferenceController.PREF_KEY);
         when(mDreamPickerPref.getExtras()).thenReturn(new Bundle());
         when(mDreamPickerPref.getKey()).thenReturn(DreamPickerController.PREF_KEY);
         when(mComplicationsTogglePref.getKey()).thenReturn(
                 DreamComplicationPreferenceController.PREF_KEY);
-
+        when(mHomeControllerTogglePref.getExtras()).thenReturn(new Bundle());
+        when(mHomeControllerTogglePref.getKey()).thenReturn(
+                DreamHomeControlsPreferenceController.PREF_KEY);
+        when(mDreamHomeControlsPreferenceController.getAvailabilityStatus())
+                .thenReturn(mDreamHomeControlsPreferenceController.AVAILABLE);
         dreamSettings.addPreference(DreamPickerController.PREF_KEY, mDreamPickerPref);
         dreamSettings.addPreference(DreamComplicationPreferenceController.PREF_KEY,
                 mComplicationsTogglePref);
+        dreamSettings.addPreference(DreamHomeControlsPreferenceController.PREF_KEY,
+                mHomeControllerTogglePref);
         dreamSettings.setDreamPickerController(mDreamPickerController);
+        dreamSettings
+                .setDreamHomeControlsPreferenceController(mDreamHomeControlsPreferenceController);
 
         return dreamSettings;
     }

@@ -72,6 +72,7 @@ public class PrivateSpaceLockControllerTest {
         final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
+        doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
 
         mPrivateSpaceLockController = new PrivateSpaceLockController(mContext,
                 mSettingsPreferenceFragment);
@@ -80,7 +81,8 @@ public class PrivateSpaceLockControllerTest {
     /** Tests that the controller is always available. */
     @Test
     public void getAvailabilityStatus_returnsAvailable() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         assertThat(mPrivateSpaceLockController.isAvailable()).isEqualTo(true);
     }
@@ -89,7 +91,8 @@ public class PrivateSpaceLockControllerTest {
     @Test
     public void getSummary_whenScreenLock() {
         doReturn(false).when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mPrivateSpaceLockController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isFalse();
@@ -103,7 +106,8 @@ public class PrivateSpaceLockControllerTest {
                 .when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
         doReturn(CREDENTIAL_TYPE_PATTERN)
                 .when(mLockPatternUtils).getCredentialTypeForUser(anyInt());
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mPrivateSpaceLockController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isTrue();
@@ -115,7 +119,8 @@ public class PrivateSpaceLockControllerTest {
     public void getSummary_whenProfileLockPin() {
         doReturn(true).when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
         doReturn(CREDENTIAL_TYPE_PIN).when(mLockPatternUtils).getCredentialTypeForUser(anyInt());
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mPrivateSpaceLockController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isTrue();
@@ -129,7 +134,8 @@ public class PrivateSpaceLockControllerTest {
                 .when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
         doReturn(CREDENTIAL_TYPE_PASSWORD)
                 .when(mLockPatternUtils).getCredentialTypeForUser(anyInt());
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         mPrivateSpaceLockController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isTrue();

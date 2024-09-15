@@ -77,6 +77,7 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
 
         if (mAppRow != null) {
             final Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_BUBBLE_SETTINGS);
+            intent.setPackage(mContext.getPackageName());
             intent.putExtra(Settings.EXTRA_APP_PACKAGE, mAppRow.pkg);
             intent.putExtra(Settings.EXTRA_APP_UID, mAppRow.uid);
             preference.setIntent(intent);

@@ -18,9 +18,7 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.DialogInterface;
-import android.view.View;
 
-import com.android.settings.R;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 /**
@@ -52,24 +50,7 @@ public class InvisibleToggleAccessibilityServicePreferenceFragment extends
         super.onToggleClicked(preference);
         boolean enabled = getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED)
                 && preference.isChecked();
-
         AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName, enabled);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * Enables accessibility service when user clicks permission allow button.
-     */
-    @Override
-    void onDialogButtonFromShortcutToggleClicked(View view) {
-        super.onDialogButtonFromShortcutToggleClicked(view);
-        if (!android.view.accessibility.Flags.cleanupAccessibilityWarningDialog()) {
-            if (view.getId() == R.id.permission_enable_allow_button) {
-                AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName,
-                        true);
-            }
-        }
     }
 
     /**
@@ -80,9 +61,7 @@ public class InvisibleToggleAccessibilityServicePreferenceFragment extends
     @Override
     void onAllowButtonFromShortcutToggleClicked() {
         super.onAllowButtonFromShortcutToggleClicked();
-        if (android.view.accessibility.Flags.cleanupAccessibilityWarningDialog()) {
-            AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName, true);
-        }
+        AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName, true);
     }
 
     /**

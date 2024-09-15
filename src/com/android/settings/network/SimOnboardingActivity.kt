@@ -19,9 +19,9 @@ package com.android.settings.network
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.telephony.SubscriptionManager
 import android.util.Log
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,57 +32,64 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.BasicAlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.lifecycle.LifecycleRegistry
 import com.android.settings.R
 import com.android.settings.SidecarFragment
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity
+import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity
+import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.network.SimOnboardingPageProvider.getRoute
+import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.settingslib.spa.SpaBaseDialogActivity
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
+import com.android.settingslib.spa.widget.dialog.SettingsAlertDialogWithIcon
 import com.android.settingslib.spa.widget.dialog.getDialogWidth
 import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
-import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
 import com.android.settingslib.spa.widget.ui.SettingsTitle
 import com.android.settingslib.spaprivileged.framework.common.userManager
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SimOnboardingActivity : SpaBaseDialogActivity() {
     lateinit var scope: CoroutineScope
-    lateinit var showBottomSheet: MutableState<Boolean>
+    lateinit var wifiPickerTrackerHelper: WifiPickerTrackerHelper
+    lateinit var context: Context
+    lateinit var showStartingDialog: MutableState<Boolean>
     lateinit var showError: MutableState<ErrorType>
     lateinit var showProgressDialog: MutableState<Boolean>
+    lateinit var showDsdsProgressDialog: MutableState<Boolean>
+    lateinit var showRestartDialog: MutableState<Boolean>
 
     private var switchToEuiccSubscriptionSidecar: SwitchToEuiccSubscriptionSidecar? = null
     private var switchToRemovableSlotSidecar: SwitchToRemovableSlotSidecar? = null
@@ -90,6 +97,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (!this.userManager.isAdminUser) {
             Log.e(TAG, "It is not the admin user. Unable to toggle subscription.")
             finish()
@@ -132,8 +140,14 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 setProgressDialog(false)
             }
 
+            CallbackType.CALLBACK_ENABLE_DSDS-> {
+                scope.launch {
+                    onboardingService.startEnableDsds(this@SimOnboardingActivity)
+                }
+            }
+
             CallbackType.CALLBACK_ONBOARDING_COMPLETE -> {
-                showBottomSheet.value = false
+                showStartingDialog.value = false
                 setProgressDialog(true)
                 scope.launch {
                     // TODO: refactor the Sidecar
@@ -150,7 +164,10 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
             CallbackType.CALLBACK_SETUP_PRIMARY_SIM -> {
                 scope.launch {
-                    onboardingService.startSetupPrimarySim(this@SimOnboardingActivity)
+                    onboardingService.startSetupPrimarySim(
+                        this@SimOnboardingActivity,
+                        wifiPickerTrackerHelper
+                    )
                 }
             }
 
@@ -176,49 +193,111 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
-        showBottomSheet = remember { mutableStateOf(false) }
-        showError = remember { mutableStateOf(ErrorType.ERROR_NONE) }
-        showProgressDialog = remember { mutableStateOf(false) }
+        showStartingDialog = rememberSaveable { mutableStateOf(false) }
+        showError = rememberSaveable { mutableStateOf(ErrorType.ERROR_NONE) }
+        showProgressDialog = rememberSaveable { mutableStateOf(false) }
+        showDsdsProgressDialog = rememberSaveable { mutableStateOf(false) }
+        showRestartDialog = rememberSaveable { mutableStateOf(false) }
         scope = rememberCoroutineScope()
+        context = LocalContext.current
+        val lifecycleOwner = LocalLifecycleOwner.current
+        wifiPickerTrackerHelper = WifiPickerTrackerHelper(
+            LifecycleRegistry(lifecycleOwner), context,
+            null /* WifiPickerTrackerCallback */
+        )
 
         registerSidecarReceiverFlow()
 
         ErrorDialogImpl()
-
+        RestartDialogImpl()
         LaunchedEffect(Unit) {
-            if (onboardingService.activeSubInfoList.isNotEmpty()) {
-                showBottomSheet.value = true
+            if (showError.value != ErrorType.ERROR_NONE
+                || showProgressDialog.value
+                || showDsdsProgressDialog.value
+                || showRestartDialog.value) {
+                Log.d(TAG, "status: showError:${showError.value}, " +
+                        "showProgressDialog:${showProgressDialog.value}, " +
+                        "showDsdsProgressDialog:${showDsdsProgressDialog.value}, " +
+                        "showRestartDialog:${showRestartDialog.value}")
+                showStartingDialog.value = false
+            } else if (onboardingService.activeSubInfoList.isNotEmpty()) {
+                showStartingDialog.value = true
             }
         }
 
-        if (showBottomSheet.value) {
-            var sheetState = rememberModalBottomSheetState()
-            BottomSheetImpl(
-                sheetState = sheetState,
+        if (showStartingDialog.value) {
+            StartingDialogImpl(
                 nextAction = {
-                    // TODO: if the phone is SS mode and the isDsdsConditionSatisfied is true, then
-                    //  enable the DSDS mode.
-                    //  case#1: the device need the reboot after enabling DSDS. Showing the confirm
-                    //          dialog to user whether reboot device or not.
-                    //  case#2: The device don't need the reboot. Enabling DSDS and then showing
-                    //          the SIM onboarding UI.
-
-                    // case#2
-                    val route = getRoute(onboardingService.targetSubId)
-                    startSpaActivity(route)
+                    if (onboardingService.isDsdsConditionSatisfied()) {
+                        // TODO: if the phone is SS mode and the isDsdsConditionSatisfied is true,
+                        //  then enable the DSDS mode.
+                        //  case#1: the device need the reboot after enabling DSDS. Showing the
+                        //          confirm dialog to user whether reboot device or not.
+                        //  case#2: The device don't need the reboot. Enabling DSDS and then showing
+                        //          the SIM onboarding UI.
+                        if (onboardingService.doesSwitchMultiSimConfigTriggerReboot) {
+                            // case#1
+                            Log.d(TAG, "Device does not support reboot free DSDS.")
+                            showRestartDialog.value = true
+                        } else {
+                            // case#2
+                            Log.d(TAG, "Enable DSDS mode")
+                            showDsdsProgressDialog.value = true
+                            enableMultiSimSidecar?.run(SimOnboardingService.NUM_OF_SIMS_FOR_DSDS)
+                        }
+                    } else {
+                        startSimOnboardingProvider()
+                    }
                 },
                 cancelAction = { finish() },
             )
         }
 
-        if(showProgressDialog.value) {
-            ProgressDialogImpl()
+        if (showProgressDialog.value) {
+            ProgressDialogImpl(
+                stringResource(
+                    R.string.sim_onboarding_progressbar_turning_sim_on,
+                    onboardingService.targetSubInfo?.displayName ?: ""
+                )
+            )
+        }
+        if (showDsdsProgressDialog.value) {
+            ProgressDialogImpl(
+                stringResource(R.string.sim_action_enabling_sim_without_carrier_name)
+            )
+        }
+    }
+    @Composable
+    private fun RestartDialogImpl() {
+        val restartDialogPresenter = rememberAlertDialogPresenter(
+            confirmButton = AlertDialogButton(
+                stringResource(R.string.sim_action_reboot)
+            ) {
+                callbackListener(CallbackType.CALLBACK_ENABLE_DSDS)
+            },
+            dismissButton = AlertDialogButton(
+                stringResource(
+                    R.string.sim_action_restart_dialog_cancel,
+                    onboardingService.targetSubInfo?.displayName ?: "")
+            ) {
+                callbackListener(CallbackType.CALLBACK_ONBOARDING_COMPLETE)
+            },
+            title = stringResource(R.string.sim_action_restart_dialog_title),
+            text = {
+                Text(stringResource(R.string.sim_action_restart_dialog_msg))
+            },
+        )
+
+        if(showRestartDialog.value){
+            LaunchedEffect(Unit) {
+                restartDialogPresenter.open()
+            }
         }
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun ProgressDialogImpl() {
+    fun ProgressDialogImpl(title: String) {
         // TODO: Create the SPA's ProgressDialog and using SPA's widget
         BasicAlertDialog(
             onDismissRequest = {},
@@ -232,19 +311,14 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             ) {
                 Row(
                     modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(SettingsDimension.itemPaddingStart),
+                        .fillMaxWidth()
+                        .padding(SettingsDimension.itemPaddingStart),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     CircularProgressIndicator()
                     Column(modifier = Modifier
                             .padding(start = SettingsDimension.itemPaddingStart)) {
-                        SettingsTitle(
-                            stringResource(
-                                R.string.sim_onboarding_progressbar_turning_sim_on,
-                                onboardingService.targetSubInfo?.displayName ?: ""
-                            )
-                        )
+                        SettingsTitle(title)
                     }
                 }
             }
@@ -329,10 +403,15 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         Log.e(TAG, "Error while sidecarReceiverFlow", e)
     }.conflate()
 
-    fun startSimSwitching(){
+    fun startSimSwitching() {
         Log.d(TAG, "startSimSwitching:")
 
         var targetSubInfo = onboardingService.targetSubInfo
+        if(onboardingService.doesTargetSimActive) {
+            Log.d(TAG, "target subInfo is already active")
+            callbackListener(CallbackType.CALLBACK_SETUP_NAME)
+            return
+        }
         targetSubInfo?.let {
             var removedSubInfo = onboardingService.getRemovedSim()
             if (targetSubInfo.isEmbedded) {
@@ -368,7 +447,9 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             SidecarFragment.State.SUCCESS -> {
                 Log.i(TAG, "Successfully enable the eSIM profile.")
                 switchToEuiccSubscriptionSidecar!!.reset()
-                callbackListener(CallbackType.CALLBACK_SETUP_NAME)
+                scope.launch {
+                    checkSimIsReadyAndGoNext()
+                }
             }
 
             SidecarFragment.State.ERROR -> {
@@ -376,8 +457,6 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 switchToEuiccSubscriptionSidecar!!.reset()
                 showError.value = ErrorType.ERROR_EUICC_SLOT
                 callbackListener(CallbackType.CALLBACK_ERROR)
-                // TODO: showErrorDialog and using privileged_action_disable_fail_title and
-                //       privileged_action_disable_fail_text
             }
         }
     }
@@ -388,7 +467,9 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 Log.i(TAG, "Successfully switched to removable slot.")
                 switchToRemovableSlotSidecar!!.reset()
                 onboardingService.handleTogglePsimAction()
-                callbackListener(CallbackType.CALLBACK_SETUP_NAME)
+                scope.launch {
+                    checkSimIsReadyAndGoNext()
+                }
             }
 
             SidecarFragment.State.ERROR -> {
@@ -396,18 +477,19 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 switchToRemovableSlotSidecar!!.reset()
                 showError.value = ErrorType.ERROR_REMOVABLE_SLOT
                 callbackListener(CallbackType.CALLBACK_ERROR)
-                // TODO: showErrorDialog and using sim_action_enable_sim_fail_title and
-                //       sim_action_enable_sim_fail_text
             }
         }
     }
 
     fun handleEnableMultiSimSidecarStateChange() {
+        showDsdsProgressDialog.value = false
         when (enableMultiSimSidecar!!.state) {
             SidecarFragment.State.SUCCESS -> {
                 enableMultiSimSidecar!!.reset()
                 Log.i(TAG, "Successfully switched to DSDS without reboot.")
-                handleEnableSubscriptionAfterEnablingDsds()
+                // refresh data
+                initServiceData(this, onboardingService.targetSubId, callbackListener)
+                startSimOnboardingProvider()
             }
 
             SidecarFragment.State.ERROR -> {
@@ -415,73 +497,72 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 Log.i(TAG, "Failed to switch to DSDS without rebooting.")
                 showError.value = ErrorType.ERROR_ENABLE_DSDS
                 callbackListener(CallbackType.CALLBACK_ERROR)
-                // TODO: showErrorDialog and using dsds_activation_failure_title and
-                //       dsds_activation_failure_body_msg2
             }
         }
     }
 
-    fun handleEnableSubscriptionAfterEnablingDsds() {
-        var targetSubInfo = onboardingService.targetSubInfo
-        if (targetSubInfo?.isEmbedded == true) {
-            Log.i(TAG,
-                    "DSDS enabled, start to enable profile: " + targetSubInfo.getSubscriptionId()
-            )
-            // For eSIM operations, we simply switch to the selected eSIM profile.
-            switchToEuiccSubscriptionSidecar!!.run(
-                targetSubInfo.subscriptionId,
-                UiccSlotUtil.INVALID_PORT_ID,
-                null
-            )
-            return
+    suspend fun checkSimIsReadyAndGoNext() {
+        withContext(Dispatchers.Default) {
+            val isEnabled = context.requireSubscriptionManager()
+                .isSubscriptionEnabled(onboardingService.targetSubId)
+            if (!isEnabled) {
+                val latch = CountDownLatch(1)
+                val receiver = CarrierConfigChangedReceiver(latch)
+                try {
+                    val waitingTimeMillis =
+                        Settings.Global.getLong(
+                            context.contentResolver,
+                            Settings.Global.EUICC_SWITCH_SLOT_TIMEOUT_MILLIS,
+                            UiccSlotUtil.DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS
+                        )
+                    receiver.registerOn(context)
+                    Log.d(TAG, "Start waiting, waitingTime is $waitingTimeMillis")
+                    latch.await(waitingTimeMillis, TimeUnit.MILLISECONDS)
+                } catch (e: InterruptedException) {
+                    Thread.currentThread().interrupt()
+                    Log.e(TAG, "Failed switching to physical slot.", e)
+                } finally {
+                    context.unregisterReceiver(receiver)
+                }
+            }
+            Log.d(TAG, "Sim is ready then go to next")
+            callbackListener(CallbackType.CALLBACK_SETUP_NAME)
         }
-        Log.i(TAG, "DSDS enabled, start to enable pSIM profile.")
-        onboardingService.handleTogglePsimAction()
-        callbackListener(CallbackType.CALLBACK_FINISH)
     }
 
     @Composable
-    fun BottomSheetBody(nextAction: () -> Unit) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(bottom = SettingsDimension.itemPaddingVertical)) {
-            Icon(
-                imageVector = Icons.Outlined.SignalCellularAlt,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(SettingsDimension.iconLarge),
-                tint = MaterialTheme.colorScheme.primary,
-            )
-            SettingsTitle(stringResource(R.string.sim_onboarding_bottomsheets_title))
-            Column(Modifier.padding(SettingsDimension.itemPadding)) {
-                Text(
-                    text = stringResource(R.string.sim_onboarding_bottomsheets_msg),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodyMedium,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Center
-                )
-            }
-            Button(onClick = nextAction) {
-                Text(stringResource(R.string.sim_onboarding_setup))
-            }
-        }
-    }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun BottomSheetImpl(
-        sheetState: SheetState,
+    fun StartingDialogImpl(
         nextAction: () -> Unit,
         cancelAction: () -> Unit,
     ) {
-        ModalBottomSheet(
+        SettingsAlertDialogWithIcon(
             onDismissRequest = cancelAction,
-            sheetState = sheetState,
-        ) {
-            BottomSheetBody(nextAction = nextAction)
-        }
-        LaunchedEffect(Unit) {
-            sheetState.show()
-        }
+            confirmButton = AlertDialogButton(
+                text = getString(R.string.sim_onboarding_setup),
+                onClick = nextAction,
+            ),
+            dismissButton = AlertDialogButton(
+                text = getString(R.string.sim_onboarding_close),
+                onClick = cancelAction,
+            ),
+            title = stringResource(R.string.sim_onboarding_dialog_starting_title),
+            icon = {
+                Icon(
+                    imageVector = Icons.Outlined.SignalCellularAlt,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(SettingsDimension.iconLarge),
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            },
+            text = {
+                Text(
+                    stringResource(R.string.sim_onboarding_dialog_starting_msg),
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            })
+
     }
 
     fun setProgressState(state: Int) {
@@ -497,6 +578,11 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         onboardingService.initData(targetSubId, context,callback)
     }
 
+    private fun startSimOnboardingProvider() {
+        val route = getRoute(onboardingService.targetSubId)
+        startSpaActivity(route)
+    }
+
     companion object {
         @JvmStatic
         fun startSimOnboardingActivity(
@@ -506,6 +592,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             val intent = Intent(context, SimOnboardingActivity::class.java).apply {
                 putExtra(SUB_ID, subId)
             }
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
 
@@ -523,9 +610,10 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         enum class CallbackType(val value:Int){
             CALLBACK_ERROR(-1),
             CALLBACK_ONBOARDING_COMPLETE(1),
-            CALLBACK_SETUP_NAME(2),
-            CALLBACK_SETUP_PRIMARY_SIM(3),
-            CALLBACK_FINISH(4)
+            CALLBACK_ENABLE_DSDS(2),
+            CALLBACK_SETUP_NAME(3),
+            CALLBACK_SETUP_PRIMARY_SIM(4),
+            CALLBACK_FINISH(5)
         }
     }
 }

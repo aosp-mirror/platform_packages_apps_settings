@@ -96,17 +96,17 @@ public class BluetoothLeAudioModePreferenceController
             return;
         }
 
+        String currentValue;
         if (mBluetoothAdapter.isLeAudioBroadcastSourceSupported()
                 == BluetoothStatusCodes.FEATURE_SUPPORTED) {
-            SystemProperties.set(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, "broadcast");
+            currentValue = "broadcast";
         } else if (mBluetoothAdapter.isLeAudioSupported()
                 == BluetoothStatusCodes.FEATURE_SUPPORTED) {
-            SystemProperties.set(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, "unicast");
+            currentValue = "unicast";
         } else {
-            SystemProperties.set(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, "disabled");
+            currentValue = "disabled";
         }
 
-        final String currentValue = SystemProperties.get(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY);
         int index = 0;
         for (int i = 0; i < mListValues.length; i++) {
             if (TextUtils.equals(currentValue, mListValues[i])) {
@@ -118,6 +118,11 @@ public class BluetoothLeAudioModePreferenceController
         final ListPreference listPreference = (ListPreference) preference;
         listPreference.setValue(mListValues[index]);
         listPreference.setSummary(mListSummaries[index]);
+
+        if (!mBluetoothAdapter.isEnabled()) {
+            listPreference.setEnabled(false);
+            return;
+        }
     }
 
     /**

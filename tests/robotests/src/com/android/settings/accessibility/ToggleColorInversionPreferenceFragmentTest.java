@@ -31,10 +31,13 @@ import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.Flags;
 import android.widget.PopupWindow;
 
 import androidx.fragment.app.FragmentActivity;
@@ -49,6 +52,7 @@ import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -65,6 +69,8 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowFragment.class)
 public class ToggleColorInversionPreferenceFragmentTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private TestToggleColorInversionPreferenceFragment mFragment;
     private PreferenceScreen mScreen;
@@ -131,6 +137,7 @@ public class ToggleColorInversionPreferenceFragmentTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void onPreferenceToggled_colorCorrectDisabled_shouldReturnTrueAndShowTooltipView() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, OFF);

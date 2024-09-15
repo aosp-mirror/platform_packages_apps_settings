@@ -83,11 +83,14 @@ public class VibrationMainSwitchPreferenceController extends SettingsMainSwitchP
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        // The main switch change can be triggered by both the user click and the
+        // SettingsMainSwitchPreferenceController state change. Make sure we only do it once.
+        boolean wasChecked = isChecked();
         boolean success = Settings.System.putInt(mContext.getContentResolver(),
                 VibrationPreferenceConfig.MAIN_SWITCH_SETTING_KEY,
                 isChecked ? ON : OFF);
 
-        if (success && isChecked) {
+        if (success && !wasChecked && isChecked) {
             // Play a haptic as preview for the main toggle only when touch feedback is enabled.
             VibrationPreferenceConfig.playVibrationPreview(
                     mVibrator, VibrationAttributes.USAGE_TOUCH);

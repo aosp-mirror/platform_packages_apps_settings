@@ -163,8 +163,7 @@ class HibernationSwitchPreferenceTest {
     }
 
     private fun isArchivingEnabled() =
-            PmFlags.archiving() || SystemProperties.getBoolean("pm.archiving.enabled", false)
-                    || Flags.appArchiving()
+            PmFlags.archiving() || Flags.appArchiving()
     @Test
     fun `An app targets Q with ops mode default when hibernation targets pre S - not exempted`() {
         mockOpsMode(MODE_DEFAULT)

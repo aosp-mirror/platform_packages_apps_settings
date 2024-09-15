@@ -28,15 +28,24 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.icu.text.CaseMap;
 import android.os.Bundle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.Flags;
 import android.widget.PopupWindow;
 
 import androidx.annotation.Nullable;
@@ -46,9 +55,14 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SubSettings;
+import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -60,13 +74,14 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.Locale;
+
 /** Tests for {@link AccessibilityShortcutPreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class AccessibilityShortcutPreferenceFragmentTest {
-
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";
     private static final String PLACEHOLDER_CLASS_NAME = PLACEHOLDER_PACKAGE_NAME + ".placeholder";
     private static final String PLACEHOLDER_TILE_CLASS_NAME =
@@ -83,7 +98,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
             Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
     private static final String HARDWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
-
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private TestAccessibilityShortcutPreferenceFragment mFragment;
     private PreferenceScreen mScreen;
     private Context mContext = ApplicationProvider.getApplicationContext();
@@ -206,6 +222,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_showTooltipView() {
         mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
@@ -223,6 +240,15 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    @Config(shadows = ShadowFragment.class)
+    public void showQuickSettingsTooltipIfNeeded_qsFlagOn_dontShowTooltipView() {
+        mFragment.showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_EDIT);
+
+        assertThat(getLatestPopupWindow()).isNull();
+    }
+
+    @Test
     @Config(shadows = ShadowFragment.class)
     public void showGeneralCategory_shouldInitCategory() {
         final Bundle savedInstanceState = new Bundle();
@@ -236,6 +262,50 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     @Test
     public void showGeneralCategory_shouldSetDefaultDescription() {
         assertThat(mFragment.getGeneralCategoryDescription(null)).isNotNull();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_EDIT_SHORTCUTS_IN_FULL_SCREEN)
+    public void onSettingsClicked_editShortcutsFullScreenFlagOn_showFullScreenEditShortcutScreen() {
+        Activity activity = Robolectric.setupActivity(FragmentActivity.class);
+        when(mFragment.getContext()).thenReturn(activity);
+        Context context = mFragment.getContext();
+        final ShortcutPreference shortcutPreference =
+                new ShortcutPreference(context, /* attrs= */ null);
+
+        mFragment.onSettingsClicked(shortcutPreference);
+
+        Intent intent = shadowOf(
+                (Application) context.getApplicationContext()).getNextStartedActivity();
+        assertThat(intent).isNotNull();
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
+        assertThat(intent.getComponent()).isEqualTo(
+                new ComponentName(context, SubSettings.class));
+        assertThat(intent.getExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(EditShortcutsPreferenceFragment.class.getName());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void getShortcutTypeSummary_shortcutSummaryIsCorrectlySet() {
+        final PreferredShortcut userPreferredShortcut = new PreferredShortcut(
+                PLACEHOLDER_COMPONENT_NAME.flattenToString(),
+                UserShortcutType.HARDWARE | UserShortcutType.QUICK_SETTINGS);
+        putUserShortcutTypeIntoSharedPreference(mContext, userPreferredShortcut);
+        final ShortcutPreference shortcutPreference =
+                new ShortcutPreference(mContext, /* attrs= */ null);
+        shortcutPreference.setChecked(true);
+        shortcutPreference.setSettingsEditable(true);
+        mFragment.mShortcutPreference = shortcutPreference;
+        String expected = CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(),
+                /* iter= */ null,
+                mContext.getString(
+                        R.string.accessibility_feature_shortcut_setting_summary_quick_settings)
+                        + ", "
+                        + mContext.getString(R.string.accessibility_shortcut_hardware_keyword));
+
+        String summary = mFragment.getShortcutTypeSummary(mContext).toString();
+        assertThat(summary).isEqualTo(expected);
     }
 
     private void callEmptyOnClicked(DialogInterface dialog, int which) {}

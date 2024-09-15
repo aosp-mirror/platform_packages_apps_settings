@@ -17,12 +17,14 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
 import com.android.settingslib.spa.testutils.toListWithTimeout
 import com.google.common.truth.Truth.assertThat
+import java.util.UUID
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -47,16 +49,28 @@ class SubscriptionRepositoryTest {
     }
 
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { getSystemService(SubscriptionManager::class.java) } doReturn mockSubscriptionManager
+        on { subscriptionManager } doReturn mockSubscriptionManager
+    }
+
+    private val repository = SubscriptionRepository(context)
+
+    @Test
+    fun isSubscriptionEnabledFlow_invalidSubId() = runBlocking {
+        val isEnabled = repository
+            .isSubscriptionEnabledFlow(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+            .firstWithTimeoutOrNull()
+
+        assertThat(isEnabled).isFalse()
     }
 
     @Test
-    fun isSubscriptionEnabledFlow() = runBlocking {
+    fun isSubscriptionEnabledFlow_enabled() = runBlocking {
         mockSubscriptionManager.stub {
-            on { isSubscriptionEnabled(SUB_ID) } doReturn true
+            on { isSubscriptionEnabled(SUB_ID_IN_SLOT_0) } doReturn true
         }
 
-        val isEnabled = context.isSubscriptionEnabledFlow(SUB_ID).firstWithTimeoutOrNull()
+        val isEnabled =
+            repository.isSubscriptionEnabledFlow(SUB_ID_IN_SLOT_0).firstWithTimeoutOrNull()
 
         assertThat(isEnabled).isTrue()
     }
@@ -80,7 +94,114 @@ class SubscriptionRepositoryTest {
         assertThat(listDeferred.await()).hasSize(2)
     }
 
+    @Test
+    fun getSelectableSubscriptionInfoList_sortedBySimSlotIndex() {
+        mockSubscriptionManager.stub {
+            on { getAvailableSubscriptionInfoList() } doReturn listOf(
+                SubscriptionInfo.Builder().apply {
+                    setSimSlotIndex(SIM_SLOT_INDEX_0)
+                    setId(SUB_ID_IN_SLOT_0)
+                }.build(),
+                SubscriptionInfo.Builder().apply {
+                    setSimSlotIndex(SIM_SLOT_INDEX_1)
+                    setId(SUB_ID_IN_SLOT_1)
+                }.build(),
+            )
+        }
+
+        val subInfos = context.getSelectableSubscriptionInfoList()
+
+        assertThat(subInfos.map { it.simSlotIndex })
+            .containsExactly(SIM_SLOT_INDEX_0, SIM_SLOT_INDEX_1).inOrder()
+    }
+
+    @Test
+    fun getSelectableSubscriptionInfoList_oneNotInSlot_inSlotSortedFirst() {
+        mockSubscriptionManager.stub {
+            on { getAvailableSubscriptionInfoList() } doReturn listOf(
+                SubscriptionInfo.Builder().apply {
+                    setSimSlotIndex(SubscriptionManager.INVALID_SIM_SLOT_INDEX)
+                    setId(SUB_ID_3_NOT_IN_SLOT)
+                }.build(),
+                SubscriptionInfo.Builder().apply {
+                    setSimSlotIndex(SIM_SLOT_INDEX_1)
+                    setId(SUB_ID_IN_SLOT_1)
+                }.build(),
+            )
+        }
+
+        val subInfos = context.getSelectableSubscriptionInfoList()
+
+        assertThat(subInfos.map { it.simSlotIndex })
+            .containsExactly(SIM_SLOT_INDEX_1, SubscriptionManager.INVALID_SIM_SLOT_INDEX).inOrder()
+    }
+
+    @Test
+    fun getSelectableSubscriptionInfoList_sameGroupAndOneHasSlot_returnTheOneWithSimSlotIndex() {
+        mockSubscriptionManager.stub {
+            on { getAvailableSubscriptionInfoList() } doReturn listOf(
+                SubscriptionInfo.Builder().apply {
+                    setSimSlotIndex(SubscriptionManager.INVALID_SIM_SLOT_INDEX)
+                    setId(SUB_ID_3_NOT_IN_SLOT)
+                    setGroupUuid(GROUP_UUID)
+                }.build(),
+                SubscriptionInfo.Builder().apply {
+                    setSimSlotIndex(SIM_SLOT_INDEX_0)
+                    setId(SUB_ID_IN_SLOT_0)
+                    setGroupUuid(GROUP_UUID)
+                }.build(),
+            )
+        }
+
+        val subInfos = context.getSelectableSubscriptionInfoList()
+
+        assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_IN_SLOT_0)
+    }
+
+    @Test
+    fun getSelectableSubscriptionInfoList_sameGroupAndNonHasSlot_returnTheOneWithMinimumSubId() {
+        mockSubscriptionManager.stub {
+            on { getAvailableSubscriptionInfoList() } doReturn listOf(
+                SubscriptionInfo.Builder().apply {
+                    setId(SUB_ID_4_NOT_IN_SLOT)
+                    setGroupUuid(GROUP_UUID)
+                }.build(),
+                SubscriptionInfo.Builder().apply {
+                    setId(SUB_ID_3_NOT_IN_SLOT)
+                    setGroupUuid(GROUP_UUID)
+                }.build(),
+            )
+        }
+
+        val subInfos = context.getSelectableSubscriptionInfoList()
+
+        assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_3_NOT_IN_SLOT)
+    }
+
+    @Test
+    fun phoneNumberFlow() = runBlocking {
+        mockSubscriptionManager.stub {
+            on { getPhoneNumber(SUB_ID_IN_SLOT_1) } doReturn NUMBER_1
+        }
+        val subInfo = SubscriptionInfo.Builder().apply {
+            setId(SUB_ID_IN_SLOT_1)
+            setMcc(MCC)
+        }.build()
+
+        val phoneNumber = context.phoneNumberFlow(subInfo).firstWithTimeoutOrNull()
+
+        assertThat(phoneNumber).isEqualTo(NUMBER_1)
+    }
+
     private companion object {
-        const val SUB_ID = 1
+        const val SIM_SLOT_INDEX_0 = 0
+        const val SUB_ID_IN_SLOT_0 = 2
+        const val SIM_SLOT_INDEX_1 = 1
+        const val SUB_ID_IN_SLOT_1 = 1
+        const val SUB_ID_3_NOT_IN_SLOT = 3
+        const val SUB_ID_4_NOT_IN_SLOT = 4
+        val GROUP_UUID = UUID.randomUUID().toString()
+        const val NUMBER_1 = "000000001"
+        const val MCC = "310"
     }
 }

@@ -22,6 +22,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 
@@ -78,5 +79,27 @@ public class MultiUserSwitchBarControllerTest {
                 mSwitchWidgetController, null);
 
         verify(mSwitchWidgetController, never()).setDisabledByAdmin(any());
+    }
+
+    @Test
+    public void onStart_userIsNotMain_shouldNotBeEnabled() {
+        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_USER_SWITCH, false);
+        mUserManager.addUser(10, "Test", UserInfo.FLAG_ADMIN);
+        mUserManager.switchUser(10);
+        new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);
+
+        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any());
+        verify(mSwitchWidgetController).setEnabled(false);
+    }
+
+    @Test
+    public void onStart_userIsMain_shouldBeEnabled() {
+        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_USER_SWITCH, false);
+        new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);
+
+        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any());
+        verify(mSwitchWidgetController).setEnabled(true);
     }
 }

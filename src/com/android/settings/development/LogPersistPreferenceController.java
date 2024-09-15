@@ -28,10 +28,10 @@ import com.android.settingslib.development.AbstractLogpersistPreferenceControlle
 public class LogPersistPreferenceController extends AbstractLogpersistPreferenceController
         implements PreferenceControllerMixin {
 
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
 
     public LogPersistPreferenceController(Context context,
-            DevelopmentSettingsDashboardFragment fragment, Lifecycle lifecycle) {
+            @Nullable DevelopmentSettingsDashboardFragment fragment, Lifecycle lifecycle) {
         super(context, lifecycle);
 
         mFragment = fragment;

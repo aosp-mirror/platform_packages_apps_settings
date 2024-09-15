@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PRIVATE_CATEGORY_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
 import static android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
 import static android.widget.LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -108,17 +109,36 @@ public class TrustedCredentialsFragment extends ObservableFragment
             mKeyChainConnectionByProfileId = new SparseArray<>();
     private ViewGroup mFragmentView;
 
-    private final BroadcastReceiver mWorkProfileChangedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mProfileChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (Intent.ACTION_MANAGED_PROFILE_AVAILABLE.equals(action)
-                    || Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE.equals(action)
-                    || Intent.ACTION_MANAGED_PROFILE_UNLOCKED.equals(action)) {
+            if (isBroadcastValidForAction(intent)) {
                 mGroupAdapter.load();
             }
         }
     };
+
+    private boolean isBroadcastValidForAction(Intent intent) {
+        String action = intent.getAction();
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
+            UserHandle userHandle = intent.getParcelableExtra(Intent.EXTRA_USER, UserHandle.class);
+            if (userHandle == null) {
+                Log.w(TAG, "received action " + action + " with missing user extra");
+                return false;
+            }
+
+            UserInfo userInfo = mUserManager.getUserInfo(userHandle.getIdentifier());
+            return (Intent.ACTION_PROFILE_AVAILABLE.equals(action)
+                    || Intent.ACTION_PROFILE_UNAVAILABLE.equals(action)
+                    || Intent.ACTION_PROFILE_ACCESSIBLE.equals(action))
+                    && (userInfo.isManagedProfile() || userInfo.isPrivateProfile());
+        }
+        return (Intent.ACTION_MANAGED_PROFILE_AVAILABLE.equals(action)
+                || Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE.equals(action)
+                || Intent.ACTION_MANAGED_PROFILE_UNLOCKED.equals(action));
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,10 +162,18 @@ public class TrustedCredentialsFragment extends ObservableFragment
         }
 
         IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
-        filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
-        filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNLOCKED);
-        activity.registerReceiver(mWorkProfileChangedReceiver, filter);
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
+            filter.addAction(Intent.ACTION_PROFILE_AVAILABLE);
+            filter.addAction(Intent.ACTION_PROFILE_UNAVAILABLE);
+            filter.addAction(Intent.ACTION_PROFILE_ACCESSIBLE);
+        } else {
+            filter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
+            filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
+            filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNLOCKED);
+        }
+        activity.registerReceiver(mProfileChangedReceiver, filter);
     }
 
     @Override
@@ -177,7 +205,16 @@ public class TrustedCredentialsFragment extends ObservableFragment
 
     private void createChildView(
             LayoutInflater inflater, ViewGroup parent, Bundle childState, int i) {
-        boolean isWork = mGroupAdapter.getUserInfoByGroup(i).isManagedProfile();
+        UserInfo userInfo = mGroupAdapter.getUserInfoByGroup(i);
+        if (Utils.shouldHideUser(userInfo.getUserHandle(), mUserManager)) {
+            return;
+        }
+        boolean isProfile = userInfo.isManagedProfile();
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
+            isProfile |= userInfo.isPrivateProfile();
+        }
         ChildAdapter adapter = mGroupAdapter.createChildAdapter(i);
 
         LinearLayout containerView = (LinearLayout) inflater.inflate(
@@ -186,9 +223,9 @@ public class TrustedCredentialsFragment extends ObservableFragment
 
         int profilesSize = mGroupAdapter.getGroupCount();
         adapter.showHeader(profilesSize > 1);
-        adapter.showDivider(isWork);
-        adapter.setExpandIfAvailable(profilesSize <= 2 || !isWork, childState);
-        if (isWork) {
+        adapter.showDivider(isProfile);
+        adapter.setExpandIfAvailable(profilesSize <= 2 || !isProfile, childState);
+        if (isProfile) {
             parent.addView(containerView);
         } else {
             parent.addView(containerView, 0);
@@ -203,7 +240,7 @@ public class TrustedCredentialsFragment extends ObservableFragment
 
     @Override
     public void onDestroy() {
-        getActivity().unregisterReceiver(mWorkProfileChangedReceiver);
+        getActivity().unregisterReceiver(mProfileChangedReceiver);
         for (AdapterData.AliasLoader aliasLoader : mAliasLoaders) {
             aliasLoader.cancel(true);
         }
@@ -331,9 +368,16 @@ public class TrustedCredentialsFragment extends ObservableFragment
             }
 
             TextView title = convertView.findViewById(android.R.id.title);
-            if (getUserInfoByGroup(groupPosition).isManagedProfile()) {
+            UserInfo userInfo = getUserInfoByGroup(groupPosition);
+            if (userInfo.isManagedProfile()) {
                 title.setText(mDevicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
                         () -> getString(com.android.settingslib.R.string.category_work)));
+            } else if (android.os.Flags.allowPrivateProfile()
+                    && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                    && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                    && userInfo.isPrivateProfile()) {
+                title.setText(mDevicePolicyManager.getResources().getString(PRIVATE_CATEGORY_HEADER,
+                        () -> getString(com.android.settingslib.R.string.category_private)));
             } else {
                 title.setText(mDevicePolicyManager.getResources().getString(
                         PERSONAL_CATEGORY_HEADER,

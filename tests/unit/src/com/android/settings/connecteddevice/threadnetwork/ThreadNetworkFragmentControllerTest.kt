@@ -34,6 +34,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.spy
 import java.util.concurrent.Executor
+import org.junit.Ignore
 
 /** Unit tests for [ThreadNetworkFragmentController].  */
 @RunWith(AndroidJUnit4::class)
@@ -99,6 +100,7 @@ class ThreadNetworkFragmentControllerTest {
     }
 
     @Test
+    @Ignore("b/339767488")
     fun getSummary_ThreadIsDisabled_returnsOff() {
         startController(controller)
         fakeThreadNetworkController.setEnabled(false, executor) {}

@@ -38,6 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.UiEventLogger;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,7 @@ public class NotificationHistoryAdapter extends
             mUiEventLogger.logWithPosition(NotificationHistoryActivity.NotificationHistoryEvent
                     .NOTIFICATION_HISTORY_OLDER_ITEM_CLICK, hn.getUid(), hn.getPackage(), position);
             Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+                    .setPackage(Utils.SETTINGS_PACKAGE_NAME)
                     .putExtra(EXTRA_APP_PACKAGE, hn.getPackage())
                     .putExtra(EXTRA_CHANNEL_ID, hn.getChannelId())
                     .putExtra(EXTRA_CONVERSATION_ID, hn.getConversationId());

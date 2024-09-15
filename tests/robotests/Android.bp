@@ -12,8 +12,8 @@ package {
 android_app {
     name: "SettingsRoboTestStub",
     defaults: [
-        "SettingsLibDefaults",
         "SettingsLib-search-defaults",
+        "SettingsLibDefaults",
     ],
     platform_apis: true,
     certificate: "platform",
@@ -23,18 +23,18 @@ android_app {
 
     static_libs: [
         "Settings-core",
-        "androidx.fragment_fragment-testing",
-        "frameworks-base-testutils",
         "androidx.fragment_fragment",
+        "androidx.fragment_fragment-testing",
         "androidx.lifecycle_lifecycle-runtime-testing",
+        "frameworks-base-testutils",
         "kotlinx_coroutines_test",
     ],
 
     aaptflags: ["--extra-packages com.android.settings"],
 
     libs: [
-        "telephony-common",
         "ims-common",
+        "telephony-common",
     ],
     uses_libs: ["org.apache.http.legacy"],
     optional_uses_libs: [
@@ -55,28 +55,29 @@ android_robolectric_test {
 
     static_libs: [
         "Robolectric_shadows_androidx_fragment_upstream",
-        "Settings_robolectric_meta_service_file",
-        "SettingsLib-robo-testutils",
         "Settings-robo-testutils",
+        "Settings-testutils2",
+        "SettingsLib-robo-testutils",
+        "Settings_robolectric_meta_service_file",
+        "aconfig_settings_flags_lib",
         "android.webkit.flags-aconfig-java",
         "androidx.test.core",
         "androidx.test.espresso.core",
         "androidx.test.ext.junit",
         "androidx.test.rules",
         "androidx.test.runner",
+        "com_android_server_accessibility_flags_lib",
         "flag-junit",
         "flag-junit-base",
-        "aconfig_settings_flags_lib",
-        "platform-test-annotations",
-        "Settings-testutils2",
         "notification_flags_lib",
-        "com_android_server_accessibility_flags_lib",
+        "platform-test-annotations",
         "testables",
+        "android.app.flags-aconfig-java",
     ],
 
     libs: [
+        "android.test.mock.impl",
         "ims-common",
-        "android.test.mock",
     ],
 
     java_resource_dirs: [

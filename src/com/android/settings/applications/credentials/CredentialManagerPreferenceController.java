@@ -69,8 +69,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.utils.ThreadUtils;
-import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,6 +87,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         implements LifecycleObserver {
     public static final String ADD_SERVICE_DEVICE_CONFIG = "credential_manager_service_search_uri";
 
+    private static final String TAG = "CredentialManagerPreferenceController";
+    private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
+    private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
+    private static final int MAX_SELECTABLE_PROVIDERS = 5;
+
     /**
      * In the settings logic we should hide the list of additional credman providers if there is no
      * provider selected at the top. The current logic relies on checking whether the autofill
@@ -93,11 +99,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
      * provider is set we will set the autofill setting to be this placeholder.
      */
     public static final String AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER = "credential-provider";
-
-    private static final String TAG = "CredentialManagerPreferenceController";
-    private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
-    private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
-    private static final int MAX_SELECTABLE_PROVIDERS = 5;
 
     private final PackageManager mPm;
     private final List<CredentialProviderInfo> mServices;
@@ -114,6 +115,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private @Nullable Delegate mDelegate = null;
     private @Nullable String mFlagOverrideForTest = null;
     private @Nullable PreferenceScreen mPreferenceScreen = null;
+    private @Nullable PreferenceGroup mPreferenceGroup = null;
 
     private Optional<Boolean> mSimulateHiddenForTests = Optional.empty();
     private boolean mIsWorkProfile = false;
@@ -158,12 +160,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     public int getAvailabilityStatus() {
         if (!isConnected()) {
             return UNSUPPORTED_ON_DEVICE;
-        }
-
-        // If there is no top provider or any providers in the list then
-        // we should hide this pref.
-        if (isHiddenDueToNoProviderSet()) {
-            return CONDITIONALLY_UNAVAILABLE;
         }
 
         if (!hasNonPrimaryServices()) {
@@ -328,7 +324,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         setAvailableServices(
                 mCredentialManager.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY),
+                        getUser(),
+                        CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN),
                 null);
     }
 
@@ -353,23 +350,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
 
         // Get the list of new providers and components.
-        List<CredentialProviderInfo> newProviders =
+        setAvailableServices(
                 mCredentialManager.getCredentialProviderServices(
-                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY);
-        Set<ComponentName> newComponents = buildComponentNameSet(newProviders, false);
-        Set<ComponentName> newPrimaryComponents = buildComponentNameSet(newProviders, true);
-
-        // Get the list of old components
-        Set<ComponentName> oldComponents = buildComponentNameSet(mServices, false);
-        Set<ComponentName> oldPrimaryComponents = buildComponentNameSet(mServices, true);
-
-        // If the sets are equal then don't update the UI.
-        if (oldComponents.equals(newComponents)
-                && oldPrimaryComponents.equals(newPrimaryComponents)) {
-            return;
-        }
-
-        setAvailableServices(newProviders, null);
+                        getUser(),
+                        CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_INCLUDING_HIDDEN),
+                null);
 
         if (mPreferenceScreen != null) {
             displayPreference(mPreferenceScreen);
@@ -393,11 +378,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     @VisibleForTesting
-    public boolean isHiddenDueToNoProviderSet() {
-        return isHiddenDueToNoProviderSet(getProviders());
-    }
-
-    private boolean isHiddenDueToNoProviderSet(
+    public boolean isHiddenDueToNoProviderSet(
             Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair) {
         if (mSimulateHiddenForTests.isPresent()) {
             return mSimulateHiddenForTests.get();
@@ -441,17 +422,67 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
+        final String prefKey = getPreferenceKey();
+        if (TextUtils.isEmpty(prefKey)) {
+            Log.w(TAG, "Skipping displayPreference because key is empty");
+            return;
+        }
 
-        // Since the UI is being cleared, clear any refs.
+        // Store this reference for later.
+        if (mPreferenceScreen == null) {
+            mPreferenceScreen = screen;
+            mPreferenceGroup = screen.findPreference(prefKey);
+        }
+
+        final Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair = getProviders();
+
+        maybeUpdateListOfPrefs(providerPair);
+        maybeUpdatePreferenceVisibility(providerPair);
+    }
+
+    private void maybeUpdateListOfPrefs(
+            Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair) {
+        if (mPreferenceScreen == null || mPreferenceGroup == null) {
+            return;
+        }
+
+        // Build the new list of prefs.
+        Map<String, CombiPreference> newPrefs =
+                buildPreferenceList(mPreferenceScreen.getContext(), providerPair);
+
+        // Determine if we need to update the prefs.
+        Set<String> existingPrefPackageNames = mPrefs.keySet();
+        if (existingPrefPackageNames.equals(newPrefs.keySet())) {
+            return;
+        }
+
+        // Since the UI is being cleared, clear any refs and prefs.
         mPrefs.clear();
+        mPreferenceGroup.removeAll();
 
-        mPreferenceScreen = screen;
-        PreferenceGroup group = screen.findPreference(getPreferenceKey());
-        group.removeAll();
+        // Populate the preference list with new data.
+        mPrefs.putAll(newPrefs);
+        for (CombiPreference pref : newPrefs.values()) {
+            mPreferenceGroup.addPreference(pref);
+        }
+    }
 
-        Context context = screen.getContext();
-        mPrefs.putAll(buildPreferenceList(context, group));
+    private void maybeUpdatePreferenceVisibility(
+            Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair) {
+        if (mPreferenceScreen == null || mPreferenceGroup == null) {
+            return;
+        }
+
+        final boolean isAvailable =
+                (getAvailabilityStatus() == AVAILABLE) && !isHiddenDueToNoProviderSet(providerPair);
+
+        if (isAvailable) {
+            mPreferenceScreen.addPreference(mPreferenceGroup);
+            mPreferenceGroup.setVisible(true);
+        } else {
+            mPreferenceScreen.removePreference(mPreferenceGroup);
+            mPreferenceGroup.setVisible(false);
+        }
     }
 
     /**
@@ -490,11 +521,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         // Get the selected autofill provider. If it is the placeholder then replace it with an
         // empty string.
         String selectedAutofillProvider =
-                DefaultCombinedPicker.getSelectedAutofillProvider(mContext, getUser());
-        if (TextUtils.equals(
-                selectedAutofillProvider, AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER)) {
-            selectedAutofillProvider = "";
-        }
+                getSelectedAutofillProvider(mContext, getUser(), TAG);
 
         // Get the list of combined providers.
         List<CombinedProviderInfo> providers =
@@ -508,9 +535,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     /** Aggregates the list of services and builds a list of UI prefs to show. */
     @VisibleForTesting
     public @NonNull Map<String, CombiPreference> buildPreferenceList(
-            @NonNull Context context, @NonNull PreferenceGroup group) {
-        // Get the providers and extract the values.
-        Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair = getProviders();
+            @NonNull Context context,
+            @NonNull Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair) {
+        // Extract the values.
         CombinedProviderInfo topProvider = providerPair.second;
         List<CombinedProviderInfo> providers = providerPair.first;
 
@@ -548,9 +575,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             icon,
                             packageName,
                             combinedInfo.getSettingsSubtitle(),
-                            combinedInfo.getSettingsActivity());
+                            combinedInfo.getSettingsActivity(),
+                            combinedInfo.getDeviceAdminRestrictions(context, getUser()));
             output.put(packageName, pref);
-            group.addPreference(pref);
         }
 
         // Set the visibility if we have services.
@@ -569,7 +596,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 service.getServiceIcon(mContext),
                 service.getServiceInfo().packageName,
                 service.getSettingsSubtitle(),
-                service.getSettingsActivity());
+                service.getSettingsActivity(),
+                /* enforcedCredManAdmin= */ null);
     }
 
     /**
@@ -647,13 +675,50 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         return (enabledAdditionalProviderCount + 1) >= MAX_SELECTABLE_PROVIDERS;
     }
 
+    /** Gets the credential autofill service component name. */
+    public static String getCredentialAutofillService(Context context, String tag) {
+        try {
+            return context.getResources().getString(
+                    com.android.internal.R.string.config_defaultCredentialManagerAutofillService);
+        } catch (Resources.NotFoundException e) {
+            Log.e(tag, "Failed to find credential autofill service.", e);
+        }
+        return "";
+    }
+
+    /** Gets the selected autofill provider name. This will filter out place holder names. **/
+    public static @Nullable String getSelectedAutofillProvider(
+            Context context, int userId, String tag) {
+        String providerName = Settings.Secure.getStringForUser(
+                context.getContentResolver(), Settings.Secure.AUTOFILL_SERVICE, userId);
+
+        if (TextUtils.isEmpty(providerName)) {
+            return providerName;
+        }
+
+        if (providerName.equals(AUTOFILL_CREDMAN_ONLY_PROVIDER_PLACEHOLDER)) {
+            return "";
+        }
+
+        String credentialAutofillService = "";
+        if (android.service.autofill.Flags.autofillCredmanDevIntegration()) {
+            credentialAutofillService = getCredentialAutofillService(context, tag);
+        }
+        if (providerName.equals(credentialAutofillService)) {
+            return "";
+        }
+
+        return providerName;
+    }
+
     private CombiPreference addProviderPreference(
             @NonNull Context prefContext,
             @NonNull CharSequence title,
             @Nullable Drawable icon,
             @NonNull String packageName,
             @Nullable CharSequence subtitle,
-            @Nullable CharSequence settingsActivity) {
+            @Nullable CharSequence settingsActivity,
+            @Nullable RestrictedLockUtils.EnforcedAdmin enforcedCredManAdmin) {
         final CombiPreference pref =
                 new CombiPreference(prefContext, mEnabledPackageNames.contains(packageName));
         pref.setTitle(title);
@@ -668,6 +733,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         if (subtitle != null) {
             pref.setSummary(subtitle);
         }
+
+        pref.setDisabledByAdmin(enforcedCredManAdmin);
 
         pref.setPreferenceListener(
                 new CombiPreference.OnCombiPreferenceClickListener() {
@@ -1005,8 +1072,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
     }
 
-    /** CombiPreference is a combination of TwoTargetPreference and SwitchPreference. */
-    public static class CombiPreference extends TwoTargetPreference {
+    /** CombiPreference is a combination of RestrictedPreference and SwitchPreference. */
+    public static class CombiPreference extends RestrictedPreference {
 
         private final Listener mListener = new Listener();
 
@@ -1015,11 +1082,12 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             public void onClick(View buttonView) {
                 // Forward the event.
                 if (mSwitch != null && mOnClickListener != null) {
-                    if (!mOnClickListener.onCheckChanged(CombiPreference.this, mSwitch.isChecked())) {
-                      // The update was not successful since there were too
-                      // many enabled providers to manually reset any state.
-                      mChecked = false;
-                      mSwitch.setChecked(false);
+                    if (!mOnClickListener.onCheckChanged(
+                            CombiPreference.this, mSwitch.isChecked())) {
+                        // The update was not successful since there were too
+                        // many enabled providers to manually reset any state.
+                        mChecked = false;
+                        mSwitch.setChecked(false);
                     }
                 }
             }
@@ -1064,6 +1132,24 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             return mChecked;
         }
 
+        @Override
+        public void setTitle(@Nullable CharSequence title) {
+            super.setTitle(title);
+            maybeUpdateContentDescription();
+        }
+
+        private void maybeUpdateContentDescription() {
+            final CharSequence appName = getTitle();
+
+            if (mSwitch != null && !TextUtils.isEmpty(appName)) {
+                mSwitch.setContentDescription(
+                        getContext()
+                                .getString(
+                                        R.string.credman_on_off_switch_content_description,
+                                        appName));
+            }
+        }
+
         public void setPreferenceListener(OnCombiPreferenceClickListener onClickListener) {
             mOnClickListener = onClickListener;
         }
@@ -1086,6 +1172,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
                 // Store this for later.
                 mSwitch = switchView;
+
+                // Update the content description.
+                maybeUpdateContentDescription();
             }
 
             super.setOnPreferenceClickListener(

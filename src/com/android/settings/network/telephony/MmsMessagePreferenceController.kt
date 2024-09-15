@@ -49,6 +49,7 @@ class MmsMessagePreferenceController @JvmOverloads constructor(
 
     override fun getAvailabilityStatus(subId: Int) =
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID &&
+            this::telephonyManager.isInitialized &&
             !telephonyManager.isDataEnabled &&
             telephonyManager.isApnMetered(ApnSetting.TYPE_MMS) &&
             !isFallbackDataEnabled()

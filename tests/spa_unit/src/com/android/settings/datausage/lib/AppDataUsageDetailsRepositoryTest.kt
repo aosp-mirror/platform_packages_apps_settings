@@ -125,6 +125,32 @@ class AppDataUsageDetailsRepositoryTest {
         )
     }
 
+    @Test
+    fun queryDetailsForCycles_appWithZeroUsage_filtered(): Unit = runBlocking {
+        networkStatsRepository.stub {
+            on { queryBuckets(CYCLE1_END_TIME, CYCLE2_END_TIME) } doReturn listOf(
+                Bucket(
+                    uid = UID,
+                    bytes = 0L,
+                    startTimeStamp = 0L,
+                    endTimeStamp = 0L,
+                ),
+            )
+        }
+        val repository = AppDataUsageDetailsRepository(
+            context = context,
+            cycles = null,
+            template = template,
+            uids = listOf(UID),
+            networkCycleDataRepository = networkCycleDataRepository,
+            networkStatsRepository = networkStatsRepository,
+        )
+
+        val detailsForCycles = repository.queryDetailsForCycles()
+
+        assertThat(detailsForCycles).isEmpty()
+    }
+
     private companion object {
         const val CYCLE1_START_TIME = 1694444444000L
         const val CYCLE1_END_TIME = 1695555555000L

@@ -27,6 +27,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.BatteryUtils;
 
@@ -45,6 +46,7 @@ public class ScreenOnTimeController extends BasePreferenceController {
     @VisibleForTesting Context mPrefContext;
     @VisibleForTesting PreferenceCategory mRootPreference;
     @VisibleForTesting TextViewPreference mScreenOnTimeTextPreference;
+    @VisibleForTesting String mScreenTimeCategoryLastFullChargeText;
 
     public ScreenOnTimeController(Context context) {
         super(context, ROOT_PREFERENCE_KEY);
@@ -61,25 +63,34 @@ public class ScreenOnTimeController extends BasePreferenceController {
         mPrefContext = screen.getContext();
         mRootPreference = screen.findPreference(ROOT_PREFERENCE_KEY);
         mScreenOnTimeTextPreference = screen.findPreference(SCREEN_ON_TIME_TEXT_PREFERENCE_KEY);
+        mScreenTimeCategoryLastFullChargeText =
+                mPrefContext.getString(R.string.screen_time_category_last_full_charge);
     }
 
-    void handleSceenOnTimeUpdated(Long screenOnTime, String slotTimestamp) {
+    void handleScreenOnTimeUpdated(
+            Long screenOnTime, String slotTimestamp, String accessibilitySlotTimestamp) {
         if (screenOnTime == null) {
             mRootPreference.setVisible(false);
             mScreenOnTimeTextPreference.setVisible(false);
             return;
         }
-        showCategoryTitle(slotTimestamp);
+        showCategoryTitle(slotTimestamp, accessibilitySlotTimestamp);
         showScreenOnTimeText(screenOnTime);
     }
 
     @VisibleForTesting
-    void showCategoryTitle(String slotTimestamp) {
-        mRootPreference.setTitle(
+    void showCategoryTitle(String slotTimestamp, String accessibilitySlotTimestamp) {
+        final String displayTitle =
                 slotTimestamp == null
-                        ? mPrefContext.getString(R.string.screen_time_category_last_full_charge)
+                        ? mScreenTimeCategoryLastFullChargeText
                         : mPrefContext.getString(
-                                R.string.screen_time_category_for_slot, slotTimestamp));
+                                R.string.screen_time_category_for_slot, slotTimestamp);
+        final String accessibilityTitle =
+                accessibilitySlotTimestamp == null
+                        ? mScreenTimeCategoryLastFullChargeText
+                        : mPrefContext.getString(
+                                R.string.screen_time_category_for_slot, accessibilitySlotTimestamp);
+        mRootPreference.setTitle(Utils.createAccessibleSequence(displayTitle, accessibilityTitle));
         mRootPreference.setVisible(true);
     }
 

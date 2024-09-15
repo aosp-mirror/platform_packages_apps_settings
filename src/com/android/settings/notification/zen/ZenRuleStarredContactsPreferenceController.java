@@ -25,6 +25,7 @@ import android.service.notification.ZenPolicy;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenRuleStarredContactsPreferenceController extends
@@ -43,10 +44,13 @@ public class ZenRuleStarredContactsPreferenceController extends
         mPriorityCategory = priorityCategory;
         mPackageManager = mContext.getPackageManager();
 
+        String contactsPackage = context.getString(R.string.config_contacts_package_name);
         mStarredContactsIntent = new Intent(Contacts.Intents.UI.LIST_STARRED_ACTION)
+                .setPackage(contactsPackage)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        mFallbackIntent =  new Intent(Intent.ACTION_MAIN);
+        mFallbackIntent = new Intent(Intent.ACTION_MAIN);
+        mFallbackIntent.setPackage(contactsPackage);
         mFallbackIntent.addCategory(Intent.CATEGORY_APP_CONTACTS);
         mFallbackIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     }

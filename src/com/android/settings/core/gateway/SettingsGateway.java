@@ -25,11 +25,13 @@ import com.android.settings.Settings;
 import com.android.settings.TestingSettings;
 import com.android.settings.TrustedCredentialsSettings;
 import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
+import com.android.settings.accessibility.AccessibilityHearingAidsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
+import com.android.settings.accessibility.AutoBrightnessPreferenceFragmentForSetupWizard;
 import com.android.settings.accessibility.CaptioningPropertiesFragment;
 import com.android.settings.accessibility.ColorAndMotionFragment;
-import com.android.settings.accessibility.ColorContrastFragment;
+import com.android.settings.accessibility.HearingDevicePairingFragment;
 import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard;
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
@@ -84,6 +86,7 @@ import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bugreporthandler.BugReportHandlerPicker;
 import com.android.settings.communal.CommunalDashboardFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
+import com.android.settings.connecteddevice.BluetoothDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.NfcAndPaymentFragment;
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
@@ -103,6 +106,7 @@ import com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.AutoBrightnessSettings;
+import com.android.settings.display.ColorContrastFragment;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.display.SmartAutoRotatePreferenceFragment;
@@ -133,7 +137,6 @@ import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.TrackpadSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
-import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.language.LanguageSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationServices;
@@ -144,6 +147,7 @@ import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.network.NetworkProviderSettings;
 import com.android.settings.network.apn.ApnEditor;
 import com.android.settings.network.apn.ApnSettings;
+import com.android.settings.network.telephony.CellularSecuritySettingsFragment;
 import com.android.settings.network.telephony.MobileNetworkSettings;
 import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.network.telephony.SatelliteSetting;
@@ -210,6 +214,7 @@ public class SettingsGateway {
             AdvancedConnectedDeviceDashboardFragment.class.getName(),
             CreateShortcut.class.getName(),
             BluetoothPairingDetail.class.getName(),
+            BluetoothDashboardFragment.class.getName(),
             WifiNetworkDetailsFragment.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings2.class.getName(),
@@ -223,7 +228,6 @@ public class SettingsGateway {
             DateTimeSettings.class.getName(),
             LocaleListEditor.class.getName(),
             AvailableVirtualKeyboardFragment.class.getName(),
-            LanguageAndInputSettings.class.getName(),
             LanguageSettings.class.getName(),
             KeyboardSettings.class.getName(),
             ModifierKeysSettings.class.getName(),
@@ -257,6 +261,7 @@ public class SettingsGateway {
             EditShortcutsPreferenceFragment.class.getName(),
             TextReadingPreferenceFragment.class.getName(),
             TextReadingPreferenceFragmentForSetupWizard.class.getName(),
+            AutoBrightnessPreferenceFragmentForSetupWizard.class.getName(),
             CaptioningPropertiesFragment.class.getName(),
             ToggleDaltonizerPreferenceFragment.class.getName(),
             ToggleColorInversionPreferenceFragment.class.getName(),
@@ -388,6 +393,9 @@ public class SettingsGateway {
             ScreenTimeoutSettings.class.getName(),
             ResetNetwork.class.getName(),
             VibrationIntensitySettingsFragment.class.getName(),
+            CellularSecuritySettingsFragment.class.getName(),
+            AccessibilityHearingAidsFragment.class.getName(),
+            HearingDevicePairingFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

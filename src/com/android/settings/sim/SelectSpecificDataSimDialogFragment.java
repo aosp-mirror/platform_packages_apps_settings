@@ -114,7 +114,7 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
         return getSubscriptionManager().getDefaultDataSubscriptionInfo();
     }
 
-    private void updateDialog(AlertDialog dialog) {
+    private void updateDialog(@Nullable AlertDialog dialog) {
         Log.d(TAG, "Dialog updated, dismiss status: " + mWasDismissed);
         if (mWasDismissed) {
             return;
@@ -123,6 +123,7 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
         if (dialog == null) {
             Log.d(TAG, "Dialog is null.");
             dismiss();
+            return;
         }
 
         SubscriptionInfo currentDataSubInfo = getDefaultDataSubInfo();

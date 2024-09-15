@@ -75,6 +75,13 @@
             android:entryValues="@array/hdcp_checking_values" />
 
         <ListPreference
+            android:key="bt_stack_log_level"
+            android:title="@string/bt_stack_log_level"
+            android:dialogTitle="@string/bt_stack_log_level_summary"
+            android:entries="@array/bt_stack_log_level_entries"
+            android:entryValues="@array/bt_stack_log_level_values" />
+
+        <ListPreference
             android:key="bt_hci_snoop_log"
             android:title="@string/bt_hci_snoop_log"
             android:dialogTitle="@string/bt_hci_snoop_log_summary"
@@ -145,7 +152,8 @@
         <Preference
             android:key="demo_mode"
             android:title="@string/demo_mode">
-            <intent android:action="com.android.settings.action.DEMO_MODE" />
+            <intent android:action="com.android.settings.action.DEMO_MODE"
+                    android:targetPackage="com.android.systemui"/>
         </Preference>
 
         <Preference
@@ -468,11 +476,6 @@
             android:entryValues="@array/bluetooth_max_connected_audio_devices_values" />
 
         <SwitchPreferenceCompat
-            android:key="nfc_stack_debuglog_enabled"
-            android:title="@string/nfc_stack_debuglog_title"
-            android:summary="@string/nfc_stack_debuglog_summary" />
-
-        <SwitchPreferenceCompat
             android:key="nfc_verbose_vendor_log"
             android:title="@string/nfc_verbose_vendor_log_title"
             android:summary="@string/nfc_verbose_vendor_log_summary" />
@@ -564,12 +567,6 @@
             android:title="@string/transparent_navigation_bar"
             android:summary="@string/transparent_navigation_bar_summary" />
 
-        <Preference
-            android:key="contrast_preference"
-            android:title="@string/contrast_title"
-            android:persistent="false"
-            settings:keywords="@string/keywords_contrast" />
-
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -643,9 +640,9 @@
             android:fragment="com.android.settings.development.transcode.TranscodeSettingsFragment" />
 
         <Preference
-            android:key="widevine_settings"
-            android:title="@string/widevine_settings_title"
-            android:fragment="com.android.settings.development.widevine.WidevineSettingsFragment" />
+            android:key="media_drm_settings"
+            android:title="@string/media_drm_settings_title"
+            android:fragment="com.android.settings.development.mediadrm.MediaDrmSettingsFragment" />
 
     </PreferenceCategory>
 
@@ -773,12 +770,6 @@
             android:key="force_enable_notes_role"
             android:title="@string/enable_notes_role_title"
             android:summary="@string/enable_notes_role_summary" />
-
-        <Preference
-            android:key="quarantined_apps"
-            android:title="@string/quarantined_apps_title"
-            settings:controller="com.android.settings.development.quarantine.QuarantinedAppsPreferenceController"
-            android:fragment="com.android.settings.development.quarantine.QuarantinedAppsFragment" />
 
     </PreferenceCategory>
 

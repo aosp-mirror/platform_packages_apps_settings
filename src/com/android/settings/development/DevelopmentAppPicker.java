@@ -39,7 +39,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class DevelopmentAppPicker extends DefaultAppPickerFragment {
+public class DevelopmentAppPicker extends DefaultAppPickerFragment implements
+        DeveloperOptionAwareMixin {
     public static final String EXTRA_REQUESTING_PERMISSION = "REQUESTING_PERMISSION";
     public static final String EXTRA_DEBUGGABLE = "DEBUGGABLE";
     public static final String EXTRA_SELECTING_APP = "SELECTING_APP";

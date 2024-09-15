@@ -23,8 +23,7 @@ import android.os.SystemProperties
 import androidx.annotation.DrawableRes
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
-
-
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 
 /** To load Regulatory Info from device. */
 object RegulatoryInfo {
@@ -38,10 +37,10 @@ object RegulatoryInfo {
 
     /** Gets the regulatory drawable. */
     fun Context.getRegulatoryInfo(): Drawable? {
-        val sku = getSku()
+        val sku = getSku().lowercase()
         if (sku.isNotBlank()) {
             // When hardware coo property exists, use regulatory_info_<sku>_<coo> resource if valid.
-            val coo = getCoo()
+            val coo = getCoo().lowercase()
             if (coo.isNotBlank()) {
                 getRegulatoryInfo("${REGULATORY_INFO_RESOURCE}_${sku}_$coo")?.let { return it }
             }
@@ -51,9 +50,9 @@ object RegulatoryInfo {
         return getRegulatoryInfo(REGULATORY_INFO_RESOURCE)
     }
 
-    private fun getCoo(): String = SystemProperties.get(KEY_COO).lowercase()
+    fun getCoo(): String = SystemProperties.get(KEY_COO)
 
-    private fun getSku(): String = SystemProperties.get(KEY_SKU).lowercase()
+    fun getSku(): String = SystemProperties.get(KEY_SKU)
 
     private fun Context.getRegulatoryInfo(fileName: String): Drawable? {
         val overlayPackageName =

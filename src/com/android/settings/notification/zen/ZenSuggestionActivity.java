@@ -12,11 +12,13 @@ public class ZenSuggestionActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         // start up zen settings activity
-        Intent settingsIntent = new Intent(Settings.ACTION_ZEN_MODE_SETTINGS);
+        Intent settingsIntent = new Intent(Settings.ACTION_ZEN_MODE_SETTINGS)
+                .setPackage(getPackageName());
         startActivity(settingsIntent);
 
         // start up onboarding activity
-        Intent onboardingActivity = new Intent(Settings.ZEN_MODE_ONBOARDING);
+        Intent onboardingActivity = new Intent(Settings.ZEN_MODE_ONBOARDING)
+                .setPackage(getPackageName());
         startActivity(onboardingActivity);
 
         finish();

@@ -67,12 +67,49 @@ public class SubSettingLauncherTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void cannotReuseLauncher() {
+    public void cannotReuseLauncher_launchMethod() {
         final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext))
                 .setDestination(SubSettingLauncherTest.class.getName())
                 .setSourceMetricsCategory(123);
         doNothing().when(launcher).launch(any(Intent.class));
         launcher.launch();
+        launcher.launch();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void verifyIntent_noDestination() {
+        final SubSettingLauncher launcher =
+                spy(new SubSettingLauncher(mContext))
+                        .setSourceMetricsCategory(123);
+        doNothing().when(launcher).launch(any(Intent.class));
+        launcher.launchWithIntent(launcher.toIntent());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void verifyIntent_noMetricsCategory() {
+        final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext))
+                .setDestination(SubSettingLauncherTest.class.getName());
+        doNothing().when(launcher).launch(any(Intent.class));
+        launcher.launchWithIntent(launcher.toIntent());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void verifyIntent_notTheCorrectClass() {
+        final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext))
+                .setDestination(SubSettingLauncherTest.class.getName())
+                .setSourceMetricsCategory(123);
+        doNothing().when(launcher).launch(any(Intent.class));
+        launcher.launchWithIntent(new Intent(Intent.ACTION_MAIN));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void cannotReuseLauncher_launchAndLaunchWithIntentMethod() {
+        final SubSettingLauncher launcher =
+                spy(new SubSettingLauncher(mContext))
+                        .setDestination(SubSettingLauncherTest.class.getName())
+                        .setSourceMetricsCategory(123);
+        doNothing().when(launcher).launch(any(Intent.class));
+        launcher.launchWithIntent(launcher.toIntent());
         launcher.launch();
     }
 

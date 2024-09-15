@@ -32,7 +32,11 @@ import com.android.settingslib.spa.testutils.FakeNavControllerWrapper
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
@@ -45,6 +49,8 @@ import org.junit.runner.RunWith
 class UserAspectRatioAppsPageProviderTest {
     @get:Rule
     val composeTestRule = createComposeRule()
+    private val testDispatcher = StandardTestDispatcher()
+    private val testScope = TestScope(testDispatcher)
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val fakeNavControllerWrapper = FakeNavControllerWrapper()
@@ -137,33 +143,37 @@ class UserAspectRatioAppsPageProviderTest {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun aspectRatioAppListModel_getSummaryDefault() {
-        val summary = getSummary(USER_MIN_ASPECT_RATIO_UNSET)
+    fun aspectRatioAppListModel_getSummaryDefault() = testScope.runTest {
+        val summary = setSummary(USER_MIN_ASPECT_RATIO_UNSET)
+        advanceUntilIdle()
 
-        assertThat(summary).isEqualTo(context.getString(R.string.user_aspect_ratio_app_default))
+        assertThat(summary()).isEqualTo(context.getString(R.string.user_aspect_ratio_app_default))
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun aspectRatioAppListModel_getSummaryWhenSplitScreen() {
-        val summary = getSummary(USER_MIN_ASPECT_RATIO_SPLIT_SCREEN)
+    fun aspectRatioAppListModel_getSummaryWhenSplitScreen() = testScope.runTest {
+        val summary = setSummary(USER_MIN_ASPECT_RATIO_SPLIT_SCREEN)
+        advanceUntilIdle()
 
-        assertThat(summary).isEqualTo(context.getString(R.string.user_aspect_ratio_half_screen))
+        assertThat(summary()).isEqualTo(context.getString(R.string.user_aspect_ratio_half_screen))
     }
 
-    private fun getSummary(userOverride: Int): String {
-        val listModel = UserAspectRatioAppListModel(context)
+    private fun setSummary(userOverride: Int): () -> String {
+        val listModel = UserAspectRatioAppListModel(context, testDispatcher)
+        val record = UserAspectRatioAppListItemModel(
+            app = APP,
+            userOverride = userOverride,
+            suggested = false,
+            canDisplay = true,
+        )
         lateinit var summary: () -> String
         composeTestRule.setContent {
-            summary = listModel.getSummary(option = 0,
-                record = UserAspectRatioAppListItemModel(
-                    app = APP,
-                    userOverride = userOverride,
-                    suggested = false,
-                    canDisplay = true,
-                ))
+            summary =  listModel.getSummary(option = 0, record = record)
         }
-        return summary()
+        return summary
     }
 
 

@@ -17,12 +17,14 @@
 package com.android.settings.core;
 
 import android.annotation.StringRes;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
@@ -129,13 +131,21 @@ public class SubSettingLauncher {
     }
 
     public void launch() {
+        launchWithIntent(toIntent());
+    }
+
+    /**
+     * Launch sub settings activity with an intent.
+     *
+     * @param intent the settings intent we want to launch
+     */
+    public void launchWithIntent(@NonNull Intent intent) {
+        verifyIntent(intent);
         if (mLaunched) {
             throw new IllegalStateException(
                     "This launcher has already been executed. Do not reuse");
         }
         mLaunched = true;
-
-        final Intent intent = toIntent();
 
         boolean launchAsUser = mLaunchRequest.mUserHandle != null
                 && mLaunchRequest.mUserHandle.getIdentifier() != UserHandle.myUserId();
@@ -149,6 +159,28 @@ public class SubSettingLauncher {
             launchForResult(mLaunchRequest.mResultListener, intent, mLaunchRequest.mRequestCode);
         } else {
             launch(intent);
+        }
+    }
+
+    /**
+     * Verify intent is correctly constructed.
+     *
+     * @param intent the intent to verify
+     */
+    @VisibleForTesting
+    public void verifyIntent(@NonNull Intent intent) {
+        String className = SubSettings.class.getName();
+        ComponentName componentName = intent.getComponent();
+        String destinationName = intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT);
+        int sourceMetricsCategory =
+                intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, -1);
+
+        if (componentName != null && !TextUtils.equals(className, componentName.getClassName())) {
+            throw new IllegalArgumentException(String.format("Class must be: %s", className));
+        } else if (TextUtils.isEmpty(destinationName)) {
+            throw new IllegalArgumentException("Destination fragment must be set");
+        } else if (sourceMetricsCategory < 0) {
+            throw new IllegalArgumentException("Source metrics category must be set");
         }
     }
 

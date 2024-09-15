@@ -25,7 +25,7 @@
         android:layout_marginTop="8dp"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-        android:textColor="?android:attr/textColorPrimary" />
+        android:textColor="@color/settingslib_materialColorOnSurface" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             android:paddingHorizontal="16dp"
             android:text="@string/battery_tips_card_action_button"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:textColor="@color/power_anomaly_primary_button_text_color"
+            android:textColor="@color/settingslib_materialColorOnPrimary"
             app:backgroundTint="@color/color_accent_selector" />
     </LinearLayout>
 </LinearLayout>
