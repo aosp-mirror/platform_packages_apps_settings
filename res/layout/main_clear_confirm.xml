@@ -19,21 +19,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/setup_wizard_layout"
     android:icon="@drawable/ic_delete_accent"
-    app:sucHeaderText="@string/main_clear_confirm_title">
-
-    <LinearLayout
-        style="@style/SudContentFrame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/sud_layout_subtitle"
-            style="@style/TextAppearance.PreferenceTitle.SettingsLib"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main_clear_final_desc"/>
-    </LinearLayout>
-</com.google.android.setupdesign.GlifLayout>
+    app:sucHeaderText="@string/main_clear_confirm_title" />

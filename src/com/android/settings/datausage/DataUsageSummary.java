@@ -180,14 +180,16 @@ public class DataUsageSummary extends DashboardFragment {
     void addWifiSection() {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_wifi);
-        category.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build(), 0);
+        category.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build(),
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
     }
 
     private void addEthernetSection() {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_ethernet);
         category.setTemplate(
-                new NetworkTemplate.Builder(NetworkTemplate.MATCH_ETHERNET).build(), 0);
+                new NetworkTemplate.Builder(NetworkTemplate.MATCH_ETHERNET).build(),
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
     }
 
     private Preference inflatePreferences(int resId) {

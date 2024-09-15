@@ -32,7 +32,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -73,8 +72,6 @@ public class MobileNetworkSummaryControllerTest {
     @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
-    private UserManager mUserManager;
-    @Mock
     private MobileNetworkRepository mMobileNetworkRepository;
     @Mock
     private MobileNetworkRepository.MobileNetworkCallback mMobileNetworkCallback;
@@ -92,7 +89,6 @@ public class MobileNetworkSummaryControllerTest {
         doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
         doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
         doReturn(mEuiccManager).when(mContext).getSystemService(EuiccManager.class);
-        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         mMobileNetworkRepository = MobileNetworkRepository.getInstance(mContext);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
@@ -116,21 +112,6 @@ public class MobileNetworkSummaryControllerTest {
         mMobileNetworkRepository.removeRegister(mMobileNetworkCallback);
         SubscriptionUtil.setActiveSubscriptionsForTesting(null);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
-    }
-
-    @Test
-    public void isAvailable_wifiOnlyMode_notAvailable() {
-        when(mTelephonyManager.isDataCapable()).thenReturn(false);
-        when(mUserManager.isAdminUser()).thenReturn(true);
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_secondaryUser_notAvailable() {
-        when(mTelephonyManager.isDataCapable()).thenReturn(true);
-        when(mUserManager.isAdminUser()).thenReturn(false);
-        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

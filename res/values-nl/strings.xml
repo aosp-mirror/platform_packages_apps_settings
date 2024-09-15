@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Als bluetooth aanstaat, kan je apparaat communiceren met andere bluetooth-apparaten in de buurt.\n\nVoor een betere apparaatfunctionaliteit kunnen apps en services nog steeds op elk moment zoeken naar apparaten in de buurt, zelfs als bluetooth uitstaat. Dit kan worden gebruikt om bijvoorbeeld locatiegebaseerde functies en services te verbeteren. Je kunt dit wijzigen in de instellingen voor bluetooth-scannen."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Als bluetooth aanstaat, kan je apparaat communiceren met andere bluetooth-apparaten in de buurt. Functies zoals Quick Share en Vind mijn apparaat gebruiken bluetooth.\n\nApps en services kunnen nog steeds op elk moment apparaten in de buurt zoeken, zelfs als bluetooth uitstaat. Dit kan bijvoorbeeld worden gebruikt om functies en services op basis van locatie te verbeteren. Je kunt dit wijzigen in de instellingen voor Bluetooth-scannen."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Wijzigen"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is niet verbonden"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Vergeet dit apparaat om veiligheidsredenen en koppel het opnieuw"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Apparaat vergeten"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Annuleren"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Apparaatgegevens"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Toetsenbordinstellingen"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Meer instellingen"</string>
@@ -1991,10 +1995,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Resetten"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Functietoets kiezen"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Kies een nieuwe toets voor <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Toegankelijkheid met fysiek toetsenbord"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Plaktoetsen, bouncetoetsen, muisknoppen"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Indeling: <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standaard"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatisch: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2206,11 +2208,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Geavanceerd"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Toegankelijkheid is ingesteld op <xliff:g id="SERVICE">%1$s</xliff:g>. Als je vergroting wilt gebruiken, tik je op de knop Toegankelijkheid, houd je deze vast en selecteer je Vergroting."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Het toegankelijkheidsgebaar is ingesteld op <xliff:g id="SERVICE">%1$s</xliff:g>. Als je vergroting wilt gebruiken, swipe je met twee vingers omhoog vanaf het onderkant van het scherm en houd je vast. Selecteer vervolgens Vergroting."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Snelkoppeling met volumeknoppen"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Instellingen voor snelkoppelingen"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Snelkoppeling met volumetoetsen vanaf vergrendelscherm"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Sta toe dat de functiesnelkoppeling wordt aangezet vanaf het vergrendelscherm. Houd beide volumeknoppen een paar seconden ingedrukt."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Knop Toegankelijkheid"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Knop en gebaar voor toegankelijkheid"</string>
@@ -3351,8 +3351,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Uit"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Geen}=1{1 planning ingesteld}other{# planningen ingesteld}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Niet storen"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"Modi"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimaliseer afleidingen en houd de controle over je aandacht met modi voor slapen, werken, autorijden en alles daartussenin."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Je eigen modus maken"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Krijg alleen meldingen van belangrijke mensen en apps"</string>
@@ -3647,11 +3646,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"De app kan berichten beantwoorden en acties uitvoeren voor knoppen in meldingen, waaronder meldingen snoozen of sluiten en gesprekken beantwoorden."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Instellingen wijzigen"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"De app kan Niet storen aan- of uitzetten en gerelateerde instellingen wijzigen"</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"De app kan modi beheren en activeren, en gerelateerde instellingen wijzigen."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Als je <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> geen toegang tot meldingen geeft, krijgt Niet storen mogelijk ook geen toegang."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Als je toegang tot meldingen intrekt voor <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, wordt toegang tot modi misschien ook ingetrokken."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Uitzetten"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Annuleren"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Realtime"</string>
@@ -3712,12 +3709,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Toegang tot Niet storen"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Niet storen toestaan"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Er zijn geen geïnstalleerde apps die toegang tot \'Niet storen\' hebben aangevraagd"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Toegang tot modi"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Toegang tot modi toestaan"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Er zijn geen geïnstalleerde apps die toegang tot modi hebben aangevraagd"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Je hebt meldingen van deze app niet toegestaan"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Op jouw verzoek toont Android geen meldingen van deze categorie op dit apparaat"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Op jouw verzoek toont Android deze groep meldingen niet op dit apparaat"</string>
@@ -4108,12 +4102,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Moet aan blijven omdat toegang tot meldingen is gegeven"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Toegang tot \'Niet storen\' intrekken voor <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Alle \'Niet storen\'-regels die door deze app zijn gemaakt, worden verwijderd."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Toegang tot modi geven voor <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"De app kan de functie Niet storen aan-/uitzetten, modi beheren en activeren, en wijzigingen aanbrengen in gerelateerde instellingen."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Toegang tot modi intrekken voor <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Alle modi die door deze app zijn gemaakt, worden verwijderd."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Niet optimaliseren"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimaliseren"</string>
@@ -5365,8 +5356,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Audio delen gestopt"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Een compatibel apparaat verbinden"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Als je audio wilt delen, verbind je eerst een LE Audio-koptelefoon met je telefoon"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Overschakelen naar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Verbinden met een LE-audiostream"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Audiostreams in de buurt"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Audiostreams"</string>
@@ -5411,7 +5401,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scan de QR-code van een audiostream om mee te luisteren met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Kan wachtwoord niet bewerken tijdens het delen. Als je het wachtwoord wilt wijzigen, zet je audio delen eerst uit."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-codescanner"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Hulp nodig?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Zoeken in Instellingen"</string>
 </resources>

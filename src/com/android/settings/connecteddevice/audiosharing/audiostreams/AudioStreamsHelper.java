@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.BROADCAST_ID;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.BROADCAST_TITLE;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.DEVICES;
+import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
 
 import static java.util.Collections.emptyList;
 
@@ -63,6 +64,12 @@ public class AudioStreamsHelper {
 
     private final @Nullable LocalBluetoothManager mBluetoothManager;
     private final @Nullable LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
+    // Referring to Broadcast Audio Scan Service 1.0
+    // Table 3.9: Broadcast Receive State characteristic format
+    // 0x00000000: 0b0 = Not synchronized to BIS_index[x]
+    // 0xFFFFFFFF: Failed to sync to BIG
+    private static final long BIS_SYNC_NOT_SYNC_TO_BIS = 0x00000000L;
+    private static final long BIS_SYNC_FAILED_SYNC_TO_BIG = 0xFFFFFFFFL;
 
     AudioStreamsHelper(@Nullable LocalBluetoothManager bluetoothManager) {
         mBluetoothManager = bluetoothManager;
@@ -144,6 +151,19 @@ public class AudioStreamsHelper {
                 .toList();
     }
 
+    /** Retrieves a list of all LE broadcast receive states from sinks with source present. */
+    @VisibleForTesting
+    public List<BluetoothLeBroadcastReceiveState> getAllPresentSources() {
+        if (mLeBroadcastAssistant == null) {
+            Log.w(TAG, "getAllPresentSources(): LeBroadcastAssistant is null!");
+            return emptyList();
+        }
+        return getConnectedBluetoothDevices(mBluetoothManager, /* inSharingOnly= */ true).stream()
+                .flatMap(sink -> mLeBroadcastAssistant.getAllSources(sink).stream())
+                .filter(AudioStreamsHelper::hasSourcePresent)
+                .toList();
+    }
+
     /** Retrieves LocalBluetoothLeBroadcastAssistant. */
     @VisibleForTesting
     @Nullable
@@ -153,7 +173,18 @@ public class AudioStreamsHelper {
 
     /** Checks the connectivity status based on the provided broadcast receive state. */
     public static boolean isConnected(BluetoothLeBroadcastReceiveState state) {
-        return state.getBisSyncState().stream().anyMatch(bitmap -> bitmap != 0);
+        return state.getBisSyncState().stream()
+                .anyMatch(
+                        bitmap ->
+                                (bitmap != BIS_SYNC_NOT_SYNC_TO_BIS
+                                        && bitmap != BIS_SYNC_FAILED_SYNC_TO_BIG));
+    }
+
+    /** Checks the connectivity status based on the provided broadcast receive state. */
+    public static boolean hasSourcePresent(BluetoothLeBroadcastReceiveState state) {
+        // Referring to Broadcast Audio Scan Service 1.0
+        // All zero address means no source on the sink device
+        return !state.getSourceDevice().getAddress().equals("00:00:00:00:00:00");
     }
 
     static boolean isBadCode(BluetoothLeBroadcastReceiveState state) {
@@ -242,7 +273,8 @@ public class AudioStreamsHelper {
         List<BluetoothLeBroadcastReceiveState> sourceList =
                 assistant.getAllSources(cachedDevice.getDevice());
         if (!sourceList.isEmpty()
-                && sourceList.stream().anyMatch(AudioStreamsHelper::isConnected)) {
+                && (audioSharingHysteresisModeFix()
+                        || sourceList.stream().anyMatch(AudioStreamsHelper::isConnected))) {
             Log.d(
                     TAG,
                     "Lead device has connected broadcast source, device = "
@@ -253,7 +285,9 @@ public class AudioStreamsHelper {
         for (CachedBluetoothDevice device : cachedDevice.getMemberDevice()) {
             List<BluetoothLeBroadcastReceiveState> list =
                     assistant.getAllSources(device.getDevice());
-            if (!list.isEmpty() && list.stream().anyMatch(AudioStreamsHelper::isConnected)) {
+            if (!list.isEmpty()
+                    && (audioSharingHysteresisModeFix()
+                            || list.stream().anyMatch(AudioStreamsHelper::isConnected))) {
                 Log.d(
                         TAG,
                         "Member device has connected broadcast source, device = "

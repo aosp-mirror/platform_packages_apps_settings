@@ -94,8 +94,10 @@ android_library {
         "MediaDrmSettingsFlagsLib",
         "Settings-change-ids",
         "SettingsLib",
-        "SettingsLibDataStore",
         "SettingsLibActivityEmbedding",
+        "SettingsLibDataStore",
+        "SettingsLibMetadata",
+        "SettingsLibPreference",
         "aconfig_settings_flags_lib",
         "accessibility_settings_flags_lib",
         "contextualcards",
@@ -111,7 +113,10 @@ android_library {
         "keyboard_flags_lib",
     ],
 
-    plugins: ["androidx.room_room-compiler-plugin"],
+    plugins: [
+        "SettingsLibMetadata-processor",
+        "androidx.room_room-compiler-plugin",
+    ],
 
     errorprone: {
         extra_check_modules: ["//external/nullaway:nullaway_plugin"],

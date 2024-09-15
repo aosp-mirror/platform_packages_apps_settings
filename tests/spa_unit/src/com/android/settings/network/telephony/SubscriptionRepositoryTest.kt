@@ -120,7 +120,7 @@ class SubscriptionRepositoryTest {
             )
         }
 
-        val subInfos = context.getSelectableSubscriptionInfoList()
+        val subInfos = repository.getSelectableSubscriptionInfoList()
 
         assertThat(subInfos.map { it.simSlotIndex })
             .containsExactly(SIM_SLOT_INDEX_0, SIM_SLOT_INDEX_1).inOrder()
@@ -141,7 +141,7 @@ class SubscriptionRepositoryTest {
             )
         }
 
-        val subInfos = context.getSelectableSubscriptionInfoList()
+        val subInfos = repository.getSelectableSubscriptionInfoList()
 
         assertThat(subInfos.map { it.simSlotIndex })
             .containsExactly(SIM_SLOT_INDEX_1, SubscriptionManager.INVALID_SIM_SLOT_INDEX).inOrder()
@@ -164,7 +164,7 @@ class SubscriptionRepositoryTest {
             )
         }
 
-        val subInfos = context.getSelectableSubscriptionInfoList()
+        val subInfos = repository.getSelectableSubscriptionInfoList()
 
         assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_IN_SLOT_0)
     }
@@ -184,7 +184,7 @@ class SubscriptionRepositoryTest {
             )
         }
 
-        val subInfos = context.getSelectableSubscriptionInfoList()
+        val subInfos = repository.getSelectableSubscriptionInfoList()
 
         assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_3_NOT_IN_SLOT)
     }

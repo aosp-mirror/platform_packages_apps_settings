@@ -834,6 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Cuando el Bluetooth está activado, tu dispositivo puede comunicarse con otros dispositivos Bluetooth cercanos.\n\nPara mejorar la experiencia de uso del dispositivo, las aplicaciones y los servicios pueden buscar dispositivos cercanos en cualquier momento aunque el Bluetooth esté desactivado. Esto puede servir, por ejemplo, para mejorar servicios y funciones basados en la ubicación. Puedes cambiar esta opción en los ajustes de búsqueda de dispositivos Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Con el Bluetooth activado, tu dispositivo se puede comunicar con otros dispositivos Bluetooth cercanos. Las funciones como Quick Share y Encontrar mi dispositivo usan Bluetooth.\n\nAunque el Bluetooth esté desactivado, las aplicaciones y los servicios pueden buscar dispositivos cercanos en cualquier momento para mejorar las funciones y los servicios basados en la ubicación, entre otras cosas. Puedes cambiar esta opción en los ajustes de la búsqueda de dispositivos Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Cambiar"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> no conectado"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Por tu seguridad, olvida este dispositivo y, después, vuelve a emparejarlo"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Olvidar dispositivo"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Cancelar"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalles del dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Ajustes del teclado"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Más ajustes"</string>
@@ -1991,10 +1995,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Restablecer"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Elige una tecla modificadora"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Elige una nueva tecla para <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accesibilidad del teclado físico"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Teclas persistentes, teclas de rebote y teclas para el ratón"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Diseño <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminado"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automático: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2206,11 +2208,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Ajustes avanzados"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Se ha definido <xliff:g id="SERVICE">%1$s</xliff:g> como preferencia de Accesibilidad. Para utilizar la ampliación, mantén pulsado el botón de accesibilidad y selecciona esa opción."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Se ha definido el gesto de accesibilidad para <xliff:g id="SERVICE">%1$s</xliff:g>. Para usar la función de ampliación, desliza hacia arriba con dos dedos desde la parte inferior de la pantalla y mantenla pulsada. A continuación, selecciona la ampliación."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Acceso directo de teclas de volumen"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Ajustes de accesos directos"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Acceso directo de teclas de volumen desde la pantalla de bloqueo"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permite que el acceso directo de accesibilidad se pueda activar desde la pantalla de bloqueo. Mantén pulsadas las dos teclas de volumen durante unos segundos."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Botón de accesibilidad"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Botón y gesto de accesibilidad"</string>
@@ -3351,8 +3351,7 @@
     <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Desactivado"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ninguna}=1{1 programación creada}other{# programaciones creadas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No molestar"</string>
-    <!-- no translation found for zen_modes_list_title (4796033710444068729) -->
-    <skip />
+    <string name="zen_modes_list_title" msgid="4796033710444068729">"Modos"</string>
     <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimiza las distracciones y toma el control de tu atención con los modos para dormir, trabajar, conducir o cualquier otra actividad."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Crea tu propio modo"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recibe notificaciones solo de personas y aplicaciones importantes"</string>
@@ -3647,11 +3646,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Puede responder a mensajes y realizar acciones en botones de notificaciones, como posponer o descartar notificaciones y responder a llamadas."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Cambiar ajustes"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Puede activar o desactivar el modo No molestar y cambiar ajustes relacionados."</string>
-    <!-- no translation found for nls_feature_modes_settings_summary (70022458305195595) -->
-    <skip />
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Puede gestionar y activar los modos, así como cambiar ajustes relacionados."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si desactivas el acceso a las notificaciones de <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, es posible que también se desactive el modo No molestar."</string>
-    <!-- no translation found for notification_listener_disable_modes_warning_summary (7528432011433844158) -->
-    <skip />
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Si desactivas el acceso a las notificaciones de <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, es posible que también se desactive el acceso a los modos."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desactivar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"En tiempo real"</string>
@@ -3712,12 +3709,9 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acceso a No molestar"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir No molestar"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ninguna aplicación instalada ha solicitado acceso a No molestar"</string>
-    <!-- no translation found for manage_zen_modes_access_title (2520680004915648824) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_detail_switch (4060429747631111299) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_empty_text (8750927923904377110) -->
-    <skip />
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Acceso a los modos"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Permitir acceso a los modos"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Ninguna aplicación instalada ha solicitado acceso a los modos"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"No has permitido notificaciones de esta aplicación"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Por petición tuya, Android está bloqueando esta categoría de notificaciones para que no se muestren en el dispositivo"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Por petición tuya, Android está bloqueando este grupo de notificaciones para que no se muestren en el dispositivo"</string>
@@ -4108,12 +4102,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Debe activarse porque el acceso a las notificaciones está activado"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"¿Quieres que <xliff:g id="APP">%1$s</xliff:g> ya no pueda acceder a No molestar?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Se quitarán todas las reglas del modo No molestar que esta aplicación haya creado."</string>
-    <!-- no translation found for zen_modes_access_warning_dialog_title (8372164559156809659) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_warning_dialog_summary (2432178679607798200) -->
-    <skip />
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (6288548508466545492) -->
-    <skip />
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"¿Permitir que <xliff:g id="APP">%1$s</xliff:g> acceda a los modos?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"La aplicación podrá activar o desactivar No molestar, gestionar y activar los modos y hacer cambios en los ajustes relacionados."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"¿Revocar el acceso a Modos de <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Se eliminarán todos los modos creados por esta aplicación."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"No optimizar"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizar"</string>
@@ -5413,5 +5404,5 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Escáner de códigos QR"</string>
     <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
     <skip />
-    <string name="homepage_search" msgid="6759334912284663559">"Configuración de búsqueda"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Buscar ajustes"</string>
 </resources>
