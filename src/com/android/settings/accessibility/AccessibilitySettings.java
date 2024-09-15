@@ -473,7 +473,7 @@ public class AccessibilitySettings extends DashboardFragment implements
      * @param installedShortcutList A list of installed {@link AccessibilityShortcutInfo}s.
      * @param installedServiceList  A list of installed {@link AccessibilityServiceInfo}s.
      */
-    private List<RestrictedPreference> getInstalledAccessibilityPreferences(Context context,
+    private static List<RestrictedPreference> getInstalledAccessibilityPreferences(Context context,
             List<AccessibilityShortcutInfo> installedShortcutList,
             List<AccessibilityServiceInfo> installedServiceList) {
         final RestrictedPreferenceHelper preferenceHelper = new RestrictedPreferenceHelper(context);
@@ -622,6 +622,51 @@ public class AccessibilitySettings extends DashboardFragment implements
                     return FeatureFactory.getFeatureFactory()
                             .getAccessibilitySearchFeatureProvider().getSearchIndexableRawData(
                                     context);
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context,
+                        boolean enabled) {
+                    List<SearchIndexableRaw> dynamicRawData = super.getDynamicRawDataToIndex(
+                            context, enabled);
+                    if (dynamicRawData == null) {
+                        dynamicRawData = new ArrayList<>();
+                    }
+                    if (!Flags.fixA11ySettingsSearch()) {
+                        return dynamicRawData;
+                    }
+
+                    AccessibilityManager a11yManager = context.getSystemService(
+                            AccessibilityManager.class);
+                    AccessibilitySearchFeatureProvider a11ySearchFeatureProvider =
+                            FeatureFactory.getFeatureFactory()
+                                    .getAccessibilitySearchFeatureProvider();
+                    List<RestrictedPreference> installedA11yFeaturesPref =
+                            AccessibilitySettings.getInstalledAccessibilityPreferences(
+                                    context,
+                                    a11yManager.getInstalledAccessibilityShortcutListAsUser(
+                                            context, UserHandle.myUserId()),
+                                    a11yManager.getInstalledAccessibilityServiceList()
+                            );
+                    for (RestrictedPreference pref : installedA11yFeaturesPref) {
+                        SearchIndexableRaw indexableRaw = new SearchIndexableRaw(context);
+                        indexableRaw.key = pref.getKey();
+                        indexableRaw.title = pref.getTitle().toString();
+                        @NonNull String synonyms = "";
+                        if (pref instanceof AccessibilityServicePreference) {
+                            synonyms = a11ySearchFeatureProvider.getSynonymsForComponent(
+                                    context,
+                                    ((AccessibilityServicePreference) pref).getComponentName());
+                        } else if (pref instanceof AccessibilityActivityPreference) {
+                            synonyms = a11ySearchFeatureProvider.getSynonymsForComponent(
+                                    context,
+                                    ((AccessibilityActivityPreference) pref).getComponentName());
+                        }
+                        indexableRaw.keywords = synonyms;
+                        dynamicRawData.add(indexableRaw);
+                    }
+
+                    return dynamicRawData;
                 }
             };
 

@@ -42,7 +42,6 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.Flags;
 
 import androidx.fragment.app.Fragment;
 import androidx.test.core.app.ApplicationProvider;
@@ -50,6 +49,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settings.testutils.shadow.ShadowApplicationPackageManager;
@@ -78,6 +78,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowContentResolver;
+import org.robolectric.shadows.ShadowLooper;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -153,6 +154,53 @@ public class AccessibilitySettingsTest {
                         .getRawDataToIndex(mContext, true);
 
         assertThat(indexableRawList).isNull();
+    }
+
+    @DisableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    @Test
+    public void getDynamicRawDataToIndex_hasInstalledA11yFeatures_flagOff_returnEmpty() {
+        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
+                List.of(mServiceInfo));
+        mShadowAccessibilityManager.setInstalledAccessibilityShortcutListAsUser(
+                List.of(getMockAccessibilityShortcutInfo()));
+
+        assertThat(AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER.getDynamicRawDataToIndex(
+                mContext, /* enabled= */ true))
+                .isEmpty();
+    }
+
+    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    @Test
+    public void getDynamicRawDataToIndex_hasInstalledA11yFeatures_flagOn_returnRawDataForInstalledA11yFeatures() {
+        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
+                List.of(mServiceInfo));
+        mShadowAccessibilityManager.setInstalledAccessibilityShortcutListAsUser(
+                List.of(getMockAccessibilityShortcutInfo()));
+        final AccessibilitySearchFeatureProvider featureProvider =
+                FakeFeatureFactory.setupForTest().getAccessibilitySearchFeatureProvider();
+        final String synonyms = "fake keyword1, fake keyword2";
+        when(featureProvider.getSynonymsForComponent(mContext, ACTIVITY_COMPONENT_NAME))
+                .thenReturn("");
+        when(featureProvider.getSynonymsForComponent(mContext, SERVICE_COMPONENT_NAME))
+                .thenReturn(synonyms);
+
+        final List<SearchIndexableRaw> indexableRawDataList =
+                AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER.getDynamicRawDataToIndex(
+                        mContext, /* enabled= */ true);
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+
+        assertThat(indexableRawDataList).hasSize(2);
+        SearchIndexableRaw a11yActivityIndexableData = indexableRawDataList.get(0);
+        assertThat(a11yActivityIndexableData.key).isEqualTo(
+                ACTIVITY_COMPONENT_NAME.flattenToString());
+        assertThat(a11yActivityIndexableData.title).isEqualTo(DEFAULT_LABEL);
+        assertThat(a11yActivityIndexableData.keywords).isEmpty();
+
+        SearchIndexableRaw a11yServiceIndexableData = indexableRawDataList.get(1);
+        assertThat(a11yServiceIndexableData.key).isEqualTo(
+                SERVICE_COMPONENT_NAME.flattenToString());
+        assertThat(a11yServiceIndexableData.title).isEqualTo(DEFAULT_LABEL);
+        assertThat(a11yServiceIndexableData.keywords).isEqualTo(synonyms);
     }
 
     @Test
@@ -328,7 +376,7 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void onCreate_flagDisabled_haveRegisterToSpecificUrisAndActions() {
         setupFragment();
 
@@ -341,7 +389,7 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void onCreate_flagEnabled_haveRegisterToSpecificUrisAndActions() {
         setupFragment();
 
@@ -415,7 +463,7 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_CHECK_PREBUNDLED_IS_PREINSTALLED)
+    @EnableFlags(Flags.FLAG_CHECK_PREBUNDLED_IS_PREINSTALLED)
     public void testNonPreinstalledApp_IncludedInDownloadedCategory() {
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
                 List.of(getMockAccessibilityServiceInfo(
