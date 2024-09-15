@@ -20,6 +20,7 @@ import static com.android.internal.widget.LockPatternUtils.MIN_AUTO_PIN_REQUIREM
 
 import android.content.Context;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
@@ -28,7 +29,6 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 /**
  * Preference controller for the pin_auto_confirm setting.
@@ -40,11 +40,10 @@ public class AutoPinConfirmPreferenceController extends AbstractPreferenceContro
 
     private final int mUserId;
     private final LockPatternUtils mLockPatternUtils;
-    private final ObservablePreferenceFragment mParentFragment;
+    private final Fragment mParentFragment;
 
     public AutoPinConfirmPreferenceController(Context context, int userId,
-            LockPatternUtils lockPatternUtils,
-            ObservablePreferenceFragment parentFragment) {
+            LockPatternUtils lockPatternUtils, Fragment parentFragment) {
         super(context);
         mUserId = userId;
         mLockPatternUtils = lockPatternUtils;

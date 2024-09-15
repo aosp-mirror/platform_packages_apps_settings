@@ -44,7 +44,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.zen.AbstractZenModePreferenceController.ZenModeConfigWrapper;
-import com.android.settings.notification.zen.ZenModeSettingsFooterPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -289,7 +288,7 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
         injectedRule.component = mock(ComponentName.class);
         injectedRule.name = nameAndId;
         injectedRule.conditionId = new Uri.Builder().authority(nameAndId).build(); // unique uri
-        when(injectedRule.isAutomaticActive()).thenReturn(isActive);
+        when(injectedRule.isActive()).thenReturn(isActive);
         when(mConfigWrapper.isTimeRule(injectedRule.conditionId)).thenReturn(!isApp);
         if (isApp) {
             when(injectedRule.component.getPackageName()).thenReturn(TEST_APP_NAME);

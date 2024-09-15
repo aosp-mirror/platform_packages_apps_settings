@@ -42,13 +42,48 @@ private const val TAG = "SubscriptionRepository"
 class SubscriptionRepository(private val context: Context) {
     private val subscriptionManager = context.requireSubscriptionManager()
 
+    /** A cold flow of a list of subscriptions that are available and visible to the user. */
+    fun selectableSubscriptionInfoListFlow(): Flow<List<SubscriptionInfo>> =
+        context
+            .subscriptionsChangedFlow()
+            .map { getSelectableSubscriptionInfoList() }
+            .conflate()
+            .flowOn(Dispatchers.Default)
+
     /**
      * Return a list of subscriptions that are available and visible to the user.
      *
      * @return list of user selectable subscriptions.
      */
-    fun getSelectableSubscriptionInfoList(): List<SubscriptionInfo> =
-        context.getSelectableSubscriptionInfoList()
+    fun getSelectableSubscriptionInfoList(): List<SubscriptionInfo> {
+        val availableList =
+            subscriptionManager.getAvailableSubscriptionInfoList() ?: return emptyList()
+        val visibleList =
+            availableList.filter { subInfo ->
+                // Opportunistic subscriptions are considered invisible to users so they should
+                // never be returned.
+                SubscriptionUtil.isSubscriptionVisible(subscriptionManager, context, subInfo)
+            }
+        return visibleList
+            .groupBy { it.groupUuid }
+            .flatMap { (groupUuid, subInfos) ->
+                if (groupUuid == null) {
+                    subInfos
+                } else {
+                    // Multiple subscriptions in a group should only have one representative.
+                    // It should be the current active primary subscription if any, or the primary
+                    // subscription with minimum subscription id.
+                    subInfos
+                        .filter { it.simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX }
+                        .ifEmpty { subInfos.sortedBy { it.subscriptionId } }
+                        .take(1)
+                }
+            }
+            // Matching the sorting order in
+            // SubscriptionManagerService.getAvailableSubscriptionInfoList
+            .sortedWith(compareBy({ it.sortableSimSlotIndex }, { it.subscriptionId }))
+            .also { Log.d(TAG, "getSelectableSubscriptionInfoList: $it") }
+    }
 
     /** Flow of whether the subscription visible for the given [subId]. */
     fun isSubscriptionVisibleFlow(subId: Int): Flow<Boolean> {
@@ -153,38 +188,6 @@ fun Context.phoneNumberFlow(subscriptionInfo: SubscriptionInfo): Flow<String?> =
 
 fun Context.subscriptionsChangedFlow(): Flow<Unit> =
     SubscriptionRepository(this).subscriptionsChangedFlow()
-
-/**
- * Return a list of subscriptions that are available and visible to the user.
- *
- * @return list of user selectable subscriptions.
- */
-fun Context.getSelectableSubscriptionInfoList(): List<SubscriptionInfo> {
-    val subscriptionManager = requireSubscriptionManager()
-    val availableList = subscriptionManager.getAvailableSubscriptionInfoList() ?: return emptyList()
-    val visibleList = availableList.filter { subInfo ->
-        // Opportunistic subscriptions are considered invisible
-        // to users so they should never be returned.
-        SubscriptionUtil.isSubscriptionVisible(subscriptionManager, this, subInfo)
-    }
-    return visibleList
-        .groupBy { it.groupUuid }
-        .flatMap { (groupUuid, subInfos) ->
-            if (groupUuid == null) {
-                subInfos
-            } else {
-                // Multiple subscriptions in a group should only have one representative.
-                // It should be the current active primary subscription if any, or the primary
-                // subscription with minimum subscription id.
-                subInfos.filter { it.simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX }
-                    .ifEmpty { subInfos.sortedBy { it.subscriptionId } }
-                    .take(1)
-            }
-        }
-        // Matching the sorting order in SubscriptionManagerService.getAvailableSubscriptionInfoList
-        .sortedWith(compareBy({ it.sortableSimSlotIndex }, { it.subscriptionId }))
-        .also { Log.d(TAG, "getSelectableSubscriptionInfoList: $it") }
-}
 
 /** Subscription with invalid sim slot index has lowest sort order. */
 private val SubscriptionInfo.sortableSimSlotIndex: Int
