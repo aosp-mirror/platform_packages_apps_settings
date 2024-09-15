@@ -246,11 +246,11 @@ class BluetoothDeviceDetailsViewModelTest {
     }
 
     private fun getLatestLayout(layout: DeviceSettingLayout): List<List<Int>> {
-        var latestLayout = MutableList(layout.rows.size) { emptyList<Int>() }
+        val latestLayout = MutableList(layout.rows.size) { emptyList<Int>() }
         for (i in layout.rows.indices) {
             layout.rows[i]
-                .settingIds
-                .onEach { latestLayout[i] = it }
+                .columns
+                .onEach { latestLayout[i] = it.map { c -> c.settingId } }
                 .launchIn(testScope.backgroundScope)
         }
 
@@ -278,15 +278,15 @@ class BluetoothDeviceDetailsViewModelTest {
         DeviceSettingModel.ActionSwitchPreference(cachedDevice, settingId, "title")
 
     private fun buildRemoteSettingItem(settingId: Int) =
-        DeviceSettingConfigItemModel.AppProvidedItem(settingId)
+        DeviceSettingConfigItemModel.AppProvidedItem(settingId, false)
 
     private companion object {
         val BUILTIN_SETTING_ITEM_1 =
-            DeviceSettingConfigItemModel.BuiltinItem(
-                DeviceSettingId.DEVICE_SETTING_ID_HEADER, "bluetooth_device_header")
+            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
+                DeviceSettingId.DEVICE_SETTING_ID_HEADER, false, "bluetooth_device_header")
         val BUILDIN_SETTING_ITEM_2 =
-            DeviceSettingConfigItemModel.BuiltinItem(
-                DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, "action_buttons")
-        val SETTING_ITEM_HELP = DeviceSettingConfigItemModel.AppProvidedItem(12345)
+            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
+                DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, false, "action_buttons")
+        val SETTING_ITEM_HELP = DeviceSettingConfigItemModel.AppProvidedItem(12345, false)
     }
 }

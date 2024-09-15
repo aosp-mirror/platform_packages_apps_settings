@@ -2938,6 +2938,8 @@
     <string name="dark_ui_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at bedtime. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime">Will turn on automatically at bedtime</string>
+    <!-- Display settings screen, summary of Dark UI when off and controlled by Modes. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_modes">Will turn on when <xliff:g name="modeName" example="Bedtime">%1$s</xliff:g> starts</string>
     <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
@@ -2946,12 +2948,26 @@
     <string name="dark_ui_summary_on_auto_mode_custom">Will turn off automatically at <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically after bedtime. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime">Will turn off automatically after bedtime</string>
+    <!-- Display settings screen, summary of Dark UI when on and controlled by Modes. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_modes">Will turn off when <xliff:g name="modeName" example="Bedtime">%1$s</xliff:g> ends</string>
     <!-- Dark theme screen, description of Dark theme feature. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_text">Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off.</string>
     <!-- Dark UI screen footer summary text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_bedtime_footer_summary">Dark theme is currently following your Bedtime mode schedule</string>
     <!-- Dark UI screen footer action text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_bedtime_footer_action">Bedtime mode settings</string>
+    <!-- Dark UI screen footer summary text shown to indicate Modes may turn on/off Dark theme automatically according to their triggers. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_modes_footer_summary">
+        {count, plural, offset:2
+            =0    {Modes can also activate dark theme}
+            =1    {{mode_1} also activates dark theme}
+            =2    {{mode_1} and {mode_2} also activate dark theme}
+            =3    {{mode_1}, {mode_2}, and {mode_3} also activate dark theme}
+            other {{mode_1}, {mode_2}, and # more also activate dark theme}
+        }
+    </string>
+    <!-- Dark UI screen footer action text linking to Modes settings. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_modes_footer_action">Modes settings</string>
     <!-- Even Dimmer setting title. Allows device to reduce brightness even further than standard range. [CHAR LIMIT=NONE] -->
     <string name="even_dimmer_display_title">Even dimmer</string>
     <!-- Even Dimmer setting summary. [CHAR LIMIT=NONE] -->
@@ -4516,8 +4532,8 @@
     <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
     <string name="trackpad_pointer_speed">Pointer speed</string>
-    <!-- Title text for mouse pointer fill style. [CHAR LIMIT=35] -->
-    <string name="pointer_fill_style">Pointer fill style</string>
+    <!-- Title text for mouse pointer color. [CHAR LIMIT=35] -->
+    <string name="pointer_fill_style">Pointer color</string>
     <!-- Content description for black pointer fill style. [CHAR LIMIT=60] -->
     <string name="pointer_fill_style_black_button">Change pointer fill style to black</string>
     <!-- Content description for green pointer fill style. [CHAR LIMIT=60] -->
@@ -4794,6 +4810,12 @@
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility color and motion page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_and_motion_title">Color and motion</string>
+    <!-- Title for the accessibility pointer and touchpad page. [CHAR LIMIT=50] -->
+    <string name="accessibility_pointer_and_touchpad_title">Pointer &amp; touchpad accessibility</string>
+    <!-- Summary for the accessibility pointer and touchpad page. [CHAR LIMIT=50] -->
+    <string name="accessibility_pointer_and_touchpad_summary">Pointer color, pointer size &amp; more</string>
+    <!-- Title for the accessibility pointer color customization page. [CHAR LIMIT=50] -->
+    <string name="accessibility_pointer_color_customization_title">Pointer color customization</string>
     <!-- Title for the accessibility color contrast page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_contrast_title">Color contrast</string>
     <!-- Intro for the accessibility color contrast page. [CHAR LIMIT=NONE] -->
@@ -5190,6 +5212,8 @@
     <string name="accessibility_button_low_label">Transparent</string>
     <!-- Label on the right side of transparency adjustment slider [CHAR LIMIT=30] -->
     <string name="accessibility_button_high_label">Non-transparent</string>
+    <!-- Summary for settings that are disabled in the current button mode [CHAR LIMIT=30] -->
+    <string name="accessibility_button_disabled_button_mode_summary">Unavailable while using navigation bar button mode.</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Summary for the accessibility preference to high contrast text. [CHAR LIMIT=NONE] -->
@@ -7843,7 +7867,9 @@
     <string name="keywords_keyboard_vibration">keyboard, haptics, vibrate,</string>
 
     <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="sound_dashboard_summary">Volume, vibration, Do Not Disturb</string>
+    <string name="sound_dashboard_summary">Volume and vibration</string>
+    <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="sound_dashboard_summary_with_dnd">Volume, vibration, Do Not Disturb</string>
 
     <!-- Sound: Title for the option managing media volume. [CHAR LIMIT=30] -->
     <string name="media_volume_option_title">Media volume</string>
@@ -13342,9 +13368,9 @@
     <!-- Summary of the Live Caption enabled state. -->
     <string name="live_caption_enabled">On</string>
     <!-- State description for the Audio Balance seek bar, with left reported before right. -->
-    <string name="audio_seek_bar_state_left_first">Audio %1$d%% left, %2$d%% right</string>
+    <string name="audio_seek_bar_state_left_first">Audio <xliff:g id="percent_left">%1$s</xliff:g> left, <xliff:g id="percent_right">%2$s</xliff:g> right</string>
     <!-- State description for the Audio Balance seek bar, with right reported before left. -->
-    <string name="audio_seek_bar_state_right_first">Audio %1$d%% right, %2$d%% left</string>
+    <string name="audio_seek_bar_state_right_first">Audio <xliff:g id="percent_right">%1$s</xliff:g> right, <xliff:g id="percent_left">%2$s</xliff:g> left</string>
 
     <!--  Warning text about the visibility of device name. [CHAR LIMIT=NONE] -->
     <string name="about_phone_device_name_warning">Your device name is visible to apps you installed. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot.</string>
@@ -13553,6 +13579,8 @@
     <string name="audio_streams_dialog_cannot_play">Can\u0027t play this audio stream on <xliff:g example="LE headset" id="device_name">%1$s</xliff:g>.</string>
     <!-- The preference summary when add source succeed [CHAR LIMIT=NONE] -->
     <string name="audio_streams_listening_now">Listening now</string>
+    <!-- The preference summary when source is present on sinks [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_present_now">Paused by host</string>
     <!-- Le audio streams service notification leave broadcast text [CHAR LIMIT=NONE] -->
     <string name="audio_streams_media_service_notification_leave_broadcast_text">Stop listening</string>
     <!-- Le audio streams no le device dialog title [CHAR LIMIT=NONE] -->

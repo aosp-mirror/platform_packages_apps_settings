@@ -783,9 +783,13 @@
 
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
-                  android:exported="false"
+                  android:exported="true"
                   android:enableOnBackInvokedCallback="false"
                   android:taskAffinity="com.android.settings.root">
+            <intent-filter>
+                <action android:name="android.settings.COMBINED_BIOMETRICS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -1292,8 +1296,8 @@
 
         <activity
             android:name="Settings$ModesSettingsActivity"
-            android:label="@string/zen_mode_settings_title"
-            android:icon="@drawable/ic_homepage_notification"
+            android:label="@string/zen_modes_list_title"
+            android:icon="@*android:drawable/ic_zen_priority_modes"
             android:exported="true">
             <intent-filter android:priority="1"
                            android:featureFlag="android.app.modes_ui">
@@ -2809,6 +2813,9 @@
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFinish" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollParentalConsent" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroduction"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light" />
+        <activity android:name=".biometrics.fingerprint.FingerprintEnroll"
             android:exported="true"
             android:theme="@style/GlifTheme.Light">
             <intent-filter>
@@ -2819,9 +2826,13 @@
         </activity>
 
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroductionInternal"
-                  android:exported="false"
-                  android:theme="@style/GlifTheme.Light"
-                  android:taskAffinity="com.android.settings.root" />
+              android:exported="false"
+              android:theme="@style/GlifTheme.Light"
+              android:taskAffinity="com.android.settings.root" />
+        <activity android:name=".biometrics.fingerprint.FingerprintEnroll$InternalActivity"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light"
+            android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFindSensor"
             android:exported="false"
@@ -2829,6 +2840,10 @@
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollEnrolling" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFinish" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollIntroduction"
+            android:exported="false"
+            android:permission="android.permission.MANAGE_FINGERPRINT"
+            android:theme="@style/GlifTheme.Light" />
+        <activity android:name=".biometrics.fingerprint.FingerprintEnroll$SetupActivity"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
             android:theme="@style/GlifTheme.Light">
@@ -2837,7 +2852,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
 
         <activity android:name=".biometrics.fingerprint2.ui.enrollment.activity.FingerprintEnrollmentV2Activity"
             android:exported="true"

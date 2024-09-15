@@ -197,8 +197,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         mCancelButton = view.findViewById(R.id.cancelButton);
         boolean showCancelButton = mRemoteValidation || getActivity().getIntent().getBooleanExtra(
                 SHOW_CANCEL_BUTTON, false);
-        boolean hasAlternateButton = (mFrp || mRemoteValidation) && !TextUtils.isEmpty(
-                mAlternateButtonText);
+        boolean hasAlternateButton = (mFrp || mRemoteValidation || mRepairMode)
+                && !TextUtils.isEmpty(mAlternateButtonText);
         mCancelButton.setVisibility(showCancelButton || hasAlternateButton
                 ? View.VISIBLE : View.GONE);
         if (hasAlternateButton) {
