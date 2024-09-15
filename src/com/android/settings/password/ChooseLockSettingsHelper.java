@@ -64,6 +64,8 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_FOR_FACE = "for_face";
     // For the paths where multiple biometric sensors exist
     public static final String EXTRA_KEY_FOR_BIOMETRICS = "for_biometrics";
+    // To support fingerprint enrollment only and skip other biometric enrollments like face.
+    public static final String EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY = "for_fingerprint_only";
     // For the paths where setup biometrics in suw flow
     public static final String EXTRA_KEY_IS_SUW = "is_suw";
     public static final String EXTRA_KEY_FOREGROUND_ONLY = "foreground_only";

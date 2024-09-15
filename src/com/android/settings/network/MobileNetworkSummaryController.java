@@ -146,6 +146,7 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     private void startAddSimFlow() {
         final Intent intent = new Intent(EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION);
+        intent.setPackage(com.android.settings.Utils.PHONE_PACKAGE_NAME);
         intent.putExtra(EuiccManager.EXTRA_FORCE_PROVISION, true);
         mContext.startActivity(intent);
     }

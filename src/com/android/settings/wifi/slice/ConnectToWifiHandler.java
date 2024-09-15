@@ -32,7 +32,10 @@ import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 
 /**
  * This receiver helps connect to Wi-Fi network
+ *
+ * @deprecated this is not used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class ConnectToWifiHandler extends BroadcastReceiver {
 
     static final String KEY_CHOSEN_WIFIENTRY_KEY = "key_chosen_wifientry_key";

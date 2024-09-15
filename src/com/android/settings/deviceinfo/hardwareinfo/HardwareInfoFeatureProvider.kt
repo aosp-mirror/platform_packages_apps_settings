@@ -23,4 +23,9 @@ interface HardwareInfoFeatureProvider {
      * Returns the manufactured year
      */
     val manufacturedYear: String?
+
+    /**
+     * The country of origin label.
+     */
+    val countryIfOriginLabel: String
 }

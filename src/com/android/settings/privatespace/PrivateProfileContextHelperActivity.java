@@ -22,12 +22,14 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
@@ -59,7 +61,8 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (!android.os.Flags.allowPrivateProfile()) {
+        if (!android.os.Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             return;
         }
         setTheme(SetupWizardUtils.getTheme(this, getIntent()));
@@ -68,11 +71,20 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
         if (savedInstanceState == null) {
             int action = getIntent().getIntExtra(EXTRA_ACTION_TYPE, -1);
             if (action == ACCOUNT_LOGIN_ACTION) {
+                setContentView(R.layout.private_space_wait_screen);
                 PrivateSpaceLoginFeatureProvider privateSpaceLoginFeatureProvider =
                         FeatureFactory.getFeatureFactory().getPrivateSpaceLoginFeatureProvider();
-                if (!privateSpaceLoginFeatureProvider.initiateAccountLogin(
-                        this, mAddAccountToPrivateProfile)) {
-                    setResult(RESULT_OK);
+                UserHandle userHandle =
+                        PrivateSpaceMaintainer.getInstance(this).getPrivateProfileHandle();
+                if (userHandle != null) {
+                    if (!privateSpaceLoginFeatureProvider.initiateAccountLogin(
+                            createContextAsUser(userHandle, 0), mAddAccountToPrivateProfile)) {
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                } else {
+                    Log.w(TAG, "Private profile user handle is null");
+                    setResult(RESULT_CANCELED);
                     finish();
                 }
             } else if (action == SET_LOCK_ACTION) {
@@ -84,6 +96,7 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
     private void createPrivateSpaceLock() {
         final Intent intent = new Intent(ACTION_SET_NEW_PASSWORD);
         intent.putExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_LOW);
+        intent.putExtra(EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY, true);
         intent.putExtra(
                 EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, R.string.private_space_lock_setup_title);
         intent.putExtra(
@@ -93,13 +106,24 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
     }
 
     private void onAccountAdded(@Nullable ActivityResult result) {
-        if (result != null && result.getResultCode() == RESULT_OK) {
+        if (result == null) {
+            Log.i(TAG, "private space account login result null");
+            setResult(RESULT_CANCELED);
+            finish();
+            return;
+        }
+        final int resultCode = result.getResultCode();
+        if (resultCode == RESULT_OK) {
             Log.i(TAG, "private space account login success");
-            setResult(RESULT_OK);
+        } else if (resultCode == RESULT_FIRST_USER) {
+            Log.i(TAG, "private space account login skipped");
         } else {
             Log.i(TAG, "private space account login failed");
-            setResult(RESULT_CANCELED);
         }
+        setResult(
+                resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER
+                        ? RESULT_OK
+                        : RESULT_CANCELED);
         finish();
     }
 

@@ -28,7 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.spa.preference.ComposePreferenceController
@@ -77,7 +76,7 @@ class WepNetworksPreferenceController(context: Context, preferenceKey: String) :
             SettingsAlertDialogWithIcon(
                 onDismissRequest = { openDialog = false },
                 confirmButton = AlertDialogButton(
-                    stringResource(R.string.wifi_disconnect_button_text)
+                    stringResource(R.string.sim_action_yes)
                 ) {
                     wifiManager.setWepAllowed(false)
                     wepAllowedFlow.override(false)
@@ -87,10 +86,7 @@ class WepNetworksPreferenceController(context: Context, preferenceKey: String) :
                 AlertDialogButton(
                     stringResource(R.string.wifi_cancel)
                 ) { openDialog = false },
-                title = String.format(
-                    stringResource(R.string.wifi_settings_wep_networks_disconnect_title),
-                    wifiInfo.ssid.removeSurrounding("\"")
-                ),
+                title = stringResource(R.string.wifi_settings_wep_networks_disconnect_title),
                 text = {
                     Text(
                         stringResource(R.string.wifi_settings_wep_networks_disconnect_summary),

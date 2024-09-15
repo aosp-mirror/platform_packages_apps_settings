@@ -79,7 +79,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -88,7 +87,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @Ignore("b/295325503")
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public class FingerprintEnrollEnrollingTest {
     private static final String ENROLL_PROGRESS_COLOR_LIGHT = "#699FF3";
     private static final String ENROLL_PROGRESS_COLOR_DARK = "#7DA7F1";

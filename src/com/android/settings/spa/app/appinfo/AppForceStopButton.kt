@@ -35,18 +35,14 @@ import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
 import com.android.settingslib.spa.widget.dialog.AlertDialogPresenter
 import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
-import com.android.settingslib.spaprivileged.model.app.hasFlag
-import com.android.settingslib.spaprivileged.model.app.isActiveAdmin
 import com.android.settingslib.spaprivileged.model.app.userId
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 
 class AppForceStopButton(
     private val packageInfoPresenter: PackageInfoPresenter,
+    private val appForceStopRepository: AppForceStopRepository =
+        AppForceStopRepository(packageInfoPresenter),
 ) {
     private val context = packageInfoPresenter.context
-    private val appButtonRepository = AppButtonRepository(context)
     private val packageManager = context.packageManager
 
     @Composable
@@ -55,25 +51,9 @@ class AppForceStopButton(
         return ActionButton(
             text = stringResource(R.string.force_stop),
             imageVector = Icons.Outlined.Report,
-            enabled = remember(app) {
-                flow {
-                    emit(isForceStopButtonEnable(app))
-                }.flowOn(Dispatchers.Default)
-            }.collectAsStateWithLifecycle(false).value,
+            enabled = remember(app) { appForceStopRepository.canForceStopFlow() }
+                .collectAsStateWithLifecycle(false).value,
         ) { onForceStopButtonClicked(app, dialogPresenter) }
-    }
-
-    /**
-     * Gets whether a package can be force stopped.
-     */
-    private fun isForceStopButtonEnable(app: ApplicationInfo): Boolean = when {
-        // User can't force stop device admin.
-        app.isActiveAdmin(context) -> false
-
-        appButtonRepository.isDisallowControl(app) -> false
-
-        // If the app isn't explicitly stopped, then always show the force stop button.
-        else -> !app.hasFlag(ApplicationInfo.FLAG_STOPPED)
     }
 
     private fun onForceStopButtonClicked(

@@ -69,12 +69,19 @@ public class GrammaticalGenderPreferenceController extends DeveloperOptionsPrefe
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final var oldValue = SystemProperties.getInt(GRAMMATICAL_GENDER_PROPERTY,
+                Configuration.GRAMMATICAL_GENDER_NOT_SPECIFIED);
         SystemProperties.set(GRAMMATICAL_GENDER_PROPERTY, newValue.toString());
         updateState(mPreference);
         try {
             Configuration config = mActivityManager.getConfiguration();
-            config.setGrammaticalGender(Integer.parseInt(newValue.toString()));
-            mActivityManager.updatePersistentConfiguration(config);
+            // Only apply the developer settings value if it is the one currently used,
+            // otherwise it means there's some kind of override that we don't want to
+            // touch here.
+            if (config.getGrammaticalGender() == oldValue) {
+                config.setGrammaticalGender(Integer.parseInt(newValue.toString()));
+                mActivityManager.updatePersistentConfiguration(config);
+            }
         } catch (RemoteException ex) {
             // intentional no-op
         }

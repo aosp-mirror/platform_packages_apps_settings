@@ -115,9 +115,9 @@
     </style>
 
     <style name="Theme.AlertDialog.Base" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
-        <item name="colorAccent">@*android:color/accent_device_default_light</item>
+        <item name="colorAccent">@android:color/system_primary_light</item>
         <item name="android:colorError">@color/settings_dialog_colorError</item>
-        <item name="android:colorBackground">@*android:color/surface_light</item>
+        <item name="android:colorBackground">@android:color/system_surface_container_high_light</item>
     </style>
 
     <style name="Theme.AlertDialog" parent="Theme.AlertDialog.Base">
@@ -185,6 +185,7 @@
     <style name="Theme.Settings.HomeBase" parent="Theme.Settings.NoActionBar">
         <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
+        <item name="android:listPreferredItemPaddingStart">16dp</item>
         <item name="preferenceTheme">@style/SettingsPreferenceTheme</item>
 
         <!-- action bar, needed for search bar icon tinting -->
@@ -192,6 +193,9 @@
 
         <!-- Define this color for material design -->
         <item name="colorPrimaryVariant">@android:color/white</item>
+        <!-- Workaround for E2E modification. -->
+        <!-- TODO (b/328622648) waiting for new method instead of this attribute. -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
     </style>
 
     <style name="Theme.Settings.Home" parent="Theme.Settings.HomeBase">
@@ -201,6 +205,7 @@
         <!-- Homepage should follow device default design, the values is same as device default theme.-->
         <item name="android:navigationBarColor">@android:color/white</item>
         <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+        <item name="android:colorBackground">@android:color/system_surface_container_light</item>
     </style>
 
     <style name="Theme.Settings.Home.NoAnimation">

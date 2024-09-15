@@ -57,6 +57,8 @@ message WarningBannerInfo {
   // Used in the SubSettingLauncher.setArguments().
   optional string main_button_source_highlight_key = 6;
   optional string cancel_button_string = 7;
+  optional string main_button_config_settings_name = 8;
+  optional int32 main_button_config_settings_value = 9;
 }
 
 message WarningItemInfo {

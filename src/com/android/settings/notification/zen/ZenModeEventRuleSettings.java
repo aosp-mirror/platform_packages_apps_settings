@@ -138,7 +138,7 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
                 mEvent.userId = Integer.parseInt(key[0]);
                 mEvent.calendarId = key[1].equals("") ? null : Long.parseLong(key[1]);
                 mEvent.calName = key[2].equals("") ? null : key[2];
-                updateRule(ZenModeConfig.toEventConditionId(mEvent));
+                updateEventRule(mEvent);
                 return true;
             }
         });
@@ -160,7 +160,7 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
                 final int reply = Integer.parseInt((String) newValue);
                 if (reply == mEvent.reply) return false;
                 mEvent.reply = reply;
-                updateRule(ZenModeConfig.toEventConditionId(mEvent));
+                updateEventRule(mEvent);
                 return true;
             }
         });

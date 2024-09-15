@@ -22,12 +22,16 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.os.Looper;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.flags.Flags;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -36,7 +40,8 @@ import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class NetworkProviderCallsSmsFragmentTest {
-
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private Context mContext;
     private List<String> mPreferenceKeyList;
 
@@ -49,6 +54,7 @@ public class NetworkProviderCallsSmsFragmentTest {
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
+        mSetFlagsRule.disableFlags(Flags.FLAG_IS_DUAL_SIM_ONBOARDING_ENABLED);
     }
 
     @Test

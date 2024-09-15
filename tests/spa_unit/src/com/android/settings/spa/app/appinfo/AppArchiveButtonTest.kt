@@ -110,6 +110,19 @@ class AppArchiveButtonTest {
     }
 
     @Test
+    fun appArchiveButton_whenPackageIsNotFound_isDisabled() {
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            isArchived = false
+        }
+        whenever(userPackageManager.isAppArchivable(app.packageName)).thenThrow(PackageManager.NameNotFoundException())
+
+        val actionButton = setContent(app)
+
+        assertThat(actionButton.enabled).isFalse()
+    }
+
+    @Test
     fun appArchiveButton_displaysRightTextAndIcon() {
         val app = ApplicationInfo().apply {
             packageName = PACKAGE_NAME

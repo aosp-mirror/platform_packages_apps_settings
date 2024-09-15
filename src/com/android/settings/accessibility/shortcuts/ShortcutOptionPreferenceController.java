@@ -18,6 +18,8 @@ package com.android.settings.accessibility.shortcuts;
 
 import android.content.Context;
 import android.os.UserHandle;
+import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.Flags;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
@@ -115,6 +117,16 @@ public abstract class ShortcutOptionPreferenceController extends BasePreferenceC
     protected void enableShortcutForTargets(boolean enable) {
         Set<String> shortcutTargets = getShortcutTargets();
         @ShortcutConstants.UserShortcutType int shortcutType = getShortcutType();
+
+        if (Flags.a11yQsShortcut()) {
+            AccessibilityManager a11yManager = mContext.getSystemService(
+                    AccessibilityManager.class);
+            if (a11yManager != null) {
+                a11yManager.enableShortcutsForTargets(enable, shortcutType, shortcutTargets,
+                        UserHandle.myUserId());
+            }
+            return;
+        }
 
         if (enable) {
             for (String target : shortcutTargets) {

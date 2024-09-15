@@ -47,7 +47,7 @@ class MobileNetworkListFragment : DashboardFragment() {
         super.onCreate(icicle)
 
         if (Flags.isDualSimOnboardingEnabled()) {
-            context?.startSpaActivity(NetworkCellularGroupProvider.name);
+            context?.startSpaActivity(NetworkCellularGroupProvider.fileName)
             finish()
         }
     }

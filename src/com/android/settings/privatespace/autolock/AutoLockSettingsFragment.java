@@ -38,6 +38,8 @@ import java.util.List;
 
 public class AutoLockSettingsFragment extends RadioButtonPickerFragment {
     private static final String TAG = "PSAutoLockSetting";
+
+    private static final String AUTOLOCK_METRIC_KEY = "private_space_autolock_mode";
     private PrivateSpaceMaintainer mPrivateSpaceMaintainer;
     private CharSequence[] mAutoLockRadioOptions;
     private CharSequence[] mAutoLockRadioValues;
@@ -45,7 +47,8 @@ public class AutoLockSettingsFragment extends RadioButtonPickerFragment {
     @Override
     public void onCreate(@NonNull Bundle icicle) {
         if (android.os.Flags.allowPrivateProfile()
-                && android.multiuser.Flags.supportAutolockForPrivateSpace()) {
+                && android.multiuser.Flags.supportAutolockForPrivateSpace()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             super.onCreate(icicle);
         }
     }
@@ -111,6 +114,12 @@ public class AutoLockSettingsFragment extends RadioButtonPickerFragment {
         try {
             @Settings.Secure.PrivateSpaceAutoLockOption final int value = Integer.parseInt(key);
             mPrivateSpaceMaintainer.setPrivateSpaceAutoLockSetting(value);
+            mMetricsFeatureProvider.action(
+                    mMetricsFeatureProvider.getAttribution(getActivity()),
+                    SettingsEnums.ACTION_SET_PRIVATE_SPACE_AUTOLOCK,
+                    getMetricsCategory(),
+                    AUTOLOCK_METRIC_KEY,
+                    value /* value */);
         } catch (NumberFormatException e) {
             Log.e(TAG, "could not persist screen timeout setting", e);
         }

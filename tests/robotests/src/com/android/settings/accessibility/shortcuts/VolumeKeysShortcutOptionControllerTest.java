@@ -18,8 +18,18 @@ package com.android.settings.accessibility.shortcuts;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
 import android.content.ComponentName;
 import android.content.Context;
+import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.Flags;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -28,8 +38,10 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
+import com.android.settings.testutils.AccessibilityTestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -45,7 +57,11 @@ public class VolumeKeysShortcutOptionControllerTest {
     private static final String PREF_KEY = "prefKey";
     private static final String TARGET =
             new ComponentName("FakePackage", "FakeClass").flattenToString();
-    private final Context mContext = ApplicationProvider.getApplicationContext();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
+    private final Context mContext = spy(ApplicationProvider.getApplicationContext());
+    private AccessibilityManager mAccessibilityManager;
     private VolumeKeysShortcutOptionController mController;
     private ShortcutOptionPreference mShortcutOptionPreference;
 
@@ -53,6 +69,7 @@ public class VolumeKeysShortcutOptionControllerTest {
 
     @Before
     public void setUp() {
+        mAccessibilityManager = AccessibilityTestUtils.setupMockAccessibilityManager(mContext);
         mController = new VolumeKeysShortcutOptionController(
                 mContext, PREF_KEY);
         mController.setShortcutTargets(Set.of(TARGET));
@@ -94,6 +111,7 @@ public class VolumeKeysShortcutOptionControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableVolumeKeysShortcut_shortcutSet() {
         mController.enableShortcutForTargets(true);
 
@@ -103,11 +121,40 @@ public class VolumeKeysShortcutOptionControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void enableShortcutForTargets_enableVolumeKeysShortcut_callA11yManager() {
+        mController.enableShortcutForTargets(true);
+
+        verify(mAccessibilityManager).enableShortcutsForTargets(
+                /* enable= */ true,
+                ShortcutConstants.UserShortcutType.HARDWARE,
+                Set.of(TARGET),
+                UserHandle.myUserId()
+        );
+        verifyNoMoreInteractions(mAccessibilityManager);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_disableVolumeKeysShortcut_shortcutNotSet() {
         mController.enableShortcutForTargets(false);
 
         assertThat(
                 ShortcutUtils.isComponentIdExistingInSettings(
                         mContext, ShortcutConstants.UserShortcutType.HARDWARE, TARGET)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    public void enableShortcutForTargets_disableVolumeKeysShortcut_callA11yManager() {
+        mController.enableShortcutForTargets(false);
+
+        verify(mAccessibilityManager).enableShortcutsForTargets(
+                /* enable= */ false,
+                ShortcutConstants.UserShortcutType.HARDWARE,
+                Set.of(TARGET),
+                UserHandle.myUserId()
+        );
+        verifyNoMoreInteractions(mAccessibilityManager);
     }
 }

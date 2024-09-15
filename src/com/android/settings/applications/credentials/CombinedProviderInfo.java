@@ -33,6 +33,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -236,6 +239,31 @@ public final class CombinedProviderInfo {
         return null;
     }
 
+    /** Returns whether this entry contains a system provider. */
+    public boolean isCredentialManagerSystemProvider() {
+        for (CredentialProviderInfo cpi : mCredentialProviderInfos) {
+            if (cpi.isSystemProvider()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** Returns whether this entry has device admin restrictions. */
+    @Nullable
+    public RestrictedLockUtils.EnforcedAdmin getDeviceAdminRestrictions(
+            Context context, int userId) {
+        final String packageName = getPackageName();
+        if (TextUtils.isEmpty(packageName)) {
+            return null;
+        }
+
+        return RestrictedLockUtilsInternal.checkIfApplicationCanBeCredentialManagerProvider(
+                context.createContextAsUser(UserHandle.of(userId), /* flags= */ 0),
+                packageName);
+    }
+
     /** Returns the provider that gets the top spot. */
     public static @Nullable CombinedProviderInfo getTopProvider(
             List<CombinedProviderInfo> providers) {
@@ -327,8 +355,7 @@ public final class CombinedProviderInfo {
     }
 
     public static @Nullable Intent createSettingsActivityIntent(
-            @Nullable CharSequence packageName,
-            @Nullable CharSequence settingsActivity) {
+            @Nullable CharSequence packageName, @Nullable CharSequence settingsActivity) {
         if (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(settingsActivity)) {
             return null;
         }

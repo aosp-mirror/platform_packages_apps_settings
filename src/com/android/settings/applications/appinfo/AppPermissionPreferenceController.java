@@ -132,6 +132,7 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
     private void startManagePermissionsActivity() {
         // start new activity to manage app permissions
         final Intent permIntent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
+        permIntent.setPackage(mPackageManager.getPermissionControllerPackageName());
         permIntent.putExtra(Intent.EXTRA_PACKAGE_NAME, mParent.getAppEntry().info.packageName);
         permIntent.putExtra(EXTRA_HIDE_INFO_BUTTON, true);
         Activity activity = mParent.getActivity();

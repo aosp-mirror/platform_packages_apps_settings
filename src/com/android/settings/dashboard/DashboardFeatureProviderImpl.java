@@ -223,8 +223,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public void openTileIntent(FragmentActivity activity, Tile tile) {
         if (tile == null) {
-            Intent intent = new Intent(Settings.ACTION_SETTINGS).addFlags(
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Intent intent = new Intent(Settings.ACTION_SETTINGS)
+                    .setPackage(mContext.getPackageName())
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mContext.startActivity(intent);
             return;
         }
@@ -443,7 +444,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         if (TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
             iconDrawable.setTint(Utils.getHomepageIconColor(preference.getContext()));
-        } else if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
+        }
+
+        if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
             iconDrawable = new AdaptiveIcon(mContext, iconDrawable,
                     R.dimen.dashboard_tile_foreground_image_inset);
             ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);

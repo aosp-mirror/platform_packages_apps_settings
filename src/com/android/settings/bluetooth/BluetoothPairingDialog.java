@@ -105,6 +105,8 @@ public class BluetoothPairingDialog extends FragmentActivity {
         registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_PAIRING_CANCEL));
         registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED));
         mReceiverRegistered = true;
+
+        closeSystemDialogs();
     }
 
     @Override
