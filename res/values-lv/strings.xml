@@ -834,14 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Kad ir ieslēgts Bluetooth savienojums, jūsu ierīce var sazināties ar tuvumā esošām Bluetooth ierīcēm.\n\nLai uzlabotu ierīču izmantošanas iespējas, lietotnes un pakalpojumi var meklēt tuvumā esošas ierīces jebkurā laikā, pat ja Bluetooth savienojums ir izslēgts. Šo iestatījumu var izmantot, piemēram, lai uzlabotu ar atrašanās vietu saistītas funkcijas un pakalpojumus, un to var mainīt Bluetooth meklēšanas iestatījumos."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Kad tehnoloģija Bluetooth ir ieslēgta, ierīce var sazināties ar citām tuvumā esošām Bluetooth ierīcēm. Tādas funkcijas kā “Ātrā kopīgošana” un “Atrast ierīci” izmanto Bluetooth savienojumu.\n\nPat ja tehnoloģija Bluetooth ir izslēgta, lietotnēs un pakalpojumos jebkurā laikā tik un tā var meklēt tuvumā esošas ierīces. Šādu meklēšanu var izmantot, piemēram, lai uzlabotu ar atrašanās vietu saistītas funkcijas un pakalpojumus. Varat to mainīt Bluetooth meklēšanas iestatījumos."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Mainīt"</string>
-    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"Nav izveidots savienojums ar ierīci “<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Drošības apsvērumu dēļ aizmirstiet šo ierīci un pēc tam vēlreiz savienojiet to pārī."</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Aizmirst ierīci"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Atcelt"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Ierīces dati"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tastatūras iestatījumi"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Citi iestatījumi"</string>
@@ -1281,13 +1277,21 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Tiks automātiski ieslēgts saulrietā"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Tiks automātiski ieslēgts plkst. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Tiks automātiski ieslēgts pirms gulētiešanas."</string>
+    <!-- no translation found for dark_ui_summary_off_auto_mode_modes (2672694802103388896) -->
+    <skip />
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Nekad netiks automātiski izslēgts"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Tiks automātiski izslēgts saullēktā"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Tiks automātiski izslēgts plkst. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Tiks automātiski izslēgts pēc pamošanās."</string>
+    <!-- no translation found for dark_ui_summary_on_auto_mode_modes (7769594183411785087) -->
+    <skip />
     <string name="dark_ui_text" msgid="4392646155331126666">"Tumšajā motīvā tiek izmantots melns fons noteiktos ekrānos, lai paildzinātu akumulatora darbību. Turklāt jūs varat iestatīt, kad ieslēgt un izslēgt tumšo motīvu."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tumšā motīva pamatā pašlaik ir jūsu gulēšanas režīma grafiks."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Gulēšanas režīma iestatījumi"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (1041117250408363391) -->
+    <skip />
+    <!-- no translation found for dark_ui_modes_footer_action (80671811848446248) -->
+    <skip />
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Aptumšot papildus"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Varat atļaut aptumšot ierīci vairāk nekā parasti."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Ekrāna noildze"</string>
@@ -1952,7 +1956,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Noklikšķināt apakšējā labajā stūrī"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Citas iespējas: skārienpaliktņa labais apakšējais stūris"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Rādītāja ātrums"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"Rādītāja aizpildījuma stils"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Mainīt aizpildījuma stilu uz melnu"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Mainīt aizpildījuma stilu uz zaļu"</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Mainīt aizpildījumu uz dzeltenu"</string>
@@ -1999,10 +2004,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Atiestatīt"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Modificētājtaustiņa izvēle"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Izvēlieties jaunu taustiņu — <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Fiziskās tastatūras pieejamība"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Taustiņu ķēde, atlēcienu taustiņi, peles taustiņi"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Izkārtojums: <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Noklusējums"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automātiski: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2071,6 +2074,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"Vispārīgi"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Attēlojums"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Krāsa un kustība"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Krāsu kontrasts"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Lielākā kontrastā teksts, pogas un ikonas skaidrāk izceļas. Izvēlieties kontrastu, kas, jūsuprāt, izskatās vislabāk."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Iespējams, dažās lietotnēs netiks atbalstīti visi krāsu un teksta kontrasta iestatījumi."</string>
@@ -2214,11 +2223,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Papildu"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Pieejamības pogai ir iestatīts pakalpojums <xliff:g id="SERVICE">%1$s</xliff:g>. Lai izmantotu palielināšanu, pieskarieties pieejamības pogai un pēc tam atlasiet palielināšanu."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Pieejamības žestam ir iestatīts <xliff:g id="SERVICE">%1$s</xliff:g>. Lai izmantotu palielinājumu, velciet ar diviem pirkstiem no ekrāna apakšdaļas un turiet. Pēc tam atlasiet palielinājumu."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Skaļuma pogu saīsne"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Saīšņu iestatījumi"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Skaļuma pogu saīsne bloķēšanas ekrānā"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Atļaujiet funkcijas saīsni ieslēgt no bloķēšanas ekrāna. Turiet abas skaļuma pogas dažas sekundes."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Pieejamības poga"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Pieejamības poga un žests"</string>
@@ -2238,6 +2245,8 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Caurspīdīgums, kad poga netiek izmantota"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Caurspīdīga"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Necaurspīdīga"</string>
+    <!-- no translation found for accessibility_button_disabled_button_mode_summary (1978174613270619492) -->
+    <skip />
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Liela kontrasta teksts"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Mainīt teksta krāsu uz melnu vai baltu, lai palielinātu kontrastu ar fonu."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maksimāls teksta kontrasts"</string>
@@ -4112,8 +4121,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Visas šajā lietotnē izveidotās kārtulas “Netraucēt” tiks noņemtas."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Vai atļaut lietotnei <xliff:g id="APP">%1$s</xliff:g> piekļūt režīmiem?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Lietotne varēs ieslēgt/izslēgt režīmu “Netraucēt”, pārvaldīt un aktivizēt režīmus, kā arī mainīt saistītos iestatījumus."</string>
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
-    <skip />
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Vai atsaukt lietotnes <xliff:g id="APP">%1$s</xliff:g> piekļuvi režīmiem?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Tiks noņemti visi šajā lietotnē izveidotie režīmi."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Neoptimizēt"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizēt"</string>
@@ -5296,8 +5304,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Ieslēgti"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Izslēgti"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Ieslēgti"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Audio: %1$d%% — pa kreisi, %2$d%% — pa labi"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Audio: %1$d%% — pa labi, %2$d%% — pa kreisi"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Jūsu ierīces nosaukums ir redzams jūsu instalētajām lietotnēm. Tas var būt redzams arī citām personām, ja izveidosiet savienojumu ar Bluetooth ierīcēm, Wi-Fi tīklu vai iestatīsiet Wi-Fi tīklāju."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gramatiskā dzimte"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Atlasiet gramatisko dzimti"</string>
