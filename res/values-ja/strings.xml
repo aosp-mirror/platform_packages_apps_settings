@@ -1277,13 +1277,17 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"日の入りに自動的に ON"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"自動的に ON: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"就寝時に自動的に ON になります"</string>
+    <string name="dark_ui_summary_off_auto_mode_modes" msgid="2672694802103388896">"<xliff:g id="ID_1">%1$s</xliff:g>が開始すると ON になります"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"自動で OFF にしない"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"日の出に自動的に OFF"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"自動的に OFF: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"就寝後に自動的に OFF になります"</string>
+    <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"<xliff:g id="ID_1">%1$s</xliff:g>が終了すると OFF になります"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"ダークモードでは黒い背景を使用するため、一部の画面で電池が長持ちします。スケジュールを設定した場合、時刻を過ぎても画面が OFF になるまではダークモードに切り替わりません。"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ダークモードは現在、おやすみ時間モードのスケジュールに合わせた設定になっています"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"おやすみ時間モードの設定"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{モードの設定により、ダークモードも有効になります}=1{{mode_1} に設定すると、ダークモードも有効になります}=2{{mode_1} と {mode_2} に設定すると、ダークモードも有効になります}=3{{mode_1}、{mode_2}、{mode_3} に設定すると、ダークモードも有効になります}other{{mode_1}、{mode_2}、他 # 個のモードに設定すると、ダークモードも有効になります}}"</string>
+    <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"モードの設定"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"さらに暗くする"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"デバイスを通常より暗くできます"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"画面消灯"</string>
@@ -1948,7 +1952,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"右下をクリック"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"タッチパッドの右下をクリックするとオプションが表示されます"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"ポインタの速度"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"ポインターの塗りつぶしスタイル"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"ポインターの塗りつぶしを黒色に変更"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"ポインターの塗りつぶしを緑色に変更"</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"ポインターの塗りつぶしを黄色に変更"</string>
@@ -2065,6 +2070,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"全般"</string>
     <string name="display_category_title" msgid="6638191682294461408">"表示"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"色と動き"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"色のコントラスト"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"コントラストを高くすると、テキスト、ボタン、アイコンが見分けやすくなります。一番見やすくなるコントラストを選択してください。"</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"色とテキストのコントラスト設定は、一部のアプリで適用されないことがあります"</string>
@@ -2230,6 +2241,7 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"未使用時の透明度"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"透明"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"非透明"</string>
+    <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"ナビゲーション バーのボタンモードの使用中は無効です。"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高コントラスト テキスト"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"テキストの色を黒または白に変更します。背景とのコントラストが最も際立ちます。"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"テキストのコントラストを最大にする"</string>
@@ -5286,8 +5298,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"ON"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"OFF"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"ON"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"音声: 左 %1$d%%、右 %2$d%%"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"音声: 右 %1$d%%、左 %2$d%%"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"インストールしたアプリにデバイス名が表示されます。また、Bluetooth デバイスや Wi-Fi ネットワークに接続したり、Wi-Fi アクセス ポイントを設定したりすると、他のユーザーにもデバイス名が表示されます。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"文法性"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"文法性の選択"</string>

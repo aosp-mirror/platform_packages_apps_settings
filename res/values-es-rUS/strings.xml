@@ -834,14 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Cuando Bluetooth está activado, tu dispositivo puede usarlo para comunicarse con otros dispositivos Bluetooth cercanos.\n\nPara mejorar la experiencia, las apps y los servicios pueden buscar dispositivos cercanos incluso cuando la conexión Bluetooth esté desactivada. Esta función puede usarse, por ejemplo, para mejorar las funciones y los servicios basados en la ubicación. Puedes cambiar esta opción en la configuración de búsqueda de Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Si el Bluetooth está activado, el dispositivo podrá comunicarse con otros dispositivos cercanos que tengan Bluetooth. Las funciones como Quick Share y Encontrar mi dispositivo usan Bluetooth.\n\nLas apps y los servicios pueden seguir buscando dispositivos cercanos en cualquier momento, incluso si el Bluetooth está desactivado. Esto puede usarse, por ejemplo, para mejorar las funciones y los servicios que se basan en la ubicación. Puedes modificar esto en la configuración de búsqueda de dispositivos Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Cambiar"</string>
-    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"No se conectó <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Por seguridad, olvida este dispositivo y vuelve a vincularlo"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Olvidar dispositivo"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Cancelar"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalles del dispositivo"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Configuración del teclado"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Más parámetros de configuración"</string>
@@ -1281,13 +1277,21 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Se activará automáticamente al atardecer"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Se activará automáticamente a la(s) <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Se activará automáticamente a la hora de dormir"</string>
+    <!-- no translation found for dark_ui_summary_off_auto_mode_modes (2672694802103388896) -->
+    <skip />
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Nunca se desactivará automáticamente"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Se desactivará automáticamente al amanecer"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Se desactivará automáticamente a la(s) <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Se desactivará automáticamente después de la hora de dormir"</string>
+    <!-- no translation found for dark_ui_summary_on_auto_mode_modes (7769594183411785087) -->
+    <skip />
     <string name="dark_ui_text" msgid="4392646155331126666">"El Tema oscuro usa un fondo negro para conservar la batería durante más tiempo en algunas pantallas y se programa a fin de esperar a que se apague la pantalla para activarse."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"El tema oscuro se activa o desactiva a partir del horario para dormir"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Configuración del Modo hora de dormir"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (1041117250408363391) -->
+    <skip />
+    <!-- no translation found for dark_ui_modes_footer_action (80671811848446248) -->
+    <skip />
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Aún más tenue"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Permite que el dispositivo se atenúe más que de costumbre"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tiempo de espera de la pantalla"</string>
@@ -1952,7 +1956,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic de la parte inferior derecha"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Más opciones en la esquina inferior derecha del panel táctil"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Velocidad del puntero"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"Estilo de relleno del puntero"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Cambia el estilo de relleno a negro"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Cambia el estilo de relleno a verde"</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Cambia estilo de relleno a amarillo"</string>
@@ -1999,10 +2004,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Restablecer"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Elegir tecla modificadora"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Elige una nueva tecla para <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accesibilidad del teclado físico"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Teclas especiales, rechazo de teclas, teclas del mouse"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Diseño <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminadas"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automático: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2071,6 +2074,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Pantalla"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Color y movimiento"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contraste de color"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"El contraste más alto destaca el texto, los botones y los íconos. Elige la intensidad que más te guste."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Es posible que algunas apps no admitan todos los parámetros de contraste de texto y colores"</string>
@@ -2214,11 +2223,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avanzada"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"El botón de Accesibilidad está configurado para <xliff:g id="SERVICE">%1$s</xliff:g>. Para ampliar, mantén presionado el botón y, luego, selecciona ampliación."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"El gesto de accesibilidad se configuró en <xliff:g id="SERVICE">%1$s</xliff:g>. Para usar la ampliación, desliza dos dedos hacia arriba desde la parte inferior de la pantalla y mantén presionado. Luego, selecciona la ampliación."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Combinación de teclas de volumen"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Configuración de combinación de teclas"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Combinación de teclas de volumen desde la pantalla de bloqueo"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permite que la combinación active la función desde la pantalla de bloqueo. Mantén presionadas ambas teclas de volumen durante unos segundos."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Botón de accesibilidad"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Botón de accesibilidad y gestos"</string>
@@ -2238,6 +2245,8 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparente cuando no se usa"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Transparente"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"No transparente"</string>
+    <!-- no translation found for accessibility_button_disabled_button_mode_summary (1978174613270619492) -->
+    <skip />
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texto de alto contraste"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Cambia el color del texto a blanco o negro. Maximiza el contraste con el fondo."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximizar el contraste del texto"</string>
@@ -3424,7 +3433,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtra el brillo del fondo de pantalla"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Habilitar el tema oscuro"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"Habilitar el tema oscuro"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Cambia el SO y las apps para preferir el texto claro sobre un fondo oscuro, lo que puede ser más cómodo para los ojos y genera un ahorro de batería significativo en algunos dispositivos."</string>
+    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Se prioriza que el SO y las apps usen un texto claro sobre un fondo oscuro, lo que puede ser más cómodo para la vista y genera un ahorro de batería significativo en algunos dispositivos"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Sin cambios de visualización}=1{{effect_1}}=2{{effect_1} y {effect_2}}=3{{effect_1}, {effect_2} y {effect_3}}other{{effect_1}, {effect_2} y # más}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permitir todas las notificaciones"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Las personas, las apps y los sonidos pueden interrumpir"</string>
@@ -3789,7 +3798,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ninguna"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ninguna}=1{1 conversación}other{# conversaciones}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Quiénes pueden interrumpir"</string>
-    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Incluso si las apps de mensajería o llamadas no pueden notificarte, las personas que selecciones aquí podrán comunicarse contigo mediante esas apps"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Incluso si las apps de mensajería o llamadas no pueden enviarte notificaciones, las personas que selecciones aquí podrán comunicarse contigo mediante esas apps"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Llamadas"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Llamadas"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"llamadas"</string>
@@ -4112,8 +4121,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Se quitarán todas las reglas del modo No interrumpir que creó esta app."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"¿Quieres permitir el acceso de <xliff:g id="APP">%1$s</xliff:g> a los modos?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"La app podrá activar y desactivar No interrumpir, administrar y activar los modos, y cambiar la configuración relacionada."</string>
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
-    <skip />
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"¿Quieres revocar el acceso de <xliff:g id="APP">%1$s</xliff:g> a los modos?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Se quitarán todos los modos que creó esta app."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"No optimizar"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizar"</string>
@@ -5295,8 +5303,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Activadas"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Desactivado"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activado"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Audio: %1$d%% izquierda, %2$d%% derecha"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Audio: %1$d%% derecha, %2$d%% izquierda"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"El nombre de tu dispositivo es visible para las apps instaladas. Es posible que también lo vean otras personas cuando te conectes a dispositivos Bluetooth o a una red Wi-Fi, o cuando configures un hotspot de Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Género gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selecciona un género gramatical"</string>
@@ -5365,8 +5375,7 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"Se dejó de compartir audio"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Conectar un dispositivo compatible"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Para comenzar a compartir audio, conecta auriculares compatibles con LE Audio a tu teléfono"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Cambiar a <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Conectarse a reproducción de LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Reproducciones de audio cercanas"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Reproducciones de audio"</string>
@@ -5411,7 +5420,6 @@
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Escanea el código QR de una reproducción de audio para escuchar con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"No se puede editar la contraseña mientras se está compartiendo. Para cambiar la contraseña, primero desactiva el uso compartido de audio."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Escáner de código QR"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"¿Necesitas ayuda?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Buscar en Configuración"</string>
 </resources>
