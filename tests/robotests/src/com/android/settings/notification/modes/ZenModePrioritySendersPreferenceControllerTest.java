@@ -451,7 +451,7 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
         mMessagesController.updateZenMode(mMessagesPrefCategory, zenMode);
 
         assertThat(((SelectorWithWidgetPreference) mMessagesPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
+                .isChecked()).isTrue();
 
         mMessagesPrefCategory.findPreference(KEY_STARRED).performClick();
 
