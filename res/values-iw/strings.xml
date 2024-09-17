@@ -834,14 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"‏כשה-Bluetooth מופעל, המכשיר יכול לתקשר עם מכשירי Bluetooth אחרים שנמצאים בקרבת מקום.\n\nכדי לשפר את חוויית השימוש במכשיר, אפליקציות ושירותים יכולים לסרוק אחר מכשירים בקרבת מקום בכל שלב, גם כשה-Bluetooth כבוי. אפשר להשתמש בכך, למשל, כדי לשפר תכונות ושירותים שמבוססים על מיקום. ניתן לשנות זאת בהגדרות הסריקה של Bluetooth‏."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"‏כשה-Bluetooth מופעל, המכשיר יכול לתקשר עם מכשירי Bluetooth אחרים בקרבת מקום. תכונות כמו \'שיתוף מהיר\' ו\'איפה המכשיר שלי\' מתבססות על Bluetooth.\n\nאפליקציות ושירותים עדיין יכולים לסרוק כדי למצוא מכשירים קרובים בכל שלב, גם כשה-Bluetooth מושבת. זה יכול לשמש, למשל, כדי לשפר תכונות ושירותים מבוססי מיקום. אפשר לשנות את זה בהגדרות של סריקת Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"שינוי"</string>
-    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"אין חיבור אל <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"מטעמי אבטחה, צריך להסיר את המכשיר הזה ואז להתאים אותו שוב"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"הסרת המכשיר"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"ביטול"</string>
     <string name="device_details_title" msgid="1155622417516195481">"פרטי המכשיר"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"הגדרות מקלדת"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"הגדרות נוספות"</string>
@@ -1281,13 +1277,21 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"הפעלה אוטומטית בשקיעה"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"הפעלה אוטומטית בשעה <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"יופעל אוטומטית בשעת השינה"</string>
+    <!-- no translation found for dark_ui_summary_off_auto_mode_modes (2672694802103388896) -->
+    <skip />
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"ללא כיבוי אוטומטי"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"כיבוי אוטומטי בזריחה"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"כיבוי אוטומטי בשעה <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"יושבת אוטומטית לאחר שעת השינה"</string>
+    <!-- no translation found for dark_ui_summary_on_auto_mode_modes (7769594183411785087) -->
+    <skip />
     <string name="dark_ui_text" msgid="4392646155331126666">"העיצוב הכהה משתמש ברקע שחור כדי להאריך את חיי הסוללה. הפעלת העיצוב הכהה תתחיל לאחר כיבוי המסך והפעלתו מחדש."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"העיצוב הכהה פועל כרגע בהתאם ללוח הזמנים של מצב שעת השינה"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"הגדרות של מצב שעת השינה"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (1041117250408363391) -->
+    <skip />
+    <!-- no translation found for dark_ui_modes_footer_action (80671811848446248) -->
+    <skip />
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"מעומעם במיוחד"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"הרשאה למכשיר להתעמעם יותר מהרגיל"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"זמן קצוב לכיבוי המסך"</string>
@@ -1952,7 +1956,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"לחיצה ימנית למטה"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"לוחצים על הפינה הימנית התחתונה של לוח המגע לאפשרויות נוספות"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"מהירות המצביע"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"סגנון המילוי של המצביע"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"שינוי סגנון המילוי של המצביע לשחור"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"שינוי סגנון המילוי של המצביע לירוק"</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"שינוי סגנון המילוי של המצביע לצהוב"</string>
@@ -1999,10 +2004,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"איפוס"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"בחירת מקש צירוף"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"יש לבחור מפתח חדש עבור <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"תכונות נגישות שפועלות באמצעות מקלדת פיזית"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"מקשים \"דביקים\", מקשים חוזרים, לחצני העכבר"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"פריסה של <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ברירת מחדל"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"אוטומטי: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2071,6 +2074,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"הגדרות כלליות"</string>
     <string name="display_category_title" msgid="6638191682294461408">"תצוגה"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"צבע ותנועה"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"ניגודיות של צבעים"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"ניגודיות גבוהה יותר מבליטה את הטקסט, הלחצנים והסמלים. כדאי לבחור את הניגודיות שמתאימה לך."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"חלק מהאפליקציות לא תומכות בכל הגדרות הניגודיות של הצבעים והטקסטים"</string>
@@ -2214,11 +2223,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"מתקדם"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"הלחצן \'נגישות\' מוגדר לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש ללחוץ לחיצה ארוכה על לחצן הנגישות ולאחר מכן לבחור בהגדלה."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"תנועת הנגישות מוגדרת לשירות <xliff:g id="SERVICE">%1$s</xliff:g>. כדי להשתמש בהגדלה, יש להחליק מעלה מהחלק התחתון של המסך באמצעות שתי אצבעות ולהחזיק. לאחר מכן יש לבחור באפשרות \'הגדלה\'."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"קיצור דרך באמצעות מקשי עוצמת הקול"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"הגדרות של קיצורי דרך"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"קיצור דרך באמצעות מקשי עוצמת הקול ממסך הנעילה"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"מקש הקיצור של תכונות הנגישות יפעל ממסך הנעילה. לוחצים על שני הלחצנים של עוצמת הקול למשך מספר שניות."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"לחצן הנגישות"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"לחצן הנגישות ותנועות"</string>
@@ -2238,6 +2245,8 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"רמת השקיפות כשלא בשימוש"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"שקוף"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"לא שקוף"</string>
+    <!-- no translation found for accessibility_button_disabled_button_mode_summary (1978174613270619492) -->
+    <skip />
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"טקסט בניגודיות גבוהה"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"שינוי צבע הטקסט לשחור או לבן. ניגודיות מקסימלית לצבע הרקע."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"הגדלת הניגודיות של הטקסט למקסימום"</string>
@@ -3654,7 +3663,7 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"התכונה תוכל לענות להודעות ולהפעיל לחצנים שמופיעים בהתראות, כולל העברה למצב נודניק או ביטול של התראות ומענה לשיחות."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"לשנות הגדרות"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"התכונה יכולה להפעיל או להשבית את מצב \'נא לא להפריע\' ולשנות הגדרות קשורות."</string>
-    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"יש אפשרות לנהל ולהפעיל מצבים וגם לשנות הגדרות קשורות."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"זו אפשרות שממנה מנהלים ומפעילים מצבים וגם משנים הגדרות קשורות."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"אם משביתים את הגישה של <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> להתראות, יכול להיות שגם הגישה לתכונה \'נא לא להפריע\' תושבת."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"אם משביתים את הרשאת הגישה של <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> להתראות, יכול להיות שגם הגישה למצבים תושבת."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"השבתה"</string>
@@ -3718,8 +3727,8 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"אישור גישה אל \'נא לא להפריע\'"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"אין אפליקציות מותקנות שביקשו גישה אל \'נא לא להפריע\'"</string>
     <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"גישה למצבים"</string>
-    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"להרשאת גישה למצבים"</string>
-    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"לא התקבלה בקשת גישה למצבים מאף אפליקציה מותקנת"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"מתן גישה למצבים"</string>
+    <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"אף אחת מהאפליקציות שמותקנות במכשיר לא ביקשה גישה למצבים"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"לא הפעלת קבלת התראות מהאפליקציה הזו"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות ששייכות לקטגוריה הזו"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות מקבוצה זו"</string>
@@ -4112,8 +4121,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"כל כללי \'נא לא להפריע\' שנוצרו על ידי האפליקציה הזו יוסרו."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"לתת לאפליקציה <xliff:g id="APP">%1$s</xliff:g> הרשאת גישה למצבים?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"האפליקציה תוכל להפעיל או להשבית את מצב \'נא לא להפריע\', לנהל ולהפעיל מצבים ולבצע שינויים בהגדרות קשורות."</string>
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
-    <skip />
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"לבטל את הרשאת הגישה של <xliff:g id="APP">%1$s</xliff:g> למצבים?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"כל המצבים שנוצרו על ידי האפליקציה הזו יוסרו."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"אין לבצע אופטימיזציה"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"ביצוע אופטימיזציה"</string>
@@ -5296,8 +5304,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"מופעלת"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"מושבתות"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"מופעלות"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"‏אודיו %1$d%% משמאל, %2$d%% מימין"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"‏אודיו %1$d%% מימין, %2$d%% משמאל"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"‏המכשיר שלך גלוי לאפליקציות שהתקנת. כמו כן, ייתכן שאנשים אחרים יראו אותו בהתחברות למכשירי Bluetooth, לרשת Wi-Fi, או בהגדרת נקודת Wi-Fi לשיתוף אינטרנט."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"לשון הפנייה"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"בחירת לשון הפנייה"</string>
