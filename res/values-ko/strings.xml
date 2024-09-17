@@ -834,14 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"블루투스가 켜져 있으면 기기가 근처의 다른 블루투스 기기와 통신할 수 있습니다.\n\n기기 사용 환경을 개선하기 위해 블루투스가 꺼져 있을 때도 앱 및 서비스에서 언제든지 근처에 기기가 있는지 검색할 수 있습니다. 예를 들면 위치 기반 기능 및 서비스를 개선하는 데 이 기능이 사용되기도 합니다. 설정을 변경하려면 블루투스 검색 설정으로 이동하세요."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"기기에서 블루투스가 켜져 있으면 근처의 다른 블루투스 기기와 통신할 수 있습니다. Quick Share 및 내 기기 찾기 등의 기능에서 블루투스를 사용합니다.\n\n블루투스가 꺼져 있어도 앱 및 서비스에서 언제든지 근처 기기를 검색할 수 있습니다. 예를 들어 위치 기반 기능 및 서비스를 향상하기 위한 용도로 블루투스를 사용합니다. 이 설정은 블루투스 검색 설정에서 변경할 수 있습니다."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"변경"</string>
-    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 연결되어 있지 않음"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"보안을 위해 이 기기를 삭제한 후 다시 페어링하세요."</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"기기 삭제"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"취소"</string>
     <string name="device_details_title" msgid="1155622417516195481">"기기 세부정보"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"키보드 설정"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"설정 더보기"</string>
@@ -1281,13 +1277,21 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"일몰에 자동으로 켜짐"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"<xliff:g id="ID_1">%1$s</xliff:g>에 자동으로 켜짐"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"취침 시간에 자동으로 켜짐"</string>
+    <!-- no translation found for dark_ui_summary_off_auto_mode_modes (2672694802103388896) -->
+    <skip />
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"자동으로 끄지 않음"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"일출에 자동으로 끄기"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"<xliff:g id="ID_1">%1$s</xliff:g>에 자동으로 꺼짐"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"취침 시간에 자동으로 꺼짐"</string>
+    <!-- no translation found for dark_ui_summary_on_auto_mode_modes (7769594183411785087) -->
+    <skip />
     <string name="dark_ui_text" msgid="4392646155331126666">"어두운 테마는 배터리 사용 시간을 늘리기 위해 일부 화면에서 검은색 배경을 사용합니다. 어두운 테마 일정은 화면이 꺼질 때까지 기다린 후 켜집니다."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"어두운 테마는 현재 취침 모드 일정을 따릅니다."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"취침 모드 설정"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (1041117250408363391) -->
+    <skip />
+    <!-- no translation found for dark_ui_modes_footer_action (80671811848446248) -->
+    <skip />
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"더 어둡게"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"기기가 평소보다 어두워지도록 허용"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"화면 자동 잠금 시간"</string>
@@ -1952,7 +1956,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"오른쪽 하단 클릭"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"더 많은 옵션을 확인하려면 터치패드 오른쪽 하단을 클릭합니다"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"포인터 속도"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"포인터 채움 스타일"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"포인터 채움 스타일을 검은색으로 변경"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"포인터 채움 스타일을 초록색으로 변경"</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"포인터 채움 스타일을 노란색으로 변경"</string>
@@ -1999,10 +2004,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"초기화"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"특수키 선택"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>의 새 키 선택:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"실제 키보드 접근성"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"고정키, 바운스 키, 마우스 키"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> 레이아웃"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"기본"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"자동: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2071,6 +2074,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"일반"</string>
     <string name="display_category_title" msgid="6638191682294461408">"디스플레이"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"색상 및 모션"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"색상 대비"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"고대비를 사용하면 텍스트, 버튼, 아이콘이 더 선명하게 보입니다. 가장 괜찮아 보이는 대비를 선택하세요."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"일부 앱에서는 몇몇 색상 및 텍스트 대비 설정을 지원하지 않습니다."</string>
@@ -2214,11 +2223,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"고급"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"접근성 버튼이 <xliff:g id="SERVICE">%1$s</xliff:g>(으)로 설정되어 있습니다. 확대를 사용하려면 접근성 버튼을 길게 터치한 다음 확대를 선택하세요."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"접근성 동작이 <xliff:g id="SERVICE">%1$s</xliff:g>(으)로 설정되어 있습니다. 확대 기능을 사용하려면 두 손가락을 사용하여 화면 하단에서 위로 스와이프한 다음 잠시 기다리세요. 그런 다음 확대를 선택합니다."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"볼륨 키 바로가기"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"단축키 설정"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"잠금 화면의 볼륨 키 바로가기"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"잠금 화면에서 기능 단축키 사용을 허용합니다. 볼륨 키 2개를 몇 초 동안 동시에 길게 누릅니다."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"접근성 버튼"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"접근성 버튼 및 동작"</string>
@@ -2238,6 +2245,8 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"사용하지 않을 때 투명도"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"투명"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"불투명"</string>
+    <!-- no translation found for accessibility_button_disabled_button_mode_summary (1978174613270619492) -->
+    <skip />
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"고대비 텍스트"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"텍스트 색상을 검은색 또는 흰색으로 변경하여 배경과의 대비를 극대화합니다."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"텍스트 대비 극대화"</string>
@@ -4112,8 +4121,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"이 앱에서 생성된 모든 방해 금지 모드 규칙이 삭제됩니다."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"<xliff:g id="APP">%1$s</xliff:g>에 대해 모드 액세스 권한을 허용하시겠습니까?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"앱에서 방해 금지 모드를 사용 또는 사용 중지하고, 모드를 관리 및 활성화하고, 관련 설정을 변경할 수 있습니다."</string>
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
-    <skip />
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"모드에 대한 <xliff:g id="APP">%1$s</xliff:g>의 액세스 권한을 취소하시겠습니까?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"이 앱에서 생성된 모든 모드가 삭제됩니다."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"최적화하지 않음"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"최적화"</string>
@@ -5295,8 +5303,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"사용"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"사용 안함"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"사용"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"오디오 %1$d%% 왼쪽, %2$d%% 오른쪽"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"오디오 %1$d%% 오른쪽, %2$d%% 왼쪽"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"기기 이름이 설치한 앱에 표시됩니다. 블루투스 기기 및 Wi-Fi 네트워크에 연결하거나 Wi-Fi 핫스팟을 설정할 때도 기기 이름이 다른 사용자에게 표시될 수 있습니다."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"문법적 성별"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"문법적 성별 선택"</string>

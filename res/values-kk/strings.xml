@@ -834,14 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Bluetooth қосулы кезде, құрылғыңыз маңайдағы басқа Bluetooth құрылғыларымен байланыс орната алады.\n\nҚұрылғының жұмысын жақсарту үшін қолданбалар мен қызметтер маңайдағы құрылғыларды кез келген уақытта (Bluetooth өшірулі кезде де) іздеуі мүмкін. Бұл, мысалы, локацияға негізделген функциялар мен қызметтерді жақсартуға пайдаланыла алады. Оны Bluetooth іздеу параметрлерінен өзгерте аласыз."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Bluetooth қосулы кезде, құрылғыңыз маңайдағы басқа Bluetooth құрылғыларымен байланыса алады. Quick Share және Find My Device сияқты функциялар Bluetooth-ты пайдаланады.\n\nҚолданбалар мен қызметтер маңайдағы құрылғыларды Bluetooth өшірулі кезде де сканерлей береді. Бұл мысал ретінде локацияға негізделген функциялар мен қызметтерді жақсарту үшін пайдаланылуы мүмкін. Бұл мүмкіндікті Bluetooth іздеу функциясының параметрлерінде өзгерте аласыз."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Өзгерту"</string>
-    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> құрылғысы қосылмады"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Қауіпсіздік мақсатында бұл құрылғыны ұмытып, қайта жұптаңыз."</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Құрылғыны ұмыту"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Бас тарту"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Құрылғы мәліметтері"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Пернетақта параметрлері"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Қосымша параметрлер"</string>
@@ -1281,13 +1277,21 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Күн батқанда, автоматты түрде қосылады"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Автоматты түрде қосылады: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Ұйқы режимінде автоматты түрде қосылады."</string>
+    <!-- no translation found for dark_ui_summary_off_auto_mode_modes (2672694802103388896) -->
+    <skip />
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Автоматты өшпейді"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Күн шыққанда, автоматты өшеді"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Автоматты түрде өшеді: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Ұйқы режимі аяқталған соң автоматты түрде қосылады."</string>
+    <!-- no translation found for dark_ui_summary_on_auto_mode_modes (7769594183411785087) -->
+    <skip />
     <string name="dark_ui_text" msgid="4392646155331126666">"Қараңғы батарея кейбір экрандарда батарея зарядын ұзаққа жеткізу үшін қара фонды пайдаланады. Экран өшпейінше, қараңғы режим кестелері қосылмайды."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Қараңғы режим қазір \"Ұйқы\" режимінің кестесіне қолданылып жатыр."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"\"Ұйқы\" режимі параметрлері"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (1041117250408363391) -->
+    <skip />
+    <!-- no translation found for dark_ui_modes_footer_action (80671811848446248) -->
+    <skip />
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Жарықтығын бұрынғыдан азайту"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Құрылғы жарықтығын әдеттегіден азайтып пайдалану"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Экранның өшуі"</string>
@@ -1952,7 +1956,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Төменгі оң жақты басу"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Қосымша опцияларды көру үшін сенсорлық тақтаның төменгі оң жақ бұрышын басыңыз."</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Меңзер жылдамдығы"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"Меңзердің бояу стилі"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Меңзердің бояу стилін қара түске өзгертеді."</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Меңзердің бояу стилін жасыл түске өзгертеді."</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Меңзердің бояу стилін сары түске өзгертеді."</string>
@@ -1999,10 +2004,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Қайта орнату"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Өзгерткіш перне таңдау"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> жаңа пернесін таңдау:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Физикалық пернетақтаның арнайы мүмкіндіктері"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Бекітілген пернелер, серпімді пернелер, тінтуір пернелері"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> форматы"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Әдепкі"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Автоматты: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2071,6 +2074,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"Жалпы"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Дисплей"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Түс және қозғалыс"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Түс контрасы"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Жоғары контраст мәтінді, түймелерді және белгішелерді ерекшелейді. Өзіңізге ұнайтын контрасты таңдаңыз."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Кейбір қолданбалар түс және мәтін контрасының барлық параметрін қолдамауы мүмкін."</string>
@@ -2214,11 +2223,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Қосымша"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Арнайы мүмкіндіктер <xliff:g id="SERVICE">%1$s</xliff:g> қызметіне орнатылды. Ұлғайту функциясын пайдалану үшін арнайы мүмкіндіктер түймесін басып тұрып, ұлғайту пәрменін таңдаңыз."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Арнайы мүмкіндіктер қимылы <xliff:g id="SERVICE">%1$s</xliff:g> қызметіне орнатылған. Үлкейту үшін экранның төменгі жағынан жоғары қарай екі саусақпен сырғытып, ұстап тұрыңыз. Одан кейін үлкейтуді таңдаңыз."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Дыбыс деңгейі пернелері тіркесімі"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Таңбаша параметрлері"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Құлып экранынан дыбыс деңгейі пернелері тіркесімін басу"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Функцияның құлыптаулы экраннан жылдам пәрмен арқылы іске қосылуына мүмкіндік береді. Дыбыс деңгейі пернелерін бірнеше секунд ұстап тұрыңыз."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Арнайы мүмкіндіктер түймесі"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Арнайы мүмкіндіктер түймесі мен қимылы"</string>
@@ -2238,6 +2245,8 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Түссіздік деңгейі"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Мөлдір"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Мөлдір емес"</string>
+    <!-- no translation found for accessibility_button_disabled_button_mode_summary (1978174613270619492) -->
+    <skip />
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Жоғары контрасты мәтін"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Мәтін түсін қараға немесе аққа өзгертеді. Фонмен арадағы контрасты арттырады."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Мәтін контрасын арттыру"</string>
@@ -4112,8 +4121,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Мазаламау режимінің осы қолданба жасаған барлық ережесі жойылады."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"<xliff:g id="APP">%1$s</xliff:g> үшін режимдерді пайдалану рұқсаты берілсін бе?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Қолданба \"Мазаламау\" режимін қосып, өшіре алады, режимдерді іске қосып, басқара алады және қатысты параметрлерге өзгерістер енгізе алады."</string>
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
-    <skip />
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"<xliff:g id="APP">%1$s</xliff:g> қолданбасының режимдерді пайдалану рұқсатын тоқтату керек пе?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Осы қолданба арқылы жасалған барлық режим өшіріледі."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Оңтайландырмау"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Оңтайландыру"</string>
@@ -5295,8 +5303,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Қосулы"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Өшірулі"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Қосулы"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Аудио: сол жақ %1$d%%, оң жақ %2$d%%"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Аудио: сол жақ %1$d%%, оң жақ %2$d%%"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Құрылғыңыздың аты орнатылған қолданбаларға көрінеді. Bluetooth құрылғыларына, Wi-Fi желісіне қосылғанда немесе Wi-Fi хотспотын орнатқанда, басқа адамдарға да көрінуі мүмкін."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Грамматикалық тек"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Грамматикалық текті таңдаңыз"</string>
