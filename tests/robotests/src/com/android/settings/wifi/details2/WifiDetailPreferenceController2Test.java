@@ -137,6 +137,7 @@ public class WifiDetailPreferenceController2Test {
     private static final String FACTORY_MAC_ADDRESS = "FACTORY_MAC_ADDRESS";
     private static final String SECURITY = "None";
     private static final String FQDN = "fqdn";
+    private static final Uri TEST_URI = Uri.parse("content://test/test");
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mMockScreen;
@@ -1874,6 +1875,24 @@ public class WifiDetailPreferenceController2Test {
         mController.setSignalStrengthTitle(R.string.hotspot_connection_strength);
 
         verify(mMockSignalStrengthPref).setTitle(R.string.hotspot_connection_strength);
+    }
+
+    @Test
+    public void launchCaptivePortal_uriNull_doNothing() {
+        setUpSpyController();
+
+        mController.launchCaptivePortal(null);
+
+        verify(mContext, never()).startActivity(any());
+    }
+
+    @Test
+    public void launchCaptivePortal_uriNotNull_startActivity() {
+        setUpSpyController();
+
+        mController.launchCaptivePortal(TEST_URI);
+
+        verify(mContext).startActivity(any());
     }
 
     private SubscriptionInfo mockSubscriptionInfo(int subId, String displayName, int carrierId) {
