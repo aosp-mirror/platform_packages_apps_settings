@@ -51,8 +51,6 @@ import java.util.concurrent.Executors;
 import java.util.function.Function;
 
 class ZenModesListAddModePreferenceController extends BasePreferenceController {
-    protected static final String KEY = "add_mode";
-
     private final ZenServiceListing mServiceListing;
     private final OnAddModeListener mOnAddModeListener;
 
@@ -70,8 +68,9 @@ class ZenModesListAddModePreferenceController extends BasePreferenceController {
         void onAvailableModeTypesForAdd(List<ModeType> types);
     }
 
-    ZenModesListAddModePreferenceController(Context context, OnAddModeListener onAddModeListener) {
-        this(context, onAddModeListener, new ZenServiceListing(context),
+    ZenModesListAddModePreferenceController(Context context, String key,
+            OnAddModeListener onAddModeListener) {
+        this(context, key, onAddModeListener, new ZenServiceListing(context),
                 new ConfigurationActivityHelper(context.getPackageManager()),
                 context.getSystemService(NotificationManager.class), context.getPackageManager(),
                 applicationInfo -> Utils.getBadgedIcon(context, applicationInfo),
@@ -79,13 +78,13 @@ class ZenModesListAddModePreferenceController extends BasePreferenceController {
     }
 
     @VisibleForTesting
-    ZenModesListAddModePreferenceController(Context context,
+    ZenModesListAddModePreferenceController(Context context, String key,
             OnAddModeListener onAddModeListener, ZenServiceListing serviceListing,
             ConfigurationActivityHelper configurationActivityHelper,
             NotificationManager notificationManager, PackageManager packageManager,
             Function<ApplicationInfo, Drawable> appIconRetriever,
             ExecutorService backgroundExecutor, Executor uiThreadExecutor) {
-        super(context, KEY);
+        super(context, key);
         mOnAddModeListener = onAddModeListener;
         mServiceListing = serviceListing;
         mConfigurationActivityHelper = configurationActivityHelper;
