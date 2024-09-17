@@ -834,14 +834,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices. Features like Quick Share and Find My Device use Bluetooth.\n\nApps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Change"</string>
-    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> not connected"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"For your security, forget this device, then pair it again"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Forget device"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Cancel"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Device details"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Keyboard settings"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"More settings"</string>
@@ -1281,13 +1277,21 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Will turn on automatically at sunset"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Will turn on automatically at <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Will turn on automatically at bedtime"</string>
+    <!-- no translation found for dark_ui_summary_off_auto_mode_modes (2672694802103388896) -->
+    <skip />
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Will never turn off automatically"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Will turn off automatically at sunrise"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Will turn off automatically at <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Will turn off automatically after bedtime"</string>
+    <!-- no translation found for dark_ui_summary_on_auto_mode_modes (7769594183411785087) -->
+    <skip />
     <string name="dark_ui_text" msgid="4392646155331126666">"Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Dark theme is currently following your Bedtime mode schedule"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Bedtime mode settings"</string>
+    <!-- no translation found for dark_ui_modes_footer_summary (1041117250408363391) -->
+    <skip />
+    <!-- no translation found for dark_ui_modes_footer_action (80671811848446248) -->
+    <skip />
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Even dimmer"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Allow device to go dimmer than usual"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Screen timeout"</string>
@@ -1952,7 +1956,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Bottom-right click"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Click in the bottom right-hand corner of the touchpad for more options"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Pointer speed"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"Pointer fill style"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Change pointer fill style to black"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Change pointer fill style to green"</string>
     <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Change pointer fill style to yellow"</string>
@@ -1999,10 +2004,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Reset"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Choose modifier key"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Choose a new key for <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Physical keyboard accessibility"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Sticky keys, bounce keys, mouse keys"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> layout"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Default"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatic: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2071,6 +2074,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Display"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Colour and motion"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Colour contrast"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Higher contrast makes text, buttons and icons stand out more. Choose the contrast that looks best to you."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Some apps may not support all colour and text contrast settings"</string>
@@ -2214,11 +2223,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Advanced"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"The accessibility button is set to <xliff:g id="SERVICE">%1$s</xliff:g>. To use magnification, touch &amp; hold the accessibility button, then select magnification."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"The accessibility gesture is set to the <xliff:g id="SERVICE">%1$s</xliff:g>. To use magnification, swipe up with two fingers from the bottom of the screen and hold. Then select magnification."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Volume keys shortcut"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Shortcut settings"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Volume keys shortcut from lock screen"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Accessibility button"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Accessibility button and gesture"</string>
@@ -2238,6 +2245,8 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparency when not in use"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Transparent"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Non-transparent"</string>
+    <!-- no translation found for accessibility_button_disabled_button_mode_summary (1978174613270619492) -->
+    <skip />
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"High-contrast text"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Change text colour to black or white. Maximises contrast with the background."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximise text contrast"</string>
@@ -4112,8 +4121,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"All Do Not Disturb rules created by this app will be removed."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Allow access to Modes for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"The app will be able to turn on/off Do Not Disturb, manage and activate Modes and make changes to related settings."</string>
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
-    <skip />
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Revoke access to modes for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"All modes created by this app will be removed."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Don’t optimise"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimise"</string>
@@ -5295,8 +5303,10 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"On"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Off"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"On"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Audio %1$d%% left, %2$d%% right"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Audio %1$d%% right, %2$d%% left"</string>
+    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
+    <skip />
+    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
+    <skip />
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Your device name is visible to apps you installed. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammatical gender"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Select grammatical gender"</string>
