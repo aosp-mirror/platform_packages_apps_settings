@@ -1763,9 +1763,12 @@
     <string name="lockpassword_password_recently_used">Device admin doesn\'t allow using a recent
         password</string>
 
-    <!-- [CHAR_LIMIT=NONE] Error shown when the user tries to set an ascending or descending sequence of digits -->
+    <!-- [CHAR_LIMIT=NONE] Error shown when the user tries to set an ascending or descending sequence of digits as PIN -->
     <string name="lockpassword_pin_no_sequential_digits">Ascending, descending, or repeated sequence
         of digits isn\'t allowed</string>
+
+    <!-- Error shown when the user tries to set an ascending or descending sequence of alphanumeric characters in the password [CHAR_LIMIT=NONE] -->
+    <string name="lockpassword_password_no_sequential_characters">Ascending, descending, or repeated sequence of characters isn\'t allowed</string>
 
     <!-- Label for Confirm button when entering PIN / password the second time. [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_label">Confirm</string>

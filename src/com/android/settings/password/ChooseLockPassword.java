@@ -927,7 +927,9 @@ public class ChooseLockPassword extends SettingsActivity {
                                         : R.string.lockpassword_pin_too_long));
                         break;
                     case CONTAINS_SEQUENCE:
-                        messages.add(getString(R.string.lockpassword_pin_no_sequential_digits));
+                        messages.add(getString(mIsAlphaMode
+                                ? R.string.lockpassword_password_no_sequential_characters
+                                : R.string.lockpassword_pin_no_sequential_digits));
                         break;
                     case RECENTLY_USED:
                         DevicePolicyManager devicePolicyManager =
