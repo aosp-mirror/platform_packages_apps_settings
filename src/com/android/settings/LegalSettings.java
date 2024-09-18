@@ -17,8 +17,13 @@
 package com.android.settings;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.deviceinfo.legal.LegalSettingsScreen;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -44,4 +49,10 @@ public class LegalSettings extends DashboardFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.about_legal);
+
+    @Nullable
+    @Override
+    public String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return LegalSettingsScreen.KEY;
+    }
 }
