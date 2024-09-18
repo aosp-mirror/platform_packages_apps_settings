@@ -41,6 +41,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.SettingsMainSwitchBar;
@@ -234,6 +237,22 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowIdentityCheckBiometricErrorDialog.class)
+    @Ignore("b/354820314")
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void onActivityResult_requestBiometricPrompt_showErrorDialog() {
+        when(mDashboard.getContext()).thenReturn(mContext);
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+        mDashboard.onActivityResult(DevelopmentSettingsDashboardFragment.REQUEST_BIOMETRIC_PROMPT,
+                ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT, null);
+
+        assertThat(mSwitchBar.isChecked()).isFalse();
+        assertThat(ShadowIdentityCheckBiometricErrorDialog.sShown).isTrue();
+    }
+
+    @Test
     @Ignore
     @Config(shadows = ShadowEnableDevelopmentSettingWarningDialog.class)
     public void onSwitchChanged_turnOff_shouldTurnOff() {
@@ -359,6 +378,16 @@ public class DevelopmentSettingsDashboardFragmentTest {
         @Implementation
         protected static void show(DevelopmentSettingsDashboardFragment host) {
             mShown = true;
+        }
+    }
+
+    @Implements(IdentityCheckBiometricErrorDialog.class)
+    public static class ShadowIdentityCheckBiometricErrorDialog {
+        static boolean sShown;
+        @Implementation
+        public static void showBiometricErrorDialog(FragmentActivity fragmentActivity,
+                Utils.BiometricStatus errorCode) {
+            sShown = true;
         }
     }
 
