@@ -45,6 +45,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.sounde.AudioSwitchUtils;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -68,7 +69,8 @@ import java.util.concurrent.FutureTask;
  * updating the current status of switcher entry. Subclasses must overwrite
  */
 public abstract class AudioSwitchPreferenceController extends BasePreferenceController
-        implements BluetoothCallback, LifecycleObserver, OnStart, OnStop {
+        implements BluetoothCallback, LifecycleObserver, OnStart, OnStop,
+        LocalBluetoothProfileManager.ServiceListener {
 
     private static final String TAG = "AudioSwitchPrefCtrl";
 
@@ -149,6 +151,11 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             return;
         }
         mLocalBluetoothManager.setForegroundActivity(mContext);
+        if (!AudioSwitchUtils.isLeAudioProfileReady(mProfileManager)) {
+            if (mProfileManager != null) {
+                mProfileManager.addServiceListener(this);
+            }
+        }
         register();
     }
 
@@ -159,6 +166,9 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
             return;
         }
         mLocalBluetoothManager.setForegroundActivity(null);
+        if (mProfileManager != null) {
+            mProfileManager.removeServiceListener(this);
+        }
         unregister();
     }
 
@@ -191,6 +201,20 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     @Override
     public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
         updateState(mPreference);
+    }
+
+    @Override
+    public void onServiceConnected() {
+        Log.d(TAG, "onServiceConnected");
+        if (AudioSwitchUtils.isLeAudioProfileReady(mProfileManager)) {
+            updateState(mPreference);
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected() {
+        Log.d(TAG, "onServiceDisconnected()");
+        // Do nothing.
     }
 
     public void setCallback(AudioSwitchCallback callback) {
