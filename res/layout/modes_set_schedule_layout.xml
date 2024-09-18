@@ -73,18 +73,17 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
-        <!-- End time title (non-clickable preference), left-aligned to edge of time display -->
+        <!-- End time title (non-clickable preference), right-aligned -->
         <TextView
             android:id="@+id/end_time_label"
             android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/end_time"
             app:layout_constraintStart_toEndOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constrainedWidth="true"
-            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_bias="1"
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Medium"
             android:text="@string/zen_mode_end_time"
             android:importantForAccessibility="no" />

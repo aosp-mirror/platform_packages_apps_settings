@@ -57,6 +57,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.development.autofill.AutofillCategoryController;
@@ -76,6 +77,7 @@ import com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngle
 import com.android.settings.development.qstile.DevelopmentTiles;
 import com.android.settings.development.storage.SharedDataPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.widget.SettingsMainSwitchBar;
@@ -377,6 +379,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                             userId, false /* hideBackground */);
                 } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                     mSwitchBar.setChecked(false);
+                    IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                            biometricAuthStatus, false /* twoFactorAuthentication */);
                 } else {
                     //Reset biometrics once enable dialog is shown
                     mIsBiometricsAuthenticated = false;
@@ -559,6 +563,10 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             if (resultCode == RESULT_OK) {
                 mIsBiometricsAuthenticated = true;
                 mSwitchBar.setChecked(true);
+            } else if (resultCode
+                    == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                        Utils.BiometricStatus.LOCKOUT, false /* twoFactorAuthentication */);
             }
         }
         for (AbstractPreferenceController controller : mPreferenceControllers) {
