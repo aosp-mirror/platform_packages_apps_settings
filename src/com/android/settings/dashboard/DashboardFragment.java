@@ -15,8 +15,6 @@
  */
 package com.android.settings.dashboard;
 
-import static com.android.settingslib.flags.Flags.settingsCatalyst;
-
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
@@ -390,7 +388,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     /** Returns if catalyst is enabled on current screen. */
     protected final boolean isCatalystEnabled() {
-        if (!settingsCatalyst()) {
+        if (!Flags.catalyst()) {
             return false;
         }
         Context context = getContext();
