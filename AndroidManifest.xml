@@ -237,6 +237,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.USER_INITIALIZE"/>
                 <action android:name="android.intent.action.PRE_BOOT_COMPLETED"/>
+                <action android:name="com.google.android.setupwizard.SETUP_WIZARD_FINISHED"/>
             </intent-filter>
         </receiver>
 
