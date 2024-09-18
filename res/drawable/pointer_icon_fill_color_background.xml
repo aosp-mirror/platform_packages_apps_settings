@@ -14,9 +14,15 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
-    android:shape="rectangle">
-    <corners android:radius="16dp" />
-    <solid android:color="?androidprv:attr/materialColorSurface"/>
-</shape>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetBottom="@dimen/pointer_fill_style_circle_offset"
+    android:insetLeft="@dimen/pointer_fill_style_circle_offset"
+    android:insetRight="@dimen/pointer_fill_style_circle_offset"
+    android:insetTop="@dimen/pointer_fill_style_circle_offset">
+    <shape android:shape="oval">
+        <size
+            android:width="@dimen/pointer_fill_style_circle_inner_diameter"
+            android:height="@dimen/pointer_fill_style_circle_inner_diameter" />
+        <solid android:color="@android:color/white" />
+    </shape>
+</inset>
