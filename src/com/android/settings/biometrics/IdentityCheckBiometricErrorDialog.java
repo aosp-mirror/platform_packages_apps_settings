@@ -50,9 +50,11 @@ public class IdentityCheckBiometricErrorDialog extends InstrumentedDialogFragmen
 
     private static final String KEY_ERROR_CODE = "key_error_code";
     private static final String KEY_TWO_FACTOR_AUTHENTICATION = "key_two_factor_authentication";
+    private static final String KEY_FINISH_ACTIVITY = "key_finish_activity";
 
     private String mActionIdentityCheckSettings = Settings.ACTION_SETTINGS;
     @Nullable private BroadcastReceiver mBroadcastReceiver;
+    private boolean mShouldFinishActivity = false;
 
     @NonNull
     @Override
@@ -70,6 +72,9 @@ public class IdentityCheckBiometricErrorDialog extends InstrumentedDialogFragmen
                 R.string.identity_check_settings_action);
         mActionIdentityCheckSettings = identityCheckSettingsAction.isEmpty()
                 ? mActionIdentityCheckSettings : identityCheckSettingsAction;
+        mShouldFinishActivity = getArguments().getBoolean(
+                KEY_FINISH_ACTIVITY);
+
         setTitle(customView, isLockoutError);
         setBody(customView, isLockoutError, twoFactorAuthentication);
         alertDialogBuilder.setView(customView);
@@ -94,11 +99,14 @@ public class IdentityCheckBiometricErrorDialog extends InstrumentedDialogFragmen
     }
 
     @Override
-    public void dismiss() {
-        super.dismiss();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mBroadcastReceiver != null) {
             getContext().unregisterReceiver(mBroadcastReceiver);
             mBroadcastReceiver = null;
+        }
+        if (mShouldFinishActivity && getActivity() != null) {
+            getActivity().finish();
         }
     }
 
@@ -106,19 +114,39 @@ public class IdentityCheckBiometricErrorDialog extends InstrumentedDialogFragmen
      * Shows an error dialog to prompt the user to resolve biometric errors for identity check.
      * @param fragmentActivity calling activity
      * @param errorCode refers to the biometric error
+     * @param twoFactorAuthentication if the surface requests LSKF before identity check auth
      */
     public static void showBiometricErrorDialog(FragmentActivity fragmentActivity,
             Utils.BiometricStatus errorCode, boolean twoFactorAuthentication) {
+        showBiometricErrorDialog(fragmentActivity, errorCode, twoFactorAuthentication,
+                false /* finishActivityOnDismiss */);
+    }
+
+    /**
+     * Shows an error dialog to prompt the user to resolve biometric errors for identity check.
+     * Finishes the activity once the dialog is dismissed.
+     * @param fragmentActivity calling activity
+     * @param errorCode refers to the biometric error
+     */
+    public static void showBiometricErrorDialogAndFinishActivityOnDismiss(
+            FragmentActivity fragmentActivity, Utils.BiometricStatus errorCode) {
+        showBiometricErrorDialog(fragmentActivity, errorCode, true /* twoFactorAuthentication */,
+                true /* finishActivityOnDismiss */);
+    }
+
+    private static void showBiometricErrorDialog(FragmentActivity fragmentActivity,
+            Utils.BiometricStatus errorCode, boolean twoFactorAuthentication,
+            boolean finishActivityOnDismiss) {
         final IdentityCheckBiometricErrorDialog identityCheckBiometricErrorDialog =
                 new IdentityCheckBiometricErrorDialog();
         final Bundle args = new Bundle();
         args.putCharSequence(KEY_ERROR_CODE, errorCode.name());
         args.putBoolean(KEY_TWO_FACTOR_AUTHENTICATION, twoFactorAuthentication);
+        args.putBoolean(KEY_FINISH_ACTIVITY, finishActivityOnDismiss);
         identityCheckBiometricErrorDialog.setArguments(args);
         identityCheckBiometricErrorDialog.show(fragmentActivity.getSupportFragmentManager(),
                 IdentityCheckBiometricErrorDialog.class.getName());
     }
-
     private void setTitle(View view, boolean lockout) {
         final TextView titleTextView = view.findViewById(R.id.title);
         if (lockout) {
