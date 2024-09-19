@@ -1522,6 +1522,7 @@ public final class Utils extends com.android.settingslib.Utils {
                 case BiometricManager.BIOMETRIC_ERROR_LOCKOUT:
                     return BiometricStatus.LOCKOUT;
                 case BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE:
+                case BiometricManager.BIOMETRIC_ERROR_NOT_ENABLED_FOR_APPS:
                     return BiometricStatus.NOT_ACTIVE;
                 default:
                     return BiometricStatus.ERROR;
