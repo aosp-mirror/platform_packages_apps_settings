@@ -45,9 +45,11 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -325,7 +327,9 @@ public class FaceSettings extends DashboardFragment {
                             BIOMETRIC_AUTH_REQUEST,
                             mUserId, true /* hideBackground */);
                 } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                    finish();
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
+                                    biometricAuthStatus);
                 }
             }
         } else if (requestCode == ENROLL_REQUEST) {
@@ -336,7 +340,13 @@ public class FaceSettings extends DashboardFragment {
         } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
             mBiometricsAuthenticationRequested = false;
             if (resultCode != RESULT_OK) {
-                finish();
+                if (resultCode == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
+                                    Utils.BiometricStatus.LOCKOUT);
+                } else {
+                    finish();
+                }
             }
         }
     }

@@ -43,6 +43,7 @@ import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
+import android.hardware.biometrics.Flags;
 import android.hardware.biometrics.PromptInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -82,6 +83,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             "biometric_prompt_negative_button_text";
     public static final String BIOMETRIC_PROMPT_HIDE_BACKGROUND =
             "biometric_prompt_hide_background";
+    public static final int BIOMETRIC_LOCKOUT_ERROR_RESULT = 100;
 
     public static class InternalActivity extends ConfirmDeviceCredentialActivity {
     }
@@ -129,6 +131,10 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                         showConfirmCredentials();
                     } else {
                         Log.i(TAG, "Finishing, device credential not requested");
+                        if (Flags.mandatoryBiometrics()
+                                && errorCode == BiometricPrompt.BIOMETRIC_ERROR_LOCKOUT_PERMANENT) {
+                            setResult(BIOMETRIC_LOCKOUT_ERROR_RESULT);
+                        }
                         finish();
                     }
                 }
