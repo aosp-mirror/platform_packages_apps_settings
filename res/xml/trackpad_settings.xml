@@ -69,6 +69,13 @@
         settings:controller="com.android.settings.inputmethod.MouseReverseVerticalScrollingPreferenceController"
         android:order="45"/>
 
+    <SwitchPreferenceCompat
+        android:key="mouse_swap_primary_button"
+        android:title="@string/mouse_swap_primary_button"
+        android:summary="@string/mouse_swap_primary_button_summary"
+        settings:controller="com.android.settings.inputmethod.MouseSwapPrimaryButtonPreferenceController"
+        android:order="47"/>
+
     <Preference
         android:fragment="com.android.settings.inputmethod.PointerTouchpadFragment"
         android:key="pointer_and_touchpad"
