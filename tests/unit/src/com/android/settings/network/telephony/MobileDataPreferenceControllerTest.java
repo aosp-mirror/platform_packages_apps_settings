@@ -120,12 +120,12 @@ public class MobileDataPreferenceControllerTest {
             boolean isOpportunistic, boolean isValid, boolean isActive) {
         int id = Integer.parseInt(subId);
         return new SubscriptionInfoEntity(subId, id, false, isOpportunistic, displayName, false,
-                false, isValid, isActive, false);
+                false, isValid, isActive);
     }
 
     private MobileNetworkInfoEntity setupMobileNetworkInfoEntity(String subId,
             boolean isDatEnabled) {
-        return new MobileNetworkInfoEntity(subId, isDatEnabled, false);
+        return new MobileNetworkInfoEntity(subId, isDatEnabled);
     }
 
     @Test

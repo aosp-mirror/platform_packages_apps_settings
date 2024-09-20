@@ -16,7 +16,6 @@
 package com.android.settings.network;
 
 import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
-import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -29,7 +28,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
-import android.telephony.UiccPortInfo;
 import android.telephony.UiccSlotInfo;
 import android.util.ArrayMap;
 import android.util.IndentingPrintWriter;
@@ -47,7 +45,6 @@ import com.android.settingslib.mobile.dataservice.MobileNetworkInfoDao;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoDao;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -70,7 +67,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             new ArrayMap<>();
     private static Map<Integer, MobileNetworkInfoEntity> sCacheMobileNetworkInfoEntityMap =
             new ArrayMap<>();
-    private static Map<Integer, UiccInfoEntity> sCacheUiccInfoEntityMap = new ArrayMap<>();
     private static Collection<MobileNetworkCallback> sCallbacks = new CopyOnWriteArrayList<>();
     private static final Object sInstanceLock = new Object();
     @GuardedBy("sInstanceLock")
@@ -85,8 +81,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private Context mContext;
     private AirplaneModeObserver mAirplaneModeObserver;
     private MetricsFeatureProvider mMetricsFeatureProvider;
-    private int mPhysicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
-    private boolean mIsActive = false;
     private Map<Integer, SubscriptionInfo> mSubscriptionInfoMap = new ArrayMap<>();
     private Map<Integer, TelephonyManager> mTelephonyManagerMap = new HashMap<>();
     private Map<Integer, PhoneCallStateTelephonyCallback> mTelephonyCallbackMap = new HashMap<>();
@@ -165,7 +159,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
         sCallbacks.add(mobileNetworkCallback);
         observeAllSubInfo(lifecycleOwner);
-        observeAllUiccInfo(lifecycleOwner);
         observeAllMobileNetworkInfo(lifecycleOwner);
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             createTelephonyManagerBySubId(subId);
@@ -267,14 +260,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 lifecycleOwner, this::onAvailableSubInfoChanged);
     }
 
-    private void observeAllUiccInfo(LifecycleOwner lifecycleOwner) {
-        if (DEBUG) {
-            Log.d(TAG, "Observe UICC info.");
-        }
-        mMobileNetworkDatabase.queryAllUiccInfo().observe(
-                lifecycleOwner, this::onAllUiccInfoChanged);
-    }
-
     private void observeAllMobileNetworkInfo(LifecycleOwner lifecycleOwner) {
         Log.d(TAG, "Observe mobile network info.");
         mMobileNetworkDatabase.queryAllMobileNetworkInfo().observe(
@@ -287,36 +272,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     public MobileNetworkInfoEntity queryMobileNetworkInfoBySubId(String subId) {
         return mMobileNetworkInfoDao.queryMobileNetworkInfoBySubId(subId);
-    }
-
-    private void getUiccInfoBySubscriptionInfo(@NonNull UiccSlotInfo[] uiccSlotInfos,
-            SubscriptionInfo subInfo) {
-        for (int i = 0; i < uiccSlotInfos.length; i++) {
-            UiccSlotInfo curSlotInfo = uiccSlotInfos[i];
-            if (curSlotInfo != null && curSlotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT) {
-                final int index = i;
-
-                Collection<UiccPortInfo> uiccPortInfos = curSlotInfo.getPorts();
-                uiccPortInfos.forEach(portInfo -> {
-                    if (portInfo.getPortIndex() == subInfo.getPortIndex()
-                            && portInfo.getLogicalSlotIndex() == subInfo.getSimSlotIndex()) {
-                        mPhysicalSlotIndex = index;
-                        mIsActive = portInfo.isActive();
-                    } else if (DEBUG) {
-                        Log.d(TAG, "Can not get port index and physicalSlotIndex for subId "
-                                + subInfo.getSubscriptionId());
-                    }
-                });
-                if (mPhysicalSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
-                    break;
-                }
-            } else if (DEBUG) {
-                Log.d(TAG, "Can not get card state info");
-            }
-        }
-        mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_MOBILE_NETWORK_DB_GET_UICC_INFO,
-                subInfo.getSubscriptionId());
     }
 
     private void onAvailableSubInfoChanged(
@@ -385,14 +340,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-        for (MobileNetworkCallback callback : sCallbacks) {
-            callback.onAllUiccInfoChanged(uiccInfoEntityList);
-        }
-        mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_UICC_INFO_IS_CHANGED, 0);
-    }
-
     private void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
         for (MobileNetworkCallback callback : sCallbacks) {
@@ -422,7 +369,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 mMobileNetworkDatabase.insertSubsInfo(subInfoEntity);
                 mMetricsFeatureProvider.action(mContext,
                         SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO, subId);
-                insertUiccInfo(subId);
                 insertMobileNetworkInfo(subId, telephonyManager);
             }
         } else if (DEBUG) {
@@ -433,14 +379,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private void deleteAllInfoBySubId(String subId) {
         Log.d(TAG, "deleteAllInfoBySubId, subId = " + subId);
         mMobileNetworkDatabase.deleteSubInfoBySubId(subId);
-        mMobileNetworkDatabase.deleteUiccInfoBySubId(subId);
         mMobileNetworkDatabase.deleteMobileNetworkInfoBySubId(subId);
         int id = Integer.parseInt(subId);
         removerRegisterBySubId(id);
         mSubscriptionInfoMap.remove(id);
         mTelephonyManagerMap.remove(id);
         sCacheSubscriptionInfoEntityMap.remove(id);
-        sCacheUiccInfoEntityMap.remove(id);
         sCacheMobileNetworkInfoEntityMap.remove(id);
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_MOBILE_NETWORK_DB_DELETE_DATA, id);
@@ -462,7 +406,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             }
             return null;
         } else {
-            getUiccInfoBySubscriptionInfo(uiccSlotInfos, subInfo);
             if (DEBUG) {
                 Log.d(TAG, "convert subscriptionInfo to entity for subId = " + subId);
             }
@@ -472,22 +415,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                     SubscriptionUtil.isSubscriptionVisible(mSubscriptionManager, context, subInfo),
                     SubscriptionUtil.isDefaultSubscription(context, subId),
                     mSubscriptionManager.isValidSubscriptionId(subId),
-                    mSubscriptionManager.isActiveSubscriptionId(subId),
-                    mSubscriptionManager.getActiveDataSubscriptionId() == subId);
-        }
-    }
-
-    private void insertUiccInfo(int subId) {
-        UiccInfoEntity uiccInfoEntity = convertToUiccInfoEntity(subId);
-        if (DEBUG) {
-            Log.d(TAG, "uiccInfoEntity = " + uiccInfoEntity);
-        }
-        if (!sCacheUiccInfoEntityMap.containsKey(subId)
-                || !sCacheUiccInfoEntityMap.get(subId).equals(uiccInfoEntity)) {
-            sCacheUiccInfoEntityMap.put(subId, uiccInfoEntity);
-            mMobileNetworkDatabase.insertUiccInfo(uiccInfoEntity);
-            mMetricsFeatureProvider.action(mContext,
-                    SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_UICC_INFO, subId);
+                    mSubscriptionManager.isActiveSubscriptionId(subId));
         }
     }
 
@@ -516,13 +444,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             Log.d(TAG, "TelephonyManager is null, subId = " + subId);
         }
 
-        return new MobileNetworkInfoEntity(String.valueOf(subId), isDataEnabled,
-                SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)
-        );
-    }
-
-    private UiccInfoEntity convertToUiccInfoEntity(int subId) {
-        return new UiccInfoEntity(String.valueOf(subId), mIsActive);
+        return new MobileNetworkInfoEntity(String.valueOf(subId), isDataEnabled);
     }
 
     @Override
@@ -633,9 +555,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
 
         default void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        }
-
-        default void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
         }
 
         default void onAllMobileNetworkInfoChanged(
