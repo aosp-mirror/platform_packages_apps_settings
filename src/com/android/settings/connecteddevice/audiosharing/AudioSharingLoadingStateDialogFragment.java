@@ -115,10 +115,6 @@ public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFr
     @NonNull
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         mHandler = new Handler(Looper.getMainLooper());
-        mHandler.postDelayed(() -> {
-            Log.d(TAG, "Auto dismiss dialog after timeout");
-            dismiss();
-        }, AUTO_DISMISS_MESSAGE_ID, AUTO_DISMISS_TIME_THRESHOLD_MS);
         Bundle args = requireArguments();
         String message = args.getString(BUNDLE_KEY_MESSAGE, "");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -130,6 +126,26 @@ public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFr
         AlertDialog dialog = builder.setView(customView).setCancelable(false).create();
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mHandler != null) {
+            Log.d(TAG, "onStart, postTimeOut for auto dismiss");
+            mHandler.postDelayed(() -> {
+                Log.d(TAG, "Try to auto dismiss dialog after timeout");
+                try {
+                    Dialog dialog = getDialog();
+                    if (dialog != null) {
+                        Log.d(TAG, "Dialog is not null, dismiss");
+                        dismissAllowingStateLoss();
+                    }
+                } catch (IllegalStateException e) {
+                    Log.d(TAG, "Fail to dismiss: " + e.getMessage());
+                }
+            }, AUTO_DISMISS_MESSAGE_ID, AUTO_DISMISS_TIME_THRESHOLD_MS);
+        }
     }
 
     @Override
