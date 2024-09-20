@@ -19,6 +19,7 @@ package com.android.settings.network.telephony
 import android.content.Context
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
+import android.telephony.TelephonyManager
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -37,12 +38,13 @@ class VoNrRepository(
     fun isVoNrAvailable(subId: Int): Boolean {
         if (!nrRepository.isNrAvailable(subId)) return false
         data class Config(val isVoNrEnabled: Boolean, val isVoNrSettingVisibility: Boolean)
+
         val carrierConfig =
             carrierConfigRepository.transformConfig(subId) {
                 Config(
                     isVoNrEnabled = getBoolean(CarrierConfigManager.KEY_VONR_ENABLED_BOOL),
                     isVoNrSettingVisibility =
-                        getBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL),
+                    getBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL),
                 )
             }
         return carrierConfig.isVoNrEnabled && carrierConfig.isVoNrSettingVisibility
@@ -52,7 +54,14 @@ class VoNrRepository(
         val telephonyManager = context.telephonyManager(subId)
         return context
             .subscriptionsChangedFlow()
-            .map { telephonyManager.isVoNrEnabled }
+            .map {
+                try {
+                    telephonyManager.isVoNrEnabled
+                } catch (e: IllegalStateException) {
+                    Log.e(TAG, "IllegalStateException - isVoNrEnabled : $e")
+                    false
+                }
+            }
             .conflate()
             .onEach { Log.d(TAG, "[$subId] isVoNrEnabled: $it") }
             .flowOn(Dispatchers.Default)
@@ -61,8 +70,14 @@ class VoNrRepository(
     suspend fun setVoNrEnabled(subId: Int, enabled: Boolean) =
         withContext(Dispatchers.Default) {
             if (!SubscriptionManager.isValidSubscriptionId(subId)) return@withContext
-            val result = context.telephonyManager(subId).setVoNrEnabled(enabled)
-            Log.d(TAG, "[$subId] setVoNrEnabled: $enabled, result: $result")
+            var result = TelephonyManager.ENABLE_VONR_RADIO_INVALID_STATE
+            try {
+                result = context.telephonyManager(subId).setVoNrEnabled(enabled)
+            } catch (e: IllegalStateException) {
+                Log.e(TAG, "IllegalStateException - setVoNrEnabled : $e")
+            } finally {
+                Log.d(TAG, "[$subId] setVoNrEnabled: $enabled, result: $result")
+            }
         }
 
     private companion object {
