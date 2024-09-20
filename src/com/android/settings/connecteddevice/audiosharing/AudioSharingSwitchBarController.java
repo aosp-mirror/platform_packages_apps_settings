@@ -315,7 +315,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                         if (mSinksInAdding.contains(sink)) {
                             mSinksInAdding.remove(sink);
                         }
-                        dismissLoadingStateDialogIfNeeded();
+                        dismissProgressDialogIfNeeded();
                         Log.d(TAG, "onReceiveStateChanged() connected, sink = " + sink
                                 + ", remaining sinks = " + mSinksInAdding);
                         if (mSinksToWaitFor.contains(sink)) {
@@ -573,7 +573,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             mSinksInAdding.clear();
             // TODO: use string res once finalized.
             AudioSharingUtils.postOnMainThread(mContext,
-                    () -> AudioSharingLoadingStateDialogFragment.show(mFragment,
+                    () -> AudioSharingProgressDialogFragment.show(mFragment,
                             "Starting audio stream..."));
             mMetricsFeatureProvider.action(
                     mContext,
@@ -690,7 +690,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         if (mFragment == null) {
             Log.d(TAG, "handleOnBroadcastReady: dialog fail to show due to null fragment.");
             // Clean up states before early return.
-            dismissLoadingStateDialogIfNeeded();
+            dismissProgressDialogIfNeeded();
             cleanUpStatesForStartSharing();
             return;
         }
@@ -711,8 +711,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 new AudioSharingDialogFragment.DialogEventListener() {
                     @Override
                     public void onPositiveClick() {
-                        // Could go to other pages, dismiss the loading dialog.
-                        dismissLoadingStateDialogIfNeeded();
+                        // Could go to other pages, dismiss the progress dialog.
+                        dismissProgressDialogIfNeeded();
                         cleanUpStatesForStartSharing();
                     }
 
@@ -726,8 +726,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
                     @Override
                     public void onCancelClick() {
-                        // Could go to other pages, dismiss the loading dialog.
-                        dismissLoadingStateDialogIfNeeded();
+                        // Could go to other pages, dismiss the progress dialog.
+                        dismissProgressDialogIfNeeded();
                         cleanUpStatesForStartSharing();
                     }
                 };
@@ -831,20 +831,20 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             @NonNull String sinkName) {
         mSinksInAdding.addAll(targetActiveSinks);
         // TODO: move to res once finalized
-        String loadingMessage = "Sharing with " + sinkName + "...";
-        showLoadingStateDialog(loadingMessage);
+        String progressMessage = "Sharing with " + sinkName + "...";
+        showProgressDialog(progressMessage);
         AudioSharingUtils.addSourceToTargetSinks(targetActiveSinks, mBtManager);
     }
 
-    private void showLoadingStateDialog(@NonNull String loadingMessage) {
+    private void showProgressDialog(@NonNull String progressMessage) {
         AudioSharingUtils.postOnMainThread(mContext,
-                () -> AudioSharingLoadingStateDialogFragment.show(mFragment, loadingMessage));
+                () -> AudioSharingProgressDialogFragment.show(mFragment, progressMessage));
     }
 
-    private void dismissLoadingStateDialogIfNeeded() {
+    private void dismissProgressDialogIfNeeded() {
         if (mSinksInAdding.isEmpty()) {
             AudioSharingUtils.postOnMainThread(mContext,
-                    () -> AudioSharingLoadingStateDialogFragment.dismiss(mFragment));
+                    () -> AudioSharingProgressDialogFragment.dismiss(mFragment));
         }
     }
 

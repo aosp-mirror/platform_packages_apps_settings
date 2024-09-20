@@ -500,7 +500,7 @@ public class AudioSharingSwitchBarControllerTest {
 
         verify(mBroadcast).startPrivateBroadcast();
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
-        // No loading state dialog.
+        // No progress dialog.
         assertThat(childFragments).isEmpty();
 
         mController.mBroadcastCallback.onPlaybackStarted(0, 0);
@@ -531,7 +531,7 @@ public class AudioSharingSwitchBarControllerTest {
         verify(mBroadcast).startPrivateBroadcast();
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingLoadingStateDialogFragment.class.getName());
+                AudioSharingProgressDialogFragment.class.getName());
 
         mController.mBroadcastCallback.onPlaybackStarted(0, 0);
         shadowOf(Looper.getMainLooper()).idle();
@@ -562,7 +562,7 @@ public class AudioSharingSwitchBarControllerTest {
         verify(mBroadcast).startPrivateBroadcast();
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingLoadingStateDialogFragment.class.getName());
+                AudioSharingProgressDialogFragment.class.getName());
 
         when(mBroadcast.isEnabled(null)).thenReturn(true);
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
@@ -626,12 +626,12 @@ public class AudioSharingSwitchBarControllerTest {
         verify(mBroadcast).startPrivateBroadcast();
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingLoadingStateDialogFragment.class.getName());
-        AudioSharingLoadingStateDialogFragment loadingFragment =
-                (AudioSharingLoadingStateDialogFragment) Iterables.getOnlyElement(childFragments);
+                AudioSharingProgressDialogFragment.class.getName());
+        AudioSharingProgressDialogFragment progressFragment =
+                (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
         // TODO: use string res once finalized
         String expectedMessage = "Starting audio stream...";
-        checkLoadingStateDialogMessage(loadingFragment, expectedMessage);
+        checkProgressDialogMessage(progressFragment, expectedMessage);
 
         when(mBroadcast.isEnabled(null)).thenReturn(true);
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
@@ -642,13 +642,13 @@ public class AudioSharingSwitchBarControllerTest {
                 .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
         // TODO: use string res once finalized
         expectedMessage = "Sharing with " + TEST_DEVICE_NAME2 + "...";
-        checkLoadingStateDialogMessage(loadingFragment, expectedMessage);
+        checkProgressDialogMessage(progressFragment, expectedMessage);
 
         childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments)
                 .comparingElementsUsing(CLAZZNAME_EQUALS)
                 .containsExactly(AudioSharingDialogFragment.class.getName(),
-                        AudioSharingLoadingStateDialogFragment.class.getName());
+                        AudioSharingProgressDialogFragment.class.getName());
 
         Pair<Integer, Object>[] eventData = new Pair[0];
         for (Fragment fragment : childFragments) {
@@ -708,15 +708,15 @@ public class AudioSharingSwitchBarControllerTest {
 
         verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
         assertThat(dialog.isShowing()).isFalse();
-        // Loading state dialog shows sharing state for the user chosen sink.
+        // Progress dialog shows sharing progress for the user chosen sink.
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingLoadingStateDialogFragment.class.getName());
-        AudioSharingLoadingStateDialogFragment loadingFragment =
-                (AudioSharingLoadingStateDialogFragment) Iterables.getOnlyElement(childFragments);
+                AudioSharingProgressDialogFragment.class.getName());
+        AudioSharingProgressDialogFragment progressFragment =
+                (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
         // TODO: use string res once finalized
         String expectedMessage = "Sharing with " + TEST_DEVICE_NAME1 + "...";
-        checkLoadingStateDialogMessage(loadingFragment, expectedMessage);
+        checkProgressDialogMessage(progressFragment, expectedMessage);
 
         childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
@@ -749,15 +749,15 @@ public class AudioSharingSwitchBarControllerTest {
 
         verify(mAssistant, never()).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
         assertThat(dialog.isShowing()).isFalse();
-        // Loading state dialog shows sharing state for the auto add active sink.
+        // Progress dialog shows sharing progress for the auto add active sink.
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingLoadingStateDialogFragment.class.getName());
-        AudioSharingLoadingStateDialogFragment loadingFragment =
-                (AudioSharingLoadingStateDialogFragment) Iterables.getOnlyElement(childFragments);
+                AudioSharingProgressDialogFragment.class.getName());
+        AudioSharingProgressDialogFragment progressFragment =
+                (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
         // TODO: use string res once finalized
         String expectedMessage = "Sharing with " + TEST_DEVICE_NAME2 + "...";
-        checkLoadingStateDialogMessage(loadingFragment, expectedMessage);
+        checkProgressDialogMessage(progressFragment, expectedMessage);
 
         childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
@@ -854,7 +854,7 @@ public class AudioSharingSwitchBarControllerTest {
                 mDevice1, mMetadata, /* reason= */ 1);
         shadowMainLooper().idle();
 
-        // Loading state dialog shows sharing state for the user chosen sink.
+        // Progress dialog shows sharing progress for the user chosen sink.
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
                 AudioSharingRetryDialogFragment.class.getName());
@@ -868,12 +868,12 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void testAssistantCallbacks_onReceiveStateChanged_dismissLoadingDialog() {
-        AudioSharingLoadingStateDialogFragment.show(mParentFragment, TEST_DEVICE_NAME1);
+    public void testAssistantCallbacks_onReceiveStateChanged_dismissProgressDialog() {
+        AudioSharingProgressDialogFragment.show(mParentFragment, TEST_DEVICE_NAME1);
         shadowOf(Looper.getMainLooper()).idle();
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingLoadingStateDialogFragment.class.getName());
+                AudioSharingProgressDialogFragment.class.getName());
 
         when(mState.getBisSyncState()).thenReturn(ImmutableList.of(1L));
         mController.mBroadcastAssistantCallback.onReceiveStateChanged(mDevice1, /* sourceId= */ 1,
@@ -1023,13 +1023,13 @@ public class AudioSharingSwitchBarControllerTest {
         List<Fragment> childFragments = parentFragment.getChildFragmentManager().getFragments();
         // Skip audio sharing dialog.
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingLoadingStateDialogFragment.class.getName());
-        // The loading state dialog shows sharing state for the auto add second sink.
-        AudioSharingLoadingStateDialogFragment loadingFragment =
-                (AudioSharingLoadingStateDialogFragment) Iterables.getOnlyElement(childFragments);
+                AudioSharingProgressDialogFragment.class.getName());
+        // Progress dialog shows sharing progress for the auto add second sink.
+        AudioSharingProgressDialogFragment progressFragment =
+                (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
         // TODO: use string res once finalized
         String expectedMessage = "Sharing with " + TEST_DEVICE_NAME1 + "...";
-        checkLoadingStateDialogMessage(loadingFragment, expectedMessage);
+        checkProgressDialogMessage(progressFragment, expectedMessage);
 
         childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
@@ -1044,7 +1044,7 @@ public class AudioSharingSwitchBarControllerTest {
         verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingLoadingStateDialogFragment.class.getName());
+                AudioSharingProgressDialogFragment.class.getName());
     }
 
     private Fragment setUpFragmentWithStartSharingIntent() {
@@ -1064,12 +1064,12 @@ public class AudioSharingSwitchBarControllerTest {
         return fragment;
     }
 
-    private void checkLoadingStateDialogMessage(
-            @NonNull AudioSharingLoadingStateDialogFragment fragment,
+    private void checkProgressDialogMessage(
+            @NonNull AudioSharingProgressDialogFragment fragment,
             @NonNull String expectedMessage) {
-        TextView loadingMessage = fragment.getDialog() == null ? null
+        TextView progressMessage = fragment.getDialog() == null ? null
                 : fragment.getDialog().findViewById(R.id.message);
-        assertThat(loadingMessage).isNotNull();
-        assertThat(loadingMessage.getText().toString()).isEqualTo(expectedMessage);
+        assertThat(progressMessage).isNotNull();
+        assertThat(progressMessage.getText().toString()).isEqualTo(expectedMessage);
     }
 }
