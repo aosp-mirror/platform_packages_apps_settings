@@ -934,6 +934,19 @@ public class AudioSharingSwitchBarControllerTest {
         childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
 
+    @Test
+    public void handleAutoAddSourceAfterPair() {
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1));
+        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
+        mController.handleAutoAddSourceAfterPair(mDevice1);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
+                AudioSharingLoadingStateDialogFragment.class.getName());
+    }
+
     private Fragment setUpFragmentWithStartSharingIntent() {
         Bundle args = new Bundle();
         args.putBoolean(EXTRA_START_LE_AUDIO_SHARING, true);

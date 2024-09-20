@@ -16,6 +16,8 @@
 
 package com.android.settings.localepicker;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -41,7 +43,8 @@ import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.shortcut.ShortcutsUpdateTask;
+import com.android.settings.shortcut.ShortcutsUpdater;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -96,7 +99,7 @@ class LocaleDragAndDropAdapter
     LocaleDragAndDropAdapter(LocaleListEditor parent, List<LocaleStore.LocaleInfo> feedItemList) {
         mFeedItemList = feedItemList;
         mCacheItemList = new ArrayList<>(feedItemList);
-        mContext = parent.getContext();
+        mContext = checkNotNull(parent.getContext());
 
         final float dragElevation = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8,
                 mContext.getResources().getDisplayMetrics());
@@ -350,7 +353,8 @@ class LocaleDragAndDropAdapter
 
                 LocalePicker.updateLocales(mLocalesToSetNext);
                 mLocalesSetLast = mLocalesToSetNext;
-                new ShortcutsUpdateTask(mContext).execute();
+                ThreadUtils.postOnBackgroundThread(
+                        () -> ShortcutsUpdater.updatePinnedShortcuts(mContext));
 
                 mLocalesToSetNext = null;
 
