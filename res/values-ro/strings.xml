@@ -412,6 +412,28 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Au fost adăugate fața, amprenta și <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Au fost adăugate fața, amprentele și <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"Verificarea identității este activată și necesită o formă de identificare biometrică"</string>
+    <!-- no translation found for go_to_settings (4394928396153474179) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
+    <skip />
+    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
+    <skip />
+    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
+    <skip />
+    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
+    <skip />
+    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
+    <skip />
+    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Deblocarea cu Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Ceasul a fost adăugat"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configurează ceasul"</string>
@@ -796,6 +818,8 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Trebuie să conțină cel puțin un caracter care să nu fie cifră}few{Trebuie să conțină cel puțin # caractere care să nu fie cifre}other{Trebuie să conțină cel puțin # de caractere care să nu fie cifre}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Administratorul dispozitivului nu permite utilizarea unei parole recente"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Șirurile de cifre ascendente, descendente sau repetate nu sunt permise"</string>
+    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
+    <skip />
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Confirmă"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Șterge"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Blocarea ecranului a fost schimbată deja. Încearcă din nou cu blocarea ecranului nouă."</string>
@@ -834,14 +858,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Când Bluetooth este activat, dispozitivul poate să comunice cu alte dispozitive Bluetooth din apropiere.\n\nPentru a îmbunătăți experiența dispozitivului, aplicațiile și serviciile pot să caute în continuare dispozitive din apropiere chiar și atunci când Bluetooth este dezactivat. Această opțiune poate fi folosită, de exemplu, pentru a îmbunătăți funcțiile și serviciile bazate pe locație. Poți să-ți schimbi preferințele în setările pentru scanarea Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Când funcția Bluetooth este activată, dispozitivul poate să comunice cu alte dispozitive Bluetooth din apropiere. Funcții precum Quick Share și Găsește-mi dispozitivul folosesc Bluetooth.\n\nChiar dacă Bluetooth este dezactivat, aplicațiile și serviciile pot totuși să caute dispozitive din apropiere în orice moment. Această permisiune poate fi folosită, de exemplu, pentru a îmbunătăți funcțiile și serviciile bazate pe locație. Poți modifica această opțiune în setările pentru scanarea Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Modifică"</string>
-    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> neconectat"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Pentru securitatea ta, elimină dispozitivul, apoi asociază-l din nou"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Elimină dispozitivul"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Anulează"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalii despre dispozitiv"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Setări tastatură"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Mai multe setări"</string>
@@ -1281,13 +1301,17 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Se va activa automat la apus"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Se va activa automat la <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Se va activa automat la ora de culcare"</string>
+    <string name="dark_ui_summary_off_auto_mode_modes" msgid="2672694802103388896">"Se va activa când începe <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Nu se va dezactiva niciodată automat"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Se va dezactiva automat la răsărit"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Se va dezactiva automat la <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Se va dezactiva automat după ora de trezire"</string>
+    <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"Se va dezactiva când se încheie <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Tema întunecată folosește un fundal negru pentru a conserva autonomia bateriei pentru unele ecrane. Programele cu Tema întunecată se activează când se dezactivează ecranul."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tema întunecată urmează momentan programul modului Ora de culcare"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Setările modului Ora de culcare"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Modurile pot și să activeze tema întunecată}=1{{mode_1} activează tema întunecată}=2{{mode_1} și {mode_2} activează tema întunecată}=3{{mode_1}, {mode_2} și {mode_3} activează tema întunecată}few{{mode_1}, {mode_2} și încă # activează tema întunecată}other{{mode_1}, {mode_2} și încă # activează tema întunecată}}"</string>
+    <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Setările pentru Moduri"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Chiar mai întunecat"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Permite ca dispozitivul să fie mai întunecat ca de obicei"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Durată până la dezactivarea ecranului"</string>
@@ -1952,13 +1976,18 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic în dreapta jos"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Dă clic în colțul din dreapta jos pe touchpad pentru opțiuni"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Viteza indicatorului"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"Stilul de umplere al pointerului"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Schimbă stilul de umplere în negru"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Schimbă stilul de umplere în verde"</string>
-    <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Schimbă stilul de umplere în galben"</string>
+    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
+    <skip />
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Schimbă stilul de umplere în roz"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Schimbă stilul de umplere în albastru"</string>
-    <string name="pointer_stroke_style" msgid="1886986630216050665">"Stilul pointerului"</string>
+    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
+    <skip />
+    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
+    <skip />
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Alb"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Negru"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Niciunul"</string>
@@ -1999,10 +2028,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Resetează"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Alege tasta de modificare"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Alege o nouă tastă pentru <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accesibilitatea tastaturii fizice"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Taste adezive, Taste nerepetate, Butoanele mouse-ului"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Aspectul <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Prestabilit"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automat: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2071,6 +2098,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Afișaj"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Culoare și mișcare"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contrastul culorilor"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Contrastul mai înalt scoate în evidență textul, butoanele și pictogramele. Alege contrastul care ți se pare cel mai potrivit."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Este posibil ca unele aplicații să nu accepte toate setările pentru contrastul culorilor și al textului"</string>
@@ -2214,11 +2247,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avansate"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Butonul Accesibilitate este setat pe <xliff:g id="SERVICE">%1$s</xliff:g>. Pentru a folosi mărirea, atinge lung butonul Accesibilitate și apoi selectează mărirea."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Gestul de accesibilitate este setat la <xliff:g id="SERVICE">%1$s</xliff:g>. Pentru a folosi mărirea, glisează în sus cu două degete din partea de jos a ecranului și ține apăsat. Apoi selectează mărirea."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Comandă rapidă pentru butoanele de volum"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Setări pentru comenzi rapide"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Comandă rapidă pentru butoanele de volum de pe ecranul de blocare"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permite activarea comenzii rapide pentru funcție din ecranul de blocare. Apasă ambele taste pentru volum timp de câteva secunde."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Buton de accesibilitate"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Buton și gest de accesibilitate"</string>
@@ -2238,6 +2269,7 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Transparența atunci când nu este folosit"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Transparent"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Netransparent"</string>
+    <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Indis. pt. but. din bara nav."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text cu contrast ridicat"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Schimbă culoarea textului în negru sau alb. Astfel, se maximizează contrastul cu fundalul."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximizează contrastul textului"</string>
@@ -3311,7 +3343,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"afișaj ambiental activat permanent, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etichetă, cititor"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"tastatură, feedback tactil, vibrație"</string>
-    <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volum, vibrații, Nu deranja"</string>
+    <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volum și vibrații"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"Volum, vibrații, Nu deranja"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volum media"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volumul proiectării"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volumul apelului"</string>
@@ -4112,8 +4145,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Toate regulile din modul Nu deranja create de această aplicație vor fi eliminate."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Permiți accesul la Moduri pentru <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Aplicația va putea să activeze / dezactiveze modul Nu deranja, să gestioneze și să activeze Modurile și să modifice setările aferente."</string>
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
-    <skip />
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Revoci accesul la Moduri pentru <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Toate modurile create de această aplicație vor fi eliminate."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Nu se optimizează"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Se optimizează"</string>
@@ -4776,7 +4808,8 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Mod nevalid de rețea <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignoră."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"Mesaje prin satelit"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Trimite și primește mesaje text prin satelit. Opțiunea este inclusă în contul tău."</string>
-    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"Trimite și primește mesaje text prin satelit. Opțiunea nu este inclusă în contul tău."</string>
+    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
+    <skip />
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"Mesaje prin satelit"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Despre mesajele prin satelit"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Dacă ai un cont <xliff:g id="CARRIER_NAME">%1$s</xliff:g> eligibil, poți să trimiți și să primești mesaje text prin satelit"</string>
@@ -5296,8 +5329,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Activată"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Dezactivate"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activate"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Audio %1$d%% stânga, %2$d%% dreapta"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Audio %1$d%% dreapta, %2$d%% stânga"</string>
+    <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Audio <xliff:g id="PERCENT_LEFT">%1$s</xliff:g> stânga, <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g> dreapta"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="6027686565598201061">"Audio <xliff:g id="PERCENT_RIGHT">%1$s</xliff:g> dreapta, <xliff:g id="PERCENT_LEFT">%2$s</xliff:g> stânga"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Numele dispozitivului este vizibil pentru aplicațiile instalate. Poate fi văzut și de alte persoane când te conectezi la dispozitivele Bluetooth sau la o rețea Wi-Fi sau când configurezi un hotspot Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genul gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selectează genul gramatical"</string>
@@ -5393,6 +5426,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Află mai multe"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Streamul audio nu se poate reda pe <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Se ascultă acum"</string>
+    <string name="audio_streams_present_now" msgid="1128360774541089402">"Întrerupt de gazdă"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Nu mai asculta"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Conectează căști compatibile"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Conectează un dispozitiv"</string>
