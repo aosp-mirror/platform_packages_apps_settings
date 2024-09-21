@@ -53,6 +53,7 @@ public class IdentityCheckBiometricErrorDialog extends InstrumentedDialogFragmen
     private static final String KEY_FINISH_ACTIVITY = "key_finish_activity";
 
     private String mActionIdentityCheckSettings = Settings.ACTION_SETTINGS;
+    private String mIdentityCheckSettingsPackageName;
     @Nullable private BroadcastReceiver mBroadcastReceiver;
     private boolean mShouldFinishActivity = false;
 
@@ -69,9 +70,11 @@ public class IdentityCheckBiometricErrorDialog extends InstrumentedDialogFragmen
         final boolean twoFactorAuthentication = getArguments().getBoolean(
                 KEY_TWO_FACTOR_AUTHENTICATION);
         final String identityCheckSettingsAction = getActivity().getString(
-                R.string.identity_check_settings_action);
+                com.android.internal.R.string.identity_check_settings_action);
         mActionIdentityCheckSettings = identityCheckSettingsAction.isEmpty()
                 ? mActionIdentityCheckSettings : identityCheckSettingsAction;
+        mIdentityCheckSettingsPackageName = getActivity().getString(
+                com.android.internal.R.string.identity_check_settings_package_name);
         mShouldFinishActivity = getArguments().getBoolean(
                 KEY_FINISH_ACTIVITY);
 

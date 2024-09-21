@@ -960,8 +960,6 @@
     <string name="go_to_identity_check">Go to identity check</string>
     <!-- Biometric error dialog button text to lock screen and recover biometric lockout state. [CHAR LIMIT=60] -->
     <string name="identity_check_lockout_error_lock_screen">Lock screen</string>
-    <!-- Action for opening identity check settings page [CHAR LIMIT=NONE] [DO NOT TRANSLATE] -->
-    <string name="identity_check_settings_action"></string>
     <!-- RemoteAuth unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
     <string name ="security_settings_remoteauth_preference_title">Remote Authenticator Unlock</string>
@@ -4695,6 +4693,8 @@
     <string name="pointer_scale_decrease_content_description">Decrease pointer scale</string>
     <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
     <string name="pointer_scale_increase_content_description">Increase pointer scale</string>
+    <!-- Search keywords for pointer scale, including legacy Large Mouse Pointer. [CHAR LIMIT=NONE] -->
+    <string name="pointer_scale_keywords">scale, size, Pointer Scale, Pointer Size, Large mouse pointer, Large, noticeable</string>
 
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to game controller devices. [CHAR LIMIT=40] -->
     <string name="game_controller_settings_category">Game Controller</string>
@@ -13554,6 +13554,20 @@
     <string name="audio_sharing_comfirm_dialog_content">To start sharing audio, first connect LE Audio headphones to your phone</string>
     <!-- Text for audio sharing switch active device button [CHAR LIMIT=none]-->
     <string name="audio_sharing_switch_active_button_label">Switch to <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Content for audio sharing progress dialog when starting audio stream [CHAR LIMIT=none]-->
+    <string name="audio_sharing_progress_dialog_start_stream_content">Starting audio stream\u2026</string>
+    <!-- Content for audio sharing progress dialog when adding source to device [CHAR LIMIT=none]-->
+    <string name="audio_sharing_progress_dialog_add_source_content">Sharing with <xliff:g example="My buds" id="device_name">%1$s</xliff:g>\u2026</string>
+    <!-- Content for progress dialog when connect to device [CHAR LIMIT=none]-->
+    <string name="progress_dialog_connect_device_content">Connecting to <xliff:g example="My buds" id="device_name">%1$s</xliff:g>\u2026</string>
+    <!-- Title for audio sharing retry dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_retry_dialog_title">Couldn\'t share audio</string>
+    <!-- Content for audio sharing retry dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_retry_dialog_content">Something went wrong. Please try again.</string>
+    <!-- Title for audio sharing incompatible device dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_incompatible_dialog_title">Can\'t share audio with <xliff:g example="My buds" id="device_name">%1$s</xliff:g></string>
+    <!-- Content for audio sharing incompatible device dialog [CHAR LIMIT=none]-->
+    <string name="audio_sharing_incompatible_dialog_content">Audio sharing only works with headphones that support LE Audio</string>
 
     <!-- Title for audio streams preference category [CHAR LIMIT=none]-->
     <string name="audio_streams_category_title">Connect to a LE audio stream</string>
