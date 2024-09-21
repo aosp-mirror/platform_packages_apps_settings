@@ -17,14 +17,14 @@
 package com.android.settings.development;
 
 import static android.provider.Settings.Global.DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES;
-
-import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.convertToToggleOverrideWithFallback;
-import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride.OVERRIDE_OFF;
-import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride.OVERRIDE_ON;
-import static com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride.OVERRIDE_UNSET;
+import static android.window.flags.DesktopModeFlags.ToggleOverride.fromSetting;
+import static android.window.flags.DesktopModeFlags.ToggleOverride.OVERRIDE_OFF;
+import static android.window.flags.DesktopModeFlags.ToggleOverride.OVERRIDE_ON;
+import static android.window.flags.DesktopModeFlags.ToggleOverride.OVERRIDE_UNSET;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.window.flags.DesktopModeFlags.ToggleOverride;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,7 +34,6 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.wm.shell.shared.desktopmode.DesktopModeFlags.ToggleOverride;
 import com.android.wm.shell.shared.desktopmode.DesktopModeStatus;
 
 /**
@@ -84,7 +83,7 @@ public class DesktopModePreferenceController extends DeveloperOptionsPreferenceC
         // Use overridden state, if not present, then use default state
         final int overrideInt = Settings.Global.getInt(mContext.getContentResolver(),
                 DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES, OVERRIDE_UNSET.getSetting());
-        final ToggleOverride toggleOverride = convertToToggleOverrideWithFallback(overrideInt,
+        final ToggleOverride toggleOverride = fromSetting(overrideInt,
                 OVERRIDE_UNSET);
         final boolean shouldDevOptionBeEnabled = switch (toggleOverride) {
             case OVERRIDE_OFF -> false;
