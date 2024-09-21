@@ -56,6 +56,7 @@ import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -78,9 +79,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class AudioSharingSwitchBarController extends BasePreferenceController
         implements DefaultLifecycleObserver,
-                OnCheckedChangeListener,
-                LocalBluetoothProfileManager.ServiceListener,
-                BluetoothCallback {
+        OnCheckedChangeListener,
+        LocalBluetoothProfileManager.ServiceListener,
+        BluetoothCallback {
     private static final String TAG = "AudioSharingSwitchCtlr";
     private static final String PREF_KEY = "audio_sharing_main_switch";
 
@@ -464,6 +465,18 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         this.mFragment = fragment;
     }
 
+    /** Handle auto add source to the just paired device in share then pair flow. */
+    public void handleAutoAddSourceAfterPair(@NonNull BluetoothDevice device) {
+        CachedBluetoothDeviceManager deviceManager =
+                mBtManager == null ? null : mBtManager.getCachedDeviceManager();
+        CachedBluetoothDevice cachedDevice =
+                deviceManager == null ? null : deviceManager.findDevice(device);
+        if (cachedDevice != null) {
+            Log.d(TAG, "handleAutoAddSourceAfterPair, device = " + device.getAnonymizedAddress());
+            addSourceToTargetSinks(ImmutableList.of(device), cachedDevice.getName());
+        }
+    }
+
     /** Test only: set callback registration status in tests. */
     @VisibleForTesting
     void setCallbacksRegistered(boolean registered) {
@@ -610,8 +623,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING);
             mTargetActiveItem = null;
             if (mIntentHandleStage.compareAndSet(
-                            StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal(),
-                            StartIntentHandleStage.HANDLED.ordinal())
+                    StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal(),
+                    StartIntentHandleStage.HANDLED.ordinal())
                     && mDeviceItemsForSharing.size() == 1) {
                 Log.d(TAG, "handleOnBroadcastReady: auto add source to the second device");
                 AudioSharingDeviceItem target = mDeviceItemsForSharing.get(0);
@@ -639,6 +652,13 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         AudioSharingDialogFragment.DialogEventListener listener =
                 new AudioSharingDialogFragment.DialogEventListener() {
                     @Override
+                    public void onPositiveClick() {
+                        // Could go to other pages, dismiss the loading dialog.
+                        dismissLoadingStateDialogIfNeeded();
+                        cleanUp();
+                    }
+
+                    @Override
                     public void onItemClick(@NonNull AudioSharingDeviceItem item) {
                         List<BluetoothDevice> targetSinks = mGroupedConnectedDevices.getOrDefault(
                                 item.getGroupId(), ImmutableList.of());
@@ -648,6 +668,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
                     @Override
                     public void onCancelClick() {
+                        // Could go to other pages, dismiss the loading dialog.
                         dismissLoadingStateDialogIfNeeded();
                         cleanUp();
                     }
@@ -669,8 +690,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 @NonNull ViewGroup host, @NonNull View view, @NonNull AccessibilityEvent event) {
             if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
                     && (event.getContentChangeTypes()
-                                    & AccessibilityEvent.CONTENT_CHANGE_TYPE_ENABLED)
-                            != 0) {
+                    & AccessibilityEvent.CONTENT_CHANGE_TYPE_ENABLED)
+                    != 0) {
                 Log.d(TAG, "Skip accessibility event for CONTENT_CHANGE_TYPE_ENABLED");
                 return false;
             }

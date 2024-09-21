@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+  name: "enable_contacts_default_account_in_settings"
+  namespace: "contacts"
+  description: "Enable Contacts Storage (Contacts Default Account) in settings"
+  bug: "368126293"
+}

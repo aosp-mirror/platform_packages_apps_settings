@@ -18,7 +18,6 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.when;
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.bluetooth.BluetoothAdapter;
@@ -34,7 +33,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.flags.Flags;
 
 import org.junit.After;
@@ -42,7 +40,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
@@ -62,7 +59,6 @@ public class AudioSharingIncompatibleDialogFragmentTest {
     @Rule public final MockitoRule mocks = MockitoJUnit.rule();
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
-    @Mock private CachedBluetoothDevice mCachedBluetoothDevice;
     private Fragment mParent;
     private AudioSharingIncompatibleDialogFragment mFragment;
 
@@ -76,7 +72,6 @@ public class AudioSharingIncompatibleDialogFragmentTest {
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
-        when(mCachedBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME);
         mFragment = new AudioSharingIncompatibleDialogFragment();
         mParent = new Fragment();
         FragmentController.setupFragment(mParent, FragmentActivity.class, /* containerViewId= */
@@ -97,7 +92,7 @@ public class AudioSharingIncompatibleDialogFragmentTest {
     @Test
     public void onCreateDialog_flagOff_dialogNotExist() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingIncompatibleDialogFragment.show(mParent, mCachedBluetoothDevice,
+        AudioSharingIncompatibleDialogFragment.show(mParent, TEST_DEVICE_NAME,
                 EMPTY_EVENT_LISTENER);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
@@ -107,7 +102,7 @@ public class AudioSharingIncompatibleDialogFragmentTest {
     @Test
     public void onCreateDialog_unattachedFragment_dialogNotExist() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingIncompatibleDialogFragment.show(new Fragment(), mCachedBluetoothDevice,
+        AudioSharingIncompatibleDialogFragment.show(new Fragment(), TEST_DEVICE_NAME,
                 EMPTY_EVENT_LISTENER);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
@@ -117,7 +112,7 @@ public class AudioSharingIncompatibleDialogFragmentTest {
     @Test
     public void onCreateDialog_flagOn_showDialog() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingIncompatibleDialogFragment.show(mParent, mCachedBluetoothDevice,
+        AudioSharingIncompatibleDialogFragment.show(mParent, TEST_DEVICE_NAME,
                 EMPTY_EVENT_LISTENER);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
@@ -134,7 +129,7 @@ public class AudioSharingIncompatibleDialogFragmentTest {
     public void onCreateDialog_clickBtn_callbackTriggered() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         AtomicBoolean isBtnClicked = new AtomicBoolean(false);
-        AudioSharingIncompatibleDialogFragment.show(mParent, mCachedBluetoothDevice,
+        AudioSharingIncompatibleDialogFragment.show(mParent, TEST_DEVICE_NAME,
                 () -> isBtnClicked.set(true));
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
