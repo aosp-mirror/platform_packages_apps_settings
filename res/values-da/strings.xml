@@ -412,6 +412,28 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Ansigt, fingeraftryk og <xliff:g id="WATCH">%s</xliff:g> er tilføjet"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansigt, fingeraftryk og <xliff:g id="WATCH">%s</xliff:g> er tilføjet"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"Identitetstjek er aktiveret og kræver biometrisk verificering"</string>
+    <!-- no translation found for go_to_settings (4394928396153474179) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
+    <skip />
+    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
+    <skip />
+    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
+    <skip />
+    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
+    <skip />
+    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
+    <skip />
+    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Oplåsning af Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Uret er tilføjet"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Konfigurer dit ur"</string>
@@ -796,6 +818,8 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Skal indeholde mindst 1 tegn, som ikke er et tal}one{Skal indeholde mindst # tegn, som ikke er et tal}other{Skal indeholde mindst # tegn, som ikke er tal}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Enhedens administrator tillader ikke brug af en nylig brugt adgangskode"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Stigende eller faldende talsekvens og gentagne tal er ikke tilladt"</string>
+    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
+    <skip />
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Bekræft"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Ryd"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Skærmlåsen var allerede blevet ændret. Prøv igen med den nye skærmlås."</string>
@@ -834,14 +858,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Når Bluetooth er aktiveret, kan din enhed kommunikere med andre Bluetooth-enheder i nærheden.\n\nFor at forbedre enhedsoplevelsen kan apps og tjenester stadig til enhver tid søge efter enheder i nærheden, også selvom Bluetooth er deaktiveret. Dette kan f.eks. bruges til at forbedre lokationsbaserede funktioner og tjenester. Du kan ændre dette i indstillingerne for Bluetooth-scanning."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Når Bluetooth er aktiveret, kan enheden kommunikere med andre Bluetooth-enheder i nærheden. Funktioner som f.eks. Quick Share og Find min enhed anvender Bluetooth.\n\nApps og tjenester kan stadig til enhver tid søge efter enheder i nærheden, også selvom Bluetooth er deaktiveret. Dette kan f.eks. anvendes til at forbedre lokationsbaserede funktioner og tjenester. Du kan ændre dette i indstillingerne for Bluetooth-scanning."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Rediger"</string>
-    <!-- no translation found for bluetooth_key_missing_title (7799054163548353853) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_message (2388861106663695319) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_forget (4692006517823001013) -->
-    <skip />
-    <!-- no translation found for bluetooth_key_missing_cancel (2482416446357804371) -->
-    <skip />
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> er ikke forbundet"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Glem denne enhed af sikkerhedsmæssige årsager, og par den derefter igen"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"Glem enhed"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"Annuller"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Enhedsoplysninger"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tastaturindstillinger"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Flere indstillinger"</string>
@@ -1255,7 +1275,7 @@
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Aktiveres på valgt tidspunkt"</string>
     <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Aktiveres fra solnedgang til solopgang"</string>
     <string name="night_display_start_time_title" msgid="2611541851596977786">"Starttidspunkt"</string>
-    <string name="night_display_end_time_title" msgid="5243112480391192111">"Sluttidspunkt"</string>
+    <string name="night_display_end_time_title" msgid="5243112480391192111">"Slut­tidspunkt"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"Intensitet"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Aktiveres aldrig automatisk"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"Aktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -1281,13 +1301,17 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Aktiveres automatisk ved solnedgang"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Aktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Aktiveres automatisk ved sengetid"</string>
+    <string name="dark_ui_summary_off_auto_mode_modes" msgid="2672694802103388896">"Aktiveres, når <xliff:g id="ID_1">%1$s</xliff:g> starter"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Deaktiveres aldrig automatisk"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Deaktiveres automatisk ved solopgang"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Deaktiveres automatisk kl. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Deaktiveres automatisk efter sengetid"</string>
+    <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"Deaktiveres, når <xliff:g id="ID_1">%1$s</xliff:g> slutter"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Mørkt tema bruger en sort baggrund på nogle skærme for at spare på batteriet. Tidsplaner for Mørkt tema aktiveres først, når din skærm er slukket."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Mørkt tema følger i øjeblikket din tidsplan for sengetid"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Indstillinger for sengetid"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Tilstande kan også aktivere mørkt tema}=1{{mode_1} aktiverer også mørkt tema}=2{{mode_1} og {mode_2} aktiverer også mørkt tema}=3{{mode_1}, {mode_2} og {mode_3} aktiverer også mørkt tema}one{{mode_1}, {mode_2} og # anden aktiverer også mørkt tema}other{{mode_1}, {mode_2} og # andre aktiverer også mørkt tema}}"</string>
+    <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Indstillinger for tilstande"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Nedton yderligere"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Tillad, at enheden nedtones mere end normalt"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Timeout for skærmen"</string>
@@ -1952,13 +1976,18 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klik nederst til højre"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Klik nederst til højre på touchpladen for flere valgmuligheder"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Markørens hastighed"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"Udfyldningsstil for markør"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Skift udfyldningsstil for markør til sort"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Skift udfyldningsstil for markør til grøn"</string>
-    <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Skift udfyldningsstil for markør til gul"</string>
+    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
+    <skip />
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Skift udfyldningsstil for markør til lyserød"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Skift udfyldningsstil for markør til blå"</string>
-    <string name="pointer_stroke_style" msgid="1886986630216050665">"Stregformat for markør"</string>
+    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
+    <skip />
+    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
+    <skip />
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Hvid"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Sort"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Ingen"</string>
@@ -1999,10 +2028,8 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Nulstil"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Vælg ændringstast"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Vælg en ny ændringstast til <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Hjælpefunktioner til fysisk tastatur"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Træge taster, elastiktaster, musetaster"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g>-layout"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standard"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatisk: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2071,6 +2098,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"Generelt"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Visning"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Farve og bevægelse"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Farvekontrast"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Højere kontrast gør tekst, knapper og ikoner tydeligere. Vælg den kontrast, du foretrækker."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Visse apps understøtter ikke alle indstillinger for farve- og tekstkontrast"</string>
@@ -2214,11 +2247,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avanceret"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Knappen til hjælpefunktioner er angivet til <xliff:g id="SERVICE">%1$s</xliff:g>. Hvis du vil bruge forstørrelse, skal du trykke på knappen til hjælpefunktioner, holde fingeren nede og derefter vælge forstørrelse."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Bevægelsen for hjælpefunktioner er indstillet til <xliff:g id="SERVICE">%1$s</xliff:g>. Hvis du vil bruge forstørrelse, kan du stryge opad med to fingre fra bunden af skærmen og holde dem nede. Vælg derefter forstørrelse."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"Genvej til lydstyrkeknapper"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Indstillinger for genvej"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"Genvej til lydstyrkeknapperne via låseskærmen"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Tillad, at genvej til funktionen kan aktiveres via låseskærmen. Hold begge lydstyrkeknapper nede i et par sekunder."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Knap til hjælpefunktioner"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Knap til hjælpefunktioner og bevægelser for hjælpefunktioner"</string>
@@ -2238,6 +2269,7 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Gennemsigtig, når funktionen ikke bruges"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Gennemsigtig"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Ikke-gennemsigtig"</string>
+    <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Ikke tilgængelig, når du bruger knappetilstand i navigationslinjen."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Tekst med høj kontrast"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Skift tekstfarven til sort eller hvid. Dette maksimerer kontrasten med baggrunden."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maksimér tekstkontrast"</string>
@@ -3311,7 +3343,10 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"altid tændt pauseskærm, AOD (always on ambient display)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, læser"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"tastatur, haptisk teknologi, vibration"</string>
-    <string name="sound_dashboard_summary" msgid="6574444810552643312">"Lydstyrke, vibration, Forstyr ikke"</string>
+    <!-- no translation found for sound_dashboard_summary (8254699132423665654) -->
+    <skip />
+    <!-- no translation found for sound_dashboard_summary_with_dnd (731956092218394657) -->
+    <skip />
     <string name="media_volume_option_title" msgid="5966569685119475630">"Lydstyrke for medier"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Lydstyrke for castet indhold"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Lydstyrke for opkald"</string>
@@ -3871,7 +3906,7 @@
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> og <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"Hvis den samme person ringer igen inden for <xliff:g id="MINUTES">%d</xliff:g> minutter"</string>
     <string name="zen_mode_start_time" msgid="1252665038977523332">"Starttidspunkt"</string>
-    <string name="zen_mode_end_time" msgid="223502560367331706">"Sluttidspunkt"</string>
+    <string name="zen_mode_end_time" msgid="223502560367331706">"Slut­tidspunkt"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="419683704068360804">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> næste dag"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="910047326128154945">"Skift til Kun alarmer på ubestemt tid"</string>
     <string name="zen_mode_summary_alarms_only_by_minute" msgid="6673649005494939311">"{count,plural, =1{Skift til kun alarmer i ét minut (indtil {time})}one{Skift til kun alarmer i # minut (indtil {time})}other{Skift til kun alarmer i # minutter (indtil {time})}}"</string>
@@ -4112,8 +4147,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Alle Forstyr ikke-regler, der er oprettet af denne app, fjernes."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Vil du give <xliff:g id="APP">%1$s</xliff:g> adgang til Tilstande?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Appen vil kunne aktivere/deaktivere Forstyr ikke, administrere og aktivere Tilstande og foretage ændringer af relaterede indstillinger."</string>
-    <!-- no translation found for zen_modes_access_revoke_warning_dialog_title (189454396436517964) -->
-    <skip />
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Vil du tilbagekalde adgangen til Tilstande for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Alle tilstande, der er oprettet af denne app, fjernes."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Undlad at optimere"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimer"</string>
@@ -4776,7 +4810,8 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ugyldig netværkstilstand <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorer."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"Satellitbeskeder"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Send og modtag beskeder via satellit. Inkluderet på din konto."</string>
-    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"Send og modtag beskeder via satellit. Ikke inkluderet på din konto."</string>
+    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
+    <skip />
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"Satellitbeskeder"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Om satellitbeskeder"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Du kan sende og modtage beskeder via satellit som en del af en kvalificeret <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-konto"</string>
@@ -5295,8 +5330,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Til"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Fra"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Til"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Lyd %1$d%% venstre, %2$d%% højre"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Lyd %1$d%% højre, %2$d%% venstre"</string>
+    <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Lyd: <xliff:g id="PERCENT_LEFT">%1$s</xliff:g> venstre, <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g> højre"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="6027686565598201061">"Lyd: <xliff:g id="PERCENT_RIGHT">%1$s</xliff:g> højre, <xliff:g id="PERCENT_LEFT">%2$s</xliff:g> venstre"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Din enheds navn er synligt for apps, du har installeret. Det kan muligvis også ses af andre, når du opretter forbindelse til Bluetooth-enheder eller et Wi-Fi-netværk, eller når du konfigurerer et Wi-Fi-hotspot."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammatisk køn"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Vælg grammatisk køn"</string>
@@ -5392,6 +5427,8 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Få flere oplysninger"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Kan ikke afspille denne lydstream på <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Lytter nu"</string>
+    <!-- no translation found for audio_streams_present_now (1128360774541089402) -->
+    <skip />
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Stop med at lytte"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Forbind kompatible høretelefoner"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Forbind en enhed"</string>

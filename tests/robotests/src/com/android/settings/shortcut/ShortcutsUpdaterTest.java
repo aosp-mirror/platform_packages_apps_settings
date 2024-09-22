@@ -16,30 +16,30 @@
 
 package com.android.settings.shortcut;
 
-import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_ID_PREFIX;
+import static com.android.settings.shortcut.Shortcuts.SHORTCUT_ID_PREFIX;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Flags;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settings.Settings;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -48,17 +48,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-public class ShortcutsUpdateTaskTest {
+public class ShortcutsUpdaterTest {
 
     private Context mContext;
-    private ShadowPackageManager mPackageManager;
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private ShortcutManager mShortcutManager;
@@ -68,29 +68,12 @@ public class ShortcutsUpdateTaskTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mPackageManager = Shadow.extract(mContext.getPackageManager());
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mShortcutManager).when(mContext).getSystemService(eq(Context.SHORTCUT_SERVICE));
     }
 
     @Test
-    public void shortcutsUpdateTask() {
-        mContext = spy(RuntimeEnvironment.application);
-        doReturn(mShortcutManager).when(mContext).getSystemService(eq(Context.SHORTCUT_SERVICE));
-        final Intent shortcut1 = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
-                .setComponent(new ComponentName(
-                        mContext, Settings.ManageApplicationsActivity.class));
-        final ResolveInfo ri1 = mock(ResolveInfo.class);
-        ri1.nonLocalizedLabel = "label1";
-
-        final Intent shortcut2 = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
-                .setComponent(new ComponentName(
-                        mContext, Settings.SoundSettingsActivity.class));
-        final ResolveInfo ri2 = mock(ResolveInfo.class);
-        ri2.nonLocalizedLabel = "label2";
-
-        mPackageManager.addResolveInfoForIntent(shortcut1, ri1);
-        mPackageManager.addResolveInfoForIntent(shortcut2, ri2);
-
+    public void updatePinnedShortcuts_updatesAllShortcuts() {
         final List<ShortcutInfo> pinnedShortcuts = Arrays.asList(
                 makeShortcut("d1"),
                 makeShortcut("d2"),
@@ -99,7 +82,7 @@ public class ShortcutsUpdateTaskTest {
                 makeShortcut(Settings.SoundSettingsActivity.class));
         when(mShortcutManager.getPinnedShortcuts()).thenReturn(pinnedShortcuts);
 
-        new ShortcutsUpdateTask(mContext).doInBackground();
+        ShortcutsUpdater.updatePinnedShortcuts(mContext);
 
         verify(mShortcutManager, times(1)).updateShortcuts(mListCaptor.capture());
 
@@ -108,6 +91,52 @@ public class ShortcutsUpdateTaskTest {
         assertThat(updates).hasSize(2);
         assertThat(pinnedShortcuts.get(2).getId()).isEqualTo(updates.get(0).getId());
         assertThat(pinnedShortcuts.get(4).getId()).isEqualTo(updates.get(1).getId());
+        assertThat(updates.get(0).getShortLabel().toString()).isEqualTo("App info");
+        assertThat(updates.get(1).getShortLabel().toString()).isEqualTo("Sound & vibration");
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MODES_UI)
+    public void updatePinnedShortcuts_withModesFlag_replacesDndByModes() {
+        List<ShortcutInfo> shortcuts = List.of(
+                makeShortcut(Settings.ZenModeSettingsActivity.class));
+        when(mShortcutManager.getPinnedShortcuts()).thenReturn(shortcuts);
+
+        ShortcutsUpdater.updatePinnedShortcuts(mContext);
+
+        verify(mShortcutManager, times(1)).updateShortcuts(mListCaptor.capture());
+        final List<ShortcutInfo> updates = mListCaptor.getValue();
+        assertThat(updates).hasSize(1);
+
+        // Id hasn't changed, but intent and label has.
+        ComponentName zenCn = new ComponentName(mContext, Settings.ZenModeSettingsActivity.class);
+        ComponentName modesCn = new ComponentName(mContext, Settings.ModesSettingsActivity.class);
+        assertThat(updates.get(0).getId()).isEqualTo(
+                SHORTCUT_ID_PREFIX + zenCn.flattenToShortString());
+        assertThat(updates.get(0).getIntent().getComponent()).isEqualTo(modesCn);
+        assertThat(updates.get(0).getShortLabel().toString()).isEqualTo("Modes");
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_MODES_UI)
+    public void updatePinnedShortcuts_withoutModesFlag_leavesDndAlone() {
+        List<ShortcutInfo> shortcuts = List.of(
+                makeShortcut(Settings.ZenModeSettingsActivity.class));
+        when(mShortcutManager.getPinnedShortcuts()).thenReturn(shortcuts);
+
+        ShortcutsUpdater.updatePinnedShortcuts(mContext);
+
+        verify(mShortcutManager, times(1)).updateShortcuts(mListCaptor.capture());
+        final List<ShortcutInfo> updates = mListCaptor.getValue();
+        assertThat(updates).hasSize(1);
+
+        // Nothing has changed.
+        ComponentName zenCn = new ComponentName(mContext, Settings.ZenModeSettingsActivity.class);
+        assertThat(updates.get(0).getId()).isEqualTo(
+                SHORTCUT_ID_PREFIX + zenCn.flattenToShortString());
+        assertThat(updates.get(0).getIntent().getComponent()).isEqualTo(zenCn);
+        assertThat(updates.get(0).getShortLabel().toString()).isEqualTo("Do Not Disturb");
+
     }
 
     private ShortcutInfo makeShortcut(Class<?> className) {

@@ -412,6 +412,28 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Tvár, odtlačok prsta a hodinky <xliff:g id="WATCH">%s</xliff:g> boli pridané"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Tvár, odtlačky prstov a hodinky <xliff:g id="WATCH">%s</xliff:g> boli pridané"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"Kontrola totožnosti je zapnutá a vyžaduje biometriu"</string>
+    <!-- no translation found for go_to_settings (4394928396153474179) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
+    <skip />
+    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
+    <skip />
+    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
+    <skip />
+    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
+    <skip />
+    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
+    <skip />
+    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Odomknutie Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Hodinky boli pridané"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Nastavte si hodinky"</string>
@@ -796,6 +818,8 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Musí obsahovať aspoň 1 znak, ktorý nie je číslica}few{Musí obsahovať aspoň # znaky, ktoré nie sú číslice}many{Must contain at least # non-numerical characters}other{Musí obsahovať aspoň # znakov, ktoré nie sú číslice}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Správca zariadenia neumožňuje používať nedávne heslo"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Vzostupná, zostupná alebo opakovaná sekvencia čísiel nie je povolená"</string>
+    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
+    <skip />
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Potvrdiť"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Vymazať"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Zámka obrazovky už bola zmenená. Skúste to znova s novou zámkou obrazovky."</string>
@@ -1277,13 +1301,17 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Zapnúť automaticky pri západe slnka"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Zapne sa automaticky o <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Zapne sa automaticky pri večierke"</string>
+    <string name="dark_ui_summary_off_auto_mode_modes" msgid="2672694802103388896">"Zapne sa po spustení režimu <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Nikdy sa automaticky nevypne"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Vypne sa automaticky pri východe slnka"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Vypne sa automaticky o <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Vypne sa automaticky po večierke"</string>
+    <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"Vypne sa po skončení režimu <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Tmavý motív na niektorých obrazovkách používa čierne pozadie a predlžuje tak výdrž batérie. Plány tmavého motívu sa zapnú až po vypnutí obrazovky."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tmavý motív sa momentálne riadi plánom režimu večierky"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Nastavenia režimu večierky"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Tmavý motív môžu aktivovať aj režimy}=1{Tmavý motív aktivuje aj režim {mode_1}}=2{Tmavý motív aktivujú aj režimy {mode_1} a {mode_2}}=3{Tmavý motív aktivujú aj režimy {mode_1}, {mode_2} a {mode_3}}few{Tmavý motív aktivujú aj režimy {mode_1}, {mode_2} a # ďalšie}many{{mode_1}, {mode_2}, and # more also activate dark theme}other{Tmavý motív aktivujú aj režimy {mode_1}, {mode_2} a # ďalších}}"</string>
+    <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Nastavenia režimov"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Ešte tmavšie"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Umožnite zariadeniu stmaviť sa viac ako zvyčajne"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Časový limit obrazovky"</string>
@@ -1948,13 +1976,18 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Kliknutie vpravo dole"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliknutím v pravom dolnom rohu touchpadu zobrazíte ďalšie možnosti"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Rýchlosť kurzora"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"Štýl vyplnenia kurzora"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Zmena farby kurzora na čiernu"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Zmena farby kurzora na zelenú"</string>
-    <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"Zmena farby kurzora na žltú"</string>
+    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
+    <skip />
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Zmena farby kurzora na ružovú"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Zmena farby kurzora na modrú"</string>
-    <string name="pointer_stroke_style" msgid="1886986630216050665">"Štýl čiary kurzora"</string>
+    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
+    <skip />
+    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
+    <skip />
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Biely"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Čierny"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Žiadny"</string>
@@ -2065,6 +2098,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"Všeobecné"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Zobrazenie"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Farba a pohyb"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Farebný kontrast"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Zvýšením kontrastu zvýrazníte text, tlačidlá a ikony. Vyberte úroveň kontrastu, ktorá vám najviac vyhovuje."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Niektoré aplikácie nemusia podporovať všetky nastavenia kontrastu farieb a textu"</string>
@@ -2230,6 +2269,7 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Priehľadnosť, keď sa nepoužíva"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Priehľadné"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Nepriehľadné"</string>
+    <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Nedostupné pri používaní režimu tlačidla navigačného panela."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text s vysokým kontrastom"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Zmeňte farbu textu na čiernu alebo bielu, aby lepšie vynikol na pozadí"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximalizovať kontrast textu"</string>
@@ -3303,7 +3343,10 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"vždy zapnuté ambientné zobrazenie"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, štítok, čítačka"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"klávesnica, hmatová spätná väzba, vibrovať,"</string>
-    <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hlasitosť, vibrovanie, režim bez vyrušení"</string>
+    <!-- no translation found for sound_dashboard_summary (8254699132423665654) -->
+    <skip />
+    <!-- no translation found for sound_dashboard_summary_with_dnd (731956092218394657) -->
+    <skip />
     <string name="media_volume_option_title" msgid="5966569685119475630">"Hlasitosť médií"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Hlasitosť prenášania"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Hlasitosť hovorov"</string>
@@ -3352,8 +3395,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Žiadne}=1{Bol nastavený 1 plán}few{Boli nastavené # plány}many{# schedules set}other{Bolo nastavených # plánov}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Režim bez vyrušení"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Režimy"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimalizujte vyrušenia a majte svoju pozornosť pod kontrolou pomocou režimov spánku, práce, šoférovania a všetkého medzi tým."</string>
-    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Vytvorte vlastný režim"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Minimalizujte vyrušenia a sústreďte sa na spánok, prácu, šoférovanie alebo čokoľvek iného."</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"Vytvoriť vlastný režim"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Prijímajte upozornenia iba od dôležitých ľudí a z dôležitých aplikácií"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Nastaviť plán"</string>
     <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Plán na základe"</string>
@@ -3365,7 +3408,7 @@
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ZAPNUTÉ"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nenastavené"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Deaktivované"</string>
-    <string name="zen_mode_new_title" msgid="4934720193004330740">"Vytvorte režim"</string>
+    <string name="zen_mode_new_title" msgid="4934720193004330740">"Vytvorenie režimu"</string>
     <string name="zen_mode_new_option_custom" msgid="1060993879440003341">"Vlastné"</string>
     <string name="zen_mode_action_activate" msgid="4832626715234966484">"Zapnúť"</string>
     <string name="zen_mode_action_deactivate" msgid="5922468877447186921">"Vypnúť"</string>
@@ -3403,24 +3446,24 @@
     <string name="mode_interruption_filter_title" msgid="6293843948349239256">"Filtre upozornení"</string>
     <string name="mode_device_effects_title" msgid="6019908499525166737">"Ďalšie nastavenia"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{Vypnuté}=1{Vypnuté / 1 režim sa môže zapínať automaticky}few{Vypnuté / # režimy sa môžu zapínať automaticky}many{Off / # modes can turn on automatically}other{Vypnuté / # režimov sa môže zapínať automaticky}}"</string>
-    <string name="mode_display_settings_title" msgid="8132825978346535472">"Nastavenia obrazovky"</string>
+    <string name="mode_display_settings_title" msgid="8132825978346535472">"Nastavenia zobrazenia"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"Možnosti zobrazenia"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Odfarbenie"</string>
     <string name="mode_grayscale_title_secondary_list" msgid="2662593380253642581">"odfarbenie"</string>
-    <string name="mode_grayscale_summary" msgid="6682099523626777038">"Zmena obrazovky na čiernobielu"</string>
+    <string name="mode_grayscale_summary" msgid="6682099523626777038">"Prepnúť na čiernobiele zobrazenie"</string>
     <string name="mode_aod_title" msgid="5903435070341237325">"Neprebudenie obrazovky"</string>
     <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"Neprebudenie obrazovky"</string>
-    <string name="mode_aod_summary" msgid="7516159044827627065">"Vypnutie vždy zapnutej obrazovky"</string>
+    <string name="mode_aod_summary" msgid="7516159044827627065">"Deaktivovať vždy zapnutú obrazovku"</string>
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Stmavenie tapety"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"stmavenie tapety"</string>
-    <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrovanie jasu tapety"</string>
-    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Zapnutie tmavého motívu"</string>
-    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"zapnutie tmavého motívu"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Prepnite operačný systém a aplikácie na preferovaný svetlý text na tmavom pozadí, čo môže byť menej namáhavé pre oči a významne prispeje k úspore batérie v niektorých zariadeniach"</string>
+    <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrovať jas tapety"</string>
+    <string name="mode_dark_theme_title" msgid="8099007897943513209">"Tmavý motív"</string>
+    <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"tmavý motív"</string>
+    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Preferovať v operačnom systéme a aplikáciách svetlý text na tmavom pozadí, čo môže byť príjemnejšie pre oči a v niektorých zariadeniach výrazne šetriť batériu"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Žiadne zmeny obrazovky}=1{{effect_1}}=2{{effect_1} a {effect_2}}=3{{effect_1}, {effect_2} a {effect_3}}few{{effect_1}, {effect_2} a # ďalšie}many{{effect_1}, {effect_2}, and # more}other{{effect_1}, {effect_2} a # ďalších}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Povoliť všetky upozornenia"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Ľudia, aplikácie a zvuky môžu vyrušiť"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Možnosti obrazovky na filtrovanie upozornení"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Možnosti zobrazenia filtrovaných upozornení"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Keď je zapnutý režim bez vyrušení"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Upozornenia bez zvuku"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Upozornenia bude vidieť na obrazovke"</string>
@@ -3440,7 +3483,7 @@
     <string name="zen_mode_block_effect_sound" msgid="7929909410442858327">"Stlmiť zvuk a vibrácie"</string>
     <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"Nezapínať obrazovku"</string>
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"Neblikať"</string>
-    <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"Nezobrazovať upozornenia na obrazovke"</string>
+    <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"Nezobrazovať vyskakovacie upozornenia"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Skryť ikony stavového riadka hore na obrazovke"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Skryť bodky upozornení na ikonách aplikácií"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Pri upozorneniach neprebúdzať obrazovku"</string>
@@ -3614,7 +3657,7 @@
     <string name="notification_silence_title" msgid="4085829874452944989">"Tiché"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"Predvolené"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Povoliť vyrušenia"</string>
-    <string name="allow_interruption_summary" msgid="9044131663518112543">"Povoliť aplikácii prehrávať zvuk, vibrovať alebo zobrazovať upozornenia na obrazovke"</string>
+    <string name="allow_interruption_summary" msgid="9044131663518112543">"Povoliť aplikácii vydávať zvuky, vibrovať alebo zobrazovať vyskakovacie upozornenia"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Priorita"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Zobrazuje sa hore v sekcii konverzácií ako plávajúca bublina a ako profilová fotka na uzamknutej obrazovke"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> nepodporuje väčšinu funkcií konverzácie. Určitú konverzáciu môžete nastaviť ako prioritu a konverzácie sa nebudú zobrazovať ako plávajúce bubliny."</string>
@@ -3668,10 +3711,10 @@
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Ďalšie nastavenia"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"V tejto aplikácii sú k dispozícii ďalšie nastavenia"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"Stlmenie upozornení"</string>
-    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Používanie stlmenia upozornení"</string>
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"Používať stlmenie upozornení"</string>
     <string name="notification_polite_description" msgid="5497748284893832854">"Keď dostanete v krátkom čase priveľa upozornení, zariadenie až na dve minúty zníži hlasitosť a minimalizuje počet upozornení. Netýka sa to hovorov, budíkov a prioritných konverzácií. \n\nUpozornenia prijaté počas režimu stlmenia zobrazíte potiahnutím zhora obrazovky nadol."</string>
-    <string name="notification_polite_work" msgid="8823596456640216391">"Použiť na pracovné profily"</string>
-    <string name="notification_polite_work_summary" msgid="5014189280132951378">"Platí pre aplikácie v pracovnom profile"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Používať na pracovné profily"</string>
+    <string name="notification_polite_work_summary" msgid="5014189280132951378">"Používať na aplikácie v pracovnom profile"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pomocné služby VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Žiadne nainštalované aplikácie nežiadali, aby boli spúšťané ako pomocné služby VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Umožniť službe VR prístup do služby <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -3797,7 +3840,7 @@
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Správy, ktoré môžu vyrušiť"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Skontrolujte, či má zariadenie zapnuté zvonenie, aby na povolené správy upozorňovalo zvukom"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Prichádzajúce správy sú v rámci plánu <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g> blokované. Môžete upraviť nastavenia a povoliť priateľom, rodine alebo ďalším kontaktom spojiť sa s vami."</string>
-    <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Dostanete všetky správy"</string>
+    <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Upozornenie na každú správu"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Dostanete všetky hovory"</string>
     <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Žiadne}=1{1 kontakt}few{# kontakty}many{# contacts}other{# kontaktov}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Ktokoľvek"</string>
@@ -3871,7 +3914,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Zmena na možnosť Iba budíky platná do <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Zmena na možnosť Vždy prerušiť"</string>
     <string name="zen_mode_rename_title" msgid="8146882272966214558">"Úprava režimu"</string>
-    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Vytvorte režim"</string>
+    <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Vytvorenie režimu"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Vlastný režim"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Názov režimu"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Udalosti v kalendári"</string>
@@ -4767,7 +4810,8 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Neplatný režim siete <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorovať."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"Správy cez satelit"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Odosielajte a prijímajte textové správy cez satelit. Táto možnosť je zahrnutá vo vašom účte."</string>
-    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"Odosielajte a prijímajte textové správy cez satelit. Táto možnosť nie je zahrnutá vo vašom účte."</string>
+    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
+    <skip />
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"Správy cez satelit"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Správy cez satelit"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Textová správy môžete odosielať a prijímať cez satelit, pretože váš účet <xliff:g id="CARRIER_NAME">%1$s</xliff:g> spĺňa podmienky."</string>
@@ -5288,8 +5332,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Zapnuté"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Vypnuté"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Zapnuté"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"Zvuk – ľavé: %1$d%%, pravé: %2$d%%"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"Zvuk – pravé: %1$d%%, ľavé: %2$d%%"</string>
+    <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Zvuk <xliff:g id="PERCENT_LEFT">%1$s</xliff:g> vľavo, <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g> vpravo"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="6027686565598201061">"Zvuk <xliff:g id="PERCENT_RIGHT">%1$s</xliff:g> vpravo, <xliff:g id="PERCENT_LEFT">%2$s</xliff:g> vľavo"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Názov zariadenia je viditeľný pre aplikácie, ktoré ste nainštalovali. Keď sa pripojíte k zariadeniam s rozhraním Bluetooth alebo sieti Wi‑Fi, prípadne nastavíte hotspot Wi‑Fi, môžu ho uvidieť aj ďalší ľudia."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gramatický rod"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Výber gramatického rodu"</string>
@@ -5385,6 +5429,8 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Ďalšie informácie"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Tento zvukový stream sa nedá prehrať v zariadení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Práve počúvate"</string>
+    <!-- no translation found for audio_streams_present_now (1128360774541089402) -->
+    <skip />
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Zastavenie počúvania"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Pripojenie kompatibilných slúchadiel"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Pripojiť zariadenie"</string>
@@ -5404,5 +5450,5 @@
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Heslo sa nedá upraviť počas zdieľania. Ak ho chcete zmeniť, najprv vypnite zdieľanie zvuku."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Skener QR kódov"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Potrebujete pomoc?"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"Nastavenia vyhľadávania"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Vyhľadávať v nastaveniach"</string>
 </resources>

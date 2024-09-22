@@ -29,7 +29,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothUtils;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 public class AudioSharingIncompatibleDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "AudioSharingIncompatDlg";
@@ -59,7 +58,7 @@ public class AudioSharingIncompatibleDialogFragment extends InstrumentedDialogFr
      *
      * @param host The Fragment this dialog will be hosted.
      */
-    public static void show(@Nullable Fragment host, @NonNull CachedBluetoothDevice cachedDevice,
+    public static void show(@Nullable Fragment host, @NonNull String deviceName,
             @NonNull DialogEventListener listener) {
         if (host == null || !BluetoothUtils.isAudioSharingEnabled()) return;
         final FragmentManager manager;
@@ -77,7 +76,7 @@ public class AudioSharingIncompatibleDialogFragment extends InstrumentedDialogFr
         }
         Log.d(TAG, "Show up the incompatible device dialog.");
         final Bundle bundle = new Bundle();
-        bundle.putString(BUNDLE_KEY_DEVICE_NAME, cachedDevice.getName());
+        bundle.putString(BUNDLE_KEY_DEVICE_NAME, deviceName);
         AudioSharingIncompatibleDialogFragment dialogFrag =
                 new AudioSharingIncompatibleDialogFragment();
         dialogFrag.setArguments(bundle);
