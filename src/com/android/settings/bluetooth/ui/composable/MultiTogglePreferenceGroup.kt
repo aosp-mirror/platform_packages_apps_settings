@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -62,6 +63,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
@@ -78,7 +80,11 @@ fun MultiTogglePreferenceGroup(
     var settingIdForPopUp by remember { mutableStateOf<Int?>(null) }
 
     settingIdForPopUp?.let { id ->
-        preferenceModels.find { it.id == id }?.let { dialog(it) { settingIdForPopUp = null } }
+        preferenceModels.find { it.id == id && it.isAllowedChangingState }?.let {
+            dialog(it) { settingIdForPopUp = null }
+        } ?: run {
+            settingIdForPopUp = null
+        }
     }
 
     Row(
@@ -102,7 +108,9 @@ fun MultiTogglePreferenceGroup(
                                     Modifier.fillMaxSize().padding(8.dp).semantics {
                                         role = Role.Switch
                                         toggleableState =
-                                            if (preferenceModel.isActive) {
+                                            if (!preferenceModel.isAllowedChangingState) {
+                                                ToggleableState.Indeterminate
+                                            } else if (preferenceModel.isActive) {
                                                 ToggleableState.On
                                             } else {
                                                 ToggleableState.Off
@@ -110,6 +118,7 @@ fun MultiTogglePreferenceGroup(
                                         contentDescription = preferenceModel.title
                                     },
                                 onClick = { settingIdForPopUp = preferenceModel.id },
+                                enabled = preferenceModel.isAllowedChangingState,
                                 shape = RoundedCornerShape(20.dp),
                                 colors = getButtonColors(preferenceModel.isActive),
                                 contentPadding = PaddingValues(0.dp)) {
@@ -254,7 +263,7 @@ private fun dialogContent(multiTogglePreference: DeviceSettingPreferenceModel.Mu
         }
         Spacer(modifier = Modifier.height(12.dp))
         Row(
-            modifier = Modifier.fillMaxWidth().height(32.dp),
+            modifier = Modifier.fillMaxWidth().defaultMinSize(32.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
@@ -263,6 +272,7 @@ private fun dialogContent(multiTogglePreference: DeviceSettingPreferenceModel.Mu
                     text = toggle.label,
                     fontSize = 12.sp,
                     textAlign = TextAlign.Center,
+                    overflow = TextOverflow.Visible,
                     modifier = Modifier.weight(1f).padding(horizontal = 8.dp))
             }
         }
