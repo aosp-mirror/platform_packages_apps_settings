@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static com.android.settingslib.flags.Flags.settingsCatalyst;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -73,7 +71,7 @@ public class SettingsApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        if (settingsCatalyst()) {
+        if (Flags.catalyst()) {
             PreferenceScreenRegistry.INSTANCE.setPreferenceScreensSupplier(
                     this::getPreferenceScreens);
         }

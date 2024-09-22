@@ -93,6 +93,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
         } else if (mShouldUseReverseLandscape) {
             swapHeaderAndContent();
         }
+        mUdfpsEnrollView.setVisibility(View.VISIBLE);
         setOnHoverListener();
     }
 
