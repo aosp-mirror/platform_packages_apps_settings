@@ -239,11 +239,11 @@ public final class ZenModeAppsPreferenceControllerTest {
 
         // MPME is checked; ALL and PRIORITY are unchecked.
         assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
-                .isChecked());
+                .isChecked()).isTrue();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
+                .isChecked()).isFalse();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
+                .isChecked()).isFalse();
 
         mPrefCategory.findPreference(KEY_ALL).performClick();
 
@@ -255,11 +255,11 @@ public final class ZenModeAppsPreferenceControllerTest {
                 .isEqualTo(INTERRUPTION_FILTER_ALL);
         // ALL is now checked; others are unchecked.
         assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
-                .isChecked());
+                .isChecked()).isTrue();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
+                .isChecked()).isFalse();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
+                .isChecked()).isFalse();
     }
 
     @Test
@@ -277,11 +277,11 @@ public final class ZenModeAppsPreferenceControllerTest {
         mPriorityController.updateZenMode(mPriorityPref, zenMode);
 
         assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
-                .isChecked());
+                .isChecked()).isTrue();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
+                .isChecked()).isFalse();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
+                .isChecked()).isFalse();
 
         // Click on NONE
         mPrefCategory.findPreference(KEY_NONE).performClick();
@@ -295,11 +295,11 @@ public final class ZenModeAppsPreferenceControllerTest {
                 .isEqualTo(INTERRUPTION_FILTER_PRIORITY);
         // NONE is now checked; others are unchecked.
         assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
-                .isChecked());
+                .isChecked()).isTrue();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
+                .isChecked()).isFalse();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
+                .isChecked()).isFalse();
     }
 
     @Test
@@ -317,11 +317,11 @@ public final class ZenModeAppsPreferenceControllerTest {
         mPriorityController.updateZenMode(mPriorityPref, zenMode);
 
         assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
-                .isChecked());
+                .isChecked()).isTrue();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
+                .isChecked()).isFalse();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
+                .isChecked()).isFalse();
 
         // Click on PRIORITY
         mPrefCategory.findPreference(KEY_PRIORITY).performClick();
@@ -333,11 +333,11 @@ public final class ZenModeAppsPreferenceControllerTest {
                 .isEqualTo(INTERRUPTION_FILTER_PRIORITY);
         // PRIORITY is now checked; others are unchecked.
         assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_PRIORITY))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
-                .isChecked());
-        assertThat(!((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
-                .isChecked());
+                .isChecked()).isTrue();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_ALL))
+                .isChecked()).isFalse();
+        assertThat(((SelectorWithWidgetPreference) mPrefCategory.findPreference(KEY_NONE))
+                .isChecked()).isFalse();
     }
 
 }
