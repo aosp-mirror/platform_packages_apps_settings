@@ -412,6 +412,28 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"本人確認が ON になっているため、生体認証が必要です"</string>
+    <!-- no translation found for go_to_settings (4394928396153474179) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
+    <skip />
+    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
+    <skip />
+    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
+    <skip />
+    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
+    <skip />
+    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
+    <skip />
+    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
+    <skip />
+    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
+    <skip />
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"リモート認証のロック解除"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"スマートウォッチを追加しました"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"スマートウォッチのセットアップ"</string>
@@ -796,6 +818,8 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{数字以外の文字が 1 個以上必要です}other{数字以外の文字が # 個以上必要です}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"デバイス管理により、最近使用したパスワードは使用できません"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"一連の数字を昇順や降順にしたり、繰り返したりすることはできません"</string>
+    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
+    <skip />
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"確認"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"消去"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"画面ロックはすでに変更されています。新しい画面ロックでもう一度お試しください。"</string>
@@ -810,7 +834,7 @@
     <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{有効な信頼エージェント: 1 件}other{有効な信頼エージェント: # 件}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
-    <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>をペアに設定しますか？"</string>
+    <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>をペア設定しますか？"</string>
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"2 台目のオーディオ機器の追加を確認してください"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetoothペア設定コード"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"ペア設定コードを入力してからReturnキーまたはEnterキーを押してください"</string>
@@ -821,7 +845,7 @@
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"もう一方のデバイスでも、このパスキーの入力が必要な場合があります。"</string>
     <string name="bluetooth_paring_group_msg" msgid="2455293929036668131">"オーディオ機器とのペア設定の確認"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"連絡先と通話履歴へのアクセスを許可する"</string>
-    <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"連絡先と通話履歴へのアクセスも許可します"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"連絡先と通話履歴へのアクセスも許可"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"情報は着信の通知などに使用されます"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>に接続できませんでした。"</string>
@@ -1277,13 +1301,17 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"日の入りに自動的に ON"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"自動的に ON: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"就寝時に自動的に ON になります"</string>
+    <string name="dark_ui_summary_off_auto_mode_modes" msgid="2672694802103388896">"<xliff:g id="ID_1">%1$s</xliff:g>が開始すると ON になります"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"自動で OFF にしない"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"日の出に自動的に OFF"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"自動的に OFF: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"就寝後に自動的に OFF になります"</string>
+    <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"<xliff:g id="ID_1">%1$s</xliff:g>が終了すると OFF になります"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"ダークモードでは黒い背景を使用するため、一部の画面で電池が長持ちします。スケジュールを設定した場合、時刻を過ぎても画面が OFF になるまではダークモードに切り替わりません。"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ダークモードは現在、おやすみ時間モードのスケジュールに合わせた設定になっています"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"おやすみ時間モードの設定"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{モードの設定により、ダークモードも有効になります}=1{{mode_1} に設定すると、ダークモードも有効になります}=2{{mode_1} と {mode_2} に設定すると、ダークモードも有効になります}=3{{mode_1}、{mode_2}、{mode_3} に設定すると、ダークモードも有効になります}other{{mode_1}、{mode_2}、他 # 個のモードに設定すると、ダークモードも有効になります}}"</string>
+    <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"モードの設定"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"さらに暗くする"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"デバイスを通常より暗くできます"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"画面消灯"</string>
@@ -1948,13 +1976,18 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"右下をクリック"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"タッチパッドの右下をクリックするとオプションが表示されます"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"ポインタの速度"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"ポインターの塗りつぶしスタイル"</string>
+    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
+    <skip />
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"ポインターの塗りつぶしを黒色に変更"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"ポインターの塗りつぶしを緑色に変更"</string>
-    <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"ポインターの塗りつぶしを黄色に変更"</string>
+    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
+    <skip />
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"ポインターの塗りつぶしを桃色に変更"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"ポインターの塗りつぶしを青色に変更"</string>
-    <string name="pointer_stroke_style" msgid="1886986630216050665">"ポインターのストローク スタイル"</string>
+    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
+    <skip />
+    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
+    <skip />
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"白"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"黒"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"なし"</string>
@@ -2065,6 +2098,12 @@
     <string name="general_category_title" msgid="6298579528716834157">"全般"</string>
     <string name="display_category_title" msgid="6638191682294461408">"表示"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"色と動き"</string>
+    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
+    <skip />
+    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
+    <skip />
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"色のコントラスト"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"コントラストを高くすると、テキスト、ボタン、アイコンが見分けやすくなります。一番見やすくなるコントラストを選択してください。"</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"色とテキストのコントラスト設定は、一部のアプリで適用されないことがあります"</string>
@@ -2230,6 +2269,7 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"未使用時の透明度"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"透明"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"非透明"</string>
+    <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"ナビゲーション バーのボタンモードの使用中は無効です。"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高コントラスト テキスト"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"テキストの色を黒または白に変更します。背景とのコントラストが最も際立ちます。"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"テキストのコントラストを最大にする"</string>
@@ -3303,7 +3343,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"常時オンのアンビエント表示, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, タグ, リーダー"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"キーボード、ハプティクス、振動"</string>
-    <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、バイブレーション、サイレント モード"</string>
+    <string name="sound_dashboard_summary" msgid="8254699132423665654">"音量とバイブレーション"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"音量、バイブレーション、サイレント モード"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"メディアの音量"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"キャストの音量"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"通話の音量"</string>
@@ -3352,7 +3393,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{なし}=1{1 件のスケジュールが有効}other{# 件のスケジュールが有効}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"サイレント モード"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"モード"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"睡眠、作業、運転など、さまざまな状況において妨げとなるものを防いで集中できるようにします。"</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"就寝中、仕事中、運転中などの特定の状況において、割り込みを最小限に抑えて集中できるようにします。"</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"独自のモードを作成する"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"大切な人やアプリからの通知のみ受け取ります"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"スケジュールの設定"</string>
@@ -3668,8 +3709,8 @@
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"その他の設定"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"このアプリ内でその他の設定を利用できます"</string>
     <string name="notification_polite_title" msgid="6121016426991791557">"通知のクールダウン"</string>
-    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"通知のクールダウンの使用"</string>
-    <string name="notification_polite_description" msgid="5497748284893832854">"短時間の間に通知が多く届いた場合に、最大 2 分間、デバイスが音量を下げて通知を最小限に抑えます。通話、アラーム、優先度の高い会話には影響しません。\n\nクールダウンの間に受信した通知は、画面上部から下にスワイプすると確認できます。"</string>
+    <string name="notification_polite_main_control_title" msgid="5812529809151927149">"通知のクールダウンを使用する"</string>
+    <string name="notification_polite_description" msgid="5497748284893832854">"短時間の間に通知が多く届いた場合に、最長 2 分間、デバイスが音量を下げて通知を最小限に抑えます。通話、アラーム、優先度の高い会話には影響しません。\n\nクールダウンの間に受信した通知は、画面上部から下にスワイプすると確認できます。"</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"仕事用プロファイルに適用する"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"仕事用プロファイルのアプリに適用する"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR ヘルパー サービス"</string>
@@ -4767,7 +4808,8 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"ネットワーク モード <xliff:g id="NETWORKMODEID">%1$d</xliff:g> は無効です。無視してください。"</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"衛星通信メッセージ"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"衛星通信によりテキスト メッセージを送受信します。お客様のアカウントに含まれています。"</string>
-    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"衛星通信によりテキスト メッセージを送受信します。お客様のアカウントには含まれていません。"</string>
+    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
+    <skip />
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"衛星通信メッセージ"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"衛星通信メッセージについて"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"対象の <xliff:g id="CARRIER_NAME">%1$s</xliff:g> アカウントの一部として、衛星通信によるテキスト メッセージの送受信を行えます"</string>
@@ -5286,8 +5328,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"ON"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"OFF"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"ON"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"音声: 左 %1$d%%、右 %2$d%%"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"音声: 右 %1$d%%、左 %2$d%%"</string>
+    <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"音声: 左 <xliff:g id="PERCENT_LEFT">%1$s</xliff:g>、右 <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g>"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="6027686565598201061">"音声: 右 <xliff:g id="PERCENT_RIGHT">%1$s</xliff:g>、左 <xliff:g id="PERCENT_LEFT">%2$s</xliff:g>"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"インストールしたアプリにデバイス名が表示されます。また、Bluetooth デバイスや Wi-Fi ネットワークに接続したり、Wi-Fi アクセス ポイントを設定したりすると、他のユーザーにもデバイス名が表示されます。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"文法性"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"文法性の選択"</string>
@@ -5383,6 +5425,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"詳細"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ではこの音声ストリームを再生できません。"</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"現在再生しています"</string>
+    <string name="audio_streams_present_now" msgid="1128360774541089402">"ホストによって一時停止されました"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"受信を停止"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"対応するヘッドフォンの接続"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"デバイスを接続"</string>

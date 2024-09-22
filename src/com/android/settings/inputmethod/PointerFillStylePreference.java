@@ -19,21 +19,14 @@ import static android.view.PointerIcon.POINTER_ICON_VECTOR_STYLE_FILL_BLACK;
 import static android.view.PointerIcon.POINTER_ICON_VECTOR_STYLE_FILL_BLUE;
 import static android.view.PointerIcon.POINTER_ICON_VECTOR_STYLE_FILL_GREEN;
 import static android.view.PointerIcon.POINTER_ICON_VECTOR_STYLE_FILL_PINK;
-import static android.view.PointerIcon.POINTER_ICON_VECTOR_STYLE_FILL_YELLOW;
+import static android.view.PointerIcon.POINTER_ICON_VECTOR_STYLE_FILL_PURPLE;
+import static android.view.PointerIcon.POINTER_ICON_VECTOR_STYLE_FILL_RED;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.BlendMode;
-import android.graphics.BlendModeColorFilter;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.StateListDrawable;
 import android.provider.Settings;
 import android.util.AttributeSet;
-import android.util.StateSet;
-import android.view.Gravity;
 import android.view.PointerIcon;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,7 +38,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settingslib.Utils;
 
 
 public class PointerFillStylePreference extends Preference {
@@ -62,7 +54,7 @@ public class PointerFillStylePreference extends Preference {
         super.onBindViewHolder(holder);
 
         mButtonHolder = (LinearLayout) holder.findViewById(R.id.button_holder);
-        // Intercept hover events so setting row does not highlight when hovering buttons.
+        // Intercept hover events so container does not highlight when hovering buttons.
         if (mButtonHolder != null) {
             mButtonHolder.setOnHoverListener((v, e) -> true);
         }
@@ -73,11 +65,13 @@ public class PointerFillStylePreference extends Preference {
                 currentStyle);
         initStyleButton(holder, R.id.button_green, POINTER_ICON_VECTOR_STYLE_FILL_GREEN,
                 currentStyle);
-        initStyleButton(holder, R.id.button_yellow, POINTER_ICON_VECTOR_STYLE_FILL_YELLOW,
+        initStyleButton(holder, R.id.button_red, POINTER_ICON_VECTOR_STYLE_FILL_RED,
                 currentStyle);
         initStyleButton(holder, R.id.button_pink, POINTER_ICON_VECTOR_STYLE_FILL_PINK,
                 currentStyle);
         initStyleButton(holder, R.id.button_blue, POINTER_ICON_VECTOR_STYLE_FILL_BLUE,
+                currentStyle);
+        initStyleButton(holder, R.id.button_purple, POINTER_ICON_VECTOR_STYLE_FILL_PURPLE,
                 currentStyle);
     }
 
@@ -90,60 +84,15 @@ public class PointerFillStylePreference extends Preference {
         int[] attrs = {com.android.internal.R.attr.pointerIconVectorFill};
         try (TypedArray ta = getContext().obtainStyledAttributes(
                 PointerIcon.vectorFillStyleToResource(style), attrs)) {
-            button.setBackground(getBackgroundSelector(ta.getColor(0, Color.BLACK)));
+            button.getBackground().setTint(ta.getColor(0, Color.BLACK));
         }
-        button.setForeground(getForegroundDrawable(style, currentStyle));
-        button.setForegroundGravity(Gravity.CENTER);
         button.setOnClickListener(
                 (v) -> {
                     getPreferenceDataStore().putInt(Settings.System.POINTER_FILL_STYLE, style);
                     setButtonChecked(id);
                 });
+        button.setSelected(style == currentStyle);
         button.setPointerIcon(PointerIcon.getSystemIcon(getContext(), PointerIcon.TYPE_ARROW));
-    }
-
-    // Generate background instead of defining in XML so we can use res color from the platform.
-    private StateListDrawable getBackgroundSelector(int color) {
-        StateListDrawable background = new StateListDrawable();
-        Resources res = getContext().getResources();
-        int ovalSize = res.getDimensionPixelSize(R.dimen.pointer_fill_style_circle_diameter);
-        background.setBounds(0, 0, ovalSize, ovalSize);
-
-        // Add hovered state first! The order states are added matters for a StateListDrawable.
-        GradientDrawable hoveredOval = new GradientDrawable();
-        hoveredOval.setColor(color);
-        int textColor = Utils.getColorAttr(getContext(),
-                com.android.internal.R.attr.materialColorOutline).getDefaultColor();
-        hoveredOval.setStroke(
-                res.getDimensionPixelSize(R.dimen.pointer_fill_style_shape_hovered_stroke),
-                textColor);
-        hoveredOval.setSize(ovalSize, ovalSize);
-        hoveredOval.setBounds(0, 0, ovalSize, ovalSize);
-        hoveredOval.setCornerRadius(ovalSize / 2f);
-        background.addState(new int[]{android.R.attr.state_hovered}, hoveredOval);
-
-        GradientDrawable defaultOval = new GradientDrawable();
-        defaultOval.setColor(color);
-        defaultOval.setStroke(
-                res.getDimensionPixelSize(R.dimen.pointer_fill_style_shape_default_stroke),
-                textColor);
-        defaultOval.setSize(ovalSize, ovalSize);
-        defaultOval.setBounds(0, 0, ovalSize, ovalSize);
-        defaultOval.setCornerRadius(ovalSize / 2f);
-        background.addState(StateSet.WILD_CARD, defaultOval);
-
-        return background;
-    }
-
-    private Drawable getForegroundDrawable(int style, int currentStyle) {
-        Resources res = getContext().getResources();
-        int ovalSize = res.getDimensionPixelSize(R.dimen.pointer_fill_style_circle_diameter);
-        Drawable checkMark = getContext().getDrawable(R.drawable.ic_check_24dp);
-        int padding = res.getDimensionPixelSize(R.dimen.pointer_fill_style_circle_padding) / 2;
-        checkMark.setBounds(padding, padding, ovalSize - padding, ovalSize - padding);
-        checkMark.setColorFilter(new BlendModeColorFilter(Color.WHITE, BlendMode.SRC_IN));
-        checkMark.setAlpha(style == currentStyle ? 255 : 0);
-        return checkMark;
     }
 
     private void setButtonChecked(int id) {
@@ -152,8 +101,8 @@ public class PointerFillStylePreference extends Preference {
         }
         for (int i = 0; i < mButtonHolder.getChildCount(); i++) {
             View child = mButtonHolder.getChildAt(i);
-            if (child != null) {
-                child.getForeground().setAlpha(child.getId() == id ? 255 : 0);
+            if (child instanceof ImageView) {
+                child.setSelected(child.getId() == id);
             }
         }
     }

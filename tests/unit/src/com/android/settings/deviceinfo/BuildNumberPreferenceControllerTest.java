@@ -247,26 +247,6 @@ public class BuildNumberPreferenceControllerTest {
     }
 
     @Test
-    @UiThreadTest
-    @RequiresFlagsEnabled(Flags.FLAG_MANDATORY_BIOMETRICS)
-    public void onActivityResult_confirmPasswordRequestCompleted_lockoutError() {
-        when(mUserManager.isAdminUser()).thenReturn(true);
-        when(mBiometricManager.canAuthenticate(mContext.getUserId(),
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
-                .thenReturn(BiometricManager.BIOMETRIC_ERROR_LOCKOUT);
-
-        final boolean activityResultHandled = mController.onActivityResult(
-                BuildNumberPreferenceController.REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,
-                Activity.RESULT_OK,
-                null);
-
-        assertThat(activityResultHandled).isTrue();
-        verify(mFragment, never()).startActivityForResult(any(),
-                eq(BuildNumberPreferenceController.REQUEST_IDENTITY_CHECK_FOR_DEV_PREF));
-        assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isFalse();
-    }
-
-    @Test
     public void onActivityResult_confirmBiometricAuthentication_enableDevPref() {
         when(mUserManager.isAdminUser()).thenReturn(true);
 
