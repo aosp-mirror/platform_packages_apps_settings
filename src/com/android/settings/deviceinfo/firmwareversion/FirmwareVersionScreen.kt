@@ -51,7 +51,7 @@ class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider
             +PreferenceWidget("security_key", R.string.security_patch)
             +PreferenceWidget("module_version", R.string.module_version)
             +BasebandVersionPreference()
-            +PreferenceWidget("kernel_version", R.string.kernel_version)
+            +KernelVersionPreference()
             +PreferenceWidget("os_build_number", R.string.build_number)
         }
 
