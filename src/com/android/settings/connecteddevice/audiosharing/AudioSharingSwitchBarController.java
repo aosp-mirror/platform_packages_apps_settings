@@ -161,7 +161,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 public void onBroadcastStartFailed(int reason) {
                     Log.d(TAG, "onBroadcastStartFailed(), reason = " + reason);
                     updateSwitch();
-                    showRetryDialog();
+                    showErrorDialog();
                     mMetricsFeatureProvider.action(
                             mContext,
                             SettingsEnums.ACTION_AUDIO_SHARING_START_FAILED,
@@ -190,7 +190,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                     mStoppingSharing.compareAndSet(true, false);
                     updateSwitch();
                     AudioSharingUtils.postOnMainThread(mContext,
-                            () -> dismissStaleDialogsOtherThanRetryDialog());
+                            () -> dismissStaleDialogsOtherThanErrorDialog());
                     AudioSharingUtils.toastMessage(
                             mContext,
                             mContext.getString(R.string.audio_sharing_sharing_stopped_label));
@@ -278,7 +278,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                     + reason);
                     if (mSinksInAdding.contains(sink)) {
                         stopAudioSharing();
-                        showRetryDialog();
+                        showErrorDialog();
                         mMetricsFeatureProvider.action(
                                 mContext,
                                 SettingsEnums.ACTION_AUDIO_SHARING_JOIN_FAILED,
@@ -742,17 +742,17 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 });
     }
 
-    private void showRetryDialog() {
+    private void showErrorDialog() {
         AudioSharingUtils.postOnMainThread(mContext,
                 () -> {
-                    // Remove all opening dialogs before show retry dialog
-                    dismissStaleDialogsOtherThanRetryDialog();
-                    AudioSharingRetryDialogFragment.show(mFragment);
+                    // Remove all stale dialogs before showing error dialog
+                    dismissStaleDialogsOtherThanErrorDialog();
+                    AudioSharingErrorDialogFragment.show(mFragment);
                 });
     }
 
     @UiThread
-    private void dismissStaleDialogsOtherThanRetryDialog() {
+    private void dismissStaleDialogsOtherThanErrorDialog() {
         List<Fragment> fragments = new ArrayList<Fragment>();
         try {
             if (mFragment != null) {
@@ -764,7 +764,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         }
         for (Fragment fragment : fragments) {
             if (fragment != null && fragment instanceof DialogFragment
-                    && !(fragment instanceof AudioSharingRetryDialogFragment)
+                    && !(fragment instanceof AudioSharingErrorDialogFragment)
                     && ((DialogFragment) fragment).getDialog() != null) {
                 Log.d(TAG, "Remove stale dialog = " + fragment.getTag());
                 ((DialogFragment) fragment).dismiss();

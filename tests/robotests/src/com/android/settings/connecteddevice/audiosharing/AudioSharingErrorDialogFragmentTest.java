@@ -51,14 +51,14 @@ import org.robolectric.shadows.androidx.fragment.FragmentController;
                 ShadowAlertDialogCompat.class,
                 ShadowBluetoothAdapter.class,
         })
-public class AudioSharingRetryDialogFragmentTest {
+public class AudioSharingErrorDialogFragmentTest {
     @Rule
     public final MockitoRule mocks = MockitoJUnit.rule();
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Fragment mParent;
-    private AudioSharingRetryDialogFragment mFragment;
+    private AudioSharingErrorDialogFragment mFragment;
 
     @Before
     public void setUp() {
@@ -70,7 +70,7 @@ public class AudioSharingRetryDialogFragmentTest {
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
-        mFragment = new AudioSharingRetryDialogFragment();
+        mFragment = new AudioSharingErrorDialogFragment();
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
@@ -91,7 +91,7 @@ public class AudioSharingRetryDialogFragmentTest {
     @Test
     public void onCreateDialog_flagOff_dialogNotExist() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingRetryDialogFragment.show(mParent);
+        AudioSharingErrorDialogFragment.show(mParent);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
@@ -100,7 +100,7 @@ public class AudioSharingRetryDialogFragmentTest {
     @Test
     public void onCreateDialog_unattachedFragment_dialogNotExist() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingRetryDialogFragment.show(new Fragment());
+        AudioSharingErrorDialogFragment.show(new Fragment());
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
@@ -109,7 +109,7 @@ public class AudioSharingRetryDialogFragmentTest {
     @Test
     public void onCreateDialog_flagOn_showDialog() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingRetryDialogFragment.show(mParent);
+        AudioSharingErrorDialogFragment.show(mParent);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
@@ -119,7 +119,7 @@ public class AudioSharingRetryDialogFragmentTest {
     @Test
     public void onCreateDialog_clickOk_dialogDismiss() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingRetryDialogFragment.show(mParent);
+        AudioSharingErrorDialogFragment.show(mParent);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();

@@ -821,7 +821,7 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void testAssistantCallbacks_onSourceAddFailed_twoDevices_showRetryAndLogAction() {
+    public void testAssistantCallbacks_onSourceAddFailed_twoDevices_showErrorAndLogAction() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
@@ -857,7 +857,7 @@ public class AudioSharingSwitchBarControllerTest {
         // Progress dialog shows sharing progress for the user chosen sink.
         List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingRetryDialogFragment.class.getName());
+                AudioSharingErrorDialogFragment.class.getName());
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
                         mContext,
