@@ -52,7 +52,7 @@ class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider
             +PreferenceWidget("module_version", R.string.module_version)
             +BasebandVersionPreference()
             +KernelVersionPreference()
-            +PreferenceWidget("os_build_number", R.string.build_number)
+            +SimpleBuildNumberPreference()
         }
 
     private class PreferenceWidget(override val key: String, override val title: Int) :
