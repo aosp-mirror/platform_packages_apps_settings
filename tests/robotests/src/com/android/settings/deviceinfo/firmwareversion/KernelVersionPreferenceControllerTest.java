@@ -29,6 +29,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class KernelVersionPreferenceControllerTest {
 
@@ -49,3 +50,4 @@ public class KernelVersionPreferenceControllerTest {
                 DeviceInfoUtils.getFormattedKernelVersion(mContext));
     }
 }
+// LINT.ThenChange(KernelVersionPreferenceTest.kt)
