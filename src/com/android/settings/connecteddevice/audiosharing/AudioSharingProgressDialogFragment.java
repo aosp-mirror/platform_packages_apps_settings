@@ -80,6 +80,7 @@ public class AudioSharingProgressDialogFragment extends InstrumentedDialogFragme
                 if (messageView != null) {
                     messageView.setText(message);
                 }
+                sMessage = message;
             }
             Log.d(TAG, "Dialog is showing, return.");
             return;
