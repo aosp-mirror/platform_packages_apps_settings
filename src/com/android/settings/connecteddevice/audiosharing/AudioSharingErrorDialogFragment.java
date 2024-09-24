@@ -29,8 +29,8 @@ import androidx.fragment.app.FragmentManager;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
-public class AudioSharingRetryDialogFragment extends InstrumentedDialogFragment {
-    private static final String TAG = "AudioSharingRetryDialog";
+public class AudioSharingErrorDialogFragment extends InstrumentedDialogFragment {
+    private static final String TAG = "AudioSharingErrorDialog";
 
     @Override
     public int getMetricsCategory() {
@@ -39,7 +39,7 @@ public class AudioSharingRetryDialogFragment extends InstrumentedDialogFragment 
     }
 
     /**
-     * Display the {@link AudioSharingRetryDialogFragment} dialog.
+     * Display the {@link AudioSharingErrorDialogFragment} dialog.
      *
      * @param host The Fragment this dialog will be hosted.
      */
@@ -57,8 +57,8 @@ public class AudioSharingRetryDialogFragment extends InstrumentedDialogFragment 
             Log.d(TAG, "Dialog is showing, return.");
             return;
         }
-        Log.d(TAG, "Show up the retry dialog.");
-        AudioSharingRetryDialogFragment dialogFrag = new AudioSharingRetryDialogFragment();
+        Log.d(TAG, "Show up the error dialog.");
+        AudioSharingErrorDialogFragment dialogFrag = new AudioSharingErrorDialogFragment();
         dialogFrag.show(manager, TAG);
     }
 
