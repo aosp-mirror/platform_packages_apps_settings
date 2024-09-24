@@ -818,8 +818,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{必須包含至少 1 個非數字字元}other{必須包含至少 # 個非數字字元}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"裝置管理員不允許使用最近用過的密碼"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"不可使用依遞增或遞減順序排列或重複的連續數字"</string>
-    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
-    <skip />
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"不允許使用依遞增或遞減順序排列，或是重複的一系列半形字元"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"確認"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"清除"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"螢幕鎖定憑證已更改。請使用新的螢幕鎖定憑證再試一次。"</string>
@@ -1976,8 +1975,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"點擊右下角"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"點擊觸控板右下角，即可查看更多選項"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"游標速度"</string>
-    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="8794616790175016092">"游標顏色"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"變更游標填滿樣式至黑色"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"變更游標填滿樣式至綠色"</string>
     <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
@@ -2039,6 +2037,8 @@
     <string name="pointer_scale" msgid="4941564570571663964">"游標比例"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"縮小游標比例"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"放大游標比例"</string>
+    <!-- no translation found for pointer_scale_keywords (8939432511048322072) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"遊戲控制器"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"產生震動"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"連接時令遊戲控制器產生震動"</string>
@@ -2098,12 +2098,9 @@
     <string name="general_category_title" msgid="6298579528716834157">"一般"</string>
     <string name="display_category_title" msgid="6638191682294461408">"螢幕"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"顏色及動作"</string>
-    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
-    <skip />
+    <string name="accessibility_pointer_and_touchpad_title" msgid="8719482393177273831">"游標和觸控板無障礙功能"</string>
+    <string name="accessibility_pointer_and_touchpad_summary" msgid="6089872217234956258">"游標顏色、大小和其他設定"</string>
+    <string name="accessibility_pointer_color_customization_title" msgid="3376392766113189508">"自訂游標顏色"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"色彩對比度"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"對比度越高，文字、按鈕和圖示便越突出。選擇最適合你的對比度。"</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"部分應用程式可能尚未支援所有色彩和文字對比度設定"</string>
@@ -3343,10 +3340,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"一律開啟氛圍畫面, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, 標籤, 閱讀器"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"鍵盤、觸感反應、震動、"</string>
-    <!-- no translation found for sound_dashboard_summary (8254699132423665654) -->
-    <skip />
-    <!-- no translation found for sound_dashboard_summary_with_dnd (731956092218394657) -->
-    <skip />
+    <string name="sound_dashboard_summary" msgid="8254699132423665654">"音量和震動"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"音量、震動、請勿騷擾"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"媒體音量"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"投放音量"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"通話音量"</string>
@@ -3390,8 +3385,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"已連接裝置設定"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"空間音訊"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"關閉"</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"關閉"</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"關閉"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"固定"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"頭部追蹤"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{無}=1{已設定 1 個時間表}other{已設定 # 個時間表}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"請勿騷擾"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"模式"</string>
@@ -3459,7 +3454,8 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"加上濾鏡調整桌布亮度"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"啟用深色主題背景"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"啟用深色主題背景"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"將 OS 和應用程式切換成淺色文字配搭深色背景。此設定可減少眼睛疲勞，更有助部分裝置顯著節省電量"</string>
+    <!-- no translation found for mode_dark_theme_summary (2808149708986602464) -->
+    <skip />
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{沒有顯示變更}=1{{effect_1}}=2{{effect_1}和{effect_2}}=3{{effect_1}、{effect_2}和{effect_3}}other{{effect_1}、{effect_2}和另外 # 個設定}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"允許所有通知"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"使用者、應用程式和音效可打擾"</string>
@@ -4818,7 +4814,8 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"你的 <xliff:g id="CARRIER_NAME">%1$s</xliff:g> 計劃"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"你的帳戶支援衛星訊息"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"你的帳戶不支援衛星訊息"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"新增衛星訊息"</string>
+    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
+    <skip />
     <string name="category_name_how_it_works" msgid="585303230539269496">"運作方式"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"沒有流動網絡時"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"手機將自動連接衛星。在清楚看到天空的的地方可獲得最佳連線。"</string>
@@ -4930,8 +4927,8 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"顯示全部"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"正在搜尋裝置…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"正在連接裝置…"</string>
-    <string name="bluetooth_left_name" msgid="7440064067910080502">"左耳"</string>
-    <string name="bluetooth_right_name" msgid="7588088072444124949">"右耳"</string>
+    <string name="bluetooth_left_name" msgid="7440064067910080502">"左"</string>
+    <string name="bluetooth_right_name" msgid="7588088072444124949">"右"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"耳機盒"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"電池"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"設定面板"</string>
@@ -5401,6 +5398,20 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"連接兼容的裝置"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"如要開始分享音訊，請先將 LE Audio 耳機連線至手機"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"切換至「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」"</string>
+    <!-- no translation found for audio_sharing_progress_dialog_start_stream_content (1152386358063502897) -->
+    <skip />
+    <!-- no translation found for audio_sharing_progress_dialog_add_source_content (2913609550496440710) -->
+    <skip />
+    <!-- no translation found for progress_dialog_connect_device_content (1387370883978461533) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_title (3954529199333866445) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_content (6014534433894608834) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_title (4586805264392802115) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_content (3943223683620405311) -->
+    <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"連接 LE Audio 音訊串流"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"附近的音訊串流"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"音訊串流"</string>
@@ -5427,8 +5438,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"瞭解詳情"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"無法在「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」上播放此音訊串流。"</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"正在收聽"</string>
-    <!-- no translation found for audio_streams_present_now (1128360774541089402) -->
-    <skip />
+    <string name="audio_streams_present_now" msgid="1128360774541089402">"主辦人已暫停串流"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"停止收聽"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"連接兼容耳機"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"連接裝置"</string>

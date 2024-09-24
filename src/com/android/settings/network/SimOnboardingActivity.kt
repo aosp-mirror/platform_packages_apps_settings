@@ -53,8 +53,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.LifecycleRegistry
 import com.android.settings.R
 import com.android.settings.SidecarFragment
+import com.android.settings.network.telephony.SimRepository
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity
-import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity
 import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
@@ -578,6 +578,10 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             subId: Int,
             isNewTask: Boolean = false,
         ) {
+            if (!SimRepository(context).canEnterMobileNetworkPage()) {
+                Log.i(TAG, "Unable to start SimOnboardingActivity due to missing permissions")
+                return
+            }
             val intent = Intent(context, SimOnboardingActivity::class.java).apply {
                 putExtra(SUB_ID, subId)
                 if(isNewTask) {
