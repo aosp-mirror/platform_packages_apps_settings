@@ -119,6 +119,7 @@ public class GestureShortcutOptionControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void getSummary_touchExplorationEnabled_notInSuw_verifySummary() {
         enableTouchExploration(true);
         mController.setInSetupWizard(false);
@@ -129,6 +130,19 @@ public class GestureShortcutOptionControllerTest {
                 + "\n\n"
                 + mContext.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_software_floating);
+
+        assertThat(mController.getSummary().toString()).isEqualTo(expected);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void getSummary_touchExplorationEnabled_notInSuw_gestureFlag_verifySummary() {
+        enableTouchExploration(true);
+        mController.setInSetupWizard(false);
+        String expected = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 3,
+                R.string.accessibility_shortcut_edit_dialog_summary_gesture);
 
         assertThat(mController.getSummary().toString()).isEqualTo(expected);
     }
