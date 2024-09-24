@@ -67,6 +67,7 @@ object Util {
     return FingerEnrollState.EnrollError(
       errTitle,
       errString,
+      this,
       this == FINGERPRINT_ERROR_UNABLE_TO_PROCESS,
       this == FINGERPRINT_ERROR_CANCELED,
     )
