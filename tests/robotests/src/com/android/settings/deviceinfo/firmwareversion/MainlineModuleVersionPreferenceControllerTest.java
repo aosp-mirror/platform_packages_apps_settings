@@ -47,6 +47,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class MainlineModuleVersionPreferenceControllerTest {
 
@@ -222,3 +223,4 @@ public class MainlineModuleVersionPreferenceControllerTest {
         when(mPackageManager.getPackageInfo(eq(provider), anyInt())).thenReturn(info);
     }
 }
+// LINT.ThenChange(MainlineModuleVersionPreferenceTest.kt)
