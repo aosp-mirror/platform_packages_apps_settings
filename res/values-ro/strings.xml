@@ -818,8 +818,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Trebuie să conțină cel puțin un caracter care să nu fie cifră}few{Trebuie să conțină cel puțin # caractere care să nu fie cifre}other{Trebuie să conțină cel puțin # de caractere care să nu fie cifre}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Administratorul dispozitivului nu permite utilizarea unei parole recente"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Șirurile de cifre ascendente, descendente sau repetate nu sunt permise"</string>
-    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
-    <skip />
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"Șirurile de caractere ascendente, descendente sau repetate nu sunt permise"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Confirmă"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Șterge"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Blocarea ecranului a fost schimbată deja. Încearcă din nou cu blocarea ecranului nouă."</string>
@@ -1976,8 +1975,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic în dreapta jos"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Dă clic în colțul din dreapta jos pe touchpad pentru opțiuni"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Viteza indicatorului"</string>
-    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="8794616790175016092">"Culoarea cursorului"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Schimbă stilul de umplere în negru"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Schimbă stilul de umplere în verde"</string>
     <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
@@ -2039,6 +2037,8 @@
     <string name="pointer_scale" msgid="4941564570571663964">"Mărimea cursorului"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Micșorează cursorul"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Mărește cursorul"</string>
+    <!-- no translation found for pointer_scale_keywords (8939432511048322072) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controler de joc"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirecționează vibrațiile"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Trimite vibrații la controlerul de joc când este conectat"</string>
@@ -2098,12 +2098,9 @@
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Afișaj"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Culoare și mișcare"</string>
-    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
-    <skip />
+    <string name="accessibility_pointer_and_touchpad_title" msgid="8719482393177273831">"Accesibilitatea cursorului și a touchpadului"</string>
+    <string name="accessibility_pointer_and_touchpad_summary" msgid="6089872217234956258">"Culoarea, dimensiunea cursorului și altele"</string>
+    <string name="accessibility_pointer_color_customization_title" msgid="3376392766113189508">"Personalizarea culorii cursorului"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contrastul culorilor"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Contrastul mai înalt scoate în evidență textul, butoanele și pictogramele. Alege contrastul care ți se pare cel mai potrivit."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Este posibil ca unele aplicații să nu accepte toate setările pentru contrastul culorilor și al textului"</string>
@@ -3388,8 +3385,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Setări pentru dispozitivele conectate"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Audio spațial"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Dezactivat"</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Dezactivat"</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Dezactivat"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"Fix"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"Urmărire mișcări cap"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Niciunul}=1{Un program setat}few{# programe setate}other{# de programe setate}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Nu deranja"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Moduri"</string>
@@ -3457,7 +3454,8 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Reglează luminozitatea imaginii de fundal"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Activează tema întunecată"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"activează tema întunecată"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Modifică sistemul de operare și aplicațiile astfel încât să se afișeze text de culoare deschisă pe un fundal de culoare închisă, care este mai odihnitor pentru ochi și asigură economisirea considerabilă a bateriei în cazul unor dispozitive"</string>
+    <!-- no translation found for mode_dark_theme_summary (2808149708986602464) -->
+    <skip />
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nicio modificare a afișării}=1{{effect_1}}=2{{effect_1} și {effect_2}}=3{{effect_1}, {effect_2} și {effect_3}}few{{effect_1}, {effect_2} și încă #}other{{effect_1}, {effect_2} și încă #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permite toate notificările"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Persoanele, aplicațiile și sunetele îl pot întrerupe"</string>
@@ -4816,7 +4814,8 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Planul tău <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Mesajele prin satelit sunt incluse în contul tău"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Mesajele prin satelit nu sunt incluse în contul tău"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Adaugă transmiterea mesajelor prin satelit"</string>
+    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
+    <skip />
     <string name="category_name_how_it_works" msgid="585303230539269496">"Cum funcționează"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Când nu este disponibilă o rețea mobilă"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Telefonul se va conecta automat la un satelit. Pentru o conexiune optimă, trebuie să vezi cerul clar."</string>
@@ -5400,6 +5399,20 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Conectează un dispozitiv compatibil"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Ca să începi să permiți accesul la conținut audio, conectează căștile LE Audio la telefon"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Comută la <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for audio_sharing_progress_dialog_start_stream_content (1152386358063502897) -->
+    <skip />
+    <!-- no translation found for audio_sharing_progress_dialog_add_source_content (2913609550496440710) -->
+    <skip />
+    <!-- no translation found for progress_dialog_connect_device_content (1387370883978461533) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_title (3954529199333866445) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_content (6014534433894608834) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_title (4586805264392802115) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_content (3943223683620405311) -->
+    <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Conectează-te la un stream LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Streamuri audio în apropiere"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Streamuri audio"</string>
