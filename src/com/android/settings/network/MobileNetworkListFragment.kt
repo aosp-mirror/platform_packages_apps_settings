@@ -89,7 +89,7 @@ class MobileNetworkListFragment : DashboardFragment() {
             private val simRepositoryFactory: (Context) -> SimRepository = ::SimRepository
         ) : BaseSearchIndexProvider(R.xml.network_provider_sims_list) {
             public override fun isPageSearchEnabled(context: Context): Boolean =
-                simRepositoryFactory(context).showMobileNetworkPage()
+                simRepositoryFactory(context).canEnterMobileNetworkPage()
         }
     }
 }

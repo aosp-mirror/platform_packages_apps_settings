@@ -57,7 +57,7 @@ constructor(
     private var isAirplaneModeOn = false
 
     override fun getAvailabilityStatus() =
-        if (SimRepository(mContext).showMobileNetworkPage()) AVAILABLE
+        if (SimRepository(mContext).showMobileNetworkPageEntrance()) AVAILABLE
         else CONDITIONALLY_UNAVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {

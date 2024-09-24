@@ -458,7 +458,7 @@ public class ZenModeBackend {
     }
 
     private static List<String> getDefaultRuleIds() {
-        return ZenModeConfig.DEFAULT_RULE_IDS;
+        return ZenModeConfig.getDefaultRuleIds();
     }
 
     NotificationManager.Policy toNotificationPolicy(ZenPolicy policy) {
