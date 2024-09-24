@@ -36,7 +36,7 @@ class MobileNetworkListFragmentTest {
 
     @Test
     fun isPageSearchEnabled_showMobileNetworkPage_returnTrue() {
-        mockSimRepository.stub { on { showMobileNetworkPage() } doReturn true }
+        mockSimRepository.stub { on { canEnterMobileNetworkPage() } doReturn true }
 
         val isEnabled = SearchIndexProvider { mockSimRepository }.isPageSearchEnabled(context)
 
@@ -45,7 +45,7 @@ class MobileNetworkListFragmentTest {
 
     @Test
     fun isPageSearchEnabled_hideMobileNetworkPage_returnFalse() {
-        mockSimRepository.stub { on { showMobileNetworkPage() } doReturn false }
+        mockSimRepository.stub { on { canEnterMobileNetworkPage() } doReturn false }
 
         val isEnabled = SearchIndexProvider { mockSimRepository }.isPageSearchEnabled(context)
 

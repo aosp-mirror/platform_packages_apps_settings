@@ -72,7 +72,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     @Nullable
-    private AlertDialog mLoadingDialog = null;
+    private AlertDialog mProgressDialog = null;
     @VisibleForTesting
     boolean mShouldTriggerAudioSharingShareThenPairFlow = false;
     private CopyOnWriteArrayList<BluetoothDevice> mDevicesWithMetadataChangedListener =
@@ -89,7 +89,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     // In share then pair flow, we have to wait on this page till the device is connected.
     // The BluetoothDevicePreference summary will be blank for seconds between "Pairing..." and
     // "Connecting..." To help users better understand the process, we listen to metadata change
-    // as well and show a loading dialog with "Connecting to ...." once BluetoothDevice.getState()
+    // as well and show a progress dialog with "Connecting to ...." once BluetoothDevice.getState()
     // gets to BOND_BONDED.
     final BluetoothAdapter.OnMetadataChangedListener mMetadataListener =
             new BluetoothAdapter.OnMetadataChangedListener() {
@@ -97,7 +97,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
                 public void onMetadataChanged(@NonNull BluetoothDevice device, int key,
                         @Nullable byte[] value) {
                     Log.d(getLogTag(), "onMetadataChanged device = " + device + ", key  = " + key);
-                    if (mShouldTriggerAudioSharingShareThenPairFlow && mLoadingDialog == null
+                    if (mShouldTriggerAudioSharingShareThenPairFlow && mProgressDialog == null
                             && device.getBondState() == BluetoothDevice.BOND_BONDED
                             && mSelectedList.contains(device)) {
                         triggerAudioSharingShareThenPairFlow(device);
@@ -355,7 +355,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
                 return;
             }
             mJustBonded = device;
-            // Show connecting device loading state
+            // Show connecting device progress
             String aliasName = device.getAlias();
             String deviceName = TextUtils.isEmpty(aliasName) ? device.getAddress()
                     : aliasName;
@@ -387,9 +387,9 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     // TODO: use DialogFragment
     private void showConnectingDialog(@NonNull String message) {
         postOnMainThread(() -> {
-            if (mLoadingDialog != null) {
+            if (mProgressDialog != null) {
                 Log.d(getLogTag(), "showConnectingDialog, is already showing");
-                TextView textView = mLoadingDialog.findViewById(R.id.message);
+                TextView textView = mProgressDialog.findViewById(R.id.message);
                 if (textView != null && !message.equals(textView.getText().toString())) {
                     Log.d(getLogTag(), "showConnectingDialog, update message");
                     // TODO: use string res once finalized
@@ -401,7 +401,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             LayoutInflater inflater = LayoutInflater.from(builder.getContext());
             View customView = inflater.inflate(
-                    R.layout.dialog_audio_sharing_loading_state, /* root= */
+                    R.layout.dialog_audio_sharing_progress, /* root= */
                     null);
             TextView textView = customView.findViewById(R.id.message);
             if (textView != null) {
@@ -410,15 +410,15 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             }
             AlertDialog dialog = builder.setView(customView).setCancelable(false).create();
             dialog.setCanceledOnTouchOutside(false);
-            mLoadingDialog = dialog;
+            mProgressDialog = dialog;
             dialog.show();
         });
     }
 
     private void dismissConnectingDialog() {
         postOnMainThread(() -> {
-            if (mLoadingDialog != null) {
-                mLoadingDialog.dismiss();
+            if (mProgressDialog != null) {
+                mProgressDialog.dismiss();
             }
         });
     }
