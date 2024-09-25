@@ -45,6 +45,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class TermsPreferenceControllerTest {
 
@@ -119,3 +120,4 @@ public class TermsPreferenceControllerTest {
         return testResolveInfo;
     }
 }
+// LINT.ThenChange(LegalPreferenceTest.kt)

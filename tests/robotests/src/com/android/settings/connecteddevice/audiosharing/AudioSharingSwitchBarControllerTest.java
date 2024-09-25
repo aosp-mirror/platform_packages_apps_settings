@@ -629,8 +629,8 @@ public class AudioSharingSwitchBarControllerTest {
                 AudioSharingProgressDialogFragment.class.getName());
         AudioSharingProgressDialogFragment progressFragment =
                 (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
-        // TODO: use string res once finalized
-        String expectedMessage = "Starting audio stream...";
+        String expectedMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_start_stream_content);
         checkProgressDialogMessage(progressFragment, expectedMessage);
 
         when(mBroadcast.isEnabled(null)).thenReturn(true);
@@ -640,8 +640,8 @@ public class AudioSharingSwitchBarControllerTest {
 
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
-        // TODO: use string res once finalized
-        expectedMessage = "Sharing with " + TEST_DEVICE_NAME2 + "...";
+        expectedMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_add_source_content, TEST_DEVICE_NAME2);
         checkProgressDialogMessage(progressFragment, expectedMessage);
 
         childFragments = mParentFragment.getChildFragmentManager().getFragments();
@@ -714,8 +714,8 @@ public class AudioSharingSwitchBarControllerTest {
                 AudioSharingProgressDialogFragment.class.getName());
         AudioSharingProgressDialogFragment progressFragment =
                 (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
-        // TODO: use string res once finalized
-        String expectedMessage = "Sharing with " + TEST_DEVICE_NAME1 + "...";
+        String expectedMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_add_source_content, TEST_DEVICE_NAME1);
         checkProgressDialogMessage(progressFragment, expectedMessage);
 
         childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
@@ -755,8 +755,8 @@ public class AudioSharingSwitchBarControllerTest {
                 AudioSharingProgressDialogFragment.class.getName());
         AudioSharingProgressDialogFragment progressFragment =
                 (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
-        // TODO: use string res once finalized
-        String expectedMessage = "Sharing with " + TEST_DEVICE_NAME2 + "...";
+        String expectedMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_add_source_content, TEST_DEVICE_NAME2);
         checkProgressDialogMessage(progressFragment, expectedMessage);
 
         childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
@@ -1027,8 +1027,8 @@ public class AudioSharingSwitchBarControllerTest {
         // Progress dialog shows sharing progress for the auto add second sink.
         AudioSharingProgressDialogFragment progressFragment =
                 (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
-        // TODO: use string res once finalized
-        String expectedMessage = "Sharing with " + TEST_DEVICE_NAME1 + "...";
+        String expectedMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_add_source_content, TEST_DEVICE_NAME1);
         checkProgressDialogMessage(progressFragment, expectedMessage);
 
         childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());

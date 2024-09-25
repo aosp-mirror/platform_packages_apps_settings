@@ -818,8 +818,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Peab sisaldama vähemalt 1 tähemärki, mis ei ole number}other{Peab sisaldama vähemalt # tähemärki, mis ei ole number}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Seadme administraator ei luba kasutada hiljutist parooli"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Kasvavad, kahanevad või korduvad numbrijadad on keelatud"</string>
-    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
-    <skip />
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"Kasvavad, kahanevad või korduvad tähemärgijadad on keelatud"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Kinnita"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Kustuta"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Ekraanilukk on juba muudetud. Proovige uue ekraanilukuga veel kord."</string>
@@ -2038,6 +2037,8 @@
     <string name="pointer_scale" msgid="4941564570571663964">"Kursori suurus"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Vähenda kursorit"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Suurenda kursorit"</string>
+    <!-- no translation found for pointer_scale_keywords (8939432511048322072) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Mängukontroller"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Vibreerimise ümbersuunamine"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Saadab vibreerimise mängukontrollerisse, kui see on ühendatud"</string>
@@ -3339,10 +3340,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"alati sisse lülitatud taustakuva, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, kiip, lugeja"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"klaviatuur, värintagasiside, vibreerimine,"</string>
-    <!-- no translation found for sound_dashboard_summary (8254699132423665654) -->
-    <skip />
-    <!-- no translation found for sound_dashboard_summary_with_dnd (731956092218394657) -->
-    <skip />
+    <string name="sound_dashboard_summary" msgid="8254699132423665654">"Helitugevus ja vibreerimine"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"Helitugevus, vibreerimine, režiim Mitte segada"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Meedia helitugevus"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Ülekantava sisu helitugevus"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Kõne helitugevus"</string>
@@ -3386,8 +3385,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Ühendatud seadmete seaded"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Ruumiline heli"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Väljas"</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Väljas"</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Väljas"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"Fikseeritud"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"Peajälgimine"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Puudub}=1{1 ajakava on määratud}other{# ajakava on määratud}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Mitte segada"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Režiimid"</string>
@@ -3455,7 +3454,8 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtreerige taustapildi heledust"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Tumeda teema lubamine"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"tumeda teema lubamine"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Lülitage OS ja rakendused heleda teksti ja tumeda tausta eelistusele, mis võib hõlbustada teksti lugemist ning säästab teatud seadmetes oluliselt akut"</string>
+    <!-- no translation found for mode_dark_theme_summary (2808149708986602464) -->
+    <skip />
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ekraanikuva muudatusi pole}=1{{effect_1}}=2{{effect_1} ja {effect_2}}=3{{effect_1}, {effect_2} ja {effect_3}}other{{effect_1}, {effect_2} ja veel #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Luba kõik märguanded"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Inimesed, rakendused ja helid saavad katkestada"</string>
@@ -4814,7 +4814,8 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Teie operaatori <xliff:g id="CARRIER_NAME">%1$s</xliff:g> pakett"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Satellidipõhine sõnumside on teie konto osa"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Satelliidipõhine sõnumside ei ole teie konto osa"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Satelliidipõhise sõnumside lisamine"</string>
+    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
+    <skip />
     <string name="category_name_how_it_works" msgid="585303230539269496">"Tööpõhimõtted"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Kui teil ei ole mobiilsidevõrku"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Teie telefon ühendatakse satelliidiga automaatselt. Parima ühenduse tagamiseks asuge taeva all."</string>
@@ -5397,6 +5398,20 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Ühilduva seadme ühendamine"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Heli jagamise alustamiseks ühendage esmalt LE Audio kõrvaklapid oma telefoniga"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Lülitage profiilile <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for audio_sharing_progress_dialog_start_stream_content (1152386358063502897) -->
+    <skip />
+    <!-- no translation found for audio_sharing_progress_dialog_add_source_content (2913609550496440710) -->
+    <skip />
+    <!-- no translation found for progress_dialog_connect_device_content (1387370883978461533) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_title (3954529199333866445) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_content (6014534433894608834) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_title (4586805264392802115) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_content (3943223683620405311) -->
+    <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"LE Audio vooga ühendamine"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Läheduses asuvad helivood"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Helivood"</string>
@@ -5423,8 +5438,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Lisateave"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Seda helivoogu ei saa seadmes <xliff:g id="DEVICE_NAME">%1$s</xliff:g> esitada."</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Kuulamine käib"</string>
-    <!-- no translation found for audio_streams_present_now (1128360774541089402) -->
-    <skip />
+    <string name="audio_streams_present_now" msgid="1128360774541089402">"Korraldaja peatas"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Lõpeta kuulamine"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Ühilduvate kõrvaklappide ühendamine"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Ühenda seade"</string>

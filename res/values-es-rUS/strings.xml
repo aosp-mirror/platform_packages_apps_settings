@@ -818,8 +818,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Debe tener al menos 1 carácter no numérico}other{Debe tener al menos # de caracteres no numéricos}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"El administrador del dispositivo no permite el uso de contraseñas recientes"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"No se permiten secuencias de dígitos ascendentes, descendentes ni repetidas"</string>
-    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
-    <skip />
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"No se permiten secuencias de caracteres ascendentes, descendentes ni repetidas"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Confirmar"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Borrar"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Ya se cambió el bloqueo de pantalla. Vuelve a intentarlo con el nuevo bloqueo de pantalla."</string>
@@ -2039,6 +2038,8 @@
     <string name="pointer_scale" msgid="4941564570571663964">"Tamaño del puntero"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Achicar el tamaño del puntero"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Agrandar el tamaño del puntero"</string>
+    <!-- no translation found for pointer_scale_keywords (8939432511048322072) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controlador de juegos"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redireccionar vibración"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Enviar la vibración al controlador de juegos cuando esté conectado"</string>
@@ -3343,10 +3344,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"pantalla ambiente siempre encendida, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiqueta, lector"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"teclado, tecnología táctil, vibración,"</string>
-    <!-- no translation found for sound_dashboard_summary (8254699132423665654) -->
-    <skip />
-    <!-- no translation found for sound_dashboard_summary_with_dnd (731956092218394657) -->
-    <skip />
+    <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volumen y vibración"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"Volumen, vibración, No interrumpir"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volumen multimedia"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volumen de transmisión"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volumen de llamada"</string>
@@ -3390,8 +3389,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Parámetros de configuración de dispositivos conectados"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Audio espacial"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Desactivado"</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Desactivado"</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Desactivado"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"Fijo"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"Monitoreo de cabeza"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ninguno}=1{1 programa establecido}other{# programas establecidos}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No interrumpir"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modos"</string>
@@ -3459,7 +3458,8 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtra el brillo del fondo de pantalla"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Habilitar el tema oscuro"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"Habilitar el tema oscuro"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Se prioriza que el SO y las apps usen un texto claro sobre un fondo oscuro, lo que puede ser más cómodo para la vista y genera un ahorro de batería significativo en algunos dispositivos"</string>
+    <!-- no translation found for mode_dark_theme_summary (2808149708986602464) -->
+    <skip />
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Sin cambios de visualización}=1{{effect_1}}=2{{effect_1} y {effect_2}}=3{{effect_1}, {effect_2} y {effect_3}}other{{effect_1}, {effect_2} y # más}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permitir todas las notificaciones"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Las personas, las apps y los sonidos pueden interrumpir"</string>
@@ -4818,7 +4818,8 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Tu plan de <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"La mensajería satelital está incluida con tu cuenta"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"La mensajería satelital no está incluida con tu cuenta"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Agregar mensajería satelital"</string>
+    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
+    <skip />
     <string name="category_name_how_it_works" msgid="585303230539269496">"Cómo funciona"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Cuando no tienes una red móvil"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Tu teléfono se conectará automáticamente a un satélite. Para tener una mejor conexión, mantén una vista clara del cielo."</string>
@@ -5330,10 +5331,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Activadas"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Desactivado"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activado"</string>
-    <!-- no translation found for audio_seek_bar_state_left_first (1641359989891833888) -->
-    <skip />
-    <!-- no translation found for audio_seek_bar_state_right_first (6027686565598201061) -->
-    <skip />
+    <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Audio: <xliff:g id="PERCENT_LEFT">%1$s</xliff:g> a la izquierda, <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g> a la derecha"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="6027686565598201061">"Audio: <xliff:g id="PERCENT_RIGHT">%1$s</xliff:g> a la derecha, <xliff:g id="PERCENT_LEFT">%2$s</xliff:g> a la izquierda"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"El nombre de tu dispositivo es visible para las apps instaladas. Es posible que también lo vean otras personas cuando te conectes a dispositivos Bluetooth o a una red Wi-Fi, o cuando configures un hotspot de Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Género gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selecciona un género gramatical"</string>
@@ -5403,6 +5402,20 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Conectar un dispositivo compatible"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Para comenzar a compartir audio, conecta auriculares compatibles con LE Audio a tu teléfono"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Cambiar a <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for audio_sharing_progress_dialog_start_stream_content (1152386358063502897) -->
+    <skip />
+    <!-- no translation found for audio_sharing_progress_dialog_add_source_content (2913609550496440710) -->
+    <skip />
+    <!-- no translation found for progress_dialog_connect_device_content (1387370883978461533) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_title (3954529199333866445) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_content (6014534433894608834) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_title (4586805264392802115) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_content (3943223683620405311) -->
+    <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Conectarse a reproducción de LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Reproducciones de audio cercanas"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Reproducciones de audio"</string>
@@ -5429,8 +5442,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Más información"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"No se puede realizar esta reproducción de audio en <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Escuchando ahora mismo"</string>
-    <!-- no translation found for audio_streams_present_now (1128360774541089402) -->
-    <skip />
+    <string name="audio_streams_present_now" msgid="1128360774541089402">"Detenido por el host"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Dejar de escuchar"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Conecta auriculares compatibles"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Conectar un dispositivo"</string>
