@@ -818,8 +818,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Tem de incluir, pelo menos, 1 caráter que não seja um número}other{Tem de incluir, pelo menos, # carateres que não sejam números}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"O admin. do disp. não permite a utilização de uma palavra-passe recente"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Não é permitida uma sequência de dígitos ascendente, descendente ou repetida"</string>
-    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
-    <skip />
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"Não é permitida uma sequência de carateres ascendente, descendente ou repetida"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Confirmar"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Limpar"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"O bloqueio de ecrã já foi alterado. Tente novamente com o novo bloqueio de ecrã."</string>
@@ -1976,8 +1975,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clicar no canto inferior direito"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Clique no canto inferior direito do touchpad para mais opções"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Velocidade do ponteiro"</string>
-    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="8794616790175016092">"Cor do ponteiro"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Alt. est. preenc. ponteiro p/ preto"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Alt. est. preenc. ponteiro p/ verde"</string>
     <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
@@ -2039,6 +2037,7 @@
     <string name="pointer_scale" msgid="4941564570571663964">"Tamanho do ponteiro"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Diminuir tamanho do ponteiro"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Aumentar tamanho do ponteiro"</string>
+    <string name="pointer_scale_keywords" msgid="8939432511048322072">"escala, tamanho, escala do ponteiro, tamanho do ponteiro, ponteiro do rato grande, grande, visível"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controlador de Jogos"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirecionar vibração"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Enviar a vibração para o controlador do jogo, quando ligado."</string>
@@ -2098,12 +2097,9 @@
     <string name="general_category_title" msgid="6298579528716834157">"Geral"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Visualização"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Cor e movimento"</string>
-    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
-    <skip />
+    <string name="accessibility_pointer_and_touchpad_title" msgid="8719482393177273831">"Acessibilidade do ponteiro e touchpad"</string>
+    <string name="accessibility_pointer_and_touchpad_summary" msgid="6089872217234956258">"Cor e tamanho do ponteiro, entre outros"</string>
+    <string name="accessibility_pointer_color_customization_title" msgid="3376392766113189508">"Personalização da cor do ponteiro"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contraste de cor"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Um contraste mais elevado faz com que o texto, os botões e os ícones sobressaiam mais. Escolha o contraste que lhe parecer melhor."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Algumas apps podem não suportar todas as definições de contraste de cor e texto"</string>
@@ -3388,8 +3384,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Definições de dispositivos ligados"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Áudio espacial"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Desativado"</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Desativado"</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Desativado"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"Fixo"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"Posição da cabeça"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nenhum}=1{1 horário definido}other{# horários definidos}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Não incomodar"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modos"</string>
@@ -3457,7 +3453,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtre o brilho da imagem de fundo"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Ativar tema escuro"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ativar tema escuro"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Mude as opções do sistema operativo e das apps para darem preferência a texto claro num fundo escuro, o que pode ser mais agradável para os olhos e permite poupar significativamente a bateria em alguns dispositivos"</string>
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Mude o tema do dispositivo para usar um fundo escuro, que é mais confortável para os olhos"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Nenhuma alteração de visualização}=1{{effect_1}}=2{{effect_1} e {effect_2}}=3{{effect_1}, {effect_2} e {effect_3}}other{{effect_1}, {effect_2} e mais #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permitir todas as notificações"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"As pessoas, as apps e os sons podem interromper"</string>
@@ -4816,7 +4812,8 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"O seu plano da operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"As mensagens por satélite estão incluídas na sua conta"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"As mensagens por satélite não estão incluídas na sua conta"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Adicione mensagens por satélite"</string>
+    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
+    <skip />
     <string name="category_name_how_it_works" msgid="585303230539269496">"Como funciona"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Quando não tem ligação a uma rede móvel"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"O seu telemóvel vai ligar-se automaticamente a um satélite. Para conseguir a melhor ligação, procure uma vista desimpedida para o céu."</string>
@@ -5399,6 +5396,13 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Ligue um dispositivo compatível"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Para partilhar áudio, ligue os auscultadores LE Audio ao telemóvel"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Mudar para <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"A iniciar a stream de áudio…"</string>
+    <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"A partilhar com o dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"A ligar a <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"Não foi possível partilhar o áudio"</string>
+    <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Algo correu mal. Tente novamente."</string>
+    <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"Não é possível partilhar o áudio com o dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"A partilha de áudio só funciona com auscultadores que suportem o LE Audio"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Ligue-se a uma stream de LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Streams de áudio próximas"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Streams de áudio"</string>
