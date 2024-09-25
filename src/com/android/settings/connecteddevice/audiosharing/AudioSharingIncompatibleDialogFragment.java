@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -66,6 +67,11 @@ public class AudioSharingIncompatibleDialogFragment extends InstrumentedDialogFr
             manager = host.getChildFragmentManager();
         } catch (IllegalStateException e) {
             Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+            return;
+        }
+        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            Log.d(TAG, "Fail to show dialog with state: " + currentState);
             return;
         }
         sListener = listener;

@@ -767,7 +767,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                     && !(fragment instanceof AudioSharingErrorDialogFragment)
                     && ((DialogFragment) fragment).getDialog() != null) {
                 Log.d(TAG, "Remove stale dialog = " + fragment.getTag());
-                ((DialogFragment) fragment).dismiss();
+                ((DialogFragment) fragment).dismissAllowingStateLoss();
             }
         }
     }
