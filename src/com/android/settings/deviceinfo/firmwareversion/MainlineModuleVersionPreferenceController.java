@@ -39,6 +39,7 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.TimeZone;
 
+// LINT.IfChange
 public class MainlineModuleVersionPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
@@ -141,3 +142,4 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
         return Optional.empty();
     }
 }
+// LINT.ThenChange(MainlineModuleVersionPreference.kt)
