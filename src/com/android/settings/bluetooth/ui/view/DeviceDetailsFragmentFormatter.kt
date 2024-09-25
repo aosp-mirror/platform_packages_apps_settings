@@ -362,7 +362,12 @@ class DeviceDetailsFragmentFormatterImpl(
                         )
                         .launch()
                 }
-                override val icon = @Composable { deviceSettingIcon(null) }
+                override val icon =
+                    @Composable {
+                        deviceSettingIcon(
+                            DeviceSettingIcon.ResourceIcon(R.drawable.ic_chevron_right_24dp)
+                        )
+                    }
             }
         )
     }
