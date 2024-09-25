@@ -411,7 +411,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"얼굴 및 <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"얼굴, 지문, <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"얼굴, 지문, <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
-    <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"신원 확인이 사용 설정되어 있으며 생체 인식 인증이 필요합니다."</string>
+    <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"본인 확인이 사용 설정되어 있어 생체 인식 인증이 필요합니다."</string>
     <!-- no translation found for go_to_settings (4394928396153474179) -->
     <skip />
     <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
@@ -1976,8 +1976,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"오른쪽 하단 클릭"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"더 많은 옵션을 확인하려면 터치패드 오른쪽 하단을 클릭합니다"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"포인터 속도"</string>
-    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="8794616790175016092">"포인터 색상"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"포인터 채움 스타일을 검은색으로 변경"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"포인터 채움 스타일을 초록색으로 변경"</string>
     <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
@@ -2039,6 +2038,8 @@
     <string name="pointer_scale" msgid="4941564570571663964">"포인터 크기"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"포인터 크기 줄이기"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"포인터 크기 늘리기"</string>
+    <!-- no translation found for pointer_scale_keywords (8939432511048322072) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"게임 컨트롤러"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"진동 리디렉션"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"게임 컨트롤러가 연결되어 있으면 진동을 컨트롤러로 전송합니다."</string>
@@ -2098,12 +2099,9 @@
     <string name="general_category_title" msgid="6298579528716834157">"일반"</string>
     <string name="display_category_title" msgid="6638191682294461408">"디스플레이"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"색상 및 모션"</string>
-    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
-    <skip />
+    <string name="accessibility_pointer_and_touchpad_title" msgid="8719482393177273831">"포인터 및 터치패드 접근성"</string>
+    <string name="accessibility_pointer_and_touchpad_summary" msgid="6089872217234956258">"포인터 색상, 포인터 크기 등"</string>
+    <string name="accessibility_pointer_color_customization_title" msgid="3376392766113189508">"포인터 색상 맞춤설정"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"색상 대비"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"고대비를 사용하면 텍스트, 버튼, 아이콘이 더 선명하게 보입니다. 가장 괜찮아 보이는 대비를 선택하세요."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"일부 앱에서는 몇몇 색상 및 텍스트 대비 설정을 지원하지 않습니다."</string>
@@ -3343,10 +3341,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"화면 보호 모드 상시 사용 설정(AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, 태그, 리더"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"키보드, 햅틱, 진동"</string>
-    <!-- no translation found for sound_dashboard_summary (8254699132423665654) -->
-    <skip />
-    <!-- no translation found for sound_dashboard_summary_with_dnd (731956092218394657) -->
-    <skip />
+    <string name="sound_dashboard_summary" msgid="8254699132423665654">"볼륨 및 진동"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"볼륨, 진동, 방해 금지 모드"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"미디어 볼륨"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"전송 볼륨"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"통화 볼륨"</string>
@@ -3390,8 +3386,10 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"연결된 기기 설정"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"공간 음향"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"사용 안함"</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"사용 안함"</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"사용 안함"</string>
+    <!-- no translation found for spatial_audio_multi_toggle_on (4204808183659033003) -->
+    <skip />
+    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (4156440073634867249) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{없음}=1{예약 1개 설정됨}other{예약 #개 설정됨}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"방해 금지 모드"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"모드"</string>
@@ -3459,7 +3457,8 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"배경화면 밝기 필터링"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"어두운 테마 사용"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"어두운 테마 사용"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"어두운 배경에 밝은 텍스트를 표시하도록 OS와 앱을 전환합니다. 이렇게 하면 눈의 피로도를 낮출 수 있고, 일부 기기에서는 상당한 배터리 절약 효과를 볼 수 있습니다."</string>
+    <!-- no translation found for mode_dark_theme_summary (2808149708986602464) -->
+    <skip />
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{디스플레이 변경사항 없음}=1{{effect_1}}=2{{effect_1} 및 {effect_2}}=3{{effect_1}, {effect_2}, {effect_3}}other{{effect_1}, {effect_2} 외 #개}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"모든 알림 허용"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"사람, 앱, 소리 예외"</string>
@@ -4818,7 +4817,8 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"사용 중인 <xliff:g id="CARRIER_NAME">%1$s</xliff:g> 요금제"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"위성 메시지가 계정에 포함되어 있음"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"위성 메시지가 계정에 포함되어 있지 않음"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"위성 메시지 추가"</string>
+    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
+    <skip />
     <string name="category_name_how_it_works" msgid="585303230539269496">"작동 방식"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"모바일 네트워크를 이용할 수 없는 경우"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"휴대전화가 위성에 자동 연결됩니다. 최적의 연결을 위해 하늘이 잘 보이는 상태를 유지하세요."</string>
@@ -5401,6 +5401,20 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"호환되는 기기를 연결하세요"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"오디오 공유를 시작하려면 먼저 LE 오디오 헤드폰을 휴대전화에 연결하세요."</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기로 전환"</string>
+    <!-- no translation found for audio_sharing_progress_dialog_start_stream_content (1152386358063502897) -->
+    <skip />
+    <!-- no translation found for audio_sharing_progress_dialog_add_source_content (2913609550496440710) -->
+    <skip />
+    <!-- no translation found for progress_dialog_connect_device_content (1387370883978461533) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_title (3954529199333866445) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_content (6014534433894608834) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_title (4586805264392802115) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_content (3943223683620405311) -->
+    <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"LE 오디오 스트림에 연결"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"주변 오디오 스트림"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"오디오 스트림"</string>
@@ -5427,8 +5441,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"자세히 알아보기"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 기기에서 이 오디오 스트림을 재생할 수 없습니다"</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"듣는 중"</string>
-    <!-- no translation found for audio_streams_present_now (1128360774541089402) -->
-    <skip />
+    <string name="audio_streams_present_now" msgid="1128360774541089402">"호스트가 일시중지함"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"그만 듣기"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"호환되는 헤드폰 연결"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"기기 연결"</string>

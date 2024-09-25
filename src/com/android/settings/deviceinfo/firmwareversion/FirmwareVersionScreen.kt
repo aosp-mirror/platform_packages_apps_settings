@@ -48,8 +48,8 @@ class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(this) {
             +PreferenceWidget("os_firmware_version", R.string.firmware_version)
-            +PreferenceWidget("security_key", R.string.security_patch)
-            +PreferenceWidget("module_version", R.string.module_version)
+            +SecurityPatchLevelPreference()
+            +MainlineModuleVersionPreference()
             +BasebandVersionPreference()
             +KernelVersionPreference()
             +SimpleBuildNumberPreference()

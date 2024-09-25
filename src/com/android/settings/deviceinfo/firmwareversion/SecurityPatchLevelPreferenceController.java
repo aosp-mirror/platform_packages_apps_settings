@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
+// LINT.IfChange
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -73,3 +74,4 @@ public class SecurityPatchLevelPreferenceController extends BasePreferenceContro
         return true;
     }
 }
+// LINT.ThenChange(SecurityPatchLevelPreference.kt)

@@ -114,13 +114,7 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
-    <style name="Theme.AlertDialog.Base" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
-        <item name="colorAccent">@android:color/system_primary_light</item>
-        <item name="android:colorError">@color/settings_dialog_colorError</item>
-        <item name="android:colorBackground">@android:color/system_surface_container_high_light</item>
-    </style>
-
-    <style name="Theme.AlertDialog" parent="Theme.AlertDialog.Base">
+    <style name="Theme.AlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="android:clipToPadding">true</item>
         <item name="android:clipChildren">true</item>
