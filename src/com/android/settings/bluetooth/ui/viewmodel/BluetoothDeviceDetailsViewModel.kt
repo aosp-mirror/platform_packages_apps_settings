@@ -101,7 +101,7 @@ class BluetoothDeviceDetailsViewModel(
                                 DeviceSettingStateModel.ActionSwitchPreferenceState(newState)
                             )
                         },
-                        onPrimaryClick = { intent?.let { application.startActivity(it) } },
+                        intent = intent,
                     )
                 } else {
                     DeviceSettingPreferenceModel.PlainPreference(
@@ -109,7 +109,7 @@ class BluetoothDeviceDetailsViewModel(
                         title = title,
                         summary = summary,
                         icon = icon,
-                        onClick = { intent?.let { application.startActivity(it) } },
+                        intent = intent,
                     )
                 }
             }
@@ -119,7 +119,7 @@ class BluetoothDeviceDetailsViewModel(
                 DeviceSettingPreferenceModel.HelpPreference(
                     id = id,
                     icon = DeviceSettingIcon.ResourceIcon(R.drawable.ic_help),
-                    onClick = { application.startActivity(intent) },
+                    intent = intent,
                 )
             is DeviceSettingModel.MultiTogglePreference ->
                 DeviceSettingPreferenceModel.MultiTogglePreference(

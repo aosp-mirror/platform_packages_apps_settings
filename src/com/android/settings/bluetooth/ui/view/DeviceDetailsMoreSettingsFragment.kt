@@ -19,6 +19,7 @@ package com.android.settings.bluetooth.ui.view
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.Menu
@@ -73,7 +74,10 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == MENU_HELP_ITEM_ID) {
-            helpItem.value?.let { it.onClick() }
+            helpItem.value?.intent?.let {
+                it.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                requireContext().startActivity(it)
+            }
             return true
         }
         return super.onOptionsItemSelected(menuItem)
