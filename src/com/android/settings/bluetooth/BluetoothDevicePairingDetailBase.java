@@ -359,7 +359,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             String aliasName = device.getAlias();
             String deviceName = TextUtils.isEmpty(aliasName) ? device.getAddress()
                     : aliasName;
-            showConnectingDialog("Connecting to " + deviceName + "...");
+            showConnectingDialog(deviceName);
             // Wait for AUTO_DISMISS_TIME_THRESHOLD_MS and check if the paired device supports audio
             // sharing.
             if (!mHandler.hasMessages(AUTO_DISMISS_MESSAGE_ID)) {
@@ -385,14 +385,15 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     }
 
     // TODO: use DialogFragment
-    private void showConnectingDialog(@NonNull String message) {
+    private void showConnectingDialog(@NonNull String deviceName) {
         postOnMainThread(() -> {
+            String message = getContext().getString(R.string.progress_dialog_connect_device_content,
+                    deviceName);
             if (mProgressDialog != null) {
                 Log.d(getLogTag(), "showConnectingDialog, is already showing");
                 TextView textView = mProgressDialog.findViewById(R.id.message);
                 if (textView != null && !message.equals(textView.getText().toString())) {
                     Log.d(getLogTag(), "showConnectingDialog, update message");
-                    // TODO: use string res once finalized
                     textView.setText(message);
                 }
                 return;
@@ -405,7 +406,6 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
                     null);
             TextView textView = customView.findViewById(R.id.message);
             if (textView != null) {
-                // TODO: use string res once finalized
                 textView.setText(message);
             }
             AlertDialog dialog = builder.setView(customView).setCancelable(false).create();
