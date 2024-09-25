@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth.ui.view
 
+import android.app.settings.SettingsEnums
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.content.Context
@@ -48,8 +49,7 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
     private lateinit var cachedDevice: CachedBluetoothDevice
     private lateinit var helpItem: StateFlow<DeviceSettingPreferenceModel.HelpPreference?>
 
-    // TODO(b/343317785): add metrics category
-    override fun getMetricsCategory(): Int = 0
+    override fun getMetricsCategory(): Int = SettingsEnums.BLUETOOTH_DEVICE_DETAILS_MORE_SETTINGS
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
