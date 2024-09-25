@@ -249,6 +249,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (isCatalystEnabled()) {
+            Intent intent = preference.getIntent();
+            if (intent != null && preference.getContext().getPackageManager().queryIntentActivities(
+                    intent, 0).isEmpty()) {
+                Log.w(TAG, "No activity to start for " + intent);
+                return true;
+            }
+        }
+
         final Collection<List<AbstractPreferenceController>> controllers =
                 mPreferenceControllers.values();
         for (List<AbstractPreferenceController> controllerList : controllers) {
