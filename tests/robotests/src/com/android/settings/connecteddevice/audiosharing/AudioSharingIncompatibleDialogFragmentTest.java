@@ -120,9 +120,9 @@ public class AudioSharingIncompatibleDialogFragmentTest {
         assertThat(dialog.isShowing()).isTrue();
         TextView title = dialog.findViewById(R.id.title_text);
         assertThat(title).isNotNull();
-        // TODO: use string res
         assertThat(title.getText().toString()).isEqualTo(
-                "Can't share audio with " + TEST_DEVICE_NAME);
+                mParent.getString(R.string.audio_sharing_incompatible_dialog_title,
+                        TEST_DEVICE_NAME));
     }
 
     @Test

@@ -26,6 +26,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
@@ -65,15 +66,13 @@ public class AudioSharingErrorDialogFragment extends InstrumentedDialogFragment 
     @Override
     @NonNull
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        // TODO: put strings to res till they are finalized
         AlertDialog dialog =
                 AudioSharingDialogFactory.newBuilder(getActivity())
-                        .setTitle("Couldn't share audio")
-                        .setTitleIcon(com.android.settings.R.drawable.ic_warning_24dp)
+                        .setTitle(R.string.audio_sharing_retry_dialog_title)
+                        .setTitleIcon(R.drawable.ic_warning_24dp)
                         .setIsCustomBodyEnabled(true)
-                        .setCustomMessage("Something went wrong. Please try again.")
-                        .setPositiveButton(com.android.settings.R.string.okay, (d, w) -> {
-                        })
+                        .setCustomMessage(R.string.audio_sharing_retry_dialog_content)
+                        .setPositiveButton(R.string.okay, (d, w) -> {})
                         .build();
         dialog.setCanceledOnTouchOutside(true);
         return dialog;

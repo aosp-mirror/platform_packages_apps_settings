@@ -41,8 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.display.AutoBrightnessPreferenceController;
-import com.android.settings.display.BrightnessLevelPreferenceController;
+import com.android.settings.display.BrightnessLevelPreferenceControllerForSetupWizard;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -168,16 +167,10 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        // Requires lifecycle, so added programmatically (normally via resId).
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        BrightnessLevelPreferenceController brightnessLevelPreferenceController =
-                new BrightnessLevelPreferenceController(context, getSettingsLifecycle());
-        brightnessLevelPreferenceController.setInSetupWizard(true);
-        controllers.add(brightnessLevelPreferenceController);
-        String autoBrightnessKey = context.getString(R.string.preference_key_auto_brightness);
-        AutoBrightnessPreferenceController autoBrightnessPreferenceController =
-                new AutoBrightnessPreferenceController(context, autoBrightnessKey);
-        autoBrightnessPreferenceController.setInSetupWizard(true);
-        controllers.add(autoBrightnessPreferenceController);
+        controllers.add(new BrightnessLevelPreferenceControllerForSetupWizard(
+                context, getSettingsLifecycle()));
         return controllers;
     }
 

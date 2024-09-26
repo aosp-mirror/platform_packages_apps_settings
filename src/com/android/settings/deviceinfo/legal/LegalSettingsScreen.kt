@@ -13,48 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.android.settings.deviceinfo.firmwareversion
+package com.android.settings.deviceinfo.legal
 
 import android.content.Context
-import android.os.Build
+import com.android.settings.LegalSettings
 import com.android.settings.R
 import com.android.settings.flags.Flags
-import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen
-class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider {
-
-    override fun isFlagEnabled(context: Context) = Flags.catalystFirmwareVersion()
-
+open class LegalSettingsScreen : PreferenceScreenCreator {
     override val key: String
         get() = KEY
 
     override val title: Int
-        get() = R.string.firmware_version
+        get() = R.string.legal_information
 
-    override fun getSummary(context: Context): CharSequence? =
-        Build.VERSION.RELEASE_OR_PREVIEW_DISPLAY
+    override fun isFlagEnabled(context: Context) = Flags.catalystLegalInformation()
 
-    override val keywords: Int
-        get() = R.string.keywords_android_version
-
-    override fun fragmentClass() = FirmwareVersionSettings::class.java
+    override fun fragmentClass() = LegalSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(this) {
-            +FirmwareVersionDetailPreference()
-            +SecurityPatchLevelPreference()
-            +MainlineModuleVersionPreference()
-            +BasebandVersionPreference()
-            +KernelVersionPreference()
-            +SimpleBuildNumberPreference()
+            +LegalPreference("copyright", R.string.copyright_title, "android.settings.COPYRIGHT")
+            +LegalPreference("license", R.string.license_title, "android.settings.LICENSE")
+            +LegalPreference("terms", R.string.terms_title, "android.settings.TERMS")
+            +ModuleLicensesScreen.KEY // Use screen key in case it is overlaid.
+            +LegalPreference(
+                "webview_license",
+                R.string.webview_license_title,
+                "android.settings.WEBVIEW_LICENSE",
+            )
+            +WallpaperAttributionsPreference()
         }
 
     companion object {
-        const val KEY = "firmware_version"
+        const val KEY = "legal_information"
     }
 }
