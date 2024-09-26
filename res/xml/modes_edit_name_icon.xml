@@ -33,13 +33,15 @@
         android:key="name"
         android:layout="@layout/modes_edit_name" />
 
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="32dp" />
+    <PreferenceCategory
+        android:title="@string/zen_mode_edit_choose_icon_title"
+        android:key="modes_filters">
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="icon_list"
-        android:selectable="false"
-        android:layout="@layout/modes_icon_list"/>
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="icon_list"
+            android:selectable="false"
+            android:layout="@layout/modes_icon_list" />
+    </PreferenceCategory>
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="done"
