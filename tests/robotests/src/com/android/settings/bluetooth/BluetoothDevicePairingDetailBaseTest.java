@@ -211,9 +211,9 @@ public class BluetoothDevicePairingDetailBaseTest {
         assertThat(dialog).isNotNull();
         TextView message = dialog.findViewById(R.id.message);
         assertThat(message).isNotNull();
-        // TODO: use stringr res once finalized
         assertThat(message.getText().toString()).isEqualTo(
-                "Connecting to " + TEST_DEVICE_ADDRESS + "...");
+                mContext.getString(R.string.progress_dialog_connect_device_content,
+                        TEST_DEVICE_ADDRESS));
         verify(mFragment, never()).finish();
     }
 

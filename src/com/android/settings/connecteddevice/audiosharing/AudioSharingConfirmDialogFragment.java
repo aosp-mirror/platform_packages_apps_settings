@@ -72,7 +72,7 @@ public class AudioSharingConfirmDialogFragment extends InstrumentedDialogFragmen
                         .setTitleIcon(com.android.settingslib.R.drawable.ic_bt_le_audio_sharing)
                         .setIsCustomBodyEnabled(true)
                         .setCustomMessage(R.string.audio_sharing_comfirm_dialog_content)
-                        .setPositiveButton(com.android.settings.R.string.okay, (d, w) -> {})
+                        .setPositiveButton(R.string.okay, (d, w) -> {})
                         .build();
         dialog.setCanceledOnTouchOutside(true);
         return dialog;
