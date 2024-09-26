@@ -31,15 +31,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -71,8 +68,9 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     private volatile BluetoothDevice mJustBonded = null;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+    @VisibleForTesting
     @Nullable
-    private AlertDialog mProgressDialog = null;
+    ProgressDialogFragment mProgressDialog = null;
     @VisibleForTesting
     boolean mShouldTriggerAudioSharingShareThenPairFlow = false;
     private CopyOnWriteArrayList<BluetoothDevice> mDevicesWithMetadataChangedListener =
@@ -384,41 +382,24 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
         finish();
     }
 
-    // TODO: use DialogFragment
     private void showConnectingDialog(@NonNull String deviceName) {
         postOnMainThread(() -> {
             String message = getContext().getString(R.string.progress_dialog_connect_device_content,
                     deviceName);
+            if (mProgressDialog == null) {
+                mProgressDialog = ProgressDialogFragment.newInstance(this);
+            }
             if (mProgressDialog != null) {
-                Log.d(getLogTag(), "showConnectingDialog, is already showing");
-                TextView textView = mProgressDialog.findViewById(R.id.message);
-                if (textView != null && !message.equals(textView.getText().toString())) {
-                    Log.d(getLogTag(), "showConnectingDialog, update message");
-                    textView.setText(message);
-                }
-                return;
+                mProgressDialog.show(message);
             }
-            Log.d(getLogTag(), "showConnectingDialog, show dialog");
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = LayoutInflater.from(builder.getContext());
-            View customView = inflater.inflate(
-                    R.layout.dialog_audio_sharing_progress, /* root= */
-                    null);
-            TextView textView = customView.findViewById(R.id.message);
-            if (textView != null) {
-                textView.setText(message);
-            }
-            AlertDialog dialog = builder.setView(customView).setCancelable(false).create();
-            dialog.setCanceledOnTouchOutside(false);
-            mProgressDialog = dialog;
-            dialog.show();
         });
     }
 
     private void dismissConnectingDialog() {
         postOnMainThread(() -> {
             if (mProgressDialog != null) {
-                mProgressDialog.dismiss();
+                Log.d(getLogTag(), "Dismiss connecting dialog.");
+                mProgressDialog.dismissAllowingStateLoss();
             }
         });
     }

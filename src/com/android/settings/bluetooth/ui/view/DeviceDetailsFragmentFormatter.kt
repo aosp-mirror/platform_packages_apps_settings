@@ -18,6 +18,7 @@ package com.android.settings.bluetooth.ui.view
 
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
+import android.content.Intent
 import android.media.AudioManager
 import android.os.Bundle
 import androidx.compose.animation.AnimatedVisibility
@@ -101,13 +102,13 @@ class DeviceDetailsFragmentFormatterImpl(
 ) : DeviceDetailsFragmentFormatter {
     private val repository =
         featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
-            context,
+            fragment.requireActivity().application,
             bluetoothAdapter,
             fragment.lifecycleScope,
         )
     private val spatialAudioInteractor =
         featureFactory.bluetoothFeatureProvider.getSpatialAudioInteractor(
-            context,
+            fragment.requireActivity().application,
             context.getSystemService(AudioManager::class.java),
             fragment.lifecycleScope,
         )
@@ -312,10 +313,10 @@ class DeviceDetailsFragmentFormatterImpl(
                         return { deviceSettingIcon(model.icon) }
                     }
             }
-        if (model.onPrimaryClick != null) {
+        if (model.intent != null) {
             TwoTargetSwitchPreference(
                 switchPrefModel,
-                primaryOnClick = model.onPrimaryClick::invoke,
+                primaryOnClick = { startActivity(model.intent) },
             )
         } else {
             SwitchPreference(switchPrefModel)
@@ -329,7 +330,7 @@ class DeviceDetailsFragmentFormatterImpl(
                 override val title = model.title
                 override val summary = { model.summary ?: "" }
                 override val onClick = {
-                    model.onClick?.invoke()
+                    model.intent?.let { startActivity(it) }
                     Unit
                 }
                 override val icon: (@Composable () -> Unit)?
@@ -361,7 +362,12 @@ class DeviceDetailsFragmentFormatterImpl(
                         )
                         .launch()
                 }
-                override val icon = @Composable { deviceSettingIcon(null) }
+                override val icon =
+                    @Composable {
+                        deviceSettingIcon(
+                            DeviceSettingIcon.ResourceIcon(R.drawable.ic_chevron_right_24dp)
+                        )
+                    }
             }
         )
     }
@@ -374,6 +380,11 @@ class DeviceDetailsFragmentFormatterImpl(
     @Composable
     private fun deviceSettingIcon(icon: DeviceSettingIcon?) {
         icon?.let { Icon(it, modifier = Modifier.size(SettingsDimension.itemIconSize)) }
+    }
+
+    private fun startActivity(intent: Intent) {
+        intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
     }
 
     private fun getPreferenceKey(settingId: Int) = "DEVICE_SETTING_${settingId}"

@@ -178,11 +178,9 @@ class DeviceDetailsFragmentFormatterTest {
             }.launchIn(testScope.backgroundScope)
             delay(100)
             runCurrent()
-            helpPreference!!.onClick()
             ShadowLooper.idleMainLooper()
 
-            val shadowActivity = Shadows.shadowOf(fragmentActivity)
-            assertThat(shadowActivity.nextStartedActivity).isSameInstanceAs(intent)
+            assertThat(helpPreference?.intent).isSameInstanceAs(intent)
         }
     }
 

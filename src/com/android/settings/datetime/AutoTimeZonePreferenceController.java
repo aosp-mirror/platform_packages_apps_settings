@@ -129,11 +129,11 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
         // time zone must use location.
         if (LocationProviderStatusPreferenceController.hasLocationTimeZoneNoTelephonyFallback(
                 mTimeManager.getTimeZoneCapabilitiesAndConfig().getDetectorStatus())) {
-            return mContext.getResources().getString(R.string.auto_zone_requires_location_summary);
+            return mContext.getString(R.string.auto_zone_requires_location_summary);
         }
-        // If the user has a dedicated toggle to control location use, the summary can
-        // be empty because the use of location is explicit.
-        return "";
+
+        // If the user has a dedicated toggle to control location use, explain what it does.
+        return mContext.getString(R.string.zone_auto_title_summary);
     }
 
     @VisibleForTesting
