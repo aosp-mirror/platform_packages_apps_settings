@@ -246,9 +246,16 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Ligar a serviços de dados em roaming"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Ligar a serviços de dados em roaming"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Podem aplicar-se custos de roaming."</string>
-    <string name="date_time_auto" msgid="4239202185055225869">"Definir a hora automaticamente"</string>
-    <string name="zone_auto_title" msgid="5141692422373097957">"Definir automaticamente"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"A localização vai ser usada para definir o fuso horário quando este botão estiver ativado"</string>
+    <!-- no translation found for date_time_auto (1759599045100040686) -->
+    <skip />
+    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
+    <skip />
+    <!-- no translation found for zone_auto_title (3520584257065861479) -->
+    <skip />
+    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
+    <skip />
+    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
+    <skip />
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar local predefinido"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Usar formato de 24 horas"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Hora"</string>
@@ -412,28 +419,17 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rosto, impressão digital e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rosto, impressões digitais e <xliff:g id="WATCH">%s</xliff:g> adicionados"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"A verificação de identidade está ativada e requer dados biométricos"</string>
-    <!-- no translation found for go_to_settings (4394928396153474179) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
-    <skip />
-    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
-    <skip />
+    <string name="go_to_settings" msgid="4394928396153474179">"Aceda às Definições"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"A verificação de identidade está ativada e não é possível validar a sua identidade"</string>
+    <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"Os dados biométricos falharam demasiadas vezes. Bloqueie e desbloqueie o dispositivo para tentar novamente."</string>
+    <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"Os dados biométricos falharam demasiadas vezes. Tente novamente."</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Pode gerir a verificação de identidade nas definições de proteção contra roubo. Aceda às Definições"</string>
+    <string name="identity_check_general_error_title" msgid="5073929400896102674">"Os dados biométricos são necessários para continuar"</string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"A verificação de identidade está ativada e requer dados biométricos, mas o sensor de rosto ou de impressões digitais não está disponível\n"<ul><li>"Verifique se a câmara está ativada e tente novamente"</li>\n<li>"Pode desativar a verificação de identidade através da sua Conta Google"</li></ul></string>
+    <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"Cancelar"</string>
+    <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"OK"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"Aceder à verificação de identidade"</string>
+    <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"Ecrã de bloqueio"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Desbloqueio remoto do Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Relógio adicionado"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configure o seu relógio"</string>
@@ -1634,7 +1630,8 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Permita que as apps e os serviços procurem dispositivos próximos em qualquer altura, mesmo quando o Bluetooth estiver desativado. Isto pode ser utilizado, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Serviços de localização"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Serviços de localização"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Usar localização"</string>
+    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
+    <skip />
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Impossível definir o fuso horário automaticamente"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Localização ou Serviços de localização desativados"</string>
@@ -1645,11 +1642,13 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Definições de localização"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Resolver este problema"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Cancelar"</string>
-    <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"O fuso horário automático está desativado"</string>
+    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
+    <skip />
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"A deteção do fuso horário da localização está desativada."</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"A deteção do fuso horário da localização não é suportada."</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Não são permitidas alterações à deteção do fuso horário da localização."</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"A localização pode ser usada para definir o fuso horário"</string>
+    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"Ver informações jurídicas, estado, versão de software"</string>
     <string name="legal_information" msgid="7509900979811934843">"Informações legais"</string>
     <string name="manual" msgid="3651593989906084868">"Manual"</string>
@@ -1978,14 +1977,11 @@
     <string name="pointer_fill_style" msgid="8794616790175016092">"Cor do ponteiro"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Alt. est. preenc. ponteiro p/ preto"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Alt. est. preenc. ponteiro p/ verde"</string>
-    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
-    <skip />
+    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"Altere o estilo de preenchimento do ponteiro para vermelho"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Alt. est. preenc. ponteiro p/ rosa"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Alt. est. preenc. ponteiro p/ azul"</string>
-    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
-    <skip />
+    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"Altere o estilo de preenchimento do ponteiro para roxo"</string>
+    <string name="pointer_stroke_style" msgid="139962661485972329">"Cor do traço do ponteiro"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Branco"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Preto"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Nenhum"</string>
@@ -3911,6 +3907,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Crie um modo"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Modo personalizado"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Nome do modo"</string>
+    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
+    <skip />
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventos de calendário"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rotina da hora de dormir"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Durante a condução"</string>
@@ -3980,7 +3978,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"Gerido por <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Abrir por predefinição"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Abrir links compatíveis"</string>
-    <string name="app_launch_top_intro_message" msgid="137370923637482459">"Permitir que os links da Web abram nesta app"</string>
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"Na app"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"No navegador"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Escolha como abrir links da Web para esta app"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Links a serem abertos nesta app"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Links compatíveis"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Outras preferências predefinidas"</string>
@@ -4804,16 +4804,14 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Modo de rede inválido: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignore."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"Mensagens por satélite"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Envie e receba mensagens de texto por satélite. Incluído na sua conta."</string>
-    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
-    <skip />
+    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Envie e receba mensagens de texto por satélite. Não está incluído na sua conta."</string>
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"Mensagens por satélite"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Acerca das mensagens por satélite"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Pode enviar e receber mensagens de texto por satélite através de uma conta elegível da operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"O seu plano da operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"As mensagens por satélite estão incluídas na sua conta"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"As mensagens por satélite não estão incluídas na sua conta"</string>
-    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
-    <skip />
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"Saiba mais"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Como funciona"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Quando não tem ligação a uma rede móvel"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"O seu telemóvel vai ligar-se automaticamente a um satélite. Para conseguir a melhor ligação, procure uma vista desimpedida para o céu."</string>
@@ -5450,4 +5448,10 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Leitor de códigos QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Precisa de ajuda?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Pesquise definições"</string>
+    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <skip />
+    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <skip />
+    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <skip />
 </resources>
