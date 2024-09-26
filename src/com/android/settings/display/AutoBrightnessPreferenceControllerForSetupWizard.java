@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.deviceinfo.legal;
+
+package com.android.settings.display;
 
 import android.content.Context;
 
-import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
+import androidx.annotation.NonNull;
 
-// LINT.IfChange
-public class WallpaperAttributionsPreferenceController extends BasePreferenceController {
+import com.android.settings.accessibility.Flags;
 
-    public WallpaperAttributionsPreferenceController(Context context, String key) {
+/**
+ * The top-level preference controller that updates the adaptive brightness in the SetupWizard.
+ */
+public class AutoBrightnessPreferenceControllerForSetupWizard
+        extends AutoBrightnessPreferenceController {
+
+    public AutoBrightnessPreferenceControllerForSetupWizard(@NonNull Context context,
+            @NonNull String key) {
         super(context, key);
     }
 
     @Override
+    @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(R.bool.config_show_wallpaper_attribution)
-                ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
+        if (!Flags.addBrightnessSettingsInSuw()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        return super.getAvailabilityStatus();
     }
 }
-// LINT.ThenChange(WallpaperAttributionsPreference.kt)
