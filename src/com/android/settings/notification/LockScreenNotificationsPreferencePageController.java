@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,25 +18,23 @@ package com.android.settings.notification;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-
 import com.android.server.notification.Flags;
 import com.android.settings.core.BasePreferenceController;
 
-// TODO(b/330606963): remove controller when the feature flag is removed!
-/**
- * Controller for polite notifications settings page.
- */
-public class PoliteNotificationsPreferenceController extends BasePreferenceController {
+// TODO(b/367455695): remove controller when the feature flag is removed!
 
-    public PoliteNotificationsPreferenceController(@NonNull Context context,
-            @NonNull String preferenceKey) {
+/**
+ * Controller for lock screen notifications settings page.
+ */
+public class LockScreenNotificationsPreferencePageController extends BasePreferenceController {
+
+    public LockScreenNotificationsPreferencePageController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return Flags.politeNotifications() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return Flags.notificationLockScreenSettings() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
 }
