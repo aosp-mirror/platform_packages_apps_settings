@@ -45,6 +45,8 @@ object ApnTypes {
         ApnSetting.TYPE_VSIM_STRING,
         ApnSetting.TYPE_BIP_STRING,
         ApnSetting.TYPE_ENTERPRISE_STRING,
+        ApnSetting.TYPE_OEM_PAID_STRING,
+        ApnSetting.TYPE_OEM_PRIVATE_STRING,
     )
 
     private fun splitToList(apnType: String): List<String> {
