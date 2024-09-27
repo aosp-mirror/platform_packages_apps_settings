@@ -16,14 +16,12 @@
 
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
-import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintEnrollmentRepository
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrolledFingerprintsInteractor
-import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.data.repository.UserRepo
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.UserInteractor
 import kotlinx.coroutines.flow.Flow
 
-class EnrolledFingerprintsInteractorImpl(
-  private val fingerprintEnrollmentRepository: FingerprintEnrollmentRepository
-) : EnrolledFingerprintsInteractor {
-  override val enrolledFingerprints: Flow<List<FingerprintData>?> =
-    fingerprintEnrollmentRepository.currentEnrollments
+class UserInteractorImpl(private val userRepo: UserRepo) : UserInteractor {
+  override val currentUser: Flow<Int> = userRepo.currentUser
+
+  override fun updateUser(user: Int) = userRepo.updateUser(user)
 }

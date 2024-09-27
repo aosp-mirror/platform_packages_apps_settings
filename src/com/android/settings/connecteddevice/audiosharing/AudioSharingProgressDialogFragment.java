@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -72,6 +73,11 @@ public class AudioSharingProgressDialogFragment extends InstrumentedDialogFragme
             Log.d(TAG, "Fail to show dialog: " + e.getMessage());
             return;
         }
+        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            Log.d(TAG, "Fail to show dialog with state: " + currentState);
+            return;
+        }
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
         if (dialog != null) {
             if (!sMessage.equals(message)) {
@@ -80,6 +86,7 @@ public class AudioSharingProgressDialogFragment extends InstrumentedDialogFragme
                 if (messageView != null) {
                     messageView.setText(message);
                 }
+                sMessage = message;
             }
             Log.d(TAG, "Dialog is showing, return.");
             return;
