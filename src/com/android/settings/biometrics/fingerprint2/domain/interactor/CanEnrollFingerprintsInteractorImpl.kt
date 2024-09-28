@@ -21,11 +21,14 @@ import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.CanEnr
 import kotlinx.coroutines.flow.Flow
 
 class CanEnrollFingerprintsInteractorImpl(
-  val fingerprintEnrollmentRepository: FingerprintEnrollmentRepository
+  private val fingerprintEnrollmentRepository: FingerprintEnrollmentRepository
 ) : CanEnrollFingerprintsInteractor {
   override val canEnrollFingerprints: Flow<Boolean> = fingerprintEnrollmentRepository.canEnrollUser
   /** Indicates the maximum fingerprints enrollable for a given user */
-  override fun maxFingerprintsEnrollable(): Int {
-    return fingerprintEnrollmentRepository.maxFingerprintsEnrollable()
+  override val maxFingerprintsEnrollable: Flow<Int> =
+    fingerprintEnrollmentRepository.maxFingerprintsEnrollable
+
+  override fun setShouldUseSettingsMaxFingerprints(useSettings: Boolean) {
+    fingerprintEnrollmentRepository.setShouldUseSettingsMaxFingerprints(useSettings)
   }
 }
