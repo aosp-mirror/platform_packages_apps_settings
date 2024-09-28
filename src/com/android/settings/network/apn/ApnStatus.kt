@@ -204,9 +204,7 @@ fun getCarrierCustomizedConfig(
         CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL
     )
     val customizedConfig = CustomizedConfig(
-        readOnlyApnTypes = b.getStringArray(
-            CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY
-        )?.toList() ?: emptyList(),
+        readOnlyApnTypes = ApnEditor.getReadOnlyApnTypes(b)?.toList() ?: emptyList(),
         readOnlyApnFields = b.getStringArray(
             CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY
         )?.toList() ?: emptyList(),
