@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.Secure.LOCK_SCREEN_NOTIFICATION_MINIMALISM;
 import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS;
-import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -28,16 +28,15 @@ import com.android.server.notification.Flags;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
-public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceController
+public class LockscreenNotificationMinimalismPreferenceController
         extends TogglePreferenceController {
 
-    private static final int UNSET = 0;
     @VisibleForTesting
     static final int ON = 1;
     @VisibleForTesting
-    static final int OFF = 2;
+    static final int OFF = 0;
 
-    public ShowOnlyUnseenNotificationsOnLockscreenPreferenceController(
+    public LockscreenNotificationMinimalismPreferenceController(
             Context context,
             String preferenceKey) {
         super(context, preferenceKey);
@@ -46,40 +45,30 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceController
     @Override
     public boolean isChecked() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET) == ON;
+                LOCK_SCREEN_NOTIFICATION_MINIMALISM, ON) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, isChecked ? ON : OFF);
+                LOCK_SCREEN_NOTIFICATION_MINIMALISM, isChecked ? ON : OFF);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (Flags.notificationMinimalism()) {
-            if (!isNotifOnLockScreenEnabled()) {
-                return DISABLED_DEPENDENT_SETTING;
-            }
-            // We want to show the switch when the lock screen notification minimalism flag is on.
-            return AVAILABLE;
-        }
-        int setting = Settings.Secure.getInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET);
-        if (setting == UNSET) {
+        if (!Flags.notificationMinimalism()) {
             return CONDITIONALLY_UNAVAILABLE;
-        } else {
-            return AVAILABLE;
         }
+        int lockScreenNotif = Settings.Secure.getInt(mContext.getContentResolver(),
+                LOCK_SCREEN_SHOW_NOTIFICATIONS, 0);
+        if (lockScreenNotif == 0) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+        return AVAILABLE;
     }
 
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_notifications;
-    }
-
-    private boolean isNotifOnLockScreenEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) == 1;
     }
 }
