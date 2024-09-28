@@ -198,6 +198,10 @@ public class ApnEditor extends SettingsPreferenceFragment
     public static final String APN_TYPE_MCX = "mcx";
     /** APN type for XCAP */
     public static final String APN_TYPE_XCAP = "xcap";
+    /** APN type for OEM_PAID networks (Automotive PANS) */
+    public static final String APN_TYPE_OEM_PAID = "oem_paid";
+    /** APN type for OEM_PRIVATE networks (Automotive PANS) */
+    public static final String APN_TYPE_OEM_PRIVATE = "oem_private";
     /** Array of all APN types */
     public static final String[] APN_TYPES = {APN_TYPE_DEFAULT,
             APN_TYPE_MMS,
@@ -211,6 +215,14 @@ public class ApnEditor extends SettingsPreferenceFragment
             APN_TYPE_EMERGENCY,
             APN_TYPE_MCX,
             APN_TYPE_XCAP,
+            APN_TYPE_OEM_PAID,
+            APN_TYPE_OEM_PRIVATE,
+    };
+
+    /** Array of APN types that are never user-editable */
+    private static final String[] ALWAYS_READ_ONLY_APN_TYPES = new String[] {
+        APN_TYPE_OEM_PAID,
+        APN_TYPE_OEM_PRIVATE,
     };
 
     /**
@@ -358,6 +370,18 @@ public class ApnEditor extends SettingsPreferenceFragment
         for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
             getPreferenceScreen().getPreference(i).setOnPreferenceChangeListener(this);
         }
+    }
+
+    /**
+     * Fetch complete list of read only APN types.
+     *
+     * The list primarily comes from carrier config, but is also supplied by APN types which are
+     * always read only.
+     */
+    static String[] getReadOnlyApnTypes(PersistableBundle b) {
+        String[] carrierReadOnlyApnTypes = b.getStringArray(
+                CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
+        return ArrayUtils.concat(String.class, carrierReadOnlyApnTypes, ALWAYS_READ_ONLY_APN_TYPES);
     }
 
     /**
@@ -1355,8 +1379,7 @@ public class ApnEditor extends SettingsPreferenceFragment
         if (configManager != null) {
             final PersistableBundle b = configManager.getConfigForSubId(mSubId);
             if (b != null) {
-                mReadOnlyApnTypes = b.getStringArray(
-                        CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
+                mReadOnlyApnTypes = getReadOnlyApnTypes(b);
                 if (!ArrayUtils.isEmpty(mReadOnlyApnTypes)) {
                     Log.d(TAG,
                             "onCreate: read only APN type: " + Arrays.toString(mReadOnlyApnTypes));

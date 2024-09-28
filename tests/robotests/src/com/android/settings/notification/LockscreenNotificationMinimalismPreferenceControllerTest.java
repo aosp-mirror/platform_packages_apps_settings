@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,7 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS;
-
-import static com.android.settings.notification.ShowOnlyUnseenNotificationsOnLockscreenPreferenceController.OFF;
-import static com.android.settings.notification.ShowOnlyUnseenNotificationsOnLockscreenPreferenceController.ON;
+import static android.provider.Settings.Secure.LOCK_SCREEN_NOTIFICATION_MINIMALISM;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -48,15 +45,17 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceControllerTest {
+public class LockscreenNotificationMinimalismPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
 
-    private ShowOnlyUnseenNotificationsOnLockscreenPreferenceController mController;
+    private LockscreenNotificationMinimalismPreferenceController mController;
     private Preference mPreference;
+    static final int ON = 1;
+    static final int OFF = 0;
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
@@ -65,7 +64,7 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         doReturn(mock(DevicePolicyManager.class)).when(mContext)
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
-        mController = new ShowOnlyUnseenNotificationsOnLockscreenPreferenceController(mContext,
+        mController = new LockscreenNotificationMinimalismPreferenceController(mContext,
                 "key");
         mPreference = new Preference(RuntimeEnvironment.application);
         mPreference.setKey(mController.getPreferenceKey());
@@ -74,66 +73,33 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceControllerTest {
 
     @Test
     @DisableFlags(com.android.server.notification.Flags.FLAG_NOTIFICATION_MINIMALISM)
-    public void display_configUnset_shouldNotDisplay() {
+    public void display_featureFlagOff_shouldNotDisplay() {
         mController.displayPreference(mScreen);
         assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
-    @DisableFlags(com.android.server.notification.Flags.FLAG_NOTIFICATION_MINIMALISM)
-    public void display_configSet_showDisplay() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, OFF);
+    @EnableFlags(com.android.server.notification.Flags.FLAG_NOTIFICATION_MINIMALISM)
+    public void display_featureFlagOn_shouldDisplay() {
         mController.displayPreference(mScreen);
         assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
     @EnableFlags(com.android.server.notification.Flags.FLAG_NOTIFICATION_MINIMALISM)
-    public void display_configUnset_minimalismEnabled_shouldDisplay() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, ON);
-        mController.displayPreference(mScreen);
-        assertThat(mPreference.isVisible()).isTrue();
-    }
-
-    @Test
     public void isChecked_settingIsOff_shouldReturnFalse() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, OFF);
+                LOCK_SCREEN_NOTIFICATION_MINIMALISM, OFF);
 
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
+    @EnableFlags(com.android.server.notification.Flags.FLAG_NOTIFICATION_MINIMALISM)
     public void isChecked_settingIsOn_shouldReturnTrue() {
         Settings.Secure.putInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, ON);
+                LOCK_SCREEN_NOTIFICATION_MINIMALISM, ON);
 
         assertThat(mController.isChecked()).isTrue();
-    }
-
-    @Test
-    public void setChecked_setFalse_disablesSetting() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, ON);
-
-        mController.setChecked(false);
-        int updatedValue = Settings.Secure.getInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, -1);
-
-        assertThat(updatedValue).isEqualTo(OFF);
-    }
-
-    @Test
-    public void setChecked_setTrue_enablesSetting() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, OFF);
-
-        mController.setChecked(true);
-        int updatedValue = Settings.Secure.getInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, -1);
-
-        assertThat(updatedValue).isEqualTo(ON);
     }
 }

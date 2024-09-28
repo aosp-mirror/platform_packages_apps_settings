@@ -356,10 +356,11 @@ public class WifiHotspotRepository {
                 log("setSpeedType(), setBand(BAND_2GHZ)");
                 configBuilder.setBand(BAND_2GHZ);
             }
-            // Set the security type back to WPA2/WPA3 if we're moving from 6GHz to something else.
-            if ((config.getBand() & BAND_6GHZ) != 0) {
-                configBuilder.setPassphrase(
-                        generatePassword(config), SECURITY_TYPE_WPA3_SAE_TRANSITION);
+            // Set the security type back to WPA2/WPA3 if the password is at least 8 characters and
+            // we're moving from 6GHz to something else.
+            String passphrase = generatePassword(config);
+            if ((passphrase.length() >= 8) && (config.getBand() & BAND_6GHZ) != 0) {
+                configBuilder.setPassphrase(passphrase, SECURITY_TYPE_WPA3_SAE_TRANSITION);
             }
         }
         setSoftApConfiguration(configBuilder.build());
