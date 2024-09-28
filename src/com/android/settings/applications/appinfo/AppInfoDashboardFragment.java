@@ -715,7 +715,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         if (mPackageName == null) {
             final Intent intent = args == null ?
                     getActivity().getIntent() : (Intent) args.getParcelable("intent");
-            if (intent != null) {
+            if (intent != null && intent.getData() != null) {
                 mPackageName = intent.getData().getSchemeSpecificPart();
             }
         }
