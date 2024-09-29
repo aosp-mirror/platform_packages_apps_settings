@@ -20,11 +20,9 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.Indexable;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +30,6 @@ import java.util.List;
 /**
  * Settings > Sound > Do Not Disturb > Alarms & Other Interruptions
  */
-@SearchIndexable
 public class ZenModeSoundVibrationSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
@@ -61,22 +58,4 @@ public class ZenModeSoundVibrationSettings extends ZenModeSettingsBase implement
     public int getMetricsCategory() {
         return SettingsEnums.NOTIFICATION_ZEN_MODE_PRIORITY;
     }
-
-    /**
-     * For Search.
-     */
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.zen_mode_sound_vibration_settings) {
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
-                }
-
-            @Override
-            public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-                return buildPreferenceControllers(context, null);
-            }
-        };
 }

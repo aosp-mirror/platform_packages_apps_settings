@@ -571,10 +571,10 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         if (mBroadcast != null) {
             mBroadcast.startPrivateBroadcast();
             mSinksInAdding.clear();
-            // TODO: use string res once finalized.
             AudioSharingUtils.postOnMainThread(mContext,
                     () -> AudioSharingProgressDialogFragment.show(mFragment,
-                            "Starting audio stream..."));
+                            mContext.getString(
+                                    R.string.audio_sharing_progress_dialog_start_stream_content)));
             mMetricsFeatureProvider.action(
                     mContext,
                     SettingsEnums.ACTION_AUDIO_SHARING_MAIN_SWITCH_ON,
@@ -767,7 +767,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                     && !(fragment instanceof AudioSharingErrorDialogFragment)
                     && ((DialogFragment) fragment).getDialog() != null) {
                 Log.d(TAG, "Remove stale dialog = " + fragment.getTag());
-                ((DialogFragment) fragment).dismiss();
+                ((DialogFragment) fragment).dismissAllowingStateLoss();
             }
         }
     }
@@ -830,8 +830,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     private void addSourceToTargetSinks(List<BluetoothDevice> targetActiveSinks,
             @NonNull String sinkName) {
         mSinksInAdding.addAll(targetActiveSinks);
-        // TODO: move to res once finalized
-        String progressMessage = "Sharing with " + sinkName + "...";
+        String progressMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_add_source_content, sinkName);
         showProgressDialog(progressMessage);
         AudioSharingUtils.addSourceToTargetSinks(targetActiveSinks, mBtManager);
     }

@@ -412,28 +412,17 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"चेहरा, फ़िंगरप्रिंट, और <xliff:g id="WATCH">%s</xliff:g> सेट अप की गई"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"चेहरा, फ़िंगरप्रिंट, और <xliff:g id="WATCH">%s</xliff:g> सेट अप की गई"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"पहचान की पुष्टि करने की सुविधा चालू है और इसके लिए बायोमेट्रिक डेटा की ज़रूरत है"</string>
-    <!-- no translation found for go_to_settings (4394928396153474179) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
-    <skip />
-    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
-    <skip />
+    <string name="go_to_settings" msgid="4394928396153474179">"सेटिंग पर जाएं"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"पहचान की पुष्टि करने की सेटिंग चालू है, लेकिन यह आपकी पहचान की पुष्टि नहीं कर पा रही है"</string>
+    <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"कई बार गलत बायोमेट्रिक्स का इस्तेमाल करने की वजह से, पुष्टि नहीं हो सकी. फिर से कोशिश करने के लिए, अपना डिवाइस लॉक और अनलॉक करें."</string>
+    <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"कई बार गलत बायोमेट्रिक्स का इस्तेमाल किए जाने की वजह से, पुष्टि नहीं हो सकी. फिर से कोशिश करें."</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"डिवाइस चोरी होने पर डेटा को सुरक्षित रखने से जुड़ी सेटिंग में जाकर, पहचान की पुष्टि करने की सेटिंग को मैनेज किया जा सकता है. सेटिंग पर जाएं"</string>
+    <string name="identity_check_general_error_title" msgid="5073929400896102674">"पुष्टि करने के लिए बायोमेट्रिक डेटा ज़रूरी है"</string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"पहचान की पुष्टि करने की सेटिंग चालू है और इसके लिए बायोमेट्रिक डेटा की ज़रूरत है. फ़िलहाल, आपका चेहरा नहीं दिख रहा है या फ़िंगरप्रिंट सेंसर उपलब्ध नहीं है\n"<ul><li>"देखें कि आपके डिवाइस का कैमरा चालू है या नहीं. इसके बाद, फिर से कोशिश करें"</li>\n<li>"अपने Google खाते के ज़रिए, पहचान की पुष्टि करने की सेटिंग को बंद किया जा सकता है"</li></ul></string>
+    <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"रद्द करें"</string>
+    <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"ठीक है"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"पहचान की पुष्टि करने वाली सेटिंग पर जाएं"</string>
+    <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"लॉक स्क्रीन"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator अनलॉक करें"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"स्मार्टवॉच जोड़ दी गई"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"अपनी स्मार्ट वॉच सेट अप करें"</string>
@@ -818,8 +807,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{पासवर्ड में कम से कम 1 वर्ण ऐसा होना चाहिए जो संख्या न हो}one{पासवर्ड में कम से कम # वर्ण ऐसा होना चाहिए जो संख्या न हो}other{पासवर्ड में कम से कम # वर्ण ऐसे होने चाहिए जो संख्या न हों}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"डिवाइस व्यवस्थापक हाल ही के पासवर्ड का उपयोग करने की अनुमति नहीं देता"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"पिन के लिए, अंकों को बढ़ते क्रम, घटते क्रम या दोहराव वाले क्रम में नहीं लिखा जा सकता"</string>
-    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
-    <skip />
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"वर्णों को बढ़ते, घटते या दोहराए गए क्रम में लिखने की अनुमति नहीं है"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"पुष्टि करें"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"मिटाएं"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"स्क्रीन लॉक पहले ही बदला जा चुका है. नए स्क्रीन लॉक के साथ फिर से कोशिश करें."</string>
@@ -1979,14 +1967,11 @@
     <string name="pointer_fill_style" msgid="8794616790175016092">"पॉइंटर का कलर"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"पॉइंटर फ़िल स्टाइल, ब्लैक में बदलें"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"पॉइंटर फ़िल स्टाइल, ग्रीन में बदलें"</string>
-    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
-    <skip />
+    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"पॉइंटर फ़िल स्टाइल के तौर पर लाल रंग को चुनें"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"पॉइंटर फ़िल स्टाइल, पिंक में बदलें"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"पॉइंटर फ़िल स्टाइल, ब्लू में बदलें"</string>
-    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
-    <skip />
+    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"पॉइंटर फ़िल स्टाइल के तौर पर बैंगनी रंग को चुनें"</string>
+    <string name="pointer_stroke_style" msgid="139962661485972329">"पॉइंटर स्ट्रोक का रंग"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"सफ़ेद"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"काला"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"कोई नहीं"</string>
@@ -2038,6 +2023,7 @@
     <string name="pointer_scale" msgid="4941564570571663964">"माउस पॉइंटर का साइज़"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"माउस पॉइंटर का साइज़ कम करें"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"माउस पॉइंटर का साइज़ बढ़ाएं"</string>
+    <string name="pointer_scale_keywords" msgid="8939432511048322072">"स्केल, साइज़, पॉइंटर स्केल, पॉइंटर साइज़, बड़ा माउस पॉइंटर, बड़ा, ध्यान देने लायक"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"गेमनियंत्रक"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"वाइब्रेशन रिडायरेक्ट करें"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"कनेक्ट होने पर, गेम कंट्रोलर पर वाइब्रेशन हो"</string>
@@ -3384,8 +3370,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"कनेक्ट किए गए डिवाइसों की सेटिंग"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"स्पेशल ऑडियो"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"बंद है"</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"बंद है"</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"बंद है"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"समस्या ठीक की गई"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"हेड ट्रैकिंग चालू है"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{कोई शेड्यूल सेट नहीं है}=1{1 शेड्यूल सेट है}one{# शेड्यूल सेट है}other{# शेड्यूल सेट हैं}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"परेशान न करें"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"मोड"</string>
@@ -3453,7 +3439,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"इससे वॉलपेपर की चमक बदल जाती है"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"गहरे रंग वाली थीम चालू करें"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"इससे गहरे रंग वाली थीम चालू होती है"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"गहरे रंग के बैकग्राउंड पर हल्के रंग के टेक्स्ट को प्राथमिकता देने के लिए, ओएस और ऐप्लिकेशन पर स्विच करें. ऐसा करके, टेक्स्ट को देख पाना आसान हो जाता है. साथ ही, कुछ डिवाइसों पर बैटरी की काफ़ी बचत होती है"</string>
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"गहरे रंग वाले बैकग्राउंड का इस्तेमाल करने के लिए, डिवाइस की थीम को बदलें. इससे आंखों को आराम मिलता है"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{डिसप्ले में कोई बदलाव नहीं किया गया}=1{{effect_1}}=2{{effect_1} और {effect_2}}=3{{effect_1}, {effect_2}, और {effect_3}}one{{effect_1}, {effect_2}, और # अन्य}other{{effect_1}, {effect_2}, और # अन्य}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"सभी सूचनाओं को अनुमति दें"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"लोग, ऐप्लिकेशन, और आवाज़ें, प्राथमिकता मोड को बायपास कर सकती हैं"</string>
@@ -4025,7 +4011,7 @@
     <string name="filter_instant_apps" msgid="2292108467020380068">"इंस्टैंट ऐप्लिकेशन"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"वे ऐप जिनकी सूचनाएं ब्लॉक हैं"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"ऐडवांस"</string>
-    <string name="app_permissions" msgid="8666537659217653626">"अनुमतियों को मैनेज करना"</string>
+    <string name="app_permissions" msgid="8666537659217653626">"अनुमतियों को मैनेज करें"</string>
     <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"जगह की जानकारी का डेटा शेयर करने के तरीके के बारे में अपडेट"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"ऐसे ऐप्लिकेशन देखें जिनमें आपकी जगह की जानकारी के डेटा को शेयर करने का तरीका बदल दिया है"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"वेक करने के लिए टैप करें"</string>
@@ -4804,15 +4790,15 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"गलत नेटवर्क मोड <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. अनदेखा करें."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"सैटलाइट के ज़रिए मैसेज भेजें और पाएं. यह सुविधा, आपके खाते के लिए उपलब्ध नहीं है."</string>
-    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
-    <skip />
+    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"सैटलाइट के ज़रिए मैसेज भेजें और पाएं. आपके खाते से इस सुविधा का इस्तेमाल नहीं किया जा सकता."</string>
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा के बारे में जानकारी"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"अगर आपके पास <xliff:g id="CARRIER_NAME">%1$s</xliff:g> खाता है, तो आपके लिए सैटलाइट के ज़रिए मैसेज भेजने और पाने की सुविधा उपलब्ध है"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"आपका <xliff:g id="CARRIER_NAME">%1$s</xliff:g> प्लान"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"आपके खाते के प्लान में सैटलाइट के ज़रिए मैसेज भेजने की सुविधा शामिल है"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"आपके खाते के प्लान में सैटलाइट के ज़रिए मैसेज भेजने की सुविधा शामिल नहीं है"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा जोड़ें"</string>
+    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
+    <skip />
     <string name="category_name_how_it_works" msgid="585303230539269496">"यह सुविधा कैसे काम करती है"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"मोबाइल नेटवर्क न होने पर"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"आपका फ़ोन, सैटलाइट से अपने-आप कनेक्ट हो जाएगा. अच्छे कनेक्शन के लिए, यह ज़रूरी है कि आप किसी खुली जगह में हों और आसमान साफ़ हो."</string>
@@ -5395,6 +5381,13 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"इस फ़ोन के साथ काम करने वाला डिवाइस कनेक्ट करें"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"ऑडियो शेयर करने के लिए, सबसे पहले फ़ोन से LE Audio हेडफ़ोन कनेक्ट करें"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> पर स्विच करें"</string>
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"ऑडियो स्ट्रीम शुरू हो रहा है…"</string>
+    <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> के साथ ऑडियो शेयर किया जा रहा है…"</string>
+    <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> से डिवाइस कनेक्ट किया जा रहा है…"</string>
+    <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"ऑडियो शेयर नहीं किया जा सका"</string>
+    <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"कोई गड़बड़ी हुई. कृपया फिर से कोशिश करें."</string>
+    <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> के साथ ऑडियो शेयर नहीं किया जा सकता"</string>
+    <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"ऑडियो शेयर करने की सुविधा सिर्फ़ उन हेडफ़ोन के साथ काम करती है जिन पर LE Audio काम करता है"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"LE Audio स्ट्रीम से कनेक्ट करें"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"आस-पास होने वाली ऑडियो स्ट्रीम"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"ऑडियो स्ट्रीम"</string>
