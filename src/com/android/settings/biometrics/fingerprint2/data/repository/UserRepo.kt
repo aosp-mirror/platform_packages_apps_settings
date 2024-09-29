@@ -17,7 +17,10 @@
 package com.android.settings.biometrics.fingerprint2.data.repository
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.update
 
 /**
  * A repository responsible for indicating the current user.
@@ -27,8 +30,18 @@ interface UserRepo {
      * This flow indicates the current user.
      */
     val currentUser: Flow<Int>
+
+    /**
+     * Updates the current user.
+     */
+    fun updateUser(user: Int)
 }
 
-class UserRepoImpl(val currUser: Int): UserRepo {
-    override val currentUser: Flow<Int> = flowOf(currUser)
+class UserRepoImpl(currUser: Int): UserRepo {
+    private val _currentUser = MutableStateFlow(currUser)
+    override val currentUser = _currentUser.asStateFlow()
+
+    override fun updateUser(user: Int) {
+        _currentUser.update { user }
+    }
 }

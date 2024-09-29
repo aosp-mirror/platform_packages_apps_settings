@@ -80,6 +80,15 @@
         android:order="10"/>
 
     <Preference
+        android:key="contacts_storage"
+        android:title="@string/contacts_storage_settings_title"
+        android:summary="@string/summary_placeholder"
+        android:order="13"
+        settings:controller="com.android.settings.applications.contacts.ContactsStoragePreferenceController"
+        settings:keywords="@string/keywords_contacts_storage">
+    </Preference>
+
+    <Preference
         android:key="hibernated_apps"
         android:title="@string/unused_apps"
         android:summary="@string/summary_placeholder"

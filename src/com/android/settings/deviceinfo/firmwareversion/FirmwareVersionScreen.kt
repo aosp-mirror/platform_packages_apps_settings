@@ -20,7 +20,6 @@ import android.content.Context
 import android.os.Build
 import com.android.settings.R
 import com.android.settings.flags.Flags
-import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -47,16 +46,13 @@ class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(this) {
-            +PreferenceWidget("os_firmware_version", R.string.firmware_version)
-            +PreferenceWidget("security_key", R.string.security_patch)
-            +PreferenceWidget("module_version", R.string.module_version)
-            +PreferenceWidget("base_band", R.string.baseband_version)
-            +PreferenceWidget("kernel_version", R.string.kernel_version)
-            +PreferenceWidget("os_build_number", R.string.build_number)
+            +FirmwareVersionDetailPreference()
+            +SecurityPatchLevelPreference()
+            +MainlineModuleVersionPreference()
+            +BasebandVersionPreference()
+            +KernelVersionPreference()
+            +SimpleBuildNumberPreference()
         }
-
-    private class PreferenceWidget(override val key: String, override val title: Int) :
-        PreferenceMetadata
 
     companion object {
         const val KEY = "firmware_version"
