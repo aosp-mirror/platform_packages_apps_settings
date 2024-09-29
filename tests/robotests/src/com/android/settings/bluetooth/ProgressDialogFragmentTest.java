@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.connecteddevice.audiosharing;
+package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothStatusCodes;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -31,8 +28,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
-import com.android.settingslib.flags.Flags;
 
 import org.junit.After;
 import org.junit.Before;
@@ -43,36 +38,21 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(
-        shadows = {
-                ShadowAlertDialogCompat.class,
-                ShadowBluetoothAdapter.class,
-        })
-public class AudioSharingLoadingStateDialogFragmentTest {
+@Config(shadows = {ShadowAlertDialogCompat.class})
+public class ProgressDialogFragmentTest {
     @Rule public final MockitoRule mocks = MockitoJUnit.rule();
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String TEST_MESSAGE1 = "message1";
     private static final String TEST_MESSAGE2 = "message2";
 
     private Fragment mParent;
-    private AudioSharingLoadingStateDialogFragment mFragment;
 
     @Before
     public void setUp() {
         ShadowAlertDialogCompat.reset();
-        ShadowBluetoothAdapter shadowBluetoothAdapter =
-                Shadow.extract(BluetoothAdapter.getDefaultAdapter());
-        shadowBluetoothAdapter.setEnabled(true);
-        shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
-                BluetoothStatusCodes.FEATURE_SUPPORTED);
-        shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
-                BluetoothStatusCodes.FEATURE_SUPPORTED);
-        mFragment = new AudioSharingLoadingStateDialogFragment();
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
@@ -85,33 +65,21 @@ public class AudioSharingLoadingStateDialogFragmentTest {
 
     @Test
     public void getMetricsCategory_correctValue() {
+        ProgressDialogFragment fragment = ProgressDialogFragment.newInstance(mParent);
         // TODO: update real metric
-        assertThat(mFragment.getMetricsCategory())
-                .isEqualTo(0);
+        assertThat(fragment.getMetricsCategory()).isEqualTo(0);
     }
 
     @Test
-    public void onCreateDialog_flagOff_dialogNotExist() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingLoadingStateDialogFragment.show(mParent, TEST_MESSAGE1);
-        shadowMainLooper().idle();
-        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNull();
+    public void onCreateDialog_unattachedFragment_nullDialogFragment() {
+        ProgressDialogFragment fragment = ProgressDialogFragment.newInstance(new Fragment());
+        assertThat(fragment).isNull();
     }
 
     @Test
-    public void onCreateDialog_unattachedFragment_dialogNotExist() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingLoadingStateDialogFragment.show(new Fragment(), TEST_MESSAGE1);
-        shadowMainLooper().idle();
-        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNull();
-    }
-
-    @Test
-    public void onCreateDialog_flagOn_showDialog() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingLoadingStateDialogFragment.show(mParent, TEST_MESSAGE1);
+    public void onCreateDialog_showDialog() {
+        ProgressDialogFragment fragment = ProgressDialogFragment.newInstance(mParent);
+        fragment.show(TEST_MESSAGE1);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
@@ -123,36 +91,39 @@ public class AudioSharingLoadingStateDialogFragmentTest {
 
     @Test
     public void dismissDialog_succeed() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingLoadingStateDialogFragment.show(mParent, TEST_MESSAGE1);
+        ProgressDialogFragment fragment = ProgressDialogFragment.newInstance(mParent);
+        fragment.show(TEST_MESSAGE1);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
 
-        AudioSharingLoadingStateDialogFragment.dismiss(mParent);
+        fragment.dismissAllowingStateLoss();
         shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isFalse();
     }
 
     @Test
     public void showDialog_sameMessage_keepExistingDialog() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingLoadingStateDialogFragment.show(mParent, TEST_MESSAGE1);
+        ProgressDialogFragment fragment = ProgressDialogFragment.newInstance(mParent);
+        fragment.show(TEST_MESSAGE1);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
 
-        AudioSharingLoadingStateDialogFragment.show(mParent, TEST_MESSAGE1);
+        fragment.show(TEST_MESSAGE1);
         shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isTrue();
+        TextView view = dialog.findViewById(R.id.message);
+        assertThat(view).isNotNull();
+        assertThat(view.getText().toString()).isEqualTo(TEST_MESSAGE1);
     }
 
     @Test
     public void showDialog_newMessage_keepAndUpdateDialog() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        AudioSharingLoadingStateDialogFragment.show(mParent, TEST_MESSAGE1);
+        ProgressDialogFragment fragment = ProgressDialogFragment.newInstance(mParent);
+        fragment.show(TEST_MESSAGE1);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
@@ -161,7 +132,7 @@ public class AudioSharingLoadingStateDialogFragmentTest {
         assertThat(view).isNotNull();
         assertThat(view.getText().toString()).isEqualTo(TEST_MESSAGE1);
 
-        AudioSharingLoadingStateDialogFragment.show(mParent, TEST_MESSAGE2);
+        fragment.show(TEST_MESSAGE2);
         shadowMainLooper().idle();
         assertThat(dialog.isShowing()).isTrue();
         assertThat(view.getText().toString()).isEqualTo(TEST_MESSAGE2);

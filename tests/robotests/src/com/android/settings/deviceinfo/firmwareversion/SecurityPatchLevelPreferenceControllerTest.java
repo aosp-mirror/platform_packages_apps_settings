@@ -46,6 +46,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Collections;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class SecurityPatchLevelPreferenceControllerTest {
 
@@ -108,3 +109,4 @@ public class SecurityPatchLevelPreferenceControllerTest {
         verify(mContext).startActivity(any());
     }
 }
+// LINT.ThenChange(SecurityPatchLevelPreferenceTest.kt)

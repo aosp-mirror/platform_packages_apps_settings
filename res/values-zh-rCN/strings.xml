@@ -1308,8 +1308,8 @@
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"将在就寝时间过后自动关闭"</string>
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"将在“<xliff:g id="ID_1">%1$s</xliff:g>”结束时关闭"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"在某些屏幕上，深色主题使用纯黑背景，有助于延长您的电池续航时间。深色主题开启时间设置会等到屏幕进入关闭状态后才应用。"</string>
-    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"深色主题目前会按照就寝模式时间表开启/关闭"</string>
-    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"就寝模式设置"</string>
+    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"深色主题目前会按照睡眠模式时间表开启/关闭"</string>
+    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"睡眠模式设置"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{模式也可以启用深色主题}=1{“{mode_1}”也会启用深色主题}=2{“{mode_1}”和“{mode_2}”也会启用深色主题}=3{“{mode_1}”“{mode_2}”和“{mode_3}”也会启用深色主题}other{“{mode_1}”“{mode_2}”和另外 # 种模式也会启用深色主题}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"模式设置"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"调得更暗"</string>
@@ -1327,7 +1327,7 @@
     <string name="style_suggestion_summary" msgid="4271131877800968159">"尝试不同的样式、壁纸等"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"屏保"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"屏保"</string>
-    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"就寝模式开启时无法使用"</string>
+    <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"睡眠模式开启时无法使用"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"使用屏保"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充电或插入基座时"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"插入基座充电时"</string>
@@ -1976,8 +1976,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"点按右下角"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"点按触控板的右下角即可查看更多选项"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"指针速度"</string>
-    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="8794616790175016092">"指针颜色"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"将指针填充样式更改为黑色"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"将指针填充样式更改为绿色"</string>
     <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
@@ -2039,6 +2038,8 @@
     <string name="pointer_scale" msgid="4941564570571663964">"指针比例"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"减小指针比例"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"增大指针比例"</string>
+    <!-- no translation found for pointer_scale_keywords (8939432511048322072) -->
+    <skip />
     <string name="game_controller_settings_category" msgid="8557472715034961918">"游戏控制器"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"重定向振动"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"连接后将振动传到游戏控制器"</string>
@@ -2098,12 +2099,9 @@
     <string name="general_category_title" msgid="6298579528716834157">"常规"</string>
     <string name="display_category_title" msgid="6638191682294461408">"显示"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"色彩和动画"</string>
-    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
-    <skip />
+    <string name="accessibility_pointer_and_touchpad_title" msgid="8719482393177273831">"指针和触控板无障碍功能"</string>
+    <string name="accessibility_pointer_and_touchpad_summary" msgid="6089872217234956258">"指针颜色、指针大小等"</string>
+    <string name="accessibility_pointer_color_customization_title" msgid="3376392766113189508">"指针颜色自定义"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"颜色对比度"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"对比度越高，文字、按钮和图标越引人注目。请选择最符合您需求的对比度。"</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"某些应用可能仅支持部分颜色和文字对比度设置"</string>
@@ -3343,10 +3341,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"氛围屏保始终保持开启状态, AOD, always on ambient display, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, 标签, tag, 读取器, reader"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"键盘、触感反馈、振动、"</string>
-    <!-- no translation found for sound_dashboard_summary (8254699132423665654) -->
-    <skip />
-    <!-- no translation found for sound_dashboard_summary_with_dnd (731956092218394657) -->
-    <skip />
+    <string name="sound_dashboard_summary" msgid="8254699132423665654">"音量和振动"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"音量、振动、勿扰"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"媒体音量"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"投放音量"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"通话音量"</string>
@@ -3390,8 +3386,10 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"设置已连接的设备"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"空间音频"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"关闭"</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"关闭"</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"关闭"</string>
+    <!-- no translation found for spatial_audio_multi_toggle_on (4204808183659033003) -->
+    <skip />
+    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (4156440073634867249) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{无}=1{已设置 1 个时间表}other{已设置 # 个时间表}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"勿扰模式"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"模式"</string>
@@ -3459,7 +3457,8 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"调整壁纸亮度"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"启用深色主题"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"启用深色主题"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"将操作系统和应用设置切换到首选深色背景配浅色文本，这样可以减轻眼睛负担，并且在某些设备上能够显著节省电池电量"</string>
+    <!-- no translation found for mode_dark_theme_summary (2808149708986602464) -->
+    <skip />
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{无显示变化}=1{{effect_1}}=2{{effect_1}和{effect_2}}=3{{effect_1}、{effect_2}和{effect_3}}other{{effect_1}、{effect_2}和另外 # 个}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"允许所有通知"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"来电、应用和其他提示音例外"</string>
@@ -4818,7 +4817,8 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"您的<xliff:g id="CARRIER_NAME">%1$s</xliff:g>套餐"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"您的账号支持卫星消息功能"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"您的账号不支持卫星消息功能"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"添加卫星消息功能"</string>
+    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
+    <skip />
     <string name="category_name_how_it_works" msgid="585303230539269496">"运作方式"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"当您没有移动网络时"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"您的手机会自动连接到卫星。为获得最佳连接质量，请确保您身在能清楚看到天空的场所。"</string>
@@ -5120,7 +5120,7 @@
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"您将无法通过<xliff:g id="CARRIER">%s</xliff:g>使用移动数据网络或互联网，而只能通过 WLAN 连接到互联网。"</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"您的运营商"</string>
     <string name="not_allowed_by_ent" msgid="1958611623122304411">"您的组织不允许使用"</string>
-    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"就寝模式开启时无法使用"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"睡眠模式开启时无法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重置完成。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"应用"</string>
     <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"有设备想要访问您的消息。点按可了解详情。"</string>
@@ -5401,6 +5401,20 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"连接兼容设备"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"如要开始分享音频，请先将 LE 音频耳机连接到手机"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"切换到“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”"</string>
+    <!-- no translation found for audio_sharing_progress_dialog_start_stream_content (1152386358063502897) -->
+    <skip />
+    <!-- no translation found for audio_sharing_progress_dialog_add_source_content (2913609550496440710) -->
+    <skip />
+    <!-- no translation found for progress_dialog_connect_device_content (1387370883978461533) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_title (3954529199333866445) -->
+    <skip />
+    <!-- no translation found for audio_sharing_retry_dialog_content (6014534433894608834) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_title (4586805264392802115) -->
+    <skip />
+    <!-- no translation found for audio_sharing_incompatible_dialog_content (3943223683620405311) -->
+    <skip />
     <string name="audio_streams_category_title" msgid="4878022761829895463">"连接到 LE 音频串流"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"附近的音频流"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"音频流"</string>
@@ -5427,8 +5441,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"了解详情"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"无法通过“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”播放该音频流。"</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"正在收听"</string>
-    <!-- no translation found for audio_streams_present_now (1128360774541089402) -->
-    <skip />
+    <string name="audio_streams_present_now" msgid="1128360774541089402">"已被主机暂停"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"停止收听"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"连接兼容耳机"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"连接设备"</string>

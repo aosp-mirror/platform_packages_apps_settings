@@ -571,11 +571,15 @@
     <string name="roaming_warning">Roaming charges may apply.</string>
 
     <!-- Date & time setting screen setting switch title: whether the system clock (Unix epoch time) should be determined automatically [CHAR LIMIT=100] -->
-    <string name="date_time_auto">Set time automatically</string>
+    <string name="date_time_auto">Automatic date and time</string>
+    <!-- Date & time setting screen setting switch summary: whether the system clock (Unix epoch time) should be determined automatically [CHAR LIMIT=100] -->
+    <string name="date_time_auto_summary">Set automatically using your network and wireless signals</string>
     <!-- Date & time setting screen setting switch title: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
-    <string name="zone_auto_title">Set automatically</string>
+    <string name="zone_auto_title">Automatic time zone</string>
+    <!-- Date & time setting screen setting switch summary: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
+    <string name="zone_auto_title_summary">Set automatically based on mobile networks near you</string>
     <!-- Date & time setting screen setting switch summary for non-telephony devices [CHAR LIMIT=100] -->
-    <string name="auto_zone_requires_location_summary">Location will be used for setting the time zone when this toggle is on</string>
+    <string name="auto_zone_requires_location_summary">Set automatically using your device location, if available. An active Wifi connection may also be required.</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
     <string name="date_time_24hour_auto">Use locale default</string>
     <!-- Date & time setting screen setting check box title -->
@@ -3772,7 +3776,7 @@
     <string name="location_services_screen_title">Location services</string>
 
     <!-- [CHAR LIMIT=60] Date&Time settings screen, toggle button title -->
-    <string name="location_time_zone_detection_toggle_title">Use location</string>
+    <string name="location_time_zone_detection_toggle_title">Use location for time zone</string>
     <!-- [CHAR LIMIT=50] Date&Time settings screen, title of the dialog when AutoTimeZone is degraded -->
     <string name="location_time_zone_detection_status_title">Cannot set the time zone automatically</string>
     <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is degraded by settings-->
@@ -3800,7 +3804,7 @@
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          applicable due to other settings like the "automatic time zone detection enabled" setting
          being set to "off". -->
-    <string name="location_time_zone_detection_auto_is_off">Automatic time zone is off</string>
+    <string name="location_time_zone_detection_auto_is_off">Not available when automatic time zone is off</string>
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          applicable for the user for unspecified reasons. More specific messages are used when there
          is a clear reason. -->
@@ -3811,7 +3815,7 @@
          allowed for the user, e.g. because of device policy -->
     <string name="location_time_zone_detection_not_allowed">Location time zone detection changes are not allowed</string>
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is enabled. -->
-    <string name="location_time_zone_detection_auto_is_on">Location may be used to set time zone</string>
+    <string name="location_time_zone_detection_auto_is_on">If your device location is available, it may be used to set your time zone</string>
     <!-- Main settings screen, setting summary for the user to go into the About phone screen-->
     <string name="about_settings_summary">View legal info, status, software version</string>
     <!-- About phone settings screen, setting option name to go to dialog that shows legal info -->
@@ -8653,6 +8657,13 @@
     <!-- Configure Notifications: Title for the option controlling notifications for work profile. [CHAR LIMIT=30] -->
     <string name="locked_work_profile_notification_title">When work profile is locked</string>
 
+    <!-- Configure notifications: Title for the option controlling whether or not to minimalize the
+    number of notifications to show on the lock screen[CHAR LIMIT=60] -->
+    <string name="lock_screen_notif_minimalism">Lock screen notification minimalism</string>
+
+    <!-- Configure notifications: Summary for option lock_screen_notif_minimalism. [CHAR LIMIT=100] -->
+    <string name="lock_screen_notif_minimalism_summary">Show fewer notifications on lock screen</string>
+
     <!-- Configure notifications: Title for the option controlling whether only new notifications are displayed to the user
     on the lock screen [CHAR LIMIT=60] -->
     <string name="unseen_notifs_lock_screen">Show only new notifications on lock screen</string>
@@ -9581,6 +9592,9 @@
     <!-- Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
     <string name="zen_mode_edit_name_hint">Mode name</string>
 
+    <!-- Modes: Text shown above the list of icons in the mode editor. [CHAR LIMIT=40] -->
+    <string name="zen_mode_edit_choose_icon_title">Choose an icon</string>
+
     <!-- Modes: Trigger title for modes of type SCHEDULE_CALENDAR. [CHAR LIMIT=30] -->
     <string name="zen_mode_trigger_title_schedule_calendar">Calendar events</string>
     <!-- Modes: Trigger title for modes of type BEDTIME. [CHAR LIMIT=30] -->
@@ -9762,8 +9776,10 @@
     <string name="launch_by_default">Open by default</string>
 
     <string name="app_launch_open_domain_urls_title">Open supported links</string>
+    <string name="app_launch_open_in_app">In the app</string>
+    <string name="app_launch_open_in_browser">In your browser</string>
     <!-- Preference title for Supported links open in this app. [CHAR LIMIT=60] -->
-    <string name="app_launch_top_intro_message">Allow web links to open in this app</string>
+    <string name="app_launch_top_intro_message">Choose how to open web links for this app</string>
     <!-- Preference title for Links to open in this app. [CHAR LIMIT=60] -->
     <string name="app_launch_links_category">Links to open in this app</string>
 
@@ -12141,8 +12157,8 @@
     <string name="title_have_satellite_plan">Satellite messaging is included with your account</string>
     <!-- Title for category "Your mobile plan when satellite is not included in plan" [CHAR_LIMIT=NONE] -->
     <string name="title_no_satellite_plan">Satellite messaging isn\u2019t included with your account</string>
-    <!-- text view add satellite messaging" [CHAR_LIMIT=NONE] -->
-    <string name="summary_add_satellite_setting">Add satellite messaging</string>
+    <!-- text view "Learn more" [CHAR_LIMIT=NONE] -->
+    <string name="summary_add_satellite_setting">Learn More</string>
     <!-- Category name "How it works" [CHAR_LIMIT=NONE] -->
     <string name="category_name_how_it_works">How it works</string>
     <!-- Title for satellite connection guide [CHAR_LIMIT=NONE] -->
@@ -13668,4 +13684,11 @@
 
     <!-- Text for Search bar of Settings home screen [CHAR LIMIT=34] -->
     <string name="homepage_search">Search Settings</string>
+
+    <!-- Keywords for contacts storage item [CHAR LIMIT=NONE] -->
+    <string name="keywords_contacts_storage">contacts, storage, account</string>
+    <!-- Text for Contacts Storage Settings title [CHAR LIMIT=50]-->
+    <string name="contacts_storage_settings_title">Contacts storage</string>
+    <!-- Text for displaying when no account is set as default account [CHAR LIMIT=50] -->
+    <string name="contacts_storage_no_account_set">No default set</string>
 </resources>

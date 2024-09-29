@@ -26,7 +26,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 
+import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
@@ -68,6 +70,11 @@ public class AudioSharingIncompatibleDialogFragment extends InstrumentedDialogFr
             Log.d(TAG, "Fail to show dialog: " + e.getMessage());
             return;
         }
+        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            Log.d(TAG, "Fail to show dialog with state: " + currentState);
+            return;
+        }
         sListener = listener;
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
         if (dialog != null) {
@@ -88,15 +95,14 @@ public class AudioSharingIncompatibleDialogFragment extends InstrumentedDialogFr
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Bundle arguments = requireArguments();
         String deviceName = arguments.getString(BUNDLE_KEY_DEVICE_NAME);
-        // TODO: move strings to res once they are finalized
         AlertDialog dialog =
                 AudioSharingDialogFactory.newBuilder(getActivity())
-                        .setTitle("Can't share audio with " + deviceName)
-                        .setTitleIcon(com.android.settings.R.drawable.ic_warning_24dp)
+                        .setTitle(getString(R.string.audio_sharing_incompatible_dialog_title,
+                                deviceName))
+                        .setTitleIcon(R.drawable.ic_warning_24dp)
                         .setIsCustomBodyEnabled(true)
-                        .setCustomMessage(
-                                "Audio sharing only works with headphones that support LE Audio.")
-                        .setPositiveButton(com.android.settings.R.string.okay, (d, w) -> {})
+                        .setCustomMessage(R.string.audio_sharing_incompatible_dialog_content)
+                        .setPositiveButton(R.string.okay, (d, w) -> {})
                         .build();
         dialog.setCanceledOnTouchOutside(true);
         return dialog;

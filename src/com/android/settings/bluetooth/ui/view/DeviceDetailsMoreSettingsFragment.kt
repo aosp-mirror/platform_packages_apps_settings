@@ -16,9 +16,11 @@
 
 package com.android.settings.bluetooth.ui.view
 
+import android.app.settings.SettingsEnums
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.Menu
@@ -48,8 +50,7 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
     private lateinit var cachedDevice: CachedBluetoothDevice
     private lateinit var helpItem: StateFlow<DeviceSettingPreferenceModel.HelpPreference?>
 
-    // TODO(b/343317785): add metrics category
-    override fun getMetricsCategory(): Int = 0
+    override fun getMetricsCategory(): Int = SettingsEnums.BLUETOOTH_DEVICE_DETAILS_MORE_SETTINGS
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
@@ -73,7 +74,10 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == MENU_HELP_ITEM_ID) {
-            helpItem.value?.let { it.onClick() }
+            helpItem.value?.intent?.let {
+                it.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                requireContext().startActivity(it)
+            }
             return true
         }
         return super.onOptionsItemSelected(menuItem)

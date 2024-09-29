@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -40,8 +41,8 @@ import com.google.common.base.Strings;
 
 import java.util.concurrent.TimeUnit;
 
-public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFragment {
-    private static final String TAG = "AudioSharingLoadingDlg";
+public class AudioSharingProgressDialogFragment extends InstrumentedDialogFragment {
+    private static final String TAG = "AudioSharingProgressDlg";
 
     private static final String BUNDLE_KEY_MESSAGE = "bundle_key_message";
     private static final long AUTO_DISMISS_TIME_THRESHOLD_MS = TimeUnit.SECONDS.toMillis(15);
@@ -58,7 +59,7 @@ public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFr
     }
 
     /**
-     * Display the {@link AudioSharingLoadingStateDialogFragment} dialog.
+     * Display the {@link AudioSharingProgressDialogFragment} dialog.
      *
      * @param host    The Fragment this dialog will be hosted by.
      * @param message The content to be shown on the dialog.
@@ -72,6 +73,11 @@ public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFr
             Log.d(TAG, "Fail to show dialog: " + e.getMessage());
             return;
         }
+        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            Log.d(TAG, "Fail to show dialog with state: " + currentState);
+            return;
+        }
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
         if (dialog != null) {
             if (!sMessage.equals(message)) {
@@ -80,21 +86,21 @@ public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFr
                 if (messageView != null) {
                     messageView.setText(message);
                 }
+                sMessage = message;
             }
             Log.d(TAG, "Dialog is showing, return.");
             return;
         }
         sMessage = message;
-        Log.d(TAG, "Show up the loading dialog.");
+        Log.d(TAG, "Show up the progress dialog.");
         Bundle args = new Bundle();
         args.putString(BUNDLE_KEY_MESSAGE, message);
-        AudioSharingLoadingStateDialogFragment dialogFrag =
-                new AudioSharingLoadingStateDialogFragment();
+        AudioSharingProgressDialogFragment dialogFrag = new AudioSharingProgressDialogFragment();
         dialogFrag.setArguments(args);
         dialogFrag.show(manager, TAG);
     }
 
-    /** Dismiss the {@link AudioSharingLoadingStateDialogFragment} dialog. */
+    /** Dismiss the {@link AudioSharingProgressDialogFragment} dialog. */
     public static void dismiss(@Nullable Fragment host) {
         if (host == null || !BluetoothUtils.isAudioSharingEnabled()) return;
         final FragmentManager manager;
@@ -119,7 +125,7 @@ public class AudioSharingLoadingStateDialogFragment extends InstrumentedDialogFr
         String message = args.getString(BUNDLE_KEY_MESSAGE, "");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = LayoutInflater.from(builder.getContext());
-        View customView = inflater.inflate(R.layout.dialog_audio_sharing_loading_state, /* root= */
+        View customView = inflater.inflate(R.layout.dialog_audio_sharing_progress, /* root= */
                 null);
         TextView textView = customView.findViewById(R.id.message);
         if (!Strings.isNullOrEmpty(message)) textView.setText(message);

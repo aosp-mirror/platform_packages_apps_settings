@@ -225,7 +225,8 @@ public class AutoTimeZonePreferenceControllerTest {
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
         when(mTimeManager.updateTimeZoneConfiguration(Mockito.any())).thenReturn(true);
 
-        assertThat(mController.getSummary()).isEqualTo("");
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.zone_auto_title_summary));
 
         capabilitiesAndConfig = createCapabilitiesAndConfig(
                 /* autoSupported= */true, /* autoEnabled= */true, /* telephonySupported= */
@@ -233,7 +234,7 @@ public class AutoTimeZonePreferenceControllerTest {
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
         when(mTimeManager.updateTimeZoneConfiguration(Mockito.any())).thenReturn(true);
 
-        assertThat(mController.getSummary()).isEqualTo(
+        assertThat(mController.getSummary().toString()).isEqualTo(
                 mContext.getString(R.string.auto_zone_requires_location_summary));
     }
 
