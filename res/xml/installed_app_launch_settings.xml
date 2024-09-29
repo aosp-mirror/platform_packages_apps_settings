@@ -19,9 +19,15 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/launch_by_default">
 
-    <com.android.settingslib.widget.MainSwitchPreference
-        android:key="open_by_default_supported_links"
-        android:title="@string/app_launch_open_domain_urls_title"/>
+    <PreferenceCategory>
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
+            android:key="app_launch_open_in_app"
+            android:title="@string/app_launch_open_in_app"/>
+
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
+            android:key="app_launch_open_in_browser"
+            android:title="@string/app_launch_open_in_browser"/>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:layout="@layout/preference_category_no_label"

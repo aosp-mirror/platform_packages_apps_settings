@@ -21,6 +21,7 @@ import android.content.Context;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
 
+// LINT.IfChange
 public class KernelVersionPreferenceController extends BasePreferenceController {
 
     public KernelVersionPreferenceController(Context context, String preferenceKey) {
@@ -37,3 +38,4 @@ public class KernelVersionPreferenceController extends BasePreferenceController 
         return DeviceInfoUtils.getFormattedKernelVersion(mContext);
     }
 }
+// LINT.ThenChange(KernelVersionPreference.kt)

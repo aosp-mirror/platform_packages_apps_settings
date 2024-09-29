@@ -31,15 +31,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -71,8 +68,9 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     private volatile BluetoothDevice mJustBonded = null;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+    @VisibleForTesting
     @Nullable
-    private AlertDialog mLoadingDialog = null;
+    ProgressDialogFragment mProgressDialog = null;
     @VisibleForTesting
     boolean mShouldTriggerAudioSharingShareThenPairFlow = false;
     private CopyOnWriteArrayList<BluetoothDevice> mDevicesWithMetadataChangedListener =
@@ -89,7 +87,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     // In share then pair flow, we have to wait on this page till the device is connected.
     // The BluetoothDevicePreference summary will be blank for seconds between "Pairing..." and
     // "Connecting..." To help users better understand the process, we listen to metadata change
-    // as well and show a loading dialog with "Connecting to ...." once BluetoothDevice.getState()
+    // as well and show a progress dialog with "Connecting to ...." once BluetoothDevice.getState()
     // gets to BOND_BONDED.
     final BluetoothAdapter.OnMetadataChangedListener mMetadataListener =
             new BluetoothAdapter.OnMetadataChangedListener() {
@@ -97,7 +95,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
                 public void onMetadataChanged(@NonNull BluetoothDevice device, int key,
                         @Nullable byte[] value) {
                     Log.d(getLogTag(), "onMetadataChanged device = " + device + ", key  = " + key);
-                    if (mShouldTriggerAudioSharingShareThenPairFlow && mLoadingDialog == null
+                    if (mShouldTriggerAudioSharingShareThenPairFlow && mProgressDialog == null
                             && device.getBondState() == BluetoothDevice.BOND_BONDED
                             && mSelectedList.contains(device)) {
                         triggerAudioSharingShareThenPairFlow(device);
@@ -355,11 +353,11 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
                 return;
             }
             mJustBonded = device;
-            // Show connecting device loading state
+            // Show connecting device progress
             String aliasName = device.getAlias();
             String deviceName = TextUtils.isEmpty(aliasName) ? device.getAddress()
                     : aliasName;
-            showConnectingDialog("Connecting to " + deviceName + "...");
+            showConnectingDialog(deviceName);
             // Wait for AUTO_DISMISS_TIME_THRESHOLD_MS and check if the paired device supports audio
             // sharing.
             if (!mHandler.hasMessages(AUTO_DISMISS_MESSAGE_ID)) {
@@ -384,41 +382,24 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
         finish();
     }
 
-    // TODO: use DialogFragment
-    private void showConnectingDialog(@NonNull String message) {
+    private void showConnectingDialog(@NonNull String deviceName) {
         postOnMainThread(() -> {
-            if (mLoadingDialog != null) {
-                Log.d(getLogTag(), "showConnectingDialog, is already showing");
-                TextView textView = mLoadingDialog.findViewById(R.id.message);
-                if (textView != null && !message.equals(textView.getText().toString())) {
-                    Log.d(getLogTag(), "showConnectingDialog, update message");
-                    // TODO: use string res once finalized
-                    textView.setText(message);
-                }
-                return;
+            String message = getContext().getString(R.string.progress_dialog_connect_device_content,
+                    deviceName);
+            if (mProgressDialog == null) {
+                mProgressDialog = ProgressDialogFragment.newInstance(this);
             }
-            Log.d(getLogTag(), "showConnectingDialog, show dialog");
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = LayoutInflater.from(builder.getContext());
-            View customView = inflater.inflate(
-                    R.layout.dialog_audio_sharing_loading_state, /* root= */
-                    null);
-            TextView textView = customView.findViewById(R.id.message);
-            if (textView != null) {
-                // TODO: use string res once finalized
-                textView.setText(message);
+            if (mProgressDialog != null) {
+                mProgressDialog.show(message);
             }
-            AlertDialog dialog = builder.setView(customView).setCancelable(false).create();
-            dialog.setCanceledOnTouchOutside(false);
-            mLoadingDialog = dialog;
-            dialog.show();
         });
     }
 
     private void dismissConnectingDialog() {
         postOnMainThread(() -> {
-            if (mLoadingDialog != null) {
-                mLoadingDialog.dismiss();
+            if (mProgressDialog != null) {
+                Log.d(getLogTag(), "Dismiss connecting dialog.");
+                mProgressDialog.dismissAllowingStateLoss();
             }
         });
     }

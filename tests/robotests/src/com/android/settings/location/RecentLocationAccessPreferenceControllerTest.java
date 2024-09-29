@@ -17,12 +17,15 @@ package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
+import android.location.LocationManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -65,7 +68,8 @@ public class RecentLocationAccessPreferenceControllerTest {
     private DashboardFragment mDashboardFragment;
     @Mock
     private RecentAppOpsAccess mRecentLocationApps;
-
+    @Mock
+    private LocationManager mLocationManager;
     private Context mContext;
     private RecentLocationAccessPreferenceController mController;
     private View mAppEntitiesHeaderView;
@@ -129,5 +133,24 @@ public class RecentLocationAccessPreferenceControllerTest {
         Settings.Secure.putInt(
                 mContext.getContentResolver(), Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 1);
         verify(mLayoutPreference, Mockito.times(1)).addPreference(Mockito.any());
+    }
+
+    @Test
+    public void testPreferenceClick_onExtraLocationPackage_startsExtraLocationActivity() {
+        String extraLocationPkgName = "extraLocationPkgName";
+        when(mContext.getSystemService(LocationManager.class)).thenReturn(mLocationManager);
+        when(mLocationManager.getExtraLocationControllerPackage()).thenReturn(extraLocationPkgName);
+        RecentLocationAccessPreferenceController.PackageEntryClickedListener listener =
+                new RecentLocationAccessPreferenceController.PackageEntryClickedListener(
+                        mContext, extraLocationPkgName, UserHandle.CURRENT);
+        doNothing().when(mContext).startActivityAsUser(Mockito.refEq(new Intent(
+                Settings.ACTION_LOCATION_CONTROLLER_EXTRA_PACKAGE_SETTINGS)),
+                Mockito.eq(UserHandle.CURRENT));
+
+        listener.onPreferenceClick(mLayoutPreference);
+
+        verify(mContext).startActivityAsUser(Mockito.refEq(new Intent(
+                Settings.ACTION_LOCATION_CONTROLLER_EXTRA_PACKAGE_SETTINGS)),
+                Mockito.eq(UserHandle.CURRENT));
     }
 }

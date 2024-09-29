@@ -17,6 +17,7 @@ package com.android.settings.deviceinfo.legal;
 import android.content.Context;
 import android.content.Intent;
 
+// LINT.IfChange
 public class WebViewLicensePreferenceController extends LegalPreferenceController {
 
     private static final Intent INTENT = new Intent("android.settings.WEBVIEW_LICENSE");
@@ -30,3 +31,4 @@ public class WebViewLicensePreferenceController extends LegalPreferenceControlle
         return INTENT;
     }
 }
+// LINT.ThenChange(LegalPreference.kt)
