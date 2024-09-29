@@ -25,6 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -44,10 +45,14 @@ import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.util.Pair;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -56,10 +61,13 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -99,14 +107,16 @@ import java.util.concurrent.Executor;
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
-            ShadowBluetoothAdapter.class,
-            ShadowBluetoothUtils.class,
-            ShadowFragment.class,
+                ShadowBluetoothAdapter.class,
+                ShadowBluetoothUtils.class,
+                ShadowFragment.class,
+                ShadowAudioManager.class,
         })
 public class AudioSharingDevicePreferenceControllerTest {
     private static final String KEY = "audio_sharing_device_list";
     private static final String KEY_AUDIO_SHARING_SETTINGS =
             "connected_device_audio_sharing_settings";
+    private static final String TEST_DEVICE_NAME = "test";
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -140,6 +150,7 @@ public class AudioSharingDevicePreferenceControllerTest {
     private PreferenceCategory mPreferenceGroup;
     private Preference mAudioSharingPreference;
     private FakeFeatureFactory mFeatureFactory;
+    private AudioManager mAudioManager;
 
     @Before
     public void setUp() {
@@ -153,6 +164,7 @@ public class AudioSharingDevicePreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mAudioManager = mContext.getSystemService(AudioManager.class);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
         mLocalBtManager = Utils.getLocalBtManager(mContext);
         when(mLocalBtManager.getEventManager()).thenReturn(mEventManager);
@@ -570,5 +582,52 @@ public class AudioSharingDevicePreferenceControllerTest {
         // Above callbacks won't update group preference and log actions
         verify(mBluetoothDeviceUpdater, never()).forceUpdate();
         verifyNoMoreInteractions(mFeatureFactory.metricsFeatureProvider);
+    }
+
+    @Test
+    public void testInCallState_showCallStateTitleAndSetActiveOnDeviceClick() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mController.displayPreference(mScreen);
+
+        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        mController.onAudioModeChanged();
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mPreferenceGroup.getTitle().toString())
+                .isEqualTo(mContext.getString(R.string.connected_device_call_device_title));
+
+        BluetoothDevicePreference preference = createBluetoothDevicePreference();
+        mController.onDeviceClick(preference);
+        verify(mCachedDevice).setActive();
+    }
+
+    @Test
+    public void testInNormalState_showNormalStateTitleAndDoNothingOnDeviceClick() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mController.displayPreference(mScreen);
+
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mController.onAudioModeChanged();
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mPreferenceGroup.getTitle().toString())
+                .isEqualTo(mContext.getString(R.string.audio_sharing_device_group_title));
+
+        BluetoothDevicePreference preference = createBluetoothDevicePreference();
+        mController.onDeviceClick(preference);
+
+        verify(mCachedDevice, never()).setActive();
+    }
+
+    @NonNull
+    private BluetoothDevicePreference createBluetoothDevicePreference() {
+        Drawable drawable = mock(Drawable.class);
+        Pair<Drawable, String> pairs = new Pair<>(drawable, TEST_DEVICE_NAME);
+        when(mCachedDevice.getDrawableWithDescription()).thenReturn(pairs);
+        return new BluetoothDevicePreference(
+                        mContext,
+                        mCachedDevice,
+                        /* showDeviceWithoutNames= */ false,
+                        BluetoothDevicePreference.SortType.TYPE_DEFAULT);
     }
 }
