@@ -139,7 +139,6 @@ public class AudioStreamsHelper {
     }
 
     /** Retrieves a list of all LE broadcast receive states from active sinks. */
-    @VisibleForTesting
     public List<BluetoothLeBroadcastReceiveState> getAllConnectedSources() {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "getAllSources(): LeBroadcastAssistant is null!");
@@ -165,7 +164,6 @@ public class AudioStreamsHelper {
     }
 
     /** Retrieves LocalBluetoothLeBroadcastAssistant. */
-    @VisibleForTesting
     @Nullable
     public LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
         return mLeBroadcastAssistant;
