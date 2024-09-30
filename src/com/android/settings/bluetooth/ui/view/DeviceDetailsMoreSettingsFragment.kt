@@ -27,6 +27,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
+import com.android.settings.bluetooth.BluetoothDetailsAudioDeviceTypeController
 import com.android.settings.bluetooth.BluetoothDetailsProfilesController
 import com.android.settings.bluetooth.Utils
 import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
@@ -140,7 +141,14 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
                 formatter.getInvisibleBluetoothProfiles(
                     FragmentTypeModel.DeviceDetailsMoreSettingsFragment
                 ),
-            )
+            ),
+            BluetoothDetailsAudioDeviceTypeController(
+                context,
+                this,
+                localBluetoothManager,
+                cachedDevice,
+                settingsLifecycle,
+            ),
         )
     }
 
