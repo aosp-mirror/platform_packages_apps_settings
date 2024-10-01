@@ -204,10 +204,10 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
             // day label.
             dayToggle.setTextOn(mShortDayFormat.format(c.getTime()));
             dayToggle.setTextOff(mShortDayFormat.format(c.getTime()));
-            String state = dayEnabled
-                    ? mContext.getString(com.android.internal.R.string.capital_on)
-                    : mContext.getString(com.android.internal.R.string.capital_off);
-            dayToggle.setStateDescription(mLongDayFormat.format(c.getTime()) + ", " + state);
+            dayToggle.setContentDescription(mLongDayFormat.format(c.getTime()));
+            dayToggle.setStateDescription(mContext.getString(dayEnabled
+                    ? com.android.internal.R.string.capital_on
+                    : com.android.internal.R.string.capital_off));
 
             dayToggle.setChecked(dayEnabled);
             dayToggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
