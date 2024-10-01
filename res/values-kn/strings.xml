@@ -100,8 +100,8 @@
     <string name="device_picker" msgid="2427027896389445414">"ಬ್ಲೂಟೂತ್ ಸಾಧನ ಆರಿಸಿ"</string>
     <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"ಬ್ಲೂಟೂತ್‌ ಆನ್ ಮಾಡಲು <xliff:g id="APP_NAME">%1$s</xliff:g> ಬಯಸುತ್ತದೆ"</string>
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"ಬ್ಲೂಟೂತ್‌ ಆಫ್ ಮಾಡಲು <xliff:g id="APP_NAME">%1$s</xliff:g> ಬಯಸುತ್ತದೆ"</string>
-    <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"ಬ್ಲೂಟೂತ್‌‌ ಆನ್‌ ಮಾಡಲು ಅಪ್ಲಿಕೇಶನ್‌ ಬಯಸುತ್ತದೆ"</string>
-    <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"ಬ್ಲೂಟೂತ್‌‌ ಆಫ್ ಮಾಡಲು ಅಪ್ಲಿಕೇಶನ್‌ ಬಯಸುತ್ತದೆ"</string>
+    <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"ಬ್ಲೂಟೂತ್‌‌ ಆನ್‌ ಮಾಡಲು ಆ್ಯಪ್‌ ಬಯಸುತ್ತದೆ"</string>
+    <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"ಬ್ಲೂಟೂತ್‌‌ ಆಫ್ ಮಾಡಲು ಆ್ಯಪ್ ಬಯಸುತ್ತದೆ"</string>
     <string name="bluetooth_turning_on" msgid="3842613808709024730">"ಬ್ಲೂಟೂತ್‌‌ ಆನ್ ಮಾಡಲಾಗುತ್ತಿದೆ..."</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"ಬ್ಲೂಟೂತ್‌‌ ಅನ್ನು ಆಫ್‌ ಮಾಡಲಾಗುತ್ತಿದೆ..."</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"ಬ್ಲೂಟೂತ್‌‌ ಸಂಪರ್ಕ ವಿನಂತಿ"</string>
@@ -246,9 +246,16 @@
     <string name="roaming_enable" msgid="7845716016861535340">"ರೋಮಿಂಗ್‌ನಲ್ಲಿರುವಾಗ ಡೇಟಾ ಸೇವೆಗಳಿಗೆ ಸಂಪರ್ಕಪಡಿಸು"</string>
     <string name="roaming_disable" msgid="729512894708689604">"ರೋಮಿಂಗ್‌ನಲ್ಲಿರುವಾಗ ಡೇಟಾ ಸೇವೆಗಳಿಗೆ ಕನೆಕ್ಟ್ ಮಾಡಿ"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"ರೋಮಿಂಗ್ ಶುಲ್ಕಗಳು ಅನ್ವಯವಾಗಬಹುದು."</string>
-    <string name="date_time_auto" msgid="4239202185055225869">"ಸಮಯವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಸೆಟ್ ಮಾಡಿ"</string>
-    <string name="zone_auto_title" msgid="5141692422373097957">"ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಸೆಟ್ ಮಾಡಿ"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"ಈ ಟಾಗಲ್ ಆನ್ ಆಗಿರುವಾಗ ಸಮಯ ವಲಯವನ್ನು ಸೆಟ್ ಮಾಡಲು ಸ್ಥಳವನ್ನು ಬಳಸಲಾಗುತ್ತದೆ"</string>
+    <!-- no translation found for date_time_auto (1759599045100040686) -->
+    <skip />
+    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
+    <skip />
+    <!-- no translation found for zone_auto_title (3520584257065861479) -->
+    <skip />
+    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
+    <skip />
+    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
+    <skip />
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"ಭಾಷೆ ಡೀಫಾಲ್ಟ್ ಬಳಸಿ"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-ಗಂಟೆ ಫಾರ್ಮ್ಯಾಟ್‌‌ ಬಳಸಿ"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"ಸಮಯ"</string>
@@ -412,28 +419,17 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"ಮುಖ, ಫಿಂಗರ್‌‍‍‍ಪ್ರಿಂಟ್‌ ಮತ್ತು <xliff:g id="WATCH">%s</xliff:g> ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"ಮುಖ ಮತ್ತು ಫಿಂಗರ್‌‍‍‍ಪ್ರಿಂಟ್‌ಗಳನ್ನು, ಮತ್ತು <xliff:g id="WATCH">%s</xliff:g> ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"ಗುರುತಿನ ಪರಿಶೀಲನೆ ಆನ್ ಆಗಿದೆ ಮತ್ತು ಬಯೋಮೆಟ್ರಿಕ್ ಅಗತ್ಯವಿದೆ"</string>
-    <!-- no translation found for go_to_settings (4394928396153474179) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
-    <skip />
-    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
-    <skip />
+    <string name="go_to_settings" msgid="4394928396153474179">"ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"ಗುರುತಿನ ಪರಿಶೀಲನೆ ಆನ್ ಆಗಿದೆ ಮತ್ತು ಇದು ನೀವೇ ಎಂದು ಪರಿಶೀಲಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
+    <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"ಬಯೋಮೆಟ್ರಿಕ್ಸ್ ಹಲವು ಬಾರಿ ವಿಫಲವಾಗಿದೆ. ಮರುಪ್ರಯತ್ನಿಸಲು ನಿಮ್ಮ ಸಾಧನವನ್ನು ಲಾಕ್ ಮಾಡಿ ಮತ್ತು ಅನ್‌ಲಾಕ್ ಮಾಡಿ."</string>
+    <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"ಬಯೋಮೆಟ್ರಿಕ್ಸ್ ಹಲವು ಬಾರಿ ವಿಫಲವಾಗಿದೆ. ಪುನಃ ಪ್ರಯತ್ನಿಸಿ."</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"\'ಕಳ್ಳತನದಿಂದ ರಕ್ಷಣೆ\' ಯ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ನೀವು ಗುರುತಿನ ಪರಿಶೀಲನೆಯನ್ನು ನಿರ್ವಹಿಸಬಹುದು. ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ"</string>
+    <string name="identity_check_general_error_title" msgid="5073929400896102674">"ಮುಂದುವರಿಸಲು ಬಯೋಮೆಟ್ರಿಕ್ ಅಗತ್ಯವಿದೆ"</string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"ಗುರುತಿನ ಪರಿಶೀಲನೆ ಆನ್ ಆಗಿದೆ ಮತ್ತು ಬಯೋಮೆಟ್ರಿಕ್‌ನ ಅಗತ್ಯವಿದೆ, ಆದರೆ ನಿಮ್ಮ ಫೇಸ್ ಮತ್ತು ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಸೆನ್ಸರ್‌‌ ಲಭ್ಯವಿಲ್ಲ\n"<ul><li>"ನಿಮ್ಮ ಕ್ಯಾಮರಾ ಆನ್ ಆಗಿದೆಯೇ ಎಂಬುದನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಪುನಃ ಪ್ರಯತ್ನಿಸಿ"</li>\n<li>"ನಿಮ್ಮ Google ಖಾತೆಯನ್ನು ಬಳಸಿಕೊಂಡು ನೀವು ಗುರುತಿನ ಪರಿಶೀಲನೆಯನ್ನು ಆಫ್ ಮಾಡಬಹುದು"</li></ul></string>
+    <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"ರದ್ದುಮಾಡಿ"</string>
+    <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"ಸರಿ"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"ಗುರುತಿನ ಪರಿಶೀಲನೆಗೆ ಹೋಗಿ"</string>
+    <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"ಲಾಕ್ ಸ್ಕ್ರೀನ್"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"ರಿಮೋಟ್ Authenticator ಅನ್‌ಲಾಕ್"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"ವಾಚ್ ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"ನಿಮ್ಮ ವಾಚ್ ಸೆಟಪ್ ಮಾಡಿ"</string>
@@ -935,7 +931,7 @@
     <string name="android_beam_on_summary" msgid="6067720758437490896">"NFC ಮೂಲಕ ಆಪ್ಲಿಕೇಶನ್ ವಿಷಯವನ್ನು ಪ್ರಸಾರ ಮಾಡಲು ಸಿದ್ಧವಾಗಿದೆ"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"ಆಫ್"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"NFC ಅನ್ನು ಆಫ್ ಮಾಡಿರುವ ಕಾರಣ ಲಭ್ಯವಿಲ್ಲ"</string>
-    <string name="android_beam_explained" msgid="5684416131846701256">"ಈ ವೈಶಿಷ್ಟ್ಯವು ಆನ್‌ ಆಗಿರುವಾಗ, ಸಾಧನಗಳನ್ನು ಒಂದಕ್ಕೊಂದು ಹತ್ತಿರ ತರುವ ಮೂಲಕ ಮತ್ತೊಂದು NFC-ಸಾಮರ್ಥ್ಯದ ಸಾಧನಕ್ಕೆ ಅಪ್ಲಿಕೇಶನ್ ವಿಷಯವನ್ನು ಬೀಮ್ ಮಾಡಬಹುದು. ಉದಾಹರಣೆಗೆ, ವೆಬ್‌ ಪುಟಗಳು, YouTube ವೀಡಿಯೊಗಳು, ಜನರ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಇನ್ನೂ ಹಲವನ್ನು ನೀವು ಬೀಮ್ ಮಾಡಬಹುದು.\n\n ಸಾಧನಗಳನ್ನು ಹತ್ತಿರ ತನ್ನಿ ಸಾಕು (ಹಿಮ್ಮುಖವಾಗಿ), ನಂತರ ನಿಮ್ಮ ಪರದೆಯನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ. ಯಾವುದನ್ನು ಬೀಮ್ ಮಾಡಬೇಕು ಎಂಬುದನ್ನು ಅಪ್ಲಿಕೇಶನ್ ನಿರ್ಧರಿಸುತ್ತದೆ."</string>
+    <string name="android_beam_explained" msgid="5684416131846701256">"ಈ ವೈಶಿಷ್ಟ್ಯವು ಆನ್‌ ಆಗಿರುವಾಗ, ಸಾಧನಗಳನ್ನು ಒಂದಕ್ಕೊಂದು ಹತ್ತಿರ ತರುವ ಮೂಲಕ ಮತ್ತೊಂದು NFC-ಸಾಮರ್ಥ್ಯದ ಸಾಧನಕ್ಕೆ ಆ್ಯಪ್ ವಿಷಯವನ್ನು ಬೀಮ್ ಮಾಡಬಹುದು. ಉದಾಹರಣೆಗೆ, ವೆಬ್‌ ಪುಟಗಳು, YouTube ವೀಡಿಯೊಗಳು, ಜನರ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಇನ್ನೂ ಹಲವನ್ನು ನೀವು ಬೀಮ್ ಮಾಡಬಹುದು.\n\n ಸಾಧನಗಳನ್ನು ಹತ್ತಿರ ತನ್ನಿ ಸಾಕು (ಹಿಮ್ಮುಖವಾಗಿ), ನಂತರ ನಿಮ್ಮ ಪರದೆಯನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ. ಯಾವುದನ್ನು ಬೀಮ್ ಮಾಡಬೇಕು ಎಂಬುದನ್ನು ಆ್ಯಪ್ ನಿರ್ಧರಿಸುತ್ತದೆ."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"ವೈ-ಫೈ ಬಳಸಿ"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi‑Fi ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
@@ -1311,8 +1307,8 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ಬೆಡ್‌ಟೈಮ್ ಮೋಡ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{ಮೋಡ್‌ಗಳು ಡಾರ್ಕ್ ಥೀಮ್ ಅನ್ನು ಸಹ ಸಕ್ರಿಯಗೊಳಿಸಬಹುದು}=1{{mode_1} ಸಹ ಡಾರ್ಕ್ ಥೀಮ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ}=2{{mode_1} ಮತ್ತು {mode_2} ಸಹ ಡಾರ್ಕ್ ಥೀಮ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತವೆ}=3{{mode_1}, {mode_2} ಮತ್ತು {mode_3} ಸಹ ಡಾರ್ಕ್ ಥೀಮ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತವೆ}one{{mode_1}, {mode_2} ಮತ್ತು # ಇನ್ನಷ್ಟು ಡಾರ್ಕ್ ಥೀಮ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತವೆ}other{{mode_1}, {mode_2} ಮತ್ತು # ಇನ್ನಷ್ಟು ಡಾರ್ಕ್ ಥೀಮ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತವೆ}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"ಮೋಡ್‌ಗಳ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"ಇನ್ನೂ ಹೆಚ್ಚು ಮಂದ"</string>
-    <string name="even_dimmer_display_summary" msgid="120301078873242172">"ಸಾಧನವು ಸಾಮಾನ್ಯಕ್ಕಿಂತ ಹೆಚ್ಚು ಮಂದವಾಗಿರಲು ಅನುಮತಿಸಿ"</string>
+    <string name="even_dimmer_display_title" msgid="6731255736830410149">"ಇನ್ನೂ ಹೆಚ್ಚು ಡಿಮ್"</string>
+    <string name="even_dimmer_display_summary" msgid="120301078873242172">"ಸಾಧನವು ಸಾಮಾನ್ಯಕ್ಕಿಂತ ಹೆಚ್ಚು ಡಿಮ್ ಆಗಿರಲು ಅನುಮತಿಸಿ"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ಸ್ಕ್ರೀನ್ ಟೈಮ್‌ಔಟ್"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"ನಿಷ್ಕ್ರಿಯತೆಯ <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ಆದ ಮೇಲೆ"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"ಸೆಟ್ ಮಾಡಿಲ್ಲ"</string>
@@ -1466,7 +1462,7 @@
     <string name="storage_wizard_move_confirm_body" msgid="1713022828842263574">"<xliff:g id="APP">^1</xliff:g> ಮತ್ತು ಅದರ ಡೇಟಾವನ್ನು <xliff:g id="NAME_0">^2</xliff:g> ಗೆ ಸರಿಸಲು ಕೆಲವು ಕ್ಷಣಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಹುದು. ಸರಿಸುವುದು ಪೂರ್ಣಗೊಳ್ಳುವವರೆಗೆ ನಿಮಗೆ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಬಳಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ. \n\nಸರಿಸುವಾಗ <xliff:g id="NAME_1">^2</xliff:g> ಅನ್ನು ತೆಗೆದುಹಾಕಬೇಡಿ."</string>
     <string name="storage_wizard_move_unlock" msgid="14651384927767749">"ಡೇಟಾವನ್ನು ಸರಿಸಲು ನೀವು ಬಳಕೆದಾರರ <xliff:g id="APP">^1</xliff:g> ಅನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಬೇಕಾಗಿದೆ."</string>
     <string name="storage_wizard_move_progress_title" msgid="3912406225614672391">"<xliff:g id="APP">^1</xliff:g> ಅನ್ನು ಸರಿಸಲಾಗುತ್ತಿದೆ…"</string>
-    <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"ಸರಿಸುವಾಗ <xliff:g id="NAME">^1</xliff:g> ಅನ್ನು ತೆಗೆದುಹಾಕಬೇಡಿ. \n\nಈ ಸಾಧನದಲ್ಲಿರುವ <xliff:g id="APP">^2</xliff:g> ಅಪ್ಲಿಕೇಶನ್ ಸರಿಸುವುದು ಪೂರ್ಣಗೊಳ್ಳುವವರೆಗೆ ಲಭ್ಯವಿರುವುದಿಲ್ಲ."</string>
+    <string name="storage_wizard_move_progress_body" msgid="2396714553394935094">"ಸರಿಸುವಾಗ <xliff:g id="NAME">^1</xliff:g> ಅನ್ನು ತೆಗೆದುಹಾಕಬೇಡಿ. \n\nಈ ಸಾಧನದಲ್ಲಿರುವ <xliff:g id="APP">^2</xliff:g> ಆ್ಯಪ್‌ ಸರಿಸುವುದು ಪೂರ್ಣಗೊಳ್ಳುವವರೆಗೆ ಲಭ್ಯವಿರುವುದಿಲ್ಲ."</string>
     <string name="storage_wizard_init_v2_title" msgid="2538630338392381113">"ಈ <xliff:g id="NAME">^1</xliff:g> ಅನ್ನು ನೀವು ಹೇಗೆ ಬಳಸುತ್ತೀರಿ?"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"ಅಥವಾ"</string>
     <string name="storage_wizard_init_v2_external_title" msgid="2786416384217054112">"ಪೋರ್ಟಬಲ್ ಸಂಗ್ರಹಣೆಗಾಗಿ SD ಕಾರ್ಡ್ ಅನ್ನು ಫಾರ್ಮ್ಯಾಟ್ ಮಾಡಿ"</string>
@@ -1608,10 +1604,10 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ನಿಮ್ಮ ವೈ-ಫೈ ಅಥವಾ ಮೊಬೈಲ್ ಡೇಟಾ ಕನೆಕ್ಷನ್ ಮೂಲಕ ಇತರ ಸಾಧನಗಳಿಗೆ ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವನ್ನು ಒದಗಿಸಲು ಹಾಟ್‌ಸ್ಪಾಟ್ ಮತ್ತು ಟೆಥರಿಂಗ್ ಅನ್ನು ಬಳಸಿ. ಸಮೀಪದಲ್ಲಿರುವ ಸಾಧನಗಳ ಜೊತೆಗೆ ವಿಷಯಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಲು ಆ್ಯಪ್‌ಗಳು ಹಾಟ್‌ಸ್ಪಾಟ್ ಅನ್ನು ಸಹ ರಚಿಸಬಹುದು."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ಸಹಾಯ"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"ಮೊಬೈಲ್‌ ನೆಟ್‌ವರ್ಕ್‌"</string>
-    <string name="sms_application_title" msgid="4791107002724108809">"SMS ಅಪ್ಲಿಕೇಶನ್"</string>
-    <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"SMS ಅಪ್ಲಿಕೇಶನ್‌ ಬದಲಾಯಿಸುವುದೇ?"</string>
-    <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"<xliff:g id="CURRENT_APP">%2$s</xliff:g> ಬದಲಾಗಿ <xliff:g id="NEW_APP">%1$s</xliff:g> ಅನ್ನು ನಿಮ್ಮ SMS ಅಪ್ಲಿಕೇಶನ್‌ ಆಗಿ ಬಳಸುವುದೇ?"</string>
-    <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"<xliff:g id="NEW_APP">%s</xliff:g> ಅನ್ನು ನಿಮ್ಮ SMS ಅಪ್ಲಿಕೇಶನ್‌ ಆಗಿ ಬಳಸುವುದೇ?"</string>
+    <string name="sms_application_title" msgid="4791107002724108809">"SMS ಆ್ಯಪ್‌"</string>
+    <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"SMS ಆ್ಯಪ್‌ ಬದಲಾಯಿಸುವುದೇ?"</string>
+    <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"<xliff:g id="CURRENT_APP">%2$s</xliff:g> ಬದಲಾಗಿ <xliff:g id="NEW_APP">%1$s</xliff:g> ಅನ್ನು ನಿಮ್ಮ SMS ಆ್ಯಪ್‌ ಆಗಿ ಬಳಸುವುದೇ?"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"<xliff:g id="NEW_APP">%s</xliff:g> ಅನ್ನು ನಿಮ್ಮ SMS ಆ್ಯಪ್ ಆಗಿ ಬಳಸುವುದೇ?"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Wi‑Fi ಸಹಾಯಕವನ್ನು ಬದಲಿಸುವುದೇ?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"ನಿಮ್ಮ ನೆಟ್‌ವರ್ಕ್ ಸಂಪರ್ಕಗಳನ್ನು ನಿರ್ವಹಿಸಲು <xliff:g id="CURRENT_APP">%2$s</xliff:g> ಬದಲಿಗೆ <xliff:g id="NEW_APP">%1$s</xliff:g> ಬಳಸುವುದೇ?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"ನಿಮ್ಮ ನೆಟ್‌ವರ್ಕ್ ಸಂಪರ್ಕಗಳನ್ನು ನಿರ್ವಹಿಸಲು <xliff:g id="NEW_APP">%s</xliff:g> ಬಳಸುವುದೇ?"</string>
@@ -1634,7 +1630,8 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"ಬ್ಲೂಟೂತ್‌ ಆಫ್‌ ಆಗಿದ್ದರೂ ಸಹ, ಯಾವ ಸಮಯದಲ್ಲಾದರೂ ಸಮೀಪದ ಸಾಧನಗಳಿಗೆ ಸ್ಕ್ಯಾನ್‌ ಮಾಡಲು ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಮತ್ತು ಸೇವೆಗಳನ್ನು ಅನುಮತಿಸಿ. ಉದಾಹರಣೆಗೆ, ಸ್ಥಳ ಆಧಾರಿತ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಮತ್ತು ಸೇವೆಗಳನ್ನು ಸುಧಾರಿಸಲು ಇದನ್ನು ಬಳಸಬಹುದಾಗಿದೆ."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"ಸ್ಥಳ ಸೇವೆಗಳು"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"ಸ್ಥಾನ ಸೇವೆಗಳು"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"ಸ್ಥಳವನ್ನು ಬಳಸಿ"</string>
+    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
+    <skip />
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"ಸಮಯ ವಲಯವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಸೆಟ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"ಸ್ಥಳ ಅಥವಾ ಸ್ಥಳ ಸೇವೆಗಳು ಆಫ್ ಆಗಿವೆ"</string>
@@ -1645,11 +1642,13 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"ಸ್ಥಳದ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"ಇದನ್ನು ಸರಿಪಡಿಸಿ"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"ರದ್ದುಮಾಡಿ"</string>
-    <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"ಸ್ವಯಂಚಾಲಿತ ಸಮಯ ವಲಯ ಆಫ್ ಆಗಿದೆ"</string>
+    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
+    <skip />
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"ಸ್ಥಳದ ಸಮಯವಲಯದ ಪತ್ತೆಹಚ್ಚುವಿಕೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"ಸ್ಥಳದ ಸಮಯವಲಯದ ಪತ್ತೆಹಚ್ಚುವಿಕೆಯನ್ನು ಬೆಂಬಲಿಸಲಾಗುವುದಿಲ್ಲ"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"ಸ್ಥಳದ ಸಮಯವಲಯದ ಪತ್ತೆಹಚ್ಚುವಿಕೆಯಲ್ಲಿ ಬದಲಾವಣೆ ಮಾಡಲು ಅನುಮತಿಯಿಲ್ಲ"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"ಸಮಯ ವಲಯವನ್ನು ಸೆಟ್ ಮಾಡಲು ಸ್ಥಳವನ್ನು ಬಳಸಬಹುದು"</string>
+    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"ಕಾನೂನು ಮಾಹಿತಿ, ಸ್ಥಿತಿ, ಸಾಫ್ಟ್‌ವೇರ್ ಆವೃತ್ತಿಯನ್ನು ವೀಕ್ಷಿಸಿ"</string>
     <string name="legal_information" msgid="7509900979811934843">"ಕಾನೂನು ಮಾಹಿತಿ"</string>
     <string name="manual" msgid="3651593989906084868">"ಹಸ್ತಚಾಲಿತ"</string>
@@ -1776,9 +1775,9 @@
     <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"ಸಾಧನದ ಸ್ಕ್ರೀನ್ ಲಾಕ್‌ ಅನ್ನೇ ಬಳಸಲಾಗುತ್ತಿದೆ"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ"</string>
     <string name="applications_settings" msgid="1941993743933425622">"ಆ್ಯಪ್ ಮಾಹಿತಿ"</string>
-    <string name="applications_settings_header" msgid="3154670675856048015">"ಅಪ್ಲಿಕೇಶನ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
+    <string name="applications_settings_header" msgid="3154670675856048015">"ಆ್ಯಪ್‌ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="install_applications" msgid="3921609656584369901">"ಅಪರಿಚಿತ ಮೂಲಗಳು"</string>
-    <string name="install_applications_title" msgid="7890233747559108106">"ಎಲ್ಲಾ ಅಪ್ಲಿಕೇಶನ್ ಮೂಲಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
+    <string name="install_applications_title" msgid="7890233747559108106">"ಎಲ್ಲಾ ಆ್ಯಪ್‌ ಮೂಲಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"ಇತ್ತೀಚೆಗಷ್ಟೇ ತೆರೆಯಲಾಗಿರುವ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು"</string>
     <string name="see_all_apps_title" msgid="1650653853942381797">"{count,plural, =1{ಎಲ್ಲಾ ಆ್ಯಪ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ}one{ಎಲ್ಲಾ # ಆ್ಯಪ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ}other{ಎಲ್ಲಾ # ಆ್ಯಪ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ}}"</string>
     <string name="forgot_password_title" msgid="3967873480875239885">"ನಿಮ್ಮ IT ನಿರ್ವಾಹಕರನ್ನು ಸಂಪರ್ಕಿಸಿ"</string>
@@ -1805,8 +1804,8 @@
     <string name="restoring_step_three" msgid="3712883580876329811">"ಮರುಸ್ಥಾಪಿಸಲಾಗುತ್ತಿದೆ…"</string>
     <string name="restoring_step_four" msgid="8966846882470446209">"ಮರುಸ್ಥಾಪಿಸಲಾಗುತ್ತಿದೆ..."</string>
     <string name="total_size_label" msgid="2052185048749658866">"ಒಟ್ಟು"</string>
-    <string name="application_size_label" msgid="6407051020651716729">"ಅಪ್ಲಿಕೇಶನ್ ಗಾತ್ರ"</string>
-    <string name="external_code_size_label" msgid="7375146402660973743">"USB ಸಂಗ್ರಹಣೆ ಅಪ್ಲಿಕೇಶನ್"</string>
+    <string name="application_size_label" msgid="6407051020651716729">"ಆ್ಯಪ್‌ ಗಾತ್ರ"</string>
+    <string name="external_code_size_label" msgid="7375146402660973743">"USB ಸಂಗ್ರಹಣೆ ಆ್ಯಪ್‌"</string>
     <string name="data_size_label" msgid="7814478940141255234">"ಬಳಕೆದಾರರ ಡೇಟಾ"</string>
     <string name="uninstall_text" msgid="315764653029060126">"ಅನ್‌ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"</string>
     <string name="uninstall_all_users_text" msgid="5924715251087176474">"ಎಲ್ಲ ಬಳಕೆದಾರರಿಗಾಗಿ ಅನ್‌ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"</string>
@@ -1817,10 +1816,10 @@
     <string name="app_factory_reset" msgid="8974044931667015201">"ನವೀಕರಣಗಳನ್ನು ಅನ್‌ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"</string>
     <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"ನಿರ್ಬಂಧಿಸಲಾದ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"ನೀವು ಆಯ್ಕೆ ಮಾಡಿದ ಕೆಲವು ಚಟುವಟಿಕೆಗಳು ಡಿಫಾಲ್ಟ್ ಆಗಿ ಈ ಆ್ಯಪ್‌ನಲ್ಲಿ ತೆರೆಯುತ್ತವೆ."</string>
-    <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"ಈ ಅಪ್ಲಿಕೇಶನ್‌ ಅನ್ನು ಅನುಮತಿಸಲು ನೀವು ವಿಜೆಟ್‌ಗಳನ್ನು ರಚಿಸಲು ಮತ್ತು ಅವುಗಳ ಡೇಟಾವನ್ನು ಪ್ರವೇಶಿಸಲು ಆಯ್ಕೆಮಾಡಿಕೊಂಡಿರುವಿರಿ."</string>
+    <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"ಈ ಆ್ಯಪ್‌ ಅನ್ನು ಅನುಮತಿಸಲು ನೀವು ವಿಜೆಟ್‌ಗಳನ್ನು ರಚಿಸಲು ಮತ್ತು ಅವುಗಳ ಡೇಟಾವನ್ನು ಪ್ರವೇಶಿಸಲು ಆಯ್ಕೆಮಾಡಿಕೊಂಡಿರುವಿರಿ."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"ಡೀಫಾಲ್ಟ್‌ಗಳನ್ನು ಹೊಂದಿಸಲಾಗಿಲ್ಲ."</string>
     <string name="clear_activities" msgid="488089228657585700">"ಡೀಫಾಲ್ಟ್ ಆದ್ಯತೆಗಳನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
-    <string name="screen_compatibility_text" msgid="5915767835411020274">"ಈ ಅಪ್ಲಿಕೇಶನ್‌ ಅನ್ನು ನಿಮ್ಮ ಪರದೆಗೆ ಅನುಗುಣವಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸದೆ ಇರಬಹುದು. ನಿಮ್ಮ ಪರದೆಗೆ ಇದು ಹೇಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ ಎಂಬುದನ್ನು ನೀವು ಇಲ್ಲಿ ನಿಯಂತ್ರಿಸಬಹುದು."</string>
+    <string name="screen_compatibility_text" msgid="5915767835411020274">"ಈ ಆ್ಯಪ್ ಅನ್ನು ನಿಮ್ಮ ಪರದೆಗೆ ಅನುಗುಣವಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸದೆ ಇರಬಹುದು. ನಿಮ್ಮ ಪರದೆಗೆ ಇದು ಹೇಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ ಎಂಬುದನ್ನು ನೀವು ಇಲ್ಲಿ ನಿಯಂತ್ರಿಸಬಹುದು."</string>
     <string name="ask_compatibility" msgid="8388397595148476565">"ಆರಂಭಿಸಿದಾಗ ಕೇಳು"</string>
     <string name="enable_compatibility" msgid="1163387233622859712">"ಅಪ್ಲಿಕೇಶನ್‌ ಅನ್ನು ಅಳತೆ ಮಾಡು"</string>
     <string name="unknown" msgid="8192160131923461175">"ಅಪರಿಚಿತ"</string>
@@ -1830,7 +1829,7 @@
     <string name="sort_order_frequent_notification" msgid="4063700985742284794">"ಹೆಚ್ಚು ಪುನರಾವರ್ತನೆಗೊಳ್ಳುವವು"</string>
     <string name="show_running_services" msgid="8666008279959853318">"ರನ್ನಿಂಗ್‌ ಸೇವೆ ತೋರಿಸು"</string>
     <string name="show_background_processes" msgid="5682856012453562151">"ಸಂಗ್ರಹಿತ ಪ್ರಕ್ರಿಯೆ ತೋರಿಸು"</string>
-    <string name="default_emergency_app" msgid="1929974800666613803">"ತುರ್ತು ಅಪ್ಲಿಕೇಶನ್"</string>
+    <string name="default_emergency_app" msgid="1929974800666613803">"ತುರ್ತು ಆ್ಯಪ್"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"ಆ್ಯಪ್ ಆದ್ಯತೆಗಳನ್ನು ಮರುಹೊಂದಿಸಿ"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"ಆ್ಯಪ್ ಆದ್ಯತೆಗಳನ್ನು ಮರುಹೊಂದಿಸುವುದೇ?"</string>
     <string name="reset_app_preferences_desc" msgid="8550782670650158299">"ಇದು ಕೆಳಗಿನವುಗಳ ಎಲ್ಲಾ ಆದ್ಯತೆಗಳನ್ನು ರೀಸೆಟ್ ಮಾಡುತ್ತದೆ:\n\n"<li>"ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದ ಆ್ಯಪ್‌ಗಳು"</li>\n<li>"ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದ ಆ್ಯಪ್ ಅಧಿಸೂಚನೆಗಳು"</li>\n<li>"ಕ್ರಿಯೆಗಳಿಗಾಗಿ ಡೀಫಾಲ್ಟ್ ಆ್ಯಪ್‌ಗಳು"</li>\n<li>"ಆ್ಯಪ್‌ನ ಹಿನ್ನೆಲೆ ಡೇಟಾ ನಿರ್ಬಂಧಗಳು"</li>\n<li>"ಯಾವುದೇ ಅನುಮತಿ ನಿರ್ಬಂಧಗಳು"</li>\n<li>"ಬ್ಯಾಟರಿ ಬಳಕೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</li>\n\n"ನೀವು ಯಾವುದೇ ಆ್ಯಪ್ ಡೇಟಾವನ್ನು ಕಳೆದುಕೊಳ್ಳುವುದಿಲ್ಲ."</string>
@@ -1851,7 +1850,7 @@
     <string name="dlg_ok" msgid="1421350367857960997">"ಸರಿ"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"ರದ್ದುಮಾಡಿ"</string>
     <string name="dlg_delete" msgid="1790919205039397659">"ಅಳಿಸಿ"</string>
-    <string name="app_not_found_dlg_text" msgid="8634675268730513704">"ಸ್ಥಾಪಿಸಲಾಗಿರುವ ಅಪ್ಲಿಕೇಶನ್‍ಗಳ ಪಟ್ಟಿಯಲ್ಲಿ ಅಪ್ಲಿಕೇಶನ್ ಕಂಡುಬಂದಿಲ್ಲ."</string>
+    <string name="app_not_found_dlg_text" msgid="8634675268730513704">"ಸ್ಥಾಪಿಸಲಾಗಿರುವ ಆ್ಯಪ್‌ಗಳ ಪಟ್ಟಿಯಲ್ಲಿ ಆ್ಯಪ್‌ ಕಂಡುಬಂದಿಲ್ಲ."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"ಅಪ್ಲಿಕೇಶನ್‌ಗಾಗಿ ಸಂಗ್ರಹಣೆಯನ್ನು ತೆರವುಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ."</string>
     <string name="computing_size" msgid="4915310659841174866">"ಗಣನೆ ಮಾಡಲಾಗುತ್ತಿದೆ…"</string>
     <string name="invalid_size_value" msgid="7017371543563259201">"ಪ್ಯಾಕೇಜ್‌ನ ಗಾತ್ರವನ್ನು ಲೆಕ್ಕ ಮಾಡಲಾಗಲಿಲ್ಲ."</string>
@@ -1863,7 +1862,7 @@
     <string name="restoring_in_progress" msgid="7787443682651146115">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> ಮರುಸ್ಥಾಪಿಸಲಾಗುತ್ತಿದೆ"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"ಮತ್ತೊಂದು ರವಾನೆ ಈಗಾಗಲೇ ಪ್ರಗತಿಯಲ್ಲಿದೆ."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"ಸಾಕಷ್ಟು ಸಂಗ್ರಹಣೆ ಸ್ಥಳ ಇಲ್ಲ"</string>
-    <string name="does_not_exist" msgid="6499163879348776120">"ಅಪ್ಲಿಕೇಶನ್ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ."</string>
+    <string name="does_not_exist" msgid="6499163879348776120">"ಆ್ಯಪ್‌ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ."</string>
     <string name="invalid_location" msgid="8013853455355520557">"ಸ್ಥಾಪನೆ ಸ್ಥಾನವು ಮಾನ್ಯವಾಗಿಲ್ಲ."</string>
     <string name="system_package" msgid="7559476279008519360">"ಸಿಸ್ಟಂ ನವೀಕರಣಗಳನ್ನು ಬಾಹ್ಯ ಮಾಧ್ಯಮದಲ್ಲಿ ಸ್ಥಾಪಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
     <string name="move_error_device_admin" msgid="1561502976834303626">"ಸಾಧನ ನಿರ್ವಹಣಾ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಬಾಹ್ಯ ಮಾಧ್ಯಮದಲ್ಲಿ ಸ್ಥಾಪಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
@@ -1872,7 +1871,7 @@
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"ಅಪ್ಲಿಕೇಶನ್‌ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"ನೀವು ಈ ಆ್ಯಪ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದರೆ, Android ಮತ್ತು ಇತರ ಆ್ಯಪ್‌ಗಳು ಇನ್ನು ಮುಂದೆ ಉದ್ದೇಶಿಸಿದ ಹಾಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸದಿರಬಹುದು. ಈ ಆ್ಯಪ್ ಅನ್ನು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಪೂರ್ವ-ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿರುವುದರಿಂದ, ನೀವು ಅದನ್ನು ಅಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ ಎಂಬುದನ್ನು ನೆನಪಿನಲ್ಲಿಡಿ. ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುವ ಮೂಲಕ, ಈ ಆ್ಯಪ್ ಅನ್ನು ನೀವು ಆಫ್ ಮಾಡಬಹುದು ಮತ್ತು ಅದನ್ನು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಮರೆ ಮಾಡಬಹುದು."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"ಸ್ಟೋರ್"</string>
-    <string name="app_install_details_title" msgid="7783556181897142187">"ಅಪ್ಲಿಕೇಶನ್ ವಿವರಗಳು"</string>
+    <string name="app_install_details_title" msgid="7783556181897142187">"ಆ್ಯಪ್‌ ವಿವರಗಳು"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"<xliff:g id="APP_STORE">%1$s</xliff:g> ನಿಂದ ಆ್ಯಪ್ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="app_install_details_different_initiating_package_summary" msgid="6093306593167176688">"<xliff:g id="APP_STORE1">%1$s</xliff:g> ನಿಂದ ಆ್ಯಪ್ ಅನ್ನು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಲಾಗಿದೆ (<xliff:g id="APP_STORE2">%2$s</xliff:g> ಮೂಲಕ)"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"<xliff:g id="APP_STORE">%1$s</xliff:g> ನಲ್ಲಿ ಹೆಚ್ಚಿನ ಮಾಹಿತಿ"</string>
@@ -1897,7 +1896,7 @@
     <string name="running_processes_item_description_p_s" msgid="8957061449107822282">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> ಪ್ರಕ್ರಿಯೆಗಳು ಮತ್ತು <xliff:g id="NUMSERVICES">%2$d</xliff:g> ಸೇವೆ"</string>
     <string name="running_processes_item_description_p_p" msgid="3292999232897469679">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> ಪ್ರಕ್ರಿಯೆಗಳು ಮತ್ತು <xliff:g id="NUMSERVICES">%2$d</xliff:g> ಸೇವೆಗಳು"</string>
     <string name="running_processes_header_title" msgid="558961782589967366">"ಸಾಧನದ ಮೆಮೊರಿ"</string>
-    <string name="running_processes_header_footer" msgid="2726092156680487584">"ಅಪ್ಲಿಕೇಶನ್ RAM ಬಳಕೆ"</string>
+    <string name="running_processes_header_footer" msgid="2726092156680487584">"ಆ್ಯಪ್‌ RAM ಬಳಕೆ"</string>
     <string name="running_processes_header_system_prefix" msgid="8819527769608555124">"ಸಿಸ್ಟಂ"</string>
     <string name="running_processes_header_apps_prefix" msgid="4151874328324238133">"ಅಪ್ಲಿಕೇಶನ್‌ಗಳು"</string>
     <string name="running_processes_header_free_prefix" msgid="4271100378295864738">"ಖಾಲಿ"</string>
@@ -1910,9 +1909,9 @@
     <string name="runningservicedetails_processes_title" msgid="5292271587797234038">"ಪ್ರಕ್ರಿಯೆಗಳು"</string>
     <string name="service_stop" msgid="5712522600201308795">"ನಿಲ್ಲಿಸಿ"</string>
     <string name="service_manage" msgid="3896322986828332075">"ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
-    <string name="service_stop_description" msgid="6327742632400026677">"ಈ ಸೇವೆಯನ್ನು ಇದರ ಅಪ್ಲಿಕೇಶನ್‌ ಪ್ರಾರಂಭಿಸಿದೆ. ನಿಲ್ಲಿಸುವುದರಿಂದ ಇದು ಅಪ್ಲಿಕೇಶನ್ ವಿಫಲಗೊಳ್ಳಲು ಕಾರಣವಾಗಬಹುದು."</string>
-    <string name="heavy_weight_stop_description" msgid="3086419998820881290">"ಈ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ನಿಲ್ಲಿಸಲಾಗುವುದಿಲ್ಲ. ನೀವು ಇದನ್ನು ನಿಲ್ಲಿಸಿದರೆ, ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಕೆಲವು ಕಾರ್ಯವನ್ನು ನೀವು ಕಳೆದುಕೊಳ್ಳಬಹುದು."</string>
-    <string name="background_process_stop_description" msgid="4792038933517438037">"ಇದು ಮತ್ತೆ ಅಗತ್ಯವಿರುವ ಸಂದರ್ಭದಲ್ಲಿ ಇನ್ನೂ ಚಾಲನೆಯಲ್ಲಿರುವ ಹಳೆಯ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರಕ್ರಿಯೆ ಇದಾಗಿದೆ. ಇದನ್ನು ನಿಲ್ಲಿಸಲು ಸಾಮಾನ್ಯವಾಗಿ ಯಾವುದೇ ಕಾರಣವಿಲ್ಲ."</string>
+    <string name="service_stop_description" msgid="6327742632400026677">"ಈ ಸೇವೆಯನ್ನು ಇದರ ಆ್ಯಪ್ ಪ್ರಾರಂಭಿಸಿದೆ. ನಿಲ್ಲಿಸುವುದರಿಂದ ಇದು ಆ್ಯಪ್ ವಿಫಲಗೊಳ್ಳಲು ಕಾರಣವಾಗಬಹುದು."</string>
+    <string name="heavy_weight_stop_description" msgid="3086419998820881290">"ಈ ಆ್ಯಪ್‌ ಅನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ನಿಲ್ಲಿಸಲಾಗುವುದಿಲ್ಲ. ನೀವು ಇದನ್ನು ನಿಲ್ಲಿಸಿದರೆ, ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಕೆಲವು ಕಾರ್ಯವನ್ನು ನೀವು ಕಳೆದುಕೊಳ್ಳಬಹುದು."</string>
+    <string name="background_process_stop_description" msgid="4792038933517438037">"ಇದು ಮತ್ತೆ ಅಗತ್ಯವಿರುವ ಸಂದರ್ಭದಲ್ಲಿ ಇನ್ನೂ ಚಾಲನೆಯಲ್ಲಿರುವ ಹಳೆಯ ಆ್ಯಪ್‌ ಪ್ರಕ್ರಿಯೆ ಇದಾಗಿದೆ. ಇದನ್ನು ನಿಲ್ಲಿಸಲು ಸಾಮಾನ್ಯವಾಗಿ ಯಾವುದೇ ಕಾರಣವಿಲ್ಲ."</string>
     <string name="service_manage_description" msgid="6615788996428486121">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: ಪ್ರಸ್ತುತ ಬಳಕೆಯಲ್ಲಿದೆ. ಅದನ್ನು ನಿಯಂತ್ರಿಸಲು ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ."</string>
     <string name="main_running_process_description" msgid="6685973937935027773">"ಮುಖ್ಯ ಪ್ರಕ್ರಿಯೆಯು ಬಳಕೆಯಲ್ಲಿದೆ."</string>
     <string name="process_service_in_use_description" msgid="4210957264507014878">"<xliff:g id="COMP_NAME">%1$s</xliff:g> ಸೇವೆ ಬಳಕೆಯಲ್ಲಿದೆ."</string>
@@ -1978,14 +1977,11 @@
     <string name="pointer_fill_style" msgid="8794616790175016092">"ಪಾಯಿಂಟರ್‌ನ ಬಣ್ಣ"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"ಬ್ಲಾಕ್‌ಗೆ ಪಾಯಿಂಟರ್ ಫಿಲ್ ಶೈಲಿ ಬದಲಿಸಿ"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"ಹಸಿರಿಗೆ ಪಾಯಿಂಟರ್ ಫಿಲ್ ಶೈಲಿ ಬದಲಿಸಿ"</string>
-    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
-    <skip />
+    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"ಕೆಂಪು ಬಣ್ಣಕ್ಕೆ ಪಾಯಿಂಟರ್ ಫಿಲ್ ಶೈಲಿಯನ್ನು ಬದಲಿಸಿ"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"ಪಿಂಕ್‌ಗೆ ಪಾಯಿಂಟರ್ ಫಿಲ್ ಶೈಲಿ ಬದಲಿಸಿ"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"ನೀಲಿಗೆ ಪಾಯಿಂಟರ್ ಫಿಲ್ ಶೈಲಿ ಬದಲಿಸಿ"</string>
-    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
-    <skip />
+    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"ನೇರಳೆ ಬಣ್ಣಕ್ಕೆ ಪಾಯಿಂಟರ್ ಫಿಲ್ ಶೈಲಿಯನ್ನು ಬದಲಿಸಿ"</string>
+    <string name="pointer_stroke_style" msgid="139962661485972329">"ಪಾಯಿಂಟರ್ ಸ್ಟ್ರೋಕ್ ಬಣ್ಣ"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"ಬಿಳಿ"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"ಕಪ್ಪು"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"ಯಾವುದೂ ಇಲ್ಲ"</string>
@@ -2037,8 +2033,7 @@
     <string name="pointer_scale" msgid="4941564570571663964">"ಪಾಯಿಂಟರ್ ಸ್ಕೇಲ್"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"ಪಾಯಿಂಟರ್ ಸ್ಕೇಲ್ ಕಡಿಮೆ ಮಾಡಿ"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"ಪಾಯಿಂಟರ್ ಸ್ಕೇಲ್ ಹೆಚ್ಚಿಸಿ"</string>
-    <!-- no translation found for pointer_scale_keywords (8939432511048322072) -->
-    <skip />
+    <string name="pointer_scale_keywords" msgid="8939432511048322072">"ಪ್ರಮಾಣ, ಗಾತ್ರ, ಪಾಯಿಂಟರ್ ಸ್ಕೇಲ್, ಪಾಯಿಂಟರ್ ಗಾತ್ರ, ದೊಡ್ಡ ಮೌಸ್ ಪಾಯಿಂಟರ್, ದೊಡ್ಡದು, ಗಮನಾರ್ಹ"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"ಆಟ ನಿಯಂತ್ರಕ"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"ಕಂಪನವನ್ನು ಮರುನಿರ್ದೇಶಿಸಿ"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"ಸಂಪರ್ಕಗೊಂಡಾಗ ಆಟ ನಿಯಂತ್ರಕಕ್ಕೆ ಕಂಪನವನ್ನು ಕಳುಹಿಸಿ"</string>
@@ -2272,7 +2267,7 @@
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"ಪಠ್ಯದ ಕಾಂಟ್ರಾಸ್ಟ್ ಗರಿಷ್ಠಗೊಳಿಸಿ"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"ಕಾಂಟ್ರ್ಯಾಸ್ಟ್ ಅನ್ನು ಹೆಚ್ಚಿಸಲು ಪಠ್ಯದ ಸುತ್ತಲೂ ಕಪ್ಪು ಅಥವಾ ಬಿಳಿ ಹಿನ್ನೆಲೆಯನ್ನು ಸೇರಿಸಿ"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"ಸ್ವಯಂ ಅಪ್‍ಡೇಟ್ ಸ್ಕ್ರೀನ್‌ ವರ್ಧನೆ"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ಅಪ್ಲಿಕೇಶನ್‌ ಪರಿವರ್ತನೆಗಳಲ್ಲಿ ಸ್ಕ್ರೀನ್‌ ವರ್ಧಕವನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಿ"</string>
+    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"ಆ್ಯಪ್‌ ಪರಿವರ್ತನೆಗಳಲ್ಲಿ ಸ್ಕ್ರೀನ್‌ ವರ್ಧಕವನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಿ"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"ಪವರ್ ಬಟನ್ ಕರೆಯನ್ನು ಕೊನೆಗೊಳಿಸುತ್ತದೆ"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"ದೊಡ್ಡ ಮೌಸ್ ಪಾಯಿಂಟರ್"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"ಮೌಸ್ ಪಾಯಿಂಟರ್ ದೊಡ್ಡದಾಗಿ ಕಾಣುವಂತೆ ಮಾಡಿ"</string>
@@ -2461,7 +2456,7 @@
     <string name="color_yellow" msgid="5957551912912679058">"ಹಳದಿ"</string>
     <string name="color_magenta" msgid="8943538189219528423">"ಕೆನ್ನೇರಿಳೆ"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> ಈ ಕೆಳಗಿನವುಗಳನ್ನು ಮಾಡುತ್ತದೆ:"</string>
-    <string name="touch_filtered_warning" msgid="4225815157460318241">"ಅನುಮತಿ ವಿನಂತಿಯನ್ನು ಅಪ್ಲಿಕೇಶನ್ ಮರೆಮಾಚುತ್ತಿರುವ ಕಾರಣ, ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಪರಿಶೀಲಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
+    <string name="touch_filtered_warning" msgid="4225815157460318241">"ಅನುಮತಿ ವಿನಂತಿಯನ್ನು ಆ್ಯಪ್ ಮರೆಮಾಚುತ್ತಿರುವ ಕಾರಣ, ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಪರಿಶೀಲಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"ಅನುಮತಿಸಿ"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"ನಿರಾಕರಿಸಿ"</string>
     <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"ಆಫ್ ಮಾಡಿ"</string>
@@ -2533,7 +2528,7 @@
     <string name="background_activity_summary" msgid="3817376868497046016">"ಹಿನ್ನೆಲೆಯಲ್ಲಿ ರನ್ ಆಗಲು ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಅನುಮತಿ ನೀಡಿ"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"ಹಿನ್ನೆಲೆ ಚಟುವಟಿಕೆಯನ್ನು ಸೀಮಿತಗೊಳಿಸುವುದೇ?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"ಒಂದು ಅಪ್ಲಿಕೇಶನ್‌ನ ಹಿನ್ನೆಲೆ ಚಟುವಟಿಕೆಯನ್ನು ನೀವು ಸೀಮಿತಗೊಳಿಸಿದರೆ, ಅದು ಸರಿಯಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸದಿರಬಹುದು"</string>
-    <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"ಬ್ಯಾಟರಿ ಅನ್ನು ಆಪ್ಟಿಮೈಜ್ ಮಾಡಲು ಈ ಅಪ್ಲಿಕೇಶನ್ ಹೊಂದಿಸದ ಕಾರಣ, ನೀವು ಇದನ್ನು ನಿರ್ಬಂಧಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.\n\n ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿರ್ಬಂಧಿಸಲು, ಮೊದಲು ಬ್ಯಾಟರಿ ಆಪ್ಟಿಮೈಸೇಷನ್ ಅನ್ನು ಆನ್ ಮಾಡಿ."</string>
+    <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"ಬ್ಯಾಟರಿ ಅನ್ನು ಆಪ್ಟಿಮೈಜ್ ಮಾಡಲು ಈ ಆ್ಯಪ್ ಹೊಂದಿಸದ ಕಾರಣ, ನೀವು ಇದನ್ನು ನಿರ್ಬಂಧಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.\n\n ಆ್ಯಪ್ ಅನ್ನು ನಿರ್ಬಂಧಿಸಲು, ಮೊದಲು ಬ್ಯಾಟರಿ ಆಪ್ಟಿಮೈಸೇಷನ್ ಅನ್ನು ಆನ್ ಮಾಡಿ."</string>
     <string name="manager_battery_usage_category_title" msgid="1493303237531629961">"ಬ್ಯಾಟರಿ ಬಳಕೆಯನ್ನು ನಿರ್ವಹಿಸಿ"</string>
     <string name="manager_battery_usage_allow_background_usage_settings_title" msgid="8150026934645052635">"ಹಿನ್ನೆಲೆ ಬಳಕೆಯನ್ನು ಅನುಮತಿಸಿ"</string>
     <string name="manager_battery_usage_allow_background_usage_title" msgid="6294649996820358852">"ಹಿನ್ನೆಲೆ ಬಳಕೆಯನ್ನು ಅನುಮತಿಸಿ"</string>
@@ -2749,7 +2744,7 @@
     <string name="tts_spoken_language" msgid="4652894245474520872">"ಆಡುಭಾಷೆ"</string>
     <string name="tts_install_voices_title" msgid="6505257816336165782">"ಧ್ವನಿಗಳನ್ನು ಸ್ಥಾಪಿಸಿ"</string>
     <string name="tts_install_voices_text" msgid="902408506519246362">"ಧ್ವನಿಗಳನ್ನು ಸ್ಥಾಪಿಸಲು <xliff:g id="TTS_APP_NAME">%s</xliff:g> ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಮುಂದುವರಿಯಿರಿ"</string>
-    <string name="tts_install_voices_open" msgid="919034855418197668">"ಅಪ್ಲಿಕೇಶನ್‌ ತೆರೆಯಿರಿ"</string>
+    <string name="tts_install_voices_open" msgid="919034855418197668">"ಆ್ಯಪ್‌ ತೆರೆಯಿರಿ"</string>
     <string name="tts_install_voices_cancel" msgid="5179154684379560628">"ರದ್ದುಮಾಡಿ"</string>
     <string name="tts_reset" msgid="9047681050813970031">"ಮರುಹೊಂದಿಸಿ"</string>
     <string name="tts_play" msgid="2945513377250757221">"ಪ್ಲೇ"</string>
@@ -2818,22 +2813,22 @@
     <string name="backup_section_title" msgid="6539706829848457794">"ಬ್ಯಾಕಪ್ &amp; ಮರುಸ್ಥಾಪನೆ"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"ವೈಯಕ್ತಿಕ ಡೇಟಾ"</string>
     <string name="backup_data_title" msgid="507663517227498525">"ನನ್ನ ಡೇಟಾ ಬ್ಯಾಕಪ್ ಮಾಡು"</string>
-    <string name="backup_data_summary" msgid="8054551085241427531">"Google ಸರ್ವರ್‌ಗಳಿಗೆ ಅಪ್ಲಿಕೇಶನ್‌‌ ಡೇಟಾ, ವೈ-ಫೈ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು ಮತ್ತು ಇತರ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬ್ಯಾಕಪ್‌ ಮಾಡು"</string>
+    <string name="backup_data_summary" msgid="8054551085241427531">"Google ಸರ್ವರ್‌ಗಳಿಗೆ ಆ್ಯಪ್‌ ಡೇಟಾ, ವೈ-ಫೈ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು ಮತ್ತು ಇತರ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬ್ಯಾಕಪ್‌ ಮಾಡು"</string>
     <string name="backup_configure_account_title" msgid="8574055186903658842">"ಬ್ಯಾಕಪ್ ಖಾತೆ"</string>
     <string name="backup_data_management_title" msgid="6596830198441939702">"ಬ್ಯಾಕಪ್ ಖಾತೆಯನ್ನು ನಿರ್ವಹಿಸಿ"</string>
-    <string name="include_app_data_title" msgid="2969603876620594523">"ಅಪ್ಲಿಕೇಶನ್ ಡೇಟಾ ಸೇರಿಸಿ"</string>
+    <string name="include_app_data_title" msgid="2969603876620594523">"ಆ್ಯಪ್‌ ಡೇಟಾ ಸೇರಿಸಿ"</string>
     <string name="auto_restore_title" msgid="4124345897936637561">"ಸ್ವಯಂಚಾಲಿತ ಮರುಸ್ಥಾಪನೆ"</string>
-    <string name="auto_restore_summary" msgid="6830198851045584001">"ಅಪ್ಲಿಕೇಶನ್‌ ಅನ್ನು ಮರುಸ್ಥಾಪಿಸುವಾಗ, ಬ್ಯಾಕಪ್‌‌ ಮಾಡಲಾದ ಸೆಟ್ಟಿಂಗ್‌ಗಳು, ಡೇಟಾವನ್ನು ಮರುಸ್ಥಾಪಿಸು"</string>
+    <string name="auto_restore_summary" msgid="6830198851045584001">"ಆ್ಯಪ್‌ ಅನ್ನು ಮರುಸ್ಥಾಪಿಸುವಾಗ, ಬ್ಯಾಕಪ್‌‌ ಮಾಡಲಾದ ಸೆಟ್ಟಿಂಗ್‌ಗಳು, ಡೇಟಾವನ್ನು ಮರುಸ್ಥಾಪಿಸು"</string>
     <string name="backup_inactive_title" msgid="6753265378043349277">"ಬ್ಯಾಕ್‌ಅಪ್ ಸೇವೆ ಸಕ್ರಿಯವಾಗಿಲ್ಲ"</string>
     <string name="backup_configure_account_default_summary" msgid="5323225330966306690">"ಬ್ಯಾಕ್‌ ಅಪ್‌ ಆಗಿರುವ ಡೇಟಾವನ್ನು ಯಾವುದೇ ಖಾತೆಯು ಪ್ರಸ್ತುತ ಸಂಗ್ರಹಿಸುತ್ತಿಲ್ಲ"</string>
     <string name="backup_erase_dialog_title" msgid="5892431263348766484"></string>
     <string name="backup_erase_dialog_message" msgid="2250872501409574331">"ನಿಮ್ಮ Wi‑Fi ಪಾಸ್‌ವರ್ಡ್‌ಗಳು, ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳು ಇತರ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಹಾಗೂ ಆ್ಯಪ್‌‌ ಡೇಟಾವನ್ನು ಬ್ಯಾಕಪ್‌‌‌ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸುವುದರ ಜೊತೆಗೆ Google ಸರ್ವರ್‌ಗಳಲ್ಲಿನ ಎಲ್ಲ ಪ್ರತಿಗಳನ್ನು ಅಳಿಸುವುದೇ?"</string>
-    <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"ಸಾಧನ ಡೇಟಾ (ವೈ-ಫೈ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು ಮತ್ತು ಕರೆ ಇತಿಹಾಸದಂತಹ) ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಡೇಟಾವನ್ನು (ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಮೂಲಕ ಸಂಗ್ರಹಿಸಲಾದ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಫೈಲ್‌ಗಳಂತಹ) ಬ್ಯಾಕಪ್ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸುವುದೇ ಹಾಗೂ ರಿಮೋಟ್ ಸರ್ವರ್‌ಗಳಲ್ಲಿರುವ ಎಲ್ಲಾ ನಕಲುಗಳನ್ನು ಅಳಿಸುವುದೇ?"</string>
-    <string name="fullbackup_data_summary" msgid="971587401251601473">"ಸಾಧನ ಡೇಟಾ (ವೈ-ಫೈ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು ಮತ್ತು ಕರೆ ಇತಿಹಾಸದಂತಹವು) ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಡೇಟಾವನ್ನು (ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಮೂಲಕ ಸಂಗ್ರಹಿಸಲಾದ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಫೈಲ್‌ಗಳಂತಹವು) ರಿಮೋಟ್ ಮೂಲಕ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಬ್ಯಾಕಪ್ ಮಾಡಿ.\n\nನೀವು ಸ್ವಯಂಚಾಲಿತ ಬ್ಯಾಕಪ್ ಅನ್ನು ಆನ್ ಮಾಡಿದಾಗ, ಸಾಧನ ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಡೇಟಾವನ್ನು ರಿಮೋಟ್ ಮೂಲಕ ನಿಯತಕಾಲಿಕವಾಗಿ ಉಳಿಸಲಾಗುವುದು. ಅಪ್ಲಿಕೇಶನ್ ಡೇಟಾ ಎಂದರೆ ಅಪ್ಲಿಕೇಶನ್ ಮೂಲಕ ಉಳಿಸಲಾಗಿರುವ (ಡೆವಲಪರ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಆಧರಿಸಿ) ಯಾವುದೇ ಡೇಟಾ ಆಗಿರಬಹುದು. ಇದು ಸಂಪರ್ಕಗಳು, ಸಂದೇಶಗಳು ಮತ್ತು ಫೋಟೋಗಳಂತಹ ಸಂಭವನೀಯ ಸೂಕ್ಷ್ಮ ಡೇಟಾವನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ."</string>
+    <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"ಸಾಧನ ಡೇಟಾ (ವೈ-ಫೈ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು ಮತ್ತು ಕರೆ ಇತಿಹಾಸದಂತಹ) ಮತ್ತು ಆ್ಯಪ್‌ ಡೇಟಾವನ್ನು (ಆ್ಯಪ್‌ಗಳ ಮೂಲಕ ಸಂಗ್ರಹಿಸಲಾದ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಫೈಲ್‌ಗಳಂತಹ) ಬ್ಯಾಕಪ್ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸುವುದೇ ಹಾಗೂ ರಿಮೋಟ್ ಸರ್ವರ್‌ಗಳಲ್ಲಿರುವ ಎಲ್ಲಾ ನಕಲುಗಳನ್ನು ಅಳಿಸುವುದೇ?"</string>
+    <string name="fullbackup_data_summary" msgid="971587401251601473">"ಸಾಧನ ಡೇಟಾ (ವೈ-ಫೈ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು ಮತ್ತು ಕರೆ ಇತಿಹಾಸದಂತಹವು) ಮತ್ತು ಆ್ಯಪ್‌ ಡೇಟಾವನ್ನು (ಆ್ಯಪ್‌ಗಳ ಮೂಲಕ ಸಂಗ್ರಹಿಸಲಾದ ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಮತ್ತು ಫೈಲ್‌ಗಳಂತಹವು) ರಿಮೋಟ್ ಮೂಲಕ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಬ್ಯಾಕಪ್ ಮಾಡಿ.\n\nನೀವು ಸ್ವಯಂಚಾಲಿತ ಬ್ಯಾಕಪ್ ಅನ್ನು ಆನ್ ಮಾಡಿದಾಗ, ಸಾಧನ ಮತ್ತು ಆ್ಯಪ್‌ ಡೇಟಾವನ್ನು ರಿಮೋಟ್ ಮೂಲಕ ನಿಯತಕಾಲಿಕವಾಗಿ ಉಳಿಸಲಾಗುವುದು. ಆ್ಯಪ್‌ ಡೇಟಾ ಎಂದರೆ ಆ್ಯಪ್‌ ಮೂಲಕ ಉಳಿಸಲಾಗಿರುವ (ಡೆವಲಪರ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಆಧರಿಸಿ) ಯಾವುದೇ ಡೇಟಾ ಆಗಿರಬಹುದು. ಇದು ಸಂಪರ್ಕಗಳು, ಸಂದೇಶಗಳು ಮತ್ತು ಫೋಟೋಗಳಂತಹ ಸಂಭವನೀಯ ಸೂಕ್ಷ್ಮ ಡೇಟಾವನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ."</string>
     <string name="device_admin_settings_title" msgid="31392408594557070">"ಸಾಧನದ ನಿರ್ವಾಹಕರ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="active_device_admin_msg" msgid="7744106305636543184">"ಸಾಧನ ನಿರ್ವಹಣೆ ಆ್ಯಪ್"</string>
-    <string name="remove_device_admin" msgid="3143059558744287259">"ಈ ಸಾಧನ ನಿರ್ವಹಣಾ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"</string>
-    <string name="uninstall_device_admin" msgid="4481095209503956916">"ಅಪ್ಲಿಕೇಶನ್ ಅನ್‌ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"</string>
+    <string name="remove_device_admin" msgid="3143059558744287259">"ಈ ಸಾಧನ ನಿರ್ವಹಣಾ ಆ್ಯಪ್‌ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"</string>
+    <string name="uninstall_device_admin" msgid="4481095209503956916">"ಆ್ಯಪ್‌ ಅನ್‌ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ ಮತ್ತು ಅನ್‌ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"ಸಾಧನ ಅಡ್ಮಿನ್ ಆ್ಯಪ್‍‍ಗಳು"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"ಸಾಧನ ನಿರ್ವಹಣಾ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಲಭ್ಯವಿಲ್ಲ"</string>
@@ -2843,7 +2838,7 @@
     <string name="device_admin_add_title" msgid="6087481040932322289">"ಸಾಧನದ ನಿರ್ವಾಹಕರು"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"ಈ ನಿರ್ವಹಣಾ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದರೆ, ಈ ಕೆಳಗಿನ ಕಾರ್ಯಾಚರಣೆಗಳನ್ನು ಮಾಡಲು <xliff:g id="APP_NAME">%1$s</xliff:g> ಗೆ ಅನುಮತಿಸಲಾಗುತ್ತದೆ:"</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"ಈ ಸಾಧನವನ್ನು <xliff:g id="APP_NAME">%1$s</xliff:g> ನಿರ್ವಹಿಸುತ್ತದೆ ಮತ್ತು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡುತ್ತದೆ."</string>
-    <string name="device_admin_status" msgid="6332571781623084064">"ಈ ನಿರ್ವಹಣಾ ಅಪ್ಲಿಕೇಶನ್ ಸಕ್ರಿಯವಾಗಿದೆ ಮತ್ತು ಈ ಕೆಳಗಿನ ಕಾರ್ಯಾಚರಣೆಗಳನ್ನು ಮಾಡಲು <xliff:g id="APP_NAME">%1$s</xliff:g> ಗೆ ಅನುಮತಿ ನೀಡುತ್ತದೆ:"</string>
+    <string name="device_admin_status" msgid="6332571781623084064">"ಈ ನಿರ್ವಹಣಾ ಆ್ಯಪ್‌ ಸಕ್ರಿಯವಾಗಿದೆ ಮತ್ತು ಈ ಕೆಳಗಿನ ಕಾರ್ಯಾಚರಣೆಗಳನ್ನು ಮಾಡಲು <xliff:g id="APP_NAME">%1$s</xliff:g> ಗೆ ಅನುಮತಿ ನೀಡುತ್ತದೆ:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"ಪ್ರೊಫೈಲ್ ನಿರ್ವಾಹಕವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುವುದೇ?"</string>
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಲು ಅನುಮತಿಸುವುದೇ?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"ಇದನ್ನು ಮುಂದುವರಿಸಿದರೆ, ನಿಮ್ಮ ಬಳಕೆದಾರರನ್ನು ನಿಮ್ಮ ನಿರ್ವಾಹಕರು ನಿರ್ವಹಿಸುತ್ತಾರೆ ಮತ್ತು ಇದು ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಡೇಟಾ ಮಾತ್ರವಲ್ಲದೆ, ಸಂಬಂಧಿತ ಡೇಟಾವನ್ನೂ ಸಹ ಸಂಗ್ರಹಣೆ ಮಾಡಬಲ್ಲದು.\n\nನಿಮ್ಮ ನಿರ್ವಾಹಕರು ನೆಟ್‌ವರ್ಕ್ ಚಟುವಟಿಕೆ ಮತ್ತು ನಿಮ್ಮ ಸಾಧನದ ಸ್ಥಳ ಮಾಹಿತಿ ಸೇರಿದಂತೆ ಈ ಬಳಕೆದಾರರಿಗೆ ಸಂಬಂಧಿಸಿದ ಸೆಟ್ಟಿಂಗ್‌ಗಳು, ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಮತ್ತು ಡೇಟಾದ ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಬಹುದು ಮತ್ತು ನಿರ್ವಹಿಸಬಹುದು."</string>
@@ -2887,7 +2882,7 @@
     <string name="sync_gmail" msgid="228561698646018808">"Gmail"</string>
     <string name="sync_calendar" msgid="4603704438090387251">"Calendar"</string>
     <string name="sync_contacts" msgid="2376465611511325472">"ಸಂಪರ್ಕಗಳು"</string>
-    <string name="header_application_sync_settings" msgid="7427706834875419243">"ಅಪ್ಲಿಕೇಶನ್ ಸಿಂಕ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
+    <string name="header_application_sync_settings" msgid="7427706834875419243">"ಆ್ಯಪ್‌ ಸಿಂಕ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="header_data_and_synchronization" msgid="453920312552838939">"ಡೇಟಾ &amp; ಸಿಂಕ್ರೋನೈಜ್ ಮಾಡುವಿಕೆ"</string>
     <string name="preference_change_password_title" msgid="5465821666939825972">"ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾಯಿಸಿ"</string>
     <string name="header_account_settings" msgid="1189339410278750008">"ಖಾತೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
@@ -2928,12 +2923,12 @@
     <string name="data_roaming_enable_mobile" msgid="5745287603577995977">"ರೋಮಿಂಗ್"</string>
     <string name="data_usage_forground_label" msgid="5762048187044975428">"ಮುನ್ನೆಲೆ:"</string>
     <string name="data_usage_background_label" msgid="5363718469293175279">"ಹಿನ್ನೆಲೆ:"</string>
-    <string name="data_usage_app_settings" msgid="5693524672522122485">"ಅಪ್ಲಿಕೇಶನ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
+    <string name="data_usage_app_settings" msgid="5693524672522122485">"ಆ್ಯಪ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="data_usage_app_restrict_background" msgid="5728840276368097276">"ಹಿನ್ನೆಲೆ ಡೇಟಾ"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"ಹಿನ್ನೆಲೆಯಲ್ಲಿ ಮೊಬೈಲ್ ಡೇಟಾ ಬಳಕೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="8213268097024597864">"ಈ ಅಪ್ಲಿಕೇಶನ್‌ಗಾಗಿ ಹಿನ್ನೆಲೆ ಡೇಟಾವನ್ನು ನಿರ್ಬಂಧಿಸಲು, ಮೊದಲಿಗೆ ಮೊಬೈಲ್ ಡೇಟಾ ಮಿತಿಯನ್ನು ಹೊಂದಿಸಿ."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="5383874438677899255">"ಹಿನ್ನೆಲೆ ಡೇಟಾವನ್ನು ನಿರ್ಬಂಧಿಸುವುದೇ?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"ಮೊಬೈಲ್‌ ನೆಟ್‌ವರ್ಕ್‌ಗಳು ಮಾತ್ರ ಲಭ್ಯವಿದ್ದಾಗ ಕಾರ್ಯವನ್ನು ನಿಲ್ಲಿಸುವುದಕ್ಕಾಗಿ ಹಿನ್ನೆಲೆ ಡೇಟಾದ ಮೇಲೆ ಅವಲಂಬಿತವಾದ ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಈ ವೈಶಿಷ್ಟ್ಯವು ಕಾರಣವಾಗಬಹುದು.\n\nಅಪ್ಲಿಕೇಶನ್‌‌ ವ್ಯಾಪ್ತಿಯೊಳಗೆ ಲಭ್ಯವಿರುವ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ನೀವು ಇನ್ನಷ್ಟು ಸೂಕ್ತವಾದ ಡೇಟಾ ಬಳಕೆಯ ನಿಯಂತ್ರಣಗಳನ್ನು ಪಡೆದುಕೊಳ್ಳಬಹುದು."</string>
+    <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"ಮೊಬೈಲ್‌ ನೆಟ್‌ವರ್ಕ್‌ಗಳು ಮಾತ್ರ ಲಭ್ಯವಿದ್ದಾಗ ಕಾರ್ಯವನ್ನು ನಿಲ್ಲಿಸುವುದಕ್ಕಾಗಿ ಹಿನ್ನೆಲೆ ಡೇಟಾದ ಮೇಲೆ ಅವಲಂಬಿತವಾದ ಆ್ಯಪ್‌ಗೆ ಈ ವೈಶಿಷ್ಟ್ಯವು ಕಾರಣವಾಗಬಹುದು.\n\nಆ್ಯಪ್‌ ವ್ಯಾಪ್ತಿಯೊಳಗೆ ಲಭ್ಯವಿರುವ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ನೀವು ಇನ್ನಷ್ಟು ಸೂಕ್ತವಾದ ಡೇಟಾ ಬಳಕೆಯ ನಿಯಂತ್ರಣಗಳನ್ನು ಪಡೆದುಕೊಳ್ಳಬಹುದು."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"ನೀವು ಮೊಬೈಲ್ ಡೇಟಾ ಮಿತಿಯನ್ನು ಹೊಂದಿಸಿದಾಗ ಮಾತ್ರ ಹಿನ್ನೆಲೆ ಡೇಟಾ ನಿರ್ಬಂಧಿಸುವುದು ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"ಡೇಟಾ ಸ್ವಯಂ-ಸಿಂಕ್‌ ಆನ್‌‌ ಮಾಡಬೇಕೇ?"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"ಡೇಟಾ ಸ್ವಯಂ-ಸಿಂಕ್‌ ಆಫ್‌ ಮಾಡಬೇಕೆ?"</string>
@@ -2986,7 +2981,7 @@
     <string name="vpn_replace_vpn_message" msgid="1094297700371463386">"ನೀವು ಈಗಾಗಲೇ VPN ಗೆ ಸಂಪರ್ಕ ಹೊಂದಿರುವಿರಿ. ಒಂದು ವೇಳೆ ನೀವು ಬೇರೊಂದಕ್ಕೆ ಸಂಪರ್ಕಗೊಂಡಲ್ಲಿ, ನಿಮ್ಮ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ VPN ಅನ್ನು ಸ್ಥಾನಾಂತರಿಸಲಾಗುವುದು."</string>
     <string name="vpn_turn_on" msgid="3568307071295211187">"ಆನ್‌ ಮಾಡಿ"</string>
     <string name="vpn_cant_connect_title" msgid="5670787575925519386">"<xliff:g id="VPN_NAME">%1$s</xliff:g> ಸಂಪರ್ಕ ಸಾಧ್ಯವಿಲ್ಲ"</string>
-    <string name="vpn_cant_connect_message" msgid="2139148820719163694">"ಈ ಅಪ್ಲಿಕೇಶನ್ ಯಾವಾಗಲೂ-ಆನ್ VPN ಅನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ."</string>
+    <string name="vpn_cant_connect_message" msgid="2139148820719163694">"ಈ ಆ್ಯಪ್‌ ಯಾವಾಗಲೂ-ಆನ್ VPN ಅನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ."</string>
     <string name="vpn_title" msgid="3068868814145870274">"VPN"</string>
     <string name="vpn_create" msgid="7546073242936894638">"VPN ಪ್ರೊಫೈಲ್ ಸೇರಿಸಿ"</string>
     <string name="vpn_menu_edit" msgid="5100387853773792379">"ಪ್ರೊಫೈಲ್ ಎಡಿಟ್ ಮಾಡಿ"</string>
@@ -2994,7 +2989,7 @@
     <string name="vpn_menu_lockdown" msgid="5284041663859541007">"VPN ಆನ್‌ ಆಗಿರಿಸಿ"</string>
     <string name="vpn_no_vpns_added" msgid="7387080769821533728">"ಯಾವುದೇ VPN ಗಳನ್ನು ಸೇರಿಸಿಲ್ಲ"</string>
     <string name="vpn_always_on_summary" msgid="2171252372476858166">"ಎಲ್ಲ ಸಮಯಗಳಲ್ಲೂ VPN ಜೊತೆ ಸಂಪರ್ಕದಲ್ಲಿರಿ"</string>
-    <string name="vpn_always_on_summary_not_supported" msgid="9084872130449368437">"ಈ ಅಪ್ಲಿಕೇಶನ್‌ ಬೆಂಬಲಿಸುವುದಿಲ್ಲ"</string>
+    <string name="vpn_always_on_summary_not_supported" msgid="9084872130449368437">"ಈ ಆ್ಯಪ್‌ ಬೆಂಬಲಿಸುವುದಿಲ್ಲ"</string>
     <string name="vpn_always_on_summary_active" msgid="175877594406330387">"ಯಾವಾಗಲೂ ಆನ್ ಇರುತ್ತದೆ"</string>
     <string name="vpn_insecure_summary" msgid="4450920215186742859">"ಸುರಕ್ಷಿತವಾಗಿಲ್ಲ"</string>
     <string name="vpn_require_connection" msgid="1027347404470060998">"VPN ಇಲ್ಲದಿರುವ ಸಂಪರ್ಕಗಳನ್ನು ಬ್ಲಾಕ್ ಮಾಡಿ"</string>
@@ -3163,12 +3158,12 @@
     <string name="auto_data_switch_title" msgid="5862200603753603464">"ಮೊಬೈಲ್ ಡೇಟಾವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಬದಲಿಸಿ"</string>
     <string name="auto_data_switch_summary" msgid="1934340931995429057">"ಈ ನೆಟ್‌ವರ್ಕ್ ಉತ್ತಮ ಲಭ್ಯತೆಯನ್ನು ಹೊಂದಿರುವಾಗ ಇದನ್ನು ಬಳಸಿ"</string>
     <string name="work_sim_title" msgid="8999872928646924429">"ಕೆಲಸದ ಸಿಮ್‌"</string>
-    <string name="user_restrictions_title" msgid="4068914244980335993">"ಅಪ್ಲಿಕೇಶನ್ &amp; ಕಂಟೆಂಟ್‍ ಆ್ಯಕ್ಸೆಸ್"</string>
+    <string name="user_restrictions_title" msgid="4068914244980335993">"ಆ್ಯಪ್ &amp; ಕಂಟೆಂಟ್‍ ಆ್ಯಕ್ಸೆಸ್"</string>
     <string name="user_rename" msgid="8735940847878484249">"ಮರುಹೆಸರಿಸಿ"</string>
-    <string name="app_restrictions_custom_label" msgid="6949268049087435132">"ಅಪ್ಲಿಕೇಶನ್ ನಿರ್ಬಂಧಗಳನ್ನು ಹೊಂದಿಸಿ"</string>
+    <string name="app_restrictions_custom_label" msgid="6949268049087435132">"ಆ್ಯಪ್‌ ನಿರ್ಬಂಧಗಳನ್ನು ಹೊಂದಿಸಿ"</string>
     <string name="user_restrictions_controlled_by" msgid="2821526006742851624">"<xliff:g id="APP">%1$s</xliff:g> ಮೂಲಕ ನಿಯಂತ್ರಿಸಲಾಗುತ್ತಿದೆ"</string>
-    <string name="app_sees_restricted_accounts" msgid="3526008344222566318">"ಈ ಅಪ್ಲಿಕೇಶನ್‌ ನಿಮ್ಮ ಖಾತೆಗಳನ್ನು ಪ್ರವೇಶಿಸಬಹುದು"</string>
-    <string name="app_sees_restricted_accounts_and_controlled_by" msgid="8338520379923447143">"ಈ ಅಪ್ಲಿಕೇಶನ್ ನಿಮ್ಮ ಖಾತೆಗಳನ್ನು ಪ್ರವೇಶಿಸಬಹುದು. <xliff:g id="APP">%1$s</xliff:g> ಮೂಲಕ ನಿಯಂತ್ರಿಸಲಾಗಿದೆ"</string>
+    <string name="app_sees_restricted_accounts" msgid="3526008344222566318">"ಈ ಆ್ಯಪ್ ನಿಮ್ಮ ಖಾತೆಗಳನ್ನು ಪ್ರವೇಶಿಸಬಹುದು"</string>
+    <string name="app_sees_restricted_accounts_and_controlled_by" msgid="8338520379923447143">"ಈ ಆ್ಯಪ್‌ ನಿಮ್ಮ ಖಾತೆಗಳನ್ನು ಪ್ರವೇಶಿಸಬಹುದು. <xliff:g id="APP">%1$s</xliff:g> ಮೂಲಕ ನಿಯಂತ್ರಿಸಲಾಗಿದೆ"</string>
     <string name="restriction_wifi_config_title" msgid="2630656989926554685">"Wi‑Fi ಮತ್ತು ಮೊಬೈಲ್‌"</string>
     <string name="restriction_wifi_config_summary" msgid="920419010472168694">"Wi‑Fi ಮತ್ತು ಮೊಬೈಲ್‌ ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಮಾರ್ಪಡಿಸುವಿಕೆಯನ್ನು ಅನುಮತಿಸಿ"</string>
     <string name="restriction_bluetooth_config_title" msgid="220586273589093821">"ಬ್ಲೂಟೂತ್‌‌"</string>
@@ -3276,7 +3271,7 @@
     <string name="keywords_all_apps" msgid="9016323378609007166">"ಅಪ್ಲಿಕೇಶನ್‌ಗಳು, ಡೌನ್‌ಲೋಡ್, ಅಪ್ಲಿಕೇಶನ್‌ಗಳು, ಸಿಸ್ಟಂ"</string>
     <string name="keywords_app_permissions" msgid="2061773665663541610">"ಅಪ್ಲಿಕೇಶನ್‌ಗಳು, ಅನುಮತಿಗಳು, ಭದ್ರತೆ"</string>
     <string name="keywords_default_apps" msgid="4601664230800605416">"ಅಪ್ಲಿಕೇಶನ್‌ಗಳು, ಡೀಫಾಲ್ಟ್"</string>
-    <string name="keywords_ignore_optimizations" msgid="8967142288569785145">"ಆಪ್ಟಿಮೈಸೇಶನ್‌ಗಳು, ಡೋಜ್, ಅಪ್ಲಿಕೇಶನ್ ಸ್ಟ್ಯಾಂಡ್‌ಬೈ ಅನ್ನು ನಿರ್ಲಕ್ಷಿಸಿ"</string>
+    <string name="keywords_ignore_optimizations" msgid="8967142288569785145">"ಆಪ್ಟಿಮೈಸೇಶನ್‌ಗಳು, ಡೋಜ್, ಆ್ಯಪ್‌ ಸ್ಟ್ಯಾಂಡ್‌ಬೈ ಅನ್ನು ನಿರ್ಲಕ್ಷಿಸಿ"</string>
     <string name="keywords_color_mode" msgid="1193896024705705826">"ಸ್ಪಂದನಾತ್ಮಕ, RGB, sRGB, ಬಣ್ಣ, ನೈಸರ್ಗಿಕ, ಉತ್ತಮ ಗುಣಮಟ್ಟ"</string>
     <string name="keywords_screen_resolution" msgid="6652125115386722875">"FHD, QHD, ರೆಸಲ್ಯೂಷನ್, 1080p, 1440p"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"ಬಣ್ಣ, ತಾಪಮಾನ D65 D73 ಬಿಳಿ, ಹಳದಿ, ನೀಲಿ, ಬೆಚ್ಚಗಿನ, ತಂಪು"</string>
@@ -3454,8 +3449,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"ವಾಲ್‌ಪೇಪರ್‌ನ ಪ್ರಖರತೆಯನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಿ"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"ಡಾರ್ಕ್ ಥೀಮ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ಡಾರ್ಕ್ ಥೀಮ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
-    <!-- no translation found for mode_dark_theme_summary (2808149708986602464) -->
-    <skip />
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"ಡಾರ್ಕ್ ಹಿನ್ನೆಲೆಯನ್ನು ಬಳಸಲು ಸಾಧನದ ಥೀಮ್ ಅನ್ನು ಬದಲಿಸಿ, ಇದು ಕಣ್ಣುಗಳಿಗೆ ಆಯಾಸ ಉಂಟುಮಾಡುವುದಿಲ್ಲ"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ಯಾವುದೇ ಡಿಸ್‌ಪ್ಲೇ ಬದಲಾವಣೆಗಳಿಲ್ಲ}=1{{effect_1}}=2{{effect_1} ಮತ್ತು {effect_2}}=3{{effect_1}, {effect_2} ಮತ್ತು {effect_3}}one{{effect_1}, {effect_2} ಮತ್ತು ಇನ್ನೂ #}other{{effect_1}, {effect_2} ಮತ್ತು ಇನ್ನೂ #}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"ಎಲ್ಲಾ ನೋಟಿಫಿಕೇಶನ್‌ಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"ಜನರು, ಆ್ಯಪ್‌ಗಳು ಮತ್ತು ಧ್ವನಿಗಳು ಅಡಚಣೆ ಉಂಟುಮಾಡಬಹುದು"</string>
@@ -3500,7 +3494,7 @@
     <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ <xliff:g id="FORMATTED_TIME">%s</xliff:g> ವರೆಗೆ ಆನ್ ಆಗಿದೆ"</string>
     <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"ನೀವು ಅದನ್ನು ಆಫ್ ಮಾಡುವವರೆಗೆ ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಹಾಗೆಯೇ ಇರುತ್ತದೆ"</string>
     <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"ವೇಳಾಪಟ್ಟಿಯ ಪ್ರಕಾರ (<xliff:g id="RULE_NAME">%s</xliff:g>) ಅಡಚಣೆ ಮಾಡಬೇಡ ಆಯ್ಕೆಯನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆನ್ ಮಾಡಲಾಗಿದೆ"</string>
-    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅಪ್ಲಿಕೇಶನ್ (<xliff:g id="APP_NAME">%s</xliff:g>) ಮೂಲಕ ಆನ್ ಮಾಡಲಾಗಿದೆ"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆ್ಯಪ್ (<xliff:g id="APP_NAME">%s</xliff:g>) ಮೂಲಕ ಆನ್ ಮಾಡಲಾಗಿದೆ"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"ಕಸ್ಟಮ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಜೊತೆಗೆ <xliff:g id="RULE_NAMES">%s</xliff:g> ಗಾಗಿ ಅಡಚಣೆ ಮಾಡಬೇಡ ಆನ್ ಆಗಿದೆ."</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"ಕಸ್ಟಮ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"ಆದ್ಯತೆ ಮಾತ್ರ"</string>
@@ -3653,7 +3647,7 @@
     <string name="notification_silence_title" msgid="4085829874452944989">"ನಿಶ್ಶಬ್ದ"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"ಡೀಫಾಲ್ಟ್"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"ತಡೆಗಳನ್ನು ಅನುಮತಿಸಿ"</string>
-    <string name="allow_interruption_summary" msgid="9044131663518112543">"ಅಪ್ಲಿಕೇಶನ್‌ ಧ್ವನಿ, ವೈಬ್ರೇಷನ್ ಮಾಡಲು ಮತ್ತು /ಅಥವಾ ಪರದೆ ಮೇಲೆ ಇಣುಕು ನೋಟದ ಅಧಿಸೂಚನೆಗಳು ಕಾಣಿಸಲು ಅವಕಾಶ ಮಾಡಿಕೊಡಿ."</string>
+    <string name="allow_interruption_summary" msgid="9044131663518112543">"ಆ್ಯಪ್‌ ಧ್ವನಿ, ವೈಬ್ರೇಷನ್ ಮಾಡಲು ಮತ್ತು /ಅಥವಾ ಪರದೆ ಮೇಲೆ ಇಣುಕು ನೋಟದ ಅಧಿಸೂಚನೆಗಳು ಕಾಣಿಸಲು ಅವಕಾಶ ಮಾಡಿಕೊಡಿ."</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"ಆದ್ಯತೆ"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"ಸಂಭಾಷಣೆ ವಿಭಾಗದ ಮೇಲ್ಭಾಗದಲ್ಲಿ ತೇಲುವ ಬಬಲ್‌ ಆಗಿ ಗೋಚರಿಸುತ್ತದೆ ಮತ್ತು ಪ್ರೊಫೈಲ್ ಚಿತ್ರವನ್ನು ಲಾಕ್‌ಸ್ಕ್ರೀನ್‌ ಮೇಲೆ‌ ಪ್ರದರ್ಶಿಸುತ್ತದೆ"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> ಹೆಚ್ಚಿನ ಸಂಭಾಷಣೆ ಫೀಚರ್‌ಗಳನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ. ಸಂಭಾಷಣೆಯನ್ನು ಆದ್ಯತೆಯನ್ನಾಗಿ ಹೊಂದಿಸಲು ನಿಮಗೆ ಸಾಧ್ಯವಿಲ್ಲ ಹಾಗೂ ಸಂಭಾಷಣೆಯನ್ನು ತೇಲುವ ಬಬಲ್‌ಗಳಾಗಿ ಪ್ರದರ್ಶಿಸಲಾಗುವುದಿಲ್ಲ."</string>
@@ -3723,7 +3717,7 @@
     <string name="picture_in_picture_keywords" msgid="3605379820551656253">"ಚಿತ್ರದಲ್ಲಿ ಚಿತ್ರ"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"ಚಿತ್ರದಲ್ಲಿ ಚಿತ್ರ"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"ಚಿತ್ರದಲ್ಲಿ ಚಿತ್ರಕ್ಕೆ ಅನುಮತಿಸಿ"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"ನೀವು ಈ ಅಪ್ಲಿಕೇಶನ್ ತೊರೆದ ಬಳಿಕ (ಉದಾಹರಣೆಗೆ, ವೀಡಿಯೊ ನೋಡಲು), ಅಪ್ಲಿಕೇಶನ್ ತೆರೆದೇ ಇರುವಾಗ ಚಿತ್ರದಲ್ಲಿ ಚಿತ್ರ ವಿಂಡೋ ರಚಿಸಲು ಈ ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಅನುಮತಿ ನೀಡಿ. ನೀವು ಬಳಸುವ ಇತರ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಮೇಲೆ ಈ ವಿಂಡೋ ಡಿಸ್‌ಪ್ಲೇ ಆಗುತ್ತದೆ."</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"ನೀವು ಈ ಆ್ಯಪ್‌ ತೊರೆದ ಬಳಿಕ (ಉದಾಹರಣೆಗೆ, ವೀಡಿಯೊ ನೋಡಲು), ಆ್ಯಪ್‌ ತೆರೆದೇ ಇರುವಾಗ ಚಿತ್ರದಲ್ಲಿ ಚಿತ್ರ ವಿಂಡೋ ರಚಿಸಲು ಈ ಆ್ಯಪ್‌ಗೆ ಅನುಮತಿ ನೀಡಿ. ನೀವು ಬಳಸುವ ಇತರ ಆ್ಯಪ್‌ಗಳ ಮೇಲೆ ಈ ವಿಂಡೋ ಡಿಸ್‌ಪ್ಲೇ ಆಗುತ್ತದೆ."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"ಕನೆಕ್ಟ್ ಆಗಿರುವ ಉದ್ಯೋಗ ಮತ್ತು ವೈಯಕ್ತಿಕ ಆ್ಯಪ್‌ಗಳು"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"ಕನೆಕ್ಟ್ ಆಗಿದೆ"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"ಕನೆಕ್ಟ್ ಆಗಿಲ್ಲ"</string>
@@ -3757,7 +3751,7 @@
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"ಈ ಆ್ಯಪ್ ಅಧಿಸೂಚನೆಗಳನ್ನು ಕಳುಹಿಸುವುದಿಲ್ಲ"</string>
     <string name="notification_channels" msgid="1502969522886493799">"ವಿಭಾಗಗಳು"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"ಇತರೆ"</string>
-    <string name="no_channels" msgid="4716199078612071915">"ಯಾವುದೇ ಅಧಿಸೂಚನೆಗಳನ್ನು ಈ ಅಪ್ಲಿಕೇಶನ್‌ ಪೋಸ್ಟ್‌ ಮಾಡಿಲ್ಲ"</string>
+    <string name="no_channels" msgid="4716199078612071915">"ಯಾವುದೇ ಅಧಿಸೂಚನೆಗಳನ್ನು ಈ ಆ್ಯಪ್‌ ಪೋಸ್ಟ್‌ ಮಾಡಿಲ್ಲ"</string>
     <string name="no_recent_channels" msgid="5068574296267584043">"ಬಳಕೆಯಾಗದ ವರ್ಗಗಳನ್ನು ತೋರಿಸಿ"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"ಆ್ಯಪ್‍‍ನಲ್ಲಿ ಹೆಚ್ಚುವರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"ಬಳಕೆಯಾಗದ ವರ್ಗಗಳನ್ನು ತೋರಿಸಿ"</string>
@@ -3788,8 +3782,8 @@
     <string name="zen_mode_choose_rule_type" msgid="7656308563653982975">"ವೇಳಾಪಟ್ಟಿಯ ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"\"<xliff:g id="RULE">%1$s</xliff:g>\" ನಿಯಮವನ್ನು ಅಳಿಸುವುದೇ?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"ಅಳಿಸಿ"</string>
-    <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"ಈ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸದ್ಯಕ್ಕೆ ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಕಸ್ಟಮ್ ನಡವಳಿಕೆಯಿಂದ ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು (<xliff:g id="APP_NAME">%1$s</xliff:g>) ಅಪ್ಲಿಕೇಶನ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆನ್ ಮಾಡುತ್ತದೆ."</string>
-    <string name="zen_mode_unknown_app_set_behavior" msgid="8544413884273894104">"ಈ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸದ್ಯಕ್ಕೆ ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಕಸ್ಟಮ್ ನಡವಳಿಕೆಯಿಂದ ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು ಅಪ್ಲಿಕೇಶನ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆನ್ ಮಾಡುತ್ತದೆ."</string>
+    <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"ಈ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸದ್ಯಕ್ಕೆ ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಕಸ್ಟಮ್ ನಡವಳಿಕೆಯಿಂದ ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು (<xliff:g id="APP_NAME">%1$s</xliff:g>) ಆ್ಯಪ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆನ್ ಮಾಡುತ್ತದೆ."</string>
+    <string name="zen_mode_unknown_app_set_behavior" msgid="8544413884273894104">"ಈ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸದ್ಯಕ್ಕೆ ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಕಸ್ಟಮ್ ನಡವಳಿಕೆಯಿಂದ ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು ಆ್ಯಪ್‌ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆನ್ ಮಾಡುತ್ತದೆ."</string>
     <string name="zen_mode_qs_set_behavior" msgid="3805244555649172848">"ಈ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸದ್ಯಕ್ಕೆ ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಕಸ್ಟಮ್ ನಡವಳಿಕೆಯಿಂದ ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು ಹಸ್ತಚಾಲಿತವಾಗಿ ಆನ್ ಮಾಡಲಾಗಿದೆ."</string>
     <string name="zen_schedule_rule_type_name" msgid="8071428540221112090">"ಸಮಯ"</string>
     <string name="zen_event_rule_type_name" msgid="1921166617081971754">"ಈವೆಂಟ್"</string>
@@ -3913,6 +3907,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"ಮೋಡ್ ಅನ್ನು ರಚಿಸಿ"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"ಕಸ್ಟಮ್ ಮೋಡ್"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"ಮೋಡ್ ಹೆಸರು"</string>
+    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
+    <skip />
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"ಕ್ಯಾಲೆಂಡರ್ ಈವೆಂಟ್‌ಗಳು"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"ಬೆಡ್‌ಟೈಮ್ ದಿನಚರಿ"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"ಡ್ರೈವಿಂಗ್ ಮಾಡುವಾಗ"</string>
@@ -3982,7 +3978,12 @@
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> ಮೂಲಕ ನಿರ್ವಹಿಸಲಾಗಿದೆ"</string>
     <string name="launch_by_default" msgid="892824422067985734">"ಡೀಫಾಲ್ಟ್ ಪ್ರಕಾರ ತೆರೆಯಿರಿ"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"ಬೆಂಬಲಿತ ಲಿಂಕ್‌ಗಳನ್ನು ತೆರೆಯಿರಿ"</string>
-    <string name="app_launch_top_intro_message" msgid="137370923637482459">"ಈ ಆ್ಯಪ್‌ನಲ್ಲಿ ವೆಬ್ ಲಿಂಕ್‌ಗಳನ್ನು ತೆರೆಯಲು ಅನುಮತಿಸಿ"</string>
+    <!-- no translation found for app_launch_open_in_app (2208182888681699512) -->
+    <skip />
+    <!-- no translation found for app_launch_open_in_browser (766170191853009756) -->
+    <skip />
+    <!-- no translation found for app_launch_top_intro_message (9037324384325518290) -->
+    <skip />
     <string name="app_launch_links_category" msgid="2380467163878760037">"ಈ ಆ್ಯಪ್‌ನಲ್ಲಿ ತೆರೆಯಲು ಇರುವ ಲಿಂಕ್‌ಗಳು"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"ಬೆಂಬಲಿತ ಲಿಂಕ್‌ಗಳು"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"ಇತರೆ ಡೀಫಾಲ್ಟ್ ಆದ್ಯತೆಗಳು"</string>
@@ -4045,8 +4046,8 @@
     <string name="default_assist_title" msgid="1182435129627493758">"ಡಿಜಿಟಲ್ ಅಸಿಸ್ಟೆಂಟ್ ಆ್ಯಪ್"</string>
     <string name="default_digital_assistant_title" msgid="5654663086385490838">"ಡೀಫಾಲ್ಟ್ ಡಿಜಿಟಲ್ ಅಸಿಸ್ಟೆಂಟ್ ಆ್ಯಪ್"</string>
     <string name="assistant_security_warning_agree" msgid="9013334158753473359">"ಅನುಮೋದಿಸು"</string>
-    <string name="default_browser_title" msgid="8342074390782390458">"ಬ್ರೌಸರ್ ಅಪ್ಲಿಕೇಶನ್"</string>
-    <string name="default_phone_title" msgid="7616730756650803827">"ಫೋನ್ ಅಪ್ಲಿಕೇಶನ್"</string>
+    <string name="default_browser_title" msgid="8342074390782390458">"ಬ್ರೌಸರ್ ಆ್ಯಪ್‌"</string>
+    <string name="default_phone_title" msgid="7616730756650803827">"ಫೋನ್ ಆ್ಯಪ್‌"</string>
     <string name="system_app" msgid="1863291702508355041">"(ಸಿಸ್ಟಂ)"</string>
     <string name="apps_storage" msgid="643866814746927111">"ಆ್ಯಪ್‍‍ಗಳ ಸಂಗ್ರಹ"</string>
     <string name="usage_access" msgid="5487993885373893282">"ಬಳಕೆ ಆ್ಯಕ್ಸೆಸ್"</string>
@@ -4118,7 +4119,7 @@
     <string name="average_memory_use" msgid="717313706368825388">"ಸರಾಸರಿ ಮೆಮೊರಿ ಬಳಕೆ"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"ಗರಿಷ್ಠ ಮೆಮೊರಿ ಬಳಕೆ"</string>
     <string name="memory_usage" msgid="5594133403819880617">"ಮೆಮೊರಿ ಬಳಕೆ"</string>
-    <string name="app_list_memory_use" msgid="3178720339027577869">"ಅಪ್ಲಿಕೇಶನ್ ಬಳಕೆ"</string>
+    <string name="app_list_memory_use" msgid="3178720339027577869">"ಆ್ಯಪ್‌ ಬಳಕೆ"</string>
     <string name="memory_details" msgid="6133226869214421347">"ವಿವರಗಳು"</string>
     <string name="memory_use_summary" msgid="3915964794146424142">"ಕಳೆದ 3 ಗಂಟೆಗಳಿಂದ ಬಳಸಲಾದ <xliff:g id="SIZE">%1$s</xliff:g> ಸರಾಸರಿ ಮೆಮೊರಿ"</string>
     <string name="no_memory_use_summary" msgid="6708111974923274436">"ಕಳೆದ 3 ಗಂಟೆಗಳಿಂದ ಯಾವುದೇ ಮೆಮೊರಿ ಬಳಸಲಾಗಿಲ್ಲ"</string>
@@ -4140,7 +4141,7 @@
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಆನ್/ಆಫ್ ಮಾಡಲು ಹಾಗೂ ಸಂಬಂಧಿಸಿದ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"ನೋಟಿಫಿಕೇಶನ್‍ ಆ್ಯಕ್ಸೆಸ್ ಆನ್ ಆಗಿರುವ ಕಾರಣ ಕಡ್ಡಾಯವಾಗಿ ಆನ್ ಆಗಿ ಉಳಿಯಬೇಕು"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"<xliff:g id="APP">%1$s</xliff:g> ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಅಡಚಣೆ ಮಾಡಬೇಡಿಗೆ ಪ್ರವೇಶವನ್ನು ಹಿಂತೆಗೆದುಕೊಳ್ಳುವುದೇ?"</string>
-    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"ಈ ಅಪ್ಲಿಕೇಶನ್ ರಚಿಸಿರುವಂತಹ ಎಲ್ಲ ಅಡಚಣೆ ಮಾಡಬೇಡಿ ನಿಯಮಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ."</string>
+    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"ಈ ಆ್ಯಪ್‌ ರಚಿಸಿರುವಂತಹ ಎಲ್ಲ ಅಡಚಣೆ ಮಾಡಬೇಡಿ ನಿಯಮಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"<xliff:g id="APP">%1$s</xliff:g> ಗಾಗಿ ಮೋಡ್‌ಗಳಿಗೆ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ಅನುಮತಿಸಬೇಕೇ?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು ಆನ್/ಆಫ್ ಮಾಡಲು, ಮೋಡ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಲು ಮತ್ತು ಸಕ್ರಿಯಗೊಳಿಸಲು ಹಾಗೂ ಸಂಬಂಧಿತ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಲು ಆ್ಯಪ್‌ಗೆ ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>
     <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"<xliff:g id="APP">%1$s</xliff:g> ಗಾಗಿ ಮೋಡ್‌ಗಳಿಗೆ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ಹಿಂಪಡೆಯಬೇಕೇ?"</string>
@@ -4150,7 +4151,7 @@
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"ನಿಮ್ಮ ಬ್ಯಾಟರಿಯನ್ನು ತ್ವರಿತವಾಗಿ ಬರಿದಾಗಿಸಬಹುದು. ಹಿನ್ನೆಲೆ ಬ್ಯಾಟರಿ ಬಳಸದಂತೆ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಇನ್ನು ಮುಂದೆ ನಿರ್ಬಂಧಿಸಲಾಗುವುದಿಲ್ಲ."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"ಉತ್ತಮ ಬ್ಯಾಟರಿ ಬಾಳಿಕೆಗೆ ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ"</string>
     <string name="app_list_preference_none" msgid="1635406344616653756">"ಯಾವುದೂ ಇಲ್ಲ"</string>
-    <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"ಈ ಅಪ್ಲಿಕೇಶನ್ ಬಳಕೆಗೆ ಪ್ರವೇಶವನ್ನು ಆಫ್ ಮಾಡಿದರೂ, ಇದು ನಿಮ್ಮ ಕೆಲಸದ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿರುವ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಡೇಟಾ ಬಳಕೆಯನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡದಂತೆ ನಿಮ್ಮ ನಿರ್ವಾಹಕರನ್ನು ತಡೆಯುವುದಿಲ್ಲ"</string>
+    <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"ಈ ಆ್ಯಪ್ ಬಳಕೆಗೆ ಪ್ರವೇಶವನ್ನು ಆಫ್ ಮಾಡಿದರೂ, ಇದು ನಿಮ್ಮ ಕೆಲಸದ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿರುವ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಡೇಟಾ ಬಳಕೆಯನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡದಂತೆ ನಿಮ್ಮ ನಿರ್ವಾಹಕರನ್ನು ತಡೆಯುವುದಿಲ್ಲ"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"‍ಇತರ ಆ್ಯಪ್‍ಗಳ ಮೇಲೆ ಪ್ರದರ್ಶಿಸುವಿಕೆ"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"ಇತರ ಆ್ಯಪ್‍ಗಳ ಮೇಲೆ ಪ್ರದರ್ಶಿಸಿ"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"‍ಇತರ ಆ್ಯಪ್ ಮೇಲೆ ಡಿಸ್‌ಪ್ಲೇ ಮಾಡಲು ಅನುಮತಿಸಿ"</string>
@@ -4185,7 +4186,7 @@
     <string name="write_settings_description" msgid="1474881759793261146">"ಈ ಅನುಮತಿಯು ಸಿಸ್ಟಂ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಮಾರ್ಪಡಿಸಲು ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಅನುಮತಿಸುತ್ತದೆ."</string>
     <string name="external_source_switch_title" msgid="101571983954849473">"ಈ ಮೂಲದಿಂದ ಅನುಮತಿಸಿ"</string>
     <string name="camera_gesture_title" msgid="5559439253128696180">"ಕ್ಯಾಮರಾಗೆ ಎರಡು ಬಾರಿ ತಿರುಗಿಸಿ"</string>
-    <string name="camera_gesture_desc" msgid="7557645057320805328">"ನಿಮ್ಮ ಮಣಿಕಟ್ಟನ್ನು ಎರಡು ಬಾರಿ ತಿರುಗಿಸುವ ಮೂಲಕ ಕ್ಯಾಮರಾ ಅಪ್ಲಿಕೇಶನ್ ತೆರೆಯಿರಿ"</string>
+    <string name="camera_gesture_desc" msgid="7557645057320805328">"ನಿಮ್ಮ ಮಣಿಕಟ್ಟನ್ನು ಎರಡು ಬಾರಿ ತಿರುಗಿಸುವ ಮೂಲಕ ಕ್ಯಾಮರಾ ಆ್ಯಪ್‌ ತೆರೆಯಿರಿ"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"ಡಿಸ್‌ಪ್ಲೇ ಗಾತ್ರ"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"ಎಲ್ಲವನ್ನೂ ದೊಡ್ಡದು ಅಥವಾ ಚಿಕ್ಕದು ಮಾಡಿ"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"ಸಾಂದ್ರತೆ, ಪರದೆ ಝೂಮ್, ಅಳತೆ, ಅಳತೆಯ ಪ್ರಮಾಣವನ್ನು ಪ್ರದರ್ಶಿಸಿ"</string>
@@ -4207,7 +4208,7 @@
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"SMS ಸಂದೇಶಗಳನ್ನು ಕಳುಹಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="disabled_by_policy_title_camera" msgid="6616508876399613773">"ಕ್ಯಾಮರಾ ಬಳಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"ಸ್ಕ್ರೀನ್‌ಶಾಟ್‌ಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
-    <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"ಈ ಅಪ್ಲಿಕೇಶನ್ ತೆರೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
+    <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"ಈ ಆ್ಯಪ್ ತೆರೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"ನಿಮ್ಮ ಕ್ರೆಡಿಟ್ ಒದಗಿಸುವವರಿಂದ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"ಪೋಷಕರ ಅಗತ್ಯವಿದೆ"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"ಇದನ್ನು ಸೆಟಪ್ ಮಾಡಲು ನಿಮ್ಮ ಪೋಷಕರ ಸಹಾಯವನ್ನು ಪಡೆದುಕೊಳ್ಳಿ"</string>
@@ -4305,7 +4306,7 @@
     <string name="data_saver_switch_title" msgid="7111538580123722959">"ಡೇಟಾ ಸೇವರ್ ಅನ್ನು ಬಳಸಿ"</string>
     <string name="unrestricted_app_title" msgid="8531936851059106374">"ಅನಿಯಂತ್ರಿತ ಮೊಬೈಲ್ ಡೇಟಾ ಬಳಕೆ"</string>
     <string name="unrestricted_app_summary" msgid="8320813971858627624">"ಡೇಟಾ ಉಳಿಸುವಿಕೆಯು ಆನ್ ಆಗಿರುವಾಗ ಅನಿಯಂತ್ರಿತ ಮೊಬೈಲ್ ಡೇಟಾ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ಅನುಮತಿಸಿ"</string>
-    <string name="home_app" msgid="6056850504746902747">"ಮುಖಪುಟ ಅಪ್ಲಿಕೇಶನ್"</string>
+    <string name="home_app" msgid="6056850504746902747">"ಮುಖಪುಟ ಆ್ಯಪ್"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"ಮತ್ತೊಂದು ಫಿಂಗರ್‌ಪ್ರಿಂಟ್ ಸೇರಿಸಿ"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"ಬೇರೆ ಬೆರಳನ್ನು ಬಳಸಿಕೊಂಡು ಅನ್‌ಲಾಕ್ ಮಾಡಿ"</string>
     <string name="battery_saver_on_summary" msgid="4605146593966255848">"ಆನ್"</string>
@@ -4379,7 +4380,7 @@
     <string name="page_tab_title_support" msgid="3235725053332345773">"ಸಲಹೆಗಳು &amp; ಬೆಂಬಲ"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"ಚಿಕ್ಕದಾದ ಅಗಲ"</string>
     <string name="premium_sms_none" msgid="4718916765158062108">"ಯಾವುದೇ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದ ಆ್ಯಪ್‌ಗಳು ಪ್ರೀಮಿಯಂ SMS ವಿನಂತಿಸಿಲ್ಲ"</string>
-    <string name="premium_sms_warning" msgid="2192300872411073324">"ಪ್ರೀಮಿಯಂ SMS ನಿಮ್ಮ ವೆಚ್ಚಗಳಿಗೆ ಕಾರಣವಾಗಬಹುದು ಮತ್ತು ಇದನ್ನು ನಿಮ್ಮ ವಾಹಕ ಬಿಲ್‌ಗಳಿಗೆ ಸೇರಿಸಲಾಗುತ್ತದೆ. ನೀವು ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಅನುಮತಿಯನ್ನು ಸಕ್ರೀಯಗೊಳಿಸಿದರೆ, ನೀವು ಆ ಅಪ್ಲಿಕೇಶನ್‌ ಬಳಸಿಕೊಂಡು ಪ್ರೀಮಿಯಂ SMS ಕಳುಹಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>
+    <string name="premium_sms_warning" msgid="2192300872411073324">"ಪ್ರೀಮಿಯಂ SMS ನಿಮ್ಮ ವೆಚ್ಚಗಳಿಗೆ ಕಾರಣವಾಗಬಹುದು ಮತ್ತು ಇದನ್ನು ನಿಮ್ಮ ವಾಹಕ ಬಿಲ್‌ಗಳಿಗೆ ಸೇರಿಸಲಾಗುತ್ತದೆ. ನೀವು ಆ್ಯಪ್‌ಗೆ ಅನುಮತಿಯನ್ನು ಸಕ್ರೀಯಗೊಳಿಸಿದರೆ, ನೀವು ಆ ಆ್ಯಪ್‌ ಬಳಸಿಕೊಂಡು ಪ್ರೀಮಿಯಂ SMS ಕಳುಹಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>
     <string name="premium_sms_access" msgid="8487315743197916530">"Premium SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"ಆಫ್"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g> ಗೆ ಸಂಪರ್ಕಿಸಲಾಗಿದೆ"</string>
@@ -4553,9 +4554,9 @@
     <string name="financed_device_info" msgid="3871860346697308342">"ಸಾಲ ಪಡೆದು ಖರೀದಿಸಿದ ಸಾಧನದ ಮಾಹಿತಿ"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{ಕ್ಯಾಮರಾ ಆ್ಯಪ್}one{ಕ್ಯಾಮರಾ ಆ್ಯಪ್‌ಗಳು}other{ಕ್ಯಾಮರಾ ಆ್ಯಪ್‌ಗಳು}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Calendar ಅಪ್ಲಿಕೇಶನ್"</string>
-    <string name="default_contacts_app_title" msgid="7740028900741944569">"ಸಂಪರ್ಕಗಳ ಅಪ್ಲಿಕೇಶನ್"</string>
+    <string name="default_contacts_app_title" msgid="7740028900741944569">"ಸಂಪರ್ಕಗಳ ಆ್ಯಪ್‌"</string>
     <string name="default_email_app_title" msgid="5411280873093244250">"{count,plural, =1{ಇಮೇಲ್ ಕ್ಲೈಂಟ್ ಆ್ಯಪ್}one{ಇಮೇಲ್ ಕ್ಲೈಂಟ್ ಆ್ಯಪ್‌ಗಳು}other{ಇಮೇಲ್ ಕ್ಲೈಂಟ್ ಆ್ಯಪ್‌ಗಳು}}"</string>
-    <string name="default_map_app_title" msgid="7569231732944853320">"ನಕ್ಷೆಯ ಅಪ್ಲಿಕೇಶನ್"</string>
+    <string name="default_map_app_title" msgid="7569231732944853320">"ನಕ್ಷೆಯ ಆ್ಯಪ್‌"</string>
     <string name="default_phone_app_title" msgid="795025972645464135">"{count,plural, =1{ಫೋನ್ ಆ್ಯಪ್‌}one{ಫೋನ್ ಆ್ಯಪ್‌ಗಳು}other{ಫೋನ್ ಆ್ಯಪ್‌ಗಳು}}"</string>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
@@ -4578,8 +4579,8 @@
     <string name="storage_trash_dialog_confirm" msgid="1707723334982760436">"ಅನುಪಯುಕ್ತವನ್ನು ಖಾಲಿ ಮಾಡಿ"</string>
     <string name="storage_usage_summary" msgid="4591121727356723463">"<xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g> ಬಳಸಲಾಗಿದೆ"</string>
     <string name="storage_total_summary" msgid="7163360249534964272">"ಒಟ್ಟು <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
-    <string name="clear_instant_app_data" msgid="5951258323364386357">"ಅಪ್ಲಿಕೇಶನ್ ತೆರವುಗೊಳಿಸಿ"</string>
-    <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"ಈ ತತ್‌ಕ್ಷಣ ಅಪ್ಲಿಕೇಶನ್ ತೆಗೆದುಹಾಕಲು ಬಯಸುವಿರಾ?"</string>
+    <string name="clear_instant_app_data" msgid="5951258323364386357">"ಆ್ಯಪ್ ತೆರವುಗೊಳಿಸಿ"</string>
+    <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"ಈ ತತ್‌ಕ್ಷಣ ಆ್ಯಪ್ ತೆಗೆದುಹಾಕಲು ಬಯಸುವಿರಾ?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"ತೆರೆಯಿರಿ"</string>
     <string name="game_storage_settings" msgid="2521393115726178837">"ಗೇಮ್‌ಗಳು"</string>
     <string name="app_info_storage_title" msgid="4076977173803093808">"ಬಳಸಿರುವ ಸ್ಥಳ"</string>
@@ -4597,7 +4598,7 @@
     <string name="credman_button_change" msgid="4072629639218503790">"ಬದಲಾಯಿಸಿ"</string>
     <string name="credman_button_open" msgid="7519871964170816850">"ತೆರೆಯಿರಿ"</string>
     <string name="credman_app_list_preference_none" msgid="2509646651254971448">"ಯಾವುದನ್ನೂ ಆಯ್ಕೆಮಾಡಿಲ್ಲ"</string>
-    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;ನಿಮಗೆ ಈ ಅಪ್ಲಿಕೇಶನ್ ಮೇಲೆ ವಿಶ್ವಾಸವಿರುವುದನ್ನು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ &lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ಯಾವ ಕ್ಷೇತ್ರಗಳನ್ನು ಸ್ವಯಂ-ಭರ್ತಿ ಮಾಡಬಹುದು ಎಂಬುದನ್ನು ನಿರ್ಧರಿಸಲು &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‍ನಲ್ಲಿನ ಮಾಹಿತಿಯನ್ನು ಬಳಸಿಕೊಳ್ಳುತ್ತದೆ."</string>
+    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;ನಿಮಗೆ ಈ ಆ್ಯಪ್‌ ಮೇಲೆ ವಿಶ್ವಾಸವಿರುವುದನ್ನು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ &lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ಯಾವ ಕ್ಷೇತ್ರಗಳನ್ನು ಸ್ವಯಂ-ಭರ್ತಿ ಮಾಡಬಹುದು ಎಂಬುದನ್ನು ನಿರ್ಧರಿಸಲು &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; ನಿಮ್ಮ ಸ್ಕ್ರೀನ್‍ನಲ್ಲಿನ ಮಾಹಿತಿಯನ್ನು ಬಳಸಿಕೊಳ್ಳುತ್ತದೆ."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ಈಗಿನಿಂದ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು, ಪಾಸ್‌ಕೀಗಳು ಮತ್ತು ಇತರ ಮಾಹಿತಿಯನ್ನು ಇಲ್ಲಿ ಉಳಿಸಲಾಗುತ್ತದೆ. ಏನನ್ನು ಆಟೋಫಿಲ್ ಮಾಡಬಹುದು ಎಂಬುದನ್ನು ನಿರ್ಧರಿಸಲು &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ನಿಮ್ಮ ಸ್ಕ್ರೀನ್ ಮೇಲಿರುವುದನ್ನು ಬಳಸಬಹುದು."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"ಪಾಸ್‌ವರ್ಡ್‌ಗಳು, ಪಾಸ್‌ಕೀಗಳು ಮತ್ತು ಆಟೋಫಿಲ್‌ಗಾಗಿ ಆದ್ಯತೆಯ ಸೇವೆಗಳು"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"1$s ಅನ್ನು ಆಫ್ ಮಾಡಬೇಕೆ?"</string>
@@ -4634,14 +4635,14 @@
     <string name="default_theme" msgid="4815428567082263639">"ಡಿಫಾಲ್ಟ್"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"ನೆಟ್‌ವರ್ಕ್‌ ಹೆಸರು"</string>
     <string name="show_operator_name_summary" msgid="5352696579216501773">"ಸ್ಥಿತಿ ಬಾರ್‌ನಲ್ಲಿ ನೆಟ್‌ವರ್ಕ್‌ ಹೆಸರನ್ನು ಪ್ರದರ್ಶಿಸಿ"</string>
-    <string name="install_type_instant" msgid="7685381859060486009">"ತತ್‌ಕ್ಷಣದ ಅಪ್ಲಿಕೇಶನ್"</string>
+    <string name="install_type_instant" msgid="7685381859060486009">"ತತ್‌ಕ್ಷಣದ ಆ್ಯಪ್‌"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"ಸಂಗ್ರಹಣೆ ನಿರ್ವಾಹಕವನ್ನು ಆಫ್ ಮಾಡಬೇಕೆ?"</string>
     <string name="zen_suggestion_title" msgid="4555260320474465668">"ಅಡಚಣೆ ಮಾಡಬೇಡಿ ಅನ್ನು ಅಪ್‌ಡೇಟ್‌ ಮಾಡಿ"</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"ಫೋಕಸ್‌ ಆಗಿ ಇರಲು ನೋಟಿಫಿಕೇಶನ್‌ಗಳನ್ನು ವಿರಾಮಗೊಳಿಸಿ"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"ಫೀಚರ್ ಲಭ್ಯವಿಲ್ಲ"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಆಫ್ ಮಾಡಲಾಗಿದೆ ಏಕೆಂದರೆ ಇದು ನಿಮ್ಮ ಫೋನ್‌ನ ಕಾರ್ಯಾಚರಣೆಯನ್ನು ನಿಧಾನಗೊಳಿಸುತ್ತದೆ"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"ಯಾವಾಗಲೂ ಕ್ರ್ಯಾಶ್ ಸಂವಾದವನ್ನು ತೋರಿಸಿ"</string>
-    <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"ಅಪ್ಲಿಕೇಶನ್ ಕ್ರ್ಯಾಶ್ ಆಗುವಾಗ ಪ್ರತಿ ಬಾರಿ ಸಂವಾದವನ್ನು ತೋರಿಸಿ"</string>
+    <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"ಆ್ಯಪ್‌ ಕ್ರ್ಯಾಶ್ ಆಗುವಾಗ ಪ್ರತಿ ಬಾರಿ ಸಂವಾದವನ್ನು ತೋರಿಸಿ"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"ANGLE ಸಕ್ರಿಯಗೊಳಿಸಿದ ಆ್ಯಪ್‌ ಆಯ್ಕೆಮಾಡಿ"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"ಯಾವುದೇ ANGLE ಸಕ್ರಿಯಗೊಳಿಸದ ಆ್ಯಪ್‌ ಅನ್ನು ಹೊಂದಿಸಿ"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"ANGLE ಸಕ್ರಿಯಗೊಳಿಸಿದ ಆ್ಯಪ್‌: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4806,8 +4807,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"ಅಮಾನ್ಯ ನೆಟ್‌ವರ್ಕ್‌ ಮೋಡ್‌ <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. ನಿರ್ಲಕ್ಷಿಸಿ."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"ಸ್ಯಾಟಲೈಟ್ ಸಂದೇಶ ಕಳುಹಿಸುವಿಕೆ"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"ಸ್ಯಾಟಲೈಟ್ ಮೂಲಕ ಪಠ್ಯ ಸಂದೇಶಗಳನ್ನು ಕಳುಹಿಸಿ ಮತ್ತು ಸ್ವೀಕರಿಸಿ. ನಿಮ್ಮ ಖಾತೆಯ ಜೊತೆಗೆ ಸೇರಿಸಲಾಗಿದೆ."</string>
-    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
-    <skip />
+    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"ಸ್ಯಾಟಲೈಟ್ ಮೂಲಕ ಪಠ್ಯ ಸಂದೇಶಗಳನ್ನು ಕಳುಹಿಸಿ ಮತ್ತು ಸ್ವೀಕರಿಸಿ. ನಿಮ್ಮ ಖಾತೆಯೊಂದಿಗೆ ಸೇರಿಸಲಾಗಿಲ್ಲ."</string>
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"ಸ್ಯಾಟಲೈಟ್ ಸಂದೇಶ ಕಳುಹಿಸುವಿಕೆ"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"ಸ್ಯಾಟಲೈಟ್ ಸಂದೇಶ ಕಳುಹಿಸುವಿಕೆ ಕುರಿತಾಗಿ"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"ಅರ್ಹ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ಖಾತೆಯ ಭಾಗವಾಗಿ, ನೀವು ಸ್ಯಾಟಲೈಟ್‌ನ ಮೂಲಕ ಪಠ್ಯ ಸಂದೇಶಗಳನ್ನು ಕಳುಹಿಸಬಹುದು ಮತ್ತು ಸ್ವೀಕರಿಸಬಹುದು"</string>
@@ -5398,20 +5398,13 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"ಹೊಂದಾಣಿಕೆಯಾಗುವ ಸಾಧನವನ್ನು ಕನೆಕ್ಟ್‌ ಮಾಡಿ"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"ಆಡಿಯೋವನ್ನು ಹಂಚಿಕೊಳ್ಳಲು ಪ್ರಾರಂಭಿಸುವುದಕ್ಕೆ ಮೊದಲು ನಿಮ್ಮ ಫೋನ್‌ಗೆ LE ಆಡಿಯೋ ಹೆಡ್‌ಫೋನ್‌ಗಳನ್ನು ಕನೆಕ್ಟ್‌ ಮಾಡಿ"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಗೆ ಬದಲಿಸಿ"</string>
-    <!-- no translation found for audio_sharing_progress_dialog_start_stream_content (1152386358063502897) -->
-    <skip />
-    <!-- no translation found for audio_sharing_progress_dialog_add_source_content (2913609550496440710) -->
-    <skip />
-    <!-- no translation found for progress_dialog_connect_device_content (1387370883978461533) -->
-    <skip />
-    <!-- no translation found for audio_sharing_retry_dialog_title (3954529199333866445) -->
-    <skip />
-    <!-- no translation found for audio_sharing_retry_dialog_content (6014534433894608834) -->
-    <skip />
-    <!-- no translation found for audio_sharing_incompatible_dialog_title (4586805264392802115) -->
-    <skip />
-    <!-- no translation found for audio_sharing_incompatible_dialog_content (3943223683620405311) -->
-    <skip />
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"ಆಡಿಯೋ ಸ್ಟ್ರೀಮ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಲಾಗುತ್ತಿದೆ…"</string>
+    <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಜೊತೆಗೆ ಹಂಚಿಕೊಳ್ಳಲಾಗುತ್ತಿದೆ…"</string>
+    <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಗೆ ಕನೆಕ್ಟ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"</string>
+    <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"ಆಡಿಯೋವನ್ನು ಹಂಚಿಕೊಳ್ಳಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"</string>
+    <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"ಏನೋ ತಪ್ಪಾಗಿದೆ. ಪುನಃ ಪ್ರಯತ್ನಿಸಿ."</string>
+    <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಜೊತೆಗೆ ಆಡಿಯೋ ಹಂಚಿಕೊಳ್ಳಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
+    <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"LE ಆಡಿಯೋವನ್ನು ಬೆಂಬಲಿಸುವ ಹೆಡ್‌ಫೋನ್‌ಗಳೊಂದಿಗೆ ಮಾತ್ರ ಆಡಿಯೋ ಹಂಚಿಕೊಳ್ಳುವಿಕೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"LE ಆಡಿಯೋ ಸ್ಟ್ರೀಮ್‌ಗೆ ಕನೆಕ್ಟ್ ಮಾಡಿ"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"ಸಮೀಪದ ಆಡಿಯೋ ಸ್ಟ್ರೀಮ್‌ಗಳು"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"ಆಡಿಯೋ ಸ್ಟ್ರೀಮ್‌ಗಳು"</string>
@@ -5459,4 +5452,10 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR ಕೋಡ್ ಸ್ಕ್ಯಾನರ್"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"ಸಹಾಯ ಬೇಕೇ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"ಹುಡುಕಾಟ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
+    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <skip />
+    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <skip />
+    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <skip />
 </resources>

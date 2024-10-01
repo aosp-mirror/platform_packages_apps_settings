@@ -246,9 +246,16 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Yhdistä verkkoon roaming-tilassa"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Yhdistä verkkoon roaming-tilassa"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Datan käytöstä saatetaan periä roaming-maksuja."</string>
-    <string name="date_time_auto" msgid="4239202185055225869">"Aseta aika automaattisesti"</string>
-    <string name="zone_auto_title" msgid="5141692422373097957">"Aseta automaattisesti"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Sijaintia käytetään aikavyöhykkeen asettamiseen, kun vaihto on päällä"</string>
+    <!-- no translation found for date_time_auto (1759599045100040686) -->
+    <skip />
+    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
+    <skip />
+    <!-- no translation found for zone_auto_title (3520584257065861479) -->
+    <skip />
+    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
+    <skip />
+    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
+    <skip />
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Käytä paikallista oletusasetusta"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Käytä 24-tuntista kelloa"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Aika"</string>
@@ -412,28 +419,17 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Kasvot, sormenjälki ja <xliff:g id="WATCH">%s</xliff:g> lisätty"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Kasvot, sormenjäljet ja <xliff:g id="WATCH">%s</xliff:g> lisätty"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"Henkilöllisyyden tunnistaminen on päällä ja edellyttää biometristä tunnistetta"</string>
-    <!-- no translation found for go_to_settings (4394928396153474179) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
-    <skip />
-    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
-    <skip />
+    <string name="go_to_settings" msgid="4394928396153474179">"Avaa Asetukset"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"Henkilöllisyyden tarkistus on päällä, eikä sinua voida tunnistaa"</string>
+    <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"Biometriikka epäonnistui liian monta kertaa. Lukitse ja avaa laite uudelleen."</string>
+    <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"Biometriikka epäonnistui liian monta kertaa. Yritä uudelleen."</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Voit ylläpitää henkilöllisyystarkastusta varkauksilta suojautumisen asetuksista. Avaa Asetukset"</string>
+    <string name="identity_check_general_error_title" msgid="5073929400896102674">"Jatkamiseen edellytetään biometriikkaa"</string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"Henkilöllisyyden tunnistaminen on päällä ja edellyttää biometristä tunnistetta, mutta kasvojasi tai sormenjälkitunnistinta ei voi käyttää\n"<ul><li>"Tarkista, että kamera on päällä, ja yritä uudelleen"</li>\n<li>"Voit laittaa henkilöllisyyden tunnistamisen pois päältä Google-tililläsi"</li></ul></string>
+    <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"Peru"</string>
+    <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"OK"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"Siirry henkilöllisyyden tarkistukseen"</string>
+    <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"Lukitusnäyttö"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticatorin lukituksen avaus"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Kello lisätty"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Kellon käyttöönotto"</string>
@@ -818,8 +814,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Salasanassa on oltava vähintään 1 merkki, joka ei ole numero}other{Salasanassa on oltava vähintään # merkkiä, jotka eivät ole numeroita}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Järjestelmänvalvoja esti salasanan, koska sitä on käytetty hiljattain."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Nousevat, laskevat tai toistuvat numerosarjat on kielletty."</string>
-    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
-    <skip />
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"Nousevat, laskevat tai toistuvat merkkisarjat on kielletty"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Vahvista"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Tyhjennä"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Näytön lukitus on jo vaihdettu. Yritä uudelleen uudella lukituksella."</string>
@@ -1310,7 +1305,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Tumman teeman musta tausta auttaa pidentämään akunkestoa joillain näytöillä. Tumman teeman aikataulut otetaan käyttöön vasta, kun näyttö on sammutettu."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tumma teema toimii nyt nukkuma-aikamoodisi aikataulun mukaan"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Nukkuma-aikamoodin asetukset"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Tiloilla voi myös aktivoida tumman teeman}=1{{mode_1} aktivoi myös tumman teeman}=2{{mode_1} ja {mode_2} aktivoivat myös tumman teeman}=3{{mode_1}, {mode_2} ja {mode_3} aktivoivat myös tumman teeman}other{{mode_1}, {mode_2} ja # muuta aktivoi myös tumman teeman}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Tiloilla voi myös aktivoida tumman teeman}=1{{mode_1} aktivoi myös tumman teeman}=2{{mode_1} ja {mode_2} aktivoivat myös tumman teeman}=3{{mode_1}, {mode_2} ja {mode_3} aktivoivat myös tumman teeman}other{{mode_1}, {mode_2} ja # muuta aktivoivat myös tumman teeman}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Tilojen asetukset"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Vielä himmeämpi"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Salli että laite on tavallista himmeämpi"</string>
@@ -1635,7 +1630,8 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Salli sovellusten ja palvelujen hakea lähellä olevia laitteita aina, vaikka Bluetooth olisi pois käytöstä. Näin voidaan esimerkiksi kehittää sijaintiin perustuvia ominaisuuksia ja palveluja."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Sijaintipalvelut"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Sijaintipalvelut"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Käytä sijaintia"</string>
+    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
+    <skip />
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Aikavyöhykettä ei voi asettaa automaattisesti"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Sijainti tai Sijaintipalvelut ovat pois päältä"</string>
@@ -1646,11 +1642,13 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Sijaintiasetukset"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Ratkaise ongelma"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Peru"</string>
-    <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"Automaattinen aikavyöhyke on poissa päältä"</string>
+    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
+    <skip />
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Sijainnin aikavyöhykkeen tunnistus on poistettu käytöstä"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Sijainnin aikavyöhykkeen tunnistusta ei tueta"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Sijainnin aikavyöhykkeen tunnistukseen ei voi tehdä muutoksia"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Sijaintia voidaan käyttää aikavyöhykkeen asettamiseen"</string>
+    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"Näytä lakitiedot, tila, ohjelmiston versio"</string>
     <string name="legal_information" msgid="7509900979811934843">"Oikeudelliset tiedot"</string>
     <string name="manual" msgid="3651593989906084868">"Käyttöopas"</string>
@@ -1979,14 +1977,11 @@
     <string name="pointer_fill_style" msgid="8794616790175016092">"Osoittimen väri"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Musta osoittimen täytön tyyli"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Vihreä osoittimen täytön tyyli"</string>
-    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
-    <skip />
+    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"Vaihda osoittimen täytön tyyli punaiseksi"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Pinkki osoittimen täytön tyyli"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Sininen osoittimen täytön tyyli"</string>
-    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
-    <skip />
+    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"Vaihda osoittimen täytön tyyli purppuraksi"</string>
+    <string name="pointer_stroke_style" msgid="139962661485972329">"Osoittimen vedon väri"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Valkoinen"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Musta"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Ei mitään"</string>
@@ -2038,8 +2033,7 @@
     <string name="pointer_scale" msgid="4941564570571663964">"Osoittimen kokoasteikko"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Pienennä osoittimen kokoa"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Suurenna osoittimen kokoa"</string>
-    <!-- no translation found for pointer_scale_keywords (8939432511048322072) -->
-    <skip />
+    <string name="pointer_scale_keywords" msgid="8939432511048322072">"asteikko, koko, osoittimen kokoasteikko, osoittimen koko, suuri hiiren osoitin, suuri, havaittavissa"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Peliohjaimet"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Uudelleenohjaa värinä"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Ohjaa värinä peliohjaimeen, jos se on kytketty."</string>
@@ -3386,10 +3380,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Verkkoon yhdistettävien laitteiden asetukset"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Tila-audio"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Pois päältä"</string>
-    <!-- no translation found for spatial_audio_multi_toggle_on (4204808183659033003) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (4156440073634867249) -->
-    <skip />
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"Kiinteä"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"Pään seuranta"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ei yhtään}=1{1 aikataulu luotu}other{# aikataulua luotu}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Älä häiritse"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Tilat"</string>
@@ -3457,8 +3449,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Muuta taustakuvan kirkkautta"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Ota tumma teema käyttöön"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ota tumma teema käyttöön"</string>
-    <!-- no translation found for mode_dark_theme_summary (2808149708986602464) -->
-    <skip />
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Vaihda laitteen teemaan, jossa on silmille hellävaraisempi tumma tausta"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ei muutoksia näyttöön}=1{{effect_1}}=2{{effect_1} ja {effect_2}}=3{{effect_1}, {effect_2} ja {effect_3}}other{{effect_1}, {effect_2} ja # muuta}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Salli kaikki ilmoitukset"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Ihmiset, sovellukset ja äänet voivat keskeyttää"</string>
@@ -3916,6 +3907,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Luo tila"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Oma tila"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Tilan nimi"</string>
+    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
+    <skip />
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalenteritapahtumat"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Nukkumaanmeno-ohjelma"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Ajon aikana"</string>
@@ -3985,7 +3978,12 @@
     <string name="managing_admin" msgid="2633920317425356619">"Hallinnoija: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Avaa oletuksena"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Avaa tuetut linkit"</string>
-    <string name="app_launch_top_intro_message" msgid="137370923637482459">"Salli verkkolinkkien avaaminen tässä sovelluksessa"</string>
+    <!-- no translation found for app_launch_open_in_app (2208182888681699512) -->
+    <skip />
+    <!-- no translation found for app_launch_open_in_browser (766170191853009756) -->
+    <skip />
+    <!-- no translation found for app_launch_top_intro_message (9037324384325518290) -->
+    <skip />
     <string name="app_launch_links_category" msgid="2380467163878760037">"Sovelluksella avattavat linkit"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Tuetut linkit"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Muut oletusasetukset"</string>
@@ -4809,8 +4807,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Virheellinen verkkotila <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ohita."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"Satelliittiviestintä"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Lähetä ja vastaanota tekstiviestejä satelliitin kautta. Sisältyy tiliin."</string>
-    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
-    <skip />
+    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Lähetä ja vastaanota tekstiviestejä satelliitin kautta. Ei sisälly tiliin."</string>
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"Satelliittiviestintä"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Tietoa satelliittiviestinnästä"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Voit lähettää ja vastaanottaa tekstiviestejä satelliitin kautta osana ehdot täyttävää <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ‑tiliä"</string>
@@ -5401,20 +5398,13 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Yhdistä yhteensopiva laite"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Jos haluat jakaa audiota, yhdistä ensin LE Audio ‑kuulokkeet puhelimeen"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Vaihda: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_progress_dialog_start_stream_content (1152386358063502897) -->
-    <skip />
-    <!-- no translation found for audio_sharing_progress_dialog_add_source_content (2913609550496440710) -->
-    <skip />
-    <!-- no translation found for progress_dialog_connect_device_content (1387370883978461533) -->
-    <skip />
-    <!-- no translation found for audio_sharing_retry_dialog_title (3954529199333866445) -->
-    <skip />
-    <!-- no translation found for audio_sharing_retry_dialog_content (6014534433894608834) -->
-    <skip />
-    <!-- no translation found for audio_sharing_incompatible_dialog_title (4586805264392802115) -->
-    <skip />
-    <!-- no translation found for audio_sharing_incompatible_dialog_content (3943223683620405311) -->
-    <skip />
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"Audiostriimiä käynnistetään…"</string>
+    <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"Jaetaan laitteelle <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"Yhdistetään laitteeseen <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"Audion jakaminen ei onnistu"</string>
+    <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Jotain meni pieleen. Yritä uudelleen."</string>
+    <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"Audiota ei voi jakaa tälle laitteelle: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"Audionjako toimii vain LE Audiota tukevilla kuulokkeilla"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Yhdistä LE Audio ‑striimiin"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Lähellä olevat audiostriimit"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Audiostriimit"</string>
@@ -5462,4 +5452,10 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-koodiskanneri"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Tarvitsetko apua?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Hae asetuksista"</string>
+    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <skip />
+    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <skip />
+    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <skip />
 </resources>
