@@ -246,9 +246,16 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Conectar a servicios de datos en roaming"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Conectar a servicios de datos en roaming"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Es posible que se apliquen cargos de roaming."</string>
-    <string name="date_time_auto" msgid="4239202185055225869">"Establecer la hora automáticamente"</string>
-    <string name="zone_auto_title" msgid="5141692422373097957">"Establecer automáticamente"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Se usará la ubicación para establecer la zona horaria cuando el botón de activación esté habilitado"</string>
+    <!-- no translation found for date_time_auto (1759599045100040686) -->
+    <skip />
+    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
+    <skip />
+    <!-- no translation found for zone_auto_title (3520584257065861479) -->
+    <skip />
+    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
+    <skip />
+    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
+    <skip />
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar configuración regional predeterminada"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Formato de 24 horas"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Hora"</string>
@@ -412,28 +419,17 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rostro, huella dactilar y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rostro, huellas dactilares y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"La Verificación de identidad está activada y requiere que uses datos biométricos"</string>
-    <!-- no translation found for go_to_settings (4394928396153474179) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
-    <skip />
-    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
-    <skip />
+    <string name="go_to_settings" msgid="4394928396153474179">"Ir a Configuración"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"La función de Identity Check está activada pero no puede verificar tu identidad"</string>
+    <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"El reconocimiento de datos biométricos falló demasiadas veces. Bloquea y desbloquea el dispositivo para volver a intentarlo."</string>
+    <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"El reconocimiento de datos biométricos falló demasiadas veces. Vuelve a intentarlo."</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Puedes administrar Identity Check en la configuración de la protección ante robo. Ir a Configuración"</string>
+    <string name="identity_check_general_error_title" msgid="5073929400896102674">"Se requieren datos biométricos para continuar"</string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"La función de Identity Check está activada y requiere el uso de datos biométricos, pero el sensor de rostro o huellas dactilares no está disponible\n"<ul><li>"Comprueba que la cámara esté encendida y vuelve a intentarlo"</li>\n<li>"Puedes desactivar Identity Check con tu Cuenta de Google"</li></ul></string>
+    <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"Cancelar"</string>
+    <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"Aceptar"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"Ir a Identity Check"</string>
+    <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"Bloquear pantalla"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Authenticator Unlock remoto"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Se agregó el reloj"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configura el reloj"</string>
@@ -1634,7 +1630,8 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Permite que las apps y los servicios busquen dispositivos cercanos en cualquier momento, aunque la conexión Bluetooth esté desactivada. Esta función puede usarse, por ejemplo, para mejorar las funciones y los servicios basados en la ubicación."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Servicios de ubicación"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Servicios de ubicación"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Usar ubicación"</string>
+    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
+    <skip />
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"No se puede establecer la zona horaria automát."</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"La ubicación o los Servicios de ubicación están desactivados"</string>
@@ -1645,11 +1642,13 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Configuración de la ubicación"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Corregir"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Cancelar"</string>
-    <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"La zona horaria automática está desactivada"</string>
+    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
+    <skip />
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Se inhabilitó la detección de la zona horaria de la ubicación"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"La detección de la zona horaria de la ubicación no es compatible"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"No se permiten los cambios de detección de la zona horaria de la ubicación"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Se puede usar la ubicación para configurar la zona horaria"</string>
+    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
+    <skip />
     <string name="about_settings_summary" msgid="4831942939227432513">"Ver información legal, estado, versión de software del tablet"</string>
     <string name="legal_information" msgid="7509900979811934843">"Información legal"</string>
     <string name="manual" msgid="3651593989906084868">"Manual"</string>
@@ -1975,18 +1974,14 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic de la parte inferior derecha"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Más opciones en la esquina inferior derecha del panel táctil"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Velocidad del puntero"</string>
-    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="8794616790175016092">"Color del puntero"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Cambia el estilo de relleno a negro"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Cambia el estilo de relleno a verde"</string>
-    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
-    <skip />
+    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"Cambia el estilo de relleno a rojo"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Cambia el estilo de relleno a rosa"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Cambia el estilo de relleno a azul"</string>
-    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
-    <skip />
+    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"Cambia el estilo de relleno a púrpura"</string>
+    <string name="pointer_stroke_style" msgid="139962661485972329">"Color del trazo del puntero"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Blanco"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Negro"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Ninguno"</string>
@@ -2038,8 +2033,7 @@
     <string name="pointer_scale" msgid="4941564570571663964">"Tamaño del puntero"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Achicar el tamaño del puntero"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Agrandar el tamaño del puntero"</string>
-    <!-- no translation found for pointer_scale_keywords (8939432511048322072) -->
-    <skip />
+    <string name="pointer_scale_keywords" msgid="8939432511048322072">"escala, tamaño, escala del puntero, tamaño del puntero, puntero del mouse grande, grande, notable"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controlador de juegos"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redireccionar vibración"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Enviar la vibración al controlador de juegos cuando esté conectado"</string>
@@ -2099,12 +2093,9 @@
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Pantalla"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Color y movimiento"</string>
-    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
-    <skip />
+    <string name="accessibility_pointer_and_touchpad_title" msgid="8719482393177273831">"Accesibilidad del puntero y del panel táctil"</string>
+    <string name="accessibility_pointer_and_touchpad_summary" msgid="6089872217234956258">"Color y tamaño del puntero, y mucho más"</string>
+    <string name="accessibility_pointer_color_customization_title" msgid="3376392766113189508">"Personalización del color del puntero"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contraste de color"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"El contraste más alto destaca el texto, los botones y los íconos. Elige la intensidad que más te guste."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Es posible que algunas apps no admitan todos los parámetros de contraste de texto y colores"</string>
@@ -3458,8 +3449,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtra el brillo del fondo de pantalla"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Habilitar el tema oscuro"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"Habilitar el tema oscuro"</string>
-    <!-- no translation found for mode_dark_theme_summary (2808149708986602464) -->
-    <skip />
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Cambia el tema del dispositivo para usar un fondo oscuro, que es más cómodo para la vista"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Sin cambios de visualización}=1{{effect_1}}=2{{effect_1} y {effect_2}}=3{{effect_1}, {effect_2} y {effect_3}}other{{effect_1}, {effect_2} y # más}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Permitir todas las notificaciones"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Las personas, las apps y los sonidos pueden interrumpir"</string>
@@ -3917,6 +3907,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Crea un modo"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Modo personalizado"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Nombre del modo"</string>
+    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
+    <skip />
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventos de calendario"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina Hora de dormir"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Mientras conduces"</string>
@@ -3986,7 +3978,12 @@
     <string name="managing_admin" msgid="2633920317425356619">"Administrado por <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Abrir de forma predeterminada"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Abrir vínculos admitidos"</string>
-    <string name="app_launch_top_intro_message" msgid="137370923637482459">"Permitir que se abran vínculos web en esta app"</string>
+    <!-- no translation found for app_launch_open_in_app (2208182888681699512) -->
+    <skip />
+    <!-- no translation found for app_launch_open_in_browser (766170191853009756) -->
+    <skip />
+    <!-- no translation found for app_launch_top_intro_message (9037324384325518290) -->
+    <skip />
     <string name="app_launch_links_category" msgid="2380467163878760037">"Vínculos que se pueden abrir en esta app"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Vínculos admitidos"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Otras preferencias predeterminadas"</string>
@@ -4810,8 +4807,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"El modo de red no es válido: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorar."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"Mensajería satelital"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Envía y recibe mensajes de texto a través de satélites (incluido con tu cuenta)."</string>
-    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
-    <skip />
+    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Envía y recibe mensajes de texto a través de satélites No se incluye con tu cuenta."</string>
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"Mensajería satelital"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Información sobre la mensajería satelital"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Puedes enviar y recibir mensajes de texto por satélite como parte de una cuenta de <xliff:g id="CARRIER_NAME">%1$s</xliff:g> apta"</string>
@@ -5402,20 +5398,13 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Conectar un dispositivo compatible"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Para comenzar a compartir audio, conecta auriculares compatibles con LE Audio a tu teléfono"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Cambiar a <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_progress_dialog_start_stream_content (1152386358063502897) -->
-    <skip />
-    <!-- no translation found for audio_sharing_progress_dialog_add_source_content (2913609550496440710) -->
-    <skip />
-    <!-- no translation found for progress_dialog_connect_device_content (1387370883978461533) -->
-    <skip />
-    <!-- no translation found for audio_sharing_retry_dialog_title (3954529199333866445) -->
-    <skip />
-    <!-- no translation found for audio_sharing_retry_dialog_content (6014534433894608834) -->
-    <skip />
-    <!-- no translation found for audio_sharing_incompatible_dialog_title (4586805264392802115) -->
-    <skip />
-    <!-- no translation found for audio_sharing_incompatible_dialog_content (3943223683620405311) -->
-    <skip />
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"Iniciando reproducción de audio…"</string>
+    <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"Compartiendo con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"Estableciendo conexión con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"No se pudo compartir el audio"</string>
+    <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Se produjo un error. Vuelve a intentarlo."</string>
+    <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"No se puede compartir audio con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"El uso compartido de audio solo funciona con auriculares compatibles con LE Audio"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Conectarse a reproducción de LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Reproducciones de audio cercanas"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Reproducciones de audio"</string>
@@ -5463,4 +5452,10 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Escáner de código QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"¿Necesitas ayuda?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Buscar en Configuración"</string>
+    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <skip />
+    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <skip />
+    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <skip />
 </resources>
