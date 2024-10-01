@@ -69,16 +69,16 @@ public class AccessibilityButtonLocationPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_navigationGestureEnabled_returnConditionallyUnavailable() {
-        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
-                .thenReturn(NAV_BAR_MODE_GESTURAL);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, NAV_BAR_MODE_GESTURAL, mContext.getUserId());
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_navigationGestureDisabled_returnAvailable() {
-        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
-                .thenReturn(NAV_BAR_MODE_2BUTTON);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, NAV_BAR_MODE_2BUTTON, mContext.getUserId());
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
