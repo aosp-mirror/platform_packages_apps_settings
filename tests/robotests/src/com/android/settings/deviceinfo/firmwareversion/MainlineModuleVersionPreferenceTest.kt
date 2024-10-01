@@ -150,7 +150,7 @@ class MainlineModuleVersionPreferenceTest {
         mainlineModuleVersionPreference.bind(preference, mainlineModuleVersionPreference)
 
         assertThat(preference.intent).isNull()
-        assertThat(preference.isSelectable).isFalse()
+        assertThat(preference.isSelectable).isTrue()
     }
 
     private fun createMocks(
