@@ -38,6 +38,8 @@ import android.service.notification.ZenPolicy;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -118,25 +120,27 @@ class ZenModePrioritySendersPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         mPreferenceCategory = checkNotNull(screen.findPreference(getPreferenceKey()));
         if (mPreferenceCategory.getPreferenceCount() == 0) {
-            makeSelectorPreference(KEY_STARRED,
-                    com.android.settings.R.string.zen_mode_from_starred, mIsMessages, true);
-            makeSelectorPreference(KEY_CONTACTS,
-                    com.android.settings.R.string.zen_mode_from_contacts, mIsMessages, true);
+            makeSelectorPreference(KEY_STARRED, R.string.zen_mode_from_starred,
+                    R.string.zen_mode_from_starred_settings, mIsMessages, true);
+            makeSelectorPreference(KEY_CONTACTS, R.string.zen_mode_from_contacts,
+                    R.string.zen_mode_from_contacts_settings, mIsMessages, true);
             if (mIsMessages) {
                 // "Any conversations" will only be available as option if it is the current value.
                 // Because it's confusing and we don't want users setting it up that way, but apps
                 // could create such ZenPolicies and we must show that.
                 makeSelectorPreference(KEY_ANY_CONVERSATIONS,
-                        com.android.settings.R.string.zen_mode_from_all_conversations, true,
+                        R.string.zen_mode_from_all_conversations,
+                        R.string.zen_mode_from_conversations_settings, true,
                         /* isVisibleByDefault= */ false);
                 makeSelectorPreference(KEY_IMPORTANT_CONVERSATIONS,
-                        com.android.settings.R.string.zen_mode_from_important_conversations, true,
+                        R.string.zen_mode_from_important_conversations,
+                        R.string.zen_mode_from_conversations_settings, true,
                         true);
             }
             makeSelectorPreference(KEY_ANY,
-                    com.android.settings.R.string.zen_mode_from_anyone, mIsMessages, true);
+                    R.string.zen_mode_from_anyone, null, mIsMessages, true);
             makeSelectorPreference(KEY_NONE,
-                    com.android.settings.R.string.zen_mode_none_messages, mIsMessages, true);
+                    R.string.zen_mode_none_messages, null, mIsMessages, true);
         }
         super.displayPreference(screen);
     }
@@ -229,8 +233,9 @@ class ZenModePrioritySendersPreferenceController
         return CONVERSATION_SENDERS_UNSET;
     }
 
-    private void makeSelectorPreference(String key, int titleId,
-            boolean isCheckbox, boolean isVisibleByDefault) {
+    private void makeSelectorPreference(String key, @StringRes int titleId,
+            @Nullable @StringRes Integer settingsContentDescriptionResId, boolean isCheckbox,
+            boolean isVisibleByDefault) {
         final SelectorWithWidgetPreference pref =
                 new SelectorWithWidgetPreference(mPreferenceCategory.getContext(), isCheckbox);
         pref.setKey(key);
@@ -241,6 +246,9 @@ class ZenModePrioritySendersPreferenceController
         View.OnClickListener widgetClickListener = getWidgetClickListener(key);
         if (widgetClickListener != null) {
             pref.setExtraWidgetOnClickListener(widgetClickListener);
+            pref.setExtraWidgetContentDescription(settingsContentDescriptionResId != null
+                    ? mContext.getString(settingsContentDescriptionResId)
+                    : null);
         }
 
         mPreferenceCategory.addPreference(pref);
