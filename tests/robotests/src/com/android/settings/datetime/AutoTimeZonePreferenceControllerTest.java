@@ -282,10 +282,12 @@ public class AutoTimeZonePreferenceControllerTest {
                         locationSupported ? Capabilities.CAPABILITY_POSSESSED
                                 : Capabilities.CAPABILITY_NOT_SUPPORTED)
                 .setSetManualTimeZoneCapability(Capabilities.CAPABILITY_POSSESSED)
+                .setConfigureNotificationsEnabledCapability(Capabilities.CAPABILITY_POSSESSED)
                 .build();
         TimeZoneConfiguration config = new TimeZoneConfiguration.Builder()
                 .setAutoDetectionEnabled(autoEnabled)
                 .setGeoDetectionEnabled(locationSupported)
+                .setNotificationsEnabled(true)
                 .build();
         return new TimeZoneCapabilitiesAndConfig(status, capabilities, config);
     }

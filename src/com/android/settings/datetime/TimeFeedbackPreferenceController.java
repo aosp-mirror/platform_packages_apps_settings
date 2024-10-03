@@ -67,7 +67,7 @@ public class TimeFeedbackPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        if (!TimeFeedbackLaunchUtils.isFeedbackFeatureSupported()) {
+        if (!DateTimeLaunchUtils.isFeedbackFeatureSupported()) {
             return UNSUPPORTED_ON_DEVICE;
         }
         return mAvailabilityStatus;

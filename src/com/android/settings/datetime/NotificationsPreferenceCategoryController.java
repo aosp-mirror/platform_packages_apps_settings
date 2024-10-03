@@ -19,6 +19,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.android.server.flags.Flags;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -26,15 +27,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 /**
- * A controller for the Settings category for "time feedback".
+ * A controller for the Settings category for "time notifications".
  */
-public class TimeFeedbackPreferenceCategoryController extends BasePreferenceController {
+public class NotificationsPreferenceCategoryController extends BasePreferenceController {
 
     private final List<AbstractPreferenceController> mChildControllers = new ArrayList<>();
 
-    public TimeFeedbackPreferenceCategoryController(
-            Context context, String preferenceKey) {
+    public NotificationsPreferenceCategoryController(@NonNull Context context,
+            @NonNull String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -48,7 +50,7 @@ public class TimeFeedbackPreferenceCategoryController extends BasePreferenceCont
     @Override
     public int getAvailabilityStatus() {
         // Firstly, hide the category if it is not enabled by flags.
-        if (!isTimeFeedbackFeatureEnabled()) {
+        if (!Flags.datetimeNotifications()) {
             return UNSUPPORTED_ON_DEVICE;
         }
 
@@ -59,9 +61,5 @@ public class TimeFeedbackPreferenceCategoryController extends BasePreferenceCont
             }
         }
         return UNSUPPORTED_ON_DEVICE;
-    }
-
-    protected boolean isTimeFeedbackFeatureEnabled() {
-        return DateTimeLaunchUtils.isFeedbackFeatureSupported();
     }
 }
