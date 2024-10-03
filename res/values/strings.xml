@@ -2291,6 +2291,10 @@
     <string name="wifi_dpp_failure_enrollee_rejected_configuration">Contact the device manufacturer</string>
     <!-- Hint for Wi-Fi connection fail [CHAR LIMIT=NONE]  -->
     <string name="wifi_dpp_check_connection_try_again">Check connection and try again</string>
+    <!-- Hint for Wi-Fi connection fail [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_check_connection_no_matched_ssid">This Wi\u2011Fi network isn\u2019t available right now</string>
+    <!-- Hint for Wi-Fi connection fail [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_check_connection_no_matched_security">There\u2019s a problem with this QR code. Try connecting another way.</string>
     <!-- Title for the fragment choose network [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_choose_network">Choose network</string>
     <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=NONE] -->
@@ -9335,6 +9339,10 @@
             other {# conversations}
         }
     </string>
+
+    <!-- Modes: Content description of the "gear" icon that takes the user to the Conversation settings. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_from_conversations_settings">Conversations settings</string>
+
     <!-- [CHAR LIMIT=120] Zen mode settings: Header for calls and messages section of conversations
     setting page -->
     <string name="zen_mode_people_calls_messages_section_title">Who can interrupt</string>
@@ -9402,6 +9410,11 @@
     <string name="zen_mode_from_contacts">Contacts</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From starred contacts only -->
     <string name="zen_mode_from_starred">Starred contacts</string>
+
+    <!-- Modes: Content description of the "gear" icon that takes the user to the Contacts app to manage contacts. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_from_contacts_settings">Contacts settings</string>
+    <!-- Modes: Content description of the "gear" icon that takes the user to the Contacts app to manage starred contacts. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_from_starred_settings">Starred contacts settings</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls option value: No calls allowed -->
     <string name="zen_mode_none_calls">None</string>
@@ -9475,6 +9488,8 @@
     <string name="zen_mode_apps_work_app"><xliff:g id="app_label" example="Chrome">%s</xliff:g> (Work)</string>
     <!-- Text displayed (for a brief time) while the list of bypassing apps is being fetched. Will be replaced by a zen_mode_apps_subtext. [CHAR_LIMIT=60] -->
     <string name="zen_mode_apps_calculating">Calculating\u2026</string>
+    <!-- Modes: Content description of the "gear" icon that takes the user to the "Apps that can interrupt" settings. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_apps_priority_apps_settings">Apps settings</string>
     <!-- Modes: Format for a string displayed when there are more items (e.g. apps, contacts) that can be shown. For example, we show (A)(B)(C)(+5), where this string represents the "+5" value. Needs to be as compact as possible, since it will be drawn in a really small area. [CHAR_LIMIT=4] -->
     <string name="zen_mode_plus_n_items">+<xliff:g id="number" example="42">%d</xliff:g></string>
 
