@@ -1834,6 +1834,24 @@ public class UserSettings extends SettingsPreferenceFragment
                             MultiUserSwitchBarController.class.getName();
 
                     rawData.add(allowMultipleUsersResult);
+
+                    SearchIndexableRaw addUserData = new SearchIndexableRaw(context);
+                    addUserData.key = KEY_ADD_USER;
+
+                    // Dynamically set the title of addUser preference
+                    final UserCapabilities userCaps = UserCapabilities.create(context);
+                    if (!userCaps.mCanAddRestrictedProfile) {
+                        addUserData.title = context.getString(
+                                com.android.settingslib.R.string.user_add_user);
+                    } else {
+                        addUserData.title = context.getString(
+                                R.string.user_add_user_or_profile_menu);
+                    }
+                    addUserData.screenTitle = context.getString(R.string.user_settings_title);
+                    addUserData.iconResId = R.drawable.ic_add_40dp;
+
+                    rawData.add(addUserData);
+
                     return rawData;
                 }
 

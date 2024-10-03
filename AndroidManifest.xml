@@ -1385,40 +1385,6 @@
         </activity>
 
         <activity
-            android:name=".notification.zen.ZenSuggestionActivity"
-            android:label="@string/zen_mode_settings_title"
-            android:icon="@drawable/ic_suggestion_dnd"
-            android:exported="true"
-            android:theme="@android:style/Theme.NoDisplay">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.ZEN" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
-            </intent-filter>
-
-            <meta-data android:name="com.android.settings.dismiss"
-                       android:value="0" />
-            <meta-data android:name="com.android.settings.title"
-                       android:resource="@string/zen_suggestion_title" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/zen_suggestion_summary" />
-        </activity>
-
-        <activity
-            android:name=".notification.zen.ZenOnboardingActivity"
-            android:label="@string/zen_onboarding_dnd_visual_disturbances_header"
-            android:icon="@drawable/ic_notifications"
-            android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
-            android:exported="true">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.ZEN_MODE_ONBOARDING" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name="Settings$ZenModeAutomationSettingsActivity"
             android:label="@string/zen_mode_automation_settings_title"
             android:icon="@drawable/ic_notifications"
