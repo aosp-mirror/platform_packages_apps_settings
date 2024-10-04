@@ -412,28 +412,17 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Dodano skan twarzy, odcisk palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Dodano skan twarzy, odciski palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"Weryfikacja tożsamości jest włączona i wymaga danych biometrycznych"</string>
-    <!-- no translation found for go_to_settings (4394928396153474179) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
-    <skip />
-    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
-    <skip />
+    <string name="go_to_settings" msgid="4394928396153474179">"Otwórz Ustawienia"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"Weryfikacja tożsamości jest włączona i nie może potwierdzić, że to Ty"</string>
+    <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"Podanie danych biometrycznych nie powiodło się zbyt wiele razy. Zablokuj i odblokuj urządzenie, aby spróbować ponownie."</string>
+    <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"Podanie danych biometrycznych nie powiodło się zbyt wiele razy. Spróbuj ponownie."</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Weryfikacją tożsamości można zarządzać w ustawieniach ochrony w razie kradzieży. Otwórz Ustawienia"</string>
+    <string name="identity_check_general_error_title" msgid="5073929400896102674">"Aby kontynuować, musisz użyć biometrii"</string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"Weryfikacja tożsamości jest włączona i wymaga danych biometrycznych, ale czujnik rozpoznawania twarzy lub czytnik linii papilarnych jest niedostępny\n"<ul><li>"Sprawdź, czy aparat jest włączony, i spróbuj ponownie"</li>\n<li>"Możesz wyłączyć weryfikację tożsamości na koncie Google"</li></ul></string>
+    <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"Anuluj"</string>
+    <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"OK"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"Przejdź do weryfikacji tożsamości"</string>
+    <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"Ekran blokady"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Odblokowanie Remote Authenticator"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Dodano zegarek"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Skonfiguruj zegarek"</string>
@@ -594,7 +583,7 @@
     <string name="private_space_face_settings_footer" msgid="7722256209563543711">"Używaj rozpoznawania twarzy do odblokowywania przestrzeni prywatnej.\n\nPamiętaj:\nMożesz mieć skonfigurowany tylko jeden model twarzy. Jeśli chcesz dodać inny model twarzy, usuń bieżący.\n\nPatrząc na telefon, możesz niechcący odblokować przestrzeń prywatną.\n\nMoże to także zrobić inna osoba, zbliżając urządzenie do Twojej twarzy.\n\nIstnieje też możliwość, że ktoś bardzo podobny do Ciebie (np. bliźniacze rodzeństwo) będzie w stanie odblokować Twoją przestrzeń prywatną."</string>
     <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"W przypadku rozpoznawania twarzy zawsze wymagaj etapu potwierdzenia"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Sposoby odblokowywania"</string>
-    <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Taka sama jak blokada ekranu urządzenia"</string>
+    <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Identycznie jak blokada ekranu urządzenia"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Wybrać nową blokadę dla przestrzeni prywatnej?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"Na następnym ekranie będzie trzeba wpisać kod PIN lub hasło albo narysować wzór ustawiony na urządzeniu."</string>
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Automatyczne blokowanie przestrzeni prywatnej"</string>
@@ -818,8 +807,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Musi zawierać co najmniej 1 znak niebędący cyfrą}few{Musi zawierać co najmniej # znaki niebędące cyframi}many{Musi zawierać co najmniej # znaków niebędących cyframi}other{Musi zawierać co najmniej # znaku niebędącego cyfrą}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Administrator urządzenia nie zezwala na ustawianie niedawno używanego hasła"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Ciąg cyfr rosnących, malejących lub powtarzających się jest niedozwolony"</string>
-    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
-    <skip />
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"Rosnący, malejący lub powtarzający się ciąg znaków jest niedozwolony"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Potwierdź"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Wyczyść"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Blokada ekranu została już zmieniona. Spróbuj ponownie, używając nowej blokady."</string>
@@ -1976,18 +1964,14 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Kliknięcie w prawym dolnym rogu"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliknij prawy dolny róg touchpada, aby zobaczyć więcej opcji"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Szybkość wskaźnika"</string>
-    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="8794616790175016092">"Kolor wskaźnika"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Zmień styl wypełnienia na czarny"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Zmień styl wypełnienia na zielony"</string>
-    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
-    <skip />
+    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"Zmień styl wypełnienia na czerwony"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Zmień styl wypełnienia na różowy"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Zmień styl wypełnienia na niebieski"</string>
-    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
-    <skip />
+    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"Zmień styl wypełnienia na fioletowy"</string>
+    <string name="pointer_stroke_style" msgid="139962661485972329">"Kolor obrysu wskaźnika"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Biały"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Czarny"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Brak"</string>
@@ -2029,7 +2013,7 @@
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Wybierz klawisz modyfikujący"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Wybierz nowy klawisz jako <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Ułatwienia dostępu z klawiatury fizycznej"</string>
-    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Klawisze trwałe, klawisze zwrócone, klawisze sterowania myszą"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Klawisze trwałe, Klawisze z filtrem powtórzeń, klawisze sterowania myszą"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Układ <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Domyślny"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatyczny: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2039,6 +2023,7 @@
     <string name="pointer_scale" msgid="4941564570571663964">"Skala wskaźnika"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Zmniejsz wskaźnik"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Zwiększ wskaźnik"</string>
+    <string name="pointer_scale_keywords" msgid="8939432511048322072">"skala, rozmiar, skala wskaźnika, rozmiar wskaźnika, duży wskaźnik myszy, duży, widoczny"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Kontroler gier"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Przekierowuj wibracje"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Po podłączeniu kontrolera gier przekieruj do niego wibracje"</string>
@@ -2098,12 +2083,9 @@
     <string name="general_category_title" msgid="6298579528716834157">"Ogólne"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Wyświetlacz"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Kolor i ruch"</string>
-    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
-    <skip />
+    <string name="accessibility_pointer_and_touchpad_title" msgid="8719482393177273831">"Ułatwienia dostępu dotyczące wskaźnika i touchpada"</string>
+    <string name="accessibility_pointer_and_touchpad_summary" msgid="6089872217234956258">"Kolor i rozmiar wskaźnika oraz inne ustawienia"</string>
+    <string name="accessibility_pointer_color_customization_title" msgid="3376392766113189508">"Dostosowywanie koloru wskaźnika"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Kontrast kolorów"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Wyższy kontrast powoduje większe wyróżnienie tekstu, przycisków i ikon. Wybierz poziom kontrastu, który najbardziej Ci odpowiada."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Niektóre aplikacje mogą nie obsługiwać wszystkich ustawień kontrastu kolorów i tekstu"</string>
@@ -3343,10 +3325,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"wygaszacz z powiadomieniami zawsze włączony, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, czytnik"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"klawiatura, czujnik haptyczny, wibracje,"</string>
-    <!-- no translation found for sound_dashboard_summary (8254699132423665654) -->
-    <skip />
-    <!-- no translation found for sound_dashboard_summary_with_dnd (731956092218394657) -->
-    <skip />
+    <string name="sound_dashboard_summary" msgid="8254699132423665654">"Głośność i wibracje"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"Głośność, wibracje, Nie przeszkadzać"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Głośność multimediów"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Głośność przesyłania"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Głośność połączeń"</string>
@@ -3390,8 +3370,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Ustawienia połączonych urządzeń"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Dźwięk przestrzenny"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Wył."</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Wył."</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Wył."</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"Nieruchomo"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"Śledzenie ruchów głowy"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Brak}=1{Ustawiono 1 harmonogram}few{Ustawiono # harmonogramy}many{Ustawiono # harmonogramów}other{Ustawiono # harmonogramu}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Nie przeszkadzać"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Tryby"</string>
@@ -3459,7 +3439,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtruj jasność tapety"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Włącz ciemny motyw"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"włącz ciemny motyw"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Włącz preferowanie jasnego tekstu na ciemnym tle w systemie operacyjnym i aplikacjach, co mniej obciąża oczy i może zapewnić znacznie większą oszczędność energii na niektórych urządzeniach"</string>
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Zmień motyw urządzenia, aby używać ciemnego tła, które jest łagodniejsze dla oczu"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Brak zmian dotyczących wyświetlania}=1{{effect_1}}=2{{effect_1} i {effect_2}}=3{{effect_1}, {effect_2} i {effect_3}}few{{effect_1}, {effect_2} i # więcej}many{{effect_1}, {effect_2} i # więcej}other{{effect_1}, {effect_2} i # więcej}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Zezwalaj na wszystkie powiadomienia"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Osoby, aplikacje i dźwięki mogą ignorować tryb Nie przeszkadzać"</string>
@@ -3986,7 +3966,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"Zarządzane przez: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Otwieraj domyślnie"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Otwieraj obsługiwane linki"</string>
-    <string name="app_launch_top_intro_message" msgid="137370923637482459">"Zezwalaj na otwieranie linków internetowych w tej aplikacji"</string>
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"W aplikacji"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"W przeglądarce"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Wybierz, gdzie chcesz otwierać linki z tej aplikacji"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Linki otwierane w tej aplikacji"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Obsługiwane linki"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Inne ustawienia domyślne"</string>
@@ -4810,15 +4792,14 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Nieprawidłowy tryb sieci <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignoruj."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"Przesyłanie wiadomości przez satelitę"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Wysyłanie i odbieranie SMS-ów przez satelitę. Twoje konto obejmuje tę funkcję."</string>
-    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
-    <skip />
+    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Wysyłanie i odbieranie SMS-ów przez satelitę. Twoje konto tego nie obejmuje."</string>
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"Przesyłanie wiadomości przez satelitę"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Informacje o przesyłaniu wiadomości przez satelitę"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Możesz wymieniać wiadomości przez satelitę w ramach odpowiedniego konta u operatora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Twój abonament u operatora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Twoje konto obejmuje funkcję przesyłania wiadomości przez satelitę"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Twoje konto nie obejmuje funkcji przesyłania wiadomości przez satelitę"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Dodaj przesyłanie wiadomości za pomocą satelity"</string>
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"Więcej informacji"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Jak to działa"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Gdy nie masz połączenia z siecią komórkową"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Twój telefon automatycznie połączy się z satelitą. Aby uzyskać najlepszą jakość połączenia, stań w miejscu, w którym nic nie zasłania widoku nieba."</string>
@@ -5319,7 +5300,7 @@
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Ta aplikacja może być otwarta tylko w 1 oknie."</string>
     <string name="generic_accessibility_service_on" msgid="4466229372357726824">"Włączono"</string>
     <string name="generic_accessibility_service_off" msgid="4759859497651675724">"Wyłączono"</string>
-    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Wyłączony"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Wyłączono"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Wyłączono"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"Włączono"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"Wyłączono"</string>
@@ -5403,6 +5384,13 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Połącz zgodne urządzenie"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Aby zacząć udostępniać dźwięk, najpierw połącz słuchawki LE Audio z telefonem"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Przełącz na: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"Uruchamiam strumień audio…"</string>
+    <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"Udostępniam urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"Łączę z urządzeniem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"Nie udało się udostępnić dźwięku"</string>
+    <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Coś poszło nie tak. Spróbuj ponownie."</string>
+    <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"Nie udało się udostępnić dźwięku urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"Udostępnianie dźwięku działa tylko ze słuchawkami obsługującymi LE Audio"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Połącz się ze strumieniem LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Strumienie audio w pobliżu"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Strumienie audio"</string>
@@ -5429,8 +5417,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Więcej informacji"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Nie można odtworzyć tego strumienia audio na urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Posłuchaj teraz"</string>
-    <!-- no translation found for audio_streams_present_now (1128360774541089402) -->
-    <skip />
+    <string name="audio_streams_present_now" msgid="1128360774541089402">"Wstrzymane przez hosta"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Przestań słuchać"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Połącz zgodne słuchawki"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Połącz urządzenie"</string>
