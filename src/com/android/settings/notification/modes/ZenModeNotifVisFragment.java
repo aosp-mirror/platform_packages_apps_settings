@@ -38,7 +38,8 @@ public class ZenModeNotifVisFragment extends ZenModeFragmentBase {
         prefControllers.add(new ZenModeNotifVisPreferenceController(context,
                 "zen_effect_light", ZenPolicy.VISUAL_EFFECT_LIGHTS, null, mBackend));
         prefControllers.add(new ZenModeNotifVisPreferenceController(context,
-                "zen_effect_peek", ZenPolicy.VISUAL_EFFECT_PEEK, null, mBackend));
+                "zen_effect_peek", ZenPolicy.VISUAL_EFFECT_PEEK,
+                new int[] {ZenPolicy.VISUAL_EFFECT_NOTIFICATION_LIST}, mBackend));
         prefControllers.add(new ZenModeNotifVisPreferenceController(context,
                 "zen_effect_status", ZenPolicy.VISUAL_EFFECT_STATUS_BAR,
                 new int[] {ZenPolicy.VISUAL_EFFECT_NOTIFICATION_LIST}, mBackend));

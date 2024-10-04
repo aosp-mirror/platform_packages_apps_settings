@@ -47,6 +47,8 @@ class VideoCallingPreferenceControllerTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
 
     private val mockCallStateRepository = mock<CallStateRepository> {}
+    private val mockVideoCallingRepository = mock<VideoCallingRepository> {}
+
 
     private var controller =
         spy(
@@ -54,6 +56,7 @@ class VideoCallingPreferenceControllerTest {
                 context = context,
                 key = TEST_KEY,
                 callStateRepository = mockCallStateRepository,
+                videoCallingRepository = mockVideoCallingRepository
             )
         ) {
             on { queryImsState(SUB_ID) } doReturn mockVtQueryImsState
@@ -70,6 +73,42 @@ class VideoCallingPreferenceControllerTest {
         controller.displayPreference(preferenceScreen)
     }
 
+
+    @Test
+    fun displayPreference_uiInitState_isHidden() {
+        assertThat(preference.isVisible).isFalse()
+    }
+
+    @Test
+    fun onViewCreated_videoCallIsNotReady_isHidden() = runBlocking {
+        mockVideoCallingRepository.stub {
+            on { isVideoCallReadyFlow(SUB_ID) } doReturn flowOf(false)
+        }
+        mockCallStateRepository.stub {
+            on { callStateFlow(SUB_ID) } doReturn flowOf(TelephonyManager.CALL_STATE_IDLE)
+        }
+
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
+
+        assertThat(preference.isVisible).isFalse()
+    }
+
+    @Test
+    fun onViewCreated_videoCallIsNotReady_isShown() = runBlocking {
+        mockVideoCallingRepository.stub {
+            on { isVideoCallReadyFlow(SUB_ID) } doReturn flowOf(true)
+        }
+        mockCallStateRepository.stub {
+            on { callStateFlow(SUB_ID) } doReturn flowOf(TelephonyManager.CALL_STATE_IDLE)
+        }
+
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
+
+        assertThat(preference.isVisible).isTrue()
+    }
+
     @Test
     fun updateState_4gLteOff_disabledAndUnchecked() {
         mockQueryVoLteState.stub { on { isEnabledByUser } doReturn false }
@@ -82,6 +121,9 @@ class VideoCallingPreferenceControllerTest {
 
     @Test
     fun updateState_4gLteOnWithoutCall_enabledAndChecked() = runBlocking {
+        mockVideoCallingRepository.stub {
+            on { isVideoCallReadyFlow(SUB_ID) } doReturn flowOf(true)
+        }
         mockVtQueryImsState.stub {
             on { isEnabledByUser } doReturn true
             on { isAllowUserControl } doReturn true
@@ -101,6 +143,9 @@ class VideoCallingPreferenceControllerTest {
 
     @Test
     fun updateState_4gLteOnWithCall_disabledAndChecked() = runBlocking {
+        mockVideoCallingRepository.stub {
+            on { isVideoCallReadyFlow(SUB_ID) } doReturn flowOf(true)
+        }
         mockVtQueryImsState.stub {
             on { isEnabledByUser } doReturn true
             on { isAllowUserControl } doReturn true

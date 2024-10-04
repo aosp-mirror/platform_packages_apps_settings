@@ -37,6 +37,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
@@ -112,6 +113,7 @@ public class UserSettingsTest {
     private static final String KEY_USER_GUEST = "user_guest";
     private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
     private static final String KEY_USER_SETTINGS_SCREEN = "user_settings_screen";
+    private static final String KEY_ADD_USER = "user_add";
     private static final int ACTIVE_USER_ID = 0;
     private static final int INACTIVE_ADMIN_USER_ID = 1;
     private static final int INACTIVE_SECONDARY_USER_ID = 14;
@@ -129,6 +131,8 @@ public class UserSettingsTest {
     private Drawable mDefaultIconDrawable;
     @Mock
     private PreferenceManager mMockPreferenceManager;
+    @Mock
+    private DevicePolicyManager mDevicePolicyManager;
     @Mock
     private UserPreference mMePreference;
     @Mock
@@ -222,7 +226,7 @@ public class UserSettingsTest {
 
     @Test
     public void testGetRawDataToIndex_returnAllIndexablePreferences() {
-        String[] expectedKeys = {KEY_ALLOW_MULTIPLE_USERS, KEY_USER_SETTINGS_SCREEN};
+        String[] expectedKeys = {KEY_ALLOW_MULTIPLE_USERS, KEY_USER_SETTINGS_SCREEN, KEY_ADD_USER};
         List<String> keysResultList = new ArrayList<>();
         ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
         List<SearchIndexableRaw> rawData =
@@ -233,6 +237,54 @@ public class UserSettingsTest {
         }
 
         assertThat(keysResultList).containsExactly(expectedKeys);
+    }
+
+    @Test
+    public void testGetRawDataToIndex_addRestrictedProfileAllowed_addUserTitleIsCorrect() {
+        ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
+        SettingsShadowResources.overrideResource(
+                com.android.settings.R.bool.config_offer_restricted_profiles,
+                Boolean.TRUE);
+        when(mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_ADD_USER, mContext.getUser()))
+                .thenReturn(false);
+        ShadowUserManager.getShadow().setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED,
+                true);
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
+                .thenReturn(mDevicePolicyManager);
+        when(mDevicePolicyManager.isDeviceManaged()).thenReturn(false);
+
+        List<SearchIndexableRaw> rawData =
+                UserSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
+
+        String title = null;
+        for (SearchIndexableRaw rawDataItem : rawData) {
+            if (rawDataItem.key.equals(KEY_ADD_USER)) {
+                title = rawDataItem.title;
+            }
+        }
+
+        assertThat(title).isEqualTo(mContext.getString(
+                com.android.settings.R.string.user_add_user_or_profile_menu));
+    }
+
+    @Test
+    public void testGetRawDataToIndex_addRestrictedProfileDisallowed_addUserTitleIsCorrect() {
+        ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
+        SettingsShadowResources.overrideResource(
+                com.android.settings.R.bool.config_offer_restricted_profiles,
+                Boolean.FALSE);
+        List<SearchIndexableRaw> rawData =
+                UserSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
+
+        String title = null;
+        for (SearchIndexableRaw rawDataItem : rawData) {
+            if (rawDataItem.key.equals(KEY_ADD_USER)) {
+                title = rawDataItem.title;
+            }
+        }
+
+        assertThat(title).isEqualTo(mContext.getString(
+                com.android.settingslib.R.string.user_add_user));
     }
 
     @Test
