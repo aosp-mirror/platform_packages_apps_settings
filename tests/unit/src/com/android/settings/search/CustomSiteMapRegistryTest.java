@@ -18,6 +18,12 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.Flags;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.backup.UserBackupSettingsActivity;
@@ -35,11 +41,15 @@ import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.system.SystemDashboardFragment;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 public class CustomSiteMapRegistryTest {
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Test
     public void shouldContainScreenLockSettingsPairs() {
@@ -75,10 +85,18 @@ public class CustomSiteMapRegistryTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_MODES_UI)
     public void shouldContainZenModeBlockedEffectsSettingsPairs() {
-        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
-                ZenModeBlockedEffectsSettings.class.getName())).isEqualTo(
+        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP).containsEntry(
+                ZenModeBlockedEffectsSettings.class.getName(),
                 ZenModeRestrictNotificationsSettings.class.getName());
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_MODES_UI)
+    public void shouldNotContainZenModeBlockedEffectsSettingsPairs() {
+        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP)
+                .doesNotContainKey(ZenModeBlockedEffectsSettings.class.getName());
     }
 
     @Test
