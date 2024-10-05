@@ -44,12 +44,12 @@ constructor(
     context: Context,
     key: String,
     private val callStateRepository: CallStateRepository = CallStateRepository(context),
+    private val videoCallingRepository: VideoCallingRepository = VideoCallingRepository(context),
 ) : TogglePreferenceController(context, key), On4gLteUpdateListener {
 
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     private var preference: TwoStatePreference? = null
     private var callingPreferenceCategoryController: CallingPreferenceCategoryController? = null
-    private val repository = VideoCallingRepository(context)
 
     private var videoCallEditable = false
     private var isInCall = false
@@ -71,14 +71,18 @@ constructor(
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
+        Log.d(TAG, "init ui")
+        preference?.isVisible = false
+        callingPreferenceCategoryController?.updateChildVisible(preferenceKey, false)
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        repository.isVideoCallReadyFlow(subId).collectLatestWithLifecycle(viewLifecycleOwner) {
-            isReady ->
-            preference?.isVisible = isReady
-            callingPreferenceCategoryController?.updateChildVisible(preferenceKey, isReady)
-        }
+        videoCallingRepository.isVideoCallReadyFlow(subId)
+            .collectLatestWithLifecycle(viewLifecycleOwner) { isReady ->
+                Log.d(TAG, "isVideoCallReadyFlow: update visible")
+                preference?.isVisible = isReady
+                callingPreferenceCategoryController?.updateChildVisible(preferenceKey, isReady)
+            }
         callStateRepository.callStateFlow(subId).collectLatestWithLifecycle(viewLifecycleOwner) {
             callState ->
             isInCall = callState != TelephonyManager.CALL_STATE_IDLE
@@ -129,10 +133,10 @@ constructor(
 
         class VideoCallingSearchItem(private val context: Context) :
             MobileNetworkSettingsSearchItem {
-            private val repository = VideoCallingRepository(context)
+            private val videoCallingRepository = VideoCallingRepository(context)
 
             private fun isAvailable(subId: Int): Boolean = runBlocking {
-                repository.isVideoCallReadyFlow(subId).first()
+                videoCallingRepository.isVideoCallReadyFlow(subId).first()
             }
 
             override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
