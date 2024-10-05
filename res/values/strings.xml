@@ -1446,6 +1446,12 @@
     <string name="private_space_category_lock">Lock</string>
     <!-- The title of the category for settings related to hiding the private space  [CHAR LIMIT=20] -->
     <string name="private_space_category_hide">Hide</string>
+    <!-- Header on pattern confirm screen inside private space settings when separate lock set for private space [CHAR LIMIT=50] -->
+    <string name="private_space_confirm_your_pattern_header">Confirm your private space pattern</string>
+     <!-- Header on PIN confirm screen inside private space settings when separate lock set for private space [CHAR LIMIT=50] -->
+    <string name="private_space_confirm_your_pin_header">Re-enter your private space PIN</string>
+     <!-- Header on password confirm screen inside private space when separate lock set for private space[CHAR LIMIT=50] -->
+    <string name="private_space_confirm_your_password_header">Re-enter your private space password</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -9584,6 +9590,9 @@
 
     <!-- Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
     <string name="zen_mode_edit_name_hint">Mode name</string>
+
+    <!-- Modes: Error message when editing a mode's name and the name is empty [CHAR LIMIT=40] -->
+    <string name="zen_mode_edit_name_empty_error">Mode name cannot be empty</string>
 
     <!-- Modes: Text shown above the list of icons in the mode editor. [CHAR LIMIT=40] -->
     <string name="zen_mode_edit_choose_icon_title">Choose an icon</string>
