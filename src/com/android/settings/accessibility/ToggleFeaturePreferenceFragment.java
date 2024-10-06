@@ -17,10 +17,9 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
+import static com.android.settings.accessibility.AccessibilityUtil.getShortcutSummaryList;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -34,7 +33,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
-import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -59,14 +57,12 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
-import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
-import com.android.settings.utils.LocaleUtils;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.widget.IllustrationPreference;
@@ -76,7 +72,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Base class for accessibility fragments with toggle, shortcut, some helper functions
@@ -627,10 +622,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         mFooterPreferenceController.displayPreference(screen);
     }
 
-    private boolean hasShortcutType(int value, @UserShortcutType int type) {
-        return (value & type) == type;
-    }
-
     protected CharSequence getShortcutTypeSummary(Context context) {
         if (!mShortcutPreference.isSettingsEditable()) {
             return context.getText(R.string.accessibility_shortcut_edit_dialog_title_hardware);
@@ -640,47 +631,9 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
             return context.getText(R.string.accessibility_shortcut_state_off);
         }
 
-        // LINT.IfChange(shortcut_type_ui_order)
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(
                 context, mComponentName.flattenToString(), getDefaultShortcutTypes());
-
-        final List<CharSequence> list = new ArrayList<>();
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if (hasShortcutType(shortcutTypes, QUICK_SETTINGS)) {
-                final CharSequence qsTitle = context.getText(
-                        R.string.accessibility_feature_shortcut_setting_summary_quick_settings);
-                list.add(qsTitle);
-            }
-        }
-        if (hasShortcutType(shortcutTypes, SOFTWARE)) {
-            list.add(getSoftwareShortcutTypeSummary(context));
-        }
-        if (hasShortcutType(shortcutTypes, HARDWARE)) {
-            final CharSequence hardwareTitle = context.getText(
-                    R.string.accessibility_shortcut_hardware_keyword);
-            list.add(hardwareTitle);
-        }
-        // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
-
-        // Show software shortcut if first time to use.
-        if (list.isEmpty()) {
-            list.add(getSoftwareShortcutTypeSummary(context));
-        }
-
-        return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
-                null, LocaleUtils.getConcatenatedString(list));
-    }
-
-    private static CharSequence getSoftwareShortcutTypeSummary(Context context) {
-        int resId;
-        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.string.accessibility_shortcut_edit_summary_software;
-        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = R.string.accessibility_shortcut_edit_summary_software_gesture;
-        } else {
-            resId = R.string.accessibility_shortcut_edit_summary_software;
-        }
-        return context.getText(resId);
+        return getShortcutSummaryList(context, shortcutTypes);
     }
 
     /**

@@ -1446,6 +1446,12 @@
     <string name="private_space_category_lock">Lock</string>
     <!-- The title of the category for settings related to hiding the private space  [CHAR LIMIT=20] -->
     <string name="private_space_category_hide">Hide</string>
+    <!-- Header on pattern confirm screen inside private space settings when separate lock set for private space [CHAR LIMIT=50] -->
+    <string name="private_space_confirm_your_pattern_header">Confirm your private space pattern</string>
+     <!-- Header on PIN confirm screen inside private space settings when separate lock set for private space [CHAR LIMIT=50] -->
+    <string name="private_space_confirm_your_pin_header">Re-enter your private space PIN</string>
+     <!-- Header on password confirm screen inside private space when separate lock set for private space[CHAR LIMIT=50] -->
+    <string name="private_space_confirm_your_password_header">Re-enter your private space password</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -2291,6 +2297,10 @@
     <string name="wifi_dpp_failure_enrollee_rejected_configuration">Contact the device manufacturer</string>
     <!-- Hint for Wi-Fi connection fail [CHAR LIMIT=NONE]  -->
     <string name="wifi_dpp_check_connection_try_again">Check connection and try again</string>
+    <!-- Hint for Wi-Fi connection fail [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_check_connection_no_matched_ssid">This Wi\u2011Fi network isn\u2019t available right now</string>
+    <!-- Hint for Wi-Fi connection fail [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_check_connection_no_matched_security">There\u2019s a problem with this QR code. Try connecting another way.</string>
     <!-- Title for the fragment choose network [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_choose_network">Choose network</string>
     <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=NONE] -->
@@ -8447,28 +8457,6 @@
     <!-- Do not disturb custom settings duration header [CHAR LIMIT=40]-->
     <string name="zen_custom_settings_duration_header">Duration</string>
 
-    <!-- Do not disturb settings, messages, events and reminders title [CHAR LIMIT=100]-->
-    <string name="zen_msg_event_reminder_title">Messages, events &amp; reminders</string>
-    <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
-    <string name="zen_msg_event_reminder_footer">When Do Not Disturb is on, messages, reminders, and events will be muted, except for the items you allow above. You can adjust messages settings to allow your friends, family, or other contacts to reach you.</string>
-
-    <!-- Do not disturb onboarding dialog, accept new settings [CHAR LIMIT=30]-->
-    <string name="zen_onboarding_ok">Done</string>
-    <!-- Do not disturb onboarding dialog, on click user goes to dnd settings page [CHAR LIMIT=30]-->
-    <string name="zen_onboarding_settings">Settings</string>
-
-    <!-- Do not disturb onboarding dialog, title for radio button [CHAR LIMIT=80]-->
-    <string name="zen_onboarding_new_setting_title">No visuals or sound from notifications</string>
-    <!-- Do not disturb onboarding dialog, title for radio button [CHAR LIMIT=80]-->
-    <string name="zen_onboarding_current_setting_title">No sound from notifications</string>
-    <!-- Do not disturb onboarding dialog, secondary text for radio button [CHAR LIMIT=NONE]-->
-    <string name="zen_onboarding_new_setting_summary">You won\u2019t see or hear notifications. Calls from starred contacts and repeat callers are allowed.</string>
-    <!-- Do not disturb onboarding dialog, secondary text for radio button [CHAR LIMIT=NONE]-->
-    <string name="zen_onboarding_current_setting_summary">(Current setting)</string>
-
-    <!-- Do not disturb onboarding dialog, header prompt for settings [CHAR LIMIT=80]-->
-    <string name="zen_onboarding_dnd_visual_disturbances_header">Change Do Not Disturb notification settings?</string>
-
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
 
@@ -9335,6 +9323,10 @@
             other {# conversations}
         }
     </string>
+
+    <!-- Modes: Content description of the "gear" icon that takes the user to the Conversation settings. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_from_conversations_settings">Conversations settings</string>
+
     <!-- [CHAR LIMIT=120] Zen mode settings: Header for calls and messages section of conversations
     setting page -->
     <string name="zen_mode_people_calls_messages_section_title">Who can interrupt</string>
@@ -9402,6 +9394,11 @@
     <string name="zen_mode_from_contacts">Contacts</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From starred contacts only -->
     <string name="zen_mode_from_starred">Starred contacts</string>
+
+    <!-- Modes: Content description of the "gear" icon that takes the user to the Contacts app to manage contacts. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_from_contacts_settings">Contacts settings</string>
+    <!-- Modes: Content description of the "gear" icon that takes the user to the Contacts app to manage starred contacts. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_from_starred_settings">Starred contacts settings</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls option value: No calls allowed -->
     <string name="zen_mode_none_calls">None</string>
@@ -9475,6 +9472,8 @@
     <string name="zen_mode_apps_work_app"><xliff:g id="app_label" example="Chrome">%s</xliff:g> (Work)</string>
     <!-- Text displayed (for a brief time) while the list of bypassing apps is being fetched. Will be replaced by a zen_mode_apps_subtext. [CHAR_LIMIT=60] -->
     <string name="zen_mode_apps_calculating">Calculating\u2026</string>
+    <!-- Modes: Content description of the "gear" icon that takes the user to the "Apps that can interrupt" settings. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_apps_priority_apps_settings">Apps settings</string>
     <!-- Modes: Format for a string displayed when there are more items (e.g. apps, contacts) that can be shown. For example, we show (A)(B)(C)(+5), where this string represents the "+5" value. Needs to be as compact as possible, since it will be drawn in a really small area. [CHAR_LIMIT=4] -->
     <string name="zen_mode_plus_n_items">+<xliff:g id="number" example="42">%d</xliff:g></string>
 
@@ -9591,6 +9590,9 @@
 
     <!-- Modes: Hint for the EditText for editing a mode's name [CHAR LIMIT=30] -->
     <string name="zen_mode_edit_name_hint">Mode name</string>
+
+    <!-- Modes: Error message when editing a mode's name and the name is empty [CHAR LIMIT=40] -->
+    <string name="zen_mode_edit_name_empty_error">Mode name cannot be empty</string>
 
     <!-- Modes: Text shown above the list of icons in the mode editor. [CHAR LIMIT=40] -->
     <string name="zen_mode_edit_choose_icon_title">Choose an icon</string>
