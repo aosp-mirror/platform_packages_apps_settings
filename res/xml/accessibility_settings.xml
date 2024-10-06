@@ -120,37 +120,14 @@
             settings:controller="com.android.settings.inputmethod.PointerTouchpadPreferenceController"
             settings:searchable="true"/>
 
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="physical_keyboard_options_category"
-        android:persistent="false"
-        android:title="@string/keyboard_category_title">
-
-        <SwitchPreferenceCompat
+        <Preference
             android:icon="@drawable/ic_sticky_keys"
-            android:key="toggle_keyboard_sticky_keys"
+            android:key="physical_keyboard_a11y"
+            android:title="@string/keyboard_a11y_settings"
+            android:summary="@string/keyboard_a11y_settings_summary"
             android:persistent="false"
-            android:summary="@string/sticky_keys_summary"
-            android:title="@string/sticky_keys"
-            settings:controller="com.android.settings.accessibility.KeyboardStickyKeyPreferenceController"
-            settings:searchable="true" />
-
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_bounce_keys"
-            android:key="toggle_keyboard_bounce_keys"
-            android:persistent="false"
-            android:title="@string/bounce_keys"
-            settings:controller="com.android.settings.accessibility.KeyboardBounceKeyPreferenceController"
-            settings:searchable="true" />
-
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_slow_keys"
-            android:key="toggle_keyboard_slow_keys"
-            android:persistent="false"
-            android:title="@string/slow_keys"
-            settings:controller="com.android.settings.accessibility.KeyboardSlowKeyPreferenceController"
-            settings:searchable="true" />
+            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardA11yFragment"
+            settings:controller="com.android.settings.inputmethod.PhysicalKeyboardA11yPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory

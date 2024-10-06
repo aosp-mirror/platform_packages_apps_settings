@@ -15,22 +15,37 @@
   limitations under the License.
   -->
 
+<!-- Theme.AppCompat.DayNight is in the parent View so that it's merged with the Theme.Settings
+     theme below. An AppCompat descendant (which Theme.Settings isn't) is necessary to inflate
+     TextInputLayout. -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:theme="@style/Theme.AppCompat.DayNight"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:paddingBottom="8dp">
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@android:id/edit"
-        android:maxLines="1"
-        android:inputType="text|textCapSentences"
-        android:imeOptions="actionDone"
-        android:selectAllOnFocus="true"
-        android:hint="@string/zen_mode_edit_name_hint" />
+        android:theme="@style/Theme.Settings"
+        style="?attr/textInputFilledStyle"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        android:hint="@string/zen_mode_edit_name_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@android:id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:inputType="text|textCapSentences"
+            android:imeOptions="actionDone"
+            android:selectAllOnFocus="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>

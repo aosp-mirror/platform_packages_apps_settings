@@ -17,9 +17,11 @@
 package com.android.settings.notification.modes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
@@ -28,14 +30,18 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.widget.LayoutPreference;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.function.Consumer;
 
 class ZenModeEditNamePreferenceController extends AbstractZenModePreferenceController {
 
     private final Consumer<String> mModeNameSetter;
+    @Nullable private TextInputLayout mInputLayout;
     @Nullable private EditText mEditText;
     private boolean mIsSettingText;
 
@@ -50,7 +56,8 @@ class ZenModeEditNamePreferenceController extends AbstractZenModePreferenceContr
         super.displayPreference(screen);
         if (mEditText == null) {
             LayoutPreference pref = checkNotNull(screen.findPreference(getPreferenceKey()));
-            mEditText = pref.findViewById(android.R.id.edit);
+            mInputLayout = checkNotNull(pref.findViewById(R.id.edit_input_layout));
+            mEditText = checkNotNull(pref.findViewById(android.R.id.edit));
 
             mEditText.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -61,9 +68,11 @@ class ZenModeEditNamePreferenceController extends AbstractZenModePreferenceContr
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if (!mIsSettingText) {
-                        mModeNameSetter.accept(s.toString());
+                    if (mIsSettingText) {
+                        return;
                     }
+                    mModeNameSetter.accept(s.toString());
+                    updateErrorState(s.toString());
                 }
             });
         }
@@ -79,9 +88,20 @@ class ZenModeEditNamePreferenceController extends AbstractZenModePreferenceContr
                 if (!modeName.equals(currentText)) {
                     mEditText.setText(modeName);
                 }
+                updateErrorState(modeName);
             } finally {
                 mIsSettingText = false;
             }
+        }
+    }
+
+    private void updateErrorState(String currentName) {
+        checkState(mInputLayout != null);
+        if (TextUtils.isEmpty(currentName)) {
+            mInputLayout.setError(
+                    mContext.getString(R.string.zen_mode_edit_name_empty_error));
+        } else {
+            mInputLayout.setError(null);
         }
     }
 }
