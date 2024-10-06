@@ -246,9 +246,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Connect to data services when roaming"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Connect to data services when roaming"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Roaming charges may apply."</string>
-    <string name="date_time_auto" msgid="4239202185055225869">"Set time automatically"</string>
-    <string name="zone_auto_title" msgid="5141692422373097957">"Set automatically"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"Location will be used for setting the time zone when this toggle is on"</string>
+    <string name="date_time_auto" msgid="1759599045100040686">"Automatic date and time"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"Set automatically using your network and wireless signals"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"Automatic time zone"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Set automatically based on mobile networks near you"</string>
+    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"Set automatically using your device location, if available. An active Wi-Fi connection may also be required."</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Use locale default"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Use 24-hour format"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Time"</string>
@@ -807,8 +809,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Must contain at least 1 non-numeric character}other{Must contain at least # non-numeric characters}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Device admin doesn\'t allow using a recent password"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Ascending, descending or repeated sequence of digits isn\'t allowed"</string>
-    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
-    <skip />
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"Ascending, descending or repeated sequence of characters isn\'t allowed"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Confirm"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Clear"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Screen lock was already changed. Try again with the new screen lock."</string>
@@ -1624,7 +1625,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Location Services"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Location Services"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Use location"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"Use location for time zone"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Cannot set the time zone automatically"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Location or Location Services are off"</string>
@@ -1635,11 +1636,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Location settings"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Fix this"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Cancel"</string>
-    <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"Automatic time zone is off"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"Not available when automatic time zone is off"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Location time zone detection is disabled"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Location time zone detection is not supported"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Location time zone detection changes are not allowed"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Location may be used to set time zone"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"If your device location is available, it may be used to set your time zone"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"View legal info, status, software version"</string>
     <string name="legal_information" msgid="7509900979811934843">"Legal information"</string>
     <string name="manual" msgid="3651593989906084868">"Manual"</string>
@@ -2024,8 +2025,7 @@
     <string name="pointer_scale" msgid="4941564570571663964">"Pointer scale"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Decrease pointer scale"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Increase pointer scale"</string>
-    <!-- no translation found for pointer_scale_keywords (8939432511048322072) -->
-    <skip />
+    <string name="pointer_scale_keywords" msgid="8939432511048322072">"Scale, size, pointer scale, pointer size, large mouse pointer, large, noticeable"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Game Controller"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirect vibration"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Send vibration to game controller when connected"</string>
@@ -3372,10 +3372,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Connected devices settings"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Spatial audio"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Off"</string>
-    <!-- no translation found for spatial_audio_multi_toggle_on (4204808183659033003) -->
-    <skip />
-    <!-- no translation found for spatial_audio_multi_toggle_head_tracking_on (4156440073634867249) -->
-    <skip />
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"Fixed"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"Head tracking"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{None}=1{1 schedule set}other{# schedules set}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Do Not Disturb"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modes"</string>
@@ -3443,8 +3441,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filter the brightness of the wallpaper"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Enable Dark theme"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"Enable Dark theme"</string>
-    <!-- no translation found for mode_dark_theme_summary (2808149708986602464) -->
-    <skip />
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Switch the device theme to use a dark background, which is easier on the eyes"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{No display changes}=1{{effect_1}}=2{{effect_1} and {effect_2}}=3{{effect_1}, {effect_2} and {effect_3}}other{{effect_1}, {effect_2} and # more}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Allow all notifications"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"People, apps and sounds can interrupt"</string>
@@ -3591,6 +3588,10 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"After unlocking, go directly to last used screen. Notifications won’t show on lock screen. Swipe down from top to see them."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Lock screen, Lockscreen, Skip, Bypass"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"When work profile is locked"</string>
+    <!-- no translation found for lock_screen_notif_minimalism (5556871004042668149) -->
+    <skip />
+    <!-- no translation found for lock_screen_notif_minimalism_summary (4607237285421814421) -->
+    <skip />
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Show only new notifications on lock screen"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatically remove previously viewed notifications from the lock screen"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifications on lock screen"</string>
@@ -3902,6 +3903,7 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Create a mode"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Custom mode"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Mode name"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Choose an icon"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Calendar events"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Bedtime routine"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"While driving"</string>
@@ -3971,7 +3973,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"Managed by <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Open by default"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Open supported links"</string>
-    <string name="app_launch_top_intro_message" msgid="137370923637482459">"Allow web links to open in this app"</string>
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"In the app"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"In your browser"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Choose how to open web links for this app"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Links to open in this app"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Supported links"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Other default preferences"</string>
@@ -4802,8 +4806,7 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Your <xliff:g id="CARRIER_NAME">%1$s</xliff:g> plan"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Satellite messaging is included with your account"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Satellite messaging isn’t included with your account"</string>
-    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
-    <skip />
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"Learn more"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"How it works"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"When you don’t have a mobile network"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Your phone will auto-connect to a satellite. For the best connection, keep a clear view of the sky."</string>
@@ -5386,20 +5389,13 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Connect a compatible device"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"To start sharing audio, first connect LE Audio headphones to your phone"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Switch to <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for audio_sharing_progress_dialog_start_stream_content (1152386358063502897) -->
-    <skip />
-    <!-- no translation found for audio_sharing_progress_dialog_add_source_content (2913609550496440710) -->
-    <skip />
-    <!-- no translation found for progress_dialog_connect_device_content (1387370883978461533) -->
-    <skip />
-    <!-- no translation found for audio_sharing_retry_dialog_title (3954529199333866445) -->
-    <skip />
-    <!-- no translation found for audio_sharing_retry_dialog_content (6014534433894608834) -->
-    <skip />
-    <!-- no translation found for audio_sharing_incompatible_dialog_title (4586805264392802115) -->
-    <skip />
-    <!-- no translation found for audio_sharing_incompatible_dialog_content (3943223683620405311) -->
-    <skip />
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"Starting audio stream…"</string>
+    <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"Sharing with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"Connecting to <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"Couldn\'t share audio"</string>
+    <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Something went wrong. Please try again."</string>
+    <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"Can\'t share audio with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"Audio sharing only works with headphones that support LE Audio"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Connect to an LE audio stream"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Nearby audio streams"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Audio streams"</string>
@@ -5447,4 +5443,7 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR code scanner"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Need help?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Search settings"</string>
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"contacts, storage, account"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Contacts storage"</string>
+    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"No default set"</string>
 </resources>
