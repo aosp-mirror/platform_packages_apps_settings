@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import static android.webkit.Flags.updateServiceV2;
-
 import android.Manifest;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -173,11 +171,9 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         }
 
         // Keep WebView default package enabled.
-        if (updateServiceV2()) {
-            String packageName = mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName();
-            if (packageName != null) {
-                keepEnabledPackages.add(packageName);
-            }
+        String packageName = mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName();
+        if (packageName != null) {
+            keepEnabledPackages.add(packageName);
         }
 
         keepEnabledPackages.addAll(getEnabledPackageAllowlist());
