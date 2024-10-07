@@ -23,7 +23,6 @@ import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.ServiceInfo;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,8 +30,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.util.Pair;
-import android.view.InputDevice;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
@@ -47,7 +44,6 @@ import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.development.Enable16kUtils;
-import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedPreference;
@@ -59,8 +55,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /** Activity with the accessibility settings. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -77,14 +71,12 @@ public class AccessibilitySettings extends DashboardFragment implements
     private static final String CATEGORY_DISPLAY = "display_category";
     @VisibleForTesting
     static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
-    private static final String CATEGORY_KEYBOARD_OPTIONS = "physical_keyboard_options_category";
     @VisibleForTesting
     static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
 
     private static final String[] CATEGORIES = new String[]{
             CATEGORY_SCREEN_READER, CATEGORY_CAPTIONS, CATEGORY_AUDIO, CATEGORY_DISPLAY,
-            CATEGORY_SPEECH, CATEGORY_INTERACTION_CONTROL,
-            CATEGORY_KEYBOARD_OPTIONS, CATEGORY_DOWNLOADED_SERVICES
+            CATEGORY_SPEECH, CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
     };
 
     // Extras passed to sub-fragments.
@@ -279,7 +271,7 @@ public class AccessibilitySettings extends DashboardFragment implements
      * @return The service summary
      */
     public static CharSequence getServiceSummary(Context context, AccessibilityServiceInfo info,
-                                                 boolean serviceEnabled) {
+            boolean serviceEnabled) {
         if (serviceEnabled && info.crashed) {
             return context.getText(R.string.accessibility_summary_state_stopped);
         }
@@ -415,14 +407,14 @@ public class AccessibilitySettings extends DashboardFragment implements
         final List<AccessibilityShortcutInfo> installedShortcutList =
                 a11yManager.getInstalledAccessibilityShortcutListAsUser(getPrefContext(),
                         UserHandle.myUserId());
-        final List<AccessibilityServiceInfo> modifiableInstalledServiceList =
-                new ArrayList<>(a11yManager.getInstalledAccessibilityServiceList());
+        final List<AccessibilityServiceInfo> installedServiceList =
+                a11yManager.getInstalledAccessibilityServiceList();
         final List<RestrictedPreference> preferenceList = getInstalledAccessibilityPreferences(
-                getPrefContext(), installedShortcutList, modifiableInstalledServiceList);
+                getPrefContext(), installedShortcutList, installedServiceList);
 
         if (Flags.checkPrebundledIsPreinstalled()) {
             removeNonPreinstalledComponents(mPreBundledServiceComponentToCategoryMap,
-                    installedShortcutList, modifiableInstalledServiceList);
+                    installedShortcutList, installedServiceList);
         }
 
         final PreferenceCategory downloadedServicesCategory =
@@ -465,7 +457,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         // Hide category if it is empty.
         updatePreferenceCategoryVisibility(CATEGORY_SCREEN_READER);
         updatePreferenceCategoryVisibility(CATEGORY_SPEECH);
-        updatePreferenceCategoryVisibility(CATEGORY_KEYBOARD_OPTIONS);
     }
 
     /**
@@ -474,31 +465,18 @@ public class AccessibilitySettings extends DashboardFragment implements
      * <p>{@code modifiableInstalledServiceList} may be modified to remove any entries with
      * matching package name and label as an entry in {@code installedShortcutList}.
      *
-     * @param installedShortcutList          A list of installed {@link AccessibilityShortcutInfo}s.
-     * @param modifiableInstalledServiceList A modifiable list of installed
-     *                                       {@link AccessibilityServiceInfo}s.
+     * @param installedShortcutList A list of installed {@link AccessibilityShortcutInfo}s.
+     * @param installedServiceList  A list of installed {@link AccessibilityServiceInfo}s.
      */
-    private List<RestrictedPreference> getInstalledAccessibilityPreferences(Context context,
+    private static List<RestrictedPreference> getInstalledAccessibilityPreferences(Context context,
             List<AccessibilityShortcutInfo> installedShortcutList,
-            List<AccessibilityServiceInfo> modifiableInstalledServiceList) {
+            List<AccessibilityServiceInfo> installedServiceList) {
         final RestrictedPreferenceHelper preferenceHelper = new RestrictedPreferenceHelper(context);
 
         final List<AccessibilityActivityPreference> activityList =
                 preferenceHelper.createAccessibilityActivityPreferenceList(installedShortcutList);
-        final Set<Pair<String, CharSequence>> packageLabelPairs =
-                activityList.stream()
-                        .map(a11yActivityPref -> new Pair<>(
-                                a11yActivityPref.getPackageName(), a11yActivityPref.getLabel())
-                        ).collect(Collectors.toSet());
-
-        // Remove duplicate A11yServices that are already shown as A11yActivities.
-        if (!packageLabelPairs.isEmpty()) {
-            modifiableInstalledServiceList.removeIf(
-                    target -> containsPackageAndLabelInList(packageLabelPairs, target));
-        }
         final List<RestrictedPreference> serviceList =
-                preferenceHelper.createAccessibilityServicePreferenceList(
-                        modifiableInstalledServiceList);
+                preferenceHelper.createAccessibilityServicePreferenceList(installedServiceList);
 
         final List<RestrictedPreference> preferenceList = new ArrayList<>();
         preferenceList.addAll(activityList);
@@ -521,16 +499,6 @@ public class AccessibilitySettings extends DashboardFragment implements
                 componentToCategory.remove(info.getComponentName());
             }
         }
-    }
-
-    private boolean containsPackageAndLabelInList(
-            Set<Pair<String, CharSequence>> packageLabelPairs,
-            AccessibilityServiceInfo targetServiceInfo) {
-        final ServiceInfo serviceInfo = targetServiceInfo.getResolveInfo().serviceInfo;
-        final String servicePackageName = serviceInfo.packageName;
-        final CharSequence serviceLabel = serviceInfo.loadLabel(getPackageManager());
-
-        return packageLabelPairs.contains(new Pair<>(servicePackageName, serviceLabel));
     }
 
     private void initializePreBundledServicesMapFromArray(String categoryKey, int key) {
@@ -583,62 +551,13 @@ public class AccessibilitySettings extends DashboardFragment implements
     /**
      * Updates preferences related to system configurations.
      */
-    protected void updateSystemPreferences() {
-        updateKeyboardPreferencesVisibility();
-    }
+    protected void updateSystemPreferences() {}
 
     private void updatePreferencesState() {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         getPreferenceControllers().forEach(controllers::addAll);
         controllers.forEach(controller -> controller.updateState(
                 findPreference(controller.getPreferenceKey())));
-    }
-
-    private void updateKeyboardPreferencesVisibility() {
-        if (!mCategoryToPrefCategoryMap.containsKey(CATEGORY_KEYBOARD_OPTIONS)) {
-            return;
-        }
-        boolean isVisible = isAnyHardKeyboardsExist()
-                && isAnyKeyboardPreferenceAvailable();
-        mCategoryToPrefCategoryMap.get(CATEGORY_KEYBOARD_OPTIONS).setVisible(
-                isVisible);
-        if (isVisible) {
-            //set summary here.
-            findPreference(KeyboardBounceKeyPreferenceController.PREF_KEY).setSummary(
-                    getContext().getString(R.string.bounce_keys_summary,
-                            PhysicalKeyboardFragment.BOUNCE_KEYS_THRESHOLD));
-            findPreference(KeyboardSlowKeyPreferenceController.PREF_KEY).setSummary(
-                    getContext().getString(R.string.slow_keys_summary,
-                            PhysicalKeyboardFragment.SLOW_KEYS_THRESHOLD));
-        }
-    }
-
-    static boolean isAnyHardKeyboardsExist() {
-        for (int deviceId : InputDevice.getDeviceIds()) {
-            final InputDevice device = InputDevice.getDevice(deviceId);
-            if (device != null && !device.isVirtual() && device.isFullKeyboard()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isAnyKeyboardPreferenceAvailable() {
-        for (List<AbstractPreferenceController> controllerList : getPreferenceControllers()) {
-            for (AbstractPreferenceController controller : controllerList) {
-                if (controller.getPreferenceKey().equals(
-                        KeyboardBounceKeyPreferenceController.PREF_KEY)
-                        || controller.getPreferenceKey().equals(
-                        KeyboardSlowKeyPreferenceController.PREF_KEY)
-                        || controller.getPreferenceKey().equals(
-                        KeyboardStickyKeyPreferenceController.PREF_KEY)) {
-                    if (controller.isAvailable()) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -650,13 +569,60 @@ public class AccessibilitySettings extends DashboardFragment implements
                             .getAccessibilitySearchFeatureProvider().getSearchIndexableRawData(
                                     context);
                 }
+
+                @Override
+                public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context,
+                        boolean enabled) {
+                    List<SearchIndexableRaw> dynamicRawData = super.getDynamicRawDataToIndex(
+                            context, enabled);
+                    if (dynamicRawData == null) {
+                        dynamicRawData = new ArrayList<>();
+                    }
+                    if (!Flags.fixA11ySettingsSearch()) {
+                        return dynamicRawData;
+                    }
+
+                    AccessibilityManager a11yManager = context.getSystemService(
+                            AccessibilityManager.class);
+                    AccessibilitySearchFeatureProvider a11ySearchFeatureProvider =
+                            FeatureFactory.getFeatureFactory()
+                                    .getAccessibilitySearchFeatureProvider();
+                    List<RestrictedPreference> installedA11yFeaturesPref =
+                            AccessibilitySettings.getInstalledAccessibilityPreferences(
+                                    context,
+                                    a11yManager.getInstalledAccessibilityShortcutListAsUser(
+                                            context, UserHandle.myUserId()),
+                                    a11yManager.getInstalledAccessibilityServiceList()
+                            );
+                    for (RestrictedPreference pref : installedA11yFeaturesPref) {
+                        SearchIndexableRaw indexableRaw = new SearchIndexableRaw(context);
+                        indexableRaw.key = pref.getKey();
+                        indexableRaw.title = pref.getTitle().toString();
+                        @NonNull String synonyms = "";
+                        if (pref instanceof AccessibilityServicePreference) {
+                            synonyms = a11ySearchFeatureProvider.getSynonymsForComponent(
+                                    context,
+                                    ((AccessibilityServicePreference) pref).getComponentName());
+                        } else if (pref instanceof AccessibilityActivityPreference) {
+                            synonyms = a11ySearchFeatureProvider.getSynonymsForComponent(
+                                    context,
+                                    ((AccessibilityActivityPreference) pref).getComponentName());
+                        }
+                        indexableRaw.keywords = synonyms;
+                        dynamicRawData.add(indexableRaw);
+                    }
+
+                    return dynamicRawData;
+                }
             };
 
     @Override
-    public void onInputDeviceAdded(int deviceId) {}
+    public void onInputDeviceAdded(int deviceId) {
+    }
 
     @Override
-    public void onInputDeviceRemoved(int deviceId) {}
+    public void onInputDeviceRemoved(int deviceId) {
+    }
 
     @Override
     public void onInputDeviceChanged(int deviceId) {

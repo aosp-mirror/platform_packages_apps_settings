@@ -237,6 +237,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.USER_INITIALIZE"/>
                 <action android:name="android.intent.action.PRE_BOOT_COMPLETED"/>
+                <action android:name="com.google.android.setupwizard.SETUP_WIZARD_FINISHED"/>
             </intent-filter>
         </receiver>
 
@@ -740,6 +741,7 @@
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
             android:exported="true"
+            android:enableOnBackInvokedCallback="false"
             android:theme="@style/Theme.Settings.NoActionBar"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
@@ -755,6 +757,7 @@
         <activity android:name="Settings$FaceSettingsInternalActivity"
                   android:label="@string/security_settings_face_preference_title"
                   android:exported="false"
+                  android:enableOnBackInvokedCallback="false"
                   android:theme="@style/Theme.Settings.NoActionBar"
                   android:icon="@drawable/ic_face_header"
                   android:taskAffinity="com.android.settings.root">
@@ -767,6 +770,7 @@
         <activity android:name="Settings$FingerprintSettingsActivity"
                   android:label="@string/security_settings_fingerprint_preference_title"
                   android:exported="true"
+                  android:enableOnBackInvokedCallback="false"
                   android:icon="@drawable/ic_fingerprint_header">
             <intent-filter>
                 <action android:name="android.settings.FINGERPRINT_SETTINGS" />
@@ -780,8 +784,13 @@
 
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
-                  android:exported="false"
+                  android:exported="true"
+                  android:enableOnBackInvokedCallback="false"
                   android:taskAffinity="com.android.settings.root">
+            <intent-filter>
+                <action android:name="android.settings.COMBINED_BIOMETRICS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -1288,8 +1297,8 @@
 
         <activity
             android:name="Settings$ModesSettingsActivity"
-            android:label="@string/zen_mode_settings_title"
-            android:icon="@drawable/ic_homepage_notification"
+            android:label="@string/zen_modes_list_title"
+            android:icon="@*android:drawable/ic_zen_priority_modes"
             android:exported="true">
             <intent-filter android:priority="1"
                            android:featureFlag="android.app.modes_ui">
@@ -1321,7 +1330,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.modes.ZenModesListFragment"/>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
+                       android:value="@string/menu_key_priority_modes" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -1375,40 +1384,6 @@
             android:theme="@style/Theme.Settings.NoActionBar">
         </activity>
 
-        <activity
-            android:name=".notification.zen.ZenSuggestionActivity"
-            android:label="@string/zen_mode_settings_title"
-            android:icon="@drawable/ic_suggestion_dnd"
-            android:exported="true"
-            android:theme="@android:style/Theme.NoDisplay">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.ZEN" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
-            </intent-filter>
-
-            <meta-data android:name="com.android.settings.dismiss"
-                       android:value="0" />
-            <meta-data android:name="com.android.settings.title"
-                       android:resource="@string/zen_suggestion_title" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/zen_suggestion_summary" />
-        </activity>
-
-        <activity
-            android:name=".notification.zen.ZenOnboardingActivity"
-            android:label="@string/zen_onboarding_dnd_visual_disturbances_header"
-            android:icon="@drawable/ic_notifications"
-            android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
-            android:exported="true">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.ZEN_MODE_ONBOARDING" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity
             android:name="Settings$ZenModeAutomationSettingsActivity"
             android:label="@string/zen_mode_automation_settings_title"
@@ -2271,13 +2246,6 @@
                        android:value="com.android.settings.privacy.PrivacyControlsFragment" />
         </activity>
 
-        <activity android:name=".development.tare.TareHomePage"
-                  android:label="@string/tare_settings"
-                  android:exported="false" />
-
-        <activity android:name=".development.tare.DropdownActivity"
-                  android:exported="false" />
-
         <activity android:name="SetFullBackupPassword"
                   android:label="@string/local_backup_password_title"
                   android:exported="false" />
@@ -2812,6 +2780,9 @@
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFinish" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollParentalConsent" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroduction"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light" />
+        <activity android:name=".biometrics.fingerprint.FingerprintEnroll"
             android:exported="true"
             android:theme="@style/GlifTheme.Light">
             <intent-filter>
@@ -2822,9 +2793,13 @@
         </activity>
 
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroductionInternal"
-                  android:exported="false"
-                  android:theme="@style/GlifTheme.Light"
-                  android:taskAffinity="com.android.settings.root" />
+              android:exported="false"
+              android:theme="@style/GlifTheme.Light"
+              android:taskAffinity="com.android.settings.root" />
+        <activity android:name=".biometrics.fingerprint.FingerprintEnroll$InternalActivity"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light"
+            android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFindSensor"
             android:exported="false"
@@ -2832,6 +2807,10 @@
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollEnrolling" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFinish" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollIntroduction"
+            android:exported="false"
+            android:permission="android.permission.MANAGE_FINGERPRINT"
+            android:theme="@style/GlifTheme.Light" />
+        <activity android:name=".biometrics.fingerprint.FingerprintEnroll$SetupActivity"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
             android:theme="@style/GlifTheme.Light">
@@ -2840,7 +2819,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
 
         <activity android:name=".biometrics.fingerprint2.ui.enrollment.activity.FingerprintEnrollmentV2Activity"
             android:exported="true"
@@ -3230,6 +3208,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".bluetooth.BluetoothKeyMissingDialog"
+                  android:permission="android.permission.BLUETOOTH_PRIVILEGED"
+                  android:excludeFromRecents="true"
+                  android:windowSoftInputMode="stateVisible|adjustResize"
+                  android:theme="@style/Theme.AlertDialog"
+                  android:exported="false"
+                  android:taskAffinity=".bluetooth.BluetoothKeyMissingDialog">
+            <intent-filter android:priority="1">
+                <action android:name="android.bluetooth.device.action.KEY_MISSING" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".bluetooth.RequestPermissionActivity"
                   android:excludeFromRecents="true"
                   android:permission="android.permission.BLUETOOTH_CONNECT"
@@ -3281,6 +3272,13 @@
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <action android:name="android.bluetooth.action.CSIS_SET_MEMBER_AVAILABLE"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".bluetooth.BluetoothKeyMissingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.KEY_MISSING" />
             </intent-filter>
         </receiver>
 
@@ -5328,6 +5326,14 @@
             <intent-filter>
                 <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STATE_CHANGE" />
                 <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STOP" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".shortcut.ShortcutsUpdateReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 

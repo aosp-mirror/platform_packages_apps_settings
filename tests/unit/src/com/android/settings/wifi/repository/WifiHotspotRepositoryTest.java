@@ -78,6 +78,7 @@ import java.util.Arrays;
 public class WifiHotspotRepositoryTest {
     static final String WIFI_SSID = "wifi_ssid";
     static final String WIFI_PASSWORD = "wifi_password";
+    static final String WIFI_PASSWORD_SHORT = "wifi";
 
     static final int WIFI_5GHZ_BAND_PREFERRED = BAND_2GHZ_5GHZ;
     static final int WIFI_6GHZ_BAND_PREFERRED = BAND_2GHZ_5GHZ_6GHZ;
@@ -118,12 +119,12 @@ public class WifiHotspotRepositoryTest {
         mRepository.mSecurityType = mSecurityType;
         mRepository.mSpeedType = mSpeedType;
         mRepository.mIsDualBand = true;
-        mRepository.mBand5g.isUsableChannelsReady = true;
-        mRepository.mBand5g.isUsableChannelsUnsupported = false;
-        mRepository.mBand5g.hasUsableChannels = true;
-        mRepository.mBand6g.isUsableChannelsReady = true;
-        mRepository.mBand6g.isUsableChannelsUnsupported = false;
-        mRepository.mBand6g.hasUsableChannels = true;
+        mRepository.mBand5g.isChannelsReady = true;
+        mRepository.mBand5g.isChannelsUnsupported = false;
+        mRepository.mBand5g.hasChannels = true;
+        mRepository.mBand6g.isChannelsReady = true;
+        mRepository.mBand6g.isChannelsUnsupported = false;
+        mRepository.mBand6g.hasChannels = true;
     }
 
     @Test
@@ -382,7 +383,7 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void updateSpeedType_singleBand5gPreferredBut5gUnavailable_get2gSpeedType() {
         mRepository.mIsDualBand = false;
-        mRepository.mBand5g.hasUsableChannels = false;
+        mRepository.mBand5g.hasChannels = false;
         SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setBand(WIFI_5GHZ_BAND_PREFERRED).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
@@ -407,7 +408,7 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void updateSpeedType_singleBand6gPreferredBut6gUnavailable_get5gSpeedType() {
         mRepository.mIsDualBand = false;
-        mRepository.mBand6g.hasUsableChannels = false;
+        mRepository.mBand6g.hasChannels = false;
         SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setBand(WIFI_6GHZ_BAND_PREFERRED).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
@@ -420,8 +421,8 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void updateSpeedType_singleBand6gPreferredBut5gAnd6gUnavailable_get2gSpeedType() {
         mRepository.mIsDualBand = false;
-        mRepository.mBand5g.hasUsableChannels = false;
-        mRepository.mBand6g.hasUsableChannels = false;
+        mRepository.mBand5g.hasChannels = false;
+        mRepository.mBand6g.hasChannels = false;
         SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setBand(WIFI_6GHZ_BAND_PREFERRED).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
@@ -446,7 +447,7 @@ public class WifiHotspotRepositoryTest {
     @Test
     public void updateSpeedType_dualBand2gAnd5gBut5gUnavailable_get2gSpeedType() {
         mRepository.mIsDualBand = true;
-        mRepository.mBand5g.hasUsableChannels = false;
+        mRepository.mBand5g.hasChannels = false;
         SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setBand(WIFI_5GHZ_BAND_PREFERRED).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
@@ -477,7 +478,7 @@ public class WifiHotspotRepositoryTest {
 
     @Test
     public void setSpeedType_2g5ghzTo6ghz_setConfigSecurityToWpa3() {
-        mockConfig(SPEED_2GHZ_5GHZ, SECURITY_TYPE_WPA3_SAE_TRANSITION);
+        mockConfig(SPEED_2GHZ_5GHZ, SECURITY_TYPE_WPA3_SAE_TRANSITION, WIFI_PASSWORD);
 
         mRepository.setSpeedType(SPEED_6GHZ);
 
@@ -497,8 +498,30 @@ public class WifiHotspotRepositoryTest {
         SparseIntArray channels = mSoftApConfigCaptor.getValue().getChannels();
         assertThat(channels.get(BAND_2GHZ, CHANNEL_NOT_FOUND)).isNotEqualTo(CHANNEL_NOT_FOUND);
         assertThat(channels.get(BAND_2GHZ_5GHZ, CHANNEL_NOT_FOUND)).isNotEqualTo(CHANNEL_NOT_FOUND);
+    }
+
+    @Test
+    public void setSpeedType_6ghzTo2g5ghzWith8CharPassphrase_changesSecurityToWpa3Transition() {
+        mockConfigSpeedType(SPEED_6GHZ);
+        mRepository.mIsDualBand = true;
+
+        mRepository.setSpeedType(SPEED_2GHZ_5GHZ);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
         assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
                 .isEqualTo(SECURITY_TYPE_WPA3_SAE_TRANSITION);
+    }
+
+    @Test
+    public void setSpeedType_6ghzTo2g5ghzWithLessThan8CharPassphrase_doesNotChangeSecurity() {
+        mockConfig(SECURITY_TYPE_WPA3_SAE, SPEED_6GHZ, WIFI_PASSWORD_SHORT);
+        mRepository.mIsDualBand = true;
+
+        mRepository.setSpeedType(SPEED_2GHZ_5GHZ);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_WPA3_SAE);
     }
 
     @Test
@@ -562,19 +585,19 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void is5gAvailable_hasUsableChannels_returnTrue() {
+    public void is5gAvailable_hasChannels_returnTrue() {
         mRepository.mIs5gBandSupported = true;
         // Reset m5gBand to trigger an update
-        mRepository.mBand5g.isUsableChannelsReady = false;
+        mRepository.mBand5g.isChannelsReady = false;
 
         assertThat(mRepository.is5gAvailable()).isTrue();
     }
 
     @Test
-    public void is5gAvailable_noUsableChannels_returnFalse() {
+    public void is5gAvailable_noChannels_returnFalse() {
         mRepository.mIs5gBandSupported = true;
         // Reset m5gBand to trigger an update
-        mRepository.mBand5g.isUsableChannelsReady = false;
+        mRepository.mBand5g.isChannelsReady = false;
         when(mWifiManager.getAllowedChannels(WifiScanner.WIFI_BAND_5_GHZ_WITH_DFS, OP_MODE_SAP))
                 .thenReturn(null);
 
@@ -585,7 +608,7 @@ public class WifiHotspotRepositoryTest {
     @UiThreadTest
     public void get5gAvailable_shouldNotReturnNull() {
         // Reset m5gBand to trigger an update
-        mRepository.mBand5g.isUsableChannelsReady = false;
+        mRepository.mBand5g.isChannelsReady = false;
 
         assertThat(mRepository.get5gAvailable()).isNotNull();
     }
@@ -606,19 +629,19 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void is6gAvailable_hasUsableChannels_returnTrue() {
+    public void is6gAvailable_hasChannels_returnTrue() {
         mRepository.mIs6gBandSupported = true;
         // Reset m6gBand to trigger an update
-        mRepository.mBand6g.isUsableChannelsReady = false;
+        mRepository.mBand6g.isChannelsReady = false;
 
         assertThat(mRepository.is6gAvailable()).isTrue();
     }
 
     @Test
-    public void is6gAvailable_noUsableChannels_returnFalse() {
+    public void is6gAvailable_noChannels_returnFalse() {
         mRepository.mIs6gBandSupported = true;
         // Reset m6gBand to trigger an update
-        mRepository.mBand6g.isUsableChannelsReady = false;
+        mRepository.mBand6g.isChannelsReady = false;
         when(mWifiManager.getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP))
                 .thenReturn(null);
 
@@ -658,33 +681,33 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void isChannelAvailable_throwIllegalArgumentException_hasUsableChannelsFalse() {
+    public void isChannelAvailable_throwIllegalArgumentException_hasChannelsFalse() {
         doThrow(IllegalArgumentException.class).when(mWifiManager)
                 .getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
 
         mRepository.isChannelAvailable(mRepository.mBand6g);
 
-        assertThat(mRepository.mBand6g.hasUsableChannels).isFalse();
-        assertThat(mRepository.mBand6g.isUsableChannelsUnsupported).isTrue();
+        assertThat(mRepository.mBand6g.hasChannels).isFalse();
+        assertThat(mRepository.mBand6g.isChannelsUnsupported).isTrue();
     }
 
     @Test
-    public void isChannelAvailable_throwUnsupportedOperationException_hasUsableChannelsFalse() {
+    public void isChannelAvailable_throwUnsupportedOperationException_hasChannelsFalse() {
         doThrow(UnsupportedOperationException.class).when(mWifiManager)
                 .getAllowedChannels(WifiScanner.WIFI_BAND_6_GHZ, OP_MODE_SAP);
 
         mRepository.isChannelAvailable(mRepository.mBand6g);
 
-        assertThat(mRepository.mBand6g.hasUsableChannels).isFalse();
-        assertThat(mRepository.mBand6g.isUsableChannelsUnsupported).isTrue();
+        assertThat(mRepository.mBand6g.hasChannels).isFalse();
+        assertThat(mRepository.mBand6g.isChannelsUnsupported).isTrue();
     }
 
     @Test
-    public void isChannelAvailable_noExceptionAndHasUsableChannels_hasUsableChannelsTrue() {
+    public void isChannelAvailable_noExceptionAndHasChannels_hasChannelsTrue() {
         mRepository.isChannelAvailable(mRepository.mBand6g);
 
-        assertThat(mRepository.mBand6g.hasUsableChannels).isTrue();
-        assertThat(mRepository.mBand6g.isUsableChannelsUnsupported).isFalse();
+        assertThat(mRepository.mBand6g.hasChannels).isTrue();
+        assertThat(mRepository.mBand6g.isChannelsUnsupported).isFalse();
     }
 
     @Test
@@ -744,9 +767,9 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void updateCapabilityChanged_band5gUsableChannelsUnsupported_update5gAvailable() {
+    public void updateCapabilityChanged_band5gChannelsUnsupported_update5gAvailable() {
         mRepository = spy(new WifiHotspotRepository(mContext, mWifiManager, mTetheringManager));
-        mRepository.mBand5g.isUsableChannelsUnsupported = true;
+        mRepository.mBand5g.isChannelsUnsupported = true;
 
         mRepository.updateCapabilityChanged();
 
@@ -755,9 +778,9 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void updateCapabilityChanged_band6gUsableChannelsUnsupported_update5gAvailable() {
+    public void updateCapabilityChanged_band6gChannelsUnsupported_update5gAvailable() {
         mRepository = spy(new WifiHotspotRepository(mContext, mWifiManager, mTetheringManager));
-        mRepository.mBand6g.isUsableChannelsUnsupported = true;
+        mRepository.mBand6g.isChannelsUnsupported = true;
 
         mRepository.updateCapabilityChanged();
 
@@ -766,36 +789,36 @@ public class WifiHotspotRepositoryTest {
     }
 
     @Test
-    public void isAvailable_isUsableChannelsUnsupportedFalse_returnHasUsableChannels() {
-        mRepository.mBand6g.isUsableChannelsUnsupported = false;
-        mRepository.mBand6g.hasUsableChannels = false;
+    public void isAvailable_isChannelsUnsupportedFalse_returnHasChannels() {
+        mRepository.mBand6g.isChannelsUnsupported = false;
+        mRepository.mBand6g.hasChannels = false;
         mRepository.mBand6g.hasCapability = true;
 
         assertThat(mRepository.mBand6g.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_isUsableChannelsUnsupportedTrue_returnHasCapability() {
-        mRepository.mBand6g.isUsableChannelsUnsupported = true;
-        mRepository.mBand6g.hasUsableChannels = false;
+    public void isAvailable_isChannelsUnsupportedTrue_returnHasCapability() {
+        mRepository.mBand6g.isChannelsUnsupported = true;
+        mRepository.mBand6g.hasChannels = false;
         mRepository.mBand6g.hasCapability = true;
 
         assertThat(mRepository.mBand6g.isAvailable()).isTrue();
     }
 
     private void mockConfigSecurityType(int securityType) {
-        mockConfig(securityType, SPEED_2GHZ);
+        mockConfig(securityType, SPEED_2GHZ,
+                (securityType == SECURITY_TYPE_OPEN) ? null : WIFI_PASSWORD);
     }
 
     private void mockConfigSpeedType(int speedType) {
-        mockConfig(SECURITY_TYPE_WPA3_SAE, speedType);
+        mockConfig(SECURITY_TYPE_WPA3_SAE, speedType, WIFI_PASSWORD);
     }
 
-    private void mockConfig(int securityType, int speedType) {
+    private void mockConfig(int securityType, int speedType, String passphrase) {
         SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         // Security Type
         doReturn(securityType).when(mSecurityType).getValue();
-        String passphrase = (securityType == SECURITY_TYPE_OPEN) ? null : WIFI_PASSWORD;
         configBuilder.setPassphrase(passphrase, securityType).build();
 
         // Speed Type

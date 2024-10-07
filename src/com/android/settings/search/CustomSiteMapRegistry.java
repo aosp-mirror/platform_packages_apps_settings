@@ -16,6 +16,7 @@
 
 package com.android.settings.search;
 
+import android.app.Flags;
 import android.util.ArrayMap;
 
 import com.android.settings.backup.UserBackupSettingsActivity;
@@ -55,8 +56,10 @@ public class CustomSiteMapRegistry {
                 ConnectedDeviceDashboardFragment.class.getName());
         CUSTOM_SITE_MAP.put(UserBackupSettingsActivity.class.getName(),
                 SystemDashboardFragment.class.getName());
-        CUSTOM_SITE_MAP.put(ZenModeBlockedEffectsSettings.class.getName(),
-                ZenModeRestrictNotificationsSettings.class.getName());
+        if (!Flags.modesUi()) {
+            CUSTOM_SITE_MAP.put(ZenModeBlockedEffectsSettings.class.getName(),
+                    ZenModeRestrictNotificationsSettings.class.getName());
+        }
         CUSTOM_SITE_MAP.put(GestureNavigationSettingsFragment.class.getName(),
                 SystemNavigationGestureSettings.class.getName());
     }

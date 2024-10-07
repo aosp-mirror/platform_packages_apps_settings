@@ -16,27 +16,19 @@
 
 package com.android.settings.shortcut;
 
+import static com.android.settings.shortcut.Shortcuts.SHORTCUT_PROBE;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
-import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -48,7 +40,6 @@ import com.android.settings.Settings;
 import com.android.settings.Settings.DataUsageSummaryActivity;
 import com.android.settings.Settings.TetherSettingsActivity;
 import com.android.settings.Settings.WifiTetherSettingsActivity;
-import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.gestures.OneHandedSettingsUtils;
 import com.android.settings.network.SubscriptionUtil;
@@ -68,11 +59,6 @@ import java.util.List;
 public class CreateShortcutPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "CreateShortcutPrefCtrl";
-
-    static final String SHORTCUT_ID_PREFIX = "component-shortcut-";
-    static final Intent SHORTCUT_PROBE = new Intent(Intent.ACTION_MAIN)
-            .addCategory("com.android.settings.SHORTCUT")
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
     private final ShortcutManager mShortcutManager;
     private final PackageManager mPackageManager;
@@ -132,9 +118,7 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                 if (mHost == null) {
                     return false;
                 }
-                final Intent shortcutIntent = createResultIntent(
-                        buildShortcutIntent(uiContext, info),
-                        info, clickTarget.getTitle());
+                final Intent shortcutIntent = createResultIntent(info);
                 mHost.setResult(Activity.RESULT_OK, shortcutIntent);
                 logCreateShortcut(info);
                 mHost.finish();
@@ -149,21 +133,20 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
      * launcher widget using this intent.
      */
     @VisibleForTesting
-    Intent createResultIntent(Intent shortcutIntent, ResolveInfo resolveInfo,
-            CharSequence label) {
-        ShortcutInfo info = createShortcutInfo(mContext, shortcutIntent, resolveInfo, label);
+    Intent createResultIntent(ResolveInfo resolveInfo) {
+        ShortcutInfo info = Shortcuts.createShortcutInfo(mContext, resolveInfo);
         Intent intent = mShortcutManager.createShortcutResultIntent(info);
         if (intent == null) {
             intent = new Intent();
         }
         intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
                 Intent.ShortcutIconResource.fromContext(mContext, R.mipmap.ic_launcher_settings))
-                .putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent)
-                .putExtra(Intent.EXTRA_SHORTCUT_NAME, label);
+                .putExtra(Intent.EXTRA_SHORTCUT_INTENT, info.getIntent())
+                .putExtra(Intent.EXTRA_SHORTCUT_NAME, info.getShortLabel());
 
         final ActivityInfo activityInfo = resolveInfo.activityInfo;
         if (activityInfo.icon != 0) {
-            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createIcon(
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, Shortcuts.createIcon(
                     mContext,
                     activityInfo.applicationInfo,
                     activityInfo.icon,
@@ -237,87 +220,6 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
         mMetricsFeatureProvider.action(
                 mContext, SettingsEnums.ACTION_SETTINGS_CREATE_SHORTCUT,
                 info.activityInfo.name);
-    }
-
-    private static Intent buildShortcutIntent(Context context, ResolveInfo info) {
-        Intent intent = new Intent(SHORTCUT_PROBE)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .setClassName(info.activityInfo.packageName, info.activityInfo.name);
-        if (ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        }
-        return intent;
-    }
-
-    private static ShortcutInfo createShortcutInfo(Context context, Intent shortcutIntent,
-            ResolveInfo resolveInfo, CharSequence label) {
-        final ActivityInfo activityInfo = resolveInfo.activityInfo;
-
-        final Icon maskableIcon;
-        if (activityInfo.icon != 0 && activityInfo.applicationInfo != null) {
-            maskableIcon = Icon.createWithAdaptiveBitmap(createIcon(
-                    context,
-                    activityInfo.applicationInfo, activityInfo.icon,
-                    R.layout.shortcut_badge_maskable,
-                    context.getResources().getDimensionPixelSize(R.dimen.shortcut_size_maskable)));
-        } else {
-            maskableIcon = Icon.createWithResource(context, R.drawable.ic_launcher_settings);
-        }
-        final String shortcutId = SHORTCUT_ID_PREFIX +
-                shortcutIntent.getComponent().flattenToShortString();
-        return new ShortcutInfo.Builder(context, shortcutId)
-                .setShortLabel(label)
-                .setIntent(shortcutIntent)
-                .setIcon(maskableIcon)
-                .build();
-    }
-
-    private static Bitmap createIcon(Context context, ApplicationInfo app, int resource,
-            int layoutRes, int size) {
-        final Context themedContext = new ContextThemeWrapper(context,
-                android.R.style.Theme_Material);
-        final View view = LayoutInflater.from(themedContext).inflate(layoutRes, null);
-        final int spec = View.MeasureSpec.makeMeasureSpec(size, View.MeasureSpec.EXACTLY);
-        view.measure(spec, spec);
-        final Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
-                Bitmap.Config.ARGB_8888);
-        final Canvas canvas = new Canvas(bitmap);
-
-        Drawable iconDrawable;
-        try {
-            iconDrawable = context.getPackageManager().getResourcesForApplication(app)
-                    .getDrawable(resource, themedContext.getTheme());
-            if (iconDrawable instanceof LayerDrawable) {
-                iconDrawable = ((LayerDrawable) iconDrawable).getDrawable(1);
-            }
-            ((ImageView) view.findViewById(android.R.id.icon)).setImageDrawable(iconDrawable);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.w(TAG, "Cannot load icon from app " + app + ", returning a default icon");
-            Icon icon = Icon.createWithResource(context, R.drawable.ic_launcher_settings);
-            ((ImageView) view.findViewById(android.R.id.icon)).setImageIcon(icon);
-        }
-
-        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
-        view.draw(canvas);
-        return bitmap;
-    }
-
-    public static void updateRestoredShortcuts(Context context) {
-        ShortcutManager sm = context.getSystemService(ShortcutManager.class);
-        List<ShortcutInfo> updatedShortcuts = new ArrayList<>();
-        for (ShortcutInfo si : sm.getPinnedShortcuts()) {
-            if (si.getId().startsWith(SHORTCUT_ID_PREFIX)) {
-                ResolveInfo ri = context.getPackageManager().resolveActivity(si.getIntent(), 0);
-
-                if (ri != null) {
-                    updatedShortcuts.add(createShortcutInfo(context,
-                            buildShortcutIntent(context, ri), ri, si.getShortLabel()));
-                }
-            }
-        }
-        if (!updatedShortcuts.isEmpty()) {
-            sm.updateShortcuts(updatedShortcuts);
-        }
     }
 
     private static final Comparator<ResolveInfo> SHORTCUT_COMPARATOR =

@@ -28,6 +28,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
@@ -87,6 +88,11 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
             manager = host.getChildFragmentManager();
         } catch (IllegalStateException e) {
             Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+            return;
+        }
+        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            Log.d(TAG, "Fail to show dialog with state: " + currentState);
             return;
         }
         sListener = listener;
@@ -158,7 +164,11 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
                                     dismiss();
                                 })
                         .setCustomNegativeButton(
-                                R.string.audio_sharing_no_thanks_button_label,
+                                getMetricsCategory() == SettingsEnums.DIALOG_START_AUDIO_SHARING
+                                        ? getString(
+                                                R.string.audio_sharing_switch_active_button_label,
+                                                newDeviceName)
+                                        : getString(R.string.audio_sharing_no_thanks_button_label),
                                 v -> {
                                     if (sListener != null) {
                                         sListener.onCancelClick();

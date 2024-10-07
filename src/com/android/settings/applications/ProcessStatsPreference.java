@@ -21,16 +21,24 @@ import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
+import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
 import com.android.settingslib.widget.AppPreference;
 
 public class ProcessStatsPreference extends AppPreference {
     static final String TAG = "ProcessStatsPreference";
 
     private ProcStatsPackageEntry mEntry;
+    private int mProgress;
+    private boolean mProgressVisible;
 
     public ProcessStatsPreference(Context context) {
         super(context, null);
+        setLayoutResource(R.layout.preference_process_stats);
     }
 
     public void init(ProcStatsPackageEntry entry, PackageManager pm, double maxMemory,
@@ -55,5 +63,30 @@ public class ProcessStatsPreference extends AppPreference {
 
     public ProcStatsPackageEntry getEntry() {
         return mEntry;
+    }
+
+    /**
+     * Sets the current progress.
+     * @param amount the current progress
+     *
+     * @see ProgressBar#setProgress(int)
+     */
+    public void setProgress(int amount) {
+        mProgress = amount;
+        mProgressVisible = true;
+        notifyChanged();
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
+
+        final ProgressBar progress = (ProgressBar) view.findViewById(android.R.id.progress);
+        if (mProgressVisible) {
+            progress.setProgress(mProgress);
+            progress.setVisibility(View.VISIBLE);
+        } else {
+            progress.setVisibility(View.GONE);
+        }
     }
 }

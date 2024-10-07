@@ -17,10 +17,10 @@
 package com.android.settings.testutils;
 
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
+import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_GESTURE;
+import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
-
-import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -35,8 +35,6 @@ import android.os.Build;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -48,15 +46,18 @@ public class AccessibilityTestUtils {
 
     public static void setSoftwareShortcutMode(
             Context context, boolean gestureNavEnabled, boolean floatingButtonEnabled) {
-        int buttonMode = floatingButtonEnabled ? ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU : -1;
+        int buttonMode = ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR;
+        if (floatingButtonEnabled) {
+            buttonMode = ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
+        } else if (gestureNavEnabled) {
+            buttonMode = ACCESSIBILITY_BUTTON_MODE_GESTURE;
+        }
         int navMode = gestureNavEnabled ? NAV_BAR_MODE_GESTURAL : NAV_BAR_MODE_3BUTTON;
 
-        Settings.Secure.putInt(context.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, buttonMode);
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.integer.config_navBarInteractionMode, navMode);
-        assertThat(context.getResources().getInteger(
-                com.android.internal.R.integer.config_navBarInteractionMode)).isEqualTo(navMode);
+        Settings.Secure.putIntForUser(context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, buttonMode, context.getUserId());
+        Settings.Secure.putIntForUser(context.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, navMode, context.getUserId());
     }
 
     /**

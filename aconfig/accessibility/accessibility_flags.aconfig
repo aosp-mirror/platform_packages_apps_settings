@@ -1,5 +1,5 @@
 package: "com.android.settings.accessibility"
-container: "system_ext"
+container: "system"
 
 # NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
 
@@ -35,6 +35,13 @@ flag {
   namespace: "accessibility"
   description: "Show the edit shorcuts screen in full screen, since the shortcut options are increasing."
   bug: "300302098"
+}
+
+flag {
+  name: "enable_color_contrast_control"
+  namespace: "accessibility"
+  description: "Allows users to control color contrast in the Accessibility settings page."
+  bug: "246577325"
 }
 
 flag {
@@ -89,8 +96,11 @@ flag {
 }
 
 flag {
-  name: "enable_color_contrast_control"
+  name: "toggle_feature_fragment_collection_info"
   namespace: "accessibility"
-  description: "Allows users to control color contrast in the Accessibility settings page."
-  bug: "246577325"
+  description: "Provides custom CollectionInfo for ToggleFeaturePreferenceFragment"
+  bug: "318607873"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
 }

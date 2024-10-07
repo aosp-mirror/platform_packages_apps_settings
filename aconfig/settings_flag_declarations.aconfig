@@ -1,5 +1,5 @@
 package: "com.android.settings.flags"
-container: "system_ext"
+container: "system"
 
 flag {
     name: "show_factory_reset_cancel_button"
@@ -51,8 +51,15 @@ flag {
 }
 
 flag {
-  name: "catalyst_legal_information"
+    name: "updated_suggestion_card_aosp"
+    namespace: "android_settings"
+    description: "Use updated suggestion card(s) in AOSP Settings"
+    bug: "323258154"
+}
+
+flag {
+  name: "catalyst"
   namespace: "android_settings"
-  description: "This flag controls the About phone > Legal information page migration"
+  description: "Flag for all screens"
   bug: "323791114"
 }

@@ -39,6 +39,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.core.instrumentation.ElapsedTimeUtils;
 import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.search.SearchStateReceiver;
 import com.android.settingslib.utils.ThreadUtils;
@@ -69,6 +70,7 @@ public class SettingsInitialize extends BroadcastReceiver {
         webviewSettingSetup(context, pm, userInfo);
         ThreadUtils.postOnBackgroundThread(() -> refreshExistingShortcuts(context));
         enableTwoPaneDeepLinkActivityIfNecessary(pm, context);
+        storeSuwCompleteTimestamp(context, broadcast);
     }
 
     private void managedProfileSetup(Context context, final PackageManager pm, Intent broadcast,
@@ -160,5 +162,11 @@ public class SettingsInitialize extends BroadcastReceiver {
         pm.setComponentEnabledSetting(deepLinkHome, enableState, PackageManager.DONT_KILL_APP);
         pm.setComponentEnabledSetting(searchStateReceiver, enableState,
                 PackageManager.DONT_KILL_APP);
+    }
+
+    private void storeSuwCompleteTimestamp(Context context, Intent broadcast) {
+        if (SetupWizardUtils.ACTION_SETUP_WIZARD_FINISHED.equals(broadcast.getAction())) {
+            ElapsedTimeUtils.storeSuwFinishedTimestamp(context, System.currentTimeMillis());
+        }
     }
 }

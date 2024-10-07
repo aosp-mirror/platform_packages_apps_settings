@@ -209,48 +209,46 @@ class ZenModeSummaryHelper {
         boolean isFirst = true;
         List<String> enabledEffects = new ArrayList<>();
         if (!zenMode.getPolicy().shouldShowAllVisualEffects()
-                && zenMode.getRule().getInterruptionFilter() != INTERRUPTION_FILTER_ALL) {
+                && zenMode.getInterruptionFilter() != INTERRUPTION_FILTER_ALL) {
             enabledEffects.add(getBlockedEffectsSummary(zenMode));
             isFirst = false;
         }
-        ZenDeviceEffects currEffects = zenMode.getRule().getDeviceEffects();
-        if (currEffects != null) {
-            if (currEffects.shouldDisplayGrayscale()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_grayscale_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_grayscale_title_secondary_list));
-                }
-                isFirst = false;
+        ZenDeviceEffects currEffects = zenMode.getDeviceEffects();
+        if (currEffects.shouldDisplayGrayscale()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_grayscale_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_grayscale_title_secondary_list));
             }
-            if (currEffects.shouldSuppressAmbientDisplay()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_aod_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_aod_title_secondary_list));
-                }
-                isFirst = false;
+            isFirst = false;
+        }
+        if (currEffects.shouldSuppressAmbientDisplay()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_aod_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_aod_title_secondary_list));
             }
-            if (currEffects.shouldDimWallpaper()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_wallpaper_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_wallpaper_title_secondary_list));
-                }
-                isFirst = false;
+            isFirst = false;
+        }
+        if (currEffects.shouldDimWallpaper()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_wallpaper_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_wallpaper_title_secondary_list));
             }
-            if (currEffects.shouldUseNightMode()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_dark_theme_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_dark_theme_title_secondary_list));
-                }
-                isFirst = false;
+            isFirst = false;
+        }
+        if (currEffects.shouldUseNightMode()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_dark_theme_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_dark_theme_title_secondary_list));
             }
+            isFirst = false;
         }
 
         int numCategories = enabledEffects.size();

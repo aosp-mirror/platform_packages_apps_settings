@@ -27,6 +27,8 @@ import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -116,16 +118,22 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
     }
 
     @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        refreshSummary(preference);
+    }
+
+    @Override
     public CharSequence getSummary() {
         // If auto time zone cannot enable telephony fallback and is capable of location, then auto
         // time zone must use location.
         if (LocationProviderStatusPreferenceController.hasLocationTimeZoneNoTelephonyFallback(
                 mTimeManager.getTimeZoneCapabilitiesAndConfig().getDetectorStatus())) {
-            return mContext.getResources().getString(R.string.auto_zone_requires_location_summary);
+            return mContext.getString(R.string.auto_zone_requires_location_summary);
         }
-        // If the user has a dedicated toggle to control location use, the summary can
-        // be empty because the use of location is explicit.
-        return "";
+
+        // If the user has a dedicated toggle to control location use, explain what it does.
+        return mContext.getString(R.string.zone_auto_title_summary);
     }
 
     @VisibleForTesting

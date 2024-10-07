@@ -36,8 +36,10 @@ import androidx.annotation.VisibleForTesting;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.Utils;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.password.SetupSkipDialog;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -417,6 +419,17 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                         getNextButton().setEnabled(true);
                     }));
                 }
+                final Utils.BiometricStatus biometricStatus =
+                        Utils.requestBiometricAuthenticationForMandatoryBiometrics(this,
+                                false /* biometricsAuthenticationRequested */, mUserId);
+                if (biometricStatus == Utils.BiometricStatus.OK) {
+                    Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                            BIOMETRIC_AUTH_REQUEST, mUserId, true /* hideBackground */);
+                } else if (biometricStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(this,
+                                    biometricStatus);
+                }
             } else {
                 setResult(resultCode, data);
                 finish();
@@ -444,6 +457,16 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             } else if (resultCode != RESULT_CANCELED) {
                 setResult(resultCode, data);
                 finish();
+            }
+        } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
+            if (resultCode != RESULT_OK) {
+                if (resultCode == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(this,
+                                    Utils.BiometricStatus.LOCKOUT);
+                } else {
+                    finish();
+                }
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

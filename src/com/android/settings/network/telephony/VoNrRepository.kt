@@ -29,42 +29,56 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
 
-class VoNrRepository(private val context: Context, private val subId: Int) {
-    private val telephonyManager = context.telephonyManager(subId)
-    private val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
+class VoNrRepository(
+    private val context: Context,
+    private val nrRepository: NrRepository = NrRepository(context),
+) {
+    private val carrierConfigRepository = CarrierConfigRepository(context)
 
-    fun isVoNrAvailable(): Boolean {
-        if (!SubscriptionManager.isValidSubscriptionId(subId) || !has5gCapability()) return false
-        val carrierConfig = carrierConfigManager.safeGetConfig(
-            keys = listOf(
-                CarrierConfigManager.KEY_VONR_ENABLED_BOOL,
-                CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL,
-                CarrierConfigManager.KEY_CARRIER_NR_AVAILABILITIES_INT_ARRAY,
-            ),
-            subId = subId,
-        )
-        return carrierConfig.getBoolean(CarrierConfigManager.KEY_VONR_ENABLED_BOOL) &&
-            carrierConfig.getBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL) &&
-            (carrierConfig.getIntArray(CarrierConfigManager.KEY_CARRIER_NR_AVAILABILITIES_INT_ARRAY)
-                ?.isNotEmpty() ?: false)
+    fun isVoNrAvailable(subId: Int): Boolean {
+        if (!nrRepository.isNrAvailable(subId)) return false
+        data class Config(val isVoNrEnabled: Boolean, val isVoNrSettingVisibility: Boolean)
+
+        val carrierConfig =
+            carrierConfigRepository.transformConfig(subId) {
+                Config(
+                    isVoNrEnabled = getBoolean(CarrierConfigManager.KEY_VONR_ENABLED_BOOL),
+                    isVoNrSettingVisibility =
+                    getBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL),
+                )
+            }
+        return carrierConfig.isVoNrEnabled && carrierConfig.isVoNrSettingVisibility
     }
 
-    private fun has5gCapability() =
-        ((telephonyManager.supportedRadioAccessFamily and
-            TelephonyManager.NETWORK_TYPE_BITMASK_NR) > 0)
-            .also { Log.d(TAG, "[$subId] has5gCapability: $it") }
-
-    fun isVoNrEnabledFlow(): Flow<Boolean> = context.subscriptionsChangedFlow()
-        .map { telephonyManager.isVoNrEnabled }
-        .conflate()
-        .onEach { Log.d(TAG, "[$subId] isVoNrEnabled: $it") }
-        .flowOn(Dispatchers.Default)
-
-    suspend fun setVoNrEnabled(enabled: Boolean) = withContext(Dispatchers.Default) {
-        if (!SubscriptionManager.isValidSubscriptionId(subId)) return@withContext
-        val result = telephonyManager.setVoNrEnabled(enabled)
-        Log.d(TAG, "[$subId] setVoNrEnabled: $enabled, result: $result")
+    fun isVoNrEnabledFlow(subId: Int): Flow<Boolean> {
+        val telephonyManager = context.telephonyManager(subId)
+        return context
+            .subscriptionsChangedFlow()
+            .map {
+                try {
+                    telephonyManager.isVoNrEnabled
+                } catch (e: IllegalStateException) {
+                    Log.e(TAG, "IllegalStateException - isVoNrEnabled : $e")
+                    false
+                }
+            }
+            .conflate()
+            .onEach { Log.d(TAG, "[$subId] isVoNrEnabled: $it") }
+            .flowOn(Dispatchers.Default)
     }
+
+    suspend fun setVoNrEnabled(subId: Int, enabled: Boolean) =
+        withContext(Dispatchers.Default) {
+            if (!SubscriptionManager.isValidSubscriptionId(subId)) return@withContext
+            var result = TelephonyManager.ENABLE_VONR_RADIO_INVALID_STATE
+            try {
+                result = context.telephonyManager(subId).setVoNrEnabled(enabled)
+            } catch (e: IllegalStateException) {
+                Log.e(TAG, "IllegalStateException - setVoNrEnabled : $e")
+            } finally {
+                Log.d(TAG, "[$subId] setVoNrEnabled: $enabled, result: $result")
+            }
+        }
 
     private companion object {
         private const val TAG = "VoNrRepository"

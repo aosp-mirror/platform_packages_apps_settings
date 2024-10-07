@@ -112,7 +112,7 @@ class FingerprintEnrollConfirmationViewModelTest {
           .toFingerprintSensor()
 
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal = mutableListOf()
-      fakeFingerprintManagerInteractor.enrollableFingerprints = 5
+      fakeFingerprintManagerInteractor.setMaxEnrollableFingerprints(5)
 
       var canEnrollFingerprints: Boolean = false
       val job = launch {

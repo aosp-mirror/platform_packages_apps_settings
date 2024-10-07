@@ -392,12 +392,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
         mButtonsPref.setButton2Text(R.string.wifi_venue_website_button_text)
                 .setButton2Icon(R.drawable.ic_settings_sign_in)
-                .setButton2OnClickListener(view -> {
-                    final Intent infoIntent = new Intent(Intent.ACTION_VIEW);
-                    infoIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    infoIntent.setData(venueInfoUrl);
-                    mContext.startActivity(infoIntent);
-                });
+                .setButton2OnClickListener(view -> launchCaptivePortal(venueInfoUrl));
         // Only show the venue website when the network is connected.
         return mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED;
     }
@@ -412,6 +407,18 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return null;
         }
         return data.getVenueInfoUrl();
+    }
+
+    @VisibleForTesting
+    void launchCaptivePortal(Uri uri) {
+        if (uri == null) {
+            Log.e(TAG, "Launch captive portal with a null Uri!");
+            return;
+        }
+        final Intent infoIntent = new Intent(Intent.ACTION_VIEW);
+        infoIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        infoIntent.setData(uri);
+        mContext.startActivity(infoIntent);
     }
 
     private void setupEntityHeader(PreferenceScreen screen) {
@@ -556,6 +563,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return mContext.getDrawable(getHotspotIconResource(deviceType));
         }
         if (mWifiEntry.getLevel() == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
+            Log.w(TAG, "WiFi level is WIFI_LEVEL_UNREACHABLE(-1)");
             return mContext.getDrawable(R.drawable.empty_icon);
         }
         return mIconInjector.getIcon(wifiEntry.shouldShowXLevelIcon(), wifiEntry.getLevel());

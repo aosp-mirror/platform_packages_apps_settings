@@ -22,7 +22,14 @@ import android.hardware.biometrics.SensorProperties
 import android.hardware.fingerprint.FingerprintEnrollOptions
 import android.hardware.fingerprint.FingerprintSensorProperties
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.AuthenitcateInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.CanEnrollFingerprintsInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrollFingerprintInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrolledFingerprintsInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.GenerateChallengeInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.RemoveFingerprintInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.RenameFingerprintInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.SensorInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
@@ -31,13 +38,25 @@ import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.flow.update
 
 /** Fake to be used by other classes to easily fake the FingerprintManager implementation. */
-class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
+class FakeFingerprintManagerInteractor :
+  AuthenitcateInteractor,
+  CanEnrollFingerprintsInteractor,
+  EnrolledFingerprintsInteractor,
+  EnrollFingerprintInteractor,
+  GenerateChallengeInteractor,
+  RemoveFingerprintInteractor,
+  RenameFingerprintInteractor,
+  SensorInteractor {
 
-  var enrollableFingerprints: Int = 5
+  private val enrollableFingerprints = MutableStateFlow(5)
   var enrolledFingerprintsInternal: MutableList<FingerprintData> = mutableListOf()
   var challengeToGenerate: Pair<Long, ByteArray> = Pair(-1L, byteArrayOf())
   var authenticateAttempt = FingerprintAuthAttemptModel.Success(1)
@@ -67,19 +86,22 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
   override val enrolledFingerprints: Flow<List<FingerprintData>> = flow {
     emit(enrolledFingerprintsInternal)
   }
-
-  override val canEnrollFingerprints: Flow<Boolean> = flow {
-    emit(enrolledFingerprintsInternal.size < enrollableFingerprints)
+  override val canEnrollFingerprints: Flow<Boolean> = enrollableFingerprints.transform {
+     emit(enrolledFingerprintsInternal.size < it)
   }
 
-  override val sensorPropertiesInternal: Flow<FingerprintSensor?> = flow { emit(sensorProp) }
+  override val maxFingerprintsEnrollable: Flow<Int> = enrollableFingerprints.asStateFlow()
 
-  override val maxEnrollableFingerprints: Flow<Int> = flow { emit(enrollableFingerprints) }
+  override fun setShouldUseSettingsMaxFingerprints(useSettings: Boolean) {}
+
+  override val sensorPropertiesInternal: Flow<FingerprintSensor?> = flow { emit(sensorProp) }
+  override val hasSideFps: Flow<Boolean> =
+    flowOf(sensorProp.sensorType == FingerprintSensorType.POWER_BUTTON)
 
   override suspend fun enroll(
     hardwareAuthToken: ByteArray?,
     enrollReason: EnrollReason,
-    fingerprintEnrollOptions: FingerprintEnrollOptions
+    fingerprintEnrollOptions: FingerprintEnrollOptions,
   ): Flow<FingerEnrollState> = flowOf(*enrollStateViewModel.toTypedArray())
 
   override suspend fun removeFingerprint(fp: FingerprintData): Boolean {
@@ -92,7 +114,7 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
     }
   }
 
-  override suspend fun hasSideFps(): Boolean {
-    return sensorProp.sensorType == FingerprintSensorType.POWER_BUTTON
+  fun setMaxEnrollableFingerprints(fingerprints: Int) {
+    enrollableFingerprints.update { fingerprints }
   }
 }

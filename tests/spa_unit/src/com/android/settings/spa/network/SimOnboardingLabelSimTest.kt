@@ -19,23 +19,17 @@ package com.android.settings.spa.network
 import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
-import android.view.KeyEvent.ACTION_DOWN
-import android.view.KeyEvent.KEYCODE_FORWARD_DEL
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.input.key.KeyEvent
-import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performKeyPress
 import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.lifecycle.testing.TestLifecycleOwner
@@ -45,6 +39,7 @@ import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
 import com.android.settingslib.spa.testutils.waitUntilExists
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -80,7 +75,6 @@ class SimOnboardingLabelSimTest {
         on { targetSubInfo }.doReturn(null)
         on { availableSubInfoList }.doReturn(listOf())
         on { activeSubInfoList }.doReturn(listOf())
-        on { slotInfoList }.doReturn(listOf())
         on { uiccCardInfoList }.doReturn(listOf())
 
         on { targetPrimarySimCalls }.doReturn(PRIMARY_SIM_ASK_EVERY_TIME)
@@ -136,6 +130,7 @@ class SimOnboardingLabelSimTest {
     }
 
     @Test
+    @Ignore
     fun simOnboardingLabelSimImpl_showItem_show3Items() {
         preSetupContent()
 

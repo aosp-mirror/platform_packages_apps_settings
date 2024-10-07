@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.GESTURE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
@@ -27,6 +28,7 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+import static com.android.settings.accessibility.AccessibilityUtil.getShortcutSummaryList;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -34,7 +36,6 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.icu.text.CaseMap;
 import android.icu.text.MessageFormat;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,6 +56,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.server.accessibility.Flags;
@@ -62,7 +64,6 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
-import com.android.settings.utils.LocaleUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.IllustrationPreference;
 
@@ -70,7 +71,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.StringJoiner;
 
@@ -348,22 +348,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mDialogDelegate = delegate;
     }
 
-    private boolean hasShortcutType(int value, @UserShortcutType int type) {
-        return (value & type) == type;
-    }
-
-    private static CharSequence getSoftwareShortcutTypeSummary(Context context) {
-        int resId;
-        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.string.accessibility_shortcut_edit_summary_software;
-        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = R.string.accessibility_shortcut_edit_summary_software_gesture;
-        } else {
-            resId = R.string.accessibility_shortcut_edit_summary_software;
-        }
-        return context.getText(resId);
-    }
-
     @Override
     protected void registerKeysToObserverCallback(
             AccessibilitySettingsContentObserver contentObserver) {
@@ -423,47 +407,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             return context.getText(R.string.switch_off_text);
         }
 
-        final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
-                MAGNIFICATION_CONTROLLER_NAME);
-
-        // LINT.IfChange(shortcut_type_ui_order)
-        final List<CharSequence> list = new ArrayList<>();
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if (hasShortcutType(shortcutTypes, QUICK_SETTINGS)) {
-                final CharSequence qsTitle = context.getText(
-                        R.string.accessibility_feature_shortcut_setting_summary_quick_settings);
-                list.add(qsTitle);
-            }
-        }
-        if (hasShortcutType(shortcutTypes, SOFTWARE)) {
-            list.add(getSoftwareShortcutTypeSummary(context));
-        }
-        if (hasShortcutType(shortcutTypes, HARDWARE)) {
-            final CharSequence hardwareTitle = context.getText(
-                    R.string.accessibility_shortcut_hardware_keyword);
-            list.add(hardwareTitle);
-        }
-        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (hasShortcutType(shortcutTypes, TWOFINGER_DOUBLETAP)) {
-                final CharSequence twoFingerDoubleTapTitle = context.getString(
-                        R.string.accessibility_shortcut_two_finger_double_tap_keyword, 2);
-                list.add(twoFingerDoubleTapTitle);
-            }
-        }
-        if (hasShortcutType(shortcutTypes, TRIPLETAP)) {
-            final CharSequence tripleTapTitle = context.getText(
-                    R.string.accessibility_shortcut_triple_tap_keyword);
-            list.add(tripleTapTitle);
-        }
-        // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
-
-        // Show software shortcut if first time to use.
-        if (list.isEmpty()) {
-            list.add(getSoftwareShortcutTypeSummary(context));
-        }
-
-        return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
-                null, LocaleUtils.getConcatenatedString(list));
+        return getShortcutSummaryList(context,
+                PreferredShortcuts.retrieveUserShortcutType(context,
+                MAGNIFICATION_CONTROLLER_NAME));
     }
 
     @Override
@@ -595,6 +541,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (((shortcutTypes & TRIPLETAP) == TRIPLETAP)) {
             optInMagnificationValueToSettings(context, TRIPLETAP);
         }
+        if (((shortcutTypes & GESTURE) == GESTURE)) {
+            optInMagnificationValueToSettings(context, GESTURE);
+        }
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
             if (((shortcutTypes & TWOFINGER_DOUBLETAP)
                     == TWOFINGER_DOUBLETAP)) {
@@ -680,6 +629,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (((shortcutTypes & TRIPLETAP) == TRIPLETAP)) {
             optOutMagnificationValueFromSettings(context, TRIPLETAP);
         }
+        if (((shortcutTypes & GESTURE) == GESTURE)) {
+            optOutMagnificationValueFromSettings(context, GESTURE);
+        }
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
             if (((shortcutTypes & TWOFINGER_DOUBLETAP)
                     == TWOFINGER_DOUBLETAP)) {
@@ -749,25 +701,21 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @VisibleForTesting
     static boolean hasMagnificationValuesInSettings(Context context, int shortcutTypes) {
-        boolean exist = false;
-
-        if ((shortcutTypes & SOFTWARE) == SOFTWARE) {
-            exist = hasMagnificationValueInSettings(context, SOFTWARE);
-        }
-        if (((shortcutTypes & HARDWARE) == HARDWARE)) {
-            exist |= hasMagnificationValueInSettings(context, HARDWARE);
-        }
-        if (((shortcutTypes & TRIPLETAP) == TRIPLETAP)) {
-            exist |= hasMagnificationValueInSettings(context, TRIPLETAP);
-        }
-        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (((shortcutTypes & TWOFINGER_DOUBLETAP)
-                    == TWOFINGER_DOUBLETAP)) {
-                exist |= hasMagnificationValueInSettings(context,
-                        TWOFINGER_DOUBLETAP);
+        for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
+            if ((shortcutTypes & shortcutType) == 0) {
+                continue;
+            }
+            if (((shortcutType & TWOFINGER_DOUBLETAP)
+                    == TWOFINGER_DOUBLETAP)
+                    && !Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
+                continue;
+            }
+            if (hasMagnificationValueInSettings(context, shortcutType)) {
+                return true;
             }
         }
-        return exist;
+
+        return false;
     }
 
     private static boolean hasMagnificationValueInSettings(Context context,
@@ -776,7 +724,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             return Settings.Secure.getInt(context.getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF) == ON;
         }
-
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
             if (shortcutType == TWOFINGER_DOUBLETAP) {
                 return Settings.Secure.getInt(context.getContentResolver(),
@@ -805,20 +752,18 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private static int getUserShortcutTypeFromSettings(Context context) {
         int shortcutTypes = DEFAULT;
-        if (hasMagnificationValuesInSettings(context, SOFTWARE)) {
-            shortcutTypes |= SOFTWARE;
-        }
-        if (hasMagnificationValuesInSettings(context, HARDWARE)) {
-            shortcutTypes |= HARDWARE;
-        }
-        if (hasMagnificationValuesInSettings(context, TRIPLETAP)) {
-            shortcutTypes |= TRIPLETAP;
-        }
-        if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if (hasMagnificationValuesInSettings(context, TWOFINGER_DOUBLETAP)) {
-                shortcutTypes |= TWOFINGER_DOUBLETAP;
+        for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
+            if ((shortcutType & (TWOFINGER_DOUBLETAP | QUICK_SETTINGS | GESTURE | TRIPLETAP))
+                    == shortcutType
+                    && !android.view.accessibility.Flags.a11yQsShortcut()) {
+                // These shortcuts will throw if we try to look up their settings without the flag.
+                continue;
+            }
+            if (hasMagnificationValueInSettings(context, shortcutType)) {
+                shortcutTypes |= shortcutType;
             }
         }
+
         return shortcutTypes;
     }
 

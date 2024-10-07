@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.settings.R
@@ -34,6 +35,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
@@ -43,9 +45,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.plus
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class CrossSimCallingViewModel(
-    private val application: Application,
-) : AndroidViewModel(application) {
+class CrossSimCallingViewModel(private val application: Application) :
+    AndroidViewModel(application) {
 
     private val subscriptionRepository = SubscriptionRepository(application)
     private val dataSubscriptionRepository = DataSubscriptionRepository(application)
@@ -61,38 +62,45 @@ class CrossSimCallingViewModel(
                     subscriptionRepository.activeSubscriptionIdListFlow(),
                     dataSubscriptionRepository.defaultDataSubscriptionIdFlow(),
                 ) { activeSubIds, defaultDataSubId ->
-                    activeSubIds to crossSimCallNewEnabled(activeSubIds, defaultDataSubId)
+                    updatableSubIdsFlow(activeSubIds) to
+                        crossSimCallNewEnabledFlow(activeSubIds, defaultDataSubId)
                 }
-                .flatMapLatest { (activeSubIds, newEnabledFlow) ->
-                    newEnabledFlow.map { newEnabled -> activeSubIds to newEnabled }
+                .flatMapLatest { (updatableSubIdsFlow, crossSimCallNewEnabledFlow) ->
+                    combine(updatableSubIdsFlow, crossSimCallNewEnabledFlow) {
+                        updatableSubIds,
+                        newEnabled ->
+                        updatableSubIds to newEnabled
+                    }
                 }
                 .distinctUntilChanged()
-                .onEach { (activeSubIds, newEnabled) ->
-                    updateCrossSimCalling(activeSubIds, newEnabled)
+                .conflate()
+                .onEach { (updatableSubIds, newEnabled) ->
+                    Log.d(TAG, "updatableSubIds: $updatableSubIds newEnabled: $newEnabled")
+                    updateCrossSimCalling(updatableSubIds, newEnabled)
                 }
                 .launchIn(scope)
         }
     }
 
-    private suspend fun updateCrossSimCalling(activeSubIds: List<Int>, newEnabled: Boolean) {
-        metricsFeatureProvider.action(
-            application,
-            SettingsEnums.ACTION_UPDATE_CROSS_SIM_CALLING_ON_AUTO_DATA_SWITCH_EVENT,
-            newEnabled,
-        )
-        activeSubIds
-            .filter { subId -> crossSimAvailable(subId) }
-            .forEach { subId ->
-                ImsMmTelRepositoryImpl(application, subId).setCrossSimCallingEnabled(newEnabled)
+    private fun updatableSubIdsFlow(activeSubIds: List<Int>): Flow<List<Int>> {
+        val updatableSubIdFlows =
+            activeSubIds.map { subId ->
+                WifiCallingRepository(application, subId).wifiCallingReadyFlow().map { isReady ->
+                    subId.takeIf { isReady && isCrossSimImsAvailable(subId) }
+                }
             }
+        return combine(updatableSubIdFlows) { subIds -> subIds.filterNotNull() }
+            .distinctUntilChanged()
+            .conflate()
     }
 
-    private suspend fun crossSimAvailable(subId: Int): Boolean =
-        WifiCallingRepository(application, subId).isWifiCallingSupported() &&
-            carrierConfigRepository.getBoolean(
-                subId, CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL)
+    private fun isCrossSimImsAvailable(subId: Int) =
+        carrierConfigRepository.getBoolean(
+            subId,
+            CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL,
+        )
 
-    private fun crossSimCallNewEnabled(
+    private fun crossSimCallNewEnabledFlow(
         activeSubscriptionIdList: List<Int>,
         defaultDataSubId: Int,
     ): Flow<Boolean> {
@@ -102,8 +110,27 @@ class CrossSimCallingViewModel(
                 .filter { subId -> subId != defaultDataSubId }
                 .map { subId ->
                     mobileDataRepository.isMobileDataPolicyEnabledFlow(
-                        subId, TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH)
+                        subId,
+                        TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH,
+                    )
                 }
         return combine(isMobileDataPolicyEnabledFlows) { true in it }
+            .distinctUntilChanged()
+            .conflate()
+    }
+
+    private suspend fun updateCrossSimCalling(subIds: List<Int>, newEnabled: Boolean) {
+        metricsFeatureProvider.action(
+            application,
+            SettingsEnums.ACTION_UPDATE_CROSS_SIM_CALLING_ON_AUTO_DATA_SWITCH_EVENT,
+            newEnabled,
+        )
+        for (subId in subIds) {
+            ImsMmTelRepositoryImpl(application, subId).setCrossSimCallingEnabled(newEnabled)
+        }
+    }
+
+    companion object {
+        private const val TAG = "CrossSimCallingVM"
     }
 }

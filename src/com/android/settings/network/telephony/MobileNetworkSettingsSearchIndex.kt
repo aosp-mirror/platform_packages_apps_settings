@@ -20,10 +20,13 @@ import android.content.Context
 import android.provider.Settings
 import android.telephony.SubscriptionInfo
 import com.android.settings.R
-import com.android.settings.network.SubscriptionUtil
+import com.android.settings.datausage.BillingCyclePreferenceController.Companion.BillingCycleSearchItem
+import com.android.settings.network.telephony.CarrierSettingsVersionPreferenceController.Companion.CarrierSettingsVersionSearchItem
+import com.android.settings.network.telephony.DataUsagePreferenceController.Companion.DataUsageSearchItem
 import com.android.settings.network.telephony.MmsMessagePreferenceController.Companion.MmsMessageSearchItem
 import com.android.settings.network.telephony.NrAdvancedCallingPreferenceController.Companion.NrAdvancedCallingSearchItem
 import com.android.settings.network.telephony.RoamingPreferenceController.Companion.RoamingSearchItem
+import com.android.settings.network.telephony.VideoCallingPreferenceController.Companion.VideoCallingSearchItem
 import com.android.settings.network.telephony.WifiCallingPreferenceController.Companion.WifiCallingSearchItem
 import com.android.settings.spa.SpaSearchLanding.BundleValue
 import com.android.settings.spa.SpaSearchLanding.SpaSearchLandingFragment
@@ -32,7 +35,6 @@ import com.android.settings.spa.search.SpaSearchRepository.Companion.createSearc
 import com.android.settings.spa.search.SpaSearchRepository.Companion.searchIndexProviderOf
 import com.android.settingslib.search.SearchIndexableData
 import com.android.settingslib.search.SearchIndexableRaw
-import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBoolean
 
 class MobileNetworkSettingsSearchIndex(
@@ -105,19 +107,19 @@ class MobileNetworkSettingsSearchIndex(
     companion object {
         /** suppress full page if user is not admin */
         @JvmStatic
-        fun isMobileNetworkSettingsSearchable(context: Context): Boolean {
-            val isAirplaneMode by context.settingsGlobalBoolean(Settings.Global.AIRPLANE_MODE_ON)
-            return SubscriptionUtil.isSimHardwareVisible(context) &&
-                !isAirplaneMode &&
-                context.userManager.isAdminUser
-        }
+        fun isMobileNetworkSettingsSearchable(context: Context): Boolean =
+            SimRepository(context).canEnterMobileNetworkPage()
 
         fun createSearchItems(context: Context): List<MobileNetworkSettingsSearchItem> =
             listOf(
+                BillingCycleSearchItem(context),
+                CarrierSettingsVersionSearchItem(context),
+                DataUsageSearchItem(context),
                 MmsMessageSearchItem(context),
                 NrAdvancedCallingSearchItem(context),
                 PreferredNetworkModeSearchItem(context),
                 RoamingSearchItem(context),
+                VideoCallingSearchItem(context),
                 WifiCallingSearchItem(context),
             )
     }

@@ -23,6 +23,7 @@ import android.content.Intent;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -30,6 +31,7 @@ import com.android.settings.notification.modes.ZenModesListAddModePreferenceCont
 import com.android.settings.notification.modes.ZenModesListAddModePreferenceController.OnAddModeListener;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.search.SearchIndexable;
@@ -55,16 +57,19 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             ZenModesBackend backend, OnAddModeListener onAddModeListener) {
         return ImmutableList.of(
-                new ZenModesListPreferenceController(context, backend),
-                new ZenModesListAddModePreferenceController(context, onAddModeListener)
+                new ZenModesListPreferenceController(context, backend, ZenIconLoader.getInstance()),
+                new ZenModesListAddModePreferenceController(context, "add_mode", onAddModeListener)
         );
     }
 
     @Override
     protected void onUpdatedZenModeState() {
-        // TODO: b/322373473 -- update any overall description of modes state here if necessary.
-        // Note the preferences linking to individual rules do not need to be updated, as
-        // updateState() is called on all preference controllers whenever the page is resumed.
+        // Preferences linking to individual rules do not need to be updated as part of onStart(),
+        // because DashboardFragment does that in onResume(). However, we force the update if we
+        // detect Modes changes in the background with the page open.
+        if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
+            forceUpdatePreferences();
+        }
     }
 
     @Override
@@ -137,9 +142,6 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
-                    // TODO: b/332937523 - determine if this should be removed once the preference
-                    //                     controller adds dynamic data to index
-                    keys.add(ZenModesListPreferenceController.KEY);
                     return keys;
                 }
 

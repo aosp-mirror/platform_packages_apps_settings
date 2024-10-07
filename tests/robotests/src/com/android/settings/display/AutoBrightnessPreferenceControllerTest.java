@@ -21,24 +21,18 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.Flags;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -46,12 +40,12 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+/**
+ * Tests for {@link AutoBrightnessPreferenceController}.
+ */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {SettingsShadowResources.class})
 public class AutoBrightnessPreferenceControllerTest {
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String PREFERENCE_KEY = "auto_brightness";
 
@@ -130,32 +124,11 @@ public class AutoBrightnessPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatusNotInSUW_configTrueSet_shouldReturnAvailableUnsearchable() {
+    public void getAvailabilityStatus_configTrueSet_shouldReturnAvailableUnsearchable() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_automatic_brightness_available, true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void getAvailabilityStatusInSUW_configTrueAndFlagOn_shouldReturnAvailableUnsearchable() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_automatic_brightness_available, true);
-        mController.setInSetupWizard(true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void
-            getAvailabilityStatusInSUW_configTrueAndFlagOff_shouldReturnConditionallyUnavailable() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_automatic_brightness_available, true);
-        mController.setInSetupWizard(true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

@@ -120,11 +120,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
                 .thenAnswer(invocation -> ImmutableList.of(mConnectableProfiles));
 
         setupDevice(mDeviceConfig);
-        mController = new BluetoothDetailsProfilesController(mContext, mFragment, mLocalManager,
-                mCachedDevice, mLifecycle);
-        mProfiles.setKey(mController.getPreferenceKey());
-        mController.mProfilesContainer = mProfiles;
-        mScreen.addPreference(mProfiles);
+        initController(List.of());
         BluetoothProperties.le_audio_allow_list(Lists.newArrayList(LE_DEVICE_MODEL));
     }
 
@@ -554,7 +550,36 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void prefKeyInBlockingList_hideToggle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_BLUETOOTH_PROFILE_TOGGLE_VISIBILITY_CHECKER);
+        initController(List.of("A2DP"));
+        setupDevice(makeDefaultDeviceConfig());
+
+        addA2dpProfileToDevice(true, true, true);
+        when(mFeatureProvider.getInvisibleProfilePreferenceKeys(any(), any()))
+                .thenReturn(ImmutableSet.of());
+
+        showScreen(mController);
+
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches.get(0).isVisible()).isFalse();
+    }
+
+    @Test
+    public void prefKeyNotInBlockingList_showToggle() {
+        initController(List.of());
+        setupDevice(makeDefaultDeviceConfig());
+
+        addA2dpProfileToDevice(true, true, true);
+        when(mFeatureProvider.getInvisibleProfilePreferenceKeys(any(), any()))
+                .thenReturn(ImmutableSet.of());
+
+        showScreen(mController);
+
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches.get(0).isVisible()).isTrue();
+    }
+
+    @Test
+    public void prefKeyInFeatureProviderBlockingList_hideToggle() {
         setupDevice(makeDefaultDeviceConfig());
 
         addA2dpProfileToDevice(true, true, true);
@@ -568,8 +593,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
     }
 
     @Test
-    public void prefKeyNotInBlockingList_showToggle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_BLUETOOTH_PROFILE_TOGGLE_VISIBILITY_CHECKER);
+    public void prefKeyNotInFeatureProviderBlockingList_showToggle() {
         setupDevice(makeDefaultDeviceConfig());
 
         addA2dpProfileToDevice(true, true, true);
@@ -628,5 +652,14 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
         assertThat(switches.getFirst().getTitle()).isEqualTo(
                 mContext.getString(mLeAudioProfile.getNameResource(mDevice)));
+    }
+
+    private void initController(List<String> invisibleProfiles) {
+        mController = new BluetoothDetailsProfilesController(mContext, mFragment, mLocalManager,
+                mCachedDevice, mLifecycle, invisibleProfiles);
+        mProfiles.setKey(mController.getPreferenceKey());
+        mController.mProfilesContainer = mProfiles;
+        mScreen.removeAll();
+        mScreen.addPreference(mProfiles);
     }
 }

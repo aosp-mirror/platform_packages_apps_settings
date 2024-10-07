@@ -52,7 +52,7 @@ import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
-import com.android.settings.network.telephony.SubscriptionRepositoryKt;
+import com.android.settings.network.telephony.SubscriptionRepository;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 
 import java.util.ArrayList;
@@ -508,7 +508,7 @@ public class SubscriptionUtil {
      * @return list of user selectable subscriptions.
      */
     public static List<SubscriptionInfo> getSelectableSubscriptionInfoList(Context context) {
-        return SubscriptionRepositoryKt.getSelectableSubscriptionInfoList(context);
+        return new SubscriptionRepository(context).getSelectableSubscriptionInfoList();
     }
 
     /**

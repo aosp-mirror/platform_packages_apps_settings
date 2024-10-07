@@ -1,5 +1,5 @@
 package: "com.android.settings.flags"
-container: "system_ext"
+container: "system"
 
 flag {
     name: "new_apn_page_enabled"
@@ -13,16 +13,6 @@ flag {
     namespace: "settings_experience"
     description: "Refactor the PrintSettings page."
     bug: "320076351"
-    metadata {
-        purpose: PURPOSE_BUGFIX
-    }
-}
-
-flag {
-    name: "internet_preference_controller_v2"
-    namespace: "settings_experience"
-    description: "New InternetPreferenceControllerV2."
-    bug: "339884322"
     metadata {
         purpose: PURPOSE_BUGFIX
     }

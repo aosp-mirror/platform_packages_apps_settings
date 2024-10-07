@@ -252,8 +252,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 mSwitchToEuiccSubscriptionSidecar.reset();
                 dismissProgressDialog();
                 showErrorDialog(
-                        getString(R.string.privileged_action_disable_fail_title),
-                        getString(R.string.privileged_action_disable_fail_text));
+                        getString(R.string.sim_action_enable_sim_fail_title),
+                        getString(R.string.sim_action_enable_sim_fail_text));
                 break;
         }
     }
@@ -583,7 +583,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     }
 
     private boolean isRemovableSimEnabled() {
-        return UiccSlotUtil.isRemovableSimEnabled(mTelMgr);
+        return new UiccSlotRepository(mTelMgr).anyRemovablePhysicalSimEnabled();
     }
 
     private boolean isMultipleEnabledProfilesSupported() {
