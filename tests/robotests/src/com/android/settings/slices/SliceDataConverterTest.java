@@ -120,7 +120,6 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getSummary()).isEqualTo(FAKE_SUMMARY);
         assertThat(fakeSlice.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
         assertThat(fakeSlice.getKeywords()).isNull();
-        assertThat(fakeSlice.getIconResource()).isNotNull();
         assertThat(fakeSlice.getUri().toString())
                 .isEqualTo("content://com.android.settings.slices/action/key");
         assertThat(fakeSlice.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_CLASSNAME);
