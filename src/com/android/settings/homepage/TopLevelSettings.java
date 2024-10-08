@@ -251,6 +251,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             Bundle savedInstanceState) {
         RecyclerView recyclerView = super.onCreateRecyclerView(inflater, parent,
                 savedInstanceState);
+        recyclerView.setVerticalScrollBarEnabled(false);
+        recyclerView.setHorizontalScrollBarEnabled(false);
         recyclerView.setPadding(mPaddingHorizontal, 0, mPaddingHorizontal, 0);
         return recyclerView;
     }
