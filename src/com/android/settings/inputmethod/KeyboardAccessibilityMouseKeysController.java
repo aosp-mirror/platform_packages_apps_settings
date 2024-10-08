@@ -22,15 +22,23 @@ import android.net.Uri;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
+
+import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 public class KeyboardAccessibilityMouseKeysController extends
         InputSettingPreferenceController implements
         LifecycleObserver {
+    private static final String KEY_MOUSE_KEY = "accessibility_mouse_keys";
+    private static final String KEY_MOUSE_KEY_MAIN_PAGE = "mouse_keys_main_switch";
 
-    private TwoStatePreference mTwoStatePreference;
+    @Nullable
+    private PrimarySwitchPreference mPrimaryPreference;
+    @Nullable
+    private MainSwitchPreference mMainSwitchPreference;
 
     public KeyboardAccessibilityMouseKeysController(@NonNull Context context, @NonNull String key) {
         super(context, key);
@@ -39,7 +47,11 @@ public class KeyboardAccessibilityMouseKeysController extends
     @Override
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
-        mTwoStatePreference = screen.findPreference(getPreferenceKey());
+        if (KEY_MOUSE_KEY.equals(getPreferenceKey())) {
+            mPrimaryPreference = screen.findPreference(getPreferenceKey());
+        } else if (KEY_MOUSE_KEY_MAIN_PAGE.equals(getPreferenceKey())) {
+            mMainSwitchPreference = screen.findPreference(getPreferenceKey());
+        }
     }
 
     @Override
@@ -63,8 +75,11 @@ public class KeyboardAccessibilityMouseKeysController extends
 
     @Override
     protected void onInputSettingUpdated() {
-        if (mTwoStatePreference != null) {
-            mTwoStatePreference.setChecked(
+        if (mPrimaryPreference != null) {
+            mPrimaryPreference.setChecked(
+                    InputSettings.isAccessibilityMouseKeysEnabled(mContext));
+        } else if (mMainSwitchPreference != null) {
+            mMainSwitchPreference.setChecked(
                     InputSettings.isAccessibilityMouseKeysEnabled(mContext));
         }
     }
