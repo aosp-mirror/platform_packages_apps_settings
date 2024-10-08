@@ -27,10 +27,10 @@ import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
@@ -51,11 +51,10 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
     private final SimpleDateFormat mShortDayFormat = new SimpleDateFormat("EEEEE");
     private final SimpleDateFormat mLongDayFormat = new SimpleDateFormat("EEEE");
 
-    private static final String TAG = "ZenModeSetSchedulePreferenceController";
-    private Fragment mParent;
+    private DashboardFragment mParent;
     private ZenModeConfig.ScheduleInfo mSchedule;
 
-    ZenModeSetSchedulePreferenceController(Context context, Fragment parent, String key,
+    ZenModeSetSchedulePreferenceController(Context context, DashboardFragment parent, String key,
             ZenModesBackend backend) {
         super(context, key, backend);
         mParent = parent;
@@ -154,11 +153,7 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
 
     private View.OnClickListener timePickerLauncher(int hour, int minute,
             ZenModeTimePickerFragment.TimeSetter timeSetter) {
-        return v -> {
-            final ZenModeTimePickerFragment frag = new ZenModeTimePickerFragment(mContext, hour,
-                    minute, timeSetter);
-            frag.show(mParent.getParentFragmentManager(), TAG);
-        };
+        return v -> ZenModeTimePickerFragment.show(mParent, hour, minute, timeSetter);
     }
 
     protected static int[] getDaysOfWeekForLocale(Calendar c) {

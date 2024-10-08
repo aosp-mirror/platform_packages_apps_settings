@@ -18,6 +18,7 @@ package com.android.settings.bluetooth.ui.model
 
 import android.content.Intent
 import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingActionModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.bluetooth.devicesettings.shared.model.ToggleModel
 
@@ -32,7 +33,7 @@ sealed interface DeviceSettingPreferenceModel {
         val title: String,
         val summary: String? = null,
         val icon: DeviceSettingIcon? = null,
-        val intent: Intent? = null,
+        val action: DeviceSettingActionModel? = null,
     ) : DeviceSettingPreferenceModel
 
     /** Models a switch preference. */
@@ -43,7 +44,7 @@ sealed interface DeviceSettingPreferenceModel {
         val icon: DeviceSettingIcon? = null,
         val checked: Boolean,
         val onCheckedChange: ((Boolean) -> Unit),
-        val intent: Intent? = null,
+        val action: DeviceSettingActionModel? = null,
     ) : DeviceSettingPreferenceModel
 
     /** Models a multi-toggle preference. */
