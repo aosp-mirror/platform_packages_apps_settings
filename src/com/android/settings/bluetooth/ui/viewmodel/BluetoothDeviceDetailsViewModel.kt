@@ -101,7 +101,7 @@ class BluetoothDeviceDetailsViewModel(
                                 DeviceSettingStateModel.ActionSwitchPreferenceState(newState)
                             )
                         },
-                        intent = intent,
+                        action = action,
                     )
                 } else {
                     DeviceSettingPreferenceModel.PlainPreference(
@@ -109,7 +109,7 @@ class BluetoothDeviceDetailsViewModel(
                         title = title,
                         summary = summary,
                         icon = icon,
-                        intent = intent,
+                        action = action,
                     )
                 }
             }

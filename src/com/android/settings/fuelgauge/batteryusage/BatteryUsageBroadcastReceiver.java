@@ -106,6 +106,10 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
 
     private void tryToFetchUsageData(Context context) {
         final Intent batteryIntent = BatteryUtils.getBatteryIntent(context);
+        if (batteryIntent == null) {
+            Log.w(TAG, "tryToFetchUsageData: ignore from null battery intent");
+            return;
+        }
         // Returns when battery is not fully charged.
         if (!BatteryStatus.isCharged(batteryIntent)) {
             return;

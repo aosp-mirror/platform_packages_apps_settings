@@ -23,16 +23,24 @@ import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleObserver;
-
-import com.android.settings.R;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 public class KeyboardAccessibilitySlowKeysController extends
-        KeyboardAccessibilityController implements
+        InputSettingPreferenceController implements
         LifecycleObserver {
     public static final int SLOW_KEYS_THRESHOLD = 500;
 
+    private TwoStatePreference mTwoStatePreference;
+
     public KeyboardAccessibilitySlowKeysController(@NonNull Context context, @NonNull String key) {
         super(context, key);
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mTwoStatePreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -54,16 +62,12 @@ public class KeyboardAccessibilitySlowKeysController extends
                 : UNSUPPORTED_ON_DEVICE;
     }
 
-    @NonNull
     @Override
-    public CharSequence getSummary() {
-        return mContext.getString(R.string.slow_keys_summary, SLOW_KEYS_THRESHOLD);
-    }
-
-    @Override
-    protected void updateKeyboardAccessibilitySettings() {
-        setChecked(
-                InputSettings.isAccessibilitySlowKeysEnabled(mContext));
+    protected void onInputSettingUpdated() {
+        if (mTwoStatePreference != null) {
+            mTwoStatePreference.setChecked(
+                    InputSettings.isAccessibilitySlowKeysEnabled(mContext));
+        }
     }
 
     @Override
