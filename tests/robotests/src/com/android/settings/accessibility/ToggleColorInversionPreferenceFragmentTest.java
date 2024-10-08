@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-import static com.android.settings.accessibility.ToggleColorInversionPreferenceFragment.KEY_USE_SERVICE_PREFERENCE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -93,10 +92,10 @@ public class ToggleColorInversionPreferenceFragmentTest {
         when(mActivity.getContentResolver()).thenReturn(mContext.getContentResolver());
 
         mScreen = spy(new PreferenceScreen(mContext, /* attrs= */ null));
-        when(mScreen.findPreference(KEY_USE_SERVICE_PREFERENCE))
+        when(mScreen.findPreference(mFragment.getUseServicePreferenceKey()))
                 .thenReturn(mFragment.mToggleServiceSwitchPreference);
         doReturn(mScreen).when(mFragment).getPreferenceScreen();
-        mSwitchPreference = mScreen.findPreference(KEY_USE_SERVICE_PREFERENCE);
+        mSwitchPreference = mScreen.findPreference(mFragment.getUseServicePreferenceKey());
     }
 
     @Test
@@ -220,7 +219,7 @@ public class ToggleColorInversionPreferenceFragmentTest {
             mComponentName = PLACEHOLDER_COMPONENT_NAME;
             final SettingsMainSwitchPreference switchPreference =
                     new SettingsMainSwitchPreference(context);
-            switchPreference.setKey(KEY_USE_SERVICE_PREFERENCE);
+            switchPreference.setKey(getUseServicePreferenceKey());
             mToggleServiceSwitchPreference = switchPreference;
             setArguments(new Bundle());
         }
