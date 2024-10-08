@@ -50,7 +50,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
@@ -66,6 +65,16 @@ import java.util.StringJoiner;
 
 /** Provides utility methods to accessibility settings only. */
 public final class AccessibilityUtil {
+    // LINT.IfChange(shortcut_type_ui_order)
+    static final int[] SHORTCUTS_ORDER_IN_UI = {
+            QUICK_SETTINGS,
+            SOFTWARE, // FAB displays before gesture. Navbar displays without gesture.
+            GESTURE,
+            HARDWARE,
+            TWOFINGER_DOUBLETAP,
+            TRIPLETAP
+    };
+    // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
 
     private AccessibilityUtil(){}
 
@@ -344,7 +353,7 @@ public final class AccessibilityUtil {
      */
     static boolean hasValuesInSettings(Context context, int shortcutTypes,
             @NonNull ComponentName componentName) {
-        for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
+        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if (!android.view.accessibility.Flags.a11yQsShortcut()) {
                 if ((shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
                     continue;
@@ -395,7 +404,7 @@ public final class AccessibilityUtil {
     static int getUserShortcutTypesFromSettings(Context context,
             @NonNull ComponentName componentName) {
         int shortcutTypes = DEFAULT;
-        for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
+        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if (!android.view.accessibility.Flags.a11yQsShortcut()) {
                 if ((shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
                     continue;
@@ -511,8 +520,7 @@ public final class AccessibilityUtil {
     public static CharSequence getShortcutSummaryList(Context context, int shortcutTypes) {
         final List<CharSequence> list = new ArrayList<>();
 
-        // LINT.IfChange(shortcut_type_ui_order)
-        for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
+        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if (!android.view.accessibility.Flags.a11yQsShortcut()
                     && (shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
                 continue;
@@ -548,7 +556,6 @@ public final class AccessibilityUtil {
         list.sort(CharSequence::compare);
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
                 null, LocaleUtils.getConcatenatedString(list));
-        // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
     }
 
     @VisibleForTesting
