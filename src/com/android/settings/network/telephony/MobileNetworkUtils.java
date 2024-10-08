@@ -610,12 +610,8 @@ public class MobileNetworkUtils {
     }
 
     public static CharSequence getCurrentCarrierNameForDisplay(Context context) {
-        final SubscriptionInfo subInfo = getSubscriptionInfo(context,
+        return getCurrentCarrierNameForDisplay(context,
                 SubscriptionManager.getDefaultSubscriptionId());
-        if (subInfo != null) {
-            return subInfo.getCarrierName();
-        }
-        return getOperatorNameFromTelephonyManager(context);
     }
 
     private static @Nullable SubscriptionInfo getSubscriptionInfo(Context context, int subId) {
