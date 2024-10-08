@@ -32,10 +32,10 @@ import android.service.notification.ZenModeConfig;
 import android.view.ViewGroup;
 import android.widget.ToggleButton;
 
-import androidx.fragment.app.Fragment;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
@@ -60,7 +60,7 @@ public class ZenModeSetSchedulePreferenceControllerTest {
     private Context mContext;
 
     @Mock
-    private Fragment mParent;
+    private DashboardFragment mParent;
     @Mock
     private Calendar mCalendar;
     @Mock
