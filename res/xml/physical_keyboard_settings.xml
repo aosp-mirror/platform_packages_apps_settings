@@ -33,11 +33,12 @@
             android:summary="@string/modifier_keys_settings_summary"
             android:fragment="com.android.settings.inputmethod.ModifierKeysSettings" />
 
-        <SwitchPreferenceCompat
-            android:key="physical_keyboard_repeat_key"
-            android:title="@string/keyboard_repeat_key_title"
-            android:summary="@string/keyboard_repeat_key_summary"
+        <com.android.settingslib.PrimarySwitchPreference
+            android:key="physical_keyboard_repeat_keys"
+            android:title="@string/keyboard_repeat_keys_title"
+            android:summary="@string/keyboard_repeat_keys_summary"
             android:defaultValue="false"
+            android:fragment="com.android.settings.inputmethod.KeyboardRepeatKeysMainFragment"
             settings:controller="com.android.settings.inputmethod.KeyboardRepeatKeysController" />
 
         <Preference
