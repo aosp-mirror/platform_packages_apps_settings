@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-import static com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment.KEY_USE_SERVICE_PREFERENCE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -189,6 +188,6 @@ public class ToggleDaltonizerPreferenceFragmentTest {
 
     private SettingsMainSwitchPreference getMainFeatureToggle(
             ToggleDaltonizerPreferenceFragment fragment) {
-        return fragment.findPreference(KEY_USE_SERVICE_PREFERENCE);
+        return fragment.findPreference(fragment.getUseServicePreferenceKey());
     }
 }

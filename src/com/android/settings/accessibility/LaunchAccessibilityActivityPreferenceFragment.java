@@ -67,7 +67,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         initLaunchPreference();
 
         final View view = super.onCreateView(inflater, container, savedInstanceState);
-        removePreference(KEY_USE_SERVICE_PREFERENCE);
+        removePreference(getUseServicePreferenceKey());
         return view;
     }
 
