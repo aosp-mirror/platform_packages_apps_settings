@@ -106,7 +106,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         final List<String> lists = new ArrayList<>();
         lists.add(KEY_TOP_INTRO_PREFERENCE);
         lists.add(KEY_PREVIEW);
-        lists.add(KEY_USE_SERVICE_PREFERENCE);
+        lists.add(getUseServicePreferenceKey());
         // Putting saturation level close to the preview so users can see what is changing.
         lists.add(KEY_SATURATION);
         lists.add(KEY_DEUTERANOMALY);

@@ -437,8 +437,6 @@ public class SettingsGateway {
             Settings.AdaptiveBrightnessActivity.class.getName(),
             // Home page > Security & screen lock
             Settings.LocationSettingsActivity.class.getName(),
-            // Home page > System
-            Settings.LanguageAndInputSettingsActivity.class.getName(),
             Settings.LanguageSettingsActivity.class.getName(),
             Settings.KeyboardSettingsActivity.class.getName(),
             Settings.DateTimeSettingsActivity.class.getName(),

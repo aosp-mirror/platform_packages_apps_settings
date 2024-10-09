@@ -35,25 +35,25 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.keyboard.Flags;
 
 /**
- * Abstract class for toggle controllers of Keyboard accessibility related function.
+ * Abstract class for toggle controllers of Keyboard input setting related function.
  */
-public abstract class KeyboardAccessibilityController extends TogglePreferenceController implements
+public abstract class InputSettingPreferenceController extends TogglePreferenceController implements
         LifecycleObserver {
     private final ContentResolver mContentResolver;
     private final ContentObserver mContentObserver = new ContentObserver(new Handler(true)) {
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             if (getSettingUri().equals(uri)) {
-                updateKeyboardAccessibilitySettings();
+                onInputSettingUpdated();
             }
         }
     };
 
-    protected abstract void updateKeyboardAccessibilitySettings();
+    protected abstract void onInputSettingUpdated();
 
     protected abstract Uri getSettingUri();
 
-    public KeyboardAccessibilityController(@NonNull Context context,
+    public InputSettingPreferenceController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
@@ -94,7 +94,7 @@ public abstract class KeyboardAccessibilityController extends TogglePreferenceCo
                 false,
                 mContentObserver,
                 UserHandle.myUserId());
-        updateKeyboardAccessibilitySettings();
+        onInputSettingUpdated();
     }
 
     private void unregisterSettingsObserver() {

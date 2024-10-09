@@ -32,9 +32,10 @@
             android:defaultValue="false"
             settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityStickyKeysController"/>
 
-        <SwitchPreferenceCompat
+        <com.android.settingslib.PrimarySwitchPreference
             android:key="accessibility_bounce_keys"
             android:title="@string/bounce_keys"
+            android:summary="@string/bounce_keys_summary"
             android:defaultValue="false"
             settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityBounceKeysController"/>
 
@@ -42,6 +43,7 @@
             android:key="accessibility_slow_keys"
             android:title="@string/slow_keys"
             android:defaultValue="false"
+            android:summary="@string/slow_keys_summary"
             settings:controller="com.android.settings.inputmethod.KeyboardAccessibilitySlowKeysController" />
 
         <SwitchPreferenceCompat
