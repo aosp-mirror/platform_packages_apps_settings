@@ -903,6 +903,7 @@ public final class DataProcessorTest {
                                                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                                                 0L,
                                                 0L,
+                                                0L,
                                                 false)),
                         batteryHistoryKeys[1],
                                 Map.of(
@@ -920,6 +921,7 @@ public final class DataProcessorTest {
                                                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                                                 0L,
                                                 0L,
+                                                0L,
                                                 false)),
                         batteryHistoryKeys[2],
                                 Map.of(
@@ -935,6 +937,7 @@ public final class DataProcessorTest {
                                                 0L,
                                                 userId,
                                                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                                                0L,
                                                 0L,
                                                 0L,
                                                 false)));
@@ -993,6 +996,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         // Adds the index = 0 data.
@@ -1010,6 +1014,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 10L,
+                        /* foregroundServiceUsageTimeInMs= */ 15L,
                         /* backgroundUsageTimeInMs= */ 20L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1034,6 +1039,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 15L,
+                        /* foregroundServiceUsageTimeInMs= */ 20L,
                         /* backgroundUsageTimeInMs= */ 25L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1054,6 +1060,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 25L,
+                        /* foregroundServiceUsageTimeInMs= */ 30L,
                         /* backgroundUsageTimeInMs= */ 35L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1070,6 +1077,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY,
                         /* foregroundUsageTimeInMs= */ 40L,
+                        /* foregroundServiceUsageTimeInMs= */ 45L,
                         /* backgroundUsageTimeInMs= */ 50L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1086,6 +1094,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 5L,
+                        /* foregroundServiceUsageTimeInMs= */ 5L,
                         /* backgroundUsageTimeInMs= */ 5L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1106,6 +1115,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 30L,
+                        /* foregroundServiceUsageTimeInMs= */ 35L,
                         /* backgroundUsageTimeInMs= */ 40L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1122,6 +1132,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY,
                         /* foregroundUsageTimeInMs= */ 50L,
+                        /* foregroundServiceUsageTimeInMs= */ 55L,
                         /* backgroundUsageTimeInMs= */ 60L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1138,6 +1149,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 5L,
+                        /* foregroundServiceUsageTimeInMs= */ 5L,
                         /* backgroundUsageTimeInMs= */ 5L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1195,6 +1207,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 9,
                 /* cachedUsageConsumePower= */ 8,
                 /* foregroundUsageTimeInMs= */ 30,
+                /* foregroundServiceUsageTimeInMs= */ 35,
                 /* backgroundUsageTimeInMs= */ 40,
                 /* screenOnTimeInMs= */ 12);
         assertBatteryDiffEntry(
@@ -1208,6 +1221,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 8,
                 /* cachedUsageConsumePower= */ 8,
                 /* foregroundUsageTimeInMs= */ 5,
+                /* foregroundServiceUsageTimeInMs= */ 5,
                 /* backgroundUsageTimeInMs= */ 5,
                 /* screenOnTimeInMs= */ 0);
         assertBatteryDiffEntry(
@@ -1221,6 +1235,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 5,
                 /* cachedUsageConsumePower= */ 5,
                 /* foregroundUsageTimeInMs= */ 16,
+                /* foregroundServiceUsageTimeInMs= */ 55,
                 /* backgroundUsageTimeInMs= */ 60,
                 /* screenOnTimeInMs= */ 9);
         resultDiffData = resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL);
@@ -1235,6 +1250,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 5,
                 /* cachedUsageConsumePower= */ 5,
                 /* foregroundUsageTimeInMs= */ 15,
+                /* foregroundServiceUsageTimeInMs= */ 20,
                 /* backgroundUsageTimeInMs= */ 25,
                 /* screenOnTimeInMs= */ 5);
         resultDiffData = resultMap.get(1).get(DataProcessor.SELECTED_INDEX_ALL);
@@ -1249,6 +1265,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 8,
                 /* cachedUsageConsumePower= */ 8,
                 /* foregroundUsageTimeInMs= */ 5,
+                /* foregroundServiceUsageTimeInMs= */ 5,
                 /* backgroundUsageTimeInMs= */ 5,
                 /* screenOnTimeInMs= */ 0);
         assertBatteryDiffEntry(
@@ -1262,6 +1279,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 4,
                 /* cachedUsageConsumePower= */ 3,
                 /* foregroundUsageTimeInMs= */ 15,
+                /* foregroundServiceUsageTimeInMs= */ 15,
                 /* backgroundUsageTimeInMs= */ 15,
                 /* screenOnTimeInMs= */ 7);
         assertBatteryDiffEntry(
@@ -1275,6 +1293,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 5,
                 /* cachedUsageConsumePower= */ 5,
                 /* foregroundUsageTimeInMs= */ 16,
+                /* foregroundServiceUsageTimeInMs= */ 55,
                 /* backgroundUsageTimeInMs= */ 60,
                 /* screenOnTimeInMs= */ 9);
     }
@@ -1308,6 +1327,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 10L,
+                        /* foregroundServiceUsageTimeInMs= */ 15L,
                         /* backgroundUsageTimeInMs= */ 20L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1324,6 +1344,7 @@ public final class DataProcessorTest {
                         currentUserId + 1,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 10L,
+                        /* foregroundServiceUsageTimeInMs= */ 15L,
                         /* backgroundUsageTimeInMs= */ 20L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1340,6 +1361,7 @@ public final class DataProcessorTest {
                         currentUserId + 2,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 20L,
+                        /* foregroundServiceUsageTimeInMs= */ 25L,
                         /* backgroundUsageTimeInMs= */ 30L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1359,6 +1381,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 20L,
+                        /* foregroundServiceUsageTimeInMs= */ 25L,
                         /* backgroundUsageTimeInMs= */ 30L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1375,6 +1398,7 @@ public final class DataProcessorTest {
                         currentUserId + 1,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 10L,
+                        /* foregroundServiceUsageTimeInMs= */ 15L,
                         /* backgroundUsageTimeInMs= */ 20L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1391,6 +1415,7 @@ public final class DataProcessorTest {
                         currentUserId + 2,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 30L,
+                        /* foregroundServiceUsageTimeInMs= */ 30L,
                         /* backgroundUsageTimeInMs= */ 30L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1410,6 +1435,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 20L,
+                        /* foregroundServiceUsageTimeInMs= */ 25L,
                         /* backgroundUsageTimeInMs= */ 30L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1426,6 +1452,7 @@ public final class DataProcessorTest {
                         currentUserId + 1,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 20L,
+                        /* foregroundServiceUsageTimeInMs= */ 20L,
                         /* backgroundUsageTimeInMs= */ 20L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1442,6 +1469,7 @@ public final class DataProcessorTest {
                         currentUserId + 2,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 30L,
+                        /* foregroundServiceUsageTimeInMs= */ 30L,
                         /* backgroundUsageTimeInMs= */ 30L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1477,6 +1505,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 5,
                 /* cachedUsageConsumePower= */ 5,
                 /* foregroundUsageTimeInMs= */ 10,
+                /* foregroundServiceUsageTimeInMs= */ 10,
                 /* backgroundUsageTimeInMs= */ 10,
                 /* screenOnTimeInMs= */ 0);
         assertThat(resultDiffData.getSystemDiffEntryList()).isEmpty();
@@ -1509,6 +1538,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1528,6 +1558,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1547,6 +1578,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 3600000L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 7200000L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1587,6 +1619,7 @@ public final class DataProcessorTest {
         final BatteryDiffEntry resultEntry = resultDiffData.getAppDiffEntryList().get(0);
         assertThat(resultEntry.mForegroundUsageTimeInMs)
                 .isEqualTo(Math.round(entry.mForegroundUsageTimeInMs * ratio));
+        assertThat(resultEntry.mForegroundServiceUsageTimeInMs).isEqualTo(0);
         assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(0);
         assertThat(resultEntry.mConsumePower).isEqualTo(entry.mConsumePower * ratio);
         assertThat(resultEntry.mForegroundUsageConsumePower)
@@ -1627,6 +1660,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1643,6 +1677,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1662,6 +1697,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1678,6 +1714,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1697,6 +1734,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 10L,
+                        /* foregroundServiceUsageTimeInMs= */ 15L,
                         /* backgroundUsageTimeInMs= */ 20L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1713,6 +1751,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 10L,
+                        /* foregroundServiceUsageTimeInMs= */ 15L,
                         /* backgroundUsageTimeInMs= */ 20L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1748,6 +1787,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 5,
                 /* cachedUsageConsumePower= */ 5,
                 /* foregroundUsageTimeInMs= */ 10,
+                /* foregroundServiceUsageTimeInMs= */ 15,
                 /* backgroundUsageTimeInMs= */ 20,
                 /* screenOnTimeInMs= */ 0);
     }
@@ -1777,6 +1817,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1793,6 +1834,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1812,6 +1854,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1828,6 +1871,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 0L,
+                        /* foregroundServiceUsageTimeInMs= */ 0L,
                         /* backgroundUsageTimeInMs= */ 0L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1847,6 +1891,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 10L,
+                        /* foregroundServiceUsageTimeInMs= */ 15L,
                         /* backgroundUsageTimeInMs= */ 20L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1863,6 +1908,7 @@ public final class DataProcessorTest {
                         currentUserId,
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /* foregroundUsageTimeInMs= */ 10L,
+                        /* foregroundServiceUsageTimeInMs= */ 15L,
                         /* backgroundUsageTimeInMs= */ 20L,
                         /* isHidden= */ false);
         entryMap.put(entry.getKey(), entry);
@@ -1892,6 +1938,7 @@ public final class DataProcessorTest {
         assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(20);
         resultEntry = resultDiffData.getAppDiffEntryList().get(1);
         assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(0);
+        assertThat(resultEntry.mForegroundServiceUsageTimeInMs).isEqualTo(0);
     }
 
     @Test
@@ -1921,6 +1968,7 @@ public final class DataProcessorTest {
         doReturn(0.0).when(mMockBatteryEntry1).getConsumedPowerInBackground();
         doReturn(0.0).when(mMockBatteryEntry1).getConsumedPowerInCached();
         doReturn(30L).when(mMockBatteryEntry1).getTimeInForegroundMs();
+        doReturn(35L).when(mMockBatteryEntry1).getTimeInForegroundServiceMs();
         doReturn(40L).when(mMockBatteryEntry1).getTimeInBackgroundMs();
         doReturn(1).when(mMockBatteryEntry1).getUid();
         doReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).when(mMockBatteryEntry1).getConsumerType();
@@ -1930,6 +1978,7 @@ public final class DataProcessorTest {
         doReturn(0.0).when(mMockBatteryEntry2).getConsumedPowerInBackground();
         doReturn(0.0).when(mMockBatteryEntry2).getConsumedPowerInCached();
         doReturn(20L).when(mMockBatteryEntry2).getTimeInForegroundMs();
+        doReturn(20L).when(mMockBatteryEntry2).getTimeInForegroundServiceMs();
         doReturn(20L).when(mMockBatteryEntry2).getTimeInBackgroundMs();
         doReturn(2).when(mMockBatteryEntry2).getUid();
         doReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).when(mMockBatteryEntry2).getConsumerType();
@@ -1939,6 +1988,7 @@ public final class DataProcessorTest {
         doReturn(0.0).when(mMockBatteryEntry3).getConsumedPowerInBackground();
         doReturn(0.0).when(mMockBatteryEntry3).getConsumedPowerInCached();
         doReturn(0L).when(mMockBatteryEntry3).getTimeInForegroundMs();
+        doReturn(0L).when(mMockBatteryEntry3).getTimeInForegroundServiceMs();
         doReturn(0L).when(mMockBatteryEntry3).getTimeInBackgroundMs();
         doReturn(3).when(mMockBatteryEntry3).getUid();
         doReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).when(mMockBatteryEntry3).getConsumerType();
@@ -1948,6 +1998,7 @@ public final class DataProcessorTest {
         doReturn(0.3).when(mMockBatteryEntry4).getConsumedPowerInBackground();
         doReturn(0.1).when(mMockBatteryEntry4).getConsumedPowerInCached();
         doReturn(10L).when(mMockBatteryEntry4).getTimeInForegroundMs();
+        doReturn(10L).when(mMockBatteryEntry4).getTimeInForegroundServiceMs();
         doReturn(10L).when(mMockBatteryEntry4).getTimeInBackgroundMs();
         doReturn(4).when(mMockBatteryEntry4).getUid();
         doReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY)
@@ -1978,6 +2029,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 0,
                 /* cachedUsageConsumePower= */ 0,
                 /* foregroundUsageTimeInMs= */ 20,
+                /* foregroundServiceUsageTimeInMs= */ 20,
                 /* backgroundUsageTimeInMs= */ 20,
                 /* screenOnTimeInMs= */ 0);
         assertBatteryDiffEntry(
@@ -1991,6 +2043,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 0,
                 /* cachedUsageConsumePower= */ 0,
                 /* foregroundUsageTimeInMs= */ 30,
+                /* foregroundServiceUsageTimeInMs= */ 35,
                 /* backgroundUsageTimeInMs= */ 40,
                 /* screenOnTimeInMs= */ 0);
         assertBatteryDiffEntry(
@@ -2004,6 +2057,7 @@ public final class DataProcessorTest {
                 /* backgroundUsageConsumePower= */ 0.3,
                 /* cachedUsageConsumePower= */ 0.1,
                 /* foregroundUsageTimeInMs= */ 10,
+                /* foregroundServiceUsageTimeInMs= */ 10,
                 /* backgroundUsageTimeInMs= */ 10,
                 /* screenOnTimeInMs= */ 0);
     }
@@ -2390,6 +2444,7 @@ public final class DataProcessorTest {
             final long userId,
             final int consumerType,
             final long foregroundUsageTimeInMs,
+            final long foregroundServiceUsageTimeInMs,
             final long backgroundUsageTimeInMs,
             final boolean isHidden) {
         // Only insert required fields.
@@ -2402,6 +2457,7 @@ public final class DataProcessorTest {
                         .setBackgroundUsageConsumePower(backgroundUsageConsumePower)
                         .setCachedUsageConsumePower(cachedUsageConsumePower)
                         .setForegroundUsageTimeInMs(foregroundUsageTimeInMs)
+                        .setForegroundServiceUsageTimeInMs(foregroundServiceUsageTimeInMs)
                         .setBackgroundUsageTimeInMs(backgroundUsageTimeInMs)
                         .setIsHidden(isHidden)
                         .build();
@@ -2531,6 +2587,7 @@ public final class DataProcessorTest {
             final double backgroundUsageConsumePower,
             final double cachedUsageConsumePower,
             final long foregroundUsageTimeInMs,
+            final long foregroundServiceUsageTimeInMs,
             final long backgroundUsageTimeInMs,
             final long screenOnTimeInMs) {
         assertThat(entry.mUserId).isEqualTo(userId);
@@ -2543,6 +2600,8 @@ public final class DataProcessorTest {
         assertThat(entry.mBackgroundUsageConsumePower).isEqualTo(backgroundUsageConsumePower);
         assertThat(entry.mCachedUsageConsumePower).isEqualTo(cachedUsageConsumePower);
         assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(foregroundUsageTimeInMs);
+        assertThat(entry.mForegroundServiceUsageTimeInMs)
+                .isEqualTo(foregroundServiceUsageTimeInMs);
         assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
         assertThat(entry.mScreenOnTimeInMs).isEqualTo(screenOnTimeInMs);
     }
