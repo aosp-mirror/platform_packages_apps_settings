@@ -23,13 +23,24 @@ import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 public class KeyboardAccessibilityStickyKeysController extends
-        KeyboardAccessibilityController implements
+        InputSettingPreferenceController implements
         LifecycleObserver {
+
+    private TwoStatePreference mTwoStatePreference;
+
     public KeyboardAccessibilityStickyKeysController(@NonNull Context context,
             @NonNull String key) {
         super(context, key);
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mTwoStatePreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -52,9 +63,11 @@ public class KeyboardAccessibilityStickyKeysController extends
     }
 
     @Override
-    protected void updateKeyboardAccessibilitySettings() {
-        setChecked(
-                InputSettings.isAccessibilityStickyKeysEnabled(mContext));
+    protected void onInputSettingUpdated() {
+        if (mTwoStatePreference != null) {
+            mTwoStatePreference.setChecked(
+                    InputSettings.isAccessibilityStickyKeysEnabled(mContext));
+        }
     }
 
     @Override

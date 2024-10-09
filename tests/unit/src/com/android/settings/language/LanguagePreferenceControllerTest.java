@@ -16,7 +16,6 @@
 
 package com.android.settings.language;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import android.content.ComponentName;
@@ -41,10 +40,9 @@ public class LanguagePreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_featureFlagOff_LanguageAndInputSettingsActivitydisabled() {
+    public void getAvailabilityStatus_featureFlagOff_LanguageSettingsActivitydisabled() {
         mController.getAvailabilityStatus();
 
-        assertFalse(isActivityEnable(mContext, Settings.LanguageAndInputSettingsActivity.class));
         assertTrue(isActivityEnable(mContext, Settings.LanguageSettingsActivity.class));
     }
 
