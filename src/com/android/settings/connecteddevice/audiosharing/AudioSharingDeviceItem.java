@@ -19,6 +19,8 @@ package com.android.settings.connecteddevice.audiosharing;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 public final class AudioSharingDeviceItem implements Parcelable {
     private final String mName;
     private final int mGroupId;
@@ -72,4 +74,10 @@ public final class AudioSharingDeviceItem implements Parcelable {
                     return new AudioSharingDeviceItem[size];
                 }
             };
+
+    @Override
+    @NonNull
+    public String toString() {
+        return "AudioSharingDeviceItem groupId = " + mGroupId + ", isActive = " + mIsActive;
+    }
 }
