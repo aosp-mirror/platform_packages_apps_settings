@@ -246,16 +246,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Свързване с услуги за данни при роуминг"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Свързване с услуги за данни при роуминг"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Възможно е да ви бъдат начислени такси за роуминг."</string>
-    <!-- no translation found for date_time_auto (1759599045100040686) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
-    <skip />
-    <!-- no translation found for zone_auto_title (3520584257065861479) -->
-    <skip />
-    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
-    <skip />
-    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
-    <skip />
+    <string name="date_time_auto" msgid="1759599045100040686">"Автоматични дата и час"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"Автоматично задаване чрез мрежата и безжичните сигнали"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"Автоматична часова зона"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Автоматично задаване въз основа на мобилните мрежи в близост до вас"</string>
+    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"Авт. задаване чрез местоп. на у-вото ви, ако е налице. Може да се изисква и активна връзка с Wi-Fi."</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Използване на стандартния формат за локала"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-часов формат"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Час"</string>
@@ -664,6 +659,12 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Задайте фигура за частното пространство"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Заключване"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Скриване"</string>
+    <!-- no translation found for private_space_confirm_your_pattern_header (449382220134788771) -->
+    <skip />
+    <!-- no translation found for private_space_confirm_your_pin_header (4543332157470087796) -->
+    <skip />
+    <!-- no translation found for private_space_confirm_your_password_header (9202308075814307169) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Можете да добавите до <xliff:g id="COUNT">%d</xliff:g> отпечатъка"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Добавихте максималния брой отпечатъци"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не могат да се добавят още отпечатъци"</string>
@@ -1031,6 +1032,10 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Проверете паролата и опитайте отново"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Свържете се с производителя на устройството"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Проверете връзката и опитайте отново"</string>
+    <!-- no translation found for wifi_dpp_check_connection_no_matched_ssid (3608318690698685427) -->
+    <skip />
+    <!-- no translation found for wifi_dpp_check_connection_no_matched_security (1462706753123341376) -->
+    <skip />
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Избиране на мрежа"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"За да свържете устройството си, изберете мрежа"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Да се добави ли това устройство към <xliff:g id="SSID">%1$s</xliff:g>?"</string>
@@ -1630,8 +1635,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Разрешете на приложенията и услугите да сканират за устройства в близост по всяко време дори когато функцията за Bluetooth e изключена. Това може да послужи например за подобряване на базиращите се на местоположението функции и услуги."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Услуги за местоположение"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Услуги за местоположение"</string>
-    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
-    <skip />
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"Използване на местоположението за часовата зона"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Часовата зона не може да се зададе автоматично"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Местоположението или услугите за местоположение са изключени"</string>
@@ -1642,13 +1646,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Настройки за местоположението"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Поправяне на това"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Отказ"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"Не е налице, когато автоматичното установяване на часовата зона е изключено"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Установяването на часовата зона чрез местоположението е деактивирано"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Установяването на часовата зона чрез местоположението не се поддържа"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Не се разрешават промени в установяването на часовата зона чрез местоположението"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Ако местоположението на устройството ви е налице, то може да се използва за задаване на часовата ви зона"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Преглед на състоянието, правната информация и версията на софтуера"</string>
     <string name="legal_information" msgid="7509900979811934843">"Правна информация"</string>
     <string name="manual" msgid="3651593989906084868">"Ръководство"</string>
@@ -3519,15 +3521,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"Разбрах"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Известия"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Продължителност"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Съобщения, събития и напомняния"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Когато режимът „Не безпокойте“ е включен, съобщенията, напомнянията и събитията ще бъдат спрени – това не се отнася за елементите, разрешени от вас по-горе. Можете да коригирате настройките за съобщенията, за да разрешите на близки и приятели и други контакти да се свързват с вас."</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"Готово"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"Настройки"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Без визуално прекъсване или звук от известията"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Без звук от известията"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Няма да виждате, нито да чувате известията. Обажданията от контактите със звезда и повторно обаждащите се са разрешени."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Текуща настройка)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Да се променят ли настройките за известията в режима „Не безпокойте“?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Звуци за служебния потребителски профил"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Използване на звуците за личния потребителски профил"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Използване на същите звуци като за личния потребителски профил"</string>
@@ -3596,6 +3589,8 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"След отключване да се отваря последно ползваният екран. Известията няма да се показват на закл. екран. Вижте ги с плъзгане надолу от горната част."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"заключен екран, пропускане, заобикаляне"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"При закл. служ. потреб. профил"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"Свеждане на известията на заключения екран до минимум"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Показване на по-малко известия на заключения екран"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Показване само на новите известия на заключения екран"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Автоматично премахване на по-рано прегледаните известия от заключения екран"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Известия на заключения екран"</string>
@@ -3813,6 +3808,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"разговори с приоритет"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Никакви"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Нито един}=1{1 разговор}other{# разговора}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"Настройки за разговорите"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Кой може да прекъсва режима"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"Дори ако приложенията за съобщения или обаждания не могат да ви известят, хората, които посочите тук, пак могат да се свързват с вас чрез тези приложения"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Обаждания"</string>
@@ -3836,6 +3832,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Всеки"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Контакти"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Контакти със звезда"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"Настройки на контактите"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"Настройки за контактите със звезда"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Никакви"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Никой"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Будилници"</string>
@@ -3865,6 +3863,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Нито едно приложение не може да прекъсва режима}=1{{app_1} може да прекъсва режима}=2{{app_1} и {app_2} могат да прекъсват режима}=3{{app_1}, {app_2} и {app_3} могат да прекъсват режима}other{{app_1}, {app_2} и още # могат да прекъсват режима}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (служ.)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Изчислява се…"</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"Настройки за приложенията"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+ <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Разрешаване на приложения да отменят режима"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Приложения, които могат да прекъсват режима"</string>
@@ -3907,8 +3906,9 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Създаване на режим"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Персонализиран режим"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Име на режима"</string>
-    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
+    <!-- no translation found for zen_mode_edit_name_empty_error (5788063278827188275) -->
     <skip />
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Избор на икона"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Събития от календара"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Час на лягане и ставане"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"По време на шофиране"</string>
@@ -4811,8 +4811,7 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Вашият план от <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Услугата за сателитни съобщения е включена с профила ви"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Услугата за сателитни съобщения не е включена с профила ви"</string>
-    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
-    <skip />
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"Научете повече"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Начин на работа"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Когато нямате достъп до мобилна мрежа"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Телефонът ви ще се свърже автоматично със сателит. За оптимална връзка трябва да сте на място с ясен изглед към небето."</string>
@@ -5449,10 +5448,7 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Скенер за QR кодове"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Нуждаете се от помощ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Търсене в настройките"</string>
-    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
-    <skip />
-    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
-    <skip />
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"контакти, хранилище, профил"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Хранилище на контакти"</string>
+    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"Няма профил по подразбиране"</string>
 </resources>

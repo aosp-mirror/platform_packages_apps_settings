@@ -1860,6 +1860,10 @@ public class UserSettings extends SettingsPreferenceFragment
                         boolean suppressAllPage) {
                     final List<String> niks = super.getNonIndexableKeysFromXml(context, xmlResId,
                             suppressAllPage);
+                    if (TextUtils.isEmpty(context.getString(
+                            com.android.internal.R.string.config_supervisedUserCreationPackage))) {
+                        niks.add(KEY_ADD_SUPERVISED_USER);
+                    }
                     AddUserWhenLockedPreferenceController controller =
                             new AddUserWhenLockedPreferenceController(
                                     context, KEY_ADD_USER_WHEN_LOCKED);
