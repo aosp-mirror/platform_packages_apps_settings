@@ -325,11 +325,10 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
             }
 
             final DisplayDensityUtils density = new DisplayDensityUtils(mContext);
-            final int currentIndex = density.getCurrentIndexForDefaultDisplay();
-            final int defaultDensity = density.getDefaultDensityForDefaultDisplay();
+            final int currentIndex = density.getCurrentIndex();
+            final int defaultDensity = density.getDefaultDensity();
 
-            if (density.getDefaultDisplayDensityValues()[mCurrentIndex]
-                    == density.getDefaultDensityForDefaultDisplay()) {
+            if (density.getValues()[mCurrentIndex] == density.getDefaultDensity()) {
                 return;
             }
 
@@ -373,20 +372,19 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
             /* If current density is the same as a default density of other resolutions,
              * then mCurrentIndex may be out of boundary.
              */
-            if (density.getDefaultDisplayDensityValues().length <= mCurrentIndex) {
-                mCurrentIndex = density.getCurrentIndexForDefaultDisplay();
+            if (density.getValues().length <= mCurrentIndex) {
+                mCurrentIndex = density.getCurrentIndex();
             }
-            if (density.getDefaultDisplayDensityValues()[mCurrentIndex]
-                    != density.getDefaultDensityForDefaultDisplay()) {
+            if (density.getValues()[mCurrentIndex] != density.getDefaultDensity()) {
                 density.setForcedDisplayDensity(mCurrentIndex);
             }
 
-            mDefaultDensity = density.getDefaultDensityForDefaultDisplay();
+            mDefaultDensity = density.getDefaultDensity();
         }
 
         private boolean isDensityChanged() {
             final DisplayDensityUtils density = new DisplayDensityUtils(mContext);
-            if (density.getDefaultDensityForDefaultDisplay() == mDefaultDensity) {
+            if (density.getDefaultDensity() == mDefaultDensity) {
                 return false;
             }
 
