@@ -40,7 +40,10 @@ class SoundScreen : PreferenceScreenCreator {
 
     override fun fragmentClass(): Class<out Fragment>? = SoundSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(this) {
+            +DialPadTonePreference()
+        }
 
     companion object {
         const val KEY = "sound_screen"
