@@ -235,8 +235,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void onPreferenceToggledOnDisabledService_notShowTooltipView() {
-        mFragment.onPreferenceToggled(
-                ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ false);
+        mFragment.onPreferenceToggled(mFragment.getUseServicePreferenceKey(), /* enabled= */ false);
 
         assertThat(getLatestPopupWindow()).isNull();
     }
@@ -245,8 +244,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     @Config(shadows = ShadowFragment.class)
     public void onPreferenceToggledOnEnabledService_showTooltipView() {
-        mFragment.onPreferenceToggled(
-                ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+        mFragment.onPreferenceToggled(mFragment.getUseServicePreferenceKey(), /* enabled= */ true);
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
     }
@@ -258,8 +256,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         suwIntent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
         when(mActivity.getIntent()).thenReturn(suwIntent);
 
-        mFragment.onPreferenceToggled(
-                ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+        mFragment.onPreferenceToggled(mFragment.getUseServicePreferenceKey(), /* enabled= */ true);
 
         assertThat(getLatestPopupWindow()).isNull();
     }
@@ -268,12 +265,10 @@ public class ToggleFeaturePreferenceFragmentTest {
     @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     @Config(shadows = ShadowFragment.class)
     public void onPreferenceToggledOnEnabledService_tooltipViewShown_notShowTooltipView() {
-        mFragment.onPreferenceToggled(
-                ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+        mFragment.onPreferenceToggled(mFragment.getUseServicePreferenceKey(), /* enabled= */ true);
         getLatestPopupWindow().dismiss();
 
-        mFragment.onPreferenceToggled(
-                ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+        mFragment.onPreferenceToggled(mFragment.getUseServicePreferenceKey(), /* enabled= */ true);
 
         assertThat(getLatestPopupWindow().isShowing()).isFalse();
     }

@@ -28,6 +28,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -36,6 +40,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -57,6 +62,9 @@ public class PaymentSettingsTest {
     static final String FOREGROUND_KEY = "nfc_foreground";
 
     private Context mContext;
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock
     private PackageManager mPackageManager;
@@ -98,7 +106,19 @@ public class PaymentSettingsTest {
     }
 
     @Test
-    public void getNonIndexableKey_primaryUser_returnsTrue() {
+    @RequiresFlagsEnabled(android.permission.flags.Flags.FLAG_WALLET_ROLE_ENABLED)
+    public void getNonIndexableKey_primaryUser_returnsFalse_walletRoleEnabled() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
+
+        final List<String> niks =
+                PaymentSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(niks).containsAtLeast(FOREGROUND_KEY, PAYMENT_KEY);
+    }
+
+    @Test
+    @RequiresFlagsDisabled(android.permission.flags.Flags.FLAG_WALLET_ROLE_ENABLED)
+    public void getNonIndexableKey_primaryUser_returnsTrue_walletRoleDisabled() {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
 
         final List<String> niks =
