@@ -43,7 +43,6 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.AppPreference;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -160,7 +159,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
             final String packageName = appInfo.packageName;
             final CharSequence label = appInfo.loadLabel(mPackageManager);
 
-            final Preference pref = new AppPreference(prefContext);
+            final Preference pref = new Preference(prefContext);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appInfo, userId));
             pref.setTitle(mPackageManager.getUserBadgedLabel(label, user));
             pref.setSummary(PictureInPictureDetails.getPreferenceSummary(prefContext,
