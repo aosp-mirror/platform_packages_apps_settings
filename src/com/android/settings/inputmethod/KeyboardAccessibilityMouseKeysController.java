@@ -23,12 +23,23 @@ import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 public class KeyboardAccessibilityMouseKeysController extends
-        KeyboardAccessibilityController implements
+        InputSettingPreferenceController implements
         LifecycleObserver {
+
+    private TwoStatePreference mTwoStatePreference;
+
     public KeyboardAccessibilityMouseKeysController(@NonNull Context context, @NonNull String key) {
         super(context, key);
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mTwoStatePreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -51,9 +62,11 @@ public class KeyboardAccessibilityMouseKeysController extends
     }
 
     @Override
-    protected void updateKeyboardAccessibilitySettings() {
-        setChecked(
-                InputSettings.isAccessibilityMouseKeysEnabled(mContext));
+    protected void onInputSettingUpdated() {
+        if (mTwoStatePreference != null) {
+            mTwoStatePreference.setChecked(
+                    InputSettings.isAccessibilityMouseKeysEnabled(mContext));
+        }
     }
 
     @Override

@@ -25,6 +25,7 @@ import static com.android.settings.accessibility.DaltonizerPreferenceUtil.isSecu
 
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltip
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,11 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     private static final String KEY_PROTANOMALY = "daltonizer_mode_protanomaly";
     private static final String KEY_TRITANOMEALY = "daltonizer_mode_tritanomaly";
     private static final String KEY_GRAYSCALE = "daltonizer_mode_grayscale";
+
+    @VisibleForTesting
+    static final String KEY_SHORTCUT_PREFERENCE = "daltonizer_shortcut_key";
+    @VisibleForTesting
+    static final String KEY_SWITCH_PREFERENCE = "daltonizer_switch_preference_key";
     @VisibleForTesting
     static final String KEY_SATURATION = "daltonizer_saturation";
 
@@ -106,7 +113,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         final List<String> lists = new ArrayList<>();
         lists.add(KEY_TOP_INTRO_PREFERENCE);
         lists.add(KEY_PREVIEW);
-        lists.add(KEY_USE_SERVICE_PREFERENCE);
+        lists.add(getUseServicePreferenceKey());
         // Putting saturation level close to the preview so users can see what is changing.
         lists.add(KEY_SATURATION);
         lists.add(KEY_DEUTERANOMALY);
@@ -171,6 +178,11 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     }
 
     @Override
+    protected String getUseServicePreferenceKey() {
+        return KEY_SWITCH_PREFERENCE;
+    }
+
+    @Override
     protected CharSequence getShortcutTitle() {
         return getText(R.string.accessibility_daltonizer_shortcut_title);
     }
@@ -203,5 +215,27 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_daltonizer_settings);
+            new BaseSearchIndexProvider(R.xml.accessibility_daltonizer_settings) {
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableRaw> rawData =
+                            super.getRawDataToIndex(context, enabled);
+
+                    if (Flags.fixA11ySettingsSearch()) {
+                        SearchIndexableRaw shortcutRaw = new SearchIndexableRaw(context);
+                        shortcutRaw.key = KEY_SHORTCUT_PREFERENCE;
+                        shortcutRaw.title = context.getString(
+                                R.string.accessibility_daltonizer_shortcut_title);
+                        rawData.add(shortcutRaw);
+
+                        SearchIndexableRaw mainSwitchRaw = new SearchIndexableRaw(context);
+                        mainSwitchRaw.key = KEY_SWITCH_PREFERENCE;
+                        mainSwitchRaw.title = context.getString(
+                                R.string.accessibility_daltonizer_primary_switch_title);
+                        rawData.add(mainSwitchRaw);
+                    }
+                    return rawData;
+                }
+            };
 }
