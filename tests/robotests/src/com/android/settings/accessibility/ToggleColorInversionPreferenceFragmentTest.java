@@ -18,7 +18,8 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-import static com.android.settings.accessibility.ToggleColorInversionPreferenceFragment.KEY_USE_SERVICE_PREFERENCE;
+import static com.android.settings.accessibility.ToggleColorInversionPreferenceFragment.KEY_SHORTCUT_PREFERENCE;
+import static com.android.settings.accessibility.ToggleColorInversionPreferenceFragment.KEY_SWITCH_PREFERENCE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -32,12 +33,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.Flags;
 import android.widget.PopupWindow;
 
 import androidx.fragment.app.FragmentActivity;
@@ -50,6 +51,7 @@ import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltip
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -63,6 +65,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** Tests for {@link ToggleColorInversionPreferenceFragment} */
@@ -93,10 +96,10 @@ public class ToggleColorInversionPreferenceFragmentTest {
         when(mActivity.getContentResolver()).thenReturn(mContext.getContentResolver());
 
         mScreen = spy(new PreferenceScreen(mContext, /* attrs= */ null));
-        when(mScreen.findPreference(KEY_USE_SERVICE_PREFERENCE))
+        when(mScreen.findPreference(mFragment.getUseServicePreferenceKey()))
                 .thenReturn(mFragment.mToggleServiceSwitchPreference);
         doReturn(mScreen).when(mFragment).getPreferenceScreen();
-        mSwitchPreference = mScreen.findPreference(KEY_USE_SERVICE_PREFERENCE);
+        mSwitchPreference = mScreen.findPreference(mFragment.getUseServicePreferenceKey());
     }
 
     @Test
@@ -137,7 +140,7 @@ public class ToggleColorInversionPreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void onPreferenceToggled_colorCorrectDisabled_shouldReturnTrueAndShowTooltipView() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, OFF);
@@ -199,6 +202,41 @@ public class ToggleColorInversionPreferenceFragmentTest {
         assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
+    @Test
+    @DisableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getRawDataToIndex_flagOff_returnShortcutIndexablePreferences() {
+        List<SearchIndexableRaw> rawData = ToggleColorInversionPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, /* enabled= */ true);
+
+        assertThat(rawData).hasSize(1);
+        assertThat(rawData.get(0).key).isEqualTo(KEY_SHORTCUT_PREFERENCE);
+        assertThat(rawData.get(0).title).isEqualTo(mContext.getString(
+                R.string.accessibility_display_inversion_shortcut_title));
+
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getRawDataToIndex_flagOn_returnAllIndexablePreferences() {
+        String[] expectedKeys = {KEY_SHORTCUT_PREFERENCE, KEY_SWITCH_PREFERENCE};
+        String[] expectedTitles = {
+                mContext.getString(R.string.accessibility_display_inversion_shortcut_title),
+                mContext.getString(R.string.accessibility_display_inversion_switch_title)};
+        List<String> keysResultList = new ArrayList<>();
+        List<String> titlesResultList = new ArrayList<>();
+        List<SearchIndexableRaw> rawData = ToggleColorInversionPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, /* enabled= */ true);
+
+        for (SearchIndexableRaw rawDataItem : rawData) {
+            keysResultList.add(rawDataItem.key);
+            titlesResultList.add(rawDataItem.title);
+        }
+
+        assertThat(rawData).hasSize(2);
+        assertThat(keysResultList).containsExactly(expectedKeys);
+        assertThat(titlesResultList).containsExactly(expectedTitles);
+    }
+
     private static PopupWindow getLatestPopupWindow() {
         final ShadowApplication shadowApplication =
                 Shadow.extract(ApplicationProvider.getApplicationContext());
@@ -220,7 +258,7 @@ public class ToggleColorInversionPreferenceFragmentTest {
             mComponentName = PLACEHOLDER_COMPONENT_NAME;
             final SettingsMainSwitchPreference switchPreference =
                     new SettingsMainSwitchPreference(context);
-            switchPreference.setKey(KEY_USE_SERVICE_PREFERENCE);
+            switchPreference.setKey(getUseServicePreferenceKey());
             mToggleServiceSwitchPreference = switchPreference;
             setArguments(new Bundle());
         }
