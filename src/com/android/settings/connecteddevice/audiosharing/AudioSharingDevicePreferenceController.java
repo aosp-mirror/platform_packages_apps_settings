@@ -390,7 +390,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             Log.d(TAG, "onDeviceClick, set active in call mode");
             CachedBluetoothDevice cachedDevice =
                     ((BluetoothDevicePreference) preference).getBluetoothDevice();
-            cachedDevice.setActive();
+            AudioSharingUtils.setPrimary(mContext, cachedDevice);
         }
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_DEVICE_CLICK,
                 isCallMode);
