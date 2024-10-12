@@ -39,6 +39,8 @@
         settings:keywords="@string/keywords_color_inversion"
         settings:controller="com.android.settings.accessibility.ColorInversionPreferenceController"/>
 
+    <!-- DarkModePreference is searchable in the Display & Touch setting.
+         Therefore, we set searchable = false here to avoid duplicate search results. -->
     <com.android.settings.display.darkmode.DarkModePreference
         android:key="dark_ui_mode_accessibility"
         android:icon="@drawable/ic_dark_ui"

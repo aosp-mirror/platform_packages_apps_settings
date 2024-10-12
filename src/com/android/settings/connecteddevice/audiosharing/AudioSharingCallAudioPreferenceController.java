@@ -219,7 +219,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                                         if (lead != null) {
                                             String addr = lead.getDevice().getAnonymizedAddress();
                                             Log.d(TAG, "Set call audio device: " + addr);
-                                            lead.setActive();
+                                            AudioSharingUtils.setPrimary(mContext, lead);
                                             logCallAudioDeviceChange(currentGroupId, lead);
                                         } else {
                                             Log.d(TAG, "Skip set call audio device: no lead");
