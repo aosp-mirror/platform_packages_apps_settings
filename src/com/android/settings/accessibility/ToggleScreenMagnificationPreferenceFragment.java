@@ -55,7 +55,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreferenceCompat;
 
-import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.server.accessibility.Flags;
@@ -740,7 +739,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @VisibleForTesting
     static boolean hasMagnificationValuesInSettings(Context context, int shortcutTypes) {
-        for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
+        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if ((shortcutTypes & shortcutType) == 0) {
                 continue;
             }
@@ -791,7 +790,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private static int getUserShortcutTypeFromSettings(Context context) {
         int shortcutTypes = DEFAULT;
-        for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
+        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if ((shortcutType & (TWOFINGER_DOUBLETAP | QUICK_SETTINGS | GESTURE | TRIPLETAP))
                     == shortcutType
                     && !android.view.accessibility.Flags.a11yQsShortcut()) {

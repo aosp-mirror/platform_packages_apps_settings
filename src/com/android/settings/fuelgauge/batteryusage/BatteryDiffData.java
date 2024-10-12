@@ -169,6 +169,7 @@ public class BatteryDiffData {
             }
             if (packageName != null && hideBackgroundUsageTimeSet.contains(packageName)) {
                 entry.mBackgroundUsageTimeInMs = 0;
+                entry.mForegroundServiceUsageTimeInMs = 0;
             }
         }
     }

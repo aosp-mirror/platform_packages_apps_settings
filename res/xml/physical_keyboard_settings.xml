@@ -15,6 +15,7 @@
 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/physical_keyboard_title">
     <!-- Additional preference screens are inserted here programmatically
          with low order values to set the key map of each attached keyboard. -->
@@ -31,6 +32,14 @@
             android:title="@string/modifier_keys_settings"
             android:summary="@string/modifier_keys_settings_summary"
             android:fragment="com.android.settings.inputmethod.ModifierKeysSettings" />
+
+        <SwitchPreferenceCompat
+            android:key="physical_keyboard_repeat_key"
+            android:title="@string/keyboard_repeat_key_title"
+            android:summary="@string/keyboard_repeat_key_summary"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.inputmethod.KeyboardRepeatKeysController" />
+
         <Preference
             android:key="physical_keyboard_a11y"
             android:title="@string/keyboard_a11y_settings"

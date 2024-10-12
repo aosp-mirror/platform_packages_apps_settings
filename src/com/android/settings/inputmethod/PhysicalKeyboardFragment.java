@@ -48,8 +48,8 @@ import androidx.preference.TwoStatePreference;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.Settings;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.keyboard.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -65,7 +65,7 @@ import java.util.Objects;
 // TODO(b/327638540): Update implementation of preference here and reuse key preferences and
 //  controllers between here and A11y Setting page.
 @SearchIndexable
-public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
+public final class PhysicalKeyboardFragment extends DashboardFragment
         implements InputManager.InputDeviceListener,
         KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener {
 
@@ -79,6 +79,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
     private static final String MODIFIER_KEYS_SETTINGS = "modifier_keys_settings";
     private static final String EXTRA_AUTO_SELECTION = "auto_selection";
+    private static final String TAG = "KeyboardAndTouchA11yFragment";
     private static final Uri sVirtualKeyboardSettingsUri = Secure.getUriFor(
             Secure.SHOW_IME_WITH_HARD_KEYBOARD);
     private static final Uri sAccessibilityBounceKeysUri = Secure.getUriFor(
@@ -119,6 +120,16 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private String mBluetoothAddress;
 
     @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.physical_keyboard_settings;
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelable(EXTRA_AUTO_SELECTION, mAutoInputDeviceIdentifier);
         super.onSaveInstanceState(outState);
@@ -126,6 +137,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
+        super.onCreatePreferences(bundle, s);
         Activity activity = Preconditions.checkNotNull(getActivity());
         addPreferencesFromResource(R.xml.physical_keyboard_settings);
         mIm = Preconditions.checkNotNull(activity.getSystemService(InputManager.class));
