@@ -62,6 +62,20 @@
         android:selectable="false"
         settings:controller="com.android.settings.inputmethod.TrackpadPointerSpeedPreferenceController"/>
 
+    <SwitchPreferenceCompat
+        android:key="mouse_reverse_vertical_scrolling"
+        android:title="@string/mouse_reverse_vertical_scrolling"
+        android:summary="@string/mouse_reverse_vertical_scrolling_summary"
+        settings:controller="com.android.settings.inputmethod.MouseReverseVerticalScrollingPreferenceController"
+        android:order="45"/>
+
+    <SwitchPreferenceCompat
+        android:key="mouse_swap_primary_button"
+        android:title="@string/mouse_swap_primary_button"
+        android:summary="@string/mouse_swap_primary_button_summary"
+        settings:controller="com.android.settings.inputmethod.MouseSwapPrimaryButtonPreferenceController"
+        android:order="47"/>
+
     <Preference
         android:fragment="com.android.settings.inputmethod.PointerTouchpadFragment"
         android:key="pointer_and_touchpad"
