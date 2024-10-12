@@ -37,6 +37,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.R;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
@@ -135,25 +136,23 @@ public class PhoneNumberPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_cannotGetActiveSubscriptionInfo_shouldShowUnknown() {
+    public void getSummary_cannotGetActiveSubscriptionInfo_shouldShowNotAvailable() {
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(null);
         mController.displayPreference(mScreen);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(ResourcesUtils.getResourcesString(
-                mContext, "device_info_default"));
+        verify(mPreference).setSummary(mContext.getString(R.string.device_info_not_available));
     }
 
     @Test
-    public void getSummary_getEmptySubscriptionInfo_shouldShowUnknown() {
+    public void getSummary_getEmptySubscriptionInfo_shouldShowNotAvailable() {
         List<SubscriptionInfo> infos = new ArrayList<>();
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(infos);
 
         mController.displayPreference(mScreen);
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(ResourcesUtils.getResourcesString(
-                mContext, "device_info_default"));
+        verify(mPreference).setSummary(mContext.getString(R.string.device_info_not_available));
     }
 }

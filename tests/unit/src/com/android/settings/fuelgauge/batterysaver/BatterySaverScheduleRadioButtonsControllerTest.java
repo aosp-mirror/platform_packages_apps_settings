@@ -53,6 +53,8 @@ public class BatterySaverScheduleRadioButtonsControllerTest {
     public void setDefaultKey_percentage_shouldSuppressNotification() {
         Secure.putInt(
                 mContext.getContentResolver(), Secure.LOW_POWER_WARNING_ACKNOWLEDGED, 1);
+        Secure.putInt(
+                mContext.getContentResolver(), Secure.EXTRA_LOW_POWER_WARNING_ACKNOWLEDGED, 1);
         Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
                 PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         Settings.Global.putInt(mResolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 5);

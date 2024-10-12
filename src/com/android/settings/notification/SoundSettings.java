@@ -29,6 +29,8 @@ import android.os.UserHandle;
 import android.preference.SeekBarVolumizer;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -193,21 +195,23 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        ArrayList<VolumeSeekBarPreferenceController> volumeControllers = new ArrayList<>();
-        volumeControllers.add(use(AlarmVolumePreferenceController.class));
-        volumeControllers.add(use(MediaVolumePreferenceController.class));
-        volumeControllers.add(use(SeparateRingVolumePreferenceController.class));
-        volumeControllers.add(use(NotificationVolumePreferenceController.class));
-        volumeControllers.add(use(CallVolumePreferenceController.class));
+        if (!isCatalystEnabled()) {
+            ArrayList<VolumeSeekBarPreferenceController> volumeControllers = new ArrayList<>();
+            volumeControllers.add(use(AlarmVolumePreferenceController.class));
+            volumeControllers.add(use(MediaVolumePreferenceController.class));
+            volumeControllers.add(use(SeparateRingVolumePreferenceController.class));
+            volumeControllers.add(use(NotificationVolumePreferenceController.class));
+            volumeControllers.add(use(CallVolumePreferenceController.class));
 
-        use(HandsFreeProfileOutputPreferenceController.class).setCallback(listPreference ->
-                onPreferenceDataChanged(listPreference));
-        mHfpOutputControllerKey =
-                use(HandsFreeProfileOutputPreferenceController.class).getPreferenceKey();
+            use(HandsFreeProfileOutputPreferenceController.class).setCallback(listPreference ->
+                    onPreferenceDataChanged(listPreference));
+            mHfpOutputControllerKey =
+                    use(HandsFreeProfileOutputPreferenceController.class).getPreferenceKey();
 
-        for (VolumeSeekBarPreferenceController controller : volumeControllers) {
-            controller.setCallback(mVolumeCallback);
-            getSettingsLifecycle().addObserver(controller);
+            for (VolumeSeekBarPreferenceController controller : volumeControllers) {
+                controller.setCallback(mVolumeCallback);
+                getSettingsLifecycle().addObserver(controller);
+            }
         }
     }
 
@@ -320,5 +324,10 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         if (mDialogFragment != null) {
             mDialogFragment.onListPreferenceUpdated(preference);
         }
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return SoundScreen.KEY;
     }
 }
