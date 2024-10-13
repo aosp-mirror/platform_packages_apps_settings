@@ -276,8 +276,10 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             }
         }
         if (canFindNetwork) {
+            Log.e(TAG, "WiFi DPP check connection no matched security");
             return R.string.wifi_dpp_check_connection_no_matched_security;
         }
+        Log.e(TAG, "WiFi DPP check connection no matched SSID");
         return R.string.wifi_dpp_check_connection_no_matched_ssid;
     }
 

@@ -246,16 +246,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"漫遊時連線到數據傳輸服務"</string>
     <string name="roaming_disable" msgid="729512894708689604">"漫遊時連線到數據傳輸服務"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"可能要支付漫遊費用。"</string>
-    <!-- no translation found for date_time_auto (1759599045100040686) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
-    <skip />
-    <!-- no translation found for zone_auto_title (3520584257065861479) -->
-    <skip />
-    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
-    <skip />
-    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
-    <skip />
+    <string name="date_time_auto" msgid="1759599045100040686">"自動判斷日期和時間"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"使用網路和無線訊號自動設定"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"自動判定時區"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"根據附近的行動網路自動設定"</string>
+    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"使用裝置位置資訊自動設定 (如有)。這個選項可能還需要有效的 Wi-Fi 連線。"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"使用地區設定預設值"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"使用 24 小時格式"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"時間"</string>
@@ -664,6 +659,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"設定私人空間的解鎖圖案"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"鎖定"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"隱藏"</string>
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"確認私人空間的解鎖圖案"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"重新輸入私人空間 PIN 碼"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"重新輸入私人空間密碼"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"你最多可以新增 <xliff:g id="COUNT">%d</xliff:g> 個指紋"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"你新增的指紋數量已達上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"無法新增其他指紋"</string>
@@ -1031,6 +1029,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"請檢查輸入的密碼是否正確，然後再試一次"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"請與裝置製造商聯絡"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"請檢查連線狀況，然後再試一次"</string>
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"這個 Wi‑Fi 網路目前無法使用"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"這個 QR code 有問題，請試試其他連線方式。"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"選擇網路"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"選擇裝置要連線的網路"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"要將這個裝置新增至「<xliff:g id="SSID">%1$s</xliff:g>」嗎？"</string>
@@ -1630,8 +1630,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"允許應用程式和服務隨時掃描附近裝置 (即使藍牙功能處於關閉狀態)。這項設定有助於改善適地性相關功能和服務等等。"</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"定位服務"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"定位服務"</string>
-    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
-    <skip />
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"使用位置資訊設定時區"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"無法自動設定時區"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"位置或定位服務已關閉"</string>
@@ -1642,13 +1641,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"位置資訊設定"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"修正這個問題"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"取消"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"自動判定時區功能關閉時無法使用"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"位置時區偵測已停用"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"不支援位置時區偵測"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"不允許變更位置時區偵測"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"如有可用的裝置位置資訊，系統可能會用來設定時區"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"查看法律資訊、狀態、軟體版本"</string>
     <string name="legal_information" msgid="7509900979811934843">"法律資訊"</string>
     <string name="manual" msgid="3651593989906084868">"說明書"</string>
@@ -1949,13 +1946,26 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"無障礙"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"實體鍵盤"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"彈回鍵"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"鍵盤會忽略在 <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> 毫秒內快速重覆按下同一按鍵的動作"</string>
+    <!-- no translation found for bounce_keys_summary (7418024428905737729) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (4088646362538368693) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (5640575860258120026) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_200 (7876774697200082558) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_400 (8146580138675322657) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_600 (6166166103942612488) -->
+    <skip />
     <string name="slow_keys" msgid="2891452895499690837">"延遲感應鍵"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"將按鍵啟動時間調整為 <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> 毫秒"</string>
+    <!-- no translation found for slow_keys_summary (2914214326648535377) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"相黏鍵"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"一次按下快速鍵中的一個按鍵，而非同時按住多個按鍵"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"滑鼠按鍵"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"使用實體鍵盤控制滑鼠。"</string>
+    <!-- no translation found for mouse_keys_summary (7030731235143286467) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"鍵盤快速鍵"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"顯示快速鍵清單"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"工作資料夾鍵盤和工具"</string>
@@ -2024,6 +2034,10 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"為「<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>」選擇新的輔助鍵："</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"實體鍵盤無障礙功能"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"相黏鍵、彈回鍵、滑鼠按鍵"</string>
+    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"「<xliff:g id="IME_LABEL">%s</xliff:g>」版面配置"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"預設"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"自動選取：<xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2428,7 +2442,8 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"預覽"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"標準選項"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"語言"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"文字大小"</string>
+    <!-- no translation found for captioning_text_size (5764254558945371745) -->
+    <skip />
     <string name="captioning_preset" msgid="4174276086501638524">"字幕樣式"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"自訂選項"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"背景顏色"</string>
@@ -3519,15 +3534,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"我知道了"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"通知"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"時間長度"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"訊息、活動和提醒"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"開啟「零打擾」模式時，系統會將訊息、提醒和活動設為靜音 (你在上方允許的項目除外)。你可以調整訊息設定，讓好友、家人或其他聯絡人可以聯絡你。"</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"完成"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"設定"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"不顯示通知也不發出音效"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"不發出通知音效"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"你將不會看到或聽到通知。允許已加星號的聯絡人和重複來電者的來電。"</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(目前設定)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"要變更「零打擾」模式的通知設定嗎？"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"工作資料夾音效"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"使用個人資料夾音效"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"使用與個人資料夾相同的音效"</string>
@@ -3596,6 +3602,8 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"解鎖成功後顯示上次離開的畫面。螢幕鎖定畫面不會顯示通知，如要查看，請從螢幕頂端向下滑動。"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"螢幕鎖定, 鎖定螢幕, 略過, 規避"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"工作資料夾鎖定時"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"減少螢幕鎖定通知"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"減少在螢幕鎖定畫面顯示的通知"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"螢幕鎖定畫面上只顯示新通知"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"自動從螢幕鎖定畫面移除先前看過的通知"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"螢幕鎖定畫面通知"</string>
@@ -3813,6 +3821,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"重要對話"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"無"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{無}=1{1 個對話}other{# 個對話}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"對話設定"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"例外的對象"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"即使訊息和通話應用程式都不會發出通知，你指定的對象仍可透過這些應用程式聯繫到你"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"通話"</string>
@@ -3836,6 +3845,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"所有人"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"聯絡人"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"已加星號的聯絡人"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"聯絡人設定"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"已加星號的聯絡人設定"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"無"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"無"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"鬧鐘"</string>
@@ -3865,6 +3876,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{沒有應用程式例外}=1{「{app_1}」例外}=2{「{app_1}」和「{app_2}」例外}=3{「{app_1}」、「{app_2}」和「{app_3}」例外}other{「{app_1}」、「{app_2}」和另外 # 個應用程式例外}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (工作)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"計算中…"</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"應用程式設定"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"允許應用程式覆寫"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"例外的應用程式"</string>
@@ -3907,8 +3919,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"建立模式"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"自訂模式"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"模式名稱"</string>
-    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"模式名稱不得空白"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"選擇圖示"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"日曆活動"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"就寢時間日常安排"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"行車期間"</string>
@@ -3978,12 +3990,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"由 <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> 管理"</string>
     <string name="launch_by_default" msgid="892824422067985734">"預設開啟"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"開啟支援的連結"</string>
-    <!-- no translation found for app_launch_open_in_app (2208182888681699512) -->
-    <skip />
-    <!-- no translation found for app_launch_open_in_browser (766170191853009756) -->
-    <skip />
-    <!-- no translation found for app_launch_top_intro_message (9037324384325518290) -->
-    <skip />
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"在應用程式中開啟"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"在瀏覽器中開啟"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"選擇如何開啟這個應用程式的網頁連結"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"要在這個應用程式中開啟的連結"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"支援的連結"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"其他預設偏好設定"</string>
@@ -4814,8 +4823,7 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"你的「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」方案"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"你的帳戶支援衛星訊息"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"你的帳戶不支援衛星訊息"</string>
-    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
-    <skip />
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"瞭解詳情"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"運作方式"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"沒有行動網路時"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"手機會自動連上衛星。為獲得最佳連線品質，請在沒有物體遮住天空的地方使用。"</string>
@@ -5452,10 +5460,15 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR code 掃描器"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"需要協助嗎？"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"搜尋設定"</string>
-    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"聯絡人, 儲存空間, 帳戶"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"聯絡人儲存空間"</string>
+    <!-- no translation found for contacts_storage_device_only_preference_label (970250816918108264) -->
     <skip />
-    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <!-- no translation found for contacts_storage_device_only_preference_summary (2339782491812039153) -->
     <skip />
-    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <!-- no translation found for contacts_storage_selection_message (8082077300632059003) -->
+    <skip />
+    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"沒有預設帳戶"</string>
+    <!-- no translation found for contacts_storage_first_time_add_account_message (5161093169928132323) -->
     <skip />
 </resources>

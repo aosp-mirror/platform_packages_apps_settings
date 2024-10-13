@@ -55,6 +55,7 @@ import com.android.settings.core.SubSettingLauncher
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingActionModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.spa.framework.theme.SettingsDimension
@@ -313,10 +314,10 @@ class DeviceDetailsFragmentFormatterImpl(
                         return { deviceSettingIcon(model.icon) }
                     }
             }
-        if (model.intent != null) {
+        if (model.action != null) {
             TwoTargetSwitchPreference(
                 switchPrefModel,
-                primaryOnClick = { startActivity(model.intent) },
+                primaryOnClick = { triggerAction(model.action) },
             )
         } else {
             SwitchPreference(switchPrefModel)
@@ -330,7 +331,7 @@ class DeviceDetailsFragmentFormatterImpl(
                 override val title = model.title
                 override val summary = { model.summary ?: "" }
                 override val onClick = {
-                    model.intent?.let { startActivity(it) }
+                    model.action?.let { triggerAction(it) }
                     Unit
                 }
                 override val icon: (@Composable () -> Unit)?
@@ -382,9 +383,16 @@ class DeviceDetailsFragmentFormatterImpl(
         icon?.let { Icon(it, modifier = Modifier.size(SettingsDimension.itemIconSize)) }
     }
 
-    private fun startActivity(intent: Intent) {
-        intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
+    private fun triggerAction(action: DeviceSettingActionModel) {
+        when (action) {
+            is DeviceSettingActionModel.IntentAction -> {
+                action.intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(action.intent)
+            }
+            is DeviceSettingActionModel.PendingIntentAction -> {
+                action.pendingIntent.send()
+            }
+        }
     }
 
     private fun getPreferenceKey(settingId: Int) = "DEVICE_SETTING_${settingId}"
