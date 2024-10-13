@@ -34,6 +34,8 @@ class DisplayScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
 
     override fun isFlagEnabled(context: Context) = Flags.catalystDisplaySettingsScreen()
 
+    override fun hasCompleteHierarchy() = false
+
     override fun fragmentClass() = DisplaySettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
